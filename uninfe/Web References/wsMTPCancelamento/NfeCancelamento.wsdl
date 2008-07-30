@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:intf="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento" xmlns:impl="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento">
+      <xsd:element name="nfeCancelamentoNF">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="nfeCabecMsg" type="xsd:string" />
+            <xsd:element name="nfeDadosMsg" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="nfeCancelamentoNFResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="nfeCancelamentoNFResult" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="nfeCancelamentoNFRequest">
+    <wsdl:part name="parameters" element="impl:nfeCancelamentoNF" />
+  </wsdl:message>
+  <wsdl:message name="nfeCancelamentoNFResponse">
+    <wsdl:part name="parameters" element="impl:nfeCancelamentoNFResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NfeCancelamento">
+    <wsdl:operation name="nfeCancelamentoNF">
+      <wsdl:input name="nfeCancelamentoNFRequest" message="impl:nfeCancelamentoNFRequest" />
+      <wsdl:output name="nfeCancelamentoNFResponse" message="impl:nfeCancelamentoNFResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NfeCancelamentoSoapBinding" type="impl:NfeCancelamento">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeCancelamentoNF">
+      <wsdlsoap:operation soapAction="nfeCancelamentoNF" />
+      <wsdl:input name="nfeCancelamentoNFRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="nfeCancelamentoNFResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NfeCancelamento">
+    <wsdl:port name="NfeCancelamento" binding="impl:NfeCancelamentoSoapBinding">
+      <wsdlsoap:address location="https://nfe.sefaz.mt.gov.br/nfews/NfeCancelamento" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
