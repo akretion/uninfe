@@ -2,7 +2,7 @@
 
 function Main()
    cls
-
+          teste
 *  WVW_nOpenWindow('outra janela', 10,20,15,40)
 
    Wvw_SetMouseMove(, .t. )
