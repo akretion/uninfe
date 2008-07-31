@@ -184,11 +184,10 @@ namespace uninfe
         {
             FormSobre oSobre = new FormSobre();
             oSobre.MdiParent = this;
-            oSobre.Show();            
-
+            oSobre.Show();       
         }
 
-        private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
             FormValidarXML oValidarXML = new FormValidarXML();
             oValidarXML.MdiParent = this;

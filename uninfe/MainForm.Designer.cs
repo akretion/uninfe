@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.timer_connect_webservice = new System.Windows.Forms.Timer(this.components);
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_recarregar_config = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_StatusServicoNfe = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_teste = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
+            this.timer_connect_webservice = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,20 +57,6 @@
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
-            this.toolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip_ItemClicked);
-            // 
-            // timer_connect_webservice
-            // 
-            this.timer_connect_webservice.Tick += new System.EventHandler(this.timer_connect_webservice_Tick);
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFE, de um duplo clique sobre o ícone.";
-            this.notifyIcon1.BalloonTipTitle = "UniNFE - Monitor da Nota Fiscal Eletrônica";
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "UniNFE - Monitor da Nota Fiscal Eletrônica";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // toolStripButton_config
             // 
@@ -138,6 +124,20 @@
             this.toolStripButton_validarxml.Size = new System.Drawing.Size(52, 52);
             this.toolStripButton_validarxml.Text = "toolStripButton1";
             this.toolStripButton_validarxml.ToolTipText = "Validar os arquivos XML de envio";
+            this.toolStripButton_validarxml.Click += new System.EventHandler(this.toolStripButton_validarxml_Click);
+            // 
+            // timer_connect_webservice
+            // 
+            this.timer_connect_webservice.Tick += new System.EventHandler(this.timer_connect_webservice_Tick);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFE, de um duplo clique sobre o ícone.";
+            this.notifyIcon1.BalloonTipTitle = "UniNFE - Monitor da Nota Fiscal Eletrônica";
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "UniNFE - Monitor da Nota Fiscal Eletrônica";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // MainForm
             // 

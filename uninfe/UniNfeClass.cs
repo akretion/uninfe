@@ -141,16 +141,26 @@ namespace uninfe
 
             if (oAD.vResultado == 0)
             {
-                //Gerar o Lote de Notas Fiscais
-                this.vXmlNfeDadosMsg = this.GerarLoteNfe();
-
-                //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                object oServico = null;
-                this.DefObjRecepcao(ref oServico);
-                if (this.InvocarObjeto("1.10", oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+                // Validar o Arquivo XML da NFe
+                string cResultadoValidacao = this.ValidarArqXML();
+                if (cResultadoValidacao == "")
                 {
-                    this.MoveDeleteArq(vNomeArqNfe, "M"); //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
-                    this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D"); //Deletar o arquivo de lote de nota fiscal enviado
+                    //Gerar o Lote de Notas Fiscais
+                    this.vXmlNfeDadosMsg = this.GerarLoteNfe();
+
+                    //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+                    object oServico = null;
+                    this.DefObjRecepcao(ref oServico);
+                    if (this.InvocarObjeto("1.10", oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+                    {
+                        this.MoveDeleteArq(vNomeArqNfe, "M"); //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
+                        this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D"); //Deletar o arquivo de lote de nota fiscal enviado
+                    }
+                }
+                else
+                {
+                    //Registrar o erro da validação para o sistema ERP
+                    this.GravarArqErroServico("-nfe.xml", "-nfe.err", cResultadoValidacao);
                 }
             }
             else
@@ -474,6 +484,16 @@ namespace uninfe
         private bool InvocarObjeto(string cVersaoDados, object oServico, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
             bool lRetorna;
+
+            // Validar o Arquivo XML
+            string cResultadoValidacao = this.ValidarArqXML();
+            if (cResultadoValidacao != "")
+            {
+                //Registrar o erro da validação para o sistema ERP
+                this.GravarArqErroServico(cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", cResultadoValidacao);
+                lRetorna = false;
+                return lRetorna;
+            }
 
             // Passo 1: Declara variável (tipo string) com o conteúdo do Cabecalho da mensagem a ser enviada para o webservice
             string vNFeCabecMsg = this.GerarXMLCabecMsg(cVersaoDados);
@@ -1632,6 +1652,66 @@ namespace uninfe
             {
                 oArquivo.Delete();
             }
+        }
+
+        /*
+         * ==============================================================================
+         * UNIMAKE - SOLUÇÕES CORPORATIVAS
+         * ==============================================================================
+         * Data.......: 31/07/2008
+         * Autor......: Wandrey Mundin Ferreira
+         * ------------------------------------------------------------------------------
+         * Descrição..: Valida o arquivo XML 
+         *              
+         * ------------------------------------------------------------------------------
+         * Definição..: ValidarArqXML(),string
+         * Parâmetros.: 
+         *                        
+         * ------------------------------------------------------------------------------
+         * Retorno....: Se retornar uma string em branco, significa que o XML foi 
+         *              validado com sucesso, ou seja, não tem nenhum erro. Se o retorno
+         *              tiver algo, algum erro ocorreu na validação.
+         * 
+         * ------------------------------------------------------------------------------
+         * Exemplos...:
+         * 
+         * string cResultadoValidacao = this.ValidarArqXML();
+         * 
+         * if (cResultadoValidacao == "")
+         * {
+         *    MessageBox.Show( "Arquivo validado com sucesso" );
+         * }
+         * else
+         * {
+         *    MessageBox.Show( cResultadoValidacao );
+         * }
+         * ------------------------------------------------------------------------------
+         * Notas......: 
+         * 
+         * ==============================================================================         
+         */
+        private string ValidarArqXML()
+        {
+            string cRetorna = "";
+
+            // Validar Arquivo XML
+            ValidadorXMLClass oValidador = new ValidadorXMLClass();
+            oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
+
+            if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= 7)
+            {
+                oValidador.ValidarXML(this.vXmlNfeDadosMsg, oValidador.cArquivoSchema);
+                if (oValidador.Retorno != 0)
+                {
+                    cRetorna = "XML INCONSISTENTE!\r\n\r\n" + oValidador.RetornoString;
+                }
+            }
+            else
+            {
+                cRetorna = "XML INCONSISTENTE!\r\n\r\n" + oValidador.cRetornoTipoArq;
+            }
+
+            return cRetorna;
         }
     }
 }

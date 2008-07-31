@@ -100,9 +100,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(5, 126);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 13);
+            this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Resultado da validação";
+            this.label3.Text = "Resultado da validação:";
             // 
             // openFileDialog_arqxml
             // 
@@ -128,6 +128,7 @@
             this.toolStripButton_validar.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_validar.Text = "toolStripButton1";
             this.toolStripButton_validar.ToolTipText = "Validar o XML";
+            this.toolStripButton_validar.Click += new System.EventHandler(this.toolStripButton_validar_Click);
             // 
             // FormValidarXML
             // 
