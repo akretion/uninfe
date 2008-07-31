@@ -91,6 +91,8 @@ namespace uninfe
                 this.cErro = "";
                 while (reader.Read()) { }
 
+                reader.Close();
+
                 this.Retorno = 0;
                 this.RetornoString = "";
                 if (cErro != "")
