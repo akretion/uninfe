@@ -22,6 +22,7 @@ namespace uninfe
         public string vPastaXMLEnvio { get; set; } //Pasta que contém os XMLs para serem enviados para o WebService
         public string vPastaXMLRetorno { get; set; } //Pasta que é para ser gravado os XML´s retornados pelo WebService
         public string vPastaXMLEnviado { get; set; } //Pasta onde vai gravar os XML´s que foram assinados e enviados
+        public string vPastaXMLErro { get; set; } //Pasta para arquivamento temporário dos XML que apresentaram erro na validação
 
         /*
          * ==============================================================================
@@ -145,6 +146,10 @@ namespace uninfe
                 string cResultadoValidacao = this.ValidarArqXML();
                 if (cResultadoValidacao == "")
                 {
+                    //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
+                    //o mesmo existir
+                    this.DeletarArqXMLErro();
+
                     //Gerar o Lote de Notas Fiscais
                     this.vXmlNfeDadosMsg = this.GerarLoteNfe();
 
@@ -1018,7 +1023,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHStatusServico.NfeStatusServico(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
@@ -1089,7 +1094,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
@@ -1161,7 +1166,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHRetRecepcao.NfeRetRecepcao(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHRetRecepcao.NfeRetRecepcaoService(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
@@ -1233,7 +1238,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHConsulta.NfeConsulta(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHConsulta.NfeConsulta(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHConsulta.NfeConsulta(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHConsulta.NfeConsultaService(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
@@ -1304,7 +1309,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHCancelamento.NfeCancelamento(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHCancelamento.NfeCancelamentoService(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
@@ -1376,7 +1381,7 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHInutilizacao.NfeInutilizacao(); }
-                else if (this.vUF == 41) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRHInutilizacao.NfeInutilizacaoService(); }
                 else if (this.vUF == 42) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
@@ -1522,7 +1527,11 @@ namespace uninfe
          */
         private void GravarXmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno)
         {
-            //Gravar o arquivo XML
+            //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
+            //o mesmo existir
+            this.DeletarArqXMLErro();
+
+            //Gravar o arquivo XML de retorno
             StreamWriter SW;
             this.vArqXMLRetorno = this.vPastaXMLRetorno + "\\" +
                                   this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
@@ -1569,6 +1578,29 @@ namespace uninfe
          */
         private void GravarArqErroServico(string pFinalArqEnvio, string pFinalArqErro, string cErro)
         {
+            //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
+            //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
+            //for gerado corretamente.
+            FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
+
+            if (Directory.Exists(this.vPastaXMLErro) == true)
+            {
+                //Mover o arquivo da nota fiscal para a pasta do XML com erro
+                string vNomeArquivo = this.vPastaXMLErro + "\\" + ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
+                if (File.Exists(vNomeArquivo))
+                {
+                    FileInfo oArqDestino = new FileInfo(vNomeArquivo);
+                    oArqDestino.Delete();
+                }
+
+                oArquivo.MoveTo(vNomeArquivo);
+            }
+            else
+            {
+                oArquivo.Delete();
+            }
+         
+            //Grava arquivo de ERRO para o ERP
             string cArqErro = this.vPastaXMLRetorno + "\\" +
                               this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
                               pFinalArqErro;
@@ -1712,6 +1744,17 @@ namespace uninfe
             }
 
             return cRetorna;
+        }
+
+        private void DeletarArqXMLErro()
+        {
+            //Excluir o XML da pasta temporária dos arquivos com erro se existir
+            string vNomeArquivo = this.vPastaXMLErro + "\\" + ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
+            if (File.Exists(vNomeArquivo))
+            {
+                FileInfo oArqXMLComErro = new FileInfo(vNomeArquivo);
+                oArqXMLComErro.Delete();
+            }
         }
     }
 }

@@ -49,8 +49,27 @@ namespace uninfe
             oNfe.vPastaXMLEnvio = oConfig.vPastaXMLEnvio;
             oNfe.vPastaXMLRetorno = oConfig.vPastaXMLRetorno;
             oNfe.vPastaXMLEnviado = oConfig.vPastaXMLEnviado;
+            oNfe.vPastaXMLErro = oConfig.vPastaXMLErro;
 
-            this.timer_connect_webservice.Enabled = true; //Ativar o timer
+            bool lExecutaTelaConfig = false;
+
+            //Avaliar se algumas configurações não foram feitas e informar o usuário
+            //executando a tela para que ele configure
+            //Wandrey 05/08/2008
+            if (oConfig.vPastaXMLErro == "")
+            {
+                MessageBox.Show("Para evitar falhas no aplicativo, informe nas configurações a pasta para arquivamento temporário dos arquivos XML que apresentaram erros na validação.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lExecutaTelaConfig = true;
+            }
+
+            if (lExecutaTelaConfig == true)
+            {
+                FormConfiguracao oTelaConfig = new FormConfiguracao();
+                oTelaConfig.Show();
+            }
+
+            //Ativar o timer
+            this.timer_connect_webservice.Enabled = true; 
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

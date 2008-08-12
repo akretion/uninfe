@@ -31,8 +31,6 @@ namespace uninfe.wsPRHInutilizacao {
         
         private System.Threading.SendOrPostCallback nfeInutilizacaoNFOperationCompleted;
         
-        private System.Threading.SendOrPostCallback insereZeroEsquerdaOperationCompleted;
-        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -75,9 +73,6 @@ namespace uninfe.wsPRHInutilizacao {
         public event nfeInutilizacaoNFCompletedEventHandler nfeInutilizacaoNFCompleted;
         
         /// <remarks/>
-        public event insereZeroEsquerdaCompletedEventHandler insereZeroEsquerdaCompleted;
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("nfeInutilizacaoNFReturn")]
         public string nfeInutilizacaoNF(string nfeCabecMsg, string nfeDadosMsg) {
@@ -106,38 +101,6 @@ namespace uninfe.wsPRHInutilizacao {
             if ((this.nfeInutilizacaoNFCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.nfeInutilizacaoNFCompleted(this, new nfeInutilizacaoNFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("insereZeroEsquerdaReturn")]
-        public string insereZeroEsquerda(string number, int intLength) {
-            object[] results = this.Invoke("insereZeroEsquerda", new object[] {
-                        number,
-                        intLength});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void insereZeroEsquerdaAsync(string number, int intLength) {
-            this.insereZeroEsquerdaAsync(number, intLength, null);
-        }
-        
-        /// <remarks/>
-        public void insereZeroEsquerdaAsync(string number, int intLength, object userState) {
-            if ((this.insereZeroEsquerdaOperationCompleted == null)) {
-                this.insereZeroEsquerdaOperationCompleted = new System.Threading.SendOrPostCallback(this.OninsereZeroEsquerdaOperationCompleted);
-            }
-            this.InvokeAsync("insereZeroEsquerda", new object[] {
-                        number,
-                        intLength}, this.insereZeroEsquerdaOperationCompleted, userState);
-        }
-        
-        private void OninsereZeroEsquerdaOperationCompleted(object arg) {
-            if ((this.insereZeroEsquerdaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.insereZeroEsquerdaCompleted(this, new insereZeroEsquerdaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -173,32 +136,6 @@ namespace uninfe.wsPRHInutilizacao {
         private object[] results;
         
         internal nfeInutilizacaoNFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
-    public delegate void insereZeroEsquerdaCompletedEventHandler(object sender, insereZeroEsquerdaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class insereZeroEsquerdaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal insereZeroEsquerdaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -320,5 +320,11 @@
     <Setting Name="uninfe_wsGOPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.sefaz.go.gov.br/nfe/services/NfeStatusServico</Value>
     </Setting>
+    <Setting Name="uninfe_wsPRHRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsPRHStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeStatusServicoNF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

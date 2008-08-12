@@ -1090,5 +1090,26 @@ namespace uninfe.Properties {
                 return ((string)(this["uninfe_wsGOPStatusServico_NfeStatusServico"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRecepcao")]
+        public string uninfe_wsPRHRecepcao_NfeRecepcao {
+            get {
+                return ((string)(this["uninfe_wsPRHRecepcao_NfeRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeStatusServi" +
+            "coNF")]
+        public string uninfe_wsPRHStatusServico_NfeStatusServico {
+            get {
+                return ((string)(this["uninfe_wsPRHStatusServico_NfeStatusServico"]));
+            }
+        }
     }
 }

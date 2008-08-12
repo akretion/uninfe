@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace uninfe.wsPRHConsulta {
+namespace uninfe.wsPRHRecepcao {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -26,16 +26,16 @@ namespace uninfe.wsPRHConsulta {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="nfeConsultaNFSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaNF")]
-    public partial class NfeConsultaService : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeRecepcaoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao")]
+    public partial class NfeRecepcao : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback nfeConsultaNFOperationCompleted;
+        private System.Threading.SendOrPostCallback nfeRecepcaoLoteOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public NfeConsultaService() {
-            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsPRHConsulta_NfeConsultaService;
+        public NfeRecepcao() {
+            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsPRHRecepcao_NfeRecepcao;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,37 +70,36 @@ namespace uninfe.wsPRHConsulta {
         }
         
         /// <remarks/>
-        public event nfeConsultaNFCompletedEventHandler nfeConsultaNFCompleted;
+        public event nfeRecepcaoLoteCompletedEventHandler nfeRecepcaoLoteCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaNF", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaNF", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("nfeConsultaNFReturn")]
-        public string nfeConsultaNF(string nfeCabecMsg, string nfeDadosMsg) {
-            object[] results = this.Invoke("nfeConsultaNF", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao/nfeRecepcaoLote", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string nfeRecepcaoLote(string nfeCabecMsg, string nfeDadosMsg) {
+            object[] results = this.Invoke("nfeRecepcaoLote", new object[] {
                         nfeCabecMsg,
                         nfeDadosMsg});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void nfeConsultaNFAsync(string nfeCabecMsg, string nfeDadosMsg) {
-            this.nfeConsultaNFAsync(nfeCabecMsg, nfeDadosMsg, null);
+        public void nfeRecepcaoLoteAsync(string nfeCabecMsg, string nfeDadosMsg) {
+            this.nfeRecepcaoLoteAsync(nfeCabecMsg, nfeDadosMsg, null);
         }
         
         /// <remarks/>
-        public void nfeConsultaNFAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
-            if ((this.nfeConsultaNFOperationCompleted == null)) {
-                this.nfeConsultaNFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnfeConsultaNFOperationCompleted);
+        public void nfeRecepcaoLoteAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
+            if ((this.nfeRecepcaoLoteOperationCompleted == null)) {
+                this.nfeRecepcaoLoteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnfeRecepcaoLoteOperationCompleted);
             }
-            this.InvokeAsync("nfeConsultaNF", new object[] {
+            this.InvokeAsync("nfeRecepcaoLote", new object[] {
                         nfeCabecMsg,
-                        nfeDadosMsg}, this.nfeConsultaNFOperationCompleted, userState);
+                        nfeDadosMsg}, this.nfeRecepcaoLoteOperationCompleted, userState);
         }
         
-        private void OnnfeConsultaNFOperationCompleted(object arg) {
-            if ((this.nfeConsultaNFCompleted != null)) {
+        private void OnnfeRecepcaoLoteOperationCompleted(object arg) {
+            if ((this.nfeRecepcaoLoteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.nfeConsultaNFCompleted(this, new nfeConsultaNFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.nfeRecepcaoLoteCompleted(this, new nfeRecepcaoLoteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -125,17 +124,17 @@ namespace uninfe.wsPRHConsulta {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
-    public delegate void nfeConsultaNFCompletedEventHandler(object sender, nfeConsultaNFCompletedEventArgs e);
+    public delegate void nfeRecepcaoLoteCompletedEventHandler(object sender, nfeRecepcaoLoteCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class nfeConsultaNFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class nfeRecepcaoLoteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal nfeConsultaNFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal nfeRecepcaoLoteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

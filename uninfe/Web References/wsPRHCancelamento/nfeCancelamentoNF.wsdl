@@ -17,43 +17,18 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="insereZeroEsquerda">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="number" type="xsd:string" />
-            <xsd:element name="intLength" type="xsd:int" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="insereZeroEsquerdaResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="insereZeroEsquerdaReturn" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="insereZeroEsquerdaRequest">
-    <wsdl:part name="parameters" element="impl:insereZeroEsquerda" />
-  </wsdl:message>
   <wsdl:message name="nfeCancelamentoNFResponse">
     <wsdl:part name="parameters" element="impl:nfeCancelamentoNFResponse" />
   </wsdl:message>
   <wsdl:message name="nfeCancelamentoNFRequest">
     <wsdl:part name="parameters" element="impl:nfeCancelamentoNF" />
   </wsdl:message>
-  <wsdl:message name="insereZeroEsquerdaResponse">
-    <wsdl:part name="parameters" element="impl:insereZeroEsquerdaResponse" />
-  </wsdl:message>
   <wsdl:portType name="NfeCancelamento">
     <wsdl:operation name="nfeCancelamentoNF">
       <wsdl:input name="nfeCancelamentoNFRequest" message="impl:nfeCancelamentoNFRequest" />
       <wsdl:output name="nfeCancelamentoNFResponse" message="impl:nfeCancelamentoNFResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="insereZeroEsquerda">
-      <wsdl:input name="insereZeroEsquerdaRequest" message="impl:insereZeroEsquerdaRequest" />
-      <wsdl:output name="insereZeroEsquerdaResponse" message="impl:insereZeroEsquerdaResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="nfeCancelamentoNFSoapBinding" type="impl:NfeCancelamento">
@@ -64,15 +39,6 @@
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="nfeCancelamentoNFResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="insereZeroEsquerda">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="insereZeroEsquerdaRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="insereZeroEsquerdaResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

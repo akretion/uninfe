@@ -20,6 +20,7 @@ namespace uninfe
         private void button1_Click(object sender, EventArgs e)
         {
             this.openFileDialog_arqxml.FileName = "";
+            this.openFileDialog_arqxml.RestoreDirectory = true; //Para não mudar o diretório corrente da aplicação. Wandrey 06/08/2008
             this.openFileDialog_arqxml.Filter = "Arquivos XML|*.xml";
             if (this.openFileDialog_arqxml.ShowDialog() == DialogResult.OK)
             {

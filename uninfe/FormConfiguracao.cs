@@ -55,6 +55,7 @@ namespace uninfe
             this.textBox_PastaEnvioXML.Text = oCarrega.vPastaXMLEnvio;
             this.textBox_PastaRetornoXML.Text = oCarrega.vPastaXMLRetorno;
             this.textBox_PastaEnviados.Text = oCarrega.vPastaXMLEnviado;
+            this.textBox_PastaXmlErro.Text = oCarrega.vPastaXMLErro;
             this.comboBox_UF.Text = oCarrega.vUnidadeFederativa;            
             this.comboBox_Ambiente.Text = oCarrega.vAmbiente;
             this.oMeuCert = oCarrega.oCertificado;
@@ -110,27 +111,67 @@ namespace uninfe
 
         private void toolStripButton_salvar_Click(object sender, EventArgs e)
         {
-            DirectoryInfo oDirEnvio = new DirectoryInfo(this.textBox_PastaEnvioXML.Text);
-            DirectoryInfo oDirRetorno = new DirectoryInfo(this.textBox_PastaRetornoXML.Text);
-            DirectoryInfo oDirEnviado = new DirectoryInfo(this.textBox_PastaEnviados.Text);
+            bool lInformaoesCorretas = true;
 
-            if (this.oMeuCert == null)
+            //Verificar se as pastas estão em branco
+            if (this.textBox_PastaEnviados.Text == "")
             {
-                MessageBox.Show("Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Informe a pasta para arquivamento dos arquivos XML enviados.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lInformaoesCorretas = false;
             }
-            else if (!oDirEnvio.Exists)
+            else if (this.textBox_PastaEnvioXML.Text == "")
             {
-                MessageBox.Show("A pasta de envio dos arquivos XML informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Informe a pasta de envio dos arquivos XML.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lInformaoesCorretas = false;
             }
-            else if (!oDirRetorno.Exists)
+            else if (this.textBox_PastaRetornoXML.Text == "")
             {
-                MessageBox.Show("A pasta de retorno dos arquivos XML informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Informe a pasta de retorno dos arquivos XML.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lInformaoesCorretas = false;
             }
-            else if (!oDirEnviado.Exists)
+            else if (this.textBox_PastaXmlErro.Text == "")
             {
-                MessageBox.Show("A pasta dos arquivos XML enviados informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lInformaoesCorretas = false;
             }
-            else
+
+            //Verificar se as pastas existem
+            if (lInformaoesCorretas == true)
+            {
+                DirectoryInfo oDirEnvio = new DirectoryInfo(this.textBox_PastaEnvioXML.Text);
+                DirectoryInfo oDirRetorno = new DirectoryInfo(this.textBox_PastaRetornoXML.Text);
+                DirectoryInfo oDirEnviado = new DirectoryInfo(this.textBox_PastaEnviados.Text);
+                DirectoryInfo oDirErro = new DirectoryInfo(this.textBox_PastaXmlErro.Text);
+
+                if (this.oMeuCert == null)
+                {
+                    MessageBox.Show("Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    lInformaoesCorretas = false;
+                }
+                else if (!oDirEnvio.Exists)
+                {
+                    MessageBox.Show("A pasta de envio dos arquivos XML informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    lInformaoesCorretas = false;
+                }
+                else if (!oDirRetorno.Exists)
+                {
+                    MessageBox.Show("A pasta de retorno dos arquivos XML informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    lInformaoesCorretas = false;
+                }
+                else if (!oDirEnviado.Exists)
+                {
+                    MessageBox.Show("A pasta para arquivamento dos arquivos XML enviados informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    lInformaoesCorretas = false;
+                }
+                else if (!oDirErro.Exists)
+                {
+                    MessageBox.Show("A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    lInformaoesCorretas = false;
+                }
+            }
+
+            //Gravar as informações
+            if (lInformaoesCorretas == true)
             {
                 XmlWriterSettings oSettings = new XmlWriterSettings();
 
@@ -149,6 +190,7 @@ namespace uninfe
                 oXmlGravar.WriteElementString("PastaXmlEnvio", this.textBox_PastaEnvioXML.Text);
                 oXmlGravar.WriteElementString("PastaXmlRetorno", this.textBox_PastaRetornoXML.Text);
                 oXmlGravar.WriteElementString("PastaXmlEnviado", this.textBox_PastaEnviados.Text);
+                oXmlGravar.WriteElementString("PastaXmlErro", this.textBox_PastaXmlErro.Text);
                 oXmlGravar.WriteElementString("UnidadeFederativa", this.comboBox_UF.Text);
                 oXmlGravar.WriteElementString("UnidadeFederativaCodigo", this.comboBox_UF.SelectedValue.ToString());
                 oXmlGravar.WriteElementString("Ambiente", this.comboBox_Ambiente.Text);
@@ -172,6 +214,16 @@ namespace uninfe
                 this.textBox_PastaEnviados.Text = this.folderBrowserDialog_xmlenviado.SelectedPath;
             }
         }
+
+        private void button_SelectPastaXmlErro_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_xmlerro.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.textBox_PastaXmlErro.Text = this.folderBrowserDialog_xmlerro.SelectedPath;
+            }
+        }
     }
 
     public class CarregarConfiguracoes
@@ -179,6 +231,7 @@ namespace uninfe
         public string vPastaXMLEnvio { get; private set; }
         public string vPastaXMLRetorno { get; private set; }
         public string vPastaXMLEnviado { get; private set; }
+        public string vPastaXMLErro { get; private set; }
         public string vUnidadeFederativa { get; private set; }
         public int vUnidadeFederativaCodigo { get; private set; }
         public string vAmbiente { get; private set; }
@@ -192,6 +245,7 @@ namespace uninfe
             this.vPastaXMLEnvio = string.Empty;
             this.vPastaXMLRetorno = string.Empty;
             this.vPastaXMLEnviado = string.Empty;
+            this.vPastaXMLErro = string.Empty;
             this.vUnidadeFederativa = string.Empty;
             this.vUnidadeFederativaCodigo = 0;
             this.vAmbiente = string.Empty;
@@ -216,6 +270,7 @@ namespace uninfe
                                     if (oLerXml.Name == "PastaXmlEnvio") { oLerXml.Read(); this.vPastaXMLEnvio = oLerXml.Value; }
                                     else if (oLerXml.Name == "PastaXmlRetorno") { oLerXml.Read(); this.vPastaXMLRetorno = oLerXml.Value; }
                                     else if (oLerXml.Name == "PastaXmlEnviado") { oLerXml.Read(); this.vPastaXMLEnviado = oLerXml.Value; }
+                                    else if (oLerXml.Name == "PastaXmlErro") { oLerXml.Read(); this.vPastaXMLErro = oLerXml.Value; }
                                     else if (oLerXml.Name == "UnidadeFederativa") { oLerXml.Read(); this.vUnidadeFederativa = oLerXml.Value; }
                                     else if (oLerXml.Name == "UnidadeFederativaCodigo") { oLerXml.Read(); this.vUnidadeFederativaCodigo = Convert.ToInt32(oLerXml.Value); }
                                     else if (oLerXml.Name == "Ambiente") { oLerXml.Read(); this.vAmbiente = oLerXml.Value; }

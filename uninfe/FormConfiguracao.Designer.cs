@@ -43,7 +43,6 @@
             this.toolStripButton_fechar = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog_xmlenvio = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_xmlretorno = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog_xsdschema = new System.Windows.Forms.FolderBrowserDialog();
             this.textBox_dadoscertificado = new System.Windows.Forms.TextBox();
             this.button_selecionar_certificado = new System.Windows.Forms.Button();
             this.button_SelectPastaXmlRetorno = new System.Windows.Forms.Button();
@@ -54,8 +53,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button_SelectPastaXmlErro = new System.Windows.Forms.Button();
+            this.textBox_PastaXmlErro = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.folderBrowserDialog_xmlenviado = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog_xmlerro = new System.Windows.Forms.FolderBrowserDialog();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -235,9 +238,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(3, 102);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(171, 13);
+            this.label6.Size = new System.Drawing.Size(262, 13);
             this.label6.TabIndex = 16;
-            this.label6.Text = "Pasta dos arquivos XML enviados:";
+            this.label6.Text = "Pasta para arquivamento dos arquivos XML enviados:";
             // 
             // button_SelectPastaXmlEnviado
             // 
@@ -276,6 +279,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button_SelectPastaXmlErro);
+            this.tabPage2.Controls.Add(this.textBox_PastaXmlErro);
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.textBox_PastaEnvioXML);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.button_SelectPastaXmlEnviado);
@@ -292,6 +298,33 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pastas";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button_SelectPastaXmlErro
+            // 
+            this.button_SelectPastaXmlErro.Image = global::uninfe.Properties.Resources.folder_orange_open;
+            this.button_SelectPastaXmlErro.Location = new System.Drawing.Point(554, 162);
+            this.button_SelectPastaXmlErro.Name = "button_SelectPastaXmlErro";
+            this.button_SelectPastaXmlErro.Size = new System.Drawing.Size(27, 23);
+            this.button_SelectPastaXmlErro.TabIndex = 21;
+            this.button_SelectPastaXmlErro.UseVisualStyleBackColor = true;
+            this.button_SelectPastaXmlErro.Click += new System.EventHandler(this.button_SelectPastaXmlErro_Click);
+            // 
+            // textBox_PastaXmlErro
+            // 
+            this.textBox_PastaXmlErro.Location = new System.Drawing.Point(6, 164);
+            this.textBox_PastaXmlErro.Name = "textBox_PastaXmlErro";
+            this.textBox_PastaXmlErro.Size = new System.Drawing.Size(542, 20);
+            this.textBox_PastaXmlErro.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 147);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(437, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Pasta para arquivamento temporário dos XML que apresentaram erro na tentativa do " +
+                "envio:";
             // 
             // tabPage3
             // 
@@ -348,7 +381,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_fechar;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlenvio;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlretorno;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xsdschema;
         private System.Windows.Forms.TextBox textBox_dadoscertificado;
         private System.Windows.Forms.Button button_selecionar_certificado;
         private System.Windows.Forms.TextBox textBox_PastaEnviados;
@@ -359,5 +391,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlenviado;
+        private System.Windows.Forms.Button button_SelectPastaXmlErro;
+        private System.Windows.Forms.TextBox textBox_PastaXmlErro;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlerro;
     }
 }
