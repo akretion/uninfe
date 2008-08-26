@@ -24,13 +24,20 @@ namespace uninfe
             //Montar os itens do DropList da UF
             ArrayList arrUF = new ArrayList();
             arrUF.Add(new DropDownListClass("AM", 13));
+            arrUF.Add(new DropDownListClass("CE", 23));
+            //arrUF.Add(new DropDownListClass("ES", 32));
             arrUF.Add(new DropDownListClass("GO", 52));
+            arrUF.Add(new DropDownListClass("MA", 21));
             arrUF.Add(new DropDownListClass("MG", 31));
             arrUF.Add(new DropDownListClass("MS", 50));
             arrUF.Add(new DropDownListClass("MT", 51));
+            arrUF.Add(new DropDownListClass("PA", 15));
+            arrUF.Add(new DropDownListClass("PI", 22));
             arrUF.Add(new DropDownListClass("PR", 41));
+            arrUF.Add(new DropDownListClass("RN", 24));
             arrUF.Add(new DropDownListClass("RS", 43));
             arrUF.Add(new DropDownListClass("SC", 42));
+            arrUF.Add(new DropDownListClass("SE", 28));
             arrUF.Add(new DropDownListClass("SP", 35));
             arrUF.Add(new DropDownListClass("TO", 17));
 

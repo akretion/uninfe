@@ -488,7 +488,7 @@ namespace uninfe
          */
         private bool InvocarObjeto(string cVersaoDados, object oServico, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
-            bool lRetorna;
+            bool lRetorna = false;
 
             // Validar o Arquivo XML
             string cResultadoValidacao = this.ValidarArqXML();
@@ -512,24 +512,43 @@ namespace uninfe
             // Passo 4: Limpa a variável de retorno
             this.vStrXmlRetorno = string.Empty;
 
-            try
+            // Definir o tipo de serviço
+            Type tipoServico = oServico.GetType();
+
+            //Vou fazer 3 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
+            for (int i = 1; i <= 5; i++)
             {
-                // Passo 5: (Invoke) Faz a chamada ao método de envio de Lote de NF-e, recebendo o resultado do processo em variável.
-                Type tipoServico = oServico.GetType();
-                this.vStrXmlRetorno = (string)(tipoServico.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oServico, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
+                try
+                {
+                    //Deu erro na primeira tentativa, sendo assim, vou aumentar o timeout para ver se não resolve a questão na segunda e terceira tentativa
+                    if (i == 2)
+                    {
+                        tipoServico.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, oServico, new object[] {300000});
+                    }                    
 
-                // Passo 6 e 7: Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
-                this.GravarXmlRetorno(cFinalArqEnvio+".xml",cFinalArqRetorno+".xml");
+                    //Invocar o membro
+                    this.vStrXmlRetorno = (string)(tipoServico.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oServico, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
 
-                lRetorna = true;
-            }
+                    // Passo 6 e 7: Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
+                    this.GravarXmlRetorno(cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml");
 
-            catch (Exception ex)
-            {
-                // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
-                this.GravarArqErroServico(cFinalArqEnvio+".xml", cFinalArqRetorno+".err", ex.ToString());
+                    lRetorna = true;
+                }
 
-                lRetorna = false;
+                catch (Exception ex)
+                {
+                    // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
+                    if (i == 5)
+                    {
+                        this.GravarArqErroServico(cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.ToString());
+                        lRetorna = false;
+                    }
+                }
+
+                if (lRetorna == true)
+                {
+                    break;
+                }
             }
 
             return lRetorna;
@@ -1010,10 +1029,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPStatusServico.NfeStatusServico(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1024,9 +1052,18 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHStatusServico.NfeStatusServico(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
             }
         }
 
@@ -1081,10 +1118,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPRecepcao.NfeRecepcao(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1093,11 +1139,20 @@ namespace uninfe
                 else if (this.vUF == 31) { pObjeto = new wsMGHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHRecepcao.NfeRecepcao(); }
-                else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }             
                 else if (this.vUF == 41) { pObjeto = new wsPRHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHRecepcao.NfeRecepcao(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
+                
                 else if (this.vUF == 42) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
             }
         }
 
@@ -1153,10 +1208,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPRetRecepcao.NfeRetRecepcao(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1167,9 +1231,18 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHRetRecepcao.NfeRetRecepcaoService(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHRetRecepcao.NfeRetRecepcao(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
             }
         }
 
@@ -1225,10 +1298,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPConsulta.NfeConsulta(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPConsulta.NfeConsulta(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPConsulta.NfeConsulta(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPConsulta.NfeConsulta(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1239,9 +1321,18 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSHConsulta.NfeConsulta(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHConsulta.NfeConsulta(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHConsulta.NfeConsultaService(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHConsulta.NfeConsulta(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
             }
         }
 
@@ -1296,10 +1387,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPCancelamento.NfeCancelamento(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1310,9 +1410,18 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHCancelamento.NfeCancelamentoService(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHCancelamento.NfeCancelamento(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
             }
         }
 
@@ -1368,10 +1477,19 @@ namespace uninfe
                 else if (this.vUF == 35) { pObjeto = new wsSPPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPInutilizacao.NfeInutilizacao(); }
+
                 else if (this.vUF == 41) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 15) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
             }
             else if (this.vAmbiente == 2)
             {
@@ -1382,9 +1500,18 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHInutilizacao.NfeInutilizacaoService(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEHInutilizacao.NfeInutilizacao(); }
+
+                else if (this.vUF == 15) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 21) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 22) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 24) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 32) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 13) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 28) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
             }
         }
 
@@ -1490,7 +1617,7 @@ namespace uninfe
             Type tipoClientCertificates;
             oClientCertificates = tipoServico.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, pObjeto, new Object[] { });
             tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });           
         }
 
         /*

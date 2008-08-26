@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao">
+      <s:element name="nfeRecepcaoLote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeCabecMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nfeDadosMsg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="nfeRecepcaoLoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeRecepcaoLoteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="nfeRecepcaoLoteSoapIn">
+    <wsdl:part name="parameters" element="tns:nfeRecepcaoLote" />
+  </wsdl:message>
+  <wsdl:message name="nfeRecepcaoLoteSoapOut">
+    <wsdl:part name="parameters" element="tns:nfeRecepcaoLoteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NfeRecepcao">
+    <wsdl:operation name="nfeRecepcaoLote">
+      <wsdl:input message="tns:nfeRecepcaoLoteSoapIn" />
+      <wsdl:output message="tns:nfeRecepcaoLoteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NfeRecepcao" type="tns:NfeRecepcao">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeRecepcaoLote">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao/nfeRecepcaoLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NfeRecepcao">
+    <wsdl:port name="NfeRecepcao" binding="tns:NfeRecepcao">
+      <soap:address location="https://nfeh.sefaz.ce.gov.br:443/nfe/services/NfeRecepcao" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
