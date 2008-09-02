@@ -24,6 +24,7 @@ namespace uninfe
             //Montar os itens do DropList da UF
             ArrayList arrUF = new ArrayList();
             arrUF.Add(new DropDownListClass("AM", 13));
+            arrUF.Add(new DropDownListClass("BA", 29));
             arrUF.Add(new DropDownListClass("CE", 23));
             //arrUF.Add(new DropDownListClass("ES", 32));
             arrUF.Add(new DropDownListClass("GO", 52));

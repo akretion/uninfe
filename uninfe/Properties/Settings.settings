@@ -362,5 +362,41 @@
     <Setting Name="uninfe_wsCEPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeStatusServico</Value>
     </Setting>
+    <Setting Name="uninfe_br_gov_ba_sefaz_hnfe_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_br_gov_ba_sefaz_hnfe1_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAHRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAHConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAHCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeCancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAHInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeInutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeCancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeInutilizacao.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

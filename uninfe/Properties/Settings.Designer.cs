@@ -1231,5 +1231,125 @@ namespace uninfe.Properties {
                 return ((string)(this["uninfe_wsCEPStatusServico_NfeStatusServico"]));
             }
         }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeStatusServico.asmx")]
+        public string uninfe_br_gov_ba_sefaz_hnfe_NfeStatusServico {
+            get {
+                return ((string)(this["uninfe_br_gov_ba_sefaz_hnfe_NfeStatusServico"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeRecepcao.asmx")]
+        public string uninfe_br_gov_ba_sefaz_hnfe1_NfeRecepcao {
+            get {
+                return ((string)(this["uninfe_br_gov_ba_sefaz_hnfe1_NfeRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx")]
+        public string uninfe_wsBAHRetRecepcao_NfeRetRecepcao {
+            get {
+                return ((string)(this["uninfe_wsBAHRetRecepcao_NfeRetRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeConsulta.asmx")]
+        public string uninfe_wsBAHConsulta_NfeConsulta {
+            get {
+                return ((string)(this["uninfe_wsBAHConsulta_NfeConsulta"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeCancelamento.asmx")]
+        public string uninfe_wsBAHCancelamento_NfeCancelamento {
+            get {
+                return ((string)(this["uninfe_wsBAHCancelamento_NfeCancelamento"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeInutilizacao.asmx")]
+        public string uninfe_wsBAHInutilizacao_NfeInutilizacao {
+            get {
+                return ((string)(this["uninfe_wsBAHInutilizacao_NfeInutilizacao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeStatusServico.asmx")]
+        public string uninfe_wsBAPStatusServico_NfeStatusServico {
+            get {
+                return ((string)(this["uninfe_wsBAPStatusServico_NfeStatusServico"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRecepcao.asmx")]
+        public string uninfe_wsBAPRecepcao_NfeRecepcao {
+            get {
+                return ((string)(this["uninfe_wsBAPRecepcao_NfeRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx")]
+        public string uninfe_wsBAPRetRecepcao_NfeRetRecepcao {
+            get {
+                return ((string)(this["uninfe_wsBAPRetRecepcao_NfeRetRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeConsulta.asmx")]
+        public string uninfe_wsBAPConsulta_NfeConsulta {
+            get {
+                return ((string)(this["uninfe_wsBAPConsulta_NfeConsulta"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeCancelamento.asmx")]
+        public string uninfe_wsBAPCancelamento_NfeCancelamento {
+            get {
+                return ((string)(this["uninfe_wsBAPCancelamento_NfeCancelamento"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeInutilizacao.asmx")]
+        public string uninfe_wsBAPInutilizacao_NfeInutilizacao {
+            get {
+                return ((string)(this["uninfe_wsBAPInutilizacao_NfeInutilizacao"]));
+            }
+        }
     }
 }

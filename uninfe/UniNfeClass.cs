@@ -918,7 +918,8 @@ namespace uninfe
             bool vRetorna;
 
             X509Certificate2 oX509Cert = new X509Certificate2();
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+            //X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+            X509Store store = new X509Store("MY", StoreLocation.LocalMachine);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
             X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
             X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
@@ -1030,6 +1031,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
@@ -1053,6 +1055,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
@@ -1119,6 +1122,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPRecepcao.NfeRecepcao(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
@@ -1142,6 +1146,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }             
                 else if (this.vUF == 41) { pObjeto = new wsPRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHRecepcao.NfeRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
@@ -1209,6 +1214,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
@@ -1232,6 +1238,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHRetRecepcao.NfeRetRecepcaoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
@@ -1299,6 +1306,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPConsulta.NfeConsulta(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPConsulta.NfeConsulta(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPConsulta.NfeConsulta(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
@@ -1322,6 +1330,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHConsulta.NfeConsulta(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHConsulta.NfeConsultaService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHConsulta.NfeConsulta(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
@@ -1388,6 +1397,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
@@ -1411,6 +1421,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHCancelamento.NfeCancelamentoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
@@ -1478,6 +1489,7 @@ namespace uninfe
                 else if (this.vUF == 50) { pObjeto = new wsMSPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAPInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 41) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
@@ -1501,6 +1513,7 @@ namespace uninfe
                 else if (this.vUF == 52) { pObjeto = new wsGOHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHInutilizacao.NfeInutilizacaoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 29) { pObjeto = new wsBAHInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
