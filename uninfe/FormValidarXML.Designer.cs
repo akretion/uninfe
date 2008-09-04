@@ -70,12 +70,12 @@
             // 
             // textBox_resultado
             // 
-            this.textBox_resultado.Location = new System.Drawing.Point(8, 142);
+            this.textBox_resultado.Location = new System.Drawing.Point(8, 146);
             this.textBox_resultado.Multiline = true;
             this.textBox_resultado.Name = "textBox_resultado";
             this.textBox_resultado.ReadOnly = true;
             this.textBox_resultado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_resultado.Size = new System.Drawing.Size(612, 259);
+            this.textBox_resultado.Size = new System.Drawing.Size(612, 255);
             this.textBox_resultado.TabIndex = 3;
             // 
             // textBox_tipoarq
@@ -98,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 126);
+            this.label3.Location = new System.Drawing.Point(5, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 6;

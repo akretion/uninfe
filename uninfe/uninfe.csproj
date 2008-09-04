@@ -274,6 +274,66 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\wsDFHCancelamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHConsulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHInutilizacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHRetRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHStatusServico\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPCancelamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPConsulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPInutilizacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPRetRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFPStatusServico\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\wsGOHCancelamento\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1039,6 +1099,72 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsVNHStatusServico_NfeStatusServico</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHCancelamento\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHCancelamento_NfeCancelamento</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHConsulta\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHConsulta_NfeConsulta</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHInutilizacao\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHInutilizacao_NfeInutilizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHRecepcao\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHRecepcao_NfeRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHRetRecepcao\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHRetRecepcao_NfeRetRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHStatusServico\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHStatusServico_NfeStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://homolog.sefaz.go.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsGOHCancelamento\</RelPath>
@@ -1105,10 +1231,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsGOHStatusServico_NfeStatusServico</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeCancelamentoNF%3fWSDL">
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\Parana\nfeCancelamentoNF.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsPRHCancelamento\</RelPath>
-      <UpdateFromURL>https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeCancelamentoNF%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\Parana\nfeCancelamentoNF.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1116,10 +1242,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsPRHCancelamento_NfeCancelamentoService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeConsultaNF%3fWSDL">
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\Parana\nfeConsultaNF.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsPRHConsulta\</RelPath>
-      <UpdateFromURL>https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeConsultaNF%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\Parana\nfeConsultaNF.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1127,10 +1253,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsPRHConsulta_NfeConsultaService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeInutilizacaoNF%3fWSDL">
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\Parana\nfeInutilizacaoNF.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsPRHInutilizacao\</RelPath>
-      <UpdateFromURL>https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeInutilizacaoNF%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\Parana\nfeInutilizacaoNF.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1138,10 +1264,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsPRHInutilizacao_NfeInutilizacaoService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRetRecepcao%3fWSDL">
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\Parana\nfeRetRecepcao.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsPRHRetRecepcao\</RelPath>
-      <UpdateFromURL>https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRetRecepcao%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\Parana\nfeRetRecepcao.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1478,6 +1604,72 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsMTHStatusServico_NfeStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPCancelamento\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPCancelamento_NfeCancelamento</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPConsulta\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPConsulta_NfeConsulta</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPInutilizacao\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPInutilizacao_NfeInutilizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPRecepcao\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPRecepcao_NfeRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPRetRecepcao\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPRetRecepcao_NfeRetRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPStatusServico\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPStatusServico_NfeStatusServico</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfe.fazenda.mg.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -2448,11 +2640,6 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsPRHRetRecepcao\nfeRetRecepcao.wsdl" />
-    <None Include="Web References\wsPRHRetRecepcao\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Web References\wsPRPCancelamento\nfeCancelamentoNF.wsdl" />
     <None Include="Web References\wsPRPCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -2978,6 +3165,71 @@
     </None>
     <None Include="Web References\wsBAPStatusServico\NfeStatusServico.wsdl" />
     <None Include="Web References\wsBAPStatusServico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHCancelamento\NfeCancelamento.wsdl" />
+    <None Include="Web References\wsDFHCancelamento\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHConsulta\NfeConsulta.wsdl" />
+    <None Include="Web References\wsDFHConsulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHInutilizacao\NfeInutilizacao.wsdl" />
+    <None Include="Web References\wsDFHInutilizacao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHRecepcao\NfeRecepcao.wsdl" />
+    <None Include="Web References\wsDFHRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHRetRecepcao\NfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsDFHRetRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHStatusServico\NfeStatusServico.wsdl" />
+    <None Include="Web References\wsDFHStatusServico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPCancelamento\NfeCancelamento.wsdl" />
+    <None Include="Web References\wsDFPCancelamento\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPConsulta\NfeConsulta.wsdl" />
+    <None Include="Web References\wsDFPConsulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPInutilizacao\NfeInutilizacao.wsdl" />
+    <None Include="Web References\wsDFPInutilizacao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPRecepcao\NfeRecepcao.wsdl" />
+    <None Include="Web References\wsDFPRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPRetRecepcao\NfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsDFPRetRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFPStatusServico\NfeStatusServico.wsdl" />
+    <None Include="Web References\wsDFPStatusServico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsPRHRetRecepcao\nfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsPRHRetRecepcao\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

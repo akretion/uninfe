@@ -74,7 +74,6 @@ namespace uninfe.wsPRHCancelamento {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("nfeCancelamentoNFReturn")]
         public string nfeCancelamentoNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeCancelamentoNF", new object[] {
                         nfeCabecMsg,

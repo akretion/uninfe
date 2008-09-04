@@ -26,6 +26,7 @@ namespace uninfe
             arrUF.Add(new DropDownListClass("AM", 13));
             arrUF.Add(new DropDownListClass("BA", 29));
             arrUF.Add(new DropDownListClass("CE", 23));
+            arrUF.Add(new DropDownListClass("DF", 53));
             //arrUF.Add(new DropDownListClass("ES", 32));
             arrUF.Add(new DropDownListClass("GO", 52));
             arrUF.Add(new DropDownListClass("MA", 21));
@@ -35,6 +36,7 @@ namespace uninfe
             arrUF.Add(new DropDownListClass("PA", 15));
             arrUF.Add(new DropDownListClass("PI", 22));
             arrUF.Add(new DropDownListClass("PR", 41));
+            arrUF.Add(new DropDownListClass("RJ", 33));
             arrUF.Add(new DropDownListClass("RN", 24));
             arrUF.Add(new DropDownListClass("RS", 43));
             arrUF.Add(new DropDownListClass("SC", 42));

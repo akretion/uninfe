@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+	targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap"
+	xmlns:impl="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao"
+	xmlns:intf="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!-- WSDL liz -->
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao" xmlns="http://www.w3.org/2001/XMLSchema">
+			<element name="nfeRetRecepcao">
+				<complexType>
+					<sequence>
+						<element name="nfeCabecMsg" type="xsd:string" />
+						<element name="nfeDadosMsg" type="xsd:string" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="nfeRetRecepcaoResponse">
+				<complexType>
+					<sequence>
+						<element name="nfeRetRecepcaoResult" type="xsd:string" />
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</wsdl:types>
+	<message name="nfeRetRecepcaoResponse">
+		<part element="impl:nfeRetRecepcaoResponse" name="parameters" />
+	</message>
+	<message name="nfeRetRecepcaoRequest">
+		<part element="impl:nfeRetRecepcao" name="parameters" />
+	</message>
+	<portType name="NfeRetRecepcao">
+		<operation name="nfeRetRecepcao">
+			<input message="impl:nfeRetRecepcaoRequest" name="nfeRetRecepcaoRequest" />
+			<output message="impl:nfeRetRecepcaoResponse" name="nfeRetRecepcaoResponse" />
+		</operation>
+	</portType>
+	<binding name="nfeRetRecepcaoSoapBinding" type="impl:NfeRetRecepcao">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="nfeRetRecepcao">
+			<wsdlsoap:operation soapAction="" />
+			<input name="nfeRetRecepcaoRequest">
+				<wsdlsoap:body use="literal" />
+			</input>
+			<output name="nfeRetRecepcaoResponse">
+				<wsdlsoap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="NfeRetRecepcaoService">
+		<port binding="impl:nfeRetRecepcaoSoapBinding" name="nfeRetRecepcao">
+			<wsdlsoap:address
+				location="https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRetRecepcao" />
+		</port>
+	</service>
+</definitions>

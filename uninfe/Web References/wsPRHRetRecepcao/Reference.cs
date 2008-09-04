@@ -74,7 +74,6 @@ namespace uninfe.wsPRHRetRecepcao {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("nfeRetRecepcaoReturn")]
         public string nfeRetRecepcao(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeRetRecepcao", new object[] {
                         nfeCabecMsg,

@@ -74,7 +74,6 @@ namespace uninfe.wsPRHConsulta {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaNF", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaNF", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("nfeConsultaNFReturn")]
         public string nfeConsultaNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeConsultaNF", new object[] {
                         nfeCabecMsg,

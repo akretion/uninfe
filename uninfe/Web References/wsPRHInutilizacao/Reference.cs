@@ -74,7 +74,6 @@ namespace uninfe.wsPRHInutilizacao {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("nfeInutilizacaoNFReturn")]
         public string nfeInutilizacaoNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeInutilizacaoNF", new object[] {
                         nfeCabecMsg,

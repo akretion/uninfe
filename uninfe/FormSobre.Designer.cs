@@ -39,6 +39,8 @@
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_licenca = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_DataUltimaModificacao = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,11 +58,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(167, 0);
+            this.label1.Location = new System.Drawing.Point(165, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 31);
+            this.label1.Size = new System.Drawing.Size(221, 31);
             this.label1.TabIndex = 1;
-            this.label1.Text = "UniNFe - 1.1";
+            this.label1.Text = "UniNFe - 1.1.01";
             // 
             // label2
             // 
@@ -118,16 +120,16 @@
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.Location = new System.Drawing.Point(222, 129);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(129, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(143, 13);
             this.linkLabel3.TabIndex = 7;
             this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "www.unimake.com.br/nfe";
+            this.linkLabel3.Text = "www.unimake.com.br/uninfe";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 167);
+            this.label5.Location = new System.Drawing.Point(10, 205);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 8;
@@ -135,19 +137,40 @@
             // 
             // textBox_licenca
             // 
-            this.textBox_licenca.Location = new System.Drawing.Point(13, 183);
+            this.textBox_licenca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_licenca.Location = new System.Drawing.Point(13, 223);
             this.textBox_licenca.Multiline = true;
             this.textBox_licenca.Name = "textBox_licenca";
             this.textBox_licenca.ReadOnly = true;
             this.textBox_licenca.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_licenca.Size = new System.Drawing.Size(534, 178);
+            this.textBox_licenca.Size = new System.Drawing.Size(534, 138);
             this.textBox_licenca.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 161);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Data da última modificação:";
+            // 
+            // textBox_DataUltimaModificacao
+            // 
+            this.textBox_DataUltimaModificacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_DataUltimaModificacao.Location = new System.Drawing.Point(13, 179);
+            this.textBox_DataUltimaModificacao.Name = "textBox_DataUltimaModificacao";
+            this.textBox_DataUltimaModificacao.ReadOnly = true;
+            this.textBox_DataUltimaModificacao.Size = new System.Drawing.Size(169, 20);
+            this.textBox_DataUltimaModificacao.TabIndex = 11;
             // 
             // FormSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 373);
+            this.Controls.Add(this.textBox_DataUltimaModificacao);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox_licenca);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.linkLabel3);
@@ -180,6 +203,8 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox_licenca;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox_DataUltimaModificacao;
 
     }
 }

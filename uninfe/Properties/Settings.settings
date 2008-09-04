@@ -110,9 +110,6 @@
     <Setting Name="uninfe_wsRSPConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.sefaz.rs.gov.br/ws/nfeconsulta/NfeConsulta.asmx</Value>
     </Setting>
-    <Setting Name="uninfe_wsPRHRetRecepcao_NfeRetRecepcaoService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRetRecepcao</Value>
-    </Setting>
     <Setting Name="uninfe_wsPRHCancelamento_NfeCancelamentoService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeCancelamentoNF</Value>
     </Setting>
@@ -397,6 +394,45 @@
     </Setting>
     <Setting Name="uninfe_wsBAPInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeInutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsPRHRetRecepcao_NfeRetRecepcaoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRetRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeConsulta</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFHStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico</Value>
     </Setting>
   </Settings>
 </SettingsFile>

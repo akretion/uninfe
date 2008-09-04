@@ -12,7 +12,6 @@ namespace uninfe
     public partial class MainForm : Form
     {
         UniNfeClass oNfe = new UniNfeClass();
-        UniAssinaturaDigitalClass oAD = new UniAssinaturaDigitalClass();
 
         public MainForm()
         {
