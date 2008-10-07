@@ -112,7 +112,6 @@
             this.toolStripButton_teste.Size = new System.Drawing.Size(52, 52);
             this.toolStripButton_teste.Text = "toolStripButton2";
             this.toolStripButton_teste.ToolTipText = "Rotina para testes diversos com a NFe";
-            this.toolStripButton_teste.Visible = false;
             this.toolStripButton_teste.Click += new System.EventHandler(this.toolStripButton_teste_Click);
             // 
             // toolStripButton_validarxml

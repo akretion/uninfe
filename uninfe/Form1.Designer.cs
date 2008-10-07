@@ -45,6 +45,7 @@
             this.button_RetRecepcao = new System.Windows.Forms.Button();
             this.comboBoxUF = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_status_servico
@@ -156,10 +157,18 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // FormTeste
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button_RetRecepcao);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_xmlretorno);
@@ -175,7 +184,7 @@
             this.Controls.Add(this.button_exibir_certificado_selecionado);
             this.Controls.Add(this.button_selecionar_certificado);
             this.Controls.Add(this.button_status_servico);
-            this.Name = "FormTeste";
+            this.Name = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,6 +208,7 @@
         private System.Windows.Forms.Button button_RetRecepcao;
         private System.Windows.Forms.ComboBox comboBoxUF;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

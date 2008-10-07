@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:intf="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:impl="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao">
-      <xsd:element name="nfeRecepcaoLote">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="nfeCabecMsg" type="xsd:string" />
-            <xsd:element name="nfeDadosMsg" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nfeRecepcaoLoteResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="nfeRecepcaoLoteReturn" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-    </xsd:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao">
+      <s:element name="nfeRecepcaoLote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeCabecMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nfeDadosMsg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="nfeRecepcaoLoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeRecepcaoLoteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeRecepcaoLoteRequest">
-    <wsdl:part name="parameters" element="impl:nfeRecepcaoLote" />
+  <wsdl:message name="nfeRecepcaoLoteSoapIn">
+    <wsdl:part name="parameters" element="tns:nfeRecepcaoLote" />
   </wsdl:message>
-  <wsdl:message name="nfeRecepcaoLoteResponse">
-    <wsdl:part name="parameters" element="impl:nfeRecepcaoLoteResponse" />
+  <wsdl:message name="nfeRecepcaoLoteSoapOut">
+    <wsdl:part name="parameters" element="tns:nfeRecepcaoLoteResponse" />
   </wsdl:message>
-  <wsdl:portType name="NfeRecepcaoLote">
+  <wsdl:portType name="NfeRecepcaoSoap">
     <wsdl:operation name="nfeRecepcaoLote">
-      <wsdl:input name="nfeRecepcaoLoteRequest" message="impl:nfeRecepcaoLoteRequest" />
-      <wsdl:output name="nfeRecepcaoLoteResponse" message="impl:nfeRecepcaoLoteResponse" />
+      <wsdl:input message="tns:nfeRecepcaoLoteSoapIn" />
+      <wsdl:output message="tns:nfeRecepcaoLoteSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="nfeRecepcaoSoapBinding" type="impl:NfeRecepcaoLote">
-    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+  <wsdl:binding name="NfeRecepcaoSoap" type="tns:NfeRecepcaoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeRecepcaoLote">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="nfeRecepcaoLoteRequest">
-        <wsdlsoap:body use="literal" />
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao/nfeRecepcaoLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="nfeRecepcaoLoteResponse">
-        <wsdlsoap:body use="literal" />
+      <wsdl:output>
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="NfeRecepcaoLoteService">
-    <wsdl:port name="nfeRecepcao" binding="impl:nfeRecepcaoSoapBinding">
-      <wsdlsoap:address location="https://nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRecepcao" />
+  <wsdl:service name="NfeRecepcao">
+    <wsdl:port name="NfeRecepcaoSoap" binding="tns:NfeRecepcaoSoap">
+      <soap:address location="https://nfe.fazenda.pr.gov.br/NFENWebServices/services/nfeRecepcao" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
