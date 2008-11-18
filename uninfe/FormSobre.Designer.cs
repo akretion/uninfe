@@ -60,9 +60,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(165, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 31);
+            this.label1.Size = new System.Drawing.Size(180, 31);
             this.label1.TabIndex = 1;
-            this.label1.Text = "UniNFe - 1.1.01";
+            this.label1.Text = "UniNFe - 1.2";
             // 
             // label2
             // 

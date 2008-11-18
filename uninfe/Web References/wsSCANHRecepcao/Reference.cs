@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace uninfe.wsSCANCancelamento {
+namespace uninfe.wsSCANHRecepcao {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -26,16 +26,16 @@ namespace uninfe.wsSCANCancelamento {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeCancelamentoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento")]
-    public partial class NfeCancelamento : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeRecepcaoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao")]
+    public partial class NfeRecepcao : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback nfeCancelamentoNFOperationCompleted;
+        private System.Threading.SendOrPostCallback nfeRecepcaoLoteOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public NfeCancelamento() {
-            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsSCANCancelamento_NfeCancelamento;
+        public NfeRecepcao() {
+            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsSCANRecepcao_NfeRecepcao;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,36 +70,36 @@ namespace uninfe.wsSCANCancelamento {
         }
         
         /// <remarks/>
-        public event nfeCancelamentoNFCompletedEventHandler nfeCancelamentoNFCompleted;
+        public event nfeRecepcaoLoteCompletedEventHandler nfeRecepcaoLoteCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento/nfeCancelamentoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string nfeCancelamentoNF(string nfeCabecMsg, string nfeDadosMsg) {
-            object[] results = this.Invoke("nfeCancelamentoNF", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao/nfeRecepcaoLote", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string nfeRecepcaoLote(string nfeCabecMsg, string nfeDadosMsg) {
+            object[] results = this.Invoke("nfeRecepcaoLote", new object[] {
                         nfeCabecMsg,
                         nfeDadosMsg});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void nfeCancelamentoNFAsync(string nfeCabecMsg, string nfeDadosMsg) {
-            this.nfeCancelamentoNFAsync(nfeCabecMsg, nfeDadosMsg, null);
+        public void nfeRecepcaoLoteAsync(string nfeCabecMsg, string nfeDadosMsg) {
+            this.nfeRecepcaoLoteAsync(nfeCabecMsg, nfeDadosMsg, null);
         }
         
         /// <remarks/>
-        public void nfeCancelamentoNFAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
-            if ((this.nfeCancelamentoNFOperationCompleted == null)) {
-                this.nfeCancelamentoNFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnfeCancelamentoNFOperationCompleted);
+        public void nfeRecepcaoLoteAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
+            if ((this.nfeRecepcaoLoteOperationCompleted == null)) {
+                this.nfeRecepcaoLoteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnfeRecepcaoLoteOperationCompleted);
             }
-            this.InvokeAsync("nfeCancelamentoNF", new object[] {
+            this.InvokeAsync("nfeRecepcaoLote", new object[] {
                         nfeCabecMsg,
-                        nfeDadosMsg}, this.nfeCancelamentoNFOperationCompleted, userState);
+                        nfeDadosMsg}, this.nfeRecepcaoLoteOperationCompleted, userState);
         }
         
-        private void OnnfeCancelamentoNFOperationCompleted(object arg) {
-            if ((this.nfeCancelamentoNFCompleted != null)) {
+        private void OnnfeRecepcaoLoteOperationCompleted(object arg) {
+            if ((this.nfeRecepcaoLoteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.nfeCancelamentoNFCompleted(this, new nfeCancelamentoNFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.nfeRecepcaoLoteCompleted(this, new nfeRecepcaoLoteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -124,17 +124,17 @@ namespace uninfe.wsSCANCancelamento {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
-    public delegate void nfeCancelamentoNFCompletedEventHandler(object sender, nfeCancelamentoNFCompletedEventArgs e);
+    public delegate void nfeRecepcaoLoteCompletedEventHandler(object sender, nfeRecepcaoLoteCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class nfeCancelamentoNFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class nfeRecepcaoLoteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal nfeCancelamentoNFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal nfeRecepcaoLoteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

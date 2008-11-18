@@ -38,9 +38,17 @@ namespace uninfe
             oFormTeste.Show();
         }
 
+        private void ReconfigurarUniNFe(string cArquivo)
+        {
+            ConfigUniNFe oConfig = new ConfigUniNFe();
+            oConfig.ReconfigurarUniNFe(cArquivo);
+
+            CarregarConfiguracoes();
+        }
+
         private void CarregarConfiguracoes()
         {
-            CarregarConfiguracoes oConfig = new CarregarConfiguracoes();
+            ConfigUniNFe oConfig = new ConfigUniNFe();
             oConfig.CarregarDados();
             oNfe.oCertificado = oConfig.oCertificado;
             oNfe.vUF = oConfig.vUnidadeFederativaCodigo;
@@ -49,23 +57,7 @@ namespace uninfe
             oNfe.vPastaXMLRetorno = oConfig.vPastaXMLRetorno;
             oNfe.vPastaXMLEnviado = oConfig.vPastaXMLEnviado;
             oNfe.vPastaXMLErro = oConfig.vPastaXMLErro;
-
-            bool lExecutaTelaConfig = false;
-
-            //Avaliar se algumas configurações não foram feitas e informar o usuário
-            //executando a tela para que ele configure
-            //Wandrey 05/08/2008
-            if (oConfig.vPastaXMLErro == "")
-            {
-                MessageBox.Show("Para evitar falhas no aplicativo, informe nas configurações a pasta para arquivamento temporário dos arquivos XML que apresentaram erros na validação.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                lExecutaTelaConfig = true;
-            }
-
-            if (lExecutaTelaConfig == true)
-            {
-                FormConfiguracao oTelaConfig = new FormConfiguracao();
-                oTelaConfig.Show();
-            }
+            oNfe.vTpEmis = oConfig.vTpEmis;
 
             //Ativar o timer
             this.timer_connect_webservice.Enabled = true; 
@@ -83,6 +75,11 @@ namespace uninfe
         private void timer_connect_webservice_Tick(object sender, EventArgs e)
         {
             this.timer_connect_webservice.Enabled = false; //Desativar o timer
+
+            //a linha comentada abaixo retorna a localização do executável. Wandrey 11/11/2008
+            //string pathFile = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //a linha comentada abaixo acredito eu que muda o path, diretório, tem que testar. Wandrey 11/11/2008
+            //System.IO.Directory.SetCurrentDirectory()
 
             //Procurar arquivos XML para ser enviados aos web-services
             if (oNfe.vPastaXMLEnvio != string.Empty)
@@ -125,32 +122,52 @@ namespace uninfe
             bool lPedCan = (cArquivo.Substring(cArquivo.ToUpper().IndexOf(".XML") - 8, 8).ToLower() == "-ped-can");
             //-ped-inu.xml = Arquivo XML de Inutilização de Numeração de Notas Fiscais
             bool lPedInu = (cArquivo.Substring(cArquivo.ToUpper().IndexOf(".XML") - 8, 8).ToLower() == "-ped-inu");
+            //-alt-con.xml = Arquivo XML de Configuração Automática do UniNFe
+            bool lAltCon = (cArquivo.Substring(cArquivo.ToUpper().IndexOf(".XML") - 8, 8).ToLower() == "-alt-con");
 
             //Invocar o serviço solicitado
             oNfe.vXmlNfeDadosMsg = cArquivo;
-            if (lNfe == true)
+            if (oNfe.vTpEmis != 2) //2-Confingência em Formulário decimal segurança não envia na hora, tem que aguardar voltar para normal.
             {
-                oNfe.Recepcao();
+                if (lNfe == true)
+                {
+                    oNfe.Recepcao();
+                }
+                else if (lPedRec == true)
+                {
+                    oNfe.RetRecepcao();
+                }
+                else if (lPedSit == true)
+                {
+                    oNfe.Consulta();
+                }
+                else if (lPedSta == true)
+                {
+                    oNfe.StatusServico();
+                }
+                else if (lPedCan == true)
+                {
+                    oNfe.Cancelamento();
+                }
+                else if (lPedInu == true)
+                {
+                    oNfe.Inutilizacao();
+                }
+                if (lAltCon == true)
+                {
+                    this.ReconfigurarUniNFe(cArquivo);
+                }
             }
-            else if (lPedRec == true)
+            else
             {
-                oNfe.RetRecepcao();
-            }
-            else if (lPedSit == true)
-            {
-                oNfe.Consulta();
-            }
-            else if (lPedSta == true)
-            {
-                oNfe.StatusServico();
-            }
-            else if (lPedCan == true)
-            {
-                oNfe.Cancelamento();
-            }
-            else if (lPedInu == true)
-            {
-                oNfe.Inutilizacao();
+                if (lAltCon == true)
+                {
+                    this.ReconfigurarUniNFe(cArquivo);
+                }
+                else if (lPedSta == true)
+                {
+                    oNfe.StatusServico();
+                }
             }
         }
 

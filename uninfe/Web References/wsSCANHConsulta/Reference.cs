@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace uninfe.wsSCANConsulta {
+namespace uninfe.wsSCANHConsulta {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;

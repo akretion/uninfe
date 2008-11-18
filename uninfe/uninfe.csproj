@@ -152,6 +152,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="UniAssinaturaDigitalClass.cs" />
+    <Compile Include="UniLerXMLClass.cs" />
     <Compile Include="UniNfeClass.cs" />
     <Compile Include="ValidadorXMLClass.cs" />
     <Compile Include="Web References\wsCEHCancelamento\Reference.cs">
@@ -814,32 +815,62 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANCancelamento\Reference.cs">
+    <Compile Include="Web References\wsSCANHCancelamento\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANConsulta\Reference.cs">
+    <Compile Include="Web References\wsSCANHConsulta\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANInutilizacao\Reference.cs">
+    <Compile Include="Web References\wsSCANHInutilizacao\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANRecepcao\Reference.cs">
+    <Compile Include="Web References\wsSCANPCancelamento\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANRetRecepcao\Reference.cs">
+    <Compile Include="Web References\wsSCANPConsulta\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\wsSCANStatusServico\Reference.cs">
+    <Compile Include="Web References\wsSCANPInutilizacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANPRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANHRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANHRetRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANHStatusServico\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANPRetRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSCANPStatusServico\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1051,6 +1082,72 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsPRHStatusServico_NfeStatusServico</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeCancelamento.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPCancelamento\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeCancelamento.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPCancelamento_NfeCancelamento</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeConsulta.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPConsulta\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeConsulta.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPConsulta_NfeConsulta</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeInutilizacao.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPInutilizacao\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeInutilizacao.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPInutilizacao_NfeInutilizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeRecepcao.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPRecepcao\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeRecepcao.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPNfeRecepcao_NfeRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeRetRecepcao.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPRetRecepcao\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeRetRecepcao.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPRetRecepcao_NfeRetRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeStatusServico.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSCANPStatusServico\</RelPath>
+      <UpdateFromURL>C:\fontes\Windows\uninfe\WSDL\SCAN\producao\NfeStatusServico.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsSCANPStatusServico_NfeStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://hnfe.fazenda.mg.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsMGHCancelamento\</RelPath>
@@ -1251,7 +1348,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeCancelamento/NfeCancelamento.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANCancelamento\</RelPath>
+      <RelPath>Web References\wsSCANHCancelamento\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeCancelamento/NfeCancelamento.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -1262,7 +1359,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeConsulta/NfeConsulta.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANConsulta\</RelPath>
+      <RelPath>Web References\wsSCANHConsulta\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeConsulta/NfeConsulta.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -1273,7 +1370,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeInutilizacao/NfeInutilizacao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANInutilizacao\</RelPath>
+      <RelPath>Web References\wsSCANHInutilizacao\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeInutilizacao/NfeInutilizacao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -1284,7 +1381,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeRecepcao/NfeRecepcao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANRecepcao\</RelPath>
+      <RelPath>Web References\wsSCANHRecepcao\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeRecepcao/NfeRecepcao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -1295,7 +1392,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeRetRecepcao/NfeRetRecepcao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANRetRecepcao\</RelPath>
+      <RelPath>Web References\wsSCANHRetRecepcao\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeRetRecepcao/NfeRetRecepcao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -1306,7 +1403,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.nfe.fazenda.gov.br/SCAN/NfeStatusServico/NfeStatusServico.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsSCANStatusServico\</RelPath>
+      <RelPath>Web References\wsSCANHStatusServico\</RelPath>
       <UpdateFromURL>https://hom.nfe.fazenda.gov.br/SCAN/NfeStatusServico/NfeStatusServico.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -3833,33 +3930,63 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANCancelamento\NfeCancelamento.wsdl" />
-    <None Include="Web References\wsSCANCancelamento\Reference.map">
+    <None Include="Web References\wsSCANHCancelamento\NfeCancelamento.wsdl" />
+    <None Include="Web References\wsSCANHCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANConsulta\NfeConsulta.wsdl" />
-    <None Include="Web References\wsSCANConsulta\Reference.map">
+    <None Include="Web References\wsSCANHConsulta\NfeConsulta.wsdl" />
+    <None Include="Web References\wsSCANHConsulta\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANInutilizacao\NfeInutilizacao.wsdl" />
-    <None Include="Web References\wsSCANInutilizacao\Reference.map">
+    <None Include="Web References\wsSCANHInutilizacao\NfeInutilizacao.wsdl" />
+    <None Include="Web References\wsSCANHInutilizacao\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANRecepcao\NfeRecepcao.wsdl" />
-    <None Include="Web References\wsSCANRecepcao\Reference.map">
+    <None Include="Web References\wsSCANPCancelamento\NfeCancelamento.wsdl" />
+    <None Include="Web References\wsSCANPCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANRetRecepcao\NfeRetRecepcao.wsdl" />
-    <None Include="Web References\wsSCANRetRecepcao\Reference.map">
+    <None Include="Web References\wsSCANPConsulta\NfeConsulta.wsdl" />
+    <None Include="Web References\wsSCANPConsulta\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsSCANStatusServico\NfeStatusServico.wsdl" />
-    <None Include="Web References\wsSCANStatusServico\Reference.map">
+    <None Include="Web References\wsSCANPInutilizacao\NfeInutilizacao.wsdl" />
+    <None Include="Web References\wsSCANPInutilizacao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANPRecepcao\NfeRecepcao.wsdl" />
+    <None Include="Web References\wsSCANPRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANHRecepcao\NfeRecepcao.wsdl" />
+    <None Include="Web References\wsSCANHRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANHRetRecepcao\NfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsSCANHRetRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANHStatusServico\NfeStatusServico.wsdl" />
+    <None Include="Web References\wsSCANHStatusServico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANPRetRecepcao\NfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsSCANPRetRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsSCANPStatusServico\NfeStatusServico.wsdl" />
+    <None Include="Web References\wsSCANPStatusServico\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

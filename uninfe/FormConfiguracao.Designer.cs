@@ -52,6 +52,8 @@
             this.button_SelectPastaXmlEnviado = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox_tpEmis = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button_SelectPastaXmlErro = new System.Windows.Forms.Button();
             this.textBox_PastaXmlErro = new System.Windows.Forms.TextBox();
@@ -265,6 +267,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox_tpEmis);
+            this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.comboBox_UF);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label4);
@@ -276,6 +280,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_tpEmis
+            // 
+            this.comboBox_tpEmis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_tpEmis.FormattingEnabled = true;
+            this.comboBox_tpEmis.Location = new System.Drawing.Point(6, 129);
+            this.comboBox_tpEmis.Name = "comboBox_tpEmis";
+            this.comboBox_tpEmis.Size = new System.Drawing.Size(284, 21);
+            this.comboBox_tpEmis.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(114, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Tipo de Emissão NF-e:";
             // 
             // tabPage2
             // 
@@ -395,5 +417,7 @@
         private System.Windows.Forms.TextBox textBox_PastaXmlErro;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlerro;
+        private System.Windows.Forms.ComboBox comboBox_tpEmis;
+        private System.Windows.Forms.Label label8;
     }
 }

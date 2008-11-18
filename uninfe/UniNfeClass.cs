@@ -16,6 +16,7 @@ namespace uninfe
         public X509Certificate2 oCertificado { get; set; }
         public int vUF { get; set; } //Código do Estado (UF) que é para certificar a Nota Fiscal Eletrônica
         public int vAmbiente { get; set; } //Código do Ambiente que é para certificar a Nota Fiscal Eletrônica
+        public int vTpEmis { get; set; } //Tipo de emissão 1-Normal 2-Contingência em formulário de Segurança 3-Contingência SCAN 4-Contingência Eletrônica
         public string vXmlNfeDadosMsg { get; set; } //Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
         public string vStrXmlRetorno { get; private set; } //Conteúdo do XML de retorno do serviço, ou seja, para cada serviço invocado a classe seta neste atributo a string do XML Retornado pelo serviço
         public string vArqXMLRetorno { get; private set; } //Pasta e nome do arquivo dos XML´s retornados pelos WebServices, sempre que um serviço for consumido, nesta propriedade será setado o caminho e nome do arquivo XML gravado que tem o conteúdo de retorno do webservice.
@@ -23,6 +24,7 @@ namespace uninfe
         public string vPastaXMLRetorno { get; set; } //Pasta que é para ser gravado os XML´s retornados pelo WebService
         public string vPastaXMLEnviado { get; set; } //Pasta onde vai gravar os XML´s que foram assinados e enviados
         public string vPastaXMLErro { get; set; } //Pasta para arquivamento temporário dos XML que apresentaram erro na validação
+        private DateTime vDataParaPastaEnviado; //Data que vai ser utilizada para criar a sub-pasta dentro da pasta dos xml enviados
 
         /*
          * ==============================================================================
@@ -153,13 +155,31 @@ namespace uninfe
                     //Gerar o Lote de Notas Fiscais
                     this.vXmlNfeDadosMsg = this.GerarLoteNfe();
 
+                    //Ler os dados do XML 
+                    UniLerXMLClass oLerXml = new UniLerXMLClass();
+                    oLerXml.Nfe(vNomeArqNfe);
+
+                    //Setar a propriedade que vai determinar a pasta que vai ser gravado o XML enviado
+                    this.vDataParaPastaEnviado = oLerXml.oDadosNfe.dEmi; //Data de emissão da nota fiscal
+
                     //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
                     object oServico = null;
                     this.DefObjRecepcao(ref oServico);
                     if (this.InvocarObjeto("1.10", oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
                     {
-                        this.MoveDeleteArq(vNomeArqNfe, "M"); //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
-                        this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D"); //Deletar o arquivo de lote de nota fiscal enviado
+                        //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
+                        this.MoveDeleteArq(vNomeArqNfe, "M");
+
+                        //Deletar o arquivo de lote de nota fiscal enviado
+                        this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
+                    }
+                    else
+                    {
+                        //O método InvocarObjeto já moveu o XML de lote para a pasta de erro
+                        //Mas o XML da NFe ainda não foi movido, para evitar falhas, tem que
+                        //mover ele, e vou faze-lo, agora.
+                        //Wandrey 06/11/2008
+                        this.MoveArqErro(vNomeArqNfe);
                     }
                 }
                 else
@@ -359,7 +379,11 @@ namespace uninfe
                 this.DefObjCancelamento(ref oServico);
                 if (this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF", "-ped-can", "-can") == true)
                 {
-                    //Deletar o arquivo de solicitação do serviço
+                    //Setar a propriedade que vai determinar a pasta que vai ser gravado
+                    //o XML enviado
+                    this.vDataParaPastaEnviado = DateTime.Now; //Data Atual
+
+                    //Move o arquivo de solicitação do serviço para a pasta de enviados
                     this.MoveDeleteArq(this.vXmlNfeDadosMsg, "M");
                 }
             }
@@ -435,7 +459,11 @@ namespace uninfe
                 this.DefObjInutilizacao(ref oServico);
                 if (this.InvocarObjeto("1.07", oServico, "nfeInutilizacaoNF", "-ped-inu", "-inu") == true)
                 {
-                    //Deletar o arquivo de solicitação do serviço
+                    //Setar a propriedade que vai determinar a pasta que vai ser gravado
+                    //o XML enviado
+                    this.vDataParaPastaEnviado = DateTime.Now; //Data Atual
+
+                    //Move o arquivo de solicitação do serviço para a pasta de enviados
                     this.MoveDeleteArq(this.vXmlNfeDadosMsg, "M");
                 }
             }
@@ -1023,7 +1051,8 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPStatusServico.NfeStatusServico(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPStatusServico.NfeStatusServico(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPStatusServico.NfeStatusServico(); }
@@ -1055,7 +1084,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHStatusServico.NfeStatusServico(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHStatusServico.NfeStatusServico(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHStatusServico.NfeStatusServico(); }
@@ -1132,19 +1162,20 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPRecepcao.NfeRecepcao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPRecepcao.NfeRecepcao(); }
 
-                else if (this.vUF == 41) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
@@ -1164,7 +1195,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHRecepcao.NfeRecepcao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHRecepcao.NfeRecepcao(); }
@@ -1242,19 +1274,20 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPRetRecepcao.NfeRetRecepcao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRPRetRecepcao.NfeRetRecepcaoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPRetRecepcao.NfeRetRecepcao(); }
 
-                else if (this.vUF == 41) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
@@ -1274,7 +1307,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHRetRecepcao.NfeRetRecepcao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHRetRecepcao.NfeRetRecepcao(); }
@@ -1352,19 +1386,20 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPConsulta.NfeConsulta(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPConsulta.NfeConsulta(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPConsulta.NfeConsulta(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPConsulta.NfeConsulta(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPConsulta.NfeConsulta(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPConsulta.NfeConsulta(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPConsulta.NfeConsulta(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPConsulta.NfeConsulta(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRPConsulta.NfeConsultaService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPConsulta.NfeConsulta(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAPConsulta.NfeConsulta(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFPConsulta.NfeConsulta(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPConsulta.NfeConsulta(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPConsulta.NfeConsulta(); }
 
-                else if (this.vUF == 41) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
@@ -1384,7 +1419,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHConsulta.NfeConsulta(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHConsulta.NfeConsulta(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHConsulta.NfeConsulta(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHConsulta.NfeConsulta(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHConsulta.NfeConsulta(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHConsulta.NfeConsulta(); }
@@ -1461,19 +1497,20 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPCancelamento.NfeCancelamento(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRPCancelamento.NfeCancelamentoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPCancelamento.NfeCancelamento(); }
 
-                else if (this.vUF == 41) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
@@ -1493,7 +1530,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHCancelamento.NfeCancelamento(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHCancelamento.NfeCancelamento(); }
@@ -1571,19 +1609,20 @@ namespace uninfe
         {
             if (this.vAmbiente == 1)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTPInutilizacao.NfeInutilizacao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANPInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 52) { pObjeto = new wsGOPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 41) { pObjeto = new wsPRPInutilizacao.NfeInutilizacaoService(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPInutilizacao.NfeInutilizacao(); }
 
-                else if (this.vUF == 41) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 15) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
@@ -1603,7 +1642,8 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 51) { pObjeto = new wsMTHInutilizacao.NfeInutilizacao(); }
+                if (this.vTpEmis == 3) { pObjeto = new wsSCANHInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
+                else if (this.vUF == 51) { pObjeto = new wsMTHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 43) { pObjeto = new wsRSHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 31) { pObjeto = new wsMGHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHInutilizacao.NfeInutilizacao(); }
@@ -1828,12 +1868,31 @@ namespace uninfe
             //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
             //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
             //for gerado corretamente.
-            FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
+            this.MoveArqErro(this.vXmlNfeDadosMsg);
+         
+            //Grava arquivo de ERRO para o ERP
+            string cArqErro = this.vPastaXMLRetorno + "\\" +
+                              this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
+                              pFinalArqErro;
+
+            StreamWriter SW_2 = File.CreateText(cArqErro);
+            SW_2.Write(cErro);
+            SW_2.Close();
+        }
+
+        /// <summary>
+        /// Move arquivos XML com erro para uma pasta de xml´s com erro configurados no UniNFe.
+        /// </summary>
+        /// <param name="cArquivo">Nome do arquivo a ser movido para a pasta de XML´s com erro</param>
+        /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg)</example>
+        private void MoveArqErro( string cArquivo )
+        {
+            FileInfo oArquivo = new FileInfo(cArquivo);
 
             if (Directory.Exists(this.vPastaXMLErro) == true)
             {
                 //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                string vNomeArquivo = this.vPastaXMLErro + "\\" + ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
+                string vNomeArquivo = this.vPastaXMLErro + "\\" + ExtrairNomeArq(cArquivo, ".xml") + ".xml";
                 if (File.Exists(vNomeArquivo))
                 {
                     FileInfo oArqDestino = new FileInfo(vNomeArquivo);
@@ -1846,15 +1905,6 @@ namespace uninfe
             {
                 oArquivo.Delete();
             }
-         
-            //Grava arquivo de ERRO para o ERP
-            string cArqErro = this.vPastaXMLRetorno + "\\" +
-                              this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
-                              pFinalArqErro;
-
-            StreamWriter SW_2 = File.CreateText(cArqErro);
-            SW_2.Write(cErro);
-            SW_2.Close();
         }
 
         /*
@@ -1903,7 +1953,7 @@ namespace uninfe
             if (cOpcao == "M") //Mover o arquivo para outra pasta 
             {
                 //Criar Pasta do Mês para gravar arquivos enviados
-                string vNomePastaEnviado = this.vPastaXMLEnviado + "\\" + DateTime.Now.ToString("yyyyMM");
+                string vNomePastaEnviado = this.vPastaXMLEnviado + "\\" + this.vDataParaPastaEnviado.ToString("yyyyMM");
                 if (Directory.Exists(vNomePastaEnviado) == false)
                 {
                     System.IO.Directory.CreateDirectory(vNomePastaEnviado);
@@ -1993,9 +2043,11 @@ namespace uninfe
             return cRetorna;
         }
 
+        /// <summary>
+        /// Deleta o XML da pata temporária dos arquivos com erro se o mesmo existir.
+        /// </summary>
         private void DeletarArqXMLErro()
         {
-            //Excluir o XML da pasta temporária dos arquivos com erro se existir
             string vNomeArquivo = this.vPastaXMLErro + "\\" + ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
             if (File.Exists(vNomeArquivo))
             {
