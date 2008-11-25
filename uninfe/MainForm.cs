@@ -164,6 +164,14 @@ namespace uninfe
                 {
                     this.ReconfigurarUniNFe(cArquivo);
                 }
+                else if (lPedRec == true)
+                {
+                    oNfe.RetRecepcao();
+                }
+                else if (lPedSit == true)
+                {
+                    oNfe.Consulta();
+                }
                 else if (lPedSta == true)
                 {
                     oNfe.StatusServico();

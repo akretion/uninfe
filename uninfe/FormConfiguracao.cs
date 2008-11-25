@@ -320,68 +320,8 @@ namespace uninfe
         /// <returns>Retorna true se conseguiu gravar corretamente as configurações ou false se não conseguiu</returns>
         public bool GravarConfig()
         {
-            bool lErro = false;
-            this.cErroGravarConfig = "";
-
-            //Verificar se as pastas estão em branco
-            if (this.vPastaXMLEnviado == "")
-            {
-                this.cErroGravarConfig = "Informe a pasta para arquivamento dos arquivos XML enviados.";
-                lErro = true;
-            }
-            else if (this.vPastaXMLEnvio == "")
-            {
-                this.cErroGravarConfig = "Informe a pasta de envio dos arquivos XML.";
-                lErro = true;
-            }
-            else if (this.vPastaXMLRetorno == "")
-            {
-                this.cErroGravarConfig = "Informe a pasta de retorno dos arquivos XML.";
-                lErro = true;
-            }
-            else if (this.vPastaXMLErro == "")
-            {
-                this.cErroGravarConfig = "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.";
-                lErro = true;
-            }
-
-            //Verificar se as pastas existem
-            if (lErro == false)
-            {
-                DirectoryInfo oDirEnvio = new DirectoryInfo(this.vPastaXMLEnvio);
-                DirectoryInfo oDirRetorno = new DirectoryInfo(this.vPastaXMLRetorno);
-                DirectoryInfo oDirEnviado = new DirectoryInfo(this.vPastaXMLEnviado);
-                DirectoryInfo oDirErro = new DirectoryInfo(this.vPastaXMLErro);
-
-                if (this.vCertificado == "")
-                {
-                    this.cErroGravarConfig = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.";
-                    lErro = true;
-                }
-                else if (!oDirEnvio.Exists)
-                {
-                    this.cErroGravarConfig = "A pasta de envio dos arquivos XML informada não existe.";
-                    lErro = true;
-                }
-                else if (!oDirRetorno.Exists)
-                {
-                    this.cErroGravarConfig = "A pasta de retorno dos arquivos XML informada não existe.";
-                    lErro = true;
-                }
-                else if (!oDirEnviado.Exists)
-                {
-                    this.cErroGravarConfig = "A pasta para arquivamento dos arquivos XML enviados informada não existe.";
-                    lErro = true;
-                }
-                else if (!oDirErro.Exists)
-                {
-                    this.cErroGravarConfig = "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.";
-                    lErro = true;
-                }
-            }
-
-            //Gravar as informações
-            if (lErro == false)
+            bool lValidou = this.ValidarConfig();
+            if (lValidou == true)
             {
                 try
                 {
@@ -418,7 +358,78 @@ namespace uninfe
                 }
             }
 
-            return (lErro == false);
+            return (lValidou);
+        }
+
+        /// <summary>
+        /// Verifica se algumas das informações das configurações tem algum problema ou falha
+        /// </summary>
+        /// <returns>
+        /// true - nenhum problema/falha
+        /// false - encontrou algum problema
+        /// </returns>
+        private bool ValidarConfig()
+        {
+            bool lValidou = true;
+
+            //Verificar se as pastas estão em branco
+            if (this.vPastaXMLEnviado == "")
+            {
+                this.cErroGravarConfig = "Informe a pasta para arquivamento dos arquivos XML enviados.";
+                lValidou = false;
+            }
+            else if (this.vPastaXMLEnvio == "")
+            {
+                this.cErroGravarConfig = "Informe a pasta de envio dos arquivos XML.";
+                lValidou = false;
+            }
+            else if (this.vPastaXMLRetorno == "")
+            {
+                this.cErroGravarConfig = "Informe a pasta de retorno dos arquivos XML.";
+                lValidou = false;
+            }
+            else if (this.vPastaXMLErro == "")
+            {
+                this.cErroGravarConfig = "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.";
+                lValidou = false;
+            }
+
+            //Verificar se as pastas existem
+            if (lValidou == true)
+            {
+                DirectoryInfo oDirEnvio = new DirectoryInfo(this.vPastaXMLEnvio);
+                DirectoryInfo oDirRetorno = new DirectoryInfo(this.vPastaXMLRetorno);
+                DirectoryInfo oDirEnviado = new DirectoryInfo(this.vPastaXMLEnviado);
+                DirectoryInfo oDirErro = new DirectoryInfo(this.vPastaXMLErro);
+
+                if (this.vCertificado == "")
+                {
+                    this.cErroGravarConfig = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.";
+                    lValidou = false;
+                }
+                else if (!oDirEnvio.Exists)
+                {
+                    this.cErroGravarConfig = "A pasta de envio dos arquivos XML informada não existe.";
+                    lValidou = false;
+                }
+                else if (!oDirRetorno.Exists)
+                {
+                    this.cErroGravarConfig = "A pasta de retorno dos arquivos XML informada não existe.";
+                    lValidou = false;
+                }
+                else if (!oDirEnviado.Exists)
+                {
+                    this.cErroGravarConfig = "A pasta para arquivamento dos arquivos XML enviados informada não existe.";
+                    lValidou = false;
+                }
+                else if (!oDirErro.Exists)
+                {
+                    this.cErroGravarConfig = "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.";
+                    lValidou = false;
+                }
+            }
+
+            return lValidou;
         }
 
         /// <summary>
@@ -434,6 +445,7 @@ namespace uninfe
             string cStat = "";
             string xMotivo = "";
             bool lErro = false;
+            bool lEncontrouTag = false;
 
             //Recarrega as configurações atuais
             this.CarregarDados();
@@ -449,14 +461,49 @@ namespace uninfe
                 {
                     XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
 
-                    this.vPastaXMLEnvio = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio")[0].InnerText;
-                    this.vPastaXMLRetorno = ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno")[0].InnerText;
-                    this.vPastaXMLEnviado = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado")[0].InnerText;
-                    this.vPastaXMLErro = ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro")[0].InnerText;
-                    this.vUnidadeFederativaCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo")[0].InnerText);
-                    this.vAmbienteCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo")[0].InnerText);
-                    this.vTpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                }
+                    //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio").Count != 0)
+                    {
+                        this.vPastaXMLEnvio = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno").Count != 0)
+                    {
+                        this.vPastaXMLRetorno = ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado").Count != 0)
+                    {
+                        this.vPastaXMLEnviado = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro").Count != 0)
+                    {
+                        this.vPastaXMLErro = ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo").Count != 0)
+                    {
+                        this.vUnidadeFederativaCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo").Count != 0)
+                    {
+                        this.vAmbienteCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <tpEmis> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    {
+                        this.vTpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
+                }                
             }
             catch (Exception ex)
             {
@@ -464,46 +511,72 @@ namespace uninfe
                 xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do UniNFe: " + ex.Message;
                 lErro = true;
             }
-            if (lErro == false)
+            
+            if (lEncontrouTag == true)
             {
-                if (this.GravarConfig() == false)
+                if (lErro == false)
                 {
-                    cStat = "2";
-                    xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do UniNFe: " + this.cErroGravarConfig;
-                }
-                else
-                {
-                    cStat = "1";
-                    xMotivo = "Configuracao do UniNFe alterada com sucesso";
+                    if (this.ValidarConfig() == false || this.GravarConfig() == false)
+                    {
+                        cStat = "2";
+                        xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do UniNFe: " + this.cErroGravarConfig;
+                        lErro = true;
+                    }
+                    else
+                    {
+                        cStat = "1";
+                        xMotivo = "Configuracao do UniNFe alterada com sucesso";
+                        lErro = false;
+                    }
                 }
             }
+            else
+            {
+                cStat = "2";
+                xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do UniNFe: Nenhuma tag padrão de configuração foi localizada no XML";
+                lErro = true;
+            }
 
-            string cArqRetorno = this.vPastaXMLRetorno + "\\uninfe-ret-alt-con.xml";
+            //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
+            //exatamente como estavam gravadas no XML de configuração
+            if (lErro == true)
+            {
+                this.CarregarDados();
+            }
 
             //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
-            FileInfo oArqRetorno = new FileInfo(cArqRetorno);
-            if (oArqRetorno.Exists == true)
+            try
             {
-                oArqRetorno.Delete();
+                string cArqRetorno = this.vPastaXMLRetorno + "\\uninfe-ret-alt-con.xml";
+
+                FileInfo oArqRetorno = new FileInfo(cArqRetorno);
+                if (oArqRetorno.Exists == true)
+                {
+                    oArqRetorno.Delete();
+                }
+
+                XmlWriterSettings oSettings = new XmlWriterSettings();
+
+                oSettings.Indent = true;
+                oSettings.IndentChars = "";
+                oSettings.NewLineOnAttributes = false;
+                oSettings.OmitXmlDeclaration = false;
+
+                XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
+
+                oXmlGravar.WriteStartDocument();
+                oXmlGravar.WriteStartElement("retAltConfUniNFe");
+                oXmlGravar.WriteElementString("cStat", cStat);
+                oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                oXmlGravar.WriteEndElement(); //retAltConfUniNFe
+                oXmlGravar.WriteEndDocument();
+                oXmlGravar.Flush();
+                oXmlGravar.Close();
             }
-
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-
-            XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
-
-            oXmlGravar.WriteStartDocument();
-            oXmlGravar.WriteStartElement("retAltConfUniNFe");
-            oXmlGravar.WriteElementString("cStat", cStat);
-            oXmlGravar.WriteElementString("xMotivo", xMotivo);
-            oXmlGravar.WriteEndElement(); //retAltConfUniNFe
-            oXmlGravar.WriteEndDocument();
-            oXmlGravar.Flush();
-            oXmlGravar.Close();
+            catch 
+            {
+                //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
+            }
 
             //Deletar o arquivo de configurações automáticas gerado pelo ERP
             FileInfo oArqReconf = new FileInfo(cArquivoXml);

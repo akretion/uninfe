@@ -152,39 +152,68 @@ namespace uninfe
                     //o mesmo existir
                     this.DeletarArqXMLErro();
 
-                    //Gerar o Lote de Notas Fiscais
-                    this.vXmlNfeDadosMsg = this.GerarLoteNfe();
-
-                    //Ler os dados do XML 
+                    //Ler os dados do XML
                     UniLerXMLClass oLerXml = new UniLerXMLClass();
                     oLerXml.Nfe(vNomeArqNfe);
 
-                    //Setar a propriedade que vai determinar a pasta que vai ser gravado o XML enviado
-                    this.vDataParaPastaEnviado = oLerXml.oDadosNfe.dEmi; //Data de emissão da nota fiscal
-
-                    //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                    object oServico = null;
-                    this.DefObjRecepcao(ref oServico);
-                    if (this.InvocarObjeto("1.10", oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+                    //Verificar o tipo de emissão de bate com o configurado, se não bater vai retornar um erro 
+                    //para o ERP
+                    if ((vTpEmis == 1 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2")) || 
+                        (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "3")))
                     {
-                        //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
-                        this.MoveDeleteArq(vNomeArqNfe, "M");
+                        //Gerar o Lote de Notas Fiscais
+                        this.vXmlNfeDadosMsg = this.GerarLoteNfe();
 
-                        //Deletar o arquivo de lote de nota fiscal enviado
-                        this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
+                        //Setar a propriedade que vai determinar a pasta que vai ser gravado o XML enviado
+                        this.vDataParaPastaEnviado = oLerXml.oDadosNfe.dEmi; //Data de emissão da nota fiscal
+
+                        //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+                        object oServico = null;
+                        this.DefObjRecepcao(ref oServico);
+                        if (this.InvocarObjeto("1.10", oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+                        {
+                            //Mover o arquivo de notas fiscais eletrônicas para a pasta de enviados
+                            this.MoveDeleteArq(vNomeArqNfe, "M");
+
+                            //Deletar o arquivo de lote de nota fiscal enviado
+                            this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
+                        }
+                        else
+                        {
+                            //O método InvocarObjeto já moveu o XML de lote para a pasta de erro
+                            //Mas o XML da NFe ainda não foi movido, para evitar falhas, tem que
+                            //mover ele, e vou faze-lo, agora.
+                            //Wandrey 06/11/2008
+                            this.MoveArqErro(vNomeArqNfe);
+                        }
                     }
                     else
                     {
-                        //O método InvocarObjeto já moveu o XML de lote para a pasta de erro
-                        //Mas o XML da NFe ainda não foi movido, para evitar falhas, tem que
-                        //mover ele, e vou faze-lo, agora.
-                        //Wandrey 06/11/2008
-                        this.MoveArqErro(vNomeArqNfe);
+                        //Registrar o erro referente ao tipo de emissão, está diferente, do que foi 
+                        //configurado na tela do UniNFe
+                        string cTextoErroTpEmis = "";
+
+                        if (vTpEmis == 1 && oLerXml.oDadosNfe.tpEmis == "3")
+                        {
+                            cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
+                                               "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
+                                               "para o SCAN do Ambiente Nacional.\r\n\r\n";
+
+                        }
+                        else if (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2"))
+                        {
+                            cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
+                                               "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                        }
+
+                        cTextoErroTpEmis += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+
+                        this.GravarArqErroServico("-nfe.xml", "-nfe.err", cTextoErroTpEmis);
                     }
                 }
                 else
                 {
-                    //Registrar o erro da validação para o sistema ERP
+                    //Registrar o erro da validação do schema para o sistema ERP
                     this.GravarArqErroServico("-nfe.xml", "-nfe.err", cResultadoValidacao);
                 }
             }
@@ -1828,41 +1857,19 @@ namespace uninfe
             SW.Close();
         }
 
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 24/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Grava um arquivo Texto com um erro ocorrido na invocação dos 
-         *              WebServices. Este arquivo é gravado para que o sistema ERP saiba
-         *              o que está acontecendo.
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: GravaArqErroServico(string, string, string)
-         * Parâmetros.: pFinalArqEnvio   = Final do nome do arquivo de solicitação do 
-         *                                 serviço.
-         *              pFinalArqRetorno = Final do nome do arquivo que é para ser
-         *                                 gravado o erro.
-         *              cErro            = Texto do erro ocorrido a ser gravado no 
-         *                                 arquivo
-         *                            
-         * ------------------------------------------------------------------------------
-         * Retorno....: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * // Arquivo de envio: 20080619T19113320-ped-sta.xml
-         * // Arquivo de retorno que vai ser gravado: 20080619T19113320-sta.err
-         * this.GravarXmlRetorno("-ped-sta.xml", "-sta.err");
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
+        /// <summary>
+        /// Grava um arquivo texto com um erro ocorrido na invocação dos WebServices ou na execusão de alguma
+        /// rotina de validação, etc. Este arquivo é gravado para que o sistema ERP tenha condições de interagir
+        /// com o usuário.
+        /// </summary>
+        /// <param name="pFinalArqEnvio">Final do nome do arquivo de solicitação do serviço</param>
+        /// <param name="pFinalArqErro">Final do nome do arquivo que é para ser gravado o erro</param>
+        /// <param name="cErro">Texto do erro ocorrido a ser gravado no arquivo</param>
+        /// <example>
+        /// //Arquivo de envio: 20080619T19113320-ped-sta.xml
+        /// //Arquivo de retorno que vai ser gravado: 20080619T19113320-sta.err
+        /// this.GravarXmlRetorno("-ped-sta.xml", "-sta.err");
+        /// </example>
         private void GravarArqErroServico(string pFinalArqEnvio, string pFinalArqErro, string cErro)
         {
             //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
