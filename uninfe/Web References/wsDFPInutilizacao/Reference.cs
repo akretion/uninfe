@@ -26,7 +26,7 @@ namespace uninfe.wsDFPInutilizacao {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeInutilizacaoSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeInutilizacaoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao")]
     public partial class NfeInutilizacao : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback nfeInutilizacaoNFOperationCompleted;
@@ -73,7 +73,7 @@ namespace uninfe.wsDFPInutilizacao {
         public event nfeInutilizacaoNFCompletedEventHandler nfeInutilizacaoNFCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("nfeInutilizacaoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao/nfeInutilizacaoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string nfeInutilizacaoNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeInutilizacaoNF", new object[] {
                         nfeCabecMsg,

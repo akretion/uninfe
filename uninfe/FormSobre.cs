@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace uninfe
 {
@@ -14,6 +15,25 @@ namespace uninfe
         public FormSobre()
         {
             InitializeComponent();
+
+            //Montar a versão do programa
+            Assembly objAssembly = Assembly.GetExecutingAssembly();
+
+            string versao;
+        
+            foreach (Attribute attr in Attribute.GetCustomAttributes(objAssembly)) 
+            { 
+                if (attr.GetType() == typeof(AssemblyVersionAttribute)) 
+                { 
+                    versao = ((AssemblyVersionAttribute)attr).Version; 
+                } 
+            }
+            string delimStr = ",=";
+            char[] delimiter = delimStr.ToCharArray();
+            string[] strAssembly = objAssembly.ToString().Split(delimiter);
+            versao = strAssembly[2]; 
+
+            this.textBox_versao.Text = versao.ToString();
 
             //Atualizar o texto da licença de uso
             this.textBox_licenca.Text  = "GNU General Public License\r\n\r\n";
@@ -40,5 +60,34 @@ namespace uninfe
         {
             System.Diagnostics.Process.Start("mailto:nfe@unimake.com.br");
         }
+/*
+        private static void AssemblyPropriedades( string product, ref string version) 
+        { 
+            try 
+            { 
+                Assembly objAssembly = Assembly.GetExecutingAssembly(); 
+
+                foreach (Attribute attr in Attribute.GetCustomAttributes(objAssembly)) 
+                { 
+                    if (attr.GetType() == typeof(AssemblyProductAttribute)) 
+                    { 
+                        product = ((AssemblyProductAttribute)attr).Product; 
+                    } 
+                    if (attr.GetType() == typeof(AssemblyVersionAttribute)) 
+                    { 
+                        version = ((AssemblyVersionAttribute)attr).Version; 
+                    } 
+                } 
+                string delimStr = ",="; 
+                char[] delimiter = delimStr.ToCharArray(); 
+                string[] strAssembly = objAssembly.ToString().Split(delimiter); 
+                version = strAssembly[2]; 
+            }
+            catch (Exception ex) 
+            { 
+                Log(ex); 
+            } 
+        }
+ */ 
     }
 }

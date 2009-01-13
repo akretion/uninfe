@@ -26,7 +26,7 @@ namespace uninfe.wsDFPStatusServico {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeStatusServicoSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeStatusServicoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico")]
     public partial class NfeStatusServico : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback nfeStatusServicoNFOperationCompleted;

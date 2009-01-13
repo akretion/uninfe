@@ -6,6 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace uninfe
 {
@@ -19,9 +21,13 @@ namespace uninfe
             CarregarConfiguracoes();
 
             //Trazer minimizado e no systray
+            notifyIcon1.Visible=true;
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
+
+            //Ativar o timer
+            this.timer_connect_webservice.Enabled = true; 
         }
 
         private void toolStripButton_config_Click(object sender, EventArgs e)
@@ -57,10 +63,16 @@ namespace uninfe
             oNfe.vPastaXMLRetorno = oConfig.vPastaXMLRetorno;
             oNfe.vPastaXMLEnviado = oConfig.vPastaXMLEnviado;
             oNfe.vPastaXMLErro = oConfig.vPastaXMLErro;
+            oNfe.cPastaBackup = oConfig.cPastaBackup;
             oNfe.vTpEmis = oConfig.vTpEmis;
 
-            //Ativar o timer
-            this.timer_connect_webservice.Enabled = true; 
+            //Atualizar o nome da empresa na toolstrip
+            //Wandrey 28/11/2008
+            this.toolStripLabel_NomeEmpresa.Text = oConfig.cNomeEmpresa;
+            if (oConfig.cNomeEmpresa.Trim() != "")
+            {
+                this.notifyIcon1.Text = "UniNFe\r\n" + oConfig.cNomeEmpresa;
+            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

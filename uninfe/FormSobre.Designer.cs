@@ -41,6 +41,8 @@
             this.textBox_licenca = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_DataUltimaModificacao = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox_versao = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,9 +62,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(165, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 31);
+            this.label1.Size = new System.Drawing.Size(113, 31);
             this.label1.TabIndex = 1;
-            this.label1.Text = "UniNFe - 1.2";
+            this.label1.Text = "UniNFe";
             // 
             // label2
             // 
@@ -107,7 +109,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(222, 142);
+            this.linkLabel2.Location = new System.Drawing.Point(222, 135);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(108, 13);
             this.linkLabel2.TabIndex = 6;
@@ -118,7 +120,7 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(222, 129);
+            this.linkLabel3.Location = new System.Drawing.Point(222, 122);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(143, 13);
             this.linkLabel3.TabIndex = 7;
@@ -164,11 +166,31 @@
             this.textBox_DataUltimaModificacao.Size = new System.Drawing.Size(169, 20);
             this.textBox_DataUltimaModificacao.TabIndex = 11;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(222, 161);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Versão:";
+            // 
+            // textBox_versao
+            // 
+            this.textBox_versao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_versao.Location = new System.Drawing.Point(225, 178);
+            this.textBox_versao.Name = "textBox_versao";
+            this.textBox_versao.ReadOnly = true;
+            this.textBox_versao.Size = new System.Drawing.Size(221, 20);
+            this.textBox_versao.TabIndex = 14;
+            // 
             // FormSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 373);
+            this.Controls.Add(this.textBox_versao);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox_DataUltimaModificacao);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox_licenca);
@@ -205,6 +227,8 @@
         private System.Windows.Forms.TextBox textBox_licenca;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_DataUltimaModificacao;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox_versao;
 
     }
 }

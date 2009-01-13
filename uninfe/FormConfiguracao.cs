@@ -85,9 +85,18 @@ namespace uninfe
             this.textBox_PastaRetornoXML.Text = oCarrega.vPastaXMLRetorno;
             this.textBox_PastaEnviados.Text = oCarrega.vPastaXMLEnviado;
             this.textBox_PastaXmlErro.Text = oCarrega.vPastaXMLErro;
+            this.textBox_Empresa.Text = oCarrega.cNomeEmpresa;
             this.oMeuCert = oCarrega.oCertificado;
             this.DemonstraDadosCertificado();
 
+            if (oCarrega.cPastaBackup == "")
+            {
+                this.textBox_PastaBackup.Text = "";
+            }
+            else
+            {
+                this.textBox_PastaBackup.Text = oCarrega.cPastaBackup;
+            }
             //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrTpEmis.Count; i++)
@@ -179,6 +188,8 @@ namespace uninfe
             oConfig.vUnidadeFederativaCodigo = Convert.ToInt32(this.comboBox_UF.SelectedValue);
             oConfig.vAmbienteCodigo = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
             oConfig.vTpEmis = Convert.ToInt32(this.comboBox_tpEmis.SelectedValue);
+            oConfig.cNomeEmpresa = this.textBox_Empresa.Text;
+            oConfig.cPastaBackup = this.textBox_PastaBackup.Text;
             if (this.oMeuCert == null)
             {
                 oConfig.vCertificado = "";
@@ -217,6 +228,16 @@ namespace uninfe
                 this.textBox_PastaXmlErro.Text = this.folderBrowserDialog_xmlerro.SelectedPath;
             }
         }
+
+        private void button_SelectPastaBackup_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_backup.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.textBox_PastaBackup.Text = this.folderBrowserDialog_backup.SelectedPath;
+            }
+        }
     }
 
     /// <summary>
@@ -234,6 +255,8 @@ namespace uninfe
         public int vTpEmis { get; set; }
         public string vCertificado { get; set; }
         public X509Certificate2 oCertificado { get; set; }
+        public string cNomeEmpresa { get; set; }
+        public string cPastaBackup { get; set; }
 
         /// <summary>
         /// Recebe uma mensagem de erro caso venha a ocorrer na execução do método "GravarConfig()"
@@ -263,9 +286,11 @@ namespace uninfe
             this.vPastaXMLEnviado = string.Empty;
             this.vPastaXMLErro = string.Empty;
             this.vUnidadeFederativaCodigo = 0;
-            this.vAmbienteCodigo = 0;
-            this.vTpEmis = 0;
+            this.vAmbienteCodigo = 2;
+            this.vTpEmis = 1;
             this.vCertificado = string.Empty;
+            this.cNomeEmpresa = string.Empty;
+            this.cPastaBackup = string.Empty;
 
             if (File.Exists(vArquivoConfig))
             {
@@ -290,6 +315,8 @@ namespace uninfe
                                     else if (oLerXml.Name == "AmbienteCodigo") { oLerXml.Read(); this.vAmbienteCodigo = Convert.ToInt32(oLerXml.Value); }
                                     else if (oLerXml.Name == "CertificadoDigital") { oLerXml.Read(); this.vCertificado = oLerXml.Value; }
                                     else if (oLerXml.Name == "tpEmis") { oLerXml.Read(); this.vTpEmis = Convert.ToInt32(oLerXml.Value); }
+                                    else if (oLerXml.Name == "NomeEmpresa") { oLerXml.Read(); this.cNomeEmpresa = oLerXml.Value; }
+                                    else if (oLerXml.Name == "PastaBackup") { oLerXml.Read(); this.cPastaBackup = oLerXml.Value; }
                                 }
                             }
                             break;
@@ -347,6 +374,8 @@ namespace uninfe
                     oXmlGravar.WriteElementString("AmbienteCodigo", this.vAmbienteCodigo.ToString());
                     oXmlGravar.WriteElementString("CertificadoDigital", this.vCertificado);
                     oXmlGravar.WriteElementString("tpEmis", this.vTpEmis.ToString());
+                    oXmlGravar.WriteElementString("NomeEmpresa", this.cNomeEmpresa);
+                    oXmlGravar.WriteElementString("PastaBackup", this.cPastaBackup);
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -372,8 +401,13 @@ namespace uninfe
         {
             bool lValidou = true;
 
-            //Verificar se as pastas estão em branco
-            if (this.vPastaXMLEnviado == "")
+            //Verifica se o nome da empresa ou alguma pasta de configuração está em branco
+            if (this.cNomeEmpresa == "")
+            {
+                this.cErroGravarConfig = "Informe o nome da empresa.";
+                lValidou = false;
+            }
+            else if (this.vPastaXMLEnviado == "")
             {
                 this.cErroGravarConfig = "Informe a pasta para arquivamento dos arquivos XML enviados.";
                 lValidou = false;
@@ -397,10 +431,10 @@ namespace uninfe
             //Verificar se as pastas existem
             if (lValidou == true)
             {
-                DirectoryInfo oDirEnvio = new DirectoryInfo(this.vPastaXMLEnvio);
-                DirectoryInfo oDirRetorno = new DirectoryInfo(this.vPastaXMLRetorno);
-                DirectoryInfo oDirEnviado = new DirectoryInfo(this.vPastaXMLEnviado);
-                DirectoryInfo oDirErro = new DirectoryInfo(this.vPastaXMLErro);
+                DirectoryInfo oDirEnvio = new DirectoryInfo(this.vPastaXMLEnvio.Trim());
+                DirectoryInfo oDirRetorno = new DirectoryInfo(this.vPastaXMLRetorno.Trim());
+                DirectoryInfo oDirEnviado = new DirectoryInfo(this.vPastaXMLEnviado.Trim());
+                DirectoryInfo oDirErro = new DirectoryInfo(this.vPastaXMLErro.Trim());
 
                 if (this.vCertificado == "")
                 {
@@ -426,6 +460,16 @@ namespace uninfe
                 {
                     this.cErroGravarConfig = "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.";
                     lValidou = false;
+                }
+                else if (this.cPastaBackup.Trim() != "")
+                {
+                    DirectoryInfo oDirBackup = new DirectoryInfo(this.cPastaBackup.Trim());
+
+                    if (!oDirBackup.Exists)
+                    {
+                        this.cErroGravarConfig = "A pasta opcional para backup dos XML enviados informada não existe.";
+                        lValidou = false;
+                    }
                 }
             }
 
@@ -501,6 +545,18 @@ namespace uninfe
                     if (ConfUniNfeElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
                         this.vTpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <NomeEmpresa> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa").Count != 0)
+                    {
+                        this.cNomeEmpresa = ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaBackup> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaBackup").Count != 0)
+                    {
+                        this.cPastaBackup = ConfUniNfeElemento.GetElementsByTagName("PastaBackup")[0].InnerText;
                         lEncontrouTag = true;
                     }
                 }                

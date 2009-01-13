@@ -26,7 +26,7 @@ namespace uninfe.wsDFPRecepcao {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeRecepcaoSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeRecepcaoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRecepcao")]
     public partial class NfeRecepcao : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback nfeRecepcaoLoteOperationCompleted;

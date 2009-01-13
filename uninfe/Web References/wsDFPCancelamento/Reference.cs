@@ -26,7 +26,7 @@ namespace uninfe.wsDFPCancelamento {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeCancelamentoSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeCancelamentoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento")]
     public partial class NfeCancelamento : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback nfeCancelamentoNFOperationCompleted;
@@ -73,7 +73,7 @@ namespace uninfe.wsDFPCancelamento {
         public event nfeCancelamentoNFCompletedEventHandler nfeCancelamentoNFCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("nfeCancelamentoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento/nfeCancelamentoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeCancelamento", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string nfeCancelamentoNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeCancelamentoNF", new object[] {
                         nfeCabecMsg,

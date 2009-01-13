@@ -12,8 +12,8 @@ namespace uninfe
         public string RetornoString { get; private set; }
         public int nRetornoTipoArq { get ; private set; }
         public string cRetornoTipoArq { get ; private set; }
-        public string cArquivoSchema { get; private set; }
-
+        public string cArquivoSchema { get; private set; }              
+        
         private string cErro;
 
         /*

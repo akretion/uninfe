@@ -37,6 +37,7 @@
             this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_teste = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel_NomeEmpresa = new System.Windows.Forms.ToolStripLabel();
             this.timer_connect_webservice = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStrip.SuspendLayout();
@@ -51,7 +52,8 @@
             this.toolStripButton_StatusServicoNfe,
             this.toolStripButton_sobre,
             this.toolStripButton_teste,
-            this.toolStripButton_validarxml});
+            this.toolStripButton_validarxml,
+            this.toolStripLabel_NomeEmpresa});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
@@ -126,6 +128,14 @@
             this.toolStripButton_validarxml.ToolTipText = "Validar os arquivos XML de envio";
             this.toolStripButton_validarxml.Click += new System.EventHandler(this.toolStripButton_validarxml_Click);
             // 
+            // toolStripLabel_NomeEmpresa
+            // 
+            this.toolStripLabel_NomeEmpresa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel_NomeEmpresa.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripLabel_NomeEmpresa.Name = "toolStripLabel_NomeEmpresa";
+            this.toolStripLabel_NomeEmpresa.Size = new System.Drawing.Size(86, 52);
+            this.toolStripLabel_NomeEmpresa.Text = "toolStripLabel1";
+            // 
             // timer_connect_webservice
             // 
             this.timer_connect_webservice.Tick += new System.EventHandler(this.timer_connect_webservice_Tick);
@@ -136,7 +146,6 @@
             this.notifyIcon1.BalloonTipTitle = "UniNFE - Monitor da Nota Fiscal Eletrônica";
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "UniNFE - Monitor da Nota Fiscal Eletrônica";
-            this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // MainForm
@@ -168,6 +177,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_recarregar_config;
         private System.Windows.Forms.ToolStripButton toolStripButton_sobre;
         private System.Windows.Forms.ToolStripButton toolStripButton_validarxml;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel_NomeEmpresa;
     }
 }
 

@@ -26,7 +26,7 @@ namespace uninfe.wsDFPConsulta {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeConsultaSoapBinding", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="NfeConsultaSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta")]
     public partial class NfeConsulta : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback nfeConsultaNFOperationCompleted;
@@ -73,7 +73,7 @@ namespace uninfe.wsDFPConsulta {
         public event nfeConsultaNFCompletedEventHandler nfeConsultaNFCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("nfeConsultaNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/nfeConsultaNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string nfeConsultaNF(string nfeCabecMsg, string nfeDadosMsg) {
             object[] results = this.Invoke("nfeConsultaNF", new object[] {
                         nfeCabecMsg,

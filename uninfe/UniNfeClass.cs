@@ -16,7 +16,7 @@ namespace uninfe
         public X509Certificate2 oCertificado { get; set; }
         public int vUF { get; set; } //Código do Estado (UF) que é para certificar a Nota Fiscal Eletrônica
         public int vAmbiente { get; set; } //Código do Ambiente que é para certificar a Nota Fiscal Eletrônica
-        public int vTpEmis { get; set; } //Tipo de emissão 1-Normal 2-Contingência em formulário de Segurança 3-Contingência SCAN 4-Contingência Eletrônica
+        public int vTpEmis { get; set; }  //Tipo de emissão 1-Normal 2-Contingência em formulário de Segurança 3-Contingência SCAN 4-Contingência Eletrônica
         public string vXmlNfeDadosMsg { get; set; } //Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
         public string vStrXmlRetorno { get; private set; } //Conteúdo do XML de retorno do serviço, ou seja, para cada serviço invocado a classe seta neste atributo a string do XML Retornado pelo serviço
         public string vArqXMLRetorno { get; private set; } //Pasta e nome do arquivo dos XML´s retornados pelos WebServices, sempre que um serviço for consumido, nesta propriedade será setado o caminho e nome do arquivo XML gravado que tem o conteúdo de retorno do webservice.
@@ -24,54 +24,45 @@ namespace uninfe
         public string vPastaXMLRetorno { get; set; } //Pasta que é para ser gravado os XML´s retornados pelo WebService
         public string vPastaXMLEnviado { get; set; } //Pasta onde vai gravar os XML´s que foram assinados e enviados
         public string vPastaXMLErro { get; set; } //Pasta para arquivamento temporário dos XML que apresentaram erro na validação
+        public string cPastaBackup { get; set; } //Pasta para gravar o backup dos XML enviados
         private DateTime vDataParaPastaEnviado; //Data que vai ser utilizada para criar a sub-pasta dentro da pasta dos xml enviados
+        private string vArqERRRetorno; //Pasta e nome do arquivo dos Erros ocorridos ao tentar consumir um serviço.
 
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 04/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Verificar o status do Serviço da NFe do SEFAZ em questão
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: StatusServico()
-         * Parâmetros.: 
-         *
-         * ------------------------------------------------------------------------------
-         * Retorno....: Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-         *              XML com o retorno que foi dado do serviço do WebService.
-         *              No caso do StatusServico se tudo estiver correto retorna um XML
-         *              dizendo que o serviço está em operação
-         *              Se der algum erro ele grava um arquivo txt com o erro em questão.
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * oUniNfe.vUF = 51; //Setar o Estado que é para ser verificado o status do serviço
-         * oUniNfe.vXmlNfeDadosMsg = "c:\pedstatus.xml";
-         * oUniNfe.StatusServico();
-         * this.textBox_xmlretorno.Text = oUniNfe.vNfeRetorno;
-         * //
-         * //O conteúdo de retorno vai ser algo mais ou menos assim:
-         * //
-         * // <?xml version="1.0" encoding="UTF-8"?>
-         * //   <retConsStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
-         * //      <tpAmb>2</tpAmb>
-         * //      <verAplic>1.10</verAplic>
-         * //      <cStat>107</cStat>
-         * //      <xMotivo>Servico em Operacao</xMotivo>
-         * //      <cUF>51</cUF>
-         * //      <dhRecbto>2008-06-12T11:16:55</dhRecbto>
-         * //      <tMed>2</tMed>
-         * //   </retConsStatServ>
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
+        /// <summary>
+        /// Verificar o status do Serviço da NFe do SEFAZ em questão
+        /// </summary>
+        /// <remark>
+        /// Como retorno, o método atualiza a propriedade this.vNfeRetorno da classe 
+        /// com o conteúdo do retorno do WebService.
+        /// No caso do StatusServico se tudo estiver correto retorna um XML
+        /// dizendo que o serviço está em operação
+        /// Se der algum erro ele grava um arquivo txt com a extensão .ERR com o conteúdo do erro
+        /// </remark>
+        /// <example>
+        /// oUniNfe.vUF = 51; //Setar o Estado que é para ser verificado o status do serviço
+        /// oUniNfe.vXmlNfeDadosMsg = "c:\pedstatus.xml";
+        /// oUniNfe.StatusServico();
+        /// this.textBox_xmlretorno.Text = oUniNfe.vNfeRetorno;
+        /// //
+        /// //O conteúdo de retorno vai ser algo mais ou menos assim:
+        /// //
+        /// // <?xml version="1.0" encoding="UTF-8"?>
+        /// //   <retConsStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+        /// //      <tpAmb>2</tpAmb>
+        /// //      <verAplic>1.10</verAplic>
+        /// //      <cStat>107</cStat>
+        /// //      <xMotivo>Servico em Operacao</xMotivo>
+        /// //      <cUF>51</cUF>
+        /// //      <dhRecbto>2008-06-12T11:16:55</dhRecbto>
+        /// //      <tMed>2</tMed>
+        /// //   </retConsStatServ>
+        /// </example>
+        /// <by>
+        /// Wandrey Mundin Ferreira
+        /// </by>
+        /// <date>
+        /// 01/04/2008
+        /// </date>
         public void StatusServico()
         {
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
@@ -198,7 +189,6 @@ namespace uninfe
                             cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                                "para o SCAN do Ambiente Nacional.\r\n\r\n";
-
                         }
                         else if (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2"))
                         {
@@ -483,10 +473,17 @@ namespace uninfe
 
             if (oAD.vResultado == 0)
             {
+                //Resolver um falha do estado da bahia que gera um método com nome diferente dos demais estados
+                string cMetodo = "nfeInutilizacaoNF";
+                if (this.vUF == 29)
+                {
+                    cMetodo = "nfeInutilizacao";
+                }
+
                 //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
                 object oServico = null;
                 this.DefObjInutilizacao(ref oServico);
-                if (this.InvocarObjeto("1.07", oServico, "nfeInutilizacaoNF", "-ped-inu", "-inu") == true)
+                if (this.InvocarObjeto("1.07", oServico, cMetodo, "-ped-inu", "-inu") == true)
                 {
                     //Setar a propriedade que vai determinar a pasta que vai ser gravado
                     //o XML enviado
@@ -898,7 +895,16 @@ namespace uninfe
                 FileInfo oArquivoDel = new FileInfo(this.vArqXMLRetorno);
                 oArquivoDel.Delete();
             }
+            else if (File.Exists(this.vArqERRRetorno))
+            {
+                //Retornou um arquivo com a extensão .ERR, ou seja, deu um erro,
+                //futuramente tem que retornar esta mensagem para a MessageBox do usuário.
 
+                //Detetar o arquivo de retorno
+                FileInfo oArquivoDel = new FileInfo(this.vArqERRRetorno);
+                oArquivoDel.Delete();
+            }
+            
             //Retornar o status do serviço
             return vStatus;
         }
@@ -1882,6 +1888,8 @@ namespace uninfe
                               this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
                               pFinalArqErro;
 
+            this.vArqERRRetorno = cArqErro;
+
             StreamWriter SW_2 = File.CreateText(cArqErro);
             SW_2.Write(cErro);
             SW_2.Close();
@@ -1914,44 +1922,37 @@ namespace uninfe
             }
         }
 
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 16/07/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Move ou Excluir os arquivos XML da pasta de envio
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: MoveDeleteArq( string, string )
-         * Parâmetros.: cArquivo - Nome do arquivo que é para ser movido ou deletado
-         *              cOpcao   - M = Move o arquivo da pasta de envio para a pasta de
-         *                             XML´s enviados
-         *                         D = Deleta o arquivo da pasta de envio    
-         *                        
-         * ------------------------------------------------------------------------------
-         * Retorno....: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * //Mover o arquivo da pasta c:\ para a pasta de enviados configurado na 
-         * //tela de configurações do uninfe.
-         * this.MoveDeleteArq( "c:\teste.xml", "M" ) 
-         * 
-         * //Deletar o arquivo
-         * this.MoveDeleteArq( "c:\teste.xml", "D" )
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......: Normalmente os arquivos que são movidos para a pasta de enviados
-         *              são os de nota fiscal, cancelamento e inutilização, pois são 
-         *              documentos assinados digitalmente e necessários para comprovar
-         *              algo futuramente.
-         *              Os demais são deletados.
-         * 
-         * ==============================================================================         
-         */
+        /// <summary>
+        /// Move os arquivos XML da pasta de envio para a pasta dos XML enviados e de backup (se configurado para isso)
+        /// ou somente exclui os arquivos XML da pasta de envio no caso de não ter sido possível envia-lo ao SEFAZ
+        /// </summary>
+        /// <param name="cArquivo">
+        /// Nome do arquivo que é para ser movido ou deletado
+        /// </param>
+        /// <param name="cOpcao">
+        /// M = Move o arquivo da pasta de envio para a pasta de XML´s enviados
+        /// D = Deleta o arquivo da pasta de envio    
+        /// </param>
+        /// <remarks>
+        /// Normalmente os arquivos que são movidos para a pasta de enviados
+        /// são os de nota fiscal, cancelamento e inutilização, pois são 
+        /// documentos assinados digitalmente e necessários para comprovar
+        /// algo futuramente. Os demais são deletados.
+        /// </remarks>
+        /// <example>
+        /// //Mover o arquivo da pasta c:\ para a pasta de enviados configurado na
+        /// //tela de configurações do uninfe.
+        /// this.MoveDeleteArq( "c:\teste.xml", "M" ) 
+        /// 
+        /// //Deletar o arquivo
+        /// this.MoveDeleteArq( "c:\teste.xml", "D" )
+        /// </example>
+        /// <by>
+        /// Wandrey Mundin Ferreira
+        /// </by>
+        /// <date>
+        /// 16/07/2008
+        /// </date>
         private void MoveDeleteArq(string cArquivo, string cOpcao)
         {
             //Definir o arquivo que vai ser deletado ou movido para outra pasta
@@ -1977,6 +1978,39 @@ namespace uninfe
                         oArqDestino.Delete();
                     }
                     oArquivo.MoveTo(vNomeArquivo);
+
+                    //Fazer um backup do XML que foi copiado para a pasta de enviados
+                    //para uma outra pasta para termos uma maior segurança no arquivamento
+                    //Normalmente esta pasta é em um outro computador ou HD
+                    if (this.cPastaBackup.Trim() != "")
+                    {
+                        //Criar Pasta do Mês para gravar arquivos enviados
+                        string vNomePastaBackup = this.cPastaBackup + "\\" + this.vDataParaPastaEnviado.ToString("yyyyMM");
+                        if (Directory.Exists(vNomePastaBackup) == false)
+                        {
+                            System.IO.Directory.CreateDirectory(vNomePastaBackup);
+                        }
+
+                        //Se conseguiu criar a pasta ele move o arquivo, caso contrário
+                        if (Directory.Exists(vNomePastaBackup) == true)
+                        {
+                            //Mover o arquivo da nota fiscal para a pasta de backup
+                            string vNomeArquivoBkp = vNomePastaBackup + "\\" + ExtrairNomeArq(cArquivo, ".xml") + ".xml";
+                            if (File.Exists(vNomeArquivoBkp))
+                            {
+                                FileInfo oArqDestinoBkp = new FileInfo(vNomeArquivoBkp);
+                                oArqDestinoBkp.Delete();
+                            }
+                            FileInfo oArquivoBkp = new FileInfo(vNomeArquivo);
+
+                            oArquivoBkp.CopyTo(vNomeArquivoBkp,true);
+                        }
+                        else
+                        {
+                            //FAZER: Futuramente tenho que tratar este erro, pois se não existe o diretório
+                            //       Tenho que retornar um erro para o ERP
+                        }
+                    }                    
                 }
                 else
                 {
