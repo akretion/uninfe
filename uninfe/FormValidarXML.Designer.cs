@@ -44,6 +44,8 @@
             // 
             // textBox_arqxml
             // 
+            this.textBox_arqxml.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.textBox_arqxml.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             this.textBox_arqxml.Location = new System.Drawing.Point(8, 56);
             this.textBox_arqxml.Name = "textBox_arqxml";
             this.textBox_arqxml.Size = new System.Drawing.Size(579, 20);

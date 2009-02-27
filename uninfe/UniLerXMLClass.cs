@@ -33,12 +33,8 @@ namespace uninfe
             public string tpAmb { get; set; } //Tipo de Ambiente 1-Produção 2-Homologação
         }
 
-        /// <devdoc>
-        /// <para>
-        /// Esta herança que deve ser utilizada fora da classe para obter o valores
-        /// das tag´s da nota fiscal eletrônica
-        /// </para>
-        /// </devdoc>
+        //Esta herança que deve ser utilizada fora da classe para obter o valores
+        //das tag´s da nota fiscal eletrônica
         public DadosNFeClass oDadosNfe = new DadosNFeClass();
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace uninfe
         public FormValidarXML()
         {
             InitializeComponent();
-        }
+        }      
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -103,7 +103,7 @@ namespace uninfe
             if (lValidar == true)
             {
                 //Validar o arquivo
-                if (oValidarXML.nRetornoTipoArq >= 1 && oValidarXML.nRetornoTipoArq <= 7)
+                if (oValidarXML.nRetornoTipoArq >= 1 && oValidarXML.nRetornoTipoArq <= 8)
                 {
                     oValidarXML.ValidarXML(cArquivo, oValidarXML.cArquivoSchema);
                     if (oValidarXML.Retorno == 0)

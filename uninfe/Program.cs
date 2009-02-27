@@ -18,6 +18,8 @@ namespace uninfe
             // Pegar o nome da empresa do certificado para utilizar na verificação do Mutex
             // Wandrey 27/11/2008
             String nomeEmpresaCertificado = "UNINFE";
+            String nomePastaEnvio = "";
+            String nomePastaEnvioDemo = "";
             if (oConfig.oCertificado != null)
             {
                 nomeEmpresaCertificado = oConfig.oCertificado.Subject;
@@ -37,13 +39,30 @@ namespace uninfe
                     //então não será possível pegar o nome da empresa com cnpj
                     nomeEmpresaCertificado = "UNINFE";
                 }
+
+                //Acrescentar a pasta de envio ao Mutex, se for diferente ele vai permitir a execução do uninfe
+                if (oConfig.vPastaXMLEnvio != "")
+                {
+                    nomePastaEnvio = oConfig.vPastaXMLEnvio;
+
+                    //Tirar a unidade e os dois pontos do nome da pasta
+                    int iPos = nomePastaEnvio.IndexOf(':') + 1;
+                    if (iPos >= 0)
+                    {
+                        nomePastaEnvio = nomePastaEnvio.Substring(iPos, nomePastaEnvio.Length - iPos);
+                    }
+                    nomePastaEnvioDemo = nomePastaEnvio;
+
+                    //tirar as barras de separação de pastas e subpastas
+                    nomePastaEnvio = nomePastaEnvio.Replace("\\", "").Replace("/","").ToUpper();
+                }
             }
 
             // Verificar se o aplicativo já está rodando. Se estiver vai emitir um aviso e abortar
             // Pois só pode executar o aplicativo uma única vez por certificado/CNPJ.
             // Wandrey 27/11/2008
             System.Threading.Mutex oneMutex = null;
-            String nomeMutex = nomeEmpresaCertificado;
+            String nomeMutex = nomeEmpresaCertificado.Trim()+nomePastaEnvio.Trim();
 
             try
             {
@@ -60,7 +79,10 @@ namespace uninfe
             }
             else
             {
-                MessageBox.Show("Já existe uma instância do UniNFe em execução.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Somente uma instância do UniNFe pode ser executada com o seguintes dados configurados:\r\n\r\n"+
+                                "Certificado: "+nomeEmpresaCertificado+"\r\n\r\n"+
+                                "Pasta Envio: "+nomePastaEnvioDemo+"\r\n\r\n"+
+                                "Já tem uma intância com estes dados em execução.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 oneMutex.Close();
 

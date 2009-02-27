@@ -6,7 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
 
 namespace uninfe
 {
@@ -16,24 +15,9 @@ namespace uninfe
         {
             InitializeComponent();
 
-            //Montar a versão do programa
-            Assembly objAssembly = Assembly.GetExecutingAssembly();
+            UniNfeInfClass oUniNfeInf = new UniNfeInfClass();
 
-            string versao;
-        
-            foreach (Attribute attr in Attribute.GetCustomAttributes(objAssembly)) 
-            { 
-                if (attr.GetType() == typeof(AssemblyVersionAttribute)) 
-                { 
-                    versao = ((AssemblyVersionAttribute)attr).Version; 
-                } 
-            }
-            string delimStr = ",=";
-            char[] delimiter = delimStr.ToCharArray();
-            string[] strAssembly = objAssembly.ToString().Split(delimiter);
-            versao = strAssembly[2]; 
-
-            this.textBox_versao.Text = versao.ToString();
+            this.textBox_versao.Text = oUniNfeInf.Versao();
 
             //Atualizar o texto da licença de uso
             this.textBox_licenca.Text  = "GNU General Public License\r\n\r\n";

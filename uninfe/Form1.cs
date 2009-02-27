@@ -5,16 +5,21 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using uninfe;
+using Npgsql;
+using System.Data;
 
 namespace uninfe
 {
     public partial class Form1 : Form
     {
-        UniNfeClass oUniNfe = new UniNfeClass();        
+        UniNfeClass oUniNfe = new UniNfeClass();
+        CertificadoDigitalClass oCertDig = new CertificadoDigitalClass();
+
+        private DataSet ds = new DataSet();
+        private DataTable dt = new DataTable();
 
         public Form1()
         {
-            oUniNfe.SelecionarCertificado();
             InitializeComponent();
         }
 
@@ -37,12 +42,15 @@ namespace uninfe
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
-            oUniNfe.SelecionarCertificado();
+            oCertDig.SelecionarCertificado();
+            oCertDig.PrepInfCertificado(oCertDig.oCertificado);
+
+            oUniNfe.oCertificado = oCertDig.oCertificado;
         }
 
         private void button_exibir_certificado_selecionado_Click(object sender, EventArgs e)
         {
-            oUniNfe.ExibirCertSel();
+            oCertDig.ExibirCertSel();
         }
 
         private void comboBoxUF_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,6 +131,40 @@ namespace uninfe
             else
             {
                 MessageBox.Show("Ocorreu um erro ao tentar ler o XML:\r\n\r\n" + oLerNFe.cMensagemErro);
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            //TODO: Estudar este código para aprender mais sobre o DataGrid e conexão com banco de dados
+            //Criar a string de conexão com o postgresql
+            string Conexao = "Server=localhost;Port=5432;User Id=supervisor;Password=1234;Database=teste";
+
+            //Instânciar a Npgsqlconnection 
+            NpgsqlConnection conn = new NpgsqlConnection(Conexao);
+            try
+            {
+                //Abrir a conexão 
+                conn.Open();
+
+                //Montar a Query de consulta
+                string sSql = "select * from usuarios";
+
+                //Instancia o NpgsqlDataAdapter que é responsavel pela comunicação isto significa efetuar a leitura dos dados 'de um banco de dados e preencher um dataset, efetuar a manutenção de dados e, em seguida, 'escrever de volta no banco de dados com as informações atualizadas do'dataset. Na 'verdade, um data adapter pode mover dados entre qualquer fonte de dados e um dataset.
+                Npgsql.NpgsqlDataAdapter da = new NpgsqlDataAdapter(sSql, conn);
+
+                ds.Reset();
+
+                da.Fill(ds);
+                // since it C# DataSet can handle multiple tables, we will select first
+                dt = ds.Tables[0];
+                // connect grid to DataTable
+                dataGridView1.DataSource = dt;
+            }
+            finally
+            {
+                conn.Close();
+                MessageBox.Show("oi");
             }
         }
     }

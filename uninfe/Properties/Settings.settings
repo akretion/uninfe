@@ -342,22 +342,22 @@
       <Value Profile="(Default)">https://nfeh.sefaz.ce.gov.br:443/nfe/services/NfeStatusServico</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeRecepcao</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeRecepcao</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeRetRecepcao</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeRetRecepcao</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeCancelamento</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeCancelamento</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeInutilizacao</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeInutilizacao</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeConsulta</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeConsulta</Value>
     </Setting>
     <Setting Name="uninfe_wsCEPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br/nfe/services/NfeStatusServico</Value>
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeStatusServico</Value>
     </Setting>
     <Setting Name="uninfe_br_gov_ba_sefaz_hnfe_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://hnfe.sefaz.ba.gov.br/webservices/nfe/NfeStatusServico.asmx</Value>
@@ -541,6 +541,81 @@
     </Setting>
     <Setting Name="uninfe_wsDFPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://dec.fazenda.df.gov.br/nfe/ServiceStatus.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeRetRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeCancelamento</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeInutilizacao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeConsulta</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMHStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homnfe.sefaz.am.gov.br/ws/services/NfeStatusServico</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPRecepcao_NfeRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPRetRecepcao_NfeRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeRetRecepcao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPCancelamento_NfeCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeCancelamento</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPInutilizacao_NfeInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeInutilizacao</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPConsulta_NfeConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeConsulta</Value>
+    </Setting>
+    <Setting Name="uninfe_wsAMPStatusServico_NfeStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.am.gov.br/ws/services/NfeStatusServico</Value>
+    </Setting>
+    <Setting Name="uninfe_wsCEHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfeh.sefaz.ce.gov.br:443/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsGOHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.sefaz.go.gov.br/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsPEHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfehomolog.sefaz.pe.gov.br/nfe-service/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsROHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.nfe.sefin.ro.gov.br:443/ws/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsSPHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/nfeWEB/services/cadconsultacadastro.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsBAPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ba.gov.br/webservices/nfe/CadConsultaCadastro.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDFPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.df.gov.br/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsGOPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.go.gov.br/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsPEPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.pe.gov.br/nfe-service/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsROPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.nfe.sefin.ro.gov.br:443/wsprod/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsRSPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sef.sefaz.rs.gov.br/ws/CadConsultaCadastro/CadConsultaCadastro.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsSPPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/nfeweb/services/cadconsultacadastro.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsCEPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sefaz.ce.gov.br:443/nfe/services/CadConsultaCadastro</Value>
     </Setting>
   </Settings>
 </SettingsFile>

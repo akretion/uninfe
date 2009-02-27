@@ -89,7 +89,14 @@ namespace uninfe
 
                 // Iterate through the xml document
                 this.cErro = "";
-                while (reader.Read()) { }
+                try
+                {
+                    while (reader.Read()) { }
+                }
+                catch (Exception ex)
+                {
+                    this.cErro = ex.Message;
+                }
 
                 reader.Close();
 
@@ -179,7 +186,7 @@ namespace uninfe
             this.nRetornoTipoArq = 0;
             this.cRetornoTipoArq = "";
             this.cArquivoSchema = "";
-
+            
             if (File.Exists(cRotaArqXML))
             {
                 //Carregar os dados do arquivo XML de configurações do UniNfe
@@ -231,7 +238,12 @@ namespace uninfe
                             this.cRetornoTipoArq = "XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica";
                             this.cArquivoSchema = "consStatServ_v1.07.xsd";
                         }
-
+                        else if (oLerXml.Name == "ConsCad")
+                        {
+                            this.nRetornoTipoArq = 8;
+                            this.cRetornoTipoArq = "XML de Consulta do Cadastro do Contribuinte";
+                            this.cArquivoSchema = "consCad_v1.01.xsd";
+                        }
                         if (this.nRetornoTipoArq != 0) //Arquivo já foi identificado
                         {
                             break;

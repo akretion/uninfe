@@ -32,13 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_recarregar_config = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_StatusServicoNfe = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_teste = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel_NomeEmpresa = new System.Windows.Forms.ToolStripLabel();
-            this.timer_connect_webservice = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +46,6 @@
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_config,
-            this.toolStripButton_recarregar_config,
             this.toolStripButton_StatusServicoNfe,
             this.toolStripButton_sobre,
             this.toolStripButton_teste,
@@ -70,16 +67,6 @@
             this.toolStripButton_config.Text = "toolStripButton1";
             this.toolStripButton_config.ToolTipText = "Configurações do aplicativo";
             this.toolStripButton_config.Click += new System.EventHandler(this.toolStripButton_config_Click);
-            // 
-            // toolStripButton_recarregar_config
-            // 
-            this.toolStripButton_recarregar_config.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_recarregar_config.Image = global::uninfe.Properties.Resources.atualizar2;
-            this.toolStripButton_recarregar_config.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_recarregar_config.Name = "toolStripButton_recarregar_config";
-            this.toolStripButton_recarregar_config.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButton_recarregar_config.ToolTipText = "Forçar recarregar as configurações";
-            this.toolStripButton_recarregar_config.Click += new System.EventHandler(this.toolStripButton_recarregar_config_Click);
             // 
             // toolStripButton_StatusServicoNfe
             // 
@@ -124,8 +111,8 @@
             this.toolStripButton_validarxml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_validarxml.Name = "toolStripButton_validarxml";
             this.toolStripButton_validarxml.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButton_validarxml.Text = "toolStripButton1";
-            this.toolStripButton_validarxml.ToolTipText = "Validar os arquivos XML de envio";
+            this.toolStripButton_validarxml.Text = "toolStripButton_validarxml";
+            this.toolStripButton_validarxml.ToolTipText = "Validar os arquivos XML";
             this.toolStripButton_validarxml.Click += new System.EventHandler(this.toolStripButton_validarxml_Click);
             // 
             // toolStripLabel_NomeEmpresa
@@ -135,10 +122,6 @@
             this.toolStripLabel_NomeEmpresa.Name = "toolStripLabel_NomeEmpresa";
             this.toolStripLabel_NomeEmpresa.Size = new System.Drawing.Size(86, 52);
             this.toolStripLabel_NomeEmpresa.Text = "toolStripLabel1";
-            // 
-            // timer_connect_webservice
-            // 
-            this.timer_connect_webservice.Tick += new System.EventHandler(this.timer_connect_webservice_Tick);
             // 
             // notifyIcon1
             // 
@@ -159,6 +142,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "UniNFE - Monitor da Nota Fiscal Eletrônica";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
@@ -172,12 +156,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_config;
         private System.Windows.Forms.ToolStripButton toolStripButton_teste;
         private System.Windows.Forms.ToolStripButton toolStripButton_StatusServicoNfe;
-        private System.Windows.Forms.Timer timer_connect_webservice;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ToolStripButton toolStripButton_recarregar_config;
         private System.Windows.Forms.ToolStripButton toolStripButton_sobre;
-        private System.Windows.Forms.ToolStripButton toolStripButton_validarxml;
         private System.Windows.Forms.ToolStripLabel toolStripLabel_NomeEmpresa;
+        private System.Windows.Forms.ToolStripButton toolStripButton_validarxml;
     }
 }
 

@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:intf="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico" xmlns:impl="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico">
-      <xsd:element name="nfeStatusServicoNF">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="nfeCabecMsg" type="xsd:string" />
-            <xsd:element name="nfeDadosMsg" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nfeStatusServicoNFResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="nfeStatusServicoNFResult" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-    </xsd:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico">
+      <s:element name="nfeStatusServicoNF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeCabecMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nfeDadosMsg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="nfeStatusServicoNFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nfeStatusServicoNFResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeStatusServicoNFRequest">
-    <wsdl:part name="parameters" element="impl:nfeStatusServicoNF" />
+  <wsdl:message name="nfeStatusServicoNFSoapIn">
+    <wsdl:part name="parameters" element="tns:nfeStatusServicoNF" />
   </wsdl:message>
-  <wsdl:message name="nfeStatusServicoNFResponse">
-    <wsdl:part name="parameters" element="impl:nfeStatusServicoNFResponse" />
+  <wsdl:message name="nfeStatusServicoNFSoapOut">
+    <wsdl:part name="parameters" element="tns:nfeStatusServicoNFResponse" />
   </wsdl:message>
   <wsdl:portType name="NfeStatusServico">
     <wsdl:operation name="nfeStatusServicoNF">
-      <wsdl:input name="nfeStatusServicoNFRequest" message="impl:nfeStatusServicoNFRequest" />
-      <wsdl:output name="nfeStatusServicoNFResponse" message="impl:nfeStatusServicoNFResponse" />
+      <wsdl:input message="tns:nfeStatusServicoNFSoapIn" />
+      <wsdl:output message="tns:nfeStatusServicoNFSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NfeStatusServicoSoapBinding" type="impl:NfeStatusServico">
-    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+  <wsdl:binding name="NfeStatusServico" type="tns:NfeStatusServico">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeStatusServicoNF">
-      <wsdlsoap:operation soapAction="nfeStatusServicoNF" />
-      <wsdl:input name="nfeStatusServicoNFRequest">
-        <wsdlsoap:body use="literal" />
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/nfeStatusServicoNF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="nfeStatusServicoNFResponse">
-        <wsdlsoap:body use="literal" />
+      <wsdl:output>
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="NfeStatusServico">
-    <wsdl:port name="NfeStatusServico" binding="impl:NfeStatusServicoSoapBinding">
-      <wsdlsoap:address location="https://nfe.sefaz.ce.gov.br/nfe/services/NfeStatusServico" />
+    <wsdl:port name="NfeStatusServico" binding="tns:NfeStatusServico">
+      <soap:address location="https://nfe.sefaz.ce.gov.br:443/nfe/services/NfeStatusServico" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

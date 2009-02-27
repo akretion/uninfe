@@ -1,5 +1,5 @@
 ﻿Lista dos Estados com WebServices Próprios
-    Amazonas - AM			(Não foi incluido ainda no UniNFE)
+    Amazonas - AM			
 	Bahia - BA
 	Ceará - CE
 	Distrito Federal - DF

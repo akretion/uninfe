@@ -18,9 +18,8 @@ namespace uninfe
 
         public FormConfiguracao()
         {
-
             InitializeComponent();
-
+            
             //Montar os itens do DropList da UF
             ArrayList arrUF = new ArrayList();
             arrUF.Add(new DropDownListClass("AC", 12));
@@ -153,11 +152,11 @@ namespace uninfe
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
-            UniNfeClass oUniNfe = new UniNfeClass();
+            CertificadoDigitalClass oCertDig = new CertificadoDigitalClass();
 
-            if (oUniNfe.SelecionarCertificado() == true)
+            if (oCertDig.SelecionarCertificado() == true)
             {
-                this.oMeuCert = oUniNfe.oCertificado;
+                this.oMeuCert = oCertDig.oCertificado;
                 this.DemonstraDadosCertificado();
             }
         }
@@ -205,6 +204,10 @@ namespace uninfe
             }
             else
             {
+                //Avisar os serviços do UniNFE que uma configuração nova foi feita e que eles deve recarregar
+                //as configurações na memória novamente.
+                ServicoUniNFe.CarregarConfiguracoes();
+
                 this.Dispose();
             }
         }
@@ -472,6 +475,8 @@ namespace uninfe
                     }
                 }
             }
+
+            //TODO: Verificar se as pastas informadas são todas diferentes uma das outras, pois não pode ser igual
 
             return lValidou;
         }

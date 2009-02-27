@@ -13,6 +13,8 @@ namespace uninfe
 {
     class UniNfeClass
     {
+        #region propriedades da classe
+
         public X509Certificate2 oCertificado { get; set; }
         public int vUF { get; set; } //Código do Estado (UF) que é para certificar a Nota Fiscal Eletrônica
         public int vAmbiente { get; set; } //Código do Ambiente que é para certificar a Nota Fiscal Eletrônica
@@ -27,6 +29,8 @@ namespace uninfe
         public string cPastaBackup { get; set; } //Pasta para gravar o backup dos XML enviados
         private DateTime vDataParaPastaEnviado; //Data que vai ser utilizada para criar a sub-pasta dentro da pasta dos xml enviados
         private string vArqERRRetorno; //Pasta e nome do arquivo dos Erros ocorridos ao tentar consumir um serviço.
+
+        #endregion
 
         /// <summary>
         /// Verificar o status do Serviço da NFe do SEFAZ em questão
@@ -149,7 +153,7 @@ namespace uninfe
 
                     //Verificar o tipo de emissão de bate com o configurado, se não bater vai retornar um erro 
                     //para o ERP
-                    if ((vTpEmis == 1 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2")) || 
+                    if ((vTpEmis == 1 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2")) ||
                         (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "3")))
                     {
                         //Gerar o Lote de Notas Fiscais
@@ -209,7 +213,7 @@ namespace uninfe
             }
             else
             {
-                this.GravarArqErroServico("-nfe.xml", "-nfe.err", oAD.vResultadoString+" ("+oAD.vResultado.ToString()+")");
+                this.GravarArqErroServico("-nfe.xml", "-nfe.err", oAD.vResultadoString + " (" + oAD.vResultado.ToString() + ")");
             }
         }
 
@@ -268,8 +272,8 @@ namespace uninfe
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjRetRecepcao(ref oServico);
-            if (this.InvocarObjeto("1.10", oServico, "nfeRetRecepcao", "-ped-rec", "-pro-rec") == true) 
-            {                
+            if (this.InvocarObjeto("1.10", oServico, "nfeRetRecepcao", "-ped-rec", "-pro-rec") == true)
+            {
                 //Deletar o arquivo de solicitação do serviço
                 this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
             }
@@ -330,7 +334,7 @@ namespace uninfe
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjConsulta(ref oServico);
-            if (this.InvocarObjeto("1.07", oServico, "nfeConsultaNF", "-ped-sit", "-sit") == true) 
+            if (this.InvocarObjeto("1.07", oServico, "nfeConsultaNF", "-ped-sit", "-sit") == true)
             {
                 //Deletar o arquivo de solicitação do serviço
                 this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
@@ -499,6 +503,79 @@ namespace uninfe
             }
         }
 
+        /// <summary>
+        /// Envia o XML de consulta do cadastro do contribuinte para o web-service do sefaz
+        /// </summary>
+        /// <remark>
+        /// Como retorno, o método atualiza a propriedade this.vNfeRetorno da classe 
+        /// com o conteúdo do retorno do WebService.
+        /// No caso do consultaCadastro se tudo estiver correto retorna um XML
+        /// com o resultado da consulta
+        /// Se der algum erro ele grava um arquivo txt com a extensão .ERR com o conteúdo do erro
+        /// </remark>
+        /// <example>
+        /// oUniNfe.vUF = 51; //Setar o Estado que é para efetuar a consulta
+        /// oUniNfe.vXmlNfeDadosMsg = "c:\00000000000000-cons-cad.xml";
+        /// oUniNfe.ConsultaCadastro();
+        /// this.textBox_xmlretorno.Text = oUniNfe.vNfeRetorno;
+        /// //
+        /// //O conteúdo de retorno vai ser algo mais ou menos assim:
+        /// //
+        /// //<retConsCad xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+        /// //   <infCons>
+        /// //      <verAplic>SP_NFE_PL_005c</verAplic>
+        /// //      <cStat>111</cStat>
+        /// //      <xMotivo>Consulta cadastro com uma ocorrência</xMotivo>
+        /// //      <UF>SP</UF>
+        /// //      <CNPJ>00000000000000</CNPJ>
+        /// //      <dhCons>2009-01-29T10:36:33</dhCons>
+        /// //      <cUF>35</cUF>
+        /// //      <infCad>
+        /// //         <IE>000000000000</IE>
+        /// //         <CPF />
+        /// //         <CNPJ>00000000000000</CNPJ>
+        /// //         <UF>SP</UF>
+        /// //         <cSit>1</cSit>
+        /// //         <xNome>EMPRESA DE TESTE PARA AVALIACAO DO SERVICO</xNome>
+        /// //      </infCad>
+        /// //   </infCons>
+        /// //</retConsCad>
+        /// </example>
+        /// <by>
+        /// Wandrey Mundin Ferreira
+        /// </by>
+        /// <date>
+        /// 15/01/2009
+        /// </date>
+        public void ConsultaCadastro()
+        {
+            //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+            object oServico = null;
+            this.DefObjConsultaCadastro(ref oServico);
+            if (oServico == null)
+            {
+                string sAmbiente;
+                if (vAmbiente == 1)
+                {
+                    sAmbiente = "produção";
+                }
+                else
+                {
+                    sAmbiente = "homologação";
+                }
+
+                this.GravarArqErroServico("-cons-cad.xml", "-ret-cons-cad.err", "O Estado (" + vUF.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
+            }
+            else
+            {
+                if (this.InvocarObjeto("1.01", oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+                {
+                    //Deletar o arquivo de solicitação do serviço
+                    this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
+                }
+            }
+        }
+
         /*
          * ==============================================================================
          * UNIMAKE - SOLUÇÕES CORPORATIVAS
@@ -577,8 +654,8 @@ namespace uninfe
                     //Deu erro na primeira tentativa, sendo assim, vou aumentar o timeout para ver se não resolve a questão na segunda e terceira tentativa
                     if (i == 2)
                     {
-                        tipoServico.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, oServico, new object[] {300000});
-                    }                    
+                        tipoServico.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, oServico, new object[] { 300000 });
+                    }
 
                     //Invocar o membro
                     this.vStrXmlRetorno = (string)(tipoServico.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oServico, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
@@ -717,7 +794,7 @@ namespace uninfe
             //Montar a parte do XML referente ao Lote e acrescentar a Nota Fiscal
             string vStringLoteNfe = string.Empty;
             vStringLoteNfe += "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-            vStringLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" versao=\""+cVersaoDados+"\">";
+            vStringLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" versao=\"" + cVersaoDados + "\">";
             vStringLoteNfe += "<idLote>" + nNumeroLote.ToString("000000000000000") + "</idLote>";
             vStringLoteNfe += vStringNfe;
             vStringLoteNfe += "</enviNFe>";
@@ -733,7 +810,7 @@ namespace uninfe
 
             //Gerar o XML de retorno para o ERP com o número do Lote de Nfe Utilizado
             string cArqLoteRetorno = this.vPastaXMLRetorno + "\\" +
-                                     this.ExtrairNomeArq(this.vXmlNfeDadosMsg,"-nfe.xml") +
+                                     this.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-nfe.xml") +
                                      "-num-lot.xml";
 
             XmlWriter oXmlLoteERP = XmlWriter.Create(cArqLoteRetorno, oSettings);
@@ -823,7 +900,7 @@ namespace uninfe
          */
         private string CriarArqXMLStatusServico()
         {
-            string vDadosMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.07\" xmlns=\"http://www.portalfiscal.inf.br/nfe\"><tpAmb>"+this.vAmbiente.ToString()+"</tpAmb><cUF>"+this.vUF.ToString()+"</cUF><xServ>STATUS</xServ></consStatServ>";
+            string vDadosMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.07\" xmlns=\"http://www.portalfiscal.inf.br/nfe\"><tpAmb>" + this.vAmbiente.ToString() + "</tpAmb><cUF>" + this.vUF.ToString() + "</cUF><xServ>STATUS</xServ></consStatServ>";
 
             string _arquivo_saida = this.vPastaXMLEnvio + "\\" + DateTime.Now.ToString("yyyyMMddThhmmss") + "-ped-sta.xml";
 
@@ -834,77 +911,123 @@ namespace uninfe
             return _arquivo_saida;
         }
 
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 17/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Verifica e retorna o Status do Serviço da NFE. Para isso este 
-         *              método gera o arquivo XML necessário para obter o status do 
-         *              serviço e faz a leitura do XML de retorno, retornando uma 
-         *              string com a mensagem obtida.
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: VerStatusServico(),string
-         * Parâmetros.: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Retorno....: Retorna a mensagem obtida de retorno do webservice da nfe.
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         *              string vPastaArq = this.CriaArqXMLStatusServico();
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
+        /// <summary>
+        /// Verifica e retorna o Status do Servido da NFE. Para isso este método gera o arquivo XML necessário
+        /// para obter o status do serviõ e faz a leitura do XML de retorno, disponibilizando uma string com a mensagem
+        /// obtida.
+        /// </summary>
+        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
+        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>17/06/2008</date>
         public string VerStatusServico()
         {
-            string vStatus     = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
+            string vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
 
             //Criar XML para obter o status do serviço
             this.vXmlNfeDadosMsg = this.CriarArqXMLStatusServico();
 
-            //Obter o status do serviço
-            this.StatusServico();
+            this.vArqXMLRetorno = this.vPastaXMLRetorno + "\\" +
+                      this.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-sta.xml") +
+                      "-sta.xml";
 
-            if (File.Exists(this.vArqXMLRetorno))
+            this.vArqERRRetorno = this.vPastaXMLRetorno + "\\" +
+                      this.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-sta.xml") +
+                      "-sta.err";
+
+            DateTime startTime;
+            DateTime stopTime;
+            TimeSpan elapsedTime;
+
+            long elapsedMillieconds;
+            startTime = DateTime.Now;
+
+            while (true)
             {
-                //Ler o status do serviço no XML retornado pelo WebService
-                XmlTextReader oLerXml = new XmlTextReader(this.vArqXMLRetorno);
+                stopTime = DateTime.Now;
+                elapsedTime = stopTime.Subtract(startTime);
+                elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
 
-                while (oLerXml.Read())
+                if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minutos
                 {
-                    if (oLerXml.NodeType == XmlNodeType.Element)
+                    break;
+                }
+
+                if (File.Exists(this.vArqXMLRetorno))
+                {
+                    try
                     {
-                        if (oLerXml.Name == "xMotivo")
+                        //Verificar se consegue abrir o arquivo em modo exclusivo, se conseguir ele dá sequencia
+                        using (FileStream fs = File.Open(this.vArqXMLRetorno, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
                         {
-                            oLerXml.Read();
-                            vStatus = oLerXml.Value;
-                            break;
+                            //Conseguiu abrir o arquivo, significa que está perfeitamente gerado
+                            //assim vou iniciar o processo de envio do XML
+                            fs.Close();
+
+                            //Ler o status do serviço no XML retornado pelo WebService
+                            XmlTextReader oLerXml = new XmlTextReader(this.vArqXMLRetorno);
+
+                            try
+                            {
+                                while (oLerXml.Read())
+                                {
+                                    if (oLerXml.NodeType == XmlNodeType.Element)
+                                    {
+                                        if (oLerXml.Name == "xMotivo")
+                                        {
+                                            oLerXml.Read();
+                                            vStatus = oLerXml.Value;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
+                                //pode ser que o arquivo esteja em uso ainda.
+                            }
+
+                            oLerXml.Close();
+
+                            //Detetar o arquivo de retorno
+                            try
+                            {
+                                FileInfo oArquivoDel = new FileInfo(this.vArqXMLRetorno);
+                                oArquivoDel.Delete();
+
+                                break;
+                            }
+                            catch
+                            {
+                                //Somente deixa fazer o loop novamente e tentar deletar
+                            }
                         }
                     }
+                    catch
+                    {
+
+                    }
                 }
-                oLerXml.Close();
+                else if (File.Exists(this.vArqERRRetorno))
+                {
+                    //Retornou um arquivo com a extensão .ERR, ou seja, deu um erro,
+                    //futuramente tem que retornar esta mensagem para a MessageBox do usuário.
 
-                //Detetar o arquivo de retorno
-                FileInfo oArquivoDel = new FileInfo(this.vArqXMLRetorno);
-                oArquivoDel.Delete();
+                    //Detetar o arquivo de retorno
+                    try
+                    {
+                        FileInfo oArquivoDel = new FileInfo(this.vArqERRRetorno);
+                        oArquivoDel.Delete();
+                        break;
+                    }
+                    catch
+                    {
+                        //Somente deixa fazer o loop novamente e tentar deletar
+                    }
+                }
             }
-            else if (File.Exists(this.vArqERRRetorno))
-            {
-                //Retornou um arquivo com a extensão .ERR, ou seja, deu um erro,
-                //futuramente tem que retornar esta mensagem para a MessageBox do usuário.
 
-                //Detetar o arquivo de retorno
-                FileInfo oArquivoDel = new FileInfo(this.vArqERRRetorno);
-                oArquivoDel.Delete();
-            }
-            
             //Retornar o status do serviço
             return vStatus;
         }
@@ -938,7 +1061,7 @@ namespace uninfe
          * 
          * ==============================================================================         
          */
-        public string XmlToString(string parNomeArquivo)
+        private string XmlToString(string parNomeArquivo)
         {
             StreamReader SR;
             SR = File.OpenText(parNomeArquivo);
@@ -946,99 +1069,6 @@ namespace uninfe
             SR.Close();
 
             return conteudo_xml;
-        }
-
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 04/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Método responsável por abrir um browse para selecionar o 
-         *              o certificado digital que será utilizado para autenticação
-         *              dos WebServices e gravar ele no atributo oCertificado
-         * ------------------------------------------------------------------------------
-         * Definição..: SelecionarCertificado(),bool
-         * Parâmetros.: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Retorno....: Retorna se o certificado foi selecionado corretamente ou não
-         *              true  = foi selecionado corretamente
-         *              false = não foi selecionado, algum problema ocorreu ou foi 
-         *                      cancelado o selecionamento pelo usuário
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
-        public bool SelecionarCertificado()
-        {
-            bool vRetorna;
-
-            X509Certificate2 oX509Cert = new X509Certificate2();
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-            X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
-            X509Certificate2Collection collection2 = (X509Certificate2Collection)collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.DigitalSignature, false);
-            X509Certificate2Collection scollection = X509Certificate2UI.SelectFromCollection(collection2, "Certificado(s) Digital(is) disponível(is)", "Selecione o certificado digital para uso no aplicativo", X509SelectionFlag.SingleSelection);
-
-            if (scollection.Count == 0)
-            {
-                string msgResultado = "Nenhum certificado digital foi selecionado ou o certificado selecionado está com problemas.";
-                MessageBox.Show(msgResultado, "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                vRetorna = false;
-            }
-            else
-            {
-                oX509Cert = scollection[0];
-                oCertificado = oX509Cert;
-                vRetorna = true;
-            }
-
-            return vRetorna;
-        }
-
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 04/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Exibi uma tela com o certificado digital selecionado para ser
-         *              utilizado na integração com os WEBServices da NFe
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: ExibirCertSel()
-         * Parâmetros.: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Retorno....: 
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
-        public void ExibirCertSel()
-        {
-            if (oCertificado == null)
-            {
-                MessageBox.Show("Nenhum certificado foi selecionado.", "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                X509Certificate2UI.DisplayCertificate(oCertificado);
-            }
         }
 
         /*
@@ -1099,6 +1129,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
@@ -1107,7 +1138,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPStatusServico.NfeStatusServico(); }
@@ -1132,6 +1162,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHStatusServico.NfeStatusServico(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
@@ -1140,7 +1171,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNHStatusServico.NfeStatusServico(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHStatusServico.NfeStatusServico(); }
@@ -1210,6 +1240,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPRecepcao.NfeRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
@@ -1218,7 +1249,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPRecepcao.NfeRecepcao(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPRecepcao.NfeRecepcao(); }
@@ -1236,22 +1266,22 @@ namespace uninfe
                 else if (this.vUF == 31) { pObjeto = new wsMGHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 35) { pObjeto = new wsSPHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 50) { pObjeto = new wsMSHRecepcao.NfeRecepcao(); }
-                else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }             
+                else if (this.vUF == 52) { pObjeto = new wsGOHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 41) { pObjeto = new wsPRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 23) { pObjeto = new wsCEHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 29) { pObjeto = new wsBAHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 53) { pObjeto = new wsDFHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHRecepcao.NfeRecepcao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHRecepcao.NfeRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 22) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 24) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 32) { pObjeto = new wsVNHRecepcao.NfeRecepcao(); }
-                
+
                 else if (this.vUF == 42) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHRecepcao.NfeRecepcao(); }
@@ -1322,6 +1352,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
@@ -1330,7 +1361,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPRetRecepcao.NfeRetRecepcao(); }
@@ -1355,6 +1385,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHRetRecepcao.NfeRetRecepcao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
@@ -1363,7 +1394,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNHRetRecepcao.NfeRetRecepcao(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHRetRecepcao.NfeRetRecepcao(); }
@@ -1434,6 +1464,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPConsulta.NfeConsulta(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPConsulta.NfeConsulta(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPConsulta.NfeConsulta(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
@@ -1442,7 +1473,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPConsulta.NfeConsulta(); }
@@ -1467,6 +1497,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFHConsulta.NfeConsulta(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHConsulta.NfeConsulta(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHConsulta.NfeConsulta(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
@@ -1475,7 +1506,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNHConsulta.NfeConsulta(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHConsulta.NfeConsulta(); }
@@ -1545,6 +1575,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
@@ -1553,7 +1584,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPCancelamento.NfeCancelamento(); }
@@ -1578,6 +1608,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHCancelamento.NfeCancelamento(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
@@ -1586,7 +1617,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNHCancelamento.NfeCancelamento(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHCancelamento.NfeCancelamento(); }
@@ -1657,6 +1687,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROPInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMPInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
@@ -1665,7 +1696,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNPInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRPInutilizacao.NfeInutilizacao(); }
@@ -1690,6 +1720,7 @@ namespace uninfe
                 else if (this.vUF == 53) { pObjeto = new wsDFHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 26) { pObjeto = new wsPEHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 11) { pObjeto = new wsROHInutilizacao.NfeInutilizacao(); }
+                else if (this.vUF == 13) { pObjeto = new wsAMHInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 15) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 21) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
@@ -1698,7 +1729,6 @@ namespace uninfe
                 else if (this.vUF == 32) { pObjeto = new wsVNHInutilizacao.NfeInutilizacao(); }
 
                 else if (this.vUF == 42) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
-                else if (this.vUF == 13) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 17) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 28) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (this.vUF == 33) { pObjeto = new wsVRHInutilizacao.NfeInutilizacao(); }
@@ -1710,42 +1740,61 @@ namespace uninfe
             }
         }
 
-        /*
-         * ==============================================================================
-         * UNIMAKE - SOLUÇÕES CORPORATIVAS
-         * ==============================================================================
-         * Data.......: 19/06/2008
-         * Autor......: Wandrey Mundin Ferreira
-         * ------------------------------------------------------------------------------
-         * Descrição..: Extrai somente o nome do arquivo de uma string para ser utilizado
-         *              na situação desejada. Veja os exemplos.
-         *              
-         * ------------------------------------------------------------------------------
-         * Definição..: ExtrairNomeArq(string,string),string
-         * Parâmetros.: pPastaArq = String contendo o caminho e nome do arquivo que é
-         *                          para ser extraido o nome.
-         *              pFinalArq = String contendo o final do nome do arquivo até onde
-         *                          é para ser extraido.
-         *                        
-         * ------------------------------------------------------------------------------
-         * Retorno....: Retorna somente o some do arquivo de acordo com os parametros
-         *              passados - veja exemplos.
-         * 
-         * ------------------------------------------------------------------------------
-         * Exemplos...:
-         * 
-         * MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
-         * //Será demonstrado no message a string "ArqSituacao"
-         * 
-         * MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
-         * //Será demonstrado no message a string "ArqSituacao-ped-sta"
-         * 
-         * ------------------------------------------------------------------------------
-         * Notas......:
-         * 
-         * ==============================================================================         
-         */
-        public string ExtrairNomeArq( string pPastaArq, string pFinalArq )
+        /// <summary>
+        /// Defini o Objeto que vai ser utilizado para consultar o cadastro do contribuinte de acordo com o Estado e Ambiente informado para a classe
+        /// </summary>
+        /// <param name="pObjeto">Variável de objeto que é para receber a instância do serviço</param>
+        /// <example>
+        /// object oServico = null;
+        /// this.DefObjConsultaCadastro(ref oServico);
+        /// if (this.InvocarObjeto("1.01", oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+        /// {
+        ///    //Deletar o arquivo de solicitação do serviço
+        ///    this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
+        /// }
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>15/01/2009</date>
+        private void DefObjConsultaCadastro(ref object pObjeto)
+        {
+            if (this.vAmbiente == 1)
+            {
+                if (this.vUF == 29) { pObjeto = new wsBAPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 23) { pObjeto = new wsCEPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 53) { pObjeto = new wsDFPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 52) { pObjeto = new wsGOPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 26) { pObjeto = new wsPEPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 11) { pObjeto = new wsROPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 43) { pObjeto = new wsRSPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 35) { pObjeto = new wsSPPConsultaCadastro.CadConsultaCadastro(); }
+            }
+            else if (this.vAmbiente == 2)
+            {
+                if (this.vUF == 23) { pObjeto = new wsCEPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 53) { pObjeto = new wsDFPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 52) { pObjeto = new wsGOPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 26) { pObjeto = new wsPEPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 11) { pObjeto = new wsROPConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 35) { pObjeto = new wsSPPConsultaCadastro.CadConsultaCadastro(); }
+            }
+        }
+
+        /// <summary>
+        /// Extrai somente o nome do arquivo de uma string; para ser utilizado na situação desejada. Veja os exemplos na documentação do código.
+        /// </summary>
+        /// <param name="pPastaArq">String contendo o caminho e nome do arquivo que é para ser extraido o nome.</param>
+        /// <param name="pFinalArq">String contendo o final do nome do arquivo até onde é para ser extraído.</param>
+        /// <returns>Retorna somente o nome do arquivo de acordo com os parâmetros passados - veja exemplos.</returns>
+        /// <example>
+        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
+        /// //Será demonstrado no message a string "ArqSituacao"
+        /// 
+        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
+        /// //Será demonstrado no message a string "ArqSituacao-ped-sta"
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>19/06/2008</date>
+        public string ExtrairNomeArq(string pPastaArq, string pFinalArq)
         {
             //Achar o posição inicial do nome do arquivo
             //procura por pastas, tira elas para ficar somente o nome do arquivo
@@ -1812,7 +1861,7 @@ namespace uninfe
             Type tipoClientCertificates;
             oClientCertificates = tipoServico.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, pObjeto, new Object[] { });
             tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });           
+            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
         }
 
         /*
@@ -1882,7 +1931,7 @@ namespace uninfe
             //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
             //for gerado corretamente.
             this.MoveArqErro(this.vXmlNfeDadosMsg);
-         
+
             //Grava arquivo de ERRO para o ERP
             string cArqErro = this.vPastaXMLRetorno + "\\" +
                               this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
@@ -1900,7 +1949,7 @@ namespace uninfe
         /// </summary>
         /// <param name="cArquivo">Nome do arquivo a ser movido para a pasta de XML´s com erro</param>
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg)</example>
-        private void MoveArqErro( string cArquivo )
+        private void MoveArqErro(string cArquivo)
         {
             FileInfo oArquivo = new FileInfo(cArquivo);
 
@@ -1955,6 +2004,8 @@ namespace uninfe
         /// </date>
         private void MoveDeleteArq(string cArquivo, string cOpcao)
         {
+            //TODO: Criar vários try/catch neste método para evitar erros
+
             //Definir o arquivo que vai ser deletado ou movido para outra pasta
             FileInfo oArquivo = new FileInfo(cArquivo);
 
@@ -2003,19 +2054,17 @@ namespace uninfe
                             }
                             FileInfo oArquivoBkp = new FileInfo(vNomeArquivo);
 
-                            oArquivoBkp.CopyTo(vNomeArquivoBkp,true);
+                            oArquivoBkp.CopyTo(vNomeArquivoBkp, true);
                         }
                         else
                         {
-                            //FAZER: Futuramente tenho que tratar este erro, pois se não existe o diretório
-                            //       Tenho que retornar um erro para o ERP
+                            //TODO: Tenho que tratar este Erro e retornar algo para o ERP urgente, pois pode falhar
                         }
-                    }                    
+                    }
                 }
                 else
                 {
-                    //FAZER: Futuramente tenho que tratar este erro, pois se não existe o diretório
-                    //       Tenho que retornar um erro para o ERP
+                    //TODO: Tenho que tratar este Erro e retornar algo para o ERP urgente, pois pode falhar                
                 }
             }
             else if (cOpcao == "D") //Deletar o arquivo
@@ -2068,7 +2117,7 @@ namespace uninfe
             ValidadorXMLClass oValidador = new ValidadorXMLClass();
             oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
 
-            if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= 7)
+            if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= 8)
             {
                 oValidador.ValidarXML(this.vXmlNfeDadosMsg, oValidador.cArquivoSchema);
                 if (oValidador.Retorno != 0)
