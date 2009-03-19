@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using uninfe;
-using Npgsql;
+//using Npgsql;
 using System.Data;
 
 namespace uninfe
@@ -135,17 +135,19 @@ namespace uninfe
         }
 
         private void button2_Click_1(object sender, EventArgs e)
-        {
+        {   /*      
             //TODO: Estudar este código para aprender mais sobre o DataGrid e conexão com banco de dados
             //Criar a string de conexão com o postgresql
             string Conexao = "Server=localhost;Port=5432;User Id=supervisor;Password=1234;Database=teste";
 
             //Instânciar a Npgsqlconnection 
             NpgsqlConnection conn = new NpgsqlConnection(Conexao);
+            
             try
             {
                 //Abrir a conexão 
                 conn.Open();
+                
 
                 //Montar a Query de consulta
                 string sSql = "select * from usuarios";
@@ -158,6 +160,7 @@ namespace uninfe
                 da.Fill(ds);
                 // since it C# DataSet can handle multiple tables, we will select first
                 dt = ds.Tables[0];
+                
                 // connect grid to DataTable
                 dataGridView1.DataSource = dt;
             }
@@ -166,6 +169,7 @@ namespace uninfe
                 conn.Close();
                 MessageBox.Show("oi");
             }
+             */
         }
     }
 }

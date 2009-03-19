@@ -51,10 +51,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Npgsql, Version=2.0.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Lixo\Downloads\Npgsql2.0.2-bin-ms.net\Npgsql2.0.2-bin-ms.net\bin\Npgsql.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.EnterpriseServices" />
@@ -357,6 +353,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\wsDFHCancelamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsDFHConsultaCadastro\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1301,6 +1302,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFPConsulta_NfeConsulta</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://dec.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFPConsultaCadastro\</RelPath>
+      <UpdateFromURL>https://dec.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFPConsultaCadastro_CadConsultaCadastro</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://dec.fazenda.df.gov.br/nfe/ServiceInutilizacao.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFPInutilizacao\</RelPath>
@@ -1675,10 +1687,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsAMHStatusServico_NfeStatusServico</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceCancelamento.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHCancelamento\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeCancelamento%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceCancelamento.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1686,10 +1698,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFHCancelamento_NfeCancelamento</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsulta.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHConsulta\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsulta.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1697,10 +1709,21 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFHConsulta_NfeConsulta</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsDFHConsultaCadastro\</RelPath>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsDFHConsultaCadastro_CadConsultaCadastro</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceInutilizacao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHInutilizacao\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceInutilizacao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1708,10 +1731,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFHInutilizacao_NfeInutilizacao</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRecepcao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHRecepcao\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRecepcao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1719,10 +1742,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFHRecepcao_NfeRecepcao</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRetRecepcao.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHRetRecepcao\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRetRecepcao.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1730,10 +1753,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFHRetRecepcao_NfeRetRecepcao</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL">
+    <WebReferenceUrl Include="https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceStatus.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsDFHStatusServico\</RelPath>
-      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceStatus.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -2202,17 +2225,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsMTHStatusServico_NfeStatusServico</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="https://nfe.fazenda.df.gov.br/nfe/services/CadConsultaCadastro%3fWSDL">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\wsDFPConsultaCadastro\</RelPath>
-      <UpdateFromURL>https://nfe.fazenda.df.gov.br/nfe/services/CadConsultaCadastro%3fWSDL</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>uninfe_wsDFPConsultaCadastro_CadConsultaCadastro</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfe.fazenda.mg.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -4226,46 +4238,51 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHCancelamento\NfeCancelamento.wsdl" />
     <None Include="Web References\wsDFHCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHConsulta\NfeConsulta.wsdl" />
+    <None Include="Web References\wsDFHCancelamento\ServiceCancelamento.wsdl" />
+    <None Include="Web References\wsDFHConsultaCadastro\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsDFHConsultaCadastro\ServiceConsultaCadastro.wsdl" />
     <None Include="Web References\wsDFHConsulta\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHInutilizacao\NfeInutilizacao.wsdl" />
+    <None Include="Web References\wsDFHConsulta\ServiceConsulta.wsdl" />
     <None Include="Web References\wsDFHInutilizacao\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHRecepcao\NfeRecepcao.wsdl" />
+    <None Include="Web References\wsDFHInutilizacao\ServiceInutilizacao.wsdl" />
     <None Include="Web References\wsDFHRecepcao\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHRetRecepcao\NfeRetRecepcao.wsdl" />
+    <None Include="Web References\wsDFHRecepcao\ServiceRecepcao.wsdl" />
     <None Include="Web References\wsDFHRetRecepcao\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsDFHStatusServico\NfeStatusServico.wsdl" />
+    <None Include="Web References\wsDFHRetRecepcao\ServiceRetRecepcao.wsdl" />
     <None Include="Web References\wsDFHStatusServico\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\wsDFHStatusServico\ServiceStatus.wsdl" />
     <None Include="Web References\wsDFPCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\wsDFPCancelamento\ServiceCancelamento.wsdl" />
-    <None Include="Web References\wsDFPConsultaCadastro\CadConsultaCadastro.wsdl" />
     <None Include="Web References\wsDFPConsultaCadastro\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\wsDFPConsultaCadastro\ServiceConsultaCadastro.wsdl" />
     <None Include="Web References\wsDFPConsulta\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

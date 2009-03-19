@@ -32,6 +32,7 @@ namespace uninfe
 
         #endregion
 
+        #region Métodos de execução dos serviços da NFE
         /// <summary>
         /// Verificar o status do Serviço da NFe do SEFAZ em questão
         /// </summary>
@@ -575,6 +576,7 @@ namespace uninfe
                 }
             }
         }
+        #endregion
 
         /*
          * ==============================================================================
@@ -1071,6 +1073,7 @@ namespace uninfe
             return conteudo_xml;
         }
 
+        #region Métodos de definição dos objetos
         /*
          * ==============================================================================
          * UNIMAKE - SOLUÇÕES CORPORATIVAS
@@ -1770,14 +1773,15 @@ namespace uninfe
             }
             else if (this.vAmbiente == 2)
             {
-                if (this.vUF == 23) { pObjeto = new wsCEPConsultaCadastro.CadConsultaCadastro(); }
-                else if (this.vUF == 53) { pObjeto = new wsDFPConsultaCadastro.CadConsultaCadastro(); }
-                else if (this.vUF == 52) { pObjeto = new wsGOPConsultaCadastro.CadConsultaCadastro(); }
-                else if (this.vUF == 26) { pObjeto = new wsPEPConsultaCadastro.CadConsultaCadastro(); }
-                else if (this.vUF == 11) { pObjeto = new wsROPConsultaCadastro.CadConsultaCadastro(); }
-                else if (this.vUF == 35) { pObjeto = new wsSPPConsultaCadastro.CadConsultaCadastro(); }
+                if (this.vUF == 23) { pObjeto = new wsCEHConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 53) { pObjeto = new wsDFHConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 52) { pObjeto = new wsGOHConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 26) { pObjeto = new wsPEHConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 11) { pObjeto = new wsROHConsultaCadastro.CadConsultaCadastro(); }
+                else if (this.vUF == 35) { pObjeto = new wsSPHConsultaCadastro.CadConsultaCadastro(); }
             }
         }
+        #endregion
 
         /// <summary>
         /// Extrai somente o nome do arquivo de uma string; para ser utilizado na situação desejada. Veja os exemplos na documentação do código.

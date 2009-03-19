@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace uninfe.wsDFHStatusServico {
+namespace uninfe.wsDFHConsultaCadastro {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -26,16 +26,16 @@ namespace uninfe.wsDFHStatusServico {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="NfeStatusServicoSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico")]
-    public partial class NfeStatusServico : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="CadConsultaCadastroSoap", Namespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaCadastro")]
+    public partial class CadConsultaCadastro : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback nfeStatusServicoNFOperationCompleted;
+        private System.Threading.SendOrPostCallback consultaCadastroOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public NfeStatusServico() {
-            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsDFHStatusServico_NfeStatusServico;
+        public CadConsultaCadastro() {
+            this.Url = global::uninfe.Properties.Settings.Default.uninfe_wsDFHConsultaCadastro_CadConsultaCadastro;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,36 +70,36 @@ namespace uninfe.wsDFHStatusServico {
         }
         
         /// <remarks/>
-        public event nfeStatusServicoNFCompletedEventHandler nfeStatusServicoNFCompleted;
+        public event consultaCadastroCompletedEventHandler consultaCadastroCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/nfeStatusServicoNF", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string nfeStatusServicoNF(string nfeCabecMsg, string nfeDadosMsg) {
-            object[] results = this.Invoke("nfeStatusServicoNF", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaCadastro/consultaCadastro", RequestNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaCadastro", ResponseNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsultaCadastro", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string consultaCadastro(string nfeCabecMsg, string nfeDadosMsg) {
+            object[] results = this.Invoke("consultaCadastro", new object[] {
                         nfeCabecMsg,
                         nfeDadosMsg});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void nfeStatusServicoNFAsync(string nfeCabecMsg, string nfeDadosMsg) {
-            this.nfeStatusServicoNFAsync(nfeCabecMsg, nfeDadosMsg, null);
+        public void consultaCadastroAsync(string nfeCabecMsg, string nfeDadosMsg) {
+            this.consultaCadastroAsync(nfeCabecMsg, nfeDadosMsg, null);
         }
         
         /// <remarks/>
-        public void nfeStatusServicoNFAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
-            if ((this.nfeStatusServicoNFOperationCompleted == null)) {
-                this.nfeStatusServicoNFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnfeStatusServicoNFOperationCompleted);
+        public void consultaCadastroAsync(string nfeCabecMsg, string nfeDadosMsg, object userState) {
+            if ((this.consultaCadastroOperationCompleted == null)) {
+                this.consultaCadastroOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaCadastroOperationCompleted);
             }
-            this.InvokeAsync("nfeStatusServicoNF", new object[] {
+            this.InvokeAsync("consultaCadastro", new object[] {
                         nfeCabecMsg,
-                        nfeDadosMsg}, this.nfeStatusServicoNFOperationCompleted, userState);
+                        nfeDadosMsg}, this.consultaCadastroOperationCompleted, userState);
         }
         
-        private void OnnfeStatusServicoNFOperationCompleted(object arg) {
-            if ((this.nfeStatusServicoNFCompleted != null)) {
+        private void OnconsultaCadastroOperationCompleted(object arg) {
+            if ((this.consultaCadastroCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.nfeStatusServicoNFCompleted(this, new nfeStatusServicoNFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.consultaCadastroCompleted(this, new consultaCadastroCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -124,17 +124,17 @@ namespace uninfe.wsDFHStatusServico {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void nfeStatusServicoNFCompletedEventHandler(object sender, nfeStatusServicoNFCompletedEventArgs e);
+    public delegate void consultaCadastroCompletedEventHandler(object sender, consultaCadastroCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class nfeStatusServicoNFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class consultaCadastroCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal nfeStatusServicoNFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal consultaCadastroCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -1355,66 +1355,6 @@ namespace uninfe.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRecepcao")]
-        public string uninfe_wsDFHRecepcao_NfeRecepcao {
-            get {
-                return ((string)(this["uninfe_wsDFHRecepcao_NfeRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeRetRecepcao")]
-        public string uninfe_wsDFHRetRecepcao_NfeRetRecepcao {
-            get {
-                return ((string)(this["uninfe_wsDFHRetRecepcao_NfeRetRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceCancelamento.asmx")]
-        public string uninfe_wsDFHCancelamento_NfeCancelamento {
-            get {
-                return ((string)(this["uninfe_wsDFHCancelamento_NfeCancelamento"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeInutilizacao")]
-        public string uninfe_wsDFHInutilizacao_NfeInutilizacao {
-            get {
-                return ((string)(this["uninfe_wsDFHInutilizacao_NfeInutilizacao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeConsulta")]
-        public string uninfe_wsDFHConsulta_NfeConsulta {
-            get {
-                return ((string)(this["uninfe_wsDFHConsulta_NfeConsulta"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/services/NfeStatusServico")]
-        public string uninfe_wsDFHStatusServico_NfeStatusServico {
-            get {
-                return ((string)(this["uninfe_wsDFHStatusServico_NfeStatusServico"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://hom.nfe.fazenda.gov.br/SCAN/NfeRecepcao/NfeRecepcao.asmx")]
         public string uninfe_wsSCANRecepcao_NfeRecepcao {
             get {
@@ -2016,16 +1956,6 @@ namespace uninfe.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.fazenda.df.gov.br/nfe/services/CadConsultaCadastro")]
-        public string uninfe_wsDFPConsultaCadastro_CadConsultaCadastro {
-            get {
-                return ((string)(this["uninfe_wsDFPConsultaCadastro_CadConsultaCadastro"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sefaz.go.gov.br/nfe/services/CadConsultaCadastro")]
         public string uninfe_wsGOPConsultaCadastro_CadConsultaCadastro {
             get {
@@ -2080,6 +2010,86 @@ namespace uninfe.Properties {
         public string uninfe_wsCEPConsultaCadastro_CadConsultaCadastro {
             get {
                 return ((string)(this["uninfe_wsCEPConsultaCadastro_CadConsultaCadastro"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsulta.asmx")]
+        public string uninfe_wsDFHConsulta_NfeConsulta {
+            get {
+                return ((string)(this["uninfe_wsDFHConsulta_NfeConsulta"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceCancelamento.asmx")]
+        public string uninfe_wsDFHCancelamento_NfeCancelamento {
+            get {
+                return ((string)(this["uninfe_wsDFHCancelamento_NfeCancelamento"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx")]
+        public string uninfe_wsDFHConsultaCadastro_CadConsultaCadastro {
+            get {
+                return ((string)(this["uninfe_wsDFHConsultaCadastro_CadConsultaCadastro"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceInutilizacao.asmx")]
+        public string uninfe_wsDFHInutilizacao_NfeInutilizacao {
+            get {
+                return ((string)(this["uninfe_wsDFHInutilizacao_NfeInutilizacao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRecepcao.asmx")]
+        public string uninfe_wsDFHRecepcao_NfeRecepcao {
+            get {
+                return ((string)(this["uninfe_wsDFHRecepcao_NfeRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceRetRecepcao.asmx")]
+        public string uninfe_wsDFHRetRecepcao_NfeRetRecepcao {
+            get {
+                return ((string)(this["uninfe_wsDFHRetRecepcao_NfeRetRecepcao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.nfe.fazenda.df.gov.br/nfe/ServiceStatus.asmx")]
+        public string uninfe_wsDFHStatusServico_NfeStatusServico {
+            get {
+                return ((string)(this["uninfe_wsDFHStatusServico_NfeStatusServico"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dec.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx")]
+        public string uninfe_wsDFPConsultaCadastro_CadConsultaCadastro {
+            get {
+                return ((string)(this["uninfe_wsDFPConsultaCadastro_CadConsultaCadastro"]));
             }
         }
     }
