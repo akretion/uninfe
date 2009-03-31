@@ -29,7 +29,7 @@ namespace uninfe
             arrUF.Add(new DropDownListClass("BA", 29));
             arrUF.Add(new DropDownListClass("CE", 23));
             arrUF.Add(new DropDownListClass("DF", 53));
-//          arrUF.Add(new DropDownListClass("ES", 32));
+            arrUF.Add(new DropDownListClass("ES", 32));
             arrUF.Add(new DropDownListClass("GO", 52));
             arrUF.Add(new DropDownListClass("MA", 21));
             arrUF.Add(new DropDownListClass("MG", 31));

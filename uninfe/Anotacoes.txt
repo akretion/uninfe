@@ -3,7 +3,6 @@
 	Bahia - BA
 	Ceará - CE
 	Distrito Federal - DF
-	Espirito Santo - ES		(Não foi incluido ainda no UniNFE)
 	Goias - GO
 	Minas Gerais - MG
 	Mato Grosso do Sul - MS
@@ -19,6 +18,7 @@ Lista dos Estados que utilizam os WebServices do Ambiente Virtual Nacional
     Pará - PA
     Piauí - PI
     Rio Grande do Norte - RN
+	Espirito Santo - ES		
 
 Lista dos Estados que utilizam os WebServices do Ambiente Virtual do Rio Grande do Sul  
 	Acré - AC
