@@ -10,10 +10,18 @@ namespace uninfe
     {
         public int Retorno { get; private set; }
         public string RetornoString { get; private set; }
-        public int nRetornoTipoArq { get ; private set; }
-        public string cRetornoTipoArq { get ; private set; }
-        public string cArquivoSchema { get; private set; }              
-        
+        public int nRetornoTipoArq { get; private set; }
+        public string cRetornoTipoArq { get; private set; }
+        public string cArquivoSchema { get; private set; }
+        /// <summary>
+        /// Pasta dos schemas para validação do XML
+        /// </summary>
+        private string PastaSchema = UniNfeInfClass.PastaSchemas();
+        /// <summary>
+        /// Tag que deve ser assinada no XML, se o conteúdo estiver em branco é por que o XML não deve ser assinado
+        /// </summary>
+        public string TagAssinar { get; private set; }
+
         private string cErro;
 
         /*
@@ -66,9 +74,9 @@ namespace uninfe
          * ==============================================================================         
          */
         public void ValidarXML(string cRotaArqXML, string cRotaArqSchema)
-        {
+        {            
             bool lArqXML = File.Exists(cRotaArqXML);
-            bool lArqXSD = File.Exists(cRotaArqSchema);
+            bool lArqXSD = File.Exists(this.PastaSchema + "\\" + cRotaArqSchema);
 
             if (lArqXML && lArqXSD)
             {
@@ -78,7 +86,7 @@ namespace uninfe
 
                 // Criar um coleção de schema, adicionar o XSD para ela
                 XmlSchemaCollection schemaCollection = new XmlSchemaCollection();
-                schemaCollection.Add("http://www.portalfiscal.inf.br/nfe", cRotaArqSchema);
+                schemaCollection.Add("http://www.portalfiscal.inf.br/nfe", this.PastaSchema + "\\" + cRotaArqSchema);
 
                 // Adicionar a coleção de schema para o XmlValidatingReader
                 reader.Schemas.Add(schemaCollection);
@@ -106,6 +114,8 @@ namespace uninfe
                 {
                     this.Retorno = 1;
                     this.RetornoString = "Início da validação...\r\n\r\n";
+                    this.RetornoString += "Arquivo XML: " + cRotaArqXML + "\r\n";
+                    this.RetornoString += "Arquivo SCHEMA: " + this.PastaSchema + "\\" + cRotaArqSchema + "\r\n\r\n";
                     this.RetornoString += this.cErro;
                     this.RetornoString += "\r\n...Final da validação";
                 }
@@ -127,7 +137,7 @@ namespace uninfe
 
         private void reader_ValidationEventHandler(object sender, ValidationEventArgs e)
         {
-            this.cErro = "Linha: "+e.Exception.LineNumber+" Coluna: "+e.Exception.LinePosition+" Erro: "+e.Exception.Message+"\r\n";
+            this.cErro = "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
         }
 
         /*
@@ -181,76 +191,120 @@ namespace uninfe
          * 
          * ==============================================================================         
          */
-        public void TipoArquivoXML( string cRotaArqXML )
-        {          
+        public void TipoArquivoXML(string cRotaArqXML)
+        {
             this.nRetornoTipoArq = 0;
-            this.cRetornoTipoArq = "";
-            this.cArquivoSchema = "";
-            
+            this.cRetornoTipoArq = string.Empty;
+            this.cArquivoSchema = string.Empty;
+            this.TagAssinar = string.Empty;
+
             if (File.Exists(cRotaArqXML))
             {
                 //Carregar os dados do arquivo XML de configurações do UniNfe
-                XmlTextReader oLerXml = new XmlTextReader(cRotaArqXML);
+                XmlTextReader oLerXml = null;
 
-                while (oLerXml.Read())
+                try
                 {
-                    if (oLerXml.NodeType == XmlNodeType.Element)
+                    oLerXml = new XmlTextReader(cRotaArqXML);
+
+                    while (oLerXml.Read())
                     {
-                        if (oLerXml.Name == "NFe")
+                        if (oLerXml.NodeType == XmlNodeType.Element)
                         {
-                            this.nRetornoTipoArq = 1;
-                            this.cRetornoTipoArq = "XML de Nota Fiscal Eletrônica";
-                            this.cArquivoSchema = "nfe_v1.10.xsd";
-                        }
-                        else if (oLerXml.Name == "enviNFe")
-                        {
-                            this.nRetornoTipoArq = 2;
-                            this.cRetornoTipoArq = "XML de Envio de Lote de Notas Fiscais Eletrônicas";
-                            this.cArquivoSchema = "enviNFe_v1.10.xsd";
-                        }
-                        else if (oLerXml.Name == "cancNFe")
-                        {
-                            this.nRetornoTipoArq = 3;
-                            this.cRetornoTipoArq = "XML de Cancelamento de Nota Fiscal Eletrônica";
-                            this.cArquivoSchema = "cancNFe_v1.07.xsd";
-                        }
-                        else if (oLerXml.Name == "inutNFe")
-                        {
-                            this.nRetornoTipoArq = 4;
-                            this.cRetornoTipoArq = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas";
-                            this.cArquivoSchema = "inutNFe_v1.07.xsd";
-                        }
-                        else if (oLerXml.Name == "consSitNFe")
-                        {
-                            this.nRetornoTipoArq = 5;
-                            this.cRetornoTipoArq = "XML de Consulta da Situação da Nota Fiscal Eletrônica";
-                            this.cArquivoSchema = "consSitNFe_v1.07.xsd";
-                        }
-                        else if (oLerXml.Name == "consReciNFe")
-                        {
-                            this.nRetornoTipoArq = 6;
-                            this.cRetornoTipoArq = "XML de Consulta do Recibo do Lote de Notas Fiscais Eletrônicas";
-                            this.cArquivoSchema = "consReciNfe_v1.10.xsd";
-                        }
-                        else if (oLerXml.Name == "consStatServ")
-                        {
-                            this.nRetornoTipoArq = 7;
-                            this.cRetornoTipoArq = "XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica";
-                            this.cArquivoSchema = "consStatServ_v1.07.xsd";
-                        }
-                        else if (oLerXml.Name == "ConsCad")
-                        {
-                            this.nRetornoTipoArq = 8;
-                            this.cRetornoTipoArq = "XML de Consulta do Cadastro do Contribuinte";
-                            this.cArquivoSchema = "consCad_v1.01.xsd";
-                        }
-                        if (this.nRetornoTipoArq != 0) //Arquivo já foi identificado
-                        {
-                            break;
+                            switch (oLerXml.Name)
+                            {
+                                case "nfeProc":
+                                    this.nRetornoTipoArq = 9;
+                                    this.cRetornoTipoArq = "XML de distribuição da NFe com protocolo de autorização anexado";
+                                    this.cArquivoSchema = "procNFe_v1.10.xsd";
+                                    break;
+
+                                case "procCancNFe":
+                                    this.nRetornoTipoArq = 10;
+                                    this.cRetornoTipoArq = "XML de distribuição do Cancelamento da NFe com protocolo de autorização anexado";
+                                    this.cArquivoSchema = "procCancNFe_v1.07.xsd";
+                                    break;
+
+                                case "procInutNFe":
+                                    this.nRetornoTipoArq = 11;
+                                    this.cRetornoTipoArq = "XML de distribuição de Inutilização de Números de NFe com protocolo de autorização anexado";
+                                    this.cArquivoSchema = "procInutNFe_v1.07.xsd";
+                                    break;
+
+                                case "NFe":
+                                    this.nRetornoTipoArq = 1;
+                                    this.cRetornoTipoArq = "XML de Nota Fiscal Eletrônica";
+                                    this.cArquivoSchema = "nfe_v1.10.xsd";
+                                    this.TagAssinar = "infNFe";
+                                    break;
+
+                                case "enviNFe":
+                                    this.nRetornoTipoArq = 2;
+                                    this.cRetornoTipoArq = "XML de Envio de Lote de Notas Fiscais Eletrônicas";
+                                    this.cArquivoSchema = "enviNFe_v1.10.xsd";
+                                    break;
+
+                                case "cancNFe":
+                                    this.nRetornoTipoArq = 3;
+                                    this.cRetornoTipoArq = "XML de Cancelamento de Nota Fiscal Eletrônica";
+                                    this.cArquivoSchema = "cancNFe_v1.07.xsd";
+                                    this.TagAssinar = "infCanc";
+                                    break;
+
+                                case "inutNFe":
+                                    this.nRetornoTipoArq = 4;
+                                    this.cRetornoTipoArq = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas";
+                                    this.cArquivoSchema = "inutNFe_v1.07.xsd";
+                                    this.TagAssinar = "infInut";
+                                    break;
+
+                                case "consSitNFe":
+                                    this.nRetornoTipoArq = 5;
+                                    this.cRetornoTipoArq = "XML de Consulta da Situação da Nota Fiscal Eletrônica";
+                                    this.cArquivoSchema = "consSitNFe_v1.07.xsd";
+                                    break;
+
+                                case "consReciNFe":
+                                    this.nRetornoTipoArq = 6;
+                                    this.cRetornoTipoArq = "XML de Consulta do Recibo do Lote de Notas Fiscais Eletrônicas";
+                                    this.cArquivoSchema = "consReciNfe_v1.10.xsd";
+                                    break;
+
+                                case "consStatServ":
+                                    this.nRetornoTipoArq = 7;
+                                    this.cRetornoTipoArq = "XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica";
+                                    this.cArquivoSchema = "consStatServ_v1.07.xsd";
+                                    break;
+
+                                case "ConsCad":
+                                    this.nRetornoTipoArq = 8;
+                                    this.cRetornoTipoArq = "XML de Consulta do Cadastro do Contribuinte";
+                                    this.cArquivoSchema = "consCad_v1.01.xsd";
+                                    break;
+                            }
+
+                            if (this.nRetornoTipoArq != 0) //Arquivo já foi identificado
+                            {
+                                break;
+                            }
                         }
                     }
                 }
-                oLerXml.Close();
+                catch (Exception ex)
+                {
+                    this.nRetornoTipoArq = 102;
+                    this.cRetornoTipoArq = ex.Message;
+                }
+                finally
+                {
+                    if (oLerXml != null)
+                    {
+                        if (oLerXml.ReadState != ReadState.Closed)
+                        {
+                            oLerXml.Close();
+                        }
+                    }
+                }
             }
             else
             {

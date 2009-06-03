@@ -15,9 +15,7 @@ namespace uninfe
         {
             InitializeComponent();
 
-            UniNfeInfClass oUniNfeInf = new UniNfeInfClass();
-
-            this.textBox_versao.Text = oUniNfeInf.Versao();
+            this.textBox_versao.Text = UniNfeInfClass.Versao();
 
             //Atualizar o texto da licença de uso
             this.textBox_licenca.Text  = "GNU General Public License\r\n\r\n";
@@ -43,6 +41,25 @@ namespace uninfe
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("mailto:nfe@unimake.com.br");
+        }
+
+        private void btnManualUniNFe_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(Application.StartupPath + "\\UniNFe.pdf"))
+                {
+                    System.Diagnostics.Process.Start(Application.StartupPath + "\\UniNFe.pdf");
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível localizar o arquivo de manual do UniNFe.","Erro",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Erro",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 /*
         private static void AssemblyPropriedades( string product, ref string version) 

@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Reflection;
 using System.IO;
+using System.Windows.Forms;
 
 namespace uninfe
 {
@@ -18,7 +19,7 @@ namespace uninfe
         /// <returns>string contendo a versão do aplicativo UniNfe</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>29/01/2009</date>
-        public string Versao()
+        public static string Versao()
         {
             //Montar a versão do programa
             Assembly objAssembly = Assembly.GetExecutingAssembly();
@@ -39,6 +40,25 @@ namespace uninfe
 
             return versao;
         }
+
+        /// <summary>
+        /// Retorna a pasta do executável UniNFe
+        /// </summary>
+        /// <returns>Retorna a pasta onde está o executável</returns>
+        public static string PastaExecutavel()
+        {
+            return System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+        }
+
+        /// <summary>
+        /// Retorna a pasta dos schemas para validar os XML´s
+        /// </summary>
+        /// <returns></returns>
+        public static string PastaSchemas()
+        {
+            return PastaExecutavel() + "\\schemas";
+        }
+
 
         /// <summary>
         /// Grava XML com algumas informações do aplicativo UniNFe, 
@@ -62,7 +82,7 @@ namespace uninfe
             ConfigUniNFe oConfig = new ConfigUniNFe();
             oConfig.CarregarDados();
 
-            oDigCert.PrepInfCertificado( oConfig.oCertificado );
+            oDigCert.PrepInfCertificado(oConfig.oCertificado);
 
             if (oDigCert.lLocalizouCertificado == true)
             {
@@ -80,8 +100,10 @@ namespace uninfe
             try
             {
                 XmlWriterSettings oSettings = new XmlWriterSettings();
+                UTF8Encoding c = new UTF8Encoding(false);
 
                 //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+                oSettings.Encoding = c;
                 oSettings.Indent = true;
                 oSettings.IndentChars = "";
                 oSettings.NewLineOnAttributes = false;
@@ -105,9 +127,14 @@ namespace uninfe
 
                 //Dados gerais do UniNFe
                 oXmlGravar.WriteStartElement("DadosUniNfe");
-                oXmlGravar.WriteElementString("versao", this.Versao());
+                oXmlGravar.WriteElementString("versao", UniNfeInfClass.Versao());
                 oXmlGravar.WriteElementString("dUltModif", File.GetLastWriteTimeUtc("uninfe.exe").ToString("dd/MM/yyyy hh:mm:ss"));
                 oXmlGravar.WriteEndElement(); //DadosUniNfe
+
+                //Dados das configurações do uninfe
+                oXmlGravar.WriteStartElement("nfe_configuracoes");
+                oXmlGravar.WriteElementString("PastaBackup", oConfig.cPastaBackup);
+                oXmlGravar.WriteEndElement(); //nfe_configuracoes
 
                 //Finalizar o XML
                 oXmlGravar.WriteEndElement(); //retConsInf

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSobre));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,18 +42,10 @@
             this.textBox_DataUltimaModificacao = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_versao = new System.Windows.Forms.TextBox();
+            this.btnManualUniNFe = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::uninfe.Properties.Resources.uninfe128;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.WaitOnLoad = true;
             // 
             // label1
             // 
@@ -184,11 +175,36 @@
             this.textBox_versao.Size = new System.Drawing.Size(221, 20);
             this.textBox_versao.TabIndex = 14;
             // 
+            // btnManualUniNFe
+            // 
+            this.btnManualUniNFe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManualUniNFe.Image = global::uninfe.Properties.Resources.pdf3;
+            this.btnManualUniNFe.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnManualUniNFe.Location = new System.Drawing.Point(472, 142);
+            this.btnManualUniNFe.Name = "btnManualUniNFe";
+            this.btnManualUniNFe.Size = new System.Drawing.Size(75, 75);
+            this.btnManualUniNFe.TabIndex = 15;
+            this.btnManualUniNFe.Text = "Manual";
+            this.btnManualUniNFe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnManualUniNFe.UseVisualStyleBackColor = true;
+            this.btnManualUniNFe.Click += new System.EventHandler(this.btnManualUniNFe_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::uninfe.Properties.Resources.uninfe128;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
+            // 
             // FormSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 373);
+            this.Controls.Add(this.btnManualUniNFe);
             this.Controls.Add(this.textBox_versao);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox_DataUltimaModificacao);
@@ -203,7 +219,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormSobre";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sobre";
@@ -229,6 +247,7 @@
         private System.Windows.Forms.TextBox textBox_DataUltimaModificacao;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox_versao;
+        private System.Windows.Forms.Button btnManualUniNFe;
 
     }
 }

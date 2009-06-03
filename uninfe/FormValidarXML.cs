@@ -83,16 +83,16 @@ namespace uninfe
                 oConfig.CarregarDados();
 
                 UniAssinaturaDigitalClass oAD = new UniAssinaturaDigitalClass();
-                oAD.Assinar(cArquivo, cTagAssinar, oConfig.oCertificado);
-                if (oAD.vResultado == 0)
+                try
                 {
+                    oAD.Assinar(cArquivo, cTagAssinar, oConfig.oCertificado);
                     lValidar = true;
                 }
-                else
+                catch (Exception ex)
                 {
                     lValidar = false;
                     this.textBox_tipoarq.Text = oValidarXML.cRetornoTipoArq;
-                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + oAD.vResultado.ToString() + " " + oAD.vResultadoString;
+                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + ex.Message;                    
                 }
             }
             else
@@ -103,7 +103,7 @@ namespace uninfe
             if (lValidar == true)
             {
                 //Validar o arquivo
-                if (oValidarXML.nRetornoTipoArq >= 1 && oValidarXML.nRetornoTipoArq <= 8)
+                if (oValidarXML.nRetornoTipoArq >= 1 && oValidarXML.nRetornoTipoArq <= 11)
                 {
                     oValidarXML.ValidarXML(cArquivo, oValidarXML.cArquivoSchema);
                     if (oValidarXML.Retorno == 0)
@@ -123,6 +123,12 @@ namespace uninfe
             }
 
             oArqDestino.Delete();
+        }
+
+        private void textBox_arqxml_TextChanged(object sender, EventArgs e)
+        {
+            oValidarXML.TipoArquivoXML(this.textBox_arqxml.Text);
+            this.textBox_tipoarq.Text = oValidarXML.cRetornoTipoArq;
         }
     }
 }

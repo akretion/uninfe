@@ -57,6 +57,12 @@
             this.comboBox_tpEmis = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button_SelectPastaValidar = new System.Windows.Forms.Button();
+            this.tbPastaValidar = new System.Windows.Forms.TextBox();
+            this.btnSelectPastaLote = new System.Windows.Forms.Button();
+            this.tbPastaLote = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.button_SelectPastaBackup = new System.Windows.Forms.Button();
             this.textBox_PastaBackup = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -67,6 +73,8 @@
             this.folderBrowserDialog_xmlenviado = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_xmlerro = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_backup = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog_xmlenviolote = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog_Validar = new System.Windows.Forms.FolderBrowserDialog();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -82,25 +90,26 @@
             this.textBox_PastaEnvioXML.Location = new System.Drawing.Point(6, 25);
             this.textBox_PastaEnvioXML.Name = "textBox_PastaEnvioXML";
             this.textBox_PastaEnvioXML.Size = new System.Drawing.Size(542, 20);
-            this.textBox_PastaEnvioXML.TabIndex = 0;
+            this.textBox_PastaEnvioXML.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 13);
+            this.label1.Size = new System.Drawing.Size(486, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Pasta de envio dos arquivos XML:";
+            this.label1.Text = "Pasta onde será gravado os arquivos XML´s a serem enviados individualmente para o" +
+                "s WebServices:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 56);
+            this.label2.Location = new System.Drawing.Point(3, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 13);
+            this.label2.Size = new System.Drawing.Size(357, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Pasta de retorno dos arquivos XML:";
+            this.label2.Text = "Pasta onde será gravado os arquivos XML´s de retorno dos WebServices:";
             // 
             // label3
             // 
@@ -133,7 +142,7 @@
             // 
             this.textBox_PastaRetornoXML.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox_PastaRetornoXML.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.textBox_PastaRetornoXML.Location = new System.Drawing.Point(6, 72);
+            this.textBox_PastaRetornoXML.Location = new System.Drawing.Point(6, 115);
             this.textBox_PastaRetornoXML.Name = "textBox_PastaRetornoXML";
             this.textBox_PastaRetornoXML.Size = new System.Drawing.Size(542, 20);
             this.textBox_PastaRetornoXML.TabIndex = 10;
@@ -142,6 +151,7 @@
             // 
             this.comboBox_UF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_UF.FormattingEnabled = true;
+            this.comboBox_UF.ItemHeight = 13;
             this.comboBox_UF.Location = new System.Drawing.Point(6, 69);
             this.comboBox_UF.Name = "comboBox_UF";
             this.comboBox_UF.Size = new System.Drawing.Size(121, 21);
@@ -151,6 +161,7 @@
             // 
             this.comboBox_Ambiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Ambiente.FormattingEnabled = true;
+            this.comboBox_Ambiente.ItemHeight = 13;
             this.comboBox_Ambiente.Location = new System.Drawing.Point(6, 116);
             this.comboBox_Ambiente.Name = "comboBox_Ambiente";
             this.comboBox_Ambiente.Size = new System.Drawing.Size(121, 21);
@@ -165,7 +176,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(612, 39);
-            this.toolStrip1.TabIndex = 9;
+            this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButton_salvar
@@ -205,8 +216,8 @@
             this.textBox_dadoscertificado.Name = "textBox_dadoscertificado";
             this.textBox_dadoscertificado.ReadOnly = true;
             this.textBox_dadoscertificado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_dadoscertificado.Size = new System.Drawing.Size(516, 237);
-            this.textBox_dadoscertificado.TabIndex = 12;
+            this.textBox_dadoscertificado.Size = new System.Drawing.Size(516, 257);
+            this.textBox_dadoscertificado.TabIndex = 18;
             // 
             // button_selecionar_certificado
             // 
@@ -214,14 +225,14 @@
             this.button_selecionar_certificado.Location = new System.Drawing.Point(525, 22);
             this.button_selecionar_certificado.Name = "button_selecionar_certificado";
             this.button_selecionar_certificado.Size = new System.Drawing.Size(60, 50);
-            this.button_selecionar_certificado.TabIndex = 13;
+            this.button_selecionar_certificado.TabIndex = 19;
             this.button_selecionar_certificado.UseVisualStyleBackColor = true;
             this.button_selecionar_certificado.Click += new System.EventHandler(this.button_selecionar_certificado_Click);
             // 
             // button_SelectPastaXmlRetorno
             // 
             this.button_SelectPastaXmlRetorno.Image = global::uninfe.Properties.Resources.folder_orange_open;
-            this.button_SelectPastaXmlRetorno.Location = new System.Drawing.Point(554, 70);
+            this.button_SelectPastaXmlRetorno.Location = new System.Drawing.Point(554, 113);
             this.button_SelectPastaXmlRetorno.Name = "button_SelectPastaXmlRetorno";
             this.button_SelectPastaXmlRetorno.Size = new System.Drawing.Size(27, 23);
             this.button_SelectPastaXmlRetorno.TabIndex = 11;
@@ -234,7 +245,7 @@
             this.button_selectxmlenvio.Location = new System.Drawing.Point(554, 23);
             this.button_selectxmlenvio.Name = "button_selectxmlenvio";
             this.button_selectxmlenvio.Size = new System.Drawing.Size(27, 23);
-            this.button_selectxmlenvio.TabIndex = 6;
+            this.button_selectxmlenvio.TabIndex = 7;
             this.button_selectxmlenvio.UseVisualStyleBackColor = true;
             this.button_selectxmlenvio.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
             // 
@@ -242,27 +253,27 @@
             // 
             this.textBox_PastaEnviados.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox_PastaEnviados.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.textBox_PastaEnviados.Location = new System.Drawing.Point(6, 118);
+            this.textBox_PastaEnviados.Location = new System.Drawing.Point(6, 161);
             this.textBox_PastaEnviados.Name = "textBox_PastaEnviados";
             this.textBox_PastaEnviados.Size = new System.Drawing.Size(542, 20);
-            this.textBox_PastaEnviados.TabIndex = 15;
+            this.textBox_PastaEnviados.TabIndex = 12;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 102);
+            this.label6.Location = new System.Drawing.Point(3, 145);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(262, 13);
+            this.label6.Size = new System.Drawing.Size(265, 13);
             this.label6.TabIndex = 16;
-            this.label6.Text = "Pasta para arquivamento dos arquivos XML enviados:";
+            this.label6.Text = "Pasta onde será gravado os arquivos XML´s enviados:";
             // 
             // button_SelectPastaXmlEnviado
             // 
             this.button_SelectPastaXmlEnviado.Image = global::uninfe.Properties.Resources.folder_orange_open;
-            this.button_SelectPastaXmlEnviado.Location = new System.Drawing.Point(554, 116);
+            this.button_SelectPastaXmlEnviado.Location = new System.Drawing.Point(554, 159);
             this.button_SelectPastaXmlEnviado.Name = "button_SelectPastaXmlEnviado";
             this.button_SelectPastaXmlEnviado.Size = new System.Drawing.Size(27, 23);
-            this.button_SelectPastaXmlEnviado.TabIndex = 18;
+            this.button_SelectPastaXmlEnviado.TabIndex = 13;
             this.button_SelectPastaXmlEnviado.UseVisualStyleBackColor = true;
             this.button_SelectPastaXmlEnviado.Click += new System.EventHandler(this.button_SelectPastaXmlEnviado_Click);
             // 
@@ -274,7 +285,7 @@
             this.tabControl1.Location = new System.Drawing.Point(10, 42);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(596, 288);
+            this.tabControl1.Size = new System.Drawing.Size(596, 341);
             this.tabControl1.TabIndex = 20;
             // 
             // tabPage1
@@ -290,7 +301,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(588, 262);
+            this.tabPage1.Size = new System.Drawing.Size(588, 315);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -301,7 +312,7 @@
             this.textBox_Empresa.MaxLength = 50;
             this.textBox_Empresa.Name = "textBox_Empresa";
             this.textBox_Empresa.Size = new System.Drawing.Size(557, 20);
-            this.textBox_Empresa.TabIndex = 7;
+            this.textBox_Empresa.TabIndex = 2;
             // 
             // label9
             // 
@@ -316,6 +327,7 @@
             // 
             this.comboBox_tpEmis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_tpEmis.FormattingEnabled = true;
+            this.comboBox_tpEmis.ItemHeight = 13;
             this.comboBox_tpEmis.Location = new System.Drawing.Point(6, 164);
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
             this.comboBox_tpEmis.Size = new System.Drawing.Size(284, 21);
@@ -332,6 +344,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.button_SelectPastaValidar);
+            this.tabPage2.Controls.Add(this.tbPastaValidar);
+            this.tabPage2.Controls.Add(this.btnSelectPastaLote);
+            this.tabPage2.Controls.Add(this.tbPastaLote);
+            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.button_SelectPastaBackup);
             this.tabPage2.Controls.Add(this.textBox_PastaBackup);
             this.tabPage2.Controls.Add(this.label10);
@@ -350,18 +368,75 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(588, 262);
+            this.tabPage2.Size = new System.Drawing.Size(588, 315);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pastas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 275);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(350, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Pasta onde será gravado os arquivos XML´s a serem somente validados:";
+            // 
+            // button_SelectPastaValidar
+            // 
+            this.button_SelectPastaValidar.Image = global::uninfe.Properties.Resources.folder_orange_open;
+            this.button_SelectPastaValidar.Location = new System.Drawing.Point(555, 290);
+            this.button_SelectPastaValidar.Name = "button_SelectPastaValidar";
+            this.button_SelectPastaValidar.Size = new System.Drawing.Size(27, 23);
+            this.button_SelectPastaValidar.TabIndex = 27;
+            this.button_SelectPastaValidar.UseVisualStyleBackColor = true;
+            this.button_SelectPastaValidar.Click += new System.EventHandler(this.button_SelectPastaValidar_Click);
+            // 
+            // tbPastaValidar
+            // 
+            this.tbPastaValidar.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbPastaValidar.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbPastaValidar.Location = new System.Drawing.Point(7, 290);
+            this.tbPastaValidar.Name = "tbPastaValidar";
+            this.tbPastaValidar.Size = new System.Drawing.Size(542, 20);
+            this.tbPastaValidar.TabIndex = 26;
+            // 
+            // btnSelectPastaLote
+            // 
+            this.btnSelectPastaLote.Image = global::uninfe.Properties.Resources.folder_orange_open;
+            this.btnSelectPastaLote.Location = new System.Drawing.Point(554, 69);
+            this.btnSelectPastaLote.Name = "btnSelectPastaLote";
+            this.btnSelectPastaLote.Size = new System.Drawing.Size(27, 23);
+            this.btnSelectPastaLote.TabIndex = 9;
+            this.btnSelectPastaLote.UseVisualStyleBackColor = true;
+            this.btnSelectPastaLote.Click += new System.EventHandler(this.btnSelectPastaLote_Click);
+            // 
+            // tbPastaLote
+            // 
+            this.tbPastaLote.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbPastaLote.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbPastaLote.Location = new System.Drawing.Point(6, 69);
+            this.tbPastaLote.Name = "tbPastaLote";
+            this.tbPastaLote.Size = new System.Drawing.Size(542, 20);
+            this.tbPastaLote.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 52);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(488, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Pasta onde será gravado os arquivos XML´s de NF-e a serem enviadas em lote para o" +
+                "s WebServices:";
+            // 
             // button_SelectPastaBackup
             // 
             this.button_SelectPastaBackup.Image = global::uninfe.Properties.Resources.folder_orange_open;
-            this.button_SelectPastaBackup.Location = new System.Drawing.Point(554, 213);
+            this.button_SelectPastaBackup.Location = new System.Drawing.Point(554, 250);
             this.button_SelectPastaBackup.Name = "button_SelectPastaBackup";
             this.button_SelectPastaBackup.Size = new System.Drawing.Size(27, 23);
-            this.button_SelectPastaBackup.TabIndex = 24;
+            this.button_SelectPastaBackup.TabIndex = 17;
             this.button_SelectPastaBackup.UseVisualStyleBackColor = true;
             this.button_SelectPastaBackup.Click += new System.EventHandler(this.button_SelectPastaBackup_Click);
             // 
@@ -369,27 +444,27 @@
             // 
             this.textBox_PastaBackup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox_PastaBackup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.textBox_PastaBackup.Location = new System.Drawing.Point(6, 213);
+            this.textBox_PastaBackup.Location = new System.Drawing.Point(6, 250);
             this.textBox_PastaBackup.Name = "textBox_PastaBackup";
             this.textBox_PastaBackup.Size = new System.Drawing.Size(542, 20);
-            this.textBox_PastaBackup.TabIndex = 23;
+            this.textBox_PastaBackup.TabIndex = 16;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 197);
+            this.label10.Location = new System.Drawing.Point(3, 234);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(235, 13);
+            this.label10.Size = new System.Drawing.Size(200, 13);
             this.label10.TabIndex = 22;
-            this.label10.Text = "Pasta opcional para Backup dos XML enviados:";
+            this.label10.Text = "Pasta para Backup dos XML´s enviados:";
             // 
             // button_SelectPastaXmlErro
             // 
             this.button_SelectPastaXmlErro.Image = global::uninfe.Properties.Resources.folder_orange_open;
-            this.button_SelectPastaXmlErro.Location = new System.Drawing.Point(554, 162);
+            this.button_SelectPastaXmlErro.Location = new System.Drawing.Point(554, 205);
             this.button_SelectPastaXmlErro.Name = "button_SelectPastaXmlErro";
             this.button_SelectPastaXmlErro.Size = new System.Drawing.Size(27, 23);
-            this.button_SelectPastaXmlErro.TabIndex = 21;
+            this.button_SelectPastaXmlErro.TabIndex = 15;
             this.button_SelectPastaXmlErro.UseVisualStyleBackColor = true;
             this.button_SelectPastaXmlErro.Click += new System.EventHandler(this.button_SelectPastaXmlErro_Click);
             // 
@@ -397,20 +472,20 @@
             // 
             this.textBox_PastaXmlErro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox_PastaXmlErro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.textBox_PastaXmlErro.Location = new System.Drawing.Point(6, 164);
+            this.textBox_PastaXmlErro.Location = new System.Drawing.Point(6, 207);
             this.textBox_PastaXmlErro.Name = "textBox_PastaXmlErro";
             this.textBox_PastaXmlErro.Size = new System.Drawing.Size(542, 20);
-            this.textBox_PastaXmlErro.TabIndex = 20;
+            this.textBox_PastaXmlErro.TabIndex = 14;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 147);
+            this.label7.Location = new System.Drawing.Point(3, 190);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(437, 13);
+            this.label7.Size = new System.Drawing.Size(445, 13);
             this.label7.TabIndex = 19;
-            this.label7.Text = "Pasta para arquivamento temporário dos XML que apresentaram erro na tentativa do " +
-                "envio:";
+            this.label7.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
+                "o envio:";
             // 
             // tabPage3
             // 
@@ -419,7 +494,7 @@
             this.tabPage3.Controls.Add(this.button_selecionar_certificado);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(588, 262);
+            this.tabPage3.Size = new System.Drawing.Size(588, 315);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Certificado Digital";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -428,10 +503,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 342);
+            this.ClientSize = new System.Drawing.Size(612, 389);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormConfiguracao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configurações";
@@ -489,5 +566,13 @@
         private System.Windows.Forms.Button button_SelectPastaBackup;
         private System.Windows.Forms.TextBox textBox_PastaBackup;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_backup;
+        private System.Windows.Forms.Button btnSelectPastaLote;
+        private System.Windows.Forms.TextBox tbPastaLote;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_xmlenviolote;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button_SelectPastaValidar;
+        private System.Windows.Forms.TextBox tbPastaValidar;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_Validar;
     }
 }

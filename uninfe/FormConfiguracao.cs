@@ -12,6 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace uninfe
 {
+    #region Classe FormConfiguracao
     public partial class FormConfiguracao : Form
     {
         private X509Certificate2 oMeuCert;
@@ -19,7 +20,8 @@ namespace uninfe
         public FormConfiguracao()
         {
             InitializeComponent();
-            
+
+            #region Montar Array DropList da UF
             //Montar os itens do DropList da UF
             ArrayList arrUF = new ArrayList();
             arrUF.Add(new DropDownListClass("AC", 12));
@@ -53,7 +55,9 @@ namespace uninfe
             comboBox_UF.DataSource = arrUF;
             comboBox_UF.DisplayMember = "nome";
             comboBox_UF.ValueMember = "valor";
+            #endregion
 
+            #region Montar Array DropList do Ambiente
             //Montar os itens do DropList do Ambiente
             ArrayList arrAmb = new ArrayList();
             arrAmb.Add(new DropDownListClass("Produção", 1));
@@ -62,7 +66,9 @@ namespace uninfe
             comboBox_Ambiente.DataSource = arrAmb;
             comboBox_Ambiente.DisplayMember = "nome";
             comboBox_Ambiente.ValueMember = "valor";
+            #endregion
 
+            #region Montar Array DropList do Tipo de Emissão da NF-e
             //Montar os itens do DropList do Tipo de Emissão da NF-e
             ArrayList arrTpEmis = new ArrayList();
             ArrayList.Synchronized(arrTpEmis);
@@ -74,7 +80,9 @@ namespace uninfe
             comboBox_tpEmis.DataSource = arrTpEmis;
             comboBox_tpEmis.DisplayMember = "nome";
             comboBox_tpEmis.ValueMember = "valor";
+            #endregion
 
+            #region Carregar os dados gravados no XML das configurações
             //Carregar os dados gravados no XML das configurações
             ConfigUniNFe oCarrega = new ConfigUniNFe();
 
@@ -84,6 +92,8 @@ namespace uninfe
             this.textBox_PastaRetornoXML.Text = oCarrega.vPastaXMLRetorno;
             this.textBox_PastaEnviados.Text = oCarrega.vPastaXMLEnviado;
             this.textBox_PastaXmlErro.Text = oCarrega.vPastaXMLErro;
+            this.tbPastaLote.Text = oCarrega.cPastaXMLEmLote;
+            this.tbPastaValidar.Text = oCarrega.PastaValidar;
             this.textBox_Empresa.Text = oCarrega.cNomeEmpresa;
             this.oMeuCert = oCarrega.oCertificado;
             this.DemonstraDadosCertificado();
@@ -99,13 +109,13 @@ namespace uninfe
             //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrTpEmis.Count; i++)
-			{
+            {
                 if (((uninfe.DropDownListClass)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor == oCarrega.vTpEmis)
                 {
                     this.comboBox_tpEmis.Text = ((uninfe.DropDownListClass)(new System.Collections.ArrayList(arrTpEmis))[i]).Nome;
                     break;
                 }
-			}
+            }
 
             //Carregar o conteúdo do droplist da Unidade Federativa (UF) para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
@@ -128,8 +138,24 @@ namespace uninfe
                     break;
                 }
             }
+            #endregion
         }
 
+        #region Métodos gerais
+        #region DemonstraDadosCertificado()
+        private void DemonstraDadosCertificado()
+        {
+            if (oMeuCert != null)
+            {
+                this.textBox_dadoscertificado.Text =
+                    "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
+                    "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region Métodos de evento
         private void button_selectxmlenvio_Click(object sender, EventArgs e)
         {
             DialogResult result = this.folderBrowserDialog_xmlenvio.ShowDialog();
@@ -161,16 +187,6 @@ namespace uninfe
             }
         }
 
-        private void DemonstraDadosCertificado()
-        {
-            if (oMeuCert != null)
-            {
-                this.textBox_dadoscertificado.Text =
-                    "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
-                    "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter;
-            }
-        }
-
         private void toolStripButton_fechar_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -178,17 +194,24 @@ namespace uninfe
 
         private void toolStripButton_salvar_Click(object sender, EventArgs e)
         {
+            //Criar o XML de controle do fluxo de NFe se ainda não existir
+            FluxoNfe oFluxo = new FluxoNfe();
+            oFluxo.CriarXml();
+
+            //Salvar as configurações
             ConfigUniNFe oConfig = new ConfigUniNFe();
-            
-            oConfig.vPastaXMLEnvio = this.textBox_PastaEnvioXML.Text;
-            oConfig.vPastaXMLRetorno = this.textBox_PastaRetornoXML.Text;
-            oConfig.vPastaXMLEnviado = this.textBox_PastaEnviados.Text;
-            oConfig.vPastaXMLErro = this.textBox_PastaXmlErro.Text;
+
+            oConfig.vPastaXMLEnvio = this.textBox_PastaEnvioXML.Text.Trim();
+            oConfig.vPastaXMLRetorno = this.textBox_PastaRetornoXML.Text.Trim();
+            oConfig.vPastaXMLEnviado = this.textBox_PastaEnviados.Text.Trim();
+            oConfig.vPastaXMLErro = this.textBox_PastaXmlErro.Text.Trim();
             oConfig.vUnidadeFederativaCodigo = Convert.ToInt32(this.comboBox_UF.SelectedValue);
             oConfig.vAmbienteCodigo = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
             oConfig.vTpEmis = Convert.ToInt32(this.comboBox_tpEmis.SelectedValue);
             oConfig.cNomeEmpresa = this.textBox_Empresa.Text;
-            oConfig.cPastaBackup = this.textBox_PastaBackup.Text;
+            oConfig.cPastaBackup = this.textBox_PastaBackup.Text.Trim();
+            oConfig.cPastaXMLEmLote = this.tbPastaLote.Text.Trim();
+            oConfig.PastaValidar = this.tbPastaValidar.Text.Trim();
             if (this.oMeuCert == null)
             {
                 oConfig.vCertificado = "";
@@ -241,14 +264,39 @@ namespace uninfe
                 this.textBox_PastaBackup.Text = this.folderBrowserDialog_backup.SelectedPath;
             }
         }
-    }
 
+        private void btnSelectPastaLote_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_xmlenviolote.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.tbPastaLote.Text = this.folderBrowserDialog_xmlenviolote.SelectedPath;
+            }
+        }
+
+        private void button_SelectPastaValidar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_Validar.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.tbPastaValidar.Text = this.folderBrowserDialog_Validar.SelectedPath;
+            }
+
+        }
+        #endregion
+    }
+    #endregion
+
+    #region Classe ConfigUniNFe
     /// <summary>
     /// Classe responsável por relalizar algumas tarefas na parte de configurações do uninfe.
     /// Arquivo de configurações: UniNfeConfig.xml
     /// </summary>
     public class ConfigUniNFe
     {
+        #region Propriedades
         public string vPastaXMLEnvio { get; set; }
         public string vPastaXMLRetorno { get; set; }
         public string vPastaXMLEnviado { get; set; }
@@ -260,12 +308,20 @@ namespace uninfe
         public X509Certificate2 oCertificado { get; set; }
         public string cNomeEmpresa { get; set; }
         public string cPastaBackup { get; set; }
-
+        public string cPastaXMLEmLote { get; set; }
+        /// <summary>
+        /// Pasta onde é gravado os XML´s da NFE somente para validação
+        /// </summary>
+        public string PastaValidar { get; set; }
         /// <summary>
         /// Recebe uma mensagem de erro caso venha a ocorrer na execução do método "GravarConfig()"
         /// </summary>
         public string cErroGravarConfig { get; private set; }
+        #endregion
 
+        #region Métodos gerais
+
+        #region CarregarDados()
         /// <summary>
         /// Carrega as configurações realizadas no UniNFe gravadas no XML UniNfeConfig.xml para
         /// propriedades, para facilitar a leitura das informações necessárias para as transações da NF-e.
@@ -283,8 +339,9 @@ namespace uninfe
         /// </example>
         public void CarregarDados()
         {
-            string vArquivoConfig = "UniNfeConfig.xml";
+            string vArquivoConfig = UniNfeInfClass.PastaExecutavel() + "\\UniNfeConfig.xml";
             this.vPastaXMLEnvio = string.Empty;
+            this.cPastaXMLEmLote = string.Empty;
             this.vPastaXMLRetorno = string.Empty;
             this.vPastaXMLEnviado = string.Empty;
             this.vPastaXMLErro = string.Empty;
@@ -294,6 +351,7 @@ namespace uninfe
             this.vCertificado = string.Empty;
             this.cNomeEmpresa = string.Empty;
             this.cPastaBackup = string.Empty;
+            this.PastaValidar = string.Empty;
 
             if (File.Exists(vArquivoConfig))
             {
@@ -320,6 +378,8 @@ namespace uninfe
                                     else if (oLerXml.Name == "tpEmis") { oLerXml.Read(); this.vTpEmis = Convert.ToInt32(oLerXml.Value); }
                                     else if (oLerXml.Name == "NomeEmpresa") { oLerXml.Read(); this.cNomeEmpresa = oLerXml.Value; }
                                     else if (oLerXml.Name == "PastaBackup") { oLerXml.Read(); this.cPastaBackup = oLerXml.Value; }
+                                    else if (oLerXml.Name == "PastaXmlEmLote") { oLerXml.Read(); this.cPastaXMLEmLote = oLerXml.Value; }
+                                    else if (oLerXml.Name == "PastaValidar") { oLerXml.Read(); this.PastaValidar = oLerXml.Value; }
                                 }
                             }
                             break;
@@ -341,9 +401,29 @@ namespace uninfe
                 {
                     this.oCertificado = collection1[0];
                 }
+
+                //Criar subpasta Assinado na pasta de envio indivudual de nfe
+                if (this.vPastaXMLEnvio.Trim() != string.Empty)
+                {
+                    if (!Directory.Exists(this.vPastaXMLEnvio + UniNfeClass.strNomeSubPastaAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(this.vPastaXMLEnvio + UniNfeClass.strNomeSubPastaAssinado);
+                    }
+                }
+
+                //Criar subpasta Assinado na pasta de envio em lote de nfe
+                if (this.cPastaXMLEmLote.Trim() != string.Empty)
+                {
+                    if (!Directory.Exists(this.cPastaXMLEmLote + UniNfeClass.strNomeSubPastaAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(this.cPastaXMLEmLote + UniNfeClass.strNomeSubPastaAssinado);
+                    }
+                }
             }
         }
+        #endregion
 
+        #region GravarConfig()
         /// <summary>
         /// Método responsável por gravar as configurações do UniNFe no arquivo "UniNfeConfig.xml"
         /// </summary>
@@ -356,15 +436,17 @@ namespace uninfe
                 try
                 {
                     XmlWriterSettings oSettings = new XmlWriterSettings();
+                    UTF8Encoding c = new UTF8Encoding(false);
 
                     //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+                    oSettings.Encoding = c; 
                     oSettings.Indent = true;
                     oSettings.IndentChars = "";
                     oSettings.NewLineOnAttributes = false;
                     oSettings.OmitXmlDeclaration = false;
 
                     //Agora vamos criar um XML Writer
-                    XmlWriter oXmlGravar = XmlWriter.Create("UniNfeConfig.xml", oSettings);
+                    XmlWriter oXmlGravar = XmlWriter.Create(UniNfeInfClass.PastaExecutavel() + "\\UniNfeConfig.xml", oSettings);
 
                     //Agora vamos gravar os dados
                     oXmlGravar.WriteStartDocument();
@@ -379,6 +461,8 @@ namespace uninfe
                     oXmlGravar.WriteElementString("tpEmis", this.vTpEmis.ToString());
                     oXmlGravar.WriteElementString("NomeEmpresa", this.cNomeEmpresa);
                     oXmlGravar.WriteElementString("PastaBackup", this.cPastaBackup);
+                    oXmlGravar.WriteElementString("PastaXmlEmLote", this.cPastaXMLEmLote);
+                    oXmlGravar.WriteElementString("PastaValidar", this.PastaValidar);
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -392,7 +476,9 @@ namespace uninfe
 
             return (lValidou);
         }
+        #endregion
 
+        #region ValidarConfig()
         /// <summary>
         /// Verifica se algumas das informações das configurações tem algum problema ou falha
         /// </summary>
@@ -405,41 +491,52 @@ namespace uninfe
             bool lValidou = true;
 
             //Verifica se o nome da empresa ou alguma pasta de configuração está em branco
-            if (this.cNomeEmpresa == "")
+            if (this.cNomeEmpresa == string.Empty)
             {
                 this.cErroGravarConfig = "Informe o nome da empresa.";
                 lValidou = false;
             }
-            else if (this.vPastaXMLEnviado == "")
+            else if (this.vPastaXMLEnviado == string.Empty)
             {
                 this.cErroGravarConfig = "Informe a pasta para arquivamento dos arquivos XML enviados.";
                 lValidou = false;
             }
-            else if (this.vPastaXMLEnvio == "")
+            else if (this.vPastaXMLEnvio == string.Empty)
             {
                 this.cErroGravarConfig = "Informe a pasta de envio dos arquivos XML.";
                 lValidou = false;
             }
-            else if (this.vPastaXMLRetorno == "")
+            else if (this.vPastaXMLRetorno == string.Empty)
             {
                 this.cErroGravarConfig = "Informe a pasta de retorno dos arquivos XML.";
                 lValidou = false;
             }
-            else if (this.vPastaXMLErro == "")
+            else if (this.vPastaXMLErro == string.Empty)
             {
                 this.cErroGravarConfig = "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.";
                 lValidou = false;
             }
+            else if (this.cPastaBackup == string.Empty)
+            {
+                this.cErroGravarConfig = "Informe a pasta para o Backup dos XML enviados.";
+                lValidou = false;
+            }
+            else if (this.PastaValidar == string.Empty)
+            {
+                this.cErroGravarConfig = "Informe a pasta onde será gravado os XML somente para ser validado pelo UniNFe.";
+                lValidou = false;
+            }
 
             //Verificar se as pastas existem
-            if (lValidou == true)
+            if (lValidou)
             {
                 DirectoryInfo oDirEnvio = new DirectoryInfo(this.vPastaXMLEnvio.Trim());
                 DirectoryInfo oDirRetorno = new DirectoryInfo(this.vPastaXMLRetorno.Trim());
                 DirectoryInfo oDirEnviado = new DirectoryInfo(this.vPastaXMLEnviado.Trim());
                 DirectoryInfo oDirErro = new DirectoryInfo(this.vPastaXMLErro.Trim());
+                DirectoryInfo oDirBackup = new DirectoryInfo(this.cPastaBackup.Trim());
 
-                if (this.vCertificado == "")
+                if (this.vCertificado == string.Empty)
                 {
                     this.cErroGravarConfig = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.";
                     lValidou = false;
@@ -464,13 +561,28 @@ namespace uninfe
                     this.cErroGravarConfig = "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.";
                     lValidou = false;
                 }
-                else if (this.cPastaBackup.Trim() != "")
+                else if (!oDirBackup.Exists)
                 {
-                    DirectoryInfo oDirBackup = new DirectoryInfo(this.cPastaBackup.Trim());
+                    this.cErroGravarConfig = "A pasta para backup dos XML enviados informada não existe.";
+                    lValidou = false;
+                }
+                else if (this.PastaValidar.Trim() != string.Empty)
+                {
+                    DirectoryInfo oDirValidar = new DirectoryInfo(this.PastaValidar.Trim());
 
-                    if (!oDirBackup.Exists)
+                    if (!oDirValidar.Exists)
                     {
-                        this.cErroGravarConfig = "A pasta opcional para backup dos XML enviados informada não existe.";
+                        this.cErroGravarConfig = "A pasta para validação de XML´s informada não existe.";
+                        lValidou = false;
+                    }
+                }
+                else if (this.cPastaXMLEmLote.Trim() != string.Empty)
+                {
+                    DirectoryInfo oDirLote = new DirectoryInfo(this.cPastaXMLEmLote.Trim());
+
+                    if (!oDirLote.Exists)
+                    {
+                        this.cErroGravarConfig = "A pasta de envio das notas fiscais eletrônicas em lote informada não existe.";
                         lValidou = false;
                     }
                 }
@@ -480,7 +592,9 @@ namespace uninfe
 
             return lValidou;
         }
+        #endregion
 
+        #region ReconfigurarUniNFe()
         /// <summary>
         /// Método responsável por reconfigurar automaticamente o UniNFe a partir de um XML com as 
         /// informações necessárias.
@@ -489,7 +603,7 @@ namespace uninfe
         /// </summary>
         /// <param name="cArquivoXml">Nome e pasta do arquivo de configurações gerado pelo ERP para atualização
         /// das configurações do uninfe</param>        /// 
-        public void ReconfigurarUniNFe( string cArquivoXml )
+        public void ReconfigurarUniNFe(string cArquivoXml)
         {
             string cStat = "";
             string xMotivo = "";
@@ -514,6 +628,12 @@ namespace uninfe
                     if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio").Count != 0)
                     {
                         this.vPastaXMLEnvio = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote").Count != 0)
+                    {
+                        this.cPastaXMLEmLote = ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText;
                         lEncontrouTag = true;
                     }
                     //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
@@ -564,7 +684,13 @@ namespace uninfe
                         this.cPastaBackup = ConfUniNfeElemento.GetElementsByTagName("PastaBackup")[0].InnerText;
                         lEncontrouTag = true;
                     }
-                }                
+                    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("PastaValidar").Count != 0)
+                    {
+                        this.PastaValidar = ConfUniNfeElemento.GetElementsByTagName("PastaValidar")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -572,7 +698,7 @@ namespace uninfe
                 xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do UniNFe: " + ex.Message;
                 lErro = true;
             }
-            
+
             if (lEncontrouTag == true)
             {
                 if (lErro == false)
@@ -617,7 +743,9 @@ namespace uninfe
                 }
 
                 XmlWriterSettings oSettings = new XmlWriterSettings();
+                UTF8Encoding c = new UTF8Encoding(false);
 
+                oSettings.Encoding = c; 
                 oSettings.Indent = true;
                 oSettings.IndentChars = "";
                 oSettings.NewLineOnAttributes = false;
@@ -634,7 +762,7 @@ namespace uninfe
                 oXmlGravar.Flush();
                 oXmlGravar.Close();
             }
-            catch 
+            catch
             {
                 //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
             }
@@ -643,5 +771,9 @@ namespace uninfe
             FileInfo oArqReconf = new FileInfo(cArquivoXml);
             oArqReconf.Delete();
         }
+        #endregion
+
+        #endregion
     }
+    #endregion
 }

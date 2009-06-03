@@ -82,12 +82,11 @@ namespace uninfe
                 MessageBox.Show("Somente uma instância do UniNFe pode ser executada com o seguintes dados configurados:\r\n\r\n"+
                                 "Certificado: "+nomeEmpresaCertificado+"\r\n\r\n"+
                                 "Pasta Envio: "+nomePastaEnvioDemo+"\r\n\r\n"+
-                                "Já tem uma intância com estes dados em execução.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                "Já tem uma instância com estes dados em execução.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 oneMutex.Close();
 
                 return;
-                //Environment.Exit(0); //Forçar a aplicação ser encerrada; 
             }
 
             try
