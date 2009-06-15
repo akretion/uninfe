@@ -2135,6 +2135,10 @@ namespace uninfe
                 {
                     booValido = true;
                 }
+                else if (vTpEmis == 2 && (oLerXml.oDadosNfe.tpEmis == "2"))
+                {
+                    booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
+                }
                 else
                 {
                     booValido = false;

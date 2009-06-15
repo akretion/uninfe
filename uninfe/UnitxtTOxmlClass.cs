@@ -20,8 +20,6 @@ namespace uninfe
         /// </summary>
         public string ChaveNfe { get; private set; }
 
-        public DataSet xx;
-
         /// <summary>
         /// Converte o arquivo TXT gerado para ser importado através do programa emissor de Nfe SFAZ/SP para XML versão 1.10
         /// </summary>
@@ -33,10 +31,8 @@ namespace uninfe
         {
             //Lê o arquivo texto passado do padrao do software emissor de Nfe Sefaz/SP 
             //Variaveis utilizadas na função
-            //DataSet dsNfe = new NFeDataSets.NewDataSet();
 
             cMensagemErro = "";
-            //TextReader txt;
             if (File.Exists(cFile))
             {
 
@@ -53,9 +49,6 @@ namespace uninfe
                 DataSet dsNfe = new DataSet();
                 dsNfe.ReadXmlSchema(baseDir);
 
-                // dsNfe.DataSetName = "NFezzz";
-
-                //dsNfe.DataSetName = "NFe";
                 dsNfe.EnforceConstraints = false; //permite campos nulos
 
 
@@ -73,6 +66,7 @@ namespace uninfe
                 DataRow drCOFINSOutr;
                 DataRow drCOFINSST;
                 DataRow drtransporta;
+                DataRow drIPITrib;
 
                 string idprod; // Guarda o Id do produto, usado para gravar os dados referente a impostos
                 idprod = "";
@@ -81,6 +75,7 @@ namespace uninfe
                 drCOFINSOutr = null;
                 drCOFINSST = null;
                 drtransporta = null;
+                drIPITrib = null;
                 int iControle;
                 iControle = 1;
                 iLacre = 1;
@@ -94,8 +89,6 @@ namespace uninfe
                 int iLinhaLida = 0; //controla a linha que foi lida
 
 
-                //cFile = cArquivo;
-
                 cLinhaTXT = txt.ReadLine();
                 dados = cLinhaTXT.Split('|');
                 iLinhaLida++;
@@ -103,7 +96,6 @@ namespace uninfe
                 if (dados[0] != "NOTA FISCAL")
                 {
                     throw new ArgumentException("Este arquivo não é um arquivo de NOTA FISCAL");
-                    //   return;
                 }
 
 
@@ -120,7 +112,7 @@ namespace uninfe
                     dados = cLinhaTXT.Split('|');
                     dados[0] = dados[0].ToUpper();
 
-                    //no progress quando o campu é null ele retorna ?
+                    //no banco de dados progress quando o campo é null ele retorna "?", essa rotina, troca o "?" para ""
                     for (iLeitura = 0; iLeitura <= dados.GetUpperBound(0) - 1; iLeitura++)
                     {
                         if (dados[iLeitura].Trim() == "?")
@@ -188,10 +180,6 @@ namespace uninfe
                         drNFref["NFref_Id"] = iControle; ;
                         if (dados[0] == "B13") //<NFref>
                             drNFref[0] = dados[1]; //caso tenha o segmento B13 preenche o campo chave
-                        //else
-                        //drNFref["refNFe"] = "9999"; //se nao vier chave no arquivo txt, usar qq numero apenas para manter o relacionamento
-
-                        //dsNfe.Tables["NFref"].Columns["refNFe"].AllowDBNull = true;
                         dsNfe.Tables["NFref"].Rows.Add(drNFref);
 
 
@@ -254,14 +242,6 @@ namespace uninfe
                     if (dados[0] == "C05")
                     {
                         DataRow dr = dsNfe.Tables["enderEmit"].NewRow();
-                        //Seta os campos para aceitar nulo
-                        /*dsNfe.Tables["emit"].Columns["CNPJ"].AllowDBNull = true;
-                        dsNfe.Tables["emit"].Columns["CPF"].AllowDBNull = true;
-                        dsNfe.Tables["emit"].Columns["CNAE"].AllowDBNull = true;
-                        dsNfe.Tables["emit"].Columns["IE"].AllowDBNull = true;
-                        dsNfe.Tables["emit"].Columns["IM"].AllowDBNull = true;
-                        dsNfe.Tables["emit"].Columns["IEST"].AllowDBNull = true;
-                        */
 
                         dr["emit_Id"] = 0;
 
@@ -294,13 +274,9 @@ namespace uninfe
 
                     if (dados[0] == "E") //tag <infNFe><ide><emit>
                     {
-                        /*
-                        //Seta os campos para aceitar nulo
-                        dsNfe.Tables["dest"].Columns["CNPJ"].AllowDBNull = true;
-                        dsNfe.Tables["dest"].Columns["CPF"].AllowDBNull = true;
                         dsNfe.Tables["dest"].Columns["IE"].AllowDBNull = true;
-                        drdest["IE"] = ""; //campo obrigatorio, preenchido se não apresenta erro
-                        */
+                        drdest["IE"] = ""; //deve sempre gerar essa tag mesmo que em branco se nao ha problemas na hora dele inveter o enderdest
+
                         for (iLeitura = 0; iLeitura <= 4; iLeitura++)
                         {
                             //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
@@ -308,6 +284,7 @@ namespace uninfe
                                 drdest[iLeitura] = dados[iLeitura - 1].Trim();
 
                         }
+
                         drdest["dest_Id"] = 0;
                         drdest["infNFe_Id"] = 0;
 
@@ -315,13 +292,11 @@ namespace uninfe
                     }
                     if (dados[0] == "E02") //ainda tag <infNFe><ide><emit>, preenche o cnpj
                     {
-                        //dsNfe.Tables["dest"].Rows[0]["CNPJ"] = dados[1];
                         drdest["CNPJ"] = dados[1];
                         dsNfe.Tables["dest"].Rows.Add(drdest);
                     }
                     if (dados[0] == "E03") //ainda tag <infNFe><ide><emit>, preenche o cpf
                     {
-                        //dsNfe.Tables["dest"].Rows[0]["CPF"] = dados[1];
                         drdest["CPF"] = dados[1];
                         dsNfe.Tables["dest"].Rows.Add(drdest);
                     }
@@ -374,7 +349,6 @@ namespace uninfe
                         idprod = drdet[0].ToString();
                         drdet["det_Id"] = idprod; //det_Id
                         drdet["infNFe_Id"] = 0;
-
                         dsNfe.Tables["det"].Rows.Add(drdet);
 
                     }
@@ -595,7 +569,6 @@ namespace uninfe
                                 dr[iLeitura - 1] = dados[iLeitura].Trim();
                         }
                         dr["ICMS_Id"] = idprod.ToString();
-
                         dsNfe.Tables["ICMS40"].Rows.Add(dr);
                     }
 
@@ -666,27 +639,28 @@ namespace uninfe
 
                     if (dados[0] == "O07" || dados[0] == "O10" || dados[0] == "O11")  //IPITrib
                     {
-                        DataRow dr = dsNfe.Tables["IPITrib"].NewRow();
                         if (dados[0] == "O07")
                         {
-                            dr["CST"] = dados[1].Trim();
-                            dr["VIPI"] = dados[2].Trim();
+                            drIPITrib = dsNfe.Tables["IPITrib"].NewRow();
+                            drIPITrib["CST"] = dados[1].Trim();
+                            drIPITrib["VIPI"] = dados[2].Trim();
                         }
 
                         if (dados[0] == "O10")
                         {
-                            dr["VBC"] = dados[1].Trim();
-                            dr["PIPI"] = dados[2].Trim();
+                            drIPITrib["VBC"] = dados[1].Trim();
+                            drIPITrib["PIPI"] = dados[2].Trim();
                         }
 
                         if (dados[0] == "O11")
                         {
-                            dr["QUnid"] = dados[1].Trim();
-                            dr["VUnid"] = dados[2].Trim();
+                            drIPITrib["QUnid"] = dados[1].Trim();
+                            drIPITrib["VUnid"] = dados[2].Trim();
                         }
 
-                        dr["IPI_Id"] = idprod.ToString();
-                        dsNfe.Tables["IPITrib"].Rows.Add(dr);
+                        drIPITrib["IPI_Id"] = idprod.ToString();
+                        if (dados[0] != "O07")
+                            dsNfe.Tables["IPITrib"].Rows.Add(drIPITrib);
                     }
 
                     if (dados[0] == "O08") //IPINT
@@ -756,24 +730,18 @@ namespace uninfe
 
                     if (dados[0] == "Q05") //
                     {
-
-
                         drPISOutr = dsNfe.Tables["PISOutr"].NewRow();
                         drPISOutr["CST"] = dados[1].Trim();
                         drPISOutr["VPIS"] = dados[2].Trim();
 
                         drPISOutr["PIS_Id"] = idprod.ToString();
                         dsNfe.Tables["PISOutr"].Rows.Add(drPISOutr);
-
-                        //dsNfe.Tables["PISOutr"].Rows.Add(dr);
-
                     }
 
                     if (dados[0] == "Q07")
                     {
                         drPISOutr["VBC"] = dados[1];
                         drPISOutr["PPIS"] = dados[2];
-
                     }
 
                     if (dados[0] == "Q10")
@@ -804,8 +772,6 @@ namespace uninfe
                         drCOFINS["COFINS_Id"] = idprod.ToString();
                         drCOFINS["imposto_Id"] = idprod.ToString();
                         dsNfe.Tables["COFINS"].Rows.Add(drCOFINS);
-
-
                     }
 
                     if (dados[0] == "S02") //COFINSAliq
@@ -846,19 +812,12 @@ namespace uninfe
                         drCOFINSOutr["VCOFINS"] = dados[2];
                         // drCOFINSOutr["qBCProd"] = null;
                         drCOFINSOutr["COFINS_Id"] = idprod.ToString();
-
-
                     }
 
                     if (dados[0] == "S07") //COFINSOutr
                     {
                         drCOFINSOutr["VBC"] = dados[1];
                         drCOFINSOutr["PCOFINS"] = dados[2];
-
-                        //drCOFINSOutr["QBCProd"] = 0;
-                        //drCOFINSOutr["VAliqProd"] = 0;
-
-
                         dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
 
                     }
@@ -866,10 +825,6 @@ namespace uninfe
                     {
                         drCOFINSOutr["QBCProd"] = dados[1];
                         drCOFINSOutr["VAliqProd"] = dados[2];
-
-                        //drCOFINSOutr["VBC"] = 0;
-                        //drCOFINSOutr["PCOFINS"] = 0;
-
                         dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
 
                     }
@@ -884,7 +839,6 @@ namespace uninfe
                     {
                         drCOFINSST["QBCProd"] = 0;
                         drCOFINSST["VAliqProd"] = 0;
-
                         drCOFINSST["VBC"] = dados[1];
                         drCOFINSST["PCOFINS"] = dados[2];
                         dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
@@ -892,12 +846,10 @@ namespace uninfe
 
                     if (dados[0] == "T04") //COFINSST
                     {
-
                         drCOFINSST["QBCProd"] = dados[1];
                         drCOFINSST["VAliqProd"] = dados[2];
                         drCOFINSST["VBC"] = 0;
                         drCOFINSST["PCOFINS"] = 0;
-
                         dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
                     }
 
@@ -909,9 +861,7 @@ namespace uninfe
                             if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
                                 dr[iLeitura - 1] = dados[iLeitura].Trim();
                         }
-
                         dr["imposto_Id"] = idprod.ToString();
-
                     }
 
                     if (dados[0] == "W") //total
@@ -920,7 +870,6 @@ namespace uninfe
                         dr["total_Id"] = idprod.ToString();
                         dr["infNFe_Id"] = 0;
                         dsNfe.Tables["total"].Rows.Add(dr);
-
                     }
 
 
@@ -934,8 +883,6 @@ namespace uninfe
                         }
                         dr["total_Id"] = idprod.ToString();
                         dsNfe.Tables["ICMSTot"].Rows.Add(dr);
-
-
                     }
                     if (dados[0] == "W17") //ISSQNtot
                     {
@@ -1165,7 +1112,6 @@ namespace uninfe
 
                 txt.Close();
                 cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
-
                 dsNfe.Tables["infNFe"].Rows[0]["Id"] = "NFe" + cChave;
                 dsNfe.AcceptChanges();
                 Retorno = cDestino + "\\" + cChave + "-nfe.xml";
@@ -1182,7 +1128,10 @@ namespace uninfe
                 //remove os espacos entre as tags
                 TextoXml.GetStringBuilder().Remove(0, TextoXml.ToString().Length);
                 TextoXml.GetStringBuilder().Append(sAux);
-                
+
+
+
+
                 //Ajustando a Tag de <NFref>
                 if (TextoXml.ToString().IndexOf("<NFref>") > -1 && TextoXml.ToString().LastIndexOf("</NFref>") > -1)
                 {
@@ -1215,9 +1164,27 @@ namespace uninfe
                 TextoXml.GetStringBuilder().Replace("</xFant>", "</xFant>" + sAux);
 
                 // Ajustando a tag IE do destinatario 
+
                 sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<enderDest>"), (TextoXml.ToString().IndexOf("</enderDest>") - TextoXml.ToString().IndexOf("<enderDest>")) + 12);
+
                 TextoXml.GetStringBuilder().Replace(sAux, "");
-                TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+                //MessageBox.Show(TextoXml.ToString().IndexOf("</xNome></dest>").ToString());
+                //achandoa posição para qual vai mover o <enderDest>
+                iLeitura = -1;
+                iLeitura = TextoXml.ToString().IndexOf("</xNome><IE/></dest>");
+                if (iLeitura > -1)
+                    iLeitura = iLeitura + 8; // posição entre </xNome><IE/>
+                else
+                {
+                    iLeitura = TextoXml.ToString().Substring(0, TextoXml.ToString().IndexOf("</dest>")).LastIndexOf("<IE>");
+                    if (iLeitura == -1)
+                        throw new ArgumentException("Não foi possivel inverter as Tags EnderDest");
+
+                }
+                TextoXml.GetStringBuilder().Insert(iLeitura, sAux);
+
+                //TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+
 
                 //TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
                 //TextWriter txtDestino = new StreamWriter(@Retorno);
@@ -1242,22 +1209,12 @@ namespace uninfe
 
                 xWriter.Close();
                 #endregion
-                xx = dsNfe;
-
-
-
             }
             catch (Exception Ex)
             {
-
                 cMensagemErro = Ex.Message;
                 txt.Close();
-
-                //return false;
             }
-
-
-
         }
 
         private String gera_chave(String cChave)
@@ -1282,7 +1239,7 @@ namespace uninfe
             return cChave + (11 - (total % 11)).ToString();
         }
 
-
+ 
         private string valida_elemento(string cElem, int iCampos)
         {
             /*
@@ -1391,15 +1348,15 @@ namespace uninfe
             {
                 if (cElem.ToUpper() == aValidar[iPos, 0])
                 {
-                    if (Convert.ToInt16(aValidar[iPos, 1]) != iCampos)
+                    if (Convert.ToInt16(aValidar[iPos, 1])  != iCampos)
                     {
                         if ((aValidar[iPos, 0] == "I") && (iCampos == 19 || iCampos == 20))
                         {
                             cRetorno = "OK";
                         }
                         else
-                            cRetorno = "A quantidade de campos no seguimento " + cElem + " é " + iCampos.ToString() + ", o correto é " +
-                              Convert.ToInt16(aValidar[iPos, 1]) + " campos.";
+                        cRetorno = "A quantidade de campos no seguimento " + cElem + " é " + iCampos.ToString() + ", o correto é " +
+                          Convert.ToInt16(aValidar[iPos, 1]) + " campos.";
                     }
 
                 }
@@ -1409,8 +1366,9 @@ namespace uninfe
 
             }
             return cRetorno;
-        }
 
+
+        }
         private string limpa_texto(string cTexto)
         {
             int iControle;
@@ -1418,8 +1376,8 @@ namespace uninfe
             cRetorno = cTexto;
             while (cRetorno.IndexOf("> ") > -1)
             {
-                cRetorno = cRetorno.Replace("> ", ">");
-
+                cRetorno = cRetorno.Replace("> ",">");
+                
                 /*
                 for (iControle = 0; iControle < cTexto.Length; iControle++)
                 {
@@ -1430,7 +1388,12 @@ namespace uninfe
                 }
                  */
             }
+            cRetorno = cRetorno.Replace(" />", "/>");
             return cRetorno;
         }
+
+
+
+
     }
 }
