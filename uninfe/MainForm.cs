@@ -334,8 +334,8 @@ namespace uninfe
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
             FormValidarXML oValidarXML = new FormValidarXML();
-            oValidarXML.MdiParent = this;
             oValidarXML.MinimizeBox = false;
+            oValidarXML.ShowInTaskbar = false;
             oValidarXML.Show();
         }
 
@@ -375,6 +375,7 @@ namespace uninfe
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormValidarXML oValidarXML = new FormValidarXML();
+            oValidarXML.ShowInTaskbar = true;
             oValidarXML.MinimizeBox = true;
             oValidarXML.Show();
         }

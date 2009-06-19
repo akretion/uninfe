@@ -50,8 +50,7 @@ namespace uninfe
                 dsNfe.ReadXmlSchema(baseDir);
 
                 dsNfe.EnforceConstraints = false; //permite campos nulos
-
-
+                
                 string cLinhaTXT;
                 string[] dados;
                 int iLeitura;
@@ -1182,6 +1181,7 @@ namespace uninfe
 
                 }
                 TextoXml.GetStringBuilder().Insert(iLeitura, sAux);
+                TextoXml.GetStringBuilder().Replace("<IE/>", "").Replace("<IE />", "");
 
                 //TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
 
