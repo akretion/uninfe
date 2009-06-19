@@ -283,12 +283,19 @@ namespace uninfe
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjRetRecepcao(ref oServico);
-            if (this.InvocarObjeto("1.10", oServico, "nfeRetRecepcao", "-ped-rec", "-pro-rec") == true)
+
+            //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
+            if (this.InvocarObjeto("1.10", oServico, "nfeRetRecepcao") == true)
             {
                 try
                 {
                     //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
                     this.LerRetornoLote();
+
+                    //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                    //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                    //Wandrey 18/06/2009
+                    this.GravarXmlRetorno("-ped-rec.xml", "-pro-rec.xml");
 
                     //Deletar o arquivo de solicitação do serviço
                     this.MoveDeleteArq(this.vXmlNfeDadosMsg, "D");
@@ -1190,9 +1197,35 @@ namespace uninfe
 
         #region Métodos auxiliares
 
+        #region InvocarObjeto() - Sobrecarga()
+        /// <summary>
+        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e não grava o XML retornado
+        /// </summary>
+        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
+        /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
+        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
+        /// <returns>
+        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
+        /// XML com o retorno que foi dado do serviço do WebService.
+        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
+        /// </returns>
+        /// <example>
+        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+        /// object oServico = null;
+        /// this.DefObjCancelamento(ref oServico);
+        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF");
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>01/07/2008</date>
+        private bool InvocarObjeto(string cVersaoDados, object oServico, string cMetodo)
+        {
+            return InvocarObjeto(cVersaoDados, oServico, cMetodo, string.Empty, string.Empty);
+        }
+        #endregion
+
         #region InvocarObjeto()
         /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ
+        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e Grava o XML retornado
         /// </summary>
         /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
         /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
@@ -1256,7 +1289,10 @@ namespace uninfe
                     this.vStrXmlRetorno = (string)(tipoServico.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oServico, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
 
                     // Passo 6 e 7: Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
-                    this.GravarXmlRetorno(cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml");
+                    if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
+                    {
+                        this.GravarXmlRetorno(cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml");
+                    }
 
                     lRetorna = true;
                 }
