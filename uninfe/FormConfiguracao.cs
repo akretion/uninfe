@@ -74,8 +74,10 @@ namespace uninfe
             ArrayList.Synchronized(arrTpEmis);
 
             arrTpEmis.Add(new DropDownListClass("Normal", 1));
-            arrTpEmis.Add(new DropDownListClass("Contingência com formulário de segurança", 2));
+            arrTpEmis.Add(new DropDownListClass("Contingência com formulário de segurança (FS)", 2));
             arrTpEmis.Add(new DropDownListClass("Contingência com SCAN do Ambiente Nacional", 3));
+            //arrTpEmis.Add(new DropDownListClass("Contingência com DPEC", 4));
+            arrTpEmis.Add(new DropDownListClass("Contingência com formulário de segurança (FS-DA)", 5));
 
             comboBox_tpEmis.DataSource = arrTpEmis;
             comboBox_tpEmis.DisplayMember = "nome";

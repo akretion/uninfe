@@ -2166,7 +2166,7 @@ namespace uninfe
             {
                 //Verificar o tipo de emissão de bate com o configurado, se não bater vai retornar um erro 
                 //para o ERP
-                if ((vTpEmis == 1 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2")) ||
+                if ((vTpEmis == 1 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2" || oLerXml.oDadosNfe.tpEmis == "5")) ||
                     (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "3")))
                 {
                     booValido = true;
@@ -2174,6 +2174,10 @@ namespace uninfe
                 else if (vTpEmis == 2 && (oLerXml.oDadosNfe.tpEmis == "2"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
+                }
+                else if (vTpEmis == 5 && (oLerXml.oDadosNfe.tpEmis == "5"))
+                {
+                    booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                 }
                 else
                 {
@@ -2190,11 +2194,10 @@ namespace uninfe
                                            "para o SCAN do Ambiente Nacional.\r\n\r\n";
 
                     }
-                    else if (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2"))
+                    else if (vTpEmis == 3 && (oLerXml.oDadosNfe.tpEmis == "1" || oLerXml.oDadosNfe.tpEmis == "2" || oLerXml.oDadosNfe.tpEmis == "5"))
                     {
                         cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
                                            "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
-
                     }
 
                     cTextoErroTpEmis += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
