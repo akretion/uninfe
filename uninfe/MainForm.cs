@@ -89,6 +89,9 @@ namespace uninfe
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
 
+            //TODO: danasa
+            this.MinimumSize = new Size(750,600);   
+
             #region Executar os serviços em novas threads
             //Executar o método para forçar os serviços a carregarem as configurações assim 
             // que forem executados$
@@ -264,7 +267,20 @@ namespace uninfe
         #region Métodos de eventos
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
-            FormConfiguracao oConfig = new FormConfiguracao();
+            //danasa 
+            FormConfiguracao oConfig = null;
+            foreach (Form fg in this.MdiChildren)
+            {
+                if (fg is FormConfiguracao)
+                {
+                    oConfig = fg as FormConfiguracao;
+                    oConfig.WindowState = FormWindowState.Normal;
+                    break;
+                }
+            }
+            //danasa 
+            if (oConfig == null)
+                oConfig = new FormConfiguracao();
             oConfig.MdiParent = this;
             oConfig.MinimizeBox = false;
             oConfig.Show();
@@ -285,7 +301,10 @@ namespace uninfe
         private void MainForm_Resize(object sender, EventArgs e)
         {
             //Faz a aplicação sumir da barra de tarefas
-            this.ShowInTaskbar = false;
+            //danasa
+            //  Se usuario mudar o tamanho da janela, não pode desaparece-la da tasknar
+            if (this.WindowState == FormWindowState.Minimized)
+                this.ShowInTaskbar = false;   
 
             //Mostrar o balão com as informações que selecionamos
             //O parâmetro passado refere-se ao tempo (ms)
@@ -334,8 +353,9 @@ namespace uninfe
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
             FormValidarXML oValidarXML = new FormValidarXML();
+            oValidarXML.MdiParent = this;
             oValidarXML.MinimizeBox = false;
-            oValidarXML.ShowInTaskbar = false;
+            //oValidarXML.StartPosition = FormStartPosition.WindowsDefaultLocation;//TODO: danasa
             oValidarXML.Show();
         }
 

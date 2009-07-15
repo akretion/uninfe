@@ -96,6 +96,7 @@ namespace uninfe
             this.textBox_PastaXmlErro.Text = oCarrega.vPastaXMLErro;
             this.tbPastaLote.Text = oCarrega.cPastaXMLEmLote;
             this.tbPastaValidar.Text = oCarrega.PastaValidar;
+            this.checkBoxRetornoNFETxt.Checked = oCarrega.GravarRetornoTXTNFe;
             this.textBox_Empresa.Text = oCarrega.cNomeEmpresa;
             this.oMeuCert = oCarrega.oCertificado;
             this.DemonstraDadosCertificado();
@@ -214,6 +215,7 @@ namespace uninfe
             oConfig.cPastaBackup = this.textBox_PastaBackup.Text.Trim();
             oConfig.cPastaXMLEmLote = this.tbPastaLote.Text.Trim();
             oConfig.PastaValidar = this.tbPastaValidar.Text.Trim();
+            oConfig.GravarRetornoTXTNFe = this.checkBoxRetornoNFETxt.Checked;
             if (this.oMeuCert == null)
             {
                 oConfig.vCertificado = "";
@@ -316,6 +318,10 @@ namespace uninfe
         /// </summary>
         public string PastaValidar { get; set; }
         /// <summary>
+        /// Gravar o retorno da NFe também em TXT
+        /// </summary>
+        public bool GravarRetornoTXTNFe { get; set; }
+        /// <summary>
         /// Recebe uma mensagem de erro caso venha a ocorrer na execução do método "GravarConfig()"
         /// </summary>
         public string cErroGravarConfig { get; private set; }
@@ -354,6 +360,7 @@ namespace uninfe
             this.cNomeEmpresa = string.Empty;
             this.cPastaBackup = string.Empty;
             this.PastaValidar = string.Empty;
+            this.GravarRetornoTXTNFe = false;
 
             if (File.Exists(vArquivoConfig))
             {
@@ -382,6 +389,7 @@ namespace uninfe
                                     else if (oLerXml.Name == "PastaBackup") { oLerXml.Read(); this.cPastaBackup = oLerXml.Value; }
                                     else if (oLerXml.Name == "PastaXmlEmLote") { oLerXml.Read(); this.cPastaXMLEmLote = oLerXml.Value; }
                                     else if (oLerXml.Name == "PastaValidar") { oLerXml.Read(); this.PastaValidar = oLerXml.Value; }
+                                    else if (oLerXml.Name == "GravarRetornoTXTNFe") { oLerXml.Read(); this.GravarRetornoTXTNFe = Convert.ToBoolean(oLerXml.Value); }
                                 }
                             }
                             break;
@@ -465,6 +473,7 @@ namespace uninfe
                     oXmlGravar.WriteElementString("PastaBackup", this.cPastaBackup);
                     oXmlGravar.WriteElementString("PastaXmlEmLote", this.cPastaXMLEmLote);
                     oXmlGravar.WriteElementString("PastaValidar", this.PastaValidar);
+                    oXmlGravar.WriteElementString("GravarRetornoTXTNFe", this.GravarRetornoTXTNFe.ToString());
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -690,6 +699,12 @@ namespace uninfe
                     if (ConfUniNfeElemento.GetElementsByTagName("PastaValidar").Count != 0)
                     {
                         this.PastaValidar = ConfUniNfeElemento.GetElementsByTagName("PastaValidar")[0].InnerText;
+                        lEncontrouTag = true;
+                    }
+                    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe").Count != 0)
+                    {
+                        this.GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe")[0].InnerText);
                         lEncontrouTag = true;
                     }
                 }

@@ -25,6 +25,10 @@ namespace uninfe
 
         #endregion
 
+        #region Atributos ou Variáveis locais da classe
+        private ServicoUniNFe.Servicos Servico;
+        #endregion
+
         #region propriedades da classe
 
         /// <summary>
@@ -83,6 +87,10 @@ namespace uninfe
         /// Pasta para onde o UNINFE vai verificar se tem XML para ser somente Validado e Assinado
         /// </summary>
         public string PastaValidar { get; set; }
+        /// <summary>
+        /// Gravar o retorno da NFE também em TXT
+        /// </summary>
+        public bool GravarRetornoTXTNFe { get; set; }
 
         #endregion
 
@@ -148,6 +156,9 @@ namespace uninfe
         /// </date>
         public void StatusServico()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.PedidoConsultaStatusServicoNFe;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjStatusServico(ref oServico);
@@ -196,6 +207,9 @@ namespace uninfe
         /// <date>04/06/2008</date>
         public void Recepcao()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.EnviarLoteNfe;
+
             //Ler o XML de Lote para pegar o número do lote que está sendo enviado
             UniLerXMLClass oLerXml = new UniLerXMLClass();
             oLerXml.Nfe(this.vXmlNfeDadosMsg);
@@ -280,6 +294,9 @@ namespace uninfe
         /// <date>04/06/2008</date>        
         public void RetRecepcao()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.PedidoSituacaoLoteNFe;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjRetRecepcao(ref oServico);
@@ -349,6 +366,9 @@ namespace uninfe
         /// <date>04/06/2008</date>
         public void Consulta()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.PedidoConsultaSituacaoNFe;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjConsulta(ref oServico);
@@ -396,6 +416,9 @@ namespace uninfe
         /// <date>01/07/2008</date>
         public void Cancelamento()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.CancelarNFe;
+
             //Assinar o arquivo XML
             UniAssinaturaDigitalClass oAD = new UniAssinaturaDigitalClass();
             try
@@ -465,6 +488,9 @@ namespace uninfe
         /// <date>03/04/2009</date>
         public void Inutilizacao()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.InutilizarNumerosNFe;
+
             //Assinar o arquivo XML
             UniAssinaturaDigitalClass oAD = new UniAssinaturaDigitalClass();
             try
@@ -547,6 +573,9 @@ namespace uninfe
         /// </date>
         public void ConsultaCadastro()
         {
+            //Definir o serviço que será executado para a classe
+            Servico = ServicoUniNFe.Servicos.ConsultaCadastroContribuinte;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             this.DefObjConsultaCadastro(ref oServico);
@@ -1628,9 +1657,138 @@ namespace uninfe
             this.vArqXMLRetorno = this.vPastaXMLRetorno + "\\" +
                                   this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) +
                                   pFinalArqRetorno;
+//            File.WriteAllText(this.vArqXMLRetorno, this.vStrXmlRetorno, Encoding.Default);
             SW = File.CreateText(this.vArqXMLRetorno);
             SW.Write(this.vStrXmlRetorno);
             SW.Close();
+
+            //Gravar o XML de retorno também no formato TXT
+            if (this.GravarRetornoTXTNFe)
+            {
+                try
+                {
+                    this.GravarRetornoEmTXT(pFinalArqEnvio, pFinalArqRetorno);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+        #endregion
+
+        #region GravarRetornoEmTXT()
+        //TODO: Documentar este método
+        private void GravarRetornoEmTXT(string pFinalArqEnvio, string pFinalArqRetorno)
+        {
+            string ConteudoRetorno = string.Empty;
+            
+            UniLerXMLClass oLerXml = new UniLerXMLClass();
+            MemoryStream msXml = UniLerXMLClass.StringXmlToStream(this.vStrXmlRetorno);
+
+            try
+            {
+                switch (Servico)
+                {
+                    case ServicoUniNFe.Servicos.EnviarLoteNfe:
+                        XmlDocument docRec = new XmlDocument();
+                        docRec.Load(msXml);
+
+                        XmlNodeList retEnviNFeList = docRec.GetElementsByTagName("retEnviNFe");
+                        XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeList.Item(0);
+
+                        ConteudoRetorno += this.LerTag(retEnviNFeElemento, "cStat");
+                        ConteudoRetorno += this.LerTag(retEnviNFeElemento, "xMotivo");
+
+                        XmlNodeList infRecList = retEnviNFeElemento.GetElementsByTagName("infRec");
+                        XmlElement infRecElemento = (XmlElement)infRecList.Item(0);
+
+                        ConteudoRetorno += this.LerTag(infRecElemento, "nRec");
+                        ConteudoRetorno += this.LerTag(infRecElemento, "dhRecbto");
+                        ConteudoRetorno += this.LerTag(infRecElemento, "tMed");
+
+                        goto default;
+
+                    case ServicoUniNFe.Servicos.PedidoSituacaoLoteNFe:
+                        XmlDocument docProRec = new XmlDocument();
+                        docProRec.Load(msXml);
+
+                        XmlNodeList retConsReciNFeList = docProRec.GetElementsByTagName("retConsReciNFe");
+                        XmlElement retConsReciNFeElemento = (XmlElement)retConsReciNFeList.Item(0);
+
+                        ConteudoRetorno += this.LerTag(retConsReciNFeElemento, "nRec");
+                        ConteudoRetorno += this.LerTag(retConsReciNFeElemento, "cStat");
+                        ConteudoRetorno += this.LerTag(retConsReciNFeElemento, "xMotivo");
+                        ConteudoRetorno += "\r\n";
+
+                        XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
+                        XmlElement protNFeElemento = (XmlElement)protNFeList.Item(0);
+                        XmlNodeList infProtList = protNFeElemento.GetElementsByTagName("infProt");
+
+                        foreach (XmlNode infProtNode in infProtList)
+                        {
+                            XmlElement infProtElemento = (XmlElement)infProtNode;
+                            string chNFe = this.LerTag(infProtElemento, "chNFe");
+                            
+                            ConteudoRetorno += chNFe.Substring(6,14)+";";
+                            ConteudoRetorno += chNFe.Substring(25,9)+";";
+                            ConteudoRetorno += chNFe;
+                            ConteudoRetorno += this.LerTag(infProtElemento, "dhRecbto");
+                            ConteudoRetorno += this.LerTag(infProtElemento, "nProt");
+                            ConteudoRetorno += this.LerTag(infProtElemento, "digVal");
+                            ConteudoRetorno += this.LerTag(infProtElemento, "cStat");
+                            ConteudoRetorno += this.LerTag(infProtElemento, "xMotivo");
+                            ConteudoRetorno += "\r\n";
+                        }
+
+                        goto default;
+
+                    case ServicoUniNFe.Servicos.CancelarNFe:
+                        break;
+                    case ServicoUniNFe.Servicos.InutilizarNumerosNFe:
+                        break;
+                    case ServicoUniNFe.Servicos.PedidoConsultaSituacaoNFe:
+                        break;
+                    case ServicoUniNFe.Servicos.PedidoConsultaStatusServicoNFe:
+                        break;
+                    case ServicoUniNFe.Servicos.ConsultaCadastroContribuinte:
+                        break;
+                    case ServicoUniNFe.Servicos.ConsultaInformacoesUniNFe:
+                        break;
+
+                    default: //Gravar o TXT de retorno para o ERP
+                        string TXTRetorno = string.Empty;
+                        TXTRetorno = this.ExtrairNomeArq(this.vXmlNfeDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
+                        TXTRetorno = this.vPastaXMLRetorno + "\\" + this.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
+
+                        File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.Default);
+//                        StreamWriter SW;
+//                        SW = File.CreateText(TXTRetorno);
+//                        SW.Write(ConteudoRetorno);
+//                        SW.Close();
+                        break;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        #endregion
+
+        #region LerTag()
+        //TODO: Documentar este método
+        private string LerTag(XmlElement Elemento, string NomeTag)
+        {
+            string Retorno = string.Empty;
+
+            if (Elemento.GetElementsByTagName(NomeTag).Count != 0)
+            {
+                Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText;
+                Retorno += ";";
+            }
+
+            return Retorno;
         }
         #endregion
 
@@ -2259,9 +2417,19 @@ namespace uninfe
                             {
                                 XmlElement infProtElemento = (XmlElement)infProtNode;
 
-                                string strChaveNFe = "NFe" + infProtElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                                string strStat = infProtElemento.GetElementsByTagName("cStat")[0].InnerText;
+                                string strChaveNFe = string.Empty;
+                                string strStat = string.Empty;
                                 string strProt = string.Empty;
+
+                                if (infProtElemento.GetElementsByTagName("chNFe")[0] != null)
+                                {
+                                    strChaveNFe = "NFe" + infProtElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                                }
+
+                                if (infProtElemento.GetElementsByTagName("cStat")[0] != null)
+                                {
+                                    strStat = infProtElemento.GetElementsByTagName("cStat")[0].InnerText;
+                                }
 
                                 //Se o strStat for de rejeição a tag nProt não existe, assim sendo tenho que tratar
                                 //para evitar um erro. Wandrey 01/06/2009

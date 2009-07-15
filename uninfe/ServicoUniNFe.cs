@@ -185,6 +185,7 @@ namespace uninfe
                     oNfe.cPastaBackup = oConfig.cPastaBackup;
                     oNfe.PastaValidar = oConfig.PastaValidar;
                     oNfe.vTpEmis = oConfig.vTpEmis;
+                    oNfe.GravarRetornoTXTNFe = oConfig.GravarRetornoTXTNFe;
 
                     //Remover o item da lista para não recarregar mais a configuração
                     lstContrConfig.Remove(Thread.CurrentThread.Name.Trim());

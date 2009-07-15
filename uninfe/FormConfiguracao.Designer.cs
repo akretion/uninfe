@@ -75,6 +75,7 @@
             this.folderBrowserDialog_backup = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_xmlenviolote = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_Validar = new System.Windows.Forms.FolderBrowserDialog();
+            this.checkBoxRetornoNFETxt = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -282,7 +283,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(10, 42);
+            this.tabControl1.Location = new System.Drawing.Point(12, 42);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(596, 341);
@@ -290,6 +291,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkBoxRetornoNFETxt);
             this.tabPage1.Controls.Add(this.textBox_Empresa);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.comboBox_tpEmis);
@@ -499,6 +501,16 @@
             this.tabPage3.Text = "Certificado Digital";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // checkBoxRetornoNFETxt
+            // 
+            this.checkBoxRetornoNFETxt.AutoSize = true;
+            this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(6, 292);
+            this.checkBoxRetornoNFETxt.Name = "checkBoxRetornoNFETxt";
+            this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(373, 17);
+            this.checkBoxRetornoNFETxt.TabIndex = 13;
+            this.checkBoxRetornoNFETxt.Text = "Gravar o retorno da Nota Fiscal Eletrônica também no formato texto (TXT)";
+            this.checkBoxRetornoNFETxt.UseVisualStyleBackColor = true;
+            // 
             // FormConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -574,5 +586,6 @@
         private System.Windows.Forms.Button button_SelectPastaValidar;
         private System.Windows.Forms.TextBox tbPastaValidar;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog_Validar;
+        private System.Windows.Forms.CheckBox checkBoxRetornoNFETxt;
     }
 }
