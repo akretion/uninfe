@@ -61,35 +61,21 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="UniNFeLibrary, Version=1.0.3499.19345, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UniNFeLibrary\bin\Release\UniNFeLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificadoDigitalClass.cs" />
-    <Compile Include="DropDownListClass.cs" />
-    <Compile Include="FluxoNfe.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Classes\LerXML.cs" />
+    <Compile Include="Classes\DefObjServico.cs" />
+    <Compile Include="Formulario\FormSobre.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormConfiguracao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormConfiguracao.Designer.cs">
-      <DependentUpon>FormConfiguracao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormSobre.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSobre.Designer.cs">
+    <Compile Include="Formulario\FormSobre.Designer.cs">
       <DependentUpon>FormSobre.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormValidarXML.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormValidarXML.Designer.cs">
-      <DependentUpon>FormValidarXML.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\GerarXML.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,20 +84,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormConfiguracao.resx">
-      <DependentUpon>FormConfiguracao.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSobre.resx">
+    <EmbeddedResource Include="Formulario\FormSobre.resx">
       <DependentUpon>FormSobre.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormValidarXML.resx">
-      <DependentUpon>FormValidarXML.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -122,6 +96,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulario\ValidarXML.resx">
+      <DependentUpon>ValidarXML.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -153,13 +130,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ServicoUniNFe.cs" />
-    <Compile Include="UniAssinaturaDigitalClass.cs" />
-    <Compile Include="UniLerXMLClass.cs" />
-    <Compile Include="UniNfeClass.cs" />
-    <Compile Include="UniNfeInfClass.cs" />
-    <Compile Include="UnitxtTOxmlClass.cs" />
-    <Compile Include="ValidadorXMLClass.cs" />
+    <Compile Include="Classes\ServicoUniNFe.cs" />
+    <Compile Include="Classes\ServicoNFe.cs" />
+    <Compile Include="Formulario\ValidarXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulario\ValidarXML.designer.cs">
+      <DependentUpon>ValidarXML.cs</DependentUpon>
+    </Compile>
     <Compile Include="Web References\wsAMHCancelamento\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

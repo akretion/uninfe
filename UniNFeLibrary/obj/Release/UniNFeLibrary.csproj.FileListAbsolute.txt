@@ -1,0 +1,9 @@
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\ResolveAssemblyReference.cache
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.dll.config
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.dll
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.pdb
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.dll
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.pdb
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.csproj.GenerateResource.Cache
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Properties.Resources.resources
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.Configuracao.resources

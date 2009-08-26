@@ -11,6 +11,10 @@ using System.Diagnostics;
 using System.Threading;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using UniNFeLibrary;
+using UniNFeLibrary.Formulario;
+using UniNFeLibrary.Enums;
+using uninfe.Formulario;
 
 namespace uninfe
 {
@@ -89,13 +93,21 @@ namespace uninfe
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
 
-            //TODO: danasa
             this.MinimumSize = new Size(750,600);   
 
             #region Executar os serviços em novas threads
-            //Executar o método para forçar os serviços a carregarem as configurações assim 
-            // que forem executados$
-            ServicoUniNFe.CarregarConfiguracoes();
+            //Carregar as configurações antes de executar os serviços do UNINFE
+            ConfiguracaoApp.CarregarDados();
+            ConfiguracaoApp.VersaoXMLCanc = "1.07";
+            ConfiguracaoApp.VersaoXMLConsCad = "1.01";
+            ConfiguracaoApp.VersaoXMLInut = "1.07";
+            ConfiguracaoApp.VersaoXMLNFe = "1.10";
+            ConfiguracaoApp.VersaoXMLPedRec = "1.10";
+            ConfiguracaoApp.VersaoXMLPedSit = "1.07";
+            ConfiguracaoApp.VersaoXMLStatusServico = "1.07";
+            ConfiguracaoApp.VersaoXMLCabecMsg = "1.02";
+            ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
+            SchemaXML.CriarListaIDXML();
 
             //Executar os serviços do UniNFe em novas threads
             this.ExecutaServicos();
@@ -111,15 +123,17 @@ namespace uninfe
         /// </summary>
         private void AtualizarDadosToolBar()
         {
-            ConfigUniNFe oConfig = new ConfigUniNFe();
-            oConfig.CarregarDados();
-
             //Atualizar o nome da empresa na toolstrip
             //Wandrey 28/11/2008
-            this.toolStripLabel_NomeEmpresa.Text = oConfig.cNomeEmpresa;
-            if (oConfig.cNomeEmpresa.Trim() != "")
+            this.toolStripLabel_NomeEmpresa.Text = ConfiguracaoApp.cNomeEmpresa;
+            if (ConfiguracaoApp.cNomeEmpresa.Trim() != "")
             {
-                this.notifyIcon1.Text = "UniNFe\r\n" + oConfig.cNomeEmpresa;
+                ///
+                /// danasa 8-2009
+                /// notifyIcon1.Text tem o limite de 64 bytes
+                /// 
+                string cTemp = "UniNFe\r\n" + ConfiguracaoApp.cNomeEmpresa;
+                this.notifyIcon1.Text = cTemp.Substring(0, Math.Min(63, cTemp.Length));
             }
         }
         #endregion
@@ -133,107 +147,108 @@ namespace uninfe
             #region Executar a Thread que verifica e processa os XML´s de cancelamentos de notas fiscais
             oOperacaoPedCan = new ParameterizedThreadStart(oServicoPedCan.BuscaXML); 
             oThreadPedCan = new Thread(oOperacaoPedCan);
-            oThreadPedCan.Name = ServicoUniNFe.Servicos.CancelarNFe.ToString();
-            oThreadPedCan.Start(ServicoUniNFe.Servicos.CancelarNFe);
+            oThreadPedCan.Name = Servicos.CancelarNFe.ToString();
+            oThreadPedCan.Start(Servicos.CancelarNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s de Inutilização de números de notas fiscais
             oOperacaoPedInu = new ParameterizedThreadStart(oServicoPedInu.BuscaXML);
             oThreadPedInu = new Thread(oOperacaoPedInu); 
-            oThreadPedInu.Name = ServicoUniNFe.Servicos.InutilizarNumerosNFe.ToString();
-            oThreadPedInu.Start(ServicoUniNFe.Servicos.InutilizarNumerosNFe);
+            oThreadPedInu.Name = Servicos.InutilizarNumerosNFe.ToString();
+            oThreadPedInu.Start(Servicos.InutilizarNumerosNFe);
             #endregion
-                        
+
             #region Executar a Thread que verifica e processa os XML´s Pedido da Situação da Nota Fiscal Eletrônica
             oOperacaoPedSit = new ParameterizedThreadStart(oServicoPedSit.BuscaXML);
             oThreadPedSit = new Thread(oOperacaoPedSit); 
-            oThreadPedSit.Name = ServicoUniNFe.Servicos.PedidoConsultaSituacaoNFe.ToString();
-            oThreadPedSit.Start(ServicoUniNFe.Servicos.PedidoConsultaSituacaoNFe);
+            oThreadPedSit.Name = Servicos.PedidoConsultaSituacaoNFe.ToString();
+            oThreadPedSit.Start(Servicos.PedidoConsultaSituacaoNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido do Status do Serviço da Nota Fiscal Eletrônica
             oOperacaoPedSta = new ParameterizedThreadStart(oServicoPedSta.BuscaXML);
             oThreadPedSta = new Thread(oOperacaoPedSta); 
-            oThreadPedSta.Name = ServicoUniNFe.Servicos.PedidoConsultaStatusServicoNFe.ToString();
-            oThreadPedSta.Start(ServicoUniNFe.Servicos.PedidoConsultaStatusServicoNFe);
+            oThreadPedSta.Name = Servicos.PedidoConsultaStatusServicoNFe.ToString();
+            oThreadPedSta.Start(Servicos.PedidoConsultaStatusServicoNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido da Situação do Recibo do Lote de Notas Fiscais Eletrônica
             oOperacaoPedRec = new ParameterizedThreadStart(oServicoPedRec.BuscaXML);
             oThreadPedRec = new Thread(oOperacaoPedRec);
-            oThreadPedRec.Name = ServicoUniNFe.Servicos.PedidoSituacaoLoteNFe.ToString();
-            oThreadPedRec.Start(ServicoUniNFe.Servicos.PedidoSituacaoLoteNFe);
+            oThreadPedRec.Name = Servicos.PedidoSituacaoLoteNFe.ToString();
+            oThreadPedRec.Start(Servicos.PedidoSituacaoLoteNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido de Consulta do Cadastro de Contribuintes
             oOperacaoConsCad = new ParameterizedThreadStart(oServicoConsCad.BuscaXML);
             oThreadConsCad = new Thread(oOperacaoConsCad);
-            oThreadConsCad.Name = ServicoUniNFe.Servicos.ConsultaCadastroContribuinte.ToString();
-            oThreadConsCad.Start(ServicoUniNFe.Servicos.ConsultaCadastroContribuinte);
+            oThreadConsCad.Name = Servicos.ConsultaCadastroContribuinte.ToString();
+            oThreadConsCad.Start(Servicos.ConsultaCadastroContribuinte);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido de Consulta das Informações do UniNfe
             oOperacaoConsInf = new ParameterizedThreadStart(oServicoConsInf.BuscaXML);
             oThreadConsInf = new Thread(oOperacaoConsInf);
-            oThreadConsInf.Name = ServicoUniNFe.Servicos.ConsultaInformacoesUniNFe.ToString();
-            oThreadConsInf.Start(ServicoUniNFe.Servicos.ConsultaInformacoesUniNFe);
+            oThreadConsInf.Name = Servicos.ConsultaInformacoesUniNFe.ToString();
+            oThreadConsInf.Start(Servicos.ConsultaInformacoesUniNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido de Alteração das Configurações do UniNfe
             oOperacaoAltCon = new ParameterizedThreadStart(oServicoAltCon.BuscaXML);
             oThreadAltCon = new Thread(oOperacaoAltCon);
-            oThreadAltCon.Name = ServicoUniNFe.Servicos.AlterarConfiguracoesUniNFe.ToString();
-            oThreadAltCon.Start(ServicoUniNFe.Servicos.AlterarConfiguracoesUniNFe);
+            oThreadAltCon.Name = Servicos.AlterarConfiguracoesUniNFe.ToString();
+            oThreadAltCon.Start(Servicos.AlterarConfiguracoesUniNFe);
             #endregion
-  
+
             #region Executar a Thread que verifica e assina os XML´s de notas fiscais eletrônicas da pasta Envio
             oOperacaoAssinaNfeEnvio = new ParameterizedThreadStart(oServicoAssinaNfeEnvio.BuscaXML);
             oThreadAssinaNfeEnvio = new Thread(oOperacaoAssinaNfeEnvio);
-            oThreadAssinaNfeEnvio.Name = ServicoUniNFe.Servicos.AssinarNFePastaEnvio.ToString();
-            oThreadAssinaNfeEnvio.Start(ServicoUniNFe.Servicos.AssinarNFePastaEnvio);
+            oThreadAssinaNfeEnvio.Name = Servicos.AssinarNFePastaEnvio.ToString();
+            oThreadAssinaNfeEnvio.Start(Servicos.AssinarNFePastaEnvio);
             #endregion  
  
             #region Executar a Thread que verifica e monta o lote com uma única nota fiscal eletrônica
             oOperacaoMontaLoteUmaNfe = new ParameterizedThreadStart(oServicoMontaLoteUmaNfe.BuscaXML);
             oThreadMontaLoteUmaNfe = new Thread(oOperacaoMontaLoteUmaNfe);
-            oThreadMontaLoteUmaNfe.Name = ServicoUniNFe.Servicos.MontarLoteUmaNFe.ToString();
-            oThreadMontaLoteUmaNfe.Start(ServicoUniNFe.Servicos.MontarLoteUmaNFe);
+            oThreadMontaLoteUmaNfe.Name = Servicos.MontarLoteUmaNFe.ToString();
+            oThreadMontaLoteUmaNfe.Start(Servicos.MontarLoteUmaNFe);
             #endregion
-    
+
             #region Executar a Thread que envia os lotes de notas fiscais eletrônicas
             oOperacaoEnviarLoteNfe = new ParameterizedThreadStart(oServicoEnviarLoteNfe.BuscaXML);  
             oThreadEnviarLoteNfe = new Thread(oOperacaoEnviarLoteNfe);
-            oThreadEnviarLoteNfe.Name = ServicoUniNFe.Servicos.EnviarLoteNfe.ToString();
-            oThreadEnviarLoteNfe.Start(ServicoUniNFe.Servicos.EnviarLoteNfe);
+            oThreadEnviarLoteNfe.Name = Servicos.EnviarLoteNfe.ToString();
+            oThreadEnviarLoteNfe.Start(Servicos.EnviarLoteNfe);
             #endregion
-
+  
             #region Executar a Thread que somente Valida e Assina XML´s e dá o retorno para o ERP
             oOperacaoValidarAssinar = new ParameterizedThreadStart(oServicoValidarAssinar.BuscaXML);
             oThreadValidarAssinar = new Thread(oOperacaoValidarAssinar);
-            oThreadValidarAssinar.Name = ServicoUniNFe.Servicos.ValidarAssinar.ToString();
-            oThreadValidarAssinar.Start(ServicoUniNFe.Servicos.ValidarAssinar);
+            oThreadValidarAssinar.Name = Servicos.ValidarAssinar.ToString();
+            oThreadValidarAssinar.Start(Servicos.ValidarAssinar);
             #endregion
 
             #region Executar a Thread que somente Converte o TXT da NFe para XML
             oOperacaoConvTXT = new ParameterizedThreadStart(oServicoConvTXT.BuscaXML);
             oThreadConvTXT = new Thread(oOperacaoConvTXT);
-            oThreadConvTXT.Name = ServicoUniNFe.Servicos.ConverterTXTparaXML.ToString();
-            oThreadConvTXT.Start(ServicoUniNFe.Servicos.ConverterTXTparaXML);
+            oThreadConvTXT.Name = Servicos.ConverterTXTparaXML.ToString();
+            oThreadConvTXT.Start(Servicos.ConverterTXTparaXML);
             #endregion
 
+  
             #region Executar a Thread que verifica e assina os XML´s de notas fiscais eletrônicas da pasta de Envio em Lote
-//          oOperacaoAssinaNfeEnvioEmLote = new ParameterizedThreadStart(oServicoAssinaNfeEnvioEmLote.BuscaXML);
-//          oThreadAssinaNfeEnvioEmLote = new Thread(oOperacaoAssinaNfeEnvioEmLote);
-//          oThreadAssinaNfeEnvioEmLote.Name = ServicoUniNFe.Servicos.AssinarNFePastaEnvioEmLote.ToString();
-//          oThreadAssinaNfeEnvioEmLote.Start(ServicoUniNFe.Servicos.AssinarNFePastaEnvioEmLote);
+            oOperacaoAssinaNfeEnvioEmLote = new ParameterizedThreadStart(oServicoAssinaNfeEnvioEmLote.BuscaXML);
+            oThreadAssinaNfeEnvioEmLote = new Thread(oOperacaoAssinaNfeEnvioEmLote);
+            oThreadAssinaNfeEnvioEmLote.Name = Servicos.AssinarNFePastaEnvioEmLote.ToString();
+            oThreadAssinaNfeEnvioEmLote.Start(Servicos.AssinarNFePastaEnvioEmLote);
             #endregion
   
             #region Executar a Thread que verifica e monta o lote com várias notas fiscais eletrônicas
-//          oOperacaoMontaLoteVariasNfe = new ParameterizedThreadStart(oServicoMontaLoteVariasNfe.BuscaXML);
-//          oThreadMontaLoteVariasNfe = new Thread(oOperacaoMontaLoteVariasNfe);
-//          oThreadMontaLoteUmaNfe.Name = ServicoUniNFe.Servicos.MontarLoteVariasNFe.ToString();
-//          oThreadMontaLoteUmaNfe.Start(ServicoUniNFe.Servicos.MontarLoteVariasNFe);
-            #endregion   
+            oOperacaoMontaLoteVariasNfe = new ParameterizedThreadStart(oServicoMontaLoteVariasNfe.BuscaXML);
+            oThreadMontaLoteVariasNfe = new Thread(oOperacaoMontaLoteVariasNfe);
+            oThreadMontaLoteVariasNfe.Name = Servicos.MontarLoteVariasNFe.ToString();
+            oThreadMontaLoteVariasNfe.Start(Servicos.MontarLoteVariasNFe);
+            #endregion               
         }
         #endregion
 
@@ -241,21 +256,7 @@ namespace uninfe
         private void DemonstrarStatusServico()
         {
             //Carregar configurações
-            ConfigUniNFe oConfig = new ConfigUniNFe();
-            UniNfeClass oNfe = new UniNfeClass();
-
-            oConfig.CarregarDados();
-
-            oNfe.oCertificado = oConfig.oCertificado;
-            oNfe.vUF = oConfig.vUnidadeFederativaCodigo;
-            oNfe.vAmbiente = oConfig.vAmbienteCodigo;
-            oNfe.vPastaXMLEnvio = oConfig.vPastaXMLEnvio;
-            oNfe.vPastaXMLRetorno = oConfig.vPastaXMLRetorno;
-            oNfe.vPastaXMLEnviado = oConfig.vPastaXMLEnviado;
-            oNfe.vPastaXMLErro = oConfig.vPastaXMLErro;
-            oNfe.vPastaXMLEmLote = oConfig.cPastaXMLEmLote;
-            oNfe.cPastaBackup = oConfig.cPastaBackup;
-            oNfe.vTpEmis = oConfig.vTpEmis;
+            ServicoNFe oNfe = new ServicoNFe();
 
             //Demonstrar o status do serviço
             MessageBox.Show(oNfe.VerStatusServico(), "Situação do serviço da NFe é:", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -268,29 +269,22 @@ namespace uninfe
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
             //danasa 
-            FormConfiguracao oConfig = null;
+            Configuracao oConfig = null;
             foreach (Form fg in this.MdiChildren)
             {
-                if (fg is FormConfiguracao)
+                if (fg is Configuracao)
                 {
-                    oConfig = fg as FormConfiguracao;
+                    oConfig = fg as Configuracao;
                     oConfig.WindowState = FormWindowState.Normal;
                     break;
                 }
             }
             //danasa 
             if (oConfig == null)
-                oConfig = new FormConfiguracao();
+                oConfig = new Configuracao();
             oConfig.MdiParent = this;
             oConfig.MinimizeBox = false;
             oConfig.Show();
-        }
-
-        private void toolStripButton_teste_Click(object sender, EventArgs e)
-        {
-            Form1 oFormTeste = new Form1();
-            oFormTeste.MdiParent = this;
-            oFormTeste.Show();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -352,10 +346,9 @@ namespace uninfe
 
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
-            FormValidarXML oValidarXML = new FormValidarXML();
+            ValidarXML oValidarXML = new ValidarXML();
             oValidarXML.MdiParent = this;
             oValidarXML.MinimizeBox = false;
-            //oValidarXML.StartPosition = FormStartPosition.WindowsDefaultLocation;//TODO: danasa
             oValidarXML.Show();
         }
 
@@ -371,9 +364,9 @@ namespace uninfe
             oThreadPedSit.Abort();
             oThreadPedSta.Abort();
             oThreadMontaLoteUmaNfe.Abort();
-//          oThreadMontaLoteVariasNfe.Abort();
+            oThreadMontaLoteVariasNfe.Abort();
             oThreadAssinaNfeEnvio.Abort();
-//          oThreadAssinaNfeEnvioEmLote.Abort();
+            oThreadAssinaNfeEnvioEmLote.Abort();
             oThreadEnviarLoteNfe.Abort();
             oThreadValidarAssinar.Abort();
             oThreadConvTXT.Abort();                
@@ -394,7 +387,7 @@ namespace uninfe
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormValidarXML oValidarXML = new FormValidarXML();
+            ValidarXML oValidarXML = new ValidarXML();
             oValidarXML.ShowInTaskbar = true;
             oValidarXML.MinimizeBox = true;
             oValidarXML.Show();
@@ -402,7 +395,7 @@ namespace uninfe
 
         private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FormConfiguracao oConfig = new FormConfiguracao();
+            Configuracao oConfig = new Configuracao();
             oConfig.MinimizeBox = true;
             oConfig.Show();
         }
@@ -451,7 +444,6 @@ namespace uninfe
                 e.Cancel = false;  //se o PC for desligado o windows o fecha automaticamente.
             }
         }
-        #endregion
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -471,6 +463,7 @@ namespace uninfe
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
     }
     #endregion
 }

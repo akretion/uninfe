@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using uninfe;
+using UniNFeLibrary;
 
 namespace GerarProcNFe
 {
@@ -127,7 +128,7 @@ namespace GerarProcNFe
         /// <date>02/05/2009</date>
         private string LerChave(string strArqNfe)
         {
-            UniLerXMLClass oLerXml = new UniLerXMLClass();
+            LerXML oLerXml = new LerXML();
 
             oLerXml.Nfe(strArqNfe);
 
@@ -202,7 +203,7 @@ namespace GerarProcNFe
         /// <date>20/04/2009</date>
         private void CriarXmlDistNFe(string strArqNFe, string strArqProRec)
         {
-            UniNfeClass oUniNfe = new UniNfeClass();
+            Auxiliar oAux = new Auxiliar();
 
             string strProtNfe = this.SeparaProtocolo(strArqProRec);
 
@@ -227,7 +228,7 @@ namespace GerarProcNFe
                     "</nfeProc>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcNFe = oUniNfe.ExtrairNomeArq(strArqNFe, "-nfe.xml") + "-procNFe.xml";
+                string strNomeArqProcNFe = oAux.ExtrairNomeArq(strArqNFe, "-nfe.xml") + "-procNFe.xml";
 
                 //Gravar o XML em uma linha sÃƒÂ³ (sem quebrar as tagÃ‚Â´s linha a linha) ou dÃƒÂ¡ erro na hora de validar o XML pelos Schemas. Wandreu 13/05/2009
                 swProc = File.CreateText(strNomeArqProcNFe);

@@ -1,0 +1,2416 @@
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
+using System.IO;
+using System.Xml;
+using System.Text;
+using System.Collections.Generic;
+#if ! __teste__
+//using UniNFeLibrary;
+#endif
+
+namespace UniNFeLibrary
+{
+    /// <summary>
+    /// Classe responsável pela conversão de TXT para XML da Nota Fiscal Eletrônica
+    /// TXT no mesmo formato do aplicativo de NFe do estado de São Paulo
+    /// </summary>
+    public class UnitxtTOxmlClass
+    {
+        #region --- public properties
+        
+        public List<txtTOxmlClassRetorno> cRetorno = new List<txtTOxmlClassRetorno>();
+        //public string Retorno { get; private set; }
+        public string cMensagemErro { get; private set; }
+
+        /// <summary>
+        /// Chave da NFe já calculada e montada
+        /// </summary>
+        //public string ChaveNfe { get; private set; }
+
+        #endregion
+
+        #region --- private properties
+
+        private string cChave = ""; // Monta string com a chave Nota fiscal
+        private int serie = 0;
+        private int nNF = 0; //Numero Nf
+        private int cNF = 0; //Código Numérico que compõe a Chave de Acesso
+        private int cDV = 0; //Dígito Verificador da Chave de Acesso
+        //private int iControle = 1;
+        private string cLinhaTXT = "";
+        private int iLinhaLida = 0; //controla a linha que foi lida
+
+        #endregion
+
+        /// <summary>
+        /// Converte o arquivo TXT gerado para ser importado através do programa emissor de Nfe SFAZ/SP para XML versão 1.10
+        /// </summary>
+        /// <param name="cFile">Arquivo TXT a ser convertido</param>
+        /// <param name="cDestino">Pasta de destino onde é para ser gerado o XML da NFe</param>
+        /// <by>Marcos Paulo Gomes - marcos@delphibr.com.br</by>
+        /// <date>16/05/2009</date>
+        public void Converter(string cFile, string cDestino)
+        {
+            cRetorno.Clear();
+
+            //Lê o arquivo texto passado do padrao do software emissor de Nfe Sefaz/SP 
+            //Variaveis utilizadas na função
+
+            cMensagemErro = "";
+            if (!File.Exists(cFile))
+            {
+                ///
+                /// danasa 12-8-2009
+                /// 
+                cMensagemErro = "Arquivo [" + cFile + "] não encontrado";
+                return;
+            }
+
+            TextReader txt = new StreamReader(cFile);
+
+            //string cLinhaTXT = "";
+            //int iLinhaLida = 0; //controla a linha que foi lida
+
+            try
+            {
+#if xxx
+                System.Reflection.Assembly a = System.Reflection.Assembly.GetEntryAssembly();
+#if __teste__
+                string baseDir = @"C:\\unimake\\uninfe\\schemas\\nfe_v1.10.xsd";
+#else
+                string baseDir = InfoApp.PastaSchemas() + "\\nfe_v1.10.xsd";
+#endif
+
+                DataSet dsNfe = new DataSet();
+                dsNfe.ReadXmlSchema(baseDir);
+                dsNfe.EnforceConstraints = false; //permite campos nulos
+
+                //string cLinhaTXT = "";
+                int iLeitura;
+                string[] dados;
+                //int iLacre;
+
+                ///
+                /// danasa 8-2009
+                /// 
+                DataRow dremit = dsNfe.Tables["emit"].NewRow();
+                DataRow drdest = dsNfe.Tables["dest"].NewRow();
+
+                DataRow drPISOutr;
+                DataRow drPISST;
+                DataRow drCOFINSOutr;
+                DataRow drCOFINSST;
+                DataRow drtransporta;
+                DataRow drIPITrib;
+
+                string idprod; // Guarda o Id do produto, usado para gravar os dados referente a impostos
+                idprod = "";
+                drPISOutr = null;
+                drPISST = null;
+                drCOFINSOutr = null;
+                drCOFINSST = null;
+                drtransporta = null;
+                drIPITrib = null;
+                int iControle;
+                int nElementos;
+                iControle = 1;
+                //iLacre = 1;
+
+                Int64 iTmp = 0; //Valores temporarios
+                ///
+                /// danasa 8-2009 (movido para private para ser utilizados na funcao "FechaNota")
+                /// 
+                //string cChave = ""; // Monta string com a chave Nota fiscal
+                //int serie = 0;
+                //int nNF = 0; //Numer Nf
+                //int cNF = 0; //Código Numérico que compõe a Chave de Acesso
+                //int cDV = 0; //Dígito Verificador da Chave de Acesso
+                //int iLinhaLida = 0; //controla a linha que foi lida
+#endif
+
+                cLinhaTXT = txt.ReadLine();
+                string[] dados;
+                dados = cLinhaTXT.Split('|');
+                iLinhaLida++;
+
+                if (dados[0] != "NOTAFISCAL" && dados[0] != "NOTA FISCAL")
+                {
+                    throw new ArgumentException("Este arquivo não é um arquivo de NOTA FISCAL. A Primeira linha do arquivo deve conter o texto 'NOTAFISCAL'");
+                }
+
+                int nNotas = 1;
+                if (dados.GetLength(0) == 2)
+                    nNotas = Convert.ToInt32("0" + dados[1]);
+                if (nNotas == 0)
+                    nNotas = 1;
+
+                this.nNF = 0;
+                for (int nNota = 0; nNota < nNotas; ++nNota)
+                {
+                    this.ProcessaNota(txt, cDestino);
+                }
+            }
+            catch (Exception Ex)
+            {
+                cMensagemErro = Ex.Message + Environment.NewLine + Environment.NewLine +
+                    "Conteudo da linha: " + cLinhaTXT + Environment.NewLine +
+                    "Linha: " + iLinhaLida.ToString() + Environment.NewLine +
+                    "Arquivo texto: " + cFile;
+                ///
+                /// danasa 8-2009
+                /// Exclui os XML convertidos
+                /// 
+                foreach (txtTOxmlClassRetorno txtClass in this.cRetorno)
+                {
+                    FileInfo fi = new FileInfo(cDestino + @"\convertidos\" + txtClass.XMLFileName);
+                    fi.Delete();
+                }
+            }
+            finally
+            {
+                txt.Close();
+            }
+        }
+
+#if _used_
+        private String gera_chave(String cChave)
+        {
+            /* Function Criada por Marcos Paulo Gomes
+             * Funcção que retorna o DV da chave de acesso, para entender melhor a formula de cálculo do digito, veja a pagina 69 
+             * do manual de integração, tópico "CÁLCULO DO DÍGITO VERIFICADOR DA CHAVE DE ACESSO DA NF-e"
+             * 
+             */
+            int peso = 2;
+            int icont;
+            int total = 0;
+
+            for (icont = cChave.Length - 1; icont >= 0; icont--)
+            {
+                if (peso > 9) { peso = 2; }
+
+                total += Convert.ToInt16(cChave.Substring(icont, 1)) * peso;
+                peso++;
+
+            }
+            return cChave + (11 - (total % 11)).ToString();
+        }
+#endif
+
+        private string valida_elemento(string cElem, int iCampos)
+        {
+            /*
+             * cElem - Recebe o tipo de elemento que será validado
+             * iCampos - Recebe a quantidade de campos
+             */
+            string[,] aValidar = new string[88, 2];
+            string cRetorno = "OK";
+            int iPos = -1;
+            /* Gera uma array com a identficicação da linha e quantos campos tem que ter na linha, por exemplo:
+             * a linha com a identificação B deve ter 20 campos, caso a quantidade seja diferente disso é porqueo txt foi gerado
+             * errado, sendo assim ele gera uma exceção e devolve erro para a rotina principal
+             */
+            #region Definição de array para validação dos segmentos do arquivo txt
+            iPos++; aValidar[iPos, 0] = "NOTAFISCAL"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "A"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "B"; aValidar[iPos, 1] = "20";
+            iPos++; aValidar[iPos, 0] = "B13"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "B14"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "C"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "C02"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "C02a"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "C05"; aValidar[iPos, 1] = "13";
+            iPos++; aValidar[iPos, 0] = "D"; aValidar[iPos, 1] = "13";
+            iPos++; aValidar[iPos, 0] = "E"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "E02"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "E03"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "E05"; aValidar[iPos, 1] = "13";
+            iPos++; aValidar[iPos, 0] = "F"; aValidar[iPos, 1] = "10";
+            iPos++; aValidar[iPos, 0] = "G"; aValidar[iPos, 1] = "10";
+            iPos++; aValidar[iPos, 0] = "H"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "I"; aValidar[iPos, 1] = "19";
+            iPos++; aValidar[iPos, 0] = "I18"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "I25"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "J"; aValidar[iPos, 1] = "20";
+            iPos++; aValidar[iPos, 0] = "c"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "K"; aValidar[iPos, 1] = "7";
+            iPos++; aValidar[iPos, 0] = "L"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "L01"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "L105"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "L109"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "L114"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "L117"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "M"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "N"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "N02"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "N03"; aValidar[iPos, 1] = "14";
+            iPos++; aValidar[iPos, 0] = "N04"; aValidar[iPos, 1] = "9";
+            iPos++; aValidar[iPos, 0] = "N05"; aValidar[iPos, 1] = "10";
+            iPos++; aValidar[iPos, 0] = "N06"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "N07"; aValidar[iPos, 1] = "9";
+            iPos++; aValidar[iPos, 0] = "N08"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "N09"; aValidar[iPos, 1] = "15";
+            iPos++; aValidar[iPos, 0] = "N10"; aValidar[iPos, 1] = "15";
+            iPos++; aValidar[iPos, 0] = "O"; aValidar[iPos, 1] = "7";
+            iPos++; aValidar[iPos, 0] = "O07"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "O10"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "O11"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "O08"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "P"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "Q"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "Q02"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "Q03"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "Q04"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "Q05"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "Q07"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "Q10"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "R"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "R02"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "R04"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "S"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "S02"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "S03"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "S04"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "S05"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "S07"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "S09"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "T"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "T02"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "T04"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "U"; aValidar[iPos, 1] = "7";
+            iPos++; aValidar[iPos, 0] = "W"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "W02"; aValidar[iPos, 1] = "16";
+            iPos++; aValidar[iPos, 0] = "W17"; aValidar[iPos, 1] = "7";
+            iPos++; aValidar[iPos, 0] = "W23"; aValidar[iPos, 1] = "9";
+            iPos++; aValidar[iPos, 0] = "X"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "X03"; aValidar[iPos, 1] = "7";
+            iPos++; aValidar[iPos, 0] = "X04"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "X05"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "X11"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "X18"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "X22"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "X26"; aValidar[iPos, 1] = "8";
+            iPos++; aValidar[iPos, 0] = "X33"; aValidar[iPos, 1] = "3";
+            iPos++; aValidar[iPos, 0] = "Y"; aValidar[iPos, 1] = "2";
+            iPos++; aValidar[iPos, 0] = "Y02"; aValidar[iPos, 1] = "6";
+            iPos++; aValidar[iPos, 0] = "Y07"; aValidar[iPos, 1] = "5";
+            iPos++; aValidar[iPos, 0] = "Z"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "Z04"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "Z10"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "ZA"; aValidar[iPos, 1] = "4";
+            iPos++; aValidar[iPos, 0] = "ZB"; aValidar[iPos, 1] = "5";
+            #endregion
+
+            for (iPos = 0; iPos <= 87; iPos++)
+            {
+                if (cElem.ToUpper() == aValidar[iPos, 0])
+                {
+                    if (Convert.ToInt16(aValidar[iPos, 1])  != iCampos)
+                    {
+                        if ((aValidar[iPos, 0] == "I") && (iCampos == 19 || iCampos == 20))
+                        {
+                            cRetorno = "OK";
+                        }
+                        else
+                        cRetorno = "A quantidade de campos no segmento [" + cElem + "] é " + iCampos.ToString() + ", o correto é(são) " +
+                          Convert.ToInt16(aValidar[iPos, 1]) + " campo(s).";
+                    }
+                }
+            }
+            return cRetorno;
+        }
+
+        private string limpa_texto(string cTexto)
+        {
+            //int iControle;
+            string cRetorno;
+            cRetorno = cTexto;
+            while (cRetorno.IndexOf("> ") > -1)
+            {
+                cRetorno = cRetorno.Replace("> ",">");
+                
+                /*
+                for (iControle = 0; iControle < cTexto.Length; iControle++)
+                {
+                    if (cRetorno.IndexOf("> ") > -1)
+                    {
+                        //cRetorno.Substring(iControle
+                    }
+                }
+                 */
+            }
+            cRetorno = cRetorno.Replace(" />", "/>");
+            return cRetorno;
+        }
+
+        public Int32 GerarCodigoNumerico(Int32 numeroNF)
+        {
+            string s;
+            Int32 i, j, k;
+
+            // Essa função gera um código numerico atravéz de calculos realizados sobre o parametro numero
+            s = numeroNF.ToString("000000000");
+            for (i = 0; i < 9; ++i)
+            {
+                k = 0;
+                for (j = 0; j < 9; ++j)
+                    k += Convert.ToInt32(s[j]) * (j + 1);
+                s = (k % 11).ToString().Trim() + s;
+            }
+            return Convert.ToInt32(s.Substring(0, 9));
+        }
+
+        public Int32 GerarDigito(string chave)
+        {
+            int i, j, Digito;
+            const string PESO = "4329876543298765432987654329876543298765432";
+
+            chave = chave.Replace("NFe", "");
+            if (chave.Length != 43)
+                throw new Exception("Erro na composição da chave para obter o DV (" + chave.Length.ToString() + ")");
+
+            // Manual Integracao Contribuinte v2.02a - Página: 70 //
+            j = 0;
+            Digito = -1;
+            try
+            {
+                for (i = 0; i < 43; ++i)
+                    j += Convert.ToInt32(chave.Substring(i, 1)) * Convert.ToInt32(PESO.Substring(i, 1));
+                Digito = 11 - (j % 11);
+                if ((j % 11) < 2)
+                    Digito = 0;
+            }
+            catch
+            {
+                Digito = -1;
+            }
+            if (Digito == -1)
+                throw new Exception("Erro no cálculo do DV");
+            return Digito;
+        }
+
+        #region --- Validacao das tags
+
+        /// <summary>
+        /// valida uma tag
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="field"></param>
+        /// <param name="dataRow"></param>
+        /// <param name="optional"></param>
+        /// <param name="minLength"></param>
+        /// <param name="maxLength"></param>
+        private void Check(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength)
+        {
+            int len = dataRow[field].ToString().Trim().Length;
+            if (len == 0 && optional == ObOp.Opcional)
+                return;
+
+            if (len == 0 && minLength > 0)
+            {
+                throw new Exception("Segmento [" + segment + "]: tag <" + field +
+                    "> deve ser informada. Conteudo: \"" + dataRow[field].ToString() + "\"");// - linha: " + iLinhaLida.ToString() + Environment.NewLine;
+            }
+            else
+            if (len > maxLength || len < minLength)
+            {
+                throw new Exception("Segmento [" + segment + "]: tag <" + field +
+                    "> deve ter seu tamanho entre " + minLength.ToString() + " e " + maxLength.ToString());
+                    //" - linha: " + iLinhaLida.ToString() + Environment.NewLine;
+            }
+        }
+        /// <summary>
+        /// valida uma tag do tipo numerico
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="field"></param>
+        /// <param name="dataRow"></param>
+        /// <param name="optional"></param>
+        /// <param name="minLength"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="decimals"></param>
+        private void Check(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength, int decimals)
+        {
+            this.Check(segment, field, dataRow, optional, minLength, maxLength);
+            if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
+            {
+                int pos = dataRow[field].ToString().Trim().IndexOf(".") + 1;
+                int ndec = dataRow[field].ToString().Trim().Substring(pos).Length;
+                if (ndec != decimals)
+                    throw new Exception("Segmento [" + segment + "]: tag <" + field +
+                        "> número de casas decimais deve ser de " + decimals.ToString() + 
+                        " e existe(m) " + ndec.ToString());
+            }
+        }
+        /// <summary>
+        /// Valida uma tag do tipo data
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="field"></param>
+        /// <param name="dataRow"></param>
+        /// <param name="optional"></param>
+        private void Check(string segment, string field, DataRow dataRow, ObOp optional)
+        {
+            this.Check(segment, field, dataRow, optional, 10, 10);
+            if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
+            {
+                int pos = dataRow[field].ToString().Trim().IndexOf("-");
+                if (pos==-1)
+                    throw new Exception("Segmento [" + segment + "]: tag <" + field +
+                        "> data inválida. Conteudo: \"" + dataRow[field].ToString() + "\"");
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Atribui ao elementos d um DataRow o conteudo do que fora lido do arquivo texto
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="dados"></param>
+        private void PopulateDataRow(DataRow dr, string[] dados)
+        {
+            for (int iLeitura = 0; iLeitura <= dados.GetLength(0) - 1; iLeitura++)
+            {
+                if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                {
+                    dr[iLeitura - 1] = dados[iLeitura].Trim();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Processa o arquivo texto
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="cDestino"></param>
+        private void ProcessaNota(TextReader txt, string cDestino)
+        {
+//            System.Reflection.Assembly a = System.Reflection.Assembly.GetEntryAssembly();
+#if __teste__
+            string baseDir = @"C:\\unimake\\uninfe\\schemas\\nfe_v1.10.xsd";
+#else
+            string baseDir = InfoApp.PastaSchemas() + "\\nfe_v1.10.xsd";
+#endif
+            if (!File.Exists(baseDir))
+                throw new Exception("Arquivo: " + baseDir + " não encontrado");
+
+            DataSet dsNfe = new DataSet();
+            dsNfe.ReadXmlSchema(baseDir);
+            dsNfe.EnforceConstraints = false; //permite campos nulos
+
+            DataRow dremit = dsNfe.Tables["emit"].NewRow();
+            DataRow drdest = dsNfe.Tables["dest"].NewRow();
+            DataRow drPISOutr = null;
+            DataRow drPISST = null;
+            DataRow drCOFINSOutr = null;
+            DataRow drCOFINSST = null;
+            DataRow drtransporta = null;
+            DataRow drIPITrib = null;
+
+            string idprod = ""; // Guarda o Id do produto, usado para gravar os dados referente a impostos
+            int iControle = 1;
+            int nElementos;
+            int iLeitura;
+            string[] dados;
+            //int iLacre = 1;
+            Int64 iTmp = 0; //Valores temporarios
+            bool vNovaNota = false;
+            bool vTiraxFant = false;
+
+            this.nNF = 0;
+
+            while (cLinhaTXT != null)
+            {
+                dados = cLinhaTXT.Split('|');
+                dados[0] = dados[0].ToUpper();
+                nElementos = dados.GetLength(0) - 1;
+
+                switch (dados[0])
+                {
+                    case "NOTAFISCAL":
+                    case "NOTA FISCAL":
+                        break;
+
+                    case "A":
+                        #region -- A
+
+                        if (this.nNF > 0)
+                        {
+                            vNovaNota = true;
+                        }
+                        else
+                        {
+                            //MessageBox.Show(iLinhaLida.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cLinhaTXT);
+
+                            //MessageBox.Show(dados[0] + "\n" + dados[1] + "\n" + dados[2]+"\n\n"+nElementos.ToString());
+
+                            //A|1.10|NFe35090504176770000140550010000176500000176506|
+                            DataRow dr = dsNfe.Tables["infNFe"].NewRow();
+                            if (nElementos >= 1)
+                                dr["versao"] = dados[1].Trim();
+                            if (nElementos >= 2)
+                                dr["id"] = dados[2]; //id
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["infNFe"].Rows.Add(dr);
+
+                            this.Check(dados[0], "versao", dr, ObOp.Obrigatorio, 1, 4);
+                        }
+                        break;
+
+                        #endregion
+
+                    case "B": //tag <infNFe><ide
+                        #region -- B
+                        {
+                            DataRow dr = dsNfe.Tables["ide"].NewRow();
+                            cChave = "";
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*18*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["infNFe_Id"] = 0;
+                            dr["ide_Id"] = 0;
+                            dsNfe.Tables["ide"].Rows.Add(dr);
+
+                            //B|cUF|cNF|natOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|tpNF|cMunFG|tpImp|tpEmis|cDV|tpAmb|finNFe|procEmi|verProc|
+#if !__teste__
+                            if (dr["cUF"].ToString() == "")
+                                ///
+                                /// Assume a UF da configuracao
+                                ///
+                                dr["cUF"] = ConfiguracaoApp.vUnidadeFederativaCodigo;
+#endif
+                            this.Check(dados[0], "cUF", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "natOp", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "mod", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "serie", dr, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "nNF", dr, ObOp.Obrigatorio, 1, 9);
+                            this.Check(dados[0], "dEmi", dr, ObOp.Obrigatorio);
+                            this.Check(dados[0], "dSaiEnt", dr, ObOp.Opcional);
+                            this.Check(dados[0], "tpNF", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
+                            this.Check(dados[0], "tpImp", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "tpEmis", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "cDV", dr, ObOp.Opcional, 1, 1);
+                            this.Check(dados[0], "tpAmb", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "finNFe", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "procEmi", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "verProc", dr, ObOp.Obrigatorio, 1, 20);
+
+                            ///
+                            /// danasa 8-2009 (adicionado o "0" para que não haja erro de conversão)
+                            /// 
+                            serie = Convert.ToInt32("0" + dr["serie"].ToString());
+                            nNF = Convert.ToInt32("0" + dr["nNF"].ToString());   //Numero Nf
+                            cNF = Convert.ToInt32("0" + dr["cNF"].ToString());   //Código Numérico que compõe a Chave de Acesso
+                            cDV = Convert.ToInt32("0" + dr["cDV"].ToString()); ; //Dígito Verificador da Chave de Acesso
+
+                            cChave = dr["cUF"].ToString() + dr["dEmi"].ToString().Substring(2, 2) +
+                                     dr["dEmi"].ToString().Substring(5, 2); //data AAMM
+                        }
+                        break;
+
+                        #endregion
+
+                    case "B13":
+                    case "B14": //tag <infNFe><ide><refNF>
+                        #region -- B13 ou B14
+                        {
+                            //esse codigo foi montado dessa forma para que possa mater a tag <NFref><refNf>
+                            DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
+                            drNFref["ide_Id"] = 0;
+                            drNFref["NFref_Id"] = iControle;
+                            if (dados[0] == "B13") //<NFref>
+                            {
+                                if (nElementos >= 1)
+                                    drNFref[0] = dados[1]; //caso tenha o segmento B13 preenche o campo chave
+
+                                this.Check(dados[0], "CNPJ", drNFref, ObOp.Obrigatorio, 44, 44);
+                            }
+                            dsNfe.Tables["NFref"].Rows.Add(drNFref);
+
+                            if (dados[0] == "B14")
+                            {
+                                DataRow dr = dsNfe.Tables["refNF"].NewRow();
+                                this.PopulateDataRow(dr, dados);
+                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
+                                //{
+                                //    if (iLeitura > 0 && dados[iLeitura] != null)
+                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                                //}
+                                dr["NFref_Id"] = iControle;
+                                dsNfe.Tables["refNF"].Rows.Add(dr);
+
+                                this.Check(dados[0], "cUF", dr, ObOp.Obrigatorio, 2, 2);
+                                this.Check(dados[0], "AAMM", dr, ObOp.Obrigatorio, 4, 4);
+                                this.Check(dados[0], "CNPJ", dr, ObOp.Obrigatorio, 14, 14);
+                                this.Check(dados[0], "mod", dr, ObOp.Obrigatorio, 2, 2);
+                                this.Check(dados[0], "serie", dr, ObOp.Obrigatorio, 1, 3);
+                                this.Check(dados[0], "nNF", dr, ObOp.Obrigatorio, 1, 9);
+                            }
+                            iControle = iControle + 1;
+                        }
+                        break;
+
+                        #endregion
+
+                    case "C": //tag <infNFe><ide><emit>
+                        #region -- C
+                        {
+                            dremit["IE"] = "";
+                            //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
+                            for (iLeitura = 0; iLeitura <= nElementos /*6*/; iLeitura++)
+                            {
+                                //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
+                                if (iLeitura > 1 & dados[iLeitura] != null && dados[iLeitura - 1].Trim() != "")
+                                    dremit[iLeitura] = dados[iLeitura - 1].Trim();
+                            }
+                            dremit["infNFe_Id"] = 0;
+                            dremit["emit_Id"] = 0;
+                            ///
+                            /// danasa 8-2009
+                            /// Se não definido o nome fantasia, atribuo o proprio nome da empresa
+                            /// pois quando for ajustar a IE, é obrigratorio ter a tag <xFant>
+                            /// 
+                            this.Check(dados[0], "xNome", dremit, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xFant", dremit, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "IE", dremit, ObOp.Obrigatorio, 0, 14);
+                            this.Check(dados[0], "IEST", dremit, ObOp.Opcional, 2, 14);
+                            this.Check(dados[0], "IM", dremit, ObOp.Opcional, 1, 15);
+                            this.Check(dados[0], "CNAE", dremit, ObOp.Opcional, 7, 7);
+
+                            if (dremit["xFant"].ToString() == "")
+                            {
+                                vTiraxFant = true;
+                                dremit["xFant"] = dremit["xNome"].ToString();
+                            }
+                        }
+                        break;
+
+                        #endregion
+
+                    case "C02": //ainda tag <infNFe><ide><emit>, preenche o cnpj
+                        #region -- C02
+
+                        if (nElementos >= 1)
+                            dremit[0] = dados[1];
+
+                        this.Check(dados[0], "CNPJ", dremit, ObOp.Obrigatorio, 14, 14);
+                        iTmp = Convert.ToInt64("0" + dremit["CNPJ"]);
+                        cChave = cChave + iTmp.ToString("00000000000000") + "55";
+                        break;
+
+                        #endregion
+
+                    case "C02A": //ainda tag <infNFe><ide><emit>, preenche o cpf
+                        #region -- C02A
+                        if (nElementos >= 1)
+                            dremit[1] = dados[1];
+
+                        this.Check(dados[0], "CPF", dremit, ObOp.Obrigatorio, 11, 11);
+                        break;
+                        #endregion
+
+                    case "C05":
+                        #region -- C05
+                        {
+                            DataRow dr = dsNfe.Tables["enderEmit"].NewRow();
+
+                            dr["emit_Id"] = 0;
+
+                            dsNfe.Tables["emit"].Rows.Add(dremit);
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["enderEmit"].Rows.Add(dr);
+
+                            this.Check(dados[0], "xLgr", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "nro", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xCpl", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "xBairro", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "cMun", dr, ObOp.Obrigatorio, 1, 7);
+                            this.Check(dados[0], "xMun", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "UF", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "CEP", dr, ObOp.Opcional, 8, 8);
+                            this.Check(dados[0], "cPais", dr, ObOp.Opcional, 4, 4);
+                            this.Check(dados[0], "xPais", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "fone", dr, ObOp.Opcional, 1, 10);
+                        }
+                        break;
+                        #endregion
+
+                    case "D":
+                        #region -- D
+                        {
+                            DataRow dr = dsNfe.Tables["avulsa"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["avulsa"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CNPJ", dr, ObOp.Obrigatorio, 14, 14);
+                            this.Check(dados[0], "xOrgao", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "matr", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xAgente", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "fone", dr, ObOp.Obrigatorio, 1, 10);
+                            this.Check(dados[0], "UF", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "nDAR", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "dEmi", dr, ObOp.Obrigatorio);
+                            this.Check(dados[0], "vDAR", dr, ObOp.Obrigatorio, 1, 15);
+                            this.Check(dados[0], "repEmi", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "dPag", dr, ObOp.Opcional);
+                        }
+                        break;
+                        #endregion
+
+                    case "E": //tag <infNFe><ide><emit>
+                        #region -- E
+                        {
+                            dsNfe.Tables["dest"].Columns["IE"].AllowDBNull = true;
+                            drdest["IE"] = ""; //deve sempre gerar essa tag mesmo que em branco se nao ha problemas na hora dele inveter o enderdest
+
+                            for (iLeitura = 0; iLeitura <= nElementos/*4*/; iLeitura++)
+                            {
+                                //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
+                                if (iLeitura > 1 & dados[iLeitura] != null && dados[iLeitura - 1].Trim() != "")
+                                    drdest[iLeitura] = dados[iLeitura - 1].Trim();
+                            }
+                            drdest["dest_Id"] = 0;
+                            drdest["infNFe_Id"] = 0;
+
+                            this.Check(dados[0], "xNome", drdest, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "IE", drdest, ObOp.Obrigatorio, 0, 14);
+                            this.Check(dados[0], "ISUF", drdest, ObOp.Opcional, 1, 9);
+                        }
+                        break;
+                        #endregion
+
+                    case "E02": //ainda tag <infNFe><ide><emit>, preenche o cnpj
+                        #region -- E02
+                        if (nElementos >= 1)
+                            drdest["CNPJ"] = dados[1];
+                        dsNfe.Tables["dest"].Rows.Add(drdest);
+
+                        this.Check(dados[0], "CNPJ", drdest, ObOp.Obrigatorio, 14, 14); 
+                        break;
+                        #endregion
+
+                    case "E03": //ainda tag <infNFe><ide><emit>, preenche o cpf
+                        #region -- E03
+                        if (nElementos >= 1)
+                            drdest["CPF"] = dados[1];
+                        dsNfe.Tables["dest"].Rows.Add(drdest);
+
+                        this.Check(dados[0], "CPF", drdest, ObOp.Obrigatorio, 11, 11);
+                        break;
+                        #endregion
+
+                    case "E05":
+                        #region -- E05
+                        {
+                            DataRow drenderDest = dsNfe.Tables["enderDest"].NewRow();
+                            this.PopulateDataRow(drenderDest, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drenderDest[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            drenderDest["dest_Id"] = 0;
+                            dsNfe.Tables["enderDest"].Rows.Add(drenderDest);
+
+                            this.Check(dados[0], "xLgr", drenderDest, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "nro", drenderDest, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xCpl", drenderDest, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "xBairro", drenderDest, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "cMun", drenderDest, ObOp.Obrigatorio, 1, 7);
+                            this.Check(dados[0], "xMun", drenderDest, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "UF", drenderDest, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "CEP", drenderDest, ObOp.Opcional, 8, 8);
+                            this.Check(dados[0], "cPais", drenderDest, ObOp.Opcional, 1, 4);
+                            this.Check(dados[0], "xPais", drenderDest, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "fone", drenderDest, ObOp.Opcional, 1, 10);
+                        }
+                        break;
+                        #endregion
+
+                    case "F":
+                        #region -- F
+                        {
+                            DataRow drretirada = dsNfe.Tables["retirada"].NewRow();
+                            this.PopulateDataRow(drretirada, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drretirada[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["retirada"].Rows.Add(drretirada);
+
+                            this.Check(dados[0], "CNPJ", drretirada, ObOp.Obrigatorio, 14, 14);
+                            this.Check(dados[0], "xLgr", drretirada, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "nro", drretirada, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xCpl", drretirada, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "xBairro", drretirada, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "cMun", drretirada, ObOp.Obrigatorio, 1, 7);
+                            this.Check(dados[0], "xMun", drretirada, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "UF", drretirada, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "G":
+                        #region -- G
+                        {
+                            DataRow drentrega = dsNfe.Tables["entrega"].NewRow();
+                            this.PopulateDataRow(drentrega, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drentrega[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            drentrega["infNFe_Id"] = 0;
+                            dsNfe.Tables["entrega"].Rows.Add(drentrega);
+
+                            this.Check(dados[0], "CNPJ", drentrega, ObOp.Obrigatorio, 14, 14);
+                            this.Check(dados[0], "xLgr", drentrega, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "nro", drentrega, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "xCpl", drentrega, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "xBairro", drentrega, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "cMun", drentrega, ObOp.Obrigatorio, 1, 7);
+                            this.Check(dados[0], "xMun", drentrega, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "UF", drentrega, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "H":
+                        #region -- H
+                        {
+                            DataRow drdet = dsNfe.Tables["det"].NewRow();
+                            if (nElementos >= 1) 
+                                drdet["nItem"] = dados[1];
+                            if (nElementos >= 2)
+                                if (dados[2].Trim() != "")
+                                    drdet["infAdProd"] = dados[2];
+                            idprod = drdet[0].ToString();
+                            drdet["det_Id"] = idprod; //det_Id
+                            drdet["infNFe_Id"] = 0;
+                            dsNfe.Tables["det"].Rows.Add(drdet);
+
+                            this.Check(dados[0], "nItem", drdet, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "infAdProd", drdet, ObOp.Opcional, 0, 500);
+                        }
+                        break;
+                        #endregion
+
+                    case "I":
+                        #region -- I
+                        {
+                            DataRow drprod = dsNfe.Tables["prod"].NewRow();
+                            drprod["cEAN"] = ""; //se nao deixa-lo em branco da erro
+                            drprod["CEANTrib"] = ""; //se nao deixa-lo em branco da erro.
+                            this.PopulateDataRow(drprod, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*18*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drprod[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            drprod[19] = idprod.ToString(); //det_Id
+                            //drprod["det_Id"] = idprod.ToString(); //det_Id
+                            dsNfe.Tables["prod"].Rows.Add(drprod);
+
+                            this.Check(dados[0], "cProd", drprod, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "cEAN", drprod, ObOp.Obrigatorio, 0, 14);
+                            this.Check(dados[0], "xProd", drprod, ObOp.Obrigatorio, 1, 120);
+                            this.Check(dados[0], "NCM", drprod, ObOp.Obrigatorio, 8, 8);
+                            this.Check(dados[0], "EXTIPI", drprod, ObOp.Opcional, 2, 3);
+                            this.Check(dados[0], "genero", drprod, ObOp.Opcional, 2, 2);
+                            this.Check(dados[0], "CFOP", drprod, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "uCom", drprod, ObOp.Obrigatorio, 1, 6);
+                            this.Check(dados[0], "qCom", drprod, ObOp.Obrigatorio, 1, 12, 4);
+                            this.Check(dados[0], "vUnCom", drprod, ObOp.Obrigatorio, 1, 16, 4);
+                            this.Check(dados[0], "vProd", drprod, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "cEANTrib", drprod, ObOp.Obrigatorio, 0, 14);
+                            this.Check(dados[0], "uTrib", drprod, ObOp.Obrigatorio, 1, 6);
+                            this.Check(dados[0], "qTrib", drprod, ObOp.Obrigatorio, 1, 12, 4);
+                            this.Check(dados[0], "vUnTrib", drprod, ObOp.Obrigatorio, 1, 16, 4);
+                            this.Check(dados[0], "vFrete", drprod, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vSeg", drprod, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vDesc", drprod, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "I18":
+                        #region -- I18
+                        {
+                            DataRow drDI = dsNfe.Tables["DI"].NewRow();
+                            this.PopulateDataRow(drDI, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drDI[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["DI"].Rows.Add(drDI);
+
+                            this.Check(dados[0], "nDI", drDI, ObOp.Obrigatorio, 1, 10);
+                            this.Check(dados[0], "dDI", drDI, ObOp.Obrigatorio);
+                            this.Check(dados[0], "xLocDesemb", drDI, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "UFDesemb", drDI, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "dDesemb", drDI, ObOp.Obrigatorio);
+                            this.Check(dados[0], "cExportador", drDI, ObOp.Obrigatorio, 1, 60);
+                        }
+                        break;
+                        #endregion
+
+                    case "I25":
+                        #region -- I25
+                        {
+                            DataRow dradi = dsNfe.Tables["adi"].NewRow();
+                            this.PopulateDataRow(dradi, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dradi[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["adi"].Rows.Add(dradi);
+
+                            this.Check(dados[0], "nAdicao", dradi, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "nSeqAdic", dradi, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "cFabricante", dradi, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "vDescDI", dradi, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "J":
+                        #region -- J
+                        {
+                            DataRow drveicProd = dsNfe.Tables["veicProd"].NewRow();
+                            this.PopulateDataRow(drveicProd, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*22*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drveicProd[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["veicProd"].Rows.Add(drveicProd);
+
+                            this.Check(dados[0], "tpOp", drveicProd, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "chassi", drveicProd, ObOp.Obrigatorio, 17, 17);
+                            this.Check(dados[0], "cCor", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "xCor", drveicProd, ObOp.Obrigatorio, 40, 40);
+                            this.Check(dados[0], "pot", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "CM3", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "pesoL", drveicProd, ObOp.Obrigatorio, 1, 9);
+                            this.Check(dados[0], "pesoB", drveicProd, ObOp.Obrigatorio, 1, 9);
+                            this.Check(dados[0], "nSerie", drveicProd, ObOp.Obrigatorio, 9, 9);
+                            this.Check(dados[0], "tpComb", drveicProd, ObOp.Obrigatorio, 8, 8);
+                            this.Check(dados[0], "nMotor", drveicProd, ObOp.Obrigatorio, 1, 21);
+                            this.Check(dados[0], "CMKG", drveicProd, ObOp.Obrigatorio, 9, 9);
+                            this.Check(dados[0], "dist", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "RENAVAM", drveicProd, ObOp.Opcional, 9, 9);
+                            this.Check(dados[0], "anoMod", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "anoFab", drveicProd, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "tpPint", drveicProd, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "tpVeic", drveicProd, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "espVeic", drveicProd, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "VIN", drveicProd, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "condVeic", drveicProd, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "cMod", drveicProd, ObOp.Obrigatorio, 6, 6);
+                        }
+                        break;
+                        #endregion
+
+                    case "K":   //K - Detalhamento Específico de Medicamento
+                        #region -- K
+                        {
+                            DataRow drmed = dsNfe.Tables["med"].NewRow();
+                            this.PopulateDataRow(drmed, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drveicProd[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["med"].Rows.Add(drmed);
+
+                            this.Check(dados[0], "nLote", drmed, ObOp.Obrigatorio, 20, 20);
+                            this.Check(dados[0], "qLote", drmed, ObOp.Obrigatorio, 1, 11, 3);
+                            this.Check(dados[0], "dFab", drmed, ObOp.Obrigatorio);
+                            this.Check(dados[0], "dVal", drmed, ObOp.Obrigatorio);
+                            this.Check(dados[0], "vPMC", drmed, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "L":   //L - Detalhamento Específico de Armamentos
+                        #region -- L
+                        {
+                            DataRow drarma = dsNfe.Tables["arma"].NewRow();
+                            this.PopulateDataRow(drarma, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drarma[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["arma"].Rows.Add(drarma);
+
+                            this.Check(dados[0], "tpArma", drarma, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "nSerie", drarma, ObOp.Obrigatorio, 1, 9);
+                            this.Check(dados[0], "nCano", drarma, ObOp.Obrigatorio, 1, 9);
+                            this.Check(dados[0], "descr", drarma, ObOp.Obrigatorio, 1, 256);
+                        }
+                        break;
+                        #endregion
+
+                    case "L01":  //Combustível - Informar apenas para operações com combustíveis líquidos.
+                    case "L1":
+                        #region -- L01 ou L1
+                        {
+                            DataRow drcomb = dsNfe.Tables["comb"].NewRow();
+                            this.PopulateDataRow(drcomb, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drcomb[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["comb"].Rows.Add(drcomb);
+
+                            this.Check(dados[0], "cProdANP", drcomb, ObOp.Opcional, 9, 9);
+                            this.Check(dados[0], "CODIF", drcomb, ObOp.Opcional, 0, 21);
+                            this.Check(dados[0], "qTemp", drcomb, ObOp.Opcional, 1, 16, 4);
+                        }
+                        break;
+                        #endregion
+
+                    case "L05": //CIDE
+                    case "L105":
+                        #region -- L05 ou L105
+                        {
+                            DataRow drCIDE = dsNfe.Tables["CIDE"].NewRow();
+                            this.PopulateDataRow(drCIDE, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drCIDE[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["CIDE"].Rows.Add(drCIDE);
+
+                            this.Check(dados[0], "qBCprod", drCIDE, ObOp.Obrigatorio, 1, 16, 4);
+                            this.Check(dados[0], "vAliqProd", drCIDE, ObOp.Obrigatorio, 1, 15, 4);
+                            this.Check(dados[0], "vCIDE", drCIDE, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "L09": //ICMS próprio e ST retido
+                    case "L109":
+                        #region -- L09 ou L109
+                        {
+                            DataRow drICMSComb = dsNfe.Tables["ICMSComb"].NewRow();
+                            this.PopulateDataRow(drICMSComb, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drICMSComb[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["ICMSComb"].Rows.Add(drICMSComb);
+
+                            this.Check(dados[0], "vBCICMS", drICMSComb, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMS", drICMSComb, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vBCICMSST", drICMSComb, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMSST", drICMSComb, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "L114":    //ICMS para UF devido para a UF de destino, nas operações interestaduais 
+                                    //de produtos que tiveram retenção antecipada de ICMS por ST para a UF 
+                                    //do remetente
+                        #region -- L114
+                        {
+                            DataRow drICMSInter = dsNfe.Tables["ICMSInter"].NewRow();
+                            this.PopulateDataRow(drICMSInter, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*2*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drICMSInter[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["ICMSInter"].Rows.Add(drICMSInter);
+
+                            this.Check(dados[0], "vBCICMSSTDest", drICMSInter, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMSSTDest", drICMSInter, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "L117":    //ICMS para consumo em UF diversa - informar quando o produto for adquirido 
+                                    //para consumo em UF diversa da UF de localização do estabelecimento do 
+                                    //destinatário da nota fiscal
+                        #region -- L117
+                        {
+                            DataRow drICMSCons = dsNfe.Tables["ICMSCons"].NewRow();
+                            this.PopulateDataRow(drICMSCons, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        drICMSCons[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dsNfe.Tables["ICMSCons"].Rows.Add(drICMSCons);
+
+                            this.Check(dados[0], "vBCICMSSTCons", drICMSCons, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMSSTCons", drICMSCons, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "UFcons", drICMSCons, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N":   //N - ICMS Normal e ST
+                        #region -- N
+                        {
+                            DataRow dr = dsNfe.Tables["imposto"].NewRow();
+                            dr["imposto_Id"] = idprod.ToString();
+                            dr["det_Id"] = idprod.ToString();
+
+                            dsNfe.Tables["imposto"].Rows.Add(dr);
+
+                            dr = dsNfe.Tables["ICMS"].NewRow();
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dr["imposto_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS"].Rows.Add(dr);
+                        }
+                        break;
+                        #endregion
+
+                    case "N02": //CST – 00 – Tributada integralmente
+                        #region -- N02
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS00"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS00"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N03": //CST - 10 - Tributada e com cobrança do ICMS por substituição tributária
+                        #region -- N03
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS10"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*12*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS10"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N04": //CST – 20 - Com redução de base de cálculo
+                        #region -- N04
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS20"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS20"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N05": //CST – 30 - Isenta ou não tributada e com cobrança do ICMS por 
+                                //substituição tributária
+                        #region -- N05
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS30"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS30"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N06": //CST – 40 - Isenta, 41 - Não tributada e 50 - Suspensão
+                        #region -- N06
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS40"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*2*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS40"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N07": //CST – 51 - Diferimento - A exigência do preenchimento das informações 
+                                //do ICMS diferido fica à critério de cada UF.
+                        #region -- N07
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS51"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS51"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Opcional, 1, 1);
+                            this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N08": //CST – 60 - ICMS cobrado anteriormente por substituição tributária
+                        #region -- N08
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS60"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS60"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N09": //CST - 70 - Com redução de base de cálculo e cobrança do ICMS por 
+                                //substituição tributária
+                        #region -- N09
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS70"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*13*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS70"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "N10": //CST - 90 – Outros
+                        #region -- N10
+                        {
+                            DataRow dr = dsNfe.Tables["ICMS90"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*13*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["ICMS_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMS90"].Rows.Add(dr);
+
+                            this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                            this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "O": //IPI - Informar apenas quando o item for sujeito ao IPI
+                        #region -- O
+                        {
+                            DataRow dr = dsNfe.Tables["IPI"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["IPI_Id"] = idprod.ToString();
+                            dr["imposto_Id"] = idprod.ToString();
+                            dsNfe.Tables["IPI"].Rows.Add(dr);
+
+                            this.Check(dados[0], "clEnq", dr, ObOp.Opcional, 5, 5);
+                            this.Check(dados[0], "CNPJProd", dr, ObOp.Opcional, 14, 14);
+                            this.Check(dados[0], "cSelo", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "qSelo", dr, ObOp.Opcional, 1, 12);
+                            this.Check(dados[0], "cEnq", dr, ObOp.Obrigatorio, 3, 3);
+                        }
+                        break;
+                        #endregion
+
+                    case "O07":
+                    case "O10":
+                    case "O11":  //IPI Tributável
+                        #region -- O07, O08 e O11
+                        {
+                            if (dados[0] == "O07")
+                            {
+                                drIPITrib = dsNfe.Tables["IPITrib"].NewRow();
+                                if (nElementos >= 1)
+                                    drIPITrib["CST"] = dados[1].Trim();
+                                if (nElementos >= 2)
+                                    drIPITrib["vIPI"] = dados[2].Trim();
+
+                                this.Check(dados[0], "CST", drIPITrib, ObOp.Obrigatorio, 2, 2);
+                                this.Check(dados[0], "vIPI", drIPITrib, ObOp.Obrigatorio, 1, 15, 2);
+                            }
+                            if (dados[0] == "O10")
+                            {
+                                if (nElementos >= 1)
+                                    drIPITrib["vBC"] = dados[1].Trim();
+                                if (nElementos >= 2)
+                                    drIPITrib["pIPI"] = dados[2].Trim();
+
+                                this.Check(dados[0], "vBC", drIPITrib, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pIPI", drIPITrib, ObOp.Obrigatorio, 1, 5, 2);
+                            }
+                            if (dados[0] == "O11")
+                            {
+                                if (nElementos >= 1)
+                                    drIPITrib["vUnid"] = dados[1].Trim();
+                                if (nElementos >= 2)
+                                    drIPITrib["qUnid"] = dados[2].Trim();
+
+                                this.Check(dados[0], "vUnid", drIPITrib, ObOp.Obrigatorio, 1, 15, 4);
+                                this.Check(dados[0], "qUnid", drIPITrib, ObOp.Obrigatorio, 1, 16, 4);
+                            }
+                            drIPITrib["IPI_Id"] = idprod.ToString();
+                            if (dados[0] != "O07")
+                                dsNfe.Tables["IPITrib"].Rows.Add(drIPITrib);
+                        }
+                        break;
+                        #endregion
+
+                    case "O08": //IPI Não Tributável
+                        #region -- O08
+                        {
+                            DataRow dr = dsNfe.Tables["IPINT"].NewRow();
+                            if (nElementos >= 1)
+                                dr["CST"] = dados[1].Trim();
+                            dr["IPI_Id"] = idprod.ToString();
+                            dsNfe.Tables["IPINT"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "P": //II - Informar apenas quando o item for sujeito ao II
+                        #region -- P
+                        {
+                            DataRow dr = dsNfe.Tables["II"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["imposto_Id"] = idprod.ToString();
+                            dsNfe.Tables["II"].Rows.Add(dr);
+
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vDespAdu", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vIOF", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Q": //II
+                        #region -- Q
+                        {
+                            DataRow dr = dsNfe.Tables["PIS"].NewRow();
+                            dr["PIS_Id"] = idprod.ToString();
+                            dr["imposto_Id"] = idprod.ToString();
+                            dsNfe.Tables["PIS"].Rows.Add(dr);
+                        }
+                        break;
+                        #endregion
+
+                    case "Q02": //PIS - grupo de PIS tributado pela alíquota
+                        #region -- Q02
+                        {
+                            DataRow dr = dsNfe.Tables["PISAliq"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["PIS_Id"] = idprod.ToString();
+                            dsNfe.Tables["PISAliq"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pPIS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Q03": //PIS - grupo de PIS tributado por Qtde
+                        #region -- Q03
+                        {
+                            DataRow dr = dsNfe.Tables["PISQtde"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["PIS_Id"] = idprod.ToString();
+                            dsNfe.Tables["PISQtde"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 16, 4);
+                            this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 15, 4);
+                            this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Q04": //PIS - grupo de PIS não tributado
+                        #region -- Q04
+                        {
+                            DataRow dr = dsNfe.Tables["PISNT"].NewRow();
+                            if (nElementos >= 1)
+                                dr["CST"] = dados[1].Trim();
+                            dr["PIS_Id"] = idprod.ToString();
+                            dsNfe.Tables["PISNT"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Q05": //PIS - grupo de PIS Outras Operações
+                        #region -- Q05
+                        drPISOutr = dsNfe.Tables["PISOutr"].NewRow();
+                        if (nElementos >= 1)
+                            drPISOutr["CST"] = dados[1].Trim();
+                        if (nElementos >= 2)
+                            drPISOutr["vPIS"] = dados[2].Trim();
+                        drPISOutr["PIS_Id"] = idprod.ToString();
+                        dsNfe.Tables["PISOutr"].Rows.Add(drPISOutr);
+
+                        this.Check(dados[0], "CST", drPISOutr, ObOp.Obrigatorio, 2, 2);
+                        this.Check(dados[0], "vPIS", drPISOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        break;
+                        #endregion
+
+                    case "Q07":
+                        #region -- Q07
+                        if (nElementos >= 1)
+                            drPISOutr["vBC"] = dados[1].Trim();
+                        if (nElementos >= 2)
+                            drPISOutr["pPIS"] = dados[2].Trim();
+
+                        this.Check(dados[0], "vBC", drPISOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "pPIS", drPISOutr, ObOp.Obrigatorio, 1, 5, 2);
+                        break;
+                        #endregion
+
+                    case "Q10":
+                        #region -- Q10
+                        if (nElementos >= 1)
+                            drPISOutr["qBCProd"] = dados[1];
+                        if (nElementos >= 2)
+                            drPISOutr["vAliqProd"] = dados[2];
+
+                        this.Check(dados[0], "qBCProd", drPISOutr, ObOp.Obrigatorio, 1, 16, 4);
+                        this.Check(dados[0], "vAliqProd", drPISOutr, ObOp.Obrigatorio, 1, 15, 4);
+                        break;
+                        #endregion
+
+                    case "R":   //PIS Substituição Tributária
+                        #region -- R
+                        drPISST = dsNfe.Tables["PISST"].NewRow();
+                        if (nElementos >= 1)
+                            drPISST[4] = dados[1]; //vPIS
+
+                        this.Check(dados[0], "vPIS", drPISST, ObOp.Obrigatorio, 1, 15, 2);
+                        break;
+                        #endregion
+
+                    case "R02":
+                        #region -- R02
+                        if (nElementos >= 1)
+                            drPISST[0] = dados[1]; //VBC
+                        if (nElementos >= 2)
+                            drPISST[1] = dados[2]; //pPIS
+
+                        this.Check(dados[0], "vBC", drPISST, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "pPIS", drPISST, ObOp.Obrigatorio, 1, 5, 2);
+                        break;
+                        #endregion
+
+                    case "R04":
+                        #region -- R04
+                        if (nElementos >= 1)
+                            drPISST[2] = dados[1]; //qBCProd
+                        if (nElementos >= 2)
+                            drPISST[3] = dados[2]; //vAliqProd
+
+                        this.Check(dados[0], "qBCProd", drPISST, ObOp.Obrigatorio, 1, 16, 4);
+                        this.Check(dados[0], "vAliqProd", drPISST, ObOp.Obrigatorio, 1, 15, 4);
+                        break;
+                        #endregion
+
+                    case "S": //cofins
+                        #region -- S
+                        {
+                            DataRow drCOFINS = dsNfe.Tables["COFINS"].NewRow();
+                            drCOFINS["COFINS_Id"] = idprod.ToString();
+                            drCOFINS["imposto_Id"] = idprod.ToString();
+                            dsNfe.Tables["COFINS"].Rows.Add(drCOFINS);
+                        }
+                        break;
+                        #endregion
+
+                    case "S02": //COFINS - grupo de COFINS tributado pela alíquota
+                        #region -- S02
+                        {
+                            DataRow dr = dsNfe.Tables["COFINSAliq"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["COFINS_Id"] = idprod.ToString();
+                            dsNfe.Tables["COFINSAliq"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pCOFINS", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "S03": //COFINS - grupo de COFINS tributado por Qtde
+                        #region -- S03
+                        {
+                            DataRow dr = dsNfe.Tables["COFINSQtde"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["COFINS_Id"] = idprod.ToString();
+                            dsNfe.Tables["COFINSQtde"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 16, 4);
+                            this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 15, 4);
+                            this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "S04": //COFINS - grupo de COFINS não tributado
+                        #region -- S04
+                        {
+                            DataRow dr = dsNfe.Tables["COFINSNT"].NewRow();
+                            if (nElementos >= 1)
+                                dr["CST"] = dados[1];
+                            dr["COFINS_Id"] = idprod.ToString();
+                            dsNfe.Tables["COFINSNT"].Rows.Add(dr);
+
+                            this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "S05": //COFINS - grupo de COFINS Outras Operações
+                        #region -- S05
+                        drCOFINSOutr = dsNfe.Tables["COFINSOutr"].NewRow();
+                        if (nElementos >= 1)
+                            drCOFINSOutr["CST"] = dados[1];
+                        if (nElementos >= 2)
+                            drCOFINSOutr["vCOFINS"] = dados[2];
+                        // drCOFINSOutr["qBCProd"] = null;
+                        drCOFINSOutr["COFINS_Id"] = idprod.ToString();
+
+                        this.Check(dados[0], "CST", drCOFINSOutr, ObOp.Obrigatorio, 2, 2);
+                        this.Check(dados[0], "vCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        break;
+                        #endregion
+
+                    case "S07": //COFINS - grupo de COFINS Outras Operações
+                        #region -- S07
+                        if (nElementos >= 1)
+                            drCOFINSOutr["vBC"] = dados[1];
+                        if (nElementos >= 2)
+                            drCOFINSOutr["pCOFINS"] = dados[2];
+                        dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
+
+                        this.Check(dados[0], "vBC", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "pCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 5, 2);
+                        break;
+                        #endregion
+
+                    case "S09": //COFINS - grupo de COFINS Outras Operações
+                        #region -- S09
+                        if (nElementos >= 1)
+                            drCOFINSOutr["qBCProd"] = dados[1];
+                        if (nElementos >= 2)
+                            drCOFINSOutr["vAliqProd"] = dados[2];
+                        dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
+
+                        this.Check(dados[0], "qBCProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 16, 4);
+                        this.Check(dados[0], "vAliqProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 4);
+                        break;
+                        #endregion
+
+                    case "T": //COFINS Substituição Tributária
+                        #region -- T
+                        drCOFINSST = dsNfe.Tables["COFINSST"].NewRow();
+                        if (nElementos >= 1)
+                            drCOFINSST["vCOFINS"] = dados[1];
+                        drCOFINSST["imposto_Id"] = idprod.ToString();
+
+                        this.Check(dados[0], "vCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 15, 2);
+                        break;
+                        #endregion
+
+                    case "T02": //COFINS Substituição Tributária
+                        #region -- T02
+                        drCOFINSST["qBCProd"] = 0;
+                        drCOFINSST["vAliqProd"] = 0;
+                        if (nElementos >= 1)
+                            drCOFINSST["vBC"] = dados[1];
+                        if (nElementos >= 2)
+                            drCOFINSST["pCOFINS"] = dados[2];
+                        dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
+
+                        this.Check(dados[0], "vBC", drCOFINSST, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "pCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 5, 2);
+                        break;
+                        #endregion
+
+                    case "T04": //COFINS Substituição Tributária
+                        #region -- T04
+                        if (nElementos >= 1)
+                            drCOFINSST["qBCProd"] = dados[1];
+                        if (nElementos >= 2)
+                            drCOFINSST["vAliqProd"] = dados[2];
+                        drCOFINSST["vBC"] = 0;
+                        drCOFINSST["pCOFINS"] = 0;
+                        dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
+
+                        this.Check(dados[0], "qBCProd", drCOFINSST, ObOp.Obrigatorio, 1, 16, 4);
+                        this.Check(dados[0], "vAliqProd", drCOFINSST, ObOp.Obrigatorio, 1, 15, 4);
+                        break;
+                        #endregion
+
+                    case "U":   //ISS - Informar os campos para cálculo do ISSQN nas NFe conjugadas, 
+                                //onde há a prestação de serviços sujeitos ao ISSQN e fornecimento de 
+                                //peças sujeitas ao ICMS
+                        #region -- U
+                        {
+                            DataRow dr = dsNfe.Tables["ISSQN"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["imposto_Id"] = idprod.ToString();
+
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vAliq", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vISSQN", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
+                            this.Check(dados[0], "cListServ", dr, ObOp.Obrigatorio, 3, 4);
+                        }
+                        break;
+                        #endregion
+
+                    case "W": //total
+                        #region -- W
+                        {
+                            DataRow dr = dsNfe.Tables["total"].NewRow();
+                            dr["total_Id"] = idprod.ToString();
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["total"].Rows.Add(dr);
+                        }
+                        break;
+                        #endregion
+
+                    case "W02": //Grupo de Valores Totais referentes ao ICMS
+                        #region -- W02
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSTot"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*14*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["total_Id"] = idprod.ToString();
+                            dsNfe.Tables["ICMSTot"].Rows.Add(dr);
+
+                            this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vProd", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vFrete", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vSeg", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vDesc", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vIPI", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vOutro", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vNF", dr, ObOp.Obrigatorio, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "W17": //Grupo de Valores Totais referentes ao ISSQN
+                        #region -- W17
+                        {
+                            DataRow dr = dsNfe.Tables["ISSQNtot"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["total_Id"] = idprod.ToString();
+                            dsNfe.Tables["ISSQNtot"].Rows.Add(dr);
+
+                            this.Check(dados[0], "vServ", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vISS", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vPIS", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vCOFINS", dr, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "W23": //Grupo de Retenções de Tributos
+                        #region -- W23
+                        {
+                            DataRow dr = dsNfe.Tables["retTrib"].NewRow();
+                            bool lEntrou = false;
+                            for (iLeitura = 0; iLeitura <= nElementos/*7*/; iLeitura++)
+                            {
+                                if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                                {
+                                    dr[iLeitura - 1] = dados[iLeitura].Trim();
+                                    lEntrou = true;
+                                }
+                            }
+                            if (lEntrou == true)
+                            {
+                                dr["total_Id"] = idprod.ToString();
+                                dsNfe.Tables["retTrib"].Rows.Add(dr);
+
+                                this.Check(dados[0], "vRetPIS", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vRetCOFINS", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vRetCSLL", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vBCIRRF", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vIRRF", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vBCRetPrev", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vRetPrev", dr, ObOp.Opcional, 1, 15, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+
+                    case "X": //transp
+                        #region -- X
+                        {
+                            DataRow dr = dsNfe.Tables["transp"].NewRow();
+                            if (nElementos >= 1)
+                                dr["modFrete"] = dados[1];
+                            dr["transp_Id"] = 0;
+                            dr["infNFe_Id"] = 0;
+
+                            dsNfe.Tables["transp"].Rows.Add(dr);
+
+                            this.Check(dados[0], "modFrete", dr, ObOp.Obrigatorio, 1, 1);
+                        }
+                        break;
+                        #endregion
+
+                    case "X03": //transporta
+                        #region -- X03
+                        {
+                            drtransporta = dsNfe.Tables["transporta"].NewRow();
+                            /*
+                            for (iLeitura = 0; iLeitura <= 6; iLeitura++)
+                            {
+                                if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                                    drtransporta[iLeitura -1 ] = dados[iLeitura].Trim();
+                            }
+                             * */
+                            //         1       3   3         4    5
+                            //X03 | XNome | IE | XEnder | UF | XMun |
+                            if (nElementos >= 1)
+                                drtransporta["xNome"] = dados[1];
+                            if (nElementos >= 2)
+                                drtransporta["IE"] = dados[2];
+                            if (nElementos >= 3)
+                                drtransporta["xEnder"] = dados[3];
+                            if (nElementos >= 4)
+                                drtransporta["UF"] = dados[4];
+                            if (nElementos >= 5)
+                                drtransporta["xMun"] = dados[5];
+
+                            drtransporta["transp_Id"] = 0;
+
+                            this.Check(dados[0], "xNome", drtransporta, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "IE", drtransporta, ObOp.Opcional, 2, 14);
+                            this.Check(dados[0], "xEnder", drtransporta, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "UF", drtransporta, ObOp.Opcional, 2, 2);
+                            this.Check(dados[0], "xMun", drtransporta, ObOp.Opcional, 1, 60);
+                        }
+                        break;
+                        #endregion
+
+                    case "X04":  //CNPJ|
+                        #region -- X04
+                        /* dsNfe.Tables["transporta"].Columns["CPF"].AllowDBNull = true; */
+                        if (nElementos >= 1)
+                            drtransporta["CNPJ"] = dados[1];
+                        dsNfe.Tables["transporta"].Rows.Add(drtransporta);
+                        
+                        this.Check(dados[0], "CNPJ", drtransporta, ObOp.Opcional, 14, 14);
+                        break;
+                        #endregion
+
+                    case "X05":  //CPF
+                        #region --- X05
+                        /* dsNfe.Tables["transporta"].Columns["CNPJ"].AllowDBNull = true; */
+                        if (nElementos >= 1)
+                            drtransporta["CPF"] = dados[1];
+                        dsNfe.Tables["transporta"].Rows.Add(drtransporta);
+
+                        this.Check(dados[0], "CPF", drtransporta, ObOp.Opcional, 11, 11);
+                        break;
+                        #endregion
+
+                    case "X11": //ICMS do serviço de transporte retido.
+                        #region -- X11
+                        {
+                            DataRow dr = dsNfe.Tables["retTransp"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["transp_Id"] = 0;
+                            dsNfe.Tables["retTransp"].Rows.Add(dr);
+
+                            this.Check(dados[0], "vServ", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "vBCRet", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "pICMSRet", dr, ObOp.Obrigatorio, 1, 5, 2);
+                            this.Check(dados[0], "vICMSRet", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            this.Check(dados[0], "CFOP", dr, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
+                        }
+                        break;
+                        #endregion
+
+                    case "X18": //veicTransp
+                        #region -- X18
+                        {
+                            DataRow dr = dsNfe.Tables["veicTransp"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["placa"] = dados[1];
+                            //dr["UF"] = dados[2];
+                            //dr["RNTC"] = dados[3];
+                            dr["transp_Id"] = 0;
+                            dsNfe.Tables["veicTransp"].Rows.Add(dr);
+
+                            this.Check(dados[0], "placa", dr, ObOp.Obrigatorio, 1, 8);
+                            this.Check(dados[0], "UF", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "RNTC", dr, ObOp.Opcional, 1, 20);
+                        }
+                        break;
+                        #endregion
+
+                    case "X22": //reboque
+                        #region -- X22
+                        {
+                            DataRow dr = dsNfe.Tables["reboque"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["placa"] = dados[1];
+                            //dr["UF"] = dados[2];
+                            //dr["RNTC"] = dados[3];
+                            dr["transp_Id"] = 0;
+                            dsNfe.Tables["reboque"].Rows.Add(dr);
+
+                            this.Check(dados[0], "placa", dr, ObOp.Obrigatorio, 1, 8);
+                            this.Check(dados[0], "UF", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "RNTC", dr, ObOp.Opcional, 1, 20);
+                        }
+                        break;
+                        #endregion
+
+                    case "X26": //vol
+                        #region -- X26
+                        {
+                            DataRow dr = dsNfe.Tables["vol"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
+                            //{
+                            //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
+                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
+                            //}
+                            dr["vol_Id"] = 0;
+                            dr["transp_Id"] = 0;
+                            dsNfe.Tables["vol"].Rows.Add(dr);
+
+                            this.Check(dados[0], "qVol", dr, ObOp.Opcional, 1, 15);
+                            this.Check(dados[0], "esp", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "marca", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "nVol", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "pesoL", dr, ObOp.Opcional, 1, 15, 3);
+                            this.Check(dados[0], "pesoB", dr, ObOp.Opcional, 1, 15, 3);
+                        }
+                        break;
+
+                        #endregion
+
+                    case "X33": //lacres
+                        #region -- X33
+                        {
+                            DataRow dr = dsNfe.Tables["lacres"].NewRow();
+                            if (nElementos >= 1)
+                                dr["nLacre"] = dados[1];
+                            dr["vol_Id"] = 0;
+                            dsNfe.Tables["lacres"].Rows.Add(dr);
+
+                            this.Check(dados[0], "nLacre", dr, ObOp.Obrigatorio, 1, 60);
+                        }
+                        break;
+                        #endregion
+
+                    case "Y": //cobr
+                        #region -- Y
+                        {
+                            DataRow dr = dsNfe.Tables["cobr"].NewRow();
+                            dr["cobr_Id"] = 0;
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["cobr"].Rows.Add(dr);
+                        }
+                        break;
+                        #endregion
+
+                    case "Y02": //fat
+                        #region -- Y02
+                        {
+                            DataRow dr = dsNfe.Tables["fat"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["nFat"] = dados[1];
+                            //dr["vOrig"] = dados[2];
+                            //dr["vDesc"] = dados[3];
+                            //dr["vLiq"] = dados[4];
+
+                            dr["cobr_Id"] = 0;
+                            dsNfe.Tables["fat"].Rows.Add(dr);
+
+                            this.Check(dados[0], "nFat", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "vOrig", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vDesc", dr, ObOp.Opcional, 1, 15, 2);
+                            this.Check(dados[0], "vLiq", dr, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Y07": //dup
+                        #region -- Y07
+                        {
+                            DataRow dr = dsNfe.Tables["dup"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["nDup"] = dados[1];
+                            //dr["dVenc"] = dados[2];
+                            //dr["vDup"] = dados[3];
+                            dr["cobr_Id"] = 0;
+                            dsNfe.Tables["dup"].Rows.Add(dr);
+
+                            this.Check(dados[0], "nDup", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "dVenc", dr, ObOp.Opcional);
+                            this.Check(dados[0], "vDup", dr, ObOp.Opcional, 1, 15, 2);
+                        }
+                        break;
+                        #endregion
+
+                    case "Z":   //infAdic
+                        #region -- Z
+                        {
+                            DataRow dr = dsNfe.Tables["infAdic"].NewRow();
+                            if (nElementos >= 1)
+                                if (dados[1] != "")
+                                    dr["infAdFisco"] = dados[1];
+                            if (nElementos >= 2)
+                                if (dados[2] != "")
+                                    dr["infCpl"] = dados[2];
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["infAdic"].Rows.Add(dr);
+
+                            this.Check(dados[0], "infAdFisco", dr, ObOp.Opcional, 1, 256);
+                            this.Check(dados[0], "infCpl", dr, ObOp.Opcional, 1, 5000);
+                        }
+                        break;
+
+                        #endregion
+
+                    case "Z04": //obsCont
+                        #region -- Z04
+                        {
+                            DataRow dr = dsNfe.Tables["obsCont"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["xCampo"] = dados[1];
+                            //dr["xTexto"] = dados[2];
+                            //dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["obsCont"].Rows.Add(dr);
+
+                            this.Check(dados[0], "xCampo", dr, ObOp.Obrigatorio, 1, 20);
+                            this.Check(dados[0], "xTexto", dr, ObOp.Obrigatorio, 1, 60);
+                        }
+                        //dsNfe.Tables["obsFisco"]; não encontrei na documentação do TXT nada que fala sobre o conteudo dessa tebela
+                        break;
+
+                        #endregion
+
+                    case "Z10": //procRef
+                        #region -- Z10
+                        {
+                            DataRow dr = dsNfe.Tables["procRef"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["nProc"] = dados[1];
+                            dsNfe.Tables["procRef"].Rows.Add(dr);
+
+                            this.Check(dados[0], "nProc", dr, ObOp.Obrigatorio, 1, 60);
+                            this.Check(dados[0], "indProc", dr, ObOp.Obrigatorio, 1, 1);
+                        }
+                        break;
+
+                        #endregion
+
+                    case "ZA": //EXPORTA
+                        #region -- ZA
+                        {
+                            DataRow dr = dsNfe.Tables["exporta"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["UFEmbarq"] = dados[1].Trim();
+                            //dr["xLocEmbarq"] = dados[2].Trim();
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["exporta"].Rows.Add(dr);
+
+                            this.Check(dados[0], "UFEmbarq", dr, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "xLocEmbarq", dr, ObOp.Obrigatorio, 1, 60);
+                        }
+                        break;
+
+                        #endregion
+
+                    case "ZB": //compra
+                        #region -- ZB
+                        {
+                            DataRow dr = dsNfe.Tables["compra"].NewRow();
+                            this.PopulateDataRow(dr, dados);
+                            //dr["xNEmp"] = dados[1];
+                            //dr["xPed"] = dados[2];
+                            //dr["xCont"] = dados[3];
+                            dr["infNFe_Id"] = 0;
+                            dsNfe.Tables["compra"].Rows.Add(dr);
+
+                            this.Check(dados[0], "xNEmp", dr, ObOp.Opcional, 1, 17);
+                            this.Check(dados[0], "xPed", dr, ObOp.Opcional, 1, 60);
+                            this.Check(dados[0], "xCont", dr, ObOp.Opcional, 1, 60);
+                        }
+                        break;
+
+                        #endregion
+                }
+                if (vNovaNota)
+                    break;
+
+                cLinhaTXT = txt.ReadLine();
+                iLinhaLida++;
+            }
+            if (cMensagemErro != "")
+                return;
+
+            if (cNF == 0)
+            {
+                ///
+                /// gera codigo aleatorio
+                /// 
+                //Random x = new Random();
+                //cNF = (int)((double)x.Next(1000));
+                cNF = GerarCodigoNumerico(Convert.ToInt32(dsNfe.Tables["ide"].Rows[0]["nNF"].ToString()));
+            }
+            if (cDV == 0)
+            {
+                ///
+                /// calcula do digito verificador
+                /// 
+                string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000");
+
+                cDV = this.GerarDigito(ccChave);
+            }
+            cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
+
+            dsNfe.Tables["ide"].Rows[0]["serie"] = serie;
+            dsNfe.Tables["ide"].Rows[0]["nNF"] = nNF;
+            dsNfe.Tables["ide"].Rows[0]["cNF"] = cNF.ToString("000000000");
+            dsNfe.Tables["ide"].Rows[0]["cDV"] = cDV.ToString("0");
+            dsNfe.Tables["infNFe"].Rows[0]["Id"] = "NFe" + cChave;
+            dsNfe.AcceptChanges();
+            //string xRetorno = cDestino + "\\" + cChave + "-nfe.xml";
+            //this.Retorno.Add(xRetorno);
+            //this.ChaveNfe.Add(cChave);
+
+            StringWriter TextoXml = new StringWriter();
+            TextoXml.NewLine = "";
+
+            dsNfe.WriteXml(TextoXml, XmlWriteMode.IgnoreSchema);
+            //#region Invertendo a TAG IE do emitente e destinatario
+            string sAux;
+            sAux = limpa_texto(TextoXml.ToString());
+
+            //remove os espacos entre as tags
+            TextoXml.GetStringBuilder().Remove(0, TextoXml.ToString().Length);
+            TextoXml.GetStringBuilder().Append(sAux);
+
+            //Ajustando a Tag de <NFref>
+            if (TextoXml.ToString().IndexOf("<NFref>") > -1 && TextoXml.ToString().LastIndexOf("</NFref>") > -1)
+            {
+                sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<NFref>"), TextoXml.ToString().LastIndexOf("</NFref>") - TextoXml.ToString().IndexOf("<NFref>") + 8);
+                //remove o texto que foi jogado para variavel
+                TextoXml.GetStringBuilder().Remove(TextoXml.ToString().IndexOf("<NFref>"), TextoXml.ToString().LastIndexOf("</NFref>") - TextoXml.ToString().IndexOf("<NFref>") + 8);
+                //insere o texto antes da tag tpImp
+                TextoXml.GetStringBuilder().Replace("<tpImp>", sAux + "<tpImp>");
+            }
+
+            //movendo os dados do </infAdProd> para apos a tag imposto
+            sAux = "";
+            while (TextoXml.ToString().IndexOf("</infAdProd><prod>") > -1)
+            {
+                sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("\"><infAdProd>") + 2, TextoXml.ToString().IndexOf("</infAdProd><prod>") - TextoXml.ToString().IndexOf("\"><infAdProd>") + 10);
+                //MessageBox.Show(sAux);
+
+                if (TextoXml.ToString().IndexOf("</imposto></det>") == -1)
+                    throw new Exception("tag </imposto> não encontrada");
+                if (TextoXml.ToString().IndexOf("\"><infAdProd>") == -1)
+                    throw new Exception("tag <infAdProd> não encontrada");
+                TextoXml.GetStringBuilder().Remove(TextoXml.ToString().IndexOf("\"><infAdProd>") + 2, sAux.Length);
+                TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("</imposto></det>") + 10, sAux);
+            }
+            //Ajustando a tag IE do emitente 
+            if (TextoXml.ToString().IndexOf("<xFant>") == -1)
+                throw new Exception("tag <xFant> não encontrada");
+            if (TextoXml.ToString().IndexOf("<enderEmit>") == -1)
+                throw new Exception("tag <enderEmit> não encontada");
+            sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<enderEmit>"), (TextoXml.ToString().IndexOf("</enderEmit>") - TextoXml.ToString().IndexOf("<enderEmit>")) + 12);
+            TextoXml.GetStringBuilder().Replace(sAux, "").Replace("NewDataSet", "NFe"); //.Replace("\n","ç").Replace("\r","Í");
+            TextoXml.GetStringBuilder().Replace("</xFant>", "</xFant>" + sAux);
+            if (vTiraxFant)
+            {
+                ///
+                /// danasa 8-2009
+                /// no arquivo texto não tem o nome fantasia e não é obrigatorio no arquivo XML
+                /// 
+                sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<xFant>"));
+                sAux = sAux.Substring(0, sAux.IndexOf("</xFant>")+8);
+                TextoXml.GetStringBuilder().Replace(sAux, "");
+            }
+
+            //MessageBox.Show(TextoXml.ToString());
+
+            // Ajustando a tag IE do destinatario 
+            if (TextoXml.ToString().IndexOf("<enderDest>") == -1)
+                throw new Exception("tag <enderDest> não encontrada");
+            sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<enderDest>"), (TextoXml.ToString().IndexOf("</enderDest>") - TextoXml.ToString().IndexOf("<enderDest>")) + 12);
+            TextoXml.GetStringBuilder().Replace(sAux, "");
+            if (TextoXml.ToString().IndexOf("<dest>") == -1)
+                throw new Exception("tag <dest> não encontrada");
+            if (TextoXml.ToString().IndexOf("<IE>") == -1)
+                throw new Exception("tag <IE> não encontrada");
+            TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+
+            //MessageBox.Show(TextoXml.ToString());
+
+            //TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+            //TextWriter txtDestino = new StreamWriter(@Retorno);
+
+            //MessageBox.Show(TextoXml.GetStringBuilder().GetHashCode().ToString());
+            /*
+                            txtDestino.Write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + TextoXml.ToString());
+                            txtDestino.Flush();
+                            txtDestino.Close();
+              */
+            //            txt.Close();
+
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.LoadXml(TextoXml.ToString());
+
+            ///
+            /// danasa 8-2009
+            /// 
+            //this.Retorno = cDestino + "\\" + cChave + "-nfe.xml";
+            //this.ChaveNfe = cChave;
+            //XmlTextWriter xWriter = new XmlTextWriter(@Retorno, Encoding.UTF8);
+            if (cDestino.Substring(cDestino.Length - 1, 1) == @"\")
+                cDestino = cDestino.Substring(0, cDestino.Length - 1);
+
+            if (!Directory.Exists(cDestino + @"\convertidos"))
+            {
+                ///
+                /// cria uma pasta temporária para armazenar o XML convertido
+                /// 
+                System.IO.Directory.CreateDirectory(cDestino + @"\convertidos");
+            }
+            ///
+            /// danasa 8-2009
+            /// Adiciona o XML na lista de arquivos convertidos
+            /// 
+            this.cRetorno.Add(new txtTOxmlClassRetorno(cChave + "-nfe.xml", cChave, nNF, serie));
+
+            ///
+            /// danasa 8-2009
+            /// Salva o XML convertido na pasta temporária
+            /// 
+            string strRetorno = cDestino + @"\convertidos\" + cChave + "-nfe.xml";
+            //MessageBox.Show("salvando: " + strRetorno);
+            XmlTextWriter xWriter = new XmlTextWriter(@strRetorno, Encoding.UTF8);
+            xWriter.Formatting = Formatting.None;
+            xdoc.Save(xWriter);
+
+            xWriter.Close();
+        }
+    }
+    public class txtTOxmlClassRetorno
+    {
+        public Int32 NotaFiscal { get; set; }
+        public Int32 Serie { get; set; }
+        public string XMLFileName { get; set; }
+        public string ChaveNFe { get; set; }
+
+        public txtTOxmlClassRetorno(string xmlFileName, string chaveNFe, Int32 notaFiscal, Int32 serie)
+        {
+            this.XMLFileName = xmlFileName;
+            this.ChaveNFe = chaveNFe;
+            this.NotaFiscal = notaFiscal;
+            this.Serie = serie;
+        }
+    }
+    enum ObOp
+    {
+        Obrigatorio,
+        Opcional
+    }
+}
