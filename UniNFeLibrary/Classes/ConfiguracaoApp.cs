@@ -360,7 +360,6 @@ namespace UniNFeLibrary
                 }
             }
 
-            //TODO: Verificar se as pastas informadas se são todas diferentes uma das outras, pois não podem ser iguais
             ///
             /// danasa 8-2009
             /// Wandrey verifique se ok - nos meus testes, foram...

@@ -79,9 +79,19 @@ namespace UniNFeLibrary
                 {
                     this.mchNFe = value;
                     this.cUF = string.Empty;
+                    this.serie = string.Empty;
                     if (this.mchNFe != string.Empty)
                     {
                         this.cUF = this.mchNFe.Substring(0, 2);
+                        this.serie = this.mchNFe.Substring(23, 3);
+                        if (Convert.ToInt32(this.serie) >= 900)
+                        {
+                            this.tpEmis = "3";
+                        }
+                        else
+                        {
+                            this.tpEmis = "1";
+                        }
                     }
                 }
             }
@@ -89,6 +99,14 @@ namespace UniNFeLibrary
             /// Código da Unidade Federativa (UF)
             /// </summary>
             public string cUF { get; private set; }
+            /// <summary>
+            /// Série da NFe que está sendo consultada a situação
+            /// </summary>
+            public string serie { get; private set; }
+            /// <summary>
+            /// Tipo de emissão para saber para onde será enviado a consulta da situação da nota
+            /// </summary>
+            public string tpEmis { get; private set; }
         }
 
         public class DadosConsCad

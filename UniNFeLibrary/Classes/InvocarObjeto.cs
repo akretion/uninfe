@@ -247,7 +247,6 @@ namespace UniNFeLibrary
                     }
 
                     //Atualizar a propriedade do objeto do cabecalho da mensagem
-                    //TODO: WANDREY-REVER URGENTE - Não pode aparecer o nome do método abaixo pq tem o cte na palavra
                     TipoServicoWS.InvokeMember("cteCabecMsgValue", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { CabecMsg });
                     
                     //Invocar o membro

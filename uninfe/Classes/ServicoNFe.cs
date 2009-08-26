@@ -335,7 +335,7 @@ namespace uninfe
             ParametroEnvioXML oParam = new ParametroEnvioXML();
             oParam.tpAmb = Convert.ToInt32(oLer.oDadosPedSit.tpAmb);
             oParam.UFCod = Convert.ToInt32(oLer.oDadosPedSit.cUF);
-            oParam.tpEmis = ConfiguracaoApp.tpEmis;
+            oParam.tpEmis = Convert.ToInt32(oLer.oDadosPedSit.tpEmis);
 
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
@@ -557,6 +557,7 @@ namespace uninfe
             ParametroEnvioXML oParam = new ParametroEnvioXML();
             oParam.tpAmb = Convert.ToInt32(oLer.oDadosConsCad.tpAmb);
             oParam.UFCod = Convert.ToInt32(oLer.oDadosConsCad.cUF);
+            //TODO: CONFIG - Linha abaixo não tive como definir o tpEmis de acordo com o XML, assim sendo tá pegando do parâmetro ainda
             oParam.tpEmis = ConfiguracaoApp.tpEmis;
 
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
@@ -565,8 +566,7 @@ namespace uninfe
             if (oServico == null)
             {
                 string sAmbiente;
-                //TODO: CONFIG
-                if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
+                if (oParam.tpAmb == TipoAmbiente.taProducao/*1*/)
                 {
                     sAmbiente = "produção";
                 }
@@ -578,7 +578,7 @@ namespace uninfe
                 oAux.GravarArqErroServico(this.vXmlNfeDadosMsg,
                     "-cons-cad.xml",
                     "-ret-cons-cad.err",
-                    "O Estado (" + ConfiguracaoApp.UFCod.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
+                    "O Estado (" + oParam.UFCod.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
             }
             else
             {
