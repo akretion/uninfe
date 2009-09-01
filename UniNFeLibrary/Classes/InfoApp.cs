@@ -182,8 +182,6 @@ namespace UniNFeLibrary
             }
             catch (Exception ex)
             {
-                //TODO: Não conseguiu gravar o XML tem que tratar este erro e devolver algo para o ERP talvez um .ERR
-
                 ///
                 /// danasa 8-2009
                 /// 

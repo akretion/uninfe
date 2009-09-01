@@ -203,6 +203,12 @@ namespace uninfe
                 //Se falhou algo no envio vamos ter que excluir a nota do fluxo, 
                 //Primeiro deleta o xml da nota da pasta EmProcessamento e depois tira ela do fluxo
                 //Wandrey 30/04/2009
+
+                //TODO: QUEDA DE ENERGIA
+                //ANOTACOES TODO ACIMA: Como já vai ter movido o arquivo de lote para a pasta de XML´s com erro
+                //Neste ponto se der uma queda de energia ele não sai mais do fluxo, visto que não tem recibo
+                //Não tem mais lote para enviar, enfim fica preso.
+
                 oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                 oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
             }
@@ -411,7 +417,6 @@ namespace uninfe
             catch (Exception ex)
             {
                 oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, "-ped-can.xml", "-can.err", ex.Message);
-
             }
         }
         #endregion
@@ -557,8 +562,7 @@ namespace uninfe
             ParametroEnvioXML oParam = new ParametroEnvioXML();
             oParam.tpAmb = Convert.ToInt32(oLer.oDadosConsCad.tpAmb);
             oParam.UFCod = Convert.ToInt32(oLer.oDadosConsCad.cUF);
-            //TODO: CONFIG - Linha abaixo não tive como definir o tpEmis de acordo com o XML, assim sendo tá pegando do parâmetro ainda
-            oParam.tpEmis = ConfiguracaoApp.tpEmis;
+            oParam.tpEmis = TipoEmissao.teNormal; //Sempre NORMAL pois SCAN não tem esta consulta de cadastro do contribuinte - 01/09/2009 Wandrey.
 
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
@@ -566,7 +570,7 @@ namespace uninfe
             if (oServico == null)
             {
                 string sAmbiente;
-                if (oParam.tpAmb == TipoAmbiente.taProducao/*1*/)
+                if (oParam.tpAmb == TipoAmbiente.taProducao)
                 {
                     sAmbiente = "produção";
                 }
@@ -619,7 +623,14 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno)
         {
-            oGerarXML.XmlRetorno(pFinalArqEnvio,pFinalArqRetorno,this.vStrXmlRetorno);
+            try
+            {
+                oGerarXML.XmlRetorno(pFinalArqEnvio, pFinalArqRetorno, this.vStrXmlRetorno);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -683,23 +694,37 @@ namespace uninfe
         }
         #endregion
 
-        #region LerChave()
-        protected override string LerChave()
-        {
-            LerXML oLer = new LerXML();
-            oLer.Nfe(this.vXmlNfeDadosMsg);
+        #region ConsultaCadastro()
 
-            return oLer.oDadosNfe.chavenfe;
+        /// <summary>
+        /// Verifica um cadastro no site da receita.
+        /// Voce deve preencher o estado e mais um dos tres itens: CPNJ, IE ou CPF.
+        /// </summary>
+        /// <param name="uf">Sigla do UF do cadastro a ser consultado. Tem que ter dois dígitos. SU para suframa.</param>
+        /// <param name="cnpj"></param>
+        /// <param name="ie"></param>
+        /// <param name="cpf"></param>
+        /// <returns>String com o resultado da consuta do cadastro</returns>
+        /// <by>Marcos Diez</by>
+        /// <date>29/08/2009</date>
+        public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
+        {
+            //Criar XML para obter o status do serviço
+            string XmlNfeConsultaCadastro = oGerarXML.ConsultaCadastro(uf, cnpj, ie, cpf);
+
+            //Retornar o status do serviço
+            //return oAux.VerStatusServico(XmlNfeConsultaCadastro);
+            return oAux.VerConsultaCadastro(XmlNfeConsultaCadastro);
         }
         #endregion
 
-        #region LerTpEmis()
-        protected override string LerTpEmis()
+        #region LerXMLNFe()
+        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
         {
-            LerXML oLer = new LerXML();
-            oLer.Nfe(this.vXmlNfeDadosMsg);
+            LerXML oLerXML = new LerXML();
+            oLerXML.Nfe(Arquivo);
 
-            return oLer.oDadosNfe.tpEmis;
+            return oLerXML.oDadosNfe;
         }
         #endregion
 
@@ -879,42 +904,49 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoCanc()
         {
-            MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
-
             XmlDocument doc = new XmlDocument();
-            doc.Load(msXml);
 
-            XmlNodeList retCancNFeList = doc.GetElementsByTagName("retCancNFe");
-
-            foreach (XmlNode retCancNFeNode in retCancNFeList)
+            try
             {
-                XmlElement retCancNFeElemento = (XmlElement)retCancNFeNode;
+                MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
+                doc.Load(msXml);
 
-                XmlNodeList infCancList = retCancNFeElemento.GetElementsByTagName("infCanc");
+                XmlNodeList retCancNFeList = doc.GetElementsByTagName("retCancNFe");
 
-                foreach (XmlNode infCancNode in infCancList)
+                foreach (XmlNode retCancNFeNode in retCancNFeList)
                 {
-                    XmlElement infCancElemento = (XmlElement)infCancNode;
+                    XmlElement retCancNFeElemento = (XmlElement)retCancNFeNode;
 
-                    if (infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "101") //Cancelamento Homologado
+                    XmlNodeList infCancList = retCancNFeElemento.GetElementsByTagName("infCanc");
+
+                    foreach (XmlNode infCancNode in infCancList)
                     {
-                        string strRetCancNFe = retCancNFeNode.OuterXml;
+                        XmlElement infCancElemento = (XmlElement)infCancNode;
 
-                        oGerarXML.XmlDistCanc(this.vXmlNfeDadosMsg, strRetCancNFe);
+                        if (infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "101") //Cancelamento Homologado
+                        {
+                            string strRetCancNFe = retCancNFeNode.OuterXml;
 
-                        //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                        oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
+                            oGerarXML.XmlDistCanc(this.vXmlNfeDadosMsg, strRetCancNFe);
 
-                        //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-can.xml") + "-procCancNFe.xml";
-                        oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, DateTime.Now);
-                    }
-                    else
-                    {
-                        //Deletar o arquivo de solicitação do serviço da pasta de envio
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
+
+                            //Move o arquivo de Distribuição para a pasta de enviados autorizados
+                            string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-can.xml") + "-procCancNFe.xml";
+                            oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, DateTime.Now);
+                        }
+                        else
+                        {
+                            //Deletar o arquivo de solicitação do serviço da pasta de envio
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -927,42 +959,49 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoInut()
         {
-            MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
-
             XmlDocument doc = new XmlDocument();
-            doc.Load(msXml);
 
-            XmlNodeList retInutNFeList = doc.GetElementsByTagName("retInutNFe");
-
-            foreach (XmlNode retInutNFeNode in retInutNFeList)
+            try
             {
-                XmlElement retInutNFeElemento = (XmlElement)retInutNFeNode;
+                MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
+                doc.Load(msXml);
 
-                XmlNodeList infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
+                XmlNodeList retInutNFeList = doc.GetElementsByTagName("retInutNFe");
 
-                foreach (XmlNode infInutNode in infInutList)
+                foreach (XmlNode retInutNFeNode in retInutNFeList)
                 {
-                    XmlElement infInutElemento = (XmlElement)infInutNode;
+                    XmlElement retInutNFeElemento = (XmlElement)retInutNFeNode;
 
-                    if (infInutElemento.GetElementsByTagName("cStat")[0].InnerText == "102") //Inutilização de Número Homologado
+                    XmlNodeList infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
+
+                    foreach (XmlNode infInutNode in infInutList)
                     {
-                        string strRetInutNFe = retInutNFeNode.OuterXml;
+                        XmlElement infInutElemento = (XmlElement)infInutNode;
 
-                        oGerarXML.XmlDistInut(this.vXmlNfeDadosMsg, strRetInutNFe);
+                        if (infInutElemento.GetElementsByTagName("cStat")[0].InnerText == "102") //Inutilização de Número Homologado
+                        {
+                            string strRetInutNFe = retInutNFeNode.OuterXml;
 
-                        //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                        oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
+                            oGerarXML.XmlDistInut(this.vXmlNfeDadosMsg, strRetInutNFe);
 
-                        //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-inu.xml") + "-procInutNFe.xml";
-                        oAux.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
-                    }
-                    else
-                    {
-                        //Deletar o arquivo de solicitação do serviço da pasta de envio
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
+
+                            //Move o arquivo de Distribuição para a pasta de enviados autorizados
+                            string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-inu.xml") + "-procInutNFe.xml";
+                            oAux.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
+                        }
+                        else
+                        {
+                            //Deletar o arquivo de solicitação do serviço da pasta de envio
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion

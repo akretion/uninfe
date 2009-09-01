@@ -108,7 +108,7 @@ namespace UniNFeLibrary
                         TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 300000 });
                     }
 
-                    //Invocar o membro
+                    //Invocar o membro, ou seja, mandar o XML para o SEFAZ
                     XmlRetorno = (string)(TipoServicoWS.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, ServicoWS, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
                     
                     //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz
@@ -254,7 +254,7 @@ namespace UniNFeLibrary
 
                     //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
                     TipoServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, ServicoNFe, new object[] { XmlRetorno.OuterXml });
-
+                    
                     // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
                     if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
                     {

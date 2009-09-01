@@ -136,6 +136,78 @@ namespace uninfe
         }
         #endregion
 
+        #region ConsultaCadastro()
+
+        /// <summary>
+        /// Cria um arquivo XML com a estrutura necessária para consultar um cadastro
+        /// Voce deve preencher o estado e mais um dos tres itens: CPNJ, IE ou CPF
+        /// </summary>
+        /// <param name="uf">Sigla do UF do cadastro a ser consultado. Tem que ter duas letras. SU para suframa.</param>
+        /// <param name="cnpj"></param>
+        /// <param name="ie"></param>
+        /// <param name="cpf"></param>
+        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
+        /// <by>Marcos Diez</by>
+        /// <date>29/08/2009</date>
+        public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
+        {
+            string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><ConsCad xmlns=\"" +
+                ConfiguracaoApp.nsURI +
+                "\" versao=\"1.01\"><infCons><xServ>CONS-CAD</xServ>";
+            var footer = "</infCons></ConsCad>";
+
+            cnpj = OnlyNumbers(cnpj);
+            ie = OnlyNumbers(ie);
+            cpf = OnlyNumbers(cpf);
+
+            var saida = new StringBuilder(1000);
+            saida.Append(header);
+            saida.AppendFormat("<UF>{0}</UF>", uf);
+            if (cnpj != null && cnpj != "")
+            {
+                saida.AppendFormat("<CNPJ>{0}</CNPJ>", cnpj);
+            }
+            if (ie != null && ie != "")
+            {
+                saida.AppendFormat("<IE>{0}</IE>", ie);
+            }
+            if (cpf != null && cpf != "")
+            {
+                saida.AppendFormat("<CPF>{0}</CPF>", cpf);
+            }
+            saida.Append(footer);
+
+            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" + DateTime.Now.ToString("yyyyMMddThhmmss") + "-cons-cad.xml";
+
+            StreamWriter SW = File.CreateText(_arquivo_saida);
+            var output = saida.ToString();
+            SW.Write(output);
+            SW.Close();
+
+            return _arquivo_saida;
+        }
+
+        /// <summary>
+        /// retorna uma string contendo apenas os digitos da entrada
+        /// </summary>
+        /// <by>Marcos Diez</by>
+        /// <date>29/08/2009</date>
+        public static string OnlyNumbers(string entrada)
+        {
+            if (entrada == null) return null;
+            StringBuilder saida = new StringBuilder(entrada.Length);
+            foreach (char c in entrada)
+            {
+                if (char.IsDigit(c))
+                {
+                    saida.Append(c);
+                }
+            }
+            return saida.ToString();
+        }
+
+#endregion  
+
         #region GravarRetornoEmTXT()
         //TODO: Documentar este método
         protected override void TXTRetorno(string pFinalArqEnvio, string pFinalArqRetorno, string ConteudoXMLRetorno)
@@ -223,9 +295,9 @@ namespace uninfe
                         break;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                throw (ex);
             }
         }
         #endregion

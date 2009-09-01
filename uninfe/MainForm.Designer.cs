@@ -86,7 +86,7 @@
             this.toolStripButton_StatusServicoNfe.Name = "toolStripButton_StatusServicoNfe";
             this.toolStripButton_StatusServicoNfe.Size = new System.Drawing.Size(52, 52);
             this.toolStripButton_StatusServicoNfe.Text = "toolStripButton1";
-            this.toolStripButton_StatusServicoNfe.ToolTipText = "Verifica a situação do serviço da Nota Fiscal Eletrônica";
+            this.toolStripButton_StatusServicoNfe.ToolTipText = "Consultar Situação do Servidor e Cadastro de Contribuinte";
             this.toolStripButton_StatusServicoNfe.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton_sobre
@@ -144,69 +144,69 @@
             this.toolStripSeparator1,
             this.sairToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(264, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(381, 176);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(263, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(380, 22);
             this.toolStripMenuItem1.Text = "Abrir UniNFe";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(260, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(377, 6);
             // 
             // configuraçõesToolStripMenuItem
             // 
             this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
-            this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.configuraçõesToolStripMenuItem.Text = "Verificar status dos serviços da NF-e";
+            this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
+            this.configuraçõesToolStripMenuItem.Text = "Consultar situação dos serviços e cadastro de contribuinte";
             this.configuraçõesToolStripMenuItem.Click += new System.EventHandler(this.configuraçõesToolStripMenuItem_Click);
             // 
             // configuraçõesToolStripMenuItem1
             // 
             this.configuraçõesToolStripMenuItem1.Name = "configuraçõesToolStripMenuItem1";
-            this.configuraçõesToolStripMenuItem1.Size = new System.Drawing.Size(263, 22);
+            this.configuraçõesToolStripMenuItem1.Size = new System.Drawing.Size(380, 22);
             this.configuraçõesToolStripMenuItem1.Text = "Configurações";
             this.configuraçõesToolStripMenuItem1.Click += new System.EventHandler(this.configuraçõesToolStripMenuItem1_Click);
             // 
             // vaToolStripMenuItem
             // 
             this.vaToolStripMenuItem.Name = "vaToolStripMenuItem";
-            this.vaToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.vaToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.vaToolStripMenuItem.Text = "Validar arquivos XML";
             this.vaToolStripMenuItem.Click += new System.EventHandler(this.vaToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(260, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(377, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(263, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(380, 22);
             this.toolStripMenuItem2.Text = "Manual do UniNFe";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // sobreOUniNFeToolStripMenuItem
             // 
             this.sobreOUniNFeToolStripMenuItem.Name = "sobreOUniNFeToolStripMenuItem";
-            this.sobreOUniNFeToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.sobreOUniNFeToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.sobreOUniNFeToolStripMenuItem.Text = "Sobre o UniNFe";
             this.sobreOUniNFeToolStripMenuItem.Click += new System.EventHandler(this.sobreOUniNFeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(260, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(377, 6);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.sairToolStripMenuItem.Text = "Fechar o UniNFe";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 

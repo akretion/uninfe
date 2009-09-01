@@ -34,6 +34,13 @@ namespace UniNFeLibrary
             public string tpAmb { get; set; } //Tipo de Ambiente 1-Produção 2-Homologação
             public string idLote { get; set; } //Lote que a NFe faz parte
             public string serie { get; set; } //Série da NFe
+
+            public string cUF { get; set; } //UF do Emitente
+            public string cNF { get; set; } //Número randomico da chave da nfe
+            public string mod { get; set; } //Modelo da nota fiscal
+            public string nNF { get; set; } //Número da nota fiscal
+            public string cDV { get; set; } //Dígito verificador da chave da nfe
+            public string CNPJ { get; set; } //CNPJ do emitente
         }
 
         /// <summary>

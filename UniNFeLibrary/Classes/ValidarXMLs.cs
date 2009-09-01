@@ -56,7 +56,8 @@ namespace UniNFeLibrary
         public void Validar(string cRotaArqXML, string cRotaArqSchema)
         {
             bool lArqXML = File.Exists(cRotaArqXML);
-            bool lArqXSD = File.Exists(this.PastaSchema + "\\" + cRotaArqSchema);
+            var caminhoDoSchema = this.PastaSchema + "\\" + cRotaArqSchema;
+            bool lArqXSD = File.Exists(caminhoDoSchema);
 
             if (lArqXML && lArqXSD)
             {
@@ -66,7 +67,7 @@ namespace UniNFeLibrary
 
                 // Criar um coleção de schema, adicionar o XSD para ela
                 XmlSchemaCollection schemaCollection = new XmlSchemaCollection();
-                schemaCollection.Add(ConfiguracaoApp.nsURI, this.PastaSchema + "\\" + cRotaArqSchema);
+                schemaCollection.Add(ConfiguracaoApp.nsURI, caminhoDoSchema);
 
                 // Adicionar a coleção de schema para o XmlValidatingReader
                 reader.Schemas.Add(schemaCollection);
@@ -95,7 +96,7 @@ namespace UniNFeLibrary
                     this.Retorno = 1;
                     this.RetornoString = "Início da validação...\r\n\r\n";
                     this.RetornoString += "Arquivo XML: " + cRotaArqXML + "\r\n";
-                    this.RetornoString += "Arquivo SCHEMA: " + this.PastaSchema + "\\" + cRotaArqSchema + "\r\n\r\n";
+                    this.RetornoString += "Arquivo SCHEMA: " + caminhoDoSchema + "\r\n\r\n";
                     this.RetornoString += this.cErro;
                     this.RetornoString += "\r\n...Final da validação";
                 }
@@ -110,14 +111,14 @@ namespace UniNFeLibrary
                 else if (lArqXSD == false)
                 {
                     this.Retorno = 3;
-                    this.RetornoString = "Arquivo XSD (schema) não foi encontrato";
+                    this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + caminhoDoSchema;
                 }
             }
         }
 
         private void reader_ValidationEventHandler(object sender, ValidationEventArgs e)
         {
-            this.cErro = "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
+            this.cErro += "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
         }
 
         /// <summary>

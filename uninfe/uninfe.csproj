@@ -69,6 +69,12 @@
   <ItemGroup>
     <Compile Include="Classes\LerXML.cs" />
     <Compile Include="Classes\DefObjServico.cs" />
+    <Compile Include="Formulario\FormConsultaCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulario\FormConsultaCadastro.Designer.cs">
+      <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formulario\FormSobre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Formulario\FormConsultaCadastro.resx">
+      <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formulario\FormSobre.resx">
       <DependentUpon>FormSobre.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -3441,6 +3450,11 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -3454,6 +3468,11 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>

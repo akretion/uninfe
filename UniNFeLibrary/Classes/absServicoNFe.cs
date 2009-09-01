@@ -105,8 +105,8 @@ namespace UniNFeLibrary
         #endregion
 
         #region XmlPedRec()
-        public abstract void XmlPedRec(string nRec);        
-        #endregion 
+        public abstract void XmlPedRec(string nRec);
+        #endregion
 
         #region VerStatusServico()
         public abstract string VerStatusServico();
@@ -137,8 +137,9 @@ namespace UniNFeLibrary
             try
             {
                 //Fazer uma leitura de algumas tags do XML
-                string ChaveNfe = this.LerChave();
-                string TpEmis = this.LerTpEmis();
+                absLerXML.DadosNFeClass oDadosNFe = this.LerXMLNFe(this.vXmlNfeDadosMsg);
+                string ChaveNfe = oDadosNFe.chavenfe;
+                string TpEmis = oDadosNFe.tpEmis;
 
                 //Inserir NFe no XML de controle do fluxo
                 FluxoNfe oFluxoNfe = new FluxoNfe();
@@ -150,7 +151,7 @@ namespace UniNFeLibrary
                         oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
                         //Validações gerais
-                        if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, TpEmis))
+                        if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
                         {
                             bValidacaoGeral = true;
                         }
@@ -162,7 +163,7 @@ namespace UniNFeLibrary
 
                             ValidarXMLs oValidador = new ValidarXMLs();
                             oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
-                            
+
                             oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
 
                             if (oAD.intResultado == 0)
@@ -242,6 +243,7 @@ namespace UniNFeLibrary
                 }
                 else
                 {
+                    //TODO: WANDREY - URGENTE - Rever quando a nota já está no fluxo
                     throw new Exception("A nota fiscal abaixo já foi enviada para o SEFAZ e está somente aguardando a consulta do recibo, efetue a consulta para finalizar a transação da NFe.\r\n" +
                         this.vXmlNfeDadosMsg);
                 }
@@ -259,12 +261,8 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region LerChave()
-        protected abstract string LerChave();
-        #endregion
-
-        #region LerTpEmis()
-        protected abstract string LerTpEmis();
+        #region LerXMLNFe()
+        protected abstract absLerXML.DadosNFeClass LerXMLNFe(string Arquivo);
         #endregion
 
         #region Assinado()
@@ -294,9 +292,10 @@ namespace UniNFeLibrary
         /// <returns>true = Validado com sucesso</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>16/04/2009</date>
-        protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, string tpEmis)
+        protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, absLerXML.DadosNFeClass oDadosNFe)
         {
             bool booValido = false;
+            string cTextoErro = "";
 
             //TODO: CONFIG
             try
@@ -304,18 +303,18 @@ namespace UniNFeLibrary
                 //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro 
                 //para o ERP
                 // danasa 8-2009
-                if ((ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && (tpEmis == "1" || tpEmis == "2" || tpEmis == "5")) ||
-                    (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (tpEmis == "3")))
+                if ((ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
+                    (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
                 {
                     booValido = true;
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teContingencia && (tpEmis == "2"))
+                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teFSDA && (tpEmis == "5"))
+                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                 }
@@ -323,29 +322,119 @@ namespace UniNFeLibrary
                 {
                     booValido = false;
 
-                    //Registrar o erro referente ao tipo de emissão, está diferente, do que foi 
-                    //configurado na tela do UniNFe
-                    string cTextoErroTpEmis = "";
-
                     // danasa 8-2009
-                    if (ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && tpEmis == "3")
+                    if (ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
                     {
-                        cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
-                                           "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
-                                           "para o SCAN do Ambiente Nacional.\r\n\r\n";
+                        cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
+                            "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
+                            "para o SCAN do Ambiente Nacional.\r\n\r\n";
 
                     }
                     // danasa 8-2009
-                    else if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (tpEmis == "1" || tpEmis == "2" || tpEmis == "5"))
+                    else if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
                     {
-                        cTextoErroTpEmis = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
-                                           "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                        cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
+                            "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
                     }
 
-                    cTextoErroTpEmis += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+                    cTextoErro += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
 
-                    throw new Exception(cTextoErroTpEmis);
+                    throw new Exception(cTextoErro);
                 }
+
+                #region Verificar se os valores das tag´s que compõe a chave da nfe estão batendo com as informadas na chave
+                //Verificar se os valores das tag´s que compõe a chave da nfe estão batendo com as informadas na chave
+                if (booValido)
+                {
+                    cTextoErro = string.Empty;
+
+                    #region Tag <cUF>
+                    if (oDadosNFe.cUF != oDadosNFe.chavenfe.Substring(3, 2))
+                    {
+                        cTextoErro += "O código da UF informado na tag <cUF> está diferente do informado na chave da NF-e.\r\n" +
+                            "Código da UF informado na tag <cUF>: " + oDadosNFe.cUF + "\r\n" +
+                            "Código da UF informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(3, 2) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <cNF>
+                    if (oDadosNFe.cNF != oDadosNFe.chavenfe.Substring(37, 9))
+                    {
+                        cTextoErro += "O código numérico informado na tag <cNF> está diferente do informado na chave da NF-e.\r\n" +
+                            "Código numérico informado na tag <cNF>: " + oDadosNFe.cNF + "\r\n" +
+                            "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(37, 9) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <mod>
+                    if (oDadosNFe.mod != oDadosNFe.chavenfe.Substring(23, 2))
+                    {
+                        cTextoErro += "O modelo informado na tag <mod> está diferente do informado na chave da NF-e.\r\n" +
+                            "Modelo informado na tag <mod>: " + oDadosNFe.mod + "\r\n" +
+                            "Modelo informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(23, 2) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <nNF>
+                    if (Convert.ToInt32(oDadosNFe.nNF) != Convert.ToInt32(oDadosNFe.chavenfe.Substring(28, 9)))
+                    {
+                        cTextoErro += "O número da NF-e informado na tag <nNF> está diferente do informado na chave da NF-e.\r\n" +
+                            "Número da NFe informado na tag <nNF>: " + Convert.ToInt32(oDadosNFe.nNF).ToString() + "\r\n" +
+                            "Número da NFe informado na chave da NF-e: " + Convert.ToInt32(oDadosNFe.chavenfe.Substring(28, 9)).ToString() + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <cDV>
+                    if (oDadosNFe.cDV != oDadosNFe.chavenfe.Substring(46, 1))
+                    {
+                        cTextoErro += "O número do dígito verificador informado na tag <cDV> está diferente do informado na chave da NF-e.\r\n" +
+                            "Número do dígito verificador informado na tag <cDV>: " + oDadosNFe.cDV + "\r\n" +
+                            "Número do dígito verificador informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(46, 1) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <CNPJ> da tag <emit>
+                    if (oDadosNFe.CNPJ != oDadosNFe.chavenfe.Substring(9, 14))
+                    {
+                        cTextoErro += "O CNPJ do emitente informado na tag <emit><CNPJ> está diferente do informado na chave da NF-e.\r\n" +
+                            "CNPJ do emitente informado na tag <emit><CNPJ>: " + oDadosNFe.CNPJ + "\r\n" +
+                            "CNPJ do emitente informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(9, 14) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <serie>
+                    if (Convert.ToInt32(oDadosNFe.serie) != Convert.ToInt32(oDadosNFe.chavenfe.Substring(25, 3)))
+                    {
+                        cTextoErro += "A série informada na tag <serie> está diferente da informada na chave da NF-e.\r\n" +
+                            "Série informada na tag <cDV>: " + Convert.ToInt32(oDadosNFe.serie).ToString() + "\r\n" +
+                            "Série informada na chave da NF-e: " + Convert.ToInt32(oDadosNFe.chavenfe.Substring(25, 3)).ToString() + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    #region Tag <dEmi>
+                    if (oDadosNFe.dEmi.Month.ToString("00") != oDadosNFe.chavenfe.Substring(7, 2) ||
+                        oDadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) != oDadosNFe.chavenfe.Substring(5, 2))
+                    {
+                        cTextoErro += "A ano e mês da emissão informada na tag <dEmi> está diferente da informada na chave da NF-e.\r\n" +
+                            "Mês/Ano da data de emissão informada na tag <dEmi>: " + oDadosNFe.dEmi.Month.ToString("00") + "/" + oDadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
+                            "Mês/Ano informados na chave da NF-e: " + oDadosNFe.chavenfe.Substring(5, 2) + "/" + oDadosNFe.chavenfe.Substring(7, 2) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                    #endregion
+
+                    if (!booValido)
+                    {
+                        throw new Exception(cTextoErro);
+                    }
+                }
+                #endregion
             }
             catch (Exception ex)
             {

@@ -70,119 +70,124 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado, DateTime Emissao)
         {
-            //TODO: Criar vários try/catch neste método para evitar erros
-
-            //Definir o arquivo que vai ser deletado ou movido para outra pasta
-            FileInfo oArquivo = new FileInfo(Arquivo);
-
-            //Criar a pasta EmProcessamento
-            if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+            try
             {
-                System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
-            }
+                //Definir o arquivo que vai ser deletado ou movido para outra pasta
+                FileInfo oArquivo = new FileInfo(Arquivo);
 
-            //Criar a Pasta Autorizado
-            if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
-            {
-                System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString());
-            }
-
-            //Criar a Pasta Denegado
-            if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString()))
-            {
-                System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString());
-            }
-
-            //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
-            string strNomePastaEnviado = string.Empty;
-            string strDestinoArquivo = string.Empty;
-            switch (SubPastaXMLEnviado)
-            {
-                case PastaEnviados.EmProcessamento:
-                    strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
-                    strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
-                    break;
-
-                case PastaEnviados.Autorizados:
-                    strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Emissao.ToString("yyyyMM");
-                    strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
-                    goto default;
-
-                case PastaEnviados.Denegados:
-                    strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Emissao.ToString("yyyyMM");
-                    strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, "-nfe.xml") + "-den.xml";
-                    goto default;
-
-                default:
-                    if (!Directory.Exists(strNomePastaEnviado))
-                    {
-                        System.IO.Directory.CreateDirectory(strNomePastaEnviado);
-                    }
-                    break;
-            }
-
-            //Se conseguiu criar a pasta ele move o arquivo, caso contrário
-            if (Directory.Exists(strNomePastaEnviado) == true)
-            {
-                //Mover o arquivo da nota fiscal para a pasta dos enviados
-                if (File.Exists(strDestinoArquivo))
+                //Criar a pasta EmProcessamento
+                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
                 {
-                    FileInfo oArqDestino = new FileInfo(strDestinoArquivo);
-                    oArqDestino.Delete();
+                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
                 }
-                oArquivo.MoveTo(strDestinoArquivo);
 
-                if (SubPastaXMLEnviado == PastaEnviados.Autorizados || SubPastaXMLEnviado == PastaEnviados.Denegados)
+                //Criar a Pasta Autorizado
+                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
                 {
-                    //Fazer um backup do XML que foi copiado para a pasta de enviados
-                    //para uma outra pasta para termos uma maior segurança no arquivamento
-                    //Normalmente esta pasta é em um outro computador ou HD
-                    if (ConfiguracaoApp.cPastaBackup.Trim() != "")
-                    {
-                        //Criar Pasta do Mês para gravar arquivos enviados
-                        string strNomePastaBackup = string.Empty;
-                        switch (SubPastaXMLEnviado)
+                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                }
+
+                //Criar a Pasta Denegado
+                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                {
+                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                }
+
+                //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
+                string strNomePastaEnviado = string.Empty;
+                string strDestinoArquivo = string.Empty;
+                switch (SubPastaXMLEnviado)
+                {
+                    case PastaEnviados.EmProcessamento:
+                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
+                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                        break;
+
+                    case PastaEnviados.Autorizados:
+                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Emissao.ToString("yyyyMM");
+                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                        goto default;
+
+                    case PastaEnviados.Denegados:
+                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Emissao.ToString("yyyyMM");
+                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, "-nfe.xml") + "-den.xml";
+                        goto default;
+
+                    default:
+                        if (!Directory.Exists(strNomePastaEnviado))
                         {
-                            case PastaEnviados.Autorizados:
-                                strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Emissao.ToString("yyyyMM");
-                                goto default;
-
-                            case PastaEnviados.Denegados:
-                                strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Emissao.ToString("yyyyMM");
-                                goto default;
-
-                            default:
-                                if (Directory.Exists(strNomePastaBackup) == false)
-                                {
-                                    System.IO.Directory.CreateDirectory(strNomePastaBackup);
-                                }
-                                break;
+                            System.IO.Directory.CreateDirectory(strNomePastaEnviado);
                         }
+                        break;
+                }
 
-                        //Se conseguiu criar a pasta ele move o arquivo, caso contrário
-                        if (Directory.Exists(strNomePastaBackup) == true)
+                //Se conseguiu criar a pasta ele move o arquivo, caso contrário
+                if (Directory.Exists(strNomePastaEnviado) == true)
+                {
+                    //Mover o arquivo da nota fiscal para a pasta dos enviados
+                    if (File.Exists(strDestinoArquivo))
+                    {
+                        FileInfo oArqDestino = new FileInfo(strDestinoArquivo);
+                        oArqDestino.Delete();
+                    }
+                    oArquivo.MoveTo(strDestinoArquivo);
+
+                    if (SubPastaXMLEnviado == PastaEnviados.Autorizados || SubPastaXMLEnviado == PastaEnviados.Denegados)
+                    {
+                        //Fazer um backup do XML que foi copiado para a pasta de enviados
+                        //para uma outra pasta para termos uma maior segurança no arquivamento
+                        //Normalmente esta pasta é em um outro computador ou HD
+                        if (ConfiguracaoApp.cPastaBackup.Trim() != "")
                         {
-                            //Mover o arquivo da nota fiscal para a pasta de backup
-                            string strNomeArquivoBkp = strNomePastaBackup + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
-                            if (File.Exists(strNomeArquivoBkp))
+                            //Criar Pasta do Mês para gravar arquivos enviados
+                            string strNomePastaBackup = string.Empty;
+                            switch (SubPastaXMLEnviado)
                             {
-                                FileInfo oArqDestinoBkp = new FileInfo(strNomeArquivoBkp);
-                                oArqDestinoBkp.Delete();
-                            }
-                            FileInfo oArquivoBkp = new FileInfo(strDestinoArquivo);
+                                case PastaEnviados.Autorizados:
+                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Emissao.ToString("yyyyMM");
+                                    goto default;
 
-                            oArquivoBkp.CopyTo(strNomeArquivoBkp, true);
-                        }
-                        else
-                        {
-                            //TODO: Tenho que tratar este Erro e retornar algo para o ERP urgente, pois pode falhar
+                                case PastaEnviados.Denegados:
+                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Emissao.ToString("yyyyMM");
+                                    goto default;
+
+                                default:
+                                    if (Directory.Exists(strNomePastaBackup) == false)
+                                    {
+                                        System.IO.Directory.CreateDirectory(strNomePastaBackup);
+                                    }
+                                    break;
+                            }
+
+                            //Se conseguiu criar a pasta ele move o arquivo, caso contrário
+                            if (Directory.Exists(strNomePastaBackup) == true)
+                            {
+                                //Mover o arquivo da nota fiscal para a pasta de backup
+                                string strNomeArquivoBkp = strNomePastaBackup + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                                if (File.Exists(strNomeArquivoBkp))
+                                {
+                                    FileInfo oArqDestinoBkp = new FileInfo(strNomeArquivoBkp);
+                                    oArqDestinoBkp.Delete();
+                                }
+                                FileInfo oArquivoBkp = new FileInfo(strDestinoArquivo);
+
+                                oArquivoBkp.CopyTo(strNomeArquivoBkp, true);
+                            }
+                            else
+                            {
+                                throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + strNomePastaBackup + ")");
+                            }
                         }
                     }
                 }
+                else
+                {
+                    throw new Exception("Pasta para arquivamento dos XML´s enviados não existe. (Pasta: " + strNomePastaEnviado + ")");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //TODO: Tenho que tratar este Erro e retornar algo para o ERP urgente, pois pode falhar                
+                throw (ex);
             }
         }
         #endregion
@@ -198,7 +203,14 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado)
         {
-            this.MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now);
+            try
+            {
+                this.MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -565,7 +577,8 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region VerStatusServico()
+        #region VerStatusServico() e ConsultaCadastro()
+
         /// <summary>
         /// Verifica e retorna o Status do Servido da NFE. Para isso este método gera o arquivo XML necessário
         /// para obter o status do serviõ e faz a leitura do XML de retorno, disponibilizando uma string com a mensagem
@@ -577,7 +590,6 @@ namespace UniNFeLibrary
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-            string vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
 
             string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
                       this.ExtrairNomeArq(XmlNfeDadosMsg, "-ped-sta.xml") +
@@ -587,6 +599,145 @@ namespace UniNFeLibrary
                       this.ExtrairNomeArq(XmlNfeDadosMsg, "-ped-sta.xml") +
                       "-sta.err";
 
+            var saida = EnviaArquivoERecebeResposa(ArqXMLRetorno, ArqERRRetorno, ProcessaStatusServico);
+            return saida;
+        }
+
+
+        /// <summary>
+        /// Função Callback que analisa a resposta do Status do Servido
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <by>Marcos Diez</by>
+        /// <date>30/8/2009</date>
+        /// <returns></returns>
+        static string ProcessaStatusServico(XmlTextReader elem)
+        {
+            while (elem.Read())
+            {
+                if (elem.NodeType == XmlNodeType.Element)
+                {
+                    if (elem.Name == "xMotivo")
+                    {
+
+                        elem.Read();
+                        return elem.Value;
+                    }
+                }
+            }
+            return "Erro na leitora do XML";
+        }
+
+        /// <summary>
+        /// Função Callback que analisa a resposta do Status do Servido
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <by>Marcos Diez</by>
+        /// <date>30/8/2009</date>
+        /// <returns></returns>
+        public string VerConsultaCadastro(string XmlNfeDadosMsg)
+        {
+            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                       this.ExtrairNomeArq(XmlNfeDadosMsg, "-cons-cad.xml") +
+                       "-ret-cons-cad.xml";
+
+            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                      this.ExtrairNomeArq(XmlNfeDadosMsg, "-cons-cad.xml") +
+                      "-ret-cons-cad.err";
+
+            var saida = EnviaArquivoERecebeResposa(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastro);
+            return saida;
+        }
+
+
+        /// <summary>
+        /// Função Callback que analisa a resposta da Consulta de Cadastro
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <by>Marcos Diez</by>
+        /// <date>30/8/2009</date>
+        /// <returns></returns>
+        static string ProcessaConsultaCadastro(XmlTextReader elem)
+        {
+            string ie = "";
+            string cnpj = "";
+            string xNome = "";
+            string cpf = "";
+            string situacao = "";
+
+            // "infCad" , 
+            bool deuErro = true;
+
+            while (elem.Read())
+            {
+                if (elem.NodeType == XmlNodeType.Element)
+                {
+                    switch (elem.Name)
+                    {
+                        case "cStat":
+                            elem.Read();
+                            if (elem.Value == "111" || elem.Value == "112")
+                            {
+                                deuErro = false;
+                            }
+                            break;
+                        case "xMotivo":
+                            elem.Read();
+                            if (deuErro)
+                            {
+                                return elem.Value;
+                            }
+                            break;
+                        case "IE":
+                            elem.Read();
+                            ie = elem.Value;
+                            break;
+                        case "CPF":
+                            elem.Read();
+                            cpf = elem.Value;
+                            break;
+                        case "CNPJ":
+                            elem.Read();
+                            cnpj = elem.Value;
+                            break;
+                        case "xNome":
+                            elem.Read();
+                            xNome = elem.Value;
+                            break;
+                        case "cSit":
+                            elem.Read();
+                            if (elem.Value == "0")
+                                situacao = "não habilitado";
+                            else if (elem.Value == "1")
+                                situacao = "habilitado";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            var forma = "{0}\r\nCPF:\t{1}\r\nCNPJ:\t{2}\r\nIE:\t{3}\r\nSituação:\t{4}";
+            var output = String.Format(forma, xNome, cpf, cnpj, ie, situacao);
+            return output;
+        }
+
+
+        /// <summary>
+        /// Escopo do CalBack de analise de resposta da EnviarArquivoEReceberResposta
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <returns></returns>
+        delegate string Processa(XmlTextReader elem);
+        /// <summary>
+        /// Envia um arquivo para o webservice da NFE e recebe a resposta. 
+        /// </summary>
+        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
+        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>17/06/2009</date>
+        string EnviaArquivoERecebeResposa(string ArqXMLRetorno, string ArqERRRetorno, Processa processa)
+        {
+            string vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
             DateTime startTime;
             DateTime stopTime;
             TimeSpan elapsedTime;
@@ -621,18 +772,7 @@ namespace UniNFeLibrary
 
                             try
                             {
-                                while (oLerXml.Read())
-                                {
-                                    if (oLerXml.NodeType == XmlNodeType.Element)
-                                    {
-                                        if (oLerXml.Name == "xMotivo")
-                                        {
-                                            oLerXml.Read();
-                                            vStatus = oLerXml.Value;
-                                            break;
-                                        }
-                                    }
-                                }
+                                vStatus = processa(oLerXml);
                             }
                             catch
                             {
@@ -669,8 +809,8 @@ namespace UniNFeLibrary
                     //Detetar o arquivo de retorno
                     try
                     {
-                        FileInfo oArquivoDel = new FileInfo(ArqERRRetorno);
-                        oArquivoDel.Delete();
+                        vStatus = System.IO.File.ReadAllText(ArqERRRetorno, Encoding.Default);
+                        System.IO.File.Delete(ArqERRRetorno);
                         break;
                     }
                     catch
@@ -706,6 +846,35 @@ namespace UniNFeLibrary
             memoryStream.Seek(0, SeekOrigin.Begin);
 
             return memoryStream;
+        }
+        #endregion
+
+        #region FileInUse()
+        /// <summary>
+        /// detectar se o arquivo está em uso
+        /// </summary>
+        /// <param name="file">caminho do arquivo</param>
+        /// <returns>true se estiver em uso</returns>
+        /// <by>http://desenvolvedores.net/marcelo</by>
+        public static bool FileInUse(string file)
+        {
+            bool ret = false;
+
+            try
+            {
+                using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
+                {
+                    fs.Close();//fechar o arquivo para nao dar erro em outras aplicações
+                }
+
+                return ret;
+            }
+            catch (IOException ex)
+            {
+                ret = true;
+            }
+
+            return ret;
         }
         #endregion
     }

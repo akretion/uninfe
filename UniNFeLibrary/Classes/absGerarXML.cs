@@ -443,18 +443,32 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno, string ConteudoXMLRetorno)
         {
-            //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
-            //o mesmo existir
-            oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
+            StreamWriter SW = null;
 
-            //Gravar o arquivo XML de retorno
-            StreamWriter SW;
-            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                  oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) +
-                                  pFinalArqRetorno;
-            SW = File.CreateText(ArqXMLRetorno);
-            SW.Write(ConteudoXMLRetorno);
-            SW.Close();
+            try
+            {
+                //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
+                //o mesmo existir
+                oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
+
+                //Gravar o arquivo XML de retorno
+                string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                                      oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) +
+                                      pFinalArqRetorno;
+                SW = File.CreateText(ArqXMLRetorno);
+                SW.Write(ConteudoXMLRetorno);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                if (SW != null)
+                {
+                    SW.Close();
+                }
+            }
 
             //Gravar o XML de retorno também no formato TXT
             if (ConfiguracaoApp.GravarRetornoTXTNFe)
@@ -463,9 +477,9 @@ namespace UniNFeLibrary
                 {
                     this.TXTRetorno(pFinalArqEnvio, pFinalArqRetorno, ConteudoXMLRetorno);
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    throw (ex);
                 }
             }
         }

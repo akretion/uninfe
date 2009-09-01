@@ -45,6 +45,12 @@ namespace uninfe
             this.oDadosNfe.tpAmb = string.Empty;
             this.oDadosNfe.tpEmis = string.Empty;
             this.oDadosNfe.serie = string.Empty;
+            this.oDadosNfe.cUF = string.Empty;
+            this.oDadosNfe.cNF = string.Empty;
+            this.oDadosNfe.mod = string.Empty;
+            this.oDadosNfe.nNF = string.Empty;
+            this.oDadosNfe.cDV = string.Empty;
+            this.oDadosNfe.CNPJ = string.Empty;
 
             try
             {
@@ -66,7 +72,6 @@ namespace uninfe
                     //Montar lista de tag´s da tag <ide>
                     XmlNodeList ideList = infNFeElemento.GetElementsByTagName("ide");
 
-                    //Pegar o conteúdo da tag <dEmi>
                     foreach (XmlNode ideNode in ideList)
                     {
                         XmlElement ideElemento = (XmlElement)ideNode;
@@ -75,6 +80,21 @@ namespace uninfe
                         this.oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
                         this.oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
                         this.oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
+                        this.oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
+                        this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cNF")[0].InnerText;
+                        this.oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
+                        this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nNF")[0].InnerText;
+                        this.oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
+                    }
+
+                    //Montar lista de tag´s da tag <emit>
+                    XmlNodeList emitList = infNFeElemento.GetElementsByTagName("emit");
+
+                    foreach (XmlNode emitNode in emitList)
+                    {
+                        XmlElement emitElemento = (XmlElement)emitNode;
+
+                        this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
                     }
                 }
 

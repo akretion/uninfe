@@ -38,6 +38,11 @@ namespace uninfe.Formulario
         private void toolStripButton_validar_Click(object sender, EventArgs e)
         {
             this.textBox_resultado.Text = "";
+            if (this.textBox_arqxml.Text == "")
+            {
+                this.textBox_resultado.Text="Arquivo não encontrado.";
+                return;
+            }
 
             //Copiar o arquivo XML para temporários para assinar e depois vou validar o que está nos temporários
             Auxiliar oAux = new Auxiliar();

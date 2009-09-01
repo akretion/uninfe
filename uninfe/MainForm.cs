@@ -289,7 +289,10 @@ namespace uninfe
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            this.DemonstrarStatusServico();
+            var consultaCadastro = new FormConsultaCadastro();
+            consultaCadastro.MdiParent = this;
+            consultaCadastro.MinimizeBox = false;
+            consultaCadastro.Show();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -382,7 +385,12 @@ namespace uninfe
 
         private void configuraçõesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.DemonstrarStatusServico();
+            var consultaCadastro = new FormConsultaCadastro();
+            consultaCadastro.MinimizeBox = true;
+            consultaCadastro.ShowInTaskbar = true;
+            consultaCadastro.ShowDialog();
+
+            //this.DemonstrarStatusServico();
         }
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)

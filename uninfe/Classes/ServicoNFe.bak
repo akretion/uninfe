@@ -99,10 +99,18 @@ namespace uninfe
             //Definir o serviço que será executado para a classe
             Servico = Servicos.PedidoConsultaStatusServicoNFe;
 
+            //Ler o XML para pegar parâmetros de envio
+            LerXML oLer = new LerXML();
+            oLer.PedSta(this.vXmlNfeDadosMsg);
+            ParametroEnvioXML oParam = new ParametroEnvioXML();
+            oParam.tpAmb = Convert.ToInt32(oLer.oDadosPedSta.tpAmb);
+            oParam.UFCod = Convert.ToInt32(oLer.oDadosPedSta.cUF);
+            oParam.tpEmis = ConfiguracaoApp.tpEmis;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             object oCabecMsg = null;
-            oDefObj.StatusServico(ref oServico, ref oCabecMsg);
+            oDefObj.StatusServico(ref oServico, ref oCabecMsg, oParam);
             if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oServico, "nfeStatusServicoNF", "-ped-sta", "-sta") == true)
             {
                 //Deletar o arquivo de solicitação do serviço
@@ -195,6 +203,12 @@ namespace uninfe
                 //Se falhou algo no envio vamos ter que excluir a nota do fluxo, 
                 //Primeiro deleta o xml da nota da pasta EmProcessamento e depois tira ela do fluxo
                 //Wandrey 30/04/2009
+
+                //TODO: QUEDA DE ENERGIA
+                //ANOTACOES TODO ACIMA: Como já vai ter movido o arquivo de lote para a pasta de XML´s com erro
+                //Neste ponto se der uma queda de energia ele não sai mais do fluxo, visto que não tem recibo
+                //Não tem mais lote para enviar, enfim fica preso.
+
                 oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                 oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
             }
@@ -321,10 +335,18 @@ namespace uninfe
             //Definir o serviço que será executado para a classe
             Servico = Servicos.PedidoConsultaSituacaoNFe;
 
+            //Ler o XML para pegar parâmetros de envio
+            LerXML oLer = new LerXML();
+            oLer.PedSit(this.vXmlNfeDadosMsg);
+            ParametroEnvioXML oParam = new ParametroEnvioXML();
+            oParam.tpAmb = Convert.ToInt32(oLer.oDadosPedSit.tpAmb);
+            oParam.UFCod = Convert.ToInt32(oLer.oDadosPedSit.cUF);
+            oParam.tpEmis = Convert.ToInt32(oLer.oDadosPedSit.tpEmis);
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
             object oCabecMsg = null;
-            oDefObj.Consulta(ref oServico, ref oCabecMsg);
+            oDefObj.Consulta(ref oServico, ref oCabecMsg, oParam);
             if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oServico, "nfeConsultaNF", "-ped-sit", "-sit") == true)
             {
                 //Deletar o arquivo de solicitação do serviço
@@ -458,7 +480,9 @@ namespace uninfe
                 {
                     //Resolver um falha do estado da bahia que gera um método com nome diferente dos demais estados
                     string cMetodo = "nfeInutilizacaoNF";
-                    if (ConfiguracaoApp.vUnidadeFederativaCodigo == 29 && ConfiguracaoApp.vTpEmis != 3)
+                    //TODO: CONFIG
+                    if (ConfiguracaoApp.tpAmb == 29 &&
+                        ConfiguracaoApp.tpEmis != TipoEmissao.teSCAN/*3*/)
                     {
                         cMetodo = "nfeInutilizacao";
                     }
@@ -533,13 +557,22 @@ namespace uninfe
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultaCadastroContribuinte;
 
+            //Ler o XML para pegar parâmetros de envio
+            LerXML oLer = new LerXML();
+            oLer.ConsCad(this.vXmlNfeDadosMsg);
+            ParametroEnvioXML oParam = new ParametroEnvioXML();
+            oParam.tpAmb = Convert.ToInt32(oLer.oDadosConsCad.tpAmb);
+            oParam.UFCod = Convert.ToInt32(oLer.oDadosConsCad.cUF);
+            //TODO: CONFIG - Linha abaixo não tive como definir o tpEmis de acordo com o XML, assim sendo tá pegando do parâmetro ainda
+            oParam.tpEmis = ConfiguracaoApp.tpEmis;
+
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
-            oDefObj.ConsultaCadastro(ref oServico);
+            oDefObj.ConsultaCadastro(ref oServico, oParam);
             if (oServico == null)
             {
                 string sAmbiente;
-                if (ConfiguracaoApp.vAmbienteCodigo == 1)
+                if (oParam.tpAmb == TipoAmbiente.taProducao/*1*/)
                 {
                     sAmbiente = "produção";
                 }
@@ -551,7 +584,7 @@ namespace uninfe
                 oAux.GravarArqErroServico(this.vXmlNfeDadosMsg,
                     "-cons-cad.xml",
                     "-ret-cons-cad.err",
-                    "O Estado (" + ConfiguracaoApp.vUnidadeFederativaCodigo.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
+                    "O Estado (" + oParam.UFCod.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
             }
             else
             {
@@ -612,15 +645,27 @@ namespace uninfe
 
         #region LoteNfe()
         /// <summary>
-        /// Auxiliar na geração do arquivo XML de retorno para o ERP quando estivermos utilizando o InvokeMember para chamar o método
+        /// Auxiliar na geração do arquivo XML de Lote de notas fiscais
         /// </summary>
-        /// <param name="pFinalArqEnvio">Final do nome do arquivo de solicitação do serviço.</param>
-        /// <param name="pFinalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
+        /// <param name="Arquivo">Nome do arquivo XML da NFe para montagem do lote de 1 NFe</param>
         /// <date>07/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
         public override void LoteNfe(string Arquivo)
         {
             oGerarXML.LoteNfe(Arquivo);
+        }
+        #endregion
+
+        #region LoteNfe() - Sobrecarga
+        /// <summary>
+        /// Auxliar na geração do arquivo XML de Lote de notas fiscais
+        /// </summary>
+        /// <param name="lstArquivoNfe">Lista de arquivos de NFe para montagem do lote de várias NFe</param>
+        /// <date>24/08/2009</date>
+        /// <by>Wandrey Mundin Ferreira</by>
+        public override void LoteNfe(List<string> lstArquivoNfe)
+        {
+            oGerarXML.LoteNfe(lstArquivoNfe);
         }
         #endregion
 
@@ -643,6 +688,33 @@ namespace uninfe
             return oAux.VerStatusServico(XmlNfeDadosMsg);
         }
         #endregion
+
+        #region ConsultaCadastro()
+
+        /// <summary>
+        /// Verifica um cadastro no site da receita.
+        /// Voce deve preencher o estado e mais um dos tres itens: CPNJ, IE ou CPF.
+        /// </summary>
+        /// <param name="uf">Sigla do UF do cadastro a ser consultado. Tem que ter dois dígitos. SU para suframa.</param>
+        /// <param name="cnpj"></param>
+        /// <param name="ie"></param>
+        /// <param name="cpf"></param>
+        /// <returns>String com o resultado da consuta do cadastro</returns>
+        /// <by>Marcos Diez</by>
+        /// <date>29/08/2009</date>
+        public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
+        {
+            //Criar XML para obter o status do serviço
+            string XmlNfeConsultaCadastro = oGerarXML.ConsultaCadastro(uf, cnpj, ie, cpf);
+
+            //Retornar o status do serviço
+            return oAux.VerStatusServico(XmlNfeConsultaCadastro);
+            //return oAux.VerConsultaCadastro(XmlNfeConsultaCadastro);
+        }
+
+
+        #endregion
+
 
         #region LerChave()
         protected override string LerChave()
@@ -689,10 +761,22 @@ namespace uninfe
                 {
                     XmlElement retConsReciNFeElemento = (XmlElement)retConsReciNFeNode;
 
-                    if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText == "104") //Lote processado
+                    //Pegar o número do recibo do lote enviado
+                    string nRec = string.Empty;
+                    if (retConsReciNFeElemento.GetElementsByTagName("nRec")[0] != null)
                     {
-                        string nRec = retConsReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                        nRec = retConsReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                    }
 
+                    //Pegar o status de retorno do lote enviado
+                    string cStatLote = string.Empty;
+                    if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0] != null)
+                    {
+                        cStatLote = retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+                    }
+
+                    if (cStatLote == "104") //Lote processado
+                    {
                         XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
 
                         foreach (XmlNode protNFeNode in protNFeList)
@@ -730,6 +814,20 @@ namespace uninfe
 
                                 //Definir o nome do arquivo da NFe e seu caminho
                                 string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
+
+                                ///
+                                /// danasa 8-2009
+                                /// se por algum motivo o XML não existir no "Fluxo", então o arquivo tem que existir
+                                /// na pasta "EmProcessamento" assinada.
+                                /// 
+                                if (string.IsNullOrEmpty(strNomeArqNfe))
+                                {
+                                    if (string.IsNullOrEmpty(strChaveNFe))
+                                        throw new Exception("LerRetornoLote(): Não pode obter o nome do arquivo");
+
+                                    strNomeArqNfe = strChaveNFe.Substring(3) + "-nfe.xml";
+                                    //throw new Exception(strChaveNFe + " não pode ser localizada");
+                                }
                                 string strArquivoNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                 //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
@@ -778,11 +876,11 @@ namespace uninfe
                             }
                         }
                     }
-                    else if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText == "105") //Lote em processamento
+                    else if (cStatLote == "105") //Lote em processamento
                     {
                         //Ok vou aguardar o ERP gerar uma nova consulta para encerrar o fluxo da nota
                     }
-                    else if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText == "106") //Lote não encontrado
+                    else if (cStatLote == "106") //Lote não encontrado
                     {
                         //Se o recibo que está sendo consultado não existir no SEFAZ, vamos excluir a nota do fluxo de envio
                         //TODO: 1-Tenho que ver isso ainda como vai ficar
@@ -790,15 +888,12 @@ namespace uninfe
                         //ou criar uma exclusão do fluxo através do recibo.
                         //TODO: URGENTE - Aqui é um ponto que pode estar deixando o XML no fluxo sem tirar
                     }
-                    else //Qualquer outro tipo de rejeição que der tem que tirar o arquivo de NFe do fluxo para que o ERP gere um novo com o ajuste
+                    else //Rejeitou a consulta do lote
                     {
-                        //TODO: WANDREY - ACERTAR URGENTE AQUI E NO CTE
-
-                        //Mover o XML da NFE a pasta de XML´s com erro
-                        //oAux.MoveArqErro(strArquivoNFe);
-
-                        //Deletar a NFE do arquivo de controle de fluxo
-                        //oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
+                        //A consulta do recibo do lote pode ser rejeitada por diversas motivos, eu não posso tirar do fluxo
+                        //tenho que continuar tentando consultar, o ERP vai ter que analisar o retorno gravado, arrumar o problema, 
+                        //se preciso for sair do uninfe entrar novamente para que ele gere nova consulta e tente finalizar.
+                        //Wandrey 18/08/2009
                     }
                 }
             }

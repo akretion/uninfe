@@ -317,11 +317,11 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                    //TODO: WANDREY - URGENTE - Pode dar um erro na hora de gerar o lote ou na hora de gravar a nfe no fluxonfe.xml
                 }
                 catch (Exception ex)
                 {
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                    //TODO: WANDREY - URGENTE - Pode dar um erro na hora de gerar o lote ou na hora de gravar a nfe no fluxonfe.xml
                 }
             }
         }
@@ -337,14 +337,22 @@ namespace UniNFeLibrary
         /// <date>28/04/2009</date>
         private void MontarLoteVariasNfe(Object oNfe)
         {
-            //Verificar se existe o arquivo que solicita a montagem do lote
+
             List<string> lstArqMontarLote = new List<string>();
 
+            //Aguardar a assinatura de todos os arquivos da pasta de lotes
+            lstArqMontarLote = this.ArquivosPasta(ConfiguracaoApp.cPastaXMLEmLote, "*" + ExtXml.Nfe);
+            if (lstArqMontarLote.Count > 0) return;
+
+            //Verificar se existe o arquivo que solicita a montagem do lote
             lstArqMontarLote = this.ArquivosPasta(ConfiguracaoApp.cPastaXMLEmLote, "*" + ExtXml.MontarLote);
 
             for (int b = 0; b < lstArqMontarLote.Count; b++)
             {
                 string NomeArquivo = lstArqMontarLote[b];
+
+                //O arquivo existe mas pode estar em uso
+                if (Auxiliar.FileInUse(NomeArquivo) == true) return;
 
                 //Verificar se consegue abrir o arquivo em modo exclusivo
                 //Se conseguir significa que está perfeitamente gerado e liberado pelo ERP
