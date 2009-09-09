@@ -63,6 +63,10 @@ namespace UniNFeLibrary
             /// Código da Unidade Federativa (UF)
             /// </summary>
             public string cUF { get; set; }
+            /// <summary>
+            /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+            /// </summary>
+            public int tpEmis { get; set; }
         }
 
         public class DadosPedSit
@@ -90,7 +94,7 @@ namespace UniNFeLibrary
                     if (this.mchNFe != string.Empty)
                     {
                         this.cUF = this.mchNFe.Substring(0, 2);
-                        this.serie = this.mchNFe.Substring(23, 3);
+                        this.serie = this.mchNFe.Substring(22, 3);
                         if (Convert.ToInt32(this.serie) >= 900)
                         {
                             this.tpEmis = "3";

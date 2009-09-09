@@ -122,9 +122,17 @@ namespace UniNFeLibrary
                     this.ConvTXT();
                     break;
 
+                ///
+                /// danasa 9-2009
+                /// 
+                case Servicos.GerarChaveNFe:
+                    this.GerarChaveNFe();
+                    break;
+
                 default:  //Assinar, validar, enviar ou somente processar os arquivos XML encontrados na pasta de envio
                     for (int i = 0; i < lstArquivos.Count; i++)
                     {
+                        string cError = "";
                         try
                         {
                             //Verificar se consegue abrir o arquivo em modo exclusivo
@@ -140,11 +148,32 @@ namespace UniNFeLibrary
                         }
                         catch (IOException ex)
                         {
-                            //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                            ///
+                            /// danasa 9-2009
+                            /// 
+                            cError = ex.Message;
                         }
                         catch (Exception ex)
                         {
-                            //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                            ///
+                            /// danasa 9-2009
+                            /// 
+                            cError = ex.Message;
+                        }
+                        ///
+                        /// danasa 9-2009
+                        /// 
+                        if (!string.IsNullOrEmpty(cError))
+                        {
+                            Auxiliar oAux = new Auxiliar();
+                            ///
+                            /// grava o arquivo de erro
+                            /// 
+                            oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(lstArquivos[i]) + ".err", cError);
+                            ///
+                            /// move o arquivo para a pasta de erro
+                            /// 
+                            oAux.MoveArqErro(lstArquivos[i]);
                         }
                     }
                     break;
@@ -170,6 +199,7 @@ namespace UniNFeLibrary
             //Assinar, Validar, Enviar ou somente processar os arquivos XML encontrados na pasta de envio
             for (int i = 0; i < lstArquivos.Count; i++)
             {
+                string cError = "";
                 try
                 {
                     //Verificar se consegue abrir o arquivo em modo exclusivo
@@ -189,12 +219,27 @@ namespace UniNFeLibrary
                 catch (IOException ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                    cError = ex.Message;
                 }
                 catch (Exception ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso ao arquivo.
+                    cError = ex.Message;
+                }
+                ///
+                /// danasa 9-2009
+                /// 
+                if (!string.IsNullOrEmpty(cError))
+                {
+                    Auxiliar oAux = new Auxiliar();
+                    ///
+                    /// grava o arquivo de erro
+                    /// 
+                    oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(lstArquivos[i]) + ".err", cError);
+                    ///
+                    /// move o arquivo para a pasta de erro
+                    /// 
+                    oAux.MoveArqErro(lstArquivos[i]);
                 }
             }
         }
@@ -215,7 +260,7 @@ namespace UniNFeLibrary
             tipoServico.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.SetProperty, null, oNfe, new object[] { cArquivo });
 
             //TODO: CONFIG
-            if (ConfiguracaoApp.tpEmis != 2) //2-Confingência em Formulário de segurança não envia na hora, tem que aguardar voltar para normal.
+            if (ConfiguracaoApp.tpEmis != TipoEmissao.teContingencia/*2*/) //2-Confingência em Formulário de segurança não envia na hora, tem que aguardar voltar para normal.
             {
                 if (strMetodo == "ReconfigurarUniNfe")
                 {
@@ -264,6 +309,7 @@ namespace UniNFeLibrary
 
             if (strPasta.Trim() != "" && Directory.Exists(strPasta))
             {
+                string cError = "";
                 try
                 {
                     foreach (string item in Directory.GetFiles(strPasta, strMascara))
@@ -273,16 +319,20 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    throw (ex);
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso a pasta.
+                    //throw (ex);
+                    cError = ex.Message;
                 }
                 catch (Exception ex)
                 {
-                    throw (ex);
-                    //TODO: Tenho que gravar o log de erros neste ponto, pois pode ocorrer do usuário não ter acesso a pasta.
+                    //throw (ex);
+                    cError = ex.Message;
+                }
+                if (!string.IsNullOrEmpty(cError))
+                {
+                    new Auxiliar().GravarArqErroERP(string.Format(InfoApp.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddThhmmss")), cError);
+                    lstArquivos.Clear();
                 }
             }
-
             return lstArquivos;
         }
         #endregion
@@ -305,6 +355,7 @@ namespace UniNFeLibrary
             lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio + ConfiguracaoApp.NomePastaXMLAssinado, "*" + ExtXml.Nfe);
             for (int i = 0; i < lstArquivos.Count; i++)
             {
+                string cError = "";
                 try
                 {
                     absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(lstArquivos[i]);
@@ -317,17 +368,31 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    //TODO: WANDREY - URGENTE - Pode dar um erro na hora de gerar o lote ou na hora de gravar a nfe no fluxonfe.xml
+                    cError = ex.Message;
                 }
                 catch (Exception ex)
                 {
-                    //TODO: WANDREY - URGENTE - Pode dar um erro na hora de gerar o lote ou na hora de gravar a nfe no fluxonfe.xml
+                    cError = ex.Message;
+                }
+                ///
+                /// danasa 9-2009
+                /// 
+                if (!string.IsNullOrEmpty(cError))
+                {
+                    Auxiliar oAux = new Auxiliar();
+                    ///
+                    /// grava o arquivo de erro
+                    /// 
+                    oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(lstArquivos[i]) + ".err", cError);
+                    ///
+                    /// move o arquivo para a pasta de erro
+                    /// 
+                    oAux.MoveArqErro(lstArquivos[i]);
                 }
             }
         }
         #endregion
 
-        
         #region MontarLoteVariasNfe()
         /// <summary>
         /// Monta o um lote com várias NFe´s
@@ -337,7 +402,6 @@ namespace UniNFeLibrary
         /// <date>28/04/2009</date>
         private void MontarLoteVariasNfe(Object oNfe)
         {
-
             List<string> lstArqMontarLote = new List<string>();
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
@@ -476,7 +540,7 @@ namespace UniNFeLibrary
                     
                     if (lTeveErro)
                     {
-                        oAux.GravarArqErroServico(NomeArquivo, "-montar-lote.xml", "-montar-lote.err", MensagemErro);
+                        oAux.GravarArqErroServico(NomeArquivo, ExtXml.MontarLote/*"-montar-lote.xml"*/, "-montar-lote.err", MensagemErro);
                     }
                 }
             }
@@ -500,7 +564,8 @@ namespace UniNFeLibrary
 
             Auxiliar oAux = new Auxiliar();
 
-            oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(ArquivoXml,"-cons-inf.xml")+"-ret-cons-inf.xml");
+            oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" + 
+                                            oAux.ExtrairNomeArq(ArquivoXml, ExtXml.ConsInf/*"-cons-inf.xml"*/) + "-ret-cons-inf.xml");
         }
         #endregion
 
@@ -613,6 +678,15 @@ namespace UniNFeLibrary
 
         #region LerXMLRecibo()
         protected abstract absLerXML.DadosRecClass LerXMLRecibo(string Arquivo);
+        #endregion
+
+        #region GerarChaveNFe()
+        /// <summary>
+        /// Monta a chave da NFe
+        /// </summary>
+        /// <param name="lstArquivos"></param>
+        /// <returns></returns>
+        protected abstract void GerarChaveNFe();
         #endregion
 
         #endregion

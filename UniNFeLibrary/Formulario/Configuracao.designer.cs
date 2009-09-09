@@ -626,6 +626,8 @@
             this.Name = "Configuracao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configurações";
+            this.Load += new System.EventHandler(this.Configuracao_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Configuracao_FormClosed);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

@@ -110,7 +110,7 @@ namespace UniNFeLibrary
 
                     case PastaEnviados.Denegados:
                         strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Emissao.ToString("yyyyMM");
-                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, "-nfe.xml") + "-den.xml";
+                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe/*"-nfe.xml"*/) + "-den.xml";
                         goto default;
 
                     default:
@@ -226,11 +226,33 @@ namespace UniNFeLibrary
             //TODO: Criar vários try/catch neste método para evitar erros
 
             //Definir o arquivo que vai ser deletado ou movido para outra pasta
-            FileInfo oArquivo = new FileInfo(Arquivo);
+            //FileInfo oArquivo = new FileInfo(Arquivo);
 
             if (File.Exists(Arquivo))
             {
+                FileInfo oArquivo = new FileInfo(Arquivo);  // << movido para cá >>
                 oArquivo.Delete();
+            }
+        }
+        #endregion
+
+        #region DeletarArqXMLErro()
+        /// <summary>
+        /// Deleta o XML da pata temporária dos arquivos com erro se o mesmo existir.
+        /// </summary>
+        public void DeletarArqXMLErro(string Arquivo)
+        {
+            try
+            {
+                this.DeletarArquivo(Arquivo);
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -272,27 +294,6 @@ namespace UniNFeLibrary
             }
 
             return conteudo_xml;
-        }
-        #endregion
-
-        #region DeletarArqXMLErro()
-        /// <summary>
-        /// Deleta o XML da pata temporária dos arquivos com erro se o mesmo existir.
-        /// </summary>
-        public void DeletarArqXMLErro(string Arquivo)
-        {
-            try
-            {
-                this.DeletarArquivo(Arquivo);
-            }
-            catch (IOException ex)
-            {
-                throw (ex);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 
@@ -378,9 +379,12 @@ namespace UniNFeLibrary
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
-            //Grava arquivo de ERRO para o ERP
-            string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Arquivo;
-            File.WriteAllText(cArqErro, Erro, Encoding.Default);
+            if (!string.IsNullOrEmpty(Arquivo))
+            {
+                //Grava arquivo de ERRO para o ERP
+                string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
+                File.WriteAllText(cArqErro, Erro, Encoding.Default);
+            }
         }
         #endregion
 
@@ -590,17 +594,20 @@ namespace UniNFeLibrary
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-
             string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                      this.ExtrairNomeArq(XmlNfeDadosMsg, "-ped-sta.xml") +
+                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.PedSta) +
                       "-sta.xml";
 
             string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                      this.ExtrairNomeArq(XmlNfeDadosMsg, "-ped-sta.xml") +
-                      "-sta.err";
+                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.PedSta) +
+                      "-ped-sta.err";
 
-            var saida = EnviaArquivoERecebeResposa(ArqXMLRetorno, ArqERRRetorno, ProcessaStatusServico);
-            return saida;
+            string result = (string)EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaStatusServico);
+
+            this.DeletarArquivo(ArqERRRetorno);
+            this.DeletarArquivo(ArqXMLRetorno);
+
+            return result;
         }
 
 
@@ -611,7 +618,7 @@ namespace UniNFeLibrary
         /// <by>Marcos Diez</by>
         /// <date>30/8/2009</date>
         /// <returns></returns>
-        static string ProcessaStatusServico(XmlTextReader elem)
+        private static string ProcessaStatusServico(XmlTextReader elem)
         {
             while (elem.Read())
             {
@@ -619,13 +626,12 @@ namespace UniNFeLibrary
                 {
                     if (elem.Name == "xMotivo")
                     {
-
                         elem.Read();
                         return elem.Value;
                     }
                 }
             }
-            return "Erro na leitora do XML";
+            return "Erro na leitura do XML";
         }
 
         /// <summary>
@@ -635,7 +641,7 @@ namespace UniNFeLibrary
         /// <by>Marcos Diez</by>
         /// <date>30/8/2009</date>
         /// <returns></returns>
-        public string VerConsultaCadastro(string XmlNfeDadosMsg)
+        /*public string VerConsultaCadastro(string XmlNfeDadosMsg)
         {
             string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
                        this.ExtrairNomeArq(XmlNfeDadosMsg, "-cons-cad.xml") +
@@ -645,8 +651,27 @@ namespace UniNFeLibrary
                       this.ExtrairNomeArq(XmlNfeDadosMsg, "-cons-cad.xml") +
                       "-ret-cons-cad.err";
 
-            var saida = EnviaArquivoERecebeResposa(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastro);
+            var saida = (string)EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastro);
             return saida;
+        }
+        */
+
+        public object VerConsultaCadastroClass(string XmlNfeDadosMsg)
+        {
+            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                       this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.ConsCad) +
+                       "-ret-cons-cad.xml";
+
+            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.ConsCad) +
+                      "-ret-cons-cad.err";
+
+            object vRetorno = EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastroClass);
+
+            this.DeletarArquivo(ArqERRRetorno);
+            this.DeletarArquivo(ArqXMLRetorno);
+
+            return vRetorno;
         }
 
 
@@ -657,7 +682,8 @@ namespace UniNFeLibrary
         /// <by>Marcos Diez</by>
         /// <date>30/8/2009</date>
         /// <returns></returns>
-        static string ProcessaConsultaCadastro(XmlTextReader elem)
+        /*
+        private static string ProcessaConsultaCadastro(XmlTextReader elem)
         {
             string ie = "";
             string cnpj = "";
@@ -720,14 +746,172 @@ namespace UniNFeLibrary
             var output = String.Format(forma, xNome, cpf, cnpj, ie, situacao);
             return output;
         }
+        */
 
+        private static DateTime getDateTime(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return DateTime.MinValue;
+
+            int _ano = Convert.ToInt16(value.Substring(0, 4));
+            int _mes = Convert.ToInt16(value.Substring(5, 2));
+            int _dia = Convert.ToInt16(value.Substring(8, 2));
+            if (value.Contains("T") && value.Contains(":"))
+            {
+                int _hora = Convert.ToInt16(value.Substring(11, 2));
+                int _min = Convert.ToInt16(value.Substring(14, 2));
+                int _seg = Convert.ToInt16(value.Substring(17, 2));
+                return new DateTime(_ano, _mes, _dia, _hora, _min, _seg);
+            }
+            return new DateTime(_ano, _mes, _dia);
+        }
+
+        private static RetConsCad ProcessaConsultaCadastroClass(XmlTextReader elem)
+        {
+            RetConsCad vRetorno = new RetConsCad();
+
+            while (elem.Read())
+            {
+                if (elem.NodeType == XmlNodeType.Element)
+                {
+                    switch (elem.Name)
+                    {
+                        case "infCad":
+                            elem.Read();
+                            vRetorno.infCad.Add(new infCad());
+                            break;
+
+                        case "cStat":
+                            elem.Read();
+                            vRetorno.cStat = Convert.ToInt32("0" + elem.Value);
+                            break;
+                        case "xMotivo":
+                            elem.Read();
+                            vRetorno.xMotivo = elem.Value;
+                            break;
+                        case "UF":
+                            elem.Read();
+                            if (vRetorno.infCad.Count > 0)
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].UF = elem.Value;
+                            else
+                                vRetorno.UF = elem.Value;
+                            break;
+                        case "IE":
+                            elem.Read();
+                            if (vRetorno.infCad.Count > 0)
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].IE = elem.Value;
+                            else
+                                vRetorno.IE = elem.Value;
+                            break;
+                        case "CNPJ":
+                            elem.Read();
+                            if (vRetorno.infCad.Count > 0)
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = elem.Value;
+                            else
+                                vRetorno.CNPJ = elem.Value;
+                            break;
+                        case "CPF":
+                            elem.Read();
+                            if (vRetorno.infCad.Count > 0)
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = elem.Value;
+                            else
+                                vRetorno.CPF = elem.Value;
+                            break;
+                        case "dhCons":
+                            elem.Read();
+                            vRetorno.dhCons = getDateTime(elem.Value);
+                            break;
+                        case "cUF":
+                            elem.Read();
+                            vRetorno.cUF = elem.Value;
+                            break;
+
+                        case "xNome":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = elem.Value;
+                            break;
+                        case "xFant":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = elem.Value;
+                            break;
+                        case "xLgr":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xLgr = elem.Value;
+                            break;
+                        case "nro":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].nro = elem.Value;
+                            break;
+                        case "xCpl":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xCpl = elem.Value;
+                            break;
+                        case "xBairro":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xBairro = elem.Value;
+                            break;
+                        case "xMun":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xMun = elem.Value;
+                            break;
+                        case "cMun":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].cMun = Convert.ToInt32("0" + elem.Value);
+                            break;
+                        case "CEP":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].CEP = Convert.ToInt32("0" + elem.Value);
+                            break;
+                        case "IEAtual":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].IEAtual = elem.Value;
+                            break;
+                        case "IEUnica":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].IEUnica = elem.Value;
+                            break;
+                        case "dBaixa":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].dBaixa = getDateTime(elem.Value);
+                            break;
+                        case "dUltSit":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].dUltSit = getDateTime(elem.Value);
+                            break;
+                        case "dIniAtiv":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].dIniAtiv = getDateTime(elem.Value);
+                            break;
+                        case "CNAE":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].CNAE = Convert.ToInt32("0" + elem.Value);
+                            break;
+                        case "xRegApur":
+                            elem.Read();
+                            vRetorno.infCad[vRetorno.infCad.Count - 1].xRegApur = elem.Value;
+                            break;
+                        case "cSit":
+                            elem.Read();
+                            if (elem.Value == "0")
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte não habilitado";
+                            else if (elem.Value == "1")
+                                vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte habilitado";
+                            break;
+                    }
+                }
+            }
+            //if (infcad != null)
+              //  vRetorno.infCad.Add(infcad);
+            return vRetorno;
+        }
 
         /// <summary>
         /// Escopo do CalBack de analise de resposta da EnviarArquivoEReceberResposta
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        delegate string Processa(XmlTextReader elem);
+        delegate object Processa(XmlTextReader elem);
+
         /// <summary>
         /// Envia um arquivo para o webservice da NFE e recebe a resposta. 
         /// </summary>
@@ -735,9 +919,9 @@ namespace UniNFeLibrary
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2009</date>
-        string EnviaArquivoERecebeResposa(string ArqXMLRetorno, string ArqERRRetorno, Processa processa)
+        private object EnviaArquivoERecebeResposta(string ArqXMLRetorno, string ArqERRRetorno, Processa processa)
         {
-            string vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
+            object vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
             DateTime startTime;
             DateTime stopTime;
             TimeSpan elapsedTime;
@@ -779,7 +963,6 @@ namespace UniNFeLibrary
                                 //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
                                 //pode ser que o arquivo esteja em uso ainda.
                             }
-
                             oLerXml.Close();
 
                             //Detetar o arquivo de retorno
@@ -787,7 +970,6 @@ namespace UniNFeLibrary
                             {
                                 FileInfo oArquivoDel = new FileInfo(ArqXMLRetorno);
                                 oArquivoDel.Delete();
-
                                 break;
                             }
                             catch
@@ -798,7 +980,6 @@ namespace UniNFeLibrary
                     }
                     catch
                     {
-
                     }
                 }
                 else if (File.Exists(ArqERRRetorno))
@@ -818,12 +999,224 @@ namespace UniNFeLibrary
                         //Somente deixa fazer o loop novamente e tentar deletar
                     }
                 }
-
                 Thread.Sleep(5000);
             }
-
             //Retornar o status do serviço
             return vStatus;
+        }
+        #endregion
+
+        #region GerarChaveNFe
+        /// <summary>
+        /// MontaChave
+        /// Cria a chave de acesso da NFe
+        /// </summary>
+        /// <param name="ArqXMLPedido"></param>
+        public void GerarChaveNFe(string ArqPedido, Boolean xml)
+        {
+            // XML - pedido
+            // Filename: XXXXXXXX-gerar-chave.xml
+            // -------------------------------------------------------------------
+            // <?xml version="1.0" encoding="UTF-8"?>
+            // <gerarChave>
+            //      <UF>35</UF>                 //se não informado, assume a da configuracao
+            //      <nNF>1000</nNF>
+            //      <cNF>0</cNF>                //se não informado, eu gero
+            //      <serie>1</serie>
+            //      <AAMM>0912</AAMM>
+            //      <CNPJ>55801377000131</CNPJ>
+            // </gerarChave>
+            //
+            // XML - resposta
+            // Filename: XXXXXXXX-ret-gerar-chave.xml
+            // -------------------------------------------------------------------
+            // <?xml version="1.0" encoding="UTF-8"?>
+            // <retGerarChave>
+            //      <chaveNFe>350912</chaveNFe>
+            // </retGerarChave>
+            //
+
+            // TXT - pedido
+            // Filename: XXXXXXXX-gerar-chave.txt
+            // -------------------------------------------------------------------
+            // UF|35
+            // nNF|1000
+            // cNF|0
+            // serie|1
+            // AAMM|0912
+            // CNPJ|55801377000131
+            //
+            // TXT - resposta
+            // Filename: XXXXXXXX-ret-gerar-chave.txt
+            // -------------------------------------------------------------------
+            // 35091255801377000131550010000000010000176506
+            //
+            // -------------------------------------------------------------------
+            // ERR - resposta
+            // Filename: XXXXXXXX-gerar-chave.err
+
+            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
+            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-gerar-chave.err" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-gerar-chave.err");
+
+            this.DeletarArquivo(ArqXMLRetorno);
+            this.DeletarArquivo(ArqERRRetorno);
+            this.DeletarArquivo(ConfiguracaoApp.vPastaXMLErro + "\\" + ArqPedido);
+
+            try
+            {
+                if (!File.Exists(ArqPedido))
+                {
+                    throw new Exception("Arquivo " + ArqPedido + " não encontrado");
+                }
+                UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
+
+                using (FileStream fs = File.Open(ArqPedido, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+                {
+                    fs.Close();
+
+                    int serie = 0;
+                    int nNF = 0;
+                    int cNF = 0;
+                    int cUF = ConfiguracaoApp.UFCod;
+                    string cAAMM = "0000";
+                    string cChave = "";
+                    string cCNPJ = "";
+                    string cError = "";
+
+                    if (xml)
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(ArqPedido);
+
+                        XmlNodeList mChaveList = doc.GetElementsByTagName("gerarChave");
+
+                        foreach (XmlNode mChaveNode in mChaveList)
+                        {
+                            XmlElement mChaveElemento = (XmlElement)mChaveNode;
+
+                            if (mChaveElemento.GetElementsByTagName("UF").Count != 0)
+                                cUF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("UF")[0].InnerText);
+
+                            if (mChaveElemento.GetElementsByTagName("nNF").Count != 0)
+                                nNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("nNF")[0].InnerText);
+
+                            if (mChaveElemento.GetElementsByTagName("cNF").Count != 0)
+                                cNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("cNF")[0].InnerText);
+
+                            if (mChaveElemento.GetElementsByTagName("serie").Count != 0)
+                                serie = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("serie")[0].InnerText);
+
+                            if (mChaveElemento.GetElementsByTagName("AAMM").Count != 0)
+                                cAAMM = mChaveElemento.GetElementsByTagName("AAMM")[0].InnerText;
+
+                            if (mChaveElemento.GetElementsByTagName("CNPJ").Count != 0)
+                                cCNPJ = mChaveElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                        }
+                    }
+                    else
+                    {
+                        TextReader txt = new StreamReader(ArqPedido);
+                        string cLinhaTXT = txt.ReadLine();
+                        string[] dados;
+                        while (cLinhaTXT != null)
+                        {
+                            dados = cLinhaTXT.Split('|');
+                            dados[0] = dados[0].ToUpper();
+                            if (dados.GetLength(0) == 1)
+                                cError += "Segmento [" + dados[0] + "] inválido";
+                            else
+                                switch (dados[0])
+                                {
+                                    case "UF":
+                                        cUF = Convert.ToInt32("0" + dados[1]);
+                                        break;
+                                    case "NNF":
+                                        nNF = Convert.ToInt32("0" + dados[1]);
+                                        break;
+                                    case "CNF":
+                                        cNF = Convert.ToInt32("0" + dados[1]);
+                                        break;
+                                    case "SERIE":
+                                        serie = Convert.ToInt32("0" + dados[1]);
+                                        break;
+                                    case "AAMM":
+                                        cAAMM = dados[1];
+                                        break;
+                                    case "CNPJ":
+                                        cCNPJ = dados[1];
+                                        break;
+                                }
+                            cLinhaTXT = txt.ReadLine();
+                        }
+                        txt.Close();
+                    }
+                    if (nNF == 0)
+                        cError = "Número da nota fiscal deve ser informado" + Environment.NewLine;
+
+                    if (string.IsNullOrEmpty(cAAMM))
+                        cError += "Ano e mês da emissão deve ser informado" + Environment.NewLine;
+
+                    if (string.IsNullOrEmpty(cCNPJ))
+                        cError += "CNPJ deve ser informado" + Environment.NewLine;
+
+                    //System.Windows.Forms.MessageBox.Show(cAAMM);
+
+                    if (cAAMM.Substring(0, 2) == "00")
+                        cError += "Ano da emissão inválido" + Environment.NewLine;
+
+                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
+
+                    if (Convert.ToInt32(cAAMM.Substring(2, 2)) <= 0 || Convert.ToInt32(cAAMM.Substring(2, 2)) > 12)
+                        cError += "Mês da emissão inválido" + Environment.NewLine;
+
+                    if (cError != "")
+                        throw new Exception(cError);
+
+                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
+
+                    Int64 iTmp = Convert.ToInt64("0" + cCNPJ);
+                    cChave = cUF.ToString("00") + cAAMM + iTmp.ToString("00000000000000") + "55";
+
+                    //System.Windows.Forms.MessageBox.Show(cChave);
+
+                    if (cNF == 0)
+                    {
+                        ///
+                        /// gera codigo aleatorio
+                        /// 
+                        //System.Windows.Forms.MessageBox.Show("go cNF");
+                        cNF = oUniTxtToXml.GerarCodigoNumerico(nNF);
+
+                        //System.Windows.Forms.MessageBox.Show(cNF.ToString());
+                    }
+                    ///
+                    /// calcula do digito verificador
+                    /// 
+                    string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000");
+                    int cDV = oUniTxtToXml.GerarDigito(ccChave);
+                    ///
+                    /// monta a chave da NFe
+                    /// 
+                    cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
+
+                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
+
+                    ///
+                    /// grava o XML/TXT de resposta
+                    /// 
+                    string vMsgRetorno = (xml ? "<?xml version=\"1.0\" encoding=\"UTF-8\"?><retGerarChave><chaveNFe>" + cChave + "</chaveNFe></retGerarChave>" : cChave);
+                    File.WriteAllText(ArqXMLRetorno, vMsgRetorno, Encoding.Default);
+                    ///
+                    /// exclui o XML/TXT de pedido
+                    /// 
+                    this.DeletarArquivo(ArqPedido);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.MoveArqErro(ArqPedido);
+                File.WriteAllText(ArqERRRetorno, "Arquivo " + ArqERRRetorno + Environment.NewLine + ex.Message, Encoding.Default);
+            }
         }
         #endregion
 
@@ -866,16 +1259,57 @@ namespace UniNFeLibrary
                 {
                     fs.Close();//fechar o arquivo para nao dar erro em outras aplicações
                 }
-
                 return ret;
             }
             catch (IOException ex)
             {
                 ret = true;
             }
-
             return ret;
         }
         #endregion
+    }
+    
+    public class infCad
+    {
+        public string IE { get; set; }
+        public string CNPJ { get; set; }
+        public string CPF { get; set; }
+        public string UF { get; set; }
+        public string xNome { get; set; }
+        public string xFant { get; set; }
+        public string xLgr { get; set; }
+        public string nro { get; set; }
+        public string xCpl { get; set; }
+        public string xBairro { get; set; }
+        public string xMun { get; set; }
+        public int cMun { get; set; }
+        public int CEP { get; set; }
+        public string IEAtual { get; set; }
+        public string IEUnica { get; set; }
+        public DateTime dBaixa { get; set; }
+        public DateTime dUltSit { get; set; }
+        public DateTime dIniAtiv { get; set; }
+        public int CNAE { get; set; }
+        public string xRegApur { get; set; }
+        public string cSit { get; set; }
+    }
+
+    public class RetConsCad
+    {
+        public int cStat { get; set; }
+        public string xMotivo { get; set; }
+        public string UF { get; set; }
+        public string IE { get; set; }
+        public string CNPJ {get; set; }
+        public string CPF {get; set; }
+        public DateTime dhCons { get; set; }
+        public string cUF { get; set; }
+        public List<infCad> infCad { get; set; }
+
+        public RetConsCad()
+        {
+            infCad = new List<infCad>();
+        }
     }
 }

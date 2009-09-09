@@ -23,7 +23,6 @@ namespace UniNFeLibrary.Formulario
             InitializeComponent();
 
             #region Montar Array DropList da UF
-            //Montar os itens do DropList da UF
             ArrayList arrUF = new ArrayList();
             if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
             {
@@ -66,12 +65,11 @@ namespace UniNFeLibrary.Formulario
             }
 
             comboBox_UF.DataSource = arrUF;
-            comboBox_UF.DisplayMember = "nome";
-            comboBox_UF.ValueMember = "valor";
+            comboBox_UF.DisplayMember = "Nome";
+            comboBox_UF.ValueMember = "Valor";
             #endregion
 
             #region Montar Array DropList do Ambiente
-            //Montar os itens do DropList do Ambiente
             //
             // danasa 8-2009
             // atribuido "TipoEmbiente"
@@ -86,18 +84,18 @@ namespace UniNFeLibrary.Formulario
             #endregion
 
             #region Montar Array DropList do Tipo de Emissão da NF-e
-            //Montar os itens do DropList do Tipo de Emissão da NF-e
             ArrayList arrTpEmis = new ArrayList();
             ArrayList.Synchronized(arrTpEmis);
             //
             // danasa 8-2009
+            // danasa 9-2009
             // atribuido "TipoEmissao.
             //
-            arrTpEmis.Add(new DropDownLista("Normal", TipoEmissao.teNormal/*1*/));
-            arrTpEmis.Add(new DropDownLista("Contingência com formulário de segurança (FS)", TipoEmissao.teContingencia/*2*/));
-            arrTpEmis.Add(new DropDownLista("Contingência com SCAN do Ambiente Nacional", TipoEmissao.teSCAN/*3*/));
-            //arrTpEmis.Add(new DropDownLista("Contingência com DPEC", TipoEmissao.teDPEC/*4*/));
-            arrTpEmis.Add(new DropDownLista("Contingência com formulário de segurança (FS-DA)", TipoEmissao.teFSDA/*5*/));
+            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teNormal], TipoEmissao.teNormal));
+            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teContingencia], TipoEmissao.teContingencia));
+            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teSCAN], TipoEmissao.teSCAN));
+            //arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teDPEC], TipoEmissao.teDPEC));
+            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teFSDA], TipoEmissao.teFSDA));
 
             comboBox_tpEmis.DataSource = arrTpEmis;
             comboBox_tpEmis.DisplayMember = "nome";
@@ -105,7 +103,6 @@ namespace UniNFeLibrary.Formulario
             #endregion
 
             #region Carregar os dados gravados no XML das configurações
-            //Carregar os dados gravados no XML das configurações
             ConfiguracaoApp oCarrega = new ConfiguracaoApp();
 
             ConfiguracaoApp.CarregarDados();
@@ -133,7 +130,7 @@ namespace UniNFeLibrary.Formulario
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrTpEmis.Count; i++)
             {
-                if (((DropDownLista)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor == (int)ConfiguracaoApp.tpEmis)
+                if (((DropDownLista)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor == ConfiguracaoApp.tpEmis)
                 {
                     this.comboBox_tpEmis.Text = ((DropDownLista)(new System.Collections.ArrayList(arrTpEmis))[i]).Nome;
                     break;
@@ -144,7 +141,7 @@ namespace UniNFeLibrary.Formulario
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrUF.Count; i++)
             {
-                if (((DropDownLista)(new System.Collections.ArrayList(arrUF))[i]).Valor == (int)ConfiguracaoApp.UFCod)
+                if (((DropDownLista)(new System.Collections.ArrayList(arrUF))[i]).Valor == ConfiguracaoApp.UFCod)
                 {
                     this.comboBox_UF.Text = ((DropDownLista)(new System.Collections.ArrayList(arrUF))[i]).Nome;
                     break;
@@ -155,7 +152,7 @@ namespace UniNFeLibrary.Formulario
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrAmb.Count; i++)
             {
-                if (((DropDownLista)(new System.Collections.ArrayList(arrAmb))[i]).Valor == (int)ConfiguracaoApp.tpAmb)
+                if (((DropDownLista)(new System.Collections.ArrayList(arrAmb))[i]).Valor == ConfiguracaoApp.tpAmb)
                 {
                     this.comboBox_Ambiente.Text = ((DropDownLista)(new System.Collections.ArrayList(arrAmb))[i]).Nome;
                     break;
@@ -326,6 +323,25 @@ namespace UniNFeLibrary.Formulario
                 tbSenha.Enabled = false;
                 nudPorta.Enabled = false;
             }
+        }
+
+        private void Configuracao_Load(object sender, EventArgs e)
+        {
+            ///
+            /// danasa 9-2009
+            /// 
+            XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+            iniFile.LoadForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
+        }
+
+        private void Configuracao_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ///
+            /// danasa 9-2009
+            /// 
+            XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+            iniFile.SaveForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
+            iniFile.Save();
         }
     }
     #endregion

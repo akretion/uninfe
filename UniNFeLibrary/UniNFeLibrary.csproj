@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Consts.cs" />
     <Compile Include="Classes\ExtXml.cs" />
     <Compile Include="Classes\Auxiliar.cs" />
     <Compile Include="Classes\CertificadoDigital.cs" />
@@ -53,9 +54,11 @@
     <Compile Include="Classes\DropDownLista.cs" />
     <Compile Include="Classes\absServicoNFe.cs" />
     <Compile Include="Classes\absServicoApp.cs" />
+    <Compile Include="Classes\InternetConnected.cs" />
     <Compile Include="Classes\InvocarObjeto.cs" />
     <Compile Include="Classes\SchemaXML.cs" />
     <Compile Include="Classes\UnitxtTOxmlClass.cs" />
+    <Compile Include="Classes\XMLIniFile.cs" />
     <Compile Include="Formulario\Configuracao.cs">
       <SubType>Form</SubType>
     </Compile>

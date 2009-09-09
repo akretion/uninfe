@@ -18,6 +18,7 @@ namespace UniNFeLibrary
         /// Nome para a pasta dos XML assinados
         /// </summary>
         public const string NomePastaXMLAssinado = "\\Assinado";
+        public const string NomeArqERRUniNFe = "UniNFeErro_{0}.err";
         #endregion
 
         #region Propriedades Estaticas
@@ -97,6 +98,14 @@ namespace UniNFeLibrary
         public static string PastaSchemas()
         {
             return PastaExecutavel() + "\\schemas";
+        }
+
+        /// <summary>
+        /// Retorna o XML para salvar os parametros das telas
+        /// </summary>
+        public static string NomeArqXMLParams()
+        {
+            return PastaExecutavel() + "\\UniNFeParams.xml";
         }
 
         /// <summary>
@@ -185,9 +194,8 @@ namespace UniNFeLibrary
                 ///
                 /// danasa 8-2009
                 /// 
-                string cArqErro = Path.GetFileNameWithoutExtension(sArquivo) + ".err";
                 Auxiliar oAux = new Auxiliar();
-                oAux.GravarArqErroERP(cArqErro, ex.Message);
+                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(sArquivo) + ".err", ex.Message);
             }
         }
 

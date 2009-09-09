@@ -114,7 +114,7 @@ namespace UniNFeLibrary
                     //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz
                     TipoServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, ServicoNFe, new object[] { XmlRetorno });
 
-                    // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
+                    // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitação do serviço
                     if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
                     {
                         TipoServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, ServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });

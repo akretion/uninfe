@@ -177,6 +177,11 @@ namespace uninfe
         {
             this.oDadosPedSta.tpAmb = string.Empty;
             this.oDadosPedSta.cUF = string.Empty;
+            ///
+            /// danasa 9-2009
+            /// Assume o que está na configuracao
+            /// 
+            this.oDadosPedSta.tpEmis = ConfiguracaoApp.tpEmis;
 
             try
             {
@@ -191,6 +196,18 @@ namespace uninfe
 
                     this.oDadosPedSta.tpAmb = consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText;
                     this.oDadosPedSta.cUF = consStatServElemento.GetElementsByTagName("cUF")[0].InnerText;
+
+                    ///
+                    /// danasa 9-2009
+                    /// 
+                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    {
+                        this.oDadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        /// para que o validador não rejeite, excluo a tag <tpEmis>
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                        /// salvo o arquivo modificado
+                        doc.Save(cArquivoXML);
+                    }
                 }
             }
             catch (Exception ex)

@@ -37,6 +37,11 @@ namespace uninfe
         ServicoUniNFe oServicoAltCon = new ServicoUniNFe();
         ServicoUniNFe oServicoValidarAssinar = new ServicoUniNFe();
         ServicoUniNFe oServicoConvTXT = new ServicoUniNFe();
+
+        /// <summary>
+        /// danasa 9-2009
+        /// </summary>
+        ServicoUniNFe oServicoGerarChaveNFe = new ServicoUniNFe();
         #endregion
 
         #region Definir os objetos de threads para executar os serviços do UniNFe
@@ -56,6 +61,8 @@ namespace uninfe
         ParameterizedThreadStart oOperacaoValidarAssinar;
         ParameterizedThreadStart oOperacaoConvTXT;
 
+        ParameterizedThreadStart oOperacaoGerarChaveNFe;
+
         Thread oThreadAssinaNfeEnvio;
         Thread oThreadAssinaNfeEnvioEmLote;
         Thread oThreadMontaLoteUmaNfe;
@@ -71,6 +78,8 @@ namespace uninfe
         Thread oThreadAltCon;
         Thread oThreadValidarAssinar;
         Thread oThreadConvTXT;
+
+        Thread oThreadGerarChaveNFe;
         #endregion
 
         #region Atributos
@@ -81,6 +90,13 @@ namespace uninfe
         public MainForm()
         {
             InitializeComponent();
+
+            ///
+            /// danasa 9-2009
+            /// 
+            XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+            iniFile.LoadForm(this, "");
+
             AtualizarDadosToolBar();
 
             //Criar XML de controle de fluxo de envios de Notas Fiscais
@@ -235,7 +251,6 @@ namespace uninfe
             oThreadConvTXT.Start(Servicos.ConverterTXTparaXML);
             #endregion
 
-  
             #region Executar a Thread que verifica e assina os XML´s de notas fiscais eletrônicas da pasta de Envio em Lote
             oOperacaoAssinaNfeEnvioEmLote = new ParameterizedThreadStart(oServicoAssinaNfeEnvioEmLote.BuscaXML);
             oThreadAssinaNfeEnvioEmLote = new Thread(oOperacaoAssinaNfeEnvioEmLote);
@@ -249,54 +264,35 @@ namespace uninfe
             oThreadMontaLoteVariasNfe.Name = Servicos.MontarLoteVariasNFe.ToString();
             oThreadMontaLoteVariasNfe.Start(Servicos.MontarLoteVariasNFe);
             #endregion               
-        }
-        #endregion
-
-        #region DemonstrarStatusServico()
-        private void DemonstrarStatusServico()
-        {
-            //Carregar configurações
-            ServicoNFe oNfe = new ServicoNFe();
-
-            //Demonstrar o status do serviço
-            MessageBox.Show(oNfe.VerStatusServico(), "Situação do serviço da NFe é:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        
+        
+            /// <summary>
+            /// danasa 9-2009
+            /// </summary>
+            #region Executar a Thread que retorna a chave da NFe
+            oOperacaoGerarChaveNFe = new ParameterizedThreadStart(oServicoGerarChaveNFe.BuscaXML);
+            oThreadGerarChaveNFe = new Thread(oOperacaoGerarChaveNFe);
+            oThreadGerarChaveNFe.Name = Servicos.GerarChaveNFe.ToString();
+            oThreadGerarChaveNFe.Start(Servicos.GerarChaveNFe);
+            #endregion
         }
         #endregion
 
         #endregion
 
         #region Métodos de eventos
-        private void toolStripButton_config_Click(object sender, EventArgs e)
-        {
-            //danasa 
-            Configuracao oConfig = null;
-            foreach (Form fg in this.MdiChildren)
-            {
-                if (fg is Configuracao)
-                {
-                    oConfig = fg as Configuracao;
-                    oConfig.WindowState = FormWindowState.Normal;
-                    break;
-                }
-            }
-            //danasa 
-            if (oConfig == null)
-                oConfig = new Configuracao();
-            oConfig.MdiParent = this;
-            oConfig.MinimizeBox = false;
-            oConfig.Show();
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            var consultaCadastro = new FormConsultaCadastro();
-            consultaCadastro.MdiParent = this;
-            consultaCadastro.MinimizeBox = false;
-            consultaCadastro.Show();
-        }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
+            ///
+            /// danasa 9-2009
+            /// 
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+                iniFile.SaveForm(this, "");
+                iniFile.Save();
+            }
             //Faz a aplicação sumir da barra de tarefas
             //danasa
             //  Se usuario mudar o tamanho da janela, não pode desaparece-la da tasknar
@@ -312,11 +308,16 @@ namespace uninfe
             {
                 notifyIcon1.ShowBalloonTip(6000);
             }
-
             //Ativar o ícone na área de notificação
             //para isso a propriedade Visible deveria ser setada
             //como false, mas prefiro deixar o ícone lá.
             //notifyIcon1.Visible = true;
+        }
+
+        #region -- Show desktop
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.notifyIcon1_MouseDoubleClick(sender, null);
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -338,22 +339,7 @@ namespace uninfe
 
             // notifyIcon1.Visible=false;
         }
-
-        private void toolStripButton_sobre_Click(object sender, EventArgs e)
-        {
-            FormSobre oSobre = new FormSobre();
-            oSobre.MinimizeBox = false;
-            oSobre.ShowInTaskbar = false;            
-            oSobre.ShowDialog();
-        }
-
-        private void toolStripButton_validarxml_Click(object sender, EventArgs e)
-        {
-            ValidarXML oValidarXML = new ValidarXML();
-            oValidarXML.MdiParent = this;
-            oValidarXML.MinimizeBox = false;
-            oValidarXML.Show();
-        }
+        #endregion
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -372,66 +358,8 @@ namespace uninfe
             oThreadAssinaNfeEnvioEmLote.Abort();
             oThreadEnviarLoteNfe.Abort();
             oThreadValidarAssinar.Abort();
-            oThreadConvTXT.Abort();                
-        }
-
-        private void sobreOUniNFeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormSobre oSobre = new FormSobre();
-            oSobre.MinimizeBox = true;
-            oSobre.ShowInTaskbar = true;
-            oSobre.ShowDialog();
-        }
-
-        private void configuraçõesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var consultaCadastro = new FormConsultaCadastro();
-            consultaCadastro.MinimizeBox = true;
-            consultaCadastro.ShowInTaskbar = true;
-            consultaCadastro.ShowDialog();
-
-            //this.DemonstrarStatusServico();
-        }
-
-        private void vaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ValidarXML oValidarXML = new ValidarXML();
-            oValidarXML.ShowInTaskbar = true;
-            oValidarXML.MinimizeBox = true;
-            oValidarXML.Show();
-        }
-
-        private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Configuracao oConfig = new Configuracao();
-            oConfig.MinimizeBox = true;
-            oConfig.Show();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //Voltar a janela em seu estado normal
-            this.WindowState = FormWindowState.Normal;
-
-            // Faz a aplicação aparecer na barra de tarefas.            
-            this.ShowInTaskbar = true;
-
-            // Levando o Form de volta para a tela.
-
-            this.WindowState = FormWindowState.Normal;
-            this.Visible = true;
-
-            // Faz desaparecer o ícone na área de notificação,
-            // para isso a propriedade Visible deveria ser setada 
-            // como true no evento Resize do Form.
-
-            // notifyIcon1.Visible=false;
-        }
-
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.booPodeFechar = true;
-            this.Close();
+            oThreadConvTXT.Abort();
+            oThreadGerarChaveNFe.Abort();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -439,8 +367,17 @@ namespace uninfe
             //
             // TODO: Aqui, deveriamos verificar se ainda existe alguma Thread pendente antes de fechar
             //
-            if (e.CloseReason == CloseReason.UserClosing && ! this.booPodeFechar)
+            if (e.CloseReason == CloseReason.UserClosing && !this.booPodeFechar)
             {
+                ///
+                /// danasa 9-2009
+                /// 
+                if (this.WindowState != FormWindowState.Minimized)
+                {
+                    XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+                    iniFile.SaveForm(this, "");
+                    iniFile.Save();
+                }
                 // se o botão de fechar for pressionado pelo usuário, o mainform não será fechado em sim minimizado.
                 e.Cancel = true;
                 this.Visible = false;
@@ -451,6 +388,204 @@ namespace uninfe
             {
                 e.Cancel = false;  //se o PC for desligado o windows o fecha automaticamente.
             }
+        }
+
+        #region -- Sobre o UniNFe
+        private void toolStripButton_sobre_Click(object sender, EventArgs e)
+        {
+            this.toolStripButton_sobre.Enabled = 
+                this.sobreOUniNFeToolStripMenuItem.Enabled = false;
+            using (FormSobre oSobre = new FormSobre())
+            {
+                oSobre.MinimizeBox =
+                    oSobre.ShowInTaskbar = !(sender is ToolStripButton);
+                oSobre.ShowDialog();
+            }
+            this.sobreOUniNFeToolStripMenuItem.Enabled = 
+                this.toolStripButton_sobre.Enabled = true;
+        }
+        #endregion
+
+        #region -- Consulta servico e cadastro
+        private int CadastroAtivo()
+        {
+            FormConsultaCadastro oCadastro = null;
+            //danasa 
+            foreach (Form fg in this.MdiChildren)
+            {
+                if (fg is FormConsultaCadastro)
+                {
+                    ///
+                    /// configuracão já está ativa como MDI
+                    /// 
+                    this.notifyIcon1_MouseDoubleClick(null, null);
+                    oCadastro = fg as FormConsultaCadastro;
+                    oCadastro.WindowState = FormWindowState.Normal;
+                    return 1;
+                }
+            }
+            foreach (Form fg in Application.OpenForms)
+            {
+                if (fg is FormConsultaCadastro)
+                {
+                    oCadastro = fg as FormConsultaCadastro;
+                    oCadastro.WindowState = FormWindowState.Normal;
+                    return 0;
+                }
+            }
+            return -1;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            switch (CadastroAtivo())
+            {
+                case 0:
+                    ///
+                    /// configuracao ja existe como Modal
+                    /// minimiza o MainForm para que a tela de configuracao esteja visivel
+                    /// 
+                    this.WindowState = FormWindowState.Minimized;
+                    break;
+
+                case -1:
+                    {
+                        FormConsultaCadastro consultaCadastro = new FormConsultaCadastro();
+                        consultaCadastro.MdiParent = this;
+                        consultaCadastro.MinimizeBox = false;
+                        consultaCadastro.Show();
+                    }
+                    break;
+            }
+        }
+
+        private void cmConsultaCadastroServico_Click(object sender, EventArgs e)
+        {
+            switch (CadastroAtivo())
+            {
+                case -1:
+                    ///
+                    /// tela principal está visivel?
+                    /// 
+                    if (this.WindowState != FormWindowState.Minimized)
+                        ///
+                        /// então abre o cadastro como MDI
+                        /// 
+                        this.toolStripButton1_Click(sender, e);
+                    else
+                        using (FormConsultaCadastro consultaCadastro = new FormConsultaCadastro())
+                        {
+                            consultaCadastro.MinimizeBox = true;
+                            consultaCadastro.ShowInTaskbar = true;
+                            consultaCadastro.ShowDialog();
+                        }
+                    break;
+            }
+            //this.DemonstrarStatusServico();
+        }
+        #endregion
+
+        #region -- Validar
+        private void toolStripButton_validarxml_Click(object sender, EventArgs e)
+        {
+            ValidarXML oValidarXML = new ValidarXML();
+            oValidarXML.MdiParent = this;
+            oValidarXML.MinimizeBox = false;
+            oValidarXML.Show();
+        }
+
+        private void vaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ValidarXML oValidarXML = new ValidarXML())
+            {
+                oValidarXML.ShowInTaskbar = true;
+                oValidarXML.MinimizeBox = true;
+                oValidarXML.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region -- Configuracao
+        private int ConfiguracaoAtiva()
+        {
+            Configuracao oConfig = null;
+            //danasa 
+            foreach (Form fg in this.MdiChildren)
+            {
+                if (fg is Configuracao)
+                {
+                    ///
+                    /// configuracão já está ativa como MDI
+                    /// 
+                    this.notifyIcon1_MouseDoubleClick(null, null);
+                    oConfig = fg as Configuracao;
+                    oConfig.WindowState = FormWindowState.Normal;
+                    return 1;
+                }
+            }
+            foreach (Form fg in Application.OpenForms)
+            {
+                if (fg is Configuracao)
+                {
+                    oConfig = fg as Configuracao;
+                    oConfig.WindowState = FormWindowState.Normal;
+                    return 0;
+                }
+            }
+            return -1;
+        }
+
+        private void toolStripButton_config_Click(object sender, EventArgs e)
+        {
+            switch (ConfiguracaoAtiva())
+            {
+                case 0:
+                    ///
+                    /// configuracao ja existe como Modal
+                    /// minimiza o MainForm para que a tela de configuracao esteja visivel
+                    /// 
+                    this.WindowState = FormWindowState.Minimized;
+                    break;
+
+                case -1:
+                    {
+                        Configuracao oConfig = new Configuracao();
+                        oConfig.MdiParent = this;
+                        oConfig.MinimizeBox = false;
+                        oConfig.Show();
+                    }
+                    break;
+            }
+        }
+
+        private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            switch (ConfiguracaoAtiva())
+            {
+                case -1:
+                    ///
+                    /// tela principal está visivel?
+                    /// 
+                    if (this.WindowState != FormWindowState.Minimized)
+                        ///
+                        /// então abre a configuração como MDI
+                        /// 
+                        toolStripButton_config_Click(sender, e);
+                    else
+                        using (Configuracao oConfig = new Configuracao())
+                        {
+                            oConfig.MinimizeBox = true;
+                            oConfig.ShowDialog();
+                        }
+                    break;
+            }
+        }
+        #endregion
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.booPodeFechar = true;
+            this.Close();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)

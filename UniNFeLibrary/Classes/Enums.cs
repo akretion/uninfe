@@ -81,7 +81,11 @@ namespace UniNFeLibrary.Enums
         /// <summary>
         /// Somente converter TXT da NFe para XML de NFe
         /// </summary>
-        ConverterTXTparaXML
+        ConverterTXTparaXML,
+        /// <summary>
+        /// Monta chave de acesso
+        /// </summary>
+        GerarChaveNFe
     }
     #endregion
 }

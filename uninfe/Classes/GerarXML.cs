@@ -121,19 +121,33 @@ namespace uninfe
         /// </example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2008</date>
-        public override string StatusServico()
+        public override string StatusServico(int tpEmis)
+        {
+            return this.StatusServico(tpEmis, ConfiguracaoApp.UFCod);
+        }
+        #endregion
+
+        #region StatusServico() - Sobrecarga
+        public override string StatusServico(int tpEmis, int cUF)
         {
             //TODO: CONFIG
-            string vDadosMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.07\" xmlns=\"" + ConfiguracaoApp.nsURI + "\"><tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb><cUF>" + ConfiguracaoApp.UFCod.ToString() + "</cUF><xServ>STATUS</xServ></consStatServ>";
+            string vDadosMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.07\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">"
+                + "<tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb>"
+                + "<cUF>" + cUF.ToString() + "</cUF>"
+                + "<tpEmis>" + tpEmis.ToString() + "</tpEmis>"  //danasa 9-2009
+                + "<xServ>STATUS</xServ></consStatServ>";
 
-            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" + DateTime.Now.ToString("yyyyMMddThhmmss") + "-ped-sta.xml";
+            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
+                                    DateTime.Now.ToString("yyyyMMddThhmmss") +
+                                    ExtXml.PedSta;// "-ped-sta.xml";
 
             StreamWriter SW = File.CreateText(_arquivo_saida);
             SW.Write(vDadosMsg);
             SW.Close();
 
             return _arquivo_saida;
-        }
+        } 
         #endregion
 
         #region ConsultaCadastro()
@@ -154,13 +168,13 @@ namespace uninfe
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><ConsCad xmlns=\"" +
                 ConfiguracaoApp.nsURI +
                 "\" versao=\"1.01\"><infCons><xServ>CONS-CAD</xServ>";
-            var footer = "</infCons></ConsCad>";
+            string footer = "</infCons></ConsCad>";
 
             cnpj = OnlyNumbers(cnpj);
             ie = OnlyNumbers(ie);
             cpf = OnlyNumbers(cpf);
 
-            var saida = new StringBuilder(1000);
+            StringBuilder saida = new StringBuilder();
             saida.Append(header);
             saida.AppendFormat("<UF>{0}</UF>", uf);
             if (cnpj != null && cnpj != "")
@@ -177,11 +191,13 @@ namespace uninfe
             }
             saida.Append(footer);
 
-            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" + DateTime.Now.ToString("yyyyMMddThhmmss") + "-cons-cad.xml";
+            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" + 
+                                    DateTime.Now.ToString("yyyyMMddThhmmss") + 
+                                    ExtXml.ConsCad;// "-cons-cad.xml";
 
             StreamWriter SW = File.CreateText(_arquivo_saida);
-            var output = saida.ToString();
-            SW.Write(output);
+            //var output = saida.ToString();
+            SW.Write(saida.ToString());//output);
             SW.Close();
 
             return _arquivo_saida;
@@ -192,7 +208,7 @@ namespace uninfe
         /// </summary>
         /// <by>Marcos Diez</by>
         /// <date>29/08/2009</date>
-        public static string OnlyNumbers(string entrada)
+        private static string OnlyNumbers(string entrada)
         {
             if (entrada == null) return null;
             StringBuilder saida = new StringBuilder(entrada.Length);
@@ -333,9 +349,12 @@ namespace uninfe
                     "</procInutNFe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(strArqInut, "-ped-inu.xml") + "-procInutNFe.xml";
+                string strNomeArqProcInutNFe =  ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                                PastaEnviados.EmProcessamento + "\\" + 
+                                                oAux.ExtrairNomeArq(strArqInut, ExtXml.PedInu/*"-ped-inu.xml"*/) +
+                                                ExtXml.ProcInutNFe;// "-procInutNFe.xml";
 
-                //Gravar o XML em uma linha sÃ³ (sem quebrar as tagÂ´s linha a linha) ou dÃ¡ erro na hora de validar o XML pelos Schemas. Wandreu 13/05/2009
+                //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcInutNFe);
                 swProc.Write(strXmlProcInutNfe);
             }
@@ -385,9 +404,12 @@ namespace uninfe
                     "</procCancNFe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(strArqCanc, "-ped-can.xml") + "-procCancNFe.xml";
+                string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                                PastaEnviados.EmProcessamento + "\\" + 
+                                                oAux.ExtrairNomeArq(strArqCanc, ExtXml.PedCan/*"-ped-can.xml"*/) +
+                                                ExtXml.ProcCancNFe;// "-procCancNFe.xml";
 
-                //Gravar o XML em uma linha sÃ³ (sem quebrar as tagÂ´s linha a linha) ou dÃ¡ erro na hora de validar o XML pelos Schemas. Wandreu 13/05/2009
+                //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcCancNFe);
                 swProc.Write(strXmlProcCancNfe);
             }
@@ -415,7 +437,7 @@ namespace uninfe
         public override void XmlPedRec(string strRecibo)
         {
             string strXml = string.Empty;
-            string strNomeArqPedRec = ConfiguracaoApp.vPastaXMLEnvio + "\\" + strRecibo + "-ped-rec.xml";
+            string strNomeArqPedRec = ConfiguracaoApp.vPastaXMLEnvio + "\\" + strRecibo + ExtXml.PedRec;// "-ped-rec.xml";
             if (!File.Exists(strNomeArqPedRec))
             {
                 //TODO: CONFIG
@@ -465,9 +487,12 @@ namespace uninfe
                     "</nfeProc>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(strArqNFe, "-nfe.xml") + "-procNFe.xml";
+                string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                            PastaEnviados.EmProcessamento + "\\" + 
+                                            oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe/*"-nfe.xml"*/) +
+                                            ExtXml.ProcNFe;// "-procNFe.xml";
 
-                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandreu 13/05/2009
+                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcNFe);
                 swProc.Write(strXmlProcNfe);
             }
@@ -509,7 +534,7 @@ namespace uninfe
         protected override string NomeArqLoteRetERP(string NomeArquivoXML)
         {
             return ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                oAux.ExtrairNomeArq(NomeArquivoXML, "-nfe.xml") +
+                oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe/*"-nfe.xml"*/) +
                 "-num-lot.xml";
         } 
         #endregion

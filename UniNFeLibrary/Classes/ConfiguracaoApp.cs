@@ -94,7 +94,7 @@ namespace UniNFeLibrary
             ConfiguracaoApp.cPastaBackup = string.Empty;
             ConfiguracaoApp.PastaValidar = string.Empty;
             ConfiguracaoApp.GravarRetornoTXTNFe = false;
-            ConfiguracaoApp.NomePastaXMLAssinado = "\\Assinado";
+            ConfiguracaoApp.NomePastaXMLAssinado = InfoApp.NomePastaXMLAssinado;// "\\Assinado";
 
             if (File.Exists(vArquivoConfig))
             {
@@ -177,10 +177,8 @@ namespace UniNFeLibrary
                     /// 
                     if (Directory.Exists(ConfiguracaoApp.vPastaXMLRetorno))
                     {
-                        string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                            Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err";
                         Auxiliar oAux = new Auxiliar();
-                        oAux.GravarArqErroERP(cArqErro, ex.Message);
+                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err", ex.Message);
                     }
                     else
                         MessageBox.Show(ex.Message);
@@ -588,10 +586,8 @@ namespace UniNFeLibrary
                 ///
                 /// danasa 8-2009
                 /// 
-                string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                    Path.GetFileNameWithoutExtension(cArqRetorno) + ".err";
                 Auxiliar oAux = new Auxiliar();
-                oAux.GravarArqErroERP(cArqErro, xMotivo + Environment.NewLine + ex.Message);
+                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
             }
             //Deletar o arquivo de configurações automáticas gerado pelo ERP
             FileInfo oArqReconf = new FileInfo(cArquivoXml);

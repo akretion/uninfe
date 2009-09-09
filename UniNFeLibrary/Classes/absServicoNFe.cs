@@ -109,7 +109,7 @@ namespace UniNFeLibrary
         #endregion
 
         #region VerStatusServico()
-        public abstract string VerStatusServico();
+        public abstract string VerStatusServico(int tpEmis, int cUF);
         #endregion
 
         #region AssinarValidarXMLNFe()
@@ -250,7 +250,7 @@ namespace UniNFeLibrary
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, "-nfe.xml", "-nfe.err", ex.Message);
+                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, "-nfe.err", ex.Message);
 
                 //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                 //forçar mover para a pasta de XML com erro neste ponto.

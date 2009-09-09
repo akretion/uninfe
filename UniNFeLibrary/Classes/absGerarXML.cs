@@ -253,7 +253,7 @@ namespace UniNFeLibrary
             //Gravar o XML do lote das notas fiscais
             string vNomeArqLoteNfe = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
                                      intNumeroLote.ToString("000000000000000") +
-                                     "-env-lot.xml";
+                                     ExtXml.EnvLot;// "-env-lot.xml";
 
             StreamWriter SW_2 = null;
 
@@ -398,7 +398,11 @@ namespace UniNFeLibrary
         /// </example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2008</date>
-        public abstract string StatusServico();
+        public abstract string StatusServico(int tpEmis);
+        #endregion
+
+        #region StatusServico() - Sobrecarga
+        public abstract string StatusServico(int tpEmis, int cUF);
         #endregion
 
         #region CabecMsg()

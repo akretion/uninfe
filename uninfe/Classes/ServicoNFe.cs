@@ -105,7 +105,7 @@ namespace uninfe
             ParametroEnvioXML oParam = new ParametroEnvioXML();
             oParam.tpAmb = Convert.ToInt32(oLer.oDadosPedSta.tpAmb);
             oParam.UFCod = Convert.ToInt32(oLer.oDadosPedSta.cUF);
-            oParam.tpEmis = ConfiguracaoApp.tpEmis;
+            oParam.tpEmis = oLer.oDadosPedSta.tpEmis;// ConfiguracaoApp.tpEmis;
 
             //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
             object oServico = null;
@@ -275,7 +275,7 @@ namespace uninfe
                     //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                     //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                     //Wandrey 18/06/2009
-                    oGerarXML.XmlRetorno("-ped-rec.xml", "-pro-rec.xml", this.vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(ExtXml.PedRec/*"-ped-rec.xml"*/, "-pro-rec.xml", this.vStrXmlRetorno);
 
                     //Deletar o arquivo de solicitação do serviço
                     oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
@@ -416,7 +416,7 @@ namespace uninfe
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, "-ped-can.xml", "-can.err", ex.Message);
+                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedCan/*"-ped-can.xml"*/, "-can.err", ex.Message);
             }
         }
         #endregion
@@ -498,7 +498,7 @@ namespace uninfe
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, "-ped-inu.xml", "-inu.err", ex.Message);
+                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedInu/*"-ped-inu.xml"*/, "-inu.err", ex.Message);
             }
         }
         #endregion
@@ -569,18 +569,9 @@ namespace uninfe
             oDefObj.ConsultaCadastro(ref oServico, oParam);
             if (oServico == null)
             {
-                string sAmbiente;
-                if (oParam.tpAmb == TipoAmbiente.taProducao)
-                {
-                    sAmbiente = "produção";
-                }
-                else
-                {
-                    sAmbiente = "homologação";
-                }
-
+                string sAmbiente = (oParam.tpAmb == TipoAmbiente.taProducao ? "produção" : "homologação");
                 oAux.GravarArqErroServico(this.vXmlNfeDadosMsg,
-                    "-cons-cad.xml",
+                    ExtXml.ConsCad,//"-cons-cad.xml",
                     "-ret-cons-cad.err",
                     "O Estado (" + oParam.UFCod.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
             }
@@ -684,10 +675,22 @@ namespace uninfe
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2008</date>
-        public override string VerStatusServico()
+        public override string VerStatusServico(int tpEmis, int cUF)
         {
+            /// Wandrey - para sua avaliacao
+            ///
+            /// danasa 9-2009
+            /// 
+            /// verifica se tem conexão com a internet
+            /// 
+            if (!InternetCS.IsConnectedToInternet())
+            {
+                //Registrar o erro da validação para o sistema ERP
+                return "Sem conexão com a internet";
+            }
+
             //Criar XML para obter o status do serviço
-            string XmlNfeDadosMsg = oGerarXML.StatusServico();
+            string XmlNfeDadosMsg = oGerarXML.StatusServico(tpEmis, cUF);
 
             //Retornar o status do serviço
             return oAux.VerStatusServico(XmlNfeDadosMsg);
@@ -707,7 +710,7 @@ namespace uninfe
         /// <returns>String com o resultado da consuta do cadastro</returns>
         /// <by>Marcos Diez</by>
         /// <date>29/08/2009</date>
-        public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
+        /*public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
         {
             //Criar XML para obter o status do serviço
             string XmlNfeConsultaCadastro = oGerarXML.ConsultaCadastro(uf, cnpj, ie, cpf);
@@ -715,6 +718,13 @@ namespace uninfe
             //Retornar o status do serviço
             //return oAux.VerStatusServico(XmlNfeConsultaCadastro);
             return oAux.VerConsultaCadastro(XmlNfeConsultaCadastro);
+        }*/
+        public object ConsultaCadastroClass(string uf, string cnpj, string ie, string cpf)
+        {
+            //Criar XML para obter o cadastro do contribuinte
+            string XmlNfeConsultaCadastro = oGerarXML.ConsultaCadastro(uf, cnpj, ie, cpf);
+
+            return oAux.VerConsultaCadastroClass(XmlNfeConsultaCadastro);
         }
         #endregion
 
@@ -817,7 +827,7 @@ namespace uninfe
                                     if (string.IsNullOrEmpty(strChaveNFe))
                                         throw new Exception("LerRetornoLote(): Não pode obter o nome do arquivo");
 
-                                    strNomeArqNfe = strChaveNFe.Substring(3) + "-nfe.xml";
+                                    strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
                                     //throw new Exception(strChaveNFe + " não pode ser localizada");
                                 }
                                 string strArquivoNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
@@ -833,7 +843,9 @@ namespace uninfe
                                     case "100": //NFe Autorizada
                                         //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                         oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
-                                        string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(strNomeArqNfe, "-nfe.xml") + "-procNFe.xml";
+                                        string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                                                    PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                                    oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe/*"-nfe.xml"*/) + ExtXml.ProcNFe;// "-procNFe.xml";
 
                                         //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                         oLerXml.Nfe(strArquivoNFe);
@@ -928,13 +940,21 @@ namespace uninfe
                             string strRetCancNFe = retCancNFeNode.OuterXml;
 
                             oGerarXML.XmlDistCanc(this.vXmlNfeDadosMsg, strRetCancNFe);
+                            ///
+                            /// danasa 9-2009
+                            /// pega a data da emissão da nota para mover os XML's para a pasta de origem da NFe
+                            /// 
+                            string cChaveNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                            DateTime dtEmissaoNFe = new DateTime(DateTime.Now.Year + Convert.ToInt16(cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
+                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                            string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-can.xml") + "-procCancNFe.xml";
-                            oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, DateTime.Now);
+                            string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                                            PastaEnviados.EmProcessamento + "\\" +
+                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedCan/*"-ped-can.xml"*/) + ExtXml.ProcCancNFe;// "-procCancNFe.xml";
+                            oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
                         }
                         else
                         {
@@ -988,7 +1008,9 @@ namespace uninfe
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                            string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, "-ped-inu.xml") + "-procInutNFe.xml";
+                            string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
+                                                            PastaEnviados.EmProcessamento + "\\" +
+                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedInu/*"-ped-inu.xml"*/) + ExtXml.ProcInutNFe;// "-procInutNFe.xml";
                             oAux.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
                         }
                         else

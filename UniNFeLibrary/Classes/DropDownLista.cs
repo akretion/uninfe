@@ -10,7 +10,7 @@ namespace UniNFeLibrary
         {
             Nome = nome;
             Valor = valor;
-        }       
+        }
 
         string _nome;
         int _valor;

@@ -20,6 +20,8 @@ namespace UniNFeLibrary
         public const string ConsInf = "-cons-inf.xml";
         public const string AltCon = "-alt-con.xml";
         public const string MontarLote = "-montar-lote.xml";
+        public const string GerarChaveNFe_XML = "-gerar-chave.xml";
+        public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
     }
 
     /// <summary>
