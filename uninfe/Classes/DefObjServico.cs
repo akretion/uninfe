@@ -50,7 +50,7 @@ namespace uninfe
                 else if (oParam.UFCod == 29) { pServico = new wsBAPStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 53) { pServico = new wsDFPStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEPStatusServico.NfeStatusServico(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROPStatusServico.NfeStatusServico(); }
+                else if (oParam.UFCod == 11) { pServico = new wsVRPStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 13) { pServico = new wsAMPStatusServico.NfeStatusServico(); }
 
                 else if (oParam.UFCod == 15) { pServico = new wsVNPStatusServico.NfeStatusServico(); }
@@ -83,7 +83,7 @@ namespace uninfe
                 else if (oParam.UFCod == 29) { pServico = new wsBAHStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 53) { pServico = new wsDFHStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEHStatusServico.NfeStatusServico(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROHStatusServico.NfeStatusServico(); }
+                else if (oParam.UFCod == 11) { pServico = new wsVRHStatusServico.NfeStatusServico(); }
                 else if (oParam.UFCod == 13) { pServico = new wsAMHStatusServico.NfeStatusServico(); }
 
                 else if (oParam.UFCod == 15) { pServico = new wsVNHStatusServico.NfeStatusServico(); }
@@ -147,7 +147,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAPRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFPRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEPRecepcao.NfeRecepcao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROPRecepcao.NfeRecepcao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRPRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMPRecepcao.NfeRecepcao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNPRecepcao.NfeRecepcao(); }
@@ -180,7 +180,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAHRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFHRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEHRecepcao.NfeRecepcao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROHRecepcao.NfeRecepcao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRHRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMHRecepcao.NfeRecepcao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNHRecepcao.NfeRecepcao(); }
@@ -245,7 +245,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAPRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFPRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEPRetRecepcao.NfeRetRecepcao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROPRetRecepcao.NfeRetRecepcao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRPRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMPRetRecepcao.NfeRetRecepcao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNPRetRecepcao.NfeRetRecepcao(); }
@@ -278,7 +278,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAHRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFHRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEHRetRecepcao.NfeRetRecepcao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROHRetRecepcao.NfeRetRecepcao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRHRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMHRetRecepcao.NfeRetRecepcao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNHRetRecepcao.NfeRetRecepcao(); }
@@ -342,7 +342,7 @@ namespace uninfe
                 else if (oParam.UFCod == 29) { pServico = new wsBAPConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 53) { pServico = new wsDFPConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEPConsulta.NfeConsulta(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROPConsulta.NfeConsulta(); }
+                else if (oParam.UFCod == 11) { pServico = new wsVRPConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 13) { pServico = new wsAMPConsulta.NfeConsulta(); }
 
                 else if (oParam.UFCod == 15) { pServico = new wsVNPConsulta.NfeConsulta(); }
@@ -375,7 +375,7 @@ namespace uninfe
                 else if (oParam.UFCod == 29) { pServico = new wsBAHConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 53) { pServico = new wsDFHConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEHConsulta.NfeConsulta(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROHConsulta.NfeConsulta(); }
+                else if (oParam.UFCod == 11) { pServico = new wsVRHConsulta.NfeConsulta(); }
                 else if (oParam.UFCod == 13) { pServico = new wsAMHConsulta.NfeConsulta(); }
 
                 else if (oParam.UFCod == 15) { pServico = new wsVNHConsulta.NfeConsulta(); }
@@ -440,7 +440,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAPCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFPCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEPCancelamento.NfeCancelamento(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROPCancelamento.NfeCancelamento(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRPCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMPCancelamento.NfeCancelamento(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNPCancelamento.NfeCancelamento(); }
@@ -473,7 +473,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAHCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFHCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEHCancelamento.NfeCancelamento(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROHCancelamento.NfeCancelamento(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRHCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMHCancelamento.NfeCancelamento(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNHCancelamento.NfeCancelamento(); }
@@ -537,7 +537,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAPInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFPInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEPInutilizacao.NfeInutilizacao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROPInutilizacao.NfeInutilizacao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRPInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMPInutilizacao.NfeInutilizacao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNPInutilizacao.NfeInutilizacao(); }
@@ -570,7 +570,7 @@ namespace uninfe
                 else if (ConfiguracaoApp.UFCod == 29) { pServico = new wsBAHInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 53) { pServico = new wsDFHInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 26) { pServico = new wsPEHInutilizacao.NfeInutilizacao(); }
-                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsROHInutilizacao.NfeInutilizacao(); }
+                else if (ConfiguracaoApp.UFCod == 11) { pServico = new wsVRHInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 13) { pServico = new wsAMHInutilizacao.NfeInutilizacao(); }
 
                 else if (ConfiguracaoApp.UFCod == 15) { pServico = new wsVNHInutilizacao.NfeInutilizacao(); }
@@ -618,7 +618,7 @@ namespace uninfe
                 else if (oParam.UFCod == 53) { pServico = new wsDFPConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 52) { pServico = new wsGOPConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEPConsultaCadastro.CadConsultaCadastro(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROPConsultaCadastro.CadConsultaCadastro(); }
+//              else if (oParam.UFCod == 11) { pServico = new wsROPConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 43) { pServico = new wsRSPConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 35) { pServico = new wsSPPConsultaCadastro.CadConsultaCadastro(); }
             }
@@ -628,7 +628,7 @@ namespace uninfe
                 else if (oParam.UFCod == 53) { pServico = new wsDFHConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 52) { pServico = new wsGOHConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 26) { pServico = new wsPEHConsultaCadastro.CadConsultaCadastro(); }
-                else if (oParam.UFCod == 11) { pServico = new wsROHConsultaCadastro.CadConsultaCadastro(); }
+//                else if (oParam.UFCod == 11) { pServico = new wsROHConsultaCadastro.CadConsultaCadastro(); }
                 else if (oParam.UFCod == 35) { pServico = new wsSPHConsultaCadastro.CadConsultaCadastro(); }
             }
         }
