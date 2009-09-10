@@ -418,6 +418,7 @@
             this.udDiasLimpeza.Name = "udDiasLimpeza";
             this.udDiasLimpeza.Size = new System.Drawing.Size(52, 20);
             this.udDiasLimpeza.TabIndex = 32;
+            this.udDiasLimpeza.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label14
             // 
@@ -602,7 +603,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(588, 315);
+            this.tabPage4.Size = new System.Drawing.Size(588, 351);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Proxy";
             this.tabPage4.UseVisualStyleBackColor = true;

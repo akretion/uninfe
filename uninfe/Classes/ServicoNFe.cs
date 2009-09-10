@@ -945,7 +945,10 @@ namespace uninfe
                             /// pega a data da emissão da nota para mover os XML's para a pasta de origem da NFe
                             /// 
                             string cChaveNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                            DateTime dtEmissaoNFe = new DateTime(DateTime.Now.Year + Convert.ToInt16(cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
+                            //TODO: Cancelamento - Acertar a data
+                            DateTime dtEmissaoNFe = new DateTime(Convert.ToInt16("20" + cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
+                            //DateTime dtEmissaoNFe = DateTime.Now;
+                            
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);

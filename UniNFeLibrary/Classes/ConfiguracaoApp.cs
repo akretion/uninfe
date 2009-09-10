@@ -561,7 +561,12 @@ namespace UniNFeLibrary
                         lEncontrouTag = true;
                     }
 
-
+                    //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza").Count != 0)
+                    {
+                        ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
                 }
             }
             catch (Exception ex)
