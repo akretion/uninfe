@@ -193,7 +193,7 @@
             this.toolStripButton_fechar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(612, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(607, 39);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -234,7 +234,7 @@
             this.textBox_dadoscertificado.Name = "textBox_dadoscertificado";
             this.textBox_dadoscertificado.ReadOnly = true;
             this.textBox_dadoscertificado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_dadoscertificado.Size = new System.Drawing.Size(516, 257);
+            this.textBox_dadoscertificado.Size = new System.Drawing.Size(516, 326);
             this.textBox_dadoscertificado.TabIndex = 18;
             // 
             // button_selecionar_certificado
@@ -301,10 +301,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(12, 42);
+            this.tabControl1.Location = new System.Drawing.Point(6, 42);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(596, 341);
+            this.tabControl1.Size = new System.Drawing.Size(596, 377);
             this.tabControl1.TabIndex = 20;
             // 
             // tabPage1
@@ -321,7 +321,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(588, 315);
+            this.tabPage1.Size = new System.Drawing.Size(588, 351);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -329,7 +329,7 @@
             // checkBoxRetornoNFETxt
             // 
             this.checkBoxRetornoNFETxt.AutoSize = true;
-            this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(6, 292);
+            this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(6, 329);
             this.checkBoxRetornoNFETxt.Name = "checkBoxRetornoNFETxt";
             this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(334, 17);
             this.checkBoxRetornoNFETxt.TabIndex = 13;
@@ -402,14 +402,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(588, 315);
+            this.tabPage2.Size = new System.Drawing.Size(588, 351);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pastas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // udDiasLimpeza
             // 
-            this.udDiasLimpeza.Location = new System.Drawing.Point(529, 281);
+            this.udDiasLimpeza.Location = new System.Drawing.Point(529, 322);
             this.udDiasLimpeza.Maximum = new decimal(new int[] {
             7305,
             0,
@@ -421,9 +421,9 @@
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(274, 277);
+            this.label14.Location = new System.Drawing.Point(278, 318);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(248, 32);
+            this.label14.Size = new System.Drawing.Size(250, 32);
             this.label14.TabIndex = 31;
             this.label14.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
                 "0 para infinito.";
@@ -451,16 +451,16 @@
             "D\\M\\A",
             "D\\M",
             "D\\A"});
-            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(203, 280);
+            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(190, 321);
             this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
             this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(65, 21);
             this.cboDiretorioSalvarComo.TabIndex = 30;
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(3, 277);
+            this.label13.Location = new System.Drawing.Point(3, 318);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(200, 35);
+            this.label13.Size = new System.Drawing.Size(185, 35);
             this.label13.TabIndex = 29;
             this.label13.Text = "Como devem ser criados os diretórios baseados na data de emissão?";
             // 
@@ -585,7 +585,7 @@
             this.tabPage3.Controls.Add(this.button_selecionar_certificado);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(588, 315);
+            this.tabPage3.Size = new System.Drawing.Size(588, 351);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Certificado Digital";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -683,7 +683,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 389);
+            this.ClientSize = new System.Drawing.Size(607, 427);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

@@ -80,6 +80,12 @@ namespace uninfe
         Thread oThreadConvTXT;
 
         Thread oThreadGerarChaveNFe;
+        /// <summary>
+        /// executa a limpeza das pastas temp e retorno
+        /// </summary>
+        /// <by>http://desenvolvedores.net/marcelo</by>
+        Thread oThreadLimpeza;
+
         #endregion
 
         #region Atributos
@@ -263,21 +269,78 @@ namespace uninfe
             oThreadMontaLoteVariasNfe = new Thread(oOperacaoMontaLoteVariasNfe);
             oThreadMontaLoteVariasNfe.Name = Servicos.MontarLoteVariasNFe.ToString();
             oThreadMontaLoteVariasNfe.Start(Servicos.MontarLoteVariasNFe);
-            #endregion               
+            #endregion                      
         
-        
+            #region Executar a Thread que retorna a chave da NFe
             /// <summary>
             /// danasa 9-2009
             /// </summary>
-            #region Executar a Thread que retorna a chave da NFe
             oOperacaoGerarChaveNFe = new ParameterizedThreadStart(oServicoGerarChaveNFe.BuscaXML);
             oThreadGerarChaveNFe = new Thread(oOperacaoGerarChaveNFe);
             oThreadGerarChaveNFe.Name = Servicos.GerarChaveNFe.ToString();
             oThreadGerarChaveNFe.Start(Servicos.GerarChaveNFe);
             #endregion
+
+            #region Executar a thread que faz a limpeza dos diretórios temp e retorno
+            if (ConfiguracaoApp.DiasLimpeza > 0)
+            {
+                oThreadLimpeza = new Thread(new ThreadStart(ExecutaLimpeza));
+                oThreadLimpeza.Start();
+            }
+            #endregion
         }
         #endregion
 
+        #region Executa Limpeza
+        /// <summary>
+        /// executa a limpeza das pastas temp e retorno
+        /// </summary>
+        /// <by>http://desenvolvedores.net/marcelo</by>
+        private void ExecutaLimpeza()
+        {
+            lock (oThreadLimpeza)
+            {
+                //se chegou até aqui é porque é para fazer a limpeza dos diretórios
+                #region temporario
+                Limpar(ConfiguracaoApp.vPastaXMLErro);
+                #endregion
+
+                #region retorno
+                Limpar(ConfiguracaoApp.vPastaXMLRetorno);
+                #endregion
+
+                //pode dormir pelos dias de limpeza. não é necessário fazer a limpeza antes do dia
+                //não é interessante sair da thread porque o uninfe pode ficar no ar 24/7
+                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
+            }
+        }
+
+        private void Limpar(string diretorio)
+        {
+            //recupera os arquivos da pasta temporario
+            string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);
+            DateTime UltimaData = DateTime.Today.AddDays(-ConfiguracaoApp.DiasLimpeza);
+
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                //usar a última data de acesso, e não a data de criação
+                if (fi.LastWriteTime <= UltimaData)
+                {
+                    try
+                    {
+                        fi.Delete();
+                    }
+                    catch
+                    {
+                        //td bem... nao deu para excluir. fica pra próxima
+                    }
+                }
+
+                Application.DoEvents();
+            }
+        }
+        #endregion
         #endregion
 
         #region Métodos de eventos
@@ -360,6 +423,7 @@ namespace uninfe
             oThreadValidarAssinar.Abort();
             oThreadConvTXT.Abort();
             oThreadGerarChaveNFe.Abort();
+            if (oThreadLimpeza != null) oThreadLimpeza.Abort();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
