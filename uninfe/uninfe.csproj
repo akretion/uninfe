@@ -73,14 +73,8 @@
     <Compile Include="Formulario\FormConsultaCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formulario\FormConsultaCadastro.Designer.cs">
+    <Compile Include="Formulario\FormConsultaCadastro.designer.cs">
       <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formulario\FormConsultaCadastroResult.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formulario\FormConsultaCadastroResult.Designer.cs">
-      <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Formulario\FormSobre.cs">
       <SubType>Form</SubType>
@@ -89,12 +83,6 @@
       <DependentUpon>FormSobre.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GerarXML.cs" />
-    <Compile Include="Formulario\retConsCad.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Formulario\retConsCad.Designer.cs">
-      <DependentUpon>retConsCad.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,15 +94,9 @@
     <EmbeddedResource Include="Formulario\FormConsultaCadastro.resx">
       <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formulario\FormConsultaCadastroResult.resx">
-      <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formulario\FormSobre.resx">
       <DependentUpon>FormSobre.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formulario\retConsCad.resx">
-      <DependentUpon>retConsCad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -135,7 +135,7 @@ namespace uninfe
             //TODO: CONFIG
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANPRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGPRecepcao.NfeRecepcao(); }
@@ -168,7 +168,7 @@ namespace uninfe
             }
             else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANHRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTHRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSHRecepcao.NfeRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGHRecepcao.NfeRecepcao(); }
@@ -233,7 +233,7 @@ namespace uninfe
             //TODO: CONFIG
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANPRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGPRetRecepcao.NfeRetRecepcao(); }
@@ -266,7 +266,7 @@ namespace uninfe
             }
             else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANHRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTHRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSHRetRecepcao.NfeRetRecepcao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGHRetRecepcao.NfeRetRecepcao(); }
@@ -428,7 +428,7 @@ namespace uninfe
             //TODO: CONFIG
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANPCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGPCancelamento.NfeCancelamento(); }
@@ -461,7 +461,7 @@ namespace uninfe
             }
             else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANHCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHCancelamento.NfeCancelamento(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTHCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSHCancelamento.NfeCancelamento(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGHCancelamento.NfeCancelamento(); }
@@ -525,7 +525,7 @@ namespace uninfe
             //TODO: CONFIG
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANPInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGPInutilizacao.NfeInutilizacao(); }
@@ -558,7 +558,7 @@ namespace uninfe
             }
             else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN/*3*/) { pServico = new wsSCANHInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
+                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
                 else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTHInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSHInutilizacao.NfeInutilizacao(); }
                 else if (ConfiguracaoApp.UFCod == 31) { pServico = new wsMGHInutilizacao.NfeInutilizacao(); }

@@ -54,6 +54,44 @@ namespace UniNFeLibrary
         public static string VersaoXMLConsCad { get; set; }
         public static string VersaoXMLCabecMsg { get; set; }
         public static string NomePastaXMLAssinado { get; private set; }
+
+
+        private static DiretorioSalvarComo mDiretorioSalvarComo = "";
+        /// <summary>
+        /// Define como devem ser salvos os diretórios dentro do Uninfe.
+        /// <para>por enqto apenas usa a data e os valores possíveis para definir são:</para>
+        /// <para>    A para ANO</para>
+        /// <para>    M para MES</para>
+        /// <para>    D para DIA</para>
+        /// <para>    pode se passar como desejar</para>
+        /// <para>    Ex:</para>
+        /// <para>        AMD   para criar a pasta como ..\Enviados\Autorizados\ANOMESDIA\nfe.xml</para>
+        /// <para>        AM    para criar a pasta como ..\Enviados\Autorizados\ANOMES\nfe.xml</para>
+        /// <para>        AD    para criar a pasta como ..\Enviados\Autorizados\ANODIA\nfe.xml</para>
+        /// <para>        A\M\D para criar a pasta como ..\Enviados\Autorizados\ANO\MES\DIA\nfe.xml</para>
+        /// <para>        podem ser criadas outras combinações, ficando a critério do usuário</para>
+        /// </summary>
+        /// <by>http://desenvolvedores.net/marcelo</by>
+        public static DiretorioSalvarComo DiretorioSalvarComo
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(mDiretorioSalvarComo))
+                    mDiretorioSalvarComo = "AM";//padrão
+
+                return mDiretorioSalvarComo;
+            }
+
+            set { mDiretorioSalvarComo = value; }
+        }
+
+        /// <summary>
+        /// dias em que se deve manter os arquivos nas pastas retorno e temporario
+        /// <para>coloque 0 para infinito</para>
+        /// </summary>
+        /// <by>http://desenvolvedores.net/marcelo</by>
+        public static int DiasLimpeza { get; set; }
+
         /// <summary>
         /// Namespace URI associado (Endereço http dos schemas de XML)
         /// </summary>
@@ -95,6 +133,8 @@ namespace UniNFeLibrary
             ConfiguracaoApp.PastaValidar = string.Empty;
             ConfiguracaoApp.GravarRetornoTXTNFe = false;
             ConfiguracaoApp.NomePastaXMLAssinado = InfoApp.NomePastaXMLAssinado;// "\\Assinado";
+            ConfiguracaoApp.DiretorioSalvarComo = "AM";
+            ConfiguracaoApp.DiasLimpeza = 0;
 
             if (File.Exists(vArquivoConfig))
             {
@@ -127,6 +167,8 @@ namespace UniNFeLibrary
                                         else if (oLerXml.Name == "PastaXmlEmLote") { oLerXml.Read(); ConfiguracaoApp.cPastaXMLEmLote = ConfiguracaoApp.RemoveEndSlash(oLerXml.Value); }
                                         else if (oLerXml.Name == "PastaValidar") { oLerXml.Read(); ConfiguracaoApp.PastaValidar = ConfiguracaoApp.RemoveEndSlash(oLerXml.Value); }
                                         else if (oLerXml.Name == "GravarRetornoTXTNFe") { oLerXml.Read(); ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(oLerXml.Value); }
+                                        else if (oLerXml.Name == "DiretorioSalvarComo") { oLerXml.Read(); ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(oLerXml.Value); }
+                                        else if (oLerXml.Name == "DiasLimpeza") { oLerXml.Read(); ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(oLerXml.Value); }
                                     }
                                 }
                                 break;
@@ -233,6 +275,8 @@ namespace UniNFeLibrary
                     oXmlGravar.WriteElementString("PastaXmlEmLote", ConfiguracaoApp.cPastaXMLEmLote);
                     oXmlGravar.WriteElementString("PastaValidar", ConfiguracaoApp.PastaValidar);
                     oXmlGravar.WriteElementString("GravarRetornoTXTNFe", ConfiguracaoApp.GravarRetornoTXTNFe.ToString());
+                    oXmlGravar.WriteElementString("DiretorioSalvarComo", ConfiguracaoApp.DiretorioSalvarComo.ToString());
+                    oXmlGravar.WriteElementString("DiasLimpeza", ConfiguracaoApp.DiasLimpeza.ToString());
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -509,6 +553,15 @@ namespace UniNFeLibrary
                         ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe")[0].InnerText);
                         lEncontrouTag = true;
                     }
+
+                    //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
+                    if (ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo").Count != 0)
+                    {
+                        ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo")[0].InnerText);
+                        lEncontrouTag = true;
+                    }
+
+
                 }
             }
             catch (Exception ex)

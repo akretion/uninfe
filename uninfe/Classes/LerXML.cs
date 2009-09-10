@@ -176,7 +176,7 @@ namespace uninfe
         public override void PedSta(string cArquivoXML)
         {
             this.oDadosPedSta.tpAmb = string.Empty;
-            this.oDadosPedSta.cUF = string.Empty;
+            this.oDadosPedSta.cUF = ConfiguracaoApp.UFCod.ToString();
             ///
             /// danasa 9-2009
             /// Assume o que está na configuracao
@@ -195,7 +195,11 @@ namespace uninfe
                     XmlElement consStatServElemento = (XmlElement)consStatServNode;
 
                     this.oDadosPedSta.tpAmb = consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                    this.oDadosPedSta.cUF = consStatServElemento.GetElementsByTagName("cUF")[0].InnerText;
+
+                    if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                    {
+                        this.oDadosPedSta.cUF = consStatServElemento.GetElementsByTagName("cUF")[0].InnerText;
+                    }
 
                     ///
                     /// danasa 9-2009

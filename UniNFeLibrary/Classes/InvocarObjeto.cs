@@ -178,6 +178,7 @@ namespace UniNFeLibrary
         /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
         /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
         /// <param name="ServicoWS">Nome do Objeto do WebService que vai ser acessado</param>
+        /// <param name="oParam">Parametros para execução dos serviços</param>
         /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
         /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
         /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
@@ -194,7 +195,7 @@ namespace UniNFeLibrary
         /// </example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
+        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, ParametroEnvioXML oParam, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
             bool lRetorna = false;
 
@@ -222,7 +223,13 @@ namespace UniNFeLibrary
             }
 
             // Definir algumas propriedades do objeto do cabeçalho da mensagem
-            TipoCabecMsg.InvokeMember("cUF", System.Reflection.BindingFlags.SetProperty, null, CabecMsg, new object[] { ConfiguracaoApp.UFCod.ToString() });
+            string cUF = ConfiguracaoApp.UFCod.ToString();
+            if (oParam != null)
+            { 
+                cUF = oParam.UFCod.ToString();
+            }
+
+            TipoCabecMsg.InvokeMember("cUF", System.Reflection.BindingFlags.SetProperty, null, CabecMsg, new object[] { cUF });
             TipoCabecMsg.InvokeMember("versaoDados", System.Reflection.BindingFlags.SetProperty, null, CabecMsg, new object[] { cVersaoDados });
 
             // Montar o XML de Lote de envio de Notas fiscais
@@ -306,7 +313,66 @@ namespace UniNFeLibrary
         /// <date>01/07/2008</date>
         public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object oServico, string cMetodo)
         {
-            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, oServico, cMetodo, string.Empty, string.Empty);
+            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, oServico, null, cMetodo, string.Empty, string.Empty);
+        }
+        #endregion
+
+        #region Invocar() - Sobrecarga()
+        /// <summary>
+        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e não grava o XML retornado
+        /// </summary>
+        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
+        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
+        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
+        /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
+        /// <param name="oParam">Parametros para execução dos serviços</param>
+        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
+        /// <returns>
+        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
+        /// XML com o retorno que foi dado do serviço do WebService.
+        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
+        /// </returns>
+        /// <example>
+        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+        /// object oServico = null;
+        /// this.DefObjCancelamento(ref oServico);
+        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF");
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>01/07/2008</date>
+        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object oServico, ParametroEnvioXML oParam, string cMetodo)
+        {
+            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, oServico, oParam, cMetodo, string.Empty, string.Empty);
+        }
+        #endregion
+
+        #region Invocar() - Sobrecarga
+        /// <summary>
+        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e Grava o XML retornado
+        /// </summary>
+        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
+        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
+        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
+        /// <param name="ServicoWS">Nome do Objeto do WebService que vai ser acessado</param>
+        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
+        /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
+        /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
+        /// <returns>
+        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
+        /// XML com o retorno que foi dado do serviço do WebService.
+        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
+        /// </returns>
+        /// <example>
+        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
+        /// object oServico = null;
+        /// this.DefObjCancelamento(ref oServico);
+        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF", "-ped-can", "-can");
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>01/07/2008</date>
+        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
+        {
+            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, ServicoWS, null, cMetodo, cFinalArqEnvio, cFinalArqRetorno);
         }
         #endregion
 

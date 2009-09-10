@@ -29,6 +29,14 @@ namespace UniNFeLibrary
         /// <date>19/06/2008</date>
         public string ExtrairNomeArq(string pPastaArq, string pFinalArq)
         {
+            FileInfo fi = new FileInfo(pPastaArq);
+            string ret = fi.Name;
+            ret = ret.Substring(0, ret.Length - pFinalArq.Length);
+            return ret;
+
+            #region bkp Código Antigo
+            /*
+             **** DEPOIS DE AVALIADO O CÓDIGO ACIMA. ESTE AQUI PODE SER APAGADO ****
             //Achar o posição inicial do nome do arquivo
             //procura por pastas, tira elas para ficar somente o nome do arquivo
             Int32 nAchou = 0;
@@ -53,7 +61,9 @@ namespace UniNFeLibrary
             //Extrair o nome do arquivo
             string cRetorna = pPastaArq.Substring(nPosI, nPosF - nPosI);
 
-            return cRetorna;
+            return cRetorna; 
+             */
+            #endregion
         }
         #endregion
 
@@ -104,13 +114,13 @@ namespace UniNFeLibrary
                         break;
 
                     case PastaEnviados.Autorizados:
-                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Emissao.ToString("yyyyMM");
+                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
                         strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
                         goto default;
 
                     case PastaEnviados.Denegados:
-                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Emissao.ToString("yyyyMM");
-                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe/*"-nfe.xml"*/) + "-den.xml";
+                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+                        strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, "-nfe.xml") + "-den.xml";
                         goto default;
 
                     default:
@@ -144,11 +154,11 @@ namespace UniNFeLibrary
                             switch (SubPastaXMLEnviado)
                             {
                                 case PastaEnviados.Autorizados:
-                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Emissao.ToString("yyyyMM");
+                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
                                     goto default;
 
                                 case PastaEnviados.Denegados:
-                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Emissao.ToString("yyyyMM");
+                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Denegados + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
                                     goto default;
 
                                 default:

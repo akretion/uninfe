@@ -380,10 +380,6 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region NomeArqLoteRetERP()
-        protected abstract string NomeArqLoteRetERP(string NomeArquivoXML);
-        #endregion
-
         #endregion
 
         #region Métodos para gerar o XML´s diversos
@@ -551,6 +547,15 @@ namespace UniNFeLibrary
 
         #region LerXMLRecibo()
         protected abstract absLerXML.DadosRecClass LerXMLRecibo(string Arquivo);
+        #endregion
+
+        #region NomeArqLoteRetERP()
+        protected string NomeArqLoteRetERP(string NomeArquivoXML)
+        {
+            return ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe/*"-nfe.xml"*/) +
+                "-num-lot.xml";
+        }
         #endregion
 
         #endregion

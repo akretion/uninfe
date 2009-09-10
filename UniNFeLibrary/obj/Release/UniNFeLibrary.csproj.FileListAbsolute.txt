@@ -7,3 +7,5 @@ C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.pdb
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.csproj.GenerateResource.Cache
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Properties.Resources.resources
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.Configuracao.resources
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.FormConsultaCadastroResult.resources
+C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.retConsCad.resources

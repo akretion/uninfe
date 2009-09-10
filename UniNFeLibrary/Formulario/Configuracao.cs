@@ -158,6 +158,13 @@ namespace UniNFeLibrary.Formulario
                     break;
                 }
             }
+
+
+            //DiretorioSalvarComo
+            cboDiretorioSalvarComo.Text = ConfiguracaoApp.DiretorioSalvarComo;
+
+            //dias limpeza
+            udDiasLimpeza.Value = ConfiguracaoApp.DiasLimpeza;
             #endregion
         }
 
@@ -231,6 +238,9 @@ namespace UniNFeLibrary.Formulario
             ConfiguracaoApp.cPastaXMLEmLote = this.tbPastaLote.Text.Trim();
             ConfiguracaoApp.PastaValidar = this.tbPastaValidar.Text.Trim();
             ConfiguracaoApp.GravarRetornoTXTNFe = this.checkBoxRetornoNFETxt.Checked;
+            ConfiguracaoApp.DiretorioSalvarComo = this.cboDiretorioSalvarComo.Text;
+
+            ConfiguracaoApp.DiasLimpeza = (int)udDiasLimpeza.Value;
             if (this.oMeuCert == null)
             {
                 ConfiguracaoApp.vCertificado = "";

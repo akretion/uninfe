@@ -59,6 +59,10 @@
             this.comboBox_tpEmis = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.udDiasLimpeza = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cboDiretorioSalvarComo = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button_SelectPastaValidar = new System.Windows.Forms.Button();
             this.tbPastaValidar = new System.Windows.Forms.TextBox();
@@ -90,6 +94,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDiasLimpeza)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPorta)).BeginInit();
@@ -369,6 +374,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.udDiasLimpeza);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.cboDiretorioSalvarComo);
+            this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.button_SelectPastaValidar);
             this.tabPage2.Controls.Add(this.tbPastaValidar);
@@ -397,6 +406,63 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pastas";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // udDiasLimpeza
+            // 
+            this.udDiasLimpeza.Location = new System.Drawing.Point(529, 281);
+            this.udDiasLimpeza.Maximum = new decimal(new int[] {
+            7305,
+            0,
+            0,
+            0});
+            this.udDiasLimpeza.Name = "udDiasLimpeza";
+            this.udDiasLimpeza.Size = new System.Drawing.Size(52, 20);
+            this.udDiasLimpeza.TabIndex = 32;
+            // 
+            // label14
+            // 
+            this.label14.Location = new System.Drawing.Point(274, 277);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(248, 32);
+            this.label14.TabIndex = 31;
+            this.label14.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
+                "0 para infinito.";
+            // 
+            // cboDiretorioSalvarComo
+            // 
+            this.cboDiretorioSalvarComo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDiretorioSalvarComo.FormattingEnabled = true;
+            this.cboDiretorioSalvarComo.Items.AddRange(new object[] {
+            "AMD",
+            "AM",
+            "AD",
+            "MDA",
+            "MD",
+            "MA",
+            "DMA",
+            "DM",
+            "DA",
+            "A\\M\\D",
+            "A\\M",
+            "A\\D",
+            "M\\D\\A",
+            "M\\D",
+            "M\\A",
+            "D\\M\\A",
+            "D\\M",
+            "D\\A"});
+            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(203, 280);
+            this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
+            this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(65, 21);
+            this.cboDiretorioSalvarComo.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(3, 277);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(200, 35);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "Como devem ser criados os diretórios baseados na data de emissão?";
             // 
             // label12
             // 
@@ -635,6 +701,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDiasLimpeza)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -703,5 +770,9 @@
         private System.Windows.Forms.TextBox tbSenha;
         private System.Windows.Forms.TextBox tbUsuario;
         private System.Windows.Forms.NumericUpDown nudPorta;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cboDiretorioSalvarComo;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown udDiasLimpeza;
     }
 }

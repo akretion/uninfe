@@ -136,7 +136,8 @@ namespace uninfe
                 + "<tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb>"
                 + "<cUF>" + cUF.ToString() + "</cUF>"
                 + "<tpEmis>" + tpEmis.ToString() + "</tpEmis>"  //danasa 9-2009
-                + "<xServ>STATUS</xServ></consStatServ>";
+                + "<xServ>STATUS</xServ>"
+                + "</consStatServ>";
 
             string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
                                     DateTime.Now.ToString("yyyyMMddThhmmss") +
@@ -528,15 +529,6 @@ namespace uninfe
 
             return oLerXML.oDadosRec;
         }
-        #endregion
-
-        #region NomeArqLoteRetERP()
-        protected override string NomeArqLoteRetERP(string NomeArquivoXML)
-        {
-            return ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe/*"-nfe.xml"*/) +
-                "-num-lot.xml";
-        } 
-        #endregion
+        #endregion   
     }
 }
