@@ -911,7 +911,7 @@ namespace UniNFeLibrary
                 }
             }
             //if (infcad != null)
-              //  vRetorno.infCad.Add(infcad);
+            //  vRetorno.infCad.Add(infcad);
             return vRetorno;
         }
 
@@ -952,15 +952,10 @@ namespace UniNFeLibrary
 
                 if (File.Exists(ArqXMLRetorno))
                 {
-                    try
+                    if (!Auxiliar.FileInUse(ArqXMLRetorno))
                     {
-                        //Verificar se consegue abrir o arquivo em modo exclusivo, se conseguir ele dá sequencia
-                        using (FileStream fs = File.Open(ArqXMLRetorno, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+                        try
                         {
-                            //Conseguiu abrir o arquivo, significa que está perfeitamente gerado
-                            //assim vou iniciar o processo de envio do XML
-                            fs.Close();
-
                             //Ler o status do serviço no XML retornado pelo WebService
                             XmlTextReader oLerXml = new XmlTextReader(ArqXMLRetorno);
 
@@ -987,9 +982,9 @@ namespace UniNFeLibrary
                                 //Somente deixa fazer o loop novamente e tentar deletar
                             }
                         }
-                    }
-                    catch
-                    {
+                        catch
+                        {
+                        }
                     }
                 }
                 else if (File.Exists(ArqERRRetorno))
@@ -1080,10 +1075,8 @@ namespace UniNFeLibrary
                 }
                 UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
 
-                using (FileStream fs = File.Open(ArqPedido, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+                if (!Auxiliar.FileInUse(ArqPedido))
                 {
-                    fs.Close();
-
                     int serie = 0;
                     int nNF = 0;
                     int cNF = 0;
@@ -1279,7 +1272,7 @@ namespace UniNFeLibrary
         }
         #endregion
     }
-    
+
     public class infCad
     {
         public string IE { get; set; }
@@ -1311,8 +1304,8 @@ namespace UniNFeLibrary
         public string xMotivo { get; set; }
         public string UF { get; set; }
         public string IE { get; set; }
-        public string CNPJ {get; set; }
-        public string CPF {get; set; }
+        public string CNPJ { get; set; }
+        public string CPF { get; set; }
         public DateTime dhCons { get; set; }
         public string cUF { get; set; }
         public List<infCad> infCad { get; set; }

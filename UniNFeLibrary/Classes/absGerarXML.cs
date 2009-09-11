@@ -60,11 +60,8 @@ namespace UniNFeLibrary
                 {
                     booLiberado = false;
                     //Verificar se consegue abrir o arquivo em modo exclusivo
-                    using (FileStream fs = File.Open(lstArquivosNFe[i], FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+                    if (!Auxiliar.FileInUse(lstArquivosNFe[i]))
                     {
-                        //Fechar o arquivo
-                        fs.Close();
-
                         booLiberado = true;
 
                         Thread.Sleep(100);

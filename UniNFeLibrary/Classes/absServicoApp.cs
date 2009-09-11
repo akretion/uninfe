@@ -132,19 +132,15 @@ namespace UniNFeLibrary
                 default:  //Assinar, validar, enviar ou somente processar os arquivos XML encontrados na pasta de envio
                     for (int i = 0; i < lstArquivos.Count; i++)
                     {
+                        //Se o arquivo estiver ainda em uso eu pulo ele para tentar mais tarde
+                        if (Auxiliar.FileInUse(lstArquivos[i]))
+                            continue;
+
                         string cError = "";
                         try
                         {
-                            //Verificar se consegue abrir o arquivo em modo exclusivo
-                            //Se conseguir significa que está perfeitamente gerado e liberado pelo ERP
-                            using (FileStream fs = File.Open(lstArquivos[i], FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-                            {
-                                //Fechar o arquivo
-                                fs.Close();
-
-                                //Processa ou envia o XML
-                                this.EnviarArquivo(lstArquivos[i], oNfe, strMetodo);
-                            }
+                            //Processa ou envia o XML
+                            this.EnviarArquivo(lstArquivos[i], oNfe, strMetodo);
                         }
                         catch (IOException ex)
                         {
@@ -199,22 +195,18 @@ namespace UniNFeLibrary
             //Assinar, Validar, Enviar ou somente processar os arquivos XML encontrados na pasta de envio
             for (int i = 0; i < lstArquivos.Count; i++)
             {
+                //Se o arquivo estiver em uso eu pulo ele para tentar mais tarde
+                if (Auxiliar.FileInUse(lstArquivos[i]))
+                    continue;
+
                 string cError = "";
                 try
                 {
-                    //Verificar se consegue abrir o arquivo em modo exclusivo
-                    //Se conseguir significa que está perfeitamente gerado e liberado pelo ERP
-                    using (FileStream fs = File.Open(lstArquivos[i], FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
-                    {
-                        //Fechar o arquivo
-                        fs.Close();
+                    //Definir o arquivo XML 
+                    tipoServico.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.SetProperty, null, oNfe, new object[] { lstArquivos[i] });
 
-                        //Definir o arquivo XML 
-                        tipoServico.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.SetProperty, null, oNfe, new object[] { lstArquivos[i] });
-
-                        //Assinar e Validar o XML de nota fiscal eletrônica e coloca na pasta de Assinados
-                        tipoServico.InvokeMember("AssinarValidarXMLNFe", System.Reflection.BindingFlags.InvokeMethod, null, oNfe, new Object[] { strPasta });
-                    }
+                    //Assinar e Validar o XML de nota fiscal eletrônica e coloca na pasta de Assinados
+                    tipoServico.InvokeMember("AssinarValidarXMLNFe", System.Reflection.BindingFlags.InvokeMethod, null, oNfe, new Object[] { strPasta });
                 }
                 catch (IOException ex)
                 {
@@ -416,136 +408,129 @@ namespace UniNFeLibrary
                 string NomeArquivo = lstArqMontarLote[b];
 
                 //O arquivo existe mas pode estar em uso
-                if (Auxiliar.FileInUse(NomeArquivo) == true) return;
+                if (Auxiliar.FileInUse(NomeArquivo) == true)
+                    return;
 
-                //Verificar se consegue abrir o arquivo em modo exclusivo
-                //Se conseguir significa que está perfeitamente gerado e liberado pelo ERP
-                using (FileStream fs = File.Open(NomeArquivo, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+                Auxiliar oAux = new Auxiliar();
+                List<string> lstNfe = new List<string>();
+                FileStream fsArquivo = null;
+                FluxoNfe oFluxoNfe = new FluxoNfe();
+
+                string MensagemErro = string.Empty;
+                bool lTeveErro = false;
+
+                try
                 {
-                    //Fechar o arquivo
-                    fs.Close();
+                    XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
+                    fsArquivo = new FileStream(NomeArquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                    doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
-                    Auxiliar oAux = new Auxiliar();
-                    List<string> lstNfe = new List<string>();
-                    FileStream fsArquivo = null;
-                    FluxoNfe oFluxoNfe = new FluxoNfe();
-
-                    string MensagemErro = string.Empty;
-                    bool lTeveErro = false;
-
-                    try
+                    XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteNFe"); //Pesquisar o elemento Documento no arquivo XML
+                    foreach (XmlNode documentoNode in documentoList)
                     {
-                        XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                        fsArquivo = new FileStream(NomeArquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
-                        doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
+                        XmlElement documentoElemento = (XmlElement)documentoNode;
 
-                        XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteNFe"); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentoNode in documentoList)
+                        int QtdeArquivo = documentoElemento.GetElementsByTagName("ArquivoNFe").Count;
+
+                        for (int d = 0; d < QtdeArquivo; d++)
                         {
-                            XmlElement documentoElemento = (XmlElement)documentoNode;
+                            string ArquivoNFe = ConfiguracaoApp.cPastaXMLEmLote + ConfiguracaoApp.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
 
-                            int QtdeArquivo = documentoElemento.GetElementsByTagName("ArquivoNFe").Count;
-
-                            for (int d = 0; d < QtdeArquivo; d++)
+                            if (File.Exists(ArquivoNFe))
                             {
-                                string ArquivoNFe = ConfiguracaoApp.cPastaXMLEmLote + ConfiguracaoApp.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
 
-                                if (File.Exists(ArquivoNFe))
+                                try
                                 {
-
-                                    try
+                                    absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(ArquivoNFe);
+                                    if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                     {
-                                        absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(ArquivoNFe);
-                                        if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
-                                        {
-                                            lstNfe.Add(ArquivoNFe);
-                                        }
-                                        else
-                                        {
-                                            MensagemErro += "Arquivo: "+ArquivoNFe +" já está no fluxo de envio e não será incluido em novo lote.\r\n";
-                                            lTeveErro = true;
-
-                                            FileInfo oArq = new FileInfo(ArquivoNFe);
-                                            oArq.Delete();
-                                        }
+                                        lstNfe.Add(ArquivoNFe);
                                     }
-                                    catch (IOException ex)
+                                    else
                                     {
-                                        MensagemErro += ex.Message + "\r\n";
+                                        MensagemErro += "Arquivo: " + ArquivoNFe + " já está no fluxo de envio e não será incluido em novo lote.\r\n";
                                         lTeveErro = true;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MensagemErro += ex.Message + "\r\n";
-                                        lTeveErro = true;
-                                    }
 
+                                        FileInfo oArq = new FileInfo(ArquivoNFe);
+                                        oArq.Delete();
+                                    }
                                 }
-                                else
+                                catch (IOException ex)
                                 {
+                                    MensagemErro += ex.Message + "\r\n";
                                     lTeveErro = true;
-                                    MensagemErro += "Arquivo: "+ArquivoNFe+" não existe e não será incluido no lote!\r\n";
                                 }
-                            }                            
-                        }
+                                catch (Exception ex)
+                                {
+                                    MensagemErro += ex.Message + "\r\n";
+                                    lTeveErro = true;
+                                }
 
-                        fsArquivo.Close(); //Fecha o arquivo XML
-
-                        //Definir o tipo do serviço
-                        Type tipoServico = oNfe.GetType();
-
-                        try
-                        {
-                            //Gerar lote
-                            tipoServico.InvokeMember("LoteNfe", System.Reflection.BindingFlags.InvokeMethod, null, oNfe, new object[] { lstNfe });
-                        }
-                        catch (IOException ex)
-                        {
-                            MensagemErro += ex.Message+"\r\n";
-                            lTeveErro = true;
-                        }
-                        catch (Exception ex)
-                        {
-                            MensagemErro += ex.Message+"\r\n";
-                            lTeveErro = true;
+                            }
+                            else
+                            {
+                                lTeveErro = true;
+                                MensagemErro += "Arquivo: " + ArquivoNFe + " não existe e não será incluido no lote!\r\n";
+                            }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        if (fsArquivo != null)
-                        {
-                            fsArquivo.Close();
-                        }
 
-                        lTeveErro = true;
-                        MensagemErro += ex.Message+"\r\n";
-                    }
+                    fsArquivo.Close(); //Fecha o arquivo XML
 
-                    //Deletar o arquivo de solicitão de montagem do lote de NFe
+                    //Definir o tipo do serviço
+                    Type tipoServico = oNfe.GetType();
+
                     try
                     {
-                        FileInfo oArquivo = new FileInfo(NomeArquivo);
-                        oArquivo.Delete();
+                        //Gerar lote
+                        tipoServico.InvokeMember("LoteNfe", System.Reflection.BindingFlags.InvokeMethod, null, oNfe, new object[] { lstNfe });
                     }
                     catch (IOException ex)
                     {
+                        MensagemErro += ex.Message + "\r\n";
                         lTeveErro = true;
-                        MensagemErro += ex.Message+"\r\n";
                     }
                     catch (Exception ex)
                     {
+                        MensagemErro += ex.Message + "\r\n";
                         lTeveErro = true;
-                        MensagemErro += ex.Message+"\r\n";
                     }
-                    
-                    if (lTeveErro)
+                }
+                catch (Exception ex)
+                {
+                    if (fsArquivo != null)
                     {
-                        oAux.GravarArqErroServico(NomeArquivo, ExtXml.MontarLote/*"-montar-lote.xml"*/, "-montar-lote.err", MensagemErro);
+                        fsArquivo.Close();
                     }
+
+                    lTeveErro = true;
+                    MensagemErro += ex.Message + "\r\n";
+                }
+
+                //Deletar o arquivo de solicitão de montagem do lote de NFe
+                try
+                {
+                    FileInfo oArquivo = new FileInfo(NomeArquivo);
+                    oArquivo.Delete();
+                }
+                catch (IOException ex)
+                {
+                    lTeveErro = true;
+                    MensagemErro += ex.Message + "\r\n";
+                }
+                catch (Exception ex)
+                {
+                    lTeveErro = true;
+                    MensagemErro += ex.Message + "\r\n";
+                }
+
+                if (lTeveErro)
+                {
+                    oAux.GravarArqErroServico(NomeArquivo, ExtXml.MontarLote/*"-montar-lote.xml"*/, "-montar-lote.err", MensagemErro);
                 }
             }
         }
-        #endregion             
+        #endregion
 
         #region GravarXMLDadosCertificado()
         /// <summary>
@@ -564,7 +549,7 @@ namespace UniNFeLibrary
 
             Auxiliar oAux = new Auxiliar();
 
-            oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" + 
+            oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" +
                                             oAux.ExtrairNomeArq(ArquivoXml, ExtXml.ConsInf/*"-cons-inf.xml"*/) + "-ret-cons-inf.xml");
         }
         #endregion
