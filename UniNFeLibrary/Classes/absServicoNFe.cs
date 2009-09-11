@@ -142,110 +142,110 @@ namespace UniNFeLibrary
                 string TpEmis = oDadosNFe.tpEmis;
 
                 //Inserir NFe no XML de controle do fluxo
-                FluxoNfe oFluxoNfe = new FluxoNfe();
-                if (!oFluxoNfe.NfeExiste(ChaveNfe))
+                try
                 {
-                    try
+                    FluxoNfe oFluxoNfe = new FluxoNfe();
+                    if (oFluxoNfe.NfeExiste(ChaveNfe))
                     {
-                        //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir             
-                        oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                        //Deletar o arquivo da pasta em processamento
+                        oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
-                        //Validações gerais
-                        if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
+                        //Deletar a NFE do arquivo de controle de fluxo
+                        oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
+                    }
+
+                    //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
+                    oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+
+                    //Validações gerais
+                    if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
+                    {
+                        bValidacaoGeral = true;
+                    }
+
+                    //Assinar o arquivo XML
+                    if (bValidacaoGeral && !bAssinado)
+                    {
+                        AssinaturaDigital oAD = new AssinaturaDigital();
+
+                        ValidarXMLs oValidador = new ValidarXMLs();
+                        oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
+
+                        oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
+
+                        if (oAD.intResultado == 0)
                         {
-                            bValidacaoGeral = true;
+                            bAssinado = true;
                         }
+                    }
 
-                        //Assinar o arquivo XML
-                        if (bValidacaoGeral && !bAssinado)
+                    // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
+                    if (bValidacaoGeral && bAssinado)
+                    {
+                        string cResultadoValidacao = oAux.ValidarArqXML(this.vXmlNfeDadosMsg);
+                        if (cResultadoValidacao == "")
                         {
-                            AssinaturaDigital oAD = new AssinaturaDigital();
+                            bValidadoSchema = true;
+                        }
+                        else
+                        {
+                            //Registrar o erro da validação do schema para o sistema ERP
+                            throw new Exception(cResultadoValidacao);
+                        }
+                    }
 
-                            ValidarXMLs oValidador = new ValidarXMLs();
-                            oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
-
-                            oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
-
-                            if (oAD.intResultado == 0)
+                    //Mover o arquivo XML da pasta de lote para a pasta de XML´s assinados
+                    if (bValidadoSchema)
+                    {
+                        try
+                        {
+                            //Se a pasta de assinados não existir, vamos criar
+                            if (!Directory.Exists(strPastaLoteAssinado))
                             {
-                                bAssinado = true;
+                                Directory.CreateDirectory(strPastaLoteAssinado);
                             }
-                        }
 
-                        // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
-                        if (bValidacaoGeral && bAssinado)
-                        {
-                            string cResultadoValidacao = oAux.ValidarArqXML(this.vXmlNfeDadosMsg);
-                            if (cResultadoValidacao == "")
+                            if (!File.Exists(strArqDestino))
                             {
-                                bValidadoSchema = true;
+                                //Mover o arquivo para a pasta de XML´s assinados
+                                FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
+                                oArquivo.MoveTo(strArqDestino);
+
+                                bRetorna = true;
                             }
                             else
                             {
-                                //Registrar o erro da validação do schema para o sistema ERP
-                                throw new Exception(cResultadoValidacao);
-                            }
-                        }
-
-                        //Mover o arquivo XML da pasta de lote para a pasta de XML´s assinados
-                        if (bValidadoSchema)
-                        {
-                            try
-                            {
-                                //Se a pasta de assinados não existir, vamos criar
-                                if (!Directory.Exists(strPastaLoteAssinado))
-                                {
-                                    Directory.CreateDirectory(strPastaLoteAssinado);
-                                }
-
-                                if (!File.Exists(strArqDestino))
-                                {
-                                    //Mover o arquivo para a pasta de XML´s assinados
-                                    FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
-                                    oArquivo.MoveTo(strArqDestino);
-
-                                    bRetorna = true;
-                                }
-                                else
-                                {
-                                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
-
-                                    throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
-                                        this.vXmlNfeDadosMsg);
-                                }
-                            }
-                            catch (IOException ex)
-                            {
-                                throw (ex);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw (ex);
-                            }
-                        }
-
-                        if (bRetorna)
-                        {
-                            try
-                            {
                                 oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
+
+                                throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
+                                    this.vXmlNfeDadosMsg);
                             }
-                            catch (Exception ex)
-                            {
-                                throw (ex);
-                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            throw (ex);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw (ex);
                         }
                     }
-                    catch (Exception ex)
+
+                    if (bRetorna)
                     {
-                        throw (ex);
+                        try
+                        {
+                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
+                        }
+                        catch (Exception ex)
+                        {
+                            throw (ex);
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    //TODO: WANDREY - URGENTE - Rever quando a nota já está no fluxo
-                    throw new Exception("A nota fiscal abaixo já foi enviada para o SEFAZ e está somente aguardando a consulta do recibo, efetue a consulta para finalizar a transação da NFe.\r\n" +
-                        this.vXmlNfeDadosMsg);
+                    throw (ex);
                 }
             }
             catch (Exception ex)

@@ -181,8 +181,8 @@ namespace uninfe
                 if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
                 {
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
                     oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
+                    oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
                 }
                 else
                 {
@@ -945,10 +945,9 @@ namespace uninfe
                             /// pega a data da emissão da nota para mover os XML's para a pasta de origem da NFe
                             /// 
                             string cChaveNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                            //TODO: Cancelamento - Acertar a data
+                            //TODO: Cancelamento - Se for pasta por dia, tem que pegar a data de dentro do XML da NFe
                             DateTime dtEmissaoNFe = new DateTime(Convert.ToInt16("20" + cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
-                            //DateTime dtEmissaoNFe = DateTime.Now;
-                            
+                            //DateTime dtEmissaoNFe = DateTime.Now;                            
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);

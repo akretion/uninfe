@@ -679,6 +679,22 @@ namespace UniNFeLibrary
                         oReciboCons.tMed = tMed;
                         lstRecibo.Add(oReciboCons);
                     }
+
+                    //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
+                    //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
+                    //Wandrey 11/09/2009
+                    if (DateTime.Now.Subtract(dPedRec).Days >= 2)
+                    {
+                        string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
+                        string NomeArquivo = documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
+
+                        //Deletar o arquivo da pasta em processamento
+                        Auxiliar oAux = new Auxiliar();
+                        oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + Enums.PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo);
+
+                        //Deletar a NFE do arquivo de controle de fluxo
+                        this.ExcluirNfeFluxo(ChaveNFe);
+                    }
                 }
 
                 fsArquivo.Close(); //Fecha o arquivo XML

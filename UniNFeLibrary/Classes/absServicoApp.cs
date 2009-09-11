@@ -638,6 +638,9 @@ namespace UniNFeLibrary
 
                 for (int b = 0; b < lstArquivos.Count; b++)
                 {
+                    if (Auxiliar.FileInUse(lstArquivos[b]))
+                        continue;
+
                     oAux.ValidarAssinarXML(lstArquivos[b]);
                 }
 
