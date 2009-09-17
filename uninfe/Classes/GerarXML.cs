@@ -10,75 +10,6 @@ namespace uninfe
 {
     public class GerarXML : absGerarXML
     {
-        #region IniciarLoteNfe()
-        /// <summary>
-        /// Inicia a string do XML do Lote de notas fiscais
-        /// </summary>
-        /// <param name="intNumeroLote">Número do lote que será enviado</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>15/04/2009</date>
-        protected override void IniciarLoteNfe(Int32 intNumeroLote)
-        {
-            string cVersaoDados = "1.10";
-
-            strXMLLoteNfe = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-            strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" versao=\"" + cVersaoDados + "\">";
-            strXMLLoteNfe += "<idLote>" + intNumeroLote.ToString("000000000000000") + "</idLote>";
-        }
-
-        #endregion
-
-        #region InserirNFeLote()
-        /// <summary>
-        /// Insere o XML de Nota Fiscal passado por parâmetro na string do XML de Lote de NFe
-        /// </summary>
-        /// <param name="strArquivoNfe">Nome do arquivo XML de nota fiscal eletrônica a ser inserido no lote</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>15/04/2009</date>
-        protected override void InserirNFeLote(string strArquivoNfe)
-        {
-            try
-            {
-                string vNfeDadosMsg = this.oAux.XmlToString(strArquivoNfe);
-
-                //Separar somente o conteúdo a partir da tag <NFe> até </NFe>
-                Int32 nPosI = vNfeDadosMsg.IndexOf("<NFe");
-                Int32 nPosF = vNfeDadosMsg.Length - nPosI;
-                strXMLLoteNfe += vNfeDadosMsg.Substring(nPosI, nPosF);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-        #endregion
-
-        #region EncerrarLoteNfe()
-        /// <summary>
-        /// Encerra a string do XML de lote de notas fiscais eletrônicas
-        /// </summary>
-        /// <param name="intNumeroLote">Número do lote que será enviado</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>15/04/2009</date>
-        protected override void EncerrarLoteNfe(Int32 intNumeroLote)
-        {
-            strXMLLoteNfe += "</enviNFe>";
-
-            try
-            {
-                this.GerarXMLLote(intNumeroLote);
-            }
-            catch (IOException ex)
-            {
-                throw (ex);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-        #endregion
-
         #region CabecMsg()
         /// <summary>
         /// Gera uma string com o XML do cabeçalho dos dados a serem enviados para os serviços da NFe
@@ -111,48 +42,54 @@ namespace uninfe
         }
         #endregion
 
-        #region StatusServico()
+        #region Cancelamento()
         /// <summary>
-        /// Criar um arquivo XML com a estrutura necessária para consultar o status do serviço
+        /// 
         /// </summary>
-        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
-        /// <example>
-        /// string vPastaArq = this.CriaArqXMLStatusServico();
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public override string StatusServico(int tpEmis)
+        /// <param name="pFinalArqEnvio"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="chNFe"></param>
+        /// <param name="nProt"></param>
+        /// <param name="xJust"></param>
+        public override void Cancelamento(string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe, string nProt, string xJust)
         {
-            return this.StatusServico(tpEmis, ConfiguracaoApp.UFCod);
+            StringBuilder aXML = new StringBuilder();
+            aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            aXML.Append("<cancNFe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLCanc + "\">");
+            aXML.AppendFormat("<infCanc Id=\"ID{0}\">", chNFe);
+            aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
+            aXML.Append("<xServ>CANCELAR</xServ>");
+            aXML.AppendFormat("<chNFe>{0}</chNFe>", chNFe);
+            aXML.AppendFormat("<nProt>{0}</nProt>", nProt);
+            aXML.AppendFormat("<xJust>{0}</xJust>", xJust);
+            if (tpEmis != ConfiguracaoApp.tpEmis)
+                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
+            aXML.Append("</infCanc>");
+            aXML.Append("</cancNFe>");
+
+            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
         }
         #endregion
 
-        #region StatusServico() - Sobrecarga
-        public override string StatusServico(int tpEmis, int cUF)
+        #region Consulta
+        public override void Consulta(string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe)
         {
-            //TODO: CONFIG
-            string vDadosMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.07\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">"
-                + "<tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb>"
-                + "<cUF>" + cUF.ToString() + "</cUF>"
-                + "<tpEmis>" + tpEmis.ToString() + "</tpEmis>"  //danasa 9-2009
-                + "<xServ>STATUS</xServ>"
-                + "</consStatServ>";
+            StringBuilder aXML = new StringBuilder();
+            aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            aXML.Append("<consSitNFe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLPedSit + "\">");
+            aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
+            if (ConfiguracaoApp.tpEmis != tpEmis)
+                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //<<< opcional >>>
+            aXML.Append("<xServ>CONSULTAR</xServ>");
+            aXML.AppendFormat("<chNFe>{0}</chNFe>", chNFe);
+            aXML.Append("</consSitNFe>");
 
-            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
-                                    DateTime.Now.ToString("yyyyMMddThhmmss") +
-                                    ExtXml.PedSta;// "-ped-sta.xml";
-
-            StreamWriter SW = File.CreateText(_arquivo_saida);
-            SW.Write(vDadosMsg);
-            SW.Close();
-
-            return _arquivo_saida;
-        } 
+            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+        }
         #endregion
 
         #region ConsultaCadastro()
-
         /// <summary>
         /// Cria um arquivo XML com a estrutura necessária para consultar um cadastro
         /// Voce deve preencher o estado e mais um dos tres itens: CPNJ, IE ou CPF
@@ -164,12 +101,11 @@ namespace uninfe
         /// <returns>Retorna o caminho e nome do arquivo criado</returns>
         /// <by>Marcos Diez</by>
         /// <date>29/08/2009</date>
-        public string ConsultaCadastro(string uf, string cnpj, string ie, string cpf)
+        public string ConsultaCadastro(string pArquivo, string uf, string cnpj, string ie, string cpf)
         {
-            string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><ConsCad xmlns=\"" +
-                ConfiguracaoApp.nsURI +
-                "\" versao=\"1.01\"><infCons><xServ>CONS-CAD</xServ>";
-            string footer = "</infCons></ConsCad>";
+            string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                "<ConsCad xmlns=\"" + ConfiguracaoApp.nsURI +
+                "\" versao=\"" + ConfiguracaoApp.VersaoXMLConsCad + "\"><infCons><xServ>CONS-CAD</xServ>";
 
             cnpj = OnlyNumbers(cnpj);
             ie = OnlyNumbers(ie);
@@ -178,30 +114,27 @@ namespace uninfe
             StringBuilder saida = new StringBuilder();
             saida.Append(header);
             saida.AppendFormat("<UF>{0}</UF>", uf);
-            if (cnpj != null && cnpj != "")
+            if (!string.IsNullOrEmpty(cnpj))
             {
                 saida.AppendFormat("<CNPJ>{0}</CNPJ>", cnpj);
             }
-            if (ie != null && ie != "")
+            else
+            if (!string.IsNullOrEmpty(ie))
             {
                 saida.AppendFormat("<IE>{0}</IE>", ie);
             }
-            if (cpf != null && cpf != "")
+            else
+            if (!string.IsNullOrEmpty(cpf))
             {
                 saida.AppendFormat("<CPF>{0}</CPF>", cpf);
             }
-            saida.Append(footer);
+            saida.Append("</infCons></ConsCad>");
 
-            string _arquivo_saida = ConfiguracaoApp.vPastaXMLEnvio + "\\" + 
-                                    DateTime.Now.ToString("yyyyMMddThhmmss") + 
-                                    ExtXml.ConsCad;// "-cons-cad.xml";
+            string _arquivo_saida = (string.IsNullOrEmpty(pArquivo) ? DateTime.Now.ToString("yyyyMMddThhmmss") + ExtXml.ConsCad : pArquivo);
 
-            StreamWriter SW = File.CreateText(_arquivo_saida);
-            //var output = saida.ToString();
-            SW.Write(saida.ToString());//output);
-            SW.Close();
-
-            return _arquivo_saida;
+            oAux.GravarArquivoParaEnvio(_arquivo_saida, saida.ToString());
+            
+            return ConfiguracaoApp.vPastaXMLEnvio + "\\" + _arquivo_saida;
         }
 
         /// <summary>
@@ -211,7 +144,7 @@ namespace uninfe
         /// <date>29/08/2009</date>
         private static string OnlyNumbers(string entrada)
         {
-            if (entrada == null) return null;
+            if (string.IsNullOrEmpty(entrada)) return null;
             StringBuilder saida = new StringBuilder(entrada.Length);
             foreach (char c in entrada)
             {
@@ -222,8 +155,33 @@ namespace uninfe
             }
             return saida.ToString();
         }
+        #endregion  
+        
+        #region EncerrarLoteNfe()
+        /// <summary>
+        /// Encerra a string do XML de lote de notas fiscais eletrônicas
+        /// </summary>
+        /// <param name="intNumeroLote">Número do lote que será enviado</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>15/04/2009</date>
+        protected override void EncerrarLoteNfe(Int32 intNumeroLote)
+        {
+            strXMLLoteNfe += "</enviNFe>";
 
-#endregion  
+            try
+            {
+                this.GerarXMLLote(intNumeroLote);
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
 
         #region GravarRetornoEmTXT()
         //TODO: Documentar este método
@@ -316,6 +274,154 @@ namespace uninfe
             {
                 throw (ex);
             }
+        }
+        #endregion
+
+        #region IniciarLoteNfe()
+        /// <summary>
+        /// Inicia a string do XML do Lote de notas fiscais
+        /// </summary>
+        /// <param name="intNumeroLote">Número do lote que será enviado</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>15/04/2009</date>
+        protected override void IniciarLoteNfe(Int32 intNumeroLote)
+        {
+            string cVersaoDados = "1.10";
+
+            strXMLLoteNfe = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+            strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" versao=\"" + cVersaoDados + "\">";
+            strXMLLoteNfe += "<idLote>" + intNumeroLote.ToString("000000000000000") + "</idLote>";
+        }
+
+        #endregion
+
+        #region InserirNFeLote()
+        /// <summary>
+        /// Insere o XML de Nota Fiscal passado por parâmetro na string do XML de Lote de NFe
+        /// </summary>
+        /// <param name="strArquivoNfe">Nome do arquivo XML de nota fiscal eletrônica a ser inserido no lote</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>15/04/2009</date>
+        protected override void InserirNFeLote(string strArquivoNfe)
+        {
+            try
+            {
+                string vNfeDadosMsg = this.oAux.XmlToString(strArquivoNfe);
+
+                //Separar somente o conteúdo a partir da tag <NFe> até </NFe>
+                Int32 nPosI = vNfeDadosMsg.IndexOf("<NFe");
+                Int32 nPosF = vNfeDadosMsg.Length - nPosI;
+                strXMLLoteNfe += vNfeDadosMsg.Substring(nPosI, nPosF);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
+        #region Inutilizacao
+        public override void Inutilizacao(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF, int ano, string CNPJ, int mod, int serie, int nNFIni, int nNFFin, string xJust)
+        {
+            StringBuilder aXML = new StringBuilder();
+            aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+            aXML.Append("<inutNFe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLInut + "\">");
+            aXML.AppendFormat("<infInut Id=\"ID{0}{1}{2}{3}{4}{5}\">", cUF.ToString("00"), CNPJ, mod.ToString("00"), serie.ToString("000"), nNFIni.ToString("000000000"), nNFFin.ToString("000000000"));
+            aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
+            if (tpEmis != ConfiguracaoApp.tpEmis)
+                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
+            aXML.Append("<xServ>INUTILIZAR</xServ>");
+            aXML.AppendFormat("<cUF>{0}</cUF>", cUF.ToString("00"));
+            aXML.AppendFormat("<ano>{0}</ano>", ano.ToString("00"));
+            aXML.AppendFormat("<CNPJ>{0}</CNPJ>", CNPJ);
+            aXML.AppendFormat("<mod>{0}</mod>", mod.ToString("00"));
+            aXML.AppendFormat("<serie>{0}</serie>", serie);
+            aXML.AppendFormat("<nNFIni>{0}</nNFIni>", nNFIni);
+            aXML.AppendFormat("<nNFFin>{0}</nNFFin>", nNFFin);
+            aXML.AppendFormat("<xJust>{0}</xJust>", xJust);
+            aXML.Append("</infInut>");
+            aXML.Append("</inutNFe>");
+
+            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+        }
+        #endregion
+
+        #region LerXMLNFe()
+        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Nfe(Arquivo);
+
+            return oLerXML.oDadosNfe;
+        }
+        #endregion
+
+        #region LerXMLRecibo()
+        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Recibo(Arquivo);
+
+            return oLerXML.oDadosRec;
+        }
+        #endregion  
+
+        #region StatusServico()
+        /// <summary>
+        /// Criar um arquivo XML com a estrutura necessária para consultar o status do serviço
+        /// </summary>
+        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
+        /// <example>
+        /// string vPastaArq = this.CriaArqXMLStatusServico();
+        /// </example>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>17/06/2008</date>
+        public override string StatusServico(int tpEmis)
+        {
+            return this.StatusServico(tpEmis, ConfiguracaoApp.UFCod);
+        }
+        #endregion
+
+        #region StatusServico() - Sobrecarga
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tpEmis"></param>
+        /// <param name="cUF"></param>
+        /// <returns></returns>
+        public override string StatusServico(int tpEmis, int cUF)
+        {
+            string _arquivo_saida = DateTime.Now.ToString("yyyyMMddThhmmss") + ExtXml.PedSta;
+
+            this.StatusServico(_arquivo_saida, ConfiguracaoApp.tpAmb, tpEmis, cUF);
+
+            return ConfiguracaoApp.vPastaXMLEnvio + "\\" + _arquivo_saida;
+        }
+        #endregion
+
+        #region StatusServico() - Sobrecarga
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pArquivo"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="cUF"></param>
+        public override void StatusServico(string pArquivo, int tpAmb, int tpEmis, int cUF)
+        {
+            StringBuilder vDadosMsg = new StringBuilder();
+            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            vDadosMsg.Append("<consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
+            vDadosMsg.Append("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"" + ConfiguracaoApp.VersaoXMLStatusServico);
+            vDadosMsg.Append("\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">");
+            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
+            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
+            if (ConfiguracaoApp.tpEmis != tpEmis)
+                vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //danasa 9-2009
+            vDadosMsg.Append("<xServ>STATUS</xServ>");
+            vDadosMsg.Append("</consStatServ>");
+
+            oAux.GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());
         }
         #endregion
 
@@ -437,22 +543,24 @@ namespace uninfe
         /// <date>21/04/2009</date>
         public override void XmlPedRec(string strRecibo)
         {
-            string strXml = string.Empty;
-            string strNomeArqPedRec = ConfiguracaoApp.vPastaXMLEnvio + "\\" + strRecibo + ExtXml.PedRec;// "-ped-rec.xml";
+            string strNomeArqPedRec = ConfiguracaoApp.vPastaXMLEnvio + "\\" + strRecibo + ExtXml.PedRec;
             if (!File.Exists(strNomeArqPedRec))
             {
+                
                 //TODO: CONFIG
-                strXml += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<consReciNFe xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1.10\" xmlns=\"http://www.portalfiscal.inf.br/nfe\">" +
+                string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<consReciNFe xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "+
+                    "versao=\"" + ConfiguracaoApp.VersaoXMLPedRec + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">" +
                     "<tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb>" +
                     "<nRec>" + strRecibo + "</nRec>" +
                     "</consReciNFe>";
 
                 //Gravar o XML
-                MemoryStream oMemoryStream = Auxiliar.StringXmlToStream(strXml);
-                XmlDocument docProc = new XmlDocument();
-                docProc.Load(oMemoryStream);
-                docProc.Save(strNomeArqPedRec);
+                oAux.GravarArquivoParaEnvio(strNomeArqPedRec, strXml);
+                //MemoryStream oMemoryStream = Auxiliar.StringXmlToStream(strXml);
+                //XmlDocument docProc = new XmlDocument();
+                //docProc.Load(oMemoryStream);
+                //docProc.Save(strNomeArqPedRec);
             }
         }
         #endregion
@@ -510,25 +618,6 @@ namespace uninfe
             }
         }
         #endregion
-
-        #region LerXMLNFe()
-        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
-
-            return oLerXML.oDadosNfe;
-        }
-        #endregion
-
-        #region LerXMLRecibo()
-        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Recibo(Arquivo);
-
-            return oLerXML.oDadosRec;
-        }
-        #endregion   
+ 
     }
 }

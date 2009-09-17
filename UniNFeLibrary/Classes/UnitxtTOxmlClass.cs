@@ -17,13 +17,7 @@ namespace UniNFeLibrary
         #region --- public properties
         
         public List<txtTOxmlClassRetorno> cRetorno = new List<txtTOxmlClassRetorno>();
-        //public string Retorno { get; private set; }
         public string cMensagemErro { get; private set; }
-
-        /// <summary>
-        /// Chave da NFe já calculada e montada
-        /// </summary>
-        //public string ChaveNfe { get; private set; }
 
         #endregion
 
@@ -34,7 +28,6 @@ namespace UniNFeLibrary
         private int nNF = 0; //Numero Nf
         private int cNF = 0; //Código Numérico que compõe a Chave de Acesso
         private int cDV = 0; //Dígito Verificador da Chave de Acesso
-        //private int iControle = 1;
         private string cLinhaTXT = "";
         private int iLinhaLida = 0; //controla a linha que foi lida
 
@@ -90,9 +83,9 @@ namespace UniNFeLibrary
                     this.ProcessaNota(txt, cDestino);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                cMensagemErro = "Arquivo texto: " + cFile + Environment.NewLine + Environment.NewLine + Ex.Message;
+                cMensagemErro = "Arquivo texto: " + cFile + Environment.NewLine + Environment.NewLine + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 ///
                 /// danasa 8-2009
                 /// Exclui os XML convertidos
@@ -109,172 +102,14 @@ namespace UniNFeLibrary
             }
         }
 
-#if _used_
-        private String gera_chave(String cChave)
-        {
-            /* Function Criada por Marcos Paulo Gomes
-             * Funcção que retorna o DV da chave de acesso, para entender melhor a formula de cálculo do digito, veja a pagina 69 
-             * do manual de integração, tópico "CÁLCULO DO DÍGITO VERIFICADOR DA CHAVE DE ACESSO DA NF-e"
-             * 
-             */
-            int peso = 2;
-            int icont;
-            int total = 0;
-
-            for (icont = cChave.Length - 1; icont >= 0; icont--)
-            {
-                if (peso > 9) { peso = 2; }
-
-                total += Convert.ToInt16(cChave.Substring(icont, 1)) * peso;
-                peso++;
-
-            }
-            return cChave + (11 - (total % 11)).ToString();
-        }
-#endif
-
-        private string valida_elemento(string cElem, int iCampos)
-        {
-            /*
-             * cElem - Recebe o tipo de elemento que será validado
-             * iCampos - Recebe a quantidade de campos
-             */
-            string[,] aValidar = new string[88, 2];
-            string cRetorno = "OK";
-            int iPos = -1;
-            /* Gera uma array com a identficicação da linha e quantos campos tem que ter na linha, por exemplo:
-             * a linha com a identificação B deve ter 20 campos, caso a quantidade seja diferente disso é porqueo txt foi gerado
-             * errado, sendo assim ele gera uma exceção e devolve erro para a rotina principal
-             */
-            #region Definição de array para validação dos segmentos do arquivo txt
-            iPos++; aValidar[iPos, 0] = "NOTAFISCAL"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "A"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "B"; aValidar[iPos, 1] = "20";
-            iPos++; aValidar[iPos, 0] = "B13"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "B14"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "C"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "C02"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "C02a"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "C05"; aValidar[iPos, 1] = "13";
-            iPos++; aValidar[iPos, 0] = "D"; aValidar[iPos, 1] = "13";
-            iPos++; aValidar[iPos, 0] = "E"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "E02"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "E03"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "E05"; aValidar[iPos, 1] = "13";
-            iPos++; aValidar[iPos, 0] = "F"; aValidar[iPos, 1] = "10";
-            iPos++; aValidar[iPos, 0] = "G"; aValidar[iPos, 1] = "10";
-            iPos++; aValidar[iPos, 0] = "H"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "I"; aValidar[iPos, 1] = "19";
-            iPos++; aValidar[iPos, 0] = "I18"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "I25"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "J"; aValidar[iPos, 1] = "20";
-            iPos++; aValidar[iPos, 0] = "c"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "K"; aValidar[iPos, 1] = "7";
-            iPos++; aValidar[iPos, 0] = "L"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "L01"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "L105"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "L109"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "L114"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "L117"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "M"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "N"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "N02"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "N03"; aValidar[iPos, 1] = "14";
-            iPos++; aValidar[iPos, 0] = "N04"; aValidar[iPos, 1] = "9";
-            iPos++; aValidar[iPos, 0] = "N05"; aValidar[iPos, 1] = "10";
-            iPos++; aValidar[iPos, 0] = "N06"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "N07"; aValidar[iPos, 1] = "9";
-            iPos++; aValidar[iPos, 0] = "N08"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "N09"; aValidar[iPos, 1] = "15";
-            iPos++; aValidar[iPos, 0] = "N10"; aValidar[iPos, 1] = "15";
-            iPos++; aValidar[iPos, 0] = "O"; aValidar[iPos, 1] = "7";
-            iPos++; aValidar[iPos, 0] = "O07"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "O10"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "O11"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "O08"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "P"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "Q"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "Q02"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "Q03"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "Q04"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "Q05"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "Q07"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "Q10"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "R"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "R02"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "R04"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "S"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "S02"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "S03"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "S04"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "S05"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "S07"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "S09"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "T"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "T02"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "T04"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "U"; aValidar[iPos, 1] = "7";
-            iPos++; aValidar[iPos, 0] = "W"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "W02"; aValidar[iPos, 1] = "16";
-            iPos++; aValidar[iPos, 0] = "W17"; aValidar[iPos, 1] = "7";
-            iPos++; aValidar[iPos, 0] = "W23"; aValidar[iPos, 1] = "9";
-            iPos++; aValidar[iPos, 0] = "X"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "X03"; aValidar[iPos, 1] = "7";
-            iPos++; aValidar[iPos, 0] = "X04"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "X05"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "X11"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "X18"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "X22"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "X26"; aValidar[iPos, 1] = "8";
-            iPos++; aValidar[iPos, 0] = "X33"; aValidar[iPos, 1] = "3";
-            iPos++; aValidar[iPos, 0] = "Y"; aValidar[iPos, 1] = "2";
-            iPos++; aValidar[iPos, 0] = "Y02"; aValidar[iPos, 1] = "6";
-            iPos++; aValidar[iPos, 0] = "Y07"; aValidar[iPos, 1] = "5";
-            iPos++; aValidar[iPos, 0] = "Z"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "Z04"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "Z10"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "ZA"; aValidar[iPos, 1] = "4";
-            iPos++; aValidar[iPos, 0] = "ZB"; aValidar[iPos, 1] = "5";
-            #endregion
-
-            for (iPos = 0; iPos <= 87; iPos++)
-            {
-                if (cElem.ToUpper() == aValidar[iPos, 0])
-                {
-                    if (Convert.ToInt16(aValidar[iPos, 1])  != iCampos)
-                    {
-                        if ((aValidar[iPos, 0] == "I") && (iCampos == 19 || iCampos == 20))
-                            cRetorno = "OK";
-                        else
-                            cRetorno = "A quantidade de campos no segmento [" + cElem + "] é " + iCampos.ToString() + ", o correto é(são) " +
-                                            Convert.ToInt16(aValidar[iPos, 1]) + " campo(s).";
-                    }
-                }
-            }
-            return cRetorno;
-        }
-
         private string limpa_texto(string cTexto)
         {
-            //int iControle;
-            string cRetorno;
-            cRetorno = cTexto;
+            string cRetorno = cTexto;
             while (cRetorno.IndexOf("> ") > -1)
             {
                 cRetorno = cRetorno.Replace("> ",">");
-                
-                /*
-                for (iControle = 0; iControle < cTexto.Length; iControle++)
-                {
-                    if (cRetorno.IndexOf("> ") > -1)
-                    {
-                        //cRetorno.Substring(iControle
-                    }
-                }
-                 */
             }
             cRetorno = cRetorno.Replace(" />", "/>").Replace(" </", "</");
-//            cRetorno = cRetorno.Replace(" <", "<");
             return cRetorno;
         }
 
@@ -352,7 +187,8 @@ namespace UniNFeLibrary
             if (len > maxLength || len < minLength)
             {
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ter seu tamanho entre {2} e {3}" + 
-                                                    Environment.NewLine + 
+                                                    ". Conteudo: " + dataRow[field].ToString() +
+                                                    Environment.NewLine +
                                                     "\tLinha: {4}: Conteudo do segmento: {5}", 
                                                     segment, field, minLength, maxLength, iLinhaLida, cLinhaTXT) + Environment.NewLine;
             }
@@ -370,7 +206,17 @@ namespace UniNFeLibrary
         /// <param name="decimals"></param>
         private void Check(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength, int decimals)
         {
+            if (decimals > 0 && dataRow[field].ToString().Trim() == "")
+            {
+                ///
+                /// para campos numericos que estejam em branco, coloco um ZERO
+                /// 
+                dataRow[field] = "0." + ("0000000").Substring(0, decimals);
+
+                //cMensagemErro += segment+" = "+field+" X "+dataRow[field].ToString() + "\r\n";
+            }
             this.Check(segment, field, dataRow, optional, minLength, maxLength);
+
             if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
             {
                 int pos = dataRow[field].ToString().Trim().IndexOf(".") + 1;
@@ -421,6 +267,26 @@ namespace UniNFeLibrary
 
         #endregion
 
+        #region ConverToOEM
+        private string ConvertToOEM(string FBuffer)
+        {
+            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ");
+            const string FOEM = (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuA");
+            int L, P;
+            char X;
+            string result = "";
+
+            for (L = 0; L < FBuffer.Length; ++L)
+            {
+                X = (char)FBuffer[L];
+                P = FAnsi.IndexOf(X);
+                if (P >= 0) X = FOEM[P];
+                result += X;
+            }
+            return result;
+        }
+        #endregion
+
         /// <summary>
         /// Atribui ao elementos a um DataRow o conteudo do que fora lido do arquivo texto
         /// </summary>
@@ -433,7 +299,7 @@ namespace UniNFeLibrary
             {
                 if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
                 {
-                    dr[iLeitura - 1] = dados[iLeitura].Trim();
+                    dr[iLeitura - 1] = this.ConvertToOEM(dados[iLeitura].Trim());
                     result = true;
                 }
             }
@@ -470,8 +336,7 @@ namespace UniNFeLibrary
             int nElementos;
             int iLeitura;
             string[] dados;
-            //int iLacre = 1;
-            Int64 iTmp = 0; //Valores temporarios
+            Int64 iTmp = 0;
             bool vNovaNota = false;
             bool vTiraxFant = false;
             bool transpAdd = false;
@@ -586,7 +451,7 @@ namespace UniNFeLibrary
                                     if (dados[1].Trim() != "")
                                         drNFref[0] = dados[1].Trim(); //caso tenha o segmento B13 preenche o campo chave
 
-                                this.Check(dados[0], "CNPJ", drNFref, ObOp.Obrigatorio, 44, 44);
+                                this.Check(dados[0], "refNFe", drNFref, ObOp.Obrigatorio, 44, 44);
                             }
                             dsNfe.Tables["NFref"].Rows.Add(drNFref);
 
@@ -765,10 +630,12 @@ namespace UniNFeLibrary
                         #region -- E02
                         if (nElementos >= 1)
                             if (dados[1].Trim() != "")
+                            {
                                 drdest["CNPJ"] = dados[1].Trim();
+                                this.Check(dados[0], "CNPJ", drdest, ObOp.Obrigatorio, 14, 14);
+                            }
                         dsNfe.Tables["dest"].Rows.Add(drdest);
 
-                        this.Check(dados[0], "CNPJ", drdest, ObOp.Obrigatorio, 14, 14); 
                         break;
                         #endregion
 
@@ -2550,15 +2417,12 @@ namespace UniNFeLibrary
             dsNfe.Tables["ide"].Rows[0]["cDV"] = cDV.ToString("0");
             dsNfe.Tables["infNFe"].Rows[0]["Id"] = "NFe" + cChave;
             dsNfe.AcceptChanges();
-            //string xRetorno = cDestino + "\\" + cChave + "-nfe.xml";
-            //this.Retorno.Add(xRetorno);
-            //this.ChaveNfe.Add(cChave);
 
             StringWriter TextoXml = new StringWriter();
             TextoXml.NewLine = "";
 
             dsNfe.WriteXml(TextoXml, XmlWriteMode.IgnoreSchema);
-            //#region Invertendo a TAG IE do emitente e destinatario
+
             string sAux = limpa_texto(TextoXml.ToString());
 
             //remove os espacos entre as tags
@@ -2580,7 +2444,6 @@ namespace UniNFeLibrary
             while (TextoXml.ToString().IndexOf("</infAdProd><prod>") > -1)
             {
                 sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("\"><infAdProd>") + 2, TextoXml.ToString().IndexOf("</infAdProd><prod>") - TextoXml.ToString().IndexOf("\"><infAdProd>") + 10);
-                //MessageBox.Show(sAux);
 
                 if (TextoXml.ToString().IndexOf("</imposto></det>") == -1)
                     throw new Exception("tag </imposto> não encontrada");
@@ -2628,26 +2491,10 @@ namespace UniNFeLibrary
             if (sAux2.IndexOf("<IE>") == -1 && sAux2.IndexOf("<IE/>") == -1)
                 throw new Exception("tag <IE> não encontrada na tag <dest>");
 
-            //MessageBox.Show(sAux);
-            //MessageBox.Show(sAux2);
-
             if (sAux2.IndexOf("<IE>") == -1)
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE/>", TextoXml.ToString().IndexOf("<dest>")), sAux);
             else
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
-
-            //MessageBox.Show(TextoXml.ToString());
-
-            //TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
-            //TextWriter txtDestino = new StreamWriter(@Retorno);
-
-            //MessageBox.Show(TextoXml.GetStringBuilder().GetHashCode().ToString());
-            /*
-                            txtDestino.Write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + TextoXml.ToString());
-                            txtDestino.Flush();
-                            txtDestino.Close();
-              */
-            //            txt.Close();
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.LoadXml(TextoXml.ToString());
@@ -2655,9 +2502,6 @@ namespace UniNFeLibrary
             ///
             /// danasa 8-2009
             /// 
-            //this.Retorno = cDestino + "\\" + cChave + "-nfe.xml";
-            //this.ChaveNfe = cChave;
-            //XmlTextWriter xWriter = new XmlTextWriter(@Retorno, Encoding.UTF8);
             if (cDestino.Substring(cDestino.Length - 1, 1) == @"\")
                 cDestino = cDestino.Substring(0, cDestino.Length - 1);
 
@@ -2679,7 +2523,6 @@ namespace UniNFeLibrary
             /// Salva o XML convertido na pasta temporária
             /// 
             string strRetorno = cDestino + "\\convertidos\\" + cChave + ExtXml.Nfe;
-            //MessageBox.Show("salvando: " + strRetorno);
             XmlTextWriter xWriter = new XmlTextWriter(@strRetorno, Encoding.UTF8);
             xWriter.Formatting = Formatting.None;
             xdoc.Save(xWriter);

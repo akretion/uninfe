@@ -46,6 +46,10 @@ namespace UniNFeLibrary
         public abstract void StatusServico();
         #endregion
 
+        #region StatusServico(int tpEmis, int cUF)
+        public abstract string StatusServico(int tpEmis, int cUF);
+        #endregion
+
         #region Recepcao()
         public abstract void Recepcao();
         #endregion
@@ -106,10 +110,6 @@ namespace UniNFeLibrary
 
         #region XmlPedRec()
         public abstract void XmlPedRec(string nRec);
-        #endregion
-
-        #region VerStatusServico()
-        public abstract string VerStatusServico(int tpEmis, int cUF);
         #endregion
 
         #region AssinarValidarXMLNFe()
@@ -250,7 +250,7 @@ namespace UniNFeLibrary
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, "-nfe.err", ex.Message);
+                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, "-nfe.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
 
                 //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                 //forçar mover para a pasta de XML com erro neste ponto.
@@ -459,6 +459,11 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoInut();
         #endregion
 
+
+        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
+        {
+            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
+        }
         #endregion
     }
     #endregion

@@ -84,7 +84,7 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
-                    this.cErro = ex.Message;
+                    this.cErro = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
 
                 reader.Close();
@@ -203,7 +203,7 @@ namespace UniNFeLibrary
                 catch (Exception ex)
                 {
                     this.nRetornoTipoArq = 102;
-                    this.cRetornoTipoArq = ex.Message;
+                    this.cRetornoTipoArq = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 finally
                 {

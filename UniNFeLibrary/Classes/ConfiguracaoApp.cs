@@ -54,7 +54,11 @@ namespace UniNFeLibrary
         public static string VersaoXMLConsCad { get; set; }
         public static string VersaoXMLCabecMsg { get; set; }
         public static string NomePastaXMLAssinado { get; private set; }
-
+        public static bool Proxy { get; set; }
+        public static string ProxyServidor { get; set; }
+        public static string ProxyUsuario { get; set; }
+        public static string ProxySenha { get; set; }
+        public static int ProxyPorta { get; set; }
 
         private static DiretorioSalvarComo mDiretorioSalvarComo = "";
         /// <summary>
@@ -220,10 +224,10 @@ namespace UniNFeLibrary
                     if (Directory.Exists(ConfiguracaoApp.vPastaXMLRetorno))
                     {
                         Auxiliar oAux = new Auxiliar();
-                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err", ex.Message);
+                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
                     }
                     else
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show((ex.InnerException != null ? ex.InnerException.Message : ex.Message));
                 }
                 finally
                 {
@@ -277,6 +281,11 @@ namespace UniNFeLibrary
                     oXmlGravar.WriteElementString("GravarRetornoTXTNFe", ConfiguracaoApp.GravarRetornoTXTNFe.ToString());
                     oXmlGravar.WriteElementString("DiretorioSalvarComo", ConfiguracaoApp.DiretorioSalvarComo.ToString());
                     oXmlGravar.WriteElementString("DiasLimpeza", ConfiguracaoApp.DiasLimpeza.ToString());
+                    oXmlGravar.WriteElementString("Proxy", ConfiguracaoApp.Proxy.ToString());
+                    oXmlGravar.WriteElementString("ProxyServidor", ConfiguracaoApp.ProxyServidor);
+                    oXmlGravar.WriteElementString("ProxyUsuario", ConfiguracaoApp.ProxyUsuario);
+                    oXmlGravar.WriteElementString("ProxySenha", ConfiguracaoApp.ProxySenha);
+                    oXmlGravar.WriteElementString("ProxyPorta", ConfiguracaoApp.ProxyPorta.ToString());
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -284,7 +293,7 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
-                    ConfiguracaoApp.cErroGravarConfig = ex.Message;
+                    ConfiguracaoApp.cErroGravarConfig = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
             }
 
@@ -472,107 +481,182 @@ namespace UniNFeLibrary
 
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXml);
-
-                XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
-
-                foreach (XmlNode ConfUniNfeNode in ConfUniNfeList)
+                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 {
-                    XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
+                    #region Formato TXT
+                    List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXml);
+                    foreach (string texto in cLinhas)
+                    {
+                        string[] dados = texto.Split('|');
+                        int nElementos = dados.GetLength(0);
+                        if (nElementos <= 1)
+                            continue;
+                        switch (dados[0].ToLower())
+                        {
+                            case "pastaxmlenvio":
+                                ConfiguracaoApp.vPastaXMLEnvio = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastaxmlemlote":
+                                ConfiguracaoApp.cPastaXMLEmLote = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastaxmlretorno":
+                                ConfiguracaoApp.vPastaXMLRetorno = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastaxmlenviado": //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.vPastaXMLEnviado = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "" );
+                                lEncontrouTag = true;
+                                break;
+                            case "pastaxmlerro":    //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.vPastaXMLErro = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "unidadefederativacodigo": //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.UFCod = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                lEncontrouTag = true;
+                                break;
+                            case "ambientecodigo":  //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.tpAmb = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 1);
+                                lEncontrouTag = true;
+                                break;
+                            case "tpemis":  //Se a tag <tpEmis> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.tpEmis = (nElementos==2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                lEncontrouTag = true;
+                                break;
+                            case "nomeempresa": //Se a tag <NomeEmpresa> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.cNomeEmpresa = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastabackup": //Se a tag <PastaBackup> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.cPastaBackup = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastavalidar":    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.PastaValidar = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "gravarretornotxtnfe": //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.GravarRetornoTXTNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
+                                lEncontrouTag = true;
+                                break;
+                            case "diretoriosalvarcomo": //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.DiretorioSalvarComo = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "diaslimpeza": //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.DiasLimpeza = (nElementos==2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                lEncontrouTag = true;
+                                break;
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    #region Formato XML
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXml);
 
-                    //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio").Count != 0)
-                    {
-                        ConfiguracaoApp.vPastaXMLEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote").Count != 0)
-                    {
-                        ConfiguracaoApp.cPastaXMLEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno").Count != 0)
-                    {
-                        ConfiguracaoApp.vPastaXMLRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado").Count != 0)
-                    {
-                        ConfiguracaoApp.vPastaXMLEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro").Count != 0)
-                    {
-                        ConfiguracaoApp.vPastaXMLErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo").Count != 0)
-                    {
-                        ConfiguracaoApp.UFCod = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo").Count != 0)
-                    {
-                        ConfiguracaoApp.tpAmb = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <tpEmis> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("tpEmis").Count != 0)
-                    {
-                        ConfiguracaoApp.tpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <NomeEmpresa> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa").Count != 0)
-                    {
-                        ConfiguracaoApp.cNomeEmpresa = ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa")[0].InnerText;
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaBackup").Count != 0)
-                    {
-                        ConfiguracaoApp.cPastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaBackup")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("PastaValidar").Count != 0)
-                    {
-                        ConfiguracaoApp.PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaValidar")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
-                    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe").Count != 0)
-                    {
-                        ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
+                    XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
 
-                    //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo").Count != 0)
+                    foreach (XmlNode ConfUniNfeNode in ConfUniNfeList)
                     {
-                        ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo")[0].InnerText);
-                        lEncontrouTag = true;
-                    }
+                        XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
 
-                    //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
-                    if (ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza").Count != 0)
-                    {
-                        ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza")[0].InnerText);
-                        lEncontrouTag = true;
+                        //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio").Count != 0)
+                        {
+                            ConfiguracaoApp.vPastaXMLEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnvio")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote").Count != 0)
+                        {
+                            ConfiguracaoApp.cPastaXMLEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno").Count != 0)
+                        {
+                            ConfiguracaoApp.vPastaXMLRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlRetorno")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado").Count != 0)
+                        {
+                            ConfiguracaoApp.vPastaXMLEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlEnviado")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro").Count != 0)
+                        {
+                            ConfiguracaoApp.vPastaXMLErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaXmlErro")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo").Count != 0)
+                        {
+                            ConfiguracaoApp.UFCod = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("UnidadeFederativaCodigo")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo").Count != 0)
+                        {
+                            ConfiguracaoApp.tpAmb = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("AmbienteCodigo")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <tpEmis> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            ConfiguracaoApp.tpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <NomeEmpresa> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa").Count != 0)
+                        {
+                            ConfiguracaoApp.cNomeEmpresa = ConfUniNfeElemento.GetElementsByTagName("NomeEmpresa")[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaBackup> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaBackup").Count != 0)
+                        {
+                            ConfiguracaoApp.cPastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaBackup")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaValidar").Count != 0)
+                        {
+                            ConfiguracaoApp.PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaValidar")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe").Count != 0)
+                        {
+                            ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName("GravarRetornoTXTNFe")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo").Count != 0)
+                        {
+                            ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(ConfUniNfeElemento.GetElementsByTagName("DiretorioSalvarComo")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza").Count != 0)
+                        {
+                            ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
                     }
+                    #endregion
                 }
             }
             catch (Exception ex)
             {
                 cStat = "2";
-                xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + InfoApp.NomeAplicacao() + ": " + ex.Message;
+                xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + InfoApp.NomeAplicacao() + ": " + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 lErro = true;
             }
 
@@ -580,7 +664,7 @@ namespace UniNFeLibrary
             {
                 if (lErro == false)
                 {
-                    if (this.ValidarConfig() == false || this.GravarConfig() == false)
+                    if (/*this.ValidarConfig() == false ||*/ this.GravarConfig() == false)
                     {
                         cStat = "2";
                         xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + InfoApp.NomeAplicacao() + ": " + ConfiguracaoApp.cErroGravarConfig;
@@ -610,6 +694,9 @@ namespace UniNFeLibrary
 
             //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
             string cArqRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\uninfe-ret-alt-con.xml";
+            if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                cArqRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\uninfe-ret-alt-con.txt";
+
             try
             {
                 FileInfo oArqRetorno = new FileInfo(cArqRetorno);
@@ -618,25 +705,32 @@ namespace UniNFeLibrary
                     oArqRetorno.Delete();
                 }
 
-                XmlWriterSettings oSettings = new XmlWriterSettings();
-                UTF8Encoding c = new UTF8Encoding(false);
+                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                {
+                    File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n", Encoding.Default);
+                }
+                else
+                {
+                    XmlWriterSettings oSettings = new XmlWriterSettings();
+                    UTF8Encoding c = new UTF8Encoding(false);
 
-                oSettings.Encoding = c;
-                oSettings.Indent = true;
-                oSettings.IndentChars = "";
-                oSettings.NewLineOnAttributes = false;
-                oSettings.OmitXmlDeclaration = false;
+                    oSettings.Encoding = c;
+                    oSettings.Indent = true;
+                    oSettings.IndentChars = "";
+                    oSettings.NewLineOnAttributes = false;
+                    oSettings.OmitXmlDeclaration = false;
 
-                XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
+                    XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
 
-                oXmlGravar.WriteStartDocument();
-                oXmlGravar.WriteStartElement("retAltConfUniNFe");
-                oXmlGravar.WriteElementString("cStat", cStat);
-                oXmlGravar.WriteElementString("xMotivo", xMotivo);
-                oXmlGravar.WriteEndElement(); //retAltConfUniNFe
-                oXmlGravar.WriteEndDocument();
-                oXmlGravar.Flush();
-                oXmlGravar.Close();
+                    oXmlGravar.WriteStartDocument();
+                    oXmlGravar.WriteStartElement("retAltConfUniNFe");
+                    oXmlGravar.WriteElementString("cStat", cStat);
+                    oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                    oXmlGravar.WriteEndElement(); //retAltConfUniNFe
+                    oXmlGravar.WriteEndDocument();
+                    oXmlGravar.Flush();
+                    oXmlGravar.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -645,7 +739,7 @@ namespace UniNFeLibrary
                 /// danasa 8-2009
                 /// 
                 Auxiliar oAux = new Auxiliar();
-                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
+                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
             }
             //Deletar o arquivo de configurações automáticas gerado pelo ERP
             FileInfo oArqReconf = new FileInfo(cArquivoXml);

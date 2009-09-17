@@ -2092,5 +2092,25 @@ namespace uninfe.Properties {
                 return ((string)(this["uninfe_wsDFPConsultaCadastro_CadConsultaCadastro"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro")]
+        public string uninfe_wsMGPConsultaCadastro_CadConsultaCadastro {
+            get {
+                return ((string)(this["uninfe_wsMGPConsultaCadastro_CadConsultaCadastro"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hnfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro")]
+        public string uninfe_wsMGHConsultaCadastro_CadConsultaCadastro {
+            get {
+                return ((string)(this["uninfe_wsMGHConsultaCadastro_CadConsultaCadastro"]));
+            }
+        }
     }
 }

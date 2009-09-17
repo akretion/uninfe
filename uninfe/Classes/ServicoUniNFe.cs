@@ -66,21 +66,6 @@ namespace uninfe
                     //Deu tudo certo com a conversão
                     if (oUniTxtToXml.cMensagemErro == string.Empty)
                     {
-#if _old_
-                        //Gravar o retorno para o ERP em formato TXT
-                        string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                          oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") +
-                                          "-nfe.txt";
-
-                        string cTexto = "cStat=01\r\n"+
-                            "xMotivo=Convertido com sucesso\r\n" +
-                            "ChaveNfe=" + oUniTxtToXml.ChaveNfe;
-
-                        File.WriteAllText(cArqErro, cTexto, Encoding.Default);
-
-                        FileInfo oArquivo = new FileInfo(lstArquivos[i]);
-                        oArquivo.Delete();
-#else
                         ///
                         /// danasa 8-2009
                         /// 
@@ -133,24 +118,9 @@ namespace uninfe
                                 oArquivo.MoveTo(vNomeArquivoDestino);
                             }
                         }
-#endif
                     }
                     else
                     {
-#if _old_
-                        //Gravar o retorno para o ERP em formato TXT com o erro ocorrido
-                        string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                          oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") +
-                                          "-nfe.err";
-
-                        string cTexto = "cStat=99\r\n"+
-                            "xMotivo=Falha na conversão\r\n" +
-                            "MensagemErro=" + oUniTxtToXml.cMensagemErro;
-
-                        File.WriteAllText(cArqErro, cTexto, Encoding.Default);
-
-                        oAux.MoveArqErro(lstArquivos[i], ".txt");
-#else
                         ///
                         /// danasa 8-2009
                         /// 
@@ -166,16 +136,13 @@ namespace uninfe
                         {
                             oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnvio + "\\convertidos\\" + txtClass.XMLFileName);
                         }
-#endif
                     }
-#if !_old_
                     ///
                     /// danasa 8-2009
                     /// 
                     /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
                     /// 
                     oAux.GravarArqErroERP(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension, ccMessage);
-#endif
                 }
             }
             catch (Exception ex)

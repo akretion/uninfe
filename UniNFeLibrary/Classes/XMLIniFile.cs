@@ -123,22 +123,25 @@ namespace UniNFeLibrary
 
                 Modified = false;
 			}
-			catch( Exception ex )
+			catch//( Exception ex )
 			{
-				MessageBox.Show( "Save: "+ex.Message );
+				//MessageBox.Show( "Save: "+ex.Message );
 			}
 		}
 
 		public void SaveAs(string filename)
 		{
+            if (string.IsNullOrEmpty(filename))
+                return;
+
 			try
 			{
 				xmldoc.Save(filename);
                 Modified = false;
             }
-			catch(Exception ex)
+			catch//(Exception ex)
 			{
-				MessageBox.Show("SaveAs: "+ex.Message);
+				//MessageBox.Show("SaveAs: "+ex.Message);
 			}
 		}
 
@@ -796,7 +799,7 @@ namespace UniNFeLibrary
 		protected XmlNode GetPathNode(string NodePath, bool CanCreate)
 		{
 			XmlNode lnode;
-			XmlNode Result;
+			XmlNode Result = null;
 			ArrayList s1 = new ArrayList();
 
 			CheckInitialized();
@@ -821,9 +824,10 @@ namespace UniNFeLibrary
 						}
 				}
 			}
-			catch (Exception ex)
+			catch// (Exception ex)
 			{
-				MessageBox.Show("Erro em 'GetNodePath()': "+ex.Message);
+                Result = null;
+				//MessageBox.Show("Erro em 'GetNodePath()': "+ex.Message);
 			}
 			return Result;
 		}

@@ -488,6 +488,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\wsMGHConsultaCadastro\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\wsMGHConsulta\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -514,6 +519,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\wsMGPCancelamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMGPConsultaCadastro\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1347,6 +1357,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsDFPStatusServico_NfeStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://hnfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMGHConsultaCadastro\</RelPath>
+      <UpdateFromURL>https://hnfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsMGHConsultaCadastro_CadConsultaCadastro</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hnfe.fazenda.mg.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -2216,6 +2237,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>uninfe_wsMTHStatusServico_NfeStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMGPConsultaCadastro\</RelPath>
+      <UpdateFromURL>https://nfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>uninfe_wsMGPConsultaCadastro_CadConsultaCadastro</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfe.fazenda.mg.gov.br/nfe/services/NfeCancelamento%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -4321,6 +4353,16 @@
     </None>
     <None Include="Web References\wsGOPConsultaCadastro\CadConsultaCadastro.wsdl" />
     <None Include="Web References\wsGOPConsultaCadastro\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMGHConsultaCadastro\CadConsultaCadastro.wsdl" />
+    <None Include="Web References\wsMGHConsultaCadastro\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMGPConsultaCadastro\CadConsultaCadastro.wsdl" />
+    <None Include="Web References\wsMGPConsultaCadastro\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

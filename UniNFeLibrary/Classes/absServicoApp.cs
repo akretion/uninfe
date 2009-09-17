@@ -49,21 +49,29 @@ namespace UniNFeLibrary
                 case Servicos.CancelarNFe:
                     strMetodo = "Cancelamento";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedCan);
+                    // danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedCan_TXT));
                     goto default;
 
                 case Servicos.InutilizarNumerosNFe:
                     strMetodo = "Inutilizacao";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedInu);
+                    // danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedInu_TXT));
                     goto default;
 
                 case Servicos.PedidoConsultaSituacaoNFe:
                     strMetodo = "Consulta";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedSit);
+                    // danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedSit_TXT));
                     goto default;
 
                 case Servicos.PedidoConsultaStatusServicoNFe:
                     strMetodo = "StatusServico";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedSta);
+                    // danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedSta_TXT));
                     goto default;
 
                 case Servicos.PedidoSituacaoLoteNFe:
@@ -75,16 +83,22 @@ namespace UniNFeLibrary
                 case Servicos.ConsultaCadastroContribuinte:
                     strMetodo = "ConsultaCadastro";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.ConsCad);
+                    // danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.ConsCad_TXT));
                     goto default;
 
                 case Servicos.ConsultaInformacoesUniNFe:
                     strMetodo = "GravarXMLDadosCertificado";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.ConsInf);
+                    //danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.ConsInf_TXT));
                     goto default;
 
                 case Servicos.AlterarConfiguracoesUniNFe:
                     strMetodo = "ReconfigurarUniNfe";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.AltCon);
+                    //danasa 12-9-2009
+                    lstArquivos.AddRange(this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.AltCon_TXT));
                     goto default;
 
                 case Servicos.AssinarNFePastaEnvio:
@@ -147,14 +161,14 @@ namespace UniNFeLibrary
                             ///
                             /// danasa 9-2009
                             /// 
-                            cError = ex.Message;
+                            cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                         }
                         catch (Exception ex)
                         {
                             ///
                             /// danasa 9-2009
                             /// 
-                            cError = ex.Message;
+                            cError = (ex.InnerException != null ? ex.InnerException.Message: ex.Message);
                         }
                         ///
                         /// danasa 9-2009
@@ -189,8 +203,7 @@ namespace UniNFeLibrary
             Type tipoServico = oNfe.GetType();
 
             //Monta a lista de XML´s encontrados na pasta
-            List<string> lstArquivos = new List<string>();
-            lstArquivos = this.ArquivosPasta(strPasta, "*" + ExtXml.Nfe);
+            List<string> lstArquivos = this.ArquivosPasta(strPasta, "*" + ExtXml.Nfe);
 
             //Assinar, Validar, Enviar ou somente processar os arquivos XML encontrados na pasta de envio
             for (int i = 0; i < lstArquivos.Count; i++)
@@ -211,12 +224,12 @@ namespace UniNFeLibrary
                 catch (IOException ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 catch (Exception ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 ///
                 /// danasa 9-2009
@@ -245,6 +258,11 @@ namespace UniNFeLibrary
         /// <param name="oNfe">Objeto da classe UniNfeClass a ser utilizado nas operações</param>
         private void EnviarArquivo(string cArquivo, Object oNfe, string strMetodo)
         {
+            if (!InternetCS.IsConnectedToInternet())
+            {
+                //Registrar o erro da validação para o sistema ERP
+                throw new Exception("Sem conexão com a internet.\r\nMétodo: " + strMetodo + "\r\nArquivo: " + cArquivo);
+            }
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
 
@@ -311,13 +329,11 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    //throw (ex);
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    //throw (ex);
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 if (!string.IsNullOrEmpty(cError))
                 {
@@ -360,11 +376,11 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    cError = ex.Message;
+                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
                 ///
                 /// danasa 9-2009
@@ -457,12 +473,12 @@ namespace UniNFeLibrary
                                 }
                                 catch (IOException ex)
                                 {
-                                    MensagemErro += ex.Message + "\r\n";
+                                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                                     lTeveErro = true;
                                 }
                                 catch (Exception ex)
                                 {
-                                    MensagemErro += ex.Message + "\r\n";
+                                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                                     lTeveErro = true;
                                 }
 
@@ -487,12 +503,12 @@ namespace UniNFeLibrary
                     }
                     catch (IOException ex)
                     {
-                        MensagemErro += ex.Message + "\r\n";
+                        MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                         lTeveErro = true;
                     }
                     catch (Exception ex)
                     {
-                        MensagemErro += ex.Message + "\r\n";
+                        MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                         lTeveErro = true;
                     }
                 }
@@ -504,7 +520,7 @@ namespace UniNFeLibrary
                     }
 
                     lTeveErro = true;
-                    MensagemErro += ex.Message + "\r\n";
+                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                 }
 
                 //Deletar o arquivo de solicitão de montagem do lote de NFe
@@ -516,12 +532,12 @@ namespace UniNFeLibrary
                 catch (IOException ex)
                 {
                     lTeveErro = true;
-                    MensagemErro += ex.Message + "\r\n";
+                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                 }
                 catch (Exception ex)
                 {
                     lTeveErro = true;
-                    MensagemErro += ex.Message + "\r\n";
+                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
                 }
 
                 if (lTeveErro)
@@ -549,8 +565,12 @@ namespace UniNFeLibrary
 
             Auxiliar oAux = new Auxiliar();
 
-            oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                                            oAux.ExtrairNomeArq(ArquivoXml, ExtXml.ConsInf/*"-cons-inf.xml"*/) + "-ret-cons-inf.xml");
+            if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
+                oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                                                oAux.ExtrairNomeArq(ArquivoXml, ExtXml.ConsInf) + "-ret-cons-inf.txt");
+            else
+                oInfUniNfe.GravarXMLInformacoes(ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                                                oAux.ExtrairNomeArq(ArquivoXml, ExtXml.ConsInf) + "-ret-cons-inf.xml");
         }
         #endregion
 

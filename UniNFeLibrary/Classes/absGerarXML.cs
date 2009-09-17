@@ -381,6 +381,39 @@ namespace UniNFeLibrary
 
         #region Métodos para gerar o XML´s diversos
 
+        #region Cancelamento()
+        /// <summary>
+        /// Criar um arquivo XML com a estrutura necessária para cancelamento de uma nota
+        /// </summary>
+        /// <param name="pFinalArqEnvio"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="chNFe"></param>
+        /// <param name="nProt"></param>
+        /// <param name="xJust"></param>
+        public abstract void Cancelamento(string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe, string nProt, string xJust);
+        #endregion
+
+        #region Consulta()
+        public abstract void Consulta(string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe);
+        #endregion
+
+        #region Inutilizacao()
+        /// <summary>
+        /// Criar um arquivo XML com a estrutura necessária para inutilizacao de numeraca
+        /// </summary>
+        /// <param name="pFinalArqEnvio"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="ano"></param>
+        /// <param name="CNPJ"></param>
+        /// <param name="mod"></param>
+        /// <param name="serie"></param>
+        /// <param name="nNFIni"></param>
+        /// <param name="nNFFin"></param>
+        public abstract void Inutilizacao(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF, int ano, string CNPJ, int mod, int serie, int nNFIni, int nNFFin, string xJust);
+        #endregion
+
         #region StatusServico()
         /// <summary>
         /// Criar um arquivo XML com a estrutura necessária para consultar o status do serviço
@@ -395,7 +428,25 @@ namespace UniNFeLibrary
         #endregion
 
         #region StatusServico() - Sobrecarga
+        /// <summary>
+        /// Cria um arquivo XML com a estrutura necessária para consultar o status do serviço
+        /// </summary>
+        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
+        /// <param name="tpEmis"></param>
+        /// <param name="cUF"></param>
+        /// <returns></returns>
         public abstract string StatusServico(int tpEmis, int cUF);
+        #endregion
+
+        #region StatusServico() - Sobrecarga
+        /// <summary>
+        /// Cria um arquivo XML com a estrutura necessária para consultar o status do serviço
+        /// </summary>
+        /// <param name="pFinalArqEnvio"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="cUF"></param>
+        public abstract void StatusServico(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF);
         #endregion
 
         #region CabecMsg()

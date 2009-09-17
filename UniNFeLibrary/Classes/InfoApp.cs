@@ -5,6 +5,7 @@ using System.Xml;
 using System.Reflection;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace UniNFeLibrary
 {
@@ -146,48 +147,94 @@ namespace UniNFeLibrary
             //Gravar o XML com as informações do aplicativo
             try
             {
-                XmlWriterSettings oSettings = new XmlWriterSettings();
-                UTF8Encoding c = new UTF8Encoding(false);
+                if (Path.GetExtension(sArquivo).ToLower() == ".txt")
+                {
+                    StringBuilder aTXT = new StringBuilder();
+                    aTXT.AppendLine("cStat|" + cStat);
+                    aTXT.AppendLine("xMotivo|" + xMotivo);
+                    //Dados do certificado digital
+                    aTXT.AppendLine("sSubject|" + sSubject);
+                    aTXT.AppendLine("dValIni|" + sValIni);
+                    aTXT.AppendLine("dValFin|" + sValFin);
+                    //Dados gerais do Aplicativo
+                    aTXT.AppendLine("versao|" + InfoApp.Versao());
+                    aTXT.AppendLine("dUltModif|" + File.GetLastWriteTimeUtc(Application.ExecutablePath).ToString("dd/MM/yyyy hh:mm:ss"));
+                    //Dados das configurações do aplicativo
+                    aTXT.AppendLine("PastaBackup|" + (string.IsNullOrEmpty(ConfiguracaoApp.cPastaBackup) ? "" : ConfiguracaoApp.cPastaBackup));
+                    aTXT.AppendLine("PastaXmlEmLote|" + (string.IsNullOrEmpty(ConfiguracaoApp.cPastaXMLEmLote) ? "" : ConfiguracaoApp.cPastaXMLEmLote));
+                    aTXT.AppendLine("PastaXmlAssinado|" + (string.IsNullOrEmpty(ConfiguracaoApp.NomePastaXMLAssinado) ? "" : ConfiguracaoApp.NomePastaXMLAssinado));
+                    aTXT.AppendLine("PastaValidar|" + (string.IsNullOrEmpty(ConfiguracaoApp.PastaValidar) ? "" : ConfiguracaoApp.PastaValidar));
+                    aTXT.AppendLine("PastaXmlEnviado|" + (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnviado) ? "" : ConfiguracaoApp.vPastaXMLEnviado));
+                    aTXT.AppendLine("PastaXmlEnvio|" + (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnvio) ? "" : ConfiguracaoApp.vPastaXMLEnvio));
+                    aTXT.AppendLine("PastaXmlErro|" + (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLErro) ? "" : ConfiguracaoApp.vPastaXMLErro));
+                    aTXT.AppendLine("PastaXmlRetorno|" + (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLRetorno) ? "" : ConfiguracaoApp.vPastaXMLRetorno));
+                    aTXT.AppendLine("DiasParaLimpeza|" + ConfiguracaoApp.DiasLimpeza.ToString());
+                    aTXT.AppendLine("DiretorioSalvarComo|" + ConfiguracaoApp.DiretorioSalvarComo.ToString());
+                    aTXT.AppendLine("GravarRetornoTXTNFe|" + ConfiguracaoApp.GravarRetornoTXTNFe.ToString());
+                    aTXT.AppendLine("AmbienteCodigo|" + ConfiguracaoApp.tpAmb.ToString());
+                    aTXT.AppendLine("tpEmis|" + ConfiguracaoApp.tpEmis.ToString());
+                    aTXT.AppendLine("UnidadeFederativaCodigo|" + ConfiguracaoApp.UFCod.ToString());
 
-                //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-                oSettings.Encoding = c;
-                oSettings.Indent = true;
-                oSettings.IndentChars = "";
-                oSettings.NewLineOnAttributes = false;
-                oSettings.OmitXmlDeclaration = false;
+                    File.WriteAllText(sArquivo, aTXT.ToString(), Encoding.Default);
+                }
+                else
+                {
+                    XmlWriterSettings oSettings = new XmlWriterSettings();
+                    UTF8Encoding c = new UTF8Encoding(false);
 
-                //Agora vamos criar um XML Writer
-                XmlWriter oXmlGravar = XmlWriter.Create(sArquivo, oSettings);
+                    //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+                    oSettings.Encoding = c;
+                    oSettings.Indent = true;
+                    oSettings.IndentChars = "";
+                    oSettings.NewLineOnAttributes = false;
+                    oSettings.OmitXmlDeclaration = false;
 
-                //Abrir o XML
-                oXmlGravar.WriteStartDocument();
-                oXmlGravar.WriteStartElement("retConsInf");
-                oXmlGravar.WriteElementString("cStat", cStat);
-                oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                    //Agora vamos criar um XML Writer
+                    XmlWriter oXmlGravar = XmlWriter.Create(sArquivo, oSettings);
 
-                //Dados do certificado digital
-                oXmlGravar.WriteStartElement("DadosCertificado");
-                oXmlGravar.WriteElementString("sSubject", sSubject);
-                oXmlGravar.WriteElementString("dValIni", sValIni);
-                oXmlGravar.WriteElementString("dValFin", sValFin);
-                oXmlGravar.WriteEndElement(); //DadosCertificado                
+                    //Abrir o XML
+                    oXmlGravar.WriteStartDocument();
+                    oXmlGravar.WriteStartElement("retConsInf");
+                    oXmlGravar.WriteElementString("cStat", cStat);
+                    oXmlGravar.WriteElementString("xMotivo", xMotivo);
 
-                //Dados gerais do Aplicativo
-                oXmlGravar.WriteStartElement("DadosUniNfe");
-                oXmlGravar.WriteElementString("versao", InfoApp.Versao());
-                oXmlGravar.WriteElementString("dUltModif", File.GetLastWriteTimeUtc(Application.ExecutablePath).ToString("dd/MM/yyyy hh:mm:ss"));
-                oXmlGravar.WriteEndElement(); //DadosUniNfe
+                    //Dados do certificado digital
+                    oXmlGravar.WriteStartElement("DadosCertificado");
+                    oXmlGravar.WriteElementString("sSubject", sSubject);
+                    oXmlGravar.WriteElementString("dValIni", sValIni);
+                    oXmlGravar.WriteElementString("dValFin", sValFin);
+                    oXmlGravar.WriteEndElement(); //DadosCertificado                
 
-                //Dados das configurações do aplicativo
-                oXmlGravar.WriteStartElement("nfe_configuracoes");
-                oXmlGravar.WriteElementString("PastaBackup", ConfiguracaoApp.cPastaBackup);
-                oXmlGravar.WriteEndElement(); //nfe_configuracoes
+                    //Dados gerais do Aplicativo
+                    oXmlGravar.WriteStartElement("DadosUniNfe");
+                    oXmlGravar.WriteElementString("versao", InfoApp.Versao());
+                    oXmlGravar.WriteElementString("dUltModif", File.GetLastWriteTimeUtc(Application.ExecutablePath).ToString("dd/MM/yyyy hh:mm:ss"));
+                    oXmlGravar.WriteEndElement(); //DadosUniNfe
 
-                //Finalizar o XML
-                oXmlGravar.WriteEndElement(); //retConsInf
-                oXmlGravar.WriteEndDocument();
-                oXmlGravar.Flush();
-                oXmlGravar.Close();
+                    //Dados das configurações do aplicativo
+                    oXmlGravar.WriteStartElement("nfe_configuracoes");
+                    oXmlGravar.WriteElementString("PastaBackup", (string.IsNullOrEmpty(ConfiguracaoApp.cPastaBackup) ? "" : ConfiguracaoApp.cPastaBackup));
+                    oXmlGravar.WriteElementString("PastaXmlEmLote", (string.IsNullOrEmpty(ConfiguracaoApp.cPastaXMLEmLote) ? "" : ConfiguracaoApp.cPastaXMLEmLote));
+                    oXmlGravar.WriteElementString("PastaXmlAssinado", (string.IsNullOrEmpty(ConfiguracaoApp.NomePastaXMLAssinado) ? "" : ConfiguracaoApp.NomePastaXMLAssinado));
+                    oXmlGravar.WriteElementString("PastaValidar", (string.IsNullOrEmpty(ConfiguracaoApp.PastaValidar) ? "" : ConfiguracaoApp.PastaValidar));
+                    oXmlGravar.WriteElementString("PastaXmlEnviado", (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnviado) ? "" : ConfiguracaoApp.vPastaXMLEnviado));
+                    oXmlGravar.WriteElementString("PastaXmlEnvio", (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnvio) ? "" : ConfiguracaoApp.vPastaXMLEnvio));
+                    oXmlGravar.WriteElementString("PastaXmlErro", (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLErro) ? "" : ConfiguracaoApp.vPastaXMLErro));
+                    oXmlGravar.WriteElementString("PastaXmlRetorno", (string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLRetorno) ? "" : ConfiguracaoApp.vPastaXMLRetorno));
+                    oXmlGravar.WriteElementString("DiasParaLimpeza", ConfiguracaoApp.DiasLimpeza.ToString());
+                    oXmlGravar.WriteElementString("DiretorioSalvarComo", ConfiguracaoApp.DiretorioSalvarComo.ToString());
+                    oXmlGravar.WriteElementString("GravarRetornoTXTNFe", ConfiguracaoApp.GravarRetornoTXTNFe.ToString());
+                    oXmlGravar.WriteElementString("AmbienteCodigo", ConfiguracaoApp.tpAmb.ToString());
+                    oXmlGravar.WriteElementString("tpEmis", ConfiguracaoApp.tpEmis.ToString());
+                    oXmlGravar.WriteElementString("UnidadeFederativaCodigo", ConfiguracaoApp.UFCod.ToString());
+                    oXmlGravar.WriteEndElement(); //nfe_configuracoes
+
+                    //Finalizar o XML
+                    oXmlGravar.WriteEndElement(); //retConsInf
+                    oXmlGravar.WriteEndDocument();
+                    oXmlGravar.Flush();
+                    oXmlGravar.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -195,7 +242,7 @@ namespace UniNFeLibrary
                 /// danasa 8-2009
                 /// 
                 Auxiliar oAux = new Auxiliar();
-                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(sArquivo) + ".err", ex.Message);
+                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(sArquivo) + ".err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
             }
         }
 
@@ -268,24 +315,140 @@ namespace UniNFeLibrary
 
             }
 
+            bool Executando = false;
             if (oneMutex == null)
             {
                 oneMutex = new System.Threading.Mutex(false, nomeMutex);
                 oOneMutex = oneMutex;
-
-                return false;
+                Executando = false;
             }
             else
+            {
+                oneMutex.Close();
+                Executando = true;
+            }
+
+            //Alem de verificar no Mutex, vamos fazer uma segunda verificação se passar pelo Mutax para 
+            //ter certeza que não está rodando, pois o mutax falha quando é executado por terminal server, quando
+            //é executado em duas máquinas diferentes. A opção seguinte dá a certeza.
+            bool OcorreuErro = false;
+            if (!Executando)
+            {
+                try
+                {
+                    Executando = AppExecutandoAux();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocorreu uma falha ao tentar verificar se uma instância do " + InfoApp.NomeAplicacao() + " já está sendo executada.\r\n\r\n" +
+                        "Erro ocorrido:\r\n" +
+                        ex.Message + "\r\n\r\n" +
+                        "O aplicativo não será inicializado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    OcorreuErro = true;
+                }
+            }
+
+            if (Executando)
             {
                 MessageBox.Show("Somente uma instância do " + InfoApp.NomeAplicacao() + " pode ser executada com o seguintes dados configurados:\r\n\r\n" +
                                 "Certificado: " + nomeEmpresaCertificado + "\r\n\r\n" +
                                 "Pasta Envio: " + nomePastaEnvioDemo + "\r\n\r\n" +
                                 "Já tem uma instância com estes dados em execução.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                oneMutex.Close();
-
-                return true;
             }
+
+            if (OcorreuErro)
+                Executando = true;
+
+            return Executando;
+        }
+
+        /// <summary>
+        /// Uma segunda forma de verificar se o UniNFe já está rodando é gerar o XML de consulta de informações
+        /// Se tiver retorno é pq já está sendo executando. Isso evita falhas quando é Terminal Server, quando está rodando o EXE em uma 
+        /// pasta diferente o EXE que está sendo executado neste exato momento mas está apontando para a mesma pasta de envio.
+        /// </summary>
+        /// <returns>Se está executando ou não</returns>
+        /// <date>16/09/2009</date>
+        /// <by>Wandrey Mundin Ferreira</by>
+        private static bool AppExecutandoAux()
+        {
+            bool Executando = false;
+
+            XmlWriterSettings oSettings = new XmlWriterSettings();
+            UTF8Encoding c = new UTF8Encoding(false);
+
+            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+            oSettings.Encoding = c;
+            oSettings.Indent = true;
+            oSettings.IndentChars = "";
+            oSettings.NewLineOnAttributes = false;
+            oSettings.OmitXmlDeclaration = false;
+            XmlWriter oXmlGravar = null;
+
+            try
+            {
+                string ArquivoConsulta = ConfiguracaoApp.vPastaXMLEnvio + "\\UniNfeRodando" + ExtXml.ConsInf;
+                string ArquivoRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.xml";
+                string ArquivoRetornoErr = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.err";
+
+                if (File.Exists(ArquivoConsulta) && !Auxiliar.FileInUse(ArquivoConsulta))
+                    File.Delete(ArquivoConsulta);
+
+                if (File.Exists(ArquivoRetorno) && !Auxiliar.FileInUse(ArquivoRetorno))
+                    File.Delete(ArquivoRetorno);
+
+                //Agora vamos criar um XML Writer
+                oXmlGravar = XmlWriter.Create(ArquivoConsulta, oSettings);
+
+                //Abrir o XML
+                oXmlGravar.WriteStartDocument();
+                oXmlGravar.WriteStartElement("ConsInf");
+                oXmlGravar.WriteElementString("xServ", "CONS-INF");
+                oXmlGravar.WriteEndElement(); //ConsInf
+                oXmlGravar.WriteEndDocument();
+                oXmlGravar.Flush();
+                oXmlGravar.Close();
+
+                int Contador = 0;
+                while (Contador < 10)
+                {
+                    if (File.Exists(ArquivoRetorno) || File.Exists(ArquivoRetornoErr))
+                    {
+                        if (File.Exists(ArquivoRetorno))
+                            File.Delete(ArquivoRetorno);
+
+                        if (File.Exists(ArquivoRetornoErr))
+                            File.Delete(ArquivoRetornoErr);
+
+                        Executando = true;
+                        break;
+                    }
+
+                    Thread.Sleep(1000);
+
+                    Contador++;
+                }
+
+                if (!Executando)
+                {
+                    if (!Auxiliar.FileInUse(ArquivoConsulta))
+                        File.Delete(ArquivoConsulta);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (oXmlGravar != null)
+                {
+                    oXmlGravar.Close();
+                }
+
+                Executando = false;
+
+                throw (ex);
+            }
+
+            return Executando;
         }
     }
 }

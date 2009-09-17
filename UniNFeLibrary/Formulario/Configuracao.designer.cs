@@ -90,6 +90,8 @@
             this.folderBrowserDialog_xmlenviolote = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_Validar = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblServidor = new System.Windows.Forms.Label();
+            this.tbServidor = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -593,6 +595,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.tbServidor);
+            this.tabPage4.Controls.Add(this.lblServidor);
             this.tabPage4.Controls.Add(this.nudPorta);
             this.tabPage4.Controls.Add(this.tbSenha);
             this.tabPage4.Controls.Add(this.tbUsuario);
@@ -679,6 +683,24 @@
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ShowAlways = true;
             this.toolTip1.ToolTipTitle = "As pastas informadas não podem se repetir";
+            // 
+            // lblServidor
+            // 
+            this.lblServidor.AutoSize = true;
+            this.lblServidor.Enabled = false;
+            this.lblServidor.Location = new System.Drawing.Point(6, 118);
+            this.lblServidor.Name = "lblServidor";
+            this.lblServidor.Size = new System.Drawing.Size(49, 13);
+            this.lblServidor.TabIndex = 7;
+            this.lblServidor.Text = "Servidor:";
+            // 
+            // tbServidor
+            // 
+            this.tbServidor.Enabled = false;
+            this.tbServidor.Location = new System.Drawing.Point(59, 115);
+            this.tbServidor.Name = "tbServidor";
+            this.tbServidor.Size = new System.Drawing.Size(327, 20);
+            this.tbServidor.TabIndex = 8;
             // 
             // Configuracao
             // 
@@ -775,5 +797,7 @@
         private System.Windows.Forms.ComboBox cboDiretorioSalvarComo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown udDiasLimpeza;
+        private System.Windows.Forms.TextBox tbServidor;
+        private System.Windows.Forms.Label lblServidor;
     }
 }

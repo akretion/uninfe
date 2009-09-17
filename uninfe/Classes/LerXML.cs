@@ -23,6 +23,79 @@ namespace uninfe
     /// </summary>
     public class LerXML : absLerXML
     {
+        public override void ConsCad(string cArquivoXML)
+        {
+            this.oDadosConsCad.CNPJ = string.Empty;
+            this.oDadosConsCad.IE = string.Empty;
+            this.oDadosConsCad.UF = string.Empty;
+
+            try
+            {
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                {
+                    List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXML);
+                    foreach (string cTexto in cLinhas)
+                    {
+                        string[] dados = cTexto.Split('|');
+                        switch (dados[0].ToLower())
+                        {
+                            case "cnpj":
+                                this.oDadosConsCad.CNPJ = dados[1].Trim();
+                                break;
+                            case "cpf":
+                                this.oDadosConsCad.CPF = dados[1].Trim();
+                                break;
+                            case "ie":
+                                this.oDadosConsCad.IE = dados[1].Trim();
+                                break;
+                            case "uf":
+                                this.oDadosConsCad.UF = dados[1].Trim();
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
+
+                    XmlNodeList ConsCadList = doc.GetElementsByTagName("ConsCad");
+                    foreach (XmlNode ConsCadNode in ConsCadList)
+                    {
+                        XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+
+                        XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
+
+                        foreach (XmlNode infConsNode in infConsList)
+                        {
+                            XmlElement infConsElemento = (XmlElement)infConsNode;
+
+                            if (infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
+                            {
+                                this.oDadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                            }
+                            if (infConsElemento.GetElementsByTagName("CPF")[0] != null)
+                            {
+                                this.oDadosConsCad.CPF = infConsElemento.GetElementsByTagName("CPF")[0].InnerText;
+                            }
+                            if (infConsElemento.GetElementsByTagName("UF")[0] != null)
+                            {
+                                this.oDadosConsCad.UF = infConsElemento.GetElementsByTagName("UF")[0].InnerText;
+                            }
+                            if (infConsElemento.GetElementsByTagName("IE")[0] != null)
+                            {
+                                this.oDadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
         /// <summary>
         /// Faz a leitura do XML da nota fiscal eletrônica e disponibiliza os valores
         /// de algumas tag´s
@@ -115,6 +188,395 @@ namespace uninfe
         }
 
         /// <summary>
+        /// PedCan(string cArquivoXML)
+        /// </summary>
+        /// <param name="cArquivoXML"></param>
+        public override void PedCanc(string cArquivoXML)
+        {
+            this.oDadosPedCanc.tpAmb = ConfiguracaoApp.tpAmb;
+            this.oDadosPedCanc.tpEmis = ConfiguracaoApp.tpEmis;
+
+            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            {
+                //      tpAmb|2
+                //      chNFe|35080699999090910270550000000000011234567890
+                //      nProt|135080000000001
+                //      xJust|Teste do WS de Cancelamento
+                //      tpEmis|1                                    <<< opcional >>>
+                List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXML);
+                foreach (string cTexto in cLinhas)
+                {
+                    string[] dados = cTexto.Split('|');
+                    switch (dados[0].ToLower())
+                    {
+                        case "tpamb":
+                            this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "chnfe":
+                            this.oDadosPedCanc.chNFe = dados[1].Trim();
+                            break;
+                        case "nprot":
+                            this.oDadosPedCanc.nProt = dados[1].Trim();
+                            break;
+                        case "xjust":
+                            this.oDadosPedCanc.xJust = dados[1].Trim();
+                            break;
+                        case "tpemis":
+                            this.oDadosPedCanc.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                //<?xml version="1.0" encoding="UTF-8"?>
+                //<cancNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+                //  <infCanc Id="ID35080699999090910270550000000000011234567890">
+                //      <tpAmb>2</tpAmb>
+                //      <xServ>CANCELAR</xServ>
+                //      <chNFe>35080699999090910270550000000000011234567890</chNFe>
+                //      <nProt>135080000000001</nProt>
+                //      <xJust>Teste do WS de Cancelamento</xJust>
+                //      <tpEmis>1</tpEmis>                                      <<< opcional >>>
+                //  </infCanc>}
+                //</cancNFe>
+                XmlDocument doc = new XmlDocument();
+                doc.Load(cArquivoXML);
+
+                XmlNodeList consStatServList = doc.GetElementsByTagName("infCanc");
+
+                foreach (XmlNode consStatServNode in consStatServList)
+                {
+                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
+
+                    this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+
+                    if (consStatServElemento.GetElementsByTagName("chNFe").Count != 0)
+                        this.oDadosPedCanc.chNFe = consStatServElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                    /*
+                    if (consStatServElemento.GetElementsByTagName("nProt").Count != 0)
+                        this.oDadosPedCanc.nProt = consStatServElemento.GetElementsByTagName("nProt")[0].InnerText;
+
+                    if (consStatServElemento.GetElementsByTagName("xJust").Count != 0)
+                        this.oDadosPedCanc.xJust = consStatServElemento.GetElementsByTagName("xJust")[0].InnerText;
+                    */
+                    ///
+                    /// danasa 12-9-2009
+                    /// 
+                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    {
+                        this.oDadosPedCanc.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        /// para que o validador não rejeite, excluo a tag <tpEmis>
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                        /// salvo o arquivo modificado
+                        doc.Save(cArquivoXML);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// PedInut(string cArquivoXML)
+        /// </summary>
+        /// <param name="cArquivoXML"></param>
+        public override void PedInut(string cArquivoXML)
+        {
+            this.oDadosPedInut.tpAmb = ConfiguracaoApp.tpAmb;
+            this.oDadosPedInut.tpEmis = ConfiguracaoApp.tpEmis;
+
+            try
+            {
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                {
+                    //      tpAmb|2
+                    //      tpEmis|1                <<< opcional >>>
+                    //      cUF|35
+                    //      ano|08
+                    //      CNPJ|99999090910270
+                    //      mod|55
+                    //      serie|0
+                    //      nNFIni|1
+                    //      nNFFin|1
+                    //      xJust|Teste do WS de Inutilizacao
+                    List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXML);
+                    foreach (string cTexto in cLinhas)
+                    {
+                        string[] dados = cTexto.Split('|');
+                        switch (dados[0].ToLower())
+                        {
+                            case "tpamb":
+                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "tpemis":
+                                this.oDadosPedInut.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "cuf":
+                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "ano":
+                                this.oDadosPedInut.ano = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "cnpj":
+                                this.oDadosPedInut.CNPJ = dados[1].Trim();
+                                break;
+                            case "mod":
+                                this.oDadosPedInut.mod = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "serie":
+                                this.oDadosPedInut.serie = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "nnfini":
+                                this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "nnffin":
+                                this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "xjust":
+                                this.oDadosPedInut.xJust = dados[1].Trim();
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    //<?xml version="1.0" encoding="UTF-8"?>
+                    //<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+                    //  <infInut Id="ID359999909091027055000000000001000000001">
+                    //      <tpAmb>2</tpAmb>
+                    //      <tpEmis>1</tpEmis>                  <<< opcional >>>
+                    //      <xServ>INUTILIZAR</xServ>
+                    //      <cUF>35</cUF>
+                    //      <ano>08</ano>
+                    //      <CNPJ>99999090910270</CNPJ>
+                    //      <mod>55</mod>
+                    //      <serie>0</serie>
+                    //      <nNFIni>1</nNFIni>
+                    //      <nNFFin>1</nNFFin>
+                    //      <xJust>Teste do WS de InutilizaÃ§Ã£o</xJust>
+                    //  </infInut>
+                    //</inutNFe>
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
+
+                    XmlNodeList ConsCadList = doc.GetElementsByTagName("inutNFe");
+                    foreach (XmlNode ConsCadNode in ConsCadList)
+                    {
+                        XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+
+                        XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infInut");
+
+                        foreach (XmlNode infConsNode in infConsList)
+                        {
+                            XmlElement infConsElemento = (XmlElement)infConsNode;
+
+                            if (infConsElemento.GetElementsByTagName("tpAmb")[0] != null)
+                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("cUF")[0] != null)
+                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("cUF")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("ano")[0] != null)
+                                this.oDadosPedInut.ano = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("ano")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
+                                this.oDadosPedInut.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+
+                            if (infConsElemento.GetElementsByTagName("mod")[0] != null)
+                                this.oDadosPedInut.mod = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("mod")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("serie")[0] != null)
+                                this.oDadosPedInut.serie = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("serie")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("nNFIni")[0] != null)
+                                this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("nNFIni")[0].InnerText);
+
+                            if (infConsElemento.GetElementsByTagName("nNFFin")[0] != null)
+                                this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("nNFFin")[0].InnerText);
+
+                            ///
+                            /// danasa 12-9-2009
+                            /// 
+                            if (infConsElemento.GetElementsByTagName("tpEmis").Count != 0)
+                            {
+                                this.oDadosPedInut.tpEmis = Convert.ToInt16(infConsElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                                /// para que o validador não rejeite, excluo a tag <tpEmis>
+                                doc.DocumentElement.RemoveChild(infConsElemento.GetElementsByTagName("tpEmis")[0]);
+                                /// salvo o arquivo modificado
+                                doc.Save(cArquivoXML);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        /// <summary>
+        /// Faz a leitura do XML de pedido de consulta da situação da NFe
+        /// </summary>
+        /// <param name="cArquivoXML">Nome do XML a ser lido</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        public override void PedSit(string cArquivoXML)
+        {
+            this.oDadosPedSit.tpAmb = ConfiguracaoApp.tpAmb;// string.Empty;
+            this.oDadosPedSit.chNFe = string.Empty;
+
+            try
+            {
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                {
+                    //      tpAmb|2
+                    //      tpEmis|1                <<< opcional >>>
+                    //      chNFe|35080600000000000000550000000000010000000000
+                    List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXML);
+                    foreach (string cTexto in cLinhas)
+                    {
+                        string[] dados = cTexto.Split('|');
+                        switch (dados[0].ToLower())
+                        {
+                            case "tpamb":
+                                this.oDadosPedSit.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "tpemis":
+                                this.oDadosPedSit.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "chnfe":
+                                this.oDadosPedSit.chNFe = dados[1].Trim();
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    //<?xml version="1.0" encoding="UTF-8"?>
+                    //<consSitNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+                    //  <tpAmb>2</tpAmb>
+                    //  <tpEmis>1</tpEmis>                          <<< opcional >>>
+                    //  <xServ>CONSULTAR</xServ>
+                    //  <chNFe>35080600000000000000550000000000010000000000</chNFe>
+                    //</consSitNFe>                  
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
+
+                    XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitNFe");
+
+                    foreach (XmlNode consSitNFeNode in consSitNFeList)
+                    {
+                        XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
+
+                        this.oDadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                        this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        ///
+                        /// danasa 12-9-2009
+                        /// 
+                        if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            this.oDadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <tpEmis>
+                            doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        /// <summary>
+        /// Faz a leitura do XML de pedido do status de serviço
+        /// </summary>
+        /// <param name="cArquivoXml">Nome do XML a ser lido</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        public override void PedSta(string cArquivoXML)
+        {
+            this.oDadosPedSta.tpAmb = 0;
+            this.oDadosPedSta.cUF = ConfiguracaoApp.UFCod;
+            ///
+            /// danasa 9-2009
+            /// Assume o que está na configuracao
+            /// 
+            this.oDadosPedSta.tpEmis = ConfiguracaoApp.tpEmis;
+
+            try
+            {
+                ///
+                /// danasa 12-9-2009
+                /// 
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                {
+                    // tpEmis|1						<<< opcional >>>
+                    // tpAmb|1
+                    // cUF|35
+                    List<string> cLinhas = new Auxiliar().LerArquivo(cArquivoXML);
+                    foreach (string cTexto in cLinhas)
+                    {
+                        string[] dados = cTexto.Split('|');
+                        switch (dados[0].ToLower())
+                        {
+                            case "tpamb":
+                                this.oDadosPedSta.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "cuf":
+                                this.oDadosPedSta.cUF = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                            case "tpemis":
+                                this.oDadosPedSta.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    //<?xml version="1.0" encoding="UTF-8"?>
+                    //<consStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+                    //  <tpAmb>2</tpAmb>
+                    //  <cUF>35</cUF>
+                    //  <xServ>STATUS</xServ>
+                    //</consStatServ>                    
+
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
+
+                    XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServ");
+
+                    foreach (XmlNode consStatServNode in consStatServList)
+                    {
+                        XmlElement consStatServElemento = (XmlElement)consStatServNode;
+
+                        this.oDadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+
+                        if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                        {
+                            this.oDadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
+                        }
+                        ///
+                        /// danasa 9-2009
+                        /// 
+                        if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            this.oDadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <tpEmis>
+                            doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        /// <summary>
         /// Faz a leitura do XML do Recibo do lote enviado e disponibiliza os valores
         /// de algumas tag´s
         /// </summary>
@@ -159,132 +621,6 @@ namespace uninfe
 
                         this.oDadosRec.nRec = infRecElemento.GetElementsByTagName("nRec")[0].InnerText;
                         this.oDadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-
-        /// <summary>
-        /// Faz a leitura do XML de pedido do status de serviço
-        /// </summary>
-        /// <param name="cArquivoXml">Nome do XML a ser lido</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        public override void PedSta(string cArquivoXML)
-        {
-            this.oDadosPedSta.tpAmb = string.Empty;
-            this.oDadosPedSta.cUF = ConfiguracaoApp.UFCod.ToString();
-            ///
-            /// danasa 9-2009
-            /// Assume o que está na configuracao
-            /// 
-            this.oDadosPedSta.tpEmis = ConfiguracaoApp.tpEmis;
-
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServ");
-
-                foreach (XmlNode consStatServNode in consStatServList)
-                {
-                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
-
-                    this.oDadosPedSta.tpAmb = consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-
-                    if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
-                    {
-                        this.oDadosPedSta.cUF = consStatServElemento.GetElementsByTagName("cUF")[0].InnerText;
-                    }
-
-                    ///
-                    /// danasa 9-2009
-                    /// 
-                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
-                    {
-                        this.oDadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                        /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
-                        /// salvo o arquivo modificado
-                        doc.Save(cArquivoXML);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-
-        /// <summary>
-        /// Faz a leitura do XML de pedido de consulta da situação da NFe
-        /// </summary>
-        /// <param name="cArquivoXML">Nome do XML a ser lido</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        public override void PedSit(string cArquivoXML)
-        {
-            this.oDadosPedSit.tpAmb = string.Empty;
-            this.oDadosPedSit.chNFe = string.Empty;
-
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitNFe");
-
-                foreach (XmlNode consSitNFeNode in consSitNFeList)
-                {
-                    XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
-
-                    this.oDadosPedSit.tpAmb = consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                    this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-
-        public override void ConsCad(string cArquivoXML)
-        {
-            oDadosConsCad.CNPJ = string.Empty;
-            this.oDadosConsCad.IE = string.Empty;
-            this.oDadosConsCad.UF = string.Empty;
-
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList ConsCadList = doc.GetElementsByTagName("ConsCad");
-                foreach (XmlNode ConsCadNode in ConsCadList)
-                {
-                    XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
-
-                    XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
-
-                    foreach (XmlNode infConsNode in infConsList)
-                    {
-                        XmlElement infConsElemento = (XmlElement)infConsNode;
-
-                        if (infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
-                        {
-                            this.oDadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                        }
-                        if (infConsElemento.GetElementsByTagName("UF")[0] != null)
-                        {
-                            this.oDadosConsCad.UF = infConsElemento.GetElementsByTagName("UF")[0].InnerText;
-                        }
-                        if (infConsElemento.GetElementsByTagName("IE")[0] != null)
-                        {
-                            this.oDadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
-                        }
                     }
                 }
             }

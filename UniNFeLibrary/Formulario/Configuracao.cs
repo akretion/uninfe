@@ -118,6 +118,12 @@ namespace UniNFeLibrary.Formulario
             this.oMeuCert = ConfiguracaoApp.oCertificado;
             this.DemonstraDadosCertificado();
 
+            this.cbProxy.Checked = ConfiguracaoApp.Proxy;
+            this.tbServidor.Text = ConfiguracaoApp.ProxyServidor;
+            this.tbUsuario.Text = ConfiguracaoApp.ProxyUsuario;
+            this.tbSenha.Text = ConfiguracaoApp.ProxySenha;
+            this.nudPorta.Value = ConfiguracaoApp.ProxyPorta;
+
             if (ConfiguracaoApp.cPastaBackup == "")
             {
                 this.textBox_PastaBackup.Text = "";
@@ -239,6 +245,11 @@ namespace UniNFeLibrary.Formulario
             ConfiguracaoApp.PastaValidar = this.tbPastaValidar.Text.Trim();
             ConfiguracaoApp.GravarRetornoTXTNFe = this.checkBoxRetornoNFETxt.Checked;
             ConfiguracaoApp.DiretorioSalvarComo = this.cboDiretorioSalvarComo.Text;
+            ConfiguracaoApp.Proxy = this.cbProxy.Checked;
+            ConfiguracaoApp.ProxyPorta = (int)this.nudPorta.Value;
+            ConfiguracaoApp.ProxySenha = this.tbSenha.Text;
+            ConfiguracaoApp.ProxyServidor = tbServidor.Text;
+            ConfiguracaoApp.ProxyUsuario = tbUsuario.Text;
 
             ConfiguracaoApp.DiasLimpeza = (int)udDiasLimpeza.Value;
             if (this.oMeuCert == null)
@@ -311,7 +322,6 @@ namespace UniNFeLibrary.Formulario
             }
 
         }
-        #endregion
 
         private void cbProxy_CheckedChanged(object sender, EventArgs e)
         {
@@ -320,18 +330,22 @@ namespace UniNFeLibrary.Formulario
                 lblPorta.Enabled = true;
                 lblSenha.Enabled = true;
                 lblUsuario.Enabled = true;
+                lblServidor.Enabled = true;
                 tbUsuario.Enabled = true;
                 tbSenha.Enabled = true;
                 nudPorta.Enabled = true;
+                tbServidor.Enabled = true;
             }
             else
             {
                 lblPorta.Enabled = false;
                 lblSenha.Enabled = false;
                 lblUsuario.Enabled = false;
+                lblServidor.Enabled = false;
                 tbUsuario.Enabled = false;
                 tbSenha.Enabled = false;
                 nudPorta.Enabled = false;
+                tbServidor.Enabled = false;
             }
         }
 
@@ -353,6 +367,7 @@ namespace UniNFeLibrary.Formulario
             iniFile.SaveForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
             iniFile.Save();
         }
+        #endregion
     }
     #endregion
 }

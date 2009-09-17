@@ -45,8 +45,8 @@ namespace uninfe.Formulario
             arrUF.Add(new ComboElem("ES", 32, "Espirito Santo"));
             arrUF.Add(new ComboElem("GO", 52, "Goias"));
             arrUF.Add(new ComboElem("MA", 21, "Maranhão"));
-            arrUF.Add(new ComboElem("MT", 50, "Mato Grosso"));
-            arrUF.Add(new ComboElem("MS", 51, "Mato Grosso do Sul"));
+            arrUF.Add(new ComboElem("MT", 51, "Mato Grosso"));
+            arrUF.Add(new ComboElem("MS", 50, "Mato Grosso do Sul"));
             arrUF.Add(new ComboElem("MG", 31, "Minas Gerais"));
             arrUF.Add(new ComboElem("PA", 15, "Pará"));                  
             arrUF.Add(new ComboElem("PB", 25, "Paraíba"));               
@@ -108,7 +108,11 @@ namespace uninfe.Formulario
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).UFCod;
 
                 //Demonstrar o status do serviço
-                this.textResultado.Text = "Status do servidor: " + oNfe.VerStatusServico(this.cbEmissao.SelectedIndex + 1, cUF);//UniNFeLibrary.ConfiguracaoApp.tpEmis);
+                this.textResultado.Text = oNfe.StatusServico(this.cbEmissao.SelectedIndex + 1, cUF);
+            }
+            catch (Exception ex)
+            {
+                this.textResultado.Text = (ex.InnerException!=null?ex.InnerException.Message:ex.Message);
             }
             finally
             {
@@ -119,6 +123,7 @@ namespace uninfe.Formulario
 
         private void buttonPesquisaCNPJ_Click(object sender, EventArgs e)
         {
+            this.textConteudo.Focus();
             this.toolStripStatusLabel1.Text = _wait;
             this.textResultado.Text = "";
             this.Refresh();
@@ -140,13 +145,19 @@ namespace uninfe.Formulario
                         vvConsCad = oNfe.ConsultaCadastroClass((string)this.comboUf.SelectedValue, string.Empty, this.textConteudo.Text, string.Empty);
 
                 if (vvConsCad is UniNFeLibrary.RetConsCad)
+                {
                     vConsCad = (vvConsCad as UniNFeLibrary.RetConsCad);
+                    if (vConsCad == null)
+                        this.textResultado.Text = "Não pode obter a resposta do Sefaz";
+                }
                 else
+                {
                     throw new Exception((string)vvConsCad);
+                }
             }
             catch (Exception ex)
             {
-                textResultado.Text = ex.Message;
+                this.textResultado.Text = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 vConsCad = null;
             }
             finally
@@ -168,9 +179,27 @@ namespace uninfe.Formulario
             }
         }
 
-        private void textConteudo_TextChanged(object sender, EventArgs e)
+        private void rbCNPJ_CheckedChanged(object sender, EventArgs e)
         {
-            this.buttonPesquisa.Enabled = this.textConteudo.Text != "";
+            this.textConteudo.Mask = "00,000,000/0000-00";
+            this.textConteudo.SelectionStart = 0;
+        }
+
+        private void rbCPF_CheckedChanged(object sender, EventArgs e)
+        {
+            this.textConteudo.Mask = "000,000,000-00";
+            this.textConteudo.SelectionStart = 0;
+        }
+
+        private void rbIE_CheckedChanged(object sender, EventArgs e)
+        {
+            this.textConteudo.Mask = "";
+            this.textConteudo.SelectionStart = 0;
+        }
+
+        private void maskedTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.buttonPesquisa.Enabled = this.textConteudo.Text.Replace(",", "").Replace(".", "").Replace("-", "").Replace("/", "").Trim() != "";
         }
 
         internal class ComboElem

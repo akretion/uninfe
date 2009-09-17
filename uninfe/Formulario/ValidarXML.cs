@@ -83,7 +83,7 @@ namespace uninfe.Formulario
                 {
                     lValidar = false;
                     this.textBox_tipoarq.Text = oValidarXML.cRetornoTipoArq;
-                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + ex.Message;                    
+                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);                    
                 }
             }
             else

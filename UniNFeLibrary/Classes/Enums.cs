@@ -88,4 +88,5 @@ namespace UniNFeLibrary.Enums
         GerarChaveNFe
     }
     #endregion
+
 }

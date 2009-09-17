@@ -620,5 +620,11 @@
     <Setting Name="uninfe_wsDFPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://dec.fazenda.df.gov.br/nfe/ServiceConsultaCadastro.asmx</Value>
     </Setting>
+    <Setting Name="uninfe_wsMGPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
+    <Setting Name="uninfe_wsMGHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hnfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
