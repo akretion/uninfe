@@ -187,7 +187,8 @@ namespace UniNFeLibrary
             if (len > maxLength || len < minLength)
             {
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ter seu tamanho entre {2} e {3}" + 
-                                                    Environment.NewLine + 
+                                                    ". Conteudo: " + dataRow[field].ToString() +
+                                                    Environment.NewLine +
                                                     "\tLinha: {4}: Conteudo do segmento: {5}", 
                                                     segment, field, minLength, maxLength, iLinhaLida, cLinhaTXT) + Environment.NewLine;
             }
@@ -205,7 +206,17 @@ namespace UniNFeLibrary
         /// <param name="decimals"></param>
         private void Check(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength, int decimals)
         {
+            if (decimals > 0 && dataRow[field].ToString().Trim() == "")
+            {
+                ///
+                /// para campos numericos que estejam em branco, coloco um ZERO
+                /// 
+                dataRow[field] = "0." + ("0000000").Substring(0, decimals);
+
+                //cMensagemErro += segment+" = "+field+" X "+dataRow[field].ToString() + "\r\n";
+            }
             this.Check(segment, field, dataRow, optional, minLength, maxLength);
+
             if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
             {
                 int pos = dataRow[field].ToString().Trim().IndexOf(".") + 1;
@@ -256,6 +267,26 @@ namespace UniNFeLibrary
 
         #endregion
 
+        #region ConverToOEM
+        private string ConvertToOEM(string FBuffer)
+        {
+            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ");
+            const string FOEM = (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuA");
+            int L, P;
+            char X;
+            string result = "";
+
+            for (L = 0; L < FBuffer.Length; ++L)
+            {
+                X = (char)FBuffer[L];
+                P = FAnsi.IndexOf(X);
+                if (P >= 0) X = FOEM[P];
+                result += X;
+            }
+            return result;
+        }
+        #endregion
+
         /// <summary>
         /// Atribui ao elementos a um DataRow o conteudo do que fora lido do arquivo texto
         /// </summary>
@@ -268,7 +299,7 @@ namespace UniNFeLibrary
             {
                 if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
                 {
-                    dr[iLeitura - 1] = dados[iLeitura].Trim();
+                    dr[iLeitura - 1] = this.ConvertToOEM(dados[iLeitura].Trim());
                     result = true;
                 }
             }
@@ -599,10 +630,12 @@ namespace UniNFeLibrary
                         #region -- E02
                         if (nElementos >= 1)
                             if (dados[1].Trim() != "")
+                            {
                                 drdest["CNPJ"] = dados[1].Trim();
+                                this.Check(dados[0], "CNPJ", drdest, ObOp.Obrigatorio, 14, 14);
+                            }
                         dsNfe.Tables["dest"].Rows.Add(drdest);
 
-                        this.Check(dados[0], "CNPJ", drdest, ObOp.Obrigatorio, 14, 14); 
                         break;
                         #endregion
 

@@ -421,7 +421,7 @@ namespace UniNFeLibrary
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
             //Definir o nome do arquivo de retorno
-            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
+            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret." + (cStat == "1" ? "xml" : "err");
 
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);

@@ -97,17 +97,15 @@ namespace UniNFeLibrary
             // Limpa a variável de retorno
             string XmlRetorno = string.Empty;
 
-            //Vou fazer 3 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
+            //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
+            //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
+            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 300000 });
+
+            //Vou fazer 5 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
             for (int i = 1; i <= 5; i++)
             {
                 try
                 {
-                    //Deu erro na primeira tentativa, sendo assim, vou aumentar o timeout para ver se não resolve a questão na segunda e terceira tentativa
-                    if (i == 2)
-                    {
-                        TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 300000 });
-                    }
-
                     //Invocar o membro, ou seja, mandar o XML para o SEFAZ
                     XmlRetorno = (string)(TipoServicoWS.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, ServicoWS, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
                     
@@ -242,17 +240,15 @@ namespace UniNFeLibrary
             // Limpa a variável de retorno
             XmlNode XmlRetorno;
 
+            //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
+            //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
+            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 300000 });
+
             //Vou fazer 3 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
             for (int i = 1; i <= 5; i++)
             {
                 try
                 {
-                    //Deu erro na primeira tentativa, sendo assim, vou aumentar o timeout para ver se não resolve a questão na segunda e terceira tentativa
-                    if (i == 2)
-                    {
-                        TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 300000 });
-                    }
-
                     //Atualizar a propriedade do objeto do cabecalho da mensagem
                     TipoServicoWS.InvokeMember("cteCabecMsgValue", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { CabecMsg });
                     
