@@ -27,13 +27,13 @@ namespace uninfe.Formulario
             this.txtxIE.Text = infCad.IE;
             this.txtxNome.Text = infCad.xNome;
             this.txtxFant.Text = infCad.xFant;
-            this.txtxEnder.Text = infCad.xLgr;
-            this.txtxBairro.Text = infCad.xBairro;
-            this.txtnro.Text = infCad.nro;
-            this.txtxCpl.Text = infCad.xCpl;
+            this.txtxEnder.Text = infCad.ender.xLgr;
+            this.txtxBairro.Text = infCad.ender.xBairro;
+            this.txtnro.Text = infCad.ender.nro;
+            this.txtxCpl.Text = infCad.ender.xCpl;
             this.txtUF.Text = infCad.UF;
-            this.txtxMun.Text = infCad.xMun;
-            this.txtCEP.Text = infCad.CEP.ToString("00000000");
+            this.txtxMun.Text = infCad.ender.xMun;
+            this.txtCEP.Text = infCad.ender.CEP.ToString("00000000");
             this.txtdBaixa.Text = infCad.dBaixa.ToShortDateString();
             this.txtdUltSit.Text = infCad.dUltSit.ToShortDateString();
             this.txtdIniAtiv.Text = infCad.dIniAtiv.ToShortDateString();
@@ -44,19 +44,10 @@ namespace uninfe.Formulario
             this.txtcSit.Text = infCad.cSit;
         }
 
-        private string Align(string val, int size)
-        {
-            string Result = string.Empty;
-            for (int i = 0; i < size; ++i)
-                Result += '0';
-            Result += val;
-            Result = Result.Remove(0, Result.Length - size);
-            return Result;
-        }
-
         private string FmtCgcCpf(string Value, bool juridica)
         {
-            string Result = Align(Value,14);
+            string Result = Value.PadLeft(14, '0');
+
             if (juridica)
                 Result = Result.Substring(0, 2) + "." +
                         Result.Substring(2, 3) + "." +

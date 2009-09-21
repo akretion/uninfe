@@ -500,10 +500,9 @@ namespace UniNFeLibrary
 
             if (Elemento.GetElementsByTagName(NomeTag).Count != 0)
             {
-                Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText;
+                Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText.Replace(";"," ");  //danasa 19-9-2009
                 Retorno += ";";
             }
-
             return Retorno;
         }
         #endregion
@@ -947,6 +946,7 @@ namespace UniNFeLibrary
             try
             {
                 vRetorno = EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastroClass);
+                //vRetorno = ProcessaConsultaCadastroClass(@"c:\usr\nfe\uninfe\modelos\retorno-cons-cad.txt");
             }
             finally
             {
@@ -975,17 +975,12 @@ namespace UniNFeLibrary
         }
 
         /// <summary>
-        /// Função Callback que analisa a resposta do Status do Servido
+        /// utilizada pela GerarXML
         /// </summary>
-        /// <param name="elem"></param>
-        /// <by>Marcos Diez</by>
-        /// <date>30/8/2009</date>
+        /// <param name="msXml"></param>
         /// <returns></returns>
-        private static RetConsCad ProcessaConsultaCadastroClass(string cArquivoXML)//XmlTextReader elem)
+        private static RetConsCad ProcessaConsultaCadastro(XmlDocument doc)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(cArquivoXML);
-
             if (doc.GetElementsByTagName("infCad") == null)
                 return null;
 
@@ -1025,36 +1020,43 @@ namespace UniNFeLibrary
                                             case "CPF":
                                                 vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
                                                 break;
-                                            case "cUF":
-                                                vRetorno.cUF = nodeinfCad.InnerText;
-                                                break;
                                             case "xNome":
                                                 vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = nodeinfCad.InnerText;
                                                 break;
                                             case "xFant":
                                                 vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = nodeinfCad.InnerText;
                                                 break;
-                                            case "xLgr":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xLgr = nodeinfCad.InnerText;
+
+                                            case "ender":
+                                                foreach (XmlNode nodeinfConsEnder in nodeinfCad.ChildNodes)
+                                                {
+                                                    switch (nodeinfConsEnder.Name)
+                                                    {
+                                                        case "xLgr":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xLgr = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "nro":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.nro = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xCpl":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xCpl = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xBairro":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xBairro = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xMun":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xMun = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "cMun":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.cMun = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
+                                                            break;
+                                                        case "CEP":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.CEP = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
+                                                            break;
+                                                    }
+                                                }
                                                 break;
-                                            case "nro":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].nro = nodeinfCad.InnerText;
-                                                break;
-                                            case "xCpl":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xCpl = nodeinfCad.InnerText;
-                                                break;
-                                            case "xBairro":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xBairro = nodeinfCad.InnerText;
-                                                break;
-                                            case "xMun":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xMun = nodeinfCad.InnerText;
-                                                break;
-                                            case "cMun":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].cMun = Convert.ToInt32("0" + nodeinfCad.InnerText);
-                                                break;
-                                            case "CEP":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CEP = Convert.ToInt32("0" + nodeinfCad.InnerText);
-                                                break;
+
                                             case "IEAtual":
                                                 vRetorno.infCad[vRetorno.infCad.Count - 1].IEAtual = nodeinfCad.InnerText;
                                                 break;
@@ -1111,7 +1113,7 @@ namespace UniNFeLibrary
                                             vRetorno.dhCons = getDateTime(nodeinfCons.InnerText);
                                             break;
                                         case "cUF":
-                                            vRetorno.cUF = nodeinfCons.InnerText;
+                                            vRetorno.cUF = Convert.ToInt32("0" + nodeinfCons.InnerText);
                                             break;
                                     }
                                 }
@@ -1121,6 +1123,30 @@ namespace UniNFeLibrary
                 }
             }
             return vRetorno;
+        }
+        public RetConsCad ProcessaConsultaCadastroClass(MemoryStream msXml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(msXml);
+            return ProcessaConsultaCadastro(doc);
+        }
+        /// <summary>
+        /// Função Callback que analisa a resposta do Status do Servido
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <by>Marcos Diez</by>
+        /// <date>30/8/2009</date>
+        /// <returns></returns>
+        /// <summary>
+        /// utilizada internamente pela VerConsultaCadastroClass
+        /// </summary>
+        /// <param name="cArquivoXML"></param>
+        /// <returns></returns>
+        private static RetConsCad ProcessaConsultaCadastroClass(string cArquivoXML)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(cArquivoXML);
+            return ProcessaConsultaCadastro(doc);
         }
 
         /// <summary>
@@ -1263,6 +1289,16 @@ namespace UniNFeLibrary
     }
 
     #region infCad & RetConsCad
+    public class enderConsCadInf
+    {
+        public string xLgr { get; set; }
+        public string nro { get; set; }
+        public string xCpl { get; set; }
+        public string xBairro { get; set; }
+        public int cMun { get; set; }
+        public string xMun { get; set; }
+        public int CEP { get; set; }
+    }
     public class infCad
     {
         public string IE { get; set; }
@@ -1271,13 +1307,6 @@ namespace UniNFeLibrary
         public string UF { get; set; }
         public string xNome { get; set; }
         public string xFant { get; set; }
-        public string xLgr { get; set; }
-        public string nro { get; set; }
-        public string xCpl { get; set; }
-        public string xBairro { get; set; }
-        public string xMun { get; set; }
-        public int cMun { get; set; }
-        public int CEP { get; set; }
         public string IEAtual { get; set; }
         public string IEUnica { get; set; }
         public DateTime dBaixa { get; set; }
@@ -1286,6 +1315,12 @@ namespace UniNFeLibrary
         public int CNAE { get; set; }
         public string xRegApur { get; set; }
         public string cSit { get; set; }
+        public enderConsCadInf ender { get; set; }
+
+        public infCad()
+        {
+            ender = new enderConsCadInf();
+        }
     }
 
     public class RetConsCad
@@ -1297,7 +1332,7 @@ namespace UniNFeLibrary
         public string CNPJ { get; set; }
         public string CPF { get; set; }
         public DateTime dhCons { get; set; }
-        public string cUF { get; set; }
+        public Int32 cUF { get; set; }
         public List<infCad> infCad { get; set; }
 
         public RetConsCad()

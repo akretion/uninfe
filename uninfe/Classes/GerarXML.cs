@@ -190,83 +190,200 @@ namespace uninfe
             string ConteudoRetorno = string.Empty;
 
             MemoryStream msXml = Auxiliar.StringXmlToStream(ConteudoXMLRetorno);
-
             try
             {
                 switch (Servico)
                 {
                     case Servicos.EnviarLoteNfe:
-                        XmlDocument docRec = new XmlDocument();
-                        docRec.Load(msXml);
+                        {
+                            XmlDocument docRec = new XmlDocument();
+                            docRec.Load(msXml);
 
-                        XmlNodeList retEnviNFeList = docRec.GetElementsByTagName("retEnviNFe");
-                        XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeList.Item(0);
+                            XmlNodeList retEnviNFeList = docRec.GetElementsByTagName("retEnviNFe");
+                            XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeList.Item(0);
 
-                        ConteudoRetorno += oAux.LerTag(retEnviNFeElemento, "cStat");
-                        ConteudoRetorno += oAux.LerTag(retEnviNFeElemento, "xMotivo");
+                            ConteudoRetorno += oAux.LerTag(retEnviNFeElemento, "cStat");
+                            ConteudoRetorno += oAux.LerTag(retEnviNFeElemento, "xMotivo");
 
-                        XmlNodeList infRecList = retEnviNFeElemento.GetElementsByTagName("infRec");
-                        XmlElement infRecElemento = (XmlElement)infRecList.Item(0);
+                            XmlNodeList infRecList = retEnviNFeElemento.GetElementsByTagName("infRec");
+                            XmlElement infRecElemento = (XmlElement)infRecList.Item(0);
 
-                        ConteudoRetorno += oAux.LerTag(infRecElemento, "nRec");
-                        ConteudoRetorno += oAux.LerTag(infRecElemento, "dhRecbto");
-                        ConteudoRetorno += oAux.LerTag(infRecElemento, "tMed");
-
+                            ConteudoRetorno += oAux.LerTag(infRecElemento, "nRec");
+                            ConteudoRetorno += oAux.LerTag(infRecElemento, "dhRecbto");
+                            ConteudoRetorno += oAux.LerTag(infRecElemento, "tMed");
+                        }
                         goto default;
 
                     case Servicos.PedidoSituacaoLoteNFe:
-                        XmlDocument docProRec = new XmlDocument();
-                        docProRec.Load(msXml);
-
-                        XmlNodeList retConsReciNFeList = docProRec.GetElementsByTagName("retConsReciNFe");
-                        XmlElement retConsReciNFeElemento = (XmlElement)retConsReciNFeList.Item(0);
-
-                        ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "nRec");
-                        ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "cStat");
-                        ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "xMotivo");
-                        ConteudoRetorno += "\r\n";
-
-                        XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
-                        XmlElement protNFeElemento = (XmlElement)protNFeList.Item(0);
-                        XmlNodeList infProtList = protNFeElemento.GetElementsByTagName("infProt");
-
-                        foreach (XmlNode infProtNode in infProtList)
                         {
-                            XmlElement infProtElemento = (XmlElement)infProtNode;
-                            string chNFe = oAux.LerTag(infProtElemento, "chNFe");
+                            XmlDocument docProRec = new XmlDocument();
+                            docProRec.Load(msXml);
 
-                            ConteudoRetorno += chNFe.Substring(6, 14) + ";";
-                            ConteudoRetorno += chNFe.Substring(25, 9) + ";";
-                            ConteudoRetorno += chNFe;
-                            ConteudoRetorno += oAux.LerTag(infProtElemento, "dhRecbto");
-                            ConteudoRetorno += oAux.LerTag(infProtElemento, "nProt");
-                            ConteudoRetorno += oAux.LerTag(infProtElemento, "digVal");
-                            ConteudoRetorno += oAux.LerTag(infProtElemento, "cStat");
-                            ConteudoRetorno += oAux.LerTag(infProtElemento, "xMotivo");
+                            XmlNodeList retConsReciNFeList = docProRec.GetElementsByTagName("retConsReciNFe");
+                            XmlElement retConsReciNFeElemento = (XmlElement)retConsReciNFeList.Item(0);
+
+                            ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "nRec");
+                            ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "cStat");
+                            ConteudoRetorno += oAux.LerTag(retConsReciNFeElemento, "xMotivo");
                             ConteudoRetorno += "\r\n";
-                        }
 
+                            XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
+                            XmlElement protNFeElemento = (XmlElement)protNFeList.Item(0);
+                            XmlNodeList infProtList = protNFeElemento.GetElementsByTagName("infProt");
+
+                            foreach (XmlNode infProtNode in infProtList)
+                            {
+                                XmlElement infProtElemento = (XmlElement)infProtNode;
+                                string chNFe = oAux.LerTag(infProtElemento, "chNFe");
+
+                                ConteudoRetorno += chNFe.Substring(6, 14) + ";";
+                                ConteudoRetorno += chNFe.Substring(25, 9) + ";";
+                                ConteudoRetorno += chNFe;
+                                ConteudoRetorno += oAux.LerTag(infProtElemento, "dhRecbto");
+                                ConteudoRetorno += oAux.LerTag(infProtElemento, "nProt");
+                                ConteudoRetorno += oAux.LerTag(infProtElemento, "digVal");
+                                ConteudoRetorno += oAux.LerTag(infProtElemento, "cStat");
+                                ConteudoRetorno += oAux.LerTag(infProtElemento, "xMotivo");
+                                ConteudoRetorno += "\r\n";
+                            }
+                        }
                         goto default;
 
-                    case Servicos.CancelarNFe:
-                        break;
-                    case Servicos.InutilizarNumerosNFe:
-                        break;
-                    case Servicos.PedidoConsultaSituacaoNFe:
-                        break;
-                    case Servicos.PedidoConsultaStatusServicoNFe:
-                        break;
-                    case Servicos.ConsultaCadastroContribuinte:
-                        break;
+                    case Servicos.CancelarNFe:  //danasa 19-9-2009
+                        {
+                            XmlDocument docretCanc = new XmlDocument();
+                            docretCanc.Load(msXml);
+
+                            XmlNodeList retCancList = docretCanc.GetElementsByTagName("retCancNFe");
+                            XmlElement retCancElemento = (XmlElement)retCancList.Item(0);
+                            XmlNodeList infCancList = retCancElemento.GetElementsByTagName("infCanc");
+
+                            foreach (XmlNode infCancNode in infCancList)
+                            {
+                                XmlElement infCancElemento = (XmlElement)infCancNode;
+
+                                ConteudoRetorno += oAux.LerTag(infCancElemento, "tpAmb");
+                                ConteudoRetorno += oAux.LerTag(infCancElemento, "cStat");
+                                ConteudoRetorno += oAux.LerTag(infCancElemento, "xMotivo");
+                                ConteudoRetorno += "\r\n";
+                            }
+                        }
+                        goto default;
+                    case Servicos.InutilizarNumerosNFe: //danasa 19-9-2009
+                        {
+                            XmlDocument docretInut = new XmlDocument();
+                            docretInut.Load(msXml);
+
+                            XmlNodeList retInutList = docretInut.GetElementsByTagName("retInutNFe");
+                            XmlElement retInutElemento = (XmlElement)retInutList.Item(0);
+                            XmlNodeList infInutList = retInutElemento.GetElementsByTagName("infInut");
+
+                            foreach (XmlNode infInutNode in infInutList)
+                            {
+                                XmlElement infInutElemento = (XmlElement)infInutNode;
+
+                                ConteudoRetorno += oAux.LerTag(infInutElemento, "tpAmb");
+                                ConteudoRetorno += oAux.LerTag(infInutElemento, "cStat");
+                                ConteudoRetorno += oAux.LerTag(infInutElemento, "xMotivo");
+                                ConteudoRetorno += oAux.LerTag(infInutElemento, "cUF");
+                                ConteudoRetorno += "\r\n";
+                            }
+                        }
+                        goto default;
+                    case Servicos.PedidoConsultaSituacaoNFe:   //danasa 19-9-2009
+                        {
+                            XmlDocument docretConsSit = new XmlDocument();
+                            docretConsSit.Load(msXml);
+
+                            XmlNodeList retConsSitList = docretConsSit.GetElementsByTagName("retConsSitNFe");
+                            XmlElement retConsSitElemento = (XmlElement)retConsSitList.Item(0);
+                            XmlNodeList infConsSitList = retConsSitElemento.GetElementsByTagName("infProt");
+
+                            foreach (XmlNode infConsSitNode in infConsSitList)
+                            {
+                                XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
+
+                                ConteudoRetorno += oAux.LerTag(infConsSitElemento, "tpAmb");
+                                ConteudoRetorno += oAux.LerTag(infConsSitElemento, "cStat");
+                                ConteudoRetorno += oAux.LerTag(infConsSitElemento, "xMotivo");
+                                ConteudoRetorno += oAux.LerTag(infConsSitElemento, "cUF");
+                                ConteudoRetorno += "\r\n";
+                            }
+                        }
+                        goto default;
+                    case Servicos.PedidoConsultaStatusServicoNFe:   //danasa 19-9-2009
+                        {
+                            XmlDocument docConsStat = new XmlDocument();
+                            docConsStat.Load(msXml);
+
+                            XmlNodeList retConsStatServList = docConsStat.GetElementsByTagName("retConsStatServ");
+                            XmlElement retConsStatServElemento = (XmlElement)retConsStatServList.Item(0);
+
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "tpAmb");
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "cStat");
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "xMotivo");
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "cUF");
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "dhRecbto");
+                            ConteudoRetorno += oAux.LerTag(retConsStatServElemento, "tMed");
+                            ConteudoRetorno += "\r\n";
+                        }
+                        goto default;
+                    case Servicos.ConsultaCadastroContribuinte: //danasa 19-9-2009
+                        {
+                            ///
+                            /// Retorna o texto conforme o manual do Sefaz versao 3.0
+                            /// 
+                            RetConsCad rconscad = oAux.ProcessaConsultaCadastroClass(msXml);
+                            if (rconscad != null)
+                            {
+                                ConteudoRetorno = rconscad.cStat.ToString("000") + ";";
+                                ConteudoRetorno += rconscad.xMotivo.Replace(";", " ") + ";";
+                                ConteudoRetorno += rconscad.UF + ";";
+                                ConteudoRetorno += rconscad.IE + ";";
+                                ConteudoRetorno += rconscad.CNPJ + ";";
+                                ConteudoRetorno += rconscad.CPF + ";";
+                                ConteudoRetorno += rconscad.dhCons + ";";
+                                ConteudoRetorno += rconscad.cUF.ToString("00") + ";";
+                                ConteudoRetorno += "\r\r";
+                                foreach (infCad infCadNode in rconscad.infCad)
+                                {
+                                    ConteudoRetorno += infCadNode.IE + ";";
+                                    ConteudoRetorno += infCadNode.CNPJ + ";";
+                                    ConteudoRetorno += infCadNode.CPF + ";";
+                                    ConteudoRetorno += infCadNode.UF + ";";
+                                    ConteudoRetorno += infCadNode.cSit + ";";
+                                    ConteudoRetorno += infCadNode.xNome.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.xFant.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.xRegApur.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.CNAE.ToString() + ";";
+                                    ConteudoRetorno += infCadNode.dIniAtiv + ";";
+                                    ConteudoRetorno += infCadNode.dUltSit + ";";
+                                    ConteudoRetorno += infCadNode.IEUnica.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.IEAtual.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.xLgr.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.nro.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.xCpl.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.xBairro.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.cMun.ToString("0000000") + ";";
+                                    ConteudoRetorno += infCadNode.ender.xMun.Replace(";", " ") + ";";
+                                    ConteudoRetorno += infCadNode.ender.CEP.ToString("00000000") + ";";
+                                    ConteudoRetorno += "\r\r";
+                                }
+                            }
+                        }
+                        goto default;
                     case Servicos.ConsultaInformacoesUniNFe:
                         break;
 
                     default: //Gravar o TXT de retorno para o ERP
-                        string TXTRetorno = string.Empty;
-                        TXTRetorno = oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
-                        TXTRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
+                        if (!string.IsNullOrEmpty(ConteudoRetorno))
+                        {
+                            string TXTRetorno = string.Empty;
+                            TXTRetorno = oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
+                            TXTRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
 
-                        File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.Default);
+                            File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.Default);
+                        }
                         break;
                 }
             }

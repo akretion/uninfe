@@ -73,6 +73,10 @@ namespace UniNFeLibrary
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
             string XmlNfeDadosMsg = (string)(TipoServicoNFe.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.GetProperty, null, ServicoNFe, null));
 
+            // exclui o arquivo de erro
+            // danasa 19-9-2009
+            oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+
             // Validar o Arquivo XML
             string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
@@ -208,6 +212,10 @@ namespace UniNFeLibrary
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
             string XmlNfeDadosMsg = (string)(TipoServicoNFe.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.GetProperty, null, ServicoNFe, null));
+
+            // exclui o arquivo de erro
+            // danasa 19-9-2009
+            oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
             // Validar o Arquivo XML
             string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);

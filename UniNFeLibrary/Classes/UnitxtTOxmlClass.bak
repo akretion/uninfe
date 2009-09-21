@@ -47,13 +47,13 @@ namespace UniNFeLibrary
             //Lê o arquivo texto passado do padrao do software emissor de Nfe Sefaz/SP 
             //Variaveis utilizadas na função
 
-            cMensagemErro = "";
+            this.cMensagemErro = "";
             if (!File.Exists(cFile))
             {
                 ///
                 /// danasa 8-2009
                 /// 
-                cMensagemErro = "Arquivo [" + cFile + "] não encontrado";
+                this.cMensagemErro = "Arquivo [" + cFile + "] não encontrado";
                 return;
             }
 
@@ -82,6 +82,8 @@ namespace UniNFeLibrary
                 {
                     this.ProcessaNota(txt, cDestino);
                 }
+                if (this.cMensagemErro != "")
+                    throw new Exception(this.cMensagemErro);
             }
             catch (Exception ex)
             {
@@ -206,15 +208,6 @@ namespace UniNFeLibrary
         /// <param name="decimals"></param>
         private void Check(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength, int decimals)
         {
-            if (decimals > 0 && dataRow[field].ToString().Trim() == "")
-            {
-                ///
-                /// para campos numericos que estejam em branco, coloco um ZERO
-                /// 
-                dataRow[field] = "0." + ("0000000").Substring(0, decimals);
-
-                //cMensagemErro += segment+" = "+field+" X "+dataRow[field].ToString() + "\r\n";
-            }
             this.Check(segment, field, dataRow, optional, minLength, maxLength);
 
             if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
@@ -299,7 +292,7 @@ namespace UniNFeLibrary
             {
                 if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
                 {
-                    dr[iLeitura - 1] = this.ConvertToOEM(dados[iLeitura].Trim());
+                    dr[iLeitura - 1] = dados[iLeitura].Trim();
                     result = true;
                 }
             }
@@ -342,10 +335,11 @@ namespace UniNFeLibrary
             bool transpAdd = false;
 
             this.nNF = 0;
-            this.cMensagemErro = "";
+            //this.cMensagemErro = "";
 
             while (cLinhaTXT != null)
             {
+                cLinhaTXT = this.ConvertToOEM(this.cLinhaTXT);
                 dados = cLinhaTXT.Split('|');
                 dados[0] = dados[0].ToUpper();
                 nElementos = dados.GetLength(0) - 1;
@@ -465,6 +459,7 @@ namespace UniNFeLibrary
                                     //    if (iLeitura > 0 && dados[iLeitura] != null)
                                     //        dr[iLeitura - 1] = dados[iLeitura].Trim();
                                     //}
+                                    dr["serie"] = Convert.ToInt32("0" + dr["serie"].ToString());
                                     dr["NFref_Id"] = iControle;
                                     dsNfe.Tables["refNF"].Rows.Add(dr);
 
@@ -643,10 +638,12 @@ namespace UniNFeLibrary
                         #region -- E03
                         if (nElementos >= 1)
                             if (dados[1].Trim() != "")
+                            {
                                 drdest["CPF"] = dados[1].Trim();
+                                this.Check(dados[0], "CPF", drdest, ObOp.Obrigatorio, 11, 11);
+                            }
                         dsNfe.Tables["dest"].Rows.Add(drdest);
-
-                        this.Check(dados[0], "CPF", drdest, ObOp.Obrigatorio, 11, 11);
+                        
                         break;
                         #endregion
 
@@ -682,9 +679,15 @@ namespace UniNFeLibrary
                                 /// 
                                 if (drenderDest["UF"].ToString() == "EX")
                                 {
+                                    if (dsNfe.Tables["dest"].Rows.Count == 0)
+                                        dsNfe.Tables["dest"].Rows.Add(drdest);
+
                                     dsNfe.Tables["dest"].Rows[0]["IE"] = "";
                                     dsNfe.Tables["dest"].Rows[0]["CNPJ"] = "";
                                 }
+                                else
+                                    if (dsNfe.Tables["dest"].Rows.Count == 0)
+                                        this.cMensagemErro += "Falta definir o segmento [E02] ou [E03]" + Environment.NewLine;
                             }
                         }
                         break;
@@ -2386,7 +2389,7 @@ namespace UniNFeLibrary
                 iLinhaLida++;
             }
             if (cMensagemErro != "")
-                throw new Exception(cMensagemErro);
+                return;
 
             if (cNF == 0)
             {
@@ -2551,3 +2554,4 @@ namespace UniNFeLibrary
         Opcional
     }
 }
+

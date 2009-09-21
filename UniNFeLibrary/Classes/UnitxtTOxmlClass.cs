@@ -274,6 +274,7 @@ namespace UniNFeLibrary
                 X = (char)FBuffer[L];
                 P = FAnsi.IndexOf(X);
                 if (P >= 0) X = FOEM[P];
+                
                 result += X;
             }
             return result;
@@ -307,10 +308,12 @@ namespace UniNFeLibrary
         private void ProcessaNota(TextReader txt, string cDestino)
         {
             string baseDir = InfoApp.PastaSchemas() + "\\nfe_v1.10.xsd";
-      
-            if (!File.Exists(baseDir))
-                throw new Exception("Arquivo: " + baseDir + " não encontrado");
 
+            if (!File.Exists(baseDir))
+            {
+                this.cMensagemErro += "Arquivo: " + baseDir + " não encontrado" + Environment.NewLine;
+                return;
+            }
             DataSet dsNfe = new DataSet();
             dsNfe.ReadXmlSchema(baseDir);
             dsNfe.EnforceConstraints = false; //permite campos nulos
@@ -335,11 +338,26 @@ namespace UniNFeLibrary
             bool transpAdd = false;
 
             this.nNF = 0;
-            //this.cMensagemErro = "";
 
             while (cLinhaTXT != null)
             {
                 cLinhaTXT = this.ConvertToOEM(this.cLinhaTXT);
+
+                bool reLe = false;
+                for(int x = 0; x < cLinhaTXT.Length - 1; ++x)
+                    if (cLinhaTXT[x] != '|')
+                        if (char.IsSymbol(cLinhaTXT, x) || char.IsControl(cLinhaTXT, x))
+                        {
+                            this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] contem caracter não permitido" + Environment.NewLine;
+                            cLinhaTXT = txt.ReadLine();
+                            iLinhaLida++;
+                            reLe = true;
+                            break;
+                        }
+
+                if (reLe)
+                    continue;
+
                 dados = cLinhaTXT.Split('|');
                 dados[0] = dados[0].ToUpper();
                 nElementos = dados.GetLength(0) - 1;
@@ -2554,4 +2572,3 @@ namespace UniNFeLibrary
         Opcional
     }
 }
-
