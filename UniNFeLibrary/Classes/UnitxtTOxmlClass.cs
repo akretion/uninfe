@@ -264,7 +264,7 @@ namespace UniNFeLibrary
         private string ConvertToOEM(string FBuffer)
         {
             const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ");
-            const string FOEM = (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuA");
+            const string FOEM =  (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuA");
             int L, P;
             char X;
             string result = "";
@@ -277,6 +277,7 @@ namespace UniNFeLibrary
                 
                 result += X;
             }
+            result = result.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;");//.Replace("'", "&#39;");
             return result;
         }
         #endregion
@@ -343,12 +344,15 @@ namespace UniNFeLibrary
             {
                 cLinhaTXT = this.ConvertToOEM(this.cLinhaTXT);
 
+                //cLinhaTXT += "!@#$%^&*()_+";
                 bool reLe = false;
                 for(int x = 0; x < cLinhaTXT.Length - 1; ++x)
-                    if (cLinhaTXT[x] != '|')
-                        if (char.IsSymbol(cLinhaTXT, x) || char.IsControl(cLinhaTXT, x))
+                    //if (cLinhaTXT[x] != '|' && cLinhaTXT[x] != '=' && cLinhaTXT[x] != '%')
+                        if (/*char.IsSymbol(cLinhaTXT, x) ||*/ char.IsControl(cLinhaTXT, x))
                         {
-                            this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] contem caracter não permitido" + Environment.NewLine;
+                            this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] coluna ["+(x+1).ToString()+ "] contem o caracter [" + cLinhaTXT.Substring(x,1) + "] que não é permitido" + Environment.NewLine;
+                            //this.cMensagemErro += "\t"+cLinhaTXT + Environment.NewLine;
+
                             cLinhaTXT = txt.ReadLine();
                             iLinhaLida++;
                             reLe = true;
@@ -2516,6 +2520,13 @@ namespace UniNFeLibrary
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE/>", TextoXml.ToString().IndexOf("<dest>")), sAux);
             else
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+
+            #region Para bahia não pode ter o atributo (namespace) xmlns:xsi pois o SEFAZ de lá rejeita. Wandrey 22/09/2009
+            if (cChave.Substring(0, 2) == "29") 
+            {
+                TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+            }
+            #endregion
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.LoadXml(TextoXml.ToString());

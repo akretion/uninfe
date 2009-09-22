@@ -133,7 +133,7 @@ namespace UniNFeLibrary
                     break;
 
                 case Servicos.ConverterTXTparaXML:
-                    this.ConvTXT();
+                    this.ConvTXT(ConfiguracaoApp.vPastaXMLEnvio);
                     break;
 
                 ///
@@ -634,6 +634,11 @@ namespace UniNFeLibrary
         #region AssinarValidarXML()
         private void AssinarValidarXML()
         {
+            ///
+            /// danasa 21-9-2009
+            /// 
+            this.ConvTXT(ConfiguracaoApp.PastaValidar);
+
             List<string> lstMascaras = new List<string>();
             lstMascaras.Add(ExtXml.Nfe);
             lstMascaras.Add(ExtXml.EnvLot);
@@ -663,10 +668,8 @@ namespace UniNFeLibrary
 
                     oAux.ValidarAssinarXML(lstArquivos[b]);
                 }
-
                 lstArquivos.Clear();
             }
-
             Thread.Sleep(2000);
         }
         #endregion
@@ -677,7 +680,7 @@ namespace UniNFeLibrary
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>03/069/2009</date>
-        protected abstract void ConvTXT();
+        protected abstract void ConvTXT(string vPasta);
         #endregion
 
         #region LerXMLNfe()

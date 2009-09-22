@@ -421,7 +421,7 @@ namespace UniNFeLibrary
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
             //Definir o nome do arquivo de retorno
-            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret." + (cStat == "1" ? "xml" : "err");
+            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";// +(cStat == "1" ? "xml" : "err");
 
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
@@ -574,6 +574,19 @@ namespace UniNFeLibrary
         #endregion
 
         #region MoverArquivo()
+        public void MoverArquivo(string Arquivo, string strDestinoArquivo)
+        {
+            //Definir o arquivo que vai ser deletado ou movido para outra pasta
+            FileInfo oArquivo = new FileInfo(Arquivo);
+
+            //Mover o arquivo original para a pasta de destino
+            if (File.Exists(strDestinoArquivo))
+            {
+                FileInfo oArqDestino = new FileInfo(strDestinoArquivo);
+                oArqDestino.Delete();
+            }
+            oArquivo.MoveTo(strDestinoArquivo);
+        }
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
         /// </summary>

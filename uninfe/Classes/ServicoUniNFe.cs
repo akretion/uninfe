@@ -41,30 +41,41 @@ namespace uninfe
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>03/069/2009</date>
-        protected override void ConvTXT()
+        protected override void ConvTXT(string vPasta)
         {
             Auxiliar oAux = new Auxiliar();
 
-            List<string> lstArquivos = new List<string>();
+            List<string> lstArquivos = this.ArquivosPasta(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/, "*-nfe.txt");
 
-            try
+            for (int i = 0; i < lstArquivos.Count; i++)
             {
-                lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*-nfe.txt");
+                if (Auxiliar.FileInUse(lstArquivos[i]))
+                    continue;
 
-                for (int i = 0; i < lstArquivos.Count; i++)
+                UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
+                string ccMessage = string.Empty;
+                string ccExtension = "-nfe.err";
+
+                try
                 {
-                    if (Auxiliar.FileInUse(lstArquivos[i]))
-                        continue;
+                    ///
+                    /// exclui o arquivo de erro
+                    /// 
+                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension));
+                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + "-nfe-ret.xml"));
+                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLErro + "\\" + Path.GetFileName(lstArquivos[i]));
+                    ///
+                    /// exclui o arquivo TXT original
+                    /// 
+                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt");
 
-                    UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
+                    ///
+                    /// processa a conversão
+                    /// 
+                    oUniTxtToXml.Converter(lstArquivos[i], vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/);
 
-                    oUniTxtToXml.Converter(lstArquivos[i], ConfiguracaoApp.vPastaXMLEnvio);
-
-                    string ccMessage = string.Empty;
-                    string ccExtension = "-nfe.err";
-
-                    //Deu tudo certo com a conversão
-                    if (oUniTxtToXml.cMensagemErro == string.Empty)
+                    //Deu tudo certo com a conversão?
+                    if (string.IsNullOrEmpty(oUniTxtToXml.cMensagemErro))
                     {
                         ///
                         /// danasa 8-2009
@@ -79,10 +90,14 @@ namespace uninfe
                         else
                         {
                             ///
-                            /// exclui o arquivo texto original
+                            /// salva o arquivo texto original
                             ///
-                            oAux.DeletarArquivo(lstArquivos[i]);
-
+                            FileInfo otxtArquivo = new FileInfo(lstArquivos[i]);
+                            if (vPasta.Equals(ConfiguracaoApp.vPastaXMLEnvio))
+                            {
+                                string vvNomeArquivoDestino = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt";
+                                otxtArquivo.MoveTo(vvNomeArquivoDestino);
+                            }
                             ccExtension = "-nfe.txt";
                             ccMessage = "cStat=01\r\n" +
                                 "xMotivo=Convertido com sucesso. Foi(ram) convertida(s) " + oUniTxtToXml.cRetorno.Count.ToString() + " nota(s) fiscal(is)";
@@ -98,23 +113,22 @@ namespace uninfe
                                         " - ChaveNFe: " + txtClass.ChaveNFe;
                                 ///
                                 /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
+                                /// ou
+                                /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
                                 /// 
-                                FileInfo oArquivo = new FileInfo(ConfiguracaoApp.vPastaXMLEnvio + "\\convertidos\\" + txtClass.XMLFileName);
+                                FileInfo oArquivo = new FileInfo(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\convertidos\\" + txtClass.XMLFileName);
 
-                                //System.Windows.Forms.MessageBox.Show(oNfe.vPastaXMLEnvio + "\\convertidos\\" + txtClass.XMLFileName);
+                                string vNomeArquivoDestino = vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\" + txtClass.XMLFileName;
+                                ///
+                                /// excluo o XML se já existe
+                                /// 
+                                oAux.DeletarArquivo(vNomeArquivoDestino);
 
-                                string vNomeArquivoDestino = ConfiguracaoApp.vPastaXMLEnvio + "\\" + txtClass.XMLFileName;
-                                if (File.Exists(vNomeArquivoDestino))
-                                {
-                                    ///
-                                    /// excluo o XML se ele já existe
-                                    /// 
-                                    oAux.DeletarArquivo(vNomeArquivoDestino);
-                                }
                                 ///
                                 /// move o arquivo da pasta "Envio\Convertidos" para a pasta "Envio"
+                                /// ou
+                                /// move o arquivo da pasta "Validar\Convertidos" para a pasta "Validar"
                                 /// 
-                                //System.Windows.Forms.MessageBox.Show(ConfiguracaoApp.vPastaXMLEnvio + @"\convertidos\" + txtClass.XMLFileName + "\n\r" + vNomeArquivoDestino);
                                 oArquivo.MoveTo(vNomeArquivoDestino);
                             }
                         }
@@ -127,15 +141,23 @@ namespace uninfe
                         ccMessage = "cStat=99\r\n" +
                             "xMotivo=Falha na conversão\r\n" +
                             "MensagemErro=" + oUniTxtToXml.cMensagemErro;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ccMessage = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    ccExtension = "-nfe.err";
+                }
 
-                        oAux.MoveArqErro(lstArquivos[i], ".txt");
-                        ///
-                        /// exclui todos os XML gerados na pasta Enviados\convertidos
-                        /// 
-                        foreach (txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
-                        {
-                            oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnvio + "\\convertidos\\" + txtClass.XMLFileName);
-                        }
+                if (!string.IsNullOrEmpty(ccMessage))
+                {
+                    oAux.MoveArqErro(lstArquivos[i], ".txt");
+                    ///
+                    /// exclui todos os XML gerados na pasta Enviados\convertidos
+                    /// 
+                    foreach (txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
+                    {
+                        oAux.DeletarArquivo(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\convertidos\\" + txtClass.XMLFileName);
                     }
                     ///
                     /// danasa 8-2009
@@ -144,10 +166,6 @@ namespace uninfe
                     /// 
                     oAux.GravarArqErroERP(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension, ccMessage);
                 }
-            }
-            catch (Exception ex)
-            {
-                //TODO: Retornar erro para o ERP
             }
         }
         #endregion
