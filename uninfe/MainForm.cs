@@ -311,7 +311,8 @@ namespace uninfe
 
                 //pode dormir pelos dias de limpeza. não é necessário fazer a limpeza antes do dia
                 //não é interessante sair da thread porque o uninfe pode ficar no ar 24/7
-                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
+                //System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
+                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(1, 0, 0, 0), false);
             }
         }
 
