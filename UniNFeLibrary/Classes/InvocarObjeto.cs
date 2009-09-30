@@ -98,6 +98,12 @@ namespace UniNFeLibrary
             // Passar para o Objeto qual vai ser o certificado digital que ele deve utilizar             
             this.RelacionarCertObj(ServicoWS);
 
+            // Definir Proxy
+            if (ConfiguracaoApp.Proxy)
+            {
+                TipoServicoWS.InvokeMember("Proxy", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { this.DefinirProxy() });
+            }
+
             // Limpa a variável de retorno
             string XmlRetorno = string.Empty;
 
@@ -245,6 +251,12 @@ namespace UniNFeLibrary
             // Passar para o Objeto qual vai ser o certificado digital que ele deve utilizar             
             this.RelacionarCertObj(ServicoWS);
 
+            // Definir Proxy
+            if (ConfiguracaoApp.Proxy)
+            {
+                TipoServicoWS.InvokeMember("Proxy", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { this.DefinirProxy() });
+            }
+
             // Limpa a variável de retorno
             XmlNode XmlRetorno;
 
@@ -377,6 +389,24 @@ namespace UniNFeLibrary
         public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
             return Invocar(ServicoNFe, cVersaoDados, CabecMsg, ServicoWS, null, cMetodo, cFinalArqEnvio, cFinalArqRetorno);
+        }
+        #endregion
+
+        #region DefinirProxy()
+        /// <summary>
+        /// Efetua as definições do proxy
+        /// </summary>
+        /// <returns>Retorna as definições do Proxy</returns>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>29/09/2009</date>
+        private System.Net.IWebProxy DefinirProxy()
+        {
+            System.Net.NetworkCredential Usuario = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario,ConfiguracaoApp.ProxySenha);
+            System.Net.IWebProxy Proxy;
+            Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor,ConfiguracaoApp.ProxyPorta);
+            Proxy.Credentials = Usuario;
+
+            return Proxy;
         }
         #endregion
 

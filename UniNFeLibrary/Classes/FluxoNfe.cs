@@ -79,17 +79,62 @@ namespace UniNFeLibrary
         #region métodos gerais
 
         #region CriarXml()
+        public void CriarXml()
+        {
+            this.CriarXml(false);
+        }
+        #endregion
+
+        #region CriarXml()
         /// <summary>
         /// Cria o arquivo XML para o controle do fluxo
         /// </summary>
+        /// <param name="forcar">Força criar o arquivo mesmo que já exista</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/04/2009</date>
-        public void CriarXml()
+        public void CriarXml(bool VerificaEstruturaXml)
         {
             XmlWriter xtw = null; // criar instância para xmltextwriter. 
             try
             {
-                if (!File.Exists(strNomeXmlControleFluxo))
+                //TODO: 1-Tenho que analisar se esta parte abaixo é realmente seguro ou não vai gerar mais problemas
+                #region Testar para ver se o XML não tá danificado, ou seja, sem as tag´s iniciais, se tiver força recriar ele
+                bool ForcarCriar = false;
+                if (VerificaEstruturaXml)
+                {
+                    XmlDocument doc = null;
+                    FileStream fsArquivo = null;
+                    try
+                    {
+                        fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+
+                        if (File.Exists(strNomeXmlControleFluxo))
+                        {
+                            doc = new XmlDocument();
+                            doc.Load(strNomeXmlControleFluxo);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (doc != null)
+                        {
+                            if (doc.DocumentElement == null)
+                            {
+                                ForcarCriar = true;
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        if (fsArquivo != null)
+                        {
+                            fsArquivo.Close();
+                        }
+                    }
+                }
+                #endregion
+
+                if (!File.Exists(strNomeXmlControleFluxo) || ForcarCriar)
                 {
                     XmlWriterSettings oSettings = new XmlWriterSettings();
                     UTF8Encoding c = new UTF8Encoding(false);
@@ -152,7 +197,7 @@ namespace UniNFeLibrary
                     try
                     {
                         XmlDocument xd = new XmlDocument(); //Criar instância do XmlDocument Class
-                        
+
                         lfile = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
 
                         xd.Load(lfile); //Carregar o arquivo aberto no XmlDocument
@@ -698,6 +743,15 @@ namespace UniNFeLibrary
                 }
 
                 fsArquivo.Close(); //Fecha o arquivo XML
+            }
+            catch (XmlException ex)
+            {
+                if (fsArquivo != null)
+                {
+                    fsArquivo.Close();
+                }
+
+                throw (ex);
             }
             catch (Exception ex)
             {

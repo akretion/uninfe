@@ -55,7 +55,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPCancelamento.NfeCancelamentoService(); break;
                         case 23: pServico = new wsCEPCancelamento.NfeCancelamento(); break;
                         case 29: pServico = new wsBAPCancelamento.NfeCancelamento(); break;
-                        case 53: pServico = new wsDFPCancelamento.NfeCancelamento(); break;
+                        case 53: pServico = new wsVRPCancelamento.NfeCancelamento(); break;
                         case 26: pServico = new wsPEPCancelamento.NfeCancelamento(); break;
                         case 11: pServico = new wsVRPCancelamento.NfeCancelamento(); break;
                         case 13: pServico = new wsAMPCancelamento.NfeCancelamento(); break;
@@ -95,7 +95,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHCancelamento.NfeCancelamentoService(); break;
                         case 23: pServico = new wsCEHCancelamento.NfeCancelamento(); break;
                         case 29: pServico = new wsBAHCancelamento.NfeCancelamento(); break;
-                        case 53: pServico = new wsDFHCancelamento.NfeCancelamento(); break;
+                        case 53: pServico = new wsVRHCancelamento.NfeCancelamento(); break;
                         case 26: pServico = new wsPEHCancelamento.NfeCancelamento(); break;
                         case 11: pServico = new wsVRHCancelamento.NfeCancelamento(); break;
                         case 13: pServico = new wsAMHCancelamento.NfeCancelamento(); break;
@@ -163,7 +163,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPConsulta.NfeConsultaService(); break;
                         case 23: pServico = new wsCEPConsulta.NfeConsulta(); break;
                         case 29: pServico = new wsBAPConsulta.NfeConsulta(); break;
-                        case 53: pServico = new wsDFPConsulta.NfeConsulta(); break;
+                        case 53: pServico = new wsVRPConsulta.NfeConsulta(); break;
                         case 26: pServico = new wsPEPConsulta.NfeConsulta(); break;
                         case 11: pServico = new wsVRPConsulta.NfeConsulta(); break;
                         case 13: pServico = new wsAMPConsulta.NfeConsulta(); break;
@@ -200,7 +200,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHConsulta.NfeConsultaService(); break;
                         case 23: pServico = new wsCEHConsulta.NfeConsulta(); break;
                         case 29: pServico = new wsBAHConsulta.NfeConsulta(); break;
-                        case 53: pServico = new wsDFHConsulta.NfeConsulta(); break;
+                        case 53: pServico = new wsVRHConsulta.NfeConsulta(); break;
                         case 26: pServico = new wsPEHConsulta.NfeConsulta(); break;
                         case 11: pServico = new wsVRHConsulta.NfeConsulta(); break;
                         case 13: pServico = new wsAMHConsulta.NfeConsulta(); break;
@@ -250,7 +250,6 @@ namespace uninfe
                 {
                     case 29: pServico = new wsBAPConsultaCadastro.CadConsultaCadastro(); break;
                     case 23: pServico = new wsCEPConsultaCadastro.CadConsultaCadastro(); break;
-                    case 53: pServico = new wsDFPConsultaCadastro.CadConsultaCadastro(); break;
                     case 52: pServico = new wsGOPConsultaCadastro.CadConsultaCadastro(); break;
                     case 26: pServico = new wsPEPConsultaCadastro.CadConsultaCadastro(); break;
                     case 43: pServico = new wsRSPConsultaCadastro.CadConsultaCadastro(); break;
@@ -263,7 +262,6 @@ namespace uninfe
                 switch (oParam.UFCod)
                 {
                     case 23: pServico = new wsCEHConsultaCadastro.CadConsultaCadastro(); break;
-                    case 53: pServico = new wsDFHConsultaCadastro.CadConsultaCadastro(); break;
                     case 52: pServico = new wsGOHConsultaCadastro.CadConsultaCadastro(); break;
                     case 26: pServico = new wsPEHConsultaCadastro.CadConsultaCadastro(); break;
                     case 35: pServico = new wsSPHConsultaCadastro.CadConsultaCadastro(); break;
@@ -315,7 +313,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPInutilizacao.NfeInutilizacaoService(); break;
                         case 23: pServico = new wsCEPInutilizacao.NfeInutilizacao(); break;
                         case 29: pServico = new wsBAPInutilizacao.NfeInutilizacao(); break;
-                        case 53: pServico = new wsDFPInutilizacao.NfeInutilizacao(); break;
+                        case 53: pServico = new wsVRPInutilizacao.NfeInutilizacao(); break;
                         case 26: pServico = new wsPEPInutilizacao.NfeInutilizacao(); break;
                         case 11: pServico = new wsVRPInutilizacao.NfeInutilizacao(); break;
                         case 13: pServico = new wsAMPInutilizacao.NfeInutilizacao(); break;
@@ -352,7 +350,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHInutilizacao.NfeInutilizacaoService(); break;
                         case 23: pServico = new wsCEHInutilizacao.NfeInutilizacao(); break;
                         case 29: pServico = new wsBAHInutilizacao.NfeInutilizacao(); break;
-                        case 53: pServico = new wsDFHInutilizacao.NfeInutilizacao(); break;
+                        case 53: pServico = new wsVRHInutilizacao.NfeInutilizacao(); break;
                         case 26: pServico = new wsPEHInutilizacao.NfeInutilizacao(); break;
                         case 11: pServico = new wsVRHInutilizacao.NfeInutilizacao(); break;
                         case 13: pServico = new wsAMHInutilizacao.NfeInutilizacao(); break;
@@ -419,7 +417,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPRecepcao.NfeRecepcao(); break;
                         case 23: pServico = new wsCEPRecepcao.NfeRecepcao(); break;
                         case 29: pServico = new wsBAPRecepcao.NfeRecepcao(); break;
-                        case 53: pServico = new wsDFPRecepcao.NfeRecepcao(); break;
+                        case 53: pServico = new wsVRPRecepcao.NfeRecepcao(); break;
                         case 26: pServico = new wsPEPRecepcao.NfeRecepcao(); break;
                         case 11: pServico = new wsVRPRecepcao.NfeRecepcao(); break;
                         case 13: pServico = new wsAMPRecepcao.NfeRecepcao(); break;
@@ -456,7 +454,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHRecepcao.NfeRecepcao(); break;
                         case 23: pServico = new wsCEHRecepcao.NfeRecepcao(); break;
                         case 29: pServico = new wsBAHRecepcao.NfeRecepcao(); break;
-                        case 53: pServico = new wsDFHRecepcao.NfeRecepcao(); break;
+                        case 53: pServico = new wsVRHRecepcao.NfeRecepcao(); break;
                         case 26: pServico = new wsPEHRecepcao.NfeRecepcao(); break;
                         case 11: pServico = new wsVRHRecepcao.NfeRecepcao(); break;
                         case 13: pServico = new wsAMHRecepcao.NfeRecepcao(); break;
@@ -525,7 +523,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPRetRecepcao.NfeRetRecepcaoService(); break;
                         case 23: pServico = new wsCEPRetRecepcao.NfeRetRecepcao(); break;
                         case 29: pServico = new wsBAPRetRecepcao.NfeRetRecepcao(); break;
-                        case 53: pServico = new wsDFPRetRecepcao.NfeRetRecepcao(); break;
+                        case 53: pServico = new wsVRPRetRecepcao.NfeRetRecepcao(); break;
                         case 26: pServico = new wsPEPRetRecepcao.NfeRetRecepcao(); break;
                         case 11: pServico = new wsVRPRetRecepcao.NfeRetRecepcao(); break;
                         case 13: pServico = new wsAMPRetRecepcao.NfeRetRecepcao(); break;
@@ -562,7 +560,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHRetRecepcao.NfeRetRecepcaoService(); break;
                         case 23: pServico = new wsCEHRetRecepcao.NfeRetRecepcao(); break;
                         case 29: pServico = new wsBAHRetRecepcao.NfeRetRecepcao(); break;
-                        case 53: pServico = new wsDFHRetRecepcao.NfeRetRecepcao(); break;
+                        case 53: pServico = new wsVRHRetRecepcao.NfeRetRecepcao(); break;
                         case 26: pServico = new wsPEHRetRecepcao.NfeRetRecepcao(); break;
                         case 11: pServico = new wsVRHRetRecepcao.NfeRetRecepcao(); break;
                         case 13: pServico = new wsAMHRetRecepcao.NfeRetRecepcao(); break;
@@ -629,7 +627,7 @@ namespace uninfe
                         case 41: pServico = new wsPRPStatusServico.NfeStatusServico(); break;
                         case 23: pServico = new wsCEPStatusServico.NfeStatusServico(); break;
                         case 29: pServico = new wsBAPStatusServico.NfeStatusServico(); break;
-                        case 53: pServico = new wsDFPStatusServico.NfeStatusServico(); break;
+                        case 53: pServico = new wsVRPStatusServico.NfeStatusServico(); break;
                         case 26: pServico = new wsPEPStatusServico.NfeStatusServico(); break;
                         case 11: pServico = new wsVRPStatusServico.NfeStatusServico(); break;
                         case 13: pServico = new wsAMPStatusServico.NfeStatusServico(); break;
@@ -666,7 +664,7 @@ namespace uninfe
                         case 41: pServico = new wsPRHStatusServico.NfeStatusServico(); break;
                         case 23: pServico = new wsCEHStatusServico.NfeStatusServico(); break;
                         case 29: pServico = new wsBAHStatusServico.NfeStatusServico(); break;
-                        case 53: pServico = new wsDFHStatusServico.NfeStatusServico(); break;
+                        case 53: pServico = new wsVRHStatusServico.NfeStatusServico(); break;
                         case 26: pServico = new wsPEHStatusServico.NfeStatusServico(); break;
                         case 11: pServico = new wsVRHStatusServico.NfeStatusServico(); break;
                         case 13: pServico = new wsAMHStatusServico.NfeStatusServico(); break;

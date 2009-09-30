@@ -1535,126 +1535,6 @@ namespace uninfe.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeRecepcao")]
-        public string uninfe_wsROPRecepcao_NfeRecepcao {
-            get {
-                return ((string)(this["uninfe_wsROPRecepcao_NfeRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeRetRecepcao")]
-        public string uninfe_wsROPRetRecepcao_NfeRetRecepcao {
-            get {
-                return ((string)(this["uninfe_wsROPRetRecepcao_NfeRetRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeCancelamento")]
-        public string uninfe_wsROPCancelamento_NfeCancelamento {
-            get {
-                return ((string)(this["uninfe_wsROPCancelamento_NfeCancelamento"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeInutilizacao")]
-        public string uninfe_wsROPInutilizacao_NfeInutilizacao {
-            get {
-                return ((string)(this["uninfe_wsROPInutilizacao_NfeInutilizacao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeConsulta")]
-        public string uninfe_wsROPConsulta_NfeConsulta {
-            get {
-                return ((string)(this["uninfe_wsROPConsulta_NfeConsulta"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/NfeStatusServico")]
-        public string uninfe_wsROPStatusServico_NfeStatusServico {
-            get {
-                return ((string)(this["uninfe_wsROPStatusServico_NfeStatusServico"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeRecepcao")]
-        public string uninfe_wsROHRecepcao_NfeRecepcao {
-            get {
-                return ((string)(this["uninfe_wsROHRecepcao_NfeRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeRetRecepcao")]
-        public string uninfe_wsROHRetRecepcao_NfeRetRecepcao {
-            get {
-                return ((string)(this["uninfe_wsROHRetRecepcao_NfeRetRecepcao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeCancelamento")]
-        public string uninfe_wsROHCancelamento_NfeCancelamento {
-            get {
-                return ((string)(this["uninfe_wsROHCancelamento_NfeCancelamento"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeInutilizacao")]
-        public string uninfe_wsROHInutilizacao_NfeInutilizacao {
-            get {
-                return ((string)(this["uninfe_wsROHInutilizacao_NfeInutilizacao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeConsulta")]
-        public string uninfe_wsROHConsulta_NfeConsulta {
-            get {
-                return ((string)(this["uninfe_wsROHConsulta_NfeConsulta"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/NfeStatusServico")]
-        public string uninfe_wsROHStatusServico_NfeStatusServico {
-            get {
-                return ((string)(this["uninfe_wsROHStatusServico_NfeStatusServico"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://www.scan.fazenda.gov.br/NfeRecepcao/NfeRecepcao.asmx")]
         public string uninfe_wsSCANPNfeRecepcao_NfeRecepcao {
             get {
@@ -1925,16 +1805,6 @@ namespace uninfe.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/ws/CadConsultaCadastro")]
-        public string uninfe_wsROHConsultaCadastro_CadConsultaCadastro {
-            get {
-                return ((string)(this["uninfe_wsROHConsultaCadastro_CadConsultaCadastro"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/nfeWEB/services/cadconsultacadastro.asm" +
             "x")]
         public string uninfe_wsSPHConsultaCadastro_CadConsultaCadastro {
@@ -1970,16 +1840,6 @@ namespace uninfe.Properties {
         public string uninfe_wsPEPConsultaCadastro_CadConsultaCadastro {
             get {
                 return ((string)(this["uninfe_wsPEPConsultaCadastro_CadConsultaCadastro"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe.sefin.ro.gov.br:443/wsprod/CadConsultaCadastro")]
-        public string uninfe_wsROPConsultaCadastro_CadConsultaCadastro {
-            get {
-                return ((string)(this["uninfe_wsROPConsultaCadastro_CadConsultaCadastro"]));
             }
         }
         

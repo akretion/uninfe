@@ -2,14 +2,12 @@
     Amazonas - AM			
 	Bahia - BA
 	Ceará - CE
-	Distrito Federal - DF
 	Goias - GO
 	Minas Gerais - MG
 	Mato Grosso do Sul - MS
 	Mato Grosso - MT
 	Pernambuco - PE
 	Paraná - PR
-	Rondônia - RO
 	Rio Grande do Sul - RS
 	São Paulo - SP			
 
@@ -26,7 +24,10 @@ Lista dos Estados que utilizam os WebServices do Ambiente Virtual do Rio Grande 
 	Amapá - AP
 	Paraíba - PB
 	Rio de Janeiro - RJ
+	Rondônia - RO
 	Roraima - RR
 	Santa Catarina - SC
 	Sergipe - SE
 	Tocantins - TO    
+	Distrito Federal - DF
+	

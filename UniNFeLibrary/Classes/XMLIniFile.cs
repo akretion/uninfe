@@ -13,13 +13,14 @@ namespace UniNFeLibrary
 	{
         public enum Store { SameElement, MultiElements };
 
-        private XmlDocument xmldoc;
+        public XmlDocument xmldoc{get; private set;}
 		private string xmlfilename = "";
 		private string aDocElementname = "Principal";
 		private int aDocElementVersion = 1;
 		private Store aXmlFormat = Store.SameElement;
 		private bool Modified = true;
-
+        public string namespaceURI { get; set; }
+      
 		const string stxmlini_ValueNotExists = "Value '{0} - {1}' not exists!";
 		const string stxmlini_PathNotExists = "Path '{0}' not exists!";
 		const string stxmlini_CannotCreatePath = "Cannot create '{0}'";
@@ -172,6 +173,7 @@ namespace UniNFeLibrary
 			if (n != null)
 			{
 				n.RemoveAll();
+                this.Modified = true;
 
 				XmlNode _RootNode = xmldoc.DocumentElement;
 				if (_RootNode!=null)
@@ -187,22 +189,24 @@ namespace UniNFeLibrary
 			return (n!=null);
 		}
 
-		public void DeleteValue(string Path, string ValueSection)
+		public void DeleteValue(string Path, string ValueSection)   //ok
 		{
 			XmlNode n = GetPathNode(Path, false);
 			if (n != null)
 			{
 				//MessageBox.Show(Path+"\n\r"+ValueSection);
-				if (n.Attributes!=null && n.Attributes.GetNamedItem( ValueSection )!=null)
+				if (n.Attributes != null && n.Attributes.GetNamedItem( ValueSection )!=null)
 				{
 					n.Attributes.RemoveNamedItem(ValueSection);
+                    this.Modified = true;
 					return;
 				}
-				for(int i=0; i<n.ChildNodes.Count; ++i)
+				for(int i = 0; i < n.ChildNodes.Count; ++i)
 					if (n.ChildNodes[i].LocalName == ValueSection)
 					{
 						XmlNode d = n.ChildNodes[i];
-						d.RemoveAll();
+                        n.RemoveChild(d);
+                        this.Modified = true;
 						return;
 					}
 			}
@@ -263,7 +267,7 @@ namespace UniNFeLibrary
 		public double ReadValue(string Path, string ValueSection, double Default)
 		{
 			if (ValueExists(Path, ValueSection))
-				return Convert.ToDouble( ReadThisValue( Path, ValueSection ) );
+				return Convert.ToDouble( "0" + ReadThisValue( Path, ValueSection ) );
 			return Default;
 		}
 
@@ -281,7 +285,7 @@ namespace UniNFeLibrary
         public Int32 ReadValue(string Path, string ValueSection, Int32 Default)
 		{
             if (ValueExists(Path, ValueSection))
-                return Convert.ToInt32(ReadThisValue(Path, ValueSection));
+                return Convert.ToInt32("0" + ReadThisValue(Path, ValueSection));
 		    return Default;
 		}
 
@@ -454,7 +458,7 @@ namespace UniNFeLibrary
 
 		#region Write Functions
 
-		public void WriteValue(string Path, Font Value)
+		public void WriteFontValue(string Path, Font Value)
 		{
 			WriteThisValue( Translate(Path), "Name", Value.Name );
 			WriteThisValue( Translate(Path), "Size", Value.Size.ToString() );
@@ -506,7 +510,8 @@ namespace UniNFeLibrary
                 if (n != null)
                 {
                     Modified = true;
-                    n.InnerText = Value;
+                    if (!string.IsNullOrEmpty(Value))
+                        n.InnerText = Value;
                 }
 			}
 			catch
@@ -532,6 +537,28 @@ namespace UniNFeLibrary
             }
         }
 
+        public void WriteAttribute(string Path, string ValueSection, string Value)
+        {
+				XmlNode node = GetPathNode(Path, true);
+                if (node != null)
+                {
+                    Modified = true;
+                    if (node.Attributes.GetNamedItem(ValueSection) != null)
+                    {
+                        node = node.Attributes.GetNamedItem(ValueSection);
+                        node.Value = Value;
+                    }
+                    else
+                    {
+                        XmlAttribute xmlSection;
+
+                        xmlSection = xmldoc.CreateAttribute(ValueSection);
+                        xmlSection.Value = Value;
+                        node.Attributes.Append(xmlSection);
+                    }
+                }
+        }
+
         protected void WriteThisValue(string Path, string ValueSection, string Value)
 		{
 			try
@@ -539,7 +566,6 @@ namespace UniNFeLibrary
 				XmlNode node = GetPathNode(Path, true);
 				if (node!=null)
 				{
-					Modified = true;
 					if (node.Attributes.GetNamedItem( ValueSection )!=null)
 					{
 						node = node.Attributes.GetNamedItem( ValueSection );
@@ -575,13 +601,15 @@ namespace UniNFeLibrary
 										return;
 									}
 								xmlInf = xmldoc.CreateElement("", ValueSection, "");
-								xmlInf.InnerText = Value;
+                                if (!string.IsNullOrEmpty(Value))
+								    xmlInf.InnerText = Value;
 								node.AppendChild(xmlInf);
 								break;
 							}
 						}
 					}
-				}
+                    Modified = true;
+                }
 			}
 			catch (Exception ex)
 			{
@@ -713,14 +741,23 @@ namespace UniNFeLibrary
 					DocElementname = "Principal";
 
 				Modified = true;
-				XmlNode node = xmldoc.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
-				XmlNode childNode = xmldoc.AppendChild(node);
-				
-				XmlNode xmlInf = xmldoc.CreateElement("", DocElementname, "");
-				XmlAttribute xmlVersion = xmldoc.CreateAttribute("Version");
-				xmlVersion.Value = Convert.ToString(DocElementVersion);
-				xmlInf.Attributes.Append(xmlVersion);
-				/*childNode = */xmldoc.AppendChild(xmlInf);
+
+                XmlDeclaration node;
+                node = xmldoc.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
+                xmldoc.InsertBefore(node, xmldoc.DocumentElement);
+				//XmlNode childNode = xmldoc.AppendChild(node);
+                XmlNode xmlInf = xmldoc.CreateElement(DocElementname, this.namespaceURI);
+                xmldoc.AppendChild(xmlInf);
+
+				//XmlNode xmlInf = xmldoc.CreateElement("", DocElementname, "");
+                if (DocElementVersion > 0)
+                {
+                    XmlAttribute xmlVersion = xmldoc.CreateAttribute("Version");
+                    xmlVersion.Value = Convert.ToString(DocElementVersion);
+                    xmlInf.Attributes.Append(xmlVersion);
+                    /*childNode = */
+                    xmldoc.AppendChild(xmlInf);
+                }
 			}
 		}
 
@@ -796,7 +833,11 @@ namespace UniNFeLibrary
 			return slist;
 		}
 
-		protected XmlNode GetPathNode(string NodePath, bool CanCreate)
+        public void AddValue(XmlNode node, string Path, string Section, string value)
+        {
+        }
+
+		public XmlNode GetPathNode(string NodePath, bool CanCreate)
 		{
 			XmlNode lnode;
 			XmlNode Result = null;
@@ -859,5 +900,7 @@ namespace UniNFeLibrary
 		}
 
 		#endregion
-	}
+    
+
+    }
 }

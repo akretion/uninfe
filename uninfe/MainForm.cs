@@ -107,7 +107,7 @@ namespace uninfe
 
             //Criar XML de controle de fluxo de envios de Notas Fiscais
             FluxoNfe oFluxoNfe = new FluxoNfe();
-            oFluxoNfe.CriarXml();           
+            oFluxoNfe.CriarXml(true);           
 
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;

@@ -193,23 +193,7 @@ namespace UniNFeLibrary
                         ConfiguracaoApp.oCertificado = collection1[0];
                     }
 
-                    //Criar subpasta Assinado na pasta de envio individual de nfe
-                    if (ConfiguracaoApp.vPastaXMLEnvio.Trim() != string.Empty)
-                    {
-                        if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnvio + InfoApp.NomePastaXMLAssinado))
-                        {
-                            System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnvio + InfoApp.NomePastaXMLAssinado);
-                        }
-                    }
-
-                    //Criar subpasta Assinado na pasta de envio em lote de nfe
-                    if (ConfiguracaoApp.cPastaXMLEmLote.Trim() != string.Empty)
-                    {
-                        if (!Directory.Exists(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado))
-                        {
-                            System.IO.Directory.CreateDirectory(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado);
-                        }
-                    }
+                    ConfiguracaoApp.CriarPasta();
                 }
                 catch (Exception ex)
                 {
@@ -234,6 +218,108 @@ namespace UniNFeLibrary
                     if (oLerXml != null)
                         oLerXml.Close();
                 }
+            }
+        }
+        #endregion
+
+        #region CriarPasta()
+        /// <summary>
+        /// Criar as pastas configuradas no sistema se as mesmas não existirem
+        /// </summary>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>29/09/2009</date>
+        private static void CriarPasta()
+        {
+            try
+            {
+                //Criar pasta de envio
+                if (ConfiguracaoApp.vPastaXMLEnvio != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnvio))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnvio);
+                    }
+                }
+
+                //Criar pasta de Envio em Lote
+                if (ConfiguracaoApp.cPastaXMLEmLote != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.cPastaXMLEmLote))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.cPastaXMLEmLote);
+                    }
+                }
+
+                //Criar pasta de Retorno
+                if (ConfiguracaoApp.vPastaXMLRetorno != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLRetorno))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLRetorno);
+                    }
+                }
+
+                //Criar pasta Enviado
+                if (ConfiguracaoApp.vPastaXMLEnviado != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado);
+                    }
+                }
+
+                //Criar pasta de XML´s com erro
+                if (ConfiguracaoApp.vPastaXMLErro != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLErro))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLErro);
+                    }
+                }
+
+                //Criar pasta de Backup
+                if (ConfiguracaoApp.cPastaBackup != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.cPastaBackup))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.cPastaBackup);
+                    }
+                }
+
+                //Criar pasta para somente validação de XML´s
+                if (ConfiguracaoApp.PastaValidar != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.PastaValidar))
+                    {
+                        Directory.CreateDirectory(ConfiguracaoApp.PastaValidar);
+                    }
+                }
+
+                //Criar subpasta Assinado na pasta de envio individual de nfe
+                if (ConfiguracaoApp.vPastaXMLEnvio.Trim() != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnvio + InfoApp.NomePastaXMLAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnvio + InfoApp.NomePastaXMLAssinado);
+                    }
+                }
+
+                //Criar subpasta Assinado na pasta de envio em lote de nfe
+                if (ConfiguracaoApp.cPastaXMLEmLote.Trim() != string.Empty)
+                {
+                    if (!Directory.Exists(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -494,23 +580,23 @@ namespace UniNFeLibrary
                         switch (dados[0].ToLower())
                         {
                             case "pastaxmlenvio":
-                                ConfiguracaoApp.vPastaXMLEnvio = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.vPastaXMLEnvio = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "pastaxmlemlote":
-                                ConfiguracaoApp.cPastaXMLEmLote = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.cPastaXMLEmLote = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "pastaxmlretorno":
-                                ConfiguracaoApp.vPastaXMLRetorno = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.vPastaXMLRetorno = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "pastaxmlenviado": //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
-                                ConfiguracaoApp.vPastaXMLEnviado = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "" );
+                                ConfiguracaoApp.vPastaXMLEnviado = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "pastaxmlerro":    //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
-                                ConfiguracaoApp.vPastaXMLErro = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.vPastaXMLErro = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "unidadefederativacodigo": //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
@@ -522,7 +608,7 @@ namespace UniNFeLibrary
                                 lEncontrouTag = true;
                                 break;
                             case "tpemis":  //Se a tag <tpEmis> existir ele pega no novo conteúdo
-                                ConfiguracaoApp.tpEmis = (nElementos==2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                ConfiguracaoApp.tpEmis = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
                                 lEncontrouTag = true;
                                 break;
                             case "nomeempresa": //Se a tag <NomeEmpresa> existir ele pega no novo conteúdo
@@ -530,11 +616,11 @@ namespace UniNFeLibrary
                                 lEncontrouTag = true;
                                 break;
                             case "pastabackup": //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                                ConfiguracaoApp.cPastaBackup = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.cPastaBackup = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "pastavalidar":    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                                ConfiguracaoApp.PastaValidar = (nElementos==2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                ConfiguracaoApp.PastaValidar = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                 lEncontrouTag = true;
                                 break;
                             case "gravarretornotxtnfe": //Se a tag <PastaValidar> existir ele pega no novo conteúdo
@@ -546,7 +632,27 @@ namespace UniNFeLibrary
                                 lEncontrouTag = true;
                                 break;
                             case "diaslimpeza": //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.DiasLimpeza = (nElementos==2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                ConfiguracaoApp.DiasLimpeza = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                lEncontrouTag = true;
+                                break;
+                            case "proxy": //Se a tag <Proxy> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.Proxy = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : false);
+                                lEncontrouTag = true;
+                                break;
+                            case "proxyservidor": //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.ProxyServidor = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "proxyusuario": //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.ProxyUsuario = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "proxysenha": //Se a tag <ProxySenha> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.ProxySenha = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "proxyporta": //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
+                                ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32(dados[1].Trim()) : 0);
                                 lEncontrouTag = true;
                                 break;
                         }
@@ -649,6 +755,36 @@ namespace UniNFeLibrary
                             ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("DiasLimpeza")[0].InnerText);
                             lEncontrouTag = true;
                         }
+                        //Se a tag <Proxy> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("Proxy").Count != 0)
+                        {
+                            ConfiguracaoApp.Proxy = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName("Proxy")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("ProxyServidor").Count != 0)
+                        {
+                            ConfiguracaoApp.ProxyServidor = ConfUniNfeElemento.GetElementsByTagName("ProxyServidor")[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("ProxyUsuario").Count != 0)
+                        {
+                            ConfiguracaoApp.ProxyUsuario = ConfUniNfeElemento.GetElementsByTagName("ProxyUsuario")[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <ProxySenha> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("ProxySenha").Count != 0)
+                        {
+                            ConfiguracaoApp.ProxySenha = ConfUniNfeElemento.GetElementsByTagName("ProxySenha")[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("ProxyPorta").Count != 0)
+                        {
+                            ConfiguracaoApp.ProxyPorta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("ProxyPorta")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
                     }
                     #endregion
                 }
@@ -664,7 +800,7 @@ namespace UniNFeLibrary
             {
                 if (lErro == false)
                 {
-                    if (/*this.ValidarConfig() == false ||*/ this.GravarConfig() == false)
+                    if (this.GravarConfig() == false)
                     {
                         cStat = "2";
                         xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + InfoApp.NomeAplicacao() + ": " + ConfiguracaoApp.cErroGravarConfig;
