@@ -886,10 +886,10 @@ namespace UniNFeLibrary
         #endregion
 
         /// <summary>
-        /// danasa 8-2009
+        /// Remove a ultima barra de uma pasta, exemplo c:\pasta\ fica c:\pasta. danasa 8-2009
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">tring que é para remover os caracteres</param>
+        /// <returns>Retorna a string sem a ultima barra se tiver</returns>
         private static string RemoveEndSlash(string value)
         {
             if (!string.IsNullOrEmpty(value))
@@ -897,7 +897,7 @@ namespace UniNFeLibrary
                 while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
                     value = value.Substring(0, value.Length - 1);
             }
-            return value;
+            return value.Replace("\r\n","").Trim();
         }
     }
     #endregion
