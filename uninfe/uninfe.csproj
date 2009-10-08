@@ -56,6 +56,7 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Classes\LerXML.cs" />
     <Compile Include="Classes\DefObjServico.cs" />
+    <Compile Include="Classes\NFeEmProcessamento.cs" />
     <Compile Include="Formulario\FormConsultaCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +149,11 @@
     </Compile>
     <Compile Include="Formulario\ValidarXML.designer.cs">
       <DependentUpon>ValidarXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMGHConsultaCadastro\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\wsAMHCancelamento\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -484,11 +491,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\wsMGHCancelamento\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\wsMGHConsultaCadastro\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3906,6 +3908,11 @@
     <None Include="Resources\pdf3.png" />
     <Content Include="danasa092009_1.txt" />
     <Content Include="uninfe.ico" />
+    <None Include="Web References\wsMGHConsultaCadastro\CadConsultaCadastro.wsdl" />
+    <None Include="Web References\wsMGHConsultaCadastro\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\wsAMHCancelamento\NfeCancelamento.wsdl" />
     <None Include="Web References\wsAMHCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -4132,8 +4139,8 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\wsMGHConsultaCadastro\CadConsultaCadastro.wsdl" />
-    <None Include="Web References\wsMGHConsultaCadastro\Reference.map">
+    <None Include="Web References\wsMGPConsultaCadastro\CadConsultaCadastro.wsdl" />
+    <None Include="Web References\wsMGPConsultaCadastro\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

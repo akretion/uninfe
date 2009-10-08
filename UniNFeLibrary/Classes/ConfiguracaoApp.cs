@@ -21,6 +21,7 @@ namespace UniNFeLibrary
     public class ConfiguracaoApp
     {
         #region Propriedades
+        public static DateTime dUltimaAtualizacaoEmProcessamento { get; set; }  //danasa 10-2009
         public static string vPastaXMLEnvio { get; set; }
         public static string vPastaXMLRetorno { get; set; }
         public static string vPastaXMLEnviado { get; set; }
@@ -173,6 +174,14 @@ namespace UniNFeLibrary
                                         else if (oLerXml.Name == "GravarRetornoTXTNFe") { oLerXml.Read(); ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(oLerXml.Value); }
                                         else if (oLerXml.Name == "DiretorioSalvarComo") { oLerXml.Read(); ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(oLerXml.Value); }
                                         else if (oLerXml.Name == "DiasLimpeza") { oLerXml.Read(); ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(oLerXml.Value); }
+                                        ///
+                                        /// carrega os dados para o proxy - danasa 10-2009
+                                        /// 
+                                        else if (oLerXml.Name == "Proxy") { oLerXml.Read(); ConfiguracaoApp.Proxy = Convert.ToBoolean(oLerXml.Value); }
+                                        else if (oLerXml.Name == "ProxyServidor") { oLerXml.Read(); ConfiguracaoApp.ProxyServidor = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "ProxyUsuario") { oLerXml.Read(); ConfiguracaoApp.ProxyUsuario = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "ProxySenha") { oLerXml.Read(); ConfiguracaoApp.ProxySenha = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "ProxyPorta") { oLerXml.Read(); ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0"+oLerXml.Value); }
                                     }
                                 }
                                 break;
@@ -208,7 +217,7 @@ namespace UniNFeLibrary
                     if (Directory.Exists(ConfiguracaoApp.vPastaXMLRetorno))
                     {
                         Auxiliar oAux = new Auxiliar();
-                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(vArquivoConfig) + ".err", "ConfiguracaoApp.CarregarDados: \r\n" + (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
                     }
                     else
                         MessageBox.Show((ex.InnerException != null ? ex.InnerException.Message : ex.Message));
@@ -233,7 +242,7 @@ namespace UniNFeLibrary
             try
             {
                 //Criar pasta de envio
-                if (ConfiguracaoApp.vPastaXMLEnvio != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnvio))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnvio))
                     {
@@ -242,7 +251,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta de Envio em Lote
-                if (ConfiguracaoApp.cPastaXMLEmLote != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.cPastaXMLEmLote))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.cPastaXMLEmLote))
                     {
@@ -251,7 +260,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta de Retorno
-                if (ConfiguracaoApp.vPastaXMLRetorno != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLRetorno))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.vPastaXMLRetorno))
                     {
@@ -260,7 +269,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta Enviado
-                if (ConfiguracaoApp.vPastaXMLEnviado != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnviado))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado))
                     {
@@ -269,7 +278,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta de XML´s com erro
-                if (ConfiguracaoApp.vPastaXMLErro != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLErro))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.vPastaXMLErro))
                     {
@@ -278,7 +287,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta de Backup
-                if (ConfiguracaoApp.cPastaBackup != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.cPastaBackup))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.cPastaBackup))
                     {
@@ -287,7 +296,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar pasta para somente validação de XML´s
-                if (ConfiguracaoApp.PastaValidar != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.PastaValidar))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.PastaValidar))
                     {
@@ -296,7 +305,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar subpasta Assinado na pasta de envio individual de nfe
-                if (ConfiguracaoApp.vPastaXMLEnvio.Trim() != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnvio))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnvio + InfoApp.NomePastaXMLAssinado))
                     {
@@ -305,7 +314,7 @@ namespace UniNFeLibrary
                 }
 
                 //Criar subpasta Assinado na pasta de envio em lote de nfe
-                if (ConfiguracaoApp.cPastaXMLEmLote.Trim() != string.Empty)
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.cPastaXMLEmLote))
                 {
                     if (!Directory.Exists(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado))
                     {
@@ -379,7 +388,7 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
-                    ConfiguracaoApp.cErroGravarConfig = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    ConfiguracaoApp.cErroGravarConfig = "ConfiguracaoApp.GravarConfig: \r\n" + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
             }
 
@@ -652,7 +661,7 @@ namespace UniNFeLibrary
                                 lEncontrouTag = true;
                                 break;
                             case "proxyporta": //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32(dados[1].Trim()) : 0);
+                                ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
                                 lEncontrouTag = true;
                                 break;
                         }
@@ -782,7 +791,7 @@ namespace UniNFeLibrary
                         //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName("ProxyPorta").Count != 0)
                         {
-                            ConfiguracaoApp.ProxyPorta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName("ProxyPorta")[0].InnerText);
+                            ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + ConfUniNfeElemento.GetElementsByTagName("ProxyPorta")[0].InnerText);
                             lEncontrouTag = true;
                         }
                     }
@@ -886,10 +895,10 @@ namespace UniNFeLibrary
         #endregion
 
         /// <summary>
-        /// Remove a ultima barra de uma pasta, exemplo c:\pasta\ fica c:\pasta. danasa 8-2009
+        /// danasa 8-2009
         /// </summary>
-        /// <param name="value">tring que é para remover os caracteres</param>
-        /// <returns>Retorna a string sem a ultima barra se tiver</returns>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private static string RemoveEndSlash(string value)
         {
             if (!string.IsNullOrEmpty(value))

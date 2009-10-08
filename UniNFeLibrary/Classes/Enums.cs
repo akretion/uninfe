@@ -85,7 +85,11 @@ namespace UniNFeLibrary.Enums
         /// <summary>
         /// Monta chave de acesso
         /// </summary>
-        GerarChaveNFe
+        GerarChaveNFe,
+        /// <summary>
+        /// Efetua verificações nas notas em processamento para evitar algumas falhas e perder retornos de autorização de notas
+        /// </summary>
+        EmProcessamento
     }
     #endregion
 

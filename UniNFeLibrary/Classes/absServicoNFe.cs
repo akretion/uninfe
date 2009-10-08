@@ -147,11 +147,19 @@ namespace UniNFeLibrary
                     FluxoNfe oFluxoNfe = new FluxoNfe();
                     if (oFluxoNfe.NfeExiste(ChaveNfe))
                     {
-                        //Deletar o arquivo da pasta em processamento
-                        oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                        //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
+                        //oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
                         //Deletar a NFE do arquivo de controle de fluxo
-                        oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
+                        //oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
+
+                        //Vou forçar uma exceção, e o ERP através do inicio da mensagem de erro pode tratar e já gerar uma consulta
+                        //situação para finalizar o processo. Assim envito perder os XML´s que estão na pasta EmProcessamento
+                        //tendo assim a possibilidade de gerar o -procNfe.XML através da consulta situação.
+                        //Wandrey 08/10/2009
+
+                        throw new Exception("NFE NO FLUXO: Esta nota fiscal já está na pasta de Notas Fiscais em processo de envio, desta forma não é possível envia-la novamente. Se a nota fiscal estiver presa no fluxo de envio sem conseguir finalizar o processo, gere um consulta situação da NFe para forçar a finalização.\r\n" +
+                            this.vXmlNfeDadosMsg);
                     }
 
                     //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
@@ -451,6 +459,10 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoLote();
         #endregion
 
+        #region LerRetornoSit()
+        protected abstract void LerRetornoSit();
+        #endregion
+
         #region LerRetornoCanc()
         protected abstract void LerRetornoCanc();
         #endregion
@@ -458,7 +470,6 @@ namespace UniNFeLibrary
         #region LerRetornoInut()
         protected abstract void LerRetornoInut();
         #endregion
-
 
         public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
         {

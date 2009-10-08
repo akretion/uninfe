@@ -46,6 +46,11 @@ namespace UniNFeLibrary
 
             switch (srvServico)
             {
+                case Servicos.EmProcessamento:
+                    // danasa 10-2009
+                    this.EmProcessamento();
+                    break;
+
                 case Servicos.CancelarNFe:
                     strMetodo = "Cancelamento";
                     lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.PedCan);
@@ -250,6 +255,10 @@ namespace UniNFeLibrary
         }
         #endregion
 
+        #region EmProcessamento
+        protected abstract void EmProcessamento();
+        #endregion
+
         #region EnviarArquivo()
         /// <summary>
         /// Analisa o tipo do XML que está na pasta de envio e executa a operação necessária. Exemplo: Envia ao SEFAZ, reconfigura o UniNFE, etc... 
@@ -322,7 +331,8 @@ namespace UniNFeLibrary
                 string cError = "";
                 try
                 {
-                    foreach (string item in Directory.GetFiles(strPasta, strMascara))
+                    string[] filesInFolder = Directory.GetFiles(strPasta, strMascara);
+                    foreach (string item in filesInFolder)
                     {
                         lstArquivos.Add(item);
                     }
@@ -648,10 +658,10 @@ namespace UniNFeLibrary
             lstMascaras.Add(ExtXml.PedCan);
             lstMascaras.Add(ExtXml.PedInu);
             lstMascaras.Add(ExtXml.PedSta);
-            lstMascaras.Add(ExtXml.ProcNFe);
-            lstMascaras.Add(ExtXml.ProcCancNFe);
-            lstMascaras.Add(ExtXml.ProcInutNFe);
             lstMascaras.Add(ExtXml.ConsCad);
+            lstMascaras.Add(ExtXmlRet.ProcCancNFe);
+            lstMascaras.Add(ExtXmlRet.ProcInutNFe);
+            lstMascaras.Add(ExtXmlRet.ProcNFe);
 
             Auxiliar oAux = new Auxiliar();
 

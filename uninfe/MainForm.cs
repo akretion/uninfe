@@ -37,10 +37,7 @@ namespace uninfe
         ServicoUniNFe oServicoAltCon = new ServicoUniNFe();
         ServicoUniNFe oServicoValidarAssinar = new ServicoUniNFe();
         ServicoUniNFe oServicoConvTXT = new ServicoUniNFe();
-
-        /// <summary>
-        /// danasa 9-2009
-        /// </summary>
+        ServicoUniNFe oServicoEmProcessamento = new ServicoUniNFe();
         ServicoUniNFe oServicoGerarChaveNFe = new ServicoUniNFe();
         #endregion
 
@@ -60,8 +57,8 @@ namespace uninfe
         ParameterizedThreadStart oOperacaoAltCon;
         ParameterizedThreadStart oOperacaoValidarAssinar;
         ParameterizedThreadStart oOperacaoConvTXT;
-
         ParameterizedThreadStart oOperacaoGerarChaveNFe;
+        ParameterizedThreadStart oOperacaoEmProcessamento;
 
         Thread oThreadAssinaNfeEnvio;
         Thread oThreadAssinaNfeEnvioEmLote;
@@ -78,8 +75,8 @@ namespace uninfe
         Thread oThreadAltCon;
         Thread oThreadValidarAssinar;
         Thread oThreadConvTXT;
-
         Thread oThreadGerarChaveNFe;
+        Thread oThreadEmProcessamento;
         /// <summary>
         /// executa a limpeza das pastas temp e retorno
         /// </summary>
@@ -288,6 +285,17 @@ namespace uninfe
                 oThreadLimpeza.Start();
             }
             #endregion
+
+            #region Executar a Thread que consulta uma nota e a fecha se autorizada ou denegada
+            /// <summary>
+            /// danasa 10-2009
+            /// </summary>
+//            oOperacaoEmProcessamento = new ParameterizedThreadStart(oServicoEmProcessamento.BuscaXML);
+//          oThreadEmProcessamento = new Thread(oOperacaoEmProcessamento);
+//          oThreadEmProcessamento.Name = Servicos.EmProcessamento.ToString();
+//          oThreadEmProcessamento.IsBackground = true;
+//          oThreadEmProcessamento.Start(Servicos.EmProcessamento);
+            #endregion
         }
         #endregion
 
@@ -425,6 +433,7 @@ namespace uninfe
             oThreadConvTXT.Abort();
             oThreadGerarChaveNFe.Abort();
             if (oThreadLimpeza != null) oThreadLimpeza.Abort();
+//          oThreadEmProcessamento.Abort();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -170,26 +170,6 @@ namespace uninfe
         }
         #endregion
 
-        #region LerXMLNFe()
-        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
-
-            return oLerXML.oDadosNfe;
-        }
-        #endregion
-
-        #region LerXMLRecibo()
-        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Recibo(Arquivo);
-
-            return oLerXML.oDadosRec;
-        }
-        #endregion
-
         #region GerarChaveNFe
         protected override void GerarChaveNFe()
         {
@@ -213,7 +193,36 @@ namespace uninfe
         }
         #endregion
 
+        #region EmProcessamento
+        protected override void EmProcessamento()
+        {
+            new NFeEmProcessamento();
+        }
         #endregion
+
+
+        #region LerXMLNFe()
+        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Nfe(Arquivo);
+
+            return oLerXML.oDadosNfe;
+        }
+        #endregion
+
+        #region LerXMLRecibo()
+        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Recibo(Arquivo);
+
+            return oLerXML.oDadosRec;
+        }
+        #endregion
+
+        #endregion
+
     }
     #endregion
 }

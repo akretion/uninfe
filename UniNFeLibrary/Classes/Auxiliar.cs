@@ -487,7 +487,7 @@ namespace UniNFeLibrary
 
         #region LerTag()
         /// <summary>
-        /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo.
+        /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo com um ponto e vírgula no final do conteúdo.
         /// </summary>
         /// <param name="Elemento">Elemento a ser pesquisado o Nome da TAG</param>
         /// <param name="NomeTag">Nome da Tag</param>
@@ -496,12 +496,35 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public string LerTag(XmlElement Elemento, string NomeTag)
         {
+            return this.LerTag(Elemento, NomeTag, true);
+        }
+        #endregion
+
+        #region LerTag()
+        /// <summary>
+        /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo, com ou sem um ponto e vírgula no final do conteúdo.
+        /// </summary>
+        /// <param name="Elemento">Elemento a ser pesquisado o Nome da TAG</param>
+        /// <param name="NomeTag">Nome da Tag</param>
+        /// <param name="RetornaPontoVirgula">Retorna com ponto e vírgula no final do conteúdo da tag</param>
+        /// <returns>Conteúdo da tag</returns>
+        /// <date>05/08/2009</date>
+        /// <by>Wandrey Mundin Ferreira</by>
+        public string LerTag(XmlElement Elemento, string NomeTag, bool RetornaPontoVirgula)
+        {
             string Retorno = string.Empty;
 
             if (Elemento.GetElementsByTagName(NomeTag).Count != 0)
             {
-                Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText.Replace(";"," ");  //danasa 19-9-2009
-                Retorno += ";";
+                if (RetornaPontoVirgula)
+                {
+                    Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText.Replace(";", " ");  //danasa 19-9-2009
+                    Retorno += ";";
+                }
+                else
+                {
+                    Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText;  //Wandrey 07/10/2009
+                }
             }
             return Retorno;
         }
@@ -543,14 +566,13 @@ namespace UniNFeLibrary
 
                 if (Directory.Exists(ConfiguracaoApp.vPastaXMLErro) == true)
                 {
-                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
                     string vNomeArquivo = ConfiguracaoApp.vPastaXMLErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
-                    if (File.Exists(vNomeArquivo))
-                    {
-                        FileInfo oArqDestino = new FileInfo(vNomeArquivo);
-                        oArqDestino.Delete();
-                    }
 
+                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
+                    if (File.Exists(vNomeArquivo))
+                        this.DeletarArquivo(vNomeArquivo);
+
+                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
                     oArquivo.MoveTo(vNomeArquivo);
                 }
                 else
@@ -569,23 +591,22 @@ namespace UniNFeLibrary
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg)</example>
         public void MoveArqErro(string Arquivo)
         {
-            this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));// ".xml");
+            this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
         }
         #endregion
 
         #region MoverArquivo()
         public void MoverArquivo(string Arquivo, string strDestinoArquivo)
         {
-            //Definir o arquivo que vai ser deletado ou movido para outra pasta
-            FileInfo oArquivo = new FileInfo(Arquivo);
-
-            //Mover o arquivo original para a pasta de destino
-            if (File.Exists(strDestinoArquivo))
+            if (File.Exists(Arquivo))   //danasa 10-2009
             {
-                FileInfo oArqDestino = new FileInfo(strDestinoArquivo);
-                oArqDestino.Delete();
+                //Mover o arquivo original para a pasta de destino
+                this.DeletarArquivo(strDestinoArquivo);
+
+                //Definir o arquivo que vai ser deletado ou movido para outra pasta
+                FileInfo oArquivo = new FileInfo(Arquivo);
+                oArquivo.MoveTo(strDestinoArquivo);
             }
-            oArquivo.MoveTo(strDestinoArquivo);
         }
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
@@ -739,6 +760,19 @@ namespace UniNFeLibrary
             catch (Exception ex)
             {
                 throw (ex);
+            }
+        }
+        #endregion
+
+        #region RenomearArquivo
+        // danasa 10-2009
+        public void RenomearArquivo(string oldFileName, string newFileName)
+        {
+            this.DeletarArquivo(newFileName);
+            if (File.Exists(oldFileName))
+            {
+                FileInfo oArquivo = new FileInfo(oldFileName);
+                oArquivo.MoveTo(newFileName);
             }
         }
         #endregion
@@ -1297,6 +1331,35 @@ namespace UniNFeLibrary
             }
 
             return conteudo_xml;
+        }
+        #endregion
+
+        #region EstaAutorizada()
+        /// <summary>
+        /// Verifica se o XML de Distribuição da Nota Fiscal (-procNFe) já está na pasta de Notas Autorizadas
+        /// </summary>
+        /// <param name="Arquivo">Arquivo XML a ser verificado</param>
+        /// <param name="Emissao">Data de emissão da NFe</param>
+        /// <param name="Extensao">Extensão a ser verificada (ExtXml.Nfe ou ExtXmlRet.ProcNFe)</param>
+        /// <returns>Se está na pasta de XML´s autorizados</returns>
+        public bool EstaAutorizada(string Arquivo, DateTime Emissao, string Extensao)
+        {
+            string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+            return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + Extensao);
+        }
+        #endregion
+
+        #region EstaDenegada()
+        /// <summary>
+        /// Verifica se o XML da nota fiscal já está na pasta de Notas Denegadas
+        /// </summary>
+        /// <param name="Arquivo">Arquivo XML a ser verificado</param>
+        /// <param name="Emissao">Data de emissão da NFe</param>
+        /// <returns>Se está na pasta de XML´s denegados</returns>
+        public bool EstaDenegada(string Arquivo, DateTime Emissao)
+        {
+            string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+            return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + "-den.xml");
         }
         #endregion
     }
