@@ -290,11 +290,11 @@ namespace uninfe
             /// <summary>
             /// danasa 10-2009
             /// </summary>
-//            oOperacaoEmProcessamento = new ParameterizedThreadStart(oServicoEmProcessamento.BuscaXML);
-//          oThreadEmProcessamento = new Thread(oOperacaoEmProcessamento);
-//          oThreadEmProcessamento.Name = Servicos.EmProcessamento.ToString();
-//          oThreadEmProcessamento.IsBackground = true;
-//          oThreadEmProcessamento.Start(Servicos.EmProcessamento);
+            oOperacaoEmProcessamento = new ParameterizedThreadStart(oServicoEmProcessamento.BuscaXML);
+            oThreadEmProcessamento = new Thread(oOperacaoEmProcessamento);
+            oThreadEmProcessamento.Name = Servicos.EmProcessamento.ToString();
+            oThreadEmProcessamento.IsBackground = true;
+            oThreadEmProcessamento.Start(Servicos.EmProcessamento);
             #endregion
         }
         #endregion
@@ -433,7 +433,7 @@ namespace uninfe
             oThreadConvTXT.Abort();
             oThreadGerarChaveNFe.Abort();
             if (oThreadLimpeza != null) oThreadLimpeza.Abort();
-//          oThreadEmProcessamento.Abort();
+            oThreadEmProcessamento.Abort();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

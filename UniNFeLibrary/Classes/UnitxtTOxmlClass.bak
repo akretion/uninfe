@@ -515,15 +515,42 @@ namespace UniNFeLibrary
                         {
                             dremit["IE"] = "";
                             //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
+                            /*
                             for (iLeitura = 0; iLeitura <= Math.Min(nElementos, 6); iLeitura++)
                             {
                                 //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
                                 if (iLeitura > 1 & dados[iLeitura] != null && dados[iLeitura - 1].Trim() != "")
                                     dremit[iLeitura] = dados[iLeitura - 1].Trim();
-                            }
+                            }*/
                             dremit["infNFe_Id"] = 0;
                             dremit["emit_Id"] = 0;
 
+                            dremit["xNome"] = dados[1];
+                            if (nElementos > 1)
+                            {
+                                if (dados[2] != "")
+                                    dremit["xFant"] = dados[2];
+                                if (nElementos > 2)
+                                {
+                                    if (dados[3] != "")
+                                        dremit["IE"] = dados[3];
+                                    if (nElementos > 3)
+                                    {
+                                        if (dados[4] != "")
+                                            dremit["IEST"] = dados[4];
+                                        if (nElementos > 4)
+                                        {
+                                            if (dados[5] != "")
+                                                dremit["IM"] = dados[5];
+                                            if (nElementos > 5)
+                                            {
+                                                if (dados[6] != "")
+                                                    dremit["CNAE"] = dados[6];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             this.Check(dados[0], "xNome", dremit, ObOp.Obrigatorio, 1, 60);
                             this.Check(dados[0], "xFant", dremit, ObOp.Opcional, 1, 60);
                             this.Check(dados[0], "IE", dremit, ObOp.Obrigatorio, 0, 14);

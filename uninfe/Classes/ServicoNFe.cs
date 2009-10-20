@@ -796,6 +796,9 @@ namespace uninfe
                                     case "302": //NFe Denegada - Problemas com o destinatário
                                         goto case "301";
 
+                                    case "110": //NFe Denegada - Não sei quando ocorre este, mas descobrir ele no manual então estou incluindo. Wandrey 20/10/2009
+                                        goto case "301";
+
                                     default: //NFe foi rejeitada
                                         //Mover o XML da NFE a pasta de XML´s com erro
                                         oAux.MoveArqErro(strArquivoNFe);
@@ -865,24 +868,28 @@ namespace uninfe
                                     {
                                         XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
 
-                                        //O retorno da consulta situação a posição das tag´s é diferente do que vem 
-                                        //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
-                                        //para que fique um XML de distribuição válido. Wandrey 07/10/2009
-                                        string strProtNfe = "<protNFe versao=\"1.10\">" +
-                                            "<infProt>" +
-                                            "<tpAmb>" + oAux.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
-                                            "<verAplic>" + oAux.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
-                                            "<chNFe>" + oAux.LerTag(infConsSitElemento, "chNFe", false) + "</chNFe>" +
-                                            "<dhRecbto>" + oAux.LerTag(infConsSitElemento, "dhRecbto", false) + "</dhRecbto>" +
-                                            "<nProt>" + oAux.LerTag(infConsSitElemento, "nProt", false) + "</nProt>" +
-                                            "<digVal>" + oAux.LerTag(infConsSitElemento, "digVal", false) + "</digVal>" +
-                                            "<cStat>" + oAux.LerTag(infConsSitElemento, "cStat", false) + "</cStat>" +
-                                            "<xMotivo>" + oAux.LerTag(infConsSitElemento, "xMotivo", false) + "</xMotivo>" +
-                                            "</infProt>" +
-                                            "</protNFe>";
-
+                                        //Pegar o Status do Retorno da consulta situação
                                         string strStat = oAux.LerTag(infConsSitElemento, "cStat").Replace(";", "");
-                                        string strChaveNFe = "NFe" + oAux.LerTag(infConsSitElemento, "chNFe").Replace(";", "");
+
+                                        string strChaveNFe = string.Empty;
+
+                                        if (infConsSitElemento.GetElementsByTagName("chNFe")[0] != null)
+                                        {
+                                            //Encontrou a tag chNFe
+                                            strChaveNFe = "NFe" + oAux.LerTag(infConsSitElemento, "chNFe").Replace(";", "");
+                                        }
+                                        else
+                                        {
+                                            //Se não encontrar a tag chNFe, o que ocorre quando a nota foi rejeitada,
+                                            //vou tentar pegar a chave pelo atributo ID que tem na tag infProt,
+                                            //ou não vou conseguir finalizar o processo pela consulta situação. Wandrey 20/10/2009
+                                            string ID = infConsSitElemento.GetAttribute("Id");
+                                            if (ID != "")
+                                            {
+                                                strChaveNFe = "NFe" + ID.Substring(2, 44);
+                                            }
+
+                                        }
 
                                         //Definir o nome do arquivo da NFe e seu caminho
                                         string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
@@ -890,7 +897,7 @@ namespace uninfe
                                         if (string.IsNullOrEmpty(strNomeArqNfe))
                                         {
                                             if (string.IsNullOrEmpty(strChaveNFe))
-                                                throw new Exception("LerRetornoLote(): Não pode obter o nome do arquivo");
+                                                throw new Exception("LerRetornoSit(): Não pode obter o nome do arquivo");
 
                                             strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
                                         }
@@ -900,6 +907,22 @@ namespace uninfe
                                         switch (strStat)
                                         {
                                             case "100":
+                                                //O retorno da consulta situação a posição das tag´s é diferente do que vem 
+                                                //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
+                                                //para que fique um XML de distribuição válido. Wandrey 07/10/2009
+                                                string strProtNfe = "<protNFe versao=\"1.10\">" +
+                                                    "<infProt>" +
+                                                    "<tpAmb>" + oAux.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
+                                                    "<verAplic>" + oAux.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
+                                                    "<chNFe>" + oAux.LerTag(infConsSitElemento, "chNFe", false) + "</chNFe>" +
+                                                    "<dhRecbto>" + oAux.LerTag(infConsSitElemento, "dhRecbto", false) + "</dhRecbto>" +
+                                                    "<nProt>" + oAux.LerTag(infConsSitElemento, "nProt", false) + "</nProt>" +
+                                                    "<digVal>" + oAux.LerTag(infConsSitElemento, "digVal", false) + "</digVal>" +
+                                                    "<cStat>" + oAux.LerTag(infConsSitElemento, "cStat", false) + "</cStat>" +
+                                                    "<xMotivo>" + oAux.LerTag(infConsSitElemento, "xMotivo", false) + "</xMotivo>" +
+                                                    "</infProt>" +
+                                                    "</protNFe>";
+
                                                 //Definir o nome do arquivo -procNfe.xml                                               
                                                 string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
                                                                             PastaEnviados.EmProcessamento.ToString() + "\\" +
@@ -927,6 +950,13 @@ namespace uninfe
                                                         }
                                                     }
 
+                                                    //Se o XML de distribuição não estiver ainda na pasta de autorizados
+                                                    if (!procNFeJaNaAutorizada)
+                                                    {
+                                                        //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
+                                                        oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                    }
+
                                                     //Se a NFe não exitiver ainda na pasta de autorizados
                                                     if (!NFeJaNaAutorizada)
                                                     {
@@ -937,13 +967,6 @@ namespace uninfe
                                                     {
                                                         //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
                                                         oAux.DeletarArquivo(strArquivoNFe);
-                                                    }
-
-                                                    //Se o XML de distribuição não estiver ainda na pasta de autorizados
-                                                    if (!procNFeJaNaAutorizada)
-                                                    {
-                                                        //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
-                                                        oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                                     }
                                                 }
 
@@ -968,6 +991,9 @@ namespace uninfe
                                                 break;
 
                                             case "302":
+                                                goto case "301";
+
+                                            case "110": //Uso Denegado
                                                 goto case "301";
 
                                             default:

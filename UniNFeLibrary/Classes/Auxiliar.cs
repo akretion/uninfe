@@ -1212,7 +1212,14 @@ namespace UniNFeLibrary
         /// <date>17/06/2009</date>
         private object EnviaArquivoERecebeResposta(string ArqXMLRetorno, string ArqERRRetorno, Processa processa)
         {
-            object vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço. Aguarde um momento e tente novamente.";
+            object vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço junto ao SEFAZ.\r\n\r\n"+
+                "O problema pode ter ocorrido por causa dos seguintes fatores:\r\n\r\n"+
+                "- Problema com o certificado digital\r\n"+
+                "- Necessidade de atualização da cadeia de certificados digitais\r\n"+
+                "- Falha de conexão com a internet\r\n"+
+                "- Falha nos servidores do SEFAZ\r\n\r\n"+
+                "Afirmamos que a produtora do software não se responsabiliza por decisões tomadas e/ou execuções realizadas com base nas informações acima.\r\n\r\n";
+            
             DateTime startTime;
             DateTime stopTime;
             TimeSpan elapsedTime;
@@ -1278,7 +1285,7 @@ namespace UniNFeLibrary
                     //Detetar o arquivo de retorno
                     try
                     {
-                        vStatus = System.IO.File.ReadAllText(ArqERRRetorno, Encoding.Default);
+                        vStatus += System.IO.File.ReadAllText(ArqERRRetorno, Encoding.Default);
                         System.IO.File.Delete(ArqERRRetorno);
                         break;
                     }
