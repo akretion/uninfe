@@ -634,6 +634,11 @@
             // 
             this.nudPorta.Enabled = false;
             this.nudPorta.Location = new System.Drawing.Point(59, 89);
+            this.nudPorta.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.nudPorta.Name = "nudPorta";
             this.nudPorta.Size = new System.Drawing.Size(71, 20);
             this.nudPorta.TabIndex = 6;
