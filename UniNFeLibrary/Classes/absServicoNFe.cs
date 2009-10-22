@@ -460,7 +460,7 @@ namespace UniNFeLibrary
         #endregion
 
         #region LerRetornoSit()
-        protected abstract void LerRetornoSit();
+        protected abstract void LerRetornoSit(string ChaveNFe);
         #endregion
 
         #region LerRetornoCanc()

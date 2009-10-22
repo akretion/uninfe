@@ -233,7 +233,7 @@ namespace uninfe
                         if (oFluxoNfe.NfeExiste("NFe" + oLer.oDadosPedSit.chNFe))
                         {
                             //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
-                            this.LerRetornoSit();
+                            this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
                         }
 
                         oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
@@ -839,7 +839,7 @@ namespace uninfe
 
         #region LerRetornoSit()
         //TODO: Documentar este método
-        protected override void LerRetornoSit()
+        protected override void LerRetornoSit(string ChaveNFe)
         {
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
@@ -871,25 +871,8 @@ namespace uninfe
                                         //Pegar o Status do Retorno da consulta situação
                                         string strStat = oAux.LerTag(infConsSitElemento, "cStat").Replace(";", "");
 
-                                        string strChaveNFe = string.Empty;
-
-                                        if (infConsSitElemento.GetElementsByTagName("chNFe")[0] != null)
-                                        {
-                                            //Encontrou a tag chNFe
-                                            strChaveNFe = "NFe" + oAux.LerTag(infConsSitElemento, "chNFe").Replace(";", "");
-                                        }
-                                        else
-                                        {
-                                            //Se não encontrar a tag chNFe, o que ocorre quando a nota foi rejeitada,
-                                            //vou tentar pegar a chave pelo atributo ID que tem na tag infProt,
-                                            //ou não vou conseguir finalizar o processo pela consulta situação. Wandrey 20/10/2009
-                                            string ID = infConsSitElemento.GetAttribute("Id");
-                                            if (ID != "")
-                                            {
-                                                strChaveNFe = "NFe" + ID.Substring(2, 44);
-                                            }
-
-                                        }
+                                        //Definir a chave da NFe a ser pesquisada
+                                        string strChaveNFe = "NFe" + ChaveNFe;
 
                                         //Definir o nome do arquivo da NFe e seu caminho
                                         string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);

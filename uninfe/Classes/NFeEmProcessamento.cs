@@ -80,15 +80,17 @@ namespace uninfe
 
                             try
                             {
-                                ///
-                                /// le a NFe
-                                /// 
+                                //Ler a NFe
                                 oLerXml.Nfe(file);
 
+                                //Verificar se a NFe está no fluxo, se não estiver vamos incluir ela para que funcione
+                                //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
+                                if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
+                                {
+                                    fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, "-nfe.xml") + "-nfe.xml");
+                                }
 
-                                ///
-                                /// gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
-                                /// 
+                                //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
                                 string vArquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
 
                                 oGerarXml.Consulta(vArquivoSit + ExtXml.PedSit,
