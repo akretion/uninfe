@@ -229,13 +229,10 @@ namespace uninfe
                 {
                     try
                     {
-                        FluxoNfe oFluxoNfe = new FluxoNfe();
-                        if (oFluxoNfe.NfeExiste("NFe" + oLer.oDadosPedSit.chNFe))
-                        {
-                            //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
-                            this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
-                        }
+                        //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
+                        this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
 
+                        //Gerar o retorno para o ERP
                         oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
 
                         //Deletar o arquivo de solicitação do serviço
@@ -243,8 +240,8 @@ namespace uninfe
                     }
                     catch (Exception ex)
                     {
-                        //Retornar exceção
-                        throw (ex);
+                        //Tenho que gravar para o ERP um retorno do erro se acontecer algo com o final -sit.err. Wandrey 22/10/2009
+                        oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSit, ExtXmlRet.Sit_ERR, ex.ToString());
                     }
                     finally
                     {

@@ -278,36 +278,43 @@ namespace UniNFeLibrary
             //Definir o arquivo XML para a classe UniNfeClass
             tipoServico.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.SetProperty, null, oNfe, new object[] { cArquivo });
 
-            //TODO: CONFIG
-            if (ConfiguracaoApp.tpEmis != TipoEmissao.teContingencia/*2*/) //2-Confingência em Formulário de segurança não envia na hora, tem que aguardar voltar para normal.
+            try
             {
-                if (strMetodo == "ReconfigurarUniNfe")
+                //TODO: CONFIG
+                if (ConfiguracaoApp.tpEmis != TipoEmissao.teContingencia/*2*/) //2-Confingência em Formulário de segurança não envia na hora, tem que aguardar voltar para normal.
                 {
-                    this.ReconfigurarUniNFe(cArquivo);
-                }
-                else if (strMetodo == "GravarXMLDadosCertificado")
-                {
-                    this.GravarXMLDadosCertificado(cArquivo);
+                    if (strMetodo == "ReconfigurarUniNfe")
+                    {
+                        this.ReconfigurarUniNFe(cArquivo);
+                    }
+                    else if (strMetodo == "GravarXMLDadosCertificado")
+                    {
+                        this.GravarXMLDadosCertificado(cArquivo);
+                    }
+                    else
+                    {
+                        tipoServico.InvokeMember(strMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oNfe, null);
+                    }
                 }
                 else
                 {
-                    tipoServico.InvokeMember(strMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oNfe, null);
+                    if (strMetodo == "ReconfigurarUniNfe")
+                    {
+                        this.ReconfigurarUniNFe(cArquivo);
+                    }
+                    else if (strMetodo == "RetRecepcao" || strMetodo == "Consulta" || strMetodo == "StatusServico")
+                    {
+                        tipoServico.InvokeMember(strMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oNfe, null);
+                    }
+                    else if (strMetodo == "GravarXMLDadosCertificado")
+                    {
+                        this.GravarXMLDadosCertificado(cArquivo);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (strMetodo == "ReconfigurarUniNfe")
-                {
-                    this.ReconfigurarUniNFe(cArquivo);
-                }
-                else if (strMetodo == "RetRecepcao" || strMetodo == "Consulta" || strMetodo == "StatusServico")
-                {
-                    tipoServico.InvokeMember(strMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oNfe, null);
-                }
-                else if (strMetodo == "GravarXMLDadosCertificado")
-                {
-                    this.GravarXMLDadosCertificado(cArquivo);
-                }
+                throw (ex);
             }
         }
         #endregion

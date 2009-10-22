@@ -44,6 +44,10 @@ namespace UniNFeLibrary
         /// </summary>
         public const string Sit = "-sit.xml";
         /// <summary>
+        /// Retorno da consulta situação da NFe quando com erro (-sit.err)
+        /// </summary>
+        public const string Sit_ERR = "-sit.err";
+        /// <summary>
         /// Retorno da consulta do recibo do lote das nfe´s (-pro-rec.xml)
         /// </summary>
         public const string ProRec = "-pro-rec.xml";

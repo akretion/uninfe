@@ -83,20 +83,41 @@ namespace uninfe
                                 //Ler a NFe
                                 oLerXml.Nfe(file);
 
-                                //Verificar se a NFe está no fluxo, se não estiver vamos incluir ela para que funcione
-                                //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
-                                if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
+                                //Verificar se o -nfe.xml existe na pasta de autorizados
+                                bool NFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, ExtXml.Nfe);
+
+                                //Verificar se o -procNfe.xml existe na past de autorizados
+                                bool procNFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, ExtXmlRet.ProcNFe);
+
+                                //Se um dos XML´s não estiver na pasta de autorizadas ele força finalizar o processo da NFe.
+                                if (!NFeJaNaAutorizada || !procNFeJaNaAutorizada)
                                 {
-                                    fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, "-nfe.xml") + "-nfe.xml");
+                                    //Verificar se a NFe está no fluxo, se não estiver vamos incluir ela para que funcione
+                                    //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
+                                    if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
+                                    {
+                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, "-nfe.xml") + "-nfe.xml");
+                                    }
+
+                                    //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
+                                    string vArquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
+
+                                    oGerarXml.Consulta(vArquivoSit + ExtXml.PedSit,
+                                        Convert.ToInt32(oLerXml.oDadosNfe.tpAmb),
+                                        Convert.ToInt32(oLerXml.oDadosNfe.tpEmis),
+                                        oLerXml.oDadosNfe.chavenfe.Substring(3));
                                 }
+                                else
+                                {
+                                    //Move o XML da pasta em processamento para a pasta de XML´s com erro (-nfe.xml)
+                                    oAux.MoveArqErro(file);
 
-                                //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
-                                string vArquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
+                                    //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
+                                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(file, ExtXml.Nfe) + ExtXmlRet.ProcNFe);
 
-                                oGerarXml.Consulta(vArquivoSit + ExtXml.PedSit,
-                                    Convert.ToInt32(oLerXml.oDadosNfe.tpAmb),
-                                    Convert.ToInt32(oLerXml.oDadosNfe.tpEmis),
-                                    oLerXml.oDadosNfe.chavenfe.Substring(3));
+                                    //Tirar a nota fiscal do fluxo
+                                    fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
+                                }
                             }
                             catch (Exception ex)
                             {
