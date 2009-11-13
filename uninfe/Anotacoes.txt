@@ -1,5 +1,5 @@
 ﻿Lista dos Estados com WebServices Próprios
-    Amazonas - AM			
+    Amazonas - AM
 	Bahia - BA
 	Ceará - CE
 	Goias - GO
@@ -30,4 +30,8 @@ Lista dos Estados que utilizam os WebServices do Ambiente Virtual do Rio Grande 
 	Sergipe - SE
 	Tocantins - TO    
 	Distrito Federal - DF
+
 	
+Teste de controle de versão.
+
+Perfeito teste de controle de versao funcionou.

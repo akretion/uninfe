@@ -9,3 +9,14 @@ C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Propert
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.Configuracao.resources
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.FormConsultaCadastroResult.resources
 C:\projetos\uninfe\fontes\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.retConsCad.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.dll.config
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.dll
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\bin\Release\UniNFeLibrary.pdb
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\ResolveAssemblyReference.cache
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.Configuracao.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.FormConsultaCadastroResult.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\uninfe.Formulario.retConsCad.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Properties.Resources.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.csproj.GenerateResource.Cache
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.dll
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.pdb
