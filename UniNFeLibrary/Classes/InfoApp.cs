@@ -159,6 +159,8 @@ namespace UniNFeLibrary
                     //Dados gerais do Aplicativo
                     aTXT.AppendLine("versao|" + InfoApp.Versao());
                     aTXT.AppendLine("dUltModif|" + File.GetLastWriteTimeUtc(Application.ExecutablePath).ToString("dd/MM/yyyy hh:mm:ss"));
+                    aTXT.AppendLine("PastaExecutavel|" + InfoApp.PastaExecutavel());
+                    aTXT.AppendLine("NomeComputador|" + Environment.MachineName);
                     //Dados das configurações do aplicativo
                     aTXT.AppendLine("PastaBackup|" + (string.IsNullOrEmpty(ConfiguracaoApp.cPastaBackup) ? "" : ConfiguracaoApp.cPastaBackup));
                     aTXT.AppendLine("PastaXmlEmLote|" + (string.IsNullOrEmpty(ConfiguracaoApp.cPastaXMLEmLote) ? "" : ConfiguracaoApp.cPastaXMLEmLote));
@@ -209,6 +211,8 @@ namespace UniNFeLibrary
                     oXmlGravar.WriteStartElement("DadosUniNfe");
                     oXmlGravar.WriteElementString("versao", InfoApp.Versao());
                     oXmlGravar.WriteElementString("dUltModif", File.GetLastWriteTimeUtc(Application.ExecutablePath).ToString("dd/MM/yyyy hh:mm:ss"));
+                    oXmlGravar.WriteElementString("PastaExecutavel", InfoApp.PastaExecutavel());
+                    oXmlGravar.WriteElementString("NomeComputador", Environment.MachineName);
                     oXmlGravar.WriteEndElement(); //DadosUniNfe
 
                     //Dados das configurações do aplicativo

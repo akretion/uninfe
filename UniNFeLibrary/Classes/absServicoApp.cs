@@ -267,11 +267,21 @@ namespace UniNFeLibrary
         /// <param name="oNfe">Objeto da classe UniNfeClass a ser utilizado nas operações</param>
         private void EnviarArquivo(string cArquivo, Object oNfe, string strMetodo)
         {
+            #region Código retirado
+            /*
+             * Não pode ser verificado neste ponto, visto que os retornos esperados pelo ERP podem se modificar, assim
+             * sendo movi esta parte do código para dentro dos métodos da classe InvocarObjeto, lá ele vai dar exatamente
+             * o retorno que o ERP espera e já trata todos os serviços que precisam da internet e os que não precisam
+             * continuam funcionando normalmente.
+             * Wandrey 16/11/2009
             if (!InternetCS.IsConnectedToInternet())
             {
                 //Registrar o erro da validação para o sistema ERP
                 throw new Exception("Sem conexão com a internet.\r\nMétodo: " + strMetodo + "\r\nArquivo: " + cArquivo);
             }
+            */
+            #endregion
+
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
 

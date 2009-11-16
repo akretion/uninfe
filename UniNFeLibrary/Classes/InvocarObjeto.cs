@@ -116,6 +116,13 @@ namespace UniNFeLibrary
             {
                 try
                 {
+                    //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
+                    if (!InternetCS.IsConnectedToInternet())
+                    {
+                        //Registrar o erro da validação para o sistema ERP
+                        throw new Exception("Sem conexão com a internet.\r\nArquivo: " + XmlNfeDadosMsg);
+                    }
+
                     //Invocar o membro, ou seja, mandar o XML para o SEFAZ
                     XmlRetorno = (string)(TipoServicoWS.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, ServicoWS, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
                     
@@ -269,6 +276,13 @@ namespace UniNFeLibrary
             {
                 try
                 {
+                    //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
+                    if (!InternetCS.IsConnectedToInternet())
+                    {
+                        //Registrar o erro da validação para o sistema ERP
+                        throw new Exception("Sem conexão com a internet.\r\nArquivo: " + XmlNfeDadosMsg);
+                    }
+
                     //Atualizar a propriedade do objeto do cabecalho da mensagem
                     TipoServicoWS.InvokeMember("cteCabecMsgValue", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { CabecMsg });
                     
