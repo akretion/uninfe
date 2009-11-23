@@ -1,0 +1,105 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="unicte.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="unicte_wsRSHRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSHRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSHCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSHInutilizacao_CteInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSHConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/CteConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSHStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/CteStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHInutilizacao_CteInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPInutilizacao_CteInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/cteconsulta/CteConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.rs.gov.br/ws/ctestatusservico/CteStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPInutilizacao_CteInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsRSPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sef.sefaz.rs.gov.br/ws/CadConsultaCadastro/CadConsultaCadastro.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPPConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.fazenda.sp.gov.br/nfeweb/services/cadconsultacadastro.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsSPHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.nfe.fazenda.sp.gov.br/nfeWEB/services/cadconsultacadastro.asmx</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteStatusServico</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteRecepcao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteRetRecepcao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteCancelamento</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHInutilizacao_CteInutilizacaoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteInutilizacao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTHConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteConsulta</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
