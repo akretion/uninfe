@@ -65,6 +65,7 @@
     <Compile Include="Classes\absServicoApp.cs" />
     <Compile Include="Classes\InternetConnected.cs" />
     <Compile Include="Classes\InvocarObjeto.cs" />
+    <Compile Include="Classes\MsgErro.cs" />
     <Compile Include="Classes\SchemaXML.cs" />
     <Compile Include="Classes\UnitxtTOxmlClass.cs" />
     <Compile Include="Classes\XMLIniFile.cs" />

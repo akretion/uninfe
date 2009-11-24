@@ -120,7 +120,7 @@ namespace UniNFeLibrary
                     if (!InternetCS.IsConnectedToInternet())
                     {
                         //Registrar o erro da validação para o sistema ERP
-                        throw new Exception("Sem conexão com a internet.\r\nArquivo: " + XmlNfeDadosMsg);
+                        throw new ExceptionInvocarObjeto(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
                     }
 
                     //Invocar o membro, ou seja, mandar o XML para o SEFAZ
@@ -138,13 +138,15 @@ namespace UniNFeLibrary
                     lRetorna = true;
                 }
 
-                catch (Exception ex)
+                catch (ExceptionInvocarObjeto ex)
                 {
                     // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
                     if (i == 5)
                     {
-                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.ToString());
+                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.Message + "\r\n\r\n" + ex.ToString());
                         lRetorna = false;
+
+                        throw (ex);
                     }
                 }
 
@@ -280,7 +282,7 @@ namespace UniNFeLibrary
                     if (!InternetCS.IsConnectedToInternet())
                     {
                         //Registrar o erro da validação para o sistema ERP
-                        throw new Exception("Sem conexão com a internet.\r\nArquivo: " + XmlNfeDadosMsg);
+                        throw new ExceptionInvocarObjeto(ErroPadrao.FalhaInternet,"\r\nArquivo: " + XmlNfeDadosMsg);
                     }
 
                     //Atualizar a propriedade do objeto do cabecalho da mensagem
@@ -300,13 +302,15 @@ namespace UniNFeLibrary
 
                     lRetorna = true;
                 }
-                catch (Exception ex)
+                catch (ExceptionInvocarObjeto ex)
                 {
                     // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
                     if (i == 5)
                     {
-                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.ToString());
+                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.Message + "\r\n\r\n" + ex.ToString());
                         lRetorna = false;
+
+                        throw (ex);
                     }
                 }
 
@@ -425,5 +429,36 @@ namespace UniNFeLibrary
         #endregion
 
         #endregion
+    }
+
+    /// <summary>
+    /// Classe para tratamento de exceções da classe Invocar Objeto
+    /// </summary>
+    public class ExceptionInvocarObjeto : Exception
+    {
+        public ErroPadrao ErrorCode { get; private set; }
+
+        /// <summary>
+        /// Construtor que já define uma mensagem pré-definida de exceção
+        /// </summary>
+        /// <param name="CodigoErro">Código da mensagem de erro (Classe MsgErro)</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>24/11/2009</date>
+        public ExceptionInvocarObjeto(ErroPadrao Erro)
+            : base(MsgErro.ErroPreDefinido(Erro))
+        {
+            this.ErrorCode = Erro;
+        }
+
+        /// <summary>
+        /// Construtor que ´já define uma mensagem pré-definida de exceção com possibilidade de complemento da mensagem
+        /// </summary>
+        /// <param name="CodigoErro">Código da mensagem de erro (Classe MsgErro)</param>
+        /// <param name="ComplementoMensagem">Complemento da mensagem de exceção</param>
+        public ExceptionInvocarObjeto(ErroPadrao Erro, string ComplementoMensagem)
+            : base(MsgErro.ErroPreDefinido(Erro, ComplementoMensagem))
+        {
+            this.ErrorCode = Erro;
+        }
     }
 }

@@ -131,9 +131,16 @@ namespace uninfe
                         object oServico = null;
                         object oCabecMsg = null;
                         oDefObj.Cancelamento(ref oServico, ref oCabecMsg, oParam);
-                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLCanc, oServico, "nfeCancelamentoNF", "-ped-can", "-can") == true)
+
+                        try
                         {
-                            this.LerRetornoCanc();
+                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLCanc, oServico, "nfeCancelamentoNF", "-ped-can", "-can") == true)
+                            {
+                                this.LerRetornoCanc();
+                            }
+                        }
+                        catch (ExceptionInvocarObjeto ex)
+                        {
                         }
                     }
                 }
@@ -225,29 +232,35 @@ namespace uninfe
                 object oServico = null;
                 object oCabecMsg = null;
                 oDefObj.Consulta(ref oServico, ref oCabecMsg, oParam);
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oServico, "nfeConsultaNF") == true)
+                try
                 {
-                    try
+                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oServico, "nfeConsultaNF") == true)
                     {
-                        //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
-                        this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
+                        try
+                        {
+                            //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
+                            this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
 
-                        //Gerar o retorno para o ERP
-                        oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
+                            //Gerar o retorno para o ERP
+                            oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
 
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                        catch (Exception ex)
+                        {
+                            //Tenho que gravar para o ERP um retorno do erro se acontecer algo com o final -sit.err. Wandrey 22/10/2009
+                            oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSit, ExtXmlRet.Sit_ERR, ex.ToString());
+                        }
+                        finally
+                        {
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        //Tenho que gravar para o ERP um retorno do erro se acontecer algo com o final -sit.err. Wandrey 22/10/2009
-                        oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSit, ExtXmlRet.Sit_ERR, ex.ToString());
-                    }
-                    finally
-                    {
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                    }
+                }
+                catch (ExceptionInvocarObjeto ex)
+                {
                 }
             }
             else
@@ -350,10 +363,16 @@ namespace uninfe
                 }
                 else
                 {
-                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLConsCad, oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+                    try
                     {
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLConsCad, oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+                        {
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                    }
+                    catch (ExceptionInvocarObjeto ex)
+                    {
                     }
                 }
             }
@@ -483,9 +502,15 @@ namespace uninfe
                         object oServico = null;
                         object oCabecMsg = null;
                         oDefObj.Inutilizacao(ref oServico, ref oCabecMsg, oParam);
-                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLInut, oServico, cMetodo, "-ped-inu", "-inu") == true)
+                        try
                         {
-                            this.LerRetornoInut();
+                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLInut, oServico, cMetodo, "-ped-inu", "-inu") == true)
+                            {
+                                this.LerRetornoInut();
+                            }
+                        }
+                        catch (ExceptionInvocarObjeto ex)
+                        {
                         }
                     }
                 }
@@ -1078,31 +1103,34 @@ namespace uninfe
             object oServico = null;
             object oCabecMsg = null;
             oDefObj.Recepcao(ref oServico, ref oCabecMsg);
-            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLNFe, oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+            try
             {
-                LerXML oLerRecibo = new LerXML();
-                oLerRecibo.Recibo(this.vStrXmlRetorno);
-
-                if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
+                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLNFe, oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
                 {
-                    //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
-                    oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
-                }
-                else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
-                {
-                    //Se o status do retorno do lote for maior que 200, 
-                    //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
-                    //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
-                    //Wandrey 30/04/2009
-                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-                    oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
-                }
+                    LerXML oLerRecibo = new LerXML();
+                    oLerRecibo.Recibo(this.vStrXmlRetorno);
 
-                //Deleta o arquivo de lote
-                oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
+                    {
+                        //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
+                        oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
+                        oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
+                    }
+                    else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
+                    {
+                        //Se o status do retorno do lote for maior que 200, 
+                        //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
+                        //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
+                        //Wandrey 30/04/2009
+                        oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                        oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
+                    }
+
+                    //Deleta o arquivo de lote
+                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
             }
-            else
+            catch (ExceptionInvocarObjeto ex)
             {
                 //Se falhou algo no envio, foi exatamente no ponto de enviar o XML para a receita, assim sendo,
                 //não temos como saber se a nota foi recebida pelo SEFAZ ou não, desta forma, tenho que manter
@@ -1112,10 +1140,23 @@ namespace uninfe
                 //ter autorizado ela (E isso já aconteceu diversas vezes com pessoas diferentes), e deletando vamos
                 //perder o XML.
                 //
-                //Se o ERP Desejar pode gerar outro XML da mesma nota que o sistema exclui do fluxo e tenta enviar novamente, 
-                //Mas vai ser por conta do ERP, o UniNFe não vai assumir esta responsabilidade.
+                //Se o ERP Desejar pode gerar uma consulta situação da nota que o UniNFe vai tirar ela do fluxo, finalizando ela ou não,
+                //depende do retorno do SEFAZ
                 //
-                //Wandrey 07/10/2009, solução dada pelo Édson Mundin
+                //Wandrey 07/10/2009
+                
+                //TODO: Aqui que eu tenho que tratar o erro e internet
+                //Já tenho como ver se é erro de conexão com internet e tratar
+                //se for vamos tirar a nota do fluxo para que o ERP gere ela novamente.
+                if (ex.ErrorCode == ErroPadrao.FalhaInternet)
+                {
+                    //Se o status do retorno do lote for maior que 200, 
+                    //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
+                    //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
+                    //Wandrey 30/04/2009
+                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
+                }
             }
         }
         #endregion
@@ -1169,28 +1210,35 @@ namespace uninfe
             object oCabecMsg = null;
             oDefObj.RetRecepcao(ref oServico, ref oCabecMsg);
 
-            //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
-            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedRec, oServico, "nfeRetRecepcao") == true)
+            try
             {
-                try
+                //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
+                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedRec, oServico, "nfeRetRecepcao") == true)
                 {
-                    //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
-                    this.LerRetornoLote();
+                    try
+                    {
+                        //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
+                        this.LerRetornoLote();
 
-                    //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
-                    //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                    //Wandrey 18/06/2009
-                    oGerarXML.XmlRetorno(ExtXml.PedRec, ExtXmlRet.ProRec, this.vStrXmlRetorno);
+                        //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                        //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                        //Wandrey 18/06/2009
+                        oGerarXML.XmlRetorno(ExtXml.PedRec, ExtXmlRet.ProRec, this.vStrXmlRetorno);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw (ex);
+                    }
+                    finally
+                    {
+                        //Deletar o arquivo de solicitação do serviço
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
-                finally
-                {
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                }
+            }
+            catch (ExceptionInvocarObjeto ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -1255,10 +1303,16 @@ namespace uninfe
                 object oCabecMsg = null;
 
                 oDefObj.StatusServico(ref oServico, ref oCabecMsg, oParam);
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oServico, "nfeStatusServicoNF", "-ped-sta", "-sta") == true)
+                try
                 {
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oServico, "nfeStatusServicoNF", "-ped-sta", "-sta") == true)
+                    {
+                        //Deletar o arquivo de solicitação do serviço
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    }
+                }
+                catch (ExceptionInvocarObjeto ex)
+                {
                 }
             }
             else
