@@ -20,7 +20,7 @@ namespace UniNFeLibrary
         public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
         public const string MontarLote = "-montar-lote.xml";
         public const string EnvLot = "-env-lot.xml";
-        public const string Nfe = "-nfe.xml";
+        public static string Nfe = "-nfe.xml";
         public const string PedCan = "-ped-can.xml";
         public const string PedCan_TXT = "-ped-can.txt";
         public const string PedInu = "-ped-inu.xml";
@@ -58,15 +58,15 @@ namespace UniNFeLibrary
         /// <summary>
         /// XML de Distribuição da NFe (-procNFe.xml)
         /// </summary>
-        public const string ProcNFe = "-procNFe.xml";
+        public static string ProcNFe = "-procNFe.xml";
         /// <summary>
         /// XML de Distribuição do cancelamento da NFe
         /// </summary>
-        public const string ProcCancNFe = "-procCancNFe.xml";
+        public static string ProcCancNFe = "-procCancNFe.xml";
         /// <summary>
         /// XML de Distribuição da inutilização de números da NFe
         /// </summary>
-        public const string ProcInutNFe = "-procInutNFe.xml";
+        public static string ProcInutNFe = "-procInutNFe.xml";
 
     }
     #endregion

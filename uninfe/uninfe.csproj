@@ -3914,7 +3914,6 @@
     <None Include="Resources\pdf1.png" />
     <None Include="Resources\pdf2.png" />
     <None Include="Resources\pdf3.png" />
-    <Content Include="danasa092009_1.txt" />
     <Content Include="uninfe.ico" />
     <None Include="Web References\wsMGHConsultaCadastro\CadConsultaCadastro.wsdl" />
     <None Include="Web References\wsMGHConsultaCadastro\Reference.map">

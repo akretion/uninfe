@@ -101,5 +101,23 @@
     <Setting Name="unicte_wsMTHConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homologacao.sefaz.mt.gov.br/ctews/services/CteConsulta</Value>
     </Setting>
+    <Setting Name="unicte_wsMTPRecepcao_CteRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteRecepcao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTPRetRecepcao_CteRetRecepcao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteRetRecepcao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTPCancelamento_CteCancelamento" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteCancelamento</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTPInutilizacao_CteInutilizacao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteInutilizacao</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTPConsulta_CteConsulta" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteConsulta</Value>
+    </Setting>
+    <Setting Name="unicte_wsMTPStatusServico_CteStatusServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cte.sefaz.mt.gov.br/ctews/services/CteStatusServico</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

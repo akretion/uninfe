@@ -4,26 +4,9 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Threading;
-
 using UniNFeLibrary;
 using UniNFeLibrary.Enums;
 
-///
-/// wandrey
-/// o monitoramento de se uma nfe está autorizada ou denegada, no meu erp eu faço pela presenca do arquivo na pasta
-/// de autorizadas\aaaamm ou denegadas\aaaamm
-/// 
-/// nao sei como os outros o fazem, se pelo protocolo ou pelo meu jeito.
-/// se pelo protocolo, e ele não é retornado, então por este processo eles deverão monitorar pelo -sit.xml ou -sit.err
-/// já que os estou gravando mesmo quando os arquivos já estejam na pasta Autorizadas\aaaamm ou Denegadas\aaaamm
-/// 
-/// Se o xml -procNFe.xml ou -den.xml não estão nas pastas, gero um -ped-sit.xml e se cStat=100, 
-/// gero um -procNFe.xml ou cStat=301 ou 302, gero um -den.xml
-/// e deixo o -sit.xml ou -sit.err para monitoramento.
-/// 
-/// NAO sei como fazer se no fluxo tem a nfe e na pasta em processamento NAO existir a nota
-/// neste caso precisaria verificar o status da nota no fluxo
-/// 
 namespace uninfe
 {
     public class NFeEmProcessamento
@@ -96,7 +79,7 @@ namespace uninfe
                                     //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
                                     if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
                                     {
-                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, "-nfe.xml") + "-nfe.xml");
+                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, ExtXml.Nfe) + ExtXml.Nfe);
                                     }
 
                                     //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele

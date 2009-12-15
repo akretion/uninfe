@@ -38,9 +38,7 @@ namespace unicte
         ServicoUniCTe oServicoAltCon = new ServicoUniCTe();
         ServicoUniCTe oServicoValidarAssinar = new ServicoUniCTe();
         ServicoUniCTe oServicoConvTXT = new ServicoUniCTe();
-        /// <summary>
-        /// danasa 9-2009
-        /// </summary>
+        ServicoUniCTe oServicoEmProcessamento = new ServicoUniCTe();
         ServicoUniCTe oServicoGerarChaveNFe = new ServicoUniCTe();
         #endregion
 
@@ -60,8 +58,8 @@ namespace unicte
         ParameterizedThreadStart oOperacaoAltCon;
         ParameterizedThreadStart oOperacaoValidarAssinar;
         ParameterizedThreadStart oOperacaoConvTXT;
-
         ParameterizedThreadStart oOperacaoGerarChaveNFe;
+        ParameterizedThreadStart oOperacaoEmProcessamento;
 
         Thread oThreadAssinaNfeEnvio;
         Thread oThreadAssinaNfeEnvioEmLote;
@@ -78,8 +76,8 @@ namespace unicte
         Thread oThreadAltCon;
         Thread oThreadValidarAssinar;
         Thread oThreadConvTXT;
-
         Thread oThreadGerarChaveNFe;
+        Thread oThreadEmProcessamento;
         /// <summary>
         /// executa a limpeza das pastas temp e retorno
         /// </summary>
@@ -107,7 +105,7 @@ namespace unicte
 
             //Criar XML de controle de fluxo de envios de Notas Fiscais
             FluxoNfe oFluxoNfe = new FluxoNfe();
-            oFluxoNfe.CriarXml();           
+            oFluxoNfe.CriarXml(true);           
 
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;
@@ -134,9 +132,9 @@ namespace unicte
             //Substituir a extensão de alguns arquivos da NFe para o padrão CTE, ou 
             //os serviços do UNICTE não vai enxergar os XML´s na pasta de envio
             ExtXml.Nfe = "-cte.xml";
-            ExtXml.ProcCancNFe = "-procCancCTe.xml";
-            ExtXml.ProcInutNFe = "-procInutCTe.xml";
-            ExtXml.ProcNFe = "-procCTe.xml";
+            ExtXmlRet.ProcCancNFe = "-procCancCTe.xml";
+            ExtXmlRet.ProcInutNFe = "-procInutCTe.xml";
+            ExtXmlRet.ProcNFe = "-procCTe.xml";
 
             //Executar os serviços do UniNFe em novas threads
             this.ExecutaServicos();
@@ -294,6 +292,17 @@ namespace unicte
                 oThreadLimpeza.Start();
             }
             #endregion
+
+            #region Executar a Thread que consulta uma nota e a fecha se autorizada ou denegada
+            /// <summary>
+            /// danasa 10-2009
+            /// </summary>
+            oOperacaoEmProcessamento = new ParameterizedThreadStart(oServicoEmProcessamento.BuscaXML);
+            oThreadEmProcessamento = new Thread(oOperacaoEmProcessamento);
+            oThreadEmProcessamento.Name = Servicos.EmProcessamento.ToString();
+            oThreadEmProcessamento.IsBackground = true;
+            oThreadEmProcessamento.Start(Servicos.EmProcessamento);
+            #endregion
         }
         #endregion
 
@@ -317,7 +326,8 @@ namespace unicte
 
                 //pode dormir pelos dias de limpeza. não é necessário fazer a limpeza antes do dia
                 //não é interessante sair da thread porque o uninfe pode ficar no ar 24/7
-                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
+                //System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
+                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(1, 0, 0, 0), false);
             }
         }
 
@@ -430,6 +440,7 @@ namespace unicte
 //          oThreadConvTXT.Abort();                
             oThreadGerarChaveNFe.Abort();
             if (oThreadLimpeza != null) oThreadLimpeza.Abort();
+            oThreadEmProcessamento.Abort();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Classes\DefObjServico.cs" />
     <Compile Include="Classes\LerXML.cs" />
+    <Compile Include="Classes\NFeEmProcessamento.cs" />
     <Compile Include="Classes\SchemaXMLCte.cs" />
     <Compile Include="Classes\ServicoCTe.cs" />
     <Compile Include="Classes\ServicoUniCTe.cs" />
@@ -160,6 +161,36 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\wsMTHStatusServico\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPCancelamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPConsulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPInutilizacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPRetRecepcao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsMTPStatusServico\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -388,6 +419,36 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\wsMTPCancelamento\CteCancelamento.wsdl" />
+    <None Include="Web References\wsMTPCancelamento\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMTPConsulta\CteConsulta.wsdl" />
+    <None Include="Web References\wsMTPConsulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMTPInutilizacao\CteInutilizacao.wsdl" />
+    <None Include="Web References\wsMTPInutilizacao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMTPRecepcao\CteRecepcao.wsdl" />
+    <None Include="Web References\wsMTPRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMTPRetRecepcao\CteRetRecepcao.wsdl" />
+    <None Include="Web References\wsMTPRetRecepcao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wsMTPStatusServico\CteStatusServico.wsdl" />
+    <None Include="Web References\wsMTPStatusServico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\wsRSHCancelamento\ctecancelamento.wsdl" />
     <None Include="Web References\wsRSHCancelamento\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -528,6 +589,72 @@
     <Content Include="unicte.ico" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteCancelamento%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPCancelamento\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteCancelamento%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPCancelamento_CteCancelamento</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteConsulta%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPConsulta\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteConsulta%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPConsulta_CteConsulta</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteInutilizacao%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPInutilizacao\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteInutilizacao%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPInutilizacao_CteInutilizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteRecepcao%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPRecepcao\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteRecepcao%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPRecepcao_CteRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteRetRecepcao%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPRetRecepcao\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteRetRecepcao%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPRetRecepcao_CteRetRecepcao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://cte.sefaz.mt.gov.br/ctews/services/CteStatusServico%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsMTPStatusServico\</RelPath>
+      <UpdateFromURL>https://cte.sefaz.mt.gov.br/ctews/services/CteStatusServico%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>unicte_wsMTPStatusServico_CteStatusServico</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\wsRSPCancelamento\</RelPath>
