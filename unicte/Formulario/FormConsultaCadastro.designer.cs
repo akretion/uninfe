@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsultaCadastro));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textConteudo = new System.Windows.Forms.MaskedTextBox();
             this.rbIE = new System.Windows.Forms.RadioButton();
             this.rbCPF = new System.Windows.Forms.RadioButton();
             this.rbCNPJ = new System.Windows.Forms.RadioButton();
@@ -45,7 +46,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbEmissao = new System.Windows.Forms.ComboBox();
-            this.textConteudo = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -66,7 +66,16 @@
             this.groupBox1.Size = new System.Drawing.Size(370, 75);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Consulta ao cadastro de contribuínte";
+            this.groupBox1.Text = "Consulta ao cadastro de contribuinte";
+            // 
+            // textConteudo
+            // 
+            this.textConteudo.Location = new System.Drawing.Point(64, 46);
+            this.textConteudo.Mask = "00,000,000/0000-00";
+            this.textConteudo.Name = "textConteudo";
+            this.textConteudo.Size = new System.Drawing.Size(188, 20);
+            this.textConteudo.TabIndex = 4;
+            this.textConteudo.TextChanged += new System.EventHandler(this.maskedTextBox1_TextChanged);
             // 
             // rbIE
             // 
@@ -226,15 +235,6 @@
             this.cbEmissao.Name = "cbEmissao";
             this.cbEmissao.Size = new System.Drawing.Size(288, 21);
             this.cbEmissao.TabIndex = 1;
-            // 
-            // textConteudo
-            // 
-            this.textConteudo.Location = new System.Drawing.Point(64, 46);
-            this.textConteudo.Mask = "00,000,000/0000-00";
-            this.textConteudo.Name = "textConteudo";
-            this.textConteudo.Size = new System.Drawing.Size(188, 20);
-            this.textConteudo.TabIndex = 4;
-            this.textConteudo.TextChanged += new System.EventHandler(this.maskedTextBox1_TextChanged);
             // 
             // FormConsultaCadastro
             // 

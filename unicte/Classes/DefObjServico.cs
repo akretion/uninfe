@@ -37,7 +37,6 @@ namespace unicte
         /// <date>01/07/2008</date>
         public void Cancelamento(ref object pServico, ref object pCabecMsg, ParametroEnvioXML oParam)
         {
-            //TODO: CONFIG
             if (oParam/*ConfiguracaoApp*/.tpAmb == TipoAmbiente.taProducao)
             {
                 if (oParam/*ConfiguracaoApp*/.tpEmis == TipoEmissao.teSCAN)
@@ -46,7 +45,7 @@ namespace unicte
                 else
                     switch (oParam/*ConfiguracaoApp*/.UFCod)
                     {
-                        case 51: break;
+                        case 51: pServico = new wsMTPCancelamento.CteCancelamento(); pCabecMsg = new wsMTPCancelamento.cteCabecMsg(); break;
                         case 43: pServico = new wsRSPCancelamento.CteCancelamento(); pCabecMsg = new wsRSPCancelamento.cteCabecMsg(); break;
                         case 35: pServico = new wsSPPCancelamento.CteCancelamento(); pCabecMsg = new wsSPPCancelamento.cteCabecMsg(); break;
                     }
@@ -98,7 +97,7 @@ namespace unicte
             if (oParam.tpAmb == TipoAmbiente.taProducao)
             {
                 if (oParam.tpEmis == TipoEmissao.teSCAN) { } //Contingência SCAN Ambiente Nascional
-                else if (oParam.UFCod == 51) { }
+                else if (oParam.UFCod == 51) { pServico = new wsMTPConsulta.CteConsulta(); pCabecMsg = new wsMTPConsulta.cteCabecMsg(); }
                 else if (oParam.UFCod == 43) { pServico = new wsRSPConsulta.CteConsulta(); pCabecMsg = new wsRSPConsulta.cteCabecMsg(); }
                 else if (oParam.UFCod == 35) { pServico = new wsSPPConsulta.CteConsulta(); pCabecMsg = new wsSPPConsulta.cteCabecMsg(); }
             }
@@ -176,7 +175,6 @@ namespace unicte
         /// <date>01/07/2008</date>
         public void Inutilizacao(ref object pServico, ref object pCabecMsg, ParametroEnvioXML oParam)
         {
-            //TODO: CONFIG
             if (oParam/*ConfiguracaoApp*/.tpAmb == TipoAmbiente.taProducao)
             {
                 if (oParam/*ConfiguracaoApp*/.tpEmis == TipoEmissao.teSCAN)
@@ -185,7 +183,7 @@ namespace unicte
                 else
                     switch (oParam/*ConfiguracaoApp*/.UFCod)
                     {
-                        case 51: break;
+                        case 51: pServico = new wsMTPInutilizacao.CteInutilizacao(); pCabecMsg = new wsMTPInutilizacao.cteCabecMsg(); break;
                         case 43: pServico = new wsRSPInutilizacao.CteInutilizacao(); pCabecMsg = new wsRSPInutilizacao.cteCabecMsg(); break;
                         case 35: pServico = new wsSPPInutilizacao.CteInutilizacao(); pCabecMsg = new wsSPPInutilizacao.cteCabecMsg(); break;
                     }
@@ -237,7 +235,7 @@ namespace unicte
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
                 if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { } //Contingência SCAN Ambiente Nascional
-                else if (ConfiguracaoApp.UFCod == 51) { }
+                else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPRecepcao.CteRecepcao(); pCabecMsg = new wsMTPRecepcao.cteCabecMsg(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPRecepcao.CteRecepcao(); pCabecMsg = new wsRSPRecepcao.cteCabecMsg(); }
                 else if (ConfiguracaoApp.UFCod == 35) { pServico = new wsSPPRecepcao.CteRecepcao(); pCabecMsg = new wsSPPRecepcao.cteCabecMsg(); }
             }
@@ -283,7 +281,7 @@ namespace unicte
             if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
             {
                 if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { } //Contingência SCAN Ambiente Nascional
-                else if (ConfiguracaoApp.UFCod == 51) { }
+                else if (ConfiguracaoApp.UFCod == 51) { pServico = new wsMTPRetRecepcao.CteRetRecepcao(); pCabecMsg = new wsMTPRetRecepcao.cteCabecMsg(); }
                 else if (ConfiguracaoApp.UFCod == 43) { pServico = new wsRSPRetRecepcao.CteRetRecepcao(); pCabecMsg = new wsRSPRetRecepcao.cteCabecMsg(); }
                 else if (ConfiguracaoApp.UFCod == 35) { pServico = new wsSPPRetRecepcao.CteRetRecepcao(); pCabecMsg = new wsSPPRetRecepcao.cteCabecMsg(); }
             }
@@ -327,7 +325,7 @@ namespace unicte
             if (oParam.tpAmb == TipoAmbiente.taProducao)
             {
                 if (oParam.tpEmis == TipoEmissao.teSCAN) {  } //Contingência SCAN Ambiente Nascional
-                else if (oParam.UFCod == 51) {  }
+                else if (oParam.UFCod == 51) { pServico = new wsMTPStatusServico.CteStatusServico(); pCabecMsg = new wsMTPStatusServico.cteCabecMsg(); }
                 else if (oParam.UFCod == 43) { pServico = new wsRSPStatusServico.CteStatusServico(); pCabecMsg = new wsRSPStatusServico.cteCabecMsg(); }
                 else if (oParam.UFCod == 35) { pServico = new wsSPPStatusServico.CteStatusServico(); pCabecMsg = new wsSPPStatusServico.cteCabecMsg(); } 
             }

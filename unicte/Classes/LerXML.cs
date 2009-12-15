@@ -243,31 +243,25 @@ namespace unicte
                 XmlDocument doc = new XmlDocument();
                 doc.Load(cArquivoXML);
 
-                XmlNodeList consStatServList = doc.GetElementsByTagName("infCanc");
+                XmlNodeList infCancList = doc.GetElementsByTagName("infCanc");
 
-                foreach (XmlNode consStatServNode in consStatServList)
+                foreach (XmlNode infCancNode in infCancList)
                 {
-                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
+                    XmlElement infCancElemento = (XmlElement)infCancNode;
 
-                    this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + infCancElemento.GetElementsByTagName("tpAmb")[0].InnerText);
 
-                    if (consStatServElemento.GetElementsByTagName("chCTe").Count != 0)
-                        this.oDadosPedCanc.chNFe = consStatServElemento.GetElementsByTagName("chCTe")[0].InnerText;
-                    /*
-                    if (consStatServElemento.GetElementsByTagName("nProt").Count != 0)
-                        this.oDadosPedCanc.nProt = consStatServElemento.GetElementsByTagName("nProt")[0].InnerText;
-
-                    if (consStatServElemento.GetElementsByTagName("xJust").Count != 0)
-                        this.oDadosPedCanc.xJust = consStatServElemento.GetElementsByTagName("xJust")[0].InnerText;
-                    */
+                    if (infCancElemento.GetElementsByTagName("chCTe").Count != 0)
+                        this.oDadosPedCanc.chNFe = infCancElemento.GetElementsByTagName("chCTe")[0].InnerText;
                     ///
                     /// danasa 12-9-2009
                     /// 
-                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    if (infCancElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
-                        this.oDadosPedCanc.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        this.oDadosPedCanc.tpEmis = Convert.ToInt16(infCancElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                        doc.DocumentElement["infCanc"].RemoveChild(infCancElemento.GetElementsByTagName("tpEmis")[0]);
+                           
                         /// salvo o arquivo modificado
                         doc.Save(cArquivoXML);
                     }
@@ -358,49 +352,49 @@ namespace unicte
                     XmlDocument doc = new XmlDocument();
                     doc.Load(cArquivoXML);
 
-                    XmlNodeList ConsCadList = doc.GetElementsByTagName("inutCTe");
-                    foreach (XmlNode ConsCadNode in ConsCadList)
+                    XmlNodeList InutNFeList = doc.GetElementsByTagName("inutCTe");
+                    foreach (XmlNode InutNFeNode in InutNFeList)
                     {
-                        XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+                        XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
 
-                        XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infInut");
+                        XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
 
-                        foreach (XmlNode infConsNode in infConsList)
+                        foreach (XmlNode infInutNode in infInutList)
                         {
-                            XmlElement infConsElemento = (XmlElement)infConsNode;
+                            XmlElement infInutElemento = (XmlElement)infInutNode;
 
-                            if (infConsElemento.GetElementsByTagName("tpAmb")[0] != null)
-                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("tpAmb")[0] != null)
+                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("tpAmb")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("cUF")[0] != null)
-                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("cUF")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("cUF")[0] != null)
+                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("cUF")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("ano")[0] != null)
-                                this.oDadosPedInut.ano = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("ano")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("ano")[0] != null)
+                                this.oDadosPedInut.ano = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("ano")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
-                                this.oDadosPedInut.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                            if (infInutElemento.GetElementsByTagName("CNPJ")[0] != null)
+                                this.oDadosPedInut.CNPJ = infInutElemento.GetElementsByTagName("CNPJ")[0].InnerText;
 
-                            if (infConsElemento.GetElementsByTagName("mod")[0] != null)
-                                this.oDadosPedInut.mod = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("mod")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("mod")[0] != null)
+                                this.oDadosPedInut.mod = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("mod")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("serie")[0] != null)
-                                this.oDadosPedInut.serie = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("serie")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("serie")[0] != null)
+                                this.oDadosPedInut.serie = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("serie")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("nCTIni")[0] != null)
-                                this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("nCTIni")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("nCTIni")[0] != null)
+                                this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTIni")[0].InnerText);
 
-                            if (infConsElemento.GetElementsByTagName("nCTFin")[0] != null)
-                                this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infConsElemento.GetElementsByTagName("nCTFin")[0].InnerText);
+                            if (infInutElemento.GetElementsByTagName("nCTFin")[0] != null)
+                                this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTFin")[0].InnerText);
 
                             ///
                             /// danasa 12-9-2009
                             /// 
-                            if (infConsElemento.GetElementsByTagName("tpEmis").Count != 0)
+                            if (infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
                             {
-                                this.oDadosPedInut.tpEmis = Convert.ToInt16(infConsElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                                this.oDadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                                 /// para que o validador não rejeite, excluo a tag <tpEmis>
-                                doc.DocumentElement.RemoveChild(infConsElemento.GetElementsByTagName("tpEmis")[0]);
+                                doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName("tpEmis")[0]);
                                 /// salvo o arquivo modificado
                                 doc.Save(cArquivoXML);
                             }
@@ -426,17 +420,41 @@ namespace unicte
 
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitCTe");
-
-                foreach (XmlNode consSitNFeNode in consSitNFeList)
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
                 {
-                    XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
+                }
+                else
+                {
+                    //<?xml version="1.0" encoding="UTF-8"?>
+                    //<consSitCTe xmlns="http://www.portalfiscal.inf.br/cte" versao="1.07">
+                    //  <tpAmb>2</tpAmb>
+                    //  <tpEmis>1</tpEmis>                          <<< opcional >>>
+                    //  <xServ>CONSULTAR</xServ>
+                    //  <chCTe>35080600000000000000550000000000010000000000</chCTe>
+                    //</consSitCTe>                  
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
 
-                    this.oDadosPedSit.tpAmb = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chCTe")[0].InnerText;
+                    XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitCTe");
+
+                    foreach (XmlNode consSitNFeNode in consSitNFeList)
+                    {
+                        XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
+
+                        this.oDadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                        this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chCTe")[0].InnerText;
+                        ///
+                        /// danasa 12-9-2009
+                        /// 
+                        if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            this.oDadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <tpEmis>
+                            doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -462,36 +480,44 @@ namespace unicte
 
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServCte");
-
-                foreach (XmlNode consStatServNode in consStatServList)
+                ///
+                /// danasa 12-9-2009
+                /// 
+                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
                 {
-                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
+                }
+                else
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(cArquivoXML);
 
-                    this.oDadosPedSta.tpAmb = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServCte");
 
-                    if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                    foreach (XmlNode consStatServNode in consStatServList)
                     {
-                        this.oDadosPedSta.cUF = Convert.ToInt32(consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
-                        /// para que o validador não rejeite, excluo a tag <cUF>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("cUF")[0]);
-                        /// salvo o arquivo modificado
-                        doc.Save(cArquivoXML);
-                    }
+                        XmlElement consStatServElemento = (XmlElement)consStatServNode;
 
-                    ///
-                    /// danasa 9-2009
-                    /// 
-                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
-                    {
-                        this.oDadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                        /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
-                        /// salvo o arquivo modificado
-                        doc.Save(cArquivoXML);
+                        this.oDadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+
+                        if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                        {
+                            this.oDadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <cUF>
+                            doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("cUF")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
+                        ///
+                        /// danasa 9-2009
+                        /// 
+                        if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            this.oDadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <tpEmis>
+                            doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
                     }
                 }
             }

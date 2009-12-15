@@ -18,7 +18,7 @@ namespace unicte
         #endregion
 
         #region Propriedades
-        
+
         /// <summary>
         /// Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
         /// </summary>
@@ -38,7 +38,7 @@ namespace unicte
         /// <summary>
         /// Serviço que está sendo executado (Envio de Nota, Cancelamento, Consulta, etc...)
         /// </summary>
-        protected override Servicos Servico 
+        protected override Servicos Servico
         {
             get
             {
@@ -131,9 +131,16 @@ namespace unicte
                         object oServico = null;
                         object oCabecMsg = null;
                         oDefObj.Cancelamento(ref oServico, ref oCabecMsg, oParam);
-                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLCanc, oCabecMsg, oServico, "cteCancelamentoCT", "-ped-can", "-can") == true)
+
+                        try
                         {
-                            this.LerRetornoCanc();
+                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLCanc, oCabecMsg, oServico, "cteCancelamentoCT", "-ped-can", "-can") == true)
+                            {
+                                this.LerRetornoCanc();
+                            }
+                        }
+                        catch (ExceptionInvocarObjeto ex)
+                        {
                         }
                     }
                 }
@@ -225,10 +232,35 @@ namespace unicte
                 object oServico = null;
                 object oCabecMsg = null;
                 oDefObj.Consulta(ref oServico, ref oCabecMsg, oParam);
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oCabecMsg, oServico, oParam, "cteConsultaCT", "-ped-sit", "-sit") == true)
+                try
                 {
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oCabecMsg, oServico, oParam, "cteConsultaCT", "-ped-sit", "-sit") == true)
+                    {
+                        try
+                        {
+                            //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
+                            this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
+
+                            //Gerar o retorno para o ERP
+                            oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
+
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                        catch (Exception ex)
+                        {
+                            //Tenho que gravar para o ERP um retorno do erro se acontecer algo com o final -sit.err. Wandrey 22/10/2009
+                            oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSit, ExtXmlRet.Sit_ERR, ex.ToString());
+                        }
+                        finally
+                        {
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                    }
+                }
+                catch (ExceptionInvocarObjeto ex)
+                {
                 }
             }
             else
@@ -331,10 +363,16 @@ namespace unicte
                 }
                 else
                 {
-                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLConsCad, oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+                    try
                     {
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLConsCad, oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
+                        {
+                            //Deletar o arquivo de solicitação do serviço
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                    }
+                    catch (ExceptionInvocarObjeto ex)
+                    {
                     }
                 }
             }
@@ -447,6 +485,14 @@ namespace unicte
 
                     if (oAD.intResultado == 0)
                     {
+                        //Resolver um falha do estado da bahia que gera um método com nome diferente dos demais estados
+                        string cMetodo = "nfeInutilizacaoNF";
+                        if (oLer.oDadosPedInut.cUF == 29 &&
+                            oLer.oDadosPedInut.tpEmis != TipoEmissao.teSCAN)
+                        {
+                            cMetodo = "nfeInutilizacao";
+                        }
+
                         ParametroEnvioXML oParam = new ParametroEnvioXML();
                         oParam.tpAmb = oLer.oDadosPedInut.tpAmb;
                         oParam.tpEmis = oLer.oDadosPedInut.tpEmis;
@@ -456,9 +502,15 @@ namespace unicte
                         object oServico = null;
                         object oCabecMsg = null;
                         oDefObj.Inutilizacao(ref oServico, ref oCabecMsg, oParam);
-                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLInut, oCabecMsg, oServico, "cteInutilizacaoCT", "-ped-inu", "-inu") == true)
+                        try
                         {
-                            this.LerRetornoInut();
+                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLInut, oCabecMsg, oServico, "cteInutilizacaoCT", "-ped-inu", "-inu") == true)
+                            {
+                                this.LerRetornoInut();
+                            }
+                        }
+                        catch (ExceptionInvocarObjeto ex)
+                        {
                         }
                     }
                 }
@@ -554,8 +606,8 @@ namespace unicte
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
                             string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
-                                                            PastaEnviados.EmProcessamento + "\\" +
-                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedCan) + ExtXml.ProcCancNFe;
+                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedCan) + ExtXmlRet.ProcCancNFe;
                             oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
                         }
                         else
@@ -611,8 +663,8 @@ namespace unicte
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
                             string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
-                                                            PastaEnviados.EmProcessamento + "\\" +
-                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedInu/*"-ped-inu.xml"*/) + ExtXml.ProcInutNFe;// "-procInutNFe.xml";
+                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                            oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedInu/*"-ped-inu.xml"*/) + ExtXmlRet.ProcInutNFe;// "-procInutNFe.xml";
                             oAux.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
                         }
                         else
@@ -737,16 +789,22 @@ namespace unicte
                                         oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
                                         string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe/*"-nfe.xml"*/) + ExtXml.ProcNFe;// "-procNFe.xml";
+                                                                    oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
 
                                         //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                         oLerXml.Nfe(strArquivoNFe);
 
-                                        //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
-                                        oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
-
                                         //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
+                                        //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
+                                        //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
+                                        //assim sendo não inverta as posições. Wandrey 08/10/2009
                                         oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+
+                                        //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
+                                        //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para 
+                                        //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário.
+                                        //assim sendo não inverta as posições. Wandrey 08/10/2009
+                                        oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                         break;
 
                                     case "301": //NFe Denegada - Problemas com o emitente
@@ -758,6 +816,9 @@ namespace unicte
                                         break;
 
                                     case "302": //NFe Denegada - Problemas com o destinatário
+                                        goto case "301";
+
+                                    case "110": //NFe Denegada - Não sei quando ocorre este, mas descobrir ele no manual então estou incluindo. Wandrey 20/10/2009
                                         goto case "301";
 
                                     case "303": //NFe Denegada - Problemas com o destinatário
@@ -790,18 +851,192 @@ namespace unicte
                     }
                     else if (cStatLote == "106") //Lote não encontrado
                     {
-                        //Se o recibo que está sendo consultado não existir no SEFAZ, vamos excluir a nota do fluxo de envio
-                        //TODO: 1-Tenho que ver isso ainda como vai ficar
-                        //Tenho somente o Recibo, a partir dele tenho que encontrar a chave da NFe ou das NFs e excluir do fluxo
-                        //ou criar uma exclusão do fluxo através do recibo.
-                        //TODO: URGENTE - Aqui é um ponto que pode estar deixando o XML no fluxo sem tirar
+                        //No caso do lote não encontrado através do recibo, o ERP vai ter que consultar a situação da 
+                        //Nota para tirar ela do fluxo de NFe em processamento
                     }
                     else //Rejeitou a consulta do lote
                     {
                         //A consulta do recibo do lote pode ser rejeitada por diversas motivos, eu não posso tirar do fluxo
                         //tenho que continuar tentando consultar, o ERP vai ter que analisar o retorno gravado, arrumar o problema, 
                         //se preciso for sair do uninfe entrar novamente para que ele gere nova consulta e tente finalizar.
+                        //O ERP também pode gerar uma consulta situação da NFe e tentar finalizar através deste processo.
                         //Wandrey 18/08/2009
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
+        #region LerRetornoSit()
+        //TODO: Documentar este método
+        protected override void LerRetornoSit(string ChaveNFe)
+        {
+            LerXML oLerXml = new LerXML();
+            MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
+
+            FluxoNfe oFluxoNfe = new FluxoNfe();
+
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(msXml);
+
+                XmlNodeList retConsSitList = doc.GetElementsByTagName("retConsSitCTe");
+                if (retConsSitList != null)
+                {
+                    if (retConsSitList.Count > 0)
+                    {
+                        XmlElement retConsSitElemento = (XmlElement)retConsSitList.Item(0);
+                        if (retConsSitElemento != null)
+                        {
+                            if (retConsSitElemento.ChildNodes.Count > 0)
+                            {
+                                XmlNodeList infConsSitList = retConsSitElemento.GetElementsByTagName("infProt");
+                                if (infConsSitList != null)
+                                {
+                                    foreach (XmlNode infConsSitNode in infConsSitList)
+                                    {
+                                        XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
+
+                                        //Pegar o Status do Retorno da consulta situação
+                                        string strStat = oAux.LerTag(infConsSitElemento, "cStat").Replace(";", "");
+
+                                        //Definir a chave da NFe a ser pesquisada
+                                        string strChaveNFe = "CTe" + ChaveNFe;
+
+                                        //Definir o nome do arquivo da NFe e seu caminho
+                                        string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
+
+                                        if (string.IsNullOrEmpty(strNomeArqNfe))
+                                        {
+                                            if (string.IsNullOrEmpty(strChaveNFe))
+                                                throw new Exception("LerRetornoSit(): Não pode obter o nome do arquivo");
+
+                                            strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
+                                        }
+
+                                        string strArquivoNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+
+                                        switch (strStat)
+                                        {
+                                            case "100":
+                                                //O retorno da consulta situação a posição das tag´s é diferente do que vem 
+                                                //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
+                                                //para que fique um XML de distribuição válido. Wandrey 07/10/2009
+                                                string strProtNfe = "<protCTe versao=\"1.10\">" +
+                                                    "<infProt>" +
+                                                    "<tpAmb>" + oAux.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
+                                                    "<verAplic>" + oAux.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
+                                                    "<chCTe>" + oAux.LerTag(infConsSitElemento, "chCTe", false) + "</chCTe>" +
+                                                    "<dhRecbto>" + oAux.LerTag(infConsSitElemento, "dhRecbto", false) + "</dhRecbto>" +
+                                                    "<nProt>" + oAux.LerTag(infConsSitElemento, "nProt", false) + "</nProt>" +
+                                                    "<digVal>" + oAux.LerTag(infConsSitElemento, "digVal", false) + "</digVal>" +
+                                                    "<cStat>" + oAux.LerTag(infConsSitElemento, "cStat", false) + "</cStat>" +
+                                                    "<xMotivo>" + oAux.LerTag(infConsSitElemento, "xMotivo", false) + "</xMotivo>" +
+                                                    "</infProt>" +
+                                                    "</protNFe>";
+
+                                                //Definir o nome do arquivo -procNfe.xml                                               
+                                                string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                                            oAux.ExtrairNomeArq(strArquivoNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
+
+                                                //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
+                                                //Não tenho como fazer mais nada. Wandrey 08/10/2009
+                                                if (File.Exists(strArquivoNFe))
+                                                {
+                                                    //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
+                                                    oLerXml.Nfe(strArquivoNFe);
+
+                                                    //Verificar se a -nfe.xml existe na pasta de autorizados
+                                                    bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, ExtXml.Nfe);
+
+                                                    //Verificar se o -procNfe.xml existe na past de autorizados
+                                                    bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, ExtXmlRet.ProcNFe);
+
+                                                    //Se o XML de distribuição não estiver na pasta de autorizados
+                                                    if (!procNFeJaNaAutorizada)
+                                                    {
+                                                        if (!File.Exists(strArquivoNFeProc))
+                                                        {
+                                                            oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
+                                                        }
+                                                    }
+
+                                                    //Se o XML de distribuição não estiver ainda na pasta de autorizados
+                                                    if (!procNFeJaNaAutorizada)
+                                                    {
+                                                        //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
+                                                        oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                    }
+
+                                                    //Se a NFe não exitiver ainda na pasta de autorizados
+                                                    if (!NFeJaNaAutorizada)
+                                                    {
+                                                        //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
+                                                        oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                    }
+                                                    else
+                                                    {
+                                                        //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
+                                                        oAux.DeletarArquivo(strArquivoNFe);
+                                                    }
+                                                }
+
+                                                if (File.Exists(strArquivoNFeProc))
+                                                {
+                                                    //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
+                                                    oAux.DeletarArquivo(strArquivoNFeProc);
+                                                }
+
+                                                break;
+
+                                            case "301":
+                                                //Ler o XML para pegar a data de emissão para criar a psta dos XML´s Denegados
+                                                oLerXml.Nfe(strArquivoNFe);
+
+                                                //Move a NFE da pasta de NFE em processamento para NFe Denegadas
+                                                if (!oAux.EstaDenegada(strArquivoNFe, oLerXml.oDadosNfe.dEmi))
+                                                {
+                                                    oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
+                                                }
+
+                                                break;
+
+                                            case "302":
+                                                goto case "301";
+
+                                            case "110": //CTe Denegado - Não sei quando ocorre este, mas descobrir ele no manual então estou incluindo. Wandrey 20/10/2009
+                                                goto case "301";
+
+                                            case "303": //CTe Denegado - Problemas com o destinatário
+                                                goto case "301";
+
+                                            case "304": //CTe Denegado - Problemas com o destinatário
+                                                goto case "301";
+
+                                            case "305": //CTe Denegado - Problemas com o destinatário
+                                                goto case "301";
+
+                                            case "306": //CTe Denegado - Problemas com o destinatário
+                                                goto case "301";
+
+                                            default:
+                                                //Mover o XML da NFE a pasta de XML´s com erro
+                                                oAux.MoveArqErro(strArquivoNFe);
+                                                break;
+                                        }
+
+                                        //Deletar a NFE do arquivo de controle de fluxo
+                                        oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -837,7 +1072,7 @@ namespace unicte
             oGerarXML.LoteNfe(lstArquivoNfe);
         }
         #endregion
-    
+
         #region Recepcao()
         /// <summary>
         /// Envia o XML de lote de nota fiscal pra o SEFAZ em questão
@@ -892,44 +1127,60 @@ namespace unicte
             object oServico = null;
             object oCabecMsg = null;
             oDefObj.Recepcao(ref oServico, ref oCabecMsg);
-            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLNFe, oCabecMsg, oServico, "cteRecepcaoLote", "-env-lot", "-rec") == true)
+            try
             {
-                LerXML oLerRecibo = new LerXML();
-                oLerRecibo.Recibo(this.vStrXmlRetorno);
-
-                if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
+                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLNFe, oCabecMsg, oServico, "cteRecepcaoLote", "-env-lot", "-rec") == true)
                 {
-                    //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
-                    oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
+                    LerXML oLerRecibo = new LerXML();
+                    oLerRecibo.Recibo(this.vStrXmlRetorno);
+
+                    if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
+                    {
+                        //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
+                        oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
+                        oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
+                    }
+                    else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
+                    {
+                        //Se o status do retorno do lote for maior que 200, 
+                        //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
+                        //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
+                        //Wandrey 30/04/2009
+                        oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                        oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
+                    }
+
+                    //Deleta o arquivo de lote
+                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
                 }
-                else
+            }
+            catch (ExceptionInvocarObjeto ex)
+            {
+                //Se falhou algo no envio, foi exatamente no ponto de enviar o XML para a receita, assim sendo,
+                //não temos como saber se a nota foi recebida pelo SEFAZ ou não, desta forma, tenho que manter
+                //a nota no fluxo, sem o recibo, pq não o conseguimos, a a rotina que analisa as notas presas no fluxo
+                //vai resolver e finalizar ela pela consulta situação, assim sendo neste ponto, por favor
+                //nunca delete o XML da NFe que esta em processamento, pois se a nota foi recebida pelo sefaz, ele pode
+                //ter autorizado ela (E isso já aconteceu diversas vezes com pessoas diferentes), e deletando vamos
+                //perder o XML.
+                //
+                //Se o ERP Desejar pode gerar uma consulta situação da nota que o UniNFe vai tirar ela do fluxo, finalizando ela ou não,
+                //depende do retorno do SEFAZ
+                //
+                //Wandrey 07/10/2009
+                
+                //TODO: Aqui que eu tenho que tratar o erro e internet
+                //Já tenho como ver se é erro de conexão com internet e tratar
+                //se for vamos tirar a nota do fluxo para que o ERP gere ela novamente.
+                if (ex.ErrorCode == ErroPadrao.FalhaInternet)
                 {
-                    //Se o status do retorno do lote for diferente de 103, 
+                    //Se o status do retorno do lote for maior que 200, 
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
-                    //Primeiro deleta o xml da nota da pasta EmProcessamento e depois tira ela do fluxo
+                    //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-
+                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
                 }
-
-                //Deleta o arquivo de lote
-                oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-            }
-            else
-            {
-                //Se falhou algo no envio vamos ter que excluir a nota do fluxo, 
-                //Primeiro deleta o xml da nota da pasta EmProcessamento e depois tira ela do fluxo
-                //Wandrey 30/04/2009
-
-                //TODO: QUEDA DE ENERGIA
-                //ANOTACOES TODO ACIMA: Como já vai ter movido o arquivo de lote para a pasta de XML´s com erro
-                //Neste ponto se der uma queda de energia ele não sai mais do fluxo, visto que não tem recibo
-                //Não tem mais lote para enviar, enfim fica preso.
-
-                oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-                oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
             }
         }
         #endregion
@@ -983,29 +1234,35 @@ namespace unicte
             object oCabecMsg = null;
             oDefObj.RetRecepcao(ref oServico, ref oCabecMsg);
 
-            //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
-            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedRec, oCabecMsg, oServico, "cteRetRecepcao") == true)
+            try
             {
-                try
+                //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
+                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedRec, oCabecMsg, oServico, "cteRetRecepcao") == true)
                 {
-                    //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
-                    this.LerRetornoLote();
+                    try
+                    {
+                        //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
+                        this.LerRetornoLote();
 
-                    //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
-                    //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                    //Wandrey 18/06/2009
-                    oGerarXML.XmlRetorno(ExtXml.PedRec, "-pro-rec.xml", this.vStrXmlRetorno);
-
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                        //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                        //Wandrey 18/06/2009
+                        oGerarXML.XmlRetorno(ExtXml.PedRec, ExtXmlRet.ProRec, this.vStrXmlRetorno);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw (ex);
+                    }
+                    finally
+                    {
+                        //Deletar o arquivo de solicitação do serviço
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-
-                    throw (ex);
-                }
+            }
+            catch (ExceptionInvocarObjeto ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -1070,10 +1327,16 @@ namespace unicte
                 object oCabecMsg = null;
 
                 oDefObj.StatusServico(ref oServico, ref oCabecMsg, oParam);
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oCabecMsg, oServico, oParam, "cteStatusServicoCT", "-ped-sta", "-sta") == true)
+                try
                 {
-                    //Deletar o arquivo de solicitação do serviço
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oCabecMsg, oServico, oParam, "cteStatusServicoCT", "-ped-sta", "-sta") == true)
+                    {
+                        //Deletar o arquivo de solicitação do serviço
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                    }
+                }
+                catch (ExceptionInvocarObjeto ex)
+                {
                 }
             }
             else
@@ -1118,7 +1381,7 @@ namespace unicte
         }
         #endregion
         #endregion
-        
+
         #region XmlRetorno()
         /// <summary>
         /// Auxiliar na geração do arquivo XML de retorno para o ERP quando estivermos utilizando o InvokeMember para chamar o método

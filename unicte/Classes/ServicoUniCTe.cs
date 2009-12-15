@@ -43,26 +43,7 @@ namespace unicte
         /// <date>03/069/2009</date>
         protected override void ConvTXT(string vPasta)
         {
-        }
-        #endregion
 
-        #region LerXMLNFe()
-        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
-
-            return oLerXML.oDadosNfe;
-        }
-        #endregion
-
-        #region LerXMLRecibo()
-        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-            oLerXML.Recibo(Arquivo);
-
-            return oLerXML.oDadosRec;
         }
         #endregion
 
@@ -89,7 +70,36 @@ namespace unicte
         }
         #endregion
 
+        #region EmProcessamento
+        protected override void EmProcessamento()
+        {
+            new NFeEmProcessamento();
+        }
         #endregion
+
+
+        #region LerXMLNFe()
+        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Nfe(Arquivo);
+
+            return oLerXML.oDadosNfe;
+        }
+        #endregion
+
+        #region LerXMLRecibo()
+        protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+            oLerXML.Recibo(Arquivo);
+
+            return oLerXML.oDadosRec;
+        }
+        #endregion
+
+        #endregion
+
     }
     #endregion
 }

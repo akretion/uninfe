@@ -58,6 +58,17 @@ namespace unicte
         #region Consulta
         public override void Consulta(string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe)
         {
+            StringBuilder aXML = new StringBuilder();
+            aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            aXML.Append("<consSitCTe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLPedSit + "\">");
+            aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
+            if (ConfiguracaoApp.tpEmis != tpEmis)
+                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //<<< opcional >>>
+            aXML.Append("<xServ>CONSULTAR</xServ>");
+            aXML.AppendFormat("<chCTe>{0}</chCTe>", chNFe);
+            aXML.Append("</consSitCTe>");
+
+            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
         }
         #endregion
 
@@ -128,7 +139,7 @@ namespace unicte
             return saida.ToString();
         }
         #endregion  
-        
+ 
         #region EncerrarLoteNfe()
         /// <summary>
         /// Encerra a string do XML de lote de notas fiscais eletrônicas
@@ -322,9 +333,9 @@ namespace unicte
 
                 //Montar o nome do arquivo -proc-NFe.xml
                 string strNomeArqProcInutNFe =  ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
-                                                PastaEnviados.EmProcessamento + "\\" + 
+                                                PastaEnviados.EmProcessamento.ToString() + "\\" + 
                                                 oAux.ExtrairNomeArq(strArqInut, ExtXml.PedInu/*"-ped-inu.xml"*/) +
-                                                ExtXml.ProcInutNFe;// "-procInutNFe.xml";
+                                                ExtXmlRet.ProcInutNFe;// "-procInutNFe.xml";
 
                 //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcInutNFe);
@@ -377,9 +388,9 @@ namespace unicte
 
                 //Montar o nome do arquivo -proc-NFe.xml
                 string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
-                                                PastaEnviados.EmProcessamento + "\\" + 
+                                                PastaEnviados.EmProcessamento.ToString() + "\\" + 
                                                 oAux.ExtrairNomeArq(strArqCanc, ExtXml.PedCan/*"-ped-can.xml"*/) +
-                                                ExtXml.ProcCancNFe;// "-procCancNFe.xml";
+                                                ExtXmlRet.ProcCancNFe;// "-procCancNFe.xml";
 
                 //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcCancNFe);
@@ -461,12 +472,13 @@ namespace unicte
                     "</cteProc>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + 
-                                            PastaEnviados.EmProcessamento + "\\" + 
-                                            oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe/*"-nfe.xml"*/) +
-                                            ExtXml.ProcNFe;// "-procNFe.xml";
+                string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                            oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe) +
+                                            ExtXmlRet.ProcNFe;
 
-                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
+                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de 
+                //validar o XML pelos Schemas. Wandrey 13/05/2009
                 swProc = File.CreateText(strNomeArqProcNFe);
                 swProc.Write(strXmlProcNfe);
             }
