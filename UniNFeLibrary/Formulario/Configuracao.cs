@@ -22,6 +22,11 @@ namespace UniNFeLibrary.Formulario
         {
             InitializeComponent();
 
+            //Definir um texto explicativo sobre a impressão do DANFE. Wandrey 02/02/2010
+            tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DANFE através do UniDANFe, bastando preencher os campos abaixo." +
+                "\r\n\r\n" +
+                "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
+
             #region Montar Array DropList da UF
             ArrayList arrUF = new ArrayList();
             if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
@@ -132,6 +137,25 @@ namespace UniNFeLibrary.Formulario
             {
                 this.textBox_PastaBackup.Text = ConfiguracaoApp.cPastaBackup;
             }
+
+            if (ConfiguracaoApp.PastaConfigUniDanfe == string.Empty)
+            {
+                this.tbPastaConfigUniDanfe.Text = string.Empty;
+            }
+            else
+            {
+                this.tbPastaConfigUniDanfe.Text = ConfiguracaoApp.PastaConfigUniDanfe;
+            }
+
+            if (ConfiguracaoApp.PastaExeUniDanfe == string.Empty)
+            {
+                this.tbPastaExeUniDanfe.Text = string.Empty;
+            }
+            else
+            {
+                this.tbPastaExeUniDanfe.Text = ConfiguracaoApp.PastaExeUniDanfe;
+            }
+
             //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for (int i = 0; i < arrTpEmis.Count; i++)
@@ -250,6 +274,8 @@ namespace UniNFeLibrary.Formulario
             ConfiguracaoApp.ProxySenha = this.tbSenha.Text;
             ConfiguracaoApp.ProxyServidor = tbServidor.Text;
             ConfiguracaoApp.ProxyUsuario = tbUsuario.Text;
+            ConfiguracaoApp.PastaConfigUniDanfe = tbPastaConfigUniDanfe.Text;
+            ConfiguracaoApp.PastaExeUniDanfe = tbPastaExeUniDanfe.Text;
 
             ConfiguracaoApp.DiasLimpeza = (int)udDiasLimpeza.Value;
             if (this.oMeuCert == null)
@@ -367,6 +393,28 @@ namespace UniNFeLibrary.Formulario
             iniFile.SaveForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
             iniFile.Save();
         }
+
+        private void button_SelectPastaExeUniDanfe_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_xmlenvio.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.tbPastaExeUniDanfe.Text = this.folderBrowserDialog_xmlenvio.SelectedPath;
+            }
+
+        }
+
+        private void button_SelectPastaConfUniDanfe_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog_xmlenvio.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.tbPastaConfigUniDanfe.Text = this.folderBrowserDialog_xmlenvio.SelectedPath;
+            }
+        }
+
         #endregion
     }
     #endregion

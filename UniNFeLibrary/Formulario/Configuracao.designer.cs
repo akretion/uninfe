@@ -86,6 +86,14 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.lblPorta = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button_SelectPastaConfUniDanfe = new System.Windows.Forms.Button();
+            this.tbPastaConfigUniDanfe = new System.Windows.Forms.TextBox();
+            this.button_SelectPastaExeUniDanfe = new System.Windows.Forms.Button();
+            this.tbPastaExeUniDanfe = new System.Windows.Forms.TextBox();
+            this.tbTextoDANFE = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.folderBrowserDialog_xmlenviado = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_xmlerro = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog_backup = new System.Windows.Forms.FolderBrowserDialog();
@@ -100,6 +108,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPorta)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox_PastaEnvioXML
@@ -303,6 +312,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(6, 42);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -702,6 +712,89 @@
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuário:";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button_SelectPastaConfUniDanfe);
+            this.tabPage5.Controls.Add(this.tbPastaConfigUniDanfe);
+            this.tabPage5.Controls.Add(this.button_SelectPastaExeUniDanfe);
+            this.tabPage5.Controls.Add(this.tbPastaExeUniDanfe);
+            this.tabPage5.Controls.Add(this.tbTextoDANFE);
+            this.tabPage5.Controls.Add(this.label16);
+            this.tabPage5.Controls.Add(this.label15);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(588, 351);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "DANFE";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button_SelectPastaConfUniDanfe
+            // 
+            this.button_SelectPastaConfUniDanfe.Image = global::UniNFeLibrary.Properties.Resources.folder_orange_open;
+            this.button_SelectPastaConfUniDanfe.Location = new System.Drawing.Point(553, 168);
+            this.button_SelectPastaConfUniDanfe.Name = "button_SelectPastaConfUniDanfe";
+            this.button_SelectPastaConfUniDanfe.Size = new System.Drawing.Size(27, 23);
+            this.button_SelectPastaConfUniDanfe.TabIndex = 7;
+            this.button_SelectPastaConfUniDanfe.UseVisualStyleBackColor = true;
+            this.button_SelectPastaConfUniDanfe.Click += new System.EventHandler(this.button_SelectPastaConfUniDanfe_Click);
+            // 
+            // tbPastaConfigUniDanfe
+            // 
+            this.tbPastaConfigUniDanfe.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbPastaConfigUniDanfe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbPastaConfigUniDanfe.Location = new System.Drawing.Point(6, 170);
+            this.tbPastaConfigUniDanfe.Name = "tbPastaConfigUniDanfe";
+            this.tbPastaConfigUniDanfe.Size = new System.Drawing.Size(542, 20);
+            this.tbPastaConfigUniDanfe.TabIndex = 6;
+            // 
+            // button_SelectPastaExeUniDanfe
+            // 
+            this.button_SelectPastaExeUniDanfe.Image = global::UniNFeLibrary.Properties.Resources.folder_orange_open;
+            this.button_SelectPastaExeUniDanfe.Location = new System.Drawing.Point(553, 124);
+            this.button_SelectPastaExeUniDanfe.Name = "button_SelectPastaExeUniDanfe";
+            this.button_SelectPastaExeUniDanfe.Size = new System.Drawing.Size(27, 23);
+            this.button_SelectPastaExeUniDanfe.TabIndex = 5;
+            this.button_SelectPastaExeUniDanfe.UseVisualStyleBackColor = true;
+            this.button_SelectPastaExeUniDanfe.Click += new System.EventHandler(this.button_SelectPastaExeUniDanfe_Click);
+            // 
+            // tbPastaExeUniDanfe
+            // 
+            this.tbPastaExeUniDanfe.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbPastaExeUniDanfe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbPastaExeUniDanfe.Location = new System.Drawing.Point(6, 126);
+            this.tbPastaExeUniDanfe.Name = "tbPastaExeUniDanfe";
+            this.tbPastaExeUniDanfe.Size = new System.Drawing.Size(542, 20);
+            this.tbPastaExeUniDanfe.TabIndex = 4;
+            // 
+            // tbTextoDANFE
+            // 
+            this.tbTextoDANFE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbTextoDANFE.Location = new System.Drawing.Point(6, 11);
+            this.tbTextoDANFE.Multiline = true;
+            this.tbTextoDANFE.Name = "tbTextoDANFE";
+            this.tbTextoDANFE.Size = new System.Drawing.Size(576, 75);
+            this.tbTextoDANFE.TabIndex = 3;
+            this.tbTextoDANFE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 153);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(244, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Pasta do arquivo de configurações do UniDANFe:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 110);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(176, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Pasta do executável do UniDANFe:";
+            // 
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
@@ -736,6 +829,8 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPorta)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -805,5 +900,13 @@
         private System.Windows.Forms.NumericUpDown udDiasLimpeza;
         private System.Windows.Forms.TextBox tbServidor;
         private System.Windows.Forms.Label lblServidor;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbTextoDANFE;
+        private System.Windows.Forms.Button button_SelectPastaExeUniDanfe;
+        private System.Windows.Forms.TextBox tbPastaExeUniDanfe;
+        private System.Windows.Forms.Button button_SelectPastaConfUniDanfe;
+        private System.Windows.Forms.TextBox tbPastaConfigUniDanfe;
     }
 }

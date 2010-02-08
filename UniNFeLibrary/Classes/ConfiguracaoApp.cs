@@ -60,6 +60,14 @@ namespace UniNFeLibrary
         public static string ProxyUsuario { get; set; }
         public static string ProxySenha { get; set; }
         public static int ProxyPorta { get; set; }
+        /// <summary>
+        /// Pasta do executável do UniDanfe
+        /// </summary>
+        public static string PastaExeUniDanfe { get; set; }
+        /// <summary>
+        /// Pasta do arquivo de configurações do UniDanfe (Tem que ser sem o \dados)
+        /// </summary>
+        public static string PastaConfigUniDanfe { get; set; }
 
         private static DiretorioSalvarComo mDiretorioSalvarComo = "";
         /// <summary>
@@ -140,6 +148,8 @@ namespace UniNFeLibrary
             ConfiguracaoApp.NomePastaXMLAssinado = InfoApp.NomePastaXMLAssinado;// "\\Assinado";
             ConfiguracaoApp.DiretorioSalvarComo = "AM";
             ConfiguracaoApp.DiasLimpeza = 0;
+            ConfiguracaoApp.PastaConfigUniDanfe = string.Empty;
+            ConfiguracaoApp.PastaExeUniDanfe = string.Empty;
 
             if (File.Exists(vArquivoConfig))
             {
@@ -174,14 +184,19 @@ namespace UniNFeLibrary
                                         else if (oLerXml.Name == "GravarRetornoTXTNFe") { oLerXml.Read(); ConfiguracaoApp.GravarRetornoTXTNFe = Convert.ToBoolean(oLerXml.Value); }
                                         else if (oLerXml.Name == "DiretorioSalvarComo") { oLerXml.Read(); ConfiguracaoApp.DiretorioSalvarComo = Convert.ToString(oLerXml.Value); }
                                         else if (oLerXml.Name == "DiasLimpeza") { oLerXml.Read(); ConfiguracaoApp.DiasLimpeza = Convert.ToInt32(oLerXml.Value); }
-                                        ///
-                                        /// carrega os dados para o proxy - danasa 10-2009
-                                        /// 
+                                        //
+                                        // carrega os dados para o proxy - danasa 10-2009
+                                        // 
                                         else if (oLerXml.Name == "Proxy") { oLerXml.Read(); ConfiguracaoApp.Proxy = Convert.ToBoolean(oLerXml.Value); }
                                         else if (oLerXml.Name == "ProxyServidor") { oLerXml.Read(); ConfiguracaoApp.ProxyServidor = oLerXml.Value.Trim(); }
                                         else if (oLerXml.Name == "ProxyUsuario") { oLerXml.Read(); ConfiguracaoApp.ProxyUsuario = oLerXml.Value.Trim(); }
                                         else if (oLerXml.Name == "ProxySenha") { oLerXml.Read(); ConfiguracaoApp.ProxySenha = oLerXml.Value.Trim(); }
-                                        else if (oLerXml.Name == "ProxyPorta") { oLerXml.Read(); ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0"+oLerXml.Value); }
+                                        else if (oLerXml.Name == "ProxyPorta") { oLerXml.Read(); ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + oLerXml.Value); }
+                                        //
+                                        // Carrega os dados da configuração de geração/impressão do DANFE. Wandrey 02/02/2010
+                                        //
+                                        else if (oLerXml.Name == "PastaExeUniDanfe") { oLerXml.Read(); ConfiguracaoApp.PastaExeUniDanfe = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "PastaConfigUniDanfe") { oLerXml.Read(); ConfiguracaoApp.PastaConfigUniDanfe = oLerXml.Value.Trim(); }
                                     }
                                 }
                                 break;
@@ -381,6 +396,8 @@ namespace UniNFeLibrary
                     oXmlGravar.WriteElementString("ProxyUsuario", ConfiguracaoApp.ProxyUsuario);
                     oXmlGravar.WriteElementString("ProxySenha", ConfiguracaoApp.ProxySenha);
                     oXmlGravar.WriteElementString("ProxyPorta", ConfiguracaoApp.ProxyPorta.ToString());
+                    oXmlGravar.WriteElementString("PastaExeUniDanfe", ConfiguracaoApp.PastaExeUniDanfe.ToString());
+                    oXmlGravar.WriteElementString("PastaConfigUniDanfe", ConfiguracaoApp.PastaConfigUniDanfe.ToString());
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -484,7 +501,8 @@ namespace UniNFeLibrary
                     ConfiguracaoApp.cErroGravarConfig = "A pasta para backup dos XML enviados informada não existe.";
                     lValidou = false;
                 }
-                else if (ConfiguracaoApp.PastaValidar.Trim() != string.Empty)
+
+                if (lValidou && ConfiguracaoApp.PastaValidar.Trim() != string.Empty)
                 {
                     DirectoryInfo oDirValidar = new DirectoryInfo(ConfiguracaoApp.PastaValidar.Trim());
 
@@ -494,13 +512,61 @@ namespace UniNFeLibrary
                         lValidou = false;
                     }
                 }
-                else if (ConfiguracaoApp.cPastaXMLEmLote.Trim() != string.Empty)
+
+                if (lValidou && ConfiguracaoApp.cPastaXMLEmLote.Trim() != string.Empty)
                 {
                     DirectoryInfo oDirLote = new DirectoryInfo(ConfiguracaoApp.cPastaXMLEmLote.Trim());
 
                     if (!oDirLote.Exists)
                     {
                         ConfiguracaoApp.cErroGravarConfig = "A pasta de envio das notas fiscais eletrônicas em lote informada não existe.";
+                        lValidou = false;
+                    }
+                }
+
+                if (lValidou && ConfiguracaoApp.PastaExeUniDanfe.Trim() != string.Empty)
+                {
+                    ConfiguracaoApp.PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.PastaExeUniDanfe);
+
+                    DirectoryInfo oDirExeUniDanfe = new DirectoryInfo(ConfiguracaoApp.PastaExeUniDanfe.Trim());
+
+                    if (!oDirExeUniDanfe.Exists)
+                    {
+                        ConfiguracaoApp.cErroGravarConfig = "A pasta do executável do UniDANFe informada não existe.";
+                        lValidou = false;
+                    }
+
+                    if (lValidou && !File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe"))
+                    {
+                        ConfiguracaoApp.cErroGravarConfig = "O executável do UniDANFe não foi localizado na pasta informada.";
+                        lValidou = false;
+                    }
+                }
+
+                if (lValidou && ConfiguracaoApp.PastaConfigUniDanfe.Trim() != string.Empty)
+                {
+                    //Se tiver a subpasta \dados definida no final da string, vamos retirar ou gera falha no UNIDANFE.
+                    ConfiguracaoApp.PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.PastaConfigUniDanfe);
+                    if (!string.IsNullOrEmpty(ConfiguracaoApp.PastaConfigUniDanfe))
+                    {
+                        while (ConfiguracaoApp.PastaConfigUniDanfe.Substring(ConfiguracaoApp.PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(ConfiguracaoApp.PastaConfigUniDanfe))
+                            ConfiguracaoApp.PastaConfigUniDanfe = ConfiguracaoApp.PastaConfigUniDanfe.Substring(0, ConfiguracaoApp.PastaConfigUniDanfe.Length - 6);
+                    }
+                    ConfiguracaoApp.PastaConfigUniDanfe = ConfiguracaoApp.PastaConfigUniDanfe.Replace("\r\n", "").Trim();
+
+                    //Verificar a existência da pasta
+                    DirectoryInfo oDirConfigUniDanfe = new DirectoryInfo(ConfiguracaoApp.PastaConfigUniDanfe.Trim());
+
+                    if (!oDirConfigUniDanfe.Exists)
+                    {
+                        ConfiguracaoApp.cErroGravarConfig = "A pasta do arquivo de configurações do UniDANFe informada não existe.";
+                        lValidou = false;
+                    }
+
+                    //Verificar a existência o arquivo de configuração
+                    if (lValidou && !File.Exists(ConfiguracaoApp.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                    {
+                        ConfiguracaoApp.cErroGravarConfig = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.";
                         lValidou = false;
                     }
                 }
@@ -529,6 +595,11 @@ namespace UniNFeLibrary
                 fc.Add(new folderCompare(4, ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.cPastaBackup)));
                 fc.Add(new folderCompare(5, ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.cPastaXMLEmLote)));
                 fc.Add(new folderCompare(6, ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.PastaValidar)));
+                //As duas pastas abaixo podem ser iguais, assim sendo não comparar elas. 
+                //Sendo assim retiro somente o slash do final. Wandrey 02/02/2010
+                ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.PastaExeUniDanfe);
+                ConfiguracaoApp.RemoveEndSlash(ConfiguracaoApp.PastaConfigUniDanfe);
+
                 foreach (folderCompare fc1 in fc)
                 {
                     if (string.IsNullOrEmpty(fc1.folder))
@@ -664,6 +735,14 @@ namespace UniNFeLibrary
                                 ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
                                 lEncontrouTag = true;
                                 break;
+                            case "pastaexeunidanfe": //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.PastaExeUniDanfe = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "pastaconfigunidanfe": //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
+                                ConfiguracaoApp.PastaConfigUniDanfe = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
+                                lEncontrouTag = true;
+                                break;
                         }
                     }
                     #endregion
@@ -794,6 +873,18 @@ namespace UniNFeLibrary
                             ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + ConfUniNfeElemento.GetElementsByTagName("ProxyPorta")[0].InnerText);
                             lEncontrouTag = true;
                         }
+                        //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaExeUniDanfe").Count != 0)
+                        {
+                            ConfiguracaoApp.PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaExeUniDanfe")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName("PastaConfigUniDanfe").Count != 0)
+                        {
+                            ConfiguracaoApp.PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName("PastaConfigUniDanfe")[0].InnerText);
+                            lEncontrouTag = true;
+                        }
                     }
                     #endregion
                 }
@@ -906,7 +997,7 @@ namespace UniNFeLibrary
                 while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
                     value = value.Substring(0, value.Length - 1);
             }
-            return value.Replace("\r\n","").Trim();
+            return value.Replace("\r\n", "").Trim();
         }
     }
     #endregion
@@ -927,4 +1018,3 @@ namespace UniNFeLibrary
         }
     }
 }
-

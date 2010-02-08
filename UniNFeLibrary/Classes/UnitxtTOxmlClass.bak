@@ -822,15 +822,18 @@ namespace UniNFeLibrary
                                 }
                             }
                             if (nElementos >= 2)
+                            {
                                 if (dados[2].Trim() != "")
-                                {
                                     drdet["infAdProd"] = dados[2].Trim();
-                                    r = true;
-                                }
+                                else
+                                    drdet["infAdProd"] = "~-?-~";
+                            }
+                            else
+                                drdet["infAdProd"] = "~-?-~";
 
                             if (r)
                             {
-                                idprod = drdet[0].ToString();
+                                idprod = drdet["nItem"].ToString();
                                 drdet["det_Id"] = idprod; //det_Id
                                 drdet["infNFe_Id"] = 0;
                                 dsNfe.Tables["det"].Rows.Add(drdet);
@@ -841,8 +844,6 @@ namespace UniNFeLibrary
                             else
                                 idprod = "";
                             prodID = Convert.ToInt32("0" + idprod);//danasa 27-9-2009
-                            //DIid = 0;
-                            //idcomb = 0;
                         }
                         break;
                         #endregion
@@ -867,7 +868,7 @@ namespace UniNFeLibrary
                                 drprod[19] = idprod.ToString(); //det_Id
                                 drprod["prod_ID"] = prodID.ToString();
                                 ++prodID;
-                                //drprod["det_Id"] = idprod.ToString(); //det_Id
+                                //drprod["det_Id"] = idprod.ToString();
                                 dsNfe.Tables["prod"].Rows.Add(drprod);
 
                                 this.Check(dados[0], "cProd", drprod, ObOp.Obrigatorio, 1, 60);
@@ -2069,7 +2070,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "W23": //Grupo de Retenções de Tributos
-                    #region -- W23
+                        #region -- W23
                         {
                             DataRow dr = dsNfe.Tables["retTrib"].NewRow();
                             bool lEntrou = false;
@@ -2103,7 +2104,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "X": //transp
-                    #region -- X
+                        #region -- X
                         {
                             DataRow dr = dsNfe.Tables["transp"].NewRow();
                             if (nElementos >= 1)
@@ -2591,6 +2592,8 @@ namespace UniNFeLibrary
             {
                 TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
             }
+
+            TextoXml.GetStringBuilder().Replace("<infAdProd>~-?-~</infAdProd>", "");
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.LoadXml(TextoXml.ToString());

@@ -1369,6 +1369,33 @@ namespace UniNFeLibrary
             return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + "-den.xml");
         }
         #endregion
+
+        #region ExecutaUniDanfe()
+        /// <summary>
+        /// Executa o aplicativo UniDanfe para gerar/imprimir o DANFE
+        /// </summary>
+        /// <param name="NomeArqXMLNFe">Nome do arquivo XML da NFe (final -nfe.xml)</param>
+        /// <param name="DataEmissaoNFe">Data de emissão da NFe</param>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>03/02/2010</date>
+        public void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
+        {
+            //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+            if (ConfiguracaoApp.PastaExeUniDanfe != string.Empty && File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe"))
+            {
+                string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(DataEmissaoNFe);
+                string strArqProcNFe = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(this.ExtrairNomeArq(NomeArqXMLNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe, ".xml") + ".xml";
+
+                string Args = "A=\"" + strArqProcNFe + "\"";
+                if (ConfiguracaoApp.PastaConfigUniDanfe != string.Empty)
+                {
+                    Args += " PC=\"" + ConfiguracaoApp.PastaConfigUniDanfe + "\"";
+                }
+
+                System.Diagnostics.Process.Start(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe", Args);
+            }
+        }
+        #endregion
     }
 
     #region infCad & RetConsCad

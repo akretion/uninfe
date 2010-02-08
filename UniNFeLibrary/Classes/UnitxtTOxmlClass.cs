@@ -1197,9 +1197,9 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1226,15 +1226,15 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1,6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1261,10 +1261,10 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1292,11 +1292,11 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1349,10 +1349,10 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Opcional, 1, 1);
-                                this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Opcional, 1, 16, 2);
                             }
                         }
                         break;
@@ -1378,8 +1378,8 @@ namespace UniNFeLibrary
 
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1407,16 +1407,16 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pRedBC", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1443,16 +1443,16 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
-                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 5, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1507,7 +1507,7 @@ namespace UniNFeLibrary
                                     cMensagemErro += "Segmento [O07] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
                                 this.Check(dados[0], "CST", drIPITrib, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "vIPI", drIPITrib, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vIPI", drIPITrib, ObOp.Obrigatorio, 1, 16, 2);
                             }
                             if (dados[0] == "O10")
                             {
@@ -1522,8 +1522,8 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [O10] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                this.Check(dados[0], "vBC", drIPITrib, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pIPI", drIPITrib, ObOp.Obrigatorio, 1, 5, 2);
+                                this.Check(dados[0], "vBC", drIPITrib, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pIPI", drIPITrib, ObOp.Obrigatorio, 1, 6, 2);
                             }
                             if (dados[0] == "O11")
                             {
@@ -1538,8 +1538,8 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [O11] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                this.Check(dados[0], "vUnid", drIPITrib, ObOp.Obrigatorio, 1, 15, 4);
-                                this.Check(dados[0], "qUnid", drIPITrib, ObOp.Obrigatorio, 1, 16, 4);
+                                this.Check(dados[0], "vUnid", drIPITrib, ObOp.Obrigatorio, 1, 16, 4);
+                                this.Check(dados[0], "qUnid", drIPITrib, ObOp.Obrigatorio, 1, 17, 4);
                             }
                             drIPITrib["IPI_Id"] = idprod.ToString();
                             if (dados[0] != "O07")
@@ -1585,10 +1585,10 @@ namespace UniNFeLibrary
                                 dr["imposto_Id"] = idprod.ToString();
                                 dsNfe.Tables["II"].Rows.Add(dr);
 
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vDespAdu", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vIOF", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vDespAdu", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vIOF", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1628,9 +1628,9 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["PISAliq"].Rows.Add(dr);
 
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pPIS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pPIS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1655,9 +1655,9 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["PISQtde"].Rows.Add(dr);
 
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 16, 4);
-                                this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 15, 4);
-                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 17, 4);
+                                this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 16, 4);
+                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1699,7 +1699,7 @@ namespace UniNFeLibrary
                         dsNfe.Tables["PISOutr"].Rows.Add(drPISOutr);
 
                         this.Check(dados[0], "CST", drPISOutr, ObOp.Obrigatorio, 2, 2);
-                        this.Check(dados[0], "vPIS", drPISOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "vPIS", drPISOutr, ObOp.Obrigatorio, 1, 16, 2);
                         break;
                         #endregion
 
@@ -1712,8 +1712,8 @@ namespace UniNFeLibrary
                             if (dados[2].Trim() != "")
                                 drPISOutr["pPIS"] = dados[2].Trim();
 
-                        this.Check(dados[0], "vBC", drPISOutr, ObOp.Obrigatorio, 1, 15, 2);
-                        this.Check(dados[0], "pPIS", drPISOutr, ObOp.Obrigatorio, 1, 5, 2);
+                        this.Check(dados[0], "vBC", drPISOutr, ObOp.Obrigatorio, 1, 16, 2);
+                        this.Check(dados[0], "pPIS", drPISOutr, ObOp.Obrigatorio, 1, 6, 2);
                         break;
                         #endregion
 
@@ -1726,8 +1726,8 @@ namespace UniNFeLibrary
                             if (dados[2].Trim() != "")
                                 drPISOutr["vAliqProd"] = dados[2];
 
-                        this.Check(dados[0], "qBCProd", drPISOutr, ObOp.Obrigatorio, 1, 16, 4);
-                        this.Check(dados[0], "vAliqProd", drPISOutr, ObOp.Obrigatorio, 1, 15, 4);
+                        this.Check(dados[0], "qBCProd", drPISOutr, ObOp.Obrigatorio, 1, 17, 4);
+                        this.Check(dados[0], "vAliqProd", drPISOutr, ObOp.Obrigatorio, 1, 16, 4);
                         break;
                         #endregion
 
@@ -1738,7 +1738,7 @@ namespace UniNFeLibrary
                             if (dados[1].Trim() != "")
                                 drPISST[4] = dados[1].Trim(); //vPIS
 
-                        this.Check(dados[0], "vPIS", drPISST, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "vPIS", drPISST, ObOp.Obrigatorio, 1, 16, 2);
                         break;
                         #endregion
 
@@ -1751,8 +1751,8 @@ namespace UniNFeLibrary
                             if (dados[2].Trim() != "")
                                 drPISST[1] = dados[2].Trim(); //pPIS
 
-                        this.Check(dados[0], "vBC", drPISST, ObOp.Obrigatorio, 1, 15, 2);
-                        this.Check(dados[0], "pPIS", drPISST, ObOp.Obrigatorio, 1, 5, 2);
+                        this.Check(dados[0], "vBC", drPISST, ObOp.Obrigatorio, 1, 16, 2);
+                        this.Check(dados[0], "pPIS", drPISST, ObOp.Obrigatorio, 1, 6, 2);
                         break;
                         #endregion
 
@@ -1765,8 +1765,8 @@ namespace UniNFeLibrary
                             if (dados[2].Trim() != "")
                                 drPISST[3] = dados[2].Trim(); //vAliqProd
 
-                        this.Check(dados[0], "qBCProd", drPISST, ObOp.Obrigatorio, 1, 16, 4);
-                        this.Check(dados[0], "vAliqProd", drPISST, ObOp.Obrigatorio, 1, 15, 4);
+                        this.Check(dados[0], "qBCProd", drPISST, ObOp.Obrigatorio, 1, 17, 4);
+                        this.Check(dados[0], "vAliqProd", drPISST, ObOp.Obrigatorio, 1, 16, 4);
                         break;
                         #endregion
 
@@ -1804,9 +1804,9 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["COFINSAliq"].Rows.Add(dr);
 
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pCOFINS", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pCOFINS", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1831,9 +1831,9 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["COFINSQtde"].Rows.Add(dr);
 
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 16, 4);
-                                this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 15, 4);
-                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "qBCProd", dr, ObOp.Obrigatorio, 1, 17, 4);
+                                this.Check(dados[0], "vAliqProd", dr, ObOp.Obrigatorio, 1, 16, 4);
+                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1875,7 +1875,7 @@ namespace UniNFeLibrary
                         drCOFINSOutr["COFINS_Id"] = idprod.ToString();
 
                         this.Check(dados[0], "CST", drCOFINSOutr, ObOp.Obrigatorio, 2, 2);
-                        this.Check(dados[0], "vCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "vCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 16, 2);
                         break;
                         #endregion
 
@@ -1889,8 +1889,8 @@ namespace UniNFeLibrary
                                 drCOFINSOutr["pCOFINS"] = dados[2].Trim();
                         dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
 
-                        this.Check(dados[0], "vBC", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 2);
-                        this.Check(dados[0], "pCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 5, 2);
+                        this.Check(dados[0], "vBC", drCOFINSOutr, ObOp.Obrigatorio, 1, 16, 2);
+                        this.Check(dados[0], "pCOFINS", drCOFINSOutr, ObOp.Obrigatorio, 1, 6, 2);
                         break;
                         #endregion
 
@@ -1904,8 +1904,8 @@ namespace UniNFeLibrary
                                 drCOFINSOutr["vAliqProd"] = dados[2].Trim();
                         dsNfe.Tables["COFINSOutr"].Rows.Add(drCOFINSOutr); //executa  o Add, porque sempre tera o S07 ou S09
 
-                        this.Check(dados[0], "qBCProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 16, 4);
-                        this.Check(dados[0], "vAliqProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 15, 4);
+                        this.Check(dados[0], "qBCProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 17, 4);
+                        this.Check(dados[0], "vAliqProd", drCOFINSOutr, ObOp.Obrigatorio, 1, 16, 4);
                         break;
                         #endregion
 
@@ -1917,7 +1917,7 @@ namespace UniNFeLibrary
                                 drCOFINSST["vCOFINS"] = dados[1].Trim();
                         drCOFINSST["imposto_Id"] = idprod.ToString();
 
-                        this.Check(dados[0], "vCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 15, 2);
+                        this.Check(dados[0], "vCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 16, 2);
                         break;
                         #endregion
 
@@ -1935,8 +1935,8 @@ namespace UniNFeLibrary
                                 drCOFINSST["pCOFINS"] = dados[2].Trim();
                         dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
 
-                        this.Check(dados[0], "vBC", drCOFINSST, ObOp.Obrigatorio, 1, 15, 2);
-                        this.Check(dados[0], "pCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 5, 2);
+                        this.Check(dados[0], "vBC", drCOFINSST, ObOp.Obrigatorio, 1, 16, 2);
+                        this.Check(dados[0], "pCOFINS", drCOFINSST, ObOp.Obrigatorio, 1, 6, 2);
                         break;
                         #endregion
 
@@ -1954,8 +1954,8 @@ namespace UniNFeLibrary
                         //drCOFINSST["pCOFINS"] = 0;
                         dsNfe.Tables["COFINSST"].Rows.Add(drCOFINSST);
 
-                        this.Check(dados[0], "qBCProd", drCOFINSST, ObOp.Obrigatorio, 1, 16, 4);
-                        this.Check(dados[0], "vAliqProd", drCOFINSST, ObOp.Obrigatorio, 1, 15, 4);
+                        this.Check(dados[0], "qBCProd", drCOFINSST, ObOp.Obrigatorio, 1, 17, 4);
+                        this.Check(dados[0], "vAliqProd", drCOFINSST, ObOp.Obrigatorio, 1, 16, 4);
                         break;
                         #endregion
 
@@ -1980,8 +1980,8 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["ISSQN"].Rows.Add(dr);
 
                                 this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vAliq", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vISSQN", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vAliq", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vISSQN", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
                                 this.Check(dados[0], "cListServ", dr, ObOp.Obrigatorio, 3, 4);
                             }
@@ -2022,20 +2022,20 @@ namespace UniNFeLibrary
                                 dr["total_Id"] = idprod;
                                 dsNfe.Tables["ICMSTot"].Rows.Add(dr);
 
-                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vST", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vProd", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vFrete", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vSeg", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vDesc", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vIPI", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vOutro", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vNF", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vProd", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vFrete", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vSeg", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vDesc", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vII", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vIPI", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vPIS", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vCOFINS", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vOutro", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vNF", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -2059,11 +2059,11 @@ namespace UniNFeLibrary
                                 dr["total_Id"] = idprod.ToString();
                                 dsNfe.Tables["ISSQNtot"].Rows.Add(dr);  //danasa 27-9-2009
 
-                                this.Check(dados[0], "vServ", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vISS", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vPIS", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vCOFINS", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vServ", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vISS", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vPIS", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vCOFINS", dr, ObOp.Opcional, 1, 16, 2);
                             }
                         }
                         break;
@@ -2091,13 +2091,13 @@ namespace UniNFeLibrary
                                 dr["total_Id"] = idprod.ToString();
                                 dsNfe.Tables["retTrib"].Rows.Add(dr);
 
-                                this.Check(dados[0], "vRetPIS", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vRetCOFINS", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vRetCSLL", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vBCIRRF", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vIRRF", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vBCRetPrev", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vRetPrev", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vRetPIS", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vRetCOFINS", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vRetCSLL", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vBCIRRF", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vIRRF", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vBCRetPrev", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vRetPrev", dr, ObOp.Opcional, 1, 16, 2);
                             }
                         }
                         break;
@@ -2213,10 +2213,10 @@ namespace UniNFeLibrary
                                 dr["transp_Id"] = 0;
                                 dsNfe.Tables["retTransp"].Rows.Add(dr);
 
-                                this.Check(dados[0], "vServ", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "vBCRet", dr, ObOp.Obrigatorio, 1, 15, 2);
-                                this.Check(dados[0], "pICMSRet", dr, ObOp.Obrigatorio, 1, 5, 2);
-                                this.Check(dados[0], "vICMSRet", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vServ", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vBCRet", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSRet", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSRet", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "CFOP", dr, ObOp.Obrigatorio, 4, 4);
                                 this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
                             }
@@ -2284,8 +2284,8 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "esp", drVol, ObOp.Opcional, 1, 60);
                                 this.Check(dados[0], "marca", drVol, ObOp.Opcional, 1, 60);
                                 this.Check(dados[0], "nVol", drVol, ObOp.Opcional, 1, 60);
-                                this.Check(dados[0], "pesoL", drVol, ObOp.Opcional, 1, 15, 3);
-                                this.Check(dados[0], "pesoB", drVol, ObOp.Opcional, 1, 15, 3);
+                                this.Check(dados[0], "pesoL", drVol, ObOp.Opcional, 1, 16, 3);
+                                this.Check(dados[0], "pesoB", drVol, ObOp.Opcional, 1, 16, 3);
                             }
                         }
                         break;
@@ -2333,9 +2333,9 @@ namespace UniNFeLibrary
                                 dsNfe.Tables["fat"].Rows.Add(dr);
 
                                 this.Check(dados[0], "nFat", dr, ObOp.Opcional, 1, 60);
-                                this.Check(dados[0], "vOrig", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vDesc", dr, ObOp.Opcional, 1, 15, 2);
-                                this.Check(dados[0], "vLiq", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vOrig", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vDesc", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "vLiq", dr, ObOp.Opcional, 1, 16, 2);
                             }
                         }
                         break;
@@ -2355,7 +2355,7 @@ namespace UniNFeLibrary
 
                                 this.Check(dados[0], "nDup", dr, ObOp.Opcional, 1, 60);
                                 this.Check(dados[0], "dVenc", dr, ObOp.Opcional);
-                                this.Check(dados[0], "vDup", dr, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vDup", dr, ObOp.Opcional, 1, 16, 2);
                             }
                         }
                         break;
