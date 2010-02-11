@@ -976,6 +976,9 @@ namespace uninfe
                                                         //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
                                                         oAux.DeletarArquivo(strArquivoNFe);
                                                     }
+
+                                                    //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+                                                    oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
                                                 }
 
                                                 if (File.Exists(strArquivoNFeProc))
@@ -983,9 +986,6 @@ namespace uninfe
                                                     //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
                                                     oAux.DeletarArquivo(strArquivoNFeProc);
                                                 }
-
-                                                //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
-                                                oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
 
                                                 break;
 

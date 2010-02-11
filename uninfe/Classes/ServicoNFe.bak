@@ -805,6 +805,9 @@ namespace uninfe
                                         //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário.
                                         //assim sendo não inverta as posições. Wandrey 08/10/2009
                                         oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+
+                                        //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+                                        oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
                                         break;
 
                                     case "301": //NFe Denegada - Problemas com o emitente
@@ -981,6 +984,9 @@ namespace uninfe
                                                     oAux.DeletarArquivo(strArquivoNFeProc);
                                                 }
 
+                                                //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+                                                oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+
                                                 break;
 
                                             case "301":
@@ -1144,7 +1150,7 @@ namespace uninfe
                 //depende do retorno do SEFAZ
                 //
                 //Wandrey 07/10/2009
-                
+
                 //TODO: Aqui que eu tenho que tratar o erro e internet
                 //Já tenho como ver se é erro de conexão com internet e tratar
                 //se for vamos tirar a nota do fluxo para que o ERP gere ela novamente.

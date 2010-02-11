@@ -356,9 +356,16 @@ namespace UniNFeLibrary
         {
             if (!string.IsNullOrEmpty(Arquivo))
             {
-                //Grava arquivo de ERRO para o ERP
-                string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
-                File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                try
+                {
+                    //Grava arquivo de ERRO para o ERP
+                    string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
+                    File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                }
+                catch
+                {
+
+                }
             }
         }
         #endregion
@@ -1381,7 +1388,9 @@ namespace UniNFeLibrary
         public void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
         {
             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
-            if (ConfiguracaoApp.PastaExeUniDanfe != string.Empty && File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe"))
+            if (ConfiguracaoApp.PastaExeUniDanfe != string.Empty && 
+                File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe") &&
+                File.Exists(NomeArqXMLNFe))
             {
                 string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(DataEmissaoNFe);
                 string strArqProcNFe = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(this.ExtrairNomeArq(NomeArqXMLNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe, ".xml") + ".xml";
