@@ -379,77 +379,80 @@ namespace UniNFeLibrary
         {
             bool Executando = false;
 
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-            UTF8Encoding c = new UTF8Encoding(false);
-
-            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-            oSettings.Encoding = c;
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-            XmlWriter oXmlGravar = null;
-
-            try
+            if (ConfiguracaoApp.vPastaXMLEnvio != string.Empty)
             {
-                string ArquivoConsulta = ConfiguracaoApp.vPastaXMLEnvio + "\\UniNfeRodando" + ExtXml.ConsInf;
-                string ArquivoRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.xml";
-                string ArquivoRetornoErr = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.err";
+                XmlWriterSettings oSettings = new XmlWriterSettings();
+                UTF8Encoding c = new UTF8Encoding(false);
 
-                if (File.Exists(ArquivoConsulta) && !Auxiliar.FileInUse(ArquivoConsulta))
-                    File.Delete(ArquivoConsulta);
+                //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+                oSettings.Encoding = c;
+                oSettings.Indent = true;
+                oSettings.IndentChars = "";
+                oSettings.NewLineOnAttributes = false;
+                oSettings.OmitXmlDeclaration = false;
+                XmlWriter oXmlGravar = null;
 
-                if (File.Exists(ArquivoRetorno) && !Auxiliar.FileInUse(ArquivoRetorno))
-                    File.Delete(ArquivoRetorno);
-
-                //Agora vamos criar um XML Writer
-                oXmlGravar = XmlWriter.Create(ArquivoConsulta, oSettings);
-
-                //Abrir o XML
-                oXmlGravar.WriteStartDocument();
-                oXmlGravar.WriteStartElement("ConsInf");
-                oXmlGravar.WriteElementString("xServ", "CONS-INF");
-                oXmlGravar.WriteEndElement(); //ConsInf
-                oXmlGravar.WriteEndDocument();
-                oXmlGravar.Flush();
-                oXmlGravar.Close();
-
-                int Contador = 0;
-                while (Contador < 10)
+                try
                 {
-                    if (File.Exists(ArquivoRetorno) || File.Exists(ArquivoRetornoErr))
+                    string ArquivoConsulta = ConfiguracaoApp.vPastaXMLEnvio + "\\UniNfeRodando" + ExtXml.ConsInf;
+                    string ArquivoRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.xml";
+                    string ArquivoRetornoErr = ConfiguracaoApp.vPastaXMLRetorno + "\\UniNfeRodando-ret-cons-inf.err";
+
+                    if (File.Exists(ArquivoConsulta) && !Auxiliar.FileInUse(ArquivoConsulta))
+                        File.Delete(ArquivoConsulta);
+
+                    if (File.Exists(ArquivoRetorno) && !Auxiliar.FileInUse(ArquivoRetorno))
+                        File.Delete(ArquivoRetorno);
+
+                    //Agora vamos criar um XML Writer
+                    oXmlGravar = XmlWriter.Create(ArquivoConsulta, oSettings);
+
+                    //Abrir o XML
+                    oXmlGravar.WriteStartDocument();
+                    oXmlGravar.WriteStartElement("ConsInf");
+                    oXmlGravar.WriteElementString("xServ", "CONS-INF");
+                    oXmlGravar.WriteEndElement(); //ConsInf
+                    oXmlGravar.WriteEndDocument();
+                    oXmlGravar.Flush();
+                    oXmlGravar.Close();
+
+                    int Contador = 0;
+                    while (Contador < 10)
                     {
-                        if (File.Exists(ArquivoRetorno))
-                            File.Delete(ArquivoRetorno);
+                        if (File.Exists(ArquivoRetorno) || File.Exists(ArquivoRetornoErr))
+                        {
+                            if (File.Exists(ArquivoRetorno))
+                                File.Delete(ArquivoRetorno);
 
-                        if (File.Exists(ArquivoRetornoErr))
-                            File.Delete(ArquivoRetornoErr);
+                            if (File.Exists(ArquivoRetornoErr))
+                                File.Delete(ArquivoRetornoErr);
 
-                        Executando = true;
-                        break;
+                            Executando = true;
+                            break;
+                        }
+
+                        Thread.Sleep(1000);
+
+                        Contador++;
                     }
 
-                    Thread.Sleep(1000);
-
-                    Contador++;
+                    if (!Executando)
+                    {
+                        if (!Auxiliar.FileInUse(ArquivoConsulta))
+                            File.Delete(ArquivoConsulta);
+                    }
                 }
-
-                if (!Executando)
+                catch (Exception ex)
                 {
-                    if (!Auxiliar.FileInUse(ArquivoConsulta))
-                        File.Delete(ArquivoConsulta);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (oXmlGravar != null)
-                {
-                    oXmlGravar.Close();
-                }
+                    if (oXmlGravar != null)
+                    {
+                        oXmlGravar.Close();
+                    }
 
-                Executando = false;
+                    Executando = false;
 
-                throw (ex);
+                    throw (ex);
+                }
             }
 
             return Executando;

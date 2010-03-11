@@ -358,13 +358,16 @@ namespace UniNFeLibrary
             {
                 try
                 {
-                    //Grava arquivo de ERRO para o ERP
-                    string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
-                    File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                    if (ConfiguracaoApp.vPastaXMLRetorno != string.Empty)
+                    {
+                        //Grava arquivo de ERRO para o ERP
+                        string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
+                        File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                    }
                 }
                 catch
                 {
-
+                    //TODO: V3.0 - Não deveriamos retornar a exeção
                 }
             }
         }
@@ -428,7 +431,7 @@ namespace UniNFeLibrary
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
             //Definir o nome do arquivo de retorno
-            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";// +(cStat == "1" ? "xml" : "err");
+            string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
 
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
@@ -933,9 +936,10 @@ namespace UniNFeLibrary
 
             string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
                       this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.PedSta) +
-                      "-ped-sta.err";
+                      "-sta.err";
 
             string result = string.Empty;
+
             try
             {
                 result = (string)EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaStatusServico);
@@ -945,6 +949,7 @@ namespace UniNFeLibrary
                 this.DeletarArquivo(ArqERRRetorno);
                 this.DeletarArquivo(ArqXMLRetorno);
             }
+
             return result;
         }
 
@@ -978,6 +983,7 @@ namespace UniNFeLibrary
             {
                 elem.Close();
             }
+
             return rst;
         }
 
@@ -1208,7 +1214,7 @@ namespace UniNFeLibrary
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        delegate object Processa(string cArquivoXML);//XmlTextReader elem);
+        delegate object Processa(string cArquivoXML);
 
         /// <summary>
         /// Envia um arquivo para o webservice da NFE e recebe a resposta. 
@@ -1265,7 +1271,6 @@ namespace UniNFeLibrary
                                 //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
                                 //pode ser que o arquivo esteja em uso ainda.
                             }
-                            //oLerXml.Close();
 
                             //Detetar o arquivo de retorno
                             try
@@ -1301,7 +1306,7 @@ namespace UniNFeLibrary
                         //Somente deixa fazer o loop novamente e tentar deletar
                     }
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(3000);
             }
             //Retornar o status do serviço
             return vStatus;
