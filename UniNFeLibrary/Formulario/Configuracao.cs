@@ -253,7 +253,15 @@ namespace UniNFeLibrary.Formulario
         {
             //Criar o XML de controle do fluxo de NFe se ainda não existir
             FluxoNfe oFluxo = new FluxoNfe();
-            oFluxo.CriarXml();
+
+            try
+            {
+                oFluxo.CriarXml();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao tentar criar o XML para o controle do fuxo do envio dos documentos eletrônicos.\r\n\r\nErro:"+ex.Message,"Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
 
             //Salvar as configurações
             ConfiguracaoApp.vPastaXMLEnvio = this.textBox_PastaEnvioXML.Text.Trim();

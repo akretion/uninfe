@@ -76,37 +76,6 @@ namespace UniNFeLibrary
             string ret = fi.Name;
             ret = ret.Substring(0, ret.Length - pFinalArq.Length);
             return ret;
-
-            #region bkp Código Antigo
-            /*
-             **** DEPOIS DE AVALIADO O CÓDIGO ACIMA. ESTE AQUI PODE SER APAGADO ****
-            //Achar o posição inicial do nome do arquivo
-            //procura por pastas, tira elas para ficar somente o nome do arquivo
-            Int32 nAchou = 0;
-            Int32 nPosI = 0;
-            for (Int32 nCont = 0; nCont < pPastaArq.Length; nCont++)
-            {
-                nAchou = pPastaArq.IndexOf("\\", nCont);
-                if (nAchou >= 0)
-                {
-                    nCont = nAchou;
-                    nPosI = nAchou + 1;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            //Achar a posição final do nome do arquivo
-            Int32 nPosF = pPastaArq.ToUpper().IndexOf(pFinalArq.ToUpper());
-
-            //Extrair o nome do arquivo
-            string cRetorna = pPastaArq.Substring(nPosI, nPosF - nPosI);
-
-            return cRetorna; 
-             */
-            #endregion
         }
         #endregion
 

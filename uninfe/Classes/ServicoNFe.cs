@@ -845,6 +845,11 @@ namespace uninfe
                         //No caso do lote não encontrado através do recibo, o ERP vai ter que consultar a situação da 
                         //Nota para tirar ela do fluxo de NFe em processamento
                     }
+                    else if (Convert.ToInt32(cStatLote) >= 200) //Rejeição diversas, vou ter que retirar do fluxo a NFe
+                    {
+                        //TODO: V3.0 - Excluir a nota fiscal do fluxo se acontecer qualquer rejeição acima de 200
+                        //Analisar outras no manual que podem ocorrer e também tirar elas do fluxo.
+                    }
                     else //Rejeitou a consulta do lote
                     {
                         //A consulta do recibo do lote pode ser rejeitada por diversas motivos, eu não posso tirar do fluxo

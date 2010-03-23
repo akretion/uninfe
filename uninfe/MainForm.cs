@@ -104,7 +104,14 @@ namespace uninfe
 
             //Criar XML de controle de fluxo de envios de Notas Fiscais
             FluxoNfe oFluxoNfe = new FluxoNfe();
-            oFluxoNfe.CriarXml(true);           
+            try
+            {
+                oFluxoNfe.CriarXml(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao tentar criar o XML para o controle do fuxo do envio dos documentos eletrônicos.\r\n\r\nErro:" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;
@@ -112,7 +119,7 @@ namespace uninfe
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
 
-            this.MinimumSize = new Size(750,600);   
+            this.MinimumSize = new Size(750, 600);
 
             #region Executar os serviços em novas threads
             //Carregar as configurações antes de executar os serviços do UNINFE
@@ -164,7 +171,7 @@ namespace uninfe
         private void ExecutaServicos()
         {
             #region Executar a Thread que verifica e processa os XML´s de cancelamentos de notas fiscais
-            oOperacaoPedCan = new ParameterizedThreadStart(oServicoPedCan.BuscaXML); 
+            oOperacaoPedCan = new ParameterizedThreadStart(oServicoPedCan.BuscaXML);
             oThreadPedCan = new Thread(oOperacaoPedCan);
             oThreadPedCan.Name = Servicos.CancelarNFe.ToString();
             oThreadPedCan.Start(Servicos.CancelarNFe);
@@ -172,21 +179,21 @@ namespace uninfe
 
             #region Executar a Thread que verifica e processa os XML´s de Inutilização de números de notas fiscais
             oOperacaoPedInu = new ParameterizedThreadStart(oServicoPedInu.BuscaXML);
-            oThreadPedInu = new Thread(oOperacaoPedInu); 
+            oThreadPedInu = new Thread(oOperacaoPedInu);
             oThreadPedInu.Name = Servicos.InutilizarNumerosNFe.ToString();
             oThreadPedInu.Start(Servicos.InutilizarNumerosNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido da Situação da Nota Fiscal Eletrônica
             oOperacaoPedSit = new ParameterizedThreadStart(oServicoPedSit.BuscaXML);
-            oThreadPedSit = new Thread(oOperacaoPedSit); 
+            oThreadPedSit = new Thread(oOperacaoPedSit);
             oThreadPedSit.Name = Servicos.PedidoConsultaSituacaoNFe.ToString();
             oThreadPedSit.Start(Servicos.PedidoConsultaSituacaoNFe);
             #endregion
 
             #region Executar a Thread que verifica e processa os XML´s Pedido do Status do Serviço da Nota Fiscal Eletrônica
             oOperacaoPedSta = new ParameterizedThreadStart(oServicoPedSta.BuscaXML);
-            oThreadPedSta = new Thread(oOperacaoPedSta); 
+            oThreadPedSta = new Thread(oOperacaoPedSta);
             oThreadPedSta.Name = Servicos.PedidoConsultaStatusServicoNFe.ToString();
             oThreadPedSta.Start(Servicos.PedidoConsultaStatusServicoNFe);
             #endregion
@@ -224,8 +231,8 @@ namespace uninfe
             oThreadAssinaNfeEnvio = new Thread(oOperacaoAssinaNfeEnvio);
             oThreadAssinaNfeEnvio.Name = Servicos.AssinarNFePastaEnvio.ToString();
             oThreadAssinaNfeEnvio.Start(Servicos.AssinarNFePastaEnvio);
-            #endregion  
- 
+            #endregion
+
             #region Executar a Thread que verifica e monta o lote com uma única nota fiscal eletrônica
             oOperacaoMontaLoteUmaNfe = new ParameterizedThreadStart(oServicoMontaLoteUmaNfe.BuscaXML);
             oThreadMontaLoteUmaNfe = new Thread(oOperacaoMontaLoteUmaNfe);
@@ -234,12 +241,12 @@ namespace uninfe
             #endregion
 
             #region Executar a Thread que envia os lotes de notas fiscais eletrônicas
-            oOperacaoEnviarLoteNfe = new ParameterizedThreadStart(oServicoEnviarLoteNfe.BuscaXML);  
+            oOperacaoEnviarLoteNfe = new ParameterizedThreadStart(oServicoEnviarLoteNfe.BuscaXML);
             oThreadEnviarLoteNfe = new Thread(oOperacaoEnviarLoteNfe);
             oThreadEnviarLoteNfe.Name = Servicos.EnviarLoteNfe.ToString();
             oThreadEnviarLoteNfe.Start(Servicos.EnviarLoteNfe);
             #endregion
-  
+
             #region Executar a Thread que somente Valida e Assina XML´s e dá o retorno para o ERP
             oOperacaoValidarAssinar = new ParameterizedThreadStart(oServicoValidarAssinar.BuscaXML);
             oThreadValidarAssinar = new Thread(oOperacaoValidarAssinar);
@@ -247,6 +254,7 @@ namespace uninfe
             oThreadValidarAssinar.Start(Servicos.ValidarAssinar);
             #endregion
 
+            //TODO: v3.0 - Falta acertar este serviço
             #region Executar a Thread que somente Converte o TXT da NFe para XML
             oOperacaoConvTXT = new ParameterizedThreadStart(oServicoConvTXT.BuscaXML);
             oThreadConvTXT = new Thread(oOperacaoConvTXT);
@@ -260,14 +268,14 @@ namespace uninfe
             oThreadAssinaNfeEnvioEmLote.Name = Servicos.AssinarNFePastaEnvioEmLote.ToString();
             oThreadAssinaNfeEnvioEmLote.Start(Servicos.AssinarNFePastaEnvioEmLote);
             #endregion
-  
+
             #region Executar a Thread que verifica e monta o lote com várias notas fiscais eletrônicas
             oOperacaoMontaLoteVariasNfe = new ParameterizedThreadStart(oServicoMontaLoteVariasNfe.BuscaXML);
             oThreadMontaLoteVariasNfe = new Thread(oOperacaoMontaLoteVariasNfe);
             oThreadMontaLoteVariasNfe.Name = Servicos.MontarLoteVariasNFe.ToString();
             oThreadMontaLoteVariasNfe.Start(Servicos.MontarLoteVariasNFe);
-            #endregion                      
-        
+            #endregion
+
             #region Executar a Thread que retorna a chave da NFe
             /// <summary>
             /// danasa 9-2009
@@ -369,7 +377,7 @@ namespace uninfe
             //danasa
             //  Se usuario mudar o tamanho da janela, não pode desaparece-la da tasknar
             if (this.WindowState == FormWindowState.Minimized)
-                this.ShowInTaskbar = false;   
+                this.ShowInTaskbar = false;
 
             //Mostrar o balão com as informações que selecionamos
             //O parâmetro passado refere-se ao tempo (ms)
@@ -467,7 +475,7 @@ namespace uninfe
         #region -- Sobre o UniNFe
         private void toolStripButton_sobre_Click(object sender, EventArgs e)
         {
-            this.toolStripButton_sobre.Enabled = 
+            this.toolStripButton_sobre.Enabled =
                 this.sobreOUniNFeToolStripMenuItem.Enabled = false;
             using (FormSobre oSobre = new FormSobre())
             {
@@ -475,7 +483,7 @@ namespace uninfe
                     oSobre.ShowInTaskbar = !(sender is ToolStripButton);
                 oSobre.ShowDialog();
             }
-            this.sobreOUniNFeToolStripMenuItem.Enabled = 
+            this.sobreOUniNFeToolStripMenuItem.Enabled =
                 this.toolStripButton_sobre.Enabled = true;
         }
         #endregion

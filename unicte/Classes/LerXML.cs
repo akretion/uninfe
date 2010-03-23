@@ -580,5 +580,10 @@ namespace unicte
                 throw (ex);
             }
         }
+
+        public override void PedRec(string cArquivoXML)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
