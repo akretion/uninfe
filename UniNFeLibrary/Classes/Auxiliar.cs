@@ -1357,25 +1357,29 @@ namespace UniNFeLibrary
         /// </summary>
         /// <param name="NomeArqXMLNFe">Nome do arquivo XML da NFe (final -nfe.xml)</param>
         /// <param name="DataEmissaoNFe">Data de emissão da NFe</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>03/02/2010</date>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 03/02/2010
+        /// </remarks>
         public void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
         {
             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
             if (ConfiguracaoApp.PastaExeUniDanfe != string.Empty && 
-                File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe") &&
-                File.Exists(NomeArqXMLNFe))
+                File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe"))
             {
                 string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(DataEmissaoNFe);
                 string strArqProcNFe = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(this.ExtrairNomeArq(NomeArqXMLNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe, ".xml") + ".xml";
 
-                string Args = "A=\"" + strArqProcNFe + "\"";
-                if (ConfiguracaoApp.PastaConfigUniDanfe != string.Empty)
+                if (File.Exists(strArqProcNFe))
                 {
-                    Args += " PC=\"" + ConfiguracaoApp.PastaConfigUniDanfe + "\"";
-                }
+                    string Args = "A=\"" + strArqProcNFe + "\"";
+                    if (ConfiguracaoApp.PastaConfigUniDanfe != string.Empty)
+                    {
+                        Args += " PC=\"" + ConfiguracaoApp.PastaConfigUniDanfe + "\"";
+                    }
 
-                System.Diagnostics.Process.Start(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe", Args);
+                    System.Diagnostics.Process.Start(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe", Args);
+                }
             }
         }
         #endregion
