@@ -780,32 +780,35 @@ namespace uninfe
 
             try
             {
-                //Separar as tag´s da NFe que interessa <NFe> até </NFe>
-                XmlDocument doc = new XmlDocument();
+                if (File.Exists(strArqNFe))
+                {
+                    //Separar as tag´s da NFe que interessa <NFe> até </NFe>
+                    XmlDocument doc = new XmlDocument();
 
-                doc.Load(strArqNFe);
+                    doc.Load(strArqNFe);
 
-                XmlNodeList NFeList = doc.GetElementsByTagName("NFe");
-                XmlNode NFeNode = NFeList[0];
-                string strNFe = NFeNode.OuterXml;
+                    XmlNodeList NFeList = doc.GetElementsByTagName("NFe");
+                    XmlNode NFeNode = NFeList[0];
+                    string strNFe = NFeNode.OuterXml;
 
-                //Montar a string contendo o XML -proc-NFe.xml
-                string strXmlProcNfe = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
-                    "<nfeProc xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.10\">" +
-                    strNFe +
-                    strProtNfe +
-                    "</nfeProc>";
+                    //Montar a string contendo o XML -proc-NFe.xml
+                    string strXmlProcNfe = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
+                        "<nfeProc xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.10\">" +
+                        strNFe +
+                        strProtNfe +
+                        "</nfeProc>";
 
-                //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
-                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                            oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe) +
-                                            ExtXmlRet.ProcNFe;
+                    //Montar o nome do arquivo -proc-NFe.xml
+                    string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe) +
+                                                ExtXmlRet.ProcNFe;
 
-                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de 
-                //validar o XML pelos Schemas. Wandrey 13/05/2009
-                swProc = File.CreateText(strNomeArqProcNFe);
-                swProc.Write(strXmlProcNfe);
+                    //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de 
+                    //validar o XML pelos Schemas. Wandrey 13/05/2009
+                    swProc = File.CreateText(strNomeArqProcNFe);
+                    swProc.Write(strXmlProcNfe);
+                }
             }
             catch (Exception ex)
             {

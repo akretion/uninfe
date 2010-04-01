@@ -2588,7 +2588,7 @@ namespace UniNFeLibrary
             else
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
 
-            if (cChave.Substring(0, 2) == "29") //Para bahia não pode ter o atributo (namespace) xmlns:xsi pois o SEFAZ de lá rejeita. Wandrey 22/09/2009
+            if (cChave.Substring(0, 2) == "29" || cChave.Substring(0, 2) == "52" || cChave.Substring(0, 2) == "13") //Para bahia/goiás/amazonas não pode ter o atributo (namespace) xmlns:xsi pois o SEFAZ de lá rejeita. Wandrey 22/09/2009
             {
                 TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
             }

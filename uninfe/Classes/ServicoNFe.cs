@@ -786,28 +786,31 @@ namespace uninfe
                                 {
                                     case "100": //NFe Autorizada
                                         //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
-                                        oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
-                                        string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
-                                                                    PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
+                                        if (File.Exists(strArquivoNFe))
+                                        {
+                                            oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
+                                            string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                                                       PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                                       oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
 
-                                        //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
-                                        oLerXml.Nfe(strArquivoNFe);
+                                            //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
+                                            oLerXml.Nfe(strArquivoNFe);
 
-                                        //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
-                                        //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
-                                        //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
-                                        //assim sendo não inverta as posições. Wandrey 08/10/2009
-                                        oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                            //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
+                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
+                                            //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
+                                            //assim sendo não inverta as posições. Wandrey 08/10/2009
+                                            oAux.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
-                                        //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
-                                        //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para 
-                                        //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário.
-                                        //assim sendo não inverta as posições. Wandrey 08/10/2009
-                                        oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                            //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
+                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para 
+                                            //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário.
+                                            //assim sendo não inverta as posições. Wandrey 08/10/2009
+                                            oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
-                                        //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
-                                        oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                            //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+                                            oAux.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                        }
                                         break;
 
                                     case "301": //NFe Denegada - Problemas com o emitente
