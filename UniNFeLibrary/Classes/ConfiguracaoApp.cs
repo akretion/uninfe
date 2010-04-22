@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Security.Cryptography.X509Certificates;
+using UniNFeLibrary.Enums;
 
 namespace UniNFeLibrary
 {
@@ -336,6 +337,7 @@ namespace UniNFeLibrary
                         System.IO.Directory.CreateDirectory(ConfiguracaoApp.cPastaXMLEmLote + InfoApp.NomePastaXMLAssinado);
                     }
                 }
+                ConfiguracaoApp.CriarSubPastaEnviado();
             }
             catch (IOException ex)
             {
@@ -347,6 +349,51 @@ namespace UniNFeLibrary
             }
         }
         #endregion
+
+        #region CriarSubPastaEnviado()
+        /// <summary>
+        /// Criar as subpastas (Autorizados/Denegados/EmProcessamento) dentro da pasta dos XML´s enviados
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Date: 20/04/2010
+        /// </remarks>
+        public static void CriarSubPastaEnviado()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.vPastaXMLEnviado))
+                {
+                    //Criar a pasta EmProcessamento
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
+                    }
+
+                    //Criar a Pasta Autorizado
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                    }
+
+                    //Criar a Pasta Denegado
+                    if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
 
         #region GravarConfig()
         /// <summary>

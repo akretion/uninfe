@@ -22,6 +22,18 @@ namespace UniNFeLibrary
         /// Nome do arquivo para controle da numeração sequencial do lote.
         /// </summary>
         private string NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\UniNfeLote.xml";
+        /// <summary>
+        /// Nome do arquivo 1 de backup de segurança do arquivo de controle da numeração sequencial do lote
+        /// </summary>
+        private string Bkp1NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp1_UniNfeLote.xml";
+        /// <summary>
+        /// Nome do arquivo 2 de backup de segurança do arquivo de controle da numeração sequencial do lote
+        /// </summary>
+        private string Bkp2NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp2_UniNfeLote.xml";
+        /// <summary>
+        /// Nome do arquivo 3 de backup de segurança do arquivo de controle da numeração sequencial do lote
+        /// </summary>
+        private string Bkp3NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp3_UniNfeLote.xml";
         #endregion
 
         #region Propriedades
@@ -52,6 +64,8 @@ namespace UniNFeLibrary
         /// <date>15/04/2009</date>
         public void LoteNfe(List<string> lstArquivosNFe)
         {
+            bool excluirFluxo = true;
+
             try
             {
                 bool booLiberado = false;
@@ -107,7 +121,7 @@ namespace UniNFeLibrary
                         //Inserir o arquivo de XML da NFe na string do lote
                         this.InserirNFeLote(lstArquivosNFe[i]);
                         lstArquivoInseridoLote.Add(lstArquivosNFe[i]);
-                        ContaNfe ++;
+                        ContaNfe++;
                         FileInfo oArq = new FileInfo(lstArquivosNFe[i]);
                         TamArqLote += oArq.Length;
 
@@ -117,7 +131,13 @@ namespace UniNFeLibrary
                         //Encerrar o lote se já tiver incluido 50 notas (Quantidade máxima permitida pelo SEFAZ)
                         if ((i + 1) == lstArquivosNFe.Count || ContaNfe == 50)
                         {
+                            //Encerra o lote
                             this.EncerrarLoteNfe(intNumeroLote);
+
+                            //Se já encerrou o lote não pode mais tirar do fluxo se der erro daqui para baixo
+                            excluirFluxo = false;
+
+                            //Finalizar o lote gerando retornos para o ERP.
                             this.FinalizacaoLote(intNumeroLote, lstArquivoInseridoLote);
 
                             //Limpar as variáveis, atributos depois de totalmente finalizado o lote, pois o conteúdo
@@ -125,17 +145,26 @@ namespace UniNFeLibrary
                             lstArquivoInseridoLote.Clear();
                             ContaNfe = 0;
                             TamArqLote = 0;
-                            IniciouLote = false;                            
+                            IniciouLote = false;
                         }
                     }
                 }
             }
-            catch (IOException ex)
-            {
-                throw (ex);
-            }
             catch (Exception ex)
             {
+                if (excluirFluxo)
+                {
+                    for (int i = 0; i < lstArquivosNFe.Count; i++)
+                    {
+                        //Efetua a leitura do XML da NFe
+                        absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(lstArquivosNFe[i]);
+
+                        //Excluir a nota fiscal do fluxo pois deu algum erro neste ponto
+                        FluxoNfe oFluxoNfe = new FluxoNfe();
+                        oFluxoNfe.ExcluirNfeFluxo(oDadosNfe.chavenfe);
+                    }
+                }
+
                 throw (ex);
             }
         }
@@ -159,7 +188,6 @@ namespace UniNFeLibrary
                 {
                     //Efetua a leitura do XML, tem que acontecer antes de mover o arquivo
                     absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(lstArquivosNFe[i]);
-                    //oLerXml.Nfe(lstArquivosNFe[i]);
 
                     //Mover o XML da NFE para a pasta de enviados em processamento
                     oAux.MoverArquivo(lstArquivosNFe[i], PastaEnviados.EmProcessamento);
@@ -250,7 +278,7 @@ namespace UniNFeLibrary
             //Gravar o XML do lote das notas fiscais
             string vNomeArqLoteNfe = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
                                      intNumeroLote.ToString("000000000000000") +
-                                     ExtXml.EnvLot;// "-env-lot.xml";
+                                     ExtXml.EnvLot;
 
             StreamWriter SW_2 = null;
 
@@ -285,28 +313,83 @@ namespace UniNFeLibrary
         private Int32 ProximoNumeroLote()
         {
             Int32 intNumeroLote = 1;
+            bool deuErro = false;
 
-            //TODO: Estudar uma forma de colocar um try neste ponto e retornar erro para o ERP caso não consiga ler o XML do numero do lote
-            if (File.Exists(NomeArqXmlLote))
+            for (int i = 0; i < 4; i++)
             {
-                //Carregar os dados do arquivo XML de configurações do UniNfe
-                XmlTextReader oLerXml = new XmlTextReader(NomeArqXmlLote);
+                XmlTextReader oLerXml = null;
 
-                while (oLerXml.Read())
+                try
                 {
-                    if (oLerXml.NodeType == XmlNodeType.Element)
+                    if (File.Exists(NomeArqXmlLote))
                     {
-                        if (oLerXml.Name == "UltimoLoteEnviado")
+                        //Carregar os dados do arquivo XML de configurações do UniNfe
+                        oLerXml = new XmlTextReader(NomeArqXmlLote);
+
+                        while (oLerXml.Read())
                         {
-                            oLerXml.Read(); intNumeroLote = Convert.ToInt32(oLerXml.Value) + 1;
-                            break;
+                            if (oLerXml.NodeType == XmlNodeType.Element)
+                            {
+                                if (oLerXml.Name == "UltimoLoteEnviado")
+                                {
+                                    oLerXml.Read(); intNumeroLote = Convert.ToInt32(oLerXml.Value) + 1;
+
+                                    //Vou somar uns 3 números para frente para evitar repetir os números.
+                                    if (deuErro)
+                                        intNumeroLote += 3;
+
+                                    break;
+                                }
+                            }
                         }
+
+                        oLerXml.Close();
+                    }
+
+                    this.SalvarNumeroLoteUtilizado(intNumeroLote);
+
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    deuErro = true;
+                    //Fechar o arquivo se o mesmo estiver aberto
+                    if (oLerXml != null)
+                        if (oLerXml.ReadState != ReadState.Closed)
+                            oLerXml.Close();
+
+                    switch (i)
+                    {
+                        case 0:
+                            if (File.Exists(Bkp1NomeArqXmlLote))
+                                File.Copy(Bkp1NomeArqXmlLote, NomeArqXmlLote, true);
+                            break;
+
+                        case 1:
+                            if (File.Exists(Bkp2NomeArqXmlLote))
+                                File.Copy(Bkp2NomeArqXmlLote, NomeArqXmlLote, true);
+                            break;
+
+                        case 2:
+                            if (File.Exists(Bkp3NomeArqXmlLote))
+                                File.Copy(Bkp3NomeArqXmlLote, NomeArqXmlLote, true);
+                            break;
+
+                        case 3:
+                            throw new Exception("Não foi possível efetuar a leitura do arquivo " + NomeArqXmlLote + ". Verifique se o mesmo não está com sua estrutura de XML danificada."); //Se tentou 4 vezes e deu errado, vamos retornar o erro e não tem o que ser feito.
+
+                        default:
+                            break;
                     }
                 }
-                oLerXml.Close();
+                finally
+                {
+                    //Fechar o arquivo se o mesmo estiver aberto - Wandrey 20/04/2010
+                    if (oLerXml != null)
+                        if (oLerXml.ReadState != ReadState.Closed)
+                            oLerXml.Close();
+                }
             }
-
-            this.SalvarNumeroLoteUtilizado(intNumeroLote);
 
             return intNumeroLote;
         }
@@ -321,7 +404,6 @@ namespace UniNFeLibrary
         /// <date>15/04/2009</date>
         private void SalvarNumeroLoteUtilizado(Int32 intNumeroLote)
         {
-            //TODO: Estudar uma forma de colocar um try neste ponto para se ocorrer de der algum erro, podermos retornar para o ERP
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
 
@@ -330,16 +412,39 @@ namespace UniNFeLibrary
             oSettings.IndentChars = "";
             oSettings.NewLineOnAttributes = false;
             oSettings.OmitXmlDeclaration = false;
+            XmlWriter oXmlGravar = null;
 
-            XmlWriter oXmlGravar = XmlWriter.Create(NomeArqXmlLote, oSettings);
+            try
+            {
+                oXmlGravar = XmlWriter.Create(NomeArqXmlLote, oSettings);
+                oXmlGravar.WriteStartDocument();
+                oXmlGravar.WriteStartElement("DadosLoteNfe");
+                oXmlGravar.WriteElementString("UltimoLoteEnviado", intNumeroLote.ToString());
+                oXmlGravar.WriteEndElement(); //DadosLoteNfe
+                oXmlGravar.WriteEndDocument();
+                oXmlGravar.Flush();
+                oXmlGravar.Close();
 
-            oXmlGravar.WriteStartDocument();
-            oXmlGravar.WriteStartElement("DadosLoteNfe");
-            oXmlGravar.WriteElementString("UltimoLoteEnviado", intNumeroLote.ToString());
-            oXmlGravar.WriteEndElement(); //DadosLoteNfe
-            oXmlGravar.WriteEndDocument();
-            oXmlGravar.Flush();
-            oXmlGravar.Close();
+                //Criar 3 copias de segurança deste XML para voltar ele caso de algum problema com o mesmo.
+                File.Copy(NomeArqXmlLote, Bkp1NomeArqXmlLote, true);
+                File.Copy(NomeArqXmlLote, Bkp2NomeArqXmlLote, true);
+                File.Copy(NomeArqXmlLote, Bkp3NomeArqXmlLote, true);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                //Fechar o arquivo se o mesmo ainda estiver aberto - Wandrey 20/04/2010
+                if (oXmlGravar != null)
+                    if (oXmlGravar.WriteState != WriteState.Closed)
+                        oXmlGravar.Close();
+            }
         }
         #endregion
 
@@ -352,7 +457,6 @@ namespace UniNFeLibrary
         /// <date>15/04/2009</date>
         private void GravarXMLLoteRetERP(Int32 intNumeroLote, string NomeArquivoXML)
         {
-            //TODO: Estudar uma forma de colocar um try neste ponto para se ocorrer de der algum erro, podermos retornar para o ERP
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
 
@@ -362,18 +466,37 @@ namespace UniNFeLibrary
             oSettings.NewLineOnAttributes = false;
             oSettings.OmitXmlDeclaration = false;
             oSettings.Encoding = Encoding.UTF8;
+            XmlWriter oXmlLoteERP = null;
 
             string cArqLoteRetorno = this.NomeArqLoteRetERP(NomeArquivoXML);
 
-            XmlWriter oXmlLoteERP = XmlWriter.Create(cArqLoteRetorno, oSettings);
+            try
+            {
+                oXmlLoteERP = XmlWriter.Create(cArqLoteRetorno, oSettings);
 
-            oXmlLoteERP.WriteStartDocument();
-            oXmlLoteERP.WriteStartElement("DadosLoteNfe");
-            oXmlLoteERP.WriteElementString("NumeroLoteGerado", intNumeroLote.ToString());
-            oXmlLoteERP.WriteEndElement(); //DadosLoteNfe
-            oXmlLoteERP.WriteEndDocument();
-            oXmlLoteERP.Flush();
-            oXmlLoteERP.Close();
+                oXmlLoteERP.WriteStartDocument();
+                oXmlLoteERP.WriteStartElement("DadosLoteNfe");
+                oXmlLoteERP.WriteElementString("NumeroLoteGerado", intNumeroLote.ToString());
+                oXmlLoteERP.WriteEndElement(); //DadosLoteNfe
+                oXmlLoteERP.WriteEndDocument();
+                oXmlLoteERP.Flush();
+                oXmlLoteERP.Close();
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                //Fechar o arquivo se o mesmo ainda estiver aberto - Wandrey 20/04/2010
+                if (oXmlLoteERP != null)
+                    if (oXmlLoteERP.WriteState != WriteState.Closed)
+                        oXmlLoteERP.Close();
+            }
         }
         #endregion
 
@@ -590,7 +713,7 @@ namespace UniNFeLibrary
         #region Métodos auxiliares
 
         #region LerXMLNfe()
-        protected abstract absLerXML.DadosNFeClass LerXMLNFe(string Arquivo);    
+        protected abstract absLerXML.DadosNFeClass LerXMLNFe(string Arquivo);
         #endregion
 
         #region LerXMLRecibo()
@@ -601,7 +724,7 @@ namespace UniNFeLibrary
         protected string NomeArqLoteRetERP(string NomeArquivoXML)
         {
             return ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe/*"-nfe.xml"*/) +
+                oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe) +
                 "-num-lot.xml";
         }
         #endregion

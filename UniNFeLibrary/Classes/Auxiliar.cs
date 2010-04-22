@@ -336,7 +336,7 @@ namespace UniNFeLibrary
                 }
                 catch
                 {
-                    //TODO: V3.0 - Não deveriamos retornar a exeção
+                    //TODO: V3.0 - Não deveriamos retornar a exeção com throw?
                 }
             }
         }
@@ -604,23 +604,8 @@ namespace UniNFeLibrary
                 //Definir o arquivo que vai ser deletado ou movido para outra pasta
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                //Criar a pasta EmProcessamento
-                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
-                {
-                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
-                }
-
-                //Criar a Pasta Autorizado
-                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
-                {
-                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString());
-                }
-
-                //Criar a Pasta Denegado
-                if (!Directory.Exists(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString()))
-                {
-                    System.IO.Directory.CreateDirectory(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString());
-                }
+                //Criar subpastas na pasta dos XML´s enviados
+                ConfiguracaoApp.CriarSubPastaEnviado();
 
                 //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
                 string strNomePastaEnviado = string.Empty;
@@ -1277,6 +1262,7 @@ namespace UniNFeLibrary
                 }
                 Thread.Sleep(3000);
             }
+
             //Retornar o status do serviço
             return vStatus;
         }
