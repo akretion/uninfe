@@ -96,12 +96,16 @@ namespace UniNFeLibrary
                 {
                     fs.Close();//fechar o arquivo para nao dar erro em outras aplicações
                 }
-                return ret;
             }
             catch (IOException ex)
             {
                 ret = true;
             }
+            catch (Exception ex)
+            {
+                ret = true;
+            }
+
             return ret;
         }
         #endregion
