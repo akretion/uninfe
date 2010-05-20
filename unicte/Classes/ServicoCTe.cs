@@ -142,6 +142,9 @@ namespace unicte
                         catch (ExceptionInvocarObjeto ex)
                         {
                         }
+                        catch (Exception ex)
+                        {
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -262,6 +265,9 @@ namespace unicte
                 catch (ExceptionInvocarObjeto ex)
                 {
                 }
+                catch (Exception ex)
+                {
+                }
             }
             else
             {
@@ -372,6 +378,9 @@ namespace unicte
                         }
                     }
                     catch (ExceptionInvocarObjeto ex)
+                    {
+                    }
+                    catch (Exception ex)
                     {
                     }
                 }
@@ -510,6 +519,9 @@ namespace unicte
                             }
                         }
                         catch (ExceptionInvocarObjeto ex)
+                        {
+                        }
+                        catch (Exception ex)
                         {
                         }
                     }
@@ -1142,7 +1154,7 @@ namespace unicte
                     }
                     else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
                     {
-                        //Se o status do retorno do lote for maior que 200, 
+                        //Se o status do retorno do lote for maior que 200,
                         //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                         //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                         //Wandrey 30/04/2009
@@ -1181,6 +1193,9 @@ namespace unicte
                     oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
                 }
+            }
+            catch (Exception ex)
+            {
             }
         }
         #endregion
@@ -1264,6 +1279,10 @@ namespace unicte
             {
                 throw (ex);
             }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -1336,6 +1355,9 @@ namespace unicte
                     }
                 }
                 catch (ExceptionInvocarObjeto ex)
+                {
+                }
+                catch (Exception ex)
                 {
                 }
             }

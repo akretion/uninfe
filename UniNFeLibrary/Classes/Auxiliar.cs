@@ -1224,7 +1224,7 @@ namespace UniNFeLibrary
                             }
                             catch (Exception ex)
                             {
-                                vStatus = ex.Message;
+                                vStatus = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                                 break;
                                 //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
                                 //pode ser que o arquivo esteja em uso ainda.
