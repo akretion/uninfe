@@ -15,7 +15,7 @@ namespace UniNFeLibrary
     public class UnitxtTOxmlClass
     {
         #region --- public properties
-        
+
         public List<txtTOxmlClassRetorno> cRetorno = new List<txtTOxmlClassRetorno>();
         public string cMensagemErro { get; private set; }
 
@@ -109,7 +109,7 @@ namespace UniNFeLibrary
             string cRetorno = cTexto;
             while (cRetorno.IndexOf("> ") > -1)
             {
-                cRetorno = cRetorno.Replace("> ",">");
+                cRetorno = cRetorno.Replace("> ", ">");
             }
             cRetorno = cRetorno.Replace(" />", "/>").Replace(" </", "</");
             return cRetorno;
@@ -180,20 +180,20 @@ namespace UniNFeLibrary
 
             if (len == 0 && minLength > 0)
             {
-                this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ser informada. Conteudo: {2}" + 
-                                                    Environment.NewLine + 
-                                                    "\tLinha: {3}: Conteudo do segmento: {4}", 
+                this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ser informada. Conteudo: {2}" +
+                                                    Environment.NewLine +
+                                                    "\tLinha: {3}: Conteudo do segmento: {4}",
                                                     segment, field, dataRow[field].ToString(), iLinhaLida, cLinhaTXT) + Environment.NewLine;
             }
             else
-            if (len > maxLength || len < minLength)
-            {
-                this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ter seu tamanho entre {2} e {3}" + 
-                                                    ". Conteudo: " + dataRow[field].ToString() +
-                                                    Environment.NewLine +
-                                                    "\tLinha: {4}: Conteudo do segmento: {5}", 
-                                                    segment, field, minLength, maxLength, iLinhaLida, cLinhaTXT) + Environment.NewLine;
-            }
+                if (len > maxLength || len < minLength)
+                {
+                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ter seu tamanho entre {2} e {3}" +
+                                                        ". Conteudo: " + dataRow[field].ToString() +
+                                                        Environment.NewLine +
+                                                        "\tLinha: {4}: Conteudo do segmento: {5}",
+                                                        segment, field, minLength, maxLength, iLinhaLida, cLinhaTXT) + Environment.NewLine;
+                }
         }
 
         /// <summary>
@@ -215,9 +215,9 @@ namespace UniNFeLibrary
                 int pos = dataRow[field].ToString().Trim().IndexOf(".") + 1;
                 int ndec = dataRow[field].ToString().Trim().Substring(pos).Length;
                 if (ndec != decimals)
-                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" + 
-                                                        Environment.NewLine + 
-                                                        "\tLinha: {4}: Conteudo do segmento: {5}", 
+                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" +
+                                                        Environment.NewLine +
+                                                        "\tLinha: {4}: Conteudo do segmento: {5}",
                                                         segment, field, decimals, ndec, iLinhaLida, cLinhaTXT) + Environment.NewLine;
             }
         }
@@ -251,9 +251,9 @@ namespace UniNFeLibrary
                         pos = -1;
                 }
                 if (pos == -1)
-                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> data inválida. Conteudo: {2}" + 
-                                                        Environment.NewLine + 
-                                                        "\tLinha: {3}: Conteudo do segmento: {4}", 
+                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> data inválida. Conteudo: {2}" +
+                                                        Environment.NewLine +
+                                                        "\tLinha: {3}: Conteudo do segmento: {4}",
                                                         segment, field, dataRow[field].ToString(), iLinhaLida, cLinhaTXT) + Environment.NewLine;
             }
         }
@@ -263,8 +263,8 @@ namespace UniNFeLibrary
         #region ConverToOEM
         private string ConvertToOEM(string FBuffer)
         {
-            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ");
-            const string FOEM =  (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuA");
+            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ�");
+            const string FOEM = (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuAØ");
             int L, P;
             char X;
             string result = "";
@@ -274,7 +274,7 @@ namespace UniNFeLibrary
                 X = (char)FBuffer[L];
                 P = FAnsi.IndexOf(X);
                 if (P >= 0) X = FOEM[P];
-                
+
                 result += X;
             }
             result = result.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&#39;");
@@ -354,18 +354,18 @@ namespace UniNFeLibrary
 
                 //cLinhaTXT += "!@#$%^&*()_+";
                 bool reLe = false;
-                for(int x = 0; x < cLinhaTXT.Length - 1; ++x)
+                for (int x = 0; x < cLinhaTXT.Length - 1; ++x)
                     //if (cLinhaTXT[x] != '|' && cLinhaTXT[x] != '=' && cLinhaTXT[x] != '%')
-                        if (/*char.IsSymbol(cLinhaTXT, x) ||*/ char.IsControl(cLinhaTXT, x))
-                        {
-                            this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] coluna ["+(x+1).ToString()+ "] contem o caracter [" + cLinhaTXT.Substring(x,1) + "] que não é permitido" + Environment.NewLine;
-                            //this.cMensagemErro += "\t"+cLinhaTXT + Environment.NewLine;
+                    if (/*char.IsSymbol(cLinhaTXT, x) ||*/ char.IsControl(cLinhaTXT, x))
+                    {
+                        this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] coluna [" + (x + 1).ToString() + "] contem o caracter [" + cLinhaTXT.Substring(x, 1) + "] que não é permitido" + Environment.NewLine;
+                        //this.cMensagemErro += "\t"+cLinhaTXT + Environment.NewLine;
 
-                            cLinhaTXT = txt.ReadLine();
-                            iLinhaLida++;
-                            reLe = true;
-                            break;
-                        }
+                        cLinhaTXT = txt.ReadLine();
+                        iLinhaLida++;
+                        reLe = true;
+                        break;
+                    }
 
                 if (reLe)
                     continue;
@@ -412,7 +412,7 @@ namespace UniNFeLibrary
                         #region -- B
                         {
                             DataRow dr = dsNfe.Tables["ide"].NewRow();
-                            
+
                             cChave = "";
                             this.PopulateDataRow(dr, dados, 18);
                             //for (iLeitura = 0; iLeitura <= nElementos - 1/*18*/; iLeitura++)
@@ -704,7 +704,7 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "CPF", drdest, ObOp.Obrigatorio, 11, 11);
                             }
                         dsNfe.Tables["dest"].Rows.Add(drdest);
-                        
+
                         break;
                         #endregion
 
@@ -947,7 +947,7 @@ namespace UniNFeLibrary
                     case "J":
                         #region -- J
                         {
-                      
+
 
                             DataRow drveicProd = dsNfe.Tables["veicProd"].NewRow();
                             if (this.PopulateDataRow(drveicProd, dados, 22))
@@ -1108,8 +1108,8 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "L114":    //ICMS para UF devido para a UF de destino, nas operações interestaduais 
-                                    //de produtos que tiveram retenção antecipada de ICMS por ST para a UF 
-                                    //do remetente
+                        //de produtos que tiveram retenção antecipada de ICMS por ST para a UF 
+                        //do remetente
                         #region -- L114
                         {
                             DataRow drICMSInter = dsNfe.Tables["ICMSInter"].NewRow();
@@ -1131,8 +1131,8 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "L117":    //ICMS para consumo em UF diversa - informar quando o produto for adquirido 
-                                    //para consumo em UF diversa da UF de localização do estabelecimento do 
-                                    //destinatário da nota fiscal
+                        //para consumo em UF diversa da UF de localização do estabelecimento do 
+                        //destinatário da nota fiscal
                         #region -- L117
                         {
                             DataRow drICMSCons = dsNfe.Tables["ICMSCons"].NewRow();
@@ -1227,7 +1227,7 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "vBC", dr, ObOp.Obrigatorio, 1, 16, 2);
-                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1,6, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Obrigatorio, 1, 6, 2);
                                 this.Check(dados[0], "vICMS", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
@@ -1271,7 +1271,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "N05": //CST – 30 - Isenta ou não tributada e com cobrança do ICMS por 
-                                //substituição tributária
+                        //substituição tributária
                         #region -- N05
                         {
                             DataRow dr = dsNfe.Tables["ICMS30"].NewRow();
@@ -1328,7 +1328,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "N07": //CST – 51 - Diferimento - A exigência do preenchimento das informações 
-                                //do ICMS diferido fica à critério de cada UF.
+                        //do ICMS diferido fica à critério de cada UF.
                         #region -- N07
                         {
                             DataRow dr = dsNfe.Tables["ICMS51"].NewRow();
@@ -1386,7 +1386,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "N09": //CST - 70 - Com redução de base de cálculo e cobrança do ICMS por 
-                                //substituição tributária
+                        //substituição tributária
                         #region -- N09
                         {
                             DataRow dr = dsNfe.Tables["ICMS70"].NewRow();
@@ -1883,7 +1883,7 @@ namespace UniNFeLibrary
                         #region -- S07
                         if (nElementos >= 1)
                             if (dados[1].Trim() != "")
-                            drCOFINSOutr["vBC"] = dados[1].Trim();
+                                drCOFINSOutr["vBC"] = dados[1].Trim();
                         if (nElementos >= 2)
                             if (dados[2].Trim() != "")
                                 drCOFINSOutr["pCOFINS"] = dados[2].Trim();
@@ -1960,8 +1960,8 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "U":   //ISS - Informar os campos para cálculo do ISSQN nas NFe conjugadas, 
-                                //onde há a prestação de serviços sujeitos ao ISSQN e fornecimento de 
-                                //peças sujeitas ao ICMS
+                        //onde há a prestação de serviços sujeitos ao ISSQN e fornecimento de 
+                        //peças sujeitas ao ICMS
                         #region -- U
                         {
                             DataRow dr = dsNfe.Tables["ISSQN"].NewRow();
@@ -2121,7 +2121,7 @@ namespace UniNFeLibrary
                         #endregion
 
                     case "X03": //transporta
-                    #region -- X03
+                        #region -- X03
                         {
                             /*
                             for (iLeitura = 0; iLeitura <= 6; iLeitura++)
@@ -2167,10 +2167,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X04":  //CNPJ|
-                    #region -- X04
+                        #region -- X04
                         /* dsNfe.Tables["transporta"].Columns["CPF"].AllowDBNull = true; */
                         if (nElementos >= 1 && drtransporta != null)
                         {
@@ -2182,10 +2182,10 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "CNPJ", drtransporta, ObOp.Opcional, 14, 14);
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X05":  //CPF
-                    #region --- X05
+                        #region --- X05
                         /* dsNfe.Tables["transporta"].Columns["CNPJ"].AllowDBNull = true; */
                         if (nElementos >= 1 && drtransporta != null)
                         {
@@ -2197,10 +2197,10 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "CPF", drtransporta, ObOp.Opcional, 11, 11);
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X11": //ICMS do serviço de transporte retido.
-                    #region -- X11
+                        #region -- X11
                         {
                             DataRow dr = dsNfe.Tables["retTransp"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 7))
@@ -2222,10 +2222,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X18": //veicTransp
-                    #region -- X18
+                        #region -- X18
                         {
                             DataRow dr = dsNfe.Tables["veicTransp"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 3))
@@ -2242,10 +2242,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X22": //reboque
-                    #region -- X22
+                        #region -- X22
                         {
                             DataRow dr = dsNfe.Tables["reboque"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 3))
@@ -2262,10 +2262,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "X26": //vol
-                    #region -- X26
+                        #region -- X26
                         {
                             drVol = dsNfe.Tables["vol"].NewRow();
                             if (this.PopulateDataRow(drVol, dados, 6))
@@ -2290,10 +2290,10 @@ namespace UniNFeLibrary
                         }
                         break;
 
-                    #endregion
+                        #endregion
 
                     case "X33": //lacres
-                    #region -- X33
+                        #region -- X33
                         {
                             DataRow dr = dsNfe.Tables["lacres"].NewRow();
                             if (nElementos >= 1)
@@ -2305,10 +2305,10 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "nLacre", dr, ObOp.Obrigatorio, 1, 60);
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "Y": //cobr
-                    #region -- Y
+                        #region -- Y
                         {
                             DataRow dr = dsNfe.Tables["cobr"].NewRow();
                             dr["cobr_Id"] = 0;
@@ -2316,10 +2316,10 @@ namespace UniNFeLibrary
                             dsNfe.Tables["cobr"].Rows.Add(dr);
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "Y02": //fat
-                    #region -- Y02
+                        #region -- Y02
                         {
                             DataRow dr = dsNfe.Tables["fat"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 4))
@@ -2339,10 +2339,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "Y07": //dup
-                    #region -- Y07
+                        #region -- Y07
                         {
                             DataRow dr = dsNfe.Tables["dup"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 3))
@@ -2359,10 +2359,10 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
-                    #endregion
+                        #endregion
 
                     case "Z":   //infAdic
-                    #region -- Z
+                        #region -- Z
                         {
                             bool r = false;
                             DataRow dr = dsNfe.Tables["infAdic"].NewRow();
@@ -2394,45 +2394,80 @@ namespace UniNFeLibrary
                         }
                         break;
 
-                    #endregion
+                        #endregion
 
                     case "Z04": //obsCont
-                    #region -- Z04
+                        #region -- Z04
                         {
-                            DataRow dr = dsNfe.Tables["obsCont"].NewRow();
-                            if (this.PopulateDataRow(dr, dados, 2))
+                            if (nElementos > 0)
                             {
-                                dr["infAdic_Id"] = indadicid.ToString();
-                                dsNfe.Tables["obsCont"].Rows.Add(dr);
+                                #region Criar a tag infAdic se necessário
+                                // Se a tag infAdic ainda não foi criada por que não tem a infCpl e a infAdFisco no registro Z, vou forçar neste ponto pq a obsCont deve ficar dentro dela
+                                // Wandrey 27/05/2010
+                                if (indadicid == 0)
+                                {
+                                    DataRow drInfAdic = dsNfe.Tables["infAdic"].NewRow();
 
-                                this.Check(dados[0], "xCampo", dr, ObOp.Obrigatorio, 1, 20);
-                                this.Check(dados[0], "xTexto", dr, ObOp.Obrigatorio, 1, 60);
+                                    ++indadicid;//danasa 27-9-2009;
+                                    drInfAdic["infAdic_Id"] = indadicid.ToString();
+                                    drInfAdic["infNFe_Id"] = 0;
+                                    dsNfe.Tables["infAdic"].Rows.Add(drInfAdic);
+                                }
+                                #endregion
+
+                                DataRow dr = dsNfe.Tables["obsCont"].NewRow();
+                                if (this.PopulateDataRow(dr, dados, 2))
+                                {
+                                    dr["infAdic_Id"] = indadicid.ToString();
+                                    dsNfe.Tables["obsCont"].Rows.Add(dr);
+
+                                    this.Check(dados[0], "xCampo", dr, ObOp.Obrigatorio, 1, 20);
+                                    this.Check(dados[0], "xTexto", dr, ObOp.Obrigatorio, 1, 60);
+                                }
                             }
                         }
                         //dsNfe.Tables["obsFisco"]; não encontrei na documentação do TXT nada que fala sobre o conteudo dessa tebela
                         break;
 
-                    #endregion
+                        #endregion
 
                     case "Z10": //procRef
-                    #region -- Z10
+                        #region -- Z10
                         {
-                            DataRow dr = dsNfe.Tables["procRef"].NewRow();
-                            if (this.PopulateDataRow(dr, dados, 2))
+                            if (nElementos > 0)
                             {
-                                dr["infAdic_Id"] = indadicid.ToString();
-                                dsNfe.Tables["procRef"].Rows.Add(dr);
+                                #region Criar a tag infAdic se necessário
+                                // Se a tag infAdic ainda não foi criada por que não tem a infCpl, infAdFisco ou obsCont no registro Z ou Z04, 
+                                // vou forçar neste ponto pq a procRef deve ficar dentro dela
+                                // Wandrey 27/05/2010
+                                if (indadicid == 0)
+                                {
+                                    DataRow drInfAdic = dsNfe.Tables["infAdic"].NewRow();
 
-                                this.Check(dados[0], "nProc", dr, ObOp.Obrigatorio, 1, 60);
-                                this.Check(dados[0], "indProc", dr, ObOp.Obrigatorio, 1, 1);
+                                    ++indadicid;//danasa 27-9-2009;
+                                    drInfAdic["infAdic_Id"] = indadicid.ToString();
+                                    drInfAdic["infNFe_Id"] = 0;
+                                    dsNfe.Tables["infAdic"].Rows.Add(drInfAdic);
+                                }
+                                #endregion
+
+                                DataRow dr = dsNfe.Tables["procRef"].NewRow();
+                                if (this.PopulateDataRow(dr, dados, 2))
+                                {
+                                    dr["infAdic_Id"] = indadicid.ToString();
+                                    dsNfe.Tables["procRef"].Rows.Add(dr);
+
+                                    this.Check(dados[0], "nProc", dr, ObOp.Obrigatorio, 1, 60);
+                                    this.Check(dados[0], "indProc", dr, ObOp.Obrigatorio, 1, 1);
+                                }
                             }
                         }
                         break;
 
-                    #endregion
+                        #endregion
 
                     case "ZA": //EXPORTA
-                    #region -- ZA
+                        #region -- ZA
                         {
                             DataRow dr = dsNfe.Tables["exporta"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 2))
@@ -2446,10 +2481,10 @@ namespace UniNFeLibrary
                         }
                         break;
 
-                    #endregion
+                        #endregion
 
                     case "ZB": //compra
-                    #region -- ZB
+                        #region -- ZB
                         {
                             DataRow dr = dsNfe.Tables["compra"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 3))
@@ -2464,7 +2499,7 @@ namespace UniNFeLibrary
                         }
                         break;
 
-                    #endregion
+                        #endregion
 
                 }
                 #endregion
@@ -2478,7 +2513,7 @@ namespace UniNFeLibrary
             if (cMensagemErro != "")
                 return;
 
-//            MessageBox.Show("AAAAAAAA");
+            //            MessageBox.Show("AAAAAAAA");
 
             if (cNF == 0)
             {
@@ -2563,7 +2598,7 @@ namespace UniNFeLibrary
                 /// no arquivo texto não tem o nome fantasia e não é obrigatorio no arquivo XML
                 /// 
                 sAux = TextoXml.ToString().Substring(TextoXml.ToString().IndexOf("<xFant>"));
-                sAux = sAux.Substring(0, sAux.IndexOf("</xFant>")+8);
+                sAux = sAux.Substring(0, sAux.IndexOf("</xFant>") + 8);
                 TextoXml.GetStringBuilder().Replace(sAux, "");
             }
 
@@ -2631,8 +2666,8 @@ namespace UniNFeLibrary
 
         private void colunas(DataSet dsNfe, string tablename)
         {
-            DataTable ar = dsNfe.Tables[tablename]; 
-            for (int i = 0; i < ar.Columns.Count; ++i) 
+            DataTable ar = dsNfe.Tables[tablename];
+            for (int i = 0; i < ar.Columns.Count; ++i)
                 MessageBox.Show(i.ToString() + ": " + ar.Columns[i].ColumnName);
         }
     }
