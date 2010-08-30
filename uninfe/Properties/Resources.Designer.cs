@@ -164,5 +164,19 @@ namespace uninfe.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap update48x48 {
+            get {
+                object obj = ResourceManager.GetObject("update48x48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap windows_view_detail_48x48 {
+            get {
+                object obj = ResourceManager.GetObject("windows_view_detail 48x48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

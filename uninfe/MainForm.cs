@@ -21,97 +21,38 @@ namespace uninfe
     #region Classe MainForm
     public partial class MainForm : Form
     {
-        #region Definir os objetos dos serviços executados pelo UniNFe
-        ServicoUniNFe oServicoAssinaNfeEnvio = new ServicoUniNFe();
-        ServicoUniNFe oServicoAssinaNfeEnvioEmLote = new ServicoUniNFe();
-        ServicoUniNFe oServicoMontaLoteUmaNfe = new ServicoUniNFe();
-        ServicoUniNFe oServicoMontaLoteVariasNfe = new ServicoUniNFe();
-        ServicoUniNFe oServicoEnviarLoteNfe = new ServicoUniNFe();
-        ServicoUniNFe oServicoPedCan = new ServicoUniNFe();
-        ServicoUniNFe oServicoPedInu = new ServicoUniNFe();
-        ServicoUniNFe oServicoPedRec = new ServicoUniNFe();
-        ServicoUniNFe oServicoPedSit = new ServicoUniNFe();
-        ServicoUniNFe oServicoPedSta = new ServicoUniNFe();
-        ServicoUniNFe oServicoConsCad = new ServicoUniNFe();
-        ServicoUniNFe oServicoConsInf = new ServicoUniNFe();
-        ServicoUniNFe oServicoAltCon = new ServicoUniNFe();
-        ServicoUniNFe oServicoValidarAssinar = new ServicoUniNFe();
-        ServicoUniNFe oServicoConvTXT = new ServicoUniNFe();
-        ServicoUniNFe oServicoEmProcessamento = new ServicoUniNFe();
-        ServicoUniNFe oServicoGerarChaveNFe = new ServicoUniNFe();
-        #endregion
-
-        #region Definir os objetos de threads para executar os serviços do UniNFe
-        ParameterizedThreadStart oOperacaoAssinaNfeEnvio;
-        ParameterizedThreadStart oOperacaoAssinaNfeEnvioEmLote;
-        ParameterizedThreadStart oOperacaoMontaLoteUmaNfe;
-        ParameterizedThreadStart oOperacaoMontaLoteVariasNfe;
-        ParameterizedThreadStart oOperacaoEnviarLoteNfe;
-        ParameterizedThreadStart oOperacaoPedCan;
-        ParameterizedThreadStart oOperacaoPedInu;
-        ParameterizedThreadStart oOperacaoPedRec;
-        ParameterizedThreadStart oOperacaoPedSit;
-        ParameterizedThreadStart oOperacaoPedSta;
-        ParameterizedThreadStart oOperacaoConsCad;
-        ParameterizedThreadStart oOperacaoConsInf;
-        ParameterizedThreadStart oOperacaoAltCon;
-        ParameterizedThreadStart oOperacaoValidarAssinar;
-        ParameterizedThreadStart oOperacaoConvTXT;
-        ParameterizedThreadStart oOperacaoGerarChaveNFe;
-        ParameterizedThreadStart oOperacaoEmProcessamento;
-
-        Thread oThreadAssinaNfeEnvio;
-        Thread oThreadAssinaNfeEnvioEmLote;
-        Thread oThreadMontaLoteUmaNfe;
-        Thread oThreadMontaLoteVariasNfe;
-        Thread oThreadEnviarLoteNfe;
-        Thread oThreadPedCan;
-        Thread oThreadPedInu;
-        Thread oThreadPedRec;
-        Thread oThreadPedSit;
-        Thread oThreadPedSta;
-        Thread oThreadConsCad;
-        Thread oThreadConsInf;
-        Thread oThreadAltCon;
-        Thread oThreadValidarAssinar;
-        Thread oThreadConvTXT;
-        Thread oThreadGerarChaveNFe;
-        Thread oThreadEmProcessamento;
         /// <summary>
         /// executa a limpeza das pastas temp e retorno
         /// </summary>
         /// <by>http://desenvolvedores.net/marcelo</by>
         Thread oThreadLimpeza;
 
-        #endregion
-
-        #region Atributos
-        private bool booPodeFechar = false;
-        #endregion
+        private Dictionary<ServicoUniNFe, Servicos> servicosUniNfe = new Dictionary<ServicoUniNFe, Servicos>();
+        private Dictionary<Thread, ParametroThread> threads = new Dictionary<Thread, ParametroThread>();
 
         #region MainForm()
         public MainForm()
         {
             InitializeComponent();
 
+            try
+            {
+                // Executar as conversões de atualizações de versão quando tiver
+                Auxiliar.ConversaoNovaVersao();
+
+                // Carregar as configurações de todas as empresas
+                Empresa.CarregaConfiguracao();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             ///
             /// danasa 9-2009
             /// 
             XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
             iniFile.LoadForm(this, "");
-
-            AtualizarDadosToolBar();
-
-            //Criar XML de controle de fluxo de envios de Notas Fiscais
-            FluxoNfe oFluxoNfe = new FluxoNfe();
-            try
-            {
-                oFluxoNfe.CriarXml(true);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu um erro ao tentar criar o XML para o controle do fuxo do envio dos documentos eletrônicos.\r\n\r\nErro:" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;
@@ -143,23 +84,21 @@ namespace uninfe
 
         #region Métodos gerais
 
-        #region AtualizarDadosToolBar()
+        #region PararServicos()
         /// <summary>
-        /// Atualiza o nome da empresa na ToolBar do UniNFe
+        /// Encerrar todas as thread´s de serviços da nfe
         /// </summary>
-        private void AtualizarDadosToolBar()
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 01/08/2010
+        /// </remarks>
+        private void PararServicos()
         {
-            //Atualizar o nome da empresa na toolstrip
-            //Wandrey 28/11/2008
-            this.toolStripLabel_NomeEmpresa.Text = ConfiguracaoApp.cNomeEmpresa;
-            if (ConfiguracaoApp.cNomeEmpresa.Trim() != "")
+            foreach (KeyValuePair<Thread, int> t in Auxiliar.threads)
             {
-                ///
-                /// danasa 8-2009
-                /// notifyIcon1.Text tem o limite de 64 bytes
-                /// 
-                string cTemp = "UniNFe\r\n" + ConfiguracaoApp.cNomeEmpresa;
-                this.notifyIcon1.Text = cTemp.Substring(0, Math.Min(63, cTemp.Length));
+                Thread thread = t.Key;
+
+                thread.Abort();
             }
         }
         #endregion
@@ -170,194 +109,66 @@ namespace uninfe
         /// </summary>
         private void ExecutaServicos()
         {
-            #region Executar a Thread que verifica e processa os XML´s de cancelamentos de notas fiscais
-            oOperacaoPedCan = new ParameterizedThreadStart(oServicoPedCan.BuscaXML);
-            oThreadPedCan = new Thread(oOperacaoPedCan);
-            oThreadPedCan.Name = Servicos.CancelarNFe.ToString();
-            oThreadPedCan.Start(Servicos.CancelarNFe);
-            #endregion
+            Auxiliar.threads.Clear();
+            threads.Clear();
 
-            #region Executar a Thread que verifica e processa os XML´s de Inutilização de números de notas fiscais
-            oOperacaoPedInu = new ParameterizedThreadStart(oServicoPedInu.BuscaXML);
-            oThreadPedInu = new Thread(oOperacaoPedInu);
-            oThreadPedInu.Name = Servicos.InutilizarNumerosNFe.ToString();
-            oThreadPedInu.Start(Servicos.InutilizarNumerosNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido da Situação da Nota Fiscal Eletrônica
-            oOperacaoPedSit = new ParameterizedThreadStart(oServicoPedSit.BuscaXML);
-            oThreadPedSit = new Thread(oOperacaoPedSit);
-            oThreadPedSit.Name = Servicos.PedidoConsultaSituacaoNFe.ToString();
-            oThreadPedSit.Start(Servicos.PedidoConsultaSituacaoNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido do Status do Serviço da Nota Fiscal Eletrônica
-            oOperacaoPedSta = new ParameterizedThreadStart(oServicoPedSta.BuscaXML);
-            oThreadPedSta = new Thread(oOperacaoPedSta);
-            oThreadPedSta.Name = Servicos.PedidoConsultaStatusServicoNFe.ToString();
-            oThreadPedSta.Start(Servicos.PedidoConsultaStatusServicoNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido da Situação do Recibo do Lote de Notas Fiscais Eletrônica
-            oOperacaoPedRec = new ParameterizedThreadStart(oServicoPedRec.BuscaXML);
-            oThreadPedRec = new Thread(oOperacaoPedRec);
-            oThreadPedRec.Name = Servicos.PedidoSituacaoLoteNFe.ToString();
-            oThreadPedRec.Start(Servicos.PedidoSituacaoLoteNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido de Consulta do Cadastro de Contribuintes
-            oOperacaoConsCad = new ParameterizedThreadStart(oServicoConsCad.BuscaXML);
-            oThreadConsCad = new Thread(oOperacaoConsCad);
-            oThreadConsCad.Name = Servicos.ConsultaCadastroContribuinte.ToString();
-            oThreadConsCad.Start(Servicos.ConsultaCadastroContribuinte);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido de Consulta das Informações do UniNfe
-            oOperacaoConsInf = new ParameterizedThreadStart(oServicoConsInf.BuscaXML);
-            oThreadConsInf = new Thread(oOperacaoConsInf);
-            oThreadConsInf.Name = Servicos.ConsultaInformacoesUniNFe.ToString();
-            oThreadConsInf.Start(Servicos.ConsultaInformacoesUniNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e processa os XML´s Pedido de Alteração das Configurações do UniNfe
-            oOperacaoAltCon = new ParameterizedThreadStart(oServicoAltCon.BuscaXML);
-            oThreadAltCon = new Thread(oOperacaoAltCon);
-            oThreadAltCon.Name = Servicos.AlterarConfiguracoesUniNFe.ToString();
-            oThreadAltCon.Start(Servicos.AlterarConfiguracoesUniNFe);
-            #endregion
-
-            #region Executar a Thread que verifica e assina os XML´s de notas fiscais eletrônicas da pasta Envio
-            oOperacaoAssinaNfeEnvio = new ParameterizedThreadStart(oServicoAssinaNfeEnvio.BuscaXML);
-            oThreadAssinaNfeEnvio = new Thread(oOperacaoAssinaNfeEnvio);
-            oThreadAssinaNfeEnvio.Name = Servicos.AssinarNFePastaEnvio.ToString();
-            oThreadAssinaNfeEnvio.Start(Servicos.AssinarNFePastaEnvio);
-            #endregion
-
-            #region Executar a Thread que verifica e monta o lote com uma única nota fiscal eletrônica
-            oOperacaoMontaLoteUmaNfe = new ParameterizedThreadStart(oServicoMontaLoteUmaNfe.BuscaXML);
-            oThreadMontaLoteUmaNfe = new Thread(oOperacaoMontaLoteUmaNfe);
-            oThreadMontaLoteUmaNfe.Name = Servicos.MontarLoteUmaNFe.ToString();
-            oThreadMontaLoteUmaNfe.Start(Servicos.MontarLoteUmaNFe);
-            #endregion
-
-            #region Executar a Thread que envia os lotes de notas fiscais eletrônicas
-            oOperacaoEnviarLoteNfe = new ParameterizedThreadStart(oServicoEnviarLoteNfe.BuscaXML);
-            oThreadEnviarLoteNfe = new Thread(oOperacaoEnviarLoteNfe);
-            oThreadEnviarLoteNfe.Name = Servicos.EnviarLoteNfe.ToString();
-            oThreadEnviarLoteNfe.Start(Servicos.EnviarLoteNfe);
-            #endregion
-
-            #region Executar a Thread que somente Valida e Assina XML´s e dá o retorno para o ERP
-            oOperacaoValidarAssinar = new ParameterizedThreadStart(oServicoValidarAssinar.BuscaXML);
-            oThreadValidarAssinar = new Thread(oOperacaoValidarAssinar);
-            oThreadValidarAssinar.Name = Servicos.ValidarAssinar.ToString();
-            oThreadValidarAssinar.Start(Servicos.ValidarAssinar);
-            #endregion
-
-            //TODO: v3.0 - Falta acertar este serviço
-            #region Executar a Thread que somente Converte o TXT da NFe para XML
-            oOperacaoConvTXT = new ParameterizedThreadStart(oServicoConvTXT.BuscaXML);
-            oThreadConvTXT = new Thread(oOperacaoConvTXT);
-            oThreadConvTXT.Name = Servicos.ConverterTXTparaXML.ToString();
-            oThreadConvTXT.Start(Servicos.ConverterTXTparaXML);
-            #endregion
-
-            #region Executar a Thread que verifica e assina os XML´s de notas fiscais eletrônicas da pasta de Envio em Lote
-            oOperacaoAssinaNfeEnvioEmLote = new ParameterizedThreadStart(oServicoAssinaNfeEnvioEmLote.BuscaXML);
-            oThreadAssinaNfeEnvioEmLote = new Thread(oOperacaoAssinaNfeEnvioEmLote);
-            oThreadAssinaNfeEnvioEmLote.Name = Servicos.AssinarNFePastaEnvioEmLote.ToString();
-            oThreadAssinaNfeEnvioEmLote.Start(Servicos.AssinarNFePastaEnvioEmLote);
-            #endregion
-
-            #region Executar a Thread que verifica e monta o lote com várias notas fiscais eletrônicas
-            oOperacaoMontaLoteVariasNfe = new ParameterizedThreadStart(oServicoMontaLoteVariasNfe.BuscaXML);
-            oThreadMontaLoteVariasNfe = new Thread(oOperacaoMontaLoteVariasNfe);
-            oThreadMontaLoteVariasNfe.Name = Servicos.MontarLoteVariasNFe.ToString();
-            oThreadMontaLoteVariasNfe.Start(Servicos.MontarLoteVariasNFe);
-            #endregion
-
-            #region Executar a Thread que retorna a chave da NFe
-            /// <summary>
-            /// danasa 9-2009
-            /// </summary>
-            oOperacaoGerarChaveNFe = new ParameterizedThreadStart(oServicoGerarChaveNFe.BuscaXML);
-            oThreadGerarChaveNFe = new Thread(oOperacaoGerarChaveNFe);
-            oThreadGerarChaveNFe.Name = Servicos.GerarChaveNFe.ToString();
-            oThreadGerarChaveNFe.Start(Servicos.GerarChaveNFe);
-            #endregion
-
-            #region Executar a thread que faz a limpeza dos diretórios temp e retorno
-            if (ConfiguracaoApp.DiasLimpeza > 0)
+            //Primeiro eu preparo as thread´s a serem executadas, atualizo a
+            //lista de thread´s e a empresa que está sendo executada nela
+            //para depois iniciá-las, ou gera erros nas pesquisas pela empresa da
+            //thread. Wandrey 02/08/2010
+            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
-                oThreadLimpeza = new Thread(new ThreadStart(ExecutaLimpeza));
-                oThreadLimpeza.Start();
-            }
-            #endregion
+                if (Empresa.Configuracoes[i].Certificado == string.Empty)
+                    continue;
 
-            #region Executar a Thread que consulta uma nota e a fecha se autorizada ou denegada
-            /// <summary>
-            /// danasa 10-2009
-            /// </summary>
-            oOperacaoEmProcessamento = new ParameterizedThreadStart(oServicoEmProcessamento.BuscaXML);
-            oThreadEmProcessamento = new Thread(oOperacaoEmProcessamento);
-            oThreadEmProcessamento.Name = Servicos.EmProcessamento.ToString();
-            oThreadEmProcessamento.IsBackground = true;
-            oThreadEmProcessamento.Start(Servicos.EmProcessamento);
-            #endregion
-        }
-        #endregion
+                //Criar uma lista dos serviços a serem executados
+                servicosUniNfe.Clear();
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarLoteNfe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvio);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteUmaNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoSituacaoLoteNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaSituacaoNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvioEmLote);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteVariasNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ValidarAssinar);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.CancelarNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.InutilizarNumerosNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaStatusServicoNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaCadastroContribuinte);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaInformacoesUniNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AlterarConfiguracoesUniNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.GerarChaveNFe);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EmProcessamento);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
+                //TODO: v3.0 - Falta acertar este serviço
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
 
-        #region Executa Limpeza
-        /// <summary>
-        /// executa a limpeza das pastas temp e retorno
-        /// </summary>
-        /// <by>http://desenvolvedores.net/marcelo</by>
-        private void ExecutaLimpeza()
-        {
-            lock (oThreadLimpeza)
-            {
-                //se chegou até aqui é porque é para fazer a limpeza dos diretórios
-                #region temporario
-                Limpar(ConfiguracaoApp.vPastaXMLErro);
-                #endregion
-
-                #region retorno
-                Limpar(ConfiguracaoApp.vPastaXMLRetorno);
-                #endregion
-
-                //pode dormir pelos dias de limpeza. não é necessário fazer a limpeza antes do dia
-                //não é interessante sair da thread porque o uninfe pode ficar no ar 24/7
-                //System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(ConfiguracaoApp.DiasLimpeza, 0, 0, 0), false);
-                System.Threading.Monitor.Wait(oThreadLimpeza, new TimeSpan(1, 0, 0, 0), false);
-            }
-        }
-
-        private void Limpar(string diretorio)
-        {
-            //recupera os arquivos da pasta temporario
-            string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);
-            DateTime UltimaData = DateTime.Today.AddDays(-ConfiguracaoApp.DiasLimpeza);
-
-            foreach (string file in files)
-            {
-                FileInfo fi = new FileInfo(file);
-                //usar a última data de acesso, e não a data de criação
-                if (fi.LastWriteTime <= UltimaData)
+                //Preparar as thread´s a serem executadas
+                foreach (KeyValuePair<ServicoUniNFe, Servicos> item in servicosUniNfe)
                 {
-                    try
-                    {
-                        fi.Delete();
-                    }
-                    catch
-                    {
-                        //td bem... nao deu para excluir. fica pra próxima
-                    }
-                }
+                    ServicoUniNFe servico = item.Key;
+                    Thread t = new Thread(new ParameterizedThreadStart(servico.BuscaXML));
+                    t.Name = (item.Value.ToString().Trim() + Empresa.Configuracoes[i].CNPJ.Trim()).ToUpper();
 
-                Application.DoEvents();
+                    //Atualiza a coleção de thread´s e a empresa que será executada enal
+                    Auxiliar.threads.Add(t, i);
+
+                    //Atualizar a coleção das thread´s a serem executadas.
+                    threads.Add(t, new ParametroThread(item.Value));
+                }
             }
+
+            //Executar as thread´s de todas as empresas
+            foreach (KeyValuePair<Thread, ParametroThread> item in threads)
+            {
+                Thread t = item.Key;
+                t.Start(item.Value);
+            }
+            //Limpar para tirar o conteúdo da memória pois não vamos mais precisar
+            threads.Clear();
         }
         #endregion
+
         #endregion
 
         #region Métodos de eventos
@@ -423,25 +234,7 @@ namespace uninfe
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //Abortar todas as thread´s em execução
-            oThreadAltCon.Abort();
-            oThreadConsCad.Abort();
-            oThreadConsInf.Abort();
-            oThreadPedCan.Abort();
-            oThreadPedInu.Abort();
-            oThreadPedRec.Abort();
-            oThreadPedSit.Abort();
-            oThreadPedSta.Abort();
-            oThreadMontaLoteUmaNfe.Abort();
-            oThreadMontaLoteVariasNfe.Abort();
-            oThreadAssinaNfeEnvio.Abort();
-            oThreadAssinaNfeEnvioEmLote.Abort();
-            oThreadEnviarLoteNfe.Abort();
-            oThreadValidarAssinar.Abort();
-            oThreadConvTXT.Abort();
-            oThreadGerarChaveNFe.Abort();
-            if (oThreadLimpeza != null) oThreadLimpeza.Abort();
-            oThreadEmProcessamento.Abort();
+            PararServicos();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -449,7 +242,7 @@ namespace uninfe
             //
             // TODO: Aqui, deveriamos verificar se ainda existe alguma Thread pendente antes de fechar
             //
-            if (e.CloseReason == CloseReason.UserClosing && !this.booPodeFechar)
+            if (e.CloseReason == CloseReason.UserClosing && !Auxiliar.EncerrarApp)
             {
                 ///
                 /// danasa 9-2009
@@ -520,6 +313,12 @@ namespace uninfe
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             switch (CadastroAtivo())
             {
                 case 0:
@@ -543,6 +342,12 @@ namespace uninfe
 
         private void cmConsultaCadastroServico_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             switch (CadastroAtivo())
             {
                 case -1:
@@ -570,6 +375,12 @@ namespace uninfe
         #region -- Validar
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             ValidarXML oValidarXML = new ValidarXML();
             oValidarXML.MdiParent = this;
             oValidarXML.MinimizeBox = false;
@@ -578,6 +389,12 @@ namespace uninfe
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (ValidarXML oValidarXML = new ValidarXML())
             {
                 oValidarXML.ShowInTaskbar = true;
@@ -619,6 +436,12 @@ namespace uninfe
 
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             switch (ConfiguracaoAtiva())
             {
                 case 0:
@@ -631,10 +454,16 @@ namespace uninfe
 
                 case -1:
                     {
-                        Configuracao oConfig = new Configuracao();
-                        oConfig.MdiParent = this;
-                        oConfig.MinimizeBox = false;
-                        oConfig.Show();
+                        try
+                        {
+                            Configuracao oConfig = new Configuracao();
+                            oConfig.MdiParent = this;
+                            oConfig.MinimizeBox = false;
+                            oConfig.Show();
+                        }
+                        catch
+                        {
+                        }
                     }
                     break;
             }
@@ -642,6 +471,12 @@ namespace uninfe
 
         private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (Empresa.Configuracoes.Count <= 0)
+            {
+                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             switch (ConfiguracaoAtiva())
             {
                 case -1:
@@ -666,7 +501,8 @@ namespace uninfe
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.booPodeFechar = true;
+            Auxiliar.EncerrarApp = true;
+
             this.Close();
         }
 
@@ -689,6 +525,22 @@ namespace uninfe
             }
         }
         #endregion
+
+        private void toolStripBtnUpdate_Click(object sender, EventArgs e)
+        {            
+            FormUpdate FormUp = new FormUpdate("iuninfe2.exe");
+            FormUp.MdiParent = this;
+            FormUp.MinimizeBox = false;
+            FormUp.Show();
+        }
+
+        private void tsbEmpresa_Click(object sender, EventArgs e)
+        {
+            FormEmpresa frmEmpresa = new FormEmpresa();
+            frmEmpresa.MdiParent = this;
+            frmEmpresa.MinimizeBox = false;
+            frmEmpresa.Show();
+        }
     }
     #endregion
 }

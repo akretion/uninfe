@@ -48,13 +48,45 @@ namespace UniNFeLibrary
         /// </summary>
         public const string Sit_ERR = "-sit.err";
         /// <summary>
+        /// Retorno da consulta do cadastro do contribuinte (-ret-cons-cad.xml)
+        /// </summary>
+        public const string ConsCad = "-ret-cons-cad.xml";
+        /// <summary>
+        /// Retorno da consulta do cadastro do contribuinte quando com erro (-ret-cons-cad.err)
+        /// </summary>
+        public const string ConsCad_ERR = "-ret-cons-cad.err";
+        /// <summary>
         /// Retorno da consulta do recibo do lote das nfe´s (-pro-rec.xml)
         /// </summary>
         public const string ProRec = "-pro-rec.xml";
         /// <summary>
+        /// Retorno da consulta do recibo do lote das nfe´s quando com erro (-pro-rec.err)
+        /// </summary>
+        public const string ProRec_ERR = "-pro-rec.err";
+        /// <summary>
         /// Retorno do status do serviço da nfe (-sta.xml)
         /// </summary>
         public const string Sta = "-sta.xml";
+        /// <summary>
+        /// Retorno do status do serviço da nfe quando com erro (-sta.err)
+        /// </summary>
+        public const string Sta_ERR = "-sta.err";
+        /// <summary>
+        /// Retorno do cancelamento da nfe quando com erro (-can.err)
+        /// </summary>
+        public const string Can_ERR = "-can.err";
+        /// <summary>
+        /// Retorno da inutilizacao de números de NFe quando com erro (-inu.err)
+        /// </summary>
+        public const string Inu_ERR = "-inu.err";
+        /// <summary>
+        /// Retorno da validação da NFe quando com erro (-nfe.err)
+        /// </summary>
+        public static string Nfe_ERR = "-nfe.err";
+        /// <summary>
+        /// Retorno do recibo no envio do lote de NFe quando com erro (-rec.err)
+        /// </summary>
+        public static string Rec_ERR = "-rec.err";
         /// <summary>
         /// XML de Distribuição da NFe (-procNFe.xml)
         /// </summary>

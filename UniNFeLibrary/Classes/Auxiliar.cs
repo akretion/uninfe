@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using System.IO;
 using UniNFeLibrary.Enums;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace UniNFeLibrary
 {
     public class Auxiliar
     {
+        #region Atributos
+        public static bool EncerrarApp = false;
+        /// <summary>
+        /// Lista das threads que estão sendo executadas e o Index da empresa da thread
+        /// </summary>
+        public static Dictionary<Thread, int> threads = new Dictionary<Thread, int>();
+        #endregion
+
         #region DeletarArquivo()
         /// <summary>
         /// Excluir arquivos do HD
@@ -118,6 +128,8 @@ namespace UniNFeLibrary
         /// <param name="ArqXMLPedido"></param>
         public void GerarChaveNFe(string ArqPedido, Boolean xml)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             // XML - pedido
             // Filename: XXXXXXXX-gerar-chave.xml
             // -------------------------------------------------------------------
@@ -159,12 +171,12 @@ namespace UniNFeLibrary
             // ERR - resposta
             // Filename: XXXXXXXX-gerar-chave.err
 
-            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
-            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-gerar-chave.err" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-gerar-chave.err");
+            string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
+            string ArqERRRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-gerar-chave.err" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-gerar-chave.err");
 
             this.DeletarArquivo(ArqXMLRetorno);
             this.DeletarArquivo(ArqERRRetorno);
-            this.DeletarArquivo(ConfiguracaoApp.vPastaXMLErro + "\\" + ArqPedido);
+            this.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + ArqPedido);
 
             try
             {
@@ -172,6 +184,7 @@ namespace UniNFeLibrary
                 {
                     throw new Exception("Arquivo " + ArqPedido + " não encontrado");
                 }
+
                 UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
 
                 if (!Auxiliar.FileInUse(ArqPedido))
@@ -179,7 +192,7 @@ namespace UniNFeLibrary
                     int serie = 0;
                     int nNF = 0;
                     int cNF = 0;
-                    int cUF = ConfiguracaoApp.UFCod;
+                    int cUF = Empresa.Configuracoes[emp].UFCod;
                     string cAAMM = "0000";
                     string cChave = "";
                     string cCNPJ = "";
@@ -249,6 +262,7 @@ namespace UniNFeLibrary
                                 }
                         }
                     }
+
                     if (nNF == 0)
                         cError = "Número da nota fiscal deve ser informado" + Environment.NewLine;
 
@@ -258,12 +272,8 @@ namespace UniNFeLibrary
                     if (string.IsNullOrEmpty(cCNPJ))
                         cError += "CNPJ deve ser informado" + Environment.NewLine;
 
-                    //System.Windows.Forms.MessageBox.Show(cAAMM);
-
                     if (cAAMM.Substring(0, 2) == "00")
                         cError += "Ano da emissão inválido" + Environment.NewLine;
-
-                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
 
                     if (Convert.ToInt32(cAAMM.Substring(2, 2)) <= 0 || Convert.ToInt32(cAAMM.Substring(2, 2)) > 12)
                         cError += "Mês da emissão inválido" + Environment.NewLine;
@@ -271,40 +281,34 @@ namespace UniNFeLibrary
                     if (cError != "")
                         throw new Exception(cError);
 
-                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
-
                     Int64 iTmp = Convert.ToInt64("0" + cCNPJ);
                     cChave = cUF.ToString("00") + cAAMM + iTmp.ToString("00000000000000") + "55";
-
-                    //System.Windows.Forms.MessageBox.Show(cChave);
 
                     if (cNF == 0)
                     {
                         ///
                         /// gera codigo aleatorio
                         /// 
-                        //System.Windows.Forms.MessageBox.Show("go cNF");
                         cNF = oUniTxtToXml.GerarCodigoNumerico(nNF);
-
-                        //System.Windows.Forms.MessageBox.Show(cNF.ToString());
                     }
+
                     ///
                     /// calcula do digito verificador
                     /// 
                     string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000");
                     int cDV = oUniTxtToXml.GerarDigito(ccChave);
+
                     ///
                     /// monta a chave da NFe
                     /// 
                     cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
-
-                    //System.Windows.Forms.MessageBox.Show(cChave + "\n\r" + cUF.ToString() + "\n\r" + nNF.ToString() + "\n\r" + cNF.ToString() + "\n\r" + serie.ToString() + "\n\r" + cCNPJ + "\n\r" + cAAMM);
 
                     ///
                     /// grava o XML/TXT de resposta
                     /// 
                     string vMsgRetorno = (xml ? "<?xml version=\"1.0\" encoding=\"UTF-8\"?><retGerarChave><chaveNFe>" + cChave + "</chaveNFe></retGerarChave>" : cChave);
                     File.WriteAllText(ArqXMLRetorno, vMsgRetorno, Encoding.Default);
+
                     ///
                     /// exclui o XML/TXT de pedido
                     /// 
@@ -327,14 +331,15 @@ namespace UniNFeLibrary
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name); 
             if (!string.IsNullOrEmpty(Arquivo))
             {
                 try
                 {
-                    if (ConfiguracaoApp.vPastaXMLRetorno != string.Empty)
+                    if (Empresa.Configuracoes[emp].PastaRetorno != string.Empty)
                     {
                         //Grava arquivo de ERRO para o ERP
-                        string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(Arquivo);
+                        string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Arquivo);
                         File.WriteAllText(cArqErro, Erro, Encoding.Default);
                     }
                 }
@@ -361,33 +366,19 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void GravarArqErroServico(string Arquivo, string FinalArqEnvio, string FinalArqErro, string Erro)
         {
-            //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
-            //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
-            //for gerado corretamente.
-            this.MoveArqErro(Arquivo);
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
 
-            //Grava arquivo de ERRO para o ERP
-            string cArqErro = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                              this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
-                              FinalArqErro;
+                //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
+                //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
+                //for gerado corretamente.
+                this.MoveArqErro(Arquivo);
 
-            File.WriteAllText(cArqErro, Erro, Encoding.Default);
-        }
-        #endregion
+                //Grava arquivo de ERRO para o ERP
+                string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
+                                  this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
+                                  FinalArqErro;
 
-        #region GravarArquivoParaEnvio
-        /// <summary>
-        /// grava um arquivo na pasta de envio
-        /// </summary>
-        /// <param name="Arquivo"></param>
-        /// <param name="Conteudo"></param>
-        public void GravarArquivoParaEnvio(string Arquivo, string Conteudo)
-        {
-            //Gravar o XML
-            MemoryStream oMemoryStream = Auxiliar.StringXmlToStream(Conteudo);
-            XmlDocument docProc = new XmlDocument();
-            docProc.Load(oMemoryStream);
-            docProc.Save(ConfiguracaoApp.vPastaXMLEnvio + "\\" + Path.GetFileName(Arquivo));
+                File.WriteAllText(cArqErro, Erro, Encoding.Default);
         }
         #endregion
 
@@ -403,6 +394,8 @@ namespace UniNFeLibrary
         /// <date>28/05/2009</date>
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
 
@@ -417,7 +410,7 @@ namespace UniNFeLibrary
             oSettings.OmitXmlDeclaration = false;
 
             //Agora vamos criar um XML Writer
-            XmlWriter oXmlGravar = XmlWriter.Create(ConfiguracaoApp.vPastaXMLRetorno + "\\" + ArquivoRetorno);
+            XmlWriter oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaRetorno + "\\" + ArquivoRetorno);
 
             //Agora vamos gravar os dados
             oXmlGravar.WriteStartDocument();
@@ -543,26 +536,28 @@ namespace UniNFeLibrary
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg, ".xml")</example>
         public void MoveArqErro(string Arquivo, string ExtensaoArq)
         {
-            if (File.Exists(Arquivo))
-            {
-                FileInfo oArquivo = new FileInfo(Arquivo);
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
 
-                if (Directory.Exists(ConfiguracaoApp.vPastaXMLErro) == true)
+                if (File.Exists(Arquivo))
                 {
-                    string vNomeArquivo = ConfiguracaoApp.vPastaXMLErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    FileInfo oArquivo = new FileInfo(Arquivo);
 
-                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
-                    if (File.Exists(vNomeArquivo))
-                        this.DeletarArquivo(vNomeArquivo);
+                    if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro) == true)
+                    {
+                        string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
-                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                    oArquivo.MoveTo(vNomeArquivo);
+                        //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
+                        if (File.Exists(vNomeArquivo))
+                            this.DeletarArquivo(vNomeArquivo);
+
+                        //Mover o arquivo da nota fiscal para a pasta do XML com erro
+                        oArquivo.MoveTo(vNomeArquivo);
+                    }
+                    else
+                    {
+                        oArquivo.Delete();
+                    }
                 }
-                else
-                {
-                    oArquivo.Delete();
-                }
-            }
         }
         #endregion
 
@@ -579,17 +574,26 @@ namespace UniNFeLibrary
         #endregion
 
         #region MoverArquivo()
+        /// <summary>
+        /// Move o arquivo de pasta
+        /// </summary>
+        /// <param name="Arquivo">Pasta e nome do arquivo a ser movido</param>
+        /// <param name="strDestinoArquivo">Pasta de destino do arquivo</param>
+        /// <remarks>
+        /// Autor: Wandrey
+        /// Data: 23/03/2010
+        /// </remarks>
         public void MoverArquivo(string Arquivo, string strDestinoArquivo)
         {
-            if (File.Exists(Arquivo))   //danasa 10-2009
-            {
-                //Mover o arquivo original para a pasta de destino
-                this.DeletarArquivo(strDestinoArquivo);
+                if (File.Exists(Arquivo))   //danasa 10-2009
+                {
+                    //Mover o arquivo original para a pasta de destino
+                    this.DeletarArquivo(strDestinoArquivo);
 
-                //Definir o arquivo que vai ser deletado ou movido para outra pasta
-                FileInfo oArquivo = new FileInfo(Arquivo);
-                oArquivo.MoveTo(strDestinoArquivo);
-            }
+                    //Definir o arquivo que vai ser deletado ou movido para outra pasta
+                    FileInfo oArquivo = new FileInfo(Arquivo);
+                    oArquivo.MoveTo(strDestinoArquivo);
+                }
         }
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
@@ -603,13 +607,15 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado, DateTime Emissao)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            
             try
             {
                 //Definir o arquivo que vai ser deletado ou movido para outra pasta
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                //Criar subpastas na pasta dos XML´s enviados
-                ConfiguracaoApp.CriarSubPastaEnviado();
+                //Criar subpastas da pasta dos XML´s enviados
+                Empresa.CriarSubPastaEnviado(emp);
 
                 //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
                 string strNomePastaEnviado = string.Empty;
@@ -617,17 +623,17 @@ namespace UniNFeLibrary
                 switch (SubPastaXMLEnviado)
                 {
                     case PastaEnviados.EmProcessamento:
-                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
+                        strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
                         strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
                         break;
 
                     case PastaEnviados.Autorizados:
-                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+                        strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
                         strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
                         goto default;
 
                     case PastaEnviados.Denegados:
-                        strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+                        strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
                         strDestinoArquivo = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, "-nfe.xml") + "-den.xml";
                         goto default;
 
@@ -642,6 +648,7 @@ namespace UniNFeLibrary
                 //Se conseguiu criar a pasta ele move o arquivo, caso contrário
                 if (Directory.Exists(strNomePastaEnviado) == true)
                 {
+                    #region Mover o XML para a pasta de XML´s enviados
                     //Mover o arquivo da nota fiscal para a pasta dos enviados
                     if (File.Exists(strDestinoArquivo))
                     {
@@ -649,24 +656,26 @@ namespace UniNFeLibrary
                         oArqDestino.Delete();
                     }
                     oArquivo.MoveTo(strDestinoArquivo);
+                    #endregion
 
                     if (SubPastaXMLEnviado == PastaEnviados.Autorizados || SubPastaXMLEnviado == PastaEnviados.Denegados)
                     {
+                        #region Copiar XML para a pasta de BACKUP
                         //Fazer um backup do XML que foi copiado para a pasta de enviados
                         //para uma outra pasta para termos uma maior segurança no arquivamento
                         //Normalmente esta pasta é em um outro computador ou HD
-                        if (ConfiguracaoApp.cPastaBackup.Trim() != "")
+                        if (Empresa.Configuracoes[emp].PastaBackup.Trim() != "")
                         {
                             //Criar Pasta do Mês para gravar arquivos enviados
                             string strNomePastaBackup = string.Empty;
                             switch (SubPastaXMLEnviado)
                             {
                                 case PastaEnviados.Autorizados:
-                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+                                    strNomePastaBackup = Empresa.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
                                     goto default;
 
                                 case PastaEnviados.Denegados:
-                                    strNomePastaBackup = ConfiguracaoApp.cPastaBackup + "\\" + PastaEnviados.Denegados + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+                                    strNomePastaBackup = Empresa.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
                                     goto default;
 
                                 default:
@@ -696,12 +705,60 @@ namespace UniNFeLibrary
                                 throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + strNomePastaBackup + ")");
                             }
                         }
+                        #endregion
+
+                        #region Copiar o XML para a pasta do DanfeMon, se configurado para isso
+                        this.CopiarXMLPastaDanfeMon(strDestinoArquivo);
+                        #endregion
                     }
                 }
                 else
                 {
                     throw new Exception("Pasta para arquivamento dos XML´s enviados não existe. (Pasta: " + strNomePastaEnviado + ")");
                 }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
+        #region CopiarXMLPastaDanfeMon()
+        /// <summary>
+        /// Copia o XML da NFe para a pasta monitorada pelo DANFEMon para que o mesmo imprima o DANFe.
+        /// A copia só é efetuada de o UniNFe estiver configurado para isso.
+        /// </summary>
+        /// <param name="arquivoCopiar">Nome do arquivo com as pastas e subpastas a ser copiado</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 20/04/2010
+        /// </remarks>
+        public void CopiarXMLPastaDanfeMon(string arquivoCopiar)
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            try
+            {
+                if (!string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDanfeMon))
+                {
+                    if (Directory.Exists(Empresa.Configuracoes[emp].PastaDanfeMon))
+                    {
+                        if ((arquivoCopiar.ToLower().Contains("-nfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonNFe) || (arquivoCopiar.ToLower().Contains("-procnfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe))
+                        {
+                            //Montar o nome do arquivo de destino
+                            string arqDestino = Empresa.Configuracoes[emp].PastaDanfeMon + "\\" + this.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
+
+                            //Copiar o arquivo para o destino
+                            FileInfo oArquivo = new FileInfo(arquivoCopiar);
+                            oArquivo.CopyTo(arqDestino, true);
+                        }
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
             }
             catch (Exception ex)
             {
@@ -736,12 +793,12 @@ namespace UniNFeLibrary
         // danasa 10-2009
         public void RenomearArquivo(string oldFileName, string newFileName)
         {
-            this.DeletarArquivo(newFileName);
-            if (File.Exists(oldFileName))
-            {
-                FileInfo oArquivo = new FileInfo(oldFileName);
-                oArquivo.MoveTo(newFileName);
-            }
+                this.DeletarArquivo(newFileName);
+                if (File.Exists(oldFileName))
+                {
+                    FileInfo oArquivo = new FileInfo(oldFileName);
+                    oArquivo.MoveTo(newFileName);
+                }
         }
         #endregion
 
@@ -807,6 +864,8 @@ namespace UniNFeLibrary
         /// <date>28/05/2009</date>
         public void ValidarAssinarXML(string Arquivo)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             Boolean Assinou = true;
             ValidarXMLs oValidador = new ValidarXMLs();
             oValidador.TipoArquivoXML(Arquivo);
@@ -818,7 +877,7 @@ namespace UniNFeLibrary
 
                 try
                 {
-                    oAD.Assinar(Arquivo, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
+                    oAD.Assinar(Arquivo, oValidador.TagAssinar, Empresa.Configuracoes[emp].X509Certificado);
 
                     if (oAD.intResultado != 0)
                     {
@@ -828,8 +887,8 @@ namespace UniNFeLibrary
                 catch (Exception ex)
                 {
                     Assinou = false;
-                    this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
-                    this.MoveArqErro(Arquivo);
+                        this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + ex.Message);
+                        this.MoveArqErro(Arquivo);
                 }
             }
 
@@ -847,12 +906,12 @@ namespace UniNFeLibrary
                     }
                     else
                     {
-                        if (!Directory.Exists(ConfiguracaoApp.PastaValidar + "\\Validado"))
+                        if (!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
                         {
-                            Directory.CreateDirectory(ConfiguracaoApp.PastaValidar + "\\Validado");
+                            Directory.CreateDirectory(Empresa.Configuracoes[emp].PastaValidar + "\\Validado");
                         }
 
-                        string ArquivoNovo = ConfiguracaoApp.PastaValidar + "\\Validado\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                        string ArquivoNovo = Empresa.Configuracoes[emp].PastaValidar + "\\Validado\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
 
                         if (File.Exists(ArquivoNovo))
                         {
@@ -872,403 +931,6 @@ namespace UniNFeLibrary
                     this.MoveArqErro(Arquivo);
                 }
             }
-        }
-        #endregion
-
-        #region VerStatusServico() e ConsultaCadastro()
-
-        /// <summary>
-        /// Verifica e retorna o Status do Servido da NFE. Para isso este método gera o arquivo XML necessário
-        /// para obter o status do serviõ e faz a leitura do XML de retorno, disponibilizando uma string com a mensagem
-        /// obtida.
-        /// </summary>
-        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
-        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public string VerStatusServico(string XmlNfeDadosMsg)
-        {
-            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.PedSta) +
-                      "-sta.xml";
-
-            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.PedSta) +
-                      "-sta.err";
-
-            string result = string.Empty;
-
-            try
-            {
-                result = (string)EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaStatusServico);
-            }
-            finally
-            {
-                this.DeletarArquivo(ArqERRRetorno);
-                this.DeletarArquivo(ArqXMLRetorno);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Função Callback que analisa a resposta do Status do Servido
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <by>Marcos Diez</by>
-        /// <date>30/8/2009</date>
-        /// <returns></returns>
-        private static string ProcessaStatusServico(string cArquivoXML)//XmlTextReader elem)
-        {
-            string rst = "Erro na leitura do XML " + cArquivoXML;
-            XmlTextReader elem = new XmlTextReader(cArquivoXML);
-            try
-            {
-                while (elem.Read())
-                {
-                    if (elem.NodeType == XmlNodeType.Element)
-                    {
-                        if (elem.Name == "xMotivo")
-                        {
-                            elem.Read();
-                            rst = elem.Value;
-                            break;
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                elem.Close();
-            }
-
-            return rst;
-        }
-
-        /// <summary>
-        /// VerConsultaCadastroClass
-        /// </summary>
-        /// <param name="XmlNfeDadosMsg"></param>
-        /// <returns></returns>
-        public object VerConsultaCadastroClass(string XmlNfeDadosMsg)
-        {
-            string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                       this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.ConsCad) +
-                       "-ret-cons-cad.xml";
-
-            string ArqERRRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
-                      this.ExtrairNomeArq(XmlNfeDadosMsg, ExtXml.ConsCad) +
-                      "-ret-cons-cad.err";
-
-            object vRetorno = null;
-            try
-            {
-                vRetorno = EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno, ProcessaConsultaCadastroClass);
-                //vRetorno = ProcessaConsultaCadastroClass(@"c:\usr\nfe\uninfe\modelos\retorno-cons-cad.txt");
-            }
-            finally
-            {
-                this.DeletarArquivo(ArqERRRetorno);
-                this.DeletarArquivo(ArqXMLRetorno);
-            }
-            return vRetorno;
-        }
-
-        private static DateTime getDateTime(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                return DateTime.MinValue;
-
-            int _ano = Convert.ToInt16(value.Substring(0, 4));
-            int _mes = Convert.ToInt16(value.Substring(5, 2));
-            int _dia = Convert.ToInt16(value.Substring(8, 2));
-            if (value.Contains("T") && value.Contains(":"))
-            {
-                int _hora = Convert.ToInt16(value.Substring(11, 2));
-                int _min = Convert.ToInt16(value.Substring(14, 2));
-                int _seg = Convert.ToInt16(value.Substring(17, 2));
-                return new DateTime(_ano, _mes, _dia, _hora, _min, _seg);
-            }
-            return new DateTime(_ano, _mes, _dia);
-        }
-
-        /// <summary>
-        /// utilizada pela GerarXML
-        /// </summary>
-        /// <param name="msXml"></param>
-        /// <returns></returns>
-        private static RetConsCad ProcessaConsultaCadastro(XmlDocument doc)
-        {
-            if (doc.GetElementsByTagName("infCad") == null)
-                return null;
-
-            RetConsCad vRetorno = new RetConsCad();
-
-            foreach (XmlNode node in doc.ChildNodes)
-            {
-                if (node.Name == "retConsCad")
-                {
-                    foreach (XmlNode noderetConsCad in node.ChildNodes)
-                    {
-                        if (noderetConsCad.Name == "infCons")
-                        {
-                            foreach (XmlNode nodeinfCons in noderetConsCad.ChildNodes)
-                            {
-                                if (nodeinfCons.Name == "infCad")
-                                {
-                                    vRetorno.infCad.Add(new infCad());
-                                    vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = vRetorno.CNPJ;
-                                    vRetorno.infCad[vRetorno.infCad.Count - 1].CPF = vRetorno.CPF;
-                                    vRetorno.infCad[vRetorno.infCad.Count - 1].IE = vRetorno.IE;
-                                    vRetorno.infCad[vRetorno.infCad.Count - 1].UF = vRetorno.UF;
-
-                                    foreach (XmlNode nodeinfCad in nodeinfCons.ChildNodes)
-                                    {
-                                        switch (nodeinfCad.Name)
-                                        {
-                                            case "UF":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].UF = nodeinfCad.InnerText;
-                                                break;
-                                            case "IE":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IE = nodeinfCad.InnerText;
-                                                break;
-                                            case "CNPJ":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
-                                                break;
-                                            case "CPF":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
-                                                break;
-                                            case "xNome":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = nodeinfCad.InnerText;
-                                                break;
-                                            case "xFant":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = nodeinfCad.InnerText;
-                                                break;
-
-                                            case "ender":
-                                                foreach (XmlNode nodeinfConsEnder in nodeinfCad.ChildNodes)
-                                                {
-                                                    switch (nodeinfConsEnder.Name)
-                                                    {
-                                                        case "xLgr":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xLgr = nodeinfConsEnder.InnerText;
-                                                            break;
-                                                        case "nro":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.nro = nodeinfConsEnder.InnerText;
-                                                            break;
-                                                        case "xCpl":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xCpl = nodeinfConsEnder.InnerText;
-                                                            break;
-                                                        case "xBairro":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xBairro = nodeinfConsEnder.InnerText;
-                                                            break;
-                                                        case "xMun":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xMun = nodeinfConsEnder.InnerText;
-                                                            break;
-                                                        case "cMun":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.cMun = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
-                                                            break;
-                                                        case "CEP":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.CEP = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
-                                                            break;
-                                                    }
-                                                }
-                                                break;
-
-                                            case "IEAtual":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IEAtual = nodeinfCad.InnerText;
-                                                break;
-                                            case "IEUnica":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IEUnica = nodeinfCad.InnerText;
-                                                break;
-                                            case "dBaixa":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dBaixa = getDateTime(nodeinfCad.InnerText);
-                                                break;
-                                            case "dUltSit":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dUltSit = getDateTime(nodeinfCad.InnerText);
-                                                break;
-                                            case "dIniAtiv":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dIniAtiv = getDateTime(nodeinfCad.InnerText);
-                                                break;
-                                            case "CNAE":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNAE = Convert.ToInt32("0" + nodeinfCad.InnerText);
-                                                break;
-                                            case "xRegApur":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xRegApur = nodeinfCad.InnerText;
-                                                break;
-                                            case "cSit":
-                                                if (nodeinfCad.InnerText == "0")
-                                                    vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte não habilitado";
-                                                else if (nodeinfCad.InnerText == "1")
-                                                    vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte habilitado";
-                                                break;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    switch (nodeinfCons.Name)
-                                    {
-                                        case "cStat":
-                                            vRetorno.cStat = Convert.ToInt32("0" + nodeinfCons.InnerText);
-                                            break;
-                                        case "xMotivo":
-                                            vRetorno.xMotivo = nodeinfCons.InnerText;
-                                            break;
-                                        case "UF":
-                                            vRetorno.UF = nodeinfCons.InnerText;
-                                            break;
-                                        case "IE":
-                                            vRetorno.IE = nodeinfCons.InnerText;
-                                            break;
-                                        case "CNPJ":
-                                            vRetorno.CNPJ = nodeinfCons.InnerText;
-                                            break;
-                                        case "CPF":
-                                            vRetorno.CPF = nodeinfCons.InnerText;
-                                            break;
-                                        case "dhCons":
-                                            vRetorno.dhCons = getDateTime(nodeinfCons.InnerText);
-                                            break;
-                                        case "cUF":
-                                            vRetorno.cUF = Convert.ToInt32("0" + nodeinfCons.InnerText);
-                                            break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return vRetorno;
-        }
-        public RetConsCad ProcessaConsultaCadastroClass(MemoryStream msXml)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(msXml);
-            return ProcessaConsultaCadastro(doc);
-        }
-        /// <summary>
-        /// Função Callback que analisa a resposta do Status do Servido
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <by>Marcos Diez</by>
-        /// <date>30/8/2009</date>
-        /// <returns></returns>
-        /// <summary>
-        /// utilizada internamente pela VerConsultaCadastroClass
-        /// </summary>
-        /// <param name="cArquivoXML"></param>
-        /// <returns></returns>
-        private static RetConsCad ProcessaConsultaCadastroClass(string cArquivoXML)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(cArquivoXML);
-            return ProcessaConsultaCadastro(doc);
-        }
-
-        /// <summary>
-        /// Escopo do CalBack de analise de resposta da EnviarArquivoEReceberResposta
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <returns></returns>
-        delegate object Processa(string cArquivoXML);
-
-        /// <summary>
-        /// Envia um arquivo para o webservice da NFE e recebe a resposta. 
-        /// </summary>
-        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
-        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2009</date>
-        private object EnviaArquivoERecebeResposta(string ArqXMLRetorno, string ArqERRRetorno, Processa processa)
-        {
-            object vStatus = "Ocorreu uma falha ao tentar obter a situação do serviço junto ao SEFAZ.\r\n\r\n"+
-                "O problema pode ter ocorrido por causa dos seguintes fatores:\r\n\r\n"+
-                "- Problema com o certificado digital\r\n"+
-                "- Necessidade de atualização da cadeia de certificados digitais\r\n"+
-                "- Falha de conexão com a internet\r\n"+
-                "- Falha nos servidores do SEFAZ\r\n\r\n"+
-                "Afirmamos que a produtora do software não se responsabiliza por decisões tomadas e/ou execuções realizadas com base nas informações acima.\r\n\r\n";
-            
-            DateTime startTime;
-            DateTime stopTime;
-            TimeSpan elapsedTime;
-
-            long elapsedMillieconds;
-            startTime = DateTime.Now;
-
-            while (true)
-            {
-                stopTime = DateTime.Now;
-                elapsedTime = stopTime.Subtract(startTime);
-                elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
-
-                if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minutos
-                {
-                    break;
-                }
-
-                if (File.Exists(ArqXMLRetorno))
-                {
-                    if (!Auxiliar.FileInUse(ArqXMLRetorno))
-                    {
-                        try
-                        {
-                            //Ler o status do serviço no XML retornado pelo WebService
-                            //XmlTextReader oLerXml = new XmlTextReader(ArqXMLRetorno);
-
-                            try
-                            {
-                                vStatus = processa(ArqXMLRetorno);// oLerXml);
-                            }
-                            catch (Exception ex)
-                            {
-                                vStatus = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
-                                break;
-                                //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
-                                //pode ser que o arquivo esteja em uso ainda.
-                            }
-
-                            //Detetar o arquivo de retorno
-                            try
-                            {
-                                FileInfo oArquivoDel = new FileInfo(ArqXMLRetorno);
-                                oArquivoDel.Delete();
-                                break;
-                            }
-                            catch
-                            {
-                                //Somente deixa fazer o loop novamente e tentar deletar
-                            }
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-                else if (File.Exists(ArqERRRetorno))
-                {
-                    //Retornou um arquivo com a extensão .ERR, ou seja, deu um erro,
-                    //futuramente tem que retornar esta mensagem para a MessageBox do usuário.
-
-                    //Detetar o arquivo de retorno
-                    try
-                    {
-                        vStatus += System.IO.File.ReadAllText(ArqERRRetorno, Encoding.Default);
-                        System.IO.File.Delete(ArqERRRetorno);
-                        break;
-                    }
-                    catch
-                    {
-                        //Somente deixa fazer o loop novamente e tentar deletar
-                    }
-                }
-                Thread.Sleep(3000);
-            }
-
-            //Retornar o status do serviço
-            return vStatus;
         }
         #endregion
 
@@ -1322,7 +984,9 @@ namespace UniNFeLibrary
         /// <returns>Se está na pasta de XML´s autorizados</returns>
         public bool EstaAutorizada(string Arquivo, DateTime Emissao, string Extensao)
         {
-            string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + Extensao);
         }
         #endregion
@@ -1336,7 +1000,8 @@ namespace UniNFeLibrary
         /// <returns>Se está na pasta de XML´s denegados</returns>
         public bool EstaDenegada(string Arquivo, DateTime Emissao)
         {
-            string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(Emissao);
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + "-den.xml");
         }
         #endregion
@@ -1353,24 +1018,313 @@ namespace UniNFeLibrary
         /// </remarks>
         public void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
-            if (ConfiguracaoApp.PastaExeUniDanfe != string.Empty && 
-                File.Exists(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe"))
+            if (Empresa.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
+                File.Exists(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
             {
-                string strNomePastaEnviado = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + ConfiguracaoApp.DiretorioSalvarComo.ToString(DataEmissaoNFe);
+                string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(DataEmissaoNFe);
                 string strArqProcNFe = strNomePastaEnviado + "\\" + this.ExtrairNomeArq(this.ExtrairNomeArq(NomeArqXMLNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe, ".xml") + ".xml";
 
                 if (File.Exists(strArqProcNFe))
                 {
                     string Args = "A=\"" + strArqProcNFe + "\"";
-                    if (ConfiguracaoApp.PastaConfigUniDanfe != string.Empty)
+                    if (Empresa.Configuracoes[emp].PastaConfigUniDanfe != string.Empty)
                     {
-                        Args += " PC=\"" + ConfiguracaoApp.PastaConfigUniDanfe + "\"";
+                        Args += " PC=\"" + Empresa.Configuracoes[emp].PastaConfigUniDanfe + "\"";
                     }
 
-                    System.Diagnostics.Process.Start(ConfiguracaoApp.PastaExeUniDanfe + "\\unidanfe.exe", Args);
+                    System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", Args);
                 }
             }
+        }
+        #endregion
+        #region CarregaEmpresa()
+        /// <summary>
+        /// Carrega as Emoresas que foram cadastradas e estão gravadas no XML
+        /// </summary>
+        /// <returns>Retorna uma ArrayList das empresas cadastradas</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 28/07/2010
+        /// </remarks>
+        public static ArrayList CarregaEmpresa()
+        {
+            ArrayList empresa = new ArrayList();
+
+            string arqXML = InfoApp.NomeArqEmpresa;
+
+            if (File.Exists(arqXML))
+            {
+                XmlTextReader oLerXml = null;
+                try
+                {
+                    //Carregar os dados do arquivo XML de configurações da Aplicação
+                    oLerXml = new XmlTextReader(arqXML);
+
+                    while (oLerXml.Read())
+                    {
+                        if (oLerXml.NodeType == XmlNodeType.Element)
+                        {
+                            if (oLerXml.Name.Equals("Registro"))
+                            {
+                                string cnpj = oLerXml.GetAttribute("CNPJ");
+
+                                while (oLerXml.Read())
+                                {
+                                    if (oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals("Nome"))
+                                    {
+                                        oLerXml.Read();
+                                        string nome = oLerXml.Value;
+                                        empresa.Add(new ComboElem(cnpj, 1, nome));
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                finally
+                {
+                    if (oLerXml != null)
+                        oLerXml.Close();
+                }
+            }
+
+            empresa.Sort(new OrdenacaoPorNome());
+
+            return empresa;
+        }
+        #endregion
+        #region getDateTime()
+        public static DateTime getDateTime(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return DateTime.MinValue;
+
+            int _ano = Convert.ToInt16(value.Substring(0, 4));
+            int _mes = Convert.ToInt16(value.Substring(5, 2));
+            int _dia = Convert.ToInt16(value.Substring(8, 2));
+            if (value.Contains("T") && value.Contains(":"))
+            {
+                int _hora = Convert.ToInt16(value.Substring(11, 2));
+                int _min = Convert.ToInt16(value.Substring(14, 2));
+                int _seg = Convert.ToInt16(value.Substring(17, 2));
+                return new DateTime(_ano, _mes, _dia, _hora, _min, _seg);
+            }
+            return new DateTime(_ano, _mes, _dia);
+        }
+        #endregion
+
+        #region OnlyNumbers
+        /// <summary>
+        /// Remove caracteres não-numéricos e retorna.
+        /// </summary>
+        /// <param name="text">valor a ser convertido</param>
+        /// <returns>somente números com decimais</returns>
+        public static object OnlyNumbers(object text)
+        {
+            bool flagNeg = false;
+
+            if (text == null || text.ToString().Length == 0) return 0;
+            string ret = "";
+
+            foreach (char c in text.ToString().ToCharArray())
+            {
+                if (c.Equals('.') == true || c.Equals(',') == true || char.IsNumber(c) == true)
+                    ret += c.ToString();
+                else if (c.Equals('-') == true)
+                    flagNeg = true;
+            }
+
+            if (flagNeg == true) ret = "-" + ret;
+
+            return ret;
+        }
+        #endregion
+
+        #region OnlyNumbers - Sobrecarga
+        /// <summary>
+        /// Remove caracteres não-numéricos e retorna.
+        /// </summary>
+        /// <param name="text">valor a ser convertido</param>
+        /// <param name="additionalChars">caracteres adicionais a serem removidos</param>
+        /// <returns>somente números com decimais</returns>
+        public static object OnlyNumbers(object text, string removeChars)
+        {
+            string ret = OnlyNumbers(text).ToString();
+
+            foreach (char c in removeChars.ToCharArray())
+            {
+                ret = ret.Replace(c.ToString(), "");
+            }
+
+            return ret;
+        }
+        #endregion
+
+        #region ConversaoNovaVersao()
+        /// <summary>
+        /// Conversões que são executadas quando atualizado o aplicativo.
+        /// Alguns ajustes que são necessários serem executados automaticamente
+        /// para evitar falhas no aplicativo
+        /// </summary>
+        public static void ConversaoNovaVersao()
+        {
+            #region Conversão referente a parte de Multi-Empresas
+            try
+            {
+                if (!File.Exists(InfoApp.NomeArqEmpresa) && File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqConfig))
+                {
+                    #region Localizar o CNPJ da empresa no certificado
+                    string certificado = string.Empty;
+
+                    var xmlDoc = new XmlDocument();
+                    xmlDoc.Load(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqConfig);
+                    var configList = xmlDoc.GetElementsByTagName("nfe_configuracoes");
+                    foreach (XmlNode configNode in configList)
+                    {
+                        var configElemento = (XmlElement)configNode;
+
+                        if (configElemento.GetElementsByTagName("CertificadoDigital")[0] != null)
+                            certificado = configElemento.GetElementsByTagName("CertificadoDigital")[0].InnerText;
+                    }
+                   
+                    string[] dados = certificado.Split(new char[] { ',', ':' });
+                    string cnpjEmpresa = string.Empty;
+                    string nomeEmpresa = "Digite o nome da empresa";
+                    foreach (string dado in dados)
+                    {
+                        if (CNPJ.Validate((string)Auxiliar.OnlyNumbers(dado)))
+                        {
+                            cnpjEmpresa = (string)Auxiliar.OnlyNumbers(dado);
+                        }
+
+                        if (dado.Substring(0, 3).Equals("CN="))
+                        {
+                            nomeEmpresa = dado.Substring(3, dado.Length - 3);
+                        }
+                    }
+
+                    if (cnpjEmpresa == string.Empty)
+                    {
+                        throw new Exception("Não foi possível localizar o CNPJ da empresa no certificado configurado, sendo assim as configurações do aplicativo deverão ser realizadas novamente.");
+                    }
+                    #endregion
+
+                    #region Criar o diretório das configurações da empresa
+                    string dirEmpresa = InfoApp.PastaExecutavel().Trim() + "\\" + cnpjEmpresa;
+                    if (!Directory.Exists(dirEmpresa))
+                        Directory.CreateDirectory(dirEmpresa);
+                    #endregion
+
+                    #region Copiar o arquivo de configurações para a pasta da empresa
+                    string arqConfigOrigem = InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqConfig;
+                    string arqConfigDestino = dirEmpresa + "\\" + InfoApp.NomeArqConfig;
+                    if (!File.Exists(arqConfigDestino))
+                    {
+                        File.Copy(arqConfigOrigem, arqConfigDestino);
+
+                        if (File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLote))
+                        {
+                            File.Copy(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLote, dirEmpresa + "\\" + InfoApp.NomeArqXmlLote, true);
+                            File.Delete(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLote);
+                        }
+
+                        if (File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp1))
+                        {
+                            File.Copy(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp1, dirEmpresa + "\\" + InfoApp.NomeArqXmlLoteBkp1, true);
+                            File.Delete(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp1);
+                        }
+
+                        if (File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp2))
+                        {
+                            File.Copy(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp2, dirEmpresa + "\\" + InfoApp.NomeArqXmlLoteBkp2, true);
+                            File.Delete(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp2);
+                        }
+
+                        if (File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp3))
+                        {
+                            File.Copy(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp3, dirEmpresa + "\\" + InfoApp.NomeArqXmlLoteBkp3, true);
+                            File.Delete(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlLoteBkp3);
+                        }
+
+                        if (File.Exists(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlFluxoNfe))
+                        {
+                            File.Copy(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlFluxoNfe, dirEmpresa + "\\" + InfoApp.NomeArqXmlFluxoNfe, true);
+                            File.Delete(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqXmlFluxoNfe);
+                        }
+                    }
+
+                    #endregion
+
+                    #region Criar o XML do cadastro de empresas
+                    XmlWriterSettings oSettings = new XmlWriterSettings();
+                    UTF8Encoding c = new UTF8Encoding(false);
+
+                    //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
+                    oSettings.Encoding = c;
+                    oSettings.Indent = true;
+                    oSettings.IndentChars = "";
+                    oSettings.NewLineOnAttributes = false;
+                    oSettings.OmitXmlDeclaration = false;
+
+                    try
+                    {
+                        //Agora vamos criar um XML Writer
+                        XmlWriter oXmlGravar = XmlWriter.Create(InfoApp.NomeArqEmpresa, oSettings);
+
+                        //Agora vamos gravar os dados
+                        oXmlGravar.WriteStartDocument();
+                        oXmlGravar.WriteStartElement("Empresa");
+
+                        try
+                        {
+                            //Abrir a tag <Registro>
+                            oXmlGravar.WriteStartElement("Registro");
+
+                            //Criar o atributo CNPJ dentro da tag Registro
+                            oXmlGravar.WriteStartAttribute("CNPJ");
+
+                            //Setar o conteúdo do atributo CNPJ
+                            oXmlGravar.WriteString(cnpjEmpresa.Trim());
+
+                            //Encerrar o atributo CNPJ
+                            oXmlGravar.WriteEndAttribute(); // Encerrar o atributo CNPJ
+
+                            //Criar a tag <Nome> com seu conteúdo </Nome>
+                            oXmlGravar.WriteElementString("Nome", nomeEmpresa.Trim());
+
+                            //Encerrar a tag </Registro>
+                            oXmlGravar.WriteEndElement();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Ocorreu um erro ao tentar gravar as empresas cadastradas.\r\n\r\nErro: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                        oXmlGravar.WriteEndElement(); //Encerrar o elemento Empresa
+                        oXmlGravar.WriteEndDocument();
+                        oXmlGravar.Flush();
+                        oXmlGravar.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocorreu um erro ao tentar gravar as empresas cadastradas.\r\n\r\nErro: " + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro na hora de converter o aplicativo para multiempresas.\r\n\r\nErro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            #endregion
         }
         #endregion
     }

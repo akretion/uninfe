@@ -38,16 +38,19 @@ namespace UniNFeLibrary
         /// </summary>
         protected abstract Servicos Servico { get; set; }
 
+        /// <summary>
+        /// Se o vXmlNFeDadosMsg é um XML
+        /// </summary>
+        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
+        {
+            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
+        }
         #endregion
 
         #region Métodos de execução dos serviços da NFE
 
         #region StatusServico()
         public abstract void StatusServico();
-        #endregion
-
-        #region StatusServico(int tpEmis, int cUF)
-        public abstract string StatusServico(int tpEmis, int cUF);
         #endregion
 
         #region Recepcao()
@@ -123,13 +126,15 @@ namespace UniNFeLibrary
         /// <date>03/04/2009</date>
         public Boolean AssinarValidarXMLNFe(string strPasta)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             Boolean bRetorna = false;
             Boolean bAssinado = this.Assinado(this.vXmlNfeDadosMsg);
             Boolean bValidadoSchema = false;
             Boolean bValidacaoGeral = false;
 
             //Criar Pasta dos XML´s a ser enviado em Lote já assinados
-            string strPastaLoteAssinado = strPasta + ConfiguracaoApp.NomePastaXMLAssinado;
+            string strPastaLoteAssinado = strPasta + InfoApp.NomePastaXMLAssinado;
 
             //Se o arquivo XML já existir na pasta de assinados, vou avisar o ERP que já tem um em andamento
             string strArqDestino = strPastaLoteAssinado + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
@@ -163,7 +168,7 @@ namespace UniNFeLibrary
                     }
 
                     //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                    oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                    oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
                     //Validações gerais
                     if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
@@ -179,7 +184,7 @@ namespace UniNFeLibrary
                         ValidarXMLs oValidador = new ValidarXMLs();
                         oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
 
-                        oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
+                        oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, Empresa.Configuracoes[emp].X509Certificado);
 
                         if (oAD.intResultado == 0)
                         {
@@ -302,27 +307,28 @@ namespace UniNFeLibrary
         /// <date>16/04/2009</date>
         protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, absLerXML.DadosNFeClass oDadosNFe)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             bool booValido = false;
             string cTextoErro = "";
 
-            //TODO: CONFIG
             try
             {
                 //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro 
                 //para o ERP
                 // danasa 8-2009
-                if ((ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
-                    (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
+                if ((Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
+                    (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
                 {
                     booValido = true;
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
+                else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
+                else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                 }
@@ -331,7 +337,7 @@ namespace UniNFeLibrary
                     booValido = false;
 
                     // danasa 8-2009
-                    if (ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
+                    if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
                     {
                         cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                             "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
@@ -339,7 +345,7 @@ namespace UniNFeLibrary
 
                     }
                     // danasa 8-2009
-                    else if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
+                    else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
                     {
                         cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
                             "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
@@ -471,10 +477,6 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoInut();
         #endregion
 
-        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
-        {
-            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
-        }
         #endregion
     }
     #endregion

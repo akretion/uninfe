@@ -5,11 +5,20 @@ using System.IO;
 using System.Xml;
 using UniNFeLibrary;
 using UniNFeLibrary.Enums;
+using System.Threading;
 
 namespace uninfe
 {
     public class GerarXML : absGerarXML
     {
+        #region Construtores
+        public GerarXML(int empIndex)
+            : base(empIndex)
+        {
+            EmpIndex = empIndex;
+        }
+        #endregion
+
         #region CabecMsg()
         /// <summary>
         /// Gera uma string com o XML do cabeçalho dos dados a serem enviados para os serviços da NFe
@@ -63,12 +72,22 @@ namespace uninfe
             aXML.AppendFormat("<chNFe>{0}</chNFe>", chNFe);
             aXML.AppendFormat("<nProt>{0}</nProt>", nProt);
             aXML.AppendFormat("<xJust>{0}</xJust>", xJust);
-            if (tpEmis != ConfiguracaoApp.tpEmis)
-                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
+            aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("</infCanc>");
             aXML.Append("</cancNFe>");
 
-            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+            try
+            {
+                GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -79,13 +98,12 @@ namespace uninfe
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             aXML.Append("<consSitNFe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLPedSit + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            if (ConfiguracaoApp.tpEmis != tpEmis)
-                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //<<< opcional >>>
+            aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //<<< opcional >>>
             aXML.Append("<xServ>CONSULTAR</xServ>");
             aXML.AppendFormat("<chNFe>{0}</chNFe>", chNFe);
             aXML.Append("</consSitNFe>");
 
-            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+            GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
         }
         #endregion
 
@@ -103,6 +121,8 @@ namespace uninfe
         /// <date>29/08/2009</date>
         public string ConsultaCadastro(string pArquivo, string uf, string cnpj, string ie, string cpf)
         {
+            int emp = EmpIndex;
+
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
                 "<ConsCad xmlns=\"" + ConfiguracaoApp.nsURI +
                 "\" versao=\"" + ConfiguracaoApp.VersaoXMLConsCad + "\"><infCons><xServ>CONS-CAD</xServ>";
@@ -132,9 +152,9 @@ namespace uninfe
 
             string _arquivo_saida = (string.IsNullOrEmpty(pArquivo) ? DateTime.Now.ToString("yyyyMMddThhmmss") + ExtXml.ConsCad : pArquivo);
 
-            oAux.GravarArquivoParaEnvio(_arquivo_saida, saida.ToString());
+            GravarArquivoParaEnvio(_arquivo_saida, saida.ToString());
 
-            return ConfiguracaoApp.vPastaXMLEnvio + "\\" + _arquivo_saida;
+            return Empresa.Configuracoes[emp].PastaEnvio + "\\" + _arquivo_saida;
         }
 
         /// <summary>
@@ -187,6 +207,7 @@ namespace uninfe
         //TODO: Documentar este método
         protected override void TXTRetorno(string pFinalArqEnvio, string pFinalArqRetorno, string ConteudoXMLRetorno)
         {
+            int emp = EmpIndex;
             string ConteudoRetorno = string.Empty;
 
             MemoryStream msXml = Auxiliar.StringXmlToStream(ConteudoXMLRetorno);
@@ -423,7 +444,7 @@ namespace uninfe
                             ///
                             /// Retorna o texto conforme o manual do Sefaz versao 3.0
                             /// 
-                            RetConsCad rconscad = oAux.ProcessaConsultaCadastroClass(msXml);
+                            RetConsCad rconscad = ProcessaConsultaCadastro(msXml);
                             if (rconscad != null)
                             {
                                 ConteudoRetorno = rconscad.cStat.ToString("000") + ";";
@@ -471,7 +492,7 @@ namespace uninfe
                 {
                     string TXTRetorno = string.Empty;
                     TXTRetorno = oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
-                    TXTRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" + oAux.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
+                    TXTRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
 
                     File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.Default);
                 }
@@ -534,8 +555,7 @@ namespace uninfe
             aXML.Append("<inutNFe xmlns=\"" + ConfiguracaoApp.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLInut + "\">");
             aXML.AppendFormat("<infInut Id=\"ID{0}{1}{2}{3}{4}{5}\">", cUF.ToString("00"), CNPJ, mod.ToString("00"), serie.ToString("000"), nNFIni.ToString("000000000"), nNFFin.ToString("000000000"));
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            if (tpEmis != ConfiguracaoApp.tpEmis)
-                aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
+            aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>INUTILIZAR</xServ>");
             aXML.AppendFormat("<cUF>{0}</cUF>", cUF.ToString("00"));
             aXML.AppendFormat("<ano>{0}</ano>", ano.ToString("00"));
@@ -548,7 +568,7 @@ namespace uninfe
             aXML.Append("</infInut>");
             aXML.Append("</inutNFe>");
 
-            oAux.GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
+            GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());
         }
         #endregion
 
@@ -556,7 +576,19 @@ namespace uninfe
         protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
         {
             LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
+
+            try
+            {
+                oLerXML.Nfe(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             return oLerXML.oDadosNfe;
         }
@@ -566,25 +598,21 @@ namespace uninfe
         protected override absLerXML.DadosRecClass LerXMLRecibo(string Arquivo)
         {
             LerXML oLerXML = new LerXML();
-            oLerXML.Recibo(Arquivo);
+
+            try
+            {
+                oLerXML.Recibo(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             return oLerXML.oDadosRec;
-        }
-        #endregion
-
-        #region StatusServico()
-        /// <summary>
-        /// Criar um arquivo XML com a estrutura necessária para consultar o status do serviço
-        /// </summary>
-        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
-        /// <example>
-        /// string vPastaArq = this.CriaArqXMLStatusServico();
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public override string StatusServico(int tpEmis)
-        {
-            return this.StatusServico(tpEmis, ConfiguracaoApp.UFCod);
         }
         #endregion
 
@@ -595,13 +623,13 @@ namespace uninfe
         /// <param name="tpEmis"></param>
         /// <param name="cUF"></param>
         /// <returns></returns>
-        public override string StatusServico(int tpEmis, int cUF)
+        public override string StatusServico(int tpEmis, int cUF, int amb)
         {
             string _arquivo_saida = DateTime.Now.ToString("yyyyMMddThhmmss") + ExtXml.PedSta;
 
-            this.StatusServico(_arquivo_saida, ConfiguracaoApp.tpAmb, tpEmis, cUF);
+            this.StatusServico(_arquivo_saida, amb, tpEmis, cUF);
 
-            return ConfiguracaoApp.vPastaXMLEnvio + "\\" + _arquivo_saida;
+            return _arquivo_saida;
         }
         #endregion
 
@@ -617,17 +645,25 @@ namespace uninfe
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
-            vDadosMsg.Append("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"" + ConfiguracaoApp.VersaoXMLStatusServico);
-            vDadosMsg.Append("\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">");
+            vDadosMsg.Append("<consStatServ versao=\"" + ConfiguracaoApp.VersaoXMLStatusServico + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
-            if (ConfiguracaoApp.tpEmis != tpEmis)
-                vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  //danasa 9-2009
+            vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);  
             vDadosMsg.Append("<xServ>STATUS</xServ>");
             vDadosMsg.Append("</consStatServ>");
 
-            oAux.GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());
+            try
+            {
+                GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -641,6 +677,7 @@ namespace uninfe
         /// <date>21/04/2009</date>
         public override void XmlDistInut(string strArqInut, string strRetInutNFe)
         {
+            int emp = EmpIndex;
             StreamWriter swProc = null;
 
             try
@@ -656,13 +693,13 @@ namespace uninfe
 
                 //Montar o XML -procCancNFe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
-                    "<procInutNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.07\">" +
+                    "<procInutNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + ConfiguracaoApp.VersaoXMLInut + "\">" +
                     strInutNFe +
                     strRetInutNFe +
                     "</procInutNFe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                 PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                 oAux.ExtrairNomeArq(strArqInut, ExtXml.PedInu/*"-ped-inu.xml"*/) +
                                                 ExtXmlRet.ProcInutNFe;// "-procInutNFe.xml";
@@ -696,6 +733,7 @@ namespace uninfe
         /// <date>21/04/2009</date>
         public override void XmlDistCanc(string strArqCanc, string strRetCancNFe)
         {
+            int emp = EmpIndex;
             StreamWriter swProc = null;
 
             try
@@ -711,13 +749,13 @@ namespace uninfe
 
                 //Montar o XML -procCancNFe.xml
                 string strXmlProcCancNfe = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
-                    "<procCancNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.07\">" +
+                    "<procCancNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + ConfiguracaoApp.VersaoXMLCanc + "\">" +
                     strCancNFe +
                     strRetCancNFe +
                     "</procCancNFe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                string strNomeArqProcCancNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                 PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                 oAux.ExtrairNomeArq(strArqCanc, ExtXml.PedCan/*"-ped-can.xml"*/) +
                                                 ExtXmlRet.ProcCancNFe;// "-procCancNFe.xml";
@@ -749,19 +787,20 @@ namespace uninfe
         /// <date>21/04/2009</date>
         public override void XmlPedRec(string strRecibo)
         {
-            string strNomeArqPedRec = ConfiguracaoApp.vPastaXMLEnvio + "\\" + strRecibo + ExtXml.PedRec;
+            int emp = EmpIndex;
+            string strNomeArqPedRec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + strRecibo + ExtXml.PedRec;
             if (!File.Exists(strNomeArqPedRec))
             {
 
                 string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                     "<consReciNFe xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
                     "versao=\"" + ConfiguracaoApp.VersaoXMLPedRec + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">" +
-                    "<tpAmb>" + ConfiguracaoApp.tpAmb.ToString() + "</tpAmb>" +
+                    "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                     "<nRec>" + strRecibo + "</nRec>" +
                     "</consReciNFe>";
 
                 //Gravar o XML
-                oAux.GravarArquivoParaEnvio(strNomeArqPedRec, strXml);
+                GravarArquivoParaEnvio(strNomeArqPedRec, strXml);
             }
         }
         #endregion
@@ -776,6 +815,7 @@ namespace uninfe
         /// <date>20/04/2009</date>
         public override void XmlDistNFe(string strArqNFe, string strProtNfe)
         {
+            int emp = EmpIndex;
             StreamWriter swProc = null;
 
             try
@@ -793,13 +833,13 @@ namespace uninfe
 
                     //Montar a string contendo o XML -proc-NFe.xml
                     string strXmlProcNfe = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
-                        "<nfeProc xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.10\">" +
+                        "<nfeProc xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + ConfiguracaoApp.VersaoXMLNFe + "\">" +
                         strNFe +
                         strProtNfe +
                         "</nfeProc>";
 
                     //Montar o nome do arquivo -proc-NFe.xml
-                    string strNomeArqProcNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                    string strNomeArqProcNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                 PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                 oAux.ExtrairNomeArq(strArqNFe, ExtXml.Nfe) +
                                                 ExtXmlRet.ProcNFe;

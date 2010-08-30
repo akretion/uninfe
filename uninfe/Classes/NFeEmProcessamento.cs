@@ -19,17 +19,19 @@ namespace uninfe
 
         public NFeEmProcessamento()
         {
-            if (ConfiguracaoApp.dUltimaAtualizacaoEmProcessamento.Year > 1)
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            if (Empresa.Configuracoes[emp].UltimaVerificacaoEmProcessamento.Year > 1)
             {
                 ///
                 /// executa de 10x10 minutos para evitar ter que acessar o HD sem necessidade
                 /// 
-                DateTime dCheck = ConfiguracaoApp.dUltimaAtualizacaoEmProcessamento.AddMinutes(_Minutos);
+                DateTime dCheck = Empresa.Configuracoes[emp].UltimaVerificacaoEmProcessamento.AddMinutes(_Minutos);
                 if (dCheck > DateTime.Now)
                     return;
             }
 
-            ConfiguracaoApp.dUltimaAtualizacaoEmProcessamento = DateTime.Now;
+            Empresa.Configuracoes[emp].UltimaVerificacaoEmProcessamento = DateTime.Now;
             this.oAux = new Auxiliar();
 
             try
@@ -37,7 +39,7 @@ namespace uninfe
                 ///
                 /// le todos os arquivos que estão na pasta em processamento
                 /// 
-                string[] files = Directory.GetFiles(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
+                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
                                                 "*" + ExtXml.Nfe,
                                                 SearchOption.TopDirectoryOnly);
                 ///
@@ -57,7 +59,7 @@ namespace uninfe
                             if (this.oLerXml == null)
                             {
                                 this.oLerXml = new LerXML();
-                                this.oGerarXml = new GerarXML();
+                                this.oGerarXml = new GerarXML(emp);
                                 this.fluxo = new FluxoNfe();
                             }
 
@@ -96,7 +98,7 @@ namespace uninfe
                                     oAux.MoveArqErro(file);
 
                                     //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
-                                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(file, ExtXml.Nfe) + ExtXmlRet.ProcNFe);
+                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(file, ExtXml.Nfe) + ExtXmlRet.ProcNFe);
 
                                     //Tirar a nota fiscal do fluxo
                                     fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
@@ -107,7 +109,7 @@ namespace uninfe
                                 ///
                                 /// grava o arquivo com extensao .ERR 
                                 /// 
-                                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(file) + ".err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(file) + ".err", ex.Message);
                             }
                         }
                     }
@@ -118,7 +120,7 @@ namespace uninfe
                 ///
                 /// grava o arquivo generico 
                 /// 
-                oAux.GravarArqErroERP(string.Format(InfoApp.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddThhmmss")), (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                oAux.GravarArqErroERP(string.Format(InfoApp.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddThhmmss")), ex.Message);
             }
         }
     }

@@ -7,7 +7,9 @@ namespace UniNFeLibrary
     public enum ErroPadrao
     {
         ErroNaoDetectado = 0,
-        FalhaInternet = 1
+        FalhaInternet = 1,
+        FalhaEnvioXmlWS = 2,
+        CertificadoVencido = 3
     }
 
     class MsgErro
@@ -25,10 +27,17 @@ namespace UniNFeLibrary
             {
                 case ErroPadrao.ErroNaoDetectado:
                     goto default;
-                    break;
 
                 case ErroPadrao.FalhaInternet:
                     Mensagem = "Sem conexão com a internet.";
+                    break;
+
+                case ErroPadrao.FalhaEnvioXmlWS:
+                    Mensagem = "Não foi possível recuperar o número do recibo retornado pelo sefaz, pois ocorreu uma falha no exato momento que o XML foi enviado. Esta falha pode ter sido ocasionada por falha na internet ou erro no servidor do SEFAZ. Não tendo o número do recibo, a única forma de finalizar a nota fiscal é através da consulta situação da NF-e (-ped-sit.xml).";
+                    break;
+
+                case ErroPadrao.CertificadoVencido:
+                    Mensagem = "Validade do certificado digital está vencida.";
                     break;
 
                 default:

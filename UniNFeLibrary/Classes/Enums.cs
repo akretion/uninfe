@@ -89,7 +89,11 @@ namespace UniNFeLibrary.Enums
         /// <summary>
         /// Efetua verificações nas notas em processamento para evitar algumas falhas e perder retornos de autorização de notas
         /// </summary>
-        EmProcessamento
+        EmProcessamento,
+        /// <summary>
+        /// Efetua uma limpeza das pastas que recebem arquivos temporários
+        /// </summary>
+        LimpezaTemporario
     }
     #endregion
 

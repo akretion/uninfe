@@ -31,11 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.tsbEmpresa = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_StatusServicoNfe = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel_NomeEmpresa = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,16 +57,27 @@
             // 
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbEmpresa,
             this.toolStripButton_config,
             this.toolStripButton_StatusServicoNfe,
-            this.toolStripButton_sobre,
             this.toolStripButton_validarxml,
-            this.toolStripLabel_NomeEmpresa});
+            this.toolStripButton_sobre,
+            this.toolStripBtnUpdate});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
+            // 
+            // tsbEmpresa
+            // 
+            this.tsbEmpresa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbEmpresa.Image = global::uninfe.Properties.Resources.windows_view_detail_48x48;
+            this.tsbEmpresa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEmpresa.Name = "tsbEmpresa";
+            this.tsbEmpresa.Size = new System.Drawing.Size(52, 52);
+            this.tsbEmpresa.Text = "Cadastro de empresas";
+            this.tsbEmpresa.Click += new System.EventHandler(this.tsbEmpresa_Click);
             // 
             // toolStripButton_config
             // 
@@ -89,6 +101,17 @@
             this.toolStripButton_StatusServicoNfe.ToolTipText = "Consultar Situação do Servidor e Cadastro de Contribuinte";
             this.toolStripButton_StatusServicoNfe.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // toolStripButton_validarxml
+            // 
+            this.toolStripButton_validarxml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_validarxml.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_validarxml.Image")));
+            this.toolStripButton_validarxml.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_validarxml.Name = "toolStripButton_validarxml";
+            this.toolStripButton_validarxml.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButton_validarxml.Text = "toolStripButton_validarxml";
+            this.toolStripButton_validarxml.ToolTipText = "Validar arquivos XML";
+            this.toolStripButton_validarxml.Click += new System.EventHandler(this.toolStripButton_validarxml_Click);
+            // 
             // toolStripButton_sobre
             // 
             this.toolStripButton_sobre.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -101,24 +124,17 @@
             this.toolStripButton_sobre.ToolTipText = "Sobre o UniNFe";
             this.toolStripButton_sobre.Click += new System.EventHandler(this.toolStripButton_sobre_Click);
             // 
-            // toolStripButton_validarxml
+            // toolStripBtnUpdate
             // 
-            this.toolStripButton_validarxml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_validarxml.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_validarxml.Image")));
-            this.toolStripButton_validarxml.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_validarxml.Name = "toolStripButton_validarxml";
-            this.toolStripButton_validarxml.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButton_validarxml.Text = "toolStripButton_validarxml";
-            this.toolStripButton_validarxml.ToolTipText = "Validar arquivos XML";
-            this.toolStripButton_validarxml.Click += new System.EventHandler(this.toolStripButton_validarxml_Click);
-            // 
-            // toolStripLabel_NomeEmpresa
-            // 
-            this.toolStripLabel_NomeEmpresa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel_NomeEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.toolStripLabel_NomeEmpresa.Name = "toolStripLabel_NomeEmpresa";
-            this.toolStripLabel_NomeEmpresa.Size = new System.Drawing.Size(90, 52);
-            this.toolStripLabel_NomeEmpresa.Text = "toolStripLabel1";
+            this.toolStripBtnUpdate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripBtnUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnUpdate.Image = global::uninfe.Properties.Resources.update48x48;
+            this.toolStripBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnUpdate.Name = "toolStripBtnUpdate";
+            this.toolStripBtnUpdate.Size = new System.Drawing.Size(52, 52);
+            this.toolStripBtnUpdate.Text = "toolStripButton1";
+            this.toolStripBtnUpdate.ToolTipText = "Atualizar o aplicativo";
+            this.toolStripBtnUpdate.Click += new System.EventHandler(this.toolStripBtnUpdate_Click);
             // 
             // notifyIcon1
             // 
@@ -144,69 +160,69 @@
             this.toolStripSeparator1,
             this.sairToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(355, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(381, 176);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(354, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(380, 22);
             this.toolStripMenuItem1.Text = "Abrir UniNFe";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(351, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(377, 6);
             // 
             // cmConsultaCadastroServico
             // 
             this.cmConsultaCadastroServico.Name = "cmConsultaCadastroServico";
-            this.cmConsultaCadastroServico.Size = new System.Drawing.Size(354, 22);
+            this.cmConsultaCadastroServico.Size = new System.Drawing.Size(380, 22);
             this.cmConsultaCadastroServico.Text = "Consultar situação dos serviços e cadastro de contribuinte";
             this.cmConsultaCadastroServico.Click += new System.EventHandler(this.cmConsultaCadastroServico_Click);
             // 
             // configuraçõesToolStripMenuItem1
             // 
             this.configuraçõesToolStripMenuItem1.Name = "configuraçõesToolStripMenuItem1";
-            this.configuraçõesToolStripMenuItem1.Size = new System.Drawing.Size(354, 22);
+            this.configuraçõesToolStripMenuItem1.Size = new System.Drawing.Size(380, 22);
             this.configuraçõesToolStripMenuItem1.Text = "Configurações";
             this.configuraçõesToolStripMenuItem1.Click += new System.EventHandler(this.configuraçõesToolStripMenuItem1_Click);
             // 
             // vaToolStripMenuItem
             // 
             this.vaToolStripMenuItem.Name = "vaToolStripMenuItem";
-            this.vaToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.vaToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.vaToolStripMenuItem.Text = "Validar arquivos XML";
             this.vaToolStripMenuItem.Click += new System.EventHandler(this.vaToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(351, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(377, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(354, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(380, 22);
             this.toolStripMenuItem2.Text = "Manual do UniNFe";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // sobreOUniNFeToolStripMenuItem
             // 
             this.sobreOUniNFeToolStripMenuItem.Name = "sobreOUniNFeToolStripMenuItem";
-            this.sobreOUniNFeToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.sobreOUniNFeToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.sobreOUniNFeToolStripMenuItem.Text = "Sobre o UniNFe";
             this.sobreOUniNFeToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton_sobre_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(351, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(377, 6);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.sairToolStripMenuItem.Text = "Fechar o UniNFe";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -238,7 +254,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_StatusServicoNfe;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ToolStripButton toolStripButton_sobre;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel_NomeEmpresa;
         private System.Windows.Forms.ToolStripButton toolStripButton_validarxml;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cmConsultaCadastroServico;
@@ -251,6 +266,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripButton toolStripBtnUpdate;
+        private System.Windows.Forms.ToolStripButton tsbEmpresa;
     }
 }
 

@@ -6,6 +6,8 @@ using System.IO;
 using System.Reflection;
 using UniNFeLibrary;
 using UniNFeLibrary.Enums;
+using System.Xml;
+using System.Windows.Forms;
 
 namespace uninfe
 {
@@ -22,13 +24,26 @@ namespace uninfe
         /// Procurar os arquivos XML´s a serem enviados aos web-services ou para ser executado alguma rotina
         /// </summary>
         /// <param name="pTipoArq">Mascara dos arquivos as serem pesquisados. Ex: *.xml   *-nfe.xml</param>
-        public override void BuscaXML(Object srvServico)
+        public override void BuscaXML(object parametroThread)
         {
+            ParametroThread param = (ParametroThread)parametroThread;
+
             ServicoNFe oNfe = new ServicoNFe();
+
+            //Criar XML de controle de fluxo de envios de Notas Fiscais
+            FluxoNfe oFluxoNfe = new FluxoNfe();
+            try
+            {
+                oFluxoNfe.CriarXml(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao tentar criar o XML para o controle do fuxo do envio dos documentos eletrônicos.\r\n\r\nErro:" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             while (true)
             {
-                this.ProcessaXML(oNfe, (Servicos)srvServico);
+                this.ProcessaXML(oNfe, param.Servico);
 
                 Thread.Sleep(1000); //Pausa na Thread de 1000 milissegundos ou 1 segundo
             }
@@ -43,6 +58,7 @@ namespace uninfe
         /// <date>03/069/2009</date>
         protected override void ConvTXT(string vPasta)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
             Auxiliar oAux = new Auxiliar();
 
             List<string> lstArquivos = this.ArquivosPasta(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/, "*-nfe.txt");
@@ -61,13 +77,13 @@ namespace uninfe
                     ///
                     /// exclui o arquivo de erro
                     /// 
-                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension));
-                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + "-nfe-ret.xml"));
-                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLErro + "\\" + Path.GetFileName(lstArquivos[i]));
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension));
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + "-nfe-ret.xml"));
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Path.GetFileName(lstArquivos[i]));
                     ///
                     /// exclui o arquivo TXT original
                     /// 
-                    oAux.DeletarArquivo(ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt");
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt");
 
                     ///
                     /// processa a conversão
@@ -93,9 +109,9 @@ namespace uninfe
                             /// salva o arquivo texto original
                             ///
                             FileInfo otxtArquivo = new FileInfo(lstArquivos[i]);
-                            if (vPasta.Equals(ConfiguracaoApp.vPastaXMLEnvio))
+                            if (vPasta.Equals(Empresa.Configuracoes[emp].PastaEnvio))
                             {
-                                string vvNomeArquivoDestino = ConfiguracaoApp.vPastaXMLRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt";
+                                string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt";
                                 otxtArquivo.MoveTo(vvNomeArquivoDestino);
                             }
                             ccExtension = "-nfe.txt";
@@ -145,7 +161,7 @@ namespace uninfe
                 }
                 catch (Exception ex)
                 {
-                    ccMessage = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    ccMessage = ex.Message;
                     ccExtension = "-nfe.err";
                 }
 
@@ -173,11 +189,13 @@ namespace uninfe
         #region GerarChaveNFe
         protected override void GerarChaveNFe()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             Auxiliar oAux = new Auxiliar();
             ///
             /// processa arquivos XML
             /// 
-            List<string> lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.GerarChaveNFe_XML);
+            List<string> lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.GerarChaveNFe_XML);
             foreach (string ArqXMLPedido in lstArquivos)
             {
                 oAux.GerarChaveNFe(ArqXMLPedido, true);
@@ -185,7 +203,7 @@ namespace uninfe
             ///
             /// processa arquivos TXT
             /// 
-            lstArquivos = this.ArquivosPasta(ConfiguracaoApp.vPastaXMLEnvio, "*" + ExtXml.GerarChaveNFe_TXT);
+            lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.GerarChaveNFe_TXT);
             foreach (string ArqXMLPedido in lstArquivos)
             {
                 oAux.GerarChaveNFe(ArqXMLPedido, false);
@@ -205,7 +223,19 @@ namespace uninfe
         protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
         {
             LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
+
+            try
+            {
+                oLerXML.Nfe(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             return oLerXML.oDadosNfe;
         }

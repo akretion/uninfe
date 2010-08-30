@@ -3914,6 +3914,7 @@
     <None Include="Resources\pdf1.png" />
     <None Include="Resources\pdf2.png" />
     <None Include="Resources\pdf3.png" />
+    <None Include="Resources\windows_view_detail 48x48.png" />
     <Content Include="uninfe.ico" />
     <None Include="Web References\wsMGHConsultaCadastro\CadConsultaCadastro.wsdl" />
     <None Include="Web References\wsMGHConsultaCadastro\Reference.map">

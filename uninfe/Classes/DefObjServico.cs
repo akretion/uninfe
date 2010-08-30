@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UniNFeLibrary;
+using System.Threading;
 
 namespace uninfe
 {
@@ -298,6 +299,8 @@ namespace uninfe
         /// <date>01/07/2008</date>
         public void Inutilizacao(ref object pServico, ref object pCabecMsg, ParametroEnvioXML oParam)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             if (oParam/*ConfiguracaoApp*/.tpAmb == TipoAmbiente.taProducao)
             {
                 if (oParam/*ConfiguracaoApp*/.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
@@ -335,9 +338,9 @@ namespace uninfe
                         case 14: pServico = new wsVRPInutilizacao.NfeInutilizacao(); break;
                     }
             }
-            else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao)
+            else if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taHomologacao)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
+                if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHInutilizacao.NfeInutilizacao(); } //Contingência SCAN Ambiente Nascional
                 else
                     switch (oParam/*ConfiguracaoApp*/.UFCod)
                     {
@@ -402,11 +405,12 @@ namespace uninfe
         /// <date>17/06/2008</date>
         public void Recepcao(ref object pServico, ref object pCabecMsg)
         {
-            //TODO: CONFIG
-            if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
-                else switch (ConfiguracaoApp.UFCod)
+                if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                else switch (Empresa.Configuracoes[emp].UFCod)
                     {
                         case 51: pServico = new wsMTPRecepcao.NfeRecepcao(); break;
                         case 43: pServico = new wsRSPRecepcao.NfeRecepcao(); break;
@@ -439,11 +443,11 @@ namespace uninfe
                         case 14: pServico = new wsVRPRecepcao.NfeRecepcao(); break;
                     }
             }
-            else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
+            else if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRecepcao.NfeRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else
-                    switch (ConfiguracaoApp.UFCod)
+                    switch (Empresa.Configuracoes[emp].UFCod)
                     {
                         case 51: pServico = new wsMTHRecepcao.NfeRecepcao(); break;
                         case 43: pServico = new wsRSHRecepcao.NfeRecepcao(); break;
@@ -507,12 +511,13 @@ namespace uninfe
         /// <date>17/06/2008</date>
         public void RetRecepcao(ref object pServico, ref object pCabecMsg)
         {
-            //TODO: CONFIG
-            if (ConfiguracaoApp.tpAmb == TipoAmbiente.taProducao/*1*/)
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taProducao/*1*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANPRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else
-                    switch (ConfiguracaoApp.UFCod)
+                    switch (Empresa.Configuracoes[emp].UFCod)
                     {
                         case 51: pServico = new wsMTPRetRecepcao.NfeRetRecepcao(); break;
                         case 43: pServico = new wsRSPRetRecepcao.NfeRetRecepcao(); break;
@@ -545,11 +550,11 @@ namespace uninfe
                         case 14: pServico = new wsVRPRetRecepcao.NfeRetRecepcao(); break;
                     }
             }
-            else if (ConfiguracaoApp.tpAmb == TipoAmbiente.taHomologacao/*2*/)
+            else if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taHomologacao/*2*/)
             {
-                if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
+                if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN) { pServico = new wsSCANHRetRecepcao.NfeRetRecepcao(); } //Contingência SCAN Ambiente Nascional
                 else
-                    switch (ConfiguracaoApp.UFCod)
+                    switch (Empresa.Configuracoes[emp].UFCod)
                     {
                         case 51: pServico = new wsMTHRetRecepcao.NfeRetRecepcao(); break;
                         case 43: pServico = new wsRSHRetRecepcao.NfeRetRecepcao(); break;

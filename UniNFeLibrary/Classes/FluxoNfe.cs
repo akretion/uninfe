@@ -14,6 +14,14 @@ namespace UniNFeLibrary
     /// </summary>
     public class FluxoNfe
     {
+        #region Construtores
+        public FluxoNfe()
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
+        }
+        #endregion
+
         #region Enumeradores
 
         #region ElementoEditavel
@@ -69,11 +77,11 @@ namespace UniNFeLibrary
 
         #endregion
 
-        #region Constantes
+        #region Propriedades
         /// <summary>
         /// Nome do arquivo XML onde é gravado o controle do fluxo
         /// </summary>
-        private /*const*/ string strNomeXmlControleFluxo = InfoApp.PastaExecutavel() + "\\fluxonfe.xml";
+        private string NomeXmlControleFluxo { get; set; }
         #endregion
 
         #region métodos gerais
@@ -81,7 +89,14 @@ namespace UniNFeLibrary
         #region CriarXml()
         public void CriarXml()
         {
-            this.CriarXml(false);
+            try
+            {
+                this.CriarXml(false);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -97,7 +112,6 @@ namespace UniNFeLibrary
             XmlWriter xtw = null; // criar instância para xmltextwriter. 
             try
             {
-                //TODO: 1-Tenho que analisar se esta parte abaixo é realmente seguro ou não vai gerar mais problemas
                 #region Testar para ver se o XML não tá danificado, ou seja, sem as tag´s iniciais, se tiver força recriar ele
                 bool ForcarCriar = false;
                 if (VerificaEstruturaXml)
@@ -106,12 +120,12 @@ namespace UniNFeLibrary
                     FileStream fsArquivo = null;
                     try
                     {
-                        fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                        fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
 
-                        if (File.Exists(strNomeXmlControleFluxo))
+                        if (File.Exists(NomeXmlControleFluxo))
                         {
                             doc = new XmlDocument();
-                            doc.Load(strNomeXmlControleFluxo);
+                            doc.Load(NomeXmlControleFluxo);
                         }
                     }
                     catch (Exception ex)
@@ -134,7 +148,7 @@ namespace UniNFeLibrary
                 }
                 #endregion
 
-                if (!File.Exists(strNomeXmlControleFluxo) || ForcarCriar)
+                if (!File.Exists(NomeXmlControleFluxo) || ForcarCriar)
                 {
                     XmlWriterSettings oSettings = new XmlWriterSettings();
                     UTF8Encoding c = new UTF8Encoding(false);
@@ -145,7 +159,7 @@ namespace UniNFeLibrary
                     oSettings.NewLineOnAttributes = false;
                     oSettings.OmitXmlDeclaration = false;
 
-                    xtw = XmlWriter.Create(strNomeXmlControleFluxo, oSettings); //atribuir arquivo, caminho e codificação 
+                    xtw = XmlWriter.Create(NomeXmlControleFluxo, oSettings); //atribuir arquivo, caminho e codificação 
                     xtw.WriteStartDocument(); //comaçar a escrever o documento 
                     xtw.WriteStartElement(ElementoFixo.DocumentosNFe.ToString()); //Criar elemento raiz
                     xtw.WriteEndElement(); //encerrar tag DocumentosNFe
@@ -198,7 +212,7 @@ namespace UniNFeLibrary
                     {
                         XmlDocument xd = new XmlDocument(); //Criar instância do XmlDocument Class
 
-                        lfile = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
+                        lfile = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
 
                         xd.Load(lfile); //Carregar o arquivo aberto no XmlDocument
                         XmlElement cl = xd.CreateElement(ElementoFixo.Documento.ToString()); //Criar um Elemento chamado Documento
@@ -224,7 +238,7 @@ namespace UniNFeLibrary
 
                         //Fechar o arquovo e gravar o conteúdo no HD
                         lfile.Close(); //Fechar o FileStream
-                        xd.Save(strNomeXmlControleFluxo); //Salvar o conteudo do XmlDocument para o arquivo  
+                        xd.Save(NomeXmlControleFluxo); //Salvar o conteudo do XmlDocument para o arquivo  
 
                         break;
                     }
@@ -274,7 +288,7 @@ namespace UniNFeLibrary
 
         #region ExcluirNfeFluxo()
         /// <summary>
-        /// Excluir a NFe do fluxo em processamento
+        /// Excluir a NFe do fluxo em processamento através da chave da NFe
         /// </summary>
         /// <param name="strChaveNFe">Chave da NFe</param>
         /// <by>Wandrey Mundin Ferreira</by>
@@ -287,7 +301,6 @@ namespace UniNFeLibrary
 
             long elapsedMillieconds;
             startTime = DateTime.Now;
-            this.CriarXml();    //danasa 8-2009
 
             while (true)
             {
@@ -299,7 +312,7 @@ namespace UniNFeLibrary
                 try
                 {
                     XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
-                    fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
+                    fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
                     xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                     XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -312,7 +325,7 @@ namespace UniNFeLibrary
                         }
                     }
                     fsArquivo.Close(); //Fecha o arquivo XML
-                    xdXml.Save(strNomeXmlControleFluxo); //Grava o arquivo XML                
+                    xdXml.Save(NomeXmlControleFluxo); //Grava o arquivo XML                
                     break;
 
                 }
@@ -334,8 +347,82 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region ExcluirRecFluxo()
+        #region ExcluirNfeFluxoRec()
+        /// <summary>
+        /// Excluir as NFe´s no fluxo através do recibo. Ótimo para retirar todas as notas de um único lote de uma única vez.
+        /// </summary>
+        /// <param name="nRec">Número do recibo do lote enviado</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Date: 20/07/2010
+        /// </remarks>
+        public void ExcluirNfeFluxoRec(string nRec)
+        {
+            DateTime startTime;
+            DateTime stopTime;
+            TimeSpan elapsedTime;
 
+            long elapsedMillieconds;
+            startTime = DateTime.Now;
+
+            while (true)
+            {
+                stopTime = DateTime.Now;
+                elapsedTime = stopTime.Subtract(startTime);
+                elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
+                FileStream fsArquivo = null;
+
+                try
+                {
+                    XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
+                    fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
+                    xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
+
+                    XmlNodeList documentosList = xdXml.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML
+                    foreach (XmlNode documentosNode in documentosList)
+                    {
+                        XmlElement documentosElemento = (XmlElement)documentosNode;
+
+                        List<XmlNode> nodeExcluir = new List<XmlNode>();
+
+                        XmlNodeList documentoList = documentosElemento.GetElementsByTagName(ElementoFixo.Documento.ToString());
+                        for (int i = 0; i < documentoList.Count; i++)
+                        {
+                            var documentoNode = documentoList[i];
+                            var documentoElemento = (XmlElement)documentoNode;
+                            var tagRec = documentoElemento.GetElementsByTagName(ElementoEditavel.nRec.ToString())[0].InnerText.Trim(); //Recupera o conteúdo da tag de nRec
+                            if (tagRec == nRec)
+                            {
+                                nodeExcluir.Add(documentoNode);
+                            }
+                        }
+
+                        for (int i = 0; i < nodeExcluir.Count; i++)
+                        {
+                            xdXml.DocumentElement.RemoveChild(nodeExcluir[i]);
+                        }
+                    }
+
+                    fsArquivo.Close(); //Fecha o arquivo XML
+                    xdXml.Save(NomeXmlControleFluxo); //Grava o arquivo XML                
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    if (fsArquivo != null)
+                    {
+                        fsArquivo.Close();
+                    }
+
+                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    {
+                        throw (ex);
+                    }
+                }
+
+                Thread.Sleep(200);
+            }
+        }
         #endregion
 
         #region NfeExiste()
@@ -349,9 +436,8 @@ namespace UniNFeLibrary
 
             try
             {
-                this.CriarXml();    //danasa 8-2009
                 XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
-                FileStream fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                FileStream fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                 xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                 XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -389,9 +475,8 @@ namespace UniNFeLibrary
 
             try
             {
-                this.CriarXml();    //danasa 8-2009
                 XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
-                fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                 xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                 XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -451,9 +536,8 @@ namespace UniNFeLibrary
 
                 try
                 {
-                    this.CriarXml();    //danasa 8-2009
                     XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
-                    fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
+                    fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read); //Abrir um arquivo XML usando FileStream
 
                     xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
                     XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -471,7 +555,7 @@ namespace UniNFeLibrary
                         }
                     }
                     fsArquivo.Close(); //Fecha o arquivo XML
-                    xdXml.Save(strNomeXmlControleFluxo); //Grava o arquivo xml
+                    xdXml.Save(NomeXmlControleFluxo); //Grava o arquivo xml
 
                     break;
                 }
@@ -518,9 +602,8 @@ namespace UniNFeLibrary
 
                 try
                 {
-                    this.CriarXml();    //danasa 8-2009
                     XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                    fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                     doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                     XmlNodeList documentosList = doc.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -584,9 +667,8 @@ namespace UniNFeLibrary
 
             try
             {
-                this.CriarXml();    //danasa 8-2009
                 XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                 doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                 XmlNodeList documentoList = doc.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -688,9 +770,8 @@ namespace UniNFeLibrary
 
             try
             {
-                this.CriarXml();    //danasa 8-2009
                 XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                 doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                 XmlNodeList documentoList = doc.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
@@ -732,10 +813,11 @@ namespace UniNFeLibrary
                     {
                         string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                         string NomeArquivo = documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
+                        int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
 
                         //Deletar o arquivo da pasta em processamento
                         Auxiliar oAux = new Auxiliar();
-                        oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + Enums.PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo);
+                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + Enums.PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo);
 
                         //Deletar a NFE do arquivo de controle de fluxo
                         this.ExcluirNfeFluxo(ChaveNFe);
@@ -793,9 +875,8 @@ namespace UniNFeLibrary
 
                 try
                 {
-                    this.CriarXml();    //danasa 8-2009
                     XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                    fsArquivo = new FileStream(strNomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    fsArquivo = new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                     doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                     XmlNodeList documentosList = doc.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML

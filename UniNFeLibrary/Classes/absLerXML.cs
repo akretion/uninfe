@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.IO;
+using System.Threading;
 
 namespace UniNFeLibrary
 {
@@ -24,6 +25,7 @@ namespace UniNFeLibrary
     {
         #region Classes
 
+        #region Classe com os Dados do XML da Consulta Cadastro do Contribuinte
         public class DadosConsCad
         {
             private string mUF;
@@ -184,46 +186,128 @@ namespace UniNFeLibrary
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta do cadastro do contribuinte
         /// </summary>
         public DadosConsCad oDadosConsCad = new DadosConsCad();
+        #endregion
 
+        #region Classe com os dados do XML da NFe
         /// <summary>
         /// Esta classe possui as propriedades que vai receber o conteúdo
         /// do XML da nota fiscal eletrônica
         /// </summary>
         public class DadosNFeClass
         {
-            public string chavenfe { get; set; } //Chave da nota fiscal
-            public DateTime dEmi { get; set; } //Data de emissão
-            public string tpEmis { get; set; } //Tipo de emissão 1-Normal 2-Contigência em papel de segurança 3-Contigência SCAN
-            public string tpAmb { get; set; } //Tipo de Ambiente 1-Produção 2-Homologação
-            public string idLote { get; set; } //Lote que a NFe faz parte
-            public string serie { get; set; } //Série da NFe
-
-            public string cUF { get; set; } //UF do Emitente
-            public string cNF { get; set; } //Número randomico da chave da nfe
-            public string mod { get; set; } //Modelo da nota fiscal
-            public string nNF { get; set; } //Número da nota fiscal
-            public string cDV { get; set; } //Dígito verificador da chave da nfe
-            public string CNPJ { get; set; } //CNPJ do emitente
+            /// <summary>
+            /// Chave da nota fisca
+            /// </summary>
+            public string chavenfe { get; set; }
+            /// <summary>
+            /// Data de emissão
+            /// </summary>
+            public DateTime dEmi { get; set; }
+            /// <summary>
+            /// Tipo de emissão 1-Normal 2-Contigência em papel de segurança 3-Contigência SCAN
+            /// </summary>
+            public string tpEmis { get; set; }
+            /// <summary>
+            /// Tipo de Ambiente 1-Produção 2-Homologação
+            /// </summary>
+            public string tpAmb { get; set; }
+            /// <summary>
+            /// Lote que a NFe faz parte
+            /// </summary>
+            public string idLote { get; set; } 
+            /// <summary>
+            /// Série da NFe
+            /// </summary>
+            public string serie { get; set; } 
+            /// <summary>
+            /// UF do Emitente
+            /// </summary>
+            public string cUF { get; set; } 
+            /// <summary>
+            /// Número randomico da chave da nfe
+            /// </summary>
+            public string cNF { get; set; } 
+            /// <summary>
+            /// Modelo da nota fiscal
+            /// </summary>
+            public string mod { get; set; } 
+            /// <summary>
+            /// Número da nota fiscal
+            /// </summary>
+            public string nNF { get; set; } 
+            /// <summary>
+            /// Dígito verificador da chave da nfe
+            /// </summary>
+            public string cDV { get; set; } 
+            /// <summary>
+            /// CNPJ do emitente
+            /// </summary>
+            public string CNPJ { get; set; } 
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da nota fiscal eletrônica
         /// </summary>
         public DadosNFeClass oDadosNfe = new DadosNFeClass();
+        #endregion
 
+        #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
+        /// <summary>
+        /// Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
+        /// </summary>
+        public class DadosPedRecClass
+        {
+            /// <summary>
+            /// Tipo de ambiente: 1-Produção 2-Homologação
+            /// </summary>
+            public int tpAmb { get; set; }
+            /// <summary>
+            /// Número do recibo do lote de NFe enviado
+            /// </summary>
+            public string nRec { get; set; }
+            /// <summary>
+            /// Tipo de Emissão: 1-Normal 2-Contingência FS 3-Contingência SCAN 4-Contingência DEPEC 5-Contingência FS-DA
+            /// </summary>
+            public int tpEmis { get; set; }
+            /// <summary>
+            /// Código da Unidade Federativa (UF)
+            /// </summary>
+            public int cUF { get; set; }
+        }
+        /// <summary>
+        /// Esta Herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta do recibo do lote de NFe enviado
+        /// </summary>
+        public DadosPedRecClass oDadosPedRec = new DadosPedRecClass();
+        #endregion
+
+        #region Classe com os dados do XML do retorno do envio do Lote de NFe
         /// <summary>
         /// Esta classe possui as propriedades que vai receber o conteúdo do XML do recibo do lote
         /// </summary>
         public class DadosRecClass
         {
-            public string nRec { get; set; } //Recibo do lote de notas fiscais enviado
-            public string cStat { get; set; } //Status do Lote
-            public int tMed { get; set; } //Tempo médio de resposta em segundos
+            /// <summary>
+            /// Recibo do lote de notas fiscais enviado
+            /// </summary>
+            public string nRec { get; set; } 
+            /// <summary>
+            /// Status do Lote
+            /// </summary>
+            public string cStat { get; set; } 
+            /// <summary>
+            /// Tempo médio de resposta em segundos
+            /// </summary>
+            public int tMed { get; set; } 
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do recibo do lote
         /// </summary>
         public DadosRecClass oDadosRec = new DadosRecClass();
+        #endregion
 
+        #region Classe com os dados do XML da consulta do pedido de cancelamento
+        /// <summary>
+        /// Classe com os dados do XML da consulta do pedido de cancelamento
+        /// </summary>
         public class DadosPedCanc
         {
             private string mchNFe;
@@ -250,14 +334,20 @@ namespace UniNFeLibrary
 
             public DadosPedCanc()
             {
-                this.tpEmis = ConfiguracaoApp.tpEmis;
+                int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             }
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de cancelamento
         /// </summary>
         public DadosPedCanc oDadosPedCanc = new DadosPedCanc();
+        #endregion
 
+        #region Classe com os dados do XML do pedido de inutilização de números de NF
+        /// <summary>
+        /// Classe com os dados do XML do pedido de inutilização de números de NF
+        /// </summary>
         public class DadosPedInut
         {
             private int mSerie;
@@ -285,14 +375,20 @@ namespace UniNFeLibrary
 
             public DadosPedInut()
             {
-                this.tpEmis = ConfiguracaoApp.tpEmis;
+                int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             }
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de inutilizacao
         /// </summary>
         public DadosPedInut oDadosPedInut = new DadosPedInut();
+        #endregion
 
+        #region Classe com os dados do XML da pedido de consulta da situação da NFe
+        /// <summary>
+        /// Classe com os dados do XML da pedido de consulta da situação da NFe
+        /// </summary>
         public class DadosPedSit
         {
             private string mchNFe;
@@ -345,7 +441,12 @@ namespace UniNFeLibrary
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta da situação da nota
         /// </summary>
         public DadosPedSit oDadosPedSit = new DadosPedSit();
+        #endregion
 
+        #region Classe com os dados do XML da consulta do status do serviço da NFe
+        /// <summary>
+        /// Classe com os dados do XML da consulta do status do serviço da NFe
+        /// </summary>
         public class DadosPedSta
         {
             /// <summary>
@@ -365,6 +466,7 @@ namespace UniNFeLibrary
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do status do serviço
         /// </summary>
         public DadosPedSta oDadosPedSta = new DadosPedSta();
+        #endregion
 
         #endregion
 
@@ -377,6 +479,7 @@ namespace UniNFeLibrary
         public abstract void PedSit(string cArquivoXML);
         public abstract void PedSta(string cArquivoXML);
         public abstract void Recibo(string strXml);
+        public abstract void PedRec(string cArquivoXML);
 
         #endregion
     }

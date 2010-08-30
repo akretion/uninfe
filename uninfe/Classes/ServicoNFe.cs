@@ -14,7 +14,7 @@ namespace uninfe
     public class ServicoNFe : absServicoNFe
     {
         #region Objetos
-        public GerarXML oGerarXML = new GerarXML();
+        public GerarXML oGerarXML = new GerarXML(Empresa.FindEmpresaThread(Thread.CurrentThread.Name));
         #endregion
 
         #region Propriedades
@@ -103,6 +103,8 @@ namespace uninfe
         /// <date>01/07/2008</date>
         public override void Cancelamento()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Ler o XML para pegar parâmetros de envio
             LerXML oLer = new LerXML();
             oLer.PedCanc(this.vXmlNfeDadosMsg);
@@ -124,7 +126,7 @@ namespace uninfe
                     oParam.tpEmis = oLer.oDadosPedCanc.tpEmis;
                     oParam.UFCod = oLer.oDadosPedCanc.cUF;
 
-                    oAD.Assinar(this.vXmlNfeDadosMsg, "infCanc", ConfiguracaoApp.oCertificado);
+                    oAD.Assinar(this.vXmlNfeDadosMsg, "infCanc", Empresa.Configuracoes[emp].X509Certificado);
                     if (oAD.intResultado == 0)
                     {
                         //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
@@ -410,28 +412,6 @@ namespace uninfe
         }
         #endregion
 
-        #region ConsultaCadastro()
-
-        /// <summary>
-        /// Verifica um cadastro no site da receita.
-        /// Voce deve preencher o estado e mais um dos tres itens: CPNJ, IE ou CPF.
-        /// </summary>
-        /// <param name="uf">Sigla do UF do cadastro a ser consultado. Tem que ter dois dígitos. SU para suframa.</param>
-        /// <param name="cnpj"></param>
-        /// <param name="ie"></param>
-        /// <param name="cpf"></param>
-        /// <returns>String com o resultado da consuta do cadastro</returns>
-        /// <by>Marcos Diez</by>
-        /// <date>29/08/2009</date>
-        public object ConsultaCadastroClass(string uf, string cnpj, string ie, string cpf)
-        {
-            //Criar XML para obter o cadastro do contribuinte
-            string XmlNfeConsultaCadastro = oGerarXML.ConsultaCadastro(string.Empty, uf, cnpj, ie, cpf);
-
-            return oAux.VerConsultaCadastroClass(XmlNfeConsultaCadastro);
-        }
-        #endregion
-
         #region Inutilizacao()
         /// <summary>
         /// Envia o XML de inutilização de numeração de notas fiscais
@@ -474,6 +454,8 @@ namespace uninfe
         /// <date>03/04/2009</date>
         public override void Inutilizacao()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Ler o XML para pegar parâmetros de envio
             LerXML oLer = new LerXML();
             oLer.PedInut(this.vXmlNfeDadosMsg);
@@ -490,7 +472,7 @@ namespace uninfe
                 AssinaturaDigital oAD = new AssinaturaDigital();
                 try
                 {
-                    oAD.Assinar(this.vXmlNfeDadosMsg, "infInut", ConfiguracaoApp.oCertificado);
+                    oAD.Assinar(this.vXmlNfeDadosMsg, "infInut", Empresa.Configuracoes[emp].X509Certificado);
 
                     if (oAD.intResultado == 0)
                     {
@@ -566,7 +548,19 @@ namespace uninfe
         protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
         {
             LerXML oLerXML = new LerXML();
-            oLerXML.Nfe(Arquivo);
+
+            try
+            {
+                oLerXML.Nfe(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             return oLerXML.oDadosNfe;
         }
@@ -580,6 +574,8 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoCanc()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             XmlDocument doc = new XmlDocument();
 
             try
@@ -617,7 +613,7 @@ namespace uninfe
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                            string strNomeArqProcCancNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                            string strNomeArqProcCancNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                             PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                             oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedCan) + ExtXmlRet.ProcCancNFe;
                             oAux.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
@@ -645,6 +641,8 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoInut()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            
             XmlDocument doc = new XmlDocument();
 
             try
@@ -674,7 +672,7 @@ namespace uninfe
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, DateTime.Now);
 
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                            string strNomeArqProcInutNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                            string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                             PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                             oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ExtXml.PedInu/*"-ped-inu.xml"*/) + ExtXmlRet.ProcInutNFe;// "-procInutNFe.xml";
                             oAux.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
@@ -703,6 +701,8 @@ namespace uninfe
         /// <date>20/04/2009</date>
         protected override void LerRetornoLote()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
 
@@ -735,6 +735,7 @@ namespace uninfe
 
                     switch (cStatLote)
                     {
+                        #region Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
                         case "280": //A-Certificado transmissor inválido
                         case "281": //A-Validade do certificado
                         case "283": //A-Verifica a cadeia de Certificação
@@ -757,16 +758,22 @@ namespace uninfe
                         case "248": //E-UF do recibo difere da UF do Web Service
                         case "223": //E-CNPJ do transmissor do lote difere do CNPJ do transmissor da consulta
                             break;
+                        #endregion
 
+                        #region Lote ainda está sendo processado
                         case "105": //E-Verifica se o lote não está na fila de resposta, mas está na fila de entrada (Lote em processamento)
                             //Ok vou aguardar o ERP gerar uma nova consulta para encerrar o fluxo da nota
                             break;
+                        #endregion
 
+                        #region Lote não foi localizado pelo recibo que está sendo consultado
                         case "106": //E-Verifica se o lote não está na fila de saída, nem na fila de entrada (Lote não encontrado)
                             //No caso do lote não encontrado através do recibo, o ERP vai ter que consultar a situação da 
                             //Nota para tirar ela do fluxo de NFe em processamento
                             break;
+                        #endregion
 
+                        #region Lote foi processado, agora tenho que tratar as notas fiscais dele
                         case "104": //Lote processado
                             XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
 
@@ -811,7 +818,7 @@ namespace uninfe
                                         strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
                                         //throw new Exception(strChaveNFe + " não pode ser localizada");
                                     }
-                                    string strArquivoNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                                    string strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                     //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
                                     oFluxoNfe.AtualizarTag(strChaveNFe, FluxoNfe.ElementoEditavel.cStat, strStat);
@@ -826,7 +833,7 @@ namespace uninfe
                                             if (File.Exists(strArquivoNFe))
                                             {
                                                 oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
-                                                string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                                string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                            oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
 
@@ -875,11 +882,22 @@ namespace uninfe
                                     break;
                                 }
                             }
-
                             break;
+                        #endregion
 
+                        #region Qualquer outro tipo de status que não for os acima relacionados, vai tirar a nota fiscal do fluxo.
                         default:
+                            //Qualquer outro tipo de rejeião vou tirar todas as notas do lote do fluxo, pois se o lote foi rejeitado, todas as notas fiscais também foram
+                            //De acordo com o manual de integração se o status do lote não for 104, tudo foi rejeitado. Wandrey 20/07/2010
+
+                            //Vou retirar as notas do fluxo pelo recibo
+                            if (nRec != string.Empty)
+                            {
+                                oFluxoNfe.ExcluirNfeFluxoRec(nRec.Trim());
+                            }
+
                             break;
+                        #endregion
                     }
                 }
             }
@@ -891,9 +909,18 @@ namespace uninfe
         #endregion
 
         #region LerRetornoSit()
-        //TODO: Documentar este método
+        /// <summary>
+        /// Ler o retorno da consulta situação da nota fiscal e de acordo com o status ele trata as notas enviadas se ainda não foram tratadas
+        /// </summary>
+        /// <param name="ChaveNFe">Chave da NFe que está sendo consultada</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 16/06/2010
+        /// </remarks>
         protected override void LerRetornoSit(string ChaveNFe)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
 
@@ -924,7 +951,7 @@ namespace uninfe
                         strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
                     }
 
-                    string strArquivoNFe = ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                    string strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                     //Pegar o status de retorno da NFe que está sendo consultada a situação
                     var cStatCons = string.Empty;
@@ -935,6 +962,7 @@ namespace uninfe
 
                     switch (cStatCons)
                     {
+                        #region Rejeições do XML de consulta da situação da NFe (Não é a nfe que foi rejeitada e sim o XML de consulta da situação da nfe)
                         case "280": //A-Certificado transmissor inválido
                         case "281": //A-Validade do certificado
                         case "283": //A-Verifica a cadeia de Certificação
@@ -956,13 +984,17 @@ namespace uninfe
                         case "252": //J-Tipo do ambiente da NF-e difere do ambiente do web service
                         case "226": //J-UF da chave de acesso difere da UF do web service
                             break;
+                        #endregion
 
+                        #region Nota fiscal rejeitada
                         case "217": //J-NFe não existe na base de dados do SEFAZ
                             goto case "TirarFluxo";
 
                         case "216": //J-Verificar se o campo "Código Numérico" informado na chave de acesso é diferente do existente no BD
                             goto case "TirarFluxo";
+                        #endregion
 
+                        #region Nota fiscal autorizada
                         case "100": //Autorizado o uso da NFe
                             XmlNodeList infConsSitList = retConsSitElemento.GetElementsByTagName("infProt");
                             if (infConsSitList != null)
@@ -994,7 +1026,7 @@ namespace uninfe
                                                 "</protNFe>";
 
                                             //Definir o nome do arquivo -procNfe.xml                                               
-                                            string strArquivoNFeProc = ConfiguracaoApp.vPastaXMLEnviado + "\\" +
+                                            string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                         oAux.ExtrairNomeArq(strArquivoNFe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
 
@@ -1080,13 +1112,19 @@ namespace uninfe
                                 }
                             }
                             break;
+                        #endregion
 
+                        #region Nota fiscal cancelada
                         case "101": //Cancelamento Homologado ou Nfe Cancelada
                             goto case "100";
+                        #endregion
 
+                        #region Nota fiscal Denegada
                         case "110": //NFe Denegada
                             goto case "100";
+                        #endregion
 
+                        #region Conteúdo para retirar a nota fiscal do fluxo
                         case "TirarFluxo":
                             //Mover o XML da NFE a pasta de XML´s com erro
                             oAux.MoveArqErro(strArquivoNFe);
@@ -1094,6 +1132,7 @@ namespace uninfe
                             //Deletar a NFE do arquivo de controle de fluxo
                             oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
                             break;
+                        #endregion
 
                         default:
                             break;
@@ -1116,7 +1155,14 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void LoteNfe(string Arquivo)
         {
-            oGerarXML.LoteNfe(Arquivo);
+            try
+            {
+                oGerarXML.LoteNfe(Arquivo);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -1129,7 +1175,14 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void LoteNfe(List<string> lstArquivoNfe)
         {
-            oGerarXML.LoteNfe(lstArquivoNfe);
+            try
+            {
+                oGerarXML.LoteNfe(lstArquivoNfe);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -1170,6 +1223,8 @@ namespace uninfe
         /// <date>04/06/2008</date>
         public override void Recepcao()
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Instanciar o objeto da classe DefObjServico
             DefObjServico oDefObj = new DefObjServico();
 
@@ -1206,7 +1261,7 @@ namespace uninfe
                         //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                         //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                         //Wandrey 30/04/2009
-                        oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                         oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
                     }
 
@@ -1238,7 +1293,7 @@ namespace uninfe
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
                 }
             }
@@ -1431,25 +1486,6 @@ namespace uninfe
                 }
             }
         }
-        #region VerStatusServico()
-        /// <summary>
-        /// Verifica e retorna o Status do Servido da NFE. Para isso este método gera o arquivo XML necessário
-        /// para obter o status do serviõ e faz a leitura do XML de retorno, disponibilizando uma string com a mensagem
-        /// obtida.
-        /// </summary>
-        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
-        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public override string StatusServico(int tpEmis, int cUF)
-        {
-            //Criar XML para obter o status do serviço
-            string XmlNfeDadosMsg = oGerarXML.StatusServico(tpEmis, cUF);
-
-            //Retornar o status do serviço
-            return oAux.VerStatusServico(XmlNfeDadosMsg);
-        }
-        #endregion
         #endregion
 
         #region XmlRetorno()
@@ -1486,7 +1522,6 @@ namespace uninfe
             oGerarXML.XmlPedRec(nRec);
         }
         #endregion
-
     }
     #endregion
 }

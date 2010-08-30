@@ -15,25 +15,29 @@ namespace UniNFeLibrary
     {
         #region Atributos
         /// <summary>
+        /// Index da empresa selecionada
+        /// </summary>
+        protected int EmpIndex { get; set; }
+        /// <summary>
         /// Atributo que vai receber a string do XML de lote de NFe´s para que este conteúdo seja gravado após finalizado em arquivo físico no HD
         /// </summary>
         protected string strXMLLoteNfe;
         /// <summary>     
         /// Nome do arquivo para controle da numeração sequencial do lote.
         /// </summary>
-        private string NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\UniNfeLote.xml";
+        protected string NomeArqXmlLote;
         /// <summary>
         /// Nome do arquivo 1 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
-        private string Bkp1NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp1_UniNfeLote.xml";
+        protected string Bkp1NomeArqXmlLote;
         /// <summary>
         /// Nome do arquivo 2 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
-        private string Bkp2NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp2_UniNfeLote.xml";
+        protected string Bkp2NomeArqXmlLote;
         /// <summary>
         /// Nome do arquivo 3 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
-        private string Bkp3NomeArqXmlLote = InfoApp.PastaExecutavel() + "\\Bkp3_UniNfeLote.xml";
+        protected string Bkp3NomeArqXmlLote;
         #endregion
 
         #region Propriedades
@@ -49,6 +53,12 @@ namespace UniNFeLibrary
 
         #region Objetos
         protected Auxiliar oAux = new Auxiliar();
+        #endregion
+
+        #region Construtures
+        public absGerarXML(int empIndex)
+        {
+        }
         #endregion
 
         #region Métodos
@@ -275,8 +285,10 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         protected void GerarXMLLote(Int32 intNumeroLote)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             //Gravar o XML do lote das notas fiscais
-            string vNomeArqLoteNfe = ConfiguracaoApp.vPastaXMLEnvio + "\\" +
+            string vNomeArqLoteNfe = Empresa.Configuracoes[emp].PastaEnvio + "\\" +
                                      intNumeroLote.ToString("000000000000000") +
                                      ExtXml.EnvLot;
 
@@ -303,6 +315,23 @@ namespace UniNFeLibrary
         }
         #endregion
 
+        /// <summary>
+        /// Popular a propriedade do nome do arquivo de controle da numeração do lote
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 20/08/2010
+        /// </remarks>
+        private void PopulateNomeArqLote()
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\UniNfeLote.xml";
+            Bkp1NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp1_UniNfeLote.xml";
+            Bkp2NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp2_UniNfeLote.xml";
+            Bkp3NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp3_UniNfeLote.xml";
+        }
+
         #region ProximoNumeroLote()
         /// <summary>
         /// Pega o ultimo número de lote utilizado e acrescenta mais 1 para novo envio
@@ -312,6 +341,8 @@ namespace UniNFeLibrary
         /// <date>15/04/2009</date>
         private Int32 ProximoNumeroLote()
         {
+            PopulateNomeArqLote();
+
             Int32 intNumeroLote = 1;
             bool deuErro = false;
 
@@ -537,19 +568,6 @@ namespace UniNFeLibrary
         public abstract void Inutilizacao(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF, int ano, string CNPJ, int mod, int serie, int nNFIni, int nNFFin, string xJust);
         #endregion
 
-        #region StatusServico()
-        /// <summary>
-        /// Criar um arquivo XML com a estrutura necessária para consultar o status do serviço
-        /// </summary>
-        /// <returns>Retorna o caminho e nome do arquivo criado</returns>
-        /// <example>
-        /// string vPastaArq = this.CriaArqXMLStatusServico();
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public abstract string StatusServico(int tpEmis);
-        #endregion
-
         #region StatusServico() - Sobrecarga
         /// <summary>
         /// Cria um arquivo XML com a estrutura necessária para consultar o status do serviço
@@ -557,8 +575,9 @@ namespace UniNFeLibrary
         /// <returns>Retorna o caminho e nome do arquivo criado</returns>
         /// <param name="tpEmis"></param>
         /// <param name="cUF"></param>
+        /// <param name="amb"></param>
         /// <returns></returns>
-        public abstract string StatusServico(int tpEmis, int cUF);
+        public abstract string StatusServico(int tpEmis, int cUF, int amb);
         #endregion
 
         #region StatusServico() - Sobrecarga
@@ -614,16 +633,18 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno, string ConteudoXMLRetorno)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             StreamWriter SW = null;
 
             try
             {
                 //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
                 //o mesmo existir
-                oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
+                oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
 
                 //Gravar o arquivo XML de retorno
-                string ArqXMLRetorno = ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+                string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
                                       oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) +
                                       pFinalArqRetorno;
                 SW = File.CreateText(ArqXMLRetorno);
@@ -642,7 +663,7 @@ namespace UniNFeLibrary
             }
 
             //Gravar o XML de retorno também no formato TXT
-            if (ConfiguracaoApp.GravarRetornoTXTNFe)
+            if (Empresa.Configuracoes[emp].GravarRetornoTXTNFe)
             {
                 try
                 {
@@ -723,14 +744,226 @@ namespace UniNFeLibrary
         #region NomeArqLoteRetERP()
         protected string NomeArqLoteRetERP(string NomeArquivoXML)
         {
-            return ConfiguracaoApp.vPastaXMLRetorno + "\\" +
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            return Empresa.Configuracoes[emp].PastaRetorno + "\\" +
                 oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe) +
                 "-num-lot.xml";
         }
         #endregion
 
+        #region GravarArquivoParaEnvio
+        /// <summary>
+        /// grava um arquivo na pasta de envio
+        /// </summary>
+        /// <param name="Arquivo"></param>
+        /// <param name="Conteudo"></param>
+        protected void GravarArquivoParaEnvio(string Arquivo, string Conteudo)
+        {
+            try
+            {
+                //Gravar o XML
+                MemoryStream oMemoryStream = Auxiliar.StringXmlToStream(Conteudo);
+                XmlDocument docProc = new XmlDocument();
+                docProc.Load(oMemoryStream);
+                docProc.Save(Empresa.Configuracoes[EmpIndex].PastaEnvio + "\\" + Path.GetFileName(Arquivo));
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
         #endregion
 
+        #endregion
+
+        #endregion
+
+        #region ProcessaConsultaCadastro()
+        /// <summary>
+        /// utilizada pela GerarXML
+        /// </summary>
+        /// <param name="msXml"></param>
+        /// <returns></returns>
+        public RetConsCad ProcessaConsultaCadastro(XmlDocument doc)
+        {
+            if (doc.GetElementsByTagName("infCad") == null)
+                return null;
+
+            RetConsCad vRetorno = new RetConsCad();
+
+            foreach (XmlNode node in doc.ChildNodes)
+            {
+                if (node.Name == "retConsCad")
+                {
+                    foreach (XmlNode noderetConsCad in node.ChildNodes)
+                    {
+                        if (noderetConsCad.Name == "infCons")
+                        {
+                            foreach (XmlNode nodeinfCons in noderetConsCad.ChildNodes)
+                            {
+                                if (nodeinfCons.Name == "infCad")
+                                {
+                                    vRetorno.infCad.Add(new infCad());
+                                    vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = vRetorno.CNPJ;
+                                    vRetorno.infCad[vRetorno.infCad.Count - 1].CPF = vRetorno.CPF;
+                                    vRetorno.infCad[vRetorno.infCad.Count - 1].IE = vRetorno.IE;
+                                    vRetorno.infCad[vRetorno.infCad.Count - 1].UF = vRetorno.UF;
+
+                                    foreach (XmlNode nodeinfCad in nodeinfCons.ChildNodes)
+                                    {
+                                        switch (nodeinfCad.Name)
+                                        {
+                                            case "UF":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].UF = nodeinfCad.InnerText;
+                                                break;
+                                            case "IE":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IE = nodeinfCad.InnerText;
+                                                break;
+                                            case "CNPJ":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
+                                                break;
+                                            case "CPF":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
+                                                break;
+                                            case "xNome":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = nodeinfCad.InnerText;
+                                                break;
+                                            case "xFant":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = nodeinfCad.InnerText;
+                                                break;
+
+                                            case "ender":
+                                                foreach (XmlNode nodeinfConsEnder in nodeinfCad.ChildNodes)
+                                                {
+                                                    switch (nodeinfConsEnder.Name)
+                                                    {
+                                                        case "xLgr":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xLgr = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "nro":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.nro = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xCpl":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xCpl = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xBairro":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xBairro = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "xMun":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xMun = nodeinfConsEnder.InnerText;
+                                                            break;
+                                                        case "cMun":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.cMun = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
+                                                            break;
+                                                        case "CEP":
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.CEP = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                            case "IEAtual":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IEAtual = nodeinfCad.InnerText;
+                                                break;
+                                            case "IEUnica":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].IEUnica = nodeinfCad.InnerText;
+                                                break;
+                                            case "dBaixa":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dBaixa = Auxiliar.getDateTime(nodeinfCad.InnerText);
+                                                break;
+                                            case "dUltSit":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dUltSit = Auxiliar.getDateTime(nodeinfCad.InnerText);
+                                                break;
+                                            case "dIniAtiv":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].dIniAtiv = Auxiliar.getDateTime(nodeinfCad.InnerText);
+                                                break;
+                                            case "CNAE":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].CNAE = Convert.ToInt32("0" + nodeinfCad.InnerText);
+                                                break;
+                                            case "xRegApur":
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xRegApur = nodeinfCad.InnerText;
+                                                break;
+                                            case "cSit":
+                                                if (nodeinfCad.InnerText == "0")
+                                                    vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte não habilitado";
+                                                else if (nodeinfCad.InnerText == "1")
+                                                    vRetorno.infCad[vRetorno.infCad.Count - 1].cSit = "Contribuinte habilitado";
+                                                break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    switch (nodeinfCons.Name)
+                                    {
+                                        case "cStat":
+                                            vRetorno.cStat = Convert.ToInt32("0" + nodeinfCons.InnerText);
+                                            break;
+                                        case "xMotivo":
+                                            vRetorno.xMotivo = nodeinfCons.InnerText;
+                                            break;
+                                        case "UF":
+                                            vRetorno.UF = nodeinfCons.InnerText;
+                                            break;
+                                        case "IE":
+                                            vRetorno.IE = nodeinfCons.InnerText;
+                                            break;
+                                        case "CNPJ":
+                                            vRetorno.CNPJ = nodeinfCons.InnerText;
+                                            break;
+                                        case "CPF":
+                                            vRetorno.CPF = nodeinfCons.InnerText;
+                                            break;
+                                        case "dhCons":
+                                            vRetorno.dhCons = Auxiliar.getDateTime(nodeinfCons.InnerText);
+                                            break;
+                                        case "cUF":
+                                            vRetorno.cUF = Convert.ToInt32("0" + nodeinfCons.InnerText);
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return vRetorno;
+        }
+        #endregion
+
+        #region ProcessaConsultaCadastro()
+        public RetConsCad ProcessaConsultaCadastro(MemoryStream msXml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(msXml);
+            return ProcessaConsultaCadastro(doc);
+        }
+        #endregion
+
+        #region ProcessaConsultaCadastro()
+        /// <summary>
+        /// Função Callback que analisa a resposta do Status do Servido
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <by>Marcos Diez</by>
+        /// <date>30/8/2009</date>
+        /// <returns></returns>
+        /// <summary>
+        /// utilizada internamente pela VerConsultaCadastroClass
+        /// </summary>
+        /// <param name="cArquivoXML"></param>
+        /// <returns></returns>
+        public RetConsCad ProcessaConsultaCadastro(string cArquivoXML)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(cArquivoXML);
+            return ProcessaConsultaCadastro(doc);
+        }
         #endregion
     }
 }

@@ -14,6 +14,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using UniNFeLibrary;
+using System.Threading;
 
 namespace uninfe
 {
@@ -23,6 +24,11 @@ namespace uninfe
     /// </summary>
     public class LerXML : absLerXML
     {
+        #region ConsCad()
+        /// <summary>
+        /// Faz a leitura do XML de consulta do cadastro do contribuinte e disponibiliza os valores de algumas tag´s
+        /// </summary>
+        /// <param name="cArquivoXML">Caminho e nome do arquivo XML da consulta do cadastro do contribuinte a ser lido</param>
         public override void ConsCad(string cArquivoXML)
         {
             this.oDadosConsCad.CNPJ = string.Empty;
@@ -95,7 +101,9 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
 
+        #region Nfe()
         /// <summary>
         /// Faz a leitura do XML da nota fiscal eletrônica e disponibiliza os valores
         /// de algumas tag´s
@@ -186,15 +194,19 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
 
+        #region PedCanc()
         /// <summary>
         /// PedCan(string cArquivoXML)
         /// </summary>
         /// <param name="cArquivoXML"></param>
         public override void PedCanc(string cArquivoXML)
         {
-            this.oDadosPedCanc.tpAmb = ConfiguracaoApp.tpAmb;
-            this.oDadosPedCanc.tpEmis = ConfiguracaoApp.tpEmis;
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            this.oDadosPedCanc.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.oDadosPedCanc.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
@@ -262,22 +274,26 @@ namespace uninfe
                         this.oDadosPedCanc.tpEmis = Convert.ToInt16(infCancElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
                         doc.DocumentElement["infCanc"].RemoveChild(infCancElemento.GetElementsByTagName("tpEmis")[0]);
-                           
+
                         /// salvo o arquivo modificado
                         doc.Save(cArquivoXML);
                     }
                 }
             }
         }
+        #endregion
 
+        #region PedInut()
         /// <summary>
         /// PedInut(string cArquivoXML)
         /// </summary>
         /// <param name="cArquivoXML"></param>
         public override void PedInut(string cArquivoXML)
         {
-            this.oDadosPedInut.tpAmb = ConfiguracaoApp.tpAmb;
-            this.oDadosPedInut.tpEmis = ConfiguracaoApp.tpEmis;
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            this.oDadosPedInut.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.oDadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             try
             {
@@ -408,7 +424,9 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
 
+        #region PedSit()
         /// <summary>
         /// Faz a leitura do XML de pedido de consulta da situação da NFe
         /// </summary>
@@ -416,7 +434,9 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void PedSit(string cArquivoXML)
         {
-            this.oDadosPedSit.tpAmb = ConfiguracaoApp.tpAmb;// string.Empty;
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;// string.Empty;
             this.oDadosPedSit.chNFe = string.Empty;
 
             try
@@ -483,7 +503,9 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
 
+        #region PedSta()
         /// <summary>
         /// Faz a leitura do XML de pedido do status de serviço
         /// </summary>
@@ -491,13 +513,15 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void PedSta(string cArquivoXML)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             this.oDadosPedSta.tpAmb = 0;
-            this.oDadosPedSta.cUF = ConfiguracaoApp.UFCod;
+            this.oDadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
             ///
             /// danasa 9-2009
             /// Assume o que está na configuracao
             /// 
-            this.oDadosPedSta.tpEmis = ConfiguracaoApp.tpEmis;
+            this.oDadosPedSta.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             try
             {
@@ -570,7 +594,9 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
 
+        #region Recibo
         /// <summary>
         /// Faz a leitura do XML do Recibo do lote enviado e disponibiliza os valores
         /// de algumas tag´s
@@ -624,5 +650,63 @@ namespace uninfe
                 throw (ex);
             }
         }
+        #endregion
+
+        #region PedSta()
+        /// <summary>
+        /// Faz a leitura do XML de pedido da consulta do recibo do lote de notas enviadas
+        /// </summary>
+        /// <param name="cArquivoXml">Nome do XML a ser lido</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 16/03/2010
+        /// </remarks>
+        public override void PedRec(string cArquivoXML)
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            this.oDadosPedRec.tpAmb = 0;
+            this.oDadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            this.oDadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
+            this.oDadosPedRec.nRec = string.Empty;
+
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(cArquivoXML);
+
+                XmlNodeList consReciNFeList = doc.GetElementsByTagName("consReciNFe");
+
+                foreach (XmlNode consReciNFeNode in consReciNFeList)
+                {
+                    XmlElement consReciNFeElemento = (XmlElement)consReciNFeNode;
+
+                    this.oDadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.oDadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+
+                    if (consReciNFeElemento.GetElementsByTagName("cUF").Count != 0)
+                    {
+                        this.oDadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("cUF")[0].InnerText);
+                        /// Para que o validador não rejeite, excluo a tag <cUF>
+                        doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("cUF")[0]);
+                        /// Salvo o arquivo modificado
+                        doc.Save(cArquivoXML);
+                    }
+                    if (consReciNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    {
+                        this.oDadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        /// Para que o validador não rejeite, excluo a tag <tpEmis>
+                        doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                        /// Salvo o arquivo modificado
+                        doc.Save(cArquivoXML);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
     }
 }

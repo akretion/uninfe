@@ -46,6 +46,10 @@ namespace UniNFeLibrary
         public abstract void StatusServico();
         #endregion
 
+        #region StatusServico(int tpEmis, int cUF)
+        public abstract string StatusServico(int tpEmis, int cUF);
+        #endregion
+
         #region Recepcao()
         public abstract void Recepcao();
         #endregion
@@ -108,10 +112,6 @@ namespace UniNFeLibrary
         public abstract void XmlPedRec(string nRec);
         #endregion
 
-        #region VerStatusServico()
-        public abstract string VerStatusServico();
-        #endregion
-
         #region AssinarValidarXMLNFe()
         /// <summary>
         /// Assinar e validar o XML da Nota Fiscal Eletrônica e move para a pasta de assinados
@@ -123,13 +123,15 @@ namespace UniNFeLibrary
         /// <date>03/04/2009</date>
         public Boolean AssinarValidarXMLNFe(string strPasta)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             Boolean bRetorna = false;
             Boolean bAssinado = this.Assinado(this.vXmlNfeDadosMsg);
             Boolean bValidadoSchema = false;
             Boolean bValidacaoGeral = false;
 
             //Criar Pasta dos XML´s a ser enviado em Lote já assinados
-            string strPastaLoteAssinado = strPasta + ConfiguracaoApp.NomePastaXMLAssinado;
+            string strPastaLoteAssinado = strPasta + InfoApp.NomePastaXMLAssinado;
 
             //Se o arquivo XML já existir na pasta de assinados, vou avisar o ERP que já tem um em andamento
             string strArqDestino = strPastaLoteAssinado + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml";
@@ -142,115 +144,123 @@ namespace UniNFeLibrary
                 string TpEmis = oDadosNFe.tpEmis;
 
                 //Inserir NFe no XML de controle do fluxo
-                FluxoNfe oFluxoNfe = new FluxoNfe();
-                if (!oFluxoNfe.NfeExiste(ChaveNfe))
+                try
                 {
-                    try
+                    FluxoNfe oFluxoNfe = new FluxoNfe();
+                    if (oFluxoNfe.NfeExiste(ChaveNfe))
                     {
-                        //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir             
-                        oAux.DeletarArqXMLErro(ConfiguracaoApp.vPastaXMLErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                        //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
+                        //oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
-                        //Validações gerais
-                        if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
+                        //Deletar a NFE do arquivo de controle de fluxo
+                        //oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
+
+                        //Vou forçar uma exceção, e o ERP através do inicio da mensagem de erro pode tratar e já gerar uma consulta
+                        //situação para finalizar o processo. Assim envito perder os XML´s que estão na pasta EmProcessamento
+                        //tendo assim a possibilidade de gerar o -procNfe.XML através da consulta situação.
+                        //Wandrey 08/10/2009
+
+                        throw new Exception("NFE NO FLUXO: Esta nota fiscal já está na pasta de Notas Fiscais em processo de envio, desta forma não é possível envia-la novamente. Se a nota fiscal estiver presa no fluxo de envio sem conseguir finalizar o processo, gere um consulta situação da NFe para forçar a finalização.\r\n" +
+                            this.vXmlNfeDadosMsg);
+                    }
+
+                    //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
+                    oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+
+                    //Validações gerais
+                    if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
+                    {
+                        bValidacaoGeral = true;
+                    }
+
+                    //Assinar o arquivo XML
+                    if (bValidacaoGeral && !bAssinado)
+                    {
+                        AssinaturaDigital oAD = new AssinaturaDigital();
+
+                        ValidarXMLs oValidador = new ValidarXMLs();
+                        oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
+
+                        oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, Empresa.Configuracoes[emp].X509Certificado);
+
+                        if (oAD.intResultado == 0)
                         {
-                            bValidacaoGeral = true;
+                            bAssinado = true;
                         }
+                    }
 
-                        //Assinar o arquivo XML
-                        if (bValidacaoGeral && !bAssinado)
+                    // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
+                    if (bValidacaoGeral && bAssinado)
+                    {
+                        string cResultadoValidacao = oAux.ValidarArqXML(this.vXmlNfeDadosMsg);
+                        if (cResultadoValidacao == "")
                         {
-                            AssinaturaDigital oAD = new AssinaturaDigital();
+                            bValidadoSchema = true;
+                        }
+                        else
+                        {
+                            //Registrar o erro da validação do schema para o sistema ERP
+                            throw new Exception(cResultadoValidacao);
+                        }
+                    }
 
-                            ValidarXMLs oValidador = new ValidarXMLs();
-                            oValidador.TipoArquivoXML(this.vXmlNfeDadosMsg);
-
-                            oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, ConfiguracaoApp.oCertificado);
-
-                            if (oAD.intResultado == 0)
+                    //Mover o arquivo XML da pasta de lote para a pasta de XML´s assinados
+                    if (bValidadoSchema)
+                    {
+                        try
+                        {
+                            //Se a pasta de assinados não existir, vamos criar
+                            if (!Directory.Exists(strPastaLoteAssinado))
                             {
-                                bAssinado = true;
+                                Directory.CreateDirectory(strPastaLoteAssinado);
                             }
-                        }
 
-                        // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
-                        if (bValidacaoGeral && bAssinado)
-                        {
-                            string cResultadoValidacao = oAux.ValidarArqXML(this.vXmlNfeDadosMsg);
-                            if (cResultadoValidacao == "")
+                            if (!File.Exists(strArqDestino))
                             {
-                                bValidadoSchema = true;
+                                //Mover o arquivo para a pasta de XML´s assinados
+                                FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
+                                oArquivo.MoveTo(strArqDestino);
+
+                                bRetorna = true;
                             }
                             else
                             {
-                                //Registrar o erro da validação do schema para o sistema ERP
-                                throw new Exception(cResultadoValidacao);
-                            }
-                        }
-
-                        //Mover o arquivo XML da pasta de lote para a pasta de XML´s assinados
-                        if (bValidadoSchema)
-                        {
-                            try
-                            {
-                                //Se a pasta de assinados não existir, vamos criar
-                                if (!Directory.Exists(strPastaLoteAssinado))
-                                {
-                                    Directory.CreateDirectory(strPastaLoteAssinado);
-                                }
-
-                                if (!File.Exists(strArqDestino))
-                                {
-                                    //Mover o arquivo para a pasta de XML´s assinados
-                                    FileInfo oArquivo = new FileInfo(this.vXmlNfeDadosMsg);
-                                    oArquivo.MoveTo(strArqDestino);
-
-                                    bRetorna = true;
-                                }
-                                else
-                                {
-                                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
-
-                                    throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
-                                        this.vXmlNfeDadosMsg);
-                                }
-                            }
-                            catch (IOException ex)
-                            {
-                                throw (ex);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw (ex);
-                            }
-                        }
-
-                        if (bRetorna)
-                        {
-                            try
-                            {
                                 oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
+
+                                throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
+                                    this.vXmlNfeDadosMsg);
                             }
-                            catch (Exception ex)
-                            {
-                                throw (ex);
-                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            throw (ex);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw (ex);
                         }
                     }
-                    catch (Exception ex)
+
+                    if (bRetorna)
                     {
-                        throw (ex);
+                        try
+                        {
+                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(strArqDestino, ".xml") + ".xml");
+                        }
+                        catch (Exception ex)
+                        {
+                            throw (ex);
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    //TODO: WANDREY - URGENTE - Rever quando a nota já está no fluxo
-                    throw new Exception("A nota fiscal abaixo já foi enviada para o SEFAZ e está somente aguardando a consulta do recibo, efetue a consulta para finalizar a transação da NFe.\r\n" +
-                        this.vXmlNfeDadosMsg);
+                    throw (ex);
                 }
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, "-nfe.xml", "-nfe.err", ex.Message);
+                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, "-nfe.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
 
                 //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                 //forçar mover para a pasta de XML com erro neste ponto.
@@ -294,27 +304,28 @@ namespace UniNFeLibrary
         /// <date>16/04/2009</date>
         protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, absLerXML.DadosNFeClass oDadosNFe)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             bool booValido = false;
             string cTextoErro = "";
 
-            //TODO: CONFIG
             try
             {
                 //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro 
                 //para o ERP
                 // danasa 8-2009
-                if ((ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
-                    (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
+                if ((Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
+                    (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
                 {
                     booValido = true;
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
+                else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                 }
                 // danasa 8-2009
-                else if (ConfiguracaoApp.tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
+                else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                 }
@@ -323,7 +334,7 @@ namespace UniNFeLibrary
                     booValido = false;
 
                     // danasa 8-2009
-                    if (ConfiguracaoApp.tpEmis == TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
+                    if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
                     {
                         cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                             "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
@@ -331,7 +342,7 @@ namespace UniNFeLibrary
 
                     }
                     // danasa 8-2009
-                    else if (ConfiguracaoApp.tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
+                    else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
                     {
                         cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SCAN do Ambiente Nacional " +
                             "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
@@ -451,6 +462,10 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoLote();
         #endregion
 
+        #region LerRetornoSit()
+        protected abstract void LerRetornoSit(string ChaveNFe);
+        #endregion
+
         #region LerRetornoCanc()
         protected abstract void LerRetornoCanc();
         #endregion
@@ -459,6 +474,10 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoInut();
         #endregion
 
+        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
+        {
+            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
+        }
         #endregion
     }
     #endregion
