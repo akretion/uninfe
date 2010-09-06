@@ -449,7 +449,7 @@ namespace UniNFeLibrary
                     {
                         if (diretorios[b].Equals(string.Empty))
                         {
-                            erro = mensagens[b];
+                            erro = mensagens[b].Trim()+"\r\n"+Empresa.Configuracoes[i].Nome+"\r\n"+Empresa.Configuracoes[i].CNPJ;
                             validou = false;
                             break;
                         }
@@ -461,7 +461,7 @@ namespace UniNFeLibrary
                     {
                         if (empresa.Certificado.Equals(string.Empty))
                         {
-                            erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.";
+                            erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                             validou = false;
                         }
                     }
@@ -495,13 +495,13 @@ namespace UniNFeLibrary
                         diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
                         diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
 
-                        for (int b = 0; i < diretorios.Count; i++)
+                        for (int b = 0; b < diretorios.Count; b++)
                         {
                             if (diretorios[b] != string.Empty)
                             {
                                 if (!Directory.Exists(diretorios[b]))
                                 {
-                                    erro = mensagens[b];
+                                    erro = mensagens[b].Trim() + "\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                     break;
                                 }
@@ -515,7 +515,7 @@ namespace UniNFeLibrary
                     {
                         if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
                         {
-                            erro = "O executável do UniDANFe não foi localizado na pasta informada.";
+                            erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                             validou = false;
                         }
                     }
@@ -525,7 +525,7 @@ namespace UniNFeLibrary
                         //Verificar a existência o arquivo de configuração
                         if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
                         {
-                            erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.";
+                            erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                             validou = false;
                         }
                     }
@@ -559,7 +559,7 @@ namespace UniNFeLibrary
                             {
                                 if (fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
                                 {
-                                    erro = "Pasta idêntica não é possível.";
+                                    erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre as empresas..";
                                     validou = false;
                                     break;
                                 }
