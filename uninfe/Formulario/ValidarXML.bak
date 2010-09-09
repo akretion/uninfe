@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using UniNFeLibrary;
+using System.Threading;
 
 namespace uninfe.Formulario
 {
@@ -37,6 +38,8 @@ namespace uninfe.Formulario
 
         private void toolStripButton_validar_Click(object sender, EventArgs e)
         {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
             this.textBox_resultado.Text = "";
             if (this.textBox_arqxml.Text == "")
             {
@@ -76,14 +79,14 @@ namespace uninfe.Formulario
                 AssinaturaDigital oAD = new AssinaturaDigital();
                 try
                 {
-                    oAD.Assinar(cArquivo, cTagAssinar, ConfiguracaoApp.oCertificado);
+                    oAD.Assinar(cArquivo, cTagAssinar, Empresa.Configuracoes[emp].X509Certificado);
                     lValidar = true;
                 }
                 catch (Exception ex)
                 {
                     lValidar = false;
                     this.textBox_tipoarq.Text = oValidarXML.cRetornoTipoArq;
-                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);                    
+                    this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" + ex.Message;
                 }
             }
             else

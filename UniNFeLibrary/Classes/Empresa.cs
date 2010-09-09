@@ -109,6 +109,8 @@ namespace UniNFeLibrary
         /// Nome do arquivo XML das configurações da empresa
         /// </summary>
         public string NomeArquivoConfig { get; set; }
+
+        public bool CriaPastasAutomaticamente { get; set; }
         #endregion
 
         #region Propriedades para controle da impressão do DANFE

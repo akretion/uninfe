@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,9 @@ namespace uninfe.Formulario
 {
     public partial class ValidarXML : Form
     {
+        private int Emp;
+        ArrayList empresa = new ArrayList();
+
         UniNFeLibrary.ValidarXMLs oValidarXML = new UniNFeLibrary.ValidarXMLs();
 
         public ValidarXML()
@@ -38,8 +42,6 @@ namespace uninfe.Formulario
 
         private void toolStripButton_validar_Click(object sender, EventArgs e)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
-
             this.textBox_resultado.Text = "";
             if (this.textBox_arqxml.Text == "")
             {
@@ -79,7 +81,7 @@ namespace uninfe.Formulario
                 AssinaturaDigital oAD = new AssinaturaDigital();
                 try
                 {
-                    oAD.Assinar(cArquivo, cTagAssinar, Empresa.Configuracoes[emp].X509Certificado);
+                    oAD.Assinar(cArquivo, cTagAssinar, Empresa.Configuracoes[Emp].X509Certificado);
                     lValidar = true;
                 }
                 catch (Exception ex)
@@ -123,6 +125,54 @@ namespace uninfe.Formulario
         {
             oValidarXML.TipoArquivoXML(this.textBox_arqxml.Text);
             this.textBox_tipoarq.Text = oValidarXML.cRetornoTipoArq;
+        }
+
+        private void cbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateDetalheForm();
+        }
+
+        /// <summary>
+        /// Popular detalhes do form de acordo com a empresa selecionada
+        /// </summary>
+        private void PopulateDetalheForm()
+        {
+            string cnpj = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Valor;
+            Emp = Empresa.FindConfEmpresaIndex(cnpj);
+        }
+
+        #region PopulateCbEmpresa()
+        /// <summary>
+        /// Popular a ComboBox das empresas
+        /// </summary>
+        /// <remarks>
+        /// Observações: Tem que popular separadamente do Método Populate() para evitar ficar recarregando na hora que selecionamos outra empresa
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 30/07/2010
+        /// </remarks>
+        private void PopulateCbEmpresa()
+        {
+            try
+            {
+                empresa = Auxiliar.CarregaEmpresa();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            if (empresa.Count > 0)
+            {
+                cbEmpresa.DataSource = empresa;
+                cbEmpresa.DisplayMember = "Nome";
+                cbEmpresa.ValueMember = "Valor";
+            }
+        }
+        #endregion
+
+        private void ValidarXML_Load(object sender, EventArgs e)
+        {
+            PopulateCbEmpresa();
         }
     }
 }

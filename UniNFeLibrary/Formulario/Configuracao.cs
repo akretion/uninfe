@@ -17,14 +17,25 @@ namespace UniNFeLibrary.Formulario
     public partial class Configuracao : Form
     {
         private X509Certificate2 oMeuCert;
+        ///
+        /// danasa 9-2010
+        private EventHandler OnMyClose;
+        private bool Salvos;
 
-        public Configuracao()
+        ///
+        /// danasa 9-2010
+        public Configuracao(EventHandler _OnClose)
         {
             InitializeComponent();
 
             PopulateCbEmpresa();
             PopulateConfGeral();
             PopulateConfEmpresa();
+
+            ///
+            /// danasa 9-2010
+            this.OnMyClose = _OnClose;
+            this.Salvos = false;
         }
 
         #region Métodos gerais
@@ -373,6 +384,7 @@ namespace UniNFeLibrary.Formulario
         private void toolStripButton_salvar_Click(object sender, EventArgs e)
         {
             this.Salvar();
+            this.Salvos = true;
         }
 
         private void button_SelectPastaXmlEnviado_Click(object sender, EventArgs e)
@@ -469,6 +481,12 @@ namespace UniNFeLibrary.Formulario
             XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
             iniFile.SaveForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
             iniFile.Save();
+            ///
+            /// danasa 9-2010
+            if (OnMyClose != null)
+                if (e.CloseReason == CloseReason.UserClosing)
+                    if (this.Salvos)
+                        OnMyClose(sender, null);
         }
 
         private void button_SelectPastaExeUniDanfe_Click(object sender, EventArgs e)

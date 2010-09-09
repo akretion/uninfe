@@ -430,108 +430,6 @@ namespace UniNFeLibrary
                 }
                 #endregion
 
-                for (int i = 0; i < Empresa.Configuracoes.Count; i++)
-                {
-                    Empresa empresa = Empresa.Configuracoes[i];
-                    List<string> diretorios = new List<string>();
-                    List<string> mensagens = new List<string>();
-
-                    #region Verificar se tem alguma pasta em branco
-                    diretorios.Clear(); mensagens.Clear();
-                    diretorios.Add(empresa.PastaEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
-                    diretorios.Add(empresa.PastaEnvio); mensagens.Add("Informe a pasta de envio dos arquivos XML.");
-                    diretorios.Add(empresa.PastaRetorno); mensagens.Add("Informe a pasta de retorno dos arquivos XML.");
-                    diretorios.Add(empresa.PastaErro); mensagens.Add("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.");
-                    diretorios.Add(empresa.PastaBackup); mensagens.Add("Informe a pasta para o Backup dos XML enviados.");
-                    diretorios.Add(empresa.PastaValidar); mensagens.Add("Informe a pasta onde será gravado os XML somente para ser validado pela Aplicação.");
-
-                    for (int b = 0; b < diretorios.Count; b++)
-                    {
-                        if (diretorios[b].Equals(string.Empty))
-                        {
-                            erro = mensagens[b].Trim()+"\r\n"+Empresa.Configuracoes[i].Nome+"\r\n"+Empresa.Configuracoes[i].CNPJ;
-                            validou = false;
-                            break;
-                        }
-                    }
-                    #endregion
-
-                    #region Verificar se o certificado foi informado
-                    if (validou)
-                    {
-                        if (empresa.Certificado.Equals(string.Empty))
-                        {
-                            erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                            validou = false;
-                        }
-                    }
-                    #endregion
-
-                    #region Verificar se as pastas informadas existem
-                    if (validou)
-                    {
-                        //Fazer um pequeno ajuste na pasta de configuração do unidanfe antes de verificar sua existência
-                        if (empresa.PastaConfigUniDanfe.Trim() != string.Empty)
-                        {
-                            if (!string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
-                            {
-                                while (Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaConfigUniDanfe))
-                                    Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(0, Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6);
-                            }
-                            Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Replace("\r\n", "").Trim();
-
-                            empresa.PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe;
-                        }
-
-                        diretorios.Clear(); mensagens.Clear();
-                        diretorios.Add(empresa.PastaEnvio.Trim()); mensagens.Add("A pasta de envio dos arquivos XML informada não existe.");
-                        diretorios.Add(empresa.PastaRetorno.Trim()); mensagens.Add("A pasta de retorno dos arquivos XML informada não existe.");
-                        diretorios.Add(empresa.PastaEnviado.Trim()); mensagens.Add("A pasta para arquivamento dos arquivos XML enviados informada não existe.");
-                        diretorios.Add(empresa.PastaErro.Trim()); mensagens.Add("A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.");
-                        diretorios.Add(empresa.PastaBackup.Trim()); mensagens.Add("A pasta para backup dos XML enviados informada não existe.");
-                        diretorios.Add(empresa.PastaValidar.Trim()); mensagens.Add("A pasta para validação de XML´s informada não existe.");
-                        diretorios.Add(empresa.PastaEnvioEmLote.Trim()); mensagens.Add("A pasta de envio das notas fiscais eletrônicas em lote informada não existe.");
-                        diretorios.Add(empresa.PastaDanfeMon.Trim()); mensagens.Add("A pasta informada para gravação do XML da NFe para o DANFeMon não existe.");
-                        diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
-                        diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
-
-                        for (int b = 0; b < diretorios.Count; b++)
-                        {
-                            if (diretorios[b] != string.Empty)
-                            {
-                                if (!Directory.Exists(diretorios[b]))
-                                {
-                                    erro = mensagens[b].Trim() + "\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                                    validou = false;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    #endregion
-
-                    #region Verificar se as pastas configuradas do unidanfe estão corretas
-                    if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
-                    {
-                        if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
-                        {
-                            erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                            validou = false;
-                        }
-                    }
-
-                    if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
-                    {
-                        //Verificar a existência o arquivo de configuração
-                        if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
-                        {
-                            erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                            validou = false;
-                        }
-                    }
-                    #endregion
-                }
-
                 #region Verificar a duplicação de nome de pastas que não pode existir
                 if (validou)
                 {
@@ -571,6 +469,117 @@ namespace UniNFeLibrary
                 }
                 #endregion
 
+                if (validou)
+                {
+                    for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                    {
+                        Empresa empresa = Empresa.Configuracoes[i];
+                        List<string> diretorios = new List<string>();
+                        List<string> mensagens = new List<string>();
+
+                        #region Verificar se tem alguma pasta em branco
+                        diretorios.Clear(); mensagens.Clear();
+                        diretorios.Add(empresa.PastaEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
+                        diretorios.Add(empresa.PastaEnvio); mensagens.Add("Informe a pasta de envio dos arquivos XML.");
+                        diretorios.Add(empresa.PastaRetorno); mensagens.Add("Informe a pasta de retorno dos arquivos XML.");
+                        diretorios.Add(empresa.PastaErro); mensagens.Add("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.");
+                        diretorios.Add(empresa.PastaBackup); mensagens.Add("Informe a pasta para o Backup dos XML enviados.");
+                        diretorios.Add(empresa.PastaValidar); mensagens.Add("Informe a pasta onde será gravado os XML somente para ser validado pela Aplicação.");
+
+                        for (int b = 0; b < diretorios.Count; b++)
+                        {
+                            if (diretorios[b].Equals(string.Empty))
+                            {
+                                erro = mensagens[b].Trim() + "\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                                break;
+                            }
+                        }
+                        #endregion
+
+                        #region Verificar se o certificado foi informado
+                        if (validou)
+                        {
+                            if (empresa.Certificado.Equals(string.Empty))
+                            {
+                                erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da nota fiscal eletrônica.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                            }
+                        }
+                        #endregion
+
+                        #region Verificar se as pastas informadas existem
+                        if (validou)
+                        {
+                            //Fazer um pequeno ajuste na pasta de configuração do unidanfe antes de verificar sua existência
+                            if (empresa.PastaConfigUniDanfe.Trim() != string.Empty)
+                            {
+                                if (!string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
+                                {
+                                    while (Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaConfigUniDanfe))
+                                        Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(0, Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6);
+                                }
+                                Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Replace("\r\n", "").Trim();
+
+                                empresa.PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe;
+                            }
+
+                            diretorios.Clear(); mensagens.Clear();
+                            diretorios.Add(empresa.PastaEnvio.Trim()); mensagens.Add("A pasta de envio dos arquivos XML informada não existe.");
+                            diretorios.Add(empresa.PastaRetorno.Trim()); mensagens.Add("A pasta de retorno dos arquivos XML informada não existe.");
+                            diretorios.Add(empresa.PastaEnviado.Trim()); mensagens.Add("A pasta para arquivamento dos arquivos XML enviados informada não existe.");
+                            diretorios.Add(empresa.PastaErro.Trim()); mensagens.Add("A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.");
+                            diretorios.Add(empresa.PastaBackup.Trim()); mensagens.Add("A pasta para backup dos XML enviados informada não existe.");
+                            diretorios.Add(empresa.PastaValidar.Trim()); mensagens.Add("A pasta para validação de XML´s informada não existe.");
+                            diretorios.Add(empresa.PastaEnvioEmLote.Trim()); mensagens.Add("A pasta de envio das notas fiscais eletrônicas em lote informada não existe.");
+                            diretorios.Add(empresa.PastaDanfeMon.Trim()); mensagens.Add("A pasta informada para gravação do XML da NFe para o DANFeMon não existe.");
+                            diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
+                            diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
+
+                            for (int b = 0; b < diretorios.Count; b++)
+                            {
+                                if (diretorios[b] != string.Empty)
+                                {
+                                    if (!Directory.Exists(diretorios[b]))
+                                    {
+                                        if (empresa.CriaPastasAutomaticamente)
+                                        {
+                                            Directory.CreateDirectory(diretorios[b]);
+                                        }
+                                        else
+                                        {
+                                            erro = mensagens[b].Trim() + "\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                            validou = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+
+                        #region Verificar se as pastas configuradas do unidanfe estão corretas
+                        if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
+                        {
+                            if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
+                            {
+                                erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                            }
+                        }
+
+                        if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
+                        {
+                            //Verificar a existência o arquivo de configuração
+                            if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                            {
+                                erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                            }
+                        }
+                        #endregion
+                    }
+                }
                 if (!validou)
                 {
                     throw new Exception(erro);
@@ -976,7 +985,7 @@ namespace UniNFeLibrary
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private static string RemoveEndSlash(string value)
+        public static string RemoveEndSlash(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {

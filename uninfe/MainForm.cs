@@ -157,12 +157,13 @@ namespace uninfe
                     threads.Add(t, new ParametroThread(item.Value));
                 }
             }
-
             //Executar as thread´s de todas as empresas
             foreach (KeyValuePair<Thread, ParametroThread> item in threads)
             {
                 Thread t = item.Key;
                 t.Start(item.Value);
+                if (Empresa.Configuracoes.Count>1)
+                    Thread.Sleep(500);  //danasa 9-2010
             }
             //Limpar para tirar o conteúdo da memória pois não vamos mais precisar
             threads.Clear();
@@ -434,6 +435,14 @@ namespace uninfe
             return -1;
         }
 
+        ///
+        /// danasa 9-2010
+        private void onCloseConfiguracao(object sender, EventArgs e)
+        {
+            this.PararServicos();
+            this.ExecutaServicos();
+        }
+
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
             if (Empresa.Configuracoes.Count <= 0)
@@ -456,7 +465,7 @@ namespace uninfe
                     {
                         try
                         {
-                            Configuracao oConfig = new Configuracao();
+                            Configuracao oConfig = new Configuracao(onCloseConfiguracao);
                             oConfig.MdiParent = this;
                             oConfig.MinimizeBox = false;
                             oConfig.Show();
@@ -489,7 +498,7 @@ namespace uninfe
                         /// 
                         toolStripButton_config_Click(sender, e);
                     else
-                        using (Configuracao oConfig = new Configuracao())
+                        using (Configuracao oConfig = new Configuracao(onCloseConfiguracao))
                         {
                             oConfig.MinimizeBox = true;
                             oConfig.ShowDialog();

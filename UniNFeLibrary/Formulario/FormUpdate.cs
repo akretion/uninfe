@@ -87,13 +87,15 @@ namespace UniNFeLibrary.Formulario
 
                 //Executar o instalador do uninfe
                 if (File.Exists(LocalArq))
+                {
                     System.Diagnostics.Process.Start(this.LocalArq);
-                else
-                    MessageBox.Show("Não foi possível localizar o instalador da atualização","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
-                //Forçar o encerramento da aplicação
-                Auxiliar.EncerrarApp = true;
-                this.MdiParent.Close();
+                    //Forçar o encerramento da aplicação
+                    Auxiliar.EncerrarApp = true;
+                    this.MdiParent.Close();
+                }
+                else
+                    MessageBox.Show("Não foi possível localizar o instalador da atualização", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
