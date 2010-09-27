@@ -150,20 +150,34 @@ namespace UniNFeLibrary
 
                 if (!File.Exists(NomeXmlControleFluxo) || ForcarCriar)
                 {
-                    XmlWriterSettings oSettings = new XmlWriterSettings();
-                    UTF8Encoding c = new UTF8Encoding(false);
+                    ///
+                    /// danasa 20-9-2010
+                    /// 
+                    bool goCriaArquivoDeFluxo = true;
+                    if (File.Exists(NomeXmlControleFluxo))
+                        if (Auxiliar.FileInUse(NomeXmlControleFluxo))
+                            ///
+                            /// O metodo "BuscarXML" acessa o metodo para criar o xml de fluxo, só que como ele é acessado várias vezes
+                            /// e como o arquivo está sendo criado, é exibida várias mensagens de erro de acesso ao arquivo de fluxo
+                            goCriaArquivoDeFluxo = false;
 
-                    oSettings.Encoding = c;
-                    oSettings.Indent = true;
-                    oSettings.IndentChars = "";
-                    oSettings.NewLineOnAttributes = false;
-                    oSettings.OmitXmlDeclaration = false;
+                    if (goCriaArquivoDeFluxo)
+                    {
+                        XmlWriterSettings oSettings = new XmlWriterSettings();
+                        UTF8Encoding c = new UTF8Encoding(false);
 
-                    xtw = XmlWriter.Create(NomeXmlControleFluxo, oSettings); //atribuir arquivo, caminho e codificação 
-                    xtw.WriteStartDocument(); //comaçar a escrever o documento 
-                    xtw.WriteStartElement(ElementoFixo.DocumentosNFe.ToString()); //Criar elemento raiz
-                    xtw.WriteEndElement(); //encerrar tag DocumentosNFe
-                    xtw.Flush();
+                        oSettings.Encoding = c;
+                        oSettings.Indent = true;
+                        oSettings.IndentChars = "";
+                        oSettings.NewLineOnAttributes = false;
+                        oSettings.OmitXmlDeclaration = false;
+
+                        xtw = XmlWriter.Create(NomeXmlControleFluxo, oSettings); //atribuir arquivo, caminho e codificação 
+                        xtw.WriteStartDocument(); //comaçar a escrever o documento 
+                        xtw.WriteStartElement(ElementoFixo.DocumentosNFe.ToString()); //Criar elemento raiz
+                        xtw.WriteEndElement(); //encerrar tag DocumentosNFe
+                        xtw.Flush();
+                    }
                 }
             }
             catch (Exception ex)

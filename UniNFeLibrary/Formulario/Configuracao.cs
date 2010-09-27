@@ -70,6 +70,31 @@ namespace UniNFeLibrary.Formulario
         }
         #endregion
 
+        /// <summary>
+        /// CopiaPastaDaEmpresa
+        /// </summary>
+        /// <param name="origemCNPJ"></param>
+        /// <param name="origemPasta"></param>
+        /// <param name="oEmpresa"></param>
+        /// <returns></returns>
+        private string CopiaPastaDeEmpresa(string origemCNPJ, string origemPasta, Empresa oEmpresa)
+        {
+            if (string.IsNullOrEmpty(origemPasta))
+                return "";
+
+            ///
+            ///o usuario pode ter colocado o CNPJ como parte do nome da pasta
+            ///
+            string newPasta = origemPasta.Replace(origemCNPJ.Trim(), oEmpresa.CNPJ.Trim());
+
+            if (origemPasta.ToLower() == newPasta.ToLower())
+            {
+                int lastBackSlash = ConfiguracaoApp.RemoveEndSlash(origemPasta).LastIndexOf("\\");
+                newPasta = origemPasta.Insert(lastBackSlash, "\\" + oEmpresa.CNPJ);
+            }
+            return newPasta;
+        }
+
         #region PopulateConfEmpresa()
         /// <summary>
         /// Popular campos das configurações por empresa
@@ -170,6 +195,56 @@ namespace UniNFeLibrary.Formulario
             if (Empresa.Configuracoes.Count > 0)
             {
                 Empresa oEmpresa = Empresa.FindConfEmpresa(cbEmpresa.SelectedValue.ToString().Trim());
+
+                ///
+                /// danasa 20-9-2010
+                /// tirado daqui pois se entrado + de 1 vez na configuracao da empresa, a propriedade CriaPastasAutomaticamente será definida como false 
+                /// já que na segunda vez os nomes das pastas já estão atribuidas
+                //oEmpresa.CriaPastasAutomaticamente = false;
+
+                if (string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                {
+                    ///
+                    /// tenta achar uma configuracao valida
+                    /// 
+                    foreach (Empresa empresa in Empresa.Configuracoes)
+                    {
+                        if (empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaEnvio))
+                        {
+                            oEmpresa.PastaEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvio, oEmpresa);
+                            oEmpresa.PastaRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaRetorno, oEmpresa);
+                            oEmpresa.PastaEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnviado, oEmpresa);
+                            oEmpresa.PastaErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaErro, oEmpresa);
+                            oEmpresa.PastaEnvioEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvioEmLote, oEmpresa);
+                            oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
+                            oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
+
+                            oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
+                            oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
+                            oEmpresa.PastaDanfeMon = empresa.PastaDanfeMon;
+                            oEmpresa.XMLDanfeMonNFe = empresa.XMLDanfeMonNFe;
+                            oEmpresa.XMLDanfeMonProcNFe = empresa.XMLDanfeMonProcNFe;
+                            oEmpresa.GravarRetornoTXTNFe = empresa.GravarRetornoTXTNFe;
+
+                            oEmpresa.CriaPastasAutomaticamente = true;
+                            break;
+                        }
+                    }
+                    ///
+                    /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
+                    /// 
+                    if (string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                    {
+                        oEmpresa.PastaEnvio = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\Envio");
+                        oEmpresa.PastaEnviado = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\Enviado");
+                        oEmpresa.PastaRetorno = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\Retorno");
+                        oEmpresa.PastaErro = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\Erro");
+                        oEmpresa.PastaEnvioEmLote = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\EnvioEmLote");
+                        oEmpresa.PastaValidar = Path.Combine(InfoApp.PastaExecutavel(), oEmpresa.CNPJ + "\\Validar");
+
+                        oEmpresa.CriaPastasAutomaticamente = true;
+                    }
+                }
 
                 textBox_PastaEnvioXML.Text = oEmpresa.PastaEnvio;
                 textBox_PastaRetornoXML.Text = oEmpresa.PastaRetorno;
@@ -331,7 +406,8 @@ namespace UniNFeLibrary.Formulario
             {
                 oConfig.GravarConfig();
 
-                this.Dispose();
+                this.Salvos = true;
+                this.Close();   //danasa 20-9-2010 - força a entrada em "Configuracao_FormClosed"
             }
             catch (Exception ex)
             {
@@ -378,13 +454,12 @@ namespace UniNFeLibrary.Formulario
 
         private void toolStripButton_fechar_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
 
         private void toolStripButton_salvar_Click(object sender, EventArgs e)
         {
             this.Salvar();
-            this.Salvos = true;
         }
 
         private void button_SelectPastaXmlEnviado_Click(object sender, EventArgs e)
@@ -483,10 +558,14 @@ namespace UniNFeLibrary.Formulario
             iniFile.Save();
             ///
             /// danasa 9-2010
+            /// 
             if (OnMyClose != null)
-                if (e.CloseReason == CloseReason.UserClosing)
-                    if (this.Salvos)
-                        OnMyClose(sender, null);
+            {
+                if (this.Salvos)    //danasa 20-9-2010
+                {
+                    OnMyClose(sender, null);
+                }
+            }
         }
 
         private void button_SelectPastaExeUniDanfe_Click(object sender, EventArgs e)

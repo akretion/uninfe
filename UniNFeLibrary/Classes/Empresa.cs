@@ -169,6 +169,12 @@ namespace UniNFeLibrary
         public static List<Empresa> Configuracoes = new List<Empresa>();
         #endregion
 
+        /// <summary>
+        /// Empresa
+        /// danasa 20-9-2010
+        /// </summary>
+        public Empresa() { this.CriaPastasAutomaticamente = false; }
+
         #region CarregaConfiguracao()
         /// <summary>
         /// Carregar as configurações de todas as empresas na coleção "Configuracoes" 
@@ -193,6 +199,7 @@ namespace UniNFeLibrary
                     xml.Load(arqXml);
 
                     var empresaList = xml.GetElementsByTagName("Empresa");
+
                     foreach (XmlNode empresaNode in empresaList)
                     {
                         var empresaElemento = (XmlElement)empresaNode;
@@ -218,6 +225,7 @@ namespace UniNFeLibrary
                     }
 
                     arqXml.Close();
+                    arqXml = null;
 
                     Empresa.CriarPasta();
                 }

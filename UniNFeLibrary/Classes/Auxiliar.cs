@@ -1174,7 +1174,7 @@ namespace UniNFeLibrary
         /// Alguns ajustes que são necessários serem executados automaticamente
         /// para evitar falhas no aplicativo
         /// </summary>
-        public static void ConversaoNovaVersao()
+        public static string ConversaoNovaVersao(string cnpjEmpresa)    //danasa 20-9-2010
         {
             #region Conversão referente a parte de Multi-Empresas
             try
@@ -1183,6 +1183,7 @@ namespace UniNFeLibrary
                 {
                     #region Localizar o CNPJ da empresa no certificado
                     string certificado = string.Empty;
+                    string nomeEmpresa = string.Empty;  //danasa 20-9-2010
 
                     var xmlDoc = new XmlDocument();
                     xmlDoc.Load(InfoApp.PastaExecutavel() + "\\" + InfoApp.NomeArqConfig);
@@ -1196,24 +1197,29 @@ namespace UniNFeLibrary
                     }
                    
                     string[] dados = certificado.Split(new char[] { ',', ':' });
-                    string cnpjEmpresa = string.Empty;
-                    string nomeEmpresa = "Digite o nome da empresa";
                     foreach (string dado in dados)
                     {
-                        if (CNPJ.Validate((string)Auxiliar.OnlyNumbers(dado)))
-                        {
-                            cnpjEmpresa = (string)Auxiliar.OnlyNumbers(dado);
-                        }
+                        if (cnpjEmpresa == string.Empty)  //danasa 20-9-2010
+                            if (CNPJ.Validate((string)Auxiliar.OnlyNumbers(dado.TrimStart())))
+                            {
+                                cnpjEmpresa = (string)Auxiliar.OnlyNumbers(dado.TrimStart());
+                            }
 
-                        if (dado.Substring(0, 3).Equals("CN="))
+                        /// danasa 20-9-2010
+                        /// use o TrimStart() pois em "dado" está retornando branco no inicio
+                        if (dado.TrimStart().StartsWith("CN="))
                         {
-                            nomeEmpresa = dado.Substring(3, dado.Length - 3);
+                            nomeEmpresa = dado.TrimStart().Substring(3, dado.TrimStart().Length - 3);
                         }
                     }
-
-                    if (cnpjEmpresa == string.Empty)
+                    if (cnpjEmpresa == string.Empty || nomeEmpresa == string.Empty) //danasa 20-9-2010
                     {
-                        throw new Exception("Não foi possível localizar o CNPJ da empresa no certificado configurado, sendo assim as configurações do aplicativo deverão ser realizadas novamente.");
+                        if (nomeEmpresa == string.Empty)
+                            throw new Exception("Não foi possível localizar o CNPJ da empresa no certificado configurado, sendo assim as configurações do aplicativo deverão ser realizadas novamente.");
+
+                        /// danasa 20-9-2010
+                        /// retorna o nome da empresa ao MainForm para exibir na tela de solicitacao do CNPJ
+                        return nomeEmpresa;
                     }
                     #endregion
 
@@ -1324,6 +1330,7 @@ namespace UniNFeLibrary
             {
                 MessageBox.Show("Ocorreu um erro na hora de converter o aplicativo para multiempresas.\r\n\r\nErro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return "";
             #endregion
         }
         #endregion

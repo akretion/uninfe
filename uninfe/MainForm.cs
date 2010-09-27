@@ -38,15 +38,27 @@ namespace uninfe
             try
             {
                 // Executar as conversões de atualizações de versão quando tiver
-                Auxiliar.ConversaoNovaVersao();
+                string nomeEmpresa = Auxiliar.ConversaoNovaVersao(string.Empty);
+                if (!string.IsNullOrEmpty(nomeEmpresa))
+                {
+                    /// danasa 20-9-2010
+                    /// exibe a mensagem de erro
+                    MessageBox.Show("Não foi possível localizar o CNPJ da empresa no certificado configurado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                    /// e pede o CNPJ
+                    FormCNPJ fcnpj = new FormCNPJ(nomeEmpresa);
+                    if (fcnpj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        /// tenta processar já com o CNPJ definido
+                        Auxiliar.ConversaoNovaVersao(fcnpj.Cnpj);
+                }
                 // Carregar as configurações de todas as empresas
-                Empresa.CarregaConfiguracao();
+                //Empresa.CarregaConfiguracao();    //danasa 20-9-2010 - Em InfoApp já é carregada
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
 
             ///
             /// danasa 9-2009
@@ -163,7 +175,7 @@ namespace uninfe
                 Thread t = item.Key;
                 t.Start(item.Value);
                 if (Empresa.Configuracoes.Count>1)
-                    Thread.Sleep(500);  //danasa 9-2010
+                    Thread.Sleep(100);  //danasa 9-2010
             }
             //Limpar para tirar o conteúdo da memória pois não vamos mais precisar
             threads.Clear();
@@ -439,8 +451,22 @@ namespace uninfe
         /// danasa 9-2010
         private void onCloseConfiguracao(object sender, EventArgs e)
         {
-            this.PararServicos();
-            this.ExecutaServicos();
+            /// danasa 20-9-2010
+            FormWait fw = new FormWait();
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                fw.Show();
+                fw.DisplayMessage("Parando os serviços");
+                this.PararServicos();
+                fw.DisplayMessage("Iniciando os serviços");
+                this.ExecutaServicos();
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                fw.Dispose();
+            }
         }
 
         private void toolStripButton_config_Click(object sender, EventArgs e)
@@ -543,9 +569,37 @@ namespace uninfe
             FormUp.Show();
         }
 
+        ///
+        /// danasa 9-2010
+        private void onCloseEmpresas(object sender, EventArgs e)
+        {
+            /// danasa 20-9-2010
+            FormWait fw = new FormWait();
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                fw.Show();
+                fw.DisplayMessage("Parando os serviços");
+                this.PararServicos();
+                fw.DisplayMessage("Lendo as empresas");
+                Empresa.CarregaConfiguracao();
+                fw.DisplayMessage("Iniciando os serviços");
+                this.ExecutaServicos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                fw.Dispose();
+                this.Cursor = Cursors.Default;
+            }
+        }
+
         private void tsbEmpresa_Click(object sender, EventArgs e)
         {
-            FormEmpresa frmEmpresa = new FormEmpresa();
+            FormEmpresa frmEmpresa = new FormEmpresa(onCloseEmpresas);  //danasa 20-9-2010
             frmEmpresa.MdiParent = this;
             frmEmpresa.MinimizeBox = false;
             frmEmpresa.Show();

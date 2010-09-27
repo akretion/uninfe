@@ -22,3 +22,5 @@ C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.
 C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.pdb
 C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.FormEmpresa.resources
 C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.FormUpdate.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.FormCNPJ.resources
+C:\projetos\uninfe\fontesrelease\uninfe\UniNFeLibrary\obj\Release\UniNFeLibrary.Formulario.FormWait.resources

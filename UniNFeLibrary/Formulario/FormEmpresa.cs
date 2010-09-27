@@ -12,12 +12,21 @@ namespace UniNFeLibrary.Formulario
 {
     public partial class FormEmpresa : Form
     {
+        ///
+        /// danasa 9-2010
+        private EventHandler OnMyClose;
+        private bool Salvos;
+
         #region Métodos
-        public FormEmpresa()
+        public FormEmpresa(EventHandler _OnClose)
         {
             InitializeComponent();
 
             this.PopulateGridEmpresa();
+            ///
+            /// danasa 9-2010
+            this.OnMyClose = _OnClose;
+            this.Salvos = false;
         }
         #endregion
 
@@ -55,7 +64,16 @@ namespace UniNFeLibrary.Formulario
 
         private void FormEmpresa_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            ///
+            /// danasa 20-9-2010
+            /// 
+            if (OnMyClose != null)
+            {
+                if (this.Salvos)
+                {
+                    OnMyClose(sender, null);
+                }
+            }
         }
 
         private void tsbtnSalvar_Click(object sender, EventArgs e)
@@ -186,6 +204,12 @@ namespace UniNFeLibrary.Formulario
             }
             #endregion
 
+            this.Salvos = true;
+            this.Close();
+
+            /*
+
+            MessageBox.Show("go to Empresa.CarregaCofig1");
             #region Recarregar as configurações das empresas
             try
             {
@@ -195,7 +219,8 @@ namespace UniNFeLibrary.Formulario
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            #endregion
+            MessageBox.Show("2");
+            #endregion*/
         }
         #endregion
 

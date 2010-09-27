@@ -147,6 +147,8 @@ namespace UniNFeLibrary
                     break;
             }
 
+            string ufNome = CodigoUF.ToString();  //danasa 20-9-2010
+
             if (File.Exists(ArqXML))
             {
                 XmlTextReader oLerXml = null;
@@ -163,6 +165,8 @@ namespace UniNFeLibrary
                             {
                                 if (Convert.ToInt32(oLerXml.GetAttribute("ID")) == CodigoUF)
                                 {
+                                    ufNome = "de " + oLerXml.GetAttribute("Nome");  //danasa 20-9-2010
+
                                     bool Encerrou = false;
                                     while (oLerXml.Read())
                                     {
@@ -252,7 +256,7 @@ namespace UniNFeLibrary
                         break;
                 }
 
-                throw new Exception("O Estado " + CodigoUF.ToString() + " ainda não dispõe deste serviço no layout 4.0.1 da NF-e para o ambiente de " + Ambiente + ".");
+                throw new Exception("O Estado " + ufNome/*CodigoUF.ToString()*/ + " ainda não dispõe deste serviço no layout 4.0.1 da NF-e para o ambiente de " + Ambiente + ".");
             }
 
             return URL;
