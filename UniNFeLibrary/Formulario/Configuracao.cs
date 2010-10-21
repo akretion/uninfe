@@ -183,7 +183,7 @@ namespace UniNFeLibrary.Formulario
             arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teNormal], TipoEmissao.teNormal));
             arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teContingencia], TipoEmissao.teContingencia));
             arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teSCAN], TipoEmissao.teSCAN));
-            //arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teDPEC], TipoEmissao.teDPEC));
+            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teDPEC], TipoEmissao.teDPEC));
             arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teFSDA], TipoEmissao.teFSDA));
 
             comboBox_tpEmis.DataSource = arrTpEmis;

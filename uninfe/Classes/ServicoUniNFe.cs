@@ -218,7 +218,6 @@ namespace uninfe
         }
         #endregion
 
-
         #region LerXMLNFe()
         protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
         {

@@ -30,6 +30,14 @@ namespace UniNFeLibrary
         public const string PedSit_TXT = "-ped-sit.txt";
         public const string PedSta = "-ped-sta.xml";
         public const string PedSta_TXT = "-ped-sta.txt";
+        /// <summary>
+        /// XML de envio do DPEC
+        /// </summary>
+        public const string EnvDPEC = "-envDPEC.xml";
+        /// <summary>
+        /// XML de consulta do registro do DPEC
+        /// </summary>
+        public const string ConsDPEC = "-consDPEC.xml";
     }
     #endregion
 
@@ -99,7 +107,22 @@ namespace UniNFeLibrary
         /// XML de Distribuição da inutilização de números da NFe
         /// </summary>
         public static string ProcInutNFe = "-procInutNFe.xml";
-
+        /// <summary>
+        /// XML de retorno do registro do DPEC
+        /// </summary>
+        public const string retDPEC = "-retDPEC.xml";
+        /// <summary>
+        /// Retorno do registro do DPEC quando ocorre algum erro
+        /// </summary>
+        public const string retDPEC_ERR = "-retDPEC.err";
+        /// <summary>
+        /// XML de retorno da consulta do registro do DPEC
+        /// </summary>
+        public const string retConsDPEC = "-retConsDPEC.xml";
+        /// <summary>
+        /// Retorno da consulta do registro do DPEC quando ocorre algum erro
+        /// </summary>
+        public const string retConsDPEC_ERR = "-retConsDPEC.err";
     }
     #endregion
 

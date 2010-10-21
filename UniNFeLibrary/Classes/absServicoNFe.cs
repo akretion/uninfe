@@ -16,6 +16,7 @@ namespace UniNFeLibrary
         #region Objetos
         protected Auxiliar oAux = new Auxiliar();
         protected InvocarObjeto oInvocarObj = new InvocarObjeto();
+        protected WebServiceProxy oWSProxy = null;
         #endregion
 
         #region Propriedades
@@ -27,6 +28,11 @@ namespace UniNFeLibrary
 
         protected string mXmlNfeDadosMsg;
         protected Servicos mServico { get; set; }
+
+        /// <summary>
+        /// URL do webservice que está sendo utilizando atualmente
+        /// </summary>
+        protected string UrlAtual { get; set; }
 
         /// <summary>
         /// Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
@@ -75,6 +81,14 @@ namespace UniNFeLibrary
 
         #region ConsultaCadastro()
         public abstract void ConsultaCadastro();
+        #endregion
+
+        #region RecepcaoDPEC()
+        public abstract void RecepcaoDPEC();
+        #endregion
+
+        #region ConsultaDPEC()
+        public abstract void ConsultaDPEC();
         #endregion
 
         #endregion
@@ -317,7 +331,7 @@ namespace UniNFeLibrary
                 //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro 
                 //para o ERP
                 // danasa 8-2009
-                if ((Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5")) ||
+                if ((Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4")) ||
                     (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
                 {
                     booValido = true;
@@ -327,7 +341,10 @@ namespace UniNFeLibrary
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                 }
-                // danasa 8-2009
+                else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teDPEC && (oDadosNFe.tpEmis == "4"))
+                {
+                    booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
+                }
                 else if (Empresa.Configuracoes[emp].tpEmis == TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                 {
                     booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
@@ -471,6 +488,10 @@ namespace UniNFeLibrary
 
         #region LerRetornoCanc()
         protected abstract void LerRetornoCanc();
+        #endregion
+
+        #region LerRetDPEC()
+        protected abstract void LerRetDPEC();
         #endregion
 
         #region LerRetornoInut()

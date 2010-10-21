@@ -29,6 +29,7 @@ namespace UniNFeLibrary
         /// Namespace URI associado (Endereço http dos schemas de XML)
         /// </summary>
         public static string nsURI { get; set; }
+        public static Enums.TipoAplicativo TipoAplicativo { get; set; }
         #endregion
 
         #region Propriedades das versões dos XML´s da NFe
@@ -40,6 +41,8 @@ namespace UniNFeLibrary
         public static string VersaoXMLPedSit { get; set; }
         public static string VersaoXMLConsCad { get; set; }
         public static string VersaoXMLCabecMsg { get; set; }
+        public static string VersaoXMLEnvDPEC { get; set; }
+        public static string VersaoXMLConsDPEC { get; set; }
         #endregion
 
         #region Propriedades para controle de servidor proxy
@@ -91,6 +94,7 @@ namespace UniNFeLibrary
                                         else if (oLerXml.Name == "ProxyServidor") { oLerXml.Read(); ConfiguracaoApp.ProxyServidor = oLerXml.Value.Trim(); }
                                         else if (oLerXml.Name == "ProxyUsuario") { oLerXml.Read(); ConfiguracaoApp.ProxyUsuario = oLerXml.Value.Trim(); }
                                         else if (oLerXml.Name == "ProxySenha") { oLerXml.Read(); ConfiguracaoApp.ProxySenha = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "ProxyPorta") { oLerXml.Read(); ConfiguracaoApp.ProxyPorta = Convert.ToInt32(oLerXml.Value.Trim()); }
                                     }
                                 }
                                 break;
@@ -140,7 +144,7 @@ namespace UniNFeLibrary
                     break;
 
                 case TipoEmissao.teDPEC:
-                    //TODO: v3.0 - Mudar o código do municipio para o código do DPEC
+                    CodigoUF = 901;
                     break;
 
                 default:
@@ -206,6 +210,14 @@ namespace UniNFeLibrary
 
                                                         case Servicos.EnviarLoteNfe:
                                                             if (oLerXml.Name == "NFeRecepcao") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
+                                                            break;
+
+                                                        case Servicos.EnviarDPEC:
+                                                            if (oLerXml.Name == "NFeRecepcao") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
+                                                            break;
+
+                                                        case Servicos.ConsultarDPEC:
+                                                            if (oLerXml.Name == "NFeConsulta") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
                                                             break;
 
                                                         default:

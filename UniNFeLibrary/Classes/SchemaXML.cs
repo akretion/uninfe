@@ -134,6 +134,18 @@ namespace UniNFeLibrary
             lstXMLSchema.Add("consCad_v1.01.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
+
+            #region XML Consulta DPEC
+            lstXMLTag.Add("envDPEC");
+            lstXMLID.Add(9);
+            lstXMLTextoID.Add("XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)");
+            lstXMLSchema.Add("envDPEC_v1.01.xsd");
+            lstXMLTagAssinar.Add("infDPEC");
+            #endregion
+
+            #region XML Recepção DPEC
+
+            #endregion
         }
 
     }

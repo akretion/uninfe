@@ -16,6 +16,7 @@ namespace UniNFeLibrary
         #region Objetos
         protected Auxiliar oAux = new Auxiliar();
         protected InvocarObjeto oInvocarObj = new InvocarObjeto();
+        protected WebServiceProxy oWSProxy = null;
         #endregion
 
         #region Propriedades
@@ -29,6 +30,11 @@ namespace UniNFeLibrary
         protected Servicos mServico { get; set; }
 
         /// <summary>
+        /// URL do webservice que está sendo utilizando atualmente
+        /// </summary>
+        protected string UrlAtual { get; set; }
+
+        /// <summary>
         /// Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
         /// </summary>
         public abstract string vXmlNfeDadosMsg { get; set; }
@@ -38,16 +44,19 @@ namespace UniNFeLibrary
         /// </summary>
         protected abstract Servicos Servico { get; set; }
 
+        /// <summary>
+        /// Se o vXmlNFeDadosMsg é um XML
+        /// </summary>
+        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
+        {
+            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
+        }
         #endregion
 
         #region Métodos de execução dos serviços da NFE
 
         #region StatusServico()
         public abstract void StatusServico();
-        #endregion
-
-        #region StatusServico(int tpEmis, int cUF)
-        public abstract string StatusServico(int tpEmis, int cUF);
         #endregion
 
         #region Recepcao()
@@ -72,6 +81,14 @@ namespace UniNFeLibrary
 
         #region ConsultaCadastro()
         public abstract void ConsultaCadastro();
+        #endregion
+
+        #region RecepcaoDPEC()
+        public abstract void RecepcaoDPEC();
+        #endregion
+
+        #region ConsultaDPEC()
+        public abstract void ConsultaDPEC();
         #endregion
 
         #endregion
@@ -470,14 +487,14 @@ namespace UniNFeLibrary
         protected abstract void LerRetornoCanc();
         #endregion
 
+        #region LerRetDPEC()
+        protected abstract void LerRetDPEC();
+        #endregion
+
         #region LerRetornoInut()
         protected abstract void LerRetornoInut();
         #endregion
 
-        public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
-        {
-            get { return Path.GetExtension(this.vXmlNfeDadosMsg).ToLower() == ".xml"; }
-        }
         #endregion
     }
     #endregion

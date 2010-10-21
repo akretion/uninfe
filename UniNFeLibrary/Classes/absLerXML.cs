@@ -468,6 +468,56 @@ namespace UniNFeLibrary
         public DadosPedSta oDadosPedSta = new DadosPedSta();
         #endregion
 
+        #region Classe com os dados do XML de registro do DPEC
+        /// <summary>
+        /// Classe com os dados do XML de registro do DPEC
+        /// </summary>
+        public class DadosEnvDPEC
+        {
+            /// <summary>
+            /// Ambiente (2-Homologação ou 1-Produção)
+            /// </summary>
+            public int tpAmb { get; set; }
+            /// <summary>
+            /// Código da Unidade Federativa (UF)
+            /// </summary>
+            public int cUF { get; set; }
+            /// <summary>
+            /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+            /// </summary>
+            public int tpEmis { get; set; }
+        }
+        /// <summary>
+        /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
+        /// </summary>
+        public DadosEnvDPEC dadosEnvDPEC = new DadosEnvDPEC();
+        #endregion
+
+        #region Classe com os dados do XML de consulta do registro do DPEC
+        /// <summary>
+        /// Classe com os dados do XML de registro do DPEC
+        /// </summary>
+        public class DadosConsDPEC
+        {
+            /// <summary>
+            /// Ambiente (2-Homologação ou 1-Produção)
+            /// </summary>
+            public int tpAmb { get; set; }
+            /// <summary>
+            /// Código da Unidade Federativa (UF)
+            /// </summary>
+            public int cUF { get; set; }
+            /// <summary>
+            /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+            /// </summary>
+            public int tpEmis { get; set; }
+        }
+        /// <summary>
+        /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
+        /// </summary>
+        public DadosEnvDPEC dadosConsDPEC = new DadosEnvDPEC();
+        #endregion
+
         #endregion
 
         #region Metodos abstratos

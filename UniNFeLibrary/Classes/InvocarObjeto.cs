@@ -80,7 +80,7 @@ namespace UniNFeLibrary
 
                 if (CertDig.lLocalizouCertificado == true)
                 {
-                    if (DateTime.Compare(DateTime.Now,CertDig.dValidadeFinal) > 0)
+                    if (DateTime.Compare(DateTime.Now, CertDig.dValidadeFinal) > 0)
                     {
                         throw new ExceptionInvocarObjeto(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
                     }
@@ -127,7 +127,27 @@ namespace UniNFeLibrary
                 }
 
                 //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
-                oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", oCabecMsg);
+                if (cMetodo.Substring(0, 3).ToLower() == "sce") // DPEC
+                {
+                    oWSProxy.SetProp(oServicoWS, "sceCabecMsgValue", oCabecMsg);
+                }
+                else
+                {
+                    switch (ConfiguracaoApp.TipoAplicativo)
+                    {
+                        case UniNFeLibrary.Enums.TipoAplicativo.Cte:
+                            oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", oCabecMsg);
+                            break;
+
+                        case UniNFeLibrary.Enums.TipoAplicativo.Nfe:
+                            oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", oCabecMsg);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
 
                 try
                 {
@@ -142,7 +162,7 @@ namespace UniNFeLibrary
                 //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
                 typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno.OuterXml });
 
-                // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
+                // Registra o retorno de acordo com o status obtido
                 if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
                 {
                     typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
@@ -590,10 +610,12 @@ namespace UniNFeLibrary
         /// <date>29/09/2009</date>
         private System.Net.IWebProxy DefinirProxy()
         {
-            System.Net.NetworkCredential Usuario = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario,ConfiguracaoApp.ProxySenha);
-            System.Net.IWebProxy Proxy;
-            Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor,ConfiguracaoApp.ProxyPorta);
-            Proxy.Credentials = Usuario;
+            System.Net.IWebProxy Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyPorta);
+            Proxy.Credentials = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha);
+
+            //Analisar o codigo abaixo ver a diferença e ver se vai ter alguma necessidade no futuro
+            //System.Net.IWebProxy Proxy = new System.Net.WebProxy(string Address, true);
+            //Proxy.Credentials = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, string domain);
 
             return Proxy;
         }

@@ -108,6 +108,16 @@ namespace UniNFeLibrary
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.AltCon_TXT));
                     goto default;
 
+                case Servicos.EnviarDPEC:
+                    strMetodo = "RecepcaoDPEC";
+                    lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.EnvDPEC);
+                    goto default;
+
+                case Servicos.ConsultarDPEC:
+                    strMetodo = "ConsultaDPEC";
+                    lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsDPEC);
+                    goto default;
+
                 case Servicos.AssinarNFePastaEnvio:
                     this.AssinarValidarNFe(oNfe, Empresa.Configuracoes[emp].PastaEnvio);
                     break;
@@ -298,7 +308,9 @@ namespace UniNFeLibrary
 
             try
             {
-                if (Empresa.Configuracoes[emp].tpEmis != TipoEmissao.teContingencia/*2*/) //2-Confingência em Formulário de segurança não envia na hora, tem que aguardar voltar para normal.
+                if (Empresa.Configuracoes[emp].tpEmis != TipoEmissao.teContingencia && 
+                    Empresa.Configuracoes[emp].tpEmis != TipoEmissao.teFSDA && 
+                    Empresa.Configuracoes[emp].tpEmis != TipoEmissao.teDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
                 {
                     if (strMetodo == "ReconfigurarUniNfe")
                     {
@@ -319,7 +331,7 @@ namespace UniNFeLibrary
                     {
                         this.ReconfigurarUniNFe(cArquivo);
                     }
-                    else if (strMetodo == "RetRecepcao" || strMetodo == "Consulta" || strMetodo == "StatusServico")
+                    else if (strMetodo == "RetRecepcao" || strMetodo == "Consulta" || strMetodo == "StatusServico" || strMetodo == "RecepcaoDPEC" || strMetodo == "ConsultaDPEC")
                     {
                         tipoServico.InvokeMember(strMetodo, System.Reflection.BindingFlags.InvokeMethod, null, oNfe, null);
                     }

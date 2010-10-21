@@ -708,5 +708,39 @@ namespace uninfe
             }
         }
         #endregion
+
+        #region EnvDPEC()
+        /// <summary>
+        /// Efetua a leitura do XML de registro do DPEC
+        /// </summary>
+        /// <param name="arquivoXML">Arquivo XML de registro do DPEC</param>
+        public void EnvDPEC(string arquivoXML)
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            this.dadosEnvDPEC.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.dadosEnvDPEC.tpEmis = TipoEmissao.teDPEC;
+            this.dadosEnvDPEC.cUF = Empresa.Configuracoes[emp].UFCod;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arquivoXML);
+
+            XmlNodeList infDPECList = doc.GetElementsByTagName("infDPEC");
+
+            foreach (XmlNode infDPECNode in infDPECList)
+            {
+                XmlElement infDPECElemento = (XmlElement)infDPECNode;
+
+                this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("cUF")[0].InnerText);
+            }
+        }
+        #endregion
+
+        #region ConsDPEC()
+        public void ConsDPEC(string arquivoXML)
+        {
+        }
+        #endregion
     }
 }

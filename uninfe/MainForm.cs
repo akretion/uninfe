@@ -66,14 +66,6 @@ namespace uninfe
             XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
             iniFile.LoadForm(this, "");
 
-            //Trazer minimizado e no systray
-            notifyIcon1.Visible = true;
-            this.WindowState = FormWindowState.Minimized;
-            this.ShowInTaskbar = false;
-            notifyIcon1.ShowBalloonTip(6000);
-
-            this.MinimumSize = new Size(750, 600);
-
             #region Executar os serviços em novas threads
             //Carregar as configurações antes de executar os serviços do UNINFE
             ConfiguracaoApp.CarregarDados();
@@ -85,12 +77,22 @@ namespace uninfe
             ConfiguracaoApp.VersaoXMLPedSit = "1.07";
             ConfiguracaoApp.VersaoXMLStatusServico = "1.07";
             ConfiguracaoApp.VersaoXMLCabecMsg = "1.02";
+            ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
+            ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
             ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
             SchemaXML.CriarListaIDXML();
 
             //Executar os serviços do UniNFe em novas threads
             this.ExecutaServicos();
             #endregion
+
+            //Trazer minimizado e no systray
+            notifyIcon1.Visible = true;
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
+            notifyIcon1.ShowBalloonTip(6000);
+
+            this.MinimumSize = new Size(750, 600);
         }
         #endregion
 
@@ -152,8 +154,8 @@ namespace uninfe
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.GerarChaveNFe);
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EmProcessamento);
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
-                //TODO: v3.0 - Falta acertar este serviço
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarDPEC);
 
                 //Preparar as thread´s a serem executadas
                 foreach (KeyValuePair<ServicoUniNFe, Servicos> item in servicosUniNfe)

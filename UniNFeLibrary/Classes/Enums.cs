@@ -93,7 +93,29 @@ namespace UniNFeLibrary.Enums
         /// <summary>
         /// Efetua uma limpeza das pastas que recebem arquivos temporários
         /// </summary>
-        LimpezaTemporario
+        LimpezaTemporario,
+        /// <summary>
+        /// Enviar o XML do DPEC para o SCE - Sistema de Contingência Eletrônica
+        /// </summary>
+        EnviarDPEC,
+        /// <summary>
+        /// Consultar o registro do DPEC no SCE - Sistema de Contingência Eletrônica        
+        /// </summary>
+        ConsultarDPEC    
+    }
+    #endregion
+
+    #region TipoAplicativo
+    public enum TipoAplicativo
+    {
+        /// <summary>
+        /// Aplicativo de conhecimento de transporte eletrônico
+        /// </summary>
+        Cte,
+        /// <summary>
+        /// Aplicativo de nota fiscal eletrônica
+        /// </summary>
+        Nfe
     }
     #endregion
 

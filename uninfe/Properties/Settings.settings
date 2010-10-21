@@ -584,5 +584,11 @@
     <Setting Name="uninfe_wsMGHConsultaCadastro_CadConsultaCadastro" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://hnfe.fazenda.mg.gov.br/nfe/services/CadConsultaCadastro</Value>
     </Setting>
+    <Setting Name="uninfe_wsDPECHRecepcao_SCERecepcaoRFB" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://hom.nfe.fazenda.gov.br/SCERecepcaoRFB/SCERecepcaoRFB.asmx</Value>
+    </Setting>
+    <Setting Name="uninfe_wsDPECPRecepcao_SCERecepcaoRFB" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.nfe.fazenda.gov.br/SCERecepcaoRFB/SCERecepcaoRFB.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
