@@ -714,33 +714,177 @@ namespace uninfe
         /// Efetua a leitura do XML de registro do DPEC
         /// </summary>
         /// <param name="arquivoXML">Arquivo XML de registro do DPEC</param>
-        public void EnvDPEC(string arquivoXML)
+        public override void EnvDPEC(int emp, string arquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            //int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
 
             this.dadosEnvDPEC.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.dadosEnvDPEC.tpEmis = TipoEmissao.teDPEC;
             this.dadosEnvDPEC.cUF = Empresa.Configuracoes[emp].UFCod;
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
-
-            XmlNodeList infDPECList = doc.GetElementsByTagName("infDPEC");
-
-            foreach (XmlNode infDPECNode in infDPECList)
+            ///
+            /// danasa 21/10/2010
+            /// 
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                XmlElement infDPECElemento = (XmlElement)infDPECNode;
+                switch (ConfiguracaoApp.TipoAplicativo)
+                {
+                    case UniNFeLibrary.Enums.TipoAplicativo.Cte:
+                        break;
 
-                this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("cUF")[0].InnerText);
+                    case UniNFeLibrary.Enums.TipoAplicativo.Nfe:
+                        ///cUF|31                   |
+                        ///tpAmb|2                  | opcional
+                        ///verProc|1.0.0
+                        ///CNPJ|10238568000360
+                        ///IE|148230665114
+                        ///------
+                        ///chNFe|31101010238568000360550010000001011000001011
+                        ///CNPJCPF|05481336000137   | se UF=EX->Branco
+                        ///UF|SP
+                        ///vNF|123456.00
+                        ///vICMS|18.00
+                        ///vST|121.99
+                        List<string> cLinhas = new Auxiliar().LerArquivo(arquivoXML);
+                        foreach (string cTexto in cLinhas)
+                        {
+                            string[] dados = cTexto.Split('|');
+                            if (dados.GetLength(0) == 1) continue;
+
+                            switch (dados[0].ToLower())
+                            {
+                                case "tpamb":
+                                    this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "cuf":
+                                    this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "verproc":
+                                    this.dadosEnvDPEC.verProc = dados[1].Trim();
+                                    break;
+                                case "cnpj":
+                                    this.dadosEnvDPEC.CNPJ = (string)Auxiliar.OnlyNumbers(dados[1].Trim());
+                                    break;
+                                case "ie":
+                                    this.dadosEnvDPEC.IE = (string)Auxiliar.OnlyNumbers(dados[1].Trim());
+                                    break;
+                                case "chnfe":
+                                    this.dadosEnvDPEC.chNFe = dados[1].Trim();
+                                    break;
+                                case "cnpjcpf":
+                                    this.dadosEnvDPEC.CNPJCPF = (string)Auxiliar.OnlyNumbers(dados[1].Trim());
+                                    break;
+                                case "uf":
+                                    this.dadosEnvDPEC.UF = dados[1].Trim();
+                                    break;
+                                case "vicms":
+                                    this.dadosEnvDPEC.vICMS = dados[1].Trim();
+                                    break;
+                                case "vst":
+                                    this.dadosEnvDPEC.vST = dados[1].Trim();
+                                    break;
+                                case "vnf":
+                                    this.dadosEnvDPEC.vNF = dados[1].Trim();
+                                    break;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                XmlNodeList infDPECList = doc.GetElementsByTagName("infDPEC");
+
+                foreach (XmlNode infDPECNode in infDPECList)
+                {
+                    XmlElement infDPECElemento = (XmlElement)infDPECNode;
+
+                    this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("cUF")[0].InnerText);
+                }
             }
         }
         #endregion
 
         #region ConsDPEC()
-        public void ConsDPEC(string arquivoXML)
+        public override void ConsDPEC(int emp, string arquivoXML)
         {
+            this.dadosConsDPEC.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.dadosConsDPEC.tpEmis = TipoEmissao.teDPEC;
+
+            ///
+            /// danasa 21/10/2010
+            /// 
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            {
+                switch (ConfiguracaoApp.TipoAplicativo)
+                {
+                    case UniNFeLibrary.Enums.TipoAplicativo.Cte:
+                        break;
+
+                    case UniNFeLibrary.Enums.TipoAplicativo.Nfe:
+                        ///cUF|31                   |
+                        ///tpAmb|2                  | opcional
+                        ///verProc|1.0.0
+                        ///CNPJ|10238568000360
+                        ///IE|148230665114
+                        ///------
+                        ///chNFe|31101010238568000360550010000001011000001011
+                        ///CNPJCPF|05481336000137   | se UF=EX->Branco
+                        ///UF|SP
+                        ///vNF|123456.00
+                        ///vICMS|18.00
+                        ///vST|121.99
+                        List<string> cLinhas = new Auxiliar().LerArquivo(arquivoXML);
+                        foreach (string cTexto in cLinhas)
+                        {
+                            string[] dados = cTexto.Split('|');
+                            if (dados.GetLength(0) == 1) continue;
+
+                            switch (dados[0].ToLower())
+                            {
+                                case "tpamb":
+                                    this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "veraplic":
+                                    this.dadosConsDPEC.verAplic = dados[1].Trim();
+                                    break;
+                                case "chnfe":
+                                    this.dadosConsDPEC.chNFe = dados[1].Trim();
+                                    break;
+                                case "nregdpec":
+                                    this.dadosConsDPEC.nRegDPEC = dados[1].Trim();
+                                    break;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                XmlNodeList consDPECList = doc.GetElementsByTagName("consDPEC");
+
+                foreach (XmlNode consDPECNode in consDPECList)
+                {
+                    XmlElement consDPECElemento = (XmlElement)consDPECNode;
+
+                    this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + consDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                }
+            }
         }
         #endregion
+
     }
 }

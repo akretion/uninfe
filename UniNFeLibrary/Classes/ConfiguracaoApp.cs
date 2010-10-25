@@ -124,6 +124,11 @@ namespace UniNFeLibrary
         }
         #endregion
 
+        ///  
+        /// danasa 21/10/2010
+        /// lista utilizada para armazenar os webservices
+        private static List<webServices> webservicesList = null;
+
         #region DefURLWS
         /// <summary>
         /// Definir a URLS do WebService a ser utilizado
@@ -136,7 +141,6 @@ namespace UniNFeLibrary
         {
             string ArqXML = InfoApp.PastaExecutavel() + "\\Webservice.xml";
             string URL = string.Empty;
-
             switch (tipoEmissao)
             {
                 case TipoEmissao.teSCAN:
@@ -144,15 +148,171 @@ namespace UniNFeLibrary
                     break;
 
                 case TipoEmissao.teDPEC:
-                    CodigoUF = 901;
+                    if (servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
+                        CodigoUF = 901;
                     break;
 
                 default:
                     break;
             }
-
             string ufNome = CodigoUF.ToString();  //danasa 20-9-2010
 
+
+            #region --carrega os WebServices na lista de webServices --danasa 21/10/2010
+
+            if (webservicesList == null)
+            {
+                webservicesList = new List<webServices>();
+                if (File.Exists(ArqXML))
+                {
+                    XmlDocument doc = new XmlDocument();
+                    try
+                    {
+                        doc.Load(ArqXML);
+                        XmlNodeList estadoList = doc.GetElementsByTagName("Estado");
+                        foreach (XmlNode estadoNode in estadoList)
+                        {
+                            XmlElement estadoElemento = (XmlElement)estadoNode;
+                            if (estadoElemento.Attributes.Count > 0)
+                            {
+                                if (estadoElemento.Attributes[0].Value != "XX")
+                                {
+                                    int ID = Convert.ToInt32(estadoElemento.Attributes[0].Value);
+                                    string Nome = estadoElemento.Attributes[1].Value;
+                                    string UF = estadoElemento.Attributes[2].Value;
+
+                                    webServices wsItem = new webServices(ID, Nome, UF);
+
+                                    XmlNodeList urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
+                                    for (int i = 0; i < urlList.Count; ++i)
+                                    {
+                                        for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
+                                        {
+                                            switch (urlList[i].ChildNodes[j].Name)
+                                            {
+                                                case "NFeCancelamento":
+                                                    wsItem.URLHomologacao.NFeCancelamento = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta":
+                                                    wsItem.URLHomologacao.NFeConsulta = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsultaCadastro":
+                                                    wsItem.URLHomologacao.NFeConsultaCadastro = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeInutilizacao":
+                                                    wsItem.URLHomologacao.NFeInutilizacao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRecepcao":
+                                                    wsItem.URLHomologacao.NFeRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRetRecepcao":
+                                                    wsItem.URLHomologacao.NFeRetRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeStatusServico":
+                                                    wsItem.URLHomologacao.NFeStatusServico = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    urlList = estadoElemento.GetElementsByTagName("URLProducao");
+                                    for (int i = 0; i < urlList.Count; ++i)
+                                    {
+                                        for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
+                                        {
+                                            switch (urlList[i].ChildNodes[j].Name)
+                                            {
+                                                case "NFeCancelamento":
+                                                    wsItem.URLProducao.NFeCancelamento = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta":
+                                                    wsItem.URLProducao.NFeConsulta = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsultaCadastro":
+                                                    wsItem.URLProducao.NFeConsultaCadastro = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeInutilizacao":
+                                                    wsItem.URLProducao.NFeInutilizacao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRecepcao":
+                                                    wsItem.URLProducao.NFeRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRetRecepcao":
+                                                    wsItem.URLProducao.NFeRetRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeStatusServico":
+                                                    wsItem.URLProducao.NFeStatusServico = urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    webservicesList.Add(wsItem);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw (ex);
+                    }
+                }
+            }
+            
+            #endregion            
+            
+
+            #region --varre a lista de webservices baseado no codigo da UF
+
+            foreach (webServices list in webservicesList)
+            {
+                if (list.ID == CodigoUF)
+                {
+                    switch (servico)
+                    {
+                        case Servicos.CancelarNFe:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeCancelamento : list.URLProducao.NFeCancelamento);
+                            break;
+
+                        case Servicos.ConsultaCadastroContribuinte:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeConsultaCadastro : list.URLProducao.NFeConsultaCadastro);
+                            break;
+
+                        case Servicos.EnviarLoteNfe:
+                        case Servicos.EnviarDPEC:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeRecepcao : list.URLProducao.NFeRecepcao);
+                            break;
+
+                        case Servicos.InutilizarNumerosNFe:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeInutilizacao : list.URLProducao.NFeInutilizacao);
+                            break;
+
+                        case Servicos.PedidoConsultaSituacaoNFe:
+                        case Servicos.ConsultarDPEC:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeConsulta : list.URLProducao.NFeConsulta);
+                            break;
+
+                        case Servicos.PedidoConsultaStatusServicoNFe:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeStatusServico : list.URLProducao.NFeStatusServico);
+                            break;
+
+                        case Servicos.PedidoSituacaoLoteNFe:
+                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeRetRecepcao : list.URLProducao.NFeRetRecepcao);
+                            break;
+                    }
+                    if (URL != string.Empty)
+                    {
+                        if (tipoEmissao == TipoEmissao.teDPEC)  //danasa 21/10/2010
+                            ufNome = "DPEC";
+                        else
+                            ufNome = "de " + list.Nome;  //danasa 20-9-2010
+
+                        break;
+                    }
+                }
+            }
+
+            #endregion
+
+            /************
             if (File.Exists(ArqXML))
             {
                 XmlTextReader oLerXml = null;
@@ -169,7 +329,10 @@ namespace UniNFeLibrary
                             {
                                 if (Convert.ToInt32(oLerXml.GetAttribute("ID")) == CodigoUF)
                                 {
-                                    ufNome = "de " + oLerXml.GetAttribute("Nome");  //danasa 20-9-2010
+                                    if (tipoEmissao == TipoEmissao.teDPEC)  //danasa 21/10/2010
+                                        ufNome = "DPEC";
+                                    else
+                                        ufNome = "de " + oLerXml.GetAttribute("Nome");  //danasa 20-9-2010
 
                                     bool Encerrou = false;
                                     while (oLerXml.Read())
@@ -250,7 +413,7 @@ namespace UniNFeLibrary
                         oLerXml.Close();
                 }
             }
-
+            */
             if (URL == string.Empty)
             {
                 string Ambiente = string.Empty;

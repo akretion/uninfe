@@ -1389,4 +1389,37 @@ namespace UniNFeLibrary
         }
     }
     #endregion
+
+
+    /// <summary>
+    /// danasa 21/10/2010
+    /// </summary>
+    public class URLws
+    {
+        public string NFeRecepcao {get;set;}
+        public string NFeRetRecepcao {get;set;}
+        public string NFeCancelamento {get;set;}
+        public string NFeInutilizacao {get;set;}
+        public string NFeConsulta {get;set;}
+        public string NFeStatusServico {get;set;}
+        public string NFeConsultaCadastro {get;set;}
+    }
+    
+    public class webServices
+    {
+        public int ID { get; private set; }
+        public string Nome { get; private set; }
+        public string UF { get; private set; }
+        public URLws URLHomologacao { get; private set; }
+        public URLws URLProducao { get; private set; }
+
+        public webServices(int id, string nome, string uf)
+        {
+            URLHomologacao = new URLws();
+            URLProducao = new URLws();
+            ID = id;
+            Nome = nome;
+            UF = uf;
+        }
+    }
 }

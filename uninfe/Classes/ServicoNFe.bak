@@ -1486,25 +1486,6 @@ namespace uninfe
                 }
             }
         }
-        #region VerStatusServico()
-        /// <summary>
-        /// Verifica e retorna o Status do Servido da NFE. Para isso este método gera o arquivo XML necessário
-        /// para obter o status do serviõ e faz a leitura do XML de retorno, disponibilizando uma string com a mensagem
-        /// obtida.
-        /// </summary>
-        /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
-        /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>17/06/2008</date>
-        public override string StatusServico(int tpEmis, int cUF)
-        {
-            //Criar XML para obter o status do serviço
-            string XmlNfeDadosMsg = oGerarXML.StatusServico(tpEmis, cUF);
-
-            //Retornar o status do serviço
-            return oAux.VerStatusServico(XmlNfeDadosMsg);
-        }
-        #endregion
         #endregion
 
         #region XmlRetorno()
@@ -1541,6 +1522,165 @@ namespace uninfe
             oGerarXML.XmlPedRec(nRec);
         }
         #endregion
+
+        #region Serviços DPEC
+
+        #region RecepcaoDPEC()
+        /// <summary>
+        /// Envia o XML do registro do DPEC para o SCE (Sistema de Contingência Eletronica)
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 19/10/2010
+        /// </remarks>
+        public override void RecepcaoDPEC()
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            //Definir o serviço que será executado para a classe
+            Servico = Servicos.EnviarDPEC;
+
+            try
+            {
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.EnvDPEC(this.vXmlNfeDadosMsg);
+
+                //Definir a URI para conexão com o Webservice
+                string Url = ConfiguracaoApp.DefURLWS(oLer.dadosEnvDPEC.cUF, oLer.dadosEnvDPEC.tpAmb, oLer.dadosEnvDPEC.tpEmis, Servicos.EnviarDPEC);
+                Uri oUri = new Uri(Url);
+
+                //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
+                //o objeto já instanciado anteriormente. Wandrey 09/03/2010
+                if (Url != UrlAtual)
+                {
+                    oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
+                    UrlAtual = Url;
+                }
+
+                //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCERecepcaoRFB");
+                object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
+
+                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                //oWSProxy.SetProp(oCabecMsg, "cUF", oLer.dadosEnvDPEC.cUF.ToString());
+                oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
+
+                //Criar objeto da classe de assinatura digita
+                AssinaturaDigital oAD = new AssinaturaDigital();
+
+                //Assinar o XML
+                oAD.Assinar(this.vXmlNfeDadosMsg, "infDPEC", Empresa.Configuracoes[emp].X509Certificado);
+
+                //Invocar o método que envia o XML para o SEFAZ
+                oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
+
+                //Ler o retorno
+                LerRetDPEC();
+
+                //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                oGerarXML.XmlRetorno(ExtXml.EnvDPEC, ExtXmlRet.retDPEC, vStrXmlRetorno);
+            }
+            catch (Exception ex)
+            {
+                string ExtRet = string.Empty;
+
+                ExtRet = ExtXml.EnvDPEC;
+
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.retDPEC_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de cancelamento de NFe, infelizmente
+                    //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 09/03/2010
+                }
+            }
+
+        }
+        #endregion
+
+        #region LerRetDPEC()
+        protected override void LerRetDPEC()
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            XmlDocument doc = new XmlDocument();
+
+            try
+            {
+                MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
+                doc.Load(msXml);
+
+                XmlNodeList retDPECList = doc.GetElementsByTagName("retDPEC");
+
+                foreach (XmlNode retDPECNode in retDPECList)
+                {
+                    XmlElement retDPECElemento = (XmlElement)retDPECNode;
+
+                    XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
+
+                    foreach (XmlNode infDPECRegNode in infDPECRegList)
+                    {
+                        XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
+
+                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124") //Cancelamento Homologado
+                        {
+                            string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                            string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
+                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
+
+                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
+                        }
+                        else
+                        {
+                            //Deletar o arquivo de solicitação do serviço da pasta de envio
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+        }
+        #endregion
+
+        #region ConsultaDPEC()
+        /// <summary>
+        /// Envia o XML de consulta do registro do DPEC para o SCE (Sistema de Contingência Eletronica)
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 19/10/2010
+        /// </remarks>
+        public override void ConsultaDPEC()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #endregion
+
     }
     #endregion
 }

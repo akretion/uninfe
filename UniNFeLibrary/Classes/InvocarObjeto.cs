@@ -156,6 +156,8 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
+                    if (cMetodo.Substring(0, 3).ToLower() == "sce") //danasa 21/10/2010
+                        throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWSDPEC, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
                     throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWS, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
                 }
 

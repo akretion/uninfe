@@ -136,15 +136,19 @@ namespace UniNFeLibrary
             #endregion
 
             #region XML Consulta DPEC
-            lstXMLTag.Add("envDPEC");
+            lstXMLTag.Add("consDPEC");  //danasa 21/10/2010
             lstXMLID.Add(9);
-            lstXMLTextoID.Add("XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)");
-            lstXMLSchema.Add("envDPEC_v1.01.xsd");
-            lstXMLTagAssinar.Add("infDPEC");
+            lstXMLTextoID.Add("XML de consulta do DPEC no SCE (Sistema de Contingência Eletrônica)");   //danasa 21/10/2010
+            lstXMLSchema.Add("consDPEC_v1.01.xsd");//danasa 21/10/2010
+            lstXMLTagAssinar.Add(string.Empty);//danasa 21/10/2010
             #endregion
 
             #region XML Recepção DPEC
-
+            lstXMLTag.Add("envDPEC");
+            lstXMLID.Add(10);
+            lstXMLTextoID.Add("XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)");
+            lstXMLSchema.Add("envDPEC_v1.01.xsd");
+            lstXMLTagAssinar.Add("infDPEC");
             #endregion
         }
 

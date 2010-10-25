@@ -111,11 +111,15 @@ namespace UniNFeLibrary
                 case Servicos.EnviarDPEC:
                     strMetodo = "RecepcaoDPEC";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.EnvDPEC);
+                    //danasa 21/10/2010
+                    lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.EnvDPEC_TXT));
                     goto default;
 
                 case Servicos.ConsultarDPEC:
                     strMetodo = "ConsultaDPEC";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsDPEC);
+                    //danasa 21/10/2010
+                    lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsDPEC_TXT));
                     goto default;
 
                 case Servicos.AssinarNFePastaEnvio:

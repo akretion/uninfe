@@ -486,6 +486,16 @@ namespace UniNFeLibrary
             /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
             /// </summary>
             public int tpEmis { get; set; }
+
+            public string CNPJ { get; set; }
+            public string IE { get; set; }
+            public string verProc { get; set; }
+            public string chNFe { get; set; }
+            public string CNPJCPF { get; set; }
+            public string UF { get; set; }
+            public string vNF { get; set; }
+            public string vICMS { get; set; }
+            public string vST { get; set; }
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
@@ -506,16 +516,20 @@ namespace UniNFeLibrary
             /// <summary>
             /// Código da Unidade Federativa (UF)
             /// </summary>
-            public int cUF { get; set; }
+            //public int cUF { get; set; }
             /// <summary>
             /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
             /// </summary>
             public int tpEmis { get; set; }
+
+            public string chNFe { get; set; }
+            public string nRegDPEC { get; set; }
+            public string verAplic { get; set; }
         }
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
         /// </summary>
-        public DadosEnvDPEC dadosConsDPEC = new DadosEnvDPEC();
+        public DadosConsDPEC dadosConsDPEC = new DadosConsDPEC();
         #endregion
 
         #endregion
@@ -530,6 +544,8 @@ namespace UniNFeLibrary
         public abstract void PedSta(string cArquivoXML);
         public abstract void Recibo(string strXml);
         public abstract void PedRec(string cArquivoXML);
+        public abstract void EnvDPEC(int emp, string arquivoXML);
+        public abstract void ConsDPEC(int emp, string arquivoXML);
 
         #endregion
     }

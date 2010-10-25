@@ -156,6 +156,7 @@ namespace uninfe
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
                 servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarDPEC);
+                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultarDPEC);    //danasa 21/10/2010
 
                 //Preparar as thread´s a serem executadas
                 foreach (KeyValuePair<ServicoUniNFe, Servicos> item in servicosUniNfe)
@@ -176,7 +177,7 @@ namespace uninfe
             {
                 Thread t = item.Key;
                 t.Start(item.Value);
-                if (Empresa.Configuracoes.Count>1)
+                if (Empresa.Configuracoes.Count > 1)
                     Thread.Sleep(100);  //danasa 9-2010
             }
             //Limpar para tirar o conteúdo da memória pois não vamos mais precisar

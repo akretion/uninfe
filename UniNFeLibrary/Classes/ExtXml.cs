@@ -33,11 +33,13 @@ namespace UniNFeLibrary
         /// <summary>
         /// XML de envio do DPEC
         /// </summary>
-        public const string EnvDPEC = "-envDPEC.xml";
+        public const string EnvDPEC = "-env-DPEC.xml";
+        public const string EnvDPEC_TXT = "-env-DPEC.txt";
         /// <summary>
         /// XML de consulta do registro do DPEC
         /// </summary>
-        public const string ConsDPEC = "-consDPEC.xml";
+        public const string ConsDPEC = "-cons-DPEC.xml";
+        public const string ConsDPEC_TXT = "-cons-DPEC.txt";
     }
     #endregion
 
@@ -110,19 +112,19 @@ namespace UniNFeLibrary
         /// <summary>
         /// XML de retorno do registro do DPEC
         /// </summary>
-        public const string retDPEC = "-retDPEC.xml";
+        public const string retDPEC = "-ret-DPEC.xml";
         /// <summary>
         /// Retorno do registro do DPEC quando ocorre algum erro
         /// </summary>
-        public const string retDPEC_ERR = "-retDPEC.err";
+        public const string retDPEC_ERR = "-ret-DPEC.err";
         /// <summary>
         /// XML de retorno da consulta do registro do DPEC
         /// </summary>
-        public const string retConsDPEC = "-retConsDPEC.xml";
+        public const string retConsDPEC = "-ret-Cons-DPEC.xml";
         /// <summary>
         /// Retorno da consulta do registro do DPEC quando ocorre algum erro
         /// </summary>
-        public const string retConsDPEC_ERR = "-retConsDPEC.err";
+        public const string retConsDPEC_ERR = "-ret-Cons-DPEC.err";
     }
     #endregion
 

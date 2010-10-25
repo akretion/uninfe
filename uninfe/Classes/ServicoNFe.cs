@@ -642,7 +642,7 @@ namespace uninfe
         protected override void LerRetornoInut()
         {
             int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
-            
+
             XmlDocument doc = new XmlDocument();
 
             try
@@ -1544,49 +1544,58 @@ namespace uninfe
             {
                 //Ler o XML para pegar parâmetros de envio
                 LerXML oLer = new LerXML();
-                oLer.EnvDPEC(this.vXmlNfeDadosMsg);
+                oLer.EnvDPEC(emp, this.vXmlNfeDadosMsg);    //danasa 21/10/2010
 
-                //Definir a URI para conexão com o Webservice
-                string Url = ConfiguracaoApp.DefURLWS(oLer.dadosEnvDPEC.cUF, oLer.dadosEnvDPEC.tpAmb, oLer.dadosEnvDPEC.tpEmis, Servicos.EnviarDPEC);
-                Uri oUri = new Uri(Url);
-
-                //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
-                //o objeto já instanciado anteriormente. Wandrey 09/03/2010
-                if (Url != UrlAtual)
+                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
-                    UrlAtual = Url;
+                    //Definir a URI para conexão com o Webservice
+                    string Url = ConfiguracaoApp.DefURLWS(oLer.dadosEnvDPEC.cUF, oLer.dadosEnvDPEC.tpAmb, oLer.dadosEnvDPEC.tpEmis, Servicos.EnviarDPEC);
+                    Uri oUri = new Uri(Url);
+
+                    //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
+                    //o objeto já instanciado anteriormente. Wandrey 09/03/2010
+                    if (Url != UrlAtual)
+                    {
+                        oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
+                        UrlAtual = Url;
+                    }
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCERecepcaoRFB");
+                    object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    //oWSProxy.SetProp(oCabecMsg, "cUF", oLer.dadosEnvDPEC.cUF.ToString());
+                    oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
+
+                    //Criar objeto da classe de assinatura digita
+                    AssinaturaDigital oAD = new AssinaturaDigital();
+
+                    //Assinar o XML
+                    oAD.Assinar(this.vXmlNfeDadosMsg, "infDPEC", Empresa.Configuracoes[emp].X509Certificado);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
+
+                    //Ler o retorno
+                    LerRetDPEC();
+
+                    //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                    //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                    oGerarXML.XmlRetorno(ExtXml.EnvDPEC, ExtXmlRet.retDPEC, vStrXmlRetorno);
                 }
-
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCERecepcaoRFB");
-                object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
-
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                //oWSProxy.SetProp(oCabecMsg, "cUF", oLer.dadosEnvDPEC.cUF.ToString());
-                oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
-
-                //Criar objeto da classe de assinatura digita
-                AssinaturaDigital oAD = new AssinaturaDigital();
-
-                //Assinar o XML
-                oAD.Assinar(this.vXmlNfeDadosMsg, "infDPEC", Empresa.Configuracoes[emp].X509Certificado);
-
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
-
-                //Ler o retorno
-                LerRetDPEC();
-
-                //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
-                //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                oGerarXML.XmlRetorno(ExtXml.EnvDPEC, ExtXmlRet.retDPEC, vStrXmlRetorno);
+                else
+                {
+                    // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
+                    oGerarXML.EnvioDPEC(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml", oLer.dadosEnvDPEC);
+                                        //oLer.dadosEnvDPEC.tpAmb, 
+                                        //oLer.dadosEnvDPEC.tpEmis, 
+                                        //oLer.dadosEnvDPEC.cUF);
+                }
             }
             catch (Exception ex)
             {
-                string ExtRet = string.Empty;
-
-                ExtRet = ExtXml.EnvDPEC;
+                var ExtRet = vXmlNfeDadosMsgEhXML ? ExtXml.EnvDPEC : ExtXml.EnvDPEC_TXT;
 
                 try
                 {
@@ -1640,12 +1649,12 @@ namespace uninfe
                     {
                         XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124") //Cancelamento Homologado
+                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124") //DPEC Homologado
                         {
                             string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
                             string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
-                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
-
+                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0,4)),Convert.ToInt16(dhRegDPEC.Substring(5,2)),Convert.ToInt16(dhRegDPEC.Substring(8,2)));
+                            
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
                         }
@@ -1675,12 +1684,129 @@ namespace uninfe
         /// </remarks>
         public override void ConsultaDPEC()
         {
-            throw new NotImplementedException();
+ //           throw new NotImplementedException();
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            //Definir o serviço que será executado para a classe
+            Servico = Servicos.ConsultarDPEC;
+
+            try
+            {
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.ConsDPEC(emp, this.vXmlNfeDadosMsg);
+
+                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                {
+                    //Definir a URI para conexão com o Webservice
+                    string Url = ConfiguracaoApp.DefURLWS(0, oLer.dadosConsDPEC.tpAmb, oLer.dadosConsDPEC.tpEmis, Servicos.ConsultarDPEC);
+                    Uri oUri = new Uri(Url);
+
+                    //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
+                    //o objeto já instanciado anteriormente. Wandrey 09/03/2010
+                    if (Url != UrlAtual)
+                    {
+                        oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
+                        UrlAtual = Url;
+                    }
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCEConsultaRFB");
+                    object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsDPEC);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceConsultaDPEC", oCabecMsg, this);
+
+                    //Ler o retorno
+                    LerRetConsDPEC(emp);
+
+                    //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                    //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                    oGerarXML.XmlRetorno(ExtXml.ConsDPEC, ExtXmlRet.retConsDPEC, vStrXmlRetorno);
+                }
+                else
+                {
+                    // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
+                    oGerarXML.ConsultaDPEC(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml", oLer.dadosConsDPEC);
+                }
+            }
+            catch (Exception ex)
+            {
+                var ExtRet = vXmlNfeDadosMsgEhXML ? ExtXml.ConsDPEC : ExtXml.ConsDPEC_TXT;
+
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.retConsDPEC_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de cancelamento de NFe, infelizmente
+                    //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 09/03/2010
+                }
+            }
+        }
+        private void LerRetConsDPEC(int emp)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
+                doc.Load(msXml);
+
+                XmlNodeList retDPECList = doc.GetElementsByTagName("retConstDPEC");
+
+                foreach (XmlNode retDPECNode in retDPECList)
+                {
+                    XmlElement retDPECElemento = (XmlElement)retDPECNode;
+
+                    XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
+
+                    foreach (XmlNode infDPECRegNode in infDPECRegList)
+                    {
+                        XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
+
+                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
+                        {
+                            //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                            string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
+                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
+
+                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
+                        }
+                        else
+                        {
+                            //Deletar o arquivo de solicitação do serviço da pasta de envio
+                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
         #endregion
-
     }
     #endregion
 }

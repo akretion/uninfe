@@ -667,6 +667,77 @@ namespace uninfe
         }
         #endregion
 
+        public void ConsultaDPEC(string pArquivo, LerXML.DadosConsDPEC dadosConsDPEC)
+        {
+            StringBuilder vDadosMsg = new StringBuilder();
+            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            vDadosMsg.Append("<consDPEC versao=\"" + ConfiguracaoApp.VersaoXMLConsDPEC + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">");
+            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosConsDPEC.tpAmb);
+            vDadosMsg.AppendFormat("<verAplic>{0}</verAplic>", dadosConsDPEC.verAplic);
+            if (!string.IsNullOrEmpty(dadosConsDPEC.chNFe))
+                vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", dadosConsDPEC.chNFe);
+            else
+                vDadosMsg.AppendFormat("<nRegDPEC>{0}</nRegDPEC>", dadosConsDPEC.nRegDPEC);
+            vDadosMsg.Append("</consDPEC>");
+
+            try
+            {
+                GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        public void EnvioDPEC(string pArquivo, LerXML.DadosEnvDPEC dadosEnvDPEC)
+        {
+            StringBuilder vDadosMsg = new StringBuilder();
+            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            vDadosMsg.Append("<envDPEC versao=\"" + ConfiguracaoApp.VersaoXMLEnvDPEC + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">");
+            vDadosMsg.AppendFormat("<infDPEC Id=\"DPEC{0}\">", dadosEnvDPEC.CNPJ);
+            vDadosMsg.Append("<ideDec>");
+            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", dadosEnvDPEC.cUF);
+            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosEnvDPEC.tpAmb);
+            vDadosMsg.AppendFormat("<verProc>{0}</verProc>", dadosEnvDPEC.verProc);
+            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDPEC.CNPJ);
+            vDadosMsg.AppendFormat("<IE>{0}</IE>", dadosEnvDPEC.IE);
+            vDadosMsg.Append("</ideDec>");
+            vDadosMsg.Append("<resNFe>");
+            vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", dadosEnvDPEC.chNFe);
+            if (dadosEnvDPEC.UF == "EX" || dadosEnvDPEC.CNPJCPF.Length == 0)
+                vDadosMsg.Append("<CNPJ />");
+            else
+                if (dadosEnvDPEC.CNPJCPF.Length == 14)
+                    vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDPEC.CNPJCPF);
+                else
+                    vDadosMsg.AppendFormat("<CPF>{0}</CPF>", dadosEnvDPEC.CNPJCPF);
+            vDadosMsg.AppendFormat("<UF>{0}</UF>", dadosEnvDPEC.UF);
+            vDadosMsg.AppendFormat("<vNF>{0}</vNF>", dadosEnvDPEC.vNF);
+            vDadosMsg.AppendFormat("<vICMS>{0}</vICMS>", dadosEnvDPEC.vICMS);
+            vDadosMsg.AppendFormat("<vST>{0}</vST>", dadosEnvDPEC.vST);
+            vDadosMsg.Append("</resNFe>");
+            vDadosMsg.Append("</infDPEC>");
+            vDadosMsg.Append("</envDPEC>");
+
+            try
+            {
+                GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
         #region XMLDistInut()
         /// <summary>
         /// Criar o arquivo XML de distribuição das Inutilizações de Números de NFe´s com o protocolo de autorização anexado
