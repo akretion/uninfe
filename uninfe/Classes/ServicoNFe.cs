@@ -1649,7 +1649,8 @@ namespace uninfe
                     {
                         XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124") //DPEC Homologado
+                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                            infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                         {
                             string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
                             string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
@@ -1657,6 +1658,10 @@ namespace uninfe
                             
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
+
+                            //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
+                            string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                            oGerarXML.XmlRetorno(ExtXml.EnvDPEC, ExtXmlRet.retDPEC, vStrXmlRetorno, nomePastaEnviado);
                         }
                         else
                         {
@@ -1770,7 +1775,7 @@ namespace uninfe
                 MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
                 doc.Load(msXml);
 
-                XmlNodeList retDPECList = doc.GetElementsByTagName("retConstDPEC");
+                XmlNodeList retDPECList = doc.GetElementsByTagName("retConsDPEC");
 
                 foreach (XmlNode retDPECNode in retDPECList)
                 {
@@ -1782,14 +1787,23 @@ namespace uninfe
                     {
                         XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
+                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                            infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                         {
                             //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
                             string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
                             DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
+                            string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + oAux.ExtrairNomeArq(vXmlNfeDadosMsg, ExtXml.ConsDPEC) + ExtXml.EnvDPEC;
+                            if (File.Exists(arqEnvDpec))
+                            {
+                                oAux.MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
+                            }
+
+                            //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
+                            string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                            oGerarXML.XmlRetorno(ExtXml.ConsDPEC, ExtXmlRet.retConsDPEC, vStrXmlRetorno, nomePastaEnviado);
                         }
                         else
                         {

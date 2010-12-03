@@ -612,12 +612,14 @@ namespace UniNFeLibrary
         /// <date>29/09/2009</date>
         private System.Net.IWebProxy DefinirProxy()
         {
-            System.Net.IWebProxy Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyPorta);
-            Proxy.Credentials = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha);
+            System.Net.NetworkCredential Usuario = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha);
+            System.Net.IWebProxy Proxy;
+            Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyPorta);
 
-            //Analisar o codigo abaixo ver a diferença e ver se vai ter alguma necessidade no futuro
-            //System.Net.IWebProxy Proxy = new System.Net.WebProxy(string Address, true);
-            //Proxy.Credentials = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, string domain);
+            if (!String.IsNullOrEmpty(ConfiguracaoApp.ProxyUsuario.Trim()) && ConfiguracaoApp.ProxyUsuario.Trim().Length > 0)
+            {
+                Proxy.Credentials = Usuario;
+            }
 
             return Proxy;
         }

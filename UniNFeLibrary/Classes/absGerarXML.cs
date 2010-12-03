@@ -622,16 +622,50 @@ namespace UniNFeLibrary
         /// <summary>
         /// Grava o XML com os dados do retorno dos webservices e deleta o XML de solicitação do serviço.
         /// </summary>
-        /// <param name="pFinalArqEnvio">Final do nome do arquivo de solicitação do serviço.</param>
-        /// <param name="pFinalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
-        /// <param name="ConteudoXMLRetorno">Conteúdo do XML a ser gerado</param>
+        /// <param name="finalArqEnvio">Final do nome do arquivo de solicitação do serviço.</param>
+        /// <param name="finalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
+        /// <param name="conteudoXMLRetorno">Conteúdo do XML a ser gerado</param>
         /// <example>
         /// // Arquivo de envio: 20080619T19113320-ped-sta.xml
         /// // Arquivo de retorno que vai ser gravado: 20080619T19113320-sta.xml
         /// this.GravarXmlRetorno("-ped-sta.xml", "-sta.xml");
         /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        public void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno, string ConteudoXMLRetorno)
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// </remarks>        
+        public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno)
+        {
+            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+
+            try
+            {
+                XmlRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno, Empresa.Configuracoes[emp].PastaRetorno);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
+        #region XmlRetorno()
+        /// <summary>
+        /// Grava o XML com os dados do retorno dos webservices e deleta o XML de solicitação do serviço.
+        /// </summary>
+        /// <param name="finalArqEnvio">Final do nome do arquivo de solicitação do serviço.</param>
+        /// <param name="finalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
+        /// <param name="conteudoXMLRetorno">Conteúdo do XML a ser gerado</param>
+        /// <param name="pastaGravar">Pasta onde é para ser gravado o XML de Retorno</param>
+        /// <example>
+        /// // Arquivo de envio: 20080619T19113320-ped-sta.xml
+        /// // Arquivo de retorno que vai ser gravado: 20080619T19113320-sta.xml
+        /// this.GravarXmlRetorno("-ped-sta.xml", "-sta.xml");
+        /// </example>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 25/11/2010
+        /// </remarks>        
+        public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar)
         {
             int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
 
@@ -644,11 +678,11 @@ namespace UniNFeLibrary
                 oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
 
                 //Gravar o arquivo XML de retorno
-                string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                                      oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) +
-                                      pFinalArqRetorno;
+                string ArqXMLRetorno = pastaGravar + "\\" +
+                                       oAux.ExtrairNomeArq(this.NomeXMLDadosMsg, finalArqEnvio) +
+                                       finalArqRetorno;
                 SW = File.CreateText(ArqXMLRetorno);
-                SW.Write(ConteudoXMLRetorno);
+                SW.Write(conteudoXMLRetorno);
             }
             catch (Exception ex)
             {
@@ -667,7 +701,7 @@ namespace UniNFeLibrary
             {
                 try
                 {
-                    this.TXTRetorno(pFinalArqEnvio, pFinalArqRetorno, ConteudoXMLRetorno);
+                    this.TXTRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno);
                 }
                 catch (Exception ex)
                 {
@@ -676,6 +710,7 @@ namespace UniNFeLibrary
             }
         }
         #endregion
+
 
         #region TXTRetorno()
         //TODO: Documentar este método
