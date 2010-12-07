@@ -115,7 +115,7 @@ namespace UniNFeLibrary
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            oWSProxy.SetProp(oServicoWS, "Timeout", 20000);
+            oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
             try
             {
@@ -300,7 +300,7 @@ namespace UniNFeLibrary
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 100000 });
+            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 60000 });
 
             //Vou fazer 5 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
             for (int i = 1; i <= 5; i++)
@@ -464,7 +464,7 @@ namespace UniNFeLibrary
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 100000 });
+            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 60000 });
 
             //Vou fazer 3 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
             for (int i = 1; i <= 5; i++)

@@ -864,8 +864,7 @@ namespace uninfe
             {
 
                 string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<consReciNFe xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
-                    "versao=\"" + ConfiguracaoApp.VersaoXMLPedRec + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">" +
+                    "<consReciNFe versao=\"" + ConfiguracaoApp.VersaoXMLPedRec + "\" xmlns=\"" + ConfiguracaoApp.nsURI + "\">" +
                     "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                     "<nRec>" + strRecibo + "</nRec>" +
                     "</consReciNFe>";

@@ -691,7 +691,7 @@ namespace UniNFeLibrary
                 oReciboCons = lstRecibo[i];
                 var tempoConsulta = oReciboCons.tMed;
 
-                //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandreu 20/07/2010
+                //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandrey 20/07/2010
                 if (tempoConsulta < 2)
                 {
                     tempoConsulta = 2;
