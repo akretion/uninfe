@@ -730,6 +730,8 @@ namespace UniNFeLibrary
             lstMascaras.Add(ExtXmlRet.ProcCancNFe);
             lstMascaras.Add(ExtXmlRet.ProcInutNFe);
             lstMascaras.Add(ExtXmlRet.ProcNFe);
+            lstMascaras.Add(ExtXml.ConsDPEC);
+            lstMascaras.Add(ExtXml.EnvDPEC);
 
             Auxiliar oAux = new Auxiliar();
 
