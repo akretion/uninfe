@@ -415,8 +415,8 @@ namespace UniNFeLibrary
             return retorna;
         }
         #endregion
-
-        #region FindEmpresaThread()
+        
+        /*#region FindEmpresaThread()
         /// <summary>
         /// Descobre qual é a empresa da thread que está sendo executada
         /// </summary>
@@ -441,7 +441,7 @@ namespace UniNFeLibrary
 
             return retorna;
         }
-        #endregion
+        #endregion*/
 
         #region Valid()
         /// <summary>
@@ -675,5 +675,15 @@ namespace UniNFeLibrary
         }
         #endregion
 
+    }
+
+    public class FindEmpresaThread
+    {
+        public int Index = -1;
+
+        public FindEmpresaThread(Thread currentThread)
+        {
+            Index = Auxiliar.threads[currentThread];
+        }
     }
 }

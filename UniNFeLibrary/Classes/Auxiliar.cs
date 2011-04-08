@@ -128,7 +128,7 @@ namespace UniNFeLibrary
         /// <param name="ArqXMLPedido"></param>
         public void GerarChaveNFe(string ArqPedido, Boolean xml)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             // XML - pedido
             // Filename: XXXXXXXX-gerar-chave.xml
@@ -331,7 +331,7 @@ namespace UniNFeLibrary
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name); 
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             if (!string.IsNullOrEmpty(Arquivo))
             {
                 try
@@ -366,19 +366,19 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void GravarArqErroServico(string Arquivo, string FinalArqEnvio, string FinalArqErro, string Erro)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-                //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
-                //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
-                //for gerado corretamente.
-                this.MoveArqErro(Arquivo);
+            //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
+            //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
+            //for gerado corretamente.
+            this.MoveArqErro(Arquivo);
 
-                //Grava arquivo de ERRO para o ERP
-                string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                                  this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
-                                  FinalArqErro;
+            //Grava arquivo de ERRO para o ERP
+            string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
+                              this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
+                              FinalArqErro;
 
-                File.WriteAllText(cArqErro, Erro, Encoding.Default);
+            File.WriteAllText(cArqErro, Erro, Encoding.Default);
         }
         #endregion
 
@@ -394,7 +394,7 @@ namespace UniNFeLibrary
         /// <date>28/05/2009</date>
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = this.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
@@ -536,28 +536,29 @@ namespace UniNFeLibrary
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg, ".xml")</example>
         public void MoveArqErro(string Arquivo, string ExtensaoArq)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-                if (File.Exists(Arquivo))
+            if (File.Exists(Arquivo))
+            {
+                FileInfo oArquivo = new FileInfo(Arquivo);
+
+                if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
                 {
-                    FileInfo oArquivo = new FileInfo(Arquivo);
+                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
-                    if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro) == true)
-                    {
-                        string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
+                    if (File.Exists(vNomeArquivo))
+                        this.DeletarArquivo(vNomeArquivo);
 
-                        //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
-                        if (File.Exists(vNomeArquivo))
-                            this.DeletarArquivo(vNomeArquivo);
-
-                        //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                        oArquivo.MoveTo(vNomeArquivo);
-                    }
-                    else
-                    {
-                        oArquivo.Delete();
-                    }
+                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
+                    oArquivo.MoveTo(vNomeArquivo);
                 }
+                else
+                {
+                    //Não posso excluir, o arquivo pode ser importante. Wandrey 25/02/2011
+                    //oArquivo.Delete();
+                }
+            }
         }
         #endregion
 
@@ -585,15 +586,15 @@ namespace UniNFeLibrary
         /// </remarks>
         public void MoverArquivo(string Arquivo, string strDestinoArquivo)
         {
-                if (File.Exists(Arquivo))   //danasa 10-2009
-                {
-                    //Mover o arquivo original para a pasta de destino
-                    this.DeletarArquivo(strDestinoArquivo);
+            if (File.Exists(Arquivo))   //danasa 10-2009
+            {
+                //Mover o arquivo original para a pasta de destino
+                this.DeletarArquivo(strDestinoArquivo);
 
-                    //Definir o arquivo que vai ser deletado ou movido para outra pasta
-                    FileInfo oArquivo = new FileInfo(Arquivo);
-                    oArquivo.MoveTo(strDestinoArquivo);
-                }
+                //Definir o arquivo que vai ser deletado ou movido para outra pasta
+                FileInfo oArquivo = new FileInfo(Arquivo);
+                oArquivo.MoveTo(strDestinoArquivo);
+            }
         }
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
@@ -607,8 +608,8 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado, DateTime Emissao)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
-            
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+
             try
             {
                 //Definir o arquivo que vai ser deletado ou movido para outra pasta
@@ -736,7 +737,7 @@ namespace UniNFeLibrary
         /// </remarks>
         public void CopiarXMLPastaDanfeMon(string arquivoCopiar)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             try
             {
@@ -793,12 +794,12 @@ namespace UniNFeLibrary
         // danasa 10-2009
         public void RenomearArquivo(string oldFileName, string newFileName)
         {
-                this.DeletarArquivo(newFileName);
-                if (File.Exists(oldFileName))
-                {
-                    FileInfo oArquivo = new FileInfo(oldFileName);
-                    oArquivo.MoveTo(newFileName);
-                }
+            this.DeletarArquivo(newFileName);
+            if (File.Exists(oldFileName))
+            {
+                FileInfo oArquivo = new FileInfo(oldFileName);
+                oArquivo.MoveTo(newFileName);
+            }
         }
         #endregion
 
@@ -864,7 +865,7 @@ namespace UniNFeLibrary
         /// <date>28/05/2009</date>
         public void ValidarAssinarXML(string Arquivo)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             Boolean Assinou = true;
             ValidarXMLs oValidador = new ValidarXMLs();
@@ -887,8 +888,8 @@ namespace UniNFeLibrary
                 catch (Exception ex)
                 {
                     Assinou = false;
-                        this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + ex.Message);
-                        this.MoveArqErro(Arquivo);
+                    this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + ex.Message);
+                    this.MoveArqErro(Arquivo);
                 }
             }
 
@@ -984,7 +985,7 @@ namespace UniNFeLibrary
         /// <returns>Se está na pasta de XML´s autorizados</returns>
         public bool EstaAutorizada(string Arquivo, DateTime Emissao, string Extensao)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + Extensao);
@@ -1000,7 +1001,7 @@ namespace UniNFeLibrary
         /// <returns>Se está na pasta de XML´s denegados</returns>
         public bool EstaDenegada(string Arquivo, DateTime Emissao)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + this.ExtrairNomeArq(Arquivo, ExtXml.Nfe) + "-den.xml");
         }
@@ -1018,7 +1019,7 @@ namespace UniNFeLibrary
         /// </remarks>
         public void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
             if (Empresa.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
@@ -1195,7 +1196,7 @@ namespace UniNFeLibrary
                         if (configElemento.GetElementsByTagName("CertificadoDigital")[0] != null)
                             certificado = configElemento.GetElementsByTagName("CertificadoDigital")[0].InnerText;
                     }
-                   
+
                     string[] dados = certificado.Split(new char[] { ',', ':' });
                     foreach (string dado in dados)
                     {
@@ -1396,15 +1397,15 @@ namespace UniNFeLibrary
     /// </summary>
     public class URLws
     {
-        public string NFeRecepcao {get;set;}
-        public string NFeRetRecepcao {get;set;}
-        public string NFeCancelamento {get;set;}
-        public string NFeInutilizacao {get;set;}
-        public string NFeConsulta {get;set;}
-        public string NFeStatusServico {get;set;}
-        public string NFeConsultaCadastro {get;set;}
+        public string NFeRecepcao { get; set; }
+        public string NFeRetRecepcao { get; set; }
+        public string NFeCancelamento { get; set; }
+        public string NFeInutilizacao { get; set; }
+        public string NFeConsulta { get; set; }
+        public string NFeStatusServico { get; set; }
+        public string NFeConsultaCadastro { get; set; }
     }
-    
+
     public class webServices
     {
         public int ID { get; private set; }

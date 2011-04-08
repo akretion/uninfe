@@ -432,7 +432,7 @@ namespace UniNFeLibrary
                                 ///
                                 /// Assume a UF da configuracao
                                 ///
-                                int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
                                 dr["cUF"] = Empresa.Configuracoes[emp].UFCod;
                             }

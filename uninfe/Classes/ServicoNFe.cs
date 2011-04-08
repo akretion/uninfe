@@ -14,7 +14,7 @@ namespace uninfe
     public class ServicoNFe : absServicoNFe
     {
         #region Objetos
-        public GerarXML oGerarXML = new GerarXML(Empresa.FindEmpresaThread(Thread.CurrentThread.Name));
+        public GerarXML oGerarXML = new GerarXML(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Propriedades
@@ -103,7 +103,7 @@ namespace uninfe
         /// <date>01/07/2008</date>
         public override void Cancelamento()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Ler o XML para pegar parâmetros de envio
             LerXML oLer = new LerXML();
@@ -454,7 +454,7 @@ namespace uninfe
         /// <date>03/04/2009</date>
         public override void Inutilizacao()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Ler o XML para pegar parâmetros de envio
             LerXML oLer = new LerXML();
@@ -574,7 +574,7 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoCanc()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             XmlDocument doc = new XmlDocument();
 
@@ -641,7 +641,7 @@ namespace uninfe
         /// <date>21/04/2009</date>
         protected override void LerRetornoInut()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             XmlDocument doc = new XmlDocument();
 
@@ -701,7 +701,7 @@ namespace uninfe
         /// <date>20/04/2009</date>
         protected override void LerRetornoLote()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
@@ -919,7 +919,7 @@ namespace uninfe
         /// </remarks>
         protected override void LerRetornoSit(string ChaveNFe)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
@@ -1223,7 +1223,7 @@ namespace uninfe
         /// <date>04/06/2008</date>
         public override void Recepcao()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Instanciar o objeto da classe DefObjServico
             DefObjServico oDefObj = new DefObjServico();
@@ -1535,7 +1535,7 @@ namespace uninfe
         /// </remarks>
         public override void RecepcaoDPEC()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.EnviarDPEC;
@@ -1628,7 +1628,7 @@ namespace uninfe
         #region LerRetDPEC()
         protected override void LerRetDPEC()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             XmlDocument doc = new XmlDocument();
 
@@ -1690,7 +1690,7 @@ namespace uninfe
         public override void ConsultaDPEC()
         {
  //           throw new NotImplementedException();
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultarDPEC;

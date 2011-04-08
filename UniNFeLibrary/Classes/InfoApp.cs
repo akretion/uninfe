@@ -148,7 +148,7 @@ namespace UniNFeLibrary
         /// <date>29/01/2009</date>
         public void GravarXMLInformacoes(string sArquivo)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             string cStat = "1";
             string xMotivo = "Consulta efetuada com sucesso";

@@ -44,7 +44,7 @@ namespace UniNFeLibrary.Formulario
         /// <summary>
         /// URL de onde é para ser efetuado o download do arquivo
         /// </summary>
-        private string URL = "http://www.unimake.com.br/downloads/iunicow.exe";
+        private string URL = "http://www.unimake.com.br/downloads/iuninfe.exe";
         /// <summary>
         /// Caminho local onde é para ser gravado o arquivo que está sendo efetuado o download
         /// </summary>
@@ -65,7 +65,7 @@ namespace UniNFeLibrary.Formulario
             InitializeComponent();
 
             this.LocalArq = Application.StartupPath + "\\" + NomeInstalador;
-            this.URL = "http://www.unimake.com.br/uninfe/downloads/" + NomeInstalador;
+            this.URL = "http://www.unimake.com.br/downloads/" + NomeInstalador;
         }
         #endregion
 

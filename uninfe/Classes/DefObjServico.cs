@@ -299,7 +299,7 @@ namespace uninfe
         /// <date>01/07/2008</date>
         public void Inutilizacao(ref object pServico, ref object pCabecMsg, ParametroEnvioXML oParam)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             if (oParam/*ConfiguracaoApp*/.tpAmb == TipoAmbiente.taProducao)
             {
@@ -405,7 +405,7 @@ namespace uninfe
         /// <date>17/06/2008</date>
         public void Recepcao(ref object pServico, ref object pCabecMsg)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taProducao/*1*/)
             {
@@ -511,7 +511,7 @@ namespace uninfe
         /// <date>17/06/2008</date>
         public void RetRecepcao(ref object pServico, ref object pCabecMsg)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             if (Empresa.Configuracoes[emp].tpAmb == TipoAmbiente.taProducao/*1*/)
             {

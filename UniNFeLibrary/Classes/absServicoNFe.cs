@@ -140,7 +140,7 @@ namespace UniNFeLibrary
         /// <date>03/04/2009</date>
         public Boolean AssinarValidarXMLNFe(string strPasta)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             Boolean bRetorna = false;
             Boolean bAssinado = this.Assinado(this.vXmlNfeDadosMsg);
@@ -167,22 +167,24 @@ namespace UniNFeLibrary
                     if (oFluxoNfe.NfeExiste(ChaveNfe))
                     {
                         //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
-                        //oAux.MoveArqErro(ConfiguracaoApp.vPastaXMLEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
 
                         //Deletar a NFE do arquivo de controle de fluxo
-                        //oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
+                        oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
 
                         //Vou forçar uma exceção, e o ERP através do inicio da mensagem de erro pode tratar e já gerar uma consulta
                         //situação para finalizar o processo. Assim envito perder os XML´s que estão na pasta EmProcessamento
                         //tendo assim a possibilidade de gerar o -procNfe.XML através da consulta situação.
                         //Wandrey 08/10/2009
 
-                        throw new Exception("NFE NO FLUXO: Esta nota fiscal já está na pasta de Notas Fiscais em processo de envio, desta forma não é possível envia-la novamente. Se a nota fiscal estiver presa no fluxo de envio sem conseguir finalizar o processo, gere um consulta situação da NFe para forçar a finalização.\r\n" +
-                            this.vXmlNfeDadosMsg);
+                        //throw new Exception("NFE NO FLUXO: Esta nota fiscal já está na pasta de Notas Fiscais em processo de envio, desta forma não é possível envia-la novamente. Se a nota fiscal estiver presa no fluxo de envio sem conseguir finalizar o processo, gere um consulta situação da NFe para forçar a finalização.\r\n" +
+                        //    this.vXmlNfeDadosMsg);
                     }
-
-                    //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                    oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                    else
+                    {
+                        //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
+                        oAux.DeletarArqXMLErro(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(this.vXmlNfeDadosMsg, ".xml") + ".xml");
+                    }
 
                     //Validações gerais
                     if (this.ValidacoesGeraisXMLNFe(this.vXmlNfeDadosMsg, oDadosNFe))
@@ -321,7 +323,7 @@ namespace UniNFeLibrary
         /// <date>16/04/2009</date>
         protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, absLerXML.DadosNFeClass oDadosNFe)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             bool booValido = false;
             string cTextoErro = "";

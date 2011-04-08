@@ -203,7 +203,7 @@ namespace uninfe
         /// <param name="cArquivoXML"></param>
         public override void PedCanc(string cArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             this.oDadosPedCanc.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedCanc.tpEmis = Empresa.Configuracoes[emp].tpEmis;
@@ -290,7 +290,7 @@ namespace uninfe
         /// <param name="cArquivoXML"></param>
         public override void PedInut(string cArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             this.oDadosPedInut.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
@@ -434,7 +434,7 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void PedSit(string cArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;// string.Empty;
             this.oDadosPedSit.chNFe = string.Empty;
@@ -513,7 +513,7 @@ namespace uninfe
         /// <by>Wandrey Mundin Ferreira</by>
         public override void PedSta(string cArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             this.oDadosPedSta.tpAmb = 0;
             this.oDadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
@@ -663,7 +663,7 @@ namespace uninfe
         /// </remarks>
         public override void PedRec(string cArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             this.oDadosPedRec.tpAmb = 0;
             this.oDadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;

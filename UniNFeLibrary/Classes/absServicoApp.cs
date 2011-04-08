@@ -44,7 +44,7 @@ namespace UniNFeLibrary
 
             string strMascaraArq = string.Empty;
             string strMetodo = string.Empty;
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             switch (srvServico)
             {
@@ -302,7 +302,7 @@ namespace UniNFeLibrary
             */
             #endregion
 
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
@@ -404,7 +404,7 @@ namespace UniNFeLibrary
         /// <date>17/04/2009</date>
         private void MontarLoteUmaNfe(Object oNfe)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
@@ -463,7 +463,7 @@ namespace UniNFeLibrary
         /// <date>28/04/2009</date>
         private void MontarLoteVariasNfe(Object oNfe)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             List<string> lstArqMontarLote = new List<string>();
 
@@ -612,7 +612,7 @@ namespace UniNFeLibrary
         /// <date>29/01/2009</date>
         private void GravarXMLDadosCertificado(string ArquivoXml)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name); 
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             string sArqRetorno = string.Empty;
 
             Auxiliar oAux = new Auxiliar();
@@ -710,7 +710,7 @@ namespace UniNFeLibrary
         #region AssinarValidarXML()
         private void AssinarValidarXML()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             
             ///
             /// danasa 21-9-2009
@@ -801,7 +801,7 @@ namespace UniNFeLibrary
             {
                 lock (thread)
                 {
-                    int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                    int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
                     //se chegou até aqui é porque é para fazer a limpeza dos diretórios
                     #region temporario
@@ -821,7 +821,7 @@ namespace UniNFeLibrary
 
         private void Limpar(string diretorio)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //recupera os arquivos da pasta temporario
             string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);

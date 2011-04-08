@@ -334,7 +334,7 @@ namespace UniNFeLibrary
 
             public DadosPedCanc()
             {
-                int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
                 this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             }
         }
@@ -375,7 +375,7 @@ namespace UniNFeLibrary
 
             public DadosPedInut()
             {
-                int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
                 this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             }
         }

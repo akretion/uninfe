@@ -285,7 +285,7 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         protected void GerarXMLLote(Int32 intNumeroLote)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Gravar o XML do lote das notas fiscais
             string vNomeArqLoteNfe = Empresa.Configuracoes[emp].PastaEnvio + "\\" +
@@ -324,7 +324,7 @@ namespace UniNFeLibrary
         /// </remarks>
         private void PopulateNomeArqLote()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\UniNfeLote.xml";
             Bkp1NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp1_UniNfeLote.xml";
@@ -635,7 +635,7 @@ namespace UniNFeLibrary
         /// </remarks>        
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             try
             {
@@ -667,7 +667,7 @@ namespace UniNFeLibrary
         /// </remarks>        
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             StreamWriter SW = null;
 
@@ -779,7 +779,7 @@ namespace UniNFeLibrary
         #region NomeArqLoteRetERP()
         protected string NomeArqLoteRetERP(string NomeArquivoXML)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             return Empresa.Configuracoes[emp].PastaRetorno + "\\" +
                 oAux.ExtrairNomeArq(NomeArquivoXML, ExtXml.Nfe) +

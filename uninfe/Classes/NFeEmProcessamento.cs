@@ -19,7 +19,7 @@ namespace uninfe
 
         public NFeEmProcessamento()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             if (Empresa.Configuracoes[emp].UltimaVerificacaoEmProcessamento.Year > 1)
             {

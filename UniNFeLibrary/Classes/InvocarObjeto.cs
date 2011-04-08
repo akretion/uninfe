@@ -26,7 +26,7 @@ namespace UniNFeLibrary
         /// <date>19/06/2008</date>
         private void RelacionarCertObj(object pObjeto)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             
             //Detectar o tipo do objeto
             Type tipoServico = pObjeto.GetType();
@@ -63,7 +63,7 @@ namespace UniNFeLibrary
                             string cFinalArqEnvio,
                             string cFinalArqRetorno)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
@@ -251,7 +251,7 @@ namespace UniNFeLibrary
         /// <date>01/07/2008</date>
         public bool Invocar(object ServicoNFe, string cVersaoDados, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             bool lRetorna = false;
 
@@ -405,7 +405,7 @@ namespace UniNFeLibrary
         /// <date>01/07/2008</date>
         public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, ParametroEnvioXML oParam, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             bool lRetorna = false;
 

@@ -783,7 +783,7 @@ namespace UniNFeLibrary
         /// 
         public void ReconfigurarUniNFe(string cArquivoXml)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             string cStat = "";
             string xMotivo = "";

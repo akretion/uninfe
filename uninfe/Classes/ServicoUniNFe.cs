@@ -58,7 +58,7 @@ namespace uninfe
         /// <date>03/069/2009</date>
         protected override void ConvTXT(string vPasta)
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             Auxiliar oAux = new Auxiliar();
 
             List<string> lstArquivos = this.ArquivosPasta(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/, "*-nfe.txt");
@@ -189,7 +189,7 @@ namespace uninfe
         #region GerarChaveNFe
         protected override void GerarChaveNFe()
         {
-            int emp = Empresa.FindEmpresaThread(Thread.CurrentThread.Name);
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             Auxiliar oAux = new Auxiliar();
             ///
