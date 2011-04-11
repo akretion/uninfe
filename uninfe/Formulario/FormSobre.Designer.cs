@@ -1,4 +1,4 @@
-﻿namespace uninfe
+﻿namespace uninfe.Formulario
 {
     partial class FormSobre
     {

@@ -12,9 +12,9 @@ using System.Threading;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using UniNFeLibrary;
-using UniNFeLibrary.Formulario;
-using UniNFeLibrary.Enums;
 using uninfe.Formulario;
+using UniNFeLibrary.Enums;
+using UniNFeLibrary.Formulario;
 
 namespace uninfe
 {
@@ -66,26 +66,6 @@ namespace uninfe
             XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
             iniFile.LoadForm(this, "");
 
-            #region Executar os serviços em novas threads
-            //Carregar as configurações antes de executar os serviços do UNINFE
-            ConfiguracaoApp.CarregarDados();
-            ConfiguracaoApp.VersaoXMLCanc = "1.07";
-            ConfiguracaoApp.VersaoXMLConsCad = "1.01";
-            ConfiguracaoApp.VersaoXMLInut = "1.07";
-            ConfiguracaoApp.VersaoXMLNFe = "1.10";
-            ConfiguracaoApp.VersaoXMLPedRec = "1.10";
-            ConfiguracaoApp.VersaoXMLPedSit = "1.07";
-            ConfiguracaoApp.VersaoXMLStatusServico = "1.07";
-            ConfiguracaoApp.VersaoXMLCabecMsg = "1.02";
-            ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
-            ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-            ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
-            SchemaXML.CriarListaIDXML();
-
-            //Executar os serviços do UniNFe em novas threads
-            this.ExecutaServicos();
-            #endregion
-
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;
             this.WindowState = FormWindowState.Minimized;
@@ -93,6 +73,24 @@ namespace uninfe
             notifyIcon1.ShowBalloonTip(6000);
 
             this.MinimumSize = new Size(750, 600);
+
+            #region Executar os serviços em novas threads
+            //Carregar as configurações antes de executar os serviços do UNINFE
+            ConfiguracaoApp.TipoAplicativo = TipoAplicativo.Nfe;
+            ConfiguracaoApp.CarregarDados();
+            ConfiguracaoApp.VersaoXMLCanc = "2.00";
+            ConfiguracaoApp.VersaoXMLConsCad = "2.00";
+            ConfiguracaoApp.VersaoXMLInut = "2.00";
+            ConfiguracaoApp.VersaoXMLNFe = "2.00";
+            ConfiguracaoApp.VersaoXMLPedRec = "2.00";
+            ConfiguracaoApp.VersaoXMLPedSit = "2.00";
+            ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
+            ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
+            ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
+            ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
+            ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
+            SchemaXML.CriarListaIDXML();
+            #endregion
         }
         #endregion
 
@@ -137,26 +135,27 @@ namespace uninfe
 
                 //Criar uma lista dos serviços a serem executados
                 servicosUniNfe.Clear();
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarLoteNfe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvio);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteUmaNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoSituacaoLoteNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaSituacaoNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvioEmLote);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteVariasNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ValidarAssinar);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.CancelarNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.InutilizarNumerosNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaStatusServicoNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaCadastroContribuinte);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaInformacoesUniNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AlterarConfiguracoesUniNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.GerarChaveNFe);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EmProcessamento);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarDPEC);
-                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultarDPEC);    //danasa 21/10/2010
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarLoteNfe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvio);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteUmaNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoSituacaoLoteNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaSituacaoNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvioEmLote);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteVariasNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ValidarAssinar);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.CancelarNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.InutilizarNumerosNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaStatusServicoNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaCadastroContribuinte);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaInformacoesUniNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AlterarConfiguracoesUniNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.GerarChaveNFe);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EmProcessamento);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarDPEC);
+                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultarDPEC);    //danasa 21/10/2010
+                                if (Empresa.Configuracoes[i].DiasLimpeza != 0)  //danasa 27-2-2011
+                                    servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
 
                 //Preparar as thread´s a serem executadas
                 foreach (KeyValuePair<ServicoUniNFe, Servicos> item in servicosUniNfe)
@@ -548,13 +547,13 @@ namespace uninfe
         {
             try
             {
-                if (File.Exists(Application.StartupPath + "\\UniNFe.pdf"))
+                if (File.Exists(Application.StartupPath + "\\" + InfoApp.NomeAplicacao() + ".pdf"))
                 {
-                    System.Diagnostics.Process.Start(Application.StartupPath + "\\UniNFe.pdf");
+                    System.Diagnostics.Process.Start(Application.StartupPath + InfoApp.NomeAplicacao() + ".pdf");
                 }
                 else
                 {
-                    MessageBox.Show("Não foi possível localizar o arquivo de manual do UniNFe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Não foi possível localizar o arquivo de manual do sistema.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -565,8 +564,8 @@ namespace uninfe
         #endregion
 
         private void toolStripBtnUpdate_Click(object sender, EventArgs e)
-        {            
-            FormUpdate FormUp = new FormUpdate("iuninfe2.exe");
+        {
+            FormUpdate FormUp = new FormUpdate("i" + InfoApp.NomeAplicacao().ToLower() + ".exe");
             FormUp.MdiParent = this;
             FormUp.MinimizeBox = false;
             FormUp.Show();
@@ -606,6 +605,13 @@ namespace uninfe
             frmEmpresa.MdiParent = this;
             frmEmpresa.MinimizeBox = false;
             frmEmpresa.Show();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //Executar os serviços do UniNFe em novas threads
+            //Tem que ser carregado depois que o formulário da MainForm estiver totalmente carregado para evitar Erros. Wandrey 19/10/2010
+            this.ExecutaServicos();
         }
     }
     #endregion

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using UniNFeLibrary;
 using System.Reflection;
 
-namespace uninfe
+namespace uninfe.Formulario
 {
     public partial class FormSobre : Form
     {

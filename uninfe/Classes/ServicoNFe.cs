@@ -53,20 +53,6 @@ namespace uninfe
 
         #endregion
 
-        #region CabecMsg()
-        /// <summary>
-        /// Auxiliar na geração do cabecalho da mensagem quando estivermos utilizando o InvokeMember para chamar o método
-        /// </summary>
-        /// <param name="cVersaoDados">Versão dos dados do XML</param>
-        /// <returns>Conteúdo do XML</returns>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>07/08/2009</date>
-        public override string CabecMsg(string cVersaoDados)
-        {
-            return oGerarXML.CabecMsg(cVersaoDados);
-        }
-        #endregion
-
         #region Cancelamento()
         /// <summary>
         /// Envia o XML de cancelamento de nota fiscal
@@ -105,74 +91,83 @@ namespace uninfe
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-            //Ler o XML para pegar parâmetros de envio
-            LerXML oLer = new LerXML();
-            oLer.PedCanc(this.vXmlNfeDadosMsg);
+            //Definir o serviço que será executado para a classe
+            Servico = Servicos.CancelarNFe;
 
-            if (this.vXmlNfeDadosMsgEhXML)
+            try
             {
-                //Instanciar o objeto da classe DefObjServico
-                DefObjServico oDefObj = new DefObjServico();
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.PedCanc(this.vXmlNfeDadosMsg);
 
-                //Definir o serviço que será executado para a classe
-                Servico = Servicos.CancelarNFe;
-
-                //Assinar o arquivo XML
-                AssinaturaDigital oAD = new AssinaturaDigital();
-                try
+                if (this.vXmlNfeDadosMsgEhXML)
                 {
-                    ParametroEnvioXML oParam = new ParametroEnvioXML();
-                    oParam.tpAmb = oLer.oDadosPedCanc.tpAmb;
-                    oParam.tpEmis = oLer.oDadosPedCanc.tpEmis;
-                    oParam.UFCod = oLer.oDadosPedCanc.cUF;
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.CancelarNFe, emp, oLer.oDadosPedCanc.cUF, oLer.oDadosPedCanc.tpAmb, oLer.oDadosPedCanc.tpEmis);
 
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oCancelamento = wsProxy.CriarObjeto("NfeCancelamento2");
+                    object oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosPedCanc.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLCanc);
+
+                    //Criar objeto da classe de assinatura digita
+                    AssinaturaDigital oAD = new AssinaturaDigital();
+
+                    //Assinar o XML
                     oAD.Assinar(this.vXmlNfeDadosMsg, "infCanc", Empresa.Configuracoes[emp].X509Certificado);
-                    if (oAD.intResultado == 0)
-                    {
-                        //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                        object oServico = null;
-                        object oCabecMsg = null;
-                        oDefObj.Cancelamento(ref oServico, ref oCabecMsg, oParam);
 
-                        try
-                        {
-                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLCanc, oServico, "nfeCancelamentoNF", "-ped-can", "-can") == true)
-                            {
-                                this.LerRetornoCanc();
-                            }
-                        }
-                        catch (ExceptionInvocarObjeto ex)
-                        {
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                    }
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oCancelamento, "nfeCancelamentoNF2", oCabecMsg, this, "-ped-can", "-can");
+
+                    //Ler o retorno do webservice
+                    this.LerRetornoCanc();
                 }
-                catch (Exception ex)
+                else
                 {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedCan, "-can.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                    //Gerar o XML de solicitação de cancelamento de uma NFe a partir do TXT Gerado pelo ERP
+                    oGerarXML.Cancelamento(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
+                        oLer.oDadosPedCanc.tpAmb,
+                        oLer.oDadosPedCanc.tpEmis,
+                        oLer.oDadosPedCanc.chNFe,
+                        oLer.oDadosPedCanc.nProt,
+                        oLer.oDadosPedCanc.xJust);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                //Salva o XML
+                string ExtRet = string.Empty;
+
+                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                    ExtRet = ExtXml.PedCan;
+                else //Se for TXT
+                    ExtRet = ExtXml.PedCan_TXT;
+
                 try
                 {
-                    oGerarXML.Cancelamento(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
-                                            oLer.oDadosPedCanc.tpAmb,
-                                            oLer.oDadosPedCanc.tpEmis,
-                                            oLer.oDadosPedCanc.chNFe,
-                                            oLer.oDadosPedCanc.nProt,
-                                            oLer.oDadosPedCanc.xJust);
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.Can_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
                 }
-                catch (Exception ex)
+                catch
                 {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedCan_TXT, "-can.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
                 }
-                finally
+            }
+            finally
+            {
+                try
                 {
-                    oAux.DeletarArquivo(vXmlNfeDadosMsg);
+                    if (!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de cancelamento de NFe, infelizmente
+                    //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 09/03/2010
                 }
             }
         }
@@ -216,80 +211,94 @@ namespace uninfe
         /// <date>04/06/2008</date>
         public override void Consulta()
         {
-            //Instanciar o objeto da classe DefObjServico
-            DefObjServico oDefObj = new DefObjServico();
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.PedidoConsultaSituacaoNFe;
 
-            //Ler o XML para pegar parâmetros de envio
-            LerXML oLer = new LerXML();
-            oLer.PedSit(this.vXmlNfeDadosMsg);
-
-            if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+            try
             {
-                ParametroEnvioXML oParam = new ParametroEnvioXML();
-                oParam.tpAmb = oLer.oDadosPedSit.tpAmb;
-                oParam.UFCod = oLer.oDadosPedSit.cUF;
-                oParam.tpEmis = oLer.oDadosPedSit.tpEmis;
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.PedSit(vXmlNfeDadosMsg);
 
-                //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                object oServico = null;
-                object oCabecMsg = null;
-                oDefObj.Consulta(ref oServico, ref oCabecMsg, oParam);
-                try
+                if (vXmlNfeDadosMsgEhXML)
                 {
-                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedSit, oServico, "nfeConsultaNF") == true)
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaSituacaoNFe, emp, oLer.oDadosPedSit.cUF, oLer.oDadosPedSit.tpAmb, oLer.oDadosPedSit.tpEmis, oLer.oDadosPedSit.versaoNFe);
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    if (oLer.oDadosPedSit.versaoNFe == 1)
                     {
-                        try
-                        {
-                            //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
-                            this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
+                        object oConsulta = null;
+                        if (oLer.oDadosPedSit.cUF == 41)
+                            oConsulta = wsProxy.CriarObjeto("NfeConsultaService");
+                        else
+                            oConsulta = wsProxy.CriarObjeto("NfeConsulta");
 
-                            //Gerar o retorno para o ERP
-                            oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
-
-                            //Deletar o arquivo de solicitação do serviço
-                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                        }
-                        catch (Exception ex)
-                        {
-                            //Tenho que gravar para o ERP um retorno do erro se acontecer algo com o final -sit.err. Wandrey 22/10/2009
-                            oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSit, ExtXmlRet.Sit_ERR, ex.ToString());
-                        }
-                        finally
-                        {
-                            //Deletar o arquivo de solicitação do serviço
-                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                        }
+                        //Invocar o método que envia o XML para o SEFAZ
+                        oInvocarObj.Invocar(wsProxy, oConsulta, "nfeConsultaNF", this);
                     }
+                    else
+                    {
+                        object oConsulta = wsProxy.CriarObjeto("NfeConsulta2");
+                        object oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                        //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                        wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosPedSit.cUF.ToString());
+                        wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedSit);
+
+                        //Invocar o método que envia o XML para o SEFAZ
+                        oInvocarObj.Invocar(wsProxy, oConsulta, "nfeConsultaNF2", oCabecMsg, this);
+                    }
+
+                    //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
+                    //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.
+                    if (oLer.oDadosPedSit.versaoNFe != 1)
+                        this.LerRetornoSit(oLer.oDadosPedSit.chNFe);
+
+                    //Gerar o retorno para o ERP
+                    oGerarXML.XmlRetorno(ExtXml.PedSit, ExtXmlRet.Sit, this.vStrXmlRetorno);
                 }
-                catch (ExceptionInvocarObjeto ex)
-                {
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-            else
-            {
-                ///
-                /// Gera o arquivo XML
-                /// 
-                try
+                else
                 {
                     oGerarXML.Consulta(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
                                         oLer.oDadosPedSit.tpAmb,
                                         oLer.oDadosPedSit.tpEmis,
                                         oLer.oDadosPedSit.chNFe);
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                string ExtRet = string.Empty;
+
+                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                    ExtRet = ExtXml.PedSit;
+                else //Se for TXT
+                    ExtRet = ExtXml.PedSit_TXT;
+
+                try
                 {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.ConsCad_TXT, "-sit.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.Sit_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
                 }
-                finally
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+
+            }
+            finally
+            {
+                try
                 {
                     oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de pedido da consulta da situação da NFe, infelizmente
+                    //não posso fazser mais nada, o UniNFe vai tentar mantar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 22/03/2010
                 }
             }
         }
@@ -342,71 +351,87 @@ namespace uninfe
         /// </date>
         public override void ConsultaCadastro()
         {
-            //Instanciar o objeto da classe DefObjServico
-            DefObjServico oDefObj = new DefObjServico();
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultaCadastroContribuinte;
 
-            //Ler o XML para pegar parâmetros de envio
-            LerXML oLer = new LerXML();
-            oLer.ConsCad(this.vXmlNfeDadosMsg);
-            if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+            try
             {
-                ParametroEnvioXML oParam = new ParametroEnvioXML();
-                oParam.tpAmb = oLer.oDadosConsCad.tpAmb;
-                oParam.tpEmis = TipoEmissao.teNormal; //Sempre NORMAL pois SCAN não tem esta consulta de cadastro do contribuinte - 01/09/2009 Wandrey.
-                oParam.UFCod = oLer.oDadosConsCad.cUF;
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.ConsCad(this.vXmlNfeDadosMsg);
 
-                //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                object oServico = null;
-                oDefObj.ConsultaCadastro(ref oServico, oParam);
-                if (oServico == null)
+                if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    string sAmbiente = (oParam.tpAmb == TipoAmbiente.taProducao ? "produção" : "homologação");
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg,
-                        ExtXml.ConsCad,
-                        "-ret-cons-cad.err",
-                        "O Estado (" + oParam.UFCod.ToString() + ") configurado para a consulta do cadastro em ambiente de " + sAmbiente + " ainda não possui este serviço.");
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultaCadastroContribuinte, emp, oLer.oDadosConsCad.cUF, oLer.oDadosConsCad.tpAmb, TipoEmissao.teNormal);
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oConsCad = wsProxy.CriarObjeto("CadConsultaCadastro2");                                                           
+                    object oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosConsCad.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsCad);
+
+                    string cMetodo = "consultaCadastro2";
+                    switch (oLer.oDadosConsCad.cUF)
+                    {
+                        case 52:
+                            cMetodo = "cadConsultaCadastro2";
+                            goto default;
+
+                        default:
+                            break;
+                    }
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oConsCad, cMetodo, oCabecMsg, this, "-cons-cad", "-ret-cons-cad");
                 }
                 else
                 {
-                    try
-                    {
-                        if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLConsCad, oServico, "consultaCadastro", "-cons-cad", "-ret-cons-cad") == true)
-                        {
-                            //Deletar o arquivo de solicitação do serviço
-                            oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                        }
-                    }
-                    catch (ExceptionInvocarObjeto ex)
-                    {
-                    }
-                    catch (Exception ex)
-                    {
-                    }
+                    //Gerar o XML da consulta cadastro do contribuinte a partir do TXT gerado pelo ERP
+                    oGerarXML.ConsultaCadastro(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
+                                               oLer.oDadosConsCad.UF,
+                                               oLer.oDadosConsCad.CNPJ,
+                                               oLer.oDadosConsCad.IE,
+                                               oLer.oDadosConsCad.CPF);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                ///
-                /// Gera o arquivo XML
-                /// 
+                string ExtRet = string.Empty;
+
+                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                    ExtRet = ExtXml.ConsCad;
+                else //Se for TXT
+                    ExtRet = ExtXml.ConsCad_TXT;
+
                 try
                 {
-                    oGerarXML.ConsultaCadastro(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
-                                                oLer.oDadosConsCad.UF,
-                                                oLer.oDadosConsCad.CNPJ,
-                                                oLer.oDadosConsCad.IE,
-                                                oLer.oDadosConsCad.CPF);
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.ConsCad_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
                 }
-                catch (Exception ex)
+                catch
                 {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.ConsCad_TXT, "-cons-cad.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
                 }
-                finally
+            }
+            finally
+            {
+                try
                 {
+                    //Deletar o arquivo de solicitação do serviço
                     oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de solicitação do serviço, 
+                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar 
+                    //o arquivo novamente para o webservice
+                    //Wandrey 09/03/2010
                 }
             }
         }
@@ -456,113 +481,90 @@ namespace uninfe
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-            //Ler o XML para pegar parâmetros de envio
-            LerXML oLer = new LerXML();
-            oLer.PedInut(this.vXmlNfeDadosMsg);
-
-            if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
-            {
-                //Instanciar o objeto da classe DefObjServico
-                DefObjServico oDefObj = new DefObjServico();
-
-                //Definir o serviço que será executado para a classe
-                Servico = Servicos.InutilizarNumerosNFe;
-
-                //Assinar o arquivo XML
-                AssinaturaDigital oAD = new AssinaturaDigital();
-                try
-                {
-                    oAD.Assinar(this.vXmlNfeDadosMsg, "infInut", Empresa.Configuracoes[emp].X509Certificado);
-
-                    if (oAD.intResultado == 0)
-                    {
-                        //Resolver um falha do estado da bahia que gera um método com nome diferente dos demais estados
-                        string cMetodo = "nfeInutilizacaoNF";
-                        if (oLer.oDadosPedInut.cUF == 29 &&
-                            oLer.oDadosPedInut.tpEmis != TipoEmissao.teSCAN)
-                        {
-                            cMetodo = "nfeInutilizacao";
-                        }
-
-                        ParametroEnvioXML oParam = new ParametroEnvioXML();
-                        oParam.tpAmb = oLer.oDadosPedInut.tpAmb;
-                        oParam.tpEmis = oLer.oDadosPedInut.tpEmis;
-                        oParam.UFCod = oLer.oDadosPedInut.cUF;
-
-                        //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                        object oServico = null;
-                        object oCabecMsg = null;
-                        oDefObj.Inutilizacao(ref oServico, ref oCabecMsg, oParam);
-                        try
-                        {
-                            if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLInut, oServico, cMetodo, "-ped-inu", "-inu") == true)
-                            {
-                                this.LerRetornoInut();
-                            }
-                        }
-                        catch (ExceptionInvocarObjeto ex)
-                        {
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedInu, "-inu.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
-                }
-            }
-            else
-            {
-                ///
-                /// Gera o arquivo XML
-                /// 
-                try
-                {
-                    oGerarXML.Inutilizacao(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
-                                            oLer.oDadosPedInut.tpAmb,
-                                            oLer.oDadosPedInut.tpEmis,
-                                            oLer.oDadosPedInut.cUF,
-                                            oLer.oDadosPedInut.ano,
-                                            oLer.oDadosPedInut.CNPJ,
-                                            oLer.oDadosPedInut.mod,
-                                            oLer.oDadosPedInut.serie,
-                                            oLer.oDadosPedInut.nNFIni,
-                                            oLer.oDadosPedInut.nNFFin,
-                                            oLer.oDadosPedInut.xJust);
-                }
-                catch (Exception ex)
-                {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.ConsCad_TXT, "-inu.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
-                }
-                finally
-                {
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                }
-            }
-        }
-        #endregion
-
-        #region LerXMLNFe()
-        protected override absLerXML.DadosNFeClass LerXMLNFe(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
+            //Definir o serviço que será executado para a classe
+            Servico = Servicos.InutilizarNumerosNFe;
 
             try
             {
-                oLerXML.Nfe(Arquivo);
-            }
-            catch (XmlException ex)
-            {
-                throw (ex);
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.PedInut(this.vXmlNfeDadosMsg);
+
+                if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                {
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.InutilizarNumerosNFe, emp, oLer.oDadosPedInut.cUF, oLer.oDadosPedInut.tpAmb, oLer.oDadosPedInut.tpEmis);
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oInutilizacao = wsProxy.CriarObjeto("NfeInutilizacao2");
+                    object oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosPedInut.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLInut);
+
+                    //Criar objeto da classe de assinatura digita
+                    AssinaturaDigital oAD = new AssinaturaDigital();
+
+                    //Assinar o XML
+                    oAD.Assinar(this.vXmlNfeDadosMsg, "infInut", Empresa.Configuracoes[emp].X509Certificado);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oInutilizacao, "nfeInutilizacaoNF2", oCabecMsg, this, "-ped-inu", "-inu");
+
+                    //Ler o retorno do webservice
+                    this.LerRetornoInut();
+                }
+                else
+                {
+                    oGerarXML.Inutilizacao(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
+                        oLer.oDadosPedInut.tpAmb,
+                        oLer.oDadosPedInut.tpEmis,
+                        oLer.oDadosPedInut.cUF,
+                        oLer.oDadosPedInut.ano,
+                        oLer.oDadosPedInut.CNPJ,
+                        oLer.oDadosPedInut.mod,
+                        oLer.oDadosPedInut.serie,
+                        oLer.oDadosPedInut.nNFIni,
+                        oLer.oDadosPedInut.nNFFin,
+                        oLer.oDadosPedInut.xJust);
+                }
+
             }
             catch (Exception ex)
             {
-                throw (ex);
-            }
+                string ExtRet = string.Empty;
 
-            return oLerXML.oDadosNfe;
+                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                    ExtRet = ExtXml.PedInu;
+                else //Se for TXT
+                    ExtRet = ExtXml.PedInu_TXT;
+
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtRet, ExtXmlRet.Inu_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    if (!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
+                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de inutilização, infelizmente não posso 
+                    //fazer mais nada. Com certeza o uninfe sendo restabelecido novamente vai tentar enviar o mesmo 
+                    //xml de inutilização para o SEFAZ. Este erro pode ocorrer por falha no HD, rede, Permissão de pastas, etc. Wandrey 23/03/2010
+                }
+            }
         }
         #endregion
 
@@ -702,32 +704,31 @@ namespace uninfe
         protected override void LerRetornoLote()
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            var oLerXml = new LerXML();
+            var msXml = Auxiliar.StringXmlToStream(vStrXmlRetorno);
 
-            LerXML oLerXml = new LerXML();
-            MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
-
-            FluxoNfe oFluxoNfe = new FluxoNfe();
+            var oFluxoNfe = new FluxoNfe();
 
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(msXml);
 
-                XmlNodeList retConsReciNFeList = doc.GetElementsByTagName("retConsReciNFe");
+                var retConsReciNFeList = doc.GetElementsByTagName("retConsReciNFe");
 
                 foreach (XmlNode retConsReciNFeNode in retConsReciNFeList)
                 {
-                    XmlElement retConsReciNFeElemento = (XmlElement)retConsReciNFeNode;
+                    var retConsReciNFeElemento = (XmlElement)retConsReciNFeNode;
 
                     //Pegar o número do recibo do lote enviado
-                    string nRec = string.Empty;
+                    var nRec = string.Empty;
                     if (retConsReciNFeElemento.GetElementsByTagName("nRec")[0] != null)
                     {
                         nRec = retConsReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
                     }
 
                     //Pegar o status de retorno do lote enviado
-                    string cStatLote = string.Empty;
+                    var cStatLote = string.Empty;
                     if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0] != null)
                     {
                         cStatLote = retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
@@ -748,14 +749,20 @@ namespace uninfe
                         case "108": //B-Verifica se o Serviço está paralisado momentaneamente
                         case "109": //B-Verifica se o serviço está paralisado sem previsão
                         case "242": //C-Elemento nfeCabecMsg inexistente no SOAP Header
-                        case "299": //C-XML uytiliza codificação diferente de UTF-8
-                        case "238": //C-Versão dos dados informada na área de cabeçalho é superior à versão vigente
-                        case "239": //C-Versão dos dados não suportada
+                        case "409": //C-Campo cUF inexistente no elemento nfeCabecMsg do SOAP Header
+                        case "410": //C-Campo versaoDados inexistente no elemento nfeCabecMsg do SOAP
+                        case "411": //C-Campo versaoDados inexistente no elemento nfeCabecMsg do SOAP
+                        case "238": //C-Versão dos Dados informada é superior à versão vigente
+                        case "239": //C-Versão dos Dados não suportada
                         case "215": //D-Verifica schema XML da área de dados
+                        case "516": //D-Em caso de falha de schema, verificar se existe a tag raiz esperada para mensagem
+                        case "517": //D-Em caso de falha de Schema, verificar se existe o atributo versão para a tag raiz da mensagem
+                        case "545": //D-Em caso de falha de schema, verificar se o conteúdo do atributo versão difere do conteúdo da versaoDados informado no SOAPHeader
                         case "404": //D-Verifica o uso de prefixo no namespace
                         case "402": //D-XML utiliza codificação diferente de UTF-8
                         case "252": //E-Tipo do ambiente da NF-e difere do ambiente do web service
                         case "248": //E-UF do recibo difere da UF do Web Service
+                        case "553": //E-Tipo autorizador do recibo diverge do órgão autorizador
                         case "223": //E-CNPJ do transmissor do lote difere do CNPJ do transmissor da consulta
                             break;
                         #endregion
@@ -775,22 +782,22 @@ namespace uninfe
 
                         #region Lote foi processado, agora tenho que tratar as notas fiscais dele
                         case "104": //Lote processado
-                            XmlNodeList protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
+                            var protNFeList = retConsReciNFeElemento.GetElementsByTagName("protNFe");
 
                             foreach (XmlNode protNFeNode in protNFeList)
                             {
-                                XmlElement protNFeElemento = (XmlElement)protNFeNode;
+                                var protNFeElemento = (XmlElement)protNFeNode;
 
-                                string strProtNfe = protNFeElemento.OuterXml;
+                                var strProtNfe = protNFeElemento.OuterXml;
 
-                                XmlNodeList infProtList = protNFeElemento.GetElementsByTagName("infProt");
+                                var infProtList = protNFeElemento.GetElementsByTagName("infProt");
 
                                 foreach (XmlNode infProtNode in infProtList)
                                 {
-                                    XmlElement infProtElemento = (XmlElement)infProtNode;
+                                    var infProtElemento = (XmlElement)infProtNode;
 
-                                    string strChaveNFe = string.Empty;
-                                    string strStat = string.Empty;
+                                    var strChaveNFe = string.Empty;
+                                    var strStat = string.Empty;
 
                                     if (infProtElemento.GetElementsByTagName("chNFe")[0] != null)
                                     {
@@ -803,22 +810,19 @@ namespace uninfe
                                     }
 
                                     //Definir o nome do arquivo da NFe e seu caminho
-                                    string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
+                                    var strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
 
-                                    ///
-                                    /// danasa 8-2009
-                                    /// se por algum motivo o XML não existir no "Fluxo", então o arquivo tem que existir
-                                    /// na pasta "EmProcessamento" assinada.
-                                    /// 
+                                    // danasa 8-2009
+                                    // se por algum motivo o XML não existir no "Fluxo", então o arquivo tem que existir
+                                    // na pasta "EmProcessamento" assinada.
                                     if (string.IsNullOrEmpty(strNomeArqNfe))
                                     {
                                         if (string.IsNullOrEmpty(strChaveNFe))
                                             throw new Exception("LerRetornoLote(): Não pode obter o nome do arquivo");
 
                                         strNomeArqNfe = strChaveNFe.Substring(3) + ExtXml.Nfe;
-                                        //throw new Exception(strChaveNFe + " não pode ser localizada");
                                     }
-                                    string strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                                    var strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                     //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
                                     oFluxoNfe.AtualizarTag(strChaveNFe, FluxoNfe.ElementoEditavel.cStat, strStat);
@@ -829,13 +833,13 @@ namespace uninfe
                                     switch (strStat)
                                     {
                                         case "100": //NFe Autorizada
-                                            //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                             if (File.Exists(strArquivoNFe))
                                             {
+                                                //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                                 oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe);
-                                                string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
-                                                                           PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                           oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
+                                                var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                                        PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                                        oAux.ExtrairNomeArq(strNomeArqNfe, ExtXml.Nfe) + ExtXmlRet.ProcNFe;
 
                                                 //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                                 oLerXml.Nfe(strArquivoNFe);
@@ -920,7 +924,7 @@ namespace uninfe
         protected override void LerRetornoSit(string ChaveNFe)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-            
+
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Auxiliar.StringXmlToStream(this.vStrXmlRetorno);
 
@@ -974,11 +978,16 @@ namespace uninfe
                         case "243": //B-XML de dados mal formatado
                         case "108": //B-Verifica se o Serviço está paralisado momentaneamente
                         case "109": //B-Verifica se o serviço está paralisado sem previsão
-                        case "242": //C-Verificar schema do XML da área de cabecalho
-                        case "299": //C-XML utiliza codificação diferente de UTF-8
-                        case "238": //C-Versão dos dados informada na área de cabecalho é superior a versão vigente
-                        case "239": //C-Versão dos dados não suportada
+                        case "242": //C-Elemento nfeCabecMsg inexistente no SOAP Header
+                        case "409": //C-Campo cUF inexistente no elemento nfeCabecMsg do SOAP Header
+                        case "410": //C-Campo versaoDados inexistente no elemento nfeCabecMsg do SOAP
+                        case "411": //C-Campo versaoDados inexistente no elemento nfeCabecMsg do SOAP
+                        case "238": //C-Versão dos Dados informada é superior à versão vigente
+                        case "239": //C-Versão dos Dados não suportada
                         case "215": //D-Verifica schema XML da área de dados
+                        case "516": //D-Em caso de falha de schema, verificar se existe a tag raiz esperada para mensagem
+                        case "517": //D-Em caso de falha de Schema, verificar se existe o atributo versão para a tag raiz da mensagem
+                        case "545": //D-Em caso de falha de schema, verificar se o conteúdo do atributo versão difere do conteúdo da versaoDados informado no SOAPHeader
                         case "404": //D-Verifica o uso de prefixo no namespace
                         case "402": //D-XML utiliza codificação diferente de UTF-8
                         case "252": //J-Tipo do ambiente da NF-e difere do ambiente do web service
@@ -990,7 +999,10 @@ namespace uninfe
                         case "217": //J-NFe não existe na base de dados do SEFAZ
                             goto case "TirarFluxo";
 
-                        case "216": //J-Verificar se o campo "Código Numérico" informado na chave de acesso é diferente do existente no BD
+                        case "562": //J-Verificar se o campo "Código Numérico" informado na chave de acesso é diferente do existente no BD
+                            goto case "TirarFluxo";
+
+                        case "561": //J-Verificar se campo MM (mês) informado na Chave de Acesso é diferente do existente no BD
                             goto case "TirarFluxo";
                         #endregion
 
@@ -1012,8 +1024,14 @@ namespace uninfe
                                             //O retorno da consulta situação a posição das tag´s é diferente do que vem 
                                             //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
                                             //para que fique um XML de distribuição válido. Wandrey 07/10/2009
-                                            string strProtNfe = "<protNFe versao=\"1.10\">" +
-                                                "<infProt>" +
+                                            string atributoId = string.Empty;
+                                            if (infConsSitElemento.GetAttribute("Id").Length != 0)
+                                            {
+                                                atributoId = " Id=\"" + infConsSitElemento.GetAttribute("Id") + "\"";
+                                            }
+
+                                            string strProtNfe = "<protNFe versao=\"" + ConfiguracaoApp.VersaoXMLNFe + "\">" +
+                                                "<infProt" + atributoId + ">" +
                                                 "<tpAmb>" + oAux.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
                                                 "<verAplic>" + oAux.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
                                                 "<chNFe>" + oAux.LerTag(infConsSitElemento, "chNFe", false) + "</chNFe>" +
@@ -1122,6 +1140,12 @@ namespace uninfe
                         #region Nota fiscal Denegada
                         case "110": //NFe Denegada
                             goto case "100";
+
+                        case "301": //NFe Denegada
+                            goto case "100";
+
+                        case "302": //NFe Denegada
+                            goto case "100";
                         #endregion
 
                         #region Conteúdo para retirar a nota fiscal do fluxo
@@ -1224,81 +1248,118 @@ namespace uninfe
         public override void Recepcao()
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-
-            //Instanciar o objeto da classe DefObjServico
-            DefObjServico oDefObj = new DefObjServico();
-
             //Definir o serviço que será executado para a classe
             Servico = Servicos.EnviarLoteNfe;
 
-            //Ler o XML de Lote para pegar o número do lote que está sendo enviado
-            LerXML oLerXml = new LerXML();
-            oLerXml.Nfe(this.vXmlNfeDadosMsg);
-
-            string idLote = oLerXml.oDadosNfe.idLote;
             FluxoNfe oFluxoNfe = new FluxoNfe();
+            LerXML oLer = new LerXML();
 
-            //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-            object oServico = null;
-            object oCabecMsg = null;
-            oDefObj.Recepcao(ref oServico, ref oCabecMsg);
             try
             {
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLNFe, oServico, "nfeRecepcaoLote", "-env-lot", "-rec") == true)
+                #region Parte que envia o lote
+                //Ler o XML de Lote para pegar o número do lote que está sendo enviado
+                oLer.Nfe(vXmlNfeDadosMsg);
+
+                var idLote = oLer.oDadosNfe.idLote;
+
+                //Definir o objeto do WebService
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarLoteNfe, emp, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis));
+                
+                //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                object oRecepcao = oRecepcao = wsProxy.CriarObjeto("NfeRecepcao2");
+                var oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosNfe.cUF);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLNFe);
+
+                //
+                //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 
+                //Fica aqui somente este lembrete. Wandrey 16/03/2010
+                //
+
+                //Invocar o método que envia o XML para o SEFAZ
+                oInvocarObj.Invocar(wsProxy, oRecepcao, "nfeRecepcaoLote2", oCabecMsg, this, "-env-lot", "-rec");
+                #endregion
+
+                #region Parte que trata o retorno do lote, ou seja, o número do recibo
+                //Ler o XML de retorno com o recibo do lote enviado
+                var oLerRecibo = new LerXML();
+                oLerRecibo.Recibo(vStrXmlRetorno);
+
+                if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
                 {
-                    LerXML oLerRecibo = new LerXML();
-                    oLerRecibo.Recibo(this.vStrXmlRetorno);
+                    //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
+                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
+                    oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
+                }
+                else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
+                {
+                    //Se o status do retorno do lote for maior que 200, 
+                    //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
+                    //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
+                    //Wandrey 30/04/2009
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
+                }
 
-                    if (oLerRecibo.oDadosRec.cStat == "103") //Lote recebido com sucesso
-                    {
-                        //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                        oFluxoNfe.AtualizarTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, oLerRecibo.oDadosRec.tMed.ToString());
-                        oFluxoNfe.AtualizarTagRec(idLote, oLerRecibo.oDadosRec.nRec);
-                    }
-                    else if (Convert.ToInt32(oLerRecibo.oDadosRec.cStat) > 200)
-                    {
-                        //Se o status do retorno do lote for maior que 200,
-                        //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
-                        //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
-                        //Wandrey 30/04/2009
-                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-                        oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
-                    }
+                //Deleta o arquivo de lote
+                oAux.DeletarArquivo(vXmlNfeDadosMsg);
+                #endregion
+            }
+            catch (ExceptionEnvioXML ex)
+            {
+                //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
+                //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
+                //E ver se vamos tirar o XML do Fluxo ou finalizar ele com a consulta situação da NFe
 
-                    //Deleta o arquivo de lote
-                    oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
+                //TODO: V3.0 - Tratar o problema de não conseguir pegar o recibo exatamente neste ponto
+
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.EnvLot, ExtXmlRet.Rec_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 16/03/2010
                 }
             }
             catch (ExceptionInvocarObjeto ex)
             {
-                //Se falhou algo no envio, foi exatamente no ponto de enviar o XML para a receita, assim sendo,
-                //não temos como saber se a nota foi recebida pelo SEFAZ ou não, desta forma, tenho que manter
-                //a nota no fluxo, sem o recibo, pq não o conseguimos, a a rotina que analisa as notas presas no fluxo
-                //vai resolver e finalizar ela pela consulta situação, assim sendo neste ponto, por favor
-                //nunca delete o XML da NFe que esta em processamento, pois se a nota foi recebida pelo sefaz, ele pode
-                //ter autorizado ela (E isso já aconteceu diversas vezes com pessoas diferentes), e deletando vamos
-                //perder o XML.
-                //
-                //Se o ERP Desejar pode gerar uma consulta situação da nota que o UniNFe vai tirar ela do fluxo, finalizando ela ou não,
-                //depende do retorno do SEFAZ
-                //
-                //Wandrey 07/10/2009
-
-                //TODO: Aqui que eu tenho que tratar o erro e internet
-                //Já tenho como ver se é erro de conexão com internet e tratar
-                //se for vamos tirar a nota do fluxo para que o ERP gere ela novamente.
-                if (ex.ErrorCode == ErroPadrao.FalhaInternet)
+                //Ocorreu uma falha com a conexão com a internet, sendo assim vou tirar a nota fiscal do fluxo para que o ERP gere ela novamente.
+                if (ex.ErrorCode == ErroPadrao.FalhaInternet || ex.ErrorCode == ErroPadrao.CertificadoVencido)
                 {
-                    //Se o status do retorno do lote for maior que 200, 
-                    //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro move o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-                    oFluxoNfe.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
+                }
+
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.EnvLot, ExtXmlRet.Rec_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 16/03/2010
                 }
             }
             catch (Exception ex)
             {
+                try
+                {
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.EnvLot, ExtXmlRet.Rec_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 16/03/2010
+                }
             }
         }
         #endregion
@@ -1341,50 +1402,57 @@ namespace uninfe
         /// <date>04/06/2008</date>        
         public override void RetRecepcao()
         {
-            //Instanciar o objeto da classe DefObjServico
-            DefObjServico oDefObj = new DefObjServico();
-
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
             //Definir o serviço que será executado para a classe
             Servico = Servicos.PedidoSituacaoLoteNFe;
 
-            //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-            object oServico = null;
-            object oCabecMsg = null;
-            oDefObj.RetRecepcao(ref oServico, ref oCabecMsg);
-
             try
             {
-                //Invoca o método para acessar o webservice do SEFAZ mas sem gravar o XML retornado pelo mesmo
-                if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLPedRec, oServico, "nfeRetRecepcao") == true)
-                {
-                    try
-                    {
-                        //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
-                        this.LerRetornoLote();
+                #region Parte do código que envia o XML de pedido de consulta do recibo
+                var oLer = new LerXML();
+                oLer.PedRec(vXmlNfeDadosMsg);
 
-                        //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
-                        //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                        //Wandrey 18/06/2009
-                        oGerarXML.XmlRetorno(ExtXml.PedRec, ExtXmlRet.ProRec, this.vStrXmlRetorno);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-                    }
-                    finally
-                    {
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                    }
-                }
-            }
-            catch (ExceptionInvocarObjeto ex)
-            {
-                throw (ex);
+                //Definir o objeto do WebService
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoSituacaoLoteNFe, emp, oLer.oDadosPedRec.cUF, oLer.oDadosPedRec.tpAmb, oLer.oDadosPedRec.tpEmis);
+
+                //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                var oCancelamento = wsProxy.CriarObjeto("NfeRetRecepcao2");
+                var oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
+
+                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosPedRec.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedRec);
+
+                //Invocar o método que envia o XML para o SEFAZ
+                oInvocarObj.Invocar(wsProxy, oCancelamento, "nfeRetRecepcao2", oCabecMsg, this);
+                #endregion
+
+                #region Parte do código que trata o XML de retorno da consulta do recibo
+                //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
+                LerRetornoLote();
+
+                //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
+                //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
+                //Wandrey 18/06/2009
+                oGerarXML.XmlRetorno(ExtXml.PedRec, ExtXmlRet.ProRec, vStrXmlRetorno);
+                #endregion
             }
             catch (Exception ex)
             {
-                throw (ex);
+                try
+                {
+                    oAux.GravarArqErroServico(vXmlNfeDadosMsg, ExtXml.PedRec, ExtXmlRet.ProRec_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Pois ocorreu algum erro de rede, hd, permissão das pastas, etc. Wandrey 22/03/2010
+                }
+            }
+            finally
+            {
+                //Deletar o arquivo de solicitação do serviço
+                oAux.DeletarArquivo(vXmlNfeDadosMsg);
             }
         }
         #endregion
@@ -1427,62 +1495,70 @@ namespace uninfe
         /// </date>
         public override void StatusServico()
         {
-            //Instanciar o objeto da classe DefObjServico
-            DefObjServico oDefObj = new DefObjServico();
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.PedidoConsultaStatusServicoNFe;
 
-            //Ler o XML para pegar parâmetros de envio
-            LerXML oLer = new LerXML();
-            oLer.PedSta(this.vXmlNfeDadosMsg);
-
-            if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+            try
             {
-                ParametroEnvioXML oParam = new ParametroEnvioXML();
-                oParam.tpAmb = oLer.oDadosPedSta.tpAmb;
-                oParam.tpEmis = oLer.oDadosPedSta.tpEmis;
-                oParam.UFCod = oLer.oDadosPedSta.cUF;
+                //Ler o XML para pegar parâmetros de envio
+                var oLer = new LerXML();
+                oLer.PedSta(vXmlNfeDadosMsg);
 
-                //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-                object oServico = null;
-                object oCabecMsg = null;
+                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                {
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaStatusServicoNFe, emp, oLer.oDadosPedSta.cUF, oLer.oDadosPedSta.tpAmb, oLer.oDadosPedSta.tpEmis);
+                    
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    var oStatusServico = wsProxy.CriarObjeto("NfeStatusServico2");
+                    var oCabecMsg = wsProxy.CriarObjeto("nfeCabecMsg");
 
-                oDefObj.StatusServico(ref oServico, ref oCabecMsg, oParam);
-                try
-                {
-                    if (oInvocarObj.Invocar(this, ConfiguracaoApp.VersaoXMLStatusServico, oServico, "nfeStatusServicoNF", "-ped-sta", "-sta") == true)
-                    {
-                        //Deletar o arquivo de solicitação do serviço
-                        oAux.DeletarArquivo(this.vXmlNfeDadosMsg);
-                    }
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosPedSta.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLStatusServico);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oStatusServico, "nfeStatusServicoNF2", oCabecMsg, this, "-ped-sta", "-sta");
                 }
-                catch (ExceptionInvocarObjeto ex)
+                else
                 {
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-            else
-            {
-                ///
-                /// grava o XML de solicitacao de situacao do servico
-                /// 
-                try
-                {
+                    // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
                     oGerarXML.StatusServico(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml",
                                             oLer.oDadosPedSta.tpAmb,
                                             oLer.oDadosPedSta.tpEmis,
                                             oLer.oDadosPedSta.cUF);
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                var extRet = vXmlNfeDadosMsgEhXML ? ExtXml.PedSta : ExtXml.PedSta_TXT;
+
+                try
                 {
-                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.PedSta_TXT, "-sta.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    oAux.GravarArqErroServico(vXmlNfeDadosMsg, extRet, ExtXmlRet.Sta_ERR, ex.Message + "\r\n\r\n" + ex.ToString());
                 }
-                finally
+                catch
                 {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    //Deletar o arquivo de solicitação do serviço
                     oAux.DeletarArquivo(vXmlNfeDadosMsg);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de solicitação do serviço, 
+                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar 
+                    //o arquivo novamente para o webservice
+                    //Wandrey 09/03/2010
                 }
             }
         }
@@ -1548,25 +1624,16 @@ namespace uninfe
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    //Definir a URI para conexão com o Webservice
-                    string Url = ConfiguracaoApp.DefURLWS(oLer.dadosEnvDPEC.cUF, oLer.dadosEnvDPEC.tpAmb, oLer.dadosEnvDPEC.tpEmis, Servicos.EnviarDPEC);
-                    Uri oUri = new Uri(Url);
-
-                    //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
-                    //o objeto já instanciado anteriormente. Wandrey 09/03/2010
-                    if (Url != UrlAtual)
-                    {
-                        oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
-                        UrlAtual = Url;
-                    }
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, oLer.dadosEnvDPEC.cUF, oLer.dadosEnvDPEC.tpAmb, oLer.dadosEnvDPEC.tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCERecepcaoRFB");
-                    object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
+                    object oRecepcaoDPEC = wsProxy.CriarObjeto("SCERecepcaoRFB");
+                    object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     //oWSProxy.SetProp(oCabecMsg, "cUF", oLer.dadosEnvDPEC.cUF.ToString());
-                    oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
 
                     //Criar objeto da classe de assinatura digita
                     AssinaturaDigital oAD = new AssinaturaDigital();
@@ -1575,7 +1642,7 @@ namespace uninfe
                     oAD.Assinar(this.vXmlNfeDadosMsg, "infDPEC", Empresa.Configuracoes[emp].X509Certificado);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
 
                     //Ler o retorno
                     LerRetDPEC();
@@ -1588,9 +1655,6 @@ namespace uninfe
                 {
                     // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
                     oGerarXML.EnvioDPEC(Path.GetFileNameWithoutExtension(vXmlNfeDadosMsg) + ".xml", oLer.dadosEnvDPEC);
-                                        //oLer.dadosEnvDPEC.tpAmb, 
-                                        //oLer.dadosEnvDPEC.tpEmis, 
-                                        //oLer.dadosEnvDPEC.cUF);
                 }
             }
             catch (Exception ex)
@@ -1654,8 +1718,8 @@ namespace uninfe
                         {
                             string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
                             string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
-                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0,4)),Convert.ToInt16(dhRegDPEC.Substring(5,2)),Convert.ToInt16(dhRegDPEC.Substring(8,2)));
-                            
+                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
+
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                             oAux.MoverArquivo(this.vXmlNfeDadosMsg, PastaEnviados.Autorizados, dtEmissaoDPEC);
 
@@ -1689,7 +1753,7 @@ namespace uninfe
         /// </remarks>
         public override void ConsultaDPEC()
         {
- //           throw new NotImplementedException();
+            //           throw new NotImplementedException();
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
@@ -1703,27 +1767,18 @@ namespace uninfe
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    //Definir a URI para conexão com o Webservice
-                    string Url = ConfiguracaoApp.DefURLWS(0, oLer.dadosConsDPEC.tpAmb, oLer.dadosConsDPEC.tpEmis, Servicos.ConsultarDPEC);
-                    Uri oUri = new Uri(Url);
-
-                    //Só vai reconstruir as classes do webservices se mudou o endereço do WSDL, se for o mesmo continua utilizando
-                    //o objeto já instanciado anteriormente. Wandrey 09/03/2010
-                    if (Url != UrlAtual)
-                    {
-                        oWSProxy = new WebServiceProxy(oUri, Empresa.Configuracoes[emp].X509Certificado);
-                        UrlAtual = Url;
-                    }
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, oLer.dadosConsDPEC.tpAmb, oLer.dadosConsDPEC.tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoDPEC = oWSProxy.CriarObjeto("SCEConsultaRFB");
-                    object oCabecMsg = oWSProxy.CriarObjeto("sceCabecMsg");
+                    object oRecepcaoDPEC = wsProxy.CriarObjeto("SCEConsultaRFB");
+                    object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    oWSProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsDPEC);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsDPEC);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(oWSProxy, oRecepcaoDPEC, "sceConsultaDPEC", oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, "sceConsultaDPEC", oCabecMsg, this);
 
                     //Ler o retorno
                     LerRetConsDPEC(emp);
