@@ -80,7 +80,9 @@
             this.gridEmpresa.Name = "gridEmpresa";
             this.gridEmpresa.Size = new System.Drawing.Size(588, 365);
             this.gridEmpresa.TabIndex = 1;
+            this.gridEmpresa.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gridEmpresa_CellBeginEdit);
             this.gridEmpresa.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridEmpresa_CellValidating);
+            this.gridEmpresa.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresa_CellEndEdit);
             // 
             // FormEmpresa
             // 

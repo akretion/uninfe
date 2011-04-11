@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace uninfe.Formulario
+namespace UniNFeLibrary.Formulario
 {
     public partial class retConsCad : UserControl
     {

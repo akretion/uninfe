@@ -1,4 +1,4 @@
-﻿namespace uninfe.Formulario
+﻿namespace UniNFeLibrary.Formulario
 {
     partial class retConsCad
     {

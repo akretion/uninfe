@@ -113,49 +113,19 @@ namespace UniNFeLibrary.Formulario
 
             #region Montar Array DropList da UF
             ArrayList arrUF = new ArrayList();
-            if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
+
+            try
             {
-                arrUF.Add(new DropDownLista("AC", 12));
-                arrUF.Add(new DropDownLista("AL", 27));
-                arrUF.Add(new DropDownLista("AP", 16));
-                arrUF.Add(new DropDownLista("AM", 13));
-                arrUF.Add(new DropDownLista("BA", 29));
-                arrUF.Add(new DropDownLista("CE", 23));
-                arrUF.Add(new DropDownLista("DF", 53));
-                arrUF.Add(new DropDownLista("ES", 32));
-                arrUF.Add(new DropDownLista("GO", 52));
-                arrUF.Add(new DropDownLista("MA", 21));
-                arrUF.Add(new DropDownLista("MG", 31));
-                arrUF.Add(new DropDownLista("MS", 50));
+                arrUF = Auxiliar.CarregaUF();
             }
-            arrUF.Add(new DropDownLista("MT", 51));
-            if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
+            catch (Exception ex)
             {
-                arrUF.Add(new DropDownLista("PA", 15));
-                arrUF.Add(new DropDownLista("PB", 25));
-                arrUF.Add(new DropDownLista("PE", 26));
-                arrUF.Add(new DropDownLista("PI", 22));
-                arrUF.Add(new DropDownLista("PR", 41));
-                arrUF.Add(new DropDownLista("RJ", 33));
-                arrUF.Add(new DropDownLista("RN", 24));
-                arrUF.Add(new DropDownLista("RO", 11));
-                arrUF.Add(new DropDownLista("RR", 14));
-            }
-            arrUF.Add(new DropDownLista("RS", 43));
-            if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
-            {
-                arrUF.Add(new DropDownLista("SC", 42));
-                arrUF.Add(new DropDownLista("SE", 28));
-            }
-            arrUF.Add(new DropDownLista("SP", 35));
-            if (InfoApp.NomeAplicacao().ToUpper() == "UNINFE")
-            {
-                arrUF.Add(new DropDownLista("TO", 17));
+                MessageBox.Show(ex.Message);
             }
 
             comboBox_UF.DataSource = arrUF;
             comboBox_UF.DisplayMember = "Nome";
-            comboBox_UF.ValueMember = "Valor";
+            comboBox_UF.ValueMember = "Codigo";
             #endregion
 
             #region Montar Array DropList do Ambiente
@@ -164,12 +134,12 @@ namespace UniNFeLibrary.Formulario
             // atribuido "TipoEmbiente"
             //
             ArrayList arrAmb = new ArrayList();
-            arrAmb.Add(new DropDownLista("Produção", TipoAmbiente.taProducao/*1*/));
-            arrAmb.Add(new DropDownLista("Homologação", TipoAmbiente.taHomologacao/*2*/));
+            arrAmb.Add(new ComboElem("Produção", TipoAmbiente.taProducao));
+            arrAmb.Add(new ComboElem("Homologação", TipoAmbiente.taHomologacao));
 
             comboBox_Ambiente.DataSource = arrAmb;
-            comboBox_Ambiente.DisplayMember = "nome";
-            comboBox_Ambiente.ValueMember = "valor";
+            comboBox_Ambiente.DisplayMember = "valor";
+            comboBox_Ambiente.ValueMember = "codigo";
             #endregion
 
             #region Montar Array DropList do Tipo de Emissão da NF-e
@@ -180,15 +150,15 @@ namespace UniNFeLibrary.Formulario
             // danasa 9-2009
             // atribuido "TipoEmissao.
             //
-            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teNormal], TipoEmissao.teNormal));
-            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teContingencia], TipoEmissao.teContingencia));
-            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teSCAN], TipoEmissao.teSCAN));
-            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teDPEC], TipoEmissao.teDPEC));
-            arrTpEmis.Add(new DropDownLista(UniNFeConsts.tpEmissao[TipoEmissao.teFSDA], TipoEmissao.teFSDA));
+            arrTpEmis.Add(new ComboElem(UniNFeConsts.tpEmissao[TipoEmissao.teNormal], TipoEmissao.teNormal));
+            arrTpEmis.Add(new ComboElem(UniNFeConsts.tpEmissao[TipoEmissao.teContingencia], TipoEmissao.teContingencia));
+            arrTpEmis.Add(new ComboElem(UniNFeConsts.tpEmissao[TipoEmissao.teSCAN], TipoEmissao.teSCAN));
+            arrTpEmis.Add(new ComboElem(UniNFeConsts.tpEmissao[TipoEmissao.teDPEC], TipoEmissao.teDPEC));
+            arrTpEmis.Add(new ComboElem(UniNFeConsts.tpEmissao[TipoEmissao.teFSDA], TipoEmissao.teFSDA));
 
             comboBox_tpEmis.DataSource = arrTpEmis;
-            comboBox_tpEmis.DisplayMember = "nome";
-            comboBox_tpEmis.ValueMember = "valor";
+            comboBox_tpEmis.DisplayMember = "Valor";
+            comboBox_tpEmis.ValueMember = "Codigo";
             #endregion
 
             #region Carregar as configurações da empresa selecionada
@@ -271,9 +241,9 @@ namespace UniNFeLibrary.Formulario
                 //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
                 for (int i = 0; i < arrTpEmis.Count; i++)
                 {
-                    if (((DropDownLista)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor == oEmpresa.tpEmis)
+                    if (((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[i]).Codigo == oEmpresa.tpEmis)
                     {
-                        this.comboBox_tpEmis.Text = ((DropDownLista)(new System.Collections.ArrayList(arrTpEmis))[i]).Nome;
+                        this.comboBox_tpEmis.Text = ((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor;
                         break;
                     }
                 }
@@ -282,9 +252,9 @@ namespace UniNFeLibrary.Formulario
                 //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
                 for (int i = 0; i < arrUF.Count; i++)
                 {
-                    if (((DropDownLista)(new System.Collections.ArrayList(arrUF))[i]).Valor == oEmpresa.UFCod)
+                    if (((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Codigo == oEmpresa.UFCod)
                     {
-                        this.comboBox_UF.Text = ((DropDownLista)(new System.Collections.ArrayList(arrUF))[i]).Nome;
+                        this.comboBox_UF.Text = ((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Nome;
                         break;
                     }
                 }
@@ -293,9 +263,9 @@ namespace UniNFeLibrary.Formulario
                 //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
                 for (int i = 0; i < arrAmb.Count; i++)
                 {
-                    if (((DropDownLista)(new System.Collections.ArrayList(arrAmb))[i]).Valor == oEmpresa.tpAmb)
+                    if (((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Codigo == oEmpresa.tpAmb)
                     {
-                        this.comboBox_Ambiente.Text = ((DropDownLista)(new System.Collections.ArrayList(arrAmb))[i]).Nome;
+                        this.comboBox_Ambiente.Text = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Valor;
                         break;
                     }
                 }

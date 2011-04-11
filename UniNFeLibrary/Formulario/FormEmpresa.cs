@@ -16,6 +16,7 @@ namespace UniNFeLibrary.Formulario
         /// danasa 9-2010
         private EventHandler OnMyClose;
         private bool Salvos;
+        private bool Editando = false;
 
         #region Métodos
         public FormEmpresa(EventHandler _OnClose)
@@ -27,6 +28,9 @@ namespace UniNFeLibrary.Formulario
             /// danasa 9-2010
             this.OnMyClose = _OnClose;
             this.Salvos = false;
+
+            //Nenhuma célula está sendo editada no momento - Wandrey 11/02/2011
+            this.Editando = false;
         }
         #endregion
 
@@ -78,6 +82,12 @@ namespace UniNFeLibrary.Formulario
 
         private void tsbtnSalvar_Click(object sender, EventArgs e)
         {
+            if (Editando)
+            {
+                MessageBox.Show("Existe um registro de empresa sendo editado no momento. Para salvar é necessário a finalização da edição.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             #region Verificar se existe CNPJ´s duplicados
             bool duplicou = false;
             int ContaEmpresa = 0;
@@ -206,21 +216,6 @@ namespace UniNFeLibrary.Formulario
 
             this.Salvos = true;
             this.Close();
-
-            /*
-
-            MessageBox.Show("go to Empresa.CarregaCofig1");
-            #region Recarregar as configurações das empresas
-            try
-            {
-                Empresa.CarregaConfiguracao();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            MessageBox.Show("2");
-            #endregion*/
         }
         #endregion
 
@@ -274,6 +269,18 @@ namespace UniNFeLibrary.Formulario
             DataGridViewTextBoxColumn cCNPJ = (DataGridViewTextBoxColumn)gridEmpresa.Columns["CNPJ"];
             cCNPJ.MaxInputLength = 14;
             cCNPJ.Width = 170;
+        }
+
+        private void gridEmpresa_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            //Célula está sendo editada no momento - Wandrey 11/02/2011
+            this.Editando = true;
+        }
+
+        private void gridEmpresa_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //Nenhuma célula está sendo editada no momento - Wandrey 11/02/2011
+            this.Editando = false;
         }
     }
 }
