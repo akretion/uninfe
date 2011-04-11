@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx?wsdl" docRef="https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx" xmlns:q1="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao" binding="q1:NfeRetRecepcaoSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="https://nfe.sefaz.ba.gov.br/webservices/nfe/NfeRetRecepcao.asmx" xmlns:q2="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetRecepcao" binding="q2:NfeRetRecepcaoSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>
