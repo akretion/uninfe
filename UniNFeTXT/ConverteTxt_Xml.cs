@@ -172,11 +172,11 @@ namespace UniNFeTXT
                 }
                 catch (IOException ex)
                 {
-                    this.cMensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    this.cMensagemErro += ex.Message;
                 }
                 catch (Exception ex)
                 {
-                    this.cMensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    this.cMensagemErro += ex.Message;
                 }
                 finally
                 {
@@ -215,7 +215,7 @@ namespace UniNFeTXT
                             houveErro = true;
                             this.cMensagemErro += "Linha lida: " + this.LinhaLida.ToString()+ Environment.NewLine+
                                                     "Conteudo: " + xContent + Environment.NewLine +
-                                                    (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + Environment.NewLine;
+                                                    ex.Message + Environment.NewLine;
                         }
                     }
                     
@@ -236,7 +236,7 @@ namespace UniNFeTXT
                         }
                         catch (Exception ex)
                         {
-                            nfew.cMensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                            nfew.cMensagemErro += ex.Message;
                         }
                         this.cMensagemErro = nfew.cMensagemErro;
                     }
@@ -380,7 +380,7 @@ namespace UniNFeTXT
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> Conteudo: {2}\r\n" +
                                                     "\tLinha: {3}: Conteudo do segmento: {4}\r\n\tMensagem de erro: {5}",
                                                     this.FID, TAG, ConteudoTag, this.LinhaLida, this.Registro,
-                                                    (ex.InnerException != null ? ex.InnerException.Message : ex.Message)) + Environment.NewLine;
+                                                    ex.Message) + Environment.NewLine;
                 switch (Tipo)
                 {
                     case TpcnTipoCampo.tcDat:
