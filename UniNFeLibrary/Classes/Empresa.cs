@@ -166,7 +166,14 @@ namespace UniNFeLibrary
         #endregion
 
         #region Coleções
+        /// <summary>
+        /// Configurações por empresa
+        /// </summary>
         public static List<Empresa> Configuracoes = new List<Empresa>();
+        /// <summary>
+        /// Objetos dos serviços da NFe
+        /// </summary>
+        public Dictionary<string, WebServiceProxy> WSProxy = new Dictionary<string, WebServiceProxy>();
         #endregion
 
         /// <summary>
@@ -347,13 +354,20 @@ namespace UniNFeLibrary
                     X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
                     X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, empresa.Certificado, false);
 
-                    if (collection1.Count == 0)
+                    empresa.X509Certificado = null;
+                    for (int i = 0; i < collection1.Count; i++)
                     {
+                        //Verificar a validade do certificado
+                        if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                        {
+                            empresa.X509Certificado = collection1[i];
+                            break;
+                        }
                     }
-                    else
-                    {
+
+                    //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
+                    if (empresa.X509Certificado == null)
                         empresa.X509Certificado = collection1[0];
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -415,7 +429,7 @@ namespace UniNFeLibrary
             return retorna;
         }
         #endregion
-        
+
         /*#region FindEmpresaThread()
         /// <summary>
         /// Descobre qual é a empresa da thread que está sendo executada
@@ -434,12 +448,26 @@ namespace UniNFeLibrary
             {
                 if (item.Key.Name == nameThread.ToUpper().Trim())
                 {
-                    retorna = item.Value;
+                    retorna = item.Value;                    
                     break;
                 }
             }
 
             return retorna;
+        }*/
+
+        /*/// <summary>
+        /// Descobre qual é a empresa da thread que está sendo executada
+        /// </summary>
+        /// <param name="currentThread">Thread Corrente</param>
+        /// <returns>Retorna o Index da Lista de Empresas que está sendo executada na thread</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 23/02/2011
+        /// </remarks>
+        public static int FindEmpresaThread(Thread currentThread)
+        {
+            return Auxiliar.threads[currentThread];
         }
         #endregion*/
 
@@ -674,7 +702,6 @@ namespace UniNFeLibrary
             }
         }
         #endregion
-
     }
 
     public class FindEmpresaThread

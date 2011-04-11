@@ -44,40 +44,35 @@ namespace UniNFeLibrary
 
             string strMascaraArq = string.Empty;
             string strMetodo = string.Empty;
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
             switch (srvServico)
             {
                 case Servicos.EmProcessamento:
-                    // danasa 10-2009
-                    this.EmProcessamento();
+                    EmProcessamento();
                     break;
 
                 case Servicos.CancelarNFe:
                     strMetodo = "Cancelamento";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedCan);
-                    // danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedCan_TXT));
                     goto default;
 
                 case Servicos.InutilizarNumerosNFe:
                     strMetodo = "Inutilizacao";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedInu);
-                    // danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedInu_TXT));
                     goto default;
 
                 case Servicos.PedidoConsultaSituacaoNFe:
                     strMetodo = "Consulta";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedSit);
-                    // danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedSit_TXT));
                     goto default;
 
                 case Servicos.PedidoConsultaStatusServicoNFe:
                     strMetodo = "StatusServico";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedSta);
-                    // danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.PedSta_TXT));
                     goto default;
 
@@ -90,35 +85,30 @@ namespace UniNFeLibrary
                 case Servicos.ConsultaCadastroContribuinte:
                     strMetodo = "ConsultaCadastro";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsCad);
-                    // danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsCad_TXT));
                     goto default;
 
                 case Servicos.ConsultaInformacoesUniNFe:
                     strMetodo = "GravarXMLDadosCertificado";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsInf);
-                    //danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsInf_TXT));
                     goto default;
 
                 case Servicos.AlterarConfiguracoesUniNFe:
                     strMetodo = "ReconfigurarUniNfe";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.AltCon);
-                    //danasa 12-9-2009
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.AltCon_TXT));
                     goto default;
 
                 case Servicos.EnviarDPEC:
                     strMetodo = "RecepcaoDPEC";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.EnvDPEC);
-                    //danasa 21/10/2010
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.EnvDPEC_TXT));
                     goto default;
 
                 case Servicos.ConsultarDPEC:
                     strMetodo = "ConsultaDPEC";
                     lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsDPEC);
-                    //danasa 21/10/2010
                     lstArquivos.AddRange(this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.ConsDPEC_TXT));
                     goto default;
 
@@ -157,9 +147,6 @@ namespace UniNFeLibrary
                     this.ConvTXT(Empresa.Configuracoes[emp].PastaEnvio);
                     break;
 
-                ///
-                /// danasa 9-2009
-                /// 
                 case Servicos.GerarChaveNFe:
                     this.GerarChaveNFe();
                     break;
@@ -175,40 +162,15 @@ namespace UniNFeLibrary
                         if (Auxiliar.FileInUse(lstArquivos[i]))
                             continue;
 
-                        string cError = "";
                         try
                         {
                             //Processa ou envia o XML
                             this.EnviarArquivo(lstArquivos[i], oNfe, strMetodo);
                         }
-                        catch (IOException ex)
+                        catch
                         {
-                            ///
-                            /// danasa 9-2009
-                            /// 
-                            cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
-                        }
-                        catch (Exception ex)
-                        {
-                            ///
-                            /// danasa 9-2009
-                            /// 
-                            cError = (ex.InnerException != null ? ex.InnerException.Message: ex.Message);
-                        }
-                        ///
-                        /// danasa 9-2009
-                        /// 
-                        if (!string.IsNullOrEmpty(cError))
-                        {
-                            Auxiliar oAux = new Auxiliar();
-                            ///
-                            /// grava o arquivo de erro
-                            /// 
-                            oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(lstArquivos[i]) + ".err", cError);
-                            ///
-                            /// move o arquivo para a pasta de erro
-                            /// 
-                            oAux.MoveArqErro(lstArquivos[i]);
+                            //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
+                            //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
                         }
                     }
                     break;
@@ -249,12 +211,12 @@ namespace UniNFeLibrary
                 catch (IOException ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    cError = ex.Message;
                 }
                 catch (Exception ex)
                 {
                     //System.Windows.Forms.MessageBox.Show(ex.Message);
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    cError = ex.Message;
                 }
                 ///
                 /// danasa 9-2009
@@ -276,7 +238,10 @@ namespace UniNFeLibrary
         #endregion
 
         #region EmProcessamento
-        protected abstract void EmProcessamento();
+        protected void EmProcessamento()
+        {
+            new NFeEmProcessamento();
+        }
         #endregion
 
         #region EnviarArquivo()
@@ -302,7 +267,7 @@ namespace UniNFeLibrary
             */
             #endregion
 
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
             
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
@@ -379,11 +344,11 @@ namespace UniNFeLibrary
                 }
                 catch (IOException ex)
                 {
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    cError = ex.Message;
                 }
                 catch (Exception ex)
                 {
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    cError = ex.Message;
                 }
                 if (!string.IsNullOrEmpty(cError))
                 {
@@ -404,7 +369,7 @@ namespace UniNFeLibrary
         /// <date>17/04/2009</date>
         private void MontarLoteUmaNfe(Object oNfe)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
             //Definir o tipo do serviço
             Type tipoServico = oNfe.GetType();
@@ -418,7 +383,7 @@ namespace UniNFeLibrary
                 string cError = "";
                 try
                 {
-                    absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(lstArquivos[i]);
+                    LerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(lstArquivos[i]);
                     if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                     {
                         //Gerar lote
@@ -463,7 +428,7 @@ namespace UniNFeLibrary
         /// <date>28/04/2009</date>
         private void MontarLoteVariasNfe(Object oNfe)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
             List<string> lstArqMontarLote = new List<string>();
 
@@ -512,7 +477,7 @@ namespace UniNFeLibrary
 
                                 try
                                 {
-                                    absLerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(ArquivoNFe);
+                                    LerXML.DadosNFeClass oDadosNfe = this.LerXMLNFe(ArquivoNFe);
                                     if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                     {
                                         lstNfe.Add(ArquivoNFe);
@@ -528,12 +493,12 @@ namespace UniNFeLibrary
                                 }
                                 catch (IOException ex)
                                 {
-                                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                                    MensagemErro += ex.Message + "\r\n";
                                     lTeveErro = true;
                                 }
                                 catch (Exception ex)
                                 {
-                                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                                    MensagemErro += ex.Message + "\r\n";
                                     lTeveErro = true;
                                 }
 
@@ -558,12 +523,12 @@ namespace UniNFeLibrary
                     }
                     catch (IOException ex)
                     {
-                        MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                        MensagemErro += ex.Message + "\r\n";
                         lTeveErro = true;
                     }
                     catch (Exception ex)
                     {
-                        MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                        MensagemErro += ex.Message + "\r\n";
                         lTeveErro = true;
                     }
                 }
@@ -575,7 +540,7 @@ namespace UniNFeLibrary
                     }
 
                     lTeveErro = true;
-                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                    MensagemErro += ex.Message + "\r\n";
                 }
 
                 //Deletar o arquivo de solicitão de montagem do lote de NFe
@@ -587,17 +552,25 @@ namespace UniNFeLibrary
                 catch (IOException ex)
                 {
                     lTeveErro = true;
-                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                    MensagemErro += ex.Message + "\r\n";
                 }
                 catch (Exception ex)
                 {
                     lTeveErro = true;
-                    MensagemErro += (ex.InnerException != null ? ex.InnerException.Message : ex.Message) + "\r\n";
+                    MensagemErro += ex.Message + "\r\n";
                 }
 
                 if (lTeveErro)
                 {
-                    oAux.GravarArqErroServico(NomeArquivo, ExtXml.MontarLote/*"-montar-lote.xml"*/, "-montar-lote.err", MensagemErro);
+                    try
+                    {
+                        oAux.GravarArqErroServico(NomeArquivo, ExtXml.MontarLote, "-montar-lote.err", MensagemErro);
+                    }
+                    catch
+                    {
+                        //Se deu algum erro na hora de gravar o arquivo de erro de retorno para o ERP, infelizmente não poderemos fazer nada
+                        //pois deve estar ocorrendo alguma falha de rede, hd, permissão de acesso a pasta ou arquivos, etc. Wandrey 22/03/2010
+                    }
                 }
             }
         }
@@ -691,7 +664,7 @@ namespace UniNFeLibrary
                 oReciboCons = lstRecibo[i];
                 var tempoConsulta = oReciboCons.tMed;
 
-                //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandrey 20/07/2010
+                //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandreu 20/07/2010
                 if (tempoConsulta < 2)
                 {
                     tempoConsulta = 2;
@@ -710,7 +683,7 @@ namespace UniNFeLibrary
         #region AssinarValidarXML()
         private void AssinarValidarXML()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
             
             ///
             /// danasa 21-9-2009
@@ -760,24 +733,186 @@ namespace UniNFeLibrary
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>03/069/2009</date>
-        protected abstract void ConvTXT(string vPasta);
+        protected void ConvTXT(string vPasta)
+        {
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            Auxiliar oAux = new Auxiliar();
+
+            List<string> lstArquivos = this.ArquivosPasta(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/, "*-nfe.txt");
+
+            for (int i = 0; i < lstArquivos.Count; i++)
+            {
+                if (Auxiliar.FileInUse(lstArquivos[i]))
+                    continue;
+
+                UnitxtTOxmlClass oUniTxtToXml = new UnitxtTOxmlClass();
+                string ccMessage = string.Empty;
+                string ccExtension = "-nfe.err";
+
+                try
+                {
+                    ///
+                    /// exclui o arquivo de erro
+                    /// 
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension));
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + "-nfe-ret.xml"));
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Path.GetFileName(lstArquivos[i]));
+                    ///
+                    /// exclui o arquivo TXT original
+                    /// 
+                    oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt");
+
+                    ///
+                    /// processa a conversão
+                    /// 
+                    oUniTxtToXml.Converter(lstArquivos[i], vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/);
+
+                    //Deu tudo certo com a conversão?
+                    if (string.IsNullOrEmpty(oUniTxtToXml.cMensagemErro))
+                    {
+                        ///
+                        /// danasa 8-2009
+                        /// 
+                        if (oUniTxtToXml.cRetorno.Count == 0)
+                        {
+                            ccMessage = "cStat=02\r\n" +
+                                "xMotivo=Falha na conversão. Sem informações para converter o arquivo texto";
+
+                            oAux.MoveArqErro(lstArquivos[i], ".txt");
+                        }
+                        else
+                        {
+                            ///
+                            /// salva o arquivo texto original
+                            ///
+                            FileInfo otxtArquivo = new FileInfo(lstArquivos[i]);
+                            if (vPasta.Equals(Empresa.Configuracoes[emp].PastaEnvio))
+                            {
+                                string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(lstArquivos[i]) + "-orig.txt";
+                                otxtArquivo.MoveTo(vvNomeArquivoDestino);
+                            }
+                            ccExtension = "-nfe.txt";
+                            ccMessage = "cStat=01\r\n" +
+                                "xMotivo=Convertido com sucesso. Foi(ram) convertida(s) " + oUniTxtToXml.cRetorno.Count.ToString() + " nota(s) fiscal(is)";
+
+                            foreach (txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
+                            {
+                                ///
+                                /// monta o texto que será gravado no arquivo de aviso ao ERP
+                                /// 
+                                ccMessage += Environment.NewLine +
+                                        "Nota fiscal: " + txtClass.NotaFiscal.ToString("000000000") +
+                                        " Série: " + txtClass.Serie.ToString("000") +
+                                        " - ChaveNFe: " + txtClass.ChaveNFe;
+                                ///
+                                /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
+                                /// ou
+                                /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
+                                /// 
+                                FileInfo oArquivo = new FileInfo(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\convertidos\\" + txtClass.XMLFileName);
+
+                                string vNomeArquivoDestino = vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\" + txtClass.XMLFileName;
+                                ///
+                                /// excluo o XML se já existe
+                                /// 
+                                oAux.DeletarArquivo(vNomeArquivoDestino);
+
+                                ///
+                                /// move o arquivo da pasta "Envio\Convertidos" para a pasta "Envio"
+                                /// ou
+                                /// move o arquivo da pasta "Validar\Convertidos" para a pasta "Validar"
+                                /// 
+                                oArquivo.MoveTo(vNomeArquivoDestino);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ///
+                        /// danasa 8-2009
+                        /// 
+                        ccMessage = "cStat=99\r\n" +
+                            "xMotivo=Falha na conversão\r\n" +
+                            "MensagemErro=" + oUniTxtToXml.cMensagemErro;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ccMessage = ex.Message;
+                    ccExtension = "-nfe.err";
+                }
+
+                if (!string.IsNullOrEmpty(ccMessage))
+                {
+                    oAux.MoveArqErro(lstArquivos[i], ".txt");
+                    ///
+                    /// exclui todos os XML gerados na pasta Enviados\convertidos
+                    /// 
+                    foreach (txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
+                    {
+                        oAux.DeletarArquivo(vPasta/*ConfiguracaoApp.vPastaXMLEnvio*/ + "\\convertidos\\" + txtClass.XMLFileName);
+                    }
+                    ///
+                    /// danasa 8-2009
+                    /// 
+                    /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
+                    /// 
+                    oAux.GravarArqErroERP(oAux.ExtrairNomeArq(lstArquivos[i], "-nfe.txt") + ccExtension, ccMessage);
+                }
+            }
+        }
         #endregion
 
-        #region LerXMLNfe()
-        protected abstract absLerXML.DadosNFeClass LerXMLNFe(string Arquivo);
-        #endregion
-
-        #region LerXMLRecibo()
-        protected abstract absLerXML.DadosRecClass LerXMLRecibo(string Arquivo);
-        #endregion
-
-        #region GerarChaveNFe()
+        #region LerXMLNFe
         /// <summary>
-        /// Monta a chave da NFe
+        /// Le o conteúdo do XML da NFe
         /// </summary>
-        /// <param name="lstArquivos"></param>
-        /// <returns></returns>
-        protected abstract void GerarChaveNFe();
+        /// <param name="Arquivo">Arquivo XML da NFe</param>
+        /// <returns>Retorna o conteúdo do XML da NFe</returns>
+        private LerXML.DadosNFeClass LerXMLNFe(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+
+            try
+            {
+                oLerXML.Nfe(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return oLerXML.oDadosNfe;
+        }
+        #endregion
+
+        #region GerarChaveNFe
+        protected void GerarChaveNFe()
+        {
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
+
+            Auxiliar oAux = new Auxiliar();
+            ///
+            /// processa arquivos XML
+            /// 
+            List<string> lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.GerarChaveNFe_XML);
+            foreach (string ArqXMLPedido in lstArquivos)
+            {
+                oAux.GerarChaveNFe(ArqXMLPedido, true);
+            }
+            ///
+            /// processa arquivos TXT
+            /// 
+            lstArquivos = this.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvio, "*" + ExtXml.GerarChaveNFe_TXT);
+            foreach (string ArqXMLPedido in lstArquivos)
+            {
+                oAux.GerarChaveNFe(ArqXMLPedido, false);
+            }
+        }
         #endregion
 
         #region Executa Limpeza
@@ -801,7 +936,7 @@ namespace UniNFeLibrary
             {
                 lock (thread)
                 {
-                    int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                    int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
                     //se chegou até aqui é porque é para fazer a limpeza dos diretórios
                     #region temporario
@@ -822,6 +957,9 @@ namespace UniNFeLibrary
         private void Limpar(string diretorio)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+
+            // danasa 27-2-2011
+            if (Empresa.Configuracoes[emp].DiasLimpeza == 0) return;
 
             //recupera os arquivos da pasta temporario
             string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);

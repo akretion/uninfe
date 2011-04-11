@@ -7,16 +7,12 @@ using System.Xml.Schema;
 using System.Windows.Forms;
 using System.Security.Cryptography.Xml;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Pkcs;
 
 namespace UniNFeLibrary
 {
     public class AssinaturaDigital
     {
-        /// <summary>
-        /// Recebe como conteúdo um valor inteiro com o resultado da assinatura, se deu algum errro, se foi assinado com sucesso, etc...
-        /// </summary>
-        public int intResultado { get; private set; }
-
         /// <summary>
         /// String do XML assinado
         /// </summary>
@@ -54,9 +50,6 @@ namespace UniNFeLibrary
         /// <date>04/06/2008</date>
         public void Assinar(string strArqXMLAssinar, string strUri, X509Certificate2 x509Certificado, string strArqXMLAssinado)
         {
-            //Atualizar atributos de retorno com conteúdo padrão
-            this.intResultado = 0;
-
             StreamReader SR = null;
 
             try
@@ -83,15 +76,32 @@ namespace UniNFeLibrary
 
                     if (collection1.Count == 0)
                     {
-                        throw new Exception("O UniNFe detectou problemas com o certificado digital. (Código do Erro: 2)");
-                        this.intResultado = 2;
+                        throw new Exception("O UniNFe não conseguiu localizar nenhum certificado digital para assinatura e/ou envio do XML. Verifique as configurações.");
                     }
                     else
                     {
-                        // certificado ok
-                        _X509Cert = collection1[0];
+                        //Verificar a validade do certificado
+                        _X509Cert = null;
+                        for (int i = 0; i < collection1.Count; i++)
+                        {
+                            //Verificar a validade do certificado
+                            if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                            {
+                                _X509Cert = collection1[i];
+                                break;
+                            }
+                        }
+
+                        //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
+                        if (_X509Cert == null)
+                            _X509Cert = collection1[0];
+
                         string x;
                         x = _X509Cert.GetKeyAlgorithm().ToString();
+
+                        //Normalmente não consegue acessar no certificado A3, por que falta a digitação do PIN
+                        //if (_X509Cert.PrivateKey == null)
+                        //    throw new Exception("Não foi possível acessar a chave privada do certificado digital.");
 
                         // Create a new XML document.
                         XmlDocument doc = new XmlDocument();
@@ -111,7 +121,6 @@ namespace UniNFeLibrary
                             {
                                 // a URI indicada não existe
                                 throw new Exception("A tag de assinatura " + strUri.Trim() + " não existe no XML. (Código do Erro: 4)");
-                                this.intResultado = 4;
                             }
                             // Exsiste mais de uma tag a ser assinada
                             else
@@ -120,7 +129,6 @@ namespace UniNFeLibrary
                                 {
                                     // existe mais de uma URI indicada
                                     throw new Exception("A tag de assinatura " + strUri.Trim() + " não é unica. (Código do Erro: 5)");
-                                    this.intResultado = 5;
                                 }
                                 else
                                 {
@@ -188,10 +196,6 @@ namespace UniNFeLibrary
                                         }
                                         catch (Exception caught)
                                         {
-                                            if (intResultado == 0)
-                                            {
-                                                this.intResultado = 3;
-                                            }
                                             throw (caught);
                                         }
                                     }
@@ -200,31 +204,17 @@ namespace UniNFeLibrary
                         }
                         catch (Exception caught)
                         {
-                            if (intResultado == 0)
-                            {
-                                this.intResultado = 6;
-                            }
                             throw (caught);
                         }
                     }
                 }
                 catch (Exception caught)
                 {
-                    if (intResultado == 0)
-                    {
-                        this.intResultado = 1;
-                    }
-
                     throw (caught);
                 }
             }
             catch (Exception ex)
             {
-                if (intResultado == 0)
-                {
-                    this.intResultado = 7;
-                }
-
                 throw (ex);
             }
             finally

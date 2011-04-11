@@ -16,7 +16,6 @@ namespace UniNFeLibrary
         #region Objetos
         protected Auxiliar oAux = new Auxiliar();
         protected InvocarObjeto oInvocarObj = new InvocarObjeto();
-        protected WebServiceProxy oWSProxy = null;
         #endregion
 
         #region Propriedades
@@ -28,11 +27,6 @@ namespace UniNFeLibrary
 
         protected string mXmlNfeDadosMsg;
         protected Servicos mServico { get; set; }
-
-        /// <summary>
-        /// URL do webservice que está sendo utilizando atualmente
-        /// </summary>
-        protected string UrlAtual { get; set; }
 
         /// <summary>
         /// Arquivo XML contendo os dados a serem enviados (Nota Fiscal, Pedido de Status, Cancelamento, etc...)
@@ -95,17 +89,6 @@ namespace UniNFeLibrary
 
         #region Métodos auxiliares
 
-        #region CabecMsg()
-        /// <summary>
-        /// Auxiliar na geração do cabecalho da mensagem quando estivermos utilizando o InvokeMember para chamar o método
-        /// </summary>
-        /// <param name="cVersaoDados">Versão dos dados do XML</param>
-        /// <returns>Conteúdo do XML</returns>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>07/08/2009</date>
-        public abstract string CabecMsg(string cVersaoDados);
-        #endregion
-
         #region XmlRetorno()
         /// <summary>
         /// Auxiliar na geração do arquivo XML de retorno para o ERP quando estivermos utilizando o InvokeMember para chamar o método
@@ -140,7 +123,7 @@ namespace UniNFeLibrary
         /// <date>03/04/2009</date>
         public Boolean AssinarValidarXMLNFe(string strPasta)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
             Boolean bRetorna = false;
             Boolean bAssinado = this.Assinado(this.vXmlNfeDadosMsg);
@@ -156,7 +139,7 @@ namespace UniNFeLibrary
             try
             {
                 //Fazer uma leitura de algumas tags do XML
-                absLerXML.DadosNFeClass oDadosNFe = this.LerXMLNFe(this.vXmlNfeDadosMsg);
+                LerXML.DadosNFeClass oDadosNFe = this.LerXMLNFe(this.vXmlNfeDadosMsg);
                 string ChaveNfe = oDadosNFe.chavenfe;
                 string TpEmis = oDadosNFe.tpEmis;
 
@@ -176,7 +159,6 @@ namespace UniNFeLibrary
                         //situação para finalizar o processo. Assim envito perder os XML´s que estão na pasta EmProcessamento
                         //tendo assim a possibilidade de gerar o -procNfe.XML através da consulta situação.
                         //Wandrey 08/10/2009
-
                         //throw new Exception("NFE NO FLUXO: Esta nota fiscal já está na pasta de Notas Fiscais em processo de envio, desta forma não é possível envia-la novamente. Se a nota fiscal estiver presa no fluxo de envio sem conseguir finalizar o processo, gere um consulta situação da NFe para forçar a finalização.\r\n" +
                         //    this.vXmlNfeDadosMsg);
                     }
@@ -202,10 +184,7 @@ namespace UniNFeLibrary
 
                         oAD.Assinar(this.vXmlNfeDadosMsg, oValidador.TagAssinar, Empresa.Configuracoes[emp].X509Certificado);
 
-                        if (oAD.intResultado == 0)
-                        {
-                            bAssinado = true;
-                        }
+                        bAssinado = true;
                     }
 
                     // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
@@ -279,11 +258,20 @@ namespace UniNFeLibrary
             }
             catch (Exception ex)
             {
-                oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, "-nfe.err", (ex.InnerException != null ? ex.InnerException.Message : ex.Message));
+                try
+                {
+                    oAux.GravarArqErroServico(this.vXmlNfeDadosMsg, ExtXml.Nfe, ExtXmlRet.Nfe_ERR, ex.Message);
 
-                //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
-                //forçar mover para a pasta de XML com erro neste ponto.
-                oAux.MoveArqErro(strArqDestino);
+                    //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
+                    //forçar mover para a pasta de XML com erro neste ponto.
+                    oAux.MoveArqErro(strArqDestino);
+                }
+                catch
+                {
+                    //Se ocorrer algum erro na hora de tentar gravar o XML de erro para o ERP ou mover o arquivo XML para a pasta de XML com erro, não 
+                    //vou poder fazer nada, pq foi algum erro de rede, permissão de acesso a pasta ou arquivo, etc.
+                    //Wandey 13/03/2010
+                }
             }
 
             return bRetorna;
@@ -291,7 +279,31 @@ namespace UniNFeLibrary
         #endregion
 
         #region LerXMLNFe()
-        protected abstract absLerXML.DadosNFeClass LerXMLNFe(string Arquivo);
+        /// <summary>
+        /// Le o conteúdo do XML da NFe
+        /// </summary>
+        /// <param name="Arquivo">Arquivo XML da NFe</param>
+        /// <returns>Retorna o conteúdo do XML da NFe</returns>
+        private LerXML.DadosNFeClass LerXMLNFe(string Arquivo)
+        {
+            LerXML oLerXML = new LerXML();
+
+            try
+            {
+                oLerXML.Nfe(Arquivo);
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return oLerXML.oDadosNfe;
+        }
+
         #endregion
 
         #region Assinado()
@@ -321,9 +333,9 @@ namespace UniNFeLibrary
         /// <returns>true = Validado com sucesso</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>16/04/2009</date>
-        protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, absLerXML.DadosNFeClass oDadosNFe)
+        protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, LerXML.DadosNFeClass oDadosNFe)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
             bool booValido = false;
             string cTextoErro = "";
@@ -391,12 +403,25 @@ namespace UniNFeLibrary
                     }
                     #endregion
 
+                    #region Tag <tpEmis>
+                    if (ConfiguracaoApp.TipoAplicativo == TipoAplicativo.Nfe)
+                        if (oDadosNFe.tpEmis != oDadosNFe.chavenfe.Substring(37, 1))
+                        {
+                            cTextoErro += "O código numérico informado na tag <tpEmis> está diferente do informado na chave da NF-e.\r\n" +
+                                "Código numérico informado na tag <tpEmis>: " + oDadosNFe.tpEmis + "\r\n" +
+                                "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(37, 1) + "\r\n\r\n";
+                            booValido = false;
+                        }
+
+                    #endregion
+
                     #region Tag <cNF>
-                    if (oDadosNFe.cNF != oDadosNFe.chavenfe.Substring(37, 9))
+                    if ((ConfiguracaoApp.TipoAplicativo == TipoAplicativo.Nfe && oDadosNFe.cNF != oDadosNFe.chavenfe.Substring(38, 8)) ||
+                        (ConfiguracaoApp.TipoAplicativo == TipoAplicativo.Cte && oDadosNFe.cNF != oDadosNFe.chavenfe.Substring(37, 9)))
                     {
                         cTextoErro += "O código numérico informado na tag <cNF> está diferente do informado na chave da NF-e.\r\n" +
                             "Código numérico informado na tag <cNF>: " + oDadosNFe.cNF + "\r\n" +
-                            "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(37, 9) + "\r\n\r\n";
+                            "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(38, 8) + "\r\n\r\n";
                         booValido = false;
                     }
                     #endregion

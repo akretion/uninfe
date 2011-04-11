@@ -30,6 +30,10 @@ namespace UniNFeLibrary
         /// Contém as tag´s que devem ser assinadas em cada XML
         /// </summary>
         public static List<string> lstXMLTagAssinar = new List<string>();
+        /// <summary>
+        /// O Maior ID que tem na lista
+        /// </summary>
+        public static int MaxID { get; set; }
         #endregion
 
         /// <summary>
@@ -51,7 +55,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("nfeProc");
             lstXMLID.Add(9);
             lstXMLTextoID.Add("XML de distribuição da NFe com protocolo de autorização anexado");
-            lstXMLSchema.Add("procNFe_v1.10.xsd");
+            lstXMLSchema.Add("procNFe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -59,7 +63,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("procCancNFe");
             lstXMLID.Add(10);
             lstXMLTextoID.Add("XML de distribuição do Cancelamento da NFe com protocolo de autorização anexado");
-            lstXMLSchema.Add("procCancNFe_v1.07.xsd");
+            lstXMLSchema.Add("procCancNFe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -67,7 +71,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("procInutNFe");
             lstXMLID.Add(11);
             lstXMLTextoID.Add("XML de distribuição de Inutilização de Números de NFe com protocolo de autorização anexado");
-            lstXMLSchema.Add("procInutNFe_v1.07.xsd");
+            lstXMLSchema.Add("procInutNFe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -75,7 +79,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("NFe");
             lstXMLID.Add(1);
             lstXMLTextoID.Add("XML de Nota Fiscal Eletrônica");
-            lstXMLSchema.Add("nfe_v1.10.xsd");
+            lstXMLSchema.Add("nfe_v2.00.xsd");
             lstXMLTagAssinar.Add("infNFe");
             #endregion
 
@@ -83,7 +87,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("enviNFe");
             lstXMLID.Add(2);
             lstXMLTextoID.Add("XML de Envio de Lote de Notas Fiscais Eletrônicas");
-            lstXMLSchema.Add("enviNFe_v1.10.xsd");
+            lstXMLSchema.Add("enviNFe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -91,7 +95,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("cancNFe");
             lstXMLID.Add(3);
             lstXMLTextoID.Add("XML de Cancelamento de Nota Fiscal Eletrônica");
-            lstXMLSchema.Add("cancNFe_v1.07.xsd");
+            lstXMLSchema.Add("cancNFe_v2.00.xsd");
             lstXMLTagAssinar.Add("infCanc");
             #endregion
 
@@ -99,7 +103,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("inutNFe");
             lstXMLID.Add(4);
             lstXMLTextoID.Add("XML de Inutilização de Numerações de Notas Fiscais Eletrônicas");
-            lstXMLSchema.Add("inutNFe_v1.07.xsd");
+            lstXMLSchema.Add("inutNFe_v2.00.xsd");
             lstXMLTagAssinar.Add("infInut");
             #endregion
 
@@ -107,7 +111,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("consSitNFe");
             lstXMLID.Add(5);
             lstXMLTextoID.Add("XML de Consulta da Situação da Nota Fiscal Eletrônica");
-            lstXMLSchema.Add("consSitNFe_v1.07.xsd");
+            lstXMLSchema.Add("consSitNFe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -115,7 +119,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("consReciNFe");
             lstXMLID.Add(6);
             lstXMLTextoID.Add("XML de Consulta do Recibo do Lote de Notas Fiscais Eletrônicas");
-            lstXMLSchema.Add("consReciNfe_v1.10.xsd");
+            lstXMLSchema.Add("consReciNfe_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -123,7 +127,7 @@ namespace UniNFeLibrary
             lstXMLTag.Add("consStatServ");
             lstXMLID.Add(7);
             lstXMLTextoID.Add("XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica");
-            lstXMLSchema.Add("consStatServ_v1.07.xsd");
+            lstXMLSchema.Add("consStatServ_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
@@ -131,13 +135,13 @@ namespace UniNFeLibrary
             lstXMLTag.Add("ConsCad");
             lstXMLID.Add(8);
             lstXMLTextoID.Add("XML de Consulta do Cadastro do Contribuinte");
-            lstXMLSchema.Add("consCad_v1.01.xsd");
+            lstXMLSchema.Add("consCad_v2.00.xsd");
             lstXMLTagAssinar.Add(string.Empty);
             #endregion
 
             #region XML Consulta DPEC
             lstXMLTag.Add("consDPEC");  //danasa 21/10/2010
-            lstXMLID.Add(9);
+            lstXMLID.Add(12);
             lstXMLTextoID.Add("XML de consulta do DPEC no SCE (Sistema de Contingência Eletrônica)");   //danasa 21/10/2010
             lstXMLSchema.Add("consDPEC_v1.01.xsd");//danasa 21/10/2010
             lstXMLTagAssinar.Add(string.Empty);//danasa 21/10/2010
@@ -145,10 +149,19 @@ namespace UniNFeLibrary
 
             #region XML Recepção DPEC
             lstXMLTag.Add("envDPEC");
-            lstXMLID.Add(10);
+            lstXMLID.Add(13);
             lstXMLTextoID.Add("XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)");
             lstXMLSchema.Add("envDPEC_v1.01.xsd");
             lstXMLTagAssinar.Add("infDPEC");
+            #endregion
+
+            #region Determinar a propriedade MaxID
+            MaxID = 0;
+            for (int i = 0; i < lstXMLID.Count; i++)
+            {
+                if (SchemaXML.lstXMLID[i] > MaxID)
+                    MaxID = SchemaXML.lstXMLID[i];
+            }
             #endregion
         }
 

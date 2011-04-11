@@ -827,7 +827,7 @@ namespace UniNFeLibrary
                     {
                         string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                         string NomeArquivo = documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
-                        int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                        int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
                         //Deletar o arquivo da pasta em processamento
                         Auxiliar oAux = new Auxiliar();

@@ -101,7 +101,10 @@ namespace UniNFeLibrary.Enums
         /// <summary>
         /// Consultar o registro do DPEC no SCE - Sistema de Contingência Eletrônica        
         /// </summary>
-        ConsultarDPEC    
+        ConsultarDPEC,
+        /// <summary>
+        /// Thread de execução de serviços diversos do UniNFe
+        /// </summary>
     }
     #endregion
 

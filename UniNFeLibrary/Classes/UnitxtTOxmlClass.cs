@@ -24,6 +24,7 @@ namespace UniNFeLibrary
 
         #region --- private properties
 
+        private string[] fields = { "xLgr", "nro", "xCpl", "xBairro", "cMun", "xMun", "UF" };
         private string cChave = ""; // Monta string com a chave Nota fiscal
         private int serie = 0;
         private int nNF = 0; //Numero Nf
@@ -72,11 +73,13 @@ namespace UniNFeLibrary
                     throw new ArgumentException("Este arquivo não é um arquivo de NOTA FISCAL. A Primeira linha do arquivo deve conter o texto 'NOTAFISCAL'");
                 }
 
+                // 26-10-2010 Frare
+                // Podendo ter mais de um arquivo txt, o mesmo converte os xml's separados. 
                 int nNotas = 1;
-                if (dados.GetLength(0) == 2)
-                    nNotas = Convert.ToInt32("0" + dados[1]);
-                if (nNotas == 0)
-                    nNotas = 1;
+                //if (dados.GetLength(0) == 2)
+                nNotas = Convert.ToInt32("0" + dados[1]);
+                //if (nNotas == 0)
+                //    nNotas = 1;
 
                 this.nNF = 0;
                 for (int nNota = 0; nNota < nNotas; ++nNota)
@@ -118,25 +121,27 @@ namespace UniNFeLibrary
 
         public Int32 GerarCodigoNumerico(Int32 numeroNF)
         {
+            // alterado jhs e samuel passado de 9 digitos para 8 digitos
             string s;
             Int32 i, j, k;
 
             // Essa função gera um código numerico atravéz de calculos realizados sobre o parametro numero
-            s = numeroNF.ToString("000000000");
-            for (i = 0; i < 9; ++i)
+            s = numeroNF.ToString("00000000");
+            for (i = 0; i < 8; ++i)
             {
                 k = 0;
-                for (j = 0; j < 9; ++j)
+                for (j = 0; j < 8; ++j)
                     k += Convert.ToInt32(s[j]) * (j + 1);
                 s = (k % 11).ToString().Trim() + s;
             }
-            return Convert.ToInt32(s.Substring(0, 9));
+            return Convert.ToInt32(s.Substring(0, 8));
         }
 
         public Int32 GerarDigito(string chave)
         {
             int i, j, Digito;
             const string PESO = "4329876543298765432987654329876543298765432";
+            //                   4329876543298765432987654329876543298765432
 
             chave = chave.Replace("NFe", "");
             if (chave.Length != 43)
@@ -223,6 +228,21 @@ namespace UniNFeLibrary
             }
         }
 
+        private void CheckMaxDecimal(string segment, string field, DataRow dataRow, ObOp optional, int minLength, int maxLength, int decimals)
+        {
+            this.Check(segment, field, dataRow, optional, minLength, maxLength);
+
+            if (optional == ObOp.Obrigatorio || (optional == ObOp.Opcional && dataRow[field].ToString().Trim() != ""))
+            {
+                int pos = dataRow[field].ToString().Trim().IndexOf(".") + 1;
+                int ndec = dataRow[field].ToString().Trim().Substring(pos).Length;
+                if (ndec > decimals)
+                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" +
+                                                        Environment.NewLine +
+                                                        "\tLinha: {4}: Conteudo do segmento: {5}",
+                                                        segment, field, decimals, ndec, iLinhaLida, cLinhaTXT) + Environment.NewLine;
+            }
+        }
         /// <summary>
         /// Valida uma tag do tipo data
         /// </summary>
@@ -303,6 +323,26 @@ namespace UniNFeLibrary
             return result;
         }
 
+        private bool linhaValida(TextReader txt)
+        {
+            //cLinhaTXT += "!@#$%^&*()_+";
+            bool reLe = true;
+            for (int x = 0; x < cLinhaTXT.Length - 1; ++x)
+                //if (cLinhaTXT[x] != '|' && cLinhaTXT[x] != '=' && cLinhaTXT[x] != '%')
+                if (/*char.IsSymbol(cLinhaTXT, x) ||*/ char.IsControl(cLinhaTXT, x))
+                {
+                    this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] coluna [" + (x + 1).ToString() + "] contem o caracter [" + cLinhaTXT.Substring(x, 1) + "] que não é permitido" + Environment.NewLine;
+                    //this.cMensagemErro += "\t"+cLinhaTXT + Environment.NewLine;
+
+                    cLinhaTXT = txt.ReadLine();
+                    iLinhaLida++;
+                    reLe = false;
+                    break;
+                }
+
+            return reLe;
+        }
+
         /// <summary>
         /// Processa o arquivo texto
         /// </summary>
@@ -310,7 +350,7 @@ namespace UniNFeLibrary
         /// <param name="cDestino"></param>
         private void ProcessaNota(TextReader txt, string cDestino)
         {
-            string baseDir = InfoApp.PastaSchemas() + "\\nfe_v1.10.xsd";
+            string baseDir = InfoApp.PastaSchemas() + "\\nfe_v2.00.xsd";
 
             if (!File.Exists(baseDir))
             {
@@ -353,14 +393,14 @@ namespace UniNFeLibrary
             {
                 cLinhaTXT = this.ConvertToOEM(this.cLinhaTXT);
 
+                if (!linhaValida(txt)) continue;
+/*
                 //cLinhaTXT += "!@#$%^&*()_+";
                 bool reLe = false;
                 for (int x = 0; x < cLinhaTXT.Length - 1; ++x)
-                    //if (cLinhaTXT[x] != '|' && cLinhaTXT[x] != '=' && cLinhaTXT[x] != '%')
-                    if (/*char.IsSymbol(cLinhaTXT, x) ||*/ char.IsControl(cLinhaTXT, x))
+                    if (char.IsControl(cLinhaTXT, x))
                     {
                         this.cMensagemErro += "Linha [" + this.iLinhaLida.ToString() + "] coluna [" + (x + 1).ToString() + "] contem o caracter [" + cLinhaTXT.Substring(x, 1) + "] que não é permitido" + Environment.NewLine;
-                        //this.cMensagemErro += "\t"+cLinhaTXT + Environment.NewLine;
 
                         cLinhaTXT = txt.ReadLine();
                         iLinhaLida++;
@@ -370,7 +410,7 @@ namespace UniNFeLibrary
 
                 if (reLe)
                     continue;
-
+                */
                 dados = cLinhaTXT.Split('|');
                 dados[0] = dados[0].ToUpper();
                 nElementos = dados.GetLength(0) - 1;
@@ -415,24 +455,19 @@ namespace UniNFeLibrary
                             DataRow dr = dsNfe.Tables["ide"].NewRow();
 
                             cChave = "";
-                            this.PopulateDataRow(dr, dados, 18);
-                            //for (iLeitura = 0; iLeitura <= nElementos - 1/*18*/; iLeitura++)
-                            //{
-                            //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                            //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                            //}
+                            this.PopulateDataRow(dr, dados, 23);
                             dr["infNFe_Id"] = 0;
                             dr["ide_Id"] = 0;
                             dr["procEmi"] = 0;  //0 - emissão de NF-e com aplicativo do contribuinte;
                             dsNfe.Tables["ide"].Rows.Add(dr);
 
-                            //B|cUF|cNF|natOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|tpNF|cMunFG|tpImp|tpEmis|cDV|tpAmb|finNFe|procEmi|verProc|
+                            //B|cUF|cNF|natOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|hSaiEnt|tpNF|cMunFG|tpImp|tpEmis|cDV|tpAmb|finNFe|procEmi|verProc|
                             if (dr["cUF"].ToString() == "")
                             {
                                 ///
                                 /// Assume a UF da configuracao
                                 ///
-                                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                                int emp = new FindEmpresaThread(Thread.CurrentThread).Index; 
 
                                 dr["cUF"] = Empresa.Configuracoes[emp].UFCod;
                             }
@@ -444,6 +479,10 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "nNF", dr, ObOp.Obrigatorio, 1, 9);
                             this.Check(dados[0], "dEmi", dr, ObOp.Obrigatorio);
                             this.Check(dados[0], "dSaiEnt", dr, ObOp.Opcional);
+
+                            // alterado jhs e samuel
+                            Check(dados[0], "hSaiEnt", dr, ObOp.Opcional, 8, 8);
+
                             this.Check(dados[0], "tpNF", dr, ObOp.Obrigatorio, 1, 1);
                             this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
                             this.Check(dados[0], "tpImp", dr, ObOp.Obrigatorio, 1, 1);
@@ -453,6 +492,7 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "finNFe", dr, ObOp.Obrigatorio, 1, 1);
                             this.Check(dados[0], "procEmi", dr, ObOp.Obrigatorio, 1, 1);
                             this.Check(dados[0], "verProc", dr, ObOp.Obrigatorio, 1, 20);
+                            this.Check(dados[0], "xJust", dr, ObOp.Opcional, 0, 256);
 
                             ///
                             /// danasa 8-2009 (adicionado o "0" para que não haja erro de conversão)
@@ -492,11 +532,6 @@ namespace UniNFeLibrary
                                 DataRow dr = dsNfe.Tables["refNF"].NewRow();
                                 if (this.PopulateDataRow(dr, dados, 6))
                                 {
-                                    //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
-                                    //{
-                                    //    if (iLeitura > 0 && dados[iLeitura] != null)
-                                    //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                    //}
                                     dr["serie"] = Convert.ToInt32("0" + dr["serie"].ToString());
                                     dr["NFref_Id"] = iControle;
                                     dsNfe.Tables["refNF"].Rows.Add(dr);
@@ -515,18 +550,116 @@ namespace UniNFeLibrary
 
                         #endregion
 
+                    case "B20A":    //B20a|cUF|AAMM|IE|mod|serie|nNF|
+                        #region -- B20a
+                        {
+                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            {
+                                DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
+                                drNFref["ide_Id"] = 0;
+                                drNFref["NFref_Id"] = iControle++;
+                                dsNfe.Tables["NFref"].Rows.Add(drNFref);
+                            }
+                            DataRow drrefNFP = dsNfe.Tables["refNFP"].NewRow();
+                            drrefNFP["NFref_Id"] = iControle - 1;
+                            if (nElementos > 0) drrefNFP["cUF"] = dados[1];
+                            if (nElementos > 1) drrefNFP["AAMM"] = dados[2];
+                            if (nElementos > 2) drrefNFP["IE"] = dados[3];
+                            if (nElementos > 3) drrefNFP["mod"] = dados[4];
+                            if (nElementos > 4) drrefNFP["serie"] = dados[5];
+                            if (nElementos > 5) drrefNFP["nNF"] = dados[6];
+                            this.Check(dados[0], "cUF", drrefNFP, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "AAMM", drrefNFP, ObOp.Obrigatorio, 4, 4);
+                            this.Check(dados[0], "mod", drrefNFP, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "serie", drrefNFP, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "nNF", drrefNFP, ObOp.Obrigatorio, 1, 9);
+                            dsNfe.Tables["refNFP"].Rows.Add(drrefNFP);
+                        }
+                        #endregion
+
+                        break;
+
+                    case "B20D":    //B20d|CNPJ|
+                        #region -- B20d
+                        {
+                            if (dsNfe.Tables["refNFP"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [B20a] no segmento [B20d]" + Environment.NewLine;
+                            else
+                                if (nElementos >= 1)
+                                    if (dados[1].Trim() != "")
+                                    {
+                                        DataRow ds = dsNfe.Tables["refNFP"].Rows[dsNfe.Tables["refNFP"].Rows.Count - 1];
+                                        ds["CNPJ"] = dados[1].Trim();
+                                        this.Check(dados[0], "CNPJ", ds, ObOp.Obrigatorio, 14, 14);
+                                    }
+                        }
+                        #endregion
+                        break;
+
+                    case "B20E":    //B20e|CPF|
+                        #region -- B20e
+                        {
+                            if (dsNfe.Tables["refNFP"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [B20a] no segmento [B20e]" + Environment.NewLine;
+                            else
+                                if (nElementos >= 1)
+                                    if (dados[1].Trim() != "")
+                                    {
+                                        DataRow ds = dsNfe.Tables["refNFP"].Rows[dsNfe.Tables["refNFP"].Rows.Count - 1];
+                                        ds["CPF"] = dados[1].Trim();
+                                        this.Check(dados[0], "CPF", ds, ObOp.Obrigatorio, 11, 11);
+                                    }
+                        }
+                        #endregion
+                        break;
+
+                    case "B20I":    //B20i|refCTe|
+                        #region -- B20i
+                        {
+                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            {
+                                DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
+                                drNFref["ide_Id"] = 0;
+                                drNFref["NFref_Id"] = iControle++;
+                                dsNfe.Tables["NFref"].Rows.Add(drNFref);
+                            }
+                            DataRow drrefCTe = dsNfe.Tables["NFref"].Rows[dsNfe.Tables["NFref"].Rows.Count - 1];
+                            drrefCTe["refCTe"] = dados[1];
+                            this.Check(dados[0], "refCTe", drrefCTe, ObOp.Obrigatorio, 44, 44);
+                        }
+                        #endregion
+
+                        break;
+
+                    case "B20J":    //B20j|mod|nECF|nCOO|
+                        #region -- B20i
+                        {
+                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            {
+                                DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
+                                drNFref["ide_Id"] = 0;
+                                drNFref["NFref_Id"] = iControle++;
+                                dsNfe.Tables["NFref"].Rows.Add(drNFref);
+                            }
+                            DataRow drrefECF = dsNfe.Tables["refECF"].NewRow();
+                            drrefECF["NFref_Id"] = iControle - 1;
+                            if (nElementos > 0) drrefECF["mod"] = dados[1];
+                            if (nElementos > 1) drrefECF["nECF"] = dados[2];
+                            if (nElementos > 2) drrefECF["nCOO"] = dados[3];
+                            this.Check(dados[0], "mod", drrefECF, ObOp.Obrigatorio, 2, 2);
+                            this.Check(dados[0], "nECF", drrefECF, ObOp.Obrigatorio, 3, 3);
+                            this.Check(dados[0], "nCOO", drrefECF, ObOp.Obrigatorio, 6, 6);
+                            dsNfe.Tables["refECF"].Rows.Add(drrefECF);
+                        }
+                        #endregion
+
+                        break;
+
                     case "C": //tag <infNFe><ide><emit>
                         #region -- C
                         {
                             dremit["IE"] = "";
                             //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
-                            /*
-                            for (iLeitura = 0; iLeitura <= Math.Min(nElementos, 6); iLeitura++)
-                            {
-                                //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
-                                if (iLeitura > 1 & dados[iLeitura] != null && dados[iLeitura - 1].Trim() != "")
-                                    dremit[iLeitura] = dados[iLeitura - 1].Trim();
-                            }*/
                             dremit["infNFe_Id"] = 0;
                             dremit["emit_Id"] = 0;
 
@@ -551,6 +684,13 @@ namespace UniNFeLibrary
                                             {
                                                 if (dados[6] != "")
                                                     dremit["CNAE"] = dados[6];
+                                            }
+
+                                            // alterado jhs e samuel
+                                            if (nElementos > 6)
+                                            {
+                                                if (dados[7] != "")
+                                                    dremit["CRT"] = dados[7];
                                             }
                                         }
                                     }
@@ -612,11 +752,6 @@ namespace UniNFeLibrary
                             dsNfe.Tables["emit"].Rows.Add(dremit);
                             if (this.PopulateDataRow(dr, dados, 11))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dsNfe.Tables["enderEmit"].Rows.Add(dr);
 
                                 this.Check(dados[0], "xLgr", dr, ObOp.Obrigatorio, 1, 60);
@@ -641,11 +776,6 @@ namespace UniNFeLibrary
                             DataRow dr = dsNfe.Tables["avulsa"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 11))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["infNFe_Id"] = 0;
                                 dsNfe.Tables["avulsa"].Rows.Add(dr);
 
@@ -671,7 +801,8 @@ namespace UniNFeLibrary
                             dsNfe.Tables["dest"].Columns["IE"].AllowDBNull = true;
                             drdest["IE"] = ""; //deve sempre gerar essa tag mesmo que em branco se nao ha problemas na hora dele inveter o enderdest
 
-                            for (iLeitura = 0; iLeitura <= Math.Min(nElementos, 3); iLeitura++)
+                            // alterado jhs e samuel
+                            for (iLeitura = 0; iLeitura <= Math.Min(nElementos, 5); iLeitura++)
                             {
                                 //nao preenche o campo cnpj ou cpf, sera preenchido mais abaixo
                                 if (iLeitura > 1 & dados[iLeitura] != null && dados[iLeitura - 1].Trim() != "")
@@ -683,6 +814,8 @@ namespace UniNFeLibrary
                             this.Check(dados[0], "xNome", drdest, ObOp.Obrigatorio, 1, 60);
                             this.Check(dados[0], "IE", drdest, ObOp.Obrigatorio, 0, 14);
                             this.Check(dados[0], "ISUF", drdest, ObOp.Opcional, 1, 9);
+                            // alterado jhs e samuel
+                            this.Check(dados[0], "email", drdest, ObOp.Opcional, 1, 60);
                         }
                         break;
                         #endregion
@@ -719,11 +852,6 @@ namespace UniNFeLibrary
                             DataRow drenderDest = dsNfe.Tables["enderDest"].NewRow();
                             if (this.PopulateDataRow(drenderDest, dados, 11))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*11*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drenderDest[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drenderDest["dest_Id"] = 0;
                                 dsNfe.Tables["enderDest"].Rows.Add(drenderDest);
 
@@ -763,17 +891,22 @@ namespace UniNFeLibrary
                         #region -- F
                         {
                             DataRow drretirada = dsNfe.Tables["retirada"].NewRow();
-                            if (this.PopulateDataRow(drretirada, dados, 8))
+                            //if (this.PopulateDataRow(drretirada, dados, 8))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drretirada[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drretirada["infNFe_Id"] = 0;    //<<< Adicionado em 27-9-2009
-                                dsNfe.Tables["retirada"].Rows.Add(drretirada);
 
+                                //danasa 27-2-2011
+                                for (int i = 1; i < dados.GetLength(0) - 1; ++i)
+                                    if (dados[i] != "")
+                                        drretirada[fields[i - 1]] = dados[i];
+
+                                dsNfe.Tables["retirada"].Rows.Add(drretirada);
+                                /*
                                 this.Check(dados[0], "CNPJ", drretirada, ObOp.Obrigatorio, 14, 14);
+                                // 22-10-2010 - Frare
+                                // Campo CPF para montar o arquivo de xml, seguindo o leiaoute 2.0.
+                                this.Check(dados[0], "CPF", drretirada, ObOp.Opcional, 11, 11);
+                                 */ 
                                 this.Check(dados[0], "xLgr", drretirada, ObOp.Obrigatorio, 1, 60);
                                 this.Check(dados[0], "nro", drretirada, ObOp.Obrigatorio, 1, 60);
                                 this.Check(dados[0], "xCpl", drretirada, ObOp.Opcional, 1, 60);
@@ -786,21 +919,59 @@ namespace UniNFeLibrary
                         break;
                         #endregion
 
+                    case "F02":
+                        #region -- F02
+                        {
+                            if (dsNfe.Tables["retirada"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [F]" + Environment.NewLine;
+                            else
+                            {
+                                DataRow drretirada = dsNfe.Tables["retirada"].Rows[0];
+                                drretirada["CNPJ"] = dados[1];
+                                this.Check(dados[0], "CNPJ", drretirada, ObOp.Obrigatorio, 14, 14);
+                            }
+                        }
+                        break;
+
+                        #endregion
+
+                    case "F02A":
+                        #region -- F02a
+                        {
+                            if (dsNfe.Tables["retirada"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [F]" + Environment.NewLine;
+                            else
+                            {
+                                DataRow drretirada = dsNfe.Tables["retirada"].Rows[0];
+                                drretirada["CPF"] = dados[1];
+                                this.Check(dados[0], "CPF", drretirada, ObOp.Opcional, 11, 11);
+                            }
+                        }
+                        break;
+
+                        #endregion
+
                     case "G":
                         #region -- G
                         {
                             DataRow drentrega = dsNfe.Tables["entrega"].NewRow();
-                            if (this.PopulateDataRow(drentrega, dados, 8))
+                            //if (this.PopulateDataRow(drentrega, dados, 8))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drentrega[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drentrega["infNFe_Id"] = 0;
+
+                                //danasa 27-2-2011
+                                for (int i = 1; i < dados.GetLength(0)-1; ++i)
+                                    if (dados[i] != "")
+                                        drentrega[fields[i-1]] = dados[i];
+
                                 dsNfe.Tables["entrega"].Rows.Add(drentrega);
 
+                                /*
                                 this.Check(dados[0], "CNPJ", drentrega, ObOp.Obrigatorio, 14, 14);
+                                // 22-10-2010 - Frare
+                                // Campo CPF para montar o arquivo de xml, seguindo o leiaoute 2.0.
+                                this.Check(dados[0], "CPF", drentrega, ObOp.Opcional, 11, 11);
+                                 */
                                 this.Check(dados[0], "xLgr", drentrega, ObOp.Obrigatorio, 1, 60);
                                 this.Check(dados[0], "nro", drentrega, ObOp.Obrigatorio, 1, 60);
                                 this.Check(dados[0], "xCpl", drentrega, ObOp.Opcional, 1, 60);
@@ -811,6 +982,38 @@ namespace UniNFeLibrary
                             }
                         }
                         break;
+                        #endregion
+
+                    case "G02":
+                        #region -- G02
+                        {
+                            if (dsNfe.Tables["entrega"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [G]" + Environment.NewLine;
+                            else
+                            {
+                                DataRow drentrega = dsNfe.Tables["entrega"].Rows[0];
+                                drentrega["CNPJ"] = dados[1];
+                                this.Check(dados[0], "CNPJ", drentrega, ObOp.Obrigatorio, 14, 14);
+                            }
+                        }
+                        break;
+
+                        #endregion
+
+                    case "G02A":
+                        #region -- G02a
+                        {
+                            if (dsNfe.Tables["entrega"].Rows.Count == 0)
+                                this.cMensagemErro += "Falta definir o segmento [G]" + Environment.NewLine;
+                            else
+                            {
+                                DataRow drentrega = dsNfe.Tables["entrega"].Rows[0];
+                                drentrega["CPF"] = dados[1];
+                                this.Check(dados[0], "CPF", drentrega, ObOp.Opcional, 11, 11);
+                            }
+                        }
+                        break;
+
                         #endregion
 
                     case "H":
@@ -859,18 +1062,15 @@ namespace UniNFeLibrary
                             DataRow drprod = dsNfe.Tables["prod"].NewRow();
                             drprod["cEAN"] = ""; //se nao deixa-lo em branco da erro
                             drprod["CEANTrib"] = ""; //se nao deixa-lo em branco da erro.
-                            if (this.PopulateDataRow(drprod, dados, 18))
+                            // alterado jhs e samuel
+                            if (this.PopulateDataRow(drprod, dados, 21))
                             {
                                 if (idprod == "")
                                 {
                                     cMensagemErro += "Segmento [I] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*18*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drprod[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
-                                drprod[19] = idprod.ToString(); //det_Id
+                                // alterado jhs e samuel
+                                drprod[22] = idprod.ToString(); //det_Id
                                 drprod["prod_ID"] = prodID.ToString();
                                 ++prodID;
                                 //drprod["det_Id"] = idprod.ToString();
@@ -879,21 +1079,24 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "cProd", drprod, ObOp.Obrigatorio, 1, 60);
                                 this.Check(dados[0], "cEAN", drprod, ObOp.Obrigatorio, 0, 14);
                                 this.Check(dados[0], "xProd", drprod, ObOp.Obrigatorio, 1, 120);
-                                this.Check(dados[0], "NCM", drprod, ObOp.Opcional, 8, 8);
+                                this.Check(dados[0], "NCM", drprod, ObOp.Opcional, 2, 8);
                                 this.Check(dados[0], "EXTIPI", drprod, ObOp.Opcional, 2, 3);
-                                this.Check(dados[0], "genero", drprod, ObOp.Opcional, 2, 2);
+                                // alterado jhs e samuel
+                                //Coluna removida na versao 2.00
+                                //this.Check(dados[0], "genero", drprod, ObOp.Opcional, 2, 2);
                                 this.Check(dados[0], "CFOP", drprod, ObOp.Obrigatorio, 4, 4);
                                 this.Check(dados[0], "uCom", drprod, ObOp.Obrigatorio, 1, 6);
                                 this.Check(dados[0], "qCom", drprod, ObOp.Obrigatorio, 1, 12, 4);
-                                this.Check(dados[0], "vUnCom", drprod, ObOp.Obrigatorio, 1, 16, 4);
+                                this.CheckMaxDecimal(dados[0], "vUnCom", drprod, ObOp.Obrigatorio, 1, 21, 10);
                                 this.Check(dados[0], "vProd", drprod, ObOp.Obrigatorio, 1, 15, 2);
                                 this.Check(dados[0], "cEANTrib", drprod, ObOp.Obrigatorio, 0, 14);
                                 this.Check(dados[0], "uTrib", drprod, ObOp.Obrigatorio, 1, 6);
                                 this.Check(dados[0], "qTrib", drprod, ObOp.Obrigatorio, 1, 12, 4);
-                                this.Check(dados[0], "vUnTrib", drprod, ObOp.Obrigatorio, 1, 16, 4);
+                                this.CheckMaxDecimal(dados[0], "vUnTrib", drprod, ObOp.Obrigatorio, 1, 21, 10);
                                 this.Check(dados[0], "vFrete", drprod, ObOp.Opcional, 1, 15, 2);
                                 this.Check(dados[0], "vSeg", drprod, ObOp.Opcional, 1, 15, 2);
                                 this.Check(dados[0], "vDesc", drprod, ObOp.Opcional, 1, 15, 2);
+                                this.Check(dados[0], "vOutro", drprod, ObOp.Opcional, 1, 15, 2);
                             }
                         }
                         break;
@@ -905,11 +1108,6 @@ namespace UniNFeLibrary
                             DataRow drDI = dsNfe.Tables["DI"].NewRow();
                             if (this.PopulateDataRow(drDI, dados, 6))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drDI[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 ++DIid;
                                 drDI["prod_Id"] = idprod.ToString();
                                 drDI["DI_Id"] = DIid.ToString();
@@ -932,11 +1130,6 @@ namespace UniNFeLibrary
                             DataRow dradi = dsNfe.Tables["adi"].NewRow();
                             if (this.PopulateDataRow(dradi, dados, 4))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dradi[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dradi["DI_Id"] = DIid.ToString();
                                 dsNfe.Tables["adi"].Rows.Add(dradi);
 
@@ -952,16 +1145,9 @@ namespace UniNFeLibrary
                     case "J":
                         #region -- J
                         {
-
-
                             DataRow drveicProd = dsNfe.Tables["veicProd"].NewRow();
                             if (this.PopulateDataRow(drveicProd, dados, 22))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*22*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drveicProd[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drveicProd["prod_id"] = idprod;
                                 dsNfe.Tables["veicProd"].Rows.Add(drveicProd);
 
@@ -999,11 +1185,6 @@ namespace UniNFeLibrary
 
                             if (this.PopulateDataRow(drmed, dados, 5))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drveicProd[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drmed["prod_Id"] = idprod;
                                 dsNfe.Tables["med"].Rows.Add(drmed);
 
@@ -1023,11 +1204,6 @@ namespace UniNFeLibrary
                             DataRow drarma = dsNfe.Tables["arma"].NewRow();
                             if (this.PopulateDataRow(drarma, dados, 4))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drarma[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drarma["prod_Id"] = idprod;
                                 dsNfe.Tables["arma"].Rows.Add(drarma);
 
@@ -1045,13 +1221,8 @@ namespace UniNFeLibrary
                         #region -- L01 ou L1
                         {
                             DataRow drcomb = dsNfe.Tables["comb"].NewRow();
-                            if (this.PopulateDataRow(drcomb, dados, 3))
+                            if (this.PopulateDataRow(drcomb, dados, 4))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drcomb[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 ++idcomb;
                                 drcomb["prod_Id"] = idprod;
                                 drcomb["comb_Id"] = idcomb.ToString();
@@ -1060,6 +1231,7 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "cProdANP", drcomb, ObOp.Opcional, 9, 9);
                                 this.Check(dados[0], "CODIF", drcomb, ObOp.Opcional, 0, 21);
                                 this.Check(dados[0], "qTemp", drcomb, ObOp.Opcional, 1, 16, 4);
+                                this.Check(dados[0], "UFCons", drcomb, ObOp.Opcional, 0, 2);
                             }
                         }
                         break;
@@ -1072,11 +1244,6 @@ namespace UniNFeLibrary
                             DataRow drCIDE = dsNfe.Tables["CIDE"].NewRow();
                             if (this.PopulateDataRow(drCIDE, dados, 3))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drCIDE[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drCIDE["comb_Id"] = idcomb.ToString();
                                 dsNfe.Tables["CIDE"].Rows.Add(drCIDE);
 
@@ -1095,11 +1262,6 @@ namespace UniNFeLibrary
                             DataRow drICMSComb = dsNfe.Tables["ICMSComb"].NewRow();
                             if (this.PopulateDataRow(drICMSComb, dados, 4))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drICMSComb[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drICMSComb["comb_Id"] = idcomb.ToString();
                                 dsNfe.Tables["ICMSComb"].Rows.Add(drICMSComb);
 
@@ -1120,11 +1282,6 @@ namespace UniNFeLibrary
                             DataRow drICMSInter = dsNfe.Tables["ICMSInter"].NewRow();
                             if (this.PopulateDataRow(drICMSInter, dados, 2))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*2*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drICMSInter[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drICMSInter["comb_Id"] = idcomb.ToString();
                                 dsNfe.Tables["ICMSInter"].Rows.Add(drICMSInter);
 
@@ -1143,11 +1300,6 @@ namespace UniNFeLibrary
                             DataRow drICMSCons = dsNfe.Tables["ICMSCons"].NewRow();
                             if (this.PopulateDataRow(drICMSCons, dados, 3))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*3*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        drICMSCons[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 drICMSCons["comb_Id"] = idcomb.ToString();
                                 dsNfe.Tables["ICMSCons"].Rows.Add(drICMSCons);
 
@@ -1159,9 +1311,10 @@ namespace UniNFeLibrary
                         break;
                         #endregion
 
-                    case "N":   //N - ICMS Normal e ST
-                        #region -- N
+                    case "M":
+                        #region -- M
                         {
+                            //danasa 27-2-2011
                             if (idprod != "")
                             {
                                 DataRow dr = dsNfe.Tables["imposto"].NewRow();
@@ -1169,7 +1322,27 @@ namespace UniNFeLibrary
                                 dr["det_Id"] = idprod.ToString();
 
                                 dsNfe.Tables["imposto"].Rows.Add(dr);
+                            }
+                            else
+                                cMensagemErro += "Segmento [M] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                        }
+                        break;
+                        #endregion
 
+                    case "N":   //N - ICMS Normal e ST
+                        #region -- N
+                        {
+                            if (idprod != "")
+                            {
+                                //danasa 27-2-2011
+                                DataRow dr;
+                                if (dsNfe.Tables["imposto"].Rows.Count == 0)
+                                {
+                                    dr = dsNfe.Tables["imposto"].NewRow();
+                                    dr["imposto_Id"] = idprod.ToString();
+                                    dr["det_Id"] = idprod.ToString();
+                                    dsNfe.Tables["imposto"].Rows.Add(dr);
+                                }
                                 dr = dsNfe.Tables["ICMS"].NewRow();
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dr["imposto_Id"] = idprod.ToString();
@@ -1191,11 +1364,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N02] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS00"].Rows.Add(dr);
 
@@ -1220,11 +1388,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N03] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*12*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS10"].Rows.Add(dr);
 
@@ -1255,11 +1418,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N04] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS20"].Rows.Add(dr);
 
@@ -1286,11 +1444,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N05] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*8*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS30"].Rows.Add(dr);
 
@@ -1317,11 +1470,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N06] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*2*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS40"].Rows.Add(dr);
 
@@ -1343,11 +1491,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N07] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS51"].Rows.Add(dr);
 
@@ -1373,18 +1516,13 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N08] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS60"].Rows.Add(dr);
 
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
-                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
-                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vBCSTRet", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "vICMSSTRet", dr, ObOp.Obrigatorio, 1, 16, 2);
                             }
                         }
                         break;
@@ -1401,11 +1539,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N09] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*13*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS70"].Rows.Add(dr);
 
@@ -1437,11 +1570,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [N10] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*13*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS90"].Rows.Add(dr);
 
@@ -1463,6 +1591,186 @@ namespace UniNFeLibrary
                         break;
                         #endregion
 
+                    // simples nacional
+                    case "N10C": //CST – 101 
+                        //simples com aproveitamento de credito
+                        #region -- N10c
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSSN101"].NewRow();
+                            if (this.PopulateDataRow(dr, dados, 5))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10c] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN101"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+                                this.Check(dados[0], "pCredSN", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vCredICMSSN", dr, ObOp.Obrigatorio, 1, 16, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+                    case "N10D": //CST – 102 
+                        //simples sem aproveitamento de credito
+                        #region -- N10d
+
+                        {
+                            string _CSOSN = dados[2];
+                            DataRow dr = dsNfe.Tables["ICMSSN102"].NewRow();
+                            if (this.PopulateDataRow(dr, dados, 3))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10d] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN102"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+                            }
+                        }
+                        break;
+                        #endregion
+
+                    case "N10E": //CST – 201
+                        //simples com aproveitamento de credito st
+                        #region -- N10e
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSSN201"].NewRow();
+                            if (this.PopulateDataRow(dr, dados, 11))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10e] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN201"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+                                this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pCredSN", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vCredICMSSN", dr, ObOp.Obrigatorio, 1, 16, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+
+                    case "N10F": //CST – 202
+                        //simples sem aproveitamento de credito st
+                        #region -- N10f
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSSN202"].NewRow();
+                            if (this.PopulateDataRow(dr, dados, 9))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10f] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN202"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+                                this.Check(dados[0], "modBCST", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Obrigatorio, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Obrigatorio, 1, 16, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+
+                    case "N10G": //CST – 500 
+                        //simples st cst -> [60]
+                        #region -- N10g
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSSN500"].NewRow();
+
+                            int tamanho = dados.Length;
+                            // Layout da Receita e o Emissor gratuito estao errados nao existe o campo modBCST no Layout
+                            if (tamanho == 7)
+                            {
+                                String[] dados2 = new string[5];
+                                dados2[0] = dados[0];
+                                dados2[1] = dados[1];
+                                dados2[2] = dados[2];
+                                dados2[3] = dados[4];
+                                dados2[4] = dados[5];
+                                //dos2[0] = dados[0];
+                                dados = null;
+                                dados = dados2;
+
+
+                            }
+                            if (this.PopulateDataRow(dr, dados, 5))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10g] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN500"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+                                this.Check(dados[0], "vBCSTRet", dr, ObOp.Obrigatorio, 1, 15, 2);
+                                this.Check(dados[0], "vICMSSTRet", dr, ObOp.Obrigatorio, 1, 15, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+
+                    case "N10H": //CST – 900
+                        //simples st cst -> [60]
+                        #region -- N10H
+                        {
+                            DataRow dr = dsNfe.Tables["ICMSSN900"].NewRow();
+
+                            if (this.PopulateDataRow(dr, dados, 16))
+                            {
+                                if (idprod == "")
+                                {
+                                    cMensagemErro += "Segmento [N10h] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
+                                }
+                                dr["ICMS_Id"] = idprod.ToString();
+                                dsNfe.Tables["ICMSSN900"].Rows.Add(dr);
+
+                                this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
+                                this.Check(dados[0], "CSOSN", dr, ObOp.Obrigatorio, 3, 3);
+
+                                this.Check(dados[0], "modBC", dr, ObOp.Opcional, 1, 1);
+                                this.Check(dados[0], "vBC", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "pRedBC", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pICMS", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vICMS", dr, ObOp.Opcional, 1, 16, 2);
+
+                                this.Check(dados[0], "modBCST", dr, ObOp.Opcional, 1, 1);
+                                this.Check(dados[0], "pMVAST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "pRedBCST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vBCST", dr, ObOp.Opcional, 1, 16, 2);
+                                this.Check(dados[0], "pICMSST", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vICMSST", dr, ObOp.Opcional, 1, 16, 2);
+
+                                this.Check(dados[0], "pCredSN", dr, ObOp.Opcional, 1, 6, 2);
+                                this.Check(dados[0], "vCredICMSSN", dr, ObOp.Opcional, 1, 16, 2);
+                            }
+                        }
+                        break;
+                        #endregion
+
                     case "O": //IPI - Informar apenas quando o item for sujeito ao IPI
                         #region -- O
                         {
@@ -1473,11 +1781,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [O] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["IPI_Id"] = idprod.ToString();
                                 dr["imposto_Id"] = idprod.ToString();
                                 dsNfe.Tables["IPI"].Rows.Add(dr);
@@ -1582,11 +1885,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [P] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["imposto_Id"] = idprod.ToString();
                                 dsNfe.Tables["II"].Rows.Add(dr);
 
@@ -1624,11 +1922,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [Q02] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["PIS_Id"] = idprod.ToString();
                                 dsNfe.Tables["PISAliq"].Rows.Add(dr);
 
@@ -1651,11 +1944,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [Q03] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["PIS_Id"] = idprod.ToString();
                                 dsNfe.Tables["PISQtde"].Rows.Add(dr);
 
@@ -1800,11 +2088,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [S02] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["COFINS_Id"] = idprod.ToString();
                                 dsNfe.Tables["COFINSAliq"].Rows.Add(dr);
 
@@ -1827,11 +2110,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [S03] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*4*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["COFINS_Id"] = idprod.ToString();    //danasa 27-9-2009
                                 dsNfe.Tables["COFINSQtde"].Rows.Add(dr);
 
@@ -1970,17 +2248,21 @@ namespace UniNFeLibrary
                         #region -- U
                         {
                             DataRow dr = dsNfe.Tables["ISSQN"].NewRow();
-                            if (this.PopulateDataRow(dr, dados, 5))
+                            if (this.PopulateDataRow(dr, dados, 6))
                             {
                                 if (idprod == "")
                                 {
                                     cMensagemErro += "Segmento [U] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
+
+                                //Criar a tag Imposto se não informada a tag "M"
+                                if (dsNfe.Tables["imposto"].Rows.Count == 0) //danasa 27-2-2011
+                                {
+                                    DataRow dr2 = dsNfe.Tables["imposto"].NewRow();
+                                    dr2["imposto_Id"] = idprod.ToString();
+                                    dr2["det_Id"] = idprod.ToString();
+                                    dsNfe.Tables["imposto"].Rows.Add(dr2);
+                                }
                                 dr["imposto_Id"] = idprod;
                                 dsNfe.Tables["ISSQN"].Rows.Add(dr);
 
@@ -1989,6 +2271,7 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "vISSQN", dr, ObOp.Obrigatorio, 1, 16, 2);
                                 this.Check(dados[0], "cMunFG", dr, ObOp.Obrigatorio, 7, 7);
                                 this.Check(dados[0], "cListServ", dr, ObOp.Obrigatorio, 3, 4);
+                                this.Check(dados[0], "cSitTrib", dr, ObOp.Opcional,1,1);
                             }
                         }
                         break;
@@ -2019,11 +2302,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [W02] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*14*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["total_Id"] = idprod;
                                 dsNfe.Tables["ICMSTot"].Rows.Add(dr);
 
@@ -2056,11 +2334,6 @@ namespace UniNFeLibrary
                                 {
                                     cMensagemErro += "Segmento [W17] sem segmento [H]. Linha: " + iLinhaLida.ToString() + Environment.NewLine;
                                 }
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*5*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["total_Id"] = idprod.ToString();
                                 dsNfe.Tables["ISSQNtot"].Rows.Add(dr);  //danasa 27-9-2009
 
@@ -2128,13 +2401,6 @@ namespace UniNFeLibrary
                     case "X03": //transporta
                         #region -- X03
                         {
-                            /*
-                            for (iLeitura = 0; iLeitura <= 6; iLeitura++)
-                            {
-                                if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                    drtransporta[iLeitura -1 ] = dados[iLeitura].Trim();
-                            }
-                             * */
                             //         1       3   3         4    5
                             //X03 | XNome | IE | XEnder | UF | XMun |
                             string temp = "";
@@ -2210,11 +2476,6 @@ namespace UniNFeLibrary
                             DataRow dr = dsNfe.Tables["retTransp"].NewRow();
                             if (this.PopulateDataRow(dr, dados, 7))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*7*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 & dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 dr["transp_Id"] = 0;
                                 dsNfe.Tables["retTransp"].Rows.Add(dr);
 
@@ -2275,11 +2536,6 @@ namespace UniNFeLibrary
                             drVol = dsNfe.Tables["vol"].NewRow();
                             if (this.PopulateDataRow(drVol, dados, 6))
                             {
-                                //for (iLeitura = 0; iLeitura <= nElementos - 1/*6*/; iLeitura++)
-                                //{
-                                //    if (iLeitura > 0 && dados[iLeitura] != null && dados[iLeitura].Trim() != "")
-                                //        dr[iLeitura - 1] = dados[iLeitura].Trim();
-                                //}
                                 ++volid;
                                 drVol["vol_Id"] = volid.ToString();
                                 drVol["transp_Id"] = 0;
@@ -2391,7 +2647,7 @@ namespace UniNFeLibrary
                                 dr["infNFe_Id"] = 0;
                                 dsNfe.Tables["infAdic"].Rows.Add(dr);
 
-                                this.Check(dados[0], "infAdFisco", dr, ObOp.Opcional, 1, 256);
+                                this.Check(dados[0], "infAdFisco", dr, ObOp.Opcional, 1, 2000);
                                 this.Check(dados[0], "infCpl", dr, ObOp.Opcional, 1, 5000);
 
                                 dsNfe.Tables["infAdic"].Columns["infAdFisco"].AllowDBNull = true;
@@ -2529,23 +2785,26 @@ namespace UniNFeLibrary
                 //cNF = (int)((double)x.Next(1000));
                 cNF = GerarCodigoNumerico(Convert.ToInt32(dsNfe.Tables["ide"].Rows[0]["nNF"].ToString()));
             }
+
+            /// alterado jhs e samuel
+            string _tpEmis = dsNfe.Tables["ide"].Rows[0]["tpEmis"].ToString();
             if (cDV == 0)
             {
                 ///
                 /// calcula do digito verificador
                 /// 
-                string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000");
+                string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + _tpEmis + cNF.ToString("00000000");
 
                 cDV = this.GerarDigito(ccChave);
             }
-            cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
+            cChave += serie.ToString("000") + nNF.ToString("000000000") + _tpEmis + cNF.ToString("00000000") + cDV.ToString("0");
 
             if (drtransporta != null && !transpAdd)
                 dsNfe.Tables["transporta"].Rows.Add(drtransporta);
-
             dsNfe.Tables["ide"].Rows[0]["serie"] = serie;
             dsNfe.Tables["ide"].Rows[0]["nNF"] = nNF;
-            dsNfe.Tables["ide"].Rows[0]["cNF"] = cNF.ToString("000000000");
+            // alterado de 9 digitos para 8 digitos jhs e samuel
+            dsNfe.Tables["ide"].Rows[0]["cNF"] = cNF.ToString("00000000");
             dsNfe.Tables["ide"].Rows[0]["cDV"] = cDV.ToString("0");
             dsNfe.Tables["infNFe"].Rows[0]["Id"] = "NFe" + cChave;
             dsNfe.AcceptChanges();
@@ -2624,15 +2883,72 @@ namespace UniNFeLibrary
                 throw new Exception("tag <IE> não encontrada na tag <dest>");
 
             if (sAux2.IndexOf("<IE>") == -1)
+            {
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE/>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+            }
             else
+            {
                 TextoXml.GetStringBuilder().Insert(TextoXml.ToString().IndexOf("<IE>", TextoXml.ToString().IndexOf("<dest>")), sAux);
+            }
 
-            TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+            TextoXml.GetStringBuilder().Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", ""); //Retirar o namespace xsi, pois tem estado que não tá aceitando. Wandrey 16/11/2010
             TextoXml.GetStringBuilder().Replace("<infAdProd>~-?-~</infAdProd>", "");
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.LoadXml(TextoXml.ToString());
+
+            ///
+            /// varre todos os <det><prod>
+            XmlNodeList prodList = xdoc.GetElementsByTagName("det");
+            foreach(XmlNode prodItem in prodList)
+            {
+                foreach (XmlNode xItem0 in prodItem.ChildNodes)
+                {
+                    if (xItem0.Name == "prod")
+                    {
+                        XmlNode xItemxPed_ok = null;
+                        XmlNode xItemnItemPed_ok = null;
+                        bool DI_found = false;
+
+                        foreach (XmlNode xItemxPed in xItem0.ChildNodes)
+                        {
+                            switch(xItemxPed.Name)
+                            {
+                                case "xPed":
+                                   xItemxPed_ok = xItemxPed;
+                                   break;
+                            
+                                case "nItemPed":
+                                    xItemnItemPed_ok = xItemxPed;
+                                    break;
+
+                                case "DI":
+                                    {
+                                        DI_found = true;
+                                        if (xItemxPed_ok != null)
+                                        {
+                                            //se a tag <xPed> for encontrada, insere logo apos a tag <DI>
+                                            xItem0.InsertAfter(xItemxPed_ok, xItemxPed);
+                                        }
+                                        if (xItemnItemPed_ok != null)
+                                        {
+                                            if (xItemxPed_ok == null)
+                                                //se a tag <nItemPed> for encontrada, insere logo apos a tag <DI><xPed>
+                                                xItem0.InsertAfter(xItemnItemPed_ok, xItemxPed);
+                                            else
+                                                //se a tag <nItemPed> for encontrada, insere logo apos a tag <DI>
+                                                xItem0.InsertAfter(xItemnItemPed_ok, xItemxPed_ok);
+                                        }
+                                    }
+                                    break;
+                            }
+                            if (DI_found)
+                                break;
+                        }
+                    }
+                    break;
+                }
+            }
 
             ///
             /// danasa 8-2009
@@ -2693,3 +3009,4 @@ namespace UniNFeLibrary
         Opcional
     }
 }
+

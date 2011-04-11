@@ -37,7 +37,6 @@ namespace UniNFeLibrary
 
         #region Construtores
 
-        #region WebServiceProxy
         public WebServiceProxy(Uri requestUri, X509Certificate2 Certificado)
         {
             //Definir o certificado digital que será utilizado na conexão com os serviços
@@ -59,7 +58,28 @@ namespace UniNFeLibrary
                 throw (ex);
             }
         }
-        #endregion
+
+        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado)
+        {
+            //Definir o certificado digital que será utilizado na conexão com os serviços
+            this.oCertificado = Certificado;
+
+            //Confirmar a solicitação SSL automaticamente
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
+
+            try
+            {
+                //Obeter a descrção do serviço (WSDL)
+                this.DescricaoServico(arquivoWSDL);
+
+                //Gerar e compilar a classe
+                this.GerarClasse();
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
 
         #endregion
 
@@ -122,6 +142,27 @@ namespace UniNFeLibrary
         }
         #endregion
 
+        #region InvokeXML()
+        /// <summary>
+        /// Invocar o método da classe
+        /// </summary>
+        /// <param name="Instance">Instância do objeto</param>
+        /// <param name="methodName">Nome do método</param>
+        /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
+        /// <returns>Um objeto do tipo string</returns>
+        public string InvokeStr(object Instance, string methodName, object[] parameters)
+        {
+            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
+            Type tipoInstance = Instance.GetType();
+            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
+            Type tipoClientCertificates = oClientCertificates.GetType();
+            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+
+            //Invocar método do serviço
+            return (string)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
+        }
+        #endregion
+
         #region SetProp()
         /// <summary>
         /// Alterar valor das propriedades da classe
@@ -174,7 +215,7 @@ namespace UniNFeLibrary
             X509Certificate certificate,
             X509Chain chain,
             SslPolicyErrors sslPolicyErros)
-        {            
+        {
             return true;
         }
         #endregion
@@ -204,7 +245,7 @@ namespace UniNFeLibrary
 
         #region DescricaoServico()
         /// <summary>
-        /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice
+        /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice a partir de uma URL
         /// </summary>
         /// <param name="requestUri">Uri (endereço https) para obter o WSDL</param>
         /// <param name="Certificado">Certificado digital</param>
@@ -219,14 +260,45 @@ namespace UniNFeLibrary
                 //Definir o endereço para a requisição do wsdl
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
 
+                //Definir dados para conexão com Proxy. Wandrey 22/11/2010
+                if (ConfiguracaoApp.Proxy)
+                {
+                    request.Proxy = Auxiliar.DefinirProxy();
+                }
+
                 //Definir o certificado digital que deve ser utilizado na requisição do wsdl
-                request.ClientCertificates.Add(Certificado);                
+                request.ClientCertificates.Add(Certificado);
 
                 //Requisitar o WSDL e gravar em um stream                
-                Stream stream = request.GetResponse().GetResponseStream();               
+                Stream stream = request.GetResponse().GetResponseStream();
 
                 //Definir a descrição completa do servido (WSDL)
                 this.serviceDescription = ServiceDescription.Read(stream);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
+        #region DescricaoServico()
+        /// <summary>
+        /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice de um arquivo local
+        /// </summary>
+        /// <param name="arquivoWSDL">Local e nome do arquivo WDDL</param>
+        /// <param name="Certificado">Certificado digital</param>
+        private void DescricaoServico(string arquivoWSDL)
+        {
+            try
+            {
+                //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
+                //Wandrey 31/03/2010
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+
+                //Definir a descrição completa do servido (WSDL)
+                //this.serviceDescription = ServiceDescription.Read(stream);
+                this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
             }
             catch (Exception ex)
             {
@@ -244,12 +316,14 @@ namespace UniNFeLibrary
             #region Gerar o código da classe
             StringWriter writer = new StringWriter(CultureInfo.CurrentCulture);
             CSharpCodeProvider provider = new CSharpCodeProvider();
-            provider.GenerateCodeFromNamespace(this.GerarGrafo(), writer, null);
+            provider.GenerateCodeFromNamespace(GerarGrafo(), writer, null);
             #endregion
 
+            string codigoClasse = writer.ToString();
+
             #region Compilar o código da classe
-            CompilerResults results = provider.CompileAssemblyFromSource(this.ParametroCompilacao(), writer.ToString());
-            this.serviceAssemby = results.CompiledAssembly;
+            CompilerResults results = provider.CompileAssemblyFromSource(ParametroCompilacao(), codigoClasse);
+            serviceAssemby = results.CompiledAssembly;
             #endregion
         }
         #endregion

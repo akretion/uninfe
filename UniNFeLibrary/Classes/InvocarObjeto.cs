@@ -17,30 +17,7 @@ namespace UniNFeLibrary
 
         #region Métodos
 
-        #region RelacionarCertObj()
-        /// <summary>
-        /// Relaciona o certificdo digital a ser utilizado na autenticação com o objeto do serviço.
-        /// </summary>
-        /// <param name="pObjeto">Objeto que é para ser relacionado o certificado</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>19/06/2008</date>
-        private void RelacionarCertObj(object pObjeto)
-        {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-            
-            //Detectar o tipo do objeto
-            Type tipoServico = pObjeto.GetType();
-
-            //Relacionar o certificado ao objeto
-            object oClientCertificates;
-            Type tipoClientCertificates;
-            oClientCertificates = tipoServico.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, pObjeto, new Object[] { });
-            tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { Empresa.Configuracoes[emp].X509Certificado });
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga
+        #region Invocar()
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
@@ -64,6 +41,7 @@ namespace UniNFeLibrary
                             string cFinalArqRetorno)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
@@ -107,7 +85,7 @@ namespace UniNFeLibrary
             // Definir Proxy
             if (ConfiguracaoApp.Proxy)
             {
-                oWSProxy.SetProp(oServicoWS, "Proxy", this.DefinirProxy());
+                oWSProxy.SetProp(oServicoWS, "Proxy", Auxiliar.DefinirProxy());
             }
 
             // Limpa a variável de retorno
@@ -158,7 +136,12 @@ namespace UniNFeLibrary
                 {
                     if (cMetodo.Substring(0, 3).ToLower() == "sce") //danasa 21/10/2010
                         throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWSDPEC, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
-                    throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWS, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
+
+                    //Se for XML da NFe a mensagem é padronizada, caso contrário é uma mensagem geral. Wandrey 25/02/2011
+                    if (cMetodo == "nfeRecepcaoLote2")
+                        throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlNFeWS, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
+                    else
+                        throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWS, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
                 }
 
                 //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
@@ -185,7 +168,7 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region Invocar() - Sobrecarga
+        #region Invocar()
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
@@ -226,404 +209,150 @@ namespace UniNFeLibrary
         }
         #endregion
 
-        #region Invocar()
+        #region Invocar() - NFe Versão 1.10
         /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e Grava o XML retornado
+        /// Metodo responsável por invocar o serviço do WebService do SEFAZ - NFe Versão 1.10
         /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="ServicoWS">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
+        /// <param name="oWSProxy">Objeto da classe construida do WSDL</param>
+        /// <param name="oServicoWS">Objeto da classe de envio do XML</param>
+        /// <param name="cMetodo">Método da classe de envio do XML que faz o envio</param>
+        /// <param name="oCabecMsg">Objeto da classe de cabecalho do serviço</param>
+        /// <param name="oServicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
         /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
         /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF", "-ped-can", "-can");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 17/03/2010
+        /// </remarks>
+        public void Invocar(WebServiceProxy oWSProxy,
+                            object oServicoWS,
+                            string cMetodo,
+                            object oServicoNFe,
+                            string cFinalArqEnvio,
+                            string cFinalArqRetorno)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-            bool lRetorna = false;
-
-            // Definir o tipo de serviço dos WebServices do SEFAZ
-            Type TipoServicoWS = ServicoWS.GetType();
-
             // Definir o tipo de serviço da NFe
-            Type TipoServicoNFe = ServicoNFe.GetType();
+            Type typeServicoNFe = oServicoNFe.GetType();
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
-            string XmlNfeDadosMsg = (string)(TipoServicoNFe.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.GetProperty, null, ServicoNFe, null));
+            string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
 
-            // exclui o arquivo de erro
-            // danasa 19-9-2009
-            oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
-
-            // Validar o Arquivo XML
-            string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);
-            if (cResultadoValidacao != "")
+            try
             {
-                //Registrar o erro da validação para o sistema ERP
-                oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", cResultadoValidacao);
+                //Verificar se o certificado digital está vencido, se tiver vai forçar uma exceção
+                CertificadoDigital CertDig = new CertificadoDigital();
+                CertDig.PrepInfCertificado(Empresa.Configuracoes[emp].X509Certificado);
 
-                lRetorna = false;
-                return lRetorna;
+                if (CertDig.lLocalizouCertificado == true)
+                {
+                    if (DateTime.Compare(DateTime.Now, CertDig.dValidadeFinal) > 0)
+                    {
+                        throw new ExceptionInvocarObjeto(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
+                    }
+                }
+
+                // Exclui o Arquivo de Erro
+                oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+
+                // Validar o Arquivo XML
+                //string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);
+                //if (cResultadoValidacao != "")
+                //{
+                //    throw new Exception(cResultadoValidacao);
+                //}
             }
-
-            // Declara variável (tipo string) com o conteúdo do Cabecalho da mensagem a ser enviada para o webservice
-            //            string vNFeCabecMsg = oGerarXML.CabecMsg(cVersaoDados);
-            string vNFeCabecMsg = (string)(TipoServicoNFe.InvokeMember("CabecMsg", System.Reflection.BindingFlags.InvokeMethod, null, ServicoNFe, new Object[] { cVersaoDados }));
-
-            // Montar o XML de Lote de envio de Notas fiscais
-            string vNFeDadosMsg = oAux.XmlToString(XmlNfeDadosMsg);
-
-            // Passar para o Objeto qual vai ser o certificado digital que ele deve utilizar             
-            this.RelacionarCertObj(ServicoWS);
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             // Definir Proxy
             if (ConfiguracaoApp.Proxy)
             {
-                TipoServicoWS.InvokeMember("Proxy", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { this.DefinirProxy() });
+                oWSProxy.SetProp(oServicoWS, "Proxy", Auxiliar.DefinirProxy());
             }
 
             // Limpa a variável de retorno
-            string XmlRetorno = string.Empty;
+            string XmlRetorno;
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 60000 });
+            oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
-            //Vou fazer 5 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
-            for (int i = 1; i <= 5; i++)
+            try
             {
+                //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
+                if (!InternetCS.IsConnectedToInternet())
+                {
+                    //Registrar o erro da validação para o sistema ERP
+                    throw new ExceptionInvocarObjeto(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
+                }
+
+                string CabecMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><cabecMsg xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.02\"><versaoDados>1.07</versaoDados></cabecMsg>";
+                string NFeDadosMsg = oAux.XmlToString(XmlNfeDadosMsg);
+
                 try
                 {
-                    //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-                    if (!InternetCS.IsConnectedToInternet())
-                    {
-                        //Registrar o erro da validação para o sistema ERP
-                        throw new ExceptionInvocarObjeto(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-                    }
-
-                    //Invocar o membro, ou seja, mandar o XML para o SEFAZ
-                    XmlRetorno = (string)(TipoServicoWS.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, ServicoWS, new Object[] { vNFeCabecMsg, vNFeDadosMsg }));
-
-                    //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz
-                    TipoServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, ServicoNFe, new object[] { XmlRetorno });
-
-                    // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitação do serviço
-                    if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
-                    {
-                        TipoServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, ServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
-                    }
-
-                    lRetorna = true;
-                }
-
-                catch (ExceptionInvocarObjeto ex)
-                {
-                    // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
-                    if (i == 5)
-                    {
-                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.Message + "\r\n\r\n" + ex.ToString());
-                        lRetorna = false;
-
-                        throw (ex);
-                    }
-                }
-
-                if (lRetorna == true)
-                {
-                    break;
-                }
-            }
-
-            return lRetorna;
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga()
-        /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e não grava o XML retornado
-        /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object oServico, string cMetodo)
-        {
-            return Invocar(ServicoNFe, cVersaoDados, oServico, cMetodo, string.Empty, string.Empty);
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga
-        /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e Grava o XML retornado
-        /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
-        /// <param name="ServicoWS">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="oParam">Parametros para execução dos serviços</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
-        /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
-        /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF", "-ped-can", "-can");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, ParametroEnvioXML oParam, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
-        {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-
-            bool lRetorna = false;
-
-            // Definir o tipo de serviço dos WebServices do SEFAZ
-            Type TipoServicoWS = ServicoWS.GetType();
-
-            // Definir o tipo de serviço da NFe
-            Type TipoServicoNFe = ServicoNFe.GetType();
-
-            // Definir o tipo do objeto CabecMsg
-            Type TipoCabecMsg = CabecMsg.GetType();
-
-            // Resgatar o nome do arquivo XML a ser enviado para o webservice
-            string XmlNfeDadosMsg = (string)(TipoServicoNFe.InvokeMember("vXmlNfeDadosMsg", System.Reflection.BindingFlags.GetProperty, null, ServicoNFe, null));
-
-            // exclui o arquivo de erro
-            // danasa 19-9-2009
-            oAux.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
-
-            // Validar o Arquivo XML
-            string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);
-            if (cResultadoValidacao != "")
-            {
-                //Registrar o erro da validação para o sistema ERP
-                oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", cResultadoValidacao);
-
-                lRetorna = false;
-                return lRetorna;
-            }
-
-            // Definir algumas propriedades do objeto do cabeçalho da mensagem
-            string cUF = Empresa.Configuracoes[emp].UFCod.ToString();
-            if (oParam != null)
-            {
-                cUF = oParam.UFCod.ToString();
-            }
-
-            TipoCabecMsg.InvokeMember("cUF", System.Reflection.BindingFlags.SetProperty, null, CabecMsg, new object[] { cUF });
-            TipoCabecMsg.InvokeMember("versaoDados", System.Reflection.BindingFlags.SetProperty, null, CabecMsg, new object[] { cVersaoDados });
-
-            // Montar o XML de Lote de envio de Notas fiscais
-            XmlDocument docXML = new XmlDocument();
-            docXML.Load(XmlNfeDadosMsg);
-
-            // Passar para o Objeto qual vai ser o certificado digital que ele deve utilizar             
-            this.RelacionarCertObj(ServicoWS);
-
-            // Definir Proxy
-            if (ConfiguracaoApp.Proxy)
-            {
-                TipoServicoWS.InvokeMember("Proxy", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { this.DefinirProxy() });
-            }
-
-            // Limpa a variável de retorno
-            XmlNode XmlRetorno;
-
-            //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
-            //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            TipoServicoWS.InvokeMember("Timeout", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { 60000 });
-
-            //Vou fazer 3 tentativas de envio, se na terceira falhar eu gravo o erro de Retorno para o ERP
-            for (int i = 1; i <= 5; i++)
-            {
-                try
-                {
-                    //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-                    if (!InternetCS.IsConnectedToInternet())
-                    {
-                        //Registrar o erro da validação para o sistema ERP
-                        throw new ExceptionInvocarObjeto(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-                    }
-
-                    //Atualizar a propriedade do objeto do cabecalho da mensagem
-                    TipoServicoWS.InvokeMember("cteCabecMsgValue", System.Reflection.BindingFlags.SetProperty, null, ServicoWS, new object[] { CabecMsg });
-
                     //Invocar o membro
-                    XmlRetorno = (XmlNode)(TipoServicoWS.InvokeMember(cMetodo, System.Reflection.BindingFlags.InvokeMethod, null, ServicoWS, new Object[] { docXML }));
-
-                    //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
-                    TipoServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, ServicoNFe, new object[] { XmlRetorno.OuterXml });
-
-                    // Registra o retorno de acordo com o status obtido e Exclui o XML de solicitaÃ§Ã£o do serviÃ§o
-                    if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
-                    {
-                        TipoServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, ServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
-                    }
-
-                    lRetorna = true;
+                    XmlRetorno = (string)oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { CabecMsg, NFeDadosMsg });
                 }
-                catch (ExceptionInvocarObjeto ex)
+                catch (Exception ex)
                 {
-                    // Passo alternativo: Registra o retorno no sistema interno, de acordo com a exceção
-                    if (i == 5)
-                    {
-                        oAux.GravarArqErroServico(XmlNfeDadosMsg, cFinalArqEnvio + ".xml", cFinalArqRetorno + ".err", ex.Message + "\r\n\r\n" + ex.ToString());
-                        lRetorna = false;
-
-                        throw (ex);
-                    }
+                    throw new ExceptionEnvioXML(ErroPadrao.FalhaEnvioXmlWS, "\r\nArquivo " + XmlNfeDadosMsg + "\r\nMessage Exception: " + ex.Message);
                 }
 
-                if (lRetorna == true)
+                //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
+                typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno });
+
+                // Registra o retorno de acordo com o status obtido
+                if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
                 {
-                    break;
+                    typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
                 }
+
             }
-            return lRetorna;
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga()
-        /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e não grava o XML retornado
-        /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
-        /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object oServico, string cMetodo)
-        {
-            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, oServico, null, cMetodo, string.Empty, string.Empty);
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga()
-        /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e não grava o XML retornado
-        /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
-        /// <param name="oServico">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="oParam">Parametros para execução dos serviços</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object oServico, ParametroEnvioXML oParam, string cMetodo)
-        {
-            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, oServico, oParam, cMetodo, string.Empty, string.Empty);
-        }
-        #endregion
-
-        #region Invocar() - Sobrecarga
-        /// <summary>
-        /// Invoca o método do objeto passado por parâmetro para fazer acesso aos WebServices do SEFAZ e Grava o XML retornado
-        /// </summary>
-        /// <param name="ServicoNFe">Objeto da classe ser serviço da NFe</param>
-        /// <param name="cVersaoDados">Versão dos dados que será enviado para o WebService</param>
-        /// <param name="CabecMsg">Objeto da classe de CabecMsg</param>
-        /// <param name="ServicoWS">Nome do Objeto do WebService que vai ser acessado</param>
-        /// <param name="cMetodo">Nome do método que vai ser utilizado para acessar o WebService</param>
-        /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
-        /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
-        /// <returns>
-        /// Atualiza a propriedade this.vNfeRetorno da classe com o conteúdo
-        /// XML com o retorno que foi dado do serviço do WebService.
-        /// Se der algum erro ele grava um arquivo txt com o erro em questão.
-        /// </returns>
-        /// <example>
-        /// //Definir qual objeto será utilizado, ou seja, de qual estado (UF)
-        /// object oServico = null;
-        /// this.DefObjCancelamento(ref oServico);
-        /// this.InvocarObjeto("1.07", oServico, "nfeCancelamentoNF", "-ped-can", "-can");
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>01/07/2008</date>
-        public bool Invocar(object ServicoNFe, string cVersaoDados, object CabecMsg, object ServicoWS, string cMetodo, string cFinalArqEnvio, string cFinalArqRetorno)
-        {
-            return Invocar(ServicoNFe, cVersaoDados, CabecMsg, ServicoWS, null, cMetodo, cFinalArqEnvio, cFinalArqRetorno);
-        }
-        #endregion
-
-        #region DefinirProxy()
-        /// <summary>
-        /// Efetua as definições do proxy
-        /// </summary>
-        /// <returns>Retorna as definições do Proxy</returns>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>29/09/2009</date>
-        private System.Net.IWebProxy DefinirProxy()
-        {
-            System.Net.NetworkCredential Usuario = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha);
-            System.Net.IWebProxy Proxy;
-            Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyPorta);
-
-            if (!String.IsNullOrEmpty(ConfiguracaoApp.ProxyUsuario.Trim()) && ConfiguracaoApp.ProxyUsuario.Trim().Length > 0)
+            catch (ExceptionEnvioXML ex)
             {
-                Proxy.Credentials = Usuario;
+                throw (ex);
             }
-
-            return Proxy;
+            catch (ExceptionInvocarObjeto ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
+
+        #region Invocar() - NFe Versão 1.10
+        public void Invocar(WebServiceProxy oWSProxy,
+                            object oServicoWS,
+                            string cMetodo,
+                            object oServicoNFe)
+        {
+            try
+            {
+                this.Invocar(oWSProxy, oServicoWS, cMetodo, oServicoNFe, string.Empty, string.Empty);
+            }
+            catch (ExceptionEnvioXML ex)
+            {
+                throw (ex);
+            }
+            catch (ExceptionInvocarObjeto ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
+
 
         #endregion
     }

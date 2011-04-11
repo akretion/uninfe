@@ -30,15 +30,17 @@ namespace UniNFeLibrary
         /// <by>Wandrey Mundin Ferreira</by>
         public void DeletarArquivo(string Arquivo)
         {
-            //TODO: Criar vários try/catch neste método para evitar erros
-
-            //Definir o arquivo que vai ser deletado ou movido para outra pasta
-            //FileInfo oArquivo = new FileInfo(Arquivo);
-
-            if (File.Exists(Arquivo))
+            try
             {
-                FileInfo oArquivo = new FileInfo(Arquivo);  // << movido para cá >>
-                oArquivo.Delete();
+                if (File.Exists(Arquivo))
+                {
+                    FileInfo oArquivo = new FileInfo(Arquivo);
+                    oArquivo.Delete();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -135,7 +137,8 @@ namespace UniNFeLibrary
             // -------------------------------------------------------------------
             // <?xml version="1.0" encoding="UTF-8"?>
             // <gerarChave>
-            //      <UF>35</UF>                 //se não informado, assume a da configuracao
+            //      <UF>35</UF>                 //se não informado, assume a da configuração
+            //      <tpEmis>1</tpEmis>          //se não informado, assume a da configuração. Wandrey 22/03/2010
             //      <nNF>1000</nNF>
             //      <cNF>0</cNF>                //se não informado, eu gero
             //      <serie>1</serie>
@@ -156,6 +159,7 @@ namespace UniNFeLibrary
             // Filename: XXXXXXXX-gerar-chave.txt
             // -------------------------------------------------------------------
             // UF|35
+            // tpEmis|1
             // nNF|1000
             // cNF|0
             // serie|1
@@ -174,12 +178,12 @@ namespace UniNFeLibrary
             string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
             string ArqERRRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_XML) + "-gerar-chave.err" : this.ExtrairNomeArq(ArqPedido, ExtXml.GerarChaveNFe_TXT) + "-gerar-chave.err");
 
-            this.DeletarArquivo(ArqXMLRetorno);
-            this.DeletarArquivo(ArqERRRetorno);
-            this.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + ArqPedido);
-
             try
             {
+                this.DeletarArquivo(ArqXMLRetorno);
+                this.DeletarArquivo(ArqERRRetorno);
+                this.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + ArqPedido);
+
                 if (!File.Exists(ArqPedido))
                 {
                     throw new Exception("Arquivo " + ArqPedido + " não encontrado");
@@ -190,6 +194,7 @@ namespace UniNFeLibrary
                 if (!Auxiliar.FileInUse(ArqPedido))
                 {
                     int serie = 0;
+                    int tpEmis = Empresa.Configuracoes[emp].tpEmis;
                     int nNF = 0;
                     int cNF = 0;
                     int cUF = Empresa.Configuracoes[emp].UFCod;
@@ -211,6 +216,9 @@ namespace UniNFeLibrary
 
                             if (mChaveElemento.GetElementsByTagName("UF").Count != 0)
                                 cUF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("UF")[0].InnerText);
+
+                            if (mChaveElemento.GetElementsByTagName("tpEmis").Count != 0)
+                                tpEmis = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("tpEmis")[0].InnerText);
 
                             if (mChaveElemento.GetElementsByTagName("nNF").Count != 0)
                                 nNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("nNF")[0].InnerText);
@@ -243,6 +251,9 @@ namespace UniNFeLibrary
                                 {
                                     case "uf":
                                         cUF = Convert.ToInt32("0" + dados[1]);
+                                        break;
+                                    case "tpemis":
+                                        tpEmis = Convert.ToInt32("0" + dados[1]);
                                         break;
                                     case "nnf":
                                         nNF = Convert.ToInt32("0" + dados[1]);
@@ -295,13 +306,13 @@ namespace UniNFeLibrary
                     ///
                     /// calcula do digito verificador
                     /// 
-                    string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000");
+                    string ccChave = cChave + serie.ToString("000") + nNF.ToString("000000000") + tpEmis.ToString("0") + cNF.ToString("00000000");
                     int cDV = oUniTxtToXml.GerarDigito(ccChave);
 
                     ///
                     /// monta a chave da NFe
                     /// 
-                    cChave += serie.ToString("000") + nNF.ToString("000000000") + cNF.ToString("000000000") + cDV.ToString("0");
+                    cChave += serie.ToString("000") + nNF.ToString("000000000") + tpEmis.ToString("0") + cNF.ToString("00000000") + cDV.ToString("0");
 
                     ///
                     /// grava o XML/TXT de resposta
@@ -317,8 +328,17 @@ namespace UniNFeLibrary
             }
             catch (Exception ex)
             {
-                this.MoveArqErro(ArqPedido);
-                File.WriteAllText(ArqERRRetorno, "Arquivo " + ArqERRRetorno + Environment.NewLine + (ex.InnerException != null ? ex.InnerException.Message : ex.Message), Encoding.Default);
+                try
+                {
+                    this.MoveArqErro(ArqPedido);
+
+                    File.WriteAllText(ArqERRRetorno, "Arquivo " + ArqERRRetorno + Environment.NewLine + ex.Message, Encoding.Default);
+                }
+                catch
+                {
+                    //Se der algum erro na hora de gravar o arquivo de erro para o ERP, infelizmente não vamos poder fazer nada, visto que 
+                    //pode ser algum problema com a rede, hd, permissões, etc... Wandrey 22/03/2010
+                }
             }
         }
         #endregion
@@ -368,17 +388,28 @@ namespace UniNFeLibrary
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-            //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
-            //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
-            //for gerado corretamente.
-            this.MoveArqErro(Arquivo);
+            try
+            {
+                //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
+                //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
+                //for gerado corretamente.
+                this.MoveArqErro(Arquivo);
 
-            //Grava arquivo de ERRO para o ERP
-            string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                              this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
-                              FinalArqErro;
+                //Grava arquivo de ERRO para o ERP
+                string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
+                                  this.ExtrairNomeArq(Arquivo, FinalArqEnvio) +
+                                  FinalArqErro;
 
-            File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                File.WriteAllText(cArqErro, Erro, Encoding.Default);
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -409,18 +440,35 @@ namespace UniNFeLibrary
             oSettings.NewLineOnAttributes = false;
             oSettings.OmitXmlDeclaration = false;
 
-            //Agora vamos criar um XML Writer
-            XmlWriter oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaRetorno + "\\" + ArquivoRetorno);
+            XmlWriter oXmlGravar = null;
 
-            //Agora vamos gravar os dados
-            oXmlGravar.WriteStartDocument();
-            oXmlGravar.WriteStartElement("Validacao");
-            oXmlGravar.WriteElementString("cStat", cStat);
-            oXmlGravar.WriteElementString("xMotivo", xMotivo);
-            oXmlGravar.WriteEndElement(); //nfe_configuracoes
-            oXmlGravar.WriteEndDocument();
-            oXmlGravar.Flush();
-            oXmlGravar.Close();
+            try
+            {
+                //Agora vamos criar um XML Writer
+                oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaRetorno + "\\" + ArquivoRetorno);
+
+                //Agora vamos gravar os dados
+                oXmlGravar.WriteStartDocument();
+                oXmlGravar.WriteStartElement("Validacao");
+                oXmlGravar.WriteElementString("cStat", cStat);
+                oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                oXmlGravar.WriteEndElement(); //nfe_configuracoes
+                oXmlGravar.WriteEndDocument();
+                oXmlGravar.Flush();
+            }
+            catch (XmlException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                if (oXmlGravar != null)
+                    oXmlGravar.Close();
+            }
         }
         #endregion
 
@@ -538,26 +586,35 @@ namespace UniNFeLibrary
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
-            if (File.Exists(Arquivo))
+            try
             {
-                FileInfo oArquivo = new FileInfo(Arquivo);
-
-                if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
+                if (File.Exists(Arquivo))
                 {
-                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    FileInfo oArquivo = new FileInfo(Arquivo);
 
-                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
-                    if (File.Exists(vNomeArquivo))
-                        this.DeletarArquivo(vNomeArquivo);
+                    if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
+                    {
+                        string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + this.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
-                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                    oArquivo.MoveTo(vNomeArquivo);
+                        //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
+                        if (File.Exists(vNomeArquivo))
+                            this.DeletarArquivo(vNomeArquivo);
+
+                        //Mover o arquivo da nota fiscal para a pasta do XML com erro
+                        oArquivo.MoveTo(vNomeArquivo);
+                    }
+                    else
+                    {
+                        //Antes estava deletando o arquivo, agora vou retornar uma mensagem de erro
+                        //pois não podemos excluir, pode ser coisa importante. Wandrey 25/02/2011
+                        throw new Exception("A pasta de XML´s com erro informada nas configurações não existe, por favor verifique.");
+                        //oArquivo.Delete();
+                    }
                 }
-                else
-                {
-                    //Não posso excluir, o arquivo pode ser importante. Wandrey 25/02/2011
-                    //oArquivo.Delete();
-                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -570,7 +627,18 @@ namespace UniNFeLibrary
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg)</example>
         public void MoveArqErro(string Arquivo)
         {
-            this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
+            try
+            {
+                this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         #endregion
 
@@ -586,14 +654,25 @@ namespace UniNFeLibrary
         /// </remarks>
         public void MoverArquivo(string Arquivo, string strDestinoArquivo)
         {
-            if (File.Exists(Arquivo))   //danasa 10-2009
+            try
             {
-                //Mover o arquivo original para a pasta de destino
-                this.DeletarArquivo(strDestinoArquivo);
+                if (File.Exists(Arquivo))   //danasa 10-2009
+                {
+                    //Mover o arquivo original para a pasta de destino
+                    this.DeletarArquivo(strDestinoArquivo);
 
-                //Definir o arquivo que vai ser deletado ou movido para outra pasta
-                FileInfo oArquivo = new FileInfo(Arquivo);
-                oArquivo.MoveTo(strDestinoArquivo);
+                    //Definir o arquivo que vai ser deletado ou movido para outra pasta
+                    FileInfo oArquivo = new FileInfo(Arquivo);
+                    oArquivo.MoveTo(strDestinoArquivo);
+                }
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         /// <summary>
@@ -794,11 +873,22 @@ namespace UniNFeLibrary
         // danasa 10-2009
         public void RenomearArquivo(string oldFileName, string newFileName)
         {
-            this.DeletarArquivo(newFileName);
-            if (File.Exists(oldFileName))
+            try
             {
-                FileInfo oArquivo = new FileInfo(oldFileName);
-                oArquivo.MoveTo(newFileName);
+                this.DeletarArquivo(newFileName);
+                if (File.Exists(oldFileName))
+                {
+                    FileInfo oArquivo = new FileInfo(oldFileName);
+                    oArquivo.MoveTo(newFileName);
+                }
+            }
+            catch (IOException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         #endregion
@@ -835,7 +925,7 @@ namespace UniNFeLibrary
             ValidarXMLs oValidador = new ValidarXMLs();
             oValidador.TipoArquivoXML(Arquivo);
 
-            if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= 11)
+            if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= SchemaXML.MaxID)
             {
                 oValidador.Validar(Arquivo, oValidador.cArquivoSchema);
                 if (oValidador.Retorno != 0)
@@ -880,16 +970,21 @@ namespace UniNFeLibrary
                 {
                     oAD.Assinar(Arquivo, oValidador.TagAssinar, Empresa.Configuracoes[emp].X509Certificado);
 
-                    if (oAD.intResultado != 0)
-                    {
-                        Assinou = false;
-                    }
+                    Assinou = true;
                 }
                 catch (Exception ex)
                 {
                     Assinou = false;
-                    this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + ex.Message);
-                    this.MoveArqErro(Arquivo);
+                    try
+                    {
+                        this.GravarXMLRetornoValidacao(Arquivo, "2", "Ocorreu um erro ao assinar o XML: " + ex.Message);
+                        this.MoveArqErro(Arquivo);
+                    }
+                    catch
+                    {
+                        //Se deu algum erro na hora de gravar o retorno do erro para o ERP, infelizmente não posso fazer nada.
+                        //Isso pode acontecer se falhar rede, hd, problema de permissão de pastas, etc... Wandrey 23/03/2010
+                    }
                 }
             }
 
@@ -897,39 +992,63 @@ namespace UniNFeLibrary
             if (Assinou)
             {
                 // Validar o Arquivo XML
-                if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= 11)
+                if (oValidador.nRetornoTipoArq >= 1 && oValidador.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
-                    oValidador.Validar(Arquivo, oValidador.cArquivoSchema);
-                    if (oValidador.Retorno != 0)
+                    try
                     {
-                        this.GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + oValidador.RetornoString);
-                        this.MoveArqErro(Arquivo);
+                        oValidador.Validar(Arquivo, oValidador.cArquivoSchema);
+                        if (oValidador.Retorno != 0)
+                        {
+                            this.GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + oValidador.RetornoString);
+                            this.MoveArqErro(Arquivo);
+                        }
+                        else
+                        {
+                            if (!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
+                            {
+                                Directory.CreateDirectory(Empresa.Configuracoes[emp].PastaValidar + "\\Validado");
+                            }
+
+                            string ArquivoNovo = Empresa.Configuracoes[emp].PastaValidar + "\\Validado\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+
+                            if (File.Exists(ArquivoNovo))
+                            {
+                                FileInfo oArqNovo = new FileInfo(ArquivoNovo);
+                                oArqNovo.Delete();
+                            }
+
+                            FileInfo oArquivo = new FileInfo(Arquivo);
+                            oArquivo.MoveTo(ArquivoNovo);
+
+                            this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        if (!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
+                        try
                         {
-                            Directory.CreateDirectory(Empresa.Configuracoes[emp].PastaValidar + "\\Validado");
+                            this.GravarXMLRetornoValidacao(Arquivo, "4", "Ocorreu um erro ao validar o XML: " + ex.Message);
+                            this.MoveArqErro(Arquivo);
                         }
-
-                        string ArquivoNovo = Empresa.Configuracoes[emp].PastaValidar + "\\Validado\\" + this.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
-
-                        if (File.Exists(ArquivoNovo))
+                        catch
                         {
-                            FileInfo oArqNovo = new FileInfo(ArquivoNovo);
-                            oArqNovo.Delete();
+                            //Se deu algum erro na hora de gravar o retorno do erro para o ERP, infelizmente não posso fazer nada.
+                            //Isso pode acontecer se falhar rede, hd, problema de permissão de pastas, etc... Wandrey 23/03/2010
                         }
-
-                        FileInfo oArquivo = new FileInfo(Arquivo);
-                        oArquivo.MoveTo(ArquivoNovo);
-
-                        this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
                     }
                 }
                 else
                 {
-                    this.GravarXMLRetornoValidacao(Arquivo, "4", "Ocorreu um erro ao validar o XML: " + oValidador.cRetornoTipoArq);
-                    this.MoveArqErro(Arquivo);
+                    try
+                    {
+                        this.GravarXMLRetornoValidacao(Arquivo, "5", "Ocorreu um erro ao validar o XML: " + oValidador.cRetornoTipoArq);
+                        this.MoveArqErro(Arquivo);
+                    }
+                    catch
+                    {
+                        //Se deu algum erro na hora de gravar o retorno do erro para o ERP, infelizmente não posso fazer nada.
+                        //Isso pode acontecer se falhar rede, hd, problema de permissão de pastas, etc... Wandrey 23/03/2010
+                    }
                 }
             }
         }
@@ -1041,6 +1160,57 @@ namespace UniNFeLibrary
             }
         }
         #endregion
+
+        #region CarregaUF()
+        /// <summary>
+        /// Carrega os Estados que possuem serviço de NFE já disponível. Estes Estados são carregados a partir do XML Webservice.xml que fica na pasta do executável do UNINFE
+        /// </summary>
+        /// <returns>Retorna a lista de UF e seus ID´s</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 01/03/2010
+        /// </remarks>
+        public static ArrayList CarregaUF()
+        {
+            ArrayList UF = new ArrayList();
+
+            string ArqXML = InfoApp.PastaExecutavel() + "\\Webservice.xml";
+
+            if (File.Exists(ArqXML))
+            {
+                XmlTextReader oLerXml = null;
+                try
+                {
+                    //Carregar os dados do arquivo XML de configurações da Aplicação
+                    oLerXml = new XmlTextReader(ArqXML);
+
+                    while (oLerXml.Read())
+                    {
+                        if (oLerXml.NodeType == XmlNodeType.Element)
+                        {
+                            if (oLerXml.Name == "Estado" && Convert.ToInt32(oLerXml.GetAttribute("ID")) < 900)
+                            {
+                                UF.Add(new ComboElem(oLerXml.GetAttribute("UF"), Convert.ToInt32(oLerXml.GetAttribute("ID")), oLerXml.GetAttribute("Nome")));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                finally
+                {
+                    if (oLerXml != null)
+                        oLerXml.Close();
+                }
+            }
+
+            UF.Sort(new OrdenacaoPorNome());
+
+            return UF;
+        }
+
         #region CarregaEmpresa()
         /// <summary>
         /// Carrega as Emoresas que foram cadastradas e estão gravadas no XML
@@ -1102,6 +1272,54 @@ namespace UniNFeLibrary
             return empresa;
         }
         #endregion
+
+        /// <summary>
+        /// Carrega os Estados que possuem serviço de NFE já disponível. Estes Estados são carregados a partir do XML Webservice.xml que fica na pasta do executável do UNINFE
+        /// Método modificado do original para retornar uma lista da classe UF que foi criada.
+        /// </summary>
+        /// <returns>Retorna a lista de UF</returns>
+        /// <remarks>
+        /// Autor: Márcio Fábio Althmann
+        /// Data: 06/04/2010
+        /// </remarks>
+        public static List<UF> CarregarUF()
+        {
+            List<UF> listaUf = new List<UF>();
+
+            string arquivoXml = String.Format(@"{0}\Webservice.xml", InfoApp.PastaExecutavel());
+
+            if (!File.Exists(arquivoXml))
+                return null;
+
+            using (XmlTextReader xml = new XmlTextReader(arquivoXml))
+            {
+                while (xml.Read())
+                {
+                    if (xml.NodeType == XmlNodeType.Element)
+                    {
+                        if (xml.Name.Equals("Estado") && int.Parse(xml.GetAttribute("ID")) < 900)
+                        {
+                            UF uf = new UF();
+                            uf.Id = int.Parse(xml.GetAttribute("ID"));
+                            uf.Uf = xml.GetAttribute("UF");
+                            uf.Nome = xml.GetAttribute("Nome");
+                            listaUf.Add(uf);
+                        }
+                    }
+                }
+            }
+
+            if (listaUf.Count > 0)
+                listaUf.Sort(delegate(UF uf, UF uf2)
+                {
+                    return uf.Nome.CompareTo(uf2.Nome);
+                });
+
+            return listaUf;
+        }
+
+        #endregion
+
         #region getDateTime()
         public static DateTime getDateTime(string value)
         {
@@ -1335,6 +1553,28 @@ namespace UniNFeLibrary
             #endregion
         }
         #endregion
+
+        #region DefinirProxy()
+        /// <summary>
+        /// Efetua as definições do proxy
+        /// </summary>
+        /// <returns>Retorna as definições do Proxy</returns>
+        /// <by>Wandrey Mundin Ferreira</by>
+        /// <date>29/09/2009</date>
+        public static System.Net.IWebProxy DefinirProxy()
+        {
+            System.Net.NetworkCredential Usuario = new System.Net.NetworkCredential(ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha);
+            System.Net.IWebProxy Proxy;
+            Proxy = new System.Net.WebProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyPorta);
+
+            if (!String.IsNullOrEmpty(ConfiguracaoApp.ProxyUsuario.Trim()) && ConfiguracaoApp.ProxyUsuario.Trim().Length > 0)
+            {
+                Proxy.Credentials = Usuario;
+            }
+
+            return Proxy;
+        }
+        #endregion
     }
 
     #region infCad & RetConsCad
@@ -1401,7 +1641,14 @@ namespace UniNFeLibrary
         public string NFeRetRecepcao { get; set; }
         public string NFeCancelamento { get; set; }
         public string NFeInutilizacao { get; set; }
+        /// <summary>
+        /// Consulta da Situação da NFe versão 2.0
+        /// </summary>
         public string NFeConsulta { get; set; }
+        /// <summary>
+        /// Consulta Situação da NFe na versão 1.10
+        /// </summary>
+        public string NFeConsulta1 { get; set; }
         public string NFeStatusServico { get; set; }
         public string NFeConsultaCadastro { get; set; }
     }
@@ -1413,11 +1660,15 @@ namespace UniNFeLibrary
         public string UF { get; private set; }
         public URLws URLHomologacao { get; private set; }
         public URLws URLProducao { get; private set; }
+        public URLws LocalHomologacao { get; private set; }
+        public URLws LocalProducao { get; private set; }
 
         public webServices(int id, string nome, string uf)
         {
             URLHomologacao = new URLws();
             URLProducao = new URLws();
+            LocalHomologacao = new URLws();
+            LocalProducao = new URLws();
             ID = id;
             Nome = nome;
             UF = uf;

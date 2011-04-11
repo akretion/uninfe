@@ -10,7 +10,8 @@ namespace UniNFeLibrary
         FalhaInternet = 1,
         FalhaEnvioXmlWS = 2,
         CertificadoVencido = 3,
-        FalhaEnvioXmlWSDPEC = 4//danasa 21/10/2010
+        FalhaEnvioXmlWSDPEC = 4, //danasa 21/10/2010
+        FalhaEnvioXmlNFeWS = 5
     }
 
     class MsgErro
@@ -33,10 +34,15 @@ namespace UniNFeLibrary
                     Mensagem = "Sem conexão com a internet.";
                     break;
 
-                case ErroPadrao.FalhaEnvioXmlWS:
+                case ErroPadrao.FalhaEnvioXmlNFeWS:
                     Mensagem = "Não foi possível recuperar o número do recibo retornado pelo sefaz, pois ocorreu uma falha no exato momento que o XML foi enviado. "+
                         "Esta falha pode ter sido ocasionada por falha na internet ou erro no servidor do SEFAZ. "+
                         "Não tendo o número do recibo, a única forma de finalizar a nota fiscal é através da consulta situação da NF-e (-ped-sit.xml).";
+                    break;
+
+                case ErroPadrao.FalhaEnvioXmlWS:
+                    Mensagem = "Não foi possível obter o retorno do sefaz, pois ocorreu uma falha no exato momento que o XML foi enviado. " +
+                        "Esta falha pode ter sido ocasionada por falha na internet ou erro no servidor do SEFAZ. ";
                     break;
 
                     //danasa 21/10/2010

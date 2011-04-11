@@ -61,6 +61,7 @@ namespace UniNFeLibrary
 
             if (lArqXML && lArqXSD)
             {
+                //TODO: V3.0 - Colocar Try Catch
                 StreamReader cStreamReader = new StreamReader(cRotaArqXML);
                 XmlTextReader cXmlTextReader = new XmlTextReader(cStreamReader);
                 XmlValidatingReader reader = new XmlValidatingReader(cXmlTextReader);
@@ -84,7 +85,7 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
-                    this.cErro = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    this.cErro = ex.Message;
                 }
 
                 reader.Close();
@@ -168,58 +169,66 @@ namespace UniNFeLibrary
             this.cArquivoSchema = string.Empty;
             this.TagAssinar = string.Empty;
 
-            if (File.Exists(cRotaArqXML))
+            try
             {
-                //Carregar os dados do arquivo XML de configurações do UniNfe
-                XmlTextReader oLerXml = null;
-
-                try
+                if (File.Exists(cRotaArqXML))
                 {
-                    oLerXml = new XmlTextReader(cRotaArqXML);
+                    //Carregar os dados do arquivo XML de configurações do UniNfe
+                    XmlTextReader oLerXml = null;
 
-                    while (oLerXml.Read())
+                    try
                     {
-                        if (oLerXml.NodeType == XmlNodeType.Element)
+                        oLerXml = new XmlTextReader(cRotaArqXML);
+
+                        while (oLerXml.Read())
                         {
-                            for (int i = 0; i < SchemaXML.lstXMLTag.Count; i++)
+                            if (oLerXml.NodeType == XmlNodeType.Element)
                             {
-                                if (SchemaXML.lstXMLTag[i] == oLerXml.Name)
+                                for (int i = 0; i < SchemaXML.lstXMLTag.Count; i++)
                                 {
-                                    this.nRetornoTipoArq = SchemaXML.lstXMLID[i];
-                                    this.cRetornoTipoArq = SchemaXML.lstXMLTextoID[i];
-                                    this.cArquivoSchema = SchemaXML.lstXMLSchema[i];
-                                    this.TagAssinar = SchemaXML.lstXMLTagAssinar[i];
+                                    if (SchemaXML.lstXMLTag[i] == oLerXml.Name)
+                                    {
+                                        this.nRetornoTipoArq = SchemaXML.lstXMLID[i];
+                                        this.cRetornoTipoArq = SchemaXML.lstXMLTextoID[i];
+                                        this.cArquivoSchema = SchemaXML.lstXMLSchema[i];
+                                        this.TagAssinar = SchemaXML.lstXMLTagAssinar[i];
+                                        break;
+                                    }
+                                }
+
+                                if (this.nRetornoTipoArq != 0) //Arquivo XML já foi identificado
+                                {
                                     break;
                                 }
                             }
-
-                            if (this.nRetornoTipoArq != 0) //Arquivo XML já foi identificado
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        this.nRetornoTipoArq = 102;
+                        this.cRetornoTipoArq = ex.Message;
+                    }
+                    finally
+                    {
+                        if (oLerXml != null)
+                        {
+                            if (oLerXml.ReadState != ReadState.Closed)
                             {
-                                break;
+                                oLerXml.Close();
                             }
                         }
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    this.nRetornoTipoArq = 102;
-                    this.cRetornoTipoArq = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
-                }
-                finally
-                {
-                    if (oLerXml != null)
-                    {
-                        if (oLerXml.ReadState != ReadState.Closed)
-                        {
-                            oLerXml.Close();
-                        }
-                    }
+                    this.nRetornoTipoArq = 100;
+                    this.cRetornoTipoArq = "Arquivo XML não foi encontrado";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                this.nRetornoTipoArq = 100;
-                this.cRetornoTipoArq = "Arquivo XML não foi encontrado";
+                this.nRetornoTipoArq = 103;
+                this.cRetornoTipoArq = ex.Message;
             }
 
             if (this.nRetornoTipoArq == 0)

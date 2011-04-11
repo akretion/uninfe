@@ -36,7 +36,7 @@ namespace UniNFeLibrary
         /// Subject do Certificado, Razão Social da Empresa Certificada, CNPJ, etc...
         /// </summary>
         public string sSubject { get; private set; }
-        
+
         #endregion
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace UniNFeLibrary
                 X509Certificate2UI.DisplayCertificate(oCertificado);
             }
         }
-  
+
         /// <summary>
         /// Pega algumas informações do certificado digital informado por parâmetro para o método
         /// e disponibiliza em propriedades para utilização
@@ -113,7 +113,7 @@ namespace UniNFeLibrary
         /// </example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>24/01/2009</date>
-        public void PrepInfCertificado( X509Certificate2 pCertificado )
+        public void PrepInfCertificado(X509Certificate2 pCertificado)
         {
             string _xnome = pCertificado.Subject.ToString();
 
@@ -124,12 +124,24 @@ namespace UniNFeLibrary
             X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, _xnome, false);
 
             if (collection1.Count == 0)
-            {
                 this.lLocalizouCertificado = false;
-            }
             else
             {
-                _X509Cert = collection1[0];
+                _X509Cert = null;
+
+                for (int i = 0; i < collection1.Count; i++)
+                {
+                    //Verificar a validade do certificado
+                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                    {
+                        _X509Cert = collection1[i];
+                        break;
+                    }
+                }
+
+                if (_X509Cert == null)
+                    _X509Cert = collection1[0];
+
                 this.sSubject = _X509Cert.Subject;
                 this.dValidadeInicial = _X509Cert.NotBefore;
                 this.dValidadeFinal = _X509Cert.NotAfter;

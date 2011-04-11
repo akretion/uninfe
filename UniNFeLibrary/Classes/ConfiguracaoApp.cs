@@ -129,18 +129,93 @@ namespace UniNFeLibrary
         /// lista utilizada para armazenar os webservices
         private static List<webServices> webservicesList = null;
 
-        #region DefURLWS
         /// <summary>
-        /// Definir a URLS do WebService a ser utilizado
+        /// Definir o webservice que será utilizado para o envio do XML
         /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <param name="versaoNFe">Versão da NFe (1 ou 2)</param>
+        /// <returns>Retorna o objeto do serviço</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 04/04/2011
+        /// </remarks>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, int versaoNFe)
+        {
+            WebServiceProxy wsProxy = null;
+            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + " " + versaoNFe;
+            try
+            {
+                wsProxy = Empresa.Configuracoes[emp].WSProxy[key];
+            }
+            catch
+            {
+                //Definir a URI para conexão com o Webservice
+                string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, servico, versaoNFe);
+
+                wsProxy = new WebServiceProxy(Url, Empresa.Configuracoes[emp].X509Certificado);
+                Empresa.Configuracoes[emp].WSProxy.Add(key, wsProxy);
+            }
+
+            return wsProxy;
+        }
+
+
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <returns>Retorna o objeto do serviço</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 04/04/2011
+        /// </remarks>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
+        {
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, 2);
+        }
+
+        /// <summary>
+        /// Definir o local do WSDL do webservice
+        /// </summary>
+        /// <param name="CodigoUF">Código da UF que é para pesquisar a URL do WSDL</param>
+        /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
+        /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
+        /// <param name="servico">Serviço da NFe que está sendo executado</param>
+        /// <returns>Retorna a URL</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 22/03/2011
+        /// </remarks>
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico)
+        {
+            return DefLocalWSDL(CodigoUF, tipoAmbiente, tipoEmissao, servico, 2);
+        }
+
+        #region DefLocalWSDL
+        /// <summary>
+        /// Definir o local do WSDL do webservice
+        /// </summary>
+        /// <param name="CodigoUF">Código da UF que é para pesquisar a URL do WSDL</param>
+        /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
+        /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
+        /// <param name="servico">Serviço da NFe que está sendo executado</param>
+        /// <param name="versaoNFe">Versão da NFe</param>
+        /// <returns>Retorna a URL</returns>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 08/02/2010
         /// </remarks>
-        public static string DefURLWS(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico)
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico, int versaoNFe)
         {
-            string ArqXML = InfoApp.PastaExecutavel() + "\\Webservice.xml";
-            string URL = string.Empty;
+            string WSDL = string.Empty;
             switch (tipoEmissao)
             {
                 case TipoEmissao.teSCAN:
@@ -157,8 +232,99 @@ namespace UniNFeLibrary
             }
             string ufNome = CodigoUF.ToString();  //danasa 20-9-2010
 
+            CarregaWebServicesList();
 
-            #region --carrega os WebServices na lista de webServices --danasa 21/10/2010
+            #region --varre a lista de webservices baseado no codigo da UF
+
+            foreach (webServices list in webservicesList)
+            {
+                if (list.ID == CodigoUF)
+                {
+                    switch (servico)
+                    {
+                        case Servicos.CancelarNFe:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCancelamento : list.LocalProducao.NFeCancelamento);
+                            break;
+
+                        case Servicos.ConsultaCadastroContribuinte:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaCadastro : list.LocalProducao.NFeConsultaCadastro);
+                            break;
+
+                        case Servicos.EnviarLoteNfe:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
+                            break;
+
+                        case Servicos.EnviarDPEC:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
+                            break;
+
+                        case Servicos.InutilizarNumerosNFe:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeInutilizacao : list.LocalProducao.NFeInutilizacao);
+                            break;
+
+                        case Servicos.PedidoConsultaSituacaoNFe:
+                            if (versaoNFe.Equals(1))
+                                WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta1 : list.LocalProducao.NFeConsulta1);
+                            else
+                                WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
+                            break;
+
+                        case Servicos.ConsultarDPEC:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
+                            break;
+
+                        case Servicos.PedidoConsultaStatusServicoNFe:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeStatusServico : list.LocalProducao.NFeStatusServico);
+                            break;
+
+                        case Servicos.PedidoSituacaoLoteNFe:
+                            WSDL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRetRecepcao : list.LocalProducao.NFeRetRecepcao);
+                            break;
+                    }
+                    //if (URL != string.Empty)  //danasa 02/12/2010
+                    {
+                        if (tipoEmissao == TipoEmissao.teDPEC)  //danasa 21/10/2010
+                            ufNome = "DPEC";
+                        else
+                            ufNome = "de " + list.Nome;  //danasa 20-9-2010
+
+                        break;
+                    }
+                }
+            }
+            #endregion
+
+            if (WSDL == string.Empty || !File.Exists(WSDL))
+            {
+                string Ambiente = string.Empty;
+                switch (tipoAmbiente)
+                {
+                    case TipoAmbiente.taProducao:
+                        Ambiente = "produção";
+                        break;
+
+                    case TipoAmbiente.taHomologacao:
+                        Ambiente = "homologação";
+                        break;
+
+                    default:
+                        break;
+                }
+
+                throw new Exception("O Estado " + ufNome + " ainda não dispõe deste serviço no layout 4.0.1 da NF-e para o ambiente de " + Ambiente + ".");
+            }
+
+            return WSDL;
+        }
+        #endregion
+
+        #region CarregaWebServicesList()
+        /// <summary>
+        /// Carrega a lista de webservices definidos no arquivo WebService.XML
+        /// </summary>
+        private static void CarregaWebServicesList()
+        {
+            string ArqXML = InfoApp.PastaExecutavel() + "\\Webservice.xml";
 
             if (webservicesList == null)
             {
@@ -183,6 +349,7 @@ namespace UniNFeLibrary
 
                                     webServices wsItem = new webServices(ID, Nome, UF);
 
+                                    #region URL´s de Homologação
                                     XmlNodeList urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
                                     for (int i = 0; i < urlList.Count; ++i)
                                     {
@@ -191,29 +358,35 @@ namespace UniNFeLibrary
                                             switch (urlList[i].ChildNodes[j].Name)
                                             {
                                                 case "NFeCancelamento":
-                                                    wsItem.URLHomologacao.NFeCancelamento = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeCancelamento = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeConsulta":
-                                                    wsItem.URLHomologacao.NFeConsulta = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeConsulta = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeConsultaCadastro":
-                                                    wsItem.URLHomologacao.NFeConsultaCadastro = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeConsultaCadastro = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeInutilizacao":
-                                                    wsItem.URLHomologacao.NFeInutilizacao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeInutilizacao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeRecepcao":
-                                                    wsItem.URLHomologacao.NFeRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeRetRecepcao":
-                                                    wsItem.URLHomologacao.NFeRetRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeRetRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeStatusServico":
-                                                    wsItem.URLHomologacao.NFeStatusServico = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLHomologacao.NFeStatusServico = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta1":
+                                                    wsItem.URLHomologacao.NFeConsulta1 = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                             }
                                         }
                                     }
+                                    #endregion
+
+                                    #region URL´s de produção
                                     urlList = estadoElemento.GetElementsByTagName("URLProducao");
                                     for (int i = 0; i < urlList.Count; ++i)
                                     {
@@ -222,29 +395,108 @@ namespace UniNFeLibrary
                                             switch (urlList[i].ChildNodes[j].Name)
                                             {
                                                 case "NFeCancelamento":
-                                                    wsItem.URLProducao.NFeCancelamento = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeCancelamento = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeConsulta":
-                                                    wsItem.URLProducao.NFeConsulta = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeConsulta = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeConsultaCadastro":
-                                                    wsItem.URLProducao.NFeConsultaCadastro = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeConsultaCadastro = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeInutilizacao":
-                                                    wsItem.URLProducao.NFeInutilizacao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeInutilizacao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeRecepcao":
-                                                    wsItem.URLProducao.NFeRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeRetRecepcao":
-                                                    wsItem.URLProducao.NFeRetRecepcao = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeRetRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                                 case "NFeStatusServico":
-                                                    wsItem.URLProducao.NFeStatusServico = urlList[i].ChildNodes[j].InnerText;
+                                                    wsItem.URLProducao.NFeStatusServico = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta1":
+                                                    wsItem.URLProducao.NFeConsulta1 = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
                                                     break;
                                             }
                                         }
                                     }
+                                    #endregion
+
+                                    #region WSDL´s locais de Homologação
+                                    urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
+                                    for (int i = 0; i < urlList.Count; ++i)
+                                    {
+                                        for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
+                                        {
+                                            switch (urlList[i].ChildNodes[j].Name)
+                                            {
+                                                case "NFeCancelamento":
+                                                    wsItem.LocalHomologacao.NFeCancelamento = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta":
+                                                    wsItem.LocalHomologacao.NFeConsulta = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsultaCadastro":
+                                                    wsItem.LocalHomologacao.NFeConsultaCadastro = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeInutilizacao":
+                                                    wsItem.LocalHomologacao.NFeInutilizacao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRecepcao":
+                                                    wsItem.LocalHomologacao.NFeRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRetRecepcao":
+                                                    wsItem.LocalHomologacao.NFeRetRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeStatusServico":
+                                                    wsItem.LocalHomologacao.NFeStatusServico = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta1":
+                                                    wsItem.LocalHomologacao.NFeConsulta1 = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    #endregion
+
+                                    #region WSDL´s locais de Produção
+                                    urlList = estadoElemento.GetElementsByTagName("LocalProducao");
+                                    for (int i = 0; i < urlList.Count; ++i)
+                                    {
+                                        for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
+                                        {
+                                            switch (urlList[i].ChildNodes[j].Name)
+                                            {
+                                                case "NFeCancelamento":
+                                                    wsItem.LocalProducao.NFeCancelamento = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta":
+                                                    wsItem.LocalProducao.NFeConsulta = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsultaCadastro":
+                                                    wsItem.LocalProducao.NFeConsultaCadastro = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeInutilizacao":
+                                                    wsItem.LocalProducao.NFeInutilizacao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRecepcao":
+                                                    wsItem.LocalProducao.NFeRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeRetRecepcao":
+                                                    wsItem.LocalProducao.NFeRetRecepcao = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeStatusServico":
+                                                    wsItem.LocalProducao.NFeStatusServico = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                                case "NFeConsulta1":
+                                                    wsItem.LocalProducao.NFeConsulta1 = InfoApp.PastaExecutavel() + "\\" + urlList[i].ChildNodes[j].InnerText;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    #endregion
+
                                     webservicesList.Add(wsItem);
                                 }
                             }
@@ -256,187 +508,9 @@ namespace UniNFeLibrary
                     }
                 }
             }
-            
-            #endregion            
-            
-
-            #region --varre a lista de webservices baseado no codigo da UF
-
-            foreach (webServices list in webservicesList)
-            {
-                if (list.ID == CodigoUF)
-                {
-                    switch (servico)
-                    {
-                        case Servicos.CancelarNFe:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeCancelamento : list.URLProducao.NFeCancelamento);
-                            break;
-
-                        case Servicos.ConsultaCadastroContribuinte:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeConsultaCadastro : list.URLProducao.NFeConsultaCadastro);
-                            break;
-
-                        case Servicos.EnviarLoteNfe:
-                        case Servicos.EnviarDPEC:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeRecepcao : list.URLProducao.NFeRecepcao);
-                            break;
-
-                        case Servicos.InutilizarNumerosNFe:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeInutilizacao : list.URLProducao.NFeInutilizacao);
-                            break;
-
-                        case Servicos.PedidoConsultaSituacaoNFe:
-                        case Servicos.ConsultarDPEC:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeConsulta : list.URLProducao.NFeConsulta);
-                            break;
-
-                        case Servicos.PedidoConsultaStatusServicoNFe:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeStatusServico : list.URLProducao.NFeStatusServico);
-                            break;
-
-                        case Servicos.PedidoSituacaoLoteNFe:
-                            URL = (tipoAmbiente == TipoAmbiente.taHomologacao ? list.URLHomologacao.NFeRetRecepcao : list.URLProducao.NFeRetRecepcao);
-                            break;
-                    }
-                    if (URL != string.Empty)
-                    {
-                        if (tipoEmissao == TipoEmissao.teDPEC)  //danasa 21/10/2010
-                            ufNome = "DPEC";
-                        else
-                            ufNome = "de " + list.Nome;  //danasa 20-9-2010
-
-                        break;
-                    }
-                }
-            }
-
-            #endregion
-
-            /************
-            if (File.Exists(ArqXML))
-            {
-                XmlTextReader oLerXml = null;
-                try
-                {
-                    //Carregar os dados do arquivo XML de configurações da Aplicação
-                    oLerXml = new XmlTextReader(ArqXML);
-
-                    while (oLerXml.Read())
-                    {
-                        if (oLerXml.NodeType == XmlNodeType.Element)
-                        {
-                            if (oLerXml.Name == "Estado")
-                            {
-                                if (Convert.ToInt32(oLerXml.GetAttribute("ID")) == CodigoUF)
-                                {
-                                    if (tipoEmissao == TipoEmissao.teDPEC)  //danasa 21/10/2010
-                                        ufNome = "DPEC";
-                                    else
-                                        ufNome = "de " + oLerXml.GetAttribute("Nome");  //danasa 20-9-2010
-
-                                    bool Encerrou = false;
-                                    while (oLerXml.Read())
-                                    {
-                                        if (oLerXml.NodeType == XmlNodeType.Element &&
-                                            (tipoAmbiente == TipoAmbiente.taHomologacao && oLerXml.Name == "URLHomologacao") ||
-                                            (tipoAmbiente == TipoAmbiente.taProducao && oLerXml.Name == "URLProducao"))
-                                        {
-                                            while (oLerXml.Read())
-                                            {
-                                                if (oLerXml.NodeType == XmlNodeType.Element)
-                                                {
-                                                    switch (servico)
-                                                    {
-                                                        case Servicos.CancelarNFe:
-                                                            if (oLerXml.Name == "NFeCancelamento") { oLerXml.Read(); URL = oLerXml.Value; Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.InutilizarNumerosNFe:
-                                                            if (oLerXml.Name == "NFeInutilizacao") { oLerXml.Read(); URL = oLerXml.Value; Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.PedidoConsultaSituacaoNFe:
-                                                            if (oLerXml.Name == "NFeConsulta") { oLerXml.Read(); URL = oLerXml.Value; Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.PedidoConsultaStatusServicoNFe:
-                                                            if (oLerXml.Name == "NFeStatusServico") { oLerXml.Read(); URL = oLerXml.Value; Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.PedidoSituacaoLoteNFe:
-                                                            if (oLerXml.Name == "NFeRetRecepcao") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.ConsultaCadastroContribuinte:
-                                                            if (oLerXml.Name == "NFeConsultaCadastro") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.EnviarLoteNfe:
-                                                            if (oLerXml.Name == "NFeRecepcao") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.EnviarDPEC:
-                                                            if (oLerXml.Name == "NFeRecepcao") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
-                                                            break;
-
-                                                        case Servicos.ConsultarDPEC:
-                                                            if (oLerXml.Name == "NFeConsulta") { oLerXml.Read(); URL = oLerXml.Value.Trim(); Encerrou = true; }
-                                                            break;
-
-                                                        default:
-                                                            break;
-                                                    }
-                                                }
-
-                                                if (Encerrou)
-                                                    break;
-                                            }
-                                        }
-
-                                        if (Encerrou)
-                                            break;
-                                    }
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
-                finally
-                {
-                    if (oLerXml != null)
-                        oLerXml.Close();
-                }
-            }
-            */
-            if (URL == string.Empty)
-            {
-                string Ambiente = string.Empty;
-                switch (tipoAmbiente)
-                {
-                    case TipoAmbiente.taProducao:
-                        Ambiente = "produção";
-                        break;
-
-                    case TipoAmbiente.taHomologacao:
-                        Ambiente = "homologação";
-                        break;
-
-                    default:
-                        break;
-                }
-
-                throw new Exception("O Estado " + ufNome/*CodigoUF.ToString()*/ + " ainda não dispõe deste serviço no layout 4.0.1 da NF-e para o ambiente de " + Ambiente + ".");
-            }
-
-            return URL;
         }
         #endregion
+
 
         #region GravarConfig()
         /// <summary>
