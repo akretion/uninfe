@@ -284,7 +284,7 @@ namespace UniNFeLibrary
         #region ConverToOEM
         private string ConvertToOEM(string FBuffer)
         {
-            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ�");
+            const string FAnsi = (" áéíóúÁÉÍÓÚçÇàèìòùÀÈÌÒÙãõÃÕºª§ÑâäåêëïîÄÅôûÿÖÜñüÂ?");
             const string FOEM = (" aeiouAEIOUcCaeiouAEIOUaoAOoa.NaaaeeiiAAouyOUnuAØ");
             int L, P;
             char X;
@@ -553,7 +553,7 @@ namespace UniNFeLibrary
                     case "B20A":    //B20a|cUF|AAMM|IE|mod|serie|nNF|
                         #region -- B20a
                         {
-                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            //if (dsNfe.Tables["NFref"].Rows.Count == 0)
                             {
                                 DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
                                 drNFref["ide_Id"] = 0;
@@ -616,7 +616,7 @@ namespace UniNFeLibrary
                     case "B20I":    //B20i|refCTe|
                         #region -- B20i
                         {
-                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            //if (dsNfe.Tables["NFref"].Rows.Count == 0)
                             {
                                 DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
                                 drNFref["ide_Id"] = 0;
@@ -634,7 +634,7 @@ namespace UniNFeLibrary
                     case "B20J":    //B20j|mod|nECF|nCOO|
                         #region -- B20i
                         {
-                            if (dsNfe.Tables["NFref"].Rows.Count == 0)
+                            //if (dsNfe.Tables["NFref"].Rows.Count == 0)
                             {
                                 DataRow drNFref = dsNfe.Tables["NFref"].NewRow();
                                 drNFref["ide_Id"] = 0;
@@ -647,8 +647,8 @@ namespace UniNFeLibrary
                             if (nElementos > 1) drrefECF["nECF"] = dados[2];
                             if (nElementos > 2) drrefECF["nCOO"] = dados[3];
                             this.Check(dados[0], "mod", drrefECF, ObOp.Obrigatorio, 2, 2);
-                            this.Check(dados[0], "nECF", drrefECF, ObOp.Obrigatorio, 3, 3);
-                            this.Check(dados[0], "nCOO", drrefECF, ObOp.Obrigatorio, 6, 6);
+                            this.Check(dados[0], "nECF", drrefECF, ObOp.Obrigatorio, 1, 3);
+                            this.Check(dados[0], "nCOO", drrefECF, ObOp.Obrigatorio, 1, 6);
                             dsNfe.Tables["refECF"].Rows.Add(drrefECF);
                         }
                         #endregion
@@ -1541,7 +1541,7 @@ namespace UniNFeLibrary
                                 }
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS70"].Rows.Add(dr);
-
+                                
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
                                 this.Check(dados[0], "modBC", dr, ObOp.Obrigatorio, 1, 1);
@@ -1572,6 +1572,11 @@ namespace UniNFeLibrary
                                 }
                                 dr["ICMS_Id"] = idprod.ToString();
                                 dsNfe.Tables["ICMS90"].Rows.Add(dr);
+                                
+                                string o1 = dr["vBC"].ToString();
+                                string o2 = dr["pRedBC"].ToString();
+                                dr["vBC"] = o2;
+                                dr["pRedBC"] = o1;
 
                                 this.Check(dados[0], "orig", dr, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "CST", dr, ObOp.Obrigatorio, 2, 2);
@@ -1703,7 +1708,7 @@ namespace UniNFeLibrary
                             // Layout da Receita e o Emissor gratuito estao errados nao existe o campo modBCST no Layout
                             if (tamanho == 7)
                             {
-                                String[] dados2 = new string[5];
+                                string[] dados2 = new string[5];
                                 dados2[0] = dados[0];
                                 dados2[1] = dados[1];
                                 dados2[2] = dados[2];
@@ -1715,7 +1720,12 @@ namespace UniNFeLibrary
 
 
                             }
-                            if (this.PopulateDataRow(dr, dados, 5))
+                            dr["orig"] = dados[1];
+                            dr["CSOSN"] = dados[2];
+                            if (nElementos > 3) dr["vBCSTRet"] = dados[4];
+                            if (nElementos > 4) dr["vICMSSTRet"] = dados[5];
+
+                            //if (this.PopulateDataRow(dr, dados, 5))
                             {
                                 if (idprod == "")
                                 {

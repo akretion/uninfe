@@ -638,6 +638,7 @@ namespace UniNFeLibrary
 
                             if (documentoElemento.GetElementsByTagName("idLote")[0].InnerText == strLote)
                             {
+                                this.AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, DateTime.Now.ToString());
                                 this.AtualizarTag(strChaveNFe, ElementoEditavel.nRec, strRecibo);
                             }
                         }

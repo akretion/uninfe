@@ -225,8 +225,31 @@ namespace UniNFeLibrary
                             empresa.PastaEmpresa = InfoApp.PastaExecutavel() + "\\" + empresa.CNPJ.Trim();
                             empresa.NomeArquivoConfig = empresa.PastaEmpresa + "\\" + InfoApp.NomeArqConfig;
 
-                            BuscaConfiguracao(empresa);
+                            try
+                            {
+                                BuscaConfiguracao(empresa);
+                            }
+                            catch (Exception ex)
+                            {
+                                ///
+                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
+                                /// com base em "int emp = new FindEmpresaThread(Thread.CurrentThread).Index;" e neste ponto ainda não foi criada
+                                /// as thread's
+                                string cArqErro;
+                                if (string.IsNullOrEmpty(empresa.PastaRetorno))
+                                    cArqErro = Path.Combine(InfoApp.PastaExecutavel(), string.Format(InfoApp.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddThhmmss")));
+                                else
+                                    cArqErro = Path.Combine(empresa.PastaRetorno, string.Format(InfoApp.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddThhmmss")));
 
+                                try
+                                {
+                                    //Grava arquivo de ERRO para o ERP
+                                    File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
+                                }
+                                catch { }
+                            }
+                            ///
+                            /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
                             Configuracoes.Add(empresa);
                         }
                     }
@@ -371,6 +394,7 @@ namespace UniNFeLibrary
                 }
                 catch (Exception ex)
                 {
+                    empresa.Certificado = string.Empty;
                     throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + empresa.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
                 }
                 finally
@@ -429,47 +453,6 @@ namespace UniNFeLibrary
             return retorna;
         }
         #endregion
-
-        /*#region FindEmpresaThread()
-        /// <summary>
-        /// Descobre qual é a empresa da thread que está sendo executada
-        /// </summary>
-        /// <param name="nameThread">Nome da thread</param>
-        /// <returns>Retorna o Index da Lista de Empresas que está sendo executada na thread</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 31/07/2010
-        /// </remarks>
-        public static int FindEmpresaThread(string nameThread)
-        {
-            int retorna = -1;
-
-            foreach (KeyValuePair<Thread, int> item in Auxiliar.threads)
-            {
-                if (item.Key.Name == nameThread.ToUpper().Trim())
-                {
-                    retorna = item.Value;                    
-                    break;
-                }
-            }
-
-            return retorna;
-        }*/
-
-        /*/// <summary>
-        /// Descobre qual é a empresa da thread que está sendo executada
-        /// </summary>
-        /// <param name="currentThread">Thread Corrente</param>
-        /// <returns>Retorna o Index da Lista de Empresas que está sendo executada na thread</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 23/02/2011
-        /// </remarks>
-        public static int FindEmpresaThread(Thread currentThread)
-        {
-            return Auxiliar.threads[currentThread];
-        }
-        #endregion*/
 
         #region Valid()
         /// <summary>
