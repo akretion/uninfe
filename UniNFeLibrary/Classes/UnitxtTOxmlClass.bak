@@ -1708,7 +1708,7 @@ namespace UniNFeLibrary
                             // Layout da Receita e o Emissor gratuito estao errados nao existe o campo modBCST no Layout
                             if (tamanho == 7)
                             {
-                                String[] dados2 = new string[5];
+                                string[] dados2 = new string[5];
                                 dados2[0] = dados[0];
                                 dados2[1] = dados[1];
                                 dados2[2] = dados[2];
@@ -1720,7 +1720,12 @@ namespace UniNFeLibrary
 
 
                             }
-                            if (this.PopulateDataRow(dr, dados, 5))
+                            dr["orig"] = dados[1];
+                            dr["CSOSN"] = dados[2];
+                            if (nElementos > 3) dr["vBCSTRet"] = dados[4];
+                            if (nElementos > 4) dr["vICMSSTRet"] = dados[5];
+
+                            //if (this.PopulateDataRow(dr, dados, 5))
                             {
                                 if (idprod == "")
                                 {

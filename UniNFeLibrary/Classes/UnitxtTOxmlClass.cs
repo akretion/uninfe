@@ -59,7 +59,7 @@ namespace UniNFeLibrary
                 return;
             }
 
-            TextReader txt = new StreamReader(cFile);
+            TextReader txt = new StreamReader(cFile, Encoding.UTF7);
 
             try
             {
