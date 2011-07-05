@@ -59,7 +59,7 @@ namespace UniNFeLibrary
                 return;
             }
 
-            TextReader txt = new StreamReader(cFile, Encoding.UTF7);
+            TextReader txt = new StreamReader(cFile, Encoding.Default, true);
 
             try
             {
@@ -87,11 +87,13 @@ namespace UniNFeLibrary
                     this.ProcessaNota(txt, cDestino);
                 }
                 if (this.cMensagemErro != "")
+                {
                     throw new Exception(this.cMensagemErro);
+                }
             }
             catch (Exception ex)
             {
-                cMensagemErro = "Arquivo texto: " + cFile + Environment.NewLine + Environment.NewLine + (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                cMensagemErro = "Arquivo texto: " + cFile + Environment.NewLine + Environment.NewLine + (ex.InnerException != null ? ex.InnerException.Message : ex.Message + Environment.NewLine + "Linha: " + iLinhaLida.ToString() + " :: " + cLinhaTXT);
                 ///
                 /// danasa 8-2009
                 /// Exclui os XML convertidos
@@ -865,7 +867,7 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "CEP", drenderDest, ObOp.Opcional, 8, 8);
                                 this.Check(dados[0], "cPais", drenderDest, ObOp.Opcional, 1, 4);
                                 this.Check(dados[0], "xPais", drenderDest, ObOp.Opcional, 1, 60);
-                                this.Check(dados[0], "fone", drenderDest, ObOp.Opcional, 1, 10);
+                                this.Check(dados[0], "fone", drenderDest, ObOp.Opcional, 6, 14);
 
                                 ///
                                 /// danasa 9-2009
@@ -1146,7 +1148,7 @@ namespace UniNFeLibrary
                         #region -- J
                         {
                             DataRow drveicProd = dsNfe.Tables["veicProd"].NewRow();
-                            if (this.PopulateDataRow(drveicProd, dados, 22))
+                            if (this.PopulateDataRow(drveicProd, dados, 24))
                             {
                                 drveicProd["prod_id"] = idprod;
                                 dsNfe.Tables["veicProd"].Rows.Add(drveicProd);
@@ -1156,15 +1158,15 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "cCor", drveicProd, ObOp.Obrigatorio, 1, 4);
                                 this.Check(dados[0], "xCor", drveicProd, ObOp.Obrigatorio, 1, 40);
                                 this.Check(dados[0], "pot", drveicProd, ObOp.Obrigatorio, 1, 4);
-                                this.Check(dados[0], "CM3", drveicProd, ObOp.Obrigatorio, 1, 4);
+                                this.Check(dados[0], "cilin", drveicProd, ObOp.Obrigatorio, 1, 4);
                                 this.Check(dados[0], "pesoL", drveicProd, ObOp.Obrigatorio, 1, 9);
                                 this.Check(dados[0], "pesoB", drveicProd, ObOp.Obrigatorio, 1, 9);
                                 this.Check(dados[0], "nSerie", drveicProd, ObOp.Obrigatorio, 1, 9);
                                 this.Check(dados[0], "tpComb", drveicProd, ObOp.Obrigatorio, 1, 8);
                                 this.Check(dados[0], "nMotor", drveicProd, ObOp.Obrigatorio, 1, 21);
-                                this.Check(dados[0], "CMKG", drveicProd, ObOp.Obrigatorio, 1, 9);
+                                this.Check(dados[0], "CMT", drveicProd, ObOp.Obrigatorio, 1, 9);
                                 this.Check(dados[0], "dist", drveicProd, ObOp.Obrigatorio, 1, 4);
-                                this.Check(dados[0], "RENAVAM", drveicProd, ObOp.Opcional, 1, 9);
+                                //this.Check(dados[0], "RENAVAM", drveicProd, ObOp.Opcional, 1, 9);
                                 this.Check(dados[0], "anoMod", drveicProd, ObOp.Obrigatorio, 4, 4);
                                 this.Check(dados[0], "anoFab", drveicProd, ObOp.Obrigatorio, 4, 4);
                                 this.Check(dados[0], "tpPint", drveicProd, ObOp.Obrigatorio, 1, 1);
@@ -1173,6 +1175,9 @@ namespace UniNFeLibrary
                                 this.Check(dados[0], "VIN", drveicProd, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "condVeic", drveicProd, ObOp.Obrigatorio, 1, 1);
                                 this.Check(dados[0], "cMod", drveicProd, ObOp.Obrigatorio, 1, 6);
+                                this.Check(dados[0], "cCorDENATRAN", drveicProd, ObOp.Obrigatorio, 2, 2);
+                                this.Check(dados[0], "lota", drveicProd, ObOp.Obrigatorio, 1, 3);
+                                this.Check(dados[0], "tpRest", drveicProd, ObOp.Obrigatorio, 1, 1);
                             }
                         }
                         break;
@@ -1706,7 +1711,7 @@ namespace UniNFeLibrary
 
                             int tamanho = dados.Length;
                             // Layout da Receita e o Emissor gratuito estao errados nao existe o campo modBCST no Layout
-                            if (tamanho == 7)
+                            /*if (tamanho == 7)
                             {
                                 string[] dados2 = new string[5];
                                 dados2[0] = dados[0];
@@ -1717,9 +1722,9 @@ namespace UniNFeLibrary
                                 //dos2[0] = dados[0];
                                 dados = null;
                                 dados = dados2;
-
-
-                            }
+                            }*/
+                            //N10g| Orig | CSOSN | modBCST | vBCSTRet | vICMSSTRet |
+                            //N10g|0     |500    |         |0.00      |0.0|
                             dr["orig"] = dados[1];
                             dr["CSOSN"] = dados[2];
                             if (nElementos > 3) dr["vBCSTRet"] = dados[4];
