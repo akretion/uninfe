@@ -1,0 +1,9 @@
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\obj\Release\ResolveAssemblyReference.cache
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeThreads.dll
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeThreads.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeLibrary.dll
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeTXT.dll
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeLibrary.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\bin\Release\UniNFeTXT.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\obj\Release\UniNFeThreads.dll
+C:\lixo\lixo\uninfe\trunk\fontes\UniNFeThreads\obj\Release\UniNFeThreads.pdb

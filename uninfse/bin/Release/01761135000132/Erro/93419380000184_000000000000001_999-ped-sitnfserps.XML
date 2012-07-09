@@ -1,0 +1,11 @@
+﻿<ConsultarNfseRpsEnvio>
+  <IdentificacaoRps>
+    <Numero>1</Numero>
+    <Serie>999</Serie>
+    <Tipo>1</Tipo>
+  </IdentificacaoRps>
+  <Prestador>
+    <Cnpj>93419380000184</Cnpj>
+    <InscricaoMunicipal>INSCRMUNICIPAL</InscricaoMunicipal>
+  </Prestador>
+</ConsultarNfseRpsEnvio>

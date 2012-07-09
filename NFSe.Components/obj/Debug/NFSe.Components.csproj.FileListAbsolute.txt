@@ -1,0 +1,14 @@
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\obj\Debug\ResolveAssemblyReference.cache
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFSe.Components.dll
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFSe.Components.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFe.Components.dll
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFe.Components.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\obj\Debug\NFSe.Components.dll
+C:\lixo\lixo\uninfe\trunk\fontes\NFSe.Components\obj\Debug\NFSe.Components.pdb
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFSe.Components.pdb
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\bin\Debug\NFe.Components.pdb
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\obj\Debug\ResolveAssemblyReference.cache
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\obj\Debug\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFSe.Components\obj\Debug\NFSe.Components.pdb

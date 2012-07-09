@@ -1,3 +1,8 @@
+﻿CCe já funcionando
+    SP - Homologação
+    SP - Produção
+    MG - Homologação
+
 Lista dos Estados com WebServices Próprios
     Amazonas - AM
 	Bahia - BA
@@ -35,4 +40,3 @@ Lista dos Estados que utilizam os WebServices do Ambiente Virtual do Rio Grande 
 Teste de controle de versão.
 
 Perfeito teste de controle de versao funcionou.
-.

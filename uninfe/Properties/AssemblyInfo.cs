@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UniNFe")]
-[assembly: AssemblyDescription("Monitor de Gerenciamento de Notas Fiscais Eletrônicas")]
+[assembly: AssemblyDescription("Monitor da Nota Fiscal Eletrônica")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Unimake Softwares")]
 [assembly: AssemblyProduct("UniNFe")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.2.*")]
-[assembly: AssemblyFileVersion("3.2.0.0")]
+[assembly: AssemblyVersion("4.1.*")]
+[assembly: AssemblyFileVersion("4.1.0.0")]

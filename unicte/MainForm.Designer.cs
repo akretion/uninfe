@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.tsbEmpresa = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_StatusServicoNfe = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
@@ -39,6 +38,9 @@
             this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbRestartServico = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmConsultaCadastroServico = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +59,6 @@
             // 
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbEmpresa,
             this.toolStripButton_config,
             this.toolStripButton_StatusServicoNfe,
             this.toolStripButton_validarxml,
@@ -68,16 +69,6 @@
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
-            // 
-            // tsbEmpresa
-            // 
-            this.tsbEmpresa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbEmpresa.Image = global::unicte.Properties.Resources.windows_view_detail_48x48;
-            this.tsbEmpresa.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEmpresa.Name = "tsbEmpresa";
-            this.tsbEmpresa.Size = new System.Drawing.Size(52, 52);
-            this.tsbEmpresa.Text = "Cadastro de empresas";
-            this.tsbEmpresa.Click += new System.EventHandler(this.tsbEmpresa_Click);
             // 
             // toolStripButton_config
             // 
@@ -149,6 +140,9 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbPararServico,
+            this.tbRestartServico,
+            this.tbSeparator1,
             this.toolStripMenuItem1,
             this.toolStripSeparator2,
             this.cmConsultaCadastroServico,
@@ -161,6 +155,25 @@
             this.sairToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(381, 176);
+            // 
+            // tbPararServico
+            // 
+            this.tbPararServico.Name = "tbPararServico";
+            this.tbPararServico.Size = new System.Drawing.Size(354, 22);
+            this.tbPararServico.Text = "Parar o serviço";
+            this.tbPararServico.Click += new System.EventHandler(this.tbPararServico_Click);
+            // 
+            // tbRestartServico
+            // 
+            this.tbRestartServico.Name = "tbRestartServico";
+            this.tbRestartServico.Size = new System.Drawing.Size(354, 22);
+            this.tbRestartServico.Text = "Reiniciar o serviço";
+            this.tbRestartServico.Click += new System.EventHandler(this.tbRestartServico_Click);
+            // 
+            // tbSeparator1
+            // 
+            this.tbSeparator1.Name = "tbSeparator1";
+            this.tbSeparator1.Size = new System.Drawing.Size(351, 6);
             // 
             // toolStripMenuItem1
             // 
@@ -268,7 +281,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripButton toolStripBtnUpdate;
-        private System.Windows.Forms.ToolStripButton tsbEmpresa;
+        private System.Windows.Forms.ToolStripMenuItem tbPararServico;
+        private System.Windows.Forms.ToolStripMenuItem tbRestartServico;
+        private System.Windows.Forms.ToolStripSeparator tbSeparator1;
     }
 }
 

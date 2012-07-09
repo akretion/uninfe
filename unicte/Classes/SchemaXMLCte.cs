@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UniNFeLibrary;
+using NFe.Components;
 
 namespace unicte
 {
@@ -9,108 +9,159 @@ namespace unicte
     {
         public static void CriarListaIDXML()
         {
-            #region Limpar listas
-            SchemaXML.lstXMLID.Clear();
-            SchemaXML.lstXMLSchema.Clear();
-            SchemaXML.lstXMLTag.Clear();
-            SchemaXML.lstXMLTagAssinar.Clear();
-            SchemaXML.lstXMLTextoID.Clear();
-            #endregion
+            SchemaXML.InfSchemas.Clear();
 
             #region XML Distribuição NFe
-            SchemaXML.lstXMLTag.Add("cteProc");
-            SchemaXML.lstXMLID.Add(9);
-            SchemaXML.lstXMLTextoID.Add("XML de distribuição do CTe com protocolo de autorização anexado");
-            SchemaXML.lstXMLSchema.Add("procCTe_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-cteProc", new InfSchema()
+            {
+                Tag = "cteProc",
+                ID = 9,
+                ArquivoXSD = "CTe\\procCTe_v1.04.xsd",
+                Descricao = "XML de distribuição do CTe com protocolo de autorização anexado",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Distribuição Cancelamento
-            SchemaXML.lstXMLTag.Add("procCancCTe");
-            SchemaXML.lstXMLID.Add(10);
-            SchemaXML.lstXMLTextoID.Add("XML de distribuição do Cancelamento do CTe com protocolo de autorização anexado");
-            SchemaXML.lstXMLSchema.Add("procCancCTe_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-procCancCTe", new InfSchema()
+            {
+                Tag = "procCancCTe",
+                ID = 10,
+                ArquivoXSD = "CTe\\procCancCTe_v1.04.xsd",
+                Descricao = "XML de distribuição do Cancelamento do CTe com protocolo de autorização anexado",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Distribuição Inutilização
-            SchemaXML.lstXMLTag.Add("procInutCTe");
-            SchemaXML.lstXMLID.Add(11);
-            SchemaXML.lstXMLTextoID.Add("XML de distribuição de Inutilização de Números do CTe com protocolo de autorização anexado");
-            SchemaXML.lstXMLSchema.Add("procInutCTe_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-procInutCTe", new InfSchema()
+            {
+                Tag = "procInutCTe",
+                ID = 11,
+                ArquivoXSD = "CTe\\procInutCTe_v1.04.xsd",
+                Descricao = "XML de distribuição de Inutilização de Números do CTe com protocolo de autorização anexado",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML NFe
-            SchemaXML.lstXMLTag.Add("CTe");
-            SchemaXML.lstXMLID.Add(1);
-            SchemaXML.lstXMLTextoID.Add("XML de Conhecimento de Transporte Eletrônico");
-            SchemaXML.lstXMLSchema.Add("cte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add("infCte");
+            SchemaXML.InfSchemas.Add("CTE-CTe", new InfSchema()
+            {
+                Tag = "CTe",
+                ID = 1,
+                ArquivoXSD = "CTe\\cte_v1.04.xsd",
+                Descricao = "XML de Conhecimento de Transporte Eletrônico",
+                TagAssinatura = "CTe",
+                TagAtributoId = "infCte",
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Envio Lote
-            SchemaXML.lstXMLTag.Add("enviCTe");
-            SchemaXML.lstXMLID.Add(2);
-            SchemaXML.lstXMLTextoID.Add("XML de Envio de Lote dos Conhecimentos de Transportes Eletrônicos");
-            SchemaXML.lstXMLSchema.Add("enviCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-enviCTe", new InfSchema()
+            {
+                Tag = "enviCTe",
+                ID = 2,
+                ArquivoXSD = "CTe\\enviCte_v1.04.xsd",
+                Descricao = "XML de Envio de Lote dos Conhecimentos de Transportes Eletrônicos",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Cancelamento
-            SchemaXML.lstXMLTag.Add("cancCTe");
-            SchemaXML.lstXMLID.Add(3);
-            SchemaXML.lstXMLTextoID.Add("XML de Cancelamento do Conhecimento de Transporte Eletrônico");
-            SchemaXML.lstXMLSchema.Add("cancCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add("infCanc");
+            SchemaXML.InfSchemas.Add("CTE-cancCTe", new InfSchema()
+            {
+                Tag = "cancCTe",
+                ID = 3,
+                ArquivoXSD = "CTe\\cancCte_v1.04.xsd",
+                Descricao = "XML de Cancelamento do Conhecimento de Transporte Eletrônico",
+                TagAssinatura = "cancCTe",
+                TagAtributoId = "infCanc",
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Inutilização
-            SchemaXML.lstXMLTag.Add("inutCTe");
-            SchemaXML.lstXMLID.Add(4);
-            SchemaXML.lstXMLTextoID.Add("XML de Inutilização de Numerações do Conhecimento de Transporte Eletrônico");
-            SchemaXML.lstXMLSchema.Add("inutCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add("infInut");
+            SchemaXML.InfSchemas.Add("CTE-inutCTe", new InfSchema()
+            {
+                Tag = "inutCTe",
+                ID = 4,
+                ArquivoXSD = "CTe\\inutCte_v1.04.xsd",
+                Descricao = "XML de Inutilização de Numerações do Conhecimento de Transporte Eletrônico",
+                TagAssinatura = "inutCTe",
+                TagAtributoId = "infInut",
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Consulta Situação NFe
-            SchemaXML.lstXMLTag.Add("consSitCTe");
-            SchemaXML.lstXMLID.Add(5);
-            SchemaXML.lstXMLTextoID.Add("XML de Consulta da Situação do Conhecimento de Transporte Eletrônico");
-            SchemaXML.lstXMLSchema.Add("consSitCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-consSitCTe", new InfSchema()
+            {
+                Tag = "consSitCTe",
+                ID = 5,
+                ArquivoXSD = "CTe\\consSitCte_v1.04.xsd",
+                Descricao = "XML de Consulta da Situação do Conhecimento de Transporte Eletrônico",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Consulta Recibo Lote
-            SchemaXML.lstXMLTag.Add("consReciCTe");
-            SchemaXML.lstXMLID.Add(6);
-            SchemaXML.lstXMLTextoID.Add("XML de Consulta do Recibo do Lote de Conhecimentos de Transportes Eletrônicos");
-            SchemaXML.lstXMLSchema.Add("consReciCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-consReciCTe", new InfSchema()
+            {
+                Tag = "consReciCTe",
+                ID = 6,
+                ArquivoXSD = "CTe\\consReciCte_v1.04.xsd",
+                Descricao = "XML de Consulta do Recibo do Lote de Conhecimentos de Transportes Eletrônicos",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Consulta Situação Serviço NFe
-            SchemaXML.lstXMLTag.Add("consStatServCte");
-            SchemaXML.lstXMLID.Add(7);
-            SchemaXML.lstXMLTextoID.Add("XML de Consulta da Situação do Serviço do Conhecimento de Transporte Eletrônico");
-            SchemaXML.lstXMLSchema.Add("consStatServCte_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-consStatServCte", new InfSchema()
+            {
+                Tag = "consStatServCte",
+                ID = 7,
+                ArquivoXSD = "CTe\\consStatServCte_v1.04.xsd",
+                Descricao = "XML de Consulta da Situação do Serviço do Conhecimento de Transporte Eletrônico",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
             #region XML Consulta Cadastro Contribuinte
-            SchemaXML.lstXMLTag.Add("ConsCad");
-            SchemaXML.lstXMLID.Add(8);
-            SchemaXML.lstXMLTextoID.Add("XML de Consulta do Cadastro do Contribuinte");
-            SchemaXML.lstXMLSchema.Add("consCad_v1.03.xsd");
-            SchemaXML.lstXMLTagAssinar.Add(string.Empty);
+            SchemaXML.InfSchemas.Add("CTE-ConsCad", new InfSchema()
+            {
+                Tag = "ConsCad",
+                ID = 8,
+                ArquivoXSD = "CTe\\consCad_v1.03.xsd",
+                Descricao = "XML de Consulta do Cadastro do Contribuinte",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
             #endregion
 
+            #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
-            for (int i = 0; i < SchemaXML.lstXMLID.Count; i++)
-			{
-                if (SchemaXML.lstXMLID[i] > SchemaXML.MaxID)
-                    SchemaXML.MaxID = SchemaXML.lstXMLID[i];			 
-			}
+            foreach (InfSchema item in SchemaXML.InfSchemas.Values)
+            {
+                if (item.ID > SchemaXML.MaxID)
+                    SchemaXML.MaxID = item.ID;
+            }
+            #endregion
         }
     }
 }

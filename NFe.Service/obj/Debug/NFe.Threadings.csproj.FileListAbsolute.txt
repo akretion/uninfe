@@ -1,0 +1,5 @@
+C:\lixo\lixo\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFe.Threadings.dll
+C:\lixo\lixo\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFe.Threadings.pdb
+C:\lixo\lixo\uninfe\trunk\fontes\NFe.Threadings\obj\Debug\ResolveAssemblyReference.cache
+C:\lixo\lixo\uninfe\trunk\fontes\NFe.Threadings\obj\Debug\NFe.Threadings.dll
+C:\lixo\lixo\uninfe\trunk\fontes\NFe.Threadings\obj\Debug\NFe.Threadings.pdb

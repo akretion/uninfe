@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Reflection;
-using UniNFeLibrary;
+using NFe.Components;
+using NFe.Components.Info;
 
 namespace uninfe
 {
@@ -15,28 +16,16 @@ namespace uninfe
         static void Main()
         {
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
-            InfoApp.oAssemblyEXE = Assembly.GetExecutingAssembly(); 
+            Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
-            System.Threading.Mutex oneMutex = null;
-
-            if (InfoApp.AppExecutando(ref oneMutex))
+            if (Aplicacao.AppExecutando())
             {
                 return;
             }
 
-            try
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainForm());
-            }
-            finally 
-            {
-                if (oneMutex != null)
-                {
-                    oneMutex.Close();
-                }
-            }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }

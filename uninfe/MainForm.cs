@@ -6,29 +6,24 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Xml;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using UniNFeLibrary;
-using uninfe.Formulario;
-using UniNFeLibrary.Enums;
-using UniNFeLibrary.Formulario;
+using NFe.Settings;
+using NFe.Components;
+using NFe.Interface;
+using NFe.Threadings;
 
 namespace uninfe
 {
     #region Classe MainForm
     public partial class MainForm : Form
     {
-        /// <summary>
-        /// executa a limpeza das pastas temp e retorno
-        /// </summary>
-        /// <by>http://desenvolvedores.net/marcelo</by>
-        Thread oThreadLimpeza;
-
-        private Dictionary<ServicoUniNFe, Servicos> servicosUniNfe = new Dictionary<ServicoUniNFe, Servicos>();
-        private Dictionary<Thread, ParametroThread> threads = new Dictionary<Thread, ParametroThread>();
+        private bool restartServico = false;
+        private bool servicoInstaladoErodando = false;
 
         #region MainForm()
         public MainForm()
@@ -48,22 +43,33 @@ namespace uninfe
                     /// e pede o CNPJ
                     FormCNPJ fcnpj = new FormCNPJ(nomeEmpresa);
                     if (fcnpj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
                         /// tenta processar já com o CNPJ definido
                         Auxiliar.ConversaoNovaVersao(fcnpj.Cnpj);
+                        restartServico = true;
+                    }
                 }
-                // Carregar as configurações de todas as empresas
-                //Empresa.CarregaConfiguracao();    //danasa 20-9-2010 - Em InfoApp já é carregada
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //
+            //SERVICO: danasa 7/2011
+            //servico está instalado e rodando?
+            this.servicoInstaladoErodando = Propriedade.ServicoRodando;
+
+            this.tbSeparator1.Visible =
+                this.tbRestartServico.Visible =
+                this.tbPararServico.Visible = this.servicoInstaladoErodando;
+                                                
+            this.updateControleDoServico();
 
             ///
             /// danasa 9-2009
             /// 
-            XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+            XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
             iniFile.LoadForm(this, "");
 
             //Trazer minimizado e no systray
@@ -74,46 +80,33 @@ namespace uninfe
 
             this.MinimumSize = new Size(750, 600);
 
-            #region Executar os serviços em novas threads
+            #region Definir valores propriedades de configuração
             //Carregar as configurações antes de executar os serviços do UNINFE
-            ConfiguracaoApp.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
             ConfiguracaoApp.CarregarDados();
+            ConfiguracaoApp.CarregarDadosSobre();
             ConfiguracaoApp.VersaoXMLCanc = "2.00";
             ConfiguracaoApp.VersaoXMLConsCad = "2.00";
             ConfiguracaoApp.VersaoXMLInut = "2.00";
             ConfiguracaoApp.VersaoXMLNFe = "2.00";
             ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-            ConfiguracaoApp.VersaoXMLPedSit = "2.00";
+            ConfiguracaoApp.VersaoXMLPedSit = "2.00";   //<<<danasa 6-2011
             ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
             ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
             ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
             ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-            ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
+            ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
+            Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
             SchemaXML.CriarListaIDXML();
             #endregion
+
+            if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
+                //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
+                new ThreadControlEvents();  //danasa 12/8/2011
         }
         #endregion
 
         #region Métodos gerais
-
-        #region PararServicos()
-        /// <summary>
-        /// Encerrar todas as thread´s de serviços da nfe
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 01/08/2010
-        /// </remarks>
-        private void PararServicos()
-        {
-            foreach (KeyValuePair<Thread, int> t in Auxiliar.threads)
-            {
-                Thread thread = t.Key;
-
-                thread.Abort();
-            }
-        }
-        #endregion
 
         #region ExecutaServicos()
         /// <summary>
@@ -121,66 +114,47 @@ namespace uninfe
         /// </summary>
         private void ExecutaServicos()
         {
-            Auxiliar.threads.Clear();
-            threads.Clear();
+            Empresa.CarregaConfiguracao();
 
-            //Primeiro eu preparo as thread´s a serem executadas, atualizo a
-            //lista de thread´s e a empresa que está sendo executada nela
-            //para depois iniciá-las, ou gera erros nas pesquisas pela empresa da
-            //thread. Wandrey 02/08/2010
-            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+            if (servicoInstaladoErodando)
             {
-                if (Empresa.Configuracoes[i].Certificado == string.Empty)
-                    continue;
+                if (restartServico)
+                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
 
-                //Criar uma lista dos serviços a serem executados
-                servicosUniNfe.Clear();
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarLoteNfe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvio);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteUmaNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoSituacaoLoteNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaSituacaoNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AssinarNFePastaEnvioEmLote);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.MontarLoteVariasNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ValidarAssinar);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.CancelarNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.InutilizarNumerosNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.PedidoConsultaStatusServicoNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaCadastroContribuinte);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultaInformacoesUniNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.AlterarConfiguracoesUniNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.GerarChaveNFe);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EmProcessamento);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConverterTXTparaXML);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.EnviarDPEC);
-                                servicosUniNfe.Add(new ServicoUniNFe(), Servicos.ConsultarDPEC);    //danasa 21/10/2010
-                                if (Empresa.Configuracoes[i].DiasLimpeza != 0)  //danasa 27-2-2011
-                                    servicosUniNfe.Add(new ServicoUniNFe(), Servicos.LimpezaTemporario);
+                restartServico = false;
 
-                //Preparar as thread´s a serem executadas
-                foreach (KeyValuePair<ServicoUniNFe, Servicos> item in servicosUniNfe)
+                switch (ServiceProcess.StatusService(Propriedade.ServiceName))
                 {
-                    ServicoUniNFe servico = item.Key;
-                    Thread t = new Thread(new ParameterizedThreadStart(servico.BuscaXML));
-                    t.Name = (item.Value.ToString().Trim() + Empresa.Configuracoes[i].CNPJ.Trim()).ToUpper();
+                    case System.ServiceProcess.ServiceControllerStatus.Stopped:
+                        ServiceProcess.StartService(Propriedade.ServiceName, 40000);
+                        break;
+                    case System.ServiceProcess.ServiceControllerStatus.Paused:
+                        ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                        break;
+                }
+                this.updateControleDoServico();
+            }
+            else
+            {
+                ThreadService.Start();
+            }
+        }
+        #endregion
 
-                    //Atualiza a coleção de thread´s e a empresa que será executada enal
-                    Auxiliar.threads.Add(t, i);
-
-                    //Atualizar a coleção das thread´s a serem executadas.
-                    threads.Add(t, new ParametroThread(item.Value));
+        #region PararServicos()
+        private void PararServicos(bool fechaServico)
+        {
+            if (servicoInstaladoErodando)
+            {
+                if (fechaServico)
+                {
+                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
                 }
             }
-            //Executar as thread´s de todas as empresas
-            foreach (KeyValuePair<Thread, ParametroThread> item in threads)
+            else
             {
-                Thread t = item.Key;
-                t.Start(item.Value);
-                if (Empresa.Configuracoes.Count > 1)
-                    Thread.Sleep(100);  //danasa 9-2010
+                ThreadService.Stop();
             }
-            //Limpar para tirar o conteúdo da memória pois não vamos mais precisar
-            threads.Clear();
         }
         #endregion
 
@@ -188,6 +162,7 @@ namespace uninfe
 
         #region Métodos de eventos
 
+        #region MainForm_Resize()
         private void MainForm_Resize(object sender, EventArgs e)
         {
             ///
@@ -195,7 +170,7 @@ namespace uninfe
             /// 
             if (this.WindowState != FormWindowState.Minimized)
             {
-                XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+                XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
                 iniFile.SaveForm(this, "");
                 iniFile.Save();
             }
@@ -219,6 +194,7 @@ namespace uninfe
             //como false, mas prefiro deixar o ícone lá.
             //notifyIcon1.Visible = true;
         }
+        #endregion
 
         #region -- Show desktop
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -235,8 +211,6 @@ namespace uninfe
             this.ShowInTaskbar = true;
 
             // Levando o Form de volta para a tela.
-
-            this.WindowState = FormWindowState.Normal;
             this.Visible = true;
 
             // Faz desaparecer o ícone na área de notificação,
@@ -247,24 +221,27 @@ namespace uninfe
         }
         #endregion
 
+        #region MainForm_FormClosed()
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PararServicos();
+            PararServicos(false);
         }
+        #endregion
 
+        #region MainForm_FormClosing
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //
             // TODO: Aqui, deveriamos verificar se ainda existe alguma Thread pendente antes de fechar
             //
-            if (e.CloseReason == CloseReason.UserClosing && !Auxiliar.EncerrarApp)
+            if (e.CloseReason == CloseReason.UserClosing && !Propriedade.EncerrarApp)
             {
                 ///
                 /// danasa 9-2009
                 /// 
                 if (this.WindowState != FormWindowState.Minimized)
                 {
-                    XMLIniFile iniFile = new XMLIniFile(InfoApp.NomeArqXMLParams());
+                    XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
                     iniFile.SaveForm(this, "");
                     iniFile.Save();
                 }
@@ -272,6 +249,7 @@ namespace uninfe
                 e.Cancel = true;
                 this.Visible = false;
                 this.OnResize(e);
+                this.WindowState = FormWindowState.Minimized;
                 notifyIcon1.ShowBalloonTip(6000);
             }
             else
@@ -279,6 +257,7 @@ namespace uninfe
                 e.Cancel = false;  //se o PC for desligado o windows o fecha automaticamente.
             }
         }
+        #endregion
 
         #region -- Sobre o UniNFe
         private void toolStripButton_sobre_Click(object sender, EventArgs e)
@@ -396,7 +375,7 @@ namespace uninfe
                 return;
             }
 
-            ValidarXML oValidarXML = new ValidarXML();
+            FormValidarXML oValidarXML = new FormValidarXML();
             oValidarXML.MdiParent = this;
             oValidarXML.MinimizeBox = false;
             oValidarXML.Show();
@@ -410,7 +389,7 @@ namespace uninfe
                 return;
             }
 
-            using (ValidarXML oValidarXML = new ValidarXML())
+            using (FormValidarXML oValidarXML = new FormValidarXML())
             {
                 oValidarXML.ShowInTaskbar = true;
                 oValidarXML.MinimizeBox = true;
@@ -422,26 +401,26 @@ namespace uninfe
         #region -- Configuracao
         private int ConfiguracaoAtiva()
         {
-            Configuracao oConfig = null;
+            FormConfiguracao oConfig = null;
             //danasa 
             foreach (Form fg in this.MdiChildren)
             {
-                if (fg is Configuracao)
+                if (fg is FormConfiguracao)
                 {
                     ///
                     /// configuracão já está ativa como MDI
                     /// 
                     this.notifyIcon1_MouseDoubleClick(null, null);
-                    oConfig = fg as Configuracao;
+                    oConfig = fg as FormConfiguracao;
                     oConfig.WindowState = FormWindowState.Normal;
                     return 1;
                 }
             }
             foreach (Form fg in Application.OpenForms)
             {
-                if (fg is Configuracao)
+                if (fg is FormConfiguracao)
                 {
-                    oConfig = fg as Configuracao;
+                    oConfig = fg as FormConfiguracao;
                     oConfig.WindowState = FormWindowState.Normal;
                     return 0;
                 }
@@ -460,7 +439,7 @@ namespace uninfe
             {
                 fw.Show();
                 fw.DisplayMessage("Parando os serviços");
-                this.PararServicos();
+                this.PararServicos(true);
                 fw.DisplayMessage("Iniciando os serviços");
                 this.ExecutaServicos();
             }
@@ -473,12 +452,6 @@ namespace uninfe
 
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
-            {
-                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             switch (ConfiguracaoAtiva())
             {
                 case 0:
@@ -493,10 +466,12 @@ namespace uninfe
                     {
                         try
                         {
-                            Configuracao oConfig = new Configuracao(onCloseConfiguracao);
-                            oConfig.MdiParent = this;
+                            FormConfiguracao oConfig = new FormConfiguracao(onCloseConfiguracao, this);
                             oConfig.MinimizeBox = false;
-                            oConfig.Show();
+                            if (oConfig.AcessoAutorizado)
+                            {
+                                oConfig.Show();
+                            }
                         }
                         catch
                         {
@@ -508,12 +483,6 @@ namespace uninfe
 
         private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
-            {
-                MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             switch (ConfiguracaoAtiva())
             {
                 case -1:
@@ -526,30 +495,36 @@ namespace uninfe
                         /// 
                         toolStripButton_config_Click(sender, e);
                     else
-                        using (Configuracao oConfig = new Configuracao(onCloseConfiguracao))
+                        using (FormConfiguracao oConfig = new FormConfiguracao(onCloseConfiguracao, null))
                         {
                             oConfig.MinimizeBox = true;
-                            oConfig.ShowDialog();
+                            if (oConfig.AcessoAutorizado)
+                            {
+                                oConfig.ShowDialog();
+                            }
                         }
                     break;
             }
         }
         #endregion
 
+        #region sairToolStripMenuItem_Click
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Auxiliar.EncerrarApp = true;
+            Propriedade.EncerrarApp = true;
 
             this.Close();
-        }
+        }        
+        #endregion
 
+        #region toolStripMenuItem2_Click
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             try
             {
-                if (File.Exists(Application.StartupPath + "\\" + InfoApp.NomeAplicacao() + ".pdf"))
+                if (File.Exists(Application.StartupPath + "\\" + Propriedade.NomeAplicacao + ".pdf"))
                 {
-                    System.Diagnostics.Process.Start(Application.StartupPath + InfoApp.NomeAplicacao() + ".pdf");
+                    System.Diagnostics.Process.Start(Application.StartupPath + Propriedade.NomeAplicacao + ".pdf");
                 }
                 else
                 {
@@ -560,20 +535,24 @@ namespace uninfe
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }      
         #endregion
 
+        #endregion
+
+        #region toolStripBtnUpdate_Click
         private void toolStripBtnUpdate_Click(object sender, EventArgs e)
         {
-            FormUpdate FormUp = new FormUpdate("i" + InfoApp.NomeAplicacao().ToLower() + ".exe");
+            FormUpdate FormUp = new FormUpdate("i" + Propriedade.NomeAplicacao.ToLower() + ".exe");
             FormUp.MdiParent = this;
             FormUp.MinimizeBox = false;
             FormUp.Show();
-        }
+        }        
+        #endregion
 
         ///
         /// danasa 9-2010
-        private void onCloseEmpresas(object sender, EventArgs e)
+        /*private void onCloseEmpresas(object sender, EventArgs e)
         {
             /// danasa 20-9-2010
             FormWait fw = new FormWait();
@@ -582,7 +561,7 @@ namespace uninfe
             {
                 fw.Show();
                 fw.DisplayMessage("Parando os serviços");
-                this.PararServicos();
+                this.PararServicos(true);
                 fw.DisplayMessage("Lendo as empresas");
                 Empresa.CarregaConfiguracao();
                 fw.DisplayMessage("Iniciando os serviços");
@@ -597,22 +576,71 @@ namespace uninfe
                 fw.Dispose();
                 this.Cursor = Cursors.Default;
             }
-        }
+        }*/
 
-        private void tsbEmpresa_Click(object sender, EventArgs e)
-        {
-            FormEmpresa frmEmpresa = new FormEmpresa(onCloseEmpresas);  //danasa 20-9-2010
-            frmEmpresa.MdiParent = this;
-            frmEmpresa.MinimizeBox = false;
-            frmEmpresa.Show();
-        }
-
+        #region MainForm_Load
         private void MainForm_Load(object sender, EventArgs e)
         {
             //Executar os serviços do UniNFe em novas threads
             //Tem que ser carregado depois que o formulário da MainForm estiver totalmente carregado para evitar Erros. Wandrey 19/10/2010
             this.ExecutaServicos();
+        }        
+        #endregion
+
+        #region SERVICO: danasa 7/2011
+        private void tbPararServico_Click(object sender, EventArgs e)
+        {
+            FormWait fw = new FormWait();
+            fw.Show();
+            try
+            {
+                fw.DisplayMessage("Parando o serviço do UniNFe");
+                ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                this.updateControleDoServico();
+                fw.StopMarquee();
+                MessageBox.Show("Serviço do UniNFe parado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                fw.Dispose();
+            }
         }
+
+        private void tbRestartServico_Click(object sender, EventArgs e)
+        {
+            FormWait fw = new FormWait();
+            fw.Show();
+            try
+            {
+                fw.DisplayMessage("Reiniciando o serviço do UniNFe");
+                ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                this.updateControleDoServico();
+                fw.StopMarquee();
+                MessageBox.Show("Serviço do UniNFe reiniciado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                fw.Dispose();
+            }
+        }
+
+        private void updateControleDoServico()
+        {
+            if (servicoInstaladoErodando)
+            {
+                this.tbPararServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
+                this.tbRestartServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
+            }
+        }
+        #endregion
     }
     #endregion
 }
