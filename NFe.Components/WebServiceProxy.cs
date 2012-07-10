@@ -615,6 +615,13 @@ namespace NFe.Components
             {
                 for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
                 {
+                    System.Reflection.PropertyInfo ClassProperty = wsItem.GetType().GetProperty(urlList[i].ChildNodes[j].Name);
+                    if (ClassProperty != null)
+                        ClassProperty.SetValue(wsItem, AppPath + urlList[i].ChildNodes[j].InnerText, null);
+                    else
+                        Console.WriteLine("wsItem <" + urlList[i].ChildNodes[j].Name + "> nao encontrada na classe URLws");
+
+                    /*
                     switch (urlList[i].ChildNodes[j].Name)
                     {
                         case "NFeCancelamento":
@@ -663,6 +670,7 @@ namespace NFe.Components
                             wsItem.CancelarNfse = AppPath + urlList[i].ChildNodes[j].InnerText;
                             break;
                     }
+                    */
                 }
             }
         }
@@ -693,6 +701,11 @@ namespace NFe.Components
 
     public class URLws
     {
+        /// <summary>
+        /// ******** ATENCAO *******
+        /// os nomes das propriedades tem que ser iguais as tags no WebService.xml
+        /// ******** ATENCAO *******
+        /// </summary>
         public string NFeRecepcao { get; set; }
         public string NFeRetRecepcao { get; set; }
         public string NFeCancelamento { get; set; }
@@ -708,6 +721,10 @@ namespace NFe.Components
         public string NFeStatusServico { get; set; }
         public string NFeConsultaCadastro { get; set; }
         public string NFeCCe { get; set; }
+        public string NFeDownload { get; set; }
+        public string NFeConsultaNFeDest { get; set; }
+        public string NFeManifestacao { get; set; }
+        public string NFeCancelamento1 { get; set; }
         /// <summary>
         /// Enviar Lote RPS NFS-e 
         /// </summary>

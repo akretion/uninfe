@@ -5,8 +5,8 @@ using System.Xml;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using UniNFeLibrary;
-using UniNFeLibrary.Enums;
+//using UniNFeLibrary;
+//using UniNFeLibrary.Enums;
 
 #if x
 namespace UniNFeServico

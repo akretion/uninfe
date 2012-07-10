@@ -24,7 +24,8 @@ namespace NFe.ConvertTxt
 
         private double readDouble(object element, string tag)
         {
-            return Convert.ToDouble("0" + this.readValue(element, tag));
+            char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
+            return Convert.ToDouble("0" + this.readValue(element, tag).Replace(".", charSeparator.ToString()));
         }
 
         private Int32 readInt32(object element, string tag)
@@ -160,7 +161,7 @@ namespace NFe.ConvertTxt
             nfe.protNFe.dhRecbto = this.readDate(nodenfeProc, "dhRecbto");
             nfe.protNFe.digVal = this.readValue(nodenfeProc, "digVal");
             nfe.protNFe.nProt = this.readValue(nodenfeProc, "nProt");
-            nfe.protNFe.tpAmb = (TpcnTipoAmbiente) this.readInt32(nodenfeProc, Properties.Resources.tpAmb);
+            nfe.protNFe.tpAmb = (TpcnTipoAmbiente)this.readInt32(nodenfeProc, Properties.Resources.tpAmb);
             nfe.protNFe.verAplic = this.readValue(nodenfeProc, "verAplic");
             nfe.protNFe.xMotivo = this.readValue(nodenfeProc, "xMotivo");
         }
@@ -207,7 +208,7 @@ namespace NFe.ConvertTxt
                 }
             }
         }
-        
+
         /// <summary>
         /// processaCompra
         /// </summary>
@@ -218,7 +219,7 @@ namespace NFe.ConvertTxt
             nfe.compra.xPed = this.readValue(nodeinfNFe, Properties.Resources.xPed);
             nfe.compra.xCont = this.readValue(nodeinfNFe, Properties.Resources.xCont);
         }
-        
+
         /// <summary>
         /// processaExporta
         /// </summary>
@@ -228,7 +229,7 @@ namespace NFe.ConvertTxt
             nfe.exporta.UFEmbarq = this.readValue(nodeinfNFe, Properties.Resources.UFEmbarq);
             nfe.exporta.xLocEmbarq = this.readValue(nodeinfNFe, Properties.Resources.xLocEmbarq);
         }
-        
+
         /// <summary>
         /// processaInfAdic
         /// </summary>
@@ -315,10 +316,10 @@ namespace NFe.ConvertTxt
             {
                 if (noder.LocalName.Equals("fat"))
                 {
-                    nfe.Cobr.Fat.nFat   = this.readValue(noder, Properties.Resources.nFat);
-                    nfe.Cobr.Fat.vOrig  = this.readDouble(noder, Properties.Resources.vOrig);
-                    nfe.Cobr.Fat.vDesc  = this.readDouble(noder, Properties.Resources.vDesc);
-                    nfe.Cobr.Fat.vLiq   = this.readDouble(noder, Properties.Resources.vLiq);
+                    nfe.Cobr.Fat.nFat = this.readValue(noder, Properties.Resources.nFat);
+                    nfe.Cobr.Fat.vOrig = this.readDouble(noder, Properties.Resources.vOrig);
+                    nfe.Cobr.Fat.vDesc = this.readDouble(noder, Properties.Resources.vDesc);
+                    nfe.Cobr.Fat.vLiq = this.readDouble(noder, Properties.Resources.vLiq);
                 }
                 if (noder.LocalName.Equals("dup"))
                 {
@@ -492,124 +493,126 @@ namespace NFe.ConvertTxt
                 detInfo.Prod.vUnTrib = this.readDouble(ele, Properties.Resources.vUnTrib);
                 detInfo.Prod.xPed = this.readValue(ele, Properties.Resources.xPed);
                 detInfo.Prod.xProd = this.readValue(ele, Properties.Resources.xProd);
-
-                #region -->prod->arma
-                foreach (XmlNode nodedetArma in ele.GetElementsByTagName("arma"))
-                {
-                    Arma armaInfo = new Arma();
-
-                    armaInfo.descr = this.readValue(nodedetArma, Properties.Resources.descr);
-                    armaInfo.nCano =  this.readInt32(nodedetArma, Properties.Resources.nCano);
-                    armaInfo.nSerie = this.readInt32(nodedetArma, Properties.Resources.nSerie);
-                    armaInfo.tpArma = this.readInt32(nodedetArma, Properties.Resources.tpArma);
-
-                    detInfo.Prod.arma.Add(armaInfo);
-                }
-                #endregion
-
-                #region --prod->comb
-                foreach (XmlNode nodedetComb in ele.GetElementsByTagName("comb"))
-                {
-                    foreach (XmlNode nodedetCombCIDE in ((XmlElement)nodedetComb).GetElementsByTagName("CIDE"))
-                    {
-                        detInfo.Prod.comb.CIDE.qBCprod   = this.readDouble(nodedetCombCIDE, Properties.Resources.qBCProd);
-                        detInfo.Prod.comb.CIDE.vAliqProd = this.readDouble(nodedetCombCIDE, Properties.Resources.vAliqProd);
-                        detInfo.Prod.comb.CIDE.vCIDE     = this.readDouble(nodedetCombCIDE, Properties.Resources.vCIDE);
-                    }
-                    detInfo.Prod.comb.CODIF = this.readValue(nodedetComb, Properties.Resources.CODIF);
-                    detInfo.Prod.comb.cProdANP = this.readInt32(nodedetComb, Properties.Resources.cProdANP);
-                    detInfo.Prod.comb.qTemp = this.readDouble(nodedetComb, Properties.Resources.qTemp);
-                    detInfo.Prod.comb.UFCons = this.readValue(nodedetComb, Properties.Resources.UFCons);
-
-                    //foreach (XmlNode nodedetCombicmscomb in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSComb"))
-                    //{
-                    //detInfo.Prod.comb.ICMS.vBCICMS   = Leitor.rCampo(tcDe2, 'vBCICMS');
-                    //detInfo.Prod.comb.ICMS.vICMS     = Leitor.rCampo(tcDe2, 'vICMS');
-                    //detInfo.Prod.comb.ICMS.vBCICMSST = Leitor.rCampo(tcDe2, 'vBCICMSST');
-                    //detInfo.Prod.comb.ICMS.vICMSST   = Leitor.rCampo(tcDe2, 'vICMSST');
-                    //}
-                    //foreach (XmlNode nodedetCombicmsInter in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSInter"))
-                    //{
-                    //NFe.Det[i].Prod.comb.ICMSInter.vBCICMSSTDest := Leitor.rCampo(tcDe2, 'vBCICMSSTDest');
-                    //NFe.Det[i].Prod.comb.ICMSInter.vICMSSTDest := Leitor.rCampo(tcDe2, 'vICMSSTDest');
-                    //}
-                    //foreach (XmlNode nodedetCombicmsCons in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSCons"))
-                    //{
-                    //NFe.Det[i].Prod.comb.ICMSCons.vBCICMSSTCons := Leitor.rCampo(tcDe2, 'vBCICMSSTCons');
-                    //NFe.Det[i].Prod.comb.ICMSCons.vICMSSTCons   := Leitor.rCampo(tcDe2, 'vICMSSTCons');
-                    //NFe.Det[i].Prod.comb.ICMSCons.UFcons        := Leitor.rCampo(tcStr, 'UFCons');
-                    //}
-
-                }
-                #endregion
-
-                #region --pod->DI
-                foreach (XmlNode nodedetDI in ele.GetElementsByTagName("DI"))
-                {
-                    DI diInfo = new DI();
-                    diInfo.cExportador = this.readValue(nodedetDI, Properties.Resources.cExportador);
-                    diInfo.dDesemb = this.readDate(nodedetDI, Properties.Resources.dDesemb);
-                    diInfo.dDI = this.readDate(nodedetDI, Properties.Resources.dDI);
-                    diInfo.nDI = this.readValue(nodedetDI, Properties.Resources.nDI);
-
-                    foreach (XmlNode nodedetDIadi in ((XmlElement)nodedetDI).GetElementsByTagName("adi"))
-                    {
-                        Adi adiInfo;
-
-                        adiInfo.cFabricante = this.readValue(nodedetDIadi, Properties.Resources.cFabricante);
-                        adiInfo.nAdicao = this.readInt32(nodedetDIadi, Properties.Resources.nAdicao);
-                        adiInfo.nSeqAdi = this.readInt32(nodedetDIadi, Properties.Resources.nSeqAdic);
-                        adiInfo.vDescDI = this.readDouble(nodedetDIadi, Properties.Resources.vDescDI);
-
-                        diInfo.adi.Add(adiInfo);
-                    }
-                    detInfo.Prod.DI.Add(diInfo);
-                }
-                #endregion
-
-                #region --prod->med
-                foreach (XmlNode nodedetmed in ele.GetElementsByTagName("med"))
-                {
-                    Med medInfo = new Med();
-                    medInfo.dFab = this.readDate(nodedetmed, Properties.Resources.dFab);
-                    medInfo.dVal = this.readDate(nodedetmed, Properties.Resources.dVal);
-                    medInfo.nLote = this.readValue(nodedetmed, Properties.Resources.nLote);
-                    medInfo.qLote = this.readDouble(nodedetmed, Properties.Resources.qLote);
-                    medInfo.vPMC = this.readDouble(nodedetmed, Properties.Resources.vPMC);
-                    detInfo.Prod.med.Add(medInfo);
-                }
-                #endregion
-
-                #region --prod->veicProd
-                foreach (XmlNode nodedetveic in ele.GetElementsByTagName("veicProd"))
-                {
-                    detInfo.Prod.veicProd.anoFab = this.readInt32(nodedetveic, Properties.Resources.anoFab);
-                    detInfo.Prod.veicProd.anoMod = this.readInt32(nodedetveic, Properties.Resources.anoMod);
-                    detInfo.Prod.veicProd.cCor = this.readValue(nodedetveic, Properties.Resources.cCor);
-                    detInfo.Prod.veicProd.cCorDENATRAN = this.readInt32(nodedetveic, Properties.Resources.cCorDENATRAN);
-                    detInfo.Prod.veicProd.chassi = this.readValue(nodedetveic, Properties.Resources.chassi);
-                    detInfo.Prod.veicProd.cilin = this.readValue(nodedetveic, Properties.Resources.cilin);
-                    detInfo.Prod.veicProd.cMod = this.readValue(nodedetveic, Properties.Resources.cMod);
-                    detInfo.Prod.veicProd.CMT = this.readValue(nodedetveic, Properties.Resources.CMT);
-                    detInfo.Prod.veicProd.condVeic = this.readValue(nodedetveic, Properties.Resources.condVeic);
-                    detInfo.Prod.veicProd.dist = this.readValue(nodedetveic, Properties.Resources.dist);
-                    detInfo.Prod.veicProd.espVeic = this.readInt32(nodedetveic, Properties.Resources.espVeic);
-                    detInfo.Prod.veicProd.lota = this.readInt32(nodedetveic, Properties.Resources.lota);
-                    detInfo.Prod.veicProd.nMotor = this.readValue(nodedetveic, Properties.Resources.nMotor);
-                    detInfo.Prod.veicProd.nSerie = this.readValue(nodedetveic, Properties.Resources.nSerie);
-                    detInfo.Prod.veicProd.pesoB = this.readValue(nodedetveic, Properties.Resources.pesoB);
-                    detInfo.Prod.veicProd.pesoL = this.readValue(nodedetveic, Properties.Resources.pesoL);
-                    detInfo.Prod.veicProd.pot = this.readValue(nodedetveic, Properties.Resources.pot);
-                    detInfo.Prod.veicProd.tpComb = this.readValue(nodedetveic, Properties.Resources.tpComb);
-                    detInfo.Prod.veicProd.tpOp = this.readValue(nodedetveic, Properties.Resources.tpOp);
-                    detInfo.Prod.veicProd.tpPint = this.readValue(nodedetveic, Properties.Resources.tpPint);
-                    detInfo.Prod.veicProd.tpRest = this.readInt32(nodedetveic, Properties.Resources.tpRest);
-                    detInfo.Prod.veicProd.tpVeic = this.readInt32(nodedetveic, Properties.Resources.tpVeic);
-                    detInfo.Prod.veicProd.VIN = this.readValue(nodedetveic, Properties.Resources.VIN);
-                    detInfo.Prod.veicProd.xCor = this.readValue(nodedetveic, Properties.Resources.xCor);
-                }
-                #endregion
             }
+
+            #region -->prod->arma
+            foreach (XmlNode nodedetArma in ((XmlElement)nodedet).GetElementsByTagName("arma"))
+            {
+                Arma armaInfo = new Arma();
+
+                armaInfo.descr = this.readValue(nodedetArma, Properties.Resources.descr);
+                armaInfo.nCano = this.readInt32(nodedetArma, Properties.Resources.nCano);
+                armaInfo.nSerie = this.readInt32(nodedetArma, Properties.Resources.nSerie);
+                armaInfo.tpArma = this.readInt32(nodedetArma, Properties.Resources.tpArma);
+
+                detInfo.Prod.arma.Add(armaInfo);
+            }
+            #endregion
+
+            #region --prod->comb
+            foreach (XmlNode nodedetComb in ((XmlElement)nodedet).GetElementsByTagName("comb"))
+            {
+                foreach (XmlNode nodedetCombCIDE in ((XmlElement)nodedetComb).GetElementsByTagName("CIDE"))
+                {
+                    detInfo.Prod.comb.CIDE.qBCprod = this.readDouble(nodedetCombCIDE, Properties.Resources.qBCProd);
+                    detInfo.Prod.comb.CIDE.vAliqProd = this.readDouble(nodedetCombCIDE, Properties.Resources.vAliqProd);
+                    detInfo.Prod.comb.CIDE.vCIDE = this.readDouble(nodedetCombCIDE, Properties.Resources.vCIDE);
+                }
+                detInfo.Prod.comb.CODIF = this.readValue(nodedetComb, Properties.Resources.CODIF);
+                detInfo.Prod.comb.cProdANP = this.readInt32(nodedetComb, Properties.Resources.cProdANP);
+                detInfo.Prod.comb.qTemp = this.readDouble(nodedetComb, Properties.Resources.qTemp);
+                detInfo.Prod.comb.UFCons = this.readValue(nodedetComb, Properties.Resources.UFCons);
+
+                //foreach (XmlNode nodedetCombicmscomb in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSComb"))
+                //{
+                //detInfo.Prod.comb.ICMS.vBCICMS   = Leitor.rCampo(tcDe2, 'vBCICMS');
+                //detInfo.Prod.comb.ICMS.vICMS     = Leitor.rCampo(tcDe2, 'vICMS');
+                //detInfo.Prod.comb.ICMS.vBCICMSST = Leitor.rCampo(tcDe2, 'vBCICMSST');
+                //detInfo.Prod.comb.ICMS.vICMSST   = Leitor.rCampo(tcDe2, 'vICMSST');
+                //}
+                //foreach (XmlNode nodedetCombicmsInter in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSInter"))
+                //{
+                //NFe.Det[i].Prod.comb.ICMSInter.vBCICMSSTDest := Leitor.rCampo(tcDe2, 'vBCICMSSTDest');
+                //NFe.Det[i].Prod.comb.ICMSInter.vICMSSTDest := Leitor.rCampo(tcDe2, 'vICMSSTDest');
+                //}
+                //foreach (XmlNode nodedetCombicmsCons in ((XmlElement)nodedetComb).GetElementsByTagName("ICMSCons"))
+                //{
+                //NFe.Det[i].Prod.comb.ICMSCons.vBCICMSSTCons := Leitor.rCampo(tcDe2, 'vBCICMSSTCons');
+                //NFe.Det[i].Prod.comb.ICMSCons.vICMSSTCons   := Leitor.rCampo(tcDe2, 'vICMSSTCons');
+                //NFe.Det[i].Prod.comb.ICMSCons.UFcons        := Leitor.rCampo(tcStr, 'UFCons');
+                //}
+
+            }
+            #endregion
+
+            #region --prod->med
+            foreach (XmlNode nodedetmed in ((XmlElement)nodedet).GetElementsByTagName("med"))
+            {
+                Med medInfo = new Med();
+                medInfo.dFab = this.readDate(nodedetmed, Properties.Resources.dFab);
+                medInfo.dVal = this.readDate(nodedetmed, Properties.Resources.dVal);
+                medInfo.nLote = this.readValue(nodedetmed, Properties.Resources.nLote);
+                medInfo.qLote = this.readDouble(nodedetmed, Properties.Resources.qLote);
+                medInfo.vPMC = this.readDouble(nodedetmed, Properties.Resources.vPMC);
+                detInfo.Prod.med.Add(medInfo);
+            }
+            #endregion
+
+            #region --prod->veicProd
+            foreach (XmlNode nodedetveic in ((XmlElement)nodedet).GetElementsByTagName("veicProd"))
+            {
+                detInfo.Prod.veicProd.anoFab = this.readInt32(nodedetveic, Properties.Resources.anoFab);
+                detInfo.Prod.veicProd.anoMod = this.readInt32(nodedetveic, Properties.Resources.anoMod);
+                detInfo.Prod.veicProd.cCor = this.readValue(nodedetveic, Properties.Resources.cCor);
+                detInfo.Prod.veicProd.cCorDENATRAN = this.readInt32(nodedetveic, Properties.Resources.cCorDENATRAN);
+                detInfo.Prod.veicProd.chassi = this.readValue(nodedetveic, Properties.Resources.chassi);
+                detInfo.Prod.veicProd.cilin = this.readValue(nodedetveic, Properties.Resources.cilin);
+                detInfo.Prod.veicProd.cMod = this.readValue(nodedetveic, Properties.Resources.cMod);
+                detInfo.Prod.veicProd.CMT = this.readValue(nodedetveic, Properties.Resources.CMT);
+                detInfo.Prod.veicProd.condVeic = this.readValue(nodedetveic, Properties.Resources.condVeic);
+                detInfo.Prod.veicProd.dist = this.readValue(nodedetveic, Properties.Resources.dist);
+                detInfo.Prod.veicProd.espVeic = this.readInt32(nodedetveic, Properties.Resources.espVeic);
+                detInfo.Prod.veicProd.lota = this.readInt32(nodedetveic, Properties.Resources.lota);
+                detInfo.Prod.veicProd.nMotor = this.readValue(nodedetveic, Properties.Resources.nMotor);
+                detInfo.Prod.veicProd.nSerie = this.readValue(nodedetveic, Properties.Resources.nSerie);
+                detInfo.Prod.veicProd.pesoB = this.readValue(nodedetveic, Properties.Resources.pesoB);
+                detInfo.Prod.veicProd.pesoL = this.readValue(nodedetveic, Properties.Resources.pesoL);
+                detInfo.Prod.veicProd.pot = this.readValue(nodedetveic, Properties.Resources.pot);
+                detInfo.Prod.veicProd.tpComb = this.readValue(nodedetveic, Properties.Resources.tpComb);
+                detInfo.Prod.veicProd.tpOp = this.readValue(nodedetveic, Properties.Resources.tpOp);
+                detInfo.Prod.veicProd.tpPint = this.readValue(nodedetveic, Properties.Resources.tpPint);
+                detInfo.Prod.veicProd.tpRest = this.readInt32(nodedetveic, Properties.Resources.tpRest);
+                detInfo.Prod.veicProd.tpVeic = this.readInt32(nodedetveic, Properties.Resources.tpVeic);
+                detInfo.Prod.veicProd.VIN = this.readValue(nodedetveic, Properties.Resources.VIN);
+                detInfo.Prod.veicProd.xCor = this.readValue(nodedetveic, Properties.Resources.xCor);
+            }
+            #endregion
+
+            #region --pod->DI
+            foreach (XmlNode nodedetDI in ((XmlElement)nodedet).GetElementsByTagName("DI"))
+            {
+                DI diInfo = new DI();
+                diInfo.cExportador = this.readValue(nodedetDI, Properties.Resources.cExportador);
+                diInfo.dDesemb = this.readDate(nodedetDI, Properties.Resources.dDesemb);
+                diInfo.dDI = this.readDate(nodedetDI, Properties.Resources.dDI);
+                diInfo.nDI = this.readValue(nodedetDI, Properties.Resources.nDI);
+                diInfo.xLocDesemb = this.readValue(nodedetDI, Properties.Resources.xLocDesemb);
+                diInfo.UFDesemb = this.readValue(nodedetDI, Properties.Resources.UFDesemb);
+
+                foreach (XmlNode nodedetDIadi in ((XmlElement)nodedetDI).GetElementsByTagName("adi"))
+                {
+                    Adi adiInfo;
+
+                    adiInfo.cFabricante = this.readValue(nodedetDIadi, Properties.Resources.cFabricante);
+                    adiInfo.nAdicao = this.readInt32(nodedetDIadi, Properties.Resources.nAdicao);
+                    adiInfo.nSeqAdi = this.readInt32(nodedetDIadi, Properties.Resources.nSeqAdic);
+                    adiInfo.vDescDI = this.readDouble(nodedetDIadi, Properties.Resources.vDescDI);
+
+                    diInfo.adi.Add(adiInfo);
+                }
+                detInfo.Prod.DI.Add(diInfo);
+            }
+            #endregion
 
             foreach (XmlNode nodedetImposto in ((XmlElement)nodedet).GetElementsByTagName("imposto"))
             {

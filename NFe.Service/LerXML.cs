@@ -91,6 +91,14 @@ namespace NFe.Service
         public DadosenvEvento oDadosEnvEvento = new DadosenvEvento();
         #endregion
 
+        #region Classe com os dados do XML do registro de download da nfe
+        public DadosenvDownload oDadosenvDownload = new DadosenvDownload();
+        #endregion
+
+        #region Classe com os dados do XML do registro de consulta da nfe do destinatario
+        public DadosConsultaNFeDest oDadosConsultaNFeDest = new DadosConsultaNFeDest();
+        #endregion
+
         #region Objetos relacionados a NFS-e
 
         #region Objeto com os dados do XML da consulta lote rps
@@ -1219,6 +1227,7 @@ namespace NFe.Service
                         break;
 
                     case TipoAplicativo.Nfe:
+                        ///<<<<EVENTO DE CARTA DE CORRECAO>>>>
                         ///idLote|000000000015255
                         ///evento|1
                         ///Id|ID1101103511031029073900013955001000000001105112804101                    <<opcional
@@ -1241,6 +1250,94 @@ namespace NFe.Service
                         ///evento|20    <<MAXIMO
                         ///Id|ID1101103511031029073900013955001000000001105112804103
                         ///...
+
+                        ///<<<<EVENTO DE CANCELAMENTO>>>>
+                        /// idLote|000000000015255
+                        /// evento|1
+                        /// Id|ID1101103511031029073900013955001000000001105112804102
+                        /// cOrgao|35
+                        /// tpAmb|2
+                        /// CNPJ|10290739000139 
+                        ///    ou
+                        /// CPF|80531385800
+                        /// chNFe|35110310290739000139550010000000011051128041
+                        /// dhEvento|2011-03-03T08:06:00-03:00
+                        /// tpEvento|110111
+                        /// nSeqEvento|1
+                        /// verEvento|1.00
+                        /// descEvento|Cancelamento                                                      <<opcional
+                        /// xJust|Justificativa do cancelamento
+                        /// nProt|010101010101010
+                        
+                        ///<<<<EVENTO DE CONFIRMACAO DA OPERACAO>>>>
+                        ///idLote|000000000015255
+                        ///evento|1
+                        ///Id|ID1101103511031029073900013955001000000001105112804102
+                        ///cOrgao|35
+                        ///tpAmb|2
+                        ///CNPJ|10290739000139 
+                        ///    ou
+                        ///CPF|80531385800
+                        ///chNFe|35110310290739000139550010000000011051128041
+                        ///dhEvento|2011-03-03T08:06:00-03:00
+                        ///tpEvento|210200
+                        ///nSeqEvento|1
+                        ///verEvento|1.00
+                        ///descEvento|Confirmacao da Operacao                                           <<opcional
+                        ///xJust|Justificativa.....
+                        
+                        /// ------------------------------------
+                        ///<<<<EVENTO DE CIENCIA DA OPERACAO>>>>
+                        ///idLote|000000000015255
+                        ///evento|1
+                        ///Id|ID1101103511031029073900013955001000000001105112804102
+                        ///cOrgao|35
+                        ///tpAmb|2
+                        ///CNPJ|10290739000139 
+                        ///    ou
+                        ///CPF|80531385800
+                        ///chNFe|35110310290739000139550010000000011051128041
+                        ///dhEvento|2011-03-03T08:06:00-03:00
+                        ///tpEvento|210210
+                        ///nSeqEvento|1
+                        ///verEvento|1.00
+                        ///descEvento|Ciencia da Operacao                                               <<opcional
+                        
+                        /// --------------------------------------------
+                        ///<<<<EVENTO DE DESCONHECIMENTO DA OPERACAO>>>>
+                        ///idLote|000000000015255
+                        ///evento|1
+                        ///Id|ID1101103511031029073900013955001000000001105112804102
+                        ///cOrgao|35
+                        ///tpAmb|2
+                        ///CNPJ|10290739000139 
+                        ///    ou
+                        ///CPF|80531385800
+                        ///chNFe|35110310290739000139550010000000011051128041
+                        ///dhEvento|2011-03-03T08:06:00-03:00
+                        ///tpEvento|210220
+                        ///nSeqEvento|1
+                        ///verEvento|1.00
+                        ///descEvento|Desconhecimento da Operacao                                        <<opcional
+                        ///xJust|Justificativa.....
+                        
+                        /// --------------------------------------------
+                        ///<<<<EVENTO DE OPERACAO NAO REALIZADA>>>>
+                        ///idLote|000000000015255
+                        ///evento|1
+                        ///Id|ID1101103511031029073900013955001000000001105112804102
+                        ///cOrgao|35
+                        ///tpAmb|2
+                        ///CNPJ|10290739000139 
+                        ///    ou
+                        ///CPF|80531385800
+                        ///chNFe|35110310290739000139550010000000011051128041
+                        ///dhEvento|2011-03-03T08:06:00-03:00
+                        ///tpEvento|210240
+                        ///nSeqEvento|1
+                        ///verEvento|1.00
+                        ///descEvento|Operacao nao realizada                                            <<opcional
+
                         List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                         foreach (string cTexto in cLinhas)
                         {
@@ -1294,21 +1391,70 @@ namespace NFe.Service
                                 case "xconduso":
                                     this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].xCondUso = dados[1].Trim();
                                     break;
+                                case "xjust":
+                                    this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].xJust = dados[1].Trim();
+                                    break;
+                                case "nprot":
+                                    this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].nProt = dados[1].Trim();
+                                    break;
                             }
                         }
                         foreach (Evento evento in this.oDadosEnvEvento.eventos)
                         {
-                            if (string.IsNullOrEmpty(evento.xCondUso))
-                                evento.xCondUso = "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, " +
-                                    "de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de " +
-                                    "documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o " +
-                                    "valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da " +
-                                    "operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente " +
-                                    "ou do destinatario; III - a data de emissao ou de saida.";
-                            if (string.IsNullOrEmpty(evento.descEvento))
-                                evento.descEvento = "Carta de Correcao";
+                            switch (evento.tpEvento)
+                            {
+                                case "110110":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Carta de correcao";
+                                    break;
+                                case "110111":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Cancelamento";
+                                    evento.nSeqEvento = 1;
+                                    break;
+                                case "210200":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Confirmacao da Operacao";
+                                    evento.nSeqEvento = 1;
+                                    break;
+                                case "210210":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Ciencia da Operacao";
+                                    evento.nSeqEvento = 1;
+                                    break;
+                                case "210220":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Desconhecimento da Operacao";
+                                    evento.nSeqEvento = 1;
+                                    break;
+                                case "210240":
+                                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Operacao nao Realizada";
+                                    evento.nSeqEvento = 1;
+                                    break;
+                            }
+                            if (string.IsNullOrEmpty(evento.verEvento))
+                                evento.verEvento = "1.00";
+
+                            if (evento.tpAmb == 0)
+                                evento.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+
+                            if (evento.cOrgao == 0)
+                                evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
+
                             if (string.IsNullOrEmpty(evento.Id))
                                 evento.Id = "ID" + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
+
+                            if (string.IsNullOrEmpty(evento.xCondUso))
+                                if (evento.descEvento == "Carta de correcao")
+                                    evento.xCondUso =
+                                        "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, " +
+                                        "de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de " +
+                                        "documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o " +
+                                        "valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da " +
+                                        "operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente " +
+                                        "ou do destinatario; III - a data de emissao ou de saida.";
+                                else
+                                    evento.xCondUso =
+                                        "A Carta de Correção é disciplinada pelo § 1º-A do art. 7º do Convênio S/N, de 15 de dezembro de 1970 e pode ser " +
+                                        "utilizada para regularização de erro ocorrido na emissão de documento fiscal, desde que o erro não esteja relacionado " +
+                                        "com: I - as variáveis que determinam o valor do imposto tais como: base de cálculo, alíquota, diferença de preço, " +
+                                        "quantidade, valor da operação ou da prestação; II - a correção de dados cadastrais que implique mudança do " +
+                                        "remetente ou do destinatário; III - a data de emissão ou de saída.";
                         }
                         break;
 
@@ -1358,6 +1504,139 @@ namespace NFe.Service
         }
         #endregion
 
+        #endregion
+
+
+        #region EnvDownloadNFe
+        public void EnvDownloadNFe(int emp, string arquivoXML)
+        {
+            switch (Propriedade.TipoAplicativo)
+            {
+                case TipoAplicativo.Nfe:
+                    if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+                    {
+                        /// tpAmb|2
+                        /// CNPJ|10290739000139 
+                        /// chNFe|35110310290739000139550010000000011051128041
+                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                        foreach (string cTexto in cLinhas)
+                        {
+                            string[] dados = cTexto.Split('|');
+                            if (dados.GetLength(0) <= 1) continue;
+
+                            switch (dados[0].ToLower())
+                            {
+                                case "tpamb":
+                                    this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "cnpj":
+                                    this.oDadosenvDownload.CNPJ = dados[1].Trim();
+                                    break;
+                                case "chnfe":
+                                    this.oDadosenvDownload.chNFe = dados[1].Trim();
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //<?xml version="1.0" encoding="UTF-8"?>
+                        //<downloadNFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+                        //      <tpAmb>2</tpAmb>
+                        //      <xServ>DOWNLOAD NFE</xServ>
+                        //      <CNPJ>10290739000139</CNPJ>
+                        //      <chNFe>35110310290739000139550010000000011051128041</chNFe>
+                        //</downloadNFe>
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(arquivoXML);
+
+                        XmlNodeList envEventoList = doc.GetElementsByTagName("downloadNFe");
+
+                        foreach (XmlNode envEventoNode in envEventoList)
+                        {
+                            XmlElement envEventoElemento = (XmlElement)envEventoNode;
+
+                            this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                            this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                            this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        }
+                    }
+                    break;
+            }
+        }
+        #endregion
+
+        #region EnvConsultaNFeDest
+        public void EnvConsultaNFeDest(int emp, string arquivoXML)
+        {
+            switch (Propriedade.TipoAplicativo)
+            {
+                case TipoAplicativo.Nfe:
+                    if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+                    {
+                        /// tpAmb|2
+                        /// CNPJ|10290739000139 
+                        /// indNFe|0
+                        /// indEmi|0
+                        /// ultNSU|0
+                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                        foreach (string cTexto in cLinhas)
+                        {
+                            string[] dados = cTexto.Split('|');
+                            if (dados.GetLength(0) <= 1) continue;
+
+                            switch (dados[0].ToLower())
+                            {
+                                case "tpamb":
+                                    this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "cnpj":
+                                    this.oDadosConsultaNFeDest.CNPJ = dados[1].Trim();
+                                    break;
+                                case "indnfe":
+                                    this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "indemi":
+                                    this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + dados[1].Trim());
+                                    break;
+                                case "ultnsu":
+                                    this.oDadosConsultaNFeDest.ultNSU = dados[1].Trim();
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //<?xml version="1.0" encoding="UTF-8"?>
+                        //<consNFeDest versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+                        //      <tpAmb>2</tpAmb>
+                        //      <xServ>CONSULTAR NFE DEST</xServ>
+                        //      <CNPJ>10290739000139</CNPJ>
+                        //      <indNFe>0</indNFe>
+                        //      <indEmi>0</indEmi>
+                        //      <ultNSU>000000000000000</ultNSU>
+                        //</consNFeDest>
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(arquivoXML);
+
+                        XmlNodeList envEventoList = doc.GetElementsByTagName("consNFeDest");
+
+                        foreach (XmlNode envEventoNode in envEventoList)
+                        {
+                            XmlElement envEventoElemento = (XmlElement)envEventoNode;
+
+                            this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                            this.oDadosConsultaNFeDest.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                            this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indNFe")[0].InnerText);
+                            this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indEmi")[0].InnerText);
+                            this.oDadosConsultaNFeDest.ultNSU = envEventoElemento.GetElementsByTagName("ultNSU")[0].InnerText;
+                        }
+                    }
+                    break;
+            }
+        }
         #endregion
 
         #region Métodos para leitura dos XML´s da NFS-e (Nota Fiscal de Serviços Eletrônica)

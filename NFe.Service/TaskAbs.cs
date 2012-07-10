@@ -90,6 +90,18 @@ namespace NFe.Service
         public abstract void RecepcaoEvento();
         #endregion
 
+        #region RecepcaoManifestacao()
+        public abstract void RecepcaoManifestacao();
+        #endregion
+
+        #region RecepcaoConsultaNFeDest()
+        public abstract void RecepcaoConsultaNFeDest();
+        #endregion
+
+        #region RecepcaoDownloadNFe()
+        public abstract void RecepcaoDownloadNFe();
+        #endregion
+
         #endregion
 
         #region Métodos de execução dos serviços da NFSe
@@ -149,7 +161,7 @@ namespace NFe.Service
             string pastaLoteAssinado = pasta + Propriedade.NomePastaXMLAssinado;
 
             //Se o arquivo XML já existir na pasta de assinados, vou avisar o ERP que já tem um em andamento
-            string arqDestino = pastaLoteAssinado + "\\" + oAux.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml";
+            string arqDestino = pastaLoteAssinado + "\\" + Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml";
 
             try
             {
@@ -165,7 +177,7 @@ namespace NFe.Service
                     if (oFluxoNfe.NfeExiste(ChaveNfe))
                     {
                         //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
-                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                        oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
 
                         //Deletar a NFE do arquivo de controle de fluxo
                         oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
@@ -179,7 +191,7 @@ namespace NFe.Service
                     else
                     {
                         //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                        Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + oAux.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                        Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
                     }
 
                     //Validações gerais
@@ -240,7 +252,7 @@ namespace NFe.Service
                             }
                             else
                             {
-                                oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                                oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions/*oAux*/.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
 
                                 throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
                                     NomeArquivoXML);
@@ -260,7 +272,7 @@ namespace NFe.Service
                     {
                         try
                         {
-                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, oAux.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions/*oAux*/.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
                         }
                         catch (Exception ex)
                         {
@@ -547,8 +559,20 @@ namespace NFe.Service
         protected abstract void LerRetornoInut();
         #endregion
 
-        #region LerRetEvento()
+        #region LerRetornoEvento()
         protected abstract void LerRetornoEvento(int emp);
+        #endregion
+
+        #region LerRetornoManifestacao()
+        protected abstract void LerRetornoManifestacao(int emp);
+        #endregion
+
+        #region LerRetornoConsultaNFeDest()
+        protected abstract void LerRetornoConsultaNFeDest(int emp);
+        #endregion
+
+        #region LerRetornoDownloadNFe()
+        protected abstract void LerRetornoDownloadNFe(int emp);
         #endregion
 
         #endregion

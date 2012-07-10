@@ -756,7 +756,7 @@ namespace NFe.Settings
                         }
 
                         if (!Directory.Exists(configElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText.Trim()) &&
-                            configElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText.Trim() != null)
+                            !string.IsNullOrEmpty(configElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText.Trim()))
                         {
                             Empresa.ExisteErroDiretorio = true;
                             ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   Pasta: " + configElemento.GetElementsByTagName("PastaXmlEmLote")[0].InnerText.Trim() + "\r\n";

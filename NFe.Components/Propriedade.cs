@@ -166,7 +166,7 @@ namespace NFe.Components
             /// <summary>
             /// -alt-con.xml
             /// </summary>
-            public const string AltCon = "-alt-con.xml";
+            public const string AltCon_XML = "-alt-con.xml";
             /// <summary>
             /// -alt-con.txt
             /// </summary>
@@ -174,7 +174,7 @@ namespace NFe.Components
             /// <summary>
             /// -cons-cad.xml
             /// </summary>
-            public const string ConsCad = "-cons-cad.xml";
+            public const string ConsCad_XML = "-cons-cad.xml";
             /// <summary>
             /// -cons-cad.txt
             /// </summary>
@@ -182,7 +182,7 @@ namespace NFe.Components
             /// <summary>
             /// -cons-inf.xml
             /// </summary>
-            public const string ConsInf = "-cons-inf.xml";
+            public const string ConsInf_XML = "-cons-inf.xml";
             /// <summary>
             /// -cons-inf.txt
             /// </summary>
@@ -214,7 +214,7 @@ namespace NFe.Components
             /// <summary>
             /// -ped-can.xml
             /// </summary>
-            public const string PedCan = "-ped-can.xml";
+            public const string PedCan_XML = "-ped-can.xml";
             /// <summary>
             /// -ped-can.txt
             /// </summary>
@@ -222,7 +222,7 @@ namespace NFe.Components
             /// <summary>
             /// -ped-inu.xml
             /// </summary>
-            public const string PedInu = "-ped-inu.xml";
+            public const string PedInu_XML = "-ped-inu.xml";
             /// <summary>
             /// -ped-inu.txt
             /// </summary>
@@ -230,11 +230,11 @@ namespace NFe.Components
             /// <summary>
             /// -ped-rec.xml
             /// </summary>
-            public const string PedRec = "-ped-rec.xml";
+            public const string PedRec_XML = "-ped-rec.xml";
             /// <summary>
             /// -ped-rec.xml
             /// </summary>
-            public const string PedSit = "-ped-sit.xml";
+            public const string PedSit_XML = "-ped-sit.xml";
             /// <summary>
             /// -ped-sit.txt
             /// </summary>
@@ -242,7 +242,7 @@ namespace NFe.Components
             /// <summary>
             /// -ped-sta.xml
             /// </summary>
-            public const string PedSta = "-ped-sta.xml";
+            public const string PedSta_XML = "-ped-sta.xml";
             /// <summary>
             /// -ped-sta.txt
             /// </summary>
@@ -250,7 +250,7 @@ namespace NFe.Components
             /// <summary>
             /// -env-dpec.xml
             /// </summary>
-            public const string EnvDPEC = "-env-dpec.xml";
+            public const string EnvDPEC_XML = "-env-dpec.xml";
             /// <summary>
             /// -env-dpec.txt
             /// </summary>
@@ -258,7 +258,7 @@ namespace NFe.Components
             /// <summary>
             /// -cons-dpec.xml"
             /// </summary>
-            public const string ConsDPEC = "-cons-dpec.xml";
+            public const string ConsDPEC_XML = "-cons-dpec.xml";
             /// <summary>
             /// -cons-dpec.txt
             /// </summary>
@@ -266,11 +266,44 @@ namespace NFe.Components
             /// <summary>
             /// -env-cce.xml
             /// </summary>
-            public const string EnvCCe = "-env-cce.xml";
+            public const string EnvCCe_XML = "-env-cce.xml";
             /// <summary>
             /// -env-cce.txt
             /// </summary>
             public const string EnvCCe_TXT = "-env-cce.txt";
+            /// <summary>
+            /// -down-nfe.xml
+            /// </summary>
+            public const string EnvDownload_XML = "-nfe-down.xml";
+            /// <summary>
+            /// -down-nfe.txt
+            /// </summary>
+            public const string EnvDownload_TXT = "-nfe-down.txt";
+            /// <summary>
+            /// -cons-nfe-dest.xml
+            /// </summary>
+            public const string ConsNFeDest_XML = "-cons-nfe-dest.xml";
+            /// <summary>
+            /// -cons-nfe-dest.txt
+            /// </summary>
+            public const string ConsNFeDest_TXT = "-cons-nfe-dest.txt";
+            /// <summary>
+            /// -env-manif.xml
+            /// </summary>
+            public const string EnvManifestacao_XML = "-env-manif.xml";
+            /// <summary>
+            /// -env-manif.txt
+            /// </summary>
+            public const string EnvManifestacao_TXT = "-env-manif.txt";
+            /// <summary>
+            /// -env-canc.xml
+            /// </summary>
+            public const string EnvCancelamento_XML = "-env-canc.xml";
+            /// <summary>
+            /// -env-canc.txt
+            /// </summary>
+            public const string EnvCancelamento_TXT = "-env-canc.txt";
+
             #endregion
 
             #region Extensões da NFS-e
@@ -312,7 +345,7 @@ namespace NFe.Components
             /// <summary>
             /// -sit.xml
             /// </summary>
-            public const string Sit = "-sit.xml";
+            public const string Sit_XML = "-sit.xml";
             /// <summary>
             /// -sit.err
             /// </summary>
@@ -320,7 +353,7 @@ namespace NFe.Components
             /// <summary>
             /// -ret-cons-cad.xml
             /// </summary>
-            public const string ConsCad = "-ret-cons-cad.xml";
+            public const string ConsCad_XML = "-ret-cons-cad.xml";
             /// <summary>
             /// -ret-cons-cad.err
             /// </summary>
@@ -328,7 +361,7 @@ namespace NFe.Components
             /// <summary>
             /// -pro-rec.xml
             /// </summary>
-            public const string ProRec = "-pro-rec.xml";
+            public const string ProRec_XML = "-pro-rec.xml";
             /// <summary>
             /// -pro-rec.err
             /// </summary>
@@ -336,7 +369,7 @@ namespace NFe.Components
             /// <summary>
             /// -sta.xml
             /// </summary>
-            public const string Sta = "-sta.xml";
+            public const string Sta_XML = "-sta.xml";
             /// <summary>
             /// -sta.err
             /// </summary>
@@ -372,7 +405,7 @@ namespace NFe.Components
             /// <summary>
             /// -ret-dpec.xml
             /// </summary>
-            public const string retDPEC = "-ret-dpec.xml";
+            public const string retDPEC_XML = "-ret-dpec.xml";
             /// <summary>
             /// -ret-dpec.err
             /// </summary>
@@ -380,7 +413,7 @@ namespace NFe.Components
             /// <summary>
             /// -ret-cons-dpec.xml
             /// </summary>
-            public const string retConsDPEC = "-ret-cons-dpec.xml";
+            public const string retConsDPEC_XML = "-ret-cons-dpec.xml";
             /// <summary>
             /// -ret-cons-dpec.err
             /// </summary>
@@ -396,11 +429,43 @@ namespace NFe.Components
             /// <summary>
             /// -ret-env-cce.xml
             /// </summary>
-            public const string retEnvCCe = "-ret-env-cce.xml";
+            public const string retEnvCCe_XML = "-ret-env-cce.xml";
             /// <summary>
             /// -ret-env-cce.err
             /// </summary>
             public const string retEnvCCe_ERR = "-ret-env-cce.err";
+            /// <summary>
+            /// -ret-down-nfe.xml
+            /// </summary>
+            public const string retDownload_XML = "-ret-nfe-down.xml";
+            /// <summary>
+            /// -ret-down-nfe.err
+            /// </summary>
+            public const string retDownload_ERR = "-ret-nfe-down.err";
+            /// <summary>
+            /// -ret-cons-nfe-dest.xml
+            /// </summary>
+            public const string retConsNFeDest_XML = "-ret-cons-nfe-dest.xml";
+            /// <summary>
+            /// -ret-cons-nfe-dest.err
+            /// </summary>
+            public const string retConsNFeDest_ERR = "-ret-cons-nfe-dest.err";
+            /// <summary>
+            /// -ret-manif.xml
+            /// </summary>
+            public const string retManifestacao_XML = "-ret-manif.xml";
+            /// <summary>
+            /// -ret-manif.err
+            /// </summary>
+            public const string retManifestacao_ERR = "-ret-manif.err";
+            /// <summary>
+            /// -ret-canc.xml
+            /// </summary>
+            public const string retCancelamento_XML = "-ret-canc.xml";
+            /// <summary>
+            /// -ret-canc.err
+            /// </summary>
+            public const string retCancelamento_ERR = "-ret-canc.err";
             #endregion
 
             #region Extensões de retorno da NFS-e

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfe", "uninfe\uninfe.csproj", "{B6E8E809-6501-4D21-A94C-D751A3D57085}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unicte", "unicte\unicte.csproj", "{67232FEE-F583-4E59-AF5B-DBB613407627}"
@@ -33,9 +33,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFSe.Components", "NFSe.Components\NFSe.Components.csproj", "{E0E67E9B-E48B-4302-BD67-E09FA726FD6F}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs03.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = uninfe\\uninfe.csproj
+		SccProjectName1 = uninfe
+		SccLocalPath1 = uninfe
+		SccProjectUniqueName2 = GerarProcNFe\\GerarProcNFe.csproj
+		SccProjectName2 = GerarProcNFe
+		SccLocalPath2 = GerarProcNFe
+		SccProjectUniqueName3 = UniNFeLibrary\\UniNFeLibrary.csproj
+		SccProjectName3 = UniNFeLibrary
+		SccLocalPath3 = UniNFeLibrary
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,19 +113,8 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs03.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = uninfe\\uninfe.csproj
-		SccProjectName1 = uninfe
-		SccLocalPath1 = uninfe
-		SccProjectUniqueName2 = GerarProcNFe\\GerarProcNFe.csproj
-		SccProjectName2 = GerarProcNFe
-		SccLocalPath2 = GerarProcNFe
-		SccProjectUniqueName3 = UniNFeLibrary\\UniNFeLibrary.csproj
-		SccProjectName3 = UniNFeLibrary
-		SccLocalPath3 = UniNFeLibrary
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

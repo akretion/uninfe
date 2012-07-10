@@ -90,6 +90,8 @@ namespace NFe.Service
     /// <summary>
     /// danasa 21/10/2010
     /// </summary>
+    /// 
+    /*
     public class URLws
     {
         public string NFeRecepcao { get; set; }
@@ -154,7 +156,7 @@ namespace NFe.Service
             UF = uf;
         }
     }
-
+*/
     /// <summary>
     /// Classe utilizada para permitir o lock na hora de gravar os arquivos de fluxo da NFe
     /// </summary>
@@ -645,8 +647,13 @@ namespace NFe.Service
         public int nSeqEvento { get; set; }
         public string verEvento { get; set; }
         public string descEvento { get; set; }
+        // evento de carta de correcao
         public string xCorrecao { get; set; }
         public string xCondUso { get; set; }
+        // Cancelamento de NFe como Evento
+        public string nProt { get; set; }
+        /// Cancelamento de NFe como Evento e Manifestação do Destinatário
+        public string xJust { get; set; }
 
         public Evento()
         {
@@ -669,6 +676,28 @@ namespace NFe.Service
         }
     }
     #endregion
+
+    #region Classe com os dados do XML do registro de download de nfe
+    public class DadosenvDownload
+    {
+        public int tpAmb { get; set; }
+        public string chNFe { get; set; }
+        public string CNPJ { get; set; }
+    }
+    #endregion
+
+    #region Classe com os dados do XML do registro de consulta de nfe de destinatario
+    public class DadosConsultaNFeDest
+    {
+        public int tpAmb { get; set; }
+        public string xServ { get; set; }
+        public string CNPJ { get; set; }
+        public int indNFe { get; set; }
+        public int indEmi { get; set; }
+        public string ultNSU { get; set; }
+    }
+    #endregion
+
 
     #region Classe para receber os dados dos XML´s da NFS-e
 

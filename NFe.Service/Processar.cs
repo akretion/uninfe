@@ -173,10 +173,23 @@ namespace NFe.Service
                                 break;
 
                             case Servicos.EnviarCCe:
+                            case Servicos.EnviarManifestacao:
+                            case Servicos.EnviarEventoCancelamento:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
                                 EnviarEvento(new Task(), arquivo);
+                                break;
+
+                            case Servicos.ConsultaNFeDest:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                EnviarConsultarNFeDest(new Task(), arquivo);
+                                break;
+
+                            case Servicos.DownloadNFe:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                EnviarDownloadNFe(new Task(), arquivo);
                                 break;
                         }
                         #endregion
@@ -747,7 +760,7 @@ namespace NFe.Service
         }
         #endregion
 
-        #region EnviarCCe
+        #region EnviarEvento
         /// <summary>
         /// Executa as tarefas pertinentes ao envio do xml da CCe
         /// </summary>
@@ -756,6 +769,30 @@ namespace NFe.Service
         protected void EnviarEvento(Object nfe, string arquivo)
         {
             DirecionarArquivo(arquivo, nfe, "RecepcaoEvento");
+        }
+        #endregion
+
+        #region EnviarDownloadNFe
+        /// <summary>
+        /// Executa as tarefas pertinentes ao envio do xml de download das nfe recebidas
+        /// </summary>
+        /// <param name="nfe"></param>
+        /// <param name="arquivo"></param>
+        protected void EnviarDownloadNFe(Object nfe, string arquivo)
+        {
+            DirecionarArquivo(arquivo, nfe, "RecepcaoDownloadNFe");
+        }
+        #endregion
+
+        #region EnviarConsultarNFeDest
+        /// <summary>
+        /// Executa as tarefas pertinentes ao envio do xml de consulta das nfe recebidas
+        /// </summary>
+        /// <param name="nfe"></param>
+        /// <param name="arquivo"></param>
+        protected void EnviarConsultarNFeDest(Object nfe, string arquivo)
+        {
+            DirecionarArquivo(arquivo, nfe, "RecepcaoConsultaNFeDest");
         }
         #endregion
 
@@ -886,10 +923,10 @@ namespace NFe.Service
 
             if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
                 sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                              oAux.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf) + "-ret-cons-inf.txt";
+                              Functions/*oAux*/.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.txt";
             else
                 sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                              oAux.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf) + "-ret-cons-inf.xml";
+                              Functions/*oAux*/.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.xml";
 
             try
             {
@@ -1011,8 +1048,8 @@ namespace NFe.Service
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(oAux.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
                 Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
@@ -1116,7 +1153,7 @@ namespace NFe.Service
                 /// 
                 /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
                 /// 
-                oAux.GravarArqErroERP(oAux.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension, ccMessage);
+                oAux.GravarArqErroERP(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension, ccMessage);
             }
         }
         #endregion
@@ -1265,32 +1302,32 @@ namespace NFe.Service
             switch (servico)
             {
                 case Servicos.CancelarNFe:
-                    extRet = Propriedade.ExtEnvio.PedCan;
+                    extRet = Propriedade.ExtEnvio.PedCan_XML;
                     extRetERR = Propriedade.ExtRetorno.Can_ERR;
                     goto default;
 
                 case Servicos.InutilizarNumerosNFe:
-                    extRet = Propriedade.ExtEnvio.PedInu;
+                    extRet = Propriedade.ExtEnvio.PedInu_XML;
                     extRetERR = Propriedade.ExtRetorno.Inu_ERR;
                     goto default;
 
                 case Servicos.PedidoConsultaSituacaoNFe:
-                    extRet = Propriedade.ExtEnvio.PedSit;
+                    extRet = Propriedade.ExtEnvio.PedSit_XML;
                     extRetERR = Propriedade.ExtRetorno.Sit_ERR;
                     goto default;
 
                 case Servicos.PedidoConsultaStatusServicoNFe:
-                    extRet = Propriedade.ExtEnvio.PedSta;
+                    extRet = Propriedade.ExtEnvio.PedSta_XML;
                     extRetERR = Propriedade.ExtRetorno.Sta_ERR;
                     goto default;
 
                 case Servicos.PedidoSituacaoLoteNFe:
-                    extRet = Propriedade.ExtEnvio.PedRec;
+                    extRet = Propriedade.ExtEnvio.PedRec_XML;
                     extRetERR = Propriedade.ExtRetorno.ProRec_ERR;
                     goto default;
 
                 case Servicos.ConsultaCadastroContribuinte:
-                    extRet = Propriedade.ExtEnvio.ConsCad;
+                    extRet = Propriedade.ExtEnvio.ConsCad_XML;
                     extRetERR = Propriedade.ExtRetorno.ConsCad_ERR;
                     goto default;
 
@@ -1338,12 +1375,12 @@ namespace NFe.Service
                     break;
 
                 case Servicos.EnviarDPEC:
-                    extRet = Propriedade.ExtEnvio.EnvDPEC;
+                    extRet = Propriedade.ExtEnvio.EnvDPEC_XML;
                     extRetERR = Propriedade.ExtRetorno.retDPEC_ERR;
                     goto default;
 
                 case Servicos.ConsultarDPEC:
-                    extRet = Propriedade.ExtEnvio.ConsDPEC;
+                    extRet = Propriedade.ExtEnvio.ConsDPEC_XML;
                     extRetERR = Propriedade.ExtRetorno.retConsDPEC_ERR;
                     goto default;
 
@@ -1353,8 +1390,28 @@ namespace NFe.Service
                     goto default;
 
                 case Servicos.EnviarCCe:
-                    extRet = Propriedade.ExtEnvio.EnvCCe;
+                    extRet = Propriedade.ExtEnvio.EnvCCe_XML;
                     extRetERR = Propriedade.ExtRetorno.retEnvCCe_ERR;
+                    goto default;
+
+                case Servicos.EnviarManifestacao:
+                    extRet = Propriedade.ExtEnvio.EnvManifestacao_XML;
+                    extRetERR = Propriedade.ExtRetorno.retManifestacao_ERR;
+                    goto default;
+
+                case Servicos.EnviarEventoCancelamento:
+                    extRet = Propriedade.ExtEnvio.EnvCancelamento_XML;
+                    extRetERR = Propriedade.ExtRetorno.retCancelamento_ERR;
+                    goto default;
+
+                case Servicos.DownloadNFe:
+                    extRet = Propriedade.ExtEnvio.EnvDownload_XML;
+                    extRetERR = Propriedade.ExtRetorno.retDownload_ERR;
+                    goto default;
+
+                case Servicos.ConsultaNFeDest:
+                    extRet = Propriedade.ExtEnvio.ConsNFeDest_XML;
+                    extRetERR = Propriedade.ExtRetorno.retConsNFeDest_ERR;
                     goto default;
 
                 case Servicos.RecepcionarLoteRps:

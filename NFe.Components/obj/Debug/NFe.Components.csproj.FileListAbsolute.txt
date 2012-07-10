@@ -8,13 +8,3 @@ C:\projetos\uninfe\trunk\fontes\NFe.Components\bin\Debug\NFe.Components.pdb
 C:\projetos\uninfe\trunk\fontes\NFe.Components\obj\Debug\ResolveAssemblyReference.cache
 C:\projetos\uninfe\trunk\fontes\NFe.Components\obj\Debug\NFe.Components.dll
 C:\projetos\uninfe\trunk\fontes\NFe.Components\obj\Debug\NFe.Components.pdb
-C:\projetos.old\uninfe\fontes\uninfe\NFe.Components\bin\Debug\NFe.Components.dll
-C:\projetos.old\uninfe\fontes\uninfe\NFe.Components\bin\Debug\NFe.Components.pdb
-C:\projetos.old\uninfe\fontes\uninfe\NFe.Components\obj\Debug\ResolveAssemblyReference.cache
-C:\projetos.old\uninfe\fontes\uninfe\NFe.Components\obj\Debug\NFe.Components.dll
-C:\projetos.old\uninfe\fontes\uninfe\NFe.Components\obj\Debug\NFe.Components.pdb
-C:\projetos.old\uninfe\fontesrelease\uninfe\NFe.Components\bin\Debug\NFe.Components.dll
-C:\projetos.old\uninfe\fontesrelease\uninfe\NFe.Components\bin\Debug\NFe.Components.pdb
-C:\projetos.old\uninfe\fontesrelease\uninfe\NFe.Components\obj\Debug\ResolveAssemblyReference.cache
-C:\projetos.old\uninfe\fontesrelease\uninfe\NFe.Components\obj\Debug\NFe.Components.dll
-C:\projetos.old\uninfe\fontesrelease\uninfe\NFe.Components\obj\Debug\NFe.Components.pdb

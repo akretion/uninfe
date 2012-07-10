@@ -4,7 +4,11 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Reflection;
-using UniNFeLibrary;
+
+using NFe.Components;
+using NFe.Components.Info;
+using NFe.Settings;
+using NFe.Threadings;
 
 namespace UniNFeServico
 {
@@ -16,12 +20,11 @@ namespace UniNFeServico
         static void Main()
         {
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
-
-            InfoApp.oAssemblyEXE = Assembly.GetExecutingAssembly();
+            Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             System.Threading.Mutex oneMutex = null;
 
-            if (InfoApp.AppExecutando(false, ref oneMutex))//danasa 22/7/2011
+            if (Aplicacao.AppExecutando(false, ref oneMutex))//danasa 22/7/2011
             {
                 return;
             }

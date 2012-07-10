@@ -142,7 +142,7 @@ namespace NFe.Service
                 string ExtRet = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.PedCan;
+                    ExtRet = Propriedade.ExtEnvio.PedCan_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.PedCan_TXT;
 
@@ -290,7 +290,7 @@ namespace NFe.Service
                     }
 
                     //Gerar o retorno para o ERP
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedSit, Propriedade.ExtRetorno.Sit, this.vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedSit_XML, Propriedade.ExtRetorno.Sit_XML, this.vStrXmlRetorno);
                 }
                 else
                 {
@@ -305,7 +305,7 @@ namespace NFe.Service
                 string ExtRet = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.PedSit;
+                    ExtRet = Propriedade.ExtEnvio.PedSit_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.PedSit_TXT;
 
@@ -424,7 +424,7 @@ namespace NFe.Service
                 string ExtRet = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.ConsCad;
+                    ExtRet = Propriedade.ExtEnvio.ConsCad_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.ConsCad_TXT;
 
@@ -556,7 +556,7 @@ namespace NFe.Service
                 string ExtRet = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.PedInu;
+                    ExtRet = Propriedade.ExtEnvio.PedInu_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.PedInu_TXT;
 
@@ -604,7 +604,7 @@ namespace NFe.Service
             try
             {
                 string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
-                                 "*" + Propriedade.ExtEnvio.PedCan,
+                                 "*" + Propriedade.ExtEnvio.PedCan_XML,
                                  SearchOption.TopDirectoryOnly);
 
                 foreach (string file in files)
@@ -708,7 +708,7 @@ namespace NFe.Service
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
                             string strNomeArqProcCancNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                             PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                            oAux.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCan) + Propriedade.ExtRetorno.ProcCancNFe;
+                                                            Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCan_XML) + Propriedade.ExtRetorno.ProcCancNFe;
                             MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);//DateTime.Now);
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
@@ -782,7 +782,7 @@ namespace NFe.Service
                             //Move o arquivo de Distribuição para a pasta de enviados autorizados
                             string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                             PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                            oAux.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu/*"-ped-inu.xml"*/) + Propriedade.ExtRetorno.ProcInutNFe;// "-procInutNFe.xml";
+                                                            Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML/*"-ped-inu.xml"*/) + Propriedade.ExtRetorno.ProcInutNFe;// "-procInutNFe.xml";
                             MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
                         }
                         else
@@ -962,7 +962,7 @@ namespace NFe.Service
                                                 //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                                 var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                        oAux.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
+                                                                        Functions/*oAux*/.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
                                                 //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                                 oLerXml.Nfe(strArquivoNFe);
@@ -1235,7 +1235,7 @@ namespace NFe.Service
                                                 oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe);
                                                 var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                        oAux.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
+                                                                        Functions/*oAux*/.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
                                                 //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                                 oLerXml.Nfe(strArquivoNFe);
@@ -1476,7 +1476,7 @@ namespace NFe.Service
                                             //Definir o nome do arquivo -procNfe.xml                                               
                                             string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                        oAux.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
+                                                                        Functions/*oAux*/.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
                                             //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
                                             //Não tenho como fazer mais nada. Wandrey 08/10/2009
@@ -1867,7 +1867,7 @@ namespace NFe.Service
                                             //Definir o nome do arquivo -procNfe.xml                                               
                                             string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                        oAux.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
+                                                                        Functions/*oAux*/.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
                                             //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
                                             //Não tenho como fazer mais nada. Wandrey 08/10/2009
@@ -2285,14 +2285,14 @@ namespace NFe.Service
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 //Wandrey 18/06/2009
-                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedRec, Propriedade.ExtRetorno.ProRec, vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
                 #endregion
             }
             catch (Exception ex)
             {
                 try
                 {
-                    GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedRec, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_ERR, ex);
                 }
                 catch
                 {
@@ -2384,7 +2384,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedSta : Propriedade.ExtEnvio.PedSta_TXT;
+                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedSta_XML : Propriedade.ExtEnvio.PedSta_TXT;
 
                 try
                 {
@@ -2501,7 +2501,7 @@ namespace NFe.Service
 
                     //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                     //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC, Propriedade.ExtRetorno.retDPEC, vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno);
                 }
                 else
                 {
@@ -2511,7 +2511,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDPEC : Propriedade.ExtEnvio.EnvDPEC_TXT;
+                var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDPEC_XML : Propriedade.ExtEnvio.EnvDPEC_TXT;
 
                 try
                 {
@@ -2577,7 +2577,7 @@ namespace NFe.Service
 
                             //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
                             string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
-                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC, Propriedade.ExtRetorno.retDPEC, vStrXmlRetorno, nomePastaEnviado);
+                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                         }
                         else
                         {
@@ -2637,7 +2637,7 @@ namespace NFe.Service
 
                     //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                     //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC, Propriedade.ExtRetorno.retConsDPEC, vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno);
                 }
                 else
                 {
@@ -2647,7 +2647,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.ConsDPEC : Propriedade.ExtEnvio.ConsDPEC_TXT;
+                var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.ConsDPEC_XML : Propriedade.ExtEnvio.ConsDPEC_TXT;
 
                 try
                 {
@@ -2702,7 +2702,7 @@ namespace NFe.Service
                             DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
                             //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + oAux.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC) + Propriedade.ExtEnvio.EnvDPEC;
+                            string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + Functions/*oAux*/.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
                             if (File.Exists(arqEnvDpec))
                             {
                                 MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
@@ -2710,7 +2710,7 @@ namespace NFe.Service
 
                             //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
                             string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
-                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC, Propriedade.ExtRetorno.retConsDPEC, vStrXmlRetorno, nomePastaEnviado);
+                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                         }
                         else
                         {
@@ -2739,7 +2739,14 @@ namespace NFe.Service
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.EnviarCCe;
+            if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_TXT))
+                Servico = Servicos.EnviarCCe;
+            else
+                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_TXT))
+                    Servico = Servicos.EnviarManifestacao;
+                else
+                    if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT))
+                        Servico = Servicos.EnviarEventoCancelamento;
 
             try
             {
@@ -2749,10 +2756,15 @@ namespace NFe.Service
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
+                    int cOrgao = oLer.oDadosEnvEvento.eventos[0].cOrgao;
+                    if (cOrgao == 90 || cOrgao == 91)
+                        cOrgao = Convert.ToInt32(oLer.oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));//<<< 7/2012
+
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarCCe,
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
+                        Servico,
                         emp,
-                        oLer.oDadosEnvEvento.eventos[0].cOrgao,
+                        cOrgao,
                         oLer.oDadosEnvEvento.eventos[0].tpAmb,
                         1);
 
@@ -2769,18 +2781,45 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS());
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    //wsProxy.SetProp(oCabecMsg, "cUF", Empresa.Configuracoes[emp].UFCod/*oLer.oDadosEnvEvento.eventos[0].cOrgao*/.ToString());
-                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosEnvEvento.eventos[0].cOrgao.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvCCe);
+                    wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
+                    switch (Servico)
+                    {
+                        case Servicos.EnviarCCe:
+                            wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvCCe);
+                            break;
+                        case Servicos.EnviarEventoCancelamento:
+                            wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvCancelamento);
+                            break;
+                        default:
+                            wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvManifestacao);
+                            break;
+                    }
 
                     //Criar objeto da classe de assinatura digital
                     AssinaturaDigital oAD = new AssinaturaDigital();
 
                     //Assinar o XML
-                    oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oLer.oDadosEnvEvento.eventos[0].cOrgao));
+                    oAD.Assinar(NomeArquivoXML, emp, cOrgao);//Convert.ToInt32(oLer.oDadosEnvEvento.eventos[0].cOrgao));
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, "nfeRecepcaoEvento", oCabecMsg, this, Propriedade.ExtEnvio.EnvCCe.Replace(".xml", ""), Propriedade.ExtRetorno.retEnvCCe.Replace(".xml", ""));
+                    string xmlExtEnvio = string.Empty;
+                    string xmlExtRetorno = string.Empty;
+                    switch (Servico)
+                    {
+                        case Servicos.EnviarCCe:
+                            xmlExtEnvio = Propriedade.ExtEnvio.EnvCCe_XML.Replace(".xml", "");
+                            xmlExtRetorno = Propriedade.ExtRetorno.retEnvCCe_XML.Replace(".xml", "");
+                            break;
+                        case Servicos.EnviarEventoCancelamento:
+                            xmlExtEnvio = Propriedade.ExtEnvio.EnvCancelamento_XML.Replace(".xml", "");
+                            xmlExtRetorno = Propriedade.ExtRetorno.retCancelamento_XML.Replace(".xml", "");
+                            break;
+                        default:
+                            xmlExtEnvio = Propriedade.ExtEnvio.EnvManifestacao_XML.Replace(".xml", "");
+                            xmlExtRetorno = Propriedade.ExtRetorno.retManifestacao_XML.Replace(".xml", "");
+                            break;
+                    }
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, "nfeRecepcaoEvento", oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
 
                     //Ler o retorno
                     LerRetornoEvento(emp);
@@ -2788,16 +2827,51 @@ namespace NFe.Service
                 else
                 {
                     // Gerar o XML de eventos a partir do TXT gerado pelo ERP
-                    oGerarXML.EnvioEvento(Path.GetFileNameWithoutExtension(NomeArquivoXML) + Propriedade.ExtEnvio.EnvCCe, oLer.oDadosEnvEvento);
+                    string xmlFileExt = string.Empty;
+                    string xmlFileExtTXT = string.Empty;
+                    switch (Servico)
+                    {
+                        case Servicos.EnviarCCe:
+                            xmlFileExt = Propriedade.ExtEnvio.EnvCCe_XML;
+                            xmlFileExtTXT = Propriedade.ExtEnvio.EnvCCe_TXT;
+                            break;
+                        case Servicos.EnviarEventoCancelamento:
+                            xmlFileExt = Propriedade.ExtEnvio.EnvCancelamento_XML;
+                            xmlFileExtTXT = Propriedade.ExtEnvio.EnvCancelamento_TXT;
+                            break;
+                        default:
+                            xmlFileExt = Propriedade.ExtEnvio.EnvManifestacao_XML;
+                            xmlFileExtTXT = Propriedade.ExtEnvio.EnvManifestacao_TXT;
+                            break;
+                    }
+                    oGerarXML.EnvioEvento(Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt, oLer.oDadosEnvEvento);
                 }
             }
             catch (Exception ex)
             {
                 try
                 {
-                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCCe : Propriedade.ExtEnvio.EnvCCe_TXT;
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retEnvCCe_ERR, ex);
+                    string ExtRet = string.Empty;
+                    string ExtRetorno = string.Empty;
+
+                    switch (Servico)
+                    {
+                        case Servicos.EnviarCCe:
+                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCCe_XML : Propriedade.ExtEnvio.EnvCCe_TXT;
+                            ExtRetorno = Propriedade.ExtRetorno.retEnvCCe_ERR;
+                            break;
+                        case Servicos.EnviarEventoCancelamento:
+                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCancelamento_XML : Propriedade.ExtEnvio.EnvCancelamento_TXT;
+                            ExtRetorno = Propriedade.ExtRetorno.retCancelamento_ERR;
+                            break;
+                        default:
+                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvManifestacao_XML : Propriedade.ExtEnvio.EnvManifestacao_TXT;
+                            ExtRetorno = Propriedade.ExtRetorno.retManifestacao_ERR;
+                            break;
+                    }
+                    if (ExtRetorno != string.Empty)
+                        GravarArqErroServico(NomeArquivoXML, ExtRet, ExtRetorno, ex);
                 }
                 catch
                 {
@@ -2919,7 +2993,7 @@ namespace NFe.Service
                                                     dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
 
                                                 //Gerar o arquivo XML de distribuição da CCe
-                                                oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+                                                oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
 
                                                 break;
                                             }
@@ -2937,6 +3011,177 @@ namespace NFe.Service
             }
         }
 
+        #endregion
+
+        #region RecepcaoManifestacao
+        public override void RecepcaoManifestacao()
+        {
+        }
+        protected override void LerRetornoManifestacao(int emp)
+        {
+            LerRetornoEvento(emp);
+        }
+        #endregion
+
+        #region RecepcaoConsultaNFeDest
+        public override void RecepcaoConsultaNFeDest()
+        {
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            Servico = Servicos.ConsultaNFeDest;
+
+            try
+            {
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.EnvConsultaNFeDest(emp, NomeArquivoXML);
+
+                if (vXmlNfeDadosMsgEhXML)
+                {
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
+                        Servico,
+                        emp,
+                        Empresa.Configuracoes[emp].UFCod,
+                        oLer.oDadosConsultaNFeDest.tpAmb,
+                        1);
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oDownloadEvento = wsProxy.CriarObjeto("nfeConsultaNFDest");
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS());
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", Empresa.Configuracoes[emp].UFCod);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest);
+
+                    //Criar objeto da classe de assinatura digital
+                    //AssinaturaDigital oAD = new AssinaturaDigital();
+
+                    //Assinar o XML
+                    //oAD.Assinar(NomeArquivoXML, emp);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oDownloadEvento, "NFeConsultaDest", oCabecMsg, this, Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""), Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
+
+                    //Ler o retorno
+                    this.LerRetornoConsultaNFeDest(emp);
+                }
+                else
+                {
+                    // Gerar o XML de eventos a partir do TXT gerado pelo ERP
+                    oGerarXML.EnvioConsultaNFeDest(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsNFeDest_TXT) + Propriedade.ExtEnvio.ConsNFeDest_XML, oLer.oDadosConsultaNFeDest);
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.ConsNFeDest_XML : Propriedade.ExtEnvio.ConsNFeDest_TXT;
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retConsNFeDest_ERR, ex);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    Functions.DeletarArquivo(NomeArquivoXML);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de evento, infelizmente
+                    //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 09/03/2010
+                }
+            }
+        }
+        protected override void LerRetornoConsultaNFeDest(int emp)
+        {
+        }
+        #endregion
+
+        #region RecepcaoDownloadNFe
+        public override void RecepcaoDownloadNFe()
+        {
+            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            Servico = Servicos.DownloadNFe;
+            try
+            {
+                //Ler o XML para pegar parâmetros de envio
+                LerXML oLer = new LerXML();
+                oLer.EnvDownloadNFe(emp, NomeArquivoXML);
+
+                if (vXmlNfeDadosMsgEhXML)
+                {
+                    //Definir o objeto do WebService
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
+                        Servico,
+                        emp,
+                        Convert.ToInt32(oLer.oDadosenvDownload.chNFe.Substring(0, 2)),
+                        oLer.oDadosenvDownload.tpAmb,
+                        1);
+
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oDownloadEvento = wsProxy.CriarObjeto("NfeDownloadNF");
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS());
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosenvDownload.chNFe.Substring(0, 2));
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDownload);
+
+                    //Criar objeto da classe de assinatura digital
+                    //AssinaturaDigital oAD = new AssinaturaDigital();
+
+                    //Assinar o XML
+                    //oAD.Assinar(NomeArquivoXML, emp);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF", oCabecMsg, this, Propriedade.ExtEnvio.EnvDownload_XML.Replace(".xml", ""), Propriedade.ExtRetorno.retDownload_XML.Replace(".xml", ""));
+
+                    //Ler o retorno
+                    LerRetornoDownloadNFe(emp);
+                }
+                else
+                {
+                    // Gerar o XML de eventos a partir do TXT gerado pelo ERP
+                    oGerarXML.EnvioDownloadNFe(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvDownload_TXT) + Propriedade.ExtEnvio.EnvDownload_XML, oLer.oDadosenvDownload);
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDownload_XML : Propriedade.ExtEnvio.EnvDownload_TXT;
+                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                    GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retDownload_ERR, ex);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                    //Wandrey 09/03/2010
+                }
+            }
+            finally
+            {
+                try
+                {
+                    Functions.DeletarArquivo(NomeArquivoXML);
+                }
+                catch
+                {
+                    //Se falhou algo na hora de deletar o XML de evento, infelizmente
+                    //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
+                    //Wandrey 09/03/2010
+                }
+            }
+        }
+        protected override void LerRetornoDownloadNFe(int emp)
+        {
+        }
         #endregion
 
         #region Métodos dos serviços da NFS-e (Nota Fiscal de Serviços Eletrônica)

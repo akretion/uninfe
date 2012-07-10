@@ -70,13 +70,13 @@ namespace NFe.Service
                                     //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
                                     if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
                                     {
-                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oAux.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtEnvio.Nfe);
+                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, Functions.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtEnvio.Nfe);
                                     }
 
                                     //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
                                     string vArquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
 
-                                    oGerarXml.Consulta(vArquivoSit + Propriedade.ExtEnvio.PedSit,
+                                    oGerarXml.Consulta(vArquivoSit + Propriedade.ExtEnvio.PedSit_XML,
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpAmb),
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpEmis),
                                         oLerXml.oDadosNfe.chavenfe.Substring(3));
@@ -87,7 +87,7 @@ namespace NFe.Service
                                     oAux.MoveArqErro(file);
 
                                     //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
-                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oAux.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe);
+                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe);
 
                                     //Tirar a nota fiscal do fluxo
                                     fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);

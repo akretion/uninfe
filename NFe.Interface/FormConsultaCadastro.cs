@@ -264,14 +264,14 @@ namespace NFe.Interface
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-            Auxiliar oAux = new Auxiliar();
+            //Auxiliar oAux = new Auxiliar();
 
             string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
-                      oAux.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta) +
+                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.xml";
 
             string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
-                      oAux.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta) +
+                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.err";
 
             string result = string.Empty;
@@ -334,11 +334,11 @@ namespace NFe.Interface
             GerarXML oGerar = new GerarXML(Emp);
 
             string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
-                       oAux.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad) +
+                       Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                        "-ret-cons-cad.xml";
 
             string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
-                      oAux.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad) +
+                      Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                       "-ret-cons-cad.err";
 
             object vRetorno = null;

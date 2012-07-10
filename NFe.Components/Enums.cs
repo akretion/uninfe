@@ -103,6 +103,22 @@ namespace NFe.Components
         /// </summary>
         EnviarCCe,
         /// <summary>
+        /// Enviar um evento de cancelamento
+        /// </summary>
+        EnviarEventoCancelamento,
+        /// <summary>
+        /// Enviar solicitacao de download de nfe
+        /// </summary>
+        DownloadNFe,
+        /// <summary>
+        /// Enviar uma consulta de nfe de destinatario
+        /// </summary>
+        ConsultaNFeDest,
+        /// <summary>
+        /// Enviar um evento de manifestacao
+        /// </summary>
+        EnviarManifestacao,
+        /// <summary>
         /// Nulo / Nenhum serviço em execução
         /// </summary>        
         Nulo,

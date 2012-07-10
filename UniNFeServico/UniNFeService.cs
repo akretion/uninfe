@@ -7,10 +7,9 @@ using System.ServiceProcess;
 using System.Text;
 using System.IO;
 using System.Threading;
-using UniNFeLibrary.Enums;
-using UniNFeLibrary;
-using ControlarThread;
-using uninfeT;
+using NFe.Components;
+using NFe.Settings;
+using NFe.Threadings;
 
 namespace UniNFeServico
 {
@@ -28,9 +27,8 @@ namespace UniNFeServico
         {
             base.OnStart(args);
 
-            StartupPath = InfoApp.PastaExecutavel();// this.GetPhysicalPath("");
-            //WriteLog("Serviço iniciado na pasta: " + StartupPath);
-            WriteLog("Serviço iniciado na pasta: " + InfoApp.PastaExecutavel());
+            StartupPath = NFe.Components.Propriedade.PastaExecutavel;
+            WriteLog("Serviço iniciado na pasta: " + NFe.Components.Propriedade.PastaExecutavel);
             this.iniciarServicosUniNFe();
         }
 
@@ -67,7 +65,9 @@ namespace UniNFeServico
         {
             #region Definir valores propriedades de configuração
             //Carregar as configurações antes de executar os serviços do UNINFE
-            ConfiguracaoApp.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            ConfiguracaoApp.StartVersoes();
+            /*
             ConfiguracaoApp.CarregarDados();
             ConfiguracaoApp.VersaoXMLCanc = "2.00";
             ConfiguracaoApp.VersaoXMLConsCad = "2.00";
@@ -80,10 +80,13 @@ namespace UniNFeServico
             ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
             ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
             ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
-            ConfiguracaoApp.nsURI = "http://www.portalfiscal.inf.br/nfe";
+            Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
             SchemaXML.CriarListaIDXML();
+             */ 
             #endregion
 
+            // Executar as conversões de atualizações de versão quando tiver
+            Auxiliar.ConversaoNovaVersao(string.Empty);
             Empresa.CarregaConfiguracao();
 
             //Executar o monitoramento de pastas das empresas cadastradas
@@ -91,6 +94,9 @@ namespace UniNFeServico
 
             threads.Clear();
 
+            ThreadService.Start();
+
+#if nao
             //Executa a thread que faz a limpeza dos arquivos temporários
             Thread t = new Thread(new ServicoUniNFe().LimpezaTemporario);
             t.Start();
@@ -106,8 +112,9 @@ namespace UniNFeServico
             Thread t3 = new Thread(srv.GerarXMLPedRec);
             t3.Start(new ServicoNFe());
             threads.Add(t3);
+#endif
 
-            new uninfeT.ThreadControlEvents();
+            new ThreadControlEvents();
         }
 
         private void pararServicosUniNFe()

@@ -57,7 +57,7 @@ namespace NFe.Service
             try
             {
                 // Exclui o Arquivo de Erro
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
                 // Validar o Arquivo XML
                 ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
@@ -239,7 +239,7 @@ namespace NFe.Service
             try
             {
                 // Exclui o Arquivo de Erro
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
                 // Validar o Arquivo XML
                 //string cResultadoValidacao = oAux.ValidarArqXML(XmlNfeDadosMsg);
@@ -376,7 +376,7 @@ namespace NFe.Service
             try
             {
                 // Exclui o Arquivo de Erro
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + oAux.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
                 // Validar o Arquivo XML
                 ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);

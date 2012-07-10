@@ -69,8 +69,12 @@ namespace uninfe
             ///
             /// danasa 9-2009
             /// 
+            try
+            {
             XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
             iniFile.LoadForm(this, "");
+            }
+            catch { }   // para evitar que para alguns que derrubam o uninfe quando atualizam
 
             //Trazer minimizado e no systray
             notifyIcon1.Visible = true;
@@ -83,6 +87,9 @@ namespace uninfe
             #region Definir valores propriedades de configuração
             //Carregar as configurações antes de executar os serviços do UNINFE
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            ConfiguracaoApp.StartVersoes();
+
+            /*  tirei pq o projeto UniNfeServico tambem faz a mesma coisa e para nao esquecer de atualizar em dois lugares...
             ConfiguracaoApp.CarregarDados();
             ConfiguracaoApp.CarregarDadosSobre();
             ConfiguracaoApp.VersaoXMLCanc = "2.00";
@@ -98,6 +105,7 @@ namespace uninfe
             ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
             Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
             SchemaXML.CriarListaIDXML();
+            */ 
             #endregion
 
             if (!this.servicoInstaladoErodando)     //danasa 12/8/2011

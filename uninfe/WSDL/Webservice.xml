@@ -11,6 +11,10 @@
       <NFeStatusServico>https://homnfe.sefaz.am.gov.br/services2/services/NfeStatusServico2?wsdl</NFeStatusServico>
       <NFeConsultaCadastro>https://homnfe.sefaz.am.gov.br/services2/services/cadconsultacadastro2?wsdl</NFeConsultaCadastro>
       <NFeCCe></NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </URLHomologacao>
     <URLProducao>
       <NFeRecepcao>https://nfe.sefaz.am.gov.br/services2/services/NfeRecepcao2?wsdl</NFeRecepcao>
@@ -21,6 +25,10 @@
       <NFeStatusServico>https://nfe.sefaz.am.gov.br/services2/services/NfeStatusServico2?wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeCCe></NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HAMNfeRecepcao2.wsdl</NFeRecepcao>
@@ -31,6 +39,10 @@
       <NFeStatusServico>wsdl\homologacao\HAMNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\HAMCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\HAMRecepcaoEvento.wsdl</NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PAMNfeRecepcao2.wsdl</NFeRecepcao>
@@ -41,6 +53,10 @@
       <NFeStatusServico>wsdl\producao\PAMNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\PAMCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\PAMRecepcaoEvento.wsdl</NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </LocalProducao>
   </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA">
@@ -1191,6 +1207,11 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeCCe></NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </URLHomologacao>
     <URLProducao>
       <NFeRecepcao></NFeRecepcao>
@@ -1200,6 +1221,11 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeCCe></NFeCCe>
+      <NFeDownload></NFeDownload>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeManifestacao></NFeManifestacao>
+      <NFeCancelamento1></NFeCancelamento1>
     </URLProducao>
   </Estado>
 </Webservice>

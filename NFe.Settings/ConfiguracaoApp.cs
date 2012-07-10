@@ -61,6 +61,10 @@ namespace NFe.Settings
         public static string VersaoXMLEnvDPEC { get; set; }
         public static string VersaoXMLConsDPEC { get; set; }
         public static string VersaoXMLEnvCCe { get; set; }
+        public static string VersaoXMLEnvCancelamento { get; set; }
+        public static string VersaoXMLEnvDownload { get; set; }
+        public static string VersaoXMLEnvConsultaNFeDest { get; set; }
+        public static string VersaoXMLEnvManifestacao { get; set; }
         #endregion
 
         #region Propriedades para controle de servidor proxy
@@ -103,6 +107,32 @@ namespace NFe.Settings
         #endregion
 
         #region Métodos gerais
+
+        #region StartVersoes
+        public static void StartVersoes()
+        {
+            ConfiguracaoApp.CarregarDados();
+            if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
+                ConfiguracaoApp.CarregarDadosSobre();
+            ConfiguracaoApp.VersaoXMLCanc = "2.00";
+            ConfiguracaoApp.VersaoXMLConsCad = "2.00";
+            ConfiguracaoApp.VersaoXMLInut = "2.00";
+            ConfiguracaoApp.VersaoXMLNFe = "2.00";
+            ConfiguracaoApp.VersaoXMLPedRec = "2.00";
+            ConfiguracaoApp.VersaoXMLPedSit = "2.00";   //<<<danasa 6-2011
+            ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
+            ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
+            ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
+            ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
+            ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
+            ConfiguracaoApp.VersaoXMLEnvCancelamento = "1.00";
+            ConfiguracaoApp.VersaoXMLEnvDownload = "1.00";
+            ConfiguracaoApp.VersaoXMLEnvManifestacao = "1.00";
+            ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest = "1.01";
+            Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
+            SchemaXML.CriarListaIDXML();
+        }
+        #endregion
 
         #region TemCCe()
         /// <summary>
@@ -211,7 +241,8 @@ namespace NFe.Settings
                     ///
                     /// danasa 8-2009
                     /// 
-                    MessageBox.Show(ex.Message);
+                    if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
+                        MessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -451,6 +482,26 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
                             break;
 
+                        case Servicos.ConsultaNFeDest:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaNFeDest : list.LocalProducao.NFeConsultaNFeDest);
+                            break;
+
+                        case Servicos.DownloadNFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeDownload : list.LocalProducao.NFeDownload);
+                            break;
+
+                        case Servicos.EnviarEventoCancelamento:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCancelamento1 : list.LocalProducao.NFeCancelamento1);
+                            if (string.IsNullOrEmpty(WSDL))
+                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
+                            break;
+
+                        case Servicos.EnviarManifestacao:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifestacao : list.LocalProducao.NFeManifestacao);
+                            if (string.IsNullOrEmpty(WSDL))
+                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
+                            break;
+
                         case Servicos.RecepcionarLoteRps:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcionarLoteRps : list.LocalProducao.RecepcionarLoteRps);
                             break;
@@ -492,14 +543,35 @@ namespace NFe.Settings
                     case Propriedade.TipoAmbiente.taHomologacao:
                         Ambiente = "homologação";
                         break;
+                }
+                string errorStr = "O Estado " + ufNome + " ainda não dispõe deste serviço no layout {0} para o ambiente de " + Ambiente + ".";
+                switch (servico)
+                {
+                    case Servicos.EnviarCCe:
+                    case Servicos.EnviarEventoCancelamento:
+                    case Servicos.EnviarManifestacao:
+                        throw new Exception(string.Format(errorStr, "de envio de eventos"));
+
+                    case Servicos.ConsultaNFeDest:
+                        throw new Exception(string.Format(errorStr, "de envio de consulta a nfe do destinatário"));
+
+                    case Servicos.DownloadNFe:
+                        throw new Exception(string.Format(errorStr, "de envio de download de nfe do destinatário"));
 
                     default:
-                        break;
+                        switch (servico)
+                        {
+                            case Servicos.CancelarNfse:
+                            case Servicos.ConsultarLoteRps:
+                            case Servicos.ConsultarNfse:
+                            case Servicos.ConsultarNfsePorRps:
+                            case Servicos.ConsultarSituacaoLoteRps:
+                            case Servicos.RecepcionarLoteRps:
+                                throw new Exception(string.Format(errorStr, "da NFs-e"));
+                        }
+                        throw new Exception(string.Format(errorStr, "4.0.1 da NF-e"));
                 }
-
-                throw new Exception("O Estado " + ufNome + " ainda não dispõe deste serviço no layout 4.0.1 da NF-e para o ambiente de " + Ambiente + ".");
             }
-
             return WSDL;
         }
         #endregion
