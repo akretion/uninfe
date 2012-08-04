@@ -51,55 +51,55 @@ namespace NFe.Service
         #region Métodos de execução dos serviços da NFE
 
         #region StatusServico()
-        public abstract void StatusServico();
+        //public abstract void StatusServico();
         #endregion
 
         #region Recepcao()
-        public abstract void Recepcao();
+        //public abstract void Recepcao();
         #endregion
 
         #region RetRecepcao()
-        public abstract void RetRecepcao();
+        //public abstract void RetRecepcao();
         #endregion
 
         #region Consulta()
-        public abstract void Consulta();
+        //public abstract void Consulta();
         #endregion
 
         #region Cancelamento()
-        public abstract void Cancelamento();
+        //public abstract void Cancelamento();
         #endregion
 
         #region Inutilizacao()
-        public abstract void Inutilizacao();
+        //public abstract void Inutilizacao();
         #endregion
 
         #region ConsultaCadastro()
-        public abstract void ConsultaCadastro();
+        //public abstract void ConsultaCadastro();
         #endregion
 
         #region RecepcaoDPEC()
-        public abstract void RecepcaoDPEC();
+        //public abstract void RecepcaoDPEC();
         #endregion
 
         #region ConsultaDPEC()
-        public abstract void ConsultaDPEC();
+        //public abstract void ConsultaDPEC();
         #endregion
 
         #region RecepcaoEvento()
-        public abstract void RecepcaoEvento();
+        //public abstract void RecepcaoEvento();
         #endregion
 
         #region RecepcaoManifestacao()
-        public abstract void RecepcaoManifestacao();
+        //public abstract void RecepcaoManifestacao();
         #endregion
 
         #region RecepcaoConsultaNFeDest()
-        public abstract void RecepcaoConsultaNFeDest();
+        //public abstract void RecepcaoConsultaNFeDest();
         #endregion
 
         #region RecepcaoDownloadNFe()
-        public abstract void RecepcaoDownloadNFe();
+        //public abstract void RecepcaoDownloadNFe();
         #endregion
 
         #endregion
@@ -252,7 +252,7 @@ namespace NFe.Service
                             }
                             else
                             {
-                                oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions/*oAux*/.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                                oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
 
                                 throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
                                     NomeArquivoXML);
@@ -272,7 +272,7 @@ namespace NFe.Service
                     {
                         try
                         {
-                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions/*oAux*/.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                            oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
                         }
                         catch (Exception ex)
                         {
@@ -532,15 +532,15 @@ namespace NFe.Service
         #endregion
 
         #region LerRetornoLoteNFe()
-        protected abstract void LerRetornoLoteNFe();
+        //protected abstract void LerRetornoLoteNFe();
         #endregion
 
         #region LerRetornoLoteCTe()
-        protected abstract void LerRetornoLoteCTe();
+        //protected abstract void LerRetornoLoteCTe();
         #endregion
 
         #region LerRetornoSitNFe()
-        protected abstract void LerRetornoSitNFe(string ChaveNFe);
+        //protected abstract void LerRetornoSitNFe(string ChaveNFe);
         #endregion
 
         #region LerRetornoSitCTe()
@@ -548,31 +548,31 @@ namespace NFe.Service
         #endregion
 
         #region LerRetornoCanc()
-        protected abstract void LerRetornoCanc(string xmlCanc);
+        //protected abstract void LerRetornoCanc(string xmlCanc);
         #endregion
 
         #region LerRetDPEC()
-        protected abstract void LerRetDPEC();
+        //protected abstract void LerRetDPEC();
         #endregion
 
         #region LerRetornoInut()
-        protected abstract void LerRetornoInut();
+        //protected abstract void LerRetornoInut();
         #endregion
 
         #region LerRetornoEvento()
-        protected abstract void LerRetornoEvento(int emp);
+        //protected abstract void LerRetornoEvento(int emp);
         #endregion
 
         #region LerRetornoManifestacao()
-        protected abstract void LerRetornoManifestacao(int emp);
+        //protected abstract void LerRetornoManifestacao(int emp);
         #endregion
 
         #region LerRetornoConsultaNFeDest()
-        protected abstract void LerRetornoConsultaNFeDest(int emp);
+        //protected abstract void LerRetornoConsultaNFeDest(int emp);
         #endregion
 
         #region LerRetornoDownloadNFe()
-        protected abstract void LerRetornoDownloadNFe(int emp);
+        //protected abstract void LerRetornoDownloadNFe(int emp);
         #endregion
 
         #endregion

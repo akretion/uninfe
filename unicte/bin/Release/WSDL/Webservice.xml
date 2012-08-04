@@ -2,24 +2,6 @@
 <Webservice>
   <!--Estados com webservices próprios-->
   <Estado ID="35" Nome="São Paulo" UF="SP">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSPCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSPCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -40,24 +22,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/CteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/CteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/CteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/CteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -78,24 +42,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="31" Nome="Minas Gerais" UF="MG">
-    <URLHomologacao>
-      <NFeRecepcao>https://hcte.fazenda.mg.gov.br/cte/services/CteRecepcao?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://hcte.fazenda.mg.gov.br/cte/services/CteRetRecepcao?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://hcte.fazenda.mg.gov.br/cte/services/CteCancelamento?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://hcte.fazenda.mg.gov.br/cte/services/CteInutilizacao?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://hcte.fazenda.mg.gov.br/cte/services/CteConsulta?wsdl</NFeConsulta>
-      <NFeStatusServico>https://hcte.fazenda.mg.gov.br/cte/services/CteStatusServico?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.fazenda.mg.gov.br/cte/services/CteRecepcao?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.fazenda.mg.gov.br/cte/services/CteRetRecepcao?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.fazenda.mg.gov.br/cte/services/CteCancelamento?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.fazenda.mg.gov.br/cte/services/CteInutilizacao?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.fazenda.mg.gov.br/cte/services/CteConsulta?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.fazenda.mg.gov.br/cte/services/CteStatusServico?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HMGCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HMGCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -116,24 +62,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.ms.gov.br/cteWEB/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.ms.gov.br/cteWEB/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.ms.gov.br/cteWEB/CteCancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.ms.gov.br/cteWEB/CteInutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.ms.gov.br/cteWEB/CteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.ms.gov.br/cteWEB/CteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>https://homologacao.cte.ms.gov.br/cteWEB/CadConsultaCadastro.asmx?wsdl</NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao></NFeRecepcao>
-      <NFeRetRecepcao></NFeRetRecepcao>
-      <NFeCancelamento></NFeCancelamento>
-      <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta></NFeConsulta>
-      <NFeStatusServico></NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HMSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HMSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -154,24 +82,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="51" Nome="Mato Grosso" UF="MT">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.sefaz.mt.gov.br/ctews/services/CteRecepcao?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.sefaz.mt.gov.br/ctews/services/CteRetRecepcao?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>	https://homologacao.sefaz.mt.gov.br/ctews/services/CteCancelamento?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.sefaz.mt.gov.br/ctews/services/CteInutilizacao?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.sefaz.mt.gov.br/ctews/services/CteConsulta?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.sefaz.mt.gov.br/ctews/services/CteStatusServico?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.mt.gov.br/ctews/services/CteRecepcao?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.mt.gov.br/ctews/services/CteRetRecepcao?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.mt.gov.br/ctews/services/CteCancelamento?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.mt.gov.br/ctews/services/CteInutilizacao?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.mt.gov.br/ctews/services/CteConsulta?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.mt.gov.br/ctews/services/CteStatusServico?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HMTCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HMTCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -193,24 +103,6 @@
   </Estado>
   <!--Estados que utilizam os webservices do Sistema Virtual do Rio Grande do Sul (SVRS)-->
   <Estado ID="15" Nome="Pará" UF="PA">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -231,24 +123,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="22" Nome="Piaui" UF="PI">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -269,24 +143,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="41" Nome="Paraná" UF="PR">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -307,24 +163,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="32" Nome="Espírito Santo" UF="ES">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -345,24 +183,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="13" Nome="Amazonas" UF="AM">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -383,24 +203,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -421,24 +223,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="23" Nome="Ceará" UF="CE">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -459,24 +243,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="52" Nome="Goiás" UF="GO">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -497,24 +263,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="21" Nome="Maranhão" UF="MA">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -535,24 +283,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="33" Nome="Rio de Janeiro" UF="RJ">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -573,24 +303,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="24" Nome="Rio Grande do Norte" UF="RN">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -611,24 +323,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="11" Nome="Rondonia" UF="RO">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -649,24 +343,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="42" Nome="Santa Catarina" UF="SC">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -687,24 +363,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="28" Nome="Sergipe" UF="SE">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -725,24 +383,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="17" Nome="Tocantins" UF="TO">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -763,24 +403,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="25" Nome="Paraiba" UF="PB">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://cte.sefaz.rs.gov.br/ws/cterecepcao/CteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://cte.sefaz.rs.gov.br/ws/cteretrecepcao/CteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://cte.sefaz.rs.gov.br/ws/ctecancelamento/ctecancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -802,24 +424,6 @@
   </Estado>
   <!-- Estados que utilizam o ambiente de São Paulo -->
   <Estado ID="26" Nome="Pernambuco" UF="PE">
-    <URLHomologacao>
-      <NFeRecepcao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
-      <NFeRecepcao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRecepcao.asmx?wsdl</NFeRecepcao>
-      <NFeRetRecepcao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteRetRecepcao.asmx?wsdl</NFeRetRecepcao>
-      <NFeCancelamento>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteCancelamento.asmx?wsdl</NFeCancelamento>
-      <NFeInutilizacao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx?wsdl</NFeInutilizacao>
-      <NFeConsulta>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteConsulta.asmx?wsdl</NFeConsulta>
-      <NFeStatusServico>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSPCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSPCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -841,7 +445,7 @@
   </Estado>
   <!--SCAN - Sistema de contingência do ambiente nacional-->
   <Estado ID="900" Nome="Servico de Contingencia do Ambiente Nacional" UF="SCAN">
-    <URLHomologacao>
+    <LocalHomologacao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
@@ -849,8 +453,8 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
+    </LocalHomologacao>
+    <LocalProducao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
@@ -858,11 +462,11 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
+    </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->
   <Estado ID="999" Nome="Template" UF="XX">
-    <URLHomologacao>
+    <LocalHomologacao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
@@ -870,8 +474,8 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLHomologacao>
-    <URLProducao>
+    </LocalHomologacao>
+    <LocalProducao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
@@ -879,6 +483,6 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
-    </URLProducao>
+    </LocalProducao>
   </Estado>
 </Webservice>

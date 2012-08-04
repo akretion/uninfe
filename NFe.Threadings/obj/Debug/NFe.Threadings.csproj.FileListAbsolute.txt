@@ -22,3 +22,5 @@ C:\projetos\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFe.Certificado.pdb
 C:\projetos\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFe.Components.Info.pdb
 C:\projetos\uninfe\trunk\fontes\NFe.Threadings\obj\Debug\NFe.Threadings.dll
 C:\projetos\uninfe\trunk\fontes\NFe.Threadings\obj\Debug\NFe.Threadings.pdb
+C:\projetos\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFe.Threadings\bin\Debug\NFSe.Components.pdb

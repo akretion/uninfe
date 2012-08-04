@@ -210,18 +210,37 @@ namespace NFe.Components
         /// Alterar valor das propriedades da classe
         /// </summary>
         /// <param name="Instance">Instância do objeto</param>
-        /// <param name="fieldName">Nome da propriedade</param>
+        /// <param name="propertyName">Nome da propriedade</param>
         /// <param name="novoValor">Novo valor para ser gravado na propriedade</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 09/02/2010
         /// </remarks>
-        public void SetProp(object Instance, string propertyName, object novoValor)
+        public void SetProp(object instance, string propertyName, object novoValor)
         {
-            Type tipoInstance = Instance.GetType();
+            Type tipoInstance = instance.GetType();
             PropertyInfo property = tipoInstance.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-            property.SetValue(Instance, novoValor, null);
+            property.SetValue(instance, novoValor, null);
+        }
+        #endregion
+
+        #region GetProp()
+        /// <summary>
+        /// Alterar valor das propriedades da classe
+        /// </summary>
+        /// <param name="instance">Instância do objeto</param>
+        /// <param name="propertyName">Nome da propriedade</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 09/02/2010
+        /// </remarks>
+        public object GetProp(object instance, string propertyName)
+        {
+            Type tipoInstance = instance.GetType();
+            PropertyInfo property = tipoInstance.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+
+            return property.GetValue(instance, null);
         }
         #endregion
 
@@ -480,10 +499,10 @@ namespace NFe.Components
 
                                     webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
-                                    PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr));
-                                    PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr));
-                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr));
-                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr));
+                                    //PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr), "");
+                                    //PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr), "");
+                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr), "");
+                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr), "");
 
                                     webServicesList.Add(wsItem);
                                 }
@@ -530,30 +549,30 @@ namespace NFe.Components
                                     if (jahExiste) continue;
 
                                     webServices wsItem = new webServices(ID, Nome, UF);
+                                    XmlNodeList urlList;
 
                                     #region URL´s de Homologação
-                                    XmlNodeList urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
-
-                                    if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", urlList.Item(0).OuterXml);
+                                    //urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
+                                    //if (urlList.Count > 0)
+                                    //    PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", urlList.Item(0).OuterXml, UF);
                                     #endregion
 
                                     #region URL´s de produção
-                                    urlList = estadoElemento.GetElementsByTagName("URLProducao");
-                                    if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.URLProducao, "URLProducao", urlList.Item(0).OuterXml);
+                                    //urlList = estadoElemento.GetElementsByTagName("URLProducao");
+                                    //if (urlList.Count > 0)
+                                    //    PreencheURLw(wsItem.URLProducao, "URLProducao", urlList.Item(0).OuterXml, UF);
                                     #endregion
 
                                     #region WSDL´s locais de Homologação
                                     urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
                                     if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", urlList.Item(0).OuterXml);
+                                        PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", urlList.Item(0).OuterXml, UF);
                                     #endregion
 
                                     #region WSDL´s locais de Produção
                                     urlList = estadoElemento.GetElementsByTagName("LocalProducao");
                                     if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.LocalProducao, "LocalProducao", urlList.Item(0).OuterXml);
+                                        PreencheURLw(wsItem.LocalProducao, "LocalProducao", urlList.Item(0).OuterXml, UF);
                                     #endregion
 
                                     webServicesList.Add(wsItem);
@@ -599,7 +618,7 @@ namespace NFe.Components
         #endregion
 
         #region PreencheURLw
-        private static void PreencheURLw(URLws wsItem, string tagName, string urls)
+        private static void PreencheURLw(URLws wsItem, string tagName, string urls, string uf)
         {
             if (urls == "")
                 return;
@@ -617,9 +636,55 @@ namespace NFe.Components
                 {
                     System.Reflection.PropertyInfo ClassProperty = wsItem.GetType().GetProperty(urlList[i].ChildNodes[j].Name);
                     if (ClassProperty != null)
-                        ClassProperty.SetValue(wsItem, AppPath + urlList[i].ChildNodes[j].InnerText, null);
+                    {
+                        string appPath = AppPath + urlList[i].ChildNodes[j].InnerText;
+
+                        if (!string.IsNullOrEmpty(urlList[i].ChildNodes[j].InnerText))
+                        {
+                            if (urlList[i].ChildNodes[j].InnerText.ToLower().EndsWith("asmx?wsdl"))
+                            {
+                                appPath = urlList[i].ChildNodes[j].InnerText;
+                            }
+                            else
+                            {
+                                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                                {
+                                    //antes:  wsdl\homologacao\HAMNfeRecepcao2.wsdl
+                                    //depois: wsdl\homologacao\UF\HAMNfeRecepcao2.wsdl
+                                    //
+                                    // até que todas as entradas no arquivo WebService.xml sejam atualizadas, adicionaremos o estado ao caminho do arquivo
+                                    if (!File.Exists(appPath))
+                                    {
+                                        string folder = uf;
+                                        string tempFilename = Path.GetFileName(appPath);
+                                        if (tempFilename.StartsWith("HSVRS") || tempFilename.StartsWith("PSVRS") || uf.Equals("SVRS"))
+                                            folder = "SVRS";
+                                        else
+                                            if (tempFilename.StartsWith("HSVAN") || tempFilename.StartsWith("PSVAN") || uf.Equals("SVAN"))
+                                                folder = "SVAN";
+                                            else
+                                                if (tempFilename.StartsWith("HSCAN") || tempFilename.StartsWith("PSCAN") || uf.Equals("SCAN"))
+                                                    folder = "SCAN";
+                                                else
+                                                    if (tempFilename.StartsWith("HDPEC") || tempFilename.StartsWith("PDPEC") || uf.Equals("DPEC"))
+                                                        folder = "DPEC";
+
+                                        appPath = Path.GetDirectoryName(appPath) + "\\" + folder + "\\" + tempFilename;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                            appPath = "";
+
+                        ClassProperty.SetValue(wsItem, appPath, null);
+                    }
                     else
+                    {
+                        //System.Windows.Forms.MessageBox.Show(urlList[i].ChildNodes[j].Name +"\r\n"+AppPath + urlList[i].ChildNodes[j].InnerText);
+
                         Console.WriteLine("wsItem <" + urlList[i].ChildNodes[j].Name + "> nao encontrada na classe URLws");
+                    }
 
                     /*
                     switch (urlList[i].ChildNodes[j].Name)
@@ -682,15 +747,15 @@ namespace NFe.Components
         public int ID { get; private set; }
         public string Nome { get; private set; }
         public string UF { get; private set; }
-        public URLws URLHomologacao { get; private set; }
-        public URLws URLProducao { get; private set; }
+        //public URLws URLHomologacao { get; private set; }
+        //public URLws URLProducao { get; private set; }
         public URLws LocalHomologacao { get; private set; }
         public URLws LocalProducao { get; private set; }
 
         public webServices(int id, string nome, string uf)
         {
-            URLHomologacao = new URLws();
-            URLProducao = new URLws();
+            //URLHomologacao = new URLws();
+            //URLProducao = new URLws();
             LocalHomologacao = new URLws();
             LocalProducao = new URLws();
             ID = id;
@@ -701,6 +766,31 @@ namespace NFe.Components
 
     public class URLws
     {
+        public URLws()
+        {
+            this.CancelarNfse =
+                this.ConsultarLoteRps =
+                this.ConsultarNfse =
+                this.ConsultarNfsePorRps =
+                this.ConsultarSituacaoLoteRps =
+                this.NFeCancelamento = 
+                this.NFeCancelamentoEvento =
+                this.NFeCCe =
+                this.NFeConsulta =
+                this.NFeConsulta1 =
+                this.NFeConsultaCadastro =
+                this.NFeConsultaNFeDest =
+                this.NFeDownload = 
+                this.NFeInutilizacao = 
+                this.NFeManifestacao = 
+                this.NFeRecepcao = 
+                this.NFeRetRecepcao = 
+                this.NFeStatusServico = 
+                this.NFeRegistroDeSaida =
+                this.NFeRegistroDeSaidaCancelamento =
+                this.RecepcionarLoteRps = string.Empty;
+        }
+
         /// <summary>
         /// ******** ATENCAO *******
         /// os nomes das propriedades tem que ser iguais as tags no WebService.xml
@@ -709,6 +799,7 @@ namespace NFe.Components
         public string NFeRecepcao { get; set; }
         public string NFeRetRecepcao { get; set; }
         public string NFeCancelamento { get; set; }
+        public string NFeCancelamentoEvento { get; set; }
         public string NFeInutilizacao { get; set; }
         /// <summary>
         /// Consulta da Situação da NFe versão 2.0
@@ -724,7 +815,8 @@ namespace NFe.Components
         public string NFeDownload { get; set; }
         public string NFeConsultaNFeDest { get; set; }
         public string NFeManifestacao { get; set; }
-        public string NFeCancelamento1 { get; set; }
+        public string NFeRegistroDeSaida { get; set; }
+        public string NFeRegistroDeSaidaCancelamento { get; set; }
         /// <summary>
         /// Enviar Lote RPS NFS-e 
         /// </summary>

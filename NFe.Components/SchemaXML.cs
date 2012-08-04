@@ -210,7 +210,7 @@ namespace NFe.Components
             #endregion
 
             #region XML Envio de Eventos de cancelamento
-            InfSchemas.Add("NFE-envEventoCanc", new InfSchema()
+            InfSchemas.Add("NFE-envEvento110111", new InfSchema()
             {
                 Tag = "envEvento",
                 ID = 15,
@@ -222,11 +222,63 @@ namespace NFe.Components
             });
             #endregion
 
+            #region XML Envio de manifestacoes-e210200
+            InfSchemas.Add("NFE-envEvento210200", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = 16,
+                ArquivoXSD = "EventoManifestaDestinat\\e210200_v1.00.xsd",
+                Descricao = "XML de registro de envio de evento de manifestacao",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio de manifestacoes-e210210
+            InfSchemas.Add("NFE-envEvento210210", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = 17,
+                ArquivoXSD = "EventoManifestaDestinat\\e210210_v1.00.xsd",
+                Descricao = "XML de registro de envio de evento de manifestacao",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio de manifestacoes-e210220
+            InfSchemas.Add("NFE-envEvento210220", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = 19,
+                ArquivoXSD = "EventoManifestaDestinat\\e210220_v1.00.xsd",
+                Descricao = "XML de registro de envio de evento de manifestacao",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio de manifestacoes-e210240
+            InfSchemas.Add("NFE-envEvento210240", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = 19,
+                ArquivoXSD = "EventoManifestaDestinat\\e210240_v1.00.xsd",
+                Descricao = "XML de registro de envio de evento de manifestacao",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
             #region XML Envio de consulta de nfe
             InfSchemas.Add("NFE-consNFeDest", new InfSchema()
             {
                 Tag = "nfeConsultaNFDest",
-                ID = 16,
+                ID = 20,
                 ArquivoXSD = "ConsultaNFDest\\consNFeDest_v1.01.xsd",
                 Descricao = "XML de registro de envio de consulta a nfe",
                 TagAssinatura = "",
@@ -239,7 +291,7 @@ namespace NFe.Components
             InfSchemas.Add("NFE-downloadNFe", new InfSchema()
             {
                 Tag = "downloadNFe",
-                ID = 17,
+                ID = 21,
                 ArquivoXSD = "DownloadNFe\\downloadNFe_v1.00.xsd",
                 Descricao = "XML de registro de download de nfe",
                 TagAssinatura = "",
@@ -248,67 +300,41 @@ namespace NFe.Components
             });
             #endregion
 
-            #region XML Envio de manifestacoes-e210200
-            InfSchemas.Add("NFE-envManifestacaoe210200", new InfSchema()
-            {
-                Tag = "envEvento",
-                ID = 18,
-                ArquivoXSD = "EventoManifestaDestinat\\e210200_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
-                TagAssinatura = "evento",
-                TagAtributoId = "infEvento",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Envio de manifestacoes-e210210
-            InfSchemas.Add("NFE-envManifestacaoe210210", new InfSchema()
-            {
-                Tag = "envEvento",
-                ID = 19,
-                ArquivoXSD = "EventoManifestaDestinat\\e210210_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
-                TagAssinatura = "evento",
-                TagAtributoId = "infEvento",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Envio de manifestacoes-e210220
-            InfSchemas.Add("NFE-envManifestacaoe210220", new InfSchema()
-            {
-                Tag = "envEvento",
-                ID = 20,
-                ArquivoXSD = "EventoManifestaDestinat\\e210220_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
-                TagAssinatura = "evento",
-                TagAtributoId = "infEvento",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Envio de manifestacoes-e210240
-            InfSchemas.Add("NFE-envManifestacaoe210240", new InfSchema()
-            {
-                Tag = "envEvento",
-                ID = 20,
-                ArquivoXSD = "EventoManifestaDestinat\\e210240_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
-                TagAssinatura = "evento",
-                TagAtributoId = "infEvento",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
             #region XML Envio de confirmacao de recebimento de manifestacoes
             InfSchemas.Add("NFE-envConfRecebto", new InfSchema()
             {
                 Tag = "envEvento",
-                ID = 21,
+                ID = 22,
                 ArquivoXSD = "EventoManifestaDestinat\\envConfRecebto_v1.00.xsd",
                 Descricao = "XML de registro de envio de evento de manifestacao",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio de registro de saida
+            InfSchemas.Add("NFE-envRegistroSaida", new InfSchema()
+            {
+                Tag = "envRegistro",
+                ID = 23,
+                ArquivoXSD = "envRegistro_v1.00.xsd",
+                Descricao = "XML de registro de envio de registro de saida",
+                TagAssinatura = "evento",
+                TagAtributoId = "infRegistro",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio de cancelamento registro de saida
+            InfSchemas.Add("NFE-envCancRegistroSaida", new InfSchema()
+            {
+                Tag = "envCancRegistro",
+                ID = 24,
+                ArquivoXSD = "envCancRegistro_v1.00.xsd",
+                Descricao = "XML de registro de envio de cancelamento de registro de saida",
+                TagAssinatura = "evento",
+                TagAtributoId = "infCancRegistro",
                 TargetNameSpace = string.Empty
             });
             #endregion

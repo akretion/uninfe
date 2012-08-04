@@ -121,7 +121,7 @@ namespace NFe.Interface
             try
             {
                 GerarXML oGerar = new GerarXML(Emp);
-                Auxiliar oAux = new Auxiliar();
+                //Auxiliar oAux = new Auxiliar();
 
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).Codigo;
                 int amb = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[cbAmbiente.SelectedIndex]).Codigo;
@@ -264,8 +264,6 @@ namespace NFe.Interface
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-            //Auxiliar oAux = new Auxiliar();
-
             string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.xml";
@@ -344,7 +342,7 @@ namespace NFe.Interface
             object vRetorno = null;
             try
             {
-                vRetorno = EnviaArquivoERecebeResposta(2,ArqXMLRetorno, ArqERRRetorno);
+                vRetorno = EnviaArquivoERecebeResposta(2, ArqXMLRetorno, ArqERRRetorno);
                 //vRetorno = ProcessaConsultaCadastroClass(@"c:\usr\nfe\uninfe\modelos\retorno-cons-cad.txt");
             }
             finally
@@ -424,11 +422,11 @@ namespace NFe.Interface
 
                             try
                             {
-                                GerarXML oGerar = new GerarXML(Emp);
+                                //GerarXML oGerar = new GerarXML(Emp);
                                 if (tipo == 1)
                                     vStatus = ProcessaStatusServico(arqXMLRetorno);
                                 else
-                                    vStatus = oGerar.ProcessaConsultaCadastro(arqXMLRetorno);
+                                    vStatus = new GerarXML(Emp).ProcessaConsultaCadastro(arqXMLRetorno);
                             }
                             catch (Exception ex)
                             {

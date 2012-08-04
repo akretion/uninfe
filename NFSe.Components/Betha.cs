@@ -226,5 +226,79 @@ namespace NFSe.Components
             return env.ToString();
         }
         #endregion
+
+        #region ConsultarNfse
+        /// <summary>
+        /// Consultar Nfse
+        /// </summary>
+        /// <param name="xml">XML de consulta da Nfse</param>
+        /// <returns>XML Retornado pela prefeitura</returns>
+        public string ConsultarNfse(XmlNode xml, int tpAmb)
+        {
+            StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            try
+            {
+                string url;
+                if (tpAmb == Propriedade.TipoAmbiente.taProducao)
+                    url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarNfse";
+                else
+                    url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarNfse";
+
+                string XMLRetorno = RequestWS(xml, url, "#ConsultarNfseService");
+
+                MemoryStream stream = Functions.StringXmlToStream(XMLRetorno);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(stream);
+
+                XmlNodeList xmlList = doc.GetElementsByTagName("ConsultarNfseResposta");
+                retornar.Append(xmlList[0].OuterXml);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return retornar.ToString();
+        }
+        #endregion
+        
+        #region ConsultarNfsePorRps
+        /// <summary>
+        /// Consultar Nfse por RPS
+        /// </summary>
+        /// <param name="xml">XML de consulta da Nfse por RPS</param>
+        /// <returns>XML Retornado pela prefeitura</returns>
+        public string ConsultarNfsePorRps(XmlNode xml, int tpAmb)
+        {
+            StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            try
+            {
+                string url;
+                if (tpAmb == Propriedade.TipoAmbiente.taProducao)
+                    url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarNfsePorRps";
+                else
+                    url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarNfsePorRps";
+
+                string XMLRetorno = RequestWS(xml, url, "#ConsultarNfsePorRpsService");
+
+                MemoryStream stream = Functions.StringXmlToStream(XMLRetorno);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(stream);
+
+                XmlNodeList xmlList = doc.GetElementsByTagName("ConsultarNfseRpsResposta");
+                retornar.Append(xmlList[0].OuterXml);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return retornar.ToString();
+        }
+        #endregion
+
+
     }
 }

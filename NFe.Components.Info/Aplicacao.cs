@@ -53,7 +53,17 @@ namespace NFe.Components.Info
             //danasa 22/7/2011
             //pega a data da ultima modificacao do 'uninfe.exe' diretamente porque pode ser que esteja sendo executado o servico
             //então, precisamos dos dados do uninfe.exe e não do servico
-            string dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfe.exe")).ToString("dd/MM/yyyy hh:mm:ss");
+            string dtUltModif;
+            URLws item;
+            string tipo;
+
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfe.exe")).ToString("dd/MM/yyyy hh:mm:ss");
+            else
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "unincte.exe")).ToString("dd/MM/yyyy hh:mm:ss");
+            else
+                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfes.exe")).ToString("dd/MM/yyyy hh:mm:ss");
 
             //Gravar o XML com as informações do aplicativo
             try
@@ -75,22 +85,91 @@ namespace NFe.Components.Info
                     //danasa 22/7/2011
                     aTXT.AppendLine("ExecutandoPeloServico|" + Propriedade.ServicoRodando.ToString());
                     //Dados das configurações do aplicativo
-                    aTXT.AppendLine("PastaBackup|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
-                    aTXT.AppendLine("PastaXmlEmLote|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
-                    aTXT.AppendLine("PastaXmlAssinado|" + (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
-                    aTXT.AppendLine("PastaValidar|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
-                    aTXT.AppendLine("PastaXmlEnviado|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
-                    aTXT.AppendLine("PastaXmlEnvio|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
-                    aTXT.AppendLine("PastaXmlErro|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
-                    aTXT.AppendLine("PastaXmlRetorno|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
-                    aTXT.AppendLine("DiasParaLimpeza|" + Empresa.Configuracoes[emp].DiasLimpeza.ToString());
-                    aTXT.AppendLine("DiretorioSalvarComo|" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
-                    aTXT.AppendLine("GravarRetornoTXTNFe|" + Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
-                    aTXT.AppendLine("AmbienteCodigo|" + Empresa.Configuracoes[emp].tpAmb.ToString());
-                    aTXT.AppendLine("tpEmis|" + Empresa.Configuracoes[emp].tpEmis.ToString());
-                    aTXT.AppendLine("UnidadeFederativaCodigo|" + Empresa.Configuracoes[emp].UFCod.ToString());
-                    aTXT.AppendLine("TempoConsulta|" + Empresa.Configuracoes[emp].TempoConsulta.ToString());
+                    aTXT.AppendLine(NFeStrConstants.PastaBackup + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlEmLote + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlAssinado + "|" + (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
+                    aTXT.AppendLine(NFeStrConstants.PastaValidar + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlEnviado + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlEnvio + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlErro + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
+                    aTXT.AppendLine(NFeStrConstants.PastaXmlRetorno + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
+                    aTXT.AppendLine(NFeStrConstants.PastaDownloadNFeDest + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                    aTXT.AppendLine(NFeStrConstants.DiasLimpeza + "|" + Empresa.Configuracoes[emp].DiasLimpeza.ToString());
+                    aTXT.AppendLine(NFeStrConstants.DiretorioSalvarComo + "|" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
+                    aTXT.AppendLine(NFeStrConstants.GravarRetornoTXTNFe + "|" + Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
+                    aTXT.AppendLine(NFeStrConstants.GravarEventosDeTerceiros + "|" + Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
+                    aTXT.AppendLine(NFeStrConstants.GravarEventosNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
+                    aTXT.AppendLine(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                    aTXT.AppendLine(NFeStrConstants.AmbienteCodigo + "|" + Empresa.Configuracoes[emp].tpAmb.ToString());
+                    aTXT.AppendLine(NFeStrConstants.tpEmis + "|" + Empresa.Configuracoes[emp].tpEmis.ToString());
+                    aTXT.AppendLine(NFeStrConstants.UnidadeFederativaCodigo + "|" + Empresa.Configuracoes[emp].UFCod.ToString());
+                    aTXT.AppendLine(NFeStrConstants.TempoConsulta + "|" + Empresa.Configuracoes[emp].TempoConsulta.ToString());
+                    ///
+                    /// dados do FTP
+                    /// 
+                    aTXT.AppendLine(NFeStrConstants.FTPAtivo + "|" + Empresa.Configuracoes[emp].FTPAtivo.ToString());
+                    aTXT.AppendLine(NFeStrConstants.FTPGravaXMLPastaUnica + "|" + Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
+                    aTXT.AppendLine(NFeStrConstants.FTPPastaAutorizados + "|" + Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    aTXT.AppendLine(NFeStrConstants.FTPPastaRetornos + "|" + Empresa.Configuracoes[emp].FTPPastaRetornos);
+                    aTXT.AppendLine(NFeStrConstants.FTPNomeDoUsuario + "|" + Empresa.Configuracoes[emp].FTPNomeDoUsuario);
+                    aTXT.AppendLine(NFeStrConstants.FTPNomeDoServidor + "|" + Empresa.Configuracoes[emp].FTPNomeDoServidor);
+                    aTXT.AppendLine(NFeStrConstants.FTPPorta + "|" + Empresa.Configuracoes[emp].FTPPorta.ToString());
+                    ///
+                    /// o ERP poderá verificar se determinado servico está definido no UniNFe
+                    /// 
+                    foreach (webServices list in WebServiceProxy.webServicesList)
+                    {
+                        if (list.ID == Empresa.Configuracoes[emp].UFCod || 
+                            list.UF == "DPEC" ||
+                            list.UF == "SCAN")
+                        {
+                            if (Empresa.Configuracoes[emp].tpAmb == 2)
+                            {
+                                tipo = list.UF + ".Homologacao.";
+                                item = list.LocalHomologacao;
+                            }
+                            else
+                            {
+                                tipo = list.UF + ".Producao.";
+                                item = list.LocalProducao;
+                            }
 
+                            switch (Propriedade.TipoAplicativo)
+                            {
+                                case TipoAplicativo.Nfse:
+                                    aTXT.AppendLine(tipo + "CancelarNFse|" +            (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarLoteRps|" +        (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarNfse|" +           (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarNfsePorRps|" +     (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarSituacaoLoteRps|" +(!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "RecepcionarLoteRps|" +      (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    break;
+
+                                case TipoAplicativo.Nfe:
+                                    if (string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
+                                    if (string.IsNullOrEmpty(item.NFeManifestacao)) item.NFeManifestacao = item.NFeCCe;
+
+                                    aTXT.AppendLine(tipo + "NFeRecepcao|" + (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
+                                    aTXT.AppendLine(tipo + "NFeConsulta|" + (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
+                                    if (list.UF != "DPEC")
+                                    {
+                                        aTXT.AppendLine(tipo + "NFeCancelamento|" + (!string.IsNullOrEmpty(item.NFeCancelamento)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeCancelamentoEvento|" + (!string.IsNullOrEmpty(item.NFeCancelamentoEvento)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeCCe|" + (!string.IsNullOrEmpty(item.NFeCCe)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeConsulta1|" + (!string.IsNullOrEmpty(item.NFeConsulta1)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeConsultaCadastro|" + (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeConsultaNFeDest|" + (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeDownload|" + (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeInutilizacao|" + (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeManifestacao|" + (!string.IsNullOrEmpty(item.NFeManifestacao)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeStatusServico|" + (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeRegistroDeSaida|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeRegistroDeSaidaCancelamento|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                     File.WriteAllText(sArquivo, aTXT.ToString(), Encoding.Default);
                 }
                 else
@@ -132,22 +211,96 @@ namespace NFe.Components.Info
                     oXmlGravar.WriteEndElement(); //DadosUniNfe
 
                     //Dados das configurações do aplicativo
-                    oXmlGravar.WriteStartElement("nfe_configuracoes");
-                    oXmlGravar.WriteElementString("PastaBackup", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
-                    oXmlGravar.WriteElementString("PastaXmlEmLote", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
-                    oXmlGravar.WriteElementString("PastaXmlAssinado", (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
-                    oXmlGravar.WriteElementString("PastaValidar", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
-                    oXmlGravar.WriteElementString("PastaXmlEnviado", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
-                    oXmlGravar.WriteElementString("PastaXmlEnvio", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
-                    oXmlGravar.WriteElementString("PastaXmlErro", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
-                    oXmlGravar.WriteElementString("PastaXmlRetorno", (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
-                    oXmlGravar.WriteElementString("DiasParaLimpeza", Empresa.Configuracoes[emp].DiasLimpeza.ToString());
-                    oXmlGravar.WriteElementString("DiretorioSalvarComo", Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
-                    oXmlGravar.WriteElementString("GravarRetornoTXTNFe", Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
-                    oXmlGravar.WriteElementString("AmbienteCodigo", Empresa.Configuracoes[emp].tpAmb.ToString());
-                    oXmlGravar.WriteElementString("tpEmis", Empresa.Configuracoes[emp].tpEmis.ToString());
-                    oXmlGravar.WriteElementString("UnidadeFederativaCodigo", Empresa.Configuracoes[emp].UFCod.ToString());
-                    oXmlGravar.WriteElementString("TempoConsulta", Empresa.Configuracoes[emp].TempoConsulta.ToString());
+                    oXmlGravar.WriteStartElement(NFeStrConstants.nfe_configuracoes);
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlAssinado, (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaValidar, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnvio, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlErro, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlRetorno, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
+                    oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                    oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, Empresa.Configuracoes[emp].DiasLimpeza.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.AmbienteCodigo, Empresa.Configuracoes[emp].tpAmb.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, Empresa.Configuracoes[emp].tpEmis.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.UnidadeFederativaCodigo, Empresa.Configuracoes[emp].UFCod.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, Empresa.Configuracoes[emp].TempoConsulta.ToString());
+                    ///
+                    /// dados do FTP
+                    /// 
+                    oXmlGravar.WriteStartElement("FTP");
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPAtivo, Empresa.Configuracoes[emp].FTPAtivo.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaRetornos, Empresa.Configuracoes[emp].FTPPastaRetornos);
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoUsuario, Empresa.Configuracoes[emp].FTPNomeDoUsuario);
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoServidor, Empresa.Configuracoes[emp].FTPNomeDoServidor);
+                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPorta, Empresa.Configuracoes[emp].FTPPorta.ToString());
+                    oXmlGravar.WriteEndElement();
+                    ///
+                    /// o ERP poderá verificar se determinado servico está definido no UniNFe
+                    /// 
+                    foreach (webServices list in WebServiceProxy.webServicesList)
+                    {
+                        if (list.ID == Empresa.Configuracoes[emp].UFCod ||
+                            list.UF == "DPEC" ||
+                            list.UF == "SCAN")
+                        {
+                            oXmlGravar.WriteStartElement(list.UF);
+                            if (Empresa.Configuracoes[emp].tpAmb == 2)
+                            {
+                                item = list.LocalHomologacao;
+                                oXmlGravar.WriteStartElement("Homologacao");
+                            }
+                            else
+                            {
+                                item = list.LocalProducao;
+                                oXmlGravar.WriteStartElement("Producao");
+                            }
+                            switch (Propriedade.TipoAplicativo)
+                            {
+                                case TipoAplicativo.Nfse:
+                                    oXmlGravar.WriteElementString("CancelarNFse",           (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarLoteRps",       (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarNfse",          (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarNfsePorRps",    (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarSituacaoLoteRps", (!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
+                                    oXmlGravar.WriteElementString("RecepcionarLoteRps",     (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    break;
+
+                                case TipoAplicativo.Nfe:
+                                    if (string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
+                                    if (string.IsNullOrEmpty(item.NFeManifestacao)) item.NFeManifestacao = item.NFeCCe;
+
+                                    oXmlGravar.WriteElementString("NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
+                                    oXmlGravar.WriteElementString("NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
+                                    if (list.UF != "DPEC")
+                                    {
+                                        oXmlGravar.WriteElementString("NFeCancelamento", (!string.IsNullOrEmpty(item.NFeCancelamento)).ToString());
+                                        oXmlGravar.WriteElementString("NFeCancelamentoEvento", (!string.IsNullOrEmpty(item.NFeCancelamentoEvento)).ToString());
+                                        oXmlGravar.WriteElementString("NFeCCe", (!string.IsNullOrEmpty(item.NFeCCe)).ToString());
+                                        oXmlGravar.WriteElementString("NFeConsulta1", (!string.IsNullOrEmpty(item.NFeConsulta1)).ToString());
+                                        oXmlGravar.WriteElementString("NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
+                                        oXmlGravar.WriteElementString("NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
+                                        oXmlGravar.WriteElementString("NFeDownload", (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
+                                        oXmlGravar.WriteElementString("NFeInutilizacao", (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
+                                        oXmlGravar.WriteElementString("NFeManifestacao", (!string.IsNullOrEmpty(item.NFeManifestacao)).ToString());
+                                        oXmlGravar.WriteElementString("NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
+                                        oXmlGravar.WriteElementString("NFeRegistroDeSaida", (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
+                                        oXmlGravar.WriteElementString("NFeRegistroDeSaidaCancelamento", (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
+                                    }
+                                    break;
+                            }
+                            oXmlGravar.WriteEndElement();   //Ambiente
+                            oXmlGravar.WriteEndElement();   //list.UF
+                        }
+                    }
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
 
                     //Finalizar o XML

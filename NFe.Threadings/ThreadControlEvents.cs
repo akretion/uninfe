@@ -15,8 +15,8 @@ namespace NFe.Threadings
         /// </summary>
         public ThreadControlEvents()
         {
-            //ThreadControl.OnEnded += new ThreadControl.ThreadEndedHandler(ThreadControl_OnEnded);
-            //ThreadControl.OnReleased += new ThreadControl.ThreadReleasedHandler(ThreadControl_OnReleased);
+            ThreadControl.OnEnded += new ThreadControl.ThreadEndedHandler(ThreadControl_OnEnded);
+            ThreadControl.OnReleased += new ThreadControl.ThreadReleasedHandler(ThreadControl_OnReleased);
             ThreadControl.OnStarted += new ThreadControl.ThreadStartHandler(ThreadControl_OnStarted);
         }
 
@@ -31,8 +31,8 @@ namespace NFe.Threadings
             //mudei de posicao e inclui o FullName
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento");
 
-            Servicos tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
-            new Processar().ProcessaArquivo(item.FileInfo.FullName, tipoServico);
+            //Servicos tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
+            new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);//, tipoServico);
         }
         #endregion
 
@@ -43,7 +43,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadControl_OnReleased(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.Name + " foi descarregado da lista de processamento");
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento");
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadControl_OnEnded(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.Name + " finalizou o processamento");
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento");
         }
         #endregion
     }

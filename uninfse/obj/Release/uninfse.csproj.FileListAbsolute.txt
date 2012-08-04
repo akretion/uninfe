@@ -114,3 +114,5 @@ C:\projetos\uninfe\trunk\fontes\uninfse\obj\Release\uninfse.exe
 C:\projetos\uninfe\trunk\fontes\uninfse\obj\Release\uninfse.pdb
 C:\projetos\uninfe\trunk\fontes\uninfse\obj\Release\ResGen.read.1.tlog
 C:\projetos\uninfe\trunk\fontes\uninfse\obj\Release\ResGen.write.1.tlog
+C:\projetos\uninfe\trunk\fontes\uninfse\bin\Release\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\uninfse\bin\Release\NFSe.Components.pdb

@@ -32,3 +32,5 @@ C:\projetos\uninfe\trunk\fontes\NFe.Service\bin\Debug\NFe.Components.Info.pdb
 C:\projetos\uninfe\trunk\fontes\NFe.Service\obj\Debug\ResolveAssemblyReference.cache
 C:\projetos\uninfe\trunk\fontes\NFe.Service\obj\Debug\NFe.Service.dll
 C:\projetos\uninfe\trunk\fontes\NFe.Service\obj\Debug\NFe.Service.pdb
+C:\projetos\uninfe\trunk\fontes\NFe.Service\bin\Debug\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFe.Service\bin\Debug\NFSe.Components.pdb

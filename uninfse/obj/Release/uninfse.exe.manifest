@@ -4,7 +4,7 @@
   <description asmv2:iconFile="uninfe.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="uninfse" version="1.2.4574.30182" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="uninfse" version="1.2.4599.16936" language="neutral" processorArchitecture="msil" />
     <commandLine file="uninfse.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -65,79 +65,79 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PxTAqUZcP9DjAbU0w1tyKWicCjk=</dsig:DigestValue>
+        <dsig:DigestValue>bMxFN046jrX50KFmsa5N3kWStFs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Components.dll" size="91648">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Components.dll" size="97280">
       <assemblyIdentity name="NFe.Components" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>woZKdFbc9+enW3fkkJAccTvzA8g=</dsig:DigestValue>
+        <dsig:DigestValue>WbHTOsu762o6ospusasFTJ5Fzug=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Components.Info.dll" size="12288">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Components.Info.dll" size="18432">
       <assemblyIdentity name="NFe.Components.Info" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>8pZoRCnevG26iZvZyBPookI9QwE=</dsig:DigestValue>
+        <dsig:DigestValue>IIcFUkOLZE6KaWYkLJdr6uedoIg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.ConvertTxt.dll" size="149504">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.ConvertTxt.dll" size="151552">
       <assemblyIdentity name="NFe.ConvertTxt" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Nk1i0iH0e2TIIWDhhELKwWn8lbI=</dsig:DigestValue>
+        <dsig:DigestValue>hmQc1WywnMiXxDp5Jx42U8BckHE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Interface.dll" size="492032">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Interface.dll" size="498176">
       <assemblyIdentity name="NFe.Interface" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ZIjiru6VVAW+4l1ltLrdw37z2hw=</dsig:DigestValue>
+        <dsig:DigestValue>ekZBPNpIXuptAzFkIJthGs/zcb4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Service.dll" size="163840">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Service.dll" size="175104">
       <assemblyIdentity name="NFe.Service" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>fWE5ddkqFeXGpLEjNnqAZVbD0dE=</dsig:DigestValue>
+        <dsig:DigestValue>MZMHiNfOJREeeCGIXfpKW86PhCw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Settings.dll" size="64512">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFe.Settings.dll" size="65024">
       <assemblyIdentity name="NFe.Settings" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>nJuLkkQbdAPkY4kIVF1XguptoOA=</dsig:DigestValue>
+        <dsig:DigestValue>LRYq+NVKiBk6jnzUSEUre6VGY4I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -149,7 +149,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>hbGH5RiLNGe3DxwMuo+/yuYRYpE=</dsig:DigestValue>
+        <dsig:DigestValue>oie6NY0U2sbiXKbYsOu35E8vPyA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -161,19 +161,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>DKEckEbJV0i9R7B3CXVRBhJSIzQ=</dsig:DigestValue>
+        <dsig:DigestValue>Tt/gfWa+fpYqttbcN0DHIH0Jlk8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="uninfse.exe" size="436736">
-      <assemblyIdentity name="uninfse" version="1.2.4574.30182" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NFSe.Components.dll" size="9728">
+      <assemblyIdentity name="NFSe.Components" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>mXDkX6xnWZRjaFNt6Awl642xkGE=</dsig:DigestValue>
+        <dsig:DigestValue>iB0KNcrkxmA+/l7KArWreVNnjFI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="uninfse.exe" size="440320">
+      <assemblyIdentity name="uninfse" version="1.2.4599.16936" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>GoHieAUiK30uIOUXdgE7yFKsdUM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

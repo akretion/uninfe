@@ -50,7 +50,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\release\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -74,7 +74,9 @@
     </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
@@ -180,6 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Anotacoes.txt" />
+    <Content Include="WSDL\Webservice.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\pdf.png" />
     <None Include="Resources\pdf1.png" />
     <None Include="Resources\pdf2.png" />
@@ -419,679 +425,691 @@
     <None Include="schemas\NFe\xmldsig-core-schema_v1.01.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HAMRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\AM\HAMRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBACadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBACadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBANfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBANfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HBARecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\BA\HBARecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCENfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCENfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HCERecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\CE\HCERecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HDEPCSCEConsultaRFB.wsdl">
+    <None Include="WSDL\Homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HDEPCSCERecepcaoRFB.wsdl">
+    <None Include="WSDL\Homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGOCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGOCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeConsulta.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeConsulta.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGONfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGONfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HGORecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\GO\HGORecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGCancRegSaida2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMGRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\MG\HMGRegistrarSaida2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\MS\HMSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HMTRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPECadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\MT\HMTRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPECadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPENfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPERecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPENfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeConsulta.wsdl">
+    <None Include="WSDL\Homologacao\PE\HPERecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeConsulta.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HPRNFeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\PR\HPRNFeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNFeConsultaDest.wsdl">
+    <None Include="WSDL\Homologacao\RS\HRSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNFeDownload.wsdl">
+    <None Include="WSDL\Homologacao\RS\HRSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSnfeinutilizacao2.wsdl">
+    <Content Include="WSDL\Homologacao\RS\HRSNFeConsultaDest.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="WSDL\Homologacao\RS\HRSNFeDownload.wsdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="WSDL\Homologacao\RS\HRSnfeinutilizacao2.wsdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="WSDL\Homologacao\RS\HRSNFeRecepcao2.wsdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="WSDL\Homologacao\RS\HRSNFeRecepcaoEvento.wsdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNFeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\RS\HRSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNFeRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\RS\HRSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\RS\HRSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HRSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SCAN\HSCANNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPcadconsultacadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSCANNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPcadconsultacadastro2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeConsultaDest.wsdl">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeDownload.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeConsultaDest.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeDownload.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SP\HSPRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSPRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SVAN\HSVANRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANNfeStatusServico2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVANRecepcaoEvento.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSnfeinutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSNfeConsulta2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSNFeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSnfeinutilizacao2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSNFeRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Homologacao\SVRS\HSVRSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\BA\PBARecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Homologacao\HSVRSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBARecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\AM\PAMNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\BA\PBACadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PAMNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBACadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\BA\PBANfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\CE\PCECadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PBANfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCECadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\CE\PCENfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\CE\PCERecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCENfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\DPEC\PDEPCSCEConsultaRFB.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PCERecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\DPEC\PDEPCSCERecepcaoRFB.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PDEPCSCEConsultaRFB.wsdl">
+    <None Include="WSDL\Producao\GO\PGOCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PDEPCSCERecepcaoRFB.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGOCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeConsulta.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeConsulta.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\GO\PGONfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\GO\PGORecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGONfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGCancRegSaida2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PGORecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\MG\PMGRegistrarSaida2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\MG\PMGNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMGRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\MG\PMGRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\MS\PMSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\MS\PMSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTCadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTCadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\MT\PMTNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PMTRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\MT\PMTRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPECadConsultaCadastro2.wsdl">
+    <None Include="WSDL\Producao\PE\PPECadConsultaCadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPENfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\PE\PPENfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPERecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\PE\PPERecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeConsulta.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeConsulta.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeConsulta2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PPRNFeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\PR\PPRNFeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRScadconsultacadastro2.wsdl">
+    <None Include="WSDL\Producao\RS\PRScadconsultacadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeConsultaDest.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeConsultaDest.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeDownload.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeDownload.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSnfeinutilizacao2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSnfeinutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNFeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNFeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\RS\PRSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PRSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\RS\PRSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNfeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNfeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSCANNFeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\SCAN\PSCANNFeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPcadconsultacadastro2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPcadconsultacadastro2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnfecancelamento2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnfecancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnfeconsulta2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnfeconsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnfeinutilizacao2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnfeinutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnferecepcao2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnferecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnferetrecepcao2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnferetrecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPnfestatusservico2.wsdl">
+    <None Include="WSDL\Producao\SP\PSPnfestatusservico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSPRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\SP\PSPRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANNFeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANNFeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANnfeconsulta2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANnfeconsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANNFeInutilizacao2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANNFeInutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANNfeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANNfeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANNFeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANNFeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANNFeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANNFeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVANRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\SVAN\PSVANRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSNfeCancelamento2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSNfeCancelamento2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSNfeConsulta2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSNfeConsulta2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSnfeinutilizacao2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSnfeinutilizacao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSNFeRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSNFeRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSNfeRetRecepcao2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSNfeRetRecepcao2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSNfeStatusServico2.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSNfeStatusServico2.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="WSDL\Producao\PSVRSRecepcaoEvento.wsdl">
+    <None Include="WSDL\Producao\SVRS\PSVRSRecepcaoEvento.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="uninfe.ico" />
-    <Content Include="WSDL\Webservice.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="UniNfeSobre.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

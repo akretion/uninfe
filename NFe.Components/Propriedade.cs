@@ -303,6 +303,25 @@ namespace NFe.Components
             /// -env-canc.txt
             /// </summary>
             public const string EnvCancelamento_TXT = "-env-canc.txt";
+            /// <summary>
+            /// -env-regs.xml
+            /// </summary>
+            public const string EnvRegistroDeSaida_XML = "-env-regs.xml";
+            /// <summary>
+            /// -env-regs.txt
+            /// </summary>
+            public const string EnvRegistroDeSaida_TXT = "-env-regs.txt";
+            /// <summary>
+            /// -env-canc-regs.xml
+            /// </summary>
+            public const string EnvCancRegistroDeSaida_XML = "-env-canc-regs.xml";
+            /// <summary>
+            /// -env-canc-regs.txt
+            /// </summary>
+            public const string EnvCancRegistroDeSaida_TXT = "-env-canc-regs.txt";
+
+            public const string EnvWSExiste_XML = "-env-ws.xml";
+            public const string EnvWSExiste_TXT = "-env-ws.txt";
 
             #endregion
 
@@ -453,19 +472,38 @@ namespace NFe.Components
             /// <summary>
             /// -ret-manif.xml
             /// </summary>
-            public const string retManifestacao_XML = "-ret-manif.xml";
+            public const string retManifestacao_XML = "-ret-env-manif.xml";
             /// <summary>
             /// -ret-manif.err
             /// </summary>
-            public const string retManifestacao_ERR = "-ret-manif.err";
+            public const string retManifestacao_ERR = "-ret-env-manif.err";
             /// <summary>
             /// -ret-canc.xml
             /// </summary>
-            public const string retCancelamento_XML = "-ret-canc.xml";
+            public const string retCancelamento_XML = "-ret-ret-canc.xml";
             /// <summary>
             /// -ret-canc.err
             /// </summary>
-            public const string retCancelamento_ERR = "-ret-canc.err";
+            public const string retCancelamento_ERR = "-ret-ret-canc.err";
+            /// <summary>
+            /// -ret-env-regsaida.xml
+            /// </summary>
+            public const string retRegistroDeSaida_XML = "-ret-env-regs.xml";
+            /// <summary>
+            /// -ret-env-regsaida.txt
+            /// </summary>
+            public const string retRegistroDeSaida_TXT = "-ret-env-regs.txt";
+            /// <summary>
+            /// -ret-env-regsaida.xml
+            /// </summary>
+            public const string retCancRegistroDeSaida_XML = "-ret-env-canc-regs.xml";
+            /// <summary>
+            /// -ret-env-regsaida.txt
+            /// </summary>
+            public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
+
+            public const string retWSExiste_XML = "-ret-env-ws.xml";
+            public const string retWSExiste_TXT = "-ret-env-ws.txt";
             #endregion
 
             #region Extensões de retorno da NFS-e
@@ -686,5 +724,52 @@ namespace NFe.Components
             }
         }
         #endregion
+    }
+
+    public class NFeStrConstants
+    {
+        public static string nfe_configuracoes = "nfe_configuracoes";
+        public static string PastaXmlAssinado = "PastaXmlAssinado";
+        public static string PastaXmlEnvio = "PastaXmlEnvio";
+        public static string PastaXmlEmLote = "PastaXmlEmLote";
+        public static string PastaXmlRetorno = "PastaXmlRetorno";
+        public static string PastaXmlEnviado = "PastaXmlEnviado";
+        public static string PastaXmlErro = "PastaXmlErro";
+        public static string PastaBackup = "PastaBackup";
+        public static string PastaValidar = "PastaValidar";
+        public static string PastaDownloadNFeDest = "PastaDownloadNFeDest";
+        public static string PastaExeUniDanfe = "PastaExeUniDanfe";
+        public static string PastaConfigUniDanfe = "PastaConfigUniDanfe";
+        public static string PastaDanfeMon = "PastaDanfeMon";
+        public static string XMLDanfeMonNFe = "XMLDanfeMonNFe";
+        public static string XMLDanfeMonProcNFe = "XMLDanfeMonProcNFe";
+        public static string XMLDanfeMonDenegadaNFe = "XMLDanfeMonDenegadaNFe";
+
+        public static string FTPAtivo = "FTPAtivo";
+        public static string FTPGravaXMLPastaUnica = "FTPGravaXMLPastaUnica";
+        public static string FTPSenha = "FTPSenha";
+        public static string FTPPastaAutorizados = "FTPPastaAutorizados";
+        public static string FTPPastaRetornos = "FTPPastaRetornos";
+        public static string FTPNomeDoUsuario = "FTPNomeDoUsuario";
+        public static string FTPNomeDoServidor = "FTPNomeDoServidor";
+        public static string FTPPorta = "FTPPorta";
+
+        public static string CertificadoDigital = "CertificadoDigital";
+        public static string CertificadoDigitalThumbPrint = "CertificadoDigitalThumbPrint";
+        public static string CertificadoInstalado = "CertificadoInstalado";
+        public static string CertificadoArquivo = "CertificadoArquivo";
+        public static string CertificadoSenha = "CertificadoSenha";
+
+        public static string AmbienteCodigo = "AmbienteCodigo";
+        public static string DiasLimpeza = "DiasLimpeza";
+        public static string DiretorioSalvarComo = "DiretorioSalvarComo";
+        public static string GravarRetornoTXTNFe = "GravarRetornoTXTNFe";
+        public static string GravarEventosNaPastaEnviadosNFe = "GravarEventosNaPastaEnviadosNFe";
+        public static string GravarEventosCancelamentoNaPastaEnviadosNFe = "GravarEventosCancelamentoNaPastaEnviadosNFe";
+        public static string GravarEventosDeTerceiros = "GravarEventosDeTerceiros";
+        public static string TempoConsulta = "TempoConsulta";
+        public static string tpEmis = "tpEmis";
+        public static string tpAmb = "tpAmb";
+        public static string UnidadeFederativaCodigo = "UnidadeFederativaCodigo";
     }
 }

@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfiguracao));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbSave = new System.Windows.Forms.ToolStripButton();
             this.tbCancel = new System.Windows.Forms.ToolStripButton();
             this.tbDelete = new System.Windows.Forms.ToolStripButton();
             this.tbAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.chkGravarLogOperacao = new System.Windows.Forms.CheckBox();
             this.cbChecaConexaoInternet = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,7 +53,6 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.cbProxy = new System.Windows.Forms.CheckBox();
-            this.chkGravarLogOperacao = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage9.SuspendLayout();
@@ -78,7 +77,7 @@
             // tbSave
             // 
             this.tbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbSave.Image = global::NFe.Interface.Properties.Resources.filesave;            
+            this.tbSave.Image = global::NFe.Interface.Properties.Resources.filesave;
             this.tbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbSave.Name = "tbSave";
             this.tbSave.Size = new System.Drawing.Size(36, 36);
@@ -134,7 +133,7 @@
             this.tabControl4.Location = new System.Drawing.Point(0, 39);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(611, 412);
+            this.tabControl4.Size = new System.Drawing.Size(611, 448);
             this.tabControl4.TabIndex = 3;
             this.tabControl4.SelectedIndexChanged += new System.EventHandler(this.tabControl4_SelectedIndexChanged);
             // 
@@ -155,10 +154,20 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(603, 386);
+            this.tabPage9.Size = new System.Drawing.Size(603, 422);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "Geral";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // chkGravarLogOperacao
+            // 
+            this.chkGravarLogOperacao.AutoSize = true;
+            this.chkGravarLogOperacao.Location = new System.Drawing.Point(9, 149);
+            this.chkGravarLogOperacao.Name = "chkGravarLogOperacao";
+            this.chkGravarLogOperacao.Size = new System.Drawing.Size(198, 17);
+            this.chkGravarLogOperacao.TabIndex = 15;
+            this.chkGravarLogOperacao.Text = "Gravar log das operações realizadas";
+            this.chkGravarLogOperacao.UseVisualStyleBackColor = true;
             // 
             // cbChecaConexaoInternet
             // 
@@ -312,21 +321,11 @@
             this.cbProxy.UseVisualStyleBackColor = true;
             this.cbProxy.CheckedChanged += new System.EventHandler(this.cbProxy_CheckedChanged);
             // 
-            // chkGravarLogOperacao
-            // 
-            this.chkGravarLogOperacao.AutoSize = true;
-            this.chkGravarLogOperacao.Location = new System.Drawing.Point(9, 149);
-            this.chkGravarLogOperacao.Name = "chkGravarLogOperacao";
-            this.chkGravarLogOperacao.Size = new System.Drawing.Size(198, 17);
-            this.chkGravarLogOperacao.TabIndex = 15;
-            this.chkGravarLogOperacao.Text = "Gravar log das operações realizadas";
-            this.chkGravarLogOperacao.UseVisualStyleBackColor = true;
-            // 
             // FormConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 451);
+            this.ClientSize = new System.Drawing.Size(611, 487);
             this.Controls.Add(this.tabControl4);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -334,8 +333,8 @@
             this.Name = "FormConfiguracao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuração";
-            this.Load += new System.EventHandler(this.FormConfiguracao_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguracao_FormClosing);
+            this.Load += new System.EventHandler(this.FormConfiguracao_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl4.ResumeLayout(false);

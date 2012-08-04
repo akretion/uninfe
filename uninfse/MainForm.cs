@@ -695,6 +695,82 @@ namespace uninfse
             this.Tag = 1;
             base.OnActivated(e);
         }
+
+        #region logs
+        private int LogAtivo()
+        {
+            FormLogs oLog = null;
+            //danasa 
+            foreach (Form fg in this.MdiChildren)
+            {
+                if (fg is FormLogs)
+                {
+                    ///
+                    /// configuracão já está ativa como MDI
+                    /// 
+                    this.notifyIcon1_MouseDoubleClick(null, null);
+                    oLog = fg as FormLogs;
+                    oLog.WindowState = FormWindowState.Normal;
+                    return 1;
+                }
+            }
+            foreach (Form fg in Application.OpenForms)
+            {
+                if (fg is FormConsultaCadastro)
+                {
+                    oLog = fg as FormLogs;
+                    oLog.WindowState = FormWindowState.Normal;
+                    return 0;
+                }
+            }
+            return -1;
+        }
+        private void tbLogs_Click(object sender, EventArgs e)
+        {
+            switch (LogAtivo())
+            {
+                case 0:
+                    ///
+                    /// configuracao ja existe como Modal
+                    /// minimiza o MainForm para que a tela de configuracao esteja visivel
+                    /// 
+                    this.WindowState = FormWindowState.Minimized;
+                    break;
+
+                case -1:
+                    {
+                        FormLogs consultaCadastro = new FormLogs();
+                        consultaCadastro.MdiParent = this;
+                        consultaCadastro.MinimizeBox = false;
+                        consultaCadastro.Show();
+                    }
+                    break;
+            }
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            switch (LogAtivo())
+            {
+                case -1:
+                    ///
+                    /// tela principal está visivel?
+                    /// 
+                    if (this.WindowState != FormWindowState.Minimized)
+                        ///
+                        /// então abre a configuração como MDI
+                        /// 
+                        tbLogs.PerformClick();
+                    else
+                        using (FormLogs oConfig = new FormLogs())
+                        {
+                            oConfig.MinimizeBox = true;
+                            oConfig.ShowDialog();
+                        }
+                    break;
+            }
+        }
+        #endregion
     }
     #endregion
 }

@@ -57,7 +57,7 @@ namespace NFe.Service
             try
             {
                 // Exclui o Arquivo de Erro
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
                 // Validar o Arquivo XML
                 ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
@@ -110,7 +110,14 @@ namespace NFe.Service
                     switch (Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Cte:
-                            oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                            if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
+                            {
+                                oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                            }
+                            else
+                            {
+                                oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                            }
                             break;
 
                         case TipoAplicativo.Nfe:
@@ -439,6 +446,14 @@ namespace NFe.Service
 
                             case "CancelarNfse":
                                 strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                break;
+
+                            case "ConsultarNfse":
+                                strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                break;
+
+                            case "ConsultarNfsePorRps":
+                                strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresa.Configuracoes[emp].tpAmb);
                                 break;
 
                             case "RecepcionarLoteRps":

@@ -10,6 +10,7 @@ namespace NFe.ConvertTxt
     {
         private XmlDocument doc;
         public NFe nfe { get; private set; }
+        public string XmlNota { get; private set; }
 
         public nfeRead()
         {
@@ -47,6 +48,7 @@ namespace NFe.ConvertTxt
             try
             {
                 doc.Load(xmlFilename);
+                this.XmlNota = doc.OuterXml;
 
                 foreach (XmlNode nodeRoot in doc.ChildNodes)
                 {
@@ -343,7 +345,7 @@ namespace NFe.ConvertTxt
                 switch (noder.LocalName.ToLower())
                 {
                     case "modfrete":
-                        nfe.Transp.modFrete = this.readInt32(noder, Properties.Resources.modFrete);
+                        nfe.Transp.modFrete = (TpcnModalidadeFrete)this.readInt32(noder, Properties.Resources.modFrete);
                         break;
 
                     case "transporta":
@@ -477,7 +479,7 @@ namespace NFe.ConvertTxt
                 detInfo.Prod.CFOP = this.readValue(ele, Properties.Resources.CFOP);
                 detInfo.Prod.cProd = this.readValue(ele, Properties.Resources.cProd);
                 detInfo.Prod.EXTIPI = this.readValue(ele, Properties.Resources.EXTIPI);
-                detInfo.Prod.indTot = this.readInt32(ele, Properties.Resources.indTot);
+                detInfo.Prod.indTot = (TpcnIndicadorTotal)this.readInt32(ele, Properties.Resources.indTot);
                 detInfo.Prod.NCM = this.readValue(ele, Properties.Resources.NCM);
                 detInfo.Prod.nItemPed = this.readInt32(ele, Properties.Resources.nItemPed);
                 detInfo.Prod.qCom = this.readDouble(ele, Properties.Resources.qCom);
@@ -503,7 +505,7 @@ namespace NFe.ConvertTxt
                 armaInfo.descr = this.readValue(nodedetArma, Properties.Resources.descr);
                 armaInfo.nCano = this.readInt32(nodedetArma, Properties.Resources.nCano);
                 armaInfo.nSerie = this.readInt32(nodedetArma, Properties.Resources.nSerie);
-                armaInfo.tpArma = this.readInt32(nodedetArma, Properties.Resources.tpArma);
+                armaInfo.tpArma = (TpcnTipoArma)this.readInt32(nodedetArma, Properties.Resources.tpArma);
 
                 detInfo.Prod.arma.Add(armaInfo);
             }
@@ -625,10 +627,10 @@ namespace NFe.ConvertTxt
 
                         detInfo.Imposto.ICMS.CST = this.readValue(nodedetImpostoICMS_, Properties.Resources.CST);
                         detInfo.Imposto.ICMS.CSOSN = this.readInt32(nodedetImpostoICMS_, Properties.Resources.CSOSN);
-                        detInfo.Imposto.ICMS.modBC = this.readValue(nodedetImpostoICMS_, Properties.Resources.modBC);
-                        detInfo.Imposto.ICMS.modBCST = this.readValue(nodedetImpostoICMS_, Properties.Resources.modBCST);
+                        detInfo.Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)this.readInt32(nodedetImpostoICMS_, Properties.Resources.modBC);
+                        detInfo.Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)this.readInt32(nodedetImpostoICMS_, Properties.Resources.modBCST);
                         detInfo.Imposto.ICMS.motDesICMS = this.readInt32(nodedetImpostoICMS_, Properties.Resources.motDesICMS);
-                        detInfo.Imposto.ICMS.orig = this.readInt32(nodedetImpostoICMS_, Properties.Resources.orig);
+                        detInfo.Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.readInt32(nodedetImpostoICMS_, Properties.Resources.orig);
                         detInfo.Imposto.ICMS.pCredSN = this.readDouble(nodedetImpostoICMS_, Properties.Resources.pCredSN);
                         detInfo.Imposto.ICMS.pICMS = this.readDouble(nodedetImpostoICMS_, Properties.Resources.pICMS);
                         detInfo.Imposto.ICMS.pICMSST = this.readDouble(nodedetImpostoICMS_, Properties.Resources.pICMSST);
@@ -795,7 +797,7 @@ namespace NFe.ConvertTxt
             nfe.emit.CNAE = this.readValue(el, Properties.Resources.CNAE);
             nfe.emit.CNPJ = this.readValue(el, Properties.Resources.CNPJ);
             nfe.emit.CPF = this.readValue(el, Properties.Resources.CPF);
-            nfe.emit.CRT = this.readInt32(el, Properties.Resources.CRT);
+            nfe.emit.CRT = (TpcnCRT)this.readInt32(el, Properties.Resources.CRT);
             nfe.emit.IE = this.readValue(el, Properties.Resources.IE);
             nfe.emit.IEST = this.readValue(el, Properties.Resources.IEST);
             nfe.emit.IM = this.readValue(el, Properties.Resources.IM);
@@ -839,7 +841,7 @@ namespace NFe.ConvertTxt
             nfe.ide.mod = Convert.ToInt32(this.readValue(nodeinfNFe, Properties.Resources.mod));
             nfe.ide.nNF = this.readInt32(nodeinfNFe, Properties.Resources.nNF);
             nfe.ide.natOp = this.readValue(nodeinfNFe, Properties.Resources.natOp);
-            nfe.ide.procEmi = this.readValue(nodeinfNFe, Properties.Resources.procEmi);
+            nfe.ide.procEmi = (TpcnProcessoEmissao)this.readInt32(nodeinfNFe, Properties.Resources.procEmi);
             nfe.ide.serie = Convert.ToInt32(this.readValue(nodeinfNFe, Properties.Resources.serie));
             nfe.ide.tpAmb = (TpcnTipoAmbiente)this.readInt32(nodeinfNFe, Properties.Resources.tpAmb);
             nfe.ide.tpEmis = (TpcnTipoEmissao)this.readInt32(nodeinfNFe, Properties.Resources.tpEmis);

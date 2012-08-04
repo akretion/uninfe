@@ -291,7 +291,7 @@ namespace NFe.Threadings
             //Executar a thread que faz a consulta do recibo das notas fiscais enviadas
             Processar srv = new Processar();
             Thread t3 = new Thread(srv.GerarXMLPedRec);
-            t3.Start(new Task());
+            t3.Start(new NFe.Service.TaskGerarXMLPedRec());
             Threads.Add(t3);
         }
     }

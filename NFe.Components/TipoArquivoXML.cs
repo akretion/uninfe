@@ -70,7 +70,43 @@ namespace NFe.Components
                                 InfSchema schema = null;
                                 try
                                 {
-                                    schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + "-" + padraoNFSe + oLerXml.Name];
+                                    string nome = oLerXml.Name;
+                                    if (oLerXml.Name.Equals("envEvento") && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                                    {
+                                        ///
+                                        /// **** tirei pq como estamos lendo a tag <tpEvento>, e nela tem como verificar qual XSD utilizar para validacao
+                                        /// então, o arquivo pode ter como sufixo -env-cce, -env-canc ou -env-manif
+                                        //if (!cRotaArqXML.EndsWith(Propriedade.ExtEnvio.EnvCCe_XML))
+                                        {
+                                            XmlDocument xml = new XmlDocument();
+                                            xml.Load(oLerXml);
+
+                                            XmlElement cl = (XmlElement)xml.GetElementsByTagName("tpEvento")[0];
+                                            if (cl != null)
+                                            {
+                                                switch (cl.InnerText)
+                                                {
+                                                    case "110110":
+                                                        nome = "envEvento";
+                                                        break;   //name=envEvento, pois existe uma entrada especifica no dicionario InfSchemas p/CCe
+                                                    case "110111":
+                                                        nome = "envEvento110111";
+                                                        break;   //name=envEvento110111, pois existe uma entrada especifica no dicionario InfSchemas p/ cancelamentos
+                                                    default:
+                                                        ///
+                                                        /// retorna:
+                                                        /// envEvento210200
+                                                        /// envEvento210210
+                                                        /// envEvento210220
+                                                        /// envEvento210240
+                                                        //nome += cl.InnerText;
+                                                        nome = "envConfRecebto";
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + "-" + padraoNFSe + nome];
                                 }
                                 catch
                                 {

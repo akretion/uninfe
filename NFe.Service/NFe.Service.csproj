@@ -67,15 +67,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes.cs" />
+    <Compile Include="NFe\ConverterTXT.cs" />
     <Compile Include="FluxoNfe.cs" />
     <Compile Include="GerarXML.cs" />
     <Compile Include="InvocarObjeto.cs" />
     <Compile Include="LerXML.cs" />
     <Compile Include="NFeEmProcessamento.cs" />
+    <Compile Include="NFe\TaskRegistroDeSaida.cs" />
+    <Compile Include="NFe\TaskRegistroDeSaidaCancelamento.cs" />
+    <Compile Include="NFSe\TaskCancelarNfse.cs" />
+    <Compile Include="NFSe\TaskConsultarLoteRps.cs" />
+    <Compile Include="NFSe\TaskConsultarNfse.cs" />
+    <Compile Include="NFSe\TaskConsultarNfsePorRps.cs" />
+    <Compile Include="NFSe\TaskConsultaSituacaoLoteRps.cs" />
+    <Compile Include="NFSe\TaskRecepcionarLoteRps.cs" />
     <Compile Include="Processar.cs" />
-    <Compile Include="TaskAbs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task.cs" />
+    <Compile Include="TaskAbst.cs" />
+    <Compile Include="NFe\TaskAssinarValidarNFe.cs" />
+    <Compile Include="NFe\TaskCadastroContribuinte.cs" />
+    <Compile Include="NFe\TaskCancelamento.cs" />
+    <Compile Include="NFe\TaskConsultaNFDest.cs" />
+    <Compile Include="NFe\TaskConsultaStatus.cs" />
+    <Compile Include="NFe\TaskDownloadNFe.cs" />
+    <Compile Include="NFe\TaskDPEC.cs" />
+    <Compile Include="NFe\TaskEventos.cs" />
+    <Compile Include="NFe\TaskGerarXMLPedRec.cs" />
+    <Compile Include="NFe\TaskInutilizacao.cs" />
+    <Compile Include="NFe\TaskMontarLoteUmaNFe.cs" />
+    <Compile Include="NFe\TaskMontarLoteVariasNFe.cs" />
+    <Compile Include="NFe\TaskNFeRecepcao.cs" />
+    <Compile Include="NFe\TaskPedidoConsultaSituacaoNFe.cs" />
+    <Compile Include="NFe\TaskRetRecepcao.cs" />
+    <Compile Include="TaskWSExiste.cs" />
+    <Compile Include="TFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
@@ -102,6 +127,10 @@
       <Project>{4A0D1E87-2994-4678-9AF1-EEBD093B7B44}</Project>
       <Name>NFe.Validate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFSe.Components\NFSe.Components.csproj">
+      <Project>{E0E67E9B-E48B-4302-BD67-E09FA726FD6F}</Project>
+      <Name>NFSe.Components</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -120,6 +149,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,3 +11,4 @@ C:\projetos\uninfe\trunk\fontes\UniNFeServico\obj\Release\UniNFeServico.exe
 C:\projetos\uninfe\trunk\fontes\UniNFeServico\obj\Release\UniNFeServico.pdb
 C:\projetos\uninfe\trunk\fontes\UniNFeServico\obj\Release\ResGen.read.1.tlog
 C:\projetos\uninfe\trunk\fontes\UniNFeServico\obj\Release\ResGen.write.1.tlog
+C:\projetos\uninfe\trunk\fontes\uninfe\bin\Release\servico_testar.bat

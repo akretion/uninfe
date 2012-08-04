@@ -69,6 +69,32 @@ namespace uninfse
 
             #region Schemas padrão BETHA
 
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-BETHA-e:ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "e:ConsultarNfseEnvio",
+                ID = 22,
+                ArquivoXSD = "NFSe\\BETHA\\servico_consultar_nfse_envio_v01.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.betha.com.br/e-nota-contribuinte-ws"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-BETHA-e:ConsultarNfsePorRpsEnvio", new InfSchema()
+            {
+                Tag = "e:ConsultarNfsePorRpsEnvio",
+                ID = 23,
+                ArquivoXSD = "NFSe\\BETHA\\servico_consultar_nfse_rps_envio_v01.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.betha.com.br/e-nota-contribuinte-ws"
+            });
+            #endregion
+
             #region XML de Consulta de Lote RPS
             SchemaXML.InfSchemas.Add("NFSE-BETHA-e:ConsultarLoteRpsEnvio", new InfSchema()
             {

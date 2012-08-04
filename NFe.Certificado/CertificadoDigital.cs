@@ -181,7 +181,7 @@ namespace NFe.Exceptions
     /// <summary>
     /// Classe para tratamento de exceções da classe Invocar Objeto
     /// </summary>
-    public class ExceptionCerticicadoDigital : Exception
+    public class ExceptionCertificadoDigital : Exception
     {
         public ErroPadrao ErrorCode { get; private set; }
 
@@ -191,7 +191,7 @@ namespace NFe.Exceptions
         /// <param name="CodigoErro">Código da mensagem de erro (Classe MsgErro)</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>24/11/2009</date>
-        public ExceptionCerticicadoDigital(ErroPadrao Erro)
+        public ExceptionCertificadoDigital(ErroPadrao Erro)
             : base(MsgErro.ErroPreDefinido(Erro))
         {
             this.ErrorCode = Erro;
@@ -202,7 +202,7 @@ namespace NFe.Exceptions
         /// </summary>
         /// <param name="CodigoErro">Código da mensagem de erro (Classe MsgErro)</param>
         /// <param name="ComplementoMensagem">Complemento da mensagem de exceção</param>
-        public ExceptionCerticicadoDigital(ErroPadrao Erro, string ComplementoMensagem)
+        public ExceptionCertificadoDigital(ErroPadrao Erro, string ComplementoMensagem)
             : base(MsgErro.ErroPreDefinido(Erro, ComplementoMensagem))
         {
             this.ErrorCode = Erro;

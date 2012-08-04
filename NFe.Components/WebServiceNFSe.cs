@@ -28,6 +28,7 @@ namespace NFe.Components
                 return _Padroes.ToArray();
             }
         }
+        /*
 
         public static string URLHomologacao(PadroesNFSe padrao)
         {
@@ -38,6 +39,7 @@ namespace NFe.Components
         {
             return "<URLProducao></URLProducao>";
         }
+        */
 
         public static string WebServicesHomologacao(PadroesNFSe padrao)
         {

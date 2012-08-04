@@ -86,8 +86,19 @@ namespace NFe.Certificado
                                         Reference reference = new Reference();
                                         reference.Uri = "";
 
-                                        // pega o uri que deve ser assinada
-                                        XmlAttributeCollection _Uri = doc.GetElementsByTagName(tagAtributoId).Item(0).Attributes;
+                                        // pega o uri que deve ser assinada                                       
+                                        XmlElement childElemen = (XmlElement)childNodes;
+                                        if (childElemen.GetAttributeNode("Id") != null)
+                                        {
+                                            reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
+                                        }
+                                        else if (childElemen.GetAttributeNode("id") != null)
+                                        {
+                                            reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                                        }
+                                        /*
+                                        XmlAttributeCollection _Uri = childElemen.GetElementsByTagName(tagAtributoId).Item(0).Attributes;
+
                                         if (_Uri.Count > 0)
                                             foreach (XmlAttribute _atributo in _Uri)
                                             {
@@ -96,6 +107,7 @@ namespace NFe.Certificado
                                                     reference.Uri = "#" + _atributo.InnerText;
                                                 }
                                             }
+                                        */
 
                                         // Create a SignedXml object.
                                         SignedXml signedXml = new SignedXml(doc);

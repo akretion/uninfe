@@ -16,7 +16,7 @@ namespace UniNFeServico
     public partial class UniNFeService : ServiceBase
     {
         private List<Thread> threads = new List<Thread>();
-        private string StartupPath;
+        //private string StartupPath;
 
         public UniNFeService()
         {
@@ -27,7 +27,7 @@ namespace UniNFeServico
         {
             base.OnStart(args);
 
-            StartupPath = NFe.Components.Propriedade.PastaExecutavel;
+            //StartupPath = NFe.Components.Propriedade.PastaExecutavel;
             WriteLog("Serviço iniciado na pasta: " + NFe.Components.Propriedade.PastaExecutavel);
             this.iniciarServicosUniNFe();
         }

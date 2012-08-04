@@ -55,3 +55,6 @@ C:\projetos\uninfe\trunk\fontes\NFe.Interface\bin\Debug\NFe.Components.Info.pdb
 C:\projetos\uninfe\trunk\fontes\NFe.Interface\obj\Debug\NFe.Interface.FormValidarXML.resources
 C:\projetos\uninfe\trunk\fontes\NFe.Interface\obj\Debug\ResGen.read.1.tlog
 C:\projetos\uninfe\trunk\fontes\NFe.Interface\obj\Debug\ResGen.write.1.tlog
+C:\projetos\uninfe\trunk\fontes\NFe.Interface\bin\Debug\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\NFe.Interface\bin\Debug\NFSe.Components.pdb
+C:\projetos\uninfe\trunk\fontes\NFe.Interface\obj\Debug\NFe.Interface.FormLogs.resources

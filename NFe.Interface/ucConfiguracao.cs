@@ -39,6 +39,10 @@ namespace NFe.Interface
                     edtCodMun.Visible =
                     edtPadrao.Visible = false;
             }
+            checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
+                checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
+                textBox_PastaDownload.Visible =
+                button_SelecionarPastaDownload.Visible = Propriedade.TipoAplicativo == TipoAplicativo.Nfe;
             this.updateText = updateText;
         }
 
@@ -188,6 +192,7 @@ namespace NFe.Interface
                                 oEmpresa.PastaEnvioEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvioEmLote, oEmpresa);
                                 oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
                                 oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
+                                oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
 
                                 oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
                                 oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
@@ -195,6 +200,9 @@ namespace NFe.Interface
                                 oEmpresa.XMLDanfeMonNFe = empresa.XMLDanfeMonNFe;
                                 oEmpresa.XMLDanfeMonProcNFe = empresa.XMLDanfeMonProcNFe;
                                 oEmpresa.GravarRetornoTXTNFe = empresa.GravarRetornoTXTNFe;
+                                oEmpresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
+                                oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
+                                oEmpresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
 
                                 oEmpresa.CriaPastasAutomaticamente = true;
                                 break;
@@ -211,6 +219,7 @@ namespace NFe.Interface
                             oEmpresa.PastaErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Erro");
                             oEmpresa.PastaEnvioEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\EnvioEmLote");
                             oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Validar");
+                            oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\DownloadNFe");
 
                             oEmpresa.CriaPastasAutomaticamente = true;
                         }
@@ -249,6 +258,7 @@ namespace NFe.Interface
             textBox_PastaXmlErro.Text = oEmpresa.PastaErro;
             textBox_PastaLote.Text = oEmpresa.PastaEnvioEmLote;
             textBox_PastaValidar.Text = oEmpresa.PastaValidar;
+            textBox_PastaDownload.Text = oEmpresa.PastaDownloadNFeDest;
             textBox_PastaBackup.Text = (oEmpresa.PastaBackup == string.Empty ? string.Empty : oEmpresa.PastaBackup);
 
             tbPastaConfigUniDanfe.Text = (oEmpresa.PastaConfigUniDanfe == string.Empty ? string.Empty : oEmpresa.PastaConfigUniDanfe);
@@ -257,11 +267,14 @@ namespace NFe.Interface
             cbDanfeMonNfe.Checked = oEmpresa.XMLDanfeMonNFe;
             cbDanfeMonProcNfe.Checked = oEmpresa.XMLDanfeMonProcNFe;
             checkBoxRetornoNFETxt.Checked = oEmpresa.GravarRetornoTXTNFe;
+            checkBoxGravarEventosDeTerceiros.Checked = oEmpresa.GravarEventosDeTerceiros;
+            checkBoxGravarEventosNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosNaPastaEnviadosNFe;
+            checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
             cbCriaPastas.Checked = oEmpresa.CriaPastasAutomaticamente;
 
             cboDiretorioSalvarComo.Text = oEmpresa.DiretorioSalvarComo;
             udDiasLimpeza.Value = oEmpresa.DiasLimpeza;
-            udTempoConsulta.Value = oEmpresa.TempoConsulta;
+            udTempoConsulta.Value = (oEmpresa.TempoConsulta >= udTempoConsulta.Minimum && oEmpresa.TempoConsulta <= udTempoConsulta.Maximum ? oEmpresa.TempoConsulta : udTempoConsulta.Minimum);
 
             edtFTP_Ativo.Checked = oEmpresa.FTPAtivo;
             edtFTP_GravaXMLPastaUnica.Checked = oEmpresa.FTPGravaXMLPastaUnica;
@@ -327,13 +340,18 @@ namespace NFe.Interface
             oEmpresa.PastaRetorno = this.textBox_PastaRetornoXML.Text.Trim();
             oEmpresa.PastaEnviado = this.textBox_PastaEnviados.Text.Trim();
             oEmpresa.PastaErro = this.textBox_PastaXmlErro.Text.Trim();
-            oEmpresa.UFCod = Convert.ToInt32(this.comboBox_UF.SelectedValue);
-            oEmpresa.tpAmb = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
-            oEmpresa.tpEmis = Convert.ToInt32(this.comboBox_tpEmis.SelectedValue);
             oEmpresa.PastaBackup = this.textBox_PastaBackup.Text.Trim();
             oEmpresa.PastaEnvioEmLote = this.textBox_PastaLote.Text.Trim();
             oEmpresa.PastaValidar = this.textBox_PastaValidar.Text.Trim();
+            oEmpresa.PastaDownloadNFeDest = this.textBox_PastaDownload.Text.Trim();
+
+            oEmpresa.UFCod = Convert.ToInt32(this.comboBox_UF.SelectedValue);
+            oEmpresa.tpAmb = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
+            oEmpresa.tpEmis = Convert.ToInt32(this.comboBox_tpEmis.SelectedValue);
             oEmpresa.GravarRetornoTXTNFe = this.checkBoxRetornoNFETxt.Checked;
+            oEmpresa.GravarEventosDeTerceiros = this.checkBoxGravarEventosDeTerceiros.Checked;
+            oEmpresa.GravarEventosNaPastaEnviadosNFe = this.checkBoxGravarEventosNaPastaEnviadosNFe.Checked;
+            oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked;
             oEmpresa.DiretorioSalvarComo = this.cboDiretorioSalvarComo.Text;
             oEmpresa.PastaConfigUniDanfe = tbPastaConfigUniDanfe.Text;
             oEmpresa.PastaExeUniDanfe = tbPastaExeUniDanfe.Text;
@@ -366,11 +384,30 @@ namespace NFe.Interface
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
+            //textBox_dadoscertificado.Clear();
+            textBox_dadoscertificado.Controls.Clear();
             if (oMeuCert != null)
             {
+                DateTime hoje = DateTime.Now;
+                TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
+                Label mensagemRestante = new Label();
+                mensagemRestante.Location = new Point(0,95);
+                mensagemRestante.AutoSize = true;
+                if (dif.Days > 0)
+                {
+                    mensagemRestante.Text = ("Faltam " + dif.Days + " dias para vencer o certificado.");
+                }
+                else
+                {
+                    mensagemRestante.Text = "Certificado vencido a " + (dif.Days)*1 + " dias.";
+                    mensagemRestante.ForeColor = Color.Red;
+                    mensagemRestante.Font = new Font(mensagemRestante.Font, FontStyle.Bold);
+                }
+                this.textBox_dadoscertificado.Controls.Add(mensagemRestante);
+
                 this.textBox_dadoscertificado.Text =
                     "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
-                    "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter + "\r\n\r\n" +
+                    "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter + "\r\n" /*+ mensagemRestante*/ + "\r\n\r\n" +
                     "[ThumbPrint]\r\n" + oMeuCert.Thumbprint;
             }
             else
@@ -418,12 +455,14 @@ namespace NFe.Interface
                     }
                     if (mudaPastas)
                     {
-                        textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Envio");
-                        textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Enviado");
-                        textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Retorno");
-                        textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Erro");
-                        textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\EnvioEmLote");
-                        textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Validar");
+                        this.textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Envio");
+                        this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Enviado");
+                        this.textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Retorno");
+                        this.textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Erro");
+                        this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\EnvioEmLote");
+                        this.textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Validar");
+                        if (!string.IsNullOrEmpty(textBox_PastaDownload.Text))
+                            this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\DownloadNFe");
 
                         if (!string.IsNullOrEmpty(textBox_PastaBackup.Text))
                             textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Backup");
@@ -452,6 +491,7 @@ namespace NFe.Interface
                 case 7: control = tbPastaExeUniDanfe; break;
                 case 8: control = tbPastaConfigUniDanfe; break;
                 case 9: control = tbPastaXmlParaDanfeMon; break;
+                case 10: control = textBox_PastaDownload; break;
             }
             this.folderBrowserDialog1.SelectedPath = control.Text;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -527,7 +567,8 @@ namespace NFe.Interface
                                    dirNOTexiste(this.textBox_PastaRetornoXML.Text) ||
                                    dirNOTexiste(this.textBox_PastaXmlErro.Text) ||
                                    dirNOTexiste(this.textBox_PastaValidar.Text) ||
-                                   dirNOTexiste(this.textBox_PastaLote.Text);
+                                   dirNOTexiste(this.textBox_PastaLote.Text) ||
+                                   dirNOTexiste(this.textBox_PastaDownload.Text);
         }
 
         private void btnFTPTestar_Click(object sender, EventArgs e)

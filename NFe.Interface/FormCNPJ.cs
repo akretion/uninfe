@@ -21,6 +21,8 @@ namespace NFe.Interface
 
         private void FormCNPJ_Load(object sender, EventArgs e)
         {
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse) this.Text = "UniNFse - CNPJ";
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte) this.Text = "UniCTe - CNPJ";
             this.edtCNPJ.Text = "";
         }
 

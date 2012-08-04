@@ -15,6 +15,14 @@ namespace uninfe
         [STAThread]
         static void Main()
         {
+            /*
+            //Microsoft.Win32.RegistryKey Key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727", false);
+            Microsoft.Win32.RegistryKey Key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP", false);
+            string[] v = Key.GetSubKeyNames();
+            foreach (string s in v)
+                Console.WriteLine(s);
+            */
+
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 

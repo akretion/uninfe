@@ -138,3 +138,5 @@ C:\projetos\uninfe\trunk\fontes\unicte\obj\Release\unicte.exe.manifest
 C:\projetos\uninfe\trunk\fontes\unicte\obj\Release\unicte.application
 C:\projetos\uninfe\trunk\fontes\unicte\obj\Release\unicte.exe
 C:\projetos\uninfe\trunk\fontes\unicte\obj\Release\unicte.pdb
+C:\projetos\uninfe\trunk\fontes\unicte\bin\Release\NFSe.Components.dll
+C:\projetos\uninfe\trunk\fontes\unicte\bin\Release\NFSe.Components.pdb

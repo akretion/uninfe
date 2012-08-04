@@ -343,6 +343,14 @@ namespace NFe.Components
             }
             return Retorno;
         }
+
+        public static string LerTag(XmlElement Elemento, string NomeTag, string defaultValue)
+        {
+            string result = LerTag(Elemento, NomeTag, false);
+            if (string.IsNullOrEmpty(result))
+                result = defaultValue;
+            return result;
+        }
         #endregion
 
         #region IsConnectedToInternet()

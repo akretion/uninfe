@@ -307,13 +307,13 @@ namespace NFe.Settings
 
                     var xmlDoc = new XmlDocument();
                     xmlDoc.Load(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig);
-                    var configList = xmlDoc.GetElementsByTagName("nfe_configuracoes");
+                    var configList = xmlDoc.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
                     foreach (XmlNode configNode in configList)
                     {
                         var configElemento = (XmlElement)configNode;
 
-                        if (configElemento.GetElementsByTagName("CertificadoDigital")[0] != null)
-                            certificado = configElemento.GetElementsByTagName("CertificadoDigital")[0].InnerText;
+                        if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0] != null)
+                            certificado = configElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0].InnerText;
                     }
 
                     string[] dados = certificado.Split(new char[] { ',', ':' });
@@ -477,7 +477,8 @@ namespace NFe.Settings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 27/04/2011
         /// </remarks>
-        public static Servicos DefinirTipoServico(int empresa, string fullPath)
+#if movido_para_processar_cs
+        public static Servicos xDefinirTipoServico(int empresa, string fullPath)
         {
             Servicos tipoServico = Servicos.Nulo;
 
@@ -544,6 +545,10 @@ namespace NFe.Settings
                     {
                         tipoServico = Servicos.GerarChaveNFe;
                     }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.WSExiste;
+                    }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
                     {
                         tipoServico = Servicos.EnviarDPEC;
@@ -564,17 +569,29 @@ namespace NFe.Settings
                     {
                         tipoServico = Servicos.EnviarCCe;
                     }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarEventoCancelamento;
+                    }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
                     {
                         tipoServico = Servicos.EnviarManifestacao;
                     }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
                     {
-                        tipoServico = Servicos.ConsultaNFeDest;
+                        tipoServico = Servicos.ConsultaNFDest;
                     }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_TXT) >= 0)
                     {
                         tipoServico = Servicos.DownloadNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.RegistroDeSaida;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.RegistroDeSaidaCancelamento;
                     }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.MontarLote) >= 0)
                     {
@@ -617,6 +634,7 @@ namespace NFe.Settings
 
             return tipoServico;
         }
+#endif
         #endregion
 
         #region CarregaEmpresa()

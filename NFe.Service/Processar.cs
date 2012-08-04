@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Xml;
 using System.Windows.Forms;
 using System.ComponentModel;
+
 using NFe.Components;
 using NFe.Settings;
 using NFe.Exceptions;
@@ -22,14 +23,16 @@ namespace NFe.Service
         #region Métodos gerais
 
         #region ProcessaArquivo()
-        public void ProcessaArquivo(string arquivo, Servicos servico)
+        public void ProcessaArquivo(int emp, string arquivo)//, Servicos servico)
         {
             try
             {
-                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-
+                Servicos servico = this.DefinirTipoServico(emp, arquivo);
                 try
                 {
+                    if (servico == Servicos.Nulo)
+                        throw new Exception("Não pode identificar o tipo de serviço baseado no arquivo " + arquivo);
+
                     if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
                     {
                         #region Executar o serviço da NFS-e
@@ -38,43 +41,37 @@ namespace NFe.Service
                             case Servicos.ConsultarLoteRps:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaLoteRps(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarLoteRps());
                                 break;
 
                             case Servicos.CancelarNfse:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                CancelarNfse(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskCancelarNfse());
                                 break;
 
                             case Servicos.ConsultarSituacaoLoteRps:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaSituacaoLoteRps(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskConsultaSituacaoLoteRps());
                                 break;
 
                             case Servicos.ConsultarNfse:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaNfse(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarNfse());
                                 break;
 
                             case Servicos.ConsultarNfsePorRps:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaNfsePorRps(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarNfsePorRps());
                                 break;
 
                             case Servicos.RecepcionarLoteRps:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                RecepcionarLoteRps(new Task(), arquivo);
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskRecepcionarLoteRps());
                                 break;
                         }
                         #endregion
@@ -87,54 +84,53 @@ namespace NFe.Service
                             case Servicos.PedidoConsultaSituacaoNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaSituacaoNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskPedidoConsultaSituacaoNFe());
                                 break;
 
                             case Servicos.PedidoConsultaStatusServicoNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoConsultaStatusServicoNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskConsultaStatus());
                                 break;
 
                             case Servicos.ConsultaCadastroContribuinte:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                ConsultaCadastroContribuinte(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskCadastroContribuinte());
                                 break;
 
                             case Servicos.CancelarNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                CancelarNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskCancelamento());
                                 break;
 
                             case Servicos.InutilizarNumerosNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                InutilizarNumerosNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskInutilizacao());
                                 break;
 
                             case Servicos.PedidoSituacaoLoteNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                PedidoSituacaoLoteNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskRetRecepcao());
                                 break;
 
                             case Servicos.MontarLoteUmaNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
+                                DirecionarArquivo(arquivo, new TaskMontarLoteUmaNFe());
+                                break;
 
-                                MontarLoteUmaNFe(new Task(), arquivo);
+                            case Servicos.MontarLoteVariasNFe:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                DirecionarArquivo(arquivo, new TaskMontarLoteVariasNFe());
                                 break;
 
                             case Servicos.EnviarLoteNfe:
-                                EnviarLoteNfe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskNFeRecepcao());
                                 break;
 
                             case Servicos.GerarChaveNFe:
@@ -144,15 +140,13 @@ namespace NFe.Service
                             case Servicos.EnviarDPEC:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                EnviarDPEC(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskRecepcaoDPEC());
                                 break;
 
                             case Servicos.ConsultarDPEC:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-
-                                ConsultarDPEC(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskConsultaDPEC());
                                 break;
 
                             case Servicos.ConverterTXTparaXML:
@@ -161,15 +155,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarNFe:
                                 CertVencido(emp);
-
-                                AssinarValidarNFe(new Task(), arquivo, Empresa.Configuracoes[emp].PastaEnvioEmLote);
-                                break;
-
-                            case Servicos.MontarLoteVariasNFe:
-                                CertVencido(emp);
-                                IsConnectedToInternet();
-
-                                MontarLoteVariasNFe(new Task(), arquivo);
+                                AssinarValidarNFe(arquivo, Empresa.Configuracoes[emp].PastaEnvioEmLote);
                                 break;
 
                             case Servicos.EnviarCCe:
@@ -177,19 +163,35 @@ namespace NFe.Service
                             case Servicos.EnviarEventoCancelamento:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-                                EnviarEvento(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskEventos());
                                 break;
 
-                            case Servicos.ConsultaNFeDest:
+                            case Servicos.ConsultaNFDest:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-                                EnviarConsultarNFeDest(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskConsultaNFDest());
                                 break;
 
                             case Servicos.DownloadNFe:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
-                                EnviarDownloadNFe(new Task(), arquivo);
+                                DirecionarArquivo(arquivo, new TaskDownloadNFe());
+                                break;
+
+                            case Servicos.RegistroDeSaida:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                DirecionarArquivo(arquivo, new TaskRegistroDeSaida());
+                                break;
+
+                            case Servicos.RegistroDeSaidaCancelamento:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                DirecionarArquivo(arquivo, new TaskRegistroDeSaidaCancelamento());
+                                break;
+
+                            case Servicos.WSExiste:
+                                DirecionarArquivo(arquivo, new TaskWSExiste());
                                 break;
                         }
                         #endregion
@@ -200,7 +202,6 @@ namespace NFe.Service
                     {
                         case Servicos.AssinarValidar:
                             CertVencido(emp);
-
                             AssinarValidar(arquivo);
                             break;
 
@@ -218,167 +219,190 @@ namespace NFe.Service
                 {
                     GravaErroERP(arquivo, servico, ex, ex.ErrorCode);
                 }
-                catch (ExceptionCerticicadoDigital ex)
+                catch (ExceptionCertificadoDigital ex)
                 {
                     GravaErroERP(arquivo, servico, ex, ex.ErrorCode);
                 }
-                catch
-                {
-                }
-                finally
-                {
-                }
-            }
-            catch { }
-        }
-        #endregion
-
-        #region Métodos para execução dos servicos
-
-        #region PedidoConsultaSituacaoNFe()
-        /// <summary>
-        /// Executar as tarefas pertinentes a consulta da situação da NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 18/04/2011
-        /// </remarks>
-        protected void PedidoConsultaSituacaoNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "Consulta");
-        }
-        #endregion
-
-        #region PedidoConsultaStatusServicoNFe()
-        /// <summary>
-        /// Executa as tarefas pertinentes a consulta status dos serviços da NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void PedidoConsultaStatusServicoNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "StatusServico");
-        }
-        #endregion
-
-        #region ConsultaCadastroContribuinte()
-        /// <summary>
-        /// Executa as tarefas pertinentes a consulta do cadastro de contribuintes
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void ConsultaCadastroContribuinte(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultaCadastro");
-        }
-        #endregion
-
-        #region CancelarNFe()
-        /// <summary>
-        /// Executa as tarefas pertinentes ao Cancelamento de NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void CancelarNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "Cancelamento");
-        }
-        #endregion
-
-        #region InutilizarNumerosNFe()
-        /// <summary>
-        /// Executa as tarefas pertinentes a Inutilização de Números da NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void InutilizarNumerosNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "Inutilizacao");
-        }
-        #endregion
-
-        #region PedidoSituacaoLoteNFe()
-        /// <summary>
-        /// Executa as tarefas pertinentes a consulta situação do lote da NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void PedidoSituacaoLoteNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RetRecepcao");
-        }
-        #endregion
-
-        #region MontarLoteUmaNFe()
-        /// <summary>
-        /// Executar as tarefas pertinentes a assinatura e montagem do lote de uma única nota fiscal eletrônica
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void MontarLoteUmaNFe(Object nfe, string arquivo)
-        {
-            try
-            {
-                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-                AssinarValidarNFe(nfe, arquivo, Empresa.Configuracoes[emp].PastaEnvio);
-
-                Auxiliar oAux = new Auxiliar();
-
-                //Definir o tipo do serviço
-                Type tipoServico = nfe.GetType();
-
-                //Definir o nome do arquivo assinado
-                FileInfo arq = new FileInfo(arquivo);
-                string arquivoAssinado = arq.DirectoryName.Substring(0, arq.DirectoryName.Length - 5) + Propriedade.NomePastaXMLAssinado + "\\" + arq.Name;
-
-                //Montar lote de nfe
-                FluxoNfe oFluxoNfe = new FluxoNfe();
-
-                string cError = "";
-                try
-                {
-                    DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoAssinado);
-                    if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
-                    {
-                        //Gerar lote
-                        tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, nfe, new object[] { arquivoAssinado });
-                        tipoServico.InvokeMember("LoteNfe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { arquivoAssinado });
-                    }
-                }
-                catch (IOException ex)
-                {
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
-                }
                 catch (Exception ex)
                 {
-                    cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
-                }
-
-                ///
-                /// danasa 9-2009
-                /// 
-                if (!string.IsNullOrEmpty(cError))
-                {
-                    try
+                    if (servico == Servicos.PedidoConsultaStatusServicoNFe)
                     {
+                        /// 7/2012 <<< danasa
+                        ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
                         ///
-                        /// grava o arquivo de erro
-                        /// 
-                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(arquivoAssinado) + ".err", cError);
-                        ///
-                        /// move o arquivo para a pasta de erro
-                        /// 
-                        oAux.MoveArqErro(arquivoAssinado);
-                    }
-                    catch
-                    {
-                        //A principio não vou fazer nada Wandrey 24/04/2011
+                        GravaErroERP(arquivo, servico, ex, ErroPadrao.ErroNaoDetectado);
                     }
                 }
             }
             catch { }
+        }
+        #endregion
+
+        #region DefinirTipoServico()
+        /// <summary>
+        /// Definir o tipo do servico a ser executado a partir da extensão do arquivo
+        /// </summary>
+        /// <param name="fullPath">Nome do arquivo completo do qual é para definir o tipo de serviço a ser executado</param>
+        /// <returns>Retorna o tipo do serviço que deve ser executado</returns>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 27/04/2011
+        /// </remarks>
+        private Servicos DefinirTipoServico(int empresa, string fullPath)
+        {
+            Servicos tipoServico = Servicos.Nulo;
+
+            try
+            {
+                string arq = fullPath.ToLower().Trim();
+
+                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
+                {
+                    tipoServico = Servicos.AssinarValidar;
+                }
+                else
+                {
+                    if (arq.IndexOf(Propriedade.ExtEnvio.PedSit_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSit_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.PedidoConsultaSituacaoNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSta_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSta_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.PedidoConsultaStatusServicoNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCad_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsCad_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultaCadastroContribuinte;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedCan_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedCan_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.CancelarNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedInu_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedInu_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.InutilizarNumerosNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedRec_XML) >= 0)
+                    {
+                        tipoServico = Servicos.PedidoSituacaoLoteNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe) >= 0)
+                    {
+                        FileInfo infArq = new FileInfo(arq);
+                        string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
+                        string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvioEmLote).ToLower().Trim();
+                        string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvio).ToLower().Trim();
+
+                        //Remover a subpasta temp
+                        if (pastaArq.EndsWith("\\temp"))
+                            pastaArq = Path.GetDirectoryName(pastaArq);
+
+                        //Definir o serviço
+                        if (pastaArq == pastaLote)
+                            tipoServico = Servicos.AssinarValidarNFe;
+                        else if (pastaArq == pastaEnvio)
+                            tipoServico = Servicos.MontarLoteUmaNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.ConverterTXTparaXML;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLot) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarLoteNfe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.GerarChaveNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.WSExiste;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarDPEC;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultarDPEC;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultaInformacoesUniNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarCCe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarEventoCancelamento;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.EnviarManifestacao;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultaNFDest;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.DownloadNFe;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.RegistroDeSaida;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_TXT) >= 0)
+                    {
+                        tipoServico = Servicos.RegistroDeSaidaCancelamento;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.MontarLote) >= 0)
+                    {
+                        if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                        {
+                            tipoServico = Servicos.MontarLoteVariasNFe;
+                        }
+                    }
+                    #region NFS-e
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedLoteRps) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultarLoteRps;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedCanNfse) >= 0)
+                    {
+                        tipoServico = Servicos.CancelarNfse;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitLoteRps) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultarSituacaoLoteRps;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLoteRps) >= 0)
+                    {
+                        tipoServico = Servicos.RecepcionarLoteRps;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfse) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultarNfse;
+                    }
+                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfseRps) >= 0)
+                    {
+                        tipoServico = Servicos.ConsultarNfsePorRps;
+                    }
+                    #endregion
+                }
+            }
+            catch
+            {
+            }
+
+            return tipoServico;
         }
         #endregion
 
@@ -388,22 +412,24 @@ namespace NFe.Service
         /// </summary>
         /// <param name="nfe">Objeto da classe ServicoNFe</param>
         /// <param name="arquivo">Arquivo a ser validado e assinado</param>
-        protected void AssinarValidarNFe(Object nfe, string arquivo, string pasta)
+        protected void AssinarValidarNFe(string arquivo, string pasta)
         {
-            //Se o arquivo estiver em uso eu pulo ele para tentar mais tarde
             try
             {
-                //                if (!Auxiliar.FileInUse(arquivo))
-                //                {
+                TaskAssinarValidarNFe nfe = new TaskAssinarValidarNFe();
+                nfe.NomeArquivoXML = arquivo;
+                nfe.AssinarValidarXMLNFe(pasta);
+
+                /*
                 //Definir o tipo do serviço
                 Type tipoServico = nfe.GetType();
 
                 //Definir o arquivo XML 
                 tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, nfe, new object[] { arquivo });
-
+                
                 //Assinar e Validar o XML de nota fiscal eletrônica e coloca na pasta de Assinados
                 tipoServico.InvokeMember("AssinarValidarXMLNFe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new Object[] { pasta });
-                //                }
+                 */
             }
             catch (Exception ex)
             {
@@ -434,182 +460,20 @@ namespace NFe.Service
         }
         #endregion
 
-        #region MontarLoteVariasNFe()
+        #region AlterarConfiguracoesUniNFe()
         /// <summary>
-        /// Executar as tarefas pertinentes a assinatura e montagem do lote de várias notas fiscais eletrônicas
+        /// Executa as tarefas pertinentes a consulta das informações do UniNFe
         /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void MontarLoteVariasNFe(Object nfe, string arquivo)
+        /// <param name="arquivo">Arquivo a ser tratado/param>
+        protected void AlterarConfiguracoesUniNFe(string arquivo)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-            Auxiliar oAux = new Auxiliar();
-            List<string> arquivosNFe = new List<string>();
-
-            //Aguardar a assinatura de todos os arquivos da pasta de lotes
-            arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvioEmLote, "*" + Propriedade.ExtEnvio.Nfe);
-            if (arquivosNFe.Count == 0) // && !Auxiliar.FileInUse(arquivo))
+            try
             {
-                List<string> notas = new List<string>();
-                FileStream fsArquivo = null;
-                FluxoNfe fluxoNfe = new FluxoNfe();
-
-                try
-                {
-                    try
-                    {
-                        XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                        fsArquivo = new FileStream(arquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
-                        doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
-
-                        XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteNFe"); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentoNode in documentoList)
-                        {
-                            XmlElement documentoElemento = (XmlElement)documentoNode;
-
-                            int QtdeArquivo = documentoElemento.GetElementsByTagName("ArquivoNFe").Count;
-
-                            for (int d = 0; d < QtdeArquivo; d++)
-                            {
-                                string arquivoNFe = Empresa.Configuracoes[emp].PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
-
-                                if (File.Exists(arquivoNFe))
-                                {
-
-                                    try
-                                    {
-                                        DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
-                                        if (!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
-                                        {
-                                            notas.Add(arquivoNFe);
-                                        }
-                                        else
-                                        {
-                                            throw new Exception("Arquivo: " + arquivoNFe + " já está no fluxo de envio e não será incluido em novo lote.");
-
-                                            //File.Delete(arquivoNFe);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        throw (ex);
-                                    }
-                                }
-                                else
-                                {
-                                    throw new Exception("Arquivo: " + arquivoNFe + " não existe e não será incluido no lote!");
-                                }
-                            }
-                        }
-
-                        fsArquivo.Close(); //Fecha o arquivo XML
-
-                        //Definir o tipo do serviço
-                        Type tipoServico = nfe.GetType();
-
-                        try
-                        {
-                            //Gerar lote
-                            tipoServico.InvokeMember("LoteNfe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { notas });
-                        }
-                        catch (Exception ex)
-                        {
-                            throw (ex);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (fsArquivo != null)
-                        {
-                            fsArquivo.Close();
-                        }
-
-                        throw (ex);
-                    }
-
-                    //Deletar o arquivo de solicitão de montagem do lote de NFe
-                    try
-                    {
-                        FileInfo oArquivo = new FileInfo(arquivo);
-                        oArquivo.Delete();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    try
-                    {
-                        new Task().GravarArqErroServico(arquivo, Propriedade.ExtEnvio.MontarLote, "-montar-lote.err", ex);
-                    }
-                    catch
-                    {
-                        //Se deu algum erro na hora de gravar o arquivo de erro de retorno para o ERP, infelizmente não poderemos fazer nada
-                        //pois deve estar ocorrendo alguma falha de rede, hd, permissão de acesso a pasta ou arquivos, etc. Wandrey 22/03/2010
-                    }
-                }
+                ReconfigurarUniNFe(arquivo);
             }
-        }
-        #endregion
-
-        #region EnviarLoteNfe()
-        /// <summary>
-        /// Executar tarefas pertinentes ao envio do lote de NFe
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void EnviarLoteNfe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "Recepcao");
-        }
-        #endregion
-
-        #region GerarChaveNFe()
-        /// <summary>
-        /// Executa tarefas pertinentes a geração da Chave da NFe solicitado pelo ERP
-        /// </summary>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void GerarChaveNFe(string arquivo)
-        {
-            Auxiliar oAux = new Auxiliar();
-
-            FileInfo fi = new FileInfo(arquivo);
-            // processa arquivos XML
-            if (fi.Extension.ToLower() == ".xml")
+            catch
             {
-                new NFeW().GerarChaveNFe(arquivo, true);
             }
-            // processa arquivos TXT
-            else
-            {
-                new NFeW().GerarChaveNFe(arquivo, false);
-            }
-        }
-        #endregion
-
-        #region EnviarDPEC()
-        /// <summary>
-        /// Executa as tarefas pertinentes ao envio do xml do DPEC
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void EnviarDPEC(object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RecepcaoDPEC");
-        }
-        #endregion
-
-        #region ConsultarDPEC()
-        /// <summary>
-        /// Executa as tarefas pertinentes ao envio do xml da consulta do DPEC
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="arquivo">Arquivo a ser tratado</param>
-        protected void ConsultarDPEC(object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultaDPEC");
         }
         #endregion
 
@@ -623,7 +487,7 @@ namespace NFe.Service
             try
             {
                 if (arquivo.ToLower().IndexOf(Propriedade.ExtEnvio.Nfe_TXT) > 0)
-                    ConvTXT(arquivo);
+                    new ConverterTXT(arquivo);
                 else
                 {
                     int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
@@ -634,23 +498,6 @@ namespace NFe.Service
             catch
             {
 
-            }
-        }
-        #endregion
-
-        #region ConverterTXTparaXML()
-        /// <summary>
-        /// Executa as tarefas pertinentes da conversão de NF-e em TXT para XML 
-        /// </summary>
-        /// <param name="arquivo">Nome do arquivo a ser convertido</param>
-        protected void ConverterTXTparaXML(string arquivo)
-        {
-            try
-            {
-                ConvTXT(arquivo);
-            }
-            catch
-            {
             }
         }
         #endregion
@@ -672,16 +519,16 @@ namespace NFe.Service
         }
         #endregion
 
-        #region AlterarConfiguracoesUniNFe()
+        #region ConverterTXTparaXML()
         /// <summary>
-        /// Executa as tarefas pertinentes a consulta das informações do UniNFe
+        /// Executa as tarefas pertinentes da conversão de NF-e em TXT para XML 
         /// </summary>
-        /// <param name="arquivo">Arquivo a ser tratado/param>
-        protected void AlterarConfiguracoesUniNFe(string arquivo)
+        /// <param name="arquivo">Nome do arquivo a ser convertido</param>
+        protected void ConverterTXTparaXML(string arquivo)
         {
             try
             {
-                ReconfigurarUniNFe(arquivo);
+                new ConverterTXT(arquivo);
             }
             catch
             {
@@ -741,6 +588,29 @@ namespace NFe.Service
         }
         #endregion
 
+        #region GerarChaveNFe()
+        /// <summary>
+        /// Executa tarefas pertinentes a geração da Chave da NFe solicitado pelo ERP
+        /// </summary>
+        /// <param name="arquivo">Arquivo a ser tratado</param>
+        protected void GerarChaveNFe(string arquivo)
+        {
+            Auxiliar oAux = new Auxiliar();
+
+            FileInfo fi = new FileInfo(arquivo);
+            // processa arquivos XML
+            if (fi.Extension.ToLower() == ".xml")
+            {
+                new NFeW().GerarChaveNFe(arquivo, true);
+            }
+            // processa arquivos TXT
+            else
+            {
+                new NFeW().GerarChaveNFe(arquivo, false);
+            }
+        }
+        #endregion
+
         #region GerarXMLPedRec()
         /// <summary>
         /// Executa as tarefas pertinentes a geração dos pedidos de consulta situação de lote da NFe
@@ -757,42 +627,6 @@ namespace NFe.Service
 
                 Thread.Sleep(2000);
             }
-        }
-        #endregion
-
-        #region EnviarEvento
-        /// <summary>
-        /// Executa as tarefas pertinentes ao envio do xml da CCe
-        /// </summary>
-        /// <param name="nfe"></param>
-        /// <param name="arquivo"></param>
-        protected void EnviarEvento(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RecepcaoEvento");
-        }
-        #endregion
-
-        #region EnviarDownloadNFe
-        /// <summary>
-        /// Executa as tarefas pertinentes ao envio do xml de download das nfe recebidas
-        /// </summary>
-        /// <param name="nfe"></param>
-        /// <param name="arquivo"></param>
-        protected void EnviarDownloadNFe(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RecepcaoDownloadNFe");
-        }
-        #endregion
-
-        #region EnviarConsultarNFeDest
-        /// <summary>
-        /// Executa as tarefas pertinentes ao envio do xml de consulta das nfe recebidas
-        /// </summary>
-        /// <param name="nfe"></param>
-        /// <param name="arquivo"></param>
-        protected void EnviarConsultarNFeDest(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RecepcaoConsultaNFeDest");
         }
         #endregion
 
@@ -829,16 +663,28 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 18/04/2011
         /// </remarks>
+        private void DirecionarArquivo(string arquivo, object taskClass)
+        {
+            try
+            {
+                //Processa ou envia o XML
+                EnviarArquivo(arquivo, taskClass, "Execute");
+            }
+            catch (Exception ex)
+            {
+                //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
+                //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
+                if (taskClass is TaskConsultaStatus)
+                    throw (ex);
+            }
+        }
+
         private void DirecionarArquivo(string arquivo, object nfe, string metodo)
         {
             try
             {
-                //Se o arquivo estiver ainda em uso eu pulo ele para tentar mais tarde
-                //                if (!Auxiliar.FileInUse(arquivo))
-                //                {
                 //Processa ou envia o XML
                 EnviarArquivo(arquivo, nfe, metodo);
-                //                }
             }
             catch
             {
@@ -871,16 +717,16 @@ namespace NFe.Service
             */
             #endregion
 
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-
-            //Definir o tipo do serviço
-            Type tipoServico = nfe.GetType();
-
-            //Definir o arquivo XML para a classe UniNfeClass
-            tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, nfe, new object[] { arquivo });
-
             try
             {
+                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+
+                //Definir o tipo do serviço
+                Type tipoServico = nfe.GetType();
+
+                //Definir o arquivo XML para a classe UniNfeClass
+                tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, nfe, new object[] { arquivo });
+
                 if (Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teContingencia &&
                     Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teFSDA &&
                     Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
@@ -889,12 +735,13 @@ namespace NFe.Service
                 }
                 else
                 {
-                    if (metodo == "RetRecepcao" ||
-                        metodo == "StatusServico" ||
-                        metodo == "RecepcaoDPEC" ||
-                        metodo == "Consulta" ||
-                        metodo == "ConsultaDPEC" ||
-                        metodo == "ConsultaCadastro")
+                    if (//metodo == "Execute" ||
+                        nfe is TaskRetRecepcao ||               //metodo == "RetRecepcao" ||
+                        nfe is TaskConsultaStatus ||            //metodo == "StatusServico" ||
+                        nfe is TaskRecepcaoDPEC ||              //metodo == "RecepcaoDPEC" ||
+                        nfe is TaskPedidoConsultaSituacaoNFe || //metodo == "Consulta" ||
+                        nfe is TaskConsultaDPEC ||              //metodo == "ConsultaDPEC" ||
+                        nfe is TaskCadastroContribuinte)        // || metodo == "ConsultaCadastro")
                     {
                         tipoServico.InvokeMember(metodo, System.Reflection.BindingFlags.InvokeMethod, null, nfe, null);
                     }
@@ -923,10 +770,10 @@ namespace NFe.Service
 
             if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
                 sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                              Functions/*oAux*/.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.txt";
+                              Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_TXT) + "-ret-cons-inf.txt";
             else
                 sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
-                              Functions/*oAux*/.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.xml";
+                              Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.xml";
 
             try
             {
@@ -935,6 +782,10 @@ namespace NFe.Service
                 //Deletar o arquivo de solicitação do serviço
                 FileInfo oArquivo = new FileInfo(ArquivoXml);
                 oArquivo.Delete();
+
+                oArquivo = new FileInfo(sArqRetorno);
+                if (oArquivo.Exists)
+                    oArquivo.Delete();
 
                 app.GravarXMLInformacoes(sArqRetorno);
             }
@@ -1017,174 +868,6 @@ namespace NFe.Service
         }
         #endregion
 
-        #region ConvTXT()
-        /// <summary>
-        /// Converter o arquivo de NFe do formato TXT para XML
-        /// </summary>
-        /// <param name="arquivo">Nome completo do arquivo a ser convertido (Pasta e arquivo)</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// </remarks>
-        protected void ConvTXT(String arquivo)
-        {
-            //            if (Auxiliar.FileInUse(arquivo))
-            //                return;
-
-
-            Auxiliar oAux = new Auxiliar();
-
-            NFe.ConvertTxt.ConversaoTXT oUniTxtToXml = new NFe.ConvertTxt.ConversaoTXT();
-
-            string pasta = new FileInfo(arquivo).DirectoryName;
-            pasta = pasta.Substring(0, pasta.Length - 5); //Retirar a pasta \Temp do final - Wandrey 03/08/2011
-
-            string ccMessage = string.Empty;
-            string ccExtension = "-nfe.err";
-
-            try
-            {
-                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-
-                ///
-                /// exclui o arquivo de erro
-                /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Path.GetFileName(arquivo));
-                ///
-                /// exclui o arquivo TXT original
-                /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt");
-
-                ///
-                /// processa a conversão
-                /// 
-                oUniTxtToXml.Converter(arquivo, pasta, Empresa.Configuracoes[emp].PastaRetorno);
-
-                //Deu tudo certo com a conversão?
-                if (string.IsNullOrEmpty(oUniTxtToXml.cMensagemErro))
-                {
-                    ///
-                    /// danasa 8-2009
-                    /// 
-                    if (oUniTxtToXml.cRetorno.Count == 0)
-                    {
-                        ccMessage = "cStat=02\r\n" +
-                            "xMotivo=Falha na conversão. Sem informações para converter o arquivo texto";
-
-                        oAux.MoveArqErro(arquivo, ".txt");
-                    }
-                    else
-                    {
-                        ///
-                        /// salva o arquivo texto original
-                        ///
-                        //FileInfo otxtArquivo = new FileInfo(arquivo);
-                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()))
-                        {
-                            FileInfo ArqOrig = new FileInfo(arquivo);
-
-                            string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt";
-                            ArqOrig.MoveTo(vvNomeArquivoDestino);
-                        }
-                        ccExtension = "-nfe.txt";
-                        ccMessage = "cStat=01\r\n" +
-                            "xMotivo=Convertido com sucesso. Foi(ram) convertida(s) " + oUniTxtToXml.cRetorno.Count.ToString() + " nota(s) fiscal(is)";
-
-                        foreach (NFe.ConvertTxt.txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
-                        {
-                            ///
-                            /// monta o texto que será gravado no arquivo de aviso ao ERP
-                            /// 
-                            ccMessage += Environment.NewLine +
-                                    "Nota fiscal: " + txtClass.NotaFiscal.ToString("000000000") +
-                                    " Série: " + txtClass.Serie.ToString("000") +
-                                    " - ChaveNFe: " + txtClass.ChaveNFe;
-                            ///
-                            /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
-                            /// ou
-                            /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
-                            ///
-                            FileInfo oArquivo = new FileInfo(txtClass.XMLFileName);
-                            string vNomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
-
-                            ///
-                            /// excluo o XML se já existe
-                            /// 
-                            Functions.DeletarArquivo(vNomeArquivoDestino);
-
-                            ///
-                            /// move o arquivo da pasta "Envio\Convertidos" para a pasta "Envio"
-                            /// ou
-                            /// move o arquivo da pasta "Validar\Convertidos" para a pasta "Validar"
-                            /// 
-                            oArquivo.MoveTo(vNomeArquivoDestino);
-                        }
-                    }
-                }
-                else
-                {
-                    ///
-                    /// danasa 8-2009
-                    /// 
-                    ccMessage = "cStat=99\r\n" +
-                        "xMotivo=Falha na conversão\r\n" +
-                        "MensagemErro=" + oUniTxtToXml.cMensagemErro;
-                }
-            }
-            catch (Exception ex)
-            {
-                ccMessage = ex.Message;
-                ccExtension = "-nfe.err";
-            }
-
-            if (!string.IsNullOrEmpty(ccMessage))
-            {
-                oAux.MoveArqErro(arquivo, ".txt");
-                ///
-                /// exclui todos os XML gerados na pasta Envio\convertidos
-                /// 
-                foreach (NFe.ConvertTxt.txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
-                {
-                    Functions.DeletarArquivo(pasta + "\\convertidos\\" + txtClass.XMLFileName);
-                }
-                ///
-                /// danasa 8-2009
-                /// 
-                /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
-                /// 
-                oAux.GravarArqErroERP(Functions/*oAux*/.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension, ccMessage);
-            }
-        }
-        #endregion
-
-        #region LerXMLNFe
-        /// <summary>
-        /// Le o conteúdo do XML da NFe
-        /// </summary>
-        /// <param name="Arquivo">Arquivo XML da NFe</param>
-        /// <returns>Retorna o conteúdo do XML da NFe</returns>
-        private DadosNFeClass LerXMLNFe(string Arquivo)
-        {
-            LerXML oLerXML = new LerXML();
-
-            try
-            {
-                oLerXML.Nfe(Arquivo);
-            }
-            catch (XmlException ex)
-            {
-                throw (ex);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-
-            return oLerXML.oDadosNfe;
-        }
-        #endregion
-
         #region Executa Limpeza
         /// <summary>
         /// executa a limpeza das pastas temp e retorno
@@ -1263,7 +946,7 @@ namespace NFe.Service
             CertificadoDigital CertDig = new CertificadoDigital();
             if (CertDig.Vencido(emp))
             {
-                throw new ExceptionCerticicadoDigital(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
+                throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
             }
         }
         #endregion
@@ -1409,7 +1092,7 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.retDownload_ERR;
                     goto default;
 
-                case Servicos.ConsultaNFeDest:
+                case Servicos.ConsultaNFDest:
                     extRet = Propriedade.ExtEnvio.ConsNFeDest_XML;
                     extRetERR = Propriedade.ExtRetorno.retConsNFeDest_ERR;
                     goto default;
@@ -1448,7 +1131,9 @@ namespace NFe.Service
                     try
                     {
                         //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                        new Task().GravarArqErroServico(arquivo, extRet, extRetERR, ex, erroPadrao, true);
+                        TFunctions.GravarArqErroServico(arquivo, extRet, extRetERR, ex, erroPadrao, true);
+
+                        //new Task().GravarArqErroServico(arquivo, extRet, extRetERR, ex, erroPadrao, true);
                     }
                     catch
                     {
@@ -1458,84 +1143,6 @@ namespace NFe.Service
                     break;
             }
         }
-        #endregion
-
-        #endregion
-
-        #region Métodos de controle da NFS-e
-
-        #region PedidoConsultaLoteRps()
-        /// <summary>
-        /// Executar as tarefas pertinentes a consulta da situação do lote RPS
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void PedidoConsultaLoteRps(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultarLoteRps");
-        }
-        #endregion
-
-        #region CancelarNfse()
-        /// <summary>
-        /// Executar as tarefas pertinentes ao cancelamento de NFS-e
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void CancelarNfse(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "CancelarNfse");
-        }
-        #endregion
-
-        #region PedidoConsultaSituacaoLoteRps()
-        /// <summary>
-        /// Executar as tarefas pertinentes ao pedido de consulta situação do lote de RPS
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void PedidoConsultaSituacaoLoteRps(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultarSituacaoLoteRps");
-        }
-        #endregion
-
-        #region PedidoConsultaNfse()
-        /// <summary>
-        /// Executar as tarefas pertinentes ao pedido de consulta da situação da Nfse
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void PedidoConsultaNfse(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultarNfse");
-        }
-        #endregion
-
-        #region PedidoConsultaNfsePorRps()
-        /// <summary>
-        /// Executar as tarefas pertinentes ao pedido de consulta da situação da Nfse por Rps
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void PedidoConsultaNfsePorRps(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "ConsultarNfsePorRps");
-        }
-        #endregion
-
-        #region RecepcionarLoteRps()
-        /// <summary>
-        /// Executar as tarefas pertinentes a recepção do lote RPS
-        /// </summary>
-        /// <param name="nfe">Objeto da classe ServicoNFe</param>
-        /// <param name="Arquivo">Arquivo a ser tratado</param>
-        protected void RecepcionarLoteRps(Object nfe, string arquivo)
-        {
-            DirecionarArquivo(arquivo, nfe, "RecepcionarLoteRps");
-        }
-        #endregion
-
         #endregion
     }
 }

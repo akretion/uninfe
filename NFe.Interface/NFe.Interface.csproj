@@ -89,6 +89,12 @@
     <Compile Include="FormConsultaCadastroResult.designer.cs">
       <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogs.Designer.cs">
+      <DependentUpon>FormLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="formMunicipios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <EmbeddedResource Include="FormConsultaCadastroResult.resx">
       <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogs.resx">
+      <DependentUpon>FormLogs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMunicipios.resx">
       <DependentUpon>formMunicipios.cs</DependentUpon>

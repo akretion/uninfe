@@ -98,7 +98,7 @@ namespace NFe.ConvertTxt
         /// <summary>
         /// Converter
         /// </summary>
-        public bool Converter(string cArquivo, string cFolderDestino, string cFolderRetorno)
+        public bool Converter(string cArquivo, string cFolderDestino)//, string cFolderRetorno)
         {
             cRetorno.Clear();
 
@@ -140,7 +140,7 @@ namespace NFe.ConvertTxt
                             ///
                             /// gera o XML da nota
                             /// 
-                            nfew.GerarXml(NFe, cFolderDestino, cFolderRetorno);
+                            nfew.GerarXml(NFe, cFolderDestino);//cFolderRetorno);
                             if (nfew.cFileName != "")
                             {
                                 ///
@@ -517,7 +517,7 @@ namespace NFe.ConvertTxt
                     case TpcnTipoCampo.tcDec3:
                     case TpcnTipoCampo.tcDec4:
                     case TpcnTipoCampo.tcDec10:
-                        return Convert.ToDouble("0" + ConteudoTag.Replace(".", ","));
+                        return Convert.ToDouble("0" + ConteudoTag.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
 
                     case TpcnTipoCampo.tcInt:
                         return Convert.ToInt32("0" + SomenteNumeros(ConteudoTag));
@@ -598,7 +598,7 @@ namespace NFe.ConvertTxt
                     NFe.ide.cDV     = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.cDV, ObOp.Opcional, 1, 1);
                     NFe.ide.tpAmb   = (TpcnTipoAmbiente)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpAmb, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.finNFe  = (TpcnFinalidadeNFe)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.finNFe, ObOp.Obrigatorio, 1, 1);
-                    NFe.ide.procEmi = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.procEmi, ObOp.Obrigatorio, 1, 1);
+                    NFe.ide.procEmi = (TpcnProcessoEmissao)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.procEmi, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.verProc = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.verProc, ObOp.Obrigatorio, 1, 20);
                     NFe.ide.dhCont  = (DateTime)LerCampo(TpcnTipoCampo.tcDatHor, Properties.Resources.dhCont, ObOp.Opcional, 0, 0);
                     NFe.ide.xJust   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xJust, ObOp.Opcional, 15, 256);
@@ -716,7 +716,7 @@ namespace NFe.ConvertTxt
                     NFe.emit.IEST   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.IEST, ObOp.Opcional, 2, 14);
                     NFe.emit.IM     = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.IM, ObOp.Opcional, 1, 15);
                     NFe.emit.CNAE   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CNAE, ObOp.Opcional, 7, 7);
-                    NFe.emit.CRT    = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CRT, ObOp.Obrigatorio, 1, 1);
+                    NFe.emit.CRT = (TpcnCRT)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CRT, ObOp.Obrigatorio, 1, 1);
 
                     #endregion
                     break;
@@ -939,7 +939,7 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.vSeg    =         this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vSeg, ObOp.Opcional, 15);
                     NFe.det[nProd].Prod.vDesc   =         this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vDesc, ObOp.Opcional, 15);
                     NFe.det[nProd].Prod.vOutro  =         this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vOutro, ObOp.Opcional, 15);
-                    NFe.det[nProd].Prod.indTot  = (int)   this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.indTot, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.indTot = (TpcnIndicadorTotal)this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.indTot, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Prod.xPed    = (string)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xPed, ObOp.Opcional, 1, 15);
                     NFe.det[nProd].Prod.nItemPed= (int)   this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nItemPed, ObOp.Opcional, 0, 6);
                     NFe.det[nProd].Imposto.ISSQN.cSitTrib = string.Empty;
@@ -1052,7 +1052,7 @@ namespace NFe.ConvertTxt
                     #region <det><prod><arma>
                     Arma armaItem = new Arma();
 
-                    armaItem.tpArma = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpArma, ObOp.Obrigatorio, 1, 1);
+                    armaItem.tpArma = (TpcnTipoArma)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpArma, ObOp.Obrigatorio, 1, 1);
                     armaItem.nSerie = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nSerie, ObOp.Obrigatorio, 1, 9);
                     armaItem.nCano = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nCano, ObOp.Obrigatorio, 1, 9);
                     armaItem.descr = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.descr, ObOp.Obrigatorio, 1, 256);
@@ -1127,9 +1127,9 @@ namespace NFe.ConvertTxt
                     layout = "§N02|Orig¨|CST¨|ModBC¨|VBC¨|PICMS¨|VICMS¨"; //ok   
                     #region ICMS00
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
@@ -1143,13 +1143,13 @@ namespace NFe.ConvertTxt
                     #region ICMS10
 
                     NFe.det[nProd].Imposto.ICMS.ICMSPart10 = 0;
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1164,9 +1164,9 @@ namespace NFe.ConvertTxt
                     layout = "§N04|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨"; //ok
                     #region ICMS20
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vBC = this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = this.LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
@@ -1181,9 +1181,9 @@ namespace NFe.ConvertTxt
 
                     #region ICMS30
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1199,7 +1199,7 @@ namespace NFe.ConvertTxt
 
                     #region ICMS40, ICMS41 ICMS50
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Opcional, 15);
                     if (NFe.det[nProd].Imposto.ICMS.vICMS > 0)
@@ -1214,9 +1214,9 @@ namespace NFe.ConvertTxt
 
                     #region ICMS51
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Opcional, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Opcional, 5);
@@ -1231,7 +1231,7 @@ namespace NFe.ConvertTxt
 
                     #region ICMS60
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
                     NFe.det[nProd].Imposto.ICMS.vBCSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCSTRet, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.vICMSSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMSSTRet, ObOp.Obrigatorio, 15);
@@ -1245,14 +1245,14 @@ namespace NFe.ConvertTxt
 
                     #region ICMS70
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1269,14 +1269,14 @@ namespace NFe.ConvertTxt
                     #region ICMS90
 
                     NFe.det[nProd].Imposto.ICMS.ICMSPart90 = 0;
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1292,14 +1292,14 @@ namespace NFe.ConvertTxt
 
                     #region ICMSPart-10, ICMSPart-90
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1322,7 +1322,7 @@ namespace NFe.ConvertTxt
                     #region ICMS-ST
 
                     NFe.det[nProd].Imposto.ICMS.ICMSst = 1;
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CST, ObOp.Obrigatorio, 2, 2);
                     NFe.det[nProd].Imposto.ICMS.vBCSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCSTRet, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.vICMSSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMSSTRet, ObOp.Obrigatorio, 15);
@@ -1338,7 +1338,7 @@ namespace NFe.ConvertTxt
 
                     #region ICMSSN101
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
                     NFe.det[nProd].Imposto.ICMS.pCredSN = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pCredSN, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vCredICMSSN = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vCredICMSSN, ObOp.Obrigatorio, 15);
@@ -1352,7 +1352,7 @@ namespace NFe.ConvertTxt
 
                     #region ICMSSN102
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
 
                     #endregion
@@ -1364,9 +1364,9 @@ namespace NFe.ConvertTxt
 
                     #region ICMSSN201
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1384,9 +1384,9 @@ namespace NFe.ConvertTxt
 
                     #region ICMSSN202
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
@@ -1402,10 +1402,10 @@ namespace NFe.ConvertTxt
 
                     #region ICMSSN500
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
                     //modBCST nao existe no XML
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Opcional, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Opcional, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vBCSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCSTRet, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.vICMSSTRet = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMSSTRet, ObOp.Obrigatorio, 15);
 
@@ -1418,19 +1418,17 @@ namespace NFe.ConvertTxt
                     
                     #region ICMSSN900
 
-                    NFe.det[nProd].Imposto.ICMS.orig = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.CSOSN, ObOp.Obrigatorio, 3, 3);
-                    NFe.det[nProd].Imposto.ICMS.modBC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBC, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pRedBC = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMS, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.modBCST = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Imposto.ICMS.modBCST = (TpcnDeterminacaoBaseIcmsST)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.modBCST, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.pMVAST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pMVAST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.pRedBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pRedBCST, ObOp.Opcional, 5);
                     NFe.det[nProd].Imposto.ICMS.vBCST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vBCST, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.pICMSST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMSST, ObOp.Obrigatorio, 5);
-                    NFe.det[nProd].Imposto.ICMS.vICMSST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMSST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMSST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pICMSST, ObOp.Obrigatorio, 5);
                     NFe.det[nProd].Imposto.ICMS.vICMSST = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vICMSST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pCredSN = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.pCredSN, ObOp.Obrigatorio, 5);
@@ -1764,7 +1762,7 @@ namespace NFe.ConvertTxt
                     ///
                     /// Grupo da TAG <transp>
                     /// 
-                    NFe.Transp.modFrete = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.modFrete, ObOp.Obrigatorio, 1, 1);
+                    NFe.Transp.modFrete = (TpcnModalidadeFrete)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.modFrete, ObOp.Obrigatorio, 1, 1);
                     break;
 
                 case "X03":

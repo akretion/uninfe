@@ -113,11 +113,23 @@ namespace NFe.Components
         /// <summary>
         /// Enviar uma consulta de nfe de destinatario
         /// </summary>
-        ConsultaNFeDest,
+        ConsultaNFDest,
         /// <summary>
         /// Enviar um evento de manifestacao
         /// </summary>
         EnviarManifestacao,
+        /// <summary>
+        /// Registro de saida
+        /// </summary>
+        RegistroDeSaida,
+        /// <summary>
+        /// Registro de saida
+        /// </summary>
+        RegistroDeSaidaCancelamento,
+        /// <summary>
+        /// WSExiste
+        /// </summary>
+        WSExiste,
         /// <summary>
         /// Nulo / Nenhum serviço em execução
         /// </summary>        

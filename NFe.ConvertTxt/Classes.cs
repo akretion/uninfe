@@ -4,6 +4,71 @@ using System.Text;
 
 namespace NFe.ConvertTxt
 {
+    public enum TpcnProcessoEmissao
+    {
+        peAplicativoContribuinte = 0,
+        peAvulsaFisco = 1,
+        peAvulsaContribuinte = 2,
+        peContribuinteAplicativoFisco = 3
+    }
+    public enum TpcnModalidadeFrete 
+    { 
+        mfContaEmitente = 0, 
+        mfContaDestinatario = 1, 
+        mfContaTerceiros = 2, 
+        mfSemFrete = 9
+    }
+    public enum TpcnDeterminacaoBaseIcms 
+    { 
+        dbiMargemValorAgregado, 
+        dbiPauta, 
+        dbiPrecoTabelado, 
+        dbiValorOperacao 
+    }
+    public enum TpcnDeterminacaoBaseIcmsST 
+    { 
+        dbisPrecoTabelado = 0, 
+        dbisListaNegativa = 1, 
+        dbisListaPositiva = 2, 
+        dbisListaNeutra = 3, 
+        dbisMargemValorAgregado = 4, 
+        dbisPauta = 5
+    }
+    public enum TpcnOrigemMercadoria
+    {
+        oeNacional = 0,
+        oeEstrangeiraImportacaoDireta = 1,
+        oeEstrangeiraAdquiridaBrasil = 2
+    }
+    public enum TpcnTipoArma 
+    { 
+        taUsoPermitido = 0, 
+        taUsoRestrito = 1
+    }
+    public enum TpcnCondicaoVeiculo 
+    { 
+        cvAcabado = 1, 
+        cvInacabado = 2, 
+        cvSemiAcabado = 3
+    }
+    public enum TpcnTipoOperacao 
+    { 
+        toVendaConcessionaria = 1, 
+        toFaturamentoDireto = 2, 
+        toVendaDireta = 3, 
+        toOutros = 0
+    }
+    public enum TpcnIndicadorTotal 
+    { 
+        itNaoSomaTotalNFe = 0, 
+        itSomaTotalNFe = 1 
+    }
+    public enum TpcnCRT 
+    { 
+        crtSimplesNacional = 1, 
+        crtSimplesExcessoReceita = 2,
+        crtRegimeNormal = 3
+    }
     public enum TpcnTipoCampo { tcStr, tcInt, tcDat, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 }
     public enum TpcnTipoAmbiente 
     { 
@@ -38,11 +103,17 @@ namespace NFe.ConvertTxt
         teContingencia = 2,
         teSCAN = 3,
         teDPEC = 4,
-        teFSDA = 5,
-        teSVCRS = 6,
-        teSVCSP = 7
+        teFSDA = 5
+        //teSVCRS = 6,
+        //teSVCSP = 7
     }
-
+    public enum TpcnECFModRef 
+    {
+        ECFModRefVazio, 
+        ECFModRef2B,
+        ECFModRef2C,
+        ECFModRef2D /*'', '2B', '2C','2D'*/
+    }
     public enum TpcnCSTIcms
     {
         cst00,
@@ -107,7 +178,7 @@ namespace NFe.ConvertTxt
     /// </summary>
     public class Arma
     {
-        public int tpArma;
+        public TpcnTipoArma tpArma;
         public int nSerie;
         public int nCano;
         public string descr;
@@ -239,6 +310,7 @@ namespace NFe.ConvertTxt
         public Dest()
         {
             this.CNPJ = this.CPF = string.Empty;
+            this.enderDest = new enderDest();
         }
     }
 
@@ -301,18 +373,20 @@ namespace NFe.ConvertTxt
         public string IEST;
         public string IM;
         public string CNAE;
-        public int CRT;
+        public TpcnCRT CRT;
 
         public Emit()
         {
             this.CNPJ = this.CPF = string.Empty;
+            this.CRT = TpcnCRT.crtRegimeNormal;
+            this.enderEmit = new enderEmit();
         }
     }
 
     /// <summary>
     /// enderDest
     /// </summary>
-    public struct enderDest
+    public class enderDest
     {
         public string xLgr;
         public string nro;
@@ -325,12 +399,17 @@ namespace NFe.ConvertTxt
         public int cPais;
         public string xPais;
         public string fone;
+
+        public enderDest()
+        {
+            this.fone = this.nro = this.UF = this.xBairro = this.xCpl = this.xLgr = this.xMun = this.xPais = "";
+        }
     }
 
     /// <summary>
     /// enderEmit
     /// </summary>
-    public struct enderEmit
+    public class enderEmit
     {
         public string xLgr;
         public string nro;
@@ -343,6 +422,11 @@ namespace NFe.ConvertTxt
         public int cPais;
         public string xPais;
         public string fone;
+
+        public enderEmit()
+        {
+            this.fone = this.nro = this.UF = this.xBairro = this.xCpl = this.xLgr = this.xMun = this.xPais = "";
+        }
     }
 
     /// <summary>
@@ -396,17 +480,17 @@ namespace NFe.ConvertTxt
     /// </summary>
     public struct ICMS
     {
-        public int orig;
+        public TpcnOrigemMercadoria orig;
         public string CST;
         public int ICMSPart10;
         public int ICMSPart90;
         public int ICMSst;
-        public string modBC;
+        public TpcnDeterminacaoBaseIcms modBC;
         public double pRedBC;
         public double vBC;
         public double pICMS;
         public double vICMS;
-        public string modBCST;
+        public TpcnDeterminacaoBaseIcmsST modBCST;
         public double pMVAST;
         public double pRedBCST;
         public double vBCST;
@@ -470,13 +554,17 @@ namespace NFe.ConvertTxt
         public int cDV { get; set; }
         public TpcnTipoAmbiente tpAmb { get; set; }
         public TpcnFinalidadeNFe finNFe { get; set; }
-        public string procEmi { get; set; }
+        public TpcnProcessoEmissao procEmi { get; set; }
         public string verProc { get; set; }
         public DateTime dhCont { get; set; }
         public string xJust { get; set; }
 
         public Ide()
         {
+            this.tpAmb = TpcnTipoAmbiente.taHomologacao;
+            this.tpEmis = TpcnTipoEmissao.teNormal;
+            this.tpImp = TpcnTipoImpressao.tiRetrato;
+            this.procEmi = TpcnProcessoEmissao.peAplicativoContribuinte;
             NFref = new List<NFref>();
         }
     }
@@ -743,7 +831,7 @@ namespace NFe.ConvertTxt
         public double vSeg;
         public double vDesc;
         public double vOutro;
-        public int indTot;
+        public TpcnIndicadorTotal indTot;
         public string xPed;
         public int nItemPed;
         public List<DI> DI;
@@ -756,6 +844,7 @@ namespace NFe.ConvertTxt
         {
             vUnCom_Tipo = TpcnTipoCampo.tcDec10;
             vUnTrib_Tipo = TpcnTipoCampo.tcDec10;
+            indTot = TpcnIndicadorTotal.itSomaTotalNFe;
             DI = new List<DI>();
             med = new List<Med>();
             arma = new List<Arma>();
@@ -886,7 +975,7 @@ namespace NFe.ConvertTxt
     /// </summary>
     public class Transp
     {
-        public int modFrete;
+        public TpcnModalidadeFrete modFrete;
         public Transporta Transporta;
         public retTransp retTransp;
         public veicTransp veicTransp;

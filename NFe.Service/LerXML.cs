@@ -21,7 +21,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta do cadastro do contribuinte
         /// </summary>
-        public DadosConsCad oDadosConsCad = new DadosConsCad();
+        //public DadosConsCad oDadosConsCad = new DadosConsCad();
         #endregion
 
         #region Classe com os dados do XML da NFe
@@ -35,68 +35,68 @@ namespace NFe.Service
         /// <summary>
         /// Esta Herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta do recibo do lote de NFe enviado
         /// </summary>
-        public DadosPedRecClass oDadosPedRec = new DadosPedRecClass();
+        //public DadosPedRecClass oDadosPedRec = new DadosPedRecClass();
         #endregion
 
         #region Classe com os dados do XML do retorno do envio do Lote de NFe
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do recibo do lote
         /// </summary>
-        public DadosRecClass oDadosRec = new DadosRecClass();
+        //public DadosRecClass oDadosRec = new DadosRecClass();
         #endregion
 
         #region Classe com os dados do XML da consulta do pedido de cancelamento
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de cancelamento
         /// </summary>
-        public DadosPedCanc oDadosPedCanc = new DadosPedCanc(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosPedCanc oDadosPedCanc = new DadosPedCanc(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Classe com os dados do XML do pedido de inutilização de números de NF
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de inutilizacao
         /// </summary>
-        public DadosPedInut oDadosPedInut = new DadosPedInut(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosPedInut oDadosPedInut = new DadosPedInut(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Classe com os dados do XML da pedido de consulta da situação da NFe
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta da situação da nota
         /// </summary>
-        public DadosPedSit oDadosPedSit = new DadosPedSit();
+        //public DadosPedSit oDadosPedSit = new DadosPedSit();
         #endregion
 
         #region Classe com os dados do XML da consulta do status do serviço da NFe
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do status do serviço
         /// </summary>
-        public DadosPedSta oDadosPedSta = new DadosPedSta();
+        //public DadosPedSta oDadosPedSta = new DadosPedSta();
         #endregion
 
         #region Classe com os dados do XML de registro do DPEC
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
         /// </summary>
-        public DadosEnvDPEC dadosEnvDPEC = new DadosEnvDPEC();
+        //public DadosEnvDPEC dadosEnvDPEC = new DadosEnvDPEC();
         #endregion
 
         #region Classe com os dados do XML de consulta do registro do DPEC
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do registro do DPEC
         /// </summary>
-        public DadosConsDPEC dadosConsDPEC = new DadosConsDPEC();
+        //public DadosConsDPEC dadosConsDPEC = new DadosConsDPEC();
         #endregion
 
         #region Classe com os dados do XML do registro de eventos
-        public DadosenvEvento oDadosEnvEvento = new DadosenvEvento();
+        //public DadosenvEvento oDadosEnvEvento = new DadosenvEvento();
         #endregion
 
         #region Classe com os dados do XML do registro de download da nfe
-        public DadosenvDownload oDadosenvDownload = new DadosenvDownload();
+        //public DadosenvDownload oDadosenvDownload = new DadosenvDownload();
         #endregion
 
         #region Classe com os dados do XML do registro de consulta da nfe do destinatario
-        public DadosConsultaNFeDest oDadosConsultaNFeDest = new DadosConsultaNFeDest();
+        //public DadosConsultaNFeDest oDadosConsultaNFeDest = new DadosConsultaNFeDest();
         #endregion
 
         #region Objetos relacionados a NFS-e
@@ -112,7 +112,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta nfse
         /// </summary>
-        public DadosPedSitNfse oDadosPedSitNfse = new DadosPedSitNfse(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosPedSitNfse oDadosPedSitNfse = new DadosPedSitNfse(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Objeto com os dados do XML da consulta nfse por RPS
@@ -126,21 +126,21 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de cancelamento
         /// </summary>
-        public DadosPedCanNfse oDadosPedCanNfse = new DadosPedCanNfse(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosPedCanNfse oDadosPedCanNfse = new DadosPedCanNfse(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Objeto com os dados do XML de consulta situação do lote rps
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta da situação do lote rps
         /// </summary>
-        public DadosPedSitLoteRps oDadosPedSitLoteRps = new DadosPedSitLoteRps(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosPedSitLoteRps oDadosPedSitLoteRps = new DadosPedSitLoteRps(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #region Objeto com os dados do XML de lote rps
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do lote rps
         /// </summary>
-        public DadosEnvLoteRps oDadosEnvLoteRps = new DadosEnvLoteRps(new FindEmpresaThread(Thread.CurrentThread).Index);
+        //public DadosEnvLoteRps oDadosEnvLoteRps = new DadosEnvLoteRps(new FindEmpresaThread(Thread.CurrentThread).Index);
         #endregion
 
         #endregion
@@ -149,6 +149,7 @@ namespace NFe.Service
 
         #region Metodos
 
+#if notused
         #region ConsCad()
         /// <summary>
         /// Faz a leitura do XML de consulta do cadastro do contribuinte e disponibiliza os valores de algumas tag´s
@@ -227,6 +228,7 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
         #region Nfe()
         /// <summary>
@@ -362,6 +364,7 @@ namespace NFe.Service
         }
         #endregion
 
+#if notused
         #region PedCanc()
         /// <summary>
         /// PedCan(string cArquivoXML)
@@ -390,7 +393,7 @@ namespace NFe.Service
                         case "tpamb":
                             this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
                             break;
-                        case "chnfe":
+                        case pcnConstantes.chNFe.ToString():
                             this.oDadosPedCanc.chNFe = dados[1].Trim();
                             break;
                         case "nprot":
@@ -437,8 +440,8 @@ namespace NFe.Service
                             break;
 
                         case TipoAplicativo.Nfe:
-                            if (infCancElemento.GetElementsByTagName("chNFe").Count != 0)
-                                this.oDadosPedCanc.chNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                            if (infCancElemento.GetElementsByTagName(pcnConstantes.chNFe.ToString()).Count != 0)
+                                this.oDadosPedCanc.chNFe = infCancElemento.GetElementsByTagName(pcnConstantes.chNFe.ToString())[0].InnerText;
                             break;
 
                         default:
@@ -461,7 +464,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedInut()
         /// <summary>
         /// PedInut(string cArquivoXML)
@@ -635,7 +640,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedSit()
         /// <summary>
         /// Faz a leitura do XML de pedido de consulta da situação da NFe
@@ -674,7 +681,7 @@ namespace NFe.Service
                                     case "tpemis":
                                         this.oDadosPedSit.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
                                         break;
-                                    case "chnfe":
+                                    case pcnConstantes.chNFe.ToString():
                                         this.oDadosPedSit.chNFe = dados[1].Trim();
                                         break;
                                 }
@@ -718,7 +725,7 @@ namespace NFe.Service
                                 break;
 
                             case TipoAplicativo.Nfe:
-                                this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                                this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName(pcnConstantes.chNFe.ToString())[0].InnerText;
 
                                 //Definir a versão do XML para resolver o problema do Estado do Paraná e Goiás que não migrou o banco de dados
                                 //da versão 1.0 para a 2.0, sendo assim a consulta situação de notas fiscais tem que ser feita cada uma em seu 
@@ -772,7 +779,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedSta()
         /// <summary>
         /// Faz a leitura do XML de pedido do status de serviço
@@ -892,7 +901,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region Recibo
         /// <summary>
         /// Faz a leitura do XML do Recibo do lote enviado e disponibiliza os valores
@@ -963,7 +974,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedRec()
         /// <summary>
         /// Faz a leitura do XML de pedido da consulta do recibo do lote de notas enviadas
@@ -1035,7 +1048,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region EnvDPEC()
         /// <summary>
         /// Efetua a leitura do XML de registro do DPEC
@@ -1095,7 +1110,7 @@ namespace NFe.Service
                                 case "ie":
                                     this.dadosEnvDPEC.IE = (string)Functions.OnlyNumbers(dados[1].Trim());
                                     break;
-                                case "chnfe":
+                                case pcnConstantes.chNFe.ToString():
                                     this.dadosEnvDPEC.chNFe = dados[1].Trim();
                                     break;
                                 case "cnpjcpf":
@@ -1182,7 +1197,7 @@ namespace NFe.Service
                                 case "veraplic":
                                     this.dadosConsDPEC.verAplic = dados[1].Trim();
                                     break;
-                                case "chnfe":
+                                case pcnConstantes.chNFe.ToString():
                                     this.dadosConsDPEC.chNFe = dados[1].Trim();
                                     break;
                                 case "nregdpec":
@@ -1212,7 +1227,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region EnvEvento()
         public void EnvEvento(int emp, string arquivoXML)
         {
@@ -1367,7 +1384,7 @@ namespace NFe.Service
                                 case "cpf":
                                     this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].CPF = dados[1].Trim();
                                     break;
-                                case "chnfe":
+                                case pcnConstantes.chNFe.ToString():
                                     this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].chNFe = dados[1].Trim();
                                     break;
                                 case "dhevento":
@@ -1498,15 +1515,16 @@ namespace NFe.Service
                     this.oDadosEnvEvento.eventos.Add(new Evento());
                     this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                     this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
-                    this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                    this.oDadosEnvEvento.eventos[this.oDadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName(pcnConstantes.chNFe.ToString())[0].InnerText;
                 }
             }
         }
         #endregion
+#endif
 
         #endregion
 
-
+#if notused
         #region EnvDownloadNFe
         public void EnvDownloadNFe(int emp, string arquivoXML)
         {
@@ -1532,7 +1550,7 @@ namespace NFe.Service
                                 case "cnpj":
                                     this.oDadosenvDownload.CNPJ = dados[1].Trim();
                                     break;
-                                case "chnfe":
+                                case pcnConstantes.chNFe.ToString():
                                     this.oDadosenvDownload.chNFe = dados[1].Trim();
                                     break;
                             }
@@ -1559,14 +1577,16 @@ namespace NFe.Service
 
                             this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                             this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                            this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                            this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName(pcnConstantes.chNFe.ToString())[0].InnerText;
                         }
                     }
                     break;
             }
         }
         #endregion
+#endif
 
+#if notused
         #region EnvConsultaNFeDest
         public void EnvConsultaNFeDest(int emp, string arquivoXML)
         {
@@ -1579,7 +1599,7 @@ namespace NFe.Service
                         /// CNPJ|10290739000139 
                         /// indNFe|0
                         /// indEmi|0
-                        /// ultNSU|0
+                        /// ultNSU|00000001
                         List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                         foreach (string cTexto in cLinhas)
                         {
@@ -1638,6 +1658,7 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
         #region Métodos para leitura dos XML´s da NFS-e (Nota Fiscal de Serviços Eletrônica)
 
@@ -1674,6 +1695,7 @@ namespace NFe.Service
         }
         #endregion
 
+#if notused
         #region PedCanNfse()
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de cancelamento de NFS-e e disponibilizar conteúdo em um objeto para analise
@@ -1694,7 +1716,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedSitLoteRps()
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de consulta situação do lote rps e disponibilizar conteúdo em um objeto para analise
@@ -1715,7 +1739,9 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
+#if notused
         #region PedSitNfse()
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de consulta nfse por numero e disponibiliza conteúdo em um objeto para analise
@@ -1726,6 +1752,7 @@ namespace NFe.Service
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
         }
         #endregion
+#endif
 
         #region PedSitNfseRps()
         /// <summary>
@@ -1738,6 +1765,7 @@ namespace NFe.Service
         }
         #endregion
 
+#if notused
         #region EnvLoteRps()
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de lote rps e disponibiliza o conteúdo em um objeto para analise
@@ -1758,6 +1786,7 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
         #endregion
     }
