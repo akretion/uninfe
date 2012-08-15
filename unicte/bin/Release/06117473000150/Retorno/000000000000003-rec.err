@@ -1,9 +1,0 @@
-ErrorCode|0000000000
-Message|Valor não pode ser nulo.
-Nome do parâmetro: type
-StackTrace|   em NFe.Components.WebServiceProxy.CriarObjeto(String NomeClasse) na C:\projetos\uninfe\trunk\fontes\NFe.Components\WebServiceProxy.cs:linha 281
-   em NFe.Service.Task.Recepcao() na C:\projetos\uninfe\trunk\fontes\NFe.Service\Task.cs:linha 2118
-Source|NFe.Components
-Type|System.ArgumentNullException
-TargetSite|System.Object CriarObjeto(System.String)
-HashCode|30027861

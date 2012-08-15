@@ -1,8 +1,0 @@
-ErrorCode|0000000000
-Message|Referência de objeto não definida para uma instância de um objeto.
-StackTrace|   em NFe.Service.InvocarObjeto.Invocar(WebServiceProxy oWSProxy, Object oServicoWS, String cMetodo, Object cabecMsg, Object oServicoNFe, String cFinalArqEnvio, String cFinalArqRetorno) na C:\projetos\uninfe\trunk\fontes\NFe.Service\InvocarObjeto.cs:linha 165
-   em NFe.Service.Task.Recepcao() na C:\projetos\uninfe\trunk\fontes\NFe.Service\Task.cs:linha 2130
-Source|NFe.Service
-Type|System.NullReferenceException
-TargetSite|Void Invocar(NFe.Components.WebServiceProxy, System.Object, System.String, System.Object, System.Object, System.String, System.String)
-HashCode|43017754

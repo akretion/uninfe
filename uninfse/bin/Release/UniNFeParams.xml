@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
-<Principal Version="1">
-  <FormConfiguracao>
-    <MDI left="81" top="13" />
-    <Normal left="651" top="269" />
-  </FormConfiguracao>
-  <MainForm left="560" top="208" width="800" height="602" />
-</Principal>

@@ -1,5 +1,0 @@
-C:\lixo\lixo\uninfe\trunk\fontes\NFe.Components\bin\Debug\NFe.Components.dll
-C:\lixo\lixo\uninfe\trunk\fontes\NFe.Components\bin\Debug\NFe.Components.pdb
-C:\lixo\lixo\uninfe\trunk\fontes\NFe.Components\obj\Debug\ResolveAssemblyReference.cache
-C:\lixo\lixo\uninfe\trunk\fontes\NFe.Components\obj\Debug\NFe.Components.dll
-C:\lixo\lixo\uninfe\trunk\fontes\NFe.Components\obj\Debug\NFe.Components.pdb
