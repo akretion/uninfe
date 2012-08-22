@@ -48,7 +48,10 @@ namespace NFe.Service
                     if (currentEvento != Convert.ToInt32(item.tpEvento))
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
 
-                int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
+                //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
+                int cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+                //int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
+
                 //if (cOrgao == 90 || cOrgao == 91)   //Amb.Nacional
                 //{
                 //cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));//<<< 7/2012
@@ -57,7 +60,7 @@ namespace NFe.Service
                 ///Devem utilizar 91
                 ///
                 ///para testar
-                switch (cOrgao)
+                /*switch (cOrgao)
                 {
                     case 32:
                     case 21:
@@ -66,7 +69,7 @@ namespace NFe.Service
                     case 24:
                         cOrgao = 91;
                         break;
-                }
+                }*/
                 //}
                 //Definir o serviço que será executado para a classe
 
@@ -611,9 +614,9 @@ namespace NFe.Service
                                             string Idd = env.Attributes.GetNamedItem("Id").Value;
                                             if (Idd == Id)
                                             {
-                                                DateTime dhRegEvento = Convert.ToDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
-                                                if (Empresa.Configuracoes[emp].DiretorioSalvarComo == "AM")
-                                                    dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
+                                                DateTime dhRegEvento = Functions.GetDateTime/* Convert.ToDateTime*/(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
+                                                //if (Empresa.Configuracoes[emp].DiretorioSalvarComo == "AM")
+                                                //    dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
 
                                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
                                                 oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);

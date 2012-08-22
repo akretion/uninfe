@@ -1538,9 +1538,10 @@ REENTREGA; DEVOLUÇÃO; REFATURAMENTO; etc</xs:documentation>
 														<xs:annotation>
 															<xs:documentation>Informações de quantidades da Carga do CT-e</xs:documentation>
 															<xs:documentation>Para o modal aéreo é obrigatório o preenchimento desse campo pelo menos 3 vezes.
-															1 - Peso Bruto, sempre em quilogramas;
-															2 - Peso Cubado; sempre em quilogramas;
-															3 - Quantidade de volumes, sempre em unidades.</xs:documentation>
+								1 - Peso Bruto, sempre em quilogramas (obrigatório);
+2 - Peso Cubado; sempre em quilogramas (obrigatório);
+3 - Quantidade de volumes, sempre em unidades (obrigatório);
+4 - Cubagem, sempre em metros cúbicos (obrigatório apenas quando for impossível preencher as dimensões da(s) embalagem(ens) na tag #12 do leiaute do modal aéreo).</xs:documentation>
 														</xs:annotation>
 														<xs:complexType>
 															<xs:sequence>
@@ -1882,7 +1883,7 @@ Onde v9.99 é a a designação genérica para a versão do arquivo. Por exemplo,
 													<xs:simpleType>
 														<xs:restriction base="xs:string">
 															<xs:whiteSpace value="preserve"/>
-															<xs:pattern value="1\.04"/>
+															<xs:pattern value="1\.(0[4-9]|[1-9][0-9])"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:attribute>

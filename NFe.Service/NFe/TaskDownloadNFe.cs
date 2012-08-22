@@ -211,7 +211,7 @@ namespace NFe.Service
                     int cStat = Convert.ToInt32(Functions.LerTag(retElemento, "cStat", false));
                     if (cStat == 140)
                     {
-                        DateTime dhResp = Convert.ToDateTime(Functions.LerTag(retElemento, "dhResp", false));
+                        DateTime dhResp = Functions.GetDateTime/*Convert.ToDateTime*/(Functions.LerTag(retElemento, "dhResp", false));
                     }
                     /*
                     foreach (XmlNode infretNFe in retElemento.ChildNodes)

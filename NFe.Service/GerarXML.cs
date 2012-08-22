@@ -1667,7 +1667,14 @@ namespace NFe.Service
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "cStat");
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "xMotivo");
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFe");
+                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, "tpEvento");
+                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, "xEvento");
+                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, "nSeqEvento");
+                                                        string FCNPJCPF = Functions.LerTag((XmlElement)infCCeElemento, "CNPJDest", false);
+                                                        if (string.IsNullOrEmpty(FCNPJCPF)) FCNPJCPF = Functions.LerTag((XmlElement)infCCeElemento, "CPFDest", false);
+                                                        ConteudoRetorno += FCNPJCPF + ",";
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "dhRegEvento");
+                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, "nProt");
                                                         ConteudoRetorno += "\r\n";
                                                     }
                                                 }
@@ -2083,8 +2090,8 @@ namespace NFe.Service
                     //DateTimeOffset offset = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(hourOffset));
                     //string tz = offset.ToString().Substring(offset.ToString().LastIndexOf(" ") + 1).Trim();
                     //if (tz == "") tz = "-03:00";
-                    string tz = TimeZoneInfo.Local.BaseUtcOffset.ToString().Substring(0,6);
-                    evento.dhEvento = Convert.ToDateTime(evento.dhEvento).ToString("yyyy-MM-dd\"T\"HH:mm:ss") + tz;
+                    //string tz = TimeZoneInfo.Local.BaseUtcOffset.ToString().Substring(0,6);
+                    evento.dhEvento = Convert.ToDateTime(evento.dhEvento).ToString("yyyy-MM-dd\"T\"HH:mm:sszzz");// +tz;
                 }
                 vDadosMsg.AppendFormat("<dhEvento>{0}</dhEvento>", evento.dhEvento);
                 vDadosMsg.AppendFormat("<tpEvento>{0}</tpEvento>", evento.tpEvento);
@@ -2154,10 +2161,10 @@ namespace NFe.Service
                         string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chNFe")[0].InnerText;
                         Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("nSeqEvento")[0].InnerText);
                         Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
-                        DateTime dhRegEvento = Convert.ToDateTime(((XmlElement)retConsSitNode1).GetElementsByTagName("dhRegEvento")[0].InnerText);
+                        DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName("dhRegEvento")[0].InnerText);
 
-                        if (Empresa.Configuracoes[emp].DiretorioSalvarComo == "AM")
-                            dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
+                        //if (Empresa.Configuracoes[emp].DiretorioSalvarComo == "AM")
+                        //    dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
 
                         this.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
                     }

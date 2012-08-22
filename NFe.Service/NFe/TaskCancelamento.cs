@@ -296,7 +296,7 @@ namespace NFe.Service
                                 DateTime dtEmissaoNFe = new DateTime(Convert.ToInt16("20" + cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
                                 if (Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString() != "AM")
                                 {
-                                    dtEmissaoNFe = Convert.ToDateTime(infCancElemento.GetElementsByTagName("dhRecbto")[0].InnerText);
+                                    dtEmissaoNFe = Functions.GetDateTime/*Convert.ToDateTime*/(infCancElemento.GetElementsByTagName("dhRecbto")[0].InnerText);
                                 }
 
                                 TFunctions.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);

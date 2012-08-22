@@ -41,7 +41,8 @@
 				</xs:element>
 				<xs:element name="xLAgEmi" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Nome da filial da empresa de transporte aéreo emissora do CT-e.</xs:documentation>
+						<xs:documentation>Identificação do Emissor</xs:documentation>
+						<xs:documentation>Preencher com o nome da filial, da franquia ou da representante legal emissora do CT-e da empresa de transporte aéreo. </xs:documentation>
 					</xs:annotation>
 					<xs:simpleType>
 						<xs:restriction base="TString">
@@ -50,10 +51,10 @@
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
-				<xs:element name="cIATA" minOccurs="0">
+				<xs:element name="IdT" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Código do agente de carga IATA</xs:documentation>
-						<xs:documentation>Preencher com o número CASS.</xs:documentation>
+						<xs:documentation>Identificação Interna do Tomador</xs:documentation>
+						<xs:documentation>Preencher com o código identificador entre o cliente tomador e a empresa aérea. Exemplo: CNPJ, conta corrente, etc.</xs:documentation>
 					</xs:annotation>
 					<xs:simpleType>
 						<xs:restriction base="TString">
@@ -113,10 +114,12 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="xDime">
+							<xs:element name="xDime" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Dimensão</xs:documentation>
-									<xs:documentation>Formato:1234X1234X1234 (cm)</xs:documentation>
+									<xs:documentation>Formato:1234X1234X1234 (cm)
+
+Esse campo deve sempre que possível ser preenchido. Entretanto, quando for impossível o preenchimento das dimensões, fica obrigatório o preechimento da cubagem em metro cúbico da #tag 281 do leiaute do CT-e da estrutura genérica.</xs:documentation>
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="TString">
