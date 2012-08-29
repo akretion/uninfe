@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Webservice>
   <!--Estados com webservices próprios-->
   <Estado ID="35" Nome="São Paulo" UF="SP">
@@ -99,7 +99,7 @@
       <NFeConsulta>wsdl\producao\PMTCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PMTCteStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\PMTCadConsultaCadastro.wsdl</NFeConsultaCadastro>
-    </LocalProducao>    
+    </LocalProducao>
   </Estado>
   <!--Estados que utilizam os webservices do Sistema Virtual do Rio Grande do Sul (SVRS)-->
   <Estado ID="15" Nome="Pará" UF="PA">
@@ -444,7 +444,7 @@
     </LocalProducao>
   </Estado>
   <!--SCAN - Sistema de contingência do ambiente nacional-->
-  <Estado ID="901" Nome="Servico de Contingencia Virtual do Rio Grande do Sul" UF="SVCRS">
+  <Estado ID="902" Nome="Servico de Contingencia Virtual do Rio Grande do Sul" UF="SCVRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSCVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSCVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
@@ -464,7 +464,7 @@
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="902" Nome="Servico de Contingencia Virtual de São Paulo" UF="SVCSP">
+  <Estado ID="903" Nome="Servico de Contingencia Virtual de São Paulo" UF="SCVSP">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSCVSPCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSCVSPCteRetRecepcao.wsdl</NFeRetRecepcao>

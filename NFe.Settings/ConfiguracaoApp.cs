@@ -552,11 +552,11 @@ namespace NFe.Settings
             switch (tipoEmissao)
             {
                 case Propriedade.TipoEmissao.teSVCRS:
-                    CodigoUF = 901;
+                    CodigoUF = 902;
                     break;
 
                 case Propriedade.TipoEmissao.teSVCSP:
-                    CodigoUF = 902;
+                    CodigoUF = 903;
                     break;
 
                 case Propriedade.TipoEmissao.teSCAN:

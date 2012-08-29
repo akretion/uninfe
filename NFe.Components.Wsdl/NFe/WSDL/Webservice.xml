@@ -733,20 +733,20 @@
   <!-- DPEC - Declaraçãoo Prévia de Emissão em Contingência -->
   <Estado ID="901" Nome="DPEC - Declaração Prévia de Emissão em Contingência" UF="DPEC">
     <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\DEPC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
+      <NFeRecepcao>wsdl\homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\DEPC\HDEPCSCEConsultaRFB.wsdl</NFeConsulta>
+      <NFeConsulta>wsdl\homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl</NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeRecepcao>wsdl\producao\DEPC\PDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
+      <NFeRecepcao>wsdl\producao\DPEC\PDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeCancelamento></NFeCancelamento>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\DEPC\PDEPCSCEConsultaRFB.wsdl</NFeConsulta>
+      <NFeConsulta>wsdl\producao\DPEC\PDEPCSCEConsultaRFB.wsdl</NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalProducao>
