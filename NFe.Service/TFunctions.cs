@@ -489,7 +489,7 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 03/02/2010
         /// </remarks>
-        public static void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe)
+        public static void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe,string tipo)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
@@ -506,6 +506,7 @@ namespace NFe.Service
                     if (Empresa.Configuracoes[emp].PastaConfigUniDanfe != string.Empty)
                     {
                         Args += " PC=\"" + Empresa.Configuracoes[emp].PastaConfigUniDanfe + "\"";
+                        Args += " T=\"" + tipo + "\"";
                     }
 
                     System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", Args);

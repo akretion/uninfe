@@ -667,14 +667,12 @@
     <EmbeddedResource Include="CTe\WSDL\Producao\PMGCteRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMGCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMGCteStatusServico.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteCancelamento.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteConsulta.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteInutilizacao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteRecepcao.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteRecepcaoLote.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteRetRecepcao .wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCteStatusServico.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMTCteCancelamento.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PMTCteConsulta.wsdl" />

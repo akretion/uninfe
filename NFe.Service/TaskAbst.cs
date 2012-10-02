@@ -879,38 +879,38 @@ namespace NFe.Service
 
                         if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                 "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                 "para o SVC-RS.\r\n\r\n";
 
                         }
                         if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                 "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                 "para o SVC-SP.\r\n\r\n";
 
                         }
                         if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
                                 "e o XML está configurado para enviar para o SVC-SP.\r\n\r\n";
 
                         }
                         if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
                                 "e o XML está configurado para enviar para o SVC-RS.\r\n\r\n";
 
                         }
                         else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP  && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao SVCSP " +
                                 "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
                         }
                         else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
                         {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
+                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao SVCRS " +
                                 "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
                         }
 

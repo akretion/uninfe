@@ -242,6 +242,26 @@
       <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
+  <Estado ID="53" Nome="Distrito Federal" UF="DF">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
   <Estado ID="52" Nome="Goiás" UF="GO">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>

@@ -1871,7 +1871,7 @@ namespace NFe.Service
             string nomeArqPedRec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
             string nomeArqPedRecTemp = Empresa.Configuracoes[emp].PastaEnvio + "\\Temp\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
 
-            if (!File.Exists(nomeArqPedRec) && ! File.Exists(nomeArqPedRecTemp))
+            if (!File.Exists(nomeArqPedRec) && !File.Exists(nomeArqPedRecTemp))
             {
                 string tipo = string.Empty;
                 switch (Propriedade.TipoAplicativo)
@@ -2184,7 +2184,7 @@ namespace NFe.Service
                 /// ja que a nSeqEvento deve ser unico para cada chave
                 /// 
                 /// quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
-                string tempXmlFile = 
+                string tempXmlFile =
                         PastaEnviados.Autorizados.ToString() + "\\" +
                         Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
                         ChaveNFe + "_" + (tpEvento != 110110 ? tpEvento.ToString() + "_" : "") + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoNFe;
@@ -2192,15 +2192,19 @@ namespace NFe.Service
                 string folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaEnviado, tempXmlFile);
                 string folderToWriteBackup = Path.Combine(Empresa.Configuracoes[emp].PastaBackup, tempXmlFile);
 
-                if (ChaveNFe.Substring(6, 14) != Empresa.Configuracoes[emp].CNPJ || ChaveNFe.Substring(0, 2) != Empresa.Configuracoes[emp].UFCod.ToString())
+                if (tpEvento != 110111 && tpEvento != 110110) //Cancelamento e CCe
                 {
-                    ///evento não é do cliente uninfe
-                    ///41120776676436000167550010000003961000316515
-                    ///
-                    if (!Empresa.Configuracoes[emp].GravarEventosDeTerceiros) return;
+                    if (ChaveNFe.Substring(6, 14) != Empresa.Configuracoes[emp].CNPJ || ChaveNFe.Substring(0, 2) != Empresa.Configuracoes[emp].UFCod.ToString())
+                    {
+                        ///evento não é do cliente uninfe
+                        ///41120776676436000167550010000003961000316515
+                        ///
 
-                    folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
-                    folderToWriteBackup = "";
+                        if (!Empresa.Configuracoes[emp].GravarEventosDeTerceiros) return;
+
+                        folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
+                        folderToWriteBackup = "";
+                    }
                 }
                 else
                 {
@@ -2277,7 +2281,7 @@ namespace NFe.Service
             catch (Exception ex)
             {
                 throw (ex);
-            }                 
+            }
         }
 
         #endregion

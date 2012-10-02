@@ -144,9 +144,9 @@ namespace NFe.Service
                 else
                 {
                     oGerarXML.Consulta(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
-                                        /*oLer.*/oDadosPedSit.tpAmb,
-                                        /*oLer.*/oDadosPedSit.tpEmis,
-                                        /*oLer.*/oDadosPedSit.chNFe);
+                        /*oLer.*/oDadosPedSit.tpAmb,
+                        /*oLer.*/oDadosPedSit.tpEmis,
+                        /*oLer.*/oDadosPedSit.chNFe);
                 }
             }
             catch (Exception ex)
@@ -495,6 +495,8 @@ namespace NFe.Service
 
                                                 //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
                                                 //ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                                if (procNFeJaNaAutorizada)
+                                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "dacte");
                                             }
 
                                             if (File.Exists(strArquivoNFeProc))
@@ -813,7 +815,7 @@ namespace NFe.Service
 
                                                 //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                                 if (procNFeJaNaAutorizada)
-                                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "danfe");
                                             }
 
                                             if (File.Exists(strArquivoNFeProc))

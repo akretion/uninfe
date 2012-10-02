@@ -116,39 +116,18 @@ namespace NFe.Certificado
         /// </example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>24/01/2009</date>
-        public void PrepInfCertificado(X509Certificate2 pCertificado)
+        public void PrepInfCertificado(X509Certificate2 certificado)
         {
-            string _xnome = pCertificado.Subject.ToString();
-
-            X509Certificate2 _X509Cert = new X509Certificate2();
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-            X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, _xnome, false);
-
-            if (collection1.Count == 0)
-                this.lLocalizouCertificado = false;
-            else
+            try
             {
-                _X509Cert = null;
-
-                for (int i = 0; i < collection1.Count; i++)
-                {
-                    //Verificar a validade do certificado
-                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
-                    {
-                        _X509Cert = collection1[i];
-                        break;
-                    }
-                }
-
-                if (_X509Cert == null)
-                    _X509Cert = collection1[0];
-
-                this.sSubject = _X509Cert.Subject;
-                this.dValidadeInicial = _X509Cert.NotBefore;
-                this.dValidadeFinal = _X509Cert.NotAfter;
-                this.lLocalizouCertificado = true;
+                sSubject = certificado.Subject;
+                dValidadeInicial = certificado.NotBefore;
+                dValidadeFinal = certificado.NotAfter;
+                lLocalizouCertificado = true;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

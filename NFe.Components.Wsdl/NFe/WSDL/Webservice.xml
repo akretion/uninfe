@@ -23,8 +23,8 @@
       <NFeStatusServico>wsdl\producao\AM\PAMNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\AM\PAMRecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\AM\HAMNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AM\HAMNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\AM\PAMNfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\AM\PAMNFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA">
@@ -49,8 +49,8 @@
       <NFeStatusServico>wsdl\producao\BA\PBANfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\BA\PBACadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\BA\PBARecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\BA\HBANfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\BA\HBANFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\BA\PBANfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\BA\PBANFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="23" Nome="Ceará" UF="CE">
@@ -75,8 +75,8 @@
       <NFeStatusServico>wsdl\producao\CE\PCENfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\CE\PCECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\CE\PCERecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\CE\HCENfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\CE\HCENFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\CE\PCENfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\CE\PCENFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="52" Nome="Goiás" UF="GO">
@@ -103,8 +103,8 @@
       <NFeConsultaCadastro>wsdl\producao\GO\PGOCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeConsulta1>wsdl\producao\GO\PGONfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\producao\GO\PGORecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\GO\HGONfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\GO\HGONFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\GO\PGONfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\GO\PGONFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="31" Nome="Minas Gerais" UF="MG">
@@ -129,8 +129,8 @@
       <NFeStatusServico>wsdl\producao\MG\PMGNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\MG\PMGCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MG\PMGRecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\MG\HMGNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\MG\HMGNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\MG\PMGNfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\MG\PMGNFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS">
@@ -155,8 +155,8 @@
       <NFeStatusServico>wsdl\producao\MS\PMSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\MS\PMSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MS\PMSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\MS\HMSNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\MS\HMSNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\MS\PMSNfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\MS\PMSNFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="51" Nome="Mato Grosso" UF="MT">
@@ -181,8 +181,8 @@
       <NFeStatusServico>wsdl\producao\MT\PMTNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\MT\PMTCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MT\PMTRecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\MT\HMTNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\MT\HMTNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\MT\PMTNfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\MT\PMTNFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="26" Nome="Pernambuco" UF="PE">
@@ -207,8 +207,8 @@
       <NFeStatusServico>wsdl\producao\PE\PPENfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\PE\PPECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\PE\PPERecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\PE\HPENfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\PE\HPENFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\PE\PPENfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\PE\PPENFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="41" Nome="Paraná" UF="PR">
@@ -235,8 +235,8 @@
       <NFeConsultaCadastro>wsdl\producao\PR\PPRCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeConsulta1>wsdl\producao\PR\PPRNfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\producao\PR\PPRNFeRecepcaoEvento.wsdl</NFeCCe>
-      <NFeDownload>wsdl\producao\PR\HPRNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\PR\HPRNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\PR\PPRNfeDownloadNF.wsdl</NFeDownload>
+      <NFeConsultaNFeDest>wsdl\producao\PR\PPRNFeConsultaDest.wsdl</NFeConsultaNFeDest>
     </LocalProducao>
   </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS">
@@ -730,7 +730,7 @@
       <NFeConsultaCadastro>wsdl\producao\SCAN\PSCANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <!-- DPEC - Declaraçãoo Prévia de Emissão em Contingência -->
+  <!-- DPEC - Declaração Prévia de Emissão em Contingência -->
   <Estado ID="901" Nome="DPEC - Declaração Prévia de Emissão em Contingência" UF="DPEC">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
@@ -751,7 +751,7 @@
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <!-- Sequencia de tag´s de template-->
+  <!-- Sequencia de tags de template-->
   <Estado ID="999" Nome="Template" UF="XX">
     <LocalHomologacao>
       <NFeRecepcao></NFeRecepcao>

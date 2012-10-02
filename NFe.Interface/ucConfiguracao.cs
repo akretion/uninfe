@@ -25,6 +25,12 @@ namespace NFe.Interface
         {
             InitializeComponent();
 
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+            {
+                label17.Text = "Pasta onde deve ser gravado o XML da NFe para a impressão do DACTe a partir do DANFeMon:";
+                this.tabPageDanfe.Text = "DACTE";
+
+            }
             if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
             {
                 ///danasa 1-2012
@@ -101,9 +107,19 @@ namespace NFe.Interface
         public void PopulateConfEmpresa(string cnpj)
         {
             #region Definir um texto explicativo sobre a impressão do DANFE. Wandrey 02/02/2010
-            tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DANFE através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
-                "\r\n\r\n" +
-                "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+            {
+                tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DACTE através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
+                                   "\r\n\r\n" +
+                                   "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
+                label18.Text = "XML´s a serem copiados na pasta para impressão do DACTE a partir do DANFeMon:";
+            }
+            else
+            {
+                tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DANFE através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
+                    "\r\n\r\n" +
+                    "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
+            }
             #endregion
 
             #region Montar Array DropList da UF
@@ -148,10 +164,10 @@ namespace NFe.Interface
             arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teNormal], Propriedade.TipoEmissao.teNormal));
 
             if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-            {                
+            {
                 if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                 {
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia], Propriedade.TipoEmissao.teContingencia)); 
+                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia], Propriedade.TipoEmissao.teContingencia));
                     arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN], Propriedade.TipoEmissao.teSCAN));
                     arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC], Propriedade.TipoEmissao.teDPEC));
                 }
@@ -656,6 +672,11 @@ namespace NFe.Interface
                 txtSenhaCertificado.Location = new Point(6, 88);
                 txtSenhaCertificado.Refresh();
             }
+        }
+
+        private void tbTextoDANFE_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

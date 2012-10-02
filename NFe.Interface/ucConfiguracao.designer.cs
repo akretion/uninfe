@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
+            this.checkBoxGravarEventosDeTerceiros = new System.Windows.Forms.CheckBox();
+            this.checkBoxGravarEventosNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
             this.labelPadrao = new System.Windows.Forms.Label();
             this.labelCodMun = new System.Windows.Forms.Label();
             this.edtPadrao = new System.Windows.Forms.TextBox();
@@ -52,6 +56,9 @@
             this.checkBoxRetornoNFETxt = new System.Windows.Forms.CheckBox();
             this.comboBox_UF = new System.Windows.Forms.ComboBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_PastaDownload = new System.Windows.Forms.TextBox();
+            this.button_SelecionarPastaDownload = new System.Windows.Forms.Button();
             this.cbCriaPastas = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -114,14 +121,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.edtFTP_Server = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_PastaDownload = new System.Windows.Forms.TextBox();
-            this.button_SelecionarPastaDownload = new System.Windows.Forms.Button();
-            this.checkBoxGravarEventosNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
-            this.checkBoxGravarEventosDeTerceiros = new System.Windows.Forms.CheckBox();
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -179,6 +180,37 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Diversos";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe
+            // 
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 292);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
+                "denegados?";
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxGravarEventosDeTerceiros
+            // 
+            this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
+            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(8, 315);
+            this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(273, 17);
+            this.checkBoxGravarEventosDeTerceiros.TabIndex = 22;
+            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe de terceiros?";
+            this.checkBoxGravarEventosDeTerceiros.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxGravarEventosNaPastaEnviadosNFe
+            // 
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 269);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(415, 17);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 20;
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe autorizados/denegados?";
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // labelPadrao
             // 
@@ -323,7 +355,7 @@
             this.label14.Size = new System.Drawing.Size(469, 13);
             this.label14.TabIndex = 16;
             this.label14.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
-    "0 para infinito.";
+                "0 para infinito.";
             // 
             // label13
             // 
@@ -451,6 +483,36 @@
             this.tabPage7.Text = "Pastas";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 315);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(358, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
+            // 
+            // textBox_PastaDownload
+            // 
+            this.textBox_PastaDownload.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.textBox_PastaDownload.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.textBox_PastaDownload.Location = new System.Drawing.Point(5, 330);
+            this.textBox_PastaDownload.Name = "textBox_PastaDownload";
+            this.textBox_PastaDownload.Size = new System.Drawing.Size(542, 20);
+            this.textBox_PastaDownload.TabIndex = 28;
+            this.textBox_PastaDownload.TextChanged += new System.EventHandler(this.changed_Modificado);
+            // 
+            // button_SelecionarPastaDownload
+            // 
+            this.button_SelecionarPastaDownload.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
+            this.button_SelecionarPastaDownload.Location = new System.Drawing.Point(553, 328);
+            this.button_SelecionarPastaDownload.Name = "button_SelecionarPastaDownload";
+            this.button_SelecionarPastaDownload.Size = new System.Drawing.Size(27, 23);
+            this.button_SelecionarPastaDownload.TabIndex = 29;
+            this.button_SelecionarPastaDownload.Tag = "10";
+            this.button_SelecionarPastaDownload.UseVisualStyleBackColor = true;
+            this.button_SelecionarPastaDownload.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
+            // 
             // cbCriaPastas
             // 
             this.cbCriaPastas.AutoSize = true;
@@ -469,7 +531,7 @@
             this.label1.Size = new System.Drawing.Size(497, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
-    " os WebServices:";
+                " os WebServices:";
             // 
             // label12
             // 
@@ -508,7 +570,7 @@
             this.label11.Size = new System.Drawing.Size(499, 13);
             this.label11.TabIndex = 25;
             this.label11.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
-    " os WebServices:";
+                " os WebServices:";
             // 
             // textBox_PastaBackup
             // 
@@ -576,7 +638,7 @@
             this.label7.Size = new System.Drawing.Size(445, 13);
             this.label7.TabIndex = 19;
             this.label7.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
-    "o envio:";
+                "o envio:";
             // 
             // label2
             // 
@@ -732,7 +794,7 @@
             this.txtSenhaCertificado.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaCertificado.TabIndex = 27;
             this.toolTip1.SetToolTip(this.txtSenhaCertificado, "O arquivo do certificado deverá estar no diretorio da empresa com o nome cert.ccc" +
-        "");
+                    "");
             this.txtSenhaCertificado.UseSystemPasswordChar = true;
             this.txtSenhaCertificado.Visible = false;
             // 
@@ -796,7 +858,7 @@
             this.tabPageDanfe.Location = new System.Drawing.Point(4, 22);
             this.tabPageDanfe.Name = "tabPageDanfe";
             this.tabPageDanfe.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDanfe.Size = new System.Drawing.Size(596, 339);
+            this.tabPageDanfe.Size = new System.Drawing.Size(596, 407);
             this.tabPageDanfe.TabIndex = 3;
             this.tabPageDanfe.Text = "DANFe";
             this.tabPageDanfe.UseVisualStyleBackColor = true;
@@ -819,6 +881,7 @@
             this.tbTextoDANFE.Size = new System.Drawing.Size(576, 75);
             this.tbTextoDANFE.TabIndex = 3;
             this.tbTextoDANFE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbTextoDANFE.TextChanged += new System.EventHandler(this.tbTextoDANFE_TextChanged);
             // 
             // cbDanfeMonProcNfe
             // 
@@ -860,7 +923,7 @@
             this.label17.Size = new System.Drawing.Size(467, 13);
             this.label17.TabIndex = 8;
             this.label17.Text = "Pasta onde deve ser gravado o XML da NFe para a impressão do DANFe a partir do DA" +
-    "NFeMon:";
+                "NFeMon:";
             // 
             // label15
             // 
@@ -953,7 +1016,7 @@
             this.tabPageFTP.Location = new System.Drawing.Point(4, 22);
             this.tabPageFTP.Name = "tabPageFTP";
             this.tabPageFTP.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFTP.Size = new System.Drawing.Size(596, 339);
+            this.tabPageFTP.Size = new System.Drawing.Size(596, 407);
             this.tabPageFTP.TabIndex = 4;
             this.tabPageFTP.Text = "FTP";
             this.tabPageFTP.UseVisualStyleBackColor = true;
@@ -1024,7 +1087,7 @@
             this.edtFTP_GravaXMLPastaUnica.Size = new System.Drawing.Size(502, 17);
             this.edtFTP_GravaXMLPastaUnica.TabIndex = 7;
             this.edtFTP_GravaXMLPastaUnica.Text = "Gravar os XML\'s autorizados em uma única pasta, se não, serão criadas pastas conf" +
-    "orme a definição";
+                "orme a definição";
             this.edtFTP_GravaXMLPastaUnica.UseVisualStyleBackColor = true;
             this.edtFTP_GravaXMLPastaUnica.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -1115,67 +1178,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 315);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(358, 13);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
-            // 
-            // textBox_PastaDownload
-            // 
-            this.textBox_PastaDownload.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.textBox_PastaDownload.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.textBox_PastaDownload.Location = new System.Drawing.Point(5, 330);
-            this.textBox_PastaDownload.Name = "textBox_PastaDownload";
-            this.textBox_PastaDownload.Size = new System.Drawing.Size(542, 20);
-            this.textBox_PastaDownload.TabIndex = 28;
-            this.textBox_PastaDownload.TextChanged += new System.EventHandler(this.changed_Modificado);
-            // 
-            // button_SelecionarPastaDownload
-            // 
-            this.button_SelecionarPastaDownload.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
-            this.button_SelecionarPastaDownload.Location = new System.Drawing.Point(553, 328);
-            this.button_SelecionarPastaDownload.Name = "button_SelecionarPastaDownload";
-            this.button_SelecionarPastaDownload.Size = new System.Drawing.Size(27, 23);
-            this.button_SelecionarPastaDownload.TabIndex = 29;
-            this.button_SelecionarPastaDownload.Tag = "10";
-            this.button_SelecionarPastaDownload.UseVisualStyleBackColor = true;
-            this.button_SelecionarPastaDownload.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
-            // 
-            // checkBoxGravarEventosNaPastaEnviadosNFe
-            // 
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 269);
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(415, 17);
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 20;
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe autorizados/denegados?";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxGravarEventosDeTerceiros
-            // 
-            this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
-            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(8, 315);
-            this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(273, 17);
-            this.checkBoxGravarEventosDeTerceiros.TabIndex = 22;
-            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe de terceiros?";
-            this.checkBoxGravarEventosDeTerceiros.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe
-            // 
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 292);
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
-    "denegados?";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // ucConfiguracao
             // 

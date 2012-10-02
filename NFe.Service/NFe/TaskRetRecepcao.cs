@@ -181,6 +181,7 @@ namespace NFe.Service
 
             try
             {
+               
                 var doc = new System.Xml.XmlDocument();
                 doc.Load(msXml);
 
@@ -324,12 +325,14 @@ namespace NFe.Service
 
                                                 //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
                                                 //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para 
-                                                //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário.
+                                                //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o cenário.
                                                 //assim sendo não inverta as posições. Wandrey 08/10/2009
                                                 TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
                                                 //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
                                                 //ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+
+                                                TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "dacte");
                                             }
                                             break;
 
@@ -607,7 +610,7 @@ namespace NFe.Service
 
                                                 //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
                                                 if (procNFeJaNaAutorizada)
-                                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "danfe");
 
                                                 //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012
                                                 NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe);
