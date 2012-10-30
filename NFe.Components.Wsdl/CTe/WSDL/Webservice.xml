@@ -21,6 +21,26 @@
       <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
+  <Estado ID="41" Nome="Paraná" UF="PR">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HPRCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HPRCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HPRCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HPRCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HPRCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HPRCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HPRCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PPRCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PPRCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PPRCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PPRCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PPRCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PPRCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PPRCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HRSCteRecepcao.wsdl</NFeRecepcao>
@@ -123,26 +143,6 @@
     </LocalProducao>
   </Estado>
   <Estado ID="22" Nome="Piaui" UF="PI">
-    <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\homologacao\HSVRSCteCancelamento.wsdl</NFeCancelamento>
-      <NFeInutilizacao>wsdl\homologacao\HSVRSCteInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\HSVRSCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\HSVRSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao>wsdl\producao\PSVRSCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\PSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\producao\PSVRSCteCancelamento.wsdl</NFeCancelamento>
-      <NFeInutilizacao>wsdl\producao\PSVRSCteInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\PSVRSCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\PSVRSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="41" Nome="Paraná" UF="PR">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>

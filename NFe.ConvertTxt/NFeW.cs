@@ -330,14 +330,14 @@ namespace NFe.ConvertTxt
             }
             else
             {
-                //if (NFe.dest.enderDest.UF == "EX")
+                if (NFe.dest.enderDest.cPais != 1058)
+                    wCampo("", TpcnTipoCampo.tcStr, Properties.Resources.CNPJ);
+                else
                 if (!string.IsNullOrEmpty(NFe.dest.CNPJ))
                     wCampo(NFe.dest.CNPJ, TpcnTipoCampo.tcStr, Properties.Resources.CNPJ);
                 else 
                     if (!string.IsNullOrEmpty(NFe.dest.CPF))
                         wCampo(NFe.dest.CPF, TpcnTipoCampo.tcStr, Properties.Resources.CPF);
-                //else
-                //    wCampo("99999999000191", TpcnTipoCampo.tcStr, Properties.Resources.CNPJ);
 
                 wCampo("NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL", TpcnTipoCampo.tcStr, Properties.Resources.xNome);
             }
@@ -952,10 +952,9 @@ namespace NFe.ConvertTxt
 
                         case "90":
                             wCampo(imposto.ICMS.modBC, TpcnTipoCampo.tcInt, Properties.Resources.modBC);
+                            wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, Properties.Resources.vBC);
                             if (imposto.ICMS.ICMSPart90 == 1)
                                 wCampo(imposto.ICMS.pRedBC, TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional);
-                            wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, Properties.Resources.vBC);
-                            wCampo(imposto.ICMS.pRedBC, TpcnTipoCampo.tcDec2, Properties.Resources.pRedBC, ObOp.Opcional);
                             wCampo(imposto.ICMS.pICMS, TpcnTipoCampo.tcDec2, Properties.Resources.pICMS);
                             wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, Properties.Resources.vICMS);
                             wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, Properties.Resources.modBCST);

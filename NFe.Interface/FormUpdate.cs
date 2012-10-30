@@ -50,6 +50,10 @@ namespace NFe.Interface
         /// Caminho local onde é para ser gravado o arquivo que está sendo efetuado o download
         /// </summary>
         private string LocalArq;
+        /// <summary>
+        /// Caminho do sistema o qual o UniNFe sera atualizado
+        /// </summary>
+        private string PastaInstalar;
         #endregion
 
         #region Construtores
@@ -65,8 +69,9 @@ namespace NFe.Interface
         {
             InitializeComponent();
 
+            this.PastaInstalar = Application.StartupPath;
             this.LocalArq = Application.StartupPath + "\\" + NomeInstalador;
-            this.URL = "http://www.unimake.com.br/downloads/" + NomeInstalador;
+            this.URL = "http://www.unimake2.com.br/" + NomeInstalador;
         }
         #endregion
 
@@ -92,7 +97,7 @@ namespace NFe.Interface
                 //Executar o instalador do uninfe
                 if (File.Exists(LocalArq))
                 {
-                    System.Diagnostics.Process.Start(this.LocalArq);
+                    System.Diagnostics.Process.Start(this.LocalArq, "/SILENT /DIR=" + this.PastaInstalar);
 
                     //Forçar o encerramento da aplicação
                     Propriedade.EncerrarApp = true;

@@ -1060,9 +1060,10 @@ namespace NFe.Service
                 SW.Write(conteudoXMLRetorno);
                 SW.Close();
                 SW = null;
-                //
+
                 //gravar o conteudo no FTP
-                this.XmlParaFTP(emp, ArqXMLRetorno);
+                if (Empresa.Configuracoes[emp].FTPIsAlive)
+                    this.XmlParaFTP(emp, ArqXMLRetorno);
             }
             catch (Exception ex)
             {
@@ -1073,6 +1074,7 @@ namespace NFe.Service
                 if (SW != null)
                 {
                     SW.Close();
+                    SW = null;
                 }
             }
 

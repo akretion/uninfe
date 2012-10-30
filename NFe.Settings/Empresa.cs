@@ -305,7 +305,7 @@ namespace NFe.Settings
                     }
                     catch (Exception ex)
                     {
-                        throw (ex);
+                        Auxiliar.WriteLog("Ocorreu um erro ao tentar conectar no FTP: " + ex.Message);
                     }
                     finally
                     {
@@ -445,18 +445,18 @@ namespace NFe.Settings
             #endregion
 
             #region Limpar conteúdo dos atributos de configurações da empresa
-            empresa.PastaEnvio = 
+            empresa.PastaEnvio =
                 empresa.PastaRetorno =
                 empresa.PastaEnviado =
-                empresa.PastaErro = 
-                empresa.PastaBackup = 
+                empresa.PastaErro =
+                empresa.PastaBackup =
                 empresa.PastaEnvioEmLote =
-                empresa.PastaValidar = 
-                empresa.PastaDanfeMon = 
+                empresa.PastaValidar =
+                empresa.PastaDanfeMon =
                 empresa.PastaExeUniDanfe =
                 empresa.PastaConfigUniDanfe =
                 empresa.PastaDownloadNFeDest =
-                empresa.Certificado = 
+                empresa.Certificado =
                 empresa.CertificadoThumbPrint = string.Empty;
             empresa.X509Certificado = null;
             empresa.FTPAtivo = false;
@@ -524,7 +524,7 @@ namespace NFe.Settings
                         empresa.PastaEnvioEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
                         empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
                         empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
-                        
+
                         empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
                         empresa.PastaConfigUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaConfigUniDanfe, false);
                         empresa.PastaDanfeMon = Functions.LerTag(configElemento, NFeStrConstants.PastaDanfeMon, false);
@@ -546,14 +546,16 @@ namespace NFe.Settings
                         empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
                         empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
 
-                        if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
-                            empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
+                        if (!empresa.CertificadoInstalado)
+                            if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
+                                if (!string.IsNullOrEmpty(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim()))
+                                    empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
                     }
 
                     empresa.X509Certificado = null;
                     if (empresa.CertificadoInstalado ||
-                        (!empresa.CertificadoInstalado && 
-                        string.IsNullOrEmpty(empresa.CertificadoArquivo) && 
+                        (!empresa.CertificadoInstalado &&
+                        string.IsNullOrEmpty(empresa.CertificadoArquivo) &&
                         (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado))))
                     {
                         //Ajustar o certificado digital de String para o tipo X509Certificate2
@@ -730,17 +732,17 @@ namespace NFe.Settings
                     {
                         var configElemento = (XmlElement)configNode;
 
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnvio,     "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEmLote,    "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlRetorno,   "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnviado,   "Pasta onde serão gravados os arquivos XML´s enviados", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlErro,      "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaBackup,       "Pasta para Backup dos XML´s enviados", false);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaValidar,      "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
+                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
                         //verificaPasta(empresa, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", true);
                     }
                 }
-                catch 
+                catch
                 {
                 }
                 finally
@@ -776,7 +778,7 @@ namespace NFe.Settings
                 if (isObrigatoria)
                 {
                     Empresa.ExisteErroDiretorio = true;
-                    ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   : \"" +  descricao + "\"\r\n";
+                    ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   : \"" + descricao + "\"\r\n";
                 }
             }
         }

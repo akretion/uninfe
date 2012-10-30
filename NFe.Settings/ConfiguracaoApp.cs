@@ -752,11 +752,11 @@ namespace NFe.Settings
         /// Método responsável por gravar as configurações da Aplicação no arquivo "UniNfeConfig.xml"
         /// </summary>
         /// <returns>Retorna true se conseguiu gravar corretamente as configurações ou false se não conseguiu</returns>
-        public void GravarConfig(bool gravaArqEmpresa)  //<<<<<<danasa 1-5-2011
+        public void GravarConfig(bool gravaArqEmpresa, bool validaCertificado)  //<<<<<<danasa 1-5-2011
         {
             try
             {
-                ValidarConfig();
+                ValidarConfig(validaCertificado);
                 GravarConfigGeral();
                 GravarConfigEmpresa();
                 if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
@@ -986,11 +986,8 @@ namespace NFe.Settings
         /// <summary>
         /// Verifica se algumas das informações das configurações tem algum problema ou falha
         /// </summary>
-        /// <returns>
-        /// true - nenhum problema/falha
-        /// false - encontrou algum problema
-        /// </returns>
-        private void ValidarConfig()
+        /// <param name="validarCertificado">Se valida se tem certificado informado ou não nas configurações</param>
+        private void ValidarConfig(bool validarCertificado)
         {
             try
             {
@@ -1095,60 +1092,63 @@ namespace NFe.Settings
                         #endregion
 
                         #region Verificar se o certificado foi informado
-                        if (validou)
+                        if (validarCertificado)
                         {
-                            string aplicacao = "NF-e";
-                            switch (Propriedade.TipoAplicativo)
+                            if (validou)
                             {
-                                case TipoAplicativo.Cte:
-                                    aplicacao = "CT-e";
-                                    break;
-                                case TipoAplicativo.Nfse:
-                                    aplicacao = "NFs-e";
-                                    break;
-                            }
-                            if (empresa.CertificadoInstalado && empresa.CertificadoThumbPrint.Equals(string.Empty))
-                            {
-                                erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                                validou = false;
-                            }
-                            if (!empresa.CertificadoInstalado)
-                            {
-                                if (empresa.CertificadoArquivo.Equals(string.Empty))
+                                string aplicacao = "NF-e";
+                                switch (Propriedade.TipoAplicativo)
                                 {
-                                    erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                    case TipoAplicativo.Cte:
+                                        aplicacao = "CT-e";
+                                        break;
+                                    case TipoAplicativo.Nfse:
+                                        aplicacao = "NFs-e";
+                                        break;
+                                }
+                                if (empresa.CertificadoInstalado && empresa.CertificadoThumbPrint.Equals(string.Empty))
+                                {
+                                    erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
-                                else if (!File.Exists(empresa.CertificadoArquivo))
+                                if (!empresa.CertificadoInstalado)
                                 {
-                                    erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + " não foi encontrado.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                                    validou = false;
-                                }
-                                else if (empresa.CertificadoSenha.Equals(string.Empty))
-                                {
-                                    erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                                    validou = false;
-                                }
-                                else
-                                {
-                                    try
+                                    if (empresa.CertificadoArquivo.Equals(string.Empty))
                                     {
-                                        using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
+                                        erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                        validou = false;
+                                    }
+                                    else if (!File.Exists(empresa.CertificadoArquivo))
+                                    {
+                                        erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + " não foi encontrado.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                        validou = false;
+                                    }
+                                    else if (empresa.CertificadoSenha.Equals(string.Empty))
+                                    {
+                                        erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                        validou = false;
+                                    }
+                                    else
+                                    {
+                                        try
                                         {
-                                            byte[] buffer = new byte[fs.Length];
-                                            fs.Read(buffer, 0, buffer.Length);
-                                            empresa.X509Certificado = new X509Certificate2(buffer, empresa.CertificadoSenha);
+                                            using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
+                                            {
+                                                byte[] buffer = new byte[fs.Length];
+                                                fs.Read(buffer, 0, buffer.Length);
+                                                empresa.X509Certificado = new X509Certificate2(buffer, empresa.CertificadoSenha);
+                                            }
                                         }
-                                    }
-                                    catch (System.Security.Cryptography.CryptographicException ex)
-                                    {
-                                        erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
-                                        validou = false;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
-                                        validou = false;
+                                        catch (System.Security.Cryptography.CryptographicException ex)
+                                        {
+                                            erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                            validou = false;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                            validou = false;
+                                        }
                                     }
                                 }
                             }
@@ -1730,13 +1730,14 @@ namespace NFe.Settings
                 lErro = true;
             }
 
-            if (lEncontrouTag == true)
+            if (lEncontrouTag)
             {
-                if (lErro == false)
+                if (!lErro)
                 {
                     try
                     {
-                        this.GravarConfig(false);   //<<<<<<danasa 1-5-2011
+                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                        this.GravarConfig(false, false);
 
                         cStat = "1";
                         xMotivo = "Configuracao do " + Propriedade.NomeAplicacao + " alterada com sucesso";
@@ -1759,10 +1760,11 @@ namespace NFe.Settings
 
             //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
             //exatamente como estavam gravadas no XML de configuração
-            if (lErro == true)
+            if (lErro)
             {
                 ConfiguracaoApp.CarregarDados();
                 ConfiguracaoApp.CarregarDadosSobre();
+                Empresa.CarregaConfiguracao();
             }
 
             //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração

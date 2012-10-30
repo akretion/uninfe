@@ -82,7 +82,7 @@ namespace unicte
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
-
+            
             this.MinimumSize = new Size(750, 600);
 
             #region Definir valores propriedades de configuração

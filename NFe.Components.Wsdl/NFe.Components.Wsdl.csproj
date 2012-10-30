@@ -894,6 +894,22 @@
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteStatusServico.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteCancelamento.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteConsulta.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteInutilizacao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteRetRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteStatusServico.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteCancelamento.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteConsulta.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteInutilizacao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteRetRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PPRCteStatusServico.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

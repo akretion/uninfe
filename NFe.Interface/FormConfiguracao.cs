@@ -349,7 +349,7 @@ namespace NFe.Interface
                     ConfiguracaoApp.SenhaConfig = tbSenhaConfig.Text;
                 }
 
-                oConfig.GravarConfig(true); ///<<<<<danasa 1-5-2011
+                oConfig.GravarConfig(true, true); ///<<<<<danasa 1-5-2011
 
                 this.Salvos = true;
             }
