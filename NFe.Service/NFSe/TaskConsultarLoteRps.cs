@@ -22,7 +22,7 @@ namespace NFe.Service.NFSe
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarNfsePorRps;
+            Servico = Servicos.ConsultarLoteRps;
 
             try
             {
@@ -68,14 +68,14 @@ namespace NFe.Service.NFSe
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio));
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio), cabecMsg, this, "-ped-sitnfserps", "-sitnfserps", padraoNFSe);
+                oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio), cabecMsg, this, "-ped-loterps", "-loterps", padraoNFSe);
             }
             catch (Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.LoteRps_ERR, ex);
                 }
                 catch
                 {

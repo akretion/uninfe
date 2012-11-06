@@ -113,36 +113,6 @@ namespace NFe.Threadings
                         }
                     }
 
-                    /*
-                    #region Limpar conteúdo do OldFiles, arquivos que não existem mais na pasta ou que fazem mais de 30 segundos que estão na pasta de envio parados
-                    List<string> keysDelete = new List<string>();
-                    foreach (FileInfo item in OldFiles.Values)
-                    {
-                        try
-                        {
-                            if (!File.Exists(item.FullName))
-                            {
-                                keysDelete.Add(item.Name);
-                            }
-
-                            if (DateTime.Now.Subtract(item.LastWriteTime).Seconds >= 120)
-                            {
-                                keysDelete.Add(item.Name);
-                            }
-                        }
-                        catch
-                        {
-                            //Acredito que nunca vai cair neste ponto, mas se cair, estamos seguros. Wandrey 13/09/2011
-                        }
-                    }
-
-                    foreach (string item in keysDelete)
-                    {
-                        OldFiles.Remove(item);
-                    }
-                    #endregion
-                     */
-
                     OldFiles = NewFiles.Clone() as Hashtable;
                 }
                 catch (Exception ex)
@@ -160,13 +130,18 @@ namespace NFe.Threadings
             {
                 if (fi.Length > 0)
                 {
-                    Thread t = new Thread(new ThreadStart(delegate()
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.WorkerSupportsCancellation = true;
+                    worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
+                    worker.DoWork += new DoWorkEventHandler(RaiseEvent);
+                    worker.RunWorkerAsync(fi);
+
+                    /*Thread t = new Thread(new ThreadStart(delegate()
                     {
                         if (OnFileChanged != null)
                             OnFileChanged(fi);
                     }));
-
-                    t.Start();
+                    t.Start();*/
                 }
                 else
                 {
@@ -177,6 +152,14 @@ namespace NFe.Threadings
             {
                 Auxiliar.WriteLog(fi.FullName + " - Arquivo não existe.", true);
             }
+        }
+
+        private void RaiseEvent(object sender, DoWorkEventArgs e)
+        {
+            FileInfo fi = e.Argument as FileInfo;
+
+            if (OnFileChanged != null)
+                OnFileChanged(fi);
         }
 
         /// <summary>

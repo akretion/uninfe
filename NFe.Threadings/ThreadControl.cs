@@ -135,8 +135,14 @@ namespace NFe.Threadings
             //inicia a thread que ficará executando o buffer
             ThreadControl.ResetThread = new ManualResetEvent(false);
 
-            Thread tBuffer = new Thread(new ThreadStart(ExecuteBuffer));
-            tBuffer.Start();
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
+            worker.DoWork += new DoWorkEventHandler(ExecuteBuffer);
+            worker.RunWorkerAsync();
+
+            /*Thread tBuffer = new Thread(new ThreadStart(ExecuteBuffer));
+            tBuffer.Start();*/
         }
 
         public static void Stop()
@@ -156,7 +162,7 @@ namespace NFe.Threadings
         /// <summary>
         /// executa o buffer (loop infinito)
         /// </summary>
-        static void ExecuteBuffer()
+        static void ExecuteBuffer(object sender2, DoWorkEventArgs e2)
         {
             bool signal = false;
             while (!signal)

@@ -569,11 +569,6 @@ namespace NFe.Service
                     worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
                     worker.DoWork += new DoWorkEventHandler(ExecutarEmProcessamento);
                     worker.RunWorkerAsync(i);
-
-                    //Thread t = new Thread(nfe.Analisar);
-                    //t.Name = i.ToString();
-                    //t.Start();
-                    //t.Join();
                 }
 
                 Thread.Sleep(300000); //Dorme por 5 minutos, e executa novamente
