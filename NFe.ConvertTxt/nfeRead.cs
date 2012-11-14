@@ -350,7 +350,7 @@ namespace NFe.ConvertTxt
 
                     case "transporta":
                         {
-                            nfe.Transp.Transporta.CNPJ = this.readValue(noder, Properties.Resources.xNome);
+                            nfe.Transp.Transporta.CNPJ = this.readValue(noder, Properties.Resources.CNPJ);
                             nfe.Transp.Transporta.CPF = this.readValue(noder, Properties.Resources.CPF);
                             nfe.Transp.Transporta.xNome = this.readValue(noder, Properties.Resources.xNome);
                             nfe.Transp.Transporta.IE = this.readValue(noder, Properties.Resources.IE);

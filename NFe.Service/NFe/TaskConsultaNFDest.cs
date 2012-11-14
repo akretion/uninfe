@@ -51,7 +51,7 @@ namespace NFe.Service
                     //    oConsNFDestEvento = wsProxy.CriarObjeto("NfeConsultaDest");
                     //else
                         oConsNFDestEvento = wsProxy.CriarObjeto("NFeConsultaDest");
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF));
+                        object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());

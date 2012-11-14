@@ -9,7 +9,7 @@
       <NFeInutilizacao>wsdl\homologacao\HSPCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HSPCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HSPCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PSPCteRecepcao.wsdl</NFeRecepcao>
@@ -18,7 +18,7 @@
       <NFeInutilizacao>wsdl\producao\PSPCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PSPCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PSPCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <Estado ID="41" Nome="Paraná" UF="PR">
@@ -29,7 +29,7 @@
       <NFeInutilizacao>wsdl\homologacao\HPRCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HPRCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HPRCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HPRCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HPRCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PPRCteRecepcao.wsdl</NFeRecepcao>
@@ -38,7 +38,7 @@
       <NFeInutilizacao>wsdl\producao\PPRCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PPRCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PPRCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PPRCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PPRCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS">
@@ -49,7 +49,7 @@
       <NFeInutilizacao>wsdl\homologacao\HRSCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HRSCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HRSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PRSCteRecepcao.wsdl</NFeRecepcao>
@@ -58,7 +58,7 @@
       <NFeInutilizacao>wsdl\producao\PRSCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PRSCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PRSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <Estado ID="31" Nome="Minas Gerais" UF="MG">
@@ -69,7 +69,7 @@
       <NFeInutilizacao>wsdl\homologacao\HMGCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HMGCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HMGCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HMGCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HMGCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PMGCteRecepcao.wsdl</NFeRecepcao>
@@ -78,7 +78,7 @@
       <NFeInutilizacao>wsdl\producao\PMGCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PMGCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PMGCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PMGCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PMGCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS">
@@ -89,7 +89,7 @@
       <NFeInutilizacao>wsdl\homologacao\HMSCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HMSCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HMSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HMSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HMSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PMSCteRecepcao.wsdl</NFeRecepcao>
@@ -98,7 +98,7 @@
       <NFeInutilizacao>wsdl\producao\PMSCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PMSCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PMSCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PMSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PMSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <Estado ID="51" Nome="Mato Grosso" UF="MT">
@@ -109,7 +109,7 @@
       <NFeInutilizacao>wsdl\homologacao\HMTCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HMTCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HMTCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HMTCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HMTCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PMTCteRecepcao.wsdl</NFeRecepcao>
@@ -118,7 +118,7 @@
       <NFeInutilizacao>wsdl\producao\PMTCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PMTCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PMTCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PMTCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PMTCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <!--Estados que utilizam os webservices do Sistema Virtual do Rio Grande do Sul (SVRS)-->
@@ -451,7 +451,7 @@
       <NFeInutilizacao>wsdl\homologacao\HSPCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\HSPCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\HSPCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PSPCteRecepcao.wsdl</NFeRecepcao>
@@ -460,7 +460,7 @@
       <NFeInutilizacao>wsdl\producao\PSPCteInutilizacao.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\PSPCteConsulta.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\PSPCteStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
   <!--SCAN - Sistema de contingência do ambiente nacional-->

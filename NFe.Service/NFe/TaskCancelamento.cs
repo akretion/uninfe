@@ -43,7 +43,7 @@ namespace NFe.Service
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oCancelamento = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*oLer.*/oDadosPedCanc.cUF));
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedCanc.cUF));
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedCanc.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/oDadosPedCanc.cUF.ToString());

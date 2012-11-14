@@ -146,11 +146,11 @@ namespace unicte
             {
                 Tag = "ConsCad",
                 ID = 8,
-                ArquivoXSD = "CTe\\consCad_v1.03.xsd",
+                ArquivoXSD = "CTe\\consCad_v2.00.xsd",
                 Descricao = "XML de Consulta do Cadastro do Contribuinte",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = string.Empty
+                TargetNameSpace = "http://www.portalfiscal.inf.br/nfe"
             });
             #endregion
 

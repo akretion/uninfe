@@ -751,7 +751,7 @@ namespace NFe.Service
             int emp = EmpIndex;
 
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                "<ConsCad xmlns=\"" + Propriedade.nsURI +
+                "<ConsCad xmlns=\"http://www.portalfiscal.inf.br/nfe" +
                 "\" versao=\"" + ConfiguracaoApp.VersaoXMLConsCad + "\"><infCons><xServ>CONS-CAD</xServ>";
 
             cnpj = OnlyNumbers(cnpj);

@@ -51,6 +51,8 @@ namespace NFe.Service
             // Definir o tipo de serviço da NFe
             Type typeServicoNFe = oServicoNFe.GetType();
 
+            Servicos servico = (Servicos)oWSProxy.GetProp(oServicoNFe, "Servico");
+
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
 
@@ -110,13 +112,20 @@ namespace NFe.Service
                     switch (Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Cte:
-                            if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
+                            if (servico == Servicos.ConsultaCadastroContribuinte)
                             {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                                oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", cabecMsg);
                             }
                             else
                             {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                                if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
+                                {
+                                    oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                                }
+                                else
+                                {
+                                    oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                                }
                             }
                             break;
 

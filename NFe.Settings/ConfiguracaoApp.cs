@@ -200,7 +200,7 @@ namespace NFe.Settings
             {
                 case TipoAplicativo.Cte:
                     ConfiguracaoApp.VersaoXMLCanc = "1.04";
-                    ConfiguracaoApp.VersaoXMLConsCad = "1.04";
+                    ConfiguracaoApp.VersaoXMLConsCad = "2.00";
                     ConfiguracaoApp.VersaoXMLInut = "1.04";
                     ConfiguracaoApp.VersaoXMLNFe = "1.04";
                     ConfiguracaoApp.VersaoXMLPedRec = "1.04";
@@ -1503,31 +1503,31 @@ namespace NFe.Settings
                         //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
@@ -1551,19 +1551,19 @@ namespace NFe.Settings
                         //Se a tag <PastaBackup> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaValidar> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaDownloadNFeDest> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaValidar> existir ele pega no novo conteúdo
@@ -1628,19 +1628,19 @@ namespace NFe.Settings
                         //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <PastaDanfeMon> existir ele pega no novo conteúdo
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon).Count != 0)
                         {
-                            Empresa.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon)[0].InnerText);
+                            Empresa.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon)[0].InnerText, true);
                             lEncontrouTag = true;
                         }
                         //Se a tag <XMLDanfeMonNFe> existir ele pega no novo conteúdo
@@ -1831,15 +1831,29 @@ namespace NFe.Settings
         #endregion
 
         #region RemoveEndSlash
+        public static string RemoveEndSlash(string value)
+        {
+            return RemoveEndSlash(value, false);             
+        }
+        #endregion 
+
+        #region RemoveEndSlash
         /// <summary>
         /// danasa 8-2009
         /// </summary>
         /// <param name="value"></param>
+        /// <param name="acertarNomeCurto"></param>
         /// <returns></returns>
-        public static string RemoveEndSlash(string value)
+        public static string RemoveEndSlash(string value, bool acertarNomeCurto)
         {
             if (!string.IsNullOrEmpty(value))
             {
+                if (acertarNomeCurto)
+                {
+                    DirectoryInfo dir = new DirectoryInfo(value);
+                    value = dir.FullName;
+                }
+
                 while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
                     value = value.Substring(0, value.Length - 1);
             }
@@ -1847,6 +1861,7 @@ namespace NFe.Settings
             {
                 value = string.Empty;
             }
+
             return value.Replace("\r\n", "").Trim();
         }
         #endregion

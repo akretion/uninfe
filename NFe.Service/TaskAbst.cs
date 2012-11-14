@@ -50,13 +50,13 @@ namespace NFe.Service
         /// Serviço que está sendo executado (Envio de Nota, Cancelamento, Consulta, etc...)
         /// </summary>
         private Servicos mServico;
-        protected Servicos Servico
+        public Servicos Servico
         {
             get
             {
                 return this.mServico;
             }
-            set
+            protected set
             {
                 this.mServico = value;
                 oGerarXML.Servico = value;
@@ -298,14 +298,14 @@ namespace NFe.Service
         /// </summary>
         /// <param name="cUF">Código da UF</param>
         /// <returns>Nome da classe de cabecalho</returns>
-        protected string NomeClasseCabecWS(int cUF)
+        protected string NomeClasseCabecWS(int cUF, Servicos servico)
         {
             string retorna = string.Empty;
 
             switch (Propriedade.TipoAplicativo)
             {
                 case TipoAplicativo.Cte:
-                    retorna = NomeClasseCabecWSCTe(cUF);
+                    retorna = NomeClasseCabecWSCTe(cUF, servico);
                     break;
                 case TipoAplicativo.Nfe:
                     retorna = NomeClasseCabecWSNFe();
@@ -332,16 +332,19 @@ namespace NFe.Service
         /// Retorna o nome da classe de cabecalho do serviço de CTe
         /// </summary>
         /// <returns>nome da classe de cabecalho do serviço de CTe</returns>
-        private string NomeClasseCabecWSCTe(int cUF)
+        private string NomeClasseCabecWSCTe(int cUF, Servicos servico)
         {
             string nomeClasse = "cteCabecMsg";
 
-            switch (cUF)
-            {
-                case 50:
-                    nomeClasse = "CTeCabecMsg";
-                    break;
-            }
+            if (servico == Servicos.ConsultaCadastroContribuinte)
+                nomeClasse = NomeClasseCabecWSNFe();
+            else
+                switch (cUF)
+                {
+                    case 50:
+                        nomeClasse = "CTeCabecMsg";
+                        break;
+                }
 
             return nomeClasse;
         }
@@ -903,7 +906,7 @@ namespace NFe.Service
                                 "e o XML está configurado para enviar para o SVC-RS.\r\n\r\n";
 
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP  && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
                         {
                             cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao SVCSP " +
                                 "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
