@@ -55,11 +55,11 @@ namespace NFe.Service
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());
-                    try
-                    {
-                        wsProxy.SetProp(oCabecMsg, "indComp", "0");
-                    }
-                    catch { }
+//                  try
+//                  {
+//                      wsProxy.SetProp(oCabecMsg, "indComp", "0");
+//                  }
+//                  catch { }
                     wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest);
 
                     //Criar objeto da classe de assinatura digital
