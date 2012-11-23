@@ -2158,7 +2158,7 @@ namespace NFe.Service
                 foreach (XmlNode retConsSitNode1 in retprocEventoNFeList)
                 {
                     string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName("cStat")[0].InnerText;
-                    if (cStat == "135" || cStat == "136")
+                    if (cStat == "135" || cStat == "136" || cStat == "155")
                     {
                         string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chNFe")[0].InnerText;
                         Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("nSeqEvento")[0].InnerText);

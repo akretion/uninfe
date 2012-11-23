@@ -177,7 +177,10 @@ namespace NFe.Service
                     retorna = "CteRetRecepcao";
                     break;
                 case Servicos.ConsultaCadastroContribuinte:
-                    retorna = "CadConsultaCadastro2";
+                    if (cUF == 50)
+                        retorna = "CadConsultaCadastro";
+                    else
+                        retorna = "CadConsultaCadastro2";
                     break;
                 case Servicos.EnviarLoteNfe:
                     retorna = "CteRecepcao";
@@ -335,16 +338,16 @@ namespace NFe.Service
         private string NomeClasseCabecWSCTe(int cUF, Servicos servico)
         {
             string nomeClasse = "cteCabecMsg";
+            switch (cUF)
+            {
+                case 50:
+                    return nomeClasse = "CTeCabecMsg";
 
+            }
             if (servico == Servicos.ConsultaCadastroContribuinte)
                 nomeClasse = NomeClasseCabecWSNFe();
-            else
-                switch (cUF)
-                {
-                    case 50:
-                        nomeClasse = "CTeCabecMsg";
-                        break;
-                }
+
+
 
             return nomeClasse;
         }
@@ -461,6 +464,9 @@ namespace NFe.Service
                     {
                         case 52:
                             retorna = "cadConsultaCadastro2";
+                            break;
+                        case 50:
+                            retorna = "cadConsultaCadastro";
                             break;
                         default:
                             retorna = "consultaCadastro2";

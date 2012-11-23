@@ -207,7 +207,7 @@ namespace NFe.ConvertTxt
 
                         wCampo(Dup.nDup, TpcnTipoCampo.tcStr, Properties.Resources.nDup, ObOp.Opcional);
                         wCampo(Dup.dVenc, TpcnTipoCampo.tcDat, Properties.Resources.dVenc, ObOp.Opcional);
-                        wCampo(Dup.vDup, TpcnTipoCampo.tcDec2, Properties.Resources.vDup, ObOp.Opcional);
+                        wCampo(Dup.vDup, TpcnTipoCampo.tcDec2, Properties.Resources.vDup, ObOp.Obrigatorio);
                     }
                 }
             }

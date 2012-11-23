@@ -49,8 +49,8 @@ namespace NFe.Service
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
 
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
-                int cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
-                //int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
+                //int cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+                int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
 
                 //if (cOrgao == 90 || cOrgao == 91)   //Amb.Nacional
                 //{
@@ -81,7 +81,7 @@ namespace NFe.Service
                         emp,
                         cOrgao,
                         oDadosEnvEvento.eventos[0].tpAmb,
-                        1);
+                        Empresa.Configuracoes[emp].tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento;
@@ -600,7 +600,7 @@ namespace NFe.Service
                                 {
                                     XmlElement eleRetorno = envEventosList.Item(i) as XmlElement;
                                     cStatCons = eleRetorno.GetElementsByTagName("cStat")[0].InnerText;
-                                    if (cStatCons == "135" || cStatCons == "136")
+                                    if (cStatCons == "135" || cStatCons == "136" || cStatCons == "155")
                                     {
                                         string chNFe = eleRetorno.GetElementsByTagName("chNFe")[0].InnerText;
                                         Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);

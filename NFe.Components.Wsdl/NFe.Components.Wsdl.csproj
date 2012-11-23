@@ -897,16 +897,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCadConsultaCadastro2.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HSPcadconsultacadastro2.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Producao\PSPcadconsultacadastro2.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CTe\WSDL\Producao\PPRcadconsultacadastro2.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HMGcadconsultacadastro2.wsdl" />
@@ -934,6 +928,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\WSDL\Producao\PMGCadConsultaCadastro2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HRScadconsultacadastro2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\WSDL\Producao\PMSCadConsultaCadastro2.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
