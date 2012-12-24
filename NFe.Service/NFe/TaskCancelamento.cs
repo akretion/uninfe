@@ -368,6 +368,5 @@ namespace NFe.Service
             }
         }
         #endregion
-
     }
 }

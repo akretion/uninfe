@@ -15,7 +15,7 @@ namespace NFe.Service
         private LerXML oLerXml = null;
         private GerarXML oGerarXml = null;
         private FluxoNfe fluxo = null;
-        private const int _Minutos = 10;  //10 minutos?
+        private const int _Minutos = 12;  //12 minutos para atender o consumo indevido da SEFAZ
 
         public void Analisar()
         {

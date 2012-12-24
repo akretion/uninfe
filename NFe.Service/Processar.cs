@@ -571,7 +571,7 @@ namespace NFe.Service
                     worker.RunWorkerAsync(i);
                 }
 
-                Thread.Sleep(300000); //Dorme por 5 minutos, e executa novamente
+                Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
             }
         }
 

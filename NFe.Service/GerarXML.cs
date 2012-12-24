@@ -50,6 +50,10 @@ namespace NFe.Service
         /// Serviço que está sendo executado (Envio de NFE, Cancelamento, consultas, etc...)
         /// </summary>
         public Servicos Servico { get; set; }
+        /// <summary>
+        /// Nome do arquivo XML gerado
+        /// </summary>
+        public string NomeArqGerado { get; private set; }
         #endregion
 
         #region Objetos
@@ -2274,6 +2278,8 @@ namespace NFe.Service
 
                     if (!string.IsNullOrEmpty(folderToWriteBackup))
                         this.XmlParaFTP(emp, folderToWrite);
+
+                    NomeArqGerado = folderToWrite;
                 }
                 catch (Exception ex)
                 {

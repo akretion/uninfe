@@ -850,21 +850,21 @@
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVRSCteRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVRSCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVRSCteStatusServico.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVSPCteCancelamento.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVSPCteConsulta.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVSPCteRecepcao.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVSPCteRetRecepcao.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSCVSPCteStatusServico.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSVSPCteCancelamento.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSVSPCteConsulta.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSVSPCteRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSVSPCteRetRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Homologacao\HSVSPCteStatusServico.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVRSCteCancelamento.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVRSCteConsulta.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVRSCteRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVRSCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="CTe\WSDL\Producao\PSCVRSCteStatusServico.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteCancelamento.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteConsulta.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteRecepcao.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteRetRecepcao.wsdl" />
-    <EmbeddedResource Include="CTe\WSDL\Producao\PSCVSPCteStatusServico.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PSVSPCteCancelamento.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PSVSPCteConsulta.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PSVSPCteRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PSVSPCteRetRecepcao.wsdl" />
+    <EmbeddedResource Include="CTe\WSDL\Producao\PSVSPCteStatusServico.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Homologacao\HPRCteCancelamento.wsdl" />

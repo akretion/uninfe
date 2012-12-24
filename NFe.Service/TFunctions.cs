@@ -480,6 +480,8 @@ namespace NFe.Service
         #endregion
 
         #region ExecutaUniDanfe()
+
+        #region RetornarConteudoEntre()
         /// <summary>
         /// Executa o aplicativo UniDanfe para gerar/imprimir o DANFE
         /// </summary>
@@ -489,16 +491,219 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 03/02/2010
         /// </remarks>
-        public static void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe,string tipo)
+        private static string RetornarConteudoEntre(string Conteudo, string Inicio, string Fim)
+        {
+            int i;
+            i = Conteudo.IndexOf(Inicio);
+            if (i == -1)
+                return "";
+
+            string s = Conteudo.Substring(i + Inicio.Length);
+            i = s.IndexOf(Fim);
+            if (i == -1)
+                return "";
+            return s.Substring(0, i);
+        }
+        #endregion 
+
+        #region ExcluirArqAuxiliar()
+        private static void ExcluirArqAuxiliar(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            if (e.Cancel)
+                return;
+
+            System.Threading.Thread.Sleep(1000);
+            while (!(sender as System.ComponentModel.BackgroundWorker).CancellationPending)
+            {
+                if (File.Exists((string)e.Argument))
+                {
+                    if (!Functions.FileInUse((string)e.Argument))
+                    {
+                        File.Delete((string)e.Argument);
+                        e.Cancel = true;
+                        break;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region ExecutaUniDanfe()
+        public static void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe, string tipo)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            if (tipo == "")
+            {
+                for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                {
+                    Empresa empresa = Empresa.Configuracoes[i];
+                    if (Path.GetDirectoryName(NomeArqXMLNFe).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()))
+                    {
+                        emp = i;
+                        break;
+                    }
+                }
+            }
 
             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
             if (Empresa.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
                 File.Exists(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
             {
                 string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(DataEmissaoNFe);
-                string strArqProcNFe = strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml";
+                string strArqProcNFe = Path.Combine(strNomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml");
+                string strArqNFe = string.Empty;
+                string fExtensao = string.Empty;
+                string fEmail = string.Empty;
+                string fProtocolo = "";
+
+                if (tipo == "" && !File.Exists(strArqProcNFe) && File.Exists(NomeArqXMLNFe))
+                {
+                    tipo = "danfe";
+                    strArqProcNFe = NomeArqXMLNFe;
+                }
+
+                if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                {
+                    fExtensao = Propriedade.ExtRetorno.retDPEC_XML;
+                    tipo = "danfe";
+                    ///
+                    ///le o protocolo do DPEC
+                    string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                    DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRegDPEC>", "</dhRegDPEC>"));
+                    fProtocolo = RetornarConteudoEntre(ctemp, "<nRegDPEC>", "</nRegDPEC>");
+                    fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
+                }
+                else
+                    if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcCancNFe))
+                    {
+                        fExtensao = Propriedade.ExtRetorno.ProcCancNFe;
+                        tipo = "danfe";
+                        ///
+                        ///le o protocolo de cancelamento
+                        string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                        DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRecbto>", "</dhRecbto>"));
+                        fProtocolo = RetornarConteudoEntre(ctemp, "</dhRecbto><nProt>", "</nProt>");
+                        fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
+                    }
+                    else
+                        if (NomeArqXMLNFe.EndsWith("_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe)) //cancelamento por evento
+                        {
+                            fExtensao = "_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe;
+                            tipo = "danfe";
+                            ///
+                            ///le o protocolo de cancelamento
+                            string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                            DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>"));
+                            fProtocolo = RetornarConteudoEntre(ctemp, "</dhRegEvento><nProt>", "</nProt>");
+                            fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
+                        }
+                        else
+                            if (tipo.Equals("cce") || NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoNFe))
+                            {
+                                tipo = "cce";
+                                bool foundCCe = false;
+                                for (int nSeq = 1; nSeq < 21; ++nSeq)
+                                {
+                                    fExtensao = "_" + nSeq.ToString("00") + Propriedade.ExtRetorno.ProcEventoNFe;
+                                    if (NomeArqXMLNFe.EndsWith(fExtensao))
+                                    {
+                                        foundCCe = true;
+                                        break;
+                                    }
+                                }
+                                if (!foundCCe)
+                                    fExtensao = string.Empty;
+                            }
+                            else
+                                if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retEnvCCe_XML))
+                                {
+                                    fExtensao = Propriedade.ExtRetorno.retEnvCCe_XML;
+                                    tipo = "cce";
+                                }
+
+                string fArgs = "";
+                if (fExtensao != string.Empty)
+                {
+                    if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, fExtensao) + Propriedade.ExtEnvio.Nfe, ".xml") + ".xml";
+                    else
+                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, fExtensao) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml";
+
+                    if (!string.IsNullOrEmpty(strArqNFe))
+                    {
+                        string strArqProc = Path.Combine(strNomePastaEnviado, strArqNFe);
+                        if (!File.Exists(strArqProc))
+                        {
+                            string[] fTemp = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString(), strArqNFe, SearchOption.AllDirectories);
+                            if (fTemp.Length > 0)
+                                strArqProc = fTemp[0];
+                        }
+                        if (File.Exists(strArqProc))
+                        {
+                            NFe.ConvertTxt.nfeRead fread = new ConvertTxt.nfeRead();
+                            fread.ReadFromXml(strArqProc);
+                            fEmail = fread.nfe.dest.email;
+
+                            if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                            {
+                                fArgs = " AD=\"" + NomeArqXMLNFe + "\"";
+                                fArgs += " A=\"" + strArqProc + "\"";
+                            }
+                            else
+                            if (tipo.Equals("cce"))
+                            {
+                                fArgs = " A=\"" + NomeArqXMLNFe + "\"";
+                                fArgs += " N=\"" + strArqProc + "\"";
+                            }
+                            else
+                            {
+                                fArgs = " A=\"" + strArqProc + "\"";
+                                fArgs += " X1=\"" + NomeArqXMLNFe + "\"";
+                                fArgs += " CC=\"1\"";
+                            }
+                            if (!string.IsNullOrEmpty(fEmail))
+                            {
+                                fArgs += " EE=\"1\"";
+                                fArgs += " E=\"" + fEmail + "\"";
+                                fArgs += " IEX=\"1\"";
+                            }
+                            if (Empresa.Configuracoes[emp].PastaConfigUniDanfe != string.Empty)
+                            {
+                                fArgs += " PC=\"" + Empresa.Configuracoes[emp].PastaConfigUniDanfe + "\"";
+                            }
+                            fArgs += " T=\"" + tipo + "\"";
+                            fArgs += " M=\"1\"";
+
+                            string fAuxiliar = "";
+                            if (fProtocolo != "")
+                            {
+                                fAuxiliar = Path.Combine(Path.GetTempPath(), Path.GetFileName(strArqProc.Replace("-procNFe", "-procNFedanfe")));
+
+                                StringBuilder xmlAux = new StringBuilder();
+                                xmlAux.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                                xmlAux.Append("<outrasInfDANFe>");
+                                xmlAux.AppendFormat("<protocolonfe>{0}</protocolonfe>", fProtocolo);
+                                xmlAux.Append("</outrasInfDANFe>");
+
+                                File.WriteAllText(fAuxiliar, xmlAux.ToString(), Encoding.UTF8);
+                                fArgs += " AU=\"" + fAuxiliar + "\"";
+                                ///
+                                ///OBS: deveria existir um argumento para excluir o arquivo auxiliar, já que ele é temporario
+                            }
+                            System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", fArgs);
+
+                            if (fAuxiliar != "")
+                            {
+                                System.ComponentModel.BackgroundWorker worker = new System.ComponentModel.BackgroundWorker();
+                                worker.WorkerSupportsCancellation = true;
+                                worker.RunWorkerCompleted += ((sender, e) => ((System.ComponentModel.BackgroundWorker)sender).Dispose());
+                                worker.DoWork += new System.ComponentModel.DoWorkEventHandler(ExcluirArqAuxiliar);
+                                worker.RunWorkerAsync(fAuxiliar);
+                            }
+                        }
+                    }
+                    return;
+                }
 
                 if (File.Exists(strArqProcNFe))
                 {
@@ -506,13 +711,16 @@ namespace NFe.Service
                     if (Empresa.Configuracoes[emp].PastaConfigUniDanfe != string.Empty)
                     {
                         Args += " PC=\"" + Empresa.Configuracoes[emp].PastaConfigUniDanfe + "\"";
-                        Args += " T=\"" + tipo + "\"";
+                        //Args += " T=\"" + tipo + "\"";
                     }
+                    Args += " T=\"" + tipo + "\"";
 
                     System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", Args);
                 }
             }
         }
+        #endregion 
+
         #endregion
     }
 }

@@ -707,6 +707,43 @@ namespace uninfe
             }
         }
         #endregion
+
+        private void tsPrintDanfe_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Arquivos da NFe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
+                dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe;
+                dlg.Filter += "|Arquivos de cancelamento (*.*" + Propriedade.ExtRetorno.ProcCancNFe + ")|*" + Propriedade.ExtRetorno.ProcCancNFe;
+                dlg.Filter += "|Arquivos de CCe (*.*??" + Propriedade.ExtRetorno.ProcEventoNFe + ")|*_??" + Propriedade.ExtRetorno.ProcEventoNFe;
+                dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;
+
+                while (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    bool executou = false;
+
+                    for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                    {
+                        Empresa empresa = Empresa.Configuracoes[i];
+                        if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()))
+                        {
+                            if (string.IsNullOrEmpty(empresa.PastaExeUniDanfe))
+                            {
+                                MessageBox.Show("Pasta contendo o UniDANFE não definida para a empresa: " + empresa.Nome);
+                                break;
+                            }                            
+                            NFe.Interface.PrintDANFE.printDANFE(dlg.FileName);
+
+                            executou = true;
+                            break;
+                        }
+                    }
+
+                    if (executou)
+                        break;
+                }
+            }
+        }
     }
     #endregion
 }

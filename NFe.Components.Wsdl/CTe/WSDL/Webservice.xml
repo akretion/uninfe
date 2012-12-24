@@ -202,6 +202,46 @@
       <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>
+  <Estado ID="12" Nome="Acre" UF="AC">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="27" Nome="Alagoas" UF="AL">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PSVRSCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVRSCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVRSCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PSVRSCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PSVRSCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVRSCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PSVRSCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\HSVRSCteRecepcao.wsdl</NFeRecepcao>
@@ -445,21 +485,61 @@
   <!-- Estados que utilizam o ambiente de São Paulo -->
   <Estado ID="26" Nome="Pernambuco" UF="PE">
     <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\HSPCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\HSPCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\homologacao\HSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeRecepcao>wsdl\homologacao\HSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVSPCteCancelamento.wsdl</NFeCancelamento>
       <NFeInutilizacao>wsdl\homologacao\HSPCteInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\HSPCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\HSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\homologacao\HSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVSPCteStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeRecepcao>wsdl\producao\PSPCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\PSPCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\producao\PSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeRecepcao>wsdl\producao\PSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVSPCteCancelamento.wsdl</NFeCancelamento>
       <NFeInutilizacao>wsdl\producao\PSPCteInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\PSPCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\PSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\producao\PSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="16" Nome="Amapa" UF="AP">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HSPCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PSPCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="14" Nome="Roraima" UF="RR">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\HSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\HSPCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\HSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\PSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\PSPCteInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVSPCteStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
     </LocalProducao>
   </Estado>

@@ -620,6 +620,18 @@ namespace NFe.Service
 
                                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
                                                 oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+
+                                                switch (Convert.ToInt32(tpEvento))
+                                                {
+                                                    case 110111: //Cancelamento
+                                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                                        break;
+
+                                                    case 110110: //CCe
+                                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                                        break;
+                                                }
+
                                                 break;
                                             }
                                         }
