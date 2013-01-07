@@ -18,6 +18,7 @@
 <!-- PL_006n - 01/09/2012 -  inclusão do codANP 810201001  -->
 <!-- PL_006p - 29/10/2012 -  inclusão da tabela completa codANP  -->
 <!-- PL_006p - 29/10/2012 -  restabelecidas as restrições para qVol  -->
+<!-- PL_006q - 20/11/2012 -  Origem mercadoria de acordo com NT 2012/005 -->
 <xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.portalfiscal.inf.br/nfe" targetNamespace="http://www.portalfiscal.inf.br/nfe" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v1.01.xsd"/>
 	<xs:include schemaLocation="tiposBasico_v1.03.xsd"/>
@@ -1519,9 +1520,10 @@ ambiente.</xs:documentation>
 																			<xs:sequence>
 																				<xs:element name="orig" type="Torig">
 																					<xs:annotation>
-																						<xs:documentation>origem da mercadoria: 0 - Nacional 
-1 - Estrangeira - Importação direta 
-2 - Estrangeira - Adquirida no mercado interno 
+																						<xs:documentation>origem da mercadoria: 0-Nacional 
+1-Estrangeira - Importação direta; 2-Estrangeira - Adquirida no mercado interno; 3-Nacional, conteudo superior 40%; 4-Nacional, processos produtivos 
+básicos; 5-Nacional, conteudo inferior 40%; 6-Estrangeira - Importação direta, com similar nacional, lista CAMEX; 7-Estrangeira - mercado interno, sem simular,
+lista CAMEX. 
 </xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
@@ -6371,13 +6373,21 @@ alterado para tamanho variavel 1-4. (NT2011/004)</xs:documentation>
 	</xs:simpleType>
 	<xs:simpleType name="Torig">
 		<xs:annotation>
-			<xs:documentation>Tipo Origem da mercadoria CST ICMS</xs:documentation>
+			<xs:documentation>Tipo Origem da mercadoria CST ICMS. origem da mercadoria: 0-Nacional 
+1-Estrangeira - Importação direta; 2-Estrangeira - Adquirida no mercado interno; 3-Nacional, conteudo superior 40%; 4-Nacional, processos produtivos 
+básicos; 5-Nacional, conteudo inferior 40%; 6-Estrangeira - Importação direta, com similar nacional, lista CAMEX; 7-Estrangeira - mercado interno, sem simular,
+lista CAMEX. </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve"/>
 			<xs:enumeration value="0"/>
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TFinNFe">

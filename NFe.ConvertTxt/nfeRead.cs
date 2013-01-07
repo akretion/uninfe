@@ -42,12 +42,12 @@ namespace NFe.ConvertTxt
             return "";
         }
 
-        public void ReadFromXml(string xmlFilename)
+        public void ReadFromString(string xmlString)
         {
             doc = new XmlDocument();
             try
             {
-                doc.Load(xmlFilename);
+                doc.LoadXml(xmlString);
                 this.XmlNota = doc.OuterXml;
 
                 foreach (XmlNode nodeRoot in doc.ChildNodes)
@@ -76,10 +76,19 @@ namespace NFe.ConvertTxt
                 if (nfe.ide.dEmi.Year <= 1)
                     throw new Exception("Arquivo não é de nota fiscal");
             }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             finally
             {
                 doc = null;
             }
+        }
+
+        public void ReadFromXml(string xmlFilename)
+        {
+            ReadFromString(System.IO.File.ReadAllText(xmlFilename, Encoding.UTF8));
         }
 
         private void processaNFe(XmlNode nodeRoot)

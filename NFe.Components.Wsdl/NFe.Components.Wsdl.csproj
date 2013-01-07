@@ -170,9 +170,6 @@
     <EmbeddedResource Include="NFe\schemas\NFe\consReciNFe_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\consSitNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\consSitNFe_v2.01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -186,9 +183,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\leiauteCancNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsSitNFe_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsSitNFe_v2.01.xsd">
@@ -225,9 +219,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\retConsReciNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\retConsSitNFe_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\retConsSitNFe_v2.01.xsd">
@@ -937,6 +928,23 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Producao\PMSCadConsultaCadastro2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CTe\schemas\CTe\eventoCTeTiposBasico_v1.04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTe\schemas\CTe\eventoCTe_v1.04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTe\schemas\CTe\evEPECCTe_v1.04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTe\schemas\CTe\procEventoCTe_v1.04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTe\schemas\CTe\retEventoCTe_v1.04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

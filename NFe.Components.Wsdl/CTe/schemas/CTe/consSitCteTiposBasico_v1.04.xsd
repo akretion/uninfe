@@ -3,6 +3,7 @@
 	<xs:include schemaLocation="tiposGeralCTe_v1.04.xsd"/>
 	<xs:include schemaLocation="consReciCteTiposBasico_v1.04.xsd"/>
 	<xs:include schemaLocation="cancCteTiposBasico_v1.04.xsd"/>
+	<xs:include schemaLocation="eventoCTeTiposBasico_v1.04.xsd"/>
 	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v1.01.xsd"/>
 	<xs:complexType name="TConsSitCTe">
 		<xs:annotation>
@@ -65,6 +66,7 @@
 				<xs:element name="protCTe" type="TProtCTe" minOccurs="0"/>
 				<xs:element name="retCancCTe" type="TRetCancCTe" minOccurs="0"/>
 			</xs:choice>
+			<xs:element name="procEventoCTe" type="TProcEvento" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="versao" type="TVerConsSitCTe" use="required"/>
 	</xs:complexType>

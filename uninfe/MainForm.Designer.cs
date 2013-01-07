@@ -150,7 +150,7 @@
             this.tsPrintDanfe.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsPrintDanfe.Name = "tsPrintDanfe";
             this.tsPrintDanfe.Size = new System.Drawing.Size(52, 52);
-            this.tsPrintDanfe.Text = "toolStripButton1";
+            this.tsPrintDanfe.Text = "Impressão do DANFE/CCe";
             this.tsPrintDanfe.Click += new System.EventHandler(this.tsPrintDanfe_Click);
             // 
             // notifyIcon1
