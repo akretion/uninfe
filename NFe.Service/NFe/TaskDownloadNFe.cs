@@ -209,7 +209,7 @@ namespace NFe.Service
                     //string verAplic = Functions.LerTag(retElemento, "verAplic", false);
                     //string xMotivo = Functions.LerTag(retElemento, "xMotivo", false);
                     int cStat = Convert.ToInt32(Functions.LerTag(retElemento, "cStat", false));
-                    if (cStat == 140)
+                    if (cStat == 139)
                     {
                         DateTime dhResp = Functions.GetDateTime/*Convert.ToDateTime*/(Functions.LerTag(retElemento, "dhResp", false));
                     }

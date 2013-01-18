@@ -159,7 +159,7 @@ namespace NFe.Service
                                 break;
 
                             case Servicos.EnviarCCe:
-                            case Servicos.EnviarManifestacao:
+                            case Servicos.EnviarManifDest:
                             case Servicos.EnviarEventoCancelamento:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
@@ -345,7 +345,7 @@ namespace NFe.Service
                     }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
                     {
-                        tipoServico = Servicos.EnviarManifestacao;
+                        tipoServico = Servicos.EnviarManifDest;
                     }
                     else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
                     {
@@ -1072,7 +1072,7 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.retEnvCCe_ERR;
                     goto default;
 
-                case Servicos.EnviarManifestacao:
+                case Servicos.EnviarManifDest:
                     extRet = Propriedade.ExtEnvio.EnvManifestacao_XML;
                     extRetERR = Propriedade.ExtRetorno.retManifestacao_ERR;
                     goto default;

@@ -736,7 +736,7 @@ namespace NFe.Components
                 this.NFeConsultaNFeDest =
                 this.NFeDownload = 
                 this.NFeInutilizacao = 
-                this.NFeManifestacao = 
+                this.NFeManifDest = 
                 this.NFeRecepcao = 
                 this.NFeRetRecepcao = 
                 this.NFeStatusServico = 
@@ -768,7 +768,7 @@ namespace NFe.Components
         public string NFeCCe { get; set; }
         public string NFeDownload { get; set; }
         public string NFeConsultaNFeDest { get; set; }
-        public string NFeManifestacao { get; set; }
+        public string NFeManifDest { get; set; }
         public string NFeRegistroDeSaida { get; set; }
         public string NFeRegistroDeSaidaCancelamento { get; set; }
         /// <summary>

@@ -147,7 +147,6 @@ namespace NFe.Components.Info
 
                                 case TipoAplicativo.Nfe:
                                     if (string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
-                                    if (string.IsNullOrEmpty(item.NFeManifestacao)) item.NFeManifestacao = item.NFeCCe;
 
                                     aTXT.AppendLine(tipo + "NFeRecepcao|" + (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
                                     aTXT.AppendLine(tipo + "NFeConsulta|" + (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
@@ -161,7 +160,7 @@ namespace NFe.Components.Info
                                         aTXT.AppendLine(tipo + "NFeConsultaNFeDest|" + (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
                                         aTXT.AppendLine(tipo + "NFeDownload|" + (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
                                         aTXT.AppendLine(tipo + "NFeInutilizacao|" + (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
-                                        aTXT.AppendLine(tipo + "NFeManifestacao|" + (!string.IsNullOrEmpty(item.NFeManifestacao)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeManifDest|" + (!string.IsNullOrEmpty(item.NFeManifDest)).ToString());
                                         aTXT.AppendLine(tipo + "NFeStatusServico|" + (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
                                         aTXT.AppendLine(tipo + "NFeRegistroDeSaida|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
                                         aTXT.AppendLine(tipo + "NFeRegistroDeSaidaCancelamento|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
@@ -276,7 +275,6 @@ namespace NFe.Components.Info
 
                                 case TipoAplicativo.Nfe:
                                     if (string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
-                                    if (string.IsNullOrEmpty(item.NFeManifestacao)) item.NFeManifestacao = item.NFeCCe;
 
                                     oXmlGravar.WriteElementString("NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
                                     oXmlGravar.WriteElementString("NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
@@ -290,7 +288,7 @@ namespace NFe.Components.Info
                                         oXmlGravar.WriteElementString("NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
                                         oXmlGravar.WriteElementString("NFeDownload", (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
                                         oXmlGravar.WriteElementString("NFeInutilizacao", (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
-                                        oXmlGravar.WriteElementString("NFeManifestacao", (!string.IsNullOrEmpty(item.NFeManifestacao)).ToString());
+                                        oXmlGravar.WriteElementString("NFeManifDest", (!string.IsNullOrEmpty(item.NFeManifDest)).ToString());
                                         oXmlGravar.WriteElementString("NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
                                         oXmlGravar.WriteElementString("NFeRegistroDeSaida", (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
                                         oXmlGravar.WriteElementString("NFeRegistroDeSaidaCancelamento", (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());

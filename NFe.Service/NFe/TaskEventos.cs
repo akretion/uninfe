@@ -15,6 +15,8 @@ namespace NFe.Service
     {
         #region Classe com os dados do XML do registro de eventos
         private DadosenvEvento oDadosEnvEvento;
+        private int tpEmis = 0;
+
         #endregion
 
         #region Execute
@@ -41,37 +43,21 @@ namespace NFe.Service
                         Servico = Servicos.EnviarCCe;
                         break;
                     default:
-                        Servico = Servicos.EnviarManifestacao;
+                        Servico = Servicos.EnviarManifDest;
                         break;
                 }
-                foreach (Evento item in oDadosEnvEvento.eventos)
+                foreach (Evento item in oDadosEnvEvento.eventos){
+                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34,1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir caso emitida em modo SCAN - Renan
                     if (currentEvento != Convert.ToInt32(item.tpEvento))
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
-
+                }
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
                 //int cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
                 int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
 
-                //if (cOrgao == 90 || cOrgao == 91)   //Amb.Nacional
-                //{
-                //cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));//<<< 7/2012
-
-                ///Estados que utilizam a SVAN: ES, MA, PA, PI, RN
-                ///Devem utilizar 91
-                ///
-                ///para testar
-                /*switch (cOrgao)
-                {
-                    case 32:
-                    case 21:
-                    case 15:
-                    case 22:
-                    case 24:
-                        cOrgao = 91;
-                        break;
-                }*/
-                //}
-                //Definir o serviço que será executado para a classe
+                // Ajusta o tpEmis para o configurado na empresa caso a nota nao tenha sido emitida em SCAN
+                if (tpEmis != 3 || tpEmis != 1)
+                    tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
@@ -81,7 +67,7 @@ namespace NFe.Service
                         emp,
                         cOrgao,
                         oDadosEnvEvento.eventos[0].tpAmb,
-                        Empresa.Configuracoes[emp].tpEmis);
+                        tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento;
@@ -174,7 +160,7 @@ namespace NFe.Service
                             Servico = Servicos.EnviarCCe;
                         else
                             if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_TXT))
-                                Servico = Servicos.EnviarManifestacao;
+                                Servico = Servicos.EnviarManifDest;
                             else
                                 if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT))
                                     Servico = Servicos.EnviarEventoCancelamento;
@@ -193,7 +179,7 @@ namespace NFe.Service
                             ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCancelamento_XML : Propriedade.ExtEnvio.EnvCancelamento_TXT;
                             ExtRetorno = Propriedade.ExtRetorno.retCancelamento_ERR;
                             break;
-                        case Servicos.EnviarManifestacao:
+                        case Servicos.EnviarManifDest:
                             ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvManifestacao_XML : Propriedade.ExtEnvio.EnvManifestacao_TXT;
                             ExtRetorno = Propriedade.ExtRetorno.retManifestacao_ERR;
                             break;

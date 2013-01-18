@@ -1623,7 +1623,7 @@ namespace NFe.Service
                         break;
 
                     case Servicos.EnviarEventoCancelamento:
-                    case Servicos.EnviarManifestacao:
+                    case Servicos.EnviarManifDest:
                     case Servicos.EnviarCCe:    //danasa 2/7/2011
                         //<retEnvEvento versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
                         //  <idLote>000000000038313</idLote>

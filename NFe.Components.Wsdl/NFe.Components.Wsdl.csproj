@@ -243,7 +243,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao2.wsdl" />
@@ -252,7 +251,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBACadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeRetRecepcao2.wsdl" />
@@ -260,7 +258,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBARecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetRecepcao2.wsdl" />
@@ -272,7 +269,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRetRecepcao2.wsdl" />
@@ -282,7 +278,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCancRegSaida2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRetRecepcao2.wsdl" />
@@ -292,7 +287,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeRetRecepcao2.wsdl" />
@@ -301,7 +295,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetRecepcao2.wsdl" />
@@ -310,7 +303,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeRetRecepcao2.wsdl" />
@@ -319,14 +311,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSnfeinutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRecepcaoEvento.wsdl" />
@@ -344,7 +334,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeConsulta2.wsdl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeRetRecepcao2.wsdl" />
@@ -368,7 +357,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetRecepcao2.wsdl" />
@@ -376,7 +364,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBACadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetRecepcao2.wsdl" />
@@ -385,7 +372,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetRecepcao2.wsdl" />
@@ -397,7 +383,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeRetRecepcao2.wsdl" />
@@ -407,7 +392,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGCancRegSaida2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetRecepcao2.wsdl" />
@@ -417,7 +401,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetRecepcao2.wsdl" />
@@ -426,7 +409,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetRecepcao2.wsdl" />
@@ -435,7 +417,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetRecepcao2.wsdl" />
@@ -444,7 +425,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRetRecepcao2.wsdl" />
@@ -452,7 +432,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRScadconsultacadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeCancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSnfeinutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeRecepcaoEvento.wsdl" />
@@ -468,7 +447,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPcadconsultacadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfecancelamento2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeconsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeinutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnferecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnferetrecepcao2.wsdl" />
@@ -909,18 +887,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HNFeConsultaDest.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PNFeConsultaDest.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PRecepcaoEvento.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HRecepcaoEvento.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CTe\WSDL\Producao\PMGCadConsultaCadastro2.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -945,6 +911,16 @@
     <EmbeddedResource Include="CTe\schemas\CTe\retEventoCTe_v1.04.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANNFeConsultaDest.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANNfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANNFeConsultaDest.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANNfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANRecepcaoEvento.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

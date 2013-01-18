@@ -268,8 +268,8 @@ namespace NFe.Settings
         /// <returns></returns>
         public static bool TemCCe(string cUF, int tpAmb, int tpEmis)
         {
-            bool retorna = false;
-
+            bool retorna = true;
+/*
             if (tpEmis != Propriedade.TipoEmissao.teNormal)
                 return retorna;
 
@@ -298,6 +298,7 @@ namespace NFe.Settings
                     }
                 }
             }
+ */
 
             return retorna;
         }
@@ -643,10 +644,8 @@ namespace NFe.Settings
                                 WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
                             break;
 
-                        case Servicos.EnviarManifestacao:
-                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifestacao : list.LocalProducao.NFeManifestacao);
-                            if (string.IsNullOrEmpty(WSDL))
-                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
+                        case Servicos.EnviarManifDest:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifDest : list.LocalProducao.NFeManifDest);
                             break;
 
                         case Servicos.RegistroDeSaida:
@@ -720,7 +719,7 @@ namespace NFe.Settings
                 {
                     case Servicos.EnviarCCe:
                     case Servicos.EnviarEventoCancelamento:
-                    case Servicos.EnviarManifestacao:
+                    case Servicos.EnviarManifDest:
                         throw new Exception(string.Format(errorStr, "de envio de eventos"));
 
                     case Servicos.ConsultaNFDest:

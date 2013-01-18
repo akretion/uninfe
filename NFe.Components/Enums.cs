@@ -117,7 +117,7 @@ namespace NFe.Components
         /// <summary>
         /// Enviar um evento de manifestacao
         /// </summary>
-        EnviarManifestacao,
+        EnviarManifDest,
         /// <summary>
         /// Registro de saida
         /// </summary>

@@ -185,7 +185,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                             case "nfeinutilizacao":
                                 srv = Servicos.InutilizarNumerosNFe; break;
                             case "nfemanifestacao":
-                                srv = Servicos.EnviarManifestacao; break;
+                                srv = Servicos.EnviarManifDest; break;
                             case "nferetrecepcao":
                             case "nferecepcao":
                             case "nfeenviardpec":
