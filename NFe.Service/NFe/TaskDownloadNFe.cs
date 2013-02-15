@@ -161,6 +161,38 @@ namespace NFe.Service
         #endregion
 
         #region LerRetornoDownloadNFe
+
+#if teste
+        internal class TretprocNFeGrupoZip
+        {
+            public string NFeZip { get; set; }             //E JR14 B64 1-1 XML da NF-e compactado no padrão gZip, o tipo do campo é base64Binary.
+            public string protNFeZip { get; set; }         //E JR14 B64 1-1 Protocolo de Autorização de Uso compactado no padrão gZip, o tipo do campo é base64Binary.          
+        }
+        internal class TretprocNFeGrupoOpcional
+        {
+            //JR12 Grupo opcional G JR08 - 0-1 Grupo de elementos no Schema XML.
+            public string procNFeZip { get; set; }                      //CE JR12 B64 0-1 XML da NF-e (procNFe) compactado no padrão gZip, o tipo do campo é base64Binary.
+            public TretprocNFeGrupoZip procNFeGrupoZip { get; set; }    //CG JR12 G   0-1 Grupo contendo a NF-e compactada e o Protocolo de Autorização compactado.
+
+            public TretprocNFeGrupoOpcional()
+            {
+                procNFeGrupoZip = new TretprocNFeGrupoZip();
+            }
+        }
+        internal class TretDownloadNFe_retNFe
+        {
+            public string chNFe { get; set; }
+            public Int32 cStat { get; set; }
+            public string xMotivo { get; set; }
+            public TretprocNFeGrupoOpcional GrupoOpcional { get; set; }
+
+            public TretDownloadNFe_retNFe()
+            {
+                GrupoOpcional = new TretprocNFeGrupoOpcional();
+            }
+        }
+#endif
+
         private void LerRetornoDownloadNFe(int emp)
         {
             ///<retDownloadNFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -211,7 +243,84 @@ namespace NFe.Service
                     int cStat = Convert.ToInt32(Functions.LerTag(retElemento, "cStat", false));
                     if (cStat == 139)
                     {
-                        DateTime dhResp = Functions.GetDateTime/*Convert.ToDateTime*/(Functions.LerTag(retElemento, "dhResp", false));
+                        DateTime dhResp = Functions.GetDateTime(Functions.LerTag(retElemento, "dhResp", false));
+
+                        System.Xml.XmlNodeList retDownLoadListx = retElemento.GetElementsByTagName("retNFe");
+                        if (retDownLoadListx != null)
+                        {
+                            for (var iitem = 0; iitem < retDownLoadListx.Count; ++iitem)
+                            {
+                                XmlElement el1 = retDownLoadListx.Item(iitem) as XmlElement;
+
+                                if (Convert.ToInt32(Functions.LerTag(el1, "cStat", false)) == 140)
+                                {
+                                    string chave = Functions.LerTag(el1, "chNFe", false) + Propriedade.ExtRetorno.ProcNFe;
+
+                                    foreach (XmlElement xitem in el1.ChildNodes)
+                                    {
+                                        switch (xitem.LocalName)
+                                        {
+                                            case "procNFe":
+                                                foreach (XmlElement xitem1 in xitem.ChildNodes)
+                                                {
+                                                    switch (xitem1.LocalName)
+                                                    {
+                                                        case "nfeProc":
+                                                            bool afound = false;
+                                                            for (int a1 = 0; a1 < xitem1.ChildNodes[0].Attributes.Count; ++a1)
+                                                                if (xitem1.ChildNodes[0].Attributes[a1].LocalName.Equals("xmlns"))
+                                                                    afound = true;
+
+                                                            if (!afound)
+                                                            {
+                                                                XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
+                                                                xmlVersion1.Value = "http://www.portalfiscal.inf.br/nfe";
+                                                                xitem1.ChildNodes[0].Attributes.Append(xmlVersion1);
+                                                            }
+
+                                                            afound = false;
+                                                            for (int a1 = 0; a1 < xitem1.ChildNodes[1].Attributes.Count; ++a1)
+                                                                if (xitem1.ChildNodes[1].Attributes[a1].LocalName.Equals("xmlns"))
+                                                                    afound = true;
+
+                                                            if (!afound)
+                                                            {
+                                                                XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
+                                                                xmlVersion1.Value = "http://www.portalfiscal.inf.br/nfe";
+                                                                xitem1.ChildNodes[1].Attributes.Append(xmlVersion1);
+                                                            }
+                                                            System.IO.File.WriteAllText(Path.Combine(folderDestino, chave), "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + xitem1.OuterXml, Encoding.UTF8);
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                            case "procNFeGrupoZip": //<procNFeGrupoZip><NFeZip></NFeZip><protNFeZip>
+                                                foreach (XmlElement xitem1 in xitem.ChildNodes)
+                                                {
+                                                    switch (xitem1.LocalName)
+                                                    {
+                                                        case "NFeZip":
+                                                            //item.GrupoOpcional.procNFeGrupoZip.NFeZip = xitem1.InnerText;
+                                                            break;
+
+                                                        case "protNFeZip":
+                                                            //item.GrupoOpcional.procNFeGrupoZip.protNFeZip = xitem1.InnerText;
+                                                            Decode(xitem1.InnerText);
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                            case "procNFeZip":
+                                                Console.WriteLine("zip");
+                                                //item.GrupoOpcional.procNFeZip = "";
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     /*
                     foreach (XmlNode infretNFe in retElemento.ChildNodes)
@@ -241,14 +350,12 @@ namespace NFe.Service
         #region Decode/Encode
         private string Encode(string str)
         {
-            byte[] encbuff = System.Text.Encoding.UTF8.GetBytes(str);
-            return Convert.ToBase64String(encbuff);
+            return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(str));
         }
         
         private string Decode(string str)
         {
-            byte[] decbuff = Convert.FromBase64String(str);
-            return System.Text.Encoding.UTF8.GetString(decbuff);
+            return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(str));
         }
     
         private Stream DecodeBase64Gzip(string input)

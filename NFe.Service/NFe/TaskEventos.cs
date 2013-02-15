@@ -52,12 +52,32 @@ namespace NFe.Service
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
                 }
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
-                //int cOrgao = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
                 int cOrgao = oDadosEnvEvento.eventos[0].cOrgao;
+                int ufParaWS = cOrgao;
 
-                // Ajusta o tpEmis para o configurado na empresa caso a nota nao tenha sido emitida em SCAN
-                if (tpEmis != 3 || tpEmis != 1)
-                    tpEmis = Empresa.Configuracoes[emp].tpEmis;
+                //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
+                if (cOrgao == 91)
+                    ufParaWS = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+
+                // Se for evento de cancelamento
+                if (Servico == Servicos.EnviarEventoCancelamento)
+                {
+                    switch (tpEmis)
+                    {
+                        case Propriedade.TipoEmissao.teSCAN:
+                            //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
+                            break;
+
+                        case Propriedade.TipoEmissao.teNormal:
+                            //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
+                            break;
+                            
+                        default:
+                            //Se não for SCAN nem NORMAL eu vou pegar o tipo de emissão definido nas configurações do UniNFe. Wandrey 15/02/2013
+                            tpEmis = Empresa.Configuracoes[emp].tpEmis;
+                            break;
+                    }
+                }
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
@@ -65,20 +85,12 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
                         Servico,
                         emp,
-                        cOrgao,
+                        ufParaWS,
                         oDadosEnvEvento.eventos[0].tpAmb,
                         tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoEvento;
-                    if (/*oLer.*/oDadosEnvEvento.eventos[0].cOrgao == 52)
-                    {
-                        oRecepcaoEvento = wsProxy.CriarObjeto("NfeRecepcaoEvento");
-                    }
-                    else
-                    {
-                        oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
-                    }
+                    object oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg

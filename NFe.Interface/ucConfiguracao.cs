@@ -311,6 +311,9 @@ namespace NFe.Interface
             edtFTP_Server.Text = oEmpresa.FTPNomeDoServidor;
             edtFTP_UserName.Text = oEmpresa.FTPNomeDoUsuario;
 
+            txtUsuarioWS.Text = oEmpresa.UsuarioWS;
+            txtSenhaWS.Text = oEmpresa.SenhaWS;
+
             cnpjCurrent = oEmpresa.CNPJ;
 
             //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
@@ -346,6 +349,11 @@ namespace NFe.Interface
                 }
             }
             #endregion
+
+            if (oEmpresa.UFCod == 4101408)
+                HabilitaUsuarioSenhaWS(true);
+            else
+                HabilitaUsuarioSenhaWS(false);
 
             this.Modificado = false;
         }
@@ -404,6 +412,9 @@ namespace NFe.Interface
             oEmpresa.CertificadoInstalado = ckbCertificadoInstalado.Checked;
             oEmpresa.CertificadoArquivo = txtArquivoCertificado.Text;
             oEmpresa.CertificadoSenha = txtSenhaCertificado.Text;
+
+            oEmpresa.UsuarioWS = txtUsuarioWS.Text;
+            oEmpresa.SenhaWS = txtSenhaWS.Text;
         }
         #endregion
 
@@ -571,6 +582,11 @@ namespace NFe.Interface
                 object xuf = comboBox_UF.SelectedValue;
                 edtCodMun.Text = xuf.ToString();
                 edtPadrao.Text = Functions.PadraoNFSe(Convert.ToInt32(xuf)).ToString();
+
+                if (edtCodMun.Text.Trim() == "4101408")
+                    HabilitaUsuarioSenhaWS(true);
+                else
+                    HabilitaUsuarioSenhaWS(false);
             }
             catch
             {
@@ -588,6 +604,14 @@ namespace NFe.Interface
                                    dirNOTexiste(this.textBox_PastaValidar.Text) ||
                                    dirNOTexiste(this.textBox_PastaLote.Text) ||
                                    dirNOTexiste(this.textBox_PastaDownload.Text);
+        }
+
+        private void HabilitaUsuarioSenhaWS(bool visible)
+        {
+            lblUsuarioWS.Visible = visible;
+            lblSenhaWS.Visible = visible;
+            txtUsuarioWS.Visible = visible;
+            txtSenhaWS.Visible = visible;
         }
 
         private void btnFTPTestar_Click(object sender, EventArgs e)
@@ -672,11 +696,6 @@ namespace NFe.Interface
                 txtSenhaCertificado.Location = new Point(6, 88);
                 txtSenhaCertificado.Refresh();
             }
-        }
-
-        private void tbTextoDANFE_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

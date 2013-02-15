@@ -377,7 +377,8 @@ namespace NFe.Service
                             object oServicoNFe,
                             string cFinalArqEnvio,
                             string cFinalArqRetorno,
-                            PadroesNFSe padraoNFSe)
+                            PadroesNFSe padraoNFSe,
+                            Servicos servicoNFSe)
         {
             int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
 
@@ -441,41 +442,68 @@ namespace NFe.Service
                 try
                 {
                     //Invocar o membro
-                    if (padraoNFSe == PadroesNFSe.BETHA)
+                    switch (padraoNFSe)
                     {
-                        switch (cMetodo)
-                        {
-                            case "ConsultarSituacaoLoteRps":
-                                strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
+                        case PadroesNFSe.BETHA:
+                            switch (cMetodo)
+                            {
+                                case "ConsultarSituacaoLoteRps":
+                                    strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
 
-                            case "ConsultarLoteRps":
-                                strRetorno = oWSProxy.Betha.ConsultarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
+                                case "ConsultarLoteRps":
+                                    strRetorno = oWSProxy.Betha.ConsultarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
 
-                            case "CancelarNfse":
-                                strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
+                                case "CancelarNfse":
+                                    strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
 
-                            case "ConsultarNfse":
-                                strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
+                                case "ConsultarNfse":
+                                    strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
 
-                            case "ConsultarNfsePorRps":
-                                strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
+                                case "ConsultarNfsePorRps":
+                                    strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
 
-                            case "RecepcionarLoteRps":
-                                strRetorno = oWSProxy.Betha.RecepcionarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(cabecMsg))
-                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml });
-                        else
-                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+                                case "RecepcionarLoteRps":
+                                    strRetorno = oWSProxy.Betha.RecepcionarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                                    break;
+                            }
+                            break;
+
+                        case PadroesNFSe.ISSONLINE:
+                            int operacao;
+
+                            switch (servicoNFSe)
+                            {
+                                case Servicos.RecepcionarLoteRps:
+                                    operacao = 1;
+                                    break;
+                                case Servicos.CancelarNfse:
+                                    operacao = 2;
+                                    break;
+                                default:
+                                    operacao = 3;
+                                    break;
+                            }
+
+                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Convert.ToSByte(operacao), Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, docXML.OuterXml });
+                            break;
+
+                        case PadroesNFSe.GINFES:
+                        case PadroesNFSe.THEMA:
+                        case PadroesNFSe.SALVADOR_BA:
+                        case PadroesNFSe.CANOAS_RS:
+                        case PadroesNFSe.ISSNET:
+                        default:
+                            if (string.IsNullOrEmpty(cabecMsg))
+                                strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml });
+                            else
+                                strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+
+                            break;
                     }
                 }
                 catch (Exception ex)

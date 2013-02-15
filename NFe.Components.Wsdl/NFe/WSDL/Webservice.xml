@@ -12,7 +12,7 @@
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\AM\HAMRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -25,7 +25,7 @@
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\AM\PAMRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -40,7 +40,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\BA\HBACadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\BA\HBARecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -53,7 +53,7 @@
       <NFeConsultaCadastro>wsdl\producao\BA\PBACadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\BA\PBARecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -68,7 +68,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\CE\HCECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\CE\HCERecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -81,7 +81,7 @@
       <NFeConsultaCadastro>wsdl\producao\CE\PCECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\CE\PCERecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -97,7 +97,7 @@
       <NFeConsulta1>wsdl\homologacao\GO\HGONfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\homologacao\GO\HGORecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -111,7 +111,7 @@
       <NFeConsulta1>wsdl\producao\GO\PGONfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\producao\GO\PGORecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -126,7 +126,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\MG\HMGCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\MG\HMGRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -139,7 +139,7 @@
       <NFeConsultaCadastro>wsdl\producao\MG\PMGCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MG\PMGRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -154,7 +154,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\MS\HMSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\MS\HMSRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -167,7 +167,7 @@
       <NFeConsultaCadastro>wsdl\producao\MS\PMSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MS\PMSRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -182,7 +182,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\MT\HMTCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\MT\HMTRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -195,7 +195,7 @@
       <NFeConsultaCadastro>wsdl\producao\MT\PMTCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\MT\PMTRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -210,7 +210,7 @@
       <NFeConsultaCadastro>wsdl\homologacao\PE\HPECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\PE\HPERecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -223,7 +223,7 @@
       <NFeConsultaCadastro>wsdl\producao\PE\PPECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\PE\PPERecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -239,7 +239,7 @@
       <NFeConsulta1>wsdl\homologacao\PR\HPRNfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\homologacao\PR\HPRNFeRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -253,7 +253,7 @@
       <NFeConsulta1>wsdl\producao\PR\PPRNfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\producao\PR\PPRNFeRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
@@ -267,7 +267,7 @@
       <NFeStatusServico>wsdl\homologacao\RS\HRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\RS\HRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\RS\HRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\AN\HANNFeDownloadnf.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -280,7 +280,7 @@
       <NFeStatusServico>wsdl\producao\RS\PRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\RS\PRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\RS\PRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\AN\PANNFeDownloadnf.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -295,7 +295,7 @@
       <NFeStatusServico>wsdl\homologacao\SP\HSPNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SP\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SP\HSPRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -308,7 +308,7 @@
       <NFeStatusServico>wsdl\producao\SP\PSPNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SP\PSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SP\PSPRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -324,7 +324,7 @@
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -337,7 +337,7 @@
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -352,7 +352,7 @@
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -365,7 +365,7 @@
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -380,7 +380,7 @@
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -393,7 +393,7 @@
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -408,7 +408,7 @@
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -421,7 +421,7 @@
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -436,7 +436,7 @@
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -449,7 +449,7 @@
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -465,7 +465,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -478,7 +478,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -493,7 +493,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -506,7 +506,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -521,7 +521,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -534,7 +534,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -549,7 +549,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -562,7 +562,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -577,7 +577,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -590,7 +590,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -605,7 +605,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -618,7 +618,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -633,7 +633,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -646,7 +646,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -661,7 +661,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -674,7 +674,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -689,7 +689,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -702,7 +702,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -717,7 +717,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -730,7 +730,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -745,7 +745,7 @@
       <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
@@ -758,7 +758,7 @@
       <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
@@ -774,7 +774,7 @@
       <NFeStatusServico>wsdl\homologacao\SCAN\HSCANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SCAN\HSCANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SCAN\HSCANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>
     <LocalProducao>
@@ -786,7 +786,7 @@
       <NFeStatusServico>wsdl\producao\SCAN\PSCANNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SCAN\PSCANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SCAN\PSCANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PNfeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>

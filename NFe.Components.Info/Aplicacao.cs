@@ -114,6 +114,8 @@ namespace NFe.Components.Info
                     aTXT.AppendLine(NFeStrConstants.FTPNomeDoUsuario + "|" + Empresa.Configuracoes[emp].FTPNomeDoUsuario);
                     aTXT.AppendLine(NFeStrConstants.FTPNomeDoServidor + "|" + Empresa.Configuracoes[emp].FTPNomeDoServidor);
                     aTXT.AppendLine(NFeStrConstants.FTPPorta + "|" + Empresa.Configuracoes[emp].FTPPorta.ToString());
+                    aTXT.AppendLine(NFeStrConstants.UsuarioWS + "|" + Empresa.Configuracoes[emp].UsuarioWS.ToString());
+                    aTXT.AppendLine(NFeStrConstants.SenhaWS + "|" + Empresa.Configuracoes[emp].SenhaWS.ToString());
                     ///
                     /// o ERP poderá verificar se determinado servico está definido no UniNFe
                     /// 
@@ -230,6 +232,8 @@ namespace NFe.Components.Info
                     oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, Empresa.Configuracoes[emp].tpEmis.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.UnidadeFederativaCodigo, Empresa.Configuracoes[emp].UFCod.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, Empresa.Configuracoes[emp].TempoConsulta.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.UsuarioWS, Empresa.Configuracoes[emp].UsuarioWS.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.SenhaWS, Empresa.Configuracoes[emp].SenhaWS.ToString());
                     ///
                     /// dados do FTP
                     /// 

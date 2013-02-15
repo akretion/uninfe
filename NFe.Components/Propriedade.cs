@@ -756,6 +756,9 @@ namespace NFe.Components
         public static string XMLDanfeMonProcNFe = "XMLDanfeMonProcNFe";
         public static string XMLDanfeMonDenegadaNFe = "XMLDanfeMonDenegadaNFe";
 
+        public static string UsuarioWS = "UsuarioWS";
+        public static string SenhaWS = "SenhaWS";
+
         public static string FTPAtivo = "FTPAtivo";
         public static string FTPGravaXMLPastaUnica = "FTPGravaXMLPastaUnica";
         public static string FTPSenha = "FTPSenha";

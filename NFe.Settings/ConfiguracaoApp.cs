@@ -900,6 +900,9 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.X509Certificado.Thumbprint);
                     }
 
+                    oXmlGravar.WriteElementString(NFeStrConstants.UsuarioWS, empresa.UsuarioWS.ToString());
+                    oXmlGravar.WriteElementString(NFeStrConstants.SenhaWS, empresa.SenhaWS.ToString());
+
                     oXmlGravar.WriteEndElement(); //nfe_configuracoes
                     oXmlGravar.WriteEndDocument();
                     oXmlGravar.Flush();
@@ -1495,6 +1498,16 @@ namespace NFe.Settings
                                 lEncontrouTag = true;
                                 break;
                             #endregion
+                            #region Usuário e Senha WS
+                            case "usuariows":
+                                Empresa.Configuracoes[emp].UsuarioWS = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            case "senhaws":
+                                Empresa.Configuracoes[emp].SenhaWS = (nElementos == 2 ? dados[1].Trim() : "");
+                                lEncontrouTag = true;
+                                break;
+                            #endregion
                         }
                     }
                     #endregion
@@ -1742,6 +1755,19 @@ namespace NFe.Settings
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta).Count != 0)
                         {
                             Empresa.Configuracoes[emp].FTPPorta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta)[0].InnerText.Trim());
+                            lEncontrouTag = true;
+                        }
+                        #endregion
+
+                        #region Usuário e Senha WS
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].UsuarioWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS)[0].InnerText.Trim();
+                            lEncontrouTag = true;
+                        }
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].SenhaWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS)[0].InnerText.Trim();
                             lEncontrouTag = true;
                         }
                         #endregion

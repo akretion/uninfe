@@ -70,6 +70,17 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.ISSNET:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.ISSONLINE:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        break;
+
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
@@ -80,7 +91,7 @@ namespace NFe.Service.NFSe
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosEnvLoteRps.cMunicipio));
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio), cabecMsg, this, "-env-loterps", "-ret-loterps", padraoNFSe);
+                oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio), cabecMsg, this, "-env-loterps", "-ret-loterps", padraoNFSe, Servico);
             }
             catch (Exception ex)
             {

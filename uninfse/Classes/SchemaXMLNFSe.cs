@@ -333,6 +333,182 @@ namespace uninfse
 
             #endregion
 
+            #region Schemas padrão ISSNet
+
+            #region NOVOHAMBURGO_RS
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 24,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_nfse_envio.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_nfse_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = 25,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_nfse_rps_envio.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_nfse_rps_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = 26,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_lote_rps_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-p1:CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "p1:CancelarNfseEnvio",
+                ID = 27,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_cancelar_nfse_envio.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_cancelar_nfse_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = 29,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_situacao_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_situacao_lote_rps_envio.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = 30,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_enviar_lote_rps_envio.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "tc:Rps",
+                TagAtributoId = "tc:InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_enviar_lote_rps_envio.xsd"
+            });
+            #endregion
+
+            #endregion
+
+            #endregion
+
+            #region Schemas padrão ISSNet
+
+            #region APUCARANA_PR
+/*
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 24,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_nfse_envio.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_nfse_envio.xsd"
+            });
+            #endregion
+*/
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-NFSE", new InfSchema()
+            {
+                Tag = "NFSE",
+                ID = 31,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão ISSOnLine",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+/*
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = 26,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_lote_rps_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-p1:CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "p1:CancelarNfseEnvio",
+                ID = 27,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_cancelar_nfse_envio.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_cancelar_nfse_envio.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = 29,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_situacao_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_situacao_lote_rps_envio.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = 30,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_enviar_lote_rps_envio.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "tc:Rps",
+                TagAtributoId = "tc:InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_enviar_lote_rps_envio.xsd"
+            });
+            #endregion
+ */
+
+            #endregion
+
+            #endregion
+
+
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
             foreach (InfSchema item in SchemaXML.InfSchemas.Values)

@@ -28,18 +28,6 @@ namespace NFe.Components
                 return _Padroes.ToArray();
             }
         }
-        /*
-
-        public static string URLHomologacao(PadroesNFSe padrao)
-        {
-            return "<URLHomologacao></URLHomologacao>";
-        }
-
-        public static string URLProducao(PadroesNFSe padrao)
-        {
-            return "<URLProducao></URLProducao>";
-        }
-        */
 
         public static string WebServicesHomologacao(PadroesNFSe padrao)
         {
@@ -93,6 +81,26 @@ namespace NFe.Components
                             @"<ConsultarNfse>wsdl\homologacao\HCanoasRSConsultarNfse.wsdl</ConsultarNfse>" +
                             @"<ConsultarLoteRps>wsdl\homologacao\HCanoasRSConsultarLoteRps.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HCanoasRSCancelarNfse.wsdl</CancelarNfse>" +
+                            "</LocalHomologacao>";
+
+                case PadroesNFSe.ISSNET:
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</CancelarNfse>" +
+                            "</LocalHomologacao>";
+
+                case PadroesNFSe.ISSONLINE:
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
 
                 default:
@@ -152,6 +160,26 @@ namespace NFe.Components
                             @"<ConsultarNfse>wsdl\producao\PCanoasRSConsultarNfse.wsdl</ConsultarNfse>" +
                             @"<ConsultarLoteRps>wsdl\producao\PCanoasRSConsultarLoteRps.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PCanoasRSCancelarNfse.wsdl</CancelarNfse>" +
+                            "</LocalProducao>";
+
+                case PadroesNFSe.ISSNET:
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>" +
+                            "</LocalProducao>";
+
+                case PadroesNFSe.ISSONLINE:
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
 
                 default:

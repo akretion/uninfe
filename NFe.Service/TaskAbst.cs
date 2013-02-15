@@ -289,6 +289,18 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region ISSNet
+                case PadroesNFSe.ISSNET:
+                    retorna = "Servicos";
+                    break;
+                #endregion
+
+                #region ISSNet
+                case PadroesNFSe.ISSONLINE:
+                    retorna = "Nfse";
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -596,6 +608,38 @@ namespace NFe.Service
                             retorna = "Execute";
                             break;
                     }
+                    break;
+                #endregion
+
+                #region ISSNET
+                case PadroesNFSe.ISSNET:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNFSePorRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaSituacaoLoteRPS";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region ISSNET
+                case PadroesNFSe.ISSONLINE:
+                    retorna = "Execute";
                     break;
                 #endregion
             }

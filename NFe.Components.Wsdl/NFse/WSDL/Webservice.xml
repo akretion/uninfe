@@ -1012,6 +1012,44 @@
       <CancelarNfse>wsdl\producao\PCanoasRSCancelarNfse.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <!-- Municípios que utilizam o padrão ISS.Net -->
+  <Estado ID="4313409" Nome="Novo Hamburgo - RS" UF="RS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam o padrão ISSOnLine -->
+  <Estado ID="4101408" Nome="Apucarana - PR" UF="PR">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípios que utilizam padrões próprios -->
   <Estado ID="2927408" Nome="Salvador - BA" UF="BA">
     <LocalHomologacao>
@@ -1029,6 +1067,24 @@
       <ConsultarNfse>wsdl\producao\PSalvadorBAConsultaNfse.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PSalvadorBAConsultaLoteRPS.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PSalvadorBA.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4202404" Nome="Blumenau - SC" UF="SC">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HBlumenauSC.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HBlumenauSC.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HBlumenauSC.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HBlumenauSC.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HBlumenauSC.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HBlumenauSC.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PBlumenauSC.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PBlumenauSC.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->

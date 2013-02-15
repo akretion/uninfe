@@ -86,7 +86,11 @@ namespace NFe.Interface
                 if (validarXML.TipoArqXml.nRetornoTipoArq >= 1 && validarXML.TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
                     validarXML.Validar(cArquivo);
-                    if (validarXML.Retorno == 0)
+                    if (string.IsNullOrEmpty(validarXML.TipoArqXml.cArquivoSchema))
+                    {
+                        this.textBox_resultado.Text = "XML não possui schema de validação, sendo assim não é possível validar XML;";
+                    }
+                    else if (validarXML.Retorno == 0)
                     {
                         this.textBox_resultado.Text = "Arquivo validado com sucesso;";
                     }

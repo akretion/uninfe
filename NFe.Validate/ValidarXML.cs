@@ -20,7 +20,7 @@ namespace NFe.Validate
         #region Construtores
         public ValidarXML(string arquivoXML, int UFCod)
         {
-            TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod);            
+            TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod);
         }
         #endregion
 
@@ -46,6 +46,10 @@ namespace NFe.Validate
             bool lArqXML = File.Exists(cRotaArqXML);
             var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
             bool lArqXSD = File.Exists(caminhoDoSchema);
+            bool temXSD = ! string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
+
+            Retorno = 0;
+            RetornoString = "";
 
             if (lArqXML && lArqXSD)
             {
@@ -107,7 +111,7 @@ namespace NFe.Validate
                     this.Retorno = 2;
                     this.RetornoString = "Arquivo XML não foi encontrato";
                 }
-                else if (lArqXSD == false)
+                else if (lArqXSD == false && temXSD)
                 {
                     this.Retorno = 3;
                     this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + caminhoDoSchema;

@@ -137,17 +137,22 @@ namespace NFe.Settings
         /// Tempo para execução da consulta do recibo após o envio do lote
         /// </summary>
         public int TempoConsulta { get; set; }
-
         /// <summary>
         /// Caminho das pastas com erro no caminho dos diretorios
         /// </summary>
         public static string ErroCaminhoDiretorio { get; set; }
-
         /// <summary>
         /// Propriedade para exibição  de mensagem de erro referente ao erro no caminho das pastas informadas
         /// </summary>
         public static bool ExisteErroDiretorio { get; set; }
-
+        /// <summary>
+        /// Usuário de acesso ao webservice (Utilizado pelo UniNFS-e para algumas prefeituras)
+        /// </summary>
+        public string UsuarioWS { get; set; }
+        /// <summary>
+        /// Senha de acesso ao webservice (Utilizado pelo UniNFS-e para algumas prefeituras)
+        /// </summary>
+        public string SenhaWS { get; set; }
         #endregion
 
         #region Propriedades da parte das configurações por empresa
@@ -470,6 +475,9 @@ namespace NFe.Settings
             empresa.DiasLimpeza = 0;
             empresa.TempoConsulta = 2;
 
+            empresa.UsuarioWS = string.Empty;
+            empresa.SenhaWS = string.Empty;
+
             empresa.tpAmb = Propriedade.TipoAmbiente.taHomologacao; //2
             empresa.tpEmis = Propriedade.TipoEmissao.teNormal; //1
 
@@ -550,6 +558,9 @@ namespace NFe.Settings
                             if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
                                 if (!string.IsNullOrEmpty(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim()))
                                     empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
+
+                        empresa.UsuarioWS = Functions.LerTag(configElemento, NFeStrConstants.UsuarioWS, false);
+                        empresa.SenhaWS = Functions.LerTag(configElemento, NFeStrConstants.SenhaWS, false);
                     }
 
                     empresa.X509Certificado = null;

@@ -205,8 +205,16 @@ namespace NFe.Components
         /// <summary>
         /// Padrão da prefeitura de Canoas-RS
         /// </summary>
-        CANOAS_RS
-
+        CANOAS_RS,
+        /// <summary>
+        /// Padrão da ISS Net
+        /// </summary>    
+        ISSNET,
+        /// <summary>
+        /// Padrão da prefeitura de Apucarana-PR
+        /// </summary>
+        ISSONLINE,
+        
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

@@ -123,6 +123,10 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtUsuarioWS = new System.Windows.Forms.TextBox();
+            this.txtSenhaWS = new System.Windows.Forms.TextBox();
+            this.lblUsuarioWS = new System.Windows.Forms.Label();
+            this.lblSenhaWS = new System.Windows.Forms.Label();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -149,6 +153,10 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lblSenhaWS);
+            this.tabPage6.Controls.Add(this.lblUsuarioWS);
+            this.tabPage6.Controls.Add(this.txtSenhaWS);
+            this.tabPage6.Controls.Add(this.txtUsuarioWS);
             this.tabPage6.Controls.Add(this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe);
             this.tabPage6.Controls.Add(this.checkBoxGravarEventosDeTerceiros);
             this.tabPage6.Controls.Add(this.checkBoxGravarEventosNaPastaEnviadosNFe);
@@ -184,18 +192,18 @@
             // checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe
             // 
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 292);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 304);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
-                "denegados?";
+    "denegados?";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // checkBoxGravarEventosDeTerceiros
             // 
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
-            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(8, 315);
+            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(8, 327);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
             this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(273, 17);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 22;
@@ -205,7 +213,7 @@
             // checkBoxGravarEventosNaPastaEnviadosNFe
             // 
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 269);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 281);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(415, 17);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 20;
@@ -250,7 +258,7 @@
             // 
             // udTempoConsulta
             // 
-            this.udTempoConsulta.Location = new System.Drawing.Point(354, 236);
+            this.udTempoConsulta.Location = new System.Drawing.Point(370, 255);
             this.udTempoConsulta.Maximum = new decimal(new int[] {
             15,
             0,
@@ -273,16 +281,15 @@
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(4, 236);
+            this.label20.Location = new System.Drawing.Point(367, 224);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(344, 13);
+            this.label20.Size = new System.Drawing.Size(188, 36);
             this.label20.TabIndex = 18;
             this.label20.Text = "Quantidade em segundos p/efetuar a consultar da autorização da NFe:";
             // 
             // edtCNPJ
             // 
-            this.edtCNPJ.Location = new System.Drawing.Point(4, 64);
+            this.edtCNPJ.Location = new System.Drawing.Point(7, 64);
             this.edtCNPJ.Mask = "00,000,000/0000-00";
             this.edtCNPJ.Name = "edtCNPJ";
             this.edtCNPJ.Size = new System.Drawing.Size(128, 20);
@@ -292,7 +299,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(4, 48);
+            this.label19.Location = new System.Drawing.Point(7, 48);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(34, 13);
             this.label19.TabIndex = 2;
@@ -301,7 +308,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(4, 5);
+            this.label9.Location = new System.Drawing.Point(7, 5);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 13);
             this.label9.TabIndex = 0;
@@ -309,7 +316,7 @@
             // 
             // edtNome
             // 
-            this.edtNome.Location = new System.Drawing.Point(4, 24);
+            this.edtNome.Location = new System.Drawing.Point(7, 24);
             this.edtNome.Name = "edtNome";
             this.edtNome.Size = new System.Drawing.Size(575, 20);
             this.edtNome.TabIndex = 1;
@@ -317,7 +324,7 @@
             // 
             // udDiasLimpeza
             // 
-            this.udDiasLimpeza.Location = new System.Drawing.Point(478, 209);
+            this.udDiasLimpeza.Location = new System.Drawing.Point(7, 255);
             this.udDiasLimpeza.Maximum = new decimal(new int[] {
             7305,
             0,
@@ -332,7 +339,7 @@
             // labelUF
             // 
             this.labelUF.AutoSize = true;
-            this.labelUF.Location = new System.Drawing.Point(4, 92);
+            this.labelUF.Location = new System.Drawing.Point(7, 91);
             this.labelUF.Name = "labelUF";
             this.labelUF.Size = new System.Drawing.Size(162, 13);
             this.labelUF.TabIndex = 4;
@@ -349,18 +356,17 @@
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(4, 209);
+            this.label14.Location = new System.Drawing.Point(7, 224);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(469, 13);
+            this.label14.Size = new System.Drawing.Size(212, 36);
             this.label14.TabIndex = 16;
             this.label14.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
-                "0 para infinito.";
+    "0 para infinito.";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(4, 181);
+            this.label13.Location = new System.Drawing.Point(7, 181);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(332, 13);
             this.label13.TabIndex = 14;
@@ -400,7 +406,7 @@
             "D\\M\\A",
             "D\\M",
             "D\\A"});
-            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(342, 181);
+            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(7, 197);
             this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
             this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(85, 21);
             this.cboDiretorioSalvarComo.TabIndex = 15;
@@ -409,7 +415,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 134);
+            this.label8.Location = new System.Drawing.Point(7, 134);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 13);
             this.label8.TabIndex = 12;
@@ -420,7 +426,7 @@
             this.comboBox_tpEmis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_tpEmis.FormattingEnabled = true;
             this.comboBox_tpEmis.ItemHeight = 13;
-            this.comboBox_tpEmis.Location = new System.Drawing.Point(4, 153);
+            this.comboBox_tpEmis.Location = new System.Drawing.Point(7, 150);
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
             this.comboBox_tpEmis.Size = new System.Drawing.Size(284, 21);
             this.comboBox_tpEmis.TabIndex = 13;
@@ -429,7 +435,7 @@
             // checkBoxRetornoNFETxt
             // 
             this.checkBoxRetornoNFETxt.AutoSize = true;
-            this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(8, 338);
+            this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(8, 350);
             this.checkBoxRetornoNFETxt.Name = "checkBoxRetornoNFETxt";
             this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(344, 17);
             this.checkBoxRetornoNFETxt.TabIndex = 23;
@@ -442,7 +448,7 @@
             this.comboBox_UF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_UF.FormattingEnabled = true;
             this.comboBox_UF.ItemHeight = 13;
-            this.comboBox_UF.Location = new System.Drawing.Point(4, 110);
+            this.comboBox_UF.Location = new System.Drawing.Point(7, 110);
             this.comboBox_UF.Name = "comboBox_UF";
             this.comboBox_UF.Size = new System.Drawing.Size(173, 21);
             this.comboBox_UF.TabIndex = 5;
@@ -531,7 +537,7 @@
             this.label1.Size = new System.Drawing.Size(497, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
-                " os WebServices:";
+    " os WebServices:";
             // 
             // label12
             // 
@@ -570,7 +576,7 @@
             this.label11.Size = new System.Drawing.Size(499, 13);
             this.label11.TabIndex = 25;
             this.label11.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
-                " os WebServices:";
+    " os WebServices:";
             // 
             // textBox_PastaBackup
             // 
@@ -638,7 +644,7 @@
             this.label7.Size = new System.Drawing.Size(445, 13);
             this.label7.TabIndex = 19;
             this.label7.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
-                "o envio:";
+    "o envio:";
             // 
             // label2
             // 
@@ -794,7 +800,7 @@
             this.txtSenhaCertificado.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaCertificado.TabIndex = 27;
             this.toolTip1.SetToolTip(this.txtSenhaCertificado, "O arquivo do certificado deverá estar no diretorio da empresa com o nome cert.ccc" +
-                    "");
+        "");
             this.txtSenhaCertificado.UseSystemPasswordChar = true;
             this.txtSenhaCertificado.Visible = false;
             // 
@@ -881,7 +887,6 @@
             this.tbTextoDANFE.Size = new System.Drawing.Size(576, 75);
             this.tbTextoDANFE.TabIndex = 3;
             this.tbTextoDANFE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbTextoDANFE.TextChanged += new System.EventHandler(this.tbTextoDANFE_TextChanged);
             // 
             // cbDanfeMonProcNfe
             // 
@@ -923,7 +928,7 @@
             this.label17.Size = new System.Drawing.Size(467, 13);
             this.label17.TabIndex = 8;
             this.label17.Text = "Pasta onde deve ser gravado o XML da NFe para a impressão do DANFe a partir do DA" +
-                "NFeMon:";
+    "NFeMon:";
             // 
             // label15
             // 
@@ -1087,7 +1092,7 @@
             this.edtFTP_GravaXMLPastaUnica.Size = new System.Drawing.Size(502, 17);
             this.edtFTP_GravaXMLPastaUnica.TabIndex = 7;
             this.edtFTP_GravaXMLPastaUnica.Text = "Gravar os XML\'s autorizados em uma única pasta, se não, serão criadas pastas conf" +
-                "orme a definição";
+    "orme a definição";
             this.edtFTP_GravaXMLPastaUnica.UseVisualStyleBackColor = true;
             this.edtFTP_GravaXMLPastaUnica.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -1178,6 +1183,43 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // txtUsuarioWS
+            // 
+            this.txtUsuarioWS.Location = new System.Drawing.Point(370, 150);
+            this.txtUsuarioWS.Name = "txtUsuarioWS";
+            this.txtUsuarioWS.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuarioWS.TabIndex = 24;
+            this.txtUsuarioWS.Visible = false;
+            // 
+            // txtSenhaWS
+            // 
+            this.txtSenhaWS.Location = new System.Drawing.Point(478, 150);
+            this.txtSenhaWS.Name = "txtSenhaWS";
+            this.txtSenhaWS.PasswordChar = '*';
+            this.txtSenhaWS.Size = new System.Drawing.Size(100, 20);
+            this.txtSenhaWS.TabIndex = 25;
+            this.txtSenhaWS.Visible = false;
+            // 
+            // lblUsuarioWS
+            // 
+            this.lblUsuarioWS.AutoSize = true;
+            this.lblUsuarioWS.Location = new System.Drawing.Point(370, 134);
+            this.lblUsuarioWS.Name = "lblUsuarioWS";
+            this.lblUsuarioWS.Size = new System.Drawing.Size(46, 13);
+            this.lblUsuarioWS.TabIndex = 26;
+            this.lblUsuarioWS.Text = "Usuário:";
+            this.lblUsuarioWS.Visible = false;
+            // 
+            // lblSenhaWS
+            // 
+            this.lblSenhaWS.AutoSize = true;
+            this.lblSenhaWS.Location = new System.Drawing.Point(478, 134);
+            this.lblSenhaWS.Name = "lblSenhaWS";
+            this.lblSenhaWS.Size = new System.Drawing.Size(41, 13);
+            this.lblSenhaWS.TabIndex = 27;
+            this.lblSenhaWS.Text = "Senha:";
+            this.lblSenhaWS.Visible = false;
             // 
             // ucConfiguracao
             // 
@@ -1301,5 +1343,9 @@
         private System.Windows.Forms.CheckBox checkBoxGravarEventosNaPastaEnviadosNFe;
         private System.Windows.Forms.CheckBox checkBoxGravarEventosDeTerceiros;
         private System.Windows.Forms.CheckBox checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe;
+        private System.Windows.Forms.Label lblSenhaWS;
+        private System.Windows.Forms.Label lblUsuarioWS;
+        private System.Windows.Forms.TextBox txtSenhaWS;
+        private System.Windows.Forms.TextBox txtUsuarioWS;
     }
 }
