@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace NFe.Components
 {
@@ -489,5 +490,24 @@ namespace NFe.Components
             return UF;
         }
         #endregion
+
+        /// <summary>
+        /// Criptografar conteúdo com MD5
+        /// </summary>
+        /// <param name="input">Conteúdo a ser criptografado</param>
+        /// <returns>Conteúdo criptografado com MD5</returns>
+        public static string GetMD5Hash(string input)
+        {
+            MD5 md5Hasher = MD5.Create();
+            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
     }
 }

@@ -850,6 +850,25 @@ namespace NFe.Service
     }
     #endregion
 
+    #region DadosPedURLNfse
+    /// <summary>
+    /// Classe com os dados do XML da consulta da URL da Nfse
+    /// </summary>
+    public class DadosPedURLNfse
+    {
+        public int cMunicipio { get; set; }
+        public int tpAmb { get; set; }
+        public int tpEmis { get; set; }
+
+        public DadosPedURLNfse(int emp)
+        {
+            tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+        }
+    }
+    #endregion
+
     #endregion
 
 }

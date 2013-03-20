@@ -145,6 +145,7 @@ namespace NFe.Components.Info
                                     aTXT.AppendLine(tipo + "ConsultarNfsePorRps|" +     (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
                                     aTXT.AppendLine(tipo + "ConsultarSituacaoLoteRps|" +(!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
                                     aTXT.AppendLine(tipo + "RecepcionarLoteRps|" +      (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarURLNfse|" +        (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
                                     break;
 
                                 case TipoAplicativo.Nfe:
@@ -275,6 +276,7 @@ namespace NFe.Components.Info
                                     oXmlGravar.WriteElementString("ConsultarNfsePorRps",    (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
                                     oXmlGravar.WriteElementString("ConsultarSituacaoLoteRps", (!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
                                     oXmlGravar.WriteElementString("RecepcionarLoteRps",     (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarURLNfse", (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
                                     break;
 
                                 case TipoAplicativo.Nfe:

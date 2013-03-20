@@ -157,7 +157,23 @@ namespace NFe.Components
         /// <summary>
         /// Cancelar NFS-e
         /// </summary>
-        CancelarNfse
+        CancelarNfse,
+        /// <summary>
+        /// Consultar a URL de visualização da NFSe
+        /// </summary>
+        ConsultarURLNfse,
+        /// <summary>
+        /// Cadastrar nova empresa
+        /// </summary>
+        CadastrarEmpresa,
+        /// <summary>
+        /// Consultas efetuadas pela pasta GERAL.
+        /// </summary>
+        ConsultaGeral,
+        /// <summary>
+        /// Consulta Certificados Instalados na estação do UniNFe.
+        /// </summary>
+        ConsultaCertificados
     }
     #endregion
 
@@ -214,6 +230,10 @@ namespace NFe.Components
         /// Padrão da prefeitura de Apucarana-PR
         /// </summary>
         ISSONLINE,
+        /// <summary>
+        /// Padrão da prefeitura de Blumenau-SC
+        /// </summary>
+        BLUMENAU_SC
         
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

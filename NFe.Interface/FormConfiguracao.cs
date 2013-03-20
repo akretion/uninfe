@@ -269,7 +269,7 @@ namespace NFe.Interface
             this.Close();
         }
 
-        private bool Salvar()
+        public bool Salvar()
         {
             if (this.tabControl4.TabPages.Count == 1)
             {

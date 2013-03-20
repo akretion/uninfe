@@ -86,6 +86,16 @@ namespace NFe.Components
             get { return System.IO.Path.GetDirectoryName(Application.ExecutablePath); }
         }
 
+        public static string PastaGeral
+        {
+            get{ return Propriedade.PastaExecutavel + "\\Geral"; }
+        }
+
+        public static string PastaGeralTemporaria
+        {
+            get { return Propriedade.PastaGeral + "\\Temp"; }
+        }
+
         /// <summary>
         /// Retorna o XML contendos as definicoes dos webservices
         /// </summary>
@@ -353,7 +363,18 @@ namespace NFe.Components
             /// -ped-sitnfse.xml
             /// </summary>
             public const string PedSitNfse = "-ped-sitnfse.xml";
+            /// <summary>
+            /// -ped-urlnfse.xml x -urlnfse.xml
+            /// </summary>
+            public const string PedURLNfse = "-ped-urlnfse.xml";
             #endregion
+
+            #region Extensões Gerais
+           
+            public const string ConfigEmp = "-configemp.xml";
+            public const string ConsCertificado = "-cons-certificado.xml";
+
+            #endregion 
         }
         #endregion
 
@@ -533,7 +554,7 @@ namespace NFe.Components
             /// <summary>
             /// -lotrps.err
             /// </summary>
-            public const string LoteRps_ERR = "-lotrps.err";
+            public const string LoteRps_ERR = "-loterps.err";
             /// <summary>
             /// -sitloterps.xml
             /// </summary>
@@ -558,6 +579,14 @@ namespace NFe.Components
             /// -sitnfserps.err
             /// </summary>
             public const string SitNfseRps_ERR = "-sitnfserps.err";
+            /// <summary>
+            /// -urlnfse.xml x -ped-urlnfse.xml
+            /// </summary>
+            public const string Urlnfse = "-urlnfse.xml";
+            /// <summary>
+            /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
+            /// </summary>
+            public const string Urlnfse_ERR = "-urlnfse.err";
             #endregion
         }
         #endregion

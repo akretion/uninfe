@@ -73,7 +73,17 @@ namespace NFe.Threadings
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion
+
             }
+
+            #region Pasta Geral
+
+            fsw.Add(new FileSystemWatcher(Path.Combine(System.Windows.Forms.Application.StartupPath, "Geral"), "*.xml"));
+            fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
+            fsw[fsw.Count - 1].StartWatch();
+
+            #endregion
+
         }
         #endregion
 
@@ -87,9 +97,11 @@ namespace NFe.Threadings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 26/04/2011
         /// </remarks>
-        private int LocalizaEmpresa(FileInfo fi)
+        private int LocalizaEmpresa(FileInfo fi, bool lCadastrandoEmpresa)
         {
-            int empresa = -1;
+            int  empresa = -1;
+            int  lQtRodou = -1;
+            bool lEncontrouEmp = false;
 
             try
             {
@@ -109,9 +121,17 @@ namespace NFe.Threadings
                         fullName == Empresa.Configuracoes[i].PastaValidar.ToLower())
                     {
                         empresa = i;
+                        lEncontrouEmp = true;
                         break;
                     }
+
+                    lQtRodou += 1;
+
                 }
+
+                // caso ele nao axe a empresa ele vai posicionar no ultimo mais somente se estiver cadastrando pela pasta geral.
+                if (lCadastrandoEmpresa == true && lEncontrouEmp == false)
+                    empresa = lQtRodou + 1;
             }
             catch
             {
@@ -130,7 +150,25 @@ namespace NFe.Threadings
         {
             try
             {
-                int empresa = LocalizaEmpresa(fi);
+                int empresa;
+                bool lCadastrandoEmp = false;
+                string arq = fi.FullName.ToLower();
+
+
+                /// verifica se esta cadastrando uma nova empresa - Renan
+                if (fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
+                {
+                    //encerra o UniNFe no arquivo -sair.xmls
+                    if (arq.EndsWith("-sair.xml"))
+                    {
+                        File.Delete(fi.FullName);
+                        Environment.Exit(0);
+                    }
+                    else
+                        lCadastrandoEmp = true;
+                }
+
+                empresa = LocalizaEmpresa(fi, lCadastrandoEmp);
 
                 if (empresa >= 0)
                 {

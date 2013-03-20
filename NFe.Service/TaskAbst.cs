@@ -301,6 +301,12 @@ namespace NFe.Service
                     retorna = "Nfse";
                     break;
                 #endregion
+
+                #region Blumenau-SC
+                case PadroesNFSe.BLUMENAU_SC:
+                    retorna = "LoteNFe";
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -633,13 +639,45 @@ namespace NFe.Service
                         case Servicos.RecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
+                        case Servicos.ConsultarURLNfse:
+                            retorna = "ConsultarUrlVisualizacaoNfse";
+                            break;
                     }
                     break;
                 #endregion
 
-                #region ISSNET
+                #region ISSONLINE
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Execute";
+                    break;
+                #endregion
+
+                #region Blumenau-SC
+                case PadroesNFSe.BLUMENAU_SC:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultaLote";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultaNFeEmitidas";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNFe";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaInformacoesLote";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelamentoNFe";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            if (Empresa.Configuracoes[new FindEmpresaThread(Thread.CurrentThread).Index].tpAmb == Propriedade.TipoAmbiente.taHomologacao)
+                                retorna = "TesteEnvioLoteRPS";
+                            else
+                                retorna = "EnvioLoteRPS";
+                            break;
+                    }
                     break;
                 #endregion
             }
@@ -1290,6 +1328,5 @@ namespace NFe.Service
             }
         }
         #endregion
-
     }
 }

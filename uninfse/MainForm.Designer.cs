@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
@@ -36,8 +37,9 @@
             this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMunicipios = new System.Windows.Forms.ToolStripButton();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.tbLogs = new System.Windows.Forms.ToolStripButton();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
             this.tbRestartServico = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,12 +48,11 @@
             this.configuraçõesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.vaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreOUniNFeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbLogs = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -99,7 +100,7 @@
             // 
             this.toolStripButton_sobre.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_sobre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_sobre.Image = global::uninfse.Properties.Resources.uninfe128;
+            //this.toolStripButton_sobre.Image = global::uninfse.Properties.Resources.uninfse2_128;
             this.toolStripButton_sobre.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_sobre.Name = "toolStripButton_sobre";
             this.toolStripButton_sobre.Size = new System.Drawing.Size(52, 52);
@@ -134,10 +135,21 @@
             this.btnMunicipios.Text = "Municípios";
             this.btnMunicipios.Click += new System.EventHandler(this.btnMunicipios_Click);
             // 
+            // tbLogs
+            // 
+            this.tbLogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbLogs.Image = ((System.Drawing.Image)(resources.GetObject("tbLogs.Image")));
+            this.tbLogs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbLogs.Name = "tbLogs";
+            this.tbLogs.Size = new System.Drawing.Size(52, 52);
+            this.tbLogs.Text = "toolStripButton1";
+            this.tbLogs.ToolTipText = "Visualiza os logs";
+            this.tbLogs.Click += new System.EventHandler(this.tbLogs_Click);
+            // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFSe, de um duplo clique ou pressione o botão direito d" +
-    "o mouse sobre o ícone.";
+                "o mouse sobre o ícone.";
             this.notifyIcon1.BalloonTipTitle = "UniNFSe - Monitor de Notas Fiscais de Serviços Eletrônicas";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -161,26 +173,26 @@
             this.toolStripSeparator1,
             this.sairToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 248);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 226);
             // 
             // tbPararServico
             // 
             this.tbPararServico.Name = "tbPararServico";
-            this.tbPararServico.Size = new System.Drawing.Size(354, 22);
+            this.tbPararServico.Size = new System.Drawing.Size(185, 22);
             this.tbPararServico.Text = "Parar o serviço";
             this.tbPararServico.Click += new System.EventHandler(this.tbPararServico_Click);
             // 
             // tbRestartServico
             // 
             this.tbRestartServico.Name = "tbRestartServico";
-            this.tbRestartServico.Size = new System.Drawing.Size(354, 22);
+            this.tbRestartServico.Size = new System.Drawing.Size(185, 22);
             this.tbRestartServico.Text = "Reiniciar o serviço";
             this.tbRestartServico.Click += new System.EventHandler(this.tbRestartServico_Click);
             // 
             // tbSeparator1
             // 
             this.tbSeparator1.Name = "tbSeparator1";
-            this.tbSeparator1.Size = new System.Drawing.Size(351, 6);
+            this.tbSeparator1.Size = new System.Drawing.Size(182, 6);
             // 
             // toolStripMenuItem1
             // 
@@ -213,6 +225,13 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(182, 6);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(185, 22);
+            this.toolStripMenuItem3.Text = "Logs";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
@@ -238,24 +257,6 @@
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.sairToolStripMenuItem.Text = "Fechar o UniNFSe";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
-            // 
-            // tbLogs
-            // 
-            this.tbLogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbLogs.Image = ((System.Drawing.Image)(resources.GetObject("tbLogs.Image")));
-            this.tbLogs.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbLogs.Name = "tbLogs";
-            this.tbLogs.Size = new System.Drawing.Size(52, 52);
-            this.tbLogs.Text = "toolStripButton1";
-            this.tbLogs.ToolTipText = "Visualiza os logs";
-            this.tbLogs.Click += new System.EventHandler(this.tbLogs_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(185, 22);
-            this.toolStripMenuItem3.Text = "Logs";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // MainForm
             // 

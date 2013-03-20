@@ -1021,6 +1021,7 @@
       <ConsultarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
     </LocalHomologacao>
     <LocalProducao>
       <RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>
@@ -1029,6 +1030,7 @@
       <ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam o padrão ISSOnLine -->
@@ -1048,6 +1050,24 @@
       <ConsultarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3502804" Nome="Aracatuba - SP" UF="SP">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam padrões próprios -->

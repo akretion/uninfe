@@ -501,8 +501,8 @@ namespace NFe.Components
 
                                     //PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr), "");
                                     //PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr), "");
-                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr), "");
-                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr), "");
+                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
+                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
 
                                     webServicesList.Add(wsItem);
                                 }
@@ -742,6 +742,7 @@ namespace NFe.Components
                 this.NFeStatusServico = 
                 this.NFeRegistroDeSaida =
                 this.NFeRegistroDeSaidaCancelamento =
+                this.ConsultarURLNfse =
                 this.RecepcionarLoteRps = string.Empty;
         }
 
@@ -795,5 +796,9 @@ namespace NFe.Components
         /// Cancelar NFS-e
         /// </summary>
         public string CancelarNfse { get; set; }
+        /// <summary>
+        /// Consulta URL de Visualização da NFSe
+        /// </summary>
+        public string ConsultarURLNfse { get; set; }
     }
 }

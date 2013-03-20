@@ -17,7 +17,8 @@
     <ManifestKeyFile>uninfe_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>unicte.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -171,14 +172,10 @@
     <None Include="Resources\pdf3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\unicte128.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\unicte.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\update48x48.png" />
     <None Include="Resources\windows_view_detail 48x48.png" />
+    <None Include="Resources\unicte128.png" />
+    <None Include="Resources\unicte.ico" />
     <Content Include="unicte.ico" />
     <Content Include="UniNfeSobre.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

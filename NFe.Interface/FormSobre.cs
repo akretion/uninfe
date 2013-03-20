@@ -18,6 +18,25 @@ namespace NFe.Interface
         {
             InitializeComponent();
 
+            switch (NFe.Components.Propriedade.TipoAplicativo)
+            {
+                case NFe.Components.TipoAplicativo.Cte:
+                    this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.unicte128;
+                    this.Icon = global::NFe.Interface.Properties.Resources.unicte;
+                    break;
+
+                case NFe.Components.TipoAplicativo.Nfe:
+                    this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.uninfe128;
+                    this.Icon = global::NFe.Interface.Properties.Resources.uninfe;
+                    break;
+
+                case NFe.Components.TipoAplicativo.Nfse:
+                    this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.uninfe128;
+                    this.Icon = global::NFe.Interface.Properties.Resources.uninfe;
+                    break;
+            }
+            
+
             this.textBox_versao.Text = Propriedade.Versao;
             lblDescricaoAplicacao.Text = Propriedade.DescricaoAplicacao;
             lblNomeAplicacao.Text = Propriedade.NomeAplicacao;

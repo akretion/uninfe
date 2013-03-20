@@ -73,6 +73,12 @@ namespace NFe.Service
                                 IsConnectedToInternet();
                                 this.DirecionarArquivo(arquivo, new NFSe.TaskRecepcionarLoteRps());
                                 break;
+
+                            case Servicos.ConsultarURLNfse:
+                                CertVencido(emp);
+                                IsConnectedToInternet();
+                                this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarURLNfse());
+                                break;
                         }
                         #endregion
                     }
@@ -212,6 +218,14 @@ namespace NFe.Service
                         case Servicos.AlterarConfiguracoesUniNFe:
                             AlterarConfiguracoesUniNFe(arquivo);
                             break;
+
+                        case Servicos.CadastrarEmpresa:
+                            CadastrarEmpresa(arquivo);
+                            break;
+
+                        case Servicos.ConsultaGeral:
+                            ConsultarGeral(arquivo);
+                            break;
                     }
                     #endregion
                 }
@@ -248,7 +262,7 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 27/04/2011
         /// </remarks>
-        private Servicos DefinirTipoServico(int empresa, string fullPath)
+        public Servicos DefinirTipoServico(int empresa, string fullPath)
         {
             Servicos tipoServico = Servicos.Nulo;
 
@@ -256,146 +270,165 @@ namespace NFe.Service
             {
                 string arq = fullPath.ToLower().Trim();
 
-                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
+                if (arq.IndexOf(Propriedade.ExtEnvio.ConfigEmp) >= 0)
                 {
-                    tipoServico = Servicos.AssinarValidar;
+                    tipoServico = Servicos.CadastrarEmpresa;
+                }
+                else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCertificado) >= 0)
+                {
+                    tipoServico = Servicos.ConsultaGeral;
                 }
                 else
                 {
-                    if (arq.IndexOf(Propriedade.ExtEnvio.PedSit_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSit_TXT) >= 0)
+                    if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
                     {
-                        tipoServico = Servicos.PedidoConsultaSituacaoNFe;
+                        tipoServico = Servicos.AssinarValidar;
                     }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSta_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSta_TXT) >= 0)
+                    else
                     {
-                        tipoServico = Servicos.PedidoConsultaStatusServicoNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCad_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsCad_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultaCadastroContribuinte;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedCan_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedCan_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.CancelarNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedInu_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedInu_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.InutilizarNumerosNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedRec_XML) >= 0)
-                    {
-                        tipoServico = Servicos.PedidoSituacaoLoteNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe) >= 0)
-                    {
-                        FileInfo infArq = new FileInfo(arq);
-                        string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
-                        string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvioEmLote).ToLower().Trim();
-                        string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvio).ToLower().Trim();
-
-                        //Remover a subpasta temp
-                        if (pastaArq.EndsWith("\\temp"))
-                            pastaArq = Path.GetDirectoryName(pastaArq);
-
-                        //Definir o serviço
-                        if (pastaArq == pastaLote)
-                            tipoServico = Servicos.AssinarValidarNFe;
-                        else if (pastaArq == pastaEnvio)
-                            tipoServico = Servicos.MontarLoteUmaNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.ConverterTXTparaXML;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLot) >= 0)
-                    {
-                        tipoServico = Servicos.EnviarLoteNfe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.GerarChaveNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.WSExiste;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.EnviarDPEC;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultarDPEC;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.AlterarConfiguracoesUniNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultaInformacoesUniNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.EnviarCCe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.EnviarEventoCancelamento;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.EnviarManifDest;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultaNFDest;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.DownloadNFe;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.RegistroDeSaida;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_TXT) >= 0)
-                    {
-                        tipoServico = Servicos.RegistroDeSaidaCancelamento;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.MontarLote) >= 0)
-                    {
-                        if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                        if (arq.IndexOf(Propriedade.ExtEnvio.PedSit_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSit_TXT) >= 0)
                         {
-                            tipoServico = Servicos.MontarLoteVariasNFe;
+                            tipoServico = Servicos.PedidoConsultaSituacaoNFe;
                         }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedSta_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedSta_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.PedidoConsultaStatusServicoNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCad_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsCad_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultaCadastroContribuinte;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedCan_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedCan_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.CancelarNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedInu_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.PedInu_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.InutilizarNumerosNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedRec_XML) >= 0)
+                        {
+                            tipoServico = Servicos.PedidoSituacaoLoteNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe) >= 0)
+                        {
+                            FileInfo infArq = new FileInfo(arq);
+                            string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
+                            string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvioEmLote).ToLower().Trim();
+                            string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvio).ToLower().Trim();
+
+                            //Remover a subpasta temp
+                            if (pastaArq.EndsWith("\\temp"))
+                                pastaArq = Path.GetDirectoryName(pastaArq);
+
+                            //Definir o serviço
+                            if (pastaArq == pastaLote)
+                                tipoServico = Servicos.AssinarValidarNFe;
+                            else if (pastaArq == pastaEnvio)
+                                tipoServico = Servicos.MontarLoteUmaNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.ConverterTXTparaXML;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLot) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarLoteNfe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.GerarChaveNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.WSExiste;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarDPEC;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarDPEC;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultaInformacoesUniNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarCCe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarEventoCancelamento;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarManifDest;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultaNFDest;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.DownloadNFe;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.RegistroDeSaida;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvCancRegistroDeSaida_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.RegistroDeSaidaCancelamento;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.MontarLote) >= 0)
+                        {
+                            if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                            {
+                                tipoServico = Servicos.MontarLoteVariasNFe;
+                            }
+                        }
+                        #region NFS-e
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedLoteRps) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarLoteRps;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedCanNfse) >= 0)
+                        {
+                            tipoServico = Servicos.CancelarNfse;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitLoteRps) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarSituacaoLoteRps;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLoteRps) >= 0)
+                        {
+                            tipoServico = Servicos.RecepcionarLoteRps;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfse) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarNfse;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfseRps) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarNfsePorRps;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedURLNfse) >= 0)
+                        {
+                            tipoServico = Servicos.ConsultarURLNfse;
+                        }
+                        #endregion
+                        #region Configuracoes Gerais
+
                     }
-                    #region NFS-e
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedLoteRps) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultarLoteRps;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedCanNfse) >= 0)
-                    {
-                        tipoServico = Servicos.CancelarNfse;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitLoteRps) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultarSituacaoLoteRps;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLoteRps) >= 0)
-                    {
-                        tipoServico = Servicos.RecepcionarLoteRps;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfse) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultarNfse;
-                    }
-                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfseRps) >= 0)
-                    {
-                        tipoServico = Servicos.ConsultarNfsePorRps;
-                    }
-                    #endregion
+
+                        #endregion
                 }
             }
             catch
@@ -470,6 +503,20 @@ namespace NFe.Service
             try
             {
                 ReconfigurarUniNFe(arquivo);
+            }
+            catch
+            {
+            }
+        }
+        #endregion
+
+        #region CadastrarEmpresa()
+
+        protected void CadastrarEmpresa(string arquivo)
+        {
+            try
+            {
+                CadastraEmpresa(arquivo);
             }
             catch
             {
@@ -816,6 +863,26 @@ namespace NFe.Service
         }
         #endregion
 
+        #region CadastraEmpresa
+        /// <summary>
+        /// Classe responsavel em cadastrar uma nova empresa caso nao exista ela configurada
+        /// </summary>
+        /// <param name="arquivo">Arquivo XML contendo as configuracoes da empresa</param>
+        protected void CadastraEmpresa(string arquivo)
+        {
+            try
+            {
+                ConfiguracaoApp oConfig = new ConfiguracaoApp();
+                oConfig.CadastrarEmpresa(arquivo);
+
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
+
         #region GerarXMLPedRec()
         /// <summary>
         /// Gera o XML de consulta do recibo do lote de notas enviadas
@@ -1138,6 +1205,27 @@ namespace NFe.Service
                     break;
             }
         }
+        #endregion
+
+        #region ConsultaGeral()
+        protected void ConsultarGeral(string arquivo)
+        {
+            string arq = arquivo.ToLower().Trim();
+
+            if (arq.EndsWith(Propriedade.ExtEnvio.ConsCertificado))
+            {
+                ConsultaCertificados(arquivo);
+            }
+
+            
+        }
+        
+        protected void ConsultaCertificados(string arquivo)
+        {
+            ConfiguracaoApp oConfig = new ConfiguracaoApp();
+            oConfig.CertificadosInstalados(arquivo);
+        }
+
         #endregion
     }
 }

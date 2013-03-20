@@ -46,8 +46,9 @@ namespace NFe.Service
                         Servico = Servicos.EnviarManifDest;
                         break;
                 }
-                foreach (Evento item in oDadosEnvEvento.eventos){
-                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34,1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir caso emitida em modo SCAN - Renan
+                foreach (Evento item in oDadosEnvEvento.eventos)
+                {
+                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir caso emitida em modo SCAN - Renan
                     if (currentEvento != Convert.ToInt32(item.tpEvento))
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
                 }
@@ -64,6 +65,8 @@ namespace NFe.Service
                 {
                     switch (tpEmis)
                     {
+                        case Propriedade.TipoEmissao.teSVCRS:
+                        case Propriedade.TipoEmissao.teSVCSP:
                         case Propriedade.TipoEmissao.teSCAN:
                             //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
                             break;
@@ -71,10 +74,10 @@ namespace NFe.Service
                         case Propriedade.TipoEmissao.teNormal:
                             //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
                             break;
-                            
+
                         default:
-                            //Se não for SCAN nem NORMAL eu vou pegar o tipo de emissão definido nas configurações do UniNFe. Wandrey 15/02/2013
-                            tpEmis = Empresa.Configuracoes[emp].tpEmis;
+                            //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
+                            tpEmis = Propriedade.TipoEmissao.teNormal;
                             break;
                     }
                 }
@@ -90,7 +93,16 @@ namespace NFe.Service
                         tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
+                    object oRecepcaoEvento;
+                    if (Servico != Servicos.EnviarManifDest && ufParaWS == 52)
+                    {
+                        oRecepcaoEvento = wsProxy.CriarObjeto("NfeRecepcaoEvento");
+                    }
+                    else
+                    {
+                        oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
+                    } 
+                        
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg

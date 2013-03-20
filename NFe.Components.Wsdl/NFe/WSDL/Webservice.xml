@@ -295,7 +295,7 @@
       <NFeStatusServico>wsdl\homologacao\SP\HSPNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SP\HSPCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SP\HSPRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalHomologacao>

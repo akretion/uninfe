@@ -112,7 +112,7 @@
             // 
             this.toolStripButton_sobre.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_sobre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_sobre.Image = global::uninfe.Properties.Resources.uninfe;
+            this.toolStripButton_sobre.Image = global::uninfe.Properties.Resources.uninfe128;
             this.toolStripButton_sobre.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_sobre.Name = "toolStripButton_sobre";
             this.toolStripButton_sobre.Size = new System.Drawing.Size(52, 52);
@@ -156,7 +156,7 @@
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFE, de um duplo clique ou pressione o botão direito do" +
-                " mouse sobre o ícone.";
+    " mouse sobre o ícone.";
             this.notifyIcon1.BalloonTipTitle = "UniNFE - Monitor da Nota Fiscal Eletrônica";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));

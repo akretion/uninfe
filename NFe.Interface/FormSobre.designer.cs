@@ -38,12 +38,12 @@
             this.textBox_DataUltimaModificacao = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_versao = new System.Windows.Forms.TextBox();
-            this.btnManualUniNFe = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabelSiteProduto = new System.Windows.Forms.LinkLabel();
             this.linkLabelEmail = new System.Windows.Forms.LinkLabel();
             this.linkLabelSite = new System.Windows.Forms.LinkLabel();
             this.lblEmpresa = new System.Windows.Forms.Label();
+            this.btnManualUniNFe = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,30 +133,6 @@
             this.textBox_versao.Size = new System.Drawing.Size(221, 20);
             this.textBox_versao.TabIndex = 14;
             // 
-            // btnManualUniNFe
-            // 
-            this.btnManualUniNFe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManualUniNFe.Image = global::NFe.Interface.Properties.Resources.pdf3;
-            this.btnManualUniNFe.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnManualUniNFe.Location = new System.Drawing.Point(472, 142);
-            this.btnManualUniNFe.Name = "btnManualUniNFe";
-            this.btnManualUniNFe.Size = new System.Drawing.Size(75, 75);
-            this.btnManualUniNFe.TabIndex = 15;
-            this.btnManualUniNFe.Text = "Manual";
-            this.btnManualUniNFe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnManualUniNFe.UseVisualStyleBackColor = true;
-            this.btnManualUniNFe.Click += new System.EventHandler(this.btnManualUniNFe_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.uninfe128;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.WaitOnLoad = true;
-            // 
             // linkLabelSiteProduto
             // 
             this.linkLabelSiteProduto.AutoSize = true;
@@ -196,6 +172,30 @@
             this.lblEmpresa.Size = new System.Drawing.Size(99, 13);
             this.lblEmpresa.TabIndex = 16;
             this.lblEmpresa.Text = "Unimake Softwares";
+            // 
+            // btnManualUniNFe
+            // 
+            this.btnManualUniNFe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManualUniNFe.Image = global::NFe.Interface.Properties.Resources.pdf3;
+            this.btnManualUniNFe.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnManualUniNFe.Location = new System.Drawing.Point(472, 142);
+            this.btnManualUniNFe.Name = "btnManualUniNFe";
+            this.btnManualUniNFe.Size = new System.Drawing.Size(75, 75);
+            this.btnManualUniNFe.TabIndex = 15;
+            this.btnManualUniNFe.Text = "Manual";
+            this.btnManualUniNFe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnManualUniNFe.UseVisualStyleBackColor = true;
+            this.btnManualUniNFe.Click += new System.EventHandler(this.btnManualUniNFe_Click);
+            // 
+            // pictureBox1
+            //             
+
+            this.pictureBox1.Location = new System.Drawing.Point(13, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
             // 
             // FormSobre
             // 

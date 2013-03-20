@@ -383,8 +383,8 @@ namespace uninfse
                 ID = 27,
                 ArquivoXSD = "NFSe\\ISSNET\\servico_cancelar_nfse_envio.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "tc:InfPedidoCancelamento",
                 TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_cancelar_nfse_envio.xsd"
             });
             #endregion
@@ -416,32 +416,31 @@ namespace uninfse
             });
             #endregion
 
-            #endregion
-
-            #endregion
-
-            #region Schemas padrão ISSNet
-
-            #region APUCARANA_PR
-/*
-            #region XML de Consulta de NFSe por Data
-            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarNfseEnvio", new InfSchema()
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarUrlVisualizacaoNfseEnvio", new InfSchema()
             {
-                Tag = "ConsultarNfseEnvio",
-                ID = 24,
-                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_nfse_envio.xsd",
-                Descricao = "XML de Consulta de NFSe por Data",
+                Tag = "ConsultarUrlVisualizacaoNfseEnvio",
+                ID = 31,
+                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_url_visualizacao_nfse_envio.xsd",
+                Descricao = "XML de Consulta da URL de Visualização da NFSe",
                 TagAssinatura = "",
-                TagAtributoId = "",
-                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_nfse_envio.xsd"
+                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_url_visualizacao_nfse_envio.xsd"
             });
             #endregion
-*/
+
+            #endregion
+
+            #endregion
+
+            #region Schemas padrão ISSOnLine
+
+            #region APUCARANA_PR/ARACATUBA_SP
+
             #region XML de Consulta de NFSe por Rps
             SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-NFSE", new InfSchema()
             {
                 Tag = "NFSE",
-                ID = 31,
+                ID = 32,
                 ArquivoXSD = "",
                 Descricao = "XML de NFSe padrão ISSOnLine",
                 TagAssinatura = "",
@@ -449,65 +448,90 @@ namespace uninfse
                 TargetNameSpace = ""
             });
             #endregion
-/*
-            #region XML de Consulta de Lote RPS
-            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarLoteRpsEnvio", new InfSchema()
+
+            #endregion
+
+            #endregion
+
+            #region BLUMENAU_SC
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-p1:PedidoConsultaNFePeriodo", new InfSchema()
             {
-                Tag = "ConsultarLoteRpsEnvio",
-                ID = 26,
-                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_lote_rps_envio.xsd",
+                Tag = "p1:PedidoConsultaNFePeriodo",
+                ID = 33,
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaNFePeriodo_v01.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "p1:PedidoConsultaNFePeriodo",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-p1:PedidoConsultaNFe", new InfSchema()
+            {
+                Tag = "p1:PedidoConsultaNFe",
+                ID = 34,
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaNFe_v01.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "p1:PedidoConsultaNFe",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-p1:PedidoConsultaLote", new InfSchema()
+            {
+                Tag = "p1:PedidoConsultaLote",
+                ID = 35,
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaLote_v01.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_lote_rps_envio.xsd"
+                TagAssinatura = "p1:PedidoConsultaLote",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
             });
             #endregion
 
             #region XML de Cancelamento de NFS-e
-            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-p1:CancelarNfseEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-PedidoCancelamentoNFe", new InfSchema()
             {
-                Tag = "p1:CancelarNfseEnvio",
-                ID = 27,
-                ArquivoXSD = "NFSe\\ISSNET\\servico_cancelar_nfse_envio.xsd",
+                Tag = "PedidoCancelamentoNFe",
+                ID = 36,
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoCancelamentoNFe_v01.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_cancelar_nfse_envio.xsd"
+                TagAssinatura = "PedidoCancelamentoNFe",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
             });
             #endregion
 
             #region XML de Consulta Situação do Lote RPS
-            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-p1:PedidoInformacoesLote", new InfSchema()
             {
-                Tag = "ConsultarSituacaoLoteRpsEnvio",
-                ID = 29,
-                ArquivoXSD = "NFSe\\ISSNET\\servico_consultar_situacao_lote_rps_envio.xsd",
+                Tag = "p1:PedidoInformacoesLote",
+                ID = 37,
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoInformacoesLote_v01.xsd",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
-                TagAssinatura = "",
-                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_consultar_situacao_lote_rps_envio.xsd"
+                TagAssinatura = "p1:PedidoInformacoesLote",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
             });
             #endregion
 
             #region XML de lote RPS
-            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE-EnviarLoteRpsEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-PedidoEnvioLoteRPS", new InfSchema()
             {
-                Tag = "EnviarLoteRpsEnvio",
+                Tag = "PedidoEnvioLoteRPS",
                 ID = 30,
-                ArquivoXSD = "NFSe\\ISSNET\\servico_enviar_lote_rps_envio.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoEnvioLoteRPS_v01.xsd",
                 Descricao = "XML de Lote RPS",
-                TagAssinatura = "tc:Rps",
-                TagAtributoId = "tc:InfRps",
-                TagLoteAssinatura = "EnviarLoteRpsEnvio",
-                TagLoteAtributoId = "LoteRps",
-                TargetNameSpace = "http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_enviar_lote_rps_envio.xsd"
+                TagAssinatura = "PedidoEnvioLoteRPS",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
             });
             #endregion
- */
-
-            #endregion
-
-            #endregion
-
 
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
@@ -516,6 +540,8 @@ namespace uninfse
                 if (item.ID > SchemaXML.MaxID)
                     SchemaXML.MaxID = item.ID;
             }
+            #endregion
+
             #endregion
         }
     }

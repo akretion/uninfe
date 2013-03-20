@@ -80,6 +80,10 @@ namespace NFe.Service.NFSe
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
+                    case PadroesNFSe.BLUMENAU_SC:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        break;
 
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");

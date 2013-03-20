@@ -252,9 +252,6 @@
     <None Include="Resources\pdf3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\uninfe128.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
       <Project>{C045A27F-415B-4F7D-8B9B-2956589932C8}</Project>
       <Name>NFe.Certificado</Name>
@@ -321,6 +318,18 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unicte128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unicte.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

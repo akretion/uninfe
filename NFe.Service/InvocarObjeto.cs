@@ -400,7 +400,7 @@ namespace NFe.Service
                 string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
                 if (cResultadoValidacao != "")
                 {
-                    //  throw new Exception(cResultadoValidacao);
+                    throw new Exception(cResultadoValidacao);
                 }
 
                 // Montar o XML de Lote de envio de Notas fiscais
@@ -444,6 +444,7 @@ namespace NFe.Service
                     //Invocar o membro
                     switch (padraoNFSe)
                     {
+                        #region Padrão BETHA
                         case PadroesNFSe.BETHA:
                             switch (cMetodo)
                             {
@@ -472,9 +473,12 @@ namespace NFe.Service
                                     break;
                             }
                             break;
+                        #endregion
 
+                        #region Padrão ISSONLINE
                         case PadroesNFSe.ISSONLINE:
                             int operacao;
+                            string senhaWs = Functions.GetMD5Hash(Empresa.Configuracoes[emp].SenhaWS);
 
                             switch (servicoNFSe)
                             {
@@ -489,9 +493,17 @@ namespace NFe.Service
                                     break;
                             }
 
-                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Convert.ToSByte(operacao), Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, docXML.OuterXml });
+                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Convert.ToSByte(operacao), Empresa.Configuracoes[emp].UsuarioWS, senhaWs, docXML.OuterXml });
                             break;
+                        #endregion
 
+                        #region Padrão Blumenau-SC
+                        case PadroesNFSe.BLUMENAU_SC:
+                            strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { 1, docXML.OuterXml });
+                            break;
+                        #endregion
+
+                        #region Demais padrões
                         case PadroesNFSe.GINFES:
                         case PadroesNFSe.THEMA:
                         case PadroesNFSe.SALVADOR_BA:
@@ -504,6 +516,7 @@ namespace NFe.Service
                                 strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
 
                             break;
+                        #endregion
                     }
                 }
                 catch (Exception ex)

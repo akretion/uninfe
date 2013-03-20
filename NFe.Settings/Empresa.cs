@@ -415,9 +415,6 @@ namespace NFe.Settings
                     arqXml = null;
 
 
-
-                    if (!ExisteErroDiretorio)
-                        Empresa.CriarPasta();
                 }
                 catch (Exception ex)
                 {
@@ -429,6 +426,19 @@ namespace NFe.Settings
                         arqXml.Close();
                 }
             }
+
+            if (!Directory.Exists(Propriedade.PastaGeral))
+                Directory.CreateDirectory(Propriedade.PastaGeral);
+
+            if (!Directory.Exists(Propriedade.PastaGeral + "\\Retorno"))
+                Directory.CreateDirectory(Propriedade.PastaGeral + "\\Retorno");
+
+            if (!Directory.Exists(Propriedade.PastaGeral + "\\Temp"))
+                Directory.CreateDirectory(Propriedade.PastaGeral + "\\Temp");
+
+            if (!ExisteErroDiretorio)
+                Empresa.CriarPasta();
+
         }
         #endregion
 
@@ -801,7 +811,7 @@ namespace NFe.Settings
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>29/09/2009</date>
-        private static void CriarPasta()
+        public static void CriarPasta()
         {
             try
             {

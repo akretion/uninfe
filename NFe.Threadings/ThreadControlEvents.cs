@@ -33,6 +33,16 @@ namespace NFe.Threadings
 
             //Servicos tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
             new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);//, tipoServico);
+
+            //Se estiver cadastrando empresas tem que reinciar as thread's - Renan
+            Processar servico = new Processar();
+            Servicos servicos = servico.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
+
+            if (Servicos.CadastrarEmpresa == servicos || Servicos.AlterarConfiguracoesUniNFe == servicos)
+            {
+                ThreadService.Stop();
+                ThreadService.Start();
+            }
         }
         #endregion
 

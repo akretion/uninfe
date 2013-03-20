@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using System.Linq;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
@@ -269,36 +270,36 @@ namespace NFe.Settings
         public static bool TemCCe(string cUF, int tpAmb, int tpEmis)
         {
             bool retorna = true;
-/*
-            if (tpEmis != Propriedade.TipoEmissao.teNormal)
-                return retorna;
+            /*
+                        if (tpEmis != Propriedade.TipoEmissao.teNormal)
+                            return retorna;
 
-            foreach (var item in WebServiceProxy.webServicesList)
-            {
-                if (item.ID.ToString() == cUF)
-                {
-                    switch (tpAmb)
-                    {
-                        case Propriedade.TipoAmbiente.taHomologacao:
-                            if (!string.IsNullOrEmpty(item.LocalHomologacao.NFeCCe))
+                        foreach (var item in WebServiceProxy.webServicesList)
+                        {
+                            if (item.ID.ToString() == cUF)
                             {
-                                retorna = true;
-                            }
-                            break;
+                                switch (tpAmb)
+                                {
+                                    case Propriedade.TipoAmbiente.taHomologacao:
+                                        if (!string.IsNullOrEmpty(item.LocalHomologacao.NFeCCe))
+                                        {
+                                            retorna = true;
+                                        }
+                                        break;
 
-                        case Propriedade.TipoAmbiente.taProducao:
-                            if (!string.IsNullOrEmpty(item.LocalProducao.NFeCCe))
-                            {
-                                retorna = true;
-                            }
-                            break;
+                                    case Propriedade.TipoAmbiente.taProducao:
+                                        if (!string.IsNullOrEmpty(item.LocalProducao.NFeCCe))
+                                        {
+                                            retorna = true;
+                                        }
+                                        break;
 
-                        default:
-                            break;
-                    }
-                }
-            }
- */
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+             */
 
             return retorna;
         }
@@ -677,6 +678,9 @@ namespace NFe.Settings
                         case Servicos.CancelarNfse:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CancelarNfse : list.LocalProducao.CancelarNfse);
                             break;
+                        case Servicos.ConsultarURLNfse:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
+                            break;
                         #endregion
                     }
                     if (tipoEmissao == Propriedade.TipoEmissao.teDPEC)  //danasa 21/10/2010
@@ -732,12 +736,13 @@ namespace NFe.Settings
                         switch (servico)
                         {
                             case Servicos.CancelarNfse:
+                            case Servicos.ConsultarURLNfse:
                             case Servicos.ConsultarLoteRps:
                             case Servicos.ConsultarNfse:
                             case Servicos.ConsultarNfsePorRps:
                             case Servicos.ConsultarSituacaoLoteRps:
                             case Servicos.RecepcionarLoteRps:
-                                throw new Exception(string.Format(errorStr, "da NFs-e"));
+                                throw new Exception(string.Format(errorStr, "da NFS-e"));
                         }
                         throw new Exception(string.Format(errorStr, "4.0.1 da NF-e"));
                 }
@@ -897,7 +902,8 @@ namespace NFe.Settings
 
                     if (empresa.CertificadoInstalado)
                     {
-                        oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.X509Certificado.Thumbprint);
+                        //oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.X509Certificado.Thumbprint);
+                        oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.CertificadoThumbPrint);
                     }
 
                     oXmlGravar.WriteElementString(NFeStrConstants.UsuarioWS, empresa.UsuarioWS.ToString());
@@ -1771,6 +1777,47 @@ namespace NFe.Settings
                             lEncontrouTag = true;
                         }
                         #endregion
+
+                        #region --Certificado Digital
+
+                        //Se a tag <CertificadoInstalado> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].CertificadoInstalado = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado)[0].InnerText);
+                            lEncontrouTag = true;
+                        }
+
+                        //Se a tag <CertificadoArquivo> existir ele pega o novo conteúdo
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].CertificadoArquivo = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo)[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <CertificadoSenha> existir ele pega o novo conteudo
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].CertificadoSenha = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <certificado> existir ele pega o novo conteudo
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].Certificado = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+                        //Se a tag <CertificadoDigitalThumbPrint> existir ele pega o novo conteudo
+                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint).Count != 0)
+                        {
+                            Empresa.Configuracoes[emp].CertificadoThumbPrint = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint)[0].InnerText;
+                            lEncontrouTag = true;
+                        }
+
+                        /// <summary>
+                        /// Certificado digital
+                        /// </summary>
+                        /// public X509Certificate2 X509Certificado { get; set; }
+
+                        #endregion
                     }
                     #endregion
                 }
@@ -1788,6 +1835,12 @@ namespace NFe.Settings
                 {
                     try
                     {
+                        //Se estiver cadastrando uma empresa vou forçar a criar todas as pastas. - Renan Borges
+                        if (cArquivoXml.IndexOf(Propriedade.ExtEnvio.ConfigEmp) >= 0)
+                        {
+                            Empresa.CriarPasta();
+                        }
+
                         //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
                         this.GravarConfig(false, false);
 
@@ -1885,9 +1938,9 @@ namespace NFe.Settings
         #region RemoveEndSlash
         public static string RemoveEndSlash(string value)
         {
-            return RemoveEndSlash(value, false);             
+            return RemoveEndSlash(value, false);
         }
-        #endregion 
+        #endregion
 
         #region RemoveEndSlash
         /// <summary>
@@ -1915,6 +1968,359 @@ namespace NFe.Settings
             }
 
             return value.Replace("\r\n", "").Trim();
+        }
+        #endregion
+
+        #region CadastrarEmpresa()
+        public void CadastrarEmpresa(string arqXML)
+        {
+            #region Criar XML de cadastro da Empresa
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arqXML);
+
+            string CNPJ = "";
+            string NomeEmp = "";
+
+            foreach (XmlElement item in doc.DocumentElement)
+            {
+                CNPJ = doc.DocumentElement.SelectNodes("Registro")[0].Attributes["CNPJ"].Value;
+
+                if (item.GetElementsByTagName("Nome").Count != 0)
+                {
+                    NomeEmp = item.GetElementsByTagName("Nome")[0].InnerText;
+                }
+            }
+
+            if (CriaXMLConfigEmpresa(CNPJ, NomeEmp) == false)
+            {
+                this.ReconfigurarUniNFe(arqXML);
+            }
+
+            #endregion
+
+        }
+        #endregion
+
+        #region CriaXMLConfigEmpresa()
+        /// <summary>
+        /// Cria o XML EmpresaUniNfe.xml e cadastra a empresa do xml de configuracao
+        /// </summary>
+        /// <param name="pCNPJ">CNPJ a ser cadastrado</param>
+        /// <param name="pNomeEmp">Nome da empresa a ser cadastrada</param>
+        /// <author>Renan Borges - Unimake Software</author>
+        private bool CriaXMLConfigEmpresa(string pCNPJ, string pNomeEmp)
+        {
+            string cStat = "";
+            string xMotivo = "";
+            string pathEmp = Propriedade.PastaExecutavel + "\\" + pCNPJ.Trim();
+            string empCad = Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml";
+            string NomeEmp = pNomeEmp;
+
+            bool lExisteCadEmpresa = false;
+            bool lErro = false;
+
+            try
+            {
+
+                if (File.Exists(empCad))
+                {
+                    #region Verifica se existe o cadastro da Empresa
+
+                    XDocument xml = XDocument.Load(empCad);
+
+                    var Atributos = from item in xml.Element("Empresa").Elements("Registro")
+                                    select item.FirstAttribute.Value;
+
+                    foreach (var cnpjs in Atributos)
+                    {
+                        if (cnpjs == pCNPJ)
+                        {
+                            cStat = "2";
+                            xMotivo = "Não foi possivel cadastrar a Empresa, a mesma ja se encontra Cadastrada no " + Propriedade.NomeAplicacao;
+
+                            lExisteCadEmpresa = true;
+                        }
+                    }
+
+                    #endregion
+
+                }
+                else
+                {
+                    #region Cria XML do cadastro de empresas
+                    XmlDocument ConfigEmp = new XmlDocument();
+
+                    XmlNode raiz = ConfigEmp.CreateElement("Empresa");
+                    ConfigEmp.AppendChild(raiz);
+
+                    ConfigEmp.Save(empCad);
+
+                    #endregion
+
+                }
+
+                if (lExisteCadEmpresa == false)
+                {
+                    //apos criado ele vai adcionar o cadastro da empresa
+                    AdicionarEmpresa(empCad, pCNPJ, NomeEmp);
+
+                    if (!Directory.Exists(pathEmp))
+                    {
+                        Directory.CreateDirectory(pathEmp);
+                    }
+
+                    this.GravarConfigEmpresa();
+
+                    // tem que forcar carregar as configuracoes da empresa se nao tinha pois vai dar erro na hora de carregar as propriedades da empresa
+                    Empresa.CarregaConfiguracao();
+                }
+            }
+            catch (Exception ex)
+            {
+                cStat = "2";
+                xMotivo = "Ocorreu uma falha ao tentar Cadastrar a Empresa do " + Propriedade.NomeAplicacao + ": " + ex.Message;
+                lErro = true;
+            }
+
+            #region Arquivo de Retorno do Cadastro da Empresa
+
+            //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
+            string cArqRetorno = Propriedade.PastaGeral + "\\Retorno\\" + "uninfe-ret-configemp.xml";
+
+            try
+            {
+                FileInfo oArqRetorno = new FileInfo(cArqRetorno);
+                if (oArqRetorno.Exists == true)
+                {
+                    oArqRetorno.Delete();
+                }
+
+                if (!lErro && !lExisteCadEmpresa)
+                {
+                    cStat = "1";
+                    xMotivo = "Empresa cadastrada com sucesso no " + Propriedade.NomeAplicacao;
+                }
+
+                XmlWriterSettings oSettings = new XmlWriterSettings();
+                UTF8Encoding c = new UTF8Encoding(false);
+
+                oSettings.Encoding = c;
+                oSettings.Indent = true;
+                oSettings.IndentChars = "";
+                oSettings.NewLineOnAttributes = false;
+                oSettings.OmitXmlDeclaration = false;
+
+                XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
+
+                oXmlGravar.WriteStartDocument();
+                oXmlGravar.WriteStartElement("retCadConfUniNFe");
+                oXmlGravar.WriteElementString("cStat", cStat);
+                oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                oXmlGravar.WriteEndElement(); //retAltConfUniNFe
+                oXmlGravar.WriteEndDocument();
+                oXmlGravar.Flush();
+                oXmlGravar.Close();
+            }
+
+            catch (Exception ex)
+            {
+                //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
+                Auxiliar oAux = new Auxiliar();
+                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
+            }
+
+
+            #endregion
+
+            return lExisteCadEmpresa;
+        }
+        #endregion
+
+        #region AdicionarEmpresa(empCad, pCNPJ, pNome)
+        /// <summary>
+        /// Adiciona o cadastro da empresa no XML EmpresaUniNFe.XML
+        /// </summary>
+        /// <param name="empCad">Caminho XML de cadastros das empresas usado pelo UniNFe</param>
+        /// <param name="pCNPJ">Novo CNPJ a ser cadastrado</param>
+        /// <param name="pNome">Nome da empresa</param>
+        /// <author>Renan Borges - Unimake Software</author>
+        private void AdicionarEmpresa(string empCad, string pCNPJ, string pNome)
+        {
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(empCad);
+
+            XmlNode Registro = doc.CreateElement("Registro");
+
+            XmlAttribute CNPJ = doc.CreateAttribute("CNPJ");
+            CNPJ.Value = pCNPJ;
+            Registro.Attributes.Append(CNPJ);
+
+            XmlNode Nome = doc.CreateElement("Nome");
+            Nome.InnerText = pNome;
+
+            doc.SelectSingleNode("Empresa").AppendChild(Registro);
+            Registro.AppendChild(Nome);
+
+            doc.Save(empCad);
+
+
+        }
+        #endregion
+
+        #region CertificadosInstalados()
+        public void CertificadosInstalados(string arquivo)
+        {
+            bool lConsultar = false;
+            bool lErro = false;
+            string arqRet = "uninfe-ret-cons-certificado.xml";
+            string tmp_arqRet = Path.Combine(Propriedade.PastaGeralTemporaria, arqRet);
+            string cStat = "";
+            string xMotivo = "";
+
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivo);
+
+                foreach (XmlElement item in doc.DocumentElement)
+                {
+                    lConsultar = doc.DocumentElement.GetElementsByTagName("xServ")[0].InnerText.Equals("CONS-CERTIFICADO", StringComparison.InvariantCultureIgnoreCase);
+                }
+
+                if (lConsultar)
+                {
+                    X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+                    store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                    X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+                    X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+                    X509Certificate2Collection collection2 = (X509Certificate2Collection)collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.DigitalSignature, false);
+
+                    #region Cria XML de retorno
+                    if (File.Exists(tmp_arqRet))
+                        File.Delete(tmp_arqRet);
+
+                    XmlDocument RetCertificados = new XmlDocument();
+
+                    XmlNode raiz = RetCertificados.CreateElement("Certificados");
+                    RetCertificados.AppendChild(raiz);
+
+                    RetCertificados.Save(tmp_arqRet);
+
+                    #endregion
+
+                    #region Monta XML de Retorno com dados do Certificados Instalaos
+                    for (int i = 0; i < collection2.Count; i++)
+                    {
+                        #region layout retorno
+                        /*laoyut de retorno - Renan Borges
+                        <Certificados> 
+                        <ThumbPrint ID="999..."> 
+                        <Subject>XX...</Subject> 
+                        <ValidadeInicial>dd/dd/dddd</ValidadeInicial> 
+                        <ValidadeFinal>dd/dd/dddd</ValidadeFinal> 
+                        </Certificados>
+                        */
+                        #endregion
+
+                        XmlDocument docGerar = new XmlDocument();
+                        docGerar.Load(tmp_arqRet);
+
+                        XmlNode Registro = docGerar.CreateElement("ThumbPrint");
+                        XmlAttribute IdThumbPrint = docGerar.CreateAttribute("ID");
+                        IdThumbPrint.Value = collection2[i].Thumbprint.ToString();
+                        Registro.Attributes.Append(IdThumbPrint);
+
+                        XmlNode Subject = docGerar.CreateElement("Subject");
+                        XmlNode ValidadeInicial = docGerar.CreateElement("ValidadeInicial");
+                        XmlNode ValidadeFinal = docGerar.CreateElement("ValidadeFinal");
+
+                        Subject.InnerText = collection2[i].Subject.ToString();
+                        ValidadeInicial.InnerText = collection2[i].NotBefore.ToShortDateString();
+                        ValidadeFinal.InnerText = collection2[i].NotAfter.ToShortDateString();
+
+                        docGerar.SelectSingleNode("Certificados").AppendChild(Registro);
+                        Registro.AppendChild(Subject);
+                        Registro.AppendChild(ValidadeInicial);
+                        Registro.AppendChild(ValidadeFinal);
+
+                        docGerar.Save(tmp_arqRet);
+
+                    }
+                    #endregion
+                }
+
+            }
+            catch
+            {
+                cStat = "2";
+                xMotivo = "Nao foi possivel fazer a consulta de Certificados Instalados na estação " + Propriedade.NomeAplicacao;
+                lErro = true;
+                File.Delete(tmp_arqRet);
+            }
+            finally
+            {
+                string cArqRetorno = Propriedade.PastaGeral + "\\Retorno\\" + arqRet;
+
+                #region XML de Retorno para ERP
+                try
+                {
+                    FileInfo oArqRetorno = new FileInfo(cArqRetorno);
+                    if (oArqRetorno.Exists == true)
+                    {
+                        oArqRetorno.Delete();
+                    }
+
+                    if (!lConsultar && !lErro)
+                    {
+                        cStat = "2";
+                        xMotivo = "Nao foi possivel fazer a consulta de Certificados Instalados na estação (xServ não identificado) no " + Propriedade.NomeAplicacao;
+                    }
+
+                    if (lErro || !lConsultar)
+                    {
+                        File.Delete(tmp_arqRet);
+
+                        XmlWriterSettings oSettings = new XmlWriterSettings();
+                        UTF8Encoding c = new UTF8Encoding(false);
+
+                        oSettings.Encoding = c;
+                        oSettings.Indent = true;
+                        oSettings.IndentChars = "";
+                        oSettings.NewLineOnAttributes = false;
+                        oSettings.OmitXmlDeclaration = false;
+
+                        XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
+
+                        oXmlGravar.WriteStartDocument();
+                        oXmlGravar.WriteStartElement("retCadConfUniNFe");
+                        oXmlGravar.WriteElementString("cStat", cStat);
+                        oXmlGravar.WriteElementString("xMotivo", xMotivo);
+                        oXmlGravar.WriteEndElement(); //retAltConfUniNFe
+                        oXmlGravar.WriteEndDocument();
+                        oXmlGravar.Flush();
+                        oXmlGravar.Close();
+
+                    }
+                    else
+                    {
+                        if (File.Exists(cArqRetorno))
+                            File.Delete(cArqRetorno);
+
+                        if (File.Exists(arquivo))
+                            File.Delete(arquivo);
+
+                        File.Move(tmp_arqRet, Propriedade.PastaGeral + "\\Retorno\\" + arqRet);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
+                    Auxiliar oAux = new Auxiliar();
+                    oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
+                }
+                #endregion
+            }
         }
         #endregion
 

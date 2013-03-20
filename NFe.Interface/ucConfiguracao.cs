@@ -352,6 +352,8 @@ namespace NFe.Interface
 
             if (oEmpresa.UFCod == 4101408)
                 HabilitaUsuarioSenhaWS(true);
+            else if(oEmpresa.UFCod == 3502804)
+                HabilitaUsuarioSenhaWS(true);
             else
                 HabilitaUsuarioSenhaWS(false);
 
@@ -584,6 +586,8 @@ namespace NFe.Interface
                 edtPadrao.Text = Functions.PadraoNFSe(Convert.ToInt32(xuf)).ToString();
 
                 if (edtCodMun.Text.Trim() == "4101408")
+                    HabilitaUsuarioSenhaWS(true);
+                else if(edtCodMun.Text.Trim() == "3502804")
                     HabilitaUsuarioSenhaWS(true);
                 else
                     HabilitaUsuarioSenhaWS(false);
