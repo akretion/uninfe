@@ -86,15 +86,31 @@ namespace NFe.Components
             get { return System.IO.Path.GetDirectoryName(Application.ExecutablePath); }
         }
 
+        #region Pastas de comunicação geral do ERP com o UniNFe
+        /// <summary>
+        /// Pasta de comunicação geral do ERP com o UniNFe (Envio)
+        /// </summary>
         public static string PastaGeral
         {
             get{ return Propriedade.PastaExecutavel + "\\Geral"; }
         }
 
+        /// <summary>
+        /// Pasta de comunicação geral do ERP com o UniNFe (Temporária)
+        /// </summary>
         public static string PastaGeralTemporaria
         {
             get { return Propriedade.PastaGeral + "\\Temp"; }
         }
+
+        /// <summary>
+        /// Pasta de comunicação geral do ERP com o UniNFe (Retornos)
+        /// </summary>
+        public static string PastaGeralRetorno
+        {
+            get { return Propriedade.PastaGeral + "\\Retorno"; }
+        }
+        #endregion
 
         /// <summary>
         /// Retorna o XML contendos as definicoes dos webservices

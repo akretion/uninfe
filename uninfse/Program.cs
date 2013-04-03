@@ -18,7 +18,7 @@ namespace uninfse
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
-            if (Aplicacao.AppExecutando())
+            if (Aplicacao.AppExecutando(false))
             {
                 return;
             }

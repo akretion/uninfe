@@ -228,12 +228,18 @@ namespace NFe.Components
         ISSNET,
         /// <summary>
         /// Padrão da prefeitura de Apucarana-PR
+        /// Padrão da prefeitura de Aracatuba-SP
         /// </summary>
         ISSONLINE,
         /// <summary>
         /// Padrão da prefeitura de Blumenau-SC
         /// </summary>
-        BLUMENAU_SC
+        BLUMENAU_SC,
+        /// <summary>
+        /// Padrão da prefeitura de Juiz de Fora-MG
+        /// </summary>
+        BHISS
+
         
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

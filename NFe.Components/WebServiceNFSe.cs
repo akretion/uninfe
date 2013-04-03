@@ -124,6 +124,16 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HBlumenauSC.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
 
+                case PadroesNFSe.BHISS:
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>" +
+                            "</LocalHomologacao>";
+
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
             }
@@ -222,6 +232,16 @@ namespace NFe.Components
                             @"<ConsultarNfse>wsdl\producao\PBlumenauSC.wsdl</ConsultarNfse>" +
                             @"<ConsultarLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>" +
+                            "</LocalProducao>";
+
+                case PadroesNFSe.BHISS:
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
 
                 default:

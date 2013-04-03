@@ -1697,9 +1697,10 @@ namespace NFe.ConvertTxt
                 wCampo(Reboque.placa, TpcnTipoCampo.tcStr, Properties.Resources.placa);
                 wCampo(Reboque.UF, TpcnTipoCampo.tcStr, Properties.Resources.UF);
                 wCampo(Reboque.RNTC, TpcnTipoCampo.tcStr, Properties.Resources.RNTC, ObOp.Opcional);
-                wCampo(Reboque.vagao, TpcnTipoCampo.tcStr, Properties.Resources.vagao, ObOp.Opcional);
-                wCampo(Reboque.balsa, TpcnTipoCampo.tcStr, Properties.Resources.balsa, ObOp.Opcional);
             }
+
+            wCampo(Transp.vagao, TpcnTipoCampo.tcStr, Properties.Resources.vagao, ObOp.Opcional);
+            wCampo(Transp.balsa, TpcnTipoCampo.tcStr, Properties.Resources.balsa, ObOp.Opcional);
 
             //
             //(**)GerarTranspVol;

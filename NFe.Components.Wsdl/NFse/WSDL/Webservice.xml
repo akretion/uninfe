@@ -1107,6 +1107,24 @@
       <CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3136702" Nome="Juiz de Fora - MG" UF="MG">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Sequencia de tag´s de template-->
   <Estado ID="999" Nome="Template" UF="XX">
     <LocalHomologacao>

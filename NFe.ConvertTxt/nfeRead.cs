@@ -394,8 +394,6 @@ namespace NFe.ConvertTxt
                             reboqueInfo.placa = this.readValue(noder, Properties.Resources.placa);
                             reboqueInfo.UF = this.readValue(noder, Properties.Resources.UF);
                             reboqueInfo.RNTC = this.readValue(noder, Properties.Resources.RNTC);
-                            reboqueInfo.vagao = this.readValue(noder, Properties.Resources.vagao);
-                            reboqueInfo.balsa = this.readValue(noder, Properties.Resources.balsa);
 
                             nfe.Transp.Reboque.Add(reboqueInfo);
                         }
@@ -419,6 +417,14 @@ namespace NFe.ConvertTxt
                             }
                             nfe.Transp.Vol.Add(volInfo);
                         }
+                        break;
+
+                    case "vagao":
+                        nfe.Transp.vagao = this.readValue(noder, Properties.Resources.vagao);
+                        break;
+
+                    case "balsa":
+                        nfe.Transp.balsa = this.readValue(noder, Properties.Resources.balsa);
                         break;
                 }
             }

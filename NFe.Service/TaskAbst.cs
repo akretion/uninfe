@@ -307,6 +307,15 @@ namespace NFe.Service
                     retorna = "LoteNFe";
                     break;
                 #endregion
+
+                #region BHISS
+                case PadroesNFSe.BHISS:
+                    retorna = "NfseWSService";
+                    break;
+
+                #endregion
+
+
             }
 
             return retorna;
@@ -676,6 +685,32 @@ namespace NFe.Service
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region BHISS
+                case PadroesNFSe.BHISS:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
                             break;
                     }
                     break;

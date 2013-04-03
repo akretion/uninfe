@@ -876,8 +876,6 @@ namespace NFe.ConvertTxt
         public string placa;
         public string UF;
         public string RNTC;
-        public string vagao;
-        public string balsa;
     }
 
     /// <summary>
@@ -986,6 +984,8 @@ namespace NFe.ConvertTxt
         public veicTransp veicTransp;
         public List<Vol> Vol;
         public List<Reboque> Reboque;
+        public string vagao;
+        public string balsa;
 
         public Transp()
         {

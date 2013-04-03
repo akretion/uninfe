@@ -97,11 +97,9 @@ namespace NFe.Threadings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 26/04/2011
         /// </remarks>
-        private int LocalizaEmpresa(FileInfo fi, bool lCadastrandoEmpresa)
+        private int LocalizaEmpresa(FileInfo fi)
         {
             int  empresa = -1;
-            int  lQtRodou = -1;
-            bool lEncontrouEmp = false;
 
             try
             {
@@ -121,17 +119,9 @@ namespace NFe.Threadings
                         fullName == Empresa.Configuracoes[i].PastaValidar.ToLower())
                     {
                         empresa = i;
-                        lEncontrouEmp = true;
                         break;
                     }
-
-                    lQtRodou += 1;
-
                 }
-
-                // caso ele nao axe a empresa ele vai posicionar no ultimo mais somente se estiver cadastrando pela pasta geral.
-                if (lCadastrandoEmpresa == true && lEncontrouEmp == false)
-                    empresa = lQtRodou + 1;
             }
             catch
             {
@@ -151,11 +141,8 @@ namespace NFe.Threadings
             try
             {
                 int empresa;
-                bool lCadastrandoEmp = false;
                 string arq = fi.FullName.ToLower();
 
-
-                /// verifica se esta cadastrando uma nova empresa - Renan
                 if (fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
                 {
                     //encerra o UniNFe no arquivo -sair.xmls
@@ -164,11 +151,15 @@ namespace NFe.Threadings
                         File.Delete(fi.FullName);
                         Environment.Exit(0);
                     }
-                    else
-                        lCadastrandoEmp = true;
+
+                    empresa = 1; //Vou criar fixo como 1 quando for na pasta geral, pois na pasta geral não tem como detectar qual é a empresa. Wandrey 20/03/2013
+                }
+                else
+                {
+                    empresa = LocalizaEmpresa(fi);
                 }
 
-                empresa = LocalizaEmpresa(fi, lCadastrandoEmp);
+                
 
                 if (empresa >= 0)
                 {

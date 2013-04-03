@@ -15,28 +15,33 @@ namespace uninfe
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
-            if (Aplicacao.AppExecutando())
+            bool silencioso = false;
+            if (args.Length >= 1)
+                if (args[0] == "/silent")
+                    silencioso = true;
+
+            if (Aplicacao.AppExecutando(silencioso))
             {
                 return;
             }
 
-//#if DEBUG
-//            NFe.Components.NativeMethods.AllocConsole();
-//            Console.WriteLine("UNINFE: Debug Console");
-//#endif
+            //#if DEBUG
+            //            NFe.Components.NativeMethods.AllocConsole();
+            //            Console.WriteLine("UNINFE: Debug Console");
+            //#endif
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
 
-//#if DEBUG
-//            NFe.Components.NativeMethods.FreeConsole();
-//#endif
+            //#if DEBUG
+            //            NFe.Components.NativeMethods.FreeConsole();
+            //#endif
         }
     }
 }

@@ -60,10 +60,10 @@ namespace NFe.Components.Info
             if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                 dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfe.exe")).ToString("dd/MM/yyyy HH:mm:ss");
             else
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "unincte.exe")).ToString("dd/MM/yyyy HH:mm:ss");
-            else
-                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfes.exe")).ToString("dd/MM/yyyy HH:mm:ss");
+                if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+                    dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "unincte.exe")).ToString("dd/MM/yyyy HH:mm:ss");
+                else
+                    dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfes.exe")).ToString("dd/MM/yyyy HH:mm:ss");
 
             //Gravar o XML com as informações do aplicativo
             try
@@ -121,7 +121,7 @@ namespace NFe.Components.Info
                     /// 
                     foreach (webServices list in WebServiceProxy.webServicesList)
                     {
-                        if (list.ID == Empresa.Configuracoes[emp].UFCod || 
+                        if (list.ID == Empresa.Configuracoes[emp].UFCod ||
                             list.UF == "DPEC" ||
                             list.UF == "SCAN")
                         {
@@ -139,13 +139,13 @@ namespace NFe.Components.Info
                             switch (Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfse:
-                                    aTXT.AppendLine(tipo + "CancelarNFse|" +            (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
-                                    aTXT.AppendLine(tipo + "ConsultarLoteRps|" +        (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
-                                    aTXT.AppendLine(tipo + "ConsultarNfse|" +           (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
-                                    aTXT.AppendLine(tipo + "ConsultarNfsePorRps|" +     (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
-                                    aTXT.AppendLine(tipo + "ConsultarSituacaoLoteRps|" +(!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
-                                    aTXT.AppendLine(tipo + "RecepcionarLoteRps|" +      (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
-                                    aTXT.AppendLine(tipo + "ConsultarURLNfse|" +        (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
+                                    aTXT.AppendLine(tipo + "CancelarNFse|" + (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarLoteRps|" + (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarNfse|" + (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarNfsePorRps|" + (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarSituacaoLoteRps|" + (!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "RecepcionarLoteRps|" + (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    aTXT.AppendLine(tipo + "ConsultarURLNfse|" + (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
                                     break;
 
                                 case TipoAplicativo.Nfe:
@@ -270,12 +270,12 @@ namespace NFe.Components.Info
                             switch (Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfse:
-                                    oXmlGravar.WriteElementString("CancelarNFse",           (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
-                                    oXmlGravar.WriteElementString("ConsultarLoteRps",       (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
-                                    oXmlGravar.WriteElementString("ConsultarNfse",          (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
-                                    oXmlGravar.WriteElementString("ConsultarNfsePorRps",    (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
+                                    oXmlGravar.WriteElementString("CancelarNFse", (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarLoteRps", (!string.IsNullOrEmpty(item.ConsultarLoteRps)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarNfse", (!string.IsNullOrEmpty(item.ConsultarNfse)).ToString());
+                                    oXmlGravar.WriteElementString("ConsultarNfsePorRps", (!string.IsNullOrEmpty(item.ConsultarNfsePorRps)).ToString());
                                     oXmlGravar.WriteElementString("ConsultarSituacaoLoteRps", (!string.IsNullOrEmpty(item.ConsultarSituacaoLoteRps)).ToString());
-                                    oXmlGravar.WriteElementString("RecepcionarLoteRps",     (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
+                                    oXmlGravar.WriteElementString("RecepcionarLoteRps", (!string.IsNullOrEmpty(item.RecepcionarLoteRps)).ToString());
                                     oXmlGravar.WriteElementString("ConsultarURLNfse", (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
                                     break;
 
@@ -428,7 +428,7 @@ namespace NFe.Components.Info
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 21/07/2011
         /// </remarks>
-        public static Boolean AppExecutando()
+        public static Boolean AppExecutando(bool silencioso)
         {
             Empresa.CarregaConfiguracao();
 
@@ -440,11 +440,14 @@ namespace NFe.Components.Info
                 executando = true;
             }
 
-            if (executando)
-                MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else if (Empresa.ExisteErroDiretorio)
-                System.Windows.Forms.MessageBox.Show("Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
-                                "Por favor entre na tela de configurações da(s) empresa(s) listada(s) abaixo na aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresa.ErroCaminhoDiretorio, "Atenção", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            if (!silencioso)
+            {
+                if (executando)
+                    MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else if (Empresa.ExisteErroDiretorio)
+                    System.Windows.Forms.MessageBox.Show("Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
+                                    "Por favor entre na tela de configurações da(s) empresa(s) listada(s) abaixo na aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresa.ErroCaminhoDiretorio, "Atenção", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
 
             return executando;
         }

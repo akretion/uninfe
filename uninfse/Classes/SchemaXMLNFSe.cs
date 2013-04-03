@@ -524,7 +524,7 @@ namespace uninfse
             SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-PedidoEnvioLoteRPS", new InfSchema()
             {
                 Tag = "PedidoEnvioLoteRPS",
-                ID = 30,
+                ID = 38,
                 ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoEnvioLoteRPS_v01.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "PedidoEnvioLoteRPS",
@@ -532,6 +532,89 @@ namespace uninfse
                 TargetNameSpace = "http://nfse.blumenau.sc.gov.br"
             });
             #endregion
+
+            #endregion
+
+            #region BHISS
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 39,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = 40,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+            
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = 41,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = 42,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = 43,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+            
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = 44,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "EnviarLoteRpsEnvio",
+                TagAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+            
 
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
@@ -541,6 +624,9 @@ namespace uninfse
                     SchemaXML.MaxID = item.ID;
             }
             #endregion
+
+
+
 
             #endregion
         }

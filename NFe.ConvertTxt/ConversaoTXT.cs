@@ -1818,8 +1818,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X22":
-                    //         X22|Placa |UF |RNTC |vagao |balsa
-                    layout = "§X22|Placa¨|UF¨|RNTC¨|vagao¨|balsa¨"; //ok
+                    //         X22|Placa |UF |RNTC 
+                    layout = "§X22|Placa¨|UF¨|RNTC¨"; //ok
                     ///
                     /// Grupo da TAG <transp><reboque>
                     /// 
@@ -1827,8 +1827,16 @@ namespace NFe.ConvertTxt
                     NFe.Transp.Reboque[NFe.Transp.Reboque.Count - 1].placa = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.placa, ObOp.Obrigatorio, 1, 8);
                     NFe.Transp.Reboque[NFe.Transp.Reboque.Count - 1].UF = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.UF, ObOp.Obrigatorio, 2, 2);
                     NFe.Transp.Reboque[NFe.Transp.Reboque.Count - 1].RNTC = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.RNTC, ObOp.Opcional, 1, 20);
-                    NFe.Transp.Reboque[NFe.Transp.Reboque.Count - 1].vagao = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.vagao, ObOp.Opcional, 1, 20);
-                    NFe.Transp.Reboque[NFe.Transp.Reboque.Count - 1].balsa = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.balsa, ObOp.Opcional, 1, 20);
+                    break;
+
+                case "X25a":
+                    layout = "§X25a|vagao¨"; //ok
+                    NFe.Transp.vagao = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.vagao, ObOp.Opcional, 1, 20);
+                    break;
+
+                case "X25b":
+                    layout = "§X25b|balsa¨"; //ok
+                    NFe.Transp.balsa = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.balsa, ObOp.Opcional, 1, 20);
                     break;
 
                 case "X26":

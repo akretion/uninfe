@@ -219,10 +219,6 @@ namespace NFe.Service
                             AlterarConfiguracoesUniNFe(arquivo);
                             break;
 
-                        case Servicos.CadastrarEmpresa:
-                            CadastrarEmpresa(arquivo);
-                            break;
-
                         case Servicos.ConsultaGeral:
                             ConsultarGeral(arquivo);
                             break;
@@ -270,6 +266,7 @@ namespace NFe.Service
             {
                 string arq = fullPath.ToLower().Trim();
 
+                #region Serviços que funcionam tanto na pasta Geral como na pasta da Empresa
                 if (arq.IndexOf(Propriedade.ExtEnvio.ConfigEmp) >= 0)
                 {
                     tipoServico = Servicos.CadastrarEmpresa;
@@ -278,6 +275,11 @@ namespace NFe.Service
                 {
                     tipoServico = Servicos.ConsultaGeral;
                 }
+                else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+                {
+                    tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+                }
+                #endregion
                 else
                 {
                     if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
@@ -351,10 +353,10 @@ namespace NFe.Service
                         {
                             tipoServico = Servicos.ConsultarDPEC;
                         }
-                        else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
-                        {
-                            tipoServico = Servicos.AlterarConfiguracoesUniNFe;
-                        }
+                        /*                        else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+                                                {
+                                                    tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+                                                }*/
                         else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
                         {
                             tipoServico = Servicos.ConsultaInformacoesUniNFe;
@@ -424,11 +426,7 @@ namespace NFe.Service
                             tipoServico = Servicos.ConsultarURLNfse;
                         }
                         #endregion
-                        #region Configuracoes Gerais
-
                     }
-
-                        #endregion
                 }
             }
             catch
@@ -503,20 +501,6 @@ namespace NFe.Service
             try
             {
                 ReconfigurarUniNFe(arquivo);
-            }
-            catch
-            {
-            }
-        }
-        #endregion
-
-        #region CadastrarEmpresa()
-
-        protected void CadastrarEmpresa(string arquivo)
-        {
-            try
-            {
-                CadastraEmpresa(arquivo);
             }
             catch
             {
@@ -664,7 +648,10 @@ namespace NFe.Service
             {
                 for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
-                    GerarXMLPedRec(i, nfe);
+                    Empresa empresa = Empresa.Configuracoes[i];
+
+                    if (!string.IsNullOrEmpty(empresa.PastaEmpresa))
+                        GerarXMLPedRec(i, nfe);
                 }
 
                 Thread.Sleep(2000);
@@ -861,26 +848,6 @@ namespace NFe.Service
             {
             }
         }
-        #endregion
-
-        #region CadastraEmpresa
-        /// <summary>
-        /// Classe responsavel em cadastrar uma nova empresa caso nao exista ela configurada
-        /// </summary>
-        /// <param name="arquivo">Arquivo XML contendo as configuracoes da empresa</param>
-        protected void CadastraEmpresa(string arquivo)
-        {
-            try
-            {
-                ConfiguracaoApp oConfig = new ConfiguracaoApp();
-                oConfig.CadastrarEmpresa(arquivo);
-
-            }
-            catch
-            {
-            }
-        }
-
         #endregion
 
         #region GerarXMLPedRec()
@@ -1217,9 +1184,9 @@ namespace NFe.Service
                 ConsultaCertificados(arquivo);
             }
 
-            
+
         }
-        
+
         protected void ConsultaCertificados(string arquivo)
         {
             ConfiguracaoApp oConfig = new ConfiguracaoApp();

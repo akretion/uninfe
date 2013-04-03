@@ -413,8 +413,6 @@ namespace NFe.Settings
 
                     arqXml.Close();
                     arqXml = null;
-
-
                 }
                 catch (Exception ex)
                 {
@@ -427,18 +425,8 @@ namespace NFe.Settings
                 }
             }
 
-            if (!Directory.Exists(Propriedade.PastaGeral))
-                Directory.CreateDirectory(Propriedade.PastaGeral);
-
-            if (!Directory.Exists(Propriedade.PastaGeral + "\\Retorno"))
-                Directory.CreateDirectory(Propriedade.PastaGeral + "\\Retorno");
-
-            if (!Directory.Exists(Propriedade.PastaGeral + "\\Temp"))
-                Directory.CreateDirectory(Propriedade.PastaGeral + "\\Temp");
-
             if (!ExisteErroDiretorio)
                 Empresa.CriarPasta();
-
         }
         #endregion
 
@@ -815,14 +803,20 @@ namespace NFe.Settings
         {
             try
             {
+                if (!Directory.Exists(Propriedade.PastaGeral))
+                    Directory.CreateDirectory(Propriedade.PastaGeral);
+
+                if (!Directory.Exists(Propriedade.PastaGeralRetorno))
+                    Directory.CreateDirectory(Propriedade.PastaGeralRetorno);
+
+                if (!Directory.Exists(Propriedade.PastaGeralTemporaria))
+                    Directory.CreateDirectory(Propriedade.PastaGeralTemporaria);
+
+                if (!Directory.Exists(Propriedade.PastaLog))
+                    Directory.CreateDirectory(Propriedade.PastaLog);
+
                 foreach (Empresa empresa in Empresa.Configuracoes)
                 {
-                    //Criar pasta de logs. Wandrey 03/08/2011
-                    if (!Directory.Exists(Propriedade.PastaLog))
-                    {
-                        Directory.CreateDirectory(Propriedade.PastaLog);
-                    }
-
                     //Criar pasta de envio
                     if (!string.IsNullOrEmpty(empresa.PastaEnvio))
                     {
