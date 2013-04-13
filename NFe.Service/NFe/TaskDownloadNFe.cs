@@ -57,12 +57,13 @@ namespace NFe.Service
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF", 
                                         oCabecMsg, 
-                                        this, 
-                                        Propriedade.ExtEnvio.EnvDownload_XML.Replace(".xml", ""), 
-                                        Propriedade.ExtRetorno.retDownload_XML.Replace(".xml", ""));
+                                        this);
 
                     //Ler o retorno
                     LerRetornoDownloadNFe(emp);
+
+                    //Gravar o xml de retorno para o ERP. Não pode gravar antes de extrair os downloads, para que o ERP saiba quando realmente terminou. Wandrey 03/04/2013
+                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDownload_XML, Propriedade.ExtRetorno.retDownload_XML, this.vStrXmlRetorno);
                 }
                 else
                 {

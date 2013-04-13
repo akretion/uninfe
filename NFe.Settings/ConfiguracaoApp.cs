@@ -1997,40 +1997,44 @@ namespace NFe.Settings
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arqXML);
 
-                string cnpj = "";
-                string nomeEmp = "";
-
-                foreach (XmlElement item in doc.DocumentElement)
+                if (doc.DocumentElement.SelectNodes("DadosEmpresa").Count > 0)
                 {
-                    cnpj = doc.DocumentElement.SelectNodes("DadosEmpresa")[0].Attributes["CNPJ"].Value;
+                    string cnpj = "";
+                    string nomeEmp = "";
 
-                    if (item.GetElementsByTagName("Nome").Count != 0)
+                    foreach (XmlElement item in doc.DocumentElement)
                     {
-                        nomeEmp = item.GetElementsByTagName("Nome")[0].InnerText;
+                        cnpj = doc.DocumentElement.SelectNodes("DadosEmpresa")[0].Attributes["CNPJ"].Value;
+
+                        if (item.GetElementsByTagName("Nome").Count != 0)
+                        {
+                            nomeEmp = item.GetElementsByTagName("Nome")[0].InnerText;
+                        }
                     }
+
+                    if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp))
+                    {
+                        throw new Exception("Não foi possível localizar os dados da empresa no xml de configuração.");
+                    }
+
+                    if (Empresa.FindConfEmpresa(cnpj.Trim()) == null)
+                    {
+                        Empresa empresa = new Empresa();
+                        empresa.CNPJ = cnpj;
+                        empresa.Nome = nomeEmp;
+                        Empresa.Configuracoes.Add(empresa);
+
+                        GravarArqEmpresas();
+                    }
+
+                    retEmp = Empresa.FindConfEmpresaIndex(cnpj);
                 }
-
-                if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp))
-                {
-                    throw new Exception("Não foi possível localizar os dados da empresa no xml de configuração.");
-                }
-
-                if (Empresa.FindConfEmpresa(cnpj.Trim()) == null)
-                {
-                    Empresa empresa = new Empresa();
-                    empresa.CNPJ = cnpj;
-                    empresa.Nome = nomeEmp;
-                    Empresa.Configuracoes.Add(empresa);
-
-                    GravarArqEmpresas();
-                }
-
-                retEmp = Empresa.FindConfEmpresaIndex(cnpj);
             }
             catch (Exception ex)
             {
                 throw (ex);
             }
+
 
             return retEmp;
         }

@@ -185,5 +185,19 @@ namespace NFe.Interface.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Icon uninfse {
+            get {
+                object obj = ResourceManager.GetObject("uninfse", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap uninfse128 {
+            get {
+                object obj = ResourceManager.GetObject("uninfse128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

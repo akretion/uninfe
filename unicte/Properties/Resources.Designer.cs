@@ -165,6 +165,13 @@ namespace unicte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap unicte1281 {
+            get {
+                object obj = ResourceManager.GetObject("unicte1281", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap update48x48 {
             get {
                 object obj = ResourceManager.GetObject("update48x48", resourceCulture);

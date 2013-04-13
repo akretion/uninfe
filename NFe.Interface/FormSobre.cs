@@ -31,8 +31,8 @@ namespace NFe.Interface
                     break;
 
                 case NFe.Components.TipoAplicativo.Nfse:
-                    this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.uninfe128;
-                    this.Icon = global::NFe.Interface.Properties.Resources.uninfe;
+                    this.pictureBox1.Image = global::NFe.Interface.Properties.Resources.uninfse128;
+                    this.Icon = global::NFe.Interface.Properties.Resources.uninfse;
                     break;
             }
             

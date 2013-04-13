@@ -17,8 +17,7 @@
     <ManifestKeyFile>uninfe_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>uninfe.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
     <SccProjectName>
     </SccProjectName>
@@ -182,8 +181,8 @@
     <None Include="Resources\pdf2.png" />
     <None Include="Resources\pdf3.png" />
     <None Include="Resources\windows_view_detail 48x48.png" />
-    <None Include="Resources\uninfe.ico" />
     <None Include="Resources\uninfe128.png" />
+    <None Include="Resources\uninfe.ico" />
     <Content Include="uninfe.ico" />
     <Content Include="UniNfeSobre.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

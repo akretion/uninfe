@@ -100,7 +100,7 @@
             // 
             this.toolStripButton_sobre.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton_sobre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            //this.toolStripButton_sobre.Image = global::uninfse.Properties.Resources.uninfse2_128;
+            this.toolStripButton_sobre.Image = global::uninfse.Properties.Resources.uninfse128;
             this.toolStripButton_sobre.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_sobre.Name = "toolStripButton_sobre";
             this.toolStripButton_sobre.Size = new System.Drawing.Size(52, 52);
@@ -149,7 +149,7 @@
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFSe, de um duplo clique ou pressione o botão direito d" +
-                "o mouse sobre o ícone.";
+    "o mouse sobre o ícone.";
             this.notifyIcon1.BalloonTipTitle = "UniNFSe - Monitor de Notas Fiscais de Serviços Eletrônicas";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
