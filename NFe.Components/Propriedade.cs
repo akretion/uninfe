@@ -385,11 +385,8 @@ namespace NFe.Components
             public const string PedURLNfse = "-ped-urlnfse.xml";
             #endregion
 
-            #region Extensões Gerais
-           
-            public const string ConfigEmp = "-configemp.xml";
+            #region Extensões Gerais           
             public const string ConsCertificado = "-cons-certificado.xml";
-
             #endregion 
         }
         #endregion

@@ -813,4 +813,7 @@
   <data name="ICMS" xml:space="preserve">
     <value>ICMS</value>
   </data>
+  <data name="vTotTrib" xml:space="preserve">
+    <value>vTotTrib</value>
+  </data>
 </root>

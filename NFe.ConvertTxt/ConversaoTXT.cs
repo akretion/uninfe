@@ -572,8 +572,18 @@ namespace NFe.ConvertTxt
 
             switch (this.FSegmento.ToUpper())
             {
+                case "A":
+                    //         A|versao |Tipo|
+                    layout = "§A|versao¨|Tipo¨";
+                    double v = (double)LerCampo(TpcnTipoCampo.tcDec2, "versao", ObOp.Opcional, 0, 6);
+                    NFe.infNFe.Versao = (v>0 ? Convert.ToDecimal(v) : 2);
+                    break;
+
                 case "B":
                     //         B|cUF |cNF |NatOp |intPag |mod |serie |nNF |dEmi |dSaiEnt |hSaiEnt |tpNF |cMunFG |TpImp |TpEmis |cDV |tpAmb |finNFe |procEmi |VerProc |dhCont |xJust|
+                    if (NFe.infNFe.Versao >= 3)
+                        layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dhEmi¨|dhSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
+                    else
                     layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dEmi¨|dSaiEnt¨|hSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
 
                     ///
@@ -588,9 +598,17 @@ namespace NFe.ConvertTxt
                     NFe.ide.mod     = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.mod, ObOp.Obrigatorio, 2, 2);
                     NFe.ide.serie   = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.serie, ObOp.Obrigatorio, 1, 3);
                     NFe.ide.nNF     = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nNF, ObOp.Obrigatorio, 1, 9);
+                    if (NFe.infNFe.Versao >= 3)
+                    {
+                        NFe.ide.dhEmi    = (string)LerCampo(TpcnTipoCampo.tcStr, "dhEmi",    ObOp.Obrigatorio, 19, 25);
+                        NFe.ide.dhSaiEnt = (string)LerCampo(TpcnTipoCampo.tcStr, "dhSaiEnt", ObOp.Opcional,     0, 25);
+                    }
+                    else
+                    {
                     NFe.ide.dEmi    = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dEmi, ObOp.Obrigatorio, 10, 10);
                     NFe.ide.dSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dSaiEnt, ObOp.Opcional, 10, 10);
                     NFe.ide.hSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcHor, Properties.Resources.hSaiEnt, ObOp.Opcional, 0, 0);
+                    }
                     NFe.ide.tpNF    = (TpcnTipoNFe)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpNF, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.cMunFG  = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.cMunFG, ObOp.Obrigatorio, 7, 7);
                     NFe.ide.tpImp   = (TpcnTipoImpressao)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpImp, ObOp.Obrigatorio, 1, 1);
@@ -600,10 +618,16 @@ namespace NFe.ConvertTxt
                     NFe.ide.finNFe  = (TpcnFinalidadeNFe)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.finNFe, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.procEmi = (TpcnProcessoEmissao)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.procEmi, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.verProc = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.verProc, ObOp.Obrigatorio, 1, 20);
-                    NFe.ide.dhCont  = (DateTime)LerCampo(TpcnTipoCampo.tcDatHor, Properties.Resources.dhCont, ObOp.Opcional, 0, 0);
+                    NFe.ide.dhCont  = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.dhCont, ObOp.Opcional, 0, 25);
                     NFe.ide.xJust   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xJust, ObOp.Opcional, 15, 256);
                     break;
                     #endregion
+
+                case "B11A":
+                    //         B11a|idDest|
+                    layout = "§B11a|idDest¨"; //ok
+                    NFe.ide.idDest = (TpcnDestinoOperacao)LerCampo(TpcnTipoCampo.tcInt, "idDest", ObOp.Obrigatorio, 1, 1);
+                    break;
 
                 case "B13":
                     //         B13|refNFe|
@@ -699,6 +723,18 @@ namespace NFe.ConvertTxt
                         item.refECF.nCOO = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nCOO, ObOp.Obrigatorio, 1, 6);
                         NFe.ide.NFref.Add(item);
                     }
+                    break;
+
+                case "B25A":
+                    //         B25a|indFinal|
+                    layout = "§B25a|indFinal¨"; //ok
+                    NFe.ide.indFinal =  (TpcnConsumidorFinal)LerCampo(TpcnTipoCampo.tcInt, "indFinal", ObOp.Obrigatorio, 1, 1);
+                    break;
+
+                case "B25B":
+                    //         B25b|indPres|
+                    layout = "§B25b|indPres¨"; //ok
+                    NFe.ide.indPres = (TpcnPresencaComprador)LerCampo(TpcnTipoCampo.tcInt, "indPres", ObOp.Obrigatorio, 1, 1);
                     break;
 
                 case "C":
@@ -812,6 +848,13 @@ namespace NFe.ConvertTxt
                     layout = "§E03|CPF¨"; //ok
 
                     NFe.dest.CPF = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CPF, ObOp.Obrigatorio, 11, 11);
+                    break;
+                    
+                case "E03A":
+                    //         E03a|idEstrangeiro |
+                    layout = "§E03a|idEstrangeiro¨"; //ok
+                    if (NFe.infNFe.Versao >= 3)
+                        NFe.dest.idEstrangeiro = (string)LerCampo(TpcnTipoCampo.tcStr, "idEstrangeiro", ObOp.Opcional, 0, 20);
                     break;
 
                 case "E05": 
@@ -1118,6 +1161,20 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.comb.ICMSCons.UFcons = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.UFCons);
                     break;
 #endif
+
+                case "M":
+                    if (aRegistro.Split(new char[] { '|' }).Length > 0)
+                    {
+                        layout = "§M|vTotTrib¨"; //ok   
+                        NFe.det[nProd].Imposto.vTotTrib = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vTotTrib, ObOp.Opcional, 15);
+                    }
+                    break;
+
+                case "M02":
+                    //         M02|vTotTrib|
+                    layout = "§M02|vTotTrib¨"; //ok   
+                    NFe.det[nProd].Imposto.vTotTrib = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vTotTrib, ObOp.Opcional, 15);
+                    break;
 
                 ///
                 /// Grupo da TAG <det><imposto><ICMS>
@@ -1707,8 +1764,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "W02":
-                    //         W02|vBC |vICMS |vBCST |vST |vProd |vFrete |vSeg |vDesc |vII |vIPI |vPIS |vCOFINS |vOutro |vNF|
-                    layout = "§W02|VBC¨|VICMS¨|VBCST¨|VST¨|VProd¨|VFrete¨|VSeg¨|VDesc¨|VII¨|VIPI¨|VPIS¨|VCOFINS¨|VOutro¨|VNF¨"; //ok
+                    //         W02|vBC |vICMS |vBCST |vST |vProd |vFrete |vSeg |vDesc |vII |vIPI |vPIS |vCOFINS |vOutro |vNF |vTotTrib
+                    layout = "§W02|VBC¨|VICMS¨|VBCST¨|VST¨|VProd¨|VFrete¨|VSeg¨|VDesc¨|VII¨|VIPI¨|VPIS¨|VCOFINS¨|VOutro¨|VNF¨|vTotTrib¨"; //ok
                     ///
                     /// Grupo da TAG <total><ICMSTot>
                     /// 
@@ -1726,6 +1783,7 @@ namespace NFe.ConvertTxt
                     NFe.Total.ICMSTot.vCOFINS = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vCOFINS, ObOp.Obrigatorio, 15);
                     NFe.Total.ICMSTot.vOutro  = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vOutro, ObOp.Obrigatorio, 15);
                     NFe.Total.ICMSTot.vNF   = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vNF, ObOp.Obrigatorio, 15);
+                    NFe.Total.ICMSTot.vTotTrib = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vTotTrib, ObOp.Opcional, 15);
                     break;
 
                 case "W17":
@@ -1888,6 +1946,36 @@ namespace NFe.ConvertTxt
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nDup, ObOp.Opcional, 1, 60);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].dVenc = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dVenc, ObOp.Opcional, 10, 10);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].vDup = LerCampo(TpcnTipoCampo.tcDec2, Properties.Resources.vDup, ObOp.Opcional, 15);
+                    break;
+
+                ///
+                /// NFC-e
+                /// 
+                case "YA02":
+                    //         YA02|tPag |
+                    layout = "§YA02|tPag¨";
+                    NFe.pag.Add(new pag());
+                    NFe.pag[NFe.pag.Count - 1].tPag = (TpcnFormaPagamento)LerCampo(TpcnTipoCampo.tcInt, "tPag", ObOp.Obrigatorio, 2);
+                    break;
+                case "YA03":
+                    //         YA03|vPag |
+                    layout = "§YA03|vPag¨";
+                    NFe.pag[NFe.pag.Count - 1].vPag = LerCampo(TpcnTipoCampo.tcDec2, "vPag", ObOp.Obrigatorio, 15);
+                    break;
+                case "YA05":
+                    //         YA05|CNPJ |
+                    layout = "§YA05|CNPJ¨";
+                    NFe.pag[NFe.pag.Count - 1].CNPJ = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CNPJ, ObOp.Obrigatorio, 14, 14);
+                    break;
+                case "YA06":
+                    //         YA06|tBand |
+                    layout = "§YA06|tBand¨";
+                    NFe.pag[NFe.pag.Count - 1].tBand = (TpcnBandeiraCartao)LerCampo(TpcnTipoCampo.tcInt, "tBand", ObOp.Obrigatorio, 2);
+                    break;
+                case "YA07":
+                    //         YA07|cAut |
+                    layout = "§YA07|cAut¨";
+                    NFe.pag[NFe.pag.Count - 1].cAut = (string)LerCampo(TpcnTipoCampo.tcStr, "cAut", ObOp.Obrigatorio, 1, 15);
                     break;
 
                 case "Z":

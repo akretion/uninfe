@@ -225,7 +225,7 @@ namespace NFe.Settings
                     ConfiguracaoApp.VersaoXMLInut = "2.00";
                     ConfiguracaoApp.VersaoXMLNFe = "2.00";
                     ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-                    ConfiguracaoApp.VersaoXMLPedSit = "2.00";   //<<<danasa 6-2011
+                    ConfiguracaoApp.VersaoXMLPedSit = "2.01";   //<<<danasa 6-2011
                     ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
                     ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
                     ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
@@ -259,49 +259,6 @@ namespace NFe.Settings
                     Propriedade.ExtRetorno.ProcNFe = "-procCTe.xml";
                     break;
             }
-        }
-        #endregion
-
-        #region TemCCe()
-        /// <summary>
-        /// Verifica se o Estado já tem CCe - Carta de correção Eletrônica       
-        /// </summary>
-        /// <returns></returns>
-        public static bool TemCCe(string cUF, int tpAmb, int tpEmis)
-        {
-            bool retorna = true;
-            /*
-                        if (tpEmis != Propriedade.TipoEmissao.teNormal)
-                            return retorna;
-
-                        foreach (var item in WebServiceProxy.webServicesList)
-                        {
-                            if (item.ID.ToString() == cUF)
-                            {
-                                switch (tpAmb)
-                                {
-                                    case Propriedade.TipoAmbiente.taHomologacao:
-                                        if (!string.IsNullOrEmpty(item.LocalHomologacao.NFeCCe))
-                                        {
-                                            retorna = true;
-                                        }
-                                        break;
-
-                                    case Propriedade.TipoAmbiente.taProducao:
-                                        if (!string.IsNullOrEmpty(item.LocalProducao.NFeCCe))
-                                        {
-                                            retorna = true;
-                                        }
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-             */
-
-            return retorna;
         }
         #endregion
 
@@ -463,10 +420,10 @@ namespace NFe.Settings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 04/04/2011
         /// </remarks>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, int versaoNFe)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
         {
             WebServiceProxy wsProxy = null;
-            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + " " + versaoNFe;
+            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis;
             while (true)
             {
                 lock (Smf.WebProxy)
@@ -480,7 +437,7 @@ namespace NFe.Settings
                         else
                         {
                             //Definir a URI para conexão com o Webservice
-                            string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, servico, versaoNFe);
+                            string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, servico);
 
                             wsProxy = new WebServiceProxy(Url, Empresa.Configuracoes[emp].X509Certificado);
 
@@ -499,24 +456,7 @@ namespace NFe.Settings
             return wsProxy;
         }
 
-        /// <summary>
-        /// Definir o webservice que será utilizado para o envio do XML
-        /// </summary>
-        /// <param name="servico">Serviço que será executado</param>
-        /// <param name="emp">Index da empresa que será executado o serviço</param>
-        /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Código do ambiente que será acessado</param>
-        /// <param name="tpEmis">Tipo de emissão do XML</param>
-        /// <returns>Retorna o objeto do serviço</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 04/04/2011
-        /// </remarks>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
-        {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, 2);
-        }
-
+        #region DefLocalWSDL
         /// <summary>
         /// Definir o local do WSDL do webservice
         /// </summary>
@@ -530,25 +470,6 @@ namespace NFe.Settings
         /// Data: 22/03/2011
         /// </remarks>
         private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico)
-        {
-            return DefLocalWSDL(CodigoUF, tipoAmbiente, tipoEmissao, servico, 2);
-        }
-
-        #region DefLocalWSDL
-        /// <summary>
-        /// Definir o local do WSDL do webservice
-        /// </summary>
-        /// <param name="CodigoUF">Código da UF que é para pesquisar a URL do WSDL</param>
-        /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
-        /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
-        /// <param name="servico">Serviço da NFe que está sendo executado</param>
-        /// <param name="versaoNFe">Versão da NFe</param>
-        /// <returns>Retorna a URL</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 08/02/2010
-        /// </remarks>
-        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico, int versaoNFe)
         {
             string WSDL = string.Empty;
             switch (tipoEmissao)
@@ -609,10 +530,7 @@ namespace NFe.Settings
                             break;
 
                         case Servicos.PedidoConsultaSituacaoNFe:
-                            if (versaoNFe.Equals(1))
-                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta1 : list.LocalProducao.NFeConsulta1);
-                            else
-                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
                             break;
 
                         case Servicos.ConsultarDPEC:
@@ -1324,7 +1242,10 @@ namespace NFe.Settings
 
             try
             {
-                emp = CadastrarEmpresa(cArquivoXml, emp);
+                if (Path.GetExtension(cArquivoXml).ToLower() != ".txt")
+                {
+                    emp = CadastrarEmpresa(cArquivoXml, emp);
+                }
 
                 try
                 {

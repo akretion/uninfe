@@ -33,16 +33,6 @@ namespace NFe.Threadings
 
             //Servicos tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
             new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);//, tipoServico);
-
-            //Se estiver cadastrando empresas tem que reinciar as thread's - Renan
-            Processar servico = new Processar();
-            Servicos servicos = servico.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
-
-            if (Servicos.CadastrarEmpresa == servicos || Servicos.AlterarConfiguracoesUniNFe == servicos)
-            {
-                ThreadService.Stop();
-                ThreadService.Start();
-            }
         }
         #endregion
 
@@ -54,6 +44,13 @@ namespace NFe.Threadings
         protected void ThreadControl_OnReleased(ThreadItem item)
         {
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento");
+
+            //Se estiver reconfigurando o UniNFe, tem que reiniciar as threads
+            if (item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+            {
+                ThreadService.Stop();
+                ThreadService.Start();
+            }
         }
         #endregion
 

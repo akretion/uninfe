@@ -80,6 +80,11 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.BLUMENAU_SC:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
                         pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+
+                        #region Encriptar tag <Assinatura>
+                        EncryptAssinatura();
+                        #endregion
+
                         break;
 
                     case PadroesNFSe.BHISS:
@@ -87,7 +92,13 @@ namespace NFe.Service.NFSe
                         pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
-                        
+
+                    case PadroesNFSe.GIF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+                        break;
+
+                    
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
@@ -149,5 +160,48 @@ namespace NFe.Service.NFSe
         }
         #endregion
 
+        #region EncryptAssinatura()
+        /// <summary>
+        /// Encriptar a tag Assinatura quando for município de Blumenau - SC
+        /// </summary>
+        private void EncryptAssinatura()
+        {
+            try
+            {
+                string arquivoXML = NomeArquivoXML;
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
+
+                foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
+                {
+                    XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
+
+                    XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
+
+                    foreach (XmlNode detalheNode in detalheList)
+                    {
+                        XmlElement detalheElement = (XmlElement)detalheNode;
+
+
+                        if (detalheElement.GetElementsByTagName("AssinaturaCancelamento").Count != 0)
+                        {
+                            //Encryptar a tag Assinatura
+                            detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText = Criptografia.SignWithRSASHA1(detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText);
+                        }
+                    }
+                }
+
+                //Salvar o XML com as alterações efetuadas
+                doc.Save(arquivoXML);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
     }
 }

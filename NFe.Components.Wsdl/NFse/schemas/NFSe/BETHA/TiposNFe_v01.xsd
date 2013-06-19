@@ -37,11 +37,9 @@
     <xs:annotation>
       <xs:documentation>Tipo padrão referente a inscrição municipal.</xs:documentation>
     </xs:annotation>
-  		<xs:restriction base="xs:string">
-  			<xs:maxLength value="15"/>
-  			<xs:minLength value="1"/>
-  			<xs:whiteSpace value="collapse"/>
-  		</xs:restriction>
+    <xs:restriction base="xs:long">
+      <xs:pattern value="[0-9]{1,20}" />
+    </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="tsRazaoSocial">
@@ -107,7 +105,7 @@
       <xs:documentation>Código da natureza da operação</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:int">
-      <xs:pattern value="[1-8]{1}" />
+      <xs:pattern value="[1-7]{1}" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -125,7 +123,15 @@
       <xs:documentation>Identificação de Sim/Não</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:int">
-      <xs:pattern value="[1-2]{1}" />
+      <xs:pattern value="[1-3]{1}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tsOutrasInformacoes">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+      <xs:minLength value="1"/>
+      <xs:whiteSpace value="collapse"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -437,6 +443,7 @@
       <xs:element name="RegimeEspecialTributacao" type="tipos:tsRegimeEspecialTributacao" minOccurs="0" maxOccurs="1" />
       <xs:element name="OptanteSimplesNacional" type="tipos:TsSimNao" minOccurs="1" maxOccurs="1" />
       <xs:element name="IncentivadorCultural" type="tipos:TsSimNao" minOccurs="1" maxOccurs="1" />
+      <xs:element name="OutrasInformacoes" type="tipos:tsOutrasInformacoes" minOccurs="0" maxOccurs="1"/>      
       <xs:element name="Status" type="tipos:TsStatusRps" minOccurs="1" maxOccurs="1" />
       <xs:element name="RpsSubstituido" type="tipos:tcIdentificacaoRps" minOccurs="0" maxOccurs="1" />
       <xs:element name="Servico" type="tipos:TcDadosServico" minOccurs="1" maxOccurs="1" />

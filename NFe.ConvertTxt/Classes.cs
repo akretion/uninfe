@@ -4,6 +4,46 @@ using System.Text;
 
 namespace NFe.ConvertTxt
 {
+    ///
+    /// NFC-e
+    /// 
+    public enum TpcnDestinoOperacao {
+        doInterna = 1, 
+        doInterestadual = 2, 
+        doExterior = 3
+    }
+    public enum TpcnConsumidorFinal {
+        cfNao = 0, 
+        cfConsumidorFinal = 1
+    }
+    public enum TpcnPresencaComprador {
+        pcNao=0, 
+        pcPresencial=1, 
+        pcInternet=2, 
+        pcTeleatendimento=3, 
+        pcOutros=9
+    }
+    public enum TpcnFormaPagamento {
+        fpDinheiro=1, 
+        fpCheque=2, 
+        fpCartaoCredito=3, 
+        fpCartaoDebito=4, 
+        fpCreditoLoja=5,
+        fpValeAlimentacao=10, 
+        fpValeRefeicao=11, 
+        fpValePresente=12, 
+        fpValeCombustivel=13,
+        fpOutro=99
+    }
+    public enum TpcnBandeiraCartao
+    {
+        bcVisa=1, 
+        bcMasterCard=2, 
+        bcAmericanExpress=3, 
+        bcSorocred=4, 
+        bcOutros=99
+    }
+
     public enum TpcnProcessoEmissao
     {
         peAplicativoContribuinte = 0,
@@ -74,7 +114,11 @@ namespace NFe.ConvertTxt
         crtSimplesExcessoReceita = 2,
         crtRegimeNormal = 3
     }
-    public enum TpcnTipoCampo { tcStr, tcInt, tcDat, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 }
+    public enum TpcnTipoCampo 
+    { 
+        tcStr, tcInt, tcDat, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 
+    }
+
     public enum TpcnTipoAmbiente 
     { 
         taProducao = 1, 
@@ -94,13 +138,18 @@ namespace NFe.ConvertTxt
     public enum TpcnTipoImpressao 
     { 
         tiRetrato = 1, 
-        tiPaisagem = 2
+        tiPaisagem = 2,
+        tiDANFESimplificado = 3,
+        tiDANFENFCe = 4,
+        tiDANFENFCe_resumido = 5,
+        tiDANFENFCe_em_mensagem_eletrônica = 6
     }
     public enum TpcnFinalidadeNFe
     {
         fnNormal = 1,
         fnComplementar = 2,
-        fnAjuste = 3
+        fnAjuste = 3,
+        fnNFe_de_Resumo_da_operação_em_contingência_da_NFCe = 4
     }
     public enum TpcnTipoEmissao
     {
@@ -108,9 +157,11 @@ namespace NFe.ConvertTxt
         teContingencia = 2,
         teSCAN = 3,
         teDPEC = 4,
-        teFSDA = 5
-        //teSVCRS = 6,
-        //teSVCSP = 7
+        teFSDA = 5,
+        teSVCAN = 6, 
+        teSVCRS = 7, 
+        teSVCSP = 8, 
+        teOffLine = 9
     }
     public enum TpcnECFModRef 
     {
@@ -312,9 +363,14 @@ namespace NFe.ConvertTxt
         public string ISUF;
         public string email;
 
+        /// <summary>
+        /// NFC-e
+        /// </summary>
+        public string idEstrangeiro;
+
         public Dest()
         {
-            this.CNPJ = this.CPF = string.Empty;
+            this.idEstrangeiro = this.CNPJ = this.CPF = string.Empty;
             this.enderDest = new enderDest();
         }
     }
@@ -534,6 +590,7 @@ namespace NFe.ConvertTxt
         public double vCOFINS;
         public double vOutro;
         public double vNF;
+        public double vTotTrib;
     }
 
     /// <summary>
@@ -561,11 +618,27 @@ namespace NFe.ConvertTxt
         public TpcnFinalidadeNFe finNFe { get; set; }
         public TpcnProcessoEmissao procEmi { get; set; }
         public string verProc { get; set; }
-        public DateTime dhCont { get; set; }
+        public string dhCont { get; set; }  //mudado para 'string' pq na versao 3 (NFC-e) deve ter o time-zone
         public string xJust { get; set; }
+
+        /// <summary>
+        /// NFC-e
+        /// </summary>
+        public string dhEmi { get; set; }
+        public string dhSaiEnt { get; set; }
+        public TpcnDestinoOperacao idDest { get; set; }
+        public TpcnConsumidorFinal indFinal { get; set; }
+        public TpcnPresencaComprador indPres { get; set; }
 
         public Ide()
         {
+            this.dhEmi =
+                this.dhSaiEnt =
+                this.dhCont = string.Empty;
+
+            this.idDest = TpcnDestinoOperacao.doInterna;
+            this.indFinal = TpcnConsumidorFinal.cfConsumidorFinal;
+            this.indPres = TpcnPresencaComprador.pcPresencial;
             this.tpAmb = TpcnTipoAmbiente.taHomologacao;
             this.tpEmis = TpcnTipoEmissao.teNormal;
             this.tpImp = TpcnTipoImpressao.tiRetrato;
@@ -590,6 +663,7 @@ namespace NFe.ConvertTxt
     /// </summary>
     public class Imposto
     {
+        public double vTotTrib;
         public IPI IPI;
         public ICMS ICMS;
         public II II;
@@ -628,6 +702,7 @@ namespace NFe.ConvertTxt
     public struct infNFe
     {
         public string ID;
+        public decimal Versao;
     }
 
     /// <summary>
@@ -716,6 +791,11 @@ namespace NFe.ConvertTxt
         public Cana cana;
         public protNFe protNFe { get; private set; }
 
+        /// <summary>
+        /// NFC-e
+        /// </summary>
+        public List<pag> pag { get; private set; }
+
         public NFe()
         {
             ide = new Ide();
@@ -730,6 +810,11 @@ namespace NFe.ConvertTxt
             InfAdic = new InfAdic();
             cana = new Cana();
             protNFe = new protNFe();
+            ///
+            /// NFC-e
+            pag = new List<pag>();
+
+            infNFe.Versao = (decimal)2.0;
         }
     }
 
@@ -774,6 +859,23 @@ namespace NFe.ConvertTxt
     {
         public string xCampo;
         public string xTexto;
+    }
+
+    /// <summary>
+    /// pag - NFC-e
+    /// </summary>
+    public class pag
+    {
+        public TpcnFormaPagamento tPag;
+        public double vPag;
+        public string CNPJ;
+        public TpcnBandeiraCartao tBand;
+        public string cAut;
+
+        public pag()
+        {
+            this.cAut = this.CNPJ = string.Empty;
+        }
     }
 
     /// <summary>

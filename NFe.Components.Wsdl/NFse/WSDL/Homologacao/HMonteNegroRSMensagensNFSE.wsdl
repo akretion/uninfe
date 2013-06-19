@@ -71,19 +71,19 @@
             <soap:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpsSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEmensagensHttpSoap11Endpoint" binding="ns:NFSEmensagensSoap11Binding">
-            <soap:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEmensagens.NFSEmensagensHttpSoap11Endpoint/"/>
+            <soap:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEmensagensHttpsSoap12Endpoint" binding="ns:NFSEmensagensSoap12Binding">
             <soap12:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpsSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEmensagensHttpSoap12Endpoint" binding="ns:NFSEmensagensSoap12Binding">
-            <soap12:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEmensagens.NFSEmensagensHttpSoap12Endpoint/"/>
+            <soap12:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEmensagensHttpsEndpoint" binding="ns:NFSEmensagensHttpBinding">
             <http:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpsEndpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEmensagensHttpEndpoint" binding="ns:NFSEmensagensHttpBinding">
-            <http:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEmensagens.NFSEmensagensHttpEndpoint/"/>
+            <http:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEmensagens.NFSEmensagensHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

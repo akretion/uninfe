@@ -315,6 +315,13 @@ namespace NFe.Service
 
                 #endregion
 
+                #region GIF
+                case PadroesNFSe.GIF:
+                    retorna = "ServicosService";
+                    break;
+
+                #endregion
+
 
             }
 
@@ -530,10 +537,10 @@ namespace NFe.Service
                             retorna = "ConsultarLoteRpsV3";
                             break;
                         case Servicos.ConsultarNfse:
-                            retorna = "";
+                            retorna = "ConsultarNfseV3";
                             break;
                         case Servicos.ConsultarNfsePorRps:
-                            retorna = "";
+                            retorna = "ConsultarNfsePorRpsV3";
                             break;
                         case Servicos.ConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRpsV3";
@@ -711,6 +718,36 @@ namespace NFe.Service
                             break;
                         case Servicos.RecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+
+                #region GIF
+                case PadroesNFSe.GIF:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "consultarNotaFiscal";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "obterCriticaLote";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "anularNotaFiscal";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "enviarLoteNotas";
+                            break;
+                        case Servicos.ConsultarURLNfse:
+                            retorna = "obterNotasEmPNG";
                             break;
                     }
                     break;

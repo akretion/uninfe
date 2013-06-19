@@ -83,6 +83,11 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.BLUMENAU_SC:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+
+                        #region Encriptar tag <Assinatura>
+                        EncryptAssinatura();
+                        #endregion
+
                         break;
 
                     case PadroesNFSe.BHISS:
@@ -91,10 +96,15 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
+                    case PadroesNFSe.GIF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
+                        break;
+
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
-
 
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();
@@ -130,6 +140,50 @@ namespace NFe.Service.NFSe
                 }
             }
         }
+
+        #region EncryptAssinatura()
+        /// <summary>
+        /// Encriptar a tag Assinatura quando for município de Blumenau - SC
+        /// </summary>
+        private void EncryptAssinatura()
+        {
+            try
+            {
+                string arquivoXML = NomeArquivoXML;
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
+
+                foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
+                {
+                    XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
+
+                    XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
+
+                    foreach (XmlNode rpsNode in rpsList)
+                    {
+                        XmlElement rpsElement = (XmlElement)rpsNode;
+
+
+                        if (rpsElement.GetElementsByTagName("Assinatura").Count != 0)
+                        {
+                            //Encryptar a tag Assinatura
+                            rpsElement.GetElementsByTagName("Assinatura")[0].InnerText = Criptografia.SignWithRSASHA1(rpsElement.GetElementsByTagName("Assinatura")[0].InnerText);
+                        }
+                    }
+                }
+
+                //Salvar o XML com as alterações efetuadas
+                doc.Save(arquivoXML);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        #endregion
 
         #region EnvLoteRps()
         /// <summary>

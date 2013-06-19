@@ -73,8 +73,11 @@ namespace NFe.ConvertTxt
                         }
                     }
                 }
-                if (nfe.ide.dEmi.Year <= 1)
-                    throw new Exception("Arquivo não é de nota fiscal");
+                if (nfe.ide.dEmi.Year <= 1 && nfe.infNFe.Versao <= 2)
+                    throw new Exception("Arquivo não é de nota fiscal NF-e");
+
+                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3)
+                    throw new Exception("Arquivo não é de nota fiscal NFC-e");
             }
             catch(Exception ex)
             {
@@ -98,6 +101,8 @@ namespace NFe.ConvertTxt
                 switch (nodeNFe.LocalName.ToLower())
                 {
                     case "infnfe":
+                        char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
+                        nfe.infNFe.Versao = Convert.ToDecimal("0" + nodeNFe.Attributes["versao"].Value.Replace(".", charSeparator.ToString()));
                         nfe.infNFe.ID = nodeNFe.Attributes["Id"].Value;
                         foreach (XmlNode nodeinfNFe in nodeNFe.ChildNodes)
                         {
@@ -154,11 +159,31 @@ namespace NFe.ConvertTxt
                                 case "cana":
                                     processaCana(nodeinfNFe);
                                     break;
+
+                                case "pag":
+                                    processaPag(nodeinfNFe);
+                                    break;
                             }
                         }
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// processaPag
+        /// </summary>
+        /// <param name="nodenfeProc"></param>
+        private void processaPag(XmlNode nodenfeProc)
+        {
+            pag pagItem = new pag();
+
+            pagItem.tPag = (TpcnFormaPagamento)this.readInt32(nodenfeProc, "tPag");
+            pagItem.vPag = this.readDouble(nodenfeProc, "vPag");
+            pagItem.CNPJ = this.readValue(nodenfeProc, Properties.Resources.CNPJ);
+            pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(nodenfeProc, "tBand");
+            pagItem.cAut = this.readValue(nodenfeProc, "cAut");
+            nfe.pag.Add(pagItem);
         }
 
         /// <summary>
@@ -452,6 +477,7 @@ namespace NFe.ConvertTxt
                 nfe.Total.ICMSTot.vProd = this.readDouble(nodeICMSTot, Properties.Resources.vProd);
                 nfe.Total.ICMSTot.vSeg = this.readDouble(nodeICMSTot, Properties.Resources.vSeg);
                 nfe.Total.ICMSTot.vST = this.readDouble(nodeICMSTot, Properties.Resources.vST);
+                nfe.Total.ICMSTot.vTotTrib = this.readDouble(nodeICMSTot, Properties.Resources.vTotTrib);
             }
 
             foreach (XmlNode nodeISSQNtot in ((XmlElement)nodetotal).GetElementsByTagName("ISSQNtot"))
@@ -633,6 +659,8 @@ namespace NFe.ConvertTxt
 
             foreach (XmlNode nodedetImposto in ((XmlElement)nodedet).GetElementsByTagName("imposto"))
             {
+                detInfo.Imposto.vTotTrib = this.readDouble(((XmlElement)nodedetImposto), Properties.Resources.vTotTrib);
+                
                 #region -->Imposto->ICMS
                 foreach (XmlNode nodedetImpostoICMS in ((XmlElement)nodedetImposto).GetElementsByTagName(Properties.Resources.ICMS))
                 {
@@ -778,6 +806,11 @@ namespace NFe.ConvertTxt
         /// <param name="el"></param>
         private void processaDEST(XmlNode el)
         {
+            ///
+            /// NFC-e
+            /// 
+            nfe.dest.idEstrangeiro = this.readValue(el, "idEstrangeiro");
+
             nfe.dest.CNPJ = this.readValue(el, Properties.Resources.CNPJ);
             nfe.dest.CPF = this.readValue(el, Properties.Resources.CPF);
             nfe.dest.email = this.readValue(el, Properties.Resources.email);
@@ -848,22 +881,34 @@ namespace NFe.ConvertTxt
             nfe.ide.cNF = this.readInt32(nodeinfNFe, Properties.Resources.cNF);
             nfe.ide.cUF = this.readInt32(nodeinfNFe, Properties.Resources.cUF);
             nfe.ide.dEmi = this.readDate(nodeinfNFe, Properties.Resources.dEmi);
-            nfe.ide.dhCont = this.readDate(nodeinfNFe, Properties.Resources.dhCont);
+            nfe.ide.dhCont = this.readValue(nodeinfNFe, Properties.Resources.dhCont);
             nfe.ide.dSaiEnt = this.readDate(nodeinfNFe, Properties.Resources.dSaiEnt);
             nfe.ide.finNFe = (TpcnFinalidadeNFe)this.readInt32(nodeinfNFe, Properties.Resources.finNFe);
             nfe.ide.hSaiEnt = this.readDate(nodeinfNFe, Properties.Resources.hSaiEnt);
             nfe.ide.indPag = (TpcnIndicadorPagamento)this.readInt32(nodeinfNFe, Properties.Resources.indPag);
-            nfe.ide.mod = Convert.ToInt32(this.readValue(nodeinfNFe, Properties.Resources.mod));
+            nfe.ide.mod = this.readInt32(nodeinfNFe, Properties.Resources.mod);
             nfe.ide.nNF = this.readInt32(nodeinfNFe, Properties.Resources.nNF);
             nfe.ide.natOp = this.readValue(nodeinfNFe, Properties.Resources.natOp);
             nfe.ide.procEmi = (TpcnProcessoEmissao)this.readInt32(nodeinfNFe, Properties.Resources.procEmi);
-            nfe.ide.serie = Convert.ToInt32(this.readValue(nodeinfNFe, Properties.Resources.serie));
+            nfe.ide.serie = this.readInt32(nodeinfNFe, Properties.Resources.serie);
             nfe.ide.tpAmb = (TpcnTipoAmbiente)this.readInt32(nodeinfNFe, Properties.Resources.tpAmb);
             nfe.ide.tpEmis = (TpcnTipoEmissao)this.readInt32(nodeinfNFe, Properties.Resources.tpEmis);
             nfe.ide.tpImp = (TpcnTipoImpressao)this.readInt32(nodeinfNFe, Properties.Resources.tpImp);
             nfe.ide.tpNF = (TpcnTipoNFe)this.readInt32(nodeinfNFe, Properties.Resources.tpNF);
             nfe.ide.verProc = this.readValue(nodeinfNFe, Properties.Resources.verProc);
             nfe.ide.xJust = this.readValue(nodeinfNFe, Properties.Resources.xJust);
+
+            if (nfe.infNFe.Versao >= 3)
+            {
+                ///
+                /// NFC-e
+                /// 
+                nfe.ide.dhEmi = (string)this.readValue(nodeinfNFe, "dhEmi");
+                nfe.ide.dhSaiEnt = (string)this.readValue(nodeinfNFe, "dhSaiEnt");
+                nfe.ide.idDest = (TpcnDestinoOperacao)this.readInt32(nodeinfNFe, "idDest");
+                nfe.ide.indFinal = (TpcnConsumidorFinal)this.readInt32(nodeinfNFe, "indFinal");
+                nfe.ide.indPres = (TpcnPresencaComprador)this.readInt32(nodeinfNFe, "indPres");
+            }
 
             foreach (XmlNode nodeNFref in nodeinfNFe.ChildNodes)
             {

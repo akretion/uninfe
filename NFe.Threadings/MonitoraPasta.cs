@@ -39,6 +39,8 @@ namespace NFe.Threadings
         /// </summary>
         private void MonitorarPasta()
         {
+            fsw.Clear();
+
             for (int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
                 #region Pasta de envio
@@ -73,17 +75,13 @@ namespace NFe.Threadings
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion
-
             }
 
             #region Pasta Geral
-
             fsw.Add(new FileSystemWatcher(Path.Combine(System.Windows.Forms.Application.StartupPath, "Geral"), "*.xml"));
             fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
             fsw[fsw.Count - 1].StartWatch();
-
             #endregion
-
         }
         #endregion
 
@@ -158,7 +156,6 @@ namespace NFe.Threadings
                 {
                     empresa = LocalizaEmpresa(fi);
                 }
-
                 
 
                 if (empresa >= 0)

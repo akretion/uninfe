@@ -716,14 +716,7 @@ namespace NFe.Service
                     break;
             }
 
-            #region Código temporário
-            //TODO Wandrey: Código temporário até que todos os estados tenham o serviço de CCe (Carta de correção eletrônica). Futuramente vou retirar isso
             var versao = ConfiguracaoApp.VersaoXMLPedSit;
-            if (ConfiguracaoApp.TemCCe(chNFe.Substring(0, 2), tpAmb, tpEmis))
-            {
-                versao = "2.01";
-            }
-            #endregion
 
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

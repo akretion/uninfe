@@ -381,7 +381,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\DPEC\PDEPCSCERecepcaoRFB.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGOCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeCancelamento2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeRecepcao2.wsdl" />
@@ -423,7 +422,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPERecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCancelamento2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcao2.wsdl" />
@@ -1069,6 +1067,31 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PJuizdeForaMG.wsdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampoBomRS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCampoBomRS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GIF\NFSe-Infisc-v1.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSCancelarNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSConsultarNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSDadosCadastraisNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSGuiasNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSMensagensNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSRemessaNFSE.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSCancelarNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSConsultarNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSDadosCadastraisNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSGuiasNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSMensagensNFSE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSRemessaNFSE.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,25 +61,36 @@ namespace NFe.Service
                     ufParaWS = Convert.ToInt32(oDadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
 
                 // Se for evento de cancelamento
-                if (Servico == Servicos.EnviarEventoCancelamento)
+                switch (Servico)
                 {
-                    switch (tpEmis)
-                    {
-                        case Propriedade.TipoEmissao.teSVCRS:
-                        case Propriedade.TipoEmissao.teSVCSP:
-                        case Propriedade.TipoEmissao.teSCAN:
-                            //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
-                            break;
+                    case Servicos.EnviarEventoCancelamento:
+                        switch (tpEmis)
+                        {
+                            case Propriedade.TipoEmissao.teSVCRS:
+                            case Propriedade.TipoEmissao.teSVCSP:
+                            case Propriedade.TipoEmissao.teSCAN:
+                                //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
+                                break;
 
-                        case Propriedade.TipoEmissao.teNormal:
-                            //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
-                            break;
+                            case Propriedade.TipoEmissao.teNormal:
+                                //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
+                                break;
 
-                        default:
-                            //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
-                            tpEmis = Propriedade.TipoEmissao.teNormal;
-                            break;
-                    }
+                            default:
+                                //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
+                                tpEmis = Propriedade.TipoEmissao.teNormal;
+                                break;
+                        }
+
+                        break;
+
+                    case Servicos.EnviarCCe:
+                        //CCe só existe no ambiente Normal. Wandrey 22/04/2013
+                        tpEmis = Propriedade.TipoEmissao.teNormal;
+                        break;
+
+                    default:
+                        break;
                 }
 
                 if (vXmlNfeDadosMsgEhXML)
@@ -101,8 +112,8 @@ namespace NFe.Service
                     else
                     {
                         oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
-                    } 
-                        
+                    }
+
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg

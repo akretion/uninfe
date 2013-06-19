@@ -13,6 +13,32 @@ namespace uninfse
 
             #region Schemas padrão GINFES
 
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 22,
+                ArquivoXSD = "NFSe\\GINFES\\servico_consultar_nfse_envio_v03.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "ConsultarNfseEnvio",
+                TagAtributoId = "NumeroNfse",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfsePorRpsEnvio",
+                ID = 23,
+                ArquivoXSD = "NFSe\\GINFES\\servico_consultar_nfse_rps_envio_v03.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "ConsultarNfseRpsEnvio",
+                TagAtributoId = "Prestador",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_rps_envio_v03.xsd"
+            });
+            #endregion
+
             #region XML de Consulta de Lote RPS
             SchemaXML.InfSchemas.Add("NFSE-GINFES-ConsultarLoteRpsEnvio", new InfSchema()
             {
@@ -609,12 +635,216 @@ namespace uninfse
                 ID = 44,
                 ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
-                TagAssinatura = "EnviarLoteRpsEnvio",
-                TagAtributoId = "LoteRps",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion
             
+            #endregion
+
+            #region GIF
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GIF-NFSE", new InfSchema()
+            {
+                Tag = "NFSE",
+                ID = 45,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSe", new InfSchema()
+            {
+                Tag = "pedidoLoteNFSe",
+                ID = 45,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedConsultaTrans", new InfSchema()
+            {
+                Tag = "pedConsultaTrans",
+                ID = 46,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSe", new InfSchema()
+            {
+                Tag = "pedidoNFSe",
+                ID = 47,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedAnulaNFSe", new InfSchema()
+            {
+                Tag = "pedAnulaNFSe",
+                ID = 48,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoStatusLote", new InfSchema()
+            {
+                Tag = "pedidoStatusLote",
+                ID = 49,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-envioLote", new InfSchema()
+            {
+                Tag = "envioLote",
+                ID = 50,
+                ArquivoXSD = "",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de consulta URL NFSe
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSePNG", new InfSchema()
+            {
+                Tag = "pedidoLoteNFSePNG",
+                ID = 51,
+                ArquivoXSD = "",
+                Descricao = "XML de consulta URL NFe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+/*
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSe", new InfSchema()
+            {
+                Tag = "pedidoLoteNFSe",
+                ID = 45,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "pedidoLoteNFSe",
+                TagAtributoId = "pedidoLoteNFSe",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+            
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedConsultaTrans", new InfSchema()
+            {
+                Tag = "pedConsultaTrans",
+                ID = 46,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "pedConsultaTrans",
+                TagAtributoId = "pedConsultaTrans",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+            
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSe", new InfSchema()
+            {
+                Tag = "pedidoNFSe",
+                ID = 47,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "pedidoNFSe",
+                TagAtributoId = "pedidoNFSe",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedAnulaNFSe", new InfSchema()
+            {
+                Tag = "pedAnulaNFSe",
+                ID = 48,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "pedAnulaNFSe",
+                TagAtributoId = "pedAnulaNFSe",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoStatusLote", new InfSchema()
+            {
+                Tag = "pedidoStatusLote",
+                ID = 49,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "pedidoStatusLote",
+                TagAtributoId = "pedidoStatusLote",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+            
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-envioLote", new InfSchema()
+            {
+                Tag = "envioLote",
+                ID = 50,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "envioLote",
+                TagAtributoId = "NFS-e",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion          
+ 
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSePNG", new InfSchema()
+            {
+                Tag = "pedidoLoteNFSePNG",
+                ID = 51,
+                ArquivoXSD = "",
+                Descricao = "XML de consulta URL NFe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+  
+*/
+            #endregion
 
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
@@ -623,11 +853,6 @@ namespace uninfse
                 if (item.ID > SchemaXML.MaxID)
                     SchemaXML.MaxID = item.ID;
             }
-            #endregion
-
-
-
-
             #endregion
         }
     }

@@ -163,10 +163,6 @@ namespace NFe.Components
         /// </summary>
         ConsultarURLNfse,
         /// <summary>
-        /// Cadastrar nova empresa
-        /// </summary>
-        CadastrarEmpresa,
-        /// <summary>
         /// Consultas efetuadas pela pasta GERAL.
         /// </summary>
         ConsultaGeral,
@@ -238,8 +234,12 @@ namespace NFe.Components
         /// <summary>
         /// Padrão da prefeitura de Juiz de Fora-MG
         /// </summary>
-        BHISS
-
+        BHISS,
+        /// <summary>
+        /// Padrao GIF
+        /// Prefeitura de Campo Bom-RS
+        /// </summary>
+        GIF
         
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

@@ -43,6 +43,7 @@ namespace NFe.Service.NFSe
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.ISSNET:
+                    case PadroesNFSe.GIF:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedURLNfse.cMunicipio, oDadosPedURLNfse.tpAmb, oDadosPedURLNfse.tpEmis);
                         pedURLNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedURLNfse.cMunicipio));
                         break;

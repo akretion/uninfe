@@ -267,11 +267,7 @@ namespace NFe.Service
                 string arq = fullPath.ToLower().Trim();
 
                 #region Serviços que funcionam tanto na pasta Geral como na pasta da Empresa
-                if (arq.IndexOf(Propriedade.ExtEnvio.ConfigEmp) >= 0)
-                {
-                    tipoServico = Servicos.CadastrarEmpresa;
-                }
-                else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCertificado) >= 0)
+                if (arq.IndexOf(Propriedade.ExtEnvio.ConsCertificado) >= 0)
                 {
                     tipoServico = Servicos.ConsultaGeral;
                 }

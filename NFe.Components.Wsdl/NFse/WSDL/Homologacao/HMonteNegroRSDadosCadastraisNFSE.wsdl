@@ -97,19 +97,19 @@
     </wsdl:binding>
     <wsdl:service name="NFSEdadosCadastrais">
         <wsdl:port name="NFSEdadosCadastraisHttpSoap11Endpoint" binding="ns:NFSEdadosCadastraisSoap11Binding">
-            <soap:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpSoap11Endpoint/"/>
+            <soap:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEdadosCadastraisHttpsSoap11Endpoint" binding="ns:NFSEdadosCadastraisSoap11Binding">
             <soap:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpsSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEdadosCadastraisHttpSoap12Endpoint" binding="ns:NFSEdadosCadastraisSoap12Binding">
-            <soap12:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpSoap12Endpoint/"/>
+            <soap12:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEdadosCadastraisHttpsSoap12Endpoint" binding="ns:NFSEdadosCadastraisSoap12Binding">
             <soap12:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpsSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEdadosCadastraisHttpEndpoint" binding="ns:NFSEdadosCadastraisHttpBinding">
-            <http:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpEndpoint/"/>
+            <http:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpEndpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEdadosCadastraisHttpsEndpoint" binding="ns:NFSEdadosCadastraisHttpBinding">
             <http:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEdadosCadastrais.NFSEdadosCadastraisHttpsEndpoint/"/>

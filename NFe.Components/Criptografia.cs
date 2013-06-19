@@ -17,25 +17,25 @@ namespace NFe.Components
             {
                 return criptografaSenha(senhaCripto, _chave);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return "String errada. " + ex.Message;
             }
 
         }
-        
+
         public static string descriptografaSenha(string senhaDescripto)
         {
             try
             {
                 return descriptografaSenha(senhaDescripto, _chave);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return "Wrong Input. " + ex.Message;
             }
         }
-        
+
         public static string criptografaSenha(string senhaCripto, string chave)
         {
             try
@@ -54,13 +54,12 @@ namespace NFe.Components
                 byteBuff = ASCIIEncoding.ASCII.GetBytes(senhaCripto);
                 return Convert.ToBase64String(objcriptografaSenha.CreateEncryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return "Digite os valores Corretamente." + ex.Message;
             }
         }
 
-        
         public static string descriptografaSenha(string strCriptografada, string chave)
         {
             try
@@ -82,7 +81,7 @@ namespace NFe.Components
 
                 return strDecrypted;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return "Digite os valores Corretamente." + ex.Message;
             }
@@ -91,7 +90,7 @@ namespace NFe.Components
         public static bool compararStrings(string num01, string num02)
         {
             bool stringValor;
-            if (num01.Equals(num02))
+            if(num01.Equals(num02))
             {
                 stringValor = true;
             }
@@ -101,7 +100,30 @@ namespace NFe.Components
             }
             return stringValor;
         }
-        
+
+        /// <summary>
+        /// Encripta uma string em SHA1 e assina com RSA
+        /// </summary>
+        /// <param name="value">string a ser criptografada</param>
+        /// <returns></returns>
+        public static string SignWithRSASHA1(string value)
+        {
+            string result = "";
+            //Converta a cadeia de caracteres ASCII para bytes. 
+            byte[] bytes = Encoding.ASCII.GetBytes(value);
+
+            //Gere o HASH (array de bytes) utilizando SHA1. 
+            byte[] hashData = new SHA1Managed().ComputeHash(bytes);
+
+            //Assine o HASH (array de bytes) utilizando RSA-SHA1.
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            byte[] signature = rsa.SignHash(hashData, CryptoConfig.MapNameToOID("SHA1"));
+
+            //converte para uma string base 64 e ...
+            result = Convert.ToBase64String(signature);
+
+            //... retorna
+            return result;
+        }
     }
 }
-

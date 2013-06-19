@@ -70,13 +70,13 @@
     </wsdl:binding>
     <wsdl:service name="NFSEguias">
         <wsdl:port name="NFSEguiasHttpSoap11Endpoint" binding="ns:NFSEguiasSoap11Binding">
-            <soap:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEguias.NFSEguiasHttpSoap11Endpoint/"/>
+            <soap:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEguiasHttpsSoap11Endpoint" binding="ns:NFSEguiasSoap11Binding">
             <soap:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpsSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEguiasHttpSoap12Endpoint" binding="ns:NFSEguiasSoap12Binding">
-            <soap12:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEguias.NFSEguiasHttpSoap12Endpoint/"/>
+            <soap12:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEguiasHttpsSoap12Endpoint" binding="ns:NFSEguiasSoap12Binding">
             <soap12:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpsSoap12Endpoint/"/>
@@ -85,7 +85,7 @@
             <http:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpsEndpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEguiasHttpEndpoint" binding="ns:NFSEguiasHttpBinding">
-            <http:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEguias.NFSEguiasHttpEndpoint/"/>
+            <http:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEguias.NFSEguiasHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

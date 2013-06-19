@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--  PL_006j_semAncora - 26/10/11 - versao emergencial sem ancora no pattern da placa -->
 <!--  PL_006j - 20/10/11 - alteracao no formato da placa do veiculo para aceitar AAA999, AAA9999, AA9999 e AAAA999  // NT2011/005 -->
 <!--  PL_006i - 03/07/11 - acrescimo do item 6/7 tpEmis  // NT2011/004 -->
@@ -19,6 +19,7 @@
 <!-- PL_006p - 29/10/2012 -  inclusão da tabela completa codANP  -->
 <!-- PL_006p - 29/10/2012 -  restabelecidas as restrições para qVol  -->
 <!-- PL_006q - 20/11/2012 -  Origem mercadoria de acordo com NT 2012/005 -->
+<!-- PL_006r - 23/04/2013 -  Redução qtde. máxima ocorrências NFref; inclusão do elemento vTotTrib (NT 2013/003) -->
 <xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.portalfiscal.inf.br/nfe" targetNamespace="http://www.portalfiscal.inf.br/nfe" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v1.01.xsd"/>
 	<xs:include schemaLocation="tiposBasico_v1.03.xsd"/>
@@ -137,7 +138,7 @@ SCAN 900-999</xs:documentation>
 											<xs:documentation>Código do Município de Ocorrência do Fato Gerador (utilizar a tabela do IBGE)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="NFref" minOccurs="0" maxOccurs="5000">
+									<xs:element name="NFref" minOccurs="0" maxOccurs="500">
 										<xs:annotation>
 											<xs:documentation>Grupo de infromações da NF referenciada</xs:documentation>
 										</xs:annotation>
@@ -1503,6 +1504,11 @@ ambiente.</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:sequence>
+												<xs:element name="vTotTrib" type="TDec_1302" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Valor estimado total de impostos federais, estaduais e municipais</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 												<xs:choice>
 													<xs:sequence>
 														<xs:element name="ICMS">
@@ -3698,6 +3704,11 @@ Substituição Tributaria;</xs:documentation>
 												<xs:element name="vNF" type="TDec_1302">
 													<xs:annotation>
 														<xs:documentation>Valor Total da NF-e</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="vTotTrib" type="TDec_1302" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Valor estimado total de impostos federais, estaduais e municipais</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 											</xs:sequence>

@@ -1162,4 +1162,22 @@
       <CancelarNfse>wsdl\producao\</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="4303905" Nome="Campo Bom - RS" UF="RS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

@@ -68,8 +68,6 @@ namespace NFe.Service
             {
                 oDadosPedSit = new DadosPedSit();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                ///*oLer.*/
                 PedSit(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
@@ -79,60 +77,45 @@ namespace NFe.Service
                     switch (Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Cte:
-                            wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaSituacaoNFe, emp, /*oLer.*/oDadosPedSit.cUF, /*oLer.*/oDadosPedSit.tpAmb, /*oLer.*/oDadosPedSit.tpEmis);
+                            wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaSituacaoNFe, emp, oDadosPedSit.cUF, oDadosPedSit.tpAmb, oDadosPedSit.tpEmis);
                             break;
                         case TipoAplicativo.Nfe:
-                            wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaSituacaoNFe, emp, /*oLer.*/oDadosPedSit.cUF, /*oLer.*/oDadosPedSit.tpAmb, /*oLer.*/oDadosPedSit.tpEmis, /*oLer.*/oDadosPedSit.versaoNFe);
+                            wsProxy = ConfiguracaoApp.DefinirWS(Servicos.PedidoConsultaSituacaoNFe, emp, oDadosPedSit.cUF, oDadosPedSit.tpAmb, oDadosPedSit.tpEmis);
                             break;
                         default:
                             break;
                     }
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    if (/*oLer.*/oDadosPedSit.versaoNFe == 1 && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                    object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*oLer.*/oDadosPedSit.cUF));
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedSit.cUF, Servico));
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/oDadosPedSit.cUF.ToString());
+                    switch (Propriedade.TipoAplicativo)
                     {
-                        object oConsulta = null;
-                        if (/*oLer.*/oDadosPedSit.cUF == 41)
-                            oConsulta = wsProxy.CriarObjeto("NfeConsultaService");
-                        else
-                            oConsulta = wsProxy.CriarObjeto("NfeConsulta");
-
-                        //Invocar o método que envia o XML para o SEFAZ
-                        oInvocarObj.Invocar(wsProxy, oConsulta, "nfeConsultaNF", this);
+                        case TipoAplicativo.Cte:
+                            wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedSit);
+                            break;
+                        case TipoAplicativo.Nfe:
+                            wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedSit);
+                            break;
+                        default:
+                            break;
                     }
-                    else
-                    {
-                        object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*oLer.*/oDadosPedSit.cUF));
-                        object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedSit.cUF, Servico));
 
-                        //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                        wsProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/oDadosPedSit.cUF.ToString());
-                        switch (Propriedade.TipoAplicativo)
-                        {
-                            case TipoAplicativo.Cte:
-                                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedSit);
-                                break;
-                            case TipoAplicativo.Nfe:
-                                wsProxy.SetProp(oCabecMsg, "versaoDados", /*oLer.*/oDadosPedSit.versaoNFe == 201 ? "2.01" : ConfiguracaoApp.VersaoXMLPedSit);
-                                break;
-                            default:
-                                break;
-                        }
-
-                        //Invocar o método que envia o XML para o SEFAZ
-                        oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, /*oLer.*/oDadosPedSit.cUF), oCabecMsg, this);
-                    }
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, /*oLer.*/oDadosPedSit.cUF), oCabecMsg, this);
 
                     //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
                     //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.
                     switch (Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Cte:
-                            this.LerRetornoSitCTe(/*oLer.*/oDadosPedSit.chNFe);
+                            this.LerRetornoSitCTe(oDadosPedSit.chNFe);
                             break;
                         case TipoAplicativo.Nfe:
-                            if (/*oLer.*/oDadosPedSit.versaoNFe != 1)
-                                this.LerRetornoSitNFe(/*oLer.*/oDadosPedSit.chNFe);
+                            this.LerRetornoSitNFe(oDadosPedSit.chNFe);
                             break;
                         default:
                             break;
@@ -267,32 +250,13 @@ namespace NFe.Service
 
                             case TipoAplicativo.Nfe:
                                 this.oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                                this.oDadosPedSit.versaoNFe = 201;
 
-                                //Definir a versão do XML para resolver o problema do Estado do Paraná e Goiás que não migrou o banco de dados
-                                //da versão 1.0 para a 2.0, sendo assim a consulta situação de notas fiscais tem que ser feita cada uma em seu 
-                                //ambiente. Wandrey 23/03/2011
-                                if (consSitNFeElemento.GetAttribute("versao") == "1.07" && (this.oDadosPedSit.cUF == 41 || this.oDadosPedSit.cUF == 52))
-                                    this.oDadosPedSit.versaoNFe = 1;
-                                else
+                                //Se alguém ainda gerar com a versão 2.00 vou mudar para a atual para facilitar para o usuário do UniNFe
+                                if (consSitNFeElemento.GetAttribute("versao") == "2.00")
                                 {
-                                    this.oDadosPedSit.versaoNFe = 2;
-
-                                    bool _temCCe = ConfiguracaoApp.TemCCe(this.oDadosPedSit.chNFe.Substring(0, 2), this.oDadosPedSit.tpAmb, this.oDadosPedSit.tpEmis);
-
-                                    if ((consSitNFeElemento.GetAttribute("versao") == "2.00" && _temCCe) ||
-                                        (consSitNFeElemento.GetAttribute("versao") == "2.01" && !_temCCe))
-                                    {
-                                        //if (_temCCe && oDadosPedSit.cUF != 31)
-                                        if (_temCCe)
-                                            this.oDadosPedSit.versaoNFe = 201;
-
-                                        //consSitNFeElemento.Attributes["versao"].InnerText = _temCCe && oDadosPedSit.cUF != 31 ? "2.01" : ConfiguracaoApp.VersaoXMLPedSit;
-                                        consSitNFeElemento.Attributes["versao"].InnerText = _temCCe ? "2.01" : ConfiguracaoApp.VersaoXMLPedSit;
-                                        doc.Save(cArquivoXML);
-                                    }
-                                    else
-                                        if (consSitNFeElemento.GetAttribute("versao") == "2.01")
-                                            this.oDadosPedSit.versaoNFe = 201;
+                                    consSitNFeElemento.Attributes["versao"].InnerText = ConfiguracaoApp.VersaoXMLPedSit;
+                                    doc.Save(cArquivoXML);
                                 }
                                 break;
 

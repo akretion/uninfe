@@ -29,30 +29,33 @@ namespace NFe.Components
             }
         }
 
-        public static string WebServicesHomologacao(PadroesNFSe padrao, int IdMunicipio = 0)
+        public static string WebServicesHomologacao(PadroesNFSe padrao, int idMunicipio = 0)
         {
             switch (padrao)
             {
                 case PadroesNFSe.THEMA:
+                    switch (idMunicipio)
+                    {
+                        case 4312401: //Monte Negro - RS 
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HMonteNegroRSRemessaNFSE.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>" +
+                                   "</LocalHomologacao>";
 
-                    if (IdMunicipio == 4312401) // Municipio: MonteNegro - RS
-                        return @"<LocalHomologacao>
-                             <RecepcionarLoteRps>wsdl\homologacao\HMonteNegroRSRemessaNFSE.wsdl</RecepcionarLoteRps>
-                             <ConsultarSituacaoLoteRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>
-                             <ConsultarNfsePorRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarNfsePorRps>
-                             <ConsultarNfse>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarNfse>
-                             <ConsultarLoteRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarLoteRps>
-                             <CancelarNfse>wsdl\homologacao\HMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>
-                             </LocalHomologacao>";
-                    else
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HThemaRemessa.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HThemaCancelamento.wsdl</CancelarNfse>" +
-                                "</LocalHomologacao>";
+                        default:
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HThemaRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HThemaConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HThemaCancelamento.wsdl</CancelarNfse>" +
+                                   "</LocalHomologacao>";
+                    }
 
                 case PadroesNFSe.GINFES:
                     return "<LocalHomologacao>" +
@@ -106,7 +109,7 @@ namespace NFe.Components
                             "</LocalHomologacao>";
 
                 case PadroesNFSe.ISSONLINE:
-                    if (IdMunicipio == 3502804)
+                    if (idMunicipio == 3502804)
                         return "<LocalHomologacao>" +
                                 @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
                                 @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
@@ -145,34 +148,48 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
 
+                case PadroesNFSe.GIF:
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarURLNfse>" +
+                            @"</LocalHomologacao>";
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
             }
         }
 
-        public static string WebServicesProducao(NFe.Components.PadroesNFSe padrao, int IdMunicipio = 0)
+        public static string WebServicesProducao(NFe.Components.PadroesNFSe padrao, int idMunicipio = 0)
         {
             switch (padrao)
             {
                 case PadroesNFSe.THEMA:
-                    if (IdMunicipio == 4312401) // MonteNegro - RS
-                        return @"<LocalProducao>
-                                  <RecepcionarLoteRps>wsdl\producao\PMonteNegroRSRemessaNFSE.wsdl</RecepcionarLoteRps>
-                                  <ConsultarSituacaoLoteRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>
-                                  <ConsultarNfsePorRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarNfsePorRps>
-                                  <ConsultarNfse>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarNfse>
-                                  <ConsultarLoteRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarLoteRps>
-                                  <CancelarNfse>wsdl\producao\PMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>
-                                  </LocalProducao>";
-                    else
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PThemaRemessa.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PThemaConsulta.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PThemaCancelamento.wsdl</CancelarNfse>" +
-                                @"</LocalProducao>";
+                    switch (idMunicipio)
+                    {
+                        case 4312401: // Monte Negro - RS
+                            return "<LocalProducao>" +
+                                   @"<RecepcionarLoteRps>wsdl\producao\PMonteNegroRSRemessaNFSE.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\producao\PMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>" +
+                                   "</LocalProducao>";
+
+                        default:
+                            return "<LocalProducao>" +
+                                   @"<RecepcionarLoteRps>wsdl\producao\PThemaRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\producao\PThemaConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\producao\PThemaConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\producao\PThemaCancelamento.wsdl</CancelarNfse>" +
+                                   "</LocalProducao>";
+                    }
 
                 case PadroesNFSe.GINFES:
                     return "<LocalProducao>" +
@@ -226,7 +243,7 @@ namespace NFe.Components
                             "</LocalProducao>";
 
                 case PadroesNFSe.ISSONLINE:
-                    if (IdMunicipio == 3502804)
+                    if (idMunicipio == 3502804)
                         return "<LocalProducao>" +
                                 @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
                                 @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
@@ -264,6 +281,17 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+
+                case PadroesNFSe.GIF:
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarURLNfse>" +
+                            @"</LocalProducao>";
 
                 default:
                     return "<LocalProducao></LocalProducao>";

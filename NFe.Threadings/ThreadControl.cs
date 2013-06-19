@@ -85,9 +85,10 @@ namespace NFe.Threadings
                           return false;
                       });
                 }
-                catch
+                catch (Exception ex)
                 {
                     /*Provavelmente nunca irá cair aqui... Mas...*/
+                    Auxiliar.WriteLog(ex.Message, true);
                 }
             }
 

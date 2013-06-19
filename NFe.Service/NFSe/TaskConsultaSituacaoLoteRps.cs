@@ -83,6 +83,11 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
+                    case PadroesNFSe.GIF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis);
+                        pedSitLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSitLoteRps.cMunicipio));
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

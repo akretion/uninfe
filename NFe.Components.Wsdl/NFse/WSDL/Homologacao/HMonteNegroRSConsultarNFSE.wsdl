@@ -223,7 +223,7 @@
     </wsdl:binding>
     <wsdl:service name="NFSEconsulta">
         <wsdl:port name="NFSEconsultaHttpSoap11Endpoint" binding="ns:NFSEconsultaSoap11Binding">
-            <soap:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEconsulta.NFSEconsultaHttpSoap11Endpoint/"/>
+            <soap:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpsSoap11Endpoint" binding="ns:NFSEconsultaSoap11Binding">
             <soap:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpsSoap11Endpoint/"/>
@@ -232,13 +232,13 @@
             <soap12:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpsSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpSoap12Endpoint" binding="ns:NFSEconsultaSoap12Binding">
-            <soap12:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEconsulta.NFSEconsultaHttpSoap12Endpoint/"/>
+            <soap12:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpsEndpoint" binding="ns:NFSEconsultaHttpBinding">
             <http:address location="https://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpsEndpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpEndpoint" binding="ns:NFSEconsultaHttpBinding">
-            <http:address location="http://nfsehml.montenegro.rs.gov.br:8080/nfsehml/services/NFSEconsulta.NFSEconsultaHttpEndpoint/"/>
+            <http:address location="http://nfsehml.montenegro.rs.gov.br/nfsehml/services/NFSEconsulta.NFSEconsultaHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

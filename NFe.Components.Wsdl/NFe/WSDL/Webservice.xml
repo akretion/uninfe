@@ -94,7 +94,6 @@
       <NFeConsulta>wsdl\homologacao\GO\HGONfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\GO\HGONfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\GO\HGOCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeConsulta1>wsdl\homologacao\GO\HGONfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\homologacao\GO\HGORecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
@@ -236,7 +235,6 @@
       <NFeConsulta>wsdl\homologacao\PR\HPRNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\PR\HPRNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\PR\HPRCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeConsulta1>wsdl\homologacao\PR\HPRNfeConsulta.wsdl</NFeConsulta1>
       <NFeCCe>wsdl\homologacao\PR\HPRNFeRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
@@ -398,34 +396,7 @@
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
     </LocalProducao>
   </Estado>
-  <Estado ID="24" Nome="Rio Grande do Norte" UF="RN">
-    <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\homologacao\SVAN\HSVANNfeCancelamento2.wsdl</NFeCancelamento>
-      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao>wsdl\producao\SVAN\PSVANNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\SVAN\PSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\producao\SVAN\PSVANNfeCancelamento2.wsdl</NFeCancelamento>
-      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
-    </LocalProducao>
-  </Estado>
+  
   <Estado ID="32" Nome="Espirito Santo" UF="ES">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
@@ -736,6 +707,34 @@
     </LocalProducao>
   </Estado>
   <Estado ID="53" Nome="Distrito Federal" UF="DF">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\SVRS\HSVRSNfeCancelamento2.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeCCe>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeCCe>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\SVRS\PSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SVRS\PSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\SVRS\PSVRSNfeCancelamento2.wsdl</NFeCancelamento>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeCCe>wsdl\producao\SVRS\PSVRSRecepcaoEvento.wsdl</NFeCCe>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="24" Nome="Rio Grande do Norte" UF="RN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
