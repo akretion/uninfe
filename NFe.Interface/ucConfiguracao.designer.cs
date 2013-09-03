@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lblSenhaWS = new System.Windows.Forms.Label();
+            this.lblUsuarioWS = new System.Windows.Forms.Label();
+            this.txtSenhaWS = new System.Windows.Forms.TextBox();
+            this.txtUsuarioWS = new System.Windows.Forms.TextBox();
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
             this.checkBoxGravarEventosDeTerceiros = new System.Windows.Forms.CheckBox();
             this.checkBoxGravarEventosNaPastaEnviadosNFe = new System.Windows.Forms.CheckBox();
@@ -58,7 +62,6 @@
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_PastaDownload = new System.Windows.Forms.TextBox();
-            this.button_SelecionarPastaDownload = new System.Windows.Forms.Button();
             this.cbCriaPastas = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -74,6 +77,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_PastaEnvioXML = new System.Windows.Forms.TextBox();
+            this.button_SelecionarPastaDownload = new System.Windows.Forms.Button();
             this.button_SelectPastaXmlRetorno = new System.Windows.Forms.Button();
             this.button_selectxmlenvio = new System.Windows.Forms.Button();
             this.button_SelectPastaXmlEnviado = new System.Windows.Forms.Button();
@@ -123,10 +127,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtUsuarioWS = new System.Windows.Forms.TextBox();
-            this.txtSenhaWS = new System.Windows.Forms.TextBox();
-            this.lblUsuarioWS = new System.Windows.Forms.Label();
-            this.lblSenhaWS = new System.Windows.Forms.Label();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -188,6 +188,43 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Diversos";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lblSenhaWS
+            // 
+            this.lblSenhaWS.AutoSize = true;
+            this.lblSenhaWS.Location = new System.Drawing.Point(478, 134);
+            this.lblSenhaWS.Name = "lblSenhaWS";
+            this.lblSenhaWS.Size = new System.Drawing.Size(41, 13);
+            this.lblSenhaWS.TabIndex = 27;
+            this.lblSenhaWS.Text = "Senha:";
+            this.lblSenhaWS.Visible = false;
+            // 
+            // lblUsuarioWS
+            // 
+            this.lblUsuarioWS.AutoSize = true;
+            this.lblUsuarioWS.Location = new System.Drawing.Point(370, 134);
+            this.lblUsuarioWS.Name = "lblUsuarioWS";
+            this.lblUsuarioWS.Size = new System.Drawing.Size(46, 13);
+            this.lblUsuarioWS.TabIndex = 26;
+            this.lblUsuarioWS.Text = "Usuário:";
+            this.lblUsuarioWS.Visible = false;
+            // 
+            // txtSenhaWS
+            // 
+            this.txtSenhaWS.Location = new System.Drawing.Point(478, 150);
+            this.txtSenhaWS.Name = "txtSenhaWS";
+            this.txtSenhaWS.PasswordChar = '*';
+            this.txtSenhaWS.Size = new System.Drawing.Size(100, 20);
+            this.txtSenhaWS.TabIndex = 25;
+            this.txtSenhaWS.Visible = false;
+            // 
+            // txtUsuarioWS
+            // 
+            this.txtUsuarioWS.Location = new System.Drawing.Point(370, 150);
+            this.txtUsuarioWS.Name = "txtUsuarioWS";
+            this.txtUsuarioWS.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuarioWS.TabIndex = 24;
+            this.txtUsuarioWS.Visible = false;
             // 
             // checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe
             // 
@@ -458,7 +495,6 @@
             // 
             this.tabPage7.Controls.Add(this.label3);
             this.tabPage7.Controls.Add(this.textBox_PastaDownload);
-            this.tabPage7.Controls.Add(this.button_SelecionarPastaDownload);
             this.tabPage7.Controls.Add(this.cbCriaPastas);
             this.tabPage7.Controls.Add(this.label1);
             this.tabPage7.Controls.Add(this.label12);
@@ -474,6 +510,7 @@
             this.tabPage7.Controls.Add(this.label7);
             this.tabPage7.Controls.Add(this.label2);
             this.tabPage7.Controls.Add(this.textBox_PastaEnvioXML);
+            this.tabPage7.Controls.Add(this.button_SelecionarPastaDownload);
             this.tabPage7.Controls.Add(this.button_SelectPastaXmlRetorno);
             this.tabPage7.Controls.Add(this.button_selectxmlenvio);
             this.tabPage7.Controls.Add(this.button_SelectPastaXmlEnviado);
@@ -507,17 +544,6 @@
             this.textBox_PastaDownload.Size = new System.Drawing.Size(542, 20);
             this.textBox_PastaDownload.TabIndex = 28;
             this.textBox_PastaDownload.TextChanged += new System.EventHandler(this.changed_Modificado);
-            // 
-            // button_SelecionarPastaDownload
-            // 
-            this.button_SelecionarPastaDownload.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
-            this.button_SelecionarPastaDownload.Location = new System.Drawing.Point(553, 328);
-            this.button_SelecionarPastaDownload.Name = "button_SelecionarPastaDownload";
-            this.button_SelecionarPastaDownload.Size = new System.Drawing.Size(27, 23);
-            this.button_SelecionarPastaDownload.TabIndex = 29;
-            this.button_SelecionarPastaDownload.Tag = "10";
-            this.button_SelecionarPastaDownload.UseVisualStyleBackColor = true;
-            this.button_SelecionarPastaDownload.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
             // 
             // cbCriaPastas
             // 
@@ -665,6 +691,17 @@
             this.textBox_PastaEnvioXML.Size = new System.Drawing.Size(542, 20);
             this.textBox_PastaEnvioXML.TabIndex = 6;
             this.textBox_PastaEnvioXML.TextChanged += new System.EventHandler(this.changed_Modificado);
+            // 
+            // button_SelecionarPastaDownload
+            // 
+            this.button_SelecionarPastaDownload.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
+            this.button_SelecionarPastaDownload.Location = new System.Drawing.Point(553, 328);
+            this.button_SelecionarPastaDownload.Name = "button_SelecionarPastaDownload";
+            this.button_SelecionarPastaDownload.Size = new System.Drawing.Size(27, 23);
+            this.button_SelecionarPastaDownload.TabIndex = 29;
+            this.button_SelecionarPastaDownload.Tag = "10";
+            this.button_SelecionarPastaDownload.UseVisualStyleBackColor = true;
+            this.button_SelecionarPastaDownload.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
             // 
             // button_SelectPastaXmlRetorno
             // 
@@ -1183,43 +1220,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txtUsuarioWS
-            // 
-            this.txtUsuarioWS.Location = new System.Drawing.Point(370, 150);
-            this.txtUsuarioWS.Name = "txtUsuarioWS";
-            this.txtUsuarioWS.Size = new System.Drawing.Size(100, 20);
-            this.txtUsuarioWS.TabIndex = 24;
-            this.txtUsuarioWS.Visible = false;
-            // 
-            // txtSenhaWS
-            // 
-            this.txtSenhaWS.Location = new System.Drawing.Point(478, 150);
-            this.txtSenhaWS.Name = "txtSenhaWS";
-            this.txtSenhaWS.PasswordChar = '*';
-            this.txtSenhaWS.Size = new System.Drawing.Size(100, 20);
-            this.txtSenhaWS.TabIndex = 25;
-            this.txtSenhaWS.Visible = false;
-            // 
-            // lblUsuarioWS
-            // 
-            this.lblUsuarioWS.AutoSize = true;
-            this.lblUsuarioWS.Location = new System.Drawing.Point(370, 134);
-            this.lblUsuarioWS.Name = "lblUsuarioWS";
-            this.lblUsuarioWS.Size = new System.Drawing.Size(46, 13);
-            this.lblUsuarioWS.TabIndex = 26;
-            this.lblUsuarioWS.Text = "Usuário:";
-            this.lblUsuarioWS.Visible = false;
-            // 
-            // lblSenhaWS
-            // 
-            this.lblSenhaWS.AutoSize = true;
-            this.lblSenhaWS.Location = new System.Drawing.Point(478, 134);
-            this.lblSenhaWS.Name = "lblSenhaWS";
-            this.lblSenhaWS.Size = new System.Drawing.Size(41, 13);
-            this.lblSenhaWS.TabIndex = 27;
-            this.lblSenhaWS.Text = "Senha:";
-            this.lblSenhaWS.Visible = false;
             // 
             // ucConfiguracao
             // 

@@ -71,12 +71,9 @@ namespace NFe.Components
                                 try
                                 {
                                     string nome = oLerXml.Name;
-                                    if (oLerXml.Name.Equals("envEvento") && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                                     {
-                                        ///
-                                        /// **** tirei pq como estamos lendo a tag <tpEvento>, e nela tem como verificar qual XSD utilizar para validacao
-                                        /// então, o arquivo pode ter como sufixo -env-cce, -env-canc ou -env-manif
-                                        //if (!cRotaArqXML.EndsWith(Propriedade.ExtEnvio.EnvCCe_XML))
+                                        if (oLerXml.Name.Equals("envEvento"))
                                         {
                                             XmlDocument xml = new XmlDocument();
                                             xml.Load(oLerXml);
@@ -105,6 +102,17 @@ namespace NFe.Components
                                                 }
                                             }
                                         }
+                                        else if (oLerXml.Name.Equals("eventoMDFe"))
+                                        {
+                                            XmlDocument xml = new XmlDocument();
+                                            xml.Load(oLerXml);
+
+                                            XmlElement cl = (XmlElement)xml.GetElementsByTagName("tpEvento")[0];
+                                            if (cl != null)
+                                            {
+                                                nome = "eventoMDFe" + cl.InnerText;
+                                            }
+                                        }
                                     }
                                     schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + "-" + padraoNFSe + nome];
                                 }
@@ -121,21 +129,6 @@ namespace NFe.Components
                                 TagLoteAssinatura = schema.TagLoteAssinatura;
                                 TagLoteAtributoId = schema.TagLoteAtributoId;
                                 TargetNameSpace = schema.TargetNameSpace;
-
-                                #region Código temporário, vai sumir com o tempo. Wandrey
-                                //TODO Wandrey - Este código é temporário até que todos os estados tenha o serviço da CCe - Wandrey 13/07/2011
-                                if (oLerXml.Name == "consSitNFe")
-                                {
-                                    XmlDocument xml = new XmlDocument();
-                                    xml.Load(oLerXml);
-
-                                    XmlElement cl = (XmlElement)xml.GetElementsByTagName("consSitNFe")[0];
-                                    if (cl.GetAttribute("versao") == "2.01")
-                                    {
-                                        cArquivoSchema = "NFe\\consSitNFe_v2.01.xsd";
-                                    }
-                                }
-                                #endregion
 
                                 if (this.nRetornoTipoArq != 0) //Arquivo XML já foi identificado
                                 {

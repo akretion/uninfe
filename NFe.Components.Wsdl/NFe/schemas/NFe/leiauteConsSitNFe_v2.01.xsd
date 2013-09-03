@@ -504,7 +504,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="TCOrgaoIBGE">
 		<xs:annotation>
-			<xs:documentation>Tipo Código de orgão (UF da tabela do IBGE + 90 RFB)</xs:documentation>
+			<xs:documentation>Tipo Código de orgão (UF da tabela do IBGE + 91 RFB)</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve"/>
@@ -536,6 +536,7 @@
 			<xs:enumeration value="52"/>
 			<xs:enumeration value="53"/>
 			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

@@ -35,7 +35,7 @@ namespace NFe.Service
 
             try
             {
-                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                int emp = Functions.FindEmpresaByThread();
 
                 ///
                 /// exclui o arquivo de erro
@@ -91,25 +91,25 @@ namespace NFe.Service
                                     "Nota fiscal: " + txtClass.NotaFiscal.ToString("000000000") +
                                     " Série: " + txtClass.Serie.ToString("000") +
                                     " - ChaveNFe: " + txtClass.ChaveNFe;
-                            ///
-                            /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
-                            /// ou
-                            /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
-                            ///
-                            FileInfo oArquivo = new FileInfo(txtClass.XMLFileName);
-                            string vNomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
 
-                            ///
-                            /// excluo o XML se já existe
-                            /// 
-                            Functions.DeletarArquivo(vNomeArquivoDestino);
-
-                            ///
-                            /// move o arquivo da pasta "Envio\Convertidos" para a pasta "Envio"
-                            /// ou
-                            /// move o arquivo da pasta "Validar\Convertidos" para a pasta "Validar"
-                            /// 
-                            oArquivo.MoveTo(vNomeArquivoDestino);
+                            if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()))
+                            {
+                                ///
+                                /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
+                                /// ou
+                                /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
+                                ///
+                                string vvNomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
+                                Functions.Move(txtClass.XMLFileName, vvNomeArquivoDestino);
+                            }
+                            else
+                            {
+                                ///
+                                /// se a pasta de origem é a de validação, move o arquivo convertido para a pasta de retorno
+                                /// 
+                                // string vvNomeArquivoDestino = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(oArquivo.Name));
+                                // Functions.Move(txtClass.XMLFileName, vvNomeArquivoDestino);
+                            }
                         }
                     }
                 }
@@ -132,12 +132,16 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(ccMessage))
             {
                 oAux.MoveArqErro(arquivo, ".txt");
-                ///
-                /// exclui todos os XML gerados na pasta Envio\convertidos
-                /// 
-                foreach (NFe.ConvertTxt.txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
+
+                if (ccMessage.StartsWith("cStat=02") || ccMessage.StartsWith("cStat=99"))
                 {
-                    Functions.DeletarArquivo(pasta + "\\convertidos\\" + txtClass.XMLFileName);
+                    ///
+                    /// exclui todos os XML gerados na pasta Envio\convertidos somente se houve erro na conversão
+                    /// 
+                    foreach (NFe.ConvertTxt.txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
+                    {
+                        Functions.DeletarArquivo(pasta + "\\convertidos\\" + Path.GetFileName(txtClass.XMLFileName));
+                    }
                 }
                 ///
                 /// danasa 8-2009

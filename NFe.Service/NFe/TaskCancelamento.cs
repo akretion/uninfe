@@ -11,7 +11,7 @@ using NFe.Certificado;
 
 namespace NFe.Service
 {
-    public class TaskCancelamento : TaskAbst
+    public class TaskCancelamento: TaskAbst
     {
         #region Classe com os dados do XML da consulta do pedido de cancelamento
         /// <summary>
@@ -23,7 +23,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.CancelarNFe;
@@ -36,7 +36,7 @@ namespace NFe.Service
                 ///*oLer.*/
                 PedCanc(emp, NomeArquivoXML);
 
-                if (this.vXmlNfeDadosMsgEhXML)
+                if(this.vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.CancelarNFe, emp, /*oLer.*/oDadosPedCanc.cUF, /*oLer.*/oDadosPedCanc.tpAmb, /*oLer.*/oDadosPedCanc.tpEmis);
@@ -72,11 +72,11 @@ namespace NFe.Service
                         /*oLer.*/oDadosPedCanc.xJust);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 string ExtRet = string.Empty;
 
-                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                if(this.vXmlNfeDadosMsgEhXML) //Se for XML
                     ExtRet = Propriedade.ExtEnvio.PedCan_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.PedCan_TXT;
@@ -96,7 +96,7 @@ namespace NFe.Service
             {
                 try
                 {
-                    if (!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
+                    if(!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
                         Functions.DeletarArquivo(NomeArquivoXML);
                 }
                 catch
@@ -116,12 +116,12 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         private void PedCanc(int emp, string cArquivoXML)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedCanc.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedCanc.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
-            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
                 //      tpAmb|2
                 //      chNFe|35080699999090910270550000000000011234567890
@@ -129,10 +129,10 @@ namespace NFe.Service
                 //      xJust|Teste do WS de Cancelamento
                 //      tpEmis|1                                    <<< opcional >>>
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
-                foreach (string cTexto in cLinhas)
+                foreach(string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
-                    switch (dados[0].ToLower())
+                    switch(dados[0].ToLower())
                     {
                         case "tpamb":
                             this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
@@ -170,21 +170,21 @@ namespace NFe.Service
 
                 XmlNodeList infCancList = doc.GetElementsByTagName("infCanc");
 
-                foreach (XmlNode infCancNode in infCancList)
+                foreach(XmlNode infCancNode in infCancList)
                 {
                     XmlElement infCancElemento = (XmlElement)infCancNode;
 
                     this.oDadosPedCanc.tpAmb = Convert.ToInt32("0" + infCancElemento.GetElementsByTagName("tpAmb")[0].InnerText);
 
-                    switch (Propriedade.TipoAplicativo)
+                    switch(Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Cte:
-                            if (infCancElemento.GetElementsByTagName("chCTe").Count != 0)
+                            if(infCancElemento.GetElementsByTagName("chCTe").Count != 0)
                                 this.oDadosPedCanc.chNFe = infCancElemento.GetElementsByTagName("chCTe")[0].InnerText;
                             break;
 
                         case TipoAplicativo.Nfe:
-                            if (infCancElemento.GetElementsByTagName("chNFe").Count != 0)
+                            if(infCancElemento.GetElementsByTagName("chNFe").Count != 0)
                                 this.oDadosPedCanc.chNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
                             break;
 
@@ -195,7 +195,7 @@ namespace NFe.Service
                     ///
                     /// danasa 12-9-2009
                     /// 
-                    if (infCancElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    if(infCancElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
                         this.oDadosPedCanc.tpEmis = Convert.ToInt16(infCancElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
@@ -217,105 +217,98 @@ namespace NFe.Service
         /// <date>21/04/2009</date>
         private void LerRetornoCanc(string NomeArquivoXML, string vStrXmlRetorno, GerarXML oGerarXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
 
-            try
+            MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
+            doc.Load(msXml);
+
+            XmlNodeList retCancNFeList = null;
+
+            switch(Propriedade.TipoAplicativo)
             {
-                MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
-                doc.Load(msXml);
+                case TipoAplicativo.Cte:
+                    retCancNFeList = doc.GetElementsByTagName("retCancCTe");
+                    break;
+                case TipoAplicativo.Nfe:
+                    retCancNFeList = doc.GetElementsByTagName("retCancNFe");
+                    break;
+                default:
+                    break;
+            }
 
-                XmlNodeList retCancNFeList = null;
+            foreach(XmlNode retCancNFeNode in retCancNFeList)
+            {
+                XmlElement retCancNFeElemento = (XmlElement)retCancNFeNode;
 
-                switch (Propriedade.TipoAplicativo)
+                XmlNodeList infCancList = retCancNFeElemento.GetElementsByTagName("infCanc");
+
+                foreach(XmlNode infCancNode in infCancList)
                 {
-                    case TipoAplicativo.Cte:
-                        retCancNFeList = doc.GetElementsByTagName("retCancCTe");
-                        break;
-                    case TipoAplicativo.Nfe:
-                        retCancNFeList = doc.GetElementsByTagName("retCancNFe");
-                        break;
-                    default:
-                        break;
-                }
+                    XmlElement infCancElemento = (XmlElement)infCancNode;
 
-                foreach (XmlNode retCancNFeNode in retCancNFeList)
-                {
-                    XmlElement retCancNFeElemento = (XmlElement)retCancNFeNode;
-
-                    XmlNodeList infCancList = retCancNFeElemento.GetElementsByTagName("infCanc");
-
-                    foreach (XmlNode infCancNode in infCancList)
+                    if(infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "101" ||  //Cancelamento Homologado
+                        infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "151")    //Cancelamento fora do prazo
                     {
-                        XmlElement infCancElemento = (XmlElement)infCancNode;
+                        string retCancNFe = retCancNFeNode.OuterXml;
 
-                        if (infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "101" ||  //Cancelamento Homologado
-                            infCancElemento.GetElementsByTagName("cStat")[0].InnerText == "151")    //Cancelamento fora do prazo
+                        oGerarXML.XmlDistCanc(NomeArquivoXML, retCancNFe);
+                        ///
+                        /// danasa 9-2009
+                        /// pega a data da emissão da nota para mover os XML's para a pasta de origem da NFe
+                        /// 
+                        string cChaveNFe = string.Empty;
+                        switch(Propriedade.TipoAplicativo)
                         {
-                            string retCancNFe = retCancNFeNode.OuterXml;
+                            case TipoAplicativo.Cte:
+                                cChaveNFe = infCancElemento.GetElementsByTagName("chCTe")[0].InnerText;
+                                break;
+                            case TipoAplicativo.Nfe:
+                                cChaveNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                                break;
+                            default:
+                                break;
+                        }
 
-                            oGerarXML.XmlDistCanc(NomeArquivoXML, retCancNFe);
-                            ///
-                            /// danasa 9-2009
-                            /// pega a data da emissão da nota para mover os XML's para a pasta de origem da NFe
-                            /// 
-                            string cChaveNFe = string.Empty;
-                            switch (Propriedade.TipoAplicativo)
+                        //Move o arquivo de Distribuição da pasta EmProcessamento para a pasta de enviados autorizados
+                        string strNomeArqProcCancNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                        PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCan_XML) + Propriedade.ExtRetorno.ProcCancNFe;
+
+                        if(Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe)
+                        {
+                            string folderNFe = oGerarXML.OndeNFeEstaGravada(emp, cChaveNFe);
+                            if(!string.IsNullOrEmpty(folderNFe))
                             {
-                                case TipoAplicativo.Cte:
-                                    cChaveNFe = infCancElemento.GetElementsByTagName("chCTe")[0].InnerText;
-                                    break;
-                                case TipoAplicativo.Nfe:
-                                    cChaveNFe = infCancElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                                    break;
-                                default:
-                                    break;
-                            }
+                                Functions.Move(strNomeArqProcCancNFe, Path.Combine(folderNFe, Path.GetFileName(strNomeArqProcCancNFe)));
+                                Functions.Move(NomeArquivoXML, Path.Combine(folderNFe, Path.GetFileName(NomeArquivoXML)));
 
-                            //Move o arquivo de Distribuição da pasta EmProcessamento para a pasta de enviados autorizados
-                            string strNomeArqProcCancNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
-                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                            Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCan_XML) + Propriedade.ExtRetorno.ProcCancNFe;
-
-                            if (Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe)
-                            {
-                                string folderNFe = oGerarXML.OndeNFeEstaGravada(emp, cChaveNFe);
-                                if (!string.IsNullOrEmpty(folderNFe))
-                                {
-                                    Functions.Move(strNomeArqProcCancNFe, Path.Combine(folderNFe, Path.GetFileName(strNomeArqProcCancNFe)));
-                                    Functions.Move(NomeArquivoXML, Path.Combine(folderNFe, Path.GetFileName(NomeArquivoXML)));
-
-                                    strNomeArqProcCancNFe = "";
-                                }
-                            }
-                            if (strNomeArqProcCancNFe != "")
-                            {
-                                //
-                                //TODO: Cancelamento - Se for pasta por dia, tem que pegar a data de dentro do XML da NFe
-                                DateTime dtEmissaoNFe = new DateTime(Convert.ToInt16("20" + cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
-                                if (Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString() != "AM")
-                                {
-                                    dtEmissaoNFe = Functions.GetDateTime/*Convert.ToDateTime*/(infCancElemento.GetElementsByTagName("dhRecbto")[0].InnerText);
-                                }
-
-                                TFunctions.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);
-
-                                //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                                TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoNFe);
+                                strNomeArqProcCancNFe = "";
                             }
                         }
-                        else
+                        if(strNomeArqProcCancNFe != "")
                         {
-                            //Deletar o arquivo de solicitação do serviço da pasta de envio
-                            Functions.DeletarArquivo(NomeArquivoXML);
+                            //
+                            //TODO: Cancelamento - Se for pasta por dia, tem que pegar a data de dentro do XML da NFe
+                            DateTime dtEmissaoNFe = new DateTime(Convert.ToInt16("20" + cChaveNFe.Substring(2, 2)), Convert.ToInt16(cChaveNFe.Substring(4, 2)), 1);
+                            if(Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString() != "AM")
+                            {
+                                dtEmissaoNFe = Functions.GetDateTime/*Convert.ToDateTime*/(infCancElemento.GetElementsByTagName("dhRecbto")[0].InnerText);
+                            }
+
+                            TFunctions.MoverArquivo(strNomeArqProcCancNFe, PastaEnviados.Autorizados, dtEmissaoNFe);
+
+                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                            TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoNFe);
                         }
                     }
+                    else
+                    {
+                        //Deletar o arquivo de solicitação do serviço da pasta de envio
+                        Functions.DeletarArquivo(NomeArquivoXML);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
             }
         }
         #endregion
@@ -331,7 +324,7 @@ namespace NFe.Service
         /// </remarks>
         public void GerarXmlDistCanc(string chaveNFe, string vStrXmlRetorno, GerarXML oGerarXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             try
             {
@@ -339,15 +332,15 @@ namespace NFe.Service
                                  "*" + Propriedade.ExtEnvio.PedCan_XML,
                                  SearchOption.TopDirectoryOnly);
 
-                foreach (string file in files)
+                foreach(string file in files)
                 {
-                    if (!Functions.FileInUse(file))
+                    if(!Functions.FileInUse(file))
                     {
                         System.Xml.XmlDocument xmlCanc = new System.Xml.XmlDocument();
                         xmlCanc.Load(file);
 
                         string chaveNFeCanc = string.Empty;
-                        if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+                        if(Propriedade.TipoAplicativo == TipoAplicativo.Cte)
                         {
                             chaveNFeCanc = xmlCanc.GetElementsByTagName("chCTe")[0].InnerText;
                         }
@@ -356,7 +349,7 @@ namespace NFe.Service
                             chaveNFeCanc = xmlCanc.GetElementsByTagName("chNFe")[0].InnerText;
                         }
 
-                        if (chaveNFeCanc == chaveNFe)
+                        if(chaveNFeCanc == chaveNFe)
                         {
                             LerRetornoCanc(file, vStrXmlRetorno, oGerarXML);
                         }

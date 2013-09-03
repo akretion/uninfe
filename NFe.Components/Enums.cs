@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace NFe.Components
 {
@@ -169,7 +170,17 @@ namespace NFe.Components
         /// <summary>
         /// Consulta Certificados Instalados na estação do UniNFe.
         /// </summary>
-        ConsultaCertificados
+        ConsultaCertificados,
+        #region MDF-e
+        /// <summary>
+        /// Assinar e validar MDFe
+        /// </summary>
+        AssinarValidarMDFe,
+        /// <summary>
+        /// Montar Lote Um MDFe
+        /// </summary>
+        MontarLoteUmMDFe
+        #endregion
     }
     #endregion
 
@@ -239,10 +250,40 @@ namespace NFe.Components
         /// Padrao GIF
         /// Prefeitura de Campo Bom-RS
         /// </summary>
-        GIF
-        
+        GIF,
+        /// <summary>
+        /// Padrão IPM
+        /// <para>Prefeitura de Campo Mourão.</para>
+        /// </summary>
+        IPM,
+        /// <summary>
+        /// Padrão DUETO
+        /// Prefeitura de Nova Santa Rita - RS
+        /// </summary>
+        DUETO
+
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
+    }
+    #endregion
+
+    #region NF
+    /// <summary>
+    /// Tipo de ambiente
+    /// </summary>
+    public enum TpAmb
+    {
+        /// <summary>
+        /// Ambiente de produção
+        /// </summary>
+        [Description("Produção")]
+        Producao = 1,
+
+        /// <summary>
+        /// Ambiente de homologação
+        /// </summary>
+        [Description("Homologação")]
+        Homologacao = 2
     }
     #endregion
 

@@ -23,7 +23,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.RecepcionarLoteRps;
@@ -33,7 +33,8 @@ namespace NFe.Service.NFSe
                 oDadosEnvLoteRps = new DadosEnvLoteRps(emp);
                 //Ler o XML para pegar parâmetros de envio
                 //LerXML ler = new LerXML();
-                /*ler.*/EnvLoteRps(emp, NomeArquivoXML);
+                /*ler.*/
+                EnvLoteRps(emp, NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 WebServiceProxy wsProxy = null;
@@ -43,6 +44,13 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(/*ler.*/oDadosEnvLoteRps.cMunicipio);
                 switch (padraoNFSe)
                 {
+                    case PadroesNFSe.IPM:
+                        //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
+                        //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
+                        IPM ipm = new IPM(Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, 7483, Empresa.Configuracoes[emp].PastaRetorno);
+                        ipm.EmitirNF(NomeArquivoXML, (TpAmb)Empresa.Configuracoes[emp].tpAmb);
+                        break;
+
                     case PadroesNFSe.GINFES:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
@@ -83,7 +91,6 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.BLUMENAU_SC:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
-
                         #region Encriptar tag <Assinatura>
                         EncryptAssinatura();
                         #endregion
@@ -101,17 +108,25 @@ namespace NFe.Service.NFSe
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
                         break;
 
+                    case PadroesNFSe.DUETO:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis, padraoNFSe);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
+                        break;
 
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
 
-                //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
-                ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosEnvLoteRps.cMunicipio));
+                if (padraoNFSe != PadroesNFSe.IPM)
+                {
+                    //Assinar o XML
+                    AssinaturaDigital ad = new AssinaturaDigital();
+                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosEnvLoteRps.cMunicipio));
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio), cabecMsg, this, "-env-loterps", "-ret-loterps", padraoNFSe, Servico);
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio), cabecMsg, this, "-env-loterps", "-ret-loterps", padraoNFSe, Servico);
+
+                }
             }
             catch (Exception ex)
             {
@@ -147,41 +162,35 @@ namespace NFe.Service.NFSe
         /// </summary>
         private void EncryptAssinatura()
         {
-            try
+            string arquivoXML = NomeArquivoXML;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arquivoXML);
+
+            XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
+
+            foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
             {
-                string arquivoXML = NomeArquivoXML;
+                XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(arquivoXML);
+                XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
 
-                XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
-
-                foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
+                foreach (XmlNode rpsNode in rpsList)
                 {
-                    XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
+                    XmlElement rpsElement = (XmlElement)rpsNode;
 
-                    XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
 
-                    foreach (XmlNode rpsNode in rpsList)
+                    if (rpsElement.GetElementsByTagName("Assinatura").Count != 0)
                     {
-                        XmlElement rpsElement = (XmlElement)rpsNode;
-
-
-                        if (rpsElement.GetElementsByTagName("Assinatura").Count != 0)
-                        {
-                            //Encryptar a tag Assinatura
-                            rpsElement.GetElementsByTagName("Assinatura")[0].InnerText = Criptografia.SignWithRSASHA1(rpsElement.GetElementsByTagName("Assinatura")[0].InnerText);
-                        }
+                        //Encryptar a tag Assinatura
+                        rpsElement.GetElementsByTagName("Assinatura")[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                            rpsElement.GetElementsByTagName("Assinatura")[0].InnerText);
                     }
                 }
+            }
 
-                //Salvar o XML com as alterações efetuadas
-                doc.Save(arquivoXML);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Salvar o XML com as alterações efetuadas
+            doc.Save(arquivoXML);
         }
         #endregion
 
@@ -192,7 +201,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void EnvLoteRps(int emp, string arquivoXML)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);

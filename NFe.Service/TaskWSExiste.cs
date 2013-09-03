@@ -22,7 +22,7 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             pedidoWSExiste odados = new pedidoWSExiste();
             odados.cUF = Empresa.Configuracoes[emp].UFCod;

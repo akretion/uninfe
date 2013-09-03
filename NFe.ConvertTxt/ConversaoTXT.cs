@@ -22,6 +22,7 @@ namespace NFe.ConvertTxt
         private int LinhaLida;
         private string Registro;
         private string layout;
+        private string chave;
         /// <summary>
         /// conteudo do arquivo de cada nota
         /// </summary>
@@ -573,9 +574,12 @@ namespace NFe.ConvertTxt
             switch (this.FSegmento.ToUpper())
             {
                 case "A":
-                    //         A|versao |Tipo|
-                    layout = "§A|versao¨|Tipo¨";
+                    //         A|versao |Id
+                    layout = "§A|versao¨|Id¨";
                     double v = (double)LerCampo(TpcnTipoCampo.tcDec2, "versao", ObOp.Opcional, 0, 6);
+                    this.chave = (string)LerCampo(TpcnTipoCampo.tcStr, "ID", ObOp.Opcional, 0, 47);
+                    if (this.chave.Equals("NFe")) this.chave = string.Empty;
+                    this.chave = this.chave.Replace("NFe", "");
                     NFe.infNFe.Versao = (v>0 ? Convert.ToDecimal(v) : 2);
                     break;
 
@@ -584,7 +588,7 @@ namespace NFe.ConvertTxt
                     if (NFe.infNFe.Versao >= 3)
                         layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dhEmi¨|dhSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
                     else
-                    layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dEmi¨|dSaiEnt¨|hSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
+                        layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dEmi¨|dSaiEnt¨|hSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
 
                     ///
                     /// Grupo da TAG <ide>
@@ -605,9 +609,9 @@ namespace NFe.ConvertTxt
                     }
                     else
                     {
-                    NFe.ide.dEmi    = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dEmi, ObOp.Obrigatorio, 10, 10);
-                    NFe.ide.dSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dSaiEnt, ObOp.Opcional, 10, 10);
-                    NFe.ide.hSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcHor, Properties.Resources.hSaiEnt, ObOp.Opcional, 0, 0);
+                        NFe.ide.dEmi    = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dEmi, ObOp.Obrigatorio, 10, 10);
+                        NFe.ide.dSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcDat, Properties.Resources.dSaiEnt, ObOp.Opcional, 10, 10);
+                        NFe.ide.hSaiEnt = (DateTime)LerCampo(TpcnTipoCampo.tcHor, Properties.Resources.hSaiEnt, ObOp.Opcional, 0, 0);
                     }
                     NFe.ide.tpNF    = (TpcnTipoNFe)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpNF, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.cMunFG  = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.cMunFG, ObOp.Obrigatorio, 7, 7);
@@ -620,6 +624,15 @@ namespace NFe.ConvertTxt
                     NFe.ide.verProc = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.verProc, ObOp.Obrigatorio, 1, 20);
                     NFe.ide.dhCont  = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.dhCont, ObOp.Opcional, 0, 25);
                     NFe.ide.xJust   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xJust, ObOp.Opcional, 15, 256);
+
+                    if (!string.IsNullOrEmpty(this.chave))
+                    {
+                        if (NFe.ide.cNF == 0)
+                            NFe.ide.cNF = Convert.ToInt32(this.chave.Substring(35, 8));
+
+                        if (NFe.ide.cDV == 0)
+                            NFe.ide.cDV = Convert.ToInt32(this.chave.Substring(this.chave.Length - 1, 1));
+                    }
                     break;
                     #endregion
 

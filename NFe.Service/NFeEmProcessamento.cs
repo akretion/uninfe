@@ -19,7 +19,7 @@ namespace NFe.Service
 
         public void Analisar()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oAux = new Auxiliar();
 

@@ -19,7 +19,7 @@ namespace NFe.Service
         #region Construtores
         public FluxoNfe()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
             NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
         }
 
@@ -96,14 +96,7 @@ namespace NFe.Service
         #region CriarXml()
         public void CriarXml()
         {
-            try
-            {
-                this.CriarXml(false);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            this.CriarXml(false);
         }
         #endregion
 
@@ -116,16 +109,18 @@ namespace NFe.Service
         /// <date>17/04/2009</date>
         public void CriarXml(bool VerificaEstruturaXml)
         {
-            while (true)
+            while(true)
             {
-                lock (Smf.Fluxo)
+                //Thread.Sleep(1000);
+
+                lock(Smf.Fluxo)
                 {
                     XmlWriter xtw = null; // criar instância para xmltextwriter. 
                     try
                     {
                         #region Testar para ver se o XML não tá danificado, ou seja, sem as tag´s iniciais, se tiver força recriar ele
                         bool ForcarCriar = false;
-                        if (VerificaEstruturaXml)
+                        if(VerificaEstruturaXml)
                         {
                             XmlDocument doc = null;
                             FileStream fsArquivo = null;
@@ -133,7 +128,7 @@ namespace NFe.Service
                             {
                                 fsArquivo = OpenFileFluxo(true); //Abrir um arquivo XML usando FileStream
 
-                                if (File.Exists(NomeXmlControleFluxo))
+                                if(File.Exists(NomeXmlControleFluxo))
                                 {
                                     doc = new XmlDocument();
                                     doc.Load(NomeXmlControleFluxo);
@@ -141,9 +136,9 @@ namespace NFe.Service
                             }
                             catch
                             {
-                                if (doc != null)
+                                if(doc != null)
                                 {
-                                    if (doc.DocumentElement == null)
+                                    if(doc.DocumentElement == null)
                                     {
                                         ForcarCriar = true;
                                     }
@@ -151,7 +146,7 @@ namespace NFe.Service
                             }
                             finally
                             {
-                                if (fsArquivo != null)
+                                if(fsArquivo != null)
                                 {
                                     fsArquivo.Close();
                                 }
@@ -160,20 +155,20 @@ namespace NFe.Service
                         #endregion
 
                         #region Criar arquivo
-                        if (!File.Exists(NomeXmlControleFluxo) || ForcarCriar)
+                        if(!File.Exists(NomeXmlControleFluxo) || ForcarCriar)
                         {
                             ///
                             /// danasa 20-9-2010
                             /// 
                             bool goCriaArquivoDeFluxo = true;
-                            if (File.Exists(NomeXmlControleFluxo))
-                                if (Functions.FileInUse(NomeXmlControleFluxo))
+                            if(File.Exists(NomeXmlControleFluxo))
+                                if(Functions.FileInUse(NomeXmlControleFluxo))
                                     ///
                                     /// O metodo "BuscarXML" acessa o metodo para criar o xml de fluxo, só que como ele é acessado várias vezes
                                     /// e como o arquivo está sendo criado, é exibida várias mensagens de erro de acesso ao arquivo de fluxo
                                     goCriaArquivoDeFluxo = false;
 
-                            if (goCriaArquivoDeFluxo)
+                            if(goCriaArquivoDeFluxo)
                             {
                                 XmlWriterSettings oSettings = new XmlWriterSettings();
                                 UTF8Encoding c = new UTF8Encoding(false);
@@ -193,15 +188,11 @@ namespace NFe.Service
                         }
                         #endregion
                     }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-                    }
                     finally
                     {
-                        if (xtw != null)
+                        if(xtw != null)
                         {
-                            if (xtw.WriteState != WriteState.Closed)
+                            if(xtw.WriteState != WriteState.Closed)
                             {
                                 xtw.Close(); //Fechar o arquivo e salvar
                             }
@@ -210,8 +201,6 @@ namespace NFe.Service
 
                     break;
                 }
-
-                Thread.Sleep(1000);
             }
         }
         #endregion
@@ -227,7 +216,7 @@ namespace NFe.Service
         {
             CriarXml();
 
-            if (!this.NfeExiste(strChaveNFe))
+            if(!this.NfeExiste(strChaveNFe))
             {
                 DateTime startTime;
                 DateTime stopTime;
@@ -236,7 +225,7 @@ namespace NFe.Service
                 long elapsedMillieconds;
                 startTime = DateTime.Now;
 
-                while (true)
+                while(true)
                 {
                     stopTime = DateTime.Now;
                     elapsedTime = stopTime.Subtract(startTime);
@@ -245,7 +234,7 @@ namespace NFe.Service
                     FileStream lfile = null;
                     try
                     {
-                        lock (Smf.Fluxo)
+                        lock(Smf.Fluxo)
                         {
                             XmlDocument xd = new XmlDocument(); //Criar instância do XmlDocument Class
 
@@ -279,16 +268,16 @@ namespace NFe.Service
                             break;
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        if (lfile != null)
+                        if(lfile != null)
                         {
                             lfile.Close();
                         }
 
-                        if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                        if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                         {
-                            throw (ex);
+                            throw;
                         }
                     }
 
@@ -308,18 +297,11 @@ namespace NFe.Service
         /// <param name="strConteudo">Conteúdo da Tag</param>
         private void CriarTag(XmlDocument xd, XmlElement cl, string strTag, string strConteudo)
         {
-            try
-            {
-                XmlElement na = xd.CreateElement(strTag);
-                XmlText natext = xd.CreateTextNode(strConteudo);
-                na.AppendChild(natext); //Gravar o texto da unidade para o nó Unidade
-                cl.AppendChild(na); //Gravar nó Unidade para o elemento Produto
-                xd.DocumentElement.AppendChild(cl); //Gravar o elemento raiz para o XmlDocument
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            XmlElement na = xd.CreateElement(strTag);
+            XmlText natext = xd.CreateTextNode(strConteudo);
+            na.AppendChild(natext); //Gravar o texto da unidade para o nó Unidade
+            cl.AppendChild(na); //Gravar nó Unidade para o elemento Produto
+            xd.DocumentElement.AppendChild(cl); //Gravar o elemento raiz para o XmlDocument
         }
         #endregion
 
@@ -341,7 +323,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -350,7 +332,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false); //Abrir um arquivo XML usando FileStream
@@ -358,10 +340,10 @@ namespace NFe.Service
 
                         bool removeu = false;
                         XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        for (int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
+                        for(int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
                         {
                             XmlElement cl = (XmlElement)xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString())[i]; //Recuperar o conteúdo da tag Documento
-                            if (cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
+                            if(cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
                             {
                                 xdXml.DocumentElement.RemoveChild(cl); //Remove o elemento do documento
                                 removeu = true;
@@ -371,22 +353,22 @@ namespace NFe.Service
                         fsArquivo.Close(); //Fecha o arquivo XML
 
                         //Só gravo se removeu algo ou vou manter o arquivo como estava
-                        if (removeu)
+                        if(removeu)
                             xdXml.Save(NomeXmlControleFluxo); //Grava o arquivo XML                    
 
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -415,7 +397,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -424,32 +406,32 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false); //Abrir um arquivo XML usando FileStream
                         xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList documentosList = xdXml.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentosNode in documentosList)
+                        foreach(XmlNode documentosNode in documentosList)
                         {
                             XmlElement documentosElemento = (XmlElement)documentosNode;
 
                             List<XmlNode> nodeExcluir = new List<XmlNode>();
 
                             XmlNodeList documentoList = documentosElemento.GetElementsByTagName(ElementoFixo.Documento.ToString());
-                            for (int i = 0; i < documentoList.Count; i++)
+                            for(int i = 0; i < documentoList.Count; i++)
                             {
                                 var documentoNode = documentoList[i];
                                 var documentoElemento = (XmlElement)documentoNode;
                                 var tagRec = documentoElemento.GetElementsByTagName(ElementoEditavel.nRec.ToString())[0].InnerText.Trim(); //Recupera o conteúdo da tag de nRec
-                                if (tagRec == nRec)
+                                if(tagRec == nRec)
                                 {
                                     nodeExcluir.Add(documentoNode);
                                 }
                             }
 
-                            for (int i = 0; i < nodeExcluir.Count; i++)
+                            for(int i = 0; i < nodeExcluir.Count; i++)
                             {
                                 xdXml.DocumentElement.RemoveChild(nodeExcluir[i]);
                             }
@@ -460,16 +442,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -496,7 +478,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -505,7 +487,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
 
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
@@ -513,10 +495,10 @@ namespace NFe.Service
                         xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        for (int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
+                        for(int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
                         {
                             XmlElement cl = (XmlElement)xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString())[i]; //Recuperar o conteúdo da tag Documento
-                            if (cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
+                            if(cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
                             {
                                 booExiste = true;
                             }
@@ -526,16 +508,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -565,7 +547,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -574,20 +556,20 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
                         xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        for (int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
+                        for(int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
                         {
                             XmlElement cl = (XmlElement)xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString())[i]; //Recuperar o conteúdo da tag Documento
                             XmlElement xeTagLote = (XmlElement)xdXml.GetElementsByTagName(ElementoEditavel.idLote.ToString())[i]; //Recupera o conteúdo da tag de Lote
-                            if (cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
+                            if(cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
                             {
-                                if (xeTagLote.InnerText != string.Empty)
+                                if(xeTagLote.InnerText != string.Empty)
                                 {
                                     booComLote = true;
                                 }
@@ -598,16 +580,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -638,7 +620,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -648,20 +630,20 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false); //Abrir um arquivo XML usando FileStream
                         xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList list = xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        for (int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
+                        for(int i = 0; i < list.Count; i++) //Navegar em todos os elementos do nó Documento
                         {
                             XmlElement xeDoc = (XmlElement)xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString())[i]; //Recuperar o conteúdo da tag Produto
                             XmlElement xeTag = (XmlElement)xdXml.GetElementsByTagName(tag.ToString())[i]; //Recuperar o conteúdo da tag
-                            if (xeDoc.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == chaveNFe)
+                            if(xeDoc.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == chaveNFe)
                             {
-                                if (xeTag != null)
+                                if(xeTag != null)
                                 {
                                     xeTag.InnerText = novoConteudo; //Setar o novo conteúdo para a tag
                                 }
@@ -675,16 +657,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -710,7 +692,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -720,7 +702,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
@@ -728,22 +710,22 @@ namespace NFe.Service
                         fsArquivo.Close();
 
                         XmlNodeList documentosList = doc.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentosNode in documentosList)
+                        foreach(XmlNode documentosNode in documentosList)
                         {
                             XmlElement documentosElemento = (XmlElement)documentosNode;
 
                             XmlNodeList documentoList = documentosElemento.GetElementsByTagName(ElementoFixo.Documento.ToString());
-                            foreach (XmlNode documentoNode in documentoList)
+                            foreach(XmlNode documentoNode in documentoList)
                             {
                                 XmlElement documentoElemento = (XmlElement)documentoNode;
 
                                 string strChaveNFe = string.Empty;
-                                if (documentoElemento.HasAttributes)
+                                if(documentoElemento.HasAttributes)
                                 {
                                     strChaveNFe = documentoElemento.Attributes["ChaveNFe"].InnerText;
                                 }
 
-                                if (documentoElemento.GetElementsByTagName("idLote")[0].InnerText == strLote)
+                                if(documentoElemento.GetElementsByTagName("idLote")[0].InnerText == strLote)
                                 {
                                     AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, DateTime.Now.ToString());
                                     AtualizarTag(strChaveNFe, ElementoEditavel.nRec, strRecibo);
@@ -754,16 +736,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -794,7 +776,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -803,7 +785,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
@@ -811,13 +793,13 @@ namespace NFe.Service
                         doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList documentoList = doc.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentoNode in documentoList)
+                        foreach(XmlNode documentoNode in documentoList)
                         {
                             XmlElement documentoElemento = (XmlElement)documentoNode;
 
-                            if (documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
+                            if(documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
                             {
-                                if (documentoElemento.GetElementsByTagName(Tag)[0] != null) //null significa que não encontrou a TAG, comparo para evitar erros
+                                if(documentoElemento.GetElementsByTagName(Tag)[0] != null) //null significa que não encontrou a TAG, comparo para evitar erros
                                 {
                                     strConteudo = documentoElemento.GetElementsByTagName(Tag)[0].InnerText;
                                 }
@@ -831,16 +813,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -863,16 +845,7 @@ namespace NFe.Service
         public string LerTag(string strChaveNFe, ElementoEditavel Tag)
         {
             string strConteudo = string.Empty;
-
-            try
-            {
-                strConteudo = LerTag(strChaveNFe, Tag.ToString());
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-
+            strConteudo = LerTag(strChaveNFe, Tag.ToString());
             return strConteudo;
         }
         #endregion
@@ -889,16 +862,7 @@ namespace NFe.Service
         public string LerTag(string strChaveNFe, ElementoFixo Tag)
         {
             string strConteudo = string.Empty;
-
-            try
-            {
-                strConteudo = LerTag(strChaveNFe, Tag.ToString());
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-
+            strConteudo = LerTag(strChaveNFe, Tag.ToString());
             return strConteudo;
         }
         #endregion
@@ -923,7 +887,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -932,7 +896,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
@@ -940,7 +904,7 @@ namespace NFe.Service
                         fsArquivo.Close();
 
                         XmlNodeList documentoList = doc.GetElementsByTagName(ElementoFixo.Documento.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentoNode in documentoList)
+                        foreach(XmlNode documentoNode in documentoList)
                         {
                             XmlElement documentoElemento = (XmlElement)documentoNode;
 
@@ -948,19 +912,19 @@ namespace NFe.Service
                             int tMed = 3; //3 segundos
                             DateTime dPedRec = DateTime.Now.AddMinutes(-60);
 
-                            if (documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0] != null &&
+                            if(documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0] != null &&
                                 documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0].InnerText != string.Empty)
                             {
                                 tMed = Convert.ToInt32(documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0].InnerText);
                             }
 
-                            if (documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0] != null &&
+                            if(documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0] != null &&
                                 documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0].InnerText != string.Empty)
                             {
                                 dPedRec = Convert.ToDateTime(documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0].InnerText);
                             }
 
-                            if (nRec != string.Empty && !lstNumRec.Contains(nRec))
+                            if(nRec != string.Empty && !lstNumRec.Contains(nRec))
                             {
                                 lstNumRec.Add(nRec);
 
@@ -974,11 +938,11 @@ namespace NFe.Service
                             //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
                             //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
                             //Wandrey 11/09/2009
-                            if (DateTime.Now.Subtract(dPedRec).Days >= 2)
+                            if(DateTime.Now.Subtract(dPedRec).Days >= 2)
                             {
                                 string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                                 string NomeArquivo = documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
-                                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                                int emp = Functions.FindEmpresaByThread();
 
                                 //Deletar o arquivo da pasta em processamento
                                 Auxiliar oAux = new Auxiliar();
@@ -992,16 +956,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -1030,7 +994,7 @@ namespace NFe.Service
             long elapsedMillieconds;
             startTime = DateTime.Now;
 
-            while (true)
+            while(true)
             {
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
@@ -1040,7 +1004,7 @@ namespace NFe.Service
 
                 try
                 {
-                    lock (Smf.Fluxo)
+                    lock(Smf.Fluxo)
                     {
                         XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
@@ -1048,22 +1012,22 @@ namespace NFe.Service
                         fsArquivo.Close();
 
                         XmlNodeList documentosList = doc.GetElementsByTagName(ElementoFixo.DocumentosNFe.ToString()); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentosNode in documentosList)
+                        foreach(XmlNode documentosNode in documentosList)
                         {
                             XmlElement documentosElemento = (XmlElement)documentosNode;
 
                             XmlNodeList documentoList = documentosElemento.GetElementsByTagName(ElementoFixo.Documento.ToString());
-                            foreach (XmlNode documentoNode in documentoList)
+                            foreach(XmlNode documentoNode in documentoList)
                             {
                                 XmlElement documentoElemento = (XmlElement)documentoNode;
 
                                 string strChaveNFe = string.Empty;
-                                if (documentoElemento.HasAttributes)
+                                if(documentoElemento.HasAttributes)
                                 {
                                     strChaveNFe = documentoElemento.Attributes["ChaveNFe"].InnerText;
                                 }
 
-                                if (documentoElemento.GetElementsByTagName("nRec")[0].InnerText == strRec)
+                                if(documentoElemento.GetElementsByTagName("nRec")[0].InnerText == strRec)
                                 {
                                     AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, dtData.ToString());
                                 }
@@ -1073,16 +1037,16 @@ namespace NFe.Service
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    if (fsArquivo != null)
+                    if(fsArquivo != null)
                     {
                         fsArquivo.Close();
                     }
 
-                    if (elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
+                    if(elapsedMillieconds >= 120000) //120.000 ms que corresponde á 120 segundos que corresponde a 2 minuto
                     {
-                        throw (ex);
+                        throw;
                     }
                 }
 
@@ -1098,7 +1062,7 @@ namespace NFe.Service
         /// <returns>FileStream do arquivo FluxoNFe.XML</returns>
         private FileStream OpenFileFluxo(bool somenteLeitura)
         {
-            if (somenteLeitura)
+            if(somenteLeitura)
                 return new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             else
                 return new FileStream(NomeXmlControleFluxo, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using NFe.Components;
 using NFe.Components.Info;
+using NFe.Settings;
 
 namespace unicte
 {
@@ -13,12 +14,25 @@ namespace unicte
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
-            if (Aplicacao.AppExecutando(false))
+            ConfiguracaoApp.AtualizaWSDL = false;
+
+            if(args.Length >= 1)
+                foreach(string param in args)
+                {
+                    if(param.ToLower().Equals("/updatewsdl"))
+                    {
+                        ConfiguracaoApp.AtualizaWSDL = true;
+                        continue;
+                    }
+                }
+
+
+            if(Aplicacao.AppExecutando(false))
             {
                 return;
             }

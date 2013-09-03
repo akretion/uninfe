@@ -37,6 +37,7 @@
             this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.tbLogs = new System.Windows.Forms.ToolStripButton();
+            this.tbClearLockFiles = new System.Windows.Forms.ToolStripButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +54,7 @@
             this.sobreOUniNFeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbForceUpdateWSDL = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +68,9 @@
             this.toolStripButton_validarxml,
             this.toolStripButton_sobre,
             this.toolStripBtnUpdate,
-            this.tbLogs});
+            this.tbLogs,
+            this.tbClearLockFiles,
+            this.tbForceUpdateWSDL});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
@@ -140,10 +144,20 @@
             this.tbLogs.ToolTipText = "Visualiza os logs";
             this.tbLogs.Click += new System.EventHandler(this.tbLogs_Click);
             // 
+            // tbClearLockFiles
+            // 
+            this.tbClearLockFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbClearLockFiles.Image = ((System.Drawing.Image)(resources.GetObject("tbClearLockFiles.Image")));
+            this.tbClearLockFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbClearLockFiles.Name = "tbClearLockFiles";
+            this.tbClearLockFiles.Size = new System.Drawing.Size(52, 52);
+            this.tbClearLockFiles.Text = "Excluir arquivos do tipo \".lock\"";
+            this.tbClearLockFiles.Click += new System.EventHandler(this.tbClearLockFiles_Click);
+            // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniCTE, de um duplo clique ou pressione o botão direito do" +
-    " mouse sobre o ícone.";
+                " mouse sobre o ícone.";
             this.notifyIcon1.BalloonTipTitle = "UniCTE - Monitor de Conhecimentos de Transportes Eletrônicos";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -260,6 +274,16 @@
             this.sairToolStripMenuItem.Text = "Fechar o UniCTe";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
+            // tbForceUpdateWSDL
+            // 
+            this.tbForceUpdateWSDL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbForceUpdateWSDL.Image = ((System.Drawing.Image)(resources.GetObject("tbForceUpdateWSDL.Image")));
+            this.tbForceUpdateWSDL.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbForceUpdateWSDL.Name = "tbForceUpdateWSDL";
+            this.tbForceUpdateWSDL.Size = new System.Drawing.Size(52, 52);
+            this.tbForceUpdateWSDL.Text = "Forçar atualização de WSDLs e Schemas";
+            this.tbForceUpdateWSDL.Click += new System.EventHandler(this.tbForceUpdateWSDL_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,6 +331,8 @@
         private System.Windows.Forms.ToolStripSeparator tbSeparator1;
         private System.Windows.Forms.ToolStripButton tbLogs;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripButton tbClearLockFiles;
+        private System.Windows.Forms.ToolStripButton tbForceUpdateWSDL;
     }
 }
 

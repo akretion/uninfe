@@ -566,21 +566,21 @@
   </Estado>
   <Estado ID="903" Nome="Servico de Contingencia Virtual de São Paulo" UF="SCVSP">
     <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\HSCVSPCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\HSCVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\homologacao\HSCVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeRecepcao>wsdl\homologacao\HSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\HSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\homologacao\HSVSPCteCancelamento.wsdl</NFeCancelamento>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\HSCVSPCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\HSCVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\homologacao\HSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\HSVSPCteStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeRecepcao>wsdl\producao\PSCVSPCteRecepcao.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\PSCVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
-      <NFeCancelamento>wsdl\producao\PSCVSPCteCancelamento.wsdl</NFeCancelamento>
+      <NFeRecepcao>wsdl\producao\PSVSPCteRecepcao.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\PSVSPCteRetRecepcao.wsdl</NFeRetRecepcao>
+      <NFeCancelamento>wsdl\producao\PSVSPCteCancelamento.wsdl</NFeCancelamento>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\PSCVSPCteConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\PSCVSPCteStatusServico.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\producao\PSVSPCteConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PSVSPCteStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
     </LocalProducao>
   </Estado>

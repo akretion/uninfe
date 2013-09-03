@@ -105,7 +105,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta lote rps
         /// </summary>
-        public DadosPedLoteRps oDadosPedLoteRps = new DadosPedLoteRps(new FindEmpresaThread(Thread.CurrentThread).Index);
+        public DadosPedLoteRps oDadosPedLoteRps = new DadosPedLoteRps(Functions.FindEmpresaByThread());
         #endregion
 
         #region Objeto com os dados do XML da consulta nfse
@@ -119,7 +119,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta nfse por rps
         /// </summary>
-        public DadosPedSitNfseRps oDadosPedSitNfseRps = new DadosPedSitNfseRps(new FindEmpresaThread(Thread.CurrentThread).Index);
+        public DadosPedSitNfseRps oDadosPedSitNfseRps = new DadosPedSitNfseRps(Functions.FindEmpresaByThread());
         #endregion
 
         #region Objeto com os dados do XML de cancelamento de NFS-e
@@ -161,8 +161,6 @@ namespace NFe.Service
             this.oDadosConsCad.IE = string.Empty;
             this.oDadosConsCad.UF = string.Empty;
 
-            try
-            {
                 if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
                 {
                     List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
@@ -221,11 +219,6 @@ namespace NFe.Service
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -260,106 +253,99 @@ namespace NFe.Service
             this.oDadosNfe.cDV = string.Empty;
             this.oDadosNfe.CNPJ = string.Empty;
 
-            try
+            XmlDocument doc = new XmlDocument();
+            doc.Load(cArquivoXML);
+
+            XmlNodeList infNFeList = null;
+            switch(Propriedade.TipoAplicativo)
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
+                case TipoAplicativo.Cte:
+                    infNFeList = doc.GetElementsByTagName("infCte");
+                    break;
 
-                XmlNodeList infNFeList = null;
-                switch (Propriedade.TipoAplicativo)
+                case TipoAplicativo.Nfe:
+                    infNFeList = doc.GetElementsByTagName("infNFe");
+                    break;
+
+                default:
+                    break;
+            }
+
+            foreach(XmlNode infNFeNode in infNFeList)
+            {
+                XmlElement infNFeElemento = (XmlElement)infNFeNode;
+
+                //Pegar a chave da NF-e
+                if(infNFeElemento.HasAttributes)
                 {
-                    case TipoAplicativo.Cte:
-                        infNFeList = doc.GetElementsByTagName("infCte");
-                        break;
-
-                    case TipoAplicativo.Nfe:
-                        infNFeList = doc.GetElementsByTagName("infNFe");
-                        break;
-
-                    default:
-                        break;
+                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
                 }
 
-                foreach (XmlNode infNFeNode in infNFeList)
+                //Montar lista de tag´s da tag <ide>
+                XmlNodeList ideList = infNFeElemento.GetElementsByTagName("ide");
+
+                foreach(XmlNode ideNode in ideList)
                 {
-                    XmlElement infNFeElemento = (XmlElement)infNFeNode;
+                    XmlElement ideElemento = (XmlElement)ideNode;
 
-                    //Pegar a chave da NF-e
-                    if (infNFeElemento.HasAttributes)
+                    switch(Propriedade.TipoAplicativo)
                     {
-                        this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
-                    }
+                        case TipoAplicativo.Cte:
+                            this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
+                            this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cCT")[0].InnerText;
+                            this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nCT")[0].InnerText;
+                            goto default;
 
-                    //Montar lista de tag´s da tag <ide>
-                    XmlNodeList ideList = infNFeElemento.GetElementsByTagName("ide");
+                        case TipoAplicativo.Nfe:
+                            this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dEmi")[0].InnerText);
+                            this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cNF")[0].InnerText;
+                            this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nNF")[0].InnerText;
+                            goto default;
 
-                    foreach (XmlNode ideNode in ideList)
-                    {
-                        XmlElement ideElemento = (XmlElement)ideNode;
-
-                        switch (Propriedade.TipoAplicativo)
-                        {
-                            case TipoAplicativo.Cte:
-                                this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
-                                this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cCT")[0].InnerText;
-                                this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nCT")[0].InnerText;
-                                goto default;
-
-                            case TipoAplicativo.Nfe:
-                                this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dEmi")[0].InnerText);
-                                this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cNF")[0].InnerText;
-                                this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nNF")[0].InnerText;
-                                goto default;
-
-                            default:
-                                this.oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
-                                this.oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                                this.oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
-                                this.oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
-                                this.oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
-                                this.oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
-                                break;
-                        }
-                    }
-
-                    //Montar lista de tag´s da tag <emit>
-                    XmlNodeList emitList = infNFeElemento.GetElementsByTagName("emit");
-
-                    foreach (XmlNode emitNode in emitList)
-                    {
-                        XmlElement emitElemento = (XmlElement)emitNode;
-
-                        this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                        default:
+                            this.oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
+                            this.oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
+                            this.oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
+                            this.oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
+                            this.oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
+                            this.oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
+                            break;
                     }
                 }
 
-                //Tentar detectar a tag de lote, se tiver vai atualizar o atributo do lote que a nota faz parte
-                XmlNodeList enviNFeList = null;
+                //Montar lista de tag´s da tag <emit>
+                XmlNodeList emitList = infNFeElemento.GetElementsByTagName("emit");
 
-                switch (Propriedade.TipoAplicativo)
+                foreach(XmlNode emitNode in emitList)
                 {
-                    case TipoAplicativo.Cte:
-                        enviNFeList = doc.GetElementsByTagName("enviCTe");
-                        break;
+                    XmlElement emitElemento = (XmlElement)emitNode;
 
-                    case TipoAplicativo.Nfe:
-                        enviNFeList = doc.GetElementsByTagName("enviNFe");
-                        break;
-
-                    default:
-                        break;
-                }
-
-                foreach (XmlNode enviNFeNode in enviNFeList)
-                {
-                    XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
-
-                    this.oDadosNfe.idLote = enviNFeElemento.GetElementsByTagName("idLote")[0].InnerText;
+                    this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
                 }
             }
-            catch (Exception ex)
+
+            //Tentar detectar a tag de lote, se tiver vai atualizar o atributo do lote que a nota faz parte
+            XmlNodeList enviNFeList = null;
+
+            switch(Propriedade.TipoAplicativo)
             {
-                throw (ex);
+                case TipoAplicativo.Cte:
+                    enviNFeList = doc.GetElementsByTagName("enviCTe");
+                    break;
+
+                case TipoAplicativo.Nfe:
+                    enviNFeList = doc.GetElementsByTagName("enviNFe");
+                    break;
+
+                default:
+                    break;
+            }
+
+            foreach(XmlNode enviNFeNode in enviNFeList)
+            {
+                XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
+
+                this.oDadosNfe.idLote = enviNFeElemento.GetElementsByTagName("idLote")[0].InnerText;
             }
         }
         #endregion
@@ -372,7 +358,7 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         public void PedCanc(string cArquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedCanc.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedCanc.tpEmis = Empresa.Configuracoes[emp].tpEmis;
@@ -474,13 +460,11 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         public void PedInut(string cArquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedInut.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
-            try
-            {
                 if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
                 {
                     //      tpAmb|2
@@ -633,11 +617,6 @@ namespace NFe.Service
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -651,13 +630,11 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         public void PedSit(string cArquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;// string.Empty;
             this.oDadosPedSit.chNFe = string.Empty;
 
-            try
-            {
                 if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
                 {
                     switch (Propriedade.TipoAplicativo)
@@ -772,11 +749,6 @@ namespace NFe.Service
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -790,7 +762,7 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         public void PedSta(string cArquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedSta.tpAmb = 0;
             this.oDadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
@@ -800,8 +772,6 @@ namespace NFe.Service
             /// 
             this.oDadosPedSta.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
-            try
-            {
                 ///
                 /// danasa 12-9-2009
                 /// 
@@ -894,11 +864,6 @@ namespace NFe.Service
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -929,8 +894,6 @@ namespace NFe.Service
             this.oDadosRec.nRec = string.Empty;
             this.oDadosRec.tMed = 0;
 
-            try
-            {
                 XmlDocument xml = new XmlDocument();
                 xml.Load(memoryStream);
 
@@ -967,11 +930,6 @@ namespace NFe.Service
                         this.oDadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -988,15 +946,13 @@ namespace NFe.Service
         /// </remarks>
         public void PedRec(string cArquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedRec.tpAmb = 0;
             this.oDadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             this.oDadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
             this.oDadosPedRec.nRec = string.Empty;
 
-            try
-            {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(cArquivoXML);
 
@@ -1041,11 +997,6 @@ namespace NFe.Service
                         doc.Save(cArquivoXML);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
         #endregion
 #endif
@@ -1669,27 +1620,27 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedLoteRps(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
 
             XmlNodeList infConsList = doc.GetElementsByTagName("ConsultarLoteRpsEnvio");
 
-            foreach (XmlNode infConsNode in infConsList)
+            foreach(XmlNode infConsNode in infConsList)
             {
                 XmlElement infConsElemento = (XmlElement)infConsNode;
                 oDadosPedLoteRps.Protocolo = infConsElemento.GetElementsByTagName("Protocolo")[0].InnerText;
 
                 XmlElement infPrestadorElemento = (XmlElement)infConsElemento.GetElementsByTagName("Prestador").Item(0);
-                if (infPrestadorElemento.GetElementsByTagName("tipos:Cnpj")[0] != null)
+                if(infPrestadorElemento.GetElementsByTagName("tipos:Cnpj")[0] != null)
                     oDadosPedLoteRps.Cnpj = infPrestadorElemento.GetElementsByTagName("tipos:Cnpj")[0].InnerText;
-                else if (infPrestadorElemento.GetElementsByTagName("Cnpj")[0] != null)
+                else if(infPrestadorElemento.GetElementsByTagName("Cnpj")[0] != null)
                     oDadosPedLoteRps.Cnpj = infPrestadorElemento.GetElementsByTagName("Cnpj")[0].InnerText;
 
-                if (infPrestadorElemento.GetElementsByTagName("tipos:InscricaoMunicipal")[0] != null)
+                if(infPrestadorElemento.GetElementsByTagName("tipos:InscricaoMunicipal")[0] != null)
                     oDadosPedLoteRps.InscricaoMunicipal = infPrestadorElemento.GetElementsByTagName("tipos:InscricaoMunicipal")[0].InnerText;
-                else if (infPrestadorElemento.GetElementsByTagName("InscricaoMunicipal")[0] != null)
+                else if(infPrestadorElemento.GetElementsByTagName("InscricaoMunicipal")[0] != null)
                     oDadosPedLoteRps.InscricaoMunicipal = infPrestadorElemento.GetElementsByTagName("InscricaoMunicipal")[0].InnerText;
             }
         }
@@ -1703,7 +1654,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedCanNfse(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
@@ -1726,7 +1677,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedSitLoteRps(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
@@ -1749,7 +1700,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedSitNfse(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
         }
         #endregion
 #endif
@@ -1761,7 +1712,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedSitNfseRps(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
         }
         #endregion
 
@@ -1773,7 +1724,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void EnvLoteRps(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);

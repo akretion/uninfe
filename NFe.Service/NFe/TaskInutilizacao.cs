@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskInutilizacao : TaskAbst
+    public class TaskInutilizacao: TaskAbst
     {
         /// <summary>
         /// Envia o XML de inutilização de numeração de notas fiscais
@@ -64,7 +64,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.InutilizarNumerosNFe;
@@ -77,7 +77,7 @@ namespace NFe.Service
                 ///*oLer.*/
                 PedInut(emp, NomeArquivoXML);
 
-                if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.InutilizarNumerosNFe, emp, /*oLer.*/oDadosPedInut.cUF, /*oLer.*/oDadosPedInut.tpAmb, /*oLer.*/oDadosPedInut.tpEmis);
@@ -118,11 +118,11 @@ namespace NFe.Service
                 }
 
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 string ExtRet = string.Empty;
 
-                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                if(this.vXmlNfeDadosMsgEhXML) //Se for XML
                     ExtRet = Propriedade.ExtEnvio.PedInu_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.PedInu_TXT;
@@ -142,7 +142,7 @@ namespace NFe.Service
             {
                 try
                 {
-                    if (!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
+                    if(!this.vXmlNfeDadosMsgEhXML) //Se for o TXT para ser transformado em XML, vamos excluir o TXT depois de gerado o XML
                         Functions.DeletarArquivo(NomeArquivoXML);
                 }
                 catch
@@ -162,169 +162,162 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         private void PedInut(int emp, string cArquivoXML)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
 
             this.oDadosPedInut.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
-            try
+            if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
-                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                //      tpAmb|2
+                //      tpEmis|1                <<< opcional >>>
+                //      cUF|35
+                //      ano|08
+                //      CNPJ|99999090910270
+                //      mod|55
+                //      serie|0
+                //      nNFIni|1
+                //      nNFFin|1
+                //      xJust|Teste do WS de Inutilizacao
+                List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                foreach(string cTexto in cLinhas)
                 {
-                    //      tpAmb|2
-                    //      tpEmis|1                <<< opcional >>>
-                    //      cUF|35
-                    //      ano|08
-                    //      CNPJ|99999090910270
-                    //      mod|55
-                    //      serie|0
-                    //      nNFIni|1
-                    //      nNFFin|1
-                    //      xJust|Teste do WS de Inutilizacao
-                    List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
-                    foreach (string cTexto in cLinhas)
+                    string[] dados = cTexto.Split('|');
+                    switch(dados[0].ToLower())
                     {
-                        string[] dados = cTexto.Split('|');
-                        switch (dados[0].ToLower())
-                        {
-                            case "tpamb":
-                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "tpemis":
-                                this.oDadosPedInut.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "cuf":
-                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "ano":
-                                this.oDadosPedInut.ano = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "cnpj":
-                                this.oDadosPedInut.CNPJ = dados[1].Trim();
-                                break;
-                            case "mod":
-                                this.oDadosPedInut.mod = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "serie":
-                                this.oDadosPedInut.serie = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "nnfini":
-                                this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "nnffin":
-                                this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
-                            case "xjust":
-                                this.oDadosPedInut.xJust = dados[1].Trim();
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    //<?xml version="1.0" encoding="UTF-8"?>
-                    //<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
-                    //  <infInut Id="ID359999909091027055000000000001000000001">
-                    //      <tpAmb>2</tpAmb>
-                    //      <tpEmis>1</tpEmis>                  <<< opcional >>>
-                    //      <xServ>INUTILIZAR</xServ>
-                    //      <cUF>35</cUF>
-                    //      <ano>08</ano>
-                    //      <CNPJ>99999090910270</CNPJ>
-                    //      <mod>55</mod>
-                    //      <serie>0</serie>
-                    //      <nNFIni>1</nNFIni>
-                    //      <nNFFin>1</nNFFin>
-                    //      <xJust>Teste do WS de InutilizaÃ§Ã£o</xJust>
-                    //  </infInut>
-                    //</inutNFe>
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load(cArquivoXML);
-
-                    XmlNodeList InutNFeList = null;
-
-                    switch (Propriedade.TipoAplicativo)
-                    {
-                        case TipoAplicativo.Cte:
-                            InutNFeList = doc.GetElementsByTagName("inutCTe");
+                        case "tpamb":
+                            this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
                             break;
-
-                        case TipoAplicativo.Nfe:
-                            InutNFeList = doc.GetElementsByTagName("inutNFe");
+                        case "tpemis":
+                            this.oDadosPedInut.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
                             break;
-
-                        default:
+                        case "cuf":
+                            this.oDadosPedInut.cUF = Convert.ToInt32("0" + dados[1].Trim());
                             break;
-                    }
-
-                    foreach (XmlNode InutNFeNode in InutNFeList)
-                    {
-                        XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
-
-                        XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
-
-                        foreach (XmlNode infInutNode in infInutList)
-                        {
-                            XmlElement infInutElemento = (XmlElement)infInutNode;
-
-                            if (infInutElemento.GetElementsByTagName("tpAmb")[0] != null)
-                                this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-
-                            if (infInutElemento.GetElementsByTagName("cUF")[0] != null)
-                                this.oDadosPedInut.cUF = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("cUF")[0].InnerText);
-
-                            if (infInutElemento.GetElementsByTagName("ano")[0] != null)
-                                this.oDadosPedInut.ano = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("ano")[0].InnerText);
-
-                            if (infInutElemento.GetElementsByTagName("CNPJ")[0] != null)
-                                this.oDadosPedInut.CNPJ = infInutElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-
-                            if (infInutElemento.GetElementsByTagName("mod")[0] != null)
-                                this.oDadosPedInut.mod = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("mod")[0].InnerText);
-
-                            if (infInutElemento.GetElementsByTagName("serie")[0] != null)
-                                this.oDadosPedInut.serie = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("serie")[0].InnerText);
-
-                            switch (Propriedade.TipoAplicativo)
-                            {
-                                case TipoAplicativo.Cte:
-                                    if (infInutElemento.GetElementsByTagName("nCTIni")[0] != null)
-                                        this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTIni")[0].InnerText);
-
-                                    if (infInutElemento.GetElementsByTagName("nCTFin")[0] != null)
-                                        this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTFin")[0].InnerText);
-                                    break;
-
-                                case TipoAplicativo.Nfe:
-                                    if (infInutElemento.GetElementsByTagName("nNFIni")[0] != null)
-                                        this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFIni")[0].InnerText);
-
-                                    if (infInutElemento.GetElementsByTagName("nNFFin")[0] != null)
-                                        this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFFin")[0].InnerText);
-                                    break;
-
-                                default:
-                                    break;
-                            }
-
-                            ///
-                            /// danasa 12-9-2009
-                            /// 
-                            if (infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
-                            {
-                                this.oDadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                                /// para que o validador não rejeite, excluo a tag <tpEmis>
-                                doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName("tpEmis")[0]);
-                                /// salvo o arquivo modificado
-                                doc.Save(cArquivoXML);
-                            }
-                        }
+                        case "ano":
+                            this.oDadosPedInut.ano = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "cnpj":
+                            this.oDadosPedInut.CNPJ = dados[1].Trim();
+                            break;
+                        case "mod":
+                            this.oDadosPedInut.mod = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "serie":
+                            this.oDadosPedInut.serie = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "nnfini":
+                            this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "nnffin":
+                            this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "xjust":
+                            this.oDadosPedInut.xJust = dados[1].Trim();
+                            break;
                     }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                throw (ex);
+                //<?xml version="1.0" encoding="UTF-8"?>
+                //<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.07">
+                //  <infInut Id="ID359999909091027055000000000001000000001">
+                //      <tpAmb>2</tpAmb>
+                //      <tpEmis>1</tpEmis>                  <<< opcional >>>
+                //      <xServ>INUTILIZAR</xServ>
+                //      <cUF>35</cUF>
+                //      <ano>08</ano>
+                //      <CNPJ>99999090910270</CNPJ>
+                //      <mod>55</mod>
+                //      <serie>0</serie>
+                //      <nNFIni>1</nNFIni>
+                //      <nNFFin>1</nNFFin>
+                //      <xJust>Teste do WS de InutilizaÃ§Ã£o</xJust>
+                //  </infInut>
+                //</inutNFe>
+                XmlDocument doc = new XmlDocument();
+                doc.Load(cArquivoXML);
+
+                XmlNodeList InutNFeList = null;
+
+                switch(Propriedade.TipoAplicativo)
+                {
+                    case TipoAplicativo.Cte:
+                        InutNFeList = doc.GetElementsByTagName("inutCTe");
+                        break;
+
+                    case TipoAplicativo.Nfe:
+                        InutNFeList = doc.GetElementsByTagName("inutNFe");
+                        break;
+
+                    default:
+                        break;
+                }
+
+                foreach(XmlNode InutNFeNode in InutNFeList)
+                {
+                    XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
+
+                    XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
+
+                    foreach(XmlNode infInutNode in infInutList)
+                    {
+                        XmlElement infInutElemento = (XmlElement)infInutNode;
+
+                        if(infInutElemento.GetElementsByTagName("tpAmb")[0] != null)
+                            this.oDadosPedInut.tpAmb = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+
+                        if(infInutElemento.GetElementsByTagName("cUF")[0] != null)
+                            this.oDadosPedInut.cUF = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("cUF")[0].InnerText);
+
+                        if(infInutElemento.GetElementsByTagName("ano")[0] != null)
+                            this.oDadosPedInut.ano = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("ano")[0].InnerText);
+
+                        if(infInutElemento.GetElementsByTagName("CNPJ")[0] != null)
+                            this.oDadosPedInut.CNPJ = infInutElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+
+                        if(infInutElemento.GetElementsByTagName("mod")[0] != null)
+                            this.oDadosPedInut.mod = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("mod")[0].InnerText);
+
+                        if(infInutElemento.GetElementsByTagName("serie")[0] != null)
+                            this.oDadosPedInut.serie = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("serie")[0].InnerText);
+
+                        switch(Propriedade.TipoAplicativo)
+                        {
+                            case TipoAplicativo.Cte:
+                                if(infInutElemento.GetElementsByTagName("nCTIni")[0] != null)
+                                    this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTIni")[0].InnerText);
+
+                                if(infInutElemento.GetElementsByTagName("nCTFin")[0] != null)
+                                    this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTFin")[0].InnerText);
+                                break;
+
+                            case TipoAplicativo.Nfe:
+                                if(infInutElemento.GetElementsByTagName("nNFIni")[0] != null)
+                                    this.oDadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFIni")[0].InnerText);
+
+                                if(infInutElemento.GetElementsByTagName("nNFFin")[0] != null)
+                                    this.oDadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFFin")[0].InnerText);
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        ///
+                        /// danasa 12-9-2009
+                        /// 
+                        if(infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        {
+                            this.oDadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            /// para que o validador não rejeite, excluo a tag <tpEmis>
+                            doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName("tpEmis")[0]);
+                            /// salvo o arquivo modificado
+                            doc.Save(cArquivoXML);
+                        }
+                    }
+                }
             }
         }
         #endregion
@@ -337,65 +330,58 @@ namespace NFe.Service
         /// <date>21/04/2009</date>
         private void LerRetornoInut()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
 
-            try
+            MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
+            doc.Load(msXml);
+
+            XmlNodeList retInutNFeList = null;
+
+            switch(Propriedade.TipoAplicativo)
             {
-                MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
-                doc.Load(msXml);
+                case TipoAplicativo.Cte:
+                    retInutNFeList = doc.GetElementsByTagName("retInutCTe");
+                    break;
+                case TipoAplicativo.Nfe:
+                    retInutNFeList = doc.GetElementsByTagName("retInutNFe");
+                    break;
+                default:
+                    break;
+            }
 
-                XmlNodeList retInutNFeList = null;
+            foreach(XmlNode retInutNFeNode in retInutNFeList)
+            {
+                XmlElement retInutNFeElemento = (XmlElement)retInutNFeNode;
 
-                switch (Propriedade.TipoAplicativo)
+                XmlNodeList infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
+
+                foreach(XmlNode infInutNode in infInutList)
                 {
-                    case TipoAplicativo.Cte:
-                        retInutNFeList = doc.GetElementsByTagName("retInutCTe");
-                        break;
-                    case TipoAplicativo.Nfe:
-                        retInutNFeList = doc.GetElementsByTagName("retInutNFe");
-                        break;
-                    default:
-                        break;
-                }
+                    XmlElement infInutElemento = (XmlElement)infInutNode;
 
-                foreach (XmlNode retInutNFeNode in retInutNFeList)
-                {
-                    XmlElement retInutNFeElemento = (XmlElement)retInutNFeNode;
-
-                    XmlNodeList infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
-
-                    foreach (XmlNode infInutNode in infInutList)
+                    if(infInutElemento.GetElementsByTagName("cStat")[0].InnerText == "102") //Inutilização de Número Homologado
                     {
-                        XmlElement infInutElemento = (XmlElement)infInutNode;
+                        string strRetInutNFe = retInutNFeNode.OuterXml;
 
-                        if (infInutElemento.GetElementsByTagName("cStat")[0].InnerText == "102") //Inutilização de Número Homologado
-                        {
-                            string strRetInutNFe = retInutNFeNode.OuterXml;
+                        oGerarXML.XmlDistInut(NomeArquivoXML, strRetInutNFe);
 
-                            oGerarXML.XmlDistInut(NomeArquivoXML, strRetInutNFe);
+                        //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                        TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
 
-                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
-
-                            //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                            string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
-                                                            PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                            Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML) + Propriedade.ExtRetorno.ProcInutNFe;
-                            TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
-                        }
-                        else
-                        {
-                            //Deletar o arquivo de solicitação do serviço da pasta de envio
-                            Functions.DeletarArquivo(NomeArquivoXML);
-                        }
+                        //Move o arquivo de Distribuição para a pasta de enviados autorizados
+                        string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                        PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML) + Propriedade.ExtRetorno.ProcInutNFe;
+                        TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
+                    }
+                    else
+                    {
+                        //Deletar o arquivo de solicitação do serviço da pasta de envio
+                        Functions.DeletarArquivo(NomeArquivoXML);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
             }
         }
         #endregion

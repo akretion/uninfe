@@ -46,6 +46,16 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\homologacao\HMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>" +
                                    "</LocalHomologacao>";
 
+                        case 4303103: // Cachoeirinha - RS
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HThemaCachoerinhaRSRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>" +
+                                   "</LocalHomologacao>";
+
                         default:
                             return "<LocalHomologacao>" +
                                    @"<RecepcionarLoteRps>wsdl\homologacao\HThemaRemessa.wsdl</RecepcionarLoteRps>" +
@@ -99,13 +109,13 @@ namespace NFe.Components
 
                 case PadroesNFSe.ISSNET:
                     return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</CancelarNfse>" +
-                            @"<ConsultarURLNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HISSNet.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>" +
                             "</LocalHomologacao>";
 
                 case PadroesNFSe.ISSONLINE:
@@ -158,6 +168,31 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarURLNfse>" +
                             @"</LocalHomologacao>";
+
+                case PadroesNFSe.DUETO:
+                    if (idMunicipio == 4310207) // Ijuí - RS
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</CancelarNfse>" +
+                                @"</LocalHomologacao>";
+                    }
+                    else // Nova Santa Rita - RS
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
+                                @"</LocalHomologacao>";
+                    }
+
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
             }
@@ -178,6 +213,16 @@ namespace NFe.Components
                                    @"<ConsultarNfse>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarNfse>" +
                                    @"<ConsultarLoteRps>wsdl\producao\PMonteNegroRSConsultarNFSE.wsdl</ConsultarLoteRps>" +
                                    @"<CancelarNfse>wsdl\producao\PMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>" +
+                                   "</LocalProducao>";
+
+                        case 4303103: // Cachoeirinha - RS
+                            return "<LocalProducao>" +
+                                   @"<RecepcionarLoteRps>wsdl\producao\PThemaCachoerinhaRSRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\producao\PThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalProducao>";
 
                         default:
@@ -232,15 +277,30 @@ namespace NFe.Components
                             "</LocalProducao>";
 
                 case PadroesNFSe.ISSNET:
-                    return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>" +
-                            @"<ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
-                            "</LocalProducao>";
+                    if (idMunicipio == 5201108) //Anapolis - GO
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PISSNetAnapolis.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarURLNfse>" +
+                                "</LocalProducao>";
+                    }
+                    else
+                    { //Novo Hamburgo - RS (Default)
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
+                                "</LocalProducao>";
+                    }
 
                 case PadroesNFSe.ISSONLINE:
                     if (idMunicipio == 3502804)
@@ -292,6 +352,31 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarURLNfse>" +
                             @"</LocalProducao>";
+
+                case PadroesNFSe.DUETO:
+                    if (idMunicipio == 4310207) // Ijuí - RS
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>" +
+                                @"</LocalHomologacao>";
+                    }
+                    else // Nova Santa Rita - RS
+                    {
+
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
+                                @"</LocalProducao>";
+                    }
 
                 default:
                     return "<LocalProducao></LocalProducao>";

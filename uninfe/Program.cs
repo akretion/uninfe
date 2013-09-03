@@ -6,11 +6,13 @@ using System.Runtime.InteropServices;
 
 using NFe.Components;
 using NFe.Components.Info;
+using NFe.Settings;
 
 namespace uninfe
 {
     static class Program
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,11 +23,25 @@ namespace uninfe
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             bool silencioso = false;
-            if (args.Length >= 1)
-                if (args[0] == "/silent")
-                    silencioso = true;
+            ConfiguracaoApp.AtualizaWSDL = false;
 
-            if (Aplicacao.AppExecutando(silencioso))
+            if(args.Length >= 1)
+                foreach(string param in args)
+                {
+                    if(param.ToLower().Equals("/silent"))
+                    {
+                        silencioso = true;
+                        continue;
+                    }
+                    if(param.ToLower().Equals("/updatewsdl"))
+                    {
+                        ConfiguracaoApp.AtualizaWSDL = true;
+                        continue;
+                    }
+                }
+
+
+            if(Aplicacao.AppExecutando(silencioso))
             {
                 return;
             }

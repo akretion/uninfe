@@ -46,12 +46,12 @@ namespace NFe.Validate
             bool lArqXML = File.Exists(cRotaArqXML);
             var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
             bool lArqXSD = File.Exists(caminhoDoSchema);
-            bool temXSD = ! string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
+            bool temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
 
             Retorno = 0;
             RetornoString = "";
 
-            if (lArqXML && lArqXSD)
+            if(lArqXML && lArqXSD)
             {
                 XmlReader xmlReader = null;
 
@@ -63,7 +63,7 @@ namespace NFe.Validate
                     XmlSchemaSet schemas = new XmlSchemaSet();
                     settings.Schemas = schemas;
 
-                    if (TipoArqXml.TargetNameSpace != string.Empty)
+                    if(TipoArqXml.TargetNameSpace != string.Empty)
                         schemas.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
                     else
                         schemas.Add(Propriedade.nsURI, caminhoDoSchema);
@@ -75,18 +75,18 @@ namespace NFe.Validate
                     this.cErro = "";
                     try
                     {
-                        while (xmlReader.Read()) { }
+                        while(xmlReader.Read()) { }
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
                         this.cErro = ex.Message;
                     }
 
                     xmlReader.Close();
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    if (xmlReader != null)
+                    if(xmlReader != null)
                         xmlReader.Close();
 
                     cErro = ex.Message + "\r\n";
@@ -94,7 +94,7 @@ namespace NFe.Validate
 
                 this.Retorno = 0;
                 this.RetornoString = "";
-                if (cErro != "")
+                if(cErro != "")
                 {
                     this.Retorno = 1;
                     this.RetornoString = "Início da validação...\r\n\r\n";
@@ -106,12 +106,12 @@ namespace NFe.Validate
             }
             else
             {
-                if (lArqXML == false)
+                if(lArqXML == false)
                 {
                     this.Retorno = 2;
                     this.RetornoString = "Arquivo XML não foi encontrato";
                 }
-                else if (lArqXSD == false && temXSD)
+                else if(lArqXSD == false && temXSD)
                 {
                     this.Retorno = 3;
                     this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + caminhoDoSchema;
@@ -140,10 +140,10 @@ namespace NFe.Validate
         {
             string cRetorna = "";
 
-            if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+            if(TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
             {
                 Validar(arquivo);
-                if (Retorno != 0)
+                if(Retorno != 0)
                 {
                     cRetorna = "XML INCONSISTENTE!\r\n\r\n" + RetornoString;
                 }
@@ -170,7 +170,7 @@ namespace NFe.Validate
         /// <date>28/05/2009</date>
         public void ValidarAssinarXML(string Arquivo)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             Boolean Assinou = true;
 
@@ -183,7 +183,7 @@ namespace NFe.Validate
 
                 Assinou = true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Assinou = false;
                 try
@@ -198,22 +198,22 @@ namespace NFe.Validate
                 }
             }
 
-            if (Assinou)
+            if(Assinou)
             {
                 // Validar o Arquivo XML
-                if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+                if(TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
                     try
                     {
                         Validar(Arquivo);
-                        if (Retorno != 0)
+                        if(Retorno != 0)
                         {
                             this.GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + RetornoString);
                             new Auxiliar().MoveArqErro(Arquivo);
                         }
                         else
                         {
-                            if (!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
+                            if(!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
                             {
                                 Directory.CreateDirectory(Empresa.Configuracoes[emp].PastaValidar + "\\Validado");
                             }
@@ -235,7 +235,7 @@ namespace NFe.Validate
                             this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
                         }
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
                         try
                         {
@@ -278,7 +278,7 @@ namespace NFe.Validate
         /// <date>28/05/2009</date>
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
@@ -309,17 +309,9 @@ namespace NFe.Validate
                 oXmlGravar.WriteEndDocument();
                 oXmlGravar.Flush();
             }
-            catch (XmlException ex)
-            {
-                throw (ex);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
             finally
             {
-                if (oXmlGravar != null)
+                if(oXmlGravar != null)
                     oXmlGravar.Close();
             }
         }

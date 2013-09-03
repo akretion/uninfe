@@ -67,13 +67,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\EmiteNFSeBase.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
     <Compile Include="Criptografia.cs" />
+    <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="FolderCompare.cs" />
     <Compile Include="ftplib.cs" />
+    <Compile Include="Interface\IEmiteNfIPM.cs" />
+    <Compile Include="Interface\IEmiteNFSe.cs" />
+    <Compile Include="Interface\IEmiteNFSeIPM.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="ParamEnvioXML.cs" />
+    <Compile Include="POSTRequest.cs" />
     <Compile Include="SchemaXML.cs" />
     <Compile Include="ServiceProcess.cs" />
     <Compile Include="Smf.cs" />

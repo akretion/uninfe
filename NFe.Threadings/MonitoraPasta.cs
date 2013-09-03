@@ -41,7 +41,7 @@ namespace NFe.Threadings
         {
             fsw.Clear();
 
-            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+            for(int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
                 #region Pasta de envio
                 fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvio, "*.xml"));
@@ -54,7 +54,7 @@ namespace NFe.Threadings
                 #endregion
 
                 #region Pasta de envio em Lote
-                if (!string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaEnvioEmLote))
+                if(!string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaEnvioEmLote))
                 {
                     fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvioEmLote, "*.xml"));
                     fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
@@ -97,7 +97,7 @@ namespace NFe.Threadings
         /// </remarks>
         private int LocalizaEmpresa(FileInfo fi)
         {
-            int  empresa = -1;
+            int empresa = -1;
 
             try
             {
@@ -106,13 +106,13 @@ namespace NFe.Threadings
                 string fullName = ConfiguracaoApp.RemoveEndSlash(fi.Directory.FullName.ToLower());
                 ///
                 /// "EndsWith" é para pegar apenas se terminar com, já que nas empresas pode ter um nome 'temp' no meio das definicoes das pastas
-                if (fullName.EndsWith("\\temp"))
+                if(fullName.EndsWith("\\temp"))
                     /// exclui o 'arquivo' temp.
                     fullName = Path.GetDirectoryName(fullName);
 
-                for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
-                    if (fullName == Empresa.Configuracoes[i].PastaEnvio.ToLower() ||
+                    if(fullName == Empresa.Configuracoes[i].PastaEnvio.ToLower() ||
                         fullName == Empresa.Configuracoes[i].PastaEnvioEmLote.ToLower() ||
                         fullName == Empresa.Configuracoes[i].PastaValidar.ToLower())
                     {
@@ -141,10 +141,10 @@ namespace NFe.Threadings
                 int empresa;
                 string arq = fi.FullName.ToLower();
 
-                if (fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
+                if(fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
                 {
                     //encerra o UniNFe no arquivo -sair.xmls
-                    if (arq.EndsWith("-sair.xml"))
+                    if(arq.EndsWith("-sair.xml"))
                     {
                         File.Delete(fi.FullName);
                         Environment.Exit(0);
@@ -156,18 +156,25 @@ namespace NFe.Threadings
                 {
                     empresa = LocalizaEmpresa(fi);
                 }
-                
 
-                if (empresa >= 0)
+
+                if(empresa >= 0)
                 {
-                    ThreadControl.Add(new ThreadItem(fi, empresa));
+                    /*<#8084>
+                     * Aqui foi modificado porque a ThreadControl deixou de existir.
+                     * E todo o processamento que antes existia na thread control foi deixado apenas no método Run(), que é chamado abaixo
+                     * 
+                     * Marcelo
+                     */
+                    new ThreadItem(fi, empresa).Run();
+                    //</#8084>
                 }
                 else
                 {
                     Auxiliar.WriteLog(fi.FullName + " - Não localizou a empresa.", true);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
             }

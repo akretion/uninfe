@@ -53,6 +53,11 @@ namespace NFe.Components
         /// Porta de comunicação do servidor proxy
         /// </summary>
         public int ProxyPorta { get; set; }
+        /// <summary>
+        /// Arquivo WSDL
+        /// </summary>
+        private string ArquivoWSDL { get; set; }
+        private PadroesNFSe PadraoNFSe { get; set; }
         #endregion
 
         /// <summary>
@@ -71,41 +76,29 @@ namespace NFe.Components
 
             //Confirmar a solicitação SSL automaticamente
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
+            //Obeter a descrção do serviço (WSDL)
+            this.DescricaoServico(requestUri, this.oCertificado);
 
-            try
-            {
-                //Obeter a descrção do serviço (WSDL)
-                this.DescricaoServico(requestUri, this.oCertificado);
-
-                //Gerar e compilar a classe
-                this.GerarClasse();
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Gerar e compilar a classe
+            this.GerarClasse();
         }
 
-        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado)
+        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe)
         {
+            ArquivoWSDL = arquivoWSDL;
+            PadraoNFSe = padraoNFSe;
+
             //Definir o certificado digital que será utilizado na conexão com os serviços
             this.oCertificado = Certificado;
 
             //Confirmar a solicitação SSL automaticamente
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
 
-            try
-            {
-                //Obeter a descrção do serviço (WSDL)
-                this.DescricaoServico(arquivoWSDL);
+            //Obeter a descrção do serviço (WSDL)
+            this.DescricaoServico(arquivoWSDL);
 
-                //Gerar e compilar a classe
-                this.GerarClasse();
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Gerar e compilar a classe
+            this.GerarClasse();
         }
 
         public WebServiceProxy(X509Certificate2 Certificado)
@@ -164,21 +157,15 @@ namespace NFe.Components
         public XmlNode InvokeXML(object Instance, string methodName, object[] parameters)
         {
             XmlNode xmlNode = null;
-            try
-            {
-                //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-                Type tipoInstance = Instance.GetType();
-                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-                Type tipoClientCertificates = oClientCertificates.GetType();
-                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
 
-                //Invocar método do serviço
-                xmlNode = (XmlNode)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
+            Type tipoInstance = Instance.GetType();
+            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
+            Type tipoClientCertificates = oClientCertificates.GetType();
+            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+
+            //Invocar método do serviço
+            xmlNode = (XmlNode)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
 
             return xmlNode;
         }
@@ -289,14 +276,7 @@ namespace NFe.Components
         /// <returns>Retorna o objeto</returns>
         public object CriarObjeto(string NomeClasse)
         {
-            try
-            {
-                return Activator.CreateInstance(this.serviceAssemby.GetType(NomeClasse));
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            return Activator.CreateInstance(this.serviceAssemby.GetType(NomeClasse));
         }
         #endregion
 
@@ -312,34 +292,27 @@ namespace NFe.Components
         /// <param name="Certificado">Certificado digital</param>
         private void DescricaoServico(Uri requestUri, X509Certificate2 Certificado)
         {
-            try
+            //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
+            //Wandrey 31/03/2010
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+
+            //Definir o endereço para a requisição do wsdl
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
+
+            //Definir dados para conexão com Proxy. Wandrey 22/11/2010
+            if (UtilizaServidorProxy)
             {
-                //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
-                //Wandrey 31/03/2010
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-
-                //Definir o endereço para a requisição do wsdl
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
-
-                //Definir dados para conexão com Proxy. Wandrey 22/11/2010
-                if (UtilizaServidorProxy)
-                {
-                    request.Proxy = Proxy.DefinirProxy(ProxyServidor, ProxyUsuario, ProxySenha, ProxyPorta);
-                }
-
-                //Definir o certificado digital que deve ser utilizado na requisição do wsdl
-                request.ClientCertificates.Add(Certificado);
-
-                //Requisitar o WSDL e gravar em um stream                
-                Stream stream = request.GetResponse().GetResponseStream();
-
-                //Definir a descrição completa do servido (WSDL)
-                this.serviceDescription = ServiceDescription.Read(stream);
+                request.Proxy = Proxy.DefinirProxy(ProxyServidor, ProxyUsuario, ProxySenha, ProxyPorta);
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+
+            //Definir o certificado digital que deve ser utilizado na requisição do wsdl
+            request.ClientCertificates.Add(Certificado);
+
+            //Requisitar o WSDL e gravar em um stream                
+            Stream stream = request.GetResponse().GetResponseStream();
+
+            //Definir a descrição completa do servido (WSDL)
+            this.serviceDescription = ServiceDescription.Read(stream);
         }
         #endregion
 
@@ -351,20 +324,13 @@ namespace NFe.Components
         /// <param name="Certificado">Certificado digital</param>
         private void DescricaoServico(string arquivoWSDL)
         {
-            try
-            {
-                //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
-                //Wandrey 31/03/2010
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
+            //Wandrey 31/03/2010
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
 
-                //Definir a descrição completa do servido (WSDL)
-                //this.serviceDescription = ServiceDescription.Read(stream);
-                this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Definir a descrição completa do servido (WSDL)
+            //this.serviceDescription = ServiceDescription.Read(stream);
+            this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
         }
         #endregion
 
@@ -426,6 +392,30 @@ namespace NFe.Components
             importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties;
             #endregion
 
+            #region Se a NFSe for padrão DUETO preciso importar os schemas do WSDL
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && PadraoNFSe == PadroesNFSe.DUETO)
+            {
+                System.Net.WebClient client = new System.Net.WebClient();
+                Stream stream = client.OpenRead(ArquivoWSDL);
+
+                // Add any imported files
+                foreach (System.Xml.Schema.XmlSchema wsdlSchema in serviceDescription.Types.Schemas)
+                {
+                    foreach (System.Xml.Schema.XmlSchemaObject externalSchema in wsdlSchema.Includes)
+                    {
+                        if (externalSchema is System.Xml.Schema.XmlSchemaImport)
+                        {
+                            Uri baseUri = new Uri(ArquivoWSDL);
+                            Uri schemaUri = new Uri(baseUri, ((System.Xml.Schema.XmlSchemaExternal)externalSchema).SchemaLocation);
+                            stream = client.OpenRead(schemaUri);
+                            System.Xml.Schema.XmlSchema schema = System.Xml.Schema.XmlSchema.Read(stream, null);
+                            importer.Schemas.Add(schema);
+                        }
+                    }
+                }
+            }
+            #endregion
+
             #region Gerar o o grafo da classe para depois gerar o código
             CodeNamespace @namespace = new CodeNamespace();
             CodeCompileUnit unit = new CodeCompileUnit();
@@ -469,137 +459,130 @@ namespace NFe.Components
                 webServicesList = new List<webServices>();
 
                 XmlDocument doc = new XmlDocument();
-                try
+                /// danasa 1-2012
+                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
                 {
-                    /// danasa 1-2012
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                    Propriedade.Municipios = null;
+                    Propriedade.Municipios = new List<Municipio>();
+
+                    if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                     {
-                        Propriedade.Municipios = null;
-                        Propriedade.Municipios = new List<Municipio>();
-
-                        if (File.Exists(Propriedade.NomeArqXMLMunicipios))
+                        doc.Load(Propriedade.NomeArqXMLMunicipios);
+                        XmlNodeList estadoList = doc.GetElementsByTagName("Registro");
+                        foreach (XmlNode registroNode in estadoList)
                         {
-                            doc.Load(Propriedade.NomeArqXMLMunicipios);
-                            XmlNodeList estadoList = doc.GetElementsByTagName("Registro");
-                            foreach (XmlNode registroNode in estadoList)
+                            XmlElement registroElemento = (XmlElement)registroNode;
+                            if (registroElemento.Attributes.Count > 0)
                             {
-                                XmlElement registroElemento = (XmlElement)registroNode;
-                                if (registroElemento.Attributes.Count > 0)
-                                {
-                                    int IDmunicipio = Convert.ToInt32(registroElemento.Attributes[0].Value);
-                                    string Nome = registroElemento.Attributes[1].Value;
-                                    string Padrao = registroElemento.Attributes[2].Value;
-                                    string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2))).Substring(0, 2);
+                                int IDmunicipio = Convert.ToInt32(registroElemento.Attributes[0].Value);
+                                string Nome = registroElemento.Attributes[1].Value;
+                                string Padrao = registroElemento.Attributes[2].Value;
+                                string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2))).Substring(0, 2);
 
-                                    PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
+                                PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
 
-                                    ///
-                                    /// adiciona na lista que será usada na manutencao
-                                    Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
-
-                                    webServices wsItem = new webServices(IDmunicipio, Nome, UF);
-
-                                    //PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr), "");
-                                    //PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr), "");
-                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
-                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
-
-                                    webServicesList.Add(wsItem);
-                                }
-                            }
-                            if (webServicesList.Count > 0)
-                            {
                                 ///
-                                /// nao vou sair daqui pq pode ser que no "Webservice.xml" tenha algum municipio
-                                /// que o usuário nao tenha incluido
-                                /// 
-                                //return;
+                                /// adiciona na lista que será usada na manutencao
+                                Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
+
+                                webServices wsItem = new webServices(IDmunicipio, Nome, UF);
+
+                                //PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr), "");
+                                //PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr), "");
+                                PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
+                                PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
+
+                                webServicesList.Add(wsItem);
                             }
                         }
-                    }
-                    /// danasa 1-2012
-
-                    if (File.Exists(Propriedade.NomeArqXMLWebService))
-                    {
-                        doc.Load(Propriedade.NomeArqXMLWebService);
-                        XmlNodeList estadoList = doc.GetElementsByTagName("Estado");
-                        foreach (XmlNode estadoNode in estadoList)
+                        if (webServicesList.Count > 0)
                         {
-                            XmlElement estadoElemento = (XmlElement)estadoNode;
-                            if (estadoElemento.Attributes.Count > 0)
-                            {
-                                if (estadoElemento.Attributes[2].Value != "XX")
-                                {
-                                    int ID = Convert.ToInt32(estadoElemento.Attributes[0].Value);
-                                    string Nome = estadoElemento.Attributes[1].Value;
-                                    string UF = estadoElemento.Attributes[2].Value;
-
-                                    /// danasa 1-2012
-                                    ///
-                                    /// verifica se o ID já está na lista
-                                    /// isto previne que no xml de configuracao tenha duplicidade e evita derrubar o programa
-                                    ///
-                                    bool jahExiste = false;
-                                    foreach (webServices temp in webServicesList)
-                                        if (temp.ID == ID)
-                                        {
-                                            jahExiste = true;
-                                            break;
-                                        }
-                                    if (jahExiste) continue;
-
-                                    webServices wsItem = new webServices(ID, Nome, UF);
-                                    XmlNodeList urlList;
-
-                                    #region URL´s de Homologação
-                                    //urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
-                                    //if (urlList.Count > 0)
-                                    //    PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", urlList.Item(0).OuterXml, UF);
-                                    #endregion
-
-                                    #region URL´s de produção
-                                    //urlList = estadoElemento.GetElementsByTagName("URLProducao");
-                                    //if (urlList.Count > 0)
-                                    //    PreencheURLw(wsItem.URLProducao, "URLProducao", urlList.Item(0).OuterXml, UF);
-                                    #endregion
-
-                                    #region WSDL´s locais de Homologação
-                                    urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
-                                    if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", urlList.Item(0).OuterXml, UF);
-                                    #endregion
-
-                                    #region WSDL´s locais de Produção
-                                    urlList = estadoElemento.GetElementsByTagName("LocalProducao");
-                                    if (urlList.Count > 0)
-                                        PreencheURLw(wsItem.LocalProducao, "LocalProducao", urlList.Item(0).OuterXml, UF);
-                                    #endregion
-
-                                    webServicesList.Add(wsItem);
-
-                                    // danasa 1-2012
-                                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                                    {
-                                        ///
-                                        /// adiciona na lista que será usada na manutencao
-                                        foreach (string p0 in WebServiceNFSe.PadroesNFSeList)
-                                            if (p0 != PadroesNFSe.NaoIdentificado.ToString())
-                                                if (wsItem.LocalHomologacao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0 ||
-                                                    wsItem.LocalProducao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0)
-                                                {
-                                                    Propriedade.Municipios.Add(new Municipio(ID, UF, Nome, WebServiceNFSe.GetPadraoFromString(p0)));
-                                                    break;
-                                                }
-                                    }
-                                    // danasa 1-2012
-                                }
-                            }
+                            ///
+                            /// nao vou sair daqui pq pode ser que no "Webservice.xml" tenha algum municipio
+                            /// que o usuário nao tenha incluido
+                            /// 
+                            //return;
                         }
                     }
                 }
-                catch (Exception ex)
+                /// danasa 1-2012
+
+                if (File.Exists(Propriedade.NomeArqXMLWebService))
                 {
-                    throw (ex);
+                    doc.Load(Propriedade.NomeArqXMLWebService);
+                    XmlNodeList estadoList = doc.GetElementsByTagName("Estado");
+                    foreach (XmlNode estadoNode in estadoList)
+                    {
+                        XmlElement estadoElemento = (XmlElement)estadoNode;
+                        if (estadoElemento.Attributes.Count > 0)
+                        {
+                            if (estadoElemento.Attributes[2].Value != "XX")
+                            {
+                                int ID = Convert.ToInt32(estadoElemento.Attributes[0].Value);
+                                string Nome = estadoElemento.Attributes[1].Value;
+                                string UF = estadoElemento.Attributes[2].Value;
+
+                                /// danasa 1-2012
+                                ///
+                                /// verifica se o ID já está na lista
+                                /// isto previne que no xml de configuracao tenha duplicidade e evita derrubar o programa
+                                ///
+                                bool jahExiste = false;
+                                foreach (webServices temp in webServicesList)
+                                    if (temp.ID == ID)
+                                    {
+                                        jahExiste = true;
+                                        break;
+                                    }
+                                if (jahExiste) continue;
+
+                                webServices wsItem = new webServices(ID, Nome, UF);
+                                XmlNodeList urlList;
+
+                                #region URL´s de Homologação
+                                //urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
+                                //if (urlList.Count > 0)
+                                //    PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", urlList.Item(0).OuterXml, UF);
+                                #endregion
+
+                                #region URL´s de produção
+                                //urlList = estadoElemento.GetElementsByTagName("URLProducao");
+                                //if (urlList.Count > 0)
+                                //    PreencheURLw(wsItem.URLProducao, "URLProducao", urlList.Item(0).OuterXml, UF);
+                                #endregion
+
+                                #region WSDL´s locais de Homologação
+                                urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
+                                if (urlList.Count > 0)
+                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", urlList.Item(0).OuterXml, UF);
+                                #endregion
+
+                                #region WSDL´s locais de Produção
+                                urlList = estadoElemento.GetElementsByTagName("LocalProducao");
+                                if (urlList.Count > 0)
+                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", urlList.Item(0).OuterXml, UF);
+                                #endregion
+
+                                webServicesList.Add(wsItem);
+
+                                // danasa 1-2012
+                                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                                {
+                                    ///
+                                    /// adiciona na lista que será usada na manutencao
+                                    foreach (string p0 in WebServiceNFSe.PadroesNFSeList)
+                                        if (p0 != PadroesNFSe.NaoIdentificado.ToString())
+                                            if (wsItem.LocalHomologacao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0 ||
+                                                wsItem.LocalProducao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0)
+                                            {
+                                                Propriedade.Municipios.Add(new Municipio(ID, UF, Nome, WebServiceNFSe.GetPadraoFromString(p0)));
+                                                break;
+                                            }
+                                }
+                                // danasa 1-2012
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -699,7 +682,7 @@ namespace NFe.Components
         }
         #endregion
     }
-    
+
     public class webServices
     {
         public int ID { get; private set; }
@@ -727,30 +710,36 @@ namespace NFe.Components
                 this.ConsultarNfse =
                 this.ConsultarNfsePorRps =
                 this.ConsultarSituacaoLoteRps =
-                this.NFeCancelamento = 
+                this.NFeCancelamento =
                 this.NFeCancelamentoEvento =
                 this.NFeCCe =
                 this.NFeConsulta =
                 this.NFeConsulta1 =
                 this.NFeConsultaCadastro =
                 this.NFeConsultaNFeDest =
-                this.NFeDownload = 
-                this.NFeInutilizacao = 
-                this.NFeManifDest = 
-                this.NFeRecepcao = 
-                this.NFeRetRecepcao = 
-                this.NFeStatusServico = 
+                this.NFeDownload =
+                this.NFeInutilizacao =
+                this.NFeManifDest =
+                this.NFeRecepcao =
+                this.NFeRetRecepcao =
+                this.NFeStatusServico =
                 this.NFeRegistroDeSaida =
                 this.NFeRegistroDeSaidaCancelamento =
                 this.ConsultarURLNfse =
-                this.RecepcionarLoteRps = string.Empty;
+                this.RecepcionarLoteRps =
+                this.MDFeRecepcao =
+                this.MDFeRetRecepcao =
+                this.MDFeConsulta =
+                this.MDFeStatusServico =
+                this.MDFeRecepcaoEvento = string.Empty;
         }
 
-        /// <summary>
-        /// ******** ATENCAO *******
-        /// os nomes das propriedades tem que ser iguais as tags no WebService.xml
-        /// ******** ATENCAO *******
-        /// </summary>
+        #region Propriedades referente as tags do webservice.xml
+        // ******** ATENÇÃO *******
+        // os nomes das propriedades tem que ser iguais as tags no WebService.xml
+        // ******** ATENÇÃO *******
+
+        #region NFe e CTe
         public string NFeRecepcao { get; set; }
         public string NFeRetRecepcao { get; set; }
         public string NFeCancelamento { get; set; }
@@ -772,6 +761,9 @@ namespace NFe.Components
         public string NFeManifDest { get; set; }
         public string NFeRegistroDeSaida { get; set; }
         public string NFeRegistroDeSaidaCancelamento { get; set; }
+        #endregion
+
+        #region NFS-e
         /// <summary>
         /// Enviar Lote RPS NFS-e 
         /// </summary>
@@ -800,5 +792,31 @@ namespace NFe.Components
         /// Consulta URL de Visualização da NFSe
         /// </summary>
         public string ConsultarURLNfse { get; set; }
+        #endregion
+
+        #region MDF-e
+        /// <summary>
+        /// Recepção do MDFe
+        /// </summary>
+        public string MDFeRecepcao { get; set; }
+        /// <summary>
+        /// Consulta Recibo do lote de MDFe enviado
+        /// </summary>
+        public string MDFeRetRecepcao { get; set; }
+        /// <summary>
+        /// Consulta situação do MDFe
+        /// </summary>
+        public string MDFeConsulta { get; set; }
+        /// <summary>
+        /// Consulta status do serviço de MDFe
+        /// </summary>
+        public string MDFeStatusServico { get; set; }
+        /// <summary>
+        /// Recepcao dos eventos do MDF-e
+        /// </summary>
+        public string MDFeRecepcaoEvento { get; set; }      
+        #endregion
+
+        #endregion
     }
 }

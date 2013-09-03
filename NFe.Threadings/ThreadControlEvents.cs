@@ -15,17 +15,17 @@ namespace NFe.Threadings
         /// </summary>
         public ThreadControlEvents()
         {
-            ThreadControl.OnEnded += new ThreadControl.ThreadEndedHandler(ThreadControl_OnEnded);
-            ThreadControl.OnReleased += new ThreadControl.ThreadReleasedHandler(ThreadControl_OnReleased);
-            ThreadControl.OnStarted += new ThreadControl.ThreadStartHandler(ThreadControl_OnStarted);
+            ThreadItem.OnEnded += new ThreadItem.ThreadEndedHandler(ThreadItem_OnEnded);
+            ThreadItem.OnReleased += new ThreadItem.ThreadReleasedHandler(ThreadItem_OnReleased);
+            ThreadItem.OnStarted += new ThreadItem.ThreadStartHandler(ThreadItem_OnStarted);
         }
 
-        #region ThreadControl_OnStarted()
+        #region ThreadItem_OnStarted()
         /// <summary>
         /// Evento executado quando a thread vai iniciar
         /// </summary>
         /// <param name="item"></param>
-        protected void ThreadControl_OnStarted(ThreadItem item)
+        protected void ThreadItem_OnStarted(ThreadItem item)
         {
             //danasa 12/8/2011
             //mudei de posicao e inclui o FullName
@@ -36,12 +36,12 @@ namespace NFe.Threadings
         }
         #endregion
 
-        #region ThreadControl_OnReleased()
+        #region ThreadItem_OnReleased()
         /// <summary>
         /// Evento executado quando o item é removido da fila de execução
         /// </summary>
         /// <param name="item"></param>
-        protected void ThreadControl_OnReleased(ThreadItem item)
+        protected void ThreadItem_OnReleased(ThreadItem item)
         {
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento");
 
@@ -54,12 +54,12 @@ namespace NFe.Threadings
         }
         #endregion
 
-        #region ThreadControl_OnEnded()
+        #region ThreadItem_OnEnded()
         /// <summary>
         /// Evento é executado quando a thread vai finalizar
         /// </summary>
         /// <param name="item"></param>
-        protected void ThreadControl_OnEnded(ThreadItem item)
+        protected void ThreadItem_OnEnded(ThreadItem item)
         {
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento");
         }

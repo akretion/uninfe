@@ -7,6 +7,9 @@ using System.IO;
 using System.Xml;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Threading;
+using System.Windows.Forms;
+using System.Net;
 
 namespace NFe.Components
 {
@@ -52,18 +55,11 @@ namespace NFe.Components
         /// <param name="arquivoDestino">Arquivo de destino (destino do arquivo)</param>
         public static void Move(string arquivoOrigem, string arquivoDestino)
         {
-            try
-            {
-                if (File.Exists(arquivoDestino))
-                    File.Delete(arquivoDestino);
+            if(File.Exists(arquivoDestino))
+                File.Delete(arquivoDestino);
 
-                File.Copy(arquivoOrigem, arquivoDestino);
-                File.Delete(arquivoOrigem);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            File.Copy(arquivoOrigem, arquivoDestino);
+            File.Delete(arquivoOrigem);
         }
         #endregion
 
@@ -76,16 +72,9 @@ namespace NFe.Components
         /// <by>Wandrey Mundin Ferreira</by>
         public static void DeletarArquivo(string arquivo)
         {
-            try
+            if(File.Exists(arquivo))
             {
-                if (File.Exists(arquivo))
-                {
-                    File.Delete(arquivo);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
+                File.Delete(arquivo);
             }
         }
         #endregion
@@ -95,8 +84,8 @@ namespace NFe.Components
         {
             try
             {
-                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if (Propriedade.CodigosEstados[v, 0] == codigo.ToString())
+                for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
+                    if(Propriedade.CodigosEstados[v, 0] == codigo.ToString())
                         return Propriedade.CodigosEstados[v, 1];
 
                 return "";
@@ -113,8 +102,8 @@ namespace NFe.Components
         {
             try
             {
-                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if (Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf.ToString())
+                for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
+                    if(Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf.ToString())
                         return Convert.ToInt32(Propriedade.CodigosEstados[v, 0]);
 
                 return 0;
@@ -129,8 +118,8 @@ namespace NFe.Components
         #region PadraoNFe()
         public static PadroesNFSe PadraoNFSe(int municipio)
         {
-            foreach (Municipio mun in Propriedade.Municipios)
-                if (mun.CodigoMunicipio == municipio)
+            foreach(Municipio mun in Propriedade.Municipios)
+                if(mun.CodigoMunicipio == municipio)
                     return mun.Padrao;
 
             return PadroesNFSe.NaoIdentificado;
@@ -147,18 +136,18 @@ namespace NFe.Components
         {
             bool flagNeg = false;
 
-            if (text == null || text.ToString().Length == 0) return 0;
+            if(text == null || text.ToString().Length == 0) return 0;
             string ret = "";
 
-            foreach (char c in text.ToString().ToCharArray())
+            foreach(char c in text.ToString().ToCharArray())
             {
-                if (c.Equals('.') == true || c.Equals(',') == true || char.IsNumber(c) == true)
+                if(c.Equals('.') == true || c.Equals(',') == true || char.IsNumber(c) == true)
                     ret += c.ToString();
-                else if (c.Equals('-') == true)
+                else if(c.Equals('-') == true)
                     flagNeg = true;
             }
 
-            if (flagNeg == true) ret = "-" + ret;
+            if(flagNeg == true) ret = "-" + ret;
 
             return ret;
         }
@@ -175,7 +164,7 @@ namespace NFe.Components
         {
             string ret = OnlyNumbers(text).ToString();
 
-            foreach (char c in removeChars.ToCharArray())
+            foreach(char c in removeChars.ToCharArray())
             {
                 ret = ret.Replace(c.ToString(), "");
             }
@@ -200,7 +189,7 @@ namespace NFe.Components
             // Converte cada byte em um valor hexadecimal e adiciona ao
             // string builder
             // and format each one as a hexadecimal string.
-            for (int i = 0; i < valorCriptografado.Length; i++)
+            for(int i = 0; i < valorCriptografado.Length; i++)
             {
                 strBuilder.Append(valorCriptografado[i].ToString("x2"));
             }
@@ -220,17 +209,17 @@ namespace NFe.Components
         public static List<string> LerArquivo(string cArquivo)
         {
             List<string> lstRetorno = new List<string>();
-            if (File.Exists(cArquivo))
+            if(File.Exists(cArquivo))
             {
-                using (System.IO.StreamReader txt = new StreamReader(cArquivo, Encoding.Default, true))
+                using(System.IO.StreamReader txt = new StreamReader(cArquivo, Encoding.Default, true))
                 {
                     try
                     {
                         string cLinhaTXT = txt.ReadLine();
-                        while (cLinhaTXT != null)
+                        while(cLinhaTXT != null)
                         {
                             string[] dados = cLinhaTXT.Split('|');
-                            if (dados.GetLength(0) > 1)
+                            if(dados.GetLength(0) > 1)
                             {
                                 lstRetorno.Add(cLinhaTXT);
                             }
@@ -241,7 +230,7 @@ namespace NFe.Components
                     {
                         txt.Close();
                     }
-                    if (lstRetorno.Count == 0)
+                    if(lstRetorno.Count == 0)
                         throw new Exception("Arquivo: " + cArquivo + " vazio");
                 }
             }
@@ -287,7 +276,7 @@ namespace NFe.Components
 
             try
             {
-                using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using(FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     fs.Close();//fechar o arquivo para nao dar erro em outras aplicações
                 }
@@ -330,9 +319,9 @@ namespace NFe.Components
         {
             string Retorno = string.Empty;
 
-            if (Elemento.GetElementsByTagName(NomeTag).Count != 0)
+            if(Elemento.GetElementsByTagName(NomeTag).Count != 0)
             {
-                if (RetornaPontoVirgula)
+                if(RetornaPontoVirgula)
                 {
                     Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText.Replace(";", " ");  //danasa 19-9-2009
                     Retorno += ";";
@@ -348,7 +337,7 @@ namespace NFe.Components
         public static string LerTag(XmlElement Elemento, string NomeTag, string defaultValue)
         {
             string result = LerTag(Elemento, NomeTag, false);
-            if (string.IsNullOrEmpty(result))
+            if(string.IsNullOrEmpty(result))
                 result = defaultValue;
             return result;
         }
@@ -390,10 +379,6 @@ namespace NFe.Components
                 SR = File.OpenText(parNomeArquivo);
                 conteudo_xml = SR.ReadToEnd();
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
             finally
             {
                 SR.Close();
@@ -406,13 +391,13 @@ namespace NFe.Components
         #region getDateTime()
         public static DateTime GetDateTime(string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
                 return DateTime.MinValue;
 
             int _ano = Convert.ToInt16(value.Substring(0, 4));
             int _mes = Convert.ToInt16(value.Substring(5, 2));
             int _dia = Convert.ToInt16(value.Substring(8, 2));
-            if (value.Contains("T") && value.Contains(":"))
+            if(value.Contains("T") && value.Contains(":"))
             {
                 int _hora = Convert.ToInt16(value.Substring(11, 2));
                 int _min = Convert.ToInt16(value.Substring(14, 2));
@@ -437,14 +422,14 @@ namespace NFe.Components
             ArrayList UF = new ArrayList();
 
             /// danasa 1-2012
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                foreach (Municipio mun in Propriedade.Municipios)
+            if(Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                foreach(Municipio mun in Propriedade.Municipios)
                 {
                     UF.Add(new ComboElem(mun.UF, mun.CodigoMunicipio, mun.Nome));
                 }
             /// danasa 1-2012
 
-            if (File.Exists(Propriedade.NomeArqXMLWebService))
+            if(File.Exists(Propriedade.NomeArqXMLWebService))
             {
                 XmlTextReader oLerXml = null;
                 try
@@ -452,35 +437,31 @@ namespace NFe.Components
                     //Carregar os dados do arquivo XML de configurações da Aplicação
                     oLerXml = new XmlTextReader(Propriedade.NomeArqXMLWebService);
 
-                    while (oLerXml.Read())
+                    while(oLerXml.Read())
                     {
-                        if (oLerXml.NodeType == XmlNodeType.Element)
+                        if(oLerXml.NodeType == XmlNodeType.Element)
                         {
-                            if (oLerXml.Name == "Estado" && (Convert.ToInt32(oLerXml.GetAttribute("ID")) < 900 || Propriedade.TipoAplicativo == TipoAplicativo.Nfse) && Convert.ToInt32(oLerXml.GetAttribute("ID")) != 999)
+                            if(oLerXml.Name == "Estado" && (Convert.ToInt32(oLerXml.GetAttribute("ID")) < 900 || Propriedade.TipoAplicativo == TipoAplicativo.Nfse) && Convert.ToInt32(oLerXml.GetAttribute("ID")) != 999)
                             {
                                 /// danasa 1-2012
                                 bool jahExiste = false;
-                                foreach (ComboElem ee in UF)
-                                    if (ee.Codigo == Convert.ToInt32(oLerXml.GetAttribute("ID")))
+                                foreach(ComboElem ee in UF)
+                                    if(ee.Codigo == Convert.ToInt32(oLerXml.GetAttribute("ID")))
                                     {
                                         jahExiste = true;
                                         break;
                                     }
                                 /// danasa 1-2012
                                 /// 
-                                if (!jahExiste)
+                                if(!jahExiste)
                                     UF.Add(new ComboElem(oLerXml.GetAttribute("UF"), Convert.ToInt32(oLerXml.GetAttribute("ID")), oLerXml.GetAttribute("Nome")));
                             }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
                 finally
                 {
-                    if (oLerXml != null)
+                    if(oLerXml != null)
                         oLerXml.Close();
                 }
             }
@@ -502,12 +483,43 @@ namespace NFe.Components
             byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
             StringBuilder sBuilder = new StringBuilder();
 
-            for (int i = 0; i < data.Length; i++)
+            for(int i = 0; i < data.Length; i++)
             {
                 sBuilder.Append(data[i].ToString("x2"));
             }
 
             return sBuilder.ToString();
         }
+
+        /// <summary>
+        /// Retorna a empresa pela thread atual
+        /// </summary>
+        /// <returns></returns>
+        public static int FindEmpresaByThread()
+        {
+            return Convert.ToInt32(Thread.CurrentThread.Name);
+        }
+
+        #region Ticket: #110
+        /*
+         * Marcelo
+         * 03/06/2013
+         */
+        /// <summary>
+        /// Retorna o endereço IP desta estação
+        /// </summary>
+        /// <returns>Endereço ip da estação</returns>
+        public static string GetIPAddress()
+        {
+            var hostEntry = Dns.GetHostEntry(Environment.MachineName);
+            string ip = (
+                       from addr in hostEntry.AddressList
+                       where addr.AddressFamily.ToString() == "InterNetwork"
+                       select addr.ToString()
+                ).FirstOrDefault();
+
+            return ip;
+        } 
+        #endregion
     }
 }

@@ -16,4 +16,7 @@
     </ErrorReportUrlHistory>
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>/updatewsdl</StartArguments>
+  </PropertyGroup>
 </Project>

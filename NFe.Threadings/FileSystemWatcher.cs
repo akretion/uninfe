@@ -10,7 +10,7 @@ using NFe.Settings;
 
 namespace NFe.Threadings
 {
-    public class FileSystemWatcher : IDisposable    //<<<danasa 1-5-2011
+    public class FileSystemWatcher: IDisposable    //<<<danasa 1-5-2011
     {
         public delegate void FileChangedHandler(FileInfo fi);
         public event FileChangedHandler OnFileChanged;
@@ -27,8 +27,8 @@ namespace NFe.Threadings
 
         private void Dispose(bool disposing)
         {
-            if (!_disposed)
-                if (disposing && worker != null)
+            if(!_disposed)
+                if(disposing && worker != null)
                     worker.Dispose();
             _disposed = true;
         }
@@ -64,7 +64,7 @@ namespace NFe.Threadings
 
             CancelProcess = false;//<<<<danasa 1-5-2011
 
-            while (!CancelProcess)
+            while(!CancelProcess)
             {
                 try
                 {
@@ -73,11 +73,11 @@ namespace NFe.Threadings
                     Hashtable NewFiles = new Hashtable();
 
                     //cria todos os fileinfos
-                    foreach (string s in Files)
+                    foreach(string s in Files)
                     {
                         FileInfo fi = new FileInfo(s);
-                        if (File.Exists(fi.FullName))
-                            if (!Functions.FileInUse(fi.FullName))
+                        if(File.Exists(fi.FullName))
+                            if(!Functions.FileInUse(fi.FullName))
                             {
                                 //Definir o nome do arquivo na pasta temp
                                 string arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
@@ -90,58 +90,67 @@ namespace NFe.Threadings
                             }
                     }
 
-                    foreach (FileInfo fi in NewFiles.Values)
+                    foreach(FileInfo fi in NewFiles.Values)
                     {
-                        if (CancelProcess || ((BackgroundWorker)sender).CancellationPending)
+                        if(CancelProcess || ((BackgroundWorker)sender).CancellationPending)
                         {
                             break;
                         }
 
-                        if (OldFiles.Contains(fi.Name))
+                        if(OldFiles.Contains(fi.Name))
                         {
                             FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
 
-                            if (oldFi.CreationTime != fi.CreationTime)
+#if DEBUG
+                            Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
+#endif
+
+                            if(oldFi.CreationTime != fi.CreationTime)
                                 RaiseFileChanged(fi);
-                            else if (oldFi.Length != fi.Length)
+                            else if(oldFi.Length != fi.Length)
                                 RaiseFileChanged(fi);
+
+#if DEBUG
+                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
+
                         }
                         else
                         {
+#if DEBUG
+                            Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
+#endif
+
                             RaiseFileChanged(fi);
                             OldFiles.Add(fi.Name, fi);
+#if DEBUG
+                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
                         }
                     }
 
                     OldFiles = NewFiles.Clone() as Hashtable;
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
             }
         }
 
         private void RaiseFileChanged(FileInfo fi)
         {
-            if (File.Exists(fi.FullName))
+            if(File.Exists(fi.FullName))
             {
-                if (fi.Length > 0)
+                if(fi.Length > 0)
                 {
                     BackgroundWorker worker = new BackgroundWorker();
                     worker.WorkerSupportsCancellation = true;
                     worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
                     worker.DoWork += new DoWorkEventHandler(RaiseEvent);
                     worker.RunWorkerAsync(fi);
-
-                    /*Thread t = new Thread(new ThreadStart(delegate()
-                    {
-                        if (OnFileChanged != null)
-                            OnFileChanged(fi);
-                    }));
-                    t.Start();*/
                 }
                 else
                 {
@@ -158,8 +167,16 @@ namespace NFe.Threadings
         {
             FileInfo fi = e.Argument as FileInfo;
 
-            if (OnFileChanged != null)
+#if DEBUG
+            Debug.WriteLine(String.Format("A leitura do arquivo '{0}' foi iniciada.", fi.FullName));
+#endif
+
+            if(OnFileChanged != null)
                 OnFileChanged(fi);
+
+#if DEBUG
+            Debug.WriteLine(String.Format("A leitura do arquivo '{0}' foi finalizada", fi.FullName));
+#endif
         }
 
         /// <summary>
@@ -170,7 +187,7 @@ namespace NFe.Threadings
             get { return CancelProcess; }
             set
             {
-                if (value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
+                if(value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
                 {
                     CancelProcess = true;
                     this.worker.CancelAsync();

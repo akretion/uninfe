@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskNFeRecepcao : TaskAbst
+    public class TaskNFeRecepcao: TaskAbst
     {
         #region Classe com os dados do XML do retorno do envio do Lote de NFe
         /// <summary>
@@ -24,7 +24,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
             //Definir o serviço que será executado para a classe
             Servico = Servicos.EnviarLoteNfe;
 
@@ -63,15 +63,16 @@ namespace NFe.Service
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo
                 //Ler o XML de retorno com o recibo do lote enviado
                 //var oLerRecibo = new LerXML();
-                /*oLerRecibo.*/Recibo(vStrXmlRetorno);
+                /*oLerRecibo.*/
+                Recibo(vStrXmlRetorno);
 
-                if (/*oLerRecibo.*/oDadosRec.cStat == "103") //Lote recebido com sucesso
+                if(/*oLerRecibo.*/oDadosRec.cStat == "103") //Lote recebido com sucesso
                 {
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, /*oLerRecibo.*/oDadosRec.tMed.ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, /*oLerRecibo.*/oDadosRec.nRec);
                 }
-                else if (Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) > 200 ||
+                else if(Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) > 200 ||
                          Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
                          Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
                 {
@@ -87,7 +88,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
                 #endregion
             }
-            catch (ExceptionEnvioXML ex)
+            catch(ExceptionEnvioXML ex)
             {
                 //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
                 //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
@@ -106,7 +107,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (ExceptionSemInternet ex)
+            catch(ExceptionSemInternet ex)
             {
                 try
                 {
@@ -119,7 +120,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -160,48 +161,41 @@ namespace NFe.Service
             this.oDadosRec.nRec = string.Empty;
             this.oDadosRec.tMed = 0;
 
-            try
+            XmlDocument xml = new XmlDocument();
+            xml.Load(memoryStream);
+
+            XmlNodeList retEnviNFeList = null;
+
+            switch(Propriedade.TipoAplicativo)
             {
-                XmlDocument xml = new XmlDocument();
-                xml.Load(memoryStream);
+                case TipoAplicativo.Cte:
+                    retEnviNFeList = xml.GetElementsByTagName("retEnviCte");
+                    break;
 
-                XmlNodeList retEnviNFeList = null;
+                case TipoAplicativo.Nfe:
+                    retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
+                    break;
 
-                switch (Propriedade.TipoAplicativo)
-                {
-                    case TipoAplicativo.Cte:
-                        retEnviNFeList = xml.GetElementsByTagName("retEnviCte");
-                        break;
-
-                    case TipoAplicativo.Nfe:
-                        retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
-                        break;
-
-                    default:
-                        break;
-                }
-
-
-                foreach (XmlNode retEnviNFeNode in retEnviNFeList)
-                {
-                    XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
-
-                    this.oDadosRec.cStat = retEnviNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
-
-                    XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
-
-                    foreach (XmlNode infRecNode in infRecList)
-                    {
-                        XmlElement infRecElemento = (XmlElement)infRecNode;
-
-                        this.oDadosRec.nRec = infRecElemento.GetElementsByTagName("nRec")[0].InnerText;
-                        this.oDadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
-                    }
-                }
+                default:
+                    break;
             }
-            catch (Exception ex)
+
+
+            foreach(XmlNode retEnviNFeNode in retEnviNFeList)
             {
-                throw (ex);
+                XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
+
+                this.oDadosRec.cStat = retEnviNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+
+                XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
+
+                foreach(XmlNode infRecNode in infRecList)
+                {
+                    XmlElement infRecElemento = (XmlElement)infRecNode;
+
+                    this.oDadosRec.nRec = infRecElemento.GetElementsByTagName("nRec")[0].InnerText;
+                    this.oDadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
+                }
             }
         }
         #endregion

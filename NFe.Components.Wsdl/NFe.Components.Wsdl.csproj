@@ -923,9 +923,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HISSNetNovoHamburgo.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PISSNetNovoHamburgo.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -1092,6 +1089,142 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSGuiasNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSMensagensNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSRemessaNFSE.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GIF\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSRemessa.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSRemessa.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HISSNet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consReciMDFeTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consReciMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consSitMDFeTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consSitMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consStatServMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consStatServTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\distMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\enviMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\evCancMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\evEncMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\eventoMDFeTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\eventoMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\evIncCondutorMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\leiauteDistMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeConsultaDFeTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeConsultaDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeModalAereo_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeModalAquaviario_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeModalFerroviario_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeModalRodoviario_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfeTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\mdfe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\procEventoMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\procMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retConsReciMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retConsSitMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retConsStatServMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retDistMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retEnviMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retEventoMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retMDFeConsultaDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\tiposGeralMDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeRecepcaoEvento.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeRetRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeStatusServico.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeRecepcaoEvento.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeRetRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeStatusServico.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSantaRitaRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
+    <None Include="NFse\WSDL\Producao\PISSNetAnapolis.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaSantaRitaRS-Dueto.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

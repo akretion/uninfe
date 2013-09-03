@@ -20,7 +20,7 @@ using NFe.Threadings;
 namespace uninfse
 {
     #region Classe MainForm
-    public partial class MainForm : Form
+    public partial class MainForm: Form
     {
         private bool restartServico = false;
         private bool servicoInstaladoErodando = false;
@@ -34,7 +34,7 @@ namespace uninfse
             {
                 // Executar as conversões de atualizações de versão quando tiver
                 string nomeEmpresa = Auxiliar.ConversaoNovaVersao(string.Empty);
-                if (!string.IsNullOrEmpty(nomeEmpresa))
+                if(!string.IsNullOrEmpty(nomeEmpresa))
                 {
                     /// danasa 20-9-2010
                     /// exibe a mensagem de erro
@@ -42,7 +42,7 @@ namespace uninfse
 
                     /// e pede o CNPJ
                     FormCNPJ fcnpj = new FormCNPJ(nomeEmpresa);
-                    if (fcnpj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    if(fcnpj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         /// tenta processar já com o CNPJ definido
                         Auxiliar.ConversaoNovaVersao(fcnpj.Cnpj);
@@ -50,7 +50,7 @@ namespace uninfse
                     }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -63,7 +63,7 @@ namespace uninfse
             this.tbSeparator1.Visible =
                 this.tbRestartServico.Visible =
                 this.tbPararServico.Visible = this.servicoInstaladoErodando;
-                                                
+
             this.updateControleDoServico();
 
             ///
@@ -71,8 +71,8 @@ namespace uninfse
             /// 
             try
             {
-            XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-            iniFile.LoadForm(this, "");
+                XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
+                iniFile.LoadForm(this, "");
             }
             catch { }   // para evitar que para alguns que derrubam o uninfe quando atualizam
 
@@ -88,7 +88,7 @@ namespace uninfse
             // danasa 1-2012
             // tem que ser nesta posicao pq caso nao exista o UniNFeMunic.xml, ele será criado com base no "Webservice.xml"
             // a lista de municipios será criada em ConfiguracaoApp.CarregaWebServicesList();
-            WebServiceNFSe.Start();   
+            WebServiceNFSe.Start();
 
             #region Definir valores propriedades de configuração
             Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
@@ -96,10 +96,10 @@ namespace uninfse
             SchemaXMLNFSe.CriarListaIDXML();
             #endregion
 
-            if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
+            if(!this.servicoInstaladoErodando)     //danasa 12/8/2011
 
-            //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
-            new ThreadControlEvents();  //danasa 12/8/2011
+                //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
+                new ThreadControlEvents();  //danasa 12/8/2011
         }
         #endregion
 
@@ -113,14 +113,14 @@ namespace uninfse
         {
             Empresa.CarregaConfiguracao();
 
-            if (servicoInstaladoErodando)
+            if(servicoInstaladoErodando)
             {
-                if (restartServico)
+                if(restartServico)
                     ServiceProcess.StopService(Propriedade.ServiceName, 40000);
 
                 restartServico = false;
 
-                switch (ServiceProcess.StatusService(Propriedade.ServiceName))
+                switch(ServiceProcess.StatusService(Propriedade.ServiceName))
                 {
                     case System.ServiceProcess.ServiceControllerStatus.Stopped:
                         ServiceProcess.StartService(Propriedade.ServiceName, 40000);
@@ -134,17 +134,17 @@ namespace uninfse
             else
             {
                 ThreadService.Start();
-        }
+            }
         }
         #endregion
 
         #region PararServicos()
         private void PararServicos(bool fechaServico)
         {
-            if (servicoInstaladoErodando)
+            if(servicoInstaladoErodando)
             {
-                if (fechaServico)
-            {
+                if(fechaServico)
+                {
                     ServiceProcess.StopService(Propriedade.ServiceName, 40000);
                 }
             }
@@ -168,7 +168,7 @@ namespace uninfse
             ///
             /// danasa 9-2009
             /// 
-            if (this.WindowState != FormWindowState.Minimized)
+            if(this.WindowState != FormWindowState.Minimized)
             {
                 XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
                 iniFile.SaveForm(this, "");
@@ -177,7 +177,7 @@ namespace uninfse
             //Faz a aplicação sumir da barra de tarefas
             //danasa
             //  Se usuario mudar o tamanho da janela, não pode desaparece-la da tasknar
-            if (this.WindowState == FormWindowState.Minimized)
+            if(this.WindowState == FormWindowState.Minimized)
                 this.ShowInTaskbar = false;
 
             //Mostrar o balão com as informações que selecionamos
@@ -185,7 +185,7 @@ namespace uninfse
             // em que ficará aparecendo. Coloque "0" se quiser
             // que ele feche somente quando o usuário clicar
 
-            if (this.WindowState == FormWindowState.Minimized)
+            if(this.WindowState == FormWindowState.Minimized)
             {
                 notifyIcon1.ShowBalloonTip(6000);
             }
@@ -226,6 +226,17 @@ namespace uninfse
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             PararServicos(false);
+
+            #region Ticket #110
+            /* 
+             * Excluir os arquivos de ".lock"
+             * 
+             * 05/06/2013
+             * Marcelo
+             */
+
+            Empresa.ClearLockFiles(false);
+            #endregion
         }
         #endregion
 
@@ -236,12 +247,12 @@ namespace uninfse
             //
             // TODO: Aqui, deveriamos verificar se ainda existe alguma Thread pendente antes de fechar
             //
-            if (e.CloseReason == CloseReason.UserClosing && !Propriedade.EncerrarApp)
+            if(e.CloseReason == CloseReason.UserClosing && !Propriedade.EncerrarApp)
             {
                 ///
                 /// danasa 9-2009
                 /// 
-                if (this.WindowState != FormWindowState.Minimized)
+                if(this.WindowState != FormWindowState.Minimized)
                 {
                     XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
                     iniFile.SaveForm(this, "");
@@ -266,7 +277,7 @@ namespace uninfse
         {
             this.toolStripButton_sobre.Enabled =
                 this.sobreOUniNFeToolStripMenuItem.Enabled = false;
-            using (FormSobre oSobre = new FormSobre())
+            using(FormSobre oSobre = new FormSobre())
             {
                 oSobre.MinimizeBox =
                     oSobre.ShowInTaskbar = !(sender is ToolStripButton);
@@ -282,9 +293,9 @@ namespace uninfse
         {
             FormConsultaCadastro oCadastro = null;
             //danasa 
-            foreach (Form fg in this.MdiChildren)
+            foreach(Form fg in this.MdiChildren)
             {
-                if (fg is FormConsultaCadastro)
+                if(fg is FormConsultaCadastro)
                 {
                     ///
                     /// configuracão já está ativa como MDI
@@ -295,9 +306,9 @@ namespace uninfse
                     return 1;
                 }
             }
-            foreach (Form fg in Application.OpenForms)
+            foreach(Form fg in Application.OpenForms)
             {
-                if (fg is FormConsultaCadastro)
+                if(fg is FormConsultaCadastro)
                 {
                     oCadastro = fg as FormConsultaCadastro;
                     oCadastro.WindowState = FormWindowState.Normal;
@@ -309,13 +320,13 @@ namespace uninfse
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if(Empresa.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            switch (CadastroAtivo())
+            switch(CadastroAtivo())
             {
                 case 0:
                     ///
@@ -338,25 +349,25 @@ namespace uninfse
 
         private void cmConsultaCadastroServico_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if(Empresa.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            switch (CadastroAtivo())
+            switch(CadastroAtivo())
             {
                 case -1:
                     ///
                     /// tela principal está visivel?
                     /// 
-                    if (this.WindowState != FormWindowState.Minimized)
+                    if(this.WindowState != FormWindowState.Minimized)
                         ///
                         /// então abre o cadastro como MDI
                         /// 
                         this.toolStripButton1_Click(sender, e);
                     else
-                        using (FormConsultaCadastro consultaCadastro = new FormConsultaCadastro())
+                        using(FormConsultaCadastro consultaCadastro = new FormConsultaCadastro())
                         {
                             consultaCadastro.MinimizeBox = true;
                             consultaCadastro.ShowInTaskbar = true;
@@ -371,7 +382,7 @@ namespace uninfse
         #region -- Validar
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if(Empresa.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -385,13 +396,13 @@ namespace uninfse
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if(Empresa.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (FormValidarXML oValidarXML = new FormValidarXML())
+            using(FormValidarXML oValidarXML = new FormValidarXML())
             {
                 oValidarXML.ShowInTaskbar = true;
                 oValidarXML.MinimizeBox = true;
@@ -405,9 +416,9 @@ namespace uninfse
         {
             FormConfiguracao oConfig = null;
             //danasa 
-            foreach (Form fg in this.MdiChildren)
+            foreach(Form fg in this.MdiChildren)
             {
-                if (fg is FormConfiguracao)
+                if(fg is FormConfiguracao)
                 {
                     ///
                     /// configuracão já está ativa como MDI
@@ -418,9 +429,9 @@ namespace uninfse
                     return 1;
                 }
             }
-            foreach (Form fg in Application.OpenForms)
+            foreach(Form fg in Application.OpenForms)
             {
-                if (fg is FormConfiguracao)
+                if(fg is FormConfiguracao)
                 {
                     oConfig = fg as FormConfiguracao;
                     oConfig.WindowState = FormWindowState.Normal;
@@ -455,7 +466,7 @@ namespace uninfse
 
         private void toolStripButton_config_Click(object sender, EventArgs e)
         {
-            switch (ConfiguracaoAtiva())
+            switch(ConfiguracaoAtiva())
             {
                 case 0:
                     ///
@@ -471,7 +482,7 @@ namespace uninfse
                         {
                             FormConfiguracao oConfig = new FormConfiguracao(onCloseConfiguracao, this);
                             oConfig.MinimizeBox = false;
-                            if (oConfig.AcessoAutorizado)
+                            if(oConfig.AcessoAutorizado)
                             {
                                 oConfig.Show();
                             }
@@ -486,22 +497,22 @@ namespace uninfse
 
         private void configuraçõesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            switch (ConfiguracaoAtiva())
+            switch(ConfiguracaoAtiva())
             {
                 case -1:
                     ///
                     /// tela principal está visivel?
                     /// 
-                    if (this.WindowState != FormWindowState.Minimized)
+                    if(this.WindowState != FormWindowState.Minimized)
                         ///
                         /// então abre a configuração como MDI
                         /// 
                         toolStripButton_config_Click(sender, e);
                     else
-                        using (FormConfiguracao oConfig = new FormConfiguracao(onCloseConfiguracao, null))
+                        using(FormConfiguracao oConfig = new FormConfiguracao(onCloseConfiguracao, null))
                         {
                             oConfig.MinimizeBox = true;
-                            if (oConfig.AcessoAutorizado)
+                            if(oConfig.AcessoAutorizado)
                             {
                                 oConfig.ShowDialog();
                             }
@@ -529,7 +540,7 @@ namespace uninfse
         {
             try
             {
-                if (File.Exists(Application.StartupPath + "\\" + Propriedade.NomeAplicacao + ".pdf"))
+                if(File.Exists(Application.StartupPath + "\\" + Propriedade.NomeAplicacao + ".pdf"))
                 {
                     System.Diagnostics.Process.Start(Application.StartupPath + Propriedade.NomeAplicacao + ".pdf");
                 }
@@ -538,7 +549,7 @@ namespace uninfse
                     MessageBox.Show("Não foi possível localizar o arquivo de manual do sistema.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -609,7 +620,7 @@ namespace uninfse
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe parado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -631,7 +642,7 @@ namespace uninfse
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe reiniciado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -643,7 +654,7 @@ namespace uninfse
 
         private void updateControleDoServico()
         {
-            if (servicoInstaladoErodando)
+            if(servicoInstaladoErodando)
             {
                 this.tbPararServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
                 this.tbRestartServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
@@ -663,7 +674,7 @@ namespace uninfse
         }
         private void btnMunicipios_Click(object sender, EventArgs e)
         {
-            if (m == null)
+            if(m == null)
                 m = new formMunicipios(onCloseMunicipios);
             m.MdiParent = this;
             m.Show();
@@ -671,7 +682,7 @@ namespace uninfse
 
         protected override void OnActivated(EventArgs e)
         {
-            if (this.Tag == null)
+            if(this.Tag == null)
             {
                 ///
                 /// danasa 9-2009
@@ -688,9 +699,9 @@ namespace uninfse
         {
             FormLogs oLog = null;
             //danasa 
-            foreach (Form fg in this.MdiChildren)
+            foreach(Form fg in this.MdiChildren)
             {
-                if (fg is FormLogs)
+                if(fg is FormLogs)
                 {
                     ///
                     /// configuracão já está ativa como MDI
@@ -701,9 +712,9 @@ namespace uninfse
                     return 1;
                 }
             }
-            foreach (Form fg in Application.OpenForms)
+            foreach(Form fg in Application.OpenForms)
             {
-                if (fg is FormLogs)
+                if(fg is FormLogs)
                 {
                     oLog = fg as FormLogs;
                     oLog.WindowState = FormWindowState.Normal;
@@ -714,7 +725,7 @@ namespace uninfse
         }
         private void tbLogs_Click(object sender, EventArgs e)
         {
-            switch (LogAtivo())
+            switch(LogAtivo())
             {
                 case 0:
                     ///
@@ -737,19 +748,19 @@ namespace uninfse
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            switch (LogAtivo())
+            switch(LogAtivo())
             {
                 case -1:
                     ///
                     /// tela principal está visivel?
                     /// 
-                    if (this.WindowState != FormWindowState.Minimized)
+                    if(this.WindowState != FormWindowState.Minimized)
                         ///
                         /// então abre a configuração como MDI
                         /// 
                         tbLogs.PerformClick();
                     else
-                        using (FormLogs oConfig = new FormLogs())
+                        using(FormLogs oConfig = new FormLogs())
                         {
                             oConfig.MinimizeBox = true;
                             oConfig.ShowDialog();
@@ -758,6 +769,23 @@ namespace uninfse
             }
         }
         #endregion
+
+        #region Ticket #110
+        private void tbClearLockFiles_Click(object sender, EventArgs e)
+        {
+            if(Empresa.ClearLockFiles())
+            {
+                ThreadService.Stop();
+                Application.Exit();
+            }
+        }
+        #endregion
+
+        private void tbForceUpdateWSDL_Click(object sender, EventArgs e)
+        {
+            ConfiguracaoApp.ForceUpdateWSDL();
+        }
+
     }
     #endregion
 }

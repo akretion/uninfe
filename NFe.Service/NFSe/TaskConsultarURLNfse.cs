@@ -24,7 +24,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultarURLNfse;
@@ -95,7 +95,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedURLNfse(string arquivoXML)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
         }
         #endregion
     }

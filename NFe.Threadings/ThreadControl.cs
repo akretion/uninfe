@@ -42,66 +42,8 @@ namespace NFe.Threadings
     /// <summary>
     /// classe de item da thread
     /// </summary>
-    public class ThreadItem
+    public class ThreadItem: IDisposable
     {
-        public ThreadItem(System.IO.FileInfo fi, int empresa)
-        {
-            FileInfo = fi;
-            Status = Semaphore.Added;
-            Empresa = empresa;
-        }
-
-        public System.IO.FileInfo FileInfo { get; private set; }
-        public Semaphore Status { get; internal set; }
-        public int Empresa { get; private set; }
-    }
-    #endregion
-
-    #region ThreadControl
-    /// <summary>
-    /// controla a execução das threads dentro da aplicação
-    /// </summary>
-    public static class ThreadControl
-    {
-        #region Extension Method
-        /// <summary>
-        /// reetorna o primeiro item da lista
-        /// </summary>
-        /// <param name="item">lista de items</param>
-        /// <returns>primeiro item que encontrar</returns>
-        public static ThreadItem GetItem(this List<ThreadItem> item)
-        {
-            ThreadItem result = null;
-
-            if (Buffer.Count > 0)
-            {
-                try
-                {
-                    result = item.FirstOrDefault(i =>
-                      {
-                          if (i.Status == Semaphore.Added)
-                              return true;
-
-                          return false;
-                      });
-                }
-                catch (Exception ex)
-                {
-                    /*Provavelmente nunca irá cair aqui... Mas...*/
-                    Auxiliar.WriteLog(ex.Message, true);
-                }
-            }
-
-            return result;
-        }
-        #endregion
-
-        #region Construtores
-        static ThreadControl()
-        {
-        }
-        #endregion
-
         #region delegates
         public delegate void ThreadStartHandler(ThreadItem item);
         public delegate void ThreadEndedHandler(ThreadItem item);
@@ -125,129 +67,101 @@ namespace NFe.Threadings
 
         #endregion
 
-        #region Atributos
-        private static List<ThreadItem> Buffer = new List<ThreadItem>();
-        private static ManualResetEvent ResetThread = null;
-        #endregion
-
-        #region Métodos
-        public static void Start()
+        public ThreadItem(System.IO.FileInfo fi, int empresa)
         {
-            //inicia a thread que ficará executando o buffer
-            ThreadControl.ResetThread = new ManualResetEvent(false);
-
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.WorkerSupportsCancellation = true;
-            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-            worker.DoWork += new DoWorkEventHandler(ExecuteBuffer);
-            worker.RunWorkerAsync();
-
-            /*Thread tBuffer = new Thread(new ThreadStart(ExecuteBuffer));
-            tBuffer.Start();*/
+            FileInfo = fi;
+            Empresa = empresa;
         }
 
-        public static void Stop()
-        {
-            ResetThread.Set();
-        }
+        public System.IO.FileInfo FileInfo { get; private set; }
+        public int Empresa { get; private set; }
 
+        /*<#8084>
+         * Com a morte da classe ThreadControl, este método passou a ser responsável pela execução dos eventos que antes eram feitos pela ThreadControl
+         * 
+         */
         /// <summary>
-        /// adiciona um item na lista de threads
+        /// Método responsável por executar os eventos de forma síncrona em uma thread separada
         /// </summary>
-        /// <param name="item"></param>
-        public static void Add(ThreadItem item)
+        public void Run()
         {
-            Buffer.Add(item);
-        }
+            BackgroundWorker bgw = new BackgroundWorker();
+            bgw.WorkerSupportsCancellation = true;
+            bgw.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
 
-        /// <summary>
-        /// executa o buffer (loop infinito)
-        /// </summary>
-        static void ExecuteBuffer(object sender2, DoWorkEventArgs e2)
-        {
-            bool signal = false;
-            while (!signal)
+            bgw.DoWork += new DoWorkEventHandler((sender, e) =>
             {
-                while (Buffer.Count > 0)
+                Thread.CurrentThread.Name = Empresa.ToString();
+
+                try
+                {
+                    //avisa que vai iniciar
+                    if(OnStarted != null) OnStarted(this);
+
+                    //avisa que vai finalizar
+                    if(OnEnded != null) OnEnded(this);
+                }
+                catch(Exception ex)
+                {
+                    Auxiliar.WriteLog("Ocorreu um erro na execução da thread que está sendo executada.\r\nThreadControl.Cs (1)\r\n" + ex.Message, true);
+                }
+                finally
                 {
                     try
                     {
-                        ThreadItem item = Buffer.GetItem();
-
-                        if (item != null)
-                        {
-                            item.Status = Semaphore.Started;
-
-                            BackgroundWorker worker = new BackgroundWorker();
-                            
-                            worker.WorkerSupportsCancellation = true;           
-                            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-                            worker.DoWork += new DoWorkEventHandler(ExecuteItem);
-                            worker.RunWorkerAsync(item);                            
-
-                            /*Thread t = new Thread(new ParameterizedThreadStart(ExecuteItem));
-                            t.Name = item.Empresa.ToString();
-                            t.Start(item);*/
-                        }
+                        //remove o item                   
+                        //avisa que removeu o item
+                        if(OnReleased != null) OnReleased(this);
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
-                        Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, true);
+                        Auxiliar.WriteLog("Ocorreu um erro ao tentar remover o item da Thread que está sendo executada.\r\nThreadControl.Cs (2)\r\n" + ex.Message, true);
                     }
 
-                    Thread.Sleep(200);
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
                 }
+            });
 
-                try
-                {
-                    signal = ResetThread.WaitOne(1000);
-                }
-                catch
-                {
-                    signal = true;
-                }
-            }
+            bgw.RunWorkerAsync();
         }
 
-        //static void ExecuteItem(object o)
-        static void ExecuteItem(object sender, DoWorkEventArgs e)
+        #region IDisposable members
+        public void Dispose()
         {
-            ThreadItem item = e.Argument as ThreadItem;
-            Thread.CurrentThread.Name = item.Empresa.ToString();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-            try
+        private void Dispose(bool disposing)
+        {
+            if(disposing)
             {
-                //avisa que vai iniciar
-                if (OnStarted != null) OnStarted(item);
-
-                //avisa que vai finalizar
-                item.Status = Semaphore.Finished;
-                if (OnEnded != null) OnEnded(item);
+                //need to do something?
             }
-            catch (Exception ex)
-            {
-                Auxiliar.WriteLog("Ocorreu um erro na execução da thread que está sendo executada.\r\nThreadControl.Cs (1)\r\n" + ex.Message, true);
-            }                        
-            finally
-            {
-                try
-                {
-                    //remove o item
-                    item.Status = Semaphore.Released;
-                    Buffer.Remove(item);
 
-                    //avisa que removeu o item
-                    if (OnReleased != null) OnReleased(item);                    
-                }
-                catch (Exception ex)
-                {
-                    Auxiliar.WriteLog("Ocorreu um erro ao tentar remover o item da Thread que está sendo executada.\r\nThreadControl.Cs (2)\r\n" + ex.Message, true);
-                }
-            }
+#if DEBUG
+            Debug.WriteLine(String.Format("ThreadItem Dipose(disposing: {0});", disposing));
+#endif
+        }
+
+        ~ThreadItem()
+        {
+#if DEBUG
+            Debug.WriteLine("ThreadItem ~Destructor");
+#endif
+
+            Dispose(false);
         }
         #endregion
+        //</#8084>
     }
     #endregion
+
+    /*<#8084>
+     * A classe ThreadControl deixou de existir por não ser mais utilizada dentro do aplicação, foi subusituída pelo método ThreadItem.Run()_
+     *</#8084>
+     */
 
     #region  ThreadService
     /// <summary>
@@ -259,26 +173,26 @@ namespace NFe.Threadings
 
         public static void Stop()
         {
-            for (int i = 0; i < Threads.Count; i++)
+            for(int i = 0; i < Threads.Count; i++)
             {
                 Thread t = Threads[i];
                 t.Abort();
             }
             Threads.Clear();
 
-            ThreadControl.Stop();
-
-            for (int i = 0; i < MonitoraPasta.fsw.Count; i++)
+            for(int i = 0; i < MonitoraPasta.fsw.Count; i++)
             {
                 MonitoraPasta.fsw[i].StopWatch = true;
-            }            
+            }
         }
 
         public static void Start()
         {
             Empresa.CarregaConfiguracao();
 
-            ThreadControl.Start();
+            #region Ticket #110
+            Empresa.CreateLockFile(true);
+            #endregion
 
             //Executar o monitoramento de pastas das empresas cadastradas
             MonitoraPasta e = new MonitoraPasta();
@@ -287,17 +201,20 @@ namespace NFe.Threadings
 
             //Executa a thread que faz a limpeza dos arquivos temporários
             Thread t = new Thread(new Processar().LimpezaTemporario);
+            t.IsBackground = true;
             t.Start();
             Threads.Add(t);
 
             //Executa a thread que faz a verificação das notas em processamento
             Thread t2 = new Thread(new Processar().EmProcessamento);
+            t2.IsBackground = true;
             t2.Start();
             Threads.Add(t2);
 
             //Executar a thread que faz a consulta do recibo das notas fiscais enviadas
             Processar srv = new Processar();
             Thread t3 = new Thread(srv.GerarXMLPedRec);
+            t3.IsBackground = true;
             t3.Start(new NFe.Service.TaskGerarXMLPedRec());
             Threads.Add(t3);
         }

@@ -49,12 +49,12 @@ namespace NFe.Settings
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
-            if (!string.IsNullOrEmpty(Arquivo))
+            int emp = Functions.FindEmpresaByThread();
+            if(!string.IsNullOrEmpty(Arquivo))
             {
                 try
                 {
-                    if (Empresa.Configuracoes[emp].PastaRetorno != string.Empty)
+                    if(Empresa.Configuracoes[emp].PastaRetorno != string.Empty)
                     {
                         //Grava arquivo de ERRO para o ERP
                         string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Arquivo);
@@ -73,7 +73,7 @@ namespace NFe.Settings
         public static void WriteLog(string msg)
         {
             bool geraLog = ConfiguracaoApp.GravarLogOperacoesRealizadas;
-            if (geraLog)
+            if(geraLog)
                 Auxiliar.WriteLog(msg, false);
         }
         #endregion
@@ -83,7 +83,7 @@ namespace NFe.Settings
         {
             bool geraLog = ConfiguracaoApp.GravarLogOperacoesRealizadas;
 
-            if (geraLog)
+            if(geraLog)
             {
                 string fileName = Propriedade.PastaLog + "\\uninfe_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
 
@@ -94,7 +94,7 @@ namespace NFe.Settings
                 long elapsedMillieconds;
                 startTime = DateTime.Now;
 
-                while (true)
+                while(true)
                 {
                     stopTime = DateTime.Now;
                     elapsedTime = stopTime.Subtract(startTime);
@@ -104,7 +104,7 @@ namespace NFe.Settings
                     try
                     {
                         //Se for para gravar ot race
-                        if (gravarStackTrace)
+                        if(gravarStackTrace)
                         {
                             msg += "\r\nSTACK TRACE:";
                             msg += "\r\n" + Environment.StackTrace;
@@ -128,12 +128,12 @@ namespace NFe.Settings
                     }
                     catch
                     {
-                        if (arquivoWS != null)
+                        if(arquivoWS != null)
                         {
                             arquivoWS.Close();
                         }
 
-                        if (elapsedMillieconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
+                        if(elapsedMillieconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
                         {
                             break;
                         }
@@ -153,14 +153,7 @@ namespace NFe.Settings
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg)</example>
         public void MoveArqErro(string Arquivo)
         {
-            try
-            {
-                this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            this.MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
         }
         #endregion
 
@@ -173,46 +166,39 @@ namespace NFe.Settings
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg, ".xml")</example>
         public void MoveArqErro(string Arquivo, string ExtensaoArq)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
-            try
+            if(File.Exists(Arquivo))
             {
-                if (File.Exists(Arquivo))
+                FileInfo oArquivo = new FileInfo(Arquivo);
+
+                if(Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
                 {
-                    FileInfo oArquivo = new FileInfo(Arquivo);
+                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
-                    if (Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
-                    {
-                        string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    Functions.Move(Arquivo, vNomeArquivo);
 
-                        Functions.Move(Arquivo, vNomeArquivo);
+                    Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
 
-                        Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
+                    /*
+                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
+                    if (File.Exists(vNomeArquivo))
+                        this.DeletarArquivo(vNomeArquivo);
 
-                        /*
-                        //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
-                        if (File.Exists(vNomeArquivo))
-                            this.DeletarArquivo(vNomeArquivo);
-
-                        //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                        oArquivo.MoveTo(vNomeArquivo);
-                        */
-                    }
-                    else
-                    {
-                        //Antes estava deletando o arquivo, agora vou retornar uma mensagem de erro
-                        //pois não podemos excluir, pode ser coisa importante. Wandrey 25/02/2011
-                        throw new Exception("A pasta de XML´s com erro informada nas configurações não existe, por favor verifique.");
-                        //oArquivo.Delete();
-                    }
+                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
+                    oArquivo.MoveTo(vNomeArquivo);
+                    */
+                }
+                else
+                {
+                    //Antes estava deletando o arquivo, agora vou retornar uma mensagem de erro
+                    //pois não podemos excluir, pode ser coisa importante. Wandrey 25/02/2011
+                    throw new Exception("A pasta de XML´s com erro informada nas configurações não existe, por favor verifique.");
+                    //oArquivo.Delete();
                 }
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
         }
-        #endregion       
+        #endregion
 
         #region EstaAutorizada()
         /// <summary>
@@ -224,7 +210,7 @@ namespace NFe.Settings
         /// <returns>Se está na pasta de XML´s autorizados</returns>
         public bool EstaAutorizada(string Arquivo, DateTime Emissao, string Extensao)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Extensao);
@@ -240,7 +226,7 @@ namespace NFe.Settings
         /// <returns>Se está na pasta de XML´s denegados</returns>
         public bool EstaDenegada(string Arquivo, DateTime Emissao)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
             string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
@@ -262,22 +248,22 @@ namespace NFe.Settings
             //Criar uma Lista dos arquivos existentes na pasta
             List<string> lstArquivos = new List<string>();
 
-            if (strPasta.Trim() != "" && Directory.Exists(strPasta))
+            if(strPasta.Trim() != "" && Directory.Exists(strPasta))
             {
                 string cError = "";
                 try
                 {
                     string[] filesInFolder = Directory.GetFiles(strPasta, strMascara);
-                    foreach (string item in filesInFolder)
+                    foreach(string item in filesInFolder)
                     {
                         lstArquivos.Add(item);
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     cError = ex.Message;
                 }
-                if (!string.IsNullOrEmpty(cError))
+                if(!string.IsNullOrEmpty(cError))
                 {
                     new Auxiliar().GravarArqErroERP(string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")), cError);
                     lstArquivos.Clear();
@@ -296,172 +282,7 @@ namespace NFe.Settings
         /// </summary>
         public static string ConversaoNovaVersao(string cnpjEmpresa)    //danasa 20-9-2010
         {
-            #region Conversão referente a parte de Multi-Empresas
-            try
-            {
-                if (!File.Exists(Propriedade.NomeArqEmpresa) && File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig))
-                {
-                    #region Localizar o CNPJ da empresa no certificado
-                    string certificado = string.Empty;
-                    string nomeEmpresa = string.Empty;  //danasa 20-9-2010
-
-                    var xmlDoc = new XmlDocument();
-                    xmlDoc.Load(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig);
-                    var configList = xmlDoc.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
-                    foreach (XmlNode configNode in configList)
-                    {
-                        var configElemento = (XmlElement)configNode;
-
-                        if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0] != null)
-                            certificado = configElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0].InnerText;
-                    }
-
-                    string[] dados = certificado.Split(new char[] { ',', ':' });
-                    foreach (string dado in dados)
-                    {
-                        if (cnpjEmpresa == string.Empty)  //danasa 20-9-2010
-                            if (CNPJ.Validate((string)Functions.OnlyNumbers(dado.TrimStart())))
-                            {
-                                cnpjEmpresa = (string)Functions.OnlyNumbers(dado.TrimStart());
-                            }
-
-                        /// danasa 20-9-2010
-                        /// use o TrimStart() pois em "dado" está retornando branco no inicio
-                        if (dado.TrimStart().StartsWith("CN="))
-                        {
-                            nomeEmpresa = dado.TrimStart().Substring(3, dado.TrimStart().Length - 3);
-                        }
-                    }
-                    if (cnpjEmpresa == string.Empty || nomeEmpresa == string.Empty) //danasa 20-9-2010
-                    {
-                        if (nomeEmpresa == string.Empty)
-                            throw new Exception("Não foi possível localizar o CNPJ da empresa no certificado configurado, sendo assim as configurações do aplicativo deverão ser realizadas novamente.");
-
-                        /// danasa 20-9-2010
-                        /// retorna o nome da empresa ao MainForm para exibir na tela de solicitacao do CNPJ
-                        return nomeEmpresa;
-                    }
-                    #endregion
-
-                    #region Criar o diretório das configurações da empresa
-                    string dirEmpresa = Propriedade.PastaExecutavel.Trim() + "\\" + cnpjEmpresa;
-                    if (!Directory.Exists(dirEmpresa))
-                        Directory.CreateDirectory(dirEmpresa);
-                    #endregion
-
-                    #region Copiar o arquivo de configurações para a pasta da empresa
-                    string arqConfigOrigem = Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig;
-                    string arqConfigDestino = dirEmpresa + "\\" + Propriedade.NomeArqConfig;
-                    if (!File.Exists(arqConfigDestino))
-                    {
-                        File.Copy(arqConfigOrigem, arqConfigDestino);
-
-                        if (File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLote))
-                        {
-                            File.Copy(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLote, dirEmpresa + "\\" + Propriedade.NomeArqXmlLote, true);
-                            File.Delete(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLote);
-                        }
-
-                        if (File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp1))
-                        {
-                            File.Copy(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp1, dirEmpresa + "\\" + Propriedade.NomeArqXmlLoteBkp1, true);
-                            File.Delete(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp1);
-                        }
-
-                        if (File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp2))
-                        {
-                            File.Copy(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp2, dirEmpresa + "\\" + Propriedade.NomeArqXmlLoteBkp2, true);
-                            File.Delete(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp2);
-                        }
-
-                        if (File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp3))
-                        {
-                            File.Copy(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp3, dirEmpresa + "\\" + Propriedade.NomeArqXmlLoteBkp3, true);
-                            File.Delete(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlLoteBkp3);
-                        }
-
-                        if (File.Exists(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlFluxoNfe))
-                        {
-                            File.Copy(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlFluxoNfe, dirEmpresa + "\\" + Propriedade.NomeArqXmlFluxoNfe, true);
-                            File.Delete(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqXmlFluxoNfe);
-                        }
-                    }
-
-                    #endregion
-
-                    #region Criar o XML do cadastro de empresas
-                    XmlWriterSettings oSettings = new XmlWriterSettings();
-                    UTF8Encoding c = new UTF8Encoding(false);
-
-                    //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-                    oSettings.Encoding = c;
-                    oSettings.Indent = true;
-                    oSettings.IndentChars = "";
-                    oSettings.NewLineOnAttributes = false;
-                    oSettings.OmitXmlDeclaration = false;
-
-                    try
-                    {
-                        //Agora vamos criar um XML Writer
-                        XmlWriter oXmlGravar = XmlWriter.Create(Propriedade.NomeArqEmpresa, oSettings);
-
-                        //Agora vamos gravar os dados
-                        oXmlGravar.WriteStartDocument();
-                        oXmlGravar.WriteStartElement("Empresa");
-
-                        try
-                        {
-                            //Abrir a tag <Registro>
-                            oXmlGravar.WriteStartElement("Registro");
-
-                            //Criar o atributo CNPJ dentro da tag Registro
-                            oXmlGravar.WriteStartAttribute("CNPJ");
-
-                            //Setar o conteúdo do atributo CNPJ
-                            oXmlGravar.WriteString(cnpjEmpresa.Trim());
-
-                            //Encerrar o atributo CNPJ
-                            oXmlGravar.WriteEndAttribute(); // Encerrar o atributo CNPJ
-
-                            //Criar a tag <Nome> com seu conteúdo </Nome>
-                            oXmlGravar.WriteElementString("Nome", nomeEmpresa.Trim());
-
-                            //Encerrar a tag </Registro>
-                            oXmlGravar.WriteEndElement();
-                        }
-                        catch (Exception ex)
-                        {
-                            string error = "Ocorreu um erro ao tentar gravar as empresas cadastradas.\r\n\r\nErro: " + ex.Message;
-                            if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
-                                MessageBox.Show(error, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            else
-                                WriteLog(error, true);
-                        }
-
-                        oXmlGravar.WriteEndElement(); //Encerrar o elemento Empresa
-                        oXmlGravar.WriteEndDocument();
-                        oXmlGravar.Flush();
-                        oXmlGravar.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        string error = "Ocorreu um erro ao tentar gravar as empresas cadastradas.\r\n\r\nErro: " + ex.Message;
-                        if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
-                            MessageBox.Show(error, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        else
-                            WriteLog(error, true);
-                    }
-                    #endregion
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = "Ocorreu um erro na hora de converter o aplicativo para multiempresas.\r\n\r\nErro: " + ex.Message;
-                if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
-                    MessageBox.Show(error, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    WriteLog(error, true);
-            }
+            #region Estamos sem nenhuma conversão no momento
             return "";
             #endregion
         }
@@ -600,7 +421,7 @@ namespace NFe.Settings
                             tipoServico = Servicos.MontarLoteVariasNFe;
                         }
                     }
-                    #region NFS-e
+        #region NFS-e
                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedLoteRps) >= 0)
                     {
                         tipoServico = Servicos.ConsultarLoteRps;
@@ -625,7 +446,7 @@ namespace NFe.Settings
                     {
                         tipoServico = Servicos.ConsultarNfsePorRps;
                     }
-                    #endregion
+        #endregion
                 }
             }
             catch
@@ -652,7 +473,7 @@ namespace NFe.Settings
 
             string arqXML = Propriedade.NomeArqEmpresa;
 
-            if (File.Exists(arqXML))
+            if(File.Exists(arqXML))
             {
                 XmlTextReader oLerXml = null;
                 try
@@ -660,17 +481,17 @@ namespace NFe.Settings
                     //Carregar os dados do arquivo XML de configurações da Aplicação
                     oLerXml = new XmlTextReader(arqXML);
 
-                    while (oLerXml.Read())
+                    while(oLerXml.Read())
                     {
-                        if (oLerXml.NodeType == XmlNodeType.Element)
+                        if(oLerXml.NodeType == XmlNodeType.Element)
                         {
-                            if (oLerXml.Name.Equals("Registro"))
+                            if(oLerXml.Name.Equals("Registro"))
                             {
                                 string cnpj = oLerXml.GetAttribute("CNPJ");
 
-                                while (oLerXml.Read())
+                                while(oLerXml.Read())
                                 {
-                                    if (oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals("Nome"))
+                                    if(oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals("Nome"))
                                     {
                                         oLerXml.Read();
                                         string nome = oLerXml.Value;
@@ -682,13 +503,9 @@ namespace NFe.Settings
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
                 finally
                 {
-                    if (oLerXml != null)
+                    if(oLerXml != null)
                         oLerXml.Close();
                 }
             }

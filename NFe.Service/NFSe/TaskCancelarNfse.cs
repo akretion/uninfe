@@ -24,7 +24,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.CancelarNfse;
@@ -45,6 +45,13 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(/*ler.*/oDadosPedCanNfse.cMunicipio);
                 switch (padraoNFSe)
                 {
+                    case PadroesNFSe.IPM:
+                        //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
+                        //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
+                        IPM ipm = new IPM(Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, 7483, Empresa.Configuracoes[emp].PastaRetorno);
+                        ipm.EmitirNF(NomeArquivoXML, (TpAmb)Empresa.Configuracoes[emp].tpAmb, true);
+                        break;
+
                     case PadroesNFSe.GINFES:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosPedCanNfse.cMunicipio, /*ler.*/oDadosPedCanNfse.tpAmb, /*ler.*/oDadosPedCanNfse.tpEmis);
                         pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio));
@@ -98,17 +105,24 @@ namespace NFe.Service.NFSe
                         pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         break;
 
-                    
+                    case PadroesNFSe.DUETO:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
 
-                //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
-                ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosPedCanNfse.cMunicipio));
+                if (padraoNFSe != PadroesNFSe.IPM)
+                {
+                    //Assinar o XML
+                    AssinaturaDigital ad = new AssinaturaDigital();
+                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosPedCanNfse.cMunicipio));
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);
+                }
             }
             catch (Exception ex)
             {
@@ -146,7 +160,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedCanNfse(int emp, string arquivoXML)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
@@ -166,41 +180,35 @@ namespace NFe.Service.NFSe
         /// </summary>
         private void EncryptAssinatura()
         {
-            try
+            string arquivoXML = NomeArquivoXML;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arquivoXML);
+
+            XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
+
+            foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
             {
-                string arquivoXML = NomeArquivoXML;
+                XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(arquivoXML);
+                XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
 
-                XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
-
-                foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
+                foreach (XmlNode detalheNode in detalheList)
                 {
-                    XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
+                    XmlElement detalheElement = (XmlElement)detalheNode;
 
-                    XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
 
-                    foreach (XmlNode detalheNode in detalheList)
+                    if (detalheElement.GetElementsByTagName("AssinaturaCancelamento").Count != 0)
                     {
-                        XmlElement detalheElement = (XmlElement)detalheNode;
-
-
-                        if (detalheElement.GetElementsByTagName("AssinaturaCancelamento").Count != 0)
-                        {
-                            //Encryptar a tag Assinatura
-                            detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText = Criptografia.SignWithRSASHA1(detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText);
-                        }
+                        //Encryptar a tag Assinatura
+                        detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                            detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText);
                     }
                 }
+            }
 
-                //Salvar o XML com as alterações efetuadas
-                doc.Save(arquivoXML);
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+            //Salvar o XML com as alterações efetuadas
+            doc.Save(arquivoXML);
         }
         #endregion
     }

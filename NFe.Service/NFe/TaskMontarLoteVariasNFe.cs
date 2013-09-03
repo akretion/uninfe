@@ -12,23 +12,61 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
+    ///
+    /// esta classe será acessada para chamar o metodo LoteNfe pela classe Processar.MontarLoteVariasNFe
+    /// 
+
     /// <summary>
     /// Executar as tarefas pertinentes a assinatura e montagem do lote de várias notas fiscais eletrônicas
     /// </summary>
     /// <param name="nfe">Objeto da classe ServicoNFe</param>
     /// <param name="arquivo">Arquivo a ser tratado</param>
 
-    public class TaskMontarLoteVariasNFe : TaskAbst
+    public class TaskMontarLoteVariasNFe: TaskAbst
     {
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
             List<string> arquivosNFe = new List<string>();
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
             arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvioEmLote, "*" + Propriedade.ExtEnvio.Nfe);
-            if (arquivosNFe.Count == 0) // && !Auxiliar.FileInUse(arquivo))
+            if(arquivosNFe.Count == 0) // && !Auxiliar.FileInUse(arquivo))
             {
+                if (this.NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
+                {
+                    try
+                    {
+                        StringBuilder xml = new StringBuilder();
+                        xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                        xml.Append("<MontarLoteNFe>");
+                        foreach (var filename in File.ReadAllLines(this.NomeArquivoXML, Encoding.Default))
+                        {
+                            xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.ExtEnvio.Nfe) ? "" : Propriedade.ExtEnvio.Nfe));
+                        }
+                        xml.Append("</MontarLoteNFe>");
+                        File.WriteAllText(Path.Combine(Empresa.Configuracoes[emp].PastaEnvioEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString(), Encoding.Default);
+
+                        //Deletar o arquivo de solicitação de montagem do lote de NFe
+                        FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
+                        oArquivo.Delete();
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.ExtEnvio.MontarLote_TXT, "-montar-lote.err", ex);
+                        }
+                        catch
+                        {
+                            //Se deu algum erro na hora de gravar o arquivo de erro de retorno para o ERP, infelizmente não poderemos fazer nada
+                            //pois deve estar ocorrendo alguma falha de rede, hd, permissão de acesso a pasta ou arquivos, etc. Wandrey 22/03/2010
+                            //TODO: Não poderia gravar algum LOG para análise? Erro de rede normalmente é erro de IO
+                        }
+                    }
+                }
+                else
+                {
                 List<string> notas = new List<string>();
                 FileStream fsArquivo = null;
                 FluxoNfe fluxoNfe = new FluxoNfe();
@@ -42,36 +80,28 @@ namespace NFe.Service
                         doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                         XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteNFe"); //Pesquisar o elemento Documento no arquivo XML
-                        foreach (XmlNode documentoNode in documentoList)
+                        foreach(XmlNode documentoNode in documentoList)
                         {
                             XmlElement documentoElemento = (XmlElement)documentoNode;
 
                             int QtdeArquivo = documentoElemento.GetElementsByTagName("ArquivoNFe").Count;
 
-                            for (int d = 0; d < QtdeArquivo; d++)
+                            for(int d = 0; d < QtdeArquivo; d++)
                             {
                                 string arquivoNFe = Empresa.Configuracoes[emp].PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
 
-                                if (File.Exists(arquivoNFe))
+                                if(File.Exists(arquivoNFe))
                                 {
-
-                                    try
+                                    DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
+                                    if(!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                     {
-                                        DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
-                                        if (!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
-                                        {
-                                            notas.Add(arquivoNFe);
-                                        }
-                                        else
-                                        {
-                                            throw new Exception("Arquivo: " + arquivoNFe + " já está no fluxo de envio e não será incluido em novo lote.");
-
-                                            //File.Delete(arquivoNFe);
-                                        }
+                                        notas.Add(arquivoNFe);
                                     }
-                                    catch (Exception ex)
+                                    else
                                     {
-                                        throw (ex);
+                                        throw new Exception("Arquivo: " + arquivoNFe + " já está no fluxo de envio e não será incluido em novo lote.");
+
+                                        //File.Delete(arquivoNFe);
                                     }
                                 }
                                 else
@@ -83,37 +113,21 @@ namespace NFe.Service
 
                         fsArquivo.Close(); //Fecha o arquivo XML
 
-                        try
-                        {
-                            this.LoteNfe(notas);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw (ex);
-                        }
+                        this.LoteNfe(notas);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        if (fsArquivo != null)
+                        if(fsArquivo != null)
                         {
                             fsArquivo.Close();
                         }
-
-                        throw (ex);
                     }
 
                     //Deletar o arquivo de solicitão de montagem do lote de NFe
-                    try
-                    {
-                        FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
-                        oArquivo.Delete();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-                    }
+                    FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
+                    oArquivo.Delete();
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     try
                     {
@@ -123,13 +137,12 @@ namespace NFe.Service
                     {
                         //Se deu algum erro na hora de gravar o arquivo de erro de retorno para o ERP, infelizmente não poderemos fazer nada
                         //pois deve estar ocorrendo alguma falha de rede, hd, permissão de acesso a pasta ou arquivos, etc. Wandrey 22/03/2010
+                        //TODO: Não poderia gravar algum LOG para análise? Erro de rede normalmente é erro de IO
                     }
                 }
             }
         }
 
-        ///
-        /// esta classe será acessada para chamar o metodo LoteNfe pela classe Processar.MontarLoteVariasNFe
-        /// 
+        }
     }
 }

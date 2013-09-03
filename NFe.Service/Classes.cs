@@ -464,7 +464,7 @@ namespace NFe.Service
 
         public DadosPedCanc(int emp)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
             this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
         }
     }
@@ -501,7 +501,7 @@ namespace NFe.Service
 
         public DadosPedInut(int emp)
         {
-            //int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            //int emp = Functions.FindEmpresaByThread();
             this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
         }
     }

@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskRecepcaoDPEC : TaskAbst
+    public class TaskRecepcaoDPEC: TaskAbst
     {
         #region Classe com os dados do XML de registro do DPEC
         /// <summary>
@@ -24,7 +24,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.EnviarDPEC;
@@ -37,7 +37,7 @@ namespace NFe.Service
                 ///*oLer.*/
                 EnvDPEC(emp, NomeArquivoXML);    //danasa 21/10/2010
 
-                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, /*oLer.*/dadosEnvDPEC.cUF, /*oLer.*/dadosEnvDPEC.tpAmb, /*oLer.*/dadosEnvDPEC.tpEmis);
@@ -72,7 +72,7 @@ namespace NFe.Service
                     oGerarXML.EnvioDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", /*oLer.*/dadosEnvDPEC);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDPEC_XML : Propriedade.ExtEnvio.EnvDPEC_TXT;
 
@@ -119,9 +119,9 @@ namespace NFe.Service
             ///
             /// danasa 21/10/2010
             /// 
-            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            if(Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                switch (Propriedade.TipoAplicativo)
+                switch(Propriedade.TipoAplicativo)
                 {
                     case TipoAplicativo.Cte:
                         break;
@@ -140,12 +140,12 @@ namespace NFe.Service
                         ///vICMS|18.00
                         ///vST|121.99
                         List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach (string cTexto in cLinhas)
+                        foreach(string cTexto in cLinhas)
                         {
                             string[] dados = cTexto.Split('|');
-                            if (dados.GetLength(0) == 1) continue;
+                            if(dados.GetLength(0) == 1) continue;
 
-                            switch (dados[0].ToLower())
+                            switch(dados[0].ToLower())
                             {
                                 case "tpamb":
                                     this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
@@ -195,7 +195,7 @@ namespace NFe.Service
 
                 XmlNodeList infDPECList = doc.GetElementsByTagName("infDPEC");
 
-                foreach (XmlNode infDPECNode in infDPECList)
+                foreach(XmlNode infDPECNode in infDPECList)
                 {
                     XmlElement infDPECElemento = (XmlElement)infDPECNode;
 
@@ -209,59 +209,51 @@ namespace NFe.Service
         #region LerRetDPEC()
         private void LerRetDPEC()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
 
-            try
+            MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
+            doc.Load(msXml);
+
+            XmlNodeList retDPECList = doc.GetElementsByTagName("retDPEC");
+
+            foreach(XmlNode retDPECNode in retDPECList)
             {
-                MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
-                doc.Load(msXml);
+                XmlElement retDPECElemento = (XmlElement)retDPECNode;
 
-                XmlNodeList retDPECList = doc.GetElementsByTagName("retDPEC");
+                XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
 
-                foreach (XmlNode retDPECNode in retDPECList)
+                foreach(XmlNode infDPECRegNode in infDPECRegList)
                 {
-                    XmlElement retDPECElemento = (XmlElement)retDPECNode;
+                    XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
-
-                    foreach (XmlNode infDPECRegNode in infDPECRegList)
+                    if(infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                        infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                     {
-                        XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
+                        string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
+                        DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
-                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
-                            infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
-                        {
-                            string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                            string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
-                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
+                        //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                        TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoDPEC);
 
-                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoDPEC);
-
-                            //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                            string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
-                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
-                        }
-                        else
-                        {
-                            //Deletar o arquivo de solicitação do serviço da pasta de envio
-                            Functions.DeletarArquivo(NomeArquivoXML);
-                        }
+                        //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
+                        string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
+                    }
+                    else
+                    {
+                        //Deletar o arquivo de solicitação do serviço da pasta de envio
+                        Functions.DeletarArquivo(NomeArquivoXML);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-
         }
         #endregion
     }
 
-    public class TaskConsultaDPEC : TaskAbst
+    public class TaskConsultaDPEC: TaskAbst
     {
         #region Classe com os dados do XML de consulta do registro do DPEC
         /// <summary>
@@ -273,7 +265,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultarDPEC;
@@ -283,9 +275,10 @@ namespace NFe.Service
                 dadosConsDPEC = new DadosConsDPEC();
                 //Ler o XML para pegar parâmetros de envio
                 //LerXML oLer = new LerXML();
-                /*oLer.*/ConsDPEC(emp, NomeArquivoXML);
+                /*oLer.*/
+                ConsDPEC(emp, NomeArquivoXML);
 
-                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, /*oLer.*/dadosConsDPEC.tpAmb, /*oLer.*/dadosConsDPEC.tpEmis);
@@ -313,7 +306,7 @@ namespace NFe.Service
                     oGerarXML.ConsultaDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", /*oLer.*/dadosConsDPEC);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -347,52 +340,45 @@ namespace NFe.Service
         private void LerRetConsDPEC(int emp)
         {
             XmlDocument doc = new XmlDocument();
-            try
+            MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
+            doc.Load(msXml);
+
+            XmlNodeList retDPECList = doc.GetElementsByTagName("retConsDPEC");
+
+            foreach(XmlNode retDPECNode in retDPECList)
             {
-                MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
-                doc.Load(msXml);
+                XmlElement retDPECElemento = (XmlElement)retDPECNode;
 
-                XmlNodeList retDPECList = doc.GetElementsByTagName("retConsDPEC");
+                XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
 
-                foreach (XmlNode retDPECNode in retDPECList)
+                foreach(XmlNode infDPECRegNode in infDPECRegList)
                 {
-                    XmlElement retDPECElemento = (XmlElement)retDPECNode;
+                    XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
-
-                    foreach (XmlNode infDPECRegNode in infDPECRegList)
+                    if(infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                        infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                     {
-                        XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
+                        //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
+                        DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
-                        if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
-                            infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
+                        //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                        string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
+                        if(File.Exists(arqEnvDpec))
                         {
-                            //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                            string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
-                            DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
-
-                            //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                            string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
-                            if (File.Exists(arqEnvDpec))
-                            {
-                                TFunctions.MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
-                            }
-
-                            //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                            string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
-                            oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
+                            TFunctions.MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
                         }
-                        else
-                        {
-                            //Deletar o arquivo de solicitação do serviço da pasta de envio
-                            Functions.DeletarArquivo(NomeArquivoXML);
-                        }
+
+                        //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
+                        string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
+                    }
+                    else
+                    {
+                        //Deletar o arquivo de solicitação do serviço da pasta de envio
+                        Functions.DeletarArquivo(NomeArquivoXML);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
             }
         }
         #endregion
@@ -406,9 +392,9 @@ namespace NFe.Service
             ///
             /// danasa 21/10/2010
             /// 
-            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            if(Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                switch (Propriedade.TipoAplicativo)
+                switch(Propriedade.TipoAplicativo)
                 {
                     case TipoAplicativo.Cte:
                         break;
@@ -427,12 +413,12 @@ namespace NFe.Service
                         ///vICMS|18.00
                         ///vST|121.99
                         List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach (string cTexto in cLinhas)
+                        foreach(string cTexto in cLinhas)
                         {
                             string[] dados = cTexto.Split('|');
-                            if (dados.GetLength(0) == 1) continue;
+                            if(dados.GetLength(0) == 1) continue;
 
-                            switch (dados[0].ToLower())
+                            switch(dados[0].ToLower())
                             {
                                 case "tpamb":
                                     this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
@@ -461,7 +447,7 @@ namespace NFe.Service
 
                 XmlNodeList consDPECList = doc.GetElementsByTagName("consDPEC");
 
-                foreach (XmlNode consDPECNode in consDPECList)
+                foreach(XmlNode consDPECNode in consDPECList)
                 {
                     XmlElement consDPECElemento = (XmlElement)consDPECNode;
 

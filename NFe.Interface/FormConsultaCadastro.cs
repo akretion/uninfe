@@ -64,10 +64,9 @@ namespace NFe.Interface
 
             this.cbEmissao.Items.Clear();
             this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teNormal]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia]);
             this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teFSDA]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP]);
 
             #region Montar Array DropList do Ambiente
             arrAmb.Add(new ComboElem("Produção", Propriedade.TipoAmbiente.taProducao));
@@ -113,8 +112,32 @@ namespace NFe.Interface
 
         private void buttonStatusServidor_Click(object sender, EventArgs e)
         {
-            this.toolStripStatusLabel1.Text = _wait;
             this.textResultado.Text = "";
+            this.Refresh();
+
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+            {
+                if (this.cbEmissao.SelectedIndex == 1)
+                {
+                    MessageBox.Show("CTe não dispõe do tipo de contingência SCAN.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+            else if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            {
+                if (this.cbEmissao.SelectedIndex == 2)
+                {
+                    MessageBox.Show("NFe não dispõe do tipo de contingência SCVRS.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                else if (this.cbEmissao.SelectedIndex == 3)
+                {
+                    MessageBox.Show("NFe não dispõe do tipo de contingência SCVSP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
+            this.toolStripStatusLabel1.Text = _wait;
             this.Refresh();
 
             this.Cursor = Cursors.WaitCursor;
@@ -125,8 +148,25 @@ namespace NFe.Interface
 
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).Codigo;
                 int amb = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[cbAmbiente.SelectedIndex]).Codigo;
+                int tpEmis = Propriedade.TipoEmissao.teNormal;
 
-                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(this.cbEmissao.SelectedIndex + 1, cUF, amb);
+                switch (this.cbEmissao.SelectedIndex)
+                {
+                    case 0:
+                        tpEmis = Propriedade.TipoEmissao.teNormal;
+                        break;
+                    case 1:
+                        tpEmis = Propriedade.TipoEmissao.teSCAN;
+                        break;
+                    case 2:
+                        tpEmis = Propriedade.TipoEmissao.teSVCRS;
+                        break;
+                    case 3:
+                        tpEmis = Propriedade.TipoEmissao.teSVCSP;
+                        break;
+                }
+
+                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(tpEmis, cUF, amb);
 
                 //Demonstrar o status do serviço
                 this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
@@ -233,8 +273,8 @@ namespace NFe.Interface
         private void PopulateDetalheForm()
         {
             string cnpj = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Valor;
-            Emp = Empresa.FindConfEmpresaIndex(cnpj);        
-            
+            Emp = Empresa.FindConfEmpresaIndex(cnpj);
+
             //Posicionar o elemento da combo UF
             foreach (ComboElem elem in arrUF)
             {
@@ -248,7 +288,21 @@ namespace NFe.Interface
             cbAmbiente.SelectedValue = Empresa.Configuracoes[Emp].tpAmb;
 
             //Posicionar o elemento da combo tipo de emissão
-            this.cbEmissao.SelectedIndex = Empresa.Configuracoes[Emp].tpEmis - 1;
+            switch (Empresa.Configuracoes[Emp].tpEmis)
+            {
+                case Propriedade.TipoEmissao.teNormal:
+                    this.cbEmissao.SelectedIndex = 0;
+                    break;
+                case Propriedade.TipoEmissao.teSCAN:
+                    this.cbEmissao.SelectedIndex = 1;
+                    break;
+                case Propriedade.TipoEmissao.teSVCRS:
+                    this.cbEmissao.SelectedIndex = 2;
+                    break;
+                case Propriedade.TipoEmissao.teSVCSP:
+                    this.cbEmissao.SelectedIndex = 3;
+                    break;
+            }
         }
 
         #region VerStatusServico() e ConsultaCadastro()
@@ -276,7 +330,7 @@ namespace NFe.Interface
 
             try
             {
-                result = (string)EnviaArquivoERecebeResposta(1,ArqXMLRetorno, ArqERRRetorno);
+                result = (string)EnviaArquivoERecebeResposta(1, ArqXMLRetorno, ArqERRRetorno);
             }
             finally
             {
@@ -406,7 +460,7 @@ namespace NFe.Interface
                 elapsedTime = stopTime.Subtract(startTime);
                 elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
 
-                if (elapsedMillieconds >= 60000) 
+                if (elapsedMillieconds >= 60000)
                 {
                     break;
                 }

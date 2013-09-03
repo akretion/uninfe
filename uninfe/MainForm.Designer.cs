@@ -38,6 +38,8 @@
             this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.tbLogs = new System.Windows.Forms.ToolStripButton();
             this.tsPrintDanfe = new System.Windows.Forms.ToolStripButton();
+            this.tbForceUpdateWSDL = new System.Windows.Forms.ToolStripButton();
+            this.tbClearLockFiles = new System.Windows.Forms.ToolStripButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +70,9 @@
             this.toolStripButton_sobre,
             this.toolStripBtnUpdate,
             this.tbLogs,
-            this.tsPrintDanfe});
+            this.tsPrintDanfe,
+            this.tbClearLockFiles,
+            this.tbForceUpdateWSDL});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(784, 55);
@@ -153,10 +157,31 @@
             this.tsPrintDanfe.Text = "Impressão do DANFE/CCe";
             this.tsPrintDanfe.Click += new System.EventHandler(this.tsPrintDanfe_Click);
             // 
+            // tbForceUpdateWSDL
+            // 
+            this.tbForceUpdateWSDL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbForceUpdateWSDL.Image = ((System.Drawing.Image)(resources.GetObject("tbForceUpdateWSDL.Image")));
+            this.tbForceUpdateWSDL.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbForceUpdateWSDL.Name = "tbForceUpdateWSDL";
+            this.tbForceUpdateWSDL.Size = new System.Drawing.Size(52, 52);
+            this.tbForceUpdateWSDL.Text = "Forçar atualização de WSDLs e Schemas";
+            this.tbForceUpdateWSDL.ToolTipText = "Forçar atualização de WSDLs e Schemas";
+            this.tbForceUpdateWSDL.Click += new System.EventHandler(this.tbForceUpdateWSDL_Click_1);
+            // 
+            // tbClearLockFiles
+            // 
+            this.tbClearLockFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbClearLockFiles.Image = ((System.Drawing.Image)(resources.GetObject("tbClearLockFiles.Image")));
+            this.tbClearLockFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbClearLockFiles.Name = "tbClearLockFiles";
+            this.tbClearLockFiles.Size = new System.Drawing.Size(52, 52);
+            this.tbClearLockFiles.Text = "Excluir arquivos do tipo \".lock\"";
+            this.tbClearLockFiles.Click += new System.EventHandler(this.tbClearLockFiles_Click);
+            // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipText = "Para abrir novamente o UniNFE, de um duplo clique ou pressione o botão direito do" +
-    " mouse sobre o ícone.";
+                " mouse sobre o ícone.";
             this.notifyIcon1.BalloonTipTitle = "UniNFE - Monitor da Nota Fiscal Eletrônica";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -321,6 +346,8 @@
         private System.Windows.Forms.ToolStripButton tbLogs;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripButton tsPrintDanfe;
+        private System.Windows.Forms.ToolStripButton tbForceUpdateWSDL;
+        private System.Windows.Forms.ToolStripButton tbClearLockFiles;
     }
 }
 

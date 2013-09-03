@@ -33,7 +33,7 @@ namespace NFe.Components
                 Tag = "nfeProc",
                 ID = 9,
                 ArquivoXSD = "NFe\\procNFe_v2.00.xsd",
-                Descricao = "XML de distribuição da NFe com protocolo de autorização anexado",
+                Descricao = "XML de distribuição da NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
@@ -46,7 +46,7 @@ namespace NFe.Components
                 Tag = "procCancNFe",
                 ID = 10,
                 ArquivoXSD = "NFe\\procCancNFe_v2.00.xsd",
-                Descricao = "XML de distribuição do Cancelamento da NFe com protocolo de autorização anexado",
+                Descricao = "XML de distribuição do Cancelamento da NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
@@ -59,7 +59,7 @@ namespace NFe.Components
                 Tag = "procInutNFe",
                 ID = 11,
                 ArquivoXSD = "NFe\\procInutNFe_v2.00.xsd",
-                Descricao = "XML de distribuição de Inutilização de Números de NFe com protocolo de autorização anexado",
+                Descricao = "XML de distribuição de Inutilização de Números de NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
@@ -72,7 +72,7 @@ namespace NFe.Components
                 Tag = "NFe",
                 ID = 1,
                 ArquivoXSD = "NFe\\nfe_v2.00.xsd",
-                Descricao = "XML de Nota Fiscal Eletrônica",
+                Descricao = "XML da Nota Fiscal Eletrônica",
                 TagAssinatura = "NFe",
                 TagAtributoId = "infNFe",
                 TargetNameSpace = string.Empty
@@ -123,7 +123,7 @@ namespace NFe.Components
             {
                 Tag = "consSitNFe",
                 ID = 5,
-                ArquivoXSD = "NFe\\consSitNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\consSitNFe_v2.01.xsd",
                 Descricao = "XML de Consulta da Situação da Nota Fiscal Eletrônica",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -141,7 +141,7 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            }); 
+            });
             #endregion
 
             #region XML Consulta Situação Serviço NFe
@@ -154,7 +154,7 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            }); 
+            });
             #endregion
 
             #region XML Consulta Cadastro Contribuinte
@@ -167,7 +167,7 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            }); 
+            });
             #endregion
 
             #region XML Consulta DPEC
@@ -190,7 +190,7 @@ namespace NFe.Components
                 ID = 13,
                 ArquivoXSD = "DPEC\\envDPEC_v1.01.xsd",
                 Descricao = "XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)",
-                TagAssinatura = "envDPEC",                
+                TagAssinatura = "envDPEC",
                 TagAtributoId = "infDPEC",
                 TargetNameSpace = string.Empty
             });
@@ -202,7 +202,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 14,
                 ArquivoXSD = "CCe\\envCCe_v1.00.xsd",
-                Descricao = "XML de registro de envio da CCe",
+                Descricao = "XML de registro de envio da CCe da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -215,7 +215,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 15,
                 ArquivoXSD = "EventoCanc\\envEventoCancNFe_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de cancelamento",
+                Descricao = "XML de evento de cancelamento da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -228,7 +228,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 16,
                 ArquivoXSD = "EventoManifestaDestinat\\e210200_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
+                Descricao = "XML de evento de manifestação do destinatário da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -241,7 +241,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 17,
                 ArquivoXSD = "EventoManifestaDestinat\\e210210_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
+                Descricao = "XML de evento de manifestação do destinatário da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -254,7 +254,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 19,
                 ArquivoXSD = "EventoManifestaDestinat\\e210220_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
+                Descricao = "XML de evento de manifestação do destinatário da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -267,7 +267,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 19,
                 ArquivoXSD = "EventoManifestaDestinat\\e210240_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
+                Descricao = "XML de evento de manifestação do destinatário da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -280,7 +280,7 @@ namespace NFe.Components
                 Tag = "nfeConsultaNFDest",
                 ID = 20,
                 ArquivoXSD = "ConsultaNFDest\\consNFeDest_v1.01.xsd",
-                Descricao = "XML de registro de envio de consulta a nfe",
+                Descricao = "XML de consulta de NFe do destinatário",
                 TagAssinatura = "",
                 TagAtributoId = "",
                 TargetNameSpace = string.Empty
@@ -293,7 +293,7 @@ namespace NFe.Components
                 Tag = "downloadNFe",
                 ID = 21,
                 ArquivoXSD = "DownloadNFe\\downloadNFe_v1.00.xsd",
-                Descricao = "XML de registro de download de nfe",
+                Descricao = "XML de download de nfe",
                 TagAssinatura = "",
                 TagAtributoId = "",
                 TargetNameSpace = string.Empty
@@ -306,7 +306,7 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = 22,
                 ArquivoXSD = "EventoManifestaDestinat\\envConfRecebto_v1.00.xsd",
-                Descricao = "XML de registro de envio de evento de manifestacao",
+                Descricao = "XML de evento de manifestação do destinatário da NFe",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
@@ -337,6 +337,101 @@ namespace NFe.Components
                 TagAtributoId = "infCancRegistro",
                 TargetNameSpace = string.Empty
             });
+            #endregion
+
+            #region MDF-e
+
+            #region XML Envio do MDFe
+            InfSchemas.Add("NFE-MDFe", new InfSchema()
+            {
+                Tag = "MDFe",
+                ID = 25,
+                ArquivoXSD = "MDFe\\mdfe_v1.00.xsd",
+                Descricao = "XML do Manifesto Eletrônico de Documentos Fiscais",
+                TagAssinatura = "MDFe",
+                TagAtributoId = "infMDFe",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de consulta recibo do MDFe
+            InfSchemas.Add("NFE-consReciMDFe", new InfSchema()
+            {
+                Tag = "consReciMDFe",
+                ID = 26,
+                ArquivoXSD = "MDFe\\consReciMDFe_v1.00.xsd",
+                Descricao = "XML de consulta recibo MDF-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de consulta situação do MDFe
+            InfSchemas.Add("NFE-consSitMDFe", new InfSchema()
+            {
+                Tag = "consSitMDFe",
+                ID = 27,
+                ArquivoXSD = "MDFe\\consSitMDFe_v1.00.xsd",
+                Descricao = "XML de consulta situação do MDF-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de consulta status dos serviços do MDFe
+            InfSchemas.Add("NFE-consStatServMDFe", new InfSchema()
+            {
+                Tag = "consStatServMDFe",
+                ID = 28,
+                ArquivoXSD = "MDFe\\consStatServMDFe_v1.00.xsd",
+                Descricao = "XML de consulta status do serviço do MDF-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de Evento de Cancelamento do MDFe
+            InfSchemas.Add("NFE-eventoMDFe110111", new InfSchema()
+            {
+                Tag = "eventoMDFe",
+                ID = 29,
+                ArquivoXSD = "MDFe\\evCancMDFe_v1.00.xsd",
+                Descricao = "XML de evento de cancelamento do MDF-e",
+                TagAssinatura = "eventoMDFe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de Evento de Encerramento do MDFe
+            InfSchemas.Add("NFE-eventoMDFe110112", new InfSchema()
+            {
+                Tag = "eventoMDFe",
+                ID = 29,
+                ArquivoXSD = "MDFe\\evEncMDFe_v1.00.xsd",
+                Descricao = "XML de evento de encerramento do MDF-e",
+                TagAssinatura = "eventoMDFe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
+            #region XML de Eventos Gerais do MDFe
+            InfSchemas.Add("NFE-eventoMDFe310620", new InfSchema()
+            {
+                Tag = "eventoMDFe",
+                ID = 29,
+                ArquivoXSD = "MDFe\\eventoMDFe_v1.00.xsd",
+                Descricao = "XML de evento de registro de passagem do MDF-e",
+                TagAssinatura = "eventoMDFe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
             #endregion
 
             #region Determinar a propriedade MaxID

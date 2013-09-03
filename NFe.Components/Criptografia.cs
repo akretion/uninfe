@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace NFe.Components
 {
@@ -102,27 +103,27 @@ namespace NFe.Components
         }
 
         /// <summary>
-        /// Encripta uma string em SHA1 e assina com RSA
+        /// Assina a string utilizando RSA-SHA1
         /// </summary>
-        /// <param name="value">string a ser criptografada</param>
+        /// <param name="cert">certificado utilizado para assinar a string</param>
+        /// <param name="value">Valor a ser assinado</param>
         /// <returns></returns>
-        public static string SignWithRSASHA1(string value)
+        public static string SignWithRSASHA1(X509Certificate2 cert, String value)
         {
-            string result = "";
-            //Converta a cadeia de caracteres ASCII para bytes. 
-            byte[] bytes = Encoding.ASCII.GetBytes(value);
+            //Regras retiradas da página 39 do manual da Prefeitura Municipal de Blumenau
+            // Converta a cadeia de caracteres ASCII para bytes. 
+            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+            byte[] asciiBytes = asciiEncoding.GetBytes(value);
 
-            //Gere o HASH (array de bytes) utilizando SHA1. 
-            byte[] hashData = new SHA1Managed().ComputeHash(bytes);
+            // Gere o HASH (array de bytes) utilizando SHA1
+            SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
+            byte[] sha1Hash = sha1.ComputeHash(asciiBytes);
 
-            //Assine o HASH (array de bytes) utilizando RSA-SHA1.
+            //- Assine o HASH (array de bytes) utilizando RSA-SHA1.
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            byte[] signature = rsa.SignHash(hashData, CryptoConfig.MapNameToOID("SHA1"));
-
-            //converte para uma string base 64 e ...
-            result = Convert.ToBase64String(signature);
-
-            //... retorna
+            rsa = cert.PrivateKey as RSACryptoServiceProvider;
+            asciiBytes = rsa.SignHash(sha1Hash, "SHA1");
+            string result = Convert.ToBase64String(asciiBytes);
             return result;
         }
     }

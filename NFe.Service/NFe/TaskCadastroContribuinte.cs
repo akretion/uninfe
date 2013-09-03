@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskCadastroContribuinte : TaskAbst
+    public class TaskCadastroContribuinte: TaskAbst
     {
         /// <summary>
         /// Envia o XML de consulta do cadastro do contribuinte para o web-service do sefaz
@@ -70,7 +70,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultaCadastroContribuinte;
@@ -81,9 +81,9 @@ namespace NFe.Service
                 //Ler o XML para pegar parâmetros de envio
                 //LerXML oLer = new LerXML();
                 //oLer.
-                    ConsCad(NomeArquivoXML);
+                ConsCad(NomeArquivoXML);
 
-                if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*oLer.*/oDadosConsCad.cUF, /*oLer.*/oDadosConsCad.tpAmb, Propriedade.TipoEmissao.teNormal);
@@ -103,17 +103,17 @@ namespace NFe.Service
                 {
                     //Gerar o XML da consulta cadastro do contribuinte a partir do TXT gerado pelo ERP
                     oGerarXML.ConsultaCadastro(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
-                                               /*oLer.*/oDadosConsCad.UF,
-                                               /*oLer.*/oDadosConsCad.CNPJ,
-                                               /*oLer.*/oDadosConsCad.IE,
-                                               /*oLer.*/oDadosConsCad.CPF);
+                        /*oLer.*/oDadosConsCad.UF,
+                        /*oLer.*/oDadosConsCad.CNPJ,
+                        /*oLer.*/oDadosConsCad.IE,
+                        /*oLer.*/oDadosConsCad.CPF);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 string ExtRet = string.Empty;
 
-                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
+                if(this.vXmlNfeDadosMsgEhXML) //Se for XML
                     ExtRet = Propriedade.ExtEnvio.ConsCad_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.ConsCad_TXT;
@@ -158,70 +158,63 @@ namespace NFe.Service
             this.oDadosConsCad.IE = string.Empty;
             this.oDadosConsCad.UF = string.Empty;
 
-            try
+            if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
-                if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+                List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                foreach(string cTexto in cLinhas)
                 {
-                    List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
-                    foreach (string cTexto in cLinhas)
+                    string[] dados = cTexto.Split('|');
+                    switch(dados[0].ToLower())
                     {
-                        string[] dados = cTexto.Split('|');
-                        switch (dados[0].ToLower())
-                        {
-                            case "cnpj":
-                                this.oDadosConsCad.CNPJ = dados[1].Trim();
-                                break;
-                            case "cpf":
-                                this.oDadosConsCad.CPF = dados[1].Trim();
-                                break;
-                            case "ie":
-                                this.oDadosConsCad.IE = dados[1].Trim();
-                                break;
-                            case "uf":
-                                this.oDadosConsCad.UF = dados[1].Trim();
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load(cArquivoXML);
-
-                    XmlNodeList ConsCadList = doc.GetElementsByTagName("ConsCad");
-                    foreach (XmlNode ConsCadNode in ConsCadList)
-                    {
-                        XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
-
-                        XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
-
-                        foreach (XmlNode infConsNode in infConsList)
-                        {
-                            XmlElement infConsElemento = (XmlElement)infConsNode;
-
-                            if (infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
-                            {
-                                this.oDadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                            }
-                            if (infConsElemento.GetElementsByTagName("CPF")[0] != null)
-                            {
-                                this.oDadosConsCad.CPF = infConsElemento.GetElementsByTagName("CPF")[0].InnerText;
-                            }
-                            if (infConsElemento.GetElementsByTagName("UF")[0] != null)
-                            {
-                                this.oDadosConsCad.UF = infConsElemento.GetElementsByTagName("UF")[0].InnerText;
-                            }
-                            if (infConsElemento.GetElementsByTagName("IE")[0] != null)
-                            {
-                                this.oDadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
-                            }
-                        }
+                        case "cnpj":
+                            this.oDadosConsCad.CNPJ = dados[1].Trim();
+                            break;
+                        case "cpf":
+                            this.oDadosConsCad.CPF = dados[1].Trim();
+                            break;
+                        case "ie":
+                            this.oDadosConsCad.IE = dados[1].Trim();
+                            break;
+                        case "uf":
+                            this.oDadosConsCad.UF = dados[1].Trim();
+                            break;
                     }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                throw (ex);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(cArquivoXML);
+
+                XmlNodeList ConsCadList = doc.GetElementsByTagName("ConsCad");
+                foreach(XmlNode ConsCadNode in ConsCadList)
+                {
+                    XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+
+                    XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
+
+                    foreach(XmlNode infConsNode in infConsList)
+                    {
+                        XmlElement infConsElemento = (XmlElement)infConsNode;
+
+                        if(infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
+                        {
+                            this.oDadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                        }
+                        if(infConsElemento.GetElementsByTagName("CPF")[0] != null)
+                        {
+                            this.oDadosConsCad.CPF = infConsElemento.GetElementsByTagName("CPF")[0].InnerText;
+                        }
+                        if(infConsElemento.GetElementsByTagName("UF")[0] != null)
+                        {
+                            this.oDadosConsCad.UF = infConsElemento.GetElementsByTagName("UF")[0].InnerText;
+                        }
+                        if(infConsElemento.GetElementsByTagName("IE")[0] != null)
+                        {
+                            this.oDadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
+                        }
+                    }
+                }
             }
         }
         #endregion

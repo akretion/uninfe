@@ -1011,8 +1011,26 @@
       <CancelarNfse>wsdl\producao\PMonteNegroRSCancelarNFSE.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="4303103" Nome="Cachoeirinha - RS" UF="RS" Padrao="THEMA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HThemaCachoerinhaRSRemessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HThemaCachoerinhaRSConsulta.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PThemaCachoerinhaRSRemessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PThemaCachoerinhaRSConsulta.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípíos que utilizam o padrão ABACO -->
-  <Estado ID="4304606" Nome="Canoas - RS" UF="RS">
+  <Estado ID="4304606" Nome="Canoas - RS" UF="RS" Padrao="ABACO">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HCanoasRSRecepcionarLoteRps.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps>wsdl\homologacao\HCanoasRSConsultarSituacaoLoteRps.wsdl</ConsultarSituacaoLoteRps>
@@ -1031,15 +1049,15 @@
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam o padrão ISS.Net -->
-  <Estado ID="4313409" Nome="Novo Hamburgo - RS" UF="RS">
+  <Estado ID="4313409" Nome="Novo Hamburgo - RS" UF="RS" Padrao="ISS.Net">
     <LocalHomologacao>
-      <RecepcionarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</CancelarNfse>
-      <ConsultarURLNfse>wsdl\homologacao\HISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSNet.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>
     </LocalHomologacao>
     <LocalProducao>
       <RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>
@@ -1051,8 +1069,28 @@
       <ConsultarURLNfse>wsdl\homologacao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="5201108" Nome="Anapolis - GO" UF="GO" Padrao="ISS.Net">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSNet.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PISSNetAnapolis.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\PISSNetAnapolis.wsdl</ConsultarURLNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípios que utilizam o padrão ISSOnLine -->
-  <Estado ID="4101408" Nome="Apucarana - PR" UF="PR">
+  <Estado ID="4101408" Nome="Apucarana - PR" UF="PR" Padrao="ISSOnLine">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>
@@ -1070,7 +1108,7 @@
       <CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
-  <Estado ID="3502804" Nome="Aracatuba - SP" UF="SP">
+  <Estado ID="3502804" Nome="Aracatuba - SP" UF="SP" Padrao="ISSOnLine">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>
@@ -1086,6 +1124,62 @@
       <ConsultarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam o padrão Dueto -->
+  <Estado ID="4313375" Nome="Nova Santa Rita - RS" UF="RS" Padrao="Dueto">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4310207" Nome="Ijui - RS" UF="RS" Padrao="Dueto">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam padrões próprios -->
+  <Estado ID="3136702" Nome="Juiz de Fora - MG" UF="MG" Padrao="BHIss">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam padrões próprios -->
@@ -1123,24 +1217,6 @@
       <ConsultarNfse>wsdl\producao\PBlumenauSC.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="3136702" Nome="Juiz de Fora - MG" UF="MG">
-    <LocalHomologacao>
-      <RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>
-    </LocalHomologacao>
-    <LocalProducao>
-      <RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->

@@ -21,7 +21,7 @@ namespace NFe.Service
         {
             try
             {
-                int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+                int emp = Functions.FindEmpresaByThread();
                 //AssinarValidarNFe(this, this.NomeArquivoXML, Empresa.Configuracoes[emp].PastaEnvio);
                 this.AssinarValidarXMLNFe(Empresa.Configuracoes[emp].PastaEnvio);
 

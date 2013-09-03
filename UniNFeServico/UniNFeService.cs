@@ -128,7 +128,6 @@ namespace UniNFeServico
             {
                 MonitoraPasta.fsw[i].StopWatch = true;
             }
-            ThreadControl.Stop();
         }
 
         protected void WriteEventEntry(

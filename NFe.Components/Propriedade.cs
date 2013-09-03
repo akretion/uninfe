@@ -228,6 +228,7 @@ namespace NFe.Components
             /// -montar-lote.xml
             /// </summary>
             public const string MontarLote = "-montar-lote.xml";
+            public const string MontarLote_TXT = "-montar-lote.txt";
             /// <summary>
             /// -env-lot.xml
             /// </summary>
@@ -385,7 +386,14 @@ namespace NFe.Components
             public const string PedURLNfse = "-ped-urlnfse.xml";
             #endregion
 
-            #region Extensões Gerais           
+            #region Extensões MDF-e
+            /// <summary>
+            /// -mdfe.xml
+            /// </summary>
+            public static string MDFe = "-mdfe.xml";
+            #endregion
+
+            #region Extensões Gerais
             public const string ConsCertificado = "-cons-certificado.xml";
             #endregion 
         }

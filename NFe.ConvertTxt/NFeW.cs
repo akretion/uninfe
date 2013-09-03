@@ -2080,7 +2080,7 @@ namespace NFe.ConvertTxt
         /// <param name="ArqXMLPedido"></param>
         public void GerarChaveNFe(string ArqPedido, Boolean xml)
         {
-            int emp = new FindEmpresaThread(Thread.CurrentThread).Index;
+            int emp = Functions.FindEmpresaByThread();
 
             // XML - pedido
             // Filename: XXXXXXXX-gerar-chave.xml
