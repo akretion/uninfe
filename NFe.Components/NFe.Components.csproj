@@ -94,7 +94,9 @@
     <Compile Include="Municipio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy.cs" />
-    <Compile Include="WebServiceProxy.cs" />
+    <Compile Include="WebServiceProxy.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="XMLIniFile.cs" />
   </ItemGroup>
   <ItemGroup>

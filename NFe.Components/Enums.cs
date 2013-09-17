@@ -260,7 +260,17 @@ namespace NFe.Components
         /// Padrão DUETO
         /// Prefeitura de Nova Santa Rita - RS
         /// </summary>
-        DUETO
+        DUETO,
+        /// <summary>
+        /// Padrão WEB ISS
+        /// Prefeitura de Feira de Santana - BA
+        /// </summary>
+        WEBISS,
+        /// <summary>
+        /// Padrão Nota Fiscal Eletrônica Paulistana -
+        /// Prefeitura São Paulo - SP
+        /// </summary>
+        PAULISTANA
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

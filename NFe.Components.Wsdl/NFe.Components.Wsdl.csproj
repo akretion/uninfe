@@ -1223,8 +1223,113 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSantaRitaRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBeloHorizonteMG-BHISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBeloHorizonteMG-BHISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_cancelar_nfse_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_cancelar_nfse_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_lote_rps_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_nfse_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_nfse_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_nfse_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_nfse_rps_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_situacao_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_consultar_situacao_lote_rps_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_enviar_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_enviar_lote_rps_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_gerar_nfse_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_gerar_nfse_resposta.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\tipos_complexos.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\tipos_simples.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoCancelamentoNFe_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoConsultaCNPJ_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoConsultaLote_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoConsultaNFePeriodo_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoConsultaNFe_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoEnvioLoteRPS_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoEnvioRPS_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\PedidoInformacoesLote_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoCancelamentoNFe_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoConsultaCNPJ_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoConsulta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoEnvioLoteRPS_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoEnvioRPS_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\RetornoInformacoesLote_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\TiposNFe_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PAULISTANA\xmldsig-core-schema_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoPauloSP-PAULISTANA.wsdl" />
     <None Include="NFse\WSDL\Producao\PISSNetAnapolis.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaSantaRitaRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoPauloSP-PAULISTANA.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

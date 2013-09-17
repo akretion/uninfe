@@ -345,6 +345,21 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region WEBISS
+                case PadroesNFSe.WEBISS:
+                    retorna = "NfseServices";
+                    break;
+
+                #endregion
+
+                #region PAULISTANA
+                case PadroesNFSe.PAULISTANA:
+                    retorna = "LoteNFe";
+                    break;
+
+                #endregion
+                    
             }
 
             return retorna;
@@ -798,6 +813,61 @@ namespace NFe.Service
                             break;
                         case Servicos.ConsultarURLNfse:
                             retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region WEBISS
+                case PadroesNFSe.WEBISS:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region PAULISTANA
+                case PadroesNFSe.PAULISTANA:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultaLote";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultaNFeEmitidas"; 
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNFe"; 
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaInformacoesLote";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelamentoNFe"; 
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao)
+                                retorna = "TesteEnvioLoteRPS";
+                            else
+                                retorna = "EnvioLoteRPS";
                             break;
                     }
                     break;

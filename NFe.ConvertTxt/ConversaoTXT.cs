@@ -970,8 +970,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I":   
-                    //         I|CProd |CEAN |XProd |NCM |EXTIPI |CFOP |UCom |QCom |VUnCom |VProd |CEANTrib |UTrib |QTrib |VUnTrib |VFrete |VSeg |VDesc |vOutro |indTot |xPed |nItemPed|
-                    layout = "§I|CProd¨|CEAN¨|XProd¨|NCM¨|EXTIPI¨|CFOP¨|UCom¨|QCom¨|VUnCom¨|VProd¨|CEANTrib¨|UTrib¨|QTrib¨|VUnTrib¨|VFrete¨|VSeg¨|VDesc¨|vOutro¨|indTot¨|xPed¨|nItemPed¨"; //ok
+                    //         I|CProd |CEAN |XProd |NCM |EXTIPI |CFOP |UCom |QCom |VUnCom |VProd |CEANTrib |UTrib |QTrib |VUnTrib |VFrete |VSeg |VDesc |vOutro |indTot |xPed |nItemPed |nFCI
+                    layout = "§I|CProd¨|CEAN¨|XProd¨|NCM¨|EXTIPI¨|CFOP¨|UCom¨|QCom¨|VUnCom¨|VProd¨|CEANTrib¨|UTrib¨|QTrib¨|VUnTrib¨|VFrete¨|VSeg¨|VDesc¨|vOutro¨|indTot¨|xPed¨|nItemPed¨|nFCI¨"; //ok
                     ///
                     /// Grupo da TAG <det><prod>
                     /// 
@@ -998,6 +998,7 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.indTot = (TpcnIndicadorTotal)this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.indTot, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Prod.xPed    = (string)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xPed, ObOp.Opcional, 1, 15);
                     NFe.det[nProd].Prod.nItemPed= (int)   this.LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.nItemPed, ObOp.Opcional, 0, 6);
+                    NFe.det[nProd].Prod.nFCI    = (string)this.LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nFCI, ObOp.Opcional, 0, 255);
                     NFe.det[nProd].Imposto.ISSQN.cSitTrib = string.Empty;
                     
                     #endregion                    

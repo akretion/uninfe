@@ -301,6 +301,12 @@ namespace NFe.Service
                     break;
                 #endregion
 
+                #region Padrão Paulistana
+                case PadroesNFSe.PAULISTANA:
+                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { 1, docXML.OuterXml });
+                    break;
+                #endregion
+
                 #region Demais padrões
                 case PadroesNFSe.GINFES:
                 case PadroesNFSe.THEMA:

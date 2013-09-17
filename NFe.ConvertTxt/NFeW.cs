@@ -480,6 +480,7 @@ namespace NFe.ConvertTxt
                 wCampo(det.Prod.vDesc, TpcnTipoCampo.tcDec2, Properties.Resources.vDesc, ObOp.Opcional);
                 wCampo(det.Prod.vOutro, TpcnTipoCampo.tcDec2, Properties.Resources.vOutro, ObOp.Opcional);
                 wCampo(det.Prod.indTot, TpcnTipoCampo.tcInt, Properties.Resources.indTot);
+                wCampo(det.Prod.nFCI, TpcnTipoCampo.tcStr, Properties.Resources.nFCI, ObOp.Opcional);
 
                 #region /// DI
 

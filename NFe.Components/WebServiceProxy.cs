@@ -393,10 +393,14 @@ namespace NFe.Components
             #endregion
 
             #region Se a NFSe for padrão DUETO preciso importar os schemas do WSDL
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && PadraoNFSe == PadroesNFSe.DUETO)
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.DUETO || PadraoNFSe == PadroesNFSe.WEBISS))
             {
-                System.Net.WebClient client = new System.Net.WebClient();
+                //Tive que utilizar a WebClient para que a OpenRead funcionasse, não foi possível fazer funcionar com a SecureWebClient. Tem que analisar melhor. Wandrey e Renan 10/09/2013
+                WebClient client = new WebClient();
                 Stream stream = client.OpenRead(ArquivoWSDL);
+
+                //Esta sim tem que ser com a SecureWebClient pq tem que ter o certificado. Wandrey 10/09/2013
+                SecureWebClient client2 = new SecureWebClient(oCertificado);
 
                 // Add any imported files
                 foreach (System.Xml.Schema.XmlSchema wsdlSchema in serviceDescription.Types.Schemas)
@@ -407,7 +411,7 @@ namespace NFe.Components
                         {
                             Uri baseUri = new Uri(ArquivoWSDL);
                             Uri schemaUri = new Uri(baseUri, ((System.Xml.Schema.XmlSchemaExternal)externalSchema).SchemaLocation);
-                            stream = client.OpenRead(schemaUri);
+                            stream = client2.OpenRead(schemaUri);
                             System.Xml.Schema.XmlSchema schema = System.Xml.Schema.XmlSchema.Read(stream, null);
                             importer.Schemas.Add(schema);
                         }
@@ -701,6 +705,23 @@ namespace NFe.Components
         }
     }
 
+    class SecureWebClient : WebClient
+    {
+        private readonly X509Certificate2 Certificado;
+
+        public SecureWebClient(X509Certificate2 certificado)
+        {
+            Certificado = certificado;
+        }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            HttpWebRequest request = (HttpWebRequest)base.GetWebRequest(address);
+            request.ClientCertificates.Add(Certificado);
+            return request;
+        }
+    }
+
     public class URLws
     {
         public URLws()
@@ -814,7 +835,7 @@ namespace NFe.Components
         /// <summary>
         /// Recepcao dos eventos do MDF-e
         /// </summary>
-        public string MDFeRecepcaoEvento { get; set; }      
+        public string MDFeRecepcaoEvento { get; set; }
         #endregion
 
         #endregion

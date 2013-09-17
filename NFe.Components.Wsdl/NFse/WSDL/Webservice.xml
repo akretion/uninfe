@@ -1066,7 +1066,7 @@
       <ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>
-      <ConsultarURLNfse>wsdl\homologacao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
+      <ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>
     </LocalProducao>
   </Estado>
   <Estado ID="5201108" Nome="Anapolis - GO" UF="GO" Padrao="ISS.Net">
@@ -1086,7 +1086,7 @@
       <ConsultarNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSNetAnapolis.wsdl</CancelarNfse>
-      <ConsultarURLNfse>wsdl\homologacao\PISSNetAnapolis.wsdl</ConsultarURLNfse>
+      <ConsultarURLNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarURLNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam o padrão ISSOnLine -->
@@ -1163,7 +1163,7 @@
       <CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
-  <!-- Municípios que utilizam padrões próprios -->
+  <!-- Municípios que utilizam padrão BHISS -->
   <Estado ID="3136702" Nome="Juiz de Fora - MG" UF="MG" Padrao="BHIss">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>
@@ -1180,6 +1180,43 @@
       <ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3106200" Nome="Belo Horizonte - MG" UF="MG" Padrao="BHIss">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam padrão WEBISS -->
+  <Estado ID="2910800" Nome="Feira de Santana - BA" UF="BA" Padrao="WEBIss">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam padrões próprios -->
@@ -1217,6 +1254,24 @@
       <ConsultarNfse>wsdl\producao\PBlumenauSC.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3550308" Nome="São Paulo - SP" UF="SP">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->

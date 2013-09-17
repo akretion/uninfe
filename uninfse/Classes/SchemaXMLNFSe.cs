@@ -834,6 +834,176 @@ namespace uninfse
             #endregion
             #endregion
 
+            #region Schemas padrão WebISS
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = 55,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_enviar_lote_rps_envio.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = 56,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_cancelar_nfse_envio.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = 57,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_consultar_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = 58,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_consultar_situacao_lote_rps_envio.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+            });
+            #endregion
+
+            #region Consulta NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = 59,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_consultar_nfse_rps_envio.xsd",
+                Descricao = "XML de Consulta da NFSe por RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+            });
+            #endregion
+
+            #region Consulta NFSe por período
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 60,
+                ArquivoXSD = "NFSe\\WEBISS\\servico_consultar_nfse_envio.xsd",
+                Descricao = "XML de Consulta da NFSe por período",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse"
+            });
+            #endregion
+
+            #endregion
+
+            #region Schemas padrão Paulistana
+
+            #region XML de lote RPS
+            
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-PedidoEnvioLoteRPS", new InfSchema()
+            {
+                Tag = "PedidoEnvioLoteRPS",
+                ID = 61,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoEnvioLoteRPS_v01.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAssinatura = "PedidoEnvioLoteRPS",
+                TagLoteAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+            });
+            
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-PedidoCancelamentoNFe", new InfSchema()
+            {
+                Tag = "PedidoCancelamentoNFe",
+                ID = 62,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoCancelamentoNFe_v01.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "PedidoCancelamentoNFe",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+
+            });
+            
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-p1:PedidoConsultaLote", new InfSchema()
+            {
+                Tag = "p1:PedidoConsultaLote",
+                ID = 63,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoConsultaLote_v01.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "p1:PedidoConsultaLote",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-p1:PedidoInformacoesLote", new InfSchema()
+            {
+                Tag = "p1:PedidoInformacoesLote",
+                ID = 64,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoInformacoesLote_v01.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "p1:PedidoInformacoesLote",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+            });
+            #endregion
+
+            #region Consulta NFSe por período
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-p1:PedidoConsultaNFePeriodo", new InfSchema()
+            {
+                Tag = "p1:PedidoConsultaNFePeriodo",
+                ID = 65,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoConsultaNFePeriodo_v01.xsd",
+                Descricao = "XML de Consulta da NFSe por RPS",
+                TagAssinatura = "p1:PedidoConsultaNFePeriodo",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+            });
+            #endregion
+
+            #region Consulta NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-p1:PedidoConsultaNFe", new InfSchema()
+            {
+                Tag = "p1:PedidoConsultaNFe",
+                ID = 66,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoConsultaNFe_v01.xsd",
+                Descricao = "XML de Consulta da NFSe por período",
+                TagAssinatura = "p1:PedidoConsultaNFe",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+            });
+
+            #endregion
+            
+            #endregion
+            
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
             foreach (InfSchema item in SchemaXML.InfSchemas.Values)
@@ -842,6 +1012,7 @@ namespace uninfse
                     SchemaXML.MaxID = item.ID;
             }
             #endregion
+              
         }
     }
 }

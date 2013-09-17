@@ -941,6 +941,7 @@ namespace NFe.ConvertTxt
         public TpcnIndicadorTotal indTot;
         public string xPed;
         public int nItemPed;
+        public string nFCI;
         public List<DI> DI;
         public veicProd veicProd;
         public List<Med> med;

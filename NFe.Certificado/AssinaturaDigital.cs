@@ -148,7 +148,7 @@ namespace NFe.Certificado
                     SW_2.Close();
                 }
             }
-            catch(System.Security.Cryptography.CryptographicException)
+            catch(System.Security.Cryptography.CryptographicException ex)
             {
                 #region #10316
                 /*
@@ -162,7 +162,7 @@ namespace NFe.Certificado
 #endif
                 x509Cert = Empresa.ResetCertificado(empresa);
 
-                throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente."); 
+                throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
                 #endregion
             }
             finally

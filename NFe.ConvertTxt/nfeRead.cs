@@ -536,6 +536,7 @@ namespace NFe.ConvertTxt
                 detInfo.Prod.vUnTrib = this.readDouble(ele, Properties.Resources.vUnTrib);
                 detInfo.Prod.xPed = this.readValue(ele, Properties.Resources.xPed);
                 detInfo.Prod.xProd = this.readValue(ele, Properties.Resources.xProd);
+                detInfo.Prod.nFCI = this.readValue(ele, Properties.Resources.nFCI);
             }
 
             #region -->prod->arma

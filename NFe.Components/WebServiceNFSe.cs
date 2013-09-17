@@ -149,14 +149,28 @@ namespace NFe.Components
                             "</LocalHomologacao>";
 
                 case PadroesNFSe.BHISS:
-                    return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>" +
-                            "</LocalHomologacao>";
+                    if (idMunicipio == 3106200) //Belo Horizonte - MG
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HBeloHorizonteMG-BHISS.wsdl</CancelarNfse>" +
+                                "</LocalHomologacao>";
+                    }
+                    else //Juiz de Fora - MG
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HJuizdeForaMG.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>" +
+                                "</LocalHomologacao>";
+                    }
 
                 case PadroesNFSe.GIF:
                     return "<LocalHomologacao>" +
@@ -192,6 +206,28 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
                                 @"</LocalHomologacao>";
                     }
+
+                case PadroesNFSe.WEBISS: // Feira de Santana - BA
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarURLNfse>" +
+                            @"</LocalHomologacao>";
+
+                case PadroesNFSe.PAULISTANA: // São Paulo - SP
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarURLNfse>" +
+                            @"</LocalHomologacao>";
 
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
@@ -333,14 +369,28 @@ namespace NFe.Components
                             "</LocalProducao>";
 
                 case PadroesNFSe.BHISS:
-                    return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>" +
-                            "</LocalProducao>";
+                    if (idMunicipio == 3106200) //Belo Horizonte - MG
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PBeloHorizonteMG-BHISS.wsdl</CancelarNfse>" +
+                                "</LocalProducao>";
+                    }
+                    else //Juiz de Fora - MG
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PJuizdeForaMG.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>" +
+                                "</LocalProducao>";
+                    }
 
                 case PadroesNFSe.GIF:
                     return "<LocalProducao>" +
@@ -356,7 +406,7 @@ namespace NFe.Components
                 case PadroesNFSe.DUETO:
                     if (idMunicipio == 4310207) // Ijuí - RS
                     {
-                        return "<LocalHomologacao>" +
+                        return "<LocalProducao>" +
                                 @"<RecepcionarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
                                 @"<ConsultarSituacaoLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
                                 @"<ConsultarNfsePorRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
@@ -377,6 +427,28 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
                                 @"</LocalProducao>";
                     }
+
+                case PadroesNFSe.WEBISS: // Feira de Santana - BA
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarURLNfse>" +
+                            @"</LocalProducao>";
+
+                case PadroesNFSe.PAULISTANA: // São Paulo - SP
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarURLNfse>" +
+                            @"</LocalProducao>";
 
                 default:
                     return "<LocalProducao></LocalProducao>";
