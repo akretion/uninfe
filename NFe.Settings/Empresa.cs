@@ -1116,36 +1116,47 @@ namespace NFe.Settings
         {
             if(Empresa.Configuracoes == null || Empresa.Configuracoes.Count == 0) return "";
 
-            IEnumerable<string> diretorios = (from d in Empresa.Configuracoes
-                                              select d.PastaBase);
+            //IEnumerable<string> diretorios = (from d in Empresa.Configuracoes select d.PastaBase);
 
             StringBuilder result = new StringBuilder();
 
             //se no diretório de envio existir o arquivo "nome da máquina.locked" o diretório já está sendo atendido por alguma instancia do UniNFe
 
-            foreach(string dir in diretorios)
+            foreach (Empresa emp in Empresa.Configuracoes)
             {
-                string fileName = String.Format("{0}-{1}.lock", Propriedade.NomeAplicacao, Environment.MachineName);
-                string filePath = String.Format("{0}\\{1}", dir, fileName);
-
-                //se já existe um arquivo de lock e o nome do arquivo for diferente desta máquina
-                //não pode deixar executar
-
-                string fileLock = (from x in
-                                       (from f in Directory.GetFiles(dir, "*" + Propriedade.NomeAplicacao + "*.lock")
-                                        select new FileInfo(f))
-                                   where x.Name != fileName
-                                   select x.FullName).FirstOrDefault();
-
-                if(!String.IsNullOrEmpty(fileLock))
+                if (string.IsNullOrEmpty(emp.PastaBase))
+                    result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não está definida");
+                else
                 {
-                    FileInfo fi = new FileInfo(fileLock);
+                    string dir = emp.PastaBase;
 
-                    result.AppendFormat("Já existe uma instância do {2} que atende ao diretório {0}.\r\nNome da estação: {1}",
-                        fi.Directory.FullName, fi.Name
-                                                .Replace(Propriedade.NomeAplicacao + "-", "")
-                                                .Replace(".lock", ""),
-                                                Propriedade.NomeAplicacao);
+                    if (!Directory.Exists(dir))
+                        result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não existe");
+                    else
+                    {
+                        string fileName = String.Format("{0}-{1}.lock", Propriedade.NomeAplicacao, Environment.MachineName);
+                        string filePath = String.Format("{0}\\{1}", dir, fileName);
+
+                        //se já existe um arquivo de lock e o nome do arquivo for diferente desta máquina
+                        //não pode deixar executar
+
+                        string fileLock = (from x in
+                                               (from f in Directory.GetFiles(dir, "*" + Propriedade.NomeAplicacao + "*.lock")
+                                                select new FileInfo(f))
+                                           where x.Name != fileName
+                                           select x.FullName).FirstOrDefault();
+
+                        if (!String.IsNullOrEmpty(fileLock))
+                        {
+                            FileInfo fi = new FileInfo(fileLock);
+
+                            result.AppendFormat("Já existe uma instância do {2} que atende ao diretório {0}.\r\nNome da estação: {1}",
+                                fi.Directory.FullName, fi.Name
+                                                        .Replace(Propriedade.NomeAplicacao + "-", "")
+                                                        .Replace(".lock", ""),
+                                                        Propriedade.NomeAplicacao);
+                        }
+                    }
                 }
             }
 
@@ -1170,19 +1181,22 @@ namespace NFe.Settings
 
             foreach(string dir in diretorios)
             {
-                string file = String.Format("{0}\\{1}-{2}.lock", dir, Propriedade.NomeAplicacao, Environment.MachineName);
-                FileInfo fi = new FileInfo(file);
+                if (!string.IsNullOrEmpty(dir))
+                {
+                    string file = String.Format("{0}\\{1}-{2}.lock", dir, Propriedade.NomeAplicacao, Environment.MachineName);
+                    FileInfo fi = new FileInfo(file);
 
-                using(StreamWriter sw = new StreamWriter(file, false)
-                {
-                    AutoFlush = true
-                })
-                {
-                    sw.WriteLine("Iniciado em: {0:dd/MM/yyyy hh:mm:ss}", DateTime.Now);
-                    sw.WriteLine("Estação: {0}", Environment.MachineName);
-                    sw.WriteLine("IP: {0}", Functions.GetIPAddress());
-                    sw.Flush();
-                    sw.Close();
+                    using (StreamWriter sw = new StreamWriter(file, false)
+                    {
+                        AutoFlush = true
+                    })
+                    {
+                        sw.WriteLine("Iniciado em: {0:dd/MM/yyyy hh:mm:ss}", DateTime.Now);
+                        sw.WriteLine("Estação: {0}", Environment.MachineName);
+                        sw.WriteLine("IP: {0}", Functions.GetIPAddress());
+                        sw.Flush();
+                        sw.Close();
+                    }
                 }
             }
         }

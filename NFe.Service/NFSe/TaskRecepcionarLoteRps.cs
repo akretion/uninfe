@@ -67,11 +67,6 @@ namespace NFe.Service.NFSe
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
                         break;
 
-                    case PadroesNFSe.SALVADOR_BA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
-                        break;
-
                     case PadroesNFSe.CANOAS_RS:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
@@ -125,6 +120,11 @@ namespace NFe.Service.NFSe
                         #region Encriptar tag <Assinatura>
                         EncryptAssinatura();
                         #endregion
+                        break;
+
+                    case PadroesNFSe.SALVADOR_BA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis, padraoNFSe);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     default:

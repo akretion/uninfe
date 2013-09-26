@@ -670,7 +670,8 @@ namespace uninfse
 
             ///
             /// reloadWebServicesList carrega as URL's com base no XML de municipios.
-            WebServiceProxy.reloadWebServicesList();
+            if (WebServiceProxy.reloadWebServicesList())
+                ConfiguracaoApp.loadResouces();
         }
         private void btnMunicipios_Click(object sender, EventArgs e)
         {

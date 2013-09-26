@@ -9,7 +9,7 @@
       <NFeInutilizacao>wsdl\homologacao\AM\HAMNfeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\AM\HAMNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\AM\HAMNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\AM\HAMCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\AM\HAMRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
@@ -27,7 +27,7 @@
       <NFeInutilizacao>wsdl\producao\AM\PAMNfeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\AM\PAMNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\AM\PAMNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\AM\PAMCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\AM\PAMRecepcaoEvento.wsdl</NFeCCe>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
@@ -544,7 +544,7 @@
       <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVAN\HSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\homologacao\ES\HESNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeCCe>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
@@ -562,7 +562,7 @@
       <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVAN\PSVANCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeConsultaCadastro>wsdl\producao\ES\PESNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
       <NFeCCe>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeCCe>
       <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>

@@ -413,7 +413,7 @@ namespace NFe.Components
                                 @"<ConsultarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfse>" +
                                 @"<ConsultarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
                                 @"<CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalHomologacao>";
+                                @"</LocalProducao>";    //danasa 9-2013
                     }
                     else // Nova Santa Rita - RS
                     {

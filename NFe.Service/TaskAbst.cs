@@ -359,6 +359,32 @@ namespace NFe.Service
                     break;
 
                 #endregion
+
+                #region SALVADOR_BA
+                case PadroesNFSe.SALVADOR_BA:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultaLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultaNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNfseRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaSituacaoLoteRPS";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "EnvioLoteRPS";
+                            break;
+                    }
+                    break;
+                #endregion
                     
             }
 
@@ -868,6 +894,32 @@ namespace NFe.Service
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region SALVADOR_BA
+                case PadroesNFSe.SALVADOR_BA:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfseRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRPS";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "EnviarLoteRPS";
                             break;
                     }
                     break;

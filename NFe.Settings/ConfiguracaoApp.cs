@@ -190,11 +190,13 @@ namespace NFe.Settings
                             ArquivoItem item = new ArquivoItem();
                             item = null;
 
-                            if(ListArqsAtualizar.Count > 0)
+                            if (fi.Exists)  //danasa 9-2013
                             {
-                                item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo == fi.Name);
+                                if (ListArqsAtualizar.Count > 0)
+                                {
+                                    item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo == fi.Name);
+                                }
                             }
-
                             // A comparação é feita (fi.LastWriteTime != item.Data)
                             // Pois intende-se que se a data do arquivo que esta na pasta do UniNFe for superior a data
                             // de quando foi feita a ultima atualizacao do UniNfe, significa que ele foi atualizado manualmente e não devemos
@@ -411,14 +413,20 @@ namespace NFe.Settings
         }
 
 
+        public static void loadResouces()
+        {
+            new loadResources().load();
+        }
+
         #region StartVersoes
         public static void StartVersoes()
         {
-            if(ConfiguracaoApp.AtualizaWSDL)
+            if (ConfiguracaoApp.AtualizaWSDL)
                 new loadResources().load();
 
             ConfiguracaoApp.CarregarDados();
-            if(!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
+
+            if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
 
             switch(Propriedade.TipoAplicativo)
@@ -568,7 +576,11 @@ namespace NFe.Settings
             //Carregar a lista de webservices disponíveis
             try
             {
-                WebServiceProxy.CarregaWebServicesList();
+                if (WebServiceProxy.CarregaWebServicesList())
+                    ///
+                    /// danasa 9-2013
+                    /// força a atualizacao dos wsdl's pois pode ser que tenha sido criado um novo padrao
+                    ConfiguracaoApp.AtualizaWSDL = true;
             }
             catch(Exception ex)
             {
@@ -1183,19 +1195,6 @@ namespace NFe.Settings
             }
             #endregion
 
-            #region Ticket: #110
-            /* Validar se já existe uma instancia utilizando estes diretórios
-             * Marcelo
-             * 03/06/2013
-             */
-            if(validou)
-            {
-                //Se encontrar algum arquivo de lock nos diretórios, não permtir que seja executado
-                erro = Empresa.CanRun(false);
-                validou = String.IsNullOrEmpty(erro);
-            }
-            #endregion
-
             if(validou)
             {
                 for(int i = 0; i < Empresa.Configuracoes.Count; i++)
@@ -1430,7 +1429,22 @@ namespace NFe.Settings
                     #endregion
                 }
             }
-            if(!validou)
+
+            #region Ticket: #110
+            /* Validar se já existe uma instancia utilizando estes diretórios
+             * Marcelo
+             * 03/06/2013
+             */
+            if (validou)
+            {
+                //Se encontrar algum arquivo de lock nos diretórios, não permtir que seja executado
+                erro = Empresa.CanRun(false);
+                validou = String.IsNullOrEmpty(erro);
+            }
+            #endregion
+
+
+            if (!validou)
             {
                 throw new Exception(erro);
             }

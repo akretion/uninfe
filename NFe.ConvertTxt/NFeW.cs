@@ -480,7 +480,6 @@ namespace NFe.ConvertTxt
                 wCampo(det.Prod.vDesc, TpcnTipoCampo.tcDec2, Properties.Resources.vDesc, ObOp.Opcional);
                 wCampo(det.Prod.vOutro, TpcnTipoCampo.tcDec2, Properties.Resources.vOutro, ObOp.Opcional);
                 wCampo(det.Prod.indTot, TpcnTipoCampo.tcInt, Properties.Resources.indTot);
-                wCampo(det.Prod.nFCI, TpcnTipoCampo.tcStr, Properties.Resources.nFCI, ObOp.Opcional);
 
                 #region /// DI
 
@@ -526,6 +525,7 @@ namespace NFe.ConvertTxt
 
                 wCampo(det.Prod.xPed, TpcnTipoCampo.tcStr, Properties.Resources.xPed, ObOp.Opcional);
                 wCampo(det.Prod.nItemPed, TpcnTipoCampo.tcInt, Properties.Resources.nItemPed, ObOp.Opcional);
+                wCampo(det.Prod.nFCI, TpcnTipoCampo.tcStr, Properties.Resources.nFCI, ObOp.Opcional);
 
                 #region /// veiculos
                 if (!string.IsNullOrEmpty(det.Prod.veicProd.chassi))

@@ -34,7 +34,8 @@ namespace NFe.Service.NFSe
                 oDadosPedSitNfse = new DadosPedSitNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 //LerXML ler = new LerXML();
-                /*ler.*/PedSitNfse(NomeArquivoXML);
+                /*ler.*/
+                PedSitNfse(NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 WebServiceProxy wsProxy = null;
@@ -99,6 +100,11 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis);
+                        pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSitNfse.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.SALVADOR_BA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe);
                         pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSitNfse.cMunicipio));
                         break;
 

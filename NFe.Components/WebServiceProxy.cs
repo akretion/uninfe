@@ -392,8 +392,8 @@ namespace NFe.Components
             importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties;
             #endregion
 
-            #region Se a NFSe for padrão DUETO preciso importar os schemas do WSDL
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.DUETO || PadraoNFSe == PadroesNFSe.WEBISS))
+            #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA preciso importar os schemas do WSDL
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.DUETO || PadraoNFSe == PadroesNFSe.WEBISS || PadraoNFSe == PadroesNFSe.SALVADOR_BA))
             {
                 //Tive que utilizar a WebClient para que a OpenRead funcionasse, não foi possível fazer funcionar com a SecureWebClient. Tem que analisar melhor. Wandrey e Renan 10/09/2013
                 WebClient client = new WebClient();
@@ -456,8 +456,9 @@ namespace NFe.Components
         /// <summary>
         /// Carrega a lista de webservices definidos no arquivo WebService.XML
         /// </summary>
-        public static void CarregaWebServicesList()
+        public static bool CarregaWebServicesList()
         {
+            bool atualizaWSDL = false;
             if (webServicesList == null)
             {
                 webServicesList = new List<webServices>();
@@ -483,6 +484,14 @@ namespace NFe.Components
                                 string Padrao = registroElemento.Attributes[2].Value;
                                 string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2))).Substring(0, 2);
 
+                                ///
+                                /// danasa 9-2013
+                                /// verifica se o 'novo' padrao existe, nao existindo retorna para atualizar os wsdl's dele
+                                string dirSchemas = Path.Combine(Propriedade.PastaExecutavel, "schemas\\NFSe\\" + Padrao);
+                                if (!Directory.Exists(dirSchemas))
+                                {
+                                    atualizaWSDL = true;
+                                }
                                 PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
 
                                 ///
@@ -589,6 +598,7 @@ namespace NFe.Components
                     }
                 }
             }
+            return atualizaWSDL;
         }
         #endregion
 
@@ -597,10 +607,10 @@ namespace NFe.Components
         /// Recarrega a lista de webservices
         /// usado pelo projeto da NFes quando da manutencao
         /// </summary>
-        public static void reloadWebServicesList()
+        public static bool reloadWebServicesList()
         {
             webServicesList = null;
-            CarregaWebServicesList();
+            return CarregaWebServicesList();
         }
         #endregion
 

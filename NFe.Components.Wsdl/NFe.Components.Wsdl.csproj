@@ -1050,9 +1050,7 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HISSOnLineAracatubaSP.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJuizdeForaMG.wsdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJuizdeForaMG.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\BHISS\nfse.xsd">
@@ -1061,9 +1059,7 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\BHISS\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PJuizdeForaMG.wsdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJuizdeForaMG.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampoBomRS.wsdl" />
@@ -1327,6 +1323,25 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoPauloSP-PAULISTANA.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\ES\HESNfeCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\ES\PESNfeCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\DadosComplementares.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\Deducoes.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\nfse_salvador.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\ServicosComplementares.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\WSDL\Producao\PISSNetAnapolis.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaSantaRitaRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoPauloSP-PAULISTANA.wsdl" />

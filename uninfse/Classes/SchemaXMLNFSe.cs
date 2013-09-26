@@ -479,7 +479,7 @@ namespace uninfse
 
             #endregion
 
-            #region BLUMENAU_SC
+            #region Schemas BLUMENAU_SC
 
             #region XML de Consulta de NFSe por Data
             SchemaXML.InfSchemas.Add("NFSE-BLUMENAU_SC-p1:PedidoConsultaNFePeriodo", new InfSchema()
@@ -561,7 +561,7 @@ namespace uninfse
 
             #endregion
 
-            #region BHISS
+            #region Schemas BHISS
 
             #region XML de Consulta de NFSe por Data
             SchemaXML.InfSchemas.Add("NFSE-BHISS-ConsultarNfseEnvio", new InfSchema()
@@ -645,7 +645,7 @@ namespace uninfse
             
             #endregion
 
-            #region GIF
+            #region Schemas GIF
 
             #region XML de Consulta de NFSe por Rps
             SchemaXML.InfSchemas.Add("NFSE-GIF-NFSE", new InfSchema()
@@ -1003,7 +1003,91 @@ namespace uninfse
             #endregion
             
             #endregion
+
+            #region Schemas SALVADOR_BA
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = 67,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
             
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = 68,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = 69,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Consulta de Situação do Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+            
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = 70,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = 71,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = 72,
+                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+            
+            #endregion
+
             #region Determinar a propriedade MaxID
             SchemaXML.MaxID = 0;
             foreach (InfSchema item in SchemaXML.InfSchemas.Values)
