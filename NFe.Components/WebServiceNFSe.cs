@@ -33,6 +33,7 @@ namespace NFe.Components
         {
             switch (padrao)
             {
+                #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (idMunicipio)
                     {
@@ -56,6 +57,17 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\homologacao\HThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalHomologacao>";
 
+                        case 4311403: //Lajeado - RS 
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HLajeadoRSRemessaNFSE.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HLajeadoRSCancelarNFSE.wsdl</CancelarNfse>" +
+                                   "</LocalHomologacao>";
+
+
                         default:
                             return "<LocalHomologacao>" +
                                    @"<RecepcionarLoteRps>wsdl\homologacao\HThemaRemessa.wsdl</RecepcionarLoteRps>" +
@@ -67,6 +79,9 @@ namespace NFe.Components
                                    "</LocalHomologacao>";
                     }
 
+                #endregion
+
+                #region GINFES
                 case PadroesNFSe.GINFES:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\hginfes.wsdl</RecepcionarLoteRps>" +
@@ -76,7 +91,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\homologacao\hginfes.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\hginfes.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region BETHA
                 case PadroesNFSe.BETHA:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HBethaRecepcionarLoteRps.wsdl</RecepcionarLoteRps>" +
@@ -86,7 +103,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\homologacao\HBethaConsultarLoteRPS.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HBethaCancelarNFSe.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HSalvadorBAEnvioLoteRPS.wsdl</RecepcionarLoteRps>" +
@@ -96,7 +115,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\homologacao\HSalvadorBAConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HSalvadorBA.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region CANOAS_RS
                 case PadroesNFSe.CANOAS_RS:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HCanoasRSRecepcionarLoteRps.wsdl</RecepcionarLoteRps>" +
@@ -106,7 +127,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\homologacao\HCanoasRSConsultarLoteRps.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HCanoasRSCancelarNfse.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region ISSNET
                 case PadroesNFSe.ISSNET:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>" +
@@ -117,27 +140,35 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region ISSONLINE
                 case PadroesNFSe.ISSONLINE:
-                    if (idMunicipio == 3502804)
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</CancelarNfse>" +
-                                "</LocalHomologacao>";
-                    else
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</CancelarNfse>" +
-                                "</LocalHomologacao>";
+                    switch (idMunicipio)
+                    {
+                        case 3502804: //Aracatuba - SP
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HISSOnLineAracatubaSP.wsdl</CancelarNfse>" +
+                                    "</LocalHomologacao>";
 
+                        default: //Apucarana - PR
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HISSOnLineApucarana.wsdl</CancelarNfse>" +
+                                    "</LocalHomologacao>";
+                    }
+                #endregion
+
+                #region BLUMENAU_SC
                 case PadroesNFSe.BLUMENAU_SC:
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HBlumenauSC.wsdl</RecepcionarLoteRps>" +
@@ -147,7 +178,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\homologacao\HBlumenauSC.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HBlumenauSC.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
+                #endregion
 
+                #region BHISS
                 case PadroesNFSe.BHISS:
                     if (idMunicipio == 3106200) //Belo Horizonte - MG
                     {
@@ -171,18 +204,37 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\homologacao\HJuizdeForaMG.wsdl</CancelarNfse>" +
                                 "</LocalHomologacao>";
                     }
+                #endregion
 
+                #region GIF
                 case PadroesNFSe.GIF:
-                    return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>" +
-                            @"<ConsultarURLNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarURLNfse>" +
-                            @"</LocalHomologacao>";
+                    if (idMunicipio == 4314050) // Parobé - RS
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarURLNfse>" +
+                                @"</LocalProducao>";
+                    }
+                    else
+                    {
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarURLNfse>" +
+                                @"</LocalHomologacao>";
+                    }
+                #endregion
 
+                #region DUETO
                 case PadroesNFSe.DUETO:
                     if (idMunicipio == 4310207) // Ijuí - RS
                     {
@@ -206,7 +258,9 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
                                 @"</LocalHomologacao>";
                     }
+                #endregion
 
+                #region WEBISS
                 case PadroesNFSe.WEBISS: // Feira de Santana - BA
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>" +
@@ -217,7 +271,9 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\homologacao\HFeiradeSantanaBA_WebISS.wsdl</ConsultarURLNfse>" +
                             @"</LocalHomologacao>";
+                #endregion
 
+                #region PAULISTANA
                 case PadroesNFSe.PAULISTANA: // São Paulo - SP
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>" +
@@ -228,6 +284,31 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\homologacao\HSaoPauloSP-PAULISTANA.wsdl</ConsultarURLNfse>" +
                             @"</LocalHomologacao>";
+                #endregion
+
+                #region PORTOVELHENSE
+                case PadroesNFSe.PORTOVELHENSE: // Porto Velho - RO
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HPortoVelhoPO.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarURLNfse>" +
+                            @"</LocalHomologacao>";
+                #endregion
+
+                #region PRONIN
+                case PadroesNFSe.PRONIN: // Mirassol - SP
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HMirassolSP.wsdl</CancelarNfse>" +
+                            @"</LocalHomologacao>";
+                #endregion
 
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
@@ -238,6 +319,7 @@ namespace NFe.Components
         {
             switch (padrao)
             {
+                #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (idMunicipio)
                     {
@@ -261,6 +343,16 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\producao\PThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalProducao>";
 
+                        case 4311403: // Lajeado - RS
+                            return "<LocalProducao>" +
+                                   @"<RecepcionarLoteRps>wsdl\producao\PLajeadoRSRemessaNFSE.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\producao\PLajeadoRSCancelarNFSE.wsdl</CancelarNfse>" +
+                                   "</LocalProducao>";
+
                         default:
                             return "<LocalProducao>" +
                                    @"<RecepcionarLoteRps>wsdl\producao\PThemaRemessa.wsdl</RecepcionarLoteRps>" +
@@ -271,7 +363,9 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\producao\PThemaCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalProducao>";
                     }
+                #endregion
 
+                #region GINFES
                 case PadroesNFSe.GINFES:
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\pginfes.wsdl</RecepcionarLoteRps>" +
@@ -281,7 +375,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\pginfes.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\pginfes.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+                #endregion
 
+                #region BETHA
                 case PadroesNFSe.BETHA:
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PBethaRecepcionarLoteRPS.wsdl</RecepcionarLoteRps>" +
@@ -291,7 +387,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\PBethaConsultarLoteRPS.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PBethaCancelarNFSe.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+                #endregion
 
+                #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PSalvadorBAEnvioLoteRPS.wsdl</RecepcionarLoteRps>" +
@@ -301,7 +399,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\PSalvadorBAConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PSalvadorBA.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+                #endregion
 
+                #region CANOAS_RS
                 case PadroesNFSe.CANOAS_RS:
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PCanoasRSRecepcionarLoteRps.wsdl</RecepcionarLoteRps>" +
@@ -311,7 +411,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\PCanoasRSConsultarLoteRps.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PCanoasRSCancelarNfse.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+                #endregion
 
+                #region ISSNET
                 case PadroesNFSe.ISSNET:
                     if (idMunicipio == 5201108) //Anapolis - GO
                     {
@@ -337,27 +439,48 @@ namespace NFe.Components
                                 @"<ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
                                 "</LocalProducao>";
                     }
+                #endregion
 
+                #region ISSONLINE
                 case PadroesNFSe.ISSONLINE:
-                    if (idMunicipio == 3502804)
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</CancelarNfse>" +
-                                "</LocalProducao>";
-                    else
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>" +
-                                "</LocalProducao>";
+                    switch (idMunicipio)
+                    {
+                        case 3502804: //Aracatuba - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</CancelarNfse>" +
+                                    "</LocalProducao>";
 
+                        case 3537305: //Penapolis - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PPenapoisSPIssOnLine.wsdl</CancelarNfse>" +
+                                    "</LocalProducao>";
+
+                        default: //Apucarana - PR
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PISSOnLineApucarana.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PISSOnLineApucarana.wsdl</CancelarNfse>" +
+                                    "</LocalProducao>";
+
+                    }
+
+
+                #endregion
+
+                #region BLUMENAU_SC
                 case PadroesNFSe.BLUMENAU_SC:
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PBlumenauSC.wsdl</RecepcionarLoteRps>" +
@@ -367,7 +490,9 @@ namespace NFe.Components
                             @"<ConsultarLoteRps>wsdl\producao\PBlumenauSC.wsdl</ConsultarLoteRps>" +
                             @"<CancelarNfse>wsdl\producao\PBlumenauSC.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
+                #endregion
 
+                #region BHISS
                 case PadroesNFSe.BHISS:
                     if (idMunicipio == 3106200) //Belo Horizonte - MG
                     {
@@ -391,18 +516,37 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\producao\PJuizdeForaMG.wsdl</CancelarNfse>" +
                                 "</LocalProducao>";
                     }
+                #endregion
 
+                #region GIF
                 case PadroesNFSe.GIF:
-                    return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>" +
-                            @"<ConsultarURLNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarURLNfse>" +
-                            @"</LocalProducao>";
+                    if (idMunicipio == 4314050) // Parobé - RS
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarURLNfse>" +
+                                @"</LocalProducao>";
+                    }
+                    else
+                    {
+                        return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarURLNfse>" +
+                                @"</LocalProducao>";
+                    }
+                #endregion
 
+                #region DUETO
                 case PadroesNFSe.DUETO:
                     if (idMunicipio == 4310207) // Ijuí - RS
                     {
@@ -427,7 +571,9 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
                                 @"</LocalProducao>";
                     }
+                #endregion
 
+                #region WEBISS
                 case PadroesNFSe.WEBISS: // Feira de Santana - BA
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</RecepcionarLoteRps>" +
@@ -438,7 +584,9 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\producao\PFeiradeSantanaBA_WebISS.wsdl</ConsultarURLNfse>" +
                             @"</LocalProducao>";
+                #endregion
 
+                #region PAULISTANA
                 case PadroesNFSe.PAULISTANA: // São Paulo - SP
                     return "<LocalProducao>" +
                             @"<RecepcionarLoteRps>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</RecepcionarLoteRps>" +
@@ -449,6 +597,31 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</ConsultarURLNfse>" +
                             @"</LocalProducao>";
+                #endregion
+
+                #region PORTOVELHENSE
+                case PadroesNFSe.PORTOVELHENSE: // Porto Velho - RO
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PPortoVelhoPO.wsdl</CancelarNfse>" +
+                            @"<ConsultarURLNfse>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarURLNfse>" +
+                            @"</LocalProducao>";
+                #endregion
+
+                #region PRONIN
+                case PadroesNFSe.PRONIN: // Mirassol - SP
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PMirassolSP.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PMirassolSP.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>" +
+                            @"</LocalProducao>";
+                #endregion
 
                 default:
                     return "<LocalProducao></LocalProducao>";

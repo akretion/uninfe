@@ -73,7 +73,9 @@ namespace NFe.Components
                                     string nome = oLerXml.Name;
                                     if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                                     {
-                                        if (oLerXml.Name.Equals("envEvento"))
+                                        string name = oLerXml.Name;
+
+                                        if (name.Equals("envEvento") || name.Equals("eventoCTe"))
                                         {
                                             XmlDocument xml = new XmlDocument();
                                             xml.Load(oLerXml);
@@ -81,22 +83,30 @@ namespace NFe.Components
                                             XmlElement cl = (XmlElement)xml.GetElementsByTagName("tpEvento")[0];
                                             if (cl != null)
                                             {
-                                                switch (cl.InnerText)
+                                                string evento = cl.InnerText;
+
+                                                switch (evento)
                                                 {
-                                                    case "110110":
-                                                        nome = "envEvento";
-                                                        break;   //name=envEvento, pois existe uma entrada especifica no dicionario InfSchemas p/CCe
-                                                    case "110111":
-                                                        nome = "envEvento110111";
-                                                        break;   //name=envEvento110111, pois existe uma entrada especifica no dicionario InfSchemas p/ cancelamentos
-                                                    default:
-                                                        ///
-                                                        /// retorna:
-                                                        /// envEvento210200
-                                                        /// envEvento210210
-                                                        /// envEvento210220
-                                                        /// envEvento210240
-                                                        //nome = "envEvento" + cl.InnerText;
+                                                    case "110110": //XML de Evento da CCe
+                                                        nome = name + evento;
+                                                        break;   
+
+                                                    case "110111": //XML de Envio de evento de cancelamento
+                                                        nome = name + evento;
+                                                        break;   
+
+                                                    case "110113": //XML de Envio do evento de contingencia EPEC, CTe
+                                                        nome = name + evento;
+                                                        break;
+
+                                                    case "110160": //XML de Envio do evento de Registro Multimodal, CTe
+                                                        nome = name + evento;
+                                                        break;
+
+                                                    case "210200": //XML Evento de manifestação do destinatário
+                                                    case "210210": //XML Evento de manifestação do destinatário
+                                                    case "210220": //XML Evento de manifestação do destinatário
+                                                    case "210240": //XML Evento de manifestação do destinatário
                                                         nome = "envConfRecebto";
                                                         break;
                                                 }

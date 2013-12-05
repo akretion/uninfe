@@ -77,6 +77,13 @@ namespace NFe.Interface
             cbAmbiente.ValueMember = "codigo";
             #endregion
 
+            #region cbServico
+            cbServico.Items.Clear();
+            cbServico.Items.Add("NF-e"); //0
+            cbServico.Items.Add("CT-e"); //1
+            cbServico.Items.Add("NFS-e"); //2
+            cbServico.Items.Add("MDF-e"); //3
+            #endregion
         }
 
         #region PopulateCbEmpresa()
@@ -114,8 +121,10 @@ namespace NFe.Interface
         {
             this.textResultado.Text = "";
             this.Refresh();
+            
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedIndex;
 
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+            if (servico == TipoAplicativo.Cte)
             {
                 if (this.cbEmissao.SelectedIndex == 1)
                 {
@@ -123,7 +132,7 @@ namespace NFe.Interface
                     return;
                 }
             }
-            else if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            else if (servico == TipoAplicativo.Nfe)
             {
                 if (this.cbEmissao.SelectedIndex == 2)
                 {
@@ -144,7 +153,6 @@ namespace NFe.Interface
             try
             {
                 GerarXML oGerar = new GerarXML(Emp);
-                //Auxiliar oAux = new Auxiliar();
 
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).Codigo;
                 int amb = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[cbAmbiente.SelectedIndex]).Codigo;
@@ -166,7 +174,7 @@ namespace NFe.Interface
                         break;
                 }
 
-                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(tpEmis, cUF, amb);
+                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb);
 
                 //Demonstrar o status do serviço
                 this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
@@ -272,8 +280,12 @@ namespace NFe.Interface
         /// </summary>
         private void PopulateDetalheForm()
         {
-            string cnpj = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Valor;
-            Emp = Empresa.FindConfEmpresaIndex(cnpj);
+            Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
+
+            if (Empresa.Configuracoes[Emp].Servico == TipoAplicativo.Nfse)
+            {
+                MessageBox.Show("NFS-e não dispõe do serviço de consulta status.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
             //Posicionar o elemento da combo UF
             foreach (ComboElem elem in arrUF)
@@ -302,6 +314,11 @@ namespace NFe.Interface
                 case Propriedade.TipoEmissao.teSVCSP:
                     this.cbEmissao.SelectedIndex = 3;
                     break;
+            }
+
+            if (Empresa.Configuracoes[Emp].Servico != TipoAplicativo.Nfse)
+            {
+                cbServico.SelectedIndex = (int)Empresa.Configuracoes[Emp].Servico;
             }
         }
 

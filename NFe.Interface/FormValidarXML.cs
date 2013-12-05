@@ -51,16 +51,14 @@ namespace NFe.Interface
 
             //Copiar o arquivo XML para temporários para assinar e depois vou validar o que está nos temporários
             FileInfo oArquivo = new FileInfo(this.textBox_arqxml.Text);
-            string cArquivo = System.IO.Path.GetTempPath() + Functions.ExtrairNomeArq(this.textBox_arqxml.Text, ".xml");
+            string cArquivo = System.IO.Path.GetTempPath() + oArquivo.Name;
 
             FileInfo oArqDestino = new FileInfo(cArquivo);
 
-            if (File.Exists(cArquivo)) //Deletar o arquivo antes de copiar se existir na pasta de temporários
-            {
-                oArqDestino.Delete();
-            }
+            oArquivo.CopyTo(cArquivo, true);
 
-            oArquivo.CopyTo(cArquivo);
+            //Remover atributo de somente leitura que pode gerar problemas no acesso do arquivo
+            NFe.Service.TFunctions.RemoveSomenteLeitura(cArquivo);
 
             //Detectar o tipo do arquivo
             NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresa.Configuracoes[Emp].UFCod);
@@ -119,8 +117,7 @@ namespace NFe.Interface
         /// </summary>
         private void PopulateDetalheForm()
         {
-            string cnpj = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Valor;
-            Emp = Empresa.FindConfEmpresaIndex(cnpj);
+            Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
         }
 
         #region PopulateCbEmpresa()

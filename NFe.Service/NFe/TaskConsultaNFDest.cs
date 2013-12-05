@@ -29,7 +29,8 @@ namespace NFe.Service
                 oDadosConsultaNFeDest = new DadosConsultaNFeDest();
                 //Ler o XML para pegar parâmetros de envio
                 //LerXML oLer = new LerXML();
-                /*oLer.*/EnvConsultaNFeDest(emp, NomeArquivoXML);
+                /*oLer.*/
+                EnvConsultaNFeDest(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
@@ -50,16 +51,16 @@ namespace NFe.Service
                     //if (NFe.Components.Propriedade.TipoAmbiente.taHomologacao == oDadosConsultaNFeDest.tpAmb)
                     //    oConsNFDestEvento = wsProxy.CriarObjeto("NfeConsultaDest");
                     //else
-                        oConsNFDestEvento = wsProxy.CriarObjeto("NFeConsultaDest");
-                        object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
+                    oConsNFDestEvento = wsProxy.CriarObjeto("NFeConsultaDest");
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());
-//                  try
-//                  {
-//                      wsProxy.SetProp(oCabecMsg, "indComp", "0");
-//                  }
-//                  catch { }
+                    //                  try
+                    //                  {
+                    //                      wsProxy.SetProp(oCabecMsg, "indComp", "0");
+                    //                  }
+                    //                  catch { }
                     wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest);
 
                     //Criar objeto da classe de assinatura digital
@@ -69,12 +70,12 @@ namespace NFe.Service
                     //oAD.Assinar(NomeArquivoXML, emp);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oConsNFDestEvento, 
-                                        "nfeConsultaNFDest", 
-                                        oCabecMsg, 
-                                        this, 
-                                        Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""), 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oConsNFDestEvento,
+                                        "nfeConsultaNFDest",
+                                        oCabecMsg,
+                                        this,
+                                        Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
                                         Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
 
                     //Ler o retorno
@@ -119,71 +120,66 @@ namespace NFe.Service
         #region EnvConsultaNFeDest
         private void EnvConsultaNFeDest(int emp, string arquivoXML)
         {
-            switch (Propriedade.TipoAplicativo)
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                case TipoAplicativo.Nfe:
-                    if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+                /// tpAmb|2
+                /// CNPJ|10290739000139 
+                /// indNFe|0
+                /// indEmi|0
+                /// ultNSU|00000001
+                List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                foreach (string cTexto in cLinhas)
+                {
+                    string[] dados = cTexto.Split('|');
+                    if (dados.GetLength(0) <= 1) continue;
+
+                    switch (dados[0].ToLower())
                     {
-                        /// tpAmb|2
-                        /// CNPJ|10290739000139 
-                        /// indNFe|0
-                        /// indEmi|0
-                        /// ultNSU|00000001
-                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach (string cTexto in cLinhas)
-                        {
-                            string[] dados = cTexto.Split('|');
-                            if (dados.GetLength(0) <= 1) continue;
-
-                            switch (dados[0].ToLower())
-                            {
-                                case "tpamb":
-                                    this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "cnpj":
-                                    this.oDadosConsultaNFeDest.CNPJ = dados[1].Trim();
-                                    break;
-                                case "indnfe":
-                                    this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "indemi":
-                                    this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "ultnsu":
-                                    this.oDadosConsultaNFeDest.ultNSU = dados[1].Trim();
-                                    break;
-                            }
-                        }
+                        case "tpamb":
+                            this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "cnpj":
+                            this.oDadosConsultaNFeDest.CNPJ = dados[1].Trim();
+                            break;
+                        case "indnfe":
+                            this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "indemi":
+                            this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "ultnsu":
+                            this.oDadosConsultaNFeDest.ultNSU = dados[1].Trim();
+                            break;
                     }
-                    else
-                    {
-                        //<?xml version="1.0" encoding="UTF-8"?>
-                        //<consNFeDest versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
-                        //      <tpAmb>2</tpAmb>
-                        //      <xServ>CONSULTAR NFE DEST</xServ>
-                        //      <CNPJ>10290739000139</CNPJ>
-                        //      <indNFe>0</indNFe>
-                        //      <indEmi>0</indEmi>
-                        //      <ultNSU>000000000000000</ultNSU>
-                        //</consNFeDest>
+                }
+            }
+            else
+            {
+                //<?xml version="1.0" encoding="UTF-8"?>
+                //<consNFeDest versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+                //      <tpAmb>2</tpAmb>
+                //      <xServ>CONSULTAR NFE DEST</xServ>
+                //      <CNPJ>10290739000139</CNPJ>
+                //      <indNFe>0</indNFe>
+                //      <indEmi>0</indEmi>
+                //      <ultNSU>000000000000000</ultNSU>
+                //</consNFeDest>
 
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(arquivoXML);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
 
-                        XmlNodeList envEventoList = doc.GetElementsByTagName("consNFeDest");
+                XmlNodeList envEventoList = doc.GetElementsByTagName("consNFeDest");
 
-                        foreach (XmlNode envEventoNode in envEventoList)
-                        {
-                            XmlElement envEventoElemento = (XmlElement)envEventoNode;
+                foreach (XmlNode envEventoNode in envEventoList)
+                {
+                    XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
-                            this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                            this.oDadosConsultaNFeDest.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                            this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indNFe")[0].InnerText);
-                            this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indEmi")[0].InnerText);
-                            this.oDadosConsultaNFeDest.ultNSU = envEventoElemento.GetElementsByTagName("ultNSU")[0].InnerText;
-                        }
-                    }
-                    break;
+                    this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.oDadosConsultaNFeDest.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                    this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indNFe")[0].InnerText);
+                    this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indEmi")[0].InnerText);
+                    this.oDadosConsultaNFeDest.ultNSU = envEventoElemento.GetElementsByTagName("ultNSU")[0].InnerText;
+                }
             }
         }
         #endregion

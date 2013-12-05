@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -12,8 +11,13 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskNFeRecepcao: TaskAbst
+    public class TaskNFeRecepcao : TaskAbst
     {
+        public TaskNFeRecepcao()
+        {
+            Servico = Servicos.EnviarLoteNfe;
+        }
+
         #region Classe com os dados do XML do retorno do envio do Lote de NFe
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do recibo do lote
@@ -25,8 +29,6 @@ namespace NFe.Service
         public override void Execute()
         {
             int emp = Functions.FindEmpresaByThread();
-            //Definir o serviço que será executado para a classe
-            Servico = Servicos.EnviarLoteNfe;
 
             try
             {
@@ -66,13 +68,13 @@ namespace NFe.Service
                 /*oLerRecibo.*/
                 Recibo(vStrXmlRetorno);
 
-                if(/*oLerRecibo.*/oDadosRec.cStat == "103") //Lote recebido com sucesso
+                if (/*oLerRecibo.*/oDadosRec.cStat == "103") //Lote recebido com sucesso
                 {
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, /*oLerRecibo.*/oDadosRec.tMed.ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, /*oLerRecibo.*/oDadosRec.nRec);
                 }
-                else if(Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) > 200 ||
+                else if (Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) > 200 ||
                          Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
                          Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
                 {
@@ -88,7 +90,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
                 #endregion
             }
-            catch(ExceptionEnvioXML ex)
+            catch (ExceptionEnvioXML ex)
             {
                 //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
                 //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
@@ -107,7 +109,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch(ExceptionSemInternet ex)
+            catch (ExceptionSemInternet ex)
             {
                 try
                 {
@@ -120,7 +122,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 try
                 {
@@ -164,24 +166,9 @@ namespace NFe.Service
             XmlDocument xml = new XmlDocument();
             xml.Load(memoryStream);
 
-            XmlNodeList retEnviNFeList = null;
+            XmlNodeList retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
 
-            switch(Propriedade.TipoAplicativo)
-            {
-                case TipoAplicativo.Cte:
-                    retEnviNFeList = xml.GetElementsByTagName("retEnviCte");
-                    break;
-
-                case TipoAplicativo.Nfe:
-                    retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
-                    break;
-
-                default:
-                    break;
-            }
-
-
-            foreach(XmlNode retEnviNFeNode in retEnviNFeList)
+            foreach (XmlNode retEnviNFeNode in retEnviNFeList)
             {
                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
@@ -189,7 +176,7 @@ namespace NFe.Service
 
                 XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
 
-                foreach(XmlNode infRecNode in infRecList)
+                foreach (XmlNode infRecNode in infRecList)
                 {
                     XmlElement infRecElemento = (XmlElement)infRecNode;
 

@@ -1052,30 +1052,30 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <det><prod><veicProd>
 
-                    NFe.det[nProd].Prod.veicProd.tpOp   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpOp, ObOp.Obrigatorio, 1, 1);
-                    NFe.det[nProd].Prod.veicProd.chassi = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.chassi, ObOp.Obrigatorio, 17, 17);
-                    NFe.det[nProd].Prod.veicProd.cCor   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cCor, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.xCor   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xCor, ObOp.Obrigatorio, 1, 40);
-                    NFe.det[nProd].Prod.veicProd.pot    = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pot, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.cilin  = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cilin, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.pesoL  = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pesoL, ObOp.Obrigatorio, 1, 9);
-                    NFe.det[nProd].Prod.veicProd.pesoB  = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pesoB, ObOp.Obrigatorio, 1, 9);
-                    NFe.det[nProd].Prod.veicProd.nSerie = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nSerie, ObOp.Obrigatorio, 9, 9);
-                    NFe.det[nProd].Prod.veicProd.tpComb = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpComb, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Prod.veicProd.nMotor = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nMotor, ObOp.Obrigatorio, 21, 21);
-                    NFe.det[nProd].Prod.veicProd.CMT    = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CMT, ObOp.Obrigatorio, 9, 9);
-                    NFe.det[nProd].Prod.veicProd.dist   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.dist, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.anoMod = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.anoMod, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.anoFab = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.anoFab, ObOp.Obrigatorio, 4, 4);
-                    NFe.det[nProd].Prod.veicProd.tpPint = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpPint, ObOp.Obrigatorio, 1, 1);
-                    NFe.det[nProd].Prod.veicProd.tpVeic = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpVeic, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Prod.veicProd.espVeic= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.espVeic, ObOp.Obrigatorio, 1, 1);
-                    NFe.det[nProd].Prod.veicProd.VIN    = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.VIN, ObOp.Obrigatorio, 1, 1);
-                    NFe.det[nProd].Prod.veicProd.condVeic = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.condVeic, ObOp.Obrigatorio, 1, 1);
-                    NFe.det[nProd].Prod.veicProd.cMod   = (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cMod, ObOp.Obrigatorio, 6, 6);
-                    NFe.det[nProd].Prod.veicProd.cCorDENATRAN = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.cCorDENATRAN, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Prod.veicProd.lota   = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.lota, ObOp.Obrigatorio, 1, 3);
-                    NFe.det[nProd].Prod.veicProd.tpRest = (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpRest, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.veicProd.tpOp   		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpOp, ObOp.Obrigatorio, 1, 1); 
+                    NFe.det[nProd].Prod.veicProd.chassi 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.chassi, ObOp.Obrigatorio, 17, 17); 
+                    NFe.det[nProd].Prod.veicProd.cCor   		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cCor, ObOp.Obrigatorio, 1, 4); 
+                    NFe.det[nProd].Prod.veicProd.xCor   		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.xCor, ObOp.Obrigatorio, 1, 40); 
+                    NFe.det[nProd].Prod.veicProd.pot    		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pot, ObOp.Obrigatorio, 1, 4); 
+                    NFe.det[nProd].Prod.veicProd.cilin  		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cilin, ObOp.Obrigatorio, 1, 4);
+                    NFe.det[nProd].Prod.veicProd.pesoL  		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pesoL, ObOp.Obrigatorio, 1, 9);
+                    NFe.det[nProd].Prod.veicProd.pesoB  		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.pesoB, ObOp.Obrigatorio, 1, 9);
+                    NFe.det[nProd].Prod.veicProd.nSerie 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nSerie, ObOp.Obrigatorio, 1, 9);
+                    NFe.det[nProd].Prod.veicProd.tpComb 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpComb, ObOp.Obrigatorio, 1, 2);
+                    NFe.det[nProd].Prod.veicProd.nMotor 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.nMotor, ObOp.Obrigatorio, 1, 21);
+                    NFe.det[nProd].Prod.veicProd.CMT    		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.CMT, ObOp.Obrigatorio, 1, 9);
+                    NFe.det[nProd].Prod.veicProd.dist   		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.dist, ObOp.Obrigatorio, 1, 4);
+                    NFe.det[nProd].Prod.veicProd.anoMod 		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.anoMod, ObOp.Obrigatorio, 4, 4);
+                    NFe.det[nProd].Prod.veicProd.anoFab 		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.anoFab, ObOp.Obrigatorio, 4, 4);
+                    NFe.det[nProd].Prod.veicProd.tpPint 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.tpPint, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.veicProd.tpVeic 		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpVeic, ObOp.Obrigatorio, 1, 2);
+                    NFe.det[nProd].Prod.veicProd.espVeic		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.espVeic, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.veicProd.VIN    		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.VIN, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.veicProd.condVeic 		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.condVeic, ObOp.Obrigatorio, 1, 1);
+                    NFe.det[nProd].Prod.veicProd.cMod   		= (string)LerCampo(TpcnTipoCampo.tcStr, Properties.Resources.cMod, ObOp.Obrigatorio, 1, 6);
+                    NFe.det[nProd].Prod.veicProd.cCorDENATRAN 	= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.cCorDENATRAN, ObOp.Obrigatorio, 1, 2);
+                    NFe.det[nProd].Prod.veicProd.lota   		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.lota, ObOp.Obrigatorio, 1, 3);
+                    NFe.det[nProd].Prod.veicProd.tpRest 		= (int)LerCampo(TpcnTipoCampo.tcInt, Properties.Resources.tpRest, ObOp.Obrigatorio, 1, 1);
                     
                     #endregion
                     break;

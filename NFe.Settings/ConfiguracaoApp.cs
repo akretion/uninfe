@@ -59,7 +59,9 @@ namespace NFe.Settings
         public static bool GravarLogOperacoesRealizadas { get; set; }
         #endregion
 
-        #region Propriedades das versões dos XML´s da NFe
+        #region Propriedades das versões dos XML´s
+
+        #region NFe
         public static string VersaoXMLStatusServico { get; set; }
         public static string VersaoXMLNFe { get; set; }
         public static string VersaoXMLPedRec { get; set; }
@@ -70,11 +72,30 @@ namespace NFe.Settings
         public static string VersaoXMLCabecMsg { get; set; }
         public static string VersaoXMLEnvDPEC { get; set; }
         public static string VersaoXMLConsDPEC { get; set; }
-        public static string VersaoXMLEnvCCe { get; set; }
-        public static string VersaoXMLEnvCancelamento { get; set; }
         public static string VersaoXMLEnvDownload { get; set; }
         public static string VersaoXMLEnvConsultaNFeDest { get; set; }
-        public static string VersaoXMLEnvManifestacao { get; set; }
+        public static string VersaoXMLEvento { get; set; }
+        #endregion
+
+        #region MDFe
+        public static string VersaoXMLMDFeCabecMsg { get; set; }
+        public static string VersaoXMLMDFeStatusServico { get; set; }
+        public static string VersaoXMLMDFe { get; set; }
+        public static string VersaoXMLMDFePedRec { get; set; }
+        public static string VersaoXMLMDFePedSit { get; set; }
+        public static string VersaoXMLMDFeEvento { get; set; }
+        #endregion
+
+        #region CTe
+        public static string VersaoXMLCTeCabecMsg { get; set; }
+        public static string VersaoXMLCTeStatusServico { get; set; }
+        public static string VersaoXMLCTe { get; set; }
+        public static string VersaoXMLCTePedRec { get; set; }
+        public static string VersaoXMLCTePedSit { get; set; }
+        public static string VersaoXMLCTeInut { get; set; }
+        public static string VersaoXMLCTeEvento { get; set; }
+        #endregion
+
         #endregion
 
         #region Propriedades para controle de servidor proxy
@@ -103,7 +124,7 @@ namespace NFe.Settings
             }
             set
             {
-                if(value != mSenhaConfig)
+                if (value != mSenhaConfig)
                 {
                     mSenhaConfigAlterada = true;
                     mSenhaConfig = value;
@@ -140,40 +161,36 @@ namespace NFe.Settings
                 {
                     System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFrom("NFe.Components.Wsdl.dll");
                     string[] x = ass.GetManifestResourceNames();
-                    if(x.GetLength(0) > 0)
+                    if (x.GetLength(0) > 0)
                     {
-                        foreach(string s in x)
+                        foreach (string s in x)
                         {
                             string fileoutput = null;
-                            switch(NFe.Components.Propriedade.TipoAplicativo)
+                            switch (NFe.Components.Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfe:
-                                    if(s.StartsWith("NFe.Components.Wsdl.NFe."))
+                                    if (s.StartsWith("NFe.Components.Wsdl.NFe."))
                                         fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
-                                case TipoAplicativo.Cte:
-                                    if(s.StartsWith("NFe.Components.Wsdl.CTe."))
-                                        fileoutput = s.Replace("NFe.Components.Wsdl.CTe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
-                                    break;
                                 case TipoAplicativo.Nfse:
-                                    if(s.StartsWith("NFe.Components.Wsdl.NFse."))
+                                    if (s.StartsWith("NFe.Components.Wsdl.NFse."))
                                         fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
                             }
 
-                            if(fileoutput == null)
+                            if (fileoutput == null)
                                 continue;
 
-                            if(fileoutput.ToLower().EndsWith(".xsd"))
+                            if (fileoutput.ToLower().EndsWith(".xsd"))
                             {
                                 /// Ex: NFe.Components.Wsdl.NFe.NFe.xmldsig-core-schema_v1.01.xsd
                                 ///
                                 /// pesquisa pelo nome do XSD
                                 int plast = fileoutput.ToLower().LastIndexOf("_v");
-                                if(plast == -1)
+                                if (plast == -1)
                                     plast = fileoutput.IndexOf(".xsd") - 1;
 
-                                while(fileoutput[plast] != '.')
+                                while (fileoutput[plast] != '.')
                                     --plast;
 
                                 string fn = fileoutput.Substring(plast + 1);
@@ -201,16 +218,16 @@ namespace NFe.Settings
                             // Pois intende-se que se a data do arquivo que esta na pasta do UniNFe for superior a data
                             // de quando foi feita a ultima atualizacao do UniNfe, significa que ele foi atualizado manualmente e não devemos
                             // sobrepor o WSDL ou SCHEMA do Usuario - Renan 26/03/2013
-                            if(item == null || !(fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
+                            if (item == null || !(fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
                             {
-                                if(item == null || !item.Manual)
+                                if (item == null || !item.Manual)
                                 {
-                                    using(StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
+                                    using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
                                     {
-                                        if(!Directory.Exists(Path.GetDirectoryName(fileoutput)))
+                                        if (!Directory.Exists(Path.GetDirectoryName(fileoutput)))
                                             Directory.CreateDirectory(Path.GetDirectoryName(fileoutput));
 
-                                        using(StreamWriter FileWriter = new StreamWriter(fileoutput))
+                                        using (StreamWriter FileWriter = new StreamWriter(fileoutput))
                                         {
                                             FileWriter.Write(FileReader.ReadToEnd());
                                             FileWriter.Close();
@@ -220,7 +237,7 @@ namespace NFe.Settings
                                 }
 
                             }
-                            else if(item != null)
+                            else if (item != null)
                             {
                                 item.Manual = true;
                             }
@@ -231,7 +248,7 @@ namespace NFe.Settings
                 }
 
 
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     int emp = Functions.FindEmpresaByThread();
                     string xMotivo = "Não foi possível atualizar pacotes de Schemas/WSDLs.";
@@ -255,7 +272,7 @@ namespace NFe.Settings
             /// <param name="ListArquivosVerificar">Lista a ser montada para ser comparada no momento da Atualizacao dos WSDLs</param>
             public void UpdateWSDL(List<ArquivoItem> ListArquivosVerificar)
             {
-                if(File.Exists(XMLVersoesWSDL))
+                if (File.Exists(XMLVersoesWSDL))
                 {
                     LerXmlWSDLs(ListArquivosVerificar);
 
@@ -292,13 +309,13 @@ namespace NFe.Settings
                 PreparaDadosWSDLs(ArquivosWSDLHomologacao, ArquivosXML);
                 PreparaDadosWSDLs(ArquivosXSD, ArquivosXML);
 
-                foreach(ArquivoItem item in ArquivosXML)
+                foreach (ArquivoItem item in ArquivosXML)
                 {
                     ArquivoItem itemAntigo = ListaAnterior.FirstOrDefault(a => a.Arquivo == item.Arquivo);
                     item.Manual = itemAntigo == null ? false : itemAntigo.Manual;
                 }
 
-                if(File.Exists(XMLVersoesWSDL))
+                if (File.Exists(XMLVersoesWSDL))
                 {
                     File.Delete(XMLVersoesWSDL);
                 }
@@ -321,7 +338,7 @@ namespace NFe.Settings
             private void PreparaDadosWSDLs(string[] arquivos, List<ArquivoItem> ListArquivos)
             {
 
-                foreach(string arquivo in arquivos)
+                foreach (string arquivo in arquivos)
                 {
                     FileInfo infArquivo = new FileInfo(arquivo);
 
@@ -352,7 +369,7 @@ namespace NFe.Settings
             private void EscreverXmlWSDLs(List<ArquivoItem> ListArquivosGerar)
             {
 
-                if(ListArquivosGerar.Count > 0)
+                if (ListArquivosGerar.Count > 0)
                 {
 
                     XmlTextWriter arqXML = new XmlTextWriter(XMLVersoesWSDL, Encoding.UTF8);
@@ -361,7 +378,7 @@ namespace NFe.Settings
                     arqXML.Formatting = Formatting.Indented;
                     arqXML.WriteStartElement("arquivos");
 
-                    foreach(ArquivoItem item in ListArquivosGerar)
+                    foreach (ArquivoItem item in ListArquivosGerar)
                     {
                         arqXML.WriteStartElement("wsdl");
 
@@ -394,7 +411,7 @@ namespace NFe.Settings
                 oXmlWSDLs.Load(XMLVersoesWSDL);
                 XmlNodeList xnListXml = oXmlWSDLs.GetElementsByTagName("wsdl");
 
-                foreach(XmlNode item in xnListXml)
+                foreach (XmlNode item in xnListXml)
                 {
                     string _arquivo = item["arquivo"].InnerText;
                     string _data = item["data"].InnerText;
@@ -429,44 +446,44 @@ namespace NFe.Settings
             if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
 
-            switch(Propriedade.TipoAplicativo)
+            switch (Propriedade.TipoAplicativo)
             {
-                case TipoAplicativo.Cte:
-                    ConfiguracaoApp.VersaoXMLCanc = "1.04";
-                    ConfiguracaoApp.VersaoXMLConsCad = "2.00";
-                    ConfiguracaoApp.VersaoXMLInut = "1.04";
-                    ConfiguracaoApp.VersaoXMLNFe = "1.04";
-                    ConfiguracaoApp.VersaoXMLPedRec = "1.04";
-                    ConfiguracaoApp.VersaoXMLPedSit = "1.04";
-                    ConfiguracaoApp.VersaoXMLStatusServico = "1.04";
-                    ConfiguracaoApp.VersaoXMLCabecMsg = "1.04";
-                    Propriedade.nsURI = "http://www.portalfiscal.inf.br/cte";
-
-                    //Substituir a extensão de alguns arquivos da NFe para o padrão CTE, ou 
-                    //os serviços do UNICTE não vai enxergar os XML´s na pasta de envio
-                    Propriedade.ExtEnvio.Nfe = "-cte.xml";
-                    Propriedade.ExtRetorno.Nfe_ERR = "-cte.err";
-                    Propriedade.ExtRetorno.ProcCancNFe = "-procCancCTe.xml";
-                    Propriedade.ExtRetorno.ProcInutNFe = "-procInutCTe.xml";
-                    Propriedade.ExtRetorno.ProcNFe = "-procCTe.xml";
-                    break;
-
                 case TipoAplicativo.Nfe:
+                    #region NF-e
                     ConfiguracaoApp.VersaoXMLCanc = "2.00";
                     ConfiguracaoApp.VersaoXMLConsCad = "2.00";
                     ConfiguracaoApp.VersaoXMLInut = "2.00";
                     ConfiguracaoApp.VersaoXMLNFe = "2.00";
                     ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-                    ConfiguracaoApp.VersaoXMLPedSit = "2.01";   //<<<danasa 6-2011
+                    ConfiguracaoApp.VersaoXMLPedSit = "2.01";
                     ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
                     ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
                     ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
                     ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-                    ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
-                    ConfiguracaoApp.VersaoXMLEnvCancelamento = "1.00";
+                    ConfiguracaoApp.VersaoXMLEvento = "1.00";
                     ConfiguracaoApp.VersaoXMLEnvDownload = "1.00";
-                    ConfiguracaoApp.VersaoXMLEnvManifestacao = "1.00";
                     ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest = "1.01";
+                    #endregion
+
+                    #region MDF-e
+                    ConfiguracaoApp.VersaoXMLMDFeCabecMsg = "1.00";
+                    ConfiguracaoApp.VersaoXMLMDFeStatusServico = "1.00";
+                    ConfiguracaoApp.VersaoXMLMDFe = "1.00";
+                    ConfiguracaoApp.VersaoXMLMDFePedRec = "1.00";
+                    ConfiguracaoApp.VersaoXMLMDFePedSit = "1.00";
+                    ConfiguracaoApp.VersaoXMLMDFeEvento = "1.00";
+                    #endregion
+
+                    #region CT-e
+                    ConfiguracaoApp.VersaoXMLCTeCabecMsg = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTeStatusServico = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTe = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTePedRec = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTePedSit = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTeInut = "2.00";
+                    ConfiguracaoApp.VersaoXMLCTeEvento = "2.00";
+                    #endregion
+
                     Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
                     SchemaXML.CriarListaIDXML();
                     break;
@@ -481,14 +498,6 @@ namespace NFe.Settings
                     ConfiguracaoApp.VersaoXMLStatusServico = "1.03";
                     ConfiguracaoApp.VersaoXMLCabecMsg = "1.03";
                     Propriedade.nsURI = "http://www.abrasf.org.br/";
-
-                    //Substituir a extensão de alguns arquivos da NFe para o padrão CTE, ou 
-                    //os serviços do UNINFSE não vai enxergar os XML´s na pasta de envio
-                    Propriedade.ExtEnvio.Nfe = "-cte.xml";
-                    Propriedade.ExtRetorno.Nfe_ERR = "-cte.err";
-                    Propriedade.ExtRetorno.ProcCancNFe = "-procCancCTe.xml";
-                    Propriedade.ExtRetorno.ProcInutNFe = "-procInutCTe.xml";
-                    Propriedade.ExtRetorno.ProcNFe = "-procCTe.xml";
                     break;
             }
         }
@@ -506,7 +515,7 @@ namespace NFe.Settings
         {
             string vArquivoConfig = Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig;
             XmlDocument doc = null;
-            if(File.Exists(vArquivoConfig))
+            if (File.Exists(vArquivoConfig))
             {
                 try
                 {
@@ -517,39 +526,39 @@ namespace NFe.Settings
 
                     configList = doc.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
 
-                    foreach(XmlNode nodeConfig in configList)
+                    foreach (XmlNode nodeConfig in configList)
                     {
                         XmlElement elementConfig = (XmlElement)nodeConfig;
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0] != null)
                             ConfiguracaoApp.Proxy = Convert.ToBoolean(elementConfig[NfeConfiguracoes.Proxy.ToString()].InnerText);
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString())[0] != null)
                             ConfiguracaoApp.ProxyServidor = elementConfig[NfeConfiguracoes.ProxyServidor.ToString()].InnerText.Trim();
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString())[0] != null)
                             ConfiguracaoApp.ProxyUsuario = elementConfig[NfeConfiguracoes.ProxyUsuario.ToString()].InnerText.Trim();
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0] != null)
                             ConfiguracaoApp.ProxySenha = elementConfig[NfeConfiguracoes.ProxySenha.ToString()].InnerText.Trim();
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0] != null)
                             ConfiguracaoApp.ProxyPorta = Convert.ToInt32(elementConfig[NfeConfiguracoes.ProxyPorta.ToString()].InnerText.Trim());
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0] != null)
                             ConfiguracaoApp.SenhaConfig = elementConfig[NfeConfiguracoes.SenhaConfig.ToString()].InnerText.Trim();
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString())[0] != null)
                             ConfiguracaoApp.ChecarConexaoInternet = Convert.ToBoolean(elementConfig[NfeConfiguracoes.ChecarConexaoInternet.ToString()].InnerText);
                         else
                             ConfiguracaoApp.ChecarConexaoInternet = true;
 
-                        if(elementConfig.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString())[0] != null)
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString())[0] != null)
                             ConfiguracaoApp.GravarLogOperacoesRealizadas = Convert.ToBoolean(elementConfig[NfeConfiguracoes.GravarLogOperacaoRealizada.ToString()].InnerText);
 
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ///
                     /// danasa 8-2009
@@ -559,12 +568,12 @@ namespace NFe.Settings
                     ///
                     /// danasa 8-2009
                     /// 
-                    if(!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
+                    if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                         MessageBox.Show(ex.Message);
                 }
                 finally
                 {
-                    if(doc != null)
+                    if (doc != null)
                         doc = null;
 
                 }
@@ -582,7 +591,7 @@ namespace NFe.Settings
                     /// força a atualizacao dos wsdl's pois pode ser que tenha sido criado um novo padrao
                     ConfiguracaoApp.AtualizaWSDL = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Auxiliar.WriteLog(ex.Message);
             }
@@ -600,7 +609,7 @@ namespace NFe.Settings
         {
             string vArquivoConfig = Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfigSobre;
 
-            if(File.Exists(vArquivoConfig))
+            if (File.Exists(vArquivoConfig))
             {
                 XmlTextReader oLerXml = null;
                 try
@@ -608,20 +617,20 @@ namespace NFe.Settings
                     //Carregar os dados do arquivo XML de configurações da Aplicação
                     oLerXml = new XmlTextReader(vArquivoConfig);
 
-                    while(oLerXml.Read())
+                    while (oLerXml.Read())
                     {
-                        if(oLerXml.NodeType == XmlNodeType.Element)
+                        if (oLerXml.NodeType == XmlNodeType.Element)
                         {
-                            if(oLerXml.Name == NFeStrConstants.nfe_configuracoes)
+                            if (oLerXml.Name == NFeStrConstants.nfe_configuracoes)
                             {
-                                while(oLerXml.Read())
+                                while (oLerXml.Read())
                                 {
-                                    if(oLerXml.NodeType == XmlNodeType.Element)
+                                    if (oLerXml.NodeType == XmlNodeType.Element)
                                     {
-                                        if(oLerXml.Name == "NomeEmpresa") { oLerXml.Read(); ConfiguracaoApp.NomeEmpresa = oLerXml.Value; }
-                                        else if(oLerXml.Name == "Site") { oLerXml.Read(); ConfiguracaoApp.Site = oLerXml.Value.Trim(); }
-                                        else if(oLerXml.Name == "SiteProduto") { oLerXml.Read(); ConfiguracaoApp.SiteProduto = oLerXml.Value.Trim(); }
-                                        else if(oLerXml.Name == "Email") { oLerXml.Read(); ConfiguracaoApp.Email = oLerXml.Value.Trim(); }
+                                        if (oLerXml.Name == "NomeEmpresa") { oLerXml.Read(); ConfiguracaoApp.NomeEmpresa = oLerXml.Value; }
+                                        else if (oLerXml.Name == "Site") { oLerXml.Read(); ConfiguracaoApp.Site = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "SiteProduto") { oLerXml.Read(); ConfiguracaoApp.SiteProduto = oLerXml.Value.Trim(); }
+                                        else if (oLerXml.Name == "Email") { oLerXml.Read(); ConfiguracaoApp.Email = oLerXml.Value.Trim(); }
                                     }
                                 }
                                 break;
@@ -629,13 +638,13 @@ namespace NFe.Settings
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
                 finally
                 {
-                    if(oLerXml != null)
+                    if (oLerXml != null)
                         oLerXml.Close();
                 }
             }
@@ -707,7 +716,7 @@ namespace NFe.Settings
         private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico)
         {
             string WSDL = string.Empty;
-            switch(tipoEmissao)
+            switch (tipoEmissao)
             {
                 case Propriedade.TipoEmissao.teSVCRS:
                     CodigoUF = 902;
@@ -722,7 +731,7 @@ namespace NFe.Settings
                     break;
 
                 case Propriedade.TipoEmissao.teDPEC:
-                    if(servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
+                    if (servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
                         CodigoUF = 901;
                     break;
 
@@ -733,20 +742,16 @@ namespace NFe.Settings
 
             #region --varre a lista de webservices baseado no codigo da UF
 
-            if(WebServiceProxy.webServicesList.Count == 0)
+            if (WebServiceProxy.webServicesList.Count == 0)
                 throw new Exception("Lista de webservices não foi processada verifique se o arquivo 'WebService.xml' existe na pasta WSDL do UniNFe");
 
-            foreach(webServices list in WebServiceProxy.webServicesList)
+            foreach (webServices list in WebServiceProxy.webServicesList)
             {
-                if(list.ID == CodigoUF)
+                if (list.ID == CodigoUF)
                 {
-                    switch(servico)
+                    switch (servico)
                     {
                         #region NFe
-                        case Servicos.CancelarNFe:
-                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCancelamento : list.LocalProducao.NFeCancelamento);
-                            break;
-
                         case Servicos.ConsultaCadastroContribuinte:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaCadastro : list.LocalProducao.NFeConsultaCadastro);
                             break;
@@ -755,10 +760,6 @@ namespace NFe.Settings
                         case Servicos.EnviarDPEC:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
                             break;
-
-                        //case Servicos.EnviarDPEC:
-                        //    WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
-                        //    break;
 
                         case Servicos.InutilizarNumerosNFe:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeInutilizacao : list.LocalProducao.NFeInutilizacao);
@@ -772,7 +773,7 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
                             break;
 
-                        case Servicos.PedidoConsultaStatusServicoNFe:
+                        case Servicos.ConsultaStatusServicoNFe:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeStatusServico : list.LocalProducao.NFeStatusServico);
                             break;
 
@@ -781,7 +782,9 @@ namespace NFe.Settings
                             break;
 
                         case Servicos.EnviarCCe:
-                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
+                        case Servicos.EnviarEventoCancelamento:
+                        case Servicos.RecepcaoEvento:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcaoEvento : list.LocalProducao.NFeRecepcaoEvento);
                             break;
 
                         case Servicos.ConsultaNFDest:
@@ -790,12 +793,6 @@ namespace NFe.Settings
 
                         case Servicos.DownloadNFe:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeDownload : list.LocalProducao.NFeDownload);
-                            break;
-
-                        case Servicos.EnviarEventoCancelamento:
-                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCancelamentoEvento : list.LocalProducao.NFeCancelamentoEvento);
-                            if(string.IsNullOrEmpty(WSDL))
-                                WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeCCe : list.LocalProducao.NFeCCe);
                             break;
 
                         case Servicos.EnviarManifDest:
@@ -812,7 +809,46 @@ namespace NFe.Settings
 
                         #endregion
 
-                        #region NFs-e
+                        #region MDF-e
+                        case Servicos.ConsultaStatusServicoMDFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeStatusServico : list.LocalProducao.MDFeStatusServico);
+                            break;
+                        case Servicos.EnviarLoteMDFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcao : list.LocalProducao.MDFeRecepcao);
+                            break;
+                        case Servicos.PedidoSituacaoLoteMDFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRetRecepcao : list.LocalProducao.MDFeRetRecepcao);
+                            break;
+                        case Servicos.PedidoConsultaSituacaoMDFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeConsulta : list.LocalProducao.MDFeConsulta);
+                            break;
+                        case Servicos.RecepcaoEventoMDFe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcaoEvento : list.LocalProducao.MDFeRecepcaoEvento);
+                            break;
+                        #endregion
+
+                        #region CT-e
+                        case Servicos.ConsultaStatusServicoCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeStatusServico : list.LocalProducao.CTeStatusServico);
+                            break;
+                        case Servicos.EnviarLoteCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRecepcao : list.LocalProducao.CTeRecepcao);
+                            break;
+                        case Servicos.PedidoSituacaoLoteCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRetRecepcao : list.LocalProducao.CTeRetRecepcao);
+                            break;
+                        case Servicos.PedidoConsultaSituacaoCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeConsulta : list.LocalProducao.CTeConsulta);
+                            break;
+                        case Servicos.InutilizarNumerosCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeInutilizacao : list.LocalProducao.CTeInutilizacao);
+                            break;
+                        case Servicos.RecepcaoEventoCTe:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRecepcaoEvento : list.LocalProducao.CTeRecepcaoEvento);
+                            break;
+                        #endregion
+
+                        #region NFS-e
                         case Servicos.RecepcionarLoteRps:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcionarLoteRps : list.LocalProducao.RecepcionarLoteRps);
                             break;
@@ -836,31 +872,29 @@ namespace NFe.Settings
                             break;
                         #endregion
                     }
-                    if(tipoEmissao == Propriedade.TipoEmissao.teDPEC)  //danasa 21/10/2010
+                    if (tipoEmissao == Propriedade.TipoEmissao.teDPEC)
                         ufNome = "DPEC";
                     else
-                        ufNome = "de " + list.Nome;  //danasa 20-9-2010
+                        ufNome = "de " + list.Nome;
 
                     break;
                 }
             }
             #endregion
 
-            if(string.IsNullOrEmpty(WSDL) || !File.Exists(WSDL))
+            if (string.IsNullOrEmpty(WSDL) || !File.Exists(WSDL))
             {
-                if(!File.Exists(WSDL) && !string.IsNullOrEmpty(WSDL))
-                    switch(Propriedade.TipoAplicativo)
+                if (!File.Exists(WSDL) && !string.IsNullOrEmpty(WSDL))
+                    switch (Propriedade.TipoAplicativo)
                     {
                         case TipoAplicativo.Nfe:
                             throw new Exception("O arquivo \"" + WSDL + "\" não existe. Aconselhamos a reinstalação do UniNFe.");
                         case TipoAplicativo.Nfse:
                             throw new Exception("O arquivo \"" + WSDL + "\" não existe. Aconselhamos a reinstalação do UniNFSe.");
-                        case TipoAplicativo.Cte:
-                            throw new Exception("O arquivo \"" + WSDL + "\" não existe. Aconselhamos a reinstalação do UniCTe.");
                     }
 
                 string Ambiente = string.Empty;
-                switch(tipoAmbiente)
+                switch (tipoAmbiente)
                 {
                     case Propriedade.TipoAmbiente.taProducao:
                         Ambiente = "produção";
@@ -872,10 +906,11 @@ namespace NFe.Settings
                 }
                 string errorStr = "O Estado " + ufNome + " ainda não dispõe do serviço {0} para o ambiente de " + Ambiente + ".";
 
-                switch(servico)
+                switch (servico)
                 {
                     case Servicos.EnviarCCe:
                     case Servicos.EnviarEventoCancelamento:
+                    case Servicos.RecepcaoEvento:
                     case Servicos.EnviarManifDest:
                         throw new Exception(string.Format(errorStr, "de envio de eventos da NFe"));
 
@@ -885,8 +920,23 @@ namespace NFe.Settings
                     case Servicos.DownloadNFe:
                         throw new Exception(string.Format(errorStr, "de envio de download de NFe do destinatário"));
 
+                    case Servicos.ConsultaStatusServicoMDFe:
+                    case Servicos.PedidoConsultaSituacaoMDFe:
+                    case Servicos.PedidoSituacaoLoteMDFe:
+                    case Servicos.EnviarLoteMDFe:
+                    case Servicos.RecepcaoEventoMDFe:
+                        throw new Exception(string.Format(errorStr, "do MDF-e"));
+
+                    case Servicos.ConsultaStatusServicoCTe:
+                    case Servicos.PedidoConsultaSituacaoCTe:
+                    case Servicos.PedidoSituacaoLoteCTe:
+                    case Servicos.EnviarLoteCTe:
+                    case Servicos.RecepcaoEventoCTe:
+                    case Servicos.InutilizarNumerosCTe:
+                        throw new Exception(string.Format(errorStr, "do CT-e"));
+
                     default:
-                        switch(servico)
+                        switch (servico)
                         {
                             case Servicos.CancelarNfse:
                             case Servicos.ConsultarURLNfse:
@@ -900,6 +950,7 @@ namespace NFe.Settings
                         throw new Exception(string.Format(errorStr, "da NF-e"));
                 }
             }
+
             return WSDL;
         }
         #endregion
@@ -914,7 +965,7 @@ namespace NFe.Settings
             ValidarConfig(validaCertificado);
             GravarConfigGeral();
             GravarConfigEmpresa();
-            if(gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
+            if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
             {                           //<<<<<<danasa 1-5-2011
                 GravarArqEmpresas();    //<<<<<<danasa 1-5-2011
             }                           //<<<<<<danasa 1-5-2011
@@ -942,16 +993,18 @@ namespace NFe.Settings
             oXmlGravar.WriteStartDocument();
             oXmlGravar.WriteStartElement("Empresa");
 
-            foreach(Empresa empresa in Empresa.Configuracoes)
+            foreach (Empresa empresa in Empresa.Configuracoes)
             {
                 //Abrir a tag <Registro>
                 oXmlGravar.WriteStartElement("Registro");
 
                 //Criar o atributo CNPJ dentro da tag Registro
                 oXmlGravar.WriteStartAttribute("CNPJ");
-
-                //Setar o conteúdo do atributo CNPJ
                 oXmlGravar.WriteString(empresa.CNPJ);
+
+                //Criar o atributo Servico dentro da tag Registro
+                oXmlGravar.WriteStartAttribute("Servico");
+                oXmlGravar.WriteString(((int)empresa.Servico).ToString());
 
                 //Encerrar o atributo CNPJ
                 oXmlGravar.WriteEndAttribute(); // Encerrar o atributo CNPJ
@@ -989,7 +1042,7 @@ namespace NFe.Settings
             oSettings.NewLineOnAttributes = false;
             oSettings.OmitXmlDeclaration = false;
 
-            foreach(Empresa empresa in Empresa.Configuracoes)
+            foreach (Empresa empresa in Empresa.Configuracoes)
             {
                 XmlWriter oXmlGravar = null;
 
@@ -997,11 +1050,19 @@ namespace NFe.Settings
                 {
                     //Criar pasta das configurações das empresas
                     string pasta = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
-                    if(!Directory.Exists(pasta))
+                    switch (empresa.Servico)
+                    {
+                        case TipoAplicativo.Nfe:
+                            break;
+                        default:
+                            pasta += "\\" + empresa.Servico.ToString().ToLower();
+                            break;
+                    }
+                    if (!Directory.Exists(pasta))
                         Directory.CreateDirectory(pasta);
 
                     //Agora vamos criar um XML Writer
-                    oXmlGravar = XmlWriter.Create(Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim() + "\\" + Propriedade.NomeArqConfig, oSettings);
+                    oXmlGravar = XmlWriter.Create(pasta + "\\" + Propriedade.NomeArqConfig, oSettings);
 
                     //Agora vamos gravar os dados
                     oXmlGravar.WriteStartDocument();
@@ -1046,7 +1107,7 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPPorta, empresa.FTPPorta.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPSenha, empresa.FTPSenha.ToString());
 
-                    if(empresa.CertificadoInstalado)
+                    if (empresa.CertificadoInstalado)
                     {
                         //oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.X509Certificado.Thumbprint);
                         oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.CertificadoThumbPrint);
@@ -1061,7 +1122,7 @@ namespace NFe.Settings
                 }
                 finally
                 {
-                    if(oXmlGravar != null)
+                    if (oXmlGravar != null)
                         oXmlGravar.Close();
                 }
             }
@@ -1105,9 +1166,9 @@ namespace NFe.Settings
                 oXmlGravar.WriteElementString(NfeConfiguracoes.ProxyPorta.ToString(), ConfiguracaoApp.ProxyPorta.ToString());
                 oXmlGravar.WriteElementString(NfeConfiguracoes.ChecarConexaoInternet.ToString(), ConfiguracaoApp.ChecarConexaoInternet.ToString());
                 oXmlGravar.WriteElementString(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString(), ConfiguracaoApp.GravarLogOperacoesRealizadas.ToString());
-                if(!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
+                if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
                 {
-                    if(ConfiguracaoApp.mSenhaConfigAlterada)
+                    if (ConfiguracaoApp.mSenhaConfigAlterada)
                     {
                         ConfiguracaoApp.SenhaConfig = Functions.GerarMD5(ConfiguracaoApp.SenhaConfig);
                     }
@@ -1122,7 +1183,7 @@ namespace NFe.Settings
             }
             finally
             {
-                if(oXmlGravar != null)
+                if (oXmlGravar != null)
                     oXmlGravar.Close();
             }
         }
@@ -1139,7 +1200,7 @@ namespace NFe.Settings
             bool validou = true;
 
             #region Remover End Slash
-            for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
                 Empresa.Configuracoes[i].PastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnvio);
                 Empresa.Configuracoes[i].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnviado);
@@ -1156,11 +1217,11 @@ namespace NFe.Settings
             #endregion
 
             #region Verificar a duplicação de nome de pastas que não pode existir
-            if(validou)
+            if (validou)
             {
                 List<FolderCompare> fc = new List<FolderCompare>();
 
-                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
                     fc.Add(new FolderCompare(i, Empresa.Configuracoes[i].PastaEnvio));
                     fc.Add(new FolderCompare(i + 1, Empresa.Configuracoes[i].PastaEnvioEmLote));
@@ -1172,16 +1233,16 @@ namespace NFe.Settings
                     fc.Add(new FolderCompare(i + 6, Empresa.Configuracoes[i].PastaDownloadNFeDest));
                 }
 
-                foreach(FolderCompare fc1 in fc)
+                foreach (FolderCompare fc1 in fc)
                 {
-                    if(string.IsNullOrEmpty(fc1.folder))
+                    if (string.IsNullOrEmpty(fc1.folder))
                         continue;
 
-                    foreach(FolderCompare fc2 in fc)
+                    foreach (FolderCompare fc2 in fc)
                     {
-                        if(fc1.id != fc2.id)
+                        if (fc1.id != fc2.id)
                         {
-                            if(fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
+                            if (fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
                             {
                                 erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre as empresas..";
                                 validou = false;
@@ -1189,15 +1250,15 @@ namespace NFe.Settings
                             }
                         }
                     }
-                    if(!validou)
+                    if (!validou)
                         break;
                 }
             }
             #endregion
 
-            if(validou)
+            if (validou)
             {
-                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
                     Empresa empresa = Empresa.Configuracoes[i];
                     List<string> diretorios = new List<string>();
@@ -1213,9 +1274,9 @@ namespace NFe.Settings
                     diretorios.Add(empresa.PastaValidar); mensagens.Add("Informe a pasta onde será gravado os arquivos XML somente para ser validado pela Aplicação.");
                     //diretorios.Add(empresa.PastaDownloadNFeDest); mensagens.Add("Informe a pasta onde será gravado os arquivos XML de download de destinatário.");
 
-                    for(int b = 0; b < diretorios.Count; b++)
+                    for (int b = 0; b < diretorios.Count; b++)
                     {
-                        if(diretorios[b].Equals(string.Empty))
+                        if (diretorios[b].Equals(string.Empty))
                         {
                             erro = mensagens[b].Trim() + "\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                             validou = false;
@@ -1225,9 +1286,9 @@ namespace NFe.Settings
                     ///
                     /// informacoes do FTP
                     /// danasa 7/7/2011
-                    if(empresa.FTPIsAlive)
+                    if (empresa.FTPIsAlive)
                     {
-                        if(string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
+                        if (string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
                         {
                             erro = "Informe a pasta do FTP de destino dos autorizados\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                             validou = false;
@@ -1236,38 +1297,35 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se o certificado foi informado
-                    if(validarCertificado)
+                    if (validarCertificado)
                     {
-                        if(validou)
+                        if (validou)
                         {
                             string aplicacao = "NF-e";
-                            switch(Propriedade.TipoAplicativo)
+                            switch (Propriedade.TipoAplicativo)
                             {
-                                case TipoAplicativo.Cte:
-                                    aplicacao = "CT-e";
-                                    break;
                                 case TipoAplicativo.Nfse:
-                                    aplicacao = "NFs-e";
+                                    aplicacao = "NFS-e";
                                     break;
                             }
-                            if(empresa.CertificadoInstalado && empresa.CertificadoThumbPrint.Equals(string.Empty))
+                            if (empresa.CertificadoInstalado && empresa.CertificadoThumbPrint.Equals(string.Empty))
                             {
                                 erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                 validou = false;
                             }
-                            if(!empresa.CertificadoInstalado)
+                            if (!empresa.CertificadoInstalado)
                             {
-                                if(empresa.CertificadoArquivo.Equals(string.Empty))
+                                if (empresa.CertificadoArquivo.Equals(string.Empty))
                                 {
                                     erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
-                                else if(!File.Exists(empresa.CertificadoArquivo))
+                                else if (!File.Exists(empresa.CertificadoArquivo))
                                 {
                                     erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + " não foi encontrado.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
-                                else if(empresa.CertificadoSenha.Equals(string.Empty))
+                                else if (empresa.CertificadoSenha.Equals(string.Empty))
                                 {
                                     erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
@@ -1276,19 +1334,19 @@ namespace NFe.Settings
                                 {
                                     try
                                     {
-                                        using(FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
+                                        using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
                                         {
                                             byte[] buffer = new byte[fs.Length];
                                             fs.Read(buffer, 0, buffer.Length);
                                             empresa.X509Certificado = new X509Certificate2(buffer, empresa.CertificadoSenha);
                                         }
                                     }
-                                    catch(System.Security.Cryptography.CryptographicException ex)
+                                    catch (System.Security.Cryptography.CryptographicException ex)
                                     {
                                         erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                         validou = false;
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
                                         erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                         validou = false;
@@ -1300,14 +1358,14 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se as pastas informadas existem
-                    if(validou)
+                    if (validou)
                     {
                         //Fazer um pequeno ajuste na pasta de configuração do unidanfe antes de verificar sua existência
-                        if(empresa.PastaConfigUniDanfe.Trim() != string.Empty)
+                        if (empresa.PastaConfigUniDanfe.Trim() != string.Empty)
                         {
-                            if(!string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
+                            if (!string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
                             {
-                                while(Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaConfigUniDanfe))
+                                while (Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaConfigUniDanfe))
                                     Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Substring(0, Empresa.Configuracoes[i].PastaConfigUniDanfe.Length - 6);
                             }
                             Empresa.Configuracoes[i].PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe.Replace("\r\n", "").Trim();
@@ -1315,31 +1373,31 @@ namespace NFe.Settings
                             empresa.PastaConfigUniDanfe = Empresa.Configuracoes[i].PastaConfigUniDanfe;
                         }
 
-                        if(empresa.PastaEnvio.ToLower().EndsWith("temp"))
+                        if (empresa.PastaEnvio.ToLower().EndsWith("temp"))
                         {
                             erro = "Pasta de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                             validou = false;
                         }
                         else
-                            if(empresa.PastaEnvioEmLote.ToLower().EndsWith("temp"))
+                            if (empresa.PastaEnvioEmLote.ToLower().EndsWith("temp"))
                             {
                                 erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                 validou = false;
                             }
                             else
-                                if(empresa.PastaValidar.ToLower().EndsWith("temp"))
+                                if (empresa.PastaValidar.ToLower().EndsWith("temp"))
                                 {
                                     erro = "Pasta de validação não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                     validou = false;
                                 }
                                 else
-                                    if(empresa.PastaErro.ToLower().EndsWith("temp"))
+                                    if (empresa.PastaErro.ToLower().EndsWith("temp"))
                                     {
                                         erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                         validou = false;
                                     }
 
-                        if(validou)
+                        if (validou)
                         {
                             diretorios.Clear(); mensagens.Clear();
                             diretorios.Add(empresa.PastaEnvio.Trim()); mensagens.Add("A pasta de envio dos arquivos XML informada não existe.");
@@ -1354,13 +1412,13 @@ namespace NFe.Settings
                             diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
                             diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
 
-                            for(int b = 0; b < diretorios.Count; b++)
+                            for (int b = 0; b < diretorios.Count; b++)
                             {
-                                if(!string.IsNullOrEmpty(diretorios[b]))
+                                if (!string.IsNullOrEmpty(diretorios[b]))
                                 {
-                                    if(!Directory.Exists(diretorios[b]))
+                                    if (!Directory.Exists(diretorios[b]))
                                     {
-                                        if(empresa.CriaPastasAutomaticamente)
+                                        if (empresa.CriaPastasAutomaticamente)
                                         {
                                             Directory.CreateDirectory(diretorios[b]);
                                         }
@@ -1377,27 +1435,27 @@ namespace NFe.Settings
 
                         #region Criar pasta Temp dentro da pasta de envio, envio em lote e validar
                         //Criar pasta Temp dentro da pasta de envio, envio em Lote e Validar. Wandrey 03/08/2011
-                        if(validou)
+                        if (validou)
                         {
-                            if(Directory.Exists(empresa.PastaEnvio.Trim()))
+                            if (Directory.Exists(empresa.PastaEnvio.Trim()))
                             {
-                                if(!Directory.Exists(empresa.PastaEnvio.Trim() + "\\Temp"))
+                                if (!Directory.Exists(empresa.PastaEnvio.Trim() + "\\Temp"))
                                 {
                                     Directory.CreateDirectory(empresa.PastaEnvio.Trim() + "\\Temp");
                                 }
                             }
 
-                            if(Directory.Exists(empresa.PastaEnvioEmLote.Trim()))
+                            if (Directory.Exists(empresa.PastaEnvioEmLote.Trim()))
                             {
-                                if(!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
+                                if (!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
                                 {
                                     Directory.CreateDirectory(empresa.PastaEnvioEmLote.Trim() + "\\Temp");
                                 }
                             }
 
-                            if(Directory.Exists(empresa.PastaValidar.Trim()))
+                            if (Directory.Exists(empresa.PastaValidar.Trim()))
                             {
-                                if(!Directory.Exists(empresa.PastaValidar.Trim() + "\\Temp"))
+                                if (!Directory.Exists(empresa.PastaValidar.Trim() + "\\Temp"))
                                 {
                                     Directory.CreateDirectory(empresa.PastaValidar.Trim() + "\\Temp");
                                 }
@@ -1408,19 +1466,19 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se as pastas configuradas do unidanfe estão corretas
-                    if(validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
+                    if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
                     {
-                        if(!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
+                        if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
                         {
                             erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                             validou = false;
                         }
                     }
 
-                    if(validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
+                    if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
                     {
                         //Verificar a existência o arquivo de configuração
-                        if(!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                        if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
                         {
                             erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                             validou = false;
@@ -1470,26 +1528,26 @@ namespace NFe.Settings
 
             try
             {
-                if(Path.GetExtension(cArquivoXml).ToLower() != ".txt")
+                if (Path.GetExtension(cArquivoXml).ToLower() != ".txt")
                 {
                     emp = CadastrarEmpresa(cArquivoXml, emp);
                 }
 
                 try
                 {
-                    if(Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                    if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                     {
                         #region Formato TXT
                         List<string> cLinhas = Functions.LerArquivo(cArquivoXml);
 
-                        foreach(string texto in cLinhas)
+                        foreach (string texto in cLinhas)
                         {
                             string[] dados = texto.Split('|');
                             int nElementos = dados.GetLength(0);
-                            if(nElementos <= 1)
+                            if (nElementos <= 1)
                                 continue;
 
-                            switch(dados[0].ToLower())
+                            switch (dados[0].ToLower())
                             {
                                 case "pastaxmlenvio":
                                     Empresa.Configuracoes[emp].PastaEnvio = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
@@ -1678,239 +1736,237 @@ namespace NFe.Settings
 
                         XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
 
-                        XmlNodeList RegistroEmpList = doc.GetElementsByTagName("DadosEmpresa");
-
-                        foreach(XmlNode ConfUniNfeNode in ConfUniNfeList)
+                        foreach (XmlNode ConfUniNfeNode in ConfUniNfeList)
                         {
                             XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
 
                             //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UnidadeFederativaCodigo).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UnidadeFederativaCodigo).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].UFCod = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UnidadeFederativaCodigo)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.AmbienteCodigo).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.AmbienteCodigo).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].tpAmb = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.AmbienteCodigo)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <tpEmis> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].tpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaDownloadNFeDest> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarRetornoTXTNFe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarRetornoTXTNFe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarRetornoTXTNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosDeTerceiros).Count > 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosDeTerceiros).Count > 0)
                             {
                                 Empresa.Configuracoes[emp].GravarEventosDeTerceiros = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosDeTerceiros)[0].InnerText);
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosNaPastaEnviadosNFe).Count > 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosNaPastaEnviadosNFe).Count > 0)
                             {
                                 Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosNaPastaEnviadosNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe).Count > 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe).Count > 0)
                             {
                                 Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiretorioSalvarComo).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiretorioSalvarComo).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].DiretorioSalvarComo = Convert.ToString(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiretorioSalvarComo)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiasLimpeza).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiasLimpeza).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiasLimpeza)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <Proxy> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.Proxy = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.ProxyServidor = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString())[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.ProxyUsuario = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString())[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ProxySenha> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.ProxySenha = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ChecarConexaoInternet> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.ChecarConexaoInternet = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString())[0].InnerText);
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.GravarLogOperacoesRealizadas = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString())[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaDanfeMon> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <XMLDanfeMonNFe> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonNFe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonNFe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].XMLDanfeMonNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <XMLDanfeMonProcNFe> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonProcNFe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonProcNFe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].XMLDanfeMonProcNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonProcNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <XMLDanfeMonDenegadaNFe> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonDenegadaNFe).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonDenegadaNFe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].XMLDanfeMonDenegadaNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonDenegadaNFe)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <SenhaConfig> existir ele pega no novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString()).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString()).Count != 0)
                             {
                                 ConfiguracaoApp.SenhaConfig = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0].InnerText;
                                 ConfiguracaoApp.mSenhaConfigAlterada = false;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <TempoConsulta> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.TempoConsulta).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.TempoConsulta).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].TempoConsulta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.TempoConsulta)[0].InnerText);
                                 lEncontrouTag = true;
                             }
 
                             #region -- FTP
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPAtivo).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPAtivo).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPAtivo = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPAtivo)[0].InnerText);
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPGravaXMLPastaUnica).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPGravaXMLPastaUnica).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPGravaXMLPastaUnica)[0].InnerText.Trim());
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPSenha).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPSenha).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPSenha = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPSenha)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaAutorizados).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaAutorizados).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPPastaAutorizados = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaAutorizados)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaRetornos).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaRetornos).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPPastaRetornos = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaRetornos)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoUsuario).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoUsuario).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPNomeDoUsuario = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoUsuario)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoServidor).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoServidor).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPNomeDoServidor = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoServidor)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].FTPPorta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta)[0].InnerText.Trim());
                                 lEncontrouTag = true;
@@ -1918,12 +1974,12 @@ namespace NFe.Settings
                             #endregion
 
                             #region Usuário e Senha WS
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].UsuarioWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS)[0].InnerText.Trim();
                                 lEncontrouTag = true;
                             }
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].SenhaWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS)[0].InnerText.Trim();
                                 lEncontrouTag = true;
@@ -1933,32 +1989,32 @@ namespace NFe.Settings
                             #region --Certificado Digital
 
                             //Se a tag <CertificadoInstalado> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].CertificadoInstalado = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado)[0].InnerText);
                                 lEncontrouTag = true;
                             }
 
                             //Se a tag <CertificadoArquivo> existir ele pega o novo conteúdo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].CertificadoArquivo = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo)[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <CertificadoSenha> existir ele pega o novo conteudo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].CertificadoSenha = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <certificado> existir ele pega o novo conteudo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].Certificado = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <CertificadoDigitalThumbPrint> existir ele pega o novo conteudo
-                            if(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint).Count != 0)
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].CertificadoThumbPrint = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint)[0].InnerText;
                                 lEncontrouTag = true;
@@ -1969,23 +2025,23 @@ namespace NFe.Settings
                         #endregion
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     cStat = "2";
                     xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": " + ex.Message;
                     lErro = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 cStat = "2";
                 xMotivo = "Ocorreu uma falha ao tentar alterar cadastrar a nova empresa nas configurações do " + Propriedade.NomeAplicacao + ": " + ex.Message;
                 lErro = true;
             }
 
-            if(lEncontrouTag)
+            if (lEncontrouTag)
             {
-                if(!lErro)
+                if (!lErro)
                 {
                     try
                     {
@@ -1998,7 +2054,7 @@ namespace NFe.Settings
                         xMotivo = "Configuracao do " + Propriedade.NomeAplicacao + " alterada com sucesso";
                         lErro = false;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         cStat = "2";
                         xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": " + ex.Message;
@@ -2015,7 +2071,7 @@ namespace NFe.Settings
 
             //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
             //exatamente como estavam gravadas no XML de configuração
-            if(lErro)
+            if (lErro)
             {
                 ConfiguracaoApp.CarregarDados();
                 ConfiguracaoApp.CarregarDadosSobre();
@@ -2029,7 +2085,7 @@ namespace NFe.Settings
             //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
             FileInfo arqInfo = new FileInfo(cArquivoXml);
             string pastaRetorno = string.Empty;
-            if(arqInfo.DirectoryName.ToLower().Trim() == Propriedade.PastaGeralTemporaria.ToLower().Trim())
+            if (arqInfo.DirectoryName.ToLower().Trim() == Propriedade.PastaGeralTemporaria.ToLower().Trim())
             {
                 pastaRetorno = Propriedade.PastaGeralRetorno;
             }
@@ -2039,7 +2095,7 @@ namespace NFe.Settings
             }
 
             string nomeArqRetorno;
-            if(Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+            if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.ExtEnvio.AltCon_TXT) + "-ret-alt-con.txt";
             else
                 nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.ExtEnvio.AltCon_XML) + "-ret-alt-con.xml";
@@ -2049,12 +2105,12 @@ namespace NFe.Settings
             try
             {
                 FileInfo oArqRetorno = new FileInfo(cArqRetorno);
-                if(oArqRetorno.Exists == true)
+                if (oArqRetorno.Exists == true)
                 {
                     oArqRetorno.Delete();
                 }
 
-                if(Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 {
                     File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n", Encoding.Default);
                 }
@@ -2081,7 +2137,7 @@ namespace NFe.Settings
                     oXmlGravar.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
                 ///
@@ -2120,15 +2176,15 @@ namespace NFe.Settings
         /// <returns></returns>
         public static string RemoveEndSlash(string value, bool acertarNomeCurto)
         {
-            if(!string.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
-                if(acertarNomeCurto)
+                if (acertarNomeCurto)
                 {
                     DirectoryInfo dir = new DirectoryInfo(value);
                     value = dir.FullName;
                 }
 
-                while(value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
+                while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
                     value = value.Substring(0, value.Length - 1);
             }
             else
@@ -2148,37 +2204,41 @@ namespace NFe.Settings
             XmlDocument doc = new XmlDocument();
             doc.Load(arqXML);
 
-            if(doc.DocumentElement.SelectNodes("DadosEmpresa").Count > 0)
+            if (doc.DocumentElement.SelectNodes("DadosEmpresa").Count > 0)
             {
                 string cnpj = "";
                 string nomeEmp = "";
+                string servico = ((int)TipoAplicativo.Nfe).ToString(); //Padrão será NFe
 
-                foreach(XmlElement item in doc.DocumentElement)
+                foreach (XmlElement item in doc.DocumentElement)
                 {
                     cnpj = doc.DocumentElement.SelectNodes("DadosEmpresa")[0].Attributes["CNPJ"].Value;
+                    if (doc.DocumentElement.SelectNodes("DadosEmpresa")[0].Attributes["Servico"] != null)
+                        servico = doc.DocumentElement.SelectNodes("DadosEmpresa")[0].Attributes["Servico"].Value;
 
-                    if(item.GetElementsByTagName("Nome").Count != 0)
+                    if (item.GetElementsByTagName("Nome").Count != 0)
                     {
                         nomeEmp = item.GetElementsByTagName("Nome")[0].InnerText;
                     }
                 }
 
-                if(string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp))
+                if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp))
                 {
                     throw new Exception("Não foi possível localizar os dados da empresa no xml de configuração.");
                 }
 
-                if(Empresa.FindConfEmpresa(cnpj.Trim()) == null)
+                if (Empresa.FindConfEmpresa(cnpj.Trim(), (TipoAplicativo)Convert.ToInt16(servico)) == null)
                 {
                     Empresa empresa = new Empresa();
                     empresa.CNPJ = cnpj;
                     empresa.Nome = nomeEmp;
+                    empresa.Servico = (TipoAplicativo)Convert.ToInt16(servico);
                     Empresa.Configuracoes.Add(empresa);
 
                     GravarArqEmpresas();
                 }
 
-                retEmp = Empresa.FindConfEmpresaIndex(cnpj);
+                retEmp = Empresa.FindConfEmpresaIndex(cnpj, (TipoAplicativo)Convert.ToInt16(servico));
             }
 
             return retEmp;
@@ -2200,12 +2260,12 @@ namespace NFe.Settings
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arquivo);
 
-                foreach(XmlElement item in doc.DocumentElement)
+                foreach (XmlElement item in doc.DocumentElement)
                 {
                     lConsultar = doc.DocumentElement.GetElementsByTagName("xServ")[0].InnerText.Equals("CONS-CERTIFICADO", StringComparison.InvariantCultureIgnoreCase);
                 }
 
-                if(lConsultar)
+                if (lConsultar)
                 {
                     X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
                     store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
@@ -2214,7 +2274,7 @@ namespace NFe.Settings
                     X509Certificate2Collection collection2 = (X509Certificate2Collection)collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.DigitalSignature, false);
 
                     #region Cria XML de retorno
-                    if(File.Exists(tmp_arqRet))
+                    if (File.Exists(tmp_arqRet))
                         File.Delete(tmp_arqRet);
 
                     XmlDocument RetCertificados = new XmlDocument();
@@ -2227,7 +2287,7 @@ namespace NFe.Settings
                     #endregion
 
                     #region Monta XML de Retorno com dados do Certificados Instalaos
-                    for(int i = 0; i < collection2.Count; i++)
+                    for (int i = 0; i < collection2.Count; i++)
                     {
                         #region layout retorno
                         /*laoyut de retorno - Renan Borges
@@ -2283,18 +2343,18 @@ namespace NFe.Settings
                 try
                 {
                     FileInfo oArqRetorno = new FileInfo(cArqRetorno);
-                    if(oArqRetorno.Exists == true)
+                    if (oArqRetorno.Exists == true)
                     {
                         oArqRetorno.Delete();
                     }
 
-                    if(!lConsultar && !lErro)
+                    if (!lConsultar && !lErro)
                     {
                         cStat = "2";
                         xMotivo = "Nao foi possivel fazer a consulta de Certificados Instalados na estação (xServ não identificado) no " + Propriedade.NomeAplicacao;
                     }
 
-                    if(lErro || !lConsultar)
+                    if (lErro || !lConsultar)
                     {
                         File.Delete(tmp_arqRet);
 
@@ -2320,16 +2380,16 @@ namespace NFe.Settings
                     }
                     else
                     {
-                        if(File.Exists(cArqRetorno))
+                        if (File.Exists(cArqRetorno))
                             File.Delete(cArqRetorno);
 
-                        if(File.Exists(arquivo))
+                        if (File.Exists(arquivo))
                             File.Delete(arquivo);
 
                         File.Move(tmp_arqRet, Propriedade.PastaGeralRetorno + "\\" + arqRet);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
                     Auxiliar oAux = new Auxiliar();

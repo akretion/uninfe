@@ -99,7 +99,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.GIF:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis, padraoNFSe);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
                         break;
 
@@ -123,6 +123,17 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SALVADOR_BA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis, padraoNFSe);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.PORTOVELHENSE:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
+                        cabecMsg = "<cabecalho versao=\"2.00\" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.00</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.PRONIN:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosEnvLoteRps.cMunicipio, /*ler.*/oDadosEnvLoteRps.tpAmb, /*ler.*/oDadosEnvLoteRps.tpEmis, padraoNFSe);
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosEnvLoteRps.cMunicipio));
                         break;

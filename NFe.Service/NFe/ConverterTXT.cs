@@ -68,10 +68,10 @@ namespace NFe.Service
                     }
                     else
                     {
-                        ///
-                        /// salva o arquivo texto original
-                        ///
-                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()))
+                        //
+                        // salva o arquivo texto original
+                        //
+                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()) || pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaValidar.ToLower()))
                         {
                             FileInfo ArqOrig = new FileInfo(arquivo);
 
@@ -92,24 +92,11 @@ namespace NFe.Service
                                     " Série: " + txtClass.Serie.ToString("000") +
                                     " - ChaveNFe: " + txtClass.ChaveNFe;
 
-                            if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()))
-                            {
-                                ///
-                                /// move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
-                                /// ou
-                                /// move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
-                                ///
-                                string vvNomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
-                                Functions.Move(txtClass.XMLFileName, vvNomeArquivoDestino);
-                            }
-                            else
-                            {
-                                ///
-                                /// se a pasta de origem é a de validação, move o arquivo convertido para a pasta de retorno
-                                /// 
-                                // string vvNomeArquivoDestino = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(oArquivo.Name));
-                                // Functions.Move(txtClass.XMLFileName, vvNomeArquivoDestino);
-                            }
+                            // move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
+                            // ou
+                            // move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
+                            string nomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
+                            Functions.Move(txtClass.XMLFileName, nomeArquivoDestino);
                         }
                     }
                 }

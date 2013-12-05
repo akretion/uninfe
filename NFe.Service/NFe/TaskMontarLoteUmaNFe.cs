@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -17,6 +16,11 @@ namespace NFe.Service
     /// </summary>
     public class TaskMontarLoteUmaNFe : TaskAbst
     {
+        public TaskMontarLoteUmaNFe()
+        {
+            Servico = Servicos.MontarLoteUmaNFe;
+        }
+
         public override void Execute()
         {
             try
@@ -41,11 +45,6 @@ namespace NFe.Service
                         //Gerar lote
                         this.NomeArquivoXML = arquivoAssinado;
                         this.LoteNfe(arquivoAssinado);
-
-                        //Definir o tipo do serviço
-                        //Type tipoServico = this.GetType();
-                        //tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, this, new object[] { arquivoAssinado });
-                        //tipoServico.InvokeMember("LoteNfe", System.Reflection.BindingFlags.InvokeMethod, null, this, new object[] { arquivoAssinado });
                     }
                 }
                 catch (IOException ex)
@@ -57,25 +56,18 @@ namespace NFe.Service
                     cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
 
-                ///
-                /// danasa 9-2009
-                /// 
                 if (!string.IsNullOrEmpty(cError))
                 {
                     try
                     {
-                        ///
-                        /// grava o arquivo de erro
-                        /// 
+                        // grava o arquivo de erro
                         oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(arquivoAssinado) + ".err", cError);
-                        ///
-                        /// move o arquivo para a pasta de erro
-                        /// 
+                        // move o arquivo para a pasta de erro
                         oAux.MoveArqErro(arquivoAssinado);
                     }
                     catch
                     {
-                        //A principio não vou fazer nada Wandrey 24/04/2011
+                        // A principio não vou fazer nada Wandrey 24/04/2011
                     }
                 }
             }

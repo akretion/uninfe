@@ -154,6 +154,8 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                         {
                             case "cancelarnfse":
                                 srv = Servicos.CancelarNfse; break;
+                            case "CteRecepcaoEvento":
+                                srv = Servicos.RecepcaoEventoCTe; break;
                             case "consultarloterps":
                                 srv = Servicos.ConsultarLoteRps; break;
                             case "consultarnfse":
@@ -164,13 +166,12 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.ConsultarSituacaoLoteRps;break;
                             case "recepcionarloterps":
                                 srv = Servicos.RecepcionarLoteRps; break;
-
-                            case "nfecancelamento":
-                                srv = Servicos.CancelarNFe; break;
-                            case "nfecancelamentoevento":
-                                srv = Servicos.EnviarEventoCancelamento; break;
-                            case "nfecce":
+                            case "recepcaoevento":
+                                srv = Servicos.RecepcaoEvento; break;
+                            case "enviarcce":
                                 srv = Servicos.EnviarCCe; break;
+                            case "enviareventocancelamento":
+                                srv = Servicos.EnviarEventoCancelamento; break;
                             case "nfeconsulta1":
                             case "nfeconsulta":
                                 srv = Servicos.PedidoConsultaSituacaoNFe; break;
@@ -195,7 +196,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                             case "nferegistrodesaidacancelamento":
                                 srv = Servicos.RegistroDeSaidaCancelamento; break;
                             case "nfestatusservico":
-                                srv = Servicos.PedidoConsultaStatusServicoNFe; break;
+                                srv = Servicos.ConsultaStatusServicoNFe; break;
                         }
 
                         if (srv == Servicos.Nulo)

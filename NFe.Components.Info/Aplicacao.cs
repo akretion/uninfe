@@ -38,7 +38,7 @@ namespace NFe.Components.Info
 
             oDigCert.PrepInfCertificado(Empresa.Configuracoes[emp].X509Certificado);
 
-            if(oDigCert.lLocalizouCertificado == true)
+            if (oDigCert.lLocalizouCertificado == true)
             {
                 sSubject = oDigCert.sSubject;
                 sValIni = oDigCert.dValidadeInicial.ToString();
@@ -57,18 +57,15 @@ namespace NFe.Components.Info
             URLws item;
             string tipo;
 
-            if(Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                 dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfe.exe")).ToString("dd/MM/yyyy HH:mm:ss");
             else
-                if(Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                    dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "unincte.exe")).ToString("dd/MM/yyyy HH:mm:ss");
-                else
-                    dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfes.exe")).ToString("dd/MM/yyyy HH:mm:ss");
+                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfse.exe")).ToString("dd/MM/yyyy HH:mm:ss");
 
             //Gravar o XML com as informações do aplicativo
             try
             {
-                if(Path.GetExtension(sArquivo).ToLower() == ".txt")
+                if (Path.GetExtension(sArquivo).ToLower() == ".txt")
                 {
                     StringBuilder aTXT = new StringBuilder();
                     aTXT.AppendLine("cStat|" + cStat);
@@ -119,13 +116,13 @@ namespace NFe.Components.Info
                     ///
                     /// o ERP poderá verificar se determinado servico está definido no UniNFe
                     /// 
-                    foreach(webServices list in WebServiceProxy.webServicesList)
+                    foreach (webServices list in WebServiceProxy.webServicesList)
                     {
-                        if(list.ID == Empresa.Configuracoes[emp].UFCod ||
+                        if (list.ID == Empresa.Configuracoes[emp].UFCod ||
                             list.UF == "DPEC" ||
                             list.UF == "SCAN")
                         {
-                            if(Empresa.Configuracoes[emp].tpAmb == 2)
+                            if (Empresa.Configuracoes[emp].tpAmb == 2)
                             {
                                 tipo = list.UF + ".Homologacao.";
                                 item = list.LocalHomologacao;
@@ -136,7 +133,7 @@ namespace NFe.Components.Info
                                 item = list.LocalProducao;
                             }
 
-                            switch(Propriedade.TipoAplicativo)
+                            switch (Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfse:
                                     aTXT.AppendLine(tipo + "CancelarNFse|" + (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
@@ -149,16 +146,11 @@ namespace NFe.Components.Info
                                     break;
 
                                 case TipoAplicativo.Nfe:
-                                    if(string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
-
                                     aTXT.AppendLine(tipo + "NFeRecepcao|" + (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
                                     aTXT.AppendLine(tipo + "NFeConsulta|" + (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
-                                    if(list.UF != "DPEC")
+                                    if (list.UF != "DPEC")
                                     {
-                                        aTXT.AppendLine(tipo + "NFeCancelamento|" + (!string.IsNullOrEmpty(item.NFeCancelamento)).ToString());
-                                        aTXT.AppendLine(tipo + "NFeCancelamentoEvento|" + (!string.IsNullOrEmpty(item.NFeCancelamentoEvento)).ToString());
-                                        aTXT.AppendLine(tipo + "NFeCCe|" + (!string.IsNullOrEmpty(item.NFeCCe)).ToString());
-                                        aTXT.AppendLine(tipo + "NFeConsulta1|" + (!string.IsNullOrEmpty(item.NFeConsulta1)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeRecepcaoEvento|" + (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
                                         aTXT.AppendLine(tipo + "NFeConsultaCadastro|" + (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
                                         aTXT.AppendLine(tipo + "NFeConsultaNFeDest|" + (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
                                         aTXT.AppendLine(tipo + "NFeDownload|" + (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
@@ -172,6 +164,10 @@ namespace NFe.Components.Info
                                         aTXT.AppendLine(tipo + "MDFeConsulta|" + (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
                                         aTXT.AppendLine(tipo + "MDFeStatusServico|" + (!string.IsNullOrEmpty(item.MDFeStatusServico)).ToString());
                                         aTXT.AppendLine(tipo + "MDFeRecepcaoEvento|" + (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
+                                        aTXT.AppendLine(tipo + "CTeRecepcaoEvento|" + (!string.IsNullOrEmpty(item.CTeRecepcaoEvento)).ToString());
+                                        aTXT.AppendLine(tipo + "CTeConsultaCadastro|" + (!string.IsNullOrEmpty(item.CTeConsultaCadastro)).ToString());
+                                        aTXT.AppendLine(tipo + "CTeInutilizacao|" + (!string.IsNullOrEmpty(item.CTeInutilizacao)).ToString());
+                                        aTXT.AppendLine(tipo + "CTeStatusServico|" + (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
                                     }
                                     break;
                             }
@@ -255,14 +251,14 @@ namespace NFe.Components.Info
                     ///
                     /// o ERP poderá verificar se determinado servico está definido no UniNFe
                     /// 
-                    foreach(webServices list in WebServiceProxy.webServicesList)
+                    foreach (webServices list in WebServiceProxy.webServicesList)
                     {
-                        if(list.ID == Empresa.Configuracoes[emp].UFCod ||
+                        if (list.ID == Empresa.Configuracoes[emp].UFCod ||
                             list.UF == "DPEC" ||
                             list.UF == "SCAN")
                         {
                             oXmlGravar.WriteStartElement(list.UF);
-                            if(Empresa.Configuracoes[emp].tpAmb == 2)
+                            if (Empresa.Configuracoes[emp].tpAmb == 2)
                             {
                                 item = list.LocalHomologacao;
                                 oXmlGravar.WriteStartElement("Homologacao");
@@ -272,7 +268,7 @@ namespace NFe.Components.Info
                                 item = list.LocalProducao;
                                 oXmlGravar.WriteStartElement("Producao");
                             }
-                            switch(Propriedade.TipoAplicativo)
+                            switch (Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfse:
                                     oXmlGravar.WriteElementString("CancelarNFse", (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
@@ -285,16 +281,11 @@ namespace NFe.Components.Info
                                     break;
 
                                 case TipoAplicativo.Nfe:
-                                    if(string.IsNullOrEmpty(item.NFeCancelamentoEvento)) item.NFeCancelamentoEvento = item.NFeCCe;
-
                                     oXmlGravar.WriteElementString("NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
                                     oXmlGravar.WriteElementString("NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
-                                    if(list.UF != "DPEC")
+                                    if (list.UF != "DPEC")
                                     {
-                                        oXmlGravar.WriteElementString("NFeCancelamento", (!string.IsNullOrEmpty(item.NFeCancelamento)).ToString());
-                                        oXmlGravar.WriteElementString("NFeCancelamentoEvento", (!string.IsNullOrEmpty(item.NFeCancelamentoEvento)).ToString());
-                                        oXmlGravar.WriteElementString("NFeCCe", (!string.IsNullOrEmpty(item.NFeCCe)).ToString());
-                                        oXmlGravar.WriteElementString("NFeConsulta1", (!string.IsNullOrEmpty(item.NFeConsulta1)).ToString());
+                                        oXmlGravar.WriteElementString("NFeRecepcaoEvento", (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
                                         oXmlGravar.WriteElementString("NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
                                         oXmlGravar.WriteElementString("NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
                                         oXmlGravar.WriteElementString("NFeDownload", (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
@@ -308,6 +299,10 @@ namespace NFe.Components.Info
                                         oXmlGravar.WriteElementString("MDFeConsulta", (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
                                         oXmlGravar.WriteElementString("MDFeStatusServico", (!string.IsNullOrEmpty(item.MDFeStatusServico)).ToString());
                                         oXmlGravar.WriteElementString("MDFeRecepcaoEvento", (!string.IsNullOrEmpty(item.MDFeRecepcaoEvento)).ToString());
+                                        oXmlGravar.WriteElementString("CTeRecepcaoEvento", (!string.IsNullOrEmpty(item.CTeRecepcaoEvento)).ToString());
+                                        oXmlGravar.WriteElementString("CTeConsultaCadastro", (!string.IsNullOrEmpty(item.CTeConsultaCadastro)).ToString());
+                                        oXmlGravar.WriteElementString("CTeInutilizacao", (!string.IsNullOrEmpty(item.CTeInutilizacao)).ToString());
+                                        oXmlGravar.WriteElementString("CTeStatusServico", (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
                                     }
                                     break;
                             }
@@ -324,7 +319,7 @@ namespace NFe.Components.Info
                     oXmlGravar.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ///
                 /// danasa 8-2009
@@ -361,7 +356,7 @@ namespace NFe.Components.Info
                  * 03/06/2013
                  */
                 string podeExecutar = Empresa.CanRun();
-                if(!String.IsNullOrEmpty(podeExecutar))
+                if (!String.IsNullOrEmpty(podeExecutar))
                     return true;
 
                 // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
@@ -372,22 +367,22 @@ namespace NFe.Components.Info
                 //danasa 22/7/2011
                 //se chamadaPeloUniNFe=false, é porque está sendo executado pelo servico
                 //se chamadaPeloUniNFe=true, é porque está sendo executado pelo 'uninfe.exe'
-                if(chamadaPeloUniNFe)
+                if (chamadaPeloUniNFe)
                 {
                     Empresa oEmpresa = null;
 
-                    if(Empresa.Configuracoes.Count > 0)
+                    if (Empresa.Configuracoes.Count > 0)
                     {
                         oEmpresa = Empresa.Configuracoes[0];
 
                         //Pegar a pasta de envio, se já tiver algum UniNFe configurado para uma determinada pasta de envio os demais não podem
-                        if(oEmpresa.PastaEnvio != "")
+                        if (oEmpresa.PastaEnvio != "")
                         {
                             nomePastaEnvio = oEmpresa.PastaEnvio;
 
                             //Tirar a unidade e os dois pontos do nome da pasta
                             int iPos = nomePastaEnvio.IndexOf(':') + 1;
-                            if(iPos >= 0)
+                            if (iPos >= 0)
                             {
                                 nomePastaEnvio = nomePastaEnvio.Substring(iPos, nomePastaEnvio.Length - iPos);
                             }
@@ -407,12 +402,12 @@ namespace NFe.Components.Info
                     {
                         oneMutex = System.Threading.Mutex.OpenExisting(nomeMutex);
                     }
-                    catch(System.Threading.WaitHandleCannotBeOpenedException)
+                    catch (System.Threading.WaitHandleCannotBeOpenedException)
                     {
 
                     }
 
-                    if(oneMutex == null)
+                    if (oneMutex == null)
                     {
                         oneMutex = new System.Threading.Mutex(false, nomeMutex);
                         oOneMutex = oneMutex;
@@ -432,7 +427,7 @@ namespace NFe.Components.Info
                 //ainda, ou seja, é a primeira vez que estamos entrando no aplicativo
             }
 
-            if(executando && chamadaPeloUniNFe)//danasa 22/7/2011
+            if (executando && chamadaPeloUniNFe)//danasa 22/7/2011
             {
                 MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada com a seguinte pasta de envio configurada: \r\n\r\n" +
                                 "Pasta Envio: " + nomePastaEnvioDemo + "\r\n\r\n" +
@@ -462,7 +457,7 @@ namespace NFe.Components.Info
              * 03/06/2013
              */
             string podeExecutar = Empresa.CanRun();
-            if(!String.IsNullOrEmpty(podeExecutar))
+            if (!String.IsNullOrEmpty(podeExecutar))
                 return true;
 
             // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
@@ -473,16 +468,16 @@ namespace NFe.Components.Info
             bool executando = false;
 
             string procName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-            if(System.Diagnostics.Process.GetProcessesByName(procName).Length > 1)
+            if (System.Diagnostics.Process.GetProcessesByName(procName).Length > 1)
             {
                 executando = true;
             }
 
-            if(!silencioso)
+            if (!silencioso)
             {
-                if(executando)
+                if (executando)
                     MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else if(Empresa.ExisteErroDiretorio)
+                else if (Empresa.ExisteErroDiretorio)
                     System.Windows.Forms.MessageBox.Show("Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
                                     "Por favor entre na tela de configurações da(s) empresa(s) listada(s) abaixo na aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresa.ErroCaminhoDiretorio, "Atenção", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }

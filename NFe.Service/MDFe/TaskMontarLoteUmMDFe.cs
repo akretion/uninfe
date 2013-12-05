@@ -12,16 +12,20 @@ using NFe.Exceptions;
 namespace NFe.Service
 {
     /// <summary>
-    /// Executar as tarefas pertinentes a assinatura e montagem do lote de um único MDFe
+    /// Executar as tarefas pertinentes a assinatura e montagem do lote de uma única nota fiscal eletrônica
     /// </summary>
     public class TaskMontarLoteUmMDFe : TaskAbst
     {
+        public TaskMontarLoteUmMDFe()
+        {
+            Servico = Servicos.MontarLoteUmMDFe;
+        }
+
         public override void Execute()
         {
             try
             {
                 int emp = Functions.FindEmpresaByThread();
-                //AssinarValidarNFe(this, this.NomeArquivoXML, Empresa.Configuracoes[emp].PastaEnvio);
                 this.AssinarValidarXMLNFe(Empresa.Configuracoes[emp].PastaEnvio);
 
                 //Definir o nome do arquivo assinado
@@ -34,7 +38,7 @@ namespace NFe.Service
                 string cError = "";
                 try
                 {
-                    DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoAssinado);
+                    DadosNFeClass oDadosNfe = LerXMLNFe(arquivoAssinado);
                     if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                     {
                         //Gerar lote
@@ -51,30 +55,22 @@ namespace NFe.Service
                     cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
 
-                ///
-                /// danasa 9-2009
-                /// 
                 if (!string.IsNullOrEmpty(cError))
                 {
                     try
                     {
-                        ///
-                        /// grava o arquivo de erro
-                        /// 
+                        // grava o arquivo de erro
                         oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(arquivoAssinado) + ".err", cError);
-                        ///
-                        /// move o arquivo para a pasta de erro
-                        /// 
+                        // move o arquivo para a pasta de erro
                         oAux.MoveArqErro(arquivoAssinado);
                     }
                     catch
                     {
-                        //A principio não vou fazer nada Wandrey 24/04/2011
+                        // A principio não vou fazer nada Wandrey 24/04/2011
                     }
                 }
             }
             catch { }
         }
-
     }
 }

@@ -327,7 +327,7 @@ namespace NFe.Components
             //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
             //Wandrey 31/03/2010
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-
+            
             //Definir a descrição completa do servido (WSDL)
             //this.serviceDescription = ServiceDescription.Read(stream);
             this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
@@ -392,8 +392,8 @@ namespace NFe.Components
             importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties;
             #endregion
 
-            #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA preciso importar os schemas do WSDL
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.DUETO || PadraoNFSe == PadroesNFSe.WEBISS || PadraoNFSe == PadroesNFSe.SALVADOR_BA))
+            #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.DUETO || PadraoNFSe == PadroesNFSe.WEBISS || PadraoNFSe == PadroesNFSe.SALVADOR_BA || PadraoNFSe == PadroesNFSe.GIF || PadraoNFSe == PadroesNFSe.PRONIN))
             {
                 //Tive que utilizar a WebClient para que a OpenRead funcionasse, não foi possível fazer funcionar com a SecureWebClient. Tem que analisar melhor. Wandrey e Renan 10/09/2013
                 WebClient client = new WebClient();
@@ -648,33 +648,6 @@ namespace NFe.Components
                                 {
                                     appPath = "";
                                 }
-
-                                /*******
-                                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-                                {
-                                    //antes:  wsdl\homologacao\HAMNfeRecepcao2.wsdl
-                                    //depois: wsdl\homologacao\UF\HAMNfeRecepcao2.wsdl
-                                    //
-                                    // até que todas as entradas no arquivo WebService.xml sejam atualizadas, adicionaremos o estado ao caminho do arquivo
-                                    if (!File.Exists(appPath))
-                                    {
-                                        string folder = uf;
-                                        string tempFilename = Path.GetFileName(appPath);
-                                        if (tempFilename.StartsWith("HSVRS") || tempFilename.StartsWith("PSVRS") || uf.Equals("SVRS"))
-                                            folder = "SVRS";
-                                        else
-                                            if (tempFilename.StartsWith("HSVAN") || tempFilename.StartsWith("PSVAN") || uf.Equals("SVAN"))
-                                                folder = "SVAN";
-                                            else
-                                                if (tempFilename.StartsWith("HSCAN") || tempFilename.StartsWith("PSCAN") || uf.Equals("SCAN"))
-                                                    folder = "SCAN";
-                                                else
-                                                    if (tempFilename.StartsWith("HDPEC") || tempFilename.StartsWith("PDPEC") || uf.Equals("DPEC"))
-                                                        folder = "DPEC";
-
-                                        appPath = Path.GetDirectoryName(appPath) + "\\" + folder + "\\" + tempFilename;
-                                    }
-                                }*******/
                             }
                         }
                         else
@@ -687,8 +660,6 @@ namespace NFe.Components
                     }
                     else
                     {
-                        //System.Windows.Forms.MessageBox.Show(urlList[i].ChildNodes[j].Name +"\r\n"+AppPath + urlList[i].ChildNodes[j].InnerText);
-
                         Console.WriteLine("wsItem <" + urlList[i].ChildNodes[j].Name + "> nao encontrada na classe URLws");
                     }
                 }
@@ -736,33 +707,37 @@ namespace NFe.Components
     {
         public URLws()
         {
-            this.CancelarNfse =
-                this.ConsultarLoteRps =
-                this.ConsultarNfse =
-                this.ConsultarNfsePorRps =
-                this.ConsultarSituacaoLoteRps =
-                this.NFeCancelamento =
-                this.NFeCancelamentoEvento =
-                this.NFeCCe =
-                this.NFeConsulta =
-                this.NFeConsulta1 =
-                this.NFeConsultaCadastro =
-                this.NFeConsultaNFeDest =
-                this.NFeDownload =
-                this.NFeInutilizacao =
-                this.NFeManifDest =
-                this.NFeRecepcao =
-                this.NFeRetRecepcao =
-                this.NFeStatusServico =
-                this.NFeRegistroDeSaida =
-                this.NFeRegistroDeSaidaCancelamento =
-                this.ConsultarURLNfse =
-                this.RecepcionarLoteRps =
-                this.MDFeRecepcao =
-                this.MDFeRetRecepcao =
-                this.MDFeConsulta =
-                this.MDFeStatusServico =
-                this.MDFeRecepcaoEvento = string.Empty;
+            CancelarNfse =
+            ConsultarLoteRps =
+            ConsultarNfse =
+            ConsultarNfsePorRps =
+            ConsultarSituacaoLoteRps =
+            NFeRecepcaoEvento =
+            NFeConsulta =
+            NFeConsultaCadastro =
+            NFeConsultaNFeDest =
+            NFeDownload =
+            NFeInutilizacao =
+            NFeManifDest =
+            NFeRecepcao =
+            NFeRetRecepcao =
+            NFeStatusServico =
+            NFeRegistroDeSaida =
+            NFeRegistroDeSaidaCancelamento =
+            ConsultarURLNfse =
+            RecepcionarLoteRps =
+            MDFeRecepcao =
+            MDFeRetRecepcao =
+            MDFeConsulta =
+            MDFeStatusServico =
+            MDFeRecepcaoEvento =
+            CTeRecepcao =
+            CTeRetRecepcao =
+            CTeInutilizacao =
+            CTeConsulta =
+            CTeStatusServico =
+            CTeRecepcaoEvento =
+            CTeConsultaCadastro = string.Empty;
         }
 
         #region Propriedades referente as tags do webservice.xml
@@ -770,23 +745,17 @@ namespace NFe.Components
         // os nomes das propriedades tem que ser iguais as tags no WebService.xml
         // ******** ATENÇÃO *******
 
-        #region NFe e CTe
+        #region NFe
         public string NFeRecepcao { get; set; }
         public string NFeRetRecepcao { get; set; }
-        public string NFeCancelamento { get; set; }
-        public string NFeCancelamentoEvento { get; set; }
         public string NFeInutilizacao { get; set; }
-        /// <summary>
-        /// Consulta da Situação da NFe versão 2.0
-        /// </summary>
         public string NFeConsulta { get; set; }
-        /// <summary>
-        /// Consulta Situação da NFe na versão 1.10
-        /// </summary>
-        public string NFeConsulta1 { get; set; }
         public string NFeStatusServico { get; set; }
         public string NFeConsultaCadastro { get; set; }
-        public string NFeCCe { get; set; }
+        /// <summary>
+        /// Recepção de eventos da NFe
+        /// </summary>
+        public string NFeRecepcaoEvento { get; set; }
         public string NFeDownload { get; set; }
         public string NFeConsultaNFeDest { get; set; }
         public string NFeManifDest { get; set; }
@@ -846,6 +815,37 @@ namespace NFe.Components
         /// Recepcao dos eventos do MDF-e
         /// </summary>
         public string MDFeRecepcaoEvento { get; set; }
+        #endregion
+
+        #region CTe
+        /// <summary>
+        /// Recepção do CTe
+        /// </summary>
+        public string CTeRecepcao { get; set; }
+        /// <summary>
+        /// Consulta recibo do lote de CTe enviado
+        /// </summary>
+        public string CTeRetRecepcao { get; set; }
+        /// <summary>
+        /// Inutilização numeração do CTe
+        /// </summary>
+        public string CTeInutilizacao { get; set; }
+        /// <summary>
+        /// Consulta Situação do CTe
+        /// </summary>
+        public string CTeConsulta { get; set; }
+        /// <summary>
+        /// Consulta Status Serviço do CTe
+        /// </summary>
+        public string CTeStatusServico { get; set; }
+        /// <summary>
+        /// Consulta cadastro do contribuinte do CTe
+        /// </summary>
+        public string CTeConsultaCadastro { get; set; }
+        /// <summary>
+        /// Recepção de eventos do CTe
+        /// </summary>
+        public string CTeRecepcaoEvento { get; set; }
         #endregion
 
         #endregion

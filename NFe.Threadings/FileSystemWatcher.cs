@@ -82,6 +82,9 @@ namespace NFe.Threadings
                                 //Definir o nome do arquivo na pasta temp
                                 string arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
 
+                                //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
+                                NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
+
                                 //Mover o arquivo para pasta temp e disparar o serviço a ser executado
                                 Functions.Move(fi.FullName, arqTemp);
 

@@ -427,49 +427,6 @@ namespace NFe.Service
     }
     #endregion
 
-    #region Classe com os dados do XML da consulta do pedido de cancelamento
-    /// <summary>
-    /// Classe com os dados do XML da consulta do pedido de cancelamento
-    /// </summary>
-    public class DadosPedCanc
-    {
-        private string mchNFe;
-
-        public int tpAmb { get; set; }
-        public int tpEmis { get; set; }
-        public int cUF { get; private set; }
-        public string chNFe
-        {
-            get
-            {
-                return this.mchNFe;
-            }
-            set
-            {
-                this.mchNFe = value;
-                string serie = this.mchNFe.Substring(22, 3);
-
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                {
-                    tpEmis = Convert.ToInt32(this.mchNFe.Substring(34, 1));
-                }
-                else
-                    this.tpEmis = (Convert.ToInt32(serie) >= 900 ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
-
-                this.cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
-            }
-        }
-        public string nProt { get; set; }
-        public string xJust { get; set; }
-
-        public DadosPedCanc(int emp)
-        {
-            //int emp = Functions.FindEmpresaByThread();
-            this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-        }
-    }
-    #endregion
-
     #region Classe com os dados do XML do pedido de inutilização de números de NF
     /// <summary>
     /// Classe com os dados do XML do pedido de inutilização de números de NF
@@ -535,12 +492,7 @@ namespace NFe.Service
                 {
                     this.cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
                     int serie = Convert.ToInt32(this.mchNFe.Substring(22, 3));
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                    {
-                        tpEmis = Convert.ToInt32(this.mchNFe.Substring(34, 1));
-                    }
-                    else
-                        this.tpEmis = (serie >= 900 ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
+                    this.tpEmis = (serie >= 900 ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
                 }
             }
         }
@@ -561,8 +513,7 @@ namespace NFe.Service
         public DadosPedSit()
         {
             this.cUF = 0;
-            //this.serie = string.Empty;
-            this.tpEmis = Propriedade.TipoEmissao.teNormal;// ConfiguracaoApp.tpEmis;
+            this.tpEmis = Propriedade.TipoEmissao.teNormal;
         }
     }
     #endregion
@@ -672,6 +623,13 @@ namespace NFe.Service
             verEvento = "1.00";
             versao = "1.00";
             tpEvento = "110110";
+        }
+
+        public Evento(string ptpEvento)
+        {
+            verEvento = "2.00";
+            versao = "2.00";
+            tpEvento = ptpEvento;
         }
     }
 

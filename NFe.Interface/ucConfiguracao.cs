@@ -1,37 +1,33 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Security.Cryptography.X509Certificates;
-using NFe.Settings;
-using NFe.Components;
 using NFe.Certificado;
+using NFe.Components;
+using NFe.Settings;
 
 namespace NFe.Interface
 {
-    public partial class ucConfiguracao: UserControl
+    public partial class ucConfiguracao : UserControl
     {
         private X509Certificate2 oMeuCert;
         private UpdateText updateText;
         private string cnpjCurrent;
+        private TipoAplicativo servicoCurrent;
+        private ArrayList arrServico = new ArrayList();
 
         public ucConfiguracao(UpdateText updateText)
         {
             InitializeComponent();
 
-            if(Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-            {
-                label17.Text = "Pasta onde deve ser gravado o XML da NFe para a impressão do DACTe a partir do DANFeMon:";
-                this.tabPageDanfe.Text = "DACTE";
-
-            }
-            if(Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
             {
                 ///danasa 1-2012
                 this.tabControl3.TabPages.Remove(this.tabPageDanfe);
@@ -50,6 +46,8 @@ namespace NFe.Interface
                 textBox_PastaDownload.Visible =
                 button_SelecionarPastaDownload.Visible = Propriedade.TipoAplicativo == TipoAplicativo.Nfe;
             this.updateText = updateText;
+            cnpjCurrent = "";
+            servicoCurrent = TipoAplicativo.Nulo;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -63,8 +61,8 @@ namespace NFe.Interface
 
         public void focusNome()
         {
-            if(this.edtNome.Enabled)
-                if(string.IsNullOrEmpty(edtNome.Text))
+            if (this.edtNome.Enabled)
+                if (string.IsNullOrEmpty(edtNome.Text))
                 {
                     this.tabControl3.SelectedIndex = 0;
                     this.edtNome.Focus();
@@ -80,7 +78,7 @@ namespace NFe.Interface
         /// <returns></returns>
         private string CopiaPastaDeEmpresa(string origemCNPJ, string origemPasta, Empresa oEmpresa)
         {
-            if(string.IsNullOrEmpty(origemPasta))
+            if (string.IsNullOrEmpty(origemPasta))
                 return "";
 
             ///
@@ -88,7 +86,7 @@ namespace NFe.Interface
             ///
             string newPasta = origemPasta.Replace(origemCNPJ.Trim(), oEmpresa.CNPJ.Trim());
 
-            if(origemPasta.ToLower() == newPasta.ToLower())
+            if (origemPasta.ToLower() == newPasta.ToLower())
             {
                 int lastBackSlash = ConfiguracaoApp.RemoveEndSlash(origemPasta).LastIndexOf("\\");
                 newPasta = origemPasta.Insert(lastBackSlash, "\\" + oEmpresa.CNPJ);
@@ -104,22 +102,12 @@ namespace NFe.Interface
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 29/07/2010
         /// </remarks>
-        public void PopulateConfEmpresa(string cnpj)
+        public void PopulateConfEmpresa(string cnpj, TipoAplicativo servico)
         {
             #region Definir um texto explicativo sobre a impressão do DANFE. Wandrey 02/02/2010
-            if(Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-            {
-                tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DACTE através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
-                                   "\r\n\r\n" +
-                                   "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
-                label18.Text = "XML´s a serem copiados na pasta para impressão do DACTE a partir do DANFeMon:";
-            }
-            else
-            {
-                tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do DANFE através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
-                    "\r\n\r\n" +
-                    "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
-            }
+            tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do documento fiscal eletrônicoatravés do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
+                "\r\n\r\n" +
+                "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
             #endregion
 
             #region Montar Array DropList da UF
@@ -129,7 +117,7 @@ namespace NFe.Interface
             {
                 arrUF = Functions.CarregaUF();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -140,10 +128,8 @@ namespace NFe.Interface
             #endregion
 
             #region Montar Array DropList do Ambiente
-            //
-            // danasa 8-2009
+
             // atribuido "TipoEmbiente"
-            //
             ArrayList arrAmb = new ArrayList();
             arrAmb.Add(new ComboElem("Produção", Propriedade.TipoAmbiente.taProducao));
             arrAmb.Add(new ComboElem("Homologação", Propriedade.TipoAmbiente.taHomologacao));
@@ -153,32 +139,32 @@ namespace NFe.Interface
             comboBox_Ambiente.ValueMember = "codigo";
             #endregion
 
+            #region Montar array DropList dos tipos de serviços
+            arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
+            arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
+            arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
+            arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
+
+            cbServico.DataSource = arrServico;
+            cbServico.DisplayMember = "valor";
+            cbServico.ValueMember = "codigo";
+            #endregion
+
             #region Montar Array DropList do Tipo de Emissão da NF-e
             ArrayList arrTpEmis = new ArrayList();
             ArrayList.Synchronized(arrTpEmis);
-            //
-            // danasa 8-2009
-            // danasa 9-2009
+
             // atribuido "TipoEmissao.
-            //
             arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teNormal], Propriedade.TipoEmissao.teNormal));
 
-            if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
-                if(Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-                {
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia], Propriedade.TipoEmissao.teContingencia));
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN], Propriedade.TipoEmissao.teSCAN));
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC], Propriedade.TipoEmissao.teDPEC));
-                }
-
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia], Propriedade.TipoEmissao.teContingencia));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN], Propriedade.TipoEmissao.teSCAN));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC], Propriedade.TipoEmissao.teDPEC));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teFSDA], Propriedade.TipoEmissao.teFSDA));
-
-                if(Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                {
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS], Propriedade.TipoEmissao.teSVCRS));
-                    arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP], Propriedade.TipoEmissao.teSVCSP));
-                }
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS], Propriedade.TipoEmissao.teSVCRS));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP], Propriedade.TipoEmissao.teSVCSP));
             }
 
             comboBox_tpEmis.DataSource = arrTpEmis;
@@ -191,10 +177,10 @@ namespace NFe.Interface
             textBox_dadoscertificado.Height = 287;
             textBox_dadoscertificado.Refresh();
 
-            if(Empresa.Configuracoes.Count > 0)
+            if (Empresa.Configuracoes.Count > 0 && !string.IsNullOrEmpty(cnpj))
             {
-                oEmpresa = Empresa.FindConfEmpresa(cnpj.Trim());
-                if(oEmpresa != null)
+                oEmpresa = Empresa.FindConfEmpresa(cnpj.Trim(), servico);
+                if (oEmpresa != null)
                 {
                     ///
                     /// danasa 20-9-2010
@@ -202,14 +188,14 @@ namespace NFe.Interface
                     /// já que na segunda vez os nomes das pastas já estão atribuidas
                     //oEmpresa.CriaPastasAutomaticamente = false;
 
-                    if(string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                    if (string.IsNullOrEmpty(oEmpresa.PastaEnvio))
                     {
                         ///
                         /// tenta achar uma configuracao valida
                         /// 
-                        foreach(Empresa empresa in Empresa.Configuracoes)
+                        foreach (Empresa empresa in Empresa.Configuracoes)
                         {
-                            if(empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaEnvio))
+                            if (empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaEnvio))
                             {
                                 oEmpresa.PastaEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvio, oEmpresa);
                                 oEmpresa.PastaRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaRetorno, oEmpresa);
@@ -237,7 +223,7 @@ namespace NFe.Interface
                         ///
                         /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
                         /// 
-                        if(string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                        if (string.IsNullOrEmpty(oEmpresa.PastaEnvio))
                         {
                             oEmpresa.PastaEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Envio");
                             oEmpresa.PastaEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Enviado");
@@ -253,12 +239,13 @@ namespace NFe.Interface
 
                     edtNome.Text = oEmpresa.Nome;
                     edtCNPJ.Text = oEmpresa.CNPJ;
+                    cbServico.Text = AtribuirVlr_cbServico(oEmpresa.Servico);
                     oEmpresa.X509Certificado = Empresa.BuscaConfiguracaoCertificado(oEmpresa);
 
                     oMeuCert = oEmpresa.X509Certificado;
 
                     ckbCertificadoInstalado.Checked = oEmpresa.CertificadoInstalado;
-                    if(oEmpresa.CertificadoInstalado)
+                    if (oEmpresa.CertificadoInstalado)
                     {
                         DemonstraDadosCertificado();
                     }
@@ -268,10 +255,10 @@ namespace NFe.Interface
                         txtSenhaCertificado.Text = oEmpresa.CertificadoSenha;
                     }
 
-                    edtNome.Enabled = edtCNPJ.Enabled = false;
+                    edtNome.Enabled = edtCNPJ.Enabled = cbServico.Enabled = false;
                 }
             }
-            if(oEmpresa == null)
+            if (oEmpresa == null)
             {
                 oEmpresa = new Empresa();
                 oEmpresa.tpEmis = (int)Propriedade.TipoEmissao.teNormal;
@@ -280,6 +267,7 @@ namespace NFe.Interface
                 oEmpresa.DiretorioSalvarComo = "AM";
                 oEmpresa.CNPJ = "";
             }
+
             textBox_PastaEnvioXML.Text = oEmpresa.PastaEnvio;
             textBox_PastaRetornoXML.Text = oEmpresa.PastaRetorno;
             textBox_PastaEnviados.Text = oEmpresa.PastaEnviado;
@@ -317,12 +305,13 @@ namespace NFe.Interface
             txtSenhaWS.Text = oEmpresa.SenhaWS;
 
             cnpjCurrent = oEmpresa.CNPJ;
+            servicoCurrent = oEmpresa.Servico;
 
             //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
-            for(int i = 0; i < arrTpEmis.Count; i++)
+            for (int i = 0; i < arrTpEmis.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[i]).Codigo == oEmpresa.tpEmis)
+                if (((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[i]).Codigo == oEmpresa.tpEmis)
                 {
                     this.comboBox_tpEmis.Text = ((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[i]).Valor;
                     break;
@@ -331,9 +320,9 @@ namespace NFe.Interface
 
             //Carregar o conteúdo do droplist da Unidade Federativa (UF) para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
-            for(int i = 0; i < arrUF.Count; i++)
+            for (int i = 0; i < arrUF.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Codigo == oEmpresa.UFCod)
+                if (((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Codigo == oEmpresa.UFCod)
                 {
                     this.comboBox_UF.Text = ((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Nome;
                     break;
@@ -342,9 +331,9 @@ namespace NFe.Interface
 
             //Carregar o conteúdo do droplist do Ambiente para forçar demonstrar
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
-            for(int i = 0; i < arrAmb.Count; i++)
+            for (int i = 0; i < arrAmb.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Codigo == oEmpresa.tpAmb)
+                if (((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Codigo == oEmpresa.tpAmb)
                 {
                     this.comboBox_Ambiente.Text = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Valor;
                     break;
@@ -357,11 +346,28 @@ namespace NFe.Interface
             this.Modificado = false;
         }
 
+        private string AtribuirVlr_cbServico(TipoAplicativo servico)
+        {
+            string retorna = "";
+
+            for (int i = 0; i < arrServico.Count; i++)
+            {
+                if (((ComboElem)(new System.Collections.ArrayList(arrServico))[i]).Codigo == (int)servico)
+                {
+                    retorna = ((ComboElem)(new System.Collections.ArrayList(arrServico))[i]).Valor;
+                    break;
+                }
+            }
+
+            return retorna;
+        }
+
         private void HabilitaUsuarioSenhaWS(int ufCod)
         {
             bool visible = ufCod == 4101408 /*Apucarana*/ ||
                            ufCod == 3502804 /*Araçatuba*/||
-                           ufCod == 4104303 /*Campo Mourão*/;
+                           ufCod == 4104303 /*Campo Mourão*/||
+                           ufCod == 3537305 /*Penapolis*/;
 
             lblUsuarioWS.Visible = visible;
             lblSenhaWS.Visible = visible;
@@ -426,19 +432,21 @@ namespace NFe.Interface
 
             oEmpresa.UsuarioWS = txtUsuarioWS.Text;
             oEmpresa.SenhaWS = txtSenhaWS.Text;
+
+            oEmpresa.Servico = (TipoAplicativo)cbServico.SelectedValue;
         }
         #endregion
 
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
-            if(oMeuCert != null)
+            if (oMeuCert != null)
             {
                 DateTime hoje = DateTime.Now;
                 TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
                 string mensagemRestante;
 
-                if(dif.Days > 0)
+                if (dif.Days > 0)
                 {
                     mensagemRestante = "Faltam " + dif.Days + " dias para vencer o certificado.";
                 }
@@ -454,7 +462,7 @@ namespace NFe.Interface
             else
             {
                 // Comparação feita para demonstrar possiveis certificados A3 que podem não estar presentes ou detectados. Renan - 18/06/2013
-                if(string.IsNullOrEmpty(oEmpresa.Certificado))
+                if (string.IsNullOrEmpty(oEmpresa.Certificado))
                 {
                     textBox_dadoscertificado.Clear();
                 }
@@ -473,57 +481,82 @@ namespace NFe.Interface
         private void edtCNPJ_Leave(object sender, EventArgs e)
         {
             string cnpj = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
             string nome = edtNome.Text.ToString();
 
-            if(edtNome.Text.ToString().Length > 20)
+            if (edtNome.Text.ToString().Length > 20)
                 nome = edtNome.Text.Substring(0, 20);
 
-            if(string.IsNullOrEmpty(cnpj))
+            if (string.IsNullOrEmpty(cnpj))
             {
-                if(this.updateText != null)
+                if (this.updateText != null)
                     this.updateText("-- NOVA --");
             }
             else
             {
-                if(cnpjCurrent != cnpj)
+                if (cnpjCurrent != cnpj)
                 {
-                    if(!CNPJ.Validate(cnpj))
+                    if (!CNPJ.Validate(cnpj))
                     {
                         this.tabControl3.SelectedIndex = 0;
                         this.edtCNPJ.Focus();
                         MessageBox.Show("CNPJ inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    if(Empresa.FindConfEmpresa(cnpj) != null)
-                    {
-                        this.tabControl3.SelectedIndex = 0;
-                        this.edtCNPJ.Focus();
-                        MessageBox.Show("Empresa/CNPJ já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    this.Modificado = true;
+
                     bool mudaPastas = true;
-                    if(!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text))
+                    if (Empresa.FindConfEmpresa(cnpj, servico) != null)
+                    {
+                        MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
+                        {
+                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfe);
+                            servicoCurrent = servico = TipoAplicativo.Nfe;
+                            MudarPastas(cnpj, servicoCurrent);
+                            mudaPastas = false;
+                        }
+                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
+                        {
+                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Cte);
+                            servicoCurrent = servico = TipoAplicativo.Cte;
+                            MudarPastas(cnpj, servicoCurrent);
+                            mudaPastas = false;
+                        }
+                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
+                        {
+                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfse);
+                            servicoCurrent = servico = TipoAplicativo.Nfse;
+                            MudarPastas(cnpj, servicoCurrent);
+                            mudaPastas = false;
+                        }
+                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
+                        {
+                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.MDFe);
+                            servicoCurrent = servico = TipoAplicativo.MDFe;
+                            MudarPastas(cnpj, servicoCurrent);
+                            mudaPastas = false;
+                        }
+                        else
+                        {
+                            this.tabControl3.SelectedIndex = 0;
+                            this.edtCNPJ.Focus();
+
+                            return;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text) && mudaPastas)
                     {
                         mudaPastas = MessageBox.Show("CNPJ foi alterado e você já tem as pastas definidas. Deseja mudá-las para o novo CNPJ?", "CNPJ alterado", MessageBoxButtons.YesNo) == DialogResult.Yes;
                     }
-                    if(mudaPastas)
-                    {
-                        this.textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Envio");
-                        this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Enviado");
-                        this.textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Retorno");
-                        this.textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Erro");
-                        this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\EnvioEmLote");
-                        this.textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Validar");
-                        if(!string.IsNullOrEmpty(textBox_PastaDownload.Text))
-                            this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\DownloadNFe");
 
-                        if(!string.IsNullOrEmpty(textBox_PastaBackup.Text))
-                            textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + "\\Backup");
-                    }
+                    if (mudaPastas)
+                        MudarPastas(cnpj, servico);
                 }
+
                 cnpjCurrent = cnpj;
 
-                if(this.updateText != null)
+                if (this.updateText != null)
                     this.updateText(nome);
             }
         }
@@ -532,7 +565,7 @@ namespace NFe.Interface
         {
             TextBox control = null;
 
-            switch(Convert.ToInt16(((Button)sender).Tag))
+            switch (Convert.ToInt16(((Button)sender).Tag))
             {
                 case 0: control = textBox_PastaEnvioXML; break;
                 case 1: control = textBox_PastaLote; break;
@@ -547,7 +580,7 @@ namespace NFe.Interface
                 case 10: control = textBox_PastaDownload; break;
             }
             this.folderBrowserDialog1.SelectedPath = control.Text;
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 control.Text = this.folderBrowserDialog1.SelectedPath;
             }
@@ -557,11 +590,11 @@ namespace NFe.Interface
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
-            if(ckbCertificadoInstalado.Checked)
+            if (ckbCertificadoInstalado.Checked)
             {
                 CertificadoDigital oCertDig = new CertificadoDigital();
 
-                if(oCertDig.SelecionarCertificado() == true)
+                if (oCertDig.SelecionarCertificado() == true)
                 {
                     oMeuCert = oCertDig.oCertificado;
                     oEmpresa.Certificado = oMeuCert.Subject;
@@ -572,7 +605,7 @@ namespace NFe.Interface
             }
             else
             {
-                if(File.Exists(txtArquivoCertificado.Text))
+                if (File.Exists(txtArquivoCertificado.Text))
                 {
                     FileInfo arq = new FileInfo(txtArquivoCertificado.Text);
                     this.openFileDialog1.InitialDirectory = arq.DirectoryName;
@@ -584,7 +617,7 @@ namespace NFe.Interface
                     this.openFileDialog1.FileName = null;
                 }
 
-                if(openFileDialog1.ShowDialog() == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtArquivoCertificado.Text = this.openFileDialog1.FileName;
                 }
@@ -593,7 +626,7 @@ namespace NFe.Interface
 
         private bool dirNOTexiste(string pasta)
         {
-            if(string.IsNullOrEmpty(pasta)) return false;
+            if (string.IsNullOrEmpty(pasta)) return false;
             return !Directory.Exists(pasta);
         }
 
@@ -633,16 +666,16 @@ namespace NFe.Interface
             try
             {
                 ftp.Connect();
-                if(ftp.IsConnected)
+                if (ftp.IsConnected)
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
                     //ftp.UploadFile("c:\\usr\\usr.rar", this.edtFTP_PastaDestino.Text + "/testeA.rar", false);
 
-                    if(!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                    if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                     {
                         string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
-                        if(MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             ftp.makeDir(this.edtFTP_PastaDestino.Text);
                         }
@@ -651,11 +684,11 @@ namespace NFe.Interface
 
                     ftp.ChangeDir(vCurrente);
 
-                    if(!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
-                        if(!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
+                    if (!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
+                        if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
                         {
                             string error = "Pasta '" + this.edtFTP_PastaRetornos.Text + "' não existe no FTP.";
-                            if(MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaRetornos.Text);
                             }
@@ -666,13 +699,13 @@ namespace NFe.Interface
                     MessageBox.Show("FTP conectado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if(ftp.IsConnected)
+                if (ftp.IsConnected)
                     ftp.Disconnect();
 
                 Cursor = Cursors.Default;
@@ -692,7 +725,7 @@ namespace NFe.Interface
             textBox_dadoscertificado.Visible =
             ckbCertificadoInstalado.Checked;
 
-            if(!ckbCertificadoInstalado.Checked)
+            if (!ckbCertificadoInstalado.Checked)
             {
                 textBox_dadoscertificado.Text = "";
                 oMeuCert = null;
@@ -708,6 +741,62 @@ namespace NFe.Interface
                 txtSenhaCertificado.Location = new Point(6, 88);
                 txtSenhaCertificado.Refresh();
             }
+        }
+
+        private void cbServico_Leave(object sender, EventArgs e)
+        {
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
+
+            if (servico != servicoCurrent)
+            {
+                if (Empresa.FindConfEmpresa(cnpjCurrent, servico) != null)
+                {
+                    this.tabControl3.SelectedIndex = 0;
+                    this.cbServico.Focus();
+                    MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                bool mudaPastas = true;
+                if (!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text))
+                {
+                    mudaPastas = MessageBox.Show("Serviço foi alterado e você já tem as pastas definidas. Deseja mudá-las para o novo Serviço?", "Serviço alterado", MessageBoxButtons.YesNo) == DialogResult.Yes;
+                }
+
+                if (mudaPastas)
+                    MudarPastas(cnpjCurrent, servico);
+
+                servicoCurrent = servico;
+            }
+        }
+
+        private void MudarPastas(string cnpj, TipoAplicativo servico)
+        {
+            Modificado = true;
+
+            string subpasta = "";
+
+            switch (servico)
+            {
+                case TipoAplicativo.Nfe:
+                    break;
+                default:
+                    subpasta = "\\" + servico.ToString().ToLower();
+                    break;
+            }
+
+            this.textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Envio");
+            this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Enviado");
+            this.textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Retorno");
+            this.textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Erro");
+            this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\EnvioEmLote");
+            this.textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Validar");
+
+            if (!string.IsNullOrEmpty(textBox_PastaDownload.Text))
+                this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\DownloadNFe");
+
+            if (!string.IsNullOrEmpty(textBox_PastaBackup.Text))
+                textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Backup");
         }
     }
 }

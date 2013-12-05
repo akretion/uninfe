@@ -63,7 +63,7 @@ namespace NFe.Service
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
 
             string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
-            if(cResultadoValidacao != "")
+            if (cResultadoValidacao != "")
             {
                 throw new Exception(cResultadoValidacao);
             }
@@ -72,7 +72,7 @@ namespace NFe.Service
             docXML.Load(XmlNfeDadosMsg);
 
             // Definir Proxy
-            if(ConfiguracaoApp.Proxy)
+            if (ConfiguracaoApp.Proxy)
             {
                 oWSProxy.SetProp(oServicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta));
             }
@@ -86,41 +86,47 @@ namespace NFe.Service
             oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if(ConfiguracaoApp.ChecarConexaoInternet)
-                if(!Functions.IsConnectedToInternet())
+            if (ConfiguracaoApp.ChecarConexaoInternet)
+                if (!Functions.IsConnectedToInternet())
                 {
                     //Registrar o erro da validação para o sistema ERP
                     throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
                 }
 
             //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
-            if(cMetodo.Substring(0, 3).ToLower() == "sce") // DPEC
+            if (cMetodo.Substring(0, 3).ToLower() == "sce") // DPEC
             {
                 oWSProxy.SetProp(oServicoWS, "sceCabecMsgValue", cabecMsg);
             }
             else
             {
-                switch(Propriedade.TipoAplicativo)
+                switch (servico)
                 {
-                    case TipoAplicativo.Cte:
-                        if(servico == Servicos.ConsultaCadastroContribuinte)
+                    case Servicos.PedidoConsultaSituacaoMDFe:
+                    case Servicos.PedidoSituacaoLoteMDFe:
+                    case Servicos.EnviarLoteMDFe:
+                    case Servicos.ConsultaStatusServicoMDFe:
+                    case Servicos.RecepcaoEventoMDFe:
+                        oWSProxy.SetProp(oServicoWS, "mdfeCabecMsgValue", cabecMsg);
+                        break;
+
+                    case Servicos.InutilizarNumerosCTe:
+                    case Servicos.PedidoConsultaSituacaoCTe:
+                    case Servicos.PedidoSituacaoLoteCTe:
+                    case Servicos.EnviarLoteCTe:
+                    case Servicos.RecepcaoEventoCTe:
+                    case Servicos.ConsultaStatusServicoCTe:
+                        if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
                         {
-                            oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", cabecMsg);
+                            oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
                         }
                         else
                         {
-                            if(oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
-                            {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
-                            }
-                            else
-                            {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
-                            }
+                            oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
                         }
                         break;
 
-                    case TipoAplicativo.Nfe:
+                    default:
                         oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", cabecMsg);
                         break;
                 }
@@ -131,7 +137,7 @@ namespace NFe.Service
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno.OuterXml });
 
             // Registra o retorno de acordo com o status obtido
-            if(cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
+            if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
             {
                 typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
             }
@@ -205,7 +211,7 @@ namespace NFe.Service
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
             string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
-            if(cResultadoValidacao != "")
+            if (cResultadoValidacao != "")
             {
                 throw new Exception(cResultadoValidacao);
             }
@@ -214,8 +220,8 @@ namespace NFe.Service
             docXML.Load(XmlNfeDadosMsg);
 
             // Definir Proxy
-            if(ConfiguracaoApp.Proxy)
-                if(padraoNFSe != PadroesNFSe.BETHA)
+            if (ConfiguracaoApp.Proxy)
+                if (padraoNFSe != PadroesNFSe.BETHA)
                 {
                     oWSProxy.SetProp(oServicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta));
                 }
@@ -229,22 +235,22 @@ namespace NFe.Service
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            if(padraoNFSe != PadroesNFSe.BETHA)
+            if (padraoNFSe != PadroesNFSe.BETHA)
                 oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if(!Functions.IsConnectedToInternet())
+            if (!Functions.IsConnectedToInternet())
             {
                 //Registrar o erro da validação para o sistema ERP
                 throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
             }
 
             //Invocar o membro
-            switch(padraoNFSe)
+            switch (padraoNFSe)
             {
                 #region Padrão BETHA
                 case PadroesNFSe.BETHA:
-                    switch(cMetodo)
+                    switch (cMetodo)
                     {
                         case "ConsultarSituacaoLoteRps":
                             strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
@@ -278,7 +284,7 @@ namespace NFe.Service
                     int operacao;
                     string senhaWs = Functions.GetMD5Hash(Empresa.Configuracoes[emp].SenhaWS);
 
-                    switch(servicoNFSe)
+                    switch (servicoNFSe)
                     {
                         case Servicos.RecepcionarLoteRps:
                             operacao = 1;
@@ -315,7 +321,7 @@ namespace NFe.Service
                 case PadroesNFSe.ISSNET:
                 case PadroesNFSe.DUETO:
                 default:
-                    if(string.IsNullOrEmpty(cabecMsg))
+                    if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml });
                     else
                         strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
@@ -328,7 +334,7 @@ namespace NFe.Service
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { strRetorno });
 
             // Registra o retorno de acordo com o status obtido
-            if(cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
+            if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
             {
                 typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
             }
@@ -344,7 +350,7 @@ namespace NFe.Exceptions
     /// <summary>
     /// Classe para tratamento de exceções da classe Invocar Objeto
     /// </summary>
-    public class ExceptionSemInternet: Exception
+    public class ExceptionSemInternet : Exception
     {
         public ErroPadrao ErrorCode { get; private set; }
 
@@ -375,7 +381,7 @@ namespace NFe.Exceptions
     /// <summary>
     /// Classe para tratamento de exceções da classe Invocar Objeto, mas exatamente no ponto em que vai enviar o XML para o SEFAZ
     /// </summary>
-    public class ExceptionEnvioXML: Exception
+    public class ExceptionEnvioXML : Exception
     {
         public ErroPadrao ErrorCode { get; private set; }
 

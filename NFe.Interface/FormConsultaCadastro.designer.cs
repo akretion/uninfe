@@ -46,10 +46,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblServico = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.cbEmpresa = new System.Windows.Forms.ComboBox();
             this.lblAmbiente = new System.Windows.Forms.Label();
             this.cbAmbiente = new System.Windows.Forms.ComboBox();
+            this.cbServico = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -142,9 +144,9 @@
             // 
             // textResultado
             // 
-            this.textResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textResultado.Location = new System.Drawing.Point(8, 233);
             this.textResultado.Multiline = true;
             this.textResultado.Name = "textResultado";
@@ -192,8 +194,8 @@
             // 
             // cbEmissao
             // 
-            this.cbEmissao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEmissao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmissao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEmissao.FormattingEnabled = true;
             this.cbEmissao.Location = new System.Drawing.Point(4, 118);
@@ -240,6 +242,15 @@
             this.tabPage2.Text = "Consulta cadastro do contribuinte";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lblServico
+            // 
+            this.lblServico.AutoSize = true;
+            this.lblServico.Location = new System.Drawing.Point(303, 133);
+            this.lblServico.Name = "lblServico";
+            this.lblServico.Size = new System.Drawing.Size(46, 13);
+            this.lblServico.TabIndex = 958;
+            this.lblServico.Text = "Serviço:";
+            // 
             // lblEmpresa
             // 
             this.lblEmpresa.AutoSize = true;
@@ -277,6 +288,15 @@
             this.cbAmbiente.Size = new System.Drawing.Size(100, 21);
             this.cbAmbiente.TabIndex = 4;
             // 
+            // cbServico
+            // 
+            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServico.FormattingEnabled = true;
+            this.cbServico.Location = new System.Drawing.Point(303, 150);
+            this.cbServico.Name = "cbServico";
+            this.cbServico.Size = new System.Drawing.Size(70, 21);
+            this.cbServico.TabIndex = 959;
+            // 
             // FormConsultaCadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,6 +307,8 @@
             this.Controls.Add(this.lblUF);
             this.Controls.Add(this.comboUf);
             this.Controls.Add(this.cbAmbiente);
+            this.Controls.Add(this.lblServico);
+            this.Controls.Add(this.cbServico);
             this.Controls.Add(this.lblAmbiente);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textResultado);
@@ -298,8 +320,8 @@
             this.Name = "FormConsultaCadastro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta ao Servidor";
-            this.Load += new System.EventHandler(this.FormConsultaCadastro_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormConsultaCadastro_FormClosed);
+            this.Load += new System.EventHandler(this.FormConsultaCadastro_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -335,6 +357,8 @@
         private System.Windows.Forms.ComboBox cbEmpresa;
         private System.Windows.Forms.ComboBox cbAmbiente;
         private System.Windows.Forms.Label lblAmbiente;
+        private System.Windows.Forms.ComboBox cbServico;
+        private System.Windows.Forms.Label lblServico;
 
     }
 }

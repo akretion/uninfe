@@ -55,8 +55,8 @@ namespace NFe.Service
                     //oAD.Assinar(NomeArquivoXML, emp);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF", 
-                                        oCabecMsg, 
+                    oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF",
+                                        oCabecMsg,
                                         this);
 
                     //Ler o retorno
@@ -104,59 +104,54 @@ namespace NFe.Service
         #region EnvDownloadNFe
         private void EnvDownloadNFe(int emp, string arquivoXML)
         {
-            switch (Propriedade.TipoAplicativo)
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                case TipoAplicativo.Nfe:
-                    if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+                /// tpAmb|2
+                /// CNPJ|10290739000139 
+                /// chNFe|35110310290739000139550010000000011051128041
+                List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                foreach (string cTexto in cLinhas)
+                {
+                    string[] dados = cTexto.Split('|');
+                    if (dados.GetLength(0) <= 1) continue;
+
+                    switch (dados[0].ToLower())
                     {
-                        /// tpAmb|2
-                        /// CNPJ|10290739000139 
-                        /// chNFe|35110310290739000139550010000000011051128041
-                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach (string cTexto in cLinhas)
-                        {
-                            string[] dados = cTexto.Split('|');
-                            if (dados.GetLength(0) <= 1) continue;
-
-                            switch (dados[0].ToLower())
-                            {
-                                case "tpamb":
-                                    this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "cnpj":
-                                    this.oDadosenvDownload.CNPJ = dados[1].Trim();
-                                    break;
-                                case "chnfe":
-                                    this.oDadosenvDownload.chNFe = dados[1].Trim();
-                                    break;
-                            }
-                        }
+                        case "tpamb":
+                            this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "cnpj":
+                            this.oDadosenvDownload.CNPJ = dados[1].Trim();
+                            break;
+                        case "chnfe":
+                            this.oDadosenvDownload.chNFe = dados[1].Trim();
+                            break;
                     }
-                    else
-                    {
-                        //<?xml version="1.0" encoding="UTF-8"?>
-                        //<downloadNFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
-                        //      <tpAmb>2</tpAmb>
-                        //      <xServ>DOWNLOAD NFE</xServ>
-                        //      <CNPJ>10290739000139</CNPJ>
-                        //      <chNFe>35110310290739000139550010000000011051128041</chNFe>
-                        //</downloadNFe>
+                }
+            }
+            else
+            {
+                //<?xml version="1.0" encoding="UTF-8"?>
+                //<downloadNFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+                //      <tpAmb>2</tpAmb>
+                //      <xServ>DOWNLOAD NFE</xServ>
+                //      <CNPJ>10290739000139</CNPJ>
+                //      <chNFe>35110310290739000139550010000000011051128041</chNFe>
+                //</downloadNFe>
 
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(arquivoXML);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
 
-                        XmlNodeList envEventoList = doc.GetElementsByTagName("downloadNFe");
+                XmlNodeList envEventoList = doc.GetElementsByTagName("downloadNFe");
 
-                        foreach (XmlNode envEventoNode in envEventoList)
-                        {
-                            XmlElement envEventoElemento = (XmlElement)envEventoNode;
+                foreach (XmlNode envEventoNode in envEventoList)
+                {
+                    XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
-                            this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                            this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                            this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                        }
-                    }
-                    break;
+                    this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                    this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                }
             }
         }
         #endregion
@@ -353,12 +348,12 @@ namespace NFe.Service
         {
             return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(str));
         }
-        
+
         private string Decode(string str)
         {
             return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(str));
         }
-    
+
         private Stream DecodeBase64Gzip(string input)
         {
             char[] enc = input.ToCharArray();

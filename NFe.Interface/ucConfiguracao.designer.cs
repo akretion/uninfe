@@ -127,6 +127,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.cbServico = new System.Windows.Forms.ComboBox();
+            this.lblServico = new System.Windows.Forms.Label();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -153,6 +155,8 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lblServico);
+            this.tabPage6.Controls.Add(this.cbServico);
             this.tabPage6.Controls.Add(this.lblSenhaWS);
             this.tabPage6.Controls.Add(this.lblUsuarioWS);
             this.tabPage6.Controls.Add(this.txtSenhaWS);
@@ -930,9 +934,9 @@
             this.cbDanfeMonProcNfe.AutoSize = true;
             this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(33, 289);
             this.cbDanfeMonProcNfe.Name = "cbDanfeMonProcNfe";
-            this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(305, 17);
+            this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(234, 17);
             this.cbDanfeMonProcNfe.TabIndex = 12;
-            this.cbDanfeMonProcNfe.Text = "XML de distribuição da nota fiscal eletrônica (-procNFe.xml)";
+            this.cbDanfeMonProcNfe.Text = "XML de distribuição da nota fiscal eletrônica";
             this.cbDanfeMonProcNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonProcNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -941,9 +945,9 @@
             this.cbDanfeMonNfe.AutoSize = true;
             this.cbDanfeMonNfe.Location = new System.Drawing.Point(33, 265);
             this.cbDanfeMonNfe.Name = "cbDanfeMonNfe";
-            this.cbDanfeMonNfe.Size = new System.Drawing.Size(208, 17);
+            this.cbDanfeMonNfe.Size = new System.Drawing.Size(163, 17);
             this.cbDanfeMonNfe.TabIndex = 11;
-            this.cbDanfeMonNfe.Text = "XML da nota fiscal eletrônica (-nfe.xml)";
+            this.cbDanfeMonNfe.Text = "XML da nota fiscal eletrônica";
             this.cbDanfeMonNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -962,10 +966,10 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(1, 194);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(467, 13);
+            this.label17.Size = new System.Drawing.Size(474, 13);
             this.label17.TabIndex = 8;
-            this.label17.Text = "Pasta onde deve ser gravado o XML da NFe para a impressão do DANFe a partir do DA" +
-    "NFeMon:";
+            this.label17.Text = "Pasta onde deve ser gravado o XML para a impressão do documento fiscal a partir d" +
+    "o DANFeMon:";
             // 
             // label15
             // 
@@ -1221,6 +1225,26 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // cbServico
+            // 
+            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServico.FormattingEnabled = true;
+            this.cbServico.ItemHeight = 13;
+            this.cbServico.Location = new System.Drawing.Point(187, 63);
+            this.cbServico.Name = "cbServico";
+            this.cbServico.Size = new System.Drawing.Size(173, 21);
+            this.cbServico.TabIndex = 4;
+            this.cbServico.Leave += new System.EventHandler(this.cbServico_Leave);
+            // 
+            // lblServico
+            // 
+            this.lblServico.AutoSize = true;
+            this.lblServico.Location = new System.Drawing.Point(184, 47);
+            this.lblServico.Name = "lblServico";
+            this.lblServico.Size = new System.Drawing.Size(43, 13);
+            this.lblServico.TabIndex = 29;
+            this.lblServico.Text = "Serviço\r\n";
+            // 
             // ucConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1347,5 +1371,7 @@
         private System.Windows.Forms.Label lblUsuarioWS;
         private System.Windows.Forms.TextBox txtSenhaWS;
         private System.Windows.Forms.TextBox txtUsuarioWS;
+        private System.Windows.Forms.Label lblServico;
+        private System.Windows.Forms.ComboBox cbServico;
     }
 }

@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfe", "uninfe\uninfe.csproj", "{B6E8E809-6501-4D21-A94C-D751A3D57085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unicte", "unicte\unicte.csproj", "{67232FEE-F583-4E59-AF5B-DBB613407627}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A963E456-A54B-4C4D-A9DE-E80C136C3554} = {A963E456-A54B-4C4D-A9DE-E80C136C3554}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniNFeServico", "UniNFeServico\UniNFeServico.csproj", "{E808B9BD-C6F6-467E-BA52-E5681C55AFFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfse", "uninfse\uninfse.csproj", "{8754C561-F7C0-48AB-AC29-5C66A69ECB5A}"
@@ -48,10 +43,6 @@ Global
 		{B6E8E809-6501-4D21-A94C-D751A3D57085}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{B6E8E809-6501-4D21-A94C-D751A3D57085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6E8E809-6501-4D21-A94C-D751A3D57085}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67232FEE-F583-4E59-AF5B-DBB613407627}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{67232FEE-F583-4E59-AF5B-DBB613407627}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{67232FEE-F583-4E59-AF5B-DBB613407627}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67232FEE-F583-4E59-AF5B-DBB613407627}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E808B9BD-C6F6-467E-BA52-E5681C55AFFF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{E808B9BD-C6F6-467E-BA52-E5681C55AFFF}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{E808B9BD-C6F6-467E-BA52-E5681C55AFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU

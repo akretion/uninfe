@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Threading;
 using NFe.Settings;
 using NFe.Components;
@@ -25,15 +26,16 @@ namespace NFe.Service
 
             try
             {
-                ///
-                /// le todos os arquivos que estão na pasta em processamento
-                /// 
-                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
-                                                "*" + Propriedade.ExtEnvio.Nfe,
-                                                SearchOption.TopDirectoryOnly);
-                ///
-                /// considera os arquivos em que a data do ultimo acesso é superior a 5 minutos
-                /// 
+                // le todos os arquivos que estão na pasta em processamento
+                //                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
+                //                                                "*" + Propriedade.ExtEnvio.Nfe,
+                //                                                SearchOption.TopDirectoryOnly);
+
+                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
+                                                                                                                                                          w.EndsWith(Propriedade.ExtEnvio.Cte, StringComparison.InvariantCultureIgnoreCase) ||
+                                                                                                                                                          w.EndsWith(Propriedade.ExtEnvio.MDFe, StringComparison.InvariantCultureIgnoreCase)).ToArray<string>();
+
+                // considera os arquivos em que a data do ultimo acesso é superior a 5 minutos
                 DateTime UltimaData = DateTime.Now.AddMinutes(-_Minutos);
 
                 foreach (string file in files)
@@ -54,14 +56,55 @@ namespace NFe.Service
 
                             try
                             {
+                                XmlDocument doc = new XmlDocument();
+                                doc.Load(file);
+
+                                TipoAplicativo tipoArquivo = TipoAplicativo.Nfe;
+                                string extNFe = Propriedade.ExtEnvio.Nfe;
+                                string extProcNFe = Propriedade.ExtRetorno.ProcNFe;
+                                string arquivoSit = string.Empty;
+                                string chNFe = string.Empty;
+
+                                switch (doc.DocumentElement.Name)
+                                {
+                                    case "MDFe":
+                                        tipoArquivo = TipoAplicativo.MDFe;
+                                        extNFe = Propriedade.ExtEnvio.MDFe;
+                                        extProcNFe = Propriedade.ExtRetorno.ProcMDFe;
+
+                                        oLerXml.Mdfe(file);
+                                        arquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(4);
+                                        chNFe = oLerXml.oDadosNfe.chavenfe.Substring(4);
+                                        break;
+
+                                    case "NFe":
+                                        tipoArquivo = TipoAplicativo.Nfe;
+                                        extNFe = Propriedade.ExtEnvio.Nfe;
+                                        extProcNFe = Propriedade.ExtRetorno.ProcNFe;
+
+                                        oLerXml.Nfe(file);
+                                        arquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
+                                        chNFe = oLerXml.oDadosNfe.chavenfe.Substring(3);
+                                        break;
+
+                                    case "CTe":
+                                        tipoArquivo = TipoAplicativo.Cte;
+                                        extNFe = Propriedade.ExtEnvio.Cte;
+                                        extProcNFe = Propriedade.ExtRetorno.ProcCTe;
+
+                                        oLerXml.Cte(file);
+                                        arquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
+                                        chNFe = oLerXml.oDadosNfe.chavenfe.Substring(3);
+                                        break;
+                                }
+
                                 //Ler a NFe
-                                oLerXml.Nfe(file);
 
                                 //Verificar se o -nfe.xml existe na pasta de autorizados
-                                bool NFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe);
+                                bool NFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extNFe);
 
                                 //Verificar se o -procNfe.xml existe na past de autorizados
-                                bool procNFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, Propriedade.ExtRetorno.ProcNFe);
+                                bool procNFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extProcNFe);
 
                                 //Se um dos XML´s não estiver na pasta de autorizadas ele força finalizar o processo da NFe.
                                 if (!NFeJaNaAutorizada || !procNFeJaNaAutorizada)
@@ -70,16 +113,14 @@ namespace NFe.Service
                                     //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
                                     if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
                                     {
-                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, Functions.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtEnvio.Nfe);
+                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, Functions.ExtrairNomeArq(file, extNFe) + extNFe);
                                     }
 
                                     //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
-                                    string vArquivoSit = oLerXml.oDadosNfe.chavenfe.Substring(3);
-
-                                    oGerarXml.Consulta(vArquivoSit + Propriedade.ExtEnvio.PedSit_XML,
+                                    oGerarXml.Consulta(tipoArquivo, arquivoSit + Propriedade.ExtEnvio.PedSit_XML,
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpAmb),
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpEmis),
-                                        oLerXml.oDadosNfe.chavenfe.Substring(3));
+                                        chNFe);
                                 }
                                 else
                                 {
@@ -87,7 +128,7 @@ namespace NFe.Service
                                     oAux.MoveArqErro(file);
 
                                     //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
-                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe);
+                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, extNFe) + extProcNFe);
 
                                     //Tirar a nota fiscal do fluxo
                                     fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);
@@ -124,7 +165,7 @@ namespace NFe.Service
             finally
             {
                 Thread.CurrentThread.Abort();
-            }            
+            }
         }
     }
 }

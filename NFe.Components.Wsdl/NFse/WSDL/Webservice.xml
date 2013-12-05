@@ -1029,6 +1029,24 @@
       <CancelarNfse>wsdl\producao\PThemaCachoerinhaRSCancelamento.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="4311403" Nome="Lajeado - RS" UF="RS" Padrao="THEMA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HLajeadoRSRemessaNFSE.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HLajeadoRSConsultarNFSE.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HLajeadoRSCancelarNFSE.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PLajeadoRSRemessaNFSE.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PLajeadoRSConsultarNFSE.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PLajeadoRSCancelarNFSE.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípíos que utilizam o padrão ABACO -->
   <Estado ID="4304606" Nome="Canoas - RS" UF="RS" Padrao="ABACO">
     <LocalHomologacao>
@@ -1124,6 +1142,16 @@
       <ConsultarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PISSOnLineAracatubaSP.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PISSOnLineAracatubaSP.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3537305" Nome="Penapois - SP" UF="SP" Padrao="ISSOnLine">
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PPenapoisSPIssOnLine.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PPenapoisSPIssOnLine.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam o padrão Dueto -->
@@ -1274,6 +1302,80 @@
       <CancelarNfse>wsdl\producao\PSaoPauloSP-PAULISTANA.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="1100205" Nome="Porto Velho - RO" UF="RO" Padrao="PORTOVELHENSE">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HPortoVelhoPO.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HPortoVelhoPO.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PPortoVelhoPO.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PPortoVelhoPO.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!--Municípios que utilizam padrão GIF-->
+  <Estado ID="4303905" Nome="Campo Bom - RS" UF="RS" Padrao="GIF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4314050" Nome="Parobé - RS" UF="RS" Padrao="GIF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HParobeRSGIFServicos.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PParobeRSGIFServicos.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam padrão PRONIN -->
+  <Estado ID="3530300" Nome="Mirassol - SP" UF="SP" Padrao="PRONIN">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HMirassolSP.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PMirassolSP.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PMirassolSP.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Sequencia de tag´s de template-->
   <Estado ID="999" Nome="Template" UF="XX">
     <LocalHomologacao>
@@ -1291,24 +1393,6 @@
       <ConsultarNfse>wsdl\producao\</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\</CancelarNfse>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="4303905" Nome="Campo Bom - RS" UF="RS">
-    <LocalHomologacao>
-      <RecepcionarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\homologacao\HCampoBomRS.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\homologacao\HCampoBomRS.wsdl</CancelarNfse>
-    </LocalHomologacao>
-    <LocalProducao>
-      <RecepcionarLoteRps>wsdl\producao\PCampoBomRS.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\producao\PCampoBomRS.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\producao\PCampoBomRS.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\producao\PCampoBomRS.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
 </Webservice>

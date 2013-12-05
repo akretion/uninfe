@@ -92,7 +92,7 @@ namespace NFe.Components
         /// </summary>
         public static string PastaGeral
         {
-            get{ return Propriedade.PastaExecutavel + "\\Geral"; }
+            get { return Propriedade.PastaExecutavel + "\\Geral"; }
         }
 
         /// <summary>
@@ -191,7 +191,8 @@ namespace NFe.Components
         /// </summary>
         public class ExtEnvio
         {
-            #region Extensões da NFe e CTe
+            #region Extensões gerais
+            public const string ConsCertificado = "-cons-certificado.xml";
             /// <summary>
             /// -alt-con.xml
             /// </summary>
@@ -201,14 +202,6 @@ namespace NFe.Components
             /// </summary>
             public const string AltCon_TXT = "-alt-con.txt";
             /// <summary>
-            /// -cons-cad.xml
-            /// </summary>
-            public const string ConsCad_XML = "-cons-cad.xml";
-            /// <summary>
-            /// -cons-cad.txt
-            /// </summary>
-            public const string ConsCad_TXT = "-cons-cad.txt";
-            /// <summary>
             /// -cons-inf.xml
             /// </summary>
             public const string ConsInf_XML = "-cons-inf.xml";
@@ -216,83 +209,17 @@ namespace NFe.Components
             /// -cons-inf.txt
             /// </summary>
             public const string ConsInf_TXT = "-cons-inf.txt";
-            /// <summary>
-            /// -gerar-chave.xml
-            /// </summary>
-            public const string GerarChaveNFe_XML = "-gerar-chave.xml";
-            /// <summary>
-            /// -gerar-chave.txt
-            /// </summary>
-            public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
-            /// <summary>
-            /// -montar-lote.xml
-            /// </summary>
-            public const string MontarLote = "-montar-lote.xml";
-            public const string MontarLote_TXT = "-montar-lote.txt";
-            /// <summary>
-            /// -env-lot.xml
-            /// </summary>
-            public const string EnvLot = "-env-lot.xml";
+            #endregion
+
+            #region Extensões da NFe
             /// <summary>
             /// -nfe.xml
             /// </summary>
-            public static string Nfe = "-nfe.xml";
+            public const string Nfe = "-nfe.xml";
             /// <summary>
             /// -nfe.txt
             /// </summary>
             public static string Nfe_TXT = "-nfe.txt";
-            /// <summary>
-            /// -ped-can.xml
-            /// </summary>
-            public const string PedCan_XML = "-ped-can.xml";
-            /// <summary>
-            /// -ped-can.txt
-            /// </summary>
-            public const string PedCan_TXT = "-ped-can.txt";
-            /// <summary>
-            /// -ped-inu.xml
-            /// </summary>
-            public const string PedInu_XML = "-ped-inu.xml";
-            /// <summary>
-            /// -ped-inu.txt
-            /// </summary>
-            public const string PedInu_TXT = "-ped-inu.txt";
-            /// <summary>
-            /// -ped-rec.xml
-            /// </summary>
-            public const string PedRec_XML = "-ped-rec.xml";
-            /// <summary>
-            /// -ped-rec.xml
-            /// </summary>
-            public const string PedSit_XML = "-ped-sit.xml";
-            /// <summary>
-            /// -ped-sit.txt
-            /// </summary>
-            public const string PedSit_TXT = "-ped-sit.txt";
-            /// <summary>
-            /// -ped-sta.xml
-            /// </summary>
-            public const string PedSta_XML = "-ped-sta.xml";
-            /// <summary>
-            /// -ped-sta.txt
-            /// </summary>
-            public const string PedSta_TXT = "-ped-sta.txt";
-            /// <summary>
-            /// -env-dpec.xml
-            /// </summary>
-            public const string EnvDPEC_XML = "-env-dpec.xml";
-            /// <summary>
-            /// -env-dpec.txt
-            /// </summary>
-            public const string EnvDPEC_TXT = "-env-dpec.txt";
-            /// <summary>
-            /// -cons-dpec.xml"
-            /// </summary>
-            public const string ConsDPEC_XML = "-cons-dpec.xml";
-            /// <summary>
-            /// -cons-dpec.txt
-            /// </summary>
-            public const string ConsDPEC_TXT = "-cons-dpec.txt";
             /// <summary>
             /// -env-cce.xml
             /// </summary>
@@ -301,22 +228,6 @@ namespace NFe.Components
             /// -env-cce.txt
             /// </summary>
             public const string EnvCCe_TXT = "-env-cce.txt";
-            /// <summary>
-            /// -down-nfe.xml
-            /// </summary>
-            public const string EnvDownload_XML = "-nfe-down.xml";
-            /// <summary>
-            /// -down-nfe.txt
-            /// </summary>
-            public const string EnvDownload_TXT = "-nfe-down.txt";
-            /// <summary>
-            /// -cons-nfe-dest.xml
-            /// </summary>
-            public const string ConsNFeDest_XML = "-cons-nfe-dest.xml";
-            /// <summary>
-            /// -cons-nfe-dest.txt
-            /// </summary>
-            public const string ConsNFeDest_TXT = "-cons-nfe-dest.txt";
             /// <summary>
             /// -env-manif.xml
             /// </summary>
@@ -334,6 +245,46 @@ namespace NFe.Components
             /// </summary>
             public const string EnvCancelamento_TXT = "-env-canc.txt";
             /// <summary>
+            /// -gerar-chave.xml
+            /// </summary>
+            public const string GerarChaveNFe_XML = "-gerar-chave.xml";
+            /// <summary>
+            /// -gerar-chave.txt
+            /// </summary>
+            public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
+            /// <summary>
+            /// -env-dpec.xml
+            /// </summary>
+            public const string EnvDPEC_XML = "-env-dpec.xml";
+            /// <summary>
+            /// -env-dpec.txt
+            /// </summary>
+            public const string EnvDPEC_TXT = "-env-dpec.txt";
+            /// <summary>
+            /// -cons-dpec.xml"
+            /// </summary>
+            public const string ConsDPEC_XML = "-cons-dpec.xml";
+            /// <summary>
+            /// -cons-dpec.txt
+            /// </summary>
+            public const string ConsDPEC_TXT = "-cons-dpec.txt";
+            /// <summary>
+            /// -down-nfe.xml
+            /// </summary>
+            public const string EnvDownload_XML = "-nfe-down.xml";
+            /// <summary>
+            /// -down-nfe.txt
+            /// </summary>
+            public const string EnvDownload_TXT = "-nfe-down.txt";
+            /// <summary>
+            /// -cons-nfe-dest.xml
+            /// </summary>
+            public const string ConsNFeDest_XML = "-cons-nfe-dest.xml";
+            /// <summary>
+            /// -cons-nfe-dest.txt
+            /// </summary>
+            public const string ConsNFeDest_TXT = "-cons-nfe-dest.txt";
+            /// <summary>
             /// -env-regs.xml
             /// </summary>
             public const string EnvRegistroDeSaida_XML = "-env-regs.xml";
@@ -349,10 +300,13 @@ namespace NFe.Components
             /// -env-canc-regs.txt
             /// </summary>
             public const string EnvCancRegistroDeSaida_TXT = "-env-canc-regs.txt";
+            #endregion
 
-            public const string EnvWSExiste_XML = "-env-ws.xml";
-            public const string EnvWSExiste_TXT = "-env-ws.txt";
-
+            #region Extensões do CTe
+            /// <summary>
+            /// -cte.xml
+            /// </summary>
+            public const string Cte = "-cte.xml";
             #endregion
 
             #region Extensões da NFS-e
@@ -393,9 +347,69 @@ namespace NFe.Components
             public static string MDFe = "-mdfe.xml";
             #endregion
 
-            #region Extensões Gerais
-            public const string ConsCertificado = "-cons-certificado.xml";
-            #endregion 
+            #region Extensões em comum entre NFe, CTe e MDF-e
+            /// <summary>
+            /// -ped-eve.xml
+            /// </summary>
+            public const string PedEve = "-ped-eve.xml";
+            /// <summary>
+            /// -ped-eve.txt
+            /// </summary>
+            public const string PedEve_TXT = "-ped-eve.txt";
+            /// <summary>
+            /// -montar-lote.xml
+            /// </summary>
+            public const string MontarLote = "-montar-lote.xml";
+            /// <summary>
+            /// -montar-lote.txt
+            /// </summary>
+            public const string MontarLote_TXT = "-montar-lote.txt";
+            /// <summary>
+            /// -cons-cad.xml
+            /// </summary>
+            public const string ConsCad_XML = "-cons-cad.xml";
+            /// <summary>
+            /// -cons-cad.txt
+            /// </summary>
+            public const string ConsCad_TXT = "-cons-cad.txt";
+            /// <summary>
+            /// -env-lot.xml
+            /// </summary>
+            public const string EnvLot = "-env-lot.xml";
+            /// <summary>
+            /// -ped-inu.xml
+            /// </summary>
+            public const string PedInu_XML = "-ped-inu.xml";
+            /// <summary>
+            /// -ped-inu.txt
+            /// </summary>
+            public const string PedInu_TXT = "-ped-inu.txt";
+            /// <summary>
+            /// -ped-rec.xml
+            /// </summary>
+            public const string PedRec_XML = "-ped-rec.xml";
+            /// <summary>
+            /// -ped-rec.xml
+            /// </summary>
+            public const string PedSit_XML = "-ped-sit.xml";
+            /// <summary>
+            /// -ped-sit.txt
+            /// </summary>
+            public const string PedSit_TXT = "-ped-sit.txt";
+            /// <summary>
+            /// -ped-sta.xml
+            /// </summary>
+            public const string PedSta_XML = "-ped-sta.xml";
+            /// <summary>
+            /// -ped-sta.txt
+            /// </summary>
+            public const string PedSta_TXT = "-ped-sta.txt";
+            #endregion
+
+            #region Não sei para que serve - Wandrey
+            public const string EnvWSExiste_XML = "-env-ws.xml";
+            public const string EnvWSExiste_TXT = "-env-ws.txt";
+            #endregion
         }
         #endregion
 
@@ -405,67 +419,43 @@ namespace NFe.Components
         /// </summary>
         public class ExtRetorno
         {
-            #region Extensões de retorno da NFe e CTe
-            /// <summary>
-            /// -sit.xml
-            /// </summary>
-            public const string Sit_XML = "-sit.xml";
-            /// <summary>
-            /// -sit.err
-            /// </summary>
-            public const string Sit_ERR = "-sit.err";
-            /// <summary>
-            /// -ret-cons-cad.xml
-            /// </summary>
-            public const string ConsCad_XML = "-ret-cons-cad.xml";
-            /// <summary>
-            /// -ret-cons-cad.err
-            /// </summary>
-            public const string ConsCad_ERR = "-ret-cons-cad.err";
-            /// <summary>
-            /// -pro-rec.xml
-            /// </summary>
-            public const string ProRec_XML = "-pro-rec.xml";
-            /// <summary>
-            /// -pro-rec.err
-            /// </summary>
-            public const string ProRec_ERR = "-pro-rec.err";
-            /// <summary>
-            /// -sta.xml
-            /// </summary>
-            public const string Sta_XML = "-sta.xml";
-            /// <summary>
-            /// -sta.err
-            /// </summary>
-            public const string Sta_ERR = "-sta.err";
-            /// <summary>
-            /// -can.err
-            /// </summary>
-            public const string Can_ERR = "-can.err";
-            /// <summary>
-            /// -inu.err
-            /// </summary>
-            public const string Inu_ERR = "-inu.err";
-            /// <summary>
-            /// -nfe.err
-            /// </summary>
-            public static string Nfe_ERR = "-nfe.err";
-            /// <summary>
-            /// -rec.err
-            /// </summary>
-            public static string Rec_ERR = "-rec.err";
+            #region Extensões gerais
+
+            #endregion
+
+            #region Extensões NFe
             /// <summary>
             /// -procnfe.xml
             /// </summary>
-            public static string ProcNFe = "-procNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            public const string ProcNFe = "-procNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
             /// <summary>
-            /// -proccancnfe.xml
+            /// -ret-env-cce.xml
             /// </summary>
-            public static string ProcCancNFe = "-procCancNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            public const string retEnvCCe_XML = "-ret-env-cce.xml";
+            /// <summary>
+            /// -ret-env-cce.err
+            /// </summary>
+            public const string retEnvCCe_ERR = "-ret-env-cce.err";
+            /// <summary>
+            /// -ret-canc.xml
+            /// </summary>
+            public const string retCancelamento_XML = "-ret-env-canc.xml";
+            /// <summary>
+            /// -ret-canc.err
+            /// </summary>
+            public const string retCancelamento_ERR = "-ret-env-canc.err";
+            /// <summary>
+            /// -procEventoNFe.xml
+            /// </summary>
+            public const string ProcEventoNFe = "-procEventoNFe.xml";
             /// <summary>
             /// -procinutnfe.xml
             /// </summary>
             public static string ProcInutNFe = "-procInutNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            /// <summary>
+            /// -nfe.err
+            /// </summary>
+            public static string Nfe_ERR = "-nfe.err";
             /// <summary>
             /// -ret-dpec.xml
             /// </summary>
@@ -482,22 +472,6 @@ namespace NFe.Components
             /// -ret-cons-dpec.err
             /// </summary>
             public const string retConsDPEC_ERR = "-ret-cons-dpec.err";
-            /// <summary>
-            /// -montar-lote.err
-            /// </summary>
-            public const string MontarLote_ERR = "-montar-lote.err";
-            /// <summary>
-            /// -procEventoNFe.xml
-            /// </summary>
-            public const string ProcEventoNFe = "-procEventoNFe.xml";
-            /// <summary>
-            /// -ret-env-cce.xml
-            /// </summary>
-            public const string retEnvCCe_XML = "-ret-env-cce.xml";
-            /// <summary>
-            /// -ret-env-cce.err
-            /// </summary>
-            public const string retEnvCCe_ERR = "-ret-env-cce.err";
             /// <summary>
             /// -ret-down-nfe.xml
             /// </summary>
@@ -523,14 +497,6 @@ namespace NFe.Components
             /// </summary>
             public const string retManifestacao_ERR = "-ret-env-manif.err";
             /// <summary>
-            /// -ret-canc.xml
-            /// </summary>
-            public const string retCancelamento_XML = "-ret-env-canc.xml";
-            /// <summary>
-            /// -ret-canc.err
-            /// </summary>
-            public const string retCancelamento_ERR = "-ret-env-canc.err";
-            /// <summary>
             /// -ret-env-regsaida.xml
             /// </summary>
             public const string retRegistroDeSaida_XML = "-ret-env-regs.xml";
@@ -546,12 +512,91 @@ namespace NFe.Components
             /// -ret-env-regsaida.txt
             /// </summary>
             public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
-
-            public const string retWSExiste_XML = "-ret-env-ws.xml";
-            public const string retWSExiste_TXT = "-ret-env-ws.txt";
             #endregion
 
-            #region Extensões de retorno da NFS-e
+            #region Extensões CTe
+            /// <summary>
+            /// -procCTe.xml
+            /// </summary>
+            public const string ProcCTe = "-procCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            /// <summary>
+            /// -procEventoCTe.xml
+            /// </summary>
+            public const string ProcEventoCTe = "-procEventoCTe.xml";
+            /// <summary>
+            /// -procInutCTe.xml
+            /// </summary>
+            public static string ProcInutCTe = "-procInutCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            #endregion
+
+            #region Extensões MDFe
+            /// <summary>
+            /// -procMDFe.xml
+            /// </summary>
+            public const string ProcMDFe = "-procMDFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            /// <summary>
+            /// -procEventoMDFe.xml
+            /// </summary>
+            public const string ProcEventoMDFe = "-procEventoMDFe.xml";
+
+            #endregion
+
+            #region Extensões em comum entre NFe, CTe e MDF-e
+            /// <summary>
+            /// -eve.xml
+            /// </summary>
+            public const string Eve = "-eve.xml";
+            /// <summary>
+            /// -eve.err
+            /// </summary>
+            public const string Eve_ERR = "-eve.err";
+            /// <summary>
+            /// -montar-lote.err
+            /// </summary>
+            public const string MontarLote_ERR = "-montar-lote.err";
+            /// <summary>
+            /// -ret-cons-cad.xml
+            /// </summary>
+            public const string ConsCad_XML = "-ret-cons-cad.xml";
+            /// <summary>
+            /// -ret-cons-cad.err
+            /// </summary>
+            public const string ConsCad_ERR = "-ret-cons-cad.err";
+            /// <summary>
+            /// -sit.xml
+            /// </summary>
+            public const string Sit_XML = "-sit.xml";
+            /// <summary>
+            /// -sit.err
+            /// </summary>
+            public const string Sit_ERR = "-sit.err";
+            /// <summary>
+            /// -pro-rec.xml
+            /// </summary>
+            public const string ProRec_XML = "-pro-rec.xml";
+            /// <summary>
+            /// -pro-rec.err
+            /// </summary>
+            public const string ProRec_ERR = "-pro-rec.err";
+            /// <summary>
+            /// -sta.xml
+            /// </summary>
+            public const string Sta_XML = "-sta.xml";
+            /// <summary>
+            /// -sta.err
+            /// </summary>
+            public const string Sta_ERR = "-sta.err";
+            /// <summary>
+            /// -inu.err
+            /// </summary>
+            public const string Inu_ERR = "-inu.err";
+            /// <summary>
+            /// -rec.err
+            /// </summary>
+            public static string Rec_ERR = "-rec.err";
+            #endregion
+
+            #region Extensões NFSe
             /// <summary>
             /// -ret-loterps.xml X -env-loterps.xml
             /// </summary>
@@ -608,6 +653,11 @@ namespace NFe.Components
             /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
             /// </summary>
             public const string Urlnfse_ERR = "-urlnfse.err";
+            #endregion
+
+            #region Não sei para que serve - Wandrey
+            public const string retWSExiste_XML = "-ret-env-ws.xml";
+            public const string retWSExiste_TXT = "-ret-env-ws.txt";
             #endregion
         }
         #endregion
@@ -752,7 +802,7 @@ namespace NFe.Components
                 return PastaExecutavel + "\\UniNFeParams.xml";
             }
         }
-        
+
         #region Atributos
         /// <summary>
         /// Se pode encerrar a aplicação ou não

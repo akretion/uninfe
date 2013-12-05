@@ -480,6 +480,7 @@ namespace NFe.Settings
                 {
                     //Carregar os dados do arquivo XML de configurações da Aplicação
                     oLerXml = new XmlTextReader(arqXML);
+                    int codEmp = 0;
 
                     while(oLerXml.Read())
                     {
@@ -495,7 +496,8 @@ namespace NFe.Settings
                                     {
                                         oLerXml.Read();
                                         string nome = oLerXml.Value;
-                                        empresa.Add(new ComboElem(cnpj, 1, nome));
+                                        empresa.Add(new ComboElem(cnpj, codEmp, nome));
+                                        codEmp++;
                                         break;
                                     }
                                 }

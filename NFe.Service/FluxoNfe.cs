@@ -96,7 +96,7 @@ namespace NFe.Service
         #region CriarXml()
         public void CriarXml()
         {
-            this.CriarXml(false);
+            CriarXml(false);
         }
         #endregion
 
@@ -107,7 +107,7 @@ namespace NFe.Service
         /// <param name="forcar">Força criar o arquivo mesmo que já exista</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/04/2009</date>
-        public void CriarXml(bool VerificaEstruturaXml)
+        private void CriarXml(bool VerificaEstruturaXml)
         {
             while(true)
             {
@@ -875,7 +875,7 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         public List<ReciboCons> CriarListaRec()
         {
-            CriarXml();
+            CriarXml(true);
 
             List<ReciboCons> lstRecibo = new List<ReciboCons>();
             List<string> lstNumRec = new List<string>();
@@ -932,6 +932,15 @@ namespace NFe.Service
                                 oReciboCons.dPedRec = dPedRec;
                                 oReciboCons.nRec = nRec;
                                 oReciboCons.tMed = tMed;
+
+                                string chaveNfe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
+                                if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "NFE")
+                                    oReciboCons.Servico = TipoAplicativo.Nfe;
+                                else if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "CTE")
+                                    oReciboCons.Servico = TipoAplicativo.Cte;
+                                else if (chaveNfe.Substring(0, 4).ToUpper().Trim() == "MDFE")
+                                    oReciboCons.Servico = TipoAplicativo.MDFe;
+
                                 lstRecibo.Add(oReciboCons);
                             }
 
@@ -1091,6 +1100,10 @@ namespace NFe.Service
         /// Data e hora da ultima consulta do recibo efetuada
         /// </summary>
         public DateTime dPedRec;
+        /// <summary>
+        /// Se é um CTe, NFe ou MDFe
+        /// </summary>
+        public TipoAplicativo Servico;
     }
     #endregion
 }

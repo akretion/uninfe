@@ -23,70 +23,67 @@ namespace NFe.Components
     /// </summary>
     public enum Servicos
     {
+        #region NFe
         /// <summary>
-        /// Assina, valida e envia o XML de cancelamento de NFe para o webservice
+        /// Consulta status serviço NFe
         /// </summary>
-        CancelarNFe,
-        /// <summary>
-        /// Assina, valida e envia o XML de Inutilização de números de NFe para o webservice
-        /// </summary>
-        InutilizarNumerosNFe,
-        /// <summary>
-        /// Valida e envia o XML de pedido de Consulta da Situação da NFe para o webservice
-        /// </summary>
-        PedidoConsultaSituacaoNFe,
-        /// <summary>
-        /// Valida e envia o XML de pedido de Consulta Status dos Serviços da NFe para o webservice
-        /// </summary>
-        PedidoConsultaStatusServicoNFe,
-        /// <summary>
-        /// Valida e envia o XML de pedido de Consulta da Situação do Lote da NFe para o webservice
-        /// </summary>
-        PedidoSituacaoLoteNFe,
-        /// <summary>
-        /// Valida e envia o XML de pedido de Consulta do Cadastro do Contribuinte para o webservice
-        /// </summary>
-        ConsultaCadastroContribuinte,
-        /// <summary>
-        /// Consultar Informações Gerais do UniNFe
-        /// </summary>
-        ConsultaInformacoesUniNFe,
-        /// <summary>
-        /// Solicitar ao UniNFe que altere suas configurações
-        /// </summary>
-        AlterarConfiguracoesUniNFe,
+        ConsultaStatusServicoNFe,
         /// <summary>
         /// Assinar e montar lote de uma NFe
         /// </summary>
         MontarLoteUmaNFe,
         /// <summary>
-        /// Assinar e montar lote de várias NFe
-        /// </summary>
-        MontarLoteVariasNFe,
-        /// <summary>
-        /// Envia os lotes de notas fiscais eletrônicas para os webservices
+        /// Envia os lotes de NFe para os webservices
         /// </summary>
         EnviarLoteNfe,
         /// <summary>
-        /// Somente assinar e validar o XML
+        /// Consulta recibo do lote nfe
         /// </summary>
-        AssinarValidar,
+        PedidoSituacaoLoteNFe,
+        /// <summary>
+        /// Consulta situação da NFe
+        /// </summary>
+        PedidoConsultaSituacaoNFe,
+        /// <summary>
+        /// Envia XML de Inutilização da NFe
+        /// </summary>
+        InutilizarNumerosNFe,
         /// <summary>
         /// Somente converter TXT da NFe para XML de NFe
         /// </summary>
         ConverterTXTparaXML,
+
+        #region Eventos NFe
+        /// <summary>
+        /// Enviar XML de Evento NFe
+        /// </summary>
+        RecepcaoEvento,
+        /// <summary>
+        /// Enviar XML Evento - Carta de Correção
+        /// </summary>
+        EnviarCCe,
+        /// <summary>
+        /// Enviar XML Evento - Cancelamento
+        /// </summary>
+        EnviarEventoCancelamento,
+        /// <summary>
+        /// Enviar um evento de manifestacao
+        /// </summary>
+        EnviarManifDest,
+        #endregion
+
+        /// <summary>
+        /// Assinar e validar um XML de NFe no envio em Lote
+        /// </summary>
+        AssinarValidarNFeEnvioEmLote,
+        /// <summary>
+        /// Assinar e montar lote de várias NFe
+        /// </summary>
+        MontarLoteVariasNFe,
         /// <summary>
         /// Monta chave de acesso
         /// </summary>
         GerarChaveNFe,
-        /// <summary>
-        /// Efetua verificações nas notas em processamento para evitar algumas falhas e perder retornos de autorização de notas
-        /// </summary>
-        EmProcessamento,
-        /// <summary>
-        /// Efetua uma limpeza das pastas que recebem arquivos temporários
-        /// </summary>
-        LimpezaTemporario,
         /// <summary>
         /// Enviar o XML do DPEC para o SCE - Sistema de Contingência Eletrônica
         /// </summary>
@@ -96,18 +93,6 @@ namespace NFe.Components
         /// </summary>
         ConsultarDPEC,
         /// <summary>
-        /// Assinar e validar um XML de NFe
-        /// </summary>
-        AssinarValidarNFe,
-        /// <summary>
-        /// Enviar uma carta de correcao
-        /// </summary>
-        EnviarCCe,
-        /// <summary>
-        /// Enviar um evento de cancelamento
-        /// </summary>
-        EnviarEventoCancelamento,
-        /// <summary>
         /// Enviar solicitacao de download de nfe
         /// </summary>
         DownloadNFe,
@@ -116,10 +101,6 @@ namespace NFe.Components
         /// </summary>
         ConsultaNFDest,
         /// <summary>
-        /// Enviar um evento de manifestacao
-        /// </summary>
-        EnviarManifDest,
-        /// <summary>
         /// Registro de saida
         /// </summary>
         RegistroDeSaida,
@@ -127,14 +108,48 @@ namespace NFe.Components
         /// Registro de saida
         /// </summary>
         RegistroDeSaidaCancelamento,
+        #endregion
+
+        #region CTe
         /// <summary>
-        /// WSExiste
+        /// Consulta Status Serviço CTe
         /// </summary>
-        WSExiste,
+        ConsultaStatusServicoCTe,
         /// <summary>
-        /// Nulo / Nenhum serviço em execução
-        /// </summary>        
-        Nulo,
+        /// Montar lote de um CTe
+        /// </summary>
+        MontarLoteUmCTe,
+        /// <summary>
+        /// Envia os lotes de CTe para os webservices
+        /// </summary>
+        EnviarLoteCTe,
+        /// <summary>
+        /// Consulta recibo do lote CTe
+        /// </summary>
+        PedidoSituacaoLoteCTe,
+        /// <summary>
+        /// Consulta situação da CTe
+        /// </summary>
+        PedidoConsultaSituacaoCTe,
+        /// <summary>
+        /// Envia XML de Inutilização da CTe
+        /// </summary>
+        InutilizarNumerosCTe,
+        /// <summary>
+        /// Enviar XML Evento CTe
+        /// </summary>
+        RecepcaoEventoCTe,
+        /// <summary>
+        /// Assinar e validar um XML de CTe no envio em Lote
+        /// </summary>
+        AssinarValidarCTeEnvioEmLote,
+        /// <summary>
+        /// Assinar e montar lote de várias CTe
+        /// </summary>
+        MontarLoteVariosCTe,
+        #endregion
+
+        #region NFSe
         /// <summary>
         /// Enviar Lote RPS NFS-e 
         /// </summary>
@@ -163,6 +178,71 @@ namespace NFe.Components
         /// Consultar a URL de visualização da NFSe
         /// </summary>
         ConsultarURLNfse,
+        #endregion
+
+        #region MDFe
+        /// <summary>
+        /// Consulta Status Serviço MDFe
+        /// </summary>
+        ConsultaStatusServicoMDFe,
+        /// <summary>
+        /// Montar lote de um MDFe
+        /// </summary>
+        MontarLoteUmMDFe,
+        /// <summary>
+        /// Envia os lotes de MDFe para os webservices
+        /// </summary>
+        EnviarLoteMDFe,
+        /// <summary>
+        /// Consulta recibo do lote MDFe
+        /// </summary>
+        PedidoSituacaoLoteMDFe,
+        /// <summary>
+        /// Consulta situação da MDFe
+        /// </summary>
+        PedidoConsultaSituacaoMDFe,
+        /// <summary>
+        /// Assinar e validar um XML de MDFe no envio em Lote
+        /// </summary>
+        AssinarValidarMDFeEnvioEmLote,
+        /// <summary>
+        /// Assinar e montar lote de várias MDFe
+        /// </summary>
+        MontarLoteVariosMDFe,
+        /// <summary>
+        /// Enviar XML Evento MDFe
+        /// </summary>
+        RecepcaoEventoMDFe,
+        #endregion
+
+        #region Serviços em comum NFe, CTe, MDFe e NFSe
+        /// <summary>
+        /// Valida e envia o XML de pedido de Consulta do Cadastro do Contribuinte para o webservice
+        /// </summary>
+        ConsultaCadastroContribuinte,
+        /// <summary>
+        /// Efetua verificações nas notas em processamento para evitar algumas falhas e perder retornos de autorização de notas
+        /// </summary>
+        EmProcessamento,
+        /// <summary>
+        /// Somente assinar e validar o XML
+        /// </summary>
+        AssinarValidar,
+        #endregion
+
+        #region Serviços gerais
+        /// <summary>
+        /// Consultar Informações Gerais do UniNFe
+        /// </summary>
+        ConsultaInformacoesUniNFe,
+        /// <summary>
+        /// Solicitar ao UniNFe que altere suas configurações
+        /// </summary>
+        AlterarConfiguracoesUniNFe,
+        /// <summary>
+        /// Efetua uma limpeza das pastas que recebem arquivos temporários
+        /// </summary>
+        LimpezaTemporario,
         /// <summary>
         /// Consultas efetuadas pela pasta GERAL.
         /// </summary>
@@ -171,16 +251,19 @@ namespace NFe.Components
         /// Consulta Certificados Instalados na estação do UniNFe.
         /// </summary>
         ConsultaCertificados,
-        #region MDF-e
-        /// <summary>
-        /// Assinar e validar MDFe
-        /// </summary>
-        AssinarValidarMDFe,
-        /// <summary>
-        /// Montar Lote Um MDFe
-        /// </summary>
-        MontarLoteUmMDFe
         #endregion
+
+        #region Não sei para que serve - Wandrey
+        /// <summary>
+        /// WSExiste
+        /// </summary>
+        WSExiste,
+        #endregion
+
+        /// <summary>
+        /// Nulo / Nenhum serviço em execução
+        /// </summary>        
+        Nulo
     }
     #endregion
 
@@ -188,17 +271,22 @@ namespace NFe.Components
     public enum TipoAplicativo
     {
         /// <summary>
-        /// Aplicativo de conhecimento de transporte eletrônico
+        /// Aplicativo ou serviços para processamento dos XMLs da NF-e
         /// </summary>
-        Cte,
+        Nfe = 0,
         /// <summary>
-        /// Aplicativo de nota fiscal eletrônica
+        /// Aplicativo ou serviços para processamento dos XMLs do CT-e
         /// </summary>
-        Nfe,
+        Cte = 1,
         /// <summary>
-        /// Aplicativo de nota fiscal de serviços eletrônica
+        /// Aplicativo ou servicos para processamento dos XMLs da NFS-e
         /// </summary>
-        Nfse
+        Nfse = 2,
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs do MDF-e
+        /// </summary>
+        MDFe = 3,
+        Nulo = 100
     }
     #endregion
 
@@ -270,7 +358,17 @@ namespace NFe.Components
         /// Padrão Nota Fiscal Eletrônica Paulistana -
         /// Prefeitura São Paulo - SP
         /// </summary>
-        PAULISTANA
+        PAULISTANA,
+        /// <summary>
+        /// Padrão Nota Fiscal Eletrônica Porto Velhense
+        /// Prefeitura de Porto Velho - RO
+        /// </summary>
+        PORTOVELHENSE,
+        /// <summary>
+        /// Padrão Nota Fiscal Eletrônica da PRONIN (GovBR)
+        /// Prefeitura de Mirassol - SP
+        /// </summary>
+        PRONIN
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

@@ -725,7 +725,6 @@ namespace uninfe
             {
                 dlg.Filter = "Arquivos da NFe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
                 dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe;
-                dlg.Filter += "|Arquivos de cancelamento (*.*" + Propriedade.ExtRetorno.ProcCancNFe + ")|*" + Propriedade.ExtRetorno.ProcCancNFe;
                 dlg.Filter += "|Arquivos de CCe (*.*??" + Propriedade.ExtRetorno.ProcEventoNFe + ")|*_??" + Propriedade.ExtRetorno.ProcEventoNFe;
                 dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;
 

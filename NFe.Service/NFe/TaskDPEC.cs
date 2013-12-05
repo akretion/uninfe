@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskRecepcaoDPEC: TaskAbst
+    public class TaskRecepcaoDPEC : TaskAbst
     {
         #region Classe com os dados do XML de registro do DPEC
         /// <summary>
@@ -37,7 +37,7 @@ namespace NFe.Service
                 ///*oLer.*/
                 EnvDPEC(emp, NomeArquivoXML);    //danasa 21/10/2010
 
-                if(vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, /*oLer.*/dadosEnvDPEC.cUF, /*oLer.*/dadosEnvDPEC.tpAmb, /*oLer.*/dadosEnvDPEC.tpEmis);
@@ -72,7 +72,7 @@ namespace NFe.Service
                     oGerarXML.EnvioDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", /*oLer.*/dadosEnvDPEC);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDPEC_XML : Propriedade.ExtEnvio.EnvDPEC_TXT;
 
@@ -119,73 +119,62 @@ namespace NFe.Service
             ///
             /// danasa 21/10/2010
             /// 
-            if(Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                switch(Propriedade.TipoAplicativo)
+                ///cUF|31                   |
+                ///tpAmb|2                  | opcional
+                ///verProc|1.0.0
+                ///CNPJ|10238568000360
+                ///IE|148230665114
+                ///------
+                ///chNFe|31101010238568000360550010000001011000001011
+                ///CNPJCPF|05481336000137   | se UF=EX->Branco
+                ///UF|SP
+                ///vNF|123456.00
+                ///vICMS|18.00
+                ///vST|121.99
+                List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                foreach (string cTexto in cLinhas)
                 {
-                    case TipoAplicativo.Cte:
-                        break;
+                    string[] dados = cTexto.Split('|');
+                    if (dados.GetLength(0) == 1) continue;
 
-                    case TipoAplicativo.Nfe:
-                        ///cUF|31                   |
-                        ///tpAmb|2                  | opcional
-                        ///verProc|1.0.0
-                        ///CNPJ|10238568000360
-                        ///IE|148230665114
-                        ///------
-                        ///chNFe|31101010238568000360550010000001011000001011
-                        ///CNPJCPF|05481336000137   | se UF=EX->Branco
-                        ///UF|SP
-                        ///vNF|123456.00
-                        ///vICMS|18.00
-                        ///vST|121.99
-                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach(string cTexto in cLinhas)
-                        {
-                            string[] dados = cTexto.Split('|');
-                            if(dados.GetLength(0) == 1) continue;
-
-                            switch(dados[0].ToLower())
-                            {
-                                case "tpamb":
-                                    this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "cuf":
-                                    this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "verproc":
-                                    this.dadosEnvDPEC.verProc = dados[1].Trim();
-                                    break;
-                                case "cnpj":
-                                    this.dadosEnvDPEC.CNPJ = (string)Functions.OnlyNumbers(dados[1].Trim());
-                                    break;
-                                case "ie":
-                                    this.dadosEnvDPEC.IE = (string)Functions.OnlyNumbers(dados[1].Trim());
-                                    break;
-                                case "chnfe":
-                                    this.dadosEnvDPEC.chNFe = dados[1].Trim();
-                                    break;
-                                case "cnpjcpf":
-                                    this.dadosEnvDPEC.CNPJCPF = (string)Functions.OnlyNumbers(dados[1].Trim());
-                                    break;
-                                case "uf":
-                                    this.dadosEnvDPEC.UF = dados[1].Trim();
-                                    break;
-                                case "vicms":
-                                    this.dadosEnvDPEC.vICMS = dados[1].Trim();
-                                    break;
-                                case "vst":
-                                    this.dadosEnvDPEC.vST = dados[1].Trim();
-                                    break;
-                                case "vnf":
-                                    this.dadosEnvDPEC.vNF = dados[1].Trim();
-                                    break;
-                            }
-                        }
-                        break;
-
-                    default:
-                        break;
+                    switch (dados[0].ToLower())
+                    {
+                        case "tpamb":
+                            this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "cuf":
+                            this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "verproc":
+                            this.dadosEnvDPEC.verProc = dados[1].Trim();
+                            break;
+                        case "cnpj":
+                            this.dadosEnvDPEC.CNPJ = (string)Functions.OnlyNumbers(dados[1].Trim());
+                            break;
+                        case "ie":
+                            this.dadosEnvDPEC.IE = (string)Functions.OnlyNumbers(dados[1].Trim());
+                            break;
+                        case "chnfe":
+                            this.dadosEnvDPEC.chNFe = dados[1].Trim();
+                            break;
+                        case "cnpjcpf":
+                            this.dadosEnvDPEC.CNPJCPF = (string)Functions.OnlyNumbers(dados[1].Trim());
+                            break;
+                        case "uf":
+                            this.dadosEnvDPEC.UF = dados[1].Trim();
+                            break;
+                        case "vicms":
+                            this.dadosEnvDPEC.vICMS = dados[1].Trim();
+                            break;
+                        case "vst":
+                            this.dadosEnvDPEC.vST = dados[1].Trim();
+                            break;
+                        case "vnf":
+                            this.dadosEnvDPEC.vNF = dados[1].Trim();
+                            break;
+                    }
                 }
             }
             else
@@ -195,7 +184,7 @@ namespace NFe.Service
 
                 XmlNodeList infDPECList = doc.GetElementsByTagName("infDPEC");
 
-                foreach(XmlNode infDPECNode in infDPECList)
+                foreach (XmlNode infDPECNode in infDPECList)
                 {
                     XmlElement infDPECElemento = (XmlElement)infDPECNode;
 
@@ -218,17 +207,17 @@ namespace NFe.Service
 
             XmlNodeList retDPECList = doc.GetElementsByTagName("retDPEC");
 
-            foreach(XmlNode retDPECNode in retDPECList)
+            foreach (XmlNode retDPECNode in retDPECList)
             {
                 XmlElement retDPECElemento = (XmlElement)retDPECNode;
 
                 XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
 
-                foreach(XmlNode infDPECRegNode in infDPECRegList)
+                foreach (XmlNode infDPECRegNode in infDPECRegList)
                 {
                     XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    if(infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                    if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
                         infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                     {
                         string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
@@ -253,7 +242,7 @@ namespace NFe.Service
         #endregion
     }
 
-    public class TaskConsultaDPEC: TaskAbst
+    public class TaskConsultaDPEC : TaskAbst
     {
         #region Classe com os dados do XML de consulta do registro do DPEC
         /// <summary>
@@ -278,7 +267,7 @@ namespace NFe.Service
                 /*oLer.*/
                 ConsDPEC(emp, NomeArquivoXML);
 
-                if(vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, /*oLer.*/dadosConsDPEC.tpAmb, /*oLer.*/dadosConsDPEC.tpEmis);
@@ -306,7 +295,7 @@ namespace NFe.Service
                     oGerarXML.ConsultaDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", /*oLer.*/dadosConsDPEC);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 try
                 {
@@ -345,17 +334,17 @@ namespace NFe.Service
 
             XmlNodeList retDPECList = doc.GetElementsByTagName("retConsDPEC");
 
-            foreach(XmlNode retDPECNode in retDPECList)
+            foreach (XmlNode retDPECNode in retDPECList)
             {
                 XmlElement retDPECElemento = (XmlElement)retDPECNode;
 
                 XmlNodeList infDPECRegList = retDPECElemento.GetElementsByTagName("infDPECReg");
 
-                foreach(XmlNode infDPECRegNode in infDPECRegList)
+                foreach (XmlNode infDPECRegNode in infDPECRegList)
                 {
                     XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    if(infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
+                    if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
                         infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
                     {
                         //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
@@ -364,7 +353,7 @@ namespace NFe.Service
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                         string arqEnvDpec = Empresa.Configuracoes[emp].PastaEnvio + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
-                        if(File.Exists(arqEnvDpec))
+                        if (File.Exists(arqEnvDpec))
                         {
                             TFunctions.MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
                         }
@@ -392,52 +381,41 @@ namespace NFe.Service
             ///
             /// danasa 21/10/2010
             /// 
-            if(Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
-                switch(Propriedade.TipoAplicativo)
+                ///cUF|31                   |
+                ///tpAmb|2                  | opcional
+                ///verProc|1.0.0
+                ///CNPJ|10238568000360
+                ///IE|148230665114
+                ///------
+                ///chNFe|31101010238568000360550010000001011000001011
+                ///CNPJCPF|05481336000137   | se UF=EX->Branco
+                ///UF|SP
+                ///vNF|123456.00
+                ///vICMS|18.00
+                ///vST|121.99
+                List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                foreach (string cTexto in cLinhas)
                 {
-                    case TipoAplicativo.Cte:
-                        break;
+                    string[] dados = cTexto.Split('|');
+                    if (dados.GetLength(0) == 1) continue;
 
-                    case TipoAplicativo.Nfe:
-                        ///cUF|31                   |
-                        ///tpAmb|2                  | opcional
-                        ///verProc|1.0.0
-                        ///CNPJ|10238568000360
-                        ///IE|148230665114
-                        ///------
-                        ///chNFe|31101010238568000360550010000001011000001011
-                        ///CNPJCPF|05481336000137   | se UF=EX->Branco
-                        ///UF|SP
-                        ///vNF|123456.00
-                        ///vICMS|18.00
-                        ///vST|121.99
-                        List<string> cLinhas = Functions.LerArquivo(arquivoXML);
-                        foreach(string cTexto in cLinhas)
-                        {
-                            string[] dados = cTexto.Split('|');
-                            if(dados.GetLength(0) == 1) continue;
-
-                            switch(dados[0].ToLower())
-                            {
-                                case "tpamb":
-                                    this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                                    break;
-                                case "veraplic":
-                                    this.dadosConsDPEC.verAplic = dados[1].Trim();
-                                    break;
-                                case "chnfe":
-                                    this.dadosConsDPEC.chNFe = dados[1].Trim();
-                                    break;
-                                case "nregdpec":
-                                    this.dadosConsDPEC.nRegDPEC = dados[1].Trim();
-                                    break;
-                            }
-                        }
-                        break;
-
-                    default:
-                        break;
+                    switch (dados[0].ToLower())
+                    {
+                        case "tpamb":
+                            this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "veraplic":
+                            this.dadosConsDPEC.verAplic = dados[1].Trim();
+                            break;
+                        case "chnfe":
+                            this.dadosConsDPEC.chNFe = dados[1].Trim();
+                            break;
+                        case "nregdpec":
+                            this.dadosConsDPEC.nRegDPEC = dados[1].Trim();
+                            break;
+                    }
                 }
             }
             else
@@ -447,7 +425,7 @@ namespace NFe.Service
 
                 XmlNodeList consDPECList = doc.GetElementsByTagName("consDPEC");
 
-                foreach(XmlNode consDPECNode in consDPECList)
+                foreach (XmlNode consDPECNode in consDPECList)
                 {
                     XmlElement consDPECElemento = (XmlElement)consDPECNode;
 

@@ -147,7 +147,7 @@ namespace NFe.Interface
                     tempEmpresas.Add(elemen);
                     TabPage page = new TabPage(strNome);
                     ucConfiguracao dados = new ucConfiguracao(null);
-                    dados.PopulateConfEmpresa(elemen.CNPJ);
+                    dados.PopulateConfEmpresa(elemen.CNPJ, elemen.Servico);
                     dados.Tag = elemen.CNPJ;
                     page.Controls.Add(dados);
                     dados.Dock = DockStyle.Fill;
@@ -174,7 +174,7 @@ namespace NFe.Interface
             dados.Dock = DockStyle.Fill;
             this.tabControl4.TabPages.Add(page);
             this.tabControl4.SelectedIndex = this.tabControl4.TabPages.Count - 1;
-            dados.PopulateConfEmpresa("");
+            dados.PopulateConfEmpresa("", TipoAplicativo.Nfe);            
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace NFe.Interface
             {
                 if (MessageBox.Show("Exclui esta empresa?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (Empresa.FindConfEmpresa(control.oEmpresa.CNPJ) != null)
+                    if (Empresa.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
                         Empresa.Configuracoes.Remove(control.oEmpresa);
 
                     control.Dispose();
@@ -304,7 +304,7 @@ namespace NFe.Interface
                         MessageBox.Show("Nome da empresa deve ser informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    if (dados.Tag.ToString() == "new" && Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ) != null)
+                    if (dados.Tag.ToString() == "new" && Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) != null)
                     {
                         this.tabControl4.SelectedTab = page;
                         MessageBox.Show("Empresa/CNPJ já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -323,7 +323,7 @@ namespace NFe.Interface
                     if (page.Controls[0] is ucConfiguracao)
                     {
                         ucConfiguracao dados = (ucConfiguracao)page.Controls[0];
-                        if (Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ) == null)
+                        if (Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) == null)
                         {
                             page.Controls[0].Tag = dados.oEmpresa.CNPJ;
                             Empresa.Configuracoes.Add(dados.oEmpresa);
