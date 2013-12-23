@@ -297,6 +297,7 @@ namespace NFe.Service
 
                     #region Nota fiscal autorizada
                     case "100": //Autorizado o uso da NFe
+                    case "150": //Autorizado o uso da NFe fora do prazo
                         XmlNodeList infConsSitList = retConsSitElemento.GetElementsByTagName("infProt");
                         if (infConsSitList != null)
                         {
@@ -309,7 +310,8 @@ namespace NFe.Service
 
                                 switch (strStat)
                                 {
-                                    case "100":
+                                    case "100": //NFe Autorizada
+                                    case "150": //NFe Autorizada fora do prazo
                                         //O retorno da consulta situação a posição das tag´s é diferente do que vem 
                                         //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
                                         //para que fique um XML de distribuição válido. Wandrey 07/10/2009

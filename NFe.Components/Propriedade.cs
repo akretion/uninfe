@@ -26,7 +26,7 @@ namespace NFe.Components
                 "Contingência com SCAN do Ambiente Nacional", 
                 "Contingência com DPEC", 
                 "Contingência com formulário de segurança (FS-DA)",
-                "",
+                "Contingência com SVC-AN",
                 "Contingência com SVC-RS",
                 "Contingência com SVC-SP"
             };
@@ -689,7 +689,11 @@ namespace NFe.Components
             /// </summary>
             public const int teFSDA = 5;
             /// <summary>
-            /// Sistema virtual de contingência do CTe do Rio Grande do Sul
+            /// Sistema virtual de contingência do NFe do Rio Grande do Sul
+            /// </summary>
+            public const int teSVCAN = 6;
+            /// <summary>
+            /// Sistema virtual de contingência do CTe e NFe do Rio Grande do Sul
             /// </summary>
             public const int teSVCRS = 7;
             /// <summary>

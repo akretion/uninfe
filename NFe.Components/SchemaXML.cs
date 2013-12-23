@@ -438,6 +438,19 @@ namespace NFe.Components
             });
             #endregion
 
+            #region XML de Evento de Inclusão de Condutor
+            InfSchemas.Add("NFE-eventoMDFe110114", new InfSchema()
+            {
+                Tag = "eventoMDFe",
+                ID = ++id,
+                ArquivoXSD = "MDFe\\eventoMDFe_v1.00.xsd",
+                Descricao = "XML de evento de encerramento do MDF-e",
+                TagAssinatura = "eventoMDFe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
             #region XML de Eventos Gerais do MDFe
             InfSchemas.Add("NFE-eventoMDFe310620", new InfSchema()
             {

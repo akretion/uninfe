@@ -151,6 +151,10 @@ namespace NFe.Service
 
             XmlDocument doc = new XmlDocument();
 
+            /*
+             this.vStrXmlRetorno = "<retInutCTe versao=\"2.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\"><infInut><tpAmb>2</tpAmb><verAplic>SP-CTe-05-12-2013</verAplic><cStat>102</cStat><xMotivo>Inutilização de número homologado</xMotivo><cUF>35</cUF><ano>13</ano><CNPJ>11319532000102</CNPJ><mod>57</mod><serie>1</serie><nCTIni>2017</nCTIni><nCTFin>2017</nCTFin><dhRecbto>2013-12-13T17:43:06</dhRecbto><nProt>135130006325186</nProt></infInut></retInutCTe>";
+            */
+
             MemoryStream msXml = Functions.StringXmlToStream(this.vStrXmlRetorno);
             doc.Load(msXml);
 
@@ -170,7 +174,7 @@ namespace NFe.Service
                     {
                         string strRetInutNFe = retInutNFeNode.OuterXml;
 
-                        oGerarXML.XmlDistInut(NomeArquivoXML, strRetInutNFe);
+                        oGerarXML.XmlDistInutCTe(NomeArquivoXML, strRetInutNFe);
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);

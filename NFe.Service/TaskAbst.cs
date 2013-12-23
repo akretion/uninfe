@@ -170,7 +170,10 @@ namespace NFe.Service
                     retorna = "CteInutilizacao";
                     break;
                 case Servicos.RecepcaoEventoCTe:
-                    retorna = "CteRecepcaoEvento";
+                    if (cUF == 31) //Minas Gerais (MG)
+                        retorna = "RecepcaoEvento";
+                    else
+                        retorna = "CteRecepcaoEvento";
                     break;
                 #endregion
             }
@@ -1314,7 +1317,9 @@ namespace NFe.Service
                     //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
                     //danasa 8-2009
                     if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4")) ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "3")))
+                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && oDadosNFe.tpEmis == "3") ||
+                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
+                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
                     {
                         booValido = true;
                     }

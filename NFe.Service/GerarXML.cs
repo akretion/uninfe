@@ -1699,7 +1699,7 @@ namespace NFe.Service
 
                 //Montar o XML -procCancCTe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                    "<procInutCTe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + "http://www.portalfiscal.inf.br/cte" + "\">" +
+                    "<procInutCTe xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\" versao=\"" + ConfiguracaoApp.VersaoXMLCTeInut + "\">" +
                     strInutNFe +
                     strRetInutNFe +
                     "</procInutCTe>";

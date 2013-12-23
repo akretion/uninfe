@@ -77,6 +77,7 @@ namespace NFe.Service
                     case Servicos.EnviarEventoCancelamento:
                         switch (tpEmis)
                         {
+                            case Propriedade.TipoEmissao.teSVCAN:
                             case Propriedade.TipoEmissao.teSVCRS:
                             case Propriedade.TipoEmissao.teSVCSP:
                             case Propriedade.TipoEmissao.teSCAN:

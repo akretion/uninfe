@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="MDFeRecepcao">
     <wsdl:port name="MDFeRecepcaoSoap12" binding="tns:MDFeRecepcaoSoap12">
-      <soap12:address location="https://mdfe-hml.sefaz.rs.gov.br/ws/MDFerecepcao/MDFeRecepcao.asmx" />
+      <soap12:address location="https://mdfe-hml.sefaz.rs.gov.br/WS/mdferecepcao/MDFerecepcao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

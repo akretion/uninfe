@@ -726,6 +726,10 @@ namespace NFe.Settings
                     CodigoUF = 903;
                     break;
 
+                case Propriedade.TipoEmissao.teSVCAN:
+                    CodigoUF = 904;
+                    break;
+
                 case Propriedade.TipoEmissao.teSCAN:
                     CodigoUF = 900;
                     break;

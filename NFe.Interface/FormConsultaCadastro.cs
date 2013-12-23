@@ -67,6 +67,7 @@ namespace NFe.Interface
             this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN]);
             this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS]);
             this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCAN]);
 
             #region Montar Array DropList do Ambiente
             arrAmb.Add(new ComboElem("Produção", Propriedade.TipoAmbiente.taProducao));
@@ -128,20 +129,33 @@ namespace NFe.Interface
             {
                 if (this.cbEmissao.SelectedIndex == 1)
                 {
-                    MessageBox.Show("CTe não dispõe do tipo de contingência SCAN.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("CT-e não dispõe do tipo de contingência SCAN.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                else if (this.cbEmissao.SelectedIndex == 4)
+                {
+                    MessageBox.Show("CT-e não dispõe do tipo de contingência SVCAN.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
             else if (servico == TipoAplicativo.Nfe)
             {
-                if (this.cbEmissao.SelectedIndex == 2)
+                if (this.cbEmissao.SelectedIndex == 3)
                 {
-                    MessageBox.Show("NFe não dispõe do tipo de contingência SCVRS.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("NF-e não dispõe do tipo de contingência SCVSP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                else if (this.cbEmissao.SelectedIndex == 3)
+            }
+            else if (servico == TipoAplicativo.Nfse)
+            {
+                MessageBox.Show("NFS-e não dispõe do serviço de consulta status.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (servico == TipoAplicativo.MDFe)
+            {
+                if (this.cbEmissao.SelectedIndex != 0)
                 {
-                    MessageBox.Show("NFe não dispõe do tipo de contingência SCVSP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("MDF-e só dispõe do tipo de emissão Normal.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -171,6 +185,9 @@ namespace NFe.Interface
                         break;
                     case 3:
                         tpEmis = Propriedade.TipoEmissao.teSVCSP;
+                        break;
+                    case 4:
+                        tpEmis = Propriedade.TipoEmissao.teSVCAN;
                         break;
                 }
 
@@ -313,6 +330,9 @@ namespace NFe.Interface
                     break;
                 case Propriedade.TipoEmissao.teSVCSP:
                     this.cbEmissao.SelectedIndex = 3;
+                    break;
+                case Propriedade.TipoEmissao.teSVCAN:
+                    this.cbEmissao.SelectedIndex = 4;
                     break;
             }
 

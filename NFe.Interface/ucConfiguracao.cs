@@ -163,6 +163,7 @@ namespace NFe.Interface
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN], Propriedade.TipoEmissao.teSCAN));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC], Propriedade.TipoEmissao.teDPEC));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teFSDA], Propriedade.TipoEmissao.teFSDA));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCAN], Propriedade.TipoEmissao.teSVCAN));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS], Propriedade.TipoEmissao.teSVCRS));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP], Propriedade.TipoEmissao.teSVCSP));
             }

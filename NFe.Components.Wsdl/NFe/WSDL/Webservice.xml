@@ -1375,9 +1375,14 @@
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
-  <!-- SCAN CTe - Servico de Contingencia Virtual do Rio Grande do Sul -->
-  <Estado ID="902" Nome="Servico de Contingencia Virtual do Rio Grande do Sul" UF="SCVRS">
+  <!-- SVCRS - Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe) -->
+  <Estado ID="902" Nome="Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe)" UF="SVCRS">
     <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>      
+      <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeRecepcaoEvento>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao></CTeInutilizacao>
@@ -1386,6 +1391,11 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
+      <NFeRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>      
+      <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeRecepcaoEvento>wsdl\producao\SCVRS\PSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SCVRS\PSCVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SCVRS\PSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao></CTeInutilizacao>
@@ -1394,8 +1404,8 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <!-- SCAN CTe - Servico de Contingencia Virtual de São Paulo -->
-  <Estado ID="903" Nome="Servico de Contingencia Virtual de São Paulo" UF="SCVSP">
+  <!-- SVCSP - Servico Virtual de Contingência de São Paulo (CTe) -->
+  <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP">
     <LocalHomologacao>
       <CTeRecepcao>wsdl\homologacao\SCVSP\HSCVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SCVSP\HSCVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1411,6 +1421,23 @@
       <CTeConsulta>wsdl\producao\SCVSP\PSCVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SCVSP\PSCVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <!-- SVCAN - Servico Virtual de Contingência do Ambiente Nacional (NFe) -->
+  <Estado ID="904" Nome="Servico Virtual de Contingência do Ambiente Nacional (NFe)" UF="SVCAN">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\SCVAN\HSVCANNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SCVAN\HSVCANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeConsulta>wsdl\homologacao\SCVAN\HSVCANNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SCVAN\HSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeRecepcaoEvento>wsdl\homologacao\SCVAN\HSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\SCVAN\PSVCANNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SCVAN\PSVCANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeConsulta>wsdl\producao\SCVAN\PSVCANNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SCVAN\PSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeRecepcaoEvento>wsdl\producao\SCVAN\PSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tags de template -->

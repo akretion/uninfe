@@ -420,15 +420,15 @@ namespace NFe.Service
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_TXT) >= 0)
                             {
-                                tipoServico = Servicos.EnviarCCe;
+                                tipoServico = Servicos.RecepcaoEvento;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0)
                             {
-                                tipoServico = Servicos.EnviarEventoCancelamento;
+                                tipoServico = Servicos.RecepcaoEvento;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
                             {
-                                tipoServico = Servicos.EnviarManifDest;
+                                tipoServico = Servicos.RecepcaoEvento;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
                             {
@@ -580,6 +580,26 @@ namespace NFe.Service
                                     {
                                         tipoServico = Servicos.MontarLoteVariasNFe;
                                     }
+                                    break;
+
+                                case "envDPEC":
+                                    tipoServico = Servicos.EnviarDPEC;
+                                    break;
+
+                                case "consDPEC":
+                                    tipoServico = Servicos.ConsultarDPEC;
+                                    break;
+
+                                case "gerarChave":
+                                    tipoServico = Servicos.GerarChaveNFe;
+                                    break;
+
+                                case "consNFeDest":
+                                    tipoServico = Servicos.ConsultaNFDest;
+                                    break;
+
+                                case "downloadNFe":
+                                    tipoServico = Servicos.DownloadNFe;
                                     break;
                                 #endregion
 
