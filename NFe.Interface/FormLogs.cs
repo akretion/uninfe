@@ -20,6 +20,7 @@ namespace NFe.Interface
         private void FormLogs_Load(object sender, EventArgs e)
         {
             this.textBox1.Dock = DockStyle.Fill;
+            this.textBox1.Text = "";
 
             try
             {

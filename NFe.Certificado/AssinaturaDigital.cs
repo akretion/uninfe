@@ -60,6 +60,10 @@ namespace NFe.Certificado
                 // Load the passed XML file using it’s name.
                 doc.LoadXml(xmlString);
 
+                ///danasa: 12/2013 ????????
+                if (doc.GetElementsByTagName("Signature").Count > 0)
+                    return;
+
                 if(doc.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");

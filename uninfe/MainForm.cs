@@ -86,6 +86,7 @@ namespace uninfe
 
             #region Definir valores propriedades de configuração
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
             ConfiguracaoApp.StartVersoes();
             #endregion
 

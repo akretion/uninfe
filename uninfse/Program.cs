@@ -33,6 +33,9 @@ namespace uninfse
                 }
 
 
+            Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
+
+
             if(Aplicacao.AppExecutando(false))
             {
                 return;

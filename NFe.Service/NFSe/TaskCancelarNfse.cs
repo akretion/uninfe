@@ -33,16 +33,13 @@ namespace NFe.Service.NFSe
             {
                 oDadosPedCanNfse = new DadosPedCanNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML ler = new LerXML();
-                /*ler.*/
                 PedCanNfse(emp, NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 WebServiceProxy wsProxy = null;
                 object pedCanNfse = null;
                 string cabecMsg = "";
-                //PadroesNFSe padraoNFSe = Functions.PadraoNFSe(/*ler.*/oDadosPedSitLoteRps.cMunicipio);
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(/*ler.*/oDadosPedCanNfse.cMunicipio);
+                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedCanNfse.cMunicipio);
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.IPM:
@@ -53,8 +50,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.GINFES:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosPedCanNfse.cMunicipio, /*ler.*/oDadosPedCanNfse.tpAmb, /*ler.*/oDadosPedCanNfse.tpEmis);
-                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio));
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         cabecMsg = ""; //Cancelamento ainda tá na versão 2.0 então não tem o cabecMsg
                         break;
 
@@ -64,13 +61,13 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.THEMA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosPedCanNfse.cMunicipio, /*ler.*/oDadosPedCanNfse.tpAmb, /*ler.*/oDadosPedCanNfse.tpEmis);
-                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio));
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         break;
 
                     case PadroesNFSe.CANOAS_RS:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, /*ler.*/oDadosPedCanNfse.cMunicipio, /*ler.*/oDadosPedCanNfse.tpAmb, /*ler.*/oDadosPedCanNfse.tpEmis);
-                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio));
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
 
@@ -142,10 +139,17 @@ namespace NFe.Service.NFSe
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
-                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*ler.*/oDadosPedCanNfse.cMunicipio));
+                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, /*ler.*/oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);
+                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);
+
+                    ///
+                    /// grava o arquivo no FTP
+                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                        Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.CanNfse)));
+                    if (File.Exists(filenameFTP))
+                        new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
             }
             catch (Exception ex)
@@ -204,6 +208,11 @@ namespace NFe.Service.NFSe
         /// </summary>
         private void EncryptAssinatura()
         {
+            ///danasa: 12/2013
+            NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosPedCanNfse.cMunicipio);
+            val.EncryptAssinatura(NomeArquivoXML);
+
+            /*
             string arquivoXML = NomeArquivoXML;
 
             XmlDocument doc = new XmlDocument();
@@ -232,7 +241,7 @@ namespace NFe.Service.NFSe
             }
 
             //Salvar o XML com as alterações efetuadas
-            doc.Save(arquivoXML);
+            doc.Save(arquivoXML);*/
         }
         #endregion
     }

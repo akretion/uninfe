@@ -16,7 +16,8 @@ namespace NFe.Components
         /// <summary>
         /// O Maior ID que tem na lista
         /// </summary>
-        public static int MaxID { get; set; }
+        //public static int MaxID { get; set; }
+        public static int MaxID { get { return InfSchemas.Count; } }
 
         /// <summary>
         /// Cria várias listas com as TAG´s de identificação dos XML´s e seus Schemas
@@ -640,6 +641,8 @@ namespace NFe.Components
 
             #endregion
 
+            /*
+
             #region Determinar a propriedade MaxID
             MaxID = 0;
             foreach (InfSchema item in InfSchemas.Values)
@@ -648,6 +651,7 @@ namespace NFe.Components
                     MaxID = item.ID;
             }
             #endregion
+            */ 
         }
 
     }

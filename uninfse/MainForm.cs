@@ -91,15 +91,21 @@ namespace uninfse
             WebServiceNFSe.Start();
 
             #region Definir valores propriedades de configuração
+            ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
             Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
             ConfiguracaoApp.StartVersoes();
             SchemaXMLNFSe.CriarListaIDXML();
             #endregion
 
-            if(!this.servicoInstaladoErodando)     //danasa 12/8/2011
-
-                //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
-                new ThreadControlEvents();  //danasa 12/8/2011
+            if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            {
+                MessageBox.Show("Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService + "' não encontrados");
+                Application.Exit();
+            }
+            else
+                if(!this.servicoInstaladoErodando)     //danasa 12/8/2011
+                    //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
+                    new ThreadControlEvents();  //danasa 12/8/2011
         }
         #endregion
 

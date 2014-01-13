@@ -101,10 +101,10 @@ namespace NFe.Service
                                 //Ler a NFe
 
                                 //Verificar se o -nfe.xml existe na pasta de autorizados
-                                bool NFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extNFe);
+                                bool NFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extNFe, extNFe);
 
                                 //Verificar se o -procNfe.xml existe na past de autorizados
-                                bool procNFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extProcNFe);
+                                bool procNFeJaNaAutorizada = oAux.EstaAutorizada(file, oLerXml.oDadosNfe.dEmi, extNFe, extProcNFe);
 
                                 //Se um dos XML´s não estiver na pasta de autorizadas ele força finalizar o processo da NFe.
                                 if (!NFeJaNaAutorizada || !procNFeJaNaAutorizada)

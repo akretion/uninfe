@@ -575,11 +575,11 @@ namespace NFe.Settings
 
                         empresa.PastaEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
                         empresa.PastaRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
-                        empresa.PastaEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
                         empresa.PastaErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
+                        empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
+                        empresa.PastaEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
                         empresa.PastaBackup = Functions.LerTag(configElemento, NFeStrConstants.PastaBackup, false);
                         empresa.PastaEnvioEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
-                        empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
                         empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
 
                         empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
@@ -862,13 +862,16 @@ namespace NFe.Settings
                         var configElemento = (XmlElement)configNode;
 
                         verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
                         verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
                         verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
                         verificaPasta(empresa, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
-                        //verificaPasta(empresa, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", true);
+                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                        {
+                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
+                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
+                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
+                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", false);
+                        }
                     }
                 }
                 catch
@@ -948,20 +951,72 @@ namespace NFe.Settings
                     {
                         Directory.CreateDirectory(empresa.PastaEnvio.Trim() + "\\Temp");
                     }
+
+                    //Criar subpasta Assinado na pasta de envio individual de nfe
+                    if (!Directory.Exists(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado) && Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        System.IO.Directory.CreateDirectory(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado);
+                    }
                 }
 
-                //Criar pasta de Envio em Lote
-                if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
+                if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                 {
-                    if (!Directory.Exists(empresa.PastaEnvioEmLote))
+                    //Criar pasta de Envio em Lote
+                    if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
                     {
-                        Directory.CreateDirectory(empresa.PastaEnvioEmLote);
+                        if (!Directory.Exists(empresa.PastaEnvioEmLote))
+                        {
+                            Directory.CreateDirectory(empresa.PastaEnvioEmLote);
+                        }
+
+                        //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
+                        if (!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
+                        {
+                            Directory.CreateDirectory(empresa.PastaEnvioEmLote.Trim() + "\\Temp");
+                        }
                     }
 
-                    //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
-                    if (!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
+                    //Criar pasta Enviado
+                    if (!string.IsNullOrEmpty(empresa.PastaEnviado))
                     {
-                        Directory.CreateDirectory(empresa.PastaEnvioEmLote.Trim() + "\\Temp");
+                        if (!Directory.Exists(empresa.PastaEnviado))
+                        {
+                            Directory.CreateDirectory(empresa.PastaEnviado);
+                        }
+                    }
+                    //Criar pasta de Backup
+                    if (!string.IsNullOrEmpty(empresa.PastaBackup))
+                    {
+                        if (!Directory.Exists(empresa.PastaBackup))
+                        {
+                            Directory.CreateDirectory(empresa.PastaBackup);
+                        }
+                    }
+                    //Criar subpasta Assinado na pasta de envio em lote de nfe
+                    if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
+                    {
+                        if (!Directory.Exists(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado))
+                        {
+                            System.IO.Directory.CreateDirectory(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado);
+                        }
+                    }
+
+                    //Criar pasta para monitoramento do DANFEMon e impressão do DANFE
+                    if (!string.IsNullOrEmpty(empresa.PastaDanfeMon))
+                    {
+                        if (!Directory.Exists(empresa.PastaDanfeMon))
+                        {
+                            System.IO.Directory.CreateDirectory(empresa.PastaDanfeMon);
+                        }
+                    }
+
+                    //Criar pasta para gravar as nfe de destinatarios
+                    if (!string.IsNullOrEmpty(empresa.PastaDownloadNFeDest))
+                    {
+                        if (!Directory.Exists(empresa.PastaDownloadNFeDest))
+                        {
+                            System.IO.Directory.CreateDirectory(empresa.PastaDownloadNFeDest);
+                        }
                     }
                 }
 
@@ -974,14 +1029,6 @@ namespace NFe.Settings
                     }
                 }
 
-                //Criar pasta Enviado
-                if (!string.IsNullOrEmpty(empresa.PastaEnviado))
-                {
-                    if (!Directory.Exists(empresa.PastaEnviado))
-                    {
-                        Directory.CreateDirectory(empresa.PastaEnviado);
-                    }
-                }
 
                 //Criar pasta de XML´s com erro
                 if (!string.IsNullOrEmpty(empresa.PastaErro))
@@ -992,14 +1039,6 @@ namespace NFe.Settings
                     }
                 }
 
-                //Criar pasta de Backup
-                if (!string.IsNullOrEmpty(empresa.PastaBackup))
-                {
-                    if (!Directory.Exists(empresa.PastaBackup))
-                    {
-                        Directory.CreateDirectory(empresa.PastaBackup);
-                    }
-                }
 
                 //Criar pasta para somente validação de XML´s
                 if (!string.IsNullOrEmpty(empresa.PastaValidar))
@@ -1016,41 +1055,6 @@ namespace NFe.Settings
                     }
                 }
 
-                //Criar subpasta Assinado na pasta de envio individual de nfe
-                if (!string.IsNullOrEmpty(empresa.PastaEnvio))
-                {
-                    if (!Directory.Exists(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado);
-                    }
-                }
-
-                //Criar subpasta Assinado na pasta de envio em lote de nfe
-                if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
-                {
-                    if (!Directory.Exists(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado);
-                    }
-                }
-
-                //Criar pasta para monitoramento do DANFEMon e impressão do DANFE
-                if (!string.IsNullOrEmpty(empresa.PastaDanfeMon))
-                {
-                    if (!Directory.Exists(empresa.PastaDanfeMon))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaDanfeMon);
-                    }
-                }
-
-                //Criar pasta para gravar as nfe de destinatarios
-                if (!string.IsNullOrEmpty(empresa.PastaDownloadNFeDest))
-                {
-                    if (!Directory.Exists(empresa.PastaDownloadNFeDest))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaDownloadNFeDest);
-                    }
-                }
             }
 
             Empresa.CriarSubPastaEnviado();
@@ -1085,26 +1089,29 @@ namespace NFe.Settings
         /// </remarks>
         public static void CriarSubPastaEnviado(int indexEmpresa)
         {
-            Empresa empresa = Empresa.Configuracoes[indexEmpresa];
-
-            if (!string.IsNullOrEmpty(empresa.PastaEnviado))
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse && Empresa.Configuracoes.Count > 0)
             {
-                //Criar a pasta EmProcessamento
-                if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
-                {
-                    System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
-                }
+                Empresa empresa = Empresa.Configuracoes[indexEmpresa];
 
-                //Criar a Pasta Autorizado
-                if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                if (!string.IsNullOrEmpty(empresa.PastaEnviado))
                 {
-                    System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString());
-                }
+                    //Criar a pasta EmProcessamento
+                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
+                    }
 
-                //Criar a Pasta Denegado
-                if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()))
-                {
-                    System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                    //Criar a Pasta Autorizado
+                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                    }
+
+                    //Criar a Pasta Denegado
+                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                    }
                 }
             }
         }

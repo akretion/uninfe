@@ -27,9 +27,11 @@ namespace NFe.Service
         {
             try
             {
-                Servicos servico = DefinirTipoServico(emp, arquivo);
+                Servicos servico = Servicos.Nulo;
                 try
                 {
+                    servico = DefinirTipoServico(emp, arquivo);
+
                     if (servico == Servicos.Nulo)
                         throw new Exception("Não pode identificar o tipo de serviço baseado no arquivo " + arquivo);
 
@@ -342,12 +344,12 @@ namespace NFe.Service
         }
         #endregion
 
-        public Servicos DefinirTipoServico(int empresa, string fullPath)
+        private Servicos DefinirTipoServico(int empresa, string fullPath)
         {
             Servicos tipoServico = Servicos.Nulo;
 
-            try
-            {
+            //try
+            //{
                 string arq = fullPath.ToLower().Trim();
 
                 #region Serviços que funcionam tanto na pasta Geral como na pasta da Empresa
@@ -647,10 +649,10 @@ namespace NFe.Service
                         #endregion
                     }
                 }
-            }
-            catch
-            {
-            }
+            //}
+            //catch
+            //{
+            //}
 
             return tipoServico;
         }

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lblServico = new System.Windows.Forms.Label();
+            this.cbServico = new System.Windows.Forms.ComboBox();
             this.lblSenhaWS = new System.Windows.Forms.Label();
             this.lblUsuarioWS = new System.Windows.Forms.Label();
             this.txtSenhaWS = new System.Windows.Forms.TextBox();
@@ -43,7 +45,7 @@
             this.edtPadrao = new System.Windows.Forms.TextBox();
             this.edtCodMun = new System.Windows.Forms.TextBox();
             this.udTempoConsulta = new System.Windows.Forms.NumericUpDown();
-            this.label20 = new System.Windows.Forms.Label();
+            this.lbl_udTempoConsulta = new System.Windows.Forms.Label();
             this.edtCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,8 +53,8 @@
             this.udDiasLimpeza = new System.Windows.Forms.NumericUpDown();
             this.labelUF = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lbl_udDiasLimpeza = new System.Windows.Forms.Label();
+            this.lbl_DiretorioSalvarComo = new System.Windows.Forms.Label();
             this.comboBox_Ambiente = new System.Windows.Forms.ComboBox();
             this.cboDiretorioSalvarComo = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -60,22 +62,22 @@
             this.checkBoxRetornoNFETxt = new System.Windows.Forms.CheckBox();
             this.comboBox_UF = new System.Windows.Forms.ComboBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaDownload = new System.Windows.Forms.Label();
             this.textBox_PastaDownload = new System.Windows.Forms.TextBox();
             this.cbCriaPastas = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaEnvioXML = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaValidar = new System.Windows.Forms.Label();
             this.textBox_PastaValidar = new System.Windows.Forms.TextBox();
             this.textBox_PastaLote = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaLote = new System.Windows.Forms.Label();
             this.textBox_PastaBackup = new System.Windows.Forms.TextBox();
             this.textBox_PastaEnviados = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaBackup = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaEnviados = new System.Windows.Forms.Label();
             this.textBox_PastaXmlErro = new System.Windows.Forms.TextBox();
             this.textBox_PastaRetornoXML = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaXmlErro = new System.Windows.Forms.Label();
+            this.lbl_textBox_PastaRetornoXML = new System.Windows.Forms.Label();
             this.textBox_PastaEnvioXML = new System.Windows.Forms.TextBox();
             this.button_SelecionarPastaDownload = new System.Windows.Forms.Button();
             this.button_SelectPastaXmlRetorno = new System.Windows.Forms.Button();
@@ -83,7 +85,7 @@
             this.button_SelectPastaXmlEnviado = new System.Windows.Forms.Button();
             this.button_SelectPastaXmlErro = new System.Windows.Forms.Button();
             this.button_SelectPastaBackup = new System.Windows.Forms.Button();
-            this.btnSelectPastaLote = new System.Windows.Forms.Button();
+            this.button_SelectPastaLote = new System.Windows.Forms.Button();
             this.button_SelectPastaValidar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lblCertificadoArquivo = new System.Windows.Forms.Label();
@@ -113,7 +115,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.edtFTP_PastaRetornos = new System.Windows.Forms.TextBox();
             this.edtFTP_Ativo = new System.Windows.Forms.CheckBox();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lbl_edtFTP_PastaDestino = new System.Windows.Forms.Label();
             this.edtFTP_PastaDestino = new System.Windows.Forms.TextBox();
             this.edtFTP_GravaXMLPastaUnica = new System.Windows.Forms.CheckBox();
             this.edtFTP_Porta = new System.Windows.Forms.NumericUpDown();
@@ -127,8 +129,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.cbServico = new System.Windows.Forms.ComboBox();
-            this.lblServico = new System.Windows.Forms.Label();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -169,7 +169,7 @@
             this.tabPage6.Controls.Add(this.edtPadrao);
             this.tabPage6.Controls.Add(this.edtCodMun);
             this.tabPage6.Controls.Add(this.udTempoConsulta);
-            this.tabPage6.Controls.Add(this.label20);
+            this.tabPage6.Controls.Add(this.lbl_udTempoConsulta);
             this.tabPage6.Controls.Add(this.edtCNPJ);
             this.tabPage6.Controls.Add(this.label19);
             this.tabPage6.Controls.Add(this.label9);
@@ -177,8 +177,8 @@
             this.tabPage6.Controls.Add(this.udDiasLimpeza);
             this.tabPage6.Controls.Add(this.labelUF);
             this.tabPage6.Controls.Add(this.label4);
-            this.tabPage6.Controls.Add(this.label14);
-            this.tabPage6.Controls.Add(this.label13);
+            this.tabPage6.Controls.Add(this.lbl_udDiasLimpeza);
+            this.tabPage6.Controls.Add(this.lbl_DiretorioSalvarComo);
             this.tabPage6.Controls.Add(this.comboBox_Ambiente);
             this.tabPage6.Controls.Add(this.cboDiretorioSalvarComo);
             this.tabPage6.Controls.Add(this.label8);
@@ -192,6 +192,26 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Diversos";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lblServico
+            // 
+            this.lblServico.AutoSize = true;
+            this.lblServico.Location = new System.Drawing.Point(184, 47);
+            this.lblServico.Name = "lblServico";
+            this.lblServico.Size = new System.Drawing.Size(43, 13);
+            this.lblServico.TabIndex = 29;
+            this.lblServico.Text = "Serviço\r\n";
+            // 
+            // cbServico
+            // 
+            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServico.FormattingEnabled = true;
+            this.cbServico.ItemHeight = 13;
+            this.cbServico.Location = new System.Drawing.Point(187, 63);
+            this.cbServico.Name = "cbServico";
+            this.cbServico.Size = new System.Drawing.Size(173, 21);
+            this.cbServico.TabIndex = 4;
+            this.cbServico.Leave += new System.EventHandler(this.cbServico_Leave);
             // 
             // lblSenhaWS
             // 
@@ -320,13 +340,13 @@
             0,
             0});
             // 
-            // label20
+            // lbl_udTempoConsulta
             // 
-            this.label20.Location = new System.Drawing.Point(367, 224);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(188, 36);
-            this.label20.TabIndex = 18;
-            this.label20.Text = "Quantidade em segundos p/efetuar a consultar da autorização da NFe:";
+            this.lbl_udTempoConsulta.Location = new System.Drawing.Point(367, 224);
+            this.lbl_udTempoConsulta.Name = "lbl_udTempoConsulta";
+            this.lbl_udTempoConsulta.Size = new System.Drawing.Size(188, 36);
+            this.lbl_udTempoConsulta.TabIndex = 18;
+            this.lbl_udTempoConsulta.Text = "Quantidade em segundos p/efetuar a consultar da autorização da NFe:";
             // 
             // edtCNPJ
             // 
@@ -358,6 +378,7 @@
             // edtNome
             // 
             this.edtNome.Location = new System.Drawing.Point(7, 24);
+            this.edtNome.MaxLength = 20;
             this.edtNome.Name = "edtNome";
             this.edtNome.Size = new System.Drawing.Size(575, 20);
             this.edtNome.TabIndex = 1;
@@ -395,23 +416,23 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Ambiente:";
             // 
-            // label14
+            // lbl_udDiasLimpeza
             // 
-            this.label14.Location = new System.Drawing.Point(7, 224);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(212, 36);
-            this.label14.TabIndex = 16;
-            this.label14.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
+            this.lbl_udDiasLimpeza.Location = new System.Drawing.Point(7, 224);
+            this.lbl_udDiasLimpeza.Name = "lbl_udDiasLimpeza";
+            this.lbl_udDiasLimpeza.Size = new System.Drawing.Size(212, 36);
+            this.lbl_udDiasLimpeza.TabIndex = 16;
+            this.lbl_udDiasLimpeza.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
     "0 para infinito.";
             // 
-            // label13
+            // lbl_DiretorioSalvarComo
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 181);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(332, 13);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "Como devem ser criados os diretórios baseados na data de emissão?";
+            this.lbl_DiretorioSalvarComo.AutoSize = true;
+            this.lbl_DiretorioSalvarComo.Location = new System.Drawing.Point(7, 181);
+            this.lbl_DiretorioSalvarComo.Name = "lbl_DiretorioSalvarComo";
+            this.lbl_DiretorioSalvarComo.Size = new System.Drawing.Size(332, 13);
+            this.lbl_DiretorioSalvarComo.TabIndex = 14;
+            this.lbl_DiretorioSalvarComo.Text = "Como devem ser criados os diretórios baseados na data de emissão?";
             // 
             // comboBox_Ambiente
             // 
@@ -497,22 +518,22 @@
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.label3);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaDownload);
             this.tabPage7.Controls.Add(this.textBox_PastaDownload);
             this.tabPage7.Controls.Add(this.cbCriaPastas);
-            this.tabPage7.Controls.Add(this.label1);
-            this.tabPage7.Controls.Add(this.label12);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaEnvioXML);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaValidar);
             this.tabPage7.Controls.Add(this.textBox_PastaValidar);
             this.tabPage7.Controls.Add(this.textBox_PastaLote);
-            this.tabPage7.Controls.Add(this.label11);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaLote);
             this.tabPage7.Controls.Add(this.textBox_PastaBackup);
             this.tabPage7.Controls.Add(this.textBox_PastaEnviados);
-            this.tabPage7.Controls.Add(this.label10);
-            this.tabPage7.Controls.Add(this.label6);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaBackup);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaEnviados);
             this.tabPage7.Controls.Add(this.textBox_PastaXmlErro);
             this.tabPage7.Controls.Add(this.textBox_PastaRetornoXML);
-            this.tabPage7.Controls.Add(this.label7);
-            this.tabPage7.Controls.Add(this.label2);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaXmlErro);
+            this.tabPage7.Controls.Add(this.lbl_textBox_PastaRetornoXML);
             this.tabPage7.Controls.Add(this.textBox_PastaEnvioXML);
             this.tabPage7.Controls.Add(this.button_SelecionarPastaDownload);
             this.tabPage7.Controls.Add(this.button_SelectPastaXmlRetorno);
@@ -520,7 +541,7 @@
             this.tabPage7.Controls.Add(this.button_SelectPastaXmlEnviado);
             this.tabPage7.Controls.Add(this.button_SelectPastaXmlErro);
             this.tabPage7.Controls.Add(this.button_SelectPastaBackup);
-            this.tabPage7.Controls.Add(this.btnSelectPastaLote);
+            this.tabPage7.Controls.Add(this.button_SelectPastaLote);
             this.tabPage7.Controls.Add(this.button_SelectPastaValidar);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
@@ -530,14 +551,14 @@
             this.tabPage7.Text = "Pastas";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // lbl_textBox_PastaDownload
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 315);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(358, 13);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
+            this.lbl_textBox_PastaDownload.AutoSize = true;
+            this.lbl_textBox_PastaDownload.Location = new System.Drawing.Point(5, 315);
+            this.lbl_textBox_PastaDownload.Name = "lbl_textBox_PastaDownload";
+            this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(358, 13);
+            this.lbl_textBox_PastaDownload.TabIndex = 32;
+            this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
             // 
             // textBox_PastaDownload
             // 
@@ -559,24 +580,24 @@
             this.cbCriaPastas.Text = "Criar as pastas automaticamente";
             this.cbCriaPastas.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lbl_textBox_PastaEnvioXML
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(497, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
+            this.lbl_textBox_PastaEnvioXML.AutoSize = true;
+            this.lbl_textBox_PastaEnvioXML.Location = new System.Drawing.Point(1, 6);
+            this.lbl_textBox_PastaEnvioXML.Name = "lbl_textBox_PastaEnvioXML";
+            this.lbl_textBox_PastaEnvioXML.Size = new System.Drawing.Size(497, 13);
+            this.lbl_textBox_PastaEnvioXML.TabIndex = 1;
+            this.lbl_textBox_PastaEnvioXML.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
     " os WebServices:";
             // 
-            // label12
+            // lbl_textBox_PastaValidar
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1, 272);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(361, 13);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "Pasta onde serão gravados os arquivos XML´s a serem somente validados:";
+            this.lbl_textBox_PastaValidar.AutoSize = true;
+            this.lbl_textBox_PastaValidar.Location = new System.Drawing.Point(1, 272);
+            this.lbl_textBox_PastaValidar.Name = "lbl_textBox_PastaValidar";
+            this.lbl_textBox_PastaValidar.Size = new System.Drawing.Size(361, 13);
+            this.lbl_textBox_PastaValidar.TabIndex = 28;
+            this.lbl_textBox_PastaValidar.Text = "Pasta onde serão gravados os arquivos XML´s a serem somente validados:";
             // 
             // textBox_PastaValidar
             // 
@@ -598,14 +619,14 @@
             this.textBox_PastaLote.TabIndex = 8;
             this.textBox_PastaLote.TextChanged += new System.EventHandler(this.changed_Modificado);
             // 
-            // label11
+            // lbl_textBox_PastaLote
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1, 49);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(499, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
+            this.lbl_textBox_PastaLote.AutoSize = true;
+            this.lbl_textBox_PastaLote.Location = new System.Drawing.Point(1, 49);
+            this.lbl_textBox_PastaLote.Name = "lbl_textBox_PastaLote";
+            this.lbl_textBox_PastaLote.Size = new System.Drawing.Size(499, 13);
+            this.lbl_textBox_PastaLote.TabIndex = 25;
+            this.lbl_textBox_PastaLote.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
     " os WebServices:";
             // 
             // textBox_PastaBackup
@@ -628,23 +649,23 @@
             this.textBox_PastaEnviados.TabIndex = 12;
             this.textBox_PastaEnviados.TextChanged += new System.EventHandler(this.changed_Modificado);
             // 
-            // label10
+            // lbl_textBox_PastaBackup
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1, 231);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(200, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Pasta para Backup dos XML´s enviados:";
+            this.lbl_textBox_PastaBackup.AutoSize = true;
+            this.lbl_textBox_PastaBackup.Location = new System.Drawing.Point(1, 231);
+            this.lbl_textBox_PastaBackup.Name = "lbl_textBox_PastaBackup";
+            this.lbl_textBox_PastaBackup.Size = new System.Drawing.Size(200, 13);
+            this.lbl_textBox_PastaBackup.TabIndex = 22;
+            this.lbl_textBox_PastaBackup.Text = "Pasta para Backup dos XML´s enviados:";
             // 
-            // label6
+            // lbl_textBox_PastaEnviados
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1, 142);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(276, 13);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Pasta onde serão gravados os arquivos XML´s enviados:";
+            this.lbl_textBox_PastaEnviados.AutoSize = true;
+            this.lbl_textBox_PastaEnviados.Location = new System.Drawing.Point(1, 142);
+            this.lbl_textBox_PastaEnviados.Name = "lbl_textBox_PastaEnviados";
+            this.lbl_textBox_PastaEnviados.Size = new System.Drawing.Size(276, 13);
+            this.lbl_textBox_PastaEnviados.TabIndex = 16;
+            this.lbl_textBox_PastaEnviados.Text = "Pasta onde serão gravados os arquivos XML´s enviados:";
             // 
             // textBox_PastaXmlErro
             // 
@@ -666,24 +687,24 @@
             this.textBox_PastaRetornoXML.TabIndex = 10;
             this.textBox_PastaRetornoXML.TextChanged += new System.EventHandler(this.changed_Modificado);
             // 
-            // label7
+            // lbl_textBox_PastaXmlErro
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1, 187);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(445, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
+            this.lbl_textBox_PastaXmlErro.AutoSize = true;
+            this.lbl_textBox_PastaXmlErro.Location = new System.Drawing.Point(1, 187);
+            this.lbl_textBox_PastaXmlErro.Name = "lbl_textBox_PastaXmlErro";
+            this.lbl_textBox_PastaXmlErro.Size = new System.Drawing.Size(445, 13);
+            this.lbl_textBox_PastaXmlErro.TabIndex = 19;
+            this.lbl_textBox_PastaXmlErro.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
     "o envio:";
             // 
-            // label2
+            // lbl_textBox_PastaRetornoXML
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 96);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(368, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices:";
+            this.lbl_textBox_PastaRetornoXML.AutoSize = true;
+            this.lbl_textBox_PastaRetornoXML.Location = new System.Drawing.Point(1, 96);
+            this.lbl_textBox_PastaRetornoXML.Name = "lbl_textBox_PastaRetornoXML";
+            this.lbl_textBox_PastaRetornoXML.Size = new System.Drawing.Size(368, 13);
+            this.lbl_textBox_PastaRetornoXML.TabIndex = 2;
+            this.lbl_textBox_PastaRetornoXML.Text = "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices:";
             // 
             // textBox_PastaEnvioXML
             // 
@@ -762,16 +783,16 @@
             this.button_SelectPastaBackup.UseVisualStyleBackColor = true;
             this.button_SelectPastaBackup.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
             // 
-            // btnSelectPastaLote
+            // button_SelectPastaLote
             // 
-            this.btnSelectPastaLote.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
-            this.btnSelectPastaLote.Location = new System.Drawing.Point(552, 64);
-            this.btnSelectPastaLote.Name = "btnSelectPastaLote";
-            this.btnSelectPastaLote.Size = new System.Drawing.Size(27, 23);
-            this.btnSelectPastaLote.TabIndex = 9;
-            this.btnSelectPastaLote.Tag = "1";
-            this.btnSelectPastaLote.UseVisualStyleBackColor = true;
-            this.btnSelectPastaLote.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
+            this.button_SelectPastaLote.Image = global::NFe.Interface.Properties.Resources.folder_orange_open;
+            this.button_SelectPastaLote.Location = new System.Drawing.Point(552, 64);
+            this.button_SelectPastaLote.Name = "button_SelectPastaLote";
+            this.button_SelectPastaLote.Size = new System.Drawing.Size(27, 23);
+            this.button_SelectPastaLote.TabIndex = 9;
+            this.button_SelectPastaLote.Tag = "1";
+            this.button_SelectPastaLote.UseVisualStyleBackColor = true;
+            this.button_SelectPastaLote.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
             // 
             // button_SelectPastaValidar
             // 
@@ -1048,7 +1069,7 @@
             this.tabPageFTP.Controls.Add(this.label26);
             this.tabPageFTP.Controls.Add(this.edtFTP_PastaRetornos);
             this.tabPageFTP.Controls.Add(this.edtFTP_Ativo);
-            this.tabPageFTP.Controls.Add(this.label25);
+            this.tabPageFTP.Controls.Add(this.lbl_edtFTP_PastaDestino);
             this.tabPageFTP.Controls.Add(this.edtFTP_PastaDestino);
             this.tabPageFTP.Controls.Add(this.edtFTP_GravaXMLPastaUnica);
             this.tabPageFTP.Controls.Add(this.edtFTP_Porta);
@@ -1106,14 +1127,14 @@
             this.edtFTP_Ativo.Text = "FTP ativo";
             this.edtFTP_Ativo.UseVisualStyleBackColor = true;
             // 
-            // label25
+            // lbl_edtFTP_PastaDestino
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(4, 172);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(265, 13);
-            this.label25.TabIndex = 21;
-            this.label25.Text = "Pasta onde será gravado os arquivos XML´s enviados:";
+            this.lbl_edtFTP_PastaDestino.AutoSize = true;
+            this.lbl_edtFTP_PastaDestino.Location = new System.Drawing.Point(4, 172);
+            this.lbl_edtFTP_PastaDestino.Name = "lbl_edtFTP_PastaDestino";
+            this.lbl_edtFTP_PastaDestino.Size = new System.Drawing.Size(265, 13);
+            this.lbl_edtFTP_PastaDestino.TabIndex = 21;
+            this.lbl_edtFTP_PastaDestino.Text = "Pasta onde será gravado os arquivos XML´s enviados:";
             // 
             // edtFTP_PastaDestino
             // 
@@ -1225,26 +1246,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // cbServico
-            // 
-            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbServico.FormattingEnabled = true;
-            this.cbServico.ItemHeight = 13;
-            this.cbServico.Location = new System.Drawing.Point(187, 63);
-            this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(173, 21);
-            this.cbServico.TabIndex = 4;
-            this.cbServico.Leave += new System.EventHandler(this.cbServico_Leave);
-            // 
-            // lblServico
-            // 
-            this.lblServico.AutoSize = true;
-            this.lblServico.Location = new System.Drawing.Point(184, 47);
-            this.lblServico.Name = "lblServico";
-            this.lblServico.Size = new System.Drawing.Size(43, 13);
-            this.lblServico.TabIndex = 29;
-            this.lblServico.Text = "Serviço\r\n";
-            // 
             // ucConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1278,8 +1279,8 @@
         private System.Windows.Forms.NumericUpDown udDiasLimpeza;
         private System.Windows.Forms.Label labelUF;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbl_udDiasLimpeza;
+        private System.Windows.Forms.Label lbl_DiretorioSalvarComo;
         private System.Windows.Forms.ComboBox comboBox_Ambiente;
         private System.Windows.Forms.ComboBox cboDiretorioSalvarComo;
         private System.Windows.Forms.Label label8;
@@ -1287,26 +1288,26 @@
         private System.Windows.Forms.CheckBox checkBoxRetornoNFETxt;
         private System.Windows.Forms.ComboBox comboBox_UF;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_textBox_PastaEnvioXML;
         private System.Windows.Forms.Button button_SelectPastaXmlRetorno;
         private System.Windows.Forms.Button button_selectxmlenvio;
         private System.Windows.Forms.Button button_SelectPastaXmlEnviado;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbl_textBox_PastaValidar;
         private System.Windows.Forms.Button button_SelectPastaXmlErro;
         private System.Windows.Forms.TextBox textBox_PastaValidar;
         private System.Windows.Forms.Button button_SelectPastaBackup;
         private System.Windows.Forms.TextBox textBox_PastaLote;
-        private System.Windows.Forms.Button btnSelectPastaLote;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button_SelectPastaLote;
+        private System.Windows.Forms.Label lbl_textBox_PastaLote;
         private System.Windows.Forms.Button button_SelectPastaValidar;
         private System.Windows.Forms.TextBox textBox_PastaBackup;
         private System.Windows.Forms.TextBox textBox_PastaEnviados;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_textBox_PastaBackup;
+        private System.Windows.Forms.Label lbl_textBox_PastaEnviados;
         private System.Windows.Forms.TextBox textBox_PastaXmlErro;
         private System.Windows.Forms.TextBox textBox_PastaRetornoXML;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_textBox_PastaXmlErro;
+        private System.Windows.Forms.Label lbl_textBox_PastaRetornoXML;
         private System.Windows.Forms.TextBox textBox_PastaEnvioXML;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPageDanfe;
@@ -1330,7 +1331,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.CheckBox cbCriaPastas;
         private System.Windows.Forms.NumericUpDown udTempoConsulta;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lbl_udTempoConsulta;
         private System.Windows.Forms.TabPage tabPageFTP;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox edtFTP_UserName;
@@ -1340,7 +1341,7 @@
         private System.Windows.Forms.TextBox edtFTP_Password;
         private System.Windows.Forms.NumericUpDown edtFTP_Porta;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lbl_edtFTP_PastaDestino;
         private System.Windows.Forms.TextBox edtFTP_PastaDestino;
         private System.Windows.Forms.CheckBox edtFTP_GravaXMLPastaUnica;
         private System.Windows.Forms.CheckBox edtFTP_Ativo;
@@ -1361,7 +1362,7 @@
         private System.Windows.Forms.Label labelCodMun;
         private System.Windows.Forms.TextBox edtPadrao;
         private System.Windows.Forms.TextBox edtCodMun;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_textBox_PastaDownload;
         private System.Windows.Forms.TextBox textBox_PastaDownload;
         private System.Windows.Forms.Button button_SelecionarPastaDownload;
         private System.Windows.Forms.CheckBox checkBoxGravarEventosNaPastaEnviadosNFe;

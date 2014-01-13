@@ -1104,9 +1104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSCancelarNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSConsultarNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSDadosCadastraisNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSGuiasNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSMensagensNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HLajeadoRSRemessaNFSE.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\GIF\nfse-parobe-v1-1.xsd">
       <SubType>Designer</SubType>
@@ -1344,9 +1341,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoPauloSP-PAULISTANA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSCancelarNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSConsultarNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSDadosCadastraisNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSGuiasNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSMensagensNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSRemessaNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PParobeRSGIFServicos.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPortoVelhoPO.wsdl" />
@@ -1437,6 +1431,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRetRecepcao2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaTaquaraRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaTaquaraRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaTaquaraRSRemessa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaTaquaraRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaTaquaraRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaTaquaraRSRemessa.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTresCoroasRS-Dueto.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTresCoroasRS-Dueto.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -206,7 +206,7 @@ namespace NFe.Service
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
 
             // Exclui o Arquivo de Erro
-            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
@@ -239,11 +239,12 @@ namespace NFe.Service
                 oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if (!Functions.IsConnectedToInternet())
-            {
-                //Registrar o erro da validação para o sistema ERP
-                throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-            }
+			if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013
+	            if (!Functions.IsConnectedToInternet())
+    	        {
+        	        //Registrar o erro da validação para o sistema ERP
+            	    throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
+            	}
 
             //Invocar o membro
             switch (padraoNFSe)

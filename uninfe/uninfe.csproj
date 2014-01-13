@@ -175,7 +175,6 @@
     <None Include="Resources\atualizar2.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Anotacoes.txt" />
     <None Include="Resources\pdf.png" />
     <None Include="Resources\pdf1.png" />
     <None Include="Resources\pdf2.png" />

@@ -39,7 +39,7 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object pedURLNfse = null;
                 string cabecMsg = "";
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(/*ler.*/oDadosPedURLNfse.cMunicipio);
+                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedURLNfse.cMunicipio);
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.ISSNET:
@@ -58,6 +58,13 @@ namespace NFe.Service.NFSe
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.InvocarNFSe(wsProxy, pedURLNfse, NomeMetodoWS(Servico, oDadosPedURLNfse.cMunicipio), cabecMsg, this, "-ped-urlnfse", "-urlnfse", padraoNFSe, Servico);
+
+                ///
+                /// grava o arquivo no FTP
+                string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                    Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedURLNfse, Propriedade.ExtRetorno.Urlnfse)));
+                if (File.Exists(filenameFTP))
+                    new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
             }
             catch (Exception ex)
             {
@@ -95,7 +102,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedURLNfse(string arquivoXML)
         {
-            int emp = Functions.FindEmpresaByThread();
+            //int emp = Functions.FindEmpresaByThread();
         }
         #endregion
     }

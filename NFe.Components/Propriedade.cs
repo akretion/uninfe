@@ -527,6 +527,10 @@ namespace NFe.Components
             /// -procInutCTe.xml
             /// </summary>
             public static string ProcInutCTe = "-procInutCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            /// <summary>
+            /// -cte.err
+            /// </summary>
+            public static string Cte_ERR = "-cte.err";
             #endregion
 
             #region Extensões MDFe
@@ -538,7 +542,10 @@ namespace NFe.Components
             /// -procEventoMDFe.xml
             /// </summary>
             public const string ProcEventoMDFe = "-procEventoMDFe.xml";
-
+            /// <summary>
+            /// -mdfe.err
+            /// </summary>
+            public static string MDFe_ERR = "-mdfe.err";
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e

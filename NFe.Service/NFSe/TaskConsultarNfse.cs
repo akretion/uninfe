@@ -130,6 +130,13 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, /*ler.*/oDadosPedSitNfse.cMunicipio), cabecMsg, this, "-ped-sitnfse", "-sitnfse", padraoNFSe, Servico);
+                   
+                    ///
+                    /// grava o arquivo no FTP
+                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                        Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse)));
+                    if (File.Exists(filenameFTP))
+                        new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
             }
             catch (Exception ex)

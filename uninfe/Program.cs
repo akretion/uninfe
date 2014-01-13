@@ -41,6 +41,9 @@ namespace uninfe
                 }
 
 
+            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+
+
             if(Aplicacao.AppExecutando(silencioso))
             {
                 return;

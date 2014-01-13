@@ -33,18 +33,23 @@ namespace NFe.Interface
                 this.tabControl3.TabPages.Remove(this.tabPageDanfe);
                 labelUF.Text = "Município/Cidade:";
             }
-            else
-            {
-                ///danasa 1-2012
-                labelCodMun.Visible =
-                    labelPadrao.Visible =
-                    edtCodMun.Visible =
-                    edtPadrao.Visible = false;
-            }
-            checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
+            labelCodMun.Visible =
+                labelPadrao.Visible =
+                edtCodMun.Visible =
+                edtPadrao.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse);
+            
+            cboDiretorioSalvarComo.Visible = lbl_DiretorioSalvarComo.Visible =
+                textBox_PastaLote.Visible = lbl_textBox_PastaLote.Visible = button_SelectPastaLote.Visible =
+                textBox_PastaBackup.Visible = lbl_textBox_PastaBackup.Visible = button_SelectPastaBackup.Visible =
+                textBox_PastaEnviados.Visible = lbl_textBox_PastaEnviados.Visible = button_SelectPastaXmlEnviado.Visible =
+                checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
+                checkBoxRetornoNFETxt.Visible =
+                checkBoxGravarEventosDeTerceiros.Visible =
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
-                textBox_PastaDownload.Visible =
-                button_SelecionarPastaDownload.Visible = Propriedade.TipoAplicativo == TipoAplicativo.Nfe;
+                udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
+                edtFTP_PastaDestino.Visible = lbl_edtFTP_PastaDestino.Visible = edtFTP_GravaXMLPastaUnica.Visible =
+                textBox_PastaDownload.Visible = lbl_textBox_PastaDownload.Visible =
+                button_SelecionarPastaDownload.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
             this.updateText = updateText;
             cnpjCurrent = "";
             servicoCurrent = TipoAplicativo.Nulo;
@@ -140,10 +145,14 @@ namespace NFe.Interface
             #endregion
 
             #region Montar array DropList dos tipos de serviços
-            arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
-            arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
-            arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
-            arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            {
+                arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
+                arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
+                arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
+            }
+            else
+                arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
 
             cbServico.DataSource = arrServico;
             cbServico.DisplayMember = "valor";
@@ -200,12 +209,15 @@ namespace NFe.Interface
                             {
                                 oEmpresa.PastaEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvio, oEmpresa);
                                 oEmpresa.PastaRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaRetorno, oEmpresa);
-                                oEmpresa.PastaEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnviado, oEmpresa);
                                 oEmpresa.PastaErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaErro, oEmpresa);
-                                oEmpresa.PastaEnvioEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvioEmLote, oEmpresa);
                                 oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
-                                oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
-                                oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
+                                if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                                {
+                                    oEmpresa.PastaEnvioEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvioEmLote, oEmpresa);
+                                    oEmpresa.PastaEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnviado, oEmpresa);
+                                    oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
+                                    oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
+                                }
 
                                 oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
                                 oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
@@ -226,13 +238,19 @@ namespace NFe.Interface
                         /// 
                         if (string.IsNullOrEmpty(oEmpresa.PastaEnvio))
                         {
-                            oEmpresa.PastaEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Envio");
-                            oEmpresa.PastaEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Enviado");
-                            oEmpresa.PastaRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Retorno");
-                            oEmpresa.PastaErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Erro");
-                            oEmpresa.PastaEnvioEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\EnvioEmLote");
-                            oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\Validar");
-                            oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + "\\DownloadNFe");
+                            string subpasta = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\nfse" : "");
+
+                            oEmpresa.PastaEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Envio");
+                            oEmpresa.PastaRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Retorno");
+                            oEmpresa.PastaErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Erro");
+                            oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Validar");
+                            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                            {
+                                oEmpresa.PastaEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Enviado");
+                                //oEmpresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Backup");
+                                oEmpresa.PastaEnvioEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\EnvioEmLote");
+                                oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\DownloadNFe");
+                            }
 
                             oEmpresa.CriaPastasAutomaticamente = true;
                         }
@@ -485,7 +503,7 @@ namespace NFe.Interface
             TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
             string nome = edtNome.Text.ToString();
 
-            if (edtNome.Text.ToString().Length > 20)
+            if (edtNome.Text.Length > 20)
                 nome = edtNome.Text.Substring(0, 20);
 
             if (string.IsNullOrEmpty(cnpj))
@@ -502,6 +520,7 @@ namespace NFe.Interface
                         this.tabControl3.SelectedIndex = 0;
                         this.edtCNPJ.Focus();
                         MessageBox.Show("CNPJ inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                     bool mudaPastas = true;
@@ -650,14 +669,20 @@ namespace NFe.Interface
 
             this.Modificado = true;
 
-            cbCriaPastas.Checked = dirNOTexiste(this.textBox_PastaBackup.Text) ||
-                                   dirNOTexiste(this.textBox_PastaEnviados.Text) ||
-                                   dirNOTexiste(this.textBox_PastaEnvioXML.Text) ||
-                                   dirNOTexiste(this.textBox_PastaRetornoXML.Text) ||
-                                   dirNOTexiste(this.textBox_PastaXmlErro.Text) ||
-                                   dirNOTexiste(this.textBox_PastaValidar.Text) ||
-                                   dirNOTexiste(this.textBox_PastaLote.Text) ||
-                                   dirNOTexiste(this.textBox_PastaDownload.Text);
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                cbCriaPastas.Checked = dirNOTexiste(this.textBox_PastaBackup.Text) ||
+                                       dirNOTexiste(this.textBox_PastaEnviados.Text) ||
+                                       dirNOTexiste(this.textBox_PastaEnvioXML.Text) ||
+                                       dirNOTexiste(this.textBox_PastaRetornoXML.Text) ||
+                                       dirNOTexiste(this.textBox_PastaXmlErro.Text) ||
+                                       dirNOTexiste(this.textBox_PastaValidar.Text) ||
+                                       dirNOTexiste(this.textBox_PastaLote.Text) ||
+                                       dirNOTexiste(this.textBox_PastaDownload.Text);
+            else
+                cbCriaPastas.Checked = dirNOTexiste(this.textBox_PastaEnvioXML.Text) ||
+                                       dirNOTexiste(this.textBox_PastaRetornoXML.Text) ||
+                                       dirNOTexiste(this.textBox_PastaXmlErro.Text) ||
+                                       dirNOTexiste(this.textBox_PastaValidar.Text);
         }
 
         private void btnFTPTestar_Click(object sender, EventArgs e)
@@ -671,17 +696,15 @@ namespace NFe.Interface
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
-                    //ftp.UploadFile("c:\\usr\\usr.rar", this.edtFTP_PastaDestino.Text + "/testeA.rar", false);
-
-                    if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
-                    {
-                        string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
-                        if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                        if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
-                            ftp.makeDir(this.edtFTP_PastaDestino.Text);
+                            string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
+                            if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                ftp.makeDir(this.edtFTP_PastaDestino.Text);
+                            }
                         }
-                    }
-                    //ftp.UploadFile("c:\\usr\\usr.rar", "testeX.rar", false);
 
                     ftp.ChangeDir(vCurrente);
 
@@ -695,7 +718,6 @@ namespace NFe.Interface
                             }
                         }
 
-                    //ftp.UploadFile("c:\\usr\\usr.rar", "teste.rar", false);
 
                     MessageBox.Show("FTP conectado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -787,17 +809,21 @@ namespace NFe.Interface
             }
 
             this.textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Envio");
-            this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Enviado");
             this.textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Retorno");
             this.textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Erro");
-            this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\EnvioEmLote");
             this.textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Validar");
 
-            if (!string.IsNullOrEmpty(textBox_PastaDownload.Text))
-                this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\DownloadNFe");
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            {
+                this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\EnvioEmLote");
+                this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Enviado");
 
-            if (!string.IsNullOrEmpty(textBox_PastaBackup.Text))
-                textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Backup");
+                if (!string.IsNullOrEmpty(textBox_PastaDownload.Text))
+                    this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\DownloadNFe");
+
+                if (!string.IsNullOrEmpty(textBox_PastaBackup.Text))
+                    textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Backup");
+            }
         }
     }
 }

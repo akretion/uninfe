@@ -51,7 +51,7 @@ namespace NFe.Interface
 
             //Copiar o arquivo XML para temporários para assinar e depois vou validar o que está nos temporários
             FileInfo oArquivo = new FileInfo(this.textBox_arqxml.Text);
-            string cArquivo = System.IO.Path.GetTempPath() + oArquivo.Name;
+			string cArquivo = System.IO.Path.GetTempPath() + oArquivo.Name;
 
             FileInfo oArqDestino = new FileInfo(cArquivo);
 
@@ -68,6 +68,7 @@ namespace NFe.Interface
             AssinaturaDigital oAD = new AssinaturaDigital();
             try
             {
+                validarXML.EncryptAssinatura(cArquivo); //danasa: 12/2013
                 oAD.Assinar(cArquivo, Emp, Empresa.Configuracoes[Emp].UFCod);
                 lValidar = true;
             }
@@ -83,7 +84,8 @@ namespace NFe.Interface
                 //Validar o arquivo
                 if (validarXML.TipoArqXml.nRetornoTipoArq >= 1 && validarXML.TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
-                    validarXML.Validar(cArquivo);
+                    ///danasa: 12/2013
+                    validarXML.ValidarArqXML(cArquivo);//.Validar(cArquivo);
                     if (string.IsNullOrEmpty(validarXML.TipoArqXml.cArquivoSchema))
                     {
                         this.textBox_resultado.Text = "XML não possui schema de validação, sendo assim não é possível validar XML;";

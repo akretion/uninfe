@@ -163,7 +163,8 @@ namespace NFe.Interface
 
         public void UpdateText(string nome)
         {
-            this.tabControl4.TabPages[this.tabControl4.SelectedIndex].Text = nome;
+            if (!string.IsNullOrEmpty(nome))
+                this.tabControl4.TabPages[this.tabControl4.SelectedIndex].Text = nome;
         }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {

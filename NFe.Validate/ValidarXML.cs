@@ -35,13 +35,92 @@ namespace NFe.Validate
 
         private string cErro;
 
+        #region EncryptAssinatura()
+
+        /// <summary>
+        /// Encriptar a tag Assinatura quando for município de Blumenau - SC
+        /// </summary>
+        public void EncryptAssinatura(string arquivoXML)
+        {
+            if (TipoArqXml.cArquivoSchema.Contains("PAULISTANA") ||
+                TipoArqXml.cArquivoSchema.Contains("BLUMENAU"))
+            {
+                if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps) ||
+                    arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
+                {
+                    bool bSave = false;
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(arquivoXML);
+
+                    if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps))
+                    {
+                        const string Assinatura = "Assinatura";
+
+                        XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
+                        foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
+                        {
+                            //XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
+
+                            XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
+                            foreach (XmlNode rpsNode in rpsList)
+                            {
+                                XmlElement rpsElement = (XmlElement)rpsNode;
+
+                                if (rpsElement.GetElementsByTagName(Assinatura).Count != 0)
+                                {
+                                    if (rpsElement.GetElementsByTagName(Assinatura)[0].InnerText.Length == 86)    //jah assinado?
+                                    {
+                                        bSave = true;
+                                        //Encryptar a tag Assinatura
+                                        rpsElement.GetElementsByTagName(Assinatura)[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                                            rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
+                    {
+                        const string AssinaturaCancelamento = "AssinaturaCancelamento";
+
+                        XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
+                        foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
+                        {
+                            XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
+
+                            XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
+                            foreach (XmlNode detalheNode in detalheList)
+                            {
+                                XmlElement detalheElement = (XmlElement)detalheNode;
+
+                                if (detalheElement.GetElementsByTagName(AssinaturaCancelamento).Count != 0)
+                                {
+                                    if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
+                                    {
+                                        bSave = true;
+                                        //Encryptar a tag Assinatura
+                                        detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                                            detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //Salvar o XML com as alterações efetuadas
+                    if (bSave)
+                        doc.Save(arquivoXML);
+                }
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
         /// </summary>
         /// <param name="cRotaArqXML">XML a ser validado</param>
         /// <param name="cRotaArqSchema">Schema a ser utilizado na validação</param>
         /// <param name="nsSchema">Namespace contendo a URL do schema</param>
-        public void Validar(string cRotaArqXML)
+        private void Validar(string cRotaArqXML)
         {
             bool lArqXML = File.Exists(cRotaArqXML);
             var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
@@ -57,6 +136,8 @@ namespace NFe.Validate
 
                 try
                 {
+                    this.EncryptAssinatura(cRotaArqXML);    //danasa: 12/2013
+
                     XmlReaderSettings settings = new XmlReaderSettings();
                     settings.ValidationType = ValidationType.Schema;
 
@@ -179,6 +260,8 @@ namespace NFe.Validate
 
             try
             {
+                this.EncryptAssinatura(Arquivo);    //danasa: 12/2013
+
                 oAD.Assinar(Arquivo, emp, Empresa.Configuracoes[emp].UFCod);
 
                 Assinou = true;

@@ -163,18 +163,22 @@ namespace NFe.Settings
                     string[] x = ass.GetManifestResourceNames();
                     if (x.GetLength(0) > 0)
                     {
-                        foreach (string s in x)
+                        var afiles = (from d in x
+                                      where NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? d.StartsWith("NFe.Components.Wsdl.NFse.") : d.StartsWith("NFe.Components.Wsdl.NFe.")
+                                      select d);
+
+                        foreach (string s in afiles)
                         {
                             string fileoutput = null;
                             switch (NFe.Components.Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfe:
-                                    if (s.StartsWith("NFe.Components.Wsdl.NFe."))
-                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
+                                    //if (s.StartsWith("NFe.Components.Wsdl.NFe."))
+                                    fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
                                 case TipoAplicativo.Nfse:
-                                    if (s.StartsWith("NFe.Components.Wsdl.NFse."))
-                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\");
+                                    //if (s.StartsWith("NFe.Components.Wsdl.NFse."))
+                                    fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
                             }
 
@@ -190,7 +194,7 @@ namespace NFe.Settings
                                 if (plast == -1)
                                     plast = fileoutput.IndexOf(".xsd") - 1;
 
-                                while (fileoutput[plast] != '.')
+                                while (fileoutput[plast] != '.' && plast >= 0)
                                     --plast;
 
                                 string fn = fileoutput.Substring(plast + 1);
@@ -199,9 +203,6 @@ namespace NFe.Settings
                             else
                                 fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "#" + fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("#", ".");
 
-                            //fileoutput = fileoutput.Replace(NFe.Components.Propriedade.PastaExecutavel, "e:\\temp");
-                            //System.Windows.Forms.MessageBox.Show(s + "\r\n"+fileoutput+"\r\n"+Path.GetFileName(fileoutput));
-                            //continue;
 
                             FileInfo fi = new FileInfo(fileoutput);
                             ArquivoItem item = new ArquivoItem();
@@ -220,7 +221,7 @@ namespace NFe.Settings
                             // sobrepor o WSDL ou SCHEMA do Usuario - Renan 26/03/2013
                             if (item == null || !(fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
                             {
-                                if (item == null || !item.Manual)
+                                if (item == null || (item != null && !item.Manual))
                                 {
                                     using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
                                     {
@@ -257,6 +258,11 @@ namespace NFe.Settings
                     Auxiliar oAux = new Auxiliar();
                     oAux.GravarArqErroERP(Empresa.Configuracoes[emp].CNPJ + ".err", xMotivo + Environment.NewLine + ex.Message);
 
+                }
+                finally
+                {
+                    if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                        WebServiceNFSe.Start();
                 }
             }
 
@@ -749,7 +755,9 @@ namespace NFe.Settings
             if (WebServiceProxy.webServicesList.Count == 0)
                 throw new Exception("Lista de webservices não foi processada verifique se o arquivo 'WebService.xml' existe na pasta WSDL do UniNFe");
 
-            foreach (webServices list in WebServiceProxy.webServicesList)
+            var alist = (from p in WebServiceProxy.webServicesList where p.ID == CodigoUF select p);
+
+            foreach (webServices list in alist)//WebServiceProxy.webServicesList)
             {
                 if (list.ID == CodigoUF)
                 {
@@ -1073,12 +1081,15 @@ namespace NFe.Settings
                     oXmlGravar.WriteStartElement(NFeStrConstants.nfe_configuracoes);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnvio, empresa.PastaEnvio);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlRetorno, empresa.PastaRetorno);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, empresa.PastaEnviado);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlErro, empresa.PastaErro);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, empresa.PastaBackup);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, empresa.PastaEnvioEmLote);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaValidar, empresa.PastaValidar);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, empresa.PastaDownloadNFeDest);
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, empresa.PastaEnviado);
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, empresa.PastaBackup);
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, empresa.PastaEnvioEmLote);
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, empresa.PastaDownloadNFeDest);
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.UnidadeFederativaCodigo, empresa.UFCod.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.AmbienteCodigo, empresa.tpAmb.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigital, empresa.Certificado);
@@ -1086,27 +1097,36 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoArquivo, empresa.CertificadoArquivo.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoSenha, Criptografia.criptografaSenha(empresa.CertificadoSenha));
                     oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, empresa.tpEmis.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, empresa.GravarRetornoTXTNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, empresa.GravarEventosDeTerceiros.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, empresa.GravarEventosNaPastaEnviadosNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, empresa.GravarRetornoTXTNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, empresa.GravarEventosDeTerceiros.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, empresa.GravarEventosNaPastaEnviadosNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaExeUniDanfe, empresa.PastaExeUniDanfe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaConfigUniDanfe, empresa.PastaConfigUniDanfe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaDanfeMon, empresa.PastaDanfeMon.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonNFe, empresa.XMLDanfeMonNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonProcNFe, empresa.XMLDanfeMonProcNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonDenegadaNFe, empresa.XMLDanfeMonDenegadaNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, empresa.TempoConsulta.ToString());
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaExeUniDanfe, empresa.PastaExeUniDanfe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaConfigUniDanfe, empresa.PastaConfigUniDanfe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaDanfeMon, empresa.PastaDanfeMon.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonNFe, empresa.XMLDanfeMonNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonProcNFe, empresa.XMLDanfeMonProcNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonDenegadaNFe, empresa.XMLDanfeMonDenegadaNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, empresa.TempoConsulta.ToString());
+                    }
                     ///
                     /// informacoes do FTP
                     /// danasa 7/7/2011
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPAtivo, empresa.FTPAtivo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, empresa.FTPGravaXMLPastaUnica.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoUsuario, empresa.FTPNomeDoUsuario.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoServidor, empresa.FTPNomeDoServidor.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, empresa.FTPPastaAutorizados.ToString());
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, empresa.FTPPastaAutorizados.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, empresa.FTPGravaXMLPastaUnica.ToString());
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaRetornos, empresa.FTPPastaRetornos.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPPorta, empresa.FTPPorta.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPSenha, empresa.FTPSenha.ToString());
@@ -1207,16 +1227,19 @@ namespace NFe.Settings
             for (int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
                 Empresa.Configuracoes[i].PastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnvio);
-                Empresa.Configuracoes[i].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnviado);
                 Empresa.Configuracoes[i].PastaErro = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaErro);
                 Empresa.Configuracoes[i].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaRetorno);
-                Empresa.Configuracoes[i].PastaBackup = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaBackup);
-                Empresa.Configuracoes[i].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnvioEmLote);
-                Empresa.Configuracoes[i].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaDownloadNFeDest);
                 Empresa.Configuracoes[i].PastaValidar = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaValidar);
-                Empresa.Configuracoes[i].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaDanfeMon);
-                Empresa.Configuracoes[i].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaExeUniDanfe);
-                Empresa.Configuracoes[i].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaConfigUniDanfe);
+                if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                {
+                    Empresa.Configuracoes[i].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnviado);
+                    Empresa.Configuracoes[i].PastaBackup = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaBackup);
+                    Empresa.Configuracoes[i].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaEnvioEmLote);
+                    Empresa.Configuracoes[i].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaDownloadNFeDest);
+                    Empresa.Configuracoes[i].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaDanfeMon);
+                    Empresa.Configuracoes[i].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaExeUniDanfe);
+                    Empresa.Configuracoes[i].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[i].PastaConfigUniDanfe);
+                }
             }
             #endregion
 
@@ -1228,13 +1251,16 @@ namespace NFe.Settings
                 for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
                     fc.Add(new FolderCompare(i, Empresa.Configuracoes[i].PastaEnvio));
-                    fc.Add(new FolderCompare(i + 1, Empresa.Configuracoes[i].PastaEnvioEmLote));
-                    fc.Add(new FolderCompare(i + 2, Empresa.Configuracoes[i].PastaRetorno));
-                    fc.Add(new FolderCompare(i + 3, Empresa.Configuracoes[i].PastaEnviado));
-                    fc.Add(new FolderCompare(i + 4, Empresa.Configuracoes[i].PastaErro));
-                    fc.Add(new FolderCompare(i + 5, Empresa.Configuracoes[i].PastaBackup));
-                    fc.Add(new FolderCompare(i + 6, Empresa.Configuracoes[i].PastaValidar));
-                    fc.Add(new FolderCompare(i + 6, Empresa.Configuracoes[i].PastaDownloadNFeDest));
+                    fc.Add(new FolderCompare(i + 1, Empresa.Configuracoes[i].PastaRetorno));
+                    fc.Add(new FolderCompare(i + 2, Empresa.Configuracoes[i].PastaErro));
+                    fc.Add(new FolderCompare(i + 3, Empresa.Configuracoes[i].PastaValidar));
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        fc.Add(new FolderCompare(i + 4, Empresa.Configuracoes[i].PastaEnviado));
+                        fc.Add(new FolderCompare(i + 5, Empresa.Configuracoes[i].PastaEnvioEmLote));
+                        fc.Add(new FolderCompare(i + 6, Empresa.Configuracoes[i].PastaBackup));
+                        fc.Add(new FolderCompare(i + 7, Empresa.Configuracoes[i].PastaDownloadNFeDest));
+                    }
                 }
 
                 foreach (FolderCompare fc1 in fc)
@@ -1248,7 +1274,7 @@ namespace NFe.Settings
                         {
                             if (fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
                             {
-                                erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre as empresas..";
+                                erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas..";
                                 validou = false;
                                 break;
                             }
@@ -1269,14 +1295,17 @@ namespace NFe.Settings
                     List<string> mensagens = new List<string>();
 
                     #region Verificar se tem alguma pasta em branco
-                    diretorios.Clear(); mensagens.Clear();
-                    diretorios.Add(empresa.PastaEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
                     diretorios.Add(empresa.PastaEnvio); mensagens.Add("Informe a pasta de envio dos arquivos XML.");
                     diretorios.Add(empresa.PastaRetorno); mensagens.Add("Informe a pasta de retorno dos arquivos XML.");
                     diretorios.Add(empresa.PastaErro); mensagens.Add("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.");
-                    diretorios.Add(empresa.PastaBackup); mensagens.Add("Informe a pasta para o Backup dos arquivos XML enviados.");
                     diretorios.Add(empresa.PastaValidar); mensagens.Add("Informe a pasta onde será gravado os arquivos XML somente para ser validado pela Aplicação.");
-                    //diretorios.Add(empresa.PastaDownloadNFeDest); mensagens.Add("Informe a pasta onde será gravado os arquivos XML de download de destinatário.");
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        diretorios.Add(empresa.PastaEnvioEmLote); mensagens.Add("Informe a pasta de envio dos arquivos XML em lote.");
+                        diretorios.Add(empresa.PastaEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
+                        //diretorios.Add(empresa.PastaBackup); mensagens.Add("Informe a pasta para o Backup dos arquivos XML enviados.");
+                        //diretorios.Add(empresa.PastaDownloadNFeDest); mensagens.Add("Informe a pasta onde será gravado os arquivos XML de download de destinatário.");
+                    }
 
                     for (int b = 0; b < diretorios.Count; b++)
                     {
@@ -1292,11 +1321,21 @@ namespace NFe.Settings
                     /// danasa 7/7/2011
                     if (empresa.FTPIsAlive)
                     {
-                        if (string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
+                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                         {
-                            erro = "Informe a pasta do FTP de destino dos autorizados\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
-                            validou = false;
+                            if (string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
+                            {
+                                erro = "Informe a pasta do FTP de destino dos autorizados\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                            }
                         }
+
+                        if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                            if (string.IsNullOrEmpty(empresa.FTPPastaRetornos))
+                            {
+                                erro = "Informe a pasta do FTP de destino dos retornos\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                validou = false;
+                            }
                     }
                     #endregion
 
@@ -1406,15 +1445,18 @@ namespace NFe.Settings
                             diretorios.Clear(); mensagens.Clear();
                             diretorios.Add(empresa.PastaEnvio.Trim()); mensagens.Add("A pasta de envio dos arquivos XML informada não existe.");
                             diretorios.Add(empresa.PastaRetorno.Trim()); mensagens.Add("A pasta de retorno dos arquivos XML informada não existe.");
-                            diretorios.Add(empresa.PastaEnviado.Trim()); mensagens.Add("A pasta para arquivamento dos arquivos XML enviados informada não existe.");
                             diretorios.Add(empresa.PastaErro.Trim()); mensagens.Add("A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.");
-                            diretorios.Add(empresa.PastaBackup.Trim()); mensagens.Add("A pasta para backup dos XML enviados informada não existe.");
                             diretorios.Add(empresa.PastaValidar.Trim()); mensagens.Add("A pasta para validação de XML´s informada não existe.");
-                            diretorios.Add(empresa.PastaDownloadNFeDest.Trim()); mensagens.Add("A pasta para arquivamento das NFe de destinatários informada não existe.");
-                            diretorios.Add(empresa.PastaEnvioEmLote.Trim()); mensagens.Add("A pasta de envio das notas fiscais eletrônicas em lote informada não existe.");
-                            diretorios.Add(empresa.PastaDanfeMon.Trim()); mensagens.Add("A pasta informada para gravação do XML da NFe para o DANFeMon não existe.");
-                            diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
-                            diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
+                            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                            {
+                                diretorios.Add(empresa.PastaEnviado.Trim()); mensagens.Add("A pasta para arquivamento dos arquivos XML enviados informada não existe.");
+                                diretorios.Add(empresa.PastaBackup.Trim()); mensagens.Add("A pasta para backup dos XML enviados informada não existe.");
+                                diretorios.Add(empresa.PastaDownloadNFeDest.Trim()); mensagens.Add("A pasta para arquivamento das NFe de destinatários informada não existe.");
+                                diretorios.Add(empresa.PastaEnvioEmLote.Trim()); mensagens.Add("A pasta de envio das notas fiscais eletrônicas em lote informada não existe.");
+                                diretorios.Add(empresa.PastaDanfeMon.Trim()); mensagens.Add("A pasta informada para gravação do XML da NFe para o DANFeMon não existe.");
+                                diretorios.Add(empresa.PastaExeUniDanfe.Trim()); mensagens.Add("A pasta do executável do UniDANFe informada não existe.");
+                                diretorios.Add(empresa.PastaConfigUniDanfe.Trim()); mensagens.Add("A pasta do arquivo de configurações do UniDANFe informada não existe.");
+                            }
 
                             for (int b = 0; b < diretorios.Count; b++)
                             {
@@ -1449,7 +1491,7 @@ namespace NFe.Settings
                                 }
                             }
 
-                            if (Directory.Exists(empresa.PastaEnvioEmLote.Trim()))
+                            if (Directory.Exists(empresa.PastaEnvioEmLote.Trim()) && Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                             {
                                 if (!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
                                 {
@@ -1470,22 +1512,25 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se as pastas configuradas do unidanfe estão corretas
-                    if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                     {
-                        if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
+                        if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
                         {
-                            erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
-                            validou = false;
+                            if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
+                            {
+                                erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                validou = false;
+                            }
                         }
-                    }
 
-                    if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
-                    {
-                        //Verificar a existência o arquivo de configuração
-                        if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                        if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
                         {
-                            erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
-                            validou = false;
+                            //Verificar a existência o arquivo de configuração
+                            if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                            {
+                                erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                validou = false;
+                            }
                         }
                     }
                     #endregion
@@ -1756,16 +1801,25 @@ namespace NFe.Settings
                                 Empresa.Configuracoes[emp].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
-                            //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
-                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
-                            {
-                                Empresa.Configuracoes[emp].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText, true);
-                                lEncontrouTag = true;
-                            }
+                            
                             //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
                             if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado)[0].InnerText, true);
+                                lEncontrouTag = true;
+                            }
+
+                            //Se a tag <PastaBackup> existir ele pega no novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
+                            {
+                                Empresa.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText, true);
+                                lEncontrouTag = true;
+                            }
+
+                            //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
+                            {
+                                Empresa.Configuracoes[emp].PastaRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
@@ -1790,12 +1844,6 @@ namespace NFe.Settings
                             if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].tpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis)[0].InnerText);
-                                lEncontrouTag = true;
-                            }
-                            //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
-                            {
-                                Empresa.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaValidar> existir ele pega no novo conteúdo
@@ -2429,8 +2477,10 @@ namespace NFe.Settings
         #endregion
 
         #endregion
-    }
+        
         #endregion
-}
+    }
 
     #endregion 
+}
+

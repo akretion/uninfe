@@ -270,7 +270,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedLoteRps(string arquivoXML)
         {
-            int emp = Functions.FindEmpresaByThread();
+            //int emp = Functions.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
@@ -304,7 +304,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedSitNfseRps(string arquivoXML)
         {
-            int emp = Functions.FindEmpresaByThread();
+            //int emp = Functions.FindEmpresaByThread();
         }
         #endregion
 

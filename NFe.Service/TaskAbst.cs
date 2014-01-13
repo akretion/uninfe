@@ -1189,7 +1189,24 @@ namespace NFe.Service
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Nfe_ERR, ex);
+                    string extFinal = Propriedade.ExtEnvio.Nfe;
+                    string extErro = Propriedade.ExtRetorno.Nfe_ERR;
+                    switch (Servico)
+                    {
+                        case Servicos.AssinarValidarMDFeEnvioEmLote:
+                        case Servicos.MontarLoteUmMDFe:
+                            extFinal = Propriedade.ExtEnvio.MDFe;
+                            extErro = Propriedade.ExtRetorno.MDFe_ERR;
+                            break;
+
+                        case Servicos.AssinarValidarCTeEnvioEmLote:
+                        case Servicos.MontarLoteUmCTe:
+                            extFinal = Propriedade.ExtEnvio.Cte;
+                            extErro = Propriedade.ExtRetorno.Cte_ERR;
+                            break;
+                    }
+
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, extFinal, extErro, ex);
 
                     //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                     //forçar mover para a pasta de XML com erro neste ponto.

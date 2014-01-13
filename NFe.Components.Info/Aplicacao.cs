@@ -82,21 +82,27 @@ namespace NFe.Components.Info
                     //danasa 22/7/2011
                     aTXT.AppendLine("ExecutandoPeloServico|" + Propriedade.ServicoRodando.ToString());
                     //Dados das configurações do aplicativo
-                    aTXT.AppendLine(NFeStrConstants.PastaBackup + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
-                    aTXT.AppendLine(NFeStrConstants.PastaXmlEmLote + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        aTXT.AppendLine(NFeStrConstants.PastaBackup + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
+                        aTXT.AppendLine(NFeStrConstants.PastaXmlEmLote + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                        aTXT.AppendLine(NFeStrConstants.PastaXmlEnviado + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
+                    }
                     aTXT.AppendLine(NFeStrConstants.PastaXmlAssinado + "|" + (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
                     aTXT.AppendLine(NFeStrConstants.PastaValidar + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
-                    aTXT.AppendLine(NFeStrConstants.PastaXmlEnviado + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
                     aTXT.AppendLine(NFeStrConstants.PastaXmlEnvio + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
                     aTXT.AppendLine(NFeStrConstants.PastaXmlErro + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
                     aTXT.AppendLine(NFeStrConstants.PastaXmlRetorno + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
-                    aTXT.AppendLine(NFeStrConstants.PastaDownloadNFeDest + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        aTXT.AppendLine(NFeStrConstants.PastaDownloadNFeDest + "|" + (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                        aTXT.AppendLine(NFeStrConstants.DiretorioSalvarComo + "|" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
+                        aTXT.AppendLine(NFeStrConstants.GravarRetornoTXTNFe + "|" + Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
+                        aTXT.AppendLine(NFeStrConstants.GravarEventosDeTerceiros + "|" + Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
+                        aTXT.AppendLine(NFeStrConstants.GravarEventosNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
+                        aTXT.AppendLine(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                    }
                     aTXT.AppendLine(NFeStrConstants.DiasLimpeza + "|" + Empresa.Configuracoes[emp].DiasLimpeza.ToString());
-                    aTXT.AppendLine(NFeStrConstants.DiretorioSalvarComo + "|" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
-                    aTXT.AppendLine(NFeStrConstants.GravarRetornoTXTNFe + "|" + Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
-                    aTXT.AppendLine(NFeStrConstants.GravarEventosDeTerceiros + "|" + Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
-                    aTXT.AppendLine(NFeStrConstants.GravarEventosNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
-                    aTXT.AppendLine(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
                     aTXT.AppendLine(NFeStrConstants.AmbienteCodigo + "|" + Empresa.Configuracoes[emp].tpAmb.ToString());
                     aTXT.AppendLine(NFeStrConstants.tpEmis + "|" + Empresa.Configuracoes[emp].tpEmis.ToString());
                     aTXT.AppendLine(NFeStrConstants.UnidadeFederativaCodigo + "|" + Empresa.Configuracoes[emp].UFCod.ToString());
@@ -105,8 +111,11 @@ namespace NFe.Components.Info
                     /// dados do FTP
                     /// 
                     aTXT.AppendLine(NFeStrConstants.FTPAtivo + "|" + Empresa.Configuracoes[emp].FTPAtivo.ToString());
-                    aTXT.AppendLine(NFeStrConstants.FTPGravaXMLPastaUnica + "|" + Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
-                    aTXT.AppendLine(NFeStrConstants.FTPPastaAutorizados + "|" + Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        aTXT.AppendLine(NFeStrConstants.FTPGravaXMLPastaUnica + "|" + Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
+                        aTXT.AppendLine(NFeStrConstants.FTPPastaAutorizados + "|" + Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    }
                     aTXT.AppendLine(NFeStrConstants.FTPPastaRetornos + "|" + Empresa.Configuracoes[emp].FTPPastaRetornos);
                     aTXT.AppendLine(NFeStrConstants.FTPNomeDoUsuario + "|" + Empresa.Configuracoes[emp].FTPNomeDoUsuario);
                     aTXT.AppendLine(NFeStrConstants.FTPNomeDoServidor + "|" + Empresa.Configuracoes[emp].FTPNomeDoServidor);
@@ -215,21 +224,27 @@ namespace NFe.Components.Info
 
                     //Dados das configurações do aplicativo
                     oXmlGravar.WriteStartElement(NFeStrConstants.nfe_configuracoes);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaBackup) ? "" : Empresa.Configuracoes[emp].PastaBackup));
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvioEmLote) ? "" : Empresa.Configuracoes[emp].PastaEnvioEmLote));
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlAssinado, (string.IsNullOrEmpty(Propriedade.NomePastaXMLAssinado) ? "" : Propriedade.NomePastaXMLAssinado));
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaValidar, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaValidar) ? "" : Empresa.Configuracoes[emp].PastaValidar));
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnviado) ? "" : Empresa.Configuracoes[emp].PastaEnviado));
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnvio, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaEnvio) ? "" : Empresa.Configuracoes[emp].PastaEnvio));
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlErro, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaErro) ? "" : Empresa.Configuracoes[emp].PastaErro));
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlRetorno, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaRetorno) ? "" : Empresa.Configuracoes[emp].PastaRetorno));
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDownloadNFeDest) ? "" : Empresa.Configuracoes[emp].PastaDownloadNFeDest));
+                        oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, Empresa.Configuracoes[emp].DiasLimpeza.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, Empresa.Configuracoes[emp].GravarRetornoTXTNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.AmbienteCodigo, Empresa.Configuracoes[emp].tpAmb.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, Empresa.Configuracoes[emp].tpEmis.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.UnidadeFederativaCodigo, Empresa.Configuracoes[emp].UFCod.ToString());
@@ -241,8 +256,11 @@ namespace NFe.Components.Info
                     /// 
                     oXmlGravar.WriteStartElement("FTP");
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPAtivo, Empresa.Configuracoes[emp].FTPAtivo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, Empresa.Configuracoes[emp].FTPPastaAutorizados);
+                    }
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaRetornos, Empresa.Configuracoes[emp].FTPPastaRetornos);
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoUsuario, Empresa.Configuracoes[emp].FTPNomeDoUsuario);
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoServidor, Empresa.Configuracoes[emp].FTPNomeDoServidor);

@@ -58,6 +58,9 @@ namespace NFe.Components
             if(File.Exists(arquivoDestino))
                 File.Delete(arquivoDestino);
 
+            if (!Directory.Exists(Path.GetDirectoryName(arquivoDestino)))
+                Directory.CreateDirectory(Path.GetDirectoryName(arquivoDestino));
+
             File.Copy(arquivoOrigem, arquivoDestino);
             File.Delete(arquivoOrigem);
         }

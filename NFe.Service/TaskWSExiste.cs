@@ -154,7 +154,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                         {
                             case "cancelarnfse":
                                 srv = Servicos.CancelarNfse; break;
-                            case "CteRecepcaoEvento":
+                            case "cterecepcaoevento":
                                 srv = Servicos.RecepcaoEventoCTe; break;
                             case "consultarloterps":
                                 srv = Servicos.ConsultarLoteRps; break;
