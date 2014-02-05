@@ -782,17 +782,11 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSCancelarNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSConsultarNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSDadosCadastraisNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSGuiasNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSMensagensNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteNegroRSRemessaNFSE.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSCancelarNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSConsultarNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSDadosCadastraisNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSGuiasNFSE.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSMensagensNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteNegroRSRemessaNFSE.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -1445,6 +1439,46 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PTresCoroasRS-Dueto.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HUruguaianaRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PUruguaianaRS-Dueto.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaMariaRS-ISSNet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaMariaRS-ISSNet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVSP\PSVSPCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVSP\HSVSPCteInutilizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVSP\PSVSPCteInutilizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSCteRecepcaoEvento.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

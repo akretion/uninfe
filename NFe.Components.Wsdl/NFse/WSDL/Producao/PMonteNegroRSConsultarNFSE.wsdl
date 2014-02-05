@@ -4,20 +4,6 @@
 	</wsdl:documentation>
     <wsdl:types>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://server.nfse.thema.inf.br">
-            <xs:element name="consultarNfsePorRps">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="xml" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="consultarNfsePorRpsResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="consultarLoteRps">
                 <xs:complexType>
                     <xs:sequence>
@@ -54,6 +40,20 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="consultarNfseResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarNfsePorRps">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xml" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarNfsePorRpsResponse">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
@@ -223,7 +223,7 @@
     </wsdl:binding>
     <wsdl:service name="NFSEconsulta">
         <wsdl:port name="NFSEconsultaHttpSoap11Endpoint" binding="ns:NFSEconsultaSoap11Binding">
-            <soap:address location="http://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpSoap11Endpoint/"/>
+            <soap:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpsSoap11Endpoint" binding="ns:NFSEconsultaSoap11Binding">
             <soap:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpsSoap11Endpoint/"/>
@@ -232,13 +232,13 @@
             <soap12:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpsSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpSoap12Endpoint" binding="ns:NFSEconsultaSoap12Binding">
-            <soap12:address location="http://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpSoap12Endpoint/"/>
+            <soap12:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpsEndpoint" binding="ns:NFSEconsultaHttpBinding">
             <http:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpsEndpoint/"/>
         </wsdl:port>
         <wsdl:port name="NFSEconsultaHttpEndpoint" binding="ns:NFSEconsultaHttpBinding">
-            <http:address location="http://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpEndpoint/"/>
+            <http:address location="https://nfe.montenegro.rs.gov.br/thema-nfse/services/NFSEconsulta.NFSEconsultaHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

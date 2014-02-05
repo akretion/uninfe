@@ -139,7 +139,7 @@ namespace NFe.Components
                 #endregion
 
                 #region ISSNET
-                case PadroesNFSe.ISSNET:
+                case PadroesNFSe.ISSNET: // ISSNet fornece um unico WebService de homologacao para todos os municipios
                     return "<LocalHomologacao>" +
                             @"<RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>" +
                             @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarSituacaoLoteRps>" +
@@ -245,39 +245,50 @@ namespace NFe.Components
 
                 #region DUETO
                 case PadroesNFSe.DUETO:
-                    switch(idMunicipio)
+                    switch (idMunicipio)
                     {
                         case 4310207: // Ijuí - RS
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalHomologacao>";
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HIjuiRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
 
                         case 4321709: // Tres Coroas - RS
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalHomologacao>";
-                    
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
+
+                        case 4322400: // Uruguaiana - RS
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
+
+
                         default: // Nova Santa Rita - RS
-                        return "<LocalHomologacao>" +
-                                @"<RecepcionarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalHomologacao>";
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
                     }
-                    
+
                 #endregion
 
                 #region WEBISS
@@ -445,9 +456,10 @@ namespace NFe.Components
 
                 #region ISSNET
                 case PadroesNFSe.ISSNET:
-                    if (idMunicipio == 5201108) //Anapolis - GO
+                    switch (idMunicipio)
                     {
-                        return "<LocalProducao>" +
+                        case 5201108: // Anapolis - GO
+                            return "<LocalProducao>" +
                                 @"<RecepcionarLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</RecepcionarLoteRps>" +
                                 @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarSituacaoLoteRps>" +
                                 @"<ConsultarNfsePorRps>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarNfsePorRps>" +
@@ -456,18 +468,28 @@ namespace NFe.Components
                                 @"<CancelarNfse>wsdl\producao\PISSNetAnapolis.wsdl</CancelarNfse>" +
                                 @"<ConsultarURLNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarURLNfse>" +
                                 "</LocalProducao>";
-                    }
-                    else
-                    { //Novo Hamburgo - RS (Default)
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>" +
-                                @"<ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
+
+                        case 4316907: // Santa Maria - RS
+                            return "<LocalProducao>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarURLNfse>" +
                                 "</LocalProducao>";
+
+                        default: // Novo Hamburgo - RS (Default)
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</CancelarNfse>" +
+                                    @"<ConsultarURLNfse>wsdl\producao\PISSNetNovoHamburgo.wsdl</ConsultarURLNfse>" +
+                                    "</LocalProducao>";
                     }
                 #endregion
 
@@ -578,37 +600,47 @@ namespace NFe.Components
 
                 #region DUETO
                 case PadroesNFSe.DUETO:
-                    switch(idMunicipio)
-                    {                         
+                    switch (idMunicipio)
+                    {
                         case 4310207: // Ijuí - RS
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalProducao>";    //danasa 9-2013
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PIjuiRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PIjuiRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";    //danasa 9-2013
 
                         case 4321709: // Tres Coroas - RS
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalProducao>";
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                        case 4322400: // Uruguaiana - RS
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PUruguaianaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PUruguaianaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PUruguaianaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PUruguaianaRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PUruguaianaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PUruguaianaRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
 
                         default: // Nova Santa Rita - RS
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
-                                @"</LocalProducao>";
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
                     }
                 #endregion
 

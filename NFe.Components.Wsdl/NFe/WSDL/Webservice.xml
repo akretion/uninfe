@@ -67,6 +67,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -90,6 +91,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -115,9 +117,10 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\homologacao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVSP\HSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVSP\HSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -138,9 +141,10 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\producao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVSP\PSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVSP\PSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -163,6 +167,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -186,6 +191,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -211,6 +217,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -234,6 +241,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -259,6 +267,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -282,6 +291,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -307,6 +317,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -330,6 +341,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -340,21 +352,22 @@
   </Estado>
   <Estado ID="32" Nome="Espirito Santo" UF="ES">
     <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\ES\HESNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\homologacao\SVAN\HSVANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -363,21 +376,22 @@
       <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeRecepcao>wsdl\producao\SVAN\PSVANNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\SVAN\PSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\ES\PESNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeRecepcao>wsdl\producao\SVRS\PSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SVRS\PSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\producao\SVAN\PSVANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeDownload>wsdl\producao\SVRS\PSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -403,6 +417,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -426,6 +441,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -451,6 +467,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -474,6 +491,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -499,6 +517,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\MT\HMTCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\MT\HMTCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\MT\HMTCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\MT\HMTCteInutilizacao.wsdl</CTeInutilizacao>
@@ -522,6 +541,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\MT\PMTCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\MT\PMTCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\MT\PMTCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\MT\PMTCteInutilizacao.wsdl</CTeInutilizacao>
@@ -547,6 +567,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\MS\HMSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\MS\HMSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\MS\HMSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\MS\HMSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -570,6 +591,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\MS\PMSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>      
       <CTeRecepcao>wsdl\producao\MS\PMSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\MS\PMSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\MS\PMSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -645,6 +667,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -668,6 +691,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -743,13 +767,13 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\PR\HPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\PR\HPRCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\PR\HPRCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\PR\HPRCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\PR\HPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\PR\HPRCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\homologacao\PR\HPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PR\PPRNfeRecepcao2.wsdl</NFeRecepcao>
@@ -767,13 +791,13 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\PR\PPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\PR\PPRCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\PR\PPRCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\PR\PPRCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\PR\PPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\PR\PPRCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\producao\PR\PPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
   <Estado ID="26" Nome="Pernambuco" UF="PE">
@@ -793,9 +817,10 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\homologacao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVSP\HSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVSP\HSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -816,9 +841,10 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\producao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVSP\PSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVSP\PSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -841,6 +867,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -864,6 +891,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -889,6 +917,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -912,6 +941,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -961,6 +991,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -986,6 +1017,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\RS\HRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\RS\HRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\RS\HRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\RS\HRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1009,6 +1041,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\RS\PRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\RS\PRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\RS\PRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\RS\PRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1034,6 +1067,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1057,6 +1091,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1082,9 +1117,10 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\homologacao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVSP\HSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVSP\HSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -1105,9 +1141,10 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\producao\SVSP\PSVSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVSP\PSVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVSP\PSVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -1180,13 +1217,13 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SP\HSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SP\HSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SP\HSPCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SP\HSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SP\HSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SP\HSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\homologacao\SP\HSPNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\homologacao\SP\HSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\SP\PSPNfeRecepcao2.wsdl</NFeRecepcao>
@@ -1204,13 +1241,13 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SP\PSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SP\PSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SP\PSPCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SP\PSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SP\PSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SP\PSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\producao\SP\PSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
   <Estado ID="28" Nome="Sergipe" UF="SE">
@@ -1230,6 +1267,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1253,6 +1291,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1278,6 +1317,7 @@
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
@@ -1301,6 +1341,7 @@
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>

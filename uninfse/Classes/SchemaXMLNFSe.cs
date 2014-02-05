@@ -362,7 +362,7 @@ namespace uninfse
 
             #region Schemas padrão ISSNet
 
-            #region NOVOHAMBURGO_RS
+            #region NOVOHAMBURGO_RS/SANTAMARIA_RS
 
             #region XML de Consulta de NFSe por Data
             SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarNfseEnvio", new InfSchema()

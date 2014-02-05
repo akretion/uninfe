@@ -112,8 +112,9 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         private void PedSit(int emp, string cArquivoXML)
         {
-            this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;// string.Empty;
+            this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             this.oDadosPedSit.chNFe = string.Empty;
+            this.oDadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {

@@ -91,7 +91,7 @@ namespace uninfse
             WebServiceNFSe.Start();
 
             #region Definir valores propriedades de configuração
-            ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
+            //ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
             Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
             ConfiguracaoApp.StartVersoes();
             SchemaXMLNFSe.CriarListaIDXML();

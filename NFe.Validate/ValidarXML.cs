@@ -48,6 +48,7 @@ namespace NFe.Validate
                 if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps) ||
                     arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
                 {
+                    bool found = false;
                     bool bSave = false;
                     XmlDocument doc = new XmlDocument();
                     doc.Load(arquivoXML);
@@ -56,8 +57,8 @@ namespace NFe.Validate
                     {
                         const string Assinatura = "Assinatura";
 
-                        XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
-                        foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
+                        //XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
+                        //foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
                         {
                             //XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
 
@@ -68,6 +69,7 @@ namespace NFe.Validate
 
                                 if (rpsElement.GetElementsByTagName(Assinatura).Count != 0)
                                 {
+                                    found = true;
                                     if (rpsElement.GetElementsByTagName(Assinatura)[0].InnerText.Length == 86)    //jah assinado?
                                     {
                                         bSave = true;
@@ -78,15 +80,17 @@ namespace NFe.Validate
                                 }
                             }
                         }
+                        if (!found)
+                            throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
                     }
                     else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
 
-                        XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
-                        foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
+                        //XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
+                        //foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
                         {
-                            XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
+                            //XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
 
                             XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
                             foreach (XmlNode detalheNode in detalheList)
@@ -95,6 +99,7 @@ namespace NFe.Validate
 
                                 if (detalheElement.GetElementsByTagName(AssinaturaCancelamento).Count != 0)
                                 {
+                                    found = true;
                                     if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
                                     {
                                         bSave = true;
@@ -105,6 +110,8 @@ namespace NFe.Validate
                                 }
                             }
                         }
+                        if (!found)
+                            throw new Exception("Não foi possivel encontrar a tag <Detalhe><" + AssinaturaCancelamento + ">");
                     }
                     //Salvar o XML com as alterações efetuadas
                     if (bSave)

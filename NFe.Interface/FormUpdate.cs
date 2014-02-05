@@ -71,7 +71,7 @@ namespace NFe.Interface
 
             this.PastaInstalar = Application.StartupPath;
             this.LocalArq = Application.StartupPath + "\\" + NomeInstalador;
-            this.URL = "http://www.unimake2.com.br/" + NomeInstalador;
+            this.URL = "http://www.unimake.com.br/downloads/" + NomeInstalador;
         }
         #endregion
 
