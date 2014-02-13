@@ -378,6 +378,10 @@ namespace NFe.Service
         /// CNPJ do emitente
         /// </summary>
         public string CNPJ { get; set; }
+        /// <summary>
+        /// Versão do XML
+        /// </summary>
+        public string versao { get; set; }
     }
     #endregion
 
@@ -403,6 +407,10 @@ namespace NFe.Service
         /// Código da Unidade Federativa (UF)
         /// </summary>
         public int cUF { get; set; }
+        /// <summary>
+        /// Versão do XML
+        /// </summary>
+        public string versao { get; set; }
     }
     #endregion
 
@@ -455,6 +463,7 @@ namespace NFe.Service
         public int nNFIni { get; set; }
         public int nNFFin { get; set; }
         public string xJust { get; set; }
+        public string versao { get; set; }
 
         public DadosPedInut(int emp)
         {
@@ -508,7 +517,7 @@ namespace NFe.Service
         /// Tipo de emissão para saber para onde será enviado a consulta da situação da nota
         /// </summary>
         public int tpEmis { get; set; }
-        public int versaoNFe { get; set; }
+        public string versao { get; set; }
 
         public DadosPedSit()
         {
@@ -536,6 +545,10 @@ namespace NFe.Service
         /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
         /// </summary>
         public int tpEmis { get; set; }
+        /// <summary>
+        /// Versão do XML
+        /// </summary>
+        public string versao { get; set; }
     }
     #endregion
 

@@ -168,6 +168,8 @@ namespace NFe.Components.Info
                                         aTXT.AppendLine(tipo + "NFeStatusServico|" + (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
                                         aTXT.AppendLine(tipo + "NFeRegistroDeSaida|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
                                         aTXT.AppendLine(tipo + "NFeRegistroDeSaidaCancelamento|" + (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeAutorizacao|" + (!string.IsNullOrEmpty(item.NFeAutorizacao)).ToString());
+                                        aTXT.AppendLine(tipo + "NFeRetAutorizacao|" + (!string.IsNullOrEmpty(item.NFeRetAutorizacao)).ToString());
                                         aTXT.AppendLine(tipo + "MDFeRecepcao|" + (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
                                         aTXT.AppendLine(tipo + "MDFeRetRecepcao|" + (!string.IsNullOrEmpty(item.MDFeRetRecepcao)).ToString());
                                         aTXT.AppendLine(tipo + "MDFeConsulta|" + (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
@@ -312,6 +314,8 @@ namespace NFe.Components.Info
                                         oXmlGravar.WriteElementString("NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
                                         oXmlGravar.WriteElementString("NFeRegistroDeSaida", (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
                                         oXmlGravar.WriteElementString("NFeRegistroDeSaidaCancelamento", (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
+                                        oXmlGravar.WriteElementString("NFeAutorizacao", (!string.IsNullOrEmpty(item.NFeAutorizacao)).ToString());
+                                        oXmlGravar.WriteElementString("NFeRetAutorizacao", (!string.IsNullOrEmpty(item.NFeRetAutorizacao)).ToString());
                                         oXmlGravar.WriteElementString("MDFeRecepcao", (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
                                         oXmlGravar.WriteElementString("MDFeRetRecepcao", (!string.IsNullOrEmpty(item.MDFeRetRecepcao)).ToString());
                                         oXmlGravar.WriteElementString("MDFeConsulta", (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());

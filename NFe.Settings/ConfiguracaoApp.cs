@@ -768,6 +768,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaCadastro : list.LocalProducao.NFeConsultaCadastro);
                             break;
 
+                        case Servicos.EnviarLoteNfe2:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeAutorizacao : list.LocalProducao.NFeAutorizacao);
+                            break;
+
                         case Servicos.EnviarLoteNfe:
                         case Servicos.EnviarDPEC:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
@@ -791,6 +795,10 @@ namespace NFe.Settings
 
                         case Servicos.PedidoSituacaoLoteNFe:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRetRecepcao : list.LocalProducao.NFeRetRecepcao);
+                            break;
+
+                        case Servicos.PedidoSituacaoLoteNFe2:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRetAutorizacao : list.LocalProducao.NFeRetAutorizacao);
                             break;
 
                         case Servicos.EnviarCCe:

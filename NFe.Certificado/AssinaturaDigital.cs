@@ -60,11 +60,16 @@ namespace NFe.Certificado
                 // Load the passed XML file using it’s name.
                 doc.LoadXml(xmlString);
 
+                #region Código retirado, pois gera BUG, veja comentários
                 ///danasa: 12/2013 ????????
-                if (doc.GetElementsByTagName("Signature").Count > 0)
-                    return;
+                ///Não pode ter esta verificação neste ponto, pois gera problema nas assinaturas das NFSe que tem que assinar cada RPS e o lote. Veja que aproximadamente na linha 93 tem a seguinte comparação e já atende a necessidade de não assinar novamente se já existir a assinatura:
+                ///if(childNodes.NextSibling != null && childNodes.NextSibling.Name.Equals("Signature"))
+                ///Não retornar esta comparação. Wandrey 12/02/2014
+                //if (doc.GetElementsByTagName("Signature").Count > 0)
+                //    return;
+                #endregion
 
-                if(doc.GetElementsByTagName(tagAssinatura).Count == 0)
+                if (doc.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
                 }

@@ -43,7 +43,7 @@ namespace NFe.Service
                     {
                         //Gerar lote
                         this.NomeArquivoXML = arquivoAssinado;
-                        this.LoteNfe(arquivoAssinado);
+                        this.LoteNfe(arquivoAssinado, oDadosNfe.versao);
                     }
                 }
                 catch (IOException ex)

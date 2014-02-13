@@ -82,9 +82,10 @@ namespace NFe.Service
         /// Gera o Lote das Notas Fiscais passada por parâmetro na pasta de envio
         /// </summary>
         /// <param name="arquivosNFe">Lista dos XML´s de Notas Fiscais a serem gerados os lotes</param>
+        /// <param name="versaoXml">Versão do XML do lote</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>15/04/2009</date>
-        public void LoteNfe(List<string> arquivosNFe)
+        public void LoteNfe(List<string> arquivosNFe, string versaoXml)
         {
             bool excluirFluxo = true;
 
@@ -119,7 +120,7 @@ namespace NFe.Service
                     {
                         numeroLote = ProximoNumeroLote();
 
-                        IniciarLoteNfe(numeroLote);
+                        IniciarLoteNfe(numeroLote, versaoXml);
 
                         IniciouLote = true;
                     }
@@ -219,16 +220,18 @@ namespace NFe.Service
         /// <summary>
         /// Gera lote da nota fiscal eletrônica com somente uma nota fiscal
         /// </summary>
+        /// <param name="servico">Serviço (NFe, CTe ou MDFe, etc...)</param>
         /// <param name="arquivoNfe">Nome do arquivo XML da Nota Fiscal</param>
+        /// <param name="versaoXml">Versão do Xml de Lote</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>15/04/2009</date>
-        public void LoteNfe(Servicos servico, string arquivoNfe)
+        public void LoteNfe(Servicos servico, string arquivoNfe, string versaoXml)
         {
             Servico = servico;
 
             List<string> arquivos = new List<string>();
             arquivos.Add(arquivoNfe);
-            LoteNfe(arquivos);
+            LoteNfe(arquivos, versaoXml);
         }
         #endregion
 
@@ -239,10 +242,11 @@ namespace NFe.Service
         /// <param name="intNumeroLote">Número do lote que será enviado</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>15/04/2009</date>
-        protected void IniciarLoteNfe(Int32 intNumeroLote)
+        protected void IniciarLoteNfe(Int32 intNumeroLote, string versaoXml)
         {
             strXMLLoteNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
+            string indSinc = "";
             switch (Servico)
             {
                 case Servicos.MontarLoteVariosMDFe:
@@ -256,11 +260,19 @@ namespace NFe.Service
                     break;
 
                 default:
-                    strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + "2.00" + "\">";
+                    if (versaoXml == "2.00" || string.IsNullOrEmpty(versaoXml))
+                        strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + "2.00" + "\">";
+                    else
+                    {
+                        strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + versaoXml + "\">";
+                        indSinc = "<indSinc>0</indSinc>";
+                    }
+
                     break;
             }
 
             strXMLLoteNfe += "<idLote>" + intNumeroLote.ToString("000000000000000") + "</idLote>";
+            strXMLLoteNfe += indSinc;
         }
 
         #endregion
@@ -607,7 +619,8 @@ namespace NFe.Service
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="tpEmis">Tipo de emissão</param>
         /// <param name="chNFe">Chave da NFe, CTe ou MDFe</param>
-        public void Consulta(TipoAplicativo tipoAplicativo, string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe)
+        /// <param name="versao">Versão do schema do XML</param>
+        public void Consulta(TipoAplicativo tipoAplicativo, string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe, string versao)
         {
             string xmlDados = string.Empty;
             switch (tipoAplicativo)
@@ -617,7 +630,7 @@ namespace NFe.Service
                     break;
 
                 case TipoAplicativo.Nfe:
-                    xmlDados = ConsultaNFe(tpAmb, tpEmis, chNFe);
+                    xmlDados = ConsultaNFe(tpAmb, tpEmis, chNFe, versao);
                     break;
 
                 case TipoAplicativo.MDFe:
@@ -635,12 +648,13 @@ namespace NFe.Service
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="tpEmis">Tipo de emissão</param>
         /// <param name="chNFe">Chave da NFe</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna uma sting com o XML de consulta situação da NFe (-ped-sit.xml)</returns>
-        private string ConsultaNFe(int tpAmb, int tpEmis, string chNFe)
+        private string ConsultaNFe(int tpAmb, int tpEmis, string chNFe, string versao)
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLPedSit + "\">");
+            aXML.Append("<consSitNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -770,13 +784,13 @@ namespace NFe.Service
         #endregion
 
         #region Inutilizacao
-        public void Inutilizacao(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF, int ano, string CNPJ, int mod, int serie, int nNFIni, int nNFFin, string xJust)
+        public void Inutilizacao(string pFinalArqEnvio, int tpAmb, int tpEmis, int cUF, int ano, string CNPJ, int mod, int serie, int nNFIni, int nNFFin, string xJust, string versao)
         {
             string tipo = "NF";
 
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            aXML.Append("<inut" + tipo + "e xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLInut + "\">");
+            aXML.Append("<inut" + tipo + "e xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">");
             aXML.AppendFormat("<infInut Id=\"ID{0}{1}{2}{3}{4}{5}{6}\">", cUF.ToString("00"), ano.ToString("00"), CNPJ, mod.ToString("00"), serie.ToString("000"), nNFIni.ToString("000000000"), nNFFin.ToString("000000000"));
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
@@ -816,7 +830,7 @@ namespace NFe.Service
                     break;
 
                 case TipoAplicativo.Nfe:
-                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF);
+                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF, ConfiguracaoApp.VersaoXMLStatusServico);
                     break;
 
                 case TipoAplicativo.MDFe:
@@ -836,11 +850,12 @@ namespace NFe.Service
         /// <param name="tpAmb">Ambiente da consulta</param>
         /// <param name="tpEmis">Tipo de emissão da consulta</param>
         /// <param name="cUF">Estado para a consulta</param>
-        public void StatusServicoNFe(string pArquivo, int tpAmb, int tpEmis, int cUF)
+        /// <param name="versao">Versão do schema do XML</param>
+        public void StatusServicoNFe(string pArquivo, int tpAmb, int tpEmis, int cUF, string versao)
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServ versao=\"" + ConfiguracaoApp.VersaoXMLStatusServico + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<consStatServ versao=\"" + versao + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
             vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
@@ -1732,7 +1747,7 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Serviço que está sendo executado</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
-        public void XmlPedRec(Servicos servico, string recibo)
+        public void XmlPedRec(Servicos servico, string recibo, string versao)
         {
             int emp = EmpIndex;
 
@@ -1749,7 +1764,7 @@ namespace NFe.Service
                 switch (servico)
                 {
                     case Servicos.PedidoSituacaoLoteNFe:
-                        dadosXML = XmlPedRecNFe(emp, recibo);
+                        dadosXML = XmlPedRecNFe(emp, recibo, versao);
                         break;
 
                     case Servicos.PedidoSituacaoLoteCTe:
@@ -1773,11 +1788,12 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna a string do XML a ser gravado</returns>
-        private string XmlPedRecNFe(int emp, string recibo)
+        private string XmlPedRecNFe(int emp, string recibo, string versao)
         {
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<consReciNFe versao=\"" + ConfiguracaoApp.VersaoXMLPedRec + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
+                "<consReciNFe versao=\"" + versao + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
                 "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciNFe>";
@@ -1880,7 +1896,7 @@ namespace NFe.Service
                 }
             }
 
-            return nomeArqProcNFe;   
+            return nomeArqProcNFe;
         }
         #endregion
 
@@ -1940,7 +1956,7 @@ namespace NFe.Service
                 }
             }
 
-            return nomeArqProcCTe;   
+            return nomeArqProcCTe;
         }
         #endregion
 

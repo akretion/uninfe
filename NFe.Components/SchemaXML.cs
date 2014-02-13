@@ -32,18 +32,7 @@ namespace NFe.Components
 
             #region NFe
 
-            #region XML Distribuição NFe
-            InfSchemas.Add("NFE-nfeProc", new InfSchema()
-            {
-                Tag = "nfeProc",
-                ID = ++id,
-                ArquivoXSD = "NFe\\procNFe_v2.00.xsd",
-                Descricao = "XML de distribuição da NFe",
-                TagAssinatura = string.Empty,
-                TagAtributoId = string.Empty,
-                TargetNameSpace = string.Empty
-            });
-            #endregion
+            #region NFe versão 2.0
 
             #region XML Distribuição Cancelamento
             InfSchemas.Add("NFE-procCancNFe", new InfSchema()
@@ -58,78 +47,13 @@ namespace NFe.Components
             });
             #endregion
 
-            #region XML Distribuição Inutilização
-            InfSchemas.Add("NFE-procInutNFe", new InfSchema()
+            #region XML Consulta Cadastro Contribuinte
+            InfSchemas.Add("NFE-ConsCad", new InfSchema()
             {
-                Tag = "procInutNFe",
+                Tag = "ConsCad",
                 ID = ++id,
-                ArquivoXSD = "NFe\\procInutNFe_v2.00.xsd",
-                Descricao = "XML de distribuição de Inutilização de Números de NFe",
-                TagAssinatura = string.Empty,
-                TagAtributoId = string.Empty,
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML NFe
-            InfSchemas.Add("NFE-NFe", new InfSchema()
-            {
-                Tag = "NFe",
-                ID = ++id,
-                ArquivoXSD = "NFe\\nfe_v2.00.xsd",
-                Descricao = "XML da Nota Fiscal Eletrônica",
-                TagAssinatura = "NFe",
-                TagAtributoId = "infNFe",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Envio Lote
-            InfSchemas.Add("NFE-enviNFe", new InfSchema()
-            {
-                Tag = "enviNFe",
-                ID = ++id,
-                ArquivoXSD = "NFe\\enviNFe_v2.00.xsd",
-                Descricao = "XML de Envio de Lote de Notas Fiscais Eletrônicas",
-                TagAssinatura = string.Empty,
-                TagAtributoId = string.Empty,
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Cancelamento
-            InfSchemas.Add("NFE-cancNFe", new InfSchema()
-            {
-                Tag = "cancNFe",
-                ID = ++id,
-                ArquivoXSD = "NFe\\cancNFe_v2.00.xsd",
-                Descricao = "XML de Cancelamento de Nota Fiscal Eletrônica",
-                TagAssinatura = "cancNFe",
-                TagAtributoId = "infCanc",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Inutilização
-            InfSchemas.Add("NFE-inutNFe", new InfSchema()
-            {
-                Tag = "inutNFe",
-                ID = ++id,
-                ArquivoXSD = "NFe\\inutNFe_v2.00.xsd",
-                Descricao = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas",
-                TagAssinatura = "inutNFe",
-                TagAtributoId = "infInut",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Consulta Situação NFe
-            InfSchemas.Add("NFE-consSitNFe", new InfSchema()
-            {
-                Tag = "consSitNFe",
-                ID = ++id,
-                ArquivoXSD = "NFe\\consSitNFe_v2.01.xsd",
-                Descricao = "XML de Consulta da Situação da Nota Fiscal Eletrônica",
+                ArquivoXSD = "NFe\\consCad_v2.00.xsd",
+                Descricao = "XML de Consulta do Cadastro do Contribuinte",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
@@ -149,7 +73,20 @@ namespace NFe.Components
             });
             #endregion
 
-            #region XML Consulta Situação Serviço NFe
+            #region XML Consulta Situação NFe
+            InfSchemas.Add("NFE-consSitNFe", new InfSchema()
+            {
+                Tag = "consSitNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\consSitNFe_v2.01.xsd",
+                Descricao = "XML de Consulta da Situação da Nota Fiscal Eletrônica",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Consulta Status Serviço NFe
             InfSchemas.Add("NFE-consStatServ", new InfSchema()
             {
                 Tag = "consStatServ",
@@ -162,18 +99,182 @@ namespace NFe.Components
             });
             #endregion
 
-            #region XML Consulta Cadastro Contribuinte
-            InfSchemas.Add("NFE-ConsCad", new InfSchema()
+            #region XML Envio Lote
+            InfSchemas.Add("NFE-enviNFe", new InfSchema()
             {
-                Tag = "ConsCad",
+                Tag = "enviNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\consCad_v2.00.xsd",
-                Descricao = "XML de Consulta do Cadastro do Contribuinte",
+                ArquivoXSD = "NFe\\enviNFe_v2.00.xsd",
+                Descricao = "XML de Envio de Lote de Notas Fiscais Eletrônicas",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
             });
             #endregion
+
+            #region XML Inutilização
+            InfSchemas.Add("NFE-inutNFe", new InfSchema()
+            {
+                Tag = "inutNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\inutNFe_v2.00.xsd",
+                Descricao = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas",
+                TagAssinatura = "inutNFe",
+                TagAtributoId = "infInut",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML NFe
+            InfSchemas.Add("NFE-NFe", new InfSchema()
+            {
+                Tag = "NFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\nfe_v2.00.xsd",
+                Descricao = "XML da Nota Fiscal Eletrônica",
+                TagAssinatura = "NFe",
+                TagAtributoId = "infNFe",
+                TargetNameSpace = string.Empty
+            });
+            #endregion            
+
+            #region XML Distribuição Inutilização
+            InfSchemas.Add("NFE-procInutNFe", new InfSchema()
+            {
+                Tag = "procInutNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\procInutNFe_v2.00.xsd",
+                Descricao = "XML de distribuição de Inutilização de Números de NFe",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Distribuição NFe
+            InfSchemas.Add("NFE-nfeProc", new InfSchema()
+            {
+                Tag = "nfeProc",
+                ID = ++id,
+                ArquivoXSD = "NFe\\procNFe_v2.00.xsd",
+                Descricao = "XML de distribuição da NFe",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #endregion
+
+            #region NFe versão 3.1
+
+            #region XML Consulta Recibo Lote
+            InfSchemas.Add("NFE-3.10-consReciNFe", new InfSchema()
+            {
+                Tag = "consReciNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\consReciNfe_v3.10.xsd",
+                Descricao = "XML de Consulta do Recibo do Lote de Notas Fiscais Eletrônicas",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Consulta Situação NFe
+            InfSchemas.Add("NFE-3.10-consSitNFe", new InfSchema()
+            {
+                Tag = "consSitNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\consSitNFe_v3.10.xsd",
+                Descricao = "XML de Consulta da Situação da Nota Fiscal Eletrônica",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Consulta Status Serviço NFe
+            InfSchemas.Add("NFE-3.10-consStatServ", new InfSchema()
+            {
+                Tag = "consStatServ",
+                ID = ++id,
+                ArquivoXSD = "NFe\\consStatServ_v3.10.xsd",
+                Descricao = "XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Envio Lote
+            InfSchemas.Add("NFE-3.10-enviNFe", new InfSchema()
+            {
+                Tag = "enviNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\enviNFe_v3.10.xsd",
+                Descricao = "XML de Lote de Notas Fiscais Eletrônicas",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Inutilização
+            InfSchemas.Add("NFE-3.10-inutNFe", new InfSchema()
+            {
+                Tag = "inutNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\inutNFe_v3.10.xsd",
+                Descricao = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas",
+                TagAssinatura = "inutNFe",
+                TagAtributoId = "infInut",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML NFe
+            InfSchemas.Add("NFE-3.10-NFe", new InfSchema()
+            {
+                Tag = "NFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\nfe_v3.10.xsd",
+                Descricao = "XML da Nota Fiscal Eletrônica",
+                TagAssinatura = "NFe",
+                TagAtributoId = "infNFe",
+                TargetNameSpace = string.Empty
+            });
+            #endregion            
+
+            #region XML Distribuição Inutilização
+            InfSchemas.Add("NFE-3.10-procInutNFe", new InfSchema()
+            {
+                Tag = "procInutNFe",
+                ID = ++id,
+                ArquivoXSD = "NFe\\procInutNFe_v3.10.xsd",
+                Descricao = "XML de distribuição de Inutilização de Números de NFe",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region XML Distribuição NFe
+            InfSchemas.Add("NFE-3.10-nfeProc", new InfSchema()
+            {
+                Tag = "nfeProc",
+                ID = ++id,
+                ArquivoXSD = "NFe\\procNFe_v3.10.xsd",
+                Descricao = "XML de distribuição da NFe",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #endregion
+
+            #region XML Gerais da NFe
 
             #region XML Consulta DPEC
             InfSchemas.Add("NFE-consDPEC", new InfSchema()
@@ -342,6 +443,8 @@ namespace NFe.Components
                 TagAtributoId = "infCancRegistro",
                 TargetNameSpace = string.Empty
             });
+            #endregion
+
             #endregion
 
             #endregion
@@ -640,20 +743,7 @@ namespace NFe.Components
             #endregion
 
             #endregion
-
-            /*
-
-            #region Determinar a propriedade MaxID
-            MaxID = 0;
-            foreach (InfSchema item in InfSchemas.Values)
-            {
-                if (item.ID > MaxID)
-                    MaxID = item.ID;
-            }
-            #endregion
-            */ 
         }
-
     }
 
     public class InfSchema

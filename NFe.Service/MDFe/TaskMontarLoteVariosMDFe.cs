@@ -43,6 +43,8 @@ namespace NFe.Service
                         fsArquivo = new FileStream(NomeArquivoXML, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                         doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
+                        string versaoXml = string.Empty;
+
                         XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteMDFe"); //Pesquisar o elemento Documento no arquivo XML
                         foreach (XmlNode documentoNode in documentoList)
                         {
@@ -57,6 +59,9 @@ namespace NFe.Service
                                 if (File.Exists(arquivoNFe))
                                 {
                                     DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
+                                    if (string.IsNullOrEmpty(versaoXml))
+                                        versaoXml = oDadosNfe.versao;
+
                                     if (!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                     {
                                         notas.Add(arquivoNFe);
@@ -75,7 +80,7 @@ namespace NFe.Service
 
                         fsArquivo.Close(); //Fecha o arquivo XML
 
-                        this.LoteNfe(notas);
+                        this.LoteNfe(notas, versaoXml);
                     }
                     catch
                     {

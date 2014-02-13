@@ -24,7 +24,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta da situação da nota
         /// </summary>
-        private DadosPedSit oDadosPedSit;
+        private DadosPedSit dadosPedSit;
         #endregion
 
         #region Execute
@@ -34,29 +34,28 @@ namespace NFe.Service
 
             try
             {
-                oDadosPedSit = new DadosPedSit();
-                //Ler o XML para pegar parâmetros de envio
+                dadosPedSit = new DadosPedSit();
                 PedSit(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSit.cUF, oDadosPedSit.tpAmb, oDadosPedSit.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSit.cUF));
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedSit.cUF, Servico));
+                    object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSit.cUF));
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", oDadosPedSit.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedSit);
+                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSit.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSit.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, oDadosPedSit.cUF), oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, dadosPedSit.cUF), oCabecMsg, this);
 
                     //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
                     //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.
-                    LerRetornoSitNFe(oDadosPedSit.chNFe);
+                    LerRetornoSitNFe(dadosPedSit.chNFe);
 
                     //Gerar o retorno para o ERP
                     oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedSit_XML, Propriedade.ExtRetorno.Sit_XML, this.vStrXmlRetorno);
@@ -64,9 +63,10 @@ namespace NFe.Service
                 else
                 {
                     oGerarXML.Consulta(TipoAplicativo.Nfe, Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
-                        oDadosPedSit.tpAmb,
-                        oDadosPedSit.tpEmis,
-                        oDadosPedSit.chNFe);
+                        dadosPedSit.tpAmb,
+                        dadosPedSit.tpEmis,
+                        dadosPedSit.chNFe,
+                        dadosPedSit.versao);
                 }
             }
             catch (Exception ex)
@@ -112,15 +112,17 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         private void PedSit(int emp, string cArquivoXML)
         {
-            this.oDadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            this.oDadosPedSit.chNFe = string.Empty;
-            this.oDadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            dadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            dadosPedSit.chNFe = string.Empty;
+            dadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            dadosPedSit.versao = ConfiguracaoApp.VersaoXMLPedSit;
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
                 //      tpAmb|2
                 //      tpEmis|1                <<< opcional >>>
                 //      chNFe|35080600000000000000550000000000010000000000
+                //      versao|3.10
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
                 foreach (string cTexto in cLinhas)
                 {
@@ -128,13 +130,16 @@ namespace NFe.Service
                     switch (dados[0].ToLower())
                     {
                         case "tpamb":
-                            this.oDadosPedSit.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
+                            this.dadosPedSit.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
                             break;
                         case "tpemis":
-                            this.oDadosPedSit.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                            this.dadosPedSit.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
                             break;
                         case "chnfe":
-                            this.oDadosPedSit.chNFe = dados[1].Trim();
+                            this.dadosPedSit.chNFe = dados[1].Trim();
+                            break;
+                        case "versao":
+                            this.dadosPedSit.versao = dados[1].Trim();
                             break;
                     }
                 }
@@ -150,20 +155,20 @@ namespace NFe.Service
                 {
                     XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
-                    oDadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    oDadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                    oDadosPedSit.versaoNFe = 201;
+                    dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                    dadosPedSit.versao = consSitNFeElemento.Attributes["versao"].InnerText;
 
-                    //Se alguém ainda gerar com a versão 2.00 vou mudar para a atual para facilitar para o usuário do UniNFe
-                    if (consSitNFeElemento.GetAttribute("versao") == "2.00")
+                    //Se alguém ainda gerar com a versão 2.00 vou mudar para a "2.01" para facilitar para o usuário do UniNFe
+                    if (dadosPedSit.versao == "2.00")
                     {
-                        consSitNFeElemento.Attributes["versao"].InnerText = ConfiguracaoApp.VersaoXMLPedSit;
+                        consSitNFeElemento.Attributes["versao"].InnerText = "2.01";
                         doc.Save(cArquivoXML);
                     }
 
                     if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
-                        this.oDadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        this.dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
                         doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
                         /// salvo o arquivo modificado

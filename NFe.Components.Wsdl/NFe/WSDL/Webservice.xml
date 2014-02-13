@@ -12,6 +12,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -62,6 +64,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -112,6 +116,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -312,6 +318,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -712,6 +720,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -912,6 +922,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -962,6 +974,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1012,6 +1026,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\AN\HANNFeDownloadnf.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\RS\HRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\RS\HRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1062,6 +1078,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1112,6 +1130,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1162,6 +1182,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1262,6 +1284,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1312,6 +1336,8 @@
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\SVRS\HSVRSNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -1494,6 +1520,8 @@
       <NFeDownload></NFeDownload>
       <NFeConsultaNFeDest></NFeConsultaNFeDest>
       <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
       <MDFeRecepcao></MDFeRecepcao>
       <MDFeRetRecepcao></MDFeRetRecepcao>
       <MDFeConsulta></MDFeConsulta>
@@ -1518,6 +1546,8 @@
       <NFeDownload></NFeDownload>
       <NFeConsultaNFeDest></NFeConsultaNFeDest>
       <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
       <MDFeRecepcao></MDFeRecepcao>
       <MDFeRetRecepcao></MDFeRetRecepcao>
       <MDFeConsulta></MDFeConsulta>

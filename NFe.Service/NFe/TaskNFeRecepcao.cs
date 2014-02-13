@@ -40,10 +40,15 @@ namespace NFe.Service
                 //Ler o XML de Lote para pegar o número do lote que está sendo enviado
                 oLer.Nfe(NomeArquivoXML);
 
+                if (oLer.oDadosNfe.versao != "2.00")
+                {
+                    Servico = Servicos.EnviarLoteNfe2;
+                }
+
                 var idLote = oLer.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarLoteNfe, emp, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis));
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis));
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
@@ -51,7 +56,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLNFe);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", oLer.oDadosNfe.versao);
 
                 //
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 

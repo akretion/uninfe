@@ -68,6 +68,7 @@ namespace NFe.Service
                 if (infNFeElemento.HasAttributes)
                 {
                     this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
+                    oDadosNfe.versao = infNFeElemento.Attributes["versao"].InnerText;
                 }
 
                 //Montar lista de tag´s da tag <ide>
@@ -77,7 +78,11 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dEmi")[0].InnerText);
+                    if (oDadosNfe.versao == "2.00")
+                        oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dEmi")[0].InnerText);
+                    else
+                        oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
+
                     oDadosNfe.cNF = ideElemento.GetElementsByTagName("cNF")[0].InnerText;
                     oDadosNfe.nNF = ideElemento.GetElementsByTagName("nNF")[0].InnerText;
                     oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
@@ -245,17 +250,18 @@ namespace NFe.Service
         /// </summary>
         private void ClearDados()
         {
-            this.oDadosNfe.chavenfe = string.Empty;
-            this.oDadosNfe.idLote = string.Empty;
-            this.oDadosNfe.tpAmb = string.Empty;
-            this.oDadosNfe.tpEmis = string.Empty;
-            this.oDadosNfe.serie = string.Empty;
-            this.oDadosNfe.cUF = string.Empty;
-            this.oDadosNfe.cNF = string.Empty;
-            this.oDadosNfe.mod = string.Empty;
-            this.oDadosNfe.nNF = string.Empty;
-            this.oDadosNfe.cDV = string.Empty;
-            this.oDadosNfe.CNPJ = string.Empty;
+            oDadosNfe.chavenfe = string.Empty;
+            oDadosNfe.idLote = string.Empty;
+            oDadosNfe.tpAmb = string.Empty;
+            oDadosNfe.tpEmis = string.Empty;
+            oDadosNfe.serie = string.Empty;
+            oDadosNfe.cUF = string.Empty;
+            oDadosNfe.cNF = string.Empty;
+            oDadosNfe.mod = string.Empty;
+            oDadosNfe.nNF = string.Empty;
+            oDadosNfe.cDV = string.Empty;
+            oDadosNfe.CNPJ = string.Empty;
+            oDadosNfe.versao = string.Empty;
         }
         #endregion
 

@@ -1081,15 +1081,15 @@ namespace NFe.Service
                     switch (reciboCons.Servico)
                     {
                         case TipoAplicativo.Cte:
-                            tipoServico.InvokeMember("XmlPedRecCTe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec });
+                            tipoServico.InvokeMember("XmlPedRecCTe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
                             break;
 
                         case TipoAplicativo.Nfe:
-                            tipoServico.InvokeMember("XmlPedRec", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec });
+                            tipoServico.InvokeMember("XmlPedRec", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
                             break;
 
                         case TipoAplicativo.MDFe:
-                            tipoServico.InvokeMember("XmlPedRecMDFe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec });
+                            tipoServico.InvokeMember("XmlPedRecMDFe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
                             break;
 
                         default:
@@ -1260,6 +1260,7 @@ namespace NFe.Service
                     goto default;
 
                 case Servicos.EnviarLoteNfe:
+                case Servicos.EnviarLoteNfe2:
                     extRet = Propriedade.ExtEnvio.EnvLot;
                     extRetERR = Propriedade.ExtRetorno.Rec_ERR;
                     break;

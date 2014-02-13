@@ -443,7 +443,7 @@ namespace uninfse
             });
             #endregion
 
-            #region XML de lote RPS
+            #region XML de consulta da URL para impressão da NFSe
             SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarUrlVisualizacaoNfseEnvio", new InfSchema()
             {
                 Tag = "ConsultarUrlVisualizacaoNfseEnvio",

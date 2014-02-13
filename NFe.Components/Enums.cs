@@ -33,13 +33,21 @@ namespace NFe.Components
         /// </summary>
         MontarLoteUmaNFe,
         /// <summary>
-        /// Envia os lotes de NFe para os webservices
+        /// Envia os lotes de NFe para os webservices (NfeRecepcao)
         /// </summary>
         EnviarLoteNfe,
         /// <summary>
-        /// Consulta recibo do lote nfe
+        /// Envia os lotes de NFe para os webservices (NFeAutorizacao)
+        /// </summary>
+        EnviarLoteNfe2,
+        /// <summary>
+        /// Consulta recibo do lote nfe (NFeRetRecepcao)
         /// </summary>
         PedidoSituacaoLoteNFe,
+        /// <summary>
+        /// Consulta recibo do lote nfe (NFeRetAutorizacao)
+        /// </summary>
+        PedidoSituacaoLoteNFe2,        
         /// <summary>
         /// Consulta situação da NFe
         /// </summary>

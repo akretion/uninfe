@@ -724,6 +724,8 @@ namespace NFe.Components
             NFeStatusServico =
             NFeRegistroDeSaida =
             NFeRegistroDeSaidaCancelamento =
+            NFeAutorizacao = 
+            NFeRetAutorizacao = 
             ConsultarURLNfse =
             RecepcionarLoteRps =
             MDFeRecepcao =
@@ -752,6 +754,8 @@ namespace NFe.Components
         public string NFeConsulta { get; set; }
         public string NFeStatusServico { get; set; }
         public string NFeConsultaCadastro { get; set; }
+        public string NFeAutorizacao { get; set; }
+        public string NFeRetAutorizacao { get; set; }
         /// <summary>
         /// Recepção de eventos da NFe
         /// </summary>

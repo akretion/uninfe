@@ -29,7 +29,7 @@ namespace NFe.Service
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
             arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvioEmLote, "*" + Propriedade.ExtEnvio.Nfe);
-            if (arquivosNFe.Count == 0) 
+            if (arquivosNFe.Count == 0)
             {
                 if (this.NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
                 {
@@ -77,6 +77,8 @@ namespace NFe.Service
                             fsArquivo = new FileStream(this.NomeArquivoXML, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                             doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
+                            string versaoXml = string.Empty;
+
                             XmlNodeList documentoList = doc.GetElementsByTagName("MontarLoteNFe"); //Pesquisar o elemento Documento no arquivo XML
                             foreach (XmlNode documentoNode in documentoList)
                             {
@@ -91,6 +93,10 @@ namespace NFe.Service
                                     if (File.Exists(arquivoNFe))
                                     {
                                         DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
+
+                                        if (string.IsNullOrEmpty(versaoXml))
+                                            versaoXml = oDadosNfe.versao;
+
                                         if (!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                         {
                                             notas.Add(arquivoNFe);
@@ -98,8 +104,6 @@ namespace NFe.Service
                                         else
                                         {
                                             throw new Exception("Arquivo: " + arquivoNFe + " já está no fluxo de envio e não será incluido em novo lote.");
-
-                                            //File.Delete(arquivoNFe);
                                         }
                                     }
                                     else
@@ -111,7 +115,7 @@ namespace NFe.Service
 
                             fsArquivo.Close(); //Fecha o arquivo XML
 
-                            this.LoteNfe(notas);
+                            this.LoteNfe(notas, versaoXml);
                         }
                         catch
                         {

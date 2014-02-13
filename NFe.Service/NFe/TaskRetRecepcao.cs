@@ -22,7 +22,7 @@ namespace NFe.Service
         /// <summary>
         /// Esta Herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta do recibo do lote de NFe enviado
         /// </summary>
-        private DadosPedRecClass oDadosPedRec;
+        private DadosPedRecClass dadosPedRec;
         #endregion
 
         #region Execute
@@ -33,24 +33,28 @@ namespace NFe.Service
             try
             {
                 #region Parte do código que envia o XML de pedido de consulta do recibo
-                oDadosPedRec = new DadosPedRecClass();
-                //var oLer = new LerXML();
-                //
+                dadosPedRec = new DadosPedRecClass();
                 PedRec(emp, NomeArquivoXML);
 
+                if (dadosPedRec.versao != "2.00")
+                {
+                    Servico = Servicos.PedidoSituacaoLoteNFe2;
+                }
+
+
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedRec.cUF, oDadosPedRec.tpAmb, oDadosPedRec.tpEmis);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedRec.cUF));
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(oDadosPedRec.cUF, Servico));
+                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF));
+                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", oDadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLPedRec);
+                wsProxy.SetProp(oCabecMsg, "cUF", dadosPedRec.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, oDadosPedRec.cUF), oCabecMsg, this);
+                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF), oCabecMsg, this);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo
@@ -94,10 +98,10 @@ namespace NFe.Service
         /// </remarks>
         private void PedRec(int emp, string cArquivoXML)
         {
-            this.oDadosPedRec.tpAmb = 0;
-            this.oDadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            this.oDadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
-            this.oDadosPedRec.nRec = string.Empty;
+            dadosPedRec.tpAmb = 0;
+            dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            dadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
+            dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
             doc.Load(cArquivoXML);
@@ -108,13 +112,14 @@ namespace NFe.Service
             {
                 XmlElement consReciNFeElemento = (XmlElement)consReciNFeNode;
 
-                oDadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                oDadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
-                oDadosPedRec.cUF = Convert.ToInt32(oDadosPedRec.nRec.Substring(0, 2));
+                dadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
+                dadosPedRec.versao = consReciNFeElemento.Attributes["versao"].InnerText;
 
                 if (consReciNFeElemento.GetElementsByTagName("cUF").Count != 0)
                 {
-                    this.oDadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("cUF")[0].InnerText);
+                    dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("cUF")[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <cUF>
                     doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("cUF")[0]);
                     /// Salvo o arquivo modificado
@@ -122,7 +127,7 @@ namespace NFe.Service
                 }
                 if (consReciNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
                 {
-                    this.oDadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                    dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <tpEmis>
                     doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("tpEmis")[0]);
                     /// Salvo o arquivo modificado

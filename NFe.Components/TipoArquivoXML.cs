@@ -35,7 +35,7 @@ namespace NFe.Components
             DefinirTipoArq(rotaArqXML, UFCod);
         }
 
-        private void DefinirTipoArq(string cRotaArqXML, int UFCod)
+        private void DefinirTipoArq(string fullPathXML, int UFCod)
         {
             nRetornoTipoArq = 0;
             cRetornoTipoArq = string.Empty;
@@ -45,6 +45,8 @@ namespace NFe.Components
             TagLoteAssinatura = string.Empty;
             TagLoteAtributoId = string.Empty;
             TargetNameSpace = string.Empty;
+            
+            string versaoXML = string.Empty;
 
             string padraoNFSe = string.Empty;
             if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
@@ -54,113 +56,91 @@ namespace NFe.Components
 
             try
             {
-                if (File.Exists(cRotaArqXML))
+                if (File.Exists(fullPathXML))
                 {
-                    //Carregar os dados do arquivo XML de configurações do UniNfe
-                    XmlTextReader oLerXml = null;
-
                     try
                     {
-                        oLerXml = new XmlTextReader(cRotaArqXML);
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(fullPathXML);
+                        string nome = doc.DocumentElement.Name;
+                        string versao = string.Empty;
+                        if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"] != null)
+                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"].Value;
+                        else if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"] != null)
+                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"].Value;
 
-                        while (oLerXml.Read())
+                        if (versao.Equals("3.10") && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                            versaoXML = "-" + versao;
+                        
+                        InfSchema schema = null;
+                        try
                         {
-                            if (oLerXml.NodeType == XmlNodeType.Element)
+                            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                             {
-                                InfSchema schema = null;
-                                try
+                                if (nome.Equals("envEvento") || nome.Equals("eventoCTe"))
                                 {
-                                    string nome = oLerXml.Name;
-                                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName("tpEvento")[0];
+                                    if (cl != null)
                                     {
-                                        string name = oLerXml.Name;
+                                        string evento = cl.InnerText;
 
-                                        if (name.Equals("envEvento") || name.Equals("eventoCTe"))
+                                        switch (evento)
                                         {
-                                            XmlDocument xml = new XmlDocument();
-                                            xml.Load(oLerXml);
+                                            case "110110": //XML de Evento da CCe
+                                                nome = nome + evento;
+                                                break;
 
-                                            XmlElement cl = (XmlElement)xml.GetElementsByTagName("tpEvento")[0];
-                                            if (cl != null)
-                                            {
-                                                string evento = cl.InnerText;
+                                            case "110111": //XML de Envio de evento de cancelamento
+                                                nome = nome + evento;
+                                                break;
 
-                                                switch (evento)
-                                                {
-                                                    case "110110": //XML de Evento da CCe
-                                                        nome = name + evento;
-                                                        break;   
+                                            case "110113": //XML de Envio do evento de contingencia EPEC, CTe
+                                                nome = nome + evento;
+                                                break;
 
-                                                    case "110111": //XML de Envio de evento de cancelamento
-                                                        nome = name + evento;
-                                                        break;   
+                                            case "110160": //XML de Envio do evento de Registro Multimodal, CTe
+                                                nome = nome + evento;
+                                                break;
 
-                                                    case "110113": //XML de Envio do evento de contingencia EPEC, CTe
-                                                        nome = name + evento;
-                                                        break;
-
-                                                    case "110160": //XML de Envio do evento de Registro Multimodal, CTe
-                                                        nome = name + evento;
-                                                        break;
-
-                                                    case "210200": //XML Evento de manifestação do destinatário
-                                                    case "210210": //XML Evento de manifestação do destinatário
-                                                    case "210220": //XML Evento de manifestação do destinatário
-                                                    case "210240": //XML Evento de manifestação do destinatário
-                                                        nome = "envConfRecebto";
-                                                        break;
-                                                }
-                                            }
-                                        }
-                                        else if (oLerXml.Name.Equals("eventoMDFe"))
-                                        {
-                                            XmlDocument xml = new XmlDocument();
-                                            xml.Load(oLerXml);
-
-                                            XmlElement cl = (XmlElement)xml.GetElementsByTagName("tpEvento")[0];
-                                            if (cl != null)
-                                            {
-                                                nome = "eventoMDFe" + cl.InnerText;
-                                            }
+                                            case "210200": //XML Evento de manifestação do destinatário
+                                            case "210210": //XML Evento de manifestação do destinatário
+                                            case "210220": //XML Evento de manifestação do destinatário
+                                            case "210240": //XML Evento de manifestação do destinatário
+                                                nome = "envConfRecebto";
+                                                break;
                                         }
                                     }
-                                    schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + "-" + padraoNFSe + nome];
                                 }
-                                catch
+                                else if (nome.Equals("eventoMDFe"))
                                 {
-                                    throw new Exception("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de NFe, consulta, etc. Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
-                                }
-
-                                nRetornoTipoArq = schema.ID;
-                                cRetornoTipoArq = schema.Descricao;
-                                cArquivoSchema = schema.ArquivoXSD;
-                                TagAssinatura = schema.TagAssinatura;
-                                TagAtributoId = schema.TagAtributoId;
-                                TagLoteAssinatura = schema.TagLoteAssinatura;
-                                TagLoteAtributoId = schema.TagLoteAtributoId;
-                                TargetNameSpace = schema.TargetNameSpace;
-
-                                if (this.nRetornoTipoArq != 0) //Arquivo XML já foi identificado
-                                {
-                                    break;
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName("tpEvento")[0];
+                                    if (cl != null)
+                                    {
+                                        nome = "eventoMDFe" + cl.InnerText;
+                                    }
                                 }
                             }
+
+                            schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome];
                         }
+                        catch
+                        {
+                            throw new Exception("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de NFe, consulta, etc. Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
+                        }
+
+                        nRetornoTipoArq = schema.ID;
+                        cRetornoTipoArq = schema.Descricao;
+                        cArquivoSchema = schema.ArquivoXSD;
+                        TagAssinatura = schema.TagAssinatura;
+                        TagAtributoId = schema.TagAtributoId;
+                        TagLoteAssinatura = schema.TagLoteAssinatura;
+                        TagLoteAtributoId = schema.TagLoteAtributoId;
+                        TargetNameSpace = schema.TargetNameSpace;
                     }
                     catch (Exception ex)
                     {
                         this.nRetornoTipoArq = 102;
                         this.cRetornoTipoArq = ex.Message;
-                    }
-                    finally
-                    {
-                        if (oLerXml != null)
-                        {
-                            if (oLerXml.ReadState != ReadState.Closed)
-                            {
-                                oLerXml.Close();
-                            }
-                        }
                     }
                 }
                 else

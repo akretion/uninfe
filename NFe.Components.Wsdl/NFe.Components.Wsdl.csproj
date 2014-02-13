@@ -161,9 +161,6 @@
     <EmbeddedResource Include="NFe\schemas\EventoManifestaDestinat\xmldsig-core-schema_v1.01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\cancNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\consCad_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -180,9 +177,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\inutNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\leiauteCancNFe_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsSitNFe_v2.01.xsd">
@@ -210,9 +204,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\procNFe_v2.00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\retCancNFe_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\retConsCad_v2.00.xsd">
@@ -1479,6 +1470,93 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\consReciNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\consSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\consStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\enviNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\inutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\nfe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\procInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\procNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\retConsReciNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\consSitNFe_v2.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\retConsSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\retConsStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\retEnviNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\retInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\tiposBasico_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

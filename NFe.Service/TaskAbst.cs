@@ -124,6 +124,9 @@ namespace NFe.Service
                 case Servicos.ConsultaStatusServicoNFe:
                     retorna = "NfeStatusServico2";
                     break;
+                case Servicos.PedidoSituacaoLoteNFe2:
+                    retorna = "NfeRetAutorizacao";
+                    break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "NfeRetRecepcao2";
                     break;
@@ -132,6 +135,9 @@ namespace NFe.Service
                     break;
                 case Servicos.EnviarLoteNfe:
                     retorna = "NfeRecepcao2";
+                    break;
+                case Servicos.EnviarLoteNfe2:
+                    retorna = "NfeAutorizacao";
                     break;
                 #endregion
 
@@ -520,6 +526,9 @@ namespace NFe.Service
                 case Servicos.ConsultaStatusServicoNFe:
                     retorna = "nfeStatusServicoNF2";
                     break;
+                case Servicos.PedidoSituacaoLoteNFe2:
+                    retorna = "nfeRetAutorizacaoLote";
+                    break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "nfeRetRecepcao2";
                     break;
@@ -533,6 +542,9 @@ namespace NFe.Service
                             retorna = "consultaCadastro2";
                             break;
                     }
+                    break;
+                case Servicos.EnviarLoteNfe2:
+                    retorna = "nfeAutorizacaoLote";
                     break;
                 case Servicos.EnviarLoteNfe:
                     retorna = "nfeRecepcaoLote2";
@@ -1173,7 +1185,7 @@ namespace NFe.Service
                     }
                     else
                     {
-                        oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                        oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
 
                         throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
                             NomeArquivoXML);
@@ -1182,7 +1194,7 @@ namespace NFe.Service
 
                 if (tudoOK)
                 {
-                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, Functions.ExtrairNomeArq(arqDestino, ".xml") + ".xml");
+                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
                 }
             }
             catch (Exception ex)
@@ -1496,9 +1508,9 @@ namespace NFe.Service
         /// <param name="Arquivo">Nome do arquivo XML da NFe para montagem do lote de 1 NFe</param>
         /// <date>07/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        public void LoteNfe(string Arquivo)
+        public void LoteNfe(string Arquivo, string versaoXml)
         {
-            oGerarXML.LoteNfe(Servico, Arquivo);
+            oGerarXML.LoteNfe(Servico, Arquivo, versaoXml);
         }
         #endregion
 
@@ -1507,11 +1519,12 @@ namespace NFe.Service
         /// Auxliar na geração do arquivo XML de Lote de notas fiscais
         /// </summary>
         /// <param name="lstArquivoNfe">Lista de arquivos de NFe para montagem do lote de várias NFe</param>
+        /// <param name="versaoXml">Versao do Xml de lote</param>
         /// <date>24/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        public void LoteNfe(List<string> lstArquivoNfe)
+        public void LoteNfe(List<string> lstArquivoNfe, string versaoXml)
         {
-            oGerarXML.LoteNfe(lstArquivoNfe);
+            oGerarXML.LoteNfe(lstArquivoNfe, versaoXml);
         }
         #endregion
 
@@ -1602,10 +1615,11 @@ namespace NFe.Service
         /// </summary>
         /// <param name="empresa">Código da empresa</param>
         /// <param name="nRec">Número do recibo a ser consultado</param>
-        public void XmlPedRec(int empresa, string nRec)
+        /// <param name="versao">Versao do Schema XML</param>
+        public void XmlPedRec(int empresa, string nRec, string versao)
         {
             GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteNFe, nRec);
+            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteNFe, nRec, versao);
         }
         #endregion
 
@@ -1615,10 +1629,11 @@ namespace NFe.Service
         /// </summary>
         /// <param name="empresa">Código da empresa</param>
         /// <param name="nRec">Número do recibo a ser consultado</param>
-        public void XmlPedRecCTe(int empresa, string nRec)
+        /// <param name="versao">Versao do Schema XML</param>
+        public void XmlPedRecCTe(int empresa, string nRec, string versao)
         {
             GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteCTe, nRec);
+            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteCTe, nRec, versao);
         }
         #endregion
 
@@ -1628,10 +1643,11 @@ namespace NFe.Service
         /// </summary>
         /// <param name="empresa">Código da empresa</param>
         /// <param name="nRec">Número do recibo a ser consultado</param>
-        public void XmlPedRecMDFe(int empresa, string nRec)
+        /// <param name="versao">Versao do Schema XML</param>
+        public void XmlPedRecMDFe(int empresa, string nRec, string versao)
         {
             GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteMDFe, nRec);
+            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteMDFe, nRec, versao);
         }
         #endregion
 
