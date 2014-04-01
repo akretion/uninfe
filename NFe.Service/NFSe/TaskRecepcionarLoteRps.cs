@@ -135,6 +135,19 @@ namespace NFe.Service.NFSe
                         envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
+                    case PadroesNFSe.ISSONLINE4R:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.DSF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis);
+                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        #region Encriptar tag <Assinatura>
+                        EncryptAssinatura();
+                        #endregion
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

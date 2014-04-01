@@ -49,7 +49,8 @@ namespace NFe.Interface
                 udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
                 edtFTP_PastaDestino.Visible = lbl_edtFTP_PastaDestino.Visible = edtFTP_GravaXMLPastaUnica.Visible =
                 textBox_PastaDownload.Visible = lbl_textBox_PastaDownload.Visible =
-                button_SelecionarPastaDownload.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
+                button_SelecionarPastaDownload.Visible = 
+                cbIndSinc.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
             this.updateText = updateText;
             cnpjCurrent = "";
             servicoCurrent = TipoAplicativo.Nulo;
@@ -110,7 +111,7 @@ namespace NFe.Interface
         public void PopulateConfEmpresa(string cnpj, TipoAplicativo servico)
         {
             #region Definir um texto explicativo sobre a impressão do DANFE. Wandrey 02/02/2010
-            tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do documento fiscal eletrônicoatravés do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
+            tbTextoDANFE.Text = "Você pode automatizar o processo de geração/impressão do documento fiscal eletrônico através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
                 "\r\n\r\n" +
                 "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
             #endregion
@@ -228,6 +229,7 @@ namespace NFe.Interface
                                 oEmpresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
                                 oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                                 oEmpresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
+                                oEmpresa.IndSinc = empresa.IndSinc;
 
                                 oEmpresa.CriaPastasAutomaticamente = true;
                                 break;
@@ -305,6 +307,7 @@ namespace NFe.Interface
             checkBoxGravarEventosDeTerceiros.Checked = oEmpresa.GravarEventosDeTerceiros;
             checkBoxGravarEventosNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosNaPastaEnviadosNFe;
             checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
+            cbIndSinc.Checked = oEmpresa.IndSinc;
             cbCriaPastas.Checked = oEmpresa.CriaPastasAutomaticamente;
 
             cboDiretorioSalvarComo.Text = oEmpresa.DiretorioSalvarComo;
@@ -435,6 +438,7 @@ namespace NFe.Interface
             oEmpresa.Nome = edtNome.Text;
             oEmpresa.CNPJ = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
             oEmpresa.CriaPastasAutomaticamente = cbCriaPastas.Checked;
+            oEmpresa.IndSinc = cbIndSinc.Checked;
 
             oEmpresa.FTPAtivo = this.edtFTP_Ativo.Checked;
             oEmpresa.FTPGravaXMLPastaUnica = this.edtFTP_GravaXMLPastaUnica.Checked;
@@ -503,8 +507,8 @@ namespace NFe.Interface
             TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
             string nome = edtNome.Text.ToString();
 
-            if (edtNome.Text.Length > 20)
-                nome = edtNome.Text.Substring(0, 20);
+            //if (edtNome.Text.Length > 20)
+            //    nome = edtNome.Text.Substring(0, 20);
 
             if (string.IsNullOrEmpty(cnpj))
             {
@@ -577,7 +581,7 @@ namespace NFe.Interface
                 cnpjCurrent = cnpj;
 
                 if (this.updateText != null)
-                    this.updateText(nome);
+                    this.updateText(nome.Substring(0, 20));
             }
         }
 

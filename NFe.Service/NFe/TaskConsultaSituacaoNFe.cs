@@ -314,14 +314,15 @@ namespace NFe.Service
                                 //Pegar o Status do Retorno da consulta situação
                                 string strStat = Functions.LerTag(infConsSitElemento, "cStat").Replace(";", "");
 
+                                //Pegar a versão do XML
+                                var protNFeElemento = (XmlElement)retConsSitElemento.GetElementsByTagName("protNFe")[0];
+                                string versao = protNFeElemento.GetAttribute("versao");
+
                                 switch (strStat)
                                 {
                                     case "100": //NFe Autorizada
                                     case "150": //NFe Autorizada fora do prazo
-                                        //O retorno da consulta situação a posição das tag´s é diferente do que vem 
-                                        //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
-                                        //para que fique um XML de distribuição válido. Wandrey 07/10/2009
-                                        string strProtNfe = GeraStrProtNFe(infConsSitElemento);//danasa 11-4-2012
+                                        string strProtNfe = retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml;
 
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
@@ -346,7 +347,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe);
+                                                    oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
                                                 }
                                             }
 
@@ -403,7 +404,7 @@ namespace NFe.Service
                                         //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s Denegados
                                         //
                                         // NFe existe na pasta EmProcessamento?
-                                        ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, infConsSitElemento);
+                                        ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml, versao);
                                         break;
 
                                     default:

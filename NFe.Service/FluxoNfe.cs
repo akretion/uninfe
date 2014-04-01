@@ -252,7 +252,7 @@ namespace NFe.Service
                             #region Pegar a versão do schema do XML
                             XmlDocument xmlNFe = new XmlDocument();
                             xmlNFe.Load(fullPathNFe);
-                            string versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName("infNFe")[0]).Attributes["versao"].InnerText;
+                            string versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.ChildNodes[1].ChildNodes[0].Name)[0]).Attributes["versao"].InnerText;
                             #endregion
 
                             xd.Load(lfile); //Carregar o arquivo aberto no XmlDocument

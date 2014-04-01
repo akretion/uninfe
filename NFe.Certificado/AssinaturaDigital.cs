@@ -60,20 +60,11 @@ namespace NFe.Certificado
                 // Load the passed XML file using it’s name.
                 doc.LoadXml(xmlString);
 
-                #region Código retirado, pois gera BUG, veja comentários
-                ///danasa: 12/2013 ????????
-                ///Não pode ter esta verificação neste ponto, pois gera problema nas assinaturas das NFSe que tem que assinar cada RPS e o lote. Veja que aproximadamente na linha 93 tem a seguinte comparação e já atende a necessidade de não assinar novamente se já existir a assinatura:
-                ///if(childNodes.NextSibling != null && childNodes.NextSibling.Name.Equals("Signature"))
-                ///Não retornar esta comparação. Wandrey 12/02/2014
-                //if (doc.GetElementsByTagName("Signature").Count > 0)
-                //    return;
-                #endregion
-
                 if (doc.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
                 }
-                else if(doc.GetElementsByTagName(tagAtributoId).Count == 0)
+                else if (doc.GetElementsByTagName(tagAtributoId).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
                 }
@@ -83,14 +74,34 @@ namespace NFe.Certificado
                     XmlDocument XMLDoc;
 
                     XmlNodeList lists = doc.GetElementsByTagName(tagAssinatura);
-                    foreach(XmlNode nodes in lists)
-                    {
-                        foreach(XmlNode childNodes in nodes.ChildNodes)
-                        {
-                            if(!childNodes.Name.Equals(tagAtributoId))
-                                continue;
+                    XmlNode listRPS = null;
 
-                            if(childNodes.NextSibling != null && childNodes.NextSibling.Name.Equals("Signature"))
+                    /// Esta condição foi feita especificamente para prefeitura de Governador Valadares pois o AtribudoID e o Elemento assinado devem possuir o mesmo nome.
+                    /// Talvez tenha que ser reavaliado.
+                    #region Governador Valadares
+                    if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UFCod == 3127701)
+                    {
+                        foreach (XmlNode item in lists)
+                        {
+                            if (listRPS == null)
+                            {
+                                listRPS = item;
+                            }
+
+                            if (item.Name.Equals(tagAssinatura))
+                            {
+                                lists = item.ChildNodes;
+                                break;
+                            }
+                        }
+                    }
+                    #endregion
+
+                    foreach (XmlNode nodes in lists)
+                    {
+                        foreach (XmlNode childNodes in nodes.ChildNodes)
+                        {
+                            if (!childNodes.Name.Equals(tagAtributoId))
                                 continue;
 
                             // Create a reference to be signed
@@ -99,11 +110,11 @@ namespace NFe.Certificado
 
                             // pega o uri que deve ser assinada                                       
                             XmlElement childElemen = (XmlElement)childNodes;
-                            if(childElemen.GetAttributeNode("Id") != null)
+                            if (childElemen.GetAttributeNode("Id") != null)
                             {
                                 reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
                             }
-                            else if(childElemen.GetAttributeNode("id") != null)
+                            else if (childElemen.GetAttributeNode("id") != null)
                             {
                                 reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
                             }
@@ -139,8 +150,16 @@ namespace NFe.Certificado
                             // it to an XmlElement object.
                             XmlElement xmlDigitalSignature = signedXml.GetXml();
 
-                            // Gravar o elemento no documento XML
-                            nodes.AppendChild(doc.ImportNode(xmlDigitalSignature, true));
+                            if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UFCod == 3127701)
+                            {
+                                ///Desenvolvido especificamente para prefeitura de governador valadares
+                                listRPS.AppendChild(doc.ImportNode(xmlDigitalSignature, true));
+                            }
+                            else
+                            {
+                                // Gravar o elemento no documento XML
+                                nodes.AppendChild(doc.ImportNode(xmlDigitalSignature, true));
+                            }
                         }
                     }
 
@@ -157,7 +176,7 @@ namespace NFe.Certificado
                     SW_2.Close();
                 }
             }
-            catch(System.Security.Cryptography.CryptographicException ex)
+            catch (System.Security.Cryptography.CryptographicException ex)
             {
                 #region #10316
                 /*
@@ -176,7 +195,7 @@ namespace NFe.Certificado
             }
             finally
             {
-                if(SR != null)
+                if (SR != null)
                     SR.Close();
             }
         }
@@ -192,12 +211,36 @@ namespace NFe.Certificado
         {
             TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod);
 
-            if(!String.IsNullOrEmpty(v.TagAssinatura))
-                this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+            if (!String.IsNullOrEmpty(v.TagAssinatura))
+            {
+                if (!Assinado(arqXMLAssinar, v.TagAssinatura))
+                    this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+            }
 
             //Assinar o lote
-            if(!String.IsNullOrEmpty(v.TagLoteAssinatura))
-                this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+            if (!String.IsNullOrEmpty(v.TagLoteAssinatura))
+                if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
+                    this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+        }
+
+        /// <summary>
+        /// Verificar se o XML já tem assinatura
+        /// </summary>
+        /// <param name="arqXML">Arquivo XML a ser verificado se tem assinatura</param>
+        /// <param name="tagAssinatura">Tag de assinatura onde vamos pesquisar</param>
+        /// <returns>true = Já está assinado</returns>
+        private bool Assinado(string arqXML, string tagAssinatura)
+        {            
+            bool retorno = false;
+                        
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arqXML);
+
+            if (doc.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
+                retorno = true;
+
+            return retorno;
         }
     }
 }
+

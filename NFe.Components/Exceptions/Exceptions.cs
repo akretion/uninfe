@@ -8,13 +8,41 @@ namespace NFe.Components.Exceptions
     /// <summary>
     /// Serviço não disponível
     /// </summary>
-    public class ServicoInexistenteException: Exception
+    public class ServicoInexistenteException : Exception
     {
         public override string Message
         {
             get
             {
                 return "Serviço não disponível ou não existe.";
+            }
+        }
+    }
+
+    /// <summary>
+    /// Serviço Indisponível para homologação
+    /// Renan - 27/02/2014
+    /// </summary>
+    public class ServicoInexistenteHomologacaoException : Exception
+    {
+        /// <summary>
+        /// Servico que esta indisponivel para Homologacao
+        /// </summary>
+        private string _Service = "";
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="service">nome do servico que esta indisponivel para o ambiente</param>
+        public ServicoInexistenteHomologacaoException(Servicos service)
+        {
+            _Service = EnumHelper.GetDescription(service);
+        }
+        public override string Message
+        {
+            get
+            {
+                return String.Format("Serviço {0} não está disponível para o Ambiente de Homologação.", _Service);
             }
         }
     }

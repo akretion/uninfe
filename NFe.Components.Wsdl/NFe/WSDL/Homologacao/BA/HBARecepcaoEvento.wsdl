@@ -37,6 +37,7 @@
   </wsdl:message>
   <wsdl:portType name="RecepcaoEventoSoap">
     <wsdl:operation name="nfeRecepcaoEvento">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à recepção de mensagem de Evento da NF-e.</wsdl:documentation>
       <wsdl:input message="tns:nfeRecepcaoEventoSoapIn" />
       <wsdl:output message="tns:nfeRecepcaoEventoSoapOut" />
     </wsdl:operation>
@@ -71,10 +72,10 @@
   </wsdl:binding>
   <wsdl:service name="RecepcaoEvento">
     <wsdl:port name="RecepcaoEventoSoap" binding="tns:RecepcaoEventoSoap">
-      <soap:address location="https://hnfe.sefaz.ba.gov.br/webservices/sre/RecepcaoEvento.asmx" />
+      <soap:address location="https://hnfe.sefaz.ba.gov.br/webservices/sre/recepcaoevento.asmx" />
     </wsdl:port>
     <wsdl:port name="RecepcaoEventoSoap12" binding="tns:RecepcaoEventoSoap12">
-      <soap12:address location="https://hnfe.sefaz.ba.gov.br/webservices/sre/RecepcaoEvento.asmx" />
+      <soap12:address location="https://hnfe.sefaz.ba.gov.br/webservices/sre/recepcaoevento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

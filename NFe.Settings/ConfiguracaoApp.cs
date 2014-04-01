@@ -156,6 +156,7 @@ namespace NFe.Settings
             {
                 List<ArquivoItem> ListArqsAtualizar = new List<ArquivoItem>();
                 UpdateWSDL(ListArqsAtualizar);
+                bool gravaLista = false;
 
                 try
                 {
@@ -219,7 +220,7 @@ namespace NFe.Settings
                             // Pois intende-se que se a data do arquivo que esta na pasta do UniNFe for superior a data
                             // de quando foi feita a ultima atualizacao do UniNfe, significa que ele foi atualizado manualmente e não devemos
                             // sobrepor o WSDL ou SCHEMA do Usuario - Renan 26/03/2013
-                            if (item == null || !(fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
+                            if (item == null || (item != null && fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
                             {
                                 if (item == null || (item != null && !item.Manual))
                                 {
@@ -232,6 +233,7 @@ namespace NFe.Settings
                                         {
                                             FileWriter.Write(FileReader.ReadToEnd());
                                             FileWriter.Close();
+                                            gravaLista = true;
                                         }
                                     }
 
@@ -245,7 +247,8 @@ namespace NFe.Settings
                         }
                     }
 
-                    GravarVersoesWSDLs(ListArqsAtualizar);
+                    if (gravaLista)
+                        GravarVersoesWSDLs(ListArqsAtualizar);
                 }
 
 
@@ -444,7 +447,7 @@ namespace NFe.Settings
         #region StartVersoes
         public static void StartVersoes()
         {
-            if (ConfiguracaoApp.AtualizaWSDL)
+            //if (ConfiguracaoApp.AtualizaWSDL)
                 new loadResources().load();
 
             ConfiguracaoApp.CarregarDados();
@@ -890,6 +893,9 @@ namespace NFe.Settings
                         case Servicos.ConsultarURLNfse:
                             WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
                             break;
+                        case Servicos.ConsultarURLNfseSerie:
+                            WSDL = (tipoAmbiente == Propriedade.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
+                            break;
                         #endregion
                     }
                     if (tipoEmissao == Propriedade.TipoEmissao.teDPEC)
@@ -960,6 +966,7 @@ namespace NFe.Settings
                         {
                             case Servicos.CancelarNfse:
                             case Servicos.ConsultarURLNfse:
+                            case Servicos.ConsultarURLNfseSerie:
                             case Servicos.ConsultarLoteRps:
                             case Servicos.ConsultarNfse:
                             case Servicos.ConsultarNfsePorRps:
@@ -1112,6 +1119,7 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, empresa.GravarEventosNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, empresa.IndSinc.ToString());
                     }
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
                     if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
@@ -1666,6 +1674,10 @@ namespace NFe.Settings
                                     Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
                                     lEncontrouTag = true;
                                     break;
+                                case "indsinc":
+                                    Empresa.Configuracoes[emp].IndSinc = (nElementos == 2 ? dados[1].Trim() == "True" : false);
+                                    lEncontrouTag = true;
+                                    break;
                                 case "diretoriosalvarcomo": //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
                                     Empresa.Configuracoes[emp].DiretorioSalvarComo = (nElementos == 2 ? dados[1].Trim() : "");
                                     lEncontrouTag = true;
@@ -1885,6 +1897,11 @@ namespace NFe.Settings
                             if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe).Count > 0)
                             {
                                 Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe)[0].InnerText);
+                                lEncontrouTag = true;
+                            }
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.IndSinc).Count > 0)
+                            {
+                                Empresa.Configuracoes[emp].IndSinc = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.IndSinc)[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo

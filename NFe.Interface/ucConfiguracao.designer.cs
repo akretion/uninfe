@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cbIndSinc = new System.Windows.Forms.CheckBox();
             this.lblServico = new System.Windows.Forms.Label();
             this.cbServico = new System.Windows.Forms.ComboBox();
             this.lblSenhaWS = new System.Windows.Forms.Label();
@@ -155,6 +156,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.cbIndSinc);
             this.tabPage6.Controls.Add(this.lblServico);
             this.tabPage6.Controls.Add(this.cbServico);
             this.tabPage6.Controls.Add(this.lblSenhaWS);
@@ -192,6 +194,16 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Diversos";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // cbIndSinc
+            // 
+            this.cbIndSinc.AutoSize = true;
+            this.cbIndSinc.Location = new System.Drawing.Point(8, 373);
+            this.cbIndSinc.Name = "cbIndSinc";
+            this.cbIndSinc.Size = new System.Drawing.Size(251, 17);
+            this.cbIndSinc.TabIndex = 30;
+            this.cbIndSinc.Text = "Enviar as NF-e´s utilizando o processo síncrono";
+            this.cbIndSinc.UseVisualStyleBackColor = true;
             // 
             // lblServico
             // 
@@ -378,7 +390,7 @@
             // edtNome
             // 
             this.edtNome.Location = new System.Drawing.Point(7, 24);
-            this.edtNome.MaxLength = 20;
+            this.edtNome.MaxLength = 0;
             this.edtNome.Name = "edtNome";
             this.edtNome.Size = new System.Drawing.Size(575, 20);
             this.edtNome.TabIndex = 1;
@@ -1374,5 +1386,6 @@
         private System.Windows.Forms.TextBox txtUsuarioWS;
         private System.Windows.Forms.Label lblServico;
         private System.Windows.Forms.ComboBox cbServico;
+        private System.Windows.Forms.CheckBox cbIndSinc;
     }
 }

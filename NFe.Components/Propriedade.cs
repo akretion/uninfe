@@ -338,6 +338,10 @@ namespace NFe.Components
             /// -ped-urlnfse.xml x -urlnfse.xml
             /// </summary>
             public const string PedURLNfse = "-ped-urlnfse.xml";
+            /// <summary>
+            /// -ped-urlnfseserie.xml x -urlnfseserie.xml
+            /// </summary>
+            public const string PedURLNfseSerie = "-ped-urlnfseserie.xml";
             #endregion
 
             #region Extensões MDF-e
@@ -896,5 +900,6 @@ namespace NFe.Components
         public static string tpEmis = "tpEmis";
         public static string tpAmb = "tpAmb";
         public static string UnidadeFederativaCodigo = "UnidadeFederativaCodigo";
+        public static string IndSinc = "IndSinc";
     }
 }

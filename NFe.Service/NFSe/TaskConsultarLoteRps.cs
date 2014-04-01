@@ -116,7 +116,11 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRONIN:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
                         pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio));
+                        break;
 
+                    case PadroesNFSe.DSF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis);
+                        pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio));
                         break;
 
                     default:

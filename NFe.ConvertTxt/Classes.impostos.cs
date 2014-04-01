@@ -158,6 +158,18 @@ namespace NFe.ConvertTxt
         public int cMunFG;
         public string cListServ;
         public string cSitTrib;
+        // 3.10
+        public double vDeducao;
+        public double vOutro;
+        public double vDescIncond;
+        public double vDescCond;
+        public double vISSRet;
+        public TpcnindISS indISS;
+        public string cServico;
+        public int cMun;
+        public int cPais;
+        public string nProcesso;
+        public bool indIncentivo;
     }
 
     /// <summary>
@@ -173,20 +185,11 @@ namespace NFe.ConvertTxt
 
         public DateTime dCompet;
         public double vDeducao;
-        public double vINSS;
-        public double vIR;
-        public double vCSLL;
         public double vOutro;
         public double vDescIncond;
         public double vDescCond;
-        public bool indISSRet;
-        public TpcnindISS indISS;
-        public string cServico;
-        public string cMun;
-        public int cPais;
-        public string nProcesso;
+        public double vISSRet;
         public TpcnRegimeTributario cRegTrib;
-        public bool indIncentivo;
     }
 
     /// <summary>

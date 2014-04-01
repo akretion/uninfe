@@ -7,6 +7,8 @@ using NFe.Exceptions;
 using NFe.Settings;
 using NFe.Components;
 using NFe.Validate;
+using System.IO;
+using System.Windows.Forms;
 
 namespace NFe.Service
 {
@@ -210,7 +212,7 @@ namespace NFe.Service
 
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
-            string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
+            string cResultadoValidacao = padraoNFSe == PadroesNFSe.ISSONLINE4R ? "" : validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
             {
                 throw new Exception(cResultadoValidacao);
@@ -239,12 +241,12 @@ namespace NFe.Service
                 oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-			if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013
-	            if (!Functions.IsConnectedToInternet())
-    	        {
-        	        //Registrar o erro da validação para o sistema ERP
-            	    throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-            	}
+            if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013
+                if (!Functions.IsConnectedToInternet())
+                {
+                    //Registrar o erro da validação para o sistema ERP
+                    throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
+                }
 
             //Invocar o membro
             switch (padraoNFSe)
@@ -327,6 +329,24 @@ namespace NFe.Service
                     else
                         strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
 
+                    #region gerar arquivos assinados(somente debug)
+#if DEBUG
+                    string path = Application.StartupPath + "\\teste_assintura\\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    StreamWriter sw = new StreamWriter(path + "nfseMsg_assinado.xml", true);
+                    sw.Write(docXML.OuterXml);
+                    sw.Close();
+
+                    StreamWriter sw2 = new StreamWriter(path + "cabecMsg_assinado.xml", true);
+                    sw2.Write(cabecMsg.ToString());
+                    sw2.Close();
+#endif
+                    #endregion
                     break;
                 #endregion
             }

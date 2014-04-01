@@ -327,7 +327,7 @@ namespace NFe.Components
             //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
             //Wandrey 31/03/2010
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-            
+
             //Definir a descrição completa do servido (WSDL)
             //this.serviceDescription = ServiceDescription.Read(stream);
             this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
@@ -386,7 +386,8 @@ namespace NFe.Components
             //Definir o nome do protocolo a ser utilizado
             //Não posso definir, tenho que deixar por conta do WSDL definir, ou pode dar erro em alguns estados
             //importer.ProtocolName = "Soap12";
-            //importer.ProtocolName = "Soap";
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && (PadraoNFSe == PadroesNFSe.THEMA))
+                importer.ProtocolName = "Soap";
 
             //Tipos deste serviço devem ser gerados como propriedades e não como simples campos
             importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties;
@@ -724,8 +725,8 @@ namespace NFe.Components
             NFeStatusServico =
             NFeRegistroDeSaida =
             NFeRegistroDeSaidaCancelamento =
-            NFeAutorizacao = 
-            NFeRetAutorizacao = 
+            NFeAutorizacao =
+            NFeRetAutorizacao =
             ConsultarURLNfse =
             RecepcionarLoteRps =
             MDFeRecepcao =

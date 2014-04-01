@@ -272,6 +272,19 @@ namespace NFe.Components
             });
             #endregion
 
+            #region XML Consulta Cadastro Contribuinte
+            InfSchemas.Add("NFE-3.10-ConsCad", new InfSchema()
+            {
+                Tag = "ConsCad",
+                ID = ++id,
+                ArquivoXSD = "NFe\\consCad_v3.10.xsd",
+                Descricao = "XML de Consulta do Cadastro do Contribuinte",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
             #endregion
 
             #region XML Gerais da NFe

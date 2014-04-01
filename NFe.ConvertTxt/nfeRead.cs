@@ -518,18 +518,10 @@ namespace NFe.ConvertTxt
 
                 nfe.Total.ISSQNtot.dCompet = this.readDate(nodeISSQNtot, TpcnResources.dCompet);
                 nfe.Total.ISSQNtot.vDeducao = this.readDouble(nodeISSQNtot, TpcnResources.vDeducao);
-                nfe.Total.ISSQNtot.vINSS = this.readDouble(nodeISSQNtot, TpcnResources.vINSS);
-                nfe.Total.ISSQNtot.vIR = this.readDouble(nodeISSQNtot, TpcnResources.vIR);
-                nfe.Total.ISSQNtot.vCSLL = this.readDouble(nodeISSQNtot, TpcnResources.vCSLL);
                 nfe.Total.ISSQNtot.vOutro = this.readDouble(nodeISSQNtot, TpcnResources.vOutro);
                 nfe.Total.ISSQNtot.vDescIncond = this.readDouble(nodeISSQNtot, TpcnResources.vDescIncond);
                 nfe.Total.ISSQNtot.vDescCond = this.readDouble(nodeISSQNtot, TpcnResources.vDescCond);
-                nfe.Total.ISSQNtot.indISSRet = this.readInt32(nodeISSQNtot, TpcnResources.indISSRet) == 1;
-                nfe.Total.ISSQNtot.indISS = (TpcnindISS)this.readInt32(nodeISSQNtot, TpcnResources.indISS);
-                nfe.Total.ISSQNtot.cMun = this.readValue(nodeISSQNtot, TpcnResources.cMun);
-                nfe.Total.ISSQNtot.cPais = this.readInt32(nodeISSQNtot, TpcnResources.cPais);
-                nfe.Total.ISSQNtot.nProcesso = this.readValue(nodeISSQNtot, TpcnResources.nProcesso);
-                nfe.Total.ISSQNtot.indIncentivo = this.readValue(nodeISSQNtot, TpcnResources.indIncentivo) == "1";
+                nfe.Total.ISSQNtot.vISSRet = this.readDouble(nodeISSQNtot, TpcnResources.vISSRet);
                 nfe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)this.readInt32(nodeISSQNtot, TpcnResources.cRegTrib);
 
             }
@@ -860,6 +852,18 @@ namespace NFe.ConvertTxt
                     detInfo.Imposto.ISSQN.cMunFG = this.readInt32(nodedetImpostoISSQN, TpcnResources.cMunFG);
                     detInfo.Imposto.ISSQN.cListServ = this.readValue(nodedetImpostoISSQN, TpcnResources.cListServ);
                     detInfo.Imposto.ISSQN.cSitTrib = this.readValue(nodedetImpostoISSQN, TpcnResources.cSitTrib);
+                    // 3.10
+                    detInfo.Imposto.ISSQN.vDeducao = this.readDouble(nodedetImpostoISSQN, TpcnResources.vDeducao);
+                    detInfo.Imposto.ISSQN.vOutro = this.readDouble(nodedetImpostoISSQN, TpcnResources.vOutro);
+                    detInfo.Imposto.ISSQN.vDescIncond = this.readDouble(nodedetImpostoISSQN, TpcnResources.vDescIncond);
+                    detInfo.Imposto.ISSQN.vDescCond = this.readDouble(nodedetImpostoISSQN, TpcnResources.vDescCond);
+                    detInfo.Imposto.ISSQN.vISSRet = this.readDouble(nodedetImpostoISSQN, TpcnResources.vISSRet);
+                    detInfo.Imposto.ISSQN.indISS = (TpcnindISS)this.readDouble(nodedetImpostoISSQN, TpcnResources.indISS);
+                    detInfo.Imposto.ISSQN.cServico = this.readValue(nodedetImpostoISSQN, TpcnResources.cServico);
+                    detInfo.Imposto.ISSQN.cMun = this.readInt32(nodedetImpostoISSQN, TpcnResources.cMun);
+                    detInfo.Imposto.ISSQN.cPais = this.readInt32(nodedetImpostoISSQN, TpcnResources.cPais);
+                    detInfo.Imposto.ISSQN.nProcesso = this.readValue(nodedetImpostoISSQN, TpcnResources.nProcesso);
+                    detInfo.Imposto.ISSQN.indIncentivo = this.readValue(nodedetImpostoISSQN, TpcnResources.indIncentivo) == "1";
                 }
                 #endregion
 

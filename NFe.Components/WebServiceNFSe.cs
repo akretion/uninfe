@@ -341,6 +341,27 @@ namespace NFe.Components
                             @"</LocalHomologacao>";
                 #endregion
 
+                #region ISSONLINE4R (4R Sistemas)
+                case PadroesNFSe.ISSONLINE4R: //Governador Valadares - MG
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HGovernadorValadaresCancelarNfse.wsdl</CancelarNfse>" +
+                            "</LocalHomologacao>";
+                #endregion
+
+                #region DSF
+                case PadroesNFSe.DSF: // Campinas - SP
+                    return "<LocalHomologacao>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
+                            @"</LocalHomologacao>";
+                #endregion
+
                 default:
                     return "<LocalHomologacao></LocalHomologacao>";
             }
@@ -693,6 +714,29 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>" +
                             @"</LocalProducao>";
                 #endregion
+
+                #region ISSONLINE4R (4R Sistemas)
+                case PadroesNFSe.ISSONLINE4R: //Governador Valadares - MG
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PGovernadorValadaesConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>" +
+                            @"<CancelarNfse>wsdl\producao\PGovernadorValadaesCancelarNfse.wsdl</CancelarNfse>" +
+                            "</LocalProducao>";
+                #endregion
+
+                #region DSF
+                case PadroesNFSe.DSF: // Campinas - SP
+                    return "<LocalProducao>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                            @"<ConsultarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                            @"<ConsultarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                            @"<CancelarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
+                            @"</LocalProducao>";
+                #endregion
+
+
 
                 default:
                     return "<LocalProducao></LocalProducao>";

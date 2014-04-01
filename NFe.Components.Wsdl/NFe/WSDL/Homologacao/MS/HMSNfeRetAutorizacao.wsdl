@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:nfe="http://www.portalfiscal.inf.br/nfe" name="NfeRetAutorizacao" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao">
+    <types>
+        <xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao">
+            <xsd:element name="nfeDadosMsg">
+                <xsd:complexType mixed="true">
+                    <xsd:sequence>
+                        <xsd:any/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="nfeRetAutorizacaoResult">
+                <xsd:complexType mixed="true">
+                    <xsd:sequence>
+                        <xsd:any/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="nfeCabecMsg" type="tns:nfeCabecMsg"/>
+            <xsd:complexType name="nfeCabecMsg">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="1" name="cUF" type="xs:string"/>
+                    <xsd:element minOccurs="0" maxOccurs="1" name="versaoDados" type="xs:string"/>
+                </xsd:sequence>
+                <xsd:anyAttribute/>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="NfeRetAutorizacaoRequest">
+        <part name="nfeDadosMsg" element="tns:nfeDadosMsg"/>
+        <part name="nfeCabecMsg" element="tns:nfeCabecMsg"/>
+    </message>
+    <message name="NfeRetAutorizacaoResponse">
+        <part name="nfeRetAutorizacaoResult" element="tns:nfeRetAutorizacaoResult"/>
+        <part name="nfeCabecMsg" element="tns:nfeCabecMsg"/>
+    </message>
+    <portType name="NfeRetAutorizacaoSoap">
+        <operation name="nfeRetAutorizacao">
+            <input message="tns:NfeRetAutorizacaoRequest"/>
+            <output message="tns:NfeRetAutorizacaoResponse"/>
+        </operation>
+    </portType>
+    <binding name="NfeRetAutorizacaoSoap12" type="tns:NfeRetAutorizacaoSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="nfeRetAutorizacao">
+            <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao/nfeRetAutorizacao" style="document"/>
+            <input>
+                <soap12:body use="literal" parts="nfeDadosMsg"/>
+                <soap12:header message="tns:NfeRetAutorizacaoRequest" part="nfeCabecMsg" use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal" parts="nfeRetAutorizacaoResult"/>
+                <soap12:header message="tns:NfeRetAutorizacaoResponse" part="nfeCabecMsg" use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="NfeRetAutorizacao">
+        <port name="nfeRetAutorizacaoSoap12" binding="tns:NfeRetAutorizacaoSoap12">
+            <soap12:address location="https://homologacao.nfe.ms.gov.br:443/homologacao/services2/NfeRetAutorizacao"/>
+        </port>
+    </service>
+</definitions>

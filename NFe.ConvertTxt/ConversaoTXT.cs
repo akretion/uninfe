@@ -531,7 +531,6 @@ namespace NFe.ConvertTxt
                 {
                     case TpcnTipoCampo.tcDat2:
                         return this.getDate2(Tipo, ConteudoTag);
-                        break;
 
                     case TpcnTipoCampo.tcDat:
                     case TpcnTipoCampo.tcDatHor:
@@ -1802,7 +1801,10 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "U":
-                    layout = "§U|VBC¨|VAliq¨|VISSQN¨|CMunFG¨|CListServ¨|cSitTrib¨"; //ok
+                    if ((double)NFe.infNFe.Versao >= 3.10)
+                        layout = "§U|VBC¨|VAliq¨|VISSQN¨|CMunFG¨|CListServ¨|vDeducao¨|vOutro¨|vDescIncond¨|vDescCond¨|vISSRet¨|indISS¨|cServico¨|cMun¨|cPais¨|nProcesso¨|indIncentivo¨|";
+                    else
+                        layout = "§U|VBC¨|VAliq¨|VISSQN¨|CMunFG¨|CListServ¨|cSitTrib¨"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><ISSQN>
                     /// 
@@ -1810,11 +1812,26 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ISSQN.vAliq  = LerCampo((double)NFe.infNFe.Versao >= 3.10 ? TpcnTipoCampo.tcDec4 : TpcnTipoCampo.tcDec2, TpcnResources.vAliq, ObOp.Obrigatorio, (double)NFe.infNFe.Versao >= 3.10 ? 7 : 5);
                     NFe.det[nProd].Imposto.ISSQN.vISSQN = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vISSQN, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ISSQN.cMunFG = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cMunFG, ObOp.Obrigatorio, 7, 7);
-                    if ((double)NFe.infNFe.Versao>=3.10)
+                    if ((double)NFe.infNFe.Versao >= 3.10)
+                    {
                         NFe.det[nProd].Imposto.ISSQN.cListServ = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cListServ, ObOp.Obrigatorio, 5, 5);
+                        NFe.det[nProd].Imposto.ISSQN.vDeducao  = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDeducao, ObOp.Opcional, 15);
+                        NFe.det[nProd].Imposto.ISSQN.vOutro    = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Opcional, 15);
+                        NFe.det[nProd].Imposto.ISSQN.vDescIncond = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDescIncond, ObOp.Opcional, 15);
+                        NFe.det[nProd].Imposto.ISSQN.vDescCond = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDescCond, ObOp.Opcional, 15);
+                        NFe.det[nProd].Imposto.ISSQN.vISSRet = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vISSRet, ObOp.Opcional, 15);
+                        NFe.det[nProd].Imposto.ISSQN.indISS = (TpcnindISS)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indISS, ObOp.Obrigatorio, 1, 1);
+                        NFe.det[nProd].Imposto.ISSQN.cServico = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cServico, ObOp.Opcional, 1, 20);
+                        NFe.det[nProd].Imposto.ISSQN.cMun = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cMun, ObOp.Opcional, 7, 7);
+                        NFe.det[nProd].Imposto.ISSQN.cPais = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Opcional, 4, 4);
+                        NFe.det[nProd].Imposto.ISSQN.nProcesso = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.nProcesso, ObOp.Opcional, 1, 30);
+                        NFe.det[nProd].Imposto.ISSQN.indIncentivo = (string)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indIncentivo, ObOp.Opcional, 1, 1) == "1";
+                    }
                     else
+                    {
                         NFe.det[nProd].Imposto.ISSQN.cListServ = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cListServ, ObOp.Obrigatorio, 3, 4);
-                    NFe.det[nProd].Imposto.ISSQN.cSitTrib   = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cSitTrib, ObOp.Obrigatorio, 1, 1);
+                        NFe.det[nProd].Imposto.ISSQN.cSitTrib  = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cSitTrib, ObOp.Obrigatorio, 1, 1);
+                    }
                     break;
 
                 case "U51":
@@ -1851,7 +1868,10 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "W17":
-                    layout = "§W17|VServ¨|VBC¨|VISS¨|VPIS¨|VCOFINS¨|dCompet¨|vDeducao¨|vINSS¨|vIR¨|vCSLL¨|vOutro¨|vDescIncond¨|vDescCond¨|indISSRet¨|indISS¨|cServico¨|cMun¨|cPais¨|nProcesso¨|cRegTrib¨|indIncentivo¨|";
+                    if ((double)NFe.infNFe.Versao >= 3.10)
+                        layout = "§W17|VServ¨|VBC¨|VISS¨|VPIS¨|VCOFINS¨|dCompet¨|vDeducao¨|vOutro¨|vDescIncond¨|vDescCond¨|vISSRet¨|cRegTrib¨|";
+                    else
+                        layout = "§W17|VServ¨|VBC¨|VISS¨|VPIS¨|VCOFINS¨|";
                     ///
                     /// Grupo da TAG <total><ISSQNtot>
                     /// 
@@ -1865,20 +1885,21 @@ namespace NFe.ConvertTxt
                     {
                         NFe.Total.ISSQNtot.dCompet = (DateTime)LerCampo(TpcnTipoCampo.tcDat2, TpcnResources.dCompet, ObOp.Opcional, 8, 8);
                         NFe.Total.ISSQNtot.vDeducao = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDeducao, ObOp.Opcional, 15);
-                        NFe.Total.ISSQNtot.vISS = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vISS, ObOp.Opcional, 15);
-                        NFe.Total.ISSQNtot.vIR = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vIR, ObOp.Opcional, 15);
-                        NFe.Total.ISSQNtot.vCSLL = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vCSLL, ObOp.Opcional, 15);
+                        //NFe.Total.ISSQNtot.vISS = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vISS, ObOp.Opcional, 15);
+                        //NFe.Total.ISSQNtot.vIR = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vIR, ObOp.Opcional, 15);
+                        //NFe.Total.ISSQNtot.vCSLL = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vCSLL, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vOutro = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vDescIncond = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDescIncond, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vDescCond = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vDescCond, ObOp.Opcional, 15);
-                        NFe.Total.ISSQNtot.indISSRet = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indISSRet, ObOp.Opcional, 1, 1) == 1;
-                        NFe.Total.ISSQNtot.indISS = (TpcnindISS)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indISS, ObOp.Opcional, 1, 1);
-                        NFe.Total.ISSQNtot.cServico = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cServico, ObOp.Opcional, 1, 20);
-                        NFe.Total.ISSQNtot.cMun = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cMun, ObOp.Opcional, 7, 7);
-                        NFe.Total.ISSQNtot.cPais = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Opcional, 4, 4);
-                        NFe.Total.ISSQNtot.nProcesso = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.nProcesso, ObOp.Opcional, 1, 30);
-                        NFe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cRegTrib, ObOp.Opcional, 2, 2);
-                        NFe.Total.ISSQNtot.indIncentivo = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indIncentivo, ObOp.Opcional, 1, 1) == 1;
+                        NFe.Total.ISSQNtot.vISSRet = LerCampo(TpcnTipoCampo.tcDec2, TpcnResources.vISSRet, ObOp.Opcional, 15);
+                        //NFe.Total.ISSQNtot.indISSRet = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indISSRet, ObOp.Opcional, 1, 1) == 1;
+                        //NFe.Total.ISSQNtot.indISS = (TpcnindISS)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indISS, ObOp.Opcional, 1, 1);
+                        //NFe.Total.ISSQNtot.cServico = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cServico, ObOp.Opcional, 1, 20);
+                        //NFe.Total.ISSQNtot.cMun = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.cMun, ObOp.Opcional, 7, 7);
+                        //NFe.Total.ISSQNtot.cPais = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Opcional, 4, 4);
+                        //NFe.Total.ISSQNtot.nProcesso = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.nProcesso, ObOp.Opcional, 1, 30);
+                        NFe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cRegTrib, ObOp.Opcional, 1, 2);
+                        //NFe.Total.ISSQNtot.indIncentivo = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indIncentivo, ObOp.Opcional, 1, 1) == 1;
                     }
                     break;
 

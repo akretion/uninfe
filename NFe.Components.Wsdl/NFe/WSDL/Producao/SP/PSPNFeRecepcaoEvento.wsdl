@@ -60,7 +60,7 @@
   <wsdl:service name="RecepcaoEvento">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado ao envio de mensagens de eventos da NF-e.</wsdl:documentation>
     <wsdl:port name="RecepcaoEventoSoap12" binding="tns:RecepcaoEventoSoap12">
-      <soap12:address location="https://nfe.fazenda.sp.gov.br/eventosWEB/services/RecepcaoEvento.asmx" />
+      <soap12:address location="https://nfe.fazenda.sp.gov.br/ws/recepcaoevento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

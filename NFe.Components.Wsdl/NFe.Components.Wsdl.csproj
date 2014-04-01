@@ -254,7 +254,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGOCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRecepcao2.wsdl" />
@@ -1555,8 +1554,135 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRetAutorizacao.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresCancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesCancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ConsultaSeqRps.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ReqCancelamentoNFSe.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ReqConsultaLote.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ReqConsultaNFSeRPS.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ReqConsultaNotas.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\ReqEnvioLoteRPS.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoCancelamentoNFSe.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoConsultaLote.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoConsultaNFSeRPS.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoConsultaNotas.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoConsultaSeqRps.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\RetornoEnvioLoteRPS.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\Tipos.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampinasSP-DFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCampinasSP-DFSLoteRps.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSONLINE4R\nfsev20.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSNET\servico_consultar_url_visualizacao_nfse_serie_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNfeautorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNferetautorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNFeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeautorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNferetautorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\consCad_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteConsultaCadastro_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNFeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSCVRSNFeCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSVCRSNFeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSVCRSNFeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVAN\PSVCANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVAN\PSVCANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeRetAutorizacao.wsdl" />
+    <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
+    <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

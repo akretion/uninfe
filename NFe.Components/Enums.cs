@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace NFe.Components
 {
@@ -161,31 +162,43 @@ namespace NFe.Components
         /// <summary>
         /// Enviar Lote RPS NFS-e 
         /// </summary>
+        [Description("Enviar Lote RPS NFS-e ")]
         RecepcionarLoteRps,
         /// <summary>
         /// Consultar Situação do lote RPS NFS-e
         /// </summary>
+        [Description("Consultar Situação do lote RPS NFS-e")]
         ConsultarSituacaoLoteRps,
         /// <summary>
         /// Consultar NFS-e por RPS
         /// </summary>
+        [Description("Consultar NFS-e por RPS")]
         ConsultarNfsePorRps,
         /// <summary>
-        /// Consultar NFS-e por NFS-e
+        /// Consultar NFS-e por Data
         /// </summary>
+        [Description("Consultar NFS-e por Data")]
         ConsultarNfse,
         /// <summary>
         /// Consultar lote RPS
         /// </summary>
+        [Description("ConsultarLoteRPS")]
         ConsultarLoteRps,
         /// <summary>
         /// Cancelar NFS-e
         /// </summary>
+        [Description("Cancelar NFS-e")]
         CancelarNfse,
         /// <summary>
         /// Consultar a URL de visualização da NFSe
         /// </summary>
+        [Description("Consultar a URL de Visualização da NFS-e")]
         ConsultarURLNfse,
+        /// <summary>
+        /// Consultar a URL de visualização da NFSe
+        /// </summary>
+        [Description("Consultar a URL de Visualização da NFS-e com a Série")]
+        ConsultarURLNfseSerie,
         #endregion
 
         #region MDFe
@@ -376,7 +389,17 @@ namespace NFe.Components
         /// Padrão Nota Fiscal Eletrônica da PRONIN (GovBR)
         /// Prefeitura de Mirassol - SP
         /// </summary>
-        PRONIN
+        PRONIN,
+        /// <summary>
+        /// Padrão Nota Fiscal Eletrônica ISS-ONline da 4R Sistemas
+        /// Prefeitura de Governador Valadares - SP
+        /// </summary>
+        ISSONLINE4R,
+        /// <summary>
+        /// Padrão Nota Fiscal eletrônica DSF 
+        /// Prefeitura de Campinas - SP
+        /// </summary>
+        DSF
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
@@ -415,3 +438,30 @@ namespace NFe.Components
     }
     #endregion
 }
+
+#region EnumHelper
+
+/// <summary>
+/// Classe com metodos para serem utilizadas nos Enuns
+/// </summary>
+public static class EnumHelper
+{
+    /// <summary>
+    /// Retorna a description do enum
+    /// </summary>
+    /// <param name="value">Enum para buscar a description</param>
+    /// <returns>Retorna a description do enun</returns>
+    public static string GetDescription(this Enum value)
+    {
+        FieldInfo field = value.GetType().GetField(value.ToString());
+
+        DescriptionAttribute attribute
+                = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute))
+                    as DescriptionAttribute;
+
+        return attribute == null ? value.ToString() : attribute.Description;
+    }
+}
+
+#endregion
+

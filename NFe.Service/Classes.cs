@@ -499,9 +499,9 @@ namespace NFe.Service
                 this.mchNFe = value;
                 if (this.mchNFe != string.Empty)
                 {
-                    this.cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
+                    cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
                     int serie = Convert.ToInt32(this.mchNFe.Substring(22, 3));
-                    this.tpEmis = (serie >= 900 ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
+                    tpEmis = (serie >= 900 && mchNFe.Substring(20, 2) == "55" ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
                 }
             }
         }

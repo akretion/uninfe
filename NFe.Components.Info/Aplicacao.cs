@@ -101,6 +101,7 @@ namespace NFe.Components.Info
                         aTXT.AppendLine(NFeStrConstants.GravarEventosDeTerceiros + "|" + Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
                         aTXT.AppendLine(NFeStrConstants.GravarEventosNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
                         aTXT.AppendLine(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe + "|" + Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                        aTXT.AppendLine(NFeStrConstants.IndSinc + "|" + Empresa.Configuracoes[emp].IndSinc.ToString());
                     }
                     aTXT.AppendLine(NFeStrConstants.DiasLimpeza + "|" + Empresa.Configuracoes[emp].DiasLimpeza.ToString());
                     aTXT.AppendLine(NFeStrConstants.AmbienteCodigo + "|" + Empresa.Configuracoes[emp].tpAmb.ToString());
@@ -245,6 +246,7 @@ namespace NFe.Components.Info
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, Empresa.Configuracoes[emp].GravarEventosDeTerceiros.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
+                        oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, Empresa.Configuracoes[emp].IndSinc.ToString());
                     }
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, Empresa.Configuracoes[emp].DiasLimpeza.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.AmbienteCodigo, Empresa.Configuracoes[emp].tpAmb.ToString());

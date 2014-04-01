@@ -69,19 +69,21 @@ namespace NFe.Service
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo
                 //Ler o XML de retorno com o recibo do lote enviado
-                //var oLerRecibo = new LerXML();
-                /*oLerRecibo.*/
                 Recibo(vStrXmlRetorno);
 
-                if (/*oLerRecibo.*/oDadosRec.cStat == "103") //Lote recebido com sucesso
+                if (oDadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
+                {
+                    FinalizarNFeSincrono(vStrXmlRetorno, emp);
+                }
+                else if (oDadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
                 {
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, /*oLerRecibo.*/oDadosRec.tMed.ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, /*oLerRecibo.*/oDadosRec.nRec);
                 }
-                else if (Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) > 200 ||
-                         Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
-                         Convert.ToInt32(/*oLerRecibo.*/oDadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
+                else if (Convert.ToInt32(oDadosRec.cStat) > 200 ||
+                         Convert.ToInt32(oDadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
+                         Convert.ToInt32(oDadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
                 {
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109, 
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
@@ -189,6 +191,28 @@ namespace NFe.Service
                     this.oDadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
                 }
             }
+        }
+        #endregion
+
+        #region FinalizarNFeSincrono()
+        /// <summary>
+        /// Finalizar a NFe no processo Síncrono
+        /// </summary>
+        /// <param name="conteudoXml">Conteúdo do XML retornado da SEFAZ</param>
+        /// <param name="emp">Código da empresa para buscar as configurações</param>
+        private void FinalizarNFeSincrono(string conteudoXml, int emp)
+        {
+            MemoryStream memoryStream = Functions.StringXmlToStream(conteudoXml);
+
+            XmlDocument xml = new XmlDocument();
+            xml.Load(memoryStream);
+
+            XmlNodeList protNFe = xml.GetElementsByTagName("protNFe");
+
+            FluxoNfe fluxoNFe = new FluxoNfe();
+
+            TaskRetRecepcao retRecepcao = new TaskRetRecepcao();
+            retRecepcao.FinalizarNFe(protNFe, fluxoNFe, emp);
         }
         #endregion
     }

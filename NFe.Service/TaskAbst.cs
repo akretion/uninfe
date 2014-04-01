@@ -198,6 +198,7 @@ namespace NFe.Service
         private string NomeClasseWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
+            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -409,6 +410,40 @@ namespace NFe.Service
                     break;
                 #endregion
 
+                #region ISSONLINE4R (4R Sistemas)
+                case PadroesNFSe.ISSONLINE4R:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarNfsePorRps:
+                            if (taHomologacao)
+                                retorna = "hConsultarNfsePorRps";
+                            else
+                                retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.CancelarNfse:
+                            if (taHomologacao)
+                                retorna = "hCancelarNfse";
+                            else
+                                retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.RecepcionarLoteRps:
+                            if (taHomologacao)
+                                retorna = "hRecepcionarLoteRpsSincrono";
+                            else
+                                retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region DSF
+                case PadroesNFSe.DSF:
+                    retorna = "LoteRpsService";
+                    break;
+
+                #endregion
             }
 
             return retorna;
@@ -527,7 +562,15 @@ namespace NFe.Service
                     retorna = "nfeStatusServicoNF2";
                     break;
                 case Servicos.PedidoSituacaoLoteNFe2:
-                    retorna = "nfeRetAutorizacaoLote";
+                    switch (cUF)
+                    {
+                        case 50:
+                            retorna = "nfeRetAutorizacao";
+                            break;
+                        default:
+                            retorna = "nfeRetAutorizacaoLote";
+                            break;
+                    }
                     break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "nfeRetRecepcao2";
@@ -615,6 +658,7 @@ namespace NFe.Service
         private string NomeMetodoWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
+            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -746,6 +790,9 @@ namespace NFe.Service
                             break;
                         case Servicos.ConsultarURLNfse:
                             retorna = "ConsultarUrlVisualizacaoNfse";
+                            break;
+                        case Servicos.ConsultarURLNfseSerie:
+                            retorna = "ConsultarUrlVisualizacaoNfseSerie";
                             break;
                     }
                     break;
@@ -1005,42 +1052,70 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region ISSONLINE4R (4R Sistemas)
+                case PadroesNFSe.ISSONLINE4R:
+                    retorna = "Execute";
+                    break;
+                #endregion
+
+                #region PAULISTANA
+                case PadroesNFSe.DSF:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            if (taHomologacao)
+                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            else
+                                retorna = "consultarLote";
+                            break;
+
+                        case Servicos.ConsultarNfse:
+                            if (taHomologacao)
+                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            else
+                                retorna = "consultarNota";
+                            break;
+
+                        case Servicos.ConsultarNfsePorRps:
+                            if (taHomologacao)
+                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            else
+                                retorna = "consultarNFSeRps";
+                            break;
+
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            if (taHomologacao)
+                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            else
+                                retorna = "consultarSequencialRps";
+                            break;
+
+                        case Servicos.CancelarNfse:
+                            if (taHomologacao)
+                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            else
+                                retorna = "cancelar";
+                            break;
+
+                        case Servicos.RecepcionarLoteRps:
+                            if (taHomologacao)
+                                retorna = "testeEnviar";
+                            else
+                                retorna = "enviar";
+                            break;
+
+                        default:
+                            throw new NFe.Components.Exceptions.ServicoInexistenteException();
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
         }
         #endregion
 
-        #endregion
-
-        #region GeraStrProtNFe
-        /// <summary>
-        /// GeraStrProtNFe
-        /// </summary>
-        /// <param name="infConsSitElemento"></param>
-        /// <returns></returns>
-        protected string GeraStrProtNFe(System.Xml.XmlElement infConsSitElemento)//danasa 11-4-2012
-        {
-            string atributoId = string.Empty;
-            if (infConsSitElemento.GetAttribute("Id").Length != 0)
-            {
-                atributoId = " Id=\"" + infConsSitElemento.GetAttribute("Id") + "\"";
-            }
-
-            string strProtNfe = "<protNFe versao=\"" + ConfiguracaoApp.VersaoXMLNFe + "\">" +
-                "<infProt" + atributoId + ">" +
-                "<tpAmb>" + Functions.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
-                "<verAplic>" + Functions.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
-                "<chNFe>" + Functions.LerTag(infConsSitElemento, "chNFe", false) + "</chNFe>" +
-                "<dhRecbto>" + Functions.LerTag(infConsSitElemento, "dhRecbto", false) + "</dhRecbto>" +
-                "<nProt>" + Functions.LerTag(infConsSitElemento, "nProt", false) + "</nProt>" +
-                "<digVal>" + Functions.LerTag(infConsSitElemento, "digVal", false) + "</digVal>" +
-                "<cStat>" + Functions.LerTag(infConsSitElemento, "cStat", false) + "</cStat>" +
-                "<xMotivo>" + Functions.LerTag(infConsSitElemento, "xMotivo", false) + "</xMotivo>" +
-                "</infProt>" +
-                "</protNFe>";
-            return strProtNfe;
-        }
         #endregion
 
         #region LerXMLNFe()
@@ -1529,7 +1604,7 @@ namespace NFe.Service
         #endregion
 
         #region ProcessaNFeDenegada
-        protected void ProcessaNFeDenegada(int emp, LerXML oLerXml, string strArquivoNFe, XmlElement infConsSitElemento)
+        protected void ProcessaNFeDenegada(int emp, LerXML oLerXml, string strArquivoNFe, string protNFe, string versao)
         {
             string strProtNfe;
 
@@ -1556,10 +1631,10 @@ namespace NFe.Service
                 {
                     ///
                     /// monta o XML de denegacao
-                    strProtNfe = this.GeraStrProtNFe(infConsSitElemento);
+                    strProtNfe = protNFe;
                     ///
                     /// gera o arquivo de denegacao na pasta EmProcessamento
-                    string strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, "-den.xml");
+                    string strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, "-den.xml", versao);
                     ///
                     /// exclui o XML denegado, se existir
                     //string destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strNomeArqDenegadaNFe));
@@ -1594,18 +1669,11 @@ namespace NFe.Service
                                 //throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + nomePastaBackup + ")");
                             }
                         }
-                        ///
-                        /// move o arquivo NFe para a pasta Denegada
+                        // move o arquivo NFe para a pasta Denegada
                         File.Move(strArquivoNFe, dArquivo);
                     }
                 }
-                //Move a NFE da pasta de NFE em processamento para NFe Denegadas
-                //if (!oAux.EstaDenegada(strArquivoNFe, oLerXml.oDadosNfe.dEmi))
-                //{
-                //    oAux.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
-                //}
             }
-            //return strProtNfe;
         }
         #endregion
 

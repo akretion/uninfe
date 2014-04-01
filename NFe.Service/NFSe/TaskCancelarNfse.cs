@@ -131,6 +131,21 @@ namespace NFe.Service.NFSe
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
                         pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         break;
+
+                    case PadroesNFSe.ISSONLINE4R:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.DSF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis);
+                        pedCanNfse = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+
+                        #region Encriptar tag <Assinatura>
+                        EncryptAssinatura();
+                        #endregion
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

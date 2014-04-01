@@ -265,7 +265,7 @@ namespace NFe.Service
                     else
                     {
                         strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + versaoXml + "\">";
-                        indSinc = "<indSinc>0</indSinc>";
+                        indSinc = "<indSinc>" + (Empresa.Configuracoes[EmpIndex].IndSinc ? "1" : "0") + "</indSinc>";
                     }
 
                     break;
@@ -1846,9 +1846,11 @@ namespace NFe.Service
         /// </summary>
         /// <param name="arqNFe">Nome arquivo XML da NFe</param>
         /// <param name="protNfe">String contendo a parte do XML do protocolo a ser anexado</param>
+        /// <param name="extensao">Extensão para gerar o arquivo de distribuição da NFe</param>
+        /// <param name="versao">Versão do XML da NFe</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        public string XmlDistNFe(string arqNFe, string protNfe, string extensao)  //danasa 11-4-2012
+        public string XmlDistNFe(string arqNFe, string protNfe, string extensao, string versao)  //danasa 11-4-2012
         {
             string nomeArqProcNFe = string.Empty;
             int emp = EmpIndex;
@@ -1871,7 +1873,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-NFe.xml
                     string strXmlProcNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLNFe + "\">" +
+                        "<" + tipo + "eProc xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">" +
                         strNFe +
                         protNfe +
                         "</" + tipo + "eProc>";
@@ -1931,7 +1933,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-CTe.xml
                     string xmlProcCTe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"2.0\">" +
+                        "<" + tipo + "eProc xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"2.00\">" +
                         conteudoCTe +
                         protCTe +
                         "</" + tipo + "eProc>";
@@ -1991,7 +1993,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-MDFe.xml
                     string xmlProcMDFe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"http://www.portalfiscal.inf.br/mdfe\" versao=\"1.0\">" +
+                        "<" + tipo + "eProc xmlns=\"http://www.portalfiscal.inf.br/mdfe\" versao=\"1.00\">" +
                         conteudoMDFe +
                         protMDFe +
                         "</" + tipo + "eProc>";

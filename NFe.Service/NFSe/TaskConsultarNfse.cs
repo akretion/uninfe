@@ -119,6 +119,11 @@ namespace NFe.Service.NFSe
                         pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSitNfse.cMunicipio));
                         break;
 
+                    case PadroesNFSe.DSF:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis);
+                        pedLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosPedSitNfse.cMunicipio));
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

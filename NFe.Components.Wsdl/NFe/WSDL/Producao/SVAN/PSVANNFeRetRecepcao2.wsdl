@@ -70,10 +70,10 @@
   </wsdl:binding>
   <wsdl:service name="NfeRetRecepcao2">
     <wsdl:port name="NfeRetRecepcao2Soap" binding="tns:NfeRetRecepcao2Soap">
-      <soap:address location="https://www.sefazvirtual.fazenda.gov.br/NFeRetRecepcao2/NFeRetRecepcao2.asmx" />
+      <soap:address location="https://www.sefazvirtual.fazenda.gov.br/NfeRetRecepcao2/NfeRetRecepcao2.asmx" />
     </wsdl:port>
     <wsdl:port name="NfeRetRecepcao2Soap12" binding="tns:NfeRetRecepcao2Soap12">
-      <soap12:address location="https://www.sefazvirtual.fazenda.gov.br/NFeRetRecepcao2/NFeRetRecepcao2.asmx" />
+      <soap12:address location="https://www.sefazvirtual.fazenda.gov.br/NfeRetRecepcao2/NfeRetRecepcao2.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

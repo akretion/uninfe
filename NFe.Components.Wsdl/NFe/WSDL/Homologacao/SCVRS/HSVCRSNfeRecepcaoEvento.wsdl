@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="RecepcaoEvento">
     <wsdl:port name="RecepcaoEventoSoap12" binding="tns:RecepcaoEventoSoap12">
-      <soap12:address location="https://homologacao.nfe.sefaz.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" />
+      <soap12:address location="https://homologacao.nfe.sefazvirtual.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

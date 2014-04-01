@@ -245,9 +245,6 @@ namespace NFe.Service
                                 switch (strStat)
                                 {
                                     case "100":
-                                        //O retorno da consulta situação a posição das tag´s é diferente do que vem 
-                                        //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
-                                        //para que fique um XML de distribuição válido. Wandrey 07/10/2009 
                                         var strProtNfe = retConsSitElemento.GetElementsByTagName("protMDFe")[0].OuterXml;
                                             
                                         //Definir o nome do arquivo -procNfe.xml                                               

@@ -228,27 +228,7 @@ namespace NFe.Service
                                 {
                                     case "100":
                                     case "150":
-                                        //O retorno da consulta situação a posição das tag´s é diferente do que vem 
-                                        //na consulta do recibo, assim sendo tenho que montar esta parte do XML manualmente
-                                        //para que fique um XML de distribuição válido. Wandrey 07/10/2009
-                                        string atributoId = string.Empty;
-                                        if (infConsSitElemento.GetAttribute("Id").Length != 0)
-                                        {
-                                            atributoId = " Id=\"" + infConsSitElemento.GetAttribute("Id") + "\"";
-                                        }
-
-                                        string strProtNfe = "<protCTe versao=\"" + ConfiguracaoApp.VersaoXMLNFe + "\">" +
-                                            "<infProt" + atributoId + ">" +
-                                            "<tpAmb>" + Functions.LerTag(infConsSitElemento, "tpAmb", false) + "</tpAmb>" +
-                                            "<verAplic>" + Functions.LerTag(infConsSitElemento, "verAplic", false) + "</verAplic>" +
-                                            "<chCTe>" + Functions.LerTag(infConsSitElemento, "chCTe", false) + "</chCTe>" +
-                                            "<dhRecbto>" + Functions.LerTag(infConsSitElemento, "dhRecbto", false) + "</dhRecbto>" +
-                                            "<nProt>" + Functions.LerTag(infConsSitElemento, "nProt", false) + "</nProt>" +
-                                            "<digVal>" + Functions.LerTag(infConsSitElemento, "digVal", false) + "</digVal>" +
-                                            "<cStat>" + Functions.LerTag(infConsSitElemento, "cStat", false) + "</cStat>" +
-                                            "<xMotivo>" + Functions.LerTag(infConsSitElemento, "xMotivo", false) + "</xMotivo>" +
-                                            "</infProt>" +
-                                            "</protCTe>";
+                                        var strProtNfe = retConsSitElemento.GetElementsByTagName("protCTe")[0].OuterXml;
 
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
@@ -273,7 +253,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe);
+                                                    oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcCTe);
                                                 }
                                             }
 

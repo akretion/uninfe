@@ -1192,6 +1192,19 @@
       <CancelarNfse>wsdl\producao\PPenapoisSPIssOnLine.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <!-- Municípios que utilizam o padrão ISSOnLine-4R -->
+  <Estado ID="3127701" Nome="Governador Valadares - MG" UF="MG" Padrao="ISSOnLine4R">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
+      <CancelarNfse>wsdl\homologacao\HGovernadorValadaresCancelarNfse.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\homologacao\PGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\PGovernadorValadaesConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
+      <CancelarNfse>wsdl\homologacao\PGovernadorValadaesCancelarNfse.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípios que utilizam o padrão Dueto -->
   <Estado ID="4313375" Nome="Nova Santa Rita - RS" UF="RS" Padrao="Dueto">
     <LocalHomologacao>
@@ -1448,6 +1461,25 @@
       <ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municípios que utilizam padrão DFS -->
+  <Estado ID="3509502" Nome="Campinas - SP" UF="SP" Padrao="DFS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" name="NfeInutilizacao2" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" name="NfeInutilizacao2" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2">
     <types>
         <xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2">
                 <xsd:element name="nfeDadosMsg">
@@ -54,8 +54,8 @@
         </operation>
     </binding>
     <service name="NfeInutilizacao2">
-        <port name="NfeInutilizacao2Soap12" binding="tns:NfeInutilizacao2Soap12">
-            <soap12:address location="https://homologacao.nfe.ms.gov.br/homologacao/services2/NfeInutilizacao2"/>
+        <port name="nfeInutilizacao2Soap12" binding="tns:NfeInutilizacao2Soap12">
+            <soap12:address location="https://homologacao.nfe.ms.gov.br:443/homologacao/services2/NfeInutilizacao2"/>
         </port>
     </service>
 </definitions>
