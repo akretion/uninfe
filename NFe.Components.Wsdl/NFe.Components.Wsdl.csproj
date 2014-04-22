@@ -1681,8 +1681,103 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeAutorizacao3.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRetAutorizacao3.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeStatusServico2_200.wsdl">
+      <SubType>UserControl</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRecepcao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetRecepcao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeDownloadNF.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeRecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeRetRecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeInutilizacao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeConsulta2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeRecepcaoEvento_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRetRecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeInutilizacao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeConsulta2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeStatusServico2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeCadConsultaCadastro2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRecepcaoEvento_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnferecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnferetrecepcao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeinutilizacao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeconsulta2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfestatusservico2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNFeCadConsultaCadastro2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNFeRecepcaoEvento_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento_C.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

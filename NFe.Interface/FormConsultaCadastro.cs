@@ -44,6 +44,9 @@ namespace NFe.Interface
 
         private void PreencheEstados()
         {
+            this.cbVersao.SelectedIndex = 0;
+            this.cbVersaoConsCad.SelectedIndex = 0;
+
             try
             {
                 arrUF = Functions.CarregaUF();
@@ -84,6 +87,7 @@ namespace NFe.Interface
             cbServico.Items.Add("CT-e"); //1
             cbServico.Items.Add("NFS-e"); //2
             cbServico.Items.Add("MDF-e"); //3
+            cbServico.Items.Add("NFC-e"); //4
             #endregion
         }
 
@@ -159,6 +163,14 @@ namespace NFe.Interface
                     return;
                 }
             }
+            else if (servico == TipoAplicativo.NFCe)
+            {
+                if (this.cbEmissao.SelectedIndex != 0)
+                {
+                    MessageBox.Show("MDF-e só dispõe do tipo de emissão Normal.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             this.toolStripStatusLabel1.Text = _wait;
             this.Refresh();
@@ -191,7 +203,7 @@ namespace NFe.Interface
                         break;
                 }
 
-                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb);
+                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
 
                 //Demonstrar o status do serviço
                 this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
@@ -419,9 +431,6 @@ namespace NFe.Interface
         /// <returns></returns>
         public object VerConsultaCadastro(string XmlNfeDadosMsg)
         {
-            //Auxiliar oAux = new Auxiliar();
-            //GerarXML oGerar = new GerarXML(Emp);
-
             string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
                        Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                        "-ret-cons-cad.xml";
@@ -434,7 +443,6 @@ namespace NFe.Interface
             try
             {
                 vRetorno = EnviaArquivoERecebeResposta(2, ArqXMLRetorno, ArqERRRetorno);
-                //vRetorno = ProcessaConsultaCadastroClass(@"c:\usr\nfe\uninfe\modelos\retorno-cons-cad.txt");
             }
             finally
             {
@@ -461,7 +469,7 @@ namespace NFe.Interface
             GerarXML oGerar = new GerarXML(Emp);
 
             //Criar XML para obter o cadastro do contribuinte
-            string XmlNfeConsultaCadastro = oGerar.ConsultaCadastro(string.Empty, uf, cnpj, ie, cpf);
+            string XmlNfeConsultaCadastro = oGerar.ConsultaCadastro(string.Empty, uf, cnpj, ie, cpf, this.cbVersaoConsCad.SelectedItem.ToString());
 
             return VerConsultaCadastro(XmlNfeConsultaCadastro);
         }
@@ -569,5 +577,11 @@ namespace NFe.Interface
             return vStatus;
         }
         #endregion
+
+        private void cbServico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedIndex;
+            this.cbVersao.Enabled = servico == TipoAplicativo.Nfe;
+        }
     }
 }

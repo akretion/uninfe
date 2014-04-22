@@ -40,7 +40,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, dadosPedSit.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSit.cUF));

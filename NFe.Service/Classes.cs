@@ -320,6 +320,10 @@ namespace NFe.Service
         /// Ambiente (2-Homologação 1-Produção)
         /// </summary>
         public int tpAmb { get; private set; }
+        /// <summary>
+        /// Versao (2.00 ou 3.10)
+        /// </summary>
+        public string versao { get; set; }
     }
     #endregion
 
@@ -432,6 +436,10 @@ namespace NFe.Service
         /// Tempo médio de resposta em segundos
         /// </summary>
         public int tMed { get; set; }
+        /// <summary>
+        /// Versão do XML
+        /// </summary>
+        public string versao { get; set; }
     }
     #endregion
 

@@ -961,6 +961,7 @@ namespace NFe.Service
 
             if (Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teContingencia &&
                 Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teFSDA &&
+                Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teOffLine &&
                 Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
             {
                 tipoServico.InvokeMember(metodo, System.Reflection.BindingFlags.InvokeMethod, null, nfe, null);

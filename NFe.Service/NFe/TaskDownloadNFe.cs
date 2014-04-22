@@ -38,7 +38,7 @@ namespace NFe.Service
                         emp,
                         Convert.ToInt32(/*oLer.*/oDadosenvDownload.chNFe.Substring(0, 2)),
                         /*oLer.*/oDadosenvDownload.tpAmb,
-                        1);
+                        1, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oDownloadEvento = wsProxy.CriarObjeto("NfeDownloadNF");

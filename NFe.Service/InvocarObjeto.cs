@@ -148,15 +148,15 @@ namespace NFe.Service
 
         #region Invocar()
         /// <summary>
-        /// Metodo responsável por invocar o serviço do WebService do SEFAZ
+        /// Método responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
-        /// <param name="oWSProxy">Objeto da classe construida do WSDL</param>
+        /// <param name="oWSProxy">Objeto da classe construída do WSDL</param>
         /// <param name="oServicoWS">Objeto da classe de envio do XML</param>
         /// <param name="cMetodo">Método da classe de envio do XML que faz o envio</param>
-        /// <param name="oCabecMsg">Objeto da classe de cabecalho do serviço</param>
+        /// <param name="oCabecMsg">Objeto da classe de cabeçalho do serviço</param>
         /// <param name="oServicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
         /// <remarks>
-        /// Observaçoes: Como esta sobrecarga não tem os parâmetros "cFinalArqEnvio e cFinalArqRetorno", 
+        /// Observações: Como esta sobrecarga não tem os parâmetros "cFinalArqEnvio e cFinalArqRetorno", 
         /// não será gerado o arquivo de retorno do webservice, 
         /// sendo assim no ponto onde este foi chamado deve-se manualmente fazer a gravação do retorno se for do interesse
         /// Autor: Wandrey Mundin Ferreira

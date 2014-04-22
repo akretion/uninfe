@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:s="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2">
       <s:element name="nfeDadosMsg">
@@ -26,16 +26,16 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="nfeStatusServicoNF2Soap12Out">
+    <wsdl:part name="nfeStatusServicoNF2Result" element="tns:nfeStatusServicoNF2Result">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="nfeStatusServicoNF2nfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="nfeStatusServicoNF2Soap12In">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="nfeStatusServicoNF2Soap12Out">
-    <wsdl:part name="nfeStatusServicoNF2Result" element="tns:nfeStatusServicoNF2Result">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="NfeStatusServico2Soap12">

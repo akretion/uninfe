@@ -81,7 +81,7 @@ namespace NFe.ConvertTxt
                 if (nfe.ide.dEmi.Year <= 1 && nfe.infNFe.Versao <= 2)
                     throw new Exception("Arquivo não é de nota fiscal NF-e");
 
-                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3)
+                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3 && nfe.ide.mod == 65)
                     throw new Exception("Arquivo não é de nota fiscal NFC-e");
             }
             catch(Exception ex)

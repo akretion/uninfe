@@ -28,7 +28,8 @@ namespace NFe.Components
                 "Contingência com formulário de segurança (FS-DA)",
                 "Contingência com SVC-AN",
                 "Contingência com SVC-RS",
-                "Contingência com SVC-SP"
+                "Contingência com SVC-SP",
+                "Contingência Off-Line (NFC-e)"
             };
 
         /// <summary>
@@ -711,6 +712,10 @@ namespace NFe.Components
             /// Sistema virtual de contingência do CTe de São Paulo
             /// </summary>
             public const int teSVCSP = 8;
+            /// <summary>
+            /// Contingência Off-Line NFC-e
+            /// </summary>
+            public const int teOffLine = 9;
         }
         #endregion
 

@@ -15,6 +15,11 @@ namespace NFe.Service
 {
     public class TaskConsultaStatus : TaskAbst
     {
+        public TaskConsultaStatus()
+        {
+            Servico = Servicos.ConsultaStatusServicoNFe;
+        }
+
         #region Classe com os dados do XML da consulta do status do serviço da NFe
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do status do serviço
@@ -27,9 +32,6 @@ namespace NFe.Service
         {
             int emp = Functions.FindEmpresaByThread();
 
-            //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultaStatusServicoNFe;
-
             try
             {
                 dadosPedSta = new DadosPedSta();
@@ -39,7 +41,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultaStatusServicoNFe, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultaStatusServicoNFe, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     var oStatusServico = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSta.cUF));
@@ -102,7 +104,7 @@ namespace NFe.Service
             dadosPedSta.tpAmb = 0;
             dadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
             dadosPedSta.versao = ConfiguracaoApp.VersaoXMLStatusServico;
-            
+
             ///
             /// danasa 9-2009
             /// Assume o que está na configuracao

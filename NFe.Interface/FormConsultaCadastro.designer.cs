@@ -45,13 +45,17 @@
             this.cbEmissao = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbVersao = new System.Windows.Forms.ComboBox();
+            this.cbServico = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lblServico = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbVersaoConsCad = new System.Windows.Forms.ComboBox();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.cbEmpresa = new System.Windows.Forms.ComboBox();
             this.lblAmbiente = new System.Windows.Forms.Label();
             this.cbAmbiente = new System.Windows.Forms.ComboBox();
-            this.cbServico = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -104,8 +108,9 @@
             // 
             // buttonPesquisa
             // 
-            this.buttonPesquisa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPesquisa.Location = new System.Drawing.Point(145, 145);
+            this.buttonPesquisa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPesquisa.Location = new System.Drawing.Point(153, 145);
             this.buttonPesquisa.Name = "buttonPesquisa";
             this.buttonPesquisa.Size = new System.Drawing.Size(75, 23);
             this.buttonPesquisa.TabIndex = 5;
@@ -115,29 +120,32 @@
             // 
             // comboUf
             // 
+            this.comboUf.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboUf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboUf.FormattingEnabled = true;
             this.comboUf.Location = new System.Drawing.Point(8, 104);
             this.comboUf.Name = "comboUf";
-            this.comboUf.Size = new System.Drawing.Size(258, 21);
-            this.comboUf.TabIndex = 0;
+            this.comboUf.Size = new System.Drawing.Size(177, 21);
+            this.comboUf.TabIndex = 1;
             // 
             // lblUF
             // 
             this.lblUF.AutoSize = true;
             this.lblUF.Location = new System.Drawing.Point(8, 88);
             this.lblUF.Name = "lblUF";
-            this.lblUF.Size = new System.Drawing.Size(246, 13);
+            this.lblUF.Size = new System.Drawing.Size(144, 13);
             this.lblUF.TabIndex = 954;
-            this.lblUF.Text = "Unidade Federativa (UF) para o envio da consulta:";
+            this.lblUF.Text = "UF para o envio da consulta:";
             // 
             // buttonStatusServidor
             // 
-            this.buttonStatusServidor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStatusServidor.Location = new System.Drawing.Point(145, 145);
+            this.buttonStatusServidor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStatusServidor.Location = new System.Drawing.Point(153, 145);
             this.buttonStatusServidor.Name = "buttonStatusServidor";
             this.buttonStatusServidor.Size = new System.Drawing.Size(75, 23);
-            this.buttonStatusServidor.TabIndex = 2;
+            this.buttonStatusServidor.TabIndex = 6;
             this.buttonStatusServidor.Text = "Consultar";
             this.buttonStatusServidor.UseVisualStyleBackColor = true;
             this.buttonStatusServidor.Click += new System.EventHandler(this.buttonStatusServidor_Click);
@@ -200,35 +208,87 @@
             this.cbEmissao.FormattingEnabled = true;
             this.cbEmissao.Location = new System.Drawing.Point(4, 118);
             this.cbEmissao.Name = "cbEmissao";
-            this.cbEmissao.Size = new System.Drawing.Size(288, 21);
-            this.cbEmissao.TabIndex = 1;
+            this.cbEmissao.Size = new System.Drawing.Size(282, 21);
+            this.cbEmissao.TabIndex = 4;
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(384, 206);
+            this.tabControl1.Size = new System.Drawing.Size(378, 206);
             this.tabControl1.TabIndex = 955;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.cbVersao);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.cbEmissao);
             this.tabPage1.Controls.Add(this.buttonStatusServidor);
+            this.tabPage1.Controls.Add(this.cbServico);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(376, 177);
+            this.tabPage1.Size = new System.Drawing.Size(370, 177);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Consulta status do serviço";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(292, 101);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 961;
+            this.label4.Text = "Serviço:";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(189, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 960;
+            this.label1.Text = "Versão:";
+            // 
+            // cbVersao
+            // 
+            this.cbVersao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbVersao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVersao.FormattingEnabled = true;
+            this.cbVersao.Items.AddRange(new object[] {
+            "3.10",
+            "2.00"});
+            this.cbVersao.Location = new System.Drawing.Point(189, 71);
+            this.cbVersao.Name = "cbVersao";
+            this.cbVersao.Size = new System.Drawing.Size(63, 21);
+            this.cbVersao.TabIndex = 2;
+            // 
+            // cbServico
+            // 
+            this.cbServico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServico.FormattingEnabled = true;
+            this.cbServico.Location = new System.Drawing.Point(292, 118);
+            this.cbServico.Name = "cbServico";
+            this.cbServico.Size = new System.Drawing.Size(70, 21);
+            this.cbServico.TabIndex = 5;
+            this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.cbVersaoConsCad);
             this.tabPage2.Controls.Add(this.textConteudo);
             this.tabPage2.Controls.Add(this.buttonPesquisa);
             this.tabPage2.Controls.Add(this.rbIE);
@@ -237,19 +297,33 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(376, 177);
+            this.tabPage2.Size = new System.Drawing.Size(370, 177);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Consulta cadastro do contribuinte";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lblServico
+            // label2
             // 
-            this.lblServico.AutoSize = true;
-            this.lblServico.Location = new System.Drawing.Point(303, 133);
-            this.lblServico.Name = "lblServico";
-            this.lblServico.Size = new System.Drawing.Size(46, 13);
-            this.lblServico.TabIndex = 958;
-            this.lblServico.Text = "Serviço:";
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(189, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 962;
+            this.label2.Text = "Versão:";
+            // 
+            // cbVersaoConsCad
+            // 
+            this.cbVersaoConsCad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbVersaoConsCad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVersaoConsCad.FormattingEnabled = true;
+            this.cbVersaoConsCad.Items.AddRange(new object[] {
+            "3.10",
+            "2.00"});
+            this.cbVersaoConsCad.Location = new System.Drawing.Point(189, 71);
+            this.cbVersaoConsCad.Name = "cbVersaoConsCad";
+            this.cbVersaoConsCad.Size = new System.Drawing.Size(63, 21);
+            this.cbVersaoConsCad.TabIndex = 2;
             // 
             // lblEmpresa
             // 
@@ -262,18 +336,21 @@
             // 
             // cbEmpresa
             // 
+            this.cbEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEmpresa.FormattingEnabled = true;
             this.cbEmpresa.Location = new System.Drawing.Point(8, 57);
             this.cbEmpresa.Name = "cbEmpresa";
-            this.cbEmpresa.Size = new System.Drawing.Size(365, 21);
-            this.cbEmpresa.TabIndex = 957;
+            this.cbEmpresa.Size = new System.Drawing.Size(356, 21);
+            this.cbEmpresa.TabIndex = 0;
             this.cbEmpresa.SelectedIndexChanged += new System.EventHandler(this.cbEmpresa_SelectedIndexChanged);
             // 
             // lblAmbiente
             // 
+            this.lblAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmbiente.AutoSize = true;
-            this.lblAmbiente.Location = new System.Drawing.Point(273, 88);
+            this.lblAmbiente.Location = new System.Drawing.Point(265, 88);
             this.lblAmbiente.Name = "lblAmbiente";
             this.lblAmbiente.Size = new System.Drawing.Size(54, 13);
             this.lblAmbiente.TabIndex = 3;
@@ -281,21 +358,13 @@
             // 
             // cbAmbiente
             // 
+            this.cbAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAmbiente.FormattingEnabled = true;
-            this.cbAmbiente.Location = new System.Drawing.Point(273, 104);
+            this.cbAmbiente.Location = new System.Drawing.Point(265, 104);
             this.cbAmbiente.Name = "cbAmbiente";
             this.cbAmbiente.Size = new System.Drawing.Size(100, 21);
-            this.cbAmbiente.TabIndex = 4;
-            // 
-            // cbServico
-            // 
-            this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbServico.FormattingEnabled = true;
-            this.cbServico.Location = new System.Drawing.Point(303, 150);
-            this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(70, 21);
-            this.cbServico.TabIndex = 959;
+            this.cbAmbiente.TabIndex = 3;
             // 
             // FormConsultaCadastro
             // 
@@ -307,8 +376,6 @@
             this.Controls.Add(this.lblUF);
             this.Controls.Add(this.comboUf);
             this.Controls.Add(this.cbAmbiente);
-            this.Controls.Add(this.lblServico);
-            this.Controls.Add(this.cbServico);
             this.Controls.Add(this.lblAmbiente);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textResultado);
@@ -358,7 +425,11 @@
         private System.Windows.Forms.ComboBox cbAmbiente;
         private System.Windows.Forms.Label lblAmbiente;
         private System.Windows.Forms.ComboBox cbServico;
-        private System.Windows.Forms.Label lblServico;
+        private System.Windows.Forms.ComboBox cbVersao;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbVersaoConsCad;
+        private System.Windows.Forms.Label label4;
 
     }
 }

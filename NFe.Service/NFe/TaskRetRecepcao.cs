@@ -43,7 +43,7 @@ namespace NFe.Service
 
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, dadosPedRec.versao);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF));

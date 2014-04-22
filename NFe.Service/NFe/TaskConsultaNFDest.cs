@@ -43,8 +43,8 @@ namespace NFe.Service
                         Servico,
                         emp,
                         cUF,
-                        /*oLer.*/oDadosConsultaNFeDest.tpAmb,
-                        1);
+                        oDadosConsultaNFeDest.tpAmb,
+                        1, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsNFDestEvento;

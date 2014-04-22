@@ -953,7 +953,6 @@ namespace NFe.Service
                                 oReciboCons.nRec = nRec;
                                 oReciboCons.tMed = tMed;
                                 oReciboCons.versao = versao;
-
                                 string chaveNfe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                                 if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "NFE")
                                     oReciboCons.Servico = TipoAplicativo.Nfe;

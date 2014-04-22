@@ -595,7 +595,7 @@ namespace NFe.ConvertTxt
         {
             int nProd = NFe.det.Count - 1;
             this.Registro = aRegistro;
-            this.FSegmento = this.Registro.Substring(1, this.Registro.IndexOf("|")-1);
+            this.FSegmento = this.Registro.Substring(1, this.Registro.IndexOf("|") - 1);
 
             switch (this.FSegmento.ToUpper())
             {
@@ -610,7 +610,7 @@ namespace NFe.ConvertTxt
 
                 case "B":
                     if (NFe.infNFe.Versao >= 3)
-                        layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dhEmi¨|dhSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
+                        layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dhEmi¨|dhSaiEnt¨|tpNF¨|idDest¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|indFinal¨|indPres¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
                     else
                         layout = "§B|cUF¨|cNF¨|NatOp¨|indPag¨|mod¨|serie¨|nNF¨|dEmi¨|dSaiEnt¨|hSaiEnt¨|tpNF¨|cMunFG¨|TpImp¨|TpEmis¨|cDV¨|TpAmb¨|FinNFe¨|ProcEmi¨|VerProc¨|dhCont¨|xJust¨";
 
@@ -630,6 +630,7 @@ namespace NFe.ConvertTxt
                     {
                         NFe.ide.dhEmi    = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.dhEmi,    ObOp.Obrigatorio, 19, 25);
                         NFe.ide.dhSaiEnt = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.dhSaiEnt, ObOp.Opcional,     0, 25);
+                        NFe.ide.idDest = (TpcnDestinoOperacao)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.idDest, ObOp.Obrigatorio, 1, 1);
                     }
                     else
                     {
@@ -644,6 +645,11 @@ namespace NFe.ConvertTxt
                     NFe.ide.cDV     = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cDV, ObOp.Opcional, 1, 1);
                     NFe.ide.tpAmb   = (TpcnTipoAmbiente)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.tpAmb, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.finNFe  = (TpcnFinalidadeNFe)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.finNFe, ObOp.Obrigatorio, 1, 1);
+                    if (NFe.infNFe.Versao >= 3)
+                    {
+                        NFe.ide.indFinal =  (TpcnConsumidorFinal)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indFinal, ObOp.Obrigatorio, 1, 1);
+                        NFe.ide.indPres = (TpcnPresencaComprador)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indPres, ObOp.Obrigatorio, 1, 1);
+                    }
                     NFe.ide.procEmi = (TpcnProcessoEmissao)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.procEmi, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.verProc = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.verProc, ObOp.Obrigatorio, 1, 20);
                     NFe.ide.dhCont  = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.dhCont, ObOp.Opcional, 0, 25);
@@ -660,10 +666,10 @@ namespace NFe.ConvertTxt
                     break;
                     #endregion
 
-                case "B11A":
-                    layout = "§B11a|idDest¨"; //ok
-                    NFe.ide.idDest = (TpcnDestinoOperacao)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.idDest, ObOp.Obrigatorio, 1, 1);
-                    break;
+                //case "B11A":
+                    //layout = "§B11a|idDest¨"; //ok
+                    //NFe.ide.idDest = (TpcnDestinoOperacao)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.idDest, ObOp.Obrigatorio, 1, 1);
+                    //break;
 
                 case "B13":
                     layout = "§B13|refNFe¨"; //ok
@@ -754,15 +760,15 @@ namespace NFe.ConvertTxt
                     }
                     break;
 
-                case "B25A":
-                    layout = "§B25A|indFinal¨"; //ok
-                    NFe.ide.indFinal =  (TpcnConsumidorFinal)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indFinal, ObOp.Obrigatorio, 1, 1);
-                    break;
+//                case "B25A":
+//                    layout = "§B25A|indFinal¨"; //ok
+//                    NFe.ide.indFinal =  (TpcnConsumidorFinal)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indFinal, ObOp.Obrigatorio, 1, 1);
+//                    break;
 
-                case "B25B":
-                    layout = "§B25b|indPres¨"; //ok
-                    NFe.ide.indPres = (TpcnPresencaComprador)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indPres, ObOp.Obrigatorio, 1, 1);
-                    break;
+//                case "B25B":
+//                    layout = "§B25b|indPres¨"; //ok
+//                    NFe.ide.indPres = (TpcnPresencaComprador)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indPres, ObOp.Obrigatorio, 1, 1);
+//                    break;
 
                 case "C":
                     layout = "§C|XNome¨|XFant¨|IE¨|IEST¨|IM¨|CNAE¨|CRT¨"; //ok
@@ -847,7 +853,7 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <dest>
 
-                    NFe.dest.xNome  = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Obrigatorio, 2, 60);
+                    NFe.dest.xNome  = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.xNome, (NFe.infNFe.Versao >= 3 && NFe.ide.mod != 55 ? ObOp.Opcional : ObOp.Obrigatorio), 2, 60);
                     NFe.dest.IE     = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional, 0, 14);
                     NFe.dest.ISUF   = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.ISUF, ObOp.Opcional, 8, 9);
                     NFe.dest.email  = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional, 1, 60);
@@ -861,17 +867,22 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "E03": 
-                    layout = "§E03|CPF¨"; //ok
+                    if (NFe.infNFe.Versao >= 3)
+                        layout = "§E03|CPF¨|idEstrangeiro¨"; //ok
+                    else
+                        layout = "§E03|CPF¨"; //ok
                     NFe.dest.CPF = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
-                    break;
-
-                case "E03A":
-                    layout = "§E03a|idEstrangeiro¨"; //ok
                     if ((double)NFe.infNFe.Versao >= 3.10)
                         NFe.dest.idEstrangeiro = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Opcional, 0, 20);
                     break;
 
-                case "E05": 
+//                case "E03A":
+//                    layout = "§E03a|idEstrangeiro¨"; //ok
+//                    if ((double)NFe.infNFe.Versao >= 3.10)
+//                        NFe.dest.idEstrangeiro = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Opcional, 0, 20);
+//                    break;
+
+                case "E05":
                     layout = "§E05|xLgr¨|nro¨|xCpl¨|xBairro¨|cMun¨|xMun¨|UF¨|CEP¨|cPais¨|xPais¨|fone¨"; //ok
                     ///
                     /// Grupo da TAG <dest><EnderDest>
@@ -888,14 +899,13 @@ namespace NFe.ConvertTxt
                     NFe.dest.enderDest.cPais    = (int)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Obrigatorio, 2, 4);
                     NFe.dest.enderDest.xPais    = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional, 2, 60);
                     NFe.dest.enderDest.fone     = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional, 6, 14);
-                
                     #endregion                    
                     break;
 
                 case "E16A":
                     layout = "§E16a|indIEDest¨"; //ok
                     if ((double)NFe.infNFe.Versao >= 3.10)
-                        NFe.dest.indIEDest = (TpcnindIEDest)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.indIEDest, ObOp.Obrigatorio, 1, 1);
+                        NFe.dest.indIEDest = (TpcnindIEDest)LerCampo(TpcnTipoCampo.tcInt, TpcnResources.indIEDest, ObOp.Obrigatorio, 1, 1);
                     break;
 
                 case "E17":
@@ -970,6 +980,16 @@ namespace NFe.ConvertTxt
                 case "G52":
                     layout = "§G52|CPF¨"; //ok
                     NFe.autXML.Add(new autXML{ CPF = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.CPF, ObOp.Obrigatorio, 11, 11) });
+                    break;
+
+                case "GA02":
+                    layout = "§GA02|CNPJ¨"; //ok
+                    NFe.autXML.Add(new autXML { CNPJ = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14) });
+                    break;
+
+                case "GA03":
+                    layout = "§GA03|CPF¨"; //ok
+                    NFe.autXML.Add(new autXML { CPF = (string)LerCampo(TpcnTipoCampo.tcStr, TpcnResources.CPF, ObOp.Obrigatorio, 11, 11) });
                     break;
 
                 ///
@@ -2116,7 +2136,7 @@ namespace NFe.ConvertTxt
                 case "ZA01":
                     if ((double)NFe.infNFe.Versao >= 3.10)
                     {
-                        layout = "§ZA|UFSaidaPais¨|xLocExporta¨|xLocDespacho¨"; //ok
+                        layout = "§ZA01|UFSaidaPais¨|xLocExporta¨|xLocDespacho¨"; //ok
                         ///
                         /// Grupo da TAG <exporta>
                         /// 

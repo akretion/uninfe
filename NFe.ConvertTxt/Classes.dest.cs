@@ -28,6 +28,7 @@ namespace NFe.ConvertTxt
         public Dest()
         {
             this.idEstrangeiro = this.CNPJ = this.CPF = string.Empty;
+            this.indIEDest = TpcnindIEDest.inContribuinte;
             this.enderDest = new enderDest();
         }
     }

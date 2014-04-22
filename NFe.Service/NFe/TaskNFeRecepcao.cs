@@ -48,7 +48,11 @@ namespace NFe.Service
                 var idLote = oLer.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis));
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, 
+                    Convert.ToInt32(oLer.oDadosNfe.cUF), 
+                    Convert.ToInt32(oLer.oDadosNfe.tpAmb), 
+                    Convert.ToInt32(oLer.oDadosNfe.tpEmis),
+                    oLer.oDadosNfe.versao);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));

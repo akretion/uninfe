@@ -174,11 +174,9 @@ namespace NFe.Settings
                             switch (NFe.Components.Propriedade.TipoAplicativo)
                             {
                                 case TipoAplicativo.Nfe:
-                                    //if (s.StartsWith("NFe.Components.Wsdl.NFe."))
                                     fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
                                 case TipoAplicativo.Nfse:
-                                    //if (s.StartsWith("NFe.Components.Wsdl.NFse."))
                                     fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                                     break;
                             }
@@ -438,7 +436,6 @@ namespace NFe.Settings
 
         }
 
-
         public static void loadResouces()
         {
             new loadResources().load();
@@ -660,6 +657,7 @@ namespace NFe.Settings
         }
         #endregion
 
+        #region DefinirWS()
         /// <summary>
         /// Definir o webservice que será utilizado para o envio do XML
         /// </summary>
@@ -668,21 +666,32 @@ namespace NFe.Settings
         /// <param name="cUF">Código da UF</param>
         /// <param name="tpAmb">Código do ambiente que será acessado</param>
         /// <param name="tpEmis">Tipo de emissão do XML</param>
-        /// <param name="versaoNFe">Versão da NFe (1 ou 2)</param>
+        /// <param name="versao">Versão do XML</param>
         /// <returns>Retorna o objeto do serviço</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 04/04/2011
-        /// </remarks>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao);
         }
+        #endregion
 
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe)
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <param name="versao">Versão do XML</param>
+        /// <param name="padraoNFSe">Padrão da NFS-e</param>
+        /// <param name="ehNFCe">Se é NFC-e (Nota fiscal de consumidor eletrônica)</param>
+        /// <returns>Retorna o objeto do serviço</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao)
         {
             WebServiceProxy wsProxy = null;
-            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis;
+            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "");
+
             while (true)
             {
                 lock (Smf.WebProxy)
@@ -693,8 +702,11 @@ namespace NFe.Settings
                     }
                     else
                     {
+                        //Definir se é uma configurações específica para NFC-e
+                        bool ehNFCe = Empresa.Configuracoes[emp].Servico == TipoAplicativo.NFCe;
+
                         //Definir a URI para conexão com o Webservice
-                        string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, servico);
+                        string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
 
                         wsProxy = new WebServiceProxy(Url, Empresa.Configuracoes[emp].X509Certificado, padraoNFSe);
 
@@ -707,9 +719,9 @@ namespace NFe.Settings
 
             return wsProxy;
         }
+        #endregion
 
-
-        #region DefLocalWSDL
+        #region DefLocalWSDL()
         /// <summary>
         /// Definir o local do WSDL do webservice
         /// </summary>
@@ -717,12 +729,10 @@ namespace NFe.Settings
         /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
         /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
         /// <param name="servico">Serviço da NFe que está sendo executado</param>
+        /// <param name="versao">Versão do XML</param>
+        /// <param name="ehNFCe">Se é NFCe (Nota Fiscal de Consumidor Eletrônica)</param>
         /// <returns>Retorna a URL</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 22/03/2011
-        /// </remarks>
-        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, Servicos servico)
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versao, Servicos servico, bool ehNFCe)
         {
             string WSDL = string.Empty;
             switch (tipoEmissao)
@@ -753,7 +763,7 @@ namespace NFe.Settings
             }
             string ufNome = CodigoUF.ToString();  //danasa 20-9-2010            
 
-            #region --varre a lista de webservices baseado no codigo da UF
+            #region varre a lista de webservices baseado no codigo da UF
 
             if (WebServiceProxy.webServicesList.Count == 0)
                 throw new Exception("Lista de webservices não foi processada verifique se o arquivo 'WebService.xml' existe na pasta WSDL do UniNFe");
@@ -907,6 +917,26 @@ namespace NFe.Settings
                 }
             }
             #endregion
+
+            //Se for NFCe tenho que ver se o estado não tem WSDL específico, ou seja, diferente da NFe
+            //Wandrey 17/04/2014
+            if (ehNFCe && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
+            {
+                string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_C" + Path.GetExtension(WSDL));
+                if (File.Exists(temp))
+                    WSDL = temp;
+            }
+
+            ///
+            /// danasa: 4-2014
+            /// Compatibilidade com a versao 2.00
+            /// 
+            if (!string.IsNullOrEmpty(versao) && (versao.Equals("2.01") || versao.Equals("2.00")) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
+            {
+                string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
+                if (File.Exists(temp))
+                    WSDL = temp;
+            }
 
             if (string.IsNullOrEmpty(WSDL) || !File.Exists(WSDL))
             {
@@ -1360,33 +1390,26 @@ namespace NFe.Settings
                     {
                         if (validou)
                         {
-                            string aplicacao = "NF-e";
-                            switch (Propriedade.TipoAplicativo)
-                            {
-                                case TipoAplicativo.Nfse:
-                                    aplicacao = "NFS-e";
-                                    break;
-                            }
                             if (empresa.CertificadoInstalado && empresa.CertificadoThumbPrint.Equals(string.Empty))
                             {
-                                erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                 validou = false;
                             }
                             if (!empresa.CertificadoInstalado)
                             {
                                 if (empresa.CertificadoArquivo.Equals(string.Empty))
                                 {
-                                    erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                    erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
                                 else if (!File.Exists(empresa.CertificadoArquivo))
                                 {
-                                    erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + " não foi encontrado.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                    erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços não foi encontrado.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
                                 else if (empresa.CertificadoSenha.Equals(string.Empty))
                                 {
-                                    erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços da " + aplicacao + ".\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
+                                    erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresa.Configuracoes[i].Nome + "\r\n" + Empresa.Configuracoes[i].CNPJ;
                                     validou = false;
                                 }
                                 else

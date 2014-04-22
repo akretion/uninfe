@@ -70,6 +70,7 @@ namespace NFe.Service
         {
             get { return Path.GetExtension(NomeArquivoXML).ToLower() == ".xml"; }
         }
+
         #endregion
 
         public abstract void Execute();
@@ -1166,7 +1167,7 @@ namespace NFe.Service
             int emp = Functions.FindEmpresaByThread();
 
             Boolean tudoOK = false;
-            Boolean bAssinado = this.Assinado(NomeArquivoXML);
+            Boolean bAssinado = false;
             Boolean bValidadoSchema = false;
             Boolean bValidacaoGeral = false;
 
@@ -1212,7 +1213,7 @@ namespace NFe.Service
                 }
 
                 //Assinar o arquivo XML
-                if (bValidacaoGeral && !bAssinado)
+                if (bValidacaoGeral)
                 {
                     AssinaturaDigital assDig = new AssinaturaDigital();
 
@@ -1311,24 +1312,6 @@ namespace NFe.Service
         }
         #endregion
 
-        #region Assinado()
-        /// <summary>
-        /// Verifica se o XML já está assinado digitalmente ou não
-        /// </summary>
-        /// <param name="cArquivoXML">Arquivo a ser verificado</param>
-        /// <returns>true = Arquivo XML já assinado</returns>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>03/04/2009</date>
-        protected Boolean Assinado(string cArquivoXML)
-        {
-            Boolean bAssinado = false;
-
-            //TODO: Tem que criar ainda o código que verifica se já está assinado ou não
-
-            return bAssinado;
-        }
-        #endregion
-
         #region ValidacoesGerais()
         /// <summary>
         /// Efetua uma leitura do XML da nota fiscal eletrônica e faz diversas conferências do seu conteúdo e bloqueia se não 
@@ -1356,9 +1339,10 @@ namespace NFe.Service
 
                 case Servicos.AssinarValidarCTeEnvioEmLote:
                 case Servicos.MontarLoteUmCTe:
-                    //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
+                    //Verificar o tipo de emissão Wbate com o configurado, se não bater vai retornar um erro para o ERP
                     //Wandrey 15/08/2012
-                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5")) ||
+                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9" )) ||
+                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "6")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "7")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "8")))
                     {
@@ -1368,45 +1352,73 @@ namespace NFe.Service
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
+                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
+                    {
+                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
+                    }
                     else
                     {
                         booValido = false;
 
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
+                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "6")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
-                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
-                                "para o SVC-RS.\r\n\r\n";
-
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
+                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
                         }
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
-                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
-                                "para o SVC-SP.\r\n\r\n";
-
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
+                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
                         }
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
-                                "e o XML está configurado para enviar para o SVC-SP.\r\n\r\n";
-
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
+                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
                         }
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
-                                "e o XML está configurado para enviar para o SVC-RS.\r\n\r\n";
-
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
+                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "6")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao SVCSP " +
-                                "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
+                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5"))
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
                         {
-                            cTextoErro = "O UniCTe está configurado para enviar a Nota Fiscal ao SVCRS " +
-                                "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
+                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "6")
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
+                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "7")
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
+                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "8")
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
+                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
+                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
+                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
+                        }
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
+                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
                         }
 
                         cTextoErro += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
@@ -1420,7 +1432,7 @@ namespace NFe.Service
                 case Servicos.MontarLoteUmaNFe:
                     //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
                     //danasa 8-2009
-                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4")) ||
+                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4" || oDadosNFe.tpEmis == "9")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && oDadosNFe.tpEmis == "3") ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
@@ -1440,6 +1452,10 @@ namespace NFe.Service
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
+                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
+                    {
+                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
+                    }
                     else
                     {
                         booValido = false;
@@ -1450,10 +1466,9 @@ namespace NFe.Service
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                 "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                 "para o SVCAN.\r\n\r\n";
-
                         }
                         // danasa 8-2009
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5"))
+                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
                                 "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";

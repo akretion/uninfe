@@ -417,7 +417,7 @@ namespace NFe.ConvertTxt
             if ((double)NFe.infNFe.Versao >= 3.10)
                 wCampo(NFe.dest.idEstrangeiro, TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Opcional); //E03a
 
-            wCampo(NFe.ide.tpAmb == TpcnTipoAmbiente.taProducao ? NFe.dest.xNome : "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL", TpcnTipoCampo.tcStr, TpcnResources.xNome);
+            wCampo(NFe.ide.tpAmb == TpcnTipoAmbiente.taProducao ? NFe.dest.xNome : "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL", TpcnTipoCampo.tcStr, TpcnResources.xNome, NFe.infNFe.Versao >= 3 && NFe.ide.mod != 55 ? ObOp.Opcional : ObOp.Obrigatorio);
             ///
             /// (**)GerarDestEnderDest(UF);
             /// 
@@ -444,7 +444,7 @@ namespace NFe.ConvertTxt
             /// 
             nodeCurrent = e0;
             if ((double)NFe.infNFe.Versao >= 3.10)
-                wCampo(NFe.dest.indIEDest, TpcnTipoCampo.tcInt, TpcnResources.indIEDest, ObOp.Obrigatorio);
+                wCampo((int)NFe.dest.indIEDest, TpcnTipoCampo.tcInt, TpcnResources.indIEDest, ObOp.Obrigatorio);
             else
                 NFe.dest.indIEDest = TpcnindIEDest.inContribuinte;
 
@@ -770,7 +770,7 @@ namespace NFe.ConvertTxt
                 (imposto.ISSQN.vAliq > 0) ||
                 (imposto.ISSQN.vISSQN > 0) ||
                 (imposto.ISSQN.cMunFG > 0) ||
-                (imposto.ISSQN.cListServ != ""))
+                (!string.IsNullOrEmpty(imposto.ISSQN.cListServ)))
             {
                 nodeCurrent = doc.CreateElement("ISSQN");
                 nodeImposto.AppendChild(nodeCurrent);

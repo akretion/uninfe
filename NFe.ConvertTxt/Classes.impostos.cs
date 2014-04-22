@@ -121,6 +121,11 @@ namespace NFe.ConvertTxt
         public ICMSTot ICMSTot;
         public ISSQNtot ISSQNtot;
         public retTrib retTrib;
+
+        public Imposto()
+        {
+            ISSQN.cListServ = string.Empty;
+        }
     }
 
     public class impostoDevol

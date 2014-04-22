@@ -40,7 +40,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, /*oLer.*/dadosEnvDPEC.cUF, /*oLer.*/dadosEnvDPEC.tpAmb, /*oLer.*/dadosEnvDPEC.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, dadosEnvDPEC.cUF, dadosEnvDPEC.tpAmb, dadosEnvDPEC.tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoDPEC = wsProxy.CriarObjeto("SCERecepcaoRFB");
@@ -270,7 +270,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, /*oLer.*/dadosConsDPEC.tpAmb, /*oLer.*/dadosConsDPEC.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, dadosConsDPEC.tpAmb, dadosConsDPEC.tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoDPEC = wsProxy.CriarObjeto("SCEConsultaRFB");

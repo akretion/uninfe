@@ -501,6 +501,7 @@
             this.comboBox_tpEmis.FormattingEnabled = true;
             this.comboBox_tpEmis.ItemHeight = 13;
             this.comboBox_tpEmis.Location = new System.Drawing.Point(7, 150);
+            this.comboBox_tpEmis.MaxDropDownItems = 9;
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
             this.comboBox_tpEmis.Size = new System.Drawing.Size(284, 21);
             this.comboBox_tpEmis.TabIndex = 13;

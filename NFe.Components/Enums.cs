@@ -307,6 +307,10 @@ namespace NFe.Components
         /// Aplicativo ou serviços para processamento dos XMLs do MDF-e
         /// </summary>
         MDFe = 3,
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs da NFC-e
+        /// </summary>
+        NFCe = 4,
         Nulo = 100
     }
     #endregion

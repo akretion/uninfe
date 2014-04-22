@@ -35,14 +35,12 @@ namespace NFe.Service
             {
                 dadosConsCad = new DadosConsCad();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                //oLer.
                 ConsCad(NomeArquivoXML);
 
                 if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, Propriedade.TipoEmissao.teNormal);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, Propriedade.TipoEmissao.teNormal, dadosConsCad.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsCad = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosConsCad.cUF));
@@ -62,7 +60,8 @@ namespace NFe.Service
                         dadosConsCad.UF,
                         dadosConsCad.CNPJ,
                         dadosConsCad.IE,
-                        dadosConsCad.CPF);
+                        dadosConsCad.CPF,
+                        dadosConsCad.versao);
                 }
             }
             catch(Exception ex)
@@ -113,6 +112,7 @@ namespace NFe.Service
             this.dadosConsCad.CNPJ = string.Empty;
             this.dadosConsCad.IE = string.Empty;
             this.dadosConsCad.UF = string.Empty;
+            this.dadosConsCad.versao = ConfiguracaoApp.VersaoXMLConsCad;
 
             if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
@@ -134,6 +134,9 @@ namespace NFe.Service
                         case "uf":
                             this.dadosConsCad.UF = dados[1].Trim();
                             break;
+                        case "versao":
+                            this.dadosConsCad.versao = dados[1].Trim();
+                            break;
                     }
                 }
             }
@@ -146,6 +149,8 @@ namespace NFe.Service
                 foreach(XmlNode ConsCadNode in ConsCadList)
                 {
                     XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+
+                    this.dadosConsCad.versao = ConsCadElemento.Attributes["versao"].InnerText;
 
                     XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
 

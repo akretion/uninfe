@@ -629,6 +629,7 @@ namespace NFe.Service
                     xmlDados = ConsultaCTe(tpAmb, tpEmis, chNFe);
                     break;
 
+                case TipoAplicativo.NFCe:
                 case TipoAplicativo.Nfe:
                     xmlDados = ConsultaNFe(tpAmb, tpEmis, chNFe, versao);
                     break;
@@ -725,13 +726,16 @@ namespace NFe.Service
         /// <returns>Retorna o caminho e nome do arquivo criado</returns>
         /// <by>Marcos Diez</by>
         /// <date>29/08/2009</date>
-        public string ConsultaCadastro(string pArquivo, string uf, string cnpj, string ie, string cpf)
+        public string ConsultaCadastro(string pArquivo, string uf, string cnpj, string ie, string cpf, string versao)
         {
             int emp = EmpIndex;
 
+            if (string.IsNullOrEmpty(versao))
+                versao = ConfiguracaoApp.VersaoXMLConsCad;
+
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
                 "<ConsCad xmlns=\"http://www.portalfiscal.inf.br/nfe" +
-                "\" versao=\"" + ConfiguracaoApp.VersaoXMLConsCad + "\"><infCons><xServ>CONS-CAD</xServ>";
+                "\" versao=\"" + versao + "\"><infCons><xServ>CONS-CAD</xServ>";
 
             cnpj = OnlyNumbers(cnpj);
             ie = OnlyNumbers(ie);
@@ -819,7 +823,7 @@ namespace NFe.Service
         /// <param name="cUF">Código da UF</param>
         /// <param name="amb">Tipo de Ambiente</param>
         /// <returns>Retorna o nome e pasta do arquivo xml gerado</returns>
-        public string StatusServico(TipoAplicativo servico, int tpEmis, int cUF, int amb)
+        public string StatusServico(TipoAplicativo servico, int tpEmis, int cUF, int amb, string versao)
         {
             string arquivoSaida = DateTime.Now.ToString("yyyyMMddTHHmmss") + Propriedade.ExtEnvio.PedSta_XML;
 
@@ -829,8 +833,9 @@ namespace NFe.Service
                     StatusServicoCTe(arquivoSaida, amb, tpEmis, cUF);
                     break;
 
+                case TipoAplicativo.NFCe:
                 case TipoAplicativo.Nfe:
-                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF, ConfiguracaoApp.VersaoXMLStatusServico);
+                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF, versao);//ConfiguracaoApp.VersaoXMLStatusServico);
                     break;
 
                 case TipoAplicativo.MDFe:

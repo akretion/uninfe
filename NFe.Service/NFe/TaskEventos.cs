@@ -112,7 +112,7 @@ namespace NFe.Service
                         emp,
                         ufParaWS,
                         dadosEnvEvento.eventos[0].tpAmb,
-                        tpEmis);
+                        tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento;

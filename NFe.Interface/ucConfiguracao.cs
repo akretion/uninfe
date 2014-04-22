@@ -37,7 +37,7 @@ namespace NFe.Interface
                 labelPadrao.Visible =
                 edtCodMun.Visible =
                 edtPadrao.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse);
-            
+
             cboDiretorioSalvarComo.Visible = lbl_DiretorioSalvarComo.Visible =
                 textBox_PastaLote.Visible = lbl_textBox_PastaLote.Visible = button_SelectPastaLote.Visible =
                 textBox_PastaBackup.Visible = lbl_textBox_PastaBackup.Visible = button_SelectPastaBackup.Visible =
@@ -49,7 +49,7 @@ namespace NFe.Interface
                 udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
                 edtFTP_PastaDestino.Visible = lbl_edtFTP_PastaDestino.Visible = edtFTP_GravaXMLPastaUnica.Visible =
                 textBox_PastaDownload.Visible = lbl_textBox_PastaDownload.Visible =
-                button_SelecionarPastaDownload.Visible = 
+                button_SelecionarPastaDownload.Visible =
                 cbIndSinc.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
             this.updateText = updateText;
             cnpjCurrent = "";
@@ -151,6 +151,7 @@ namespace NFe.Interface
                 arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
                 arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
                 arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
+                arrServico.Add(new ComboElem("NFC-e", (int)TipoAplicativo.NFCe));
             }
             else
                 arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
@@ -176,6 +177,7 @@ namespace NFe.Interface
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCAN], Propriedade.TipoEmissao.teSVCAN));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS], Propriedade.TipoEmissao.teSVCRS));
                 arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP], Propriedade.TipoEmissao.teSVCSP));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teOffLine], Propriedade.TipoEmissao.teOffLine));
             }
 
             comboBox_tpEmis.DataSource = arrTpEmis;
@@ -496,7 +498,6 @@ namespace NFe.Interface
                     "[ThumbPrint]\r\n" + oEmpresa.CertificadoThumbPrint + "\r\n\r\n" +
                     "[Alerta]\r\n" + "Certificado não foi Detectado na Estação! Podem ocorrer erros na emissão de documentos.";
                 }
-
             }
         }
         #endregion
@@ -560,6 +561,13 @@ namespace NFe.Interface
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
+                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
+                        {
+                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.NFCe);
+                            servicoCurrent = servico = TipoAplicativo.NFCe;
+                            MudarPastas(cnpj, servicoCurrent);
+                            mudaPastas = false;
+                        }
                         else
                         {
                             this.tabControl3.SelectedIndex = 0;
@@ -581,7 +589,10 @@ namespace NFe.Interface
                 cnpjCurrent = cnpj;
 
                 if (this.updateText != null)
-                    this.updateText(nome.Substring(0, 20));
+                    if (nome.Length > 20)
+                        this.updateText(nome.Substring(0, 20));
+                    else
+                        this.updateText(nome);
             }
         }
 
@@ -721,7 +732,6 @@ namespace NFe.Interface
                                 ftp.makeDir(this.edtFTP_PastaRetornos.Text);
                             }
                         }
-
 
                     MessageBox.Show("FTP conectado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
