@@ -147,6 +147,10 @@ namespace NFe.Settings
         /// </summary>
         public string CertificadoSenha { get; set; }
         /// <summary>
+        /// Utilizado para certificados A3
+        /// </summary>
+        public string CerficadoPIN { get; set; }
+        /// <summary>
         /// Certificado digital - Subject
         /// </summary>
         public string Certificado { get; set; }
@@ -211,6 +215,8 @@ namespace NFe.Settings
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
         public bool GravarEventosCancelamentoNaPastaEnviadosNFe { get; set; }
         public bool GravarEventosDeTerceiros { get; set; }
+        public bool CompactarNFe { get; set; }
+
         /// <summary>
         /// Enviar NFe utilizando o processo síncrono (true or false)
         /// </summary>
@@ -575,6 +581,7 @@ namespace NFe.Settings
                         empresa.GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosNaPastaEnviadosNFe, "False"));
                         empresa.GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, "False"));
                         empresa.GravarEventosDeTerceiros = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosDeTerceiros, "False"));
+                        empresa.CompactarNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNFe, "False"));
                         empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
                         empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
                         empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, false));
@@ -609,6 +616,7 @@ namespace NFe.Settings
                         empresa.CertificadoArquivo = Functions.LerTag(configElemento, NFeStrConstants.CertificadoArquivo, false);
                         empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
                         empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
+                        empresa.CerficadoPIN = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoPIN)[0].InnerText.Trim());
 
                         if(!empresa.CertificadoInstalado)
                             if(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)

@@ -45,7 +45,7 @@ namespace NFe.Service
                 // mudei para aqui cajo haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
                 switch (currentEvento)
                 {
-                    case 110111:                        
+                    case 110111:
                         Servico = Servicos.EnviarEventoCancelamento;
                         break;
                     case 110110:
@@ -232,7 +232,7 @@ namespace NFe.Service
                                     if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT))
                                         Servico = Servicos.EnviarEventoCancelamento;
                         }
-                        
+
                         switch (Servico)
                         {
                             case Servicos.EnviarCCe:
@@ -622,6 +622,8 @@ namespace NFe.Service
                                             switch (Convert.ToInt32(tpEvento))
                                             {
                                                 case 110111: //Cancelamento
+                                                    NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                                    break;
                                                 case 110110: //CCe
                                                     NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
                                                     break;

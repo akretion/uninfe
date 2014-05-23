@@ -104,7 +104,7 @@
     </binding>
     <service name="NfeAutorizacao">
         <port name="NfeAutorizacaoSoap12" binding="tns:NfeAutorizacaoSoap12">
-            <soap12:address location="https://homologacao.nfe.sefaz.rs.gov.br/ws/NfeAutorizacao/NfeAutorizacao.asmx"/>
+            <soap12:address location="https://homologacao.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao"/>
         </port>
     </service>
 </definitions>

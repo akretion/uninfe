@@ -351,15 +351,41 @@ namespace NFe.Components
                 #endregion
 
                 #region DSF
-                case PadroesNFSe.DSF: // Campinas - SP
+                case PadroesNFSe.DSF:
+                    switch (idMunicipio)
+                    {
+                        case 3170206: // Urberlandia - MG
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</CancelarNfse>" +
+                                   @"</LocalHomologacao>";
+
+                        default: // Campinas - SP
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
+                    }
+                #endregion
+
+                #region TENCNOSISTEMAS
+                case PadroesNFSe.TECNOSISTEMAS: // Portão - RS
                     return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
-                            @"</LocalHomologacao>";
+                           @"<RecepcionarLoteRps>wsdl\homologacao\HPortaoRSEnvioLoteRPSSincrono.wsdl</RecepcionarLoteRps>" +
+                           @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HPortaoRSConsultaNFSePorFaixa.wsdl</ConsultarSituacaoLoteRps>" +
+                           @"<ConsultarNfsePorRps>wsdl\homologacao\HPortaoRSConsultaNFSePorRPS.wsdl</ConsultarNfsePorRps>" +
+                           @"<ConsultarNfse>wsdl\homologacao\HPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>" +
+                           @"<ConsultarLoteRps>wsdl\homologacao\HPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
+                           @"<CancelarNfse>wsdl\homologacao\HPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>" +
+                           @"</LocalHomologacao>";
                 #endregion
 
                 default:
@@ -725,18 +751,42 @@ namespace NFe.Components
                 #endregion
 
                 #region DSF
-                case PadroesNFSe.DSF: // Campinas - SP
-                    return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
-                            @"</LocalProducao>";
+                case PadroesNFSe.DSF:
+                    switch (idMunicipio)
+                    {
+                        case 3170206: // Urberlandia - MG
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                        default: // Campinas - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+                    }
                 #endregion
 
-
+                #region TENCNOSISTEMAS
+                case PadroesNFSe.TECNOSISTEMAS: // Portão - RS
+                    return "<LocalProducao>" +
+                           @"<RecepcionarLoteRps>wsdl\producao\PPortaoRSEnvioLoteRPSSincrono.wsdl</RecepcionarLoteRps>" +
+                           @"<ConsultarSituacaoLoteRps>wsdl\producao\PPortaoRSConsultaNFSePorFaixa.wsdl</ConsultarSituacaoLoteRps>" +
+                           @"<ConsultarNfsePorRps>wsdl\producao\PPortaoRSConsultaNFSePorRPS.wsdl</ConsultarNfsePorRps>" +
+                           @"<ConsultarNfse>wsdl\producao\PPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>" +
+                           @"<ConsultarLoteRps>wsdl\producao\PPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
+                           @"<CancelarNfse>wsdl\producao\PPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>" +
+                           @"</LocalProducao>";
+                #endregion
 
                 default:
                     return "<LocalProducao></LocalProducao>";

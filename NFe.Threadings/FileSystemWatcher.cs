@@ -113,6 +113,25 @@ namespace NFe.Threadings
                             else if(oldFi.Length != fi.Length)
                                 RaiseFileChanged(fi);
 
+                            #region Bug Fix #14522
+                            else
+                            {
+                                //-------------------------------------------------------------------------
+                                // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
+                                //-------------------------------------------------------------------------
+                                int index = Functions.FindEmpresaByThread();
+                                string errorPath = String.Format("{0}\\{1}",
+                                    Settings.Empresa.Configuracoes[index].PastaErro,
+                                    oldFi.Name);
+
+#if DEBUG
+                                Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
+
+                                Functions.Move(oldFi.FullName, errorPath);
+                            }
+                            #endregion
+
 #if DEBUG
                             Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
 #endif

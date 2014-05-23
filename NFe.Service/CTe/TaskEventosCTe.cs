@@ -194,6 +194,8 @@ namespace NFe.Service
                                 switch (Convert.ToInt32(tpEvento))
                                 {
                                     case 110111: //Cancelamento
+                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                        break;
                                     case 110110: //CCe
                                         NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
                                         break;

@@ -8,6 +8,7 @@ using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
 using NFe.Exceptions;
+using System.IO.Compression;
 
 namespace NFe.Service
 {
@@ -48,11 +49,14 @@ namespace NFe.Service
                 var idLote = oLer.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, 
-                    Convert.ToInt32(oLer.oDadosNfe.cUF), 
-                    Convert.ToInt32(oLer.oDadosNfe.tpAmb), 
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp,
+                    Convert.ToInt32(oLer.oDadosNfe.cUF),
+                    Convert.ToInt32(oLer.oDadosNfe.tpAmb),
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao);
+
+                if (Empresa.Configuracoes[emp].CompactarNFe)
+                    Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
@@ -66,6 +70,13 @@ namespace NFe.Service
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 
                 //Fica aqui somente este lembrete. Wandrey 16/03/2010
                 //
+
+                // Envio de NFe Compactada - Renan 29/04/2014
+                if (Empresa.Configuracoes[emp].CompactarNFe)
+                {
+                    FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
+                    TFunctions.CompressXML(dadosArquivo);
+                }
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)), oCabecMsg, this, "-env-lot", "-rec");
@@ -99,6 +110,11 @@ namespace NFe.Service
 
                 //Deleta o arquivo de lote
                 Functions.DeletarArquivo(NomeArquivoXML);
+
+                // Envio de NFe Compactada - Renan 29/04/2014
+                if (Empresa.Configuracoes[emp].CompactarNFe)
+                    Functions.DeletarArquivo(NomeArquivoXML + ".gz");
+
                 #endregion
             }
             catch (ExceptionEnvioXML ex)

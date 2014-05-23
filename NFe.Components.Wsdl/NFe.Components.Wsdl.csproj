@@ -1706,8 +1706,44 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico2_C.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSCancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSEnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSCancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortaoRSEnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HUberlandiaMGDFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PUberlandiaMGDFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\ABRASF\nfse_v2_02.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ABRASF\nfse_v2_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2_200.wsdl" />
@@ -1778,6 +1814,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao2_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico2_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVSP\PSCVSPCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVSP\HSCVSPCteRecepcaoEvento.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

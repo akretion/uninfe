@@ -89,7 +89,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeAutorizacao">
     <wsdl:port name="NfeAutorizacaoSoap12" binding="tns:NfeAutorizacaoSoap12">
-      <soap12:address location="https://nfe.sefaz.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" />
+      <soap12:address location="https://nfe.sefazvirtual.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -140,6 +140,10 @@ namespace NFe.Service
                 case Servicos.EnviarLoteNfe2:
                     retorna = "NfeAutorizacao";
                     break;
+                case Servicos.EnviarLoteNfeZip2:
+                    retorna = "NfeAutorizacao";
+                    break;
+
                 #endregion
 
                 #region MDF-e
@@ -445,6 +449,32 @@ namespace NFe.Service
                     break;
 
                 #endregion
+
+                #region TECNOSISTEMAS
+                case PadroesNFSe.TECNOSISTEMAS:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultaLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultaNFSeServicosPrestados";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNFSePorRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaNFSePorFaixa";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelamentoNFSe";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "EnvioLoteRPSSincrono";
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -505,7 +535,6 @@ namespace NFe.Service
                 #region NFe
                 default:
                     retorna = "nfeCabecMsg";
-
                     break;
                 #endregion
             }
@@ -590,6 +619,11 @@ namespace NFe.Service
                 case Servicos.EnviarLoteNfe2:
                     retorna = "nfeAutorizacaoLote";
                     break;
+
+                case Servicos.EnviarLoteNfeZip2:
+                    retorna = "nfeAutorizacaoLoteZip";
+                    break;
+
                 case Servicos.EnviarLoteNfe:
                     retorna = "nfeRecepcaoLote2";
                     break;
@@ -1060,7 +1094,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region PAULISTANA
+                #region DSF
                 case PadroesNFSe.DSF:
                     switch (servico)
                     {
@@ -1108,6 +1142,32 @@ namespace NFe.Service
 
                         default:
                             throw new NFe.Components.Exceptions.ServicoInexistenteException();
+                    }
+                    break;
+                #endregion
+
+                #region TECNOSISTEMAS
+                case PadroesNFSe.TECNOSISTEMAS:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "mConsultaLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "mConsultaNFSeServicosPrestados";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "mConsultaNFSePorRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "mConsultaNFSePorFaixa";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "mCancelamentoNFSe";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "mEnvioLoteRPSSincrono";
+                            break;
                     }
                     break;
                 #endregion
@@ -1341,7 +1401,7 @@ namespace NFe.Service
                 case Servicos.MontarLoteUmCTe:
                     //Verificar o tipo de emissão Wbate com o configurado, se não bater vai retornar um erro para o ERP
                     //Wandrey 15/08/2012
-                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9" )) ||
+                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "6")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "7")) ||
                         (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "8")))
@@ -1687,6 +1747,8 @@ namespace NFe.Service
                         // move o arquivo NFe para a pasta Denegada
                         File.Move(strArquivoNFe, dArquivo);
                     }
+
+                    TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, "danfe");
                 }
             }
         }

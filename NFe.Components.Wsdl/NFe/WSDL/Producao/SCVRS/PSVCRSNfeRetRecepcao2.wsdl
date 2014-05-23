@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeRetRecepcao2">
     <wsdl:port name="NfeRetRecepcao2Soap12" binding="tns:NfeRetRecepcao2Soap12">
-      <soap12:address location="https://nfe.sefaz.rs.gov.br/ws/NfeRetRecepcao/NfeRetRecepcao2.asmx" />
+      <soap12:address location="https://nfe.sefazvirtual.rs.gov.br/ws/NfeRetRecepcao/NfeRetRecepcao2.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

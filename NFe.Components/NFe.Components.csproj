@@ -72,6 +72,9 @@
     <Compile Include="ComboElemen.cs" />
     <Compile Include="Criptografia.cs" />
     <Compile Include="Exceptions\Exceptions.cs" />
+    <Compile Include="ExtensionsMethods\StreamExtensions.cs" />
+    <Compile Include="ExtensionsMethods\StringExtensions.cs" />
+    <Compile Include="ExtensionsMethods\X509Certificate2Extension.cs" />
     <Compile Include="FolderCompare.cs" />
     <Compile Include="ftplib.cs" />
     <Compile Include="Interface\IEmiteNfIPM.cs" />

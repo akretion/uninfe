@@ -42,7 +42,7 @@
             this.btnAtualizar.TabIndex = 0;
             this.btnAtualizar.Text = "Iniciar a atualização";
             this.btnAtualizar.UseVisualStyleBackColor = true;
-            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);      
+            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
             // lblProgresso
             // 
@@ -72,6 +72,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormUpdate";
             this.Text = "Atualização da aplicação";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUpdate_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

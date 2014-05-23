@@ -434,6 +434,10 @@ namespace NFe.Components
             /// </summary>
             public const string ProcNFe = "-procNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
             /// <summary>
+            /// -den.xml
+            /// </summary>
+            public const string Den = "-den.xml";
+            /// <summary>
             /// -ret-env-cce.xml
             /// </summary>
             public const string retEnvCCe_XML = "-ret-env-cce.xml";
@@ -893,6 +897,7 @@ namespace NFe.Components
         public static string CertificadoInstalado = "CertificadoInstalado";
         public static string CertificadoArquivo = "CertificadoArquivo";
         public static string CertificadoSenha = "CertificadoSenha";
+        public static string CertificadoPIN = "CertificadoPIN";
 
         public static string AmbienteCodigo = "AmbienteCodigo";
         public static string DiasLimpeza = "DiasLimpeza";
@@ -901,6 +906,7 @@ namespace NFe.Components
         public static string GravarEventosNaPastaEnviadosNFe = "GravarEventosNaPastaEnviadosNFe";
         public static string GravarEventosCancelamentoNaPastaEnviadosNFe = "GravarEventosCancelamentoNaPastaEnviadosNFe";
         public static string GravarEventosDeTerceiros = "GravarEventosDeTerceiros";
+        public static string CompactarNFe = "CompactarNfe";
         public static string TempoConsulta = "TempoConsulta";
         public static string tpEmis = "tpEmis";
         public static string tpAmb = "tpAmb";

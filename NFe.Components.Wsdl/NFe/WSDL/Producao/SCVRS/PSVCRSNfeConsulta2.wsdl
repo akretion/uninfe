@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeConsulta2">
     <wsdl:port name="NfeConsulta2Soap12" binding="tns:NfeConsulta2Soap12">
-      <soap12:address location="https://nfe.sefaz.rs.gov.br/ws/NfeConsulta/NfeConsulta2.asmx" />
+      <soap12:address location="https://nfe.sefazvirtual.rs.gov.br/ws/NfeConsulta/NfeConsulta2.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

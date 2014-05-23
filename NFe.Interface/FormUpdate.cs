@@ -54,6 +54,10 @@ namespace NFe.Interface
         /// Caminho do sistema o qual o UniNFe sera atualizado
         /// </summary>
         private string PastaInstalar;
+        /// <summary>
+        /// Atualização cancelada
+        /// </summary>
+        private bool Cancelado = true;
         #endregion
 
         #region Construtores
@@ -103,10 +107,29 @@ namespace NFe.Interface
                     Propriedade.EncerrarApp = true;
                     this.MdiParent.Close();
                 }
-                else
+                else if(!Cancelado)
                     MessageBox.Show("Não foi possível localizar o instalador da atualização", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Ao fechar a atualização com download em progresso, ele deve encerrar o download para evitar falhas no aplicativo
+        /// Renan - 15/05/2014
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormUpdate_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!Cancelado)
+            {
+                strResponse.Close();
+                strLocal.Close();
+                File.Delete(LocalArq);                
+            }
+
+            Cancelado = true;
+        }
+
         #endregion
 
         #region Métodos gerais
@@ -125,6 +148,9 @@ namespace NFe.Interface
             {
                 try
                 {
+                    // Desmarcar o flag
+                    Cancelado = false;
+
                     // Criar um pedido do arquivo que será baixado
                     webRequest = (HttpWebRequest)WebRequest.Create(URL);
 
@@ -152,7 +178,7 @@ namespace NFe.Interface
                     byte[] downBuffer = new byte[2048];
 
                     // Loop através do buffer - Até que o buffer esteja vazio
-                    while ((bytesSize = strResponse.Read(downBuffer, 0, downBuffer.Length)) > 0)
+                    while (Cancelado == false && (bytesSize = strResponse.Read(downBuffer, 0, downBuffer.Length)) > 0)
                     {
                         // Gravar os dados do buffer no disco rigido
                         strLocal.Write(downBuffer, 0, bytesSize);
@@ -161,7 +187,11 @@ namespace NFe.Interface
                         this.Invoke(new UpdateProgessCallback(this.UpdateProgress), new object[] { strLocal.Length, fileSize });
                     }
 
-                    this.Invoke(new UpdateProgessCallback(this.UpdateProgress), new object[] { fileSize, fileSize });
+                    if (Cancelado)
+                        MessageBox.Show("Atualização foi cancelada!", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    else
+                        this.Invoke(new UpdateProgessCallback(this.UpdateProgress), new object[] { fileSize, fileSize });
+
                 }
                 catch (IOException ex)
                 {
@@ -214,5 +244,6 @@ namespace NFe.Interface
         #endregion
 
         #endregion
+
     }
 }

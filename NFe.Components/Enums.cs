@@ -42,6 +42,10 @@ namespace NFe.Components
         /// </summary>
         EnviarLoteNfe2,
         /// <summary>
+        /// Envia os lotes de NFe para os webservices de forma Compactada (NFeAutorizacao)
+        /// </summary>
+        EnviarLoteNfeZip2,
+        /// <summary>
         /// Consulta recibo do lote nfe (NFeRetRecepcao)
         /// </summary>
         PedidoSituacaoLoteNFe,
@@ -403,8 +407,12 @@ namespace NFe.Components
         /// Padrão Nota Fiscal eletrônica DSF 
         /// Prefeitura de Campinas - SP
         /// </summary>
-        DSF
-
+        DSF,
+        /// <summary>
+        /// Padrão Tecno Sistemas
+        /// Prefeitura de Portão - RS
+        /// </summary>
+        TECNOSISTEMAS,
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

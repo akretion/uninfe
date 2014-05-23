@@ -1076,6 +1076,8 @@ namespace NFe.Service
             switch (Servico)
             {
                 case Servicos.EnviarLoteNfe:
+                case Servicos.EnviarLoteNfe2:
+                case Servicos.EnviarLoteNfeZip2:
                     {
                         #region Servicos.EnviarLoteNfe
                         XmlDocument docRec = new XmlDocument();
@@ -1115,6 +1117,7 @@ namespace NFe.Service
                     break;
 
                 case Servicos.PedidoSituacaoLoteNFe:
+                case Servicos.PedidoSituacaoLoteNFe2:
                     {
                         #region Servicos.PedidoSituacaoLoteNFe
                         XmlDocument docProRec = new XmlDocument();
@@ -2295,6 +2298,8 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(folderToWriteBackup))
                 this.XmlParaFTP(emp, folderToWrite);
 
+            TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
+
             NomeArqGerado = folderToWrite;
         }
 
@@ -2365,7 +2370,9 @@ namespace NFe.Service
 
             if (!string.IsNullOrEmpty(folderToWriteBackup))
                 this.XmlParaFTP(emp, folderToWrite);
-
+            
+            TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
+            
             NomeArqGerado = folderToWrite;
         }
 
@@ -2436,6 +2443,8 @@ namespace NFe.Service
 
             if (!string.IsNullOrEmpty(folderToWriteBackup))
                 this.XmlParaFTP(emp, folderToWrite);
+
+            TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
 
             NomeArqGerado = folderToWrite;
         }

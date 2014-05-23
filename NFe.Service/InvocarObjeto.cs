@@ -134,7 +134,16 @@ namespace NFe.Service
                 }
             }
 
-            XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
+            // Envio da NFe Compactada - Renan
+            if (servico == Servicos.EnviarLoteNfeZip2)
+            {
+                XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
+                FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
+                string encodedData = StreamExtensions.ToBase64(XMLNfeZip);
+                XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { encodedData });
+            }
+            else
+                XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
 
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno.OuterXml });
 
@@ -317,39 +326,41 @@ namespace NFe.Service
                 #endregion
 
                 #region Demais padrões
+                case PadroesNFSe.TECNOSISTEMAS:
+                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
+                    break;
+
                 case PadroesNFSe.GINFES:
                 case PadroesNFSe.THEMA:
                 case PadroesNFSe.SALVADOR_BA:
                 case PadroesNFSe.CANOAS_RS:
                 case PadroesNFSe.ISSNET:
-                case PadroesNFSe.DUETO:
                 default:
                     if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml });
                     else
                         strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
-
-                    #region gerar arquivos assinados(somente debug)
-#if DEBUG
-                    string path = Application.StartupPath + "\\teste_assintura\\";
-
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-
-                    StreamWriter sw = new StreamWriter(path + "nfseMsg_assinado.xml", true);
-                    sw.Write(docXML.OuterXml);
-                    sw.Close();
-
-                    StreamWriter sw2 = new StreamWriter(path + "cabecMsg_assinado.xml", true);
-                    sw2.Write(cabecMsg.ToString());
-                    sw2.Close();
-#endif
-                    #endregion
                     break;
                 #endregion
             }
+            #region gerar arquivos assinados(somente debug)
+#if DEBUG
+            string path = Application.StartupPath + "\\teste_assintura\\";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            StreamWriter sw = new StreamWriter(path + "nfseMsg_assinado.xml", true);
+            sw.Write(docXML.OuterXml);
+            sw.Close();
+
+            StreamWriter sw2 = new StreamWriter(path + "cabecMsg_assinado.xml", true);
+            sw2.Write(cabecMsg.ToString());
+            sw2.Close();
+#endif
+            #endregion
 
             //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { strRetorno });

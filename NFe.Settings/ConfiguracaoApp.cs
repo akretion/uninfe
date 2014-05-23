@@ -445,7 +445,7 @@ namespace NFe.Settings
         public static void StartVersoes()
         {
             //if (ConfiguracaoApp.AtualizaWSDL)
-                new loadResources().load();
+            new loadResources().load();
 
             ConfiguracaoApp.CarregarDados();
 
@@ -1141,6 +1141,7 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoInstalado, empresa.CertificadoInstalado.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoArquivo, empresa.CertificadoArquivo.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoSenha, Criptografia.criptografaSenha(empresa.CertificadoSenha));
+                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoPIN, Criptografia.criptografaSenha(empresa.CerficadoPIN));
                     oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, empresa.tpEmis.ToString());
                     if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                     {
@@ -1151,6 +1152,12 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, empresa.IndSinc.ToString());
                     }
+
+                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                    {
+                        oXmlGravar.WriteElementString(NFeStrConstants.CompactarNFe, empresa.CompactarNFe.ToString());
+                    }
+
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
                     if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                     {
@@ -1844,7 +1851,7 @@ namespace NFe.Settings
                                 Empresa.Configuracoes[emp].PastaEnvioEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText, true);
                                 lEncontrouTag = true;
                             }
-                            
+
                             //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
                             if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
                             {
@@ -2525,10 +2532,10 @@ namespace NFe.Settings
         #endregion
 
         #endregion
-        
+
         #endregion
     }
 
-    #endregion 
+    #endregion
 }
 

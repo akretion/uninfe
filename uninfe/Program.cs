@@ -19,32 +19,54 @@ namespace uninfe
         [STAThread]
         static void Main(string[] args)
         {
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
+            {
+                Auxiliar.WriteLog(e.Exception.Message + "\r\n" + e.Exception.StackTrace);
+                if (e.Exception.InnerException != null)
+                {
+                    Auxiliar.WriteLog(e.Exception.InnerException.Message + "\r\n" + e.Exception.InnerException.StackTrace);
+
+                    if (e.Exception.InnerException.InnerException != null)
+                    {
+                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.StackTrace);
+                    }
+
+                    if (e.Exception.InnerException.InnerException.InnerException != null)
+                    {
+                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.InnerException.StackTrace);
+                    }
+                }
+            });
+
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
+            {
+                Auxiliar.WriteLog(e.ExceptionObject.ToString());
+            });
+
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             bool silencioso = false;
             ConfiguracaoApp.AtualizaWSDL = false;
 
-            if(args.Length >= 1)
-                foreach(string param in args)
+            if (args.Length >= 1)
+                foreach (string param in args)
                 {
-                    if(param.ToLower().Equals("/silent"))
+                    if (param.ToLower().Equals("/silent"))
                     {
                         silencioso = true;
                         continue;
                     }
-                    if(param.ToLower().Equals("/updatewsdl"))
+                    if (param.ToLower().Equals("/updatewsdl"))
                     {
                         ConfiguracaoApp.AtualizaWSDL = true;
                         continue;
                     }
                 }
 
-
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
-
-            if(Aplicacao.AppExecutando(silencioso))
+            if (Aplicacao.AppExecutando(silencioso))
             {
                 return;
             }

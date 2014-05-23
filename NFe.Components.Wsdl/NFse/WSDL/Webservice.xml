@@ -1482,6 +1482,43 @@
       <CancelarNfse>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3170206" Nome="Uberlândia - MG" UF="MG" Padrao="DFS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HUberlandiaMG-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municipios que utilizam o padrão TECNOSISTEMAS-->
+  <Estado ID="4314803" Nome="Portão - RS" UF="RS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HPortaoRSEnvioLoteRPSSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HPortaoRSConsultaNFSePorRPS.wsdl</ConsultarNfsePorRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HPortaoRSConsultaNFSePorFaixa.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfse>wsdl\homologacao\HPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PPortaoRSEnvioLoteRPSSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PPortaoRSConsultaNFSePorRPS.wsdl</ConsultarNfsePorRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PPortaoRSConsultaNFSePorFaixa.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfse>wsdl\producao\PPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Sequencia de tag´s de template-->
   <Estado ID="999" Nome="Template" UF="XX">
     <LocalHomologacao>

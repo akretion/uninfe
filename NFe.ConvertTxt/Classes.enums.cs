@@ -137,6 +137,7 @@ namespace NFe.ConvertTxt
     }
     public enum TpcnTipoImpressao 
     { 
+        tiNao = 0,
         tiRetrato = 1, 
         tiPaisagem = 2,
         tiDANFESimplificado = 3,

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkBoxCompactaNFe = new System.Windows.Forms.CheckBox();
             this.cbIndSinc = new System.Windows.Forms.CheckBox();
             this.lblServico = new System.Windows.Forms.Label();
             this.cbServico = new System.Windows.Forms.ComboBox();
@@ -89,6 +90,8 @@
             this.button_SelectPastaLote = new System.Windows.Forms.Button();
             this.button_SelectPastaValidar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lbPINCertificado = new System.Windows.Forms.Label();
+            this.txtPinCertificado = new System.Windows.Forms.TextBox();
             this.lblCertificadoArquivo = new System.Windows.Forms.Label();
             this.txtArquivoCertificado = new System.Windows.Forms.TextBox();
             this.lblSenhaCertificado = new System.Windows.Forms.Label();
@@ -151,11 +154,12 @@
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(604, 433);
+            this.tabControl3.Size = new System.Drawing.Size(604, 450);
             this.tabControl3.TabIndex = 2;
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.checkBoxCompactaNFe);
             this.tabPage6.Controls.Add(this.cbIndSinc);
             this.tabPage6.Controls.Add(this.lblServico);
             this.tabPage6.Controls.Add(this.cbServico);
@@ -190,10 +194,20 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(596, 407);
+            this.tabPage6.Size = new System.Drawing.Size(596, 424);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Diversos";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCompactaNFe
+            // 
+            this.checkBoxCompactaNFe.AutoSize = true;
+            this.checkBoxCompactaNFe.Location = new System.Drawing.Point(8, 396);
+            this.checkBoxCompactaNFe.Name = "checkBoxCompactaNFe";
+            this.checkBoxCompactaNFe.Size = new System.Drawing.Size(202, 17);
+            this.checkBoxCompactaNFe.TabIndex = 31;
+            this.checkBoxCompactaNFe.Text = "Compactar NFe para enviar a SEFAZ";
+            this.checkBoxCompactaNFe.UseVisualStyleBackColor = true;
             // 
             // cbIndSinc
             // 
@@ -223,6 +237,7 @@
             this.cbServico.Name = "cbServico";
             this.cbServico.Size = new System.Drawing.Size(173, 21);
             this.cbServico.TabIndex = 4;
+            this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
             this.cbServico.Leave += new System.EventHandler(this.cbServico_Leave);
             // 
             // lblSenhaWS
@@ -270,7 +285,7 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
-    "denegados?";
+                "denegados?";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // checkBoxGravarEventosDeTerceiros
@@ -435,7 +450,7 @@
             this.lbl_udDiasLimpeza.Size = new System.Drawing.Size(212, 36);
             this.lbl_udDiasLimpeza.TabIndex = 16;
             this.lbl_udDiasLimpeza.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
-    "0 para infinito.";
+                "0 para infinito.";
             // 
             // lbl_DiretorioSalvarComo
             // 
@@ -559,7 +574,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(596, 407);
+            this.tabPage7.Size = new System.Drawing.Size(596, 424);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Pastas";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -601,7 +616,7 @@
             this.lbl_textBox_PastaEnvioXML.Size = new System.Drawing.Size(497, 13);
             this.lbl_textBox_PastaEnvioXML.TabIndex = 1;
             this.lbl_textBox_PastaEnvioXML.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
-    " os WebServices:";
+                " os WebServices:";
             // 
             // lbl_textBox_PastaValidar
             // 
@@ -640,7 +655,7 @@
             this.lbl_textBox_PastaLote.Size = new System.Drawing.Size(499, 13);
             this.lbl_textBox_PastaLote.TabIndex = 25;
             this.lbl_textBox_PastaLote.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
-    " os WebServices:";
+                " os WebServices:";
             // 
             // textBox_PastaBackup
             // 
@@ -708,7 +723,7 @@
             this.lbl_textBox_PastaXmlErro.Size = new System.Drawing.Size(445, 13);
             this.lbl_textBox_PastaXmlErro.TabIndex = 19;
             this.lbl_textBox_PastaXmlErro.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
-    "o envio:";
+                "o envio:";
             // 
             // lbl_textBox_PastaRetornoXML
             // 
@@ -729,6 +744,7 @@
             this.textBox_PastaEnvioXML.Size = new System.Drawing.Size(542, 20);
             this.textBox_PastaEnvioXML.TabIndex = 6;
             this.textBox_PastaEnvioXML.TextChanged += new System.EventHandler(this.changed_Modificado);
+            this.textBox_PastaEnvioXML.Validated += new System.EventHandler(this.textBox_PastaEnvioXML_Validated);
             // 
             // button_SelecionarPastaDownload
             // 
@@ -820,6 +836,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lbPINCertificado);
+            this.tabPage3.Controls.Add(this.txtPinCertificado);
             this.tabPage3.Controls.Add(this.lblCertificadoArquivo);
             this.tabPage3.Controls.Add(this.txtArquivoCertificado);
             this.tabPage3.Controls.Add(this.lblSenhaCertificado);
@@ -831,10 +849,29 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(596, 407);
+            this.tabPage3.Size = new System.Drawing.Size(596, 424);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Certificado digital";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lbPINCertificado
+            // 
+            this.lbPINCertificado.AutoSize = true;
+            this.lbPINCertificado.Location = new System.Drawing.Point(3, 342);
+            this.lbPINCertificado.Name = "lbPINCertificado";
+            this.lbPINCertificado.Size = new System.Drawing.Size(146, 13);
+            this.lbPINCertificado.TabIndex = 32;
+            this.lbPINCertificado.Text = "PIN Certificado A3 (opcional):";
+            // 
+            // txtPinCertificado
+            // 
+            this.txtPinCertificado.Location = new System.Drawing.Point(4, 358);
+            this.txtPinCertificado.Name = "txtPinCertificado";
+            this.txtPinCertificado.PasswordChar = '*';
+            this.txtPinCertificado.Size = new System.Drawing.Size(100, 20);
+            this.txtPinCertificado.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.txtPinCertificado, "Deverá ser usado somente para certificados A3");
+            this.txtPinCertificado.UseSystemPasswordChar = true;
             // 
             // lblCertificadoArquivo
             // 
@@ -875,7 +912,7 @@
             this.txtSenhaCertificado.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaCertificado.TabIndex = 27;
             this.toolTip1.SetToolTip(this.txtSenhaCertificado, "O arquivo do certificado deverá estar no diretorio da empresa com o nome cert.ccc" +
-        "");
+                    "");
             this.txtSenhaCertificado.UseSystemPasswordChar = true;
             this.txtSenhaCertificado.Visible = false;
             // 
@@ -939,7 +976,7 @@
             this.tabPageDanfe.Location = new System.Drawing.Point(4, 22);
             this.tabPageDanfe.Name = "tabPageDanfe";
             this.tabPageDanfe.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDanfe.Size = new System.Drawing.Size(596, 407);
+            this.tabPageDanfe.Size = new System.Drawing.Size(596, 424);
             this.tabPageDanfe.TabIndex = 3;
             this.tabPageDanfe.Text = "DANFe";
             this.tabPageDanfe.UseVisualStyleBackColor = true;
@@ -968,9 +1005,9 @@
             this.cbDanfeMonProcNfe.AutoSize = true;
             this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(33, 289);
             this.cbDanfeMonProcNfe.Name = "cbDanfeMonProcNfe";
-            this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(234, 17);
+            this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(266, 17);
             this.cbDanfeMonProcNfe.TabIndex = 12;
-            this.cbDanfeMonProcNfe.Text = "XML de distribuição da nota fiscal eletrônica";
+            this.cbDanfeMonProcNfe.Text = "XML de distribuição do documento fiscal eletrônico";
             this.cbDanfeMonProcNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonProcNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -979,9 +1016,9 @@
             this.cbDanfeMonNfe.AutoSize = true;
             this.cbDanfeMonNfe.Location = new System.Drawing.Point(33, 265);
             this.cbDanfeMonNfe.Name = "cbDanfeMonNfe";
-            this.cbDanfeMonNfe.Size = new System.Drawing.Size(163, 17);
+            this.cbDanfeMonNfe.Size = new System.Drawing.Size(195, 17);
             this.cbDanfeMonNfe.TabIndex = 11;
-            this.cbDanfeMonNfe.Text = "XML da nota fiscal eletrônica";
+            this.cbDanfeMonNfe.Text = "XML do documento fiscal eletrônico";
             this.cbDanfeMonNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -1003,7 +1040,7 @@
             this.label17.Size = new System.Drawing.Size(474, 13);
             this.label17.TabIndex = 8;
             this.label17.Text = "Pasta onde deve ser gravado o XML para a impressão do documento fiscal a partir d" +
-    "o DANFeMon:";
+                "o DANFeMon:";
             // 
             // label15
             // 
@@ -1096,7 +1133,7 @@
             this.tabPageFTP.Location = new System.Drawing.Point(4, 22);
             this.tabPageFTP.Name = "tabPageFTP";
             this.tabPageFTP.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFTP.Size = new System.Drawing.Size(596, 407);
+            this.tabPageFTP.Size = new System.Drawing.Size(596, 424);
             this.tabPageFTP.TabIndex = 4;
             this.tabPageFTP.Text = "FTP";
             this.tabPageFTP.UseVisualStyleBackColor = true;
@@ -1167,7 +1204,7 @@
             this.edtFTP_GravaXMLPastaUnica.Size = new System.Drawing.Size(502, 17);
             this.edtFTP_GravaXMLPastaUnica.TabIndex = 7;
             this.edtFTP_GravaXMLPastaUnica.Text = "Gravar os XML\'s autorizados em uma única pasta, se não, serão criadas pastas conf" +
-    "orme a definição";
+                "orme a definição";
             this.edtFTP_GravaXMLPastaUnica.UseVisualStyleBackColor = true;
             this.edtFTP_GravaXMLPastaUnica.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -1388,5 +1425,8 @@
         private System.Windows.Forms.Label lblServico;
         private System.Windows.Forms.ComboBox cbServico;
         private System.Windows.Forms.CheckBox cbIndSinc;
+        private System.Windows.Forms.Label lbPINCertificado;
+        private System.Windows.Forms.TextBox txtPinCertificado;
+        private System.Windows.Forms.CheckBox checkBoxCompactaNFe;
     }
 }

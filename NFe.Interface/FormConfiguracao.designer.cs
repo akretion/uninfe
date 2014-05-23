@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfiguracao));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbSave = new System.Windows.Forms.ToolStripButton();
             this.tbCancel = new System.Windows.Forms.ToolStripButton();
             this.tbDelete = new System.Windows.Forms.ToolStripButton();
             this.tbAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.chkGravarLogOperacao = new System.Windows.Forms.CheckBox();
@@ -133,7 +134,7 @@
             this.tabControl4.Location = new System.Drawing.Point(0, 39);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(611, 448);
+            this.tabControl4.Size = new System.Drawing.Size(611, 469);
             this.tabControl4.TabIndex = 3;
             this.tabControl4.SelectedIndexChanged += new System.EventHandler(this.tabControl4_SelectedIndexChanged);
             // 
@@ -154,7 +155,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(603, 422);
+            this.tabPage9.Size = new System.Drawing.Size(603, 443);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "Geral";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -325,7 +326,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 487);
+            this.ClientSize = new System.Drawing.Size(611, 508);
             this.Controls.Add(this.tabControl4);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
