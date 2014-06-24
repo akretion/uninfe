@@ -103,7 +103,7 @@ namespace NFe.Service
         {
             dadosPedSta.tpAmb = 0;
             dadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
-            dadosPedSta.versao = ConfiguracaoApp.VersaoXMLStatusServico;
+            dadosPedSta.versao = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
 
             ///
             /// danasa 9-2009

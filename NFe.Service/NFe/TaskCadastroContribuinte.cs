@@ -48,7 +48,7 @@ namespace NFe.Service
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", dadosConsCad.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsCad);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);// NFe.ConvertTxt.versoes.VersaoXMLConsCad);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oConsCad, NomeMetodoWS(Servico, dadosConsCad.cUF), oCabecMsg, this, "-cons-cad", "-ret-cons-cad");
@@ -112,7 +112,7 @@ namespace NFe.Service
             this.dadosConsCad.CNPJ = string.Empty;
             this.dadosConsCad.IE = string.Empty;
             this.dadosConsCad.UF = string.Empty;
-            this.dadosConsCad.versao = ConfiguracaoApp.VersaoXMLConsCad;
+            this.dadosConsCad.versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
 
             if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {

@@ -61,7 +61,7 @@ namespace NFe.Service
                     //                      wsProxy.SetProp(oCabecMsg, "indComp", "0");
                     //                  }
                     //                  catch { }
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest);
 
                     //Criar objeto da classe de assinatura digital
                     //AssinaturaDigital oAD = new AssinaturaDigital();

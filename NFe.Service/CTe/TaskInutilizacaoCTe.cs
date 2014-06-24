@@ -47,7 +47,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", dadosPedInut.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLCTeInut);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTeInut);
 
                 //Criar objeto da classe de assinatura digita
                 AssinaturaDigital oAD = new AssinaturaDigital();

@@ -46,7 +46,7 @@ namespace NFe.Service
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, dadosPedRec.versao);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF));
+                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.tpAmb));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -54,7 +54,7 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF), oCabecMsg, this);
+                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.tpAmb), oCabecMsg, this);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo
@@ -373,7 +373,7 @@ namespace NFe.Service
 
                                 //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                 if (procNFeJaNaAutorizada)
-                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "danfe");
+                                    TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, (oLerXml.oDadosNfe.mod == "65" ? "nfce" : "nfe"));
 
                                 //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012
                                 NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe);

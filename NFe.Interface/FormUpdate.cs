@@ -99,7 +99,7 @@ namespace NFe.Interface
                 this.Download();
 
                 //Executar o instalador do uninfe
-                if (File.Exists(LocalArq))
+                if (File.Exists(LocalArq) && !Cancelado)
                 {
                     System.Diagnostics.Process.Start(this.LocalArq, "/SILENT /DIR=" + this.PastaInstalar);
 
@@ -107,7 +107,7 @@ namespace NFe.Interface
                     Propriedade.EncerrarApp = true;
                     this.MdiParent.Close();
                 }
-                else if(!Cancelado)
+                else if (!Cancelado)
                     MessageBox.Show("Não foi possível localizar o instalador da atualização", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -124,7 +124,6 @@ namespace NFe.Interface
             {
                 strResponse.Close();
                 strLocal.Close();
-                File.Delete(LocalArq);                
             }
 
             Cancelado = true;
@@ -213,6 +212,9 @@ namespace NFe.Interface
 
                     if (strLocal != null)
                         strLocal.Close();
+
+                    webRequest.Abort();
+                    webResponse.Close();
                 }
             }
         }

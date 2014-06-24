@@ -50,7 +50,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLCTe);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTe);
 
                 //
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 

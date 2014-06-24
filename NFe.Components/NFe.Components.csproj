@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -83,10 +84,27 @@
     <Compile Include="NativeMethods.cs" />
     <Compile Include="ParamEnvioXML.cs" />
     <Compile Include="POSTRequest.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SchemaXML.cs" />
     <Compile Include="ServiceProcess.cs" />
     <Compile Include="Smf.cs" />
+    <Compile Include="SystemPro\SystemPro.cs" />
+    <Compile Include="SystemPro\SystemProBase.cs" />
     <Compile Include="TipoArquivoXML.cs" />
+    <Compile Include="Web References\br.gov.rs.erechim.nfse.www.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.gov.rs.erechim.nfse.www.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="WebServiceNFSe.cs" />
     <Compile Include="Propriedade.cs" />
     <Compile Include="DiretorioSalvarComo.cs" />
@@ -118,6 +136,59 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.wsdl" />
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.p\NfseService.wsdl" />
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.p\NfseService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.rs.erechim.nfse.www.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.rs.erechim.nfse.www.p\</RelPath>
+      <UpdateFromURL>https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_rs_erechim_nfse_www_p_NfseService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService_Homolog/NfseService_Homolog%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.rs.erechim.nfse.www.h\</RelPath>
+      <UpdateFromURL>https://www.nfse.erechim.rs.gov.br:8182/NfseService_Homolog/NfseService_Homolog%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_rs_erechim_nfse_www_h_NfseService_Homolog</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

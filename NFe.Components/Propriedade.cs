@@ -607,6 +607,10 @@ namespace NFe.Components
             /// </summary>
             public const string Inu_ERR = "-inu.err";
             /// <summary>
+            /// -rec.xml
+            /// </summary>
+            public static string Rec = "-rec.xml";
+            /// <summary>
             /// -rec.err
             /// </summary>
             public static string Rec_ERR = "-rec.err";

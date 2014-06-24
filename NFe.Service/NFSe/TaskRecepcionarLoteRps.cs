@@ -9,6 +9,7 @@ using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
+using NFe.Components.SystemPro;
 
 namespace NFe.Service.NFSe
 {
@@ -31,7 +32,7 @@ namespace NFe.Service.NFSe
             try
             {
                 oDadosEnvLoteRps = new DadosEnvLoteRps(emp);
-                
+
                 EnvLoteRps(emp, NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -154,11 +155,19 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.SYSTEMPRO:
+                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].tpAmb,
+                            Empresa.Configuracoes[emp].PastaRetorno, Empresa.Configuracoes[emp].X509Certificado);
+                        AssinaturaDigital ad = new AssinaturaDigital();
+                        ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                        syspro.EmiteNF(NomeArquivoXML);
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

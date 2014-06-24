@@ -115,7 +115,7 @@ namespace NFe.Service
             dadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
             dadosPedSit.chNFe = string.Empty;
             dadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            dadosPedSit.versao = ConfiguracaoApp.VersaoXMLPedSit;
+            dadosPedSit.versao = NFe.ConvertTxt.versoes.VersaoXMLPedSit;
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
@@ -386,7 +386,7 @@ namespace NFe.Service
 
                                             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                             if (procNFeJaNaAutorizada)
-                                                TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "danfe");
+                                                TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, (oLerXml.oDadosNfe.mod == "65" ? "nfce" : "nfe"));
                                         }
 
                                         if (File.Exists(strArquivoNFeProc))

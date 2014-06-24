@@ -56,7 +56,7 @@ namespace NFe.Service
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                 wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLCTeEvento);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTeEvento);
 
                 //Criar objeto da classe de assinatura digital
                 AssinaturaDigital oAD = new AssinaturaDigital();
@@ -194,8 +194,6 @@ namespace NFe.Service
                                 switch (Convert.ToInt32(tpEvento))
                                 {
                                     case 110111: //Cancelamento
-                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
-                                        break;
                                     case 110110: //CCe
                                         NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
                                         break;

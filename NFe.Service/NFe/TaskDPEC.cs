@@ -48,7 +48,7 @@ namespace NFe.Service
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     //oWSProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/dadosEnvDPEC.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEnvDPEC);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC);
 
                     //Criar objeto da classe de assinatura digita
                     AssinaturaDigital oAD = new AssinaturaDigital();
@@ -277,7 +277,7 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLConsDPEC);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLConsDPEC);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, "sceConsultaDPEC", oCabecMsg, this);

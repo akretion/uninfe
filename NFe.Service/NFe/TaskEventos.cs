@@ -131,7 +131,7 @@ namespace NFe.Service
                     string xmlExtRetorno = string.Empty;
 
                     wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLEvento);
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEvento);
 
                     if (novaNomenclatura)
                     {
@@ -622,8 +622,6 @@ namespace NFe.Service
                                             switch (Convert.ToInt32(tpEvento))
                                             {
                                                 case 110111: //Cancelamento
-                                                    NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
-                                                    break;
                                                 case 110110: //CCe
                                                     NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
                                                     break;

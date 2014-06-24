@@ -67,22 +67,6 @@ namespace UniNFeServico
             //Carregar as configurações antes de executar os serviços do UNINFE
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
             ConfiguracaoApp.StartVersoes();
-            /*
-            ConfiguracaoApp.CarregarDados();
-            ConfiguracaoApp.VersaoXMLCanc = "2.00";
-            ConfiguracaoApp.VersaoXMLConsCad = "2.00";
-            ConfiguracaoApp.VersaoXMLInut = "2.00";
-            ConfiguracaoApp.VersaoXMLNFe = "2.00";
-            ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-            ConfiguracaoApp.VersaoXMLPedSit = "2.00";   //<<<danasa 6-2011
-            ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
-            ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
-            ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
-            ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-            ConfiguracaoApp.VersaoXMLEnvCCe = "1.00";   //<<<danasa 6-2011
-            Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
-            SchemaXML.CriarListaIDXML();
-             */ 
             #endregion
 
             // Executar as conversões de atualizações de versão quando tiver

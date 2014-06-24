@@ -62,38 +62,38 @@ namespace NFe.Settings
         #region Propriedades das versões dos XML´s
 
         #region NFe
-        public static string VersaoXMLStatusServico { get; set; }
-        public static string VersaoXMLNFe { get; set; }
-        public static string VersaoXMLPedRec { get; set; }
-        public static string VersaoXMLCanc { get; set; }
-        public static string VersaoXMLInut { get; set; }
-        public static string VersaoXMLPedSit { get; set; }
-        public static string VersaoXMLConsCad { get; set; }
-        public static string VersaoXMLCabecMsg { get; set; }
-        public static string VersaoXMLEnvDPEC { get; set; }
-        public static string VersaoXMLConsDPEC { get; set; }
-        public static string VersaoXMLEnvDownload { get; set; }
-        public static string VersaoXMLEnvConsultaNFeDest { get; set; }
-        public static string VersaoXMLEvento { get; set; }
+        //public static string VersaoXMLStatusServico { get; set; }
+        //public static string VersaoXMLNFe { get; set; }
+        //public static string VersaoXMLPedRec { get; set; }
+        //public static string VersaoXMLCanc { get; set; }
+        //public static string VersaoXMLInut { get; set; }
+        //public static string VersaoXMLPedSit { get; set; }
+        //public static string VersaoXMLConsCad { get; set; }
+        //public static string VersaoXMLCabecMsg { get; set; }
+        //public static string VersaoXMLEnvDPEC { get; set; }
+        //public static string VersaoXMLConsDPEC { get; set; }
+        //public static string VersaoXMLEnvDownload { get; set; }
+        //public static string VersaoXMLEnvConsultaNFeDest { get; set; }
+        //public static string VersaoXMLEvento { get; set; }
         #endregion
 
         #region MDFe
-        public static string VersaoXMLMDFeCabecMsg { get; set; }
-        public static string VersaoXMLMDFeStatusServico { get; set; }
-        public static string VersaoXMLMDFe { get; set; }
-        public static string VersaoXMLMDFePedRec { get; set; }
-        public static string VersaoXMLMDFePedSit { get; set; }
-        public static string VersaoXMLMDFeEvento { get; set; }
+        //public static string VersaoXMLMDFeCabecMsg { get; set; }
+        //public static string VersaoXMLMDFeStatusServico { get; set; }
+        //public static string VersaoXMLMDFe { get; set; }
+        //public static string VersaoXMLMDFePedRec { get; set; }
+        //public static string VersaoXMLMDFePedSit { get; set; }
+        //public static string VersaoXMLMDFeEvento { get; set; }
         #endregion
 
         #region CTe
-        public static string VersaoXMLCTeCabecMsg { get; set; }
-        public static string VersaoXMLCTeStatusServico { get; set; }
-        public static string VersaoXMLCTe { get; set; }
-        public static string VersaoXMLCTePedRec { get; set; }
-        public static string VersaoXMLCTePedSit { get; set; }
-        public static string VersaoXMLCTeInut { get; set; }
-        public static string VersaoXMLCTeEvento { get; set; }
+        //public static string VersaoXMLCTeCabecMsg { get; set; }
+        //public static string VersaoXMLCTeStatusServico { get; set; }
+        //public static string VersaoXMLCTe { get; set; }
+        //public static string VersaoXMLCTePedRec { get; set; }
+        //public static string VersaoXMLCTePedSit { get; set; }
+        //public static string VersaoXMLCTeInut { get; set; }
+        //public static string VersaoXMLCTeEvento { get; set; }
         #endregion
 
         #endregion
@@ -456,38 +456,38 @@ namespace NFe.Settings
             {
                 case TipoAplicativo.Nfe:
                     #region NF-e
-                    ConfiguracaoApp.VersaoXMLCanc = "2.00";
-                    ConfiguracaoApp.VersaoXMLConsCad = "2.00";
-                    ConfiguracaoApp.VersaoXMLInut = "2.00";
-                    ConfiguracaoApp.VersaoXMLNFe = "2.00";
-                    ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-                    ConfiguracaoApp.VersaoXMLPedSit = "2.01";
-                    ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
-                    ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
-                    ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
-                    ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-                    ConfiguracaoApp.VersaoXMLEvento = "1.00";
-                    ConfiguracaoApp.VersaoXMLEnvDownload = "1.00";
-                    ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest = "1.01";
+                    //ConfiguracaoApp.VersaoXMLCanc = "2.00";
+                    //ConfiguracaoApp.VersaoXMLConsCad = "2.00";
+                    //ConfiguracaoApp.VersaoXMLInut = "2.00";
+                    //ConfiguracaoApp.VersaoXMLNFe = "2.00";
+                    //ConfiguracaoApp.VersaoXMLPedRec = "2.00";
+                    //ConfiguracaoApp.VersaoXMLPedSit = "2.01";
+                    //ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
+                    //ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
+                    //ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
+                    //ConfiguracaoApp.VersaoXMLEvento = "1.00";
+                    //ConfiguracaoApp.VersaoXMLEnvDownload = "1.00";
+                    //ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest = "1.01";
                     #endregion
 
                     #region MDF-e
-                    ConfiguracaoApp.VersaoXMLMDFeCabecMsg = "1.00";
-                    ConfiguracaoApp.VersaoXMLMDFeStatusServico = "1.00";
-                    ConfiguracaoApp.VersaoXMLMDFe = "1.00";
-                    ConfiguracaoApp.VersaoXMLMDFePedRec = "1.00";
-                    ConfiguracaoApp.VersaoXMLMDFePedSit = "1.00";
-                    ConfiguracaoApp.VersaoXMLMDFeEvento = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFeCabecMsg = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFeStatusServico = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFe = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFePedRec = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFePedSit = "1.00";
+                    //ConfiguracaoApp.VersaoXMLMDFeEvento = "1.00";
                     #endregion
 
                     #region CT-e
-                    ConfiguracaoApp.VersaoXMLCTeCabecMsg = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTeStatusServico = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTe = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTePedRec = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTePedSit = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTeInut = "2.00";
-                    ConfiguracaoApp.VersaoXMLCTeEvento = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTeCabecMsg = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTeStatusServico = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTe = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTePedRec = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTePedSit = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTeInut = "2.00";
+                    //ConfiguracaoApp.VersaoXMLCTeEvento = "2.00";
                     #endregion
 
                     Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
@@ -495,14 +495,14 @@ namespace NFe.Settings
                     break;
 
                 case TipoAplicativo.Nfse:
-                    ConfiguracaoApp.VersaoXMLCanc = "1.03";
-                    ConfiguracaoApp.VersaoXMLConsCad = "1.03";
-                    ConfiguracaoApp.VersaoXMLInut = "1.03";
-                    ConfiguracaoApp.VersaoXMLNFe = "1.03";
-                    ConfiguracaoApp.VersaoXMLPedRec = "1.03";
-                    ConfiguracaoApp.VersaoXMLPedSit = "1.03";
-                    ConfiguracaoApp.VersaoXMLStatusServico = "1.03";
-                    ConfiguracaoApp.VersaoXMLCabecMsg = "1.03";
+                    //ConfiguracaoApp.VersaoXMLCanc = "1.03";
+                    //ConfiguracaoApp.VersaoXMLConsCad = "1.03";
+                    //ConfiguracaoApp.VersaoXMLInut = "1.03";
+                    //ConfiguracaoApp.VersaoXMLNFe = "1.03";
+                    //ConfiguracaoApp.VersaoXMLPedRec = "1.03";
+                    //ConfiguracaoApp.VersaoXMLPedSit = "1.03";
+                    //ConfiguracaoApp.VersaoXMLStatusServico = "1.03";
+                    //ConfiguracaoApp.VersaoXMLCabecMsg = "1.03";
                     Propriedade.nsURI = "http://www.abrasf.org.br/";
                     break;
             }

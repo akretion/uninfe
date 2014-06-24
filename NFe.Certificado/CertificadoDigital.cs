@@ -22,12 +22,6 @@ namespace NFe.Certificado
         /// </summary>
         public X509Certificate2 oCertificado { get; private set; }
         /// <summary>
-        /// True significa que o certificado informado para o método "PrepInfCertificado()" 
-        /// foi localizado e os dados foram preparados, false significa que o certificado 
-        /// não foi localizado.
-        /// </summary>
-        public bool lLocalizouCertificado { get; private set; }
-        /// <summary>
         /// Data inicial da validade do certificado
         /// </summary>
         public DateTime dValidadeInicial { get; private set; }
@@ -101,55 +95,26 @@ namespace NFe.Certificado
         }
 
         /// <summary>
-        /// Pega algumas informações do certificado digital informado por parâmetro para o método
-        /// e disponibiliza em propriedades para utilização
+        /// Pega algumas informações do certificado digital informado por parâmetro para o método e disponibiliza em propriedades para utilização
         /// </summary>
-        /// <param name="pCertificado">Certificado de onde é para extrair as informações</param>
-        /// <example>
-        /// CertificadoDigitalClass oCertDig = new CertificadoDigitalClass();
-        /// if (oCertDig.SelecionarCertificado() == true)
-        /// {
-        ///    oCertDig.SelecionarCertificado(); //Selecionar o certificado atualizando a propriedade "oCertificado"
-        ///    oCertDig.PrepInfCertificado(oCertDig.oCertificado); //Preparar as informações do certificado
-        ///    MessageBox.Show(oCertDig.sSubject); //Demonstra o subject do certificado
-        /// }
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>24/01/2009</date>
-        public void PrepInfCertificado(X509Certificate2 pCertificado)
+        /// <param name="empresa">Objeto com os dados da empresa</param>
+        /// <returns>Retorna se localizou o certificado ou não (True or False)</returns>
+        public bool PrepInfCertificado(Empresa empresa)
         {
-            string _xnome = pCertificado.Subject.ToString();
+            bool localizouCertificado;
+            X509Certificate2 x509Cert = Empresa.BuscaConfiguracaoCertificado(empresa);
 
-            X509Certificate2 _X509Cert = new X509Certificate2();
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-            X509Certificate2Collection collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, _xnome, false);
-
-            if (collection1.Count == 0)
-                this.lLocalizouCertificado = false;
+            if (x509Cert == null)
+                localizouCertificado = false;
             else
             {
-                _X509Cert = null;
-
-                for (int i = 0; i < collection1.Count; i++)
-                {
-                    //Verificar a validade do certificado
-                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
-                    {
-                        _X509Cert = collection1[i];
-                        break;
-                    }
-                }
-
-                if (_X509Cert == null)
-                    _X509Cert = collection1[0];
-
-                this.sSubject = _X509Cert.Subject;
-                this.dValidadeInicial = _X509Cert.NotBefore;
-                this.dValidadeFinal = _X509Cert.NotAfter;
-                this.lLocalizouCertificado = true;
+                sSubject = x509Cert.Subject;
+                dValidadeInicial = x509Cert.NotBefore;
+                dValidadeFinal = x509Cert.NotAfter;
+                localizouCertificado = true;
             }
+
+            return localizouCertificado;
         }
 
         /// <summary>
@@ -161,9 +126,7 @@ namespace NFe.Certificado
         {
             bool retorna = false;
 
-            PrepInfCertificado(Empresa.Configuracoes[emp].X509Certificado);
-
-            if (lLocalizouCertificado == true)
+            if (PrepInfCertificado(Empresa.Configuracoes[emp]))
             {
                 if (DateTime.Compare(DateTime.Now, dValidadeFinal) > 0)
                 {

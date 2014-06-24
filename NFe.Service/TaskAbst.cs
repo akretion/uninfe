@@ -83,15 +83,16 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
         /// <returns>Nome da classe</returns>
-        protected string NomeClasseWS(Servicos servico, int cUF)
+        protected string NomeClasseWS(Servicos servico, int cUF, int tpAmb)
         {
             string retorna = string.Empty;
 
             switch (Propriedade.TipoAplicativo)
             {
                 case TipoAplicativo.Nfe:
-                    retorna = NomeClasseWSNFe(servico, cUF);
+                    retorna = NomeClasseWSNFe(servico, cUF, tpAmb);
                     break;
                 case TipoAplicativo.Nfse:
                     retorna = NomeClasseWSNFSe(servico, cUF);
@@ -99,6 +100,11 @@ namespace NFe.Service
             }
 
             return retorna;
+        }
+
+        protected string NomeClasseWS(Servicos servico, int cUF)
+        {
+            return NomeClasseWS(servico, cUF, 0);
         }
         #endregion
 
@@ -108,8 +114,9 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
         /// <returns>Nome da classe</returns>
-        private string NomeClasseWSNFe(Servicos servico, int cUF)
+        private string NomeClasseWSNFe(Servicos servico, int cUF, int tpAmb)
         {
             string retorna = string.Empty;
 
@@ -125,11 +132,11 @@ namespace NFe.Service
                 case Servicos.ConsultaStatusServicoNFe:
                     retorna = "NfeStatusServico2";
                     break;
-                case Servicos.PedidoSituacaoLoteNFe2:
-                    retorna = "NfeRetAutorizacao";
-                    break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "NfeRetRecepcao2";
+                    break;
+                case Servicos.PedidoSituacaoLoteNFe2:
+                    retorna = "NfeRetAutorizacao";
                     break;
                 case Servicos.ConsultaCadastroContribuinte:
                     retorna = "CadConsultaCadastro2";
@@ -549,15 +556,16 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
         /// <returns>nome do método da classe de serviço</returns>
-        protected string NomeMetodoWS(Servicos servico, int cUF)
+        protected string NomeMetodoWS(Servicos servico, int cUF, int tpAmb)
         {
             string retorna = string.Empty;
 
             switch (Propriedade.TipoAplicativo)
             {
                 case TipoAplicativo.Nfe:
-                    retorna = NomeMetodoWSNFe(servico, cUF);
+                    retorna = NomeMetodoWSNFe(servico, cUF, tpAmb);
                     break;
                 case TipoAplicativo.Nfse:
                     retorna = NomeMetodoWSNFSe(servico, cUF);
@@ -565,6 +573,11 @@ namespace NFe.Service
             }
 
             return retorna;
+        }
+
+        protected string NomeMetodoWS(Servicos servico, int cUF)
+        {
+            return NomeMetodoWS(servico, cUF, 0);
         }
         #endregion
 
@@ -574,8 +587,9 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
         /// <returns>nome do método da classe de serviço</returns>
-        private string NomeMetodoWSNFe(Servicos servico, int cUF)
+        private string NomeMetodoWSNFe(Servicos servico, int cUF, int tpAmb)
         {
             string retorna = string.Empty;
 
@@ -591,39 +605,21 @@ namespace NFe.Service
                 case Servicos.ConsultaStatusServicoNFe:
                     retorna = "nfeStatusServicoNF2";
                     break;
-                case Servicos.PedidoSituacaoLoteNFe2:
-                    switch (cUF)
-                    {
-                        case 50:
-                            retorna = "nfeRetAutorizacao";
-                            break;
-                        default:
-                            retorna = "nfeRetAutorizacaoLote";
-                            break;
-                    }
-                    break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "nfeRetRecepcao2";
                     break;
+                case Servicos.PedidoSituacaoLoteNFe2:
+                    retorna = "nfeRetAutorizacaoLote";
+                    break;
                 case Servicos.ConsultaCadastroContribuinte:
-                    switch (cUF)
-                    {
-                        case 52:
-                            retorna = "cadConsultaCadastro2";
-                            break;
-                        default:
-                            retorna = "consultaCadastro2";
-                            break;
-                    }
+                    retorna = "consultaCadastro2";
                     break;
                 case Servicos.EnviarLoteNfe2:
                     retorna = "nfeAutorizacaoLote";
                     break;
-
                 case Servicos.EnviarLoteNfeZip2:
                     retorna = "nfeAutorizacaoLoteZip";
                     break;
-
                 case Servicos.EnviarLoteNfe:
                     retorna = "nfeRecepcaoLote2";
                     break;
@@ -1748,7 +1744,7 @@ namespace NFe.Service
                         File.Move(strArquivoNFe, dArquivo);
                     }
 
-                    TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, "danfe");
+                    TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, (oLerXml.oDadosNfe.mod == "65" ? "nfce" : "nfe"));
                 }
             }
         }

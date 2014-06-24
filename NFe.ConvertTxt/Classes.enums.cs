@@ -1,9 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace NFe.ConvertTxt
 {
+    public static class versoes
+    {
+        #region NFe
+        public static string VersaoXMLStatusServico = "3.10";
+        public static string VersaoXMLNFe = "3.10";
+        public static string VersaoXMLPedSit = "3.10";
+        public static string VersaoXMLInut = "3.10";
+        public static string VersaoXMLConsCad = "2.00";
+        public static string VersaoXMLEnvDPEC = "1.01";
+        public static string VersaoXMLConsDPEC = "1.01";
+        public static string VersaoXMLEvento = "1.00";
+        public static string VersaoXMLEnvConsultaNFeDest = "1.01";
+        public static string VersaoXMLEnvDownload = "1.00";
+        //public static string VersaoXMLCanc = "3.10";
+        //public static string NFeCCe = "1.00";
+        //public static string NfeAutorizacao = "3.10";
+        //public static string NfeRetAutorizacao = "3.10";
+        //public static string NfeRetRecepcao = "3.10";
+        #endregion
+
+        #region MDF-e
+        public static string VersaoXMLMDFeCabecMsg = "1.00";
+        public static string VersaoXMLMDFeStatusServico = "1.00";
+        public static string VersaoXMLMDFe = "1.00";
+        public static string VersaoXMLMDFePedRec = "1.00";
+        public static string VersaoXMLMDFePedSit = "1.00";
+        public static string VersaoXMLMDFeEvento = "1.00";
+        #endregion
+
+        #region CT-e
+        public static string VersaoXMLCTeCabecMsg = "2.00";
+        public static string VersaoXMLCTeStatusServico = "2.00";
+        public static string VersaoXMLCTe = "2.00";
+        public static string VersaoXMLCTePedRec = "2.00";
+        public static string VersaoXMLCTePedSit = "2.00";
+        public static string VersaoXMLCTeInut = "2.00";
+        public static string VersaoXMLCTeEvento = "2.00";
+        #endregion
+    }
     ///
     /// NFC-e
     /// 
@@ -150,7 +190,7 @@ namespace NFe.ConvertTxt
         fnNormal = 1,
         fnComplementar = 2,
         fnAjuste = 3,
-        fnNFe_de_Resumo_da_operação_em_contingência_da_NFCe = 4
+        fnDevolucao = 4//NFe_de_Resumo_da_operação_em_contingência_da_NFCe = 4
     }
     public enum TpcnTipoEmissao
     {
@@ -164,6 +204,7 @@ namespace NFe.ConvertTxt
         teSVCSP = 8, 
         teOffLine = 9           //Contingência off-line da NFC-e;
     }
+
     public enum TpcnECFModRef 
     {
         ECFModRefVazio, 
@@ -171,6 +212,23 @@ namespace NFe.ConvertTxt
         ECFModRef2C,
         ECFModRef2D /*'', '2B', '2C','2D'*/
     }
+
+    public enum tpEventos
+    {
+        tpEvCCe = 110110,
+        tpEvCancelamentoNFe = 110111,
+        tpEvConfirmacaoOperacao = 210200,
+        tpEvCienciaOperacao = 210210,
+        tpEvDesconhecimentoOperacao = 210220,
+        tpEvOperacaoNaoRealizada = 210240,
+    	tpEvEPECNFe = 110140,
+
+        tpEvEncerramentoMDFe = 110112,
+        tpEvInclusaoCondutor = 110114,
+        tpEvRegistroPassagem = 310620,
+        tpEvRegistroPassagemBRid = 510620
+    }
+
     public enum TpcnCSTIcms
     {
         cst00,
@@ -207,24 +265,43 @@ namespace NFe.ConvertTxt
         inNaoContribuinte=9
     }
 
+    public enum TpcnMod
+    {
+        modNFe = 55,
+        modNFCe = 65
+    }
+
     public enum TpcnTipoViaTransp
     {
+        [Description("Marítima")]
         tvMaritima = 1,
+        [Description("Fluvial")]
         tvFluvial = 2,
+        [Description("Lacustre")]
         tvLacustre = 3,
+        [Description("Aerea")]
         tvAerea = 4,
+        [Description("Postal")]
         tvPostal = 5,
+        [Description("Ferroviária")]
         tvFerroviaria = 6,
+        [Description("Rodoviária")]
         tvRodoviaria = 7,
+        [Description("Conduto/Rede Transmissão")]
         tvConduto = 8,
+        [Description("Meios próprios")]
         tvMeiosProprios = 9,
+        [Description("Entrada/Saida ficta")]
         tvEntradaSaidaFicta = 10
     }
 
     public enum TpcnTipoIntermedio
     {
+        [Description("Importação por conta própria")]
         tiContaPropria = 1,
+        [Description("Importação por conta e ordem")]
         tiContaOrdem = 2,
+        [Description("Importação por encomenda")]
         tiEncomenda = 3
     }
 

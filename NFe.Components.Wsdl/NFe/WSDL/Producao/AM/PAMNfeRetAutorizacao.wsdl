@@ -64,7 +64,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeRetAutorizacao">
     <wsdl:port name="NfeRetAutorizacaoSoap12" binding="tns:NfeRetAutorizacaoSoap12">
-      <soap12:address location="https://nfe.sefaz.am.gov.br/services2/services/NFeRetAutorizacao"/>
+      <soap12:address location="https://nfe.sefaz.am.gov.br/services2/services/NfeRetAutorizacao"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

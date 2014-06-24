@@ -77,6 +77,16 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\homologacao\HThemaTaquaraRSCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalHomologacao>";
 
+                        case 4307708: //Esteio - RS 
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HThemaEsteioRSRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HThemaEsteioRSCancelamento.wsdl</CancelarNfse>" +
+                                   "</LocalHomologacao>";
+
                         default:
                             return "<LocalHomologacao>" +
                                    @"<RecepcionarLoteRps>wsdl\homologacao\HThemaRemessa.wsdl</RecepcionarLoteRps>" +
@@ -364,6 +374,27 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</CancelarNfse>" +
                                    @"</LocalHomologacao>";
 
+                        case 3552205: // Sorocaba - SP
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</CancelarNfse>" +
+                                   @"</LocalHomologacao>";
+
+                        case 3303500: //Nova Iguaçu - RJ
+                            return "<LocalHomologacao>" +
+                                   @"<RecepcionarLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</CancelarNfse>" +
+                                   @"</LocalHomologacao>";
+
+
                         default: // Campinas - SP
                             return "<LocalHomologacao>" +
                                     @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</RecepcionarLoteRps>" +
@@ -385,6 +416,15 @@ namespace NFe.Components
                            @"<ConsultarNfse>wsdl\homologacao\HPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>" +
                            @"<ConsultarLoteRps>wsdl\homologacao\HPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
                            @"<CancelarNfse>wsdl\homologacao\HPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>" +
+                           @"</LocalHomologacao>";
+                #endregion
+
+                #region SYSTEMPRO
+                case PadroesNFSe.SYSTEMPRO: // Erechim - RS
+                    return "<LocalHomologacao>" +
+                           @"<RecepcionarLoteRps>wsdl\homologacao\HErechimRS-SystemPro.wsdl</RecepcionarLoteRps>" +
+                           @"<ConsultarNfse>wsdl\homologacao\HErechimRS-SystemPro.wsdl</ConsultarNfse>" +
+                           @"<CancelarNfse>wsdl\homologacao\HErechimRS-SystemPro.wsdl</CancelarNfse>" +
                            @"</LocalHomologacao>";
                 #endregion
 
@@ -441,6 +481,15 @@ namespace NFe.Components
                                    @"<CancelarNfse>wsdl\producao\PThemaTaquaraRSCancelamento.wsdl</CancelarNfse>" +
                                    "</LocalProducao>";
 
+                        case 4307708: // Esteio - RS
+                            return "<LocalProducao>" +
+                                   @"<RecepcionarLoteRps>wsdl\producao\PThemaEsteioRSRemessa.wsdl</RecepcionarLoteRps>" +
+                                   @"<ConsultarSituacaoLoteRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarSituacaoLoteRps>" +
+                                   @"<ConsultarNfsePorRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarNfsePorRps>" +
+                                   @"<ConsultarNfse>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarNfse>" +
+                                   @"<ConsultarLoteRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarLoteRps>" +
+                                   @"<CancelarNfse>wsdl\producao\PThemaEsteioRSCancelamento.wsdl</CancelarNfse>" +
+                                   "</LocalProducao>";
                         default:
                             return "<LocalProducao>" +
                                    @"<RecepcionarLoteRps>wsdl\producao\PThemaRemessa.wsdl</RecepcionarLoteRps>" +
@@ -764,6 +813,26 @@ namespace NFe.Components
                                     @"<CancelarNfse>wsdl\producao\PUberlandiaMGDFSLoteRps.wsdl</CancelarNfse>" +
                                     @"</LocalProducao>";
 
+                        case 3552205: // Sorocaba - SP 
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                        case 3303500: //Nova Iguaçu - RS
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
                         default: // Campinas - SP
                             return "<LocalProducao>" +
                                     @"<RecepcionarLoteRps>wsdl\producao\PCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
@@ -785,6 +854,15 @@ namespace NFe.Components
                            @"<ConsultarNfse>wsdl\producao\PPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>" +
                            @"<ConsultarLoteRps>wsdl\producao\PPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>" +
                            @"<CancelarNfse>wsdl\producao\PPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>" +
+                           @"</LocalProducao>";
+                #endregion
+
+                #region SYSTEMPRO
+                case PadroesNFSe.SYSTEMPRO: // Erechim - RS
+                    return "<LocalProducao>" +
+                           @"<RecepcionarLoteRps>wsdl\producao\PErechimRS-SystemPro.wsdl</RecepcionarLoteRps>" +
+                           @"<ConsultarNfse>wsdl\producao\PErechimRS-SystemPro.wsdl</ConsultarNfse>" +
+                           @"<CancelarNfse>wsdl\producao\PErechimRS-SystemPro.wsdl</CancelarNfse>" +
                            @"</LocalProducao>";
                 #endregion
 

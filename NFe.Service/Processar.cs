@@ -23,7 +23,7 @@ namespace NFe.Service
         #region Métodos gerais
 
         #region ProcessaArquivo()
-        public void ProcessaArquivo(int emp, string arquivo)//, Servicos servico)
+        public void ProcessaArquivo(int emp, string arquivo)
         {
             try
             {

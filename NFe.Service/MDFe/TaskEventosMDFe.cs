@@ -56,7 +56,7 @@ namespace NFe.Service
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                 wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLMDFeEvento);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento);
 
                 //Criar objeto da classe de assinatura digital
                 AssinaturaDigital oAD = new AssinaturaDigital();

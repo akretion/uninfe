@@ -41,6 +41,9 @@ namespace NFe.Service
                 lerXml.Mdfe(NomeArquivoXML);
                 string idLote = lerXml.oDadosNfe.idLote;
 
+                if (lerXml.oDadosNfe.mod == "58" && Empresa.Configuracoes[emp].Servico != TipoAplicativo.MDFe)
+                    throw new Exception("A empresa não está configurada como MDF-e");
+
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), string.Empty);
 
@@ -50,7 +53,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLMDFe);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFe);
 
                 //
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 

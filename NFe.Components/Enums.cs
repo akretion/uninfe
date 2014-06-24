@@ -413,6 +413,11 @@ namespace NFe.Components
         /// Prefeitura de Portão - RS
         /// </summary>
         TECNOSISTEMAS,
+        /// <summary>
+        /// Padrão System-PRO
+        /// Prefeitura de Erechim - RS
+        /// </summary>
+        SYSTEMPRO
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

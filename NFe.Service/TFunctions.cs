@@ -482,7 +482,7 @@ namespace NFe.Service
         #endregion
 
         #region ExecutaUniDanfe()
-        public static void ExecutaUniDanfe(string NomeArqXMLNFe, DateTime DataEmissaoNFe, string tipo)
+        public static void ExecutaUniDanfe(string nomeArqXMLNFe, DateTime dataEmissaoNFe, string tipo)
         {
             int emp = Functions.FindEmpresaByThread();
             if (tipo == "")
@@ -490,7 +490,7 @@ namespace NFe.Service
                 for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
                     Empresa empresa = Empresa.Configuracoes[i];
-                    if (Path.GetDirectoryName(NomeArqXMLNFe).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()))
+                    if (Path.GetDirectoryName(nomeArqXMLNFe).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()))
                     {
                         emp = i;
                         break;
@@ -509,66 +509,76 @@ namespace NFe.Service
                 string fEmail = string.Empty;
                 string fProtocolo = "";
 
-                if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.Den))
+                if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.Den))
                 {
-                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(DataEmissaoNFe);
-                    arqProcNFe = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den, ".xml") + ".xml");
+                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dataEmissaoNFe);
+                    arqProcNFe = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den, ".xml") + ".xml");
                 }
                 else
                 {
-                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(DataEmissaoNFe);
-                    arqProcNFe = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml");
+                    switch (tipo)
+                    {
+                        case "dacte": //CTe
+                            nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dataEmissaoNFe);
+                            arqProcNFe = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe, ".xml") + ".xml");
+                            break;
+
+                        default: //NFe
+                            nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dataEmissaoNFe);
+                            arqProcNFe = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml");
+                            break;
+                    }
                 }
 
-                if (tipo == "" && !File.Exists(arqProcNFe) && File.Exists(NomeArqXMLNFe))
+                if (tipo == "" && !File.Exists(arqProcNFe) && File.Exists(nomeArqXMLNFe))
                 {
-                    tipo = "danfe";
-                    arqProcNFe = NomeArqXMLNFe;
+                    tipo = "nfe";
+                    arqProcNFe = nomeArqXMLNFe;
                 }
 
-                if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
                 {
                     fExtensao = Propriedade.ExtRetorno.retDPEC_XML;
-                    tipo = "danfe";
+                    tipo = "nfe";
                     ///
                     ///le o protocolo do DPEC
-                    string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                    string ctemp = File.ReadAllText(nomeArqXMLNFe);
                     DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRegDPEC>", "</dhRegDPEC>"));
                     fProtocolo = RetornarConteudoEntre(ctemp, "<nRegDPEC>", "</nRegDPEC>");
                     fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
                 }
                 else
-                    if (NomeArqXMLNFe.EndsWith("_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe)) //cancelamento por evento NFe
+                    if (nomeArqXMLNFe.EndsWith("_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe)) //cancelamento por evento NFe
                     {
                         fExtensao = "_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe;
-                        tipo = "danfe";
+                        tipo = "nfe";
                         ///
                         ///le o protocolo de cancelamento
-                        string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                        string ctemp = File.ReadAllText(nomeArqXMLNFe);
                         DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>"));
                         fProtocolo = RetornarConteudoEntre(ctemp, "</dhRegEvento><nProt>", "</nProt>");
                         fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
                     }
-                    else if (NomeArqXMLNFe.EndsWith("_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe)) //cancelamento por evento CTe
+                    else if (nomeArqXMLNFe.EndsWith("_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe)) //cancelamento por evento CTe
                     {
                         fExtensao = "_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
-                        tipo = "dacte";
+                        tipo = "cte";
                         ///
                         ///le o protocolo de cancelamento
-                        string ctemp = File.ReadAllText(NomeArqXMLNFe);
+                        string ctemp = File.ReadAllText(nomeArqXMLNFe);
                         DateTime dhRegEvento = Functions.GetDateTime(RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>"));
                         fProtocolo = RetornarConteudoEntre(ctemp, "</dhRegEvento><nProt>", "</nProt>");
                         fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
                     }
                     else
-                        if (tipo.Equals("cce") || NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoNFe))
+                        if (tipo.Equals("cce") || nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoNFe))
                         {
                             tipo = "cce";
                             bool foundCCe = false;
                             for (int nSeq = 1; nSeq < 21; ++nSeq)
                             {
                                 fExtensao = "_" + nSeq.ToString("00") + Propriedade.ExtRetorno.ProcEventoNFe;
-                                if (NomeArqXMLNFe.EndsWith(fExtensao))
+                                if (nomeArqXMLNFe.EndsWith(fExtensao))
                                 {
                                     foundCCe = true;
                                     break;
@@ -577,14 +587,14 @@ namespace NFe.Service
                             if (!foundCCe)
                                 fExtensao = string.Empty;
                         }
-                        else if ((tipo.Equals("ccce") || NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe)))
+                        else if ((tipo.Equals("ccce") || nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe)))
                         {
                             tipo = "ccce";
                             bool foundCCe = false;
                             for (int nSeq = 1; nSeq < 21; ++nSeq)
                             {
                                 fExtensao = "_110110_" + nSeq.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
-                                if (NomeArqXMLNFe.EndsWith(fExtensao))
+                                if (nomeArqXMLNFe.EndsWith(fExtensao))
                                 {
                                     foundCCe = true;
                                     break;
@@ -594,33 +604,33 @@ namespace NFe.Service
                                 fExtensao = string.Empty;
                         }
                         else
-                            if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retEnvCCe_XML))
+                            if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retEnvCCe_XML))
                             {
                                 fExtensao = Propriedade.ExtRetorno.retEnvCCe_XML;
                                 tipo = "cce";
                             }
                             else
-                                if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcCTe))
+                                if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcCTe))
                                 {
                                     fExtensao = string.Empty;
-                                    tipo = "dacte";
+                                    tipo = "cte";
                                 }
                                 else
-                                    if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcMDFe))
+                                    if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcMDFe))
                                     {
                                         fExtensao = string.Empty;
-                                        tipo = "damdfe";
+                                        tipo = "mdfe";
                                     }
 
                 string fArgs = "";
                 if (fExtensao != string.Empty)
                 {
-                    if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
-                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, fExtensao) + Propriedade.ExtEnvio.Nfe, ".xml") + ".xml";
-                    else if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe))
-                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, fExtensao) + Propriedade.ExtRetorno.ProcCTe, ".xml") + ".xml";
+                    if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, fExtensao) + Propriedade.ExtEnvio.Nfe, ".xml") + ".xml";
+                    else if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe))
+                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, fExtensao) + Propriedade.ExtRetorno.ProcCTe, ".xml") + ".xml";
                     else
-                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(NomeArqXMLNFe, fExtensao) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml";
+                        strArqNFe = Functions.ExtrairNomeArq(Functions.ExtrairNomeArq(nomeArqXMLNFe, fExtensao) + Propriedade.ExtRetorno.ProcNFe, ".xml") + ".xml";
 
                     if (!string.IsNullOrEmpty(strArqNFe))
                     {
@@ -633,28 +643,28 @@ namespace NFe.Service
                         }
                         if (File.Exists(strArqProc))
                         {
-                            if (!NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe))
+                            if (!nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.ProcEventoCTe))
                             {
                                 NFe.ConvertTxt.nfeRead fread = new ConvertTxt.nfeRead();
                                 fread.ReadFromXml(strArqProc);
                                 fEmail = fread.nfe.dest.email;
                             }
 
-                            if (NomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                            if (nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
                             {
-                                fArgs = " AD=\"" + NomeArqXMLNFe + "\"";
+                                fArgs = " AD=\"" + nomeArqXMLNFe + "\"";
                                 fArgs += " A=\"" + strArqProc + "\"";
                             }
                             else
                                 if (tipo.Equals("cce"))
                                 {
-                                    fArgs = " A=\"" + NomeArqXMLNFe + "\"";
+                                    fArgs = " A=\"" + nomeArqXMLNFe + "\"";
                                     fArgs += " N=\"" + strArqProc + "\"";
                                 }
                                 else
                                 {
                                     fArgs = " A=\"" + strArqProc + "\"";
-                                    fArgs += " X1=\"" + NomeArqXMLNFe + "\"";
+                                    fArgs += " X1=\"" + nomeArqXMLNFe + "\"";
                                     fArgs += " CC=\"1\"";
                                 }
                             if (!string.IsNullOrEmpty(fEmail))

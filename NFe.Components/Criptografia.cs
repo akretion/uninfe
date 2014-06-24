@@ -16,9 +16,12 @@ namespace NFe.Components
         {
             try
             {
-                return criptografaSenha(senhaCripto, _chave);
+                if (String.IsNullOrEmpty(senhaCripto))
+                    return "";
+                else
+                    return criptografaSenha(senhaCripto, _chave);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "String errada. " + ex.Message;
             }
@@ -29,9 +32,12 @@ namespace NFe.Components
         {
             try
             {
-                return descriptografaSenha(senhaDescripto, _chave);
+                if (String.IsNullOrEmpty(senhaDescripto))
+                    return "";
+                else
+                    return descriptografaSenha(senhaDescripto, _chave);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "Wrong Input. " + ex.Message;
             }
@@ -55,7 +61,7 @@ namespace NFe.Components
                 byteBuff = ASCIIEncoding.ASCII.GetBytes(senhaCripto);
                 return Convert.ToBase64String(objcriptografaSenha.CreateEncryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "Digite os valores Corretamente." + ex.Message;
             }
@@ -82,7 +88,7 @@ namespace NFe.Components
 
                 return strDecrypted;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "Digite os valores Corretamente." + ex.Message;
             }
@@ -91,7 +97,7 @@ namespace NFe.Components
         public static bool compararStrings(string num01, string num02)
         {
             bool stringValor;
-            if(num01.Equals(num02))
+            if (num01.Equals(num02))
             {
                 stringValor = true;
             }

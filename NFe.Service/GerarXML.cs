@@ -678,7 +678,7 @@ namespace NFe.Service
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitCTe versao=\"" + ConfiguracaoApp.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">");
+            aXML.Append("<consSitCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -701,7 +701,7 @@ namespace NFe.Service
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitMDFe versao=\"" + ConfiguracaoApp.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">");
+            aXML.Append("<consSitMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -731,7 +731,7 @@ namespace NFe.Service
             int emp = EmpIndex;
 
             if (string.IsNullOrEmpty(versao))
-                versao = ConfiguracaoApp.VersaoXMLConsCad;
+                versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
 
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
                 "<ConsCad xmlns=\"http://www.portalfiscal.inf.br/nfe" +
@@ -835,7 +835,7 @@ namespace NFe.Service
 
                 case TipoAplicativo.NFCe:
                 case TipoAplicativo.Nfe:
-                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF, versao);//ConfiguracaoApp.VersaoXMLStatusServico);
+                    StatusServicoNFe(arquivoSaida, amb, tpEmis, cUF, versao);
                     break;
 
                 case TipoAplicativo.MDFe:
@@ -883,7 +883,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServCte versao=\"" + ConfiguracaoApp.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">");
+            vDadosMsg.Append("<consStatServCte versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
             vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
@@ -906,7 +906,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServMDFe versao=\"" + ConfiguracaoApp.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">");
+            vDadosMsg.Append("<consStatServMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
             vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
@@ -927,7 +927,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consDPEC versao=\"" + ConfiguracaoApp.VersaoXMLConsDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<consDPEC versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLConsDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosConsDPEC.tpAmb);
             vDadosMsg.AppendFormat("<verAplic>{0}</verAplic>", dadosConsDPEC.verAplic);
             if (!string.IsNullOrEmpty(dadosConsDPEC.chNFe))
@@ -950,7 +950,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<envDPEC versao=\"" + ConfiguracaoApp.VersaoXMLEnvDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<envDPEC versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<infDPEC Id=\"DPEC{0}\">", dadosEnvDPEC.CNPJ);
             vDadosMsg.Append("<ideDec>");
             vDadosMsg.AppendFormat("<cUF>{0}</cUF>", dadosEnvDPEC.cUF);
@@ -1669,9 +1669,13 @@ namespace NFe.Service
                 XmlNode InutNFeNode = InutNFeList[0];
                 string strInutNFe = InutNFeNode.OuterXml;
 
+                string versao = NFe.ConvertTxt.versoes.VersaoXMLInut;
+                if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"] != null)
+                    versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"].Value;
+
                 //Montar o XML -procCancNFe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                    "<procInutNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + ConfiguracaoApp.VersaoXMLInut + "\">" +
+                    "<procInutNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">" +
                     strInutNFe +
                     strRetInutNFe +
                     "</procInutNFe>";
@@ -1679,7 +1683,7 @@ namespace NFe.Service
                 //Montar o nome do arquivo -proc-NFe.xml
                 string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                               Functions/*oAux*/.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
+                                               Functions.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
                                                Propriedade.ExtRetorno.ProcInutNFe;
 
                 //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
@@ -1722,7 +1726,7 @@ namespace NFe.Service
 
                 //Montar o XML -procCancCTe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                    "<procInutCTe xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\" versao=\"" + ConfiguracaoApp.VersaoXMLCTeInut + "\">" +
+                    "<procInutCTe xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\" versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeInut + "\">" +
                     strInutNFe +
                     strRetInutNFe +
                     "</procInutCTe>";
@@ -1820,7 +1824,7 @@ namespace NFe.Service
         private string XmlPedRecCTe(int emp, string recibo)
         {
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<consReciCTe versao=\"" + ConfiguracaoApp.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">" +
+                "<consReciCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">" +
                 "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciCTe>";
@@ -1839,7 +1843,7 @@ namespace NFe.Service
         private string XmlPedRecMDFe(int emp, string recibo)
         {
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<consReciMDFe versao=\"" + ConfiguracaoApp.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">" +
+                "<consReciMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">" +
                 "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciMDFe>";
@@ -2034,7 +2038,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<downloadNFe versao=\"" + ConfiguracaoApp.VersaoXMLEnvDownload + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<downloadNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvDownload + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosEnvDownload.tpAmb);
             vDadosMsg.Append("<xServ>DOWNLOAD NFE</xServ>");
             vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDownload.CNPJ);
@@ -2050,7 +2054,7 @@ namespace NFe.Service
         {
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consNFeDest versao=\"" + ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<consNFeDest versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosEnvEvento.tpAmb);
             vDadosMsg.Append("<xServ>CONSULTAR NFE DEST</xServ>");
             vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvEvento.CNPJ);
@@ -2083,7 +2087,7 @@ namespace NFe.Service
 
             StringBuilder vDadosMsg = new StringBuilder();
             vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<envEvento versao=\"" + ConfiguracaoApp.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">");
+            vDadosMsg.Append("<envEvento versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">");
             vDadosMsg.AppendFormat("<idLote>{0}</idLote>", dadosEnvEvento.idLote);
 
             foreach (Evento evento in dadosEnvEvento.eventos)
@@ -2277,7 +2281,7 @@ namespace NFe.Service
                 protEnvioEvento = xmlEventoEnvio;
             else //danasa 4/7/2011
             {
-                protEnvioEvento = "<procEventoNFe versao=\"" + ConfiguracaoApp.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
+                protEnvioEvento = "<procEventoNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoNFe>";
@@ -2350,7 +2354,7 @@ namespace NFe.Service
                 protEnvioEvento = xmlEventoEnvio;
             else
             {
-                protEnvioEvento = "<procEventoCTe versao=\"" + ConfiguracaoApp.VersaoXMLCTeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\">" +
+                protEnvioEvento = "<procEventoCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoCTe>";
@@ -2423,7 +2427,7 @@ namespace NFe.Service
                 protEnvioEvento = xmlEventoEnvio;
             else
             {
-                protEnvioEvento = "<procEventoMDFe versao=\"" + ConfiguracaoApp.VersaoXMLMDFeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/mdfe" + "\">" +
+                protEnvioEvento = "<procEventoMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/mdfe" + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoMDFe>";

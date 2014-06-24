@@ -647,7 +647,7 @@ namespace NFe.ConvertTxt
                     NFe.ide.cNF     = this.LerInt32(TpcnResources.cNF, ObOp.Opcional, 8, 8);
                     NFe.ide.natOp   = this.LerString(TpcnResources.natOp, ObOp.Obrigatorio, 1, 60);
                     NFe.ide.indPag  = (TpcnIndicadorPagamento)this.LerInt32(TpcnResources.indPag, ObOp.Obrigatorio, 1, 1);
-                    NFe.ide.mod     = this.LerInt32(TpcnResources.mod, ObOp.Obrigatorio, 2, 2);
+                    NFe.ide.mod     = (TpcnMod)this.LerInt32(TpcnResources.mod, ObOp.Obrigatorio, 2, 2);
                     NFe.ide.serie   = this.LerInt32(TpcnResources.serie, ObOp.Obrigatorio, 1, 3);
                     NFe.ide.nNF     = this.LerInt32(TpcnResources.nNF, ObOp.Obrigatorio, 1, 9);
                     if (NFe.infNFe.Versao >= 3)
@@ -864,10 +864,10 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <dest>
 
-                    NFe.dest.xNome  = this.LerString(TpcnResources.xNome, (NFe.infNFe.Versao >= 3 && NFe.ide.mod != 55 ? ObOp.Opcional : ObOp.Obrigatorio), 2, 60);
-                    NFe.dest.IE     = this.LerString(TpcnResources.IE, ObOp.Opcional, 0, 14);
-                    NFe.dest.ISUF   = this.LerString(TpcnResources.ISUF, ObOp.Opcional, 8, 9);
-                    NFe.dest.email  = this.LerString(TpcnResources.email, ObOp.Opcional, 1, 60);
+                    NFe.dest.xNome = this.LerString(TpcnResources.xNome, (NFe.infNFe.Versao >= 3 && NFe.ide.mod != TpcnMod.modNFe ? ObOp.Opcional : ObOp.Obrigatorio), 2, 60);
+                    NFe.dest.IE    = this.LerString(TpcnResources.IE, ObOp.Opcional, 0, 14);
+                    NFe.dest.ISUF  = this.LerString(TpcnResources.ISUF, ObOp.Opcional, 8, 9);
+                    NFe.dest.email = this.LerString(TpcnResources.email, ObOp.Opcional, 1, 60);
 
                     #endregion
                     break;
@@ -882,14 +882,17 @@ namespace NFe.ConvertTxt
                         layout = "§E03|CPF¨|idEstrangeiro¨"; //ok
                     else
                         layout = "§E03|CPF¨"; //ok
-                    NFe.dest.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
+                    if (NFe.ide.mod == TpcnMod.modNFCe && (double)NFe.infNFe.Versao >= 3.10) //nfc-e
+                        NFe.dest.CPF = this.LerString(TpcnResources.CPF, ObOp.Opcional, 11, 11);
+                    else
+                        NFe.dest.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     if ((double)NFe.infNFe.Versao >= 3.10)
-                        NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 0, 20);
+                        NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 5, 20);
                     break;
 
                 case "E03A":
                     layout = "§E03a|idEstrangeiro¨"; //ok
-                    NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 0, 20);
+                    NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 5, 20);
                     break;
 
 

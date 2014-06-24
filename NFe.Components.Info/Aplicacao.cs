@@ -34,15 +34,13 @@ namespace NFe.Components.Info
             string sValIni = "";
             string sValFin = "";
 
-            CertificadoDigital oDigCert = new CertificadoDigital();
+            CertificadoDigital cert = new CertificadoDigital();
 
-            oDigCert.PrepInfCertificado(Empresa.Configuracoes[emp].X509Certificado);
-
-            if (oDigCert.lLocalizouCertificado == true)
+            if (cert.PrepInfCertificado(Empresa.Configuracoes[emp]))
             {
-                sSubject = oDigCert.sSubject;
-                sValIni = oDigCert.dValidadeInicial.ToString();
-                sValFin = oDigCert.dValidadeFinal.ToString();
+                sSubject = cert.sSubject;
+                sValIni = cert.dValidadeInicial.ToString();
+                sValFin = cert.dValidadeFinal.ToString();
             }
             else
             {
@@ -57,10 +55,7 @@ namespace NFe.Components.Info
             URLws item;
             string tipo;
 
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfe.exe")).ToString("dd/MM/yyyy HH:mm:ss");
-            else
-                dtUltModif = File.GetLastWriteTimeUtc(Path.Combine(Propriedade.PastaExecutavel, "uninfse.exe")).ToString("dd/MM/yyyy HH:mm:ss");
+            dtUltModif = File.GetLastWriteTime(Propriedade.NomeAplicacao + ".exe").ToString("dd/MM/yyyy - HH:mm:ss");
 
             //Gravar o XML com as informações do aplicativo
             try

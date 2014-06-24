@@ -1065,6 +1065,24 @@
       <CancelarNfse>wsdl\producao\PThemaTaquaraRSCancelamento.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="4307708" Nome="Esteio - RS" UF="RS" Padrao="THEMA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HThemaEsteioRSRemessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HThemaEsteioRSConsulta.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HThemaEsteioRSCancelamento.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PThemaEsteioRSRemessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PThemaEsteioRSConsulta.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PThemaEsteioRSCancelamento.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípíos que utilizam o padrão ABACO -->
   <Estado ID="4304606" Nome="Canoas - RS" UF="RS" Padrao="ABACO">
     <LocalHomologacao>
@@ -1500,8 +1518,44 @@
       <CancelarNfse>wsdl\producao\PUberlandiaMG-DFSLoteRps.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3552205" Nome="Sorocaba - SP" UF="SP" Padrao="DFS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HSorocabaSP-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PSorocabaSP-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3303500" Nome="Nova Iguaçu - RJ" UF="RJ" Padrao="DFS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PNovaIguacuRJ-DFSLoteRps.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municipios que utilizam o padrão TECNOSISTEMAS-->
-  <Estado ID="4314803" Nome="Portão - RS" UF="RS">
+  <Estado ID="4314803" Nome="Portão - RS" UF="RS" Padrao="TECNOSISTEMAS">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HPortaoRSEnvioLoteRPSSincrono.wsdl</RecepcionarLoteRps>
       <ConsultarNfsePorRps>wsdl\homologacao\HPortaoRSConsultaNFSePorRPS.wsdl</ConsultarNfsePorRps>
@@ -1517,6 +1571,19 @@
       <ConsultarNfse>wsdl\producao\PPortaoRSConsultaNFSeServicosPrestados.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PPortaoRSConsultaLoteRPS.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PPortaoRSCancelamentoNFSe.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <!-- Municipios que utilizam o padrão SYSTEM-PRO-->
+  <Estado ID="4307005" Nome="Erechim - RS" UF="RS" Padrao="SYSTEMPRO">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HErechimRS-SystemPro.wsdl</RecepcionarLoteRps>
+      <ConsultarNfse>wsdl\homologacao\HErechimRS-SystemPro.wsdl</ConsultarNfse>
+      <CancelarNfse>wsdl\homologacao\HErechimRS-SystemPro.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PErechimRS-SystemPro.wsdl</RecepcionarLoteRps>
+      <ConsultarNfse>wsdl\producao\PErechimRS-SystemPro.wsdl</ConsultarNfse>
+      <CancelarNfse>wsdl\producao\PErechimRS-SystemPro.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Sequencia de tag´s de template-->

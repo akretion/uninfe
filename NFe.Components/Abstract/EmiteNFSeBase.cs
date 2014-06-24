@@ -29,6 +29,7 @@ namespace NFe.Components.Abstract
             write.Dispose();
         }
 
+
         public abstract void EmiteNF(string file);
 
         public abstract void CancelarNfse(string file);

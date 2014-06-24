@@ -1687,7 +1687,6 @@
       <SubType>UserControl</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2_C.wsdl" />
@@ -1720,6 +1719,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSCancelamentoNFSe.wsdl" />
@@ -1744,6 +1747,18 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\ABRASF\nfse_v2_01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HErechimRS-SystemPro.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PErechimRS-SystemPro.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaEsteioRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaEsteioRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaEsteioRSRemessa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaEsteioRSCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaEsteioRSConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaEsteioRSRemessa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSorocabaSP-DFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSorocabaSP-DFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaIguacuRJ-DFSLoteRps.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2_200.wsdl" />

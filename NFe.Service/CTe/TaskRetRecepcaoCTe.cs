@@ -45,7 +45,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", ConfiguracaoApp.VersaoXMLCTePedRec);
+                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTePedRec);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF), oCabecMsg, this);
@@ -294,7 +294,7 @@ namespace NFe.Service
                                             //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
                                             //ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
 
-                                            TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "dacte");
+                                            TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "cte");
                                         }
                                         break;
 
