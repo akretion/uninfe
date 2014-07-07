@@ -352,7 +352,7 @@ namespace NFe.Service
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados
-                                            if (!procNFeJaNaAutorizada)
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.ProcNFe)))
                                             {
                                                 //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
                                                 TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
@@ -364,7 +364,7 @@ namespace NFe.Service
                                             }
 
                                             //Se a NFe não existir ainda na pasta de autorizados
-                                            if (!NFeJaNaAutorizada)
+                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe)))
                                             {
                                                 //1-Mover a NFE da pasta de NFE em processamento para NFe Autorizada
                                                 //2-Só vou mover o -nfe.xml para a pasta autorizados se já existir a -procnfe.xml, caso contrário vou manter na pasta EmProcessamento
@@ -386,7 +386,20 @@ namespace NFe.Service
 
                                             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                             if (procNFeJaNaAutorizada)
-                                                TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, (oLerXml.oDadosNfe.mod == "65" ? "nfce" : "nfe"));
+                                            {
+                                                try
+                                                {
+                                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                                                PastaEnviados.Autorizados.ToString() + "\\" +
+                                                                                Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                                Path.GetFileName(strArquivoNFeProc);
+                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoMDFe: " + ex.Message);
+                                                }
+                                            }
                                         }
 
                                         if (File.Exists(strArquivoNFeProc))

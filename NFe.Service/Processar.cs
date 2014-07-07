@@ -157,6 +157,7 @@ namespace NFe.Service
                                 ConverterTXTparaXML(arquivo);
                                 break;
 
+                            case Servicos.EnviarEPEC:
                             case Servicos.RecepcaoEvento:
                                 CertVencido(emp);
                                 IsConnectedToInternet();
@@ -197,10 +198,6 @@ namespace NFe.Service
                                 CertVencido(emp);
                                 IsConnectedToInternet();
                                 DirecionarArquivo(arquivo, new TaskRegistroDeSaidaCancelamento());
-                                break;
-
-                            case Servicos.WSExiste:
-                                DirecionarArquivo(arquivo, new TaskWSExiste());
                                 break;
 
                             #region MDFe
@@ -325,6 +322,18 @@ namespace NFe.Service
                         case Servicos.ConsultaGeral:
                             ConsultarGeral(arquivo);
                             break;
+
+                        case Servicos.WSExiste:
+                            DirecionarArquivo(arquivo, new TaskWSExiste());
+                            break;
+
+                        case Servicos.ImpressaoNFe:
+                            DirecionarArquivo(arquivo, new TaskDanfe());
+                            break;
+
+                        case Servicos.DanfeRelatorio:
+                            DirecionarArquivo(arquivo, new TaskDanfeReport());
+                            break;
                     }
                     #endregion
                 }
@@ -367,6 +376,18 @@ namespace NFe.Service
             else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
             {
                 tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+            }
+            else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
+            {
+                tipoServico = Servicos.WSExiste;
+            }
+            else if (arq.IndexOf(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT) >= 0)
+            {
+                tipoServico = Servicos.ImpressaoNFe;
+            }
+            else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDanfeReport_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDanfeReport_TXT) >= 0)
+            {
+                tipoServico = Servicos.DanfeRelatorio;
             }
             #endregion
             else
@@ -422,6 +443,10 @@ namespace NFe.Service
                         else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
                         {
                             tipoServico = Servicos.ConsultarDPEC;
+                        }
+                        else if (arq.IndexOf(Propriedade.ExtEnvio.PedEPEC_TXT) >= 0)
+                        {
+                            tipoServico = Servicos.EnviarEPEC;
                         }
                         else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
                         {
@@ -577,7 +602,10 @@ namespace NFe.Service
                                 break;
 
                             case "envEvento":
-                                tipoServico = Servicos.RecepcaoEvento;
+                                if (arq.IndexOf(Propriedade.ExtEnvio.PedEPEC) >= 0)
+                                    tipoServico = Servicos.EnviarEPEC;
+                                else
+                                    tipoServico = Servicos.RecepcaoEvento;
                                 break;
 
                             case "ConsCad":

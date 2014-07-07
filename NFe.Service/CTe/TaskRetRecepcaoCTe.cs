@@ -270,31 +270,38 @@ namespace NFe.Service
                                     case "100": //NFe Autorizada
                                         if (File.Exists(strArquivoNFe))
                                         {
-                                            //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
-                                            oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcCTe);
-                                            var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
-                                                                    PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions/*oAux*/.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe;
-
+                                            //Juntar o protocolo com a NFE já copiando para a pasta em processamento
+                                            var strArquivoNFeProc = oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe);
+                                            
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                             oLerXml.Cte(strArquivoNFe);
 
-                                            //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
-                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
-                                            //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
+                                            //Mover a cteProc da pasta de CTe em processamento para a NFe Autorizada
+                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para
+                                            //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
                                             //assim sendo não inverta as posições. Wandrey 08/10/2009
                                             TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
-                                            //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
-                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para 
-                                            //depois mover o da nfe (-nfe.xml), pois se ocorrer algum erro, tenho como reconstruir o cenário.
+                                            //Mover a CTe da pasta de CTe em processamento para CTe Autorizada
+                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para 
+                                            //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o cenário.
                                             //assim sendo não inverta as posições. Wandrey 08/10/2009
                                             TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
-                                            //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
-                                            //ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi);
+                                            //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
+                                            try
+                                            {
+                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                                        PastaEnviados.Autorizados.ToString() + "\\" +
+                                                                        Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                        Path.GetFileName(strArquivoNFeProc);
 
-                                            TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "cte");
+                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message);
+                                            }
                                         }
                                         break;
 
@@ -306,6 +313,22 @@ namespace NFe.Service
 
                                             //Mover a NFE da pasta de NFE em processamento para NFe Denegadas
                                             TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
+                                            ///
+                                            /// existe DACTE de CTe denegado???
+                                            /// 
+                                            try
+                                            {
+                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                                        PastaEnviados.Denegados.ToString() + "\\" +
+                                                                        Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                        Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
+
+                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message);
+                                            }
                                         }
                                         break;
 

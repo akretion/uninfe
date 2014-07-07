@@ -30,10 +30,10 @@ namespace NFe.Service
         {
             int emp = Functions.FindEmpresaByThread();
 
-            if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT))
-            {
-                novaNomenclatura = true;
-            }
+            novaNomenclatura = NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) || 
+                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT) ||
+                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC) || 
+                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC_TXT);
 
             try
             {
@@ -41,15 +41,18 @@ namespace NFe.Service
                 //Ler o XML para pegar parâmetros de envio
                 EnvEvento(emp, NomeArquivoXML);
 
-                int currentEvento = Convert.ToInt32(dadosEnvEvento.eventos[0].tpEvento);
+                string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui cajo haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
-                switch (currentEvento)
+                switch ((NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(NFe.ConvertTxt.tpEventos), currentEvento))
                 {
-                    case 110111:
+                    case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                         Servico = Servicos.EnviarEventoCancelamento;
                         break;
-                    case 110110:
+                    case ConvertTxt.tpEventos.tpEvCCe:
                         Servico = Servicos.EnviarCCe;
+                        break;
+                    case ConvertTxt.tpEventos.tpEvEPEC:
+                        Servico = Servicos.EnviarEPEC;
                         break;
                     default:
                         Servico = Servicos.EnviarManifDest;
@@ -59,7 +62,7 @@ namespace NFe.Service
                 foreach (Evento item in dadosEnvEvento.eventos)
                 {
                     tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir caso emitida em modo SCAN - Renan
-                    if (currentEvento != Convert.ToInt32(item.tpEvento))
+                    if (!currentEvento.Equals(item.tpEvento))
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
                 }
 
@@ -100,6 +103,10 @@ namespace NFe.Service
                         tpEmis = Propriedade.TipoEmissao.teNormal;
                         break;
 
+                    case Servicos.EnviarEPEC:
+                        //tpEmis = Propriedade.TipoEmissao.teEPEC;
+                        break;
+
                     default:
                         break;
                 }
@@ -135,8 +142,16 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        xmlExtEnvio = Propriedade.ExtEnvio.PedEve.Replace(".xml", "");
-                        xmlExtRetorno = Propriedade.ExtRetorno.Eve.Replace(".xml", "");
+                        if (Servico == Servicos.EnviarEPEC)
+                        {
+                            xmlExtEnvio = Propriedade.ExtEnvio.PedEPEC.Replace(".xml", "");
+                            xmlExtRetorno = Propriedade.ExtRetorno.retEPEC_XML.Replace(".xml", "");
+                        }
+                        else
+                        {
+                            xmlExtEnvio = Propriedade.ExtEnvio.PedEve.Replace(".xml", "");
+                            xmlExtRetorno = Propriedade.ExtRetorno.Eve.Replace(".xml", "");
+                        }
                     }
                     else
                     {
@@ -177,12 +192,19 @@ namespace NFe.Service
                     string xmlFileExtTXT = string.Empty;
                     if (novaNomenclatura)
                     {
-                        xmlFileExt = Propriedade.ExtEnvio.PedEve;
-                        xmlFileExtTXT = Propriedade.ExtEnvio.PedEve_TXT;
+                        if (Servico == Servicos.EnviarEPEC)
+                        {
+                            xmlFileExt = Propriedade.ExtEnvio.PedEPEC;
+                            xmlFileExtTXT = Propriedade.ExtEnvio.PedEPEC_TXT;
+                        }
+                        else
+                        {
+                            xmlFileExt = Propriedade.ExtEnvio.PedEve;
+                            xmlFileExtTXT = Propriedade.ExtEnvio.PedEve_TXT;
+                        }
                     }
                     else
                     {
-
                         switch (Servico)
                         {
                             case Servicos.EnviarCCe:
@@ -201,7 +223,6 @@ namespace NFe.Service
                                 break;
                         }
                     }
-
                     oGerarXML.EnvioEvento(Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt, dadosEnvEvento);
                 }
             }
@@ -215,8 +236,16 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEve : Propriedade.ExtEnvio.PedEve_TXT;
-                        ExtRetorno = Propriedade.ExtRetorno.Eve_ERR;
+                        if (Servico == Servicos.EnviarEPEC)
+                        {
+                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEPEC : Propriedade.ExtEnvio.PedEPEC_TXT;
+                            ExtRetorno = Propriedade.ExtRetorno.retEPEC_ERR;
+                        }
+                        else
+                        {
+                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEve : Propriedade.ExtEnvio.PedEve_TXT;
+                            ExtRetorno = Propriedade.ExtRetorno.Eve_ERR;
+                        }
                     }
                     else
                     {
@@ -298,7 +327,7 @@ namespace NFe.Service
                 ///tpAmb|2
                 ///CNPJ|10290739000139 
                 ///    ou
-                ///CPF|80531385800
+                ///CPF|12345678901
                 ///chNFe|35110310290739000139550010000000011051128041
                 ///dhEvento|2011-03-03T08:06:00
                 ///tpEvento|110110
@@ -322,7 +351,7 @@ namespace NFe.Service
                 /// tpAmb|2
                 /// CNPJ|10290739000139 
                 ///    ou
-                /// CPF|80531385800
+                /// CPF|12345678901
                 /// chNFe|35110310290739000139550010000000011051128041
                 /// dhEvento|2011-03-03T08:06:00-03:00
                 /// tpEvento|110111
@@ -340,7 +369,7 @@ namespace NFe.Service
                 ///tpAmb|2
                 ///CNPJ|10290739000139 
                 ///    ou
-                ///CPF|80531385800
+                ///CPF|12345678901
                 ///chNFe|35110310290739000139550010000000011051128041
                 ///dhEvento|2011-03-03T08:06:00-03:00
                 ///tpEvento|210200
@@ -358,7 +387,7 @@ namespace NFe.Service
                 ///tpAmb|2
                 ///CNPJ|10290739000139 
                 ///    ou
-                ///CPF|80531385800
+                ///CPF|12345678901
                 ///chNFe|35110310290739000139550010000000011051128041
                 ///dhEvento|2011-03-03T08:06:00-03:00
                 ///tpEvento|210210
@@ -375,7 +404,7 @@ namespace NFe.Service
                 ///tpAmb|2
                 ///CNPJ|10290739000139 
                 ///    ou
-                ///CPF|80531385800
+                ///CPF|12345678901
                 ///chNFe|35110310290739000139550010000000011051128041
                 ///dhEvento|2011-03-03T08:06:00-03:00
                 ///tpEvento|210220
@@ -393,13 +422,47 @@ namespace NFe.Service
                 ///tpAmb|2
                 ///CNPJ|10290739000139 
                 ///    ou
-                ///CPF|80531385800
+                ///CPF|12345678901
                 ///chNFe|35110310290739000139550010000000011051128041
                 ///dhEvento|2011-03-03T08:06:00-03:00
                 ///tpEvento|210240
                 ///nSeqEvento|1
                 ///verEvento|1.00
-                ///descEvento|Operacao nao realizada                                            <<opcional
+                ///descEvento|Operacao nao realizada                                             <<opcional
+
+
+                /// --------------------------------------------
+                ///<<<<EVENTO EPEC>>>>
+                ///idLote|000000000015255
+                ///evento|1
+                ///Id|ID2102403511031029073900013955001000000001105112804102
+                ///cOrgao|35
+                ///tpAmb|2
+                ///CNPJ|10290739000139 
+                ///    ou
+                ///CPF|12345678901
+                ///chNFe|35110310290739000139550010000000011051128041
+                ///dhEvento|2011-03-03T08:06:00-03:00
+                ///tpEvento|110140
+                ///nSeqEvento|1
+                ///verEvento|1.00
+                ///descEvento|EPEC                                                               <<opcional
+                ///epec.cOrgaoAutor|35
+                ///epec.tpAutor|1
+                ///epec.verAplic|1.1.1.0
+                ///epec.dhEmi|2011-03-03T08:06:00-03:00
+                ///epec.tpNF|1
+                ///epec.IE|ISENTO
+                ///epec.dest.UF|SP
+                ///epec.dest.CNPJ|10290739000139
+                ///     ou
+                ///epec.dest.CPF|12345678901
+                ///     ou
+                ///epec.dest.idEstrangeiro|9999999
+                ///epec.dest.IE|nao pode conter o texto 'ISENTO'
+                ///epec.vNF|1234.00
+                ///epec.vICMS|1.00
+                ///epec.vST|2.00
 
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                 foreach (string cTexto in cLinhas)
@@ -460,36 +523,93 @@ namespace NFe.Service
                         case "nprot":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nProt = dados[1].Trim();
                             break;
+                        ///
+                        /// EPEC
+                        /// 
+                        case "epec.corgaoautor":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.cOrgaoAutor = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "epec.dhemi":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dhEmi = dados[1].Trim();
+                            break;
+                        case "epec.ie":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.IE = dados[1].Trim();
+                            break;
+                        case "epec.veraplic":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.verAplic = dados[1].Trim();
+                            break;
+                        case "epec.tpautor":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpAutor = (NFe.ConvertTxt.TpcnTipoAutor)Enum.Parse(typeof(NFe.ConvertTxt.TpcnTipoAutor), dados[1].Trim());
+                            break;
+                        case "epec.tpnf":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpNF = (NFe.ConvertTxt.TpcnTipoNFe)Enum.Parse(typeof(NFe.ConvertTxt.TpcnTipoNFe), dados[1].Trim());
+                            break;
+                        case "epec.dest.idestrangeiro":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.idEstrangeiro = dados[1].Trim();
+                            break;
+                        case "epec.dest.cnpj":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.CNPJ = dados[1].Trim();
+                            break;
+                        case "epec.dest.cpf":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.CPF = dados[1].Trim();
+                            break;
+                        case "epec.dest.ie":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.IE = dados[1].Trim();
+                            break;
+                        case "epec.dest.uf":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.UF = dados[1].Trim();
+                            break;
+                        case "epec.vnf":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vNF = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                            break;
+                        case "epec.vicms":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vICMS = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                            break;
+                        case "epec.vst":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vST = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                            break;
                     }
                 }
                 foreach (Evento evento in this.dadosEnvEvento.eventos)
                 {
-                    switch (evento.tpEvento)
+                    NFe.ConvertTxt.tpEventos tpe = (NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(ConvertTxt.tpEventos), evento.tpEvento);
+                    switch (tpe)
                     {
-                        case "110110":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Carta de Correcao";
-                            break;
-                        case "110111":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Cancelamento";
+                        case ConvertTxt.tpEventos.tpEvEPEC:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "EPEC";
                             evento.nSeqEvento = 1;
                             break;
-                        case "210200":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Confirmacao da Operacao";
+                        case ConvertTxt.tpEventos.tpEvCCe:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Carta de Correcao";
+                            break;
+                        case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Cancelamento";
                             evento.nSeqEvento = 1;
                             break;
-                        case "210210":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Ciencia da Operacao";
+                        case ConvertTxt.tpEventos.tpEvCienciaOperacao:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Ciencia da Operacao";
                             evento.nSeqEvento = 1;
                             break;
-                        case "210220":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Desconhecimento da Operacao";
+                        case ConvertTxt.tpEventos.tpEvConfirmacaoOperacao:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Confirmacao da Operacao";
                             evento.nSeqEvento = 1;
                             break;
-                        case "210240":
-                            if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Operacao nao Realizada";
+                        case ConvertTxt.tpEventos.tpEvDesconhecimentoOperacao:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Desconhecimento da Operacao";
                             evento.nSeqEvento = 1;
+                            break;
+                        case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
+                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Operacao nao Realizada";
+                            evento.nSeqEvento = 1;
+                            break;
+                        case ConvertTxt.tpEventos.tpEvEncerramentoMDFe:
+                        case ConvertTxt.tpEventos.tpEvInclusaoCondutor:
+                        case ConvertTxt.tpEventos.tpEvRegistroPassagem:
+                        case ConvertTxt.tpEventos.tpEvRegistroPassagemBRid:
                             break;
                     }
+                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = EnumHelper.GetDescription(tpe);
+
                     if (string.IsNullOrEmpty(evento.verEvento))
                         evento.verEvento = "1.00";
 
@@ -602,8 +722,8 @@ namespace NFe.Service
                                 {
                                     string chNFe = eleRetorno.GetElementsByTagName("chNFe")[0].InnerText;
                                     Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
-                                    string tpEvento = eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText;
-                                    string Id = "ID" + tpEvento + chNFe + nSeqEvento.ToString("00");
+                                    NFe.ConvertTxt.tpEventos tpEvento = (NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(NFe.ConvertTxt.tpEventos), eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText);
+                                    string Id = "ID" + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado
                                     ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
@@ -612,21 +732,40 @@ namespace NFe.Service
                                         string Idd = env.Attributes.GetNamedItem("Id").Value;
                                         if (Idd == Id)
                                         {
-                                            DateTime dhRegEvento = Functions.GetDateTime/* Convert.ToDateTime*/(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
-                                            //if (Empresa.Configuracoes[emp].DiretorioSalvarComo == "AM")
-                                            //    dhRegEvento = new DateTime(Convert.ToInt16("20" + chNFe.Substring(2, 2)), Convert.ToInt16(chNFe.Substring(4, 2)), 1);
-
-                                            //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
-
-                                            switch (Convert.ToInt32(tpEvento))
+                                            if (tpEvento != ConvertTxt.tpEventos.tpEvEPEC)
                                             {
-                                                case 110111: //Cancelamento
-                                                case 110110: //CCe
-                                                    NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                                DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
+
+                                                //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
+                                                oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+                                            }
+                                            switch (tpEvento)
+                                            {
+                                                case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                                                case ConvertTxt.tpEventos.tpEvCCe:
+                                                    try
+                                                    {
+                                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresa.Configuracoes[emp]);
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        Auxiliar.WriteLog("TaskEventos: " + ex.Message);
+                                                    }
+                                                    break;
+
+                                                case ConvertTxt.tpEventos.tpEvEPEC:
+                                                    if (cStatCons == "136")
+                                                        //Evento autorizado sem vinculação do evento à respectiva NF-e
+                                                        try
+                                                        {
+                                                            NFe.Service.TFunctions.ExecutaUniDanfe(NomeArquivoXML, DateTime.Today, Empresa.Configuracoes[emp]);
+                                                        }
+                                                        catch (Exception ex)
+                                                        {
+                                                            Auxiliar.WriteLog("TaskEventos: " + ex.Message);
+                                                        }
                                                     break;
                                             }
-
                                             break;
                                         }
                                     }

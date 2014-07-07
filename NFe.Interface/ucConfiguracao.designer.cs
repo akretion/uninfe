@@ -101,6 +101,11 @@
             this.lblCerificadoInstalado = new System.Windows.Forms.Label();
             this.button_selecionar_certificado = new System.Windows.Forms.Button();
             this.tabPageDanfe = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbConfiguracaoCCe = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbConfiguracaoDanfe = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tbTextoDANFE = new System.Windows.Forms.TextBox();
             this.cbDanfeMonProcNfe = new System.Windows.Forms.CheckBox();
@@ -285,7 +290,7 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
-                "denegados?";
+    "denegados?";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // checkBoxGravarEventosDeTerceiros
@@ -450,7 +455,7 @@
             this.lbl_udDiasLimpeza.Size = new System.Drawing.Size(212, 36);
             this.lbl_udDiasLimpeza.TabIndex = 16;
             this.lbl_udDiasLimpeza.Text = "Quantos dias devem ser mantidos os arquivos na pasta temporário e retorno? Deixe " +
-                "0 para infinito.";
+    "0 para infinito.";
             // 
             // lbl_DiretorioSalvarComo
             // 
@@ -616,7 +621,7 @@
             this.lbl_textBox_PastaEnvioXML.Size = new System.Drawing.Size(497, 13);
             this.lbl_textBox_PastaEnvioXML.TabIndex = 1;
             this.lbl_textBox_PastaEnvioXML.Text = "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para" +
-                " os WebServices:";
+    " os WebServices:";
             // 
             // lbl_textBox_PastaValidar
             // 
@@ -655,7 +660,7 @@
             this.lbl_textBox_PastaLote.Size = new System.Drawing.Size(499, 13);
             this.lbl_textBox_PastaLote.TabIndex = 25;
             this.lbl_textBox_PastaLote.Text = "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para" +
-                " os WebServices:";
+    " os WebServices:";
             // 
             // textBox_PastaBackup
             // 
@@ -723,7 +728,7 @@
             this.lbl_textBox_PastaXmlErro.Size = new System.Drawing.Size(445, 13);
             this.lbl_textBox_PastaXmlErro.TabIndex = 19;
             this.lbl_textBox_PastaXmlErro.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
-                "o envio:";
+    "o envio:";
             // 
             // lbl_textBox_PastaRetornoXML
             // 
@@ -912,7 +917,7 @@
             this.txtSenhaCertificado.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaCertificado.TabIndex = 27;
             this.toolTip1.SetToolTip(this.txtSenhaCertificado, "O arquivo do certificado deverá estar no diretorio da empresa com o nome cert.ccc" +
-                    "");
+        "");
             this.txtSenhaCertificado.UseSystemPasswordChar = true;
             this.txtSenhaCertificado.Visible = false;
             // 
@@ -960,6 +965,11 @@
             // 
             // tabPageDanfe
             // 
+            this.tabPageDanfe.Controls.Add(this.label3);
+            this.tabPageDanfe.Controls.Add(this.tbConfiguracaoCCe);
+            this.tabPageDanfe.Controls.Add(this.label2);
+            this.tabPageDanfe.Controls.Add(this.tbConfiguracaoDanfe);
+            this.tabPageDanfe.Controls.Add(this.label1);
             this.tabPageDanfe.Controls.Add(this.label18);
             this.tabPageDanfe.Controls.Add(this.tbTextoDANFE);
             this.tabPageDanfe.Controls.Add(this.cbDanfeMonProcNfe);
@@ -981,13 +991,60 @@
             this.tabPageDanfe.Text = "DANFe";
             this.tabPageDanfe.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(191, 258);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "CCe";
+            // 
+            // tbConfiguracaoCCe
+            // 
+            this.tbConfiguracaoCCe.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbConfiguracaoCCe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbConfiguracaoCCe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbConfiguracaoCCe.Location = new System.Drawing.Point(191, 275);
+            this.tbConfiguracaoCCe.Name = "tbConfiguracaoCCe";
+            this.tbConfiguracaoCCe.Size = new System.Drawing.Size(173, 20);
+            this.tbConfiguracaoCCe.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 258);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "NFe/MDFe/CTe/NFCe";
+            // 
+            // tbConfiguracaoDanfe
+            // 
+            this.tbConfiguracaoDanfe.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbConfiguracaoDanfe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.tbConfiguracaoDanfe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbConfiguracaoDanfe.Location = new System.Drawing.Point(6, 275);
+            this.tbConfiguracaoDanfe.Name = "tbConfiguracaoDanfe";
+            this.tbConfiguracaoDanfe.Size = new System.Drawing.Size(173, 20);
+            this.tbConfiguracaoDanfe.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 241);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Nomes das configurações";
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1, 244);
+            this.label18.Location = new System.Drawing.Point(1, 352);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(407, 13);
-            this.label18.TabIndex = 13;
+            this.label18.TabIndex = 17;
             this.label18.Text = "XML´s a serem copiados na pasta para impressão do DANFE a partir do DANFeMon:";
             // 
             // tbTextoDANFE
@@ -997,16 +1054,16 @@
             this.tbTextoDANFE.Multiline = true;
             this.tbTextoDANFE.Name = "tbTextoDANFE";
             this.tbTextoDANFE.Size = new System.Drawing.Size(576, 75);
-            this.tbTextoDANFE.TabIndex = 3;
+            this.tbTextoDANFE.TabIndex = 0;
             this.tbTextoDANFE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cbDanfeMonProcNfe
             // 
             this.cbDanfeMonProcNfe.AutoSize = true;
-            this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(33, 289);
+            this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(33, 397);
             this.cbDanfeMonProcNfe.Name = "cbDanfeMonProcNfe";
             this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(266, 17);
-            this.cbDanfeMonProcNfe.TabIndex = 12;
+            this.cbDanfeMonProcNfe.TabIndex = 19;
             this.cbDanfeMonProcNfe.Text = "XML de distribuição do documento fiscal eletrônico";
             this.cbDanfeMonProcNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonProcNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
@@ -1014,10 +1071,10 @@
             // cbDanfeMonNfe
             // 
             this.cbDanfeMonNfe.AutoSize = true;
-            this.cbDanfeMonNfe.Location = new System.Drawing.Point(33, 265);
+            this.cbDanfeMonNfe.Location = new System.Drawing.Point(33, 373);
             this.cbDanfeMonNfe.Name = "cbDanfeMonNfe";
             this.cbDanfeMonNfe.Size = new System.Drawing.Size(195, 17);
-            this.cbDanfeMonNfe.TabIndex = 11;
+            this.cbDanfeMonNfe.TabIndex = 18;
             this.cbDanfeMonNfe.Text = "XML do documento fiscal eletrônico";
             this.cbDanfeMonNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
@@ -1029,8 +1086,7 @@
             this.tbPastaXmlParaDanfeMon.Location = new System.Drawing.Point(4, 210);
             this.tbPastaXmlParaDanfeMon.Name = "tbPastaXmlParaDanfeMon";
             this.tbPastaXmlParaDanfeMon.Size = new System.Drawing.Size(542, 20);
-            this.tbPastaXmlParaDanfeMon.TabIndex = 9;
-            this.tbPastaXmlParaDanfeMon.TextChanged += new System.EventHandler(this.changed_Modificado);
+            this.tbPastaXmlParaDanfeMon.TabIndex = 8;
             // 
             // label17
             // 
@@ -1038,9 +1094,9 @@
             this.label17.Location = new System.Drawing.Point(1, 194);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(474, 13);
-            this.label17.TabIndex = 8;
+            this.label17.TabIndex = 7;
             this.label17.Text = "Pasta onde deve ser gravado o XML para a impressão do documento fiscal a partir d" +
-                "o DANFeMon:";
+    "o DANFeMon:";
             // 
             // label15
             // 
@@ -1048,7 +1104,7 @@
             this.label15.Location = new System.Drawing.Point(1, 102);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(176, 13);
-            this.label15.TabIndex = 0;
+            this.label15.TabIndex = 1;
             this.label15.Text = "Pasta do executável do UniDANFe:";
             // 
             // tbPastaConfigUniDanfe
@@ -1058,8 +1114,7 @@
             this.tbPastaConfigUniDanfe.Location = new System.Drawing.Point(4, 162);
             this.tbPastaConfigUniDanfe.Name = "tbPastaConfigUniDanfe";
             this.tbPastaConfigUniDanfe.Size = new System.Drawing.Size(542, 20);
-            this.tbPastaConfigUniDanfe.TabIndex = 6;
-            this.tbPastaConfigUniDanfe.TextChanged += new System.EventHandler(this.changed_Modificado);
+            this.tbPastaConfigUniDanfe.TabIndex = 5;
             // 
             // label16
             // 
@@ -1067,7 +1122,7 @@
             this.label16.Location = new System.Drawing.Point(1, 145);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(244, 13);
-            this.label16.TabIndex = 1;
+            this.label16.TabIndex = 4;
             this.label16.Text = "Pasta do arquivo de configurações do UniDANFe:";
             // 
             // tbPastaExeUniDanfe
@@ -1077,8 +1132,7 @@
             this.tbPastaExeUniDanfe.Location = new System.Drawing.Point(4, 118);
             this.tbPastaExeUniDanfe.Name = "tbPastaExeUniDanfe";
             this.tbPastaExeUniDanfe.Size = new System.Drawing.Size(542, 20);
-            this.tbPastaExeUniDanfe.TabIndex = 4;
-            this.tbPastaExeUniDanfe.TextChanged += new System.EventHandler(this.changed_Modificado);
+            this.tbPastaExeUniDanfe.TabIndex = 2;
             // 
             // button_SelectPastaExeUniDanfe
             // 
@@ -1086,7 +1140,7 @@
             this.button_SelectPastaExeUniDanfe.Location = new System.Drawing.Point(551, 116);
             this.button_SelectPastaExeUniDanfe.Name = "button_SelectPastaExeUniDanfe";
             this.button_SelectPastaExeUniDanfe.Size = new System.Drawing.Size(27, 23);
-            this.button_SelectPastaExeUniDanfe.TabIndex = 5;
+            this.button_SelectPastaExeUniDanfe.TabIndex = 3;
             this.button_SelectPastaExeUniDanfe.Tag = "7";
             this.button_SelectPastaExeUniDanfe.UseVisualStyleBackColor = true;
             this.button_SelectPastaExeUniDanfe.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
@@ -1097,7 +1151,7 @@
             this.button_SelectPastaConfUniDanfe.Location = new System.Drawing.Point(551, 160);
             this.button_SelectPastaConfUniDanfe.Name = "button_SelectPastaConfUniDanfe";
             this.button_SelectPastaConfUniDanfe.Size = new System.Drawing.Size(27, 23);
-            this.button_SelectPastaConfUniDanfe.TabIndex = 7;
+            this.button_SelectPastaConfUniDanfe.TabIndex = 6;
             this.button_SelectPastaConfUniDanfe.Tag = "8";
             this.button_SelectPastaConfUniDanfe.UseVisualStyleBackColor = true;
             this.button_SelectPastaConfUniDanfe.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
@@ -1108,7 +1162,7 @@
             this.btnSelectPastaParaXmlDanfeMon.Location = new System.Drawing.Point(551, 208);
             this.btnSelectPastaParaXmlDanfeMon.Name = "btnSelectPastaParaXmlDanfeMon";
             this.btnSelectPastaParaXmlDanfeMon.Size = new System.Drawing.Size(27, 23);
-            this.btnSelectPastaParaXmlDanfeMon.TabIndex = 10;
+            this.btnSelectPastaParaXmlDanfeMon.TabIndex = 9;
             this.btnSelectPastaParaXmlDanfeMon.Tag = "9";
             this.btnSelectPastaParaXmlDanfeMon.UseVisualStyleBackColor = true;
             this.btnSelectPastaParaXmlDanfeMon.Click += new System.EventHandler(this.button_selectxmlenvio_Click);
@@ -1204,7 +1258,7 @@
             this.edtFTP_GravaXMLPastaUnica.Size = new System.Drawing.Size(502, 17);
             this.edtFTP_GravaXMLPastaUnica.TabIndex = 7;
             this.edtFTP_GravaXMLPastaUnica.Text = "Gravar os XML\'s autorizados em uma única pasta, se não, serão criadas pastas conf" +
-                "orme a definição";
+    "orme a definição";
             this.edtFTP_GravaXMLPastaUnica.UseVisualStyleBackColor = true;
             this.edtFTP_GravaXMLPastaUnica.CheckedChanged += new System.EventHandler(this.changed_Modificado);
             // 
@@ -1428,5 +1482,10 @@
         private System.Windows.Forms.Label lbPINCertificado;
         private System.Windows.Forms.TextBox txtPinCertificado;
         private System.Windows.Forms.CheckBox checkBoxCompactaNFe;
+        private System.Windows.Forms.TextBox tbConfiguracaoDanfe;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbConfiguracaoCCe;
     }
 }

@@ -86,26 +86,18 @@ namespace NFe.Components
 
                                         switch (evento)
                                         {
-                                            case "110110": //XML de Evento da CCe
+                                            case "110110":  //XML de Evento da CCe
+                                            case "110111":  //XML de Envio de evento de cancelamento
+                                            case "110113":  //XML de Envio do evento de contingencia EPEC, CTe
+                                            case "110160":  //XML de Envio do evento de Registro Multimodal, CTe
+                                            case "110140":  //EPEC
                                                 nome = nome + evento;
                                                 break;
 
-                                            case "110111": //XML de Envio de evento de cancelamento
-                                                nome = nome + evento;
-                                                break;
-
-                                            case "110113": //XML de Envio do evento de contingencia EPEC, CTe
-                                                nome = nome + evento;
-                                                break;
-
-                                            case "110160": //XML de Envio do evento de Registro Multimodal, CTe
-                                                nome = nome + evento;
-                                                break;
-
-                                            case "210200": //XML Evento de manifestação do destinatário
-                                            case "210210": //XML Evento de manifestação do destinatário
-                                            case "210220": //XML Evento de manifestação do destinatário
-                                            case "210240": //XML Evento de manifestação do destinatário
+                                            case "210200":  //XML Evento de manifestação do destinatário
+                                            case "210210":  //XML Evento de manifestação do destinatário
+                                            case "210220":  //XML Evento de manifestação do destinatário
+                                            case "210240":  //XML Evento de manifestação do destinatário
                                                 nome = "envConfRecebto";
                                                 break;
                                         }

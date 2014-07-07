@@ -52,7 +52,7 @@ namespace NFe.Components
         /// <summary>
         /// Consulta recibo do lote nfe (NFeRetAutorizacao)
         /// </summary>
-        PedidoSituacaoLoteNFe2,        
+        PedidoSituacaoLoteNFe2,
         /// <summary>
         /// Consulta situação da NFe
         /// </summary>
@@ -83,6 +83,10 @@ namespace NFe.Components
         /// Enviar um evento de manifestacao
         /// </summary>
         EnviarManifDest,
+        /// <summary>
+        /// Enviar um evento de EPEC
+        /// </summary>
+        EnviarEPEC,
         #endregion
 
         /// <summary>
@@ -285,6 +289,14 @@ namespace NFe.Components
         WSExiste,
         #endregion
 
+        #region Impressao do DANFE
+        ImpressaoNFe,
+        #endregion
+
+        #region Impressao do relatorio de e-mails do DANFE
+        DanfeRelatorio,
+        #endregion
+
         /// <summary>
         /// Nulo / Nenhum serviço em execução
         /// </summary>        
@@ -454,31 +466,31 @@ namespace NFe.Components
         FalhaEnvioXmlNFeWS = 5
     }
     #endregion
-}
 
-#region EnumHelper
 
-/// <summary>
-/// Classe com metodos para serem utilizadas nos Enuns
-/// </summary>
-public static class EnumHelper
-{
+    #region EnumHelper
+
     /// <summary>
-    /// Retorna a description do enum
+    /// Classe com metodos para serem utilizadas nos Enuns
     /// </summary>
-    /// <param name="value">Enum para buscar a description</param>
-    /// <returns>Retorna a description do enun</returns>
-    public static string GetDescription(this Enum value)
+    public static class EnumHelper
     {
-        FieldInfo field = value.GetType().GetField(value.ToString());
+        /// <summary>
+        /// Retorna a description do enum
+        /// </summary>
+        /// <param name="value">Enum para buscar a description</param>
+        /// <returns>Retorna a description do enun</returns>
+        public static string GetDescription(this Enum value)
+        {
+            FieldInfo field = value.GetType().GetField(value.ToString());
 
-        DescriptionAttribute attribute
-                = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute))
-                    as DescriptionAttribute;
+            DescriptionAttribute attribute
+                    = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute))
+                        as DescriptionAttribute;
 
-        return attribute == null ? value.ToString() : attribute.Description;
+            return attribute == null ? value.ToString() : attribute.Description;
+        }
     }
+
+    #endregion
 }
-
-#endregion
-

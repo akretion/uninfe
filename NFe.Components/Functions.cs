@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Windows.Forms;
+using System.Reflection;
 using System.Net;
 
 namespace NFe.Components
@@ -524,5 +525,32 @@ namespace NFe.Components
             return ip;
         } 
         #endregion
+
+        public static void SetProperty(object _this, PropertyInfo propertyInfo, object value)
+        {
+            switch (propertyInfo.PropertyType.Name)
+            {
+                case "Int32":
+                    propertyInfo.SetValue(_this, Convert.ToInt32(value), null);
+                    break;
+                case "String":
+                    propertyInfo.SetValue(_this, value.ToString(), null);
+                    break;
+            }
+        }
+        public static string PropertyName(object tkClass, object clName)
+        {
+            PropertyInfo[] allClassToProperties = tkClass.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            foreach (PropertyInfo pifrom in allClassToProperties)
+            {
+                if (pifrom == clName)
+                Console.WriteLine("......{0} {1}", pifrom.Name, pifrom.ToString());
+            }
+
+            Console.WriteLine("{0}", clName.GetType().FullName.ToString());
+
+            return "";// tkClasse.GetType().GetProperty(clName).Name;
+        }
     }
 }

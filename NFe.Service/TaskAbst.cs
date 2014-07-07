@@ -1685,7 +1685,7 @@ namespace NFe.Service
                 string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
-                string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, "-den.xml"));
+                string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));
 
                 //danasa 11-4-2012
                 bool addNFeDen = true;
@@ -1705,7 +1705,7 @@ namespace NFe.Service
                     strProtNfe = protNFe;
                     ///
                     /// gera o arquivo de denegacao na pasta EmProcessamento
-                    string strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, "-den.xml", versao);
+                    string strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, versao);
                     ///
                     /// exclui o XML denegado, se existir
                     //string destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strNomeArqDenegadaNFe));
@@ -1743,8 +1743,14 @@ namespace NFe.Service
                         // move o arquivo NFe para a pasta Denegada
                         File.Move(strArquivoNFe, dArquivo);
                     }
-
-                    TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, (oLerXml.oDadosNfe.mod == "65" ? "nfce" : "nfe"));
+                    try
+                    {
+                        TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                    }
+                    catch (Exception ex)
+                    {
+                        Auxiliar.WriteLog("ProcessaDenegada: " + ex.Message);
+                    }
                 }
             }
         }

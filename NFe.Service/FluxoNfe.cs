@@ -16,15 +16,23 @@ namespace NFe.Service
     /// </summary>
     public class FluxoNfe
     {
+        /// <summary>
+        /// Código da empresa
+        /// </summary>
+        private int empresa { get; set; }
+
         #region Construtores
         public FluxoNfe()
         {
             int emp = Functions.FindEmpresaByThread();
+            empresa = emp;
+
             NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
         }
 
         public FluxoNfe(int emp)
         {
+            empresa = emp;
             NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
         }
         #endregion
@@ -118,8 +126,6 @@ namespace NFe.Service
         {
             while (true)
             {
-                //Thread.Sleep(1000);
-
                 lock (Smf.Fluxo)
                 {
                     XmlWriter xtw = null; // criar instância para xmltextwriter. 
@@ -221,7 +227,7 @@ namespace NFe.Service
         /// <date>17/04/2009</date>
         public void InserirNfeFluxo(string strChaveNFe, string fullPathNFe)
         {
-            string nomeArqNFe = Functions.ExtrairNomeArq(fullPathNFe, ".xml") + ".xml";            
+            string nomeArqNFe = Functions.ExtrairNomeArq(fullPathNFe, ".xml") + ".xml";
 
             CriarXml();
 
@@ -250,9 +256,21 @@ namespace NFe.Service
                             lfile = OpenFileFluxo(false); //Abrir um arquivo XML usando FileStream
 
                             #region Pegar a versão do schema do XML
+                            string versaoXmlNFe = string.Empty;
                             XmlDocument xmlNFe = new XmlDocument();
                             xmlNFe.Load(fullPathNFe);
-                            string versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.ChildNodes[1].ChildNodes[0].Name)[0]).Attributes["versao"].InnerText;
+
+                            try
+                            {
+                                if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes["versao"] != null)
+                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes["versao"].Value;
+                                else if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes["versao"] != null)
+                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes["versao"].Value;
+                            }
+                            catch
+                            {
+                                throw new Exception("Não pode ler a versão no arquivo: " + fullPathNFe);
+                            }
                             #endregion
 
                             xd.Load(lfile); //Carregar o arquivo aberto no XmlDocument
@@ -298,7 +316,6 @@ namespace NFe.Service
                             throw;
                         }
                     }
-
                     Thread.Sleep(1000);
                 }
             }
@@ -926,62 +943,64 @@ namespace NFe.Service
                         {
                             XmlElement documentoElemento = (XmlElement)documentoNode;
 
-                            string nRec = documentoElemento.GetElementsByTagName(ElementoEditavel.nRec.ToString())[0].InnerText;
-                            string versao = documentoElemento.GetElementsByTagName(ElementoEditavel.versao.ToString())[0].InnerText;
-
-                            int tMed = 3; //3 segundos
-                            DateTime dPedRec = DateTime.Now.AddMinutes(-60);
-
-                            if (documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0] != null &&
-                                documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0].InnerText != string.Empty)
+                            string nRec = Functions.LerTag(documentoElemento, ElementoEditavel.nRec.ToString(), "");    // documentoElemento.GetElementsByTagName(ElementoEditavel.nRec.ToString())[0].InnerText;
+                            string versao = Functions.LerTag(documentoElemento, ElementoEditavel.versao.ToString(), "");// documentoElemento.GetElementsByTagName(ElementoEditavel.versao.ToString())[0].InnerText;
+                            string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
+                            string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");// documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
+                            string NomeArquivoEmProcessamento = Empresa.Configuracoes[empresa].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
+                            string NomeArquivoAssinado = Empresa.Configuracoes[empresa].PastaEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            bool excluiNota = false;
+                            if (File.Exists(NomeArquivoEmProcessamento))
                             {
-                                tMed = Convert.ToInt32(documentoElemento.GetElementsByTagName(ElementoEditavel.tMed.ToString())[0].InnerText);
+                                int tMed = 3; //3 segundos
+                                DateTime dPedRec = DateTime.Now.AddMinutes(-60);
+
+                                tMed = Convert.ToInt32(Functions.LerTag(documentoElemento, ElementoEditavel.tMed.ToString(), tMed.ToString()));
+                                dPedRec = Convert.ToDateTime(Functions.LerTag(documentoElemento, ElementoEditavel.dPedRec.ToString(), dPedRec.ToString("yyyy-MM-dd HH:mm:ss")));
+
+                                //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
+                                //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
+                                //Wandrey 11/09/2009
+                                if (DateTime.Now.Subtract(dPedRec).Days >= 2)
+                                {
+                                    excluiNota = true;
+                                }
+                                else
+                                {
+                                    if (nRec != string.Empty && !lstNumRec.Contains(nRec))
+                                    {
+                                        lstNumRec.Add(nRec);
+
+                                        ReciboCons oReciboCons = new ReciboCons();
+                                        oReciboCons.dPedRec = dPedRec;
+                                        oReciboCons.nRec = nRec;
+                                        oReciboCons.tMed = tMed;
+                                        oReciboCons.versao = versao;
+                                        string chaveNfe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
+                                        if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "NFE")
+                                            oReciboCons.Servico = TipoAplicativo.Nfe;
+                                        else if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "CTE")
+                                            oReciboCons.Servico = TipoAplicativo.Cte;
+                                        else if (chaveNfe.Substring(0, 4).ToUpper().Trim() == "MDFE")
+                                            oReciboCons.Servico = TipoAplicativo.MDFe;
+
+                                        lstRecibo.Add(oReciboCons);
+                                    }
+                                }
                             }
+                            else if (! File.Exists(NomeArquivoAssinado))
+                                excluiNota = true;
 
-                            if (documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0] != null &&
-                                documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0].InnerText != string.Empty)
+                            if (excluiNota)
                             {
-                                dPedRec = Convert.ToDateTime(documentoElemento.GetElementsByTagName(ElementoEditavel.dPedRec.ToString())[0].InnerText);
-                            }
-
-                            if (nRec != string.Empty && !lstNumRec.Contains(nRec))
-                            {
-                                lstNumRec.Add(nRec);
-
-                                ReciboCons oReciboCons = new ReciboCons();
-                                oReciboCons.dPedRec = dPedRec;
-                                oReciboCons.nRec = nRec;
-                                oReciboCons.tMed = tMed;
-                                oReciboCons.versao = versao;
-                                string chaveNfe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
-                                if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "NFE")
-                                    oReciboCons.Servico = TipoAplicativo.Nfe;
-                                else if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "CTE")
-                                    oReciboCons.Servico = TipoAplicativo.Cte;
-                                else if (chaveNfe.Substring(0, 4).ToUpper().Trim() == "MDFE")
-                                    oReciboCons.Servico = TipoAplicativo.MDFe;
-
-                                lstRecibo.Add(oReciboCons);
-                            }
-
-                            //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
-                            //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
-                            //Wandrey 11/09/2009
-                            if (DateTime.Now.Subtract(dPedRec).Days >= 2)
-                            {
-                                string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
-                                string NomeArquivo = documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
-                                int emp = Functions.FindEmpresaByThread();
-
                                 //Deletar o arquivo da pasta em processamento
                                 Auxiliar oAux = new Auxiliar();
-                                oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo);
+                                oAux.MoveArqErro(NomeArquivoEmProcessamento);
 
                                 //Deletar a NFE do arquivo de controle de fluxo
                                 ExcluirNfeFluxo(ChaveNFe);
                             }
                         }
-
                         break;
                     }
                 }

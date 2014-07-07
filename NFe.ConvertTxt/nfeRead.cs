@@ -78,11 +78,14 @@ namespace NFe.ConvertTxt
                         }
                     }
                 }
-                if (nfe.ide.dEmi.Year <= 1 && nfe.infNFe.Versao <= 2)
+                if (!string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao < 3)
                     throw new Exception("Arquivo não é de nota fiscal NF-e");
 
-                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3 && nfe.ide.mod == TpcnMod.modNFCe)
-                    throw new Exception("Arquivo não é de nota fiscal NFC-e");
+                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3)
+                    if (nfe.ide.mod == TpcnMod.modNFCe)
+                        throw new Exception("Arquivo não é de nota fiscal NFC-e");
+                    else
+                        throw new Exception("Arquivo não é de nota fiscal NF-e");
             }
             catch(Exception ex)
             {
@@ -666,8 +669,8 @@ namespace NFe.ConvertTxt
                 diInfo.tpViaTransp = (TpcnTipoViaTransp)this.readInt32(nodedetDI, TpcnResources.tpViaTransp);
                 diInfo.vAFRMM = this.readDouble(nodedetDI, TpcnResources.vAFRMM);
                 diInfo.tpIntermedio = (TpcnTipoIntermedio)this.readInt32(nodedetDI, TpcnResources.tpIntermedio);
-                diInfo.CNPJ = (string)this.readValue(nodedetDI, TpcnResources.CNPJ);
-                diInfo.UFTerceiro = (string)this.readValue(nodedetDI, TpcnResources.UFTerceiro);
+                diInfo.CNPJ = this.readValue(nodedetDI, TpcnResources.CNPJ);
+                diInfo.UFTerceiro = this.readValue(nodedetDI, TpcnResources.UFTerceiro);
 
                 foreach (XmlNode nodedetDIadi in ((XmlElement)nodedetDI).GetElementsByTagName("adi"))
                 {
@@ -975,9 +978,6 @@ namespace NFe.ConvertTxt
 
             if (nfe.infNFe.Versao >= 3)
             {
-                ///
-                /// NFC-e
-                /// 
                 nfe.ide.dhEmi = (string)this.readValue(nodeinfNFe, TpcnResources.dhEmi);
                 nfe.ide.dhSaiEnt = (string)this.readValue(nodeinfNFe, TpcnResources.dhSaiEnt);
                 nfe.ide.idDest = (TpcnDestinoOperacao)this.readInt32(nodeinfNFe,  TpcnResources.idDest);

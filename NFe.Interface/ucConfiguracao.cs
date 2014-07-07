@@ -231,6 +231,8 @@ namespace NFe.Interface
                                     oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
                                 }
 
+                                oEmpresa.ConfiguracaoDanfe = empresa.ConfiguracaoDanfe;
+                                oEmpresa.ConfiguracaoCCe = empresa.ConfiguracaoCCe;
                                 oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
                                 oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
                                 oEmpresa.PastaDanfeMon = empresa.PastaDanfeMon;
@@ -311,6 +313,8 @@ namespace NFe.Interface
             textBox_PastaDownload.Text = oEmpresa.PastaDownloadNFeDest;
             textBox_PastaBackup.Text = (oEmpresa.PastaBackup == string.Empty ? string.Empty : oEmpresa.PastaBackup);
 
+            tbConfiguracaoDanfe.Text = oEmpresa.ConfiguracaoDanfe;
+            tbConfiguracaoCCe.Text = oEmpresa.ConfiguracaoCCe;
             tbPastaConfigUniDanfe.Text = (oEmpresa.PastaConfigUniDanfe == string.Empty ? string.Empty : oEmpresa.PastaConfigUniDanfe);
             tbPastaExeUniDanfe.Text = (oEmpresa.PastaExeUniDanfe == string.Empty ? string.Empty : oEmpresa.PastaExeUniDanfe);
             tbPastaXmlParaDanfeMon.Text = (oEmpresa.PastaDanfeMon == string.Empty ? string.Empty : oEmpresa.PastaDanfeMon);
@@ -446,6 +450,8 @@ namespace NFe.Interface
             oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked;
             oEmpresa.CompactarNFe = this.checkBoxCompactaNFe.Checked;
             oEmpresa.DiretorioSalvarComo = this.cboDiretorioSalvarComo.Text;
+            oEmpresa.ConfiguracaoDanfe = tbConfiguracaoDanfe.Text;
+            oEmpresa.ConfiguracaoCCe = tbConfiguracaoCCe.Text;
             oEmpresa.PastaConfigUniDanfe = tbPastaConfigUniDanfe.Text;
             oEmpresa.PastaExeUniDanfe = tbPastaExeUniDanfe.Text;
             oEmpresa.PastaDanfeMon = tbPastaXmlParaDanfeMon.Text;

@@ -730,37 +730,56 @@ namespace uninfe
                 ok - CTe 
                 ok - MDFe
                 */
-                dlg.Filter = "Arquivos da NFe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
+                dlg.Filter = "Todos os arquivos|*" + Propriedade.ExtRetorno.ProcNFe +
+                    ";*" + Propriedade.ExtRetorno.ProcCTe +
+                    ";*" + Propriedade.ExtRetorno.ProcMDFe +
+                    ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
+                    ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe +
+                    ";*" + Propriedade.ExtRetorno.Den +
+                    ";*" + Propriedade.ExtRetorno.retCancelamento_XML +
+                    ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
+                    ";*" + Propriedade.ExtRetorno.ProcEventoNFe +
+                    ";*" + Propriedade.ExtRetorno.retEPEC_XML +
+                    ";*" + Propriedade.ExtRetorno.retDPEC_XML;
+                dlg.Filter += "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
                 dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
-                dlg.Filter += "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + "; *" + Propriedade.ExtRetorno.ProcEventoCTe;
-                ;
+                dlg.Filter += "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;
+                dlg.Filter += "|Arquivos de EPEC (*.*" + Propriedade.ExtRetorno.retEPEC_XML + ")|*" + Propriedade.ExtRetorno.retEPEC_XML;
                 dlg.Filter += "|Arquivos de CTe (*.*" + Propriedade.ExtRetorno.ProcCTe + ")|*" + Propriedade.ExtRetorno.ProcCTe;
                 dlg.Filter += "|Arquivos de MDFe (*.*" + Propriedade.ExtRetorno.ProcMDFe + ")|*" + Propriedade.ExtRetorno.ProcMDFe;
+                dlg.RestoreDirectory = true;
 
                 while (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    bool executou = false;
-
-                    for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                    try
                     {
-                        Empresa empresa = Empresa.Configuracoes[i];
-                        if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()))
+                        bool executou = false;
+
+                        for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                         {
-                            if (string.IsNullOrEmpty(empresa.PastaExeUniDanfe))
+                            Empresa empresa = Empresa.Configuracoes[i];
+                            if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
+                                Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
                             {
-                                MessageBox.Show("Pasta contendo o UniDANFE não definida para a empresa: " + empresa.Nome);
+                                if (string.IsNullOrEmpty(empresa.PastaExeUniDanfe))
+                                {
+                                    throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + empresa.Nome);
+                                }
+                                NFe.Interface.PrintDANFE.printDANFE(dlg.FileName, empresa);
+
+                                executou = true;
                                 break;
                             }
-                            NFe.Interface.PrintDANFE.printDANFE(dlg.FileName);
-
-                            executou = true;
-                            break;
                         }
+                        if (!executou)
+                            throw new Exception("Arquivo deve estar na pasta de 'Autorizados/Denegados' da empresa");
                     }
 
-                    if (executou)
-                        break;
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }

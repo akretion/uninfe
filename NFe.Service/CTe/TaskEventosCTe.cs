@@ -115,9 +115,7 @@ namespace NFe.Service
             {
                 XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
-                string tpevento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
-
-                dadosEnvEvento.eventos.Add(new Evento(tpevento));
+                dadosEnvEvento.eventos.Add(new Evento());
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
@@ -191,11 +189,18 @@ namespace NFe.Service
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
                                 oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
 
-                                switch (Convert.ToInt32(tpEvento))
+                                switch ((NFe.ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
                                 {
-                                    case 110111: //Cancelamento
-                                    case 110110: //CCe
-                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                    case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                                    case ConvertTxt.tpEventos.tpEvCCe:
+                                        try
+                                        {
+                                            NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresa.Configuracoes[emp]);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Auxiliar.WriteLog("TaskEventosCTe: " + ex.Message);
+                                        }
                                         break;
                                 }
 

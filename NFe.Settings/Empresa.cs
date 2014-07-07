@@ -233,6 +233,11 @@ namespace NFe.Settings
         /// </summary>
         public string PastaConfigUniDanfe { get; set; }
         /// <summary>
+        /// Nome da configuracao da empresa no UniDANFE
+        /// </summary>
+        public string ConfiguracaoDanfe { get; set; }
+        public string ConfiguracaoCCe { get; set; }
+        /// <summary>
         /// Copiar o XML da NFe (-nfe.xml) para a pasta do danfemon? 
         /// </summary>
         public bool XMLDanfeMonNFe { get; set; }
@@ -521,6 +526,8 @@ namespace NFe.Settings
                 empresa.PastaValidar =
                 empresa.PastaDanfeMon =
                 empresa.PastaExeUniDanfe =
+                empresa.ConfiguracaoDanfe =
+                empresa.ConfiguracaoCCe = 
                 empresa.PastaConfigUniDanfe =
                 empresa.PastaDownloadNFeDest =
                 empresa.Certificado =
@@ -585,8 +592,8 @@ namespace NFe.Settings
                         empresa.CompactarNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNFe, "False"));
                         empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
                         empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
-                        empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, false));
-                        empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, false));
+                        empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, "0"));
+                        empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, "0"));
 
                         empresa.PastaEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
                         empresa.PastaRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
@@ -597,6 +604,8 @@ namespace NFe.Settings
                         empresa.PastaEnvioEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
                         empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
 
+                        empresa.ConfiguracaoDanfe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoDanfe, false);
+                        empresa.ConfiguracaoCCe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoCCe, false);
                         empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
                         empresa.PastaConfigUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaConfigUniDanfe, false);
                         empresa.PastaDanfeMon = Functions.LerTag(configElemento, NFeStrConstants.PastaDanfeMon, false);
@@ -617,7 +626,7 @@ namespace NFe.Settings
                         empresa.CertificadoArquivo = Functions.LerTag(configElemento, NFeStrConstants.CertificadoArquivo, false);
                         empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
                         empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
-                        empresa.CerficadoPIN = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoPIN)[0].InnerText.Trim());
+                        empresa.CerficadoPIN = Criptografia.descriptografaSenha(Functions.LerTag(configElemento, NFeStrConstants.CertificadoPIN, ""));
 
                         if (!empresa.CertificadoInstalado)
                             if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)

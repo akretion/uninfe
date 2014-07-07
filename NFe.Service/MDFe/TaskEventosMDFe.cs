@@ -115,9 +115,7 @@ namespace NFe.Service
             {
                 XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
-                string tpevento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
-
-                dadosEnvEvento.eventos.Add(new Evento(tpevento));
+                dadosEnvEvento.eventos.Add(new Evento());
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                 dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
@@ -194,7 +192,14 @@ namespace NFe.Service
                                 switch (Convert.ToInt32(tpEvento))
                                 {
                                     case 110111: //Cancelamento
-                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, "");
+                                        try
+                                        {
+                                            NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresa.Configuracoes[emp]);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Auxiliar.WriteLog("TaskEventosMDFe: " + ex.Message);
+                                        }
                                         break;
                                 }
 

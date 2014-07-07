@@ -310,7 +310,7 @@ namespace NFe.Service
                                                 }
                                             }
 
-                                            if (!procNFeJaNaAutorizada)
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe)))
                                             {
                                                 //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
                                                 //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
@@ -333,10 +333,22 @@ namespace NFe.Service
                                                 TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                             }
 
-                                            //Disparar a geração/impressçao do UniDanfe. 03/02/2010 - Wandrey
+                                            //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
                                             if (procNFeJaNaAutorizada)
-                                                TFunctions.ExecutaUniDanfe(strNomeArqNfe, oLerXml.oDadosNfe.dEmi, "mdfe");
-
+                                            {
+                                                try
+                                                {
+                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                                            PastaEnviados.Autorizados.ToString() + "\\" +
+                                                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                            Path.GetFileName(strArquivoNFeProc);
+                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Auxiliar.WriteLog("TaskRetRecepcaoMDFe: " + ex.Message);
+                                                }
+                                            }
                                             //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012
                                             NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtEnvio.MDFe);
                                             procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe);

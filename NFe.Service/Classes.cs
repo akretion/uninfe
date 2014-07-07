@@ -639,18 +639,50 @@ namespace NFe.Service
         /// Cancelamento de NFe como Evento e Manifestação do Destinatário
         public string xJust { get; set; }
 
+        /// <summary>
+        /// EPEC
+        /// </summary>
+        public EventoEPEC epec { get; set; }
+
         public Evento()
         {
+            epec = new EventoEPEC();
             verEvento = "1.00";
             versao = "1.00";
             tpEvento = "110110";
         }
+    }
+    public class EventoEPEC
+    {
+        public Int32 cOrgaoAutor { get;set; }
+        public NFe.ConvertTxt.TpcnTipoAutor tpAutor { get;set; }
+        public string verAplic { get;set; }
+        public string dhEmi { get;set; }
+        public NFe.ConvertTxt.TpcnTipoNFe tpNF { get; set; }
+        public string IE { get; set; }
 
-        public Evento(string ptpEvento)
+        public EventoDestinatario dest { get; set; }
+        public double vNF { get; set; }
+        public double vICMS { get; set; }
+        public double vST { get; set; }
+
+        public EventoEPEC()
         {
-            verEvento = "2.00";
-            versao = "2.00";
-            tpEvento = ptpEvento;
+            dest = new EventoDestinatario();
+            IE = verAplic = dhEmi = string.Empty;
+        }
+    }
+    public class EventoDestinatario
+    {
+        public string CNPJ { get; set; }
+        public string CPF { get; set; }
+        public string idEstrangeiro { get; set; }
+        public string IE { get; set; }
+        public string UF { get; set; }
+
+        public EventoDestinatario()
+        {
+            this.CNPJ = this.CPF = this.idEstrangeiro = this.IE = this.UF = string.Empty;
         }
     }
 
@@ -658,7 +690,7 @@ namespace NFe.Service
     {
         public string versao { get; set; }
         public string idLote { get; set; }
-        public List<Evento> eventos { get; private set; }
+        public List<Evento> eventos { get; set; }
 
         public DadosenvEvento()
         {

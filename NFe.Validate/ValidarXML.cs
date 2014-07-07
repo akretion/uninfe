@@ -139,44 +139,42 @@ namespace NFe.Validate
 
             if(lArqXML && lArqXSD)
             {
-                XmlReader xmlReader = null;
+                this.cErro = "";
 
                 try
                 {
                     this.EncryptAssinatura(cRotaArqXML);    //danasa: 12/2013
 
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.ValidationType = ValidationType.Schema;
-
-                    XmlSchemaSet schemas = new XmlSchemaSet();
-                    settings.Schemas = schemas;
-
-                    if(TipoArqXml.TargetNameSpace != string.Empty)
-                        schemas.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
-                    else
-                        schemas.Add(Propriedade.nsURI, caminhoDoSchema);
-
-                    settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
-
-                    xmlReader = XmlReader.Create(cRotaArqXML, settings);
-
-                    this.cErro = "";
-                    try
+                    // Create a new validating reader
+                    using (var sReader = new StreamReader(cRotaArqXML))
                     {
-                        while(xmlReader.Read()) { }
-                    }
-                    catch(Exception ex)
-                    {
-                        this.cErro = ex.Message;
-                    }
+                        using (var xtReader = new XmlTextReader(sReader))
+                        {
+                            using (XmlValidatingReader reader = new XmlValidatingReader(xtReader))
+                            {
+                                // Create a schema collection, add the xsd to it
+                                XmlSchemaCollection schemaCollection = new XmlSchemaCollection();
 
-                    xmlReader.Close();
+                                if (TipoArqXml.TargetNameSpace != string.Empty)
+                                    schemaCollection.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
+                                else
+                                    schemaCollection.Add(Propriedade.nsURI, caminhoDoSchema);
+
+                                // Add the schema collection to the XmlValidatingReader
+                                reader.Schemas.Add(schemaCollection);
+
+                                // Wire up the call back.  The ValidationEvent is fired when the
+                                // XmlValidatingReader hits an issue validating a section of the xml
+                                reader.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
+
+                                // Iterate through the xml document
+                                while (reader.Read()) { }
+                            }
+                        }
+                    }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    if(xmlReader != null)
-                        xmlReader.Close();
-
                     cErro = ex.Message + "\r\n";
                 }
 

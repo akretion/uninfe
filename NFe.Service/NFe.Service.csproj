@@ -117,6 +117,7 @@
     <Compile Include="NFe\TaskNFeRecepcao.cs" />
     <Compile Include="NFe\TaskConsultaSituacaoNFe.cs" />
     <Compile Include="NFe\TaskRetRecepcao.cs" />
+    <Compile Include="TaskDanfe.cs" />
     <Compile Include="TaskWSExiste.cs" />
     <Compile Include="TFunctions.cs" />
   </ItemGroup>

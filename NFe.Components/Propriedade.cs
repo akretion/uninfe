@@ -353,6 +353,15 @@ namespace NFe.Components
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e
+
+            /// <summary>
+            /// -ped-epec.xml
+            /// </summary>
+            public const string PedEPEC = "-ped-epec.xml";
+            /// <summary>
+            /// -ped-epec.txt
+            /// </summary>
+            public const string PedEPEC_TXT = "-ped-epec.txt";
             /// <summary>
             /// -ped-eve.xml
             /// </summary>
@@ -411,10 +420,15 @@ namespace NFe.Components
             public const string PedSta_TXT = "-ped-sta.txt";
             #endregion
 
-            #region Não sei para que serve - Wandrey
+            #region Extensões usadas na pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)
             public const string EnvWSExiste_XML = "-env-ws.xml";
             public const string EnvWSExiste_TXT = "-env-ws.txt";
             #endregion
+
+            public const string EnvImpressaoDanfe_XML = "-env-danfe.xml";
+            public const string EnvImpressaoDanfe_TXT = "-env-danfe.txt";
+            public const string EnvDanfeReport_XML = "-env-danfe-report.xml";
+            public const string EnvDanfeReport_TXT = "-env-danfe-report.txt";
         }
         #endregion
 
@@ -521,6 +535,14 @@ namespace NFe.Components
             /// -ret-env-regsaida.txt
             /// </summary>
             public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
+            /// <summary>
+            /// -ret-epec.xml
+            /// </summary>
+            public const string retEPEC_XML = "-ret-epec.xml";
+            /// <summary>
+            /// -ret-epec.err
+            /// </summary>
+            public const string retEPEC_ERR = "-ret-epec.err";
             #endregion
 
             #region Extensões CTe
@@ -675,10 +697,15 @@ namespace NFe.Components
             public const string Urlnfse_ERR = "-urlnfse.err";
             #endregion
 
-            #region Não sei para que serve - Wandrey
+            #region Extensões usadas para retorno da pesquisa de se um serviço exista para um determinado estado (Producao/Homologacao)
             public const string retWSExiste_XML = "-ret-env-ws.xml";
             public const string retWSExiste_TXT = "-ret-env-ws.txt";
             #endregion
+
+            public const string RetImpressaoDanfe_XML = "-ret-danfe.xml";
+            public const string RetImpressaoDanfe_TXT = "-ret-danfe.txt";
+            public const string RetDanfeReport_XML = "-ret-env-danfe-report.xml";
+            public const string RetDanfeReport_TXT = "-ret-env-danfe-report.txt";
         }
         #endregion
 
@@ -877,6 +904,8 @@ namespace NFe.Components
         public static string PastaBackup = "PastaBackup";
         public static string PastaValidar = "PastaValidar";
         public static string PastaDownloadNFeDest = "PastaDownloadNFeDest";
+        public static string ConfiguracaoDanfe = "ConfiguracaoDanfe";
+        public static string ConfiguracaoCCe = "ConfiguracaoCCe";
         public static string PastaExeUniDanfe = "PastaExeUniDanfe";
         public static string PastaConfigUniDanfe = "PastaConfigUniDanfe";
         public static string PastaDanfeMon = "PastaDanfeMon";

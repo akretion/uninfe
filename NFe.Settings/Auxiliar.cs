@@ -120,7 +120,7 @@ namespace NFe.Settings
                             }*/
                         }
 
-                        arquivoWS = new StreamWriter(fileName, true);
+                        arquivoWS = new StreamWriter(fileName, true, Encoding.UTF8);
                         arquivoWS.WriteLine(DateTime.Now.ToLongTimeString() + "  " + msg);
                         arquivoWS.Flush();
                         arquivoWS.Close();
@@ -178,7 +178,8 @@ namespace NFe.Settings
 
                     Functions.Move(Arquivo, vNomeArquivo);
 
-                    Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
+                    Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para " + vNomeArquivo, true);
+                    //Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
 
                     /*
                     //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
@@ -213,7 +214,9 @@ namespace NFe.Settings
         {
             int emp = Functions.FindEmpresaByThread();
 
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + 
+                                            PastaEnviados.Autorizados.ToString() + "\\" + 
+                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
         }
         #endregion
@@ -231,7 +234,7 @@ namespace NFe.Settings
             string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
-            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + "-den.xml");
+            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
         }
         #endregion
 

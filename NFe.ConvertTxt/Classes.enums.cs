@@ -182,7 +182,6 @@ namespace NFe.ConvertTxt
         tiPaisagem = 2,
         tiDANFESimplificado = 3,
         tiDANFENFCe = 4,
-        //tiDANFENFCe_resumido = 5,
         tiDANFENFCe_em_mensagem_eletrônica = 5
     }
     public enum TpcnFinalidadeNFe
@@ -190,7 +189,7 @@ namespace NFe.ConvertTxt
         fnNormal = 1,
         fnComplementar = 2,
         fnAjuste = 3,
-        fnDevolucao = 4//NFe_de_Resumo_da_operação_em_contingência_da_NFCe = 4
+        fnDevolucao = 4
     }
     public enum TpcnTipoEmissao
     {
@@ -215,18 +214,38 @@ namespace NFe.ConvertTxt
 
     public enum tpEventos
     {
+        [Description("Carta de Correcao")]
         tpEvCCe = 110110,
+        [Description("Cancelamento")]
         tpEvCancelamentoNFe = 110111,
+        [Description("Confirmacao da Operacao")]
         tpEvConfirmacaoOperacao = 210200,
+        [Description("Ciencia da Operacao")]
         tpEvCienciaOperacao = 210210,
+        [Description("Desconhecimento da Operacao")]
         tpEvDesconhecimentoOperacao = 210220,
+        [Description("EPEC")]
+        tpEvEPEC = 110140,
+        [Description("Operação nao Realizada")]
         tpEvOperacaoNaoRealizada = 210240,
-    	tpEvEPECNFe = 110140,
-
+        [Description("Encerramento MDFe")]
         tpEvEncerramentoMDFe = 110112,
+        [Description("Inclusao de condutor")]
         tpEvInclusaoCondutor = 110114,
+        [Description("Registro de passagem")]
         tpEvRegistroPassagem = 310620,
+        [Description("Registro de passagem-BRid")]
         tpEvRegistroPassagemBRid = 510620
+    }
+
+    public enum TpcnTipoAutor
+    {
+        taEmpresaEmitente = 1,
+        taEmpresaDestinataria = 2,
+        taEmpresa = 3,
+        taFisco = 5,
+        taRFB = 6,
+        taOutros = 9
     }
 
     public enum TpcnCSTIcms
@@ -379,13 +398,13 @@ namespace NFe.ConvertTxt
         CNPJProd,
         CODIF,
         cOrgao,
+        cOrgaoAutor,
         condVeic,
         cMunDescarga,
         cMunCarrega,
         cPais,
         CPF,
         CPFDest,
-
         cProd,
         cProdANP,
         cPrtDest,
@@ -461,11 +480,13 @@ namespace NFe.ConvertTxt
         IM,
         indCredCTe,
         indCredNFe,
+        indEmi,
         indFinal,
         indIEDest,
         indIncentivo,
         indISS,
         indISSRet,
+        indNFe,
         indPag,
         indPres,
         indProc,
@@ -592,6 +613,7 @@ namespace NFe.ConvertTxt
         tBand,
         tpAmb,
         tpArma,
+        tpAutor,
         tpCar,
         tpComb,
         tpCTe,
@@ -630,6 +652,7 @@ namespace NFe.ConvertTxt
         UFDesemb,
         UFEmbarq,
         UFST,
+        ultNSU,
         uTrib,
 
         vAFRMM,

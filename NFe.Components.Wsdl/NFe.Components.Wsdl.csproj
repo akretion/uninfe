@@ -1723,6 +1723,30 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\schemas\EPEC\e110140_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\envEPEC_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\EPEC_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\leiauteEPEC_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\procEPEC_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\retEnvEPEC_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\tiposBasico_v1.03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EPEC\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
     <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSCancelamentoNFSe.wsdl" />

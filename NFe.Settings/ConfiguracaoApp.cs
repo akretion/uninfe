@@ -160,7 +160,7 @@ namespace NFe.Settings
 
                 try
                 {
-                    System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFrom("NFe.Components.Wsdl.dll");
+                    System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFrom(Propriedade.PastaExecutavel + "\\NFe.Components.Wsdl.dll");
                     string[] x = ass.GetManifestResourceNames();
                     if (x.GetLength(0) > 0)
                     {
@@ -1079,6 +1079,8 @@ namespace NFe.Settings
         }
         #endregion
 
+
+
         #region GravarConfigEmpresa()
         /// <summary>
         /// Gravar as configurações das empresas
@@ -1161,6 +1163,8 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
                     if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                     {
+                        oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoDanfe, empresa.ConfiguracaoDanfe);
+                        oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoCCe, empresa.ConfiguracaoCCe);
                         oXmlGravar.WriteElementString(NFeStrConstants.PastaExeUniDanfe, empresa.PastaExeUniDanfe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.PastaConfigUniDanfe, empresa.PastaConfigUniDanfe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.PastaDanfeMon, empresa.PastaDanfeMon.ToString());
@@ -1633,7 +1637,30 @@ namespace NFe.Settings
                     if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                     {
                         #region Formato TXT
+
                         List<string> cLinhas = Functions.LerArquivo(cArquivoXml);
+
+                        /*
+                        Type type = Empresa.Configuracoes[emp].GetType();
+
+                        string propertyName, value;
+                        string[] temp;
+                        char[] splitChars = new char[] { '|' };
+                        PropertyInfo propertyInfo;
+
+                        foreach (string s in cLinhas)
+                        {
+                            temp = s.Split(splitChars);
+                            if (temp.Length == 2)
+                            {
+                                propertyName = temp[0];
+                                value = temp[1];
+                                propertyInfo = type.GetProperty(propertyName);
+                                if (propertyInfo != null)
+                                    Functions.SetProperty(Empresa.Configuracoes[emp], propertyInfo, value);
+                            }
+                        }
+                        */
 
                         foreach (string texto in cLinhas)
                         {
@@ -1688,7 +1715,7 @@ namespace NFe.Settings
                                     Empresa.Configuracoes[emp].PastaValidar = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
                                     lEncontrouTag = true;
                                     break;
-                                case "gravarretornotxtnfe": //Se a tag <PastaValidar> existir ele pega no novo conteúdo
+                                case "gravarretornotxtnfe": //Se a tag <GravarRetornoTXTNFe> existir ele pega no novo conteúdo
                                     Empresa.Configuracoes[emp].GravarRetornoTXTNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
                                     lEncontrouTag = true;
                                     break;
@@ -1742,6 +1769,14 @@ namespace NFe.Settings
                                     break;
                                 case "gravarlogoperacaorealizada":
                                     ConfiguracaoApp.GravarLogOperacoesRealizadas = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : true);
+                                    lEncontrouTag = true;
+                                    break;
+                                case "configuracaodanfe": //Se a tag <ConfiguracaoDanfe> existir ele pega no novo conteúdo
+                                    Empresa.Configuracoes[emp].ConfiguracaoDanfe = (nElementos == 2 ? dados[1].Trim() : "");
+                                    lEncontrouTag = true;
+                                    break;
+                                case "configuracaocce": //Se a tag <ConfiguracaoCCe> existir ele pega no novo conteúdo
+                                    Empresa.Configuracoes[emp].ConfiguracaoCCe = (nElementos == 2 ? dados[1].Trim() : "");
                                     lEncontrouTag = true;
                                     break;
                                 case "pastaexeunidanfe": //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
@@ -1991,6 +2026,18 @@ namespace NFe.Settings
                             if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe).Count != 0)
                             {
                                 Empresa.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe)[0].InnerText, true);
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ConfiguracaoDanfe> existir ele pega no novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoDanfe).Count != 0)
+                            {
+                                Empresa.Configuracoes[emp].ConfiguracaoDanfe = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoDanfe)[0].InnerText;
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ConfiguracaoCCe> existir ele pega no novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoCCe).Count != 0)
+                            {
+                                Empresa.Configuracoes[emp].ConfiguracaoCCe = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoCCe)[0].InnerText;
                                 lEncontrouTag = true;
                             }
                             //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo

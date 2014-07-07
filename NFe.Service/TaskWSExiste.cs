@@ -170,6 +170,8 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.RecepcaoEvento; break;
                             case "enviarcce":
                                 srv = Servicos.EnviarCCe; break;
+                            case "enviarepec":
+                                srv = Servicos.EnviarEPEC; break;
                             case "enviareventocancelamento":
                                 srv = Servicos.EnviarEventoCancelamento; break;
                             case "nfeconsulta1":
@@ -202,7 +204,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                         if (srv == Servicos.Nulo)
                         {
                             string aServicos = "NFeConsultarDPEC,NFeEnviarDPEC";
-                            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse || Propriedade.TipoAplicativo == TipoAplicativo.Cte)
+                            if (Empresa.Configuracoes[emp].Servico == TipoAplicativo.Nfse)
                                 aServicos = "";
 
                             System.Reflection.PropertyInfo[] fieldInfo = typeof(URLws).GetProperties();
@@ -215,15 +217,15 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 }
                                 bool isNFse = ("RecepcionarLoteRps,ConsultarSituacaoLoteRps,ConsultarNfsePorRps,ConsultarNfse,ConsultarLoteRps,CancelarNfse").Contains(info.Name);
 
-                                if ((Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoAplicativo == TipoAplicativo.Cte) && isNFse)
+                                if (Empresa.Configuracoes[emp].Servico != TipoAplicativo.Nfse && isNFse)
                                     continue;
 
-                                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse && info.Name.StartsWith("NFe")) continue;
+                                if (Empresa.Configuracoes[emp].Servico == TipoAplicativo.Nfse && info.Name.StartsWith("NFe")) continue;
 
                                 aServicos += "," + info.Name;
                             }
                             if (aServicos.StartsWith(",")) aServicos = aServicos.Substring(1);
-                            throw new Exception("Serviços disponveis: " + aServicos);
+                            throw new Exception("Serviços disponiveis: " + aServicos);
                         }
                         else
                             try
