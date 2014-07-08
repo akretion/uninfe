@@ -68,6 +68,9 @@ namespace NFe.Threadings
             {
                 try
                 {
+
+                    if(String.IsNullOrEmpty(Directory)) continue;
+
                     string[] Files = System.IO.Directory.GetFiles(Directory, Filter, System.IO.SearchOption.TopDirectoryOnly);
 
                     Hashtable NewFiles = new Hashtable();

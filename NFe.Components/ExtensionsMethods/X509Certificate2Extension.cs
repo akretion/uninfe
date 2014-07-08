@@ -24,7 +24,7 @@ namespace NFe
         /// <param name="_PinPassword">O Pin Code / Senha / Password</param>
         public static void SetPinPrivateKey(this X509Certificate2 _Certificado, string _PinPassword)
         {
-            if (_Certificado == null) throw new ArgumentNullException("_Certificado == null!");
+            if(_Certificado == null) throw new ArgumentNullException("_Certificado == null!");
             var key = (RSACryptoServiceProvider)_Certificado.PrivateKey;
 
             IntPtr ProviderHandle = IntPtr.Zero;
@@ -50,6 +50,37 @@ namespace NFe
                                            0,
                                            ProviderHandle)
                                       );
+        }
+
+        /// <summary>
+        /// Retorna true se o certificado for do tipo A3.
+        /// </summary>
+        /// <param name="x509cert">Certificado que deverá ser validado se é A3 ou não.</param>
+        /// <returns></returns>
+        public static bool IsA3(this X509Certificate2 x509cert)
+        {
+            if(x509cert == null) throw new ArgumentNullException("x509cert");
+
+            bool result = false;
+
+            try
+            {
+                RSACryptoServiceProvider service = x509cert.PrivateKey as RSACryptoServiceProvider;
+
+                if(service != null)
+                {
+                    if(service.CspKeyContainerInfo.Removable &&
+                    service.CspKeyContainerInfo.HardwareDevice)
+                        result = true;
+                }
+            }
+            catch
+            {
+                //assume que é false
+                result = false;
+            }
+
+            return result;
         }
     }
     /// <summary>
@@ -101,7 +132,7 @@ namespace NFe
 
         public static void Execute(Func<bool> action)
         {
-            if (!action())
+            if(!action())
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }

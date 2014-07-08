@@ -54,7 +54,7 @@ namespace NFe.Settings
                 try
                 {
                     int emp = Functions.FindEmpresaByThread();
-                    if (Empresa.Configuracoes[emp].PastaXmlRetorno != string.Empty)
+                    if(Empresa.Configuracoes[emp].PastaXmlRetorno != string.Empty)
                     {
                         //Grava arquivo de ERRO para o ERP
                         string cArqErro = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
@@ -72,6 +72,11 @@ namespace NFe.Settings
         #region WriteLog()
         public static void WriteLog(string msg)
         {
+
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(msg);
+#endif
+
             bool geraLog = ConfiguracaoApp.GravarLogOperacoesRealizadas;
             if(geraLog)
                 Auxiliar.WriteLog(msg, false);
@@ -214,8 +219,8 @@ namespace NFe.Settings
         {
             int emp = Functions.FindEmpresaByThread();
 
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + 
-                                            PastaEnviados.Autorizados.ToString() + "\\" + 
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                            PastaEnviados.Autorizados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
         }

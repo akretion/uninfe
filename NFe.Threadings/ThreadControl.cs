@@ -159,13 +159,14 @@ namespace NFe.Threadings
     #endregion
 
     /*<#8084>
-     * A classe ThreadControl deixou de existir por não ser mais utilizada dentro do aplicação, foi subusituída pelo método ThreadItem.Run()_
+     * A classe ThreadControl deixou de existir por não ser mais utilizada dentro do aplicação, 
+     * foi substituída pelo método ThreadItem.Run()_
      *</#8084>
      */
 
     #region  ThreadService
     /// <summary>
-    /// Classe responsavel por executar as thread´s base de verificação dos serviços a serem executados
+    /// Classe responsável por executar as thread´s base de verificação dos serviços a serem executados
     /// </summary>
     public static class ThreadService
     {
@@ -205,7 +206,7 @@ namespace NFe.Threadings
             t.Start();
             Threads.Add(t);
 
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
                 //Executa a thread que faz a verificação das notas em processamento
                 Thread t2 = new Thread(new Processar().EmProcessamento);
