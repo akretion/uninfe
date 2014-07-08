@@ -28,7 +28,7 @@ namespace NFe.Service
             List<string> arquivosNFe = new List<string>();
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
-            arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaEnvioEmLote, "*" + Propriedade.ExtEnvio.MDFe);
+            arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.ExtEnvio.MDFe);
             if (arquivosNFe.Count == 0)
             {
                 List<string> notas = new List<string>();
@@ -54,7 +54,7 @@ namespace NFe.Service
 
                             for (int d = 0; d < QtdeArquivo; d++)
                             {
-                                string arquivoNFe = Empresa.Configuracoes[emp].PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoMDFe")[d].InnerText;
+                                string arquivoNFe = Empresa.Configuracoes[emp].PastaXmlEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoMDFe")[d].InnerText;
 
                                 if (File.Exists(arquivoNFe))
                                 {

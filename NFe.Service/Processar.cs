@@ -178,7 +178,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarNFeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarNFe(arquivo, Empresa.Configuracoes[emp].PastaEnvioEmLote);
+                                AssinarValidarNFe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.ConsultaCadastroContribuinte:
@@ -231,7 +231,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarMDFeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarMDFe(arquivo, Empresa.Configuracoes[emp].PastaEnvioEmLote);
+                                AssinarValidarMDFe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.MontarLoteVariosMDFe:
@@ -290,7 +290,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarCTeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarCTe(arquivo, Empresa.Configuracoes[emp].PastaEnvioEmLote);
+                                AssinarValidarCTe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.MontarLoteVariosCTe:
@@ -400,8 +400,8 @@ namespace NFe.Service
                 {
                     FileInfo infArq = new FileInfo(arq);
                     string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
-                    string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvioEmLote).ToLower().Trim();
-                    string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaEnvio).ToLower().Trim();
+                    string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaXmlEmLote).ToLower().Trim();
+                    string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaXmlEnvio).ToLower().Trim();
                     if (pastaArq.EndsWith("\\temp"))
                         pastaArq = Path.GetDirectoryName(pastaArq);
 
@@ -482,7 +482,7 @@ namespace NFe.Service
                         }
                         else if (arq.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
                         {
-                            if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                            if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                             {
                                 tipoServico = Servicos.MontarLoteVariasNFe;
                             }
@@ -522,7 +522,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteMDFe":
-                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariosMDFe;
                                 }
@@ -566,7 +566,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteCTe":
-                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariosCTe;
                                 }
@@ -613,7 +613,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteNFe":
-                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaEnvioEmLote.ToLower().Trim()) >= 0)
+                                if (arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariasNFe;
                                 }
@@ -772,7 +772,7 @@ namespace NFe.Service
                 else
                 {
                     int emp = Functions.FindEmpresaByThread();
-                    ValidarXML validar = new ValidarXML(arquivo, Empresa.Configuracoes[emp].UFCod);
+                    ValidarXML validar = new ValidarXML(arquivo, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
                     validar.ValidarAssinarXML(arquivo);
                 }
             }
@@ -1024,10 +1024,10 @@ namespace NFe.Service
             Auxiliar oAux = new Auxiliar();
 
             if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
-                sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
+                sArqRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
                               Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_TXT) + "-ret-cons-inf.txt";
             else
-                sArqRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" +
+                sArqRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
                               Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.xml";
 
             try
@@ -1155,19 +1155,19 @@ namespace NFe.Service
                 for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
                     //Limpar conteúdo da pasta temp que fica dentro da pasta de envio de cada empresa a cada 10 dias
-                    Limpar(Empresa.Configuracoes[i].PastaEnvio + "\\temp", 10);
+                    Limpar(Empresa.Configuracoes[i].PastaXmlEnvio + "\\temp", 10);
                     Limpar(Empresa.Configuracoes[i].PastaValidar + "\\temp", 10);   //danasa 12/8/2011
-                    Limpar(Empresa.Configuracoes[i].PastaEnvioEmLote + "\\temp", 10);   //Wandrey 05/10/2011
+                    Limpar(Empresa.Configuracoes[i].PastaXmlEmLote + "\\temp", 10);   //Wandrey 05/10/2011
 
                     if (Empresa.Configuracoes[i].DiasLimpeza == 0)
                         continue;
 
                     #region temporario
-                    Limpar(Empresa.Configuracoes[i].PastaErro, Empresa.Configuracoes[i].DiasLimpeza);
+                    Limpar(Empresa.Configuracoes[i].PastaXmlErro, Empresa.Configuracoes[i].DiasLimpeza);
                     #endregion
 
                     #region retorno
-                    Limpar(Empresa.Configuracoes[i].PastaRetorno, Empresa.Configuracoes[i].DiasLimpeza);
+                    Limpar(Empresa.Configuracoes[i].PastaXmlRetorno, Empresa.Configuracoes[i].DiasLimpeza);
                     #endregion
                 }
             }

@@ -45,8 +45,8 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.IPM:
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
-                        IPM ipm = new IPM(Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, 7483, Empresa.Configuracoes[emp].PastaRetorno);
-                        ipm.EmitirNF(NomeArquivoXML, (TpAmb)Empresa.Configuracoes[emp].tpAmb);
+                        IPM ipm = new IPM(Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, 7483, Empresa.Configuracoes[emp].PastaXmlRetorno);
+                        ipm.EmitirNF(NomeArquivoXML, (TpAmb)Empresa.Configuracoes[emp].AmbienteCodigo);
                         break;
 
                     case PadroesNFSe.GINFES:
@@ -156,8 +156,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
-                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].tpAmb,
-                            Empresa.Configuracoes[emp].PastaRetorno, Empresa.Configuracoes[emp].X509Certificado);
+                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].AmbienteCodigo,
+                            Empresa.Configuracoes[emp].PastaXmlRetorno, Empresa.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
                         syspro.EmiteNF(NomeArquivoXML);
@@ -178,7 +178,7 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);

@@ -1106,7 +1106,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRCteStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNfeDownloadNF.wsdl" />
@@ -1783,6 +1782,11 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSorocabaSP-DFSLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaIguacuRJ-DFSLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParanapanamaSP-PRONINServices.WSDL" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParanapanamaSP-PRONINServices.WSDL" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCacapavaRS-DUETOServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacapavaRS-DUETOServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCuiaba-MTISSNet.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2_200.wsdl" />

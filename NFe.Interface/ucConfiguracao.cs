@@ -210,23 +210,23 @@ namespace NFe.Interface
                     /// já que na segunda vez os nomes das pastas já estão atribuidas
                     //oEmpresa.CriaPastasAutomaticamente = false;
 
-                    if(string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                    if(string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
                     {
                         ///
                         /// tenta achar uma configuracao valida
                         /// 
                         foreach(Empresa empresa in Empresa.Configuracoes)
                         {
-                            if(empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaEnvio))
+                            if(empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                             {
-                                oEmpresa.PastaEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvio, oEmpresa);
-                                oEmpresa.PastaRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaRetorno, oEmpresa);
-                                oEmpresa.PastaErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaErro, oEmpresa);
+                                oEmpresa.PastaXmlEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnvio, oEmpresa);
+                                oEmpresa.PastaXmlRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlRetorno, oEmpresa);
+                                oEmpresa.PastaXmlErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlErro, oEmpresa);
                                 oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
                                 if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                                 {
-                                    oEmpresa.PastaEnvioEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnvioEmLote, oEmpresa);
-                                    oEmpresa.PastaEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaEnviado, oEmpresa);
+                                    oEmpresa.PastaXmlEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEmLote, oEmpresa);
+                                    oEmpresa.PastaXmlEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnviado, oEmpresa);
                                     oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
                                     oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
                                 }
@@ -242,7 +242,7 @@ namespace NFe.Interface
                                 oEmpresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
                                 oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                                 oEmpresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
-                                oEmpresa.CompactarNFe = empresa.CompactarNFe;
+                                oEmpresa.CompactarNfe = empresa.CompactarNfe;
                                 oEmpresa.IndSinc = empresa.IndSinc;
 
                                 oEmpresa.CriaPastasAutomaticamente = true;
@@ -252,19 +252,19 @@ namespace NFe.Interface
                         ///
                         /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
                         /// 
-                        if(string.IsNullOrEmpty(oEmpresa.PastaEnvio))
+                        if(string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
                         {
                             string subpasta = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\nfse" : "");
 
-                            oEmpresa.PastaEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Envio");
-                            oEmpresa.PastaRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Retorno");
-                            oEmpresa.PastaErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Erro");
+                            oEmpresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Envio");
+                            oEmpresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Retorno");
+                            oEmpresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Erro");
                             oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Validar");
                             if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                             {
-                                oEmpresa.PastaEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Enviado");
+                                oEmpresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Enviado");
                                 //oEmpresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Backup");
-                                oEmpresa.PastaEnvioEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\EnvioEmLote");
+                                oEmpresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\EnvioEmLote");
                                 oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\DownloadNFe");
                             }
 
@@ -298,17 +298,17 @@ namespace NFe.Interface
             {
                 oEmpresa = new Empresa();
                 oEmpresa.tpEmis = (int)Propriedade.TipoEmissao.teNormal;
-                oEmpresa.tpAmb = (int)Propriedade.TipoAmbiente.taHomologacao;
-                oEmpresa.UFCod = 41;
+                oEmpresa.AmbienteCodigo = (int)Propriedade.TipoAmbiente.taHomologacao;
+                oEmpresa.UnidadeFederativaCodigo = 41;
                 oEmpresa.DiretorioSalvarComo = "AM";
                 oEmpresa.CNPJ = "";
             }
 
-            textBox_PastaEnvioXML.Text = oEmpresa.PastaEnvio;
-            textBox_PastaRetornoXML.Text = oEmpresa.PastaRetorno;
-            textBox_PastaEnviados.Text = oEmpresa.PastaEnviado;
-            textBox_PastaXmlErro.Text = oEmpresa.PastaErro;
-            textBox_PastaLote.Text = oEmpresa.PastaEnvioEmLote;
+            textBox_PastaEnvioXML.Text = oEmpresa.PastaXmlEnvio;
+            textBox_PastaRetornoXML.Text = oEmpresa.PastaXmlRetorno;
+            textBox_PastaEnviados.Text = oEmpresa.PastaXmlEnviado;
+            textBox_PastaXmlErro.Text = oEmpresa.PastaXmlErro;
+            textBox_PastaLote.Text = oEmpresa.PastaXmlEmLote;
             textBox_PastaValidar.Text = oEmpresa.PastaValidar;
             textBox_PastaDownload.Text = oEmpresa.PastaDownloadNFeDest;
             textBox_PastaBackup.Text = (oEmpresa.PastaBackup == string.Empty ? string.Empty : oEmpresa.PastaBackup);
@@ -324,7 +324,7 @@ namespace NFe.Interface
             checkBoxGravarEventosDeTerceiros.Checked = oEmpresa.GravarEventosDeTerceiros;
             checkBoxGravarEventosNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosNaPastaEnviadosNFe;
             checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
-            checkBoxCompactaNFe.Checked = oEmpresa.CompactarNFe;
+            checkBoxCompactaNFe.Checked = oEmpresa.CompactarNfe;
             HabilitaOpcaoCompactar(oEmpresa.Servico == TipoAplicativo.Nfe);
             cbIndSinc.Checked = oEmpresa.IndSinc;
             cbCriaPastas.Checked = oEmpresa.CriaPastasAutomaticamente;
@@ -363,7 +363,7 @@ namespace NFe.Interface
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for(int i = 0; i < arrUF.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Codigo == oEmpresa.UFCod)
+                if(((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Codigo == oEmpresa.UnidadeFederativaCodigo)
                 {
                     this.comboBox_UF.Text = ((ComboElem)(new System.Collections.ArrayList(arrUF))[i]).Nome;
                     break;
@@ -374,7 +374,7 @@ namespace NFe.Interface
             //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
             for(int i = 0; i < arrAmb.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Codigo == oEmpresa.tpAmb)
+                if(((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Codigo == oEmpresa.AmbienteCodigo)
                 {
                     this.comboBox_Ambiente.Text = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[i]).Valor;
                     break;
@@ -382,7 +382,7 @@ namespace NFe.Interface
             }
             #endregion
 
-            HabilitaUsuarioSenhaWS(oEmpresa.UFCod);
+            HabilitaUsuarioSenhaWS(oEmpresa.UnidadeFederativaCodigo);
             this.Modificado = false;
         }
 
@@ -432,23 +432,23 @@ namespace NFe.Interface
         public void AtualizarPropriedadeEmpresa()
         {
             //Atualizar as propriedades das configurações da empresa
-            oEmpresa.PastaEnvio = this.textBox_PastaEnvioXML.Text.Trim();
-            oEmpresa.PastaRetorno = this.textBox_PastaRetornoXML.Text.Trim();
-            oEmpresa.PastaEnviado = this.textBox_PastaEnviados.Text.Trim();
-            oEmpresa.PastaErro = this.textBox_PastaXmlErro.Text.Trim();
+            oEmpresa.PastaXmlEnvio = this.textBox_PastaEnvioXML.Text.Trim();
+            oEmpresa.PastaXmlRetorno = this.textBox_PastaRetornoXML.Text.Trim();
+            oEmpresa.PastaXmlEnviado = this.textBox_PastaEnviados.Text.Trim();
+            oEmpresa.PastaXmlErro = this.textBox_PastaXmlErro.Text.Trim();
             oEmpresa.PastaBackup = this.textBox_PastaBackup.Text.Trim();
-            oEmpresa.PastaEnvioEmLote = this.textBox_PastaLote.Text.Trim();
+            oEmpresa.PastaXmlEmLote = this.textBox_PastaLote.Text.Trim();
             oEmpresa.PastaValidar = this.textBox_PastaValidar.Text.Trim();
             oEmpresa.PastaDownloadNFeDest = this.textBox_PastaDownload.Text.Trim();
 
-            oEmpresa.UFCod = Convert.ToInt32(this.comboBox_UF.SelectedValue);
-            oEmpresa.tpAmb = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
+            oEmpresa.UnidadeFederativaCodigo = Convert.ToInt32(this.comboBox_UF.SelectedValue);
+            oEmpresa.AmbienteCodigo = Convert.ToInt32(this.comboBox_Ambiente.SelectedValue);
             oEmpresa.tpEmis = Convert.ToInt32(this.comboBox_tpEmis.SelectedValue);
             oEmpresa.GravarRetornoTXTNFe = this.checkBoxRetornoNFETxt.Checked;
             oEmpresa.GravarEventosDeTerceiros = this.checkBoxGravarEventosDeTerceiros.Checked;
             oEmpresa.GravarEventosNaPastaEnviadosNFe = this.checkBoxGravarEventosNaPastaEnviadosNFe.Checked;
             oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked;
-            oEmpresa.CompactarNFe = this.checkBoxCompactaNFe.Checked;
+            oEmpresa.CompactarNfe = this.checkBoxCompactaNFe.Checked;
             oEmpresa.DiretorioSalvarComo = this.cboDiretorioSalvarComo.Text;
             oEmpresa.ConfiguracaoDanfe = tbConfiguracaoDanfe.Text;
             oEmpresa.ConfiguracaoCCe = tbConfiguracaoCCe.Text;

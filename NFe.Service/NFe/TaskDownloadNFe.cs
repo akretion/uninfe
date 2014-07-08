@@ -110,6 +110,8 @@ namespace NFe.Service
                 /// CNPJ|10290739000139 
                 /// chNFe|35110310290739000139550010000000011051128041
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                Functions.PopulateClasse(this.oDadosenvDownload, cLinhas);
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -128,6 +130,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -147,10 +150,12 @@ namespace NFe.Service
                 foreach (XmlNode envEventoNode in envEventoList)
                 {
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
-
+                    Functions.PopulateClasse(this.oDadosenvDownload, envEventoElemento);
+#if false
                     this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                     this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
                     this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+#endif
                 }
             }
         }

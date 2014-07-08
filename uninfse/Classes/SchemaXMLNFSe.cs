@@ -664,7 +664,7 @@ namespace uninfse
             bool usaParobeRS = false;
             foreach (var item in Empresa.Configuracoes)
             {
-                if (item.UFCod == 4314050)
+                if (item.UnidadeFederativaCodigo == 4314050)
                     usaParobeRS = true;
             }
 

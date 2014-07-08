@@ -25,9 +25,9 @@ namespace NFe.Service
             int emp = Functions.FindEmpresaByThread();
 
             pedidoWSExiste odados = new pedidoWSExiste();
-            odados.cUF = Empresa.Configuracoes[emp].UFCod;
+            odados.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             odados.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            odados.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            odados.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
             odados.servicos = "";
 
             //Definir o serviço que será executado para a classe
@@ -48,7 +48,7 @@ namespace NFe.Service
     <servicos>NFeConsultaCadastro,NFeStatusServico,...</servicos>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_XML, Propriedade.ExtRetorno.retWSExiste_XML).Replace(".xml", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_XML, Propriedade.ExtRetorno.retWSExiste_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -74,9 +74,10 @@ tpAmb|2             --opcional
 tpEmis|1            --opcional: (1)Normal, (2)Contingencia, ...
 servicos|NFeConsultaCadastro,NFeStatusServico,...
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_TXT, Propriedade.ExtRetorno.retWSExiste_TXT).Replace(".txt", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_TXT, Propriedade.ExtRetorno.retWSExiste_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
+
                     foreach (string cTexto in cLinhas)
                     {
                         string[] dados = cTexto.Split('|');
@@ -123,7 +124,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                     nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvWSExiste_XML) + Propriedade.ExtRetorno.retWSExiste_XML;
                 else
                     nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvWSExiste_TXT) + Propriedade.ExtRetorno.retWSExiste_TXT;
-                nomeArquivoRetorno = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(nomeArquivoRetorno));
+                nomeArquivoRetorno = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(nomeArquivoRetorno));
                 Functions.DeletarArquivo(nomeArquivoRetorno);
 
                 StringBuilder outStr = new StringBuilder();

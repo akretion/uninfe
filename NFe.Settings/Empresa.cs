@@ -18,6 +18,8 @@ namespace NFe.Settings
     /// Autor: Wandrey Mundin Ferreira
     /// Data: 28/07/2010
     /// </remarks>
+    /// 
+    //[System.Xml.Serialization.XmlRoot("nfe_configuracoes")]
     public class Empresa
     {
         #region Propriedades
@@ -39,9 +41,9 @@ namespace NFe.Settings
             {
                 string result = "";
 
-                if (!String.IsNullOrEmpty(PastaEnvio))
+                if (!String.IsNullOrEmpty(PastaXmlEnvio))
                 {
-                    string[] dirs = PastaEnvio.Split('\\');
+                    string[] dirs = PastaXmlEnvio.Split('\\');
 
                     for (int i = 0; i < dirs.Length - 1; i++)
                     {
@@ -59,19 +61,19 @@ namespace NFe.Settings
         /// <summary>
         /// Pasta onde deve ser gravado os XML´s a serem enviados
         /// </summary>
-        public string PastaEnvio { get; set; }
+        public string PastaXmlEnvio { get; set; }
         /// <summary>
         /// Pasta onde será gravado os XML´s de retorno para o ERP
         /// </summary>
-        public string PastaRetorno { get; set; }
+        public string PastaXmlRetorno { get; set; }
         /// <summary>
         /// Pasta onde será gravado os XML´s enviados
         /// </summary>
-        public string PastaEnviado { get; set; }
+        public string PastaXmlEnviado { get; set; }
         /// <summary>
         /// Pasta onde será gravado os XML´s que apresentaram algum tipo de erro em sua estrutura
         /// </summary>
-        public string PastaErro { get; set; }
+        public string PastaXmlErro { get; set; }
         /// <summary>
         /// Pasta onde será gravado como forma de backup os XML´s enviados
         /// </summary>
@@ -79,7 +81,7 @@ namespace NFe.Settings
         /// <summary>
         /// Pasta onde deve ser gravado os XML´s de notas fiscais a serem enviadas em lote
         /// </summary>
-        public string PastaEnvioEmLote { get; set; }
+        public string PastaXmlEmLote { get; set; }
         /// <summary>
         /// Pasta onde é gravado os XML´s da NFE somente para validação
         /// </summary>
@@ -125,11 +127,11 @@ namespace NFe.Settings
         /// <summary>
         /// Código da unidade Federativa da Empresa
         /// </summary>
-        public int UFCod { get; set; }
+        public int UnidadeFederativaCodigo { get; set; }
         /// <summary>
         /// Ambiente a ser utilizado para a emissão da nota fiscal eletrônica
         /// </summary>
-        public int tpAmb { get; set; }
+        public int AmbienteCodigo { get; set; }
         /// <summary>
         /// Tipo de emissão a ser utilizado para a emissão da nota fiscal eletrônica
         /// </summary>
@@ -161,6 +163,7 @@ namespace NFe.Settings
         /// <summary>
         /// Certificado digital
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public X509Certificate2 X509Certificado { get; set; }
         /// <summary>
         /// Gravar o retorno da NFe também em TXT
@@ -200,22 +203,25 @@ namespace NFe.Settings
 
         #region Propriedades da parte das configurações por empresa
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         private List<Thread> threads;
 
         /// <summary>
         /// Nome da pasta onde é gravado as configurações e informações da Empresa
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string PastaEmpresa { get; set; }
         /// <summary>
         /// Nome do arquivo XML das configurações da empresa
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string NomeArquivoConfig { get; set; }
 
         public bool CriaPastasAutomaticamente { get; set; }
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
         public bool GravarEventosCancelamentoNaPastaEnviadosNFe { get; set; }
         public bool GravarEventosDeTerceiros { get; set; }
-        public bool CompactarNFe { get; set; }
+        public bool CompactarNfe { get; set; }
 
         /// <summary>
         /// Enviar NFe utilizando o processo síncrono (true or false)
@@ -268,6 +274,13 @@ namespace NFe.Settings
         /// <para>        podem ser criadas outras combinações, ficando a critério do usuário</para>
         /// </summary>
         /// <by>http://desenvolvedores.net/marcelo</by>
+        /// 
+        public string diretorioSalvarComo
+        {
+            get { return DiretorioSalvarComo.ToString(); }
+            set { DiretorioSalvarComo = value; }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public DiretorioSalvarComo DiretorioSalvarComo
         {
             get
@@ -288,10 +301,14 @@ namespace NFe.Settings
         /// <summary>
         /// Configurações por empresa
         /// </summary>
+        /// 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public static List<Empresa> Configuracoes = new List<Empresa>();
         /// <summary>
         /// Objetos dos serviços da NFe
         /// </summary>
+        /// 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public Dictionary<string, WebServiceProxy> WSProxy = new Dictionary<string, WebServiceProxy>();
         /// <summary>
         /// Lista das threads que estão sendo executadas e o Index da empresa da thread
@@ -465,10 +482,10 @@ namespace NFe.Settings
                                 /// com base em "int emp = Functions.FindEmpresaByThread();" e neste ponto ainda não foi criada
                                 /// as thread's
                                 string cArqErro;
-                                if (string.IsNullOrEmpty(empresa.PastaRetorno))
+                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
                                     cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
                                 else
-                                    cArqErro = Path.Combine(empresa.PastaRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
 
                                 try
                                 {
@@ -517,12 +534,12 @@ namespace NFe.Settings
             #endregion
 
             #region Limpar conteúdo dos atributos de configurações da empresa
-            empresa.PastaEnvio =
-                empresa.PastaRetorno =
-                empresa.PastaEnviado =
-                empresa.PastaErro =
+            empresa.PastaXmlEnvio =
+                empresa.PastaXmlRetorno =
+                empresa.PastaXmlEnviado =
+                empresa.PastaXmlErro =
                 empresa.PastaBackup =
-                empresa.PastaEnvioEmLote =
+                empresa.PastaXmlEmLote =
                 empresa.PastaValidar =
                 empresa.PastaDanfeMon =
                 empresa.PastaExeUniDanfe =
@@ -540,14 +557,14 @@ namespace NFe.Settings
                 empresa.FTPPastaRetornos =
                 empresa.FTPPastaAutorizados = string.Empty;
 
-            empresa.UFCod = 0;
+            empresa.UnidadeFederativaCodigo = 0;
             empresa.DiasLimpeza = 0;
             empresa.TempoConsulta = 2;
 
             empresa.UsuarioWS = string.Empty;
             empresa.SenhaWS = string.Empty;
 
-            empresa.tpAmb = Propriedade.TipoAmbiente.taHomologacao; //2
+            empresa.AmbienteCodigo = Propriedade.TipoAmbiente.taHomologacao; //2
             empresa.tpEmis = Propriedade.TipoEmissao.teNormal; //1
 
             empresa.GravarRetornoTXTNFe =
@@ -573,6 +590,9 @@ namespace NFe.Settings
             {
                 try
                 {
+                    //ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+                    //objObjectXMLSerializer.Load(empresa, empresa.NomeArquivoConfig);
+
                     arqXml = new FileStream(empresa.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
                     var xml = new XmlDocument();
                     xml.Load(arqXml);
@@ -582,26 +602,26 @@ namespace NFe.Settings
                     {
                         var configElemento = (XmlElement)configNode;
 
-                        empresa.UFCod = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.UnidadeFederativaCodigo, false));
-                        empresa.tpAmb = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.AmbienteCodigo, false));
+                        empresa.UnidadeFederativaCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.UnidadeFederativaCodigo, false));
+                        empresa.AmbienteCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.AmbienteCodigo, false));
                         empresa.tpEmis = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.tpEmis, false));
                         empresa.GravarRetornoTXTNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarRetornoTXTNFe, "False"));
                         empresa.GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosNaPastaEnviadosNFe, "False"));
                         empresa.GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, "False"));
                         empresa.GravarEventosDeTerceiros = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosDeTerceiros, "False"));
-                        empresa.CompactarNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNFe, "False"));
+                        empresa.CompactarNfe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNfe, "False"));
                         empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
                         empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
                         empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, "0"));
                         empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, "0"));
 
-                        empresa.PastaEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
-                        empresa.PastaRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
-                        empresa.PastaErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
+                        empresa.PastaXmlEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
+                        empresa.PastaXmlRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
+                        empresa.PastaXmlErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
                         empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
-                        empresa.PastaEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
+                        empresa.PastaXmlEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
                         empresa.PastaBackup = Functions.LerTag(configElemento, NFeStrConstants.PastaBackup, false);
-                        empresa.PastaEnvioEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
+                        empresa.PastaXmlEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
                         empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
 
                         empresa.ConfiguracaoDanfe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoDanfe, false);
@@ -636,7 +656,6 @@ namespace NFe.Settings
                         empresa.UsuarioWS = Functions.LerTag(configElemento, NFeStrConstants.UsuarioWS, false);
                         empresa.SenhaWS = Functions.LerTag(configElemento, NFeStrConstants.SenhaWS, false);
                     }
-
                     empresa.X509Certificado = BuscaConfiguracaoCertificado(empresa);
                 }
                 catch (Exception ex)
@@ -949,49 +968,49 @@ namespace NFe.Settings
             foreach (Empresa empresa in Empresa.Configuracoes)
             {
                 //Criar pasta de envio
-                if (!string.IsNullOrEmpty(empresa.PastaEnvio))
+                if (!string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                 {
-                    if (!Directory.Exists(empresa.PastaEnvio))
+                    if (!Directory.Exists(empresa.PastaXmlEnvio))
                     {
-                        Directory.CreateDirectory(empresa.PastaEnvio);
+                        Directory.CreateDirectory(empresa.PastaXmlEnvio);
                     }
 
                     //Criar a pasta Temp dentro da pasta de envio. Wandrey 03/08/2011
-                    if (!Directory.Exists(empresa.PastaEnvio.Trim() + "\\Temp"))
+                    if (!Directory.Exists(empresa.PastaXmlEnvio.Trim() + "\\Temp"))
                     {
-                        Directory.CreateDirectory(empresa.PastaEnvio.Trim() + "\\Temp");
+                        Directory.CreateDirectory(empresa.PastaXmlEnvio.Trim() + "\\Temp");
                     }
 
                     //Criar subpasta Assinado na pasta de envio individual de nfe
-                    if (!Directory.Exists(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado) && Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (!Directory.Exists(empresa.PastaXmlEnvio + Propriedade.NomePastaXMLAssinado) && Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                     {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnvio + Propriedade.NomePastaXMLAssinado);
+                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnvio + Propriedade.NomePastaXMLAssinado);
                     }
                 }
 
                 if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                 {
                     //Criar pasta de Envio em Lote
-                    if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
+                    if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
                     {
-                        if (!Directory.Exists(empresa.PastaEnvioEmLote))
+                        if (!Directory.Exists(empresa.PastaXmlEmLote))
                         {
-                            Directory.CreateDirectory(empresa.PastaEnvioEmLote);
+                            Directory.CreateDirectory(empresa.PastaXmlEmLote);
                         }
 
                         //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
-                        if (!Directory.Exists(empresa.PastaEnvioEmLote.Trim() + "\\Temp"))
+                        if (!Directory.Exists(empresa.PastaXmlEmLote.Trim() + "\\Temp"))
                         {
-                            Directory.CreateDirectory(empresa.PastaEnvioEmLote.Trim() + "\\Temp");
+                            Directory.CreateDirectory(empresa.PastaXmlEmLote.Trim() + "\\Temp");
                         }
                     }
 
                     //Criar pasta Enviado
-                    if (!string.IsNullOrEmpty(empresa.PastaEnviado))
+                    if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
                     {
-                        if (!Directory.Exists(empresa.PastaEnviado))
+                        if (!Directory.Exists(empresa.PastaXmlEnviado))
                         {
-                            Directory.CreateDirectory(empresa.PastaEnviado);
+                            Directory.CreateDirectory(empresa.PastaXmlEnviado);
                         }
                     }
                     //Criar pasta de Backup
@@ -1003,11 +1022,11 @@ namespace NFe.Settings
                         }
                     }
                     //Criar subpasta Assinado na pasta de envio em lote de nfe
-                    if (!string.IsNullOrEmpty(empresa.PastaEnvioEmLote))
+                    if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
                     {
-                        if (!Directory.Exists(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado))
+                        if (!Directory.Exists(empresa.PastaXmlEmLote + Propriedade.NomePastaXMLAssinado))
                         {
-                            System.IO.Directory.CreateDirectory(empresa.PastaEnvioEmLote + Propriedade.NomePastaXMLAssinado);
+                            System.IO.Directory.CreateDirectory(empresa.PastaXmlEmLote + Propriedade.NomePastaXMLAssinado);
                         }
                     }
 
@@ -1031,21 +1050,21 @@ namespace NFe.Settings
                 }
 
                 //Criar pasta de Retorno
-                if (!string.IsNullOrEmpty(empresa.PastaRetorno))
+                if (!string.IsNullOrEmpty(empresa.PastaXmlRetorno))
                 {
-                    if (!Directory.Exists(empresa.PastaRetorno))
+                    if (!Directory.Exists(empresa.PastaXmlRetorno))
                     {
-                        Directory.CreateDirectory(empresa.PastaRetorno);
+                        Directory.CreateDirectory(empresa.PastaXmlRetorno);
                     }
                 }
 
 
                 //Criar pasta de XML´s com erro
-                if (!string.IsNullOrEmpty(empresa.PastaErro))
+                if (!string.IsNullOrEmpty(empresa.PastaXmlErro))
                 {
-                    if (!Directory.Exists(empresa.PastaErro))
+                    if (!Directory.Exists(empresa.PastaXmlErro))
                     {
-                        Directory.CreateDirectory(empresa.PastaErro);
+                        Directory.CreateDirectory(empresa.PastaXmlErro);
                     }
                 }
 
@@ -1103,24 +1122,24 @@ namespace NFe.Settings
             {
                 Empresa empresa = Empresa.Configuracoes[indexEmpresa];
 
-                if (!string.IsNullOrEmpty(empresa.PastaEnviado))
+                if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
                 {
                     //Criar a pasta EmProcessamento
-                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
+                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
                     }
 
                     //Criar a Pasta Autorizado
-                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString());
                     }
 
                     //Criar a Pasta Denegado
-                    if (!Directory.Exists(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString());
                     }
                 }
             }

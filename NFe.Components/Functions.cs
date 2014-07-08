@@ -528,29 +528,104 @@ namespace NFe.Components
 
         public static void SetProperty(object _this, PropertyInfo propertyInfo, object value)
         {
-            switch (propertyInfo.PropertyType.Name)
-            {
-                case "Int32":
-                    propertyInfo.SetValue(_this, Convert.ToInt32(value), null);
-                    break;
-                case "String":
-                    propertyInfo.SetValue(_this, value.ToString(), null);
-                    break;
-            }
+            if (value == null)
+                propertyInfo.SetValue(_this, null, null);
+            else
+                switch (propertyInfo.PropertyType.Name)
+                {
+                    case "Int32":
+                        propertyInfo.SetValue(_this, Convert.ToInt32(value), null);
+                        break;
+                    case "String":
+                        propertyInfo.SetValue(_this, value.ToString(), null);
+                        break;
+                    case "Boolean":
+                        propertyInfo.SetValue(_this, Convert.ToBoolean(value), null);
+                        break;
+                    case "Double":
+                        propertyInfo.SetValue(_this, Convert.ToDouble(value), null);
+                        break;
+                    case "Decimal":
+                        propertyInfo.SetValue(_this, Convert.ToDecimal(value), null);
+                        break;
+                    case "DateTime":
+                        propertyInfo.SetValue(_this, Convert.ToDateTime(value), null);
+                        break;
+                    default:
+                        switch (propertyInfo.PropertyType.FullName)
+                        {
+                            case "NFe.Components.TipoAplicativo":
+                                var ta1 = (NFe.Components.TipoAplicativo)Enum.Parse(typeof(NFe.Components.TipoAplicativo), value.ToString(), true);
+                                propertyInfo.SetValue(_this, ta1, null);
+                                break;
+                            case "NFe.Components.DiretorioSalvarComo":
+                                //propertyInfo.SetValue(_this, value.ToString(), null);
+                                break;
+                            default:
+                                throw new Exception(propertyInfo.Name + "..." + propertyInfo.PropertyType.FullName+"...."+value.ToString());
+                        }
+                        break;
+                }
         }
-        public static string PropertyName(object tkClass, object clName)
+
+        private static bool populateClasse(object classe, string[] origem)
         {
-            PropertyInfo[] allClassToProperties = tkClass.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo[] allClassToProperties = classe.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
 
-            foreach (PropertyInfo pifrom in allClassToProperties)
+            bool lEncontrou = false;
+            foreach (var xi in origem)
             {
-                if (pifrom == clName)
-                Console.WriteLine("......{0} {1}", pifrom.Name, pifrom.ToString());
+                if (!string.IsNullOrEmpty(xi))
+                {
+                    var xii = xi.Split(new char[] { '|' });
+                    if (xii.Length == 2)
+                    {
+                        if (xii[0].Equals("DiretorioSalvarComo", StringComparison.InvariantCultureIgnoreCase))
+                            xii[0] = "diretorioSalvarComo";
+
+                        var pi = (from i in allClassToProperties where i.Name.Equals(xii[0], StringComparison.InvariantCultureIgnoreCase) select i).FirstOrDefault();
+                        if (pi == null)
+                            Console.WriteLine(xi + ": NOT FOUND");
+                        else
+                        {
+                            Functions.SetProperty(classe, pi, xii[1]);
+                            lEncontrou = true;
+                        }
+                    }
+                }
             }
+            return lEncontrou;
+        }
 
-            Console.WriteLine("{0}", clName.GetType().FullName.ToString());
+        public static bool PopulateClasse(object classe, object origem)
+        {
+            bool lEncontrou = false;
 
-            return "";// tkClasse.GetType().GetProperty(clName).Name;
+            if (origem.GetType().IsAssignableFrom(typeof(XmlElement)))
+            {
+                List<System.String> temp = new List<string>();
+                var xx = (origem as XmlElement).ChildNodes;
+                foreach (var xa in xx)
+                {
+                    temp.Add((xa as XmlElement).Name + "|" + (xa as XmlElement).InnerText);
+                }
+                lEncontrou = populateClasse(classe, temp.ToArray());
+            }
+            else
+            {
+                if (origem.GetType().IsAssignableFrom(typeof(System.String[])))
+                {
+                    lEncontrou = populateClasse(classe, origem as string[]);
+                }
+                else
+                    if (origem.GetType().IsAssignableFrom(typeof(List<System.String>)))
+                    {
+                        lEncontrou = populateClasse(classe, (origem as List<String>).ToArray());
+                    }
+                    else
+                        throw new Exception("Tipo de dados da origem desconhecido. (" + origem.GetType().ToString() + ")");
+            }
+            return lEncontrou;
         }
     }
 }

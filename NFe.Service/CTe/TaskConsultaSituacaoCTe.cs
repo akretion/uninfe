@@ -95,7 +95,7 @@ namespace NFe.Service
         /// <param name="emp">Código da empresa</param>
         private void PedSit(int emp, string arquivoXML)
         {
-            this.dadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.dadosPedSit.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
             this.dadosPedSit.chNFe = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -167,7 +167,7 @@ namespace NFe.Service
                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Cte;
                 }
 
-                string strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                string strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
@@ -231,7 +231,7 @@ namespace NFe.Service
                                         var strProtNfe = retConsSitElemento.GetElementsByTagName("protCTe")[0].OuterXml;
 
                                         //Definir o nome do arquivo -procNfe.xml                                               
-                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                     Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe;
 
@@ -277,7 +277,7 @@ namespace NFe.Service
                                             if (procNFeJaNaAutorizada)
                                                 try
                                                 {
-                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Autorizados.ToString() + "\\" +
                                                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                             Path.GetFileName(strArquivoNFeProc);
@@ -312,7 +312,7 @@ namespace NFe.Service
                                                 /// 
                                                 try
                                                 {
-                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Denegados.ToString() + "\\" +
                                                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                             Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;

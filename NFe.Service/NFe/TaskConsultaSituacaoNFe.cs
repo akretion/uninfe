@@ -112,7 +112,7 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         private void PedSit(int emp, string cArquivoXML)
         {
-            dadosPedSit.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            dadosPedSit.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
             dadosPedSit.chNFe = string.Empty;
             dadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
             dadosPedSit.versao = NFe.ConvertTxt.versoes.VersaoXMLPedSit;
@@ -224,7 +224,7 @@ namespace NFe.Service
                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                 }
 
-                string strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                string strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
@@ -325,7 +325,7 @@ namespace NFe.Service
                                         string strProtNfe = retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml;
 
                                         //Definir o nome do arquivo -procNfe.xml                                               
-                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                     Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
@@ -389,7 +389,7 @@ namespace NFe.Service
                                             {
                                                 try
                                                 {
-                                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                                 PastaEnviados.Autorizados.ToString() + "\\" +
                                                                                 Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                                 Path.GetFileName(strArquivoNFeProc);

@@ -42,31 +42,53 @@ namespace uninfe
             {
                 Auxiliar.WriteLog(e.ExceptionObject.ToString());
             });
-
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             bool silencioso = false;
             ConfiguracaoApp.AtualizaWSDL = false;
 
-            if (args.Length >= 1)
-                foreach (string param in args)
+            if(args.Length >= 1)
+                foreach(string param in args)
                 {
-                    if (param.ToLower().Equals("/silent"))
+                    if(param.ToLower().Equals("/silent"))
                     {
                         silencioso = true;
                         continue;
                     }
-                    if (param.ToLower().Equals("/updatewsdl"))
+                    if(param.ToLower().Equals("/updatewsdl"))
                     {
                         ConfiguracaoApp.AtualizaWSDL = true;
                         continue;
+                    }
+                    if (param.ToLower().Equals("/quit") || param.ToLower().Equals("/restart"))
+                    {
+                        string procName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+                        int Id = System.Diagnostics.Process.GetCurrentProcess().Id;
+
+                        foreach (System.Diagnostics.Process clsProcess in System.Diagnostics.Process.GetProcesses())
+                        {
+                            if (clsProcess.ProcessName.Equals(procName))
+                            {
+                                try
+                                {
+                                    if (param.ToLower().Equals("/quit") ||
+                                        (param.ToLower().Equals("/restart") && clsProcess.Id != Id))
+                                            clsProcess.Kill();
+                                }
+                                catch
+                                {
+                                }
+                                if (param.ToLower().Equals("/quit"))
+                                    return;
+                            }
+                        }
                     }
                 }
 
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
-            if (Aplicacao.AppExecutando(silencioso))
+            if(Aplicacao.AppExecutando(silencioso))
             {
                 return;
             }

@@ -81,7 +81,7 @@ namespace NFe.Service
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + fluxoNfe.LerTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + fluxoNfe.LerTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     fluxoNfe.ExcluirNfeFluxo(lerXml.oDadosNfe.chavenfe);
                 }
 

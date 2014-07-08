@@ -210,7 +210,7 @@ namespace NFe.Service
         private string NomeClasseWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
-            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao);
+            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -250,14 +250,14 @@ namespace NFe.Service
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
-                            retorna = "ConsultarLoteRps";
-                            break;
                         case Servicos.ConsultarNfse:
                             retorna = "";
                             break;
                         case Servicos.ConsultarNfsePorRps:
                             retorna = "";
+                            break;
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
                             break;
                         case Servicos.ConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
@@ -437,7 +437,7 @@ namespace NFe.Service
                             if (taHomologacao)
                                 retorna = "hCancelarNfse";
                             else
-                                retorna = "CancelarNfse";
+                                retorna = NFe.Components.Servicos.CancelarNfse.ToString();
                             break;
 
                         case Servicos.RecepcionarLoteRps:
@@ -689,7 +689,7 @@ namespace NFe.Service
         private string NomeMetodoWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
-            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao);
+            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -855,7 +855,7 @@ namespace NFe.Service
                             retorna = "CancelamentoNFe";
                             break;
                         case Servicos.RecepcionarLoteRps:
-                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao)
+                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
@@ -994,7 +994,7 @@ namespace NFe.Service
                             retorna = "CancelamentoNFe";
                             break;
                         case Servicos.RecepcionarLoteRps:
-                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].tpAmb == Propriedade.TipoAmbiente.taHomologacao)
+                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
@@ -1245,7 +1245,7 @@ namespace NFe.Service
                 if (oFluxoNfe.NfeExiste(ChaveNfe))
                 {
                     //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
 
                     //Deletar a NFE do arquivo de controle de fluxo
                     oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
@@ -1259,7 +1259,7 @@ namespace NFe.Service
                 else
                 {
                     //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                    Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
                 }
 
                 //Validações gerais
@@ -1682,7 +1682,7 @@ namespace NFe.Service
             if (File.Exists(strArquivoNFe))
             {
                 oLerXml.Nfe(strArquivoNFe);
-                string nomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                string nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
                 string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));

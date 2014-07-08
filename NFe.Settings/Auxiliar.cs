@@ -54,10 +54,10 @@ namespace NFe.Settings
                 try
                 {
                     int emp = Functions.FindEmpresaByThread();
-                    if (Empresa.Configuracoes[emp].PastaRetorno != string.Empty)
+                    if (Empresa.Configuracoes[emp].PastaXmlRetorno != string.Empty)
                     {
                         //Grava arquivo de ERRO para o ERP
-                        string cArqErro = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Arquivo);
+                        string cArqErro = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
                         File.WriteAllText(cArqErro, Erro, Encoding.Default);
                     }
                 }
@@ -172,9 +172,9 @@ namespace NFe.Settings
             {
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                if(Directory.Exists(Empresa.Configuracoes[emp].PastaErro))
+                if(Directory.Exists(Empresa.Configuracoes[emp].PastaXmlErro))
                 {
-                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
                     Functions.Move(Arquivo, vNomeArquivo);
 
@@ -214,7 +214,7 @@ namespace NFe.Settings
         {
             int emp = Functions.FindEmpresaByThread();
 
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" + 
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + 
                                             PastaEnviados.Autorizados.ToString() + "\\" + 
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
@@ -231,7 +231,7 @@ namespace NFe.Settings
         public bool EstaDenegada(string Arquivo, DateTime Emissao)
         {
             int emp = Functions.FindEmpresaByThread();
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);

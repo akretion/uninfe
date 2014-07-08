@@ -100,7 +100,7 @@ namespace NFe.Service
         {
             dadosPedRec.tpAmb = 0;
             dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            dadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
+            dadosPedRec.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -314,7 +314,7 @@ namespace NFe.Service
 
                         strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                     }
-                    var strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + 
+                    var strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + 
                         PastaEnviados.EmProcessamento.ToString() + "\\" + 
                         strNomeArqNfe;
 
@@ -328,7 +328,7 @@ namespace NFe.Service
                             if (File.Exists(strArquivoNFe))
                             {
                                 //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
-                                var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                         Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + 
                                                         Propriedade.ExtRetorno.ProcNFe;
@@ -380,7 +380,7 @@ namespace NFe.Service
                                     ///
                                     /// tem que passar o arquivo de distribuicao da nfe
                                     /// 
-                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.Autorizados.ToString() + "\\" +
                                                                     Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                     Path.GetFileName(strArquivoNFeProc);

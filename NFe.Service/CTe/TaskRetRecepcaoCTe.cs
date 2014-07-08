@@ -94,7 +94,7 @@ namespace NFe.Service
         {
             this.dadosPedRec.tpAmb = 0;
             this.dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            this.dadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
+            this.dadosPedRec.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             this.dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -257,7 +257,7 @@ namespace NFe.Service
 
                                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Cte;
                                 }
-                                var strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                                var strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                 //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
                                 fluxoNFe.AtualizarTag(strChaveNFe, FluxoNfe.ElementoEditavel.cStat, strStat);
@@ -291,7 +291,7 @@ namespace NFe.Service
                                             //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
                                             try
                                             {
-                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                         PastaEnviados.Autorizados.ToString() + "\\" +
                                                                         Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                         Path.GetFileName(strArquivoNFeProc);
@@ -318,7 +318,7 @@ namespace NFe.Service
                                             /// 
                                             try
                                             {
-                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                         PastaEnviados.Denegados.ToString() + "\\" +
                                                                         Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                         Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;

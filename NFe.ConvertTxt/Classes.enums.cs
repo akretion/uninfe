@@ -193,15 +193,26 @@ namespace NFe.ConvertTxt
     }
     public enum TpcnTipoEmissao
     {
+        [Description("")]
+        teNone = 0,
+        [Description("Normal")]
         teNormal = 1,
-        teContingencia = 2,     //Contingência FS-IA, com impressão do DANFE em formulário de segurança;
-        teSCAN = 3,             //Contingência SCAN (Sistema de Contingência do Ambiente Nacional);
-        teDPEC = 4,             //Contingência DPEC (Declaração Prévia da Emissão em Contingência);
-        teFSDA = 5,             //Contingência FS-DA, com impressão do DANFE em formulário de segurança;
-        teSVCAN = 6,            //Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);
-        teSVCRS = 7,            //Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);
+        [Description("Contingência com formulário de segurança (FS)")]
+        teContingencia = 2,
+        [Description("Contingência com SCAN do Ambiente Nacional")]
+        teSCAN = 3,
+        [Description("Contingência com DPEC")]
+        teDPEC = 4,
+        [Description("Contingência com formulário de segurança (FS-DA)")]
+        teFSDA = 5,
+        [Description("Contingência com SVC-AN")]
+        teSVCAN = 6,
+        [Description("Contingência com SVC-RS")]
+        teSVCRS = 7,
+        [Description("Contingência com SVC-SP")]
         teSVCSP = 8, 
-        teOffLine = 9           //Contingência off-line da NFC-e;
+        [Description("Contingência Off-Line (NFC-e)")]
+        teOffLine = 9
     }
 
     public enum TpcnECFModRef 

@@ -59,10 +59,10 @@ namespace NFe.Service
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
 
             // Exclui o Arquivo de Erro
-            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
             // Validar o Arquivo XML
-            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
+            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
 
             string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
@@ -217,10 +217,10 @@ namespace NFe.Service
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
 
             // Exclui o Arquivo de Erro
-            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+            Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
 
             // Validar o Arquivo XML
-            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UFCod);
+            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
             string cResultadoValidacao = padraoNFSe == PadroesNFSe.ISSONLINE4R ? "" : validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
             {
@@ -265,27 +265,27 @@ namespace NFe.Service
                     switch (cMetodo)
                     {
                         case "ConsultarSituacaoLoteRps":
-                            strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarLoteRps":
-                            strRetorno = oWSProxy.Betha.ConsultarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.ConsultarLoteRps(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "CancelarNfse":
-                            strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarNfse":
-                            strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarNfsePorRps":
-                            strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "RecepcionarLoteRps":
-                            strRetorno = oWSProxy.Betha.RecepcionarLoteRps(docXML, Empresa.Configuracoes[emp].tpAmb);
+                            strRetorno = oWSProxy.Betha.RecepcionarLoteRps(docXML, Empresa.Configuracoes[emp].AmbienteCodigo);
                             break;
                     }
                     break;

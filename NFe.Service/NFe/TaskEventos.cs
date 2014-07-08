@@ -614,7 +614,7 @@ namespace NFe.Service
                         evento.verEvento = "1.00";
 
                     if (evento.tpAmb == 0)
-                        evento.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+                        evento.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
 
                     if (evento.cOrgao == 0)
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));

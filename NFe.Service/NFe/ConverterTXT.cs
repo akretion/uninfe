@@ -40,13 +40,13 @@ namespace NFe.Service
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + Path.GetFileName(arquivo));
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
                 /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt");
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt");
 
                 ///
                 /// processa a conversão
@@ -71,11 +71,11 @@ namespace NFe.Service
                         //
                         // salva o arquivo texto original
                         //
-                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaEnvio.ToLower()) || pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaValidar.ToLower()))
+                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaXmlEnvio.ToLower()) || pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaValidar.ToLower()))
                         {
                             FileInfo ArqOrig = new FileInfo(arquivo);
 
-                            string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt";
+                            string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt";
                             ArqOrig.MoveTo(vvNomeArquivoDestino);
                         }
                         ccExtension = "-nfe.txt";

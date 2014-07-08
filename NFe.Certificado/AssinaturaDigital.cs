@@ -79,7 +79,7 @@ namespace NFe.Certificado
                     /// Esta condição foi feita especificamente para prefeitura de Governador Valadares pois o AtribudoID e o Elemento assinado devem possuir o mesmo nome.
                     /// Talvez tenha que ser reavaliado.
                     #region Governador Valadares
-                    if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UFCod == 3127701)
+                    if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
                     {
                         foreach (XmlNode item in lists)
                         {
@@ -150,7 +150,7 @@ namespace NFe.Certificado
                             // it to an XmlElement object.
                             XmlElement xmlDigitalSignature = signedXml.GetXml();
 
-                            if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UFCod == 3127701)
+                            if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
                             {
                                 ///Desenvolvido especificamente para prefeitura de governador valadares
                                 listRPS.AppendChild(doc.ImportNode(xmlDigitalSignature, true));

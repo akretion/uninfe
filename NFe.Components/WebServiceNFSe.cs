@@ -159,6 +159,8 @@ namespace NFe.Components
                             @"<CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>" +
                             @"<ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>" +
                             "</LocalHomologacao>";
+
+
                 #endregion
 
                 #region ISSONLINE
@@ -277,6 +279,16 @@ namespace NFe.Components
                                     @"<CancelarNfse>wsdl\homologacao\HTresCoroasRS-Dueto.wsdl</CancelarNfse>" +
                                     @"</LocalHomologacao>";
 
+                        case 4302808: // Caçapava do Sul - RS
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
+
                         case 4322400: // Uruguaiana - RS
                             return "<LocalHomologacao>" +
                                     @"<RecepcionarLoteRps>wsdl\homologacao\HUruguaianaRS-Dueto.wsdl</RecepcionarLoteRps>" +
@@ -341,14 +353,27 @@ namespace NFe.Components
                 #endregion
 
                 #region PRONIN
-                case PadroesNFSe.PRONIN: // Mirassol - SP
-                    return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\homologacao\HMirassolSP.wsdl</CancelarNfse>" +
-                            @"</LocalHomologacao>";
+                case PadroesNFSe.PRONIN:
+                    switch (idMunicipio)
+                    {
+                        case 3535804: // Paranapanema - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                        default: // Mirassol - SP
+                            return "<LocalHomologacao>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HMirassolSP.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HMirassolSP.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HMirassolSP.wsdl</CancelarNfse>" +
+                                    @"</LocalHomologacao>";
+                    }
                 #endregion
 
                 #region ISSONLINE4R (4R Sistemas)
@@ -576,6 +601,17 @@ namespace NFe.Components
                                 @"<ConsultarURLNfse>wsdl\producao\PSantaMariaRS-ISSNet.wsdl</ConsultarURLNfse>" +
                                 "</LocalProducao>";
 
+                        case 5103403: // Cuiabá - MT
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</CancelarNfse>" +
+                                    @"<ConsultarURLNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarURLNfse>" +
+                                "</LocalProducao>";
+
                         default: // Novo Hamburgo - RS (Default)
                             return "<LocalProducao>" +
                                     @"<RecepcionarLoteRps>wsdl\producao\PISSNetNovoHamburgo.wsdl</RecepcionarLoteRps>" +
@@ -728,6 +764,16 @@ namespace NFe.Components
                                     @"<CancelarNfse>wsdl\producao\PUruguaianaRS-Dueto.wsdl</CancelarNfse>" +
                                     @"</LocalProducao>";
 
+                        case 4302808: // Caçapava do Sul - RS
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
                         default: // Nova Santa Rita - RS
                             return "<LocalProducao>" +
                                     @"<RecepcionarLoteRps>wsdl\producao\PNovaSantaRitaRS-Dueto.wsdl</RecepcionarLoteRps>" +
@@ -780,14 +826,28 @@ namespace NFe.Components
                 #endregion
 
                 #region PRONIN
-                case PadroesNFSe.PRONIN: // Mirassol - SP
-                    return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PMirassolSP.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PMirassolSP.wsdl</ConsultarNfsePorRps>" +
-                            @"<ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>" +
-                            @"<ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>" +
-                            @"<CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>" +
-                            @"</LocalProducao>";
+                case PadroesNFSe.PRONIN:
+                    switch (idMunicipio)
+                    {
+                        case 3535804: // Paranapanema - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                        default:  // Mirassol - SP
+                            return "<LocalProducao>" +
+                                    @"<RecepcionarLoteRps>wsdl\producao\PMirassolSP.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\producao\PMirassolSP.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>" +
+                                    @"</LocalProducao>";
+
+                    }
                 #endregion
 
                 #region ISSONLINE4R (4R Sistemas)

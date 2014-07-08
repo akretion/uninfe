@@ -92,7 +92,7 @@ namespace NFe.Service
         private void PedSta(int emp, string arquivoXML)
         {
             dadosPedSta.tpAmb = 0;
-            dadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
+            dadosPedSta.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             dadosPedSta.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             XmlDocument doc = new XmlDocument();

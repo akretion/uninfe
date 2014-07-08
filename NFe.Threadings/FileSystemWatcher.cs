@@ -121,7 +121,7 @@ namespace NFe.Threadings
                                 //-------------------------------------------------------------------------
                                 int index = Functions.FindEmpresaByThread();
                                 string errorPath = String.Format("{0}\\{1}",
-                                    Settings.Empresa.Configuracoes[index].PastaErro,
+                                    Settings.Empresa.Configuracoes[index].PastaXmlErro,
                                     oldFi.Name);
 
 #if DEBUG

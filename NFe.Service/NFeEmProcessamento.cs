@@ -31,7 +31,7 @@ namespace NFe.Service
                 //                                                "*" + Propriedade.ExtEnvio.Nfe,
                 //                                                SearchOption.TopDirectoryOnly);
 
-                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
+                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
                                                                                                                                                           w.EndsWith(Propriedade.ExtEnvio.Cte, StringComparison.InvariantCultureIgnoreCase) ||
                                                                                                                                                           w.EndsWith(Propriedade.ExtEnvio.MDFe, StringComparison.InvariantCultureIgnoreCase)).ToArray<string>();
 
@@ -129,7 +129,7 @@ namespace NFe.Service
                                     oAux.MoveArqErro(file);
 
                                     //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
-                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, extNFe) + extProcNFe);
+                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, extNFe) + extProcNFe);
 
                                     //Tirar a nota fiscal do fluxo
                                     fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);

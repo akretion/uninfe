@@ -134,7 +134,7 @@ namespace NFe.Service.NFSe
                     
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedSitLoteRps, Propriedade.ExtRetorno.SitLoteRps)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);

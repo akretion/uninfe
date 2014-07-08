@@ -102,7 +102,7 @@ namespace NFe.Service
         private void PedSta(int emp, string cArquivoXML)
         {
             dadosPedSta.tpAmb = 0;
-            dadosPedSta.cUF = Empresa.Configuracoes[emp].UFCod;
+            dadosPedSta.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             dadosPedSta.versao = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
 
             ///

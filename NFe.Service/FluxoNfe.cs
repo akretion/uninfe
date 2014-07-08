@@ -943,12 +943,12 @@ namespace NFe.Service
                         {
                             XmlElement documentoElemento = (XmlElement)documentoNode;
 
-                            string nRec = Functions.LerTag(documentoElemento, ElementoEditavel.nRec.ToString(), "");    // documentoElemento.GetElementsByTagName(ElementoEditavel.nRec.ToString())[0].InnerText;
-                            string versao = Functions.LerTag(documentoElemento, ElementoEditavel.versao.ToString(), "");// documentoElemento.GetElementsByTagName(ElementoEditavel.versao.ToString())[0].InnerText;
+                            string nRec = Functions.LerTag(documentoElemento, ElementoEditavel.nRec.ToString(), "");
+                            string versao = Functions.LerTag(documentoElemento, ElementoEditavel.versao.ToString(), "");
                             string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
-                            string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");// documentoElemento.GetElementsByTagName(ElementoFixo.ArqNFe.ToString())[0].InnerText;
-                            string NomeArquivoEmProcessamento = Empresa.Configuracoes[empresa].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
-                            string NomeArquivoAssinado = Empresa.Configuracoes[empresa].PastaEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");
+                            string NomeArquivoEmProcessamento = Empresa.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
+                            string NomeArquivoAssinado = Empresa.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
                             bool excluiNota = false;
                             if (File.Exists(NomeArquivoEmProcessamento))
                             {

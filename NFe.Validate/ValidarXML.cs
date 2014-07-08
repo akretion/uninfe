@@ -140,7 +140,6 @@ namespace NFe.Validate
             if(lArqXML && lArqXSD)
             {
                 this.cErro = "";
-
                 try
                 {
                     this.EncryptAssinatura(cRotaArqXML);    //danasa: 12/2013
@@ -173,7 +172,7 @@ namespace NFe.Validate
                         }
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     cErro = ex.Message + "\r\n";
                 }
@@ -265,11 +264,14 @@ namespace NFe.Validate
 
             try
             {
-                this.EncryptAssinatura(Arquivo);    //danasa: 12/2013
+                if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+                {
+                    this.EncryptAssinatura(Arquivo);    //danasa: 12/2013
 
-                oAD.Assinar(Arquivo, emp, Empresa.Configuracoes[emp].UFCod);
+                    oAD.Assinar(Arquivo, emp, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
 
-                Assinou = true;
+                    Assinou = true;
+                }
             }
             catch(Exception ex)
             {
@@ -386,7 +388,7 @@ namespace NFe.Validate
             try
             {
                 //Agora vamos criar um XML Writer
-                oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaRetorno + "\\" + ArquivoRetorno);
+                oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
 
                 //Agora vamos gravar os dados
                 oXmlGravar.WriteStartDocument();

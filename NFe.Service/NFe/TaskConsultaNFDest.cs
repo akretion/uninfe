@@ -34,7 +34,7 @@ namespace NFe.Service
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
-                    int cUF = Empresa.Configuracoes[emp].UFCod;
+                    int cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
 
                     //cUF = 43;
 

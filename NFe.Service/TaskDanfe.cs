@@ -36,7 +36,7 @@ namespace NFe.Service
     <ExportarPasta>Enviar | Enviados | Erros</ExportarPasta>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, 
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_XML, Propriedade.ExtRetorno.RetDanfeReport_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
@@ -60,7 +60,7 @@ DataFinal|2014-1-1
 Imprimir|true | false
 ExportarPasta|Enviar | Enviados | Erros
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, 
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_TXT, Propriedade.ExtRetorno.RetDanfeReport_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
@@ -147,7 +147,7 @@ ExportarPasta|Enviar | Enviados | Erros
     <Email></Email>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -171,7 +171,7 @@ Copias|1
 Impressora|
 Email|
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                     foreach (string cTexto in cLinhas)
@@ -199,8 +199,8 @@ Email|
                         }
                     }
                 }
-                if (Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
-                    Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
+                if (Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
+                    Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
                 {
                     if (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaExeUniDanfe))
                     {

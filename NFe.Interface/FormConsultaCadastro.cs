@@ -203,7 +203,7 @@ namespace NFe.Interface
                         break;
                 }
 
-                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
+                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaXmlEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
 
                 //Demonstrar o status do serviço
                 this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
@@ -319,14 +319,14 @@ namespace NFe.Interface
             //Posicionar o elemento da combo UF
             foreach (ComboElem elem in arrUF)
             {
-                if (elem.Codigo == Empresa.Configuracoes[Emp].UFCod)
+                if (elem.Codigo == Empresa.Configuracoes[Emp].UnidadeFederativaCodigo)
                 {
                     comboUf.SelectedValue = elem.Valor;
                     break;
                 }
             }
             //Posicionar o elemento da combo Ambiente
-            cbAmbiente.SelectedValue = Empresa.Configuracoes[Emp].tpAmb;
+            cbAmbiente.SelectedValue = Empresa.Configuracoes[Emp].AmbienteCodigo;
 
             //Posicionar o elemento da combo tipo de emissão
             switch (Empresa.Configuracoes[Emp].tpEmis)
@@ -367,11 +367,11 @@ namespace NFe.Interface
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
+            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.xml";
 
-            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
+            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.err";
 
@@ -431,11 +431,11 @@ namespace NFe.Interface
         /// <returns></returns>
         public object VerConsultaCadastro(string XmlNfeDadosMsg)
         {
-            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
+            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                        Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                        "-ret-cons-cad.xml";
 
-            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaRetorno + "\\" +
+            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                       "-ret-cons-cad.err";
 

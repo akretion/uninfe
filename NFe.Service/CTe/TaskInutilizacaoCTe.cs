@@ -84,7 +84,7 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         private void PedInut(int emp, string cArquivoXML)
         {
-            this.dadosPedInut.tpAmb = Empresa.Configuracoes[emp].tpAmb;
+            this.dadosPedInut.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
             this.dadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
 
             XmlDocument doc = new XmlDocument();
@@ -101,7 +101,8 @@ namespace NFe.Service
                 foreach (XmlNode infInutNode in infInutList)
                 {
                     XmlElement infInutElemento = (XmlElement)infInutNode;
-
+                    Functions.PopulateClasse(dadosPedInut, infInutElemento);
+#if false
                     if (infInutElemento.GetElementsByTagName("tpAmb")[0] != null)
                         this.dadosPedInut.tpAmb = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("tpAmb")[0].InnerText);
 
@@ -125,7 +126,7 @@ namespace NFe.Service
 
                     if (infInutElemento.GetElementsByTagName("nCTFin")[0] != null)
                         this.dadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nCTFin")[0].InnerText);
-
+#endif
                     if (infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
                         this.dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);
@@ -180,7 +181,7 @@ namespace NFe.Service
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
 
                         //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                        string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML) + Propriedade.ExtRetorno.ProcInutCTe;
                         TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);

@@ -44,23 +44,23 @@ namespace NFe.Threadings
             for(int i = 0; i < Empresa.Configuracoes.Count; i++)
             {
                 #region Pasta de envio
-                fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvio, "*.xml"));
+                fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaXmlEnvio, "*.xml"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
 
-                fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvio, "*.txt"));
+                fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaXmlEnvio, "*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion
 
                 #region Pasta de envio em Lote
-                if(!string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaEnvioEmLote))
+                if(!string.IsNullOrEmpty(Empresa.Configuracoes[i].PastaXmlEmLote))
                 {
-                    fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvioEmLote, "*.xml"));
+                    fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaXmlEmLote, "*.xml"));
                     fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                     fsw[fsw.Count - 1].StartWatch();
 
-                    fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaEnvioEmLote, "*.txt"));
+                    fsw.Add(new FileSystemWatcher(Empresa.Configuracoes[i].PastaXmlEmLote, "*.txt"));
                     fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                     fsw[fsw.Count - 1].StartWatch();
                 }
@@ -112,8 +112,8 @@ namespace NFe.Threadings
 
                 for(int i = 0; i < Empresa.Configuracoes.Count; i++)
                 {
-                    if(fullName == Empresa.Configuracoes[i].PastaEnvio.ToLower() ||
-                        fullName == Empresa.Configuracoes[i].PastaEnvioEmLote.ToLower() ||
+                    if(fullName == Empresa.Configuracoes[i].PastaXmlEnvio.ToLower() ||
+                        fullName == Empresa.Configuracoes[i].PastaXmlEmLote.ToLower() ||
                         fullName == Empresa.Configuracoes[i].PastaValidar.ToLower())
                     {
                         empresa = i;

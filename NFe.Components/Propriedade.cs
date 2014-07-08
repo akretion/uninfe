@@ -18,20 +18,6 @@ namespace NFe.Components
 
         public static string ServiceName = "UniNFeServico";
 
-        public static string[] tpEmissao = 
-            { 
-                "", 
-                "Normal", 
-                "Contingência com formulário de segurança (FS)", 
-                "Contingência com SCAN do Ambiente Nacional", 
-                "Contingência com DPEC", 
-                "Contingência com formulário de segurança (FS-DA)",
-                "Contingência com SVC-AN",
-                "Contingência com SVC-RS",
-                "Contingência com SVC-SP",
-                "Contingência Off-Line (NFC-e)"
-            };
-
         /// <summary>
         /// Nome para a pasta dos XML assinados
         /// </summary>
@@ -710,6 +696,20 @@ namespace NFe.Components
         #endregion
 
         #region Classe dos tipos de emissão da NFe
+        public static string[] tpEmissao = 
+            { 
+                "", 
+                "Normal", 
+                "Contingência com formulário de segurança (FS)", 
+                "Contingência com SCAN do Ambiente Nacional", 
+                "Contingência com DPEC", 
+                "Contingência com formulário de segurança (FS-DA)",
+                "Contingência com SVC-AN",
+                "Contingência com SVC-RS",
+                "Contingência com SVC-SP",
+                "Contingência Off-Line (NFC-e)"
+            };
+
         /// <summary>
         /// Tipo de emissão da NFe - danasa 8-2009
         /// </summary>
@@ -939,7 +939,7 @@ namespace NFe.Components
         public static string GravarEventosNaPastaEnviadosNFe = "GravarEventosNaPastaEnviadosNFe";
         public static string GravarEventosCancelamentoNaPastaEnviadosNFe = "GravarEventosCancelamentoNaPastaEnviadosNFe";
         public static string GravarEventosDeTerceiros = "GravarEventosDeTerceiros";
-        public static string CompactarNFe = "CompactarNfe";
+        public static string CompactarNfe = "CompactarNfe";
         public static string TempoConsulta = "TempoConsulta";
         public static string tpEmis = "tpEmis";
         public static string tpAmb = "tpAmb";

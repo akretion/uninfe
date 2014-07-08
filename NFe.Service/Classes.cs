@@ -760,8 +760,8 @@ namespace NFe.Service
         public DadosPedLoteRps(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -779,8 +779,8 @@ namespace NFe.Service
         public DadosPedSitNfse(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -798,8 +798,8 @@ namespace NFe.Service
         public DadosPedSitNfseRps(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -817,8 +817,8 @@ namespace NFe.Service
         public DadosPedCanNfse(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -836,8 +836,8 @@ namespace NFe.Service
         public DadosPedSitLoteRps(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -855,8 +855,8 @@ namespace NFe.Service
         public DadosEnvLoteRps(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -874,8 +874,8 @@ namespace NFe.Service
         public DadosPedURLNfse(int emp)
         {
             tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].tpAmb;
-            cMunicipio = Empresa.Configuracoes[emp].UFCod;
+            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion

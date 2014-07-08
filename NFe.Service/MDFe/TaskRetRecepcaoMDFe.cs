@@ -97,7 +97,7 @@ namespace NFe.Service
         {
             this.dadosPedRec.tpAmb = 0;
             this.dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            this.dadosPedRec.cUF = Empresa.Configuracoes[emp].UFCod;
+            this.dadosPedRec.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
             this.dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -274,7 +274,7 @@ namespace NFe.Service
 
                                     strNomeArqNfe = strChaveNFe.Substring(4) + Propriedade.ExtEnvio.MDFe;
                                 }
-                                var strArquivoNFe = Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                                var strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                 //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
                                 fluxoNFe.AtualizarTag(strChaveNFe, FluxoNfe.ElementoEditavel.cStat, strStat);
@@ -288,7 +288,7 @@ namespace NFe.Service
                                         if (File.Exists(strArquivoNFe))
                                         {
                                             //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
-                                            var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                            var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                     Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.MDFe) + Propriedade.ExtRetorno.ProcMDFe;
 
@@ -338,7 +338,7 @@ namespace NFe.Service
                                             {
                                                 try
                                                 {
-                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaEnviado + "\\" +
+                                                    var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Autorizados.ToString() + "\\" +
                                                                             Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                             Path.GetFileName(strArquivoNFeProc);

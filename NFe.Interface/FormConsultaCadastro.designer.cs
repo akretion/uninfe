@@ -318,8 +318,8 @@
             this.cbVersaoConsCad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVersaoConsCad.FormattingEnabled = true;
             this.cbVersaoConsCad.Items.AddRange(new object[] {
-            "3.10",
-            "2.00"});
+            "2.00",
+            "3.10"});
             this.cbVersaoConsCad.Location = new System.Drawing.Point(189, 71);
             this.cbVersaoConsCad.Name = "cbVersaoConsCad";
             this.cbVersaoConsCad.Size = new System.Drawing.Size(63, 21);

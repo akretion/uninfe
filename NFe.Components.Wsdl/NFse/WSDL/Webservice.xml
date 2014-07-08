@@ -1163,6 +1163,26 @@
       <ConsultarURLNfse>wsdl\producao\PISSNetAnapolis.wsdl</ConsultarURLNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="5103403" Nome="Cuiabá - MT" UF="MT" Padrao="ISS.Net">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HISSNet.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HISSNet.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HISSNet.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HISSNet.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\homologacao\HISSNet.wsdl</ConsultarURLNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</CancelarNfse>
+      <ConsultarURLNfse>wsdl\producao\PCuiaba-MTISSNet.wsdl</ConsultarURLNfse>
+    </LocalProducao>
+  </Estado>
   <!-- Municípios que utilizam o padrão ISSOnLine -->
   <Estado ID="4101408" Nome="Apucarana - PR" UF="PR" Padrao="ISSOnLine">
     <LocalHomologacao>
@@ -1294,6 +1314,24 @@
       <ConsultarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PTresCoroasRS-Dueto.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PTresCoroasRS-Dueto.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4302808" Nome="Caçapava do Sul - RS" UF="RS" Padrao="Dueto">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HCacapavaRS-DUETOServices.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PCacapavaRS-DUETOServices.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam padrão BHISS -->
@@ -1479,6 +1517,24 @@
       <ConsultarNfse>wsdl\producao\PMirassolSP.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\producao\PMirassolSP.wsdl</ConsultarLoteRps>
       <CancelarNfse>wsdl\producao\PMirassolSP.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3535804" Nome="Paranapanema - SP" UF="SP" Padrao="PRONIN">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PParanapanamaSP-PRONINServices.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <!-- Municípios que utilizam padrão DFS -->

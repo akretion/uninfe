@@ -117,6 +117,8 @@ namespace NFe.Service
             if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                Functions.PopulateClasse(this.dadosConsCad, cLinhas);
+#if false
                 foreach(string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -139,6 +141,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -157,7 +160,8 @@ namespace NFe.Service
                     foreach(XmlNode infConsNode in infConsList)
                     {
                         XmlElement infConsElemento = (XmlElement)infConsNode;
-
+                        Functions.PopulateClasse(this.dadosConsCad, infConsElemento);
+#if false
                         if(infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
                         {
                             this.dadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
@@ -174,6 +178,7 @@ namespace NFe.Service
                         {
                             this.dadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
                         }
+#endif
                     }
                 }
             }

@@ -58,6 +58,13 @@ namespace NFe.Components
             {
                 if (File.Exists(fullPathXML))
                 {
+                    if (fullPathXML.EndsWith(".txt"))
+                    {
+                        this.nRetornoTipoArq = SchemaXML.MaxID + 104;
+                        this.cRetornoTipoArq = "Arquivo '" + fullPathXML + " não pode ser um arquivo texto";
+                        return;
+                    }
+
                     try
                     {
                         XmlDocument doc = new XmlDocument();
@@ -83,7 +90,6 @@ namespace NFe.Components
                                     if (cl != null)
                                     {
                                         string evento = cl.InnerText;
-
                                         switch (evento)
                                         {
                                             case "110110":  //XML de Evento da CCe
@@ -131,25 +137,25 @@ namespace NFe.Components
                     }
                     catch (Exception ex)
                     {
-                        this.nRetornoTipoArq = 102;
+                        this.nRetornoTipoArq = SchemaXML.MaxID + 102;
                         this.cRetornoTipoArq = ex.Message;
                     }
                 }
                 else
                 {
-                    this.nRetornoTipoArq = 100;
+                    this.nRetornoTipoArq = SchemaXML.MaxID + 100;
                     this.cRetornoTipoArq = "Arquivo XML não foi encontrado";
                 }
             }
             catch (Exception ex)
             {
-                this.nRetornoTipoArq = 103;
+                this.nRetornoTipoArq = SchemaXML.MaxID + 103;
                 this.cRetornoTipoArq = ex.Message;
             }
 
             if (this.nRetornoTipoArq == 0)
             {
-                this.nRetornoTipoArq = 101;
+                this.nRetornoTipoArq = SchemaXML.MaxID + 101;
                 this.cRetornoTipoArq = "Não foi possível identificar o arquivo XML";
             }
         }

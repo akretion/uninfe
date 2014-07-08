@@ -132,8 +132,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
-                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].tpAmb,
-                            Empresa.Configuracoes[emp].PastaRetorno, Empresa.Configuracoes[emp].X509Certificado);
+                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].AmbienteCodigo,
+                            Empresa.Configuracoes[emp].PastaXmlRetorno, Empresa.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedSitNfse.cMunicipio));
                         syspro.ConsultarNfse(NomeArquivoXML);
@@ -153,7 +153,7 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaRetorno,
+                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);

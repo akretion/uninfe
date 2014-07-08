@@ -759,8 +759,8 @@ namespace uninfe
                         for (int i = 0; i < Empresa.Configuracoes.Count; i++)
                         {
                             Empresa empresa = Empresa.Configuracoes[i];
-                            if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
-                                Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
+                            if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
+                                Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
                             {
                                 if (string.IsNullOrEmpty(empresa.PastaExeUniDanfe))
                                 {
@@ -775,7 +775,6 @@ namespace uninfe
                         if (!executou)
                             throw new Exception("Arquivo deve estar na pasta de 'Autorizados/Denegados' da empresa");
                     }
-
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);

@@ -2318,14 +2318,14 @@ namespace NFe.ConvertTxt
             // ERR - resposta
             // Filename: XXXXXXXX-gerar-chave.err
 
-            string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
-            string ArqERRRetorno = Empresa.Configuracoes[emp].PastaRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
+            string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
+            string ArqERRRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
 
             try
             {
                 Functions.DeletarArquivo(ArqXMLRetorno);
                 Functions.DeletarArquivo(ArqERRRetorno);
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaErro + "\\" + ArqPedido);
+                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + ArqPedido);
 
                 if (!File.Exists(ArqPedido))
                 {
@@ -2338,7 +2338,7 @@ namespace NFe.ConvertTxt
                 int tpEmis = Empresa.Configuracoes[emp].tpEmis;
                 int nNF = 0;
                 int cNF = 0;
-                int cUF = Empresa.Configuracoes[emp].UFCod;
+                int cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
                 string cAAMM = "0000";
                 string cChave = "";
                 string cCNPJ = "";

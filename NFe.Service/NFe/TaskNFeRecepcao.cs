@@ -54,7 +54,7 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao);
 
-                if (Empresa.Configuracoes[emp].CompactarNFe)
+                if (Empresa.Configuracoes[emp].CompactarNfe)
                     Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -70,7 +70,7 @@ namespace NFe.Service
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresa.Configuracoes[emp].CompactarNFe)
+                if (Empresa.Configuracoes[emp].CompactarNfe)
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
@@ -110,7 +110,7 @@ namespace NFe.Service
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
                 }
 
@@ -118,7 +118,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresa.Configuracoes[emp].CompactarNFe)
+                if (Empresa.Configuracoes[emp].CompactarNfe)
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)

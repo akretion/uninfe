@@ -27,7 +27,7 @@ namespace NFe.Service
             {
                 int emp = Functions.FindEmpresaByThread();
                 //AssinarValidarNFe(this, this.NomeArquivoXML, Empresa.Configuracoes[emp].PastaEnvio);
-                this.AssinarValidarXMLNFe(Empresa.Configuracoes[emp].PastaEnvio);
+                this.AssinarValidarXMLNFe(Empresa.Configuracoes[emp].PastaXmlEnvio);
 
                 //Definir o nome do arquivo assinado
                 FileInfo arq = new FileInfo(this.NomeArquivoXML);

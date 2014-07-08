@@ -82,6 +82,7 @@
     <Compile Include="Interface\IEmiteNFSe.cs" />
     <Compile Include="Interface\IEmiteNFSeIPM.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="ObjectXMLSerializer.cs" />
     <Compile Include="ParamEnvioXML.cs" />
     <Compile Include="POSTRequest.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
