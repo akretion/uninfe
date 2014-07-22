@@ -54,12 +54,12 @@
   </wsdl:message>
   <wsdl:portType name="NfeAutorizacaoSoap">
     <wsdl:operation name="NfeAutorizacaoLote">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ServiÃ§o destinado Ã  autorizaÃ§Ã£o de NF-e.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à autorização de NF-e.</wsdl:documentation>
       <wsdl:input message="tns:NfeAutorizacaoLoteSoapIn" />
       <wsdl:output message="tns:NfeAutorizacaoLoteSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="NfeAutorizacaoLoteZip">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ServiÃ§o destinado Ã  autorizaÃ§Ã£o de NF-e com mensagem compactada.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à autorização de NF-e com mensagem compactada.</wsdl:documentation>
       <wsdl:input message="tns:NfeAutorizacaoLoteZipSoapIn" />
       <wsdl:output message="tns:NfeAutorizacaoLoteZipSoapOut" />
     </wsdl:operation>

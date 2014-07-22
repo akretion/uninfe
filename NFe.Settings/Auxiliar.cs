@@ -53,11 +53,11 @@ namespace NFe.Settings
             {
                 try
                 {
-                    int emp = Functions.FindEmpresaByThread();
-                    if(Empresa.Configuracoes[emp].PastaXmlRetorno != string.Empty)
+                    int emp = Empresas.FindEmpresaByThread();
+                    if(Empresas.Configuracoes[emp].PastaXmlRetorno != string.Empty)
                     {
                         //Grava arquivo de ERRO para o ERP
-                        string cArqErro = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
+                        string cArqErro = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
                         File.WriteAllText(cArqErro, Erro, Encoding.Default);
                     }
                 }
@@ -171,15 +171,15 @@ namespace NFe.Settings
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg, ".xml")</example>
         public void MoveArqErro(string Arquivo, string ExtensaoArq)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             if(File.Exists(Arquivo))
             {
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                if(Directory.Exists(Empresa.Configuracoes[emp].PastaXmlErro))
+                if(Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
                 {
-                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    string vNomeArquivo = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
                     Functions.Move(Arquivo, vNomeArquivo);
 
@@ -217,11 +217,11 @@ namespace NFe.Settings
         /// <returns>Se está na pasta de XML´s autorizados</returns>
         public bool EstaAutorizada(string arquivo, DateTime emissao, string extNFe, string extArqProtNfe)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+            string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Autorizados.ToString() + "\\" +
-                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
         }
         #endregion
@@ -235,10 +235,10 @@ namespace NFe.Settings
         /// <returns>Se está na pasta de XML´s denegados</returns>
         public bool EstaDenegada(string Arquivo, DateTime Emissao)
         {
-            int emp = Functions.FindEmpresaByThread();
-            string strNomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+            int emp = Empresas.FindEmpresaByThread();
+            string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
-                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
+                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
             return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
         }
         #endregion
@@ -310,7 +310,7 @@ namespace NFe.Settings
         {
             ArrayList empresa = new ArrayList();
 
-            string arqXML = Propriedade.NomeArqEmpresa;
+            string arqXML = Propriedade.NomeArqEmpresas;
 
             if(File.Exists(arqXML))
             {
@@ -328,6 +328,11 @@ namespace NFe.Settings
                             if(oLerXml.Name.Equals("Registro"))
                             {
                                 string cnpj = oLerXml.GetAttribute("CNPJ");
+                                string servico = oLerXml.GetAttribute("Servico");
+                                if (!string.IsNullOrEmpty(servico))
+                                    servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
+                                else
+                                    servico = TipoAplicativo.Nfe.ToString();
 
                                 while(oLerXml.Read())
                                 {
@@ -335,7 +340,12 @@ namespace NFe.Settings
                                     {
                                         oLerXml.Read();
                                         string nome = oLerXml.Value;
-                                        empresa.Add(new ComboElem(cnpj, codEmp, nome));
+                                        empresa.Add(new ComboElem{ 
+                                            Valor = cnpj, 
+                                            Codigo = codEmp, 
+                                            Nome = nome + "  <" + servico + ">", 
+                                            Servico = servico
+                                        });
                                         codEmp++;
                                         break;
                                     }

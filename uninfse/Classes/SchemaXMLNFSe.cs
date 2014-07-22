@@ -662,7 +662,7 @@ namespace uninfse
 
             // testo se o UniNFS-e tem alguma empresa configurada para Parobé-RS
             bool usaParobeRS = false;
-            foreach (var item in Empresa.Configuracoes)
+            foreach (var item in Empresas.Configuracoes)
             {
                 if (item.UnidadeFederativaCodigo == 4314050)
                     usaParobeRS = true;

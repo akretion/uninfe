@@ -74,7 +74,7 @@ namespace NFe.Validate
                                     {
                                         bSave = true;
                                         //Encryptar a tag Assinatura
-                                        rpsElement.GetElementsByTagName(Assinatura)[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                                        rpsElement.GetElementsByTagName(Assinatura)[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                                             rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
                                     }
                                 }
@@ -104,7 +104,7 @@ namespace NFe.Validate
                                     {
                                         bSave = true;
                                         //Encryptar a tag Assinatura
-                                        detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                                        detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                                             detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText);
                                     }
                                 }
@@ -139,41 +139,52 @@ namespace NFe.Validate
 
             if(lArqXML && lArqXSD)
             {
-                this.cErro = "";
+                XmlReader xmlReader = null;
+
                 try
                 {
                     this.EncryptAssinatura(cRotaArqXML);    //danasa: 12/2013
 
-                    // Create a new validating reader
-                    using (var sReader = new StreamReader(cRotaArqXML))
+                    XmlReaderSettings settings = new XmlReaderSettings();
+                    settings.ValidationType = ValidationType.Schema;
+
+                    XmlSchemaSet schemas = new XmlSchemaSet();
+                    settings.Schemas = schemas;
+
+                    /* Se dentro do XSD houver referência a outros XSDs externos, pode ser necessário ter certas permissões para localizá-lo. 
+                     * Usa um "Resolver" com as credencias-padrão para obter esse recurso externo. */
+                    XmlUrlResolver resolver = new XmlUrlResolver();
+                    resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                    /* Informa à configuração de leitura do XML que deve usar o "Resolver" criado acima e que a validação deve respeitar 
+                     * o esquema informado no início. */
+                    settings.XmlResolver = resolver;
+
+                    if(TipoArqXml.TargetNameSpace != string.Empty)
+                        schemas.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
+                    else
+                        schemas.Add(Propriedade.nsURI, caminhoDoSchema);
+
+                    settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
+
+                    xmlReader = XmlReader.Create(cRotaArqXML, settings);
+
+                    this.cErro = "";
+                    try
                     {
-                        using (var xtReader = new XmlTextReader(sReader))
-                        {
-                            using (XmlValidatingReader reader = new XmlValidatingReader(xtReader))
-                            {
-                                // Create a schema collection, add the xsd to it
-                                XmlSchemaCollection schemaCollection = new XmlSchemaCollection();
-
-                                if (TipoArqXml.TargetNameSpace != string.Empty)
-                                    schemaCollection.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
-                                else
-                                    schemaCollection.Add(Propriedade.nsURI, caminhoDoSchema);
-
-                                // Add the schema collection to the XmlValidatingReader
-                                reader.Schemas.Add(schemaCollection);
-
-                                // Wire up the call back.  The ValidationEvent is fired when the
-                                // XmlValidatingReader hits an issue validating a section of the xml
-                                reader.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
-
-                                // Iterate through the xml document
-                                while (reader.Read()) { }
-                            }
-                        }
+                        while(xmlReader.Read()) { }
                     }
+                    catch(Exception ex)
+                    {
+                        this.cErro = ex.Message;
+                    }
+
+                    xmlReader.Close();
                 }
                 catch(Exception ex)
                 {
+                    if(xmlReader != null)
+                        xmlReader.Close();
+
                     cErro = ex.Message + "\r\n";
                 }
 
@@ -255,7 +266,7 @@ namespace NFe.Validate
         /// <date>28/05/2009</date>
         public void ValidarAssinarXML(string Arquivo)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             Boolean Assinou = true;
 
@@ -268,7 +279,7 @@ namespace NFe.Validate
                 {
                     this.EncryptAssinatura(Arquivo);    //danasa: 12/2013
 
-                    oAD.Assinar(Arquivo, emp, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
+                    oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
 
                     Assinou = true;
                 }
@@ -303,12 +314,12 @@ namespace NFe.Validate
                         }
                         else
                         {
-                            if(!Directory.Exists(Empresa.Configuracoes[emp].PastaValidar + "\\Validado"))
+                            if(!Directory.Exists(Empresas.Configuracoes[emp].PastaValidar + "\\Validado"))
                             {
-                                Directory.CreateDirectory(Empresa.Configuracoes[emp].PastaValidar + "\\Validado");
+                                Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidar + "\\Validado");
                             }
 
-                            string ArquivoNovo = Empresa.Configuracoes[emp].PastaValidar + "\\Validado\\" + Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidar + "\\Validado\\" + Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
 
                             Functions.Move(Arquivo, ArquivoNovo);
                             /*
@@ -368,7 +379,7 @@ namespace NFe.Validate
         /// <date>28/05/2009</date>
         private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
@@ -388,7 +399,7 @@ namespace NFe.Validate
             try
             {
                 //Agora vamos criar um XML Writer
-                oXmlGravar = XmlWriter.Create(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
+                oXmlGravar = XmlWriter.Create(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
 
                 //Agora vamos gravar os dados
                 oXmlGravar.WriteStartDocument();

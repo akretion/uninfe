@@ -28,7 +28,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -41,7 +41,7 @@ namespace NFe.Service
                 lerXml.Mdfe(NomeArquivoXML);
                 string idLote = lerXml.oDadosNfe.idLote;
 
-                if (lerXml.oDadosNfe.mod == "58" && Empresa.Configuracoes[emp].Servico != TipoAplicativo.MDFe)
+                if (lerXml.oDadosNfe.mod == "58" && Empresas.Configuracoes[emp].Servico != TipoAplicativo.MDFe)
                     throw new Exception("A empresa não está configurada como MDF-e");
 
                 //Definir o objeto do WebService
@@ -81,7 +81,7 @@ namespace NFe.Service
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + fluxoNfe.LerTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + fluxoNfe.LerTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     fluxoNfe.ExcluirNfeFluxo(lerXml.oDadosNfe.chavenfe);
                 }
 

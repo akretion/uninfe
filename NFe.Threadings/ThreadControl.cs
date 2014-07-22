@@ -189,10 +189,10 @@ namespace NFe.Threadings
 
         public static void Start()
         {
-            Empresa.CarregaConfiguracao();
+            Empresas.CarregaConfiguracao();
 
             #region Ticket #110
-            Empresa.CreateLockFile(true);
+            Empresas.CreateLockFile(true);
             #endregion
 
             //Executar o monitoramento de pastas das empresas cadastradas

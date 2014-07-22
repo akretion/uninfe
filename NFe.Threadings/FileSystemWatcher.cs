@@ -122,9 +122,9 @@ namespace NFe.Threadings
                                 //-------------------------------------------------------------------------
                                 // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
                                 //-------------------------------------------------------------------------
-                                int index = Functions.FindEmpresaByThread();
+                                int index = Empresas.FindEmpresaByThread();
                                 string errorPath = String.Format("{0}\\{1}",
-                                    Settings.Empresa.Configuracoes[index].PastaXmlErro,
+                                    Settings.Empresas.Configuracoes[index].PastaXmlErro,
                                     oldFi.Name);
 
 #if DEBUG

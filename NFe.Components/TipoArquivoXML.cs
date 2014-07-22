@@ -61,7 +61,7 @@ namespace NFe.Components
                     if (fullPathXML.EndsWith(".txt"))
                     {
                         this.nRetornoTipoArq = SchemaXML.MaxID + 104;
-                        this.cRetornoTipoArq = "Arquivo '" + fullPathXML + " não pode ser um arquivo texto";
+                        this.cRetornoTipoArq = "Arquivo '" + fullPathXML + " não pode ser um arquivo texto para validação";
                         return;
                     }
 
@@ -123,7 +123,8 @@ namespace NFe.Components
                         }
                         catch
                         {
-                            throw new Exception("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de NFe, consulta, etc. Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
+                            throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", Propriedade.TipoAplicativo == TipoAplicativo.Nfe ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e")+
+                                "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
                         }
 
                         nRetornoTipoArq = schema.ID;

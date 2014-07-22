@@ -16,7 +16,7 @@ namespace NFe.Components
 
         public static bool ExecutandoPeloUniNFe = true;
 
-        public static string ServiceName = "UniNFeServico";
+        public static string[] ServiceName = new string[] { "UniNFeServico", "UniNFSeServico" };
 
         /// <summary>
         /// Nome para a pasta dos XML assinados
@@ -34,7 +34,7 @@ namespace NFe.Components
         /// <summary>
         /// Nome do arquivo XML que é gravado as empresas cadastradas
         /// </summary>
-        public static readonly string NomeArqEmpresa = Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml";
+        public static readonly string NomeArqEmpresas = Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml";
         /// <summary>     
         /// Nome do arquivo para controle da numeração sequencial do lote.
         /// </summary>
@@ -695,7 +695,6 @@ namespace NFe.Components
         }
         #endregion
 
-        #region Classe dos tipos de emissão da NFe
         public static string[] tpEmissao = 
             { 
                 "", 
@@ -709,61 +708,6 @@ namespace NFe.Components
                 "Contingência com SVC-SP",
                 "Contingência Off-Line (NFC-e)"
             };
-
-        /// <summary>
-        /// Tipo de emissão da NFe - danasa 8-2009
-        /// </summary>
-        public class TipoEmissao
-        {
-            /// <summary>
-            /// Tipo de emissão Normal
-            /// </summary>
-            public const int teNormal = 1;
-            /// <summary>
-            /// Tipo de emissão Contingência FS (Formulário de Segurança)
-            /// </summary>
-            public const int teContingencia = 2;
-            /// <summary>
-            /// Tipo de emissão Contingência SCAN (Sistema de contingência Ambiente Nacional)
-            /// </summary>
-            public const int teSCAN = 3;
-            /// <summary>
-            /// Tipo de emissão Contingência DPEC (Declaração Prévia de Emissão em Contingência)
-            /// </summary>
-            public const int teDPEC = 4;
-            /// <summary>
-            /// Tipo de emissão Contingência FSDA (Formulário de Segurança ... )
-            /// </summary>
-            public const int teFSDA = 5;
-            /// <summary>
-            /// Sistema virtual de contingência do NFe do Rio Grande do Sul
-            /// </summary>
-            public const int teSVCAN = 6;
-            /// <summary>
-            /// Sistema virtual de contingência do CTe e NFe do Rio Grande do Sul
-            /// </summary>
-            public const int teSVCRS = 7;
-            /// <summary>
-            /// Sistema virtual de contingência do CTe de São Paulo
-            /// </summary>
-            public const int teSVCSP = 8;
-            /// <summary>
-            /// Contingência Off-Line NFC-e
-            /// </summary>
-            public const int teOffLine = 9;
-        }
-        #endregion
-
-        #region Classe dos tipos de ambiente da NFe
-        /// <summary>
-        /// Tipos de ambientes da NFe - danasa 8-2009
-        /// </summary>
-        public class TipoAmbiente
-        {
-            public const int taProducao = 1;
-            public const int taHomologacao = 2;
-        }
-        #endregion
 
         #region NomeAplicacao
         /// <summary>
@@ -835,8 +779,8 @@ namespace NFe.Components
             {
                 try
                 {
-                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName))
-                        return ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
+                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe ? 0 : 1]))
+                        return ServiceProcess.StatusService(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe ? 0 : 1]) == System.ServiceProcess.ServiceControllerStatus.Running;
                     else
                         return false;
                 }
@@ -894,6 +838,9 @@ namespace NFe.Components
 
     public class NFeStrConstants
     {
+        public static string proxyError = "Especifique o nome do servidor/usuário/senha e porta para conectar do servidor proxy";
+        public static string versaoError = "Defina a versão";
+
         public static string nfe_configuracoes = "nfe_configuracoes";
         public static string PastaXmlAssinado = "PastaXmlAssinado";
         public static string PastaXmlEnvio = "PastaXmlEnvio";

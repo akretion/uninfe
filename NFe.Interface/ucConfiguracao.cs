@@ -15,6 +15,7 @@ using NFe.Settings;
 
 namespace NFe.Interface
 {
+    [ToolboxItem(false)]
     public partial class ucConfiguracao: UserControl
     {
         #region local
@@ -146,8 +147,8 @@ namespace NFe.Interface
 
             // atribuido "TipoEmbiente"
             ArrayList arrAmb = new ArrayList();
-            arrAmb.Add(new ComboElem("Produção", Propriedade.TipoAmbiente.taProducao));
-            arrAmb.Add(new ComboElem("Homologação", Propriedade.TipoAmbiente.taHomologacao));
+            arrAmb.Add(new ComboElem("Produção", (int)NFe.Components.TipoAmbiente.taProducao));
+            arrAmb.Add(new ComboElem("Homologação", (int)NFe.Components.TipoAmbiente.taHomologacao));
 
             comboBox_Ambiente.DataSource = arrAmb;
             comboBox_Ambiente.DisplayMember = "valor";
@@ -175,18 +176,18 @@ namespace NFe.Interface
             ArrayList.Synchronized(arrTpEmis);
 
             // atribuido "TipoEmissao.
-            arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teNormal], Propriedade.TipoEmissao.teNormal));
+            arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teNormal], (int)NFe.Components.TipoEmissao.teNormal));
 
             if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teContingencia],  Propriedade.TipoEmissao.teContingencia));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN],          Propriedade.TipoEmissao.teSCAN));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teDPEC],          Propriedade.TipoEmissao.teDPEC));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teFSDA],          Propriedade.TipoEmissao.teFSDA));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCAN],         Propriedade.TipoEmissao.teSVCAN));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS],         Propriedade.TipoEmissao.teSVCRS));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP],         Propriedade.TipoEmissao.teSVCSP));
-                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[Propriedade.TipoEmissao.teOffLine],       Propriedade.TipoEmissao.teOffLine));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teContingencia], (int)NFe.Components.TipoEmissao.teContingencia));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSCAN], (int)NFe.Components.TipoEmissao.teSCAN));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teDPEC], (int)NFe.Components.TipoEmissao.teDPEC));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teFSDA], (int)NFe.Components.TipoEmissao.teFSDA));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCAN], (int)NFe.Components.TipoEmissao.teSVCAN));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCRS], (int)NFe.Components.TipoEmissao.teSVCRS));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCSP], (int)NFe.Components.TipoEmissao.teSVCSP));
+                arrTpEmis.Add(new ComboElem(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teOffLine], (int)NFe.Components.TipoEmissao.teOffLine));
             }
 
             comboBox_tpEmis.DataSource = arrTpEmis;
@@ -199,9 +200,9 @@ namespace NFe.Interface
             textBox_dadoscertificado.Height = 287;
             textBox_dadoscertificado.Refresh();
 
-            if(Empresa.Configuracoes.Count > 0 && !string.IsNullOrEmpty(cnpj))
+            if(Empresas.Configuracoes.Count > 0 && !string.IsNullOrEmpty(cnpj))
             {
-                oEmpresa = Empresa.FindConfEmpresa(cnpj.Trim(), servico);
+                oEmpresa = Empresas.FindConfEmpresa(cnpj.Trim(), servico);
                 if(oEmpresa != null)
                 {
                     ///
@@ -215,7 +216,7 @@ namespace NFe.Interface
                         ///
                         /// tenta achar uma configuracao valida
                         /// 
-                        foreach(Empresa empresa in Empresa.Configuracoes)
+                        foreach(Empresa empresa in Empresas.Configuracoes)
                         {
                             if(empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                             {
@@ -275,7 +276,7 @@ namespace NFe.Interface
                     edtNome.Text = oEmpresa.Nome;
                     edtCNPJ.Text = oEmpresa.CNPJ;
                     cbServico.Text = AtribuirVlr_cbServico(oEmpresa.Servico);
-                    oEmpresa.X509Certificado = Empresa.BuscaConfiguracaoCertificado(oEmpresa);
+                    oEmpresa.X509Certificado = oEmpresa.BuscaConfiguracaoCertificado();
 
                     oMeuCert = oEmpresa.X509Certificado;
 
@@ -283,7 +284,7 @@ namespace NFe.Interface
                     if(oEmpresa.CertificadoInstalado)
                     {
                         DemonstraDadosCertificado();
-                        txtPinCertificado.Text = oEmpresa.CerficadoPIN;
+                        txtPinCertificado.Text = oEmpresa.CertificadoPIN;
                     }
                     else
                     {
@@ -297,8 +298,9 @@ namespace NFe.Interface
             if(oEmpresa == null)
             {
                 oEmpresa = new Empresa();
-                oEmpresa.tpEmis = (int)Propriedade.TipoEmissao.teNormal;
-                oEmpresa.AmbienteCodigo = (int)Propriedade.TipoAmbiente.taHomologacao;
+                oEmpresa.tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
+                oEmpresa.AmbienteCodigo = (int)NFe.Components.TipoAmbiente.taHomologacao;
+                oEmpresa.Servico = Propriedade.TipoAplicativo;
                 oEmpresa.UnidadeFederativaCodigo = 41;
                 oEmpresa.DiretorioSalvarComo = "AM";
                 oEmpresa.CNPJ = "";
@@ -388,6 +390,7 @@ namespace NFe.Interface
 
         private void HabilitaOpcaoCompactar(bool ativar)
         {
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse) ativar = false;
             checkBoxCompactaNFe.Visible = ativar;
         }
 
@@ -459,8 +462,6 @@ namespace NFe.Interface
             oEmpresa.XMLDanfeMonProcNFe = this.cbDanfeMonProcNfe.Checked;
             oEmpresa.DiasLimpeza = (int)udDiasLimpeza.Value;
             oEmpresa.TempoConsulta = (int)udTempoConsulta.Value;
-            oEmpresa.Certificado = (this.oMeuCert == null ? oEmpresa.Certificado : oMeuCert.Subject.ToString());
-            oEmpresa.CertificadoThumbPrint = (this.oMeuCert == null ? oEmpresa.CertificadoThumbPrint : oMeuCert.Thumbprint);
             oEmpresa.Nome = edtNome.Text;
             oEmpresa.CNPJ = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
             oEmpresa.CriaPastasAutomaticamente = cbCriaPastas.Checked;
@@ -475,10 +476,12 @@ namespace NFe.Interface
             oEmpresa.FTPNomeDoServidor = this.edtFTP_Server.Text;
             oEmpresa.FTPNomeDoUsuario = this.edtFTP_UserName.Text;
 
+            oEmpresa.Certificado = (this.oMeuCert == null ? oEmpresa.Certificado : oMeuCert.Subject.ToString());
+            oEmpresa.CertificadoDigitalThumbPrint = (this.oMeuCert == null ? oEmpresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint);
             oEmpresa.CertificadoInstalado = ckbCertificadoInstalado.Checked;
             oEmpresa.CertificadoArquivo = txtArquivoCertificado.Text;
             oEmpresa.CertificadoSenha = txtSenhaCertificado.Text;
-            oEmpresa.CerficadoPIN = txtPinCertificado.Text;
+            oEmpresa.CertificadoPIN = txtPinCertificado.Text;
 
             oEmpresa.UsuarioWS = txtUsuarioWS.Text;
             oEmpresa.SenhaWS = txtSenhaWS.Text;
@@ -520,7 +523,7 @@ namespace NFe.Interface
                 {
                     this.textBox_dadoscertificado.Text =
                     "[Sujeito]\r\n" + oEmpresa.Certificado + "\r\n\r\n" +
-                    "[ThumbPrint]\r\n" + oEmpresa.CertificadoThumbPrint + "\r\n\r\n" +
+                    "[ThumbPrint]\r\n" + oEmpresa.CertificadoDigitalThumbPrint + "\r\n\r\n" +
                     "[Alerta]\r\n" + "Certificado não foi Detectado na Estação! Podem ocorrer erros na emissão de documentos.";
                 }
             }
@@ -554,39 +557,39 @@ namespace NFe.Interface
                     }
 
                     bool mudaPastas = true;
-                    if(Empresa.FindConfEmpresa(cnpj, servico) != null)
+                    if(Empresas.FindConfEmpresa(cnpj, servico) != null)
                     {
                         MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        if(Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
+                        if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfe);
                             servicoCurrent = servico = TipoAplicativo.Nfe;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
+                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Cte);
                             servicoCurrent = servico = TipoAplicativo.Cte;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
+                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfse);
                             servicoCurrent = servico = TipoAplicativo.Nfse;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresa.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
+                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.MDFe);
                             servicoCurrent = servico = TipoAplicativo.MDFe;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresa.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
+                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.NFCe);
                             servicoCurrent = servico = TipoAplicativo.NFCe;
@@ -659,7 +662,7 @@ namespace NFe.Interface
                 {
                     oMeuCert = oCertDig.oCertificado;
                     oEmpresa.Certificado = oMeuCert.Subject;
-                    oEmpresa.CertificadoThumbPrint = oMeuCert.Thumbprint;
+                    oEmpresa.CertificadoDigitalThumbPrint = oMeuCert.Thumbprint;
                     oEmpresa.X509Certificado = oMeuCert;
                     DemonstraDadosCertificado();
                 }
@@ -734,13 +737,16 @@ namespace NFe.Interface
         /// </summary>
         /// <param name="textBox">Componente do tipo TextBox que será modificado</param>
         /// <param name="baseDir">diretório base para substituir no componente</param>
-        private void SetNewDir(TextBox textBox, string baseDir)
+        private void SetNewDir(TextBox textBox, string baseDir, string subfolder)
         {
-            if(String.IsNullOrEmpty(textBox.Text)) return;
-
             string[] dirs = textBox.Text.Split(new char[] { '\\' });
-            string dir = dirs[dirs.Length - 1];
-            textBox.Text = String.Format("{0}\\{1}", baseDir, dir);
+            if (dirs.Length > 0 && !String.IsNullOrEmpty(textBox.Text))
+            {
+                string dir = dirs[dirs.Length - 1];
+                textBox.Text = String.Format("{0}\\{1}", baseDir, dir);
+            }
+            else
+                textBox.Text = String.Format("{0}\\{1}", baseDir, subfolder);
         }
 
         private void btnFTPTestar_Click(object sender, EventArgs e)
@@ -809,7 +815,12 @@ namespace NFe.Interface
             txtPinCertificado.Visible =
             ckbCertificadoInstalado.Checked;
 
-            if(!ckbCertificadoInstalado.Checked)
+            #region Temporariamente, por conta de uma falha que está nesta questão de gravar o PIN, vou deixar desabilitado para que ninguém utilize. Wandrey 08/07/2014
+            lbPINCertificado.Visible = false;
+            txtPinCertificado.Visible = false;
+            #endregion
+
+            if (!ckbCertificadoInstalado.Checked)
             {
                 textBox_dadoscertificado.Text = "";
                 oMeuCert = null;
@@ -833,7 +844,7 @@ namespace NFe.Interface
 
             if(servico != servicoCurrent)
             {
-                if(Empresa.FindConfEmpresa(cnpjCurrent, servico) != null)
+                if(Empresas.FindConfEmpresa(cnpjCurrent, servico) != null)
                 {
                     this.tabControl3.SelectedIndex = 0;
                     this.cbServico.Focus();
@@ -898,13 +909,14 @@ namespace NFe.Interface
                 string[] dirs = textBox_PastaEnvioXML.Text.Split(new char[] { '\\' });
                 string baseDir = dirs.Join('\\', dirs.Length - 1);
 
-                SetNewDir(textBox_PastaBackup, baseDir);
-                SetNewDir(textBox_PastaEnviados, baseDir);
-                SetNewDir(textBox_PastaRetornoXML, baseDir);
-                SetNewDir(textBox_PastaXmlErro, baseDir);
-                SetNewDir(textBox_PastaValidar, baseDir);
-                SetNewDir(textBox_PastaLote, baseDir);
-                SetNewDir(textBox_PastaDownload, baseDir);
+                SetNewDir(textBox_PastaBackup, baseDir, "Backup");
+                SetNewDir(textBox_PastaEnviados, baseDir, "Enviados");
+                SetNewDir(textBox_PastaRetornoXML, baseDir, "Retorno");
+                SetNewDir(textBox_PastaXmlErro, baseDir, "Erro");
+                SetNewDir(textBox_PastaValidar, baseDir, "Validar");
+                SetNewDir(textBox_PastaLote, baseDir, "EnvioEmLote");
+                SetNewDir(textBox_PastaDownload, baseDir, "DownloadNFe");
+
                 stopChangedEvent = false;
             }
 

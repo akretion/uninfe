@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using NFe.Components;
+
 namespace NFe.ConvertTxt
 {
     /// <summary>
@@ -14,10 +16,9 @@ namespace NFe.ConvertTxt
         public string indProc;
     }
 
-
     public class protNFe
     {
-        public TpcnTipoAmbiente tpAmb;
+        public TipoAmbiente tpAmb;
         public string verAplic;
         public string chNFe;
         public DateTime dhRecbto;

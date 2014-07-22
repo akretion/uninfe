@@ -25,7 +25,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -195,7 +195,7 @@ namespace NFe.Service
                                     case ConvertTxt.tpEventos.tpEvCCe:
                                         try
                                         {
-                                            NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresa.Configuracoes[emp]);
+                                            NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                         }
                                         catch (Exception ex)
                                         {

@@ -37,7 +37,7 @@
   </wsdl:message>
   <wsdl:portType name="NfeRetAutorizacaoSoap">
     <wsdl:operation name="NfeRetAutorizacaoLote">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ServiÃ§o destinado ao retorno da autorizaÃ§Ã£o de NF-e.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado ao retorno da autorização de NF-e.</wsdl:documentation>
       <wsdl:input message="tns:NfeRetAutorizacaoLoteSoapIn" />
       <wsdl:output message="tns:NfeRetAutorizacaoLoteSoapOut" />
     </wsdl:operation>

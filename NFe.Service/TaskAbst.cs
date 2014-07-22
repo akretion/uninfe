@@ -83,16 +83,16 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
+        /// <param name="versao">Versão do XML</param>
         /// <returns>Nome da classe</returns>
-        protected string NomeClasseWS(Servicos servico, int cUF, int tpAmb)
+        protected string NomeClasseWS(Servicos servico, int cUF, string versao)
         {
             string retorna = string.Empty;
 
             switch (Propriedade.TipoAplicativo)
             {
                 case TipoAplicativo.Nfe:
-                    retorna = NomeClasseWSNFe(servico, cUF, tpAmb);
+                    retorna = NomeClasseWSNFe(servico, cUF, versao);
                     break;
                 case TipoAplicativo.Nfse:
                     retorna = NomeClasseWSNFSe(servico, cUF);
@@ -104,7 +104,7 @@ namespace NFe.Service
 
         protected string NomeClasseWS(Servicos servico, int cUF)
         {
-            return NomeClasseWS(servico, cUF, 0);
+            return NomeClasseWS(servico, cUF, "");
         }
         #endregion
 
@@ -114,11 +114,12 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
+        /// <param name="versao">Versão do XML</param>
         /// <returns>Nome da classe</returns>
-        private string NomeClasseWSNFe(Servicos servico, int cUF, int tpAmb)
+        private string NomeClasseWSNFe(Servicos servico, int cUF, string versao)
         {
             string retorna = string.Empty;
+            string cUFeVersao = cUF.ToString().Trim() + "|" + versao.Trim();
 
             switch (servico)
             {
@@ -130,7 +131,15 @@ namespace NFe.Service
                     retorna = "NfeConsulta2";
                     break;
                 case Servicos.ConsultaStatusServicoNFe:
-                    retorna = "NfeStatusServico2";
+                    switch (cUFeVersao)
+                    {
+                        case "29|3.10": //Bahia - XML versão 3.10
+                            retorna = "NfeStatusServico";
+                            break;
+                        default:
+                            retorna = "NfeStatusServico2";
+                            break;
+                    }
                     break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "NfeRetRecepcao2";
@@ -210,7 +219,7 @@ namespace NFe.Service
         private string NomeClasseWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
-            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao);
+            bool taHomologacao = (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -556,16 +565,16 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
+        /// <param name="versao">Versão do XML</param>
         /// <returns>nome do método da classe de serviço</returns>
-        protected string NomeMetodoWS(Servicos servico, int cUF, int tpAmb)
+        protected string NomeMetodoWS(Servicos servico, int cUF, string versao)
         {
             string retorna = string.Empty;
 
             switch (Propriedade.TipoAplicativo)
             {
                 case TipoAplicativo.Nfe:
-                    retorna = NomeMetodoWSNFe(servico, cUF, tpAmb);
+                    retorna = NomeMetodoWSNFe(servico, cUF, versao);
                     break;
                 case TipoAplicativo.Nfse:
                     retorna = NomeMetodoWSNFSe(servico, cUF);
@@ -577,7 +586,7 @@ namespace NFe.Service
 
         protected string NomeMetodoWS(Servicos servico, int cUF)
         {
-            return NomeMetodoWS(servico, cUF, 0);
+            return NomeMetodoWS(servico, cUF, "");
         }
         #endregion
 
@@ -587,11 +596,12 @@ namespace NFe.Service
         /// </summary>
         /// <param name="servico">Servico</param>
         /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Ambiente - Homologação ou Produção</param>
+        /// <param name="versao">Versão do XML</param>
         /// <returns>nome do método da classe de serviço</returns>
-        private string NomeMetodoWSNFe(Servicos servico, int cUF, int tpAmb)
+        private string NomeMetodoWSNFe(Servicos servico, int cUF, string versao)
         {
             string retorna = string.Empty;
+            string cUFeVersao = cUF.ToString().Trim() + "|" + versao;
 
             switch (servico)
             {
@@ -603,22 +613,54 @@ namespace NFe.Service
                     retorna = "nfeConsultaNF2";
                     break;
                 case Servicos.ConsultaStatusServicoNFe:
-                    retorna = "nfeStatusServicoNF2";
+                    switch (cUFeVersao)
+                    {
+                        case "29|3.10": //Bahia - XML versão 3.10
+                            retorna = "NfeStatusServicoNF";
+                            break;
+                        default:
+                            retorna = "nfeStatusServicoNF2";
+                            break;
+                    }
                     break;
                 case Servicos.PedidoSituacaoLoteNFe:
                     retorna = "nfeRetRecepcao2";
                     break;
                 case Servicos.PedidoSituacaoLoteNFe2:
-                    retorna = "nfeRetAutorizacaoLote";
+                    switch (cUFeVersao)
+                    {
+                        case "29|3.10": //Bahia - XML versão 3.10
+                            retorna = "NfeRetAutorizacaoLote";
+                            break;
+                        default:
+                            retorna = "nfeRetAutorizacaoLote";
+                            break;
+                    }
                     break;
                 case Servicos.ConsultaCadastroContribuinte:
                     retorna = "consultaCadastro2";
                     break;
                 case Servicos.EnviarLoteNfe2:
-                    retorna = "nfeAutorizacaoLote";
+                    switch (cUFeVersao)
+                    {
+                        case "29|3.10": //Bahia - XML versão 3.10
+                            retorna = "NfeAutorizacaoLote";
+                            break;
+                        default:
+                            retorna = "nfeAutorizacaoLote";
+                            break;
+                    }
                     break;
                 case Servicos.EnviarLoteNfeZip2:
-                    retorna = "nfeAutorizacaoLoteZip";
+                    switch (cUFeVersao)
+                    {
+                        case "29|3.10": //Bahia - XML versão 3.10
+                            retorna = "NfeAutorizacaoLoteZip";
+                            break;
+                        default:
+                            retorna = "nfeAutorizacaoLoteZip";
+                            break;
+                    }
                     break;
                 case Servicos.EnviarLoteNfe:
                     retorna = "nfeRecepcaoLote2";
@@ -689,7 +731,7 @@ namespace NFe.Service
         private string NomeMetodoWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
-            bool taHomologacao = (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao);
+            bool taHomologacao = (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo ==(int) NFe.Components.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -855,7 +897,7 @@ namespace NFe.Service
                             retorna = "CancelamentoNFe";
                             break;
                         case Servicos.RecepcionarLoteRps:
-                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao)
+                            if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
@@ -994,7 +1036,7 @@ namespace NFe.Service
                             retorna = "CancelamentoNFe";
                             break;
                         case Servicos.RecepcionarLoteRps:
-                            if (Empresa.Configuracoes[Functions.FindEmpresaByThread()].AmbienteCodigo == Propriedade.TipoAmbiente.taHomologacao)
+                            if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
                                 retorna = "EnvioLoteRPS";
@@ -1220,7 +1262,7 @@ namespace NFe.Service
         /// </remarks>
         public void AssinarValidarXMLNFe(string pasta)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             Boolean tudoOK = false;
             Boolean bAssinado = false;
@@ -1245,7 +1287,7 @@ namespace NFe.Service
                 if (oFluxoNfe.NfeExiste(ChaveNfe))
                 {
                     //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
 
                     //Deletar a NFE do arquivo de controle de fluxo
                     oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
@@ -1259,7 +1301,7 @@ namespace NFe.Service
                 else
                 {
                     //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                    Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
                 }
 
                 //Validações gerais
@@ -1379,7 +1421,7 @@ namespace NFe.Service
         /// <date>16/04/2009</date>
         protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, DadosNFeClass oDadosNFe)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             bool booValido = false;
             int nPos = 0;
@@ -1397,18 +1439,18 @@ namespace NFe.Service
                 case Servicos.MontarLoteUmCTe:
                     //Verificar o tipo de emissão Wbate com o configurado, se não bater vai retornar um erro para o ERP
                     //Wandrey 15/08/2012
-                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9")) ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "6")) ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "7")) ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "8")))
+                    if ((Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9")) ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "6")) ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "7")) ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "8")))
                     {
                         booValido = true;
                     }
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
@@ -1416,62 +1458,62 @@ namespace NFe.Service
                     {
                         booValido = false;
 
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "6")
+                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "6")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
                                 "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
                                 "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
                                 "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
                                 "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "6")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "6")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
                                 "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
                                 "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "6")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "6")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
                                 "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "7")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "7")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
                                 "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "8")
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "8")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
                                 "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
                                 "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
                                 "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
                         }
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
                                 "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
@@ -1488,27 +1530,27 @@ namespace NFe.Service
                 case Servicos.MontarLoteUmaNFe:
                     //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
                     //danasa 8-2009
-                    if ((Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4" || oDadosNFe.tpEmis == "9")) ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && oDadosNFe.tpEmis == "3") ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
-                        (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
+                    if ((Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4" || oDadosNFe.tpEmis == "9")) ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && oDadosNFe.tpEmis == "3") ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
+                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
                     {
                         booValido = true;
                     }
                     // danasa 8-2009
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                     }
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teDPEC && (oDadosNFe.tpEmis == "4"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teDPEC && (oDadosNFe.tpEmis == "4"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
-                    else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
+                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
                     {
                         booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
                     }
@@ -1517,14 +1559,14 @@ namespace NFe.Service
                         booValido = false;
 
                         // danasa 8-2009
-                        if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
+                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                 "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                 "para o SVCAN.\r\n\r\n";
                         }
                         // danasa 8-2009
-                        else if (Empresa.Configuracoes[emp].tpEmis == Propriedade.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
                                 "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
@@ -1682,9 +1724,9 @@ namespace NFe.Service
             if (File.Exists(strArquivoNFe))
             {
                 oLerXml.Nfe(strArquivoNFe);
-                string nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
-                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
+                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
                 string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));
 
                 //danasa 11-4-2012
@@ -1718,12 +1760,12 @@ namespace NFe.Service
                     dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe));
                     if (!File.Exists(dArquivo))
                     {
-                        if (Empresa.Configuracoes[emp].PastaBackup.Trim() != "")
+                        if (Empresas.Configuracoes[emp].PastaBackup.Trim() != "")
                         {
                             //Criar Pasta do Mês para gravar arquivos enviados
-                            string nomePastaBackup = Empresa.Configuracoes[emp].PastaBackup + "\\" +
+                            string nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" +
                                                         PastaEnviados.Denegados + "\\" +
-                                                        Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
+                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
                             if (!Directory.Exists(nomePastaBackup))
                                 System.IO.Directory.CreateDirectory(nomePastaBackup);
 
@@ -1745,7 +1787,7 @@ namespace NFe.Service
                     }
                     try
                     {
-                        TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                        TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                     }
                     catch (Exception ex)
                     {

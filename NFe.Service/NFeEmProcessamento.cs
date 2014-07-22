@@ -20,18 +20,18 @@ namespace NFe.Service
 
         public void Analisar()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             this.oAux = new Auxiliar();
 
             try
             {
                 // le todos os arquivos que estão na pasta em processamento
-                //                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
+                //                string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
                 //                                                "*" + Propriedade.ExtEnvio.Nfe,
                 //                                                SearchOption.TopDirectoryOnly);
 
-                string[] files = Directory.GetFiles(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
+                string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
                                                                                                                                                           w.EndsWith(Propriedade.ExtEnvio.Cte, StringComparison.InvariantCultureIgnoreCase) ||
                                                                                                                                                           w.EndsWith(Propriedade.ExtEnvio.MDFe, StringComparison.InvariantCultureIgnoreCase)).ToArray<string>();
 
@@ -129,7 +129,7 @@ namespace NFe.Service
                                     oAux.MoveArqErro(file);
 
                                     //Move o XML da pasta em processamento para a pasta de XML´s com erro (-procNFe.xml)
-                                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, extNFe) + extProcNFe);
+                                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(file, extNFe) + extProcNFe);
 
                                     //Tirar a nota fiscal do fluxo
                                     fluxo.ExcluirNfeFluxo(oLerXml.oDadosNfe.chavenfe);

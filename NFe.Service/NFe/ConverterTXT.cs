@@ -35,23 +35,23 @@ namespace NFe.Service
 
             try
             {
-                int emp = Functions.FindEmpresaByThread();
+                int emp = Empresas.FindEmpresaByThread();
 
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
                 /// 
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt");
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt");
 
                 ///
                 /// processa a conversão
                 /// 
-                oUniTxtToXml.Converter(arquivo, pasta);//Empresa.Configuracoes[emp].PastaRetorno);
+                oUniTxtToXml.Converter(arquivo, pasta);//Empresas.Configuracoes[emp].PastaRetorno);
 
                 //Deu tudo certo com a conversão?
                 if (string.IsNullOrEmpty(oUniTxtToXml.cMensagemErro))
@@ -71,11 +71,11 @@ namespace NFe.Service
                         //
                         // salva o arquivo texto original
                         //
-                        if (pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaXmlEnvio.ToLower()) || pasta.ToLower().Equals(Empresa.Configuracoes[emp].PastaValidar.ToLower()))
+                        if (pasta.ToLower().Equals(Empresas.Configuracoes[emp].PastaXmlEnvio.ToLower()) || pasta.ToLower().Equals(Empresas.Configuracoes[emp].PastaValidar.ToLower()))
                         {
                             FileInfo ArqOrig = new FileInfo(arquivo);
 
-                            string vvNomeArquivoDestino = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt";
+                            string vvNomeArquivoDestino = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileNameWithoutExtension(arquivo) + "-orig.txt";
                             ArqOrig.MoveTo(vvNomeArquivoDestino);
                         }
                         ccExtension = "-nfe.txt";

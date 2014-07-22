@@ -24,6 +24,7 @@ namespace uninfse
     {
         private bool restartServico = false;
         private bool servicoInstaladoErodando = false;
+        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
 
         #region MainForm()
         public MainForm()
@@ -117,22 +118,22 @@ namespace uninfse
         /// </summary>
         private void ExecutaServicos()
         {
-            Empresa.CarregaConfiguracao();
+            Empresas.CarregaConfiguracao();
 
             if(servicoInstaladoErodando)
             {
                 if(restartServico)
-                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                    ServiceProcess.StopService(srvName, 40000);
 
                 restartServico = false;
 
-                switch(ServiceProcess.StatusService(Propriedade.ServiceName))
+                switch(ServiceProcess.StatusService(srvName))
                 {
                     case System.ServiceProcess.ServiceControllerStatus.Stopped:
-                        ServiceProcess.StartService(Propriedade.ServiceName, 40000);
+                        ServiceProcess.StartService(srvName, 40000);
                         break;
                     case System.ServiceProcess.ServiceControllerStatus.Paused:
-                        ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                        ServiceProcess.RestartService(srvName, 40000);
                         break;
                 }
                 this.updateControleDoServico();
@@ -151,7 +152,7 @@ namespace uninfse
             {
                 if(fechaServico)
                 {
-                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                    ServiceProcess.StopService(srvName, 40000);
                 }
             }
 
@@ -241,7 +242,7 @@ namespace uninfse
              * Marcelo
              */
 
-            Empresa.ClearLockFiles(false);
+            Empresas.ClearLockFiles(false);
             #endregion
         }
         #endregion
@@ -326,7 +327,7 @@ namespace uninfse
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if(Empresa.Configuracoes.Count <= 0)
+            if(Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -355,7 +356,7 @@ namespace uninfse
 
         private void cmConsultaCadastroServico_Click(object sender, EventArgs e)
         {
-            if(Empresa.Configuracoes.Count <= 0)
+            if(Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -388,7 +389,7 @@ namespace uninfse
         #region -- Validar
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
-            if(Empresa.Configuracoes.Count <= 0)
+            if(Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -402,7 +403,7 @@ namespace uninfse
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(Empresa.Configuracoes.Count <= 0)
+            if(Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -621,7 +622,7 @@ namespace uninfse
             try
             {
                 fw.DisplayMessage("Parando o serviço do UniNFe");
-                ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                ServiceProcess.StopService(srvName, 40000);
                 this.updateControleDoServico();
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe parado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -643,7 +644,7 @@ namespace uninfse
             try
             {
                 fw.DisplayMessage("Reiniciando o serviço do UniNFe");
-                ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                ServiceProcess.RestartService(srvName, 40000);
                 this.updateControleDoServico();
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe reiniciado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -662,8 +663,8 @@ namespace uninfse
         {
             if(servicoInstaladoErodando)
             {
-                this.tbPararServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
-                this.tbRestartServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
+                this.tbPararServico.Enabled = ServiceProcess.StatusService(srvName) == System.ServiceProcess.ServiceControllerStatus.Running;
+                this.tbRestartServico.Enabled = ServiceProcess.StatusService(srvName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
             }
         }
         #endregion
@@ -780,7 +781,7 @@ namespace uninfse
         #region Ticket #110
         private void tbClearLockFiles_Click(object sender, EventArgs e)
         {
-            if(Empresa.ClearLockFiles())
+            if(Empresas.ClearLockFiles())
             {
                 ThreadService.Stop();
                 Application.Exit();

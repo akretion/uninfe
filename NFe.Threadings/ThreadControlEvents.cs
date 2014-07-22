@@ -141,7 +141,7 @@ namespace NFe.Threadings
 
             #region #21040
             //criar um buffer para cada empresa que o certificado é A3
-            foreach(Empresa emp in Empresa.Configuracoes)
+            foreach(Empresa emp in Empresas.Configuracoes)
             {
                 if(emp.X509Certificado.IsA3())
                 {
@@ -163,7 +163,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnStarted(ThreadItem item)
         {
-            Empresa empresa = Empresa.Configuracoes[item.Empresa];
+            Empresa empresa = Empresas.Configuracoes[item.Empresa];
 
             #region #21040
             /*
@@ -225,7 +225,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnEnded(ThreadItem item)
         {
-            Empresa empresa = Empresa.Configuracoes[item.Empresa];
+            Empresa empresa = Empresas.Configuracoes[item.Empresa];
 
             #region #21040
             /*

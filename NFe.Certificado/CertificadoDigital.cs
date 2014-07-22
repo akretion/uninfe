@@ -102,7 +102,7 @@ namespace NFe.Certificado
         public bool PrepInfCertificado(Empresa empresa)
         {
             bool localizouCertificado;
-            X509Certificate2 x509Cert = Empresa.BuscaConfiguracaoCertificado(empresa);
+            X509Certificate2 x509Cert = empresa.BuscaConfiguracaoCertificado();
 
             if (x509Cert == null)
                 localizouCertificado = false;
@@ -126,7 +126,7 @@ namespace NFe.Certificado
         {
             bool retorna = false;
 
-            if (PrepInfCertificado(Empresa.Configuracoes[emp]))
+            if (PrepInfCertificado(Empresas.Configuracoes[emp]))
             {
                 if (DateTime.Compare(DateTime.Now, dValidadeFinal) > 0)
                 {
@@ -134,8 +134,14 @@ namespace NFe.Certificado
                 }
 
                 //Caso o usuário tenha salvo o PIN do certificado eu atribuo ele a chave para não pedir o PIN para o Usuário. Renan
-                if (!String.IsNullOrEmpty(Empresa.Configuracoes[emp].CerficadoPIN))
-                    clsX509Certificate2Extension.SetPinPrivateKey(Empresa.Configuracoes[emp].X509Certificado, Empresa.Configuracoes[emp].CerficadoPIN);
+                string certificadoPIN = Empresas.Configuracoes[emp].CertificadoPIN;
+
+                #region Temporariamente, por conta de uma falha que está nesta questão de gravar o PIN, vou deixar desabilitado para que ninguém utilize. Wandrey 08/07/2014
+                certificadoPIN = string.Empty;
+                #endregion
+
+                if (!String.IsNullOrEmpty(certificadoPIN))
+                    clsX509Certificate2Extension.SetPinPrivateKey(Empresas.Configuracoes[emp].X509Certificado, certificadoPIN);
             }
 
             return retorna;

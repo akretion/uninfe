@@ -24,7 +24,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.EnviarDPEC;
@@ -110,11 +110,9 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML de registro do DPEC</param>
         private void EnvDPEC(int emp, string arquivoXML)
         {
-            //int emp = Empresa.FindEmpresaThread(Thread.CurrentThread);
-
-            this.dadosEnvDPEC.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            this.dadosEnvDPEC.tpEmis = Propriedade.TipoEmissao.teDPEC;
-            this.dadosEnvDPEC.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            this.dadosEnvDPEC.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            this.dadosEnvDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teDPEC;
+            this.dadosEnvDPEC.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
             ///
             /// danasa 21/10/2010
@@ -134,6 +132,8 @@ namespace NFe.Service
                 ///vICMS|18.00
                 ///vST|121.99
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                Functions.PopulateClasse(this.dadosEnvDPEC, cLinhas);
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -176,6 +176,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -198,7 +199,7 @@ namespace NFe.Service
         #region LerRetDPEC()
         private void LerRetDPEC()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
 
@@ -228,7 +229,7 @@ namespace NFe.Service
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoDPEC);
 
                         //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                        string nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
                         oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                     }
                     else
@@ -254,7 +255,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultarDPEC;
@@ -352,14 +353,14 @@ namespace NFe.Service
                         DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                        string arqEnvDpec = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
+                        string arqEnvDpec = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsDPEC_XML) + Propriedade.ExtEnvio.EnvDPEC_XML;
                         if (File.Exists(arqEnvDpec))
                         {
                             TFunctions.MoverArquivo(arqEnvDpec, PastaEnviados.Autorizados, dtEmissaoDPEC);
                         }
 
                         //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                        string nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
                         oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                     }
                     else
@@ -375,8 +376,8 @@ namespace NFe.Service
         #region ConsDPEC()
         private void ConsDPEC(int emp, string arquivoXML)
         {
-            this.dadosConsDPEC.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            this.dadosConsDPEC.tpEmis = Propriedade.TipoEmissao.teDPEC;
+            this.dadosConsDPEC.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            this.dadosConsDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teDPEC;
 
             ///
             /// danasa 21/10/2010
@@ -396,6 +397,8 @@ namespace NFe.Service
                 ///vICMS|18.00
                 ///vST|121.99
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                Functions.PopulateClasse(this.dadosConsDPEC, cLinhas);
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -417,6 +420,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {

@@ -30,7 +30,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -95,7 +95,7 @@ namespace NFe.Service
         /// <param name="emp">Código da empresa</param>
         private void PedSit(int emp, string arquivoXML)
         {
-            this.dadosPedSit.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            this.dadosPedSit.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             this.dadosPedSit.chNFe = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -133,7 +133,7 @@ namespace NFe.Service
         /// </remarks>
         private void LerRetornoSitMDFe(string ChaveNFe)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
@@ -167,7 +167,7 @@ namespace NFe.Service
                     strNomeArqNfe = strChaveNFe.Substring(4) + Propriedade.ExtEnvio.MDFe;
                 }
 
-                string strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
@@ -248,7 +248,7 @@ namespace NFe.Service
                                         var strProtNfe = retConsSitElemento.GetElementsByTagName("protMDFe")[0].OuterXml;
                                             
                                         //Definir o nome do arquivo -procNfe.xml                                               
-                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                        string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                     Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.MDFe) + Propriedade.ExtRetorno.ProcMDFe;
 
@@ -310,13 +310,13 @@ namespace NFe.Service
                                             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                             if (procNFeJaNaAutorizada)
                                             {
-                                                string strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                            Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                             Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.MDFe) + Propriedade.ExtRetorno.ProcMDFe;
                                                 try
                                                 {
-                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }
                                                 catch (Exception ex)
                                                 {

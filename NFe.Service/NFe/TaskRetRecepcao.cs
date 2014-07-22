@@ -28,7 +28,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -46,7 +46,7 @@ namespace NFe.Service
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, dadosPedRec.versao);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.tpAmb));
+                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -54,7 +54,7 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.tpAmb), oCabecMsg, this);
+                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.versao), oCabecMsg, this);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo
@@ -99,8 +99,8 @@ namespace NFe.Service
         private void PedRec(int emp, string cArquivoXML)
         {
             dadosPedRec.tpAmb = 0;
-            dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            dadosPedRec.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
             dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -147,7 +147,7 @@ namespace NFe.Service
         /// <date>20/04/2009</date>
         private void LerRetornoLoteNFe()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             var msXml = Functions.StringXmlToStreamUTF8(vStrXmlRetorno);
             var fluxoNFe = new FluxoNfe();
 
@@ -314,7 +314,7 @@ namespace NFe.Service
 
                         strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                     }
-                    var strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                    var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
                         PastaEnviados.EmProcessamento.ToString() + "\\" + 
                         strNomeArqNfe;
 
@@ -328,7 +328,7 @@ namespace NFe.Service
                             if (File.Exists(strArquivoNFe))
                             {
                                 //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
-                                var strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                var strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                         Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + 
                                                         Propriedade.ExtRetorno.ProcNFe;
@@ -380,13 +380,13 @@ namespace NFe.Service
                                     ///
                                     /// tem que passar o arquivo de distribuicao da nfe
                                     /// 
-                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                    string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                    Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                     Path.GetFileName(strArquivoNFeProc);
                                     try
                                     {
-                                        TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                        TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                     }
                                     catch (Exception ex)
                                     {

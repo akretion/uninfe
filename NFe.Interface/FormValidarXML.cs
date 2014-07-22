@@ -33,7 +33,7 @@ namespace NFe.Interface
             {
                 this.textBox_arqxml.Text = this.openFileDialog_arqxml.FileName.ToString();
 
-                NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(this.textBox_arqxml.Text, Empresa.Configuracoes[Emp].UnidadeFederativaCodigo);
+                NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(this.textBox_arqxml.Text, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
                 this.textBox_tipoarq.Text = validarXML.TipoArqXml.cRetornoTipoArq;
             }
 
@@ -61,7 +61,7 @@ namespace NFe.Interface
             NFe.Service.TFunctions.RemoveSomenteLeitura(cArquivo);
 
             //Detectar o tipo do arquivo
-            NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresa.Configuracoes[Emp].UnidadeFederativaCodigo);
+            NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
 
             //Assinar o arquivo XML copiado para a pasta TEMP
             bool lValidar = false;
@@ -69,7 +69,7 @@ namespace NFe.Interface
             try
             {
                 validarXML.EncryptAssinatura(cArquivo); //danasa: 12/2013
-                oAD.Assinar(cArquivo, Emp, Empresa.Configuracoes[Emp].UnidadeFederativaCodigo);
+                oAD.Assinar(cArquivo, Emp, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
                 lValidar = true;
             }
             catch (Exception ex)
@@ -158,7 +158,7 @@ namespace NFe.Interface
 
         private void textBox_arqxml_Validating(object sender, CancelEventArgs e)
         {
-            NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(this.textBox_arqxml.Text, Empresa.Configuracoes[Emp].UnidadeFederativaCodigo);
+            NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(this.textBox_arqxml.Text, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
             this.textBox_tipoarq.Text = validarXML.TipoArqXml.cRetornoTipoArq;
         }
     }

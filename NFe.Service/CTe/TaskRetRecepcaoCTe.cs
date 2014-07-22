@@ -28,7 +28,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -93,8 +93,8 @@ namespace NFe.Service
         private void PedRec(int emp, string cArquivoXML)
         {
             this.dadosPedRec.tpAmb = 0;
-            this.dadosPedRec.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            this.dadosPedRec.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            this.dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            this.dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
             this.dadosPedRec.nRec = string.Empty;
 
             XmlDocument doc = new XmlDocument();
@@ -140,7 +140,7 @@ namespace NFe.Service
         /// <date>20/04/2009</date>
         private void LerRetornoLoteCTe()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             var oLerXml = new LerXML();
             var msXml = Functions.StringXmlToStream(vStrXmlRetorno);
             var fluxoNFe = new FluxoNfe();
@@ -257,7 +257,7 @@ namespace NFe.Service
 
                                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Cte;
                                 }
-                                var strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                                var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                                 //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
                                 fluxoNFe.AtualizarTag(strChaveNFe, FluxoNfe.ElementoEditavel.cStat, strStat);
@@ -291,12 +291,12 @@ namespace NFe.Service
                                             //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
                                             try
                                             {
-                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                         PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                        Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                         Path.GetFileName(strArquivoNFeProc);
 
-                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
                                             catch (Exception ex)
                                             {
@@ -318,12 +318,12 @@ namespace NFe.Service
                                             /// 
                                             try
                                             {
-                                                var strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                         PastaEnviados.Denegados.ToString() + "\\" +
-                                                                        Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                         Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
 
-                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
                                             catch (Exception ex)
                                             {

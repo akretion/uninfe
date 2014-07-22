@@ -7,6 +7,7 @@ namespace NFe.Components
 {
     public class ComboElem
     {
+        public ComboElem() { }
         public ComboElem(string valor, int codigo, string nome)
         {
             Valor = valor;
@@ -23,6 +24,7 @@ namespace NFe.Components
         string _valor;
         int _Codigo;
         string _nome;
+        public string Servico { get; set; }
 
         public string Valor
         {

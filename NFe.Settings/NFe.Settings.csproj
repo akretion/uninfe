@@ -71,6 +71,7 @@
     <Compile Include="ConfiguracaoApp.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Empresa.cs" />
+    <Compile Include="Empresas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

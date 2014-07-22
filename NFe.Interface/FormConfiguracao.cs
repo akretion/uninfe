@@ -108,9 +108,9 @@ namespace NFe.Interface
         /// </remarks>
         private void PopulateConfGeral()
         {
-            ConfiguracaoApp oCarrega = new ConfiguracaoApp();
+            //ConfiguracaoApp oCarrega = new ConfiguracaoApp();
             ConfiguracaoApp.CarregarDados();
-            ConfiguracaoApp.CarregarDadosSobre();
+            //ConfiguracaoApp.CarregarDadosSobre();
 
             cbProxy.Checked = ConfiguracaoApp.Proxy;
             tbServidor.Text = ConfiguracaoApp.ProxyServidor;
@@ -137,7 +137,7 @@ namespace NFe.Interface
         {
             try
             {
-                foreach(Empresa elemen in Empresa.Configuracoes)
+                foreach(Empresa elemen in Empresas.Configuracoes)
                 {
                     string strNome;
                     if(elemen.Nome.Length > 20)
@@ -189,8 +189,8 @@ namespace NFe.Interface
             {
                 if(MessageBox.Show("Exclui esta empresa?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if(Empresa.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
-                        Empresa.Configuracoes.Remove(control.oEmpresa);
+                    if(Empresas.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
+                        Empresas.Configuracoes.Remove(control.oEmpresa);
 
                     control.Dispose();
 
@@ -235,8 +235,8 @@ namespace NFe.Interface
                         case DialogResult.No:
                             //byebye
                             this.Salvos = false;
-                            Empresa.Configuracoes.Clear();
-                            Empresa.Configuracoes.AddRange(tempEmpresas);
+                            Empresas.Configuracoes.Clear();
+                            Empresas.Configuracoes.AddRange(tempEmpresas);
                             break;
                     }
                 }
@@ -272,7 +272,16 @@ namespace NFe.Interface
 
         public bool Salvar()
         {
-            if(this.tabControl4.TabPages.Count == 1)
+            if (cbProxy.Checked &&
+                (nudPorta.Value == 0 ||
+                string.IsNullOrEmpty(tbServidor.Text) ||
+                string.IsNullOrEmpty(tbUsuario.Text) ||
+                string.IsNullOrEmpty(tbSenha.Text)))
+            {
+                MessageBox.Show(NFeStrConstants.proxyError, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (this.tabControl4.TabPages.Count == 1)
             {
                 MessageBox.Show("É necessário cadastrar e configurar a(s) empresa(s) que será(ão) gerenciada(s) pelo aplicativo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -305,7 +314,7 @@ namespace NFe.Interface
                         MessageBox.Show("Nome da empresa deve ser informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    if(dados.Tag.ToString() == "new" && Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) != null)
+                    if(dados.Tag.ToString() == "new" && Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) != null)
                     {
                         this.tabControl4.SelectedTab = page;
                         MessageBox.Show("Empresa/CNPJ já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -324,10 +333,10 @@ namespace NFe.Interface
                     if(page.Controls[0] is ucConfiguracao)
                     {
                         ucConfiguracao dados = (ucConfiguracao)page.Controls[0];
-                        if(Empresa.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) == null)
+                        if(Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) == null)
                         {
                             page.Controls[0].Tag = dados.oEmpresa.CNPJ;
-                            Empresa.Configuracoes.Add(dados.oEmpresa);
+                            Empresas.Configuracoes.Add(dados.oEmpresa);
                         }
                     }
                 }

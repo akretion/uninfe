@@ -24,11 +24,11 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             List<string> arquivosNFe = new List<string>();
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
-            arquivosNFe = oAux.ArquivosPasta(Empresa.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.ExtEnvio.Nfe);
+            arquivosNFe = oAux.ArquivosPasta(Empresas.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.ExtEnvio.Nfe);
             if (arquivosNFe.Count == 0)
             {
                 if (this.NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
@@ -43,7 +43,7 @@ namespace NFe.Service
                             xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.ExtEnvio.Nfe) ? "" : Propriedade.ExtEnvio.Nfe));
                         }
                         xml.Append("</MontarLoteNFe>");
-                        File.WriteAllText(Path.Combine(Empresa.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString(), Encoding.Default);
+                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString(), Encoding.Default);
 
                         //Deletar o arquivo de solicitação de montagem do lote de NFe
                         FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
@@ -88,7 +88,7 @@ namespace NFe.Service
 
                                 for (int d = 0; d < QtdeArquivo; d++)
                                 {
-                                    string arquivoNFe = Empresa.Configuracoes[emp].PastaXmlEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
+                                    string arquivoNFe = Empresas.Configuracoes[emp].PastaXmlEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
 
                                     if (File.Exists(arquivoNFe))
                                     {

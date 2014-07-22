@@ -8,10 +8,10 @@ namespace NFe.Components.Abstract
 {
     public abstract class EmiteNFSeBase : IEmiteNFSe
     {
-        public TpAmb tpAmb { get; set; }
+        public TipoAmbiente tpAmb { get; set; }
         public string PastaRetorno { get; set; }
 
-        public EmiteNFSeBase(TpAmb tpAmb, string pastaRetorno)
+        public EmiteNFSeBase(TipoAmbiente tpAmb, string pastaRetorno)
         {
             this.tpAmb = tpAmb;
             this.PastaRetorno = pastaRetorno;

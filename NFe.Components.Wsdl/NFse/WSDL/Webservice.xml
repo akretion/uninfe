@@ -19,6 +19,24 @@
       <CancelarNfse>wsdl\producao\pginfes.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3304300" Nome="Rio Bonito - RJ" UF="RJ" Padrao="GINFES">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\hginfes.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\hginfes.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\hginfes.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\hginfes.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\hginfes.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\homologacao\hginfes.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\pginfes.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\pginfes.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\pginfes.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\pginfes.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\pginfes.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\pginfes.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <Estado ID="3549904" Nome="São José dos Campos - SP" UF="SP" Padrao="GINFES">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\hginfes.wsdl</RecepcionarLoteRps>
@@ -993,7 +1011,7 @@
       <CancelarNfse>wsdl\producao\PThemaCancelamento.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
-  <Estado ID="4312401" Nome="Monte Negro - RS" UF="RS" Padrao="THEMA">
+  <Estado ID="4312401" Nome="Montenegro - RS" UF="RS" Padrao="THEMA">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HMonteNegroRSRemessaNFSE.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps>wsdl\homologacao\HMonteNegroRSConsultarNFSE.wsdl</ConsultarSituacaoLoteRps>

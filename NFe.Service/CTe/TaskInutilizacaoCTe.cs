@@ -31,7 +31,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -84,8 +84,8 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         private void PedInut(int emp, string cArquivoXML)
         {
-            this.dadosPedInut.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            this.dadosPedInut.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            this.dadosPedInut.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            this.dadosPedInut.tpEmis = Empresas.Configuracoes[emp].tpEmis;
 
             XmlDocument doc = new XmlDocument();
             doc.Load(cArquivoXML);
@@ -148,7 +148,7 @@ namespace NFe.Service
         /// <date>21/04/2009</date>
         private void LerRetornoInut()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
 
@@ -181,7 +181,7 @@ namespace NFe.Service
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
 
                         //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                        string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML) + Propriedade.ExtRetorno.ProcInutCTe;
                         TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);

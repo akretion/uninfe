@@ -13,6 +13,7 @@ using System.Globalization;
 using Microsoft.CSharp;
 using System.Reflection;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace NFe.Components
 {
@@ -165,9 +166,16 @@ namespace NFe.Components
             tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
 
             //Invocar método do serviço
-            xmlNode = (XmlNode)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
+            try
+            {
+                xmlNode = (XmlNode)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
 
-            return xmlNode;
+                return xmlNode;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao invocar o método '" + methodName + "'.\r\n" + ex.Message);
+            }
         }
         #endregion
 
@@ -276,6 +284,9 @@ namespace NFe.Components
         /// <returns>Retorna o objeto</returns>
         public object CriarObjeto(string NomeClasse)
         {
+            if (this.serviceAssemby.GetType(NomeClasse) == null)
+                throw new Exception("Nome da classe '"+NomeClasse+"' no webservice não pode ser processada");
+
             return Activator.CreateInstance(this.serviceAssemby.GetType(NomeClasse));
         }
         #endregion
@@ -302,6 +313,12 @@ namespace NFe.Components
             //Definir dados para conexão com Proxy. Wandrey 22/11/2010
             if (UtilizaServidorProxy)
             {
+                if (string.IsNullOrEmpty(ProxyServidor))
+                    throw new Exception("Nome do servidor para conectar ao servidor proxy deve ser informado");
+
+                if (string.IsNullOrEmpty(ProxyUsuario))
+                    throw new Exception("Nome do usuário para conectar ao servidor proxy deve ser informado");
+
                 request.Proxy = Proxy.DefinirProxy(ProxyServidor, ProxyUsuario, ProxySenha, ProxyPorta);
             }
 
@@ -483,7 +500,7 @@ namespace NFe.Components
                                 int IDmunicipio = Convert.ToInt32(registroElemento.Attributes[0].Value);
                                 string Nome = registroElemento.Attributes[1].Value;
                                 string Padrao = registroElemento.Attributes[2].Value;
-                                string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2))).Substring(0, 2);
+                                string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
 
                                 ///
                                 /// danasa 9-2013
@@ -501,8 +518,6 @@ namespace NFe.Components
 
                                 webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
-                                //PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", WebServiceNFSe.URLHomologacao(pdr), "");
-                                //PreencheURLw(wsItem.URLProducao, "URLProducao", WebServiceNFSe.URLProducao(pdr), "");
                                 PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
                                 PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
 
@@ -687,6 +702,7 @@ namespace NFe.Components
         }
     }
 
+    [ToolboxItem(false)]
     class SecureWebClient : WebClient
     {
         private readonly X509Certificate2 Certificado;

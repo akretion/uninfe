@@ -13,6 +13,7 @@ using NFe.Threadings;
 
 namespace UniNFeServico
 {
+    [ToolboxItem(false)]
     public partial class UniNFeService : ServiceBase
     {
         private List<Thread> threads = new List<Thread>();
@@ -71,7 +72,7 @@ namespace UniNFeServico
 
             // Executar as conversões de atualizações de versão quando tiver
             Auxiliar.ConversaoNovaVersao(string.Empty);
-            Empresa.CarregaConfiguracao();
+            Empresas.CarregaConfiguracao();
 
             //Executar o monitoramento de pastas das empresas cadastradas
             MonitoraPasta e = new MonitoraPasta();

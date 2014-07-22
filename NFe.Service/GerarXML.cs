@@ -181,7 +181,7 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         private void FinalizacaoLote(int numeroLote, List<string> arquivosNFe)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             //Vou atualizar os lotes das NFE´s no fluxo de envio somente depois de encerrado o lote onde eu 
             //tenho certeza que ele foi gerado e que nenhum erro aconteceu, pois desta forma, se falhar somente na 
             //atualização eu tenho como fazer o UniNFe se recuperar de um erro. Assim sendo não mude de ponto.
@@ -203,11 +203,11 @@ namespace NFe.Service
             }
 
             #region Move o arquivo de lote que a principio foi gerado na pasta temp para a pasta de envio. Wandrey 14/09/2011
-            string nomeArqLoteNfe = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\" +
+            string nomeArqLoteNfe = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" +
                                     numeroLote.ToString("000000000000000") +
                                     Propriedade.ExtEnvio.EnvLot;
 
-            string nomeArqLoteNfeTemp = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
+            string nomeArqLoteNfeTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
                                         numeroLote.ToString("000000000000000") +
                                         Propriedade.ExtEnvio.EnvLot;
 
@@ -265,7 +265,7 @@ namespace NFe.Service
                     else
                     {
                         strXMLLoteNfe += "<enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"" + versaoXml + "\">";
-                        indSinc = "<indSinc>" + (Empresa.Configuracoes[EmpIndex].IndSinc ? "1" : "0") + "</indSinc>";
+                        indSinc = "<indSinc>" + (Empresas.Configuracoes[EmpIndex].IndSinc ? "1" : "0") + "</indSinc>";
                     }
 
                     break;
@@ -353,10 +353,10 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         protected void GerarXMLLote(Int32 intNumeroLote)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Gravar o XML do lote das notas fiscais
-            string nomeArqLoteNfeTemp = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
+            string nomeArqLoteNfeTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
                                         intNumeroLote.ToString("000000000000000") +
                                         Propriedade.ExtEnvio.EnvLot;
 
@@ -385,12 +385,12 @@ namespace NFe.Service
         /// </remarks>
         private void PopulateNomeArqLote()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
-            NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\UniNfeLote.xml";
-            Bkp1NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp1_UniNfeLote.xml";
-            Bkp2NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp2_UniNfeLote.xml";
-            Bkp3NomeArqXmlLote = Empresa.Configuracoes[emp].PastaEmpresa + "\\Bkp3_UniNfeLote.xml";
+            NomeArqXmlLote = Empresas.Configuracoes[emp].PastaEmpresa + "\\UniNfeLote.xml";
+            Bkp1NomeArqXmlLote = Empresas.Configuracoes[emp].PastaEmpresa + "\\Bkp1_UniNfeLote.xml";
+            Bkp2NomeArqXmlLote = Empresas.Configuracoes[emp].PastaEmpresa + "\\Bkp2_UniNfeLote.xml";
+            Bkp3NomeArqXmlLote = Empresas.Configuracoes[emp].PastaEmpresa + "\\Bkp3_UniNfeLote.xml";
         }
         #endregion
 
@@ -747,9 +747,9 @@ namespace NFe.Service
             nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "CONS-CAD"));
             nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.UF.ToString(), uf));
             if (!string.IsNullOrEmpty(cnpj))
-                nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), cnpj));
+                nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), cnpj.PadLeft(14, '0')));
             else if (!string.IsNullOrEmpty(cpf))
-                nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CPF.ToString(), cpf));
+                nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CPF.ToString(), cpf.PadLeft(11, '0')));
             else if (!string.IsNullOrEmpty(ie))
                 nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.IE.ToString(), ie));
             node.AppendChild(nodeInfCons);
@@ -757,7 +757,7 @@ namespace NFe.Service
 
             GravarArquivoParaEnvio(_arquivo_saida, doc.OuterXml);
 
-            return Empresa.Configuracoes[emp].PastaXmlEnvio + "\\" + _arquivo_saida;
+            return Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + _arquivo_saida;
             /*
             string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
                 "<ConsCad xmlns=\"http://www.portalfiscal.inf.br/nfe" +
@@ -784,7 +784,7 @@ namespace NFe.Service
 
             GravarArquivoParaEnvio(_arquivo_saida, saida.ToString());
 
-            return Empresa.Configuracoes[emp].PastaEnvio + "\\" + _arquivo_saida;*/
+            return Empresas.Configuracoes[emp].PastaEnvio + "\\" + _arquivo_saida;*/
         }
 
         /// <summary>
@@ -1127,8 +1127,8 @@ namespace NFe.Service
         /// </remarks>        
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno)
         {
-            int emp = Functions.FindEmpresaByThread();
-            XmlRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno, Empresa.Configuracoes[emp].PastaXmlRetorno);
+            int emp = Empresas.FindEmpresaByThread();
+            XmlRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno, Empresas.Configuracoes[emp].PastaXmlRetorno);
         }
         #endregion
 
@@ -1151,7 +1151,7 @@ namespace NFe.Service
         /// </remarks>        
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             StreamWriter SW = null;
 
@@ -1159,7 +1159,7 @@ namespace NFe.Service
             {
                 //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
                 //o mesmo existir
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(this.NomeXMLDadosMsg, ".xml") + ".xml");
 
                 //Gravar o arquivo XML de retorno
                 string ArqXMLRetorno = pastaGravar + "\\" +
@@ -1171,7 +1171,7 @@ namespace NFe.Service
                 SW = null;
 
                 //gravar o conteudo no FTP
-                if (Empresa.Configuracoes[emp].FTPIsAlive)
+                if (Empresas.Configuracoes[emp].FTPIsAlive)
                     this.XmlParaFTP(emp, ArqXMLRetorno);
             }
             finally
@@ -1184,7 +1184,7 @@ namespace NFe.Service
             }
 
             //Gravar o XML de retorno também no formato TXT
-            if (Empresa.Configuracoes[emp].GravarRetornoTXTNFe)
+            if (Empresas.Configuracoes[emp].GravarRetornoTXTNFe)
             {
                 this.TXTRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno);
             }
@@ -1762,7 +1762,7 @@ namespace NFe.Service
             {
                 string TXTRetorno = string.Empty;
                 TXTRetorno = Functions/*oAux*/.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
-                TXTRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
+                TXTRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
 
                 if (Servico == Servicos.PedidoConsultaSituacaoNFe && temEvento)
                     File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.UTF8);
@@ -1817,7 +1817,7 @@ namespace NFe.Service
                     "</procInutNFe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                Functions.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
                                                Propriedade.ExtRetorno.ProcInutNFe;
@@ -1868,7 +1868,7 @@ namespace NFe.Service
                     "</procInutCTe>";
 
                 //Montar o nome do arquivo -proc-NFe.xml
-                string strNomeArqProcInutNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                Functions/*oAux*/.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
                                                Propriedade.ExtRetorno.ProcInutCTe;
@@ -1899,8 +1899,8 @@ namespace NFe.Service
         {
             int emp = EmpIndex;
 
-            string nomeArqPedRec = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
-            string nomeArqPedRecTemp = Empresa.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
+            string nomeArqPedRec = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
+            string nomeArqPedRecTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
 
             FileInfo fiTemp = new FileInfo(nomeArqPedRecTemp);
 
@@ -1945,14 +1945,14 @@ namespace NFe.Service
             XmlNode node = doc.CreateElement("consReciNFe");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), versao));
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
-            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresa.Configuracoes[emp].AmbienteCodigo.ToString()));
+            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRec.ToString(), recibo));
             doc.AppendChild(node);
             return doc.OuterXml;
             /*
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<consReciNFe versao=\"" + versao + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
-                "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
+                "<tpAmb>" + Empresas.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciNFe>";
 
@@ -1974,14 +1974,14 @@ namespace NFe.Service
             XmlNode node = doc.CreateElement("consReciCTe");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico));
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), "http://www.portalfiscal.inf.br/cte"));
-            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresa.Configuracoes[emp].AmbienteCodigo.ToString()));
+            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRec.ToString(), recibo));
             doc.AppendChild(node);
             return doc.OuterXml;
             /*
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<consReciCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">" +
-                "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
+                "<tpAmb>" + Empresas.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciCTe>";
 
@@ -2003,14 +2003,14 @@ namespace NFe.Service
             XmlNode node = doc.CreateElement("consReciMDFe");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico));
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), "http://www.portalfiscal.inf.br/mdfe"));
-            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresa.Configuracoes[emp].AmbienteCodigo.ToString()));
+            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRec.ToString(), recibo));
             doc.AppendChild(node);
             return doc.OuterXml;
             /*
             string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<consReciMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">" +
-                "<tpAmb>" + Empresa.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
+                "<tpAmb>" + Empresas.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
                 "<nRec>" + recibo + "</nRec>" +
                 "</consReciMDFe>";
 
@@ -2057,7 +2057,7 @@ namespace NFe.Service
                         "</" + tipo + "eProc>";
 
                     //Montar o nome do arquivo -proc-NFe.xml
-                    nomeArqProcNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                    nomeArqProcNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                      PastaEnviados.EmProcessamento.ToString() + "\\" +
                                      Functions.ExtrairNomeArq(arqNFe, Propriedade.ExtEnvio.Nfe) +
                                      extensao;
@@ -2097,7 +2097,7 @@ namespace NFe.Service
             try
             {
                 //Montar o nome do arquivo -proc-CTe.xml
-                nomeArqProcCTe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                nomeArqProcCTe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                  PastaEnviados.EmProcessamento.ToString() + "\\" +
                                  Functions.ExtrairNomeArq(arqCTe, Propriedade.ExtEnvio.Cte) +
                                  Propriedade.ExtRetorno.ProcCTe;
@@ -2177,7 +2177,7 @@ namespace NFe.Service
                         "</" + tipo + "eProc>";
 
                     //Montar o nome do arquivo -proc-MDFe.xml
-                    nomeArqProcMDFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                    nomeArqProcMDFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                      PastaEnviados.EmProcessamento.ToString() + "\\" +
                                      Functions.ExtrairNomeArq(arqMDFe, Propriedade.ExtEnvio.MDFe) +
                                      extensao;
@@ -2571,25 +2571,25 @@ namespace NFe.Service
             /// quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
                     ChaveNFe + "_" + (tpEvento != ConvertTxt.tpEventos.tpEvCCe ? ((int)tpEvento).ToString() + "_" : "") + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoNFe;
 
-            string folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string folderToWriteBackup = Path.Combine(Empresa.Configuracoes[emp].PastaBackup, tempXmlFile);
+            string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
+            string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
             if (tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe && 
                 tpEvento != ConvertTxt.tpEventos.tpEvCCe) //Cancelamento e CCe
             {
-                if (ChaveNFe.Substring(6, 14) != Empresa.Configuracoes[emp].CNPJ || 
-                    ChaveNFe.Substring(0, 2) != Empresa.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
+                if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ || 
+                    ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
                 {
                     ///evento não é do cliente uninfe
                     ///41120776676436000167550010000003961000316515
                     ///
 
-                    if (!Empresa.Configuracoes[emp].GravarEventosDeTerceiros) return;
+                    if (!Empresas.Configuracoes[emp].GravarEventosDeTerceiros) return;
 
-                    folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
+                    folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
                     folderToWriteBackup = "";
                 }
             }
@@ -2597,9 +2597,9 @@ namespace NFe.Service
             {
                 bool vePasta = false;
                 if (tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe) //cancelamento
-                    vePasta = Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
                 else
-                    vePasta = Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
                 if (vePasta)
                 {
@@ -2663,17 +2663,17 @@ namespace NFe.Service
             // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
 
-            string folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string folderToWriteBackup = Path.Combine(Empresa.Configuracoes[emp].PastaBackup, tempXmlFile);
+            string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
+            string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
             bool vePasta = false;
             if (tpEvento == 110111) //cancelamento
-                vePasta = Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
+                vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
             else
-                vePasta = Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
+                vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
             if (vePasta)
             {
@@ -2736,17 +2736,17 @@ namespace NFe.Service
             // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoMDFe;
 
-            string folderToWrite = Path.Combine(Empresa.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string folderToWriteBackup = Path.Combine(Empresa.Configuracoes[emp].PastaBackup, tempXmlFile);
+            string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
+            string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
             bool vePasta = false;
             if (tpEvento == 110111) //cancelamento
-                vePasta = Empresa.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
+                vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
             else
-                vePasta = Empresa.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
+                vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
             if (vePasta)
             {
@@ -2824,11 +2824,11 @@ namespace NFe.Service
         {
             ///
             /// pesquisa onde o arquivo de distribuicao da nota foi gravado
-            string[] files = System.IO.Directory.GetFiles(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
+            string[] files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
                                                             ChaveNFe + Propriedade.ExtRetorno.ProcNFe,
                                                             SearchOption.AllDirectories);
             if (files.Length == 0)
-                files = System.IO.Directory.GetFiles(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
+                files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
                                                             ChaveNFe + Propriedade.ExtRetorno.Den,
                                                             SearchOption.AllDirectories);
 
@@ -2872,7 +2872,7 @@ namespace NFe.Service
         #region NomeArqLoteRetERP()
         protected string NomeArqLoteRetERP(string NomeArquivoXML)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             string ext = Propriedade.ExtEnvio.Nfe;
             if (NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MDFe) >= 0)
@@ -2880,7 +2880,7 @@ namespace NFe.Service
             if (NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.Cte) >= 0)
                 ext = Propriedade.ExtEnvio.Cte;
 
-            return Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
+            return Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                 Functions.ExtrairNomeArq(NomeArquivoXML, ext) +
                 "-num-lot.xml";
         }
@@ -2902,9 +2902,9 @@ namespace NFe.Service
                 throw new Exception("Nome do arquivo deve ser informado");
 
             //Arquivo na pasta Temp
-            string arqTemp = Empresa.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
+            string arqTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
             //Arquivo na pasta de Envio
-            string arqEnvio = Empresa.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
+            string arqEnvio = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
 
             MemoryStream oMemoryStream;
             ///
@@ -3116,12 +3116,12 @@ namespace NFe.Service
         public void XmlParaFTP(int emp, string vNomeDoArquivo)
         {
             // verifica se o FTP da empresa está ativo
-            if (Empresa.Configuracoes[emp].FTPIsAlive)
+            if (Empresas.Configuracoes[emp].FTPIsAlive)
             {
                 string vFolder = "";
                 ///
                 /// exclui o arquivo de erro de FTP
-                Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(Path.ChangeExtension(vNomeDoArquivo, ".ftp"))));
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(Path.ChangeExtension(vNomeDoArquivo, ".ftp"))));
                 ///
                 /// o arquivo é Autorizado ou Denegado?
                 if (vNomeDoArquivo.Contains(PastaEnviados.Autorizados.ToString()) ||
@@ -3136,13 +3136,13 @@ namespace NFe.Service
                     {
                         ///
                         /// pega a pasta de enviados do FTP
-                        vFolder = Empresa.Configuracoes[emp].FTPPastaAutorizados;
+                        vFolder = Empresas.Configuracoes[emp].FTPPastaAutorizados;
                         if (!string.IsNullOrEmpty(vFolder))
                         {
                             ///
                             /// verifica se é para gravar na pasta especifica ou se é para gravar na mesma
                             /// hierarquia definida para gravar localmente
-                            if (!Empresa.Configuracoes[emp].FTPGravaXMLPastaUnica)
+                            if (!Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica)
                             {
                                 string[] temp = vNomeDoArquivo.Split('\\');
                                 ///
@@ -3163,14 +3163,14 @@ namespace NFe.Service
                         vNomeDoArquivo.ToLower().EndsWith(".txt") ||
                         vNomeDoArquivo.ToLower().EndsWith(".err"))
                     {
-                        vFolder = Empresa.Configuracoes[emp].FTPPastaRetornos;
+                        vFolder = Empresas.Configuracoes[emp].FTPPastaRetornos;
                     }
                 }
                 if (!string.IsNullOrEmpty(vFolder))
                 {
                     try
                     {
-                        Empresa.Configuracoes[emp].SendFileToFTP(vNomeDoArquivo, vFolder);
+                        Empresas.Configuracoes[emp].SendFileToFTP(vNomeDoArquivo, vFolder);
                     }
                     catch (Exception ex)
                     {

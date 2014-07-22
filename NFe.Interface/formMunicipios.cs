@@ -62,7 +62,7 @@ namespace NFe.Interface
                 int codmun = Convert.ToInt32((sender as DataGridView).Rows[e.RowIndex].Cells[0].Value);
                 string cidade = (sender as DataGridView).Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
                 string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[2].Value.ToString();
-                string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2))).Substring(0,2);
+                string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
                 WebServiceNFSe.SavePadrao(uf, cidade, codmun, padrao, this.tabControl1.SelectedIndex==1);
 
@@ -221,7 +221,7 @@ namespace NFe.Interface
         private void button1_Click(object sender, EventArgs e)
         {
             this.edtCodMun.Focus();
-            if (Functions.CodigoParaUF(Convert.ToInt32(this.edtCodMun.Text.Substring(0, 2))).Substring(0,2) != this.edtUF.SelectedItem.ToString())
+            if (Functions.CodigoParaUF(Convert.ToInt32(this.edtCodMun.Text.Substring(0, 2))) != this.edtUF.SelectedItem.ToString())
             {
                 MessageBox.Show("Código do IBGE diverge da UF");
                 return;

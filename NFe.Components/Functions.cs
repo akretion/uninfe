@@ -14,7 +14,7 @@ using System.Net;
 
 namespace NFe.Components
 {
-    public class Functions
+    public static class Functions
     {
         #region MemoryStream
         /// <summary>
@@ -90,7 +90,7 @@ namespace NFe.Components
             {
                 for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
                     if(Propriedade.CodigosEstados[v, 0] == codigo.ToString())
-                        return Propriedade.CodigosEstados[v, 1];
+                        return Propriedade.CodigosEstados[v, 1].Substring(0,2);
 
                 return "";
             }
@@ -107,7 +107,7 @@ namespace NFe.Components
             try
             {
                 for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if(Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf.ToString())
+                    if(Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf)
                         return Convert.ToInt32(Propriedade.CodigosEstados[v, 0]);
 
                 return 0;
@@ -499,7 +499,7 @@ namespace NFe.Components
         /// Retorna a empresa pela thread atual
         /// </summary>
         /// <returns></returns>
-        public static int FindEmpresaByThread()
+        public static int _FindEmpresaByThread()
         {
             return Convert.ToInt32(Thread.CurrentThread.Name);
         }
@@ -525,6 +525,48 @@ namespace NFe.Components
             return ip;
         } 
         #endregion
+
+        public static void CopyObjectTo(this object Source, object Destino)
+        {
+            foreach (var pS in Source.GetType().GetProperties())
+            {
+                if (!pS.CanWrite) continue;
+
+                foreach (var pT in Destino.GetType().GetProperties())
+                {
+                    if (!pT.Name.Equals(pS.Name, StringComparison.InvariantCultureIgnoreCase)) continue;
+
+                    try
+                    {
+                        (pT.GetSetMethod()).Invoke(Destino, new object[] { pS.GetGetMethod().Invoke(Source, null) });
+                    }
+                    catch //(Exception ex)
+                    {
+                        //Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
+
+        public static bool SetProperty(object _this, string propName, object value)
+        {
+            try
+            {
+                PropertyInfo aProperties = _this.GetType().GetProperty(propName, BindingFlags.Instance | BindingFlags.Public);
+                if (aProperties != null)
+                {
+                    //Console.WriteLine("AAAAAAAAAAAAAA>>>>>>>>>"+aProperties.DeclaringType.ToString()+" => "+propName);
+                    SetProperty(_this, aProperties, value);
+                    return true;
+                }
+                return false;
+            }
+            catch //(Exception ex)
+            {
+                //Console.WriteLine("AAAAAAAAAAAAAA>>>>>>>>>"+ex.Message);
+                return false;
+            }
+        }
 
         public static void SetProperty(object _this, PropertyInfo propertyInfo, object value)
         {
@@ -626,6 +668,19 @@ namespace NFe.Components
                         throw new Exception("Tipo de dados da origem desconhecido. (" + origem.GetType().ToString() + ")");
             }
             return lEncontrou;
+        }
+
+        public static void ExibeDocumentacao()
+        {
+            string docname = Path.Combine(Application.StartupPath, NFe.Components.Propriedade.NomeAplicacao + ".pdf");
+            if (System.IO.File.Exists(docname))
+            {
+                System.Diagnostics.Process.Start(docname);
+            }
+            else
+            {
+                throw new Exception("Não foi possível localizar o arquivo de manual do " + NFe.Components.Propriedade.NomeAplicacao + ".");
+            }
         }
     }
 }

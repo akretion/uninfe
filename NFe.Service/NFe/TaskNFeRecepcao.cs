@@ -29,7 +29,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -54,11 +54,11 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao);
 
-                if (Empresa.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe)
                     Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb)));
+                object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -70,22 +70,22 @@ namespace NFe.Service
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresa.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe)
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
                 }
 
                 //Invocar o método que envia o XML para o SEFAZ
-                if (Empresa.Configuracoes[emp].IndSinc)
+                if (Empresas.Configuracoes[emp].IndSinc)
                 {
-                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb)), oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), oCabecMsg, this);
 
                     Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
-                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb)), oCabecMsg, this, "-env-lot", "-rec");
+                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), oCabecMsg, this, "-env-lot", "-rec");
 
                     Recibo(vStrXmlRetorno);
                 }
@@ -110,7 +110,7 @@ namespace NFe.Service
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
                     //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
                     //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
                 }
 
@@ -118,7 +118,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresa.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe)
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)

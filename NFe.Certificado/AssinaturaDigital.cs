@@ -79,7 +79,7 @@ namespace NFe.Certificado
                     /// Esta condição foi feita especificamente para prefeitura de Governador Valadares pois o AtribudoID e o Elemento assinado devem possuir o mesmo nome.
                     /// Talvez tenha que ser reavaliado.
                     #region Governador Valadares
-                    if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
+                    if (tagAssinatura.Equals(tagAtributoId) && Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
                     {
                         foreach (XmlNode item in lists)
                         {
@@ -150,7 +150,7 @@ namespace NFe.Certificado
                             // it to an XmlElement object.
                             XmlElement xmlDigitalSignature = signedXml.GetXml();
 
-                            if (tagAssinatura.Equals(tagAtributoId) && Empresa.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
+                            if (tagAssinatura.Equals(tagAtributoId) && Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
                             {
                                 ///Desenvolvido especificamente para prefeitura de governador valadares
                                 listRPS.AppendChild(doc.ImportNode(xmlDigitalSignature, true));
@@ -188,10 +188,14 @@ namespace NFe.Certificado
 #if DEBUG
                 Debug.WriteLine("O erro CryptographicException foi lançado");
 #endif
-                x509Cert = Empresa.ResetCertificado(empresa);
+                x509Cert = Empresas.ResetCertificado(empresa);
 
                 throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
                 #endregion
+            }
+            catch
+            {
+                throw;
             }
             finally
             {
@@ -214,13 +218,13 @@ namespace NFe.Certificado
             if (!String.IsNullOrEmpty(v.TagAssinatura))
             {
                 if (!Assinado(arqXMLAssinar, v.TagAssinatura))
-                    this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+                    this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
             }
 
             //Assinar o lote
             if (!String.IsNullOrEmpty(v.TagLoteAssinatura))
                 if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
-                    this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresa.Configuracoes[emp].X509Certificado, emp);
+                    this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
         }
 
         /// <summary>

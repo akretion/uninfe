@@ -19,15 +19,13 @@ namespace NFe.Components.SystemPro
             {
                 if (systemProService == null)
                 {
-                    if (tpAmb == TpAmb.Homologacao)
+                    if (tpAmb == TipoAmbiente.taHomologacao)
                         systemProService = new br.gov.rs.erechim.nfse.www.h.NfseService_Homolog();
                     else
                         systemProService = new br.gov.rs.erechim.nfse.www.p.NfseService();
 
-                    AddClientCertificates(); ;
-
+                    AddClientCertificates();
                 }
-
                 return systemProService;
             }
         }
@@ -48,7 +46,7 @@ namespace NFe.Components.SystemPro
         #endregion
 
         #region Construtores
-        public SystemProBase(TpAmb tpAmb, string pastaRetorno, X509Certificate certificate)
+        public SystemProBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate)
             : base(tpAmb, pastaRetorno)
         {
             Certificate = certificate;

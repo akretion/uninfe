@@ -5,9 +5,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.IO;
 using System.Threading;
-using NFe.Components;
-using System.Windows.Forms;
 using System.Linq;
+using System.Xml.Serialization;
+
+using NFe.Components;
+
 
 namespace NFe.Settings
 {
@@ -20,6 +22,7 @@ namespace NFe.Settings
     /// </remarks>
     /// 
     //[System.Xml.Serialization.XmlRoot("nfe_configuracoes")]
+    [Serializable]
     public class Empresa
     {
         #region Propriedades
@@ -49,10 +52,8 @@ namespace NFe.Settings
                     {
                         result += dirs[i] + "\\";
                     }
-
                     result = result.Substring(0, result.Length - 1);
                 }
-
                 return result;
             }
         }
@@ -151,7 +152,7 @@ namespace NFe.Settings
         /// <summary>
         /// Utilizado para certificados A3
         /// </summary>
-        public string CerficadoPIN { get; set; }
+        public string CertificadoPIN { get; set; }
         /// <summary>
         /// Certificado digital - Subject
         /// </summary>
@@ -159,7 +160,7 @@ namespace NFe.Settings
         /// <summary>
         /// Certificado digital - ThumbPrint
         /// </summary>
-        public string CertificadoThumbPrint { get; set; }
+        public string CertificadoDigitalThumbPrint { get; set; }
         /// <summary>
         /// Certificado digital
         /// </summary>
@@ -179,14 +180,6 @@ namespace NFe.Settings
         /// Tempo para execução da consulta do recibo após o envio do lote
         /// </summary>
         public int TempoConsulta { get; set; }
-        /// <summary>
-        /// Caminho das pastas com erro no caminho dos diretorios
-        /// </summary>
-        public static string ErroCaminhoDiretorio { get; set; }
-        /// <summary>
-        /// Propriedade para exibição  de mensagem de erro referente ao erro no caminho das pastas informadas
-        /// </summary>
-        public static bool ExisteErroDiretorio { get; set; }
         /// <summary>
         /// Usuário de acesso ao webservice (Utilizado pelo UniNFS-e para algumas prefeituras)
         /// </summary>
@@ -210,12 +203,26 @@ namespace NFe.Settings
         /// Nome da pasta onde é gravado as configurações e informações da Empresa
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string PastaEmpresa { get; set; }
+        public string PastaEmpresa 
+        { 
+            get
+            {
+                return Propriedade.PastaExecutavel + "\\" + 
+                    this.CNPJ + 
+                    (this.Servico == TipoAplicativo.Nfe ? "" : "\\" + this.Servico.ToString().ToLower());
+            }
+        }
         /// <summary>
         /// Nome do arquivo XML das configurações da empresa
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string NomeArquivoConfig { get; set; }
+        public string NomeArquivoConfig 
+        { 
+            get 
+            { 
+                return Path.Combine(this.PastaEmpresa, Propriedade.NomeArqConfig);
+            } 
+        }
 
         public bool CriaPastasAutomaticamente { get; set; }
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
@@ -290,7 +297,6 @@ namespace NFe.Settings
 
                 return mDiretorioSalvarComo;
             }
-
             set { mDiretorioSalvarComo = value; }
         }
         #endregion
@@ -299,21 +305,11 @@ namespace NFe.Settings
 
         #region Coleções
         /// <summary>
-        /// Configurações por empresa
-        /// </summary>
-        /// 
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public static List<Empresa> Configuracoes = new List<Empresa>();
-        /// <summary>
         /// Objetos dos serviços da NFe
         /// </summary>
         /// 
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public Dictionary<string, WebServiceProxy> WSProxy = new Dictionary<string, WebServiceProxy>();
-        /// <summary>
-        /// Lista das threads que estão sendo executadas e o Index da empresa da thread
-        /// </summary>
-        //public static Dictionary<Thread, int> threads = new Dictionary<Thread, int>();
         #endregion
 
         /// <summary>
@@ -322,15 +318,8 @@ namespace NFe.Settings
         /// </summary>
         public Empresa()
         {
-            this.GravarEventosNaPastaEnviadosNFe = false;
-            this.GravarEventosCancelamentoNaPastaEnviadosNFe = false;
-            this.GravarEventosDeTerceiros = false;
-            this.CriaPastasAutomaticamente = false;
-            this.IndSinc = false;
-            this.DiasLimpeza = 0;
-            this.TempoConsulta = 2;
-            this.FTPAtivo = false;
-            this.FTPPorta = 21;
+            LimparPropriedades(this);
+
             this.threads = new List<Thread>();
         }
 
@@ -341,8 +330,698 @@ namespace NFe.Settings
                     thr.Abort();
         }
 
-        #region Envia arquivos para o FTP
+        #region CarregaConfiguracao()
+        /// <summary>
+        /// Carregar as configurações de todas as empresas na coleção "Configuracoes" 
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 29/07/2010
+        /// </remarks>
+        /// 
+#if false
+        public static void __CarregaConfiguracao()
+        {
+            Empresas.Configuracoes.Clear();
 
+            if (File.Exists(Propriedade.NomeArqEmpresa))
+            {
+                FileStream arqXml = null;
+
+                try
+                {
+                    arqXml = new FileStream(Propriedade.NomeArqEmpresa, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStream
+
+                    var xml = new XmlDocument();
+                    xml.Load(arqXml);
+
+                    var empresaList = xml.GetElementsByTagName("Empresa");
+
+                    foreach (XmlNode empresaNode in empresaList)
+                    {
+                        var empresaElemento = (XmlElement)empresaNode;
+
+                        var registroList = xml.GetElementsByTagName("Registro");
+
+                        for (int i = 0; i < registroList.Count; i++)
+                        {
+                            Empresa empresa = new Empresa();
+
+                            var registroNode = registroList[i];
+                            var registroElemento = (XmlElement)registroNode;
+
+                            empresa.CNPJ = registroElemento.GetAttribute("CNPJ").Trim();
+                            empresa.Nome = registroElemento.GetElementsByTagName("Nome")[0].InnerText.Trim();
+
+                            empresa.Servico = Propriedade.TipoAplicativo;// TipoAplicativo.Nfe;
+                            if (registroElemento.GetAttribute("Servico") != "")
+                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute("Servico").Trim());
+
+                            #region Definir a pasta das configurações da empresa
+                            empresa.PastaEmpresa = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
+
+                            switch (empresa.Servico)
+                            {
+                                case TipoAplicativo.Nfe:
+                                    break;
+
+                                default:
+                                    empresa.PastaEmpresa += "\\" + empresa.Servico.ToString().ToLower();
+                                    break;
+                            }
+                            #endregion
+
+                            empresa.NomeArquivoConfig = empresa.PastaEmpresa + "\\" + Propriedade.NomeArqConfig;
+
+                            try
+                            {
+                                BuscaConfiguracao(empresa);
+                            }
+                            catch (Exception ex)
+                            {
+                                ///
+                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
+                                /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
+                                /// as thread's
+                                string cArqErro;
+                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
+                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+                                else
+                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+
+                                try
+                                {
+                                    //Grava arquivo de ERRO para o ERP
+                                    File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
+                                }
+                                catch { }
+                            }
+                            ///
+                            /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
+                            ChecaCaminhoDiretorio(empresa);
+                            Empresas.Configuracoes.Add(empresa);
+                        }
+                    }
+
+                    arqXml.Close();
+                    arqXml = null;
+                }
+                finally
+                {
+                    if (arqXml != null)
+                        arqXml.Close();
+                }
+            }
+
+            if (!ExisteErroDiretorio)
+                Empresa.CriarPasta();
+        }
+#endif
+        #endregion
+
+        #region BuscaConfiguracao()
+        public void BuscaConfiguracao()
+        {
+            #region Criar diretório das configurações e dados da empresa
+            if (!Directory.Exists(this.PastaEmpresa))
+            {
+                Directory.CreateDirectory(this.PastaEmpresa);
+            }
+            #endregion
+
+            #region Limpar conteúdo dos atributos de configurações da empresa
+            LimparPropriedades(this);
+            #endregion
+
+            #region Carregar as configurações do XML UniNFeConfig da Empresa
+
+            if (File.Exists(this.NomeArquivoConfig))
+            {
+                try
+                {
+                    ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+                    ///
+                    /// verifica se precisa de conversao para que a Deserializacao funcione
+                    string temp = File.ReadAllText(this.NomeArquivoConfig, Encoding.UTF8);
+                    if (temp.Contains("<nfe_configuracoes>"))
+                    {
+                        File.WriteAllText(this.NomeArquivoConfig + ".old", temp);
+
+                        //this.BuscaConfiguracao(this);
+                        //objObjectXMLSerializer.Save(this, this.NomeArquivoConfig);
+
+                        temp = temp.Replace("<nfe_configuracoes>", "<Empresa xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
+                        temp = temp.Replace("</nfe_configuracoes>", "</Empresa>");
+                        temp = temp.Replace(">False<", ">false<").Replace(">True<", ">true<");
+                        File.WriteAllText(this.NomeArquivoConfig, temp);
+                    }
+                    Empresa t = new Empresa();
+                    t = (Empresa)objObjectXMLSerializer.Load(typeof(Empresa), this.NomeArquivoConfig);
+                    t.Nome = this.Nome;
+                    t.CNPJ = this.CNPJ;
+                    t.Servico = this.Servico;
+                    t.CopyObjectTo(this);
+
+                    this.CertificadoPIN = Criptografia.descriptografaSenha(this.CertificadoPIN);
+
+                    if (!this.CertificadoInstalado && !string.IsNullOrEmpty(this.CertificadoSenha))
+                        this.CertificadoSenha = Criptografia.descriptografaSenha(this.CertificadoSenha);
+
+                    this.X509Certificado = this.BuscaConfiguracaoCertificado();
+                }
+                catch (Exception ex)
+                {
+                    //Não vou mais fazer isso pois estava gerando problemas com Certificados A3 - Renan 18/06/2013
+                    //empresa.Certificado = string.Empty;
+                    //empresa.CertificadoThumbPrint = string.Empty;
+                    throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + this.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
+                }
+            }
+            #endregion
+        }
+
+        /// <summary>
+        /// Busca as configurações da empresa dentro de sua pasta gravadas em um XML chamado UniNfeConfig.Xml
+        /// </summary>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 28/07/2010
+        /// </remarks>
+#if false
+        private void BuscaConfiguracao(Empresa empresa)
+        {
+            #region Criar diretório das configurações e dados da empresa
+            if (!Directory.Exists(empresa.PastaEmpresa))
+            {
+                Directory.CreateDirectory(empresa.PastaEmpresa);
+            }
+            #endregion
+
+            #region Limpar conteúdo dos atributos de configurações da empresa
+            LimparPropriedades(empresa);
+            #endregion
+
+            #region Carregar as configurações do XML UniNFeConfig da Empresa
+            FileStream arqXml = null;
+
+            if (File.Exists(empresa.NomeArquivoConfig))
+            {
+                try
+                {
+                    //ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+                    //objObjectXMLSerializer.Load(empresa, empresa.NomeArquivoConfig);
+
+                    arqXml = new FileStream(empresa.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
+                    var xml = new XmlDocument();
+                    xml.Load(arqXml);
+
+                    var configList = xml.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
+                    foreach (XmlNode configNode in configList)
+                    {
+                        var configElemento = (XmlElement)configNode;
+
+                        empresa.UnidadeFederativaCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.UnidadeFederativaCodigo, false));
+                        empresa.AmbienteCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.AmbienteCodigo, false));
+                        empresa.tpEmis = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.tpEmis, false));
+                        empresa.GravarRetornoTXTNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarRetornoTXTNFe, "False"));
+                        empresa.GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosNaPastaEnviadosNFe, "False"));
+                        empresa.GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, "False"));
+                        empresa.GravarEventosDeTerceiros = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosDeTerceiros, "False"));
+                        empresa.CompactarNfe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNfe, "False"));
+                        empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
+                        empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
+                        empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, "0"));
+                        empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, "0"));
+
+                        empresa.PastaXmlEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
+                        empresa.PastaXmlRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
+                        empresa.PastaXmlErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
+                        empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
+                        empresa.PastaXmlEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
+                        empresa.PastaBackup = Functions.LerTag(configElemento, NFeStrConstants.PastaBackup, false);
+                        empresa.PastaXmlEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
+                        empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
+
+                        empresa.ConfiguracaoDanfe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoDanfe, false);
+                        empresa.ConfiguracaoCCe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoCCe, false);
+                        empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
+                        empresa.PastaConfigUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaConfigUniDanfe, false);
+                        empresa.PastaDanfeMon = Functions.LerTag(configElemento, NFeStrConstants.PastaDanfeMon, false);
+                        empresa.XMLDanfeMonNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonNFe, "False"));
+                        empresa.XMLDanfeMonProcNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonProcNFe, "False"));
+                        empresa.XMLDanfeMonDenegadaNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonDenegadaNFe, "False"));
+
+                        empresa.FTPAtivo = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPAtivo, "False"));
+                        empresa.FTPGravaXMLPastaUnica = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPGravaXMLPastaUnica, "False"));
+                        empresa.FTPSenha = Functions.LerTag(configElemento, NFeStrConstants.FTPSenha, false);
+                        empresa.FTPPastaAutorizados = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaAutorizados, false);
+                        empresa.FTPPastaRetornos = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaRetornos, false);
+                        empresa.FTPNomeDoUsuario = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoUsuario, false);
+                        empresa.FTPNomeDoServidor = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoServidor, false);
+                        empresa.FTPPorta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.FTPPorta, false));
+
+                        empresa.Certificado = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigital, false);
+                        empresa.CertificadoArquivo = Functions.LerTag(configElemento, NFeStrConstants.CertificadoArquivo, false);
+                        empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
+                        empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
+                        empresa.CertificadoPIN = Criptografia.descriptografaSenha(Functions.LerTag(configElemento, NFeStrConstants.CertificadoPIN, ""));
+
+                        if (!empresa.CertificadoInstalado)
+                            if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
+                                if (!string.IsNullOrEmpty(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim()))
+                                    empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
+
+                        empresa.UsuarioWS = Functions.LerTag(configElemento, NFeStrConstants.UsuarioWS, false);
+                        empresa.SenhaWS = Functions.LerTag(configElemento, NFeStrConstants.SenhaWS, false);
+                    }
+                    empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
+                }
+                catch (Exception ex)
+                {
+                    //Não vou mais fazer isso pois estava gerando problemas com Certificados A3 - Renan 18/06/2013
+                    //empresa.Certificado = string.Empty;
+                    //empresa.CertificadoThumbPrint = string.Empty;
+                    throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + empresa.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
+                }
+                finally
+                {
+                    if (arqXml != null)
+                        arqXml.Close();
+                }
+            }
+            #endregion
+        }
+#endif
+        #endregion
+
+        #region BuscaConfiguracaoCertificado
+        public X509Certificate2 BuscaConfiguracaoCertificado()
+        {
+            X509Certificate2 x509Cert = null;
+
+            //Certificado instalado no windows
+            if (this.CertificadoInstalado)
+            {
+                X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+                store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+                X509Certificate2Collection collection1 = null;
+                if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
+                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
+                else
+                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
+
+                for (int i = 0; i < collection1.Count; i++)
+                {
+                    //Verificar a validade do certificado
+                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                    {
+                        x509Cert = collection1[i];
+                        break;
+                    }
+                }
+
+                //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
+                if (x509Cert == null && collection1.Count > 0)
+                    x509Cert = collection1[0];
+            }
+            else //Certificado está sendo acessado direto do arquivo .PFX
+            {
+                if (string.IsNullOrEmpty(this.CertificadoArquivo))
+                    throw new Exception("Nome do arquivo referente ao certificado digital não foi informado nas configurações do UniNFe.");
+                else if (!string.IsNullOrEmpty(this.CertificadoArquivo) && !File.Exists(this.CertificadoArquivo))
+                    throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", this.CertificadoArquivo));
+
+                using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open))
+                {
+                    byte[] buffer = new byte[fs.Length];
+                    fs.Read(buffer, 0, buffer.Length);
+                    x509Cert = new X509Certificate2(buffer, this.CertificadoSenha);
+                }
+            }
+            return x509Cert;
+        }
+        #endregion
+
+        #region ChecaCaminhoDiretorio
+        /// <summary>
+        /// Método para checagem dos caminhos e sua existencia ou não no pc
+        /// </summary>
+        /// <param name="empresa">Empresa a ser validado os caminhos das pastas</param>
+        public void ChecaCaminhoDiretorio()
+        {
+            FileStream arqXml = null;
+
+            if (File.Exists(this.NomeArquivoConfig))
+            {
+                try
+                {
+                    arqXml = new FileStream(this.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
+                    var xml = new XmlDocument();
+                    xml.Load(arqXml);
+                    var configList = xml.GetElementsByTagName("Empresa");//NFeStrConstants.nfe_configuracoes);
+                    foreach (XmlNode configNode in configList)
+                    {
+                        var configElemento = (XmlElement)configNode;
+
+                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
+                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
+                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
+                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
+                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                        {
+                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
+                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
+                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
+                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", false);
+                        }
+                    }
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    if (arqXml != null)
+                        arqXml.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region CriarSubPastaEnviado()
+        /// <summary>
+        /// Criar as subpastas (Autorizados/Denegados/EmProcessamento) dentro da pasta dos XML´s enviados para a empresa passada por parâmetro
+        /// </summary>
+        /// <param name="indexEmpresa">Index da Empresa a ser pesquisado na coleção de configurações das empresas cadastradas</param>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Date: 20/04/2010
+        /// </remarks>
+        public void CriarSubPastaEnviado()
+        {
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            {
+                if (!string.IsNullOrEmpty(this.PastaXmlEnviado))
+                {
+                    //Criar a pasta EmProcessamento
+                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
+                    }
+
+                    //Criar a Pasta Autorizado
+                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                    }
+
+                    //Criar a Pasta Denegado
+                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                    {
+                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region CriarPastasDaEmpresa
+        public void CriarPastasDaEmpresa()
+        {
+            if (!Directory.Exists(this.PastaEmpresa))
+                Directory.CreateDirectory(this.PastaEmpresa);
+
+            //Criar pasta de envio
+            if (!string.IsNullOrEmpty(PastaXmlEnvio))
+            {
+                if (!Directory.Exists(PastaXmlEnvio))
+                {
+                    Directory.CreateDirectory(PastaXmlEnvio);
+                }
+
+                //Criar a pasta Temp dentro da pasta de envio. Wandrey 03/08/2011
+                if (!Directory.Exists(PastaXmlEnvio.Trim() + "\\Temp"))
+                {
+                    Directory.CreateDirectory(PastaXmlEnvio.Trim() + "\\Temp");
+                }
+            }
+
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            {
+                //Criar subpasta Assinado na pasta de envio individual de nfe
+                if (!Directory.Exists(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado))
+                {
+                    System.IO.Directory.CreateDirectory(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado);
+                }
+                //Criar pasta de Envio em Lote
+                if (!string.IsNullOrEmpty(PastaXmlEmLote))
+                {
+                    if (!Directory.Exists(PastaXmlEmLote))
+                    {
+                        Directory.CreateDirectory(PastaXmlEmLote);
+                    }
+
+                    //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
+                    if (!Directory.Exists(PastaXmlEmLote.Trim() + "\\Temp"))
+                    {
+                        Directory.CreateDirectory(PastaXmlEmLote.Trim() + "\\Temp");
+                    }
+                    if (!Directory.Exists(PastaXmlEmLote + Propriedade.NomePastaXMLAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(PastaXmlEmLote + Propriedade.NomePastaXMLAssinado);
+                    }
+                }
+
+                //Criar pasta Enviado
+                if (!string.IsNullOrEmpty(PastaXmlEnviado))
+                {
+                    if (!Directory.Exists(PastaXmlEnviado))
+                    {
+                        Directory.CreateDirectory(PastaXmlEnviado);
+                    }
+                }
+                //Criar pasta de Backup
+                if (!string.IsNullOrEmpty(PastaBackup))
+                {
+                    if (!Directory.Exists(PastaBackup))
+                    {
+                        Directory.CreateDirectory(PastaBackup);
+                    }
+                }
+
+                //Criar pasta para monitoramento do DANFEMon e impressão do DANFE
+                if (!string.IsNullOrEmpty(PastaDanfeMon))
+                {
+                    if (!Directory.Exists(PastaDanfeMon))
+                    {
+                        System.IO.Directory.CreateDirectory(PastaDanfeMon);
+                    }
+                }
+
+                //Criar pasta para gravar as nfe de destinatarios
+                if (!string.IsNullOrEmpty(PastaDownloadNFeDest))
+                {
+                    if (!Directory.Exists(PastaDownloadNFeDest))
+                    {
+                        System.IO.Directory.CreateDirectory(PastaDownloadNFeDest);
+                    }
+                }
+            }
+
+            //Criar pasta de Retorno
+            if (!string.IsNullOrEmpty(PastaXmlRetorno))
+            {
+                if (!Directory.Exists(PastaXmlRetorno))
+                {
+                    Directory.CreateDirectory(PastaXmlRetorno);
+                }
+            }
+
+            //Criar pasta de XML´s com erro
+            if (!string.IsNullOrEmpty(PastaXmlErro))
+            {
+                if (!Directory.Exists(PastaXmlErro))
+                {
+                    Directory.CreateDirectory(PastaXmlErro);
+                }
+            }
+
+            //Criar pasta para somente validação de XML´s
+            if (!string.IsNullOrEmpty(PastaValidar))
+            {
+                if (!Directory.Exists(PastaValidar))
+                {
+                    Directory.CreateDirectory(PastaValidar);
+                }
+
+                //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
+                if (!Directory.Exists(PastaValidar.Trim() + "\\Temp"))
+                {
+                    Directory.CreateDirectory(PastaValidar.Trim() + "\\Temp");
+                }
+            }
+            this.CriarSubPastaEnviado();
+        }
+        #endregion
+
+        #region Ticket: #110
+        /* Validação do arquivo de lock
+         * Marcelo
+         * 03/06/2013
+         */
+        /// <summary>
+        /// Exclui o arquivo de lock associado a esta empresa/ instancia
+        /// </summary>
+        public void DeleteLockFile()
+        {
+            string file = String.Format("{0}\\{1}-{2}.lock", PastaBase, Propriedade.NomeAplicacao, Environment.MachineName);
+            FileInfo fi = new FileInfo(file);
+
+            if (fi.Exists)
+                fi.Delete();
+        }
+
+        #region ExcluiPastas
+        public void ExcluiPastas()
+        {
+            if (Directory.Exists(this.PastaEmpresa))
+            {
+                ///
+                /// vazia?
+                /// 
+                bool vazia = true;
+                foreach(var vfile in Directory.GetFiles(this.PastaEmpresa, "*.*", SearchOption.AllDirectories))
+                {
+                    if (vfile.EndsWith(Propriedade.NomeArqXmlFluxoNfe)) continue;
+                    if (vfile.EndsWith(Propriedade.NomeArqConfig)) continue;
+                    if (vfile.EndsWith(Propriedade.NomeArqXmlLoteBkp1)) continue;
+                    if (vfile.EndsWith(Propriedade.NomeArqXmlLoteBkp2)) continue;
+                    if (vfile.EndsWith(Propriedade.NomeArqXmlLoteBkp3)) continue;
+                    if (vfile.EndsWith(".lock")) continue;
+
+                    vazia = false; 
+                    break; 
+                }
+                if (vazia)
+                {
+                    DeltreeMain.BeginDeleteTree(this.PastaBackup, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaDownloadNFeDest, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaValidar, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaXmlEmLote, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaXmlEnviado, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaXmlEnvio, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaXmlErro, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaXmlRetorno, true);
+                    DeltreeMain.BeginDeleteTree(this.PastaEmpresa, true);
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Limpar conteúdo dos atributos de configurações da empresa
+        private void LimparPropriedades(Empresa empresa)
+        {
+            empresa.PastaXmlEnvio =
+                empresa.PastaXmlRetorno =
+                empresa.PastaXmlEnviado =
+                empresa.PastaXmlErro =
+                empresa.PastaBackup =
+                empresa.PastaXmlEmLote =
+                empresa.PastaValidar =
+                empresa.PastaDanfeMon =
+                empresa.PastaExeUniDanfe =
+                empresa.ConfiguracaoDanfe =
+                empresa.ConfiguracaoCCe =
+                empresa.PastaConfigUniDanfe =
+                empresa.PastaDownloadNFeDest = string.Empty;
+
+            empresa.X509Certificado = null;
+            empresa.CertificadoInstalado = true;
+            empresa.CertificadoArquivo =
+                empresa.CertificadoDigitalThumbPrint =
+                empresa.CertificadoSenha =
+                empresa.CertificadoPIN =
+                empresa.Certificado = string.Empty;
+
+            empresa.FTPAtivo = false;
+            empresa.FTPPorta = 21;
+            empresa.FTPSenha =
+                empresa.FTPNomeDoServidor =
+                empresa.FTPNomeDoUsuario =
+                empresa.FTPPastaRetornos =
+                empresa.FTPPastaAutorizados = string.Empty;
+
+            empresa.UnidadeFederativaCodigo = 0;
+            empresa.DiasLimpeza = 0;
+            empresa.TempoConsulta = 2;
+
+            empresa.CriaPastasAutomaticamente = false;
+
+            empresa.UsuarioWS = string.Empty;
+            empresa.SenhaWS = string.Empty;
+
+            empresa.AmbienteCodigo = (int)NFe.Components.TipoAmbiente.taHomologacao; //2
+            empresa.tpEmis = (int)NFe.Components.TipoEmissao.teNormal; //1
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                empresa.UnidadeFederativaCodigo = 41;
+
+            empresa.GravarRetornoTXTNFe =
+                empresa.GravarEventosNaPastaEnviadosNFe =
+                empresa.GravarEventosCancelamentoNaPastaEnviadosNFe =
+                empresa.GravarEventosDeTerceiros =
+                empresa.XMLDanfeMonNFe =
+                empresa.XMLDanfeMonProcNFe =
+                empresa.XMLDanfeMonDenegadaNFe =
+                empresa.IndSinc = false;
+            empresa.DiretorioSalvarComo = "AM";
+        }
+        #endregion
+
+        /// <summary>
+        /// RemoveEndSlash
+        /// </summary>
+        public void RemoveEndSlash()
+        {
+            PastaXmlEnvio = ConfiguracaoApp.RemoveEndSlash(PastaXmlEnvio);
+            PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(PastaXmlErro);
+            PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(PastaXmlRetorno);
+            PastaValidar = ConfiguracaoApp.RemoveEndSlash(PastaValidar);
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            {
+                PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(PastaXmlEnviado);
+                PastaBackup = ConfiguracaoApp.RemoveEndSlash(PastaBackup);
+                PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(PastaXmlEmLote);
+                PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(PastaDownloadNFeDest);
+                PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(PastaDanfeMon);
+                PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(PastaExeUniDanfe);
+                PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(PastaConfigUniDanfe);
+            }
+        }
+
+        #region SalvarConfiguracao()
+        public void SalvarConfiguracao()
+        {
+            this.ValidarConfig();
+
+            if (!Directory.Exists(this.PastaEmpresa))
+                Directory.CreateDirectory(this.PastaEmpresa);
+
+            ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+            objObjectXMLSerializer.Save(this, this.NomeArquivoConfig);
+
+            this.CriarPastasDaEmpresa();
+
+            if (Empresas.FindConfEmpresaIndex(this.CNPJ, this.Servico) == -1)
+                Empresas.Configuracoes.Add(this);
+            else
+                Empresas.FindConfEmpresa(this.CNPJ, this.Servico).Nome = this.Nome;
+        }
+        #endregion
+
+        #region Envia arquivos para o FTP
         /// <summary>
         /// Copia o arquivo para o FTP
         /// </summary>
@@ -410,895 +1089,253 @@ namespace NFe.Settings
 
         #endregion
 
-        #region CarregaConfiguracao()
-        /// <summary>
-        /// Carregar as configurações de todas as empresas na coleção "Configuracoes" 
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 29/07/2010
-        /// </remarks>
-        public static void CarregaConfiguracao()
+        void _AddEmpresaNaListaDeComparacao(Dictionary<string, int> fc, Empresa empresa)
         {
-            Empresa.Configuracoes.Clear();
-
-            if (File.Exists(Propriedade.NomeArqEmpresa))
+            int i = 0;
+            fc.Add(empresa.PastaXmlEnvio.ToLower(), i);
+            if (!string.IsNullOrEmpty(empresa.PastaXmlRetorno))
+                fc.Add(empresa.PastaXmlRetorno.ToLower(), ++i);
+            if (!string.IsNullOrEmpty(empresa.PastaXmlErro))
+                fc.Add(empresa.PastaXmlErro.ToLower(), ++i);
+            if (!string.IsNullOrEmpty(empresa.PastaValidar))
+                fc.Add(empresa.PastaValidar.ToLower(), ++i);
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
-                FileStream arqXml = null;
-
-                try
-                {
-                    arqXml = new FileStream(Propriedade.NomeArqEmpresa, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStream
-
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
-
-                    var empresaList = xml.GetElementsByTagName("Empresa");
-
-                    foreach (XmlNode empresaNode in empresaList)
-                    {
-                        var empresaElemento = (XmlElement)empresaNode;
-
-                        var registroList = xml.GetElementsByTagName("Registro");
-
-                        for (int i = 0; i < registroList.Count; i++)
-                        {
-                            Empresa empresa = new Empresa();
-
-                            var registroNode = registroList[i];
-                            var registroElemento = (XmlElement)registroNode;
-
-                            empresa.CNPJ = registroElemento.GetAttribute("CNPJ").Trim();
-                            empresa.Nome = registroElemento.GetElementsByTagName("Nome")[0].InnerText.Trim();
-
-                            empresa.Servico = TipoAplicativo.Nfe;
-                            if (registroElemento.GetAttribute("Servico") != "")
-                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute("Servico").Trim());
-
-                            #region Definir a pasta das configurações da empresa
-                            empresa.PastaEmpresa = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
-
-                            switch (empresa.Servico)
-                            {
-                                case TipoAplicativo.Nfe:
-                                    break;
-
-                                default:
-                                    empresa.PastaEmpresa += "\\" + empresa.Servico.ToString().ToLower();
-                                    break;
-                            }
-                            #endregion
-
-                            empresa.NomeArquivoConfig = empresa.PastaEmpresa + "\\" + Propriedade.NomeArqConfig;
-
-                            try
-                            {
-                                BuscaConfiguracao(empresa);
-                            }
-                            catch (Exception ex)
-                            {
-                                ///
-                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
-                                /// com base em "int emp = Functions.FindEmpresaByThread();" e neste ponto ainda não foi criada
-                                /// as thread's
-                                string cArqErro;
-                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-                                else
-                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-
-                                try
-                                {
-                                    //Grava arquivo de ERRO para o ERP
-                                    File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
-                                }
-                                catch { }
-                            }
-                            ///
-                            /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
-                            ChecaCaminhoDiretorio(empresa);
-                            Configuracoes.Add(empresa);
-                        }
-                    }
-
-                    arqXml.Close();
-                    arqXml = null;
-                }
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
+                if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
+                    fc.Add(empresa.PastaXmlEnviado.ToLower(), ++i);
+                if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
+                    fc.Add(empresa.PastaXmlEmLote.ToLower(), ++i);
+                if (!string.IsNullOrEmpty(empresa.PastaBackup))
+                    fc.Add(empresa.PastaBackup.ToLower(), ++i);
+                if (!string.IsNullOrEmpty(empresa.PastaDownloadNFeDest))
+                    fc.Add(empresa.PastaDownloadNFeDest.ToLower(), ++i);
             }
-
-            if (!ExisteErroDiretorio)
-                Empresa.CriarPasta();
         }
-        #endregion
 
-        #region BuscaConfiguracao()
-        /// <summary>
-        /// Busca as configurações da empresa dentro de sua pasta gravadas em um XML chamado UniNfeConfig.Xml
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 28/07/2010
-        /// </remarks>
-        private static void BuscaConfiguracao(Empresa empresa)
+        internal class _validacao
         {
-            #region Criar diretório das configurações e dados da empresa
-            if (!Directory.Exists(empresa.PastaEmpresa))
+            public string FolderName;
+            public string ValueError;   //se branco nao é obrigatorio
+            public string FolderError;
+            public _validacao(string key, string value, string folder="")
             {
-                Directory.CreateDirectory(empresa.PastaEmpresa);
+                FolderName = key;
+                ValueError = value;
+                FolderError = folder;
+            }
+        }
+        /// <summary>
+        /// ValidarConfig
+        /// </summary>
+        private void ValidarConfig()
+        {
+            StringBuilder erros = new StringBuilder();
+            bool validou = true;
+
+            this.RemoveEndSlash();
+
+            #region Verificar se tem alguma pasta em branco
+            List<_validacao> _val1 = new List<_validacao>(){
+                new _validacao(this.PastaXmlEnvio,      ". Informe a pasta de envio dos arquivos XML.", ". A pasta de envio dos arquivos XML informada não existe."),
+                new _validacao(this.PastaXmlRetorno,    ". Informe a pasta de retorno dos arquivos XML.", ". A pasta de retorno dos arquivos XML informada não existe."),
+                new _validacao(this.PastaXmlErro,       ". Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", ". A pasta para arquivamento temporário dos arquivos XML com erro informada não existe."),
+                new _validacao(this.PastaValidar,       ". Informe a pasta onde será gravado os arquivos XML somente para ser validado pela Aplicação.", ". A pasta para validação de XML´s informada não existe.")
+            };
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            {
+                _val1.Add(new _validacao(this.PastaXmlEnviado,  ". Informe a pasta para arquivamento dos arquivos XML enviados.", ". A pasta para arquivamento dos arquivos XML enviados informada não existe."));
+                _val1.Add(new _validacao(this.PastaXmlEmLote,   ". Informe a pasta de envio dos arquivos XML em lote.", ". A pasta de envio das notas fiscais eletrônicas em lote informada não existe."));
+                ///
+                /// pastas opcionais
+                _val1.Add(new _validacao(this.PastaBackup,          "", ". A pasta para backup dos XML enviados informada não existe."));
+                _val1.Add(new _validacao(this.PastaDownloadNFeDest, "", ". A pasta para arquivamento das NFe de destinatários informada não existe."));
+                _val1.Add(new _validacao(this.PastaDanfeMon,        "", ". A pasta informada para gravação do XML da NFe para o DANFeMon não existe."));
+                _val1.Add(new _validacao(this.PastaExeUniDanfe,     "", ". A pasta do executável do UniDANFe informada não existe."));
+                _val1.Add(new _validacao(this.PastaConfigUniDanfe,  "", ". A pasta do arquivo de configurações do UniDANFe informada não existe."));
+            }
+            
+            foreach (_validacao keyValue in _val1)
+                if (string.IsNullOrEmpty(keyValue.FolderName) && !string.IsNullOrEmpty(keyValue.ValueError))
+                {
+                    erros.AppendLine(keyValue.ValueError);
+                }
+                else if (!string.IsNullOrEmpty(keyValue.FolderName))
+                {
+                    if (!Directory.Exists(keyValue.FolderName))
+                        if (this.CriaPastasAutomaticamente)
+                            Directory.CreateDirectory(keyValue.FolderName);
+                        else
+                            erros.AppendLine(keyValue.FolderError);
+                }
+
+            ///
+            /// informacoes do FTP
+            /// danasa 7/7/2011
+            if (this.FTPIsAlive)
+            {
+                if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                {
+                    if (string.IsNullOrEmpty(this.FTPPastaAutorizados))
+                    {
+                        erros.AppendLine(". Informe a pasta do FTP de destino dos autorizados");
+                    }
+                }
+
+                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                {
+                    if (string.IsNullOrEmpty(this.FTPPastaRetornos))
+                    {
+                        erros.AppendLine(". Informe a pasta do FTP de destino dos retornos");
+                    }
+                }
             }
             #endregion
 
-            #region Limpar conteúdo dos atributos de configurações da empresa
-            empresa.PastaXmlEnvio =
-                empresa.PastaXmlRetorno =
-                empresa.PastaXmlEnviado =
-                empresa.PastaXmlErro =
-                empresa.PastaBackup =
-                empresa.PastaXmlEmLote =
-                empresa.PastaValidar =
-                empresa.PastaDanfeMon =
-                empresa.PastaExeUniDanfe =
-                empresa.ConfiguracaoDanfe =
-                empresa.ConfiguracaoCCe = 
-                empresa.PastaConfigUniDanfe =
-                empresa.PastaDownloadNFeDest =
-                empresa.Certificado =
-                empresa.CertificadoThumbPrint = string.Empty;
-            empresa.X509Certificado = null;
-            empresa.FTPAtivo = false;
-            empresa.FTPSenha =
-                empresa.FTPNomeDoServidor =
-                empresa.FTPNomeDoUsuario =
-                empresa.FTPPastaRetornos =
-                empresa.FTPPastaAutorizados = string.Empty;
-
-            empresa.UnidadeFederativaCodigo = 0;
-            empresa.DiasLimpeza = 0;
-            empresa.TempoConsulta = 2;
-
-            empresa.UsuarioWS = string.Empty;
-            empresa.SenhaWS = string.Empty;
-
-            empresa.AmbienteCodigo = Propriedade.TipoAmbiente.taHomologacao; //2
-            empresa.tpEmis = Propriedade.TipoEmissao.teNormal; //1
-
-            empresa.GravarRetornoTXTNFe =
-                empresa.GravarEventosNaPastaEnviadosNFe =
-                empresa.GravarEventosCancelamentoNaPastaEnviadosNFe =
-                empresa.GravarEventosDeTerceiros =
-                empresa.XMLDanfeMonNFe =
-                empresa.XMLDanfeMonProcNFe =
-                empresa.XMLDanfeMonDenegadaNFe =
-                empresa.IndSinc = false;
-            empresa.DiretorioSalvarComo = "AM";
-
-            empresa.CertificadoInstalado = true;
-            empresa.CertificadoArquivo = string.Empty;
-            empresa.CertificadoSenha = string.Empty;
-            empresa.CerficadoPIN = string.Empty;
-            #endregion
-
-            #region Carregar as configurações do XML UniNFeConfig da Empresa
-            FileStream arqXml = null;
-
-            if (File.Exists(empresa.NomeArquivoConfig))
+            if (erros.Length == 0)
             {
+                #region Verificar a duplicação de nome de pastas que não pode existir
+                ///
+                /// a definicao por dictionary já reporta erro quando tenta incluir a mesma 'Key'
+                /// 
+                Dictionary<string, int> fcd = new Dictionary<string,int>();
+
                 try
                 {
-                    //ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
-                    //objObjectXMLSerializer.Load(empresa, empresa.NomeArquivoConfig);
+                    var EMP = Empresas.FindConfEmpresa(this.CNPJ, this.Servico);
 
-                    arqXml = new FileStream(empresa.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
+                    _AddEmpresaNaListaDeComparacao(fcd, this);
 
-                    var configList = xml.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
-                    foreach (XmlNode configNode in configList)
-                    {
-                        var configElemento = (XmlElement)configNode;
-
-                        empresa.UnidadeFederativaCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.UnidadeFederativaCodigo, false));
-                        empresa.AmbienteCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.AmbienteCodigo, false));
-                        empresa.tpEmis = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.tpEmis, false));
-                        empresa.GravarRetornoTXTNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarRetornoTXTNFe, "False"));
-                        empresa.GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosNaPastaEnviadosNFe, "False"));
-                        empresa.GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, "False"));
-                        empresa.GravarEventosDeTerceiros = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosDeTerceiros, "False"));
-                        empresa.CompactarNfe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNfe, "False"));
-                        empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
-                        empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
-                        empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, "0"));
-                        empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, "0"));
-
-                        empresa.PastaXmlEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
-                        empresa.PastaXmlRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
-                        empresa.PastaXmlErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
-                        empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
-                        empresa.PastaXmlEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
-                        empresa.PastaBackup = Functions.LerTag(configElemento, NFeStrConstants.PastaBackup, false);
-                        empresa.PastaXmlEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
-                        empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
-
-                        empresa.ConfiguracaoDanfe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoDanfe, false);
-                        empresa.ConfiguracaoCCe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoCCe, false);
-                        empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
-                        empresa.PastaConfigUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaConfigUniDanfe, false);
-                        empresa.PastaDanfeMon = Functions.LerTag(configElemento, NFeStrConstants.PastaDanfeMon, false);
-                        empresa.XMLDanfeMonNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonNFe, "False"));
-                        empresa.XMLDanfeMonProcNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonProcNFe, "False"));
-                        empresa.XMLDanfeMonDenegadaNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonDenegadaNFe, "False"));
-
-                        empresa.FTPAtivo = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPAtivo, "False"));
-                        empresa.FTPGravaXMLPastaUnica = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPGravaXMLPastaUnica, "False"));
-                        empresa.FTPSenha = Functions.LerTag(configElemento, NFeStrConstants.FTPSenha, false);
-                        empresa.FTPPastaAutorizados = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaAutorizados, false);
-                        empresa.FTPPastaRetornos = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaRetornos, false);
-                        empresa.FTPNomeDoUsuario = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoUsuario, false);
-                        empresa.FTPNomeDoServidor = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoServidor, false);
-                        empresa.FTPPorta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.FTPPorta, false));
-
-                        empresa.Certificado = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigital, false);
-                        empresa.CertificadoArquivo = Functions.LerTag(configElemento, NFeStrConstants.CertificadoArquivo, false);
-                        empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
-                        empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
-                        empresa.CerficadoPIN = Criptografia.descriptografaSenha(Functions.LerTag(configElemento, NFeStrConstants.CertificadoPIN, ""));
-
-                        if (!empresa.CertificadoInstalado)
-                            if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
-                                if (!string.IsNullOrEmpty(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim()))
-                                    empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
-
-                        empresa.UsuarioWS = Functions.LerTag(configElemento, NFeStrConstants.UsuarioWS, false);
-                        empresa.SenhaWS = Functions.LerTag(configElemento, NFeStrConstants.SenhaWS, false);
-                    }
-                    empresa.X509Certificado = BuscaConfiguracaoCertificado(empresa);
+                    for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                        if (Empresas.Configuracoes[i] != EMP)
+                            _AddEmpresaNaListaDeComparacao(fcd, Empresas.Configuracoes[i]);
                 }
                 catch (Exception ex)
                 {
-                    //Não vou mais fazer isso pois estava gerando problemas com Certificados A3 - Renan 18/06/2013
-                    //empresa.Certificado = string.Empty;
-                    //empresa.CertificadoThumbPrint = string.Empty;
-                    throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + empresa.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
+                    erros.AppendLine(". Não é permitido a utilização de pasta idêntica na mesma ou entre empresas..");
+                    validou = false;
                 }
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
-            }
-            #endregion
-        }
-        #endregion
-
-        #region #10316
-        /*
-         * Solução para o problema do certificado do tipo A3
-         * Marcelo
-         * 29/07/2013
-         */
-        #region Reset certificado
-        /// <summary>
-        /// Reseta o certificado da empresa e recria o mesmo
-        /// </summary>
-        /// <param name="index">identificador da empresa</param>
-        /// <returns></returns>
-        public static X509Certificate2 ResetCertificado(int index)
-        {
-            Empresa empresa = Empresa.Configuracoes[index];
-
-            empresa.X509Certificado.Reset();
-
-            Thread.Sleep(0);
-
-            empresa.X509Certificado = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
-            //Ajustar o certificado digital de String para o tipo X509Certificate2
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-            X509Certificate2Collection collection1 = null;
-            if (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint))
-                collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, empresa.CertificadoThumbPrint, false);
-            else
-                collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, empresa.Certificado, false);
-
-            for (int i = 0; i < collection1.Count; i++)
-            {
-                //Verificar a validade do certificado
-                if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
-                {
-                    empresa.X509Certificado = collection1[i];
-                    break;
-                }
+                #endregion
             }
 
-            //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
-            if (empresa.X509Certificado == null && collection1.Count > 0)
-                empresa.X509Certificado = collection1[0];
-
-            return empresa.X509Certificado;
-
-        }
-        #endregion
-        #endregion
-
-        #region BuscaConfiguracaoCertificado
-        public static X509Certificate2 BuscaConfiguracaoCertificado(Empresa empresa)
-        {
-            X509Certificate2 x509Cert = null;
-
-            //Certificado instalado no windows
-            if (empresa.CertificadoInstalado)
+            if (validou)
             {
-                X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-                store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-                X509Certificate2Collection collection1 = null;
-                if (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint))
-                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, empresa.CertificadoThumbPrint, false);
-                else
-                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, empresa.Certificado, false);
-
-                for (int i = 0; i < collection1.Count; i++)
+                #region Verificar se o certificado foi informado
+                if (this.CertificadoInstalado && string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
                 {
-                    //Verificar a validade do certificado
-                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                    erros.AppendLine(". Selecione o certificado digital a ser utilizado na autenticação dos serviços");
+                }
+                if (!this.CertificadoInstalado)
+                {
+                    if (string.IsNullOrEmpty(this.CertificadoArquivo))
                     {
-                        x509Cert = collection1[i];
-                        break;
+                        erros.AppendLine(". Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços.");
                     }
-                }
-
-                //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
-                if (x509Cert == null && collection1.Count > 0)
-                    x509Cert = collection1[0];
-            }
-            else //Certificado está sendo acessado direto do arquivo .PFX
-            {
-                if (string.IsNullOrEmpty(empresa.CertificadoArquivo))
-                    throw new Exception("Nome do arquivo referente ao certificado digital não foi informado nas configurações do UniNFe.");
-                else if (!string.IsNullOrEmpty(empresa.CertificadoArquivo) && !File.Exists(empresa.CertificadoArquivo))
-                    throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", empresa.CertificadoArquivo));
-                
-                using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
-                {
-                    byte[] buffer = new byte[fs.Length];
-                    fs.Read(buffer, 0, buffer.Length);
-                    x509Cert = new X509Certificate2(buffer, empresa.CertificadoSenha);
-                }
-            }
-
-            return x509Cert;
-        }
-
-        #endregion
-
-        #region FindConfEmpresa()
-        /// <summary>
-        /// Procurar o cnpj na coleção das empresas
-        /// </summary>
-        /// <param name="cnpj">CNPJ a ser pesquisado</param>
-        /// <param param name="servico">Serviço a ser pesquisado</param>
-        /// <returns>objeto empresa localizado, null se nada for localizado</returns>
-        public static Empresa FindConfEmpresa(string cnpj, TipoAplicativo servico)
-        {
-            Empresa retorna = null;
-            foreach (Empresa empresa in Empresa.Configuracoes)
-            {
-                if (empresa.CNPJ.Equals(cnpj) && empresa.Servico.Equals(servico))
-                {
-                    retorna = empresa;
-                    break;
-                }
-            }
-
-            return retorna;
-        }
-        #endregion
-
-        #region FindConfEmpresaIndex()
-        /// <summary>
-        /// Procurar o cnpj na coleção das empresas
-        /// </summary>
-        /// <param name="cnpj">CNPJ a ser pesquisado</param>
-        /// <param name="servico">Serviço a ser pesquisado</param>
-        /// <returns>Retorna o index do objeto localizado ou null se nada for localizado</returns>
-        public static int FindConfEmpresaIndex(string cnpj, TipoAplicativo servico)
-        {
-            int retorna = -1;
-
-            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
-            {
-                Empresa empresa = Empresa.Configuracoes[i];
-
-                if (empresa.CNPJ.Equals(cnpj) && empresa.Servico.Equals(servico))
-                {
-                    retorna = i;
-                    break;
-                }
-            }
-
-            return retorna;
-        }
-        #endregion
-
-        #region Valid()
-        /// <summary>
-        /// Retorna se o indice da coleção que foi pesquisado é valido ou não
-        /// </summary>
-        /// <param name="index">Indice a ser validado</param>
-        /// <returns>Retorna true or false</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 30/07/2010
-        /// </remarks>
-        public static bool Valid(int index)
-        {
-            bool retorna = true;
-            if (index.Equals(-1))
-                retorna = false;
-
-            return retorna;
-        }
-        #endregion
-
-        #region Valid()
-        /// <summary>
-        /// Retorna se o objeto da coleção que foi pesquisado é valido ou não
-        /// </summary>
-        /// <param name="empresa">Objeto da empresa</param>
-        /// <returns>Retorna true or false</returns>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 30/07/2010
-        /// </remarks>
-        public static bool Valid(Empresa empresa)
-        {
-            bool retorna = true;
-            if (empresa.Equals(null))
-                retorna = false;
-
-            return retorna;
-        }
-        #endregion
-
-        #region ChecaCaminhoDiretorio
-        /// <summary>
-        /// Método para checagem dos caminhos e sua existencia ou não no pc
-        /// </summary>
-        /// <param name="empresa">Empresa a ser validado os caminhos das pastas</param>
-        private static void ChecaCaminhoDiretorio(Empresa empresa)
-        {
-            FileStream arqXml = null;
-
-            if (File.Exists(empresa.NomeArquivoConfig))
-            {
-                try
-                {
-                    arqXml = new FileStream(empresa.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
-                    var configList = xml.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
-                    foreach (XmlNode configNode in configList)
+                    if (string.IsNullOrEmpty(this.CertificadoSenha))
                     {
-                        var configElemento = (XmlElement)configNode;
+                        erros.AppendLine(". Informe a senha do certificado digital a ser utilizado na autenticação dos serviços.");
+                    }
 
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
-                        verificaPasta(empresa, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
-                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (!File.Exists(this.CertificadoArquivo))
+                    {
+                        erros.AppendLine(". Arquivo do certificado digital a ser utilizado na autenticação dos serviços não foi encontrado.");
+                    }
+                    else if (!string.IsNullOrEmpty(this.CertificadoArquivo))
+                    {
+                        try
                         {
-                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
-                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
-                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
-                            verificaPasta(empresa, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", false);
+                            using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open))
+                            {
+                                byte[] buffer = new byte[fs.Length];
+                                fs.Read(buffer, 0, buffer.Length);
+                                this.X509Certificado = new X509Certificate2(buffer, this.CertificadoSenha);
+                            }
+                        }
+                        catch (System.Security.Cryptography.CryptographicException ex)
+                        {
+                            erros.AppendLine(ex.Message);
+                            validou = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            erros.AppendLine(ex.Message);
+                            validou = false;
                         }
                     }
                 }
-                catch
-                {
-                }
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
-            }
-        }
+                #endregion
 
-        private static void verificaPasta(Empresa empresa, XmlElement configElemento, string tagName, string descricao, bool isObrigatoria)
-        {
-            XmlNode node = configElemento.GetElementsByTagName(tagName)[0];
-            if (node != null)
-            {
-                if (!isObrigatoria && node.InnerText.Trim() == "")
-                    return;
-
-                if (isObrigatoria && node.InnerText.Trim() == "")
+                #region Verificar se as pastas informadas existem
+                if (validou)
                 {
-                    Empresa.ExisteErroDiretorio = true;
-                    ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   : \"" + descricao + "\"\r\n";
-                }
-                else
-                    if (!Directory.Exists(node.InnerText.Trim()) && node.InnerText.Trim() != "")
+                    //Fazer um pequeno ajuste na pasta de configuração do unidanfe antes de verificar sua existência
+                    if (!string.IsNullOrEmpty(this.PastaConfigUniDanfe))
                     {
-                        Empresa.ExisteErroDiretorio = true;
-                        ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   Pasta: " + node.InnerText.Trim() + "\r\n";
-                    }
-            }
-            else
-            {
-                if (isObrigatoria)
-                {
-                    Empresa.ExisteErroDiretorio = true;
-                    ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   : \"" + descricao + "\"\r\n";
-                }
-            }
-        }
-        #endregion
-
-        #region CriarPasta()
-        /// <summary>
-        /// Criar as pastas para todas as empresas cadastradas e configuradas no sistema se as mesmas não existirem
-        /// </summary>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>29/09/2009</date>
-        public static void CriarPasta()
-        {
-            if (!Directory.Exists(Propriedade.PastaGeral))
-                Directory.CreateDirectory(Propriedade.PastaGeral);
-
-            if (!Directory.Exists(Propriedade.PastaGeralRetorno))
-                Directory.CreateDirectory(Propriedade.PastaGeralRetorno);
-
-            if (!Directory.Exists(Propriedade.PastaGeralTemporaria))
-                Directory.CreateDirectory(Propriedade.PastaGeralTemporaria);
-
-            if (!Directory.Exists(Propriedade.PastaLog))
-                Directory.CreateDirectory(Propriedade.PastaLog);
-
-            foreach (Empresa empresa in Empresa.Configuracoes)
-            {
-                //Criar pasta de envio
-                if (!string.IsNullOrEmpty(empresa.PastaXmlEnvio))
-                {
-                    if (!Directory.Exists(empresa.PastaXmlEnvio))
-                    {
-                        Directory.CreateDirectory(empresa.PastaXmlEnvio);
+                        while (this.PastaConfigUniDanfe.Substring(this.PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && 
+                            !string.IsNullOrEmpty(this.PastaConfigUniDanfe))
+                            this.PastaConfigUniDanfe = this.PastaConfigUniDanfe.Substring(0, this.PastaConfigUniDanfe.Length - 6);
                     }
 
-                    //Criar a pasta Temp dentro da pasta de envio. Wandrey 03/08/2011
-                    if (!Directory.Exists(empresa.PastaXmlEnvio.Trim() + "\\Temp"))
+                    if (this.PastaXmlEnvio.ToLower().EndsWith("temp"))
                     {
-                        Directory.CreateDirectory(empresa.PastaXmlEnvio.Trim() + "\\Temp");
+                        erros.AppendLine(". Pasta de envio não pode terminar com a subpasta 'temp'.");
                     }
-
-                    //Criar subpasta Assinado na pasta de envio individual de nfe
-                    if (!Directory.Exists(empresa.PastaXmlEnvio + Propriedade.NomePastaXMLAssinado) && Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (this.PastaXmlEmLote.ToLower().EndsWith("temp"))
                     {
-                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnvio + Propriedade.NomePastaXMLAssinado);
+                        erros.AppendLine(". Pasta de envio em lote não pode terminar com a subpasta 'temp'.");
+                    }
+                    if (this.PastaValidar.ToLower().EndsWith("temp"))
+                    {
+                        erros.AppendLine(". Pasta de validação não pode terminar com a subpasta 'temp'.");
+                    }
+                    if (this.PastaXmlErro.ToLower().EndsWith("temp"))
+                    {
+                        erros.AppendLine(". Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'.");
                     }
                 }
+                #endregion
 
+                #region Verificar se as pastas configuradas do unidanfe estão corretas
                 if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                 {
-                    //Criar pasta de Envio em Lote
-                    if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
+                    if (validou && !string.IsNullOrEmpty(this.PastaExeUniDanfe))
                     {
-                        if (!Directory.Exists(empresa.PastaXmlEmLote))
+                        if (!File.Exists(this.PastaExeUniDanfe + "\\unidanfe.exe"))
                         {
-                            Directory.CreateDirectory(empresa.PastaXmlEmLote);
-                        }
-
-                        //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
-                        if (!Directory.Exists(empresa.PastaXmlEmLote.Trim() + "\\Temp"))
-                        {
-                            Directory.CreateDirectory(empresa.PastaXmlEmLote.Trim() + "\\Temp");
+                            erros.AppendLine(". O executável do UniDANFe não foi localizado na pasta informada.");
                         }
                     }
 
-                    //Criar pasta Enviado
-                    if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
+                    if (validou && !string.IsNullOrEmpty(this.PastaConfigUniDanfe))
                     {
-                        if (!Directory.Exists(empresa.PastaXmlEnviado))
+                        //Verificar a existência o arquivo de configuração
+                        if (!File.Exists(this.PastaConfigUniDanfe + "\\dados\\config.tps"))
                         {
-                            Directory.CreateDirectory(empresa.PastaXmlEnviado);
-                        }
-                    }
-                    //Criar pasta de Backup
-                    if (!string.IsNullOrEmpty(empresa.PastaBackup))
-                    {
-                        if (!Directory.Exists(empresa.PastaBackup))
-                        {
-                            Directory.CreateDirectory(empresa.PastaBackup);
-                        }
-                    }
-                    //Criar subpasta Assinado na pasta de envio em lote de nfe
-                    if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
-                    {
-                        if (!Directory.Exists(empresa.PastaXmlEmLote + Propriedade.NomePastaXMLAssinado))
-                        {
-                            System.IO.Directory.CreateDirectory(empresa.PastaXmlEmLote + Propriedade.NomePastaXMLAssinado);
-                        }
-                    }
-
-                    //Criar pasta para monitoramento do DANFEMon e impressão do DANFE
-                    if (!string.IsNullOrEmpty(empresa.PastaDanfeMon))
-                    {
-                        if (!Directory.Exists(empresa.PastaDanfeMon))
-                        {
-                            System.IO.Directory.CreateDirectory(empresa.PastaDanfeMon);
-                        }
-                    }
-
-                    //Criar pasta para gravar as nfe de destinatarios
-                    if (!string.IsNullOrEmpty(empresa.PastaDownloadNFeDest))
-                    {
-                        if (!Directory.Exists(empresa.PastaDownloadNFeDest))
-                        {
-                            System.IO.Directory.CreateDirectory(empresa.PastaDownloadNFeDest);
+                            erros.AppendLine(". O arquivo de configuração do UniDANFe não foi localizado na pasta informada.");
                         }
                     }
                 }
-
-                //Criar pasta de Retorno
-                if (!string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                {
-                    if (!Directory.Exists(empresa.PastaXmlRetorno))
-                    {
-                        Directory.CreateDirectory(empresa.PastaXmlRetorno);
-                    }
-                }
-
-
-                //Criar pasta de XML´s com erro
-                if (!string.IsNullOrEmpty(empresa.PastaXmlErro))
-                {
-                    if (!Directory.Exists(empresa.PastaXmlErro))
-                    {
-                        Directory.CreateDirectory(empresa.PastaXmlErro);
-                    }
-                }
-
-
-                //Criar pasta para somente validação de XML´s
-                if (!string.IsNullOrEmpty(empresa.PastaValidar))
-                {
-                    if (!Directory.Exists(empresa.PastaValidar))
-                    {
-                        Directory.CreateDirectory(empresa.PastaValidar);
-                    }
-
-                    //Criar a pasta Temp dentro da pasta de envio em lote. Wandrey 05/10/2011
-                    if (!Directory.Exists(empresa.PastaValidar.Trim() + "\\Temp"))
-                    {
-                        Directory.CreateDirectory(empresa.PastaValidar.Trim() + "\\Temp");
-                    }
-                }
-
+                #endregion
             }
 
-            Empresa.CriarSubPastaEnviado();
-        }
-        #endregion
-
-        #region CriarSubPastaEnviado()
-        /// <summary>
-        /// Criar as subpastas (Autorizados/Denegados/EmProcessamento) dentro da pasta dos XML´s enviados para todas as empresas cadastradas e configuradas
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Date: 20/04/2010
-        /// </remarks>
-        private static void CriarSubPastaEnviado()
-        {
-            for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+            #region Ticket: #110
+            /* Validar se já existe uma instancia utilizando estes diretórios
+             * Marcelo
+             * 03/06/2013
+             */
+            if (erros.Length == 0)
             {
-                Empresa.CriarSubPastaEnviado(i);
+                //Se encontrar algum arquivo de lock nos diretórios, não permtir que seja executado
+                string x = Empresas.CanRun(false);
+                if (x.Trim() != "")
+                    erros.AppendLine(x);
+                //validou = String.IsNullOrEmpty(erro);
+            }
+            #endregion
+
+            if (erros.Length > 0)
+            {
+                throw new Exception(erros.ToString());
             }
         }
-        #endregion
-
-        #region CriarSubPastaEnviado()
-        /// <summary>
-        /// Criar as subpastas (Autorizados/Denegados/EmProcessamento) dentro da pasta dos XML´s enviados para a empresa passada por parâmetro
-        /// </summary>
-        /// <param name="indexEmpresa">Index da Empresa a ser pesquisado na coleção de configurações das empresas cadastradas</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Date: 20/04/2010
-        /// </remarks>
-        public static void CriarSubPastaEnviado(int indexEmpresa)
-        {
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse && Empresa.Configuracoes.Count > 0)
-            {
-                Empresa empresa = Empresa.Configuracoes[indexEmpresa];
-
-                if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
-                {
-                    //Criar a pasta EmProcessamento
-                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
-                    }
-
-                    //Criar a Pasta Autorizado
-                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString());
-                    }
-
-                    //Criar a Pasta Denegado
-                    if (!Directory.Exists(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()))
-                    {
-                        System.IO.Directory.CreateDirectory(empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString());
-                    }
-                }
-            }
-        }
-        #endregion
-
-        #region Ticket: #110
-        /* Validação do arquivo de lock
-         * Marcelo
-         * 03/06/2013
-         */
-        /// <summary>
-        /// Exclui o arquivo de lock associado a esta empresa/ instancia
-        /// </summary>
-        public void DeleteLockFile()
-        {
-            string file = String.Format("{0}\\{1}-{2}.lock", PastaBase, Propriedade.NomeAplicacao, Environment.MachineName);
-            FileInfo fi = new FileInfo(file);
-
-            if (fi.Exists)
-                fi.Delete();
-        }
-
-        /// <summary>
-        /// Verifica se já existe alguma instância do UniNFe executando para os diretórios informados
-        /// <para>Se existir, retorna uma mensagem com todos os diretórios que estão executando uma instânmcia do UniNFe</para>
-        /// </summary>
-        /// <param name="showMessage">Se verdadeiro, irá exibir a mensage e retornar o resultado
-        /// <para>O padrão é verdadeiro</para></param>
-        /// <returns></returns>
-        public static string CanRun(bool showMessage = true)
-        {
-            if (Empresa.Configuracoes == null || Empresa.Configuracoes.Count == 0) return "";
-
-            //IEnumerable<string> diretorios = (from d in Empresa.Configuracoes select d.PastaBase);
-
-            StringBuilder result = new StringBuilder();
-
-            //se no diretório de envio existir o arquivo "nome da máquina.locked" o diretório já está sendo atendido por alguma instancia do UniNFe
-
-            foreach (Empresa emp in Empresa.Configuracoes)
-            {
-                if (string.IsNullOrEmpty(emp.PastaBase))
-                    result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não está definida");
-                else
-                {
-                    string dir = emp.PastaBase;
-
-                    if (!Directory.Exists(dir))
-                        result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não existe");
-                    else
-                    {
-                        string fileName = String.Format("{0}-{1}.lock", Propriedade.NomeAplicacao, Environment.MachineName);
-                        string filePath = String.Format("{0}\\{1}", dir, fileName);
-
-                        //se já existe um arquivo de lock e o nome do arquivo for diferente desta máquina
-                        //não pode deixar executar
-
-                        string fileLock = (from x in
-                                               (from f in Directory.GetFiles(dir, "*" + Propriedade.NomeAplicacao + "*.lock")
-                                                select new FileInfo(f))
-                                           where !x.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase)
-                                           select x.FullName).FirstOrDefault();
-
-                        if (!String.IsNullOrEmpty(fileLock))
-                        {
-                            FileInfo fi = new FileInfo(fileLock);
-
-                            result.AppendFormat("Já existe uma instância do {2} em Execução que atende a conjunto de pastas: {0} (*Incluindo subdiretórios).\r\n\r\n Nome da estação que está executando: {1}",
-                                fi.Directory.FullName, fi.Name
-                                                        .Replace(Propriedade.NomeAplicacao + "-", "")
-                                                        .Replace(".lock", ""),
-                                                        Propriedade.NomeAplicacao);
-                        }
-                    }
-                }
-            }
-
-            if (showMessage && result.Length > 0)
-                MessageBox.Show(result.ToString(), "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// Cria os arquivos de lock para os diretórios de envio que esta instância vai atender.
-        /// <param name="clearIfExist">Se verdadeiro, irá excluir os arquivos existentes antes de recriar</param>
-        /// </summary>
-        public static void CreateLockFile(bool clearIfExist = false)
-        {
-            if (Empresa.Configuracoes == null || Empresa.Configuracoes.Count == 0) return;
-
-            if (clearIfExist) ClearLockFiles(false);
-
-            IEnumerable<string> diretorios = (from d in Empresa.Configuracoes
-                                              select d.PastaBase);
-
-            foreach (string dir in diretorios)
-            {
-                if (!string.IsNullOrEmpty(dir))
-                {
-                    string file = String.Format("{0}\\{1}-{2}.lock", dir, Propriedade.NomeAplicacao, Environment.MachineName);
-                    FileInfo fi = new FileInfo(file);
-
-                    using (StreamWriter sw = new StreamWriter(file, false)
-                    {
-                        AutoFlush = true
-                    })
-                    {
-                        sw.WriteLine("Iniciado em: {0:dd/MM/yyyy hh:mm:ss}", DateTime.Now);
-                        sw.WriteLine("Estação: {0}", Environment.MachineName);
-                        sw.WriteLine("IP: {0}", Functions.GetIPAddress());
-                        sw.Flush();
-                        sw.Close();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Exclui todos os arquivos de lock existentes nas configurações de pasta das empresas
-        /// <param name="confirm">Se verdadeiro confirma antes de apagar os arquivos</param>
-        /// </summary>
-        public static bool ClearLockFiles(bool confirm = true)
-        {
-            if (Empresa.Configuracoes == null || Empresa.Configuracoes.Count == 0) return true;
-
-            bool result = false;
-
-            if (confirm && MessageBox.Show("Excluir os arquivos de \".lock\" configurados para esta instância?\r\nA aplicação será encerrada ao terminar a exclusão dos arquivos.\r\n\r\n\tTem certeza que deseja continuar? ", "Arquivos de .lock", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return false;
-
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-
-                foreach (Empresa empresa in Empresa.Configuracoes)
-                {
-                    empresa.DeleteLockFile();
-                }
-                if (confirm)
-                    MessageBox.Show("Arquivos de \".lock\" excluídos com sucesso.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                result = true;
-
-            }
-            catch (Exception ex)
-            {
-                if (confirm)
-                    MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
-
-
-            return result;
-        }
-        #endregion
     }
 }

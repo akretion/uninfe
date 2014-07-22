@@ -159,11 +159,6 @@ namespace NFe.ConvertTxt
         tcStr, tcInt, tcDat, tcDat2, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 
     }
 
-    public enum TpcnTipoAmbiente 
-    { 
-        taProducao = 1, 
-        taHomologacao = 2 
-    }
     public enum TpcnIndicadorPagamento 
     { 
         ipVista = 0, 
@@ -190,29 +185,6 @@ namespace NFe.ConvertTxt
         fnComplementar = 2,
         fnAjuste = 3,
         fnDevolucao = 4
-    }
-    public enum TpcnTipoEmissao
-    {
-        [Description("")]
-        teNone = 0,
-        [Description("Normal")]
-        teNormal = 1,
-        [Description("Contingência com formulário de segurança (FS)")]
-        teContingencia = 2,
-        [Description("Contingência com SCAN do Ambiente Nacional")]
-        teSCAN = 3,
-        [Description("Contingência com DPEC")]
-        teDPEC = 4,
-        [Description("Contingência com formulário de segurança (FS-DA)")]
-        teFSDA = 5,
-        [Description("Contingência com SVC-AN")]
-        teSVCAN = 6,
-        [Description("Contingência com SVC-RS")]
-        teSVCRS = 7,
-        [Description("Contingência com SVC-SP")]
-        teSVCSP = 8, 
-        [Description("Contingência Off-Line (NFC-e)")]
-        teOffLine = 9
     }
 
     public enum TpcnECFModRef 

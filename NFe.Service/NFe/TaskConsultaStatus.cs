@@ -30,7 +30,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -44,7 +44,16 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultaStatusServicoNFe, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    var oStatusServico = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSta.cUF));
+                    string nClasse = NomeClasseWS(Servico, dadosPedSta.cUF, dadosPedSta.versao);
+                    bool changeClassePR = false;
+                    if (Functions.CodigoParaUF(dadosPedSta.cUF) == "PR" &&
+                        dadosPedSta.versao.Equals("3.10") &&
+                        (TipoAmbiente)dadosPedSta.tpAmb == TipoAmbiente.taHomologacao)
+                    {
+                        nClasse = "NfeStatusServico3";
+                        changeClassePR = true;
+                    }
+                    var oStatusServico = wsProxy.CriarObjeto(nClasse);
                     var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -52,7 +61,8 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSta.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oStatusServico, NomeMetodoWS(Servico, dadosPedSta.cUF), oCabecMsg, this, "-ped-sta", "-sta");
+                    nClasse = (changeClassePR ? "nfeStatusServicoNF" : NomeMetodoWS(Servico, dadosPedSta.cUF, dadosPedSta.versao));
+                    oInvocarObj.Invocar(wsProxy, oStatusServico, nClasse, oCabecMsg, this, "-ped-sta", "-sta");
                 }
                 else
                 {
@@ -102,14 +112,14 @@ namespace NFe.Service
         private void PedSta(int emp, string cArquivoXML)
         {
             dadosPedSta.tpAmb = 0;
-            dadosPedSta.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
-            dadosPedSta.versao = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+            dadosPedSta.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosPedSta.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
 
             ///
             /// danasa 9-2009
             /// Assume o que está na configuracao
             /// 
-            dadosPedSta.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            dadosPedSta.tpEmis = Empresas.Configuracoes[emp].tpEmis;
 
             ///
             /// danasa 12-9-2009
@@ -121,6 +131,8 @@ namespace NFe.Service
                 // cUF|35
                 // versao|3.10
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                Functions.PopulateClasse(dadosPedSta, cLinhas);
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -140,6 +152,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -159,7 +172,6 @@ namespace NFe.Service
                     {
                         dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
                     }
-
                     if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
                         dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
@@ -170,6 +182,8 @@ namespace NFe.Service
                     }
                 }
             }
+            if (string.IsNullOrEmpty(dadosPedSta.versao))
+                throw new Exception(NFeStrConstants.versaoError);
         }
         #endregion
     }

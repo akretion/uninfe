@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Xml;
 
+using NFe.Components;
+
 namespace NFe.ConvertTxt
 {
     public class ConversaoTXT
@@ -665,9 +667,9 @@ namespace NFe.ConvertTxt
                     NFe.ide.tpNF    = (TpcnTipoNFe)this.LerInt32(TpcnResources.tpNF, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.cMunFG  = this.LerInt32(TpcnResources.cMunFG, ObOp.Obrigatorio, 7, 7);
                     NFe.ide.tpImp   = (TpcnTipoImpressao)this.LerInt32(TpcnResources.tpImp, ObOp.Obrigatorio, 1, 1);
-                    NFe.ide.tpEmis  = (TpcnTipoEmissao)this.LerInt32(TpcnResources.tpEmis, ObOp.Obrigatorio, 1, 1);
+                    NFe.ide.tpEmis  = (TipoEmissao)this.LerInt32(TpcnResources.tpEmis, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.cDV     = this.LerInt32(TpcnResources.cDV, ObOp.Opcional, 1, 1);
-                    NFe.ide.tpAmb   = (TpcnTipoAmbiente)this.LerInt32(TpcnResources.tpAmb, ObOp.Obrigatorio, 1, 1);
+                    NFe.ide.tpAmb   = (TipoAmbiente)this.LerInt32(TpcnResources.tpAmb, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.finNFe  = (TpcnFinalidadeNFe)this.LerInt32(TpcnResources.finNFe, ObOp.Obrigatorio, 1, 1);
                     if (NFe.infNFe.Versao >= 3)
                     {

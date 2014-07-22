@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace NFe.Components
 {
@@ -310,23 +313,30 @@ namespace NFe.Components
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs da NF-e
         /// </summary>
+        /// 
+        [Description("NF-e")]
         Nfe = 0,
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs do CT-e
         /// </summary>
+        [Description("CT-e")]
         Cte = 1,
         /// <summary>
         /// Aplicativo ou servicos para processamento dos XMLs da NFS-e
         /// </summary>
+        [Description("NFS-e")]
         Nfse = 2,
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs do MDF-e
         /// </summary>
+        [Description("MDF-e")]
         MDFe = 3,
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs da NFC-e
         /// </summary>
+        [Description("NFC-e")]
         NFCe = 4,
+        [Description("")]
         Nulo = 100
     }
     #endregion
@@ -435,23 +445,45 @@ namespace NFe.Components
     }
     #endregion
 
-    #region NF
+    #region Classe dos tipos de ambiente da NFe
     /// <summary>
     /// Tipo de ambiente
     /// </summary>
-    public enum TpAmb
+    public enum TipoAmbiente
     {
-        /// <summary>
-        /// Ambiente de produção
-        /// </summary>
         [Description("Produção")]
-        Producao = 1,
-
-        /// <summary>
-        /// Ambiente de homologação
-        /// </summary>
+        taProducao = 1,
         [Description("Homologação")]
-        Homologacao = 2
+        taHomologacao = 2
+    }
+    #endregion
+
+    #region TipoEmissao
+    /// <summary>
+    /// TipoEmissao
+    /// </summary>
+    public enum TipoEmissao
+    {
+        [Description("")]
+        teNone = 0,
+        [Description("Normal")]
+        teNormal = 1,
+        [Description("Contingência com formulário de segurança (FS)")]
+        teContingencia = 2,
+        [Description("Contingência com SCAN do Ambiente Nacional")]
+        teSCAN = 3,
+        [Description("Contingência com DPEC")]
+        teDPEC = 4,
+        [Description("Contingência com formulário de segurança (FS-DA)")]
+        teFSDA = 5,
+        [Description("Contingência com SVC-AN")]
+        teSVCAN = 6,
+        [Description("Contingência com SVC-RS")]
+        teSVCRS = 7,
+        [Description("Contingência com SVC-SP")]
+        teSVCSP = 8,
+        [Description("Contingência Off-Line (NFC-e)")]
+        teOffLine = 9
     }
     #endregion
 
@@ -470,6 +502,48 @@ namespace NFe.Components
 
     #region EnumHelper
 
+    /*
+ComboBox combo = new ComboBox();
+combo.DataSource = EnumHelper.ToList(typeof(SimpleEnum));
+combo.DisplayMember = "Value";
+combo.ValueMember = "Key";
+    
+        foreach (string value in Enum.GetNames(typeof(Model.TipoCampanhaSituacao)))
+        {
+            Model.TipoCampanhaSituacao stausEnum = (Model.TipoCampanhaSituacao)Enum.Parse(typeof(Model.TipoCampanhaSituacao), value);
+            Console.WriteLine(" Description: " + value+"  "+ Model.EnumHelper.GetDescription(stausEnum));
+        }
+     
+ */
+
+    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Field, AllowMultiple = false)]
+    public sealed class EnumDescriptionAttribute : Attribute
+    {
+        private string description;
+        /// <summary>
+        /// Gets the description stored in this attribute.
+        /// </summary>
+        /// <value>The description stored in the attribute.</value>
+        public string Description
+        {
+            get
+            {
+                return this.description;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the 
+        /// <see cref="EnumDescriptionAttribute"/> class.
+        /// </summary>
+        /// <param name="description">The description to store in this attribute.</param>
+        public EnumDescriptionAttribute(string description)
+            : base()
+        {
+            this.description = description;
+        }
+    }
+
     /// <summary>
     /// Classe com metodos para serem utilizadas nos Enuns
     /// </summary>
@@ -480,7 +554,7 @@ namespace NFe.Components
         /// </summary>
         /// <param name="value">Enum para buscar a description</param>
         /// <returns>Retorna a description do enun</returns>
-        public static string GetDescription(this Enum value)
+        /*public static string GetDescription(this Enum value)
         {
             FieldInfo field = value.GetType().GetField(value.ToString());
 
@@ -489,6 +563,99 @@ namespace NFe.Components
                         as DescriptionAttribute;
 
             return attribute == null ? value.ToString() : attribute.Description;
+        }*/
+
+
+
+
+        public static T StringToEnum<T>(string name) { return (T)Enum.Parse(typeof(T), name); }
+
+        /// <summary>
+        /// Gets the <see cref="DescriptionAttribute"/> of an <see cref="Enum"/> type value.
+        /// </summary>
+        /// <param name="value">The <see cref="Enum"/> type value.</param>
+        /// <returns>A string containing the text of the <see cref="DescriptionAttribute"/>.</returns>
+        public static string GetDescription(Enum value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+
+            string description = value.ToString();
+            FieldInfo fieldInfo = value.GetType().GetField(description);
+            EnumDescriptionAttribute[] attributes = (EnumDescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(EnumDescriptionAttribute), false);
+            if (attributes != null && attributes.Length > 0)
+            {
+                description = attributes[0].Description;
+            }
+            else
+            {
+                return GetEnumItemDescription(value);
+                //DescriptionAttribute[] dattributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                //if (dattributes != null && dattributes.Length > 0)
+                //description = dattributes[0].Description;
+            }
+            return description;
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static string GetEnumItemDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
+        }
+
+        /// <summary>
+        ///  Converts the <see cref="Enum"/> type to an <see cref="IList"/> compatible object.
+        /// </summary>
+        /// <param name="type">The <see cref="Enum"/> type.</param>
+        /// <returns>An <see cref="IList"/> containing the enumerated type value and description.</returns>
+        public static IList ToList(Type type, bool returnInt, bool excluibrancos)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            ArrayList list = new ArrayList();
+            Array enumValues = Enum.GetValues(type);
+
+            foreach (Enum value in enumValues)
+            {
+                string _descr = GetDescription(value);
+                if (excluibrancos && string.IsNullOrEmpty(_descr)) continue;
+
+                if (returnInt)
+                    list.Add(new KeyValuePair<int, string>(Convert.ToInt32(value), _descr));
+                else
+                    list.Add(new KeyValuePair<Enum, string>(value, _descr));
+            }
+
+            return list;
+        }
+
+        public static IList ToStrings(Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            ArrayList list = new ArrayList();
+            Array enumValues = Enum.GetValues(type);
+
+            foreach (Enum value in enumValues)
+            {
+                list.Add(GetDescription(value));
+            }
+
+            return list;
         }
     }
 

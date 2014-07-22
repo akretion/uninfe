@@ -21,7 +21,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             Servico = Servicos.ConsultaNFDest;
 
             try
@@ -34,7 +34,7 @@ namespace NFe.Service
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
-                    int cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+                    int cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
                     //cUF = 43;
 
@@ -128,6 +128,8 @@ namespace NFe.Service
                 /// indEmi|0
                 /// ultNSU|00000001
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                Functions.PopulateClasse(this.oDadosConsultaNFeDest, cLinhas);
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -152,6 +154,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -173,12 +176,14 @@ namespace NFe.Service
                 foreach (XmlNode envEventoNode in envEventoList)
                 {
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
-
+                    Functions.PopulateClasse(this.oDadosConsultaNFeDest, envEventoElemento);
+#if false
                     this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                     this.oDadosConsultaNFeDest.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
                     this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indNFe")[0].InnerText);
                     this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indEmi")[0].InnerText);
                     this.oDadosConsultaNFeDest.ultNSU = envEventoElemento.GetElementsByTagName("ultNSU")[0].InnerText;
+#endif
                 }
             }
         }

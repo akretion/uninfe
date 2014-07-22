@@ -29,7 +29,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -40,7 +40,7 @@ namespace NFe.Service
                 if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, Propriedade.TipoEmissao.teNormal, dadosConsCad.versao);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, (int)NFe.Components.TipoEmissao.teNormal, dadosConsCad.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsCad = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosConsCad.cUF));
@@ -112,7 +112,7 @@ namespace NFe.Service
             this.dadosConsCad.CNPJ = string.Empty;
             this.dadosConsCad.IE = string.Empty;
             this.dadosConsCad.UF = string.Empty;
-            this.dadosConsCad.versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
+            this.dadosConsCad.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLConsCad;
 
             if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
@@ -182,6 +182,8 @@ namespace NFe.Service
                     }
                 }
             }
+            if (this.dadosConsCad.versao == "")
+                throw new Exception(NFeStrConstants.versaoError);
         }
         #endregion
 

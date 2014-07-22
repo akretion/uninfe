@@ -24,6 +24,7 @@ namespace uninfe
     {
         private bool restartServico = false;
         private bool servicoInstaladoErodando = false;
+        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
 
         #region MainForm()
         public MainForm()
@@ -104,24 +105,24 @@ namespace uninfe
         /// </summary>
         private void ExecutaServicos()
         {
-            Empresa.CarregaConfiguracao();
-
             if (servicoInstaladoErodando)
             {
                 if (restartServico)
-                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                    ServiceProcess.StopService(srvName, 40000);
 
                 restartServico = false;
 
-                switch (ServiceProcess.StatusService(Propriedade.ServiceName))
+                switch (ServiceProcess.StatusService(srvName))
                 {
                     case System.ServiceProcess.ServiceControllerStatus.Stopped:
-                        ServiceProcess.StartService(Propriedade.ServiceName, 40000);
+                        ServiceProcess.StartService(srvName, 40000);
                         break;
                     case System.ServiceProcess.ServiceControllerStatus.Paused:
-                        ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                        ServiceProcess.RestartService(srvName, 40000);
                         break;
                 }
+                Empresas.CarregaConfiguracao();
+
                 this.updateControleDoServico();
             }
             else
@@ -138,7 +139,7 @@ namespace uninfe
             {
                 if (fechaServico)
                 {
-                    ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                    ServiceProcess.StopService(srvName, 40000);
                 }
             }
             else
@@ -224,7 +225,7 @@ namespace uninfe
              * Marcelo
              */
 
-            Empresa.ClearLockFiles(false);
+            Empresas.ClearLockFiles(false);
             #endregion
         }
         #endregion
@@ -308,7 +309,7 @@ namespace uninfe
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if (Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -337,7 +338,7 @@ namespace uninfe
 
         private void cmConsultaCadastroServico_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if (Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -370,7 +371,7 @@ namespace uninfe
         #region -- Validar
         private void toolStripButton_validarxml_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if (Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -384,7 +385,7 @@ namespace uninfe
 
         private void vaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Empresa.Configuracoes.Count <= 0)
+            if (Empresas.Configuracoes.Count <= 0)
             {
                 MessageBox.Show("É necessário cadastrar e configurar as empresas que serão gerenciadas pelo aplicativo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -597,7 +598,7 @@ namespace uninfe
             try
             {
                 fw.DisplayMessage("Parando o serviço do UniNFe");
-                ServiceProcess.StopService(Propriedade.ServiceName, 40000);
+                ServiceProcess.StopService(srvName, 40000);
                 this.updateControleDoServico();
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe parado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -619,7 +620,7 @@ namespace uninfe
             try
             {
                 fw.DisplayMessage("Reiniciando o serviço do UniNFe");
-                ServiceProcess.RestartService(Propriedade.ServiceName, 40000);
+                ServiceProcess.RestartService(srvName, 40000);
                 this.updateControleDoServico();
                 fw.StopMarquee();
                 MessageBox.Show("Serviço do UniNFe reiniciado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -638,8 +639,8 @@ namespace uninfe
         {
             if (servicoInstaladoErodando)
             {
-                this.tbPararServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
-                this.tbRestartServico.Enabled = ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
+                this.tbPararServico.Enabled = ServiceProcess.StatusService(srvName) == System.ServiceProcess.ServiceControllerStatus.Running;
+                this.tbRestartServico.Enabled = ServiceProcess.StatusService(srvName) == System.ServiceProcess.ServiceControllerStatus.Stopped;
             }
         }
         #endregion
@@ -742,12 +743,15 @@ namespace uninfe
                     ";*" + Propriedade.ExtRetorno.retEPEC_XML +
                     ";*" + Propriedade.ExtRetorno.retDPEC_XML;
                 dlg.Filter += "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
-                dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
+                dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + 
+                    ",*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + 
+                    ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;
                 dlg.Filter += "|Arquivos de EPEC (*.*" + Propriedade.ExtRetorno.retEPEC_XML + ")|*" + Propriedade.ExtRetorno.retEPEC_XML;
                 dlg.Filter += "|Arquivos de CTe (*.*" + Propriedade.ExtRetorno.ProcCTe + ")|*" + Propriedade.ExtRetorno.ProcCTe;
                 dlg.Filter += "|Arquivos de MDFe (*.*" + Propriedade.ExtRetorno.ProcMDFe + ")|*" + Propriedade.ExtRetorno.ProcMDFe;
+                dlg.Filter += "|Todos os arquivos XML (*.xml)|*.xml";
                 dlg.RestoreDirectory = true;
 
                 while (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -756,9 +760,9 @@ namespace uninfe
                     {
                         bool executou = false;
 
-                        for (int i = 0; i < Empresa.Configuracoes.Count; i++)
+                        for (int i = 0; i < Empresas.Configuracoes.Count; i++)
                         {
-                            Empresa empresa = Empresa.Configuracoes[i];
+                            Empresa empresa = Empresas.Configuracoes[i];
                             if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
                                 Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
                             {
@@ -787,7 +791,7 @@ namespace uninfe
         #region Ticket #110
         private void tbClearLockFiles_Click(object sender, EventArgs e)
         {
-            if (Empresa.ClearLockFiles())
+            if (Empresas.ClearLockFiles())
             {
                 ThreadService.Stop();
                 Application.Exit();

@@ -24,7 +24,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.RecepcionarLoteRps;
@@ -45,8 +45,8 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.IPM:
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
-                        IPM ipm = new IPM(Empresa.Configuracoes[emp].UsuarioWS, Empresa.Configuracoes[emp].SenhaWS, 7483, Empresa.Configuracoes[emp].PastaXmlRetorno);
-                        ipm.EmitirNF(NomeArquivoXML, (TpAmb)Empresa.Configuracoes[emp].AmbienteCodigo);
+                        IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, 7483, Empresas.Configuracoes[emp].PastaXmlRetorno);
+                        ipm.EmitirNF(NomeArquivoXML, (TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo);
                         break;
 
                     case PadroesNFSe.GINFES:
@@ -56,7 +56,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
-                        wsProxy = new WebServiceProxy(Empresa.Configuracoes[emp].X509Certificado);
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
                         wsProxy.Betha = new Betha();
                         break;
 
@@ -156,8 +156,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
-                        SystemPro syspro = new SystemPro((TpAmb)Empresa.Configuracoes[emp].AmbienteCodigo,
-                            Empresa.Configuracoes[emp].PastaXmlRetorno, Empresa.Configuracoes[emp].X509Certificado);
+                        SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
                         syspro.EmiteNF(NomeArquivoXML);
@@ -178,7 +178,7 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno,
+                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
@@ -244,7 +244,7 @@ namespace NFe.Service.NFSe
                     if (rpsElement.GetElementsByTagName("Assinatura").Count != 0)
                     {
                         //Encryptar a tag Assinatura
-                        rpsElement.GetElementsByTagName("Assinatura")[0].InnerText = Criptografia.SignWithRSASHA1(Empresa.Configuracoes[Functions.FindEmpresaByThread()].X509Certificado,
+                        rpsElement.GetElementsByTagName("Assinatura")[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                             rpsElement.GetElementsByTagName("Assinatura")[0].InnerText);
                     }
                 }
@@ -263,7 +263,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void EnvLoteRps(int emp, string arquivoXML)
         {
-            //int emp = Functions.FindEmpresaByThread();
+            //int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);

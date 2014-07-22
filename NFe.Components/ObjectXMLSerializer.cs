@@ -17,13 +17,6 @@
     public class ObjectXMLSerializer
     {
         /// <summary>
-        /// Constructor for this class.
-        /// </summary>
-        public ObjectXMLSerializer()
-        {
-        }
-
-        /// <summary>
         /// Load an object from an XML file.
         /// <newpara></newpara>
         /// <example>
@@ -39,29 +32,23 @@
         /// <param name="objObjectToLoad">Object to be loaded.</param>
         /// <param name="strXMLFilePathName">File Path name of the XML file containing object(s) serialized to XML.</param>
         /// <returns>Returns an Object loaded from the XML file. If the Object could not be loaded returns null.</returns>
-        public void Load(Object objObjectToLoad, string strXMLFilePathName)
+        public object Load(Type typObjectType, string strXMLFilePathName)
         {
-            TextReader txrTextReader = null;
-            try
-            {
-                Type typObjectType = objObjectToLoad.GetType();
+            if (!System.IO.File.Exists(strXMLFilePathName))
+                throw new Exception("Arquivo '" + strXMLFilePathName + "' não encontrado para deserialização");
 
-                XmlSerializer xserSerializer = new XmlSerializer(typObjectType);
+            using (TextReader txrTextReader = new StreamReader(strXMLFilePathName, Encoding.UTF8))
+            {
+                try
+                {
+                    XmlSerializer xserSerializer = new XmlSerializer(typObjectType);
 
-                txrTextReader = new StreamReader(strXMLFilePathName, Encoding.UTF8);
-                objObjectToLoad = xserSerializer.Deserialize(txrTextReader);
-            }
-            catch (Win32Exception exException)
-            {
-                objObjectToLoad = null;
-                throw exException;
-                //MessageBox.Show(exException.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                //Make sure to close the file even if an exception is raised...
-                if (txrTextReader != null)
-                    txrTextReader.Close();
+                    return xserSerializer.Deserialize(txrTextReader);
+                }
+                catch (Win32Exception exException)
+                {
+                    throw exException;
+                }
             }
         }
 
@@ -81,10 +68,9 @@
         /// <param name="objObjectToSave">Object to be saved.</param>
         /// <param name="strXMLFilePathName">File Path name of the XML file to contain the object serialized to XML.</param>
         /// <returns>Returns success of the object save.</returns>
-        public bool Save(Object objObjectToSave, string strXMLFilePathName)
+        public void Save(Object objObjectToSave, string strXMLFilePathName)
         {
             TextWriter txwTextWriter = null;
-            bool blnSuccess = false;
 
             try
             {
@@ -97,8 +83,6 @@
                 txwTextWriter = new StreamWriter(strXMLFilePathName, false, Encoding.UTF8);
 
                 xserSerializer.Serialize(txwTextWriter, objObjectToSave);
-
-                blnSuccess = true;
             }
             catch (Win32Exception exException)
             {
@@ -111,7 +95,6 @@
                 if (txwTextWriter != null)
                     txwTextWriter.Close();
             }
-            return blnSuccess;
         }
     }
 }

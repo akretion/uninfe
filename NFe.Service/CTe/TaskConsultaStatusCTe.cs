@@ -27,7 +27,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultaStatusServicoCTe;
@@ -92,8 +92,8 @@ namespace NFe.Service
         private void PedSta(int emp, string arquivoXML)
         {
             dadosPedSta.tpAmb = 0;
-            dadosPedSta.cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
-            dadosPedSta.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            dadosPedSta.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosPedSta.tpEmis = Empresas.Configuracoes[emp].tpEmis;
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);

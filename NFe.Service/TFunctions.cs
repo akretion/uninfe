@@ -71,7 +71,7 @@ namespace NFe.Service
         /// </remarks>
         public static void GravarArqErroServico(string arquivo, string finalArqEnvio, string finalArqErro, Exception exception, ErroPadrao erroPadrao, bool moveArqErro)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Qualquer erro ocorrido o aplicativo vai mover o XML com falha da pasta de envio
             //para a pasta de XML´s com erros. Futuramente ele é excluido quando outro igual
@@ -80,7 +80,7 @@ namespace NFe.Service
                 MoveArqErro(arquivo);
 
             //Grava arquivo de ERRO para o ERP
-            string arqErro = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
+            string arqErro = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                               Functions.ExtrairNomeArq(arquivo, finalArqEnvio) +
                               finalArqErro;
 
@@ -190,15 +190,15 @@ namespace NFe.Service
         /// <example>this.MoveArqErro(this.vXmlNfeDadosMsg, ".xml")</example>
         private static void MoveArqErro(string Arquivo, string ExtensaoArq)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             if (File.Exists(Arquivo))
             {
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                if (Directory.Exists(Empresa.Configuracoes[emp].PastaXmlErro))
+                if (Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
                 {
-                    string vNomeArquivo = Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
+                    string vNomeArquivo = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
                     Functions.Move(Arquivo, vNomeArquivo);
 
@@ -238,11 +238,11 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         public static void MoverArquivo(string arquivo, PastaEnviados subPastaXMLEnviado, DateTime emissao)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             #region Criar pastas que receberão os arquivos
             //Criar subpastas da pasta dos XML´s enviados
-            Empresa.CriarSubPastaEnviado(emp);
+            Empresas.Configuracoes[emp].CriarSubPastaEnviado();
 
             //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
             string nomePastaEnviado = string.Empty;
@@ -250,17 +250,17 @@ namespace NFe.Service
             switch (subPastaXMLEnviado)
             {
                 case PastaEnviados.EmProcessamento:
-                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
+                    nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
                     destinoArquivo = nomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     break;
 
                 case PastaEnviados.Autorizados:
-                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                    nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                     destinoArquivo = nomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     goto default;
 
                 case PastaEnviados.Denegados:
-                    nomePastaEnviado = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                    nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                     if (arquivo.ToLower().EndsWith(Propriedade.ExtRetorno.Den))//danasa 11-4-2012
                         destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(arquivo));
                     else
@@ -287,11 +287,11 @@ namespace NFe.Service
                     //ele para a pasta com erro antes para evitar exceção. Wandrey 05/07/2011
                     if (File.Exists(destinoArquivo))
                     {
-                        string destinoErro = Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                         File.Move(destinoArquivo, destinoErro);
 
                         //danasa 11-4-2012
-                        Auxiliar.WriteLog("Arquivo \"" + destinoArquivo + "\" movido para a pasta \"" + Empresa.Configuracoes[emp].PastaXmlErro + "\".", true);
+                        Auxiliar.WriteLog("Arquivo \"" + destinoArquivo + "\" movido para a pasta \"" + Empresas.Configuracoes[emp].PastaXmlErro + "\".", true);
                     }
                     File.Move(arquivo, destinoArquivo);
                 }
@@ -306,11 +306,11 @@ namespace NFe.Service
                     }
                     else
                     {
-                        string destinoErro = Empresa.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                         File.Move(arquivo, destinoErro);
 
                         //danasa 11-4-2012
-                        Auxiliar.WriteLog("Arquivo \"" + arquivo + "\" movido para a pasta \"" + Empresa.Configuracoes[emp].PastaXmlErro + "\".", true);
+                        Auxiliar.WriteLog("Arquivo \"" + arquivo + "\" movido para a pasta \"" + Empresas.Configuracoes[emp].PastaXmlErro + "\".", true);
                     }
                 }
                 #endregion
@@ -321,18 +321,18 @@ namespace NFe.Service
                     //Fazer um backup do XML que foi copiado para a pasta de enviados
                     //para uma outra pasta para termos uma maior segurança no arquivamento
                     //Normalmente esta pasta é em um outro computador ou HD
-                    if (Empresa.Configuracoes[emp].PastaBackup.Trim() != "")
+                    if (Empresas.Configuracoes[emp].PastaBackup.Trim() != "")
                     {
                         //Criar Pasta do Mês para gravar arquivos enviados
                         string nomePastaBackup = string.Empty;
                         switch (subPastaXMLEnviado)
                         {
                             case PastaEnviados.Autorizados:
-                                nomePastaBackup = Empresa.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                                 goto default;
 
                             case PastaEnviados.Denegados:
-                                nomePastaBackup = Empresa.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                                 goto default;
 
                             default:
@@ -405,25 +405,25 @@ namespace NFe.Service
         /// </remarks>
         public static void CopiarXMLPastaDanfeMon(string arquivoCopiar)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
-            if (!string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaDanfeMon))
+            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaDanfeMon))
             {
-                if (Directory.Exists(Empresa.Configuracoes[emp].PastaDanfeMon))
+                if (Directory.Exists(Empresas.Configuracoes[emp].PastaDanfeMon))
                 {
-                    if ((arquivoCopiar.ToLower().Contains("-nfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-procnfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-den.xml") && Empresa.Configuracoes[emp].XMLDanfeMonDenegadaNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-cte.xml") && Empresa.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proccte.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-mdfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-procmdfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventonfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventocte.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventomdfe.xml") && Empresa.Configuracoes[emp].XMLDanfeMonProcNFe))
+                    if ((arquivoCopiar.ToLower().Contains("-nfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-procnfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-den.xml") && Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-cte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-proccte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-mdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-procmdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-proceventonfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-proceventocte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains("-proceventomdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
                     {
                         //Montar o nome do arquivo de destino
-                        string arqDestino = Empresa.Configuracoes[emp].PastaDanfeMon + "\\" + Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
+                        string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
 
                         //Copiar o arquivo para o destino
                         FileInfo oArquivo = new FileInfo(arquivoCopiar);
@@ -491,10 +491,10 @@ namespace NFe.Service
 
         public static void ExecutaUniDanfe_ForcaEmail(int emp)
         {
-            if (Empresa.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
-                File.Exists(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
+            if (Empresas.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
+                File.Exists(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
             {
-                System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", "envia_email=1");
+                System.Diagnostics.Process.Start(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", "envia_email=1");
             }
         }
 
@@ -509,9 +509,9 @@ namespace NFe.Service
             string fm = sx.Split('|')[1];
 
             string[] relname = new string[]{ 
-                    Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviar.xml",
-                    Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviados.xml", 
-                    Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_erros.xml" 
+                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviar.xml",
+                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviados.xml", 
+                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_erros.xml" 
                 };
 
             System.Threading.Thread.Sleep(1000);
@@ -524,7 +524,7 @@ namespace NFe.Service
                     {
                         if (!Functions.FileInUse(s))
                         {
-                            string _out = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, fm.Replace(".txt",".xml"));
+                            string _out = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, fm.Replace(".txt",".xml"));
                             if (File.Exists(_out))
                                 File.Delete(_out);
                             File.Move(s, _out);
@@ -542,10 +542,10 @@ namespace NFe.Service
         #region ExecutaUniDanfe_ReportEmail
         public static void ExecutaUniDanfe_ReportEmail(int emp, DateTime datai, DateTime dataf, bool imprimir = false, string ExportarPasta = "Enviados", string filename="")
         {
-            if (Empresa.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
-                File.Exists(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
+            if (Empresas.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
+                File.Exists(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe"))
             {
-                System.Diagnostics.Process.Start(Empresa.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe",
+                System.Diagnostics.Process.Start(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe",
                     string.Format("rel_email=1 datai=\"{0:yyyy-MM-dd}\" dataf=\"{1:yyyy-MM-dd}\" imprimir={2} pasta=\"{3}\"", 
                                     datai, dataf, imprimir ? 1 : 0, ExportarPasta));
 
@@ -563,12 +563,12 @@ namespace NFe.Service
 
         #region ExecutaUniDanfe()
         public static void ExecutaUniDanfe(string nomeArqXMLNFe, 
-            DateTime dataEmissaoNFe, 
-            NFe.Settings.Empresa emp, 
-            string anexos = "", 
-            string printer = "", 
-            Int32 copias = 0, 
-            string email = "")
+                                            DateTime dataEmissaoNFe, 
+                                            NFe.Settings.Empresa emp, 
+                                            string anexos = "", 
+                                            string printer = "", 
+                                            Int32 copias = 0, 
+                                            string email = "")
         {
             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
             if (!string.IsNullOrEmpty(emp.PastaExeUniDanfe) &&
@@ -1123,6 +1123,22 @@ namespace NFe.Service
             }
         }
         #endregion
+
+        public static string DecompressXML(string origem)
+        {
+            byte[] encodedDataAsBytes = Convert.FromBase64String(origem);
+            using (MemoryStream ms = new MemoryStream(encodedDataAsBytes))
+            {
+                using (GZipStream unzip = new GZipStream(ms, CompressionMode.Decompress))
+                {
+                    Console.WriteLine(unzip.CanRead);
+                }
+            }
+
+            Console.WriteLine(encodedDataAsBytes.ToString());
+
+            return "";
+        }
 
     }
 }

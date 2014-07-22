@@ -30,7 +30,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -112,10 +112,10 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         private void PedSit(int emp, string cArquivoXML)
         {
-            dadosPedSit.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+            dadosPedSit.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             dadosPedSit.chNFe = string.Empty;
-            dadosPedSit.tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            dadosPedSit.versao = NFe.ConvertTxt.versoes.VersaoXMLPedSit;
+            dadosPedSit.tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            dadosPedSit.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLPedSit;
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
@@ -124,6 +124,10 @@ namespace NFe.Service
                 //      chNFe|35080600000000000000550000000000010000000000
                 //      versao|3.10
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                Functions.PopulateClasse(this.dadosPedSit, cLinhas);
+                if (dadosPedSit.versao == "2.00")
+                    dadosPedSit.versao = "2.01";
+#if false
                 foreach (string cTexto in cLinhas)
                 {
                     string[] dados = cTexto.Split('|');
@@ -143,6 +147,7 @@ namespace NFe.Service
                             break;
                     }
                 }
+#endif
             }
             else
             {
@@ -176,6 +181,8 @@ namespace NFe.Service
                     }
                 }
             }
+            if (this.dadosPedSit.versao == "")
+                throw new Exception(NFeStrConstants.versaoError);
         }
         #endregion
 
@@ -190,7 +197,7 @@ namespace NFe.Service
         /// </remarks>
         private void LerRetornoSitNFe(string ChaveNFe)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
@@ -224,7 +231,7 @@ namespace NFe.Service
                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                 }
 
-                string strArquivoNFe = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
@@ -325,7 +332,7 @@ namespace NFe.Service
                                         string strProtNfe = retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml;
 
                                         //Definir o nome do arquivo -procNfe.xml                                               
-                                        string strArquivoNFeProc = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                        string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
                                                                     Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
 
@@ -389,11 +396,11 @@ namespace NFe.Service
                                             {
                                                 try
                                                 {
-                                                    string strArquivoDist = Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                    string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                                 PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                                Empresa.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                                Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
                                                                                 Path.GetFileName(strArquivoNFeProc);
-                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresa.Configuracoes[emp]);
+                                                    TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }
                                                 catch (Exception ex)
                                                 {

@@ -379,7 +379,7 @@ namespace NFe.ConvertTxt
 
             if (NFe.ide.mod == TpcnMod.modNFe || (NFe.ide.mod == TpcnMod.modNFCe && !string.IsNullOrEmpty(NFe.dest.xNome)))
             {
-                wCampo(NFe.ide.tpAmb == TpcnTipoAmbiente.taProducao ? NFe.dest.xNome : "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                wCampo(NFe.ide.tpAmb == TipoAmbiente.taProducao ? NFe.dest.xNome : "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
                     TpcnTipoCampo.tcStr,
                     TpcnResources.xNome,
                     (NFe.infNFe.Versao >= 3 && NFe.ide.mod == TpcnMod.modNFCe) ? ObOp.Opcional : ObOp.Obrigatorio);
@@ -2273,7 +2273,7 @@ namespace NFe.ConvertTxt
         /// <param name="ArqXMLPedido"></param>
         public void GerarChaveNFe(string ArqPedido, Boolean xml)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             // XML - pedido
             // Filename: XXXXXXXX-gerar-chave.xml
@@ -2318,14 +2318,14 @@ namespace NFe.ConvertTxt
             // ERR - resposta
             // Filename: XXXXXXXX-gerar-chave.err
 
-            string ArqXMLRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
-            string ArqERRRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
+            string ArqXMLRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
+            string ArqERRRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
 
             try
             {
                 Functions.DeletarArquivo(ArqXMLRetorno);
                 Functions.DeletarArquivo(ArqERRRetorno);
-                Functions.DeletarArquivo(Empresa.Configuracoes[emp].PastaXmlErro + "\\" + ArqPedido);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + ArqPedido);
 
                 if (!File.Exists(ArqPedido))
                 {
@@ -2335,10 +2335,10 @@ namespace NFe.ConvertTxt
                 //                if (!Auxiliar.FileInUse(ArqPedido))
                 //                {
                 int serie = 0;
-                int tpEmis = Empresa.Configuracoes[emp].tpEmis;
+                int tpEmis = Empresas.Configuracoes[emp].tpEmis;
                 int nNF = 0;
                 int cNF = 0;
-                int cUF = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+                int cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
                 string cAAMM = "0000";
                 string cChave = "";
                 string cCNPJ = "";
@@ -2395,28 +2395,28 @@ namespace NFe.ConvertTxt
                             switch (dados[0].ToLower())
                             {
                                 case "uf":
-                                    cUF = Convert.ToInt32("0" + dados[1]);
+                                    cUF = Convert.ToInt32("0" + dados[1].Trim());
                                     break;
                                 case "tpemis":
-                                    tpEmis = Convert.ToInt32("0" + dados[1]);
+                                    tpEmis = Convert.ToInt32("0" + dados[1].Trim());
                                     break;
                                 case "nnf":
-                                    nNF = Convert.ToInt32("0" + dados[1]);
+                                    nNF = Convert.ToInt32("0" + dados[1].Trim());
                                     break;
                                 case "cnf":
-                                    cNF = Convert.ToInt32("0" + dados[1]);
+                                    cNF = Convert.ToInt32("0" + dados[1].Trim());
                                     break;
                                 case "serie":
-                                    serie = Convert.ToInt32("0" + dados[1]);
+                                    serie = Convert.ToInt32("0" + dados[1].Trim());
                                     break;
                                 case "aamm":
-                                    cAAMM = dados[1];
+                                    cAAMM = dados[1].Trim();
                                     break;
                                 case "cnpj":
-                                    cCNPJ = dados[1];
+                                    cCNPJ = dados[1].Trim();
                                     break;
                                 case "mod":
-                                    cMod = dados[1];
+                                    cMod = dados[1].Trim();
                                     break;
                             }
                     }
@@ -2444,12 +2444,7 @@ namespace NFe.ConvertTxt
                     throw new Exception(cError);
 
                 Int64 iTmp = Convert.ToInt64("0" + cCNPJ);
-                cChave = cUF.ToString("00") + cAAMM + iTmp.ToString("00000000000000") + cMod;
-
-                //if (Propriedade.TipoAplicativo == TipoAplicativo.Cte)
-                    //cChave += "57";
-                //else
-                    //cChave += "55";
+                cChave = cUF.ToString("00") + cAAMM.Trim() + iTmp.ToString("00000000000000") + cMod;
 
                 if (cNF == 0)
                 {

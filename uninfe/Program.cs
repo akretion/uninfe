@@ -74,7 +74,10 @@ namespace uninfe
                                 {
                                     if (param.ToLower().Equals("/quit") ||
                                         (param.ToLower().Equals("/restart") && clsProcess.Id != Id))
-                                            clsProcess.Kill();
+                                    {
+                                        Empresas.ClearLockFiles(false);
+                                        clsProcess.Kill();
+                                    }
                                 }
                                 catch
                                 {

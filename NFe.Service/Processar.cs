@@ -178,7 +178,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarNFeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarNFe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
+                                AssinarValidarNFe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.ConsultaCadastroContribuinte:
@@ -231,7 +231,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarMDFeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarMDFe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
+                                AssinarValidarMDFe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.MontarLoteVariosMDFe:
@@ -290,7 +290,7 @@ namespace NFe.Service
 
                             case Servicos.AssinarValidarCTeEnvioEmLote:
                                 CertVencido(emp);
-                                AssinarValidarCTe(arquivo, Empresa.Configuracoes[emp].PastaXmlEmLote);
+                                AssinarValidarCTe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                                 break;
 
                             case Servicos.MontarLoteVariosCTe:
@@ -392,7 +392,7 @@ namespace NFe.Service
             #endregion
             else
             {
-                if(arq.IndexOf(Empresa.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
+                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
                 {
                     tipoServico = Servicos.AssinarValidar;
                 }
@@ -400,8 +400,8 @@ namespace NFe.Service
                 {
                     FileInfo infArq = new FileInfo(arq);
                     string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
-                    string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaXmlEmLote).ToLower().Trim();
-                    string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresa.Configuracoes[empresa].PastaXmlEnvio).ToLower().Trim();
+                    string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[empresa].PastaXmlEmLote).ToLower().Trim();
+                    string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[empresa].PastaXmlEnvio).ToLower().Trim();
                     if(pastaArq.EndsWith("\\temp"))
                         pastaArq = Path.GetDirectoryName(pastaArq);
 
@@ -482,7 +482,7 @@ namespace NFe.Service
                         }
                         else if(arq.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
                         {
-                            if(arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                            if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                             {
                                 tipoServico = Servicos.MontarLoteVariasNFe;
                             }
@@ -522,7 +522,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteMDFe":
-                                if(arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariosMDFe;
                                 }
@@ -566,7 +566,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteCTe":
-                                if(arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariosCTe;
                                 }
@@ -613,7 +613,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteNFe":
-                                if(arq.IndexOf(Empresa.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MontarLoteVariasNFe;
                                 }
@@ -771,8 +771,8 @@ namespace NFe.Service
                     new ConverterTXT(arquivo);
                 else
                 {
-                    int emp = Functions.FindEmpresaByThread();
-                    ValidarXML validar = new ValidarXML(arquivo, Empresa.Configuracoes[emp].UnidadeFederativaCodigo);
+                    int emp = Empresas.FindEmpresaByThread();
+                    ValidarXML validar = new ValidarXML(arquivo, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
                     validar.ValidarAssinarXML(arquivo);
                 }
             }
@@ -840,7 +840,7 @@ namespace NFe.Service
         {
             while(true)
             {
-                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
                     BackgroundWorker worker = new BackgroundWorker();
 
@@ -894,9 +894,9 @@ namespace NFe.Service
         {
             while(true)
             {
-                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
-                    Empresa empresa = Empresa.Configuracoes[i];
+                    Empresa empresa = Empresas.Configuracoes[i];
 
                     if(!string.IsNullOrEmpty(empresa.PastaEmpresa))
                         GerarXMLPedRec(i, nfe);
@@ -979,7 +979,7 @@ namespace NFe.Service
         /// <param name="oNfe">Objeto da classe UniNfeClass a ser utilizado nas operações</param>
         private void EnviarArquivo(string arquivo, Object nfe, string metodo)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o tipo do serviço
             Type tipoServico = nfe.GetType();
@@ -987,10 +987,10 @@ namespace NFe.Service
             //Definir o arquivo XML para a classe UniNfeClass
             tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, nfe, new object[] { arquivo });
 
-            if(Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teContingencia &&
-                Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teFSDA &&
-                Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teOffLine &&
-                Empresa.Configuracoes[emp].tpEmis != Propriedade.TipoEmissao.teDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
+            if (Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teContingencia &&
+                Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teFSDA &&
+                Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teOffLine &&
+                Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
             {
                 tipoServico.InvokeMember(metodo, System.Reflection.BindingFlags.InvokeMethod, null, nfe, null);
             }
@@ -1018,16 +1018,16 @@ namespace NFe.Service
         /// <date>29/01/2009</date>
         private void GravarXMLDadosCertificado(string ArquivoXml)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             string sArqRetorno = string.Empty;
 
             Auxiliar oAux = new Auxiliar();
 
             if(Path.GetExtension(ArquivoXml).ToLower() == ".txt")
-                sArqRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                sArqRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                               Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_TXT) + "-ret-cons-inf.txt";
             else
-                sArqRetorno = Empresa.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                sArqRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                               Functions.ExtrairNomeArq(ArquivoXml, Propriedade.ExtEnvio.ConsInf_XML) + "-ret-cons-inf.xml";
 
             try
@@ -1107,8 +1107,8 @@ namespace NFe.Service
                 var tempoConsulta = reciboCons.tMed;
 
                 //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandrey 20/07/2010
-                if(tempoConsulta < Empresa.Configuracoes[empresa].TempoConsulta)
-                    tempoConsulta = Empresa.Configuracoes[empresa].TempoConsulta;
+                if(tempoConsulta < Empresas.Configuracoes[empresa].TempoConsulta)
+                    tempoConsulta = Empresas.Configuracoes[empresa].TempoConsulta;
 
                 if(tempoConsulta < 2)
                     tempoConsulta = 2;
@@ -1152,22 +1152,22 @@ namespace NFe.Service
                 //Limpar conteúdo da pasta de LOG, mas manter 60 dias de informação
                 Limpar(Propriedade.PastaLog, 60);
 
-                for(int i = 0; i < Empresa.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
                     //Limpar conteúdo da pasta temp que fica dentro da pasta de envio de cada empresa a cada 10 dias
-                    Limpar(Empresa.Configuracoes[i].PastaXmlEnvio + "\\temp", 10);
-                    Limpar(Empresa.Configuracoes[i].PastaValidar + "\\temp", 10);   //danasa 12/8/2011
-                    Limpar(Empresa.Configuracoes[i].PastaXmlEmLote + "\\temp", 10);   //Wandrey 05/10/2011
+                    Limpar(Empresas.Configuracoes[i].PastaXmlEnvio + "\\temp", 10);
+                    Limpar(Empresas.Configuracoes[i].PastaValidar + "\\temp", 10);   //danasa 12/8/2011
+                    Limpar(Empresas.Configuracoes[i].PastaXmlEmLote + "\\temp", 10);   //Wandrey 05/10/2011
 
-                    if(Empresa.Configuracoes[i].DiasLimpeza == 0)
+                    if(Empresas.Configuracoes[i].DiasLimpeza == 0)
                         continue;
 
                     #region temporario
-                    Limpar(Empresa.Configuracoes[i].PastaXmlErro, Empresa.Configuracoes[i].DiasLimpeza);
+                    Limpar(Empresas.Configuracoes[i].PastaXmlErro, Empresas.Configuracoes[i].DiasLimpeza);
                     #endregion
 
                     #region retorno
-                    Limpar(Empresa.Configuracoes[i].PastaXmlRetorno, Empresa.Configuracoes[i].DiasLimpeza);
+                    Limpar(Empresas.Configuracoes[i].PastaXmlRetorno, Empresas.Configuracoes[i].DiasLimpeza);
                     #endregion
                 }
             }

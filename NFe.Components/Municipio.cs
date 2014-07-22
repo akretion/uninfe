@@ -14,6 +14,7 @@ namespace NFe.Components
         public string PadraoStr { get; set; } 
         public PadroesNFSe Padrao { get; set; }
 
+        public Municipio() { }
         public Municipio(int _cod, string _uf, string _nome, PadroesNFSe _padrao)
         {
             this.Nome = _nome;

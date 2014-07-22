@@ -20,7 +20,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             Servico = Servicos.DownloadNFe;
             try
             {
@@ -221,7 +221,7 @@ namespace NFe.Service
             /// </retNFe>
             ///</retDownloadNFe>
 
-            string folderDestino = Empresa.Configuracoes[emp].PastaDownloadNFeDest;
+            string folderDestino = Empresas.Configuracoes[emp].PastaDownloadNFeDest;
             if (string.IsNullOrEmpty(folderDestino))
                 return;
 

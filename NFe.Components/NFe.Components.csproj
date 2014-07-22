@@ -72,6 +72,7 @@
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
     <Compile Include="Criptografia.cs" />
+    <Compile Include="DelFolder.cs" />
     <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="ExtensionsMethods\StreamExtensions.cs" />
     <Compile Include="ExtensionsMethods\StringExtensions.cs" />

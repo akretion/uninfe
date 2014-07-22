@@ -23,7 +23,7 @@ namespace NFSe.Components
         {
             StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             string url;
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/cancelarNfse";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/cancelarNfse";
@@ -52,7 +52,7 @@ namespace NFSe.Components
             StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
             string url;
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarLoteRps";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarLoteRps";
@@ -81,7 +81,7 @@ namespace NFSe.Components
             StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
             string url;
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarSituacaoLoteRps";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarSituacaoLoteRps";
@@ -111,7 +111,7 @@ namespace NFSe.Components
 
             string url;
 
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/recepcionarLoteRps";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/recepcionarLoteRps";
@@ -202,7 +202,7 @@ namespace NFSe.Components
             StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
             string url;
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarNfse";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarNfse";
@@ -231,7 +231,7 @@ namespace NFSe.Components
             StringBuilder retornar = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
             string url;
-            if(tpAmb == Propriedade.TipoAmbiente.taProducao)
+            if (tpAmb == (int)NFe.Components.TipoAmbiente.taProducao)
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-ws/consultarNfsePorRps";
             else
                 url = @"http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/consultarNfsePorRps";

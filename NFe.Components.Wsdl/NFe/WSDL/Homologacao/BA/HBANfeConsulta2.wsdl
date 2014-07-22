@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta2" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta2">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta">
       <s:element name="nfeDadosMsg">
         <s:complexType mixed="true">
           <s:sequence>
@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="nfeConsultaNF2Result">
+      <s:element name="NfeConsultaNFResult">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -26,55 +26,56 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeConsultaNF2SoapIn">
+  <wsdl:message name="NfeConsultaNFSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeConsultaNF2SoapOut">
-    <wsdl:part name="nfeConsultaNF2Result" element="tns:nfeConsultaNF2Result" />
+  <wsdl:message name="NfeConsultaNFSoapOut">
+    <wsdl:part name="NfeConsultaNFResult" element="tns:NfeConsultaNFResult" />
   </wsdl:message>
-  <wsdl:message name="nfeConsultaNF2nfeCabecMsg">
+  <wsdl:message name="NfeConsultaNFnfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:portType name="NfeConsulta2Soap">
-    <wsdl:operation name="nfeConsultaNF2">
-      <wsdl:input message="tns:nfeConsultaNF2SoapIn" />
-      <wsdl:output message="tns:nfeConsultaNF2SoapOut" />
+  <wsdl:portType name="NfeConsultaSoap">
+    <wsdl:operation name="NfeConsultaNF">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à consulta da NF-e.</wsdl:documentation>
+      <wsdl:input message="tns:NfeConsultaNFSoapIn" />
+      <wsdl:output message="tns:NfeConsultaNFSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NfeConsulta2Soap" type="tns:NfeConsulta2Soap">
+  <wsdl:binding name="NfeConsultaSoap" type="tns:NfeConsultaSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="nfeConsultaNF2">
-      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta2/nfeConsultaNF2" style="document" />
+    <wsdl:operation name="NfeConsultaNF">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/NfeConsultaNF" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
-        <soap:header message="tns:nfeConsultaNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
-        <soap:header message="tns:nfeConsultaNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NfeConsulta2Soap12" type="tns:NfeConsulta2Soap">
+  <wsdl:binding name="NfeConsultaSoap12" type="tns:NfeConsultaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="nfeConsultaNF2">
-      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta2/nfeConsultaNF2" style="document" />
+    <wsdl:operation name="NfeConsultaNF">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/NfeConsultaNF" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
-        <soap12:header message="tns:nfeConsultaNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
-        <soap12:header message="tns:nfeConsultaNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="NfeConsulta2">
-    <wsdl:port name="NfeConsulta2Soap" binding="tns:NfeConsulta2Soap">
-      <soap:address location="https://hnfe.sefaz.ba.gov.br/webservices/nfenw/nfeconsulta2.asmx" />
+  <wsdl:service name="NfeConsulta">
+    <wsdl:port name="NfeConsultaSoap" binding="tns:NfeConsultaSoap">
+      <soap:address location="https://hnfe.sefaz.ba.gov.br/webservices/NfeConsulta/NfeConsulta.asmx" />
     </wsdl:port>
-    <wsdl:port name="NfeConsulta2Soap12" binding="tns:NfeConsulta2Soap12">
-      <soap12:address location="https://hnfe.sefaz.ba.gov.br/webservices/nfenw/nfeconsulta2.asmx" />
+    <wsdl:port name="NfeConsultaSoap12" binding="tns:NfeConsultaSoap12">
+      <soap12:address location="https://hnfe.sefaz.ba.gov.br/webservices/NfeConsulta/NfeConsulta.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

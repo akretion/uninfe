@@ -59,7 +59,8 @@ namespace NFe
         /// <returns></returns>
         public static bool IsA3(this X509Certificate2 x509cert)
         {
-            if(x509cert == null) throw new ArgumentNullException("x509cert");
+            if (x509cert == null) 
+               return false;
 
             bool result = false;
 

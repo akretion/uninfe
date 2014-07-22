@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using NFe.Components;
+
 namespace NFe.ConvertTxt
 {
     /// <summary>
@@ -24,9 +26,9 @@ namespace NFe.ConvertTxt
         public int cMunFG { get; set; }
         public List<NFref> NFref { get; set; }
         public TpcnTipoImpressao tpImp { get; set; }
-        public TpcnTipoEmissao tpEmis { get; set; }
+        public TipoEmissao tpEmis { get; set; }
         public int cDV { get; set; }
-        public TpcnTipoAmbiente tpAmb { get; set; }
+        public TipoAmbiente tpAmb { get; set; }
         public TpcnFinalidadeNFe finNFe { get; set; }
         public TpcnProcessoEmissao procEmi { get; set; }
         public string verProc { get; set; }
@@ -51,8 +53,8 @@ namespace NFe.ConvertTxt
             this.idDest = TpcnDestinoOperacao.doInterna;
             this.indFinal = TpcnConsumidorFinal.cfConsumidorFinal;
             this.indPres = TpcnPresencaComprador.pcPresencial;
-            this.tpAmb = TpcnTipoAmbiente.taHomologacao;
-            this.tpEmis = TpcnTipoEmissao.teNormal;
+            this.tpAmb = TipoAmbiente.taHomologacao;
+            this.tpEmis = TipoEmissao.teNormal;
             this.tpImp = TpcnTipoImpressao.tiRetrato;
             this.procEmi = TpcnProcessoEmissao.peAplicativoContribuinte;
             NFref = new List<NFref>();

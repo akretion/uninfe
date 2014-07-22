@@ -867,6 +867,7 @@
             this.lbPINCertificado.Size = new System.Drawing.Size(146, 13);
             this.lbPINCertificado.TabIndex = 32;
             this.lbPINCertificado.Text = "PIN Certificado A3 (opcional):";
+            this.lbPINCertificado.Visible = false;
             // 
             // txtPinCertificado
             // 
@@ -877,6 +878,7 @@
             this.txtPinCertificado.TabIndex = 31;
             this.toolTip1.SetToolTip(this.txtPinCertificado, "Deverá ser usado somente para certificados A3");
             this.txtPinCertificado.UseSystemPasswordChar = true;
+            this.txtPinCertificado.Visible = false;
             // 
             // lblCertificadoArquivo
             // 
@@ -1207,9 +1209,9 @@
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(4, 214);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(357, 13);
+            this.label26.Size = new System.Drawing.Size(368, 13);
             this.label26.TabIndex = 24;
-            this.label26.Text = "Pasta onde será gravado os arquivos XML´s de retorno dos WebServices:";
+            this.label26.Text = "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices:";
             // 
             // edtFTP_PastaRetornos
             // 
@@ -1236,9 +1238,9 @@
             this.lbl_edtFTP_PastaDestino.AutoSize = true;
             this.lbl_edtFTP_PastaDestino.Location = new System.Drawing.Point(4, 172);
             this.lbl_edtFTP_PastaDestino.Name = "lbl_edtFTP_PastaDestino";
-            this.lbl_edtFTP_PastaDestino.Size = new System.Drawing.Size(265, 13);
+            this.lbl_edtFTP_PastaDestino.Size = new System.Drawing.Size(276, 13);
             this.lbl_edtFTP_PastaDestino.TabIndex = 21;
-            this.lbl_edtFTP_PastaDestino.Text = "Pasta onde será gravado os arquivos XML´s enviados:";
+            this.lbl_edtFTP_PastaDestino.Text = "Pasta onde serão gravados os arquivos XML´s enviados:";
             // 
             // edtFTP_PastaDestino
             // 

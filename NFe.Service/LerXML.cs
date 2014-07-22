@@ -30,14 +30,14 @@ namespace NFe.Service
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta lote rps
         /// </summary>
-        public DadosPedLoteRps oDadosPedLoteRps = new DadosPedLoteRps(Functions.FindEmpresaByThread());
+        public DadosPedLoteRps oDadosPedLoteRps = new DadosPedLoteRps(Empresas.FindEmpresaByThread());
         #endregion
 
         #region Objeto com os dados do XML da consulta nfse por RPS
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta nfse por rps
         /// </summary>
-        public DadosPedSitNfseRps oDadosPedSitNfseRps = new DadosPedSitNfseRps(Functions.FindEmpresaByThread());
+        public DadosPedSitNfseRps oDadosPedSitNfseRps = new DadosPedSitNfseRps(Empresas.FindEmpresaByThread());
         #endregion
 
         #endregion
@@ -276,7 +276,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedLoteRps(string arquivoXML)
         {
-            //int emp = Functions.FindEmpresaByThread();
+            //int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);
@@ -310,7 +310,7 @@ namespace NFe.Service
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         public void PedSitNfseRps(string arquivoXML)
         {
-            //int emp = Functions.FindEmpresaByThread();
+            //int emp = Empresas.FindEmpresaByThread();
         }
         #endregion
 

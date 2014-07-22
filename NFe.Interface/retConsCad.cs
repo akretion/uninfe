@@ -9,6 +9,7 @@ using NFe.Service;
 
 namespace NFe.Interface
 {
+    [ToolboxItem(false)]
     public partial class retConsCad : UserControl
     {
         public retConsCad(infCad infCad)

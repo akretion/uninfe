@@ -19,7 +19,7 @@ namespace NFe.Components
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="cancelamento">Define se está se tratando de um Cancelamento pois a URL utilizada é a mesma do envio - Renan</param>
         /// <returns></returns>
-        string EmitirNF(string file, TpAmb tpAmb, bool cancelamento);
+        string EmitirNF(string file, TipoAmbiente tpAmb, bool cancelamento);
         /// <summary>
         /// Usuário para emissão da NF
         /// </summary>

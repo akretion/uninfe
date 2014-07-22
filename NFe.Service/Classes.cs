@@ -171,7 +171,7 @@ namespace NFe.Service
 
         public DadosConsCad()
         {
-            this.tpAmb = Propriedade.TipoAmbiente.taProducao;// "1";
+            this.tpAmb = (int)NFe.Components.TipoAmbiente.taProducao;// "1";
         }
 
         /// <summary>
@@ -188,6 +188,8 @@ namespace NFe.Service
                 this.mUF = value;
                 this.cUF = 0;// string.Empty;
 
+                this.cUF = Functions.UFParaCodigo(value.Trim());
+                /*
                 switch (this.mUF.ToUpper().Trim())
                 {
                     case "AC":
@@ -297,7 +299,7 @@ namespace NFe.Service
                     case "TO":
                         this.cUF = 17;
                         break;
-                }
+                }*/
             }
         }
         /// <summary>
@@ -465,7 +467,7 @@ namespace NFe.Service
             set
             {
                 this.mSerie = value;
-                this.tpEmis = (value >= 900 ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
+                this.tpEmis = (value >= 900 ? (int)NFe.Components.TipoEmissao.teSCAN : this.tpEmis);
             }
         }
         public int nNFIni { get; set; }
@@ -475,8 +477,8 @@ namespace NFe.Service
 
         public DadosPedInut(int emp)
         {
-            //int emp = Functions.FindEmpresaByThread();
-            this.tpEmis = Empresa.Configuracoes[emp].tpEmis;
+            //int emp = Empresas.FindEmpresaByThread();
+            this.tpEmis = Empresas.Configuracoes[emp].tpEmis;
         }
     }
     #endregion
@@ -509,7 +511,7 @@ namespace NFe.Service
                 {
                     cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
                     int serie = Convert.ToInt32(this.mchNFe.Substring(22, 3));
-                    tpEmis = (serie >= 900 && mchNFe.Substring(20, 2) == "55" ? Propriedade.TipoEmissao.teSCAN : this.tpEmis);
+                    tpEmis = (serie >= 900 && mchNFe.Substring(20, 2) == "55" ? (int)NFe.Components.TipoEmissao.teSCAN : this.tpEmis);
                 }
             }
         }
@@ -530,7 +532,7 @@ namespace NFe.Service
         public DadosPedSit()
         {
             this.cUF = 0;
-            this.tpEmis = Propriedade.TipoEmissao.teNormal;
+            this.tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
         }
     }
     #endregion
@@ -759,9 +761,9 @@ namespace NFe.Service
 
         public DadosPedLoteRps(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -778,9 +780,9 @@ namespace NFe.Service
 
         public DadosPedSitNfse(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -797,9 +799,9 @@ namespace NFe.Service
 
         public DadosPedSitNfseRps(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -816,9 +818,9 @@ namespace NFe.Service
 
         public DadosPedCanNfse(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -835,9 +837,9 @@ namespace NFe.Service
 
         public DadosPedSitLoteRps(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -854,9 +856,9 @@ namespace NFe.Service
 
         public DadosEnvLoteRps(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion
@@ -873,9 +875,9 @@ namespace NFe.Service
 
         public DadosPedURLNfse(int emp)
         {
-            tpEmis = Empresa.Configuracoes[emp].tpEmis;
-            tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresa.Configuracoes[emp].UnidadeFederativaCodigo;
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
         }
     }
     #endregion

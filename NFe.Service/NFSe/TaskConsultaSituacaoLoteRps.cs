@@ -24,7 +24,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.ConsultarSituacaoLoteRps;
@@ -52,7 +52,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
-                        wsProxy = new WebServiceProxy(Empresa.Configuracoes[emp].X509Certificado);
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
                         wsProxy.Betha = new Betha();
                         break;
 
@@ -134,7 +134,7 @@ namespace NFe.Service.NFSe
                     
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno,
+                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedSitLoteRps, Propriedade.ExtRetorno.SitLoteRps)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
@@ -176,7 +176,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedSitLoteRps(string arquivoXML)
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arquivoXML);

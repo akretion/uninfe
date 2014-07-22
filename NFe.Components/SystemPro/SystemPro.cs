@@ -11,7 +11,7 @@ namespace NFe.Components.SystemPro
     public class SystemPro: SystemProBase
     {
         #region Construtores
-        public SystemPro(TpAmb tpAmb, string pastaRetorno, X509Certificate certificate)
+        public SystemPro(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate)
             : base(tpAmb, pastaRetorno, certificate)
         { }
         #endregion

@@ -26,7 +26,7 @@ namespace NFe.Components
             System.Net.IWebProxy proxy;
             proxy = new System.Net.WebProxy(servidor, porta);
 
-            if (!String.IsNullOrEmpty(usuario.Trim()) && usuario.Trim().Length > 0)
+            if (!String.IsNullOrEmpty(usuario) && usuario.Trim().Length > 0)
             {
                 proxy.Credentials = credencial;
             }

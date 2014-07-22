@@ -9,6 +9,7 @@ using System.Collections;
 using System.Threading;
 using System.IO;
 using System.Xml;
+
 using NFe.Components;
 using NFe.Settings;
 using NFe.Service;
@@ -66,15 +67,15 @@ namespace NFe.Interface
             this.buttonPesquisa.Enabled = false;
 
             this.cbEmissao.Items.Clear();
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teNormal]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSCAN]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCRS]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCSP]);
-            this.cbEmissao.Items.Add(Propriedade.tpEmissao[Propriedade.TipoEmissao.teSVCAN]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teNormal]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSCAN]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCRS]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCSP]);
+            this.cbEmissao.Items.Add(Propriedade.tpEmissao[(int)NFe.Components.TipoEmissao.teSVCAN]);
 
             #region Montar Array DropList do Ambiente
-            arrAmb.Add(new ComboElem("Produção", Propriedade.TipoAmbiente.taProducao));
-            arrAmb.Add(new ComboElem("Homologação", Propriedade.TipoAmbiente.taHomologacao));
+            arrAmb.Add(new ComboElem("Produção", (int)NFe.Components.TipoAmbiente.taProducao));
+            arrAmb.Add(new ComboElem("Homologação", (int)NFe.Components.TipoAmbiente.taHomologacao));
 
             cbAmbiente.DataSource = arrAmb;
             cbAmbiente.DisplayMember = "valor";
@@ -182,28 +183,28 @@ namespace NFe.Interface
 
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).Codigo;
                 int amb = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[cbAmbiente.SelectedIndex]).Codigo;
-                int tpEmis = Propriedade.TipoEmissao.teNormal;
+                int tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
 
                 switch (this.cbEmissao.SelectedIndex)
                 {
                     case 0:
-                        tpEmis = Propriedade.TipoEmissao.teNormal;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
                     case 1:
-                        tpEmis = Propriedade.TipoEmissao.teSCAN;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teSCAN;
                         break;
                     case 2:
-                        tpEmis = Propriedade.TipoEmissao.teSVCRS;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCRS;
                         break;
                     case 3:
-                        tpEmis = Propriedade.TipoEmissao.teSVCSP;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCSP;
                         break;
                     case 4:
-                        tpEmis = Propriedade.TipoEmissao.teSVCAN;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCAN;
                         break;
                 }
 
-                string XmlNfeDadosMsg = Empresa.Configuracoes[Emp].PastaXmlEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
+                string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
 
                 //Demonstrar o status do serviço
                 this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
@@ -311,7 +312,7 @@ namespace NFe.Interface
         {
             Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
 
-            if (Empresa.Configuracoes[Emp].Servico == TipoAplicativo.Nfse)
+            if (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Nfse)
             {
                 MessageBox.Show("NFS-e não dispõe do serviço de consulta status.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -319,38 +320,38 @@ namespace NFe.Interface
             //Posicionar o elemento da combo UF
             foreach (ComboElem elem in arrUF)
             {
-                if (elem.Codigo == Empresa.Configuracoes[Emp].UnidadeFederativaCodigo)
+                if (elem.Codigo == Empresas.Configuracoes[Emp].UnidadeFederativaCodigo)
                 {
                     comboUf.SelectedValue = elem.Valor;
                     break;
                 }
             }
             //Posicionar o elemento da combo Ambiente
-            cbAmbiente.SelectedValue = Empresa.Configuracoes[Emp].AmbienteCodigo;
+            cbAmbiente.SelectedValue = Empresas.Configuracoes[Emp].AmbienteCodigo;
 
             //Posicionar o elemento da combo tipo de emissão
-            switch (Empresa.Configuracoes[Emp].tpEmis)
+            switch ((NFe.Components.TipoEmissao)Empresas.Configuracoes[Emp].tpEmis)
             {
-                case Propriedade.TipoEmissao.teNormal:
+                case NFe.Components.TipoEmissao.teNormal:
                     this.cbEmissao.SelectedIndex = 0;
                     break;
-                case Propriedade.TipoEmissao.teSCAN:
+                case NFe.Components.TipoEmissao.teSCAN:
                     this.cbEmissao.SelectedIndex = 1;
                     break;
-                case Propriedade.TipoEmissao.teSVCRS:
+                case NFe.Components.TipoEmissao.teSVCRS:
                     this.cbEmissao.SelectedIndex = 2;
                     break;
-                case Propriedade.TipoEmissao.teSVCSP:
+                case NFe.Components.TipoEmissao.teSVCSP:
                     this.cbEmissao.SelectedIndex = 3;
                     break;
-                case Propriedade.TipoEmissao.teSVCAN:
+                case NFe.Components.TipoEmissao.teSVCAN:
                     this.cbEmissao.SelectedIndex = 4;
                     break;
             }
 
-            if (Empresa.Configuracoes[Emp].Servico != TipoAplicativo.Nfse)
+            if (Empresas.Configuracoes[Emp].Servico != TipoAplicativo.Nfse)
             {
-                cbServico.SelectedIndex = (int)Empresa.Configuracoes[Emp].Servico;
+                cbServico.SelectedIndex = (int)Empresas.Configuracoes[Emp].Servico;
             }
         }
 
@@ -367,11 +368,11 @@ namespace NFe.Interface
         /// <date>17/06/2008</date>
         public string VerStatusServico(string XmlNfeDadosMsg)
         {
-            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.xml";
 
-            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
                       "-sta.err";
 
@@ -431,11 +432,11 @@ namespace NFe.Interface
         /// <returns></returns>
         public object VerConsultaCadastro(string XmlNfeDadosMsg)
         {
-            string ArqXMLRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                        Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                        "-ret-cons-cad.xml";
 
-            string ArqERRRetorno = Empresa.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
                       "-ret-cons-cad.err";
 

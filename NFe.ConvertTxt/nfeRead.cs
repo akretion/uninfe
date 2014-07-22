@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
+using NFe.Components;
+
 namespace NFe.ConvertTxt
 {
     public class nfeRead
@@ -209,7 +211,7 @@ namespace NFe.ConvertTxt
             nfe.protNFe.dhRecbto = this.readDate(nodenfeProc, TpcnResources.dhRecbto);
             nfe.protNFe.digVal = this.readValue(nodenfeProc, "digVal");
             nfe.protNFe.nProt = this.readValue(nodenfeProc, "nProt");
-            nfe.protNFe.tpAmb = (TpcnTipoAmbiente)this.readInt32(nodenfeProc, TpcnResources.tpAmb);
+            nfe.protNFe.tpAmb = (TipoAmbiente)this.readInt32(nodenfeProc, TpcnResources.tpAmb);
             nfe.protNFe.verAplic = this.readValue(nodenfeProc, TpcnResources.verAplic);
             nfe.protNFe.xMotivo = this.readValue(nodenfeProc, TpcnResources.xMotivo);
         }
@@ -969,8 +971,8 @@ namespace NFe.ConvertTxt
             nfe.ide.natOp = this.readValue(nodeinfNFe, TpcnResources.natOp);
             nfe.ide.procEmi = (TpcnProcessoEmissao)this.readInt32(nodeinfNFe, TpcnResources.procEmi);
             nfe.ide.serie = this.readInt32(nodeinfNFe, TpcnResources.serie);
-            nfe.ide.tpAmb = (TpcnTipoAmbiente)this.readInt32(nodeinfNFe, TpcnResources.tpAmb);
-            nfe.ide.tpEmis = (TpcnTipoEmissao)this.readInt32(nodeinfNFe, TpcnResources.tpEmis);
+            nfe.ide.tpAmb = (TipoAmbiente)this.readInt32(nodeinfNFe, TpcnResources.tpAmb);
+            nfe.ide.tpEmis = (TipoEmissao)this.readInt32(nodeinfNFe, TpcnResources.tpEmis);
             nfe.ide.tpImp = (TpcnTipoImpressao)this.readInt32(nodeinfNFe, TpcnResources.tpImp);
             nfe.ide.tpNF = (TpcnTipoNFe)this.readInt32(nodeinfNFe, TpcnResources.tpNF);
             nfe.ide.verProc = this.readValue(nodeinfNFe, TpcnResources.verProc);

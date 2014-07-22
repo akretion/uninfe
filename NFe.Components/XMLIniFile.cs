@@ -316,7 +316,6 @@ namespace NFe.Components
 
 		    return Default;
 		}
-        /*
 		public string ReadValue(string Path, string ValueSection, string Default)
 		{
             try
@@ -330,13 +329,14 @@ namespace NFe.Components
 
 			return Default;
 		}
-	
-		public ArrayList ReadSections()
-		{
-			ArrayList List = new ArrayList();
-			this.ReadSections(List);
-			return List;
-		}
+
+        /*
+        public ArrayList ReadSections()
+        {
+            ArrayList List = new ArrayList();
+            this.ReadSections(List);
+            return List;
+        }
         */
 
         /*
@@ -672,10 +672,17 @@ namespace NFe.Components
 
             if (!this.ValueExists(section, "top") && !this.ValueExists(section, "WindowState"))
 			{
-                if (xform.StartPosition == FormStartPosition.Manual && xform.MdiParent==null)
+                if (xform.StartPosition == FormStartPosition.Manual && xform.MdiParent == null)
                 {
-                    xform.Left = (SystemInformation.VirtualScreen.Width - xform.Width) / 2;
-                    xform.Top = (SystemInformation.VirtualScreen.Height - xform.Height) / 2;
+                    //xform.Location = new Point((SystemInformation.VirtualScreen.Width - xform.Size.Width) / 2, (SystemInformation.VirtualScreen.Height - xform.Size.Height) / 2);
+
+                    Screen screen = Screen.FromControl(xform);
+                    Rectangle workingArea = screen.WorkingArea;
+                    xform.Location = new Point()
+                    {
+                        X = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - xform.Width) / 2),
+                        Y = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - xform.Height) / 2)
+                    }; 
                 }
 				return false;
 			}
@@ -705,6 +712,7 @@ namespace NFe.Components
 					{
 						case FormBorderStyle.Sizable:
 						case FormBorderStyle.SizableToolWindow:
+                        case FormBorderStyle.None:
 							width	= this.ReadValue(section, "width",	xform.Size.Width);
 							height	= this.ReadValue(section, "height", xform.Size.Height);
 							break;
@@ -727,6 +735,9 @@ namespace NFe.Components
         
         public void SaveForm(Form xform, string aSection)
 		{
+            if (xform == null) return;
+            if (xform.Name == "") return;
+
 			string section = xform.Name + aSection;
 
 			if (xform.WindowState != FormWindowState.Maximized)
@@ -737,6 +748,7 @@ namespace NFe.Components
 				{
 					case FormBorderStyle.Sizable:
 					case FormBorderStyle.SizableToolWindow:
+                    case FormBorderStyle.None:
 						this.WriteValue(section, "width",	xform.Size.Width);
 						this.WriteValue(section, "height",	xform.Size.Height);
 						break;

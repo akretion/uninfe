@@ -16,7 +16,7 @@ namespace NFe.Service
         {
             Servico = Servicos.DanfeRelatorio;
 
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             DateTime datai = DateTime.MinValue, dataf = DateTime.MaxValue;
             bool imprimir = false;
@@ -36,7 +36,7 @@ namespace NFe.Service
     <ExportarPasta>Enviar | Enviados | Erros</ExportarPasta>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_XML, Propriedade.ExtRetorno.RetDanfeReport_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
@@ -60,7 +60,7 @@ DataFinal|2014-1-1
 Imprimir|true | false
 ExportarPasta|Enviar | Enviados | Erros
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_TXT, Propriedade.ExtRetorno.RetDanfeReport_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
@@ -87,9 +87,9 @@ ExportarPasta|Enviar | Enviados | Erros
                     }
                     fm = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvDanfeReport_TXT) + Propriedade.ExtRetorno.RetDanfeReport_TXT;
                 }
-                if (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaExeUniDanfe))
+                if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
                 {
-                    throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresa.Configuracoes[emp].Nome);
+                    throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresas.Configuracoes[emp].Nome);
                 }
 
                 TFunctions.ExecutaUniDanfe_ReportEmail(emp, datai, dataf, imprimir, exportarPasta, fm);
@@ -124,7 +124,7 @@ ExportarPasta|Enviar | Enviados | Erros
         {
             Servico = Servicos.ImpressaoNFe;
 
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             string aFilename = "";
             string aAnexos = "";
             string aPrinter = "";
@@ -133,8 +133,6 @@ ExportarPasta|Enviar | Enviados | Erros
 
             try
             {
-                int intValue;
-
                 if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
 #if modelo_xml
@@ -147,7 +145,7 @@ ExportarPasta|Enviar | Enviados | Erros
     <Email></Email>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -171,7 +169,7 @@ Copias|1
 Impressora|
 Email|
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresa.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                     foreach (string cTexto in cLinhas)
@@ -199,17 +197,17 @@ Email|
                         }
                     }
                 }
-                if (Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
-                    Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresa.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
+                if (Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
+                    Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
                 {
-                    if (string.IsNullOrEmpty(Empresa.Configuracoes[emp].PastaExeUniDanfe))
+                    if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
                     {
-                        throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresa.Configuracoes[emp].Nome);
+                        throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresas.Configuracoes[emp].Nome);
                     }
-                    TFunctions.ExecutaUniDanfe(aFilename, DateTime.Today, Empresa.Configuracoes[emp], aAnexos, aPrinter, aCopias, aEmail);
+                    TFunctions.ExecutaUniDanfe(aFilename, DateTime.Today, Empresas.Configuracoes[emp], aAnexos, aPrinter, aCopias, aEmail);
                 }
                 else
-                    throw new Exception("Arquivo '" + aFilename + "' deve estar na pasta de 'Autorizados/Denegados' da empresa: " + Empresa.Configuracoes[emp].Nome);
+                    throw new Exception("Arquivo '" + aFilename + "' deve estar na pasta de 'Autorizados/Denegados' da empresa: " + Empresas.Configuracoes[emp].Nome);
             }
             catch (Exception ex)
             {

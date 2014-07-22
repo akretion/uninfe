@@ -28,7 +28,7 @@ namespace NFe.Service
         #region Execute
         public override void Execute()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
 
             novaNomenclatura = NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) || 
                 NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT) ||
@@ -78,29 +78,29 @@ namespace NFe.Service
                 switch (Servico)
                 {
                     case Servicos.EnviarEventoCancelamento:
-                        switch (tpEmis)
+                        switch ((NFe.Components.TipoEmissao)tpEmis)
                         {
-                            case Propriedade.TipoEmissao.teSVCAN:
-                            case Propriedade.TipoEmissao.teSVCRS:
-                            case Propriedade.TipoEmissao.teSVCSP:
-                            case Propriedade.TipoEmissao.teSCAN:
+                            case NFe.Components.TipoEmissao.teSVCAN:
+                            case NFe.Components.TipoEmissao.teSVCRS:
+                            case NFe.Components.TipoEmissao.teSVCSP:
+                            case NFe.Components.TipoEmissao.teSCAN:
                                 //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
                                 break;
 
-                            case Propriedade.TipoEmissao.teNormal:
+                            case NFe.Components.TipoEmissao.teNormal:
                                 //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
                                 break;
 
                             default:
                                 //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
-                                tpEmis = Propriedade.TipoEmissao.teNormal;
+                                tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                                 break;
                         }
                         break;
 
                     case Servicos.EnviarCCe:
                         //CCe só existe no ambiente Normal. Wandrey 22/04/2013
-                        tpEmis = Propriedade.TipoEmissao.teNormal;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
 
                     case Servicos.EnviarEPEC:
@@ -123,15 +123,7 @@ namespace NFe.Service
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento;
-                    if (Servico != Servicos.EnviarManifDest && ufParaWS == 52)
-                    {
-                        oRecepcaoEvento = wsProxy.CriarObjeto("NfeRecepcaoEvento");
-                    }
-                    else
-                    {
-
-                        oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
-                    }
+                    oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
 
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
                     string xmlExtEnvio = string.Empty;
@@ -465,10 +457,11 @@ namespace NFe.Service
                 ///epec.vST|2.00
 
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+
                 foreach (string cTexto in cLinhas)
                 {
-                    string[] dados = cTexto.Split('|');
-                    if (dados.GetLength(0) == 1) continue;
+                    string[] dados = cTexto.Split(new char[] {'|'} );
+                    if (dados.Length == 1) continue;
 
                     switch (dados[0].ToLower())
                     {
@@ -576,30 +569,12 @@ namespace NFe.Service
                     switch (tpe)
                     {
                         case ConvertTxt.tpEventos.tpEvEPEC:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "EPEC";
-                            evento.nSeqEvento = 1;
-                            break;
                         case ConvertTxt.tpEventos.tpEvCCe:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Carta de Correcao";
-                            break;
                         case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Cancelamento";
-                            evento.nSeqEvento = 1;
-                            break;
                         case ConvertTxt.tpEventos.tpEvCienciaOperacao:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Ciencia da Operacao";
-                            evento.nSeqEvento = 1;
-                            break;
                         case ConvertTxt.tpEventos.tpEvConfirmacaoOperacao:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Confirmacao da Operacao";
-                            evento.nSeqEvento = 1;
-                            break;
                         case ConvertTxt.tpEventos.tpEvDesconhecimentoOperacao:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Desconhecimento da Operacao";
-                            evento.nSeqEvento = 1;
-                            break;
                         case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
-                            //if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = "Operacao nao Realizada";
                             evento.nSeqEvento = 1;
                             break;
                         case ConvertTxt.tpEventos.tpEvEncerramentoMDFe:
@@ -614,7 +589,7 @@ namespace NFe.Service
                         evento.verEvento = "1.00";
 
                     if (evento.tpAmb == 0)
-                        evento.tpAmb = Empresa.Configuracoes[emp].AmbienteCodigo;
+                        evento.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
 
                     if (evento.cOrgao == 0)
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
@@ -745,7 +720,7 @@ namespace NFe.Service
                                                 case ConvertTxt.tpEventos.tpEvCCe:
                                                     try
                                                     {
-                                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresa.Configuracoes[emp]);
+                                                        NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                                     }
                                                     catch (Exception ex)
                                                     {
@@ -758,7 +733,7 @@ namespace NFe.Service
                                                         //Evento autorizado sem vinculação do evento à respectiva NF-e
                                                         try
                                                         {
-                                                            NFe.Service.TFunctions.ExecutaUniDanfe(NomeArquivoXML, DateTime.Today, Empresa.Configuracoes[emp]);
+                                                            NFe.Service.TFunctions.ExecutaUniDanfe(NomeArquivoXML, DateTime.Today, Empresas.Configuracoes[emp]);
                                                         }
                                                         catch (Exception ex)
                                                         {

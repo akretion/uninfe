@@ -24,16 +24,16 @@ namespace NFe.Service
         #region Construtores
         public FluxoNfe()
         {
-            int emp = Functions.FindEmpresaByThread();
+            int emp = Empresas.FindEmpresaByThread();
             empresa = emp;
 
-            NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
+            NomeXmlControleFluxo = Empresas.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
         }
 
         public FluxoNfe(int emp)
         {
             empresa = emp;
-            NomeXmlControleFluxo = Empresa.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
+            NomeXmlControleFluxo = Empresas.Configuracoes[emp].PastaEmpresa + "\\fluxonfe.xml";
         }
         #endregion
 
@@ -947,8 +947,8 @@ namespace NFe.Service
                             string versao = Functions.LerTag(documentoElemento, ElementoEditavel.versao.ToString(), "");
                             string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                             string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");
-                            string NomeArquivoEmProcessamento = Empresa.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
-                            string NomeArquivoAssinado = Empresa.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            string NomeArquivoEmProcessamento = Empresas.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
+                            string NomeArquivoAssinado = Empresas.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
                             bool excluiNota = false;
                             if (File.Exists(NomeArquivoEmProcessamento))
                             {

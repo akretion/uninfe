@@ -49,7 +49,7 @@ namespace NFSe.Components
         }
         #endregion
 
-        public string EmitirNF(string file, TpAmb tpAmb, bool cancelamento = false)
+        public string EmitirNF(string file, TipoAmbiente tpAmb, bool cancelamento = false)
         {
             string result = "";
 
