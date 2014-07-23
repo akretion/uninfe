@@ -1166,10 +1166,6 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, empresa.IndSinc.ToString());
-                    }
-
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-                    {
                         oXmlGravar.WriteElementString(NFeStrConstants.CompactarNfe, empresa.CompactarNfe.ToString());
                     }
 
@@ -2185,14 +2181,16 @@ namespace NFe.Settings
                         {
                             throw new Exception(NFeStrConstants.proxyError);
                         }
-                        Empresas.Configuracoes[emp].PastaXmlEnvio = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnvio, true);
-                        Empresas.Configuracoes[emp].PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEmLote, true);
-                        Empresas.Configuracoes[emp].PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlRetorno, true);
-                        Empresas.Configuracoes[emp].PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnviado, true);
-                        Empresas.Configuracoes[emp].PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlErro, true);
-                        Empresas.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaExeUniDanfe, true);
-                        Empresas.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaConfigUniDanfe, true);
-                        Empresas.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaDanfeMon, true);
+                        //Empresas.Configuracoes[emp].PastaXmlEnvio = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnvio, true);
+                        //Empresas.Configuracoes[emp].PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEmLote, true);
+                        //Empresas.Configuracoes[emp].PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlRetorno, true);
+                        //Empresas.Configuracoes[emp].PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnviado, true);
+                        //Empresas.Configuracoes[emp].PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlErro, true);
+                        //Empresas.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaExeUniDanfe, true);
+                        //Empresas.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaConfigUniDanfe, true);
+                        //Empresas.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaDanfeMon, true);
+
+                        Empresas.Configuracoes[emp].RemoveEndSlash();
                     }
                 }
                 catch (Exception ex)
@@ -2217,8 +2215,31 @@ namespace NFe.Settings
                     {
                         Empresas.CriarPasta();
 
-                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                        this.GravarConfig(false, false);
+                        ///
+                        /// salva a configuracao da empresa
+                        /// 
+                        bool versaoNova = true;
+                        if (File.Exists(Empresas.Configuracoes[emp].NomeArquivoConfig))
+                        {
+                            versaoNova = File.ReadAllText(Empresas.Configuracoes[emp].NomeArquivoConfig).Contains("<Empresa xmlns:xsi");
+                        }
+
+                        if (versaoNova)
+                        {
+                            //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                            Empresas.Configuracoes[emp].SalvarConfiguracao(false);
+
+                            ///
+                            /// salva o arquivo da lista de empresas
+                            this.GravarArqEmpresas();
+
+                            ///
+                            /// salva as configuracoes gerais
+                            this.GravarConfigGeral();
+                        }
+                        else
+                            //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                            this.GravarConfig(true, false);
 
                         cStat = "1";
                         xMotivo = "Configuracao do " + Propriedade.NomeAplicacao + " alterada com sucesso";
@@ -2428,7 +2449,7 @@ namespace NFe.Settings
                 ///
                 /// veio como 'NFe, NFCe, CTe, MDFe ou NFSe
                 /// converte para numero correspondente
-                servico = ((int)((TipoAplicativo)Enum.Parse(typeof(TipoAplicativo), servico, true))).ToString();
+                servico = ((int)NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(servico)).ToString();
 
             if (Empresas.FindConfEmpresa(cnpj.Trim(), (TipoAplicativo)Convert.ToInt16(servico)) == null)
             {
@@ -2438,7 +2459,7 @@ namespace NFe.Settings
                 empresa.Servico = (TipoAplicativo)Convert.ToInt16(servico);
                 Empresas.Configuracoes.Add(empresa);
 
-                GravarArqEmpresas();
+                //GravarArqEmpresas();  //tirado daqui pq ele somente grava quando a empresa for gravada com sucesso
             }
             return Empresas.FindConfEmpresaIndex(cnpj, (TipoAplicativo)Convert.ToInt16(servico));
         }

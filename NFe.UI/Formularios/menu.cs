@@ -105,6 +105,8 @@ namespace NFe.UI
 
         public void Show(uninfeOpcoes opcao)
         {
+            DisposeAllControls();
+
             switch (opcao)
             {
                 case uninfeOpcoes.opCadastro:
@@ -139,8 +141,16 @@ namespace NFe.UI
 
         private void menu_VisibleChanged(object sender, EventArgs e)
         {
-            UpdateControles();
+            if (!Propriedade.EncerrarApp)
+            {
+                UpdateControles();
 
+                DisposeAllControls();
+            }
+        }
+
+        private void DisposeAllControls()
+        {
             var Components = uninfeDummy.mainForm.Controls.Cast<object>()
                                                    .Where(obj => !ReferenceEquals(obj, this))
                                                    .OfType<MetroFramework.Controls.MetroUserControl>();

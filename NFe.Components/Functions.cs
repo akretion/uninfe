@@ -555,7 +555,6 @@ namespace NFe.Components
                 PropertyInfo aProperties = _this.GetType().GetProperty(propName, BindingFlags.Instance | BindingFlags.Public);
                 if (aProperties != null)
                 {
-                    //Console.WriteLine("AAAAAAAAAAAAAA>>>>>>>>>"+aProperties.DeclaringType.ToString()+" => "+propName);
                     SetProperty(_this, aProperties, value);
                     return true;
                 }
@@ -682,5 +681,20 @@ namespace NFe.Components
                 throw new Exception("Não foi possível localizar o arquivo de manual do " + NFe.Components.Propriedade.NomeAplicacao + ".");
             }
         }
+
+        public static void GravaTxtXml(object w, string fieldname, string content)
+        {
+            MethodInfo method = w.GetType().GetMethod("WriteElementString", new Type[] { typeof(System.String), typeof(System.String) });
+            if (method == null)
+            {
+                method = w.GetType().GetMethod("WriteLine", new Type[] { typeof(System.String) });
+                method.Invoke(w, new object[] { fieldname + "|" + content });
+            }
+            else
+            {
+                method.Invoke(w, new object[] { fieldname, content });
+            }
+        }
+
     }
 }

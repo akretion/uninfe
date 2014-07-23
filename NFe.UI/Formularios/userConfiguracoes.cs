@@ -342,7 +342,7 @@ namespace NFe.UI
             this.currentEmpresa = null;
 
             var list = (this.cbEmpresas.DataSource as System.Collections.ArrayList)[this.cbEmpresas.SelectedIndex] as NFe.Components.ComboElem;
-            var empresa = Empresas.FindConfEmpresa(this.cbEmpresas.SelectedValue.ToString(), (TipoAplicativo)Enum.Parse(typeof(TipoAplicativo), list.Servico));
+            var empresa = Empresas.FindConfEmpresa(this.cbEmpresas.SelectedValue.ToString(), NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
             if (empresa == null)
             {
                 CopiaDadosDaEmpresaParaControls(new Empresa(), true);
@@ -465,7 +465,7 @@ namespace NFe.UI
                         int i = this.cbEmpresas.SelectedIndex;
                         ///
                         /// salva a configuracao da empresa
-                        this.currentEmpresa.SalvarConfiguracao();
+                        this.currentEmpresa.SalvarConfiguracao(true);
 
                         var app = new ConfiguracaoApp();
                         ///
@@ -530,7 +530,7 @@ namespace NFe.UI
                         try
                         {
                             var list = (this.cbEmpresas.DataSource as System.Collections.ArrayList)[this.cbEmpresas.SelectedIndex] as NFe.Components.ComboElem;
-                            var _Empresa = Empresas.FindConfEmpresa(list.Valor, (TipoAplicativo)Enum.Parse(typeof(TipoAplicativo), list.Servico));
+                            var _Empresa = Empresas.FindConfEmpresa(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
                             if (_Empresa != null)
                             {
                                 Empresas.Configuracoes.Remove(_Empresa);

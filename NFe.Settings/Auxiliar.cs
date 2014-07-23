@@ -77,9 +77,7 @@ namespace NFe.Settings
             System.Diagnostics.Debug.WriteLine(msg);
 #endif
 
-            bool geraLog = ConfiguracaoApp.GravarLogOperacoesRealizadas;
-            if(geraLog)
-                Auxiliar.WriteLog(msg, false);
+            Auxiliar.WriteLog(msg, false);
         }
         #endregion
 

@@ -516,14 +516,29 @@ combo.ValueMember = "Key";
      
  */
 
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    public sealed class AttributeTipoAplicacao : Attribute
+    {
+        private TipoAplicativo aplicacao;
+        public TipoAplicativo Aplicacao
+        {
+            get
+            {
+                return this.aplicacao;
+            }
+        }
+
+        public AttributeTipoAplicacao(TipoAplicativo aplicacao)
+            : base()
+        {
+            this.aplicacao = aplicacao;
+        }
+    }
+
     [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Field, AllowMultiple = false)]
     public sealed class EnumDescriptionAttribute : Attribute
     {
         private string description;
-        /// <summary>
-        /// Gets the description stored in this attribute.
-        /// </summary>
-        /// <value>The description stored in the attribute.</value>
         public string Description
         {
             get
@@ -532,11 +547,6 @@ combo.ValueMember = "Key";
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// <see cref="EnumDescriptionAttribute"/> class.
-        /// </summary>
-        /// <param name="description">The description to store in this attribute.</param>
         public EnumDescriptionAttribute(string description)
             : base()
         {

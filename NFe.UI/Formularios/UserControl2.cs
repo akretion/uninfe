@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace NFe.UI.Formularios
 {
+    [ToolboxItem(false)]
     public partial class UserControl2 : MetroFramework.Controls.MetroUserControl
     {
         public UserControl2()

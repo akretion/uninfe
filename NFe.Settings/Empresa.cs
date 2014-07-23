@@ -82,6 +82,7 @@ namespace NFe.Settings
         /// <summary>
         /// Pasta onde deve ser gravado os XML´s de notas fiscais a serem enviadas em lote
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaXmlEmLote { get; set; }
         /// <summary>
         /// Pasta onde é gravado os XML´s da NFE somente para validação
@@ -90,30 +91,14 @@ namespace NFe.Settings
         /// <summary>
         /// Pasta para onde será gravado os XML´s de NFe para o DANFEMon fazer a impressão do DANFe
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaDanfeMon { get; set; }
         /// <summary>
         /// Pasta para onde será gravado os XML´s de download das NFe de destinatarios
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaDownloadNFeDest { get; set; }
 
-        public string FTPPastaAutorizados { get; set; }
-        public string FTPPastaRetornos { get; set; }
-        public string FTPNomeDoServidor { get; set; }
-        public string FTPNomeDoUsuario { get; set; }
-        public string FTPSenha { get; set; }
-        public Int32 FTPPorta { get; set; }
-        public bool FTPAtivo { get; set; }
-        public bool FTPGravaXMLPastaUnica { get; set; }
-        public bool FTPIsAlive
-        {
-            get
-            {
-                return this.FTPAtivo &&
-                    !string.IsNullOrEmpty(this.FTPNomeDoServidor) &&
-                    !string.IsNullOrEmpty(this.FTPNomeDoUsuario) &&
-                    !string.IsNullOrEmpty(this.FTPSenha);
-            }
-        }
         #endregion
 
         #region Propriedades diversas
@@ -140,35 +125,43 @@ namespace NFe.Settings
         /// <summary>
         /// Define a utilização do certficado instalado no windows ou através de arquivo
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public bool CertificadoInstalado { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar o local de armazenamento do certificado digital
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoArquivo { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar a senha do certificado
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoSenha { get; set; }
         /// <summary>
         /// Utilizado para certificados A3
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
         /// Certificado digital - Subject
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string Certificado { get; set; }
         /// <summary>
         /// Certificado digital - ThumbPrint
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoDigitalThumbPrint { get; set; }
         /// <summary>
         /// Certificado digital
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)] 
         public X509Certificate2 X509Certificado { get; set; }
         /// <summary>
         /// Gravar o retorno da NFe também em TXT
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarRetornoTXTNFe { get; set; }
         /// <summary>
         /// dias em que se deve manter os arquivos nas pastas retorno e temporario
@@ -225,14 +218,23 @@ namespace NFe.Settings
         }
 
         public bool CriaPastasAutomaticamente { get; set; }
+
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
+        
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosCancelamentoNaPastaEnviadosNFe { get; set; }
+        
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosDeTerceiros { get; set; }
+        
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool CompactarNfe { get; set; }
 
         /// <summary>
         /// Enviar NFe utilizando o processo síncrono (true or false)
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool IndSinc { get; set; }
         #endregion
 
@@ -240,29 +242,40 @@ namespace NFe.Settings
         /// <summary>
         /// Pasta do executável do UniDanfe
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaExeUniDanfe { get; set; }
         /// <summary>
         /// Pasta do arquivo de configurações do UniDanfe (Tem que ser sem o \dados)
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaConfigUniDanfe { get; set; }
         /// <summary>
         /// Nome da configuracao da empresa no UniDANFE
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string ConfiguracaoDanfe { get; set; }
+        /// <summary>
+        /// Nome da configuracao da empresa no UniDANFE de CCe
+        /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string ConfiguracaoCCe { get; set; }
         /// <summary>
         /// Copiar o XML da NFe (-nfe.xml) para a pasta do danfemon? 
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool XMLDanfeMonNFe { get; set; }
         /// <summary>
         /// Copiar o XML de Distribuição da NFe (-procNfe.xml) para a pasta do danfemon?
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool XMLDanfeMonProcNFe { get; set; }
         /// <summary>
         /// Copiar o XML de denegacao da NFe (-procNfe.xml) para a pasta do danfemon?
         /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool XMLDanfeMonDenegadaNFe { get; set; }//danasa 11-4-2012
         #endregion
+
 
         #region Propriedade para controle do nome da pasta a serem salvos os XML´s enviados
         private DiretorioSalvarComo mDiretorioSalvarComo = "";
@@ -281,7 +294,7 @@ namespace NFe.Settings
         /// <para>        podem ser criadas outras combinações, ficando a critério do usuário</para>
         /// </summary>
         /// <by>http://desenvolvedores.net/marcelo</by>
-        /// 
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)] 
         public string diretorioSalvarComo
         {
             get { return DiretorioSalvarComo.ToString(); }
@@ -298,6 +311,27 @@ namespace NFe.Settings
                 return mDiretorioSalvarComo;
             }
             set { mDiretorioSalvarComo = value; }
+        }
+        #endregion
+
+        #region Propriedades para controle de FTP (posicionado aqui só para quando for gravar as informacoes a tag FTP seja a ultima da lista)
+        public string FTPPastaAutorizados { get; set; }
+        public string FTPPastaRetornos { get; set; }
+        public string FTPNomeDoServidor { get; set; }
+        public string FTPNomeDoUsuario { get; set; }
+        public string FTPSenha { get; set; }
+        public Int32 FTPPorta { get; set; }
+        public bool FTPAtivo { get; set; }
+        public bool FTPGravaXMLPastaUnica { get; set; }
+        public bool FTPIsAlive
+        {
+            get
+            {
+                return this.FTPAtivo &&
+                    !string.IsNullOrEmpty(this.FTPNomeDoServidor) &&
+                    !string.IsNullOrEmpty(this.FTPNomeDoUsuario) &&
+                    !string.IsNullOrEmpty(this.FTPSenha);
+            }
         }
         #endregion
 
@@ -1002,9 +1036,9 @@ namespace NFe.Settings
         }
 
         #region SalvarConfiguracao()
-        public void SalvarConfiguracao()
+        public void SalvarConfiguracao(bool validaCertificado)
         {
-            this.ValidarConfig();
+            this.ValidarConfig(validaCertificado);
 
             if (!Directory.Exists(this.PastaEmpresa))
                 Directory.CreateDirectory(this.PastaEmpresa);
@@ -1127,7 +1161,7 @@ namespace NFe.Settings
         /// <summary>
         /// ValidarConfig
         /// </summary>
-        private void ValidarConfig()
+        private void ValidarConfig(bool validaCertificado)
         {
             StringBuilder erros = new StringBuilder();
             bool validou = true;
@@ -1217,7 +1251,7 @@ namespace NFe.Settings
                 #endregion
             }
 
-            if (validou)
+            if (validou && validaCertificado)
             {
                 #region Verificar se o certificado foi informado
                 if (this.CertificadoInstalado && string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))

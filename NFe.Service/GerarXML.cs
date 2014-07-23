@@ -2325,7 +2325,8 @@ namespace NFe.Service
                 XmlNode detEvento = doc.CreateElement("detEvento");
                 detEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), "1.00"));
                 detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.descEvento.ToString(), evento.descEvento));
-                switch ((NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(ConvertTxt.tpEventos), evento.tpEvento, true))
+
+                switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(evento.tpEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCCe:
                         detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xCorrecao.ToString(), evento.xCorrecao));
@@ -2505,7 +2506,7 @@ namespace NFe.Service
                     string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName("cStat")[0].InnerText;
                     if (cStat == "135" || cStat == "136" || cStat == "155")
                     {
-                        NFe.ConvertTxt.tpEventos tpEvento = (NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(NFe.ConvertTxt.tpEventos), ((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
+                        NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
                         if (tpEvento != ConvertTxt.tpEventos.tpEvEPEC)
                         {
                             string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chNFe")[0].InnerText;

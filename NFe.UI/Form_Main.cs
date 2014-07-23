@@ -110,8 +110,8 @@ namespace NFe.UI
                 this.ShowInTaskbar = false;
                 this.notifyIcon1.ShowBalloonTip(6000);
 
-                this.uTheme = (MetroFramework.MetroThemeStyle)Enum.Parse(typeof(MetroFramework.MetroThemeStyle), uninfeDummy.xmlParams.ReadValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString()), false);
-                this.uStyle = (MetroFramework.MetroColorStyle)Enum.Parse(typeof(MetroFramework.MetroColorStyle), uninfeDummy.xmlParams.ReadValue(this.Name, "Style", this.metroStyleManager1.Style.ToString()), false);
+                this.uTheme = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroThemeStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString()));
+                this.uStyle = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroColorStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Style", this.metroStyleManager1.Style.ToString()));
 
                 _menu = new menu();
                 this.Controls.Add(_menu);
@@ -154,6 +154,9 @@ namespace NFe.UI
                 //Executar os serviços do UniNFe em novas threads
                 //Tem que ser carregado depois que o formulário da MainForm estiver totalmente carregado para evitar Erros. Wandrey 19/10/2010
                 this.ExecutaServicos();
+
+                //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.xml");
+                //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.txt");
 
                 tm.Tick += delegate
                 {

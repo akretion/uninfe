@@ -133,7 +133,7 @@ namespace NFe.UI
                 if (this.cbEmpresas.SelectedValue != null)
                 {
                     var list = (this.cbEmpresas.DataSource as System.Collections.ArrayList)[this.cbEmpresas.SelectedIndex] as NFe.Components.ComboElem;
-                    this.Emp = Empresas.FindConfEmpresaIndex(this.cbEmpresas.SelectedValue.ToString(), (TipoAplicativo)Enum.Parse(typeof(TipoAplicativo), list.Servico));
+                    this.Emp = Empresas.FindConfEmpresaIndex(this.cbEmpresas.SelectedValue.ToString(), NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
 
                     uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresas.SelectedIndex);
                     uninfeDummy.xmlParams.Save();

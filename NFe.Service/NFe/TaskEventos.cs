@@ -43,7 +43,7 @@ namespace NFe.Service
 
                 string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui cajo haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
-                switch ((NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(NFe.ConvertTxt.tpEventos), currentEvento))
+                switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                         Servico = Servicos.EnviarEventoCancelamento;
@@ -532,10 +532,10 @@ namespace NFe.Service
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.verAplic = dados[1].Trim();
                             break;
                         case "epec.tpautor":
-                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpAutor = (NFe.ConvertTxt.TpcnTipoAutor)Enum.Parse(typeof(NFe.ConvertTxt.TpcnTipoAutor), dados[1].Trim());
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpAutor = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.TpcnTipoAutor>(dados[1].Trim());
                             break;
                         case "epec.tpnf":
-                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpNF = (NFe.ConvertTxt.TpcnTipoNFe)Enum.Parse(typeof(NFe.ConvertTxt.TpcnTipoNFe), dados[1].Trim());
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.tpNF = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.TpcnTipoNFe>(dados[1].Trim());
                             break;
                         case "epec.dest.idestrangeiro":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.idEstrangeiro = dados[1].Trim();
@@ -565,7 +565,7 @@ namespace NFe.Service
                 }
                 foreach (Evento evento in this.dadosEnvEvento.eventos)
                 {
-                    NFe.ConvertTxt.tpEventos tpe = (NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(ConvertTxt.tpEventos), evento.tpEvento);
+                    NFe.ConvertTxt.tpEventos tpe = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(evento.tpEvento);
                     switch (tpe)
                     {
                         case ConvertTxt.tpEventos.tpEvEPEC:
@@ -697,7 +697,7 @@ namespace NFe.Service
                                 {
                                     string chNFe = eleRetorno.GetElementsByTagName("chNFe")[0].InnerText;
                                     Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
-                                    NFe.ConvertTxt.tpEventos tpEvento = (NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(NFe.ConvertTxt.tpEventos), eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText);
+                                    NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText);
                                     string Id = "ID" + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado

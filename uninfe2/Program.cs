@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Xml;
 
 using NFe.Components;
 using NFe.Components.Info;
@@ -115,7 +116,46 @@ namespace uninfe2
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();
             Console.WriteLine("start.....");
+
+            try
+            {
+                XmlDocument wsdlDoc = new XmlDocument();
+                wsdlDoc.Load(@"E:\Usr\NFe\uninfe\b_uninfe\uninfe\bin\Release\WSDL\Homologacao\GO\HGORecepcaoEvento.wsdl");
+                wsdlDoc.Load(@"E:\Usr\NFe\uninfe\b_uninfe\uninfe\bin\Release\WSDL\Homologacao\SP\HSPNFeRecepcaoEvento_200.wsdl");
+                //Console.WriteLine(wsdlDoc.InnerXml);
+                foreach (var n in wsdlDoc.ChildNodes)
+                {
+                    if (n is XmlElement)
+                    {
+                        foreach (var m in ((System.Xml.XmlElement)n).ChildNodes)
+                        {
+                            Console.WriteLine(m.ToString());
+                            if (m is XmlElement)
+                                if (((System.Xml.XmlElement)m).Attributes.Count > 0)
+                                    Console.WriteLine(((System.Xml.XmlElement)m).Name + "..." + ((System.Xml.XmlElement)m).Attributes[0].Value);
+                        }
+                    }
+                }
+                XmlNamespaceManager nsMgr = new XmlNamespaceManager(wsdlDoc.NameTable);
+                nsMgr.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
+
+                XmlNode node = wsdlDoc.SelectSingleNode("//xmlns:s/wsdl:definitions/wsdl:service", nsMgr);
+                if (node != null)
+                {
+                    string description = node.InnerText;
+
+                    Console.WriteLine("found: " + description);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine("-----------------------------------------------");
+
+
 #endif
+
 
             bool executando = Aplicacao.AppExecutando(!silencioso);
 
@@ -141,5 +181,6 @@ namespace uninfe2
             NFe.Components.NativeMethods.FreeConsole();
 #endif
         }
+
     }
 }

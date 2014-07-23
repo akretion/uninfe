@@ -647,10 +647,11 @@ namespace NFe.Components
             {
                 for (int j = 0; j < urlList[i].ChildNodes.Count; ++j)
                 {
+                    string appPath = "";
                     System.Reflection.PropertyInfo ClassProperty = wsItem.GetType().GetProperty(urlList[i].ChildNodes[j].Name);
                     if (ClassProperty != null)
                     {
-                        string appPath = AppPath + urlList[i].ChildNodes[j].InnerText;
+                        appPath = AppPath + urlList[i].ChildNodes[j].InnerText;
 
                         if (!string.IsNullOrEmpty(urlList[i].ChildNodes[j].InnerText))
                         {
@@ -669,14 +670,12 @@ namespace NFe.Components
                         else
                             appPath = "";
 
-                        if (appPath == "")
-                            Console.WriteLine(urlList[i].ChildNodes[j].InnerText + "==>" + appPath);
-
                         ClassProperty.SetValue(wsItem, appPath, null);
                     }
-                    else
+
+                    if (appPath == "" && !string.IsNullOrEmpty(urlList[i].ChildNodes[j].InnerText))
                     {
-                        Console.WriteLine("wsItem <" + urlList[i].ChildNodes[j].Name + "> nao encontrada na classe URLws");
+                        Console.WriteLine("wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
                     }
                 }
             }

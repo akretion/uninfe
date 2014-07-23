@@ -54,7 +54,7 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao);
 
-                if (Empresas.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                     Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -70,14 +70,14 @@ namespace NFe.Service
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresas.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
                 }
 
                 //Invocar o método que envia o XML para o SEFAZ
-                if (Empresas.Configuracoes[emp].IndSinc)
+                if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
                 {
                     oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), oCabecMsg, this);
 
@@ -118,7 +118,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresas.Configuracoes[emp].CompactarNfe)
+                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)
