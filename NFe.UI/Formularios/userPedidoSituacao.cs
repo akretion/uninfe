@@ -156,7 +156,6 @@ namespace NFe.UI
 
                     case TipoAplicativo.Nfse:
                         throw new Exception("NFS-e não dispõe do serviço de consulta status.");
-                        break;
 
                     case TipoAplicativo.MDFe:
                         if (tpEmis != TipoEmissao.teNormal)

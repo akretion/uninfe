@@ -1243,7 +1243,7 @@ namespace NFe.Settings
                         if (Empresas.Configuracoes[i] != EMP)
                             _AddEmpresaNaListaDeComparacao(fcd, Empresas.Configuracoes[i]);
                 }
-                catch (Exception ex)
+                catch 
                 {
                     erros.AppendLine(". Não é permitido a utilização de pasta idêntica na mesma ou entre empresas..");
                     validou = false;
