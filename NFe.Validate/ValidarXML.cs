@@ -1,14 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
+using System.Xml.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
+
 using NFe.Components;
 using NFe.Settings;
-using System.Threading;
 using NFe.Certificado;
-using System.Text;
 
 namespace NFe.Validate
 {
@@ -384,16 +387,12 @@ namespace NFe.Validate
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
 
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-            UTF8Encoding c = new UTF8Encoding(false);
-
-            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-            oSettings.Encoding = c;
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-
+            var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
+                                    new XElement("Validacao",
+                                        new XElement("cStat", cStat),
+                                        new XElement("xMotivo", xMotivo)));
+            xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
+#if false
             XmlWriter oXmlGravar = null;
 
             try
@@ -415,6 +414,7 @@ namespace NFe.Validate
                 if(oXmlGravar != null)
                     oXmlGravar.Close();
             }
+#endif
         }
         #endregion
     }

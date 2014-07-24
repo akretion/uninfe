@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml;
+using System.Xml.Linq;
 
 using NFe.Components;
 using NFe.Components.Info;
@@ -107,7 +108,7 @@ namespace uninfe2
                     }
                 }
 
-            Propriedade.TipoAplicativo = (Propriedade.NomeAplicacao.ToLower().Equals("uninfe") ? TipoAplicativo.Nfe : TipoAplicativo.Nfse);
+            Propriedade.TipoAplicativo = (Propriedade.NomeAplicacao.ToLower().StartsWith("uninfe") ? TipoAplicativo.Nfe : TipoAplicativo.Nfse);
 
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();
@@ -115,6 +116,11 @@ namespace uninfe2
 
             try
             {
+                /*
+                 * estou tentando ler os wsdl para pegar os nomes dos servicos para eliminiar que voce tenha que definir
+                 * 
+                 * 
+                 */
                 XmlDocument wsdlDoc = new XmlDocument();
                 wsdlDoc.Load(@"E:\Usr\NFe\uninfe\b_uninfe\uninfe\bin\Release\WSDL\Homologacao\GO\HGORecepcaoEvento.wsdl");
                 wsdlDoc.Load(@"E:\Usr\NFe\uninfe\b_uninfe\uninfe\bin\Release\WSDL\Homologacao\SP\HSPNFeRecepcaoEvento_200.wsdl");
@@ -153,7 +159,7 @@ namespace uninfe2
 #endif
 
 
-            bool executando = Aplicacao.AppExecutando(!silencioso);
+            bool executando = Aplicacao.AppExecutando(!silencioso, true);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
