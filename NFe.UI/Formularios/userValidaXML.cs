@@ -30,7 +30,7 @@ namespace NFe.UI
             base.UpdateControles();
 
             this.cbEmpresas.SelectedIndexChanged -= cbEmpresas_SelectedIndexChanged;
-            this.cbEmpresas.DisplayMember = "Nome";
+            this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             this.cbEmpresas.ValueMember = "Valor";
             this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa();
             this.cbEmpresas.SelectedIndexChanged += cbEmpresas_SelectedIndexChanged;

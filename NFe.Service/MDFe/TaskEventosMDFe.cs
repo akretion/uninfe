@@ -175,7 +175,7 @@ namespace NFe.Service
                         string chMDFe = eleRetorno.GetElementsByTagName("chMDFe")[0].InnerText;
                         Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
                         string tpEvento = eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText;
-                        string Id = "ID" + tpEvento + chMDFe + nSeqEvento.ToString("00");
+                        string Id = NFe.Components.NFeStrConstants.ID + tpEvento + chMDFe + nSeqEvento.ToString("00");
                         ///
                         ///procura no Xml de envio pelo Id retornado
                         ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar

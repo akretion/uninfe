@@ -67,37 +67,40 @@ namespace NFe.UI.Formularios
             t.Start();
         }
 
-        private void selectxmlenvio(object sender)
+        private void selectxmlenvio(object sender, MouseEventArgs e)
         {
             MetroFramework.Controls.MetroTextBox control = (MetroFramework.Controls.MetroTextBox)sender;
-
-            if (!string.IsNullOrEmpty(control.Text))
-                this.folderBrowserDialog1.SelectedPath = control.Text;
-
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            int x = control.ClientRectangle.Width - control.Icon.Size.Width;
+            if (e.Location.X >= x)  // a imagem foi pressionada?
             {
-                control.Text = this.folderBrowserDialog1.SelectedPath;
+                if (!string.IsNullOrEmpty(control.Text))
+                    this.folderBrowserDialog1.SelectedPath = control.Text;
+
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    control.Text = this.folderBrowserDialog1.SelectedPath;
+                }
+                control.Focus();
+                control.SelectAll();
             }
-            control.Focus();
-            control.SelectAll();
         }
 
         private void tbPastaExeUniDanfe_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                selectxmlenvio(tbPastaExeUniDanfe);
+                selectxmlenvio(tbPastaExeUniDanfe, e);
         }
 
         private void tbPastaConfigUniDanfe_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                selectxmlenvio(tbPastaConfigUniDanfe);
+                selectxmlenvio(tbPastaConfigUniDanfe, e);
         }
 
         private void tbPastaXmlParaDanfeMon_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                selectxmlenvio(tbPastaXmlParaDanfeMon);
+                selectxmlenvio(tbPastaXmlParaDanfeMon, e);
         }
 
         private void tbPastaExeUniDanfe_TextChanged(object sender, EventArgs e)
@@ -107,11 +110,6 @@ namespace NFe.UI.Formularios
 
         private void tbPastaExeUniDanfe_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F4)
-            {
-                e.Handled = true;
-                selectxmlenvio(sender);
-            }
         }
     }
 }

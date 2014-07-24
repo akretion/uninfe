@@ -150,7 +150,6 @@ namespace MetroFramework
                 _control.Padding = new Padding(0, 0, 0, 0);
                 _control.ControlBox = false;
                 _control.ShowInTaskbar = false;
-                
 
                 //if (freeowner)
                     //_control.Dock = DockStyle.Fill;
@@ -168,9 +167,11 @@ namespace MetroFramework
 
                 _control.ArrangeApperance();
 
+                int lt = message.TrimEnd('\r').Split(new char[] { '\r' }).Length * 23;
+
                 if (owner != null && _owner.WindowState != FormWindowState.Minimized && _owner.Visible)
                 {
-                    _control.Size = new Size(_owner.Size.Width, _control.Height);
+                    _control.Size = new Size(_owner.Size.Width, Math.Min(_owner.Size.Height, Math.Max(lt, _control.Height)));
                     _control.Location = new Point(_owner.Location.X, _owner.Location.Y + (_owner.Height - _control.Height) / 2);
                     int _overlaySizes = Convert.ToInt32(Math.Floor(_control.Size.Height * 0.28));
                     //_control.OverlayPanelTop.Size = new Size(_control.Size.Width, _overlaySizes - 30);
@@ -180,7 +181,13 @@ namespace MetroFramework
                 else
                 {
                     _control.ShowInTaskbar = true;
-                    _control.StartPosition = FormStartPosition.CenterScreen;
+                    _control.StartPosition = FormStartPosition.Manual;
+                    int x = Convert.ToInt32(Math.Ceiling((decimal)(Screen.PrimaryScreen.WorkingArea.Size.Width / 2) - (_control.Size.Width / 2)));
+                    int y = Convert.ToInt32(Math.Ceiling((decimal)(Screen.PrimaryScreen.WorkingArea.Size.Height / 2) - (_control.Size.Height / 2)));
+
+                    _control.Location = new Point(x, y);
+                    _control.Size = new Size(_control.Size.Width, 
+                            Math.Min(Screen.PrimaryScreen.WorkingArea.Size.Height, Math.Max(_control.Size.Height, lt)));
                     _control.Show();
                 }
                 _control.BringToFront();

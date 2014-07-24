@@ -159,7 +159,7 @@ namespace NFe.UI
 
             this.cbEmpresas.SelectedIndexChanged -= cbEmpresas_SelectedIndexChanged;
             this.cbEmpresas.DataSource = null;
-            this.cbEmpresas.DisplayMember = "Nome";
+            this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             this.cbEmpresas.ValueMember = "Valor";
             this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa();
 

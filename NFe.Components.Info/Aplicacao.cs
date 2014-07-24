@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using NFe.Settings;
 using NFe.Certificado;
-using NFe.Components;
 using System.Threading;
 using System.IO;
 using System.Xml;
@@ -68,7 +67,7 @@ namespace NFe.Components.Info
                     isXml = true;
 
                     XmlWriterSettings oSettings = new XmlWriterSettings();
-                    UTF8Encoding c = new UTF8Encoding(false);
+                    UTF8Encoding c = new UTF8Encoding(true);
 
                     //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
                     oSettings.Encoding = c;
@@ -368,7 +367,7 @@ namespace NFe.Components.Info
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 21/07/2011
         /// </remarks>
-        public static Boolean AppExecutando(bool silencioso)
+        public static Boolean AppExecutando(bool silencioso, bool novoSistema=false)
         {
             Empresas.CarregaConfiguracao();
 
@@ -377,7 +376,7 @@ namespace NFe.Components.Info
              * Marcelo
              * 03/06/2013
              */
-            string podeExecutar = Empresas.CanRun();
+            string podeExecutar = Empresas.CanRun(!novoSistema);
             if (!String.IsNullOrEmpty(podeExecutar))
                 return true;
 
@@ -394,7 +393,7 @@ namespace NFe.Components.Info
                 executando = true;
             }
 
-            if (!silencioso)
+            if (!silencioso && !novoSistema)
             {
                 if (executando)
                     MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);

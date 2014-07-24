@@ -840,6 +840,17 @@ namespace NFe.Components
     {
         public static string proxyError = "Especifique o nome do servidor/usuário/senha e porta para conectar do servidor proxy";
         public static string versaoError = "Defina a versão";
+        public static string Nome = "Nome";
+        public static string ID = "ID";
+        public static string Padrao = "Padrao";
+        public static string UF = "UF";
+        public static string Estado = "Estado";
+        public static string Registro = "Registro";
+        public static string Servico = "Servico";
+        public static string CNPJ = "CNPJ";
+        public static string LocalHomologacao = "LocalHomologacao";
+        public static string LocalProducao = "LocalProducao";
+
 
         public static string nfe_configuracoes = "nfe_configuracoes";
         public static string PastaXmlAssinado = "PastaXmlAssinado";

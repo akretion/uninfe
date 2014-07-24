@@ -107,15 +107,11 @@ namespace uninfe2
                     }
                 }
 
-#if _uninfe_
-            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
-#else
-            Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
-#endif
+            Propriedade.TipoAplicativo = (Propriedade.NomeAplicacao.ToLower().Equals("uninfe") ? TipoAplicativo.Nfe : TipoAplicativo.Nfse);
 
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();
-            Console.WriteLine("start.....");
+            Console.WriteLine("start....." + Propriedade.NomeAplicacao);
 
             try
             {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Xml.Linq;
 using System.Threading;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
@@ -135,10 +136,52 @@ namespace NFe.Settings
 
             if (File.Exists(Propriedade.NomeArqEmpresas))
             {
-                FileStream arqXml = null;
+                //FileStream arqXml = null;
 
                 try
                 {
+                    XElement axml = XElement.Load(Propriedade.NomeArqEmpresas);
+                    var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
+                    foreach (var item in b1)
+                    {
+                        Empresa empresa = new Empresa();
+
+                        empresa.CNPJ = item.Attribute(NFe.Components.NFeStrConstants.CNPJ).Value;
+                        empresa.Nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value.Trim();
+                        empresa.Servico = Propriedade.TipoAplicativo;
+                        if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
+                            empresa.Servico = (TipoAplicativo)Convert.ToInt16(item.Attribute(NFe.Components.NFeStrConstants.Servico).Value.Trim());
+
+                        try
+                        {
+                            empresa.BuscaConfiguracao();
+                        }
+                        catch (Exception ex)
+                        {
+                            try
+                            {
+                                ///
+                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
+                                /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
+                                /// as thread's
+                                string cArqErro;
+                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
+                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+                                else
+                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+
+                                //Grava arquivo de ERRO para o ERP
+                                File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
+                            }
+                            catch { }
+                        }
+                        ///
+                        /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
+                        empresa.ChecaCaminhoDiretorio();
+
+                        Configuracoes.Add(empresa);
+                    }
+#if false
                     arqXml = new FileStream(Propriedade.NomeArqEmpresas, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStream
 
                     var xml = new XmlDocument();
@@ -150,7 +193,7 @@ namespace NFe.Settings
                     {
                         var empresaElemento = (XmlElement)empresaNode;
 
-                        var registroList = xml.GetElementsByTagName("Registro");
+                        var registroList = xml.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
 
                         for (int i = 0; i < registroList.Count; i++)
                         {
@@ -159,11 +202,11 @@ namespace NFe.Settings
                             var registroNode = registroList[i];
                             var registroElemento = (XmlElement)registroNode;
 
-                            empresa.CNPJ = registroElemento.GetAttribute("CNPJ").Trim();
-                            empresa.Nome = registroElemento.GetElementsByTagName("Nome")[0].InnerText.Trim();
+                            empresa.CNPJ = registroElemento.GetAttribute(NFe.Components.NFeStrConstants.CNPJ).Trim();
+                            empresa.Nome = registroElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText.Trim();
                             empresa.Servico = Propriedade.TipoAplicativo;// TipoAplicativo.Nfe;
-                            if (registroElemento.GetAttribute("Servico") != "")
-                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute("Servico").Trim());
+                            if (registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico) != "")
+                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico).Trim());
 
                             try
                             {
@@ -197,12 +240,19 @@ namespace NFe.Settings
                     }
                     arqXml.Close();
                     arqXml = null;
+#endif
                 }
+                catch
+                {
+                    throw;
+                }
+#if false
                 finally
                 {
                     if (arqXml != null)
                         arqXml.Close();
                 }
+#endif
             }
             if (!ExisteErroDiretorio)
                 Empresas.CriarPasta();

@@ -138,6 +138,7 @@
             this.metroButton1.TabIndex = 3;
             this.metroButton1.Text = "button 1";
             this.metroButton1.UseSelectable = true;
+            this.metroButton1.UseVisualStyleBackColor = false;
             // 
             // metroButton3
             // 

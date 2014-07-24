@@ -10,7 +10,6 @@ using System.Xml.Serialization;
 
 using NFe.Components;
 
-
 namespace NFe.Settings
 {
     /// <summary>
@@ -395,7 +394,7 @@ namespace NFe.Settings
                     {
                         var empresaElemento = (XmlElement)empresaNode;
 
-                        var registroList = xml.GetElementsByTagName("Registro");
+                        var registroList = xml.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
 
                         for (int i = 0; i < registroList.Count; i++)
                         {
@@ -404,12 +403,12 @@ namespace NFe.Settings
                             var registroNode = registroList[i];
                             var registroElemento = (XmlElement)registroNode;
 
-                            empresa.CNPJ = registroElemento.GetAttribute("CNPJ").Trim();
-                            empresa.Nome = registroElemento.GetElementsByTagName("Nome")[0].InnerText.Trim();
+                            empresa.CNPJ = registroElemento.GetAttribute(NFe.Components.NFeStrConstants.CNPJ).Trim();
+                            empresa.Nome = registroElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText.Trim();
 
                             empresa.Servico = Propriedade.TipoAplicativo;// TipoAplicativo.Nfe;
-                            if (registroElemento.GetAttribute("Servico") != "")
-                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute("Servico").Trim());
+                            if (registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico) != "")
+                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico).Trim());
 
                             #region Definir a pasta das configurações da empresa
                             empresa.PastaEmpresa = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
@@ -515,6 +514,8 @@ namespace NFe.Settings
                     t.CNPJ = this.CNPJ;
                     t.Servico = this.Servico;
                     t.CopyObjectTo(this);
+
+                    this.CriarPastasDaEmpresa();
 
                     this.CertificadoPIN = Criptografia.descriptografaSenha(this.CertificadoPIN);
 
@@ -1243,7 +1244,7 @@ namespace NFe.Settings
                         if (Empresas.Configuracoes[i] != EMP)
                             _AddEmpresaNaListaDeComparacao(fcd, Empresas.Configuracoes[i]);
                 }
-                catch 
+                catch (Exception ex)
                 {
                     erros.AppendLine(". Não é permitido a utilização de pasta idêntica na mesma ou entre empresas..");
                     validou = false;

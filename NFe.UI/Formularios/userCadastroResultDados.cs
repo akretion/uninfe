@@ -22,7 +22,7 @@ namespace NFe.UI
             uninfeDummy.ClearControls(this, true, false);
             if (!string.IsNullOrEmpty(infCad.CNPJ))
             {
-                this.label1.Text = "CNPJ";
+                this.label1.Text = NFe.Components.NFeStrConstants.CNPJ;
                 this.txtCNPJ_CPF.Text = uninfeDummy.FmtCgcCpf(infCad.CNPJ, true);
             }
             else

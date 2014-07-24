@@ -34,7 +34,7 @@ namespace NFe.UI.Formularios.NFSe
             {
                 arrUF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2),
                     Convert.ToInt32(Propriedade.CodigosEstados[v, 0]),
-                    Propriedade.CodigosEstados[v, 1]));
+                    Propriedade.CodigosEstados[v, 1].Substring(5)));
             }
             this.comboUf.SelectedValueChanged -= comboUf_SelectedValueChanged;
             this.comboUf.DataSource = arrUF;

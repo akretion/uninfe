@@ -35,11 +35,11 @@ namespace NFe.UI
             this.cbEmpresa.SelectedIndexChanged -= cbEmpresa_SelectedIndexChanged;
             try
             {
-                this.cbEmpresa.DisplayMember = "Nome";
+                this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
                 this.cbEmpresa.ValueMember = "Valor";
                 this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa();
 
-                this.comboUf.DisplayMember = "nome";
+                this.comboUf.DisplayMember = NFe.Components.NFeStrConstants.Nome.ToLower();
                 this.comboUf.ValueMember = "valor";
                 comboUf.DataSource = Functions.CarregaUF();
 

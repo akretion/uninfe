@@ -578,7 +578,7 @@ combo.ValueMember = "Key";
 
 
 
-        public static T StringToEnum<T>(string name) { return (T)Enum.Parse(typeof(T), name); }
+        public static T StringToEnum<T>(string name) { return (T)Enum.Parse(typeof(T), name, true); }
 
         /// <summary>
         /// Gets the <see cref="DescriptionAttribute"/> of an <see cref="Enum"/> type value.

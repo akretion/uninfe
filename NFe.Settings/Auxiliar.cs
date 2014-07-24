@@ -7,6 +7,7 @@ using System.Threading;
 using System.IO;
 using NFe.Components;
 using System.Xml;
+using System.Xml.Linq;
 using System.Windows.Forms;
 
 namespace NFe.Settings
@@ -312,29 +313,55 @@ namespace NFe.Settings
 
             if(File.Exists(arqXML))
             {
-                XmlTextReader oLerXml = null;
+                //XmlTextReader oLerXml = null;
                 try
                 {
                     //Carregar os dados do arquivo XML de configurações da Aplicação
-                    oLerXml = new XmlTextReader(arqXML);
                     int codEmp = 0;
+                    XElement axml = XElement.Load(arqXML);
+                    var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
+                    foreach (var item in b1)
+                    {
+                        string cnpj = item.Attribute(NFe.Components.NFeStrConstants.CNPJ).Value;
+                        string nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value;
+                        string servico = "";
+                        if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
+                        {
+                            servico = item.Attribute(NFe.Components.NFeStrConstants.Servico).Value;
+                            if (!string.IsNullOrEmpty(servico))
+                                servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
+                        }
+                        if (string.IsNullOrEmpty(servico))
+                            servico = Propriedade.TipoAplicativo.ToString();
+
+                        empresa.Add(new ComboElem
+                        {
+                            Valor = cnpj,
+                            Codigo = codEmp,
+                            Nome = nome + "  <" + servico + ">",
+                            Servico = servico
+                        });
+                        codEmp++;
+                    }
+#if false
+                    oLerXml = new XmlTextReader(arqXML);
 
                     while(oLerXml.Read())
                     {
                         if(oLerXml.NodeType == XmlNodeType.Element)
                         {
-                            if(oLerXml.Name.Equals("Registro"))
+                            if(oLerXml.Name.Equals(NFe.Components.NFeStrConstants.Registro))
                             {
-                                string cnpj = oLerXml.GetAttribute("CNPJ");
-                                string servico = oLerXml.GetAttribute("Servico");
+                                string cnpj = oLerXml.GetAttribute(NFe.Components.NFeStrConstants.CNPJ);
+                                string servico = oLerXml.GetAttribute(NFe.Components.NFeStrConstants.Servico);
                                 if (!string.IsNullOrEmpty(servico))
                                     servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
                                 else
-                                    servico = TipoAplicativo.Nfe.ToString();
+                                    servico = Propriedade.TipoAplicativo.ToString();// TipoAplicativo.Nfe.ToString();
 
                                 while(oLerXml.Read())
                                 {
-                                    if(oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals("Nome"))
+                                    if(oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals(NFe.Components.NFeStrConstants.Nome))
                                     {
                                         oLerXml.Read();
                                         string nome = oLerXml.Value;
@@ -351,11 +378,12 @@ namespace NFe.Settings
                             }
                         }
                     }
+#endif
                 }
                 finally
                 {
-                    if(oLerXml != null)
-                        oLerXml.Close();
+                    //if(oLerXml != null)
+                        //oLerXml.Close();
                 }
             }
 

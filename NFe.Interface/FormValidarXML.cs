@@ -145,7 +145,7 @@ namespace NFe.Interface
             if (empresa.Count > 0)
             {
                 cbEmpresa.DataSource = empresa;
-                cbEmpresa.DisplayMember = "Nome";
+                cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
                 cbEmpresa.ValueMember = "Valor";
             }
         }

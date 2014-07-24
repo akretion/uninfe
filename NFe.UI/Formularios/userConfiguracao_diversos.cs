@@ -73,7 +73,7 @@ namespace NFe.UI.Formularios
                 }
 
                 comboBox_UF.DataSource = arrUF;
-                comboBox_UF.DisplayMember = "Nome";
+                comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
                 comboBox_UF.ValueMember = "Codigo";
                 #endregion
 
@@ -451,6 +451,18 @@ namespace NFe.UI.Formularios
 #if false
             this.edtCNPJ.Text = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
 #endif
+        }
+
+        private void comboBox_UF_DropDownClosed(object sender, EventArgs e)
+        {
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                comboBox_UF.DropDownWidth = comboBox_UF.Width;
+        }
+
+        private void comboBox_UF_DropDown(object sender, EventArgs e)
+        {
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                comboBox_UF.DropDownWidth = 300;
         }
 
 #if false

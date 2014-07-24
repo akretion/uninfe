@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using NFe.Components;
 
 namespace NFe.Components
@@ -29,8 +30,49 @@ namespace NFe.Components
             }
         }
 
+        private static string getURLs(string local, PadroesNFSe padrao, int idMunicipio)
+        {
+            /*
+             * tenta ler as URL's do 'WebService.xml'
+             * não encontrando, assume o ID='padrao' e UF='XX' e padrao='padrao'
+             */
+#if para_quando_o_xml_estiver_atualizado
+            if (System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            {
+                XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService);
+                var s = (from p in axml.Descendents(NFe.Components.NFeStrConstants.Estado)
+                         where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
+                                (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == idMunicipio.ToString()
+                         select p);
+                foreach (var item in s)
+                {
+                    if (item.Element(local) != null)
+                        return local.Equals(NFe.Components.NFeStrConstants.LocalHomologacao) ?
+                            item.FirstNode.ToString() : item.LastNode.ToString();
+                }
+
+                var xs = (from p in axml.Descendents(NFe.Components.NFeStrConstants.Estado)
+                          where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
+                                 (string)p.Attribute(NFe.Components.NFeStrConstants.UF) == "XX" &&
+                                 (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == padrao.ToString()
+                          select p);
+                foreach (var item in xs)
+                {
+                    if (item.Element(local) != null)
+                        return local.Equals(NFe.Components.NFeStrConstants.LocalHomologacao) ?
+                            item.FirstNode.ToString() : item.LastNode.ToString();
+                }
+            }
+#endif
+            return "";
+        }
+
         public static string WebServicesHomologacao(PadroesNFSe padrao, int idMunicipio = 0)
         {
+            string result = getURLs(NFe.Components.NFeStrConstants.LocalHomologacao, padrao, idMunicipio);
+            if (result != "")
+                return result;
+
             switch (padrao)
             {
                 #region THEMA
@@ -231,15 +273,15 @@ namespace NFe.Components
                 case PadroesNFSe.GIF:
                     if (idMunicipio == 4314050) // Parobé - RS
                     {
-                        return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</CancelarNfse>" +
-                                @"<ConsultarURLNfse>wsdl\producao\HParobéRSGIFServicos.wsdl</ConsultarURLNfse>" +
-                                @"</LocalProducao>";
+                        return "<LocalHomologacao>" +
+                                @"<RecepcionarLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\homologacao\HParobeRSGIFServicos.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\homologacao\HParobeRSGIFServicos.wsdl</ConsultarURLNfse>" +
+                                @"</LocalHomologacao>";
                     }
                     else
                     {
@@ -358,11 +400,11 @@ namespace NFe.Components
                     {
                         case 3535804: // Paranapanema - SP
                             return "<LocalProducao>" +
-                                    @"<RecepcionarLoteRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>" +
-                                    @"<ConsultarNfsePorRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>" +
-                                    @"<ConsultarNfse>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>" +
-                                    @"<ConsultarLoteRps>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>" +
-                                    @"<CancelarNfse>wsdl\producao\HParanapanamaSP-PRONINServices.wsdl</CancelarNfse>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HParanapanamaSP-PRONINServices.wsdl</CancelarNfse>" +
                                     @"</LocalProducao>";
 
                         default: // Mirassol - SP
@@ -379,7 +421,7 @@ namespace NFe.Components
                 #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R: //Governador Valadares - MG
                     return "<LocalHomologacao>" +
-                            @"<RecepcionarLoteRps>wsdl\homologacao\HGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
+                            @"<RecepcionarLoteRps>wsdl\homologacao\HGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
                             @"<ConsultarNfsePorRps>wsdl\homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>" +
                             @"<CancelarNfse>wsdl\homologacao\HGovernadorValadaresCancelarNfse.wsdl</CancelarNfse>" +
                             "</LocalHomologacao>";
@@ -422,12 +464,12 @@ namespace NFe.Components
 
                         default: // Campinas - SP
                             return "<LocalHomologacao>" +
-                                    @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</RecepcionarLoteRps>" +
-                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
-                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarNfsePorRps>" +
-                                    @"<ConsultarNfse>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarNfse>" +
-                                    @"<ConsultarLoteRps>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</ConsultarLoteRps>" +
-                                    @"<CancelarNfse>wsdl\homologacao\HCampinasSPDFSLoteRps.wsdl</CancelarNfse>" +
+                                    @"<RecepcionarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</RecepcionarLoteRps>" +
+                                    @"<ConsultarSituacaoLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarSituacaoLoteRps>" +
+                                    @"<ConsultarNfsePorRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfsePorRps>" +
+                                    @"<ConsultarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarNfse>" +
+                                    @"<ConsultarLoteRps>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</ConsultarLoteRps>" +
+                                    @"<CancelarNfse>wsdl\homologacao\HCampinasSP-DFSLoteRps.wsdl</CancelarNfse>" +
                                     @"</LocalHomologacao>";
                     }
                 #endregion
@@ -460,6 +502,10 @@ namespace NFe.Components
 
         public static string WebServicesProducao(NFe.Components.PadroesNFSe padrao, int idMunicipio = 0)
         {
+            string result = getURLs(NFe.Components.NFeStrConstants.LocalProducao, padrao, idMunicipio);
+            if (result != "")
+                return result;
+
             switch (padrao)
             {
                 #region THEMA
@@ -707,13 +753,13 @@ namespace NFe.Components
                     if (idMunicipio == 4314050) // Parobé - RS
                     {
                         return "<LocalProducao>" +
-                                @"<RecepcionarLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</RecepcionarLoteRps>" +
-                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
-                                @"<ConsultarNfsePorRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
-                                @"<ConsultarNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarNfse>" +
-                                @"<ConsultarLoteRps>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarLoteRps>" +
-                                @"<CancelarNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</CancelarNfse>" +
-                                @"<ConsultarURLNfse>wsdl\producao\PParobéRSGIFServicos.wsdl</ConsultarURLNfse>" +
+                                @"<RecepcionarLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</RecepcionarLoteRps>" +
+                                @"<ConsultarSituacaoLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarSituacaoLoteRps>" +
+                                @"<ConsultarNfsePorRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarNfsePorRps>" +
+                                @"<ConsultarNfse>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarNfse>" +
+                                @"<ConsultarLoteRps>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarLoteRps>" +
+                                @"<CancelarNfse>wsdl\producao\PParobeRSGIFServicos.wsdl</CancelarNfse>" +
+                                @"<ConsultarURLNfse>wsdl\producao\PParobeRSGIFServicos.wsdl</ConsultarURLNfse>" +
                                 @"</LocalProducao>";
                     }
                     else
@@ -853,9 +899,9 @@ namespace NFe.Components
                 #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R: //Governador Valadares - MG
                     return "<LocalProducao>" +
-                            @"<RecepcionarLoteRps>wsdl\producao\PGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
-                            @"<ConsultarNfsePorRps>wsdl\producao\PGovernadorValadaesConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>" +
-                            @"<CancelarNfse>wsdl\producao\PGovernadorValadaesCancelarNfse.wsdl</CancelarNfse>" +
+                            @"<RecepcionarLoteRps>wsdl\producao\PGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>" +
+                            @"<ConsultarNfsePorRps>wsdl\producao\PGovernadorValadaresConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>" +
+                            @"<CancelarNfse>wsdl\producao\PGovernadorValadaresCancelarNfse.wsdl</CancelarNfse>" +
                             "</LocalProducao>";
                 #endregion
 
@@ -933,47 +979,58 @@ namespace NFe.Components
 
         public static NFe.Components.PadroesNFSe GetPadraoFromString(string padrao)
         {
+            try
+            {
+                return (PadroesNFSe)EnumHelper.StringToEnum<PadroesNFSe>(padrao);
+            }
+            catch
+            {
+                return PadroesNFSe.NaoIdentificado;
+            }
+            /*
             Array arr = Enum.GetValues(typeof(PadroesNFSe));
             foreach (PadroesNFSe type in arr)
                 if (padrao.ToLower() == type.ToString().ToLower())
                     return type;
 
-            return PadroesNFSe.NaoIdentificado;
+            return PadroesNFSe.NaoIdentificado;*/
         }
 
         public static void SavePadrao(string uf, string cidade, int codigomunicipio, string padrao, bool forcaAtualizacao)
         {
             try
             {
-                Municipio mun = null;
-                for (int i = 0; i < Propriedade.Municipios.Count; ++i)
-                    if (Propriedade.Municipios[i].CodigoMunicipio == codigomunicipio)
-                    {
-                        mun = Propriedade.Municipios[i];
-                        break;
-                    }
-
-                if (padrao == PadroesNFSe.NaoIdentificado.ToString() && mun != null)
-                    Propriedade.Municipios.Remove(mun);
-
-                if (padrao != PadroesNFSe.NaoIdentificado.ToString())
+                if (uf != null)
                 {
-                    if (mun != null)
+                    Municipio mun = null;
+                    for (int i = 0; i < Propriedade.Municipios.Count; ++i)
+                        if (Propriedade.Municipios[i].CodigoMunicipio == codigomunicipio)
+                        {
+                            mun = Propriedade.Municipios[i];
+                            break;
+                        }
+
+                    if (padrao == PadroesNFSe.NaoIdentificado.ToString() && mun != null)
+                        Propriedade.Municipios.Remove(mun);
+
+                    if (padrao != PadroesNFSe.NaoIdentificado.ToString())
                     {
-                        ///
-                        /// é o mesmo padrão definido?
-                        /// o parametro "forcaAtualizacao" é "true" somente quando vier da aba "Municipios definidos"
-                        /// desde que o datagrid atualiza automaticamente o membro "padrao" da classe "Municipio" quando ele é alterado.
-                        if (mun.PadraoStr == padrao && !forcaAtualizacao)
-                            return;
+                        if (mun != null)
+                        {
+                            ///
+                            /// é o mesmo padrão definido?
+                            /// o parametro "forcaAtualizacao" é "true" somente quando vier da aba "Municipios definidos"
+                            /// desde que o datagrid atualiza automaticamente o membro "padrao" da classe "Municipio" quando ele é alterado.
+                            if (mun.PadraoStr == padrao && !forcaAtualizacao)
+                                return;
 
-                        mun.Padrao = GetPadraoFromString(padrao);
-                        mun.PadraoStr = padrao;
+                            mun.Padrao = GetPadraoFromString(padrao);
+                            mun.PadraoStr = padrao;
+                        }
+                        else
+                            Propriedade.Municipios.Add(new Municipio(codigomunicipio, uf, cidade.Trim(), GetPadraoFromString(padrao)));
                     }
-                    else
-                        Propriedade.Municipios.Add(new Municipio(codigomunicipio, uf, cidade.Trim(), GetPadraoFromString(padrao)));
                 }
-
                 if (System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios))
                 {
                     ///
@@ -988,9 +1045,22 @@ namespace NFe.Components
                     <Registro ID="4125506" Nome="São José dos Pinais - PR" Padrao="GINFES" />
                 </nfes_municipios>
                  */
+
+                var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
+                XElement elementos = new XElement("nfes_municipios");
+                foreach (Municipio item in Propriedade.Municipios)
+                {
+                    elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
+                                    new XAttribute(NFe.Components.NFeStrConstants.ID, item.CodigoMunicipio.ToString()),
+                                    new XAttribute(NFe.Components.NFeStrConstants.Nome, item.Nome.Trim()),
+                                    new XAttribute(NFe.Components.NFeStrConstants.Padrao, item.PadraoStr)));
+                }
+                xml.Add(elementos);
+                xml.Save(Propriedade.NomeArqXMLMunicipios);
+#if false
                 XmlWriter oXmlGravar = null;
                 XmlWriterSettings oSettings = new XmlWriterSettings();
-                UTF8Encoding c = new UTF8Encoding(false);
+                UTF8Encoding c = new UTF8Encoding(true);
                 oSettings.Encoding = c;
                 oSettings.Indent = true;
                 oSettings.IndentChars = "";
@@ -1004,17 +1074,17 @@ namespace NFe.Components
                 {
                     foreach (Municipio item in Propriedade.Municipios)
                     {
-                        oXmlGravar.WriteStartElement("Registro");
+                        oXmlGravar.WriteStartElement(NFe.Components.NFeStrConstants.Registro);
                         {
-                            oXmlGravar.WriteStartAttribute("ID");
+                            oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.ID);
                             oXmlGravar.WriteString(item.CodigoMunicipio.ToString());
                             oXmlGravar.WriteEndAttribute();
 
-                            oXmlGravar.WriteStartAttribute("Nome");
+                            oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.Nome);
                             oXmlGravar.WriteString(item.Nome);
                             oXmlGravar.WriteEndAttribute();
 
-                            oXmlGravar.WriteStartAttribute("Padrao");
+                            oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.Padrao);
                             oXmlGravar.WriteString(item.PadraoStr);
                             oXmlGravar.WriteEndAttribute();
                         }
@@ -1025,6 +1095,7 @@ namespace NFe.Components
                 oXmlGravar.WriteEndDocument();
                 oXmlGravar.Flush();
                 oXmlGravar.Close();
+#endif
             }
             catch (Exception ex)
             {
@@ -1036,15 +1107,63 @@ namespace NFe.Components
         }
 
         /// <summary>
-        /// Responsavel pela gravacao do arquivo de muncipios, caso nao exista
+        /// Responsavel pela gravacao do arquivo de municipios, caso nao exista
         /// </summary>
         public static void Start()
         {
-            if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) && System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) && 
+                System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
             {
+                var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
+                XElement elementos = new XElement("nfes_municipios");
+
+                XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService);
+                var s = (from p in axml.Descendants(NFeStrConstants.Estado)
+                         where  (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                         select p);
+                foreach (var item in s)
+                {
+                    string padrao = PadroesNFSe.NaoIdentificado.ToString();
+                    if (item.Attribute(NFe.Components.NFeStrConstants.Padrao) != null)
+                        padrao = item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value;
+
+                    /*
+                    XmlNodeList urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalHomologacao);
+                    if (urlList.Count > 0)
+                        ///
+                        /// verifica qual o padrao com base nas url's
+                        foreach (string p0 in PadroesNFSeList)
+                            if (p0.ToLower() != PadroesNFSe.NaoIdentificado.ToString().ToLower())
+                                if (urlList[0].ChildNodes[0].InnerText.ToLower().IndexOf(p0.ToLower()) >= 0)
+                                {
+                                    padrao = p0;
+                                    break;
+                                }
+                    */
+                    if (padrao != PadroesNFSe.NaoIdentificado.ToString())
+                    {
+                        string ID = item.Attribute(NFe.Components.NFeStrConstants.ID).Value;
+                        string Nome = item.Attribute(NFe.Components.NFeStrConstants.Nome).Value;
+                        string UF = item.Attribute(NFe.Components.NFeStrConstants.UF).Value;
+
+                        elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
+                                        new XAttribute(NFe.Components.NFeStrConstants.ID, ID),
+                                        new XAttribute(NFe.Components.NFeStrConstants.Nome, Nome.Trim()),
+                                        new XAttribute(NFe.Components.NFeStrConstants.Padrao, padrao)));
+                    }
+                }
+                if (!elementos.IsEmpty)
+                {
+                    xml.Add(elementos);
+                    xml.Save(Propriedade.NomeArqXMLMunicipios);
+                }
+
+
+
+#if false
                 XmlWriter oXmlGravar = null;
                 XmlWriterSettings oSettings = new XmlWriterSettings();
-                UTF8Encoding c = new UTF8Encoding(false);
+                UTF8Encoding c = new UTF8Encoding(true);
                 oSettings.Encoding = c;
                 oSettings.Indent = true;
                 oSettings.IndentChars = "";
@@ -1059,7 +1178,7 @@ namespace NFe.Components
                 try
                 {
                     doc.Load(Propriedade.NomeArqXMLWebService);
-                    XmlNodeList estadoList = doc.GetElementsByTagName("Estado");
+                    XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Estado);
                     foreach (XmlNode estadoNode in estadoList)
                     {
                         XmlElement estadoElemento = (XmlElement)estadoNode;
@@ -1072,7 +1191,7 @@ namespace NFe.Components
                                 string UF = estadoElemento.Attributes[2].Value;
 
                                 string padrao = PadroesNFSe.NaoIdentificado.ToString();
-                                XmlNodeList urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
+                                XmlNodeList urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalHomologacao);
                                 if (urlList.Count > 0)
                                     ///
                                     /// verifica qual o padrao com base nas url's
@@ -1086,17 +1205,17 @@ namespace NFe.Components
 
                                 if (padrao != PadroesNFSe.NaoIdentificado.ToString())
                                 {
-                                    oXmlGravar.WriteStartElement("Registro");
+                                    oXmlGravar.WriteStartElement(NFe.Components.NFeStrConstants.Registro);
                                     {
-                                        oXmlGravar.WriteStartAttribute("ID");
+                                        oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.ID);
                                         oXmlGravar.WriteString(ID.ToString());
                                         oXmlGravar.WriteEndAttribute();
 
-                                        oXmlGravar.WriteStartAttribute("Nome");
+                                        oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.Nome);
                                         oXmlGravar.WriteString(Nome);
                                         oXmlGravar.WriteEndAttribute();
 
-                                        oXmlGravar.WriteStartAttribute("Padrao");
+                                        oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.Padrao);
                                         oXmlGravar.WriteString(padrao);
                                         oXmlGravar.WriteEndAttribute();
                                     }
@@ -1118,6 +1237,7 @@ namespace NFe.Components
                     if (oXmlGravar != null)
                         oXmlGravar.Close();
                 }
+#endif
             }
         }
     }

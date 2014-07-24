@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Xml.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Threading;
@@ -426,50 +427,92 @@ namespace NFe.Components
             ArrayList UF = new ArrayList();
 
             /// danasa 1-2012
-            if(Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                foreach(Municipio mun in Propriedade.Municipios)
-                {
-                    UF.Add(new ComboElem(mun.UF, mun.CodigoMunicipio, mun.Nome));
-                }
-            /// danasa 1-2012
-
-            if(File.Exists(Propriedade.NomeArqXMLWebService))
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
             {
-                XmlTextReader oLerXml = null;
-                try
-                {
-                    //Carregar os dados do arquivo XML de configurações da Aplicação
-                    oLerXml = new XmlTextReader(Propriedade.NomeArqXMLWebService);
+                Propriedade.Municipios.ForEach((mun) => { UF.Add(new ComboElem(mun.UF, mun.CodigoMunicipio, mun.Nome)); });
 
-                    while(oLerXml.Read())
+                if (File.Exists(Propriedade.NomeArqXMLWebService))
+                {
+                    //XmlTextReader oLerXml = null;
+                    try
                     {
-                        if(oLerXml.NodeType == XmlNodeType.Element)
+                        //Carregar os dados do arquivo XML de configurações da Aplicação
+                        XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService);
+                        var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                                 where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                                 select p);
+                        foreach (var item in s)
                         {
-                            if(oLerXml.Name == "Estado" && (Convert.ToInt32(oLerXml.GetAttribute("ID")) < 900 || Propriedade.TipoAplicativo == TipoAplicativo.Nfse) && Convert.ToInt32(oLerXml.GetAttribute("ID")) != 999)
+                            if (Convert.ToInt32(OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value))==0)
+                                continue;
+
+                            /// danasa 1-2012
+                            bool jahExiste = false;
+                            foreach (ComboElem ee in UF)
+                                if (ee.Codigo == Convert.ToInt32(item.Attribute(NFeStrConstants.ID).Value))
+                                {
+                                    jahExiste = true;
+                                    break;
+                                }
+                            /// danasa 1-2012
+                            /// 
+                            if (!jahExiste)
                             {
-                                /// danasa 1-2012
-                                bool jahExiste = false;
-                                foreach(ComboElem ee in UF)
-                                    if(ee.Codigo == Convert.ToInt32(oLerXml.GetAttribute("ID")))
-                                    {
-                                        jahExiste = true;
-                                        break;
-                                    }
-                                /// danasa 1-2012
-                                /// 
-                                if(!jahExiste)
-                                    UF.Add(new ComboElem(oLerXml.GetAttribute("UF"), Convert.ToInt32(oLerXml.GetAttribute("ID")), oLerXml.GetAttribute("Nome")));
+                                UF.Add(new ComboElem(item.Attribute(NFeStrConstants.UF).Value,
+                                    Convert.ToInt32(item.Attribute(NFe.Components.NFeStrConstants.ID).Value),
+                                    item.Element(NFe.Components.NFeStrConstants.Nome).Value));
                             }
                         }
+
+
+#if false
+
+                        oLerXml = new XmlTextReader(Propriedade.NomeArqXMLWebService);
+
+                        while (oLerXml.Read())
+                        {
+                            if (oLerXml.NodeType == XmlNodeType.Element)
+                            {
+                                if (oLerXml.Name == NFeStrConstants.Estado &&
+                                    (Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)) < 900 ||
+                                    Propriedade.TipoAplicativo == TipoAplicativo.Nfse) &&
+                                    Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)) != 999)
+                                {
+                                    /// danasa 1-2012
+                                    bool jahExiste = false;
+                                    foreach (ComboElem ee in UF)
+                                        if (ee.Codigo == Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)))
+                                        {
+                                            jahExiste = true;
+                                            break;
+                                        }
+                                    /// danasa 1-2012
+                                    /// 
+                                    if (!jahExiste)
+                                        UF.Add(new ComboElem(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.UF),
+                                            Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)),
+                                            oLerXml.GetAttribute(NFe.Components.NFeStrConstants.Nome)));
+                                }
+                            }
+                        }
+#endif
+                    }
+                    finally
+                    {
+                        //if (oLerXml != null)
+                            //oLerXml.Close();
                     }
                 }
-                finally
+            }
+            else
+            {
+                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
                 {
-                    if(oLerXml != null)
-                        oLerXml.Close();
+                    UF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2), 
+                        Convert.ToInt32(Propriedade.CodigosEstados[v, 0]), 
+                        Propriedade.CodigosEstados[v, 1].Substring(5)));
                 }
             }
-
             UF.Sort(new OrdenacaoPorNome());
 
             return UF;

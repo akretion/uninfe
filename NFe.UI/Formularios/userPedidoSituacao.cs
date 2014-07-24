@@ -48,7 +48,7 @@ namespace NFe.UI
 
                 this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa();//  NFe.Settings.Empresas.Configuracoes;
                 this.cbEmpresa.ValueMember = "Valor";
-                this.cbEmpresa.DisplayMember = "Nome";
+                this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
 
                 this.comboUf.DisplayMember = "nome";
                 this.comboUf.ValueMember = "valor";
@@ -156,6 +156,7 @@ namespace NFe.UI
 
                     case TipoAplicativo.Nfse:
                         throw new Exception("NFS-e não dispõe do serviço de consulta status.");
+                        break;
 
                     case TipoAplicativo.MDFe:
                         if (tpEmis != TipoEmissao.teNormal)

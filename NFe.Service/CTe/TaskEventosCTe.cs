@@ -137,18 +137,18 @@ namespace NFe.Service
             /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<retEventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"2.00\">" +
-                "<infEvento Id=\"ID342130000096132\">" +
-                "<tpAmb>2</tpAmb>" +
-                "<verAplic>RS20130820221405</verAplic>" +
-                "<cOrgao>42</cOrgao>" +
-                "<cStat>135</cStat>" +
-                "<xMotivo>Evento registrado e vinculado a CT-e</xMotivo>" +
-                "<chCTe>42131175892067000187570040000001091211932160</chCTe>" +
-                "<tpEvento>110111</tpEvento>" +
-                "<xEvento>Cancelamento</xEvento>" +
-                "<nSeqEvento>1</nSeqEvento>" +
-                "<dhRegEvento>2013-11-13T15:27:12</dhRegEvento>" +
-                "<nProt>342130000096132</nProt>" +
+                "  <infEvento Id=\"ID342130000096132\">" +
+                "    <tpAmb>2</tpAmb>" +
+                "    <verAplic>RS20130820221405</verAplic>" +
+                "    <cOrgao>42</cOrgao>" +
+                "    <cStat>135</cStat>" +
+                "    <xMotivo>Evento registrado e vinculado a CT-e</xMotivo>" +
+                "    <chCTe>42131175892067000187570040000001091211932160</chCTe>" +
+                "    <tpEvento>110111</tpEvento>" +
+                "    <xEvento>Cancelamento</xEvento>" +
+                "    <nSeqEvento>1</nSeqEvento>" +
+                "    <dhRegEvento>2013-11-13T15:27:12</dhRegEvento>" +
+                "    <nProt>342130000096132</nProt>" +
                 "</infEvento>" +
                 "</retEventoCTe>";
             */
@@ -175,7 +175,7 @@ namespace NFe.Service
                         string chCTe = eleRetorno.GetElementsByTagName("chCTe")[0].InnerText;
                         Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
                         string tpEvento = eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText;
-                        string Id = "ID" + tpEvento + chCTe + nSeqEvento.ToString("00");
+                        string Id = NFe.Components.NFeStrConstants.ID + tpEvento + chCTe + nSeqEvento.ToString("00");
                         ///
                         ///procura no Xml de envio pelo Id retornado
                         ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar

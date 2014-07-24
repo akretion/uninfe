@@ -53,7 +53,7 @@ namespace NFe.Service
             // Definir o tipo de serviço da NFe
             Type typeServicoNFe = oServicoNFe.GetType();
 
-            Servicos servico = (Servicos)oWSProxy.GetProp(oServicoNFe, "Servico");
+            Servicos servico = (Servicos)oWSProxy.GetProp(oServicoNFe, NFe.Components.NFeStrConstants.Servico);
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));

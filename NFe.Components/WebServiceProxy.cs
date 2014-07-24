@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web.Services.Description;
 using System.Xml;
 using System.IO;
+using System.Linq;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Globalization;
@@ -491,15 +492,15 @@ namespace NFe.Components
                     if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                     {
                         doc.Load(Propriedade.NomeArqXMLMunicipios);
-                        XmlNodeList estadoList = doc.GetElementsByTagName("Registro");
+                        XmlNodeList estadoList = doc.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
                         foreach (XmlNode registroNode in estadoList)
                         {
                             XmlElement registroElemento = (XmlElement)registroNode;
                             if (registroElemento.Attributes.Count > 0)
                             {
-                                int IDmunicipio = Convert.ToInt32(registroElemento.Attributes[0].Value);
-                                string Nome = registroElemento.Attributes[1].Value;
-                                string Padrao = registroElemento.Attributes[2].Value;
+                                int IDmunicipio = Convert.ToInt32(Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
+                                string Nome = registroElemento.Attributes[NFeStrConstants.Nome].Value;
+                                string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
                                 string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
 
                                 ///
@@ -518,19 +519,11 @@ namespace NFe.Components
 
                                 webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
-                                PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
-                                PreencheURLw(wsItem.LocalProducao, "LocalProducao", WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
+                                PreencheURLw(wsItem.LocalHomologacao, NFe.Components.NFeStrConstants.LocalHomologacao,  WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), "");
+                                PreencheURLw(wsItem.LocalProducao,    NFe.Components.NFeStrConstants.LocalProducao,     WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), "");
 
                                 webServicesList.Add(wsItem);
                             }
-                        }
-                        if (webServicesList.Count > 0)
-                        {
-                            ///
-                            /// nao vou sair daqui pq pode ser que no "Webservice.xml" tenha algum municipio
-                            /// que o usuário nao tenha incluido
-                            /// 
-                            //return;
                         }
                     }
                 }
@@ -538,79 +531,108 @@ namespace NFe.Components
 
                 if (File.Exists(Propriedade.NomeArqXMLWebService))
                 {
+                    bool salvaXmlLocal = false;
+
                     doc.Load(Propriedade.NomeArqXMLWebService);
-                    XmlNodeList estadoList = doc.GetElementsByTagName("Estado");
+                    XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Estado);
                     foreach (XmlNode estadoNode in estadoList)
                     {
                         XmlElement estadoElemento = (XmlElement)estadoNode;
                         if (estadoElemento.Attributes.Count > 0)
                         {
-                            if (estadoElemento.Attributes[2].Value != "XX")
+                            if (estadoElemento.Attributes[NFeStrConstants.UF].Value != "XX")
                             {
-                                int ID = Convert.ToInt32(estadoElemento.Attributes[0].Value);
-                                string Nome = estadoElemento.Attributes[1].Value;
-                                string UF = estadoElemento.Attributes[2].Value;
+                                int ID = Convert.ToInt32(Functions.OnlyNumbers(estadoElemento.Attributes[NFeStrConstants.ID].Value));
+                                if (ID == 0)
+                                    continue;
+                                string Nome = estadoElemento.Attributes[NFeStrConstants.Nome].Value;
+                                string UF = estadoElemento.Attributes[NFeStrConstants.UF].Value;
 
                                 /// danasa 1-2012
                                 ///
                                 /// verifica se o ID já está na lista
                                 /// isto previne que no xml de configuracao tenha duplicidade e evita derrubar o programa
                                 ///
-                                bool jahExiste = false;
-                                foreach (webServices temp in webServicesList)
-                                    if (temp.ID == ID)
-                                    {
-                                        jahExiste = true;
-                                        break;
-                                    }
-                                if (jahExiste) continue;
+                                var ci = (from i in webServicesList where i.ID == ID select i).FirstOrDefault();
+                                if (ci == null)
+                                {
+                                    /*
+                                    bool jahExiste = false;
+                                    foreach (webServices temp in webServicesList)
+                                        if (temp.ID == ID)
+                                        {
+                                            jahExiste = true;
+                                            break;
+                                        }
+                                    if (jahExiste) continue;
+                                    */
+                                    webServices wsItem = new webServices(ID, Nome, UF);
+                                    XmlNodeList urlList;
 
-                                webServices wsItem = new webServices(ID, Nome, UF);
-                                XmlNodeList urlList;
+                                    #region WSDL´s locais de Homologação
+                                    urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalHomologacao);
+                                    if (urlList.Count > 0)
+                                        PreencheURLw(wsItem.LocalHomologacao, NFe.Components.NFeStrConstants.LocalHomologacao, urlList.Item(0).OuterXml, UF);
+                                    #endregion
 
-                                #region URL´s de Homologação
-                                //urlList = estadoElemento.GetElementsByTagName("URLHomologacao");
-                                //if (urlList.Count > 0)
-                                //    PreencheURLw(wsItem.URLHomologacao, "URLHomologacao", urlList.Item(0).OuterXml, UF);
-                                #endregion
+                                    #region WSDL´s locais de Produção
+                                    urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalProducao);
+                                    if (urlList.Count > 0)
+                                        PreencheURLw(wsItem.LocalProducao, NFe.Components.NFeStrConstants.LocalProducao, urlList.Item(0).OuterXml, UF);
+                                    #endregion
 
-                                #region URL´s de produção
-                                //urlList = estadoElemento.GetElementsByTagName("URLProducao");
-                                //if (urlList.Count > 0)
-                                //    PreencheURLw(wsItem.URLProducao, "URLProducao", urlList.Item(0).OuterXml, UF);
-                                #endregion
-
-                                #region WSDL´s locais de Homologação
-                                urlList = estadoElemento.GetElementsByTagName("LocalHomologacao");
-                                if (urlList.Count > 0)
-                                    PreencheURLw(wsItem.LocalHomologacao, "LocalHomologacao", urlList.Item(0).OuterXml, UF);
-                                #endregion
-
-                                #region WSDL´s locais de Produção
-                                urlList = estadoElemento.GetElementsByTagName("LocalProducao");
-                                if (urlList.Count > 0)
-                                    PreencheURLw(wsItem.LocalProducao, "LocalProducao", urlList.Item(0).OuterXml, UF);
-                                #endregion
-
-                                webServicesList.Add(wsItem);
-
+                                    webServicesList.Add(wsItem);
+                                }
                                 // danasa 1-2012
                                 if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
                                 {
-                                    ///
-                                    /// adiciona na lista que será usada na manutencao
-                                    foreach (string p0 in WebServiceNFSe.PadroesNFSeList)
-                                        if (p0 != PadroesNFSe.NaoIdentificado.ToString())
-                                            if (wsItem.LocalHomologacao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0 ||
-                                                wsItem.LocalProducao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0)
+                                    try
+                                    {
+                                        string padrao = estadoElemento.Attributes[NFeStrConstants.Padrao].Value;
+                                        if (!padrao.Equals(PadroesNFSe.NaoIdentificado.ToString()))
+                                        {
+                                            var cc = (from i in Propriedade.Municipios
+                                                          where i.CodigoMunicipio == ID
+                                                      select i).FirstOrDefault();
+                                            if (cc == null)
                                             {
-                                                Propriedade.Municipios.Add(new Municipio(ID, UF, Nome, WebServiceNFSe.GetPadraoFromString(p0)));
-                                                break;
+                                                Propriedade.Municipios.Add(new Municipio(ID, UF, Nome, WebServiceNFSe.GetPadraoFromString(padrao)));
+                                                salvaXmlLocal = true;
                                             }
+                                            else
+                                            {
+                                                if (!cc.PadraoStr.Equals(padrao) || !cc.UF.Equals(UF) || !cc.Nome.Equals(Nome))
+                                                {
+                                                    cc.Padrao = WebServiceNFSe.GetPadraoFromString(padrao);
+                                                    cc.Nome = Nome;
+                                                    cc.UF = UF;
+                                                    salvaXmlLocal = true;
+                                                }
+                                            }
+
+#if false
+                                            ///
+                                            /// adiciona na lista que será usada na manutencao
+                                            foreach (string p0 in WebServiceNFSe.PadroesNFSeList)
+                                                if (p0 != PadroesNFSe.NaoIdentificado.ToString())
+                                                    if (wsItem.LocalHomologacao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0 ||
+                                                        wsItem.LocalProducao.RecepcionarLoteRps.ToLower().IndexOf(p0.ToLower()) > 0)
+                                                    {
+                                                        Propriedade.Municipios.Add(new Municipio(ID, UF, Nome, WebServiceNFSe.GetPadraoFromString(p0)));
+                                                        break;
+                                                    }
+#endif
+                                        }
+                                    }
+                                    catch { }
                                 }
                                 // danasa 1-2012
                             }
                         }
+                    }
+                    if (salvaXmlLocal)
+                    {
+                        WebServiceNFSe.SavePadrao(null, null, 0, null, false);
                     }
                 }
             }
@@ -723,11 +745,17 @@ namespace NFe.Components
     {
         public URLws()
         {
+            ///
+            /// NFS-e
             CancelarNfse =
             ConsultarLoteRps =
             ConsultarNfse =
             ConsultarNfsePorRps =
             ConsultarSituacaoLoteRps =
+            ConsultarURLNfse =
+            RecepcionarLoteRps =
+            ///
+            /// NF-e
             NFeRecepcaoEvento =
             NFeConsulta =
             NFeConsultaCadastro =
@@ -742,13 +770,15 @@ namespace NFe.Components
             NFeRegistroDeSaidaCancelamento =
             NFeAutorizacao =
             NFeRetAutorizacao =
-            ConsultarURLNfse =
-            RecepcionarLoteRps =
+            ///
+            /// MDF-e
             MDFeRecepcao =
             MDFeRetRecepcao =
             MDFeConsulta =
             MDFeStatusServico =
             MDFeRecepcaoEvento =
+            ///
+            /// CT-e
             CTeRecepcao =
             CTeRetRecepcao =
             CTeInutilizacao =

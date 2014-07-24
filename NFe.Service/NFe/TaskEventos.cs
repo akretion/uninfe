@@ -595,7 +595,7 @@ namespace NFe.Service
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
 
                     if (string.IsNullOrEmpty(evento.Id))
-                        evento.Id = "ID" + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
+                        evento.Id = NFe.Components.NFeStrConstants.ID + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
 
                     if (string.IsNullOrEmpty(evento.xCondUso))
                         if (evento.descEvento == "Carta de Correcao")
@@ -698,7 +698,7 @@ namespace NFe.Service
                                     string chNFe = eleRetorno.GetElementsByTagName("chNFe")[0].InnerText;
                                     Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
                                     NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText);
-                                    string Id = "ID" + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
+                                    string Id = NFe.Components.NFeStrConstants.ID + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado
                                     ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar

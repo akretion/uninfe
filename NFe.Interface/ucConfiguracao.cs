@@ -139,7 +139,7 @@ namespace NFe.Interface
             }
 
             comboBox_UF.DataSource = arrUF;
-            comboBox_UF.DisplayMember = "Nome";
+            comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             comboBox_UF.ValueMember = "Codigo";
             #endregion
 

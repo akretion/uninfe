@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -425,9 +425,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Webservice.xml">
+    <Content Include="NFe\WSDL\Webservice.xml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRecepcaoEvento.wsdl" />
@@ -593,9 +594,10 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PThemaRemessa.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Webservice.xml">
+    <Content Include="NFse\WSDL\Webservice.xml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcaoEvento.wsdl" />
@@ -1553,12 +1555,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRetAutorizacao.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresCancelarNfse.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesCancelarNfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesConsultarNfsePorRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaesRecepcionarLoteRpsSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresCancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao.wsdl" />
@@ -1747,8 +1749,8 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeStatusServico2_200.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta2_200.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico2_200.wsdl" />
-    <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
-    <None Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSCancelamentoNFSe.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaLoteRPS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortaoRSConsultaNFSePorFaixa.wsdl" />
@@ -1783,11 +1785,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSorocabaSP-DFSLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaIguacuRJ-DFSLoteRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PParanapanamaSP-PRONINServices.WSDL" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParanapanamaSP-PRONINServices.WSDL" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCacapavaRS-DUETOServices.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacapavaRS-DUETOServices.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCuiaba-MTISSNet.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2_200.wsdl" />
@@ -1864,6 +1861,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVSP\HSCVSPCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParanapanamaSP-PRONINServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParanapanamaSP-PRONINServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCacapavaRS-DUETOServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacapavaRS-DUETOServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCuiaba-MTISSNet.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
