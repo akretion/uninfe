@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using NFe.Components;
+using NFSe.Components;
 
 namespace NFe.Settings
 {
@@ -505,6 +506,7 @@ namespace NFe.Settings
                     //ConfiguracaoApp.VersaoXMLStatusServico = "1.03";
                     //ConfiguracaoApp.VersaoXMLCabecMsg = "1.03";
                     Propriedade.nsURI = "http://www.abrasf.org.br/";
+                    SchemaXMLNFSe.CriarListaIDXML();
                     break;
             }
         }

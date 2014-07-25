@@ -36,11 +36,10 @@ namespace NFe.Components
              * tenta ler as URL's do 'WebService.xml'
              * não encontrando, assume o ID='padrao' e UF='XX' e padrao='padrao'
              */
-#if para_quando_o_xml_estiver_atualizado
             if (System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
             {
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService);
-                var s = (from p in axml.Descendents(NFe.Components.NFeStrConstants.Estado)
+                var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
                          where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
                                 (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == idMunicipio.ToString()
                          select p);
@@ -51,7 +50,7 @@ namespace NFe.Components
                             item.FirstNode.ToString() : item.LastNode.ToString();
                 }
 
-                var xs = (from p in axml.Descendents(NFe.Components.NFeStrConstants.Estado)
+                var xs = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
                           where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
                                  (string)p.Attribute(NFe.Components.NFeStrConstants.UF) == "XX" &&
                                  (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == padrao.ToString()
@@ -63,15 +62,14 @@ namespace NFe.Components
                             item.FirstNode.ToString() : item.LastNode.ToString();
                 }
             }
-#endif
+
             return "";
         }
 
         public static string WebServicesHomologacao(PadroesNFSe padrao, int idMunicipio = 0)
         {
             string result = getURLs(NFe.Components.NFeStrConstants.LocalHomologacao, padrao, idMunicipio);
-            if (result != "")
-                return result;
+            return result;
 
             switch (padrao)
             {
@@ -503,8 +501,8 @@ namespace NFe.Components
         public static string WebServicesProducao(NFe.Components.PadroesNFSe padrao, int idMunicipio = 0)
         {
             string result = getURLs(NFe.Components.NFeStrConstants.LocalProducao, padrao, idMunicipio);
-            if (result != "")
-                return result;
+
+            return result;
 
             switch (padrao)
             {

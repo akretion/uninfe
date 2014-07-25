@@ -95,7 +95,6 @@ namespace uninfse
             //ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
             Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
             ConfiguracaoApp.StartVersoes();
-            SchemaXMLNFSe.CriarListaIDXML();
             #endregion
 
             if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))

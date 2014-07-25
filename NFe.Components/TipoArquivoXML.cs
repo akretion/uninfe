@@ -45,12 +45,22 @@ namespace NFe.Components
             TagLoteAssinatura = string.Empty;
             TagLoteAtributoId = string.Empty;
             TargetNameSpace = string.Empty;
-            
+
             string versaoXML = string.Empty;
 
             string padraoNFSe = string.Empty;
             if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
+                switch (UFCod)
+                {
+                    case 4314050: //Parobé
+                        padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4314050-";
+                        break;
+
+                    default:
+                        padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
+                        break;
+                }
+
             else
                 padraoNFSe = string.Empty;
 
@@ -78,7 +88,7 @@ namespace NFe.Components
 
                         if (versao.Equals("3.10") && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                             versaoXML = "-" + versao;
-                        
+
                         InfSchema schema = null;
                         try
                         {
@@ -123,7 +133,7 @@ namespace NFe.Components
                         }
                         catch
                         {
-                            throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", Propriedade.TipoAplicativo == TipoAplicativo.Nfe ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e")+
+                            throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", Propriedade.TipoAplicativo == TipoAplicativo.Nfe ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e") +
                                 "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
                         }
 

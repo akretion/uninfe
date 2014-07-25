@@ -447,28 +447,6 @@ namespace NFe.UI
             Activate();
             tm.Start();
             return;
-
-
-
-
-
-
-
-            //Voltar a janela em seu estado normal
-            if (this._maximized)
-                this.WindowState = FormWindowState.Maximized;
-            else
-                this.WindowState = FormWindowState.Normal;
-
-            this._maximized = false;
-
-            // Faz a aplicação aparecer na barra de tarefas.            
-            this.ShowInTaskbar = true;
-
-            // Levando o Form de volta para a tela.
-            this.Visible = true;
-
-            tm.Start();
         }
 
         private void cmAbrir_Click(object sender, EventArgs e)

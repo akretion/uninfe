@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Webservice>
   <Estado ID="12" Nome="Acre" UF="AC">
     <LocalHomologacao>
@@ -1454,7 +1454,6 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <!-- SCAN NFe - Sistema de contingência do ambiente nacional -->
   <Estado ID="900" Nome="Servico de Contingencia do Ambiente Nacional" UF="SCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SCAN\HSCANNfeRecepcao2.wsdl</NFeRecepcao>
@@ -1493,7 +1492,6 @@
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
-  <!-- DPEC - Declaração Prévia de Emissão em Contingência -->
   <Estado ID="901" Nome="DPEC - Declaração Prévia de Emissão em Contingência" UF="DPEC">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
@@ -1524,7 +1522,6 @@
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
-  <!-- SVCRS - Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe) -->
   <Estado ID="902" Nome="Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe)" UF="SVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
@@ -1559,7 +1556,6 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <!-- SVCSP - Servico Virtual de Contingência de São Paulo (CTe) -->
   <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP">
     <LocalHomologacao>
       <CTeRecepcao>wsdl\homologacao\SCVSP\HSCVSPCteRecepcao.wsdl</CTeRecepcao>
@@ -1580,7 +1576,6 @@
       <CTeRecepcaoEvento>wsdl\producao\SCVSP\PSCVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
-  <!-- SVCAN - Servico Virtual de Contingência do Ambiente Nacional (NFe) -->
   <Estado ID="904" Nome="Servico Virtual de Contingência do Ambiente Nacional (NFe)" UF="SVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SCVAN\HSVCANNfeRecepcao2.wsdl</NFeRecepcao>
@@ -1599,61 +1594,6 @@
       <NFeRecepcaoEvento>wsdl\producao\SCVAN\PSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeAutorizacao>wsdl\producao\SCVAN\PSVCANNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SCVAN\PSVCANNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
-    </LocalProducao>
-  </Estado>
-  <!-- Sequencia de tags de template -->
-  <Estado ID="999" Nome="Template" UF="XX">
-    <LocalHomologacao>
-      <NFeRecepcao></NFeRecepcao>
-      <NFeRetRecepcao></NFeRetRecepcao>
-      <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta></NFeConsulta>
-      <NFeStatusServico></NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-      <NFeRecepcaoEvento></NFeRecepcaoEvento>
-      <NFeDownload></NFeDownload>
-      <NFeConsultaNFeDest></NFeConsultaNFeDest>
-      <NFeManifDest></NFeManifDest>
-      <NFeAutorizacao></NFeAutorizacao>
-      <NFeRetAutorizacao></NFeRetAutorizacao>
-      <MDFeRecepcao></MDFeRecepcao>
-      <MDFeRetRecepcao></MDFeRetRecepcao>
-      <MDFeConsulta></MDFeConsulta>
-      <MDFeStatusServico></MDFeStatusServico>
-      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
-      <CTeRecepcao></CTeRecepcao>
-      <CTeRetRecepcao></CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
-      <CTeConsulta></CTeConsulta>
-      <CTeStatusServico></CTeStatusServico>
-      <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento></CTeRecepcaoEvento>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao></NFeRecepcao>
-      <NFeRetRecepcao></NFeRetRecepcao>
-      <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta></NFeConsulta>
-      <NFeStatusServico></NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-      <NFeRecepcaoEvento></NFeRecepcaoEvento>
-      <NFeDownload></NFeDownload>
-      <NFeConsultaNFeDest></NFeConsultaNFeDest>
-      <NFeManifDest></NFeManifDest>
-      <NFeAutorizacao></NFeAutorizacao>
-      <NFeRetAutorizacao></NFeRetAutorizacao>
-      <MDFeRecepcao></MDFeRecepcao>
-      <MDFeRetRecepcao></MDFeRetRecepcao>
-      <MDFeConsulta></MDFeConsulta>
-      <MDFeStatusServico></MDFeStatusServico>
-      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
-      <CTeRecepcao></CTeRecepcao>
-      <CTeRetRecepcao></CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
-      <CTeConsulta></CTeConsulta>
-      <CTeStatusServico></CTeStatusServico>
-      <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento></CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
 </Webservice>

@@ -70,6 +70,7 @@
     <Compile Include="Betha.cs" />
     <Compile Include="IPM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchemaXMLNFSe.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">

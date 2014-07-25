@@ -79,6 +79,10 @@
       <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
       <Name>NFe.Components</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFSe.Components\NFSe.Components.csproj">
+      <Project>{E0E67E9B-E48B-4302-BD67-E09FA726FD6F}</Project>
+      <Name>NFSe.Components</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -116,9 +116,9 @@ namespace uninfe_ws
                 }
                 filebackup = this.configname + ".xml.bck";
 
-                if (!System.IO.File.Exists(configname + ".xml"))
+/*                if (!System.IO.File.Exists(configname + ".xml"))
                     System.IO.File.Copy(configname, configname + ".xml");
-                configname += ".xml";
+                configname += ".xml"; */
 
                 XElement axml = XElement.Load(configname);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
