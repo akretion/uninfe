@@ -28,15 +28,11 @@ namespace NFe.Service
             {
                 oDadosConsultaNFeDest = new DadosConsultaNFeDest();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                /*oLer.*/
                 EnvConsultaNFeDest(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     int cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
-
-                    //cUF = 43;
 
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
@@ -46,6 +42,24 @@ namespace NFe.Service
                         oDadosConsultaNFeDest.tpAmb,
                         1, string.Empty);
 
+                    object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy,
+                                        oConsNFDestEvento,
+                                        wsProxy.NomeMetodoWS[0],
+                                        oCabecMsg,
+                                        this,
+                                        Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
+                                        Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
+
+
+#if old
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsNFDestEvento;
                     //if (NFe.Components.Propriedade.TipoAmbiente.taHomologacao == oDadosConsultaNFeDest.tpAmb)
@@ -77,7 +91,7 @@ namespace NFe.Service
                                         this,
                                         Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
                                         Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
-
+#endif
                     //Ler o retorno
                     this.LerRetornoConsultaNFeDest(emp);
                 }

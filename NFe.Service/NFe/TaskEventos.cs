@@ -122,9 +122,7 @@ namespace NFe.Service
                         tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoEvento;
-                    oRecepcaoEvento = wsProxy.CriarObjeto("RecepcaoEvento");
-
+                    object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//"RecepcaoEvento");
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
                     string xmlExtEnvio = string.Empty;
                     string xmlExtRetorno = string.Empty;
@@ -172,7 +170,7 @@ namespace NFe.Service
                     //Assinar o XML
                     oAD.Assinar(NomeArquivoXML, emp, cOrgao);
 
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, NomeMetodoWS(Servico, ufParaWS), oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0]/* NomeMetodoWS(Servico, ufParaWS)*/, oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
 
                     //Ler o retorno
                     LerRetornoEvento(emp);

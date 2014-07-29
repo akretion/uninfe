@@ -489,6 +489,7 @@ namespace NFe.Service
         }
         #endregion
 
+        #region ExecutaUniDanfe_ForcaEmail
         public static void ExecutaUniDanfe_ForcaEmail(int emp)
         {
             if (Empresas.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
@@ -497,7 +498,8 @@ namespace NFe.Service
                 System.Diagnostics.Process.Start(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", "envia_email=1");
             }
         }
-
+	    #endregion        
+        
         #region RenomearXmlReport()
         private static void RenomearXmlReport(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -578,7 +580,7 @@ namespace NFe.Service
                 string arqProcNFe = string.Empty;
                 //string strArqNFe = string.Empty;
                 string fExtensao = string.Empty;
-                string fEmail = string.Empty;
+                string fEmail = "";
                 string fProtocolo = "";
                 string tipo = "";
                 bool denegada = false;
@@ -930,6 +932,16 @@ namespace NFe.Service
                     if (string.IsNullOrEmpty(fEmail))
                         fEmail = email;
 
+                    if (!string.IsNullOrEmpty(emp.EmailDanfe))
+                        if (!emp.AdicionaEmailDanfe)
+                            fEmail = emp.EmailDanfe;
+                        else
+                            fEmail += ";" + emp.EmailDanfe;
+
+                    if (!string.IsNullOrEmpty(fEmail))
+                        if (fEmail.StartsWith(";"))
+                            fEmail = fEmail.Substring(1);
+
                     if (!string.IsNullOrEmpty(fEmail))
                     {
                         Args += " EE=1";    //EnviarEmail
@@ -1124,21 +1136,26 @@ namespace NFe.Service
         }
         #endregion
 
-        public static string DecompressXML(string origem)
+        #region Decompress
+        public static string Decompress(string compressedValue)
         {
-            byte[] encodedDataAsBytes = Convert.FromBase64String(origem);
-            using (MemoryStream ms = new MemoryStream(encodedDataAsBytes))
+            byte[] gZipBuffer = Convert.FromBase64String(compressedValue);
+            using (var memoryStream = new MemoryStream())
             {
-                using (GZipStream unzip = new GZipStream(ms, CompressionMode.Decompress))
+                int dataLength = BitConverter.ToInt32(gZipBuffer, 0);
+                memoryStream.Write(gZipBuffer, 4, gZipBuffer.Length - 4);
+
+                var buffer = new byte[dataLength];
+
+                memoryStream.Position = 0;
+                using (var gZipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
                 {
-                    Console.WriteLine(unzip.CanRead);
+                    gZipStream.Read(buffer, 0, buffer.Length);
                 }
+
+                return Encoding.UTF8.GetString(buffer);
             }
-
-            Console.WriteLine(encodedDataAsBytes.ToString());
-
-            return "";
         }
-
+	    #endregion    
     }
 }

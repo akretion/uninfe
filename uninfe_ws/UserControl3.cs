@@ -53,7 +53,7 @@ namespace uninfe_ws
                 "ConsultarURLNfse",
                 "CancelarNfse"};
         private string[] xlabels;
-        private string configname;
+        private string configname = null;
         private XmlDocument doc = new XmlDocument();
         private List<Estado> listaEstados = new List<Estado>();
         private NFe.Components.TipoAplicativo _tipo;
@@ -71,54 +71,64 @@ namespace uninfe_ws
         {
             this._tipo = opcao;
 
+            dummy.listageral.Clear();
+            listaEstados.Clear();
+
             edtEstados.SelectedIndexChanged -= metroComboBox1_SelectedIndexChanged;
+            int oIndex = 0;
             try
             {
-                xlabels = this._tipo == NFe.Components.TipoAplicativo.Nfse ? labels_nfse : labels_nfe;
-                int X = 2;
-                foreach (var label in xlabels)
-                {
-                    UserControl2 uc1 = new UserControl2();
-                    this.tpProd.Controls.Add(uc1);
-                    uc1.folder = System.IO.Path.GetDirectoryName(configname) + "\\producao";
-                    uc1.metroLabel1.Text = label;
-                    uc1.metroTextBox1.Text = label;
-                    uc1.Name = "P_" + label;
-                    uc1.Location = new Point(2, X);
-                    uc1.Size = new System.Drawing.Size(this.tpProd.Size.Width - 20, uc1.Size.Height);
-
-                    UserControl2 uc2 = new UserControl2();
-                    this.tpHomo.Controls.Add(uc2);
-                    uc2.folder = System.IO.Path.GetDirectoryName(configname) + "\\homologacao";
-                    uc2.metroLabel1.Text = label;
-                    uc2.metroTextBox1.Text = label;
-                    uc2.Name = "H_" + label;
-                    uc2.Location = new Point(2, X);
-                    uc2.Size = new System.Drawing.Size(this.tpHomo.Size.Width - 20, uc2.Size.Height);
-
-                    X += uc2.Size.Height + 4;
-                }
                 string padraobase = NFe.Components.PadroesNFSe.NaoIdentificado.ToString();
-                string fn = System.IO.Path.Combine(Application.StartupPath, "uninfe_ws.xml");
-                NFe.Components.XMLIniFile xml = new NFe.Components.XMLIniFile(fn);
-                switch (this._tipo)
+                xlabels = this._tipo == NFe.Components.TipoAplicativo.Nfse ? labels_nfse : labels_nfe;
+                if (this.configname == null)
                 {
-                    case NFe.Components.TipoAplicativo.Nfse:
-                        configname = xml.ReadValue("webservice", "uninfse", "");
-                        break;
+                    string fn = System.IO.Path.Combine(Application.StartupPath, "uninfe_ws.xml");
+                    NFe.Components.XMLIniFile xml = new NFe.Components.XMLIniFile(fn);
+                    switch (this._tipo)
+                    {
+                        case NFe.Components.TipoAplicativo.Nfse:
+                            configname = xml.ReadValue("webservice", "uninfse", "");
+                            break;
 
-                    default:
-                        padraobase = "";
-                        configname = xml.ReadValue("webservice", "uninfe", "");
-                        this.metroLabel5.Visible =
-                            this.edtPadrao.Visible = false;
-                        break;
+                        default:
+                            padraobase = "";
+                            configname = xml.ReadValue("webservice", "uninfe", "");
+                            this.metroLabel5.Visible =
+                                this.edtPadrao.Visible = false;
+                            break;
+                    }
+                    filebackup = this.configname + ".xml.bck";
+
+                    //if (!System.IO.File.Exists(configname + ".xml"))
+                    //    System.IO.File.Copy(configname, configname + ".xml");
+                    //configname += ".xml";
+
+                    int X = 2;
+                    foreach (var label in xlabels)
+                    {
+                        UserControl2 uc1 = new UserControl2();
+                        this.tpProd.Controls.Add(uc1);
+                        uc1.folder = System.IO.Path.GetDirectoryName(configname) + "\\producao";
+                        uc1.metroLabel1.Text = label;
+                        uc1.metroTextBox1.Text = label;
+                        uc1.Name = "P_" + label;
+                        uc1.Location = new Point(2, X);
+                        uc1.Size = new System.Drawing.Size(this.tpProd.Size.Width - 20, uc1.Size.Height);
+
+                        UserControl2 uc2 = new UserControl2();
+                        this.tpHomo.Controls.Add(uc2);
+                        uc2.folder = System.IO.Path.GetDirectoryName(configname) + "\\homologacao";
+                        uc2.metroLabel1.Text = label;
+                        uc2.metroTextBox1.Text = label;
+                        uc2.Name = "H_" + label;
+                        uc2.Location = new Point(2, X);
+                        uc2.Size = new System.Drawing.Size(this.tpHomo.Size.Width - 20, uc2.Size.Height);
+
+                        X += uc2.Size.Height + 4;
+                    }
                 }
-                filebackup = this.configname + ".xml.bck";
-
-/*                if (!System.IO.File.Exists(configname + ".xml"))
-                    System.IO.File.Copy(configname, configname + ".xml");
-                configname += ".xml"; */
+                else
+                    oIndex = edtEstados.SelectedIndex;
 
                 XElement axml = XElement.Load(configname);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
@@ -137,6 +147,8 @@ namespace uninfe_ws
                     dummy.listageral.Remove(listaEstados[listaEstados.Count - 1].key);
                     dummy.listageral.Add(listaEstados[listaEstados.Count - 1].key, (int)this._tipo);
                 }
+                edtEstados.DataSource = null;
+                edtEstados.Items.Clear();
                 edtEstados.DisplayMember = "text";
                 edtEstados.ValueMember = NFe.Components.NFeStrConstants.ID;
                 edtEstados.DataSource = listaEstados;
@@ -148,6 +160,7 @@ namespace uninfe_ws
             }
             finally
             {
+                edtEstados.SelectedIndex = oIndex;
                 metroComboBox1_SelectedIndexChanged(null, null);
                 edtEstados.SelectedIndexChanged += metroComboBox1_SelectedIndexChanged;
             }
@@ -438,14 +451,7 @@ namespace uninfe_ws
 
         private void RefreshEstados()
         {
-            edtEstados.SelectedIndexChanged -= metroComboBox1_SelectedIndexChanged;
-            edtEstados.DataSource = null;
-            edtEstados.DisplayMember = "text";
-            edtEstados.ValueMember = NFe.Components.NFeStrConstants.ID;
-            edtEstados.DataSource = listaEstados;
-            edtEstados.SelectedIndex = 0;
-            metroComboBox1_SelectedIndexChanged(null, null);
-            edtEstados.SelectedIndexChanged += metroComboBox1_SelectedIndexChanged;
+            this.loadData(this._tipo);
         }
     }
 }

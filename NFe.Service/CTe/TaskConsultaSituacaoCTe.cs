@@ -39,10 +39,16 @@ namespace NFe.Service
                 PedSit(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, string.Empty);
+                WebServiceProxy wsProxy = 
+                    ConfiguracaoApp.DefinirWS(  Servico, 
+                                                emp, 
+                                                dadosPedSit.cUF, 
+                                                dadosPedSit.tpAmb, 
+                                                dadosPedSit.tpEmis, 
+                                                string.Empty);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSit.cUF));
+                object oConsulta = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedSit.cUF));
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -50,7 +56,10 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTePedSit);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, dadosPedSit.cUF), oCabecMsg, this);
+                oInvocarObj.Invocar(wsProxy, 
+                                    oConsulta, 
+                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedSit.cUF), 
+                                    oCabecMsg, this);
 
                 //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
                 //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.

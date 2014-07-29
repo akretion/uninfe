@@ -665,8 +665,21 @@ namespace NFe.Components
         #endregion
 
         #region Misc Functions
-        
-        public bool LoadForm(Form xform, string aSection)
+
+        public void CenterForm(Form xform)
+        {
+            //xform.Location = new Point((SystemInformation.VirtualScreen.Width - xform.Size.Width) / 2, (SystemInformation.VirtualScreen.Height - xform.Size.Height) / 2);
+
+            Screen screen = Screen.FromControl(xform);
+            Rectangle workingArea = screen.WorkingArea;
+            xform.Location = new Point()
+            {
+                X = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - xform.Width) / 2),
+                Y = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - xform.Height) / 2)
+            };
+        }
+
+        public bool LoadForm(Form xform, string aSection, bool forcaleitura)
 		{
 			string section = xform.Name + aSection;
 
@@ -674,15 +687,7 @@ namespace NFe.Components
 			{
                 if (xform.StartPosition == FormStartPosition.Manual && xform.MdiParent == null)
                 {
-                    //xform.Location = new Point((SystemInformation.VirtualScreen.Width - xform.Size.Width) / 2, (SystemInformation.VirtualScreen.Height - xform.Size.Height) / 2);
-
-                    Screen screen = Screen.FromControl(xform);
-                    Rectangle workingArea = screen.WorkingArea;
-                    xform.Location = new Point()
-                    {
-                        X = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - xform.Width) / 2),
-                        Y = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - xform.Height) / 2)
-                    }; 
+                    CenterForm(xform);
                 }
 				return false;
 			}
@@ -700,7 +705,7 @@ namespace NFe.Components
                             break;
                     }
                 }
-				if (xform.WindowState == FormWindowState.Normal)
+				if (xform.WindowState == FormWindowState.Normal || forcaleitura)
 				{
 					int left	= this.ReadValue(section, "left",xform.Location.X);//Left);
 					int top		= this.ReadValue(section, "top", xform.Location.Y);//Top);

@@ -36,14 +36,9 @@ namespace uninfe_ws
                         if (!string.IsNullOrEmpty(control.Text))
                         {
                             string[] s = control.Text.Split(new char[] { '\\' });
-                            if (s.Length == 4)
-                            {
-                                folderBrowserDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(folder + "\\" + s[2] + "\\" + s[3]);
-                            }
-                            else
-                            {
-                                folderBrowserDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(folder + "\\" + System.IO.Path.GetFileName(control.Text));
-                            }
+                            if (s.Length>2)
+                                // tira a pasta 'wsdl'
+                                folderBrowserDialog1.InitialDirectory = folder + "\\" + s[s.Length - 2];
                         }
                         else
                             folderBrowserDialog1.InitialDirectory = folder;
@@ -54,7 +49,7 @@ namespace uninfe_ws
 
                         if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                         {
-                            control.Text = getfile(folderBrowserDialog1.FileName);
+                            control.Text = getfile(System.IO.Path.GetFullPath(folderBrowserDialog1.FileName));
                         }
                         control.Focus();
                         control.SelectAll();
@@ -75,7 +70,7 @@ namespace uninfe_ws
             if (s.Length > 3)
             {
                 value = "";
-                for (int n = s.Length-4; n < s.Length; ++n)
+                for (int n = s.Length - 4; n < s.Length; ++n)
                 {
                     value += "\\" + s[n];
                 }

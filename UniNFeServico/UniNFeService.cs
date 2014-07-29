@@ -70,6 +70,22 @@ namespace UniNFeServico
             ConfiguracaoApp.StartVersoes();
             #endregion
 
+            if (TipoAplicativo.Nfse == NFe.Components.Propriedade.TipoAplicativo)
+            {
+                if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) ||
+                    !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+                {
+                    this.WriteLog("Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService + "' não encontrados");
+                    return;
+                }
+            }
+            if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            {
+                this.WriteLog("Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado");
+                return;
+            }
+
+
             // Executar as conversões de atualizações de versão quando tiver
             Auxiliar.ConversaoNovaVersao(string.Empty);
             Empresas.CarregaConfiguracao();

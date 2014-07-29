@@ -11,6 +11,21 @@ using NFe.Settings;
 
 namespace NFe.UI
 {
+#if DEBUG
+    public class aaaa : NFe.Service.TaskAbst
+    {
+        public override void Execute()
+        {
+        }
+
+        public string nome(NFe.Components.Servicos servico, int uf, string versao)
+        {
+            this.Servico = servico;
+            return NomeClasseWS(this.Servico, uf, versao);
+        }
+    }
+#endif
+
     public enum uninfeOpcoes
     {
         opCadastro,

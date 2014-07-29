@@ -40,6 +40,8 @@ namespace NFe.UI.Formularios
             tbPastaXmlParaDanfeMon.Text = this.empresa.PastaDanfeMon;
             cbDanfeMonNfe.Checked = this.empresa.XMLDanfeMonNFe;
             cbDanfeMonProcNfe.Checked = this.empresa.XMLDanfeMonProcNFe;
+            edtEmailDANFE.Text = this.empresa.EmailDanfe;
+            chkAddEmailDANFE.Checked = this.empresa.AdicionaEmailDanfe;
         }
 
         public void Validar()
@@ -51,6 +53,8 @@ namespace NFe.UI.Formularios
             empresa.PastaDanfeMon = this.tbPastaXmlParaDanfeMon.Text;
             empresa.XMLDanfeMonNFe = this.cbDanfeMonNfe.Checked;
             empresa.XMLDanfeMonProcNFe = this.cbDanfeMonProcNfe.Checked;
+            empresa.EmailDanfe = edtEmailDANFE.Text;
+            empresa.AdicionaEmailDanfe = chkAddEmailDANFE.Checked;
         }
 
         public void FocusFirstControl()

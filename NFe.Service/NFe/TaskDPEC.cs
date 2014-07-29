@@ -33,8 +33,6 @@ namespace NFe.Service
             {
                 dadosEnvDPEC = new DadosEnvDPEC();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                ///*oLer.*/
                 EnvDPEC(emp, NomeArquivoXML);    //danasa 21/10/2010
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
@@ -43,7 +41,7 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, dadosEnvDPEC.cUF, dadosEnvDPEC.tpAmb, dadosEnvDPEC.tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoDPEC = wsProxy.CriarObjeto("SCERecepcaoRFB");
+                    object oRecepcaoDPEC = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// "SCERecepcaoRFB");
                     object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -54,10 +52,10 @@ namespace NFe.Service
                     AssinaturaDigital oAD = new AssinaturaDigital();
 
                     //Assinar o XML
-                    oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(/*oLer.*/dadosEnvDPEC.cUF));
+                    oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosEnvDPEC.cUF));
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, "sceRecepcaoDPEC", oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, wsProxy.NomeMetodoWS[0] /*"sceRecepcaoDPEC"*/, oCabecMsg, this);
 
                     //Ler o retorno
                     LerRetDPEC();
@@ -264,8 +262,6 @@ namespace NFe.Service
             {
                 dadosConsDPEC = new DadosConsDPEC();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                /*oLer.*/
                 ConsDPEC(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
@@ -274,14 +270,14 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, dadosConsDPEC.tpAmb, dadosConsDPEC.tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoDPEC = wsProxy.CriarObjeto("SCEConsultaRFB");
+                    object oRecepcaoDPEC = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//"SCEConsultaRFB");
                     object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLConsDPEC);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, "sceConsultaDPEC", oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, wsProxy.NomeMetodoWS[0]/* "sceConsultaDPEC"*/, oCabecMsg, this);
 
                     //Ler o retorno
                     LerRetConsDPEC(emp);
@@ -293,7 +289,7 @@ namespace NFe.Service
                 else
                 {
                     // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
-                    oGerarXML.ConsultaDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", /*oLer.*/dadosConsDPEC);
+                    oGerarXML.ConsultaDPEC(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", dadosConsDPEC);
                 }
             }
             catch (Exception ex)

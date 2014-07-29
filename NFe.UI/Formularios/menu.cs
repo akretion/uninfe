@@ -54,6 +54,8 @@ namespace NFe.UI
             };
             */
 
+            ConfiguracaoApp.CarregarDadosSobre();
+
             metroLink_unimake.Visible = !string.IsNullOrEmpty(NFe.Settings.ConfiguracaoApp.Site);
             metroLink_unimake.Text = NFe.Settings.ConfiguracaoApp.Site;
             uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + "  (" + NFe.Components.Propriedade.Versao + ")";
@@ -252,12 +254,10 @@ namespace NFe.UI
                     Empresas.CreateLockFile(true);
 
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Arquivos de \".lock\" excluídos com sucesso.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //Dialogs.ShowMessage("Arquivos de \".lock\" excluídos com sucesso.", 0, 0, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //Dialogs.ShowMessage(ex.Message, 500, 0, MessageBoxIcon.Error, ScrollBars.Both);
                 }
             }
         }
@@ -270,7 +270,6 @@ namespace NFe.UI
                                 Propriedade.NomeAplicacao);
 
             if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-//            if (Dialogs.YesNo("ATENÇÂO! - Atualização dos WSDLs e SCHEMAS\r\n\r\n" + msg, 500, 250))
             {
                 try
                 {
@@ -280,12 +279,11 @@ namespace NFe.UI
                     }
                     ConfiguracaoApp.ForceUpdateWSDL(false);
 
-                    throw new Exception("WSDLs e Schemas atualizados com sucesso.");
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "WSDLs e Schemas atualizados com sucesso.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
-                    //Dialogs.ShowMessage(ex.Message, 500, 0, MessageBoxIcon.Error, ScrollBars.Both);
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -314,19 +312,17 @@ namespace NFe.UI
 
         private void metroLink3_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://" + NFe.Settings.ConfiguracaoApp.Site);
+            this.StartPage("http://" + NFe.Settings.ConfiguracaoApp.Site);
         }
 
         private void metroTile_sefaz_Click(object sender, EventArgs e)
         {
-            const string address_disp = "http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=2.00";
-            System.Diagnostics.Process.Start(address_disp);
+            this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=2.00");
         }
 
         private void metroTile_sefaz_310_Click(object sender, EventArgs e)
         {
-            const string address_disp = "http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100";
-            System.Diagnostics.Process.Start(address_disp);
+            this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
         }
 
         private void metroTile_doc_Click(object sender, EventArgs e)
@@ -338,6 +334,18 @@ namespace NFe.UI
             catch (Exception ex)
             {
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
+            }
+        }
+
+        void StartPage(string url)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

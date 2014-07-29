@@ -51,7 +51,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GINFES:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
@@ -62,28 +62,28 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.THEMA:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.CANOAS_RS:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.ISSNET:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.ISSONLINE:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.BLUMENAU_SC:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         #region Encriptar tag <Assinatura>
                         EncryptAssinatura();
                         #endregion
@@ -92,29 +92,29 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.BHISS:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
                     case PadroesNFSe.GIF:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.DUETO:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.WEBISS:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         #region Encriptar tag <Assinatura>
                         EncryptAssinatura();
                         #endregion
@@ -122,28 +122,28 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SALVADOR_BA:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.PORTOVELHENSE:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho versao=\"2.00\" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.00</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.PRONIN:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.ISSONLINE4R:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.DSF:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         #region Encriptar tag <Assinatura>
                         EncryptAssinatura();
                         #endregion
@@ -151,7 +151,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.TECNOSISTEMAS:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, string.Empty);
-                        envLoteRps = wsProxy.CriarObjeto(NomeClasseWS(Servico, oDadosEnvLoteRps.cMunicipio));
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosEnvLoteRps.cMunicipio));
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
 

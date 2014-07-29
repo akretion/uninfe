@@ -73,7 +73,7 @@ namespace uninfe
             try
             {
                 XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-                iniFile.LoadForm(this, "");
+                iniFile.LoadForm(this, "", true);
             }
             catch { }   // para evitar que para alguns que derrubam o uninfe quando atualizam
 
@@ -91,9 +91,15 @@ namespace uninfe
             ConfiguracaoApp.StartVersoes();
             #endregion
 
-            if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
-                //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
-                new ThreadControlEvents();  //danasa 12/8/2011
+            if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            {
+                MessageBox.Show("Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado");
+                Application.Exit();
+            }
+            else
+                if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
+                    //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
+                    new ThreadControlEvents();  //danasa 12/8/2011
         }
         #endregion
 

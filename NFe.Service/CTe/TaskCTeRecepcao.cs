@@ -42,10 +42,15 @@ namespace NFe.Service
                 string idLote = lerXml.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), string.Empty);
+                WebServiceProxy wsProxy = 
+                    ConfiguracaoApp.DefinirWS(  Servico, 
+                                                emp, 
+                                                Convert.ToInt32(lerXml.oDadosNfe.cUF), 
+                                                Convert.ToInt32(lerXml.oDadosNfe.tpAmb), 
+                                                Convert.ToInt32(lerXml.oDadosNfe.tpEmis), string.Empty);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)));
+                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -58,7 +63,10 @@ namespace NFe.Service
                 //
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), oCabecMsg, this, "-env-lot", "-rec");
+                oInvocarObj.Invocar(wsProxy, 
+                                    oRecepcao, 
+                                    NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
+                                    oCabecMsg, this, "-env-lot", "-rec");
                 #endregion
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo

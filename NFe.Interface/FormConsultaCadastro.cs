@@ -33,7 +33,7 @@ namespace NFe.Interface
             PreencheEstados();
             PopulateCbEmpresa();
             XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-            iniFile.LoadForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
+            iniFile.LoadForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"), true);
         }
 
         private void FormConsultaCadastro_FormClosed(object sender, FormClosedEventArgs e)

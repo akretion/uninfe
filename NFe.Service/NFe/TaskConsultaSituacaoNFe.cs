@@ -40,8 +40,26 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, dadosPedSit.versao);
+                    WebServiceProxy wsProxy = 
+                        ConfiguracaoApp.DefinirWS(  Servico, 
+                                                    emp, 
+                                                    dadosPedSit.cUF, 
+                                                    dadosPedSit.tpAmb, 
+                                                    dadosPedSit.tpEmis, 
+                                                    dadosPedSit.versao);
 
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oConsulta = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSit.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSit.versao);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oConsulta, wsProxy.NomeMetodoWS[0], oCabecMsg, this);
+
+#if old
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsulta = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSit.cUF));
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
@@ -52,6 +70,7 @@ namespace NFe.Service
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oConsulta, NomeMetodoWS(Servico, dadosPedSit.cUF), oCabecMsg, this);
+#endif
 
                     //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
                     //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.

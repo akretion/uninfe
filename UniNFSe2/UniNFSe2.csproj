@@ -84,6 +84,10 @@
       <Project>{c199d582-6da4-4d00-8963-89ba04777872}</Project>
       <Name>NFe.Components</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFe.ConvertTxt\NFe.ConvertTxt.csproj">
+      <Project>{9f2e5401-1c0b-4613-ab7f-985c7f0f267a}</Project>
+      <Name>NFe.ConvertTxt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
       <Project>{a963e456-a54b-4c4d-a9de-e80c136c3554}</Project>
       <Name>NFe.Settings</Name>

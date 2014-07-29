@@ -425,10 +425,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NFe\WSDL\Webservice.xml">
+    <EmbeddedResource Include="NFe\WSDL\Webservice.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRecepcaoEvento.wsdl" />
@@ -594,10 +594,10 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PThemaRemessa.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NFse\WSDL\Webservice.xml">
+    <EmbeddedResource Include="NFse\WSDL\Webservice.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcaoEvento.wsdl" />

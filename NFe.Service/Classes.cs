@@ -88,76 +88,6 @@ namespace NFe.Service
     #endregion
 
     /// <summary>
-    /// danasa 21/10/2010
-    /// </summary>
-    /// 
-    /*
-    public class URLws
-    {
-        public string NFeRecepcao { get; set; }
-        public string NFeRetRecepcao { get; set; }
-        public string NFeCancelamento { get; set; }
-        public string NFeInutilizacao { get; set; }
-        /// <summary>
-        /// Consulta da Situação da NFe versão 2.0
-        /// </summary>
-        public string NFeConsulta { get; set; }
-        /// <summary>
-        /// Consulta Situação da NFe na versão 1.10
-        /// </summary>
-        public string NFeConsulta1 { get; set; }
-        public string NFeStatusServico { get; set; }
-        public string NFeConsultaCadastro { get; set; }
-        public string NFeCCe { get; set; }
-        /// <summary>
-        /// Enviar Lote RPS NFS-e 
-        /// </summary>
-        public string RecepcionarLoteRps { get; set; }
-        /// <summary>
-        /// Consultar Situação do lote RPS NFS-e
-        /// </summary>
-        public string ConsultarSituacaoLoteRps { get; set; }
-        /// <summary>
-        /// Consultar NFS-e por RPS
-        /// </summary>
-        public string ConsultarNfsePorRps { get; set; }
-        /// <summary>
-        /// Consultar NFS-e por NFS-e
-        /// </summary>
-        public string ConsultarNfse { get; set; }
-        /// <summary>
-        /// Consultar lote RPS
-        /// </summary>
-        public string ConsultarLoteRps { get; set; }
-        /// <summary>
-        /// Cancelar NFS-e
-        /// </summary>
-        public string CancelarNfse { get; set; }
-    }
-
-    public class webServices
-    {
-        public int ID { get; private set; }
-        public string Nome { get; private set; }
-        public string UF { get; private set; }
-        public URLws URLHomologacao { get; private set; }
-        public URLws URLProducao { get; private set; }
-        public URLws LocalHomologacao { get; private set; }
-        public URLws LocalProducao { get; private set; }
-
-        public webServices(int id, string nome, string uf)
-        {
-            URLHomologacao = new URLws();
-            URLProducao = new URLws();
-            LocalHomologacao = new URLws();
-            LocalProducao = new URLws();
-            ID = id;
-            Nome = nome;
-            UF = uf;
-        }
-    }
-*/
-    /// <summary>
     /// Classe utilizada para permitir o lock na hora de gravar os arquivos de fluxo da NFe
     /// </summary>
     public class FluxoNfeLock
@@ -722,7 +652,6 @@ namespace NFe.Service
         public string ultNSU { get; set; }
     }
     #endregion
-
 
     #region Classe para receber os dados dos XML´s da NFS-e
 

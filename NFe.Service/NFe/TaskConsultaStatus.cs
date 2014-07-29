@@ -41,9 +41,26 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultaStatusServicoNFe, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.versao);
+                    WebServiceProxy wsProxy = 
+                        ConfiguracaoApp.DefinirWS(  Servicos.ConsultaStatusServicoNFe, 
+                                                    emp, 
+                                                    dadosPedSta.cUF, 
+                                                    dadosPedSta.tpAmb, 
+                                                    dadosPedSta.tpEmis, 
+                                                    dadosPedSta.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSta.versao);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
+
+#if old
                     string nClasse = NomeClasseWS(Servico, dadosPedSta.cUF, dadosPedSta.versao);
                     bool changeClassePR = false;
                     if (Functions.CodigoParaUF(dadosPedSta.cUF) == "PR" &&
@@ -63,6 +80,7 @@ namespace NFe.Service
                     //Invocar o método que envia o XML para o SEFAZ
                     nClasse = (changeClassePR ? "nfeStatusServicoNF" : NomeMetodoWS(Servico, dadosPedSta.cUF, dadosPedSta.versao));
                     oInvocarObj.Invocar(wsProxy, oStatusServico, nClasse, oCabecMsg, this, "-ped-sta", "-sta");
+#endif
                 }
                 else
                 {

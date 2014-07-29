@@ -138,6 +138,9 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label5 = new System.Windows.Forms.Label();
+            this.edtEmailDANFE = new System.Windows.Forms.TextBox();
+            this.chkAddEmailDANFE = new System.Windows.Forms.CheckBox();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -967,6 +970,9 @@
             // 
             // tabPageDanfe
             // 
+            this.tabPageDanfe.Controls.Add(this.chkAddEmailDANFE);
+            this.tabPageDanfe.Controls.Add(this.label5);
+            this.tabPageDanfe.Controls.Add(this.edtEmailDANFE);
             this.tabPageDanfe.Controls.Add(this.label3);
             this.tabPageDanfe.Controls.Add(this.tbConfiguracaoCCe);
             this.tabPageDanfe.Controls.Add(this.label2);
@@ -996,10 +1002,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(191, 258);
+            this.label3.Location = new System.Drawing.Point(291, 258);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
-            this.label3.TabIndex = 12;
+            this.label3.TabIndex = 13;
             this.label3.Text = "CCe";
             // 
             // tbConfiguracaoCCe
@@ -1007,10 +1013,10 @@
             this.tbConfiguracaoCCe.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.tbConfiguracaoCCe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.tbConfiguracaoCCe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbConfiguracaoCCe.Location = new System.Drawing.Point(191, 275);
+            this.tbConfiguracaoCCe.Location = new System.Drawing.Point(291, 275);
             this.tbConfiguracaoCCe.Name = "tbConfiguracaoCCe";
-            this.tbConfiguracaoCCe.Size = new System.Drawing.Size(173, 20);
-            this.tbConfiguracaoCCe.TabIndex = 15;
+            this.tbConfiguracaoCCe.Size = new System.Drawing.Size(255, 20);
+            this.tbConfiguracaoCCe.TabIndex = 14;
             // 
             // label2
             // 
@@ -1028,8 +1034,8 @@
             this.tbConfiguracaoDanfe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbConfiguracaoDanfe.Location = new System.Drawing.Point(6, 275);
             this.tbConfiguracaoDanfe.Name = "tbConfiguracaoDanfe";
-            this.tbConfiguracaoDanfe.Size = new System.Drawing.Size(173, 20);
-            this.tbConfiguracaoDanfe.TabIndex = 14;
+            this.tbConfiguracaoDanfe.Size = new System.Drawing.Size(255, 20);
+            this.tbConfiguracaoDanfe.TabIndex = 12;
             // 
             // label1
             // 
@@ -1046,7 +1052,7 @@
             this.label18.Location = new System.Drawing.Point(1, 352);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(407, 13);
-            this.label18.TabIndex = 17;
+            this.label18.TabIndex = 18;
             this.label18.Text = "XML´s a serem copiados na pasta para impressão do DANFE a partir do DANFeMon:";
             // 
             // tbTextoDANFE
@@ -1065,7 +1071,7 @@
             this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(33, 397);
             this.cbDanfeMonProcNfe.Name = "cbDanfeMonProcNfe";
             this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(266, 17);
-            this.cbDanfeMonProcNfe.TabIndex = 19;
+            this.cbDanfeMonProcNfe.TabIndex = 20;
             this.cbDanfeMonProcNfe.Text = "XML de distribuição do documento fiscal eletrônico";
             this.cbDanfeMonProcNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonProcNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
@@ -1076,7 +1082,7 @@
             this.cbDanfeMonNfe.Location = new System.Drawing.Point(33, 373);
             this.cbDanfeMonNfe.Name = "cbDanfeMonNfe";
             this.cbDanfeMonNfe.Size = new System.Drawing.Size(195, 17);
-            this.cbDanfeMonNfe.TabIndex = 18;
+            this.cbDanfeMonNfe.TabIndex = 19;
             this.cbDanfeMonNfe.Text = "XML do documento fiscal eletrônico";
             this.cbDanfeMonNfe.UseVisualStyleBackColor = true;
             this.cbDanfeMonNfe.CheckedChanged += new System.EventHandler(this.changed_Modificado);
@@ -1352,6 +1358,35 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "E-mail";
+            // 
+            // edtEmailDANFE
+            // 
+            this.edtEmailDANFE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.edtEmailDANFE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.edtEmailDANFE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edtEmailDANFE.Location = new System.Drawing.Point(6, 320);
+            this.edtEmailDANFE.Name = "edtEmailDANFE";
+            this.edtEmailDANFE.Size = new System.Drawing.Size(319, 20);
+            this.edtEmailDANFE.TabIndex = 16;
+            // 
+            // chkAddEmailDANFE
+            // 
+            this.chkAddEmailDANFE.AutoSize = true;
+            this.chkAddEmailDANFE.Location = new System.Drawing.Point(331, 320);
+            this.chkAddEmailDANFE.Name = "chkAddEmailDANFE";
+            this.chkAddEmailDANFE.Size = new System.Drawing.Size(234, 17);
+            this.chkAddEmailDANFE.TabIndex = 17;
+            this.chkAddEmailDANFE.Text = "Adiciona este e-mail ao que constar no XML";
+            this.chkAddEmailDANFE.UseVisualStyleBackColor = true;
+            // 
             // ucConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1489,5 +1524,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbConfiguracaoCCe;
+        private System.Windows.Forms.CheckBox chkAddEmailDANFE;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox edtEmailDANFE;
     }
 }

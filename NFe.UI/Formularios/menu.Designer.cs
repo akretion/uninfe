@@ -82,7 +82,7 @@
             // 
             this.metroLink_unimake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.metroLink_unimake.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLink_unimake.Location = new System.Drawing.Point(479, 458);
+            this.metroLink_unimake.Location = new System.Drawing.Point(479, 474);
             this.metroLink_unimake.Name = "metroLink_unimake";
             this.metroLink_unimake.Size = new System.Drawing.Size(291, 23);
             this.metroLink_unimake.TabIndex = 44;
@@ -328,7 +328,7 @@
             this.Controls.Add(this.metroTile_Servicos);
             this.Controls.Add(this.metroTile_Configuracoes);
             this.Name = "menu";
-            this.Size = new System.Drawing.Size(773, 481);
+            this.Size = new System.Drawing.Size(773, 497);
             this.VisibleChanged += new System.EventHandler(this.menu_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();

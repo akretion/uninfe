@@ -40,9 +40,31 @@ namespace NFe.Service
                 if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, (int)NFe.Components.TipoEmissao.teNormal, dadosConsCad.versao);
+                    WebServiceProxy wsProxy = 
+                        ConfiguracaoApp.DefinirWS(  Servico, 
+                                                    emp, 
+                                                    dadosConsCad.cUF, 
+                                                    dadosConsCad.tpAmb, 
+                                                    (int)NFe.Components.TipoEmissao.teNormal, 
+                                                    dadosConsCad.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oConsCad = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosConsCad.cUF, Servico));
+
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", dadosConsCad.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oConsCad, 
+                                        wsProxy.NomeMetodoWS[0], 
+                                        oCabecMsg, 
+                                        this, 
+                                        "-cons-cad", "-ret-cons-cad");
+
+#if old
                     object oConsCad = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosConsCad.cUF));
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosConsCad.cUF, Servico));
 
@@ -51,7 +73,13 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);// NFe.ConvertTxt.versoes.VersaoXMLConsCad);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oConsCad, NomeMetodoWS(Servico, dadosConsCad.cUF), oCabecMsg, this, "-cons-cad", "-ret-cons-cad");
+                    oInvocarObj.Invocar(wsProxy,
+                        oConsCad,
+                        NomeMetodoWS(Servico, dadosConsCad.cUF),
+                        oCabecMsg,
+                        this,
+                        "-cons-cad", "-ret-cons-cad");
+#endif
                 }
                 else
                 {

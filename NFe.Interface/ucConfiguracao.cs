@@ -315,6 +315,8 @@ namespace NFe.Interface
             textBox_PastaDownload.Text = oEmpresa.PastaDownloadNFeDest;
             textBox_PastaBackup.Text = (oEmpresa.PastaBackup == string.Empty ? string.Empty : oEmpresa.PastaBackup);
 
+            chkAddEmailDANFE.Checked = oEmpresa.AdicionaEmailDanfe;
+            edtEmailDANFE.Text = oEmpresa.EmailDanfe;
             tbConfiguracaoDanfe.Text = oEmpresa.ConfiguracaoDanfe;
             tbConfiguracaoCCe.Text = oEmpresa.ConfiguracaoCCe;
             tbPastaConfigUniDanfe.Text = (oEmpresa.PastaConfigUniDanfe == string.Empty ? string.Empty : oEmpresa.PastaConfigUniDanfe);
@@ -460,6 +462,8 @@ namespace NFe.Interface
             oEmpresa.PastaDanfeMon = tbPastaXmlParaDanfeMon.Text;
             oEmpresa.XMLDanfeMonNFe = this.cbDanfeMonNfe.Checked;
             oEmpresa.XMLDanfeMonProcNFe = this.cbDanfeMonProcNfe.Checked;
+            oEmpresa.EmailDanfe = this.edtEmailDANFE.Text;
+            oEmpresa.AdicionaEmailDanfe = this.chkAddEmailDANFE.Checked;
             oEmpresa.DiasLimpeza = (int)udDiasLimpeza.Value;
             oEmpresa.TempoConsulta = (int)udTempoConsulta.Value;
             oEmpresa.Nome = edtNome.Text;

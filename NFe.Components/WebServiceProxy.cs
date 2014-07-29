@@ -55,12 +55,84 @@ namespace NFe.Components
         /// Porta de comunicação do servidor proxy
         /// </summary>
         public int ProxyPorta { get; set; }
+        #endregion
+
         /// <summary>
         /// Arquivo WSDL
         /// </summary>
-        private string ArquivoWSDL { get; set; }
+        public string ArquivoWSDL { get; set; }
         private PadroesNFSe PadraoNFSe { get; set; }
-        #endregion
+        private Servicos servico;
+        private bool taHomologacao;
+        //private int cUF;
+        //private string versao;
+
+        private string _NomeClasseWS;
+        public string NomeClasseWS 
+        {
+            get
+            {
+                switch (PadraoNFSe)
+                {
+                    #region DUETO
+                    case PadroesNFSe.DUETO:
+                        switch (servico)
+                        {
+                            case Servicos.ConsultarLoteRps:
+                                return "basic_INFSEConsultas";
+                            case Servicos.ConsultarNfse:
+                                return "basic_INFSEConsultas";
+                            case Servicos.ConsultarNfsePorRps:
+                                return "basic_INFSEConsultas";
+                            case Servicos.ConsultarSituacaoLoteRps:
+                                return "basic_INFSEConsultas";
+                            case Servicos.CancelarNfse:
+                                return "basic_INFSEGeracao";
+                            case Servicos.RecepcionarLoteRps:
+                                return "basic_INFSEGeracao";
+                            default:
+                                return _NomeClasseWS;
+                        }
+                    #endregion
+
+                    #region ISSONLINE4R (4R Sistemas)
+                    case PadroesNFSe.ISSONLINE4R:
+                        switch (servico)
+                        {
+                            case Servicos.ConsultarNfsePorRps:
+                                return (taHomologacao ? "hConsultarNfsePorRps" : "ConsultarNfsePorRps");
+
+                            case Servicos.CancelarNfse:
+                                return (taHomologacao ? "hCancelarNfse" : NFe.Components.Servicos.CancelarNfse.ToString());
+
+                            case Servicos.RecepcionarLoteRps:
+                                return (taHomologacao ? "hRecepcionarLoteRpsSincrono" : "RecepcionarLoteRpsSincrono");
+
+                            default:
+                                return _NomeClasseWS;
+                        }
+                    #endregion
+
+                    #region PRONIM
+                    case PadroesNFSe.PRONIN:
+                        switch (servico)
+                        {
+                            case Servicos.CancelarNfse:
+                                return "basic_INFSEGeracao";
+                            case Servicos.RecepcionarLoteRps:
+                                return "basic_INFSEGeracao";
+                            default:
+                                return "basic_INFSEConsultas";
+                        }
+                    #endregion
+
+                    default:
+                        return _NomeClasseWS;
+                }
+            }
+            protected set { _NomeClasseWS = value; }
+        }
+        public string[] NomeMetodoWS { get; protected set; }
 
         /// <summary>
         /// Lista utilizada para armazenar os webservices
@@ -71,6 +143,7 @@ namespace NFe.Components
 
         #region Construtores
 
+#if false
         public WebServiceProxy(Uri requestUri, X509Certificate2 Certificado)
         {
             //Definir o certificado digital que será utilizado na conexão com os serviços
@@ -84,11 +157,21 @@ namespace NFe.Components
             //Gerar e compilar a classe
             this.GerarClasse();
         }
-
-        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe)
+#endif
+        public WebServiceProxy(string arquivoWSDL, 
+            X509Certificate2 Certificado, 
+            PadroesNFSe padraoNFSe, 
+            bool taHomologacao,
+            //int cUF,
+            //string versao,
+            Servicos servico)
         {
-            ArquivoWSDL = arquivoWSDL;
-            PadraoNFSe = padraoNFSe;
+            this.ArquivoWSDL = arquivoWSDL;
+            this.PadraoNFSe = padraoNFSe;
+            this.servico = servico;
+            this.taHomologacao = taHomologacao;
+            //this.cUF = cUF;
+            //this.versao = versao;
 
             //Definir o certificado digital que será utilizado na conexão com os serviços
             this.oCertificado = Certificado;
@@ -96,11 +179,36 @@ namespace NFe.Components
             //Confirmar a solicitação SSL automaticamente
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
 
-            //Obeter a descrção do serviço (WSDL)
+            //Obter a descrção do serviço (WSDL)
             this.DescricaoServico(arquivoWSDL);
 
-            //Gerar e compilar a classe
-            this.GerarClasse();
+            this.NomeClasseWS = null;
+            this.NomeMetodoWS = null;
+            if (this.serviceDescription.Services != null)
+            {
+                this.NomeClasseWS = ((System.Web.Services.Description.Service)this.serviceDescription.Services[0]).Name;
+            }
+
+            if (this.serviceDescription.Bindings != null)
+            {
+                foreach (var xx in this.serviceDescription.Bindings)
+                {
+                    if (((System.Web.Services.Description.Binding)xx).Operations != null)
+                    {
+                        if (((System.Web.Services.Description.Binding)xx).Operations.Count > 0)
+                        {
+                            this.NomeMetodoWS = new string[((System.Web.Services.Description.Binding)xx).Operations.Count];
+                            for (int n = 0; n < ((System.Web.Services.Description.Binding)xx).Operations.Count; ++n)
+                            {
+                                this.NomeMetodoWS[n] = ((System.Web.Services.Description.Binding)xx).Operations[n].Name;
+                            }
+                        }
+                    }
+                }
+            }
+            if (Certificado != null)
+                //Gerar e compilar a classe
+                this.GerarClasse();
         }
 
         public WebServiceProxy(X509Certificate2 Certificado)
@@ -175,7 +283,7 @@ namespace NFe.Components
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao invocar o método '" + methodName + "'.\r\n" + ex.Message);
+                throw new Exception("Erro ao invocar o método '" + methodName + "'.\r\nWSDL: " + this.ArquivoWSDL + "\r\n" + ex.Message);
             }
         }
         #endregion
@@ -285,8 +393,8 @@ namespace NFe.Components
         /// <returns>Retorna o objeto</returns>
         public object CriarObjeto(string NomeClasse)
         {
-            if (this.serviceAssemby.GetType(NomeClasse) == null)
-                throw new Exception("Nome da classe '"+NomeClasse+"' no webservice não pode ser processada");
+            if (string.IsNullOrEmpty(NomeClasse) || this.serviceAssemby.GetType(NomeClasse) == null)
+                throw new Exception("Nome da classe '"+NomeClasse+"' no webservice não pode ser processada\r\nWSDL: " + this.ArquivoWSDL);
 
             return Activator.CreateInstance(this.serviceAssemby.GetType(NomeClasse));
         }
@@ -542,7 +650,7 @@ namespace NFe.Components
                         {
                             if (estadoElemento.Attributes[NFeStrConstants.UF].Value != "XX")
                             {
-                                int ID = Convert.ToInt32(Functions.OnlyNumbers(estadoElemento.Attributes[NFeStrConstants.ID].Value));
+                                int ID = Convert.ToInt32("0" + Functions.OnlyNumbers(estadoElemento.Attributes[NFeStrConstants.ID].Value));
                                 if (ID == 0)
                                     continue;
                                 string Nome = estadoElemento.Attributes[NFeStrConstants.Nome].Value;

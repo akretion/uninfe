@@ -469,13 +469,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackImagePadding = new System.Windows.Forms.Padding(210, 10, 0, 0);
             this.BackMaxSize = 50;
-            this.ClientSize = new System.Drawing.Size(804, 600);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.pnlOptions);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form_Main";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 15);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "UniNFe";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Form_Main_ControlAdded);

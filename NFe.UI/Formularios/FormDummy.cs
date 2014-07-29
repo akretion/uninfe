@@ -96,7 +96,7 @@ namespace NFe.UI
             this.Style = uninfeDummy.mainForm.uStyle;
             this.StyleManager = uninfeDummy.mainForm.StyleManager;
 
-            uninfeDummy.xmlParams.LoadForm(this, "\\" + opcao.ToString());
+            uninfeDummy.xmlParams.LoadForm(this, "\\" + opcao.ToString(), true);
 
             switch (NFe.Components.Propriedade.TipoAplicativo)
             {

@@ -44,6 +44,9 @@
             this.tbPastaConfigUniDanfe = new MetroFramework.Controls.MetroTextBox();
             this.tbPastaExeUniDanfe = new MetroFramework.Controls.MetroTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.edtEmailDANFE = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.chkAddEmailDANFE = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // cbDanfeMonProcNfe
@@ -52,7 +55,7 @@
             this.cbDanfeMonProcNfe.Location = new System.Drawing.Point(27, 340);
             this.cbDanfeMonProcNfe.Name = "cbDanfeMonProcNfe";
             this.cbDanfeMonProcNfe.Size = new System.Drawing.Size(296, 15);
-            this.cbDanfeMonProcNfe.TabIndex = 8;
+            this.cbDanfeMonProcNfe.TabIndex = 14;
             this.cbDanfeMonProcNfe.Text = "XML de distribuição do documento fiscal eletrônico";
             this.cbDanfeMonProcNfe.UseSelectable = true;
             this.cbDanfeMonProcNfe.CheckStateChanged += new System.EventHandler(this.tbPastaExeUniDanfe_TextChanged);
@@ -63,7 +66,7 @@
             this.cbDanfeMonNfe.Location = new System.Drawing.Point(27, 319);
             this.cbDanfeMonNfe.Name = "cbDanfeMonNfe";
             this.cbDanfeMonNfe.Size = new System.Drawing.Size(215, 15);
-            this.cbDanfeMonNfe.TabIndex = 7;
+            this.cbDanfeMonNfe.TabIndex = 13;
             this.cbDanfeMonNfe.Text = "XML do documento fiscal eletrônico";
             this.cbDanfeMonNfe.UseSelectable = true;
             this.cbDanfeMonNfe.CheckStateChanged += new System.EventHandler(this.tbPastaExeUniDanfe_TextChanged);
@@ -76,7 +79,7 @@
             this.metroLabel37.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel37.Name = "metroLabel37";
             this.metroLabel37.Size = new System.Drawing.Size(432, 15);
-            this.metroLabel37.TabIndex = 6;
+            this.metroLabel37.TabIndex = 12;
             this.metroLabel37.Text = "XML´s a serem copiados na pasta para impressão do DANFE a partir do DANFeMon";
             // 
             // metroLabel36
@@ -87,7 +90,7 @@
             this.metroLabel36.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel36.Name = "metroLabel36";
             this.metroLabel36.Size = new System.Drawing.Size(137, 15);
-            this.metroLabel36.TabIndex = 68;
+            this.metroLabel36.TabIndex = 5;
             this.metroLabel36.Text = "Nomes das configurações";
             // 
             // tbConfiguracaoCCe
@@ -101,7 +104,7 @@
             this.tbConfiguracaoCCe.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbConfiguracaoCCe.SelectedText = "";
             this.tbConfiguracaoCCe.Size = new System.Drawing.Size(272, 22);
-            this.tbConfiguracaoCCe.TabIndex = 4;
+            this.tbConfiguracaoCCe.TabIndex = 9;
             this.tbConfiguracaoCCe.Text = "Styled Textbox";
             this.tbConfiguracaoCCe.UseSelectable = true;
             this.tbConfiguracaoCCe.UseStyleColors = true;
@@ -115,7 +118,7 @@
             this.metroLabel35.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel35.Name = "metroLabel35";
             this.metroLabel35.Size = new System.Drawing.Size(27, 15);
-            this.metroLabel35.TabIndex = 66;
+            this.metroLabel35.TabIndex = 8;
             this.metroLabel35.Text = "CCe";
             // 
             // tbConfiguracaoDanfe
@@ -129,7 +132,7 @@
             this.tbConfiguracaoDanfe.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbConfiguracaoDanfe.SelectedText = "";
             this.tbConfiguracaoDanfe.Size = new System.Drawing.Size(272, 22);
-            this.tbConfiguracaoDanfe.TabIndex = 3;
+            this.tbConfiguracaoDanfe.TabIndex = 7;
             this.tbConfiguracaoDanfe.Text = "Styled Textbox";
             this.tbConfiguracaoDanfe.UseSelectable = true;
             this.tbConfiguracaoDanfe.UseStyleColors = true;
@@ -143,7 +146,7 @@
             this.metroLabel34.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel34.Name = "metroLabel34";
             this.metroLabel34.Size = new System.Drawing.Size(117, 15);
-            this.metroLabel34.TabIndex = 64;
+            this.metroLabel34.TabIndex = 6;
             this.metroLabel34.Text = "NFe/MDFe/CTe/NFCe";
             // 
             // metroLabel33
@@ -154,7 +157,7 @@
             this.metroLabel33.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel33.Name = "metroLabel33";
             this.metroLabel33.Size = new System.Drawing.Size(502, 15);
-            this.metroLabel33.TabIndex = 62;
+            this.metroLabel33.TabIndex = 10;
             this.metroLabel33.Text = "Pasta onde deve ser gravado o XML para a impressão do documento fiscal a partir d" +
     "o DANFeMon";
             // 
@@ -166,7 +169,7 @@
             this.metroLabel32.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel32.Name = "metroLabel32";
             this.metroLabel32.Size = new System.Drawing.Size(253, 15);
-            this.metroLabel32.TabIndex = 60;
+            this.metroLabel32.TabIndex = 3;
             this.metroLabel32.Text = "Pasta do arquivo de configurações do UniDANFe";
             // 
             // metroLabel31
@@ -177,7 +180,7 @@
             this.metroLabel31.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel31.Name = "metroLabel31";
             this.metroLabel31.Size = new System.Drawing.Size(179, 15);
-            this.metroLabel31.TabIndex = 58;
+            this.metroLabel31.TabIndex = 1;
             this.metroLabel31.Text = "Pasta do executável do UniDANFe";
             // 
             // tbTextoDANFE
@@ -215,7 +218,7 @@
             this.tbPastaXmlParaDanfeMon.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbPastaXmlParaDanfeMon.SelectedText = "";
             this.tbPastaXmlParaDanfeMon.Size = new System.Drawing.Size(651, 22);
-            this.tbPastaXmlParaDanfeMon.TabIndex = 5;
+            this.tbPastaXmlParaDanfeMon.TabIndex = 11;
             this.tbPastaXmlParaDanfeMon.Text = "Styled Textbox";
             this.tbPastaXmlParaDanfeMon.UseSelectable = true;
             this.tbPastaXmlParaDanfeMon.UseStyleColors = true;
@@ -240,7 +243,7 @@
             this.tbPastaConfigUniDanfe.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbPastaConfigUniDanfe.SelectedText = "";
             this.tbPastaConfigUniDanfe.Size = new System.Drawing.Size(651, 22);
-            this.tbPastaConfigUniDanfe.TabIndex = 2;
+            this.tbPastaConfigUniDanfe.TabIndex = 4;
             this.tbPastaConfigUniDanfe.Text = "Styled Textbox";
             this.tbPastaConfigUniDanfe.UseSelectable = true;
             this.tbPastaConfigUniDanfe.UseStyleColors = true;
@@ -265,7 +268,7 @@
             this.tbPastaExeUniDanfe.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbPastaExeUniDanfe.SelectedText = "";
             this.tbPastaExeUniDanfe.Size = new System.Drawing.Size(651, 22);
-            this.tbPastaExeUniDanfe.TabIndex = 1;
+            this.tbPastaExeUniDanfe.TabIndex = 2;
             this.tbPastaExeUniDanfe.Text = "Styled Textbox";
             this.tbPastaExeUniDanfe.UseSelectable = true;
             this.tbPastaExeUniDanfe.UseStyleColors = true;
@@ -277,10 +280,52 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // edtEmailDANFE
+            // 
+            this.edtEmailDANFE.Lines = new string[] {
+        "Styled Textbox"};
+            this.edtEmailDANFE.Location = new System.Drawing.Point(3, 380);
+            this.edtEmailDANFE.MaxLength = 32767;
+            this.edtEmailDANFE.Name = "edtEmailDANFE";
+            this.edtEmailDANFE.PasswordChar = '\0';
+            this.edtEmailDANFE.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.edtEmailDANFE.SelectedText = "";
+            this.edtEmailDANFE.Size = new System.Drawing.Size(296, 22);
+            this.edtEmailDANFE.TabIndex = 16;
+            this.edtEmailDANFE.Text = "Styled Textbox";
+            this.edtEmailDANFE.UseSelectable = true;
+            this.edtEmailDANFE.UseStyleColors = true;
+            this.edtEmailDANFE.TextChanged += new System.EventHandler(this.tbPastaExeUniDanfe_TextChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 361);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(38, 15);
+            this.metroLabel1.TabIndex = 15;
+            this.metroLabel1.Text = "E-mail";
+            // 
+            // chkAddEmailDANFE
+            // 
+            this.chkAddEmailDANFE.AutoSize = true;
+            this.chkAddEmailDANFE.Location = new System.Drawing.Point(305, 380);
+            this.chkAddEmailDANFE.Name = "chkAddEmailDANFE";
+            this.chkAddEmailDANFE.Size = new System.Drawing.Size(256, 15);
+            this.chkAddEmailDANFE.TabIndex = 17;
+            this.chkAddEmailDANFE.Text = "Adiciona este e-mail ao que constar no XML";
+            this.chkAddEmailDANFE.UseSelectable = true;
+            this.chkAddEmailDANFE.CheckedChanged += new System.EventHandler(this.tbPastaExeUniDanfe_TextChanged);
+            // 
             // userConfiguracao_danfe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkAddEmailDANFE);
+            this.Controls.Add(this.edtEmailDANFE);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.cbDanfeMonProcNfe);
             this.Controls.Add(this.cbDanfeMonNfe);
             this.Controls.Add(this.metroLabel37);
@@ -297,7 +342,7 @@
             this.Controls.Add(this.tbPastaExeUniDanfe);
             this.Controls.Add(this.tbTextoDANFE);
             this.Name = "userConfiguracao_danfe";
-            this.Size = new System.Drawing.Size(675, 363);
+            this.Size = new System.Drawing.Size(675, 411);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,5 +366,8 @@
         public MetroFramework.Controls.MetroTextBox tbPastaXmlParaDanfeMon;
         public MetroFramework.Controls.MetroTextBox tbPastaConfigUniDanfe;
         public MetroFramework.Controls.MetroTextBox tbPastaExeUniDanfe;
+        public MetroFramework.Controls.MetroTextBox edtEmailDANFE;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        public MetroFramework.Controls.MetroCheckBox chkAddEmailDANFE;
     }
 }

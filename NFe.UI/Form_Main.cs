@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 
 using MetroFramework;
 using MetroFramework.Components;
@@ -40,6 +42,7 @@ namespace NFe.UI
         private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
         private menu _menu;
         private bool _maximized;
+        private bool _formloaded = false;
 
         public Form_Main()
         {
@@ -79,13 +82,6 @@ namespace NFe.UI
         {
             try
             {
-                try
-                {
-                    uninfeDummy.xmlParams.LoadForm(this, "\\main");
-                    this._maximized = this.WindowState == FormWindowState.Maximized;
-                }
-                catch { }
-
                 //
                 //SERVICO: danasa 7/2011
                 //servico está instalado e rodando?
@@ -148,6 +144,15 @@ namespace NFe.UI
                         return;
                     }
                 }
+                if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+                {
+                    MetroFramework.MetroMessageBox.Show(this,
+                        "Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado", "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                    return;
+                }
+
                 if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
                     //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
                     new ThreadControlEvents();  //danasa 12/8/2011
@@ -195,6 +200,344 @@ namespace NFe.UI
             {
                 this.updateControleDoServico();
             }
+
+#if DEBUG
+
+            /*
+3.10: srv:PedidoConsultaSituacaoNFe
+tpEmis:teNormal
+C#:NfeConsulta2 X wsdl:NfeConsulta Tag:NFeConsulta
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeConsulta2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teContingencia
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeStatusServico2_200.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSCAN
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCAN\PSCANNfeStatusServico2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teFSDA
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeStatusServico2_200.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSVCAN
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCVAN\PSVCANNfeStatusServico2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSVCRS
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl
+----
+             * 
+             * 
+             * 
+             * 
+             * 
+2.00: srv:ConsultaCadastroContribuinte
+tpEmis:teNormal
+C#:CadConsultaCadastro2 X wsdl:CadConsultaCadastroWS Tag:NFeConsultaCadastro
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl
+----
+3.10: srv:PedidoConsultaSituacaoNFe
+tpEmis:teNormal
+C#:NfeConsulta2 X wsdl:NfeConsulta Tag:NFeConsulta
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeConsulta2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teContingencia
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeStatusServico2_200.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSCAN
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCAN\HSCANNfeStatusServico2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSVCAN
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCVAN\HSVCANNfeStatusServico2.wsdl
+----
+2.00: srv:ConsultaStatusServicoNFe
+tpEmis:teSVCRS
+C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl
+----
+2.00: srv:ConsultaCadastroContribuinte
+tpEmis:teNormal
+C#:CadConsultaCadastro2 X wsdl:CadConsultaCadastroWS Tag:NFeConsultaCadastro
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl
+----
+3.10: srv:ConsultaStatusServicoNFe
+tpEmis:teNormal
+C#:NfeStatusServico2 X wsdl:NfeStatusServico3 Tag:NFeStatusServico
+E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusServico2.wsdl
+----
+             * 
+            */
+
+#if verifica_wsdl
+
+            Console.WriteLine("----------------------");
+            NFe.Components.Servicos servico = NFe.Components.Servicos.Nulo;
+            NFe.Components.PadroesNFSe padrao = PadroesNFSe.NaoIdentificado;
+
+            Console.WriteLine(NFe.Components.Propriedade.NomeArqXMLWebService);
+
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+            {
+                XElement axml = XElement.Load(NFe.Components.Propriedade.NomeArqXMLWebService);
+                var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                            where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                            select p);
+                foreach (var item in s)
+                {
+                    NFe.Components.TipoAmbiente taHomologacao = TipoAmbiente.taProducao;
+                    var x = XElement.Parse(item.Element(NFe.Components.NFeStrConstants.LocalProducao).ToString()).Elements();
+                    foreach (var xa in x)
+                    {
+                        if (!string.IsNullOrEmpty(xa.Value))
+                        {
+                            padrao = NFe.Components.EnumHelper.StringToEnum<NFe.Components.PadroesNFSe>(item.Attribute("Padrao").Value);
+
+                            if (padrao == PadroesNFSe.SYSTEMPRO || padrao == PadroesNFSe.IPM || padrao == PadroesNFSe.BETHA)
+                                continue;
+
+                            switch(xa.Name.ToString())
+                            {
+                                case "RecepcionarLoteRps":
+                                    servico = NFe.Components.Servicos.RecepcionarLoteRps;
+                                    break;
+                                case "ConsultarSituacaoLoteRps":
+                                    servico = NFe.Components.Servicos.ConsultarSituacaoLoteRps;
+                                    break;
+                                case "ConsultarNfsePorRps":
+                                    servico = NFe.Components.Servicos.ConsultarNfsePorRps;
+                                    break;
+                                case "ConsultarNfse":
+                                    servico = NFe.Components.Servicos.ConsultarNfse;
+                                    break;
+                                case "ConsultarLoteRps":
+                                    servico = NFe.Components.Servicos.ConsultarLoteRps;
+                                    break;
+                                case "CancelarNfse":
+                                    servico = NFe.Components.Servicos.CancelarNfse;
+                                    break;
+                                case "ConsultarURLNfseSerie":
+                                    servico = Servicos.ConsultarURLNfseSerie;
+                                    break;
+                                case "ConsultarURLNfse":
+                                    servico = Servicos.ConsultarURLNfse;
+                                    break;
+                                default:
+                                    Console.WriteLine("====>(" + xa.Name.ToString()+")");
+                                    break;
+                            }
+                            if (servico == Servicos.Nulo)
+                            {
+                                Console.WriteLine("=========================================="
+                                    + " => " + item.Attribute("ID").Value
+                                                        + "=>" + item.Attribute("Padrao").Value
+                                                        + "=>" + xa.Name
+                                                        + "=>" + xa.Value);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    NFe.UI.aaaa xxx = new NFe.UI.aaaa();
+                                    var nome = xxx.nome(servico, Convert.ToInt32(item.Attribute("ID").Value), "");
+
+                                    var proxy = ConfiguracaoApp.DefinirWS(servico, 0,
+                                        Convert.ToInt32(item.Attribute("ID").Value),
+                                        (int)taHomologacao,
+                                        (int)NFe.Components.TipoEmissao.teNormal,
+                                        padrao,
+                                        string.Empty);
+
+                                    if (nome != proxy.NomeClasseWS)
+                                        Console.WriteLine("srv:" + servico.ToString()
+                                                    + "\r\nPadrao:"+item.Attribute("Padrao").Value
+                                                    + "\r\nMunic:" + item.Attribute("ID").Value
+                                                    + "\r\nC#:" + nome + " X wsdl:" + proxy.NomeClasseWS +
+                                                    " Tag:" + xa.Name + "\r\n" + proxy.ArquivoWSDL + "\r\n----");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("====\r\n" + xa.Value + "\r\n" + ex.Message);
+                                }
+                                //Console.WriteLine(NomeClasseWSNFSe(servico, padrao) + "==>" + proxy.NomeClasseWS);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                XElement axml = XElement.Load(NFe.Components.Propriedade.NomeArqXMLWebService);
+                var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                            where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                            select p);
+                foreach (var item in s)
+                {
+                    //Console.WriteLine(item.Element(NFe.Components.NFeStrConstants.LocalHomologacao).ToString());
+                    var x = XElement.Parse(item.Element(NFe.Components.NFeStrConstants.LocalHomologacao).ToString()).Elements();
+                    foreach (var xa in x)
+                    {
+                        if (!string.IsNullOrEmpty(xa.Value))
+                        {
+                            //Console.WriteLine(xa.Name + " => " + xa.Value);
+                            servico = Servicos.Nulo;
+                            string versao = "3.10";
+                            switch (xa.Name.ToString())
+                            {
+                                case "CTeRecepcaoEvento":
+                                    servico = Servicos.RecepcaoEventoCTe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLCTeEvento;
+                                    break;
+                                case "CTeRecepcao":
+                                    servico = Servicos.EnviarLoteCTe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLCTe;
+                                    break;
+                                case "CTeRetRecepcao":
+                                    servico = Servicos.PedidoSituacaoLoteCTe;
+                                    break;
+                                case "CTeInutilizacao":
+                                    servico = Servicos.InutilizarNumerosCTe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLCTeInut;
+                                    break;
+                                case "CTeConsulta":
+                                    servico = Servicos.PedidoConsultaSituacaoCTe;
+                                    break;
+                                case "CTeStatusServico":
+                                    servico = Servicos.ConsultaStatusServicoCTe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico;
+                                    break;
+                                case "CTeConsultaCadastro": break;
+
+                                case "NFeRecepcao":
+                                    servico = Servicos.EnviarLoteNfe; break;
+                                case "NFeRetRecepcao": servico = Servicos.PedidoSituacaoLoteNFe; break;
+                                case "NFeInutilizacao":
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLInut;
+                                    servico = Servicos.InutilizarNumerosNFe; break;
+                                case "NFeConsulta": servico = Servicos.PedidoConsultaSituacaoNFe; break;
+                                case "NFeStatusServico":
+                                    servico = Servicos.ConsultaStatusServicoNFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+                                    break;
+                                case "NFeConsultaCadastro":
+                                    servico = Servicos.ConsultaCadastroContribuinte;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
+                                    break;
+                                case "NFeRecepcaoEvento":
+                                    servico = Servicos.RecepcaoEvento;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLEvento;
+                                    break;
+                                case "NFeConsultaNFeDest":
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest;
+                                    servico = Servicos.ConsultaNFDest;
+                                    break;
+                                case "NFeDownload": servico = Servicos.DownloadNFe; break;
+                                case "NFeManifDest":
+                                    servico = Servicos.EnviarManifDest;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLEvento;
+                                    break;
+                                case "NFeAutorizacao": servico = Servicos.EnviarLoteNfeZip2; break;
+                                case "NFeRetAutorizacao": servico = Servicos.PedidoSituacaoLoteNFe2; break;
+
+                                case "MDFeRecepcao": servico = Servicos.EnviarLoteMDFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
+                                    break;
+                                case "MDFeRetRecepcao":
+                                    servico = Servicos.PedidoSituacaoLoteMDFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
+                                    break;
+                                case "MDFeConsulta":
+                                    servico = Servicos.PedidoConsultaSituacaoMDFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
+                                    break;
+                                case "MDFeStatusServico":
+                                    servico = Servicos.ConsultaStatusServicoMDFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico;
+                                    break;
+                                case "MDFeRecepcaoEvento":
+                                    servico = Servicos.RecepcaoEventoMDFe;
+                                    versao = NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento;
+                                    break;
+
+                                default:
+                                    servico = Servicos.Nulo;
+                                    Console.WriteLine("====>(" + xa.Name.ToString() + ")");
+                                    break;
+                            }
+                            if (servico == Servicos.Nulo) continue;
+
+                            try
+                            {
+                                if (xa.Value.Contains("\\DPEC\\"))
+                                    if (xa.Value.Contains("DEPCSCEConsultaRFB"))
+                                        servico = Servicos.ConsultarDPEC;
+                                    else
+                                        servico = Servicos.EnviarDPEC;
+
+                                NFe.UI.aaaa xxx = new NFe.UI.aaaa();
+                                var nome = xxx.nome(servico, Convert.ToInt16(item.Attribute("ID").Value), versao);
+
+                                foreach (NFe.Components.TipoEmissao temissao in Enum.GetValues(typeof(NFe.Components.TipoEmissao)))
+                                {
+                                    if (temissao == NFe.Components.TipoEmissao.teNone) continue;
+                                    if (temissao != NFe.Components.TipoEmissao.teNormal && xa.Value.Contains("\\DPEC\\")) break;
+                                    if (temissao == TipoEmissao.teDPEC && !xa.Value.Contains("\\DPEC\\")) continue;
+
+                                    var proxy = NFe.Settings.ConfiguracaoApp.DefinirWS(servico, 0,
+                                        Convert.ToInt16(item.Attribute("ID").Value),
+                                        (int)NFe.Components.TipoAmbiente.taHomologacao,
+                                        (int)temissao,
+                                        versao);
+
+                                    if (!nome.Equals(proxy.NomeClasseWS))
+                                        Console.WriteLine(versao + ": srv:" + servico.ToString() + "\r\ntpEmis:" + temissao.ToString() +
+                                                            "\r\nC#:" + nome + " X wsdl:" + proxy.NomeClasseWS +
+                                                            " Tag:" + xa.Name + "\r\n" + proxy.ArquivoWSDL + "\r\n----");
+
+                                    if (xa.Name.ToString().StartsWith("NFe") && versao.Equals("3.10"))
+                                    {
+                                        versao = "2.00";
+                                        var aproxy = NFe.Settings.ConfiguracaoApp.DefinirWS(servico, 0,
+                                            Convert.ToInt16(item.Attribute("ID").Value),
+                                            (int)NFe.Components.TipoAmbiente.taHomologacao,
+                                            (int)temissao,
+                                            versao);
+
+                                        NFe.UI.aaaa axxx = new NFe.UI.aaaa();
+                                        var anome = axxx.nome(servico, Convert.ToInt16(item.Attribute("ID").Value), versao);
+
+                                        if (!anome.Equals(aproxy.NomeClasseWS))
+                                            Console.WriteLine(versao + ": srv:" + servico.ToString() + "\r\ntpEmis:" + temissao.ToString()
+                                                        + "\r\nC#:" + anome + " X wsdl:" + aproxy.NomeClasseWS +
+                                                        " Tag:" + xa.Name + "\r\n" + aproxy.ArquivoWSDL + "\r\n----");
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                //Console.WriteLine("====\r\n" + xa.Value + "\r\n" + ex.Message);
+                            }
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("----------------------");
+#endif
+
+#endif
         }
 
         protected override void OnResize(EventArgs e)
@@ -240,8 +583,6 @@ namespace NFe.UI
                 */
             Empresas.ClearLockFiles(false);
 
-            this.SaveForm();
-
             foreach (var uc in this.Controls)
             {
                 if (uc is MetroFramework.Controls.MetroUserControl)
@@ -252,6 +593,9 @@ namespace NFe.UI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            if (this._formloaded)
+                this.SaveForm();
+
             //
             // TODO: Aqui, deveriamos verificar se ainda existe alguma Thread pendente antes de fechar
             //
@@ -269,7 +613,6 @@ namespace NFe.UI
                         if (!((userConfiguracoes)uc).VerificaSeAbandona())
                             return;
 
-                        //this.RestartServicos();
                         break;
                     }
                 }
@@ -279,8 +622,7 @@ namespace NFe.UI
                 {
                     form.Hide();
                 } while ((form = form.Owner) != null);
-                //this.Visible = false;
-                //this.WindowState = FormWindowState.Minimized;
+
                 this.notifyIcon1.Visible = true;
                 this.notifyIcon1.ShowBalloonTip(6000);
             }
@@ -431,22 +773,43 @@ namespace NFe.UI
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (!this._formloaded)
+            {
+                this._maximized = false;
+                try
+                {
+                    if (uninfeDummy.xmlParams.ValueExists(this.Name, "WindowState"))
+                    {
+                        switch (uninfeDummy.xmlParams.ReadValue(this.Name + "\\main", "WindowState", 0))
+                        {
+                            case 2:
+                                this._maximized=true;
+                                break;
+                        }
+                    }
+                }
+                catch { }
+            }
+
             BringToFront();
             Show();
+
             //Voltar a janela em seu estado normal
             if (this._maximized)
                 this.WindowState = FormWindowState.Maximized;
             else
+            {
                 this.WindowState = FormWindowState.Normal;
-
-            this._maximized = false;
-
+                if (!this._formloaded)
+                    uninfeDummy.xmlParams.LoadForm(this, "\\main", true);
+            }
             // Faz a aplicação aparecer na barra de tarefas.            
             this.ShowInTaskbar = true;
+            this._formloaded = true;
+            this._maximized = false;
 
             Activate();
             tm.Start();
-            return;
         }
 
         private void cmAbrir_Click(object sender, EventArgs e)
@@ -458,36 +821,12 @@ namespace NFe.UI
         {
             uninfeDummy.opServicos = uninfeOpcoes2.opStopServico;
             MetroTaskWindow.ShowTaskWindow(this, "", new NFe.UI.Formularios.UserControl2());
-            /*
-            using (var ff = new NFe.UI.Formularios.FormWait())
-            {
-                ff.servicename = this.srvName;
-                ff.stopservice = true;
-                ff.mensagem = "Parando o serviço do " + NFe.Components.Propriedade.NomeAplicacao;
-                if (ff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    MetroFramework.MetroMessageBox.Show(this, 
-                            "Serviço do " + NFe.Components.Propriedade.NomeAplicacao + " parado com sucesso!", "", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
-            //this.updateControleDoServico();
         }
 
         private void tbRestartServico_Click(object sender, EventArgs e)
         {
             uninfeDummy.opServicos = uninfeOpcoes2.opRestartTasks;
             MetroTaskWindow.ShowTaskWindow(this, "", new NFe.UI.Formularios.UserControl2());
-            /*
-            using (var ff = new NFe.UI.Formularios.FormWait())
-            {
-                ff.servicename = this.srvName;
-                ff.stopservice = false;
-                ff.mensagem = "Reiniciando o serviço do " + NFe.Components.Propriedade.NomeAplicacao;
-                if (ff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    MetroFramework.MetroMessageBox.Show(this, 
-                        "Serviço do " + NFe.Components.Propriedade.NomeAplicacao + " reiniciado com sucesso!", "", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
-            //this.updateControleDoServico();
         }
 
         private bool MainVisible
@@ -640,7 +979,6 @@ namespace NFe.UI
             if (!uStyle.Equals(((MetroFramework.Controls.MetroTile)sender).Style))
             {
                 uStyle = ((MetroFramework.Controls.MetroTile)sender).Style;
-                //Console.WriteLine(".............................." + uStyle.ToString() + "..." + ((MetroFramework.Controls.MetroTile)sender).Name);
                 updateVisual();
             }
         }
@@ -661,15 +999,6 @@ namespace NFe.UI
             }
             uninfeDummy.opServicos = uninfeOpcoes2.opRestartTasks;
             MetroTaskWindow.ShowTaskWindow(this, "", new NFe.UI.Formularios.UserControl2());
-            /*
-            using (var ff = new NFe.UI.Formularios.FormWait())
-            {
-                ff.acao1 = PararServicos;
-                ff.acao2 = ExecutaServicos;
-                ff.mensagem = "Parando os serviços";
-//                ff.ShowDialog();
-            }
-            */
 
             if (!MainVisible)
                 notifyIcon1.ShowBalloonTip(6000);

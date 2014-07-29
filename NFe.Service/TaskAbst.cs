@@ -160,6 +160,25 @@ namespace NFe.Service
                     retorna = "NfeAutorizacao";
                     break;
 
+                case Servicos.ConsultarDPEC:
+                    retorna = "SCEConsultaRFB";
+                    break;
+                case Servicos.EnviarDPEC:
+                    retorna = "SCERecepcaoRFB";
+                    break;
+                case Servicos.RecepcaoEvento:
+                case Servicos.EnviarEventoCancelamento:
+                case Servicos.EnviarManifDest:
+                case Servicos.EnviarCCe:    //danasa 2/7/2011
+                case Servicos.EnviarEPEC:
+                    retorna = "RecepcaoEvento"; 
+                    break;
+                case Servicos.ConsultaNFDest:
+                    retorna = "NFeConsultaDest"; 
+                    break;
+                case Servicos.DownloadNFe:
+                    retorna = "NfeDownloadNF"; 
+                    break;
                 #endregion
 
                 #region MDF-e

@@ -61,7 +61,7 @@ namespace NFe.Interface
             /// danasa 9-2009
             /// 
             XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-            iniFile.LoadForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"));
+            iniFile.LoadForm(this, (this.MdiParent == null ? "\\Normal" : "\\MDI"), true);
 
             tabControl4_SelectedIndexChanged(sender, e);
         }

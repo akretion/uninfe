@@ -52,7 +52,7 @@ namespace NFe.UI
 
                 this.comboUf.DisplayMember = "nome";
                 this.comboUf.ValueMember = "valor";
-                comboUf.DataSource = Functions.CarregaUF();
+                this.comboUf.DataSource = Functions.CarregaUF();
 
                 int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
                 if (posicao > (this.cbEmpresa.DataSource as System.Collections.ArrayList).Count)
@@ -173,7 +173,7 @@ namespace NFe.UI
 
                 GerarXML oGerar = new GerarXML(Emp);
 
-                int cUF = Empresas.Configuracoes[Emp].UnidadeFederativaCodigo;
+                int cUF = NFe.Components.Functions.UFParaCodigo(this.comboUf.SelectedValue.ToString());
                 int amb = (int)cbAmbiente.SelectedValue;
                 string versao = this.cbVersao.SelectedItem.ToString();
 

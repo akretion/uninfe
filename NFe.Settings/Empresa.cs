@@ -272,7 +272,11 @@ namespace NFe.Settings
         /// Copiar o XML de denegacao da NFe (-procNfe.xml) para a pasta do danfemon?
         /// </summary>
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
-        public bool XMLDanfeMonDenegadaNFe { get; set; }//danasa 11-4-2012
+        public bool XMLDanfeMonDenegadaNFe { get; set; }
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        public string EmailDanfe { get; set; }
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        public bool AdicionaEmailDanfe { get; set; }
         #endregion
 
 
@@ -971,7 +975,8 @@ namespace NFe.Settings
                 empresa.ConfiguracaoDanfe =
                 empresa.ConfiguracaoCCe =
                 empresa.PastaConfigUniDanfe =
-                empresa.PastaDownloadNFeDest = string.Empty;
+                empresa.PastaDownloadNFeDest =
+                empresa.EmailDanfe = string.Empty;
 
             empresa.X509Certificado = null;
             empresa.CertificadoInstalado = true;
@@ -1011,6 +1016,7 @@ namespace NFe.Settings
                 empresa.XMLDanfeMonProcNFe =
                 empresa.XMLDanfeMonDenegadaNFe =
                 empresa.IndSinc = false;
+            empresa.AdicionaEmailDanfe = true;
             empresa.DiretorioSalvarComo = "AM";
         }
         #endregion

@@ -41,12 +41,17 @@ namespace NFe.Service
                     Servico = Servicos.PedidoSituacaoLoteNFe2;
                 }
 
-
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, dadosPedRec.versao);
+                WebServiceProxy wsProxy = 
+                    ConfiguracaoApp.DefinirWS(  Servico, 
+                                                emp, 
+                                                dadosPedRec.cUF, 
+                                                dadosPedRec.tpAmb, 
+                                                dadosPedRec.tpEmis, 
+                                                dadosPedRec.versao);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
+                var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -54,7 +59,10 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oRepRecepcao, NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.versao), oCabecMsg, this);
+                oInvocarObj.Invocar(wsProxy, 
+                                    oRepRecepcao, 
+                                    wsProxy.NomeMetodoWS[0],// NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.versao), 
+                                    oCabecMsg, this);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo

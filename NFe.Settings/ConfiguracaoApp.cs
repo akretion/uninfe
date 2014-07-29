@@ -235,9 +235,7 @@ namespace NFe.Settings
                                             gravaLista = true;
                                         }
                                     }
-
                                 }
-
                             }
                             else if (item != null)
                             {
@@ -245,12 +243,9 @@ namespace NFe.Settings
                             }
                         }
                     }
-
                     if (gravaLista)
                         GravarVersoesWSDLs(ListArqsAtualizar);
                 }
-
-
                 catch (Exception ex)
                 {
                     int emp = Empresas.FindEmpresaByThread();
@@ -259,7 +254,6 @@ namespace NFe.Settings
                     Auxiliar.WriteLog(ex.Message);
                     Auxiliar oAux = new Auxiliar();
                     oAux.GravarArqErroERP(Empresas.Configuracoes[emp].CNPJ + ".err", xMotivo + Environment.NewLine + ex.Message);
-
                 }
                 finally
                 {
@@ -283,7 +277,6 @@ namespace NFe.Settings
                 if (File.Exists(XMLVersoesWSDL))
                 {
                     LerXmlWSDLs(ListArquivosVerificar);
-
                 }
                 else
                 {
@@ -617,7 +610,7 @@ namespace NFe.Settings
         public static void CarregarDadosSobre()
         {
             string vArquivoConfig = Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfigSobre;
-            
+
             //ConfiguracaoApp.NomeEmpresa = "Unimake Software";
             //ConfiguracaoApp.Site = "www.unimake.com.br";
             //ConfiguracaoApp.SiteProduto = ConfiguracaoApp.Site + "/uninfe";
@@ -716,7 +709,13 @@ namespace NFe.Settings
                         //Definir a URI para conexão com o Webservice
                         string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
 
-                        wsProxy = new WebServiceProxy(Url, Empresas.Configuracoes[emp].X509Certificado, padraoNFSe);
+                        wsProxy = new WebServiceProxy(Url, 
+                                                      Empresas.Configuracoes[emp].X509Certificado, 
+                                                      padraoNFSe,
+                                                      (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
+                                                      //cUF,
+                                                      //versao,
+                                                      servico);
 
                         Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
                     }
@@ -1197,6 +1196,8 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonNFe, empresa.XMLDanfeMonNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonProcNFe, empresa.XMLDanfeMonProcNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonDenegadaNFe, empresa.XMLDanfeMonDenegadaNFe.ToString());
+                        oXmlGravar.WriteElementString("EmailDanfe", empresa.EmailDanfe);
+                        oXmlGravar.WriteElementString("AdicionaEmailDanfe", empresa.AdicionaEmailDanfe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, empresa.TempoConsulta.ToString());
                     }
                     ///
@@ -1667,10 +1668,7 @@ namespace NFe.Settings
             {
                 ///
                 /// inclui o processo de inclusao de empresa pelo 'txt'
-                //if (Path.GetExtension(cArquivoXml).ToLower() != ".txt")
-                //{
                 emp = CadastrarEmpresa(cArquivoXml);
-                //}
 
                 if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 {
@@ -1723,6 +1721,7 @@ namespace NFe.Settings
                                 lEncontrouTag = true;
                                 break;
 
+                            #region --nao usar
 #if false
                             #region Usuário e Senha WS
                             case "usuariows":
@@ -1882,6 +1881,7 @@ namespace NFe.Settings
                             #endregion
 
 #endif
+                            #endregion
                         }
                     }
                     #endregion
@@ -1948,6 +1948,7 @@ namespace NFe.Settings
                             lEncontrouTag = true;
                         }
 
+                        #region --nao usar
 #if false
                         #region Usuário e Senha WS
                         if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS).Count != 0)
@@ -2206,6 +2207,7 @@ namespace NFe.Settings
                         #endregion
 
 #endif
+                        #endregion
                     }
                     #endregion
                 }
@@ -2219,15 +2221,6 @@ namespace NFe.Settings
                     {
                         throw new Exception(NFeStrConstants.proxyError);
                     }
-                    //Empresas.Configuracoes[emp].PastaXmlEnvio = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnvio, true);
-                    //Empresas.Configuracoes[emp].PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEmLote, true);
-                    //Empresas.Configuracoes[emp].PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlRetorno, true);
-                    //Empresas.Configuracoes[emp].PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlEnviado, true);
-                    //Empresas.Configuracoes[emp].PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaXmlErro, true);
-                    //Empresas.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaExeUniDanfe, true);
-                    //Empresas.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaConfigUniDanfe, true);
-                    //Empresas.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[emp].PastaDanfeMon, true);
-
                     Empresas.Configuracoes[emp].RemoveEndSlash();
                 }
             }
@@ -2430,7 +2423,7 @@ namespace NFe.Settings
         {
             string cnpj = "";
             string nomeEmp = "";
-            string servico = "";// ((int)NFe.Components.Propriedade.TipoAplicativo).ToString();// ((int)TipoAplicativo.Nfe).ToString(); //Padrão será NFe
+            string servico = "";
 
             if (Path.GetExtension(arqXML).ToLower() == ".xml")
             {
@@ -2482,7 +2475,7 @@ namespace NFe.Settings
 
             if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp) || string.IsNullOrEmpty(servico))
             {
-                throw new Exception("Não foi possível localizar os dados da empresa no xml de configuração. (CNPJ/Nome ou Tipo de Serviço)");
+                throw new Exception("Não foi possível localizar os dados da empresa no arquivo de configuração. (CNPJ/Nome ou Tipo de Serviço)");
             }
 
             if (Char.IsLetter(servico, 0))

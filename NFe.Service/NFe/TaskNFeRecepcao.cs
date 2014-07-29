@@ -58,7 +58,7 @@ namespace NFe.Service
                     Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
+                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -76,16 +76,26 @@ namespace NFe.Service
                     TFunctions.CompressXML(dadosArquivo);
                 }
 
+                string nOperacao = wsProxy.NomeMetodoWS[0];
+                if (Servico == Servicos.EnviarLoteNfeZip2 && wsProxy.NomeMetodoWS.Length == 2)
+                    nOperacao = wsProxy.NomeMetodoWS[1];
+
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
                 {
-                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oRecepcao, 
+                                        nOperacao,//NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), 
+                                        oCabecMsg, this);
 
                     Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
-                    oInvocarObj.Invocar(wsProxy, oRecepcao, NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), oCabecMsg, this, "-env-lot", "-rec");
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oRecepcao, 
+                                        nOperacao,//NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), 
+                                        oCabecMsg, this, "-env-lot", "-rec");
 
                     Recibo(vStrXmlRetorno);
                 }

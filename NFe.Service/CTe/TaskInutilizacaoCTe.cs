@@ -39,10 +39,16 @@ namespace NFe.Service
                 PedInut(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, string.Empty);
+                WebServiceProxy wsProxy = 
+                    ConfiguracaoApp.DefinirWS(  Servico, 
+                                                emp, 
+                                                dadosPedInut.cUF, 
+                                                dadosPedInut.tpAmb, 
+                                                dadosPedInut.tpEmis, 
+                                                string.Empty);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oInutilizacao = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedInut.cUF));
+                object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedInut.cUF));
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -56,7 +62,11 @@ namespace NFe.Service
                 oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oInutilizacao, NomeMetodoWS(Servico, dadosPedInut.cUF), oCabecMsg, this, "-ped-inu", "-inu");
+                oInvocarObj.Invocar(wsProxy, 
+                                    oInutilizacao, 
+                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedInut.cUF), 
+                                    oCabecMsg, 
+                                    this, "-ped-inu", "-inu");
 
                 //Ler o retorno do webservice
                 this.LerRetornoInut();

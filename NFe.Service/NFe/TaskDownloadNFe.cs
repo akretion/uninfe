@@ -26,8 +26,6 @@ namespace NFe.Service
             {
                 oDadosenvDownload = new DadosenvDownload();
                 //Ler o XML para pegar parâmetros de envio
-                //LerXML oLer = new LerXML();
-                //oLer.
                 EnvDownloadNFe(emp, NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
@@ -36,29 +34,38 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
                         Servico,
                         emp,
-                        Convert.ToInt32(/*oLer.*/oDadosenvDownload.chNFe.Substring(0, 2)),
-                        /*oLer.*/oDadosenvDownload.tpAmb,
+                        Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)),
+                        oDadosenvDownload.tpAmb,
                         1, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oDownloadEvento = wsProxy.CriarObjeto("NfeDownloadNF");
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(/*oLer.*/oDadosenvDownload.chNFe.Substring(0, 2)), Servico));
+                    object oDownloadEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/oDadosenvDownload.chNFe.Substring(0, 2));
+                    wsProxy.SetProp(oCabecMsg, "cUF", oDadosenvDownload.chNFe.Substring(0, 2));
                     wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
 
-                    //Criar objeto da classe de assinatura digital
-                    //AssinaturaDigital oAD = new AssinaturaDigital();
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oDownloadEvento, 
+                                        wsProxy.NomeMetodoWS[0],
+                                        oCabecMsg,
+                                        this);
+#if old
+                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                    object oDownloadEvento = wsProxy.CriarObjeto("NfeDownloadNF");
+                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), Servico));
 
-                    //Assinar o XML
-                    //oAD.Assinar(NomeArquivoXML, emp);
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, "cUF", oDadosenvDownload.chNFe.Substring(0, 2));
+                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF",
                                         oCabecMsg,
                                         this);
-
+#endif
                     //Ler o retorno
                     LerRetornoDownloadNFe(emp);
 

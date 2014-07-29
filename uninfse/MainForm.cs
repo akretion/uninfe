@@ -73,7 +73,7 @@ namespace uninfse
             try
             {
                 XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-                iniFile.LoadForm(this, "");
+                iniFile.LoadForm(this, "", true);
             }
             catch { }   // para evitar que para alguns que derrubam o uninfe quando atualizam
 
@@ -695,7 +695,7 @@ namespace uninfse
                 /// danasa 9-2009
                 /// 
                 XMLIniFile iniFile = new XMLIniFile(Propriedade.NomeArqXMLParams);
-                iniFile.LoadForm(this, "");
+                iniFile.LoadForm(this, "", true);
             }
             this.Tag = 1;
             base.OnActivated(e);
