@@ -173,7 +173,7 @@ namespace MetroFramework
                 {
                     _control.Size = new Size(_owner.Size.Width, Math.Min(_owner.Size.Height, Math.Max(lt, _control.Height)));
                     _control.Location = new Point(_owner.Location.X, _owner.Location.Y + (_owner.Height - _control.Height) / 2);
-                    int _overlaySizes = Convert.ToInt32(Math.Floor(_control.Size.Height * 0.28));
+                    //int _overlaySizes = Convert.ToInt32(Math.Floor(_control.Size.Height * 0.28));
                     //_control.OverlayPanelTop.Size = new Size(_control.Size.Width, _overlaySizes - 30);
                     //_control.OverlayPanelBottom.Size = new Size(_control.Size.Width, _overlaySizes);
                     _control.ShowDialog();
@@ -188,19 +188,25 @@ namespace MetroFramework
                     _control.Location = new Point(x, y);
                     _control.Size = new Size(_control.Size.Width, 
                             Math.Min(Screen.PrimaryScreen.WorkingArea.Size.Height, Math.Max(_control.Size.Height, lt)));
-                    _control.Show();
+                    //_control.Show();
+
+                    _control.ShowDialog();
                 }
                 _control.BringToFront();
                 _control.SetDefaultButton();
 
+                bool _cancelled = false;
+                /*
                 Action<MetroMessageBoxControl> _delegate = new Action<MetroMessageBoxControl>(ModalState);
                 IAsyncResult _asyncresult = _delegate.BeginInvoke(_control, null, _delegate);
-                bool _cancelled = false;
 
                 try
                 {
                     while (!_asyncresult.IsCompleted)
-                    { Thread.Sleep(1); Application.DoEvents(); }
+                    { 
+                        Thread.Sleep(1); 
+                        Application.DoEvents(); 
+                    }
                 }
                 catch 
                 {
@@ -214,12 +220,13 @@ namespace MetroFramework
 
                     _delegate = null;
                 }
-
+                */
                 if (!_cancelled)
                 {
                     _result = _control.Result;
                     //_owner.Controls.Remove(_control);
-                    _control.Dispose(); _control = null;
+                    _control.Dispose(); 
+                    _control = null;
                 }
                  
             }

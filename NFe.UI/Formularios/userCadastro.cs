@@ -201,16 +201,16 @@ namespace NFe.UI
         {
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                        Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
-                       "-ret-cons-cad.xml";
+                       Propriedade.ExtRetorno.ConsCad_XML;// "-ret-cons-cad.xml";
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
-                      "-ret-cons-cad.err";
+                      Propriedade.ExtRetorno.ConsCad_ERR;// "-ret-cons-cad.err";
 
             object vRetorno = null;
             try
             {
-                vRetorno = EnviaArquivoERecebeResposta(2, ArqXMLRetorno, ArqERRRetorno);
+                vRetorno = EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno);
             }
             finally
             {
@@ -250,7 +250,7 @@ namespace NFe.UI
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2009</date>
-        private object EnviaArquivoERecebeResposta(int tipo, string arqXMLRetorno, string arqERRRetorno)
+        private object EnviaArquivoERecebeResposta(string arqXMLRetorno, string arqERRRetorno)
         {
             DateTime startTime;
             DateTime stopTime;

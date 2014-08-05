@@ -47,7 +47,6 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.labelTitle.Size = new System.Drawing.Size(244, 25);
             this.labelTitle.Text = "Pedido de situação de serviços";
             // 
@@ -66,13 +65,13 @@
             this.cbEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmpresa.FormattingEnabled = true;
-            this.cbEmpresa.ItemHeight = 19;
+            this.cbEmpresa.ItemHeight = 23;
             this.cbEmpresa.Items.AddRange(new object[] {
             "Item 4"});
             this.cbEmpresa.Location = new System.Drawing.Point(0, 77);
             this.cbEmpresa.MaxDropDownItems = 15;
             this.cbEmpresa.Name = "cbEmpresa";
-            this.cbEmpresa.Size = new System.Drawing.Size(772, 25);
+            this.cbEmpresa.Size = new System.Drawing.Size(778, 29);
             this.cbEmpresa.TabIndex = 15;
             this.cbEmpresa.UseSelectable = true;
             this.cbEmpresa.SelectedIndexChanged += new System.EventHandler(this.cbEmpresa_SelectedIndexChanged);
@@ -91,13 +90,13 @@
             // 
             this.comboUf.FormattingEnabled = true;
             this.comboUf.IntegralHeight = false;
-            this.comboUf.ItemHeight = 19;
+            this.comboUf.ItemHeight = 23;
             this.comboUf.Items.AddRange(new object[] {
             "Item 4"});
             this.comboUf.Location = new System.Drawing.Point(0, 128);
             this.comboUf.MaxDropDownItems = 15;
             this.comboUf.Name = "comboUf";
-            this.comboUf.Size = new System.Drawing.Size(181, 25);
+            this.comboUf.Size = new System.Drawing.Size(181, 29);
             this.comboUf.TabIndex = 17;
             this.comboUf.UseSelectable = true;
             // 
@@ -114,14 +113,14 @@
             // cbVersao
             // 
             this.cbVersao.FormattingEnabled = true;
-            this.cbVersao.ItemHeight = 19;
+            this.cbVersao.ItemHeight = 23;
             this.cbVersao.Items.AddRange(new object[] {
             "3.10",
             "2.00"});
             this.cbVersao.Location = new System.Drawing.Point(189, 128);
             this.cbVersao.MaxDropDownItems = 15;
             this.cbVersao.Name = "cbVersao";
-            this.cbVersao.Size = new System.Drawing.Size(181, 25);
+            this.cbVersao.Size = new System.Drawing.Size(181, 29);
             this.cbVersao.TabIndex = 19;
             this.cbVersao.UseSelectable = true;
             // 
@@ -138,13 +137,13 @@
             // cbAmbiente
             // 
             this.cbAmbiente.FormattingEnabled = true;
-            this.cbAmbiente.ItemHeight = 19;
+            this.cbAmbiente.ItemHeight = 23;
             this.cbAmbiente.Items.AddRange(new object[] {
             "A"});
             this.cbAmbiente.Location = new System.Drawing.Point(374, 128);
             this.cbAmbiente.MaxDropDownItems = 15;
             this.cbAmbiente.Name = "cbAmbiente";
-            this.cbAmbiente.Size = new System.Drawing.Size(181, 25);
+            this.cbAmbiente.Size = new System.Drawing.Size(181, 29);
             this.cbAmbiente.TabIndex = 21;
             this.cbAmbiente.UseSelectable = true;
             // 
@@ -161,13 +160,13 @@
             // cbEmissao
             // 
             this.cbEmissao.FormattingEnabled = true;
-            this.cbEmissao.ItemHeight = 19;
+            this.cbEmissao.ItemHeight = 23;
             this.cbEmissao.Items.AddRange(new object[] {
             "a"});
             this.cbEmissao.Location = new System.Drawing.Point(0, 181);
             this.cbEmissao.MaxDropDownItems = 15;
             this.cbEmissao.Name = "cbEmissao";
-            this.cbEmissao.Size = new System.Drawing.Size(370, 25);
+            this.cbEmissao.Size = new System.Drawing.Size(370, 29);
             this.cbEmissao.TabIndex = 23;
             this.cbEmissao.UseSelectable = true;
             // 
@@ -185,13 +184,13 @@
             // 
             this.cbServico.Enabled = false;
             this.cbServico.FormattingEnabled = true;
-            this.cbServico.ItemHeight = 19;
+            this.cbServico.ItemHeight = 23;
             this.cbServico.Items.AddRange(new object[] {
             "A"});
             this.cbServico.Location = new System.Drawing.Point(374, 181);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(181, 25);
+            this.cbServico.Size = new System.Drawing.Size(181, 29);
             this.cbServico.TabIndex = 25;
             this.cbServico.UseSelectable = true;
             this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
@@ -211,6 +210,7 @@
             this.textResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textResultado.Lines = new string[0];
             this.textResultado.Location = new System.Drawing.Point(0, 245);
             this.textResultado.MaxLength = 32767;
             this.textResultado.Multiline = true;
@@ -219,7 +219,7 @@
             this.textResultado.ReadOnly = true;
             this.textResultado.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textResultado.SelectedText = "";
-            this.textResultado.Size = new System.Drawing.Size(774, 236);
+            this.textResultado.Size = new System.Drawing.Size(780, 236);
             this.textResultado.TabIndex = 28;
             this.textResultado.UseSelectable = true;
             this.textResultado.UseStyleColors = true;
@@ -227,7 +227,7 @@
             // buttonPesquisa
             // 
             this.buttonPesquisa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPesquisa.Location = new System.Drawing.Point(692, 181);
+            this.buttonPesquisa.Location = new System.Drawing.Point(698, 181);
             this.buttonPesquisa.Name = "buttonPesquisa";
             this.buttonPesquisa.Size = new System.Drawing.Size(80, 25);
             this.buttonPesquisa.TabIndex = 29;
@@ -255,7 +255,7 @@
             this.Controls.Add(this.metroLabel17);
             this.Controls.Add(this.cbEmpresa);
             this.Name = "userPedidoSituacao";
-            this.Size = new System.Drawing.Size(777, 484);
+            this.Size = new System.Drawing.Size(783, 484);
             this.Controls.SetChildIndex(this.labelTitle, 0);
             this.Controls.SetChildIndex(this.cbEmpresa, 0);
             this.Controls.SetChildIndex(this.metroLabel17, 0);

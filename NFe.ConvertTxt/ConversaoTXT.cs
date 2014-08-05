@@ -1059,7 +1059,11 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I18":
-                    layout = "§I18|NDI¨|DDI¨|XLocDesemb¨|UFDesemb¨|DDesemb¨|CExportador¨"; //ok
+                    if (NFe.infNFe.Versao >= 3)
+                        layout = "§I18|NDI¨|DDI¨|XLocDesemb¨|UFDesemb¨|DDesemb¨|CExportador¨|tpViaTransp¨|vAFRMM¨|tpIntermedio¨|CNPJ¨|UFTerceiro¨"; //ok
+                    else
+                        layout = "§I18|NDI¨|DDI¨|XLocDesemb¨|UFDesemb¨|DDesemb¨|CExportador¨"; //ok
+
                     ///
                     /// Grupo da TAG <det><prod><DI>
                     /// 
@@ -1073,6 +1077,14 @@ namespace NFe.ConvertTxt
                     diItem.UFDesemb     = this.LerString(TpcnResources.UFDesemb, ObOp.Obrigatorio, 2, 2);
                     diItem.dDesemb      = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dDesemb, ObOp.Obrigatorio, 10, 10);
                     diItem.cExportador  = this.LerString(TpcnResources.cExportador, ObOp.Obrigatorio, 1, 60);
+                    if (NFe.infNFe.Versao >= 3)
+                    {
+                        diItem.tpViaTransp = (TpcnTipoViaTransp)this.LerInt32(TpcnResources.tpViaTransp, ObOp.Opcional, 1, 2);
+                        diItem.vAFRMM = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vAFRMM, ObOp.Opcional, 15);
+                        diItem.tpIntermedio = (TpcnTipoIntermedio)this.LerInt32(TpcnResources.tpIntermedio, ObOp.Opcional, 1, 1);
+                        diItem.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
+                        diItem.UFTerceiro = this.LerString(TpcnResources.UFTerceiro, ObOp.Opcional, 2, 2);
+                    }
 
                     NFe.det[nProd].Prod.DI.Add(diItem);
                     #endregion
@@ -1091,8 +1103,11 @@ namespace NFe.ConvertTxt
                     }
                     break;
 
-                case "I25": 
-                    layout = "§I25|NAdicao¨|NSeqAdic¨|CFabricante¨|VDescDI¨"; //ok
+                case "I25":
+                    if (NFe.infNFe.Versao >= 3)
+                        layout = "§I25|NAdicao¨|NSeqAdic¨|CFabricante¨|VDescDI¨|nDraw¨"; //ok
+                    else
+                        layout = "§I25|NAdicao¨|NSeqAdic¨|CFabricante¨|VDescDI¨"; //ok
                     ///
                     /// Grupo da TAG <det><prod><DI><adi> 
                     /// 
@@ -1104,6 +1119,8 @@ namespace NFe.ConvertTxt
                     adiItem.nSeqAdi     = this.LerInt32(TpcnResources.nSeqAdic, ObOp.Obrigatorio, 1, 3);
                     adiItem.cFabricante = this.LerString(TpcnResources.cFabricante, ObOp.Obrigatorio, 1, 60);
                     adiItem.vDescDI     = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDescDI, ObOp.Opcional, 15);
+                    if (NFe.infNFe.Versao >= 3)
+                        adiItem.nDraw = this.LerString(TpcnResources.nDraw, ObOp.Opcional, 0, 11);
 
                     NFe.det[nProd].Prod.DI[NFe.det[nProd].Prod.DI.Count-1].adi.Add(adiItem);
                     #endregion

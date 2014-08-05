@@ -738,9 +738,6 @@ namespace NFe.Service
         }
         #endregion
 
-
-
-
         #region AlterarConfiguracoesUniNFe()
         /// <summary>
         /// Executa as tarefas pertinentes a consulta das informações do UniNFe
@@ -1258,21 +1255,29 @@ namespace NFe.Service
 
             switch(servico)
             {
+                #region NFe / CTe / MDFe
+                case Servicos.InutilizarNumerosCTe:
                 case Servicos.InutilizarNumerosNFe:
                     extRet = Propriedade.ExtEnvio.PedInu_XML;
                     extRetERR = Propriedade.ExtRetorno.Inu_ERR;
                     break;
 
+                case Servicos.PedidoConsultaSituacaoCTe:
                 case Servicos.PedidoConsultaSituacaoNFe:
+                case Servicos.PedidoConsultaSituacaoMDFe:
                     extRet = Propriedade.ExtEnvio.PedSit_XML;
                     extRetERR = Propriedade.ExtRetorno.Sit_ERR;
                     break;
 
+                case Servicos.ConsultaStatusServicoCTe:
                 case Servicos.ConsultaStatusServicoNFe:
+                case Servicos.ConsultaStatusServicoMDFe:
                     extRet = Propriedade.ExtEnvio.PedSta_XML;
                     extRetERR = Propriedade.ExtRetorno.Sta_ERR;
                     break;
 
+                case Servicos.PedidoSituacaoLoteCTe:
+                case Servicos.PedidoSituacaoLoteMDFe:
                 case Servicos.PedidoSituacaoLoteNFe:
                     extRet = Propriedade.ExtEnvio.PedRec_XML;
                     extRetERR = Propriedade.ExtRetorno.ProRec_ERR;
@@ -1283,35 +1288,34 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.ConsCad_ERR;
                     break;
 
+                case Servicos.MontarLoteUmCTe:
+                    extRet = Propriedade.ExtEnvio.Cte;
+                    extRetERR = Propriedade.ExtRetorno.Cte_ERR;
+                    break;
 
                 case Servicos.MontarLoteUmaNFe:
                     extRet = Propriedade.ExtEnvio.Nfe;
                     extRetERR = Propriedade.ExtRetorno.Nfe_ERR;
                     break;
 
+                case Servicos.MontarLoteUmMDFe:
+                    extRet = Propriedade.ExtEnvio.MDFe;
+                    extRetERR = Propriedade.ExtRetorno.MDFe_ERR;
+                    break;
+
+                case Servicos.MontarLoteVariosCTe:
                 case Servicos.MontarLoteVariasNFe:
+                case Servicos.MontarLoteVariosMDFe:
                     extRet = Propriedade.ExtEnvio.MontarLote;
                     extRetERR = Propriedade.ExtRetorno.MontarLote_ERR;
                     break;
 
+                case Servicos.EnviarLoteCTe:
                 case Servicos.EnviarLoteNfe:
                 case Servicos.EnviarLoteNfe2:
+                case Servicos.EnviarLoteMDFe:
                     extRet = Propriedade.ExtEnvio.EnvLot;
                     extRetERR = Propriedade.ExtRetorno.Rec_ERR;
-                    break;
-
-                case Servicos.AlterarConfiguracoesUniNFe:
-
-                case Servicos.AssinarValidar:
-                case Servicos.ConsultaInformacoesUniNFe:
-
-                case Servicos.ConverterTXTparaXML:
-                case Servicos.EmProcessamento:
-
-                case Servicos.GerarChaveNFe:
-
-                case Servicos.LimpezaTemporario:
-                    //Não tem definição pois não gera arquivo .ERR
                     break;
 
                 case Servicos.EnviarDPEC:
@@ -1324,9 +1328,27 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.retConsDPEC_ERR;
                     break;
 
+                case Servicos.AssinarValidarCTeEnvioEmLote:
+                    extRet = Propriedade.ExtEnvio.Cte;
+                    extRetERR = Propriedade.ExtRetorno.Cte_ERR;
+                    break;
+
+                case Servicos.AssinarValidarMDFeEnvioEmLote:
+                    extRet = Propriedade.ExtEnvio.MDFe;
+                    extRetERR = Propriedade.ExtRetorno.MDFe_ERR;
+                    break;
+
                 case Servicos.AssinarValidarNFeEnvioEmLote:
                     extRet = Propriedade.ExtEnvio.Nfe;
                     extRetERR = Propriedade.ExtRetorno.Nfe_ERR;
+                    break;
+
+                case Servicos.RecepcaoEvento:
+                case Servicos.RecepcaoEventoCTe:
+                case Servicos.RecepcaoEventoMDFe:
+                case Servicos.EnviarEPEC:
+                    extRet = Propriedade.ExtEnvio.PedEve;
+                    extRetERR = Propriedade.ExtRetorno.Eve_ERR;
                     break;
 
                 case Servicos.EnviarCCe:
@@ -1354,6 +1376,9 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.retConsNFeDest_ERR;
                     break;
 
+                #endregion
+
+                #region NFSe
                 case Servicos.RecepcionarLoteRps:
                     extRet = Propriedade.ExtEnvio.EnvLoteRps;
                     extRetERR = Propriedade.ExtRetorno.RetLoteRps_ERR;
@@ -1383,6 +1408,20 @@ namespace NFe.Service
                     extRet = Propriedade.ExtEnvio.PedCanNfse;
                     extRetERR = Propriedade.ExtRetorno.CanNfse_ERR;
                     break;
+
+                #endregion
+
+                #region Diversos
+                case Servicos.AlterarConfiguracoesUniNFe:
+                case Servicos.AssinarValidar:
+                case Servicos.ConsultaInformacoesUniNFe:
+                case Servicos.ConverterTXTparaXML:
+                case Servicos.EmProcessamento:
+                case Servicos.GerarChaveNFe:
+                case Servicos.LimpezaTemporario:
+                    //Não tem definição pois não gera arquivo .ERR
+                    break;
+                #endregion
 
                 default:
                     //Como não foi possível identificar o tipo do servico vou mudar somente a extensão para .err pois isso pode acontecer caso exista erro na estrutura do XML.
@@ -1414,8 +1453,6 @@ namespace NFe.Service
             {
                 ConsultaCertificados(arquivo);
             }
-
-
         }
 
         protected void ConsultaCertificados(string arquivo)

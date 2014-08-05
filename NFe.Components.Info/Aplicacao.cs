@@ -234,7 +234,7 @@ namespace NFe.Components.Info
                 else
                 {
                     ((StringWriter)oXmlGravar).Flush();
-                    File.WriteAllText(sArquivo, ((StringWriter)oXmlGravar).GetStringBuilder().ToString(), Encoding.UTF8);
+                    File.WriteAllText(sArquivo, ((StringWriter)oXmlGravar).GetStringBuilder().ToString(), Encoding.Default);
                     ((StringWriter)oXmlGravar).Close();
                 }
             }

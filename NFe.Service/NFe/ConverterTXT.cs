@@ -40,8 +40,8 @@ namespace NFe.Service
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension));
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + "-nfe-ret.xml"));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + ccExtension));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + "-nfe-ret.xml"));
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
@@ -97,6 +97,8 @@ namespace NFe.Service
                             // move o arquivo XML criado na pasta Validar\Convertidos para a pasta Validar
                             string nomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
                             Functions.Move(txtClass.XMLFileName, nomeArquivoDestino);
+
+                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + Propriedade.ExtEnvio.Nfe);
                         }
                     }
                 }
@@ -135,7 +137,7 @@ namespace NFe.Service
                 /// 
                 /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
                 /// 
-                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, "-nfe.txt") + ccExtension, ccMessage);
+                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + ccExtension, ccMessage);
             }
         }
     }

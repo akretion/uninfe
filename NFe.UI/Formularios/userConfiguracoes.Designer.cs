@@ -44,7 +44,6 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.labelTitle.Size = new System.Drawing.Size(121, 25);
             this.labelTitle.Text = "Configurações";
             // 
@@ -68,9 +67,9 @@
             this.tpGeral.HorizontalScrollbarBarColor = true;
             this.tpGeral.HorizontalScrollbarHighlightOnWheel = false;
             this.tpGeral.HorizontalScrollbarSize = 10;
-            this.tpGeral.Location = new System.Drawing.Point(4, 35);
+            this.tpGeral.Location = new System.Drawing.Point(4, 38);
             this.tpGeral.Name = "tpGeral";
-            this.tpGeral.Size = new System.Drawing.Size(746, 379);
+            this.tpGeral.Size = new System.Drawing.Size(746, 376);
             this.tpGeral.TabIndex = 0;
             this.tpGeral.Text = "Geral";
             this.tpGeral.VerticalScrollbar = true;
@@ -90,9 +89,9 @@
             this.tpEmpresas.HorizontalScrollbarBarColor = true;
             this.tpEmpresas.HorizontalScrollbarHighlightOnWheel = false;
             this.tpEmpresas.HorizontalScrollbarSize = 10;
-            this.tpEmpresas.Location = new System.Drawing.Point(4, 35);
+            this.tpEmpresas.Location = new System.Drawing.Point(4, 38);
             this.tpEmpresas.Name = "tpEmpresas";
-            this.tpEmpresas.Size = new System.Drawing.Size(746, 379);
+            this.tpEmpresas.Size = new System.Drawing.Size(746, 376);
             this.tpEmpresas.TabIndex = 3;
             this.tpEmpresas.Text = "Empresas";
             this.tpEmpresas.VerticalScrollbar = true;
@@ -117,7 +116,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmpresas.DisplayMember = "Nome";
             this.cbEmpresas.FormattingEnabled = true;
-            this.cbEmpresas.ItemHeight = 19;
+            this.cbEmpresas.ItemHeight = 23;
             this.cbEmpresas.Items.AddRange(new object[] {
             "Normal Combobox",
             "Item 2",
@@ -126,7 +125,7 @@
             this.cbEmpresas.Location = new System.Drawing.Point(3, 25);
             this.cbEmpresas.MaxDropDownItems = 15;
             this.cbEmpresas.Name = "cbEmpresas";
-            this.cbEmpresas.Size = new System.Drawing.Size(540, 25);
+            this.cbEmpresas.Size = new System.Drawing.Size(540, 29);
             this.cbEmpresas.TabIndex = 15;
             this.cbEmpresas.UseSelectable = true;
             this.cbEmpresas.ValueMember = "CNPJ";
@@ -162,9 +161,9 @@
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(739, 277);
+            this.metroTabPage1.Size = new System.Drawing.Size(739, 274);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "metroTabPage1";
             this.metroTabPage1.VerticalScrollbarBarColor = true;

@@ -50,7 +50,7 @@
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(23, 63);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(427, 73);
+            this.metroPanel2.Size = new System.Drawing.Size(449, 73);
             this.metroPanel2.TabIndex = 39;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -70,13 +70,15 @@
             // 
             this.tbSenha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSenha.Lines = new string[] {
+        "Normal Textbox"};
             this.tbSenha.Location = new System.Drawing.Point(16, 37);
             this.tbSenha.MaxLength = 32767;
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.PasswordChar = '#';
             this.tbSenha.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenha.SelectedText = "";
-            this.tbSenha.Size = new System.Drawing.Size(391, 22);
+            this.tbSenha.Size = new System.Drawing.Size(413, 22);
             this.tbSenha.TabIndex = 11;
             this.tbSenha.Text = "Normal Textbox";
             this.tbSenha.UseSelectable = true;
@@ -85,7 +87,7 @@
             // metroButton1
             // 
             this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton1.Location = new System.Drawing.Point(284, 154);
+            this.metroButton1.Location = new System.Drawing.Point(306, 154);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(80, 25);
             this.metroButton1.TabIndex = 40;
@@ -97,30 +99,33 @@
             // 
             this.metroButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.metroButton2.Location = new System.Drawing.Point(370, 154);
+            this.metroButton2.Location = new System.Drawing.Point(392, 154);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(80, 25);
             this.metroButton2.TabIndex = 41;
             this.metroButton2.Text = "Fechar";
             this.metroButton2.UseSelectable = true;
+            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
             // 
             // FormSenha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.metroButton2;
-            this.ClientSize = new System.Drawing.Size(473, 197);
+            this.ClientSize = new System.Drawing.Size(495, 197);
             this.ControlBox = false;
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroPanel2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(495, 197);
             this.Name = "FormSenha";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
             this.Text = "FormSenha";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormSenha_Load);
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();

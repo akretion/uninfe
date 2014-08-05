@@ -1,12 +1,14 @@
-﻿namespace NFe.Components
-{
-    using System;
-    using System.Xml;
-    using System.Xml.Serialization;	//For serialization of an object to an XML file.
-    using System.IO;				//For reading/writing data to an XML file.
-    using System.ComponentModel;	//For error messsages.
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using System.ComponentModel;	//For error messsages.
 
+namespace NFe.Components
+{
     /// <summary>
     /// Custom class used as a wrapper to the XML serialization of an object to/from an XML file.
     /// See method calls 'Load' and 'Save' for usage.
@@ -94,6 +96,48 @@
                 //Make sure to close the file even if an exception is raised...
                 if (txwTextWriter != null)
                     txwTextWriter.Close();
+            }
+        }
+    }
+
+    public class Serializador
+    {
+        public void SalvarXml<T>(T objeto, string caminhoSalvar)
+        {
+            if (System.IO.File.Exists(caminhoSalvar))
+                System.IO.File.Delete(caminhoSalvar);
+            using (var stream = new System.IO.StreamWriter(System.IO.File.Open(caminhoSalvar, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+            {
+                XmlSerializer infoSerializer = new XmlSerializer(typeof(T));
+                //XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+                //namespaces.Add("e", "http://www.betha.com.br/e-nota-contribuinte-ws");
+                infoSerializer.Serialize(stream, objeto);//, namespaces);
+                stream.Close();
+            }
+        }
+
+        public T LerXml<T>(string caminhoXml)
+        {            
+            using (var stream = new System.IO.StreamReader(System.IO.File.Open(caminhoXml, FileMode.Open, FileAccess.Read)))
+            {
+                XmlSerializer infoSerializer = new XmlSerializer(typeof(T));
+                var objeto = infoSerializer.Deserialize(stream);
+                stream.Close();
+                return (T)objeto;
+            }
+        }
+
+        public T TryLerXml<T>(string caminhoXml, out bool erro)
+        {
+            erro = false;
+            try
+            {
+                return (T)LerXml<T>(caminhoXml);
+            }
+            catch
+            {
+                erro = true;
+                return default(T);
             }
         }
     }

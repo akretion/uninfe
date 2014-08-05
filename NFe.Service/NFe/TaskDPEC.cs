@@ -227,7 +227,9 @@ namespace NFe.Service
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dtEmissaoDPEC);
 
                         //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                                                  PastaEnviados.Autorizados.ToString() + "\\" + 
+                                                  Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
                         oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDPEC_XML, Propriedade.ExtRetorno.retDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                     }
                     else
@@ -356,7 +358,9 @@ namespace NFe.Service
                         }
 
                         //Gravar o XML retornado pelo WebService do SEFAZ na pasta de autorizados. Wandrey 25/11/2010
-                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
+                        string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                                                  PastaEnviados.Autorizados.ToString() + "\\" + 
+                                                  Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dtEmissaoDPEC);
                         oGerarXML.XmlRetorno(Propriedade.ExtEnvio.ConsDPEC_XML, Propriedade.ExtRetorno.retConsDPEC_XML, vStrXmlRetorno, nomePastaEnviado);
                     }
                     else

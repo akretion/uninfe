@@ -1181,6 +1181,7 @@ namespace NFe.Settings
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, empresa.GravarEventosNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
+                        oXmlGravar.WriteElementString("diretorioSalvarComo", empresa.DiretorioSalvarComo.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, empresa.IndSinc.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.CompactarNfe, empresa.CompactarNfe.ToString());
                     }

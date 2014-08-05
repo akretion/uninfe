@@ -11,17 +11,29 @@ namespace NFe.UI
 {
     public partial class FormSenha : MetroFramework.Forms.MetroForm
     {
-        public FormSenha()
+        bool frommain;
+        public FormSenha(bool fromMain)
         {
             InitializeComponent();
+            frommain = fromMain;
         }
 
         private void FormSenha_Load(object sender, EventArgs e)
         {
-            this.Theme = uninfeDummy.mainForm.uTheme;
-            this.Style = uninfeDummy.mainForm.uStyle;
+            //this.Theme = uninfeDummy.mainForm.uTheme;
+            //this.Style = uninfeDummy.mainForm.uStyle;
+            uninfeDummy.ClearControls(this, true, frommain);
             this.Text = NFe.Components.Propriedade.NomeAplicacao;
             this.tbSenha.Clear();
+            if (frommain)
+            {
+                this.Size = new Size(uninfeDummy.mainForm.Size.Width, this.Height);
+                this.Location = new Point(uninfeDummy.mainForm.Location.X, uninfeDummy.mainForm.Location.Y + (uninfeDummy.mainForm.Height - this.Height) / 2);
+            }
+            else
+            {
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
         }
 
         protected override void OnShown(EventArgs e)
@@ -60,9 +72,14 @@ namespace NFe.UI
                 this.metroButton1_Click(sender, null);
         }
 
-        public static bool SolicitaSenha()
+        private void metroButton2_Click(object sender, EventArgs e)
         {
-            using (FormSenha f = new FormSenha())
+            this.Close();
+        }
+
+        public static bool SolicitaSenha(bool fromMain)
+        {
+            using (FormSenha f = new FormSenha(fromMain))
             {
                 return f.ShowDialog() == DialogResult.OK;
             }

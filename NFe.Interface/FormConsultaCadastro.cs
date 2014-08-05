@@ -370,11 +370,11 @@ namespace NFe.Interface
         {
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      "-sta.xml";
+                      Propriedade.ExtRetorno.Sta_XML;// "-sta.xml";
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      "-sta.err";
+                      Propriedade.ExtRetorno.Sta_ERR;// "-sta.err";
 
             string result = string.Empty;
 

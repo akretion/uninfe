@@ -54,7 +54,7 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao);
 
-                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00" && wsProxy.NomeMetodoWS.Length == 2)
                     Servico = Servicos.EnviarLoteNfeZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -70,15 +70,13 @@ namespace NFe.Service
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.EnviarLoteNfeZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
                 }
 
-                string nOperacao = wsProxy.NomeMetodoWS[0];
-                if (Servico == Servicos.EnviarLoteNfeZip2 && wsProxy.NomeMetodoWS.Length == 2)
-                    nOperacao = wsProxy.NomeMetodoWS[1];
+                string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.EnviarLoteNfeZip2) ? 1 : 0];
 
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
@@ -128,7 +126,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.EnviarLoteNfeZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)

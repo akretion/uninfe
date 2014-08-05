@@ -206,15 +206,15 @@ namespace NFe.UI
 
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      "-sta.xml";
+                      Propriedade.ExtRetorno.Sta_XML;// "-sta.xml";
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      "-sta.err";
+                      Propriedade.ExtRetorno.Sta_ERR;// "-sta.err";
 
             try
             {
-                result = (string)EnviaArquivoERecebeResposta(1, ArqXMLRetorno, ArqERRRetorno);
+                result = (string)EnviaArquivoERecebeResposta(ArqXMLRetorno, ArqERRRetorno);
             }
             finally
             {
@@ -265,7 +265,7 @@ namespace NFe.UI
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2009</date>
-        private object EnviaArquivoERecebeResposta(int tipo, string arqXMLRetorno, string arqERRRetorno)
+        private object EnviaArquivoERecebeResposta(string arqXMLRetorno, string arqERRRetorno)
         {
             object vStatus = uninfeDummy.vStatus;
             DateTime startTime;
@@ -293,8 +293,6 @@ namespace NFe.UI
                         try
                         {
                             //Ler o status do serviço no XML retornado pelo WebService
-                            //XmlTextReader oLerXml = new XmlTextReader(ArqXMLRetorno);
-
                             try
                             {
                                 vStatus = ProcessaStatusServico(arqXMLRetorno);
@@ -341,10 +339,8 @@ namespace NFe.UI
                         //Somente deixa fazer o loop novamente e tentar deletar
                     }
                 }
-
                 Thread.Sleep(3000);
             }
-
             //Retornar o status do serviço
             return vStatus;
         }

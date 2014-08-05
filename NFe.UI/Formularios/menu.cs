@@ -218,6 +218,13 @@ namespace NFe.UI
 
         private void metroTile_CFG_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig) && uninfeDummy.TempoExpirou())
+            {
+                if (!FormSenha.SolicitaSenha(true))
+                    return;
+
+                uninfeDummy.UltimoAcessoConfiguracao = DateTime.Now;
+            }
             createControl(typeof(userConfiguracoes));
         }
 

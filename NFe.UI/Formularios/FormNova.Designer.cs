@@ -53,6 +53,8 @@
             // 
             // edtCNPJ
             // 
+            this.edtCNPJ.Lines = new string[] {
+        "Normal Textbox"};
             this.edtCNPJ.Location = new System.Drawing.Point(11, 33);
             this.edtCNPJ.MaxLength = 14;
             this.edtCNPJ.Name = "edtCNPJ";
@@ -80,13 +82,17 @@
             // 
             // edtNome
             // 
+            this.edtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtNome.Lines = new string[] {
+        "Normal Textbox"};
             this.edtNome.Location = new System.Drawing.Point(11, 84);
             this.edtNome.MaxLength = 100;
             this.edtNome.Name = "edtNome";
             this.edtNome.PasswordChar = '\0';
             this.edtNome.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.edtNome.SelectedText = "";
-            this.edtNome.Size = new System.Drawing.Size(507, 22);
+            this.edtNome.Size = new System.Drawing.Size(514, 22);
             this.edtNome.TabIndex = 3;
             this.edtNome.Text = "Normal Textbox";
             this.edtNome.UseSelectable = true;
@@ -95,11 +101,11 @@
             // cbServico
             // 
             this.cbServico.FormattingEnabled = true;
-            this.cbServico.ItemHeight = 19;
+            this.cbServico.ItemHeight = 23;
             this.cbServico.Location = new System.Drawing.Point(11, 130);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(174, 25);
+            this.cbServico.Size = new System.Drawing.Size(174, 29);
             this.cbServico.TabIndex = 5;
             this.cbServico.UseSelectable = true;
             // 
@@ -116,7 +122,8 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(387, 232);
+            this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroButton1.Location = new System.Drawing.Point(398, 246);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(80, 25);
             this.metroButton1.TabIndex = 1;
@@ -126,8 +133,9 @@
             // 
             // metroButton2
             // 
+            this.metroButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.metroButton2.Location = new System.Drawing.Point(473, 232);
+            this.metroButton2.Location = new System.Drawing.Point(484, 246);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(80, 25);
             this.metroButton2.TabIndex = 2;
@@ -152,7 +160,7 @@
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(23, 59);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(530, 167);
+            this.metroPanel2.Size = new System.Drawing.Size(541, 181);
             this.metroPanel2.TabIndex = 0;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -163,7 +171,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.metroButton2;
-            this.ClientSize = new System.Drawing.Size(576, 271);
+            this.ClientSize = new System.Drawing.Size(587, 285);
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroButton2);
@@ -172,7 +180,9 @@
             this.MinimizeBox = false;
             this.Name = "FormNova";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
             this.Text = "FormNova";
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();

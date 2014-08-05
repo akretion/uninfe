@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2">
   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-    Serviço destinado ao atendimento de solicitações de inutilização de numeração.
+    Serviï¿½o destinado ao atendimento de solicitaï¿½ï¿½es de inutilizaï¿½ï¿½o de numeraï¿½ï¿½o.
   </wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NfeInutilizacao2">
@@ -40,7 +40,7 @@
   </wsdl:message>
   <wsdl:portType name="NfeInutilizacao2Soap12">
     <wsdl:operation name="nfeInutilizacaoNF2">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Inutilização de numeração de NF-e</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Inutilizaï¿½ï¿½o de numeraï¿½ï¿½o de NF-e</wsdl:documentation>
       <wsdl:input message="tns:nfeInutilizacaoNF2Soap12In"/>
       <wsdl:output message="tns:nfeInutilizacaoNF2Soap12Out"/>
     </wsdl:operation>
@@ -61,7 +61,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeInutilizacao2">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-      Serviço destinado ao atendimento de solicitações de inutilização de numeração.
+      Serviï¿½o destinado ao atendimento de solicitaï¿½ï¿½es de inutilizaï¿½ï¿½o de numeraï¿½ï¿½o.
     </wsdl:documentation>
     <wsdl:port name="NfeInutilizacao2Soap12" binding="tns:NfeInutilizacao2Soap12">
       <soap12:address location="https://hnfe.fazenda.mg.gov.br/nfe2/services/NfeInutilizacao2"/>

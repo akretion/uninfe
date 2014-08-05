@@ -2572,7 +2572,7 @@ namespace NFe.Service
             /// quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) +
                     ChaveNFe + "_" + (tpEvento != ConvertTxt.tpEventos.tpEvCCe ? ((int)tpEvento).ToString() + "_" : "") + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoNFe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
@@ -2664,7 +2664,7 @@ namespace NFe.Service
             // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + 
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
@@ -2737,7 +2737,7 @@ namespace NFe.Service
             // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoMDFe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);

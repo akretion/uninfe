@@ -636,6 +636,23 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             base.OnFormClosing(e);
         }
 
+        private void Form_Main_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Y >= Height - 15)// && e.X < (Width - pnlRightOptions.Width))
+            {
+                optionsDirection = "up";
+                optionsTimeOut = 0;
+            }
+            if (e.X >= Width - 15)
+            {
+                optionsDirection = "down";
+            }
+            //if (e.X < (Width - pnlRightOptions.Width))
+            {
+                //rightDirection = "Left";
+            }
+        }
+
         private void Form_Main_ControlAdded(object sender, ControlEventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
@@ -801,7 +818,11 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             {
                 this.WindowState = FormWindowState.Normal;
                 if (!this._formloaded)
-                    uninfeDummy.xmlParams.LoadForm(this, "\\main", true);
+                    try
+                    {
+                        uninfeDummy.xmlParams.LoadForm(this, "\\main", true);
+                    }
+                    catch { }
             }
             // Faz a aplicação aparecer na barra de tarefas.            
             this.ShowInTaskbar = true;
@@ -842,7 +863,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             {
                 if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig) && uninfeDummy.TempoExpirou())
                 {
-                    if (!FormSenha.SolicitaSenha())
+                    if (!FormSenha.SolicitaSenha(false))
                         return;
 
                     uninfeDummy.UltimoAcessoConfiguracao = DateTime.Now;
@@ -930,23 +951,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                 Propriedade.EncerrarApp = true;
                 this.notifyIcon1.Visible = false;
                 this.Close();
-            }
-        }
-
-        private void Form_Main_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Y >= Height - 15)// && e.X < (Width - pnlRightOptions.Width))
-            {
-                optionsDirection = "up";
-                optionsTimeOut = 0;
-            }
-            if (e.X >= Width - 15)
-            {
-                optionsDirection = "down";
-            }
-            //if (e.X < (Width - pnlRightOptions.Width))
-            {
-                //rightDirection = "Left";
             }
         }
 

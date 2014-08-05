@@ -101,6 +101,9 @@
             this.lblCerificadoInstalado = new System.Windows.Forms.Label();
             this.button_selecionar_certificado = new System.Windows.Forms.Button();
             this.tabPageDanfe = new System.Windows.Forms.TabPage();
+            this.chkAddEmailDANFE = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.edtEmailDANFE = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbConfiguracaoCCe = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -138,9 +141,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
-            this.edtEmailDANFE = new System.Windows.Forms.TextBox();
-            this.chkAddEmailDANFE = new System.Windows.Forms.CheckBox();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -485,6 +485,7 @@
             this.cboDiretorioSalvarComo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDiretorioSalvarComo.FormattingEnabled = true;
             this.cboDiretorioSalvarComo.Items.AddRange(new object[] {
+            "Raiz",
             "AMD",
             "AM",
             "AD",
@@ -999,6 +1000,35 @@
             this.tabPageDanfe.Text = "DANFe";
             this.tabPageDanfe.UseVisualStyleBackColor = true;
             // 
+            // chkAddEmailDANFE
+            // 
+            this.chkAddEmailDANFE.AutoSize = true;
+            this.chkAddEmailDANFE.Location = new System.Drawing.Point(331, 320);
+            this.chkAddEmailDANFE.Name = "chkAddEmailDANFE";
+            this.chkAddEmailDANFE.Size = new System.Drawing.Size(234, 17);
+            this.chkAddEmailDANFE.TabIndex = 17;
+            this.chkAddEmailDANFE.Text = "Adiciona este e-mail ao que constar no XML";
+            this.chkAddEmailDANFE.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "E-mail";
+            // 
+            // edtEmailDANFE
+            // 
+            this.edtEmailDANFE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.edtEmailDANFE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.edtEmailDANFE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edtEmailDANFE.Location = new System.Drawing.Point(6, 320);
+            this.edtEmailDANFE.Name = "edtEmailDANFE";
+            this.edtEmailDANFE.Size = new System.Drawing.Size(319, 20);
+            this.edtEmailDANFE.TabIndex = 16;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -1357,35 +1387,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 303);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "E-mail";
-            // 
-            // edtEmailDANFE
-            // 
-            this.edtEmailDANFE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.edtEmailDANFE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.edtEmailDANFE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edtEmailDANFE.Location = new System.Drawing.Point(6, 320);
-            this.edtEmailDANFE.Name = "edtEmailDANFE";
-            this.edtEmailDANFE.Size = new System.Drawing.Size(319, 20);
-            this.edtEmailDANFE.TabIndex = 16;
-            // 
-            // chkAddEmailDANFE
-            // 
-            this.chkAddEmailDANFE.AutoSize = true;
-            this.chkAddEmailDANFE.Location = new System.Drawing.Point(331, 320);
-            this.chkAddEmailDANFE.Name = "chkAddEmailDANFE";
-            this.chkAddEmailDANFE.Size = new System.Drawing.Size(234, 17);
-            this.chkAddEmailDANFE.TabIndex = 17;
-            this.chkAddEmailDANFE.Text = "Adiciona este e-mail ao que constar no XML";
-            this.chkAddEmailDANFE.UseVisualStyleBackColor = true;
             // 
             // ucConfiguracao
             // 

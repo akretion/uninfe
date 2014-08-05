@@ -41,8 +41,8 @@ namespace NFe.Service
                 lerXml.Mdfe(NomeArquivoXML);
                 string idLote = lerXml.oDadosNfe.idLote;
 
-                if (lerXml.oDadosNfe.mod == "58" && Empresas.Configuracoes[emp].Servico != TipoAplicativo.MDFe)
-                    throw new Exception("A empresa não está configurada como MDF-e");
+                //if (lerXml.oDadosNfe.mod == "58" && Empresas.Configuracoes[emp].Servico != TipoAplicativo.MDFe)
+                //    throw new Exception("A empresa não está configurada como MDF-e");
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = 

@@ -161,7 +161,7 @@ namespace NFe.Service
             {
             }
 
-            File.WriteAllText(arqErro, erroMessage, Encoding.UTF8);//.Default);
+            File.WriteAllText(arqErro, erroMessage, Encoding.Default);
 
             ///
             /// grava o arquivo de erro no FTP
@@ -255,12 +255,16 @@ namespace NFe.Service
                     break;
 
                 case PastaEnviados.Autorizados:
-                    nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                    nomePastaEnviado =  Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                                        PastaEnviados.Autorizados.ToString() + "\\" + 
+                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                     destinoArquivo = nomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     goto default;
 
                 case PastaEnviados.Denegados:
-                    nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                    nomePastaEnviado =  Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                                        PastaEnviados.Denegados.ToString() + "\\" + 
+                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                     if (arquivo.ToLower().EndsWith(Propriedade.ExtRetorno.Den))//danasa 11-4-2012
                         destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(arquivo));
                     else
@@ -328,11 +332,15 @@ namespace NFe.Service
                         switch (subPastaXMLEnviado)
                         {
                             case PastaEnviados.Autorizados:
-                                nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Autorizados + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                nomePastaBackup =   Empresas.Configuracoes[emp].PastaBackup + "\\" + 
+                                                    PastaEnviados.Autorizados + "\\" + 
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                                 goto default;
 
                             case PastaEnviados.Denegados:
-                                nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" + PastaEnviados.Denegados + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                nomePastaBackup =   Empresas.Configuracoes[emp].PastaBackup + "\\" + 
+                                                    PastaEnviados.Denegados + "\\" + 
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
                                 goto default;
 
                             default:

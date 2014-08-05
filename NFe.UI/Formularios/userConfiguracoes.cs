@@ -429,7 +429,7 @@ namespace NFe.UI
             if (this.btnNova.Text.Equals("Nova"))
             {
                 bool ok = false;
-                using (Formularios.FormNova f = new Formularios.FormNova())
+                using (Formularios.FormNova f = new Formularios.FormNova(this.FindForm()))
                 {
                     ok = f.ShowDialog() == DialogResult.OK;
 

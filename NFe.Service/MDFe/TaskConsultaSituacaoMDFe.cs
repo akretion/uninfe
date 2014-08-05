@@ -321,7 +321,7 @@ namespace NFe.Service
                                             {
                                                 string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + "\\" +
+                                                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
                                                                             Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.MDFe) + Propriedade.ExtRetorno.ProcMDFe;
                                                 try
                                                 {

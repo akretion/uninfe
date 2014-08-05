@@ -11,14 +11,19 @@ namespace NFe.UI.Formularios
 {
     public partial class FormNova : MetroFramework.Forms.MetroForm
     {
-        public FormNova()
+        Form _owner;
+        public FormNova(Form parente)
         {
             InitializeComponent();
+            _owner = parente;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            this.Size = new Size(_owner/*uninfeDummy.mainForm*/.Size.Width, this.Height);
+            this.Location = new Point(_owner/*uninfeDummy.mainForm*/.Location.X, _owner/*uninfeDummy.mainForm*/.Location.Y + (_owner/*uninfeDummy.mainForm*/.Height - this.Height) / 2);
 
             uninfeDummy.ClearControls(this, true, true);
 
@@ -34,14 +39,10 @@ namespace NFe.UI.Formularios
             this.cbServico.SelectedIndex = 0;
         }
 
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-        }
-
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+
             Timer t = new Timer();
             t.Interval = 50;
             t.Tick += (sender, _e) =>

@@ -51,18 +51,22 @@ namespace NFe.Components
         /// <returns>estrutura de diretórios</returns>
         public string ToString(DateTime emissao)
         {
+            string ret = this.ToString();
+
+            if (ret.Equals("Raiz"))
+                return "";
+
             //extrai os períodos
             int dia = emissao.Day;
             int mes = emissao.Month;
             int ano = emissao.Year;
 
-            string ret = this.ToString();
             //apenas faz um replace dos valores
             ret = ret.Replace("D", dia.ToString("00"));
             ret = ret.Replace("M", mes.ToString("00"));
             ret = ret.Replace("A", ano.ToString("0000"));
 
-            return ret;
+            return ret + "\\";
         }
         #endregion
     }

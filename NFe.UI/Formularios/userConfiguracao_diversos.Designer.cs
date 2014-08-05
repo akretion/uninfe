@@ -159,6 +159,7 @@
             this.cboDiretorioSalvarComo.FormattingEnabled = true;
             this.cboDiretorioSalvarComo.ItemHeight = 23;
             this.cboDiretorioSalvarComo.Items.AddRange(new object[] {
+            "Raiz",
             "AMD",
             "AM",
             "AD",
