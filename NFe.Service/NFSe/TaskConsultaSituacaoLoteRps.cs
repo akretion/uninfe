@@ -99,6 +99,11 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
+                    case PadroesNFSe.PRONIN:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe,string.Empty);
+                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
+                        break;
+
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
                         pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
@@ -131,7 +136,7 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedSitLoteRps, NomeMetodoWS(Servico, oDadosPedSitLoteRps.cMunicipio), cabecMsg, this, "-ped-sitloterps", "-sitloterps", padraoNFSe, Servico);
-                    
+
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,

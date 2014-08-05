@@ -1138,6 +1138,10 @@ namespace NFe.Service
                             retorna = "CancelarNfse";
                             break;
 
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+
                         case Servicos.RecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
