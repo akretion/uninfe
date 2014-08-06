@@ -1043,9 +1043,9 @@ namespace NFe.ConvertTxt
                             wCampo(imposto.ICMS.pICMS, this.nDecimaisPerc, TpcnResources.pICMS, ObOp.Opcional);
                             if ((double)nfe.infNFe.Versao >= 3.10)
                             {
-                                wCampo(imposto.ICMS.vICMSOp, TpcnTipoCampo.tcDec2, TpcnResources.vICMSOp);
-                                wCampo(imposto.ICMS.pDif, this.nDecimaisPerc, TpcnResources.pICMS, ObOp.Opcional);
-                                wCampo(imposto.ICMS.vICMSDif, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDif);
+                                wCampo(imposto.ICMS.vICMSOp, TpcnTipoCampo.tcDec2, TpcnResources.vICMSOp, ObOp.Opcional);
+                                wCampo(imposto.ICMS.pDif, this.nDecimaisPerc, TpcnResources.pDif, ObOp.Opcional);
+                                wCampo(imposto.ICMS.vICMSDif, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDif, ObOp.Opcional);
                             }
                             wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional);
                             break;
@@ -1095,10 +1095,10 @@ namespace NFe.ConvertTxt
                             if (imposto.ICMS.vBCST > 0 || imposto.ICMS.vICMSST > 0)
                             {
                                 wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                                wCampo(imposto.ICMS.pMVAST,     this.nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
-                                wCampo(imposto.ICMS.pRedBCST,   this.nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
+                                wCampo(imposto.ICMS.pMVAST, this.nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                                wCampo(imposto.ICMS.pRedBCST, this.nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                                 wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
-                                wCampo(imposto.ICMS.pICMSST,    this.nDecimaisPerc, TpcnResources.pICMSST);
+                                wCampo(imposto.ICMS.pICMSST, this.nDecimaisPerc, TpcnResources.pICMSST);
                                 wCampo(imposto.ICMS.vICMSST, TpcnTipoCampo.tcDec2, TpcnResources.vICMSST);
                             }
                             if (imposto.ICMS.ICMSPart90 == 1)

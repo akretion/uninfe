@@ -219,11 +219,20 @@ namespace NFe.Threadings
                         // para empresas diferentes.
                         //-------------------------------------------------------------------------
                         int key = emp.X509Certificado.Subject.GetHashCode();
-                        if(!Buffer.ContainsKey(key)) Buffer[key] = new BufferItem(Processar);
+                        AddToBuffer(key);
                     }
                 }
             }
             #endregion
+        }
+
+        /// <summary>
+        /// Este método adiciona o certificado a lista de buffer de certificados
+        /// </summary>
+        /// <param name="key">numero de chave do certificado</param>
+        private void AddToBuffer(int key)
+        {
+            if (!Buffer.ContainsKey(key)) Buffer[key] = new BufferItem(Processar);
         }
 
         public System.IO.FileInfo FileInfo { get; private set; }
@@ -254,6 +263,7 @@ namespace NFe.Threadings
                     // para empresas diferentes.
                     //-------------------------------------------------------------------------
                     int key = empresa.X509Certificado.Subject.GetHashCode();
+                    AddToBuffer(key);
                     BufferItem bItem = Buffer[key];
                     bItem.Buffer.Enqueue(this);
                     return;

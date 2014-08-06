@@ -150,7 +150,7 @@ namespace NFe.Threadings
                         Environment.Exit(0);
                     }
 
-                    empresa = 1; //Vou criar fixo como 1 quando for na pasta geral, pois na pasta geral não tem como detectar qual é a empresa. Wandrey 20/03/2013
+                    empresa = 0; //Vou criar fixo como 0 quando for na pasta geral, pois na pasta geral não tem como detectar qual é a empresa. Wandrey 20/03/2013
                 }
                 else
                 {

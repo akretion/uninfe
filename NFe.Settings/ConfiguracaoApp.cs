@@ -709,12 +709,12 @@ namespace NFe.Settings
                         //Definir a URI para conexão com o Webservice
                         string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
 
-                        wsProxy = new WebServiceProxy(Url, 
-                                                      Empresas.Configuracoes[emp].X509Certificado, 
+                        wsProxy = new WebServiceProxy(Url,
+                                                      Empresas.Configuracoes[emp].X509Certificado,
                                                       padraoNFSe,
                                                       (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
-                                                      //cUF,
-                                                      //versao,
+                            //cUF,
+                            //versao,
                                                       servico);
 
                         Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
@@ -1341,7 +1341,7 @@ namespace NFe.Settings
         /// Verifica se algumas das informações das configurações tem algum problema ou falha
         /// </summary>
         /// <param name="validarCertificado">Se valida se tem certificado informado ou não nas configurações</param>
-        private void ValidarConfig(bool validarCertificado)
+        public void ValidarConfig(bool validarCertificado)
         {
             string erro = string.Empty;
             bool validou = true;
@@ -1372,7 +1372,7 @@ namespace NFe.Settings
                     {
                         if (fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
                         {
-                            erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas..";
+                            erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas. \r\nPasta utilizada: \r\n" + fc1.folder.Trim();
                             validou = false;
                             break;
                         }
@@ -1634,12 +1634,11 @@ namespace NFe.Settings
              */
             if (validou)
             {
-                //Se encontrar algum arquivo de lock nos diretórios, não permtir que seja executado
+                //Se encontrar algum arquivo de lock nos diretórios, não permitir que seja executado
                 erro = Empresas.CanRun(false);
                 validou = String.IsNullOrEmpty(erro);
             }
             #endregion
-
 
             if (!validou)
             {
@@ -1669,7 +1668,7 @@ namespace NFe.Settings
             {
                 ///
                 /// inclui o processo de inclusao de empresa pelo 'txt'
-                emp = CadastrarEmpresa(cArquivoXml);
+                emp = CadastrarEmpresa(cArquivoXml, emp);
 
                 if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 {
@@ -2267,7 +2266,7 @@ namespace NFe.Settings
                             this.GravarConfig(true, false);
 
                         cStat = "1";
-                        xMotivo = "Configuracao do " + Propriedade.NomeAplicacao + " alterada com sucesso";
+                        xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
                         lErro = false;
                     }
                     catch (Exception ex)
@@ -2408,7 +2407,7 @@ namespace NFe.Settings
                 }
                 value = value.TrimEnd('\\');
                 //while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
-                    //value = value.Substring(0, value.Length - 1);
+                //value = value.Substring(0, value.Length - 1);
             }
             else
             {
@@ -2420,11 +2419,12 @@ namespace NFe.Settings
         #endregion
 
         #region CadastrarEmpresa()
-        private int CadastrarEmpresa(string arqXML)
+        private int CadastrarEmpresa(string arqXML, int emp)
         {
             string cnpj = "";
             string nomeEmp = "";
             string servico = "";
+            bool temEmpresa = false;
 
             if (Path.GetExtension(arqXML).ToLower() == ".xml")
             {
@@ -2433,7 +2433,9 @@ namespace NFe.Settings
 
                 const string DadosEmpresa = "DadosEmpresa";
 
-                if (doc.DocumentElement.SelectNodes(DadosEmpresa).Count > 0)
+                temEmpresa = doc.DocumentElement.SelectNodes(DadosEmpresa).Count > 0;
+
+                if (temEmpresa)
                 {
                     foreach (XmlElement item in doc.DocumentElement)
                     {
@@ -2452,50 +2454,62 @@ namespace NFe.Settings
             {
                 List<string> cLinhas = Functions.LerArquivo(arqXML);
 
-                foreach (string texto in cLinhas)
+                temEmpresa = cLinhas.Count > 0;
+                if (temEmpresa)
                 {
-                    string[] dados = texto.Split('|');
-                    int nElementos = dados.GetLength(0);
-                    if (nElementos <= 1)
-                        continue;
-
-                    switch (dados[0].ToLower())
+                    foreach (string texto in cLinhas)
                     {
-                        case "nome":
-                            nomeEmp = dados[1];
-                            break;
-                        case "cnpj":
-                            cnpj = dados[1];
-                            break;
-                        case "servico":
-                            servico = dados[1];
-                            break;
+                        string[] dados = texto.Split('|');
+                        int nElementos = dados.GetLength(0);
+                        if (nElementos <= 1)
+                            continue;
+
+                        switch (dados[0].ToLower())
+                        {
+                            case "nome":
+                                nomeEmp = dados[1];
+                                break;
+                            case "cnpj":
+                                cnpj = dados[1];
+                                break;
+                            case "servico":
+                                servico = dados[1];
+                                break;
+                        }
                     }
                 }
             }
 
-            if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp) || string.IsNullOrEmpty(servico))
+            if (temEmpresa)
             {
-                throw new Exception("Não foi possível localizar os dados da empresa no arquivo de configuração. (CNPJ/Nome ou Tipo de Serviço)");
+                if (string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(nomeEmp) || string.IsNullOrEmpty(servico))
+                {
+                    throw new Exception("Não foi possível localizar os dados da empresa no arquivo de configuração. (CNPJ/Nome ou Tipo de Serviço)");
+                }
+
+                if (Char.IsLetter(servico, 0))
+                    ///
+                    /// veio como 'NFe, NFCe, CTe, MDFe ou NFSe
+                    /// converte para numero correspondente
+                    servico = ((int)NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(servico)).ToString();
+
+                if (Empresas.FindConfEmpresa(cnpj.Trim(), (TipoAplicativo)Convert.ToInt16(servico)) == null)
+                {
+                    Empresa empresa = new Empresa();
+                    empresa.CNPJ = cnpj;
+                    empresa.Nome = nomeEmp;
+                    empresa.Servico = (TipoAplicativo)Convert.ToInt16(servico);
+                    Empresas.Configuracoes.Add(empresa);
+
+                    //GravarArqEmpresas();  //tirado daqui pq ele somente grava quando a empresa for gravada com sucesso
+                }
+
+                return Empresas.FindConfEmpresaIndex(cnpj, (TipoAplicativo)Convert.ToInt16(servico));
             }
-
-            if (Char.IsLetter(servico, 0))
-                ///
-                /// veio como 'NFe, NFCe, CTe, MDFe ou NFSe
-                /// converte para numero correspondente
-                servico = ((int)NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(servico)).ToString();
-
-            if (Empresas.FindConfEmpresa(cnpj.Trim(), (TipoAplicativo)Convert.ToInt16(servico)) == null)
+            else
             {
-                Empresa empresa = new Empresa();
-                empresa.CNPJ = cnpj;
-                empresa.Nome = nomeEmp;
-                empresa.Servico = (TipoAplicativo)Convert.ToInt16(servico);
-                Empresas.Configuracoes.Add(empresa);
-
-                //GravarArqEmpresas();  //tirado daqui pq ele somente grava quando a empresa for gravada com sucesso
-            }
-            return Empresas.FindConfEmpresaIndex(cnpj, (TipoAplicativo)Convert.ToInt16(servico));
+                return emp;
+            }            
         }
         #endregion
 

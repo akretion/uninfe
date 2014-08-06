@@ -315,14 +315,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl" />
@@ -410,14 +408,12 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfestatusservico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNFeRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANnfeconsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNFeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNFeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNfeRetRecepcao2.wsdl" />
@@ -1110,7 +1106,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\schemas\CTe\cancCTeTiposBasico_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1231,14 +1226,12 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPCteRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPCteStatusServico.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteStatusServico.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortoVelhoPO.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteInutilizacao.wsdl" />
@@ -1654,7 +1647,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao.wsdl" />
@@ -1665,7 +1657,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNFeAutorizacao.wsdl" />
@@ -1697,7 +1688,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeDownloadNF.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeRetAutorizacao.wsdl" />
