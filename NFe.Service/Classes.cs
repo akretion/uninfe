@@ -397,7 +397,6 @@ namespace NFe.Service
             set
             {
                 this.mSerie = value;
-                this.tpEmis = value;
             }
         }
         public int nNFIni { get; set; }
@@ -407,7 +406,6 @@ namespace NFe.Service
 
         public DadosPedInut(int emp)
         {
-            //int emp = Empresas.FindEmpresaByThread();
             this.tpEmis = Empresas.Configuracoes[emp].tpEmis;
         }
     }
@@ -441,7 +439,6 @@ namespace NFe.Service
                 {
                     cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
                     int serie = Convert.ToInt32(this.mchNFe.Substring(22, 3));
-                    tpEmis = this.tpEmis;
                 }
             }
         }
