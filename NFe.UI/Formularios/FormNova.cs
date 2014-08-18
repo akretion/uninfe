@@ -22,21 +22,22 @@ namespace NFe.UI.Formularios
         {
             base.OnLoad(e);
 
-            this.Size = new Size(_owner/*uninfeDummy.mainForm*/.Size.Width, this.Height);
-            this.Location = new Point(_owner/*uninfeDummy.mainForm*/.Location.X, _owner/*uninfeDummy.mainForm*/.Location.Y + (_owner/*uninfeDummy.mainForm*/.Height - this.Height) / 2);
-
+            if (_owner != null)
+            {
+                this.Size = new Size(_owner.Size.Width, this.Height);
+                this.Location = new Point(_owner.Location.X, _owner.Location.Y + (_owner.Height - this.Height) / 2);
+            }
             uninfeDummy.ClearControls(this, true, true);
 
             this.Text = NFe.Components.Propriedade.NomeAplicacao + " - Nova empresa";
 
-            #region Montar array DropList dos tipos de serviços
-            this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo();
+            this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
             this.cbServico.DisplayMember = "Value";
             this.cbServico.ValueMember = "Key";
-            #endregion
-
-            this.cbServico.Enabled = (NFe.Components.Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe);
+            this.cbServico.Enabled = (NFe.Components.Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe || 
+                                      NFe.Components.Propriedade.TipoExecucao == Components.TipoExecucao.teAll);
             this.cbServico.SelectedIndex = 0;
+            this.edtCNPJ.Text = this.edtNome.Text = "";
         }
 
         protected override void OnShown(EventArgs e)
@@ -77,12 +78,25 @@ namespace NFe.UI.Formularios
                 return;
             }
             NFe.Components.TipoAplicativo servico = (NFe.Components.TipoAplicativo)cbServico.SelectedValue;
-            if (NFe.Settings.Empresas.FindConfEmpresa(cnpj, servico) != null)
+            int cnt;
+
+            if (servico == NFe.Components.TipoAplicativo.Nfse)
+            {
+                cnt = NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, servico);
+            }
+            else
+            {
+                cnt = NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Todos) +
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.NFCe) +
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Nfe) +
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Cte) +
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.MDFe);
+            }
+            if (cnt > 0)
             {
                 MetroFramework.MetroMessageBox.Show(this, "Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

@@ -64,7 +64,7 @@ namespace NFe.Interface
                 string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[2].Value.ToString();
                 string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
-                WebServiceNFSe.SavePadrao(uf, cidade, codmun, padrao, this.tabControl1.SelectedIndex==1);
+                WebServiceNFSe.SalvarXMLMunicipios(uf, cidade, codmun, padrao, this.tabControl1.SelectedIndex==1);
 
                 if (tabControl1.SelectedIndex == 1)
                 {
@@ -242,7 +242,7 @@ namespace NFe.Interface
 
             try
             {
-                WebServiceNFSe.SavePadrao(this.edtUF.SelectedItem.ToString(), this.edtMunicipio.Text, Convert.ToInt32(this.edtCodMun.Text), this.edtPadrao.SelectedItem.ToString(), false);
+                WebServiceNFSe.SalvarXMLMunicipios(this.edtUF.SelectedItem.ToString(), this.edtMunicipio.Text, Convert.ToInt32(this.edtCodMun.Text), this.edtPadrao.SelectedItem.ToString(), false);
                 RefreshMunicipios();
                 this.button2.PerformClick();
             }

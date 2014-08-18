@@ -135,7 +135,7 @@ namespace NFe.Interface
         {
             try
             {
-                empresa = Auxiliar.CarregaEmpresa();
+                empresa = Auxiliar.CarregaEmpresa(false);
             }
             catch (Exception ex)
             {

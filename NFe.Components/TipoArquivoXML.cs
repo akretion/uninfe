@@ -47,9 +47,9 @@ namespace NFe.Components
             TargetNameSpace = string.Empty;
 
             string versaoXML = string.Empty;
-
             string padraoNFSe = string.Empty;
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse || UFCod.ToString().Length == 7)
                 switch (UFCod)
                 {
                     case 4314050: //Parobé
@@ -60,9 +60,6 @@ namespace NFe.Components
                         padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                         break;
                 }
-
-            else
-                padraoNFSe = string.Empty;
 
             try
             {
@@ -86,13 +83,13 @@ namespace NFe.Components
                         else if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"] != null)
                             versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"].Value;
 
-                        if (versao.Equals("3.10") && Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                        if (versao.Equals("3.10") && string.IsNullOrEmpty(padraoNFSe))
                             versaoXML = "-" + versao;
 
                         InfSchema schema = null;
                         try
                         {
-                            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                            if (string.IsNullOrEmpty(padraoNFSe))
                             {
                                 if (nome.Equals("envEvento") || nome.Equals("eventoCTe"))
                                 {
@@ -129,22 +126,33 @@ namespace NFe.Components
                                 }
                             }
 
-                            schema = SchemaXML.InfSchemas[Propriedade.TipoAplicativo.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome];
+                            string chave = "";
+                            if (string.IsNullOrEmpty(padraoNFSe))
+                                chave = TipoAplicativo.Nfe.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
+                            else
+                                chave = TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
+
+                            schema = SchemaXML.InfSchemas[chave];
                         }
                         catch
                         {
-                            throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", Propriedade.TipoAplicativo == TipoAplicativo.Nfe ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e") +
+                            throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", string.IsNullOrEmpty(padraoNFSe) ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e") +
                                 "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
                         }
 
                         nRetornoTipoArq = schema.ID;
                         cRetornoTipoArq = schema.Descricao;
-                        cArquivoSchema = schema.ArquivoXSD;
+                        //cArquivoSchema = schema.ArquivoXSD;
                         TagAssinatura = schema.TagAssinatura;
                         TagAtributoId = schema.TagAtributoId;
                         TagLoteAssinatura = schema.TagLoteAssinatura;
                         TagLoteAtributoId = schema.TagLoteAtributoId;
                         TargetNameSpace = schema.TargetNameSpace;
+
+                        if (string.IsNullOrEmpty(padraoNFSe))
+                            cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFe\\schemas\\" + schema.ArquivoXSD);
+                        else
+                            cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFse\\schemas\\" + schema.ArquivoXSD);
                     }
                     catch (Exception ex)
                     {

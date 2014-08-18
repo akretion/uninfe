@@ -300,11 +300,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeStatusServico2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeRetRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeConsulta2.wsdl">
       <SubType>Designer</SubType>
@@ -395,11 +390,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeStatusServico2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeRetRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNFeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeconsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeinutilizacao2.wsdl" />
@@ -423,7 +413,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Webservice.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -590,22 +579,10 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PThemaRemessa.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Webservice.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMRecepcaoEvento.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANRecepcaoEvento.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANRecepcaoEvento.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANNFeConsultaDest.wsdl" />
@@ -1668,10 +1645,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SCVAN\PSVCANNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SCVAN\PSVCANNfeRetAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCAN\HSCANNfeRetAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\SCAN\PSCANNfeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeAutorizacao3.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRetAutorizacao3.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeStatusServico2_200.wsdl">
@@ -1864,6 +1837,48 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatoBrancoPR-PRONIN.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Webservice.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIPM.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIPM.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMacaeRJ-TIPLAN.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\TIPLAN\nfse_municipal_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\TIPLAN\Tipos_NFSe_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\TIPLAN\xmldsig-core-schema_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\CARIOCA\nfse_pcrj_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\CARIOCA\tipos_nfse_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\CARIOCA\xmldsig-core-schema_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HRiodeJaneiro-RJ-CARIOCA.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRiodeJaneiro-RJ-CARIOCA.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

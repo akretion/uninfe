@@ -89,6 +89,7 @@ namespace uninfe
                     }
                 }
 
+            Propriedade.TipoExecucao = TipoExecucao.teAll; // teNFe;
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
             if(Aplicacao.AppExecutando(silencioso))
@@ -96,18 +97,9 @@ namespace uninfe
                 return;
             }
 
-            //#if DEBUG
-            //            NFe.Components.NativeMethods.AllocConsole();
-            //            Console.WriteLine("UNINFE: Debug Console");
-            //#endif
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-
-            //#if DEBUG
-            //            NFe.Components.NativeMethods.FreeConsole();
-            //#endif
         }
     }
 }

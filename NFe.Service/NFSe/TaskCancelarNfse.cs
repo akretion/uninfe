@@ -46,7 +46,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.IPM:
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
-                        IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, 7483, Empresas.Configuracoes[emp].PastaXmlRetorno);
+                        IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, oDadosPedCanNfse.cMunicipio, Empresas.Configuracoes[emp].PastaXmlRetorno);
                         ipm.EmitirNF(NomeArquivoXML, (TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo, true);
                         break;
 
@@ -158,6 +158,16 @@ namespace NFe.Service.NFSe
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
                         syspro.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.TIPLAN:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, string.Empty);
+                        pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.CARIOCA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, string.Empty);
+                        pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, oDadosPedCanNfse.cMunicipio));
                         break;
 
                     default:

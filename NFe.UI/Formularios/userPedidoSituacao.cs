@@ -42,17 +42,17 @@ namespace NFe.UI
                 this.cbEmissao.DisplayMember = "Value";
                 this.cbEmissao.ValueMember = "Key";
 
-                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo();
+                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
 
-                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa();//  NFe.Settings.Empresas.Configuracoes;
+                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
                 this.cbEmpresa.ValueMember = "Valor";
                 this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
 
                 this.comboUf.DisplayMember = "nome";
                 this.comboUf.ValueMember = "valor";
-                this.comboUf.DataSource = Functions.CarregaUF();
+                this.comboUf.DataSource = Functions.CarregaEstados();
 
                 int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
                 if (posicao > (this.cbEmpresa.DataSource as System.Collections.ArrayList).Count)
@@ -77,7 +77,7 @@ namespace NFe.UI
                 this.cbAmbiente.Enabled =
                     this.cbEmissao.Enabled =
                     this.comboUf.Enabled =
-                    //this.cbServico.Enabled =
+                    this.cbServico.Enabled =
                     this.cbVersao.Enabled = this.cbEmpresa.SelectedValue != null;
 
                 this.buttonPesquisa.Enabled = false;
@@ -91,12 +91,12 @@ namespace NFe.UI
                     {
                         uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresa.SelectedIndex);
                         uninfeDummy.xmlParams.Save();
-
+                        /*
                         if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Nfse)
                         {
                             throw new Exception("NFS-e não dispõe do serviço de consulta a status.");
                         }
-
+                        */
                         this.comboUf.SelectedValue = Functions.CodigoParaUF(Empresas.Configuracoes[this.Emp].UnidadeFederativaCodigo).Trim();
 
                         //Posicionar o elemento da combo Ambiente
@@ -108,9 +108,18 @@ namespace NFe.UI
                         //Posicionar o elemento da combo tipo de servico
                         this.cbServico.SelectedValue = (int)Empresas.Configuracoes[this.Emp].Servico;
 
-                        if (Empresas.Configuracoes[this.Emp].Servico != TipoAplicativo.Nfe)
-                            this.cbVersao.SelectedIndex = 1;
-                        
+                        if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Todos)
+                        {
+                            this.cbVersao.SelectedValue = "3.10";
+                            this.cbServico.SelectedIndex = 0;
+                            this.cbServico.Enabled = true;
+                        }
+                        else
+                        {
+                            this.cbServico.Enabled = false;
+                            if (Empresas.Configuracoes[this.Emp].Servico != TipoAplicativo.Nfe)
+                                this.cbVersao.SelectedValue = "2.00";
+                        }
                         this.buttonPesquisa.Enabled = true;
                     }
                 }
@@ -126,7 +135,7 @@ namespace NFe.UI
             if (cbServico.SelectedValue != null)
             {
                 TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
-                this.cbVersao.Enabled = servico == TipoAplicativo.Nfe;
+                this.cbVersao.Enabled = (servico == TipoAplicativo.Nfe || Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Todos);
             }
         }
 
@@ -143,10 +152,8 @@ namespace NFe.UI
                 switch (servico)
                 {
                     case TipoAplicativo.Cte:
-                        if (tpEmis == TipoEmissao.teSCAN)//.SelectedIndex == 1)
-                            throw new Exception("CT-e não dispõe do tipo de contingência SCAN.");
-                        else if (tpEmis == TipoEmissao.teSVCAN)// this.cbEmissao.SelectedIndex == 4)
-                                throw new Exception("CT-e não dispõe do tipo de contingência SVCAN.");
+                        if (tpEmis == TipoEmissao.teSVCAN)// this.cbEmissao.SelectedIndex == 4)
+                            throw new Exception("CT-e não dispõe do tipo de contingência SVCAN.");
                         break;
 
                     case TipoAplicativo.Nfe:
@@ -154,8 +161,8 @@ namespace NFe.UI
                             throw new Exception("NF-e não dispõe do tipo de contingência SCVSP.");
                         break;
 
-                    case TipoAplicativo.Nfse:
-                        throw new Exception("NFS-e não dispõe do serviço de consulta status.");
+                    //case TipoAplicativo.Nfse:
+                    //throw new Exception("NFS-e não dispõe do serviço de consulta status.");
 
                     case TipoAplicativo.MDFe:
                         if (tpEmis != TipoEmissao.teNormal)
@@ -177,7 +184,7 @@ namespace NFe.UI
                 int amb = (int)cbAmbiente.SelectedValue;
                 string versao = this.cbVersao.SelectedItem.ToString();
 
-                string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" + 
+                string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" +
                     oGerar.StatusServico(servico, (int)tpEmis, cUF, amb, versao);
 
                 //Demonstrar o status do serviço
@@ -206,11 +213,11 @@ namespace NFe.UI
 
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      Propriedade.ExtRetorno.Sta_XML;// "-sta.xml";
+                      Propriedade.ExtRetorno.Sta_XML;
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      Propriedade.ExtRetorno.Sta_ERR;// "-sta.err";
+                      Propriedade.ExtRetorno.Sta_ERR;
 
             try
             {
@@ -280,6 +287,7 @@ namespace NFe.UI
                 stopTime = DateTime.Now;
                 elapsedTime = stopTime.Subtract(startTime);
                 elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
+                Application.DoEvents();
 
                 if (elapsedMillieconds >= 60000)
                 {

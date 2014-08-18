@@ -25,6 +25,7 @@ namespace NFe.UI.Formularios
         private string cnpjCurrent = "";
         public event EventHandler changeEvent;
         public userConfiguracoes uConfiguracoes;
+        private ArrayList arrUF, arrMunicipios;
 
         public userConfiguracao_diversos()
         {
@@ -36,45 +37,24 @@ namespace NFe.UI.Formularios
             {
                 this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
                 servicoCurrent = TipoAplicativo.Nulo;
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                {
-                    labelUF.Text = "Município";
-                    lbl_udDiasLimpeza.Location = new Point(this.lbl_udTempoConsulta.Location.X, this.lbl_udTempoConsulta.Location.Y);
-                    udDiasLimpeza.Location = new Point(this.udTempoConsulta.Location.X, this.udTempoConsulta.Location.Y);
-                }
-                this.lbl_CodMun.Visible =
-                    this.edtCodMun.Visible =
-                    this.edtPadrao.Visible =
-                    this.lbl_Padrao.Visible = Propriedade.TipoAplicativo == TipoAplicativo.Nfse;
-
-                cboDiretorioSalvarComo.Visible = 
-                    lbl_DiretorioSalvarComo.Visible =
-                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
-                    checkBoxRetornoNFETxt.Visible =
-                    checkBoxGravarEventosDeTerceiros.Visible =
-                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
-                    checkBoxCompactaNFe.Visible =
-                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
-                    cbIndSinc.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
-
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                    this.Size = new Size(640, 300);
 
                 #region Montar Array DropList da UF
-                ArrayList arrUF = new ArrayList();
 
                 try
                 {
-                    arrUF = Functions.CarregaUF();
+                    if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
+                    {
+                        arrUF = Functions.CarregaEstados();
+                        arrMunicipios = Functions.CarregaMunicipios();
+                    }
+                    else
+                        arrUF = Functions.CarregaUF();
                 }
                 catch (Exception ex)
                 {
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
 
-                comboBox_UF.DataSource = arrUF;
-                comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
-                comboBox_UF.ValueMember = "Codigo";
                 #endregion
 
                 #region Montar Array DropList do Ambiente
@@ -84,7 +64,7 @@ namespace NFe.UI.Formularios
                 #endregion
 
                 #region Montar array DropList dos tipos de serviços
-                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo();
+                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
                 #endregion
@@ -105,8 +85,13 @@ namespace NFe.UI.Formularios
                 #endregion
 
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
+
+                loc_1 = lbl_udDiasLimpeza.Location;
+                loc_2 = udDiasLimpeza.Location;
             }
         }
+
+        private Point loc_1, loc_2;
 
         public void Populate(NFe.Settings.Empresa empresa)
         {
@@ -116,6 +101,51 @@ namespace NFe.UI.Formularios
                 uninfeDummy.ClearControls(this, true, false);
 
                 this.empresa = empresa;
+
+                if (empresa.Servico == TipoAplicativo.Nfse)
+                {
+                    labelUF.Text = "Município";
+                    lbl_udDiasLimpeza.Location = new Point(this.lbl_udTempoConsulta.Location.X, this.lbl_udTempoConsulta.Location.Y);
+                    udDiasLimpeza.Location = new Point(this.udTempoConsulta.Location.X, this.udTempoConsulta.Location.Y);
+                }
+                else
+                {
+                    labelUF.Text = "Unidade Federativa (UF-Estado)";
+                    lbl_udDiasLimpeza.Location = loc_1;
+                    udDiasLimpeza.Location = loc_2;
+                }
+                this.lbl_CodMun.Visible =
+                    this.edtCodMun.Visible =
+                    this.edtPadrao.Visible =
+                    this.lbl_Padrao.Visible = (empresa.Servico == TipoAplicativo.Nfse);
+
+                cboDiretorioSalvarComo.Visible =
+                    lbl_DiretorioSalvarComo.Visible =
+                    comboBox_tpEmis.Visible =
+                    metroLabel11.Visible =
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
+                    checkBoxRetornoNFETxt.Visible =
+                    checkBoxGravarEventosDeTerceiros.Visible =
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
+                    checkBoxCompactaNFe.Visible =
+                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
+                    cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse);
+
+                if (NFe.Components.Propriedade.TipoExecucao != TipoExecucao.teAll)
+                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                        this.Size = new Size(640, 300);
+
+                if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
+                {
+                    if (empresa.Servico == TipoAplicativo.Nfse)
+                        comboBox_UF.DataSource = arrMunicipios;
+                    else
+                        comboBox_UF.DataSource = arrUF;
+                }
+                else
+                    comboBox_UF.DataSource = arrUF;
+                comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
+                comboBox_UF.ValueMember = "Codigo";
 
                 cnpjCurrent = this.edtCNPJ.Text = empresa.CNPJ;
                 this.edtNome.Text = empresa.Nome;
@@ -127,6 +157,9 @@ namespace NFe.UI.Formularios
                 comboBox_Ambiente.SelectedValue = this.empresa.AmbienteCodigo;
                 comboBox_UF.SelectedValue = this.empresa.UnidadeFederativaCodigo;
                 cbServico.SelectedValue = (int)this.empresa.Servico;
+
+                if (empresa.Servico == TipoAplicativo.Nfse && this.empresa.UnidadeFederativaCodigo == 0)
+                    comboBox_UF.SelectedIndex = 0;
 
                 checkBoxRetornoNFETxt.Checked = this.empresa.GravarRetornoTXTNFe;
                 checkBoxGravarEventosDeTerceiros.Checked = this.empresa.GravarEventosDeTerceiros;
@@ -214,8 +247,9 @@ namespace NFe.UI.Formularios
         {
             if (this.loading)
                 return;
-
-            if (cbServico.SelectedIndex == 0) // Somente NFe habilita este campo
+            
+            if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos)
             {
                 HabilitaOpcaoCompactar(true);
             }
@@ -266,7 +300,8 @@ namespace NFe.UI.Formularios
             bool visible = ufCod == 4101408 /*Apucarana*/ ||
                            ufCod == 3502804 /*Araçatuba*/||
                            ufCod == 4104303 /*Campo Mourão*/||
-                           ufCod == 3537305 /*Penapolis*/;
+                           ufCod == 3537305 /*Penapolis*/||
+                           ufCod == 4309209 /*Gravatai*/;
 
             lbl_UsuarioWS.Visible = 
                 lbl_SenhaWS.Visible = 
@@ -305,139 +340,6 @@ namespace NFe.UI.Formularios
 
         public bool ValidadeCNPJ(bool istrow = false)
         {
-#if false
-            string cnpj = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString().PadLeft(14,'0');
-            this.edtCNPJ.Text = uninfeDummy.FmtCgcCpf(cnpj, true);
-
-            if (!this.edtCNPJ.ReadOnly)
-            {
-                TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
-                string nome = edtNome.Text;
-
-                if (cnpjCurrent != cnpj || string.IsNullOrEmpty(cnpj))
-                {
-                    if (!CNPJ.Validate(cnpj) || cnpj.Equals("00000000000000"))
-                    {
-                        if (cnpj.Equals("00000000000000"))
-                            this.edtCNPJ.Clear();
-
-                        this.edtCNPJ.Focus();
-                        if (istrow)
-                            throw new Exception("CNPJ inválido");
-                        Dialogs.ShowMessage("CNPJ inválido", 0, 0, MessageBoxIcon.Error);
-                        return false;
-                    }
-
-                    bool mudaPastas = true;
-                    if (Empresa.FindConfEmpresa(cnpj, servico) != null)
-                    {
-                        Dialogs.ShowMessage("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", 0, 0, MessageBoxIcon.Information);
-
-                        this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
-
-                        if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
-                        {
-                            cbServico.SelectedValue = servicoCurrent = servico = TipoAplicativo.Nfe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
-                        {
-                            cbServico.SelectedValue = servicoCurrent = servico = TipoAplicativo.Cte;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
-                        {
-                            cbServico.SelectedValue = servicoCurrent = servico = TipoAplicativo.Nfse;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
-                        {
-                            cbServico.SelectedValue = servicoCurrent = servico = TipoAplicativo.MDFe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresa.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
-                        {
-                            cbServico.SelectedValue = servicoCurrent = servico = TipoAplicativo.NFCe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else
-                        {
-                            this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
-                            this.edtCNPJ.Focus();
-                            return false;
-                        }
-                        this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text))
-                        {
-                            ///
-                            /// tenta achar uma configuracao valida
-                            /// 
-                            foreach (Empresa empresa in Empresas.Configuracoes)
-                            {
-                                if (empresa.CNPJ.Trim() != cnpj && !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
-                                {
-                                    this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnvio, cnpj);
-                                    this.uConfiguracoes.uce_pastas.textBox_PastaRetornoXML.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlRetorno, cnpj);
-                                    this.uConfiguracoes.uce_pastas.textBox_PastaXmlErro.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlErro, cnpj);
-                                    this.uConfiguracoes.uce_pastas.textBox_PastaValidar.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, cnpj);
-                                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-                                    {
-                                        this.uConfiguracoes.uce_pastas.textBox_PastaLote.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEmLote, cnpj);
-                                        this.uConfiguracoes.uce_pastas.textBox_PastaEnviados.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnviado, cnpj);
-                                        this.uConfiguracoes.uce_pastas.textBox_PastaBackup.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, cnpj);
-                                        this.uConfiguracoes.uce_pastas.textBox_PastaDownload.Text = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, cnpj);
-                                    }
-                                    this.uConfiguracoes.uce_danfe.tbConfiguracaoDanfe.Text = empresa.ConfiguracaoDanfe;
-                                    this.uConfiguracoes.uce_danfe.tbConfiguracaoCCe.Text = empresa.ConfiguracaoCCe;
-                                    this.uConfiguracoes.uce_danfe.tbPastaConfigUniDanfe.Text = empresa.PastaConfigUniDanfe;
-                                    this.uConfiguracoes.uce_danfe.tbPastaExeUniDanfe.Text = empresa.PastaExeUniDanfe;
-                                    this.uConfiguracoes.uce_danfe.tbPastaXmlParaDanfeMon.Text = empresa.PastaDanfeMon;
-                                    this.uConfiguracoes.uce_danfe.cbDanfeMonNfe.Checked = empresa.XMLDanfeMonNFe;
-                                    this.uConfiguracoes.uce_danfe.cbDanfeMonProcNfe.Checked = empresa.XMLDanfeMonProcNFe;
-
-                                    this.checkBoxRetornoNFETxt.Checked = empresa.GravarRetornoTXTNFe;
-                                    this.checkBoxGravarEventosNaPastaEnviadosNFe.Checked = empresa.GravarEventosNaPastaEnviadosNFe;
-                                    this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
-                                    this.checkBoxGravarEventosDeTerceiros.Checked = empresa.GravarEventosDeTerceiros;
-                                    this.checkBoxCompactaNFe.Checked = empresa.CompactarNfe;
-                                    this.cbIndSinc.Checked = empresa.IndSinc;
-
-                                    this.uConfiguracoes.uce_pastas.cbCriaPastas.Checked = true;
-                                    mudaPastas = false;
-                                    break;
-                                }
-                            }
-                            ///
-                            /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
-                            /// 
-                            if (string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text))
-                            {
-                                this.uConfiguracoes.uce_pastas.cbCriaPastas.Checked = true;
-                                mudaPastas = true;
-                            }
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text) && mudaPastas)
-                    {
-                        mudaPastas = Dialogs.YesNo("CNPJ foi alterado e você já tem as pastas definidas.\r\nDeseja mudá-las para o novo CNPJ?", 0, 0);
-                    }
-
-                    if (mudaPastas)
-                        MudarPastas(cnpj, servico);
-                }
-                this.uConfiguracoes.uce_pastas.empresa.CNPJ = cnpj;
-                cnpjCurrent = cnpj;
-            }
-#endif
             return true;
         }
 
@@ -455,66 +357,14 @@ namespace NFe.UI.Formularios
 
         private void comboBox_UF_DropDownClosed(object sender, EventArgs e)
         {
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+            if (this.empresa.Servico == TipoAplicativo.Nfse)
                 comboBox_UF.DropDownWidth = comboBox_UF.Width;
         }
 
         private void comboBox_UF_DropDown(object sender, EventArgs e)
         {
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+            if (this.empresa.Servico == TipoAplicativo.Nfse)
                 comboBox_UF.DropDownWidth = 300;
         }
-
-#if false
-        /// <summary>
-        /// CopiaPastaDaEmpresa
-        /// </summary>
-        /// <param name="origemCNPJ"></param>
-        /// <param name="origemPasta"></param>
-        /// <param name="oEmpresa"></param>
-        /// <returns></returns>
-        private string CopiaPastaDeEmpresa(string origemCNPJ, string origemPasta, string destinoCNPJ)
-        {
-            if (string.IsNullOrEmpty(origemPasta))
-                return "";
-
-            ///
-            ///o usuario pode ter colocado o CNPJ como parte do nome da pasta
-            ///
-            string newPasta = origemPasta.Replace(origemCNPJ.Trim(), destinoCNPJ.Trim());
-
-            if (origemPasta.ToLower() == newPasta.ToLower())
-            {
-                int lastBackSlash = ConfiguracaoApp.RemoveEndSlash(origemPasta).LastIndexOf("\\");
-                newPasta = origemPasta.Insert(lastBackSlash, "\\" + destinoCNPJ);
-            }
-            return newPasta;
-        }
-
-        private void MudarPastas(string cnpj, TipoAplicativo servico)
-        {
-            if (this.changeEvent != null)
-                this.changeEvent(null, null);
-
-            string subpasta = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\" + servico.ToString().ToLower() : "");
-
-            this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Envio");
-            this.uConfiguracoes.uce_pastas.textBox_PastaRetornoXML.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Retorno");
-            this.uConfiguracoes.uce_pastas.textBox_PastaXmlErro.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Erro");
-            this.uConfiguracoes.uce_pastas.textBox_PastaValidar.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Validar");
-
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-            {
-                this.uConfiguracoes.uce_pastas.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\EnvioEmLote");
-                this.uConfiguracoes.uce_pastas.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Enviado");
-
-                if (!string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaDownload.Text))
-                    this.uConfiguracoes.uce_pastas.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\DownloadNFe");
-
-                if (!string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaBackup.Text))
-                    this.uConfiguracoes.uce_pastas.textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Backup");
-            }
-        }
-#endif
     }
 }

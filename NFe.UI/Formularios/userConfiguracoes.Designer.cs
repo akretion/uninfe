@@ -115,8 +115,10 @@
             this.cbEmpresas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmpresas.DisplayMember = "Nome";
+            this.cbEmpresas.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbEmpresas.FormattingEnabled = true;
-            this.cbEmpresas.ItemHeight = 23;
+            this.cbEmpresas.IntegralHeight = false;
+            this.cbEmpresas.ItemHeight = 19;
             this.cbEmpresas.Items.AddRange(new object[] {
             "Normal Combobox",
             "Item 2",
@@ -125,7 +127,7 @@
             this.cbEmpresas.Location = new System.Drawing.Point(3, 25);
             this.cbEmpresas.MaxDropDownItems = 15;
             this.cbEmpresas.Name = "cbEmpresas";
-            this.cbEmpresas.Size = new System.Drawing.Size(540, 29);
+            this.cbEmpresas.Size = new System.Drawing.Size(540, 25);
             this.cbEmpresas.TabIndex = 15;
             this.cbEmpresas.UseSelectable = true;
             this.cbEmpresas.ValueMember = "CNPJ";

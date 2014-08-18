@@ -119,7 +119,7 @@ namespace NFe.UI.Formularios.NFSe
                 string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[2].Value.ToString();
                 string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
-                WebServiceNFSe.SavePadrao(uf, cidade, codmun, padrao, false);
+                WebServiceNFSe.SalvarXMLMunicipios(uf, cidade, codmun, padrao, false);
 
                 string cUF = ((ComboElem)(new System.Collections.ArrayList(this.arrUF))[this.comboUf.SelectedIndex]).Valor;
                 if (cUF == uf)

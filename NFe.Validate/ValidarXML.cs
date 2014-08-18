@@ -133,8 +133,10 @@ namespace NFe.Validate
         private void Validar(string cRotaArqXML)
         {
             bool lArqXML = File.Exists(cRotaArqXML);
-            var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
-            bool lArqXSD = File.Exists(caminhoDoSchema);
+            //var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
+            //if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
+            //string caminhoDoSchema = Propriedade.PastaExecutavel + "\\" + TipoArqXml.cArquivoSchema;
+            bool lArqXSD = File.Exists(TipoArqXml.cArquivoSchema);
             bool temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
 
             Retorno = 0;
@@ -163,9 +165,9 @@ namespace NFe.Validate
                     settings.XmlResolver = resolver;
 
                     if(TipoArqXml.TargetNameSpace != string.Empty)
-                        schemas.Add(TipoArqXml.TargetNameSpace, caminhoDoSchema);
+                        schemas.Add(TipoArqXml.TargetNameSpace, TipoArqXml.cArquivoSchema);
                     else
-                        schemas.Add(Propriedade.nsURI, caminhoDoSchema);
+                        schemas.Add(Propriedade.nsURI_nfe, TipoArqXml.cArquivoSchema);
 
                     settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
 
@@ -198,7 +200,7 @@ namespace NFe.Validate
                     this.Retorno = 1;
                     this.RetornoString = "Início da validação...\r\n\r\n";
                     this.RetornoString += "Arquivo XML: " + cRotaArqXML + "\r\n";
-                    this.RetornoString += "Arquivo SCHEMA: " + caminhoDoSchema + "\r\n\r\n";
+                    this.RetornoString += "Arquivo SCHEMA: " + TipoArqXml.cArquivoSchema + "\r\n\r\n";
                     this.RetornoString += this.cErro;
                     this.RetornoString += "\r\n...Final da validação";
                 }
@@ -213,7 +215,7 @@ namespace NFe.Validate
                 else if(lArqXSD == false && temXSD)
                 {
                     this.Retorno = 3;
-                    this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + caminhoDoSchema;
+                    this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + TipoArqXml.cArquivoSchema;
                 }
             }
         }

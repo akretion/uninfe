@@ -52,7 +52,7 @@ namespace NFe.Components
         public string ToString(DateTime emissao)
         {
             string ret = this.ToString();
-
+            if (string.IsNullOrEmpty(ret)) return "";
             if (ret.Equals("Raiz"))
                 return "";
 

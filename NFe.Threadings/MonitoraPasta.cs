@@ -54,7 +54,8 @@ namespace NFe.Threadings
                 #endregion
 
                 #region Pasta de envio em Lote
-                if(!string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaXmlEmLote))
+                if(!string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaXmlEmLote) && 
+                    Empresas.Configuracoes[i].Servico != Components.TipoAplicativo.Nfse)
                 {
                     fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEmLote, "*.xml"));
                     fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);

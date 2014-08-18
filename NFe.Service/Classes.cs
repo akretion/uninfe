@@ -275,7 +275,7 @@ namespace NFe.Service
         /// </summary>
         public DateTime dEmi { get; set; }
         /// <summary>
-        /// Tipo de emissão 1-Normal 2-Contigência em papel de segurança 3-Contigência SCAN
+        /// Tipo de emissão 1-Normal 2-Contigência em papel de segurança 6/7/8-Contigência SVC/AN/RS/SP
         /// </summary>
         public string tpEmis { get; set; }
         /// <summary>
@@ -336,7 +336,7 @@ namespace NFe.Service
         /// </summary>
         public string nRec { get; set; }
         /// <summary>
-        /// Tipo de Emissão: 1-Normal 2-Contingência FS 3-Contingência SCAN 4-Contingência DEPEC 5-Contingência FS-DA
+        /// Tipo de Emissão: 1-Normal 2-Contingência FS 6/7/8-Contingência SVC/AN/RS/SP 4-Contingência DEPEC 5-Contingência FS-DA
         /// </summary>
         public int tpEmis { get; set; }
         /// <summary>
@@ -397,7 +397,7 @@ namespace NFe.Service
             set
             {
                 this.mSerie = value;
-                this.tpEmis = (value >= 900 ? (int)NFe.Components.TipoEmissao.teSCAN : this.tpEmis);
+                this.tpEmis = value;
             }
         }
         public int nNFIni { get; set; }
@@ -441,7 +441,7 @@ namespace NFe.Service
                 {
                     cUF = Convert.ToInt32(this.mchNFe.Substring(0, 2));
                     int serie = Convert.ToInt32(this.mchNFe.Substring(22, 3));
-                    tpEmis = (serie >= 900 && mchNFe.Substring(20, 2) == "55" ? (int)NFe.Components.TipoEmissao.teSCAN : this.tpEmis);
+                    tpEmis = this.tpEmis;
                 }
             }
         }
@@ -482,7 +482,7 @@ namespace NFe.Service
         /// </summary>
         public int cUF { get; set; }
         /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
         /// </summary>
         public int tpEmis { get; set; }
         /// <summary>
@@ -507,7 +507,7 @@ namespace NFe.Service
         /// </summary>
         public int cUF { get; set; }
         /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
         /// </summary>
         public int tpEmis { get; set; }
 
@@ -538,7 +538,7 @@ namespace NFe.Service
         /// </summary>
         //public int cUF { get; set; }
         /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 3-SCAN, ...
+        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
         /// </summary>
         public int tpEmis { get; set; }
 

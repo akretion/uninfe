@@ -44,9 +44,10 @@ namespace NFSe.Components
         {
             Usuario = usuario;
             Senha = senha;
-            Cidade = cidade;
+            Cidade = CodigoTom(cidade);
             PastaRetorno = caminhoRetorno;
         }
+
         #endregion
 
         public string EmitirNF(string file, TipoAmbiente tpAmb, bool cancelamento = false)
@@ -85,7 +86,19 @@ namespace NFSe.Components
             write.Dispose();
         }
 
+        public int CodigoTom(int nCodIbge)
+        {
+            switch (nCodIbge)
+            {
+                case 4104303: // Campo mourão - PR
+                    return (int)7483;
+                    
+                case 4309209: // Gravatai - RS
+                    return (int)8683;
+            }
 
+            return 0;
+        }
 
     }
 

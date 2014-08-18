@@ -102,12 +102,22 @@ namespace NFe.Components
         /// <summary>
         /// Retorna o XML contendos as definicoes dos webservices
         /// </summary>
-        public static string NomeArqXMLWebService
+        public static string NomeArqXMLWebService_NFe
         {
-            get { return Propriedade.PastaExecutavel + "\\WSDL\\Webservice.xml"; }
+            get 
+            {
+                return Propriedade.PastaExecutavel + "\\NFe\\WSDL\\Webservice.xml"; 
+            }
+        }
+        public static string NomeArqXMLWebService_NFSe
+        {
+            get
+            {
+                return Propriedade.PastaExecutavel + "\\NFse\\WSDL\\Webservice.xml";
+            }
         }
 
-
+        public static TipoExecucao TipoExecucao { get; set; }
         public static TipoAplicativo TipoAplicativo { get; set; }
 
         public static List<Municipio> Municipios { get; set; }
@@ -170,7 +180,7 @@ namespace NFe.Components
         /// <summary>
         /// Namespace URI associado (Endereço http dos schemas de XML)
         /// </summary>
-        public static string nsURI { get; set; }
+        public static string nsURI_nfe { get; set; }
 
         #region Propriedades com as extensões dos XML ou TXT de envio
         /// <summary>
@@ -694,20 +704,6 @@ namespace NFe.Components
             public const string RetDanfeReport_TXT = "-ret-env-danfe-report.txt";
         }
         #endregion
-
-        public static string[] tpEmissao = 
-            { 
-                "", 
-                "Normal", 
-                "Contingência com formulário de segurança (FS)", 
-                "Contingência com SCAN do Ambiente Nacional", 
-                "Contingência com DPEC", 
-                "Contingência com formulário de segurança (FS-DA)",
-                "Contingência com SVC-AN",
-                "Contingência com SVC-RS",
-                "Contingência com SVC-SP",
-                "Contingência Off-Line (NFC-e)"
-            };
 
         #region NomeAplicacao
         /// <summary>

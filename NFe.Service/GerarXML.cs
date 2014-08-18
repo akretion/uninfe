@@ -655,7 +655,7 @@ namespace NFe.Service
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">");
+            aXML.Append("<consSitNFe xmlns=\"" + Propriedade.nsURI_nfe + "\" versao=\"" + versao + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -742,7 +742,7 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("ConsCad");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), versao));
-            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             XmlNode nodeInfCons = doc.CreateElement("infCons");
             nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "CONS-CAD"));
             nodeInfCons.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.UF.ToString(), uf));
@@ -813,7 +813,7 @@ namespace NFe.Service
             XmlDocument doc = new XmlDocument();
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("inutNFe");
-            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), versao));
 
             XmlNode nodeinfInut = doc.CreateElement("infInut");
@@ -899,7 +899,6 @@ namespace NFe.Service
 
             return arquivoSaida;
         }
-        #endregion
 
         private void StatusServico(string pArquivo, int tpAmb, int tpEmis, int cUF, string versao, string nodeStr, string nsURI)
         {
@@ -927,19 +926,7 @@ namespace NFe.Service
         /// <param name="versao">Versão do schema do XML</param>
         public void StatusServicoNFe(string pArquivo, int tpAmb, int tpEmis, int cUF, string versao)
         {
-            StatusServico(pArquivo, tpAmb, tpEmis, cUF, versao, "consStatServ", Propriedade.nsURI);
-
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServ versao=\"" + versao + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
-            vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
-            vDadosMsg.Append("<xServ>STATUS</xServ>");
-            vDadosMsg.Append("</consStatServ>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());*/
+            StatusServico(pArquivo, tpAmb, tpEmis, cUF, versao, "consStatServ", Propriedade.nsURI_nfe);
         }
         #endregion
 
@@ -954,18 +941,6 @@ namespace NFe.Service
         public void StatusServicoCTe(string pArquivo, int tpAmb, int tpEmis, int cUF)
         {
             StatusServico(pArquivo, tpAmb, tpEmis, cUF, NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico, "consStatServCte", "http://www.portalfiscal.inf.br/cte");
-
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServCte versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/cte\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
-            vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
-            vDadosMsg.Append("<xServ>STATUS</xServ>");
-            vDadosMsg.Append("</consStatServCte>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());*/
         }
         #endregion
 
@@ -980,19 +955,8 @@ namespace NFe.Service
         public void StatusServicoMDFe(string pArquivo, int tpAmb, int tpEmis, int cUF)
         {
             StatusServico(pArquivo, tpAmb, tpEmis, cUF, NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico, "consStatServMDFe", "http://www.portalfiscal.inf.br/mdfe");
-
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consStatServMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"http://www.portalfiscal.inf.br/mdfe\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", cUF);
-            vDadosMsg.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
-            vDadosMsg.Append("<xServ>STATUS</xServ>");
-            vDadosMsg.Append("</consStatServMDFe>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());*/
         }
+        #endregion
         #endregion
 
         #region ConsultaDPEC
@@ -1007,7 +971,7 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("consDPEC");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLConsDPEC));
-            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), dadosConsDPEC.tpAmb.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.verAplic.ToString(), dadosConsDPEC.verAplic));
             if (!string.IsNullOrEmpty(dadosConsDPEC.chNFe))
@@ -1016,19 +980,6 @@ namespace NFe.Service
                 node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRegDPEC.ToString(), dadosConsDPEC.nRegDPEC));
             doc.AppendChild(node);
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml);
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consDPEC versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLConsDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosConsDPEC.tpAmb);
-            vDadosMsg.AppendFormat("<verAplic>{0}</verAplic>", dadosConsDPEC.verAplic);
-            if (!string.IsNullOrEmpty(dadosConsDPEC.chNFe))
-                vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", dadosConsDPEC.chNFe);
-            else
-                vDadosMsg.AppendFormat("<nRegDPEC>{0}</nRegDPEC>", dadosConsDPEC.nRegDPEC);
-            vDadosMsg.Append("</consDPEC>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());*/
         }
         #endregion
 
@@ -1044,7 +995,7 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("envDPEC");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC));
-            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
 
             XmlNode nodeInfDPEC = doc.CreateElement("infDPEC");
             nodeInfDPEC.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.Id.ToString(), "DPEC" + dadosEnvDPEC.CNPJ));
@@ -1076,37 +1027,6 @@ namespace NFe.Service
             doc.AppendChild(node);
 
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml);
-
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<envDPEC versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<infDPEC Id=\"DPEC{0}\">", dadosEnvDPEC.CNPJ);
-            vDadosMsg.Append("<ideDec>");
-            vDadosMsg.AppendFormat("<cUF>{0}</cUF>", dadosEnvDPEC.cUF);
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosEnvDPEC.tpAmb);
-            vDadosMsg.AppendFormat("<verProc>{0}</verProc>", dadosEnvDPEC.verProc);
-            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDPEC.CNPJ);
-            vDadosMsg.AppendFormat("<IE>{0}</IE>", dadosEnvDPEC.IE);
-            vDadosMsg.Append("</ideDec>");
-            vDadosMsg.Append("<resNFe>");
-            vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", dadosEnvDPEC.chNFe);
-            if (dadosEnvDPEC.UF == "EX" || dadosEnvDPEC.CNPJCPF.Length == 0)
-                vDadosMsg.Append("<CNPJ />");
-            else
-                if (dadosEnvDPEC.CNPJCPF.Length == 14)
-                    vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDPEC.CNPJCPF);
-                else
-                    vDadosMsg.AppendFormat("<CPF>{0}</CPF>", dadosEnvDPEC.CNPJCPF);
-            vDadosMsg.AppendFormat("<UF>{0}</UF>", dadosEnvDPEC.UF);
-            vDadosMsg.AppendFormat("<vNF>{0}</vNF>", dadosEnvDPEC.vNF);
-            vDadosMsg.AppendFormat("<vICMS>{0}</vICMS>", dadosEnvDPEC.vICMS);
-            vDadosMsg.AppendFormat("<vST>{0}</vST>", dadosEnvDPEC.vST);
-            vDadosMsg.Append("</resNFe>");
-            vDadosMsg.Append("</infDPEC>");
-            vDadosMsg.Append("</envDPEC>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString());*/
         }
         #endregion
 
@@ -1811,7 +1731,7 @@ namespace NFe.Service
 
                 //Montar o XML -procInutNFe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                    "<procInutNFe xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">" +
+                    "<procInutNFe xmlns=\"" + Propriedade.nsURI_nfe + "\" versao=\"" + versao + "\">" +
                     strInutNFe +
                     strRetInutNFe +
                     "</procInutNFe>";
@@ -1944,19 +1864,11 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("consReciNFe");
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), versao));
-            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRec.ToString(), recibo));
             doc.AppendChild(node);
             return doc.OuterXml;
-            /*
-            string strXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<consReciNFe versao=\"" + versao + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
-                "<tpAmb>" + Empresas.Configuracoes[emp].tpAmb.ToString() + "</tpAmb>" +
-                "<nRec>" + recibo + "</nRec>" +
-                "</consReciNFe>";
-
-            return strXml;*/
         }
         #endregion
 
@@ -2051,7 +1963,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-NFe.xml
                     string strXmlProcNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">" +
+                        "<" + tipo + "eProc xmlns=\"" + Propriedade.nsURI_nfe + "\" versao=\"" + versao + "\">" +
                         strNFe +
                         protNfe +
                         "</" + tipo + "eProc>";
@@ -2206,7 +2118,7 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode envDownload = doc.CreateElement("downloadNFe");
             envDownload.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDownload));
-            envDownload.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            envDownload.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             envDownload.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), dadosEnvDownload.tpAmb.ToString()));
             envDownload.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "DOWNLOAD NFE"));
             envDownload.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), dadosEnvDownload.CNPJ));
@@ -2214,17 +2126,6 @@ namespace NFe.Service
             doc.AppendChild(envDownload);
 
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml, true);
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<downloadNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvDownload + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosEnvDownload.tpAmb);
-            vDadosMsg.Append("<xServ>DOWNLOAD NFE</xServ>");
-            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosEnvDownload.CNPJ);
-            vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", dadosEnvDownload.chNFe);
-            vDadosMsg.Append("</downloadNFe>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString(), true);*/
         }
         #endregion
 
@@ -2235,7 +2136,7 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode envConsulta = doc.CreateElement("consNFeDest");
             envConsulta.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest));
-            envConsulta.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            envConsulta.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             envConsulta.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), dadosConsulta.tpAmb.ToString()));
             envConsulta.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), string.IsNullOrEmpty(dadosConsulta.xServ) ? "CONSULTAR NFE DEST" : dadosConsulta.xServ));
             envConsulta.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), dadosConsulta.CNPJ));
@@ -2245,19 +2146,6 @@ namespace NFe.Service
             doc.AppendChild(envConsulta);
 
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml, true);
-            /*
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<consNFeDest versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", dadosConsulta.tpAmb);
-            vDadosMsg.Append("<xServ>CONSULTAR NFE DEST</xServ>");
-            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", dadosConsulta.CNPJ);
-            vDadosMsg.AppendFormat("<indNFe>{0}</indNFe>", dadosConsulta.indNFe);
-            vDadosMsg.AppendFormat("<indEmi>{0}</indEmi>", dadosConsulta.indEmi);
-            vDadosMsg.AppendFormat("<ultNSU>{0}</ultNSU>", dadosConsulta.ultNSU);
-            vDadosMsg.Append("</consNFeDest>");
-
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString(), true);*/
         }
         #endregion
 
@@ -2283,13 +2171,13 @@ namespace NFe.Service
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode envEvento = doc.CreateElement("envEvento");
             envEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEvento));
-            envEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+            envEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             envEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.idLote.ToString(), dadosEnvEvento.idLote));
             foreach (Evento evento in dadosEnvEvento.eventos)
             {
                 XmlNode nodeEvento = doc.CreateElement("evento");
                 nodeEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), dadosEnvEvento.versao));
-                nodeEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI));
+                nodeEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
 
                 XmlNode infEvento = doc.CreateElement("infEvento");
                 infEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.Id.ToString(), evento.Id));
@@ -2626,7 +2514,7 @@ namespace NFe.Service
                 protEnvioEvento = xmlEventoEnvio;
             else //danasa 4/7/2011
             {
-                protEnvioEvento = "<procEventoNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">" +
+                protEnvioEvento = "<procEventoNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI_nfe + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoNFe>";
@@ -2823,17 +2711,45 @@ namespace NFe.Service
         #region OndeNFeEstaGravada
         public string OndeNFeEstaGravada(int emp, string ChaveNFe)
         {
-            ///
-            /// pesquisa onde o arquivo de distribuicao da nota foi gravado
-            string[] files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
-                                                            ChaveNFe + Propriedade.ExtRetorno.ProcNFe,
-                                                            SearchOption.AllDirectories);
-            if (files.Length == 0)
-                files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
-                                                            ChaveNFe + Propriedade.ExtRetorno.Den,
-                                                            SearchOption.AllDirectories);
+            DateTime dte = Convert.ToDateTime("20" + ChaveNFe.Substring(2, 2) + "/" + ChaveNFe.Substring(4, 2) + "/1");
+            string olddir = null;
+            string retorno = null;
+            for (int nd = 0; nd < 31; ++nd)
+            {
+                string dsc = Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dte.AddDays(nd));
+                if (dsc != "") dsc = "\\" + dsc.TrimEnd('\\');
+                if (olddir != null && olddir.Equals(dsc)) continue; //evitamos pesquisar por uma pasta que já haviamos pesquisado (AM, MA, ...)
+                olddir = dsc;
 
-            return files.Length > 0 ? Path.GetDirectoryName(files[0]) : "";
+                ///
+                /// pesquisa onde o arquivo de distribuicao da nota foi gravado
+                string files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + dsc,
+                                                                ChaveNFe + Propriedade.ExtRetorno.ProcNFe);
+                if (!File.Exists(files))
+                    files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + dsc,
+                                                                ChaveNFe + Propriedade.ExtRetorno.Den);
+
+                retorno = File.Exists(files) ? Path.GetDirectoryName(files) : "";
+
+                if (!string.IsNullOrEmpty(retorno) || string.IsNullOrEmpty(dsc))
+                    break;
+            }
+            if (string.IsNullOrEmpty(retorno))
+            {
+                ///
+                /// nao a encontrando, pesquisa pela arvore de autorizados/denegados pois pode ser que o ERP pode ter
+                /// mudado o tipo DiretorioSalvarComo
+                /// 
+                string[] files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
+                                            ChaveNFe + Propriedade.ExtRetorno.ProcNFe,
+                                            SearchOption.AllDirectories);
+                if (files.Length == 0)
+                    files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
+                                            ChaveNFe + Propriedade.ExtRetorno.Den,
+                                            SearchOption.AllDirectories);
+                retorno = files.Length > 0 ? Path.GetDirectoryName(files[0]) : "";
+            }
+            return retorno;
         }
         #endregion
 

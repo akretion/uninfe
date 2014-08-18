@@ -48,7 +48,7 @@ namespace NFe.UI.Formularios
                             break;
 
                         case uninfeOpcoes2.opRestartServico:
-                            uninfeDummy.mainForm.ExecutaServicos();
+                            uninfeDummy.mainForm.ExecutaServicos(false);
                             break;
 
                         case uninfeOpcoes2.opRestartTasks:

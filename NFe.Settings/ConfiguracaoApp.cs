@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
+using System.Net;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -58,45 +59,6 @@ namespace NFe.Settings
 
         #region GravarLogOperacoesRealizadas
         public static bool GravarLogOperacoesRealizadas { get; set; }
-        #endregion
-
-        #region Propriedades das versões dos XML´s
-
-        #region NFe
-        //public static string VersaoXMLStatusServico { get; set; }
-        //public static string VersaoXMLNFe { get; set; }
-        //public static string VersaoXMLPedRec { get; set; }
-        //public static string VersaoXMLCanc { get; set; }
-        //public static string VersaoXMLInut { get; set; }
-        //public static string VersaoXMLPedSit { get; set; }
-        //public static string VersaoXMLConsCad { get; set; }
-        //public static string VersaoXMLCabecMsg { get; set; }
-        //public static string VersaoXMLEnvDPEC { get; set; }
-        //public static string VersaoXMLConsDPEC { get; set; }
-        //public static string VersaoXMLEnvDownload { get; set; }
-        //public static string VersaoXMLEnvConsultaNFeDest { get; set; }
-        //public static string VersaoXMLEvento { get; set; }
-        #endregion
-
-        #region MDFe
-        //public static string VersaoXMLMDFeCabecMsg { get; set; }
-        //public static string VersaoXMLMDFeStatusServico { get; set; }
-        //public static string VersaoXMLMDFe { get; set; }
-        //public static string VersaoXMLMDFePedRec { get; set; }
-        //public static string VersaoXMLMDFePedSit { get; set; }
-        //public static string VersaoXMLMDFeEvento { get; set; }
-        #endregion
-
-        #region CTe
-        //public static string VersaoXMLCTeCabecMsg { get; set; }
-        //public static string VersaoXMLCTeStatusServico { get; set; }
-        //public static string VersaoXMLCTe { get; set; }
-        //public static string VersaoXMLCTePedRec { get; set; }
-        //public static string VersaoXMLCTePedSit { get; set; }
-        //public static string VersaoXMLCTeInut { get; set; }
-        //public static string VersaoXMLCTeEvento { get; set; }
-        #endregion
-
         #endregion
 
         #region Propriedades para controle de servidor proxy
@@ -155,6 +117,13 @@ namespace NFe.Settings
             /// </summary>
             public void load()
             {
+                if (Empresas.Configuracoes.Count == 0)
+                {
+                    ///
+                    /// OPS!!! nenhuma empresa ainda cadastrada, então gravamos o log na pasta de log do uninfe
+                    ConfiguracaoApp.GravarLogOperacoesRealizadas = true;
+                }
+
                 List<ArquivoItem> ListArqsAtualizar = new List<ArquivoItem>();
                 UpdateWSDL(ListArqsAtualizar);
                 bool gravaLista = false;
@@ -165,23 +134,37 @@ namespace NFe.Settings
                     string[] x = ass.GetManifestResourceNames();
                     if (x.GetLength(0) > 0)
                     {
+                        string fileoutput = null;
+
                         var afiles = (from d in x
-                                      where NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? d.StartsWith("NFe.Components.Wsdl.NFse.") : d.StartsWith("NFe.Components.Wsdl.NFe.")
+                                      where NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll 
+                                                ? d.StartsWith("NFe.Components.Wsdl.NF") 
+                                                : NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse 
+                                                    ? d.StartsWith("NFe.Components.Wsdl.NFse.") 
+                                                    : d.StartsWith("NFe.Components.Wsdl.NFe.")
                                       select d);
 
                         foreach (string s in afiles)
                         {
-                            string fileoutput = null;
-                            switch (NFe.Components.Propriedade.TipoAplicativo)
+                            fileoutput = null;
+                            fileoutput = s.Replace("NFe.Components.Wsdl.", NFe.Components.Propriedade.PastaExecutavel + "\\");
+                            /*
+                            if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
                             {
-                                case TipoAplicativo.Nfe:
-                                    fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\");
-                                    break;
-                                case TipoAplicativo.Nfse:
-                                    fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\");
-                                    break;
+                                fileoutput = s.Replace("NFe.Components.Wsdl.", NFe.Components.Propriedade.PastaExecutavel + "\\");
                             }
-
+                            else
+                            {
+                                switch (NFe.Components.Propriedade.TipoAplicativo)
+                                {
+                                    case TipoAplicativo.Nfe:
+                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\NFe\\");
+                                        break;
+                                    case TipoAplicativo.Nfse:
+                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\NFse\\");
+                                        break;
+                                }
+                            }*/
                             if (fileoutput == null)
                                 continue;
 
@@ -201,44 +184,39 @@ namespace NFe.Settings
                                 fileoutput = fileoutput.Substring(0, plast).Replace(".", "\\") + "\\" + fn;
                             }
                             else
+                            {
                                 fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "#" + fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("#", ".");
-
-
+                            }
                             FileInfo fi = new FileInfo(fileoutput);
-                            ArquivoItem item = new ArquivoItem();
-                            item = null;
+                            ArquivoItem item = null;
 
                             if (fi.Exists)  //danasa 9-2013
-                            {
                                 if (ListArqsAtualizar.Count > 0)
                                 {
-                                    item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo == fi.Name);
+                                    item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo.ToLower() == fi.Name.ToLower());
                                 }
-                            }
+
                             // A comparação é feita (fi.LastWriteTime != item.Data)
                             // Pois intende-se que se a data do arquivo que esta na pasta do UniNFe for superior a data
                             // de quando foi feita a ultima atualizacao do UniNfe, significa que ele foi atualizado manualmente e não devemos
                             // sobrepor o WSDL ou SCHEMA do Usuario - Renan 26/03/2013
-                            if (item == null || (item != null && fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
+                            if (item == null ||
+                                (item != null && fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
                             {
                                 if (item == null || (item != null && !item.Manual))
                                 {
-                                    using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
-                                    {
-                                        if (!Directory.Exists(Path.GetDirectoryName(fileoutput)))
-                                            Directory.CreateDirectory(Path.GetDirectoryName(fileoutput));
-
-                                        using (StreamWriter FileWriter = new StreamWriter(fileoutput))
-                                        {
-                                            FileWriter.Write(FileReader.ReadToEnd());
-                                            FileWriter.Close();
-                                            gravaLista = true;
-                                        }
-                                    }
+                                    if (ExtractResourceToDisk(ass, s, fileoutput))
+                                        gravaLista = true;
+                                }
+                                else
+                                {
+                                    if (item != null && !item.Manual)
+                                        Auxiliar.WriteLog(fileoutput + " não copiado");
                                 }
                             }
                             else if (item != null)
                             {
+                                gravaLista = true;
                                 item.Manual = true;
                             }
                         }
@@ -248,18 +226,43 @@ namespace NFe.Settings
                 }
                 catch (Exception ex)
                 {
-                    int emp = Empresas.FindEmpresaByThread();
                     string xMotivo = "Não foi possível atualizar pacotes de Schemas/WSDLs.";
 
-                    Auxiliar.WriteLog(ex.Message);
-                    Auxiliar oAux = new Auxiliar();
-                    oAux.GravarArqErroERP(Empresas.Configuracoes[emp].CNPJ + ".err", xMotivo + Environment.NewLine + ex.Message);
+                    Auxiliar.WriteLog(xMotivo + Environment.NewLine + ex.Message);
+
+                    if (Empresas.Configuracoes.Count > 0)
+                    {
+                        int emp = Empresas.FindEmpresaByThread();
+                        Auxiliar oAux = new Auxiliar();
+                        oAux.GravarArqErroERP(Empresas.Configuracoes[emp].CNPJ + ".err", xMotivo + Environment.NewLine + ex.Message);
+                    }
                 }
                 finally
                 {
-                    if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                        WebServiceNFSe.Start();
+                    if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse ||
+                        NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
+                    {
+                        WebServiceNFSe.SalvarXMLMunicipios();
+                    }
                 }
+            }
+
+            private bool ExtractResourceToDisk(System.Reflection.Assembly ass, string s, string fileoutput)
+            {
+                bool gravaLista = false;
+                using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
+                {
+                    if (!Directory.Exists(Path.GetDirectoryName(fileoutput)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(fileoutput));
+
+                    using (StreamWriter FileWriter = new StreamWriter(fileoutput))
+                    {
+                        FileWriter.Write(FileReader.ReadToEnd());
+                        FileWriter.Close();
+                        gravaLista = true;
+                    }
+                }
+                return gravaLista;
             }
 
             #endregion
@@ -295,24 +298,24 @@ namespace NFe.Settings
             /// <param name="ListaAnterior"></param>
             public void GravarVersoesWSDLs(List<ArquivoItem> ListaAnterior)
             {
-                string pastaExecutavel = Propriedade.PastaExecutavel;
-                string pastaWSDLProducao = pastaExecutavel + "\\WSDL\\Producao\\";
-                string pastaWSDLHomologacao = pastaExecutavel + "\\WSDL\\Homologacao\\";
-                string pastaXSD = pastaExecutavel + "\\schemas\\";
+                //string pastaExecutavel = Propriedade.PastaExecutavel;
+                //string pastaWSDLProducao = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\WSDL\\Producao\\");
+                //string pastaWSDLHomologacao = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\WSDL\\Homologacao\\");
+                //string pastaXSD = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\schemas\\");
 
-                string[] ArquivosWSDLProducao = Directory.GetFiles(pastaWSDLProducao, "*.wsdl", SearchOption.AllDirectories);
-                string[] ArquivosWSDLHomologacao = Directory.GetFiles(pastaWSDLHomologacao, "*.wsdl", SearchOption.AllDirectories);
-                string[] ArquivosXSD = Directory.GetFiles(pastaXSD, "*.xsd", SearchOption.AllDirectories);
+                string[] ArquivosWSDLProducao = Directory.GetFiles(Propriedade.PastaExecutavel, "*.wsdl", SearchOption.AllDirectories);
+                //string[] ArquivosWSDLHomologacao = Directory.GetFiles(pastaWSDLHomologacao, "*.wsdl", SearchOption.AllDirectories);
+                string[] ArquivosXSD = Directory.GetFiles(Propriedade.PastaExecutavel, "*.xsd", SearchOption.AllDirectories);
 
                 List<ArquivoItem> ArquivosXML = new List<ArquivoItem>();
 
                 PreparaDadosWSDLs(ArquivosWSDLProducao, ArquivosXML);
-                PreparaDadosWSDLs(ArquivosWSDLHomologacao, ArquivosXML);
+                //PreparaDadosWSDLs(ArquivosWSDLHomologacao, ArquivosXML);
                 PreparaDadosWSDLs(ArquivosXSD, ArquivosXML);
 
                 foreach (ArquivoItem item in ArquivosXML)
                 {
-                    ArquivoItem itemAntigo = ListaAnterior.FirstOrDefault(a => a.Arquivo == item.Arquivo);
+                    ArquivoItem itemAntigo = ListaAnterior.FirstOrDefault(a => a.Arquivo.ToLower() == item.Arquivo.ToLower());
                     item.Manual = itemAntigo == null ? false : itemAntigo.Manual;
                 }
 
@@ -320,9 +323,7 @@ namespace NFe.Settings
                 {
                     File.Delete(XMLVersoesWSDL);
                 }
-
                 EscreverXmlWSDLs(ArquivosXML);
-
             }
             #endregion
 
@@ -338,7 +339,6 @@ namespace NFe.Settings
             /// <param name="ListArquivos">A Lista onde as informações serão armazenadas para serem gravadas posteriormente</param>
             private void PreparaDadosWSDLs(string[] arquivos, List<ArquivoItem> ListArquivos)
             {
-
                 foreach (string arquivo in arquivos)
                 {
                     FileInfo infArquivo = new FileInfo(arquivo);
@@ -354,8 +354,6 @@ namespace NFe.Settings
 
                     });
                 }
-
-
             }
             #endregion
 
@@ -369,10 +367,8 @@ namespace NFe.Settings
             /// <param name="ListArquivosGerar">Lista com os informacoes a serem gravados pertinentes aos arquivos</param>
             private void EscreverXmlWSDLs(List<ArquivoItem> ListArquivosGerar)
             {
-
                 if (ListArquivosGerar.Count > 0)
                 {
-
                     XmlTextWriter arqXML = new XmlTextWriter(XMLVersoesWSDL, Encoding.UTF8);
                     arqXML.WriteStartDocument();
 
@@ -439,7 +435,6 @@ namespace NFe.Settings
         #region StartVersoes
         public static void StartVersoes()
         {
-            //if (ConfiguracaoApp.AtualizaWSDL)
             new loadResources().load();
 
             ConfiguracaoApp.CarregarDados();
@@ -447,58 +442,20 @@ namespace NFe.Settings
             if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
 
-            switch (Propriedade.TipoAplicativo)
+            switch (Propriedade.TipoExecucao)
             {
-                case TipoAplicativo.Nfe:
-                    #region NF-e
-                    //ConfiguracaoApp.VersaoXMLCanc = "2.00";
-                    //ConfiguracaoApp.VersaoXMLConsCad = "2.00";
-                    //ConfiguracaoApp.VersaoXMLInut = "2.00";
-                    //ConfiguracaoApp.VersaoXMLNFe = "2.00";
-                    //ConfiguracaoApp.VersaoXMLPedRec = "2.00";
-                    //ConfiguracaoApp.VersaoXMLPedSit = "2.01";
-                    //ConfiguracaoApp.VersaoXMLStatusServico = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCabecMsg = "2.00";
-                    //ConfiguracaoApp.VersaoXMLEnvDPEC = "1.01";
-                    //ConfiguracaoApp.VersaoXMLConsDPEC = "1.01";
-                    //ConfiguracaoApp.VersaoXMLEvento = "1.00";
-                    //ConfiguracaoApp.VersaoXMLEnvDownload = "1.00";
-                    //ConfiguracaoApp.VersaoXMLEnvConsultaNFeDest = "1.01";
-                    #endregion
+                case TipoExecucao.teAll:
+                    Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
+                    SchemaXML.CriarListaIDXML();
+                    SchemaXMLNFSe.CriarListaIDXML();
+                    break;
 
-                    #region MDF-e
-                    //ConfiguracaoApp.VersaoXMLMDFeCabecMsg = "1.00";
-                    //ConfiguracaoApp.VersaoXMLMDFeStatusServico = "1.00";
-                    //ConfiguracaoApp.VersaoXMLMDFe = "1.00";
-                    //ConfiguracaoApp.VersaoXMLMDFePedRec = "1.00";
-                    //ConfiguracaoApp.VersaoXMLMDFePedSit = "1.00";
-                    //ConfiguracaoApp.VersaoXMLMDFeEvento = "1.00";
-                    #endregion
-
-                    #region CT-e
-                    //ConfiguracaoApp.VersaoXMLCTeCabecMsg = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTeStatusServico = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTe = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTePedRec = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTePedSit = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTeInut = "2.00";
-                    //ConfiguracaoApp.VersaoXMLCTeEvento = "2.00";
-                    #endregion
-
-                    Propriedade.nsURI = "http://www.portalfiscal.inf.br/nfe";
+                case TipoExecucao.teNFe:
+                    Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
                     SchemaXML.CriarListaIDXML();
                     break;
 
-                case TipoAplicativo.Nfse:
-                    //ConfiguracaoApp.VersaoXMLCanc = "1.03";
-                    //ConfiguracaoApp.VersaoXMLConsCad = "1.03";
-                    //ConfiguracaoApp.VersaoXMLInut = "1.03";
-                    //ConfiguracaoApp.VersaoXMLNFe = "1.03";
-                    //ConfiguracaoApp.VersaoXMLPedRec = "1.03";
-                    //ConfiguracaoApp.VersaoXMLPedSit = "1.03";
-                    //ConfiguracaoApp.VersaoXMLStatusServico = "1.03";
-                    //ConfiguracaoApp.VersaoXMLCabecMsg = "1.03";
-                    Propriedade.nsURI = "http://www.abrasf.org.br/";
+                case TipoExecucao.teNFSe:
                     SchemaXMLNFSe.CriarListaIDXML();
                     break;
             }
@@ -756,9 +713,6 @@ namespace NFe.Settings
                     CodigoUF = 904;
                     break;
 
-                case NFe.Components.TipoEmissao.teSCAN:
-                    CodigoUF = 900;
-                    break;
 
                 case NFe.Components.TipoEmissao.teDPEC:
                     if (servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
@@ -938,7 +892,8 @@ namespace NFe.Settings
             /// danasa: 4-2014
             /// Compatibilidade com a versao 2.00
             /// 
-            if (!string.IsNullOrEmpty(versao) && (versao.Equals("2.01") || versao.Equals("2.00")) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
+            if (!string.IsNullOrEmpty(versao) && 
+                (versao.Equals("2.01") || versao.Equals("2.00")) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
             {
                 string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
                 if (File.Exists(temp))
@@ -1028,7 +983,7 @@ namespace NFe.Settings
         {
             ValidarConfig(validaCertificado);
             GravarConfigGeral();
-            GravarConfigEmpresa();
+            GravarConfigEmpresas();
             if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
             {                           //<<<<<<danasa 1-5-2011
                 GravarArqEmpresas();    //<<<<<<danasa 1-5-2011
@@ -1052,65 +1007,19 @@ namespace NFe.Settings
             XElement empresasele = new XElement("Empresa");
             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
 
-#if false
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-            UTF8Encoding c = new UTF8Encoding(true);
-
-            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-            oSettings.Encoding = c;
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-
-            //Agora vamos criar um XML Writer
-            XmlWriter oXmlGravar = XmlWriter.Create(Propriedade.NomeArqEmpresas, oSettings);
-
-            //Agora vamos gravar os dados
-            oXmlGravar.WriteStartDocument();
-            oXmlGravar.WriteStartElement("Empresa");
-#endif
             foreach (Empresa empresa in Empresas.Configuracoes)
             {
                 empresasele.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
                                 new XAttribute(NFe.Components.NFeStrConstants.CNPJ, empresa.CNPJ),
                                 new XAttribute(NFe.Components.NFeStrConstants.Servico, ((int)empresa.Servico).ToString()),
                                 new XElement(NFe.Components.NFeStrConstants.Nome, empresa.Nome.Trim())));
-
-#if false
-                //Abrir a tag <Registro>
-                oXmlGravar.WriteStartElement(NFe.Components.NFeStrConstants.Registro);
-
-                //Criar o atributo CNPJ dentro da tag Registro
-                oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.CNPJ);
-                oXmlGravar.WriteString(empresa.CNPJ);
-
-                //Criar o atributo Servico dentro da tag Registro
-                oXmlGravar.WriteStartAttribute(NFe.Components.NFeStrConstants.Servico);
-                oXmlGravar.WriteString(((int)empresa.Servico).ToString());
-
-                //Encerrar o atributo CNPJ
-                oXmlGravar.WriteEndAttribute(); // Encerrar o atributo CNPJ
-
-                //Criar a tag <Nome> com seu conteúdo </Nome>
-                oXmlGravar.WriteElementString(NFe.Components.NFeStrConstants.Nome, empresa.Nome.Trim());
-
-                //Encerrar a tag </Registro>
-                oXmlGravar.WriteEndElement();
-#endif
             }
-#if false
-            oXmlGravar.WriteEndElement(); //Encerrar o elemento Empresa
-            oXmlGravar.WriteEndDocument();
-            oXmlGravar.Flush();
-            oXmlGravar.Close();
-#endif
             xml.Add(empresasele);
             xml.Save(Propriedade.NomeArqEmpresas);
         }
         #endregion
 
-        #region GravarConfigEmpresa()
+        #region GravarConfigEmpresas()
         /// <summary>
         /// Gravar as configurações das empresas
         /// </summary>
@@ -1118,7 +1027,7 @@ namespace NFe.Settings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 30/07/2010
         /// </remarks>
-        private void GravarConfigEmpresa()
+        private void GravarConfigEmpresas()
         {
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
@@ -1159,7 +1068,7 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlRetorno, empresa.PastaXmlRetorno);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlErro, empresa.PastaXmlErro);
                     oXmlGravar.WriteElementString(NFeStrConstants.PastaValidar, empresa.PastaValidar);
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, empresa.PastaXmlEnviado);
                         oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, empresa.PastaBackup);
@@ -1174,7 +1083,7 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoSenha, Criptografia.criptografaSenha(empresa.CertificadoSenha));
                     oXmlGravar.WriteElementString(NFeStrConstants.CertificadoPIN, Criptografia.criptografaSenha(empresa.CertificadoPIN));
                     oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, empresa.tpEmis.ToString());
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, empresa.GravarRetornoTXTNFe.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, empresa.GravarEventosDeTerceiros.ToString());
@@ -1187,7 +1096,7 @@ namespace NFe.Settings
                     }
 
                     oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoDanfe, empresa.ConfiguracaoDanfe);
                         oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoCCe, empresa.ConfiguracaoCCe);
@@ -1207,7 +1116,7 @@ namespace NFe.Settings
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPAtivo, empresa.FTPAtivo.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoUsuario, empresa.FTPNomeDoUsuario.ToString());
                     oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoServidor, empresa.FTPNomeDoServidor.ToString());
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, empresa.FTPPastaAutorizados.ToString());
                         oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, empresa.FTPGravaXMLPastaUnica.ToString());
@@ -1218,10 +1127,8 @@ namespace NFe.Settings
 
                     if (empresa.CertificadoInstalado)
                     {
-                        //oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.X509Certificado.Thumbprint);
                         oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.CertificadoDigitalThumbPrint);
                     }
-
                     oXmlGravar.WriteElementString(NFeStrConstants.UsuarioWS, (empresa.UsuarioWS == null ? "" : empresa.UsuarioWS.ToString()));
                     oXmlGravar.WriteElementString(NFeStrConstants.SenhaWS, (empresa.SenhaWS == null ? "" : empresa.SenhaWS.ToString()));
 
@@ -1268,56 +1175,6 @@ namespace NFe.Settings
             }
             xml.Add(elementos);
             xml.Save(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig);
-
-#if false
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-            UTF8Encoding c = new UTF8Encoding(false);
-
-            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-            oSettings.Encoding = c;
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-
-            XmlWriter oXmlGravar = null;
-
-            try
-            {
-                //Agora vamos criar um XML Writer
-                oXmlGravar = XmlWriter.Create(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig, oSettings);
-
-                //Agora vamos gravar os dados
-                oXmlGravar.WriteStartDocument();
-                oXmlGravar.WriteStartElement(NFeStrConstants.nfe_configuracoes);
-                oXmlGravar.WriteElementString(NfeConfiguracoes.Proxy.ToString(), ConfiguracaoApp.Proxy.ToString());
-                oXmlGravar.WriteElementString(NfeConfiguracoes.ProxyServidor.ToString(), ConfiguracaoApp.ProxyServidor);
-                oXmlGravar.WriteElementString(NfeConfiguracoes.ProxyUsuario.ToString(), ConfiguracaoApp.ProxyUsuario);
-                oXmlGravar.WriteElementString(NfeConfiguracoes.ProxySenha.ToString(), ConfiguracaoApp.ProxySenha);
-                oXmlGravar.WriteElementString(NfeConfiguracoes.ProxyPorta.ToString(), ConfiguracaoApp.ProxyPorta.ToString());
-                oXmlGravar.WriteElementString(NfeConfiguracoes.ChecarConexaoInternet.ToString(), ConfiguracaoApp.ChecarConexaoInternet.ToString());
-                oXmlGravar.WriteElementString(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString(), ConfiguracaoApp.GravarLogOperacoesRealizadas.ToString());
-                if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
-                {
-                    if (ConfiguracaoApp.mSenhaConfigAlterada)
-                    {
-                        ConfiguracaoApp.SenhaConfig = Functions.GerarMD5(ConfiguracaoApp.SenhaConfig);
-                    }
-
-                    oXmlGravar.WriteElementString(NfeConfiguracoes.SenhaConfig.ToString(), ConfiguracaoApp.SenhaConfig);
-                    ConfiguracaoApp.mSenhaConfigAlterada = false;
-                }
-
-                oXmlGravar.WriteEndElement(); //nfe_configuracoes
-                oXmlGravar.WriteEndDocument();
-                oXmlGravar.Flush();
-            }
-            finally
-            {
-                if (oXmlGravar != null)
-                    oXmlGravar.Close();
-            }
-#endif
         }
         #endregion
 
@@ -1329,7 +1186,7 @@ namespace NFe.Settings
             fc.Add(new FolderCompare(i + 1, empresa.PastaXmlRetorno));
             fc.Add(new FolderCompare(i + 2, empresa.PastaXmlErro));
             fc.Add(new FolderCompare(i + 3, empresa.PastaValidar));
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (empresa.Servico != TipoAplicativo.Nfse)
             {
                 fc.Add(new FolderCompare(i + 4, empresa.PastaXmlEnviado));
                 fc.Add(new FolderCompare(i + 5, empresa.PastaXmlEmLote));
@@ -1396,7 +1253,7 @@ namespace NFe.Settings
                     diretorios.Add(empresa.PastaXmlRetorno); mensagens.Add("Informe a pasta de retorno dos arquivos XML.");
                     diretorios.Add(empresa.PastaXmlErro); mensagens.Add("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.");
                     diretorios.Add(empresa.PastaValidar); mensagens.Add("Informe a pasta onde será gravado os arquivos XML somente para ser validado pela Aplicação.");
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         diretorios.Add(empresa.PastaXmlEmLote); mensagens.Add("Informe a pasta de envio dos arquivos XML em lote.");
                         diretorios.Add(empresa.PastaXmlEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
@@ -1418,7 +1275,7 @@ namespace NFe.Settings
                     /// danasa 7/7/2011
                     if (empresa.FTPIsAlive)
                     {
-                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                        if (empresa.Servico != TipoAplicativo.Nfse)
                         {
                             if (string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
                             {
@@ -1426,8 +1283,7 @@ namespace NFe.Settings
                                 validou = false;
                             }
                         }
-
-                        if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                        else
                             if (string.IsNullOrEmpty(empresa.FTPPastaRetornos))
                             {
                                 erro = "Informe a pasta do FTP de destino dos retornos\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
@@ -1537,7 +1393,7 @@ namespace NFe.Settings
                             diretorios.Add(empresa.PastaXmlRetorno.Trim()); mensagens.Add("A pasta de retorno dos arquivos XML informada não existe.");
                             diretorios.Add(empresa.PastaXmlErro.Trim()); mensagens.Add("A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.");
                             diretorios.Add(empresa.PastaValidar.Trim()); mensagens.Add("A pasta para validação de XML´s informada não existe.");
-                            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                            if (empresa.Servico != TipoAplicativo.Nfse)
                             {
                                 diretorios.Add(empresa.PastaXmlEnviado.Trim()); mensagens.Add("A pasta para arquivamento dos arquivos XML enviados informada não existe.");
                                 diretorios.Add(empresa.PastaBackup.Trim()); mensagens.Add("A pasta para backup dos XML enviados informada não existe.");
@@ -1602,7 +1458,7 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se as pastas configuradas do unidanfe estão corretas
-                    if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse)
                     {
                         if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
                         {
@@ -2222,6 +2078,43 @@ namespace NFe.Settings
                         throw new Exception(NFeStrConstants.proxyError);
                     }
                     Empresas.Configuracoes[emp].RemoveEndSlash();
+                    Empresas.CriarPasta();
+
+                    ///
+                    /// salva a configuracao da empresa
+                    /// 
+                    bool versaoNova = true;
+                    if (File.Exists(Empresas.Configuracoes[emp].NomeArquivoConfig))
+                    {
+                        versaoNova = File.ReadAllText(Empresas.Configuracoes[emp].NomeArquivoConfig).Contains("<Empresa xmlns:xsi");
+                    }
+
+                    if (versaoNova)
+                    {
+                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                        Empresas.Configuracoes[emp].SalvarConfiguracao(false);
+
+                        ///
+                        /// salva o arquivo da lista de empresas
+                        this.GravarArqEmpresas();
+
+                        ///
+                        /// salva as configuracoes gerais
+                        this.GravarConfigGeral();
+                    }
+                    else
+                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                        this.GravarConfig(true, false);
+
+                    cStat = "1";
+                    xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
+                    lErro = false;
+                }
+                else
+                {
+                    cStat = "2";
+                    xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": Nenhuma tag padrão de configuração foi localizada no XML";
+                    lErro = true;
                 }
             }
             catch (Exception ex)
@@ -2231,58 +2124,6 @@ namespace NFe.Settings
                 lErro = true;
             }
 
-            if (lEncontrouTag)
-            {
-                if (!lErro)
-                {
-                    try
-                    {
-                        Empresas.CriarPasta();
-
-                        ///
-                        /// salva a configuracao da empresa
-                        /// 
-                        bool versaoNova = true;
-                        if (File.Exists(Empresas.Configuracoes[emp].NomeArquivoConfig))
-                        {
-                            versaoNova = File.ReadAllText(Empresas.Configuracoes[emp].NomeArquivoConfig).Contains("<Empresa xmlns:xsi");
-                        }
-
-                        if (versaoNova)
-                        {
-                            //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                            Empresas.Configuracoes[emp].SalvarConfiguracao(false);
-
-                            ///
-                            /// salva o arquivo da lista de empresas
-                            this.GravarArqEmpresas();
-
-                            ///
-                            /// salva as configuracoes gerais
-                            this.GravarConfigGeral();
-                        }
-                        else
-                            //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                            this.GravarConfig(true, false);
-
-                        cStat = "1";
-                        xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
-                        lErro = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        cStat = "2";
-                        xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": " + ex.Message;
-                        lErro = true;
-                    }
-                }
-            }
-            else
-            {
-                cStat = "2";
-                xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": Nenhuma tag padrão de configuração foi localizada no XML";
-                lErro = true;
-            }
 
             //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
             //exatamente como estavam gravadas no XML de configuração

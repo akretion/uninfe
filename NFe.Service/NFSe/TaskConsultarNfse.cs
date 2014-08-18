@@ -137,6 +137,16 @@ namespace NFe.Service.NFSe
                         syspro.ConsultarNfse(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.TIPLAN:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe, string.Empty);
+                        pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitNfse.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.CARIOCA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe, string.Empty);
+                        pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitNfse.cMunicipio));
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

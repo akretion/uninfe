@@ -162,6 +162,8 @@
             this.textBox_PastaDownloadNFeDest.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaDownloadNFeDest.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaDownloadNFeDest.IconRight = true;
+            this.textBox_PastaDownloadNFeDest.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaDownloadNFeDest.Location = new System.Drawing.Point(3, 344);
             this.textBox_PastaDownloadNFeDest.MaxLength = 32767;
             this.textBox_PastaDownloadNFeDest.Name = "textBox_PastaDownloadNFeDest";
@@ -186,6 +188,8 @@
             this.textBox_PastaValidar.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaValidar.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaValidar.IconRight = true;
+            this.textBox_PastaValidar.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaValidar.Location = new System.Drawing.Point(3, 301);
             this.textBox_PastaValidar.MaxLength = 32767;
             this.textBox_PastaValidar.Name = "textBox_PastaValidar";
@@ -211,6 +215,8 @@
             this.textBox_PastaBackup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaBackup.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaBackup.IconRight = true;
+            this.textBox_PastaBackup.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaBackup.Location = new System.Drawing.Point(3, 258);
             this.textBox_PastaBackup.MaxLength = 32767;
             this.textBox_PastaBackup.Name = "textBox_PastaBackup";
@@ -236,6 +242,8 @@
             this.textBox_PastaXmlErro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaXmlErro.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaXmlErro.IconRight = true;
+            this.textBox_PastaXmlErro.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaXmlErro.Location = new System.Drawing.Point(3, 215);
             this.textBox_PastaXmlErro.MaxLength = 32767;
             this.textBox_PastaXmlErro.Name = "textBox_PastaXmlErro";
@@ -261,6 +269,8 @@
             this.textBox_PastaXmlEnviado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaXmlEnviado.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaXmlEnviado.IconRight = true;
+            this.textBox_PastaXmlEnviado.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaXmlEnviado.Location = new System.Drawing.Point(3, 172);
             this.textBox_PastaXmlEnviado.MaxLength = 32767;
             this.textBox_PastaXmlEnviado.Name = "textBox_PastaXmlEnviado";
@@ -286,6 +296,8 @@
             this.textBox_PastaXmlRetorno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaXmlRetorno.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaXmlRetorno.IconRight = true;
+            this.textBox_PastaXmlRetorno.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaXmlRetorno.Location = new System.Drawing.Point(3, 129);
             this.textBox_PastaXmlRetorno.MaxLength = 32767;
             this.textBox_PastaXmlRetorno.Name = "textBox_PastaXmlRetorno";
@@ -311,6 +323,8 @@
             this.textBox_PastaXmlEmLote.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaXmlEmLote.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaXmlEmLote.IconRight = true;
+            this.textBox_PastaXmlEmLote.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaXmlEmLote.Location = new System.Drawing.Point(3, 86);
             this.textBox_PastaXmlEmLote.MaxLength = 32767;
             this.textBox_PastaXmlEmLote.Name = "textBox_PastaXmlEmLote";
@@ -336,6 +350,8 @@
             this.textBox_PastaXmlEnvio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.textBox_PastaXmlEnvio.Icon = global::NFe.UI.Properties.Resources.folder_orange_open;
             this.textBox_PastaXmlEnvio.IconRight = true;
+            this.textBox_PastaXmlEnvio.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_PastaXmlEnvio.Location = new System.Drawing.Point(3, 43);
             this.textBox_PastaXmlEnvio.MaxLength = 32767;
             this.textBox_PastaXmlEnvio.Name = "textBox_PastaXmlEnvio";
@@ -375,7 +391,7 @@
             this.Controls.Add(this.lbl_textBox_PastaEnvioXML);
             this.Controls.Add(this.textBox_PastaXmlEnvio);
             this.Name = "userConfiguracao_pastas";
-            this.Size = new System.Drawing.Size(640, 377);
+            this.Size = new System.Drawing.Size(640, 374);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -130,6 +130,16 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.TIPLAN:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe, string.Empty);
+                        pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, ler.oDadosPedSitNfseRps.cMunicipio));
+                        break;
+
+                    case PadroesNFSe.CARIOCA:
+                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe, string.Empty);
+                        pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, ler.oDadosPedSitNfseRps.cMunicipio));
+                        break;
+
                     default:
                         throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }

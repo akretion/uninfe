@@ -32,7 +32,7 @@ namespace NFe.UI
             this.cbEmpresas.SelectedIndexChanged -= cbEmpresas_SelectedIndexChanged;
             this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             this.cbEmpresas.ValueMember = "Valor";
-            this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa();
+            this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa(false);
             this.cbEmpresas.SelectedIndexChanged += cbEmpresas_SelectedIndexChanged;
             int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
             if (posicao > (this.cbEmpresas.DataSource as System.Collections.ArrayList).Count)
@@ -67,8 +67,18 @@ namespace NFe.UI
                     using (OpenFileDialog dlg = new OpenFileDialog())
                     {
                         dlg.RestoreDirectory = true;
+                        dlg.Filter = "";
 
-                        if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                        if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Nfse)
+                        {
+                            dlg.Filter += "Arquivos de NFSe|*" + Propriedade.ExtEnvio.EnvLoteRps +
+                                ";*" + Propriedade.ExtEnvio.PedCanNfse +
+                                ";*" + Propriedade.ExtEnvio.PedLoteRps +
+                                ";*" + Propriedade.ExtEnvio.PedSitLoteRps +
+                                ";*" + Propriedade.ExtEnvio.PedSitNfse +
+                                ";*" + Propriedade.ExtEnvio.PedSitNfseRps;
+                        }
+                        else
                         {
                             dlg.Filter = "Todos os arquivos|*" + Propriedade.ExtEnvio.Nfe +
                                         ";*" + Propriedade.ExtEnvio.Cte +
@@ -96,15 +106,7 @@ namespace NFe.UI
                             dlg.Filter += string.Format("|Arquivos de DPEC (*.*{0})|*{0}", Propriedade.ExtEnvio.EnvDPEC_XML);
                             dlg.Filter += string.Format("|Arquivos de EPEC (*.*{0})|*{0}", Propriedade.ExtEnvio.PedEPEC);
                         }
-                        else
-                        {
-                            dlg.Filter = "Todos os arquivos|*" + Propriedade.ExtEnvio.EnvLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedCanNfse +
-                                ";*" + Propriedade.ExtEnvio.PedLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedSitLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedSitNfse +
-                                ";*" + Propriedade.ExtEnvio.PedSitNfseRps;
-                        }
+                        
                         if (!string.IsNullOrEmpty(path))
                             dlg.InitialDirectory = path;
 
@@ -207,7 +209,6 @@ namespace NFe.UI
                     catch (Exception ex)
                     {
                         lValidar = false;
-                        //this.textBox_tipoarq.Text = validarXML.TipoArqXml.cRetornoTipoArq;
                         this.textBox_resultado.Text = "Ocorreu um erro ao tentar assinar o XML: \r\n\r\n" +
                             validarXML.TipoArqXml.cRetornoTipoArq + "\r\n" + ex.Message;
                     }
@@ -218,7 +219,7 @@ namespace NFe.UI
                         if (validarXML.TipoArqXml.nRetornoTipoArq >= 1 && validarXML.TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                         {
                             ///danasa: 12/2013
-                            validarXML.ValidarArqXML(cArquivo);//.Validar(cArquivo);
+                            validarXML.ValidarArqXML(cArquivo);
                             if (string.IsNullOrEmpty(validarXML.TipoArqXml.cArquivoSchema))
                             {
                                 this.textBox_resultado.Text = "XML não possui schema de validação, sendo assim não é possível validar XML";
@@ -251,7 +252,9 @@ namespace NFe.UI
                     }
                     wb.Navigate(cArquivo);
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch { 
+                    webBrowser1_DocumentCompleted(null,null); 
+                }
             }
             catch (Exception ex)
             {

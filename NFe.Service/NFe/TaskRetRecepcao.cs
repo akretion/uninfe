@@ -355,6 +355,7 @@ namespace NFe.Service
                                 {
                                     if (!File.Exists(strArquivoNFeProc))
                                     {
+                                        Auxiliar.WriteLog("TaskRetRecepcao: Gerou o arquivo de distribuição através da consulta recibo.");
                                         oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
                                     }
                                 }
@@ -398,7 +399,7 @@ namespace NFe.Service
                                     }
                                     catch (Exception ex)
                                     {
-                                        Auxiliar.WriteLog("TaskRecepcao: " + ex.Message);
+                                        Auxiliar.WriteLog("TaskRecepcao: (Falha na execução do UniDANFe) " + ex.Message);
                                     }
                                 }
                                 //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012

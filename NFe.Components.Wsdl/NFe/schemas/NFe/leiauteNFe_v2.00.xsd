@@ -93,8 +93,7 @@
 										<xs:annotation>
 											<xs:documentation>Série do Documento Fiscal
 série normal 0-889
-Avulsa Fisco 890-899
-SCAN 900-999</xs:documentation>
+Avulsa Fisco 890-899</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="nNF" type="TNF">
@@ -335,7 +334,6 @@ Preencher com "2B", quando se tratar de Cupom Fiscal emitido por máquina regist
 											<xs:documentation>Forma de emissão da NF-e
 1 - Normal;
 2 - Contingência FS
-3 - Contingência SCAN
 4 - Contingência DPEC
 5 - Contingência FSDA
 6 - Contingência SVC - AN

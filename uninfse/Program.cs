@@ -42,7 +42,6 @@ namespace uninfse
             });
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
-
             ConfiguracaoApp.AtualizaWSDL = false;
 
             if(args.Length >= 1)
@@ -82,8 +81,8 @@ namespace uninfse
                 }
 
 
+            Propriedade.TipoExecucao = TipoExecucao.teNFSe;
             Propriedade.TipoAplicativo = TipoAplicativo.Nfse;
-
 
             if(Aplicacao.AppExecutando(false))
             {

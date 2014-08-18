@@ -221,7 +221,8 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 if (Empresas.Configuracoes[emp].Servico != TipoAplicativo.Nfse && isNFse)
                                     continue;
 
-                                if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfse && info.Name.StartsWith("NFe")) continue;
+                                if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfse && 
+                                    info.Name.StartsWith("NFe")) continue;
 
                                 aServicos += "," + info.Name;
                             }

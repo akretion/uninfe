@@ -100,12 +100,14 @@
             // 
             // cbServico
             // 
+            this.cbServico.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbServico.FormattingEnabled = true;
-            this.cbServico.ItemHeight = 23;
+            this.cbServico.IntegralHeight = false;
+            this.cbServico.ItemHeight = 19;
             this.cbServico.Location = new System.Drawing.Point(11, 130);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(174, 29);
+            this.cbServico.Size = new System.Drawing.Size(174, 25);
             this.cbServico.TabIndex = 5;
             this.cbServico.UseSelectable = true;
             // 

@@ -282,7 +282,7 @@ namespace NFe.Service
                                                             if (!afound)
                                                             {
                                                                 XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
-                                                                xmlVersion1.Value = Propriedade.nsURI;// "http://www.portalfiscal.inf.br/nfe";
+                                                                xmlVersion1.Value = Propriedade.nsURI_nfe;// "http://www.portalfiscal.inf.br/nfe";
                                                                 xitem1.ChildNodes[0].Attributes.Append(xmlVersion1);
                                                             }
 
@@ -294,7 +294,7 @@ namespace NFe.Service
                                                             if (!afound)
                                                             {
                                                                 XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
-                                                                xmlVersion1.Value = Propriedade.nsURI;// "http://www.portalfiscal.inf.br/nfe";
+                                                                xmlVersion1.Value = Propriedade.nsURI_nfe;// "http://www.portalfiscal.inf.br/nfe";
                                                                 xitem1.ChildNodes[1].Attributes.Append(xmlVersion1);
                                                             }
                                                             System.IO.File.WriteAllText(Path.Combine(folderDestino, chave), "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + xitem1.OuterXml, Encoding.UTF8);

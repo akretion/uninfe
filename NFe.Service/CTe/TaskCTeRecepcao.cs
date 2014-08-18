@@ -65,7 +65,7 @@ namespace NFe.Service
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, 
                                     oRecepcao, 
-                                    NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
+                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
                                     oCabecMsg, this, "-env-lot", "-rec");
                 #endregion
 

@@ -89,7 +89,7 @@ namespace uninfse
             // danasa 1-2012
             // tem que ser nesta posicao pq caso nao exista o UniNFeMunic.xml, ele será criado com base no "Webservice.xml"
             // a lista de municipios será criada em ConfiguracaoApp.CarregaWebServicesList();
-            WebServiceNFSe.Start();
+            WebServiceNFSe.SalvarXMLMunicipios();
 
             #region Definir valores propriedades de configuração
             //ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
@@ -97,9 +97,10 @@ namespace uninfse
             ConfiguracaoApp.StartVersoes();
             #endregion
 
-            if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || 
+                !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe))
             {
-                MessageBox.Show("Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService + "' não encontrados");
+                MessageBox.Show("Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService_NFSe + "' não encontrados");
                 Application.Exit();
             }
             else
@@ -782,8 +783,10 @@ namespace uninfse
         {
             if(Empresas.ClearLockFiles())
             {
-                ThreadService.Stop();
-                Application.Exit();
+                PararServicos(false);
+                ExecutaServicos();
+                //ThreadService.Stop();
+                //Application.Exit();
             }
         }
         #endregion

@@ -307,6 +307,12 @@ namespace NFe.Components
     }
     #endregion
 
+    public enum TipoExecucao
+    {
+        teNFe,
+        teNFSe,
+        teAll
+    }
     #region TipoAplicativo
     public enum TipoAplicativo
     {
@@ -336,6 +342,8 @@ namespace NFe.Components
         /// </summary>
         [Description("NFC-e")]
         NFCe = 4,
+        [Description("Todos")]
+        Todos = 10,
         [Description("")]
         Nulo = 100
     }
@@ -439,9 +447,18 @@ namespace NFe.Components
         /// Padrão System-PRO
         /// Prefeitura de Erechim - RS
         /// </summary>
-        SYSTEMPRO
+        SYSTEMPRO,
+        /// <summary>
+        /// Preifetura de Macaé - RJ
+        /// </summary>
+        TIPLAN,
+        /// <summary>
+        /// Prefeitura do Rio de Janeiro - RJ
+        /// </summary>
+        CARIOCA
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
+
     }
     #endregion
 
@@ -470,8 +487,6 @@ namespace NFe.Components
         teNormal = 1,
         [Description("Contingência com formulário de segurança (FS)")]
         teContingencia = 2,
-        [Description("Contingência com SCAN do Ambiente Nacional")]
-        teSCAN = 3,
         [Description("Contingência com DPEC")]
         teDPEC = 4,
         [Description("Contingência com formulário de segurança (FS-DA)")]
@@ -498,7 +513,6 @@ namespace NFe.Components
         FalhaEnvioXmlNFeWS = 5
     }
     #endregion
-
 
     #region EnumHelper
 

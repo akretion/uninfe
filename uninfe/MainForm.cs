@@ -91,15 +91,37 @@ namespace uninfe
             ConfiguracaoApp.StartVersoes();
             #endregion
 
-            if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+            string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
+            string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
+            string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
+            string msg = "";
+            bool error = false;
+            switch (Propriedade.TipoExecucao)
             {
-                MessageBox.Show("Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado");
-                Application.Exit();
+                case TipoExecucao.teNFSe:
+                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
+                    msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
+                    break;
+                case TipoExecucao.teNFe:
+                    error = !System.IO.File.Exists(filenameWS3);
+                    msg = "Arquivo '" + filenameWS3 + "' não encontrados";
+                    break;
+                case TipoExecucao.teAll:
+                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+                    msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+                    break;
             }
-            else
-                if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
-                    //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
-                    new ThreadControlEvents();  //danasa 12/8/2011
+            if (error)
+            {
+                MessageBox.Show(msg);
+                Application.Exit();
+                return;
+            }
+            this.tbMunic.Visible = Propriedade.TipoExecucao == TipoExecucao.teAll;
+
+            if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
+                //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
+                new ThreadControlEvents();  //danasa 12/8/2011
         }
         #endregion
 
@@ -793,14 +815,35 @@ namespace uninfe
             }
         }
 
+        formMunicipios m = null;
+        private void onCloseMunicipios(object sender, EventArgs e)
+        {
+            m.Dispose();
+            m = null;
+
+            ///
+            /// reloadWebServicesList carrega as URL's com base no XML de municipios.
+            if (WebServiceProxy.reloadWebServicesList())
+                ConfiguracaoApp.loadResouces();
+        }
+        private void btnMunicipios_Click(object sender, EventArgs e)
+        {
+            if (m == null)
+                m = new formMunicipios(onCloseMunicipios);
+            m.MdiParent = this;
+            m.Show();
+        }
 
         #region Ticket #110
         private void tbClearLockFiles_Click(object sender, EventArgs e)
         {
             if (Empresas.ClearLockFiles())
             {
-                ThreadService.Stop();
-                Application.Exit();
+                PararServicos(false);
+                ExecutaServicos();
+                //ThreadService.Stop();
+                //ThreadService.Start();
+                //Application.Exit();
             }
         }
         #endregion

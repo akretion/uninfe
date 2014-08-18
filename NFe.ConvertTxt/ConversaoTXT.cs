@@ -352,10 +352,10 @@ namespace NFe.ConvertTxt
                         case TpcnTipoCampo.tcHor:
                             maxLength = minLength = 8; //hh:mm:ss
                             break;
-                        case TpcnTipoCampo.tcDat:
+                        case TpcnTipoCampo.tcDatYYYY_MM_DD:
                             maxLength = minLength = 10; //yyyy-MM-dd
                             break;
-                        case TpcnTipoCampo.tcDat2:
+                        case TpcnTipoCampo.tcDatYYYYMMDD:
                             maxLength = minLength = 8; //yyyyMMdd
                             break;
                         case TpcnTipoCampo.tcDatHor:
@@ -540,10 +540,10 @@ namespace NFe.ConvertTxt
 
                 switch (Tipo)
                 {
-                    case TpcnTipoCampo.tcDat2:
+                    case TpcnTipoCampo.tcDatYYYYMMDD:
                         return this.getDate2(Tipo, ConteudoTag);
 
-                    case TpcnTipoCampo.tcDat:
+                    case TpcnTipoCampo.tcDatYYYY_MM_DD:
                     case TpcnTipoCampo.tcDatHor:
                         return this.getDateTime(Tipo, ConteudoTag);
 
@@ -579,8 +579,8 @@ namespace NFe.ConvertTxt
                 switch (Tipo)
                 {
                     case TpcnTipoCampo.tcHor:
-                    case TpcnTipoCampo.tcDat:
-                    case TpcnTipoCampo.tcDat2:
+                    case TpcnTipoCampo.tcDatYYYY_MM_DD:
+                    case TpcnTipoCampo.tcDatYYYYMMDD:
                     case TpcnTipoCampo.tcDatHor:
                         return DateTime.MinValue;
 
@@ -660,8 +660,8 @@ namespace NFe.ConvertTxt
                     }
                     else
                     {
-                        NFe.ide.dEmi    = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dEmi, ObOp.Obrigatorio, 10, 10);
-                        NFe.ide.dSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dSaiEnt, ObOp.Opcional, 10, 10);
+                        NFe.ide.dEmi    = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dEmi, ObOp.Obrigatorio, 10, 10);
+                        NFe.ide.dSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dSaiEnt, ObOp.Opcional, 10, 10);
                         NFe.ide.hSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcHor, TpcnResources.hSaiEnt, ObOp.Opcional, 0, 0);
                     }
                     NFe.ide.tpNF    = (TpcnTipoNFe)this.LerInt32(TpcnResources.tpNF, ObOp.Obrigatorio, 1, 1);
@@ -851,10 +851,10 @@ namespace NFe.ConvertTxt
                     NFe.avulsa.fone     = this.LerString(TpcnResources.fone, ObOp.Obrigatorio, 6, 14);
                     NFe.avulsa.UF       = this.LerString(TpcnResources.UF, ObOp.Obrigatorio, 2, 2);
                     NFe.avulsa.nDAR     = this.LerString(TpcnResources.nDAR, ObOp.Obrigatorio, 1, 60);
-                    NFe.avulsa.dEmi     = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dEmi, ObOp.Obrigatorio, 10, 10);
+                    NFe.avulsa.dEmi     = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dEmi, ObOp.Obrigatorio, 10, 10);
                     NFe.avulsa.vDAR     = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDAR, ObOp.Obrigatorio, 15);
                     NFe.avulsa.repEmi   = this.LerString(TpcnResources.repEmi, ObOp.Obrigatorio, 1, 60);
-                    NFe.avulsa.dPag     = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dPag, ObOp.Opcional, 10, 10);
+                    NFe.avulsa.dPag     = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dPag, ObOp.Opcional, 10, 10);
 
                     #endregion
                     break;
@@ -1072,10 +1072,10 @@ namespace NFe.ConvertTxt
                     DI diItem = new DI();
 
                     diItem.nDI          = this.LerString(TpcnResources.nDI, ObOp.Obrigatorio, 1, 12);
-                    diItem.dDI          = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dDI, ObOp.Obrigatorio, 10, 10);
+                    diItem.dDI          = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dDI, ObOp.Obrigatorio, 10, 10);
                     diItem.xLocDesemb   = this.LerString(TpcnResources.xLocDesemb, ObOp.Obrigatorio, 1, 60);
                     diItem.UFDesemb     = this.LerString(TpcnResources.UFDesemb, ObOp.Obrigatorio, 2, 2);
-                    diItem.dDesemb      = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dDesemb, ObOp.Obrigatorio, 10, 10);
+                    diItem.dDesemb      = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dDesemb, ObOp.Obrigatorio, 10, 10);
                     diItem.cExportador  = this.LerString(TpcnResources.cExportador, ObOp.Obrigatorio, 1, 60);
                     if (NFe.infNFe.Versao >= 3)
                     {
@@ -1200,8 +1200,8 @@ namespace NFe.ConvertTxt
 
                     medItem.nLote =          LerString(TpcnResources.nLote, ObOp.Obrigatorio, 1, 20);
                     medItem.qLote =          LerDouble(TpcnTipoCampo.tcDec3, TpcnResources.qLote, ObOp.Obrigatorio, 11);
-                    medItem.dFab = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat,  TpcnResources.dFab, ObOp.Obrigatorio, 10, 10);
-                    medItem.dVal = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat,  TpcnResources.dVal, ObOp.Obrigatorio, 10, 10);
+                    medItem.dFab = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD,  TpcnResources.dFab, ObOp.Obrigatorio, 10, 10);
+                    medItem.dVal = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD,  TpcnResources.dVal, ObOp.Obrigatorio, 10, 10);
                     medItem.vPMC =           LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPMC, ObOp.Obrigatorio, 15);
 
                     NFe.det[nProd].Prod.med.Add(medItem);
@@ -1900,13 +1900,13 @@ namespace NFe.ConvertTxt
 
                     if ((double)NFe.infNFe.Versao >= 3.10)
                     {
-                        NFe.Total.ISSQNtot.dCompet = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat2, TpcnResources.dCompet, ObOp.Opcional, 8, 8);
+                        NFe.Total.ISSQNtot.dCompet = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dCompet, ObOp.Opcional, 10, 10);
                         NFe.Total.ISSQNtot.vDeducao = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDeducao, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vOutro = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vDescIncond = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDescIncond, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vDescCond = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDescCond, ObOp.Opcional, 15);
                         NFe.Total.ISSQNtot.vISSRet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vISSRet, ObOp.Opcional, 15);
-                        NFe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)this.LerInt32(TpcnResources.cRegTrib, ObOp.Opcional, 1, 2);
+                        NFe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)this.LerInt32(TpcnResources.cRegTrib, ObOp.Opcional, 1, 1);
                     }
                     break;
 
@@ -2043,7 +2043,7 @@ namespace NFe.ConvertTxt
                     /// 
                     NFe.Cobr.Dup.Add(new Dup());
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = this.LerString(TpcnResources.nDup, ObOp.Opcional, 1, 60);
-                    NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].dVenc = (DateTime)this.LerCampo(TpcnTipoCampo.tcDat, TpcnResources.dVenc, ObOp.Opcional, 10, 10);
+                    NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].dVenc = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dVenc, ObOp.Opcional, 10, 10);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].vDup = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDup, ObOp.Opcional, 15);
                     break;
 

@@ -37,11 +37,11 @@ namespace NFe.UI
             {
                 this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
                 this.cbEmpresa.ValueMember = "Valor";
-                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa();
+                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
 
                 this.comboUf.DisplayMember = NFe.Components.NFeStrConstants.Nome.ToLower();
                 this.comboUf.ValueMember = "valor";
-                comboUf.DataSource = Functions.CarregaUF();
+                comboUf.DataSource = Functions.CarregaEstados();
 
                 int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
                 if (posicao > (this.cbEmpresa.DataSource as System.Collections.ArrayList).Count)

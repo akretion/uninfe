@@ -1,63 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2">
-      <s:element name="nfeDadosMsg">
-        <s:complexType mixed="true">
-          <s:sequence>
-            <s:any />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="consultaCadastro2Result">
-        <s:complexType mixed="true">
-          <s:sequence>
-            <s:any />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="nfeCabecMsg" type="tns:nfeCabecMsg" />
-      <s:complexType name="nfeCabecMsg">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="cUF" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="versaoDados" type="s:string" />
-        </s:sequence>
-        <s:anyAttribute />
-      </s:complexType>
-    </s:schema>
-  </wsdl:types>
-  <wsdl:message name="consultaCadastro2Soap12In">
-    <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
-  </wsdl:message>
-  <wsdl:message name="consultaCadastro2Soap12Out">
-    <wsdl:part name="consultaCadastro2Result" element="tns:consultaCadastro2Result" />
-  </wsdl:message>
-  <wsdl:message name="consultaCadastro2nfeCabecMsg">
-    <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
-  </wsdl:message>
-  <wsdl:portType name="CadConsultaCadastro2Soap12">
-    <wsdl:operation name="consultaCadastro2">
-      <wsdl:input message="tns:consultaCadastro2Soap12In" />
-      <wsdl:output message="tns:consultaCadastro2Soap12Out" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="CadConsultaCadastro2Soap12" type="tns:CadConsultaCadastro2Soap12">
-    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="consultaCadastro2">
-      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2/consultaCadastro2" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-        <soap12:header message="tns:consultaCadastro2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-        <soap12:header message="tns:consultaCadastro2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="CadConsultaCadastro2">
-    <wsdl:port name="CadConsultaCadastro2Soap12" binding="tns:CadConsultaCadastro2Soap12">
-      <soap12:address location="https://nfe.sefaz.go.gov.br/nfe/services/v2/CadConsultaCadastro2" />
-    </wsdl:port>
-  </wsdl:service>
-</wsdl:definitions>
+<definitions name='CadConsultaCadastro2' targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap12='http://schemas.xmlsoap.org/wsdl/soap12/' xmlns:tns='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema elementFormDefault='qualified' targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2' version='1.0' xmlns:tns='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:element name='nfeCabecMsg' type='tns:nfeCabecMsg'/>
+   <xs:element name='cadConsultaCadastro2Result'>
+    <xs:complexType mixed='true'>
+     <xs:sequence>
+      <xs:any/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   <xs:element name='nfeDadosMsg'>
+    <xs:complexType mixed='true'>
+     <xs:sequence>
+      <xs:any/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   <xs:complexType name='nfeCabecMsg'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='cUF' type='xs:string'/>
+     <xs:element minOccurs='0' name='versaoDados' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='CadConsultaCadastro2Service_cadConsultaCadastro2'>
+  <part element='tns:nfeDadosMsg' name='nfeDadosMsg'></part>
+  <part element='tns:nfeCabecMsg' name='nfeCabecMsg'></part>
+ </message>
+ <message name='CadConsultaCadastro2Service_cadConsultaCadastro2Response'>
+  <part element='tns:cadConsultaCadastro2Result' name='cadConsultaCadastro2Result'></part>
+ </message>
+ <portType name='CadConsultaCadastro2Service'>
+  <operation name='cadConsultaCadastro2' parameterOrder='nfeCabecMsg nfeDadosMsg'>
+   <input message='tns:CadConsultaCadastro2Service_cadConsultaCadastro2'></input>
+   <output message='tns:CadConsultaCadastro2Service_cadConsultaCadastro2Response'></output>
+  </operation>
+ </portType>
+ <binding name='CadConsultaCadastro2ServiceBinding' type='tns:CadConsultaCadastro2Service'>
+  <soap12:binding style='document' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='cadConsultaCadastro2'>
+   <soap12:operation soapAction='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2/cadConsultaCadastro2'/>
+   <input>
+    <soap12:body parts='nfeDadosMsg' use='literal'/>
+    <soap12:header message='tns:CadConsultaCadastro2Service_cadConsultaCadastro2' part='nfeCabecMsg' use='literal'></soap12:header>
+   </input>
+   <output>
+    <soap12:body parts='cadConsultaCadastro2Result' use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='CadConsultaCadastro2'>
+  <port binding='tns:CadConsultaCadastro2ServiceBinding' name='CadConsultaCadastro2ServicePort'>
+   <soap12:address location='https://nfe.sefaz.go.gov.br/nfe/services/v2/CadConsultaCadastro2'/>
+  </port>
+ </service>
+</definitions>

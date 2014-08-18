@@ -203,16 +203,6 @@ namespace NFe.Service
                     Functions.Move(Arquivo, vNomeArquivo);
 
                     Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para "+vNomeArquivo, true);
-                    //Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
-
-                    /*
-                    //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
-                    if (File.Exists(vNomeArquivo))
-                        this.DeletarArquivo(vNomeArquivo);
-
-                    //Mover o arquivo da nota fiscal para a pasta do XML com erro
-                    oArquivo.MoveTo(vNomeArquivo);
-                    */
                 }
                 else
                 {
@@ -584,6 +574,8 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(emp.PastaExeUniDanfe) &&
                 File.Exists(Path.Combine(emp.PastaExeUniDanfe, "unidanfe.exe")))
             {
+                Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe.");
+
                 string nomePastaEnviado = string.Empty;
                 string arqProcNFe = string.Empty;
                 //string strArqNFe = string.Empty;
@@ -757,9 +749,10 @@ namespace NFe.Service
                         }
                         break;
                 }
-                if (!isDPEC)
+                if (!isDPEC && !isEPEC)
                     isDPEC = nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML);
-                if (isDPEC)
+                
+                if (isDPEC || isEPEC)
                 {
                     ///
                     /// pesquisa na arvore de enviados pelo arquivo da NFe/NFCe
@@ -806,16 +799,35 @@ namespace NFe.Service
                         ///
                         /// arquivo da NFe/NFce não encontrada no 'path' especifico, então pesquisamos na arvore de enviados
                         /// 
-                        string[] fTemp = Directory.GetFiles(emp.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(), 
-                                                            Path.GetFileName(arqProcNFe),
-                                                            SearchOption.AllDirectories);
-                        if (fTemp.Length == 0)
-                            fTemp = Directory.GetFiles(emp.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
-                                                        Path.GetFileName(arqProcNFe),
-                                                        SearchOption.AllDirectories);
-                        if (fTemp.Length > 0)
+                        int ndias = 0;
+                        while (ndias < 5)
                         {
-                            arqProcNFe = fTemp[0];
+                            ///
+                            /// usamos o 'DiretorioSalvarComo' para pesquisar pelo arquivo numa pasta baseando-se pela
+                            /// dataEmissaoNFe.AddDays(-ndias)
+                            /// 
+                            string fTemp = Path.Combine(emp.PastaXmlEnviado + 
+                                                            "\\" + PastaEnviados.Autorizados.ToString() + 
+                                                            "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                        Path.GetFileName(arqProcNFe));
+                            if (!File.Exists(fTemp))
+                                fTemp = Path.Combine(emp.PastaXmlEnviado + 
+                                                        "\\" + PastaEnviados.Denegados.ToString() +
+                                                        "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                     Path.GetFileName(arqProcNFe));
+                            ++ndias;
+                            if (File.Exists(fTemp))
+                            {
+                                arqProcNFe = fTemp;
+                                break;
+                            }
+                            if (emp.DiretorioSalvarComo.ToString().Equals("Raiz"))
+                                ///
+                                /// ops!
+                                /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em 
+                                /// pastas baseado na data de emissao da nota
+                                /// 
+                                break;
                         }
                     }
 
@@ -875,33 +887,51 @@ namespace NFe.Service
                         }
                         if (!string.IsNullOrEmpty(fExtensao))
                         {
-                            fExtensao = tempFile + string.Format("_{0}_01{1}",
-                                                        ((int)NFe.ConvertTxt.tpEventos.tpEvCancelamentoNFe).ToString(),
-                                                        fExtensao);
-
-                            string[] fTemp = Directory.GetFiles(emp.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
-                                                                Path.GetFileName(fExtensao),
-                                                                SearchOption.AllDirectories);
-                            if (fTemp.Length == 0 && tipo.Equals("nfe"))
+                            int ndias = 0;
+                            while (ndias < 5)
                             {
-                                ///
-                                /// ops, por evento não foi encontrado, procuramos pelo cancelamento antigo
-                                /// 
-                                fExtensao = tempFile + "-procCancNFe.xml";
-                            }
+                                string filenameCancelamento = tempFile + 
+                                                                string.Format("_{0}_01{1}", 
+                                                                    ((int)NFe.ConvertTxt.tpEventos.tpEvCancelamentoNFe).ToString(),
+                                                                    fExtensao);
 
-                            if (!string.IsNullOrEmpty(fExtensao))
-                            {
                                 ///
-                                /// pesquisa pelo xml de cancelamento
+                                /// usamos o 'DiretorioSalvarComo' para pesquisar pelo arquivo numa pasta baseando-se pela
+                                /// dataEmissaoNFe.AddDays(-ndias)
                                 /// 
-                                string[] fxTemp = Directory.GetFiles(emp.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
-                                                                    Path.GetFileName(fExtensao),
-                                                                    SearchOption.AllDirectories);
-                                if (fxTemp.Length > 0)
+                                string fTemp = Path.Combine(emp.PastaXmlEnviado + 
+                                                                "\\" + PastaEnviados.Autorizados.ToString() +
+                                                                "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                            Path.GetFileName(filenameCancelamento));
+                                if (!File.Exists(fTemp) && tipo.Equals("nfe"))
                                 {
-                                    doc.Load(nomeArqXMLNFe = fxTemp[0]);
+                                    ///
+                                    /// ops, por evento não foi encontrado, procuramos pelo cancelamento antigo
+                                    /// só entramos aqui se o xml de cancelamento nao foi encontrado e se a nota for 'nfe' 
+                                    /// já que para outros tipos não existia o cancelamento por '-procCancNFe.xml'.
+                                    /// 
+                                    filenameCancelamento = tempFile + "-procCancNFe.xml";
+                                    fTemp = Path.Combine(emp.PastaXmlEnviado + 
+                                                            "\\" + PastaEnviados.Autorizados.ToString() +
+                                                            "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                         Path.GetFileName(filenameCancelamento));
+                                }
+                                ++ndias;
+                                if (File.Exists(fTemp))
+                                {
+                                    doc.Load(nomeArqXMLNFe = fTemp);
                                     temCancelamento = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (!tipo.Equals("nfe") || emp.DiretorioSalvarComo.ToString().Equals("Raiz"))
+                                        ///
+                                        /// ops!
+                                        /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em 
+                                        /// pastas baseado na data de emissao da nota e se o tipo de nota nao é 'nfe'
+                                        /// 
+                                        break;
                                 }
                             }
                         }
@@ -1083,7 +1113,10 @@ namespace NFe.Service
                         ///
                         ///OBS: deveria existir um argumento para excluir o arquivo auxiliar, já que ele é temporario
                     }
+
+                    Auxiliar.WriteLog("ExecutaUniDanfe: Iniciou a execução do UniDANFe.");
                     System.Diagnostics.Process.Start(Path.Combine(emp.PastaExeUniDanfe, "unidanfe.exe"), Args);
+                    Auxiliar.WriteLog("ExecutaUniDanfe: Encerrou a execução do UniDANFe.");
 
                     if (fAuxiliar != "")
                     {

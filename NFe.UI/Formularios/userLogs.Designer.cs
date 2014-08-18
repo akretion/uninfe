@@ -44,7 +44,9 @@
             this.cbArquivos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbArquivos.BackColor = System.Drawing.Color.Transparent;
+            this.cbArquivos.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbArquivos.FormattingEnabled = true;
+            this.cbArquivos.IntegralHeight = false;
             this.cbArquivos.ItemHeight = 19;
             this.cbArquivos.Items.AddRange(new object[] {
             "Eins",
@@ -74,6 +76,8 @@
             this.metroTextBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroTextBox3.Lines = new string[] {
+        "Multiline Textbox"};
             this.metroTextBox3.Location = new System.Drawing.Point(3, 124);
             this.metroTextBox3.MaxLength = 32767;
             this.metroTextBox3.Multiline = true;

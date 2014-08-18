@@ -373,6 +373,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe: Gerou o arquivo de distribuição através da consulta situação da NFe.");
                                                     oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
                                                 }
                                             }
@@ -423,7 +424,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoMDFe: " + ex.Message);
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe:  (Falha na execução do UniDANFe) " + ex.Message);
                                                 }
                                             }
                                         }

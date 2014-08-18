@@ -137,10 +137,10 @@ namespace NFe.Interface
         {
             try
             {
-                foreach(Empresa elemen in Empresas.Configuracoes)
+                foreach (Empresa elemen in Empresas.Configuracoes)
                 {
                     string strNome;
-                    if(elemen.Nome.Length > 20)
+                    if (elemen.Nome.Length > 20)
                         strNome = elemen.Nome.Substring(0, 20);
                     else
                         strNome = elemen.Nome;
@@ -154,7 +154,7 @@ namespace NFe.Interface
                     this.tabControl4.TabPages.Add(page);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -168,14 +168,45 @@ namespace NFe.Interface
         }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            TabPage page = new TabPage("-- NOVA --");
-            ucConfiguracao dados = new ucConfiguracao(UpdateText);
-            dados.Tag = "new"; //para indicar que é uma nova empresa
-            page.Controls.Add(dados);
-            dados.Dock = DockStyle.Fill;
-            this.tabControl4.TabPages.Add(page);
-            this.tabControl4.SelectedIndex = this.tabControl4.TabPages.Count - 1;
-            dados.PopulateConfEmpresa("", TipoAplicativo.Nfe);
+            using (FormNova f = new FormNova())
+            {
+                while (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var servico = (TipoAplicativo)f.cbServico.SelectedValue;
+                    var cnpj = Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString();
+                    int cnt;
+
+                    if (servico == TipoAplicativo.Nfse)
+                    {
+                        cnt = Empresas.FindConfEmpresaIndex(cnpj, servico);
+                    }
+                    else
+                    {
+                        cnt = Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Todos) +
+                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.NFCe) +
+                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Nfe) +
+                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Cte) +
+                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.MDFe);
+                    }
+                    if (cnt > 0)
+                    {
+                        MessageBox.Show("Já existe uma empresa que atende ao CNPJ + Serviço informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        continue;
+                    }
+                    TabPage page = new TabPage("-- NOVA --");
+                    ucConfiguracao dados = new ucConfiguracao(UpdateText);
+                    dados.Tag = "new"; //para indicar que é uma nova empresa
+                    page.Controls.Add(dados);
+                    dados.Dock = DockStyle.Fill;
+                    this.tabControl4.TabPages.Add(page);
+                    this.tabControl4.SelectedIndex = this.tabControl4.TabPages.Count - 1;
+                    dados.PopulateConfEmpresa(Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString(), (TipoAplicativo)f.cbServico.SelectedValue);
+
+                    tbAdd.Enabled = false;
+
+                    break;
+                }
+            }
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -189,15 +220,16 @@ namespace NFe.Interface
             {
                 if(MessageBox.Show("Exclui esta empresa?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if(Empresas.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
+                    if (Empresas.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
+                    {
                         Empresas.Configuracoes.Remove(control.oEmpresa);
-
+                        this.Modificado = true;
+                    }
                     control.Dispose();
 
                     //  this.tabControl4.TabPages.RemoveAt(ativa);
                     if(this.tabControl4.TabPages[ativa] is TabPage)
                         this.tabControl4.TabPages.Remove(this.tabControl4.TabPages[ativa]);
-                    this.Modificado = true;
 
                     if(ativa >= this.tabControl4.TabPages.Count)
                         this.tabControl4.SelectedIndex = this.tabControl4.TabPages.Count - 1;
@@ -205,6 +237,7 @@ namespace NFe.Interface
                         this.tabControl4.SelectedIndex = ativa;
                 }
             }
+            tbAdd.Enabled = true;
         }
 
         private void tabControl4_SelectedIndexChanged(object sender, EventArgs e)

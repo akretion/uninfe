@@ -76,7 +76,7 @@ namespace NFe.Service
         public abstract void Execute();
 
         #region Métodos para definição dos nomes das classes e métodos da NFe, CTe, NFSe e MDFe
-
+#if DEBUG
         #region NomeClasseWS()
         /// <summary>
         /// Retorna o nome da classe do serviço passado por parâmetro do WebService do SEFAZ - CTe
@@ -85,7 +85,7 @@ namespace NFe.Service
         /// <param name="cUF">Código da UF</param>
         /// <param name="versao">Versão do XML</param>
         /// <returns>Nome da classe</returns>
-        protected string NomeClasseWS(Servicos servico, int cUF, string versao)
+        protected string xNomeClasseWS(Servicos servico, int cUF, string versao)
         {
             string retorna = string.Empty;
 
@@ -104,7 +104,7 @@ namespace NFe.Service
 
         protected string NomeClasseWS(Servicos servico, int cUF)
         {
-            return NomeClasseWS(servico, cUF, "");
+            return xNomeClasseWS(servico, cUF, "");
         }
         #endregion
 
@@ -171,13 +171,13 @@ namespace NFe.Service
                 case Servicos.EnviarManifDest:
                 case Servicos.EnviarCCe:    //danasa 2/7/2011
                 case Servicos.EnviarEPEC:
-                    retorna = "RecepcaoEvento"; 
+                    retorna = "RecepcaoEvento";
                     break;
                 case Servicos.ConsultaNFDest:
-                    retorna = "NFeConsultaDest"; 
+                    retorna = "NFeConsultaDest";
                     break;
                 case Servicos.DownloadNFe:
-                    retorna = "NfeDownloadNF"; 
+                    retorna = "NfeDownloadNF";
                     break;
                 #endregion
 
@@ -510,11 +510,24 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region TIPLAN
+                case PadroesNFSe.TIPLAN:
+                    retorna = "Nfse";
+                    break;
+                #endregion
+
+                #region CARIOCA
+                case PadroesNFSe.CARIOCA:
+                    retorna = "Nfse";
+                    break;
+                #endregion
             }
 
             return retorna;
         }
         #endregion
+#endif
 
         #region NomeClasseCabecWS()
         /// <summary>
@@ -590,15 +603,22 @@ namespace NFe.Service
         {
             string retorna = string.Empty;
 
-            switch (Propriedade.TipoAplicativo)
+            if (Propriedade.TipoExecucao == TipoExecucao.teAll)
             {
-                case TipoAplicativo.Nfe:
+                retorna = NomeMetodoWSNFSe(servico, cUF);
+                if (retorna == string.Empty)//nem seria necessario, porque estamos obtendo do wsdl
                     retorna = NomeMetodoWSNFe(servico, cUF, versao);
-                    break;
-                case TipoAplicativo.Nfse:
-                    retorna = NomeMetodoWSNFSe(servico, cUF);
-                    break;
             }
+            else
+                switch (Propriedade.TipoAplicativo)
+                {
+                    case TipoAplicativo.Nfe:
+                        retorna = NomeMetodoWSNFe(servico, cUF, versao);
+                        break;
+                    case TipoAplicativo.Nfse:
+                        retorna = NomeMetodoWSNFSe(servico, cUF);
+                        break;
+                }
 
             return retorna;
         }
@@ -750,7 +770,7 @@ namespace NFe.Service
         private string NomeMetodoWSNFSe(Servicos servico, int cMunicipio)
         {
             string retorna = string.Empty;
-            bool taHomologacao = (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo ==(int) NFe.Components.TipoAmbiente.taHomologacao);
+            bool taHomologacao = (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao);
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
@@ -1232,6 +1252,58 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region TIPLAN
+                case PadroesNFSe.TIPLAN:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfseRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRPS";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region CARIOCA
+                case PadroesNFSe.CARIOCA:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfseRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRPS";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -1554,7 +1626,6 @@ namespace NFe.Service
                     //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
                     //danasa 8-2009
                     if ((Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4" || oDadosNFe.tpEmis == "9")) ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && oDadosNFe.tpEmis == "3") ||
                         (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
                         (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
                     {
@@ -1581,19 +1652,46 @@ namespace NFe.Service
                     {
                         booValido = false;
 
-                        // danasa 8-2009
                         if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
                                 "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
                                 "para o SVCAN.\r\n\r\n";
                         }
+
+//                        // danasa 8-2009
+//                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+//                        {
+//                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
+//                                "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+//                        }
+
+
+                        /*
                         // danasa 8-2009
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
+                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "3" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "8"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
+                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
+                                "para o SVCAN.\r\n\r\n";
+                        }
+                        // danasa 8-2009
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "8" || oDadosNFe.tpEmis == "9"))
                         {
                             cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
-                                "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
                         }
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "8" || oDadosNFe.tpEmis == "9"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
+                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                        }
+                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "9"))
+                        {
+                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
+                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
+                        }
+                        */
 
                         cTextoErro += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
 

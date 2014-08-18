@@ -124,32 +124,32 @@ namespace NFe.Settings
         /// <summary>
         /// Define a utilização do certficado instalado no windows ou através de arquivo
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public bool CertificadoInstalado { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar o local de armazenamento do certificado digital
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoArquivo { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar a senha do certificado
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoSenha { get; set; }
         /// <summary>
         /// Utilizado para certificados A3
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
         /// Certificado digital - Subject
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string Certificado { get; set; }
         /// <summary>
         /// Certificado digital - ThumbPrint
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoDigitalThumbPrint { get; set; }
         /// <summary>
         /// Certificado digital
@@ -201,7 +201,7 @@ namespace NFe.Settings
             {
                 return Propriedade.PastaExecutavel + "\\" + 
                     this.CNPJ + 
-                    (this.Servico == TipoAplicativo.Nfe ? "" : "\\" + this.Servico.ToString().ToLower());
+                    (this.Servico == TipoAplicativo.Nfe || this.Servico == TipoAplicativo.Todos ? "" : "\\" + this.Servico.ToString().ToLower());
             }
         }
         /// <summary>
@@ -278,7 +278,6 @@ namespace NFe.Settings
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool AdicionaEmailDanfe { get; set; }
         #endregion
-
 
         #region Propriedade para controle do nome da pasta a serem salvos os XML´s enviados
         private DiretorioSalvarComo mDiretorioSalvarComo = "";
@@ -367,130 +366,13 @@ namespace NFe.Settings
                     thr.Abort();
         }
 
-        #region CarregaConfiguracao()
-        /// <summary>
-        /// Carregar as configurações de todas as empresas na coleção "Configuracoes" 
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 29/07/2010
-        /// </remarks>
-        /// 
-#if false
-        public static void __CarregaConfiguracao()
-        {
-            Empresas.Configuracoes.Clear();
-
-            if (File.Exists(Propriedade.NomeArqEmpresa))
-            {
-                FileStream arqXml = null;
-
-                try
-                {
-                    arqXml = new FileStream(Propriedade.NomeArqEmpresa, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStream
-
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
-
-                    var empresaList = xml.GetElementsByTagName("Empresa");
-
-                    foreach (XmlNode empresaNode in empresaList)
-                    {
-                        var empresaElemento = (XmlElement)empresaNode;
-
-                        var registroList = xml.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
-
-                        for (int i = 0; i < registroList.Count; i++)
-                        {
-                            Empresa empresa = new Empresa();
-
-                            var registroNode = registroList[i];
-                            var registroElemento = (XmlElement)registroNode;
-
-                            empresa.CNPJ = registroElemento.GetAttribute(NFe.Components.NFeStrConstants.CNPJ).Trim();
-                            empresa.Nome = registroElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText.Trim();
-
-                            empresa.Servico = Propriedade.TipoAplicativo;// TipoAplicativo.Nfe;
-                            if (registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico) != "")
-                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico).Trim());
-
-                            #region Definir a pasta das configurações da empresa
-                            empresa.PastaEmpresa = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
-
-                            switch (empresa.Servico)
-                            {
-                                case TipoAplicativo.Nfe:
-                                    break;
-
-                                default:
-                                    empresa.PastaEmpresa += "\\" + empresa.Servico.ToString().ToLower();
-                                    break;
-                            }
-                            #endregion
-
-                            empresa.NomeArquivoConfig = empresa.PastaEmpresa + "\\" + Propriedade.NomeArqConfig;
-
-                            try
-                            {
-                                BuscaConfiguracao(empresa);
-                            }
-                            catch (Exception ex)
-                            {
-                                ///
-                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
-                                /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
-                                /// as thread's
-                                string cArqErro;
-                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-                                else
-                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-
-                                try
-                                {
-                                    //Grava arquivo de ERRO para o ERP
-                                    File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
-                                }
-                                catch { }
-                            }
-                            ///
-                            /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
-                            ChecaCaminhoDiretorio(empresa);
-                            Empresas.Configuracoes.Add(empresa);
-                        }
-                    }
-
-                    arqXml.Close();
-                    arqXml = null;
-                }
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
-            }
-
-            if (!ExisteErroDiretorio)
-                Empresa.CriarPasta();
-        }
-#endif
-        #endregion
-
         #region BuscaConfiguracao()
         public void BuscaConfiguracao()
         {
-            #region Criar diretório das configurações e dados da empresa
             if (!Directory.Exists(this.PastaEmpresa))
-            {
                 Directory.CreateDirectory(this.PastaEmpresa);
-            }
-            #endregion
 
-            #region Limpar conteúdo dos atributos de configurações da empresa
             LimparPropriedades(this);
-            #endregion
-
-            #region Carregar as configurações do XML UniNFeConfig da Empresa
 
             if (File.Exists(this.NomeArquivoConfig))
             {
@@ -510,6 +392,8 @@ namespace NFe.Settings
                         temp = temp.Replace("<nfe_configuracoes>", "<Empresa xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
                         temp = temp.Replace("</nfe_configuracoes>", "</Empresa>");
                         temp = temp.Replace(">False<", ">false<").Replace(">True<", ">true<");
+			            temp = temp.Replace("<DiretorioSalvarComo>","<diretorioSalvarComo>");
+			            temp = temp.Replace("</DiretorioSalvarComo>","</diretorioSalvarComo>");
                         File.WriteAllText(this.NomeArquivoConfig, temp);
                     }
                     Empresa t = new Empresa();
@@ -536,121 +420,7 @@ namespace NFe.Settings
                     throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + this.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
                 }
             }
-            #endregion
-        }
-
-        /// <summary>
-        /// Busca as configurações da empresa dentro de sua pasta gravadas em um XML chamado UniNfeConfig.Xml
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 28/07/2010
-        /// </remarks>
-#if false
-        private void BuscaConfiguracao(Empresa empresa)
-        {
-            #region Criar diretório das configurações e dados da empresa
-            if (!Directory.Exists(empresa.PastaEmpresa))
-            {
-                Directory.CreateDirectory(empresa.PastaEmpresa);
-            }
-            #endregion
-
-            #region Limpar conteúdo dos atributos de configurações da empresa
-            LimparPropriedades(empresa);
-            #endregion
-
-            #region Carregar as configurações do XML UniNFeConfig da Empresa
-            FileStream arqXml = null;
-
-            if (File.Exists(empresa.NomeArquivoConfig))
-            {
-                try
-                {
-                    //ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
-                    //objObjectXMLSerializer.Load(empresa, empresa.NomeArquivoConfig);
-
-                    arqXml = new FileStream(empresa.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
-
-                    var configList = xml.GetElementsByTagName(NFeStrConstants.nfe_configuracoes);
-                    foreach (XmlNode configNode in configList)
-                    {
-                        var configElemento = (XmlElement)configNode;
-
-                        empresa.UnidadeFederativaCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.UnidadeFederativaCodigo, false));
-                        empresa.AmbienteCodigo = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.AmbienteCodigo, false));
-                        empresa.tpEmis = Convert.ToInt32(Functions.LerTag(configElemento, NFeStrConstants.tpEmis, false));
-                        empresa.GravarRetornoTXTNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarRetornoTXTNFe, "False"));
-                        empresa.GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosNaPastaEnviadosNFe, "False"));
-                        empresa.GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, "False"));
-                        empresa.GravarEventosDeTerceiros = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.GravarEventosDeTerceiros, "False"));
-                        empresa.CompactarNfe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CompactarNfe, "False"));
-                        empresa.IndSinc = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.IndSinc, "False"));
-                        empresa.DiretorioSalvarComo = Functions.LerTag(configElemento, NFeStrConstants.DiretorioSalvarComo, "AM");
-                        empresa.DiasLimpeza = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.DiasLimpeza, "0"));
-                        empresa.TempoConsulta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.TempoConsulta, "0"));
-
-                        empresa.PastaXmlEnvio = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnvio, false);
-                        empresa.PastaXmlRetorno = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlRetorno, false);
-                        empresa.PastaXmlErro = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlErro, false);
-                        empresa.PastaValidar = Functions.LerTag(configElemento, NFeStrConstants.PastaValidar, false);
-                        empresa.PastaXmlEnviado = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEnviado, false);
-                        empresa.PastaBackup = Functions.LerTag(configElemento, NFeStrConstants.PastaBackup, false);
-                        empresa.PastaXmlEmLote = Functions.LerTag(configElemento, NFeStrConstants.PastaXmlEmLote, false);
-                        empresa.PastaDownloadNFeDest = Functions.LerTag(configElemento, NFeStrConstants.PastaDownloadNFeDest, false);
-
-                        empresa.ConfiguracaoDanfe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoDanfe, false);
-                        empresa.ConfiguracaoCCe = Functions.LerTag(configElemento, NFeStrConstants.ConfiguracaoCCe, false);
-                        empresa.PastaExeUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaExeUniDanfe, false);
-                        empresa.PastaConfigUniDanfe = Functions.LerTag(configElemento, NFeStrConstants.PastaConfigUniDanfe, false);
-                        empresa.PastaDanfeMon = Functions.LerTag(configElemento, NFeStrConstants.PastaDanfeMon, false);
-                        empresa.XMLDanfeMonNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonNFe, "False"));
-                        empresa.XMLDanfeMonProcNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonProcNFe, "False"));
-                        empresa.XMLDanfeMonDenegadaNFe = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.XMLDanfeMonDenegadaNFe, "False"));
-
-                        empresa.FTPAtivo = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPAtivo, "False"));
-                        empresa.FTPGravaXMLPastaUnica = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.FTPGravaXMLPastaUnica, "False"));
-                        empresa.FTPSenha = Functions.LerTag(configElemento, NFeStrConstants.FTPSenha, false);
-                        empresa.FTPPastaAutorizados = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaAutorizados, false);
-                        empresa.FTPPastaRetornos = Functions.LerTag(configElemento, NFeStrConstants.FTPPastaRetornos, false);
-                        empresa.FTPNomeDoUsuario = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoUsuario, false);
-                        empresa.FTPNomeDoServidor = Functions.LerTag(configElemento, NFeStrConstants.FTPNomeDoServidor, false);
-                        empresa.FTPPorta = Convert.ToInt32("0" + Functions.LerTag(configElemento, NFeStrConstants.FTPPorta, false));
-
-                        empresa.Certificado = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigital, false);
-                        empresa.CertificadoArquivo = Functions.LerTag(configElemento, NFeStrConstants.CertificadoArquivo, false);
-                        empresa.CertificadoThumbPrint = Functions.LerTag(configElemento, NFeStrConstants.CertificadoDigitalThumbPrint, false);
-                        empresa.CertificadoInstalado = Convert.ToBoolean(Functions.LerTag(configElemento, NFeStrConstants.CertificadoInstalado, (!string.IsNullOrEmpty(empresa.CertificadoThumbPrint) || !string.IsNullOrEmpty(empresa.Certificado)).ToString()));
-                        empresa.CertificadoPIN = Criptografia.descriptografaSenha(Functions.LerTag(configElemento, NFeStrConstants.CertificadoPIN, ""));
-
-                        if (!empresa.CertificadoInstalado)
-                            if (configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0] != null)
-                                if (!string.IsNullOrEmpty(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim()))
-                                    empresa.CertificadoSenha = Criptografia.descriptografaSenha(configElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText.Trim());
-
-                        empresa.UsuarioWS = Functions.LerTag(configElemento, NFeStrConstants.UsuarioWS, false);
-                        empresa.SenhaWS = Functions.LerTag(configElemento, NFeStrConstants.SenhaWS, false);
-                    }
-                    empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
-                }
-                catch (Exception ex)
-                {
-                    //Não vou mais fazer isso pois estava gerando problemas com Certificados A3 - Renan 18/06/2013
-                    //empresa.Certificado = string.Empty;
-                    //empresa.CertificadoThumbPrint = string.Empty;
-                    throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + empresa.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
-                }
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
-            }
-            #endregion
-        }
-#endif
+        }        
         #endregion
 
         #region BuscaConfiguracaoCertificado
@@ -718,7 +488,7 @@ namespace NFe.Settings
                     arqXml = new FileStream(this.NomeArquivoConfig, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStrem
                     var xml = new XmlDocument();
                     xml.Load(arqXml);
-                    var configList = xml.GetElementsByTagName("Empresa");//NFeStrConstants.nfe_configuracoes);
+                    var configList = xml.GetElementsByTagName("Empresa");
                     foreach (XmlNode configNode in configList)
                     {
                         var configElemento = (XmlElement)configNode;
@@ -727,7 +497,7 @@ namespace NFe.Settings
                         Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
                         Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
                         Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
-                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                        if (this.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                         {
                             Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
                             Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
@@ -759,7 +529,7 @@ namespace NFe.Settings
         /// </remarks>
         public void CriarSubPastaEnviado()
         {
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (this.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
                 if (!string.IsNullOrEmpty(this.PastaXmlEnviado))
                 {
@@ -806,7 +576,7 @@ namespace NFe.Settings
                 }
             }
 
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (this.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
             {
                 //Criar subpasta Assinado na pasta de envio individual de nfe
                 if (!Directory.Exists(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado))
@@ -1030,35 +800,44 @@ namespace NFe.Settings
             PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(PastaXmlErro);
             PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(PastaXmlRetorno);
             PastaValidar = ConfiguracaoApp.RemoveEndSlash(PastaValidar);
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-            {
-                PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(PastaXmlEnviado);
-                PastaBackup = ConfiguracaoApp.RemoveEndSlash(PastaBackup);
-                PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(PastaXmlEmLote);
-                PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(PastaDownloadNFeDest);
-                PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(PastaDanfeMon);
-                PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(PastaExeUniDanfe);
-                PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(PastaConfigUniDanfe);
-            }
+            PastaXmlEnviado = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaXmlEnviado);
+            PastaBackup = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaBackup);
+            PastaXmlEmLote = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaXmlEmLote);
+            PastaDownloadNFeDest = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaDownloadNFeDest);
+            PastaDanfeMon = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaDanfeMon);
+            PastaExeUniDanfe = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaExeUniDanfe);
+            PastaConfigUniDanfe = this.Servico == TipoAplicativo.Nfse ? "" : ConfiguracaoApp.RemoveEndSlash(PastaConfigUniDanfe);
         }
 
         #region SalvarConfiguracao()
         public void SalvarConfiguracao(bool validaCertificado)
         {
-            ValidarConfig(validaCertificado);
+            bool empresaNova = false;
+            try
+            {
+                if (Empresas.FindConfEmpresaIndex(this.CNPJ, this.Servico) == -1)
+                {
+                    empresaNova = true;
+                    Empresas.Configuracoes.Add(this);
+                }
+                new ConfiguracaoApp().ValidarConfig(validaCertificado);
 
-            if (!Directory.Exists(this.PastaEmpresa))
-                Directory.CreateDirectory(this.PastaEmpresa);
+                if (!Directory.Exists(this.PastaEmpresa))
+                    Directory.CreateDirectory(this.PastaEmpresa);
 
-            ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
-            objObjectXMLSerializer.Save(this, this.NomeArquivoConfig);
+                ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+                objObjectXMLSerializer.Save(this, this.NomeArquivoConfig);
 
-            this.CriarPastasDaEmpresa();
+                this.CriarPastasDaEmpresa();
 
-            if (Empresas.FindConfEmpresaIndex(this.CNPJ, this.Servico) == -1)
-                Empresas.Configuracoes.Add(this);
-            else
                 Empresas.FindConfEmpresa(this.CNPJ, this.Servico).Nome = this.Nome;
+            }
+            catch (Exception ex)
+            {
+                if (empresaNova)
+                    Empresas.Configuracoes.Remove(this);
+                throw ex;
+            }
         }
         #endregion
 
@@ -1129,48 +908,5 @@ namespace NFe.Settings
         }
 
         #endregion
-
-        void _AddEmpresaNaListaDeComparacao(Dictionary<string, int> fc, Empresa empresa)
-        {
-            int i = 0;
-            fc.Add(empresa.PastaXmlEnvio.ToLower(), i);
-            if (!string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                fc.Add(empresa.PastaXmlRetorno.ToLower(), ++i);
-            if (!string.IsNullOrEmpty(empresa.PastaXmlErro))
-                fc.Add(empresa.PastaXmlErro.ToLower(), ++i);
-            if (!string.IsNullOrEmpty(empresa.PastaValidar))
-                fc.Add(empresa.PastaValidar.ToLower(), ++i);
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-            {
-                if (!string.IsNullOrEmpty(empresa.PastaXmlEnviado))
-                    fc.Add(empresa.PastaXmlEnviado.ToLower(), ++i);
-                if (!string.IsNullOrEmpty(empresa.PastaXmlEmLote))
-                    fc.Add(empresa.PastaXmlEmLote.ToLower(), ++i);
-                if (!string.IsNullOrEmpty(empresa.PastaBackup))
-                    fc.Add(empresa.PastaBackup.ToLower(), ++i);
-                if (!string.IsNullOrEmpty(empresa.PastaDownloadNFeDest))
-                    fc.Add(empresa.PastaDownloadNFeDest.ToLower(), ++i);
-            }
-        }
-
-        internal class _validacao
-        {
-            public string FolderName;
-            public string ValueError;   //se branco nao é obrigatorio
-            public string FolderError;
-            public _validacao(string key, string value, string folder="")
-            {
-                FolderName = key;
-                ValueError = value;
-                FolderError = folder;
-            }
-        }
-        /// <summary>
-        /// ValidarConfig
-        /// </summary>
-        private void ValidarConfig(bool validaCertificado)
-        {
-            new ConfiguracaoApp().ValidarConfig(validaCertificado);
-        }
     }
 }

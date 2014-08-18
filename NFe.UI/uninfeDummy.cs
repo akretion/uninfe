@@ -21,7 +21,7 @@ namespace NFe.UI
         public string nome(NFe.Components.Servicos servico, int uf, string versao)
         {
             this.Servico = servico;
-            return NomeClasseWS(this.Servico, uf, versao);
+            return xNomeClasseWS(this.Servico, uf, versao);
         }
     }
 #endif
@@ -45,7 +45,7 @@ namespace NFe.UI
         opRestartTasks
     }
 
-    public class uninfeDummy
+    public static class uninfeDummy
     {
         public static string  vStatus = "Ocorreu uma falha ao tentar obter a solicitação junto ao SEFAZ.\r\n\r\n" +
                 "O problema pode ter ocorrido por causa dos seguintes fatores:\r\n\r\n" +
@@ -114,16 +114,21 @@ namespace NFe.UI
         /// DatasouceTipoAplicativo
         /// </summary>
         /// <returns></returns>
-        public static IList DatasouceTipoAplicativo()
+        public static IList DatasouceTipoAplicativo(bool includeservico)
         {
             ArrayList list = new ArrayList();
 
-            if (NFe.Components.Propriedade.TipoAplicativo != NFe.Components.TipoAplicativo.Nfse)
+            if (NFe.Components.Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ||
+                NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
             {
+                if (includeservico)
+                    list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Todos, EnumHelper.GetDescription(TipoAplicativo.Todos)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfe, EnumHelper.GetDescription(TipoAplicativo.Nfe)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Cte, EnumHelper.GetDescription(TipoAplicativo.Cte)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.MDFe, EnumHelper.GetDescription(TipoAplicativo.MDFe)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
+                if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll && includeservico)
+                    list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));
             }
             else
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));

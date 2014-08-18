@@ -80,72 +80,10 @@ namespace NFe.Settings
 
             Auxiliar.WriteLog(msg, false);
         }
-        #endregion
-
-        #region WriteLog()
+        
         public static void WriteLog(string msg, bool gravarStackTrace)
         {
-            bool geraLog = ConfiguracaoApp.GravarLogOperacoesRealizadas;
-
-            if(geraLog)
-            {
-                string fileName = Propriedade.PastaLog + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
-
-                DateTime startTime;
-                DateTime stopTime;
-                TimeSpan elapsedTime;
-
-                long elapsedMillieconds;
-                startTime = DateTime.Now;
-
-                while(true)
-                {
-                    stopTime = DateTime.Now;
-                    elapsedTime = stopTime.Subtract(startTime);
-                    elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
-
-                    StreamWriter arquivoWS = null;
-                    try
-                    {
-                        //Se for para gravar ot race
-                        if(gravarStackTrace)
-                        {
-                            msg += "\r\nSTACK TRACE:";
-                            msg += "\r\n" + Environment.StackTrace;
-
-                            /*
-                            StackTrace stackTrace = new StackTrace();
-                            StackFrame[] stackFrames = stackTrace.GetFrames();
-                            foreach (StackFrame s in stackFrames)
-                            {
-                                msg += "\r\nModule: " + s.GetMethod().ReflectedType.Module.Name + " Class: " + s.GetMethod().ReflectedType.FullName + " Method: " + s.GetMethod().Name;
-                                msg += " line: " + s.GetFileLineNumber();
-                                
-                            }*/
-                        }
-
-                        arquivoWS = new StreamWriter(fileName, true, Encoding.UTF8);
-                        arquivoWS.WriteLine(DateTime.Now.ToLongTimeString() + "  " + msg);
-                        arquivoWS.Flush();
-                        arquivoWS.Close();
-                        break;
-                    }
-                    catch
-                    {
-                        if(arquivoWS != null)
-                        {
-                            arquivoWS.Close();
-                        }
-
-                        if(elapsedMillieconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
-                        {
-                            break;
-                        }
-                    }
-
-                    Thread.Sleep(2);
-                }
-            }
+            NFe.Components.Functions.WriteLog(msg, gravarStackTrace, ConfiguracaoApp.GravarLogOperacoesRealizadas);
         }
         #endregion
 
@@ -305,7 +243,7 @@ namespace NFe.Settings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 28/07/2010
         /// </remarks>
-        public static ArrayList CarregaEmpresa()
+        public static ArrayList CarregaEmpresa(bool sonfe)
         {
             ArrayList empresa = new ArrayList();
 
@@ -313,9 +251,6 @@ namespace NFe.Settings
 
             if(File.Exists(arqXML))
             {
-                //XmlTextReader oLerXml = null;
-                try
-                {
                     //Carregar os dados do arquivo XML de configurações da Aplicação
                     int codEmp = 0;
                     XElement axml = XElement.Load(arqXML);
@@ -334,6 +269,9 @@ namespace NFe.Settings
                         if (string.IsNullOrEmpty(servico))
                             servico = Propriedade.TipoAplicativo.ToString();
 
+                        if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                            continue;
+
                         empresa.Add(new ComboElem
                         {
                             Valor = cnpj,
@@ -343,50 +281,7 @@ namespace NFe.Settings
                         });
                         codEmp++;
                     }
-#if false
-                    oLerXml = new XmlTextReader(arqXML);
-
-                    while(oLerXml.Read())
-                    {
-                        if(oLerXml.NodeType == XmlNodeType.Element)
-                        {
-                            if(oLerXml.Name.Equals(NFe.Components.NFeStrConstants.Registro))
-                            {
-                                string cnpj = oLerXml.GetAttribute(NFe.Components.NFeStrConstants.CNPJ);
-                                string servico = oLerXml.GetAttribute(NFe.Components.NFeStrConstants.Servico);
-                                if (!string.IsNullOrEmpty(servico))
-                                    servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
-                                else
-                                    servico = Propriedade.TipoAplicativo.ToString();// TipoAplicativo.Nfe.ToString();
-
-                                while(oLerXml.Read())
-                                {
-                                    if(oLerXml.NodeType == XmlNodeType.Element && oLerXml.Name.Equals(NFe.Components.NFeStrConstants.Nome))
-                                    {
-                                        oLerXml.Read();
-                                        string nome = oLerXml.Value;
-                                        empresa.Add(new ComboElem{ 
-                                            Valor = cnpj, 
-                                            Codigo = codEmp, 
-                                            Nome = nome + "  <" + servico + ">", 
-                                            Servico = servico
-                                        });
-                                        codEmp++;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-#endif
-                }
-                finally
-                {
-                    //if(oLerXml != null)
-                        //oLerXml.Close();
-                }
             }
-
             empresa.Sort(new OrdenacaoPorNome());
 
             return empresa;

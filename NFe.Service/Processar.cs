@@ -35,8 +35,9 @@ namespace NFe.Service
                     if(servico == Servicos.Nulo)
                         throw new Exception("Não pode identificar o tipo de serviço baseado no arquivo " + arquivo);
 
-                    if(Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                    {
+                    //if(Empresas.Configuracoes[emp].Servico /*Propriedade.TipoAplicativo*/ == TipoAplicativo.Nfse ||
+                        //Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
+                    //{
                         #region Executar o serviço da NFS-e
                         switch(servico)
                         {
@@ -88,14 +89,14 @@ namespace NFe.Service
                                 this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarURLNfseSerie());
                                 break;
 
-                        }
+                        //}
                         #endregion
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         #region Executar servico da NF-e, CT-e e MDF-e
-                        switch(servico)
-                        {
+                        //switch(servico)
+                        //{
                             #region NFe
                             case Servicos.PedidoConsultaSituacaoNFe:
                                 CertVencido(emp);
@@ -301,7 +302,7 @@ namespace NFe.Service
                             #endregion
                         }
                         #endregion
-                    }
+                    //}
 
                     #region Serviços em comum
                     switch(servico)
@@ -835,19 +836,28 @@ namespace NFe.Service
         /// </summary>
         public void EmProcessamento()
         {
+            bool hasAll = false;
+
             while(true)
             {
                 for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
+                    if (Empresas.Configuracoes[i].Servico == TipoAplicativo.Nfse)
+                        continue;
+
                     BackgroundWorker worker = new BackgroundWorker();
 
                     worker.WorkerSupportsCancellation = true;
                     worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
                     worker.DoWork += new DoWorkEventHandler(ExecutarEmProcessamento);
                     worker.RunWorkerAsync(i);
-                }
 
-                Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
+                    hasAll = true;
+                }
+                if (hasAll)
+                    Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
+                else
+                    break;
             }
         }
 
@@ -895,7 +905,7 @@ namespace NFe.Service
                 {
                     Empresa empresa = Empresas.Configuracoes[i];
 
-                    if(!string.IsNullOrEmpty(empresa.PastaEmpresa))
+                    if(!string.IsNullOrEmpty(empresa.PastaEmpresa) && empresa.Servico != TipoAplicativo.Nfse)
                         GerarXMLPedRec(i, nfe);
                 }
 

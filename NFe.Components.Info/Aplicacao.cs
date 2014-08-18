@@ -107,6 +107,7 @@ namespace NFe.Components.Info
 
                 //Dados das configurações do aplicativo
                 if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(NFeStrConstants.nfe_configuracoes);
+                Functions.GravaTxtXml(oXmlGravar, NFe.Components.NFeStrConstants.DiretorioSalvarComo, Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString());
 
                 bool hasFTP = false;
                 foreach (var pT in Empresas.Configuracoes[emp].GetType().GetProperties())
@@ -114,22 +115,25 @@ namespace NFe.Components.Info
                     if (pT.CanWrite)
                     {
                         bool ok = true;
-                        var t0 = pT.GetCustomAttributes(typeof(AttributeTipoAplicacao), false);
-                        if (t0 != null && t0.Length > 0)
+
+                        if (Propriedade.TipoExecucao != TipoExecucao.teAll)
                         {
-                            ok = false;
-                            ///
-                            /// grava apenas a propriedade que está definida para ser usada pelo ambiente
-                            foreach (var t1 in t0)
+                            var t0 = pT.GetCustomAttributes(typeof(AttributeTipoAplicacao), false);
+                            if (t0 != null && t0.Length > 0)
                             {
-                                if (Propriedade.TipoAplicativo == ((AttributeTipoAplicacao)t1).Aplicacao)
+                                ok = false;
+                                ///
+                                /// grava apenas a propriedade que está definida para ser usada pelo ambiente
+                                foreach (var t1 in t0)
                                 {
-                                    ok = true;
-                                    break;
+                                    if (Propriedade.TipoAplicativo == ((AttributeTipoAplicacao)t1).Aplicacao)
+                                    {
+                                        ok = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-
                         if (ok)
                         {
                             if (isXml)
@@ -159,8 +163,7 @@ namespace NFe.Components.Info
                 foreach (webServices list in WebServiceProxy.webServicesList)
                 {
                     if (list.ID == Empresas.Configuracoes[emp].UnidadeFederativaCodigo ||
-                        list.UF == "DPEC" ||
-                        list.UF == "SCAN")
+                        list.UF == "DPEC")
                     {
                         if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(list.UF);
                         if (Empresas.Configuracoes[emp].AmbienteCodigo == 2)
@@ -175,7 +178,7 @@ namespace NFe.Components.Info
                             if (isXml)((XmlWriter)oXmlGravar).WriteStartElement("Producao");
                             else tipo = list.UF + ".Producao.";
                         }
-                        switch (Propriedade.TipoAplicativo)
+                        switch (Empresas.Configuracoes[emp].Servico)
                         {
                             case TipoAplicativo.Nfse:
                                 Functions.GravaTxtXml(oXmlGravar, tipo + NFe.Components.Servicos.CancelarNfse.ToString(), (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
@@ -187,31 +190,45 @@ namespace NFe.Components.Info
                                 Functions.GravaTxtXml(oXmlGravar, tipo + NFe.Components.Servicos.ConsultarURLNfse.ToString(), (!string.IsNullOrEmpty(item.ConsultarURLNfse)).ToString());
                                 break;
 
-                            case TipoAplicativo.Nfe:
+                            default:
                                 Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
                                 Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
+
                                 if (list.UF != "DPEC")
                                 {
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcaoEvento", (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeDownload", (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeInutilizacao", (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeManifDest", (!string.IsNullOrEmpty(item.NFeManifDest)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRegistroDeSaida", (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRegistroDeSaidaCancelamento", (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeAutorizacao", (!string.IsNullOrEmpty(item.NFeAutorizacao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRetAutorizacao", (!string.IsNullOrEmpty(item.NFeRetAutorizacao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcao", (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRetRecepcao", (!string.IsNullOrEmpty(item.MDFeRetRecepcao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeConsulta", (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeStatusServico", (!string.IsNullOrEmpty(item.MDFeStatusServico)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcaoEvento", (!string.IsNullOrEmpty(item.MDFeRecepcaoEvento)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "CTeRecepcaoEvento", (!string.IsNullOrEmpty(item.CTeRecepcaoEvento)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "CTeConsultaCadastro", (!string.IsNullOrEmpty(item.CTeConsultaCadastro)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "CTeInutilizacao", (!string.IsNullOrEmpty(item.CTeInutilizacao)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + "CTeStatusServico", (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
+                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe ||
+                                        Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfe ||
+                                        Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
+                                    {
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcaoEvento", (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeDownload", (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeInutilizacao", (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeManifDest", (!string.IsNullOrEmpty(item.NFeManifDest)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRegistroDeSaida", (!string.IsNullOrEmpty(item.NFeRegistroDeSaida)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRegistroDeSaidaCancelamento", (!string.IsNullOrEmpty(item.NFeRegistroDeSaidaCancelamento)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeAutorizacao", (!string.IsNullOrEmpty(item.NFeAutorizacao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRetAutorizacao", (!string.IsNullOrEmpty(item.NFeRetAutorizacao)).ToString());
+                                    }
+                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.MDFe ||
+                                        Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
+                                    {
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcao", (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRetRecepcao", (!string.IsNullOrEmpty(item.MDFeRetRecepcao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeConsulta", (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeStatusServico", (!string.IsNullOrEmpty(item.MDFeStatusServico)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcaoEvento", (!string.IsNullOrEmpty(item.MDFeRecepcaoEvento)).ToString());
+                                    }
+                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.Cte ||
+                                        Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
+                                    {
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "CTeRecepcaoEvento", (!string.IsNullOrEmpty(item.CTeRecepcaoEvento)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "CTeConsultaCadastro", (!string.IsNullOrEmpty(item.CTeConsultaCadastro)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "CTeInutilizacao", (!string.IsNullOrEmpty(item.CTeInutilizacao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "CTeStatusServico", (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
+                                    }
                                 }
                                 break;
                         }
@@ -369,6 +386,8 @@ namespace NFe.Components.Info
         /// </remarks>
         public static Boolean AppExecutando(bool silencioso, bool novoSistema=false)
         {
+            bool executando = false;
+
             Empresas.CarregaConfiguracao();
 
             #region Ticket: #110
@@ -376,16 +395,21 @@ namespace NFe.Components.Info
              * Marcelo
              * 03/06/2013
              */
-            string podeExecutar = Empresas.CanRun(!novoSistema);
-            if (!String.IsNullOrEmpty(podeExecutar))
-                return true;
 
-            // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
-            // pois podem ter sofridos alterações de configurações nas pastas
-            Empresas.CreateLockFile();
+            ///
+            /// verifica se o UniNFe está sendo executado pelo servico
+            /// 
+            if (!Propriedade.ServicoRodando)
+            {
+                string podeExecutar = Empresas.CanRun(!novoSistema);
+                if (!String.IsNullOrEmpty(podeExecutar))
+                    return true;
+
+                // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
+                // pois podem ter sofridos alterações de configurações nas pastas
+                Empresas.CreateLockFile();
+            }
             #endregion
-
-            bool executando = false;
 
             string procName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
             if (System.Diagnostics.Process.GetProcessesByName(procName).Length > 1)
@@ -401,7 +425,6 @@ namespace NFe.Components.Info
                     System.Windows.Forms.MessageBox.Show("Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
                                     "Por favor entre na tela de configurações da(s) empresa(s) listada(s) abaixo na aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresas.ErroCaminhoDiretorio, "Atenção", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
-
             return executando;
         }
         #endregion

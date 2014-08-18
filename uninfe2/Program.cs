@@ -110,6 +110,18 @@ namespace uninfe2
 
             Propriedade.TipoAplicativo = (Propriedade.NomeAplicacao.ToLower().StartsWith("uninfe") ? TipoAplicativo.Nfe : TipoAplicativo.Nfse);
 
+#if _uninfeall_
+            Propriedade.TipoExecucao = TipoExecucao.teAll;
+#else
+            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            {
+                //Propriedade.TipoExecucao = TipoExecucao.teNFe;
+                Propriedade.TipoExecucao = TipoExecucao.teAll;
+            }
+            else
+                Propriedade.TipoExecucao = TipoExecucao.teNFSe;
+#endif
+
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();
             Console.WriteLine("start....." + Propriedade.NomeAplicacao);

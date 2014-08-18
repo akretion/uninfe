@@ -7,6 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.IO;
 using System.Threading;
+
 using NFe.Components;
 using NFe.Settings;
 using NFe.Threadings;
@@ -16,9 +17,6 @@ namespace UniNFeServico
     [ToolboxItem(false)]
     public partial class UniNFeService : ServiceBase
     {
-        private List<Thread> threads = new List<Thread>();
-        //private string StartupPath;
-
         public UniNFeService()
         {
             InitializeComponent();
@@ -28,7 +26,6 @@ namespace UniNFeServico
         {
             base.OnStart(args);
 
-            //StartupPath = NFe.Components.Propriedade.PastaExecutavel;
             WriteLog("Serviço iniciado na pasta: " + NFe.Components.Propriedade.PastaExecutavel);
             this.iniciarServicosUniNFe();
         }
@@ -64,71 +61,69 @@ namespace UniNFeServico
 
         private void iniciarServicosUniNFe()
         {
-            #region Definir valores propriedades de configuração
-            //Carregar as configurações antes de executar os serviços do UNINFE
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoExecucao = TipoExecucao.teAll;
             ConfiguracaoApp.StartVersoes();
-            #endregion
 
-            if (TipoAplicativo.Nfse == NFe.Components.Propriedade.TipoAplicativo)
+            string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
+            string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
+            string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
+            string msg = "";
+            bool error = false;
+            switch (Propriedade.TipoExecucao)
             {
-                if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) ||
-                    !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+                case TipoExecucao.teNFSe:
+                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
+                    msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
+                    break;
+                case TipoExecucao.teNFe:
+                    error = !System.IO.File.Exists(filenameWS3);
+                    msg = "Arquivo '" + filenameWS3 + "' não encontrados";
+                    break;
+                case TipoExecucao.teAll:
+                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+                    msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+                    break;
+            }
+            if (error)
+            {
+                this.WriteLog(msg);
+            }
+            else
+                foreach (Empresa empresa in Empresas.Configuracoes)
                 {
-                    this.WriteLog("Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService + "' não encontrados");
-                    return;
+                    if (empresa.X509Certificado == null)
+                    {
+                        msg = "Não pode ler o certificado da empresa: " + empresa.CNPJ + "=>" + empresa.Nome + "=>" + empresa.Servico.ToString();
+
+                        string f = Path.Combine(empresa.PastaXmlRetorno,
+                                                "uninfeServico_" + DateTime.Now.ToString("yyyy-MMM-dd_hh-mm-ss") + ".txt");
+                        System.IO.File.WriteAllText(f, msg, Encoding.UTF8);
+                        error = true;
+
+                        WriteLog(msg);
+                    }
                 }
-            }
-            if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+
+            if (!error)
             {
-                this.WriteLog("Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado");
-                return;
+                // Executar as conversões de atualizações de versão quando tiver
+                Auxiliar.ConversaoNovaVersao(string.Empty);
+
+                ThreadService.Start();
+
+                new ThreadControlEvents();
             }
-
-
-            // Executar as conversões de atualizações de versão quando tiver
-            Auxiliar.ConversaoNovaVersao(string.Empty);
-            Empresas.CarregaConfiguracao();
-
-            //Executar o monitoramento de pastas das empresas cadastradas
-            MonitoraPasta e = new MonitoraPasta();
-
-            threads.Clear();
-
-            ThreadService.Start();
-
-#if nao
-            //Executa a thread que faz a limpeza dos arquivos temporários
-            Thread t = new Thread(new ServicoUniNFe().LimpezaTemporario);
-            t.Start();
-            threads.Add(t);
-
-            //Executa a thread que faz a verificação das notas em processamento
-            Thread t2 = new Thread(new ServicoUniNFe().EmProcessamento);
-            t2.Start();
-            threads.Add(t2);
-
-            //Executar a thread que faz a consulta do recibo das notas fiscais enviadas
-            ServicoUniNFe srv = new ServicoUniNFe();
-            Thread t3 = new Thread(srv.GerarXMLPedRec);
-            t3.Start(new ServicoNFe());
-            threads.Add(t3);
-#endif
-
-            new ThreadControlEvents();
+            else
+            {
+                WriteLog("Servico do UniNFe não está sendo executado ");
+            }
         }
 
         private void pararServicosUniNFe()
         {
-            for (int i = 0; i < threads.Count; i++)
-            {
-                Thread t = threads[i];
-                t.Abort();
-            }
-            for (int i = 0; i < MonitoraPasta.fsw.Count; i++)
-            {
-                MonitoraPasta.fsw[i].StopWatch = true;
-            }
+            ThreadService.Stop();
+            Empresas.ClearLockFiles(false);
         }
 
         protected void WriteEventEntry(
@@ -194,7 +189,10 @@ namespace UniNFeServico
         }
         void WriteLog(string msg)
         {
+            bool o = ConfiguracaoApp.GravarLogOperacoesRealizadas;
+            ConfiguracaoApp.GravarLogOperacoesRealizadas = true;
             Auxiliar.WriteLog(msg);
+            ConfiguracaoApp.GravarLogOperacoesRealizadas = o;
         }
     }
 }

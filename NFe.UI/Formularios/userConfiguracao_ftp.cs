@@ -35,15 +35,15 @@ namespace NFe.UI.Formularios
             edtFTP_Porta.Text = empresa.FTPPorta.ToString();
             edtFTP_Server.Text = empresa.FTPNomeDoServidor;
             edtFTP_UserName.Text = empresa.FTPNomeDoUsuario;
+
+            edtFTP_PastaDestino.Visible =
+                lbl_edtFTP_PastaDestino.Visible =
+                edtFTP_GravaXMLPastaUnica.Visible = (empresa.Servico == TipoAplicativo.Nfe || empresa.Servico == TipoAplicativo.Todos);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            edtFTP_PastaDestino.Visible =
-                lbl_edtFTP_PastaDestino.Visible =
-                edtFTP_GravaXMLPastaUnica.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
         }
 
         public void Validar()
@@ -81,7 +81,7 @@ namespace NFe.UI.Formularios
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                    if (this.empresa.Servico == TipoAplicativo.Nfe || this.empresa.Servico == TipoAplicativo.Todos)
                         if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
                             string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
@@ -129,6 +129,5 @@ namespace NFe.UI.Formularios
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);
         }
-
     }
 }

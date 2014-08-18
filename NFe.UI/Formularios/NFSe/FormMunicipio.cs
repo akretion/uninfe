@@ -76,7 +76,7 @@ namespace NFe.UI.Formularios.NFSe
 
             try
             {
-                WebServiceNFSe.SavePadrao(this.edtUF.SelectedItem.ToString(), 
+                WebServiceNFSe.SalvarXMLMunicipios(this.edtUF.SelectedItem.ToString(), 
                     this.edtMunicipio.Text, 
                     Convert.ToInt32(this.edtCodMun.Text), 
                     this.edtPadrao.SelectedItem.ToString(), 

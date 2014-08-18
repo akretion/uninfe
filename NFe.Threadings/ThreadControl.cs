@@ -398,7 +398,8 @@ namespace NFe.Threadings
             t.Start();
             Threads.Add(t);
 
-            if(Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (Propriedade.TipoExecucao == TipoExecucao.teAll ||
+                Propriedade.TipoExecucao == TipoExecucao.teNFe)
             {
                 //Executa a thread que faz a verificação das notas em processamento
                 Thread t2 = new Thread(new Processar().EmProcessamento);

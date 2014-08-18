@@ -37,8 +37,6 @@ namespace NFe.Settings
         {
             if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0) return "";
 
-            //IEnumerable<string> diretorios = (from d in Empresas.Configuracoes select d.PastaBase);
-
             StringBuilder result = new StringBuilder();
 
             //se no diretório de envio existir o arquivo "nome da máquina.locked" o diretório já está sendo atendido por alguma instancia do UniNFe
@@ -524,5 +522,26 @@ namespace NFe.Settings
         }
         #endregion
 
+        #region Conta quantas empresas sao para NFe/CTe/MDFe/NFCe
+        public static int CountEmpresasNFe
+        {
+            get
+            {
+                if (Configuracoes == null) return 0;
+                return Configuracoes.Where(x => x.Servico != TipoAplicativo.Nfse).Count();
+            }
+        }
+        #endregion
+
+        #region Conta quantas empresas sao para NFSe
+        public static int CountEmpresasNFse
+        {
+            get
+            {
+                if (Configuracoes == null) return 0;
+                return Configuracoes.Where(x => x.Servico == TipoAplicativo.Nfse).Count();
+            }
+        }
+        #endregion
     }
 }

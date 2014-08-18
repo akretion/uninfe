@@ -156,8 +156,9 @@
             // 
             // cboDiretorioSalvarComo
             // 
+            this.cboDiretorioSalvarComo.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cboDiretorioSalvarComo.FormattingEnabled = true;
-            this.cboDiretorioSalvarComo.ItemHeight = 23;
+            this.cboDiretorioSalvarComo.ItemHeight = 19;
             this.cboDiretorioSalvarComo.Items.AddRange(new object[] {
             "Raiz",
             "AMD",
@@ -181,7 +182,7 @@
             this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(3, 115);
             this.cboDiretorioSalvarComo.MaxDropDownItems = 15;
             this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
-            this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(174, 29);
+            this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(174, 25);
             this.cboDiretorioSalvarComo.TabIndex = 13;
             this.cboDiretorioSalvarComo.UseSelectable = true;
             this.cboDiretorioSalvarComo.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -190,12 +191,13 @@
             // 
             this.comboBox_tpEmis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_tpEmis.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBox_tpEmis.FormattingEnabled = true;
-            this.comboBox_tpEmis.ItemHeight = 23;
+            this.comboBox_tpEmis.ItemHeight = 19;
             this.comboBox_tpEmis.Location = new System.Drawing.Point(503, 64);
             this.comboBox_tpEmis.MaxDropDownItems = 15;
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
-            this.comboBox_tpEmis.Size = new System.Drawing.Size(181, 29);
+            this.comboBox_tpEmis.Size = new System.Drawing.Size(181, 25);
             this.comboBox_tpEmis.TabIndex = 11;
             this.comboBox_tpEmis.UseSelectable = true;
             this.comboBox_tpEmis.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -213,12 +215,13 @@
             // 
             // comboBox_Ambiente
             // 
+            this.comboBox_Ambiente.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBox_Ambiente.FormattingEnabled = true;
-            this.comboBox_Ambiente.ItemHeight = 23;
+            this.comboBox_Ambiente.ItemHeight = 19;
             this.comboBox_Ambiente.Location = new System.Drawing.Point(363, 64);
             this.comboBox_Ambiente.MaxDropDownItems = 15;
             this.comboBox_Ambiente.Name = "comboBox_Ambiente";
-            this.comboBox_Ambiente.Size = new System.Drawing.Size(134, 29);
+            this.comboBox_Ambiente.Size = new System.Drawing.Size(134, 25);
             this.comboBox_Ambiente.TabIndex = 9;
             this.comboBox_Ambiente.UseSelectable = true;
             this.comboBox_Ambiente.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -236,13 +239,14 @@
             // 
             // comboBox_UF
             // 
+            this.comboBox_UF.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBox_UF.FormattingEnabled = true;
             this.comboBox_UF.IntegralHeight = false;
-            this.comboBox_UF.ItemHeight = 23;
+            this.comboBox_UF.ItemHeight = 19;
             this.comboBox_UF.Location = new System.Drawing.Point(183, 64);
             this.comboBox_UF.MaxDropDownItems = 15;
             this.comboBox_UF.Name = "comboBox_UF";
-            this.comboBox_UF.Size = new System.Drawing.Size(174, 29);
+            this.comboBox_UF.Size = new System.Drawing.Size(174, 25);
             this.comboBox_UF.TabIndex = 7;
             this.comboBox_UF.UseSelectable = true;
             this.comboBox_UF.DropDown += new System.EventHandler(this.comboBox_UF_DropDown);
@@ -262,12 +266,14 @@
             // 
             // cbServico
             // 
+            this.cbServico.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbServico.FormattingEnabled = true;
-            this.cbServico.ItemHeight = 23;
+            this.cbServico.IntegralHeight = false;
+            this.cbServico.ItemHeight = 19;
             this.cbServico.Location = new System.Drawing.Point(3, 64);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(174, 29);
+            this.cbServico.Size = new System.Drawing.Size(174, 25);
             this.cbServico.TabIndex = 5;
             this.cbServico.UseSelectable = true;
             this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);

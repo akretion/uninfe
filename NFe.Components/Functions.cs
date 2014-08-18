@@ -422,6 +422,38 @@ namespace NFe.Components
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 01/03/2010
         /// </remarks>
+        /// 
+        public static ArrayList CarregaMunicipios()
+        {
+            ArrayList UF = new ArrayList();
+
+            Propriedade.Municipios.ForEach((mun) => { UF.Add(new ComboElem(mun.UF, mun.CodigoMunicipio, mun.Nome)); });
+
+            if (File.Exists(Propriedade.NomeArqXMLWebService_NFSe))
+            {
+                //Carregar os dados do arquivo XML de configurações da Aplicação
+                XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
+                var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                            where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                            select p);
+                foreach (var item in s)
+                {
+                    if (Convert.ToInt32(OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value)) == 0)
+                        continue;
+
+                    var temp = Propriedade.Municipios.FirstOrDefault(x => x.CodigoMunicipio == Convert.ToInt32(item.Attribute(NFeStrConstants.ID).Value));
+                    if (temp == null)
+                    {
+                        UF.Add(new ComboElem(item.Attribute(NFeStrConstants.UF).Value,
+                            Convert.ToInt32(item.Attribute(NFe.Components.NFeStrConstants.ID).Value),
+                            item.Element(NFe.Components.NFeStrConstants.Nome).Value));
+                    }
+                }
+            }
+            UF.Sort(new OrdenacaoPorNome());
+            return UF;
+        }
+
         public static ArrayList CarregaUF()
         {
             ArrayList UF = new ArrayList();
@@ -429,92 +461,25 @@ namespace NFe.Components
             /// danasa 1-2012
             if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
             {
-                Propriedade.Municipios.ForEach((mun) => { UF.Add(new ComboElem(mun.UF, mun.CodigoMunicipio, mun.Nome)); });
-
-                if (File.Exists(Propriedade.NomeArqXMLWebService))
-                {
-                    //XmlTextReader oLerXml = null;
-                    try
-                    {
-                        //Carregar os dados do arquivo XML de configurações da Aplicação
-                        XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService);
-                        var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                                 where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
-                                 select p);
-                        foreach (var item in s)
-                        {
-                            if (Convert.ToInt32(OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value))==0)
-                                continue;
-
-                            /// danasa 1-2012
-                            bool jahExiste = false;
-                            foreach (ComboElem ee in UF)
-                                if (ee.Codigo == Convert.ToInt32(item.Attribute(NFeStrConstants.ID).Value))
-                                {
-                                    jahExiste = true;
-                                    break;
-                                }
-                            /// danasa 1-2012
-                            /// 
-                            if (!jahExiste)
-                            {
-                                UF.Add(new ComboElem(item.Attribute(NFeStrConstants.UF).Value,
-                                    Convert.ToInt32(item.Attribute(NFe.Components.NFeStrConstants.ID).Value),
-                                    item.Element(NFe.Components.NFeStrConstants.Nome).Value));
-                            }
-                        }
-
-
-#if false
-
-                        oLerXml = new XmlTextReader(Propriedade.NomeArqXMLWebService);
-
-                        while (oLerXml.Read())
-                        {
-                            if (oLerXml.NodeType == XmlNodeType.Element)
-                            {
-                                if (oLerXml.Name == NFeStrConstants.Estado &&
-                                    (Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)) < 900 ||
-                                    Propriedade.TipoAplicativo == TipoAplicativo.Nfse) &&
-                                    Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)) != 999)
-                                {
-                                    /// danasa 1-2012
-                                    bool jahExiste = false;
-                                    foreach (ComboElem ee in UF)
-                                        if (ee.Codigo == Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)))
-                                        {
-                                            jahExiste = true;
-                                            break;
-                                        }
-                                    /// danasa 1-2012
-                                    /// 
-                                    if (!jahExiste)
-                                        UF.Add(new ComboElem(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.UF),
-                                            Convert.ToInt32(oLerXml.GetAttribute(NFe.Components.NFeStrConstants.ID)),
-                                            oLerXml.GetAttribute(NFe.Components.NFeStrConstants.Nome)));
-                                }
-                            }
-                        }
-#endif
-                    }
-                    finally
-                    {
-                        //if (oLerXml != null)
-                            //oLerXml.Close();
-                    }
-                }
+                UF = CarregaMunicipios();
             }
             else
             {
-                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                {
-                    UF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2), 
-                        Convert.ToInt32(Propriedade.CodigosEstados[v, 0]), 
-                        Propriedade.CodigosEstados[v, 1].Substring(5)));
-                }
+                UF = CarregaEstados();
+            }
+            return UF;
+        }
+
+        public static ArrayList CarregaEstados()
+        {
+            ArrayList UF = new ArrayList();
+            for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
+            {
+                UF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2),
+                    Convert.ToInt32(Propriedade.CodigosEstados[v, 0]),
+                    Propriedade.CodigosEstados[v, 1].Substring(5)));
             }
             UF.Sort(new OrdenacaoPorNome());
-
             return UF;
         }
         #endregion
@@ -739,5 +704,79 @@ namespace NFe.Components
             }
         }
 
+        #region WriteLog()
+        public static void WriteLog(string msg, bool GravarLogOperacoesRealizadas)
+        {
+
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(msg);
+#endif
+
+            WriteLog(msg, false, GravarLogOperacoesRealizadas);
+        }
+        
+        public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog)
+        {
+            if (geraLog)
+            {
+                string fileName = Propriedade.PastaLog + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
+
+                DateTime startTime;
+                DateTime stopTime;
+                TimeSpan elapsedTime;
+
+                long elapsedMillieconds;
+                startTime = DateTime.Now;
+
+                while (true)
+                {
+                    stopTime = DateTime.Now;
+                    elapsedTime = stopTime.Subtract(startTime);
+                    elapsedMillieconds = (int)elapsedTime.TotalMilliseconds;
+
+                    StreamWriter arquivoWS = null;
+                    try
+                    {
+                        //Se for para gravar ot race
+                        if (gravarStackTrace)
+                        {
+                            msg += "\r\nSTACK TRACE:";
+                            msg += "\r\n" + Environment.StackTrace;
+
+                            /*
+                            StackTrace stackTrace = new StackTrace();
+                            StackFrame[] stackFrames = stackTrace.GetFrames();
+                            foreach (StackFrame s in stackFrames)
+                            {
+                                msg += "\r\nModule: " + s.GetMethod().ReflectedType.Module.Name + " Class: " + s.GetMethod().ReflectedType.FullName + " Method: " + s.GetMethod().Name;
+                                msg += " line: " + s.GetFileLineNumber();
+                                
+                            }*/
+                        }
+
+                        arquivoWS = new StreamWriter(fileName, true, Encoding.UTF8);
+                        arquivoWS.WriteLine(DateTime.Now.ToLongTimeString() + "  " + msg);
+                        arquivoWS.Flush();
+                        arquivoWS.Close();
+                        break;
+                    }
+                    catch
+                    {
+                        if (arquivoWS != null)
+                        {
+                            arquivoWS.Close();
+                        }
+
+                        if (elapsedMillieconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
+                        {
+                            break;
+                        }
+                    }
+
+                    Thread.Sleep(2);
+                }
+            }
+        }
+        #endregion
     }
 }

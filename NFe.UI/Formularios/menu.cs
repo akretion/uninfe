@@ -65,23 +65,26 @@ namespace NFe.UI
             this.metroTile_doc.Enabled =
                 System.IO.File.Exists(System.IO.Path.Combine(NFe.Components.Propriedade.PastaExecutavel, NFe.Components.Propriedade.NomeAplicacao + ".pdf"));
 
-            switch (NFe.Components.Propriedade.TipoAplicativo)
+            if (NFe.Components.Propriedade.TipoExecucao != TipoExecucao.teAll)
             {
-                case NFe.Components.TipoAplicativo.Nfe:
-                    this.metroTile_municipios.Visible = false;
-                    break;
+                switch (NFe.Components.Propriedade.TipoAplicativo)
+                {
+                    case NFe.Components.TipoAplicativo.Nfe:
+                        this.metroTile_municipios.Visible = false;
+                        break;
 
-                case NFe.Components.TipoAplicativo.Nfse:
-                    metroTile_sobre.TileImage = NFe.UI.Properties.Resources.uninfse;
-                    this.metroTile_Danfe.Visible =
-                        this.metroTile_CadastroContrib.Visible =
-                        this.metroTile_Servicos.Visible =
-                        //this.metroTile_doc.Visible = 
-                        this.metroTile_sefaz_200.Visible = 
-                        this.metroTile_sefaz_310.Visible = false;
-                    metroTile_municipios.Location = new Point(metroTile_Danfe.Location.X, metroTile_Danfe.Location.Y);
-                    metroTile_municipios.Size = new Size(metroTile_Danfe.Size.Width, metroTile_Danfe.Size.Height);
-                    break;
+                    case NFe.Components.TipoAplicativo.Nfse:
+                        metroTile_sobre.TileImage = NFe.UI.Properties.Resources.uninfse;
+                        this.metroTile_Danfe.Visible =
+                            this.metroTile_CadastroContrib.Visible =
+                            this.metroTile_Servicos.Visible =
+                            //this.metroTile_doc.Visible = 
+                            this.metroTile_sefaz_200.Visible =
+                            this.metroTile_sefaz_310.Visible = false;
+                        metroTile_municipios.Location = new Point(metroTile_Danfe.Location.X, metroTile_Danfe.Location.Y);
+                        metroTile_municipios.Size = new Size(metroTile_Danfe.Size.Width, metroTile_Danfe.Size.Height);
+                        break;
+                }
             }
             //string _style = uninfeDummy.uStyle;
             //this.cbStyles.DataSource = estilos;
@@ -98,11 +101,14 @@ namespace NFe.UI
             this.Style = uninfeDummy.mainForm.uStyle;
 
             this.metroTile_Configuracoes.TileCount = NFe.Settings.Empresas.Configuracoes.Count;
-            this.metroTile_CadastroContrib.Enabled =
-                this.metroTile_Servicos.Enabled =
+            this.metroTile_excluirLock.Enabled =
                 this.metroTile_ValidaXml.Enabled =
-                this.metroTile_excluirLock.Enabled =
-                this.metroTile_Danfe.Enabled = (NFe.Settings.Empresas.Configuracoes != null && NFe.Settings.Empresas.Configuracoes.Count > 0);
+                    (NFe.Settings.Empresas.Configuracoes != null && NFe.Settings.Empresas.Configuracoes.Count > 0);
+
+            this.metroTile_municipios.Visible = Empresas.CountEmpresasNFse > 0;
+            this.metroTile_Servicos.Visible =
+                this.metroTile_Danfe.Visible =
+                this.metroTile_CadastroContrib.Visible = Empresas.CountEmpresasNFe > 0;
         }
 
         public void Show(uninfeOpcoes opcao)

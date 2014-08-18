@@ -61,7 +61,7 @@ namespace NFe.Service
 
                 foreach (Evento item in dadosEnvEvento.eventos)
                 {
-                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir caso emitida em modo SCAN - Renan
+                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir
                     if (!currentEvento.Equals(item.tpEvento))
                         throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
                 }
@@ -83,10 +83,6 @@ namespace NFe.Service
                             case NFe.Components.TipoEmissao.teSVCAN:
                             case NFe.Components.TipoEmissao.teSVCRS:
                             case NFe.Components.TipoEmissao.teSVCSP:
-                            case NFe.Components.TipoEmissao.teSCAN:
-                                //Se a nota fiscal foi emitida em ambiente SCAN o cancelamento tem que ir para SCAN ou gera uma rejeição. Wandrey 15/02/2013
-                                break;
-
                             case NFe.Components.TipoEmissao.teNormal:
                                 //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
                                 break;

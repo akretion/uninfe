@@ -239,6 +239,7 @@
             // cbServico
             // 
             this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServico.Enabled = false;
             this.cbServico.FormattingEnabled = true;
             this.cbServico.ItemHeight = 13;
             this.cbServico.Location = new System.Drawing.Point(187, 63);
@@ -385,6 +386,7 @@
             // 
             // edtCNPJ
             // 
+            this.edtCNPJ.Enabled = false;
             this.edtCNPJ.Location = new System.Drawing.Point(7, 64);
             this.edtCNPJ.Mask = "00,000,000/0000-00";
             this.edtCNPJ.Name = "edtCNPJ";

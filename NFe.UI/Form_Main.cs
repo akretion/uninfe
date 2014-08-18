@@ -37,7 +37,6 @@ namespace NFe.UI
         Timer tm = new Timer();
         
         private bool first = false;
-        private bool restartServico = false;
         private bool servicoInstaladoErodando = false;
         private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
         private menu _menu;
@@ -80,6 +79,7 @@ namespace NFe.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bool error = false;
             try
             {
                 //
@@ -109,6 +109,8 @@ namespace NFe.UI
                 this.uTheme = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroThemeStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString()));
                 this.uStyle = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroColorStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Style", this.metroStyleManager1.Style.ToString()));
 
+                ConfiguracaoApp.StartVersoes();
+
                 _menu = new menu();
                 this.Controls.Add(_menu);
                 _menu.Dock = DockStyle.Fill;
@@ -130,25 +132,28 @@ namespace NFe.UI
                 this.cmManual.Text = "Manual do " + NFe.Components.Propriedade.NomeAplicacao;
                 this.cmManual.Enabled = File.Exists(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, NFe.Components.Propriedade.NomeAplicacao + ".pdf"));
 
-                ConfiguracaoApp.StartVersoes();
-
-                if (TipoAplicativo.Nfse == NFe.Components.Propriedade.TipoAplicativo)
+                string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
+                string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
+                string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
+                string msg = "";
+                switch (Propriedade.TipoExecucao)
                 {
-                    if (!System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || 
-                        !System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
-                    {
-                        MetroFramework.MetroMessageBox.Show(this, 
-                            "Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService + "' não encontrados", "", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Application.Exit();
-                        return;
-                    }
+                    case TipoExecucao.teNFSe:
+                        error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
+                        msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
+                        break;
+                    case TipoExecucao.teNFe:
+                        error = !System.IO.File.Exists(filenameWS3);
+                        msg = "Arquivo '" + filenameWS3 + "' não encontrados";
+                        break;
+                    case TipoExecucao.teAll:
+                        error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+                        msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+                        break;
                 }
-                if (!System.IO.File.Exists(Propriedade.NomeArqXMLWebService))
+                if (error)
                 {
-                    MetroFramework.MetroMessageBox.Show(this,
-                        "Arquivo '" + Propriedade.NomeArqXMLWebService + "' não encontrado", "",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroFramework.MetroMessageBox.Show(this, msg, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                     return;
                 }
@@ -164,6 +169,9 @@ namespace NFe.UI
                 //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.xml");
                 //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.txt");
 
+                ///
+                /// timer usado para habilitar/desbilitar as opcoes do visual
+                /// 
                 tm.Tick += delegate
                 {
                     if (optionsTimeOut < 1000)
@@ -198,7 +206,8 @@ namespace NFe.UI
             }
             finally
             {
-                this.updateControleDoServico();
+                if (!error)
+                    this.updateControleDoServico();
             }
 
 #if DEBUG
@@ -213,11 +222,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeConsulta2.w
 tpEmis:teContingencia
 C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
 E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeStatusServico2_200.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSCAN
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCAN\PSCANNfeStatusServico2.wsdl
 ----
 2.00: srv:ConsultaStatusServicoNFe
 tpEmis:teFSDA
@@ -253,11 +257,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeConsulta
 tpEmis:teContingencia
 C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
 E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeStatusServico2_200.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSCAN
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCAN\HSCANNfeStatusServico2.wsdl
 ----
 2.00: srv:ConsultaStatusServicoNFe
 tpEmis:teSVCAN
@@ -740,16 +739,11 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
         /// <summary>
         /// Metodo responsável por iniciar os serviços do UniNFe em threads diferentes
         /// </summary>
-        public void ExecutaServicos()
+        public void ExecutaServicos(bool updateOptions = true)
         {
             if (servicoInstaladoErodando)
             {
                 Empresas.CarregaConfiguracao();
-
-                if (restartServico)
-                    ServiceProcess.StopService(srvName, 40000);
-
-                restartServico = false;
 
                 switch (ServiceProcess.StatusService(srvName))
                 {
@@ -760,7 +754,8 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                         ServiceProcess.RestartService(srvName, 40000);
                         break;
                 }
-                this.updateControleDoServico();
+                if (updateOptions)
+                    this.updateControleDoServico();
             }
             else
             {
@@ -846,7 +841,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
 
         private void tbRestartServico_Click(object sender, EventArgs e)
         {
-            uninfeDummy.opServicos = uninfeOpcoes2.opRestartTasks;
+            uninfeDummy.opServicos = uninfeOpcoes2.opRestartServico;
             MetroTaskWindow.ShowTaskWindow(this, "", new NFe.UI.Formularios.UserControl2());
         }
 
@@ -1010,22 +1005,29 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
 
         private void metroContextMenu1_Opening(object sender, CancelEventArgs e)
         {
-            switch (NFe.Components.Propriedade.TipoAplicativo)
-            {
-                case NFe.Components.TipoAplicativo.Nfe:
-                    this.cmMunicipios.Visible = false;
-                    break;
+            this.cmValidarXML.Enabled = (NFe.Settings.Empresas.Configuracoes.Count > 0);
 
-                case NFe.Components.TipoAplicativo.Nfse:
-                    this.cmConsultaCadastro.Visible =
-                        this.cmSituacaoServicos.Visible =
-                        this.cmDANFE.Visible = false;
-                    break;
+            this.cmDANFE.Visible =
+                this.cmSituacaoServicos.Visible =
+                this.cmConsultaCadastro.Visible = (NFe.Settings.Empresas.CountEmpresasNFe > 0);
+
+            if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
+            {
+                this.cmMunicipios.Visible = Empresas.CountEmpresasNFse > 0;
             }
-            this.cmDANFE.Enabled =
-                this.cmSituacaoServicos.Enabled =
-                this.cmValidarXML.Enabled =
-                this.cmConsultaCadastro.Enabled = (NFe.Settings.Empresas.Configuracoes != null && NFe.Settings.Empresas.Configuracoes.Count > 0);
+            else
+                switch (NFe.Components.Propriedade.TipoAplicativo)
+                {
+                    case NFe.Components.TipoAplicativo.Nfe:
+                        this.cmMunicipios.Visible = false;
+                        break;
+
+                    case NFe.Components.TipoAplicativo.Nfse:
+                        this.cmConsultaCadastro.Visible =
+                            this.cmSituacaoServicos.Visible =
+                            this.cmDANFE.Visible = false;
+                        break;
+                }
         }
     }
 }

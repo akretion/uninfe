@@ -46,7 +46,6 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.labelTitle.Size = new System.Drawing.Size(291, 25);
             this.labelTitle.Text = "Consulta ao cadastro de contribuinte";
             // 
@@ -73,6 +72,7 @@
             // 
             // cbVersao
             // 
+            this.cbVersao.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbVersao.FormattingEnabled = true;
             this.cbVersao.ItemHeight = 19;
             this.cbVersao.Items.AddRange(new object[] {
@@ -98,6 +98,7 @@
             // 
             // comboUf
             // 
+            this.comboUf.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboUf.FormattingEnabled = true;
             this.comboUf.IntegralHeight = false;
             this.comboUf.ItemHeight = 19;
@@ -151,7 +152,9 @@
             // 
             this.cbEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEmpresa.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbEmpresa.FormattingEnabled = true;
+            this.cbEmpresa.IntegralHeight = false;
             this.cbEmpresa.ItemHeight = 19;
             this.cbEmpresa.Items.AddRange(new object[] {
             "Normal Combobox",
@@ -215,6 +218,7 @@
             // 
             // textConteudo
             // 
+            this.textConteudo.Lines = new string[0];
             this.textConteudo.Location = new System.Drawing.Point(0, 201);
             this.textConteudo.MaxLength = 32767;
             this.textConteudo.Name = "textConteudo";
@@ -230,6 +234,7 @@
             this.textResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textResultado.Lines = new string[0];
             this.textResultado.Location = new System.Drawing.Point(0, 249);
             this.textResultado.MaxLength = 32767;
             this.textResultado.Multiline = true;

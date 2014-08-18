@@ -72,8 +72,7 @@
 										<xs:annotation>
 											<xs:documentation>Série do Documento Fiscal
 série normal 0-889
-Avulsa Fisco 890-899
-SCAN 900-999</xs:documentation>
+Avulsa Fisco 890-899</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="nNF" type="TNF">
@@ -144,7 +143,6 @@ SCAN 900-999</xs:documentation>
 											<xs:documentation>Forma de emissão da NF-e
 1 - Normal;
 2 - Contingência FS
-3 - Contingência SCAN
 4 - Contingência DPEC
 5 - Contingência FSDA
 6 - Contingência SVC - AN
@@ -674,7 +672,7 @@ Este campo será obrigatoriamente preenchido com:
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
 													<xs:whiteSpace value="preserve"/>
-												    <xs:pattern value="[!-ÿ]{5,20}"/>
+													<xs:pattern value="([!-ÿ]{0}|[!-ÿ]{5,20})?"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1025,7 +1023,7 @@ Formato ”CFOP9999”.</xs:documentation>
 																	</xs:restriction>
 																</xs:simpleType>
 															</xs:element>
-															<xs:element name="vAFRMM" type="TDec_1302Opc" minOccurs="0">
+															<xs:element name="vAFRMM" type="TDec_1302" minOccurs="0">
 																<xs:annotation>
 																	<xs:documentation>Valor Adicional ao frete para renovação de marinha mercante</xs:documentation>
 																</xs:annotation>
@@ -2188,37 +2186,37 @@ A exigência do preenchimento das informações do ICMS diferido fica à critér
 																						</xs:restriction>
 																					</xs:simpleType>
 																				</xs:element>
-																				<xs:element name="pRedBC" type="TDec_0302a04Opc" minOccurs="0">
+																				<xs:element name="pRedBC" type="TDec_0302a04" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Percentual de redução da BC</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="vBC" type="TDec_1302Opc" minOccurs="0">
+																				<xs:element name="vBC" type="TDec_1302" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Valor da BC do ICMS</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="pICMS" type="TDec_0302a04Opc" minOccurs="0">
+																				<xs:element name="pICMS" type="TDec_0302a04" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Alíquota do ICMS</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="vICMSOp" type="TDec_1302Opc" minOccurs="0">
+																				<xs:element name="vICMSOp" type="TDec_1302" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Valor do ICMS da Operação</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="pDif" type="TDec_0302a04OpcMax100" minOccurs="0">
+																				<xs:element name="pDif" type="TDec_0302a04Max100" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Percentual do diferemento</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="vICMSDif" type="TDec_1302Opc" minOccurs="0">
+																				<xs:element name="vICMSDif" type="TDec_1302" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Valor do ICMS da diferido</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="vICMS" type="TDec_1302Opc" minOccurs="0">
+																				<xs:element name="vICMS" type="TDec_1302" minOccurs="0">
 																					<xs:annotation>
 																						<xs:documentation>Valor do ICMS</xs:documentation>
 																					</xs:annotation>

@@ -156,7 +156,7 @@ namespace NFe.ConvertTxt
     }
     public enum TpcnTipoCampo 
     { 
-        tcStr, tcInt, tcDat, tcDat2, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 
+        tcStr, tcInt, tcDatYYYY_MM_DD, tcDatYYYYMMDD, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 
     }
 
     public enum TpcnIndicadorPagamento 
@@ -320,6 +320,7 @@ namespace NFe.ConvertTxt
 
     public enum TpcnRegimeTributario
     {
+        Nenhum = 0,
         Microempresa_Municipal = 1,
         Estimativa = 2,
         Sociedade_de_Profissionais = 3,

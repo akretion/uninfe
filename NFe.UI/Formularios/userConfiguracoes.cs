@@ -59,7 +59,7 @@ namespace NFe.UI
             {
                 case 0:
                     tpage.Text = "Principal";
-                    tpage.AutoScroll =  (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
+                    tpage.AutoScroll = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll);
                     uce_divs = new Formularios.userConfiguracao_diversos();
                     uce_divs.uConfiguracoes = this;
                     uce_divs.changeEvent += changed_Modificado;
@@ -67,7 +67,7 @@ namespace NFe.UI
                     break;
                 case 1:
                     tpage.Text = "Pastas";
-                    tpage.AutoScroll =  (Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
+                    tpage.AutoScroll = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll);
                     uce_pastas = new Formularios.userConfiguracao_pastas();
                     uce_pastas.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_pastas); 
@@ -79,17 +79,17 @@ namespace NFe.UI
                     tpage.Controls.Add(uce_cert); 
                     break;
                 case 3:
+                    tpage.Text = "FTP";
+                    uce_ftp = new Formularios.userConfiguracao_ftp();
+                    uce_ftp.changeEvent += changed_Modificado;
+                    tpage.Controls.Add(uce_ftp);
+                    break;
+                case 4:
                     tpage.Text = "DANFE";
                     tpage.AutoScroll = true;
                     uce_danfe = new Formularios.userConfiguracao_danfe();
                     uce_danfe.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_danfe); 
-                    break;
-                case 4:
-                    tpage.Text = "FTP";
-                    uce_ftp = new Formularios.userConfiguracao_ftp();
-                    uce_ftp.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_ftp); 
                     break;
             }
             tpage.Controls[tpage.Controls.Count - 1].Dock = DockStyle.Fill;
@@ -144,11 +144,11 @@ namespace NFe.UI
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_divs = this.createtpage(0));
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_pastas = this.createtpage(1));
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_cert = this.createtpage(2));
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                this.tc_empresa.TabPages.Add(this._tpEmpresa_ftp = this.createtpage(3));
+                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll)
                 {
-                    this.tc_empresa.TabPages.Add(this._tpEmpresa_danfe = this.createtpage(3));
+                    this.tc_empresa.TabPages.Add(this._tpEmpresa_danfe = this.createtpage(4));
                 }
-                this.tc_empresa.TabPages.Add(this._tpEmpresa_ftp = this.createtpage(4));
 
                 uc_geral = new Formularios.userConfiguracao_geral();
                 this.tpGeral.Controls.Add(uc_geral);
@@ -161,7 +161,7 @@ namespace NFe.UI
             this.cbEmpresas.DataSource = null;
             this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             this.cbEmpresas.ValueMember = "Valor";
-            this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa();
+            this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa(false);
 
             ConfiguracaoApp.CarregarDados();
             uc_geral.PopulateConfGeral();
@@ -206,7 +206,7 @@ namespace NFe.UI
             if (string.IsNullOrEmpty(origemPasta))
                 return "";
 
-            string ctemp = destino.CNPJ + (destino.Servico == TipoAplicativo.Nfe ? "" : "\\" + destino.Servico.ToString().ToLower());
+            string ctemp = destino.CNPJ + (destino.Servico == TipoAplicativo.Nfe || destino.Servico == TipoAplicativo.Todos ? "" : "\\" + destino.Servico.ToString().ToLower());
             string newPasta = origemPasta.Replace(origemCNPJ, ctemp);
 
             if (origemPasta.ToLower() == newPasta.ToLower())
@@ -223,6 +223,8 @@ namespace NFe.UI
             stopChangedEvent = true;
             try
             {
+                oempresa.CriaPastasAutomaticamente = false;
+
                 this.tc_main.SelectedIndex = 1;
                 this.tc_empresa.SelectedIndex = 0;
 
@@ -237,13 +239,13 @@ namespace NFe.UI
                             empresa.Servico != oempresa.Servico && 
                             !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                         {
-                            string cpath = empresa.CNPJ + (empresa.Servico == TipoAplicativo.Nfe ? "" : "\\" + empresa.Servico.ToString().ToLower());
+                            string cpath = empresa.CNPJ + (empresa.Servico == TipoAplicativo.Nfse ? "\\nfse" : "");
 
                             oempresa.PastaXmlEnvio = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEnvio, oempresa);
                             oempresa.PastaXmlRetorno = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlRetorno, oempresa);
                             oempresa.PastaXmlErro = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlErro, oempresa);
                             oempresa.PastaValidar = CopiaPastaDeEmpresa(cpath, empresa.PastaValidar, oempresa);
-                            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                            if (empresa.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                             {
                                 oempresa.PastaXmlEmLote = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEmLote, oempresa);
                                 oempresa.PastaXmlEnviado = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEnviado, oempresa);
@@ -275,18 +277,18 @@ namespace NFe.UI
                     /// 
                     if (string.IsNullOrEmpty(oempresa.PastaXmlEnvio))
                     {
-                        string subpasta = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\nfse" : "");
+                        string subpasta = oempresa.CNPJ + (oempresa.Servico == TipoAplicativo.Nfse ? "\\nfse" : "");
 
-                        oempresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Envio");
-                        oempresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Retorno");
-                        oempresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Erro");
-                        oempresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Validar");
-                        if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                        oempresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Envio");
+                        oempresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Retorno");
+                        oempresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Erro");
+                        oempresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Validar");
+                        if (oempresa.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                         {
-                            oempresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Enviado");
-                            //oempresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\Backup");
-                            oempresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\EnvioEmLote");
-                            oempresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oempresa.CNPJ + subpasta + "\\DownloadNFe");
+                            oempresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Enviado");
+                            //oempresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Backup");
+                            oempresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\EnvioEmLote");
+                            oempresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\DownloadNFe");
                         }
                         oempresa.CriaPastasAutomaticamente = true;
                         _modificado = true;
@@ -296,8 +298,17 @@ namespace NFe.UI
                 uce_pastas.Populate(oempresa);
                 uce_ftp.Populate(oempresa);
                 uce_cert.Populate(oempresa);
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+
+                if (oempresa.Servico != TipoAplicativo.Nfse)
+                {
+                    _tpEmpresa_danfe.Parent = tc_empresa;
                     uce_danfe.Populate(oempresa);
+                }
+                else
+                {
+                    if (_tpEmpresa_danfe != null)
+                        _tpEmpresa_danfe.Parent = null;
+                }
             }
             finally
             {
@@ -307,7 +318,6 @@ namespace NFe.UI
                 Modificado = _modificado;
             }
         }
-
         private bool _Modificado;
         private bool Modificado {
             get
@@ -383,7 +393,7 @@ namespace NFe.UI
                 this.uce_divs.Validar();
                 this.uce_pastas.Validar();
                 this.uce_cert.Validar();
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                if (this.currentEmpresa.Servico != TipoAplicativo.Nfse)
                     this.uce_danfe.Validar();
                 this.uce_ftp.Validar();
             }
@@ -439,6 +449,10 @@ namespace NFe.UI
                         this.currentEmpresa.CNPJ = NFe.Components.Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString().PadLeft(14, '0');
                         this.currentEmpresa.Nome = f.edtNome.Text;
                         this.currentEmpresa.Servico = (TipoAplicativo)f.cbServico.SelectedValue;
+                        if (this.currentEmpresa.Servico == TipoAplicativo.Nfse)
+                            this.currentEmpresa.UnidadeFederativaCodigo = 0;
+                        else
+                            this.currentEmpresa.UnidadeFederativaCodigo = 41;
                     }
                 }
                 if (ok)

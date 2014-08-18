@@ -76,6 +76,7 @@
             // metroPanel2
             // 
             this.metroPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.metroPanel2.Controls.Add(this.metroLabel9);
             this.metroPanel2.Controls.Add(this.tbSenhaConfig2);
             this.metroPanel2.Controls.Add(this.metroLabel7);
@@ -108,13 +109,15 @@
             // 
             this.tbSenhaConfig2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSenhaConfig2.Lines = new string[] {
+        "Styled Textbox"};
             this.tbSenhaConfig2.Location = new System.Drawing.Point(11, 81);
             this.tbSenhaConfig2.MaxLength = 32767;
             this.tbSenhaConfig2.Name = "tbSenhaConfig2";
             this.tbSenhaConfig2.PasswordChar = '#';
             this.tbSenhaConfig2.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenhaConfig2.SelectedText = "";
-            this.tbSenhaConfig2.Size = new System.Drawing.Size(405, 22);
+            this.tbSenhaConfig2.Size = new System.Drawing.Size(403, 22);
             this.tbSenhaConfig2.TabIndex = 3;
             this.tbSenhaConfig2.Text = "Styled Textbox";
             this.tbSenhaConfig2.UseSelectable = true;
@@ -139,13 +142,15 @@
             // 
             this.tbSenhaConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSenhaConfig.Lines = new string[] {
+        "Styled Textbox"};
             this.tbSenhaConfig.Location = new System.Drawing.Point(11, 27);
             this.tbSenhaConfig.MaxLength = 32767;
             this.tbSenhaConfig.Name = "tbSenhaConfig";
             this.tbSenhaConfig.PasswordChar = '#';
             this.tbSenhaConfig.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenhaConfig.SelectedText = "";
-            this.tbSenhaConfig.Size = new System.Drawing.Size(405, 22);
+            this.tbSenhaConfig.Size = new System.Drawing.Size(403, 22);
             this.tbSenhaConfig.TabIndex = 1;
             this.tbSenhaConfig.Text = "Styled Textbox";
             this.tbSenhaConfig.UseSelectable = true;
@@ -190,6 +195,8 @@
             // 
             // tbServidor
             // 
+            this.tbServidor.Lines = new string[] {
+        "Styled Textbox"};
             this.tbServidor.Location = new System.Drawing.Point(281, 104);
             this.tbServidor.MaxLength = 32767;
             this.tbServidor.Name = "tbServidor";
@@ -217,6 +224,8 @@
             // 
             // nudPorta
             // 
+            this.nudPorta.Lines = new string[] {
+        "Styled Textbox"};
             this.nudPorta.Location = new System.Drawing.Point(7, 104);
             this.nudPorta.MaxLength = 32767;
             this.nudPorta.Name = "nudPorta";
@@ -234,6 +243,8 @@
             // 
             // tbSenha
             // 
+            this.tbSenha.Lines = new string[] {
+        "Styled Textbox"};
             this.tbSenha.Location = new System.Drawing.Point(281, 53);
             this.tbSenha.MaxLength = 32767;
             this.tbSenha.Name = "tbSenha";
@@ -261,6 +272,8 @@
             // 
             // tbUsuario
             // 
+            this.tbUsuario.Lines = new string[] {
+        "Styled Textbox"};
             this.tbUsuario.Location = new System.Drawing.Point(7, 53);
             this.tbUsuario.MaxLength = 32767;
             this.tbUsuario.Name = "tbUsuario";
@@ -300,6 +313,7 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.metroPanel1.Controls.Add(this.lblSenha);
             this.metroPanel1.Controls.Add(this.tbUsuario);
             this.metroPanel1.Controls.Add(this.lblUsuario);
