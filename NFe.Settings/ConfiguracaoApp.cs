@@ -137,10 +137,10 @@ namespace NFe.Settings
                         string fileoutput = null;
 
                         var afiles = (from d in x
-                                      where NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll 
-                                                ? d.StartsWith("NFe.Components.Wsdl.NF") 
-                                                : NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse 
-                                                    ? d.StartsWith("NFe.Components.Wsdl.NFse.") 
+                                      where NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll
+                                                ? d.StartsWith("NFe.Components.Wsdl.NF")
+                                                : NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse
+                                                    ? d.StartsWith("NFe.Components.Wsdl.NFse.")
                                                     : d.StartsWith("NFe.Components.Wsdl.NFe.")
                                       select d);
 
@@ -670,8 +670,6 @@ namespace NFe.Settings
                                                       Empresas.Configuracoes[emp].X509Certificado,
                                                       padraoNFSe,
                                                       (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
-                            //cUF,
-                            //versao,
                                                       servico);
 
                         Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
@@ -892,7 +890,7 @@ namespace NFe.Settings
             /// danasa: 4-2014
             /// Compatibilidade com a versao 2.00
             /// 
-            if (!string.IsNullOrEmpty(versao) && 
+            if (!string.IsNullOrEmpty(versao) &&
                 (versao.Equals("2.01") || versao.Equals("2.00")) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
             {
                 string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
@@ -1029,6 +1027,7 @@ namespace NFe.Settings
         /// </remarks>
         private void GravarConfigEmpresas()
         {
+            /***********
             XmlWriterSettings oSettings = new XmlWriterSettings();
             UTF8Encoding c = new UTF8Encoding(false);
 
@@ -1038,109 +1037,11 @@ namespace NFe.Settings
             oSettings.IndentChars = "";
             oSettings.NewLineOnAttributes = false;
             oSettings.OmitXmlDeclaration = false;
+            ***********/
 
             foreach (Empresa empresa in Empresas.Configuracoes)
             {
-                XmlWriter oXmlGravar = null;
-
-                try
-                {
-                    //Criar pasta das configurações das empresas
-                    string pasta = Propriedade.PastaExecutavel + "\\" + empresa.CNPJ.Trim();
-                    switch (empresa.Servico)
-                    {
-                        case TipoAplicativo.Nfe:
-                            break;
-                        default:
-                            pasta += "\\" + empresa.Servico.ToString().ToLower();
-                            break;
-                    }
-                    if (!Directory.Exists(pasta))
-                        Directory.CreateDirectory(pasta);
-
-                    //Agora vamos criar um XML Writer
-                    oXmlGravar = XmlWriter.Create(pasta + "\\" + Propriedade.NomeArqConfig, oSettings);
-
-                    //Agora vamos gravar os dados
-                    oXmlGravar.WriteStartDocument();
-                    oXmlGravar.WriteStartElement(NFeStrConstants.nfe_configuracoes);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnvio, empresa.PastaXmlEnvio);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlRetorno, empresa.PastaXmlRetorno);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlErro, empresa.PastaXmlErro);
-                    oXmlGravar.WriteElementString(NFeStrConstants.PastaValidar, empresa.PastaValidar);
-                    if (empresa.Servico != TipoAplicativo.Nfse)
-                    {
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEnviado, empresa.PastaXmlEnviado);
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaBackup, empresa.PastaBackup);
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaXmlEmLote, empresa.PastaXmlEmLote);
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaDownloadNFeDest, empresa.PastaDownloadNFeDest);
-                    }
-                    oXmlGravar.WriteElementString(NFeStrConstants.UnidadeFederativaCodigo, empresa.UnidadeFederativaCodigo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.AmbienteCodigo, empresa.AmbienteCodigo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigital, empresa.Certificado);
-                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoInstalado, empresa.CertificadoInstalado.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoArquivo, empresa.CertificadoArquivo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoSenha, Criptografia.criptografaSenha(empresa.CertificadoSenha));
-                    oXmlGravar.WriteElementString(NFeStrConstants.CertificadoPIN, Criptografia.criptografaSenha(empresa.CertificadoPIN));
-                    oXmlGravar.WriteElementString(NFeStrConstants.tpEmis, empresa.tpEmis.ToString());
-                    if (empresa.Servico != TipoAplicativo.Nfse)
-                    {
-                        oXmlGravar.WriteElementString(NFeStrConstants.GravarRetornoTXTNFe, empresa.GravarRetornoTXTNFe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosDeTerceiros, empresa.GravarEventosDeTerceiros.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosNaPastaEnviadosNFe, empresa.GravarEventosNaPastaEnviadosNFe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe, empresa.GravarEventosCancelamentoNaPastaEnviadosNFe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.DiretorioSalvarComo, empresa.DiretorioSalvarComo.ToString());
-                        oXmlGravar.WriteElementString("diretorioSalvarComo", empresa.DiretorioSalvarComo.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.IndSinc, empresa.IndSinc.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.CompactarNfe, empresa.CompactarNfe.ToString());
-                    }
-
-                    oXmlGravar.WriteElementString(NFeStrConstants.DiasLimpeza, empresa.DiasLimpeza.ToString());
-                    if (empresa.Servico != TipoAplicativo.Nfse)
-                    {
-                        oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoDanfe, empresa.ConfiguracaoDanfe);
-                        oXmlGravar.WriteElementString(NFeStrConstants.ConfiguracaoCCe, empresa.ConfiguracaoCCe);
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaExeUniDanfe, empresa.PastaExeUniDanfe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaConfigUniDanfe, empresa.PastaConfigUniDanfe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.PastaDanfeMon, empresa.PastaDanfeMon.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonNFe, empresa.XMLDanfeMonNFe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonProcNFe, empresa.XMLDanfeMonProcNFe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.XMLDanfeMonDenegadaNFe, empresa.XMLDanfeMonDenegadaNFe.ToString());
-                        oXmlGravar.WriteElementString("EmailDanfe", empresa.EmailDanfe);
-                        oXmlGravar.WriteElementString("AdicionaEmailDanfe", empresa.AdicionaEmailDanfe.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.TempoConsulta, empresa.TempoConsulta.ToString());
-                    }
-                    ///
-                    /// informacoes do FTP
-                    /// danasa 7/7/2011
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPAtivo, empresa.FTPAtivo.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoUsuario, empresa.FTPNomeDoUsuario.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPNomeDoServidor, empresa.FTPNomeDoServidor.ToString());
-                    if (empresa.Servico != TipoAplicativo.Nfse)
-                    {
-                        oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaAutorizados, empresa.FTPPastaAutorizados.ToString());
-                        oXmlGravar.WriteElementString(NFeStrConstants.FTPGravaXMLPastaUnica, empresa.FTPGravaXMLPastaUnica.ToString());
-                    }
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPastaRetornos, empresa.FTPPastaRetornos.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPPorta, empresa.FTPPorta.ToString());
-                    oXmlGravar.WriteElementString(NFeStrConstants.FTPSenha, empresa.FTPSenha.ToString());
-
-                    if (empresa.CertificadoInstalado)
-                    {
-                        oXmlGravar.WriteElementString(NFeStrConstants.CertificadoDigitalThumbPrint, empresa.CertificadoDigitalThumbPrint);
-                    }
-                    oXmlGravar.WriteElementString(NFeStrConstants.UsuarioWS, (empresa.UsuarioWS == null ? "" : empresa.UsuarioWS.ToString()));
-                    oXmlGravar.WriteElementString(NFeStrConstants.SenhaWS, (empresa.SenhaWS == null ? "" : empresa.SenhaWS.ToString()));
-
-                    oXmlGravar.WriteEndElement(); //nfe_configuracoes
-                    oXmlGravar.WriteEndDocument();
-                    oXmlGravar.Flush();
-                }
-                finally
-                {
-                    if (oXmlGravar != null)
-                        oXmlGravar.Close();
-                }
+                empresa.SalvarConfiguracao(false, false);
             }
         }
         #endregion
@@ -1576,168 +1477,6 @@ namespace NFe.Settings
                                 ConfiguracaoApp.mSenhaConfigAlterada = false;
                                 lEncontrouTag = true;
                                 break;
-
-                            #region --nao usar
-#if false
-                            #region Usuário e Senha WS
-                            case "usuariows":
-                                Empresas.Configuracoes[emp].UsuarioWS = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "senhaws":
-                                Empresas.Configuracoes[emp].SenhaWS = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            #endregion
-
-                            case "pastaxmlenvio":
-                                Empresas.Configuracoes[emp].PastaXmlEnvio = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaxmlemlote":
-                                Empresas.Configuracoes[emp].PastaXmlEmLote = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaxmlretorno":
-                                Empresas.Configuracoes[emp].PastaXmlRetorno = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaxmlenviado": //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaXmlEnviado = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaxmlerro":    //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaXmlErro = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastabackup": //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaBackup = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastadownloadnfedest": //Se a tag <PastaDownloadNFeDest> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaDownloadNFeDest = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastavalidar":    //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaValidar = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "unidadefederativacodigo": //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].UnidadeFederativaCodigo = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
-                                lEncontrouTag = true;
-                                break;
-                            case "ambientecodigo":  //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].AmbienteCodigo = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 1);
-                                lEncontrouTag = true;
-                                break;
-                            case "tpemis":  //Se a tag <tpEmis> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].tpEmis = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
-                                lEncontrouTag = true;
-                                break;
-                            case "gravarretornotxtnfe": //Se a tag <GravarRetornoTXTNFe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].GravarRetornoTXTNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "gravareventosdeterceiros":
-                                Empresas.Configuracoes[emp].GravarEventosDeTerceiros = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "gravareventosnapastaenviadosnfe":
-                                Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "gravareventoscancelamentonapastaenviadosnfe":
-                                Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "indsinc":
-                                Empresas.Configuracoes[emp].IndSinc = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "diretoriosalvarcomo": //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].DiretorioSalvarComo = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "diaslimpeza": //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
-                                Empresas.Configuracoes[emp].DiasLimpeza = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
-                                lEncontrouTag = true;
-                                break;
-                            case "configuracaodanfe": //Se a tag <ConfiguracaoDanfe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].ConfiguracaoDanfe = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "configuracaocce": //Se a tag <ConfiguracaoCCe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].ConfiguracaoCCe = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaexeunidanfe": //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaExeUniDanfe = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastaconfigunidanfe": //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaConfigUniDanfe = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "pastadanfemon": //Se a tag <PastaDanfeMon> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].PastaDanfeMon = (nElementos == 2 ? ConfiguracaoApp.RemoveEndSlash(dados[1].Trim()) : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "xmldanfemonnfe": //Se a tag <XMLDanfeMonNFe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].XMLDanfeMonNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "xmldanfemonprocnfe": //Se a tag <XMLDanfeMonProcNFe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].XMLDanfeMonProcNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "xmldanfemondenegadanfe": //Se a tag <XMLDanfeMonProcNFe> existir ele pega no novo conteúdo
-                                Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe = (nElementos == 2 ? dados[1].Trim() == "True" : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "tempoconsulta": //Se a tag <TempoConsulta> existir ele pega o novo conteúdo
-                                Empresas.Configuracoes[emp].TempoConsulta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
-                                lEncontrouTag = true;
-                                break;
-                            ///
-                            /// informacoes do FTP
-                            /// danasa 7/7/2011
-                            #region -- FTP
-                            case "ftpativo":
-                                Empresas.Configuracoes[emp].FTPAtivo = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "ftpgravaxmlpastaunica":
-                                Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : false);
-                                lEncontrouTag = true;
-                                break;
-                            case "ftpsenha":
-                                Empresas.Configuracoes[emp].FTPSenha = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "ftppastaautorizados":
-                                Empresas.Configuracoes[emp].FTPPastaAutorizados = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "ftppastaretornos":
-                                Empresas.Configuracoes[emp].FTPPastaRetornos = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "ftpnomedousuario":
-                                Empresas.Configuracoes[emp].FTPNomeDoUsuario = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "ftpnomedoservidor":
-                                Empresas.Configuracoes[emp].FTPNomeDoServidor = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
-                            case "ftpporta":
-                                Empresas.Configuracoes[emp].FTPPorta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 21);
-                                lEncontrouTag = true;
-                                break;
-                            #endregion
-
-#endif
-                            #endregion
                         }
                     }
                     #endregion
@@ -1803,267 +1542,6 @@ namespace NFe.Settings
                             ConfiguracaoApp.mSenhaConfigAlterada = false;
                             lEncontrouTag = true;
                         }
-
-                        #region --nao usar
-#if false
-                        #region Usuário e Senha WS
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].UsuarioWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UsuarioWS)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].SenhaWS = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.SenhaWS)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        #endregion
-
-
-
-                        //Se a tag <PastaXmlEnvio> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaXmlEnvio = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnvio)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaXmlEmLote> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaXmlEmLote = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEmLote)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-
-                        //Se a tag <PastaXmlEnviado> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaXmlEnviado = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlEnviado)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-
-                        //Se a tag <PastaBackup> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaBackup = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaBackup)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-
-                        //Se a tag <PastaXmlRetorno> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaXmlRetorno = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlRetorno)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaXmlErro> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaXmlErro = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaXmlErro)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <UnidadeFederativaCodigo> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UnidadeFederativaCodigo).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].UnidadeFederativaCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.UnidadeFederativaCodigo)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <AmbienteCodigo> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.AmbienteCodigo).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].AmbienteCodigo = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.AmbienteCodigo)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <tpEmis> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].tpEmis = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.tpEmis)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaValidar = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaValidar)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaDownloadNFeDest> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaDownloadNFeDest = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDownloadNFeDest)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaValidar> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarRetornoTXTNFe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].GravarRetornoTXTNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarRetornoTXTNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosDeTerceiros).Count > 0)
-                        {
-                            Empresas.Configuracoes[emp].GravarEventosDeTerceiros = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosDeTerceiros)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosNaPastaEnviadosNFe).Count > 0)
-                        {
-                            Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosNaPastaEnviadosNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe).Count > 0)
-                        {
-                            Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.GravarEventosCancelamentoNaPastaEnviadosNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.IndSinc).Count > 0)
-                        {
-                            Empresas.Configuracoes[emp].IndSinc = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.IndSinc)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <DiretorioSalvarComo> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiretorioSalvarComo).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].DiretorioSalvarComo = Convert.ToString(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiretorioSalvarComo)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <DiasLimpeza> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiasLimpeza).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].DiasLimpeza = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.DiasLimpeza)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaExeUniDanfe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaExeUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaExeUniDanfe)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ConfiguracaoDanfe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoDanfe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].ConfiguracaoDanfe = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoDanfe)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ConfiguracaoCCe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoCCe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].ConfiguracaoCCe = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.ConfiguracaoCCe)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaConfigUniDanfe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaConfigUniDanfe = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaConfigUniDanfe)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <PastaDanfeMon> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].PastaDanfeMon = ConfiguracaoApp.RemoveEndSlash(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.PastaDanfeMon)[0].InnerText, true);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <XMLDanfeMonNFe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonNFe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].XMLDanfeMonNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <XMLDanfeMonProcNFe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonProcNFe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].XMLDanfeMonProcNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonProcNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <XMLDanfeMonDenegadaNFe> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonDenegadaNFe).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.XMLDanfeMonDenegadaNFe)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <TempoConsulta> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.TempoConsulta).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].TempoConsulta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.TempoConsulta)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-
-                        #region -- FTP
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPAtivo).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPAtivo = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPAtivo)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPGravaXMLPastaUnica).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPGravaXMLPastaUnica)[0].InnerText.Trim());
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPSenha).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPSenha = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPSenha)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaAutorizados).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPPastaAutorizados = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaAutorizados)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaRetornos).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPPastaRetornos = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPastaRetornos)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoUsuario).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPNomeDoUsuario = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoUsuario)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoServidor).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPNomeDoServidor = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPNomeDoServidor)[0].InnerText.Trim();
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].FTPPorta = Convert.ToInt32(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.FTPPorta)[0].InnerText.Trim());
-                            lEncontrouTag = true;
-                        }
-                        #endregion
-
-                        #region --Certificado Digital
-
-                        //Se a tag <CertificadoInstalado> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].CertificadoInstalado = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoInstalado)[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-
-                        //Se a tag <CertificadoArquivo> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].CertificadoArquivo = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoArquivo)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <CertificadoSenha> existir ele pega o novo conteudo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].CertificadoSenha = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoSenha)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <certificado> existir ele pega o novo conteudo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].Certificado = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigital)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <CertificadoDigitalThumbPrint> existir ele pega o novo conteudo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint).Count != 0)
-                        {
-                            Empresas.Configuracoes[emp].CertificadoDigitalThumbPrint = ConfUniNfeElemento.GetElementsByTagName(NFeStrConstants.CertificadoDigitalThumbPrint)[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-
-                        #endregion
-
-#endif
-                        #endregion
                     }
                     #endregion
                 }
@@ -2083,28 +1561,15 @@ namespace NFe.Settings
                     ///
                     /// salva a configuracao da empresa
                     /// 
-                    bool versaoNova = true;
-                    if (File.Exists(Empresas.Configuracoes[emp].NomeArquivoConfig))
-                    {
-                        versaoNova = File.ReadAllText(Empresas.Configuracoes[emp].NomeArquivoConfig).Contains("<Empresa xmlns:xsi");
-                    }
 
-                    if (versaoNova)
-                    {
-                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                        Empresas.Configuracoes[emp].SalvarConfiguracao(false);
+                    //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                    Empresas.Configuracoes[emp].SalvarConfiguracao(false);
 
-                        ///
-                        /// salva o arquivo da lista de empresas
-                        this.GravarArqEmpresas();
+                    /// salva o arquivo da lista de empresas
+                    this.GravarArqEmpresas();
 
-                        ///
-                        /// salva as configuracoes gerais
-                        this.GravarConfigGeral();
-                    }
-                    else
-                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                        this.GravarConfig(true, false);
+                    /// salva as configuracoes gerais
+                    this.GravarConfigGeral();
 
                     cStat = "1";
                     xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
@@ -2177,27 +1642,6 @@ namespace NFe.Settings
                                                 new XElement("cStat", cStat),
                                                 new XElement("xMotivo", xMotivo)));
                     xml.Save(cArqRetorno);
-#if false
-                    XmlWriterSettings oSettings = new XmlWriterSettings();
-                    UTF8Encoding c = new UTF8Encoding(true);
-
-                    oSettings.Encoding = c;
-                    oSettings.Indent = true;
-                    oSettings.IndentChars = "";
-                    oSettings.NewLineOnAttributes = false;
-                    oSettings.OmitXmlDeclaration = false;
-
-                    XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
-
-                    oXmlGravar.WriteStartDocument();
-                    oXmlGravar.WriteStartElement("retAltConfUniNFe");
-                    oXmlGravar.WriteElementString("cStat", cStat);
-                    oXmlGravar.WriteElementString("xMotivo", xMotivo);
-                    oXmlGravar.WriteEndElement(); //retAltConfUniNFe
-                    oXmlGravar.WriteEndDocument();
-                    oXmlGravar.Flush();
-                    oXmlGravar.Close();
-#endif
                 }
             }
             catch (Exception ex)
@@ -2350,7 +1794,7 @@ namespace NFe.Settings
             else
             {
                 return emp;
-            }            
+            }
         }
         #endregion
 
@@ -2472,28 +1916,6 @@ namespace NFe.Settings
                                                     new XElement("cStat", cStat),
                                                     new XElement("xMotivo", xMotivo)));
                         xml.Save(cArqRetorno);
-
-#if false
-                        XmlWriterSettings oSettings = new XmlWriterSettings();
-                        UTF8Encoding c = new UTF8Encoding(true);
-
-                        oSettings.Encoding = c;
-                        oSettings.Indent = true;
-                        oSettings.IndentChars = "";
-                        oSettings.NewLineOnAttributes = false;
-                        oSettings.OmitXmlDeclaration = false;
-
-                        XmlWriter oXmlGravar = XmlWriter.Create(cArqRetorno, oSettings);
-
-                        oXmlGravar.WriteStartDocument();
-                        oXmlGravar.WriteStartElement("retCadConfUniNFe");
-                        oXmlGravar.WriteElementString("cStat", cStat);
-                        oXmlGravar.WriteElementString("xMotivo", xMotivo);
-                        oXmlGravar.WriteEndElement(); //retAltConfUniNFe
-                        oXmlGravar.WriteEndDocument();
-                        oXmlGravar.Flush();
-                        oXmlGravar.Close();
-#endif
                     }
                     else
                     {

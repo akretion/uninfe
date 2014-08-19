@@ -199,9 +199,9 @@ namespace NFe.Settings
         { 
             get
             {
-                return Propriedade.PastaExecutavel + "\\" + 
-                    this.CNPJ + 
-                    (this.Servico == TipoAplicativo.Nfe || this.Servico == TipoAplicativo.Todos ? "" : "\\" + this.Servico.ToString().ToLower());
+                return Propriedade.PastaExecutavel + "\\" + this.CNPJ + 
+                    (this.Servico == TipoAplicativo.Nfe || 
+                     this.Servico == TipoAplicativo.Todos ? "" : "\\" + this.Servico.ToString().ToLower());
             }
         }
         /// <summary>
@@ -810,7 +810,7 @@ namespace NFe.Settings
         }
 
         #region SalvarConfiguracao()
-        public void SalvarConfiguracao(bool validaCertificado)
+        public void SalvarConfiguracao(bool validaCertificado, bool validarConfig = true)
         {
             bool empresaNova = false;
             try
@@ -820,7 +820,8 @@ namespace NFe.Settings
                     empresaNova = true;
                     Empresas.Configuracoes.Add(this);
                 }
-                new ConfiguracaoApp().ValidarConfig(validaCertificado);
+                if (validarConfig)
+                    new ConfiguracaoApp().ValidarConfig(validaCertificado);
 
                 if (!Directory.Exists(this.PastaEmpresa))
                     Directory.CreateDirectory(this.PastaEmpresa);
