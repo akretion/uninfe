@@ -123,7 +123,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-                #region NF-e
+        #region NF-e
                 case Servicos.InutilizarNumerosNFe:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -179,9 +179,9 @@ namespace NFe.Service
                 case Servicos.DownloadNFe:
                     retorna = "NfeDownloadNF";
                     break;
-                #endregion
+        #endregion
 
-                #region MDF-e
+        #region MDF-e
                 case Servicos.ConsultaStatusServicoMDFe:
                     retorna = "MDFeStatusServico";
                     break;
@@ -197,9 +197,9 @@ namespace NFe.Service
                 case Servicos.RecepcaoEventoMDFe:
                     retorna = "MDFeRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
 
-                #region CT-e
+        #region CT-e
                 case Servicos.ConsultaStatusServicoCTe:
                     retorna = "CteStatusServico";
                     break;
@@ -221,7 +221,7 @@ namespace NFe.Service
                     else
                         retorna = "CteRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
             }
 
             return retorna;
@@ -242,13 +242,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-                #region GINFES
+        #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
-                #endregion
+        #endregion
 
-                #region THEMA
+        #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -272,9 +272,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region BETHA
+        #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -298,9 +298,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region CANOAS-RS (ABACO)
+        #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -324,41 +324,41 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
-                #endregion
+        #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
-                #region Blumenau-SC
+        #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
-                #endregion
+        #endregion
 
-                #region BHISS
+        #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region GIF
+        #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region DUETO
+        #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -382,23 +382,23 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region WEBISS
+        #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
-                #endregion
+        #endregion
 
-                #region PAULISTANA
+        #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
-                #endregion
+        #endregion
 
-                #region SALVADOR_BA
+        #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -422,16 +422,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region PORTOVELHENSE
+        #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region PRONIN
+        #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -448,9 +448,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region ISSONLINE4R (4R Sistemas)
+        #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -476,16 +476,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region DSF
+        #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region TECNOSISTEMAS
+        #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -509,19 +509,19 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region TIPLAN
+        #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
-                #region CARIOCA
+        #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
             }
 
             return retorna;
@@ -1510,11 +1510,12 @@ namespace NFe.Service
         /// Efetua uma leitura do XML da nota fiscal eletrônica e faz diversas conferências do seu conteúdo e bloqueia se não 
         /// estiver de acordo com as configurações do UNINFE
         /// </summary>
-        /// <param name="strArquivoNFe">Arquivo XML da NFe</param>
+        /// <param name="arquivoNFe">Arquivo XML da NFe</param>
+        /// <param name="dadosNFe">Objeto com o conteúdo das tags do XML</param>
         /// <returns>true = Validado com sucesso</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>16/04/2009</date>
-        protected bool ValidacoesGeraisXMLNFe(string strArquivoNFe, DadosNFeClass oDadosNFe)
+        protected bool ValidacoesGeraisXMLNFe(string arquivoNFe, DadosNFeClass dadosNFe)
         {
             int emp = Empresas.FindEmpresaByThread();
 
@@ -1522,185 +1523,95 @@ namespace NFe.Service
             int nPos = 0;
             string cTextoErro = "";
 
+            int tpEmis = Convert.ToInt32(dadosNFe.tpEmis);
+
             switch (Servico)
             {
                 case Servicos.AssinarValidarMDFeEnvioEmLote:
                 case Servicos.MontarLoteUmMDFe:
                     booValido = true;
                     nPos = 1;
-                    break;
+                    goto case Servicos.MontarLoteUmaNFe;
 
                 case Servicos.AssinarValidarCTeEnvioEmLote:
                 case Servicos.MontarLoteUmCTe:
-                    //Verificar o tipo de emissão Wbate com o configurado, se não bater vai retornar um erro para o ERP
-                    //Wandrey 15/08/2012
-                    if ((Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9")) ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "6")) ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "7")) ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "8")))
-                    {
-                        booValido = true;
-                    }
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
-                    }
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
-                    }
-                    else
-                    {
-                        booValido = false;
-
-                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "6")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
-                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "7")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
-                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "8")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente Normal " +
-                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "8")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
-                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "6")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-RS " +
-                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "7")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
-                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && oDadosNFe.tpEmis == "6")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-SP " +
-                                "e o XML está configurado para enviar ao SVC-AN.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "7")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
-                                "e o XML está configurado para enviar ao SVC-RS.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "8")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SVC-AN " +
-                                "e o XML está configurado para enviar ao SVC-SP.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
-                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
-                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
-                                "e o XML está configurado para enviar ao ambiente normal.\r\n\r\n";
-                        }
-
-                        cTextoErro += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
-
-                        throw new Exception(cTextoErro);
-                    }
-
-                    break;
-
                 case Servicos.AssinarValidarNFeEnvioEmLote:
                 case Servicos.MontarLoteUmaNFe:
-                    //Verificar o tipo de emissão se bate com o configurado, se não bater vai retornar um erro para o ERP
-                    //danasa 8-2009
-                    if ((Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "4" || oDadosNFe.tpEmis == "9")) ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && oDadosNFe.tpEmis == "6") ||
-                        (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && oDadosNFe.tpEmis == "7"))
+                    switch (Empresas.Configuracoes[emp].tpEmis)
                     {
-                        booValido = true;
-                    }
-                    // danasa 8-2009
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teContingencia && (oDadosNFe.tpEmis == "2"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
-                    }
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teDPEC && (oDadosNFe.tpEmis == "4"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
-                    }
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teFSDA && (oDadosNFe.tpEmis == "5"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
-                    }
-                    else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teOffLine && (oDadosNFe.tpEmis == "9"))
-                    {
-                        booValido = false; //Retorno somente falso mas sem exception para não fazer nada. Wandrey 19/06/2009
-                    }
-                    else
-                    {
-                        booValido = false;
+                        case (int)TipoEmissao.teNormal:
+                            switch (tpEmis)
+                            {
+                                case (int)TipoEmissao.teNormal:
+                                case (int)TipoEmissao.teFS:
+                                case (int)TipoEmissao.teFSDA:
+                                case (int)TipoEmissao.teDPEC:
+                                case (int)TipoEmissao.teOffLine:
+                                    booValido = true; break;
 
-                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && oDadosNFe.tpEmis == "3")
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
-                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
-                                "para o SVCAN.\r\n\r\n";
-                        }
+                                default:
+                                    goto default;
+                            }
+                            break;
 
-//                        // danasa 8-2009
-//                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "9"))
-//                        {
-//                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
-//                                "e o XML está configurado para enviar para o Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
-//                        }
+                        case (int)TipoEmissao.teSVCSP:
+                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP) { booValido = true; } else { goto default; }
+                            break;
 
+                        case (int)TipoEmissao.teSVCAN:
+                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN) { booValido = true; } else { goto default; }
+                            break;
 
-                        /*
-                        // danasa 8-2009
-                        if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teNormal && (oDadosNFe.tpEmis == "3" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "8"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao Ambiente da SEFAZ " +
-                                "(Secretaria Estadual da Fazenda) e o XML está configurado para enviar " +
-                                "para o SVCAN.\r\n\r\n";
-                        }
-                        // danasa 8-2009
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "8" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCAN " +
-                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "8" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCRS " +
-                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
-                        }
-                        else if (Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP && (oDadosNFe.tpEmis == "1" || oDadosNFe.tpEmis == "2" || oDadosNFe.tpEmis == "5" || oDadosNFe.tpEmis == "6" || oDadosNFe.tpEmis == "7" || oDadosNFe.tpEmis == "9"))
-                        {
-                            cTextoErro = "O UniNFe está configurado para enviar a Nota Fiscal ao SVCSP " +
-                                "e o XML está configurado para enviar para outro Ambiente da SEFAZ (Secretaria Estadual da Fazenda)\r\n\r\n";
-                        }
-                        */
+                        case (int)TipoEmissao.teSVCRS:
+                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS) { booValido = true; } else { goto default; }
+                            break;
 
-                        cTextoErro += "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+                        case (int)TipoEmissao.teFS:
+                        case (int)TipoEmissao.teDPEC:
+                        case (int)TipoEmissao.teFSDA:
+                        case (int)TipoEmissao.teOffLine:
+                            //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
+                            booValido = false;
+                            break;
 
-                        throw new Exception(cTextoErro);
+                        default:
+                            booValido = false;
+                            cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
+                                         "XML: " + Functions.EnumToString((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
+                                         "UniNFe: " + Functions.EnumToString((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
+                                         "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+
+                            throw new Exception(cTextoErro);
                     }
 
                     break;
             }
 
+            #region Verificar o ambiente da nota com o que está configurado no uninfe. Wandrey 20/08/2014
+            if (booValido)
+            {
+                switch (Empresas.Configuracoes[emp].AmbienteCodigo)
+                {
+                    case (int)NFe.Components.TipoAmbiente.taHomologacao:
+                        if (Convert.ToInt32(dadosNFe.tpAmb) == (int)NFe.Components.TipoAmbiente.taProducao)
+                        {
+                            booValido = false;
+                            cTextoErro = "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de produção e o UniNFe está configurado para ambiente de homologação.";
+                            throw new Exception(cTextoErro);
+                        }
+                        break;
+
+                    case (int)NFe.Components.TipoAmbiente.taProducao:
+                        if (Convert.ToInt32(dadosNFe.tpAmb) == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                        {
+                            booValido = false;
+                            cTextoErro = "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de homologação e o UniNFe está configurado para ambiente de produção.";
+                            throw new Exception(cTextoErro);
+                        }
+                        break;
+                }
+            }
+            #endregion
 
             #region Verificar se os valores das tag´s que compõe a chave da nfe estão batendo com as informadas na chave
             //Verificar se os valores das tag´s que compõe a chave da nfe estão batendo com as informadas na chave
@@ -1709,92 +1620,92 @@ namespace NFe.Service
                 cTextoErro = string.Empty;
 
                 #region Tag <cUF>
-                if (oDadosNFe.cUF != oDadosNFe.chavenfe.Substring(3 + nPos, 2))
+                if (dadosNFe.cUF != dadosNFe.chavenfe.Substring(3 + nPos, 2))
                 {
                     cTextoErro += "O código da UF informado na tag <cUF> está diferente do informado na chave da NF-e.\r\n" +
-                        "Código da UF informado na tag <cUF>: " + oDadosNFe.cUF + "\r\n" +
-                        "Código da UF informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(3 + nPos, 2) + "\r\n\r\n";
+                        "Código da UF informado na tag <cUF>: " + dadosNFe.cUF + "\r\n" +
+                        "Código da UF informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(3 + nPos, 2) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <tpEmis>
-                if (oDadosNFe.tpEmis != oDadosNFe.chavenfe.Substring(37 + nPos, 1))
+                if (dadosNFe.tpEmis != dadosNFe.chavenfe.Substring(37 + nPos, 1))
                 {
                     cTextoErro += "O código numérico informado na tag <tpEmis> está diferente do informado na chave da NF-e.\r\n" +
-                        "Código numérico informado na tag <tpEmis>: " + oDadosNFe.tpEmis + "\r\n" +
-                        "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(37 + nPos, 1) + "\r\n\r\n";
+                        "Código numérico informado na tag <tpEmis>: " + dadosNFe.tpEmis + "\r\n" +
+                        "Código numérico informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(37 + nPos, 1) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <cNF>
-                if (oDadosNFe.cNF != oDadosNFe.chavenfe.Substring(38 + nPos, 8))
+                if (dadosNFe.cNF != dadosNFe.chavenfe.Substring(38 + nPos, 8))
                 {
                     cTextoErro += "O código numérico informado na tag <cNF> está diferente do informado na chave da NF-e.\r\n" +
-                        "Código numérico informado na tag <cNF>: " + oDadosNFe.cNF + "\r\n" +
-                        "Código numérico informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(38 + nPos, 8) + "\r\n\r\n";
+                        "Código numérico informado na tag <cNF>: " + dadosNFe.cNF + "\r\n" +
+                        "Código numérico informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(38 + nPos, 8) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <mod>
-                if (oDadosNFe.mod != oDadosNFe.chavenfe.Substring(23 + nPos, 2))
+                if (dadosNFe.mod != dadosNFe.chavenfe.Substring(23 + nPos, 2))
                 {
                     cTextoErro += "O modelo informado na tag <mod> está diferente do informado na chave da NF-e.\r\n" +
-                        "Modelo informado na tag <mod>: " + oDadosNFe.mod + "\r\n" +
-                        "Modelo informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(23 + nPos, 2) + "\r\n\r\n";
+                        "Modelo informado na tag <mod>: " + dadosNFe.mod + "\r\n" +
+                        "Modelo informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(23 + nPos, 2) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <nNF>
-                if (Convert.ToInt32(oDadosNFe.nNF) != Convert.ToInt32(oDadosNFe.chavenfe.Substring(28 + nPos, 9)))
+                if (Convert.ToInt32(dadosNFe.nNF) != Convert.ToInt32(dadosNFe.chavenfe.Substring(28 + nPos, 9)))
                 {
                     cTextoErro += "O número da NF-e informado na tag <nNF> está diferente do informado na chave da NF-e.\r\n" +
-                        "Número da NFe informado na tag <nNF>: " + Convert.ToInt32(oDadosNFe.nNF).ToString() + "\r\n" +
-                        "Número da NFe informado na chave da NF-e: " + Convert.ToInt32(oDadosNFe.chavenfe.Substring(28 + nPos, 9)).ToString() + "\r\n\r\n";
+                        "Número da NFe informado na tag <nNF>: " + Convert.ToInt32(dadosNFe.nNF).ToString() + "\r\n" +
+                        "Número da NFe informado na chave da NF-e: " + Convert.ToInt32(dadosNFe.chavenfe.Substring(28 + nPos, 9)).ToString() + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <cDV>
-                if (oDadosNFe.cDV != oDadosNFe.chavenfe.Substring(46 + nPos, 1))
+                if (dadosNFe.cDV != dadosNFe.chavenfe.Substring(46 + nPos, 1))
                 {
                     cTextoErro += "O número do dígito verificador informado na tag <cDV> está diferente do informado na chave da NF-e.\r\n" +
-                        "Número do dígito verificador informado na tag <cDV>: " + oDadosNFe.cDV + "\r\n" +
-                        "Número do dígito verificador informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(46 + nPos, 1) + "\r\n\r\n";
+                        "Número do dígito verificador informado na tag <cDV>: " + dadosNFe.cDV + "\r\n" +
+                        "Número do dígito verificador informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(46 + nPos, 1) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <CNPJ> da tag <emit>
-                if (oDadosNFe.CNPJ != oDadosNFe.chavenfe.Substring(9 + nPos, 14))
+                if (dadosNFe.CNPJ != dadosNFe.chavenfe.Substring(9 + nPos, 14))
                 {
                     cTextoErro += "O CNPJ do emitente informado na tag <emit><CNPJ> está diferente do informado na chave da NF-e.\r\n" +
-                        "CNPJ do emitente informado na tag <emit><CNPJ>: " + oDadosNFe.CNPJ + "\r\n" +
-                        "CNPJ do emitente informado na chave da NF-e: " + oDadosNFe.chavenfe.Substring(9 + nPos, 14) + "\r\n\r\n";
+                        "CNPJ do emitente informado na tag <emit><CNPJ>: " + dadosNFe.CNPJ + "\r\n" +
+                        "CNPJ do emitente informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(9 + nPos, 14) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <serie>
-                if (Convert.ToInt32(oDadosNFe.serie) != Convert.ToInt32(oDadosNFe.chavenfe.Substring(25 + nPos, 3)))
+                if (Convert.ToInt32(dadosNFe.serie) != Convert.ToInt32(dadosNFe.chavenfe.Substring(25 + nPos, 3)))
                 {
                     cTextoErro += "A série informada na tag <serie> está diferente da informada na chave da NF-e.\r\n" +
-                        "Série informada na tag <cDV>: " + Convert.ToInt32(oDadosNFe.serie).ToString() + "\r\n" +
-                        "Série informada na chave da NF-e: " + Convert.ToInt32(oDadosNFe.chavenfe.Substring(25 + nPos, 3)).ToString() + "\r\n\r\n";
+                        "Série informada na tag <cDV>: " + Convert.ToInt32(dadosNFe.serie).ToString() + "\r\n" +
+                        "Série informada na chave da NF-e: " + Convert.ToInt32(dadosNFe.chavenfe.Substring(25 + nPos, 3)).ToString() + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
 
                 #region Tag <dEmi>
-                if (oDadosNFe.dEmi.Month.ToString("00") != oDadosNFe.chavenfe.Substring(7 + nPos, 2) ||
-                    oDadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) != oDadosNFe.chavenfe.Substring(5 + nPos, 2))
+                if (dadosNFe.dEmi.Month.ToString("00") != dadosNFe.chavenfe.Substring(7 + nPos, 2) ||
+                    dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) != dadosNFe.chavenfe.Substring(5 + nPos, 2))
                 {
                     cTextoErro += "A ano e mês da emissão informada na tag <dEmi> está diferente da informada na chave da NF-e.\r\n" +
-                        "Mês/Ano da data de emissão informada na tag <dEmi>: " + oDadosNFe.dEmi.Month.ToString("00") + "/" + oDadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
-                        "Mês/Ano informados na chave da NF-e: " + oDadosNFe.chavenfe.Substring(5 + nPos, 2) + "/" + oDadosNFe.chavenfe.Substring(7 + nPos, 2) + "\r\n\r\n";
+                        "Mês/Ano da data de emissão informada na tag <dEmi>: " + dadosNFe.dEmi.Month.ToString("00") + "/" + dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
+                        "Mês/Ano informados na chave da NF-e: " + dadosNFe.chavenfe.Substring(5 + nPos, 2) + "/" + dadosNFe.chavenfe.Substring(7 + nPos, 2) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion

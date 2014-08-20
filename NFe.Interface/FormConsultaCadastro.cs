@@ -68,7 +68,7 @@ namespace NFe.Interface
 
             this.cbEmissao.Items.Clear();
             this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teNormal));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teContingencia));
+            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFS));
             this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teDPEC));
             this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFSDA));
             this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCRS));

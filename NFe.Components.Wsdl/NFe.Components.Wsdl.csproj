@@ -1082,7 +1082,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRCteStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\schemas\CTe\cancCTeTiposBasico_v2.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1879,6 +1878,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PRiodeJaneiro-RJ-CARIOCA.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeAutorizacao3.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeCadConsultaCadastro2_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta2_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeInutilizacao2_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcao2_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcaoEvento_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRetAutorizacao3.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRetRecepcao2_200.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeStatusServico2_200.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

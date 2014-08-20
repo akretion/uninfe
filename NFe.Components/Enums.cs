@@ -486,7 +486,7 @@ namespace NFe.Components
         [Description("Normal")]
         teNormal = 1,
         [Description("Contingência com formulário de segurança (FS)")]
-        teContingencia = 2,
+        teFS = 2,
         [Description("Contingência com DPEC")]
         teDPEC = 4,
         [Description("Contingência com formulário de segurança (FS-DA)")]

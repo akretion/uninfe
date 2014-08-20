@@ -1718,20 +1718,22 @@ namespace NFe.Settings
 
                 const string DadosEmpresa = "DadosEmpresa";
 
-                temEmpresa = doc.DocumentElement.SelectNodes(DadosEmpresa).Count > 0;
-
-                if (temEmpresa)
+                foreach (XmlElement item in doc.DocumentElement)
                 {
-                    foreach (XmlElement item in doc.DocumentElement)
+                    if (doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.CNPJ] != null)
                     {
                         cnpj = doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.CNPJ].Value;
-                        if (doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico] != null)
-                            servico = doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico].Value;
-
-                        if (item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome).Count != 0)
-                        {
-                            nomeEmp = item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText;
-                        }
+                        temEmpresa = true;
+                    }
+                    if (doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico] != null)
+                    {
+                        servico = doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico].Value;
+                        temEmpresa = true;
+                    }
+                    if (item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome).Count != 0)
+                    {
+                        nomeEmp = item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText;
+                        temEmpresa = true;
                     }
                 }
             }
@@ -1739,28 +1741,27 @@ namespace NFe.Settings
             {
                 List<string> cLinhas = Functions.LerArquivo(arqXML);
 
-                temEmpresa = cLinhas.Count > 0;
-                if (temEmpresa)
+                foreach (string texto in cLinhas)
                 {
-                    foreach (string texto in cLinhas)
-                    {
-                        string[] dados = texto.Split('|');
-                        int nElementos = dados.GetLength(0);
-                        if (nElementos <= 1)
-                            continue;
+                    string[] dados = texto.Split('|');
+                    int nElementos = dados.GetLength(0);
+                    if (nElementos <= 1)
+                        continue;
 
-                        switch (dados[0].ToLower())
-                        {
-                            case "nome":
-                                nomeEmp = dados[1];
-                                break;
-                            case "cnpj":
-                                cnpj = dados[1];
-                                break;
-                            case "servico":
-                                servico = dados[1];
-                                break;
-                        }
+                    switch (dados[0].ToLower())
+                    {
+                        case "nome":
+                            nomeEmp = dados[1];
+                            temEmpresa = true;
+                            break;
+                        case "cnpj":
+                            cnpj = dados[1];
+                            temEmpresa = true;
+                            break;
+                        case "servico":
+                            servico = dados[1];
+                            temEmpresa = true;
+                            break;
                     }
                 }
             }
