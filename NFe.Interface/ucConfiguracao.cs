@@ -16,7 +16,7 @@ using NFe.Settings;
 namespace NFe.Interface
 {
     [ToolboxItem(false)]
-    public partial class ucConfiguracao: UserControl
+    public partial class ucConfiguracao : UserControl
     {
         #region local
         private X509Certificate2 oMeuCert;
@@ -53,8 +53,8 @@ namespace NFe.Interface
 
         public void focusNome()
         {
-            if(this.edtNome.Enabled)
-                if(string.IsNullOrEmpty(edtNome.Text))
+            if (this.edtNome.Enabled)
+                if (string.IsNullOrEmpty(edtNome.Text))
                 {
                     this.tabControl3.SelectedIndex = 0;
                     this.edtNome.Focus();
@@ -70,7 +70,7 @@ namespace NFe.Interface
         /// <returns></returns>
         private string CopiaPastaDeEmpresa(string origemCNPJ, string origemPasta, Empresa oEmpresa)
         {
-            if(string.IsNullOrEmpty(origemPasta))
+            if (string.IsNullOrEmpty(origemPasta))
                 return "";
 
             ///
@@ -78,7 +78,7 @@ namespace NFe.Interface
             ///
             string newPasta = origemPasta.Replace(origemCNPJ.Trim(), oEmpresa.CNPJ.Trim());
 
-            if(origemPasta.ToLower() == newPasta.ToLower())
+            if (origemPasta.ToLower() == newPasta.ToLower())
             {
                 int lastBackSlash = ConfiguracaoApp.RemoveEndSlash(origemPasta).LastIndexOf("\\");
                 newPasta = origemPasta.Insert(lastBackSlash, "\\" + oEmpresa.CNPJ);
@@ -196,119 +196,102 @@ namespace NFe.Interface
 
                 if (Empresas.Configuracoes.Count > 0)// && !string.IsNullOrEmpty(cnpj))
                 {
-                    //oEmpresa = Empresas.FindConfEmpresa(cnpj.Trim(), servico);
-                    //if (oEmpresa == null)
+                    ///
+                    /// danasa 20-9-2010
+                    /// tirado daqui pois se entrado + de 1 vez na configuracao da empresa, a propriedade CriaPastasAutomaticamente será definida como false 
+                    /// já que na segunda vez os nomes das pastas já estão atribuidas
+                    //oEmpresa.CriaPastasAutomaticamente = false;
+
+                    if (string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
                     {
                         ///
-                        /// danasa 20-9-2010
-                        /// tirado daqui pois se entrado + de 1 vez na configuracao da empresa, a propriedade CriaPastasAutomaticamente será definida como false 
-                        /// já que na segunda vez os nomes das pastas já estão atribuidas
-                        //oEmpresa.CriaPastasAutomaticamente = false;
-
-                        if (string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
+                        /// tenta achar uma configuracao valida
+                        /// 
+                        foreach (Empresa empresa in Empresas.Configuracoes)
                         {
-                            ///
-                            /// tenta achar uma configuracao valida
-                            /// 
-                            foreach (Empresa empresa in Empresas.Configuracoes)
+                            if (empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                             {
-                                if (empresa.CNPJ.Trim() != oEmpresa.CNPJ.Trim() && !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
-                                {
-                                    oEmpresa.PastaXmlEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnvio, oEmpresa);
-                                    oEmpresa.PastaXmlRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlRetorno, oEmpresa);
-                                    oEmpresa.PastaXmlErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlErro, oEmpresa);
-                                    oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
-                                    if (oEmpresa.Servico != TipoAplicativo.Nfse)
-                                    {
-                                        oEmpresa.PastaXmlEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEmLote, oEmpresa);
-                                        oEmpresa.PastaXmlEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnviado, oEmpresa);
-                                        oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
-                                        oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
-                                    }
-
-                                    oEmpresa.ConfiguracaoDanfe = empresa.ConfiguracaoDanfe;
-                                    oEmpresa.ConfiguracaoCCe = empresa.ConfiguracaoCCe;
-                                    oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
-                                    oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
-                                    oEmpresa.PastaDanfeMon = empresa.PastaDanfeMon;
-                                    oEmpresa.XMLDanfeMonNFe = empresa.XMLDanfeMonNFe;
-                                    oEmpresa.XMLDanfeMonProcNFe = empresa.XMLDanfeMonProcNFe;
-                                    oEmpresa.GravarRetornoTXTNFe = empresa.GravarRetornoTXTNFe;
-                                    oEmpresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
-                                    oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
-                                    oEmpresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
-                                    oEmpresa.CompactarNfe = empresa.CompactarNfe;
-                                    oEmpresa.IndSinc = empresa.IndSinc;
-
-                                    oEmpresa.CriaPastasAutomaticamente = true;
-                                    break;
-                                }
-                            }
-                            ///
-                            /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
-                            /// 
-                            if (string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
-                            {
-                                string subpasta = "";
-                                switch (servico)
-                                {
-                                    case TipoAplicativo.Todos:
-                                    case TipoAplicativo.Nfe:
-                                        break;
-
-                                    default:
-                                        subpasta = "\\" + servico.ToString().ToLower();
-                                        break;
-                                }
-
-                                oEmpresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Envio");
-                                oEmpresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Retorno");
-                                oEmpresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Erro");
-                                oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Validar");
+                                oEmpresa.PastaXmlEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnvio, oEmpresa);
+                                oEmpresa.PastaXmlRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlRetorno, oEmpresa);
+                                oEmpresa.PastaXmlErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlErro, oEmpresa);
+                                oEmpresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oEmpresa);
                                 if (oEmpresa.Servico != TipoAplicativo.Nfse)
                                 {
-                                    oEmpresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Enviado");
-                                    //oEmpresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Backup");
-                                    oEmpresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\EnvioEmLote");
-                                    oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\DownloadNFe");
+                                    oEmpresa.PastaXmlEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEmLote, oEmpresa);
+                                    oEmpresa.PastaXmlEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnviado, oEmpresa);
+                                    oEmpresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oEmpresa);
+                                    oEmpresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oEmpresa);
                                 }
+
+                                oEmpresa.ConfiguracaoDanfe = empresa.ConfiguracaoDanfe;
+                                oEmpresa.ConfiguracaoCCe = empresa.ConfiguracaoCCe;
+                                oEmpresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
+                                oEmpresa.PastaExeUniDanfe = empresa.PastaExeUniDanfe;
+                                oEmpresa.PastaDanfeMon = empresa.PastaDanfeMon;
+                                oEmpresa.XMLDanfeMonNFe = empresa.XMLDanfeMonNFe;
+                                oEmpresa.XMLDanfeMonProcNFe = empresa.XMLDanfeMonProcNFe;
+                                oEmpresa.GravarRetornoTXTNFe = empresa.GravarRetornoTXTNFe;
+                                oEmpresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
+                                oEmpresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
+                                oEmpresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
+                                oEmpresa.CompactarNfe = empresa.CompactarNfe;
+                                oEmpresa.IndSinc = empresa.IndSinc;
+
                                 oEmpresa.CriaPastasAutomaticamente = true;
+                                break;
                             }
                         }
-
-                        edtNome.Text = oEmpresa.Nome;
-                        edtCNPJ.Text = oEmpresa.CNPJ;
-                        cbServico.Text = AtribuirVlr_cbServico(oEmpresa.Servico);
-                        oEmpresa.X509Certificado = oEmpresa.BuscaConfiguracaoCertificado();
-
-                        oMeuCert = oEmpresa.X509Certificado;
-
-                        ckbCertificadoInstalado.Checked = oEmpresa.CertificadoInstalado;
-                        if (oEmpresa.CertificadoInstalado)
+                        ///
+                        /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
+                        /// 
+                        if (string.IsNullOrEmpty(oEmpresa.PastaXmlEnvio))
                         {
-                            DemonstraDadosCertificado();
-                            txtPinCertificado.Text = oEmpresa.CertificadoPIN;
+                            string subpasta = "";
+                            switch (servico)
+                            {
+                                case TipoAplicativo.Todos:
+                                case TipoAplicativo.Nfe:
+                                    break;
+
+                                default:
+                                    subpasta = "\\" + servico.ToString().ToLower();
+                                    break;
+                            }
+
+                            oEmpresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Envio");
+                            oEmpresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Retorno");
+                            oEmpresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Erro");
+                            oEmpresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Validar");
+                            if (oEmpresa.Servico != TipoAplicativo.Nfse)
+                            {
+                                oEmpresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\Enviado");
+                                oEmpresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\EnvioEmLote");
+                                oEmpresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, oEmpresa.CNPJ + subpasta + "\\DownloadNFe");
+                            }
+                            oEmpresa.CriaPastasAutomaticamente = true;
                         }
-                        else
-                        {
-                            txtArquivoCertificado.Text = oEmpresa.CertificadoArquivo;
-                            txtSenhaCertificado.Text = oEmpresa.CertificadoSenha;
-                        }
-                        //edtNome.Enabled = edtCNPJ.Enabled = cbServico.Enabled = false;
+                    }
+
+                    edtNome.Text = oEmpresa.Nome;
+                    oEmpresa.X509Certificado = oEmpresa.BuscaConfiguracaoCertificado();
+
+                    oMeuCert = oEmpresa.X509Certificado;
+
+                    ckbCertificadoInstalado.Checked = oEmpresa.CertificadoInstalado;
+                    if (oEmpresa.CertificadoInstalado)
+                    {
+                        DemonstraDadosCertificado();
+                        txtPinCertificado.Text = oEmpresa.CertificadoPIN;
+                    }
+                    else
+                    {
+                        txtArquivoCertificado.Text = oEmpresa.CertificadoArquivo;
+                        txtSenhaCertificado.Text = oEmpresa.CertificadoSenha;
                     }
                 }
-                /*
-                if (oEmpresa == null)
-                {
-                    oEmpresa = new Empresa();
-                    oEmpresa.tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
-                    oEmpresa.AmbienteCodigo = (int)NFe.Components.TipoAmbiente.taHomologacao;
-                    oEmpresa.Servico = Propriedade.TipoAplicativo;
-                    oEmpresa.UnidadeFederativaCodigo = 41;
-                    oEmpresa.DiretorioSalvarComo = "AM";
-                    oEmpresa.CNPJ = "";
-                }
-                */
+
+                edtCNPJ.Text = oEmpresa.CNPJ;
+                cbServico.Text = AtribuirVlr_cbServico(oEmpresa.Servico);
 
                 cboDiretorioSalvarComo.Visible = lbl_DiretorioSalvarComo.Visible =
                     textBox_PastaLote.Visible = lbl_textBox_PastaLote.Visible = button_SelectPastaLote.Visible =
@@ -436,9 +419,9 @@ namespace NFe.Interface
         {
             string retorna = "";
 
-            for(int i = 0; i < arrServico.Count; i++)
+            for (int i = 0; i < arrServico.Count; i++)
             {
-                if(((ComboElem)(new System.Collections.ArrayList(arrServico))[i]).Codigo == (int)servico)
+                if (((ComboElem)(new System.Collections.ArrayList(arrServico))[i]).Codigo == (int)servico)
                 {
                     retorna = ((ComboElem)(new System.Collections.ArrayList(arrServico))[i]).Valor;
                     break;
@@ -533,13 +516,13 @@ namespace NFe.Interface
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
-            if(oMeuCert != null)
+            if (oMeuCert != null)
             {
                 DateTime hoje = DateTime.Now;
                 TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
                 string mensagemRestante;
 
-                if(dif.Days > 0)
+                if (dif.Days > 0)
                 {
                     mensagemRestante = "Faltam " + dif.Days + " dias para vencer o certificado.";
                 }
@@ -555,7 +538,7 @@ namespace NFe.Interface
             else
             {
                 // Comparação feita para demonstrar possiveis certificados A3 que podem não estar presentes ou detectados. Renan - 18/06/2013
-                if(string.IsNullOrEmpty(oEmpresa.Certificado))
+                if (string.IsNullOrEmpty(oEmpresa.Certificado))
                 {
                     textBox_dadoscertificado.Clear();
                 }
@@ -582,16 +565,16 @@ namespace NFe.Interface
             //if (edtNome.Text.Length > 20)
             //    nome = edtNome.Text.Substring(0, 20);
 
-            if(string.IsNullOrEmpty(cnpj))
+            if (string.IsNullOrEmpty(cnpj))
             {
-                if(this.updateText != null)
+                if (this.updateText != null)
                     this.updateText("-- NOVA --");
             }
             else
             {
-                if(cnpjCurrent != cnpj)
+                if (cnpjCurrent != cnpj)
                 {
-                    if(!CNPJ.Validate(cnpj))
+                    if (!CNPJ.Validate(cnpj))
                     {
                         this.tabControl3.SelectedIndex = 0;
                         this.edtCNPJ.Focus();
@@ -600,39 +583,39 @@ namespace NFe.Interface
                     }
 
                     bool mudaPastas = true;
-                    if(Empresas.FindConfEmpresa(cnpj, servico) != null)
+                    if (Empresas.FindConfEmpresa(cnpj, servico) != null)
                     {
                         MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
+                        if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfe);
                             servicoCurrent = servico = TipoAplicativo.Nfe;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
+                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Cte);
                             servicoCurrent = servico = TipoAplicativo.Cte;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
+                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfse);
                             servicoCurrent = servico = TipoAplicativo.Nfse;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
+                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.MDFe);
                             servicoCurrent = servico = TipoAplicativo.MDFe;
                             MudarPastas(cnpj, servicoCurrent);
                             mudaPastas = false;
                         }
-                        else if(Empresas.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
+                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
                         {
                             cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.NFCe);
                             servicoCurrent = servico = TipoAplicativo.NFCe;
@@ -648,19 +631,19 @@ namespace NFe.Interface
                         }
                     }
 
-                    if(!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text) && mudaPastas)
+                    if (!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text) && mudaPastas)
                     {
                         mudaPastas = MessageBox.Show("CNPJ foi alterado e você já tem as pastas definidas. Deseja mudá-las para o novo CNPJ?", "CNPJ alterado", MessageBoxButtons.YesNo) == DialogResult.Yes;
                     }
 
-                    if(mudaPastas)
+                    if (mudaPastas)
                         MudarPastas(cnpj, servico);
                 }
 
                 cnpjCurrent = cnpj;
 
-                if(this.updateText != null)
-                    if(nome.Length > 20)
+                if (this.updateText != null)
+                    if (nome.Length > 20)
                         this.updateText(nome.Substring(0, 20));
                     else
                         this.updateText(nome);
@@ -671,7 +654,7 @@ namespace NFe.Interface
         {
             TextBox control = null;
 
-            switch(Convert.ToInt16(((Button)sender).Tag))
+            switch (Convert.ToInt16(((Button)sender).Tag))
             {
                 case 0: control = textBox_PastaEnvioXML; break;
                 case 1: control = textBox_PastaLote; break;
@@ -686,7 +669,7 @@ namespace NFe.Interface
                 case 10: control = textBox_PastaDownload; break;
             }
             this.folderBrowserDialog1.SelectedPath = control.Text;
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 control.Text = this.folderBrowserDialog1.SelectedPath;
             }
@@ -697,11 +680,11 @@ namespace NFe.Interface
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
-            if(ckbCertificadoInstalado.Checked)
+            if (ckbCertificadoInstalado.Checked)
             {
                 CertificadoDigital oCertDig = new CertificadoDigital();
 
-                if(oCertDig.SelecionarCertificado() == true)
+                if (oCertDig.SelecionarCertificado() == true)
                 {
                     oMeuCert = oCertDig.oCertificado;
                     oEmpresa.Certificado = oMeuCert.Subject;
@@ -712,7 +695,7 @@ namespace NFe.Interface
             }
             else
             {
-                if(File.Exists(txtArquivoCertificado.Text))
+                if (File.Exists(txtArquivoCertificado.Text))
                 {
                     FileInfo arq = new FileInfo(txtArquivoCertificado.Text);
                     this.openFileDialog1.InitialDirectory = arq.DirectoryName;
@@ -724,7 +707,7 @@ namespace NFe.Interface
                     this.openFileDialog1.FileName = null;
                 }
 
-                if(openFileDialog1.ShowDialog() == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtArquivoCertificado.Text = this.openFileDialog1.FileName;
                 }
@@ -733,13 +716,13 @@ namespace NFe.Interface
 
         private bool dirNOTexiste(string pasta)
         {
-            if(string.IsNullOrEmpty(pasta)) return false;
+            if (string.IsNullOrEmpty(pasta)) return false;
             return !Directory.Exists(pasta);
         }
 
         private void changed_Modificado(object sender, EventArgs e)
         {
-            if(stopChangedEvent) return;
+            if (stopChangedEvent) return;
 
             // danasa 1-2012
             try
@@ -799,15 +782,15 @@ namespace NFe.Interface
             try
             {
                 ftp.Connect();
-                if(ftp.IsConnected)
+                if (ftp.IsConnected)
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
-                    if(Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
-                        if(!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                        if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
                             string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
-                            if(MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaDestino.Text);
                             }
@@ -815,11 +798,11 @@ namespace NFe.Interface
 
                     ftp.ChangeDir(vCurrente);
 
-                    if(!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
-                        if(!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
+                    if (!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
+                        if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
                         {
                             string error = "Pasta '" + this.edtFTP_PastaRetornos.Text + "' não existe no FTP.";
-                            if(MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaRetornos.Text);
                             }
@@ -828,13 +811,13 @@ namespace NFe.Interface
                     MessageBox.Show("FTP conectado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if(ftp.IsConnected)
+                if (ftp.IsConnected)
                     ftp.Disconnect();
 
                 Cursor = Cursors.Default;
@@ -885,9 +868,9 @@ namespace NFe.Interface
         {
             TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
 
-            if(servico != servicoCurrent)
+            if (servico != servicoCurrent)
             {
-                if(Empresas.FindConfEmpresa(cnpjCurrent, servico) != null)
+                if (Empresas.FindConfEmpresa(cnpjCurrent, servico) != null)
                 {
                     this.tabControl3.SelectedIndex = 0;
                     this.cbServico.Focus();
@@ -896,12 +879,12 @@ namespace NFe.Interface
                 }
 
                 bool mudaPastas = true;
-                if(!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text))
+                if (!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text))
                 {
                     mudaPastas = MessageBox.Show("Serviço foi alterado e você já tem as pastas definidas. Deseja mudá-las para o novo Serviço?", "Serviço alterado", MessageBoxButtons.YesNo) == DialogResult.Yes;
                 }
 
-                if(mudaPastas)
+                if (mudaPastas)
                     MudarPastas(cnpjCurrent, servico);
 
                 servicoCurrent = servico;
@@ -935,19 +918,19 @@ namespace NFe.Interface
                 this.textBox_PastaLote.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\EnvioEmLote");
                 this.textBox_PastaEnviados.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Enviado");
 
-                if(!string.IsNullOrEmpty(textBox_PastaDownload.Text))
+                if (!string.IsNullOrEmpty(textBox_PastaDownload.Text))
                     this.textBox_PastaDownload.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\DownloadNFe");
 
-                if(!string.IsNullOrEmpty(textBox_PastaBackup.Text))
+                if (!string.IsNullOrEmpty(textBox_PastaBackup.Text))
                     textBox_PastaBackup.Text = Path.Combine(Propriedade.PastaExecutavel, cnpj + subpasta + "\\Backup");
             }
         }
 
         private void textBox_PastaEnvioXML_Validated(object sender, EventArgs e)
         {
-            if(!textBox_PastaEnvioXML.Modified) return;
+            if (!textBox_PastaEnvioXML.Modified) return;
 
-            if(MessageBox.Show(this, "Deseja redefinir os outros diretórios para que tenham a mesma estrutura do diretório de envio?",
+            if (MessageBox.Show(this, "Deseja redefinir os outros diretórios para que tenham a mesma estrutura do diretório de envio?",
                                    "Alterar diretórios?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 stopChangedEvent = true;
@@ -981,7 +964,7 @@ namespace NFe.Interface
             {
                 HabilitaOpcaoCompactar(false);
                 checkBoxCompactaNFe.Checked = false;
-            }            
+            }
         }
     }
 }

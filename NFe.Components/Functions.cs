@@ -779,27 +779,5 @@ namespace NFe.Components
             }
         }
         #endregion
-
-        /// <summary>
-        /// Converte um enumerador em string
-        /// </summary>
-        /// <param name="value">Enumerador a ser convertido</param>
-        /// <returns></returns>
-        public static string EnumToString(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            if(fi == null) return value.ToString();
-
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if(attributes.Length > 0)
-            {
-                return attributes[0].Description;
-            }
-            else
-            {
-                return value.ToString();
-            }
-        }
     }
 }

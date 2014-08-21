@@ -1284,16 +1284,16 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.ConsultarLoteRps:
-                            retorna = "ConsultarLoteRPS";
+                            retorna = "ConsultarLoteRps";
                             break;
                         case Servicos.ConsultarNfse:
                             retorna = "ConsultarNfse";
                             break;
                         case Servicos.ConsultarNfsePorRps:
-                            retorna = "ConsultarNfseRPS";
+                            retorna = "ConsultarNfsePorRps";
                             break;
                         case Servicos.ConsultarSituacaoLoteRps:
-                            retorna = "ConsultarSituacaoLoteRPS";
+                            retorna = "ConsultarSituacaoLoteRps";
                             break;
                         case Servicos.CancelarNfse:
                             retorna = "CancelarNfse";
@@ -1359,10 +1359,6 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            Boolean tudoOK = false;
-            Boolean bAssinado = false;
-            Boolean bValidadoSchema = false;
-            Boolean bValidacaoGeral = false;
 
             //Criar Pasta dos XML´s a ser enviado em Lote já assinados
             string pastaLoteAssinado = pasta + Propriedade.NomePastaXMLAssinado;
@@ -1400,70 +1396,44 @@ namespace NFe.Service
                 }
 
                 //Validações gerais
-                if (ValidacoesGeraisXMLNFe(NomeArquivoXML, oDadosNFe))
-                {
-                    bValidacaoGeral = true;
-                }
+                ValidacoesGeraisXMLNFe(NomeArquivoXML, oDadosNFe);
 
                 //Assinar o arquivo XML
-                if (bValidacaoGeral)
-                {
-                    AssinaturaDigital assDig = new AssinaturaDigital();
-
-                    assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosNFe.cUF));
-
-                    bAssinado = true;
-                }
+                AssinaturaDigital assDig = new AssinaturaDigital();
+                assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosNFe.cUF));
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
-                if (bValidacaoGeral && bAssinado)
+                ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(oDadosNFe.cUF));
+                string cResultadoValidacao = validar.ValidarArqXML(NomeArquivoXML);
+                if (cResultadoValidacao != "")
                 {
-                    ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(oDadosNFe.cUF));
-
-                    string cResultadoValidacao = validar.ValidarArqXML(NomeArquivoXML);
-                    if (cResultadoValidacao == "")
-                    {
-                        bValidadoSchema = true;
-                    }
-                    else
-                    {
-                        //Registrar o erro da validação do schema para o sistema ERP
-                        throw new Exception(cResultadoValidacao);
-                    }
+                    //Registrar o erro da validação do schema para o sistema ERP
+                    throw new Exception(cResultadoValidacao);
                 }
 
                 //Mover o arquivo XML da pasta de lote para a pasta de XML´s assinados
-                if (bValidadoSchema)
+                //Se a pasta de assinados não existir, vamos criar
+                if (!Directory.Exists(pastaLoteAssinado))
                 {
-                    //Se a pasta de assinados não existir, vamos criar
-                    if (!Directory.Exists(pastaLoteAssinado))
-                    {
-                        Directory.CreateDirectory(pastaLoteAssinado);
-                    }
-
-                    FileInfo fiDestino = new FileInfo(arqDestino);
-
-                    if (!File.Exists(arqDestino) || (long)DateTime.Now.Subtract(fiDestino.LastWriteTime).TotalMilliseconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
-                    {
-                        //Mover o arquivo para a pasta de XML´s assinados
-                        //FileInfo oArquivo = new FileInfo(NomeArquivoXML);
-                        //oArquivo.MoveTo(arqDestino);
-                        Functions.Move(NomeArquivoXML, arqDestino);
-
-                        tudoOK = true;
-                    }
-                    else
-                    {
-                        oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
-
-                        throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
-                            NomeArquivoXML);
-                    }
+                    Directory.CreateDirectory(pastaLoteAssinado);
                 }
 
-                if (tudoOK)
+                FileInfo fiDestino = new FileInfo(arqDestino);
+
+                if (!File.Exists(arqDestino) || (long)DateTime.Now.Subtract(fiDestino.LastWriteTime).TotalMilliseconds >= 60000) //60.000 ms que corresponde á 60 segundos que corresponde a 1 minuto
+                {
+                    //Mover o arquivo para a pasta de XML´s assinados
+                    Functions.Move(NomeArquivoXML, arqDestino);
+
+                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
+                }
+
+                else
                 {
                     oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
+
+                    throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
+                        NomeArquivoXML);
                 }
             }
             catch (Exception ex)
@@ -1515,7 +1485,7 @@ namespace NFe.Service
         /// <returns>true = Validado com sucesso</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>16/04/2009</date>
-        protected bool ValidacoesGeraisXMLNFe(string arquivoNFe, DadosNFeClass dadosNFe)
+        protected void ValidacoesGeraisXMLNFe(string arquivoNFe, DadosNFeClass dadosNFe)
         {
             int emp = Empresas.FindEmpresaByThread();
 
@@ -1575,10 +1545,9 @@ namespace NFe.Service
                             break;
 
                         default:
-                            booValido = false;
                             cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
-                                         "XML: " + Functions.EnumToString((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
-                                         "UniNFe: " + Functions.EnumToString((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
+                                         "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
+                                         "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
                                          "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
 
                             throw new Exception(cTextoErro);
@@ -1595,7 +1564,6 @@ namespace NFe.Service
                     case (int)NFe.Components.TipoAmbiente.taHomologacao:
                         if (Convert.ToInt32(dadosNFe.tpAmb) == (int)NFe.Components.TipoAmbiente.taProducao)
                         {
-                            booValido = false;
                             cTextoErro = "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de produção e o UniNFe está configurado para ambiente de homologação.";
                             throw new Exception(cTextoErro);
                         }
@@ -1604,7 +1572,6 @@ namespace NFe.Service
                     case (int)NFe.Components.TipoAmbiente.taProducao:
                         if (Convert.ToInt32(dadosNFe.tpAmb) == (int)NFe.Components.TipoAmbiente.taHomologacao)
                         {
-                            booValido = false;
                             cTextoErro = "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de homologação e o UniNFe está configurado para ambiente de produção.";
                             throw new Exception(cTextoErro);
                         }
@@ -1717,7 +1684,6 @@ namespace NFe.Service
             }
             #endregion
 
-            return booValido;
         }
         #endregion
 
