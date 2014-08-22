@@ -68,7 +68,11 @@ namespace NFe.Service
             /// <summary>
             /// Versão de schema do XML
             /// </summary>
-            versao
+            versao,
+            /// <summary>
+            /// Modelo do documento fiscal
+            /// </summary>
+            mod            
         }
         #endregion
 
@@ -225,7 +229,7 @@ namespace NFe.Service
         /// <param name="strChaveNFe">Chave da NFe</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/04/2009</date>
-        public void InserirNfeFluxo(string strChaveNFe, string fullPathNFe)
+        public void InserirNfeFluxo(string strChaveNFe, string mod, string fullPathNFe)
         {
             string nomeArqNFe = Functions.ExtrairNomeArq(fullPathNFe, ".xml") + ".xml";
 
@@ -297,6 +301,9 @@ namespace NFe.Service
 
                             //tag versao
                             this.CriarTag(xd, cl, ElementoEditavel.versao.ToString(), versaoXmlNFe);
+
+                            //tag mod
+                            this.CriarTag(xd, cl, ElementoEditavel.mod.ToString(), mod);
 
                             //Fechar o arquovo e gravar o conteúdo no HD
                             lfile.Close(); //Fechar o FileStream
@@ -949,6 +956,7 @@ namespace NFe.Service
                             string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");
                             string NomeArquivoEmProcessamento = Empresas.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
                             string NomeArquivoAssinado = Empresas.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            string mod = Functions.LerTag(documentoElemento, ElementoEditavel.mod.ToString(), "");
                             bool excluiNota = false;
                             if (File.Exists(NomeArquivoEmProcessamento))
                             {
@@ -956,7 +964,7 @@ namespace NFe.Service
                                 DateTime dPedRec = DateTime.Now.AddMinutes(-60);
 
                                 tMed = Convert.ToInt32(Functions.LerTag(documentoElemento, ElementoEditavel.tMed.ToString(), tMed.ToString()));
-                                dPedRec = Convert.ToDateTime(Functions.LerTag(documentoElemento, ElementoEditavel.dPedRec.ToString(), dPedRec.ToString("yyyy-MM-dd HH:mm:ss")));
+                                dPedRec = Convert.ToDateTime(Functions.LerTag(documentoElemento, ElementoEditavel.dPedRec.ToString(), dPedRec.ToString("yyyy-MM-dd HH:mm:ss")));                                
 
                                 //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
                                 //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
@@ -976,14 +984,7 @@ namespace NFe.Service
                                         oReciboCons.nRec = nRec;
                                         oReciboCons.tMed = tMed;
                                         oReciboCons.versao = versao;
-                                        string chaveNfe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
-                                        if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "NFE")
-                                            oReciboCons.Servico = TipoAplicativo.Nfe;
-                                        else if (chaveNfe.Substring(0, 3).ToUpper().Trim() == "CTE")
-                                            oReciboCons.Servico = TipoAplicativo.Cte;
-                                        else if (chaveNfe.Substring(0, 4).ToUpper().Trim() == "MDFE")
-                                            oReciboCons.Servico = TipoAplicativo.MDFe;
-
+                                        oReciboCons.mod = mod;
                                         lstRecibo.Add(oReciboCons);
                                     }
                                 }
@@ -1140,13 +1141,13 @@ namespace NFe.Service
         /// </summary>
         public DateTime dPedRec;
         /// <summary>
-        /// Se é um CTe, NFe ou MDFe
-        /// </summary>
-        public TipoAplicativo Servico;
-        /// <summary>
         /// Versão do Schema do XML da NFe
         /// </summary>
         public string versao;
+        /// <summary>
+        /// Modelo do documento fiscal
+        /// </summary>
+        public string mod;
     }
     #endregion
 }

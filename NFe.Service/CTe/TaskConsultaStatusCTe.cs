@@ -39,13 +39,7 @@ namespace NFe.Service
                 PedSta(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                dadosPedSta.cUF, 
-                                                dadosPedSta.tpAmb, 
-                                                dadosPedSta.tpEmis, 
-                                                string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
 
 #if true
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -142,7 +136,7 @@ namespace NFe.Service
                 if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
                 {
                     this.dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
-                    
+
                     // para que o validador não rejeite, excluo a tag <tpEmis>
                     doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
 

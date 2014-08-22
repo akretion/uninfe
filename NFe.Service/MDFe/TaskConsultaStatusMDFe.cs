@@ -42,7 +42,7 @@ namespace NFe.Service
                 PedSta(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var statusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);

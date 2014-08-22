@@ -115,7 +115,9 @@ namespace NFe.Service
                         emp,
                         ufParaWS,
                         dadosEnvEvento.eventos[0].tpAmb,
-                        tpEmis, string.Empty);
+                        tpEmis, 
+                        string.Empty, 
+                        dadosEnvEvento.eventos[0].mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//"RecepcaoEvento");
@@ -643,11 +645,11 @@ namespace NFe.Service
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
                     dadosEnvEvento.eventos.Add(new Evento());
-                    dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
-                    dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
-                    dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                    dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("nSeqEvento")[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("nSeqEvento")[0].InnerText);
                 }
             }
         }

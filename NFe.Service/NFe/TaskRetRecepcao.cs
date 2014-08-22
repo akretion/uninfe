@@ -48,7 +48,8 @@ namespace NFe.Service
                                                 dadosPedRec.cUF, 
                                                 dadosPedRec.tpAmb, 
                                                 dadosPedRec.tpEmis, 
-                                                dadosPedRec.versao);
+                                                dadosPedRec.versao,
+                                                dadosPedRec.mod);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
@@ -110,6 +111,7 @@ namespace NFe.Service
             dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
             dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
             dadosPedRec.nRec = string.Empty;
+            dadosPedRec.mod = "55";
 
             XmlDocument doc = new XmlDocument();
             doc.Load(cArquivoXML);
@@ -125,22 +127,32 @@ namespace NFe.Service
                 dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
                 dadosPedRec.versao = consReciNFeElemento.Attributes["versao"].InnerText;
 
+                bool saveXML = false;
                 if (consReciNFeElemento.GetElementsByTagName("cUF").Count != 0)
                 {
                     dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("cUF")[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <cUF>
                     doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("cUF")[0]);
-                    /// Salvo o arquivo modificado
-                    doc.Save(cArquivoXML);
+                    saveXML = true;
                 }
                 if (consReciNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
                 {
                     dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <tpEmis>
                     doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("tpEmis")[0]);
-                    /// Salvo o arquivo modificado
-                    doc.Save(cArquivoXML);
+                    saveXML = true;
                 }
+                if (consReciNFeElemento.GetElementsByTagName("mod").Count != 0)
+                {
+                    dadosPedRec.mod = consReciNFeElemento.GetElementsByTagName("mod")[0].InnerText;
+                    /// Para que o validador não rejeite, excluo a tag <mod>
+                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("mod")[0]);
+                    saveXML = true;
+                }
+
+                /// Salvo o arquivo modificado
+                if (saveXML)
+                    doc.Save(cArquivoXML);
             }
 
         }

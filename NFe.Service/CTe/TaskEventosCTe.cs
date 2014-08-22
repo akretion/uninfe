@@ -51,13 +51,8 @@ namespace NFe.Service
                     ufParaWS = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                ufParaWS, 
-                                                dadosEnvEvento.eventos[0].tpAmb, 
-                                                tpEmis, 
-                                                string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis);
+
                 object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, ufParaWS));
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
@@ -70,12 +65,12 @@ namespace NFe.Service
                 //Assinar o XML
                 oAD.Assinar(NomeArquivoXML, emp, cOrgao);
 
-                oInvocarObj.Invocar(wsProxy, 
-                                    oRecepcaoEvento, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oRecepcaoEvento,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, ufParaWS), 
-                                    oCabecMsg, 
-                                    this, 
-                                    Propriedade.ExtEnvio.PedEve.Replace(".xml", ""), 
+                                    oCabecMsg,
+                                    this,
+                                    Propriedade.ExtEnvio.PedEve.Replace(".xml", ""),
                                     Propriedade.ExtRetorno.Eve.Replace(".xml", ""));
 
                 //Ler o retorno

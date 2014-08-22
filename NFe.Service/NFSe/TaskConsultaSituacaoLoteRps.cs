@@ -39,15 +39,13 @@ namespace NFe.Service.NFSe
                 //Definir o objeto do WebService
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                WebServiceProxy wsProxy = null;
-                object pedSitLoteRps = null;
-                string cabecMsg = "";
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe);
+                object pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                string cabecMsg = "";
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
@@ -56,87 +54,21 @@ namespace NFe.Service.NFSe
                         wsProxy.Betha = new Betha();
                         break;
 
-                    case PadroesNFSe.THEMA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
                     case PadroesNFSe.CANOAS_RS:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
 
-                    case PadroesNFSe.ISSNET:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.BLUMENAU_SC:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
                     case PadroesNFSe.BHISS:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
-                        break;
-
-                    case PadroesNFSe.GIF:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.DUETO:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         break;
 
                     case PadroesNFSe.WEBISS:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
-                    case PadroesNFSe.PRONIN:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe,string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.PAULISTANA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.SALVADOR_BA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.DSF:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
                     case PadroesNFSe.TECNOSISTEMAS:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
-
-                    case PadroesNFSe.TIPLAN:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    case PadroesNFSe.CARIOCA:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, string.Empty);
-                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedSitLoteRps.cMunicipio));
-                        break;
-
-                    default:
-                        throw new Exception("Não foi possível detectar o padrão da NFS-e.");
                 }
                 if (padraoNFSe != PadroesNFSe.IPM)
                 {

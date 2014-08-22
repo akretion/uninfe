@@ -85,7 +85,7 @@ namespace NFe.Service
                             IsConnectedToInternet();
                             this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarURLNfseSerie());
                             break;
-                    #endregion
+                        #endregion
 
                         #region NFe
                         case Servicos.PedidoConsultaSituacaoNFe:
@@ -1106,24 +1106,7 @@ namespace NFe.Service
                 {
                     //Atualizar a tag da data e hora da ultima consulta do recibo aumentando 10 segundos
                     fluxoNfe.AtualizarDPedRec(reciboCons.nRec, DateTime.Now.AddSeconds(10));
-
-                    switch (reciboCons.Servico)
-                    {
-                        case TipoAplicativo.Cte:
-                            tipoServico.InvokeMember("XmlPedRecCTe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
-                            break;
-
-                        case TipoAplicativo.Nfe:
-                            tipoServico.InvokeMember("XmlPedRec", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
-                            break;
-
-                        case TipoAplicativo.MDFe:
-                            tipoServico.InvokeMember("XmlPedRecMDFe", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao });
-                            break;
-
-                        default:
-                            break;
-                    }
+                    tipoServico.InvokeMember("XmlPedRec", System.Reflection.BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao, reciboCons.mod });
                 }
             }
         }

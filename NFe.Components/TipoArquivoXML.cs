@@ -87,6 +87,7 @@ namespace NFe.Components
                             versaoXML = "-" + versao;
 
                         InfSchema schema = null;
+                        string chave = "";
                         try
                         {
                             if (string.IsNullOrEmpty(padraoNFSe))
@@ -126,7 +127,6 @@ namespace NFe.Components
                                 }
                             }
 
-                            string chave = "";
                             if (string.IsNullOrEmpty(padraoNFSe))
                                 chave = TipoAplicativo.Nfe.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
                             else
@@ -137,7 +137,7 @@ namespace NFe.Components
                         catch
                         {
                             throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", string.IsNullOrEmpty(padraoNFSe) ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e") +
-                                "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação.");
+                                "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação. (Chave: " + chave + ")");
                         }
 
                         nRetornoTipoArq = schema.ID;

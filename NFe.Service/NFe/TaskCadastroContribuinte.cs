@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskCadastroContribuinte: TaskAbst
+    public class TaskCadastroContribuinte : TaskAbst
     {
         public TaskCadastroContribuinte()
         {
@@ -37,16 +37,10 @@ namespace NFe.Service
                 //Ler o XML para pegar parâmetros de envio
                 ConsCad(NomeArquivoXML);
 
-                if(this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = 
-                        ConfiguracaoApp.DefinirWS(  Servico, 
-                                                    emp, 
-                                                    dadosConsCad.cUF, 
-                                                    dadosConsCad.tpAmb, 
-                                                    (int)NFe.Components.TipoEmissao.teNormal, 
-                                                    dadosConsCad.versao);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, (int)NFe.Components.TipoEmissao.teNormal, dadosConsCad.versao);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsCad = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -57,11 +51,11 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oConsCad, 
-                                        wsProxy.NomeMetodoWS[0], 
-                                        oCabecMsg, 
-                                        this, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oConsCad,
+                                        wsProxy.NomeMetodoWS[0],
+                                        oCabecMsg,
+                                        this,
                                         "-cons-cad", "-ret-cons-cad");
 
 #if old
@@ -92,11 +86,11 @@ namespace NFe.Service
                         dadosConsCad.versao);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string ExtRet = string.Empty;
 
-                if(this.vXmlNfeDadosMsgEhXML) //Se for XML
+                if (this.vXmlNfeDadosMsgEhXML) //Se for XML
                     ExtRet = Propriedade.ExtEnvio.ConsCad_XML;
                 else //Se for TXT
                     ExtRet = Propriedade.ExtEnvio.ConsCad_TXT;
@@ -142,7 +136,7 @@ namespace NFe.Service
             this.dadosConsCad.UF = string.Empty;
             this.dadosConsCad.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLConsCad;
 
-            if(Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
                 Functions.PopulateClasse(this.dadosConsCad, cLinhas);
@@ -177,7 +171,7 @@ namespace NFe.Service
                 doc.Load(cArquivoXML);
 
                 XmlNodeList ConsCadList = doc.GetElementsByTagName("ConsCad");
-                foreach(XmlNode ConsCadNode in ConsCadList)
+                foreach (XmlNode ConsCadNode in ConsCadList)
                 {
                     XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
 
@@ -185,7 +179,7 @@ namespace NFe.Service
 
                     XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
 
-                    foreach(XmlNode infConsNode in infConsList)
+                    foreach (XmlNode infConsNode in infConsList)
                     {
                         XmlElement infConsElemento = (XmlElement)infConsNode;
                         Functions.PopulateClasse(this.dadosConsCad, infConsElemento);

@@ -31,12 +31,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
-                        Servico,
-                        emp,
-                        Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)),
-                        oDadosenvDownload.tpAmb,
-                        1, string.Empty);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oDownloadEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);

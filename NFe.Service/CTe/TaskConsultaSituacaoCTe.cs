@@ -39,13 +39,7 @@ namespace NFe.Service
                 PedSit(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                dadosPedSit.cUF, 
-                                                dadosPedSit.tpAmb, 
-                                                dadosPedSit.tpEmis, 
-                                                string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oConsulta = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedSit.cUF));
@@ -56,8 +50,8 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTePedSit);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oConsulta, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oConsulta,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedSit.cUF), 
                                     oCabecMsg, this);
 

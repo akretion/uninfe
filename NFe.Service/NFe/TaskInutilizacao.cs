@@ -41,13 +41,13 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString());
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// NomeClasseWS(Servico, dadosPedInut.cUF));
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    //Atribuir conteúdo p ara duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, "cUF", dadosPedInut.cUF.ToString());
                     wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedInut.versao);
 
@@ -148,48 +148,6 @@ namespace NFe.Service
                 //      versao|3.10
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
                 Functions.PopulateClasse(dadosPedInut, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            dadosPedInut.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "tpemis":
-                            dadosPedInut.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cuf":
-                            dadosPedInut.cUF = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "ano":
-                            dadosPedInut.ano = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cnpj":
-                            dadosPedInut.CNPJ = dados[1].Trim();
-                            break;
-                        case "mod":
-                            dadosPedInut.mod = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "serie":
-                            dadosPedInut.serie = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "nnfini":
-                            dadosPedInut.nNFIni = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "nnffin":
-                            dadosPedInut.nNFFin = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "xjust":
-                            dadosPedInut.xJust = dados[1].Trim();
-                            break;
-                        case "versao":
-                            dadosPedInut.versao = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -209,31 +167,7 @@ namespace NFe.Service
                     {
                         XmlElement infInutElemento = (XmlElement)infInutNode;
                         Functions.PopulateClasse(dadosPedInut, infInutElemento);                   
-#if false
-                        if (infInutElemento.GetElementsByTagName("tpAmb")[0] != null)
-                            dadosPedInut.tpAmb = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("tpAmb")[0].InnerText);
 
-                        if (infInutElemento.GetElementsByTagName("cUF")[0] != null)
-                            dadosPedInut.cUF = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("cUF")[0].InnerText);
-
-                        if (infInutElemento.GetElementsByTagName("ano")[0] != null)
-                            dadosPedInut.ano = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("ano")[0].InnerText);
-
-                        if (infInutElemento.GetElementsByTagName("CNPJ")[0] != null)
-                            dadosPedInut.CNPJ = infInutElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-
-                        if (infInutElemento.GetElementsByTagName("mod")[0] != null)
-                            dadosPedInut.mod = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("mod")[0].InnerText);
-
-                        if (infInutElemento.GetElementsByTagName("serie")[0] != null)
-                            dadosPedInut.serie = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("serie")[0].InnerText);
-
-                        if (infInutElemento.GetElementsByTagName("nNFIni")[0] != null)
-                            dadosPedInut.nNFIni = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFIni")[0].InnerText);
-
-                        if (infInutElemento.GetElementsByTagName("nNFFin")[0] != null)
-                            dadosPedInut.nNFFin = Convert.ToInt32("0" + infInutElemento.GetElementsByTagName("nNFFin")[0].InnerText);
-#endif               
                         if (infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
                         {
                             dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);

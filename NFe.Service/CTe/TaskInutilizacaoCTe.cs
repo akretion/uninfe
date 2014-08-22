@@ -39,13 +39,7 @@ namespace NFe.Service
                 PedInut(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                dadosPedInut.cUF, 
-                                                dadosPedInut.tpAmb, 
-                                                dadosPedInut.tpEmis, 
-                                                string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedInut.cUF));
@@ -62,10 +56,10 @@ namespace NFe.Service
                 oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oInutilizacao, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oInutilizacao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedInut.cUF), 
-                                    oCabecMsg, 
+                                    oCabecMsg,
                                     this, "-ped-inu", "-inu");
 
                 //Ler o retorno do webservice
@@ -100,7 +94,7 @@ namespace NFe.Service
             XmlDocument doc = new XmlDocument();
             doc.Load(cArquivoXML);
 
-            XmlNodeList InutNFeList =  doc.GetElementsByTagName("inutCTe");
+            XmlNodeList InutNFeList = doc.GetElementsByTagName("inutCTe");
 
             foreach (XmlNode InutNFeNode in InutNFeList)
             {

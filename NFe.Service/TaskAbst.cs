@@ -1369,9 +1369,9 @@ namespace NFe.Service
             try
             {
                 //Fazer uma leitura de algumas tags do XML
-                DadosNFeClass oDadosNFe = this.LerXMLNFe(NomeArquivoXML);
-                string ChaveNfe = oDadosNFe.chavenfe;
-                string TpEmis = oDadosNFe.tpEmis;
+                DadosNFeClass dadosNFe = this.LerXMLNFe(NomeArquivoXML);
+                string ChaveNfe = dadosNFe.chavenfe;
+                string TpEmis = dadosNFe.tpEmis;
 
                 //Inserir NFe no XML de controle do fluxo
                 FluxoNfe oFluxoNfe = new FluxoNfe();
@@ -1396,14 +1396,14 @@ namespace NFe.Service
                 }
 
                 //Validações gerais
-                ValidacoesGeraisXMLNFe(NomeArquivoXML, oDadosNFe);
+                ValidacoesGeraisXMLNFe(NomeArquivoXML, dadosNFe);
 
                 //Assinar o arquivo XML
                 AssinaturaDigital assDig = new AssinaturaDigital();
-                assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosNFe.cUF));
+                assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosNFe.cUF));
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
-                ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(oDadosNFe.cUF));
+                ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(dadosNFe.cUF));
                 string cResultadoValidacao = validar.ValidarArqXML(NomeArquivoXML);
                 if (cResultadoValidacao != "")
                 {
@@ -1425,12 +1425,12 @@ namespace NFe.Service
                     //Mover o arquivo para a pasta de XML´s assinados
                     Functions.Move(NomeArquivoXML, arqDestino);
 
-                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
+                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, dadosNFe.mod, arqDestino);
                 }
 
                 else
                 {
-                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, arqDestino);
+                    oFluxoNfe.InserirNfeFluxo(ChaveNfe, dadosNFe.mod, arqDestino);
 
                     throw new IOException("Esta nota fiscal já está na pasta de Notas Fiscais assinadas e em processo de envio, desta forma não é possível enviar a mesma novamente.\r\n" +
                         NomeArquivoXML);
@@ -1803,38 +1803,11 @@ namespace NFe.Service
         /// <param name="empresa">Código da empresa</param>
         /// <param name="nRec">Número do recibo a ser consultado</param>
         /// <param name="versao">Versao do Schema XML</param>
-        public void XmlPedRec(int empresa, string nRec, string versao)
+        /// <param name="mod">Modelo do documento fiscal</param>
+        public void XmlPedRec(int empresa, string nRec, string versao, string mod)
         {
             GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteNFe, nRec, versao);
-        }
-        #endregion
-
-        #region XmlPedRecCTe()
-        /// <summary>
-        /// Gerar o XML de consulta do recibo do lote da cte
-        /// </summary>
-        /// <param name="empresa">Código da empresa</param>
-        /// <param name="nRec">Número do recibo a ser consultado</param>
-        /// <param name="versao">Versao do Schema XML</param>
-        public void XmlPedRecCTe(int empresa, string nRec, string versao)
-        {
-            GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteCTe, nRec, versao);
-        }
-        #endregion
-
-        #region XmlPedRecMDFe()
-        /// <summary>
-        /// Gerar o XML de consulta do recibo do lote da cte
-        /// </summary>
-        /// <param name="empresa">Código da empresa</param>
-        /// <param name="nRec">Número do recibo a ser consultado</param>
-        /// <param name="versao">Versao do Schema XML</param>
-        public void XmlPedRecMDFe(int empresa, string nRec, string versao)
-        {
-            GerarXML gerarXML = new GerarXML(empresa);
-            gerarXML.XmlPedRec(Servicos.PedidoSituacaoLoteMDFe, nRec, versao);
+            gerarXML.XmlPedRec(mod, nRec, versao);
         }
         #endregion
 

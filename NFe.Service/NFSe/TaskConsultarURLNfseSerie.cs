@@ -36,21 +36,10 @@ namespace NFe.Service.NFSe
                 PedURLNfse(NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                WebServiceProxy wsProxy = null;
-                object pedURLNfse = null;
-                string cabecMsg = "";
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedURLNfse.cMunicipio);
-                switch (padraoNFSe)
-                {
-                    case PadroesNFSe.ISSNET:
-                    case PadroesNFSe.GIF:
-                        wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedURLNfse.cMunicipio, oDadosPedURLNfse.tpAmb, oDadosPedURLNfse.tpEmis, string.Empty);
-                        pedURLNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, oDadosPedURLNfse.cMunicipio));
-                        break;
-
-                    default:
-                        throw new Exception("Não foi possível detectar o padrão da NFS-e.");
-                }
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedURLNfse.cMunicipio, oDadosPedURLNfse.tpAmb, oDadosPedURLNfse.tpEmis, padraoNFSe);
+                object pedURLNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                string cabecMsg = "";
 
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();

@@ -64,11 +64,9 @@ namespace NFe.Components
         private PadroesNFSe PadraoNFSe { get; set; }
         private Servicos servico;
         private bool taHomologacao;
-        //private int cUF;
-        //private string versao;
 
         private string _NomeClasseWS;
-        public string NomeClasseWS 
+        public string NomeClasseWS
         {
             get
             {
@@ -142,36 +140,12 @@ namespace NFe.Components
         #endregion
 
         #region Construtores
-
-#if false
-        public WebServiceProxy(Uri requestUri, X509Certificate2 Certificado)
-        {
-            //Definir o certificado digital que será utilizado na conexão com os serviços
-            this.oCertificado = Certificado;
-
-            //Confirmar a solicitação SSL automaticamente
-            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
-            //Obeter a descrção do serviço (WSDL)
-            this.DescricaoServico(requestUri, this.oCertificado);
-
-            //Gerar e compilar a classe
-            this.GerarClasse();
-        }
-#endif
-        public WebServiceProxy(string arquivoWSDL, 
-            X509Certificate2 Certificado, 
-            PadroesNFSe padraoNFSe, 
-            bool taHomologacao,
-            //int cUF,
-            //string versao,
-            Servicos servico)
+        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico)
         {
             this.ArquivoWSDL = arquivoWSDL;
             this.PadraoNFSe = padraoNFSe;
             this.servico = servico;
             this.taHomologacao = taHomologacao;
-            //this.cUF = cUF;
-            //this.versao = versao;
 
             //Definir o certificado digital que será utilizado na conexão com os serviços
             this.oCertificado = Certificado;
@@ -283,7 +257,29 @@ namespace NFe.Components
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao invocar o método '" + methodName + "'.\r\nWSDL: " + this.ArquivoWSDL + "\r\n" + ex.Message);
+                string msgErro = "Erro ao invocar o método '" + methodName + "'.\r\nWSDL: " + this.ArquivoWSDL + "\r\n" + ex.Message;
+
+                if (ex.InnerException != null)
+                {
+                    msgErro += "\r\n " + ex.InnerException.Message;
+
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        msgErro += "\r\n " + ex.InnerException.InnerException.Message;
+
+                        if (ex.InnerException.InnerException.InnerException != null)
+                        {
+                            msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.Message;
+
+                            if (ex.InnerException.InnerException.InnerException.InnerException != null) 
+                            {
+                                msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.InnerException.Message;
+                            }
+                        }
+                    }
+                }
+
+                throw new Exception(msgErro);
             }
         }
         #endregion
@@ -394,7 +390,7 @@ namespace NFe.Components
         public object CriarObjeto(string NomeClasse)
         {
             if (string.IsNullOrEmpty(NomeClasse) || this.serviceAssemby.GetType(NomeClasse) == null)
-                throw new Exception("Nome da classe '"+NomeClasse+"' no webservice não pode ser processada\r\nWSDL: " + this.ArquivoWSDL);
+                throw new Exception("Nome da classe '" + NomeClasse + "' no webservice não pode ser processada\r\nWSDL: " + this.ArquivoWSDL);
 
             return Activator.CreateInstance(this.serviceAssemby.GetType(NomeClasse));
         }
@@ -632,15 +628,15 @@ namespace NFe.Components
 
                                 webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
-                                PreencheURLw(wsItem.LocalHomologacao, 
-                                             NFe.Components.NFeStrConstants.LocalHomologacao, 
-                                             WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio), 
-                                             "",  
+                                PreencheURLw(wsItem.LocalHomologacao,
+                                             NFe.Components.NFeStrConstants.LocalHomologacao,
+                                             WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio),
+                                             "",
                                              "NFse\\");
-                                PreencheURLw(wsItem.LocalProducao, 
-                                             NFe.Components.NFeStrConstants.LocalProducao, 
-                                             WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio), 
-                                             "",  
+                                PreencheURLw(wsItem.LocalProducao,
+                                             NFe.Components.NFeStrConstants.LocalProducao,
+                                             WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio),
+                                             "",
                                              "NFse\\");
 
                                 webServicesList.Add(wsItem);
@@ -707,18 +703,18 @@ namespace NFe.Components
 
                                 urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalHomologacao);
                                 if (urlList.Count > 0)
-                                    PreencheURLw(wsItem.LocalHomologacao, 
-                                                 NFe.Components.NFeStrConstants.LocalHomologacao, 
-                                                 urlList.Item(0).OuterXml, 
-                                                 UF, 
+                                    PreencheURLw(wsItem.LocalHomologacao,
+                                                 NFe.Components.NFeStrConstants.LocalHomologacao,
+                                                 urlList.Item(0).OuterXml,
+                                                 UF,
                                                  subfolder);
 
                                 urlList = estadoElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalProducao);
                                 if (urlList.Count > 0)
-                                    PreencheURLw(wsItem.LocalProducao, 
-                                                 NFe.Components.NFeStrConstants.LocalProducao, 
-                                                 urlList.Item(0).OuterXml, 
-                                                 UF, 
+                                    PreencheURLw(wsItem.LocalProducao,
+                                                 NFe.Components.NFeStrConstants.LocalProducao,
+                                                 urlList.Item(0).OuterXml,
+                                                 UF,
                                                  subfolder);
 
                                 webServicesList.Add(wsItem);
@@ -878,8 +874,8 @@ namespace NFe.Components
             ConsultarSituacaoLoteRps =
             ConsultarURLNfse =
             RecepcionarLoteRps =
-            ///
-            /// NF-e
+                ///
+                /// NF-e
             NFeRecepcaoEvento =
             NFeConsulta =
             NFeConsultaCadastro =
@@ -894,15 +890,15 @@ namespace NFe.Components
             NFeRegistroDeSaidaCancelamento =
             NFeAutorizacao =
             NFeRetAutorizacao =
-            ///
-            /// MDF-e
+                ///
+                /// MDF-e
             MDFeRecepcao =
             MDFeRetRecepcao =
             MDFeConsulta =
             MDFeStatusServico =
             MDFeRecepcaoEvento =
-            ///
-            /// CT-e
+                ///
+                /// CT-e
             CTeRecepcao =
             CTeRetRecepcao =
             CTeInutilizacao =

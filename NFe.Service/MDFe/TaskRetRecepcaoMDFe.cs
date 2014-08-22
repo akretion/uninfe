@@ -40,13 +40,7 @@ namespace NFe.Service
                 PedRec(emp, NomeArquivoXML);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                dadosPedRec.cUF, 
-                                                dadosPedRec.tpAmb, 
-                                                dadosPedRec.tpEmis, 
-                                                string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF));
@@ -57,8 +51,8 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFePedRec);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oRepRecepcao, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oRepRecepcao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedRec.cUF), 
                                     oCabecMsg, this);
                 #endregion
@@ -349,7 +343,7 @@ namespace NFe.Service
                                                 {
                                                     var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + 
+                                                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
                                                                             Path.GetFileName(strArquivoNFeProc);
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }

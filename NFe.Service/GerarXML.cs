@@ -1813,9 +1813,9 @@ namespace NFe.Service
         /// <summary>
         /// Gera o XML de pedido de consulta do recibo do lote
         /// </summary>
-        /// <param name="servico">Serviço que está sendo executado</param>
+        /// <param name="mod">Modelo do documento fiscal</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
-        public void XmlPedRec(Servicos servico, string recibo, string versao)
+        public void XmlPedRec(string mod, string recibo, string versao)
         {
             int emp = EmpIndex;
 
@@ -1829,17 +1829,18 @@ namespace NFe.Service
 
                 string dadosXML = string.Empty;
 
-                switch (servico)
+                switch (mod)
                 {
-                    case Servicos.PedidoSituacaoLoteNFe:
-                        dadosXML = XmlPedRecNFe(emp, recibo, versao);
+                    case "65": //NFC-e
+                    case "55": //NF-e
+                        dadosXML = XmlPedRecNFe(emp, recibo, versao, mod);
                         break;
 
-                    case Servicos.PedidoSituacaoLoteCTe:
+                    case "57": //CT-e
                         dadosXML = XmlPedRecCTe(emp, recibo);
                         break;
 
-                    case Servicos.PedidoSituacaoLoteMDFe:
+                    case "58": //MDF-e
                         dadosXML = XmlPedRecMDFe(emp, recibo);
                         break;
                 }
@@ -1857,8 +1858,9 @@ namespace NFe.Service
         /// <param name="emp">Código da empresa</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
         /// <param name="versao">Versão do schema do XML</param>
+        /// <param name="mod">Modelo do documento fiscal</param>
         /// <returns>Retorna a string do XML a ser gravado</returns>
-        private string XmlPedRecNFe(int emp, string recibo, string versao)
+        private string XmlPedRecNFe(int emp, string recibo, string versao, string mod)
         {
             XmlDocument doc = new XmlDocument();
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
@@ -1867,7 +1869,9 @@ namespace NFe.Service
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nRec.ToString(), recibo));
+            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.mod.ToString(), mod));
             doc.AppendChild(node);
+
             return doc.OuterXml;
         }
         #endregion

@@ -41,13 +41,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = 
-                        ConfiguracaoApp.DefinirWS(  Servicos.ConsultaStatusServicoNFe, 
-                                                    emp, 
-                                                    dadosPedSta.cUF, 
-                                                    dadosPedSta.tpAmb, 
-                                                    dadosPedSta.tpEmis, 
-                                                    dadosPedSta.versao);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(  Servicos.ConsultaStatusServicoNFe, emp,  dadosPedSta.cUF,  dadosPedSta.tpAmb,  dadosPedSta.tpEmis,  dadosPedSta.versao, dadosPedSta.mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -59,28 +53,6 @@ namespace NFe.Service
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
-
-#if old
-                    string nClasse = NomeClasseWS(Servico, dadosPedSta.cUF, dadosPedSta.versao);
-                    bool changeClassePR = false;
-                    if (Functions.CodigoParaUF(dadosPedSta.cUF) == "PR" &&
-                        dadosPedSta.versao.Equals("3.10") &&
-                        (TipoAmbiente)dadosPedSta.tpAmb == TipoAmbiente.taHomologacao)
-                    {
-                        nClasse = "NfeStatusServico3";
-                        changeClassePR = true;
-                    }
-                    var oStatusServico = wsProxy.CriarObjeto(nClasse);
-                    var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
-
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSta.versao);
-
-                    //Invocar o método que envia o XML para o SEFAZ
-                    nClasse = (changeClassePR ? "nfeStatusServicoNF" : NomeMetodoWS(Servico, dadosPedSta.cUF, dadosPedSta.versao));
-                    oInvocarObj.Invocar(wsProxy, oStatusServico, nClasse, oCabecMsg, this, "-ped-sta", "-sta");
-#endif
                 }
                 else
                 {
@@ -150,27 +122,6 @@ namespace NFe.Service
                 // versao|3.10
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
                 Functions.PopulateClasse(dadosPedSta, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            dadosPedSta.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cuf":
-                            dadosPedSta.cUF = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "tpemis":
-                            dadosPedSta.tpEmis = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "versao":
-                            dadosPedSta.versao = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -190,14 +141,28 @@ namespace NFe.Service
                     {
                         dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
                     }
+
+                    bool saveXml = false;
+
                     if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
                     {
                         dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
                         doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
-                        /// salvo o arquivo modificado
-                        doc.Save(cArquivoXML);
+                        saveXml = true;
                     }
+
+                    if (consStatServElemento.GetElementsByTagName("mod").Count != 0)
+                    {
+                        dadosPedSta.mod = consStatServElemento.GetElementsByTagName("mod")[0].InnerText;
+                        /// para que o validador não rejeite, excluo a tag <mod>
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("mod")[0]);
+                        saveXml = true;
+                    }
+
+                    // salvo o arquivo modificado
+                    if (saveXml)
+                        doc.Save(cArquivoXML);
                 }
             }
             if (string.IsNullOrEmpty(dadosPedSta.versao))

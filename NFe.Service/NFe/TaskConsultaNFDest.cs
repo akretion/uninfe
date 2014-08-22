@@ -35,12 +35,7 @@ namespace NFe.Service
                     int cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
-                        Servico,
-                        emp,
-                        cUF,
-                        oDadosConsultaNFeDest.tpAmb,
-                        1, string.Empty);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, cUF, oDadosConsultaNFeDest.tpAmb);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));

@@ -347,6 +347,10 @@ namespace NFe.Service
         /// Versão do XML
         /// </summary>
         public string versao { get; set; }
+        /// <summary>
+        /// Modelo do documento fiscal
+        /// </summary>
+        public string mod { get; set; }
     }
     #endregion
 
@@ -455,6 +459,10 @@ namespace NFe.Service
         /// </summary>
         public int tpEmis { get; set; }
         public string versao { get; set; }
+        /// <summary>
+        /// Modelo do documento fiscal
+        /// </summary>
+        public string mod { get; set; }
 
         public DadosPedSit()
         {
@@ -486,6 +494,10 @@ namespace NFe.Service
         /// Versão do XML
         /// </summary>
         public string versao { get; set; }
+        /// <summary>
+        /// Modelo do documento fiscal que é para consultar o status do serviço
+        /// </summary>
+        public string mod { get; set; }
     }
     #endregion
 
@@ -572,6 +584,10 @@ namespace NFe.Service
         /// EPEC
         /// </summary>
         public EventoEPEC epec { get; set; }
+        public string mod
+        {
+            get { return chNFe.Substring(20, 2); }
+        }
 
         public Evento()
         {
@@ -583,10 +599,10 @@ namespace NFe.Service
     }
     public class EventoEPEC
     {
-        public Int32 cOrgaoAutor { get;set; }
-        public NFe.ConvertTxt.TpcnTipoAutor tpAutor { get;set; }
-        public string verAplic { get;set; }
-        public string dhEmi { get;set; }
+        public Int32 cOrgaoAutor { get; set; }
+        public NFe.ConvertTxt.TpcnTipoAutor tpAutor { get; set; }
+        public string verAplic { get; set; }
+        public string dhEmi { get; set; }
         public NFe.ConvertTxt.TpcnTipoNFe tpNF { get; set; }
         public string IE { get; set; }
 

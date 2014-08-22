@@ -113,7 +113,7 @@ namespace NFe.Service
                                     //a rotina de gerar o -procNFe.xml corretamente. Wandrey 21/10/2009
                                     if (!fluxo.NfeExiste(oLerXml.oDadosNfe.chavenfe))
                                     {
-                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, file);
+                                        fluxo.InserirNfeFluxo(oLerXml.oDadosNfe.chavenfe, oLerXml.oDadosNfe.mod, file);
                                     }
 
                                     //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele

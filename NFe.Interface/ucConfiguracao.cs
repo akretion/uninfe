@@ -353,6 +353,12 @@ namespace NFe.Interface
                 cnpjCurrent = oEmpresa.CNPJ;
                 servicoCurrent = oEmpresa.Servico;
 
+                if (servico == TipoAplicativo.Nfse)
+                {
+                    edtCodMun.Text = oEmpresa.UnidadeFederativaCodigo.ToString();
+                    edtPadrao.Text = Functions.PadraoNFSe(oEmpresa.UnidadeFederativaCodigo).ToString();
+                }
+
                 //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
                 //o conteúdo já informado pelo usuário. Wandrey 30/10/2008
                 for (int i = 0; i < arrTpEmis.Count; i++)
@@ -396,10 +402,11 @@ namespace NFe.Interface
                     this.tabControl3.TabPages.Remove(this.tabPageDanfe);
                     labelUF.Text = "Município/Cidade:";
                 }
+
                 labelCodMun.Visible =
                     labelPadrao.Visible =
                     edtCodMun.Visible =
-                    edtPadrao.Visible = (Propriedade.TipoAplicativo == TipoAplicativo.Nfse);
+                    edtPadrao.Visible = (servico == TipoAplicativo.Nfse);
             }
             finally
             {
@@ -436,7 +443,8 @@ namespace NFe.Interface
             bool visible = ufCod == 4101408 /*Apucarana*/ ||
                            ufCod == 3502804 /*Araçatuba*/||
                            ufCod == 4104303 /*Campo Mourão*/||
-                           ufCod == 3537305 /*Penapolis*/;
+                           ufCod == 3537305 /*Penapolis*/||
+                           ufCod == 4309209 /*Gravatai*/;
 
             lblUsuarioWS.Visible = visible;
             lblSenhaWS.Visible = visible;

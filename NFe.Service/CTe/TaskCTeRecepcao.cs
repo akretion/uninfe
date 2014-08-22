@@ -42,12 +42,7 @@ namespace NFe.Service
                 string idLote = lerXml.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                Convert.ToInt32(lerXml.oDadosNfe.cUF), 
-                                                Convert.ToInt32(lerXml.oDadosNfe.tpAmb), 
-                                                Convert.ToInt32(lerXml.oDadosNfe.tpEmis), string.Empty);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis));
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)));
@@ -63,8 +58,8 @@ namespace NFe.Service
                 //
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oRecepcao, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oRecepcao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
                                     oCabecMsg, this, "-env-lot", "-rec");
                 #endregion
@@ -171,7 +166,7 @@ namespace NFe.Service
             xml.Load(memoryStream);
 
             XmlNodeList retEnviNFeList = null;
-            
+
             retEnviNFeList = xml.GetElementsByTagName("retEnviCte");
 
             foreach (XmlNode retEnviNFeNode in retEnviNFeList)

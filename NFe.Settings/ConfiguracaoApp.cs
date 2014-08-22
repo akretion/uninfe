@@ -623,12 +623,79 @@ namespace NFe.Settings
         /// <param name="emp">Index da empresa que será executado o serviço</param>
         /// <param name="cUF">Código da UF</param>
         /// <param name="tpAmb">Código do ambiente que será acessado</param>
-        /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <returns>Retorna o objeto do WebService</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb)
+        {
+            return DefinirWS(servico, emp, cUF, tpAmb, 1, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty);
+        }
+        #endregion
+
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
+        /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
+        /// <returns>Retorna o objeto do WebService</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
+        {
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty);
+        }
+        #endregion
+
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
         /// <param name="versao">Versão do XML</param>
-        /// <returns>Retorna o objeto do serviço</returns>
+        /// <returns>Retorna o objeto do WebService</returns>
         public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, string.Empty);
+        }
+        #endregion
+
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
+        /// <param name="versao">Versão do XML</param>
+        /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
+        /// <returns>Retorna o objeto do WebService</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao, string mod)
+        {
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, mod);
+        }
+        #endregion
+
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
+        /// <param name="padraoNFSe">Padrão da NFSe</param>
+        /// <returns>Retorna o objeto do WebService</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe)
+        {
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, padraoNFSe, string.Empty, string.Empty);
         }
         #endregion
 
@@ -641,14 +708,32 @@ namespace NFe.Settings
         /// <param name="cUF">Código da UF</param>
         /// <param name="tpAmb">Código do ambiente que será acessado</param>
         /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <param name="padraoNFSe">Padrão da NFSe</param>
         /// <param name="versao">Versão do XML</param>
-        /// <param name="padraoNFSe">Padrão da NFS-e</param>
-        /// <param name="ehNFCe">Se é NFC-e (Nota fiscal de consumidor eletrônica)</param>
-        /// <returns>Retorna o objeto do serviço</returns>
+        /// <returns>Retorna o objeto do WebService</returns>
         public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao)
         {
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, padraoNFSe, versao, string.Empty);
+        }
+        #endregion
+
+        #region DefinirWS()
+        /// <summary>
+        /// Definir o webservice que será utilizado para o envio do XML
+        /// </summary>
+        /// <param name="servico">Serviço que será executado</param>
+        /// <param name="emp">Index da empresa que será executado o serviço</param>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="tpAmb">Código do ambiente que será acessado</param>
+        /// <param name="tpEmis">Tipo de emissão do XML</param>
+        /// <param name="padraoNFSe">Padrão da NFSe</param>
+        /// <param name="versao">Versão do XML</param>
+        /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
+        /// <returns>Retorna o objeto do WebService</returns>
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao, string mod)
+        {
             WebServiceProxy wsProxy = null;
-            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "");
+            string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "") + (!string.IsNullOrEmpty(mod) ? " " + mod : "");
 
             while (true)
             {
@@ -661,7 +746,7 @@ namespace NFe.Settings
                     else
                     {
                         //Definir se é uma configurações específica para NFC-e
-                        bool ehNFCe = Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe;
+                        bool ehNFCe = (mod == "65");
 
                         //Definir a URI para conexão com o Webservice
                         string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
@@ -1263,29 +1348,47 @@ namespace NFe.Settings
                             empresa.PastaConfigUniDanfe = Empresas.Configuracoes[i].PastaConfigUniDanfe;
                         }
 
-                        if (empresa.PastaXmlEnvio.ToLower().EndsWith("temp"))
+                        if (empresa.PastaXmlEnvio.ToLower().EndsWith("geral"))
                         {
-                            erro = "Pasta de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                            erro = "Pasta de envio não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                             validou = false;
                         }
                         else
-                            if (empresa.PastaXmlEmLote.ToLower().EndsWith("temp"))
+                            if (empresa.PastaXmlEmLote.ToLower().EndsWith("geral"))
                             {
-                                erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                erro = "Pasta de envio em lote não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                 validou = false;
                             }
                             else
-                                if (empresa.PastaValidar.ToLower().EndsWith("temp"))
+                                if (empresa.PastaValidar.ToLower().EndsWith("geral"))
                                 {
-                                    erro = "Pasta de validação não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                    erro = "Pasta de validação não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                     validou = false;
                                 }
                                 else
-                                    if (empresa.PastaXmlErro.ToLower().EndsWith("temp"))
+                                    if (empresa.PastaXmlEnvio.ToLower().EndsWith("temp"))
                                     {
-                                        erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                        erro = "Pasta de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
                                         validou = false;
                                     }
+                                    else
+                                        if (empresa.PastaXmlEmLote.ToLower().EndsWith("temp"))
+                                        {
+                                            erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                            validou = false;
+                                        }
+                                        else
+                                            if (empresa.PastaValidar.ToLower().EndsWith("temp"))
+                                            {
+                                                erro = "Pasta de validação não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                                validou = false;
+                                            }
+                                            else
+                                                if (empresa.PastaXmlErro.ToLower().EndsWith("temp"))
+                                                {
+                                                    erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                                    validou = false;
+                                                }
 
                         if (validou)
                         {
