@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
-
-//using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
 
@@ -72,7 +70,7 @@ namespace NFe.UI.Formularios
                 #region Montar Array DropList do Tipo de Emissão da NF-e
                 if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
                 {
-                    comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true); 
+                    comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 }
                 else
                 {
@@ -247,7 +245,7 @@ namespace NFe.UI.Formularios
         {
             if (this.loading)
                 return;
-            
+
             if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
                 (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos)
             {
@@ -260,39 +258,6 @@ namespace NFe.UI.Formularios
             }
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);
-
-#if false
-            if (cbServico.SelectedValue != null && cbServico.Enabled)
-            {
-                TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
-
-                if (servico != servicoCurrent)
-                {
-                    if (Empresa.FindConfEmpresa(cnpjCurrent, servico) != null)
-                    {
-                        this.cbServico.Focus();
-                        Dialogs.ShowMessage("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", 0, 0, MessageBoxIcon.Error);
-                        this.cbServico.SelectedValue = servicoCurrent;
-                        return;
-                    }
-
-                    bool mudaPastas = true;
-                    if (!string.IsNullOrEmpty(this.uConfiguracoes.uce_pastas.textBox_PastaEnvioXML.Text))
-                    {
-                        mudaPastas = Dialogs.YesNo("Serviço foi alterado e você já tem as pastas definidas.\r\nDeseja mudá-las para o novo Serviço?", 0, 0);
-                    }
-
-                    if (mudaPastas)
-                        MudarPastas(cnpjCurrent, servico);
-
-                    servicoCurrent = servico;
-
-                    if (this.changeEvent != null)
-                        this.changeEvent(sender, e);
-                }
-                this.uConfiguracoes.uce_pastas.empresa.Servico = servicoCurrent;
-            }
-#endif
         }
 
         private void HabilitaUsuarioSenhaWS(int ufCod)
@@ -301,10 +266,11 @@ namespace NFe.UI.Formularios
                            ufCod == 3502804 /*Araçatuba*/||
                            ufCod == 4104303 /*Campo Mourão*/||
                            ufCod == 3537305 /*Penapolis*/||
-                           ufCod == 4309209 /*Gravatai*/;
+                           ufCod == 4309209 /*Gravatai*/||
+                           ufCod == 3551702 /*Sertaozinho*/;
 
-            lbl_UsuarioWS.Visible = 
-                lbl_SenhaWS.Visible = 
+            lbl_UsuarioWS.Visible =
+                lbl_SenhaWS.Visible =
                 txtUsuarioWS.Visible =
                 txtSenhaWS.Visible = visible;
         }
@@ -350,9 +316,7 @@ namespace NFe.UI.Formularios
 
         private void edtCNPJ_Enter(object sender, EventArgs e)
         {
-#if false
-            this.edtCNPJ.Text = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
-#endif
+
         }
 
         private void comboBox_UF_DropDownClosed(object sender, EventArgs e)

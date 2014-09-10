@@ -206,13 +206,22 @@ namespace NFe.UI
             if (string.IsNullOrEmpty(origemPasta))
                 return "";
 
-            string ctemp = destino.CNPJ + (destino.Servico == TipoAplicativo.Nfe || destino.Servico == TipoAplicativo.Todos ? "" : "\\" + destino.Servico.ToString().ToLower());
-            string newPasta = origemPasta.Replace(origemCNPJ, ctemp);
+            ///
+            /// o usuario pode ter colocado o CNPJ como parte do nome da pasta
+            ///
+            /// origemPasta: C:\uninfe\CNPJ_antigo\envio
+            /// origemCNPJ:  CNPJ_novo
+            /// newPasta:    C:\uninfe\CNPJ_novo\envio
+            /// 
+            string newPasta = origemPasta.Replace(origemCNPJ.Trim(), destino.CNPJ.Trim());
 
             if (origemPasta.ToLower() == newPasta.ToLower())
             {
+                ///
+                /// o cnpj nao foi informado como parte da pasta
+                /// 
                 int lastBackSlash = ConfiguracaoApp.RemoveEndSlash(origemPasta).LastIndexOf("\\");
-                newPasta = origemPasta.Insert(lastBackSlash, "\\" + ctemp);
+                newPasta = origemPasta.Insert(lastBackSlash, "\\" + destino.CNPJ);
             }
             return newPasta;
         }
@@ -230,6 +239,29 @@ namespace NFe.UI
 
                 if (string.IsNullOrEmpty(oempresa.PastaXmlEnvio) && !empty)
                 {
+                    string subpasta = oempresa.CNPJ;
+                    switch (servico)
+                    {
+                        case TipoAplicativo.Todos:
+                        case TipoAplicativo.Nfe:
+                            break;
+
+                        default:
+                            subpasta = "\\" + servico.ToString().ToLower();
+                            break;
+                    }
+                    oempresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Envio");
+                    oempresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Retorno");
+                    oempresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Erro");
+                    oempresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Validar");
+                    if (oempresa.Servico != TipoAplicativo.Nfse)
+                    {
+                        oempresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Enviado");
+                        oempresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\EnvioEmLote");
+                        oempresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\DownloadNFe");
+                    }
+                    oempresa.CriaPastasAutomaticamente = true;
+                    _modificado = true;
                     ///
                     /// tenta achar uma configuracao valida
                     /// 
@@ -239,18 +271,16 @@ namespace NFe.UI
                             empresa.Servico != oempresa.Servico && 
                             !string.IsNullOrEmpty(empresa.PastaXmlEnvio))
                         {
-                            string cpath = empresa.CNPJ + (empresa.Servico == TipoAplicativo.Nfse ? "\\nfse" : "");
-
-                            oempresa.PastaXmlEnvio = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEnvio, oempresa);
-                            oempresa.PastaXmlRetorno = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlRetorno, oempresa);
-                            oempresa.PastaXmlErro = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlErro, oempresa);
-                            oempresa.PastaValidar = CopiaPastaDeEmpresa(cpath, empresa.PastaValidar, oempresa);
-                            if (empresa.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+                            oempresa.PastaXmlEnvio = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnvio, oempresa);
+                            oempresa.PastaXmlRetorno = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlRetorno, oempresa);
+                            oempresa.PastaXmlErro = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlErro, oempresa);
+                            oempresa.PastaValidar = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaValidar, oempresa);
+                            if (empresa.Servico != TipoAplicativo.Nfse)
                             {
-                                oempresa.PastaXmlEmLote = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEmLote, oempresa);
-                                oempresa.PastaXmlEnviado = CopiaPastaDeEmpresa(cpath, empresa.PastaXmlEnviado, oempresa);
-                                oempresa.PastaBackup = CopiaPastaDeEmpresa(cpath, empresa.PastaBackup, oempresa);
-                                oempresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(cpath, empresa.PastaDownloadNFeDest, oempresa);
+                                oempresa.PastaXmlEmLote = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEmLote, oempresa);
+                                oempresa.PastaXmlEnviado = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaXmlEnviado, oempresa);
+                                oempresa.PastaBackup = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaBackup, oempresa);
+                                oempresa.PastaDownloadNFeDest = CopiaPastaDeEmpresa(empresa.CNPJ, empresa.PastaDownloadNFeDest, oempresa);
                             }
                             oempresa.ConfiguracaoDanfe = empresa.ConfiguracaoDanfe;
                             oempresa.ConfiguracaoCCe = empresa.ConfiguracaoCCe;
@@ -271,27 +301,6 @@ namespace NFe.UI
                             _modificado = true;
                             break;
                         }
-                    }
-                    ///
-                    /// se ainda assim nao foi encontrada nenhuma configuracao válida assume a pasta de instalacao do uninfe
-                    /// 
-                    if (string.IsNullOrEmpty(oempresa.PastaXmlEnvio))
-                    {
-                        string subpasta = oempresa.CNPJ + (oempresa.Servico == TipoAplicativo.Nfse ? "\\nfse" : "");
-
-                        oempresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Envio");
-                        oempresa.PastaXmlRetorno = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Retorno");
-                        oempresa.PastaXmlErro = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Erro");
-                        oempresa.PastaValidar = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Validar");
-                        if (oempresa.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-                        {
-                            oempresa.PastaXmlEnviado = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Enviado");
-                            //oempresa.PastaBackup = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Backup");
-                            oempresa.PastaXmlEmLote = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\EnvioEmLote");
-                            oempresa.PastaDownloadNFeDest = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\DownloadNFe");
-                        }
-                        oempresa.CriaPastasAutomaticamente = true;
-                        _modificado = true;
                     }
                 }
                 uce_divs.Populate(oempresa);

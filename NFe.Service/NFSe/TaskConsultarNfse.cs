@@ -10,6 +10,7 @@ using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.SystemPro;
+using NFe.Components.SigCorp;
 
 namespace NFe.Service.NFSe
 {
@@ -79,9 +80,15 @@ namespace NFe.Service.NFSe
                         ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedSitNfse.cMunicipio));
                         syspro.ConsultarNfse(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.SIGCORP_SIGISS:
+                        SigCorp sigCorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno);
+                        sigCorp.ConsultarNfse(NomeArquivoXML);
+                        break;
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

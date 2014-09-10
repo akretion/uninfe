@@ -62,6 +62,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -94,10 +96,24 @@
     </Compile>
     <Compile Include="SchemaXML.cs" />
     <Compile Include="ServiceProcess.cs" />
+    <Compile Include="SigCorp\h\SigCorpH.cs" />
+    <Compile Include="SigCorp\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\SigCorp.cs" />
+    <Compile Include="SigCorp\SigCorpBase.cs" />
     <Compile Include="Smf.cs" />
     <Compile Include="SystemPro\SystemPro.cs" />
     <Compile Include="SystemPro\SystemProBase.cs" />
     <Compile Include="TipoArquivoXML.cs" />
+    <Compile Include="Web References\br.com.sigiss.bauru.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.sigiss.testebauru.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.gov.rs.erechim.nfse.www.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +168,34 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\br.com.sigiss.bauru.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.bauru.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.bauru.p\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.bauru.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.bauru.p\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testebauru.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.testebauru.h\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.testebauru.h\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testebauru.h\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testebauru.h\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.wsdl" />
     <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.xsd">
       <SubType>Designer</SubType>
@@ -170,6 +214,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="https://bauru.sigiss.com.br/bauru/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.bauru.p\</RelPath>
+      <UpdateFromURL>https://bauru.sigiss.com.br/bauru/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_bauru_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://testebauru.sigiss.com.br/testebauru/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.testebauru.h\</RelPath>
+      <UpdateFromURL>https://testebauru.sigiss.com.br/testebauru/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_testebauru_h_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.gov.rs.erechim.nfse.www.p\</RelPath>
@@ -193,6 +259,7 @@
       <CachedSettingsPropName>NFe_Components_br_gov_rs_erechim_nfse_www_h_NfseService_Homolog</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

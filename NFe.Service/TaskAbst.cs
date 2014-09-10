@@ -123,7 +123,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-        #region NF-e
+                #region NF-e
                 case Servicos.InutilizarNumerosNFe:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -179,9 +179,9 @@ namespace NFe.Service
                 case Servicos.DownloadNFe:
                     retorna = "NfeDownloadNF";
                     break;
-        #endregion
+                #endregion
 
-        #region MDF-e
+                #region MDF-e
                 case Servicos.ConsultaStatusServicoMDFe:
                     retorna = "MDFeStatusServico";
                     break;
@@ -197,9 +197,9 @@ namespace NFe.Service
                 case Servicos.RecepcaoEventoMDFe:
                     retorna = "MDFeRecepcaoEvento";
                     break;
-        #endregion
+                #endregion
 
-        #region CT-e
+                #region CT-e
                 case Servicos.ConsultaStatusServicoCTe:
                     retorna = "CteStatusServico";
                     break;
@@ -221,7 +221,7 @@ namespace NFe.Service
                     else
                         retorna = "CteRecepcaoEvento";
                     break;
-        #endregion
+                #endregion
             }
 
             return retorna;
@@ -242,13 +242,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-        #region GINFES
+                #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
-        #endregion
+                #endregion
 
-        #region THEMA
+                #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -272,9 +272,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region BETHA
+                #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -298,9 +298,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region CANOAS-RS (ABACO)
+                #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -324,41 +324,41 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region ISSNet
+                #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
-        #endregion
+                #endregion
 
-        #region ISSNet
+                #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
 
-        #region Blumenau-SC
+                #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
-        #endregion
+                #endregion
 
-        #region BHISS
+                #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region GIF
+                #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region DUETO
+                #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -382,23 +382,23 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region WEBISS
+                #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
-        #endregion
+                #endregion
 
-        #region PAULISTANA
+                #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
-        #endregion
+                #endregion
 
-        #region SALVADOR_BA
+                #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -422,16 +422,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region PORTOVELHENSE
+                #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region PRONIN
+                #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -448,9 +448,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region ISSONLINE4R (4R Sistemas)
+                #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -476,16 +476,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region DSF
+                #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region TECNOSISTEMAS
+                #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -509,19 +509,45 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region TIPLAN
+                #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
 
-        #region CARIOCA
+                #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
+
+                #region SMARAPD
+                case PadroesNFSe.SMARAPD:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultaLoteRPS";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultaNFSeServicosPrestados";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultaNFSePorRPS";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultaNFSePorFaixa";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelamentoNFSe";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "nfdEntrada";
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -534,19 +560,23 @@ namespace NFe.Service
         /// Retorna o nome da classe de cabecalho do serviço
         /// </summary>
         /// <param name="cUF">Código da UF</param>
+        /// <param name="servico">Serviço que está sendo executado</param>
         /// <returns>Nome da classe de cabecalho</returns>
         protected string NomeClasseCabecWS(int cUF, Servicos servico)
         {
-            return NomeClasseCabecWSNFe(cUF, servico);
+            return NomeClasseCabecWS(cUF, servico, (int)TipoEmissao.teNormal);
         }
         #endregion
 
-        #region NomeClasseCabecWSNFe()
+        #region NomeClasseCabecWS()
         /// <summary>
         /// Retorna o nome da classe de cabecalho do serviço de NFe
         /// </summary>
+        /// <param name="cUF">Código da UF</param>
+        /// <param name="servico">Serviço que está sendo executado</param>
+        /// <param name="tpEmis">Tipo de emissão</param>
         /// <returns>nome da classe de cabecalho do serviço de NFe</returns>
-        private string NomeClasseCabecWSNFe(int cUF, Servicos servico)
+        protected string NomeClasseCabecWS(int cUF, Servicos servico, int tpEmis)
         {
             string retorna = string.Empty;
 
@@ -571,12 +601,9 @@ namespace NFe.Service
                 case Servicos.RecepcaoEventoCTe:
                     retorna = "cteCabecMsg";
 
-                    switch (cUF)
-                    {
-                        case 50:
-                            retorna = "CTeCabecMsg";
-                            break;
-                    }
+                    if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal)
+                        retorna = "CTeCabecMsg";
+
                     break;
                 #endregion
 
@@ -1216,7 +1243,10 @@ namespace NFe.Service
 
                         case Servicos.RecepcionarLoteRps:
                             if (taHomologacao)
-                                retorna = "testeEnviar";
+                                if (cMunicipio.Equals("5002704")) // Campo grande - MS não tem web service de teste
+                                    throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                else
+                                    retorna = "testeEnviar";
                             else
                                 retorna = "enviar";
                             break;
@@ -1300,6 +1330,53 @@ namespace NFe.Service
                             break;
                         case Servicos.RecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region SIGCORP_SIGISS
+                case PadroesNFSe.SIGCORP_SIGISS:
+                    switch (servico)
+                    {
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "GerarNota";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNota";
+                            break;
+                    }
+                    break;
+
+                #endregion
+
+                #region SMARAPD
+                case PadroesNFSe.SMARAPD:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "nfdSaida";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "nfdEntradaCancelar";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "nfdEntrada";
+                            break;
+                        case Servicos.ConsultarURLNfse:
+                            retorna = "urlNfd";
+                            break;
+                        case Servicos.ConsultarURLNfseSerie:
+                            retorna = "";
                             break;
                     }
                     break;

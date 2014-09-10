@@ -365,7 +365,12 @@ namespace NFe.ConvertTxt
                 (NFe.infNFe.Versao >= 3 && (!string.IsNullOrEmpty(NFe.dest.CNPJ) || !string.IsNullOrEmpty(NFe.dest.CPF) || !string.IsNullOrEmpty(NFe.dest.idEstrangeiro))))
             {
                 if (NFe.infNFe.Versao >= 3 && !string.IsNullOrEmpty(NFe.dest.idEstrangeiro))
-                    wCampo(NFe.dest.idEstrangeiro, TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Opcional); //E03a
+                {
+                    if (NFe.dest.idEstrangeiro.Equals("NAO GERAR TAG"))
+                        wCampo("", TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Obrigatorio); //E03a
+                    else
+                        wCampo(NFe.dest.idEstrangeiro, TpcnTipoCampo.tcStr, TpcnResources.idEstrangeiro, ObOp.Opcional); //E03a
+                }
                 else
                     if (NFe.dest.enderDest.cPais != 1058 && NFe.infNFe.Versao <= 2)
                         wCampo("", TpcnTipoCampo.tcStr, TpcnResources.CNPJ);

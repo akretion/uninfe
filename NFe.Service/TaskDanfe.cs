@@ -118,6 +118,35 @@ ExportarPasta|Enviar | Enviados | Erros
         }
     }
 
+    public class TaskDanfeContingencia : TaskAbst
+    {
+        public override void Execute()
+        {
+            int emp = Empresas.FindEmpresaByThread();
+
+            try
+            {
+                if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
+                    throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresas.Configuracoes[emp].Nome);
+
+                TFunctions.ExecutaUniDanfe(NomeArquivoXML, DateTime.Today, Empresas.Configuracoes[emp]);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedEPEC))
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedEPEC, Propriedade.ExtRetorno.retEPEC_ERR, ex);
+                    else
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Nfe_ERR, ex);
+                }
+                catch
+                {
+                }
+            }
+        }
+    }
+
     public class TaskDanfe : TaskAbst
     {
         public override void Execute()

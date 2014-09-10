@@ -9,6 +9,7 @@ using NFe.Components;
 using NFe.Validate;
 using System.IO;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace NFe.Service
 {
@@ -118,9 +119,16 @@ namespace NFe.Service
                     case Servicos.EnviarLoteCTe:
                     case Servicos.RecepcaoEventoCTe:
                     case Servicos.ConsultaStatusServicoCTe:
-                        if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50")
+                        if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                         {
-                            oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                            try
+                            {
+                                oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                            }
+                            catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
+                            {
+                                oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                            }
                         }
                         else
                         {
@@ -221,10 +229,19 @@ namespace NFe.Service
 
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
-            string cResultadoValidacao = padraoNFSe == PadroesNFSe.ISSONLINE4R ? "" : validar.ValidarArqXML(XmlNfeDadosMsg);
+            string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
             {
-                throw new Exception(cResultadoValidacao);
+                switch (padraoNFSe)
+                {
+                    case PadroesNFSe.ISSONLINE4R:
+                        break;
+                    case PadroesNFSe.SMARAPD:
+                        break;
+                    default:
+                        throw new Exception(cResultadoValidacao);
+                }
+
             }
 
             // Montar o XML de Lote de envio de Notas fiscais
@@ -330,6 +347,18 @@ namespace NFe.Service
                     strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
                     break;
 
+                case PadroesNFSe.SMARAPD:
+                    if (cMetodo == "nfdEntradaCancelar")
+                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
+                        TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
+                        docXML.OuterXml });
+                    else
+                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
+                        TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
+                        Empresas.Configuracoes[emp].UnidadeFederativaCodigo, 
+                        docXML.OuterXml });
+                    break;
+
                 case PadroesNFSe.GINFES:
                 case PadroesNFSe.THEMA:
                 case PadroesNFSe.SALVADOR_BA:
@@ -375,6 +404,7 @@ namespace NFe.Service
 
         #endregion
     }
+
 }
 
 namespace NFe.Exceptions

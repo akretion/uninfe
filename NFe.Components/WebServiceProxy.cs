@@ -160,7 +160,7 @@ namespace NFe.Components
             this.NomeMetodoWS = null;
             if (this.serviceDescription.Services != null)
             {
-                this.NomeClasseWS = ((System.Web.Services.Description.Service)this.serviceDescription.Services[0]).Name;
+                this.NomeClasseWS = ((System.Web.Services.Description.Service)this.serviceDescription.Services[0]).Name.Replace(" ", "");
             }
 
             if (this.serviceDescription.Bindings != null)
@@ -518,6 +518,7 @@ namespace NFe.Components
             #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
             switch (PadraoNFSe)
             {
+                case PadroesNFSe.SMARAPD:
                 case PadroesNFSe.DUETO:
                 case PadroesNFSe.WEBISS:
                 case PadroesNFSe.SALVADOR_BA:

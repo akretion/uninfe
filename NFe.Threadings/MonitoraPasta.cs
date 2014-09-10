@@ -76,6 +76,16 @@ namespace NFe.Threadings
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion
+
+                #region Pasta Validar
+                if (Directory.Exists(Empresas.Configuracoes[i].PastaContingencia) &&
+                    Empresas.Configuracoes[i].tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
+                {
+                    fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaContingencia, "*.xml"));
+                    fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
+                    fsw[fsw.Count - 1].StartWatch();
+                }
+                #endregion
             }
 
             #region Pasta Geral
@@ -115,7 +125,8 @@ namespace NFe.Threadings
                 {
                     if(fullName == Empresas.Configuracoes[i].PastaXmlEnvio.ToLower() ||
                         fullName == Empresas.Configuracoes[i].PastaXmlEmLote.ToLower() ||
-                        fullName == Empresas.Configuracoes[i].PastaValidar.ToLower())
+                        fullName == Empresas.Configuracoes[i].PastaValidar.ToLower() ||
+                        fullName == Empresas.Configuracoes[i].PastaContingencia.ToLower())
                     {
                         empresa = i;
                         break;

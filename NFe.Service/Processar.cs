@@ -320,6 +320,10 @@ namespace NFe.Service
                             DirecionarArquivo(arquivo, new TaskDanfe());
                             break;
 
+                        case Servicos.ImpressaoNFe_Contingencia:
+                            DirecionarArquivo(arquivo, new TaskDanfeContingencia());
+                            break;
+
                         case Servicos.DanfeRelatorio:
                             DirecionarArquivo(arquivo, new TaskDanfeReport());
                             break;
@@ -379,6 +383,11 @@ namespace NFe.Service
             #endregion
             else
             {
+                if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaContingencia.ToLower()) >= 0)
+                {
+                    tipoServico = Servicos.ImpressaoNFe_Contingencia;
+                }
+                else
                 if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
                 {
                     tipoServico = Servicos.AssinarValidar;
@@ -986,10 +995,11 @@ namespace NFe.Service
             else
             {
                 if (nfe is TaskRetRecepcao ||
-                    nfe is TaskConsultaStatus ||
                     nfe is TaskRecepcaoDPEC ||
+                    nfe is TaskConsultaStatus ||
                     nfe is TaskConsultaSituacaoNFe ||
                     nfe is TaskConsultaDPEC ||
+                    nfe is TaskDanfeContingencia ||
                     nfe is TaskCadastroContribuinte)
                 {
                     tipoServico.InvokeMember(metodo, System.Reflection.BindingFlags.InvokeMethod, null, nfe, null);

@@ -98,6 +98,14 @@ namespace NFe.Settings
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public string PastaDownloadNFeDest { get; set; }
 
+        public string PastaContingencia
+        {
+            get
+            {
+                return Path.Combine(this.PastaXmlEnvio, "Contingencia");
+            }
+        }
+
         #endregion
 
         #region Propriedades diversas
@@ -382,7 +390,7 @@ namespace NFe.Settings
                     ///
                     /// verifica se precisa de conversao para que a Deserializacao funcione
                     string temp = File.ReadAllText(this.NomeArquivoConfig, Encoding.UTF8);
-                    if (temp.Contains("<nfe_configuracoes>"))
+                    if (temp.Contains("<nfe_configuracoes>") || temp.Contains("<CertificadoDigital>"))
                     {
                         File.WriteAllText(this.NomeArquivoConfig + ".old", temp);
 
@@ -392,8 +400,11 @@ namespace NFe.Settings
                         temp = temp.Replace("<nfe_configuracoes>", "<Empresa xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
                         temp = temp.Replace("</nfe_configuracoes>", "</Empresa>");
                         temp = temp.Replace(">False<", ">false<").Replace(">True<", ">true<");
-			            temp = temp.Replace("<DiretorioSalvarComo>","<diretorioSalvarComo>");
-			            temp = temp.Replace("</DiretorioSalvarComo>","</diretorioSalvarComo>");
+                        if (!temp.Contains("<diretorioSalvarComo>"))
+                        {
+                            temp = temp.Replace("<DiretorioSalvarComo>", "<diretorioSalvarComo>").Replace("</DiretorioSalvarComo>", "</diretorioSalvarComo>");
+                        }
+                        temp = temp.Replace("<CertificadoDigital>", "<Certificado>").Replace("</CertificadoDigital>", "</Certificado>");
                         File.WriteAllText(this.NomeArquivoConfig, temp);
                     }
                     Empresa t = new Empresa();
@@ -565,18 +576,17 @@ namespace NFe.Settings
             if (!string.IsNullOrEmpty(PastaXmlEnvio))
             {
                 if (!Directory.Exists(PastaXmlEnvio))
-                {
                     Directory.CreateDirectory(PastaXmlEnvio);
-                }
 
                 //Criar a pasta Temp dentro da pasta de envio. Wandrey 03/08/2011
                 if (!Directory.Exists(PastaXmlEnvio.Trim() + "\\Temp"))
-                {
                     Directory.CreateDirectory(PastaXmlEnvio.Trim() + "\\Temp");
-                }
+
+                if (!Directory.Exists(this.PastaContingencia) && this.Servico != TipoAplicativo.Nfse)
+                    Directory.CreateDirectory(this.PastaContingencia);
             }
 
-            if (this.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (this.Servico != TipoAplicativo.Nfse)
             {
                 //Criar subpasta Assinado na pasta de envio individual de nfe
                 if (!Directory.Exists(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado))

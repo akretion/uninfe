@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace NFe.Components.Abstract
 {
@@ -29,6 +32,46 @@ namespace NFe.Components.Abstract
             write.Dispose();
         }
 
+        public string CreateXML(Object objetoRetorno, Object tcErros)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+
+            if (objetoRetorno != null)
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(objetoRetorno.GetType());
+                using (MemoryStream xmlStream = new MemoryStream())
+                {
+                    xmlSerializer.Serialize(xmlStream, objetoRetorno);
+                    xmlStream.Position = 0;
+                    xmlDoc.Load(xmlStream);
+                }
+            }
+
+            if (tcErros != null)
+            {
+                XmlDocument xmlDoc2 = new XmlDocument();
+                XmlSerializer xmlSerializer2 = new XmlSerializer(tcErros.GetType());
+                using (MemoryStream xmlStream2 = new MemoryStream())
+                {
+                    xmlSerializer2.Serialize(xmlStream2, tcErros);
+                    xmlStream2.Position = 0;
+                    xmlDoc2.Load(xmlStream2);
+                }
+
+                if (objetoRetorno != null)
+                {
+                    XmlNode importedDocument = xmlDoc.ImportNode(xmlDoc2.DocumentElement, true);
+                    xmlDoc.DocumentElement.AppendChild(importedDocument);
+                }
+                else
+                {
+                    xmlDoc = xmlDoc2;
+                }
+                
+            }
+
+            return xmlDoc.InnerXml;
+        }
 
         public abstract void EmiteNF(string file);
 

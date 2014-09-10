@@ -10,7 +10,7 @@ using NFe.Settings;
 
 namespace NFe.Threadings
 {
-    public class FileSystemWatcher: IDisposable    //<<<danasa 1-5-2011
+    public class FileSystemWatcher : IDisposable    //<<<danasa 1-5-2011
     {
         public delegate void FileChangedHandler(FileInfo fi);
         public event FileChangedHandler OnFileChanged;
@@ -27,8 +27,8 @@ namespace NFe.Threadings
 
         private void Dispose(bool disposing)
         {
-            if(!_disposed)
-                if(disposing && worker != null)
+            if (!_disposed)
+                if (disposing && worker != null)
                     worker.Dispose();
             _disposed = true;
         }
@@ -45,131 +45,143 @@ namespace NFe.Threadings
             Filter = filter;
         }
 
-        private BackgroundWorker worker = null;         //<<<<danasa 1-5-2011
+        private BackgroundWorker worker = null;
 
         public void StartWatch()
         {
-            /*BackgroundWorker*/
-            worker = new BackgroundWorker();   //<<<<danasa 1-5-2011
-            worker.WorkerSupportsCancellation = true;               //<<<<danasa 1-5-2011
-            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());//<<<<danasa 1-5-2011
+            worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
             worker.RunWorkerAsync();
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-
             Hashtable OldFiles = new Hashtable();
 
             CancelProcess = false;//<<<<danasa 1-5-2011
 
-            while(!CancelProcess)
+            while (!CancelProcess)
             {
                 try
                 {
-
-                    if(String.IsNullOrEmpty(Directory)) continue;
-
-                    string[] Files = System.IO.Directory.GetFiles(Directory, Filter, System.IO.SearchOption.TopDirectoryOnly);
-
-                    Hashtable NewFiles = new Hashtable();
-
-                    //cria todos os fileinfos
-                    foreach(string s in Files)
+                    if (!String.IsNullOrEmpty(Directory))
                     {
-                        FileInfo fi = new FileInfo(s);
-                        if(File.Exists(fi.FullName))
-                            if(!Functions.FileInUse(fi.FullName))
+                        string[] Files = System.IO.Directory.GetFiles(Directory, Filter, System.IO.SearchOption.TopDirectoryOnly);
+                        if (Files.Length > 0)
+                        {
+                            Hashtable NewFiles = new Hashtable();
+
+                            //cria todos os fileinfos
+                            foreach (string s in Files)
                             {
-                                //Definir o nome do arquivo na pasta temp
-                                string arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
+                                FileInfo fi = new FileInfo(s);
 
-                                //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
-                                NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
+                                if (File.Exists(fi.FullName))
+                                    if (!Functions.FileInUse(fi.FullName))
+                                    {
+                                        //Definir o nome do arquivo na pasta temp
+                                        string arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
 
-                                //Mover o arquivo para pasta temp e disparar o serviço a ser executado
-                                Functions.Move(fi.FullName, arqTemp);
+                                        //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
+                                        NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
 
-                                FileInfo fi2 = new FileInfo(arqTemp);
-                                NewFiles.Add(fi2.Name, fi2);
+                                        //Mover o arquivo para pasta temp e disparar o serviço a ser executado
+                                        Functions.Move(fi.FullName, arqTemp);
+
+                                        FileInfo fi2 = new FileInfo(arqTemp);
+                                        NewFiles.Add(fi2.Name, fi2);
+                                    }
                             }
-                    }
 
-                    foreach(FileInfo fi in NewFiles.Values)
-                    {
-                        if(CancelProcess || ((BackgroundWorker)sender).CancellationPending)
-                        {
-                            break;
-                        }
-
-                        if(OldFiles.Contains(fi.Name))
-                        {
-                            FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
-
-#if DEBUG
-                            Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                            if(oldFi.CreationTime != fi.CreationTime)
-                                RaiseFileChanged(fi);
-                            else if(oldFi.Length != fi.Length)
-                                RaiseFileChanged(fi);
-
-                            #region Bug Fix #14522
-                            else
+                            foreach (FileInfo fi in NewFiles.Values)
                             {
-                                //-------------------------------------------------------------------------
-                                // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
-                                //-------------------------------------------------------------------------
-                                int index = Empresas.FindEmpresaByThread();
-                                string errorPath = String.Format("{0}\\{1}",
-                                    Settings.Empresas.Configuracoes[index].PastaXmlErro,
-                                    oldFi.Name);
+                                if (CancelProcess || ((BackgroundWorker)sender).CancellationPending)
+                                {
+                                    break;
+                                }
+
+                                if (OldFiles.Contains(fi.Name))
+                                {
+                                    FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
 
 #if DEBUG
-                                Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+                                    Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
 #endif
 
-                                Functions.Move(oldFi.FullName, errorPath);
+                                    if (oldFi.CreationTime != fi.CreationTime || oldFi.Length != fi.Length)
+                                    {
+                                        Console.WriteLine("...FS: " + fi.FullName);
+
+                                        RaiseFileChanged(fi);
+                                    }
+                                    else
+                                    {
+                                        #region Bug Fix #14522
+                                        if (!fi.FullName.ToLower().Contains("\\contingencia"))
+                                        {
+                                            //-------------------------------------------------------------------------
+                                            // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
+                                            //-------------------------------------------------------------------------
+                                            int index = Empresas.FindEmpresaByThread();
+                                            string errorPath = String.Format("{0}\\{1}",
+                                                Settings.Empresas.Configuracoes[index].PastaXmlErro,
+                                                oldFi.Name);
+
+#if DEBUG
+                                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
+
+                                            Functions.Move(oldFi.FullName, errorPath);
+                                        }
+                                        #endregion
+                                    }
+
+#if DEBUG
+                                    Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
+
+                                }
+                                else
+                                {
+#if DEBUG
+                                    Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
+#endif
+
+                                    RaiseFileChanged(fi);
+                                    OldFiles.Add(fi.Name, fi);
+#if DEBUG
+                                    Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
+#endif
+                                }
                             }
-                            #endregion
 
-#if DEBUG
-                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                        }
-                        else
-                        {
-#if DEBUG
-                            Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                            RaiseFileChanged(fi);
-                            OldFiles.Add(fi.Name, fi);
-#if DEBUG
-                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
-#endif
+                            OldFiles = NewFiles.Clone() as Hashtable;
                         }
                     }
-
-                    OldFiles = NewFiles.Clone() as Hashtable;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
                 }
-
-                Thread.Sleep(2000);
+                finally
+                {
+                    Thread.Sleep(2000);
+                }
             }
         }
 
         private void RaiseFileChanged(FileInfo fi)
         {
-            if(File.Exists(fi.FullName))
+            if (File.Exists(fi.FullName))
             {
-                if(fi.Length > 0)
+                ///
+                /// TODO!!!
+                /// entre este processo e o RaiseEvent está tendo uma demora consideravel
+                /// 
+
+                if (fi.Length > 0)
                 {
                     BackgroundWorker worker = new BackgroundWorker();
                     worker.WorkerSupportsCancellation = true;
@@ -196,7 +208,7 @@ namespace NFe.Threadings
             Debug.WriteLine(String.Format("A leitura do arquivo '{0}' foi iniciada.", fi.FullName));
 #endif
 
-            if(OnFileChanged != null)
+            if (OnFileChanged != null)
                 OnFileChanged(fi);
 
 #if DEBUG
@@ -212,7 +224,7 @@ namespace NFe.Threadings
             get { return CancelProcess; }
             set
             {
-                if(value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
+                if (value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
                 {
                     CancelProcess = true;
                     this.worker.CancelAsync();

@@ -41,10 +41,9 @@ namespace NFe.Service
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
 
-#if true
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
+                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico, dadosPedSta.tpEmis));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
@@ -52,18 +51,6 @@ namespace NFe.Service
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
-#else
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oStatusServico = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosPedSta.cUF));
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
-
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico);
-
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oStatusServico, NomeMetodoWS(Servico, dadosPedSta.cUF), oCabecMsg, this, "-ped-sta", "-sta");
-#endif
             }
             catch (Exception ex)
             {

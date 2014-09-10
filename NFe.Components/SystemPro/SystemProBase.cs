@@ -11,6 +11,7 @@ namespace NFe.Components.SystemPro
 {
     public abstract class SystemProBase : EmiteNFSeBase
     {
+
         #region locais/ protegidos
         object systemProService;
         protected object SystemProService

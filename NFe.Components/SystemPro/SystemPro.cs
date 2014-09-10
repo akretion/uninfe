@@ -10,6 +10,7 @@ namespace NFe.Components.SystemPro
     #region classe final
     public class SystemPro: SystemProBase
     {
+
         #region Construtores
         public SystemPro(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate)
             : base(tpAmb, pastaRetorno, certificate)

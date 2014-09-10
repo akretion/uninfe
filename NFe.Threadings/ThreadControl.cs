@@ -298,7 +298,7 @@ namespace NFe.Threadings
             }
             catch(Exception ex)
             {
-                Auxiliar.WriteLog("Ocorreu um erro na execução da thread que está sendo executada.\r\nThreadControl.Cs (1)\r\n" + ex.Message, true);
+                Auxiliar.WriteLog("Ocorreu um erro na execução da thread que está sendo executada.\r\nThreadControl.cs (1)\r\n" + ex.Message, true);
             }
             finally
             {
@@ -310,7 +310,7 @@ namespace NFe.Threadings
                 }
                 catch(Exception ex)
                 {
-                    Auxiliar.WriteLog("Ocorreu um erro ao tentar remover o item da Thread que está sendo executada.\r\nThreadControl.Cs (2)\r\n" + ex.Message, true);
+                    Auxiliar.WriteLog("Ocorreu um erro ao tentar remover o item da Thread que está sendo executada.\r\nThreadControl.cs (2)\r\n" + ex.Message, true);
                 }
 
                 GC.Collect();

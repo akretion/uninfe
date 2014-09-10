@@ -565,7 +565,6 @@ namespace NFe.Service
                     switch (tpe)
                     {
                         case ConvertTxt.tpEventos.tpEvEPEC:
-                        case ConvertTxt.tpEventos.tpEvCCe:
                         case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                         case ConvertTxt.tpEventos.tpEvCienciaOperacao:
                         case ConvertTxt.tpEventos.tpEvConfirmacaoOperacao:

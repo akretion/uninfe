@@ -11,6 +11,7 @@ using NFe.Settings;
 using NFe.Certificado;
 using NFe.Exceptions;
 using System.IO.Compression;
+using System.Security.Cryptography;
 
 namespace NFe.Service
 {
@@ -600,6 +601,22 @@ namespace NFe.Service
 
                 switch (doc.DocumentElement.Name)
                 {
+                    case "NFe":
+                        foreach (var el3 in doc.GetElementsByTagName("ide"))
+                        {
+                            if (((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEmis.ToString())[0] != null)
+                            {
+                                NFe.Components.TipoEmissao tpe = NFe.Components.EnumHelper.StringToEnum<NFe.Components.TipoEmissao>(((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEmis.ToString())[0].InnerText);
+                                if (tpe != (NFe.Components.TipoEmissao)emp.tpEmis)
+                                {
+                                    throw new Exception("Tipo de emissão do arquivo diferente do tipo de emissão definido na empresa");
+                                }
+                                tipo = ((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.mod.ToString())[0].InnerText.Equals("55") ? "nfe" : "nfce";
+                            }
+                        }
+                        arqProcNFe = nomeArqXMLNFe;
+                        break;
+
                     case "cteProc":
                         tipo = "cte";
                         ///
@@ -758,16 +775,28 @@ namespace NFe.Service
                     /// pesquisa na arvore de enviados pelo arquivo da NFe/NFCe
                     /// 
                     string[] fTemp = Directory.GetFiles(emp.PastaXmlEnvio,
-                                                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtRetorno.retDPEC_XML) + Propriedade.ExtEnvio.Nfe),
+                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.retEPEC_XML : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
                                                         SearchOption.AllDirectories);
                     if (fTemp.Length == 0)
                         fTemp = Directory.GetFiles(emp.PastaXmlEnviado,
-                                                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtRetorno.retDPEC_XML) + Propriedade.ExtEnvio.Nfe),
+                                                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.retEPEC_XML : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
                                                         SearchOption.AllDirectories);
                     if (fTemp.Length > 0)
                     {
                         arqProcNFe = fTemp[0];
                     }
+                    else
+                        if (emp.tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
+                        {
+                            fTemp = Directory.GetFiles(emp.PastaContingencia,
+                                                            Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.PedEPEC) + Propriedade.ExtEnvio.Nfe),
+                                                            SearchOption.AllDirectories);
+                            if (fTemp.Length > 0)
+                            {
+                                arqProcNFe = fTemp[0];
+                            }
+                        }
+
                     if (!File.Exists(arqProcNFe))
                     {
                         throw new Exception("Arquivo a NFe/NFCe" + Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtRetorno.retDPEC_XML) + Propriedade.ExtEnvio.Nfe) + " não encontrado para impressão do DANFE/DACTE");
@@ -1065,7 +1094,7 @@ namespace NFe.Service
                     if (!string.IsNullOrEmpty(configDanfe))
                         Args += " C=\"" + configDanfe + "\"";
 
-                    Args += " M=1"; //Imprimir
+                    //Args += " M=1"; //Imprimir
                     
                     if (temCancelamento)
                         Args += " CC=1"; //Cancelamento
@@ -1198,5 +1227,20 @@ namespace NFe.Service
             }
         }
 	    #endregion    
+
+        /// <summary>
+        /// Lucas A. Araujo
+        /// 卐 Criptografa uma string.
+        /// </summary>
+        /// <param name="messageString">String</param>
+        /// <returns>Texto criptografado</returns>
+        public static string EncryptSHA1(string messageString)
+        {
+            SHA1 mySHA1 = SHA1Managed.Create();
+            byte[] hashValue = mySHA1.ComputeHash(UnicodeEncoding.UTF8.GetBytes(messageString));
+
+            return Convert.ToBase64String(hashValue);
+        }
+
     }
 }

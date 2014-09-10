@@ -294,6 +294,7 @@ namespace NFe.Components
 
         #region Impressao do DANFE
         ImpressaoNFe,
+        ImpressaoNFe_Contingencia,
         #endregion
 
         #region Impressao do relatorio de e-mails do DANFE
@@ -436,6 +437,7 @@ namespace NFe.Components
         /// <summary>
         /// Padrão Nota Fiscal eletrônica DSF 
         /// Prefeitura de Campinas - SP
+        /// Prefeitura de Campo Grande - MS
         /// </summary>
         DSF,
         /// <summary>
@@ -455,7 +457,17 @@ namespace NFe.Components
         /// <summary>
         /// Prefeitura do Rio de Janeiro - RJ
         /// </summary>
-        CARIOCA
+        CARIOCA,
+        /// <summary>
+        /// Prefeitura de Bauru - SP
+        /// </summary>
+        SIGCORP_SIGISS,
+        /// <summary>
+        /// Padrão SmaraPD
+        /// Prefeitura de Sertãozinho - SP
+        /// </summary>
+        SMARAPD
+
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
 

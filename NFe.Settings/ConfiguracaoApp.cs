@@ -1819,24 +1819,23 @@ namespace NFe.Settings
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arqXML);
 
-                const string DadosEmpresa = "DadosEmpresa";
 
                 foreach (XmlElement item in doc.DocumentElement)
                 {
-                    if (doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.CNPJ] != null)
+                    switch (item.Name.ToLower())
                     {
-                        cnpj = doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.CNPJ].Value;
-                        temEmpresa = true;
-                    }
-                    if (doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico] != null)
-                    {
-                        servico = doc.DocumentElement.SelectNodes(DadosEmpresa)[0].Attributes[NFe.Components.NFeStrConstants.Servico].Value;
-                        temEmpresa = true;
-                    }
-                    if (item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome).Count != 0)
-                    {
-                        nomeEmp = item.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText;
-                        temEmpresa = true;
+                        case "nome":
+                            nomeEmp = item.InnerText;
+                            temEmpresa = true;
+                            break;
+                        case "cnpj":
+                            cnpj = item.InnerText;
+                            temEmpresa = true;
+                            break;
+                        case "servico":
+                            servico = item.InnerText;
+                            temEmpresa = true;
+                            break;
                     }
                 }
             }
@@ -1854,15 +1853,15 @@ namespace NFe.Settings
                     switch (dados[0].ToLower())
                     {
                         case "nome":
-                            nomeEmp = dados[1];
+                            nomeEmp = dados[1].Trim();
                             temEmpresa = true;
                             break;
                         case "cnpj":
-                            cnpj = dados[1];
+                            cnpj = dados[1].Trim();
                             temEmpresa = true;
                             break;
                         case "servico":
-                            servico = dados[1];
+                            servico = dados[1].Trim();
                             temEmpresa = true;
                             break;
                     }

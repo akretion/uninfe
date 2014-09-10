@@ -1890,6 +1890,43 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRetRecepcao2_200.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeStatusServico2_200.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJacarei-ISSNET.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJacarei-ISSNET.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCascavel-ISSNet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCascavel-ISSNet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNiteroi-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNiteroi-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBauruSP-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBauruSP-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDPWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDPWSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDWSEntrada.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoLuizMADSF-LoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoLuizMADSF-LoteRps.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
