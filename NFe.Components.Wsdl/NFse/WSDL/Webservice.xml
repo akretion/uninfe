@@ -2030,4 +2030,24 @@
       <CancelarNfse>WSDL\Producao\PSaoLuizMADSF-LoteRps.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="4316808" Nome="Santa Cruz do Sul - RS" UF="RS" Padrao="THEMA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HSantaCruzRS-THEMANFSEremessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HSantaCruzRS-THEMANFSEcancelamento.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PSantaCruzRS-THEMANFSEremessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PSantaCruzRS-THEMANFSEconsulta.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PSantaCruzRS-THEMANFSEcancelamento.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

@@ -1935,8 +1935,23 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetAutorizacao.wsdl" />
+  </ItemGroup>  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEcancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEdadosCadastrais.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEguias.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEmensagens.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEremessa.wsdl" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEcancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEconsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEdadosCadastrais.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEguias.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEmensagens.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEremessa.wsdl" />
+  </ItemGroup> 
+ <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
