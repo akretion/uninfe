@@ -1927,6 +1927,15 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoLuizMADSF-LoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoLuizMADSF-LoteRps.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCECadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeAutorizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetAutorizacao.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

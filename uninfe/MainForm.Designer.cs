@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_config = new System.Windows.Forms.ToolStripButton();
@@ -35,12 +36,13 @@
             this.toolStripButton_validarxml = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sobre = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnUpdate = new System.Windows.Forms.ToolStripButton();
+            this.tbMunic = new System.Windows.Forms.ToolStripButton();
             this.tbLogs = new System.Windows.Forms.ToolStripButton();
             this.tsPrintDanfe = new System.Windows.Forms.ToolStripButton();
             this.tbClearLockFiles = new System.Windows.Forms.ToolStripButton();
             this.tbForceUpdateWSDL = new System.Windows.Forms.ToolStripButton();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
             this.tbRestartServico = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -55,7 +57,6 @@
             this.sobreOUniNFeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbMunic = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -136,6 +137,17 @@
             this.toolStripBtnUpdate.Text = "toolStripButton1";
             this.toolStripBtnUpdate.ToolTipText = "Atualizar o aplicativo";
             this.toolStripBtnUpdate.Click += new System.EventHandler(this.toolStripBtnUpdate_Click);
+            // 
+            // tbMunic
+            // 
+            this.tbMunic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbMunic.Image = ((System.Drawing.Image)(resources.GetObject("tbMunic.Image")));
+            this.tbMunic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbMunic.Name = "tbMunic";
+            this.tbMunic.Size = new System.Drawing.Size(52, 52);
+            this.tbMunic.Text = "toolStripButton1";
+            this.tbMunic.ToolTipText = "Configurar os padrões de NFS-e dos municípios";
+            this.tbMunic.Click += new System.EventHandler(this.btnMunicipios_Click);
             // 
             // tbLogs
             // 
@@ -298,16 +310,6 @@
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(380, 22);
             this.sairToolStripMenuItem.Text = "Fechar o UniNFe";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
-            // 
-            // tbMunic
-            // 
-            this.tbMunic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbMunic.Image = ((System.Drawing.Image)(resources.GetObject("tbMunic.Image")));
-            this.tbMunic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbMunic.Name = "tbMunic";
-            this.tbMunic.Size = new System.Drawing.Size(52, 52);
-            this.tbMunic.Text = "toolStripButton1";
-            this.tbMunic.Click += new System.EventHandler(this.btnMunicipios_Click);
             // 
             // MainForm
             // 

@@ -631,6 +631,11 @@ namespace NFe.ConvertTxt
                         this.chave.Equals("nfce", StringComparison.InvariantCultureIgnoreCase)) this.chave = string.Empty;
                     this.chave = this.chave.Replace("NFe", "");
                     this.chave = this.chave.Replace("NFCe", "");
+                    this.chave = (string)Functions.OnlyNumbers(this.chave, ".,-/+");
+                    if (!string.IsNullOrEmpty(this.chave) && this.chave.Length != 44)
+                    {
+                        throw new Exception("Chave de acesso inválida no segmento A");
+                    }
                     NFe.infNFe.Versao = (v>0 ? Convert.ToDecimal(v) : 2);
                     break;
 
@@ -662,7 +667,7 @@ namespace NFe.ConvertTxt
                     {
                         NFe.ide.dEmi    = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dEmi, ObOp.Obrigatorio, 10, 10);
                         NFe.ide.dSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dSaiEnt, ObOp.Opcional, 10, 10);
-                        NFe.ide.hSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcHor, TpcnResources.hSaiEnt, ObOp.Opcional, 0, 0);
+                        NFe.ide.hSaiEnt = (DateTime)this.LerCampo(TpcnTipoCampo.tcHor, TpcnResources.hSaiEnt, ObOp.Opcional, 8, 8);
                     }
                     NFe.ide.tpNF    = (TpcnTipoNFe)this.LerInt32(TpcnResources.tpNF, ObOp.Obrigatorio, 1, 1);
                     NFe.ide.cMunFG  = this.LerInt32(TpcnResources.cMunFG, ObOp.Obrigatorio, 7, 7);
@@ -1327,7 +1332,7 @@ namespace NFe.ConvertTxt
 
                 case "N04":
                     layout = "§N04|orig¨|CST¨|modBC¨|pRedBC¨|vBC¨|pICMS¨|vICMS¨|vICMSDeson¨|motDesICMS¨|";  //no manual
-                    layout = "§N04|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|motDesICMS¨|vICMSDeson¨"; //ok
+                    //layout = "§N04|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|motDesICMS¨|vICMSDeson¨"; //ok
                     #region ICMS20
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
@@ -1337,15 +1342,15 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.vBC = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBC, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMS = this.LerDouble(this.TipoCampo42, TpcnResources.pICMS, ObOp.Obrigatorio, this.CasasDecimais75);
                     NFe.det[nProd].Imposto.ICMS.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion
                     break;
 
                 case "N05":
                     layout = "§N05|orig¨|CST¨|modBCST¨|pMVAST¨|pRedBCST¨|vBCST¨|pICMSST¨|vICMSST¨|vICMSDeson¨|motDesICMS¨"; //no manual
-                    layout = "§N05|Orig¨|CST¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
+                    //layout = "§N05|Orig¨|CST¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
 
                     #region ICMS30
 
@@ -1357,31 +1362,31 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMSST = this.LerDouble(this.TipoCampo42, TpcnResources.pICMSST, ObOp.Obrigatorio, this.CasasDecimais75);
                     NFe.det[nProd].Imposto.ICMS.vICMSST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSST, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion
                     break;
 
                 case "N06":
-                    layout = "§N06|orig¨|CST¨|vICMS¨|motDesICMS¨";  //no manual
-                    layout = "§N06|Orig¨|CST¨|vICMS¨|motDesICMS¨|vICMSDeson¨"; //ok
+                    layout = "§N06|orig¨|CST¨|vICMS¨|vICMSDeson¨|motDesICMS¨";  //no manual
+                    //layout = "§N06|Orig¨|CST¨|vICMS¨|motDesICMS¨|vICMSDeson¨"; //ok
 
                     #region ICMS40, ICMS41 ICMS50
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = this.LerString(TpcnResources.CST, ObOp.Obrigatorio, 2, 2);
                     NFe.det[nProd].Imposto.ICMS.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
                     if (NFe.det[nProd].Imposto.ICMS.vICMS > 0)
                         NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
-                    NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
 
                     #endregion
                     break;
 
                 case "N07":
-                    layout = "§N07|orig¨|CST¨|modBC¨|pRedBC¨|vBC¨|pICMS¨|vICMSOp¨|pDif¨|vICMSDif¨|";    //no manual
-                    layout = "§N07|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|vICMSOp¨|pDif¨|vICMSDif¨|"; //ok
+                    layout = "§N07|orig¨|CST¨|modBC¨|pRedBC¨|vBC¨|pICMS¨|vICMS¨|vICMSOp¨|pDif¨|vICMSDif¨|";    //no manual
+                    //layout = "§N07|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|vICMSOp¨|pDif¨|vICMSDif¨|"; //ok
 
                     #region ICMS51
 
@@ -1414,7 +1419,7 @@ namespace NFe.ConvertTxt
 
                 case "N09":
                     layout = "§N09|orig¨|CST¨|modBC¨|pRedBC¨|vBC¨|pICMS¨|vICMS¨|modBCST¨|pMVAST¨|pRedBCST¨|vBCST¨|pICMSST¨|vICMSST¨|vICMSDeson¨|motDesICMS¨";//no manual
-                    layout = "§N09|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
+                    //layout = "§N09|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
 
                     #region ICMS70
 
@@ -1431,15 +1436,15 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMSST = this.LerDouble(this.TipoCampo42, TpcnResources.pICMSST, ObOp.Obrigatorio, this.CasasDecimais75);
                     NFe.det[nProd].Imposto.ICMS.vICMSST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSST, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion
                     break;
 
                 case "N10":
                     layout = "§N10|orig¨|CST¨|modBC¨|vBC¨|pRedBC¨|pICMS¨|vICMS¨|modBCST¨|pMVAST¨|pRedBCST¨|vBCST¨|pICMSST¨|vICMSST¨|vICMSDeson¨|motDesICMS¨";//no manual
-                    layout = "§N10|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
+                    //layout = "§N10|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|motDesICMS¨|vICMSDeson¨"; //ok
 
                     #region ICMS90
 
@@ -1457,15 +1462,15 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pICMSST = this.LerDouble(this.TipoCampo42, TpcnResources.pICMSST, ObOp.Obrigatorio, this.CasasDecimais75);
                     NFe.det[nProd].Imposto.ICMS.vICMSST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSST, ObOp.Obrigatorio, 15);
-                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion                    
                     break;
 
                 case "N10A":
                     layout = "§N10a|orig¨|CST¨|modBC¨|vBC¨|pRedBC¨|pICMS¨|vICMS¨|modBCST¨|pMVAST¨|pRedBCST¨|vBCST¨|pICMSST¨|vICMSST¨|pBCOp¨|UFST¨";//no manual
-                    layout = "§N10a|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|pBCOp¨|UFST¨";
+                    //layout = "§N10a|Orig¨|CST¨|ModBC¨|PRedBC¨|VBC¨|PICMS¨|VICMS¨|ModBCST¨|PMVAST¨|PRedBCST¨|VBCST¨|PICMSST¨|VICMSST¨|pBCOp¨|UFST¨";
 
                     #region ICMSPart-10, ICMSPart-90
 
@@ -1895,7 +1900,7 @@ namespace NFe.ConvertTxt
 
                 case "W02":
                     if (NFe.infNFe.Versao >= 3)
-                        layout = "§W02|vBC¨|vICMS¨|vICMSDeson¨|vBCST¨|vST¨|vProd¨|vFrete¨|vSeg¨|vDesc¨|vII¨|vIPI¨|vPIS¨|¨vCOFINS¨|vOutro¨|vNF¨|vTotTrib¨|";
+                        layout = "§W02|vBC¨|vICMS¨|vICMSDeson¨|vBCST¨|vST¨|vProd¨|vFrete¨|vSeg¨|vDesc¨|vII¨|vIPI¨|vPIS¨|vCOFINS¨|vOutro¨|vNF¨|vTotTrib¨|";
                     else
                         layout = "§W02|VBC¨|VICMS¨|VBCST¨|VST¨|VProd¨|VFrete¨|VSeg¨|VDesc¨|VII¨|VIPI¨|VPIS¨|VCOFINS¨|VOutro¨|VNF¨|vTotTrib¨|vICMSDeson¨"; //ok
                     ///
