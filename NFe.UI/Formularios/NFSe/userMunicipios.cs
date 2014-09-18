@@ -26,7 +26,7 @@ namespace NFe.UI.Formularios
 
         void metroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            grid1.dataGridView1.Tag = metroTabControl1.SelectedIndex;
+            grid1.metroGrid1.Tag = metroTabControl1.SelectedIndex;
 
             if (metroTabControl1.SelectedIndex == 1)
                 this.grid2.RefreshMunicipiosDefinidos();
@@ -55,8 +55,8 @@ namespace NFe.UI.Formularios
 
                 this.metroTabControl1.SelectedIndexChanged += metroTabControl1_SelectedIndexChanged;
 
-                grid1.dataGridView1.BackgroundColor =
-                    grid2.dgvDireto.BackgroundColor = MetroFramework.Drawing.MetroPaint.BackColor.Form(uninfeDummy.mainForm.uTheme);
+                //grid1.metroGrid1.BackgroundColor =
+                    //grid2.dgvDireto.BackgroundColor = MetroFramework.Drawing.MetroPaint.BackColor.Form(uninfeDummy.mainForm.uTheme);
             }
         }
 

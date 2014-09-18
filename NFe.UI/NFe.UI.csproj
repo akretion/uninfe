@@ -65,6 +65,12 @@
     <Compile Include="Formularios\FormUpdate.Designer.cs">
       <DependentUpon>FormUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormVisual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormVisual.Designer.cs">
+      <DependentUpon>FormVisual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormWait.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormUpdate.resx">
       <DependentUpon>FormUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormVisual.resx">
+      <DependentUpon>FormVisual.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormWait.resx">
       <DependentUpon>FormWait.cs</DependentUpon>
@@ -521,6 +530,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BluePixel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="news.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1000,7 +1000,13 @@ namespace NFe.Service
                     nfe is TaskConsultaSituacaoNFe ||
                     nfe is TaskConsultaDPEC ||
                     nfe is TaskDanfeContingencia ||
-                    nfe is TaskCadastroContribuinte)
+                    nfe is TaskCadastroContribuinte ||
+                    nfe is TaskRetRecepcaoCTe ||
+                    nfe is TaskConsultaStatusCTe ||
+                    nfe is TaskConsultaSituacaoCTe ||                    
+                    nfe is TaskRetRecepcaoMDFe ||
+                    nfe is TaskConsultaStatusMDFe ||
+                    nfe is TaskConsultaSituacaoMDFe )
                 {
                     tipoServico.InvokeMember(metodo, System.Reflection.BindingFlags.InvokeMethod, null, nfe, null);
                 }

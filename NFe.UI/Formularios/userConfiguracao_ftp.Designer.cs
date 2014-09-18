@@ -84,6 +84,8 @@
             // 
             this.edtFTP_PastaRetornos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtFTP_PastaRetornos.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_PastaRetornos.Location = new System.Drawing.Point(0, 229);
             this.edtFTP_PastaRetornos.MaxLength = 14;
             this.edtFTP_PastaRetornos.Name = "edtFTP_PastaRetornos";
@@ -112,6 +114,8 @@
             // 
             this.edtFTP_PastaDestino.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtFTP_PastaDestino.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_PastaDestino.Location = new System.Drawing.Point(0, 187);
             this.edtFTP_PastaDestino.MaxLength = 14;
             this.edtFTP_PastaDestino.Name = "edtFTP_PastaDestino";
@@ -127,6 +131,8 @@
             // 
             // edtFTP_Porta
             // 
+            this.edtFTP_Porta.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_Porta.Location = new System.Drawing.Point(0, 145);
             this.edtFTP_Porta.MaxLength = 14;
             this.edtFTP_Porta.Name = "edtFTP_Porta";
@@ -144,6 +150,8 @@
             // 
             this.edtFTP_Password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtFTP_Password.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_Password.Location = new System.Drawing.Point(0, 103);
             this.edtFTP_Password.MaxLength = 14;
             this.edtFTP_Password.Name = "edtFTP_Password";
@@ -172,6 +180,8 @@
             // 
             this.edtFTP_UserName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtFTP_UserName.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_UserName.Location = new System.Drawing.Point(0, 61);
             this.edtFTP_UserName.MaxLength = 14;
             this.edtFTP_UserName.Name = "edtFTP_UserName";
@@ -200,6 +210,8 @@
             // 
             this.edtFTP_Server.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtFTP_Server.Lines = new string[] {
+        "Styled Textbox"};
             this.edtFTP_Server.Location = new System.Drawing.Point(0, 19);
             this.edtFTP_Server.MaxLength = 14;
             this.edtFTP_Server.Name = "edtFTP_Server";
@@ -250,6 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.btnTestarFTP);
             this.Controls.Add(this.metroLabel41);
             this.Controls.Add(this.metroLabel40);

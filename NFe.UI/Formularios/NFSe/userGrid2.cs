@@ -23,7 +23,8 @@ namespace NFe.UI.Formularios.NFSe
         {
             base.OnLoad(e);
 
-            this.colPadrao_D.Items.Clear();
+            uninfeDummy.ClearControls(this, true, false);
+
             this.colPadrao_D.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
         }
 
@@ -31,9 +32,9 @@ namespace NFe.UI.Formularios.NFSe
         {
             try
             {
-                int codmun = Convert.ToInt32((sender as DataGridView).Rows[e.RowIndex].Cells[0].Value);
-                string cidade = (sender as DataGridView).Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
-                string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[2].Value.ToString();
+                int codmun = Convert.ToInt32((sender as DataGridView).Rows[e.RowIndex].Cells[this.colIBGE_D.Index].Value);
+                string cidade = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colNome_D.Index].Value.ToString().Trim();
+                string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colPadrao_D.Index].Value.ToString();
                 string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
                 WebServiceNFSe.SalvarXMLMunicipios(uf, cidade, codmun, padrao, true);

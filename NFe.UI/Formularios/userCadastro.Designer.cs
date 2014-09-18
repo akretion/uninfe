@@ -98,6 +98,7 @@
             // 
             // comboUf
             // 
+            this.comboUf.BackColor = System.Drawing.SystemColors.Highlight;
             this.comboUf.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboUf.FormattingEnabled = true;
             this.comboUf.IntegralHeight = false;

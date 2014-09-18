@@ -654,6 +654,11 @@ combo.ValueMember = "Key";
         /// <returns>An <see cref="IList"/> containing the enumerated type value and description.</returns>
         public static IList ToList(Type type, bool returnInt, bool excluibrancos)
         {
+            return ToList(type, returnInt, excluibrancos, "");
+        }
+
+        public static IList ToList(Type type, bool returnInt, bool excluibrancos, string eliminar)
+        {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
@@ -666,6 +671,8 @@ combo.ValueMember = "Key";
             {
                 string _descr = GetDescription(value);
                 if (excluibrancos && string.IsNullOrEmpty(_descr)) continue;
+
+                if (eliminar.IndexOf(Convert.ToInt32(value).ToString()) != -1) continue;
 
                 if (returnInt)
                     list.Add(new KeyValuePair<int, string>(Convert.ToInt32(value), _descr));

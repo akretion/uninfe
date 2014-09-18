@@ -37,7 +37,8 @@ namespace NFe.UI
                 this.cbAmbiente.DisplayMember = "Value";
                 this.cbAmbiente.ValueMember = "Key";
 
-                var lista = EnumHelper.ToList(typeof(TipoEmissao), true, true);
+                var lista = EnumHelper.ToList(typeof(TipoEmissao), true, true, "2,4,5,9");
+
                 this.cbEmissao.DataSource = lista;
                 this.cbEmissao.DisplayMember = "Value";
                 this.cbEmissao.ValueMember = "Key";
@@ -47,7 +48,7 @@ namespace NFe.UI
                 this.cbServico.ValueMember = "Key";
 
                 this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
-                this.cbEmpresa.ValueMember = "Valor";
+                this.cbEmpresa.ValueMember = "Key";
                 this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
 
                 this.comboUf.DisplayMember = "nome";
@@ -86,7 +87,7 @@ namespace NFe.UI
                 {
                     var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
 
-                    this.Emp = Empresas.FindConfEmpresaIndex(this.cbEmpresa.SelectedValue.ToString(), NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+                    this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
                     if (this.Emp >= 0)
                     {
                         uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresa.SelectedIndex);

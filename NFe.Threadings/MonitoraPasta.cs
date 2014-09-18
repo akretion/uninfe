@@ -44,11 +44,7 @@ namespace NFe.Threadings
             for(int i = 0; i < Empresas.Configuracoes.Count; i++)
             {
                 #region Pasta de envio
-                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEnvio, "*.xml"));
-                fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
-                fsw[fsw.Count - 1].StartWatch();
-
-                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEnvio, "*.txt"));
+                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEnvio, "*.xml,*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion
@@ -57,22 +53,14 @@ namespace NFe.Threadings
                 if(!string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaXmlEmLote) && 
                     Empresas.Configuracoes[i].Servico != Components.TipoAplicativo.Nfse)
                 {
-                    fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEmLote, "*.xml"));
-                    fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
-                    fsw[fsw.Count - 1].StartWatch();
-
-                    fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEmLote, "*.txt"));
+                    fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEmLote, "*.xml,*.txt"));
                     fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                     fsw[fsw.Count - 1].StartWatch();
                 }
                 #endregion
 
                 #region Pasta Validar
-                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaValidar, "*.xml"));
-                fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
-                fsw[fsw.Count - 1].StartWatch();
-
-                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaValidar, "*.txt"));
+                fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaValidar, "*.xml,*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
                 #endregion

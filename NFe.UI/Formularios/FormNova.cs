@@ -86,11 +86,11 @@ namespace NFe.UI.Formularios
             }
             else
             {
-                cnt = NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Todos) +
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.NFCe) +
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Nfe) +
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Cte) +
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.MDFe);
+                cnt =   NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Todos) >= 0 ||
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.NFCe) >= 0 ||
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Nfe) >= 0 ||
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Cte) >= 0 ||
+                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.MDFe) >= 0 ? 1 : 0;
             }
             if (cnt > 0)
             {

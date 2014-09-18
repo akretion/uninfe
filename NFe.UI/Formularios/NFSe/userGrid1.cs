@@ -45,6 +45,8 @@ namespace NFe.UI.Formularios.NFSe
             this.comboUf.SelectedValueChanged += comboUf_SelectedValueChanged;
 
             comboUf_SelectedValueChanged(null, null);
+
+            uninfeDummy.ClearControls(this, true, false);
         }
 
         private void comboUf_SelectedValueChanged(object sender, EventArgs e)
@@ -87,7 +89,7 @@ namespace NFe.UI.Formularios.NFSe
                         cidades.Add(new NFe.Components.Municipio
                         { 
                             CodigoMunicipio = Convert.ToInt32(linha.Substring(0, 7)), 
-                            Nome = linha.Substring(7), 
+                            Nome = linha.Substring(7).Trim(), 
                             PadraoStr = Functions.PadraoNFSe(Convert.ToInt32(linha.Substring(0, 7).Trim())).ToString() 
                         });
                     }
@@ -105,7 +107,7 @@ namespace NFe.UI.Formularios.NFSe
             }
             catch (Exception ex)
             {
-                this.dataGridView1.Enabled = false;
+                this.metroGrid1.Enabled = false;
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
             }
         }
@@ -114,9 +116,9 @@ namespace NFe.UI.Formularios.NFSe
         {
             try
             {
-                int codmun = Convert.ToInt32((sender as DataGridView).Rows[e.RowIndex].Cells[0].Value);
-                string cidade = (sender as DataGridView).Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
-                string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[2].Value.ToString();
+                int codmun = Convert.ToInt32((sender as DataGridView).Rows[e.RowIndex].Cells[this.colIBGE.Index].Value);
+                string cidade = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colNome.Index].Value.ToString().Trim();
+                string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colPadrao.Index].Value.ToString();
                 string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
                 WebServiceNFSe.SalvarXMLMunicipios(uf, cidade, codmun, padrao, false);
@@ -124,10 +126,10 @@ namespace NFe.UI.Formularios.NFSe
                 string cUF = ((ComboElem)(new System.Collections.ArrayList(this.arrUF))[this.comboUf.SelectedIndex]).Valor;
                 if (cUF == uf)
                 {
-                    for (int n = 0; n < this.dataGridView1.RowCount; ++n)
-                        if (this.dataGridView1.Rows[n].Cells[0].Value.ToString() == codmun.ToString())
+                    for (int n = 0; n < this.metroGrid1.RowCount; ++n)
+                        if (this.metroGrid1.Rows[n].Cells[0].Value.ToString() == codmun.ToString())
                         {
-                            this.dataGridView1.Rows[n].Cells[2].Value = padrao;
+                            this.metroGrid1.Rows[n].Cells[this.colPadrao.Index].Value = padrao;
                             break;
                         }
                 }

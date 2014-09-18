@@ -206,7 +206,7 @@ namespace NFe.Interface
                             break;
 
                         default:
-                            subpasta = "\\" + servico.ToString().ToLower();
+                            subpasta += "\\" + servico.ToString().ToLower();
                             break;
                     }
                     oEmpresa.PastaXmlEnvio = Path.Combine(Propriedade.PastaExecutavel, subpasta + "\\Envio");

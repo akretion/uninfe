@@ -142,7 +142,7 @@ namespace NFe.Components
         {
             bool flagNeg = false;
 
-            if(text == null || text.ToString().Length == 0) return 0;
+            if(text == null || text.ToString().Length == 0) return "";
             string ret = "";
 
             foreach(char c in text.ToString().ToCharArray())
@@ -439,7 +439,7 @@ namespace NFe.Components
                             select p);
                 foreach (var item in s)
                 {
-                    if (Convert.ToInt32(OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value)) == 0)
+                    if (Convert.ToInt32("0" + OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value)) == 0)
                         continue;
 
                     var temp = Propriedade.Municipios.FirstOrDefault(x => x.CodigoMunicipio == Convert.ToInt32(item.Attribute(NFeStrConstants.ID).Value));

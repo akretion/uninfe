@@ -1,0 +1,16 @@
+﻿15-9-2014
+- Quando incluindo uma empresa, o combobox contendo as empresas estará invisivel.
+- Quando terminado de incluir uma empresa, esta já estará ativa no combobox.
+- Ajustado o problema do combobox ficar preenchida com uma cor que inviabilizava a visualização do texto quando era digitado algo num textbox.
+- No menu, foi criado um 'tile' para mudar o visual.
+- No menu, ao clicar com o botão da direito sobre um 'tile', poder-se-á mudar a cor dele.
+- No menu, o 'tile' de municipios só estará visivel se tiver ao menos uma empresa para o servico 'NFse'.
+- No menu, o 'tile' se configurações montra um número representando a quantidade de empresas cadastradas.
+- Quando da exclusao de uma empresa, será questionado se deseja excluir a empresa e se deseja excluir todas as pastas criadas.
+- Quando definida senha para acessar as configuracoes, esta será solicitada de hora em hora, não mais a cada acesso.
+- Alterada a classe MonitoraPasta para somente ter um FileSystemWatcher para cada empresa/processo. (linha 47)
+- Alterada a classe FileSystemWatcher para ler os arquivos com extensões passadas. (linha 99)
+- Alterada a classe FileSystemWatcher para usar a classe Thread em vez da BackgroundWorker (linha 213)
+	(em meus testes, todos os arquivos copiados para a pasta validar, foram processados de imediato e em sequencia. 
+	Consulta a situacao de servicos e ao cadastro de contribuinte que demoravam +/- 30 segundos, não há mais este tempo.
+	Não mandei processar uma nota para ver como se comporta esta Thread quando mais arquivos forem enviados simultaneamente).

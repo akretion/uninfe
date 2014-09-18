@@ -282,7 +282,6 @@ namespace MetroFramework.Controls
                     e.Graphics.Clear(backColor);
                     return;
                 }
-
                 base.OnPaintBackground(e);
 
                 OnCustomPaintBackground(new MetroPaintEventArgs(backColor, Color.Empty, e.Graphics));
@@ -301,7 +300,6 @@ namespace MetroFramework.Controls
                 {
                     OnPaintBackground(e);
                 }
-
                 OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
                 OnPaintForeground(e);
             }
@@ -356,8 +354,9 @@ namespace MetroFramework.Controls
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
 
             if (displayFocusRectangle && isFocused)
+            {
                 ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
-
+            }
             if (drawPrompt)
             {
                 DrawTextPrompt(e.Graphics);
@@ -369,20 +368,20 @@ namespace MetroFramework.Controls
             if (e.Index >= 0)
             {
                 Color foreColor;
-                Color backColor = BackColor;
+                Color backColor = this.BackColor;
 
                 if (!useCustomBackColor)
                 {
                     backColor = MetroPaint.BackColor.Form(Theme);
                 }
-
-                if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect) || e.State == DrawItemState.None)
+                if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect) || 
+                    e.State == DrawItemState.None || 
+                    e.State == DrawItemState.NoAccelerator)
                 {
                     using (SolidBrush b = new SolidBrush(backColor))
                     {
                         e.Graphics.FillRectangle(b, new Rectangle(e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height));
                     }
-
                     foreColor = MetroPaint.ForeColor.Link.Normal(Theme);
                 }
                 else
@@ -391,10 +390,8 @@ namespace MetroFramework.Controls
                     {
                         e.Graphics.FillRectangle(b, new Rectangle(e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height));
                     }
-
                     foreColor = MetroPaint.ForeColor.Tile.Normal(Theme);
                 }
-
                 Rectangle textRect = new Rectangle(0, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height);
                 TextRenderer.DrawText(e.Graphics, GetItemText(Items[e.Index]), MetroFonts.ComboBox(metroComboBoxSize, metroComboBoxWeight), textRect, foreColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
@@ -420,7 +417,6 @@ namespace MetroFramework.Controls
             {
                 backColor = MetroPaint.BackColor.Form(Theme);
             }
-
             Rectangle textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(g, promptText, MetroFonts.ComboBox(metroComboBoxSize, metroComboBoxWeight), textRect, SystemColors.GrayText, backColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
         }

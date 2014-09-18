@@ -93,6 +93,12 @@
     <Compile Include="Controls\MetroContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroGrid.designer.cs">
+      <DependentUpon>MetroGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MetroLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -234,6 +240,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\MetroGrid.resx">
+      <DependentUpon>MetroGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\de\MetroToggle.xml" />
     <EmbeddedResource Include="MessageBox\MetroMessageBoxControl.resx">
       <DependentUpon>MetroMessageBoxControl.cs</DependentUpon>

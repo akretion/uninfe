@@ -46,7 +46,7 @@ namespace NFe.Threadings
     /// <param name="item"></param>
     delegate void ProcessarHandler(ThreadItem item);
 
-    class BufferItem: IDisposable
+    class BufferItem : IDisposable
     {
         #region propriedades
         /// <summary>
@@ -70,7 +70,7 @@ namespace NFe.Threadings
         {
             Buffer = new Queue<ThreadItem>();
 
-            if(timer == null)
+            if (timer == null)
             {
                 //-------------------------------------------------------------------------
                 // Inicia o timer com 500 milissegundos. Desta forma a execução será rápida
@@ -81,7 +81,7 @@ namespace NFe.Threadings
 
                 timer.Elapsed += (s, e) =>
                 {
-                    lock(Buffer)
+                    lock (Buffer)
                     {
                         timer.Stop();
 
@@ -90,18 +90,18 @@ namespace NFe.Threadings
                             //-------------------------------------------------------------------------
                             // Recupera o threaditem e executa o mesmo
                             //-------------------------------------------------------------------------
-                            while(Buffer.Count > 0)
+                            while (Buffer.Count > 0)
                             {
                                 ThreadItem item = Buffer.Dequeue();
-                                if(item == null) continue;
+                                if (item == null) continue;
                                 Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento pelo Buffer");
                                 processar.Invoke(item);
                                 Thread.Sleep(0);
                                 Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento pelo Buffer");
-                                if(Disposed) return;//cai fora ... foi descarregada
+                                if (Disposed) return;//cai fora ... foi descarregada
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Auxiliar.WriteLog("ExceptionBuffer: " + ex.ToString());
                         }
@@ -134,7 +134,7 @@ namespace NFe.Threadings
 
         protected virtual void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 //faça algo
                 GC.SuppressFinalize(this);
@@ -157,7 +157,7 @@ namespace NFe.Threadings
     /// <summary>
     /// classe de item da thread
     /// </summary>
-    public class ThreadItem: IDisposable
+    public class ThreadItem : IDisposable
     {
         #region #21040
         static Dictionary<int, BufferItem> _buffer = null;
@@ -169,7 +169,7 @@ namespace NFe.Threadings
         {
             get
             {
-                if(_buffer == null)
+                if (_buffer == null)
                     _buffer = new Dictionary<int, BufferItem>();
 
                 return _buffer;
@@ -207,12 +207,12 @@ namespace NFe.Threadings
             Empresa = empresa;
 
             #region #21040
-            if(_buffer == null)
+            if (_buffer == null)
             {
                 //criar um buffer para cada empresa que o certificado é A3
-                foreach(Empresa emp in Empresas.Configuracoes)
+                foreach (Empresa emp in Empresas.Configuracoes)
                 {
-                    if(emp.X509Certificado.IsA3())
+                    if (emp.X509Certificado.IsA3())
                     {
                         //-------------------------------------------------------------------------
                         // Usar o subject como chave, pois pode se configurar o mesmo certificado
@@ -271,32 +271,23 @@ namespace NFe.Threadings
             }
             #endregion
 
-            BackgroundWorker bgw = new BackgroundWorker();
-            bgw.WorkerSupportsCancellation = true;
-            bgw.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-
-            bgw.DoWork += new DoWorkEventHandler((sender, e) =>
-            {
-                Processar(this);
-            });
-
-            bgw.RunWorkerAsync();
+            Processar(this);
         }
 
         private void Processar(ThreadItem item)
         {
-            if(String.IsNullOrEmpty(Thread.CurrentThread.Name))
+            if (String.IsNullOrEmpty(Thread.CurrentThread.Name))
                 Thread.CurrentThread.Name = item.Empresa.ToString();
 
             try
             {
                 //avisa que vai iniciar
-                if(OnStarted != null) OnStarted(item);
+                if (OnStarted != null) OnStarted(item);
 
                 //avisa que vai finalizar
-                if(OnEnded != null) OnEnded(item);
+                if (OnEnded != null) OnEnded(item);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Auxiliar.WriteLog("Ocorreu um erro na execução da thread que está sendo executada.\r\nThreadControl.cs (1)\r\n" + ex.Message, true);
             }
@@ -306,9 +297,9 @@ namespace NFe.Threadings
                 {
                     //remove o item                   
                     //avisa que removeu o item
-                    if(OnReleased != null) OnReleased(item);
+                    if (OnReleased != null) OnReleased(item);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Auxiliar.WriteLog("Ocorreu um erro ao tentar remover o item da Thread que está sendo executada.\r\nThreadControl.cs (2)\r\n" + ex.Message, true);
                 }
@@ -327,7 +318,7 @@ namespace NFe.Threadings
 
         private void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 //need to do something?
             }
@@ -366,14 +357,14 @@ namespace NFe.Threadings
 
         public static void Stop()
         {
-            for(int i = 0; i < Threads.Count; i++)
+            for (int i = 0; i < Threads.Count; i++)
             {
                 Thread t = Threads[i];
                 t.Abort();
             }
             Threads.Clear();
 
-            for(int i = 0; i < MonitoraPasta.fsw.Count; i++)
+            for (int i = 0; i < MonitoraPasta.fsw.Count; i++)
             {
                 MonitoraPasta.fsw[i].StopWatch = true;
             }

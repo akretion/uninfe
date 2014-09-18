@@ -608,7 +608,7 @@ namespace NFe.Components
                             XmlElement registroElemento = (XmlElement)registroNode;
                             if (registroElemento.Attributes.Count > 0)
                             {
-                                int IDmunicipio = Convert.ToInt32(Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
+                                int IDmunicipio = Convert.ToInt32("0" + Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
                                 string Nome = registroElemento.Attributes[NFeStrConstants.Nome].Value;
                                 string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
                                 string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));

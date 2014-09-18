@@ -47,6 +47,8 @@
             // 
             this.txtPinCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPinCertificado.Lines = new string[] {
+        "Styled Textbox"};
             this.txtPinCertificado.Location = new System.Drawing.Point(3, 321);
             this.txtPinCertificado.MaxLength = 32767;
             this.txtPinCertificado.Name = "txtPinCertificado";
@@ -75,6 +77,8 @@
             // 
             this.txtSenhaCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSenhaCertificado.Lines = new string[] {
+        "Styled Textbox"};
             this.txtSenhaCertificado.Location = new System.Drawing.Point(3, 276);
             this.txtSenhaCertificado.MaxLength = 32767;
             this.txtSenhaCertificado.Name = "txtSenhaCertificado";
@@ -104,6 +108,8 @@
             this.txtArquivoCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArquivoCertificado.IconRight = true;
+            this.txtArquivoCertificado.Lines = new string[] {
+        "Styled Textbox"};
             this.txtArquivoCertificado.Location = new System.Drawing.Point(3, 232);
             this.txtArquivoCertificado.MaxLength = 32767;
             this.txtArquivoCertificado.Name = "txtArquivoCertificado";
@@ -132,6 +138,8 @@
             // 
             this.textBox_dadoscertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_dadoscertificado.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_dadoscertificado.Location = new System.Drawing.Point(3, 43);
             this.textBox_dadoscertificado.MaxLength = 32767;
             this.textBox_dadoscertificado.Multiline = true;
@@ -194,6 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.txtPinCertificado);
             this.Controls.Add(this.lblPinCertificado);
             this.Controls.Add(this.txtSenhaCertificado);

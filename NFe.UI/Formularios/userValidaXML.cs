@@ -31,9 +31,10 @@ namespace NFe.UI
 
             this.cbEmpresas.SelectedIndexChanged -= cbEmpresas_SelectedIndexChanged;
             this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
-            this.cbEmpresas.ValueMember = "Valor";
+            this.cbEmpresas.ValueMember = "Key";
             this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa(false);
             this.cbEmpresas.SelectedIndexChanged += cbEmpresas_SelectedIndexChanged;
+
             int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
             if (posicao > (this.cbEmpresas.DataSource as System.Collections.ArrayList).Count)
                 posicao = 0;
@@ -135,7 +136,7 @@ namespace NFe.UI
                 if (this.cbEmpresas.SelectedValue != null)
                 {
                     var list = (this.cbEmpresas.DataSource as System.Collections.ArrayList)[this.cbEmpresas.SelectedIndex] as NFe.Components.ComboElem;
-                    this.Emp = Empresas.FindConfEmpresaIndex(this.cbEmpresas.SelectedValue.ToString(), NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+                    this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
 
                     uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresas.SelectedIndex);
                     uninfeDummy.xmlParams.Save();

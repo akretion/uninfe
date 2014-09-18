@@ -32,6 +32,7 @@ namespace NFe.UI.Formularios.NFSe
             this.edtUF.SelectedIndex = 0;
             this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
             this.edtPadrao.Items.RemoveAt(0);
+            this.edtPadrao.Sorted = true;
             this.edtPadrao.SelectedIndex = 0;
         }
 

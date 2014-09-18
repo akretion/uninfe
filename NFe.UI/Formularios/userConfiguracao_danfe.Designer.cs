@@ -323,6 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.chkAddEmailDANFE);
             this.Controls.Add(this.edtEmailDANFE);
             this.Controls.Add(this.metroLabel1);

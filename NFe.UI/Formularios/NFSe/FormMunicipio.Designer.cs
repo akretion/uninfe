@@ -70,12 +70,14 @@
             // 
             // edtPadrao
             // 
+            this.edtPadrao.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.edtPadrao.FormattingEnabled = true;
-            this.edtPadrao.ItemHeight = 19;
+            this.edtPadrao.IntegralHeight = false;
+            this.edtPadrao.ItemHeight = 23;
             this.edtPadrao.Location = new System.Drawing.Point(11, 183);
             this.edtPadrao.MaxDropDownItems = 15;
             this.edtPadrao.Name = "edtPadrao";
-            this.edtPadrao.Size = new System.Drawing.Size(174, 25);
+            this.edtPadrao.Size = new System.Drawing.Size(174, 29);
             this.edtPadrao.TabIndex = 7;
             this.edtPadrao.UseSelectable = true;
             // 
@@ -103,6 +105,7 @@
             // 
             // edtUF
             // 
+            this.edtUF.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.edtUF.FormattingEnabled = true;
             this.edtUF.IntegralHeight = false;
             this.edtUF.ItemHeight = 19;
@@ -115,6 +118,8 @@
             // 
             // edtCodMun
             // 
+            this.edtCodMun.Lines = new string[] {
+        "Normal Textbox"};
             this.edtCodMun.Location = new System.Drawing.Point(11, 33);
             this.edtCodMun.MaxLength = 7;
             this.edtCodMun.Name = "edtCodMun";
@@ -142,6 +147,8 @@
             // 
             // edtMunicipio
             // 
+            this.edtMunicipio.Lines = new string[] {
+        "Normal Textbox"};
             this.edtMunicipio.Location = new System.Drawing.Point(11, 84);
             this.edtMunicipio.MaxLength = 32767;
             this.edtMunicipio.Name = "edtMunicipio";

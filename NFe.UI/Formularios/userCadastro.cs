@@ -36,7 +36,7 @@ namespace NFe.UI
             try
             {
                 this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
-                this.cbEmpresa.ValueMember = "Valor";
+                this.cbEmpresa.ValueMember = "Key";
                 this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
 
                 this.comboUf.DisplayMember = NFe.Components.NFeStrConstants.Nome.ToLower();
@@ -169,7 +169,7 @@ namespace NFe.UI
                 if (this.cbEmpresa.SelectedValue != null)
                 {
                     var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
-                    this.Emp = Empresas.FindConfEmpresaIndex(this.cbEmpresa.SelectedValue.ToString(), NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+                    this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
                     if (this.Emp >= 0)
                     {
                         if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Nfse)
@@ -201,11 +201,11 @@ namespace NFe.UI
         {
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                        Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
-                       Propriedade.ExtRetorno.ConsCad_XML;// "-ret-cons-cad.xml";
+                       Propriedade.ExtRetorno.ConsCad_XML;
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
-                      Propriedade.ExtRetorno.ConsCad_ERR;// "-ret-cons-cad.err";
+                      Propriedade.ExtRetorno.ConsCad_ERR;
 
             object vRetorno = null;
             try

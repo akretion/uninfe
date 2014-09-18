@@ -83,7 +83,20 @@ namespace MetroFramework.Demo
 
         private void metroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (metroTabControl1.SelectedIndex == 2) metroTextBox1.Focus();
+            if (metroTabControl1.SelectedIndex == 2)
+            {
+                metroTextBox1.Focus();
+                //metroTextBox1.SelectAll();
+            }
+        }
+
+        private void metroComboBox4_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void metroContextMenu1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            metroButton5.Text = e.ClickedItem.Text;
         }
     }
 }

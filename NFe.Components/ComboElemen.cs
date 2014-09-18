@@ -25,6 +25,13 @@ namespace NFe.Components
         int _Codigo;
         string _nome;
         public string Servico { get; set; }
+        public string Key
+        {
+            get
+            {
+                return this.Valor + this.Servico.ToString();
+            }
+        }
 
         public string Valor
         {

@@ -11,9 +11,15 @@ namespace MetroFramework.Demo
         [STAThread]
         static void Main()
         {
+#if DEBUG
+            NFe.Components.NativeMethods.AllocConsole();
+#endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+#if DEBUG
+            NFe.Components.NativeMethods.FreeConsole();
+#endif
         }
     }
 }

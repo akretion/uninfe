@@ -78,9 +78,9 @@
             this.cbIndSinc.AutoSize = true;
             this.cbIndSinc.Location = new System.Drawing.Point(3, 320);
             this.cbIndSinc.Name = "cbIndSinc";
-            this.cbIndSinc.Size = new System.Drawing.Size(270, 15);
+            this.cbIndSinc.Size = new System.Drawing.Size(252, 15);
             this.cbIndSinc.TabIndex = 30;
-            this.cbIndSinc.Text = "Enviar as NF-e´s utilizando o processo síncrono";
+            this.cbIndSinc.Text = "Enviar a NFe utilizando o processo síncrono";
             this.cbIndSinc.UseSelectable = true;
             this.cbIndSinc.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
@@ -508,6 +508,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.lbl_Padrao);
             this.Controls.Add(this.edtPadrao);
             this.Controls.Add(this.lbl_CodMun);

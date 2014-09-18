@@ -395,7 +395,7 @@ namespace MetroFramework.Controls
             base.GotFocus += MetroTextBox_GotFocus;
             CreateBaseTextBox();
             UpdateBaseTextBox();
-            AddEventHandler();       
+            AddEventHandler();
         }
 
         void MetroTextBox_GotFocus(object sender, EventArgs e)
@@ -601,6 +601,11 @@ namespace MetroFramework.Controls
         {
             base.OnResize(e);
             UpdateBaseTextBox();
+        }
+
+        public new bool Focus()
+        {
+            return baseTextBox.Focus();
         }
 
         #endregion

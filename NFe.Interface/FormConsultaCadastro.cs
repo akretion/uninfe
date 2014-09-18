@@ -21,6 +21,7 @@ namespace NFe.Interface
         ArrayList arrUF = new ArrayList();
         ArrayList empresa = new ArrayList();
         ArrayList arrAmb = new ArrayList();
+        ArrayList arrTpEmis = new ArrayList();
         int Emp;
 
         public FormConsultaCadastro()
@@ -66,14 +67,16 @@ namespace NFe.Interface
 
             this.buttonPesquisa.Enabled = false;
 
-            this.cbEmissao.Items.Clear();
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teNormal));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFS));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teDPEC));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFSDA));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCRS));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCSP));
-            this.cbEmissao.Items.Add(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCAN));
+            #region cbEmissao
+            arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teNormal), (int)NFe.Components.TipoEmissao.teNormal));
+            arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCAN), (int)NFe.Components.TipoEmissao.teSVCAN));
+            arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCRS), (int)NFe.Components.TipoEmissao.teSVCRS));
+            arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCSP), (int)NFe.Components.TipoEmissao.teSVCSP));
+
+            cbEmissao.DataSource = arrTpEmis;
+            cbEmissao.DisplayMember = "valor";
+            cbEmissao.ValueMember = "codigo";
+            #endregion
 
             #region Montar Array DropList do Ambiente
             arrAmb.Add(new ComboElem("Produção", (int)NFe.Components.TipoAmbiente.taProducao));
@@ -129,12 +132,13 @@ namespace NFe.Interface
         {
             this.textResultado.Text = "";
             this.Refresh();
-            
+
+            TipoEmissao tpEmis = (TipoEmissao)Enum.Parse(typeof(TipoEmissao), Enum.GetName(typeof(TipoEmissao), ((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[cbEmissao.SelectedIndex]).Codigo));
             TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedIndex;
 
             if (servico == TipoAplicativo.Cte)
             {
-                if (((NFe.Components.TipoEmissao)this.cbEmissao.SelectedIndex+1) == TipoEmissao.teSVCAN)
+                if (tpEmis == TipoEmissao.teSVCAN)
                 {
                     MessageBox.Show("CT-e não dispõe do tipo de contingência SVCAN.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -142,20 +146,15 @@ namespace NFe.Interface
             }
             else if (servico == TipoAplicativo.Nfe)
             {
-                if (((NFe.Components.TipoEmissao)this.cbEmissao.SelectedIndex+1) == TipoEmissao.teSVCSP)
+                if (tpEmis == TipoEmissao.teSVCSP)
                 {
                     MessageBox.Show("NF-e não dispõe do tipo de contingência SCVSP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
-            //else if (servico == TipoAplicativo.Nfse)
-            //{
-                //MessageBox.Show("NFS-e não dispõe do serviço de consulta status.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //return;
-            //}
             else if (servico == TipoAplicativo.MDFe)
             {
-                if (this.cbEmissao.SelectedIndex != 0)
+                if (tpEmis != TipoEmissao.teNormal)
                 {
                     MessageBox.Show("MDF-e só dispõe do tipo de emissão Normal.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -163,7 +162,7 @@ namespace NFe.Interface
             }
             else if (servico == TipoAplicativo.NFCe)
             {
-                if (this.cbEmissao.SelectedIndex != 0)
+                if (tpEmis != TipoEmissao.teNormal)
                 {
                     MessageBox.Show("NFC-e só dispõe do tipo de emissão Normal.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -180,27 +179,7 @@ namespace NFe.Interface
 
                 int cUF = ((ComboElem)(new System.Collections.ArrayList(arrUF))[comboUf.SelectedIndex]).Codigo;
                 int amb = ((ComboElem)(new System.Collections.ArrayList(arrAmb))[cbAmbiente.SelectedIndex]).Codigo;
-                NFe.Components.TipoEmissao tpEmis = ((NFe.Components.TipoEmissao)NFe.Components.TipoEmissao.teNormal+1);
-                /*
-                switch (this.cbEmissao.SelectedIndex)
-                {
-                    case 0:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
-                        break;
-                    case 1:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teSCAN;
-                        break;
-                    case 2:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCRS;
-                        break;
-                    case 3:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCSP;
-                        break;
-                    case 4:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teSVCAN;
-                        break;
-                }
-                */
+
                 string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" + oGerar.StatusServico(servico, (int)tpEmis, cUF, amb, this.cbVersao.SelectedItem.ToString());
 
                 //Demonstrar o status do serviço
@@ -327,7 +306,7 @@ namespace NFe.Interface
             cbAmbiente.SelectedValue = Empresas.Configuracoes[Emp].AmbienteCodigo;
 
             //Posicionar o elemento da combo tipo de emissão
-            this.cbEmissao.SelectedIndex = Empresas.Configuracoes[Emp].tpEmis - 1;
+            cbEmissao.SelectedValue = Empresas.Configuracoes[Emp].tpEmis;
 
             if (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos)
             {

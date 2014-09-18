@@ -4,7 +4,9 @@ using System.Text;
 using System.Threading;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Collections;
+
 using NFe.Components;
 using NFe.Settings;
 
@@ -18,6 +20,7 @@ namespace NFe.Threadings
         public string Filter { get; set; }
 
         private bool CancelProcess = false;
+        private List<Thread> workers = new List<Thread>();
 
         private bool _disposed = false;
         ~FileSystemWatcher()
@@ -28,8 +31,12 @@ namespace NFe.Threadings
         private void Dispose(bool disposing)
         {
             if (!_disposed)
+            {
                 if (disposing && worker != null)
                     worker.Dispose();
+
+                workers.Clear();
+            }
             _disposed = true;
         }
 
@@ -60,7 +67,9 @@ namespace NFe.Threadings
         {
             Hashtable OldFiles = new Hashtable();
 
-            CancelProcess = false;//<<<<danasa 1-5-2011
+            CancelProcess = false;
+            if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
+                CancelProcess = true;
 
             while (!CancelProcess)
             {
@@ -68,8 +77,19 @@ namespace NFe.Threadings
                 {
                     if (!String.IsNullOrEmpty(Directory))
                     {
-                        string[] Files = System.IO.Directory.GetFiles(Directory, Filter, System.IO.SearchOption.TopDirectoryOnly);
-                        if (Files.Length > 0)
+                        bool clear = true;
+                        foreach (Thread worker in this.workers)
+                        {
+                            if (worker.IsAlive)
+                                clear = false;
+                        }
+                        if (clear)
+                            workers.Clear();
+
+                        var Files = System.IO.Directory.GetFiles(Directory, "*.*", System.IO.SearchOption.TopDirectoryOnly).
+                                        Where(s => Filter.Contains(System.IO.Path.GetExtension(s).ToLower()));
+
+                        if (Files != null)
                         {
                             Hashtable NewFiles = new Hashtable();
 
@@ -112,8 +132,6 @@ namespace NFe.Threadings
 
                                     if (oldFi.CreationTime != fi.CreationTime || oldFi.Length != fi.Length)
                                     {
-                                        Console.WriteLine("...FS: " + fi.FullName);
-
                                         RaiseFileChanged(fi);
                                     }
                                     else
@@ -141,7 +159,6 @@ namespace NFe.Threadings
 #if DEBUG
                                     Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
 #endif
-
                                 }
                                 else
                                 {
@@ -156,7 +173,6 @@ namespace NFe.Threadings
 #endif
                                 }
                             }
-
                             OldFiles = NewFiles.Clone() as Hashtable;
                         }
                     }
@@ -178,16 +194,31 @@ namespace NFe.Threadings
             {
                 ///
                 /// TODO!!!
-                /// entre este processo e o RaiseEvent está tendo uma demora consideravel
+                /// entre este processo e o RaiseEvent está tendo uma demora considerável
                 /// 
-
                 if (fi.Length > 0)
                 {
+                    Thread tworker = new Thread(
+                        new ThreadStart(
+                            delegate
+                            {
+                                if (OnFileChanged != null)
+                                {
+                                    OnFileChanged(fi);
+                                }
+                            }
+                        ));
+                    this.workers.Add(tworker);
+                    tworker.IsBackground = true;
+                    tworker.Start();
+                    tworker.Join();
+
+/*
                     BackgroundWorker worker = new BackgroundWorker();
                     worker.WorkerSupportsCancellation = true;
                     worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
                     worker.DoWork += new DoWorkEventHandler(RaiseEvent);
-                    worker.RunWorkerAsync(fi);
+                    worker.RunWorkerAsync(fi);*/
                 }
                 else
                 {
@@ -227,6 +258,10 @@ namespace NFe.Threadings
                 if (value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
                 {
                     CancelProcess = true;
+                    foreach (Thread worker in this.workers)
+                        if (worker.IsAlive)
+                            worker.Abort();
+ 
                     this.worker.CancelAsync();
                 }
             }

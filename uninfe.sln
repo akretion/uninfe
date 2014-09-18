@@ -35,8 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetroFramework", "MetroFram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFe.UI", "NFe.UI\NFe.UI.csproj", "{37A93E14-D881-4957-AD44-3615ED65CD57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniNFSe2", "UniNFSe2\UniNFSe2.csproj", "{DB8C5EC4-5BE8-462D-8B61-0094AAE50D42}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework", "MetroFramework\MetroFramework\MetroFramework.csproj", "{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework.Design", "MetroFramework\MetroFramework.Design\MetroFramework.Design.csproj", "{7316584D-9A16-4280-A8AB-6D45198C6E4D}"
@@ -45,13 +43,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework.Fonts", "Met
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfe_ws", "uninfe_ws\uninfe_ws.csproj", "{24F9938F-63F3-4443-B543-B3CF8309379D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniNFeAll", "uninfe2\UniNFeAll.csproj", "{B963B9FE-0383-466D-9F6D-A082322E0667}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework.Demo", "MetroFramework\MetroFramework.Demo\MetroFramework.Demo.csproj", "{AF988819-4618-4852-9506-C1D06D04F6B2}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -121,10 +115,6 @@ Global
 		{37A93E14-D881-4957-AD44-3615ED65CD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37A93E14-D881-4957-AD44-3615ED65CD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37A93E14-D881-4957-AD44-3615ED65CD57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB8C5EC4-5BE8-462D-8B61-0094AAE50D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB8C5EC4-5BE8-462D-8B61-0094AAE50D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB8C5EC4-5BE8-462D-8B61-0094AAE50D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB8C5EC4-5BE8-462D-8B61-0094AAE50D42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,10 +131,10 @@ Global
 		{24F9938F-63F3-4443-B543-B3CF8309379D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24F9938F-63F3-4443-B543-B3CF8309379D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24F9938F-63F3-4443-B543-B3CF8309379D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B963B9FE-0383-466D-9F6D-A082322E0667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B963B9FE-0383-466D-9F6D-A082322E0667}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B963B9FE-0383-466D-9F6D-A082322E0667}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B963B9FE-0383-466D-9F6D-A082322E0667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF988819-4618-4852-9506-C1D06D04F6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF988819-4618-4852-9506-C1D06D04F6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF988819-4618-4852-9506-C1D06D04F6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF988819-4618-4852-9506-C1D06D04F6B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,5 +143,10 @@ Global
 		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F} = {E1EDF029-0BE4-42A7-9068-5D0AEFD671CC}
 		{7316584D-9A16-4280-A8AB-6D45198C6E4D} = {E1EDF029-0BE4-42A7-9068-5D0AEFD671CC}
 		{5A2FCAE8-C2FA-41BD-90EA-16103EA07B26} = {E1EDF029-0BE4-42A7-9068-5D0AEFD671CC}
+		{AF988819-4618-4852-9506-C1D06D04F6B2} = {E1EDF029-0BE4-42A7-9068-5D0AEFD671CC}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

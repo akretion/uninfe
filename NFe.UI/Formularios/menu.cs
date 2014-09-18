@@ -22,37 +22,10 @@ namespace NFe.UI
         {
             InitializeComponent();
         }
-/*
-        private List<_styles> estilos;
-
-        internal class _styles
-        {
-            public string internal_style { get; set; }
-            public string display_style { get; set; }
-        }
-        */
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            /*
-            estilos = new List<_styles>(){
-                new _styles{ display_style="Amarelo", internal_style="Yellow" },
-                new _styles{ display_style="Azul(1)", internal_style="Blue" },
-                new _styles{ display_style="Azul(2)", internal_style="Teal" },
-                new _styles{ display_style="Branco", internal_style="White" },
-                new _styles{ display_style="Laranja", internal_style="Orange" },
-                new _styles{ display_style="Limão", internal_style="Lime" },
-                new _styles{ display_style="Magenta", internal_style="Magenta" },
-                new _styles{ display_style="Marrom", internal_style="Brown" },
-                new _styles{ display_style="Prata", internal_style="Silver" },
-                new _styles{ display_style="Preto", internal_style="Black" },
-                new _styles{ display_style="Rosa", internal_style="Pink" },
-                new _styles{ display_style="Roxo", internal_style="Purple" },
-                new _styles{ display_style="Verde", internal_style="Green" },
-                new _styles{ display_style="Vermelho", internal_style="Red" }
-            };
-            */
 
             ConfiguracaoApp.CarregarDadosSobre();
 
@@ -86,6 +59,14 @@ namespace NFe.UI
                         break;
                 }
             }
+            var Components = this.Controls.Cast<object>()
+                                                   .Where(obj => !ReferenceEquals(obj, this))
+                                                   .OfType<MetroFramework.Controls.MetroTile>();
+            foreach (var c in Components)
+            {
+                c.Style = (MetroFramework.MetroColorStyle)uninfeDummy.xmlParams.ReadValue(this.Name + "\\" + c.Name, "color", Convert.ToInt16(c.Style));
+            }
+
             //string _style = uninfeDummy.uStyle;
             //this.cbStyles.DataSource = estilos;
             //this.cbStyles.DisplayMember = "display_style";
@@ -338,6 +319,14 @@ namespace NFe.UI
             this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
         }
 
+        private void metroTile_visual_Click(object sender, EventArgs e)
+        {
+            using (NFe.UI.Formularios.FormVisual v = new Formularios.FormVisual())
+            {
+                v.ShowDialog();
+            }
+        }
+
         private void metroTile_doc_Click(object sender, EventArgs e)
         {
             try
@@ -360,6 +349,40 @@ namespace NFe.UI
             {
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            this.CurrentTile.Style = (MetroFramework.MetroColorStyle)Convert.ToInt16(e.ClickedItem.Tag);
+            this.CurrentTile.Refresh();
+
+            uninfeDummy.xmlParams.WriteValue(this.Name + "\\" + this.CurrentTile.Name, "color", (int)this.CurrentTile.Style);
+
+            this.CurrentTile = null;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (this.CurrentTile != null)
+            {
+                foreach (var item in this.contextMenuStrip1.Items)
+                {
+                    try
+                    {
+                        ((ToolStripMenuItem)item).Checked = Convert.ToInt16(((ToolStripMenuItem)item).Tag) == (int)this.CurrentTile.Style;
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
+
+        private MetroFramework.Controls.MetroTile CurrentTile=null;
+
+        private void metroTile_Configuracoes_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.CurrentTile = (MetroFramework.Controls.MetroTile)sender;
         }
     }
 }

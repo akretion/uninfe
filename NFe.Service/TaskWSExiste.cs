@@ -169,6 +169,10 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.RecepcionarLoteRps; break;
                             case "recepcaoevento":
                                 srv = Servicos.RecepcaoEvento; break;
+                            case "recepcaoeventocte":
+                                srv = Servicos.RecepcaoEventoCTe; break;
+                            case "recepcaoeventomdfe":
+                                srv = Servicos.RecepcaoEventoMDFe; break;
                             case "enviarcce":
                                 srv = Servicos.EnviarCCe; break;
                             case "enviarepec":

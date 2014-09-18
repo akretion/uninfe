@@ -24,18 +24,6 @@ namespace NFe.UI
 {
     public partial class Form_Main : MetroForm
     {
-        //For animated panels direction
-        string optionsDirection = "down";
-
-        //For animated panels timeout
-        int optionsTimeOut = 0;
-
-        //For animated panels position
-        int optionsX;
-        int optionsY;
-
-        Timer tm = new Timer();
-        
         private bool first = false;
         private bool servicoInstaladoErodando = false;
         private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
@@ -117,7 +105,7 @@ namespace NFe.UI
 
                 switch (NFe.Components.Propriedade.TipoAplicativo)
                 {
-                    case NFe.Components.TipoAplicativo.Nfe:
+                    default:
                         this.notifyIcon1.Icon = this.Icon = NFe.UI.Properties.Resources.uninfe_icon;
                         break;
 
@@ -165,44 +153,6 @@ namespace NFe.UI
                 //Executar os serviços do UniNFe em novas threads
                 //Tem que ser carregado depois que o formulário da MainForm estiver totalmente carregado para evitar Erros. Wandrey 19/10/2010
                 this.ExecutaServicos();
-
-                //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.xml");
-                //new NFe.Components.Info.Aplicacao().xGravarXMLInformacoes(0, "e:\\temp\\okokok.txt");
-
-                ///
-                /// timer usado para habilitar/desbilitar as opcoes do visual
-                /// 
-                tm.Tick += delegate
-                {
-                    if (optionsTimeOut < 1000)
-                    {
-                        optionsTimeOut++;
-                    }
-                    if (optionsTimeOut == 1000)
-                    {
-                        if (optionsDirection == "up")
-                        {
-                            optionsDirection = "down";
-                        }
-                    }
-                    if (optionsDirection == "up")
-                    {
-                        if (optionsY > Height - pnlOptions.Height + 3)
-                        {
-                            optionsY -= 3;
-                            pnlOptions.Location = new Point(optionsX, optionsY);
-                        }
-                    }
-                    else
-                    {
-                        if (optionsY < Height)
-                        {
-                            optionsY += 3;
-                        }
-                        pnlOptions.Location = new Point(optionsX, optionsY);
-                    }
-                };
-                tm.Interval = 1;
             }
             finally
             {
@@ -211,75 +161,6 @@ namespace NFe.UI
             }
 
 #if DEBUG
-
-            /*
-3.10: srv:PedidoConsultaSituacaoNFe
-tpEmis:teNormal
-C#:NfeConsulta2 X wsdl:NfeConsulta Tag:NFeConsulta
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeConsulta2.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teContingencia
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeStatusServico2_200.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teFSDA
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\BA\PBANfeStatusServico2_200.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSVCAN
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCVAN\PSVCANNfeStatusServico2.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSVCRS
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl
-----
-             * 
-             * 
-             * 
-             * 
-             * 
-2.00: srv:ConsultaCadastroContribuinte
-tpEmis:teNormal
-C#:CadConsultaCadastro2 X wsdl:CadConsultaCadastroWS Tag:NFeConsultaCadastro
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl
-----
-3.10: srv:PedidoConsultaSituacaoNFe
-tpEmis:teNormal
-C#:NfeConsulta2 X wsdl:NfeConsulta Tag:NFeConsulta
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeConsulta2.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teContingencia
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\BA\HBANfeStatusServico2_200.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSVCAN
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCVAN\HSVCANNfeStatusServico2.wsdl
-----
-2.00: srv:ConsultaStatusServicoNFe
-tpEmis:teSVCRS
-C#:NfeStatusServico X wsdl:NfeStatusServico2 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl
-----
-2.00: srv:ConsultaCadastroContribuinte
-tpEmis:teNormal
-C#:CadConsultaCadastro2 X wsdl:CadConsultaCadastroWS Tag:NFeConsultaCadastro
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl
-----
-3.10: srv:ConsultaStatusServicoNFe
-tpEmis:teNormal
-C#:NfeStatusServico2 X wsdl:NfeStatusServico3 Tag:NFeStatusServico
-E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusServico2.wsdl
-----
-             * 
-            */
 
 #if verifica_wsdl
 
@@ -541,12 +422,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
 
         protected override void OnResize(EventArgs e)
         {
-            int x = Width - 50;
-            optionsX = 0;
-            optionsY = Height + pnlOptions.Height - 25;
-            pnlOptions.Size = new Size(x, pnlOptions.Height);
-            pnlOptions.Location = new Point(optionsX, optionsY);
-            
             if (first)
             {
                 //Faz a aplicação sumir da barra de tarefas
@@ -562,8 +437,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                     // que ele feche somente quando o usuário clicar
 
                     notifyIcon1.ShowBalloonTip(6000);
-
-                    tm.Stop();
                 }
             }
             first = true;
@@ -629,38 +502,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             {
                 e.Cancel = false;  //se o PC for desligado o windows o fecha automaticamente.
             }
-
-            tm.Stop();
-
             base.OnFormClosing(e);
-        }
-
-        private void Form_Main_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Y >= Height - 15)// && e.X < (Width - pnlRightOptions.Width))
-            {
-                optionsDirection = "up";
-                optionsTimeOut = 0;
-            }
-            if (e.X >= Width - 15)
-            {
-                optionsDirection = "down";
-            }
-            //if (e.X < (Width - pnlRightOptions.Width))
-            {
-                //rightDirection = "Left";
-            }
-        }
-
-        private void Form_Main_ControlAdded(object sender, ControlEventArgs e)
-        {
-            if (this.WindowState != FormWindowState.Minimized)
-                tm.Start();
-
-            ///
-            /// fecha o painel de preferencias
-            optionsTimeOut = 1000;
-            optionsDirection = "up";
         }
 
         private void Form_Main_ControlRemoved(object sender, ControlEventArgs e)
@@ -674,6 +516,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
 
                 if (e.Control.GetType().Equals(typeof(Formularios.userMunicipios)))
                 {
+                    this.Refresh();
                     ///
                     /// reloadWebServicesList carrega as URL's com base no XML de municipios.
                     if (WebServiceProxy.reloadWebServicesList())
@@ -708,7 +551,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                     this.metroStyleManager1.Theme = value;
                     updateSettings();
                 }
-                metroTile_back.Text = value == MetroThemeStyle.Dark ? "Branco" : "Preto";
                 this.Theme = value;
             }
         }
@@ -825,7 +667,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             this._maximized = false;
 
             Activate();
-            tm.Start();
         }
 
         private void cmAbrir_Click(object sender, EventArgs e)
@@ -852,6 +693,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                 return this.WindowState != FormWindowState.Minimized && this.Visible;
             }
         }
+
         private void cmConfiguracoes_Click(object sender, EventArgs e)
         {
             if (!MainVisible)
@@ -949,7 +791,7 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
             }
         }
 
-        void updateVisual()
+        public void updateVisual()
         {
             var Components = this.Controls.Cast<object>()
                 .Where(obj => !ReferenceEquals(obj, this._menu))
@@ -965,21 +807,6 @@ E:\Usr\NFe\uninfe\a_uninfe\uninfe\bin\Release\wsdl\homologacao\PR\HPRNfeStatusSe
                 _menu.UpdateControles();
             }
             this.Refresh();
-        }
-
-        private void metroTile_back_Click(object sender, EventArgs e)
-        {
-            this.uTheme = (this.uTheme == MetroThemeStyle.Light) ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
-            updateVisual();
-        }
-
-        private void metroTileRed_Click(object sender, EventArgs e)
-        {
-            if (!uStyle.Equals(((MetroFramework.Controls.MetroTile)sender).Style))
-            {
-                uStyle = ((MetroFramework.Controls.MetroTile)sender).Style;
-                updateVisual();
-            }
         }
 
         public void _RestartServicos()

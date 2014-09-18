@@ -53,7 +53,7 @@ namespace NFe.Service
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis);
 
-                object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, ufParaWS));
+                object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                 wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());

@@ -20,8 +20,6 @@ namespace NFe.UI
 
         private void FormSenha_Load(object sender, EventArgs e)
         {
-            //this.Theme = uninfeDummy.mainForm.uTheme;
-            //this.Style = uninfeDummy.mainForm.uStyle;
             uninfeDummy.ClearControls(this, true, frommain);
             this.Text = NFe.Components.Propriedade.NomeAplicacao;
             this.tbSenha.Clear();
