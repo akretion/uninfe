@@ -565,6 +565,7 @@ namespace NFe.UI
                     bool grava = DadosMudaramDaEmpresa(true);
                     if (grava)
                     {
+                        string _key = this.currentEmpresa.CNPJ + this.currentEmpresa.Servico.ToString();
                         ///
                         /// salva a configuracao da empresa
                         this.currentEmpresa.SalvarConfiguracao(true);
@@ -592,7 +593,7 @@ namespace NFe.UI
                         for (int item = 0; item < this.cbEmpresas.Items.Count; ++item)
                         {
                             NFe.Components.ComboElem empr = this.cbEmpresas.Items[item] as NFe.Components.ComboElem;
-                            if (empr.Key.Equals(this.currentEmpresa.CNPJ + this.currentEmpresa.Servico.ToString()))
+                            if (empr.Key.Equals(_key))
                             {
                                 this.cbEmpresas.SelectedIndex = item;
                                 break;

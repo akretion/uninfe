@@ -1952,33 +1952,38 @@ namespace NFe.Settings
                         <Subject>XX...</Subject> 
                         <ValidadeInicial>dd/dd/dddd</ValidadeInicial> 
                         <ValidadeFinal>dd/dd/dddd</ValidadeFinal> 
+                        <A3>true</A3>
                         </Certificados>
                         */
                         #endregion
+
+                        X509Certificate2 _X509Cert = collection2[i];
 
                         XmlDocument docGerar = new XmlDocument();
                         docGerar.Load(tmp_arqRet);
 
                         XmlNode Registro = docGerar.CreateElement("ThumbPrint");
                         XmlAttribute IdThumbPrint = docGerar.CreateAttribute(NFe.Components.NFeStrConstants.ID);
-                        IdThumbPrint.Value = collection2[i].Thumbprint.ToString();
+                        IdThumbPrint.Value = _X509Cert.Thumbprint.ToString();
                         Registro.Attributes.Append(IdThumbPrint);
 
                         XmlNode Subject = docGerar.CreateElement("Subject");
                         XmlNode ValidadeInicial = docGerar.CreateElement("ValidadeInicial");
                         XmlNode ValidadeFinal = docGerar.CreateElement("ValidadeFinal");
+                        XmlNode A3 = docGerar.CreateElement("A3");
 
-                        Subject.InnerText = collection2[i].Subject.ToString();
-                        ValidadeInicial.InnerText = collection2[i].NotBefore.ToShortDateString();
-                        ValidadeFinal.InnerText = collection2[i].NotAfter.ToShortDateString();
+                        Subject.InnerText = _X509Cert.Subject.ToString();
+                        ValidadeInicial.InnerText = _X509Cert.NotBefore.ToShortDateString();
+                        ValidadeFinal.InnerText = _X509Cert.NotAfter.ToShortDateString();
+                        A3.InnerText = _X509Cert.IsA3().ToString().ToLower();
 
                         docGerar.SelectSingleNode("Certificados").AppendChild(Registro);
                         Registro.AppendChild(Subject);
                         Registro.AppendChild(ValidadeInicial);
                         Registro.AppendChild(ValidadeFinal);
+                        Registro.AppendChild(A3);
 
                         docGerar.Save(tmp_arqRet);
-
                     }
                     #endregion
                 }
