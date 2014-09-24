@@ -114,45 +114,22 @@ namespace NFe.Components.Info
                 {
                     if (pT.CanWrite)
                     {
-                        bool ok = true;
-
-                        if (Propriedade.TipoExecucao != TipoExecucao.teAll)
+                        if (isXml)
                         {
-                            var t0 = pT.GetCustomAttributes(typeof(AttributeTipoAplicacao), false);
-                            if (t0 != null && t0.Length > 0)
+                            if (!hasFTP && pT.Name.StartsWith("FTP"))
                             {
-                                ok = false;
-                                ///
-                                /// grava apenas a propriedade que está definida para ser usada pelo ambiente
-                                foreach (var t1 in t0)
-                                {
-                                    if (Propriedade.TipoAplicativo == ((AttributeTipoAplicacao)t1).Aplicacao)
-                                    {
-                                        ok = true;
-                                        break;
-                                    }
-                                }
+                                ((XmlWriter)oXmlGravar).WriteStartElement("FTP");
+                                hasFTP = true;
                             }
-                        }
-                        if (ok)
-                        {
-                            if (isXml)
-                            {
-                                if (!hasFTP && pT.Name.StartsWith("FTP"))
+                            else
+                                if (hasFTP && !pT.Name.StartsWith("FTP"))
                                 {
-                                    ((XmlWriter)oXmlGravar).WriteStartElement("FTP");
-                                    hasFTP = true;
+                                    ((XmlWriter)oXmlGravar).WriteEndElement();
+                                    hasFTP = false;
                                 }
-                                else
-                                    if (hasFTP && !pT.Name.StartsWith("FTP"))
-                                    {
-                                        ((XmlWriter)oXmlGravar).WriteEndElement();
-                                        hasFTP = false;
-                                    }
-                            }
-                            object v = pT.GetValue(Empresas.Configuracoes[emp], null);
-                            NFe.Components.Functions.GravaTxtXml(oXmlGravar, pT.Name, v == null ? "" : v.ToString());
                         }
+                        object v = pT.GetValue(Empresas.Configuracoes[emp], null);
+                        NFe.Components.Functions.GravaTxtXml(oXmlGravar, pT.Name, v == null ? "" : v.ToString());
                     }
                 }
                 if (hasFTP && isXml) ((XmlWriter)oXmlGravar).WriteEndElement();
@@ -175,7 +152,7 @@ namespace NFe.Components.Info
                         else
                         {
                             item = list.LocalProducao;
-                            if (isXml)((XmlWriter)oXmlGravar).WriteStartElement("Producao");
+                            if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("Producao");
                             else tipo = list.UF + ".Producao.";
                         }
                         switch (Empresas.Configuracoes[emp].Servico)
@@ -384,7 +361,7 @@ namespace NFe.Components.Info
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 21/07/2011
         /// </remarks>
-        public static Boolean AppExecutando(bool silencioso, bool novoSistema=false)
+        public static Boolean AppExecutando(bool silencioso, bool novoSistema = false)
         {
             bool executando = false;
 

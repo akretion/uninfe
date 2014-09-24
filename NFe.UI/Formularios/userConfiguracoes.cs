@@ -65,20 +65,20 @@ namespace NFe.UI
                     uce_divs = new Formularios.userConfiguracao_diversos();
                     uce_divs.uConfiguracoes = this;
                     uce_divs.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_divs); 
+                    tpage.Controls.Add(uce_divs);
                     break;
                 case 1:
                     tpage.Text = "Pastas";
                     //tpage.AutoScroll = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll);
                     uce_pastas = new Formularios.userConfiguracao_pastas();
                     uce_pastas.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_pastas); 
+                    tpage.Controls.Add(uce_pastas);
                     break;
                 case 2:
                     tpage.Text = "Certificado digital";
                     uce_cert = new Formularios.userConfiguracao_certificado();
                     uce_cert.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_cert); 
+                    tpage.Controls.Add(uce_cert);
                     break;
                 case 3:
                     tpage.Text = "FTP";
@@ -91,7 +91,7 @@ namespace NFe.UI
                     tpage.AutoScroll = true;
                     uce_danfe = new Formularios.userConfiguracao_danfe();
                     uce_danfe.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_danfe); 
+                    tpage.Controls.Add(uce_danfe);
                     break;
             }
             tpage.Controls[tpage.Controls.Count - 1].Dock = DockStyle.Fill;
@@ -157,10 +157,7 @@ namespace NFe.UI
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_pastas = this.createtpage(1));
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_cert = this.createtpage(2));
                 this.tc_empresa.TabPages.Add(this._tpEmpresa_ftp = this.createtpage(3));
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll)
-                {
-                    this.tc_empresa.TabPages.Add(this._tpEmpresa_danfe = this.createtpage(4));
-                }
+                this.tc_empresa.TabPages.Add(this._tpEmpresa_danfe = this.createtpage(4));
                 uc_geral = new Formularios.userConfiguracao_geral();
                 this.tpGeral.Controls.Add(uc_geral);
             }
@@ -399,7 +396,8 @@ namespace NFe.UI
             }
         }
         private bool _Modificado;
-        private bool Modificado {
+        private bool Modificado
+        {
             get
             {
                 return this._Modificado;
@@ -635,7 +633,7 @@ namespace NFe.UI
         {
             if (this.btnExcluir.Text.Equals("Excluir"))
             {
-                if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja realmente excluir esta empresa?","", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja realmente excluir esta empresa?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
@@ -680,7 +678,7 @@ namespace NFe.UI
                 bool pergunta = DadosMudaramDaEmpresa(false);
                 if (pergunta)
                 {
-                    pergunta = !(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma o abandono da edição desta empresa?","", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
+                    pergunta = !(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma o abandono da edição desta empresa?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
                 }
                 if (!pergunta)
                 {

@@ -7,9 +7,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
-using NFe.Components.br.com.sigiss.bauru.p;
+using NFe.Components.br.com.sigiss.botucatu.p;
 
-namespace NFe.Components.SigCorp.p
+namespace NFe.Components.SigCorp.BotucatuSP.p
 {
     public class SigCorpP : EmiteNFSeBase
     {

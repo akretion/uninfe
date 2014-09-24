@@ -62,29 +62,17 @@ namespace UniNFeServico
         private void iniciarServicosUniNFe()
         {
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
-            Propriedade.TipoExecucao = TipoExecucao.teAll;
             ConfiguracaoApp.StartVersoes();
 
             string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
             string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
             string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
             string msg = "";
+
             bool error = false;
-            switch (Propriedade.TipoExecucao)
-            {
-                case TipoExecucao.teNFSe:
-                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
-                    msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
-                    break;
-                case TipoExecucao.teNFe:
-                    error = !System.IO.File.Exists(filenameWS3);
-                    msg = "Arquivo '" + filenameWS3 + "' não encontrados";
-                    break;
-                case TipoExecucao.teAll:
-                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-                    msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-                    break;
-            }
+            error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+            msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+
             if (error)
             {
                 this.WriteLog(msg);
@@ -157,7 +145,7 @@ namespace UniNFeServico
         // Obtêm o endereço físico (diretório) do serviço
         // defaultDir representa um diretório padrão caso não seja possível obter a chave
         // this.ServiceName é o nome do serviço
-        
+
         private string GetPhysicalPath(string defaultDir)
         {
             string diretorio;

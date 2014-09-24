@@ -82,7 +82,6 @@ namespace uninfe
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             notifyIcon1.ShowBalloonTip(6000);
-
             this.MinimumSize = new Size(750, 600);
 
             #region Definir valores propriedades de configuração
@@ -96,28 +95,16 @@ namespace uninfe
             string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
             string msg = "";
             bool error = false;
-            switch (Propriedade.TipoExecucao)
-            {
-                case TipoExecucao.teNFSe:
-                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
-                    msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
-                    break;
-                case TipoExecucao.teNFe:
-                    error = !System.IO.File.Exists(filenameWS3);
-                    msg = "Arquivo '" + filenameWS3 + "' não encontrados";
-                    break;
-                case TipoExecucao.teAll:
-                    error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-                    msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-                    break;
-            }
+            error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+            msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+
             if (error)
             {
                 MessageBox.Show(msg);
                 Application.Exit();
                 return;
             }
-            this.tbMunic.Visible = Propriedade.TipoExecucao == TipoExecucao.teAll;
+            this.tbMunic.Visible = true;
 
             if (!this.servicoInstaladoErodando)     //danasa 12/8/2011
                 //Definir eventos de controles de execução das thread´s de serviços do UniNFe. Wandrey 26/07/2011
@@ -771,8 +758,8 @@ namespace uninfe
                     ";*" + Propriedade.ExtRetorno.retEPEC_XML +
                     ";*" + Propriedade.ExtRetorno.retDPEC_XML;
                 dlg.Filter += "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
-                dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + 
-                    ",*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + 
+                dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
+                    ",*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
                     ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;

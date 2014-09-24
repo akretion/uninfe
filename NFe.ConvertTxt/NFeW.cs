@@ -2436,8 +2436,9 @@ namespace NFe.ConvertTxt
                 if (Convert.ToInt32(cAAMM.Substring(2, 2)) <= 0 || Convert.ToInt32(cAAMM.Substring(2, 2)) > 12)
                     cError += "Mês da emissão inválido" + Environment.NewLine;
 
-                if (cMod == "")
-                    cError += "Mod inválido. Deve ser '55-NFe','57-Cte' ou '65-NFC-e'" + Environment.NewLine;
+                if (!("55,57,58,65").Contains(cMod))
+                    cError += "Mod inválido. Deve ser '55 p/NFe','57 p/Cte','58 p/MDF-e' ou '65 p/NFC-e'" + Environment.NewLine;
+
 
                 if (cError != "")
                     throw new Exception(cError);

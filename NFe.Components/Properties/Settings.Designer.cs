@@ -62,5 +62,15 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_sigiss_bauru_p_WebService_SigISS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://botucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS"]));
+            }
+        }
     }
 }

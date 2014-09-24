@@ -2050,4 +2050,64 @@
       <CancelarNfse>WSDL\Producao\PSantaCruzRS-THEMANFSEcancelamento.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="2211001" Nome="Teresina - PI" UF="PI" Padrao="DSF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="1501402" Nome="Belém - PA" UF="PA" Padrao="DSF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PBelemPA-DSFLoteRps.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3507506" Nome="Botucatu - SP" UF="SP" Padrao="SIGCORP_SIGISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HBauruSP-sigiss_ws.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PBauruSP-sigiss_ws.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PBauruSP-sigiss_ws.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PBauruSP-sigiss_ws.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PBauruSP-sigiss_ws.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PBauruSP-sigiss_ws.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PBauruSP-sigiss_ws.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

@@ -271,7 +271,7 @@ namespace NFe.Components
                         {
                             msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.Message;
 
-                            if (ex.InnerException.InnerException.InnerException.InnerException != null) 
+                            if (ex.InnerException.InnerException.InnerException.InnerException != null)
                             {
                                 msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.InnerException.Message;
                             }
@@ -597,70 +597,57 @@ namespace NFe.Components
 
                 XmlDocument doc = new XmlDocument();
                 /// danasa 1-2012
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse || Propriedade.TipoExecucao == TipoExecucao.teAll)
+                if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                 {
-                    if (File.Exists(Propriedade.NomeArqXMLMunicipios))
+                    doc.Load(Propriedade.NomeArqXMLMunicipios);
+                    XmlNodeList estadoList = doc.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
+                    foreach (XmlNode registroNode in estadoList)
                     {
-                        doc.Load(Propriedade.NomeArqXMLMunicipios);
-                        XmlNodeList estadoList = doc.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
-                        foreach (XmlNode registroNode in estadoList)
+                        XmlElement registroElemento = (XmlElement)registroNode;
+                        if (registroElemento.Attributes.Count > 0)
                         {
-                            XmlElement registroElemento = (XmlElement)registroNode;
-                            if (registroElemento.Attributes.Count > 0)
+                            int IDmunicipio = Convert.ToInt32("0" + Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
+                            string Nome = registroElemento.Attributes[NFeStrConstants.Nome].Value;
+                            string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
+                            string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
+
+                            ///
+                            /// danasa 9-2013
+                            /// verifica se o 'novo' padrao existe, nao existindo retorna para atualizar os wsdl's dele
+                            string dirSchemas = Path.Combine(Propriedade.PastaExecutavel, "NFse\\schemas\\NFSe\\" + Padrao);
+                            if (!Directory.Exists(dirSchemas))
                             {
-                                int IDmunicipio = Convert.ToInt32("0" + Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
-                                string Nome = registroElemento.Attributes[NFeStrConstants.Nome].Value;
-                                string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
-                                string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
-
-                                ///
-                                /// danasa 9-2013
-                                /// verifica se o 'novo' padrao existe, nao existindo retorna para atualizar os wsdl's dele
-                                string dirSchemas = Path.Combine(Propriedade.PastaExecutavel, "NFse\\schemas\\NFSe\\" + Padrao);
-                                if (!Directory.Exists(dirSchemas))
-                                {
-                                    atualizaWSDL = true;
-                                }
-                                PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
-
-                                ///
-                                /// adiciona na lista que será usada na manutencao
-                                Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
-
-                                webServices wsItem = new webServices(IDmunicipio, Nome, UF);
-
-                                PreencheURLw(wsItem.LocalHomologacao,
-                                             NFe.Components.NFeStrConstants.LocalHomologacao,
-                                             WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio),
-                                             "",
-                                             "NFse\\");
-                                PreencheURLw(wsItem.LocalProducao,
-                                             NFe.Components.NFeStrConstants.LocalProducao,
-                                             WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio),
-                                             "",
-                                             "NFse\\");
-
-                                webServicesList.Add(wsItem);
+                                atualizaWSDL = true;
                             }
+                            PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
+
+                            ///
+                            /// adiciona na lista que será usada na manutencao
+                            Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
+
+                            webServices wsItem = new webServices(IDmunicipio, Nome, UF);
+
+                            PreencheURLw(wsItem.LocalHomologacao,
+                                         NFe.Components.NFeStrConstants.LocalHomologacao,
+                                         WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio),
+                                         "",
+                                         "NFse\\");
+                            PreencheURLw(wsItem.LocalProducao,
+                                         NFe.Components.NFeStrConstants.LocalProducao,
+                                         WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio),
+                                         "",
+                                         "NFse\\");
+
+                            webServicesList.Add(wsItem);
                         }
                     }
                 }
                 /// danasa 1-2012
 
                 bool salvaXmlLocal = false;
-                switch (Propriedade.TipoExecucao)
-                {
-                    case TipoExecucao.teAll:
-                        LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFe, "NFe\\");
-                        salvaXmlLocal = LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFSe, "NFse\\");
-                        break;
-                    case TipoExecucao.teNFe:
-                        LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFe, "NFe\\");
-                        break;
-                    case TipoExecucao.teNFSe:
-                        salvaXmlLocal = LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFSe, "NFse\\");
-                        break;
-                }
+                LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFe, "NFe\\");
+                salvaXmlLocal = LoadArqXMLWebService(Propriedade.NomeArqXMLWebService_NFSe, "NFse\\");
+
                 if (salvaXmlLocal)
                 {
                     WebServiceNFSe.SalvarXMLMunicipios(null, null, 0, null, false);

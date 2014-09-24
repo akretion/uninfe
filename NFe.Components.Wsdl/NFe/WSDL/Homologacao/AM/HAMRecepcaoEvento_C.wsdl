@@ -70,7 +70,7 @@
   <wsdl:service name="RecepcaoEvento">
 <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado ao envio de mensagens de eventos da NF-e.</wsdl:documentation>
     <wsdl:port name="RecepcaoEventoSoap12" binding="tns:RecepcaoEventoSoap12">
-      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services/services/RecepcaoEvento"/>
+      <soap12:address location="http://homnfce.sefaz.am.gov.br/nfce-services-nac/services/RecepcaoEvento"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

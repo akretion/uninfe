@@ -409,17 +409,19 @@ namespace NFe.Settings
                     }
                     Empresa t = new Empresa();
                     t = (Empresa)objObjectXMLSerializer.Load(typeof(Empresa), this.NomeArquivoConfig);
+
+                    if (!t.CertificadoInstalado && !string.IsNullOrEmpty(t.CertificadoSenha))
+                        t.CertificadoSenha = Criptografia.descriptografaSenha(t.CertificadoSenha);
+
+                    if (!string.IsNullOrEmpty(t.CertificadoPIN))
+                        t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
+
                     t.Nome = this.Nome;
                     t.CNPJ = this.CNPJ;
                     t.Servico = this.Servico;
                     t.CopyObjectTo(this);
 
                     this.CriarPastasDaEmpresa();
-
-                    this.CertificadoPIN = Criptografia.descriptografaSenha(this.CertificadoPIN);
-
-                    if (!this.CertificadoInstalado && !string.IsNullOrEmpty(this.CertificadoSenha))
-                        this.CertificadoSenha = Criptografia.descriptografaSenha(this.CertificadoSenha);
 
                     this.X509Certificado = this.BuscaConfiguracaoCertificado();
                 }
@@ -830,16 +832,28 @@ namespace NFe.Settings
                     empresaNova = true;
                     Empresas.Configuracoes.Add(this);
                 }
+                else
+                {
+                    int emp = Empresas.FindConfEmpresaIndex(this.CNPJ, this.Servico);
+                    this.CopyObjectTo(Empresas.Configuracoes[emp]);
+                }
+
+
+                //Criptografar a senha do certificado digital para gravar no XML. Wandrey 23/09/2014
                 if (validarConfig)
                     new ConfiguracaoApp().ValidarConfig(validaCertificado);
 
                 if (!Directory.Exists(this.PastaEmpresa))
                     Directory.CreateDirectory(this.PastaEmpresa);
 
-                ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
-                objObjectXMLSerializer.Save(this, this.NomeArquivoConfig);
-
                 this.CriarPastasDaEmpresa();
+
+                Empresa dados = new Empresa();
+                this.CopyObjectTo(dados);
+                dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
+
+                ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
+                objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);
 
                 Empresas.FindConfEmpresa(this.CNPJ, this.Servico).Nome = this.Nome;
             }

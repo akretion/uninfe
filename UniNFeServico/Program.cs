@@ -21,7 +21,6 @@ namespace UniNFeServico
         {
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
-            NFe.Components.Propriedade.TipoExecucao = TipoExecucao.teAll;
 
             System.Threading.Mutex oneMutex = null;
 

@@ -32,9 +32,6 @@ namespace NFe.Threadings
         {
             if (!_disposed)
             {
-                if (disposing && worker != null)
-                    worker.Dispose();
-
                 workers.Clear();
             }
             _disposed = true;
@@ -52,18 +49,15 @@ namespace NFe.Threadings
             Filter = filter;
         }
 
-        private BackgroundWorker worker = null;
-
         public void StartWatch()
         {
-            worker = new BackgroundWorker();
-            worker.WorkerSupportsCancellation = true;
-            worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.RunWorkerAsync();
+            Thread t = new Thread(
+                      new ThreadStart(ProcessFiles));
+            t.IsBackground = true;
+            t.Start();
         }
 
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        void ProcessFiles()
         {
             Hashtable OldFiles = new Hashtable();
 
@@ -117,7 +111,7 @@ namespace NFe.Threadings
 
                             foreach (FileInfo fi in NewFiles.Values)
                             {
-                                if (CancelProcess || ((BackgroundWorker)sender).CancellationPending)
+                                if (CancelProcess)
                                 {
                                     break;
                                 }
@@ -212,13 +206,6 @@ namespace NFe.Threadings
                     tworker.IsBackground = true;
                     tworker.Start();
                     tworker.Join();
-
-/*
-                    BackgroundWorker worker = new BackgroundWorker();
-                    worker.WorkerSupportsCancellation = true;
-                    worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-                    worker.DoWork += new DoWorkEventHandler(RaiseEvent);
-                    worker.RunWorkerAsync(fi);*/
                 }
                 else
                 {
@@ -255,14 +242,12 @@ namespace NFe.Threadings
             get { return CancelProcess; }
             set
             {
-                if (value && this.worker != null && this.worker.IsBusy)//<<<<danasa 1-5-2011
+                if (value)//<<<<danasa 1-5-2011
                 {
                     CancelProcess = true;
                     foreach (Thread worker in this.workers)
                         if (worker.IsAlive)
                             worker.Abort();
- 
-                    this.worker.CancelAsync();
                 }
             }
         }

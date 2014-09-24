@@ -34,8 +34,7 @@ namespace NFe.UI.Formularios
             this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
             this.cbServico.DisplayMember = "Value";
             this.cbServico.ValueMember = "Key";
-            this.cbServico.Enabled = (NFe.Components.Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe || 
-                                      NFe.Components.Propriedade.TipoExecucao == Components.TipoExecucao.teAll);
+            this.cbServico.Enabled = true;
             this.cbServico.SelectedIndex = 0;
             this.edtCNPJ.Text = this.edtNome.Text = "";
         }

@@ -389,22 +389,18 @@ namespace NFe.Threadings
             t.Start();
             Threads.Add(t);
 
-            if (Propriedade.TipoExecucao == TipoExecucao.teAll ||
-                Propriedade.TipoExecucao == TipoExecucao.teNFe)
-            {
-                //Executa a thread que faz a verificação das notas em processamento
-                Thread t2 = new Thread(new Processar().EmProcessamento);
-                t2.IsBackground = true;
-                t2.Start();
-                Threads.Add(t2);
+            //Executa a thread que faz a verificação das notas em processamento
+            Thread t2 = new Thread(new Processar().EmProcessamento);
+            t2.IsBackground = true;
+            t2.Start();
+            Threads.Add(t2);
 
-                //Executar a thread que faz a consulta do recibo das notas fiscais enviadas
-                Processar srv = new Processar();
-                Thread t3 = new Thread(srv.GerarXMLPedRec);
-                t3.IsBackground = true;
-                t3.Start(new NFe.Service.TaskGerarXMLPedRec());
-                Threads.Add(t3);
-            }
+            //Executar a thread que faz a consulta do recibo das notas fiscais enviadas
+            Processar srv = new Processar();
+            Thread t3 = new Thread(srv.GerarXMLPedRec);
+            t3.IsBackground = true;
+            t3.Start(new NFe.Service.TaskGerarXMLPedRec());
+            Threads.Add(t3);
         }
     }
     #endregion

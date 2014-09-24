@@ -96,8 +96,9 @@
     </Compile>
     <Compile Include="SchemaXML.cs" />
     <Compile Include="ServiceProcess.cs" />
-    <Compile Include="SigCorp\h\SigCorpH.cs" />
-    <Compile Include="SigCorp\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\BauruSP\h\SigCorpH.cs" />
+    <Compile Include="SigCorp\BauruSP\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\BotucatuSP\p\SigCorpP.cs" />
     <Compile Include="SigCorp\SigCorp.cs" />
     <Compile Include="SigCorp\SigCorpBase.cs" />
     <Compile Include="Smf.cs" />
@@ -105,6 +106,11 @@
     <Compile Include="SystemPro\SystemProBase.cs" />
     <Compile Include="TipoArquivoXML.cs" />
     <Compile Include="Web References\br.com.sigiss.bauru.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.sigiss.botucatu.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -182,6 +188,20 @@
     <None Include="Web References\br.com.sigiss.bauru.p\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.com.sigiss.botucatu.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.botucatu.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.botucatu.p\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.botucatu.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.botucatu.p\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.sigiss.testebauru.h\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -224,6 +244,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_bauru_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://botucatu.sigiss.com.br/botucatu/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.botucatu.p\</RelPath>
+      <UpdateFromURL>https://botucatu.sigiss.com.br/botucatu/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://testebauru.sigiss.com.br/testebauru/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -1935,7 +1935,8 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetAutorizacao.wsdl" />
-  </ItemGroup>  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEcancelamento.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEconsulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaCruzRS-THEMANFSEdadosCadastrais.wsdl" />
@@ -1950,8 +1951,18 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEguias.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEmensagens.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantaCruzRS-THEMANFSEremessa.wsdl" />
-  </ItemGroup> 
- <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTeresinaPI-DSFLoteRps.WSDL" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTeresinaPI-DSFLoteRps.WSDL" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBelemPA-DSFLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBelemPA-DSFLoteRps.wsdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

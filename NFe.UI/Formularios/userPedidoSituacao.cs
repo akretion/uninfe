@@ -172,7 +172,7 @@ namespace NFe.UI
 
                     case TipoAplicativo.NFCe:
                         if (tpEmis != TipoEmissao.teNormal)
-                            throw new Exception("MDF-e só dispõe do tipo de emissão Normal.");
+                            throw new Exception("NFC-e só dispõe do tipo de emissão Normal.");
                         break;
                 }
 

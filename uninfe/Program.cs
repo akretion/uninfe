@@ -89,7 +89,6 @@ namespace uninfe
                     }
                 }
 
-            Propriedade.TipoExecucao = TipoExecucao.teAll; // teNFe;
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
             if(Aplicacao.AppExecutando(silencioso))

@@ -137,11 +137,7 @@ namespace NFe.Settings
                         string fileoutput = null;
 
                         var afiles = (from d in x
-                                      where NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll
-                                                ? d.StartsWith("NFe.Components.Wsdl.NF")
-                                                : NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse
-                                                    ? d.StartsWith("NFe.Components.Wsdl.NFse.")
-                                                    : d.StartsWith("NFe.Components.Wsdl.NFe.")
+                                      where d.StartsWith("NFe.Components.Wsdl.NF")
                                       select d);
 
                         foreach (string s in afiles)
@@ -239,11 +235,7 @@ namespace NFe.Settings
                 }
                 finally
                 {
-                    if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse ||
-                        NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-                    {
-                        WebServiceNFSe.SalvarXMLMunicipios();
-                    }
+                    WebServiceNFSe.SalvarXMLMunicipios();
                 }
             }
 
@@ -414,12 +406,19 @@ namespace NFe.Settings
                     string _data = item["data"].InnerText;
                     string _manual = item["manual"].InnerText;
 
-                    ListArqInstalados.Add(new ArquivoItem
+                    try
                     {
-                        Arquivo = _arquivo,
-                        Data = Convert.ToDateTime(_data),
-                        Manual = Convert.ToBoolean(_manual)
-                    });
+                        ListArqInstalados.Add(new ArquivoItem
+                        {
+                            Arquivo = _arquivo,
+                            Data = Convert.ToDateTime(_data),
+                            Manual = Convert.ToBoolean(_manual)
+                        });
+                    }
+                    catch
+                    {
+                        //Aconteceu da data vir em um formato não reconhecido, desta forma, gerava exceção, coloquei o try catch para evitar sair do sistema ou impedir a execução de forma correta.
+                    }
                 }
             }
             #endregion
@@ -442,23 +441,9 @@ namespace NFe.Settings
             if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
 
-            switch (Propriedade.TipoExecucao)
-            {
-                case TipoExecucao.teAll:
-                    Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
-                    SchemaXML.CriarListaIDXML();
-                    SchemaXMLNFSe.CriarListaIDXML();
-                    break;
-
-                case TipoExecucao.teNFe:
-                    Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
-                    SchemaXML.CriarListaIDXML();
-                    break;
-
-                case TipoExecucao.teNFSe:
-                    SchemaXMLNFSe.CriarListaIDXML();
-                    break;
-            }
+            Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
+            SchemaXML.CriarListaIDXML();
+            SchemaXMLNFSe.CriarListaIDXML();
         }
         #endregion
 

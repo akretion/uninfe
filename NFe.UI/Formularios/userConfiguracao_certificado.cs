@@ -38,7 +38,15 @@ namespace NFe.UI.Formularios
 
             if (!string.IsNullOrEmpty(empresa.CNPJ))
             {
-                empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
+                try
+                {
+                    empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
+                }
+                catch
+                {
+                    //Se der algum erro na hora de buscar o certificado, o sistema tem que permitir o usuário continuar com a configuração para que ele acerte o erro. Wandrey 19/09/2014
+                }
+
                 oMeuCert = empresa.X509Certificado;
             }
             else

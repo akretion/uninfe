@@ -14,6 +14,7 @@ namespace NFe.Components.SigCorp
     public abstract class SigCorpBase : EmiteNFSeBase
     {
         #region locais/ protegidos
+        int CodigoMun = 0;
         EmiteNFSeBase sigCorpService;
         protected EmiteNFSeBase SigCorpService
         {
@@ -22,9 +23,15 @@ namespace NFe.Components.SigCorp
                 if (sigCorpService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        sigCorpService = new NFe.Components.SigCorp.h.SigCorpH(tpAmb, PastaRetorno);
+                        if (CodigoMun == 3507506) //Botucatu-SP
+                            throw new Exception(); // não tem
+                        else
+                            sigCorpService = new NFe.Components.SigCorp.BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
                     else
-                        sigCorpService = new NFe.Components.SigCorp.p.SigCorpP(tpAmb, PastaRetorno);
+                        if (CodigoMun == 3507506) //Botucatu-SP
+                            sigCorpService = new NFe.Components.SigCorp.BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
+                        else
+                            sigCorpService = new NFe.Components.SigCorp.BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
                 }
                 return sigCorpService;
             }
@@ -32,10 +39,10 @@ namespace NFe.Components.SigCorp
         #endregion
 
         #region Construtores
-        public SigCorpBase(TipoAmbiente tpAmb, string pastaRetorno)
+        public SigCorpBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun)
             : base(tpAmb, pastaRetorno)
         {
-
+            CodigoMun = codMun;
         }
         #endregion
 

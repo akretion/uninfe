@@ -103,7 +103,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeRecepcao2">
     <wsdl:port name="NfeRecepcao2Soap12" binding="tns:NfeRecepcao2Soap12">
-      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeRecepcao2"/>
+      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeRecepcao2"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

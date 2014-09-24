@@ -8,8 +8,8 @@ namespace NFe.Components.SigCorp
     public class SigCorp : SigCorpBase
     {
         #region Construtures
-        public SigCorp(TipoAmbiente tpAmb, string pastaRetorno)
-            : base(tpAmb, pastaRetorno)
+        public SigCorp(TipoAmbiente tpAmb, string pastaRetorno, int codMun)
+            : base(tpAmb, pastaRetorno, codMun)
         { }
         #endregion
     }

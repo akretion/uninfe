@@ -103,7 +103,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeAutorizacao">
     <wsdl:port name="NfeAutorizacaoSoap12" binding="tns:NfeAutorizacaoSoap12">
-      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeAutorizacao"/>
+      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeAutorizacao"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

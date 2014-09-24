@@ -47,7 +47,7 @@ namespace NFe.UI
 
     public static class uninfeDummy
     {
-        public static string  vStatus = "Ocorreu uma falha ao tentar obter a solicitação junto ao SEFAZ.\r\n\r\n" +
+        public static string vStatus = "Ocorreu uma falha ao tentar obter a solicitação junto ao SEFAZ.\r\n\r\n" +
                 "O problema pode ter ocorrido por causa dos seguintes fatores:\r\n\r\n" +
                 "- Problema com o certificado digital\r\n" +
                 "- Necessidade de atualização da cadeia de certificados digitais\r\n" +
@@ -118,20 +118,17 @@ namespace NFe.UI
         {
             ArrayList list = new ArrayList();
 
-            if (NFe.Components.Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ||
-                NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-            {
-                if (includeservico)
-                    list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Todos, EnumHelper.GetDescription(TipoAplicativo.Todos)));
-                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfe, EnumHelper.GetDescription(TipoAplicativo.Nfe)));
-                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Cte, EnumHelper.GetDescription(TipoAplicativo.Cte)));
-                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.MDFe, EnumHelper.GetDescription(TipoAplicativo.MDFe)));
-                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
-                if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll && includeservico)
-                    list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));
-            }
-            else
+            if (includeservico)
+                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Todos, EnumHelper.GetDescription(TipoAplicativo.Todos)));
+
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfe, EnumHelper.GetDescription(TipoAplicativo.Nfe)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Cte, EnumHelper.GetDescription(TipoAplicativo.Cte)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.MDFe, EnumHelper.GetDescription(TipoAplicativo.MDFe)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
+
+            if (includeservico)
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));
+
             return list;
         }
 
@@ -190,9 +187,9 @@ namespace NFe.UI
 
             foreach (Control control in Xcontrol.Controls)
             {
-                if (control.Controls.Count>0)
+                if (control.Controls.Count > 0)
                 {
-                   // Console.WriteLine("..." + control.GetType().ToString());
+                    // Console.WriteLine("..." + control.GetType().ToString());
                     ClearControls(control, clear, inverteTheme);
                 }
 
@@ -219,8 +216,10 @@ namespace NFe.UI
                 }
                 NFe.Components.Functions.SetProperty(control, "UseStyleColors", false);
 
-                try { ((MetroFramework.Interfaces.IMetroControl)control).Theme = uTheme; }catch{}
-                try { ((MetroFramework.Interfaces.IMetroControl)control).Style = uninfeDummy.mainForm.uStyle;}catch{}
+                try { ((MetroFramework.Interfaces.IMetroControl)control).Theme = uTheme; }
+                catch { }
+                try { ((MetroFramework.Interfaces.IMetroControl)control).Style = uninfeDummy.mainForm.uStyle; }
+                catch { }
                 try { ((MetroFramework.Interfaces.IMetroControl)control).StyleManager = uninfeDummy.mainForm.StyleManager; }
                 catch { }
             }

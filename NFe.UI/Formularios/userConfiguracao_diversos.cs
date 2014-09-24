@@ -40,13 +40,8 @@ namespace NFe.UI.Formularios
 
                 try
                 {
-                    if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-                    {
-                        arrUF = Functions.CarregaEstados();
-                        arrMunicipios = Functions.CarregaMunicipios();
-                    }
-                    else
-                        arrUF = Functions.CarregaUF();
+                    arrUF = Functions.CarregaEstados();
+                    arrMunicipios = Functions.CarregaMunicipios();
                 }
                 catch (Exception ex)
                 {
@@ -129,19 +124,11 @@ namespace NFe.UI.Formularios
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
                     cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse);
 
-                if (NFe.Components.Propriedade.TipoExecucao != TipoExecucao.teAll)
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-                        this.Size = new Size(640, 300);
-
-                if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-                {
-                    if (empresa.Servico == TipoAplicativo.Nfse)
-                        comboBox_UF.DataSource = arrMunicipios;
-                    else
-                        comboBox_UF.DataSource = arrUF;
-                }
+                if (empresa.Servico == TipoAplicativo.Nfse)
+                    comboBox_UF.DataSource = arrMunicipios;
                 else
                     comboBox_UF.DataSource = arrUF;
+
                 comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
                 comboBox_UF.ValueMember = "Codigo";
 

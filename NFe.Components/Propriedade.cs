@@ -117,7 +117,6 @@ namespace NFe.Components
             }
         }
 
-        public static TipoExecucao TipoExecucao { get; set; }
         public static TipoAplicativo TipoAplicativo { get; set; }
 
         public static List<Municipio> Municipios { get; set; }

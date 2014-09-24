@@ -24,22 +24,13 @@ namespace NFe.Interface
 
         private void FormNova_Load(object sender, EventArgs e)
         {
-            switch (Propriedade.TipoExecucao)
-            {
-                case TipoExecucao.teAll:
-                case TipoExecucao.teNFe:
-                    arrServico.Add(new ComboElem("Todos", (int)TipoAplicativo.Todos));
-                    arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
-                    arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
-                    arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
-                    arrServico.Add(new ComboElem("NFC-e", (int)TipoAplicativo.NFCe));
-                    if (Propriedade.TipoExecucao == TipoExecucao.teAll)
-                        arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
-                    break;
-                case TipoExecucao.teNFSe:
-                    arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
-                    break;
-            }
+            arrServico.Add(new ComboElem("NF-e, NFC-e, CT-e e MDF-e", (int)TipoAplicativo.Todos));
+            arrServico.Add(new ComboElem("NF-e e NFC-e", (int)TipoAplicativo.Nfe));
+            arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
+            arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
+            arrServico.Add(new ComboElem("NFC-e", (int)TipoAplicativo.NFCe));
+            arrServico.Add(new ComboElem("NFS-e", (int)TipoAplicativo.Nfse));
+
             cbServico.DataSource = arrServico;
             cbServico.DisplayMember = "valor";
             cbServico.ValueMember = "codigo";

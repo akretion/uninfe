@@ -9,9 +9,6 @@ namespace NFSe.Components
     {
         public static void CriarListaIDXML()
         {
-            if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teNFSe)
-                SchemaXML.InfSchemas.Clear();
-
             #region Schemas padrão GINFES
 
             #region XML de Consulta de NFSe por Data
@@ -1067,6 +1064,18 @@ namespace NFSe.Components
                 ArquivoXSD = "NFSe\\PAULISTANA\\PedidoCancelamentoNFe_v01.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "p1:PedidoCancelamentoNFe",
+                TagAtributoId = "Cabecalho",
+                TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
+
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-PAULISTANA-PedidoCancelamentoNFe", new InfSchema()
+            {
+                Tag = "PedidoCancelamentoNFe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PAULISTANA\\PedidoCancelamentoNFe_v01.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "PedidoCancelamentoNFe",
                 TagAtributoId = "Cabecalho",
                 TargetNameSpace = "http://www.prefeitura.sp.gov.br/nfe"
 

@@ -308,12 +308,6 @@ namespace NFe.Components
     }
     #endregion
 
-    public enum TipoExecucao
-    {
-        teNFe,
-        teNFSe,
-        teAll
-    }
     #region TipoAplicativo
     public enum TipoAplicativo
     {
@@ -321,7 +315,7 @@ namespace NFe.Components
         /// Aplicativo ou serviços para processamento dos XMLs da NF-e
         /// </summary>
         /// 
-        [Description("NF-e")]
+        [Description("NF-e e NFC-e")]
         Nfe = 0,
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs do CT-e
@@ -343,7 +337,7 @@ namespace NFe.Components
         /// </summary>
         [Description("NFC-e")]
         NFCe = 4,
-        [Description("Todos")]
+        [Description("NF-e, NFC-e, CT-e e MDF-e")]
         Todos = 10,
         [Description("")]
         Nulo = 100

@@ -124,21 +124,10 @@ namespace NFe.UI
                 string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
                 string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
                 string msg = "";
-                switch (Propriedade.TipoExecucao)
-                {
-                    case TipoExecucao.teNFSe:
-                        error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2);
-                        msg = "Arquivos '" + filenameWS1 + "' e/ou '" + filenameWS2 + "' não encontrados";
-                        break;
-                    case TipoExecucao.teNFe:
-                        error = !System.IO.File.Exists(filenameWS3);
-                        msg = "Arquivo '" + filenameWS3 + "' não encontrados";
-                        break;
-                    case TipoExecucao.teAll:
-                        error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-                        msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-                        break;
-                }
+
+                error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
+                msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
+
                 if (error)
                 {
                     MetroFramework.MetroMessageBox.Show(this, msg, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -637,7 +626,7 @@ namespace NFe.UI
                         switch (uninfeDummy.xmlParams.ReadValue(this.Name + "\\main", "WindowState", 0))
                         {
                             case 2:
-                                this._maximized=true;
+                                this._maximized = true;
                                 break;
                         }
                     }
@@ -740,7 +729,7 @@ namespace NFe.UI
             if (!MainVisible)
                 FormDummy.ShowModulo(uninfeOpcoes.opLogs);
             else
-                this._menu.Show(uninfeOpcoes.opLogs);        
+                this._menu.Show(uninfeOpcoes.opLogs);
         }
 
         private void cmMunicipios_Click(object sender, EventArgs e)
@@ -782,7 +771,7 @@ namespace NFe.UI
         private void cmFechar_Click(object sender, EventArgs e)
         {
             if (MetroFramework.MetroMessageBox.Show(this,
-                        "Confirma o encerramento do " + NFe.Components.Propriedade.NomeAplicacao + "?", 
+                        "Confirma o encerramento do " + NFe.Components.Propriedade.NomeAplicacao + "?",
                         "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
                 Propriedade.EncerrarApp = true;
@@ -801,7 +790,7 @@ namespace NFe.UI
                 uninfeDummy.ClearControls(c, false, false);
                 ((UserControl1)c).UpdateControles();
             }
-            
+
             if (this._menu != null)
             {
                 _menu.UpdateControles();
@@ -820,7 +809,7 @@ namespace NFe.UI
             if (Empresas.Configuracoes.Count == 0)
             {
                 MetroFramework.MetroMessageBox.Show(this,
-                    "É necessário cadastrar e configurar a(s) empresa(s) que será(ão) gerenciada(s) pelo aplicativo.", "", 
+                    "É necessário cadastrar e configurar a(s) empresa(s) que será(ão) gerenciada(s) pelo aplicativo.", "",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             uninfeDummy.opServicos = uninfeOpcoes2.opRestartTasks;
@@ -838,23 +827,7 @@ namespace NFe.UI
                 this.cmSituacaoServicos.Visible =
                 this.cmConsultaCadastro.Visible = (NFe.Settings.Empresas.CountEmpresasNFe > 0);
 
-            if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-            {
-                this.cmMunicipios.Visible = Empresas.CountEmpresasNFse > 0;
-            }
-            else
-                switch (NFe.Components.Propriedade.TipoAplicativo)
-                {
-                    case NFe.Components.TipoAplicativo.Nfe:
-                        this.cmMunicipios.Visible = false;
-                        break;
-
-                    case NFe.Components.TipoAplicativo.Nfse:
-                        this.cmConsultaCadastro.Visible =
-                            this.cmSituacaoServicos.Visible =
-                            this.cmDANFE.Visible = false;
-                        break;
-                }
+            this.cmMunicipios.Visible = Empresas.CountEmpresasNFse > 0;
         }
     }
 }

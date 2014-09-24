@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using NFe.Components.Abstract;
 using NFe.Components.br.com.sigiss.testebauru.h;
 
-namespace NFe.Components.SigCorp.h
+namespace NFe.Components.SigCorp.BauruSP.h
 {
     public class SigCorpH : EmiteNFSeBase
     {

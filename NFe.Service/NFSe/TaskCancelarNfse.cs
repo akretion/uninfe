@@ -98,7 +98,8 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIGCORP_SIGISS:
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno);
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
                         sigcorp.CancelarNfse(NomeArquivoXML);
                         break;
                 }

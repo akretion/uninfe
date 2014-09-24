@@ -147,8 +147,8 @@ namespace NFe.Interface
                 #region Montar array DropList dos tipos de serviços
                 if (servico != TipoAplicativo.Nfse)
                 {
-                    arrServico.Add(new ComboElem("Todos", (int)TipoAplicativo.Todos));
-                    arrServico.Add(new ComboElem("NF-e", (int)TipoAplicativo.Nfe));
+                    arrServico.Add(new ComboElem("NF-e, NFC-e, CT-e e MDF-e", (int)TipoAplicativo.Todos));
+                    arrServico.Add(new ComboElem("NF-e e NFC-e", (int)TipoAplicativo.Nfe));
                     arrServico.Add(new ComboElem("CT-e", (int)TipoAplicativo.Cte));
                     arrServico.Add(new ComboElem("MDF-e", (int)TipoAplicativo.MDFe));
                     arrServico.Add(new ComboElem("NFC-e", (int)TipoAplicativo.NFCe));
@@ -260,7 +260,15 @@ namespace NFe.Interface
 
                 }
                 edtNome.Text = oEmpresa.Nome;
-                oEmpresa.X509Certificado = oEmpresa.BuscaConfiguracaoCertificado();
+                try
+                {
+                    oEmpresa.X509Certificado = oEmpresa.BuscaConfiguracaoCertificado();
+                }
+                catch
+                {
+                    //Se o certificado der algum problema, não posso abortar este processo,
+                    //tem que abrir a tela de configuração para que o usuário possa fazer os ajustes necessários. Wandrey 19/09/2014
+                }
 
                 oMeuCert = oEmpresa.X509Certificado;
 
@@ -275,7 +283,7 @@ namespace NFe.Interface
                     txtArquivoCertificado.Text = oEmpresa.CertificadoArquivo;
                     txtSenhaCertificado.Text = oEmpresa.CertificadoSenha;
                 }
-                
+
 
                 edtCNPJ.Text = oEmpresa.CNPJ;
                 cbServico.Text = AtribuirVlr_cbServico(oEmpresa.Servico);
@@ -399,7 +407,7 @@ namespace NFe.Interface
             {
                 stopChangedEvent = false;
                 this.cbServico.Enabled =
-                    this.edtCNPJ.Enabled = Propriedade.TipoExecucao != TipoExecucao.teAll;
+                    this.edtCNPJ.Enabled = false;
             }
         }
 
@@ -551,99 +559,7 @@ namespace NFe.Interface
 
         private void edtCNPJ_Leave(object sender, EventArgs e)
         {
-            if (Propriedade.TipoExecucao == TipoExecucao.teAll || !edtCNPJ.Enabled)
-                return;
-
-            string cnpj = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
-            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
-            string nome = edtNome.Text.ToString();
-
-            //if (edtNome.Text.Length > 20)
-            //    nome = edtNome.Text.Substring(0, 20);
-
-            if (string.IsNullOrEmpty(cnpj))
-            {
-                if (this.updateText != null)
-                    this.updateText("-- NOVA --");
-            }
-            else
-            {
-                if (cnpjCurrent != cnpj)
-                {
-                    if (!CNPJ.Validate(cnpj))
-                    {
-                        this.tabControl3.SelectedIndex = 0;
-                        this.edtCNPJ.Focus();
-                        MessageBox.Show("CNPJ inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    bool mudaPastas = true;
-                    if (Empresas.FindConfEmpresa(cnpj, servico) != null)
-                    {
-                        MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe) == null)
-                        {
-                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfe);
-                            servicoCurrent = servico = TipoAplicativo.Nfe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Cte) == null)
-                        {
-                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Cte);
-                            servicoCurrent = servico = TipoAplicativo.Cte;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfse) == null)
-                        {
-                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.Nfse);
-                            servicoCurrent = servico = TipoAplicativo.Nfse;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.MDFe) == null)
-                        {
-                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.MDFe);
-                            servicoCurrent = servico = TipoAplicativo.MDFe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else if (Empresas.FindConfEmpresa(cnpj, TipoAplicativo.NFCe) == null)
-                        {
-                            cbServico.Text = AtribuirVlr_cbServico(TipoAplicativo.NFCe);
-                            servicoCurrent = servico = TipoAplicativo.NFCe;
-                            MudarPastas(cnpj, servicoCurrent);
-                            mudaPastas = false;
-                        }
-                        else
-                        {
-                            this.tabControl3.SelectedIndex = 0;
-                            this.edtCNPJ.Focus();
-
-                            return;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(textBox_PastaEnvioXML.Text) && mudaPastas)
-                    {
-                        mudaPastas = MessageBox.Show("CNPJ foi alterado e você já tem as pastas definidas. Deseja mudá-las para o novo CNPJ?", "CNPJ alterado", MessageBoxButtons.YesNo) == DialogResult.Yes;
-                    }
-
-                    if (mudaPastas)
-                        MudarPastas(cnpj, servico);
-                }
-
-                cnpjCurrent = cnpj;
-
-                if (this.updateText != null)
-                    if (nome.Length > 20)
-                        this.updateText(nome.Substring(0, 20));
-                    else
-                        this.updateText(nome);
-            }
+            return;
         }
 
         private void button_selectxmlenvio_Click(object sender, EventArgs e)

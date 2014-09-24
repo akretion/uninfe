@@ -123,7 +123,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-                #region NF-e
+        #region NF-e
                 case Servicos.InutilizarNumerosNFe:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -181,7 +181,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region MDF-e
+        #region MDF-e
                 case Servicos.ConsultaStatusServicoMDFe:
                     retorna = "MDFeStatusServico";
                     break;
@@ -199,7 +199,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region CT-e
+        #region CT-e
                 case Servicos.ConsultaStatusServicoCTe:
                     retorna = "CteStatusServico";
                     break;
@@ -242,13 +242,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-                #region GINFES
+        #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
                 #endregion
 
-                #region THEMA
+        #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -274,7 +274,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region BETHA
+        #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -300,7 +300,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region CANOAS-RS (ABACO)
+        #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -326,39 +326,39 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
                 #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region Blumenau-SC
+        #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
                 #endregion
 
-                #region BHISS
+        #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
                 #endregion
 
-                #region GIF
+        #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
                 #endregion
 
-                #region DUETO
+        #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -384,21 +384,21 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region WEBISS
+        #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
                 #endregion
 
-                #region PAULISTANA
+        #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
                 #endregion
 
-                #region SALVADOR_BA
+        #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -424,14 +424,14 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region PORTOVELHENSE
+        #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
                 #endregion
 
-                #region PRONIN
+        #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -450,7 +450,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region ISSONLINE4R (4R Sistemas)
+        #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -478,14 +478,14 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region DSF
+        #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
                 #endregion
 
-                #region TECNOSISTEMAS
+        #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -511,19 +511,19 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region TIPLAN
+        #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region CARIOCA
+        #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region SMARAPD
+        #region SMARAPD
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
@@ -630,22 +630,9 @@ namespace NFe.Service
         {
             string retorna = string.Empty;
 
-            if (Propriedade.TipoExecucao == TipoExecucao.teAll)
-            {
-                retorna = NomeMetodoWSNFSe(servico, cUF);
-                if (retorna == string.Empty)//nem seria necessario, porque estamos obtendo do wsdl
-                    retorna = NomeMetodoWSNFe(servico, cUF, versao);
-            }
-            else
-                switch (Propriedade.TipoAplicativo)
-                {
-                    case TipoAplicativo.Nfe:
-                        retorna = NomeMetodoWSNFe(servico, cUF, versao);
-                        break;
-                    case TipoAplicativo.Nfse:
-                        retorna = NomeMetodoWSNFSe(servico, cUF);
-                        break;
-                }
+            retorna = NomeMetodoWSNFSe(servico, cUF);
+            if (retorna == string.Empty)//nem seria necessario, porque estamos obtendo do wsdl
+                retorna = NomeMetodoWSNFe(servico, cUF, versao);
 
             return retorna;
         }
