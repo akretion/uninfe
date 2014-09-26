@@ -446,6 +446,7 @@ namespace NFe.Components
             #endregion
 
             #region XML Envio de registro de saida
+#if nao
             InfSchemas.Add("NFE-envRegistroSaida", new InfSchema()
             {
                 Tag = "envRegistro",
@@ -456,9 +457,11 @@ namespace NFe.Components
                 TagAtributoId = "infRegistro",
                 TargetNameSpace = string.Empty
             });
+#endif
             #endregion
 
             #region XML Envio de cancelamento registro de saida
+#if nao
             InfSchemas.Add("NFE-envCancRegistroSaida", new InfSchema()
             {
                 Tag = "envCancRegistro",
@@ -469,6 +472,7 @@ namespace NFe.Components
                 TagAtributoId = "infCancRegistro",
                 TargetNameSpace = string.Empty
             });
+#endif
             #endregion
 
             #endregion
@@ -768,6 +772,19 @@ namespace NFe.Components
             });
             #endregion
 
+            #endregion
+
+            #region DFe
+            InfSchemas.Add("NFE-distDFeInt", new InfSchema()
+            {
+                Tag = "distDFeInt",
+                ID = ++id,
+                ArquivoXSD = "DFe\\distDFeInt_v1.00.xsd",
+                //Descricao = "XML de registro de envio de registro de saida",
+                //TagAssinatura = "evento",
+                //TagAtributoId = "infRegistro",
+                TargetNameSpace = string.Empty
+            });
             #endregion
         }
     }

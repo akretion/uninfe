@@ -36,6 +36,7 @@ namespace uninfe_ws
                 "MDFeConsulta",
                 "MDFeStatusServico",
                 "MDFeRecepcaoEvento",
+                "DFeRecepcao",
                 "CTeRecepcaoEvento",
                 "CTeRecepcao",
                 "CTeRetRecepcao",
@@ -142,7 +143,7 @@ namespace uninfe_ws
                         Nome = item.Attribute(NFe.Components.NFeStrConstants.Nome).Value,
                         ID = item.Attribute(NFe.Components.NFeStrConstants.ID).Value,
                         UF = item.Attribute(NFe.Components.NFeStrConstants.UF).Value,
-                        Padrao = item.Attribute(NFe.Components.NFeStrConstants.Padrao) == null ? padraobase : item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value
+                        Padrao = item.Attribute(NFe.Components.NFeStrConstants.Padrao) == null ? (_tipo == NFe.Components.TipoAplicativo.Nfse ? padraobase : "") : item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value
                     });
                     dummy.listageral.Remove(listaEstados[listaEstados.Count - 1].key);
                     dummy.listageral.Add(listaEstados[listaEstados.Count - 1].key, (int)this._tipo);
@@ -300,7 +301,8 @@ namespace uninfe_ws
                 {
                     item.Nome = this.edtNome.Text;
                     item.ID = this.edtID.Text;
-                    item.Padrao = this.edtPadrao.SelectedItem.ToString();
+                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                        item.Padrao = this.edtPadrao.SelectedItem.ToString();
                     item.UF = this.edtUF.Text;
                 }
                 else
@@ -308,7 +310,8 @@ namespace uninfe_ws
                     Estado estado = new Estado();
                     estado.Nome = this.edtNome.Text;
                     estado.ID = this.edtID.Text;
-                    estado.Padrao = this.edtPadrao.SelectedItem.ToString();
+                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                        estado.Padrao = this.edtPadrao.SelectedItem.ToString();
                     estado.UF = this.edtUF.Text;
 
                     dummy.listageral.Add(key, (int)this._tipo);
@@ -446,7 +449,8 @@ namespace uninfe_ws
 
         private void restorebackup()
         {
-            System.IO.File.Copy(this.filebackup, this.configname, true);
+            if (System.IO.File.Exists(this.filebackup))
+                System.IO.File.Copy(this.filebackup, this.configname, true);
         }
 
         private void RefreshEstados()

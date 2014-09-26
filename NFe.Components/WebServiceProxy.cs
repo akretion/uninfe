@@ -886,6 +886,9 @@ namespace NFe.Components
             MDFeStatusServico =
             MDFeRecepcaoEvento =
                 ///
+                /// DF-e
+            DFeRecepcao =
+                ///
                 /// CT-e
             CTeRecepcao =
             CTeRetRecepcao =
@@ -1004,6 +1007,10 @@ namespace NFe.Components
         /// Recepção de eventos do CTe
         /// </summary>
         public string CTeRecepcaoEvento { get; set; }
+        #endregion
+
+        #region DF-e
+        public string DFeRecepcao { get; set; }
         #endregion
 
         #endregion

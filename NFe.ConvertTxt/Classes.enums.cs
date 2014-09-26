@@ -18,6 +18,7 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLEvento = "1.00";
         public static string VersaoXMLEnvConsultaNFeDest = "1.01";
         public static string VersaoXMLEnvDownload = "1.00";
+        public static string VersaoXMLEnvDFe = "1.00";
         //public static string VersaoXMLCanc = "3.10";
         //public static string NFeCCe = "1.00";
         //public static string NfeAutorizacao = "3.10";
@@ -405,6 +406,7 @@ namespace NFe.ConvertTxt
         cTermCarreg,
         cTermDescarreg,
         cUF,
+        cUFAutor,
         cUnid,
         
         dBaixa,
@@ -531,6 +533,7 @@ namespace NFe.ConvertTxt
         nViag,
         nVol,
         nVoo,
+        NSU,
         NVE,
 
         orig,

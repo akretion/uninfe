@@ -17,6 +17,7 @@ namespace NFe.Service
         {
             Servico = Servicos.Nulo;
             novaNomenclatura = false;
+            dadosEnvEvento = new DadosenvEvento();
         }
 
         #region Classe com os dados do XML do registro de eventos
@@ -30,14 +31,8 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            novaNomenclatura = NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) || 
-                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT) ||
-                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC) || 
-                NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC_TXT);
-
             try
             {
-                dadosEnvEvento = new DadosenvEvento();
                 //Ler o XML para pegar parâmetros de envio
                 EnvEvento(emp, NomeArquivoXML);
 
@@ -58,7 +53,6 @@ namespace NFe.Service
                         Servico = Servicos.EnviarManifDest;
                         break;
                 }
-
                 foreach (Evento item in dadosEnvEvento.eventos)
                 {
                     tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir
@@ -100,7 +94,7 @@ namespace NFe.Service
                         break;
 
                     case Servicos.EnviarEPEC:
-                        //tpEmis = Propriedade.TipoEmissao.teEPEC;
+                        //tpEmis = (int)NFe.Components.TipoEmissao.teEPEC;
                         break;
 
                     default:
@@ -120,7 +114,7 @@ namespace NFe.Service
                         dadosEnvEvento.eventos[0].mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//"RecepcaoEvento");
+                    object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
                     string xmlExtEnvio = string.Empty;
                     string xmlExtRetorno = string.Empty;
@@ -168,7 +162,7 @@ namespace NFe.Service
                     //Assinar o XML
                     oAD.Assinar(NomeArquivoXML, emp, cOrgao);
 
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0]/* NomeMetodoWS(Servico, ufParaWS)*/, oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0], oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
 
                     //Ler o retorno
                     LerRetornoEvento(emp);
@@ -211,7 +205,13 @@ namespace NFe.Service
                                 break;
                         }
                     }
-                    oGerarXML.EnvioEvento(Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt, dadosEnvEvento);
+                    string f = Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt;
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
+                    oGerarXML.EnvioEvento(f, dadosEnvEvento);
                 }
             }
             catch (Exception ex)
@@ -302,6 +302,12 @@ namespace NFe.Service
         #region EnvEvento()
         private void EnvEvento(int emp, string arquivoXML)
         {
+            novaNomenclatura = 
+                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
+                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT) ||
+                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC) ||
+                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC_TXT);
+
             ///
             /// danasa 6/2011
             /// 

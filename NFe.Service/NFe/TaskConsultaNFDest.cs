@@ -92,8 +92,14 @@ namespace NFe.Service
                 }
                 else
                 {
+                    string f = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsNFeDest_TXT) + Propriedade.ExtEnvio.ConsNFeDest_XML;
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
                     // Gerar o XML de eventos a partir do TXT gerado pelo ERP
-                    oGerarXML.EnvioConsultaNFeDest(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsNFeDest_TXT) + Propriedade.ExtEnvio.ConsNFeDest_XML, /*oLer.*/oDadosConsultaNFeDest);
+                    oGerarXML.EnvioConsultaNFeDest(f, oDadosConsultaNFeDest);
                 }
             }
             catch (Exception ex)

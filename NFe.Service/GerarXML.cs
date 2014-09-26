@@ -757,34 +757,10 @@ namespace NFe.Service
 
             GravarArquivoParaEnvio(_arquivo_saida, doc.OuterXml);
 
+            if (_arquivo_saida.ToLower().IndexOf(Empresas.Configuracoes[emp].PastaValidar.ToLower()) >= 0)
+                return _arquivo_saida;
+
             return Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + _arquivo_saida;
-            /*
-            string header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                "<ConsCad xmlns=\"http://www.portalfiscal.inf.br/nfe" +
-                "\" versao=\"" + versao + "\"><infCons><xServ>CONS-CAD</xServ>";
-
-            StringBuilder saida = new StringBuilder();
-            saida.Append(header);
-            saida.AppendFormat("<UF>{0}</UF>", uf);
-            if (!string.IsNullOrEmpty(cnpj))
-            {
-                saida.AppendFormat("<CNPJ>{0}</CNPJ>", cnpj);
-            }
-            else
-                if (!string.IsNullOrEmpty(ie))
-                {
-                    saida.AppendFormat("<IE>{0}</IE>", ie);
-                }
-                else
-                    if (!string.IsNullOrEmpty(cpf))
-                    {
-                        saida.AppendFormat("<CPF>{0}</CPF>", cpf);
-                    }
-            saida.Append("</infCons></ConsCad>");
-
-            GravarArquivoParaEnvio(_arquivo_saida, saida.ToString());
-
-            return Empresas.Configuracoes[emp].PastaEnvio + "\\" + _arquivo_saida;*/
         }
 
         /// <summary>
@@ -827,7 +803,8 @@ namespace NFe.Service
                         nNFIni.ToString("000000000"), 
                         nNFFin.ToString("000000000"))));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), tpAmb.ToString()));
-            nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpEmis.ToString(), tpEmis.ToString()));
+            if (pFinalArqEnvio.IndexOf(Empresas.Configuracoes[this.EmpIndex].PastaValidar, StringComparison.InvariantCultureIgnoreCase) == -1)
+                nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpEmis.ToString(), tpEmis.ToString()));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "INUTILIZAR"));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cUF.ToString(), cUF.ToString("00")));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.ano.ToString(), ano.ToString("00")));
@@ -836,35 +813,11 @@ namespace NFe.Service
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.serie.ToString(), serie.ToString()));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nNFIni.ToString(), nNFIni.ToString()));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nNFFin.ToString(), nNFFin.ToString()));
-            nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), xJust));
+            nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), xJust.TrimStart().TrimEnd()));
             node.AppendChild(nodeinfInut);
             doc.AppendChild(node);
 
             GravarArquivoParaEnvio(pFinalArqEnvio, doc.OuterXml);
-
-
-            /*
-            string tipo = "NF";
-
-            StringBuilder aXML = new StringBuilder();
-            aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            aXML.Append("<inut" + tipo + "e xmlns=\"" + Propriedade.nsURI + "\" versao=\"" + versao + "\">");
-            aXML.AppendFormat("<infInut Id=\"ID{0}{1}{2}{3}{4}{5}{6}\">", cUF.ToString("00"), ano.ToString("00"), CNPJ, mod.ToString("00"), serie.ToString("000"), nNFIni.ToString("000000000"), nNFFin.ToString("000000000"));
-            aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
-            aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
-            aXML.Append("<xServ>INUTILIZAR</xServ>");
-            aXML.AppendFormat("<cUF>{0}</cUF>", cUF.ToString("00"));
-            aXML.AppendFormat("<ano>{0}</ano>", ano.ToString("00"));
-            aXML.AppendFormat("<CNPJ>{0}</CNPJ>", CNPJ);
-            aXML.AppendFormat("<mod>{0}</mod>", mod.ToString("00"));
-            aXML.AppendFormat("<serie>{0}</serie>", serie);
-            aXML.AppendFormat("<n" + tipo + "Ini>{0}</n" + tipo + "Ini>", nNFIni);
-            aXML.AppendFormat("<n" + tipo + "Fin>{0}</n" + tipo + "Fin>", nNFFin);
-            aXML.AppendFormat("<xJust>{0}</xJust>", xJust);
-            aXML.Append("</infInut>");
-            aXML.Append("</inut" + tipo + "e>");
-
-            GravarArquivoParaEnvio(pFinalArqEnvio, aXML.ToString());*/
         }
         #endregion
 
@@ -909,7 +862,8 @@ namespace NFe.Service
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), nsURI));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), tpAmb.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cUF.ToString(), cUF.ToString()));
-            node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpEmis.ToString(), tpEmis.ToString()));
+            if (pArquivo.ToLower().IndexOf(Empresas.Configuracoes[this.EmpIndex].PastaValidar.ToLower()) == -1)
+                node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpEmis.ToString(), tpEmis.ToString()));
             node.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "STATUS"));
             doc.AppendChild(node);
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml);
@@ -2216,28 +2170,28 @@ namespace NFe.Service
 
                 XmlNode detEvento = doc.CreateElement("detEvento");
                 detEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), "1.00"));
-                detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.descEvento.ToString(), evento.descEvento));
+                detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.descEvento.ToString(), evento.descEvento.Trim()));
 
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(evento.tpEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCCe:
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xCorrecao.ToString(), evento.xCorrecao));
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xCondUso.ToString(), evento.xCondUso));
+                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xCorrecao.ToString(), evento.xCorrecao.Trim()));
+                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xCondUso.ToString(), evento.xCondUso.Trim()));
                         break;
 
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                         detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nProt.ToString(), evento.nProt));
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), evento.xJust));
+                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
                         break;
 
                     case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), evento.xJust));
+                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
                         break;
 
                     case ConvertTxt.tpEventos.tpEvEPEC:
                         detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cOrgaoAutor.ToString(), evento.epec.cOrgaoAutor.ToString()));
                         detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAutor.ToString(), ((Int32)evento.epec.tpAutor).ToString()));
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.verAplic.ToString(), evento.epec.verAplic));
+                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.verAplic.ToString(), evento.epec.verAplic.Trim()));
                         if (!string.IsNullOrEmpty(evento.epec.dhEmi))
                         {
                             if (!(evento.epec.dhEmi.EndsWith("-01:00") ||
@@ -2277,103 +2231,39 @@ namespace NFe.Service
             doc.AppendChild(envEvento);
 
             GravarArquivoParaEnvio(pArquivo, doc.OuterXml, true);
+        }
+        #endregion
 
-#if false
-            StringBuilder vDadosMsg = new StringBuilder();
-            vDadosMsg.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            vDadosMsg.Append("<envEvento versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-            vDadosMsg.AppendFormat("<idLote>{0}</idLote>", dadosEnvEvento.idLote);
+        #region GerarRecepcaoDFe
+        public void RecepcaoDFe(string arquivo, distDFeInt value)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
+            XmlNode envEvento = doc.CreateElement("distDFeInt");
+            envEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), string.IsNullOrEmpty(value.versao) ? NFe.ConvertTxt.versoes.VersaoXMLEnvDFe : value.versao));
+            envEvento.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.xmlns.ToString(), Propriedade.nsURI_nfe));
+            envEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), value.tpAmb.ToString()));
+            envEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cUFAutor.ToString(), value.cUFAutor.ToString()));
+            if (!string.IsNullOrEmpty(value.CNPJ))
+                envEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), value.CNPJ.ToString()));
+            else
+                envEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CPF.ToString(), value.CPF.ToString()));
 
-            foreach (Evento evento in dadosEnvEvento.eventos)
+            if (!string.IsNullOrEmpty(value.ultNSU))
             {
-                vDadosMsg.Append("<evento versao=\"" + dadosEnvEvento.versao + "\" xmlns=\"" + Propriedade.nsURI + "\">");
-                {
-                    vDadosMsg.AppendFormat("<infEvento Id=\"{0}\">", evento.Id);
-                    {
-                        vDadosMsg.AppendFormat("<cOrgao>{0}</cOrgao>", evento.cOrgao);
-                        vDadosMsg.AppendFormat("<tpAmb>{0}</tpAmb>", evento.tpAmb);
-                        if (!string.IsNullOrEmpty(evento.CNPJ))
-                            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", evento.CNPJ);
-                        else
-                            vDadosMsg.AppendFormat("<CPF>{0}</CPF>", evento.CPF);
-                        vDadosMsg.AppendFormat("<chNFe>{0}</chNFe>", evento.chNFe);
-                        // get the UTC offset depending on day light savings
-                        /*Data e hora do evento no formato AAAA-MM-DDThh:mm:ssTZD (UTC - Universal Coordinated Time,
-                        onde TZD pode ser -02:00 (Fernando de Noronha), -03:00(Brasília) ou -04:00 (Manaus), no horário de verão serão -
-                        01:00, -02:00 e -03:00. Ex.: 2010-08-19T13:00:15-03:00.*/
-                        if (!(evento.dhEvento.EndsWith("-01:00") ||
-                              evento.dhEvento.EndsWith("-02:00") ||
-                              evento.dhEvento.EndsWith("-03:00") ||
-                              evento.dhEvento.EndsWith("-04:00")))
-                        {
-                            evento.dhEvento = Convert.ToDateTime(evento.dhEvento).ToString("yyyy-MM-dd\"T\"HH:mm:sszzz");
-                        }
-                        vDadosMsg.AppendFormat("<dhEvento>{0}</dhEvento>", evento.dhEvento);
-                        vDadosMsg.AppendFormat("<tpEvento>{0}</tpEvento>", evento.tpEvento);
-                        vDadosMsg.AppendFormat("<nSeqEvento>{0}</nSeqEvento>", evento.nSeqEvento);
-                        vDadosMsg.AppendFormat("<verEvento>{0}</verEvento>", evento.verEvento);
-
-                        vDadosMsg.Append("<detEvento versao=\"1.00\">");
-                        {
-                            vDadosMsg.AppendFormat("<descEvento>{0}</descEvento>", evento.descEvento);
-                            switch ((NFe.ConvertTxt.tpEventos)Enum.Parse(typeof(ConvertTxt.tpEventos), evento.tpEvento, true))
-                            {
-                                case ConvertTxt.tpEventos.tpEvCCe:
-                                    vDadosMsg.AppendFormat("<xCorrecao>{0}</xCorrecao>", evento.xCorrecao);
-                                    vDadosMsg.AppendFormat("<xCondUso>{0}</xCondUso>", evento.xCondUso);
-                                    break;
-
-                                case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
-                                    vDadosMsg.AppendFormat("<nProt>{0}</nProt>", evento.nProt);
-                                    vDadosMsg.AppendFormat("<xJust>{0}</xJust>", evento.xJust);
-                                    break;
-
-                                case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
-                                    vDadosMsg.AppendFormat("<xJust>{0}</xJust>", evento.xJust);
-                                    break;
-
-                                case ConvertTxt.tpEventos.tpEvEPEC:
-                                    vDadosMsg.AppendFormat("<cOrgaoAutor>{0}</cOrgaoAutor>", evento.epec.cOrgaoAutor);
-                                    vDadosMsg.AppendFormat("<tpAutor>{0}</tpAutor>", (Int32)evento.epec.tpAutor);
-                                    vDadosMsg.AppendFormat("<verAplic>{0}</verAplic>", evento.epec.verAplic);
-                                    if (!(evento.epec.dhEmi.EndsWith("-01:00") ||
-                                          evento.epec.dhEmi.EndsWith("-02:00") ||
-                                          evento.epec.dhEmi.EndsWith("-03:00") ||
-                                          evento.epec.dhEmi.EndsWith("-04:00")))
-                                    {
-                                        evento.epec.dhEmi = Convert.ToDateTime(evento.epec.dhEmi).ToString("yyyy-MM-dd\"T\"HH:mm:sszzz");
-                                    }
-                                    vDadosMsg.AppendFormat("<dhEmi>{0}</dhEmi>", evento.epec.dhEmi);
-                                    vDadosMsg.AppendFormat("<tpNF>{0}</tpNF>", (Int32)evento.epec.tpNF);
-                                    vDadosMsg.AppendFormat("<IE>{0}</IE>", evento.epec.IE);
-                                    vDadosMsg.Append("<dest>");
-                                    vDadosMsg.AppendFormat("<UF>{0}</UF>", evento.epec.dest.UF);
-                                    if (!string.IsNullOrEmpty(evento.epec.dest.idEstrangeiro) || evento.epec.dest.UF.Equals("EX"))
-                                        vDadosMsg.AppendFormat("<idEstrangeiro>{0}</idEstrangeiro>", evento.epec.dest.idEstrangeiro);
-                                    else
-                                        if (!string.IsNullOrEmpty(evento.epec.dest.CNPJ))
-                                            vDadosMsg.AppendFormat("<CNPJ>{0}</CNPJ>", evento.epec.dest.CNPJ);
-                                        else
-                                            vDadosMsg.AppendFormat("<CPF>{0}</CPF>", evento.epec.dest.CPF);
-                                    if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
-                                        vDadosMsg.AppendFormat("<IE>{0}</IE>", evento.epec.dest.IE);
-                                    vDadosMsg.Append("</dest>");
-                                    vDadosMsg.AppendFormat("<vNF>{0}</vNF>", evento.epec.vNF.ToString("0.00").Replace(",", "."));
-                                    vDadosMsg.AppendFormat("<vICMS>{0}</vICMS>", evento.epec.vICMS.ToString("0.00").Replace(",", "."));
-                                    vDadosMsg.AppendFormat("<vST>{0}</vST>", evento.epec.vST.ToString("0.00").Replace(",", "."));
-                                    break;
-                            }
-                        }
-                        vDadosMsg.Append("</detEvento>");
-                    }
-                    vDadosMsg.Append("</infEvento>");
-                }
-                vDadosMsg.Append("</evento>");
+                XmlNode nodeEvento1 = doc.CreateElement("distNSU");
+                nodeEvento1.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.ultNSU.ToString(), value.ultNSU.PadLeft(15,'0')));
+                envEvento.AppendChild(nodeEvento1);
             }
-            vDadosMsg.Append("</envEvento>");
+            else
+            {
+                XmlNode nodeEvento2 = doc.CreateElement("consNSU");
+                nodeEvento2.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.NSU.ToString(), value.NSU.PadLeft(15, '0')));
+                envEvento.AppendChild(nodeEvento2);
+            }
+            doc.AppendChild(envEvento);
 
-            GravarArquivoParaEnvio(pArquivo, vDadosMsg.ToString(), true);
-#endif
+            GravarArquivoParaEnvio(arquivo, doc.OuterXml, true);
         }
         #endregion
 
@@ -2824,8 +2714,9 @@ namespace NFe.Service
 
             //Arquivo na pasta Temp
             string arqTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
-            //Arquivo na pasta de Envio
-            string arqEnvio = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
+
+            if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0)
+                arqTemp = Arquivo;
 
             MemoryStream oMemoryStream;
             ///
@@ -2841,7 +2732,11 @@ namespace NFe.Service
             //Gravar o XML na pasta Temp
             docProc.Save(arqTemp);
 
+            if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0) return;
+
             //Mover XML da pasta Temp para Envio
+            //Arquivo na pasta de Envio
+            string arqEnvio = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
             Functions.Move(arqTemp, arqEnvio);
         }
         #endregion

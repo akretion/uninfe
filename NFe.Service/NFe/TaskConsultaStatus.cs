@@ -41,7 +41,14 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(  Servicos.ConsultaStatusServicoNFe, emp,  dadosPedSta.cUF,  dadosPedSta.tpAmb,  dadosPedSta.tpEmis,  dadosPedSta.versao, dadosPedSta.mod);
+                    WebServiceProxy wsProxy = 
+                        ConfiguracaoApp.DefinirWS(  Servico, 
+                                                    emp,  
+                                                    dadosPedSta.cUF,  
+                                                    dadosPedSta.tpAmb,  
+                                                    dadosPedSta.tpEmis,  
+                                                    dadosPedSta.versao, 
+                                                    dadosPedSta.mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -56,8 +63,14 @@ namespace NFe.Service
                 }
                 else
                 {
+                    string f = System.IO.Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
                     // Gerar o XML de solicitacao de situacao do servico a partir do TXT gerado pelo ERP
-                    oGerarXML.StatusServicoNFe(System.IO.Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml", dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.cUF, dadosPedSta.versao);
+                    oGerarXML.StatusServicoNFe(f, dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.cUF, dadosPedSta.versao);
                 }
             }
             catch (Exception ex)

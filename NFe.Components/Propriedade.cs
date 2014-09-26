@@ -215,7 +215,7 @@ namespace NFe.Components
             /// <summary>
             /// -nfe.txt
             /// </summary>
-            public static string Nfe_TXT = "-nfe.txt";
+            public const string Nfe_TXT = "-nfe.txt";
             /// <summary>
             /// -env-cce.xml
             /// </summary>
@@ -280,6 +280,7 @@ namespace NFe.Components
             /// -cons-nfe-dest.txt
             /// </summary>
             public const string ConsNFeDest_TXT = "-cons-nfe-dest.txt";
+#if nao
             /// <summary>
             /// -env-regs.xml
             /// </summary>
@@ -296,6 +297,7 @@ namespace NFe.Components
             /// -env-canc-regs.txt
             /// </summary>
             public const string EnvCancRegistroDeSaida_TXT = "-env-canc-regs.txt";
+#endif
             #endregion
 
             #region Extensões do CTe
@@ -424,6 +426,11 @@ namespace NFe.Components
             public const string EnvImpressaoDanfe_TXT = "-env-danfe.txt";
             public const string EnvDanfeReport_XML = "-env-danfe-report.xml";
             public const string EnvDanfeReport_TXT = "-env-danfe-report.txt";
+
+            #region Extensoes de DFe
+            public const string EnvDFe_XML = "-con-dist-dfe.xml";
+            public const string EnvDFe_TXT = "-con-dist-dfe.txt";
+            #endregion
         }
         #endregion
 
@@ -469,11 +476,11 @@ namespace NFe.Components
             /// <summary>
             /// -procinutnfe.xml
             /// </summary>
-            public static string ProcInutNFe = "-procInutNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            public const string ProcInutNFe = "-procInutNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
             /// <summary>
             /// -nfe.err
             /// </summary>
-            public static string Nfe_ERR = "-nfe.err";
+            public const string Nfe_ERR = "-nfe.err";
             /// <summary>
             /// -ret-dpec.xml
             /// </summary>
@@ -514,6 +521,7 @@ namespace NFe.Components
             /// -ret-manif.err
             /// </summary>
             public const string retManifestacao_ERR = "-ret-env-manif.err";
+#if nao
             /// <summary>
             /// -ret-env-regsaida.xml
             /// </summary>
@@ -530,6 +538,7 @@ namespace NFe.Components
             /// -ret-env-regsaida.txt
             /// </summary>
             public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
+#endif
             /// <summary>
             /// -ret-epec.xml
             /// </summary>
@@ -571,7 +580,7 @@ namespace NFe.Components
             /// <summary>
             /// -mdfe.err
             /// </summary>
-            public static string MDFe_ERR = "-mdfe.err";
+            public const string MDFe_ERR = "-mdfe.err";
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e
@@ -626,11 +635,11 @@ namespace NFe.Components
             /// <summary>
             /// -rec.xml
             /// </summary>
-            public static string Rec = "-rec.xml";
+            public const string Rec = "-rec.xml";
             /// <summary>
             /// -rec.err
             /// </summary>
-            public static string Rec_ERR = "-rec.err";
+            public const string Rec_ERR = "-rec.err";
             #endregion
 
             #region Extensões NFSe
@@ -701,6 +710,12 @@ namespace NFe.Components
             public const string RetImpressaoDanfe_TXT = "-ret-danfe.txt";
             public const string RetDanfeReport_XML = "-ret-env-danfe-report.xml";
             public const string RetDanfeReport_TXT = "-ret-env-danfe-report.txt";
+
+            #region Extensoes de DFe
+            public const string retEnvDFe_XML = "-dist-dfe.xml";
+            public const string retEnvDFe_TXT = "-dist-dfe.txt";
+            public const string retEnvDFe_ERR = "-con-dist-dfe.err";
+            #endregion
         }
         #endregion
 

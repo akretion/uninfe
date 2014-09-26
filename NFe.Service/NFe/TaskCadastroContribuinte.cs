@@ -77,13 +77,14 @@ namespace NFe.Service
                 }
                 else
                 {
+                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
                     //Gerar o XML da consulta cadastro do contribuinte a partir do TXT gerado pelo ERP
-                    oGerarXML.ConsultaCadastro(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
-                        dadosConsCad.UF,
-                        dadosConsCad.CNPJ,
-                        dadosConsCad.IE,
-                        dadosConsCad.CPF,
-                        dadosConsCad.versao);
+                    GravarXml(f);
                 }
             }
             catch (Exception ex)
@@ -124,6 +125,18 @@ namespace NFe.Service
         }
         #endregion
 
+        #region Gravar consCad
+        public string GravarXml(string arquivo)
+        {
+            return oGerarXML.ConsultaCadastro(arquivo,
+                dadosConsCad.UF,
+                dadosConsCad.CNPJ,
+                dadosConsCad.IE,
+                dadosConsCad.CPF,
+                dadosConsCad.versao);
+        }
+        #endregion
+
         #region ConsCad()
         /// <summary>
         /// Faz a leitura do XML de consulta do cadastro do contribuinte e disponibiliza os valores de algumas tag´s
@@ -134,7 +147,7 @@ namespace NFe.Service
             this.dadosConsCad.CNPJ = string.Empty;
             this.dadosConsCad.IE = string.Empty;
             this.dadosConsCad.UF = string.Empty;
-            this.dadosConsCad.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLConsCad;
+            this.dadosConsCad.versao = "";
 
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {

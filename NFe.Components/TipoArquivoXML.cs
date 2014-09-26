@@ -49,20 +49,22 @@ namespace NFe.Components
             string versaoXML = string.Empty;
             string padraoNFSe = string.Empty;
 
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse || UFCod.ToString().Length == 7)
-                switch (UFCod)
-                {
-                    case 4314050: //Parobé
-                        padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4314050-";
-                        break;
-
-                    default:
-                        padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
-                        break;
-                }
-
             try
             {
+                if (UFCod.ToString().Length == 7)
+                {
+                    switch (UFCod)
+                    {
+                        case 4314050: //Parobé
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4314050-";
+                            break;
+
+                        default:
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
+                            break;
+                    }
+                }
+
                 if (File.Exists(fullPathXML))
                 {
                     if (fullPathXML.EndsWith(".txt"))
@@ -178,6 +180,5 @@ namespace NFe.Components
                 this.cRetornoTipoArq = "Não foi possível identificar o arquivo XML";
             }
         }
-
     }
 }

@@ -132,7 +132,7 @@
       <soap12:address location="https://nfeh.sefaz.ce.gov.br/nfe2/services/NfeAutorizacao"/>
     </wsdl:port>
     <wsdl:port binding="tns:NfeAutorizacaoSoap" name="NfeAutorizacaoSoap">
-      <soap:address location="https://nfe.sefaz.ce.gov.br/nfe2/services/NfeAutorizacao"/>
-    </wsdl:port>
+      <soap:address location="https://nfeh.sefaz.ce.gov.br/nfe2/services/NfeAutorizacao"/>
+    </wsdl:port>              
   </wsdl:service>
 </wsdl:definitions>

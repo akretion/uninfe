@@ -875,7 +875,7 @@ namespace NFe.ConvertTxt
                     bool e31 = false;
 
                     layout = "§E|xNome¨|IE¨|ISUF¨|email¨"; //ok
-                    if ((e31 = (NFe.infNFe.Versao >= 3 && lenPipesRegistro == 6)))
+                    if ((e31 = (NFe.infNFe.Versao >= 3 && lenPipesRegistro == 7)))
                         layout = "§E|xNome¨|indIEDest¨|IE¨|ISUF¨|IM¨|email¨"; //ok
                     ///
                     /// Grupo da TAG <dest>
@@ -911,7 +911,7 @@ namespace NFe.ConvertTxt
                     if (NFe.infNFe.Versao >= 3)
                     {
                         NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 5, 20);
-                        if (string.IsNullOrEmpty(NFe.dest.idEstrangeiro) && string.IsNullOrEmpty(NFe.dest.CPF) && lenPipesRegistro == 2)
+                        if (string.IsNullOrEmpty(NFe.dest.idEstrangeiro) && string.IsNullOrEmpty(NFe.dest.CPF) && lenPipesRegistro == 3)
                             NFe.dest.idEstrangeiro = "NAO GERAR TAG";
                     }
                     break;

@@ -44,7 +44,7 @@ namespace NFe.Service
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString());
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// NomeClasseWS(Servico, dadosPedInut.cUF));
+                    object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
                     //Atribuir conteúdo p ara duas propriedades da classe nfeCabecMsg
@@ -60,7 +60,7 @@ namespace NFe.Service
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, 
                                         oInutilizacao, 
-                                        wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedInut.cUF),
+                                        wsProxy.NomeMetodoWS[0],
                                         oCabecMsg, this, "-ped-inu", "-inu");
 
                     //Ler o retorno do webservice
@@ -68,7 +68,13 @@ namespace NFe.Service
                 }
                 else
                 {
-                    oGerarXML.Inutilizacao(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
+                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
+                    oGerarXML.Inutilizacao(f,
                         dadosPedInut.tpAmb,
                         dadosPedInut.tpEmis,
                         dadosPedInut.cUF,
@@ -81,7 +87,6 @@ namespace NFe.Service
                         dadosPedInut.xJust,
                         dadosPedInut.versao);
                 }
-
             }
             catch (Exception ex)
             {
@@ -127,8 +132,6 @@ namespace NFe.Service
         /// <param name="cArquivoXML"></param>
         private void PedInut(int emp, string cArquivoXML)
         {
-            //int emp = Empresas.FindEmpresaByThread();
-
             dadosPedInut.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             dadosPedInut.tpEmis = Empresas.Configuracoes[emp].tpEmis;
             dadosPedInut.versao = "";

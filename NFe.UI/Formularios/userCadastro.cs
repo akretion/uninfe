@@ -326,7 +326,7 @@ namespace NFe.UI
                     }
                 }
 
-                Thread.Sleep(3000);
+                Thread.Sleep(100);
             }
             //Retornar o status do serviço
             return vStatus;

@@ -781,7 +781,6 @@ namespace NFe.Settings
                     CodigoUF = 904;
                     break;
 
-
                 case NFe.Components.TipoEmissao.teDPEC:
                     if (servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
                         CodigoUF = 901;
@@ -799,7 +798,7 @@ namespace NFe.Settings
 
             var alist = (from p in WebServiceProxy.webServicesList where p.ID == CodigoUF select p);
 
-            foreach (webServices list in alist)//WebServiceProxy.webServicesList)
+            foreach (webServices list in alist)
             {
                 if (list.ID == CodigoUF)
                 {
@@ -861,13 +860,17 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifDest : list.LocalProducao.NFeManifDest);
                             break;
 
-                        case Servicos.RegistroDeSaida:
-                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaida : list.LocalProducao.NFeRegistroDeSaida);
+                        case Servicos.EnviarDFe:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.DFeRecepcao : list.LocalProducao.DFeRecepcao);
                             break;
 
-                        case Servicos.RegistroDeSaidaCancelamento:
-                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaidaCancelamento : list.LocalProducao.NFeRegistroDeSaidaCancelamento);
-                            break;
+                        //case Servicos.RegistroDeSaida:
+                            //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaida : list.LocalProducao.NFeRegistroDeSaida);
+                            //break;
+
+                        //case Servicos.RegistroDeSaidaCancelamento:
+                            //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaidaCancelamento : list.LocalProducao.NFeRegistroDeSaidaCancelamento);
+                            //break;
 
                         #endregion
 
@@ -938,7 +941,7 @@ namespace NFe.Settings
                         #endregion
                     }
                     if (tipoEmissao == (int)NFe.Components.TipoEmissao.teDPEC)
-                        ufNome = "DPEC";
+                        ufNome = (servico == Servicos.EnviarEPEC ? "EPEC" : "DPEC");
                     else
                         ufNome = "de " + list.Nome;
 
@@ -994,10 +997,14 @@ namespace NFe.Settings
 
                 switch (servico)
                 {
+                    case Servicos.EnviarDFe:
+                        throw new Exception(string.Format(errorStr, "de envio de eventos da DFe"));
+
                     case Servicos.EnviarCCe:
                     case Servicos.EnviarEventoCancelamento:
                     case Servicos.RecepcaoEvento:
                     case Servicos.EnviarManifDest:
+                    case Servicos.EnviarEPEC:
                         throw new Exception(string.Format(errorStr, "de envio de eventos da NFe"));
 
                     case Servicos.ConsultaNFDest:
@@ -1804,7 +1811,6 @@ namespace NFe.Settings
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arqXML);
 
-
                 foreach (XmlElement item in doc.DocumentElement)
                 {
                     switch (item.Name.ToLower())
@@ -1861,11 +1867,35 @@ namespace NFe.Settings
                 }
 
                 if (Char.IsLetter(servico, 0))
+                {
+                    var lista = NFe.Components.EnumHelper.ToStrings(typeof(TipoAplicativo));
+                    if (!lista.Contains(servico))
+                        throw new Exception(string.Format("Serviço deve ser ({0}, {1}, {2}, {3}, {4} ou {5})",
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Nfe),
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Cte),
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Nfse),
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.MDFe),
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.NFCe),
+                            NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Todos)));
+
                     ///
                     /// veio como 'NFe, NFCe, CTe, MDFe ou NFSe
                     /// converte para numero correspondente
                     servico = ((int)NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(servico)).ToString();
-
+                }
+                else
+                {
+                    if (!("0,1,2,3,4,10").Contains(servico))
+                    {
+                        throw new Exception(string.Format("Serviço deve ser ({0} p/{1}, {2} p/{3}, {4} p/{5}, {6} p/{7}, {8} p/{9} ou {10} p/{11})",
+                            (int)TipoAplicativo.Nfe, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Nfe),
+                            (int)TipoAplicativo.Cte, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Cte),
+                            (int)TipoAplicativo.Nfse, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Nfse),
+                            (int)TipoAplicativo.MDFe, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.MDFe),
+                            (int)TipoAplicativo.NFCe, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.NFCe),
+                            (int)TipoAplicativo.Todos, NFe.Components.EnumHelper.GetDescription(TipoAplicativo.Todos)));
+                    }
+                }
                 if (Empresas.FindConfEmpresa(cnpj.Trim(), (TipoAplicativo)Convert.ToInt16(servico)) == null)
                 {
                     Empresa empresa = new Empresa();

@@ -62,7 +62,13 @@ namespace NFe.Service
                 }
                 else
                 {
-                    oGerarXML.Consulta(TipoAplicativo.Nfe, Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml",
+                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+
+                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    {
+                        f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
+                    }
+                    oGerarXML.Consulta(TipoAplicativo.Nfe, f,
                         dadosPedSit.tpAmb,
                         dadosPedSit.tpEmis,
                         dadosPedSit.chNFe,
@@ -144,11 +150,12 @@ namespace NFe.Service
                     dadosPedSit.versao = consSitNFeElemento.Attributes["versao"].InnerText;
                     dadosPedSit.mod = dadosPedSit.chNFe.Substring(20, 2);
 
+                    bool doSave = false;
                     //Se alguém ainda gerar com a versão 2.00 vou mudar para a "2.01" para facilitar para o usuário do UniNFe
                     if (dadosPedSit.versao == "2.00")
                     {
-                        consSitNFeElemento.Attributes["versao"].InnerText = "2.01";
-                        doc.Save(cArquivoXML);
+                        consSitNFeElemento.Attributes["versao"].InnerText = dadosPedSit.versao = "2.01";
+                        doSave = true;
                     }
 
                     if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
@@ -157,8 +164,9 @@ namespace NFe.Service
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
                         doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
                         /// salvo o arquivo modificado
-                        doc.Save(cArquivoXML);
+                        doSave = true;
                     }
+                    if (doSave) doc.Save(cArquivoXML);
                 }
             }
             if (this.dadosPedSit.versao == "")

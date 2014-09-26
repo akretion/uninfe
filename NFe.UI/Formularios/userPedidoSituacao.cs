@@ -348,7 +348,7 @@ namespace NFe.UI
                         //Somente deixa fazer o loop novamente e tentar deletar
                     }
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(100);
             }
             //Retornar o status do serviço
             return vStatus;

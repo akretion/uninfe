@@ -608,6 +608,14 @@ namespace NFe.Components
                                 var ta1 = (NFe.Components.TipoAplicativo)Enum.Parse(typeof(NFe.Components.TipoAplicativo), value.ToString(), true);
                                 propertyInfo.SetValue(_this, ta1, null);
                                 break;
+                            case "NFe.Components.TipoAmbiente":
+                                var ta2 = (NFe.Components.TipoAmbiente)Enum.Parse(typeof(NFe.Components.TipoAmbiente), value.ToString(), true);
+                                propertyInfo.SetValue(_this, ta2, null);
+                                break;
+                            case "NFe.Components.TipoEmissao":
+                                var ta3 = (NFe.Components.TipoEmissao)Enum.Parse(typeof(NFe.Components.TipoEmissao), value.ToString(), true);
+                                propertyInfo.SetValue(_this, ta3, null);
+                                break;
                             case "NFe.Components.DiretorioSalvarComo":
                                 //propertyInfo.SetValue(_this, value.ToString(), null);
                                 break;

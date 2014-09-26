@@ -20,7 +20,6 @@ namespace NFe.Threadings
         public string Filter { get; set; }
 
         private bool CancelProcess = false;
-        private List<Thread> workers = new List<Thread>();
 
         private bool _disposed = false;
         ~FileSystemWatcher()
@@ -32,7 +31,7 @@ namespace NFe.Threadings
         {
             if (!_disposed)
             {
-                workers.Clear();
+                CancelProcess = true;
             }
             _disposed = true;
         }
@@ -71,15 +70,6 @@ namespace NFe.Threadings
                 {
                     if (!String.IsNullOrEmpty(Directory))
                     {
-                        bool clear = true;
-                        foreach (Thread worker in this.workers)
-                        {
-                            if (worker.IsAlive)
-                                clear = false;
-                        }
-                        if (clear)
-                            workers.Clear();
-
                         var Files = System.IO.Directory.GetFiles(Directory, "*.*", System.IO.SearchOption.TopDirectoryOnly).
                                         Where(s => Filter.Contains(System.IO.Path.GetExtension(s).ToLower()));
 
@@ -177,7 +167,8 @@ namespace NFe.Threadings
                 }
                 finally
                 {
-                    Thread.Sleep(2000);
+                    if (!CancelProcess)
+                        Thread.Sleep(2000);
                 }
             }
         }
@@ -198,11 +189,17 @@ namespace NFe.Threadings
                             {
                                 if (OnFileChanged != null)
                                 {
-                                    OnFileChanged(fi);
+                                    try
+                                    {
+                                        OnFileChanged(fi);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        System.Diagnostics.Debug.WriteLine(ex.ToString());
+                                    }
                                 }
                             }
                         ));
-                    this.workers.Add(tworker);
                     tworker.IsBackground = true;
                     tworker.Start();
                     tworker.Join();
@@ -218,38 +215,13 @@ namespace NFe.Threadings
             }
         }
 
-        private void RaiseEvent(object sender, DoWorkEventArgs e)
-        {
-            FileInfo fi = e.Argument as FileInfo;
-
-#if DEBUG
-            Debug.WriteLine(String.Format("A leitura do arquivo '{0}' foi iniciada.", fi.FullName));
-#endif
-
-            if (OnFileChanged != null)
-                OnFileChanged(fi);
-
-#if DEBUG
-            Debug.WriteLine(String.Format("A leitura do arquivo '{0}' foi finalizada", fi.FullName));
-#endif
-        }
-
         /// <summary>
         /// StopWatch
         /// </summary>
         public bool StopWatch       //modifiquei para que no mainform se verifique se foi cancelado ou nao
         {
             get { return CancelProcess; }
-            set
-            {
-                if (value)//<<<<danasa 1-5-2011
-                {
-                    CancelProcess = true;
-                    foreach (Thread worker in this.workers)
-                        if (worker.IsAlive)
-                            worker.Abort();
-                }
-            }
+            set { CancelProcess = value; }
         }
     }
 }

@@ -826,4 +826,14 @@ namespace NFe.Service
 
     #endregion
 
+    public class distDFeInt
+    {
+        public string versao { get; set; }
+        public int tpAmb { get; set; }
+        public string cUFAutor { get; set; }
+        public string CNPJ { get; set; }
+        public string CPF { get; set; }
+        public string ultNSU { get; set; }
+        public string NSU { get; set; }
+    }
 }

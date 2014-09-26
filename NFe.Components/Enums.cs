@@ -123,11 +123,11 @@ namespace NFe.Components
         /// <summary>
         /// Registro de saida
         /// </summary>
-        RegistroDeSaida,
+        //RegistroDeSaida,
         /// <summary>
         /// Registro de saida
         /// </summary>
-        RegistroDeSaidaCancelamento,
+        //RegistroDeSaidaCancelamento,
         #endregion
 
         #region CTe
@@ -300,6 +300,8 @@ namespace NFe.Components
         #region Impressao do relatorio de e-mails do DANFE
         DanfeRelatorio,
         #endregion
+
+        EnviarDFe,
 
         /// <summary>
         /// Nulo / Nenhum serviço em execução

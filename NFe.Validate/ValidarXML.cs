@@ -319,12 +319,12 @@ namespace NFe.Validate
                         }
                         else
                         {
-                            if(!Directory.Exists(Empresas.Configuracoes[emp].PastaValidar + "\\Validado"))
+                            if(!Directory.Exists(Empresas.Configuracoes[emp].PastaValidado))
                             {
-                                Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidar + "\\Validado");
+                                Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidado);
                             }
 
-                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidar + "\\Validado\\" + Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
 
                             Functions.Move(Arquivo, ArquivoNovo);
                             /*

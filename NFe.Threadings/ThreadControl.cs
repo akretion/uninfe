@@ -366,7 +366,18 @@ namespace NFe.Threadings
 
             for (int i = 0; i < MonitoraPasta.fsw.Count; i++)
             {
-                MonitoraPasta.fsw[i].StopWatch = true;
+                try
+                {
+                    FileSystemWatcher fsw = MonitoraPasta.fsw[i];
+
+                    fsw.StopWatch = true;
+                    fsw.Dispose();
+                    fsw = null;
+                }
+                catch (Exception ex)
+                {
+                    Auxiliar.WriteLog("Ocorreu um erro ao tentar parar o FSW: " + MonitoraPasta.fsw[i].Directory + ".\r\nThreadService.cs\r\n" + ex.Message, false);
+                }
             }
         }
 

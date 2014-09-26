@@ -198,10 +198,12 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                             case "nferecepcao":
                             case "nfeenviardpec":
                                 srv = Servicos.EnviarLoteNfe; break;
-                            case "nferegistrodesaida":
-                                srv = Servicos.RegistroDeSaida; break;
-                            case "nferegistrodesaidacancelamento":
-                                srv = Servicos.RegistroDeSaidaCancelamento; break;
+                            case "dferecepcao":
+                                srv = Servicos.EnviarDFe; break;
+                            //case "nferegistrodesaida":
+                                //srv = Servicos.RegistroDeSaida; break;
+                            //case "nferegistrodesaidacancelamento":
+                                //srv = Servicos.RegistroDeSaidaCancelamento; break;
                             case "nfestatusservico":
                                 srv = Servicos.ConsultaStatusServicoNFe; break;
                         }

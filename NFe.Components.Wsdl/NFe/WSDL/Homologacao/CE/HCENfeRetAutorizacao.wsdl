@@ -80,10 +80,10 @@
   </wsdl:binding>
   <wsdl:service name="NfeRetAutorizacao">
     <wsdl:port binding="tns:NfeRetAutorizacaoSoap" name="NfeRetAutorizacaoSoap">
-      <soap:address location="https://nfe.sefaz.ce.gov.br/nfe2/services/NfeRetAutorizacao"/>
-    </wsdl:port>
+      <soap:address location="https://nfeh.sefaz.ce.gov.br/nfe2/services/NfeRetAutorizacao"/>
+    </wsdl:port>              
     <wsdl:port binding="tns:NfeRetAutorizacaoSoap12" name="NfeRetAutorizacaoSoap12">
       <soap12:address location="https://nfeh.sefaz.ce.gov.br/nfe2/services/NfeRetAutorizacao"/>
-    </wsdl:port>
+    </wsdl:port>                
   </wsdl:service>
 </wsdl:definitions>

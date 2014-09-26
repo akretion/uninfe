@@ -105,6 +105,13 @@ namespace NFe.Settings
                 return Path.Combine(this.PastaXmlEnvio, "Contingencia");
             }
         }
+        public string PastaValidado
+        {
+            get
+            {
+                return Path.Combine(this.PastaValidar, "Validado");
+            }
+        }
 
         #endregion
 
