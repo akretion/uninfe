@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="NfeConsultaNFResult">
+      <s:element name="nfeConsultaNFResult">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -26,47 +26,47 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="NfeConsultaNFSoapIn">
+  <wsdl:message name="nfeConsultaNFSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="NfeConsultaNFSoapOut">
-    <wsdl:part name="NfeConsultaNFResult" element="tns:NfeConsultaNFResult" />
+  <wsdl:message name="nfeConsultaNFSoapOut">
+    <wsdl:part name="nfeConsultaNFResult" element="tns:nfeConsultaNFResult" />
   </wsdl:message>
-  <wsdl:message name="NfeConsultaNFnfeCabecMsg">
+  <wsdl:message name="nfeConsultaNFnfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
   <wsdl:portType name="NfeConsultaSoap">
-    <wsdl:operation name="NfeConsultaNF">
+    <wsdl:operation name="nfeConsultaNF">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à consulta da NF-e.</wsdl:documentation>
-      <wsdl:input message="tns:NfeConsultaNFSoapIn" />
-      <wsdl:output message="tns:NfeConsultaNFSoapOut" />
+      <wsdl:input message="tns:nfeConsultaNFSoapIn" />
+      <wsdl:output message="tns:nfeConsultaNFSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NfeConsultaSoap" type="tns:NfeConsultaSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="NfeConsultaNF">
-      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/NfeConsultaNF" style="document" />
+    <wsdl:operation name="nfeConsultaNF">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/nfeConsultaNF" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
-        <soap:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:nfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
-        <soap:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:nfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NfeConsultaSoap12" type="tns:NfeConsultaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="NfeConsultaNF">
-      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/NfeConsultaNF" style="document" />
+    <wsdl:operation name="nfeConsultaNF">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeConsulta/nfeConsultaNF" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
-        <soap12:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:nfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
-        <soap12:header message="tns:NfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:nfeConsultaNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>

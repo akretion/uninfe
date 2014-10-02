@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="NfeStatusServicoNFResult">
+      <s:element name="nfeStatusServicoNFResult">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -26,47 +26,47 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="NfeStatusServicoNFSoapIn">
+  <wsdl:message name="nfeStatusServicoNFSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="NfeStatusServicoNFSoapOut">
-    <wsdl:part name="NfeStatusServicoNFResult" element="tns:NfeStatusServicoNFResult" />
+  <wsdl:message name="nfeStatusServicoNFSoapOut">
+    <wsdl:part name="nfeStatusServicoNFResult" element="tns:nfeStatusServicoNFResult" />
   </wsdl:message>
-  <wsdl:message name="NfeStatusServicoNFnfeCabecMsg">
+  <wsdl:message name="nfeStatusServicoNFnfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
   <wsdl:portType name="NfeStatusServicoSoap">
-    <wsdl:operation name="NfeStatusServicoNF">
+    <wsdl:operation name="nfeStatusServicoNF">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à consulta do status do serviço da NF-e.</wsdl:documentation>
-      <wsdl:input message="tns:NfeStatusServicoNFSoapIn" />
-      <wsdl:output message="tns:NfeStatusServicoNFSoapOut" />
+      <wsdl:input message="tns:nfeStatusServicoNFSoapIn" />
+      <wsdl:output message="tns:nfeStatusServicoNFSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NfeStatusServicoSoap" type="tns:NfeStatusServicoSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="NfeStatusServicoNF">
-      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/NfeStatusServicoNF" style="document" />
+    <wsdl:operation name="nfeStatusServicoNF">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/nfeStatusServicoNF" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
-        <soap:header message="tns:NfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:nfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
-        <soap:header message="tns:NfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap:header message="tns:nfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NfeStatusServicoSoap12" type="tns:NfeStatusServicoSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="NfeStatusServicoNF">
-      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/NfeStatusServicoNF" style="document" />
+    <wsdl:operation name="nfeStatusServicoNF">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico/nfeStatusServicoNF" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
-        <soap12:header message="tns:NfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:nfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
-        <soap12:header message="tns:NfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+        <soap12:header message="tns:nfeStatusServicoNFnfeCabecMsg" part="nfeCabecMsg" use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>

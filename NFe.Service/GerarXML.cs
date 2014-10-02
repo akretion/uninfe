@@ -797,7 +797,7 @@ namespace NFe.Service
                 string.Format("ID{0}{1}{2}{3}{4}{5}{6}", 
                         cUF.ToString("00"), 
                         ano.ToString("00"), 
-                        CNPJ, 
+                        CNPJ.Trim(), 
                         mod.ToString("00"), 
                         serie.ToString("000"), 
                         nNFIni.ToString("000000000"), 
@@ -808,7 +808,7 @@ namespace NFe.Service
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.xServ.ToString(), "INUTILIZAR"));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cUF.ToString(), cUF.ToString("00")));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.ano.ToString(), ano.ToString("00")));
-            nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), CNPJ));
+            nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CNPJ.ToString(), CNPJ.Trim()));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.mod.ToString(), mod.ToString("00")));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.serie.ToString(), serie.ToString()));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.nNFIni.ToString(), nNFIni.ToString()));

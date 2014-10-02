@@ -130,7 +130,7 @@ namespace NFe.Components
                             }
 
                             if (string.IsNullOrEmpty(padraoNFSe))
-                                chave = TipoAplicativo.Nfe.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
+                                chave = TipoAplicativo.Nfe.ToString().ToUpper() + /*versaoXML + "-" + padraoNFSe +*/ "-"+ nome;
                             else
                                 chave = TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
 
@@ -152,7 +152,7 @@ namespace NFe.Components
                         TargetNameSpace = schema.TargetNameSpace;
 
                         if (string.IsNullOrEmpty(padraoNFSe))
-                            cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFe\\schemas\\" + schema.ArquivoXSD);
+                            cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFe\\schemas\\" + string.Format(schema.ArquivoXSD, versao));
                         else
                             cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFse\\schemas\\" + schema.ArquivoXSD);
                     }

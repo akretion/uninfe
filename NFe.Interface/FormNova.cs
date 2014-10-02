@@ -51,11 +51,31 @@ namespace NFe.Interface
                 return;
             }
 
-            if (Empresas.FindConfEmpresa(cnpj, servico) != null)
+            Empresa empresa = null;
+            switch (servico)
             {
-                MessageBox.Show("Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case TipoAplicativo.Todos:
+                case TipoAplicativo.Nfe:
+                    //Serviço todos e NFe utilizam a mesma pasta de configurações, então não posso permitir configurar o mesmo CNPJ para os dois serviços. Wandrey
+                    if ((empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Todos)) == null)
+                        empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe);
+                    break;
+
+                default:
+                    empresa = Empresas.FindConfEmpresa(cnpj, servico);
+                    break;
+            }
+
+            if (empresa != null)
+            {
+                string msgErro = "Já existe uma Empresa/CNPJ configurada para atender este serviço, conforme dados abaixo: " +
+                                 "\r\n\r\nEmpresa configurada: " + empresa.Nome +
+                                 "\r\nServiço configurado: " + NFe.Components.EnumHelper.GetDescription(empresa.Servico);
+
+                MessageBox.Show(msgErro, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }

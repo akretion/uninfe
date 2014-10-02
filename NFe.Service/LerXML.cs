@@ -79,18 +79,17 @@ namespace NFe.Service
                     XmlElement ideElemento = (XmlElement)ideNode;
 
                     if (oDadosNfe.versao == "2.00")
-                        oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dEmi")[0].InnerText);
+                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dEmi", false));
                     else
-                        oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
-
-                    oDadosNfe.cNF = ideElemento.GetElementsByTagName("cNF")[0].InnerText;
-                    oDadosNfe.nNF = ideElemento.GetElementsByTagName("nNF")[0].InnerText;
-                    oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
-                    oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                    oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
-                    oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
-                    oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
-                    oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
+                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
+                    oDadosNfe.cNF = Functions.LerTag(ideElemento, "cNF", false);
+                    oDadosNfe.nNF = Functions.LerTag(ideElemento, "nNF", false);
+                    oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
+                    oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
+                    oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
+                    oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
+                    oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
+                    oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -100,7 +99,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
                 }
             }
 
@@ -111,7 +110,7 @@ namespace NFe.Service
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
 
-                this.oDadosNfe.idLote = enviNFeElemento.GetElementsByTagName("idLote")[0].InnerText;
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
             }
         }
         #endregion
@@ -147,15 +146,15 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
-                    this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cCT")[0].InnerText;
-                    this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nCT")[0].InnerText;
-                    this.oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
-                    this.oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                    this.oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
-                    this.oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
-                    this.oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
-                    this.oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
+                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
+                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, "cCT", false);
+                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, "nCT", false);
+                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
+                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
+                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
+                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
+                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
+                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -165,7 +164,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
                 }
             }
 
@@ -175,7 +174,7 @@ namespace NFe.Service
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
-                this.oDadosNfe.idLote = enviNFeElemento.GetElementsByTagName("idLote")[0].InnerText;
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
             }
         }
         #endregion
@@ -211,15 +210,15 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    this.oDadosNfe.dEmi = Convert.ToDateTime(ideElemento.GetElementsByTagName("dhEmi")[0].InnerText);
-                    this.oDadosNfe.cNF = ideElemento.GetElementsByTagName("cMDF")[0].InnerText;
-                    this.oDadosNfe.nNF = ideElemento.GetElementsByTagName("nMDF")[0].InnerText;
-                    this.oDadosNfe.tpEmis = ideElemento.GetElementsByTagName("tpEmis")[0].InnerText;
-                    this.oDadosNfe.tpAmb = ideElemento.GetElementsByTagName("tpAmb")[0].InnerText;
-                    this.oDadosNfe.serie = ideElemento.GetElementsByTagName("serie")[0].InnerText;
-                    this.oDadosNfe.cUF = ideElemento.GetElementsByTagName("cUF")[0].InnerText;
-                    this.oDadosNfe.mod = ideElemento.GetElementsByTagName("mod")[0].InnerText;
-                    this.oDadosNfe.cDV = ideElemento.GetElementsByTagName("cDV")[0].InnerText;
+                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
+                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, "cMDF", false);
+                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, "nMDF", false);
+                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
+                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
+                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
+                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
+                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
+                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -229,7 +228,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = emitElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
                 }
             }
 
@@ -239,7 +238,7 @@ namespace NFe.Service
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
-                this.oDadosNfe.idLote = enviNFeElemento.GetElementsByTagName("idLote")[0].InnerText;
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
             }
         }
         #endregion
@@ -286,11 +285,11 @@ namespace NFe.Service
             foreach (XmlNode infConsNode in infConsList)
             {
                 XmlElement infConsElemento = (XmlElement)infConsNode;
-                oDadosPedLoteRps.Protocolo = infConsElemento.GetElementsByTagName("Protocolo")[0].InnerText;
+                oDadosPedLoteRps.Protocolo = Functions.LerTag(infConsElemento, "Protocolo", false);
 
                 XmlElement infPrestadorElemento = (XmlElement)infConsElemento.GetElementsByTagName("Prestador").Item(0);
                 if (infPrestadorElemento.GetElementsByTagName("tipos:Cnpj")[0] != null)
-                    oDadosPedLoteRps.Cnpj = infPrestadorElemento.GetElementsByTagName("tipos:Cnpj")[0].InnerText;
+                    oDadosPedLoteRps.Cnpj = Functions.LerTag(infPrestadorElemento, "tipos:Cnpj", false);
                 else if (infPrestadorElemento.GetElementsByTagName("Cnpj")[0] != null)
                     oDadosPedLoteRps.Cnpj = infPrestadorElemento.GetElementsByTagName("Cnpj")[0].InnerText;
 

@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NFe.Settings;
+using NFe.Components;
 
 namespace NFe.UI.Formularios
 {
@@ -77,25 +79,32 @@ namespace NFe.UI.Formularios
                 return;
             }
             NFe.Components.TipoAplicativo servico = (NFe.Components.TipoAplicativo)cbServico.SelectedValue;
-            int cnt;
 
-            if (servico == NFe.Components.TipoAplicativo.Nfse)
+            Empresa empresa = null;
+            switch (servico)
             {
-                cnt = NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, servico);
+                case TipoAplicativo.Todos:
+                case TipoAplicativo.Nfe:
+                    //Serviço todos e NFe utilizam a mesma pasta de configurações, então não posso permitir configurar o mesmo CNPJ para os dois serviços. Wandrey
+                    if ((empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Todos)) == null)
+                        empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe);
+                    break;
+
+                default:
+                    empresa = Empresas.FindConfEmpresa(cnpj, servico);
+                    break;
             }
-            else
+
+            if (empresa != null)
             {
-                cnt =   NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Todos) >= 0 ||
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.NFCe) >= 0 ||
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Nfe) >= 0 ||
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.Cte) >= 0 ||
-                        NFe.Settings.Empresas.FindConfEmpresaIndex(cnpj, NFe.Components.TipoAplicativo.MDFe) >= 0 ? 1 : 0;
-            }
-            if (cnt > 0)
-            {
-                MetroFramework.MetroMessageBox.Show(this, "Empresa/CNPJ para atender o serviço de " + servico.ToString() + " já existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string msgErro = "Já existe uma Empresa/CNPJ configurada para atender este serviço, conforme dados abaixo: " +
+                                 "\r\n\r\nEmpresa configurada: " + empresa.Nome +
+                                 "\r\nServiço configurado: " + NFe.Components.EnumHelper.GetDescription(empresa.Servico);
+
+                MetroFramework.MetroMessageBox.Show(this, msgErro, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

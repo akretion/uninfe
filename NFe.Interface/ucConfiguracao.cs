@@ -845,17 +845,22 @@ namespace NFe.Interface
             if (MessageBox.Show(this, "Deseja redefinir os outros diretórios para que tenham a mesma estrutura do diretório de envio?",
                                    "Alterar diretórios?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
+
                 stopChangedEvent = true;
                 string[] dirs = textBox_PastaEnvioXML.Text.Split(new char[] { '\\' });
                 string baseDir = dirs.Join('\\', dirs.Length - 1);
 
-                SetNewDir(textBox_PastaBackup, baseDir, "Backup");
-                SetNewDir(textBox_PastaEnviados, baseDir, "Enviados");
                 SetNewDir(textBox_PastaRetornoXML, baseDir, "Retorno");
                 SetNewDir(textBox_PastaXmlErro, baseDir, "Erro");
                 SetNewDir(textBox_PastaValidar, baseDir, "Validar");
-                SetNewDir(textBox_PastaLote, baseDir, "EnvioEmLote");
-                SetNewDir(textBox_PastaDownload, baseDir, "DownloadNFe");
+                if (servico != TipoAplicativo.Nfse)
+                {
+                    SetNewDir(textBox_PastaEnviados, baseDir, "Enviados");
+                    SetNewDir(textBox_PastaBackup, baseDir, "Backup");
+                    SetNewDir(textBox_PastaLote, baseDir, "EnvioEmLote");
+                    SetNewDir(textBox_PastaDownload, baseDir, "DownloadNFe");
+                }
 
                 stopChangedEvent = false;
             }

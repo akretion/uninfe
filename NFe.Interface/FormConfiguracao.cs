@@ -174,25 +174,7 @@ namespace NFe.Interface
                 {
                     var servico = (TipoAplicativo)f.cbServico.SelectedValue;
                     var cnpj = Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString();
-                    int cnt;
 
-                    if (servico == TipoAplicativo.Nfse)
-                    {
-                        cnt = Empresas.FindConfEmpresaIndex(cnpj, servico);
-                    }
-                    else
-                    {
-                        cnt = Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Todos) +
-                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.NFCe) +
-                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Nfe) +
-                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.Cte) +
-                                Empresas.FindConfEmpresaIndex(cnpj, TipoAplicativo.MDFe);
-                    }
-                    if (cnt > 0)
-                    {
-                        MessageBox.Show("Já existe uma empresa que atende ao CNPJ + Serviço informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        continue;
-                    }
                     TabPage page = new TabPage("-- NOVA --");
                     ucConfiguracao dados = new ucConfiguracao(UpdateText);
                     dados.Tag = "new"; //para indicar que é uma nova empresa

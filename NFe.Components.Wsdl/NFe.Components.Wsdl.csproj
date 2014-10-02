@@ -1982,6 +1982,28 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeInutilizacao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao2_200.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNfeautorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeconsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfeinutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNferetautorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfestatusservico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeautorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNferetautorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPNfeStatusServico2_C.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

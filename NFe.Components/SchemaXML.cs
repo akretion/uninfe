@@ -39,7 +39,7 @@ namespace NFe.Components
             {
                 Tag = "procCancNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\procCancNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\procCancNFe_v{0}.xsd",
                 Descricao = "XML de distribuição do Cancelamento da NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -52,7 +52,7 @@ namespace NFe.Components
             {
                 Tag = "ConsCad",
                 ID = ++id,
-                ArquivoXSD = "NFe\\consCad_v2.00.xsd",
+                ArquivoXSD = "NFe\\consCad_v{0}.xsd",
                 Descricao = "XML de Consulta do Cadastro do Contribuinte",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -65,7 +65,7 @@ namespace NFe.Components
             {
                 Tag = "consReciNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\consReciNfe_v2.00.xsd",
+                ArquivoXSD = "NFe\\consReciNfe_v{0}.xsd",
                 Descricao = "XML de Consulta do Recibo do Lote de Notas Fiscais Eletrônicas",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -78,7 +78,7 @@ namespace NFe.Components
             {
                 Tag = "consSitNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\consSitNFe_v2.01.xsd",
+                ArquivoXSD = "NFe\\consSitNFe_v{0}.xsd",
                 Descricao = "XML de Consulta da Situação da Nota Fiscal Eletrônica",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -91,7 +91,7 @@ namespace NFe.Components
             {
                 Tag = "consStatServ",
                 ID = ++id,
-                ArquivoXSD = "NFe\\consStatServ_v2.00.xsd",
+                ArquivoXSD = "NFe\\consStatServ_v{0}.xsd",
                 Descricao = "XML de Consulta da Situação do Serviço da Nota Fiscal Eletrônica",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -104,7 +104,7 @@ namespace NFe.Components
             {
                 Tag = "enviNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\enviNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\enviNFe_v{0}.xsd",
                 Descricao = "XML de Envio de Lote de Notas Fiscais Eletrônicas",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -117,7 +117,7 @@ namespace NFe.Components
             {
                 Tag = "inutNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\inutNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\inutNFe_v{0}.xsd",
                 Descricao = "XML de Inutilização de Numerações de Notas Fiscais Eletrônicas",
                 TagAssinatura = "inutNFe",
                 TagAtributoId = "infInut",
@@ -130,7 +130,7 @@ namespace NFe.Components
             {
                 Tag = "NFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\nfe_v2.00.xsd",
+                ArquivoXSD = "NFe\\nfe_v{0}.xsd",
                 Descricao = "XML da Nota Fiscal Eletrônica",
                 TagAssinatura = "NFe",
                 TagAtributoId = "infNFe",
@@ -143,7 +143,8 @@ namespace NFe.Components
             {
                 Tag = "procInutNFe",
                 ID = ++id,
-                ArquivoXSD = "NFe\\procInutNFe_v2.00.xsd",
+                //ArquivoXSD = "NFe\\procInutNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\procInutNFe_v{0}.xsd",
                 Descricao = "XML de distribuição de Inutilização de Números de NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -156,7 +157,7 @@ namespace NFe.Components
             {
                 Tag = "nfeProc",
                 ID = ++id,
-                ArquivoXSD = "NFe\\procNFe_v2.00.xsd",
+                ArquivoXSD = "NFe\\procNFe_v{0}.xsd",
                 Descricao = "XML de distribuição da NFe",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
@@ -169,7 +170,7 @@ namespace NFe.Components
             #region NFe versão 3.1
 
             #region XML Consulta Recibo Lote
-            InfSchemas.Add("NFE-3.10-consReciNFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-consReciNFe", new InfSchema()
             {
                 Tag = "consReciNFe",
                 ID = ++id,
@@ -178,11 +179,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Consulta Situação NFe
-            InfSchemas.Add("NFE-3.10-consSitNFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-consSitNFe", new InfSchema()
             {
                 Tag = "consSitNFe",
                 ID = ++id,
@@ -191,11 +192,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Consulta Status Serviço NFe
-            InfSchemas.Add("NFE-3.10-consStatServ", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-consStatServ", new InfSchema()
             {
                 Tag = "consStatServ",
                 ID = ++id,
@@ -204,11 +205,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Envio Lote
-            InfSchemas.Add("NFE-3.10-enviNFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-enviNFe", new InfSchema()
             {
                 Tag = "enviNFe",
                 ID = ++id,
@@ -217,11 +218,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Inutilização
-            InfSchemas.Add("NFE-3.10-inutNFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-inutNFe", new InfSchema()
             {
                 Tag = "inutNFe",
                 ID = ++id,
@@ -230,11 +231,11 @@ namespace NFe.Components
                 TagAssinatura = "inutNFe",
                 TagAtributoId = "infInut",
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML NFe
-            InfSchemas.Add("NFE-3.10-NFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-NFe", new InfSchema()
             {
                 Tag = "NFe",
                 ID = ++id,
@@ -243,11 +244,11 @@ namespace NFe.Components
                 TagAssinatura = "NFe",
                 TagAtributoId = "infNFe",
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion            
 
             #region XML Distribuição Inutilização
-            InfSchemas.Add("NFE-3.10-procInutNFe", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-procInutNFe", new InfSchema()
             {
                 Tag = "procInutNFe",
                 ID = ++id,
@@ -256,11 +257,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Distribuição NFe
-            InfSchemas.Add("NFE-3.10-nfeProc", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-nfeProc", new InfSchema()
             {
                 Tag = "nfeProc",
                 ID = ++id,
@@ -269,11 +270,11 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #region XML Consulta Cadastro Contribuinte
-            InfSchemas.Add("NFE-3.10-ConsCad", new InfSchema()
+            /*InfSchemas.Add("NFE-3.10-ConsCad", new InfSchema()
             {
                 Tag = "ConsCad",
                 ID = ++id,
@@ -282,7 +283,7 @@ namespace NFe.Components
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
                 TargetNameSpace = string.Empty
-            });
+            });*/
             #endregion
 
             #endregion

@@ -314,7 +314,7 @@ namespace NFe.Components
     public enum TipoAplicativo
     {
         /// <summary>
-        /// Aplicativo ou serviços para processamento dos XMLs da NF-e
+        /// Aplicativo ou serviços para processamento dos XMLs da NF-e e NFC-e
         /// </summary>
         /// 
         [Description("NF-e e NFC-e")]
