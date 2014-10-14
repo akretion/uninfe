@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Xml;
+using Microsoft.Win32;
 
 using NFe.Components;
 using NFe.Settings;
@@ -1240,6 +1241,42 @@ namespace NFe.Service
             byte[] hashValue = mySHA1.ComputeHash(UnicodeEncoding.UTF8.GetBytes(messageString));
 
             return Convert.ToBase64String(hashValue);
+        }
+
+        public static void CriarArquivosParaServico()
+        {
+            if (!File.Exists(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_iniciar.bat")))
+            {
+                try
+                {
+                    string windir = Environment.GetEnvironmentVariable("windir");
+                    string path = Path.Combine(windir, @"microsoft.net\framework\v2.0.50727\installutil");
+
+                    Microsoft.Win32.RegistryKey ndpKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\", false);
+                    foreach (string versionKeyName in ndpKey.GetSubKeyNames())
+                    {
+                        if (versionKeyName.StartsWith("v4"))
+                        {
+                            Microsoft.Win32.RegistryKey ndpKey4 = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\v4.0.30319\", false);
+                            foreach (var v in ndpKey4.GetSubKeyNames())
+                            {
+                                path = Path.Combine(windir, @"microsoft.net\framework\v4.0.30319\installutil");
+                                break;
+                            }
+                        }
+                    }
+                    File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_iniciar.bat"), "net start UniNFeServico\r\npause");
+                    File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_parar.bat"), "net stop UniNFeServico\r\npause");
+                    File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_remover.bat"), path + " /u UniNFeServico.exe\r\npause");
+                    File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_instalar.bat"), path + " /i UniNFeServico.exe\r\npause");
+                    File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_testar.bat"), 
+                        "call servico_instalar\r\n"+
+                        "call servico_iniciar\r\n"+
+                        "call servico_parar\r\n"+
+                        "call servico_remover\r\n");
+                }
+                catch { }
+            }
         }
 
     }

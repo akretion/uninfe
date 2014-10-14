@@ -87,6 +87,7 @@ namespace NFe.UI
                                         ";*" + Propriedade.ExtEnvio.EnvCCe_XML +
                                         ";*" + Propriedade.ExtEnvio.EnvDPEC_XML +
                                         ";*" + Propriedade.ExtEnvio.EnvManifestacao_XML +
+                                        ";*" + Propriedade.ExtEnvio.EnvDFe_XML +
                                 //";*" + Propriedade.ExtEnvio.ConsNFeDest_XML +
                                 //";*" + Propriedade.ExtEnvio.EnvDownload_XML +
                                 //";*" + Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML +
@@ -97,6 +98,7 @@ namespace NFe.UI
                                         ";*" + Propriedade.ExtEnvio.PedSit_XML;
                             dlg.Filter += string.Format("|Arquivos da NFe/NFCe (*.*{0})|*{0}", Propriedade.ExtEnvio.Nfe);
                             dlg.Filter += string.Format("|Arquivos de CTe (*.*{0})|*{0}", Propriedade.ExtEnvio.Cte);
+                            dlg.Filter += string.Format("|Arquivos de DFe (*.*{0})|*{0}", Propriedade.ExtEnvio.EnvDFe_XML);
                             dlg.Filter += string.Format("|Arquivos de MDFe (*.*{0})|*{0}", Propriedade.ExtEnvio.MDFe);
                             dlg.Filter += string.Format("|Arquivos de eventos (*.*{0},*.*{1},*.*{2},*.*{3},*.*{4})|*{0};*{1};*{2};*{3};*{4}",
                                 Propriedade.ExtEnvio.EnvCCe_XML,
@@ -266,7 +268,8 @@ namespace NFe.UI
         void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (oArqDestino != null)
-                oArqDestino.Delete();
+                if (oArqDestino.Exists)
+                    oArqDestino.Delete();
 
             oArqDestino = null;
         }

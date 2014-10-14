@@ -19,6 +19,7 @@ namespace NFe.ConvertTxt
         private XmlDocument doc;
         private XmlNode nodeCurrent = null;
         private TpcnTipoCampo nDecimaisPerc = TpcnTipoCampo.tcDec2;
+        private bool convertToOem;
 
         /// <summary>
         /// GerarXml
@@ -102,6 +103,8 @@ namespace NFe.ConvertTxt
             infNfeAttrId.Value = "NFe" + NFe.infNFe.ID;
             infNfe.Attributes.Append(infNfeAttrId);
             xmlInf.AppendChild(infNfe);
+
+            this.convertToOem = true;
 
             infNfe.AppendChild(GerarIde(NFe));
             infNfe.AppendChild(GerarEmit(NFe));
@@ -481,9 +484,12 @@ namespace NFe.ConvertTxt
                 rootDet.AppendChild(nodeProd);
                 nodeCurrent = nodeProd;
 
+                this.convertToOem = (det.Prod.comb.cProdANP > 0 && det.Prod.comb.cProdANP > 0 ? false : true);
+
                 wCampo(det.Prod.cProd, TpcnTipoCampo.tcStr, TpcnResources.cProd);
                 wCampo(det.Prod.cEAN, TpcnTipoCampo.tcStr, TpcnResources.cEAN);
                 wCampo(det.Prod.xProd, TpcnTipoCampo.tcStr, TpcnResources.xProd);
+                this.convertToOem = true;
                 wCampo(det.Prod.NCM, TpcnTipoCampo.tcStr, TpcnResources.NCM);
                 wCampo(det.Prod.NVE, TpcnTipoCampo.tcStr, TpcnResources.NVE, ObOp.Opcional);
                 wCampo(det.Prod.EXTIPI, TpcnTipoCampo.tcStr, TpcnResources.EXTIPI, ObOp.Opcional);
@@ -655,7 +661,7 @@ namespace NFe.ConvertTxt
                 #endregion
 
                 #region /// combustiveis
-                if ((det.Prod.comb.cProdANP > 0))
+                if (det.Prod.comb.cProdANP > 0)
                 {
                     XmlElement e0 = doc.CreateElement("comb");
                     nodeProd.AppendChild(e0);
@@ -2180,7 +2186,12 @@ namespace NFe.ConvertTxt
                         }
                         else
                             if (obj.ToString().Trim() != "")
-                                valueEl1.InnerText = ConvertToOEM(obj.ToString().TrimStart().TrimEnd());
+                            {
+                                if (TAG == TpcnResources.xProd.ToString() && !this.convertToOem)
+                                    valueEl1.InnerText = obj.ToString().TrimStart().TrimEnd();
+                                else
+                                    valueEl1.InnerText = ConvertToOEM(obj.ToString().TrimStart().TrimEnd());
+                            }
                     break;
             }
             nodeCurrent.AppendChild(valueEl1);

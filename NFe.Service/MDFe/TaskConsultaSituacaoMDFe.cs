@@ -147,7 +147,7 @@ namespace NFe.Service
             doc.Load(msXml);
 
             #region Distribuicao de Eventos
-            oGerarXML.XmlDistEvento(emp, this.vStrXmlRetorno);
+            oGerarXML.XmlDistEventoMDFe(emp, this.vStrXmlRetorno);
             #endregion
 
             XmlNodeList retConsSitList = doc.GetElementsByTagName("retConsSitMDFe");

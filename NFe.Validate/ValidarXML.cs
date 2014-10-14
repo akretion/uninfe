@@ -46,13 +46,15 @@ namespace NFe.Validate
         public void EncryptAssinatura(string arquivoXML)
         {
             if (TipoArqXml.cArquivoSchema.Contains("PAULISTANA") ||
-                TipoArqXml.cArquivoSchema.Contains("BLUMENAU"))
+                TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
+                TipoArqXml.cArquivoSchema.Contains("DSF"))
             {
                 if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps) ||
                     arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
                 {
                     bool found = false;
                     bool bSave = false;
+                    string sh1 = "";
                     XmlDocument doc = new XmlDocument();
                     doc.Load(arquivoXML);
 
@@ -60,56 +62,56 @@ namespace NFe.Validate
                     {
                         const string Assinatura = "Assinatura";
 
-                        //XmlNodeList pedidoEnvioLoteRPSList = doc.GetElementsByTagName("PedidoEnvioLoteRPS");
-                        //foreach (XmlNode pedidoEnvioLoteRPSNode in pedidoEnvioLoteRPSList)
+                        XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
+                        foreach (XmlNode rpsNode in rpsList)
                         {
-                            //XmlElement pedidoEnvioLoteRPSElemento = (XmlElement)pedidoEnvioLoteRPSNode;
+                            XmlElement rpsElement = (XmlElement)rpsNode;
 
-                            XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
-                            foreach (XmlNode rpsNode in rpsList)
+                            if (rpsElement.GetElementsByTagName(Assinatura).Count != 0)
                             {
-                                XmlElement rpsElement = (XmlElement)rpsNode;
-
-                                if (rpsElement.GetElementsByTagName(Assinatura).Count != 0)
+                                found = true;
+                                //Encryptar a tag Assinatura
+                                int len = TipoArqXml.cArquivoSchema.Contains("DSF") ? 94 : 86;
+                                if (rpsElement.GetElementsByTagName(Assinatura)[0].InnerText.Length == len)    //jah assinado?
                                 {
-                                    found = true;
-                                    if (rpsElement.GetElementsByTagName(Assinatura)[0].InnerText.Length == 86)    //jah assinado?
+                                    bSave = true;
+                                    if (TipoArqXml.cArquivoSchema.Contains("DSF"))
                                     {
-                                        bSave = true;
-                                        //Encryptar a tag Assinatura
-                                        rpsElement.GetElementsByTagName(Assinatura)[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
-                                            rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
+                                        sh1 = Criptografia.GetSHA1HashData(rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
                                     }
+                                    else
+                                    {
+                                        sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
+                                                rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
+                                    }
+                                    rpsElement.GetElementsByTagName(Assinatura)[0].InnerText = sh1;
                                 }
                             }
                         }
                         if (!found)
                             throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
                     }
-                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
+                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse) && 
+                            !TipoArqXml.cArquivoSchema.Contains("DSF"))
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
 
-                        //XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
-                        //foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
+                        XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
+                        foreach (XmlNode detalheNode in detalheList)
                         {
-                            //XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
+                            XmlElement detalheElement = (XmlElement)detalheNode;
 
-                            XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
-                            foreach (XmlNode detalheNode in detalheList)
+                            if (detalheElement.GetElementsByTagName(AssinaturaCancelamento).Count != 0)
                             {
-                                XmlElement detalheElement = (XmlElement)detalheNode;
-
-                                if (detalheElement.GetElementsByTagName(AssinaturaCancelamento).Count != 0)
+                                found = true;
+                                if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
                                 {
-                                    found = true;
-                                    if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
-                                    {
-                                        bSave = true;
-                                        //Encryptar a tag Assinatura
-                                        detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
-                                            detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText);
-                                    }
+                                    bSave = true;
+                                    //Encryptar a tag Assinatura
+                                    sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
+                                                    detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText);
+                                    
+                                    detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = sh1;
                                 }
                             }
                         }
@@ -394,29 +396,6 @@ namespace NFe.Validate
                                         new XElement("cStat", cStat),
                                         new XElement("xMotivo", xMotivo)));
             xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
-#if false
-            XmlWriter oXmlGravar = null;
-
-            try
-            {
-                //Agora vamos criar um XML Writer
-                oXmlGravar = XmlWriter.Create(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
-
-                //Agora vamos gravar os dados
-                oXmlGravar.WriteStartDocument();
-                oXmlGravar.WriteStartElement("Validacao");
-                oXmlGravar.WriteElementString("cStat", cStat);
-                oXmlGravar.WriteElementString("xMotivo", xMotivo);
-                oXmlGravar.WriteEndElement(); //nfe_configuracoes
-                oXmlGravar.WriteEndDocument();
-                oXmlGravar.Flush();
-            }
-            finally
-            {
-                if(oXmlGravar != null)
-                    oXmlGravar.Close();
-            }
-#endif
         }
         #endregion
     }

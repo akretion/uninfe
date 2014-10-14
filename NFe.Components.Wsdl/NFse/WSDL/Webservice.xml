@@ -1970,26 +1970,6 @@
       <CancelarNfse>WSDL\Producao\PNiteroi-WebISS.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
-  <Estado ID="5002704" Nome="Campo Grande - MS" UF="MS" Padrao="DSF">
-    <LocalHomologacao>
-      <RecepcionarLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarLoteRps>
-      <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</CancelarNfse>
-    </LocalHomologacao>
-    <LocalProducao>
-      <RecepcionarLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarLoteRps>
-      <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</CancelarNfse>
-    </LocalProducao>
-  </Estado>
   <Estado ID="3551702" Nome="Sertãozinho - SP" UF="SP" Padrao="SMARAPD">
     <LocalHomologacao>
       <RecepcionarLoteRps></RecepcionarLoteRps>
@@ -2126,6 +2106,46 @@
       <ConsultarLoteRps>wsdl\producao\PBauruSP-sigiss_ws.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
       <CancelarNfse>wsdl\producao\PBauruSP-sigiss_ws.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4305108" Nome="Caxias do Sul - RS" UF="RS" Padrao="GIF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="5002704" Nome="Campo Grande - MS" UF="MS" Padrao="DSF">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HCampoGrandeMS-DSF-LoteRps.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
 </Webservice>

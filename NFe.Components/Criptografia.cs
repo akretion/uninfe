@@ -132,5 +132,32 @@ namespace NFe.Components
             string result = Convert.ToBase64String(asciiBytes);
             return result;
         }
+
+        public static string GetSHA1HashData(string data)
+        {
+            HashAlgorithm algorithm = new SHA1CryptoServiceProvider();
+            byte[] buffer = algorithm.ComputeHash(System.Text.Encoding.ASCII.GetBytes(data));
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(buffer.Length);
+            foreach (byte num in buffer)
+            {
+                builder.Append(num.ToString("x2"));
+            }
+            return builder.ToString();
+        }
+
+        public static bool ValidateSHA1HashData(string inputData, string storedHashData)
+        {
+            //hash input text and save it string variable
+            string getHashInputData = GetSHA1HashData(inputData);
+
+            if (string.Compare(getHashInputData, storedHashData) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

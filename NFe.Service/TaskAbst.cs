@@ -1230,7 +1230,7 @@ namespace NFe.Service
 
                         case Servicos.RecepcionarLoteRps:
                             if (taHomologacao)
-                                if (cMunicipio.Equals("5002704")) // Campo grande - MS não tem web service de teste
+                                if (cMunicipio.ToString().Equals("5002704")) // Campo grande - MS não tem web service de teste
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                                 else
                                     retorna = "testeEnviar";

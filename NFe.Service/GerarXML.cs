@@ -793,14 +793,14 @@ namespace NFe.Service
             node.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.versao.ToString(), versao));
 
             XmlNode nodeinfInut = doc.CreateElement("infInut");
-            nodeinfInut.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.Id.ToString(), 
-                string.Format("ID{0}{1}{2}{3}{4}{5}{6}", 
-                        cUF.ToString("00"), 
-                        ano.ToString("00"), 
-                        CNPJ.Trim(), 
-                        mod.ToString("00"), 
-                        serie.ToString("000"), 
-                        nNFIni.ToString("000000000"), 
+            nodeinfInut.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.Id.ToString(),
+                string.Format("ID{0}{1}{2}{3}{4}{5}{6}",
+                        cUF.ToString("00"),
+                        ano.ToString("00"),
+                        CNPJ.Trim(),
+                        mod.ToString("00"),
+                        serie.ToString("000"),
+                        nNFIni.ToString("000000000"),
                         nNFFin.ToString("000000000"))));
             nodeinfInut.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), tpAmb.ToString()));
             if (pFinalArqEnvio.IndexOf(Empresas.Configuracoes[this.EmpIndex].PastaValidar, StringComparison.InvariantCultureIgnoreCase) == -1)
@@ -953,7 +953,7 @@ namespace NFe.Service
 
             XmlNode nodeInfDPEC = doc.CreateElement("infDPEC");
             nodeInfDPEC.Attributes.Append(criaAttribute(doc, NFe.ConvertTxt.TpcnResources.Id.ToString(), "DPEC" + dadosEnvDPEC.CNPJ));
-            
+
             XmlNode nodeIdeDEC = doc.CreateElement("ideDec");
             nodeIdeDEC.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.cUF.ToString(), dadosEnvDPEC.cUF.ToString()));
             nodeIdeDEC.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.tpAmb.ToString(), dadosEnvDPEC.tpAmb.ToString()));
@@ -2252,7 +2252,7 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(value.ultNSU))
             {
                 XmlNode nodeEvento1 = doc.CreateElement("distNSU");
-                nodeEvento1.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.ultNSU.ToString(), value.ultNSU.PadLeft(15,'0')));
+                nodeEvento1.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.ultNSU.ToString(), value.ultNSU.PadLeft(15, '0')));
                 envEvento.AppendChild(nodeEvento1);
             }
             else
@@ -2268,6 +2268,8 @@ namespace NFe.Service
         #endregion
 
         #region XmlDistEvento
+
+        #region XmlDistEvento()
         /// <summary>
         /// XMLDistEvento
         /// </summary>
@@ -2307,38 +2309,9 @@ namespace NFe.Service
                 }
             }
         }
+        #endregion
 
-        /// <summary>
-        /// XMLDistEvento CTe
-        /// </summary>
-        /// <param name="emp"></param>
-        /// <param name="vStrXmlRetorno"></param>
-        public void XmlDistEventoCTe(int emp, string vStrXmlRetorno)
-        {
-            //
-            //<<<danasa 6-2011
-            //<<<UTF8 -> tem acentuacao no retorno
-            XmlDocument docEventos = new XmlDocument();
-            docEventos.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
-            XmlNodeList retprocEventoNFeList = docEventos.GetElementsByTagName("procEventoCTe");
-            if (retprocEventoNFeList != null)
-            {
-                foreach (XmlNode retConsSitNode1 in retprocEventoNFeList)
-                {
-                    string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName("cStat")[0].InnerText;
-                    if (cStat == "134" || cStat == "135" || cStat == "136")
-                    {
-                        string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chCTe")[0].InnerText;
-                        Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("nSeqEvento")[0].InnerText);
-                        Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
-                        DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName("dhRegEvento")[0].InnerText);
-
-                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
-                    }
-                }
-            }
-        }
-
+        #region XmlDistEvento()
         /// <summary>
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos NFe
@@ -2360,10 +2333,10 @@ namespace NFe.Service
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
             string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
-            if (tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe && 
+            if (tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe &&
                 tpEvento != ConvertTxt.tpEventos.tpEvCCe) //Cancelamento e CCe
             {
-                if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ || 
+                if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
                     ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
                 {
                     ///evento não é do cliente uninfe
@@ -2433,7 +2406,42 @@ namespace NFe.Service
 
             NomeArqGerado = folderToWrite;
         }
+        #endregion
 
+        #region XmlDistEventoCTe()
+        /// <summary>
+        /// XMLDistEvento CTe
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="vStrXmlRetorno"></param>
+        public void XmlDistEventoCTe(int emp, string vStrXmlRetorno)
+        {
+            //
+            //<<<danasa 6-2011
+            //<<<UTF8 -> tem acentuacao no retorno
+            XmlDocument docEventos = new XmlDocument();
+            docEventos.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
+            XmlNodeList retprocEventoNFeList = docEventos.GetElementsByTagName("procEventoCTe");
+            if (retprocEventoNFeList != null)
+            {
+                foreach (XmlNode retConsSitNode1 in retprocEventoNFeList)
+                {
+                    string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName("cStat")[0].InnerText;
+                    if (cStat == "134" || cStat == "135" || cStat == "136")
+                    {
+                        string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chCTe")[0].InnerText;
+                        Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("nSeqEvento")[0].InnerText);
+                        Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
+                        DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName("dhRegEvento")[0].InnerText);
+
+                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region XmlDistEventoCTe()
         /// <summary>
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos CTe
@@ -2446,7 +2454,7 @@ namespace NFe.Service
             // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
-                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + 
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
@@ -2501,12 +2509,45 @@ namespace NFe.Service
 
             if (!string.IsNullOrEmpty(folderToWriteBackup))
                 this.XmlParaFTP(emp, folderToWrite);
-            
+
             TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
-            
+
             NomeArqGerado = folderToWrite;
         }
+        #endregion
 
+        #region XmlDistEventoMDFe()
+        /// <summary>
+        /// XMLDistEvento CTe
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="strXmlRetorno"></param>
+        public void XmlDistEventoMDFe(int emp, string strXmlRetorno)
+        {
+            // <<< UTF8 -> tem acentuação no retorno
+            XmlDocument docEventos = new XmlDocument();
+            docEventos.Load(Functions.StringXmlToStreamUTF8(strXmlRetorno));
+            XmlNodeList retprocEventoNFeList = docEventos.GetElementsByTagName("procEventoMDFe");
+            if (retprocEventoNFeList != null)
+            {
+                foreach (XmlNode retConsSitNode1 in retprocEventoNFeList)
+                {
+                    string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName("cStat")[0].InnerText;
+                    if (cStat == "134" || cStat == "135" || cStat == "136")
+                    {
+                        string chNFe = ((XmlElement)retConsSitNode1).GetElementsByTagName("chMDFe")[0].InnerText;
+                        Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("nSeqEvento")[0].InnerText);
+                        Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName("tpEvento")[0].InnerText);
+                        DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName("dhRegEvento")[0].InnerText);
+
+                        XmlDistEventoMDFe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
+                    }
+                }
+            }
+        }
+        #endregion
+        
+        #region XmlDistEventoMDFe()
         /// <summary>
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos MDFe
@@ -2579,6 +2620,7 @@ namespace NFe.Service
 
             NomeArqGerado = folderToWrite;
         }
+        #endregion
 
         #endregion
 

@@ -956,6 +956,7 @@ namespace NFe.Service
                             string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");
                             string NomeArquivoEmProcessamento = Empresas.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
                             string NomeArquivoAssinado = Empresas.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            string NomeArquivoAssinadoLote = Empresas.Configuracoes[empresa].PastaXmlEmLote + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
                             string mod = Functions.LerTag(documentoElemento, ElementoEditavel.mod.ToString(), "");
                             bool excluiNota = false;
                             if (File.Exists(NomeArquivoEmProcessamento))
@@ -989,7 +990,7 @@ namespace NFe.Service
                                     }
                                 }
                             }
-                            else if (! File.Exists(NomeArquivoAssinado))
+                            else if (! File.Exists(NomeArquivoAssinado) && ! File.Exists(NomeArquivoAssinadoLote))
                                 excluiNota = true;
 
                             if (excluiNota)
