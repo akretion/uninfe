@@ -536,6 +536,36 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="news.txt" />
+    <Content Include="Resources\atualizar.png" />
+    <None Include="Resources\visual1.png" />
+    <None Include="Resources\atualizar1.png" />
+    <Content Include="Resources\cadastro.png" />
+    <None Include="Resources\cadastro1.png" />
+    <Content Include="Resources\config.png" />
+    <None Include="Resources\config1.png" />
+    <Content Include="Resources\documentacao.png" />
+    <None Include="Resources\documentacao1.png" />
+    <Content Include="Resources\excluir.png" />
+    <None Include="Resources\excluir1.png" />
+    <Content Include="Resources\imprimir.png" />
+    <None Include="Resources\imprimir1.png" />
+    <Content Include="Resources\info.png" />
+    <None Include="Resources\info1.png" />
+    <Content Include="Resources\log.png" />
+    <None Include="Resources\log1.png" />
+    <Content Include="Resources\munucipios.png" />
+    <None Include="Resources\munucipios1.png" />
+    <Content Include="Resources\sefaz.png" />
+    <None Include="Resources\sefaz1.png" />
+    <Content Include="Resources\sefaz20.png" />
+    <None Include="Resources\sefaz201.png" />
+    <Content Include="Resources\situacao.png" />
+    <None Include="Resources\situacao1.png" />
+    <Content Include="Resources\update.png" />
+    <None Include="Resources\update1.png" />
+    <Content Include="Resources\validar.png" />
+    <None Include="Resources\validar1.png" />
+    <Content Include="Resources\visual.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

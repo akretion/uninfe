@@ -58,7 +58,7 @@ namespace NFe.Components
         /// <param name="arquivoDestino">Arquivo de destino (destino do arquivo)</param>
         public static void Move(string arquivoOrigem, string arquivoDestino)
         {
-            if(File.Exists(arquivoDestino))
+            if (File.Exists(arquivoDestino))
                 File.Delete(arquivoDestino);
 
             if (!Directory.Exists(Path.GetDirectoryName(arquivoDestino)))
@@ -78,7 +78,7 @@ namespace NFe.Components
         /// <by>Wandrey Mundin Ferreira</by>
         public static void DeletarArquivo(string arquivo)
         {
-            if(File.Exists(arquivo))
+            if (File.Exists(arquivo))
             {
                 File.Delete(arquivo);
             }
@@ -90,9 +90,9 @@ namespace NFe.Components
         {
             try
             {
-                for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if(Propriedade.CodigosEstados[v, 0] == codigo.ToString())
-                        return Propriedade.CodigosEstados[v, 1].Substring(0,2);
+                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
+                    if (Propriedade.CodigosEstados[v, 0] == codigo.ToString())
+                        return Propriedade.CodigosEstados[v, 1].Substring(0, 2);
 
                 return "";
             }
@@ -108,8 +108,8 @@ namespace NFe.Components
         {
             try
             {
-                for(int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if(Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf)
+                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
+                    if (Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf)
                         return Convert.ToInt32(Propriedade.CodigosEstados[v, 0]);
 
                 return 0;
@@ -124,8 +124,8 @@ namespace NFe.Components
         #region PadraoNFe()
         public static PadroesNFSe PadraoNFSe(int municipio)
         {
-            foreach(Municipio mun in Propriedade.Municipios)
-                if(mun.CodigoMunicipio == municipio)
+            foreach (Municipio mun in Propriedade.Municipios)
+                if (mun.CodigoMunicipio == municipio)
                     return mun.Padrao;
 
             return PadroesNFSe.NaoIdentificado;
@@ -142,18 +142,18 @@ namespace NFe.Components
         {
             bool flagNeg = false;
 
-            if(text == null || text.ToString().Length == 0) return "";
+            if (text == null || text.ToString().Length == 0) return "";
             string ret = "";
 
-            foreach(char c in text.ToString().ToCharArray())
+            foreach (char c in text.ToString().ToCharArray())
             {
-                if(c.Equals('.') == true || c.Equals(',') == true || char.IsNumber(c) == true)
+                if (c.Equals('.') == true || c.Equals(',') == true || char.IsNumber(c) == true)
                     ret += c.ToString();
-                else if(c.Equals('-') == true)
+                else if (c.Equals('-') == true)
                     flagNeg = true;
             }
 
-            if(flagNeg == true) ret = "-" + ret;
+            if (flagNeg == true) ret = "-" + ret;
 
             return ret;
         }
@@ -170,7 +170,7 @@ namespace NFe.Components
         {
             string ret = OnlyNumbers(text).ToString();
 
-            foreach(char c in removeChars.ToCharArray())
+            foreach (char c in removeChars.ToCharArray())
             {
                 ret = ret.Replace(c.ToString(), "");
             }
@@ -195,7 +195,7 @@ namespace NFe.Components
             // Converte cada byte em um valor hexadecimal e adiciona ao
             // string builder
             // and format each one as a hexadecimal string.
-            for(int i = 0; i < valorCriptografado.Length; i++)
+            for (int i = 0; i < valorCriptografado.Length; i++)
             {
                 strBuilder.Append(valorCriptografado[i].ToString("x2"));
             }
@@ -215,17 +215,17 @@ namespace NFe.Components
         public static List<string> LerArquivo(string cArquivo)
         {
             List<string> lstRetorno = new List<string>();
-            if(File.Exists(cArquivo))
+            if (File.Exists(cArquivo))
             {
-                using(System.IO.StreamReader txt = new StreamReader(cArquivo, Encoding.Default, true))
+                using (System.IO.StreamReader txt = new StreamReader(cArquivo, Encoding.Default, true))
                 {
                     try
                     {
                         string cLinhaTXT = txt.ReadLine();
-                        while(cLinhaTXT != null)
+                        while (cLinhaTXT != null)
                         {
                             string[] dados = cLinhaTXT.Split('|');
-                            if(dados.GetLength(0) > 1)
+                            if (dados.GetLength(0) > 1)
                             {
                                 lstRetorno.Add(cLinhaTXT);
                             }
@@ -236,7 +236,7 @@ namespace NFe.Components
                     {
                         txt.Close();
                     }
-                    if(lstRetorno.Count == 0)
+                    if (lstRetorno.Count == 0)
                         throw new Exception("Arquivo: " + cArquivo + " vazio");
                 }
             }
@@ -282,7 +282,7 @@ namespace NFe.Components
 
             try
             {
-                using(FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     fs.Close();//fechar o arquivo para nao dar erro em outras aplicações
                 }
@@ -325,9 +325,9 @@ namespace NFe.Components
         {
             string Retorno = string.Empty;
 
-            if(Elemento.GetElementsByTagName(NomeTag).Count != 0)
+            if (Elemento.GetElementsByTagName(NomeTag).Count != 0)
             {
-                if(RetornaPontoVirgula)
+                if (RetornaPontoVirgula)
                 {
                     Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText.Replace(";", " ");  //danasa 19-9-2009
                     Retorno += ";";
@@ -343,7 +343,7 @@ namespace NFe.Components
         public static string LerTag(XmlElement Elemento, string NomeTag, string defaultValue)
         {
             string result = LerTag(Elemento, NomeTag, false);
-            if(string.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result))
                 result = defaultValue;
             return result;
         }
@@ -397,13 +397,13 @@ namespace NFe.Components
         #region getDateTime()
         public static DateTime GetDateTime(string value)
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
                 return DateTime.MinValue;
 
             int _ano = Convert.ToInt16(value.Substring(0, 4));
             int _mes = Convert.ToInt16(value.Substring(5, 2));
             int _dia = Convert.ToInt16(value.Substring(8, 2));
-            if(value.Contains("T") && value.Contains(":"))
+            if (value.Contains("T") && value.Contains(":"))
             {
                 int _hora = Convert.ToInt16(value.Substring(11, 2));
                 int _min = Convert.ToInt16(value.Substring(14, 2));
@@ -435,8 +435,8 @@ namespace NFe.Components
                 //Carregar os dados do arquivo XML de configurações da Aplicação
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                            where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
-                            select p);
+                         where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                         select p);
                 foreach (var item in s)
                 {
                     if (Convert.ToInt32("0" + OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value)) == 0)
@@ -496,7 +496,7 @@ namespace NFe.Components
             byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
             StringBuilder sBuilder = new StringBuilder();
 
-            for(int i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 sBuilder.Append(data[i].ToString("x2"));
             }
@@ -532,7 +532,7 @@ namespace NFe.Components
                 ).FirstOrDefault();
 
             return ip;
-        } 
+        }
         #endregion
 
         public static void CopyObjectTo(this object Source, object Destino)
@@ -620,7 +620,7 @@ namespace NFe.Components
                                 //propertyInfo.SetValue(_this, value.ToString(), null);
                                 break;
                             default:
-                                throw new Exception(propertyInfo.Name + "..." + propertyInfo.PropertyType.FullName+"...."+value.ToString());
+                                throw new Exception(propertyInfo.Name + "..." + propertyInfo.PropertyType.FullName + "...." + value.ToString());
                         }
                         break;
                 }
@@ -723,7 +723,7 @@ namespace NFe.Components
 
             WriteLog(msg, false, GravarLogOperacoesRealizadas);
         }
-        
+
         public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog)
         {
             if (geraLog)
@@ -787,5 +787,26 @@ namespace NFe.Components
             }
         }
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="resultFolder"></param>
+        /// <param name="ex"></param>
+        public static void GravarErroMover(string file, string resultFolder, string ex)
+        {
+            FileInfo infFile = new FileInfo(file);
+            string extFile = infFile.Name.Replace(".xml", "");
+            string extError = extFile + ".err";
+
+            string nomearq = resultFolder + "\\" + extError;
+
+            StreamWriter write = new StreamWriter(nomearq);
+            write.Write(ex);
+            write.Flush();
+            write.Close();
+            write.Dispose();
+        }
     }
 }

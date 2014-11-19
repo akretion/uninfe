@@ -66,18 +66,25 @@ namespace NFe.ConvertTxt
                 /// 
                 NFe.ide.cNF = this.GerarCodigoNumerico(NFe.ide.nNF);
             }
+            string ccChave = cChave +
+                             NFe.ide.serie.ToString("000") +
+                             NFe.ide.nNF.ToString("000000000") +
+                             ((int)NFe.ide.tpEmis).ToString("0") +
+                             NFe.ide.cNF.ToString("00000000");
+
             if (NFe.ide.cDV == 0)
             {
                 ///
                 /// calcula digito verificador
                 /// 
-                string ccChave = cChave +
-                                 NFe.ide.serie.ToString("000") +
-                                 NFe.ide.nNF.ToString("000000000") +
-                                 ((int)NFe.ide.tpEmis).ToString("0") +
-                                 NFe.ide.cNF.ToString("00000000");
 
                 NFe.ide.cDV = this.GerarDigito(ccChave);
+            }
+            else
+            {
+                int ccDV = this.GerarDigito(ccChave);
+                if (NFe.ide.cDV != ccDV)
+                    throw new Exception(string.Format("Digito verificador informado, [{0}] é diferente do calculado, [{1}]", NFe.ide.cDV, ccDV));
             }
             cChave += NFe.ide.serie.ToString("000") +
                         NFe.ide.nNF.ToString("000000000") +

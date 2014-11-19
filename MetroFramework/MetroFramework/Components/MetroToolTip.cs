@@ -178,7 +178,7 @@ namespace MetroFramework.Components
 
         private void MetroToolTip_Draw(object sender, DrawToolTipEventArgs e)
         {
-            MetroThemeStyle displayTheme = (Theme == MetroThemeStyle.Light) ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+            MetroThemeStyle displayTheme = MetroThemeStyle.Light;
 
             Color backColor = MetroPaint.BackColor.Form(displayTheme);
             Color borderColor = MetroPaint.BorderColor.Button.Normal(displayTheme);

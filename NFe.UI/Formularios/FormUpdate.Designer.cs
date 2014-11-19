@@ -39,7 +39,9 @@
             this.prgDownload.Location = new System.Drawing.Point(23, 63);
             this.prgDownload.Name = "prgDownload";
             this.prgDownload.Size = new System.Drawing.Size(462, 23);
+            this.prgDownload.Style = MetroFramework.MetroColorStyle.Green;
             this.prgDownload.TabIndex = 27;
+            this.prgDownload.Theme = MetroFramework.MetroThemeStyle.Light;
             this.prgDownload.Value = 25;
             // 
             // lblProgresso
@@ -59,6 +61,7 @@
             this.btnAtualizar.Size = new System.Drawing.Size(127, 27);
             this.btnAtualizar.TabIndex = 29;
             this.btnAtualizar.Text = "Iniciar a atualização";
+            this.btnAtualizar.UseSelectable = true;
             this.btnAtualizar.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // metroButton1
@@ -69,6 +72,7 @@
             this.metroButton1.Size = new System.Drawing.Size(127, 27);
             this.metroButton1.TabIndex = 30;
             this.metroButton1.Text = "&Fechar";
+            this.metroButton1.UseSelectable = true;
             // 
             // FormUpdate
             // 
@@ -80,14 +84,15 @@
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.lblProgresso);
             this.Controls.Add(this.prgDownload);
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormUpdate";
             this.Resizable = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Atualização do ...";
-            this.Activated += new System.EventHandler(this.FormUpdate_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUpdate_FormClosing);
             this.Load += new System.EventHandler(this.FormUpdate_Load);
             this.ResumeLayout(false);

@@ -233,5 +233,18 @@ namespace MetroFramework.Forms
             if (!cancelTimer)
                 timer.Reset();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MetroTaskWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.Name = "MetroTaskWindow";
+            this.Style = MetroFramework.MetroColorStyle.White;
+            this.ResumeLayout(false);
+
+        }
     }
 }

@@ -156,7 +156,7 @@ namespace NFe.UI
             MetroFramework.MetroThemeStyle uTheme = uninfeDummy.mainForm.uTheme;
             if (inverteTheme)
             {
-                uTheme = (uTheme == MetroFramework.MetroThemeStyle.Dark) ? MetroFramework.MetroThemeStyle.Light : MetroFramework.MetroThemeStyle.Dark;
+                uTheme = MetroFramework.MetroThemeStyle.Light;
             }
             //return;
             if (Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroUserControl)) ||
@@ -242,13 +242,11 @@ namespace NFe.UI
                     ";*" + Propriedade.ExtRetorno.retCancelamento_XML +
                     ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
                     ";*" + Propriedade.ExtRetorno.ProcEventoNFe +
-                    ";*" + Propriedade.ExtRetorno.retEPEC_XML +
                     ";*" + Propriedade.ExtRetorno.retDPEC_XML +
                     "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe +
                     "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe +
                     "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
                     "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML +
-                    "|Arquivos de EPEC (*.*" + Propriedade.ExtRetorno.retEPEC_XML + ")|*" + Propriedade.ExtRetorno.retEPEC_XML +
                     "|Arquivos de CTe (*.*" + Propriedade.ExtRetorno.ProcCTe + ")|*" + Propriedade.ExtRetorno.ProcCTe +
                     "|Arquivos de MDFe (*.*" + Propriedade.ExtRetorno.ProcMDFe + ")|*" + Propriedade.ExtRetorno.ProcMDFe;
 

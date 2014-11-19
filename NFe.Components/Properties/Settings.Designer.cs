@@ -72,5 +72,45 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://iss.londrina.pr.gov.br:443/ws/v1_02/sigiss_ws.php")]
+        public string NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php")]
+        public string NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe"]));
+            }
+        }
     }
 }

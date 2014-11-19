@@ -352,14 +352,6 @@ namespace NFe.Components
             #region Extensões em comum entre NFe, CTe e MDF-e
 
             /// <summary>
-            /// -ped-epec.xml
-            /// </summary>
-            public const string PedEPEC = "-ped-epec.xml";
-            /// <summary>
-            /// -ped-epec.txt
-            /// </summary>
-            public const string PedEPEC_TXT = "-ped-epec.txt";
-            /// <summary>
             /// -ped-eve.xml
             /// </summary>
             public const string PedEve = "-ped-eve.xml";
@@ -539,14 +531,6 @@ namespace NFe.Components
             /// </summary>
             public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
 #endif
-            /// <summary>
-            /// -ret-epec.xml
-            /// </summary>
-            public const string retEPEC_XML = "-ret-epec.xml";
-            /// <summary>
-            /// -ret-epec.err
-            /// </summary>
-            public const string retEPEC_ERR = "-ret-epec.err";
             #endregion
 
             #region Extensões CTe

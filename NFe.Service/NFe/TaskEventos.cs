@@ -94,7 +94,7 @@ namespace NFe.Service
                         break;
 
                     case Servicos.EnviarEPEC:
-                        //tpEmis = (int)NFe.Components.TipoEmissao.teEPEC;
+                        tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
                         break;
 
                     default:
@@ -109,8 +109,8 @@ namespace NFe.Service
                         emp,
                         ufParaWS,
                         dadosEnvEvento.eventos[0].tpAmb,
-                        tpEmis, 
-                        string.Empty, 
+                        tpEmis,
+                        string.Empty,
                         dadosEnvEvento.eventos[0].mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -124,16 +124,8 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        if (Servico == Servicos.EnviarEPEC)
-                        {
-                            xmlExtEnvio = Propriedade.ExtEnvio.PedEPEC.Replace(".xml", "");
-                            xmlExtRetorno = Propriedade.ExtRetorno.retEPEC_XML.Replace(".xml", "");
-                        }
-                        else
-                        {
-                            xmlExtEnvio = Propriedade.ExtEnvio.PedEve.Replace(".xml", "");
-                            xmlExtRetorno = Propriedade.ExtRetorno.Eve.Replace(".xml", "");
-                        }
+                        xmlExtEnvio = Propriedade.ExtEnvio.PedEve.Replace(".xml", "");
+                        xmlExtRetorno = Propriedade.ExtRetorno.Eve.Replace(".xml", "");
                     }
                     else
                     {
@@ -174,16 +166,8 @@ namespace NFe.Service
                     string xmlFileExtTXT = string.Empty;
                     if (novaNomenclatura)
                     {
-                        if (Servico == Servicos.EnviarEPEC)
-                        {
-                            xmlFileExt = Propriedade.ExtEnvio.PedEPEC;
-                            xmlFileExtTXT = Propriedade.ExtEnvio.PedEPEC_TXT;
-                        }
-                        else
-                        {
-                            xmlFileExt = Propriedade.ExtEnvio.PedEve;
-                            xmlFileExtTXT = Propriedade.ExtEnvio.PedEve_TXT;
-                        }
+                        xmlFileExt = Propriedade.ExtEnvio.PedEve;
+                        xmlFileExtTXT = Propriedade.ExtEnvio.PedEve_TXT;
                     }
                     else
                     {
@@ -224,16 +208,8 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        if (Servico == Servicos.EnviarEPEC)
-                        {
-                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEPEC : Propriedade.ExtEnvio.PedEPEC_TXT;
-                            ExtRetorno = Propriedade.ExtRetorno.retEPEC_ERR;
-                        }
-                        else
-                        {
-                            ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEve : Propriedade.ExtEnvio.PedEve_TXT;
-                            ExtRetorno = Propriedade.ExtRetorno.Eve_ERR;
-                        }
+                        ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEve : Propriedade.ExtEnvio.PedEve_TXT;
+                        ExtRetorno = Propriedade.ExtRetorno.Eve_ERR;
                     }
                     else
                     {
@@ -302,11 +278,9 @@ namespace NFe.Service
         #region EnvEvento()
         private void EnvEvento(int emp, string arquivoXML)
         {
-            novaNomenclatura = 
+            novaNomenclatura =
                 arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
-                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT) ||
-                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC) ||
-                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEPEC_TXT);
+                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT);
 
             ///
             /// danasa 6/2011
@@ -462,7 +436,7 @@ namespace NFe.Service
 
                 foreach (string cTexto in cLinhas)
                 {
-                    string[] dados = cTexto.Split(new char[] {'|'} );
+                    string[] dados = cTexto.Split(new char[] { '|' });
                     if (dados.Length == 1) continue;
 
                     switch (dados[0].ToLower())
@@ -708,13 +682,11 @@ namespace NFe.Service
                                         string Idd = env.Attributes.GetNamedItem("Id").Value;
                                         if (Idd == Id)
                                         {
-                                            if (tpEvento != ConvertTxt.tpEventos.tpEvEPEC)
-                                            {
-                                                DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
+                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
 
-                                                //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                                oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
-                                            }
+                                            //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
+                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+
                                             switch (tpEvento)
                                             {
                                                 case ConvertTxt.tpEventos.tpEvCancelamentoNFe:

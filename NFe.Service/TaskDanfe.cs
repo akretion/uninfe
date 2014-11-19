@@ -36,7 +36,7 @@ namespace NFe.Service
     <ExportarPasta>Enviar | Enviados | Erros</ExportarPasta>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_XML, Propriedade.ExtRetorno.RetDanfeReport_XML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
@@ -60,7 +60,7 @@ DataFinal|2014-1-1
 Imprimir|true | false
 ExportarPasta|Enviar | Enviados | Erros
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_TXT, Propriedade.ExtRetorno.RetDanfeReport_TXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
@@ -135,10 +135,7 @@ ExportarPasta|Enviar | Enviados | Erros
             {
                 try
                 {
-                    if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedEPEC))
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedEPEC, Propriedade.ExtRetorno.retEPEC_ERR, ex);
-                    else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Nfe_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Nfe_ERR, ex);
                 }
                 catch
                 {
@@ -183,10 +180,10 @@ ExportarPasta|Enviar | Enviados | Erros
                         XmlElement elementConfig = (XmlElement)node;
 
                         aFilename = Functions.LerTag(elementConfig, "FileName", "");
-                        aAnexos   = Functions.LerTag(elementConfig, "Anexos", "");
-                        aPrinter  = Functions.LerTag(elementConfig, "Impressora", "");
-                        aEmail    = Functions.LerTag(elementConfig, "Email", "");
-                        aCopias   = Convert.ToInt32("0" + Functions.LerTag(elementConfig, "Anexos", "-1"));
+                        aAnexos = Functions.LerTag(elementConfig, "Anexos", "");
+                        aPrinter = Functions.LerTag(elementConfig, "Impressora", "");
+                        aEmail = Functions.LerTag(elementConfig, "Email", "");
+                        aCopias = Convert.ToInt32("0" + Functions.LerTag(elementConfig, "Copias", "-1"));
                     }
                 }
                 else
@@ -243,7 +240,7 @@ Email|
                 try
                 {
                     string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvImpressaoDanfe_XML : Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT);
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.RetImpressaoDanfe_XML.Replace(".xml",".err"), ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.RetImpressaoDanfe_XML.Replace(".xml", ".err"), ex);
                 }
                 catch
                 {

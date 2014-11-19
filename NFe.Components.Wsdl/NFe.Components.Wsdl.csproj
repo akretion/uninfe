@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -2017,6 +2017,75 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoseSC-PRONINServices.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoJoseSC-PRONINServices.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquaritubaSP-IssWebWS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquaritubaSP-IssWebWS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSCVRSCteRecepcaoEvento.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLondrinaPR-sigiss.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLondrinaPR-sigiss.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\FIORILLI\nfse_v201.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\FIORILLI\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HContagemMG-Services.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PContagemMG-Services.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTriunfoRS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTriunfoRS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-EnvioLivroFiscal.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEstanciaVelhaRS-GetLivroFiscalXML.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-EnvioLivroFiscal.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEstanciaVelhaRS-GetLivroFiscalXML.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSUtil.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

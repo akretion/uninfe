@@ -1557,7 +1557,6 @@ namespace NFe.Service
                 case Servicos.EnviarEventoCancelamento:
                 case Servicos.EnviarManifDest:
                 case Servicos.EnviarCCe:    //danasa 2/7/2011
-                case Servicos.EnviarEPEC:
                     //<retEnvEvento versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
                     //  <idLote>000000000038313</idLote>
                     //  <tpAmb>2</tpAmb>
@@ -1614,7 +1613,7 @@ namespace NFe.Service
                                                     ConteudoRetorno += FCNPJCPF + ",";
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, "dhRegEvento");
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, "nProt");
-                                                    if (Servico == Servicos.EnviarEPEC)
+                                                    if (Functions.LerTag(infCCeElemento, "tpEvento") == "110140") //EPEC
                                                     {
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "cOrgaoAutor");
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFePend");
@@ -2318,9 +2317,6 @@ namespace NFe.Service
         /// </summary>
         public void XmlDistEvento(int emp, string ChaveNFe, int nSeqEvento, NFe.ConvertTxt.tpEventos tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento)
         {
-            if (tpEvento == ConvertTxt.tpEventos.tpEvEPEC)
-                return;
-
             /// grava o xml de distribuicao como: chave + "_" +  nSeqEvento
             /// ja que a nSeqEvento deve ser unico para cada chave
             /// 
@@ -2333,8 +2329,9 @@ namespace NFe.Service
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
             string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
-            if (tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe &&
-                tpEvento != ConvertTxt.tpEventos.tpEvCCe) //Cancelamento e CCe
+            if (tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe && //Cancelamento
+                tpEvento != ConvertTxt.tpEventos.tpEvCCe && //CCe
+                tpEvento != ConvertTxt.tpEventos.tpEvEPEC) //EPEC 
             {
                 if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
                     ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
@@ -2546,7 +2543,7 @@ namespace NFe.Service
             }
         }
         #endregion
-        
+
         #region XmlDistEventoMDFe()
         /// <summary>
         /// XMLDistEvento
@@ -2751,35 +2748,46 @@ namespace NFe.Service
         }
         protected void GravarArquivoParaEnvio(string Arquivo, string Conteudo, bool isUTF8)
         {
-            if (string.IsNullOrEmpty(Arquivo))
-                throw new Exception("Nome do arquivo deve ser informado");
+            string arqTemp = "";
 
-            //Arquivo na pasta Temp
-            string arqTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
+            try
+            {
+                if (string.IsNullOrEmpty(Arquivo))
+                    throw new Exception("Nome do arquivo deve ser informado");
 
-            if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0)
-                arqTemp = Arquivo;
+                //Arquivo na pasta Temp
+                arqTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
 
-            MemoryStream oMemoryStream;
-            ///
-            ///<<<danasa 6-2011
-            ///inclui o "isUTF8" para suportar a gravacao do XML da CCe - caso você queira, acho que pode ser tudo em UTF-8
-            if (isUTF8)
-                oMemoryStream = Functions.StringXmlToStreamUTF8(Conteudo);
-            else
-                oMemoryStream = Functions.StringXmlToStream(Conteudo);
-            XmlDocument docProc = new XmlDocument();
-            docProc.Load(oMemoryStream);
+                if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0)
+                    arqTemp = Arquivo;
 
-            //Gravar o XML na pasta Temp
-            docProc.Save(arqTemp);
+                MemoryStream oMemoryStream;
+                ///
+                ///<<<danasa 6-2011
+                ///inclui o "isUTF8" para suportar a gravacao do XML da CCe - caso você queira, acho que pode ser tudo em UTF-8
+                if (isUTF8)
+                    oMemoryStream = Functions.StringXmlToStreamUTF8(Conteudo);
+                else
+                    oMemoryStream = Functions.StringXmlToStream(Conteudo);
+                XmlDocument docProc = new XmlDocument();
+                docProc.Load(oMemoryStream);
 
-            if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0) return;
+                //Gravar o XML na pasta Temp
+                docProc.Save(arqTemp);
 
-            //Mover XML da pasta Temp para Envio
-            //Arquivo na pasta de Envio
-            string arqEnvio = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
-            Functions.Move(arqTemp, arqEnvio);
+                if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0) return;
+
+                //Mover XML da pasta Temp para Envio
+                //Arquivo na pasta de Envio
+                string arqEnvio = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + Path.GetFileName(Arquivo);
+                Functions.Move(arqTemp, arqEnvio);
+
+            }
+            catch (Exception ex)
+            {
+                Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[Empresas.FindEmpresaByThread()].PastaXmlRetorno, ex.ToString());
+            }
+
         }
         #endregion
 

@@ -462,7 +462,12 @@ namespace NFe.Components
         /// Padrão SmaraPD
         /// Prefeitura de Sertãozinho - SP
         /// </summary>
-        SMARAPD
+        SMARAPD,
+        /// <summary>
+        /// Padrão Fiorilli
+        /// Prefeitura de Taquara - SP
+        /// </summary>
+        FIORILLI
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
@@ -495,8 +500,8 @@ namespace NFe.Components
         teNormal = 1,
         [Description("Contingência com formulário de segurança (FS)")]
         teFS = 2,
-        [Description("Contingência com DPEC")]
-        teDPEC = 4,
+        [Description("Contingência com EPEC / DPEC")]
+        teEPECeDPEC = 4,
         [Description("Contingência com formulário de segurança (FS-DA)")]
         teFSDA = 5,
         [Description("Contingência com SVC-AN")]

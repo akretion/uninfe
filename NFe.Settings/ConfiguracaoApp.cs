@@ -781,9 +781,17 @@ namespace NFe.Settings
                     CodigoUF = 904;
                     break;
 
-                case NFe.Components.TipoEmissao.teDPEC:
-                    if (servico == Servicos.ConsultarDPEC || servico == Servicos.EnviarDPEC)//danasa 21/10/2010
-                        CodigoUF = 901;
+                case NFe.Components.TipoEmissao.teEPECeDPEC:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarDPEC:
+                        case Servicos.EnviarDPEC:
+                            CodigoUF = 901;
+                            break;
+                        case Servicos.EnviarEPEC:
+                            CodigoUF = 905;
+                            break;
+                    }
                     break;
 
                 default:
@@ -844,6 +852,7 @@ namespace NFe.Settings
 
                         case Servicos.EnviarCCe:
                         case Servicos.EnviarEventoCancelamento:
+                        case Servicos.EnviarEPEC:
                         case Servicos.RecepcaoEvento:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcaoEvento : list.LocalProducao.NFeRecepcaoEvento);
                             break;
@@ -865,12 +874,12 @@ namespace NFe.Settings
                             break;
 
                         //case Servicos.RegistroDeSaida:
-                            //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaida : list.LocalProducao.NFeRegistroDeSaida);
-                            //break;
+                        //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaida : list.LocalProducao.NFeRegistroDeSaida);
+                        //break;
 
                         //case Servicos.RegistroDeSaidaCancelamento:
-                            //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaidaCancelamento : list.LocalProducao.NFeRegistroDeSaidaCancelamento);
-                            //break;
+                        //WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRegistroDeSaidaCancelamento : list.LocalProducao.NFeRegistroDeSaidaCancelamento);
+                        //break;
 
                         #endregion
 
@@ -940,7 +949,7 @@ namespace NFe.Settings
                             break;
                         #endregion
                     }
-                    if (tipoEmissao == (int)NFe.Components.TipoEmissao.teDPEC)
+                    if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPECeDPEC)
                         ufNome = (servico == Servicos.EnviarEPEC ? "EPEC" : "DPEC");
                     else
                         ufNome = "de " + list.Nome;
@@ -1812,23 +1821,53 @@ namespace NFe.Settings
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arqXML);
 
-                foreach (XmlElement item in doc.DocumentElement)
+                XmlElement dadosEmpresa = (XmlElement)doc.GetElementsByTagName("DadosEmpresa")[0];
+
+                if (dadosEmpresa != null)
                 {
-                    switch (item.Name.ToLower())
+                    #region Nome da empresa
+                    if (dadosEmpresa.GetElementsByTagName("Nome")[0] != null)
                     {
-                        case "nome":
-                            nomeEmp = item.InnerText;
-                            temEmpresa = true;
-                            break;
-                        case "cnpj":
-                            cnpj = item.InnerText;
-                            temEmpresa = true;
-                            break;
-                        case "servico":
-                            servico = item.InnerText;
-                            temEmpresa = true;
-                            break;
+                        nomeEmp = dadosEmpresa.GetElementsByTagName("Nome")[0].InnerText;
+                        temEmpresa = true;
                     }
+                    else if (dadosEmpresa.GetElementsByTagName("nome")[0] != null)
+                    {
+                        nomeEmp = dadosEmpresa.GetElementsByTagName("nome")[0].InnerText;
+                        temEmpresa = true;
+                    }
+                    #endregion
+
+                    #region CNPJ
+                    if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("CNPJ")))
+                    {
+                        cnpj = dadosEmpresa.GetAttribute("CNPJ");
+                        temEmpresa = true;
+                    }
+                    else if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("cnpj")))
+                    {
+                        cnpj = dadosEmpresa.GetAttribute("cnpj");
+                        temEmpresa = true;
+                    }
+                    else if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("Cnpj")))
+                    {
+                        cnpj = dadosEmpresa.GetAttribute("Cnpj");
+                        temEmpresa = true;
+                    }
+                    #endregion
+
+                    #region Servico
+                    if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("Servico")))
+                    {
+                        servico = dadosEmpresa.GetAttribute("Servico");
+                        temEmpresa = true;
+                    }
+                    else if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("servico")))
+                    {
+                        servico = dadosEmpresa.GetAttribute("servico");
+                        temEmpresa = true;
+                    }
+                    #endregion
                 }
             }
             else

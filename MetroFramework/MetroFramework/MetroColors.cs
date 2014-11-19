@@ -63,7 +63,7 @@ namespace MetroFramework
         {
             get
             {
-                return Color.FromArgb(0, 177, 89);
+                return Color.FromArgb(40, 94, 55);
             }
         }
 

@@ -83,7 +83,7 @@ namespace NFe.UI
                 /// danasa 9-2009
                 ///
                 this.MinimumSize = new Size(800, 600);
-                this.MaximumSize = new Size(1000, 800);
+                this.MaximumSize = new Size(800, 600);
                 //Trazer minimizado e no systray
                 this.notifyIcon1.BalloonTipText = string.Format("Para abrir novamente o {0}, de um duplo clique ou pressione o botão direito do mouse sobre o ícone.", NFe.Components.Propriedade.NomeAplicacao);
                 this.notifyIcon1.BalloonTipTitle =

@@ -1382,7 +1382,10 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N06":
-                    layout = "§N06|orig¨|CST¨|vICMS¨|vICMSDeson¨|motDesICMS¨";  //no manual
+                    if (NFe.infNFe.Versao >= 3)
+                        layout = "§N06|orig¨|CST¨|vICMS¨|vICMSDeson¨|motDesICMS¨";
+                    else
+                        layout = "§N06|orig¨|CST¨|vICMS¨|motDesICMS¨";
                     //layout = "§N06|Orig¨|CST¨|vICMS¨|motDesICMS¨|vICMSDeson¨"; //ok
 
                     #region ICMS40, ICMS41 ICMS50
@@ -1390,9 +1393,9 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = this.LerString(TpcnResources.CST, ObOp.Obrigatorio, 2, 2);
                     NFe.det[nProd].Imposto.ICMS.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional, 15);
-                    NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
-                    if (NFe.det[nProd].Imposto.ICMS.vICMS > 0)
-                        NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
+                    if (NFe.infNFe.Versao >= 3)
+                        NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion
                     break;

@@ -39,6 +39,7 @@
             this.metroProgressSpinner3.Name = "metroProgressSpinner3";
             this.metroProgressSpinner3.Size = new System.Drawing.Size(58, 54);
             this.metroProgressSpinner3.TabIndex = 13;
+            this.metroProgressSpinner3.UseSelectable = true;
             this.metroProgressSpinner3.Value = 50;
             // 
             // metroLabel6
@@ -67,6 +68,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "FormWait";
             this.ResumeLayout(false);
             this.PerformLayout();

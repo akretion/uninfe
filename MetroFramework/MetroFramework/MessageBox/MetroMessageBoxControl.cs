@@ -40,19 +40,19 @@ namespace MetroFramework
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Color _defaultColor = Color.FromArgb(57, 179, 215);
+        private Color _defaultColor = Color.FromArgb(198, 218, 204);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Color _errorColor = Color.FromArgb(210, 50, 45);
+        private Color _errorColor = Color.FromArgb(198, 218, 204);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Color _warningColor = Color.FromArgb(237, 156, 40);
+        private Color _warningColor = Color.FromArgb(198, 218, 204);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Color _success = Color.FromArgb(71, 164, 71);
+        private Color _success = Color.FromArgb(198, 218, 204);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Color _question = Color.FromArgb(71, 164, 71);
+        private Color _question = Color.FromArgb(198, 218, 204);
 
         /// <summary>
         /// Gets the top body section of the control. 
@@ -87,8 +87,12 @@ namespace MetroFramework
         /// </summary>
         public void ArrangeApperance()
         {
-            titleLabel.Text = _properties.Title;
+            _properties.Title += (String.IsNullOrEmpty(_properties.Title) ? "UniNFe" : "");
+            titleLabel.ForeColor = Color.Black;
+            titleLabel.Size = new System.Drawing.Size(30, 50);
+            titleLabel.Text = _properties.Title;            
             messageLabel.Text = _properties.Message;
+            messageLabel.ForeColor = Color.Black;
 
             switch (_properties.Icon)
             {
@@ -209,6 +213,7 @@ namespace MetroFramework
                 default:
                     panelbody.BackColor = Color.DarkGray; break;
             }
+            
         }
 
         private void EnableButton(MetroButton button)

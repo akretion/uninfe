@@ -32,7 +32,7 @@ namespace NFe.UI
             metroLink_unimake.Visible = !string.IsNullOrEmpty(NFe.Settings.ConfiguracaoApp.Site);
             metroLink_unimake.Text = NFe.Settings.ConfiguracaoApp.Site;
             uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + "  (" + NFe.Components.Propriedade.Versao + ")";
-            metroTile_sobre.Text = "Sobre o " + NFe.Components.Propriedade.NomeAplicacao;
+            //metroTile_sobre.Text = "Sobre o " + NFe.Components.Propriedade.NomeAplicacao;
             metroTile_update.Text = "Atualizar o " + NFe.Components.Propriedade.NomeAplicacao;
 
             this.metroTile_doc.Enabled =
@@ -140,7 +140,7 @@ namespace NFe.UI
                 ///
                 /// processo já existe?
                 /// 
-                foreach(Control __uc in uninfeDummy.mainForm.Controls)
+                foreach (Control __uc in uninfeDummy.mainForm.Controls)
                 {
                     if (__uc.GetType().Equals(user))
                     {
@@ -148,7 +148,7 @@ namespace NFe.UI
                         break;
                     }
                 }
-                
+
                 _novo = (_uc == null);
                 if (_uc == null)
                 {
@@ -217,9 +217,9 @@ namespace NFe.UI
         private void metroTile_excluir_Click(object sender, EventArgs e)
         {
             if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0) return;
-            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, 
+            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
                                 "Exclui os arquivos de \".lock\" configurados para esta instância?\r\n" +
-                                "Tem certeza que deseja continuar? ", "", 
+                                "Tem certeza que deseja continuar? ", "",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
@@ -348,6 +348,9 @@ namespace NFe.UI
                 {
                     try
                     {
+                        if (item.ToString().Equals("Restaurar Padrão"))
+                            continue;
+
                         ((ToolStripMenuItem)item).Checked = Convert.ToInt16(((ToolStripMenuItem)item).Tag) == (int)this.CurrentTile.Style;
                     }
                     catch
@@ -357,7 +360,7 @@ namespace NFe.UI
             }
         }
 
-        private MetroFramework.Controls.MetroTile CurrentTile=null;
+        private MetroFramework.Controls.MetroTile CurrentTile = null;
 
         private void metroTile_Configuracoes_MouseDown(object sender, MouseEventArgs e)
         {

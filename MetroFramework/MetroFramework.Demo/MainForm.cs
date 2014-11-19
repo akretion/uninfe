@@ -23,7 +23,7 @@ namespace MetroFramework.Demo
 
         private void metroTile1_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Theme = metroStyleManager.Theme == MetroThemeStyle.Light ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+            metroStyleManager.Theme = MetroThemeStyle.Light;
         }
 
         private void metroButton1_Click(object sender, EventArgs e)

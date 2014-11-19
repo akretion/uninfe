@@ -1095,7 +1095,7 @@
             // metroStyleManager
             // 
             this.metroStyleManager.Owner = this;
-            this.metroStyleManager.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroStyleManager.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // metroToolTip
             // 
@@ -1165,7 +1165,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.StyleManager = this.metroStyleManager;
             this.Text = "metro framework";
-            this.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();

@@ -278,11 +278,11 @@ namespace MetroFramework.Controls
                 {
                     if (!Enabled)
                     {
-                        backColor = MetroPaint.BackColor.ProgressBar.Bar.Disabled(Theme);
+                        backColor = MetroPaint.BackColor.ProgressBar.Bar.Disabled(MetroFramework.MetroThemeStyle.Light/*Theme*/);
                     }
                     else
                     {
-                        backColor = MetroPaint.BackColor.ProgressBar.Bar.Normal(Theme);
+                        backColor = MetroPaint.BackColor.ProgressBar.Bar.Normal(MetroFramework.MetroThemeStyle.Light/*Theme*/);
                     }
                 }                
 
@@ -352,7 +352,7 @@ namespace MetroFramework.Controls
 
             DrawProgressText(e.Graphics);
 
-            using (Pen p = new Pen(MetroPaint.BorderColor.ProgressBar.Normal(Theme)))
+            using (Pen p = new Pen(MetroPaint.BorderColor.ProgressBar.Normal(MetroThemeStyle.Light/*Theme*/)))
             {
                 Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
                 e.Graphics.DrawRectangle(p, borderRect);

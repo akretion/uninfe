@@ -10,6 +10,7 @@ using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.SigCorp;
+using NFe.Components.Fiorilli;
 
 namespace NFe.Service.NFSe
 {
@@ -73,9 +74,19 @@ namespace NFe.Service.NFSe
                             Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio));
                         sigcorp.ConsultarLoteRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.FIORILLI:
+                        Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        fiorilli.ConsultarLoteRps(NomeArquivoXML);
+                        break;
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

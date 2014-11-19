@@ -221,6 +221,26 @@ namespace MetroFramework.Controls
             this.Font = new Font("Segoe UI", 11f, FontStyle.Regular, GraphicsUnit.Pixel);
 
             this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(181, 181, 181);
+            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.White; 
+
+            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.RowHeadersDefaultCellStyle.BackColor = Color.White;
+            this.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            this.DefaultCellStyle.BackColor = Color.White;
+
+            this.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 230);
+            this.DefaultCellStyle.SelectionForeColor = Color.FromArgb(17, 17, 17) ;
+
+            this.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(181, 181, 181);
+            this.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(17, 17, 17);
+
+            this.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(181, 181, 181);
+            this.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(17, 17, 17);
+
+            /*
+            this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             this.ColumnHeadersDefaultCellStyle.BackColor = MetroPaint.GetStyleColor(Style);
             this.ColumnHeadersDefaultCellStyle.ForeColor = MetroPaint.ForeColor.Button.Press(Theme);
 
@@ -241,6 +261,7 @@ namespace MetroFramework.Controls
 
             this.ColumnHeadersDefaultCellStyle.SelectionBackColor = MetroPaint.GetStyleColor(Style);
             this.ColumnHeadersDefaultCellStyle.SelectionForeColor = (Theme == MetroThemeStyle.Light) ? Color.FromArgb(17, 17, 17) : Color.FromArgb(255, 255, 255);
+            */
         }
     }
 

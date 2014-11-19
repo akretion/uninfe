@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
-            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.tbPararServico = new System.Windows.Forms.ToolStripMenuItem();
             this.tbRestartServico = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,16 +50,17 @@
             this.cmSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cmFechar = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroStyleManager1
             // 
             this.metroStyleManager1.Owner = this;
-            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Magenta;
             // 
             // metroToolTip1
             // 
@@ -213,6 +215,16 @@
             this.contextMenuStrip1.Size = new System.Drawing.Size(274, 320);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu1_Opening);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::NFe.UI.Properties.Resources.uninfe;
+            this.pictureBox1.Location = new System.Drawing.Point(18, 18);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(51, 50);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,15 +232,18 @@
             this.BackImagePadding = new System.Windows.Forms.Padding(210, 10, 0, 0);
             this.BackMaxSize = 50;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.pictureBox1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form_Main";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 15);
+            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "UniNFe";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.Form_Main_ControlRemoved);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -257,6 +272,7 @@
         public MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private System.Windows.Forms.ToolStripMenuItem cmMunicipios;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

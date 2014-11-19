@@ -54,6 +54,7 @@
             // 
             // tlpBody
             // 
+            this.tlpBody.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.tlpBody.ColumnCount = 3;
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));

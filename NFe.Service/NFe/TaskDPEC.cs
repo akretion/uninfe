@@ -109,7 +109,7 @@ namespace NFe.Service
         private void EnvDPEC(int emp, string arquivoXML)
         {
             this.dadosEnvDPEC.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
-            this.dadosEnvDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teDPEC;
+            this.dadosEnvDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
             this.dadosEnvDPEC.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
             ///
@@ -377,7 +377,7 @@ namespace NFe.Service
         private void ConsDPEC(int emp, string arquivoXML)
         {
             this.dadosConsDPEC.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
-            this.dadosConsDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teDPEC;
+            this.dadosConsDPEC.tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
 
             ///
             /// danasa 21/10/2010

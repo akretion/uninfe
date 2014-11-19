@@ -9,6 +9,7 @@ using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
+using NFe.Components.Fiorilli;
 
 namespace NFe.Service.NFSe
 {
@@ -62,9 +63,19 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.TECNOSISTEMAS:
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.FIORILLI:
+                        Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        fiorilli.ConsultarNfsePorRps(NomeArquivoXML);
+                        break;
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.FIORILLI)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

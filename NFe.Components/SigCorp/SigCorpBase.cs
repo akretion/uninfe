@@ -23,15 +23,40 @@ namespace NFe.Components.SigCorp
                 if (sigCorpService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        if (CodigoMun == 3507506) //Botucatu-SP
-                            throw new Exception(); // não tem
-                        else
-                            sigCorpService = new NFe.Components.SigCorp.BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
+                        switch (CodigoMun)
+                        {
+                            case 3507506: //Botucatu-SP
+                                throw new Exception(); // não tem
+
+                            case 3506003: //Bauru-SP
+                                sigCorpService = new NFe.Components.SigCorp.BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
+                            case 4113700: //Londrina-PR
+                                sigCorpService = new NFe.Components.SigCorp.LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
+                            default:
+                                throw new Exception(); // não tem                                
+                        }
                     else
-                        if (CodigoMun == 3507506) //Botucatu-SP
-                            sigCorpService = new NFe.Components.SigCorp.BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
-                        else
-                            sigCorpService = new NFe.Components.SigCorp.BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
+                        switch (CodigoMun)
+                        {
+                            case 3507506: //Botucatu-SP
+                                sigCorpService = new NFe.Components.SigCorp.BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 3506003: //Bauru-SP
+                                sigCorpService = new NFe.Components.SigCorp.BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 4113700: //Londrina-PR 
+                                sigCorpService = new NFe.Components.SigCorp.LondrinaPR.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            default:
+                                throw new Exception(); // não tem                                
+                        }
                 }
                 return sigCorpService;
             }

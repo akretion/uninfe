@@ -60,7 +60,7 @@ namespace NFe.UI.Formularios
         /// </summary>
         private bool Cancelado = true;
         #endregion
-
+        
         public FormUpdate()
         {
             InitializeComponent();
@@ -238,10 +238,6 @@ namespace NFe.UI.Formularios
             Application.DoEvents();
         }
         #endregion
-
-        private void FormUpdate_Activated(object sender, EventArgs e)
-        {
-        }
 
         #endregion
     }

@@ -287,7 +287,7 @@ namespace MetroFramework.Controls
             Width = 16;
             Height = 16;
             speed = 1;
-            DoubleBuffered = true;
+            DoubleBuffered = true;            
         }
 
         #endregion

@@ -1507,6 +1507,7 @@
       <CTeConsulta>wsdl\homologacao\SCVRS\HSCVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SCVRS\HSCVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
+      <CTeRecepcaoEvento>wsdl\homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
@@ -1526,6 +1527,7 @@
       <CTeConsulta>wsdl\producao\SCVRS\PSCVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SCVRS\PSCVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
+      <CTeRecepcaoEvento>wsdl\producao\SCVRS\PSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
   <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP">
@@ -1572,6 +1574,38 @@
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
       <NFeAutorizacao>wsdl\producao\SCVAN\PSVCANNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SCVAN\PSVCANNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência" UF="EPEC">
+    <LocalHomologacao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeManifDest></NFeManifDest>
+      <NFeRecepcaoEvento>wsdl\homologacao\AN\HANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeManifDest></NFeManifDest>
+      <NFeRecepcaoEvento>wsdl\producao\AN\PANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
 </Webservice>

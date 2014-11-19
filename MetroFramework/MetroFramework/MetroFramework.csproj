@@ -243,6 +243,12 @@
     <EmbeddedResource Include="Controls\MetroGrid.resx">
       <DependentUpon>MetroGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MetroMessageBox.resx">
+      <DependentUpon>MetroMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MetroTaskWindow.resx">
+      <DependentUpon>MetroTaskWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\de\MetroToggle.xml" />
     <EmbeddedResource Include="MessageBox\MetroMessageBoxControl.resx">
       <DependentUpon>MetroMessageBoxControl.cs</DependentUpon>

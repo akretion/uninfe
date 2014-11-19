@@ -185,6 +185,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
+            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "FormNova";
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();

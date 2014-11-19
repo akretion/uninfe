@@ -31,10 +31,7 @@ namespace NFe.UI
                     this.StyleManager = uninfeDummy.mainForm.StyleManager;
                 }
 
-                if (uninfeDummy.mainForm.uTheme == MetroFramework.MetroThemeStyle.Dark)
-                    this.pictureBox1.Image = NFe.UI.Properties.Resources.e112_Back_48__1_;
-                else
-                    this.pictureBox1.Image = NFe.UI.Properties.Resources.e112_Back_48;
+                this.pictureBox1.Image = NFe.UI.Properties.Resources.e112_Back_48;
             }
             catch { }
         }

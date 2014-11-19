@@ -80,6 +80,10 @@
     <Compile Include="ExtensionsMethods\StreamExtensions.cs" />
     <Compile Include="ExtensionsMethods\StringExtensions.cs" />
     <Compile Include="ExtensionsMethods\X509Certificate2Extension.cs" />
+    <Compile Include="Fiorilli\TaquaraSP\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\TaquaraSP\p\FiorilliP.cs" />
+    <Compile Include="Fiorilli\Fiorilli.cs" />
+    <Compile Include="Fiorilli\FiorilliBase.cs" />
     <Compile Include="FolderCompare.cs" />
     <Compile Include="ftplib.cs" />
     <Compile Include="Interface\IEmiteNfIPM.cs" />
@@ -99,6 +103,8 @@
     <Compile Include="SigCorp\BauruSP\h\SigCorpH.cs" />
     <Compile Include="SigCorp\BauruSP\p\SigCorpP.cs" />
     <Compile Include="SigCorp\BotucatuSP\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\LondrinaPR\h\SigCorpH.cs" />
+    <Compile Include="SigCorp\LondrinaPR\p\SigCorpP.cs" />
     <Compile Include="SigCorp\SigCorp.cs" />
     <Compile Include="SigCorp\SigCorpBase.cs" />
     <Compile Include="Smf.cs" />
@@ -120,12 +126,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.gov.pr.londrina.iss.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.gov.pr.londrina.testeiss.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.gov.rs.erechim.nfse.www.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.gov.rs.erechim.nfse.www.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.net.taquarituba.fiorilli.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.net.taquarituba.fiorilli.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -169,7 +195,9 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -216,6 +244,28 @@
     <None Include="Web References\br.com.sigiss.testebauru.h\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.gov.pr.londrina.iss.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.pr.londrina.iss.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.gov.pr.londrina.iss.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.pr.londrina.iss.p\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.pr.londrina.testeiss.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.pr.londrina.testeiss.h\sigiss_ws.wsdl" />
+    <None Include="Web References\br.gov.pr.londrina.testeiss.h\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.pr.londrina.testeiss.h\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.wsdl" />
     <None Include="Web References\br.gov.rs.erechim.nfse.www.h\NfseService_Homolog.xsd">
       <SubType>Designer</SubType>
@@ -232,8 +282,111 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\IssWebWS.wsdl" />
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.h\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\IssWebWS.wsdl" />
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.net.taquarituba.fiorilli.p\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.net.taquarituba.fiorilli.h\</RelPath>
+      <UpdateFromURL>http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.net.taquarituba.fiorilli.p\</RelPath>
+      <UpdateFromURL>http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.pr.londrina.testeiss.h\</RelPath>
+      <UpdateFromURL>http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://bauru.sigiss.com.br/bauru/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.sigiss.bauru.p\</RelPath>
@@ -255,6 +408,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://iss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.pr.londrina.iss.p\</RelPath>
+      <UpdateFromURL>https://iss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://testebauru.sigiss.com.br/testebauru/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

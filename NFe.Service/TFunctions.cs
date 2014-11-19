@@ -757,8 +757,7 @@ namespace NFe.Service
 
                     default:
                         if (!nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.Den) &&
-                            !nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML) &&
-                            !nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retEPEC_XML))
+                            !nomeArqXMLNFe.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
                         {
                             ///
                             /// tipo de arquivo desconhecido
@@ -776,11 +775,11 @@ namespace NFe.Service
                     /// pesquisa na arvore de enviados pelo arquivo da NFe/NFCe
                     /// 
                     string[] fTemp = Directory.GetFiles(emp.PastaXmlEnvio,
-                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.retEPEC_XML : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
+                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.ProcEventoNFe : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
                                                         SearchOption.AllDirectories);
                     if (fTemp.Length == 0)
                         fTemp = Directory.GetFiles(emp.PastaXmlEnviado,
-                                                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.retEPEC_XML : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
+                                                        Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.ProcEventoNFe : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
                                                         SearchOption.AllDirectories);
                     if (fTemp.Length > 0)
                     {
@@ -790,7 +789,7 @@ namespace NFe.Service
                         if (emp.tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
                         {
                             fTemp = Directory.GetFiles(emp.PastaContingencia,
-                                                            Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.PedEPEC) + Propriedade.ExtEnvio.Nfe),
+                                                            Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.PedEve) + Propriedade.ExtEnvio.Nfe),
                                                             SearchOption.AllDirectories);
                             if (fTemp.Length > 0)
                             {

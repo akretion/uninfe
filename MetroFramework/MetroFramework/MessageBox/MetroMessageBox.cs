@@ -138,10 +138,6 @@ namespace MetroFramework
                 }
 
                 MetroMessageBoxControl _control = new MetroMessageBoxControl();
-                if (owner != null)
-                {
-                    _control.BackColor = _owner.BackColor;
-                }
                 _control.Properties.Buttons = buttons;
                 _control.Properties.DefaultButton = defaultbutton;
                 _control.Properties.Icon = icon;
@@ -150,6 +146,7 @@ namespace MetroFramework
                 _control.Padding = new Padding(0, 0, 0, 0);
                 _control.ControlBox = false;
                 _control.ShowInTaskbar = false;
+                
 
                 //if (freeowner)
                     //_control.Dock = DockStyle.Fill;

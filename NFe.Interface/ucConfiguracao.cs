@@ -171,7 +171,7 @@ namespace NFe.Interface
                 if (servico != TipoAplicativo.Nfse)
                 {
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFS), (int)NFe.Components.TipoEmissao.teFS));
-                    arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teDPEC), (int)NFe.Components.TipoEmissao.teDPEC));
+                    arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teEPECeDPEC), (int)NFe.Components.TipoEmissao.teEPECeDPEC));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFSDA), (int)NFe.Components.TipoEmissao.teFSDA));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCAN), (int)NFe.Components.TipoEmissao.teSVCAN));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCRS), (int)NFe.Components.TipoEmissao.teSVCRS));
@@ -440,7 +440,9 @@ namespace NFe.Interface
                            ufCod == 4104303 /*Campo Mourão*/||
                            ufCod == 3537305 /*Penapolis*/||
                            ufCod == 4309209 /*Gravatai*/||
-                           ufCod == 3551702 /*Sertaozinho*/;
+                           ufCod == 3551702 /*Sertaozinho*/||
+                           ufCod == 3553807 /*Taquarituba*/||
+                           ufCod == 3530607 /*Mogi das Cruzes*/;
 
             lblUsuarioWS.Visible = visible;
             lblSenhaWS.Visible = visible;

@@ -9,6 +9,7 @@ using System.Collections;
 
 using NFe.Components;
 using NFe.Settings;
+using NFe.Service;
 
 namespace NFe.Threadings
 {
@@ -58,12 +59,14 @@ namespace NFe.Threadings
 
         void ProcessFiles()
         {
+            int emp = Empresas.FindEmpresaByThread();
             Hashtable OldFiles = new Hashtable();
+            string arqTemp = "";
 
             CancelProcess = false;
             if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
                 CancelProcess = true;
-
+            
             while (!CancelProcess)
             {
                 try
@@ -86,7 +89,7 @@ namespace NFe.Threadings
                                     if (!Functions.FileInUse(fi.FullName))
                                     {
                                         //Definir o nome do arquivo na pasta temp
-                                        string arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
+                                        arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
 
                                         //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
                                         NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
@@ -164,6 +167,7 @@ namespace NFe.Threadings
                 catch (Exception ex)
                 {
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
+                    Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
                 }
                 finally
                 {
@@ -223,5 +227,6 @@ namespace NFe.Threadings
             get { return CancelProcess; }
             set { CancelProcess = value; }
         }
+
     }
 }

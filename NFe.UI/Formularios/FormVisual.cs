@@ -37,7 +37,7 @@ namespace NFe.UI.Formularios
                 this.pnlOptions.Theme = 
                 this.Theme = uninfeDummy.mainForm.uTheme;
 
-            this.metroTile_back.Text = this.Theme == MetroThemeStyle.Dark ? "Branco" : "Preto";
+            this.metroTile_back.Text = "Branco";
             this.Refresh();
         }
 
@@ -53,7 +53,7 @@ namespace NFe.UI.Formularios
 
         private void metroTile_back_Click(object sender, EventArgs e)
         {
-            uninfeDummy.mainForm.uTheme = (uninfeDummy.mainForm.uTheme == MetroThemeStyle.Light) ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+            uninfeDummy.mainForm.uTheme = MetroThemeStyle.Light;
             uninfeDummy.mainForm.updateVisual();
             UpdateControls();
         }

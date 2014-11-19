@@ -92,7 +92,6 @@ namespace NFe.UI
                                 //";*" + Propriedade.ExtEnvio.EnvDownload_XML +
                                 //";*" + Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML +
                                 //";*" + Propriedade.ExtEnvio.EnvRegistroDeSaida_XML +
-                                        ";*" + Propriedade.ExtEnvio.PedEPEC +
                                         ";*" + Propriedade.ExtEnvio.PedEve +
                                         ";*" + Propriedade.ExtEnvio.PedInu_XML +
                                         ";*" + Propriedade.ExtEnvio.PedSit_XML;
@@ -107,7 +106,6 @@ namespace NFe.UI
                                 Propriedade.ExtEnvio.EnvDownload_XML,
                                 Propriedade.ExtEnvio.EnvManifestacao_XML);
                             dlg.Filter += string.Format("|Arquivos de DPEC (*.*{0})|*{0}", Propriedade.ExtEnvio.EnvDPEC_XML);
-                            dlg.Filter += string.Format("|Arquivos de EPEC (*.*{0})|*{0}", Propriedade.ExtEnvio.PedEPEC);
                         }
                         
                         if (!string.IsNullOrEmpty(path))
