@@ -57,8 +57,8 @@ namespace NFe.UI
 
         public void UpdateControles()
         {
-            this.Theme = uninfeDummy.mainForm.uTheme;
-            this.Style = uninfeDummy.mainForm.uStyle;
+            //this.Theme = uninfeDummy.mainForm.uTheme;
+            //this.Style = uninfeDummy.mainForm.uStyle;
 
             this.metroTile_Configuracoes.TileCount = NFe.Settings.Empresas.Configuracoes.Count;
             this.metroTile_excluirLock.Enabled =
@@ -298,6 +298,7 @@ namespace NFe.UI
             this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
         }
 
+        /*
         private void metroTile_visual_Click(object sender, EventArgs e)
         {
             using (NFe.UI.Formularios.FormVisual v = new Formularios.FormVisual())
@@ -305,6 +306,7 @@ namespace NFe.UI
                 v.ShowDialog();
             }
         }
+        */
 
         private void metroTile_doc_Click(object sender, EventArgs e)
         {

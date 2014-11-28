@@ -54,8 +54,8 @@ namespace NFe.UI
 
             var tpage = new MetroFramework.Controls.MetroTabPage();
             tpage.Padding = new Padding(2);
-            tpage.Theme = uninfeDummy.mainForm.uTheme;
-            tpage.Style = uninfeDummy.mainForm.uStyle;
+            //tpage.Theme = uninfeDummy.mainForm.uTheme;
+            //tpage.Style = uninfeDummy.mainForm.uStyle;
 
             switch (id)
             {

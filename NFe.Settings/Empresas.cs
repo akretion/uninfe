@@ -355,39 +355,40 @@ namespace NFe.Settings
         public static X509Certificate2 ResetCertificado(int index)
         {
             Empresa empresa = Empresas.Configuracoes[index];
-
-            empresa.X509Certificado.Reset();
-
-            Thread.Sleep(0);
-
-            empresa.X509Certificado = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
-            //Ajustar o certificado digital de String para o tipo X509Certificate2
-            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-            X509Certificate2Collection collection1 = null;
-            if (!string.IsNullOrEmpty(empresa.CertificadoDigitalThumbPrint))
-                collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, empresa.CertificadoDigitalThumbPrint, false);
-            else
-                collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, empresa.Certificado, false);
-
-            for (int i = 0; i < collection1.Count; i++)
+            if (empresa.UsaCertificado)
             {
-                //Verificar a validade do certificado
-                if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                empresa.X509Certificado.Reset();
+
+                Thread.Sleep(0);
+
+                empresa.X509Certificado = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                //Ajustar o certificado digital de String para o tipo X509Certificate2
+                X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+                store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+                X509Certificate2Collection collection1 = null;
+                if (!string.IsNullOrEmpty(empresa.CertificadoDigitalThumbPrint))
+                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, empresa.CertificadoDigitalThumbPrint, false);
+                else
+                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, empresa.Certificado, false);
+
+                for (int i = 0; i < collection1.Count; i++)
                 {
-                    empresa.X509Certificado = collection1[i];
-                    break;
+                    //Verificar a validade do certificado
+                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                    {
+                        empresa.X509Certificado = collection1[i];
+                        break;
+                    }
                 }
+
+                //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
+                if (empresa.X509Certificado == null && collection1.Count > 0)
+                    empresa.X509Certificado = collection1[0];
             }
-
-            //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
-            if (empresa.X509Certificado == null && collection1.Count > 0)
-                empresa.X509Certificado = collection1[0];
-
             return empresa.X509Certificado;
 
         }

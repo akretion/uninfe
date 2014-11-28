@@ -359,6 +359,12 @@ namespace NFe.Service
                         docXML.OuterXml });
                     break;
 
+                case PadroesNFSe.ISSWEB:
+                    string versao = docXML.DocumentElement.GetElementsByTagName("Versao")[0].InnerText;
+                    string cnpj = docXML.DocumentElement.GetElementsByTagName("CNPJCPFPrestador")[0].InnerText;
+                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cnpj, docXML.OuterXml, versao });
+                    break;
+
                 case PadroesNFSe.GINFES:
                 case PadroesNFSe.THEMA:
                 case PadroesNFSe.SALVADOR_BA:

@@ -30,22 +30,7 @@ namespace NFe.Service
                 Servicos servico = Servicos.Nulo;
                 try
                 {
-                    var extOk = false;
-                    string extensoes = "";
-                    foreach (var pS in typeof(Propriedade.ExtEnvio).GetFields(BindingFlags.Public | BindingFlags.Static))
-                    {
-                        if (extensoes != "") extensoes += ", ";
-                        extensoes += pS.GetValue(null).ToString();
-                        if (arquivo.EndsWith(pS.GetValue(null).ToString(), StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            extOk = true;
-                            break;
-                        }
-                    }
-                    if (!extOk)
-                    {
-                        throw new Exception("Não pode identificar o tipo de arquivo baseado no arquivo '" + arquivo + "'\r\nExtensões permitidas: " + extensoes);
-                    }
+                    ValidarExtensao(arquivo);
 
                     servico = DefinirTipoServico(emp, arquivo);
 
@@ -322,7 +307,8 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.AssinarValidar:
-                            CertVencido(emp);
+                            //Não vou verificar a validade do certificado neste ponto, pois as vezes quero somente validar o XML mesmo com um certificado vencido, e não consigo. Como é somente validação, isso vai facilitar para o desenvolvedor. Wandrey 21/11/2014
+                            //CertVencido(emp);
                             AssinarValidar(arquivo);
                             break;
 
@@ -376,6 +362,26 @@ namespace NFe.Service
                 }
             }
             catch { }
+        }
+
+        private void ValidarExtensao(string arquivo)
+        {
+            var extOk = false;
+            string extensoes = "";
+            foreach (var pS in typeof(Propriedade.ExtEnvio).GetFields(BindingFlags.Public | BindingFlags.Static))
+            {
+                if (extensoes != "") extensoes += ", ";
+                extensoes += pS.GetValue(null).ToString();
+                if (arquivo.EndsWith(pS.GetValue(null).ToString(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    extOk = true;
+                    break;
+                }
+            }
+            if (!extOk)
+            {
+                throw new Exception("Não pode identificar o tipo de arquivo baseado no arquivo '" + arquivo + "'\r\nExtensões permitidas: " + extensoes);
+            }
         }
         #endregion
 
@@ -1210,14 +1216,17 @@ namespace NFe.Service
             for (int i = 0; i < recibos.Count; i++)
             {
                 ReciboCons reciboCons = recibos[i];
-                var tempoConsulta = 2; //reciboCons.tMed;
+                var tempoConsulta = reciboCons.tMed;
 
-                //Vou dar no mínimo 2 segundos para efetuar a consulta do recibo. Wandrey 20/07/2010
+                if (tempoConsulta > 15)
+                    tempoConsulta = 15; //Tempo previsto no manual da SEFAZ, isso foi feito pq o ambiente SVAN está retornando na consulta recibo, tempo superior a 160, mas não está com problema, é erro no calculo deste tempo. Wandrey
+
                 if (tempoConsulta < Empresas.Configuracoes[empresa].TempoConsulta)
                     tempoConsulta = Empresas.Configuracoes[empresa].TempoConsulta;
 
-                if (tempoConsulta < 2)
-                    tempoConsulta = 2;
+                //Vou dar no mínimo 3 segundos para efetuar a consulta do recibo. Wandrey 21/11/2014
+                if (tempoConsulta < 3)
+                    tempoConsulta = 3;
 
                 if (DateTime.Now.Subtract(reciboCons.dPedRec).Seconds >= tempoConsulta)
                 {
@@ -1304,13 +1313,13 @@ namespace NFe.Service
         /// </remarks>
         protected void CertVencido(int emp)
         {
-#if !DEBUG
+//#if !DEBUG
             CertificadoDigital CertDig = new CertificadoDigital();
             if (CertDig.Vencido(emp))
             {
                 throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
             }
-#endif
+//#endif
         }
         #endregion
 

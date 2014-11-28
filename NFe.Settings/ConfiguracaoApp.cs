@@ -980,6 +980,8 @@ namespace NFe.Settings
                     WSDL = temp;
             }
 
+            Console.WriteLine("wsdl: " + WSDL);
+
             if (string.IsNullOrEmpty(WSDL) || !File.Exists(WSDL))
             {
                 if (!File.Exists(WSDL) && !string.IsNullOrEmpty(WSDL))
@@ -1281,7 +1283,7 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se o certificado foi informado
-                    if (validarCertificado)
+                    if (validarCertificado && empresa.UsaCertificado)
                     {
                         if (validou)
                         {

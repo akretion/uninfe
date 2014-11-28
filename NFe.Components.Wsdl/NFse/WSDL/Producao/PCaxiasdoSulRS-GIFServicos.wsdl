@@ -368,7 +368,7 @@
  </binding>
  <service name='ServicosService'>
   <port binding='tns:ServicosBinding' name='ServicosPort'>
-   <soap:address location='http://nfse.caxias.rs.gov.br:8080/portal/Servicos'/>
+   <soap:address location='https://nfse.caxias.rs.gov.br/portal/Servicos'/>
   </port>
  </service>
 </definitions>

@@ -40,6 +40,7 @@
             this.button_selecionar_certificado = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.ckbTemCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             this.txtPinCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtPinCertificado.SelectedText = "";
             this.txtPinCertificado.Size = new System.Drawing.Size(623, 22);
-            this.txtPinCertificado.TabIndex = 3;
+            this.txtPinCertificado.TabIndex = 9;
             this.txtPinCertificado.Text = "Styled Textbox";
             this.txtPinCertificado.UseSelectable = true;
             this.txtPinCertificado.UseStyleColors = true;
@@ -70,7 +71,7 @@
             this.lblPinCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblPinCertificado.Name = "lblPinCertificado";
             this.lblPinCertificado.Size = new System.Drawing.Size(150, 15);
-            this.lblPinCertificado.TabIndex = 57;
+            this.lblPinCertificado.TabIndex = 8;
             this.lblPinCertificado.Text = "PIN Certificado A3 (opcional)";
             // 
             // txtSenhaCertificado
@@ -86,7 +87,7 @@
             this.txtSenhaCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSenhaCertificado.SelectedText = "";
             this.txtSenhaCertificado.Size = new System.Drawing.Size(623, 22);
-            this.txtSenhaCertificado.TabIndex = 2;
+            this.txtSenhaCertificado.TabIndex = 7;
             this.txtSenhaCertificado.Text = "Styled Textbox";
             this.txtSenhaCertificado.UseSelectable = true;
             this.txtSenhaCertificado.UseStyleColors = true;
@@ -100,7 +101,7 @@
             this.lblSenhaCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblSenhaCertificado.Name = "lblSenhaCertificado";
             this.lblSenhaCertificado.Size = new System.Drawing.Size(110, 15);
-            this.lblSenhaCertificado.TabIndex = 55;
+            this.lblSenhaCertificado.TabIndex = 6;
             this.lblSenhaCertificado.Text = "Senha do Certificado";
             // 
             // txtArquivoCertificado
@@ -117,7 +118,7 @@
             this.txtArquivoCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtArquivoCertificado.SelectedText = "";
             this.txtArquivoCertificado.Size = new System.Drawing.Size(623, 22);
-            this.txtArquivoCertificado.TabIndex = 1;
+            this.txtArquivoCertificado.TabIndex = 5;
             this.txtArquivoCertificado.Text = "Styled Textbox";
             this.txtArquivoCertificado.UseSelectable = true;
             this.txtArquivoCertificado.UseStyleColors = true;
@@ -131,7 +132,7 @@
             this.lblArquivoCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblArquivoCertificado.Name = "lblArquivoCertificado";
             this.lblArquivoCertificado.Size = new System.Drawing.Size(241, 15);
-            this.lblArquivoCertificado.TabIndex = 53;
+            this.lblArquivoCertificado.TabIndex = 4;
             this.lblArquivoCertificado.Text = "Local de armazenamento do Certificado Digital";
             // 
             // textBox_dadoscertificado
@@ -149,7 +150,7 @@
             this.textBox_dadoscertificado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_dadoscertificado.SelectedText = "";
             this.textBox_dadoscertificado.Size = new System.Drawing.Size(623, 165);
-            this.textBox_dadoscertificado.TabIndex = 0;
+            this.textBox_dadoscertificado.TabIndex = 3;
             this.textBox_dadoscertificado.Text = "Styled Textbox";
             this.textBox_dadoscertificado.UseSelectable = true;
             this.textBox_dadoscertificado.UseStyleColors = true;
@@ -163,16 +164,16 @@
             this.lblCerificadoInstalado.Margin = new System.Windows.Forms.Padding(3);
             this.lblCerificadoInstalado.Name = "lblCerificadoInstalado";
             this.lblCerificadoInstalado.Size = new System.Drawing.Size(238, 15);
-            this.lblCerificadoInstalado.TabIndex = 50;
+            this.lblCerificadoInstalado.TabIndex = 2;
             this.lblCerificadoInstalado.Text = "Informações do certificado digital selecionado:";
             // 
             // ckbCertificadoInstalado
             // 
             this.ckbCertificadoInstalado.AutoSize = true;
-            this.ckbCertificadoInstalado.Location = new System.Drawing.Point(3, 3);
+            this.ckbCertificadoInstalado.Location = new System.Drawing.Point(140, 3);
             this.ckbCertificadoInstalado.Name = "ckbCertificadoInstalado";
             this.ckbCertificadoInstalado.Size = new System.Drawing.Size(246, 15);
-            this.ckbCertificadoInstalado.TabIndex = 49;
+            this.ckbCertificadoInstalado.TabIndex = 1;
             this.ckbCertificadoInstalado.Text = "Utilizar certificado instalado no Windows ?";
             this.ckbCertificadoInstalado.UseSelectable = true;
             this.ckbCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbCertificadoInstalado_CheckedChanged);
@@ -198,11 +199,23 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // ckbTemCertificadoInstalado
+            // 
+            this.ckbTemCertificadoInstalado.AutoSize = true;
+            this.ckbTemCertificadoInstalado.Location = new System.Drawing.Point(3, 3);
+            this.ckbTemCertificadoInstalado.Name = "ckbTemCertificadoInstalado";
+            this.ckbTemCertificadoInstalado.Size = new System.Drawing.Size(118, 15);
+            this.ckbTemCertificadoInstalado.TabIndex = 0;
+            this.ckbTemCertificadoInstalado.Text = "Utilizar certificado";
+            this.ckbTemCertificadoInstalado.UseSelectable = true;
+            this.ckbTemCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbTemCertificadoInstalado_CheckedChanged);
+            // 
             // userConfiguracao_certificado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.ckbTemCertificadoInstalado);
             this.Controls.Add(this.txtPinCertificado);
             this.Controls.Add(this.lblPinCertificado);
             this.Controls.Add(this.txtSenhaCertificado);
@@ -235,5 +248,6 @@
         private MetroFramework.Controls.MetroCheckBox ckbCertificadoInstalado;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private MetroFramework.Controls.MetroCheckBox ckbTemCertificadoInstalado;
     }
 }

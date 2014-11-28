@@ -80,7 +80,7 @@ namespace UniNFeServico
             else
                 foreach (Empresa empresa in Empresas.Configuracoes)
                 {
-                    if (empresa.X509Certificado == null)
+                    if (empresa.X509Certificado == null && empresa.UsaCertificado)
                     {
                         msg = "Não pode ler o certificado da empresa: " + empresa.CNPJ + "=>" + empresa.Nome + "=>" + empresa.Servico.ToString();
 

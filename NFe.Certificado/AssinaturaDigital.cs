@@ -213,18 +213,21 @@ namespace NFe.Certificado
         /// <date>16/04/2009</date>
         public void Assinar(string arqXMLAssinar, int emp, int UFCod)
         {
-            TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod);
-
-            if (!String.IsNullOrEmpty(v.TagAssinatura))
+            if (Empresas.Configuracoes[emp].UsaCertificado)
             {
-                if (!Assinado(arqXMLAssinar, v.TagAssinatura))
-                    this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
-            }
+                TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod);
 
-            //Assinar o lote
-            if (!String.IsNullOrEmpty(v.TagLoteAssinatura))
-                if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
-                    this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                if (!String.IsNullOrEmpty(v.TagAssinatura))
+                {
+                    if (!Assinado(arqXMLAssinar, v.TagAssinatura))
+                        this.Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                }
+
+                //Assinar o lote
+                if (!String.IsNullOrEmpty(v.TagLoteAssinatura))
+                    if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
+                        this.Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+            }
         }
 
         /// <summary>

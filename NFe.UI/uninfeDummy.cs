@@ -58,7 +58,6 @@ namespace NFe.UI
 
         public static DateTime UltimoAcessoConfiguracao { get; set; }
         public static Form_Main mainForm { get; set; }
-        //public static bool showError { get; set; }
         public static uninfeOpcoes2 opServicos { get; set; }
 
         private static NFe.Components.XMLIniFile _xml;
@@ -141,23 +140,12 @@ namespace NFe.UI
             if (Xcontrol == null)
                 return;
 
-            /*
-            var stylesComponents = Xcontrol.Controls.Cast<object>()
-                                       //.Where(obj => !ReferenceEquals(obj, this))
-                                       .OfType<MetroFramework.Interfaces.IMetroStyledComponent>();
-            foreach (var c in stylesComponents)
-            {
-                c.InternalStyleManager = uninfeDummy.mainForm.metroStyleManager1;
-                ClearControls(c as Control, clear, inverteTheme);
-            }
-            return;
-            */
-
-            MetroFramework.MetroThemeStyle uTheme = uninfeDummy.mainForm.uTheme;
-            if (inverteTheme)
-            {
-                uTheme = MetroFramework.MetroThemeStyle.Light;
-            }
+            MetroFramework.MetroThemeStyle uTheme = uninfeDummy.mainForm.metroStyleManager1.Theme;//.uTheme;
+            /* */
+            //if (inverteTheme)
+            //{
+                //uTheme = MetroFramework.MetroThemeStyle.Light;
+            //}
             //return;
             if (Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroUserControl)) ||
                 Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroTabPage)) ||
@@ -167,39 +155,23 @@ namespace NFe.UI
                 if (Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Forms.MetroForm)))
                 {
                     ((MetroFramework.Interfaces.IMetroForm)Xcontrol).Theme = uTheme;
-                    ((MetroFramework.Interfaces.IMetroForm)Xcontrol).Style = uninfeDummy.mainForm.uStyle;
-                    ((MetroFramework.Interfaces.IMetroForm)Xcontrol).StyleManager = uninfeDummy.mainForm.StyleManager;
+                    ((MetroFramework.Interfaces.IMetroForm)Xcontrol).Style = uninfeDummy.mainForm.metroStyleManager1.Style;//.uStyle;
+                    //((MetroFramework.Interfaces.IMetroForm)Xcontrol).StyleManager = uninfeDummy.mainForm.StyleManager;
                 }
                 else
                 {
                     ((MetroFramework.Interfaces.IMetroControl)Xcontrol).Theme = uTheme;
-                    ((MetroFramework.Interfaces.IMetroControl)Xcontrol).Style = uninfeDummy.mainForm.uStyle;
-                    ((MetroFramework.Interfaces.IMetroControl)Xcontrol).StyleManager = uninfeDummy.mainForm.StyleManager;
+                    ((MetroFramework.Interfaces.IMetroControl)Xcontrol).Style = uninfeDummy.mainForm.metroStyleManager1.Style;//.uStyle;
+                    //((MetroFramework.Interfaces.IMetroControl)Xcontrol).StyleManager = uninfeDummy.mainForm.StyleManager;
                 }
             }
-
-            //Console.WriteLine(Xcontrol.Name+": "+uninfeDummy.uStyle + "  " + uninfeDummy.uTheme);
-
-            //System.Drawing.Color backColor = mainForm.metroStyleManager1.GetThemeColor("*.BackColor.*");
-            //System.Drawing.Color foreColorNormal = mainForm.metroStyleManager1.GetThemeColor("*.ForeColor.Normal");
-            //System.Drawing.Color foreColorDisabled = mainForm.metroStyleManager1.GetThemeColor("*.ForeColor.Disabled");
-            //System.Windows.Forms.MessageBox.Show(backColor.ToString() + "\r\n" + foreColorNormal.ToString());
+            /* */
 
             foreach (Control control in Xcontrol.Controls)
             {
                 if (control.Controls.Count > 0)
                 {
-                    // Console.WriteLine("..." + control.GetType().ToString());
                     ClearControls(control, clear, inverteTheme);
-                }
-
-                //Console.WriteLine(control.Name + ": " + control.Controls.Count.ToString());
-
-                if (control.GetType().IsAssignableFrom(typeof(TextBox)) ||
-                    control.GetType().IsAssignableFrom(typeof(ComboBox)))
-                {
-                    //control.BackColor = backColor;
-                    //control.ForeColor = control.Enabled ? foreColorNormal : foreColorDisabled;
                 }
 
                 if (clear)
@@ -216,12 +188,15 @@ namespace NFe.UI
                 }
                 NFe.Components.Functions.SetProperty(control, "UseStyleColors", false);
 
-                try { ((MetroFramework.Interfaces.IMetroControl)control).Theme = uTheme; }
-                catch { }
-                try { ((MetroFramework.Interfaces.IMetroControl)control).Style = uninfeDummy.mainForm.uStyle; }
-                catch { }
-                try { ((MetroFramework.Interfaces.IMetroControl)control).StyleManager = uninfeDummy.mainForm.StyleManager; }
-                catch { }
+                if (control is MetroFramework.Interfaces.IMetroControl)
+                {
+                    try {
+                        ((MetroFramework.Interfaces.IMetroControl)control).Theme = mainForm.metroStyleManager1.Theme;
+                        ((MetroFramework.Interfaces.IMetroControl)control).Style = mainForm.metroStyleManager1.Style;
+                        //((MetroFramework.Interfaces.IMetroControl)control).StyleManager = mainForm.metroStyleManager1; 
+                    }
+                    catch { }
+                }
             }
         }
 

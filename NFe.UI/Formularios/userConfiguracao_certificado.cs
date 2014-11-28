@@ -35,45 +35,49 @@ namespace NFe.UI.Formularios
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 210;
+            ckbTemCertificadoInstalado.Checked = empresa.UsaCertificado;
 
-            if (!string.IsNullOrEmpty(empresa.CNPJ))
+            oMeuCert = null;
+
+            if (empresa.UsaCertificado)
             {
-                try
+                if (!string.IsNullOrEmpty(empresa.CNPJ))
                 {
-                    empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
+                    try
+                    {
+                        empresa.X509Certificado = empresa.BuscaConfiguracaoCertificado();
+                    }
+                    catch
+                    {
+                        //Se der algum erro na hora de buscar o certificado, o sistema tem que permitir o usuário continuar com a configuração para que ele acerte o erro. Wandrey 19/09/2014
+                    }
+                    oMeuCert = empresa.X509Certificado;
                 }
-                catch
+
+                ckbCertificadoInstalado.Checked = empresa.CertificadoInstalado;
+                if (empresa.CertificadoInstalado)
                 {
-                    //Se der algum erro na hora de buscar o certificado, o sistema tem que permitir o usuário continuar com a configuração para que ele acerte o erro. Wandrey 19/09/2014
+                    DemonstraDadosCertificado();
+                    txtPinCertificado.Text = empresa.CertificadoPIN;
                 }
-
-                oMeuCert = empresa.X509Certificado;
+                else
+                {
+                    txtArquivoCertificado.Text = empresa.CertificadoArquivo;
+                    txtSenhaCertificado.Text = empresa.CertificadoSenha;
+                }
+                ckbCertificadoInstalado_CheckedChanged(null, null);
             }
-            else
-                oMeuCert = null;
-
-            ckbCertificadoInstalado.Checked = empresa.CertificadoInstalado;
-            if (empresa.CertificadoInstalado)
-            {
-                DemonstraDadosCertificado();
-                txtPinCertificado.Text = empresa.CertificadoPIN;
-            }
-            else
-            {
-                txtArquivoCertificado.Text = empresa.CertificadoArquivo;
-                txtSenhaCertificado.Text = empresa.CertificadoSenha;
-            }
-            ckbCertificadoInstalado_CheckedChanged(null, null);
         }
 
         public void Validar()
         {
-            empresa.CertificadoInstalado = ckbCertificadoInstalado.Checked;
-            empresa.CertificadoArquivo = txtArquivoCertificado.Text;
-            empresa.CertificadoSenha = txtSenhaCertificado.Text;
-            empresa.Certificado = (this.oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString());
-            empresa.CertificadoDigitalThumbPrint = (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint);
-            empresa.CertificadoPIN = txtPinCertificado.Text;
+            empresa.CertificadoInstalado = ckbCertificadoInstalado.Checked && ckbTemCertificadoInstalado.Checked;
+            empresa.CertificadoArquivo = ckbTemCertificadoInstalado.Checked ? txtArquivoCertificado.Text : "";
+            empresa.CertificadoSenha = ckbTemCertificadoInstalado.Checked ? txtSenhaCertificado.Text : "";
+            empresa.Certificado = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString()) : "");
+            empresa.CertificadoDigitalThumbPrint = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
+            empresa.CertificadoPIN = ckbTemCertificadoInstalado.Checked ? txtPinCertificado.Text : "";
+            empresa.UsaCertificado = ckbTemCertificadoInstalado.Checked;
         }
 
         public void FocusFirstControl()
@@ -139,41 +143,51 @@ namespace NFe.UI.Formularios
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
-            if (oMeuCert != null)
+            if (this.ckbTemCertificadoInstalado.Checked)
             {
-                DateTime hoje = DateTime.Now;
-                TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
-                string mensagemRestante;
-
-                if (dif.Days > 0)
+                if (oMeuCert != null)
                 {
-                    mensagemRestante = "Faltam " + dif.Days + " dias para vencer o certificado.";
+                    DateTime hoje = DateTime.Now;
+                    TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
+                    string mensagemRestante;
+
+                    if (dif.Days > 0)
+                    {
+                        mensagemRestante = "Faltam " + dif.Days + " dias para vencer o certificado.";
+                    }
+                    else
+                    {
+                        mensagemRestante = "Certificado vencido a " + (dif.Days) * -1 + " dias.";
+                        if (this.textBox_dadoscertificado.BackColor != Color.Red)
+                            this.textBox_dadoscertificado.BackColor = Color.Red;
+                    }
+                    this.textBox_dadoscertificado.Text =
+                        "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
+                        "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter + "\r\n" + mensagemRestante + "\r\n\r\n" +
+                        "[ThumbPrint]\r\n" + oMeuCert.Thumbprint;
                 }
                 else
                 {
-                    mensagemRestante = "Certificado vencido a " + (dif.Days) * -1 + " dias.";
-                    if (this.textBox_dadoscertificado.BackColor != Color.Red)
-                        this.textBox_dadoscertificado.BackColor = Color.Red;
+                    // Comparação feita para demonstrar possiveis certificados A3 que podem não estar presentes ou detectados. Renan - 18/06/2013
+                    if (string.IsNullOrEmpty(this.empresa.Certificado))
+                    {
+                        textBox_dadoscertificado.Clear();
+                    }
+                    else
+                    {
+                        this.textBox_dadoscertificado.Text =
+                            "[Sujeito]\r\n" + this.empresa.Certificado + "\r\n\r\n" +
+                            "[ThumbPrint]\r\n" + this.empresa.CertificadoDigitalThumbPrint + "\r\n\r\n" +
+                            "[Alerta]\r\n" + "Certificado não foi Detectado na Estação! Podem ocorrer erros na emissão de documentos.";
+                    }
                 }
-                this.textBox_dadoscertificado.Text =
-                    "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
-                    "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter + "\r\n" + mensagemRestante + "\r\n\r\n" +
-                    "[ThumbPrint]\r\n" + oMeuCert.Thumbprint;
             }
             else
             {
-                // Comparação feita para demonstrar possiveis certificados A3 que podem não estar presentes ou detectados. Renan - 18/06/2013
-                if (string.IsNullOrEmpty(this.empresa.Certificado))
-                {
-                    textBox_dadoscertificado.Clear();
-                }
-                else
-                {
-                    this.textBox_dadoscertificado.Text =
-                        "[Sujeito]\r\n" + this.empresa.Certificado + "\r\n\r\n" +
-                        "[ThumbPrint]\r\n" + this.empresa.CertificadoDigitalThumbPrint + "\r\n\r\n" +
-                        "[Alerta]\r\n" + "Certificado não foi Detectado na Estação! Podem ocorrer erros na emissão de documentos.";
-                }
+                this.textBox_dadoscertificado.Clear();
+                this.txtArquivoCertificado.Clear();
+                this.txtPinCertificado.Clear();
+                this.txtSenhaCertificado.Clear();
             }
         }
         #endregion
@@ -219,6 +233,18 @@ namespace NFe.UI.Formularios
 
         private void txtArquivoCertificado_TextChanged(object sender, EventArgs e)
         {
+            if (changeEvent != null)
+                changeEvent(sender, e);
+        }
+
+        private void ckbTemCertificadoInstalado_CheckedChanged(object sender, EventArgs e)
+        {
+            this.ckbCertificadoInstalado.Enabled =
+                this.button_selecionar_certificado.Enabled =
+                this.textBox_dadoscertificado.Enabled =
+                this.txtArquivoCertificado.Enabled =
+                this.txtPinCertificado.Enabled =
+                this.txtSenhaCertificado.Enabled = this.ckbTemCertificadoInstalado.Checked;
             if (changeEvent != null)
                 changeEvent(sender, e);
         }

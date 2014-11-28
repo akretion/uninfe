@@ -663,55 +663,55 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBlumenauSC.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoCancelamentoLote_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoCancelamentoLote_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoCancelamentoNFe_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoCancelamentoNFe_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoConsultaCNPJ_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoConsultaCNPJ_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoConsultaLote_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoConsultaLote_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoConsultaNFePeriodo_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoConsultaNFePeriodo_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoConsultaNFe_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoConsultaNFe_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoEnvioLoteRPS_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoEnvioLoteRPS_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoEnvioRPS_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoEnvioRPS_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\PedidoInformacoesLote_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\PedidoInformacoesLote_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoCancelamentoNFe_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoCancelamentoNFe_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoConsultaCNPJ_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoConsultaCNPJ_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoConsulta_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoConsulta_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoEnvioLoteRPS_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoEnvioLoteRPS_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoEnvioRPS_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoEnvioRPS_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\RetornoInformacoesLote_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\RetornoInformacoesLote_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\TiposNFe_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\TiposNFe_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAUSC\xmldsig-core-schema_v01.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\BLUMENAU_SC\xmldsig-core-schema_v01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -995,19 +995,19 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\ES\PESNfeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\DadosComplementares.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\DadosComplementares.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\Deducoes.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\Deducoes.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\nfse_salvador.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\nfse_salvador.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\ServicosComplementares.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\ServicosComplementares.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADORBA\xmldsig-core-schema20020212.xsd">
+    <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\schemas\NFSe\DUETO\CoreSchema.xsd">
@@ -2086,6 +2086,67 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSEntrada.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSSaida.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMogidasCruzesSP-SMARAPDWSUtil.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeAutorizacao3_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeRetAutorizacao3_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeStatusServico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\FINTEL\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\FINTEL\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPontaGrossaPR-FINTELServices.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPontaGrossaPR-FINTELServices.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFarroupilhaRS-GIFServicos.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-GIFServicos.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRezendeRJTIPLAN-nfse.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoGoncaloRJ-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTremembeSP-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSWEB\XSDISSECancelaNFe.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSWEB\XSDISSEConsultaNota.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSWEB\XSDNFEletronica.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ISSWEB\XSDRetorno.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMairipora-ISSWEB.wsdl">
+      <SubType>UserControl</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMairipora-ISSWEB.wsdl">
+      <SubType>UserControl</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

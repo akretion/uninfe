@@ -788,6 +788,23 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
+                #region ISSWEB
+                case PadroesNFSe.ISSWEB:
+                    switch (servico)
+                    {
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNotaFiscal";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNotaFiscalEletronica";
+                            break;
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = taHomologacao ? "EnviarLoteNotaFiscalDeTeste" : "EnviarLoteNotaFiscal";
+                            break;
+                    }
+                    break;
+                #endregion
+
                 #region GINFES
                 case PadroesNFSe.GINFES:
                     switch (servico)
@@ -1275,20 +1292,36 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.ConsultarLoteRps:
-                            retorna = "ConsultarLoteRPS";
+                            if (cMunicipio.Equals(3304201))
+                                retorna = "ConsultarLoteRps";
+                            else
+                                retorna = "ConsultarLoteRPS";
                             break;
+
                         case Servicos.ConsultarNfse:
                             retorna = "ConsultarNfse";
                             break;
+
                         case Servicos.ConsultarNfsePorRps:
-                            retorna = "ConsultarNfseRPS";
+                            if (cMunicipio.Equals(3304201))
+                                retorna = "ConsultarNfsePorRps";
+                            else
+                                retorna = "ConsultarNfseRPS";
+
                             break;
+
                         case Servicos.ConsultarSituacaoLoteRps:
-                            retorna = "ConsultarSituacaoLoteRPS";
+                            if (cMunicipio.Equals(3304201))
+                                retorna = "ConsultarSituacaoLoteRps";
+                            else
+                                retorna = "ConsultarSituacaoLoteRPS";
+
                             break;
+
                         case Servicos.CancelarNfse:
                             retorna = "CancelarNfse";
                             break;
+
                         case Servicos.RecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
@@ -1361,6 +1394,39 @@ namespace NFe.Service
                             break;
                         case Servicos.ConsultarURLNfse:
                             retorna = "urlNfd";
+                            break;
+                        case Servicos.ConsultarURLNfseSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region FINTEL
+                case PadroesNFSe.FINTEL:
+                    switch (servico)
+                    {
+                        case Servicos.RecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.CancelarNfse:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.ConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.ConsultarNfsePorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.ConsultarNfse:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+                        case Servicos.ConsultarSituacaoLoteRps:
+                            retorna = "ConsultarLoteNotasFiscais";
+                            break;
+
+                        case Servicos.ConsultarURLNfse:
+                            retorna = "";
                             break;
                         case Servicos.ConsultarURLNfseSerie:
                             retorna = "";

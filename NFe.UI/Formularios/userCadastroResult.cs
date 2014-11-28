@@ -32,8 +32,8 @@ namespace NFe.UI
                     MetroFramework.Controls.MetroTabPage tb = new MetroFramework.Controls.MetroTabPage();
                     tb.Padding = new System.Windows.Forms.Padding(2);
                     tb.Text = "Consulta-" + (i+1).ToString();
-                    tb.Theme = uninfeDummy.mainForm.uTheme;
-                    tb.Style = uninfeDummy.mainForm.uStyle;
+                    //tb.Theme = uninfeDummy.mainForm.uTheme;
+                    //tb.Style = uninfeDummy.mainForm.uStyle;
 
                     userCadastroResultDados dd = new userCadastroResultDados();
                     tb.Controls.Add(dd);

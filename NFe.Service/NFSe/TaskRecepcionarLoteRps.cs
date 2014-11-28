@@ -92,6 +92,10 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.FINTEL:
+                        cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        break;
+
                     case PadroesNFSe.SYSTEMPRO:
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
@@ -107,12 +111,8 @@ namespace NFe.Service.NFSe
                         sigcorp.EmiteNF(NomeArquivoXML);
                         break;
 
-                    case PadroesNFSe.SMARAPD:
-                        cabecMsg = "";
-                        break;
 
                     case PadroesNFSe.FIORILLI:
-
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         Convert.ToInt32(oDadosEnvLoteRps.cMunicipio),

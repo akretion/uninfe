@@ -212,7 +212,7 @@ namespace NFe.Threadings
                 //criar um buffer para cada empresa que o certificado é A3
                 foreach (Empresa emp in Empresas.Configuracoes)
                 {
-                    if (emp.X509Certificado.IsA3())
+                    if (emp.UsaCertificado && emp.X509Certificado.IsA3())
                     {
                         //-------------------------------------------------------------------------
                         // Usar o subject como chave, pois pode se configurar o mesmo certificado
@@ -256,7 +256,7 @@ namespace NFe.Threadings
                  * Se o certificado for A3, então vai para o Buffer controlado, pois deverá ser executado um de cada vez
                  * 
                  */
-                if (empresa.X509Certificado.IsA3())
+                if (empresa.UsaCertificado && empresa.X509Certificado.IsA3())
                 {
                     //-------------------------------------------------------------------------
                     // Usar o subject como chave, pois pode se configurar o mesmo certificado

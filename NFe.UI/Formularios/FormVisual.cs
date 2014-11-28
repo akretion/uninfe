@@ -28,6 +28,7 @@ namespace NFe.UI.Formularios
 
         private void UpdateControls()
         {
+            /*
             this.metroLabel2.Style = 
                 this.metroButton2.Style =
                 this.pnlOptions.Style = 
@@ -36,25 +37,25 @@ namespace NFe.UI.Formularios
                 this.metroButton2.Theme =
                 this.pnlOptions.Theme = 
                 this.Theme = uninfeDummy.mainForm.uTheme;
-
+            */
             this.metroTile_back.Text = "Branco";
             this.Refresh();
         }
 
         private void mtYellow_Click(object sender, EventArgs e)
         {
-            if (!uninfeDummy.mainForm.uStyle.Equals(((MetroFramework.Controls.MetroTile)sender).Style))
+            //if (!uninfeDummy.mainForm.uStyle.Equals(((MetroFramework.Controls.MetroTile)sender).Style))
             {
-                uninfeDummy.mainForm.uStyle = ((MetroFramework.Controls.MetroTile)sender).Style;
-                uninfeDummy.mainForm.updateVisual();
+                //uninfeDummy.mainForm.uStyle = ((MetroFramework.Controls.MetroTile)sender).Style;
+                //uninfeDummy.mainForm.updateVisual();
                 UpdateControls();
             }
         }
 
         private void metroTile_back_Click(object sender, EventArgs e)
         {
-            uninfeDummy.mainForm.uTheme = MetroThemeStyle.Light;
-            uninfeDummy.mainForm.updateVisual();
+            //uninfeDummy.mainForm.uTheme = MetroThemeStyle.Light;
+            //uninfeDummy.mainForm.updateVisual();
             UpdateControls();
         }
     }

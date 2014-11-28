@@ -496,7 +496,7 @@ namespace NFSe.Components
             {
                 Tag = "p1:PedidoConsultaNFePeriodo",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaNFePeriodo_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoConsultaNFePeriodo_v01.xsd",
                 Descricao = "XML de Consulta de NFSe por Data",
                 TagAssinatura = "p1:PedidoConsultaNFePeriodo",
                 TagAtributoId = "Cabecalho",
@@ -509,7 +509,7 @@ namespace NFSe.Components
             {
                 Tag = "p1:PedidoConsultaNFe",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaNFe_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoConsultaNFe_v01.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
                 TagAssinatura = "p1:PedidoConsultaNFe",
                 TagAtributoId = "Cabecalho",
@@ -522,7 +522,7 @@ namespace NFSe.Components
             {
                 Tag = "p1:PedidoConsultaLote",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoConsultaLote_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoConsultaLote_v01.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "p1:PedidoConsultaLote",
                 TagAtributoId = "Cabecalho",
@@ -535,7 +535,7 @@ namespace NFSe.Components
             {
                 Tag = "PedidoCancelamentoNFe",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoCancelamentoNFe_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoCancelamentoNFe_v01.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "PedidoCancelamentoNFe",
                 TagAtributoId = "Cabecalho",
@@ -548,7 +548,7 @@ namespace NFSe.Components
             {
                 Tag = "p1:PedidoInformacoesLote",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoInformacoesLote_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoInformacoesLote_v01.xsd",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
                 TagAssinatura = "p1:PedidoInformacoesLote",
                 TagAtributoId = "Cabecalho",
@@ -561,7 +561,7 @@ namespace NFSe.Components
             {
                 Tag = "PedidoEnvioLoteRPS",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BLUMENAUSC\\PedidoEnvioLoteRPS_v01.xsd",
+                ArquivoXSD = "NFSe\\BLUMENAU_SC\\PedidoEnvioLoteRPS_v01.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "PedidoEnvioLoteRPS",
                 TagAtributoId = "Cabecalho",
@@ -1145,7 +1145,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Consulta de NFSe por Data",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -1158,7 +1158,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -1171,7 +1171,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Consulta de Situação do Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -1184,7 +1184,7 @@ namespace NFSe.Components
             {
                 Tag = "CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "Pedido",
                 TagAtributoId = "InfPedidoCancelamento",
@@ -1197,7 +1197,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -1210,7 +1210,7 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\SALVADORBA\\nfse_salvador.xsd",
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\nfse_salvador.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfRps",
@@ -2001,6 +2001,118 @@ namespace NFSe.Components
             #endregion
 
             #endregion
+
+            #region FINTEL
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Faixa
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarNfseFaixaEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseFaixaEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Faixa",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region XML de Consulta de NFSe por RPS
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+            });
+            #endregion                       
+            #endregion
+
+            #region ISSWEB
+
+            #region Consulta NFSe
+            SchemaXML.InfSchemas.Add("NFSE-ISSWEB-ISSEConsultaNota", new InfSchema()
+            {
+                Tag = "ISSEConsultaNota",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ISSWEB\\XSDISSEConsultaNota.xsd",
+                Descricao = "XML de Consulta da NFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://186.201.198.98/issweb/webservices/XSDISSEConsultaNota.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-ISSWEB-ISSECancelaNFe", new InfSchema()
+            {
+                Tag = "ISSECancelaNFe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ISSWEB\\XSDISSECancelaNFe.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://186.201.198.98/issweb/webservices/XSDISSECancelaNFe.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSWEB-NFEEletronica", new InfSchema()
+            {
+                Tag = "NFEEletronica",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ISSWEB\\XSDNFEletronica.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAtributoId = "",
+                TagLoteAssinatura = "",
+                TargetNameSpace = "http://186.201.198.98/issweb/webservices/XSDNFEletronica.xsd"
+            });
+            #endregion
+
+            #endregion
+
 
         }
     }

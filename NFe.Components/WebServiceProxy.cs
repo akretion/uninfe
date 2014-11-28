@@ -180,7 +180,7 @@ namespace NFe.Components
                     }
                 }
             }
-            if (Certificado != null)
+            //if (Certificado != null)
                 //Gerar e compilar a classe
                 this.GerarClasse();
         }
@@ -221,9 +221,12 @@ namespace NFe.Components
         {
             //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
             Type tipoInstance = Instance.GetType();
-            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-            Type tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            if (this.oCertificado != null)
+            {
+                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
+                Type tipoClientCertificates = oClientCertificates.GetType();
+                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            }
 
             //Invocar método do serviço
             return tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
@@ -296,9 +299,12 @@ namespace NFe.Components
         {
             //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
             Type tipoInstance = Instance.GetType();
-            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-            Type tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            if (this.oCertificado != null)
+            {
+                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
+                Type tipoClientCertificates = oClientCertificates.GetType();
+                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            }
 
             //Invocar método do serviço
             return (string)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);

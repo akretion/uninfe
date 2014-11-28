@@ -269,10 +269,10 @@
         private System.Windows.Forms.ToolStripMenuItem cmDANFE;
         private System.Windows.Forms.ToolStripMenuItem cmSituacaoServicos;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        public MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private System.Windows.Forms.ToolStripMenuItem cmMunicipios;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }
 

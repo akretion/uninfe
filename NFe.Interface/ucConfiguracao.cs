@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Xml;
 using NFe.Certificado;
 using NFe.Components;
+using NFe.Service;
 using NFe.Settings;
 
 namespace NFe.Interface
@@ -351,7 +352,7 @@ namespace NFe.Interface
                 if (servico == TipoAplicativo.Nfse)
                 {
                     edtCodMun.Text = oEmpresa.UnidadeFederativaCodigo.ToString();
-                    edtPadrao.Text = Functions.PadraoNFSe(oEmpresa.UnidadeFederativaCodigo).ToString();
+                    edtPadrao.Text = Functions.GetEnumDescription(Functions.PadraoNFSe(oEmpresa.UnidadeFederativaCodigo));
                 }
 
                 //Carregar o conteúdo do droplist do tipo de emissão para forçar demonstrar
@@ -643,7 +644,8 @@ namespace NFe.Interface
             {
                 object xuf = comboBox_UF.SelectedValue;
                 edtCodMun.Text = xuf.ToString();
-                edtPadrao.Text = Functions.PadraoNFSe(Convert.ToInt32(xuf)).ToString();
+
+                edtPadrao.Text = Functions.GetEnumDescription(Functions.PadraoNFSe(Convert.ToInt32(xuf)));
 
                 HabilitaUsuarioSenhaWS(Convert.ToInt32(edtCodMun.Text));
             }

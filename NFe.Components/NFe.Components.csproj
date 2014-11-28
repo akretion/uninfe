@@ -103,6 +103,8 @@
     <Compile Include="SigCorp\BauruSP\h\SigCorpH.cs" />
     <Compile Include="SigCorp\BauruSP\p\SigCorpP.cs" />
     <Compile Include="SigCorp\BotucatuSP\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\TremembeSP\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\SaoGoncaloRJ\p\SigCorpP.cs" />
     <Compile Include="SigCorp\LondrinaPR\h\SigCorpH.cs" />
     <Compile Include="SigCorp\LondrinaPR\p\SigCorpP.cs" />
     <Compile Include="SigCorp\SigCorp.cs" />
@@ -121,7 +123,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.sigiss.saogoncalo.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.sigiss.testebauru.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.sigiss.tremembe.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -230,6 +242,20 @@
     <None Include="Web References\br.com.sigiss.botucatu.p\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.com.sigiss.saogoncalo.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.saogoncalo.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.saogoncalo.p\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.saogoncalo.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.saogoncalo.p\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.sigiss.testebauru.h\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -242,6 +268,20 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.sigiss.testebauru.h\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.tremembe.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.tremembe.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.tremembe.p\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.tremembe.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.tremembe.p\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.gov.pr.londrina.iss.p\Reference.map">
@@ -420,6 +460,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://saogoncalo.sigiss.com.br/saogoncalo/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.saogoncalo.p\</RelPath>
+      <UpdateFromURL>https://saogoncalo.sigiss.com.br/saogoncalo/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://testebauru.sigiss.com.br/testebauru/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.sigiss.testebauru.h\</RelPath>
@@ -430,6 +481,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_testebauru_h_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://tremembe.sigiss.com.br/tremembe/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.tremembe.p\</RelPath>
+      <UpdateFromURL>https://tremembe.sigiss.com.br/tremembe/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_tremembe_p_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

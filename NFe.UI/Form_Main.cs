@@ -94,8 +94,12 @@ namespace NFe.UI
                 this.ShowInTaskbar = false;
                 this.notifyIcon1.ShowBalloonTip(6000);
 
-                this.uTheme = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroThemeStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString()));
-                this.uStyle = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroColorStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Style", this.metroStyleManager1.Style.ToString()));
+                try
+                {
+                    //this.uTheme = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroThemeStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString()));
+                    //this.uStyle = NFe.Components.EnumHelper.StringToEnum<MetroFramework.MetroColorStyle>(uninfeDummy.xmlParams.ReadValue(this.Name, "Style", this.metroStyleManager1.Style.ToString()));
+                }
+                catch { }
 
                 ConfiguracaoApp.StartVersoes();
 
@@ -516,6 +520,7 @@ namespace NFe.UI
 
         #region Métodos gerais
 
+        /*
         public MetroFramework.MetroColorStyle uStyle
         {
             get { return this.metroStyleManager1.Style; }
@@ -543,12 +548,13 @@ namespace NFe.UI
                 this.Theme = value;
             }
         }
+        */
 
         void updateSettings()
         {
-            uninfeDummy.xmlParams.WriteValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString());
-            uninfeDummy.xmlParams.WriteValue(this.Name, "Style", this.metroStyleManager1.Style.ToString());
-            uninfeDummy.xmlParams.Save();
+            //uninfeDummy.xmlParams.WriteValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString());
+            //uninfeDummy.xmlParams.WriteValue(this.Name, "Style", this.metroStyleManager1.Style.ToString());
+            //uninfeDummy.xmlParams.Save();
         }
 
         private void SaveForm()

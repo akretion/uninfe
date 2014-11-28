@@ -92,9 +92,17 @@ namespace NFe.UI
             this.Text = NFe.Components.Propriedade.NomeAplicacao + "  (" + NFe.Components.Propriedade.Versao + ")";
             this.MinimumSize = new Size(800, 600);
 
-            this.Theme = uninfeDummy.mainForm.uTheme;
-            this.Style = uninfeDummy.mainForm.uStyle;
-            this.StyleManager = uninfeDummy.mainForm.StyleManager;
+            try
+            {
+                this.StyleManager = ((MetroFramework.Interfaces.IMetroForm)uninfeDummy.mainForm).StyleManager.Clone(this) as MetroFramework.Components.MetroStyleManager;
+            }
+            catch
+            {
+                this.StyleManager = uninfeDummy.mainForm.StyleManager;
+            }
+            //this.Theme = uninfeDummy.mainForm.uTheme;
+            //this.Style = uninfeDummy.mainForm.uStyle;
+            //this.StyleManager = uninfeDummy.mainForm.StyleManager;
 
             uninfeDummy.xmlParams.LoadForm(this, "\\" + opcao.ToString(), true);
 

@@ -137,6 +137,11 @@ namespace NFe.Settings
         /// </summary>
         public int tpEmis { get; set; }
         /// <summary>
+        /// UsaCertificado
+        /// Define se a empresa necessita de um certificado digital para assinatura/transmissao
+        /// </summary>
+        public bool UsaCertificado { get; set; }
+        /// <summary>
         /// Define a utilização do certficado instalado no windows ou através de arquivo
         /// </summary>
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
@@ -397,6 +402,7 @@ namespace NFe.Settings
                     ///
                     /// verifica se precisa de conversao para que a Deserializacao funcione
                     string temp = File.ReadAllText(this.NomeArquivoConfig, Encoding.UTF8);
+
                     if (temp.Contains("<nfe_configuracoes>") || temp.Contains("<CertificadoDigital>"))
                     {
                         File.WriteAllText(this.NomeArquivoConfig + ".old", temp);
@@ -417,12 +423,17 @@ namespace NFe.Settings
                     Empresa t = new Empresa();
                     t = (Empresa)objObjectXMLSerializer.Load(typeof(Empresa), this.NomeArquivoConfig);
 
-                    if (!t.CertificadoInstalado && !string.IsNullOrEmpty(t.CertificadoSenha))
-                        t.CertificadoSenha = Criptografia.descriptografaSenha(t.CertificadoSenha);
+                    if (!temp.Contains("<UsaCertificado>"))
+                        t.UsaCertificado = true;
 
-                    if (!string.IsNullOrEmpty(t.CertificadoPIN))
-                        t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
+                    if (t.UsaCertificado)
+                    {
+                        if (!t.CertificadoInstalado && !string.IsNullOrEmpty(t.CertificadoSenha))
+                            t.CertificadoSenha = Criptografia.descriptografaSenha(t.CertificadoSenha);
 
+                        if (!string.IsNullOrEmpty(t.CertificadoPIN))
+                            t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
+                    }
                     t.Nome = this.Nome;
                     t.CNPJ = this.CNPJ;
                     t.Servico = this.Servico;
@@ -448,44 +459,47 @@ namespace NFe.Settings
         {
             X509Certificate2 x509Cert = null;
 
-            //Certificado instalado no windows
-            if (this.CertificadoInstalado)
+            if (this.UsaCertificado)
             {
-                X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
-                store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-                X509Certificate2Collection collection1 = null;
-                if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
-                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
-                else
-                    collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
-
-                for (int i = 0; i < collection1.Count; i++)
+                //Certificado instalado no windows
+                if (this.CertificadoInstalado)
                 {
-                    //Verificar a validade do certificado
-                    if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                    X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+                    store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                    X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+                    X509Certificate2Collection collection1 = null;
+                    if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
+                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
+                    else
+                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
+
+                    for (int i = 0; i < collection1.Count; i++)
                     {
-                        x509Cert = collection1[i];
-                        break;
+                        //Verificar a validade do certificado
+                        if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
+                        {
+                            x509Cert = collection1[i];
+                            break;
+                        }
                     }
+
+                    //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
+                    if (x509Cert == null && collection1.Count > 0)
+                        x509Cert = collection1[0];
                 }
-
-                //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
-                if (x509Cert == null && collection1.Count > 0)
-                    x509Cert = collection1[0];
-            }
-            else //Certificado está sendo acessado direto do arquivo .PFX
-            {
-                if (string.IsNullOrEmpty(this.CertificadoArquivo))
-                    throw new Exception("Nome do arquivo referente ao certificado digital não foi informado nas configurações do UniNFe.");
-                else if (!string.IsNullOrEmpty(this.CertificadoArquivo) && !File.Exists(this.CertificadoArquivo))
-                    throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", this.CertificadoArquivo));
-
-                using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open))
+                else //Certificado está sendo acessado direto do arquivo .PFX
                 {
-                    byte[] buffer = new byte[fs.Length];
-                    fs.Read(buffer, 0, buffer.Length);
-                    x509Cert = new X509Certificate2(buffer, this.CertificadoSenha);
+                    if (string.IsNullOrEmpty(this.CertificadoArquivo))
+                        throw new Exception("Nome do arquivo referente ao certificado digital não foi informado nas configurações do UniNFe.");
+                    else if (!string.IsNullOrEmpty(this.CertificadoArquivo) && !File.Exists(this.CertificadoArquivo))
+                        throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", this.CertificadoArquivo));
+
+                    using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open))
+                    {
+                        byte[] buffer = new byte[fs.Length];
+                        fs.Read(buffer, 0, buffer.Length);
+                        x509Cert = new X509Certificate2(buffer, this.CertificadoSenha);
+                    }
                 }
             }
             return x509Cert;
@@ -768,6 +782,7 @@ namespace NFe.Settings
                 empresa.EmailDanfe = string.Empty;
 
             empresa.X509Certificado = null;
+            empresa.UsaCertificado = true;
             empresa.CertificadoInstalado = true;
             empresa.CertificadoArquivo =
                 empresa.CertificadoDigitalThumbPrint =
@@ -857,7 +872,8 @@ namespace NFe.Settings
 
                 Empresa dados = new Empresa();
                 this.CopyObjectTo(dados);
-                dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
+                if (dados.UsaCertificado)
+                    dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
 
                 ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
                 objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);

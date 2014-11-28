@@ -141,6 +141,7 @@ namespace NFe.Service
             docEventoOriginal.Load(Functions.StringXmlToStreamUTF8(txt.ReadToEnd()));
             txt.Close();
 
+            /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<retEventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"2.00\">" +
                 "  <infEvento Id=\"ID342130000096132\">" +
@@ -157,6 +158,7 @@ namespace NFe.Service
                 "    <nProt>342130000096132</nProt>" +
                 "</infEvento>" +
                 "</retEventoCTe>";
+             */
 
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(vStrXmlRetorno);
             XmlDocument doc = new XmlDocument();

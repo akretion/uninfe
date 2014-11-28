@@ -352,122 +352,160 @@ namespace NFe.Components
         /// <summary>
         /// Não Identificado
         /// </summary>
+        [Description("Não identificado")]
         NaoIdentificado,
         /// <summary>
         /// Padrão GINFES
         /// </summary>
+        [Description("GINFES")]
         GINFES,
         /// <summary>
         /// Padrão da BETHA Sistemas
         /// </summary>
+        [Description("BETHA")]
         BETHA,
         /// <summary>
         /// Padrão da THEMA Informática
         /// </summary>
+        [Description("THEMA")]
         THEMA,
         /// <summary>
         /// Padrão da prefeitura de Salvador-BA
         /// </summary>
+        [Description("Salvador-BA")]
         SALVADOR_BA,
         /// <summary>
         /// Padrão da prefeitura de Canoas-RS
         /// </summary>
+        [Description("Canoas-RS")]
         CANOAS_RS,
         /// <summary>
         /// Padrão da ISS Net
         /// </summary>    
+        [Description("ISS Net")]
         ISSNET,
         /// <summary>
         /// Padrão da prefeitura de Apucarana-PR
         /// Padrão da prefeitura de Aracatuba-SP
         /// </summary>
+        [Description("ISS On-line")]
         ISSONLINE,
         /// <summary>
         /// Padrão da prefeitura de Blumenau-SC
         /// </summary>
+        [Description("Blumenau-SC")]
         BLUMENAU_SC,
         /// <summary>
         /// Padrão da prefeitura de Juiz de Fora-MG
         /// </summary>
+        [Description("BHISS")]
         BHISS,
         /// <summary>
         /// Padrao GIF
         /// Prefeitura de Campo Bom-RS
         /// </summary>
+        [Description("GIF/Infisc")]
         GIF,
         /// <summary>
         /// Padrão IPM
         /// <para>Prefeitura de Campo Mourão.</para>
         /// </summary>
+        [Description("IPM")]
         IPM,
         /// <summary>
         /// Padrão DUETO
         /// Prefeitura de Nova Santa Rita - RS
         /// </summary>
+        [Description("Dueto")]
         DUETO,
         /// <summary>
         /// Padrão WEB ISS
         /// Prefeitura de Feira de Santana - BA
         /// </summary>
+        [Description("Web ISS")]
         WEBISS,
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica Paulistana -
         /// Prefeitura São Paulo - SP
         /// </summary>
+        [Description("Paulistana")]
         PAULISTANA,
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica Porto Velhense
         /// Prefeitura de Porto Velho - RO
         /// </summary>
+        [Description("Portovelhense")]
         PORTOVELHENSE,
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica da PRONIN (GovBR)
         /// Prefeitura de Mirassol - SP
         /// </summary>
+        [Description("Pronin")]
         PRONIN,
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica ISS-ONline da 4R Sistemas
         /// Prefeitura de Governador Valadares - SP
         /// </summary>
+        [Description("ISS On-Line/4R")]
         ISSONLINE4R,
         /// <summary>
         /// Padrão Nota Fiscal eletrônica DSF 
         /// Prefeitura de Campinas - SP
         /// Prefeitura de Campo Grande - MS
         /// </summary>
+        [Description("DSF")]
         DSF,
         /// <summary>
         /// Padrão Tecno Sistemas
         /// Prefeitura de Portão - RS
         /// </summary>
+        [Description("Tecno Sistemas")]
         TECNOSISTEMAS,
         /// <summary>
         /// Padrão System-PRO
         /// Prefeitura de Erechim - RS
         /// </summary>
+        [Description("System-Pro")]
         SYSTEMPRO,
         /// <summary>
         /// Preifetura de Macaé - RJ
         /// </summary>
+        [Description("Tiplan")]
         TIPLAN,
         /// <summary>
         /// Prefeitura do Rio de Janeiro - RJ
         /// </summary>
+        [Description("Carioca")]
         CARIOCA,
         /// <summary>
         /// Prefeitura de Bauru - SP
         /// </summary>
+        [Description("SigCorp/SigISS")]
         SIGCORP_SIGISS,
         /// <summary>
         /// Padrão SmaraPD
         /// Prefeitura de Sertãozinho - SP
         /// </summary>
+        [Description("SmaraPD")]
         SMARAPD,
         /// <summary>
         /// Padrão Fiorilli
         /// Prefeitura de Taquara - SP
         /// </summary>
-        FIORILLI
+        [Description("Fiorilli")]
+        FIORILLI,
+        /// <summary>
+        /// Padrão Fintel
+        /// Prefeitura de Ponta Grossa - PR
+        /// </summary>
+        [Description("Fintel")]
+        FINTEL,
+        /// <summary>
+        /// Padrão ISSWEB
+        /// Prefeitura de Mairipora - SP
+        /// </summary>
+        [Description("ISSWeb")]
+        ISSWEB
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
