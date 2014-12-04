@@ -2113,7 +2113,9 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HFarroupilhaRS-GIFServicos.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-GIFServicos.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-GIFServicos.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PRezendeRJTIPLAN-nfse.wsdl" />

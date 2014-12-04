@@ -41,16 +41,16 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ckbTemCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
+            this.lblProvider = new MetroFramework.Controls.MetroLabel();
+            this.cboProviders = new MetroFramework.Controls.MetroComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPinCertificado
             // 
-            this.txtPinCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPinCertificado.Lines = new string[] {
         "Styled Textbox"};
-            this.txtPinCertificado.Location = new System.Drawing.Point(3, 321);
+            this.txtPinCertificado.Location = new System.Drawing.Point(3, 292);
             this.txtPinCertificado.MaxLength = 32767;
             this.txtPinCertificado.Name = "txtPinCertificado";
             this.txtPinCertificado.PasswordChar = '#';
@@ -67,7 +67,7 @@
             // 
             this.lblPinCertificado.AutoSize = true;
             this.lblPinCertificado.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblPinCertificado.Location = new System.Drawing.Point(3, 302);
+            this.lblPinCertificado.Location = new System.Drawing.Point(3, 273);
             this.lblPinCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblPinCertificado.Name = "lblPinCertificado";
             this.lblPinCertificado.Size = new System.Drawing.Size(150, 15);
@@ -80,7 +80,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSenhaCertificado.Lines = new string[] {
         "Styled Textbox"};
-            this.txtSenhaCertificado.Location = new System.Drawing.Point(3, 276);
+            this.txtSenhaCertificado.Location = new System.Drawing.Point(3, 247);
             this.txtSenhaCertificado.MaxLength = 32767;
             this.txtSenhaCertificado.Name = "txtSenhaCertificado";
             this.txtSenhaCertificado.PasswordChar = '#';
@@ -97,7 +97,7 @@
             // 
             this.lblSenhaCertificado.AutoSize = true;
             this.lblSenhaCertificado.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblSenhaCertificado.Location = new System.Drawing.Point(3, 257);
+            this.lblSenhaCertificado.Location = new System.Drawing.Point(3, 228);
             this.lblSenhaCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblSenhaCertificado.Name = "lblSenhaCertificado";
             this.lblSenhaCertificado.Size = new System.Drawing.Size(110, 15);
@@ -111,7 +111,7 @@
             this.txtArquivoCertificado.IconRight = true;
             this.txtArquivoCertificado.Lines = new string[] {
         "Styled Textbox"};
-            this.txtArquivoCertificado.Location = new System.Drawing.Point(3, 232);
+            this.txtArquivoCertificado.Location = new System.Drawing.Point(3, 203);
             this.txtArquivoCertificado.MaxLength = 32767;
             this.txtArquivoCertificado.Name = "txtArquivoCertificado";
             this.txtArquivoCertificado.PasswordChar = '\0';
@@ -128,7 +128,7 @@
             // 
             this.lblArquivoCertificado.AutoSize = true;
             this.lblArquivoCertificado.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblArquivoCertificado.Location = new System.Drawing.Point(3, 213);
+            this.lblArquivoCertificado.Location = new System.Drawing.Point(3, 184);
             this.lblArquivoCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblArquivoCertificado.Name = "lblArquivoCertificado";
             this.lblArquivoCertificado.Size = new System.Drawing.Size(241, 15);
@@ -149,7 +149,7 @@
             this.textBox_dadoscertificado.ReadOnly = true;
             this.textBox_dadoscertificado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_dadoscertificado.SelectedText = "";
-            this.textBox_dadoscertificado.Size = new System.Drawing.Size(623, 165);
+            this.textBox_dadoscertificado.Size = new System.Drawing.Size(623, 135);
             this.textBox_dadoscertificado.TabIndex = 3;
             this.textBox_dadoscertificado.Text = "Styled Textbox";
             this.textBox_dadoscertificado.UseSelectable = true;
@@ -210,12 +210,34 @@
             this.ckbTemCertificadoInstalado.UseSelectable = true;
             this.ckbTemCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbTemCertificadoInstalado_CheckedChanged);
             // 
+            // lblProvider
+            // 
+            this.lblProvider.AutoSize = true;
+            this.lblProvider.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblProvider.Location = new System.Drawing.Point(3, 316);
+            this.lblProvider.Margin = new System.Windows.Forms.Padding(3);
+            this.lblProvider.Name = "lblProvider";
+            this.lblProvider.Size = new System.Drawing.Size(321, 15);
+            this.lblProvider.TabIndex = 59;
+            this.lblProvider.Text = "Provedor Certificado A3 (obrigatório se houver PIN informado)";
+            // 
+            // cboProviders
+            // 
+            this.cboProviders.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cboProviders.FormattingEnabled = true;
+            this.cboProviders.ItemHeight = 19;
+            this.cboProviders.Location = new System.Drawing.Point(3, 333);
+            this.cboProviders.Name = "cboProviders";
+            this.cboProviders.Size = new System.Drawing.Size(622, 25);
+            this.cboProviders.TabIndex = 60;
+            this.cboProviders.UseSelectable = true;
+            this.cboProviders.TextChanged += new System.EventHandler(this.cboProviders_TextChanged);
+            // 
             // userConfiguracao_certificado
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.ckbTemCertificadoInstalado);
+            this.Controls.Add(this.lblProvider);
             this.Controls.Add(this.txtPinCertificado);
             this.Controls.Add(this.lblPinCertificado);
             this.Controls.Add(this.txtSenhaCertificado);
@@ -226,8 +248,9 @@
             this.Controls.Add(this.textBox_dadoscertificado);
             this.Controls.Add(this.lblCerificadoInstalado);
             this.Controls.Add(this.ckbCertificadoInstalado);
+            this.Controls.Add(this.cboProviders);
             this.Name = "userConfiguracao_certificado";
-            this.Size = new System.Drawing.Size(715, 358);
+            this.Size = new System.Drawing.Size(715, 359);
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -249,5 +272,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private MetroFramework.Controls.MetroCheckBox ckbTemCertificadoInstalado;
+        private MetroFramework.Controls.MetroLabel lblProvider;
+        private MetroFramework.Controls.MetroComboBox cboProviders;
     }
 }

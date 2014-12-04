@@ -263,6 +263,14 @@ namespace NFe.UI
 
         private void metroTile_update_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig) && uninfeDummy.TempoExpirou())
+            {
+                if (!FormSenha.SolicitaSenha(true))
+                    return;
+
+                uninfeDummy.UltimoAcessoConfiguracao = DateTime.Now;
+            }
+
             Formularios.FormUpdate FormUp = new Formularios.FormUpdate();
             FormUp.ShowDialog();
             FormUp.Dispose();

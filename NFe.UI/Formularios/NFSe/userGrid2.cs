@@ -25,7 +25,11 @@ namespace NFe.UI.Formularios.NFSe
 
             uninfeDummy.ClearControls(this, true, false);
 
-            this.colPadrao_D.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+            //this.colPadrao_D.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+            colPadrao_D.Sorted = false;
+            colPadrao_D.DataSource = WebServiceNFSe.PadroesNFSeListDataSource;
+            colPadrao_D.ValueMember = "fromType";
+            colPadrao_D.DisplayMember = "fromDescription";
         }
 
         private void dgvDireto_CellEndEdit(object sender, DataGridViewCellEventArgs e)

@@ -12,6 +12,7 @@ using NFe.Settings;
 using NFe.Components;
 using System.Security.Cryptography;
 using System.Collections;
+using System.Security;
 
 namespace NFe.Certificado
 {
@@ -122,8 +123,19 @@ namespace NFe.Certificado
                             // Create a SignedXml object.
                             SignedXml signedXml = new SignedXml(doc);
 
-                            // Add the key to the SignedXml document
-                            signedXml.SigningKey = x509Cert.PrivateKey;
+                            //A3
+                            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                            string provedor = Empresas.Configuracoes[empresa].ProviderCertificado; //"SafeSign Standard Cryptographic Service Provider" default
+                            int typeProvider = Convert.ToInt32(Empresas.Configuracoes[empresa].ProviderTypeCertificado);
+                            string pin = Empresas.Configuracoes[empresa].CertificadoPIN;
+
+                            if (!String.IsNullOrEmpty(pin) && clsX509Certificate2Extension.IsA3(x509Cert))
+                            {
+                                rsa = LerDispositivo(pin, typeProvider, provedor);
+                                signedXml.SigningKey = rsa;
+                            }
+                            else
+                                signedXml.SigningKey = x509Cert.PrivateKey;
 
                             // Add an enveloped transformation to the reference.
                             XmlDsigEnvelopedSignatureTransform env = new XmlDsigEnvelopedSignatureTransform();
@@ -204,6 +216,28 @@ namespace NFe.Certificado
             }
         }
 
+        public RSACryptoServiceProvider LerDispositivo(string PIN, int providerType, string provider)
+        {
+            CspParameters csp = new CspParameters(providerType, provider);
+
+            SecureString ss = new SecureString();
+            foreach (char a in PIN)
+            {
+                ss.AppendChar(a);
+            }
+
+            csp.KeyPassword = ss;
+            csp.KeyNumber = 1;
+            csp.Flags = CspProviderFlags.NoPrompt;
+
+            // Initialize an RSACryptoServiceProvider object using
+            // the CspParameters object.
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
+            //rsa.PersistKeyInCsp = false; //importante, senão ele lota o certificado de chaves!
+            rsa.PersistKeyInCsp = false;
+            return rsa;
+        }
+
         /// <summary>
         /// Assina o XML sobrepondo-o
         /// </summary>
@@ -237,9 +271,9 @@ namespace NFe.Certificado
         /// <param name="tagAssinatura">Tag de assinatura onde vamos pesquisar</param>
         /// <returns>true = Já está assinado</returns>
         private bool Assinado(string arqXML, string tagAssinatura)
-        {            
+        {
             bool retorno = false;
-                        
+
             XmlDocument doc = new XmlDocument();
             doc.Load(arqXML);
 

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using NFe.Components;
 using NFe.Settings;
+using System.IO;
 
 namespace NFe.UI.Formularios
 {
@@ -153,7 +154,7 @@ namespace NFe.UI.Formularios
         {
             MetroFramework.Controls.MetroTextBox control = (MetroFramework.Controls.MetroTextBox)sender;
 
-            if (!string.IsNullOrEmpty(control.Text))
+            if (!string.IsNullOrEmpty(control.Text) && Directory.Exists(control.Text)) 
                 this.folderBrowserDialog1.SelectedPath = control.Text;
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)

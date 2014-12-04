@@ -1248,57 +1248,72 @@ namespace NFe.Service
             lock (this)
             {
                 //Limpar conteúdo da pasta de LOG, mas manter 60 dias de informação
-                Limpar(Propriedade.PastaLog, 60);
+                Limpar(-1, Propriedade.PastaLog, "", 60);
 
                 for (int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
                     //Limpar conteúdo da pasta temp que fica dentro da pasta de envio de cada empresa a cada 10 dias
-                    Limpar(Empresas.Configuracoes[i].PastaXmlEnvio + "\\temp", 10);
-                    Limpar(Empresas.Configuracoes[i].PastaValidar + "\\temp", 10);   //danasa 12/8/2011
-                    Limpar(Empresas.Configuracoes[i].PastaXmlEmLote + "\\temp", 10);   //Wandrey 05/10/2011
+                    Limpar(i, Empresas.Configuracoes[i].PastaXmlEnvio, "temp", 10);
+                    Limpar(i, Empresas.Configuracoes[i].PastaValidar, "temp", 10);   //danasa 12/8/2011
+                    Limpar(i, Empresas.Configuracoes[i].PastaXmlEmLote, "temp", 10);   //Wandrey 05/10/2011
 
                     if (Empresas.Configuracoes[i].DiasLimpeza == 0)
                         continue;
 
                     #region temporario
-                    Limpar(Empresas.Configuracoes[i].PastaXmlErro, Empresas.Configuracoes[i].DiasLimpeza);
+                    Limpar(i, Empresas.Configuracoes[i].PastaXmlErro, "", Empresas.Configuracoes[i].DiasLimpeza);
                     #endregion
 
                     #region retorno
-                    Limpar(Empresas.Configuracoes[i].PastaXmlRetorno, Empresas.Configuracoes[i].DiasLimpeza);
+                    Limpar(i, Empresas.Configuracoes[i].PastaXmlRetorno, "", Empresas.Configuracoes[i].DiasLimpeza);
                     #endregion
                 }
             }
         }
 
-        private void Limpar(string diretorio, int diasLimpeza)
+        private void Limpar(int empresa, string diretorio, string subdir, int diasLimpeza)
         {
             // danasa 27-2-2011
-            if (diasLimpeza == 0) return;
+            if (diasLimpeza == 0 || string.IsNullOrEmpty(diretorio)) return;
 
             if (!Directory.Exists(diretorio)) return;   //danasa 12/8/2011
 
-            //recupera os arquivos da pasta temporario
-            string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);
-            DateTime UltimaData = DateTime.Today.AddDays(-diasLimpeza);
+            if (!string.IsNullOrEmpty(subdir))
+                diretorio += "\\" + subdir;
 
-            foreach (string file in files)
+            if (!Directory.Exists(diretorio)) return;   //danasa 12/8/2011
+
+            try
             {
-                FileInfo fi = new FileInfo(file);
-                //usar a última data de acesso, e não a data de criação
-                if (fi.LastWriteTime <= UltimaData)
+                //recupera os arquivos da pasta temporario
+                string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);
+                DateTime UltimaData = DateTime.Today.AddDays(-diasLimpeza);
+
+                foreach (string file in files)
                 {
-                    try
+                    FileInfo fi = new FileInfo(file);
+                    //usar a última data de acesso, e não a data de criação
+                    if (fi.LastWriteTime <= UltimaData)
                     {
-                        fi.Delete();
+                        try
+                        {
+                            fi.Delete();
+                        }
+                        catch
+                        {
+                            //td bem... nao deu para excluir. fica pra próxima
+                        }
                     }
-                    catch
-                    {
-                        //td bem... nao deu para excluir. fica pra próxima
-                    }
+                    Application.DoEvents();
                 }
 
-                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                if (empresa >= 0)
+                    Functions.WriteLog(Empresas.Configuracoes[empresa].Nome + "\r\n" + ex.Message, true);
+                else
+                    Functions.WriteLog("Geral:\r\n" + ex.Message, true);
             }
         }
         #endregion

@@ -28,7 +28,12 @@ namespace NFe.UI.Formularios.NFSe
         {
             base.OnLoad(e);
             
-            colPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+            //colPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+
+            colPadrao.Sorted = false;
+            colPadrao.DataSource = WebServiceNFSe.PadroesNFSeListDataSource;
+            colPadrao.ValueMember = "fromType";
+            colPadrao.DisplayMember = "fromDescription";
 
             for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
             {
@@ -148,7 +153,5 @@ namespace NFe.UI.Formularios.NFSe
         {
             e.Cancel = true;
         }
-
-
     }
 }

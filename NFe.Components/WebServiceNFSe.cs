@@ -8,10 +8,34 @@ using NFe.Components;
 
 namespace NFe.Components
 {
+    public class PadroesDataSource
+    {
+        public string fromDescription { get; set; }
+        public string fromType { get; set; }
+    }
+
     public class WebServiceNFSe
     {
-        private static List<string> _Padroes = null;
+        private static List<PadroesDataSource> _PadroesDataSource = null;
+        /// <summary>
+        /// lista de padrões usados para preencher o datagrid e pesquisas internas
+        /// </summary>
+        public static List<PadroesDataSource> PadroesNFSeListDataSource
+        {
+            get
+            {
+                if (_PadroesDataSource == null)
+                {
+                    Array arr = Enum.GetValues(typeof(PadroesNFSe));
+                    _PadroesDataSource = new List<PadroesDataSource>();
+                    foreach (PadroesNFSe type in arr)
+                        _PadroesDataSource.Add(new PadroesDataSource { fromType = type.ToString(), fromDescription = EnumHelper.GetEnumItemDescription(type) });
+                }
+                return _PadroesDataSource.OrderBy(p => p.fromDescription).ToList();
+            }
+        }
 
+        private static List<string> _Padroes = null;
         /// <summary>
         /// lista de padrões usados para preencher o datagrid e pesquisas internas
         /// </summary>

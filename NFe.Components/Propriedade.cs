@@ -883,6 +883,8 @@ namespace NFe.Components
         public static string CertificadoArquivo = "CertificadoArquivo";
         public static string CertificadoSenha = "CertificadoSenha";
         public static string CertificadoPIN = "CertificadoPIN";
+        public static string ProviderCertificado = "ProviderCertificado";
+        public static string ProviderTypeCertificado = "ProviderTypeCertificado";
 
         public static string AmbienteCodigo = "AmbienteCodigo";
         public static string DiasLimpeza = "DiasLimpeza";

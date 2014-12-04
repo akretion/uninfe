@@ -30,9 +30,15 @@ namespace NFe.UI.Formularios.NFSe
             }
 
             this.edtUF.SelectedIndex = 0;
-            this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
-            this.edtPadrao.Items.RemoveAt(0);
-            this.edtPadrao.Sorted = true;
+
+            this.edtPadrao.Sorted = false;
+            this.edtPadrao.DataSource = WebServiceNFSe.PadroesNFSeListDataSource.Where(p => p.fromType != PadroesNFSe.NaoIdentificado.ToString()).ToList();
+            this.edtPadrao.ValueMember = "fromType";
+            this.edtPadrao.DisplayMember = "fromDescription";
+            
+            //this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+            //this.edtPadrao.Items.RemoveAt(0);
+            //this.edtPadrao.Sorted = true;
             this.edtPadrao.SelectedIndex = 0;
         }
 
@@ -44,7 +50,7 @@ namespace NFe.UI.Formularios.NFSe
 
         private void edtCodMun_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsLetter(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
 
@@ -79,8 +85,8 @@ namespace NFe.UI.Formularios.NFSe
             {
                 WebServiceNFSe.SalvarXMLMunicipios(this.edtUF.SelectedItem.ToString(), 
                     this.edtMunicipio.Text, 
-                    Convert.ToInt32(this.edtCodMun.Text), 
-                    this.edtPadrao.SelectedItem.ToString(), 
+                    Convert.ToInt32(this.edtCodMun.Text),
+                    (this.edtPadrao.SelectedItem as PadroesDataSource).fromType, 
                     false);
                 
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;

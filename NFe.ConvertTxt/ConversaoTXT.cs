@@ -872,10 +872,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "E":
-                    bool e31 = false;
 
                     layout = "§E|xNome¨|IE¨|ISUF¨|email¨"; //ok
-                    if ((e31 = (NFe.infNFe.Versao >= 3 && lenPipesRegistro == 7)))
+                    if (NFe.infNFe.Versao >= 3)
                         layout = "§E|xNome¨|indIEDest¨|IE¨|ISUF¨|IM¨|email¨"; //ok
                     ///
                     /// Grupo da TAG <dest>
@@ -883,11 +882,11 @@ namespace NFe.ConvertTxt
                     #region <dest>
 
                     NFe.dest.xNome = this.LerString(TpcnResources.xNome, (NFe.infNFe.Versao >= 3 && NFe.ide.mod != TpcnMod.modNFe ? ObOp.Opcional : ObOp.Obrigatorio), 2, 60);
-                    if (e31) 
+                    if (NFe.infNFe.Versao >= 3) 
                         NFe.dest.indIEDest = (TpcnindIEDest)this.LerInt32(TpcnResources.indIEDest, ObOp.Opcional, 0, 1);
                     NFe.dest.IE    = this.LerString(TpcnResources.IE, ObOp.Opcional, 0, 14);
                     NFe.dest.ISUF  = this.LerString(TpcnResources.ISUF, ObOp.Opcional, 8, 9);
-                    if (e31) 
+                    if (NFe.infNFe.Versao >= 3) 
                         NFe.dest.IM = this.LerString(TpcnResources.IM, ObOp.Opcional, 1, 15);
                     NFe.dest.email = this.LerString(TpcnResources.email, ObOp.Opcional, 1, 60);
 

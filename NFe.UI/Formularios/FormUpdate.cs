@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading;
 using System.IO;
 using NFe.Components;
+using NFe.Settings;
 
 namespace NFe.UI.Formularios
 {
@@ -87,6 +88,7 @@ namespace NFe.UI.Formularios
                 "Após o download, a aplicação será encerrada para a execução do instalador do aplicativo.\r\n\r\nDeseja continuar com a atualização?", "", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
+                Auxiliar.WriteLog("Iniciado o processo de Atualização do UniNFe pelo Usuário.", false);
                 //Travar botao apos iniciar download
                 this.metroButton1.Enabled =
                     this.btnAtualizar.Enabled = false;
@@ -112,6 +114,8 @@ namespace NFe.UI.Formularios
                     this.metroButton1.Enabled =
                         this.btnAtualizar.Enabled = true;
                 }
+
+                Auxiliar.WriteLog("Processo de download da atualização do UniNFe pelo foi concluído.", false);
             }
         }
 

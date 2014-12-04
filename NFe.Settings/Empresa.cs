@@ -162,6 +162,14 @@ namespace NFe.Settings
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
+        /// Provider utilizado pelo certificado se utilizar a opção para salvar o PIN
+        /// </summary>
+        public string ProviderCertificado { get; set; }
+        /// <summary>
+        /// Type do Provider do Certificado selecionado
+        /// </summary>
+        public string ProviderTypeCertificado { get; set; }
+        /// <summary>
         /// Certificado digital - Subject
         /// </summary>
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
@@ -175,7 +183,7 @@ namespace NFe.Settings
         /// Certificado digital
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)] 
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public X509Certificate2 X509Certificado { get; set; }
         /// <summary>
         /// Gravar o retorno da NFe também em TXT
@@ -215,12 +223,12 @@ namespace NFe.Settings
         /// Nome da pasta onde é gravado as configurações e informações da Empresa
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string PastaEmpresa 
-        { 
+        public string PastaEmpresa
+        {
             get
             {
-                return Propriedade.PastaExecutavel + "\\" + this.CNPJ + 
-                    (this.Servico == TipoAplicativo.Nfe || 
+                return Propriedade.PastaExecutavel + "\\" + this.CNPJ +
+                    (this.Servico == TipoAplicativo.Nfe ||
                      this.Servico == TipoAplicativo.Todos ? "" : "\\" + this.Servico.ToString().ToLower());
             }
         }
@@ -228,25 +236,25 @@ namespace NFe.Settings
         /// Nome do arquivo XML das configurações da empresa
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string NomeArquivoConfig 
-        { 
-            get 
-            { 
+        public string NomeArquivoConfig
+        {
+            get
+            {
                 return Path.Combine(this.PastaEmpresa, Propriedade.NomeArqConfig);
-            } 
+            }
         }
 
         public bool CriaPastasAutomaticamente { get; set; }
 
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
-        
+
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosCancelamentoNaPastaEnviadosNFe { get; set; }
-        
+
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosDeTerceiros { get; set; }
-        
+
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool CompactarNfe { get; set; }
 
@@ -316,7 +324,7 @@ namespace NFe.Settings
         /// <para>        podem ser criadas outras combinações, ficando a critério do usuário</para>
         /// </summary>
         /// <by>http://desenvolvedores.net/marcelo</by>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)] 
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string diretorioSalvarComo
         {
             get { return DiretorioSalvarComo.ToString(); }
@@ -430,13 +438,13 @@ namespace NFe.Settings
                     {
                         if (!t.CertificadoInstalado && !string.IsNullOrEmpty(t.CertificadoSenha))
                             t.CertificadoSenha = Criptografia.descriptografaSenha(t.CertificadoSenha);
-
-                        if (!string.IsNullOrEmpty(t.CertificadoPIN))
-                            t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
                     }
                     t.Nome = this.Nome;
                     t.CNPJ = this.CNPJ;
                     t.Servico = this.Servico;
+                    if (t.Servico != TipoAplicativo.Nfse)
+                        t.UsaCertificado = true;
+
                     t.CopyObjectTo(this);
 
                     this.CriarPastasDaEmpresa();
@@ -471,7 +479,7 @@ namespace NFe.Settings
                     if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
                         collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
                     else
-                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
+                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false); 
 
                     for (int i = 0; i < collection1.Count; i++)
                     {
@@ -788,6 +796,8 @@ namespace NFe.Settings
                 empresa.CertificadoDigitalThumbPrint =
                 empresa.CertificadoSenha =
                 empresa.CertificadoPIN =
+                empresa.ProviderCertificado =
+                empresa.ProviderTypeCertificado =
                 empresa.Certificado = string.Empty;
 
             empresa.FTPAtivo = false;

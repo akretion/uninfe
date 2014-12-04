@@ -34,7 +34,7 @@ namespace NFe.UI.Formularios
             uninfeDummy.ClearControls(this, true, false);
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
-            textBox_dadoscertificado.Height = 210;
+            textBox_dadoscertificado.Height = 160;
             ckbTemCertificadoInstalado.Checked = empresa.UsaCertificado;
 
             oMeuCert = null;
@@ -59,6 +59,7 @@ namespace NFe.UI.Formularios
                 {
                     DemonstraDadosCertificado();
                     txtPinCertificado.Text = empresa.CertificadoPIN;
+                    ProvidersCertificado();
                 }
                 else
                 {
@@ -67,6 +68,32 @@ namespace NFe.UI.Formularios
                 }
                 ckbCertificadoInstalado_CheckedChanged(null, null);
             }
+            else
+                oMeuCert = null;
+
+        }
+
+        public void ProvidersCertificado()
+        {
+            CertificadoDigital oCertificado = new CertificadoDigital();
+            List<CertProviders> providers = new List<CertProviders>();
+            cboProviders.Items.Clear();
+
+            providers = oCertificado.GetListProviders();
+
+            foreach (CertProviders certinfo in providers)
+            {
+                cboProviders.Items.Add(certinfo.NameKey);
+
+                //define o default se houver este, pois a maioria vai ser Certisign
+                if (String.IsNullOrEmpty(empresa.ProviderCertificado) && certinfo.NameKey.Equals("SafeSign Standard Cryptographic Service Provider"))
+                    cboProviders.SelectedItem = certinfo.NameKey;
+
+            }
+
+            if (!String.IsNullOrEmpty(empresa.ProviderCertificado))
+                cboProviders.SelectedItem = empresa.ProviderCertificado;
+
         }
 
         public void Validar()
@@ -78,6 +105,11 @@ namespace NFe.UI.Formularios
             empresa.CertificadoDigitalThumbPrint = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
             empresa.CertificadoPIN = ckbTemCertificadoInstalado.Checked ? txtPinCertificado.Text : "";
             empresa.UsaCertificado = ckbTemCertificadoInstalado.Checked;
+            CertificadoDigital oCertificado = new CertificadoDigital();
+            CertProviders providerInfo = new CertProviders();
+            providerInfo = oCertificado.GetInfoProvider(cboProviders.SelectedItem.ToString());
+            empresa.ProviderCertificado = providerInfo.NameKey;
+            empresa.ProviderTypeCertificado = providerInfo.Type;
         }
 
         public void FocusFirstControl()
@@ -201,9 +233,15 @@ namespace NFe.UI.Formularios
                 txtArquivoCertificado.Visible = !ckbCertificadoInstalado.Checked;
 
             lblCerificadoInstalado.Visible =
-                textBox_dadoscertificado.Visible = 
+                textBox_dadoscertificado.Visible =
                 lblPinCertificado.Visible =
                 txtPinCertificado.Visible = ckbCertificadoInstalado.Checked;
+
+            lblPinCertificado.Visible =
+                txtPinCertificado.Visible = true;
+
+            lblProvider.Visible =
+                   cboProviders.Visible = true;
 
             if (!ckbCertificadoInstalado.Checked)
             {
@@ -221,11 +259,20 @@ namespace NFe.UI.Formularios
                 lblSenhaCertificado.Refresh();
                 txtSenhaCertificado.Location = new Point(lblCerificadoInstalado.Location.X, 90);
                 txtSenhaCertificado.Refresh();
+
+                lblPinCertificado.Visible =
+                    txtPinCertificado.Visible = false;
+                lblProvider.Visible =
+                    cboProviders.Visible = false;
+
             }
             else
             {
                 lblPinCertificado.Location = new Point(textBox_dadoscertificado.Location.X, textBox_dadoscertificado.Location.Y + textBox_dadoscertificado.Size.Height + 10);
                 txtPinCertificado.Location = new Point(lblPinCertificado.Location.X, lblPinCertificado.Location.Y + lblPinCertificado.Size.Height + 7);
+
+                lblProvider.Location = new Point(txtPinCertificado.Location.X, txtPinCertificado.Location.Y + txtPinCertificado.Size.Height + 10);
+                cboProviders.Location = new Point(lblProvider.Location.X, lblProvider.Location.Y + lblProvider.Size.Height + 7);
             }
             if (changeEvent != null)
                 changeEvent(sender, e);
@@ -235,6 +282,23 @@ namespace NFe.UI.Formularios
         {
             if (changeEvent != null)
                 changeEvent(sender, e);
+
+            if (clsX509Certificate2Extension.IsA3(empresa.X509Certificado))
+            {
+                if (String.IsNullOrEmpty(txtPinCertificado.Text))
+                    cboProviders.Enabled = false;
+                else
+                    cboProviders.Enabled = true;
+                
+                txtPinCertificado.Enabled = true;
+            }
+            else
+            {
+                txtPinCertificado.Enabled = false;
+                cboProviders.Enabled = false;
+            }
+
+
         }
 
         private void ckbTemCertificadoInstalado_CheckedChanged(object sender, EventArgs e)
@@ -245,6 +309,12 @@ namespace NFe.UI.Formularios
                 this.txtArquivoCertificado.Enabled =
                 this.txtPinCertificado.Enabled =
                 this.txtSenhaCertificado.Enabled = this.ckbTemCertificadoInstalado.Checked;
+            if (changeEvent != null)
+                changeEvent(sender, e);
+        }
+
+        private void cboProviders_TextChanged(object sender, EventArgs e)
+        {
             if (changeEvent != null)
                 changeEvent(sender, e);
         }

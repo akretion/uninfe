@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using NFe.Settings;
 using NFe.Components;
 using NFe.Exceptions;
+using System.Security;
+using Microsoft.Win32;
 
 namespace NFe.Certificado
 {
@@ -134,20 +136,74 @@ namespace NFe.Certificado
                     {
                         retorna = true;
                     }
-
-                    //Caso o usuário tenha salvo o PIN do certificado eu atribuo ele a chave para não pedir o PIN para o Usuário. Renan
-                    string certificadoPIN = Empresas.Configuracoes[emp].CertificadoPIN;
-
-                    #region Temporariamente, por conta de uma falha que está nesta questão de gravar o PIN, vou deixar desabilitado para que ninguém utilize. Wandrey 08/07/2014
-                    certificadoPIN = string.Empty;
-                    #endregion
-
-                    if (!String.IsNullOrEmpty(certificadoPIN))
-                        clsX509Certificate2Extension.SetPinPrivateKey(Empresas.Configuracoes[emp].X509Certificado, certificadoPIN);
                 }
             }
+
             return retorna;
         }
+
+        /// <summary>
+        /// Lista os Providers que podem ser usados para o Certificado Digital A3
+        /// </summary>
+        /// <returns>Lista de Providers para o Certificado Digital</returns>
+        /// <author>Renan Borges</author>
+        public List<CertProviders> GetListProviders()
+        {
+            List<CertProviders> providers = new List<CertProviders>();
+
+            string registry_key = @"SOFTWARE\Microsoft\Cryptography\Defaults\Provider";
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
+            {
+                foreach (string subkey_name in key.GetSubKeyNames())
+                {
+                    using (RegistryKey subkey = key.OpenSubKey(subkey_name))
+                    {
+                        string type = subkey.GetValue("Type").ToString();
+                        providers.Add(new CertProviders() { NameKey = subkey_name, Type = type });
+                    }
+                }
+            }
+
+            return providers;
+        }
+
+        /// <summary>
+        /// Retorna os dados do provedores do certificado digital A3
+        /// </summary>
+        /// <param name="provider">Nome do provider</param>
+        /// <returns>Objeto com dados do provider</returns>
+        /// <author>Renan Borges</author>
+        public CertProviders GetInfoProvider(string provider)
+        {
+            CertProviders oDadosCert = new CertProviders();
+            oDadosCert.NameKey = provider;
+
+            string registry_key = @"SOFTWARE\Microsoft\Cryptography\Defaults\Provider";
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
+            {
+                foreach (string subkey_name in key.GetSubKeyNames())
+                {
+                    if (subkey_name.Equals(oDadosCert.NameKey))
+                    {
+                        using (RegistryKey subkey = key.OpenSubKey(subkey_name))
+                        {
+                            oDadosCert.Type = subkey.GetValue("Type").ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return oDadosCert;
+        }
+    }
+
+    public class CertProviders
+    {
+        public string NameKey { get; set; }
+        public string Type { get; set; }
     }
 }
 

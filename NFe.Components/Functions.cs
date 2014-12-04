@@ -809,6 +809,7 @@ namespace NFe.Components
             write.Dispose();
         }
 
+        /*
         public static string GetEnumDescription(Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
@@ -823,6 +824,6 @@ namespace NFe.Components
                 return attributes[0].Description;
             else
                 return value.ToString();
-        }
+        }*/
     }
 }
