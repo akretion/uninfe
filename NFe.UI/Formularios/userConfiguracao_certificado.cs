@@ -36,6 +36,7 @@ namespace NFe.UI.Formularios
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 160;
             ckbTemCertificadoInstalado.Checked = empresa.UsaCertificado;
+			ckbTemCertificadoInstalado.Enabled = (empresa.Servico == TipoAplicativo.Nfse);
 
             oMeuCert = null;
 

@@ -25,15 +25,33 @@ namespace NFe.Components.Fiorilli
                 if (fiorilliService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        if (CodigoMun == 3553807) //Taquarituba-SP
-                            fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs);
-                        else
-                            throw new Exception(); // não tem
+                        switch (CodigoMun)
+                        {
+                            case 3553807: //Taquarituba-SP <-Ambiente da Fiorilli para testes
+                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                break;
+
+                            case 3512902: //Cosmorama-SP <-Ambiente da Fiorilli para testes
+                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                break;
+
+                            default:
+                                throw new Exceptions.ServicoInexistenteException();
+                        }
                     else
-                        if (CodigoMun == 3553807) //Taquarituba-SP
-                            fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs);
-                        else
-                            throw new Exception(); // não tem
+                        switch (CodigoMun)
+                        {
+                            case 3553807: //Taquarituba-SP
+                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                break;
+
+                            case 3512902: //Cosmorama-SP
+                                fiorilliService = new NFe.Components.Fiorilli.CosmoramaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs);                                
+                                break;
+
+                            default:
+                                throw new Exceptions.ServicoInexistenteException();
+                        }
                 }
                 return fiorilliService;
             }

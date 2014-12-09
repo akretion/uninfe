@@ -48,9 +48,9 @@ namespace NFe.UI.Formularios
             textBox_PastaXmlEmLote.Visible = lbl_textBox_PastaLote.Visible =
                 textBox_PastaBackup.Visible = lbl_textBox_PastaBackup.Visible =
                 textBox_PastaXmlEnviado.Visible = lbl_textBox_PastaEnviados.Visible =
-                textBox_PastaDownloadNFeDest.Visible = lbl_textBox_PastaDownload.Visible = !(empresa.Servico == TipoAplicativo.Nfse);//Propriedade.TipoAplicativo == TipoAplicativo.Nfe);
+                textBox_PastaDownloadNFeDest.Visible = lbl_textBox_PastaDownload.Visible = (empresa.Servico != TipoAplicativo.Nfse);
 
-            if (empresa.Servico == TipoAplicativo.Nfse)//Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+            if (empresa.Servico == TipoAplicativo.Nfse)
             {
                 lbl_textBox_PastaRetornoXML.Location = new Point(lbl_textBox_PastaBackup.Location.X, 67);
                 textBox_PastaXmlRetorno.Location = new Point(lbl_textBox_PastaBackup.Location.X, 86);

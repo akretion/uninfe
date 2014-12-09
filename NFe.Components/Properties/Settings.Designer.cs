@@ -132,5 +132,25 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_sigiss_tremembe_p_WebService_SigISS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://marilia.sigiss.com.br:443/marilia/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_marilia_p_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_marilia_p_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_net_cosmorama_fiorilli_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_net_cosmorama_fiorilli_p_IssWebWS"]));
+            }
+        }
     }
 }

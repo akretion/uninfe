@@ -137,6 +137,9 @@ namespace NFe.UI
                     if (_e.TabPage == this._tpEmpresa_cert) this.uce_cert.FocusFirstControl();
                 };
 
+                this.tc_main.SelectedIndex = 1;
+                this.tc_empresa.SelectedIndex = 0;
+
                 if (this.cbEmpresas.Items.Count == 0)
                     btnNova_Click(null, null);
             }
@@ -304,8 +307,6 @@ namespace NFe.UI
             {
                 oempresa.CriaPastasAutomaticamente = false;
 
-                this.tc_main.SelectedIndex = 1;
-                this.tc_empresa.SelectedIndex = 0;
 
                 if (string.IsNullOrEmpty(oempresa.PastaXmlEnvio) && !empty)
                 {
@@ -548,6 +549,9 @@ namespace NFe.UI
                 {
                     this.cbEmpresas.Visible = this.metroLabel2.Visible = false;
                     this.CopiaDadosDaEmpresaParaControls(currentEmpresa, false);
+
+                    this.tc_main.SelectedIndex = 1;
+                    this.tc_empresa.SelectedIndex = 0;
 
                     this.btnNova.Tag = 1;
                     this.Modificado = true;

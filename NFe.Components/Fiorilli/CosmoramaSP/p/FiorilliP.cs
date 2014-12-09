@@ -9,13 +9,14 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
-using NFe.Components.br.net.taquarituba.fiorilli.p;
+using NFe.Components.br.net.cosmorama.fiorilli.p;
 
-namespace NFe.Components.Fiorilli.TaquaraSP.p
+namespace NFe.Components.Fiorilli.CosmoramaSP.p
 {
     public class FiorilliP : EmiteNFSeBase
     {
         IssWebWS service = new IssWebWS();
+        
         string UsuarioWs = "";
         string SenhaWs = "";
 

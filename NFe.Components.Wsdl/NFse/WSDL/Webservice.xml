@@ -2386,4 +2386,62 @@
       <CancelarNfse>WSDL\Producao\PMairipora-ISSWEB.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3529005" Nome="Marília - SP" UF="SP" Padrao="SIGCORP_SIGISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps></RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps></ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps></ConsultarNfsePorRps>
+      <ConsultarNfse></ConsultarNfse>
+      <ConsultarLoteRps></ConsultarLoteRps>
+      <CancelarNfse></CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PMariliaSP-sigiss_ws.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3504008" Nome="Assis - SP" UF="SP" Padrao="PRONIN">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HAssisSP-PRONIN.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PAssisSP-PRONIN.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PAssisSP-PRONIN.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PAssisSP-PRONIN.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PAssisSP-PRONIN.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PAssisSP-PRONIN.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PAssisSP-PRONIN.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3512902" Nome="Cosmorama - SP" UF="SP" Padrao="FIORILLI">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HCosmoramaSP-FIORILLI.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

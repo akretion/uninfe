@@ -33,6 +33,7 @@
             this.metroLink_unimake = new MetroFramework.Controls.MetroLink();
             this.metroTile_sefaz_310 = new MetroFramework.Controls.MetroTile();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.restaurarPadrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.amareloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.azulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cinzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,6 @@
             this.metroTile_CadastroContrib = new MetroFramework.Controls.MetroTile();
             this.metroTile_Servicos = new MetroFramework.Controls.MetroTile();
             this.metroTile_Configuracoes = new MetroFramework.Controls.MetroTile();
-            this.restaurarPadrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,9 +114,16 @@
             this.tealToolStripMenuItem,
             this.vermelhoToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 334);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 312);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
+            // 
+            // restaurarPadrãoToolStripMenuItem
+            // 
+            this.restaurarPadrãoToolStripMenuItem.Name = "restaurarPadrãoToolStripMenuItem";
+            this.restaurarPadrãoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.restaurarPadrãoToolStripMenuItem.Tag = "5";
+            this.restaurarPadrãoToolStripMenuItem.Text = "Restaurar Padrão";
             // 
             // amareloToolStripMenuItem
             // 
@@ -333,7 +340,7 @@
             this.metroTile_Danfe.Location = new System.Drawing.Point(10, 308);
             this.metroTile_Danfe.MaximumSize = new System.Drawing.Size(250, 120);
             this.metroTile_Danfe.Name = "metroTile_Danfe";
-            this.metroTile_Danfe.Size = new System.Drawing.Size(240, 120);
+            this.metroTile_Danfe.Size = new System.Drawing.Size(221, 120);
             this.metroTile_Danfe.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_Danfe.TabIndex = 33;
             this.metroTile_Danfe.Text = "Imprimir DANFE/DACTE/CCe/DAMDFE";
@@ -387,10 +394,10 @@
             this.metroTile_ValidaXml.ActiveControl = null;
             this.metroTile_ValidaXml.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_ValidaXml.ContextMenuStrip = this.contextMenuStrip1;
-            this.metroTile_ValidaXml.Location = new System.Drawing.Point(256, 308);
+            this.metroTile_ValidaXml.Location = new System.Drawing.Point(237, 308);
             this.metroTile_ValidaXml.MaximumSize = new System.Drawing.Size(170, 120);
             this.metroTile_ValidaXml.Name = "metroTile_ValidaXml";
-            this.metroTile_ValidaXml.Size = new System.Drawing.Size(130, 120);
+            this.metroTile_ValidaXml.Size = new System.Drawing.Size(149, 120);
             this.metroTile_ValidaXml.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_ValidaXml.TabIndex = 29;
             this.metroTile_ValidaXml.Text = "Validar XML";
@@ -407,9 +414,9 @@
             this.metroTile_CadastroContrib.ActiveControl = null;
             this.metroTile_CadastroContrib.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_CadastroContrib.ContextMenuStrip = this.contextMenuStrip1;
-            this.metroTile_CadastroContrib.Location = new System.Drawing.Point(176, 56);
+            this.metroTile_CadastroContrib.Location = new System.Drawing.Point(10, 182);
             this.metroTile_CadastroContrib.Name = "metroTile_CadastroContrib";
-            this.metroTile_CadastroContrib.Size = new System.Drawing.Size(210, 246);
+            this.metroTile_CadastroContrib.Size = new System.Drawing.Size(221, 120);
             this.metroTile_CadastroContrib.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_CadastroContrib.TabIndex = 28;
             this.metroTile_CadastroContrib.Text = "Cadastro de contribuinte";
@@ -426,9 +433,9 @@
             this.metroTile_Servicos.ActiveControl = null;
             this.metroTile_Servicos.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_Servicos.ContextMenuStrip = this.contextMenuStrip1;
-            this.metroTile_Servicos.Location = new System.Drawing.Point(10, 182);
+            this.metroTile_Servicos.Location = new System.Drawing.Point(237, 182);
             this.metroTile_Servicos.Name = "metroTile_Servicos";
-            this.metroTile_Servicos.Size = new System.Drawing.Size(160, 120);
+            this.metroTile_Servicos.Size = new System.Drawing.Size(149, 120);
             this.metroTile_Servicos.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_Servicos.TabIndex = 27;
             this.metroTile_Servicos.Text = "Situação dos serviços";
@@ -447,8 +454,7 @@
             this.metroTile_Configuracoes.ContextMenuStrip = this.contextMenuStrip1;
             this.metroTile_Configuracoes.Location = new System.Drawing.Point(10, 56);
             this.metroTile_Configuracoes.Name = "metroTile_Configuracoes";
-            this.metroTile_Configuracoes.PaintTileCount = false;
-            this.metroTile_Configuracoes.Size = new System.Drawing.Size(160, 120);
+            this.metroTile_Configuracoes.Size = new System.Drawing.Size(376, 120);
             this.metroTile_Configuracoes.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_Configuracoes.TabIndex = 26;
             this.metroTile_Configuracoes.Text = "Configurações";
@@ -459,13 +465,6 @@
             this.metroTile_Configuracoes.UseTileImage = true;
             this.metroTile_Configuracoes.Click += new System.EventHandler(this.metroTile_CFG_Click);
             this.metroTile_Configuracoes.MouseDown += new System.Windows.Forms.MouseEventHandler(this.metroTile_Configuracoes_MouseDown);
-            // 
-            // restaurarPadrãoToolStripMenuItem
-            // 
-            this.restaurarPadrãoToolStripMenuItem.Name = "restaurarPadrãoToolStripMenuItem";
-            this.restaurarPadrãoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.restaurarPadrãoToolStripMenuItem.Tag = "5";
-            this.restaurarPadrãoToolStripMenuItem.Text = "Restaurar Padrão";
             // 
             // menu
             // 

@@ -25,12 +25,6 @@ namespace NFe.Components.SigCorp
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
-                            case 3304904: // São Gonçalo-RJ
-                                throw new Exception(); // não tem
-
-                            case 3507506: //Botucatu-SP
-                                throw new Exception(); // não tem
-
                             case 3506003: //Bauru-SP
                                 sigCorpService = new NFe.Components.SigCorp.BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
@@ -45,6 +39,10 @@ namespace NFe.Components.SigCorp
                     else
                         switch (CodigoMun)
                         {
+                            case 3529005: //Marilia-SP
+                                sigCorpService = new NFe.Components.SigCorp.MariliaSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
                             case 3304904: //São Gonçalo-RJ
                                 sigCorpService = new NFe.Components.SigCorp.SaoGoncaloRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
