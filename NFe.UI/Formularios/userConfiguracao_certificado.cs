@@ -106,11 +106,17 @@ namespace NFe.UI.Formularios
             empresa.CertificadoDigitalThumbPrint = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
             empresa.CertificadoPIN = ckbTemCertificadoInstalado.Checked ? txtPinCertificado.Text : "";
             empresa.UsaCertificado = ckbTemCertificadoInstalado.Checked;
-            CertificadoDigital oCertificado = new CertificadoDigital();
-            CertProviders providerInfo = new CertProviders();
-            providerInfo = oCertificado.GetInfoProvider(cboProviders.SelectedItem.ToString());
-            empresa.ProviderCertificado = providerInfo.NameKey;
-            empresa.ProviderTypeCertificado = providerInfo.Type;
+            if (ckbTemCertificadoInstalado.Checked)
+            {
+                if (cboProviders.SelectedItem != null)
+                {
+                    CertificadoDigital oCertificado = new CertificadoDigital();
+                    CertProviders providerInfo = new CertProviders();
+                    providerInfo = oCertificado.GetInfoProvider(cboProviders.SelectedItem.ToString());
+                    empresa.ProviderCertificado = providerInfo.NameKey;
+                    empresa.ProviderTypeCertificado = providerInfo.Type;
+                }
+            }
         }
 
         public void FocusFirstControl()

@@ -2290,7 +2290,7 @@
       <CancelarNfse>WSDL\Producao\PPontaGrossaPR-FINTELServices.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
-  <Estado ID="4307906" Nome="Farroupilha - PR" UF="PR" Padrao="GIF">
+  <Estado ID="4307906" Nome="Farroupilha - RS" UF="RS" Padrao="GIF">
     <LocalHomologacao>
       <RecepcionarLoteRps>WSDL\Homologacao\HFarroupilhaRS-GIFServicos.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps>WSDL\Homologacao\HFarroupilhaRS-GIFServicos.wsdl</ConsultarSituacaoLoteRps>
@@ -2442,6 +2442,46 @@
       <ConsultarLoteRps>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
       <CancelarNfse>WSDL\Producao\PCosmoramaSP-FIORILLI.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="3538709" Nome="Piracicaba - SP" UF="SP" Padrao="SIMPLISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4314902" Nome="Porto Alegre - RS" UF="RS" Padrao="BHISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HPortoAlegreRS-BHISS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
 </Webservice>

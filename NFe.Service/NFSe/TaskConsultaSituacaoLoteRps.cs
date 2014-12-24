@@ -9,6 +9,8 @@ using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
+using NFe.Components.Fiorilli;
+using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
@@ -40,8 +42,15 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe);
-                object pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                WebServiceProxy wsProxy = null;
+                object pedSitLoteRps = null;
+
+                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe);
+                    pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                }
+
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
@@ -74,8 +83,18 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
+                    case PadroesNFSe.SIMPLISS:
+                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(oDadosPedSitLoteRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        simpliss.ConsultarSituacaoLoteRps(NomeArquivoXML);
+                        break;
+
                 }
-                if (padraoNFSe != PadroesNFSe.IPM)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

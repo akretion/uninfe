@@ -111,6 +111,11 @@ namespace NFe.Components
                         }
                     #endregion
 
+                    #region SIMPLISS
+                    case PadroesNFSe.SIMPLISS:
+                        return _NomeClasseWS = "NfseService";
+                    #endregion
+
                     #region PRONIM
                     case PadroesNFSe.PRONIN:
                         switch (servico)
@@ -181,8 +186,8 @@ namespace NFe.Components
                 }
             }
             //if (Certificado != null)
-                //Gerar e compilar a classe
-                this.GerarClasse();
+            //Gerar e compilar a classe
+            this.GerarClasse();
         }
 
         public WebServiceProxy(X509Certificate2 Certificado)

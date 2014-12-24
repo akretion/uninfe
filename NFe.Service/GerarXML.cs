@@ -2216,11 +2216,12 @@ namespace NFe.Service
                                 destEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.CPF.ToString(), evento.epec.dest.CPF));
                         if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
                             destEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.IE.ToString(), evento.epec.dest.IE));
-                        detEvento.AppendChild(destEvento);
 
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vNF.ToString(), evento.epec.vNF.ToString("0.00").Replace(",", ".")));
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vICMS.ToString(), evento.epec.vICMS.ToString("0.00").Replace(",", ".")));
-                        detEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vST.ToString(), evento.epec.vST.ToString("0.00").Replace(",", ".")));
+                        destEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
+                        destEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
+                        destEvento.AppendChild(criaElemento(doc, NFe.ConvertTxt.TpcnResources.vST.ToString(), evento.epec.dest.vST.ToString("0.00").Replace(",", ".")));
+
+                        detEvento.AppendChild(destEvento);
                         break;
                 }
                 infEvento.AppendChild(detEvento);
@@ -2343,6 +2344,9 @@ namespace NFe.Service
                     if (!Empresas.Configuracoes[emp].GravarEventosDeTerceiros) return;
 
                     folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
+                    ///
+                    /// xml de terceiros nao grava na pasta de backup
+                    /// 
                     folderToWriteBackup = "";
                 }
             }
@@ -2356,7 +2360,7 @@ namespace NFe.Service
 
                 if (vePasta)
                 {
-                    string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe);
+                    string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcNFe);
                     if (!string.IsNullOrEmpty(folderNFe))
                     {
                         folderToWrite = Path.Combine(folderNFe, Path.GetFileName(folderToWrite));
@@ -2364,40 +2368,38 @@ namespace NFe.Service
                 }
             }
 
-            // cria a pasta se não existir
-            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
-                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
-
-            // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                if (!Directory.Exists(Path.GetDirectoryName(folderToWriteBackup)))
-                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWriteBackup));
 
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoNFe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
             else //danasa 4/7/2011
-            {
                 protEnvioEvento = "<procEventoNFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLEvento + "\" xmlns=\"" + Propriedade.nsURI_nfe + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoNFe>";
-            }
 
             //Gravar o arquivo de distribuição na pasta de enviados autorizados
             if (!protEnvioEvento.StartsWith("<?xml"))
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
             //Gravar o arquivo de distribuição na pasta de backup
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
+            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup) && !string.IsNullOrEmpty(folderToWriteBackup))
+            {
+                // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
+                if (!Directory.Exists(Empresas.Configuracoes[emp].PastaBackup))
+                    System.IO.Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaBackup);
+
                 if (!File.Exists(folderToWriteBackup))
                     File.WriteAllText(folderToWriteBackup, protEnvioEvento, Encoding.UTF8);
+            }
+            // cria a pasta se não existir
+            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
 
             if (!File.Exists(folderToWrite))
                 File.WriteAllText(folderToWrite, protEnvioEvento, Encoding.UTF8);
 
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                this.XmlParaFTP(emp, folderToWrite);
+            this.XmlParaFTP(emp, folderToWrite);
 
             TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
 
@@ -2455,7 +2457,6 @@ namespace NFe.Service
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
             bool vePasta = false;
             if (tpEvento == 110111) //cancelamento
@@ -2465,47 +2466,46 @@ namespace NFe.Service
 
             if (vePasta)
             {
-                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe);
+                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcCTe);
                 if (!string.IsNullOrEmpty(folderNFe))
                 {
                     folderToWrite = Path.Combine(folderNFe, Path.GetFileName(folderToWrite));
                 }
             }
 
-            // cria a pasta se não existir
-            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
-                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
-
-            // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                if (!Directory.Exists(Path.GetDirectoryName(folderToWriteBackup)))
-                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWriteBackup));
 
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoCTe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
             else
-            {
                 protEnvioEvento = "<procEventoCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/cte" + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoCTe>";
-            }
 
             //Gravar o arquivo de distribuição na pasta de enviados autorizados
             if (!protEnvioEvento.StartsWith("<?xml"))
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
-            //Gravar o arquivo de distribuição na pasta de backup
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
+            // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
+            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup))
+            {
+                if (!Directory.Exists(Empresas.Configuracoes[emp].PastaBackup))
+                    System.IO.Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaBackup);
+
+                //Gravar o arquivo de distribuição na pasta de backup
+                string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
                 if (!File.Exists(folderToWriteBackup))
                     File.WriteAllText(folderToWriteBackup, protEnvioEvento, Encoding.UTF8);
+            }
+            // cria a pasta se não existir
+            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
 
             if (!File.Exists(folderToWrite))
                 File.WriteAllText(folderToWrite, protEnvioEvento, Encoding.UTF8);
 
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                this.XmlParaFTP(emp, folderToWrite);
+            this.XmlParaFTP(emp, folderToWrite);
 
             TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
 
@@ -2561,7 +2561,6 @@ namespace NFe.Service
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoMDFe;
 
             string folderToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
 
             bool vePasta = false;
             if (tpEvento == 110111) //cancelamento
@@ -2571,47 +2570,46 @@ namespace NFe.Service
 
             if (vePasta)
             {
-                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe);
+                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcMDFe);
                 if (!string.IsNullOrEmpty(folderNFe))
                 {
                     folderToWrite = Path.Combine(folderNFe, Path.GetFileName(folderToWrite));
                 }
             }
 
-            // cria a pasta se não existir
-            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
-                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
-
-            // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                if (!Directory.Exists(Path.GetDirectoryName(folderToWriteBackup)))
-                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWriteBackup));
 
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoMDFe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
             else
-            {
                 protEnvioEvento = "<procEventoMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento + "\" xmlns=\"" + "http://www.portalfiscal.inf.br/mdfe" + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoMDFe>";
-            }
 
             //Gravar o arquivo de distribuição na pasta de enviados autorizados
             if (!protEnvioEvento.StartsWith("<?xml"))
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
             //Gravar o arquivo de distribuição na pasta de backup
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
+            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup))
+            {
+                // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
+                if (!Directory.Exists(Empresas.Configuracoes[emp].PastaBackup))
+                    System.IO.Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaBackup);
+
+                string folderToWriteBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
                 if (!File.Exists(folderToWriteBackup))
                     File.WriteAllText(folderToWriteBackup, protEnvioEvento, Encoding.UTF8);
+            }
+            // cria a pasta se não existir
+            if (!Directory.Exists(Path.GetDirectoryName(folderToWrite)))
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(folderToWrite));
 
             if (!File.Exists(folderToWrite))
                 File.WriteAllText(folderToWrite, protEnvioEvento, Encoding.UTF8);
 
-            if (!string.IsNullOrEmpty(folderToWriteBackup))
-                this.XmlParaFTP(emp, folderToWrite);
+            this.XmlParaFTP(emp, folderToWrite);
 
             TFunctions.CopiarXMLPastaDanfeMon(folderToWrite);
 
@@ -2642,7 +2640,7 @@ namespace NFe.Service
         }
 
         #region OndeNFeEstaGravada
-        public string OndeNFeEstaGravada(int emp, string ChaveNFe)
+        public string OndeNFeEstaGravada(int emp, string ChaveNFe, string extensao)
         {
             DateTime dte = Convert.ToDateTime("20" + ChaveNFe.Substring(2, 2) + "/" + ChaveNFe.Substring(4, 2) + "/1");
             string olddir = null;
@@ -2657,7 +2655,7 @@ namespace NFe.Service
                 ///
                 /// pesquisa onde o arquivo de distribuicao da nota foi gravado
                 string files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + dsc,
-                                                                ChaveNFe + Propriedade.ExtRetorno.ProcNFe);
+                                                                ChaveNFe + extensao);//Propriedade.ExtRetorno.ProcNFe);
                 if (!File.Exists(files))
                     files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + dsc,
                                                                 ChaveNFe + Propriedade.ExtRetorno.Den);
@@ -2674,7 +2672,7 @@ namespace NFe.Service
                 /// mudado o tipo DiretorioSalvarComo
                 /// 
                 string[] files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
-                                            ChaveNFe + Propriedade.ExtRetorno.ProcNFe,
+                                            ChaveNFe + extensao,//Propriedade.ExtRetorno.ProcNFe,
                                             SearchOption.AllDirectories);
                 if (files.Length == 0)
                     files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
@@ -2993,30 +2991,22 @@ namespace NFe.Service
                 if (vNomeDoArquivo.Contains(PastaEnviados.Autorizados.ToString()) ||
                     vNomeDoArquivo.Contains(PastaEnviados.Denegados.ToString()))
                 {
-                    // verifica as extensoes
-                    // é até redundante verificar as extensoes, já que verificamos as pastas de "Autorizado ou Denegado"
-                    if (vNomeDoArquivo.EndsWith(Propriedade.ExtRetorno.ProcEventoNFe) ||
-                        vNomeDoArquivo.EndsWith(Propriedade.ExtRetorno.ProcInutNFe) ||
-                        vNomeDoArquivo.EndsWith(Propriedade.ExtRetorno.ProcNFe) ||
-                        vNomeDoArquivo.EndsWith(Propriedade.ExtRetorno.Den))
+                    ///
+                    /// pega a pasta de enviados do FTP
+                    vFolder = Empresas.Configuracoes[emp].FTPPastaAutorizados;
+                    if (!string.IsNullOrEmpty(vFolder))
                     {
                         ///
-                        /// pega a pasta de enviados do FTP
-                        vFolder = Empresas.Configuracoes[emp].FTPPastaAutorizados;
-                        if (!string.IsNullOrEmpty(vFolder))
+                        /// verifica se é para gravar na pasta especifica ou se é para gravar na mesma
+                        /// hierarquia definida para gravar localmente
+                        if (!Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica)
                         {
+                            string[] temp = vNomeDoArquivo.Split('\\');
                             ///
-                            /// verifica se é para gravar na pasta especifica ou se é para gravar na mesma
-                            /// hierarquia definida para gravar localmente
-                            if (!Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica)
-                            {
-                                string[] temp = vNomeDoArquivo.Split('\\');
-                                ///
-                                /// pega a ultima pasta atribuida
-                                /// Ex: "c:\nfe\autorizados\201112\3539438493843493-procNFe.xml
-                                /// pega a pasta "201112"
-                                vFolder += "/" + temp[temp.Length - 2];
-                            }
+                            /// pega a ultima pasta atribuida
+                            /// Ex: "c:\nfe\autorizados\201112\3539438493843493-procNFe.xml
+                            /// pega a pasta "201112"
+                            vFolder += "/" + temp[temp.Length - 2];
                         }
                     }
                 }

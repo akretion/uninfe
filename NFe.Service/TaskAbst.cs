@@ -631,7 +631,8 @@ namespace NFe.Service
             string retorna = string.Empty;
 
             retorna = NomeMetodoWSNFSe(servico, cUF);
-            if (retorna == string.Empty)//nem seria necessario, porque estamos obtendo do wsdl
+
+            if (retorna == string.Empty) //nem seria necessário, porque estamos obtendo do wsdl
                 retorna = NomeMetodoWSNFe(servico, cUF, versao);
 
             return retorna;
@@ -1019,7 +1020,14 @@ namespace NFe.Service
                             retorna = "obterCriticaLote";
                             break;
                         case Servicos.CancelarNfse:
-                            retorna = "anularNotaFiscal";
+                            if (cMunicipio == 4305108) //Caxias do Sul-RS
+                            {
+                                retorna = "cancelarNotaFiscal";
+                            }
+                            else
+                            {
+                                retorna = "anularNotaFiscal";
+                            }
                             break;
                         case Servicos.RecepcionarLoteRps:
                             retorna = "enviarLoteNotas";

@@ -607,9 +607,6 @@ namespace NFe.Service
         public string IE { get; set; }
 
         public EventoDestinatario dest { get; set; }
-        public double vNF { get; set; }
-        public double vICMS { get; set; }
-        public double vST { get; set; }
 
         public EventoEPEC()
         {
@@ -624,6 +621,9 @@ namespace NFe.Service
         public string idEstrangeiro { get; set; }
         public string IE { get; set; }
         public string UF { get; set; }
+        public double vNF { get; set; }
+        public double vICMS { get; set; }
+        public double vST { get; set; }
 
         public EventoDestinatario()
         {

@@ -428,9 +428,9 @@ namespace NFe.Service
                 ///     ou
                 ///epec.dest.idEstrangeiro|9999999
                 ///epec.dest.IE|nao pode conter o texto 'ISENTO'
-                ///epec.vNF|1234.00
-                ///epec.vICMS|1.00
-                ///epec.vST|2.00
+                ///epec.dest.vNF|1234.00
+                ///epec.dest.vICMS|1.00
+                ///epec.dest.vST|2.00
 
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
 
@@ -528,14 +528,14 @@ namespace NFe.Service
                         case "epec.dest.uf":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.UF = dados[1].Trim();
                             break;
-                        case "epec.vnf":
-                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vNF = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                        case "epec.dest.vnf":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.vNF = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
                             break;
-                        case "epec.vicms":
-                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vICMS = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                        case "epec.dest.vicms":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.vICMS = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
                             break;
-                        case "epec.vst":
-                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.vST = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
+                        case "epec.dest.vst":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.vST = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
                             break;
                     }
                 }

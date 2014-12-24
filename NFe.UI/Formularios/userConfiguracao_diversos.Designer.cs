@@ -408,7 +408,7 @@
             this.txtUsuarioWS.Lines = new string[] {
         "Styled Textbox"};
             this.txtUsuarioWS.Location = new System.Drawing.Point(363, 161);
-            this.txtUsuarioWS.MaxLength = 14;
+            this.txtUsuarioWS.MaxLength = 32767;
             this.txtUsuarioWS.Name = "txtUsuarioWS";
             this.txtUsuarioWS.PasswordChar = '\0';
             this.txtUsuarioWS.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -435,7 +435,7 @@
             this.txtSenhaWS.Lines = new string[] {
         "Styled Textbox"};
             this.txtSenhaWS.Location = new System.Drawing.Point(503, 161);
-            this.txtSenhaWS.MaxLength = 14;
+            this.txtSenhaWS.MaxLength = 32767;
             this.txtSenhaWS.Name = "txtSenhaWS";
             this.txtSenhaWS.PasswordChar = '\0';
             this.txtSenhaWS.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -462,7 +462,7 @@
             this.edtPadrao.Lines = new string[] {
         "Styled Textbox"};
             this.edtPadrao.Location = new System.Drawing.Point(503, 115);
-            this.edtPadrao.MaxLength = 14;
+            this.edtPadrao.MaxLength = 32767;
             this.edtPadrao.Name = "edtPadrao";
             this.edtPadrao.PasswordChar = '\0';
             this.edtPadrao.ReadOnly = true;
@@ -491,7 +491,7 @@
             this.edtCodMun.Lines = new string[] {
         "Styled Textbox"};
             this.edtCodMun.Location = new System.Drawing.Point(363, 115);
-            this.edtCodMun.MaxLength = 14;
+            this.edtCodMun.MaxLength = 32767;
             this.edtCodMun.Name = "edtCodMun";
             this.edtCodMun.PasswordChar = '\0';
             this.edtCodMun.ReadOnly = true;

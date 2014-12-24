@@ -87,7 +87,7 @@
             this.edtFTP_PastaRetornos.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_PastaRetornos.Location = new System.Drawing.Point(0, 229);
-            this.edtFTP_PastaRetornos.MaxLength = 14;
+            this.edtFTP_PastaRetornos.MaxLength = 32767;
             this.edtFTP_PastaRetornos.Name = "edtFTP_PastaRetornos";
             this.edtFTP_PastaRetornos.PasswordChar = '\0';
             this.edtFTP_PastaRetornos.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -117,7 +117,7 @@
             this.edtFTP_PastaDestino.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_PastaDestino.Location = new System.Drawing.Point(0, 187);
-            this.edtFTP_PastaDestino.MaxLength = 14;
+            this.edtFTP_PastaDestino.MaxLength = 32767;
             this.edtFTP_PastaDestino.Name = "edtFTP_PastaDestino";
             this.edtFTP_PastaDestino.PasswordChar = '\0';
             this.edtFTP_PastaDestino.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -134,7 +134,7 @@
             this.edtFTP_Porta.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_Porta.Location = new System.Drawing.Point(0, 145);
-            this.edtFTP_Porta.MaxLength = 14;
+            this.edtFTP_Porta.MaxLength = 32767;
             this.edtFTP_Porta.Name = "edtFTP_Porta";
             this.edtFTP_Porta.PasswordChar = '\0';
             this.edtFTP_Porta.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -153,7 +153,7 @@
             this.edtFTP_Password.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_Password.Location = new System.Drawing.Point(0, 103);
-            this.edtFTP_Password.MaxLength = 14;
+            this.edtFTP_Password.MaxLength = 32767;
             this.edtFTP_Password.Name = "edtFTP_Password";
             this.edtFTP_Password.PasswordChar = '\0';
             this.edtFTP_Password.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -183,7 +183,7 @@
             this.edtFTP_UserName.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_UserName.Location = new System.Drawing.Point(0, 61);
-            this.edtFTP_UserName.MaxLength = 14;
+            this.edtFTP_UserName.MaxLength = 32767;
             this.edtFTP_UserName.Name = "edtFTP_UserName";
             this.edtFTP_UserName.PasswordChar = '\0';
             this.edtFTP_UserName.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -213,7 +213,7 @@
             this.edtFTP_Server.Lines = new string[] {
         "Styled Textbox"};
             this.edtFTP_Server.Location = new System.Drawing.Point(0, 19);
-            this.edtFTP_Server.MaxLength = 14;
+            this.edtFTP_Server.MaxLength = 32767;
             this.edtFTP_Server.Name = "edtFTP_Server";
             this.edtFTP_Server.PasswordChar = '\0';
             this.edtFTP_Server.ScrollBars = System.Windows.Forms.ScrollBars.None;

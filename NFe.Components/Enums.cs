@@ -505,7 +505,13 @@ namespace NFe.Components
         /// Prefeitura de Mairipora - SP
         /// </summary>
         [Description("ISSWeb")]
-        ISSWEB
+        ISSWEB,
+        /// <summary>
+        /// Padrão SimplIss
+        /// Prefeitura de Piracicaba - SP
+        /// </summary>
+        [Description("SimplIss")]
+        SIMPLISS
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

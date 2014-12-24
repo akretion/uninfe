@@ -10,6 +10,7 @@ using NFe.Settings;
 using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.Fiorilli;
+using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
@@ -30,8 +31,14 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(ler.oDadosPedSitNfseRps.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
-                object pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                WebServiceProxy wsProxy = null; 
+                object pedLoteRps = null;
+                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
+                    pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    
+                }
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
@@ -78,9 +85,19 @@ namespace NFe.Service.NFSe
 
                         fiorilli.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.SIMPLISS:
+                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        simpliss.ConsultarNfsePorRps(NomeArquivoXML);
+                        break;
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.FIORILLI)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.FIORILLI && padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

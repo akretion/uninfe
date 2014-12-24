@@ -124,15 +124,11 @@ namespace NFe.Certificado
                             SignedXml signedXml = new SignedXml(doc);
 
                             //A3
-                            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-                            string provedor = Empresas.Configuracoes[empresa].ProviderCertificado; //"SafeSign Standard Cryptographic Service Provider" default
-                            int typeProvider = Convert.ToInt32(Empresas.Configuracoes[empresa].ProviderTypeCertificado);
-                            string pin = Empresas.Configuracoes[empresa].CertificadoPIN;
-
-                            if (!String.IsNullOrEmpty(pin) && clsX509Certificate2Extension.IsA3(x509Cert))
+                            if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) && clsX509Certificate2Extension.IsA3(x509Cert))
                             {
-                                rsa = LerDispositivo(pin, typeProvider, provedor);
-                                signedXml.SigningKey = rsa;
+                                signedXml.SigningKey = LerDispositivo(Empresas.Configuracoes[empresa].CertificadoPIN,
+                                                                      Convert.ToInt32(Empresas.Configuracoes[empresa].ProviderTypeCertificado),
+                                                                      Empresas.Configuracoes[empresa].ProviderCertificado); ;
                             }
                             else
                                 signedXml.SigningKey = x509Cert.PrivateKey;

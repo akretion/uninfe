@@ -11,6 +11,7 @@ using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
+using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
@@ -31,12 +32,18 @@ namespace NFe.Service.NFSe
                 //Ler o XML para pegar parâmetros de envio
                 LerXML ler = new LerXML();
                 ler.PedSitNfseRps(NomeArquivoXML);
-
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(ler.oDadosPedSitNfseRps.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe); ;
-                object pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                string cabecMsg = "";                
+                //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                WebServiceProxy wsProxy = null;
+                object pedLoteRps = null;
+
+                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe); ;
+                    pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                }
+
+                string cabecMsg = "";
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
@@ -88,9 +95,20 @@ namespace NFe.Service.NFSe
 
                         fiorilli.ConsultarLoteRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.SIMPLISS:
+                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        simpliss.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI && padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -101,7 +119,7 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                         Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.LoteRps)));
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);

@@ -53,7 +53,9 @@ namespace NFe.UI.Formularios
             this.empresa.FTPSenha = this.edtFTP_Password.Text;
             this.empresa.FTPPastaAutorizados = this.edtFTP_PastaDestino.Text;
             this.empresa.FTPPastaRetornos = this.edtFTP_PastaRetornos.Text;
+            this.empresa.FTPPorta = Convert.ToInt32(this.edtFTP_Porta.Text);
             this.empresa.FTPNomeDoServidor = this.edtFTP_Server.Text;
+            this.empresa.FTPNomeDoUsuario = this.edtFTP_UserName.Text;            
         }
 
         public void FocusFirstControl()

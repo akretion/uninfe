@@ -411,16 +411,16 @@ namespace NFe.Service
             {
                 if (Directory.Exists(Empresas.Configuracoes[emp].PastaDanfeMon))
                 {
-                    if ((arquivoCopiar.ToLower().Contains("-nfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-procnfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-den.xml") && Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-cte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proccte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-mdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-procmdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventonfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventocte.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains("-proceventomdfe.xml") && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
+                    if ((arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.Nfe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcNFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.Den.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.Cte.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.MDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoNFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
                     {
                         //Montar o nome do arquivo de destino
                         string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";

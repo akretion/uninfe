@@ -48,6 +48,8 @@
             // 
             // txtPinCertificado
             // 
+            this.txtPinCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPinCertificado.Lines = new string[] {
         "Styled Textbox"};
             this.txtPinCertificado.Location = new System.Drawing.Point(3, 292);
@@ -223,12 +225,14 @@
             // 
             // cboProviders
             // 
+            this.cboProviders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboProviders.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cboProviders.FormattingEnabled = true;
             this.cboProviders.ItemHeight = 19;
             this.cboProviders.Location = new System.Drawing.Point(3, 333);
             this.cboProviders.Name = "cboProviders";
-            this.cboProviders.Size = new System.Drawing.Size(622, 25);
+            this.cboProviders.Size = new System.Drawing.Size(623, 25);
             this.cboProviders.TabIndex = 60;
             this.cboProviders.UseSelectable = true;
             this.cboProviders.TextChanged += new System.EventHandler(this.cboProviders_TextChanged);

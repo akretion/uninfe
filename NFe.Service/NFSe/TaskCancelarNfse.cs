@@ -12,6 +12,7 @@ using NFSe.Components;
 using NFe.Components.SystemPro;
 using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
+using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
@@ -37,11 +38,17 @@ namespace NFe.Service.NFSe
                 oDadosPedCanNfse = new DadosPedCanNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 PedCanNfse(emp, NomeArquivoXML);
+                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedCanNfse.cMunicipio);
+                WebServiceProxy wsProxy = null;
+                object pedCanNfse = null;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedCanNfse.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
-                object pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
+                    pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                }
+
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
@@ -121,13 +128,22 @@ namespace NFe.Service.NFSe
                         fiorilli.CancelarNfse(NomeArquivoXML);
                         break;
 
-                    case PadroesNFSe.SMARAPD:
-                        cabecMsg = "";
+                    case PadroesNFSe.SIMPLISS:
+                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(oDadosPedCanNfse.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        AssinaturaDigital sing = new AssinaturaDigital();
+                        sing.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+
+                        simpliss.CancelarNfse(NomeArquivoXML);
                         break;
 
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI)
+                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI && padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

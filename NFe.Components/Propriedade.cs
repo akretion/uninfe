@@ -423,6 +423,11 @@ namespace NFe.Components
             public const string EnvDFe_XML = "-con-dist-dfe.xml";
             public const string EnvDFe_TXT = "-con-dist-dfe.txt";
             #endregion
+
+            #region Extensões só para resolver um problema de compatibilidade de um usuário, com o tempo poderemos excluir. Wandrey 10/12/2014
+            public const string cce_XML = "-cce.xml";
+            public const string cancel_XML = "-cancel.xml";
+            #endregion
         }
         #endregion
 
