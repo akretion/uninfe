@@ -2723,9 +2723,10 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             string ext = Propriedade.ExtEnvio.Nfe;
-            if (NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MDFe) >= 0)
+
+            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.ExtEnvio.MDFe) >= 0)
                 ext = Propriedade.ExtEnvio.MDFe;
-            if (NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.Cte) >= 0)
+            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.ExtEnvio.Cte) >= 0)
                 ext = Propriedade.ExtEnvio.Cte;
 
             return Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +

@@ -572,6 +572,10 @@ namespace NFe.Service
                                             Int32 copias = 0, 
                                             string email = "")
         {
+#if DEBUG
+            Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe p/ o arquivo: \"" + nomeArqXMLNFe + "\"");
+#endif
+
             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
             if (!string.IsNullOrEmpty(emp.PastaExeUniDanfe) &&
                 File.Exists(Path.Combine(emp.PastaExeUniDanfe, "unidanfe.exe")))

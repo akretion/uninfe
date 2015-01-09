@@ -136,6 +136,9 @@ namespace NFe.Service
                         }
                         break;
 
+                    case Servicos.EnviarDFe:
+                        break;
+
                     default:
                         oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", cabecMsg);
                         break;
@@ -152,6 +155,9 @@ namespace NFe.Service
             }
             else
                 XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
+
+            if (XmlRetorno == null)
+                throw new Exception("Erro de envio da solicitação do serviço: " + servico.ToString());
 
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno.OuterXml });
 

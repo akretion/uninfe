@@ -775,15 +775,15 @@ namespace NFe.Components
 
             #endregion
 
-            #region DFe
+            #region Distribuição de DFe´s
             InfSchemas.Add("NFE-distDFeInt", new InfSchema()
             {
                 Tag = "distDFeInt",
                 ID = ++id,
                 ArquivoXSD = "DFe\\distDFeInt_v1.00.xsd",
-                //Descricao = "XML de registro de envio de registro de saida",
-                //TagAssinatura = "evento",
-                //TagAtributoId = "infRegistro",
+                Descricao = "XML de consulta de documentos fiscais eletrônicos",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = string.Empty
             });
             #endregion

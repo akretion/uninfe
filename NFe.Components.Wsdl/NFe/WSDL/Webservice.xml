@@ -1608,4 +1608,12 @@
       <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
     </LocalProducao>
   </Estado>
+  <Estado ID="991" Nome="Serviços da SEFAZ Ambiente Nacional" UF="AN">
+      <LocalHomologacao>
+        <DFeRecepcao>WSDL\Homologacao\AN\HANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
+      </LocalHomologacao>
+      <LocalProducao>
+        <DFeRecepcao>WSDL\Producao\AN\PANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
+      </LocalProducao>
+    </Estado>
 </Webservice>

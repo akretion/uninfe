@@ -237,7 +237,7 @@ namespace NFe.Components.SimplISS.p
                     }
                 }
             }
-            catch (Exception e)
+            catch 
             {
                 throw;
             }

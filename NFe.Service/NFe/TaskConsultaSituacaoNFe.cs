@@ -410,6 +410,7 @@ namespace NFe.Service
                                     case "110": //Uso Denegado
                                     case "301":
                                     case "302":
+                                    case "303":                                       
                                         //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s Denegados
                                         //
                                         // NFe existe na pasta EmProcessamento?

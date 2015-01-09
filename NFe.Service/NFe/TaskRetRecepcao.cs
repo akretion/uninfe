@@ -437,6 +437,7 @@ namespace NFe.Service
                         case "205":
                         case "301":
                         case "302":
+                        case "303":
                             ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, protNFeElemento.OuterXml, versao);
                             break;
 

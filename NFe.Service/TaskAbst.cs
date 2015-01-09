@@ -123,7 +123,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-                #region NF-e
+        #region NF-e
                 case Servicos.InutilizarNumerosNFe:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -179,9 +179,9 @@ namespace NFe.Service
                 case Servicos.DownloadNFe:
                     retorna = "NfeDownloadNF";
                     break;
-                #endregion
+        #endregion
 
-                #region MDF-e
+        #region MDF-e
                 case Servicos.ConsultaStatusServicoMDFe:
                     retorna = "MDFeStatusServico";
                     break;
@@ -197,9 +197,9 @@ namespace NFe.Service
                 case Servicos.RecepcaoEventoMDFe:
                     retorna = "MDFeRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
 
-                #region CT-e
+        #region CT-e
                 case Servicos.ConsultaStatusServicoCTe:
                     retorna = "CteStatusServico";
                     break;
@@ -221,7 +221,7 @@ namespace NFe.Service
                     else
                         retorna = "CteRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
             }
 
             return retorna;
@@ -242,13 +242,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-                #region GINFES
+        #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
-                #endregion
+        #endregion
 
-                #region THEMA
+        #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -272,9 +272,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region BETHA
+        #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -298,9 +298,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region CANOAS-RS (ABACO)
+        #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -324,41 +324,41 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
-                #endregion
+        #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
-                #region Blumenau-SC
+        #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
-                #endregion
+        #endregion
 
-                #region BHISS
+        #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region GIF
+        #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region DUETO
+        #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -382,23 +382,23 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region WEBISS
+        #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
-                #endregion
+        #endregion
 
-                #region PAULISTANA
+        #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
-                #endregion
+        #endregion
 
-                #region SALVADOR_BA
+        #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -422,16 +422,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region PORTOVELHENSE
+        #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region PRONIN
+        #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -448,9 +448,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region ISSONLINE4R (4R Sistemas)
+        #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -476,16 +476,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region DSF
+        #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
-                #endregion
+        #endregion
 
-                #region TECNOSISTEMAS
+        #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -509,21 +509,21 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
-                #region TIPLAN
+        #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
-                #region CARIOCA
+        #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
-                #region SMARAPD
+        #region SMARAPD
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
@@ -547,7 +547,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
             }
 
             return retorna;
@@ -1858,79 +1858,84 @@ namespace NFe.Service
         {
             string strProtNfe;
 
-            if (File.Exists(strArquivoNFe))
+            if (!File.Exists(strArquivoNFe))
+                throw new Exception("Arquivo \"" + strArquivoNFe + "\" não encontrado");
+
+            oLerXml.Nfe(strArquivoNFe);
+            string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                        PastaEnviados.Denegados.ToString() + "\\" +
+                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
+            string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));
+            string strNomeArqDenegadaNFe = dArquivo;
+            string arqDen = dArquivo;
+
+            //danasa 11-4-2012
+            bool addNFeDen = true;
+            if (File.Exists(dArquivo))
             {
-                oLerXml.Nfe(strArquivoNFe);
-                string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                            PastaEnviados.Denegados.ToString() + "\\" +
-                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
-                string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));
+                // verifica se a NFe já tem protocolo gravado
+                // só para atualizar notas denegadas que ainda não tem o protocolo atualizado 
+                // e que já estao na pasta de notas denegadas.
+                // Para futuras notas denegadas esta propriedade sempre será false
+                if (File.ReadAllText(dArquivo).IndexOf("<protNFe>") > 0)
+                    addNFeDen = false;
+            }
+            if (addNFeDen)
+            {
+                ///
+                /// monta o XML de denegacao
+                strProtNfe = protNFe;
+                ///
+                /// gera o arquivo de denegacao na pasta EmProcessamento
+                strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, versao);
+                if (string.IsNullOrEmpty(strNomeArqDenegadaNFe))
+                    throw new Exception("Erro de criação do arquivo de distribuição da nota denegada");
 
-                //danasa 11-4-2012
-                bool addNFeDen = true;
-                if (File.Exists(dArquivo))
+                ///
+                /// exclui o XML denegado, se existir
+                Functions.DeletarArquivo(dArquivo);
+                ///
+                /// Move a NFE-denegada da pasta em processamento para NFe Denegadas
+                TFunctions.MoverArquivo(strNomeArqDenegadaNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
+                ///
+                /// verifica se o arquivo da NFe já existe na pasta denegadas
+                dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe));
+
+                if (!File.Exists(dArquivo))
                 {
-                    // verifica se a NFe já tem protocolo gravado
-                    // só para atualizar notas denegadas que ainda não tem o protocolo atualizado 
-                    // e que já estao na pasta de notas denegadas.
-                    // Para futuras notas denegadas esta propriedade sempre será false
-                    if (File.ReadAllText(dArquivo).IndexOf("<protNFe>") > 0)
-                        addNFeDen = false;
-                }
-                if (addNFeDen)
-                {
-                    ///
-                    /// monta o XML de denegacao
-                    strProtNfe = protNFe;
-                    ///
-                    /// gera o arquivo de denegacao na pasta EmProcessamento
-                    string strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, versao);
-                    ///
-                    /// exclui o XML denegado, se existir
-                    //string destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strNomeArqDenegadaNFe));
-                    Functions.DeletarArquivo(dArquivo);
-                    ///
-                    /// Move a NFE-denegada da pasta em processamento para NFe Denegadas
-                    TFunctions.MoverArquivo(strNomeArqDenegadaNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
-                    ///
-                    /// verifica se o arquivo da NFe já existe na pasta denegadas
-                    dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe));
-                    if (!File.Exists(dArquivo))
+                    if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup))
                     {
-                        if (Empresas.Configuracoes[emp].PastaBackup.Trim() != "")
+                        //Criar Pasta do Mês para gravar arquivos enviados
+                        string nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" +
+                                                    PastaEnviados.Denegados + "\\" +
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
+                        if (!Directory.Exists(nomePastaBackup))
+                            System.IO.Directory.CreateDirectory(nomePastaBackup);
+
+                        //Se conseguiu criar a pasta ele move o arquivo, caso contrário
+                        if (Directory.Exists(nomePastaBackup))
                         {
-                            //Criar Pasta do Mês para gravar arquivos enviados
-                            string nomePastaBackup = Empresas.Configuracoes[emp].PastaBackup + "\\" +
-                                                        PastaEnviados.Denegados + "\\" +
-                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
-                            if (!Directory.Exists(nomePastaBackup))
-                                System.IO.Directory.CreateDirectory(nomePastaBackup);
-
-                            //Se conseguiu criar a pasta ele move o arquivo, caso contrário
-                            if (Directory.Exists(nomePastaBackup))
-                            {
-                                //Mover o arquivo da nota fiscal para a pasta de backup
-                                string destinoBackup = Path.Combine(nomePastaBackup, Path.GetFileName(strArquivoNFe));
-                                Functions.DeletarArquivo(destinoBackup);
-                                File.Copy(strArquivoNFe, destinoBackup);
-                            }
-                            else
-                            {
-                                //throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + nomePastaBackup + ")");
-                            }
+                            //Mover o arquivo da nota fiscal para a pasta de backup
+                            string destinoBackup = Path.Combine(nomePastaBackup, Path.GetFileName(strArquivoNFe));
+                            Functions.DeletarArquivo(destinoBackup);
+                            File.Copy(strArquivoNFe, destinoBackup);
                         }
-                        // move o arquivo NFe para a pasta Denegada
-                        File.Move(strArquivoNFe, dArquivo);
+                        else
+                        {
+                            //throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + nomePastaBackup + ")");
+                        }
                     }
-                    try
-                    {
-                        TFunctions.ExecutaUniDanfe(strNomeArqDenegadaNFe, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Auxiliar.WriteLog("ProcessaDenegada: " + ex.Message);
-                    }
+                    // move o arquivo NFe para a pasta Denegada
+                    File.Move(strArquivoNFe, dArquivo);
                 }
+            }
+            try
+            {
+                TFunctions.ExecutaUniDanfe(arqDen, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
+            }
+            catch (Exception ex)
+            {
+                Auxiliar.WriteLog("ProcessaDenegada: " + ex.Message);
             }
         }
         #endregion

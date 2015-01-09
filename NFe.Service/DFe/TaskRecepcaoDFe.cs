@@ -58,27 +58,20 @@ namespace NFe.Service
                         Functions.PopulateClasse(_distDFeInt, consdistDFeIntElemento);
                     }
 
-                    int cUF = 91;
-
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy =
                         ConfiguracaoApp.DefinirWS(Servico,
                                                     emp,
-                                                    cUF,
+                                                    991,
                                                     _distDFeInt.tpAmb);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
-
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString("00"));
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDFe);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,
                                         oConsNFDestEvento,
                                         wsProxy.NomeMetodoWS[0],
-                                        oCabecMsg,
+                                        null,
                                         this,
                                         Propriedade.ExtEnvio.EnvDFe_XML.Replace(".xml", ""),
                                         Propriedade.ExtRetorno.retEnvDFe_XML.Replace(".xml", ""));
