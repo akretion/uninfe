@@ -2186,6 +2186,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANNFeDistribuicaoDFe.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANNFeDistribuicaoDFe.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVarginhaMG-CONAN.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVarginhaMG-CONAN.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

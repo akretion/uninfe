@@ -439,6 +439,9 @@ namespace NFe.Settings
                         if (!t.CertificadoInstalado && !string.IsNullOrEmpty(t.CertificadoSenha))
                             t.CertificadoSenha = Criptografia.descriptografaSenha(t.CertificadoSenha);
                     }
+
+                    t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
+
                     t.Nome = this.Nome;
                     t.CNPJ = this.CNPJ;
                     t.Servico = this.Servico;
@@ -459,7 +462,7 @@ namespace NFe.Settings
                     throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + this.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
                 }
             }
-        }        
+        }
         #endregion
 
         #region BuscaConfiguracaoCertificado
@@ -479,7 +482,7 @@ namespace NFe.Settings
                     if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
                         collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
                     else
-                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false); 
+                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
 
                     for (int i = 0; i < collection1.Count; i++)
                     {
@@ -741,7 +744,7 @@ namespace NFe.Settings
                 /// vazia?
                 /// 
                 bool vazia = true;
-                foreach(var vfile in Directory.GetFiles(this.PastaEmpresa, "*.*", SearchOption.AllDirectories))
+                foreach (var vfile in Directory.GetFiles(this.PastaEmpresa, "*.*", SearchOption.AllDirectories))
                 {
                     if (vfile.EndsWith(Propriedade.NomeArqXmlFluxoNfe)) continue;
                     if (vfile.EndsWith(Propriedade.NomeArqConfig)) continue;
@@ -750,8 +753,8 @@ namespace NFe.Settings
                     if (vfile.EndsWith(Propriedade.NomeArqXmlLoteBkp3)) continue;
                     if (vfile.EndsWith(".lock")) continue;
 
-                    vazia = false; 
-                    break; 
+                    vazia = false;
+                    break;
                 }
                 if (vazia)
                 {
@@ -885,6 +888,8 @@ namespace NFe.Settings
                 if (dados.UsaCertificado)
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
 
+                dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
+
                 ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
                 objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);
 
@@ -939,7 +944,7 @@ namespace NFe.Settings
                     }
                     catch (Exception ex)
                     {
-                        Auxiliar.WriteLog("Ocorreu um erro ao tentar conectar no FTP: " + ex.Message);
+                        Auxiliar.WriteLog("Ocorreu um erro ao tentar conectar no FTP: " + ex.Message, false);
                     }
                     finally
                     {

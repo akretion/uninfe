@@ -207,7 +207,7 @@ namespace NFe.Settings
                                 else
                                 {
                                     if (item != null && !item.Manual)
-                                        Auxiliar.WriteLog(fileoutput + " não copiado");
+                                        Auxiliar.WriteLog(fileoutput + " não copiado", false);
                                 }
                             }
                             else if (item != null)
@@ -224,7 +224,7 @@ namespace NFe.Settings
                 {
                     string xMotivo = "Não foi possível atualizar pacotes de Schemas/WSDLs.";
 
-                    Auxiliar.WriteLog(xMotivo + Environment.NewLine + ex.Message);
+                    Auxiliar.WriteLog(xMotivo + Environment.NewLine + ex.Message, false);
 
                     if (Empresas.Configuracoes.Count > 0)
                     {
@@ -537,7 +537,7 @@ namespace NFe.Settings
             }
             catch (Exception ex)
             {
-                Auxiliar.WriteLog(ex.Message);
+                Auxiliar.WriteLog(ex.Message, false);
             }
         }
         #endregion

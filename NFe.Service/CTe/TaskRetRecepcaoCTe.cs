@@ -303,7 +303,7 @@ namespace NFe.Service
                                             }
                                             catch (Exception ex)
                                             {
-                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message);
+                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message, false);
                                             }
                                         }
                                         break;
@@ -330,7 +330,7 @@ namespace NFe.Service
                                             }
                                             catch (Exception ex)
                                             {
-                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message);
+                                                Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message, false);
                                             }
                                         }
                                         break;

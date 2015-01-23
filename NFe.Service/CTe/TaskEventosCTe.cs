@@ -206,7 +206,7 @@ namespace NFe.Service
                                         }
                                         catch (Exception ex)
                                         {
-                                            Auxiliar.WriteLog("TaskEventosCTe: " + ex.Message);
+                                            Auxiliar.WriteLog("TaskEventosCTe: " + ex.Message, false);
                                         }
                                         break;
                                 }

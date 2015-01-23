@@ -23,19 +23,19 @@ namespace uninfe2
         {
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
-                Auxiliar.WriteLog(e.Exception.Message + "\r\n" + e.Exception.StackTrace);
+                Auxiliar.WriteLog(e.Exception.Message + "\r\n" + e.Exception.StackTrace, false);
                 if (e.Exception.InnerException != null)
                 {
-                    Auxiliar.WriteLog(e.Exception.InnerException.Message + "\r\n" + e.Exception.InnerException.StackTrace);
+                    Auxiliar.WriteLog(e.Exception.InnerException.Message + "\r\n" + e.Exception.InnerException.StackTrace, false);
 
                     if (e.Exception.InnerException.InnerException != null)
                     {
-                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.StackTrace);
+                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.StackTrace, false);
                     }
 
                     if (e.Exception.InnerException.InnerException.InnerException != null)
                     {
-                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.InnerException.StackTrace);
+                        Auxiliar.WriteLog(e.Exception.InnerException.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.InnerException.StackTrace, false);
                     }
                 }
 #if false
@@ -57,7 +57,7 @@ namespace uninfe2
 
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
             {
-                Auxiliar.WriteLog(e.ExceptionObject.ToString());
+                Auxiliar.WriteLog(e.ExceptionObject.ToString(), false);
             });
 
             //NFe.UI.uninfeDummy.showError = true;

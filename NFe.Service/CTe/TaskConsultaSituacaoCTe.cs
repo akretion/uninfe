@@ -138,6 +138,17 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            oGerarXML.XmlDistEventoCTe(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
+
+            ///
+            /// CNPJ da chave não é de uma empresa Uninfe
+            /// 
+            if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
+            {
+                return;
+            }
+
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
 
@@ -145,10 +156,6 @@ namespace NFe.Service
 
             XmlDocument doc = new XmlDocument();
             doc.Load(msXml);
-
-            #region Distribuicao de Eventos
-            oGerarXML.XmlDistEventoCTe(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
-            #endregion
 
             XmlNodeList retConsSitList = doc.GetElementsByTagName("retConsSitCTe");
 
@@ -288,7 +295,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoCTe: " + ex.Message);
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoCTe: " + ex.Message, false);
                                                 }
                                         }
 
@@ -324,7 +331,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message);
+                                                    Auxiliar.WriteLog("TaskRetRecepcaoCTe: " + ex.Message, false);
                                                 }
                                             }
                                         }

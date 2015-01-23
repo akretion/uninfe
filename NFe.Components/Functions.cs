@@ -714,21 +714,17 @@ namespace NFe.Components
         }
 
         #region WriteLog()
-        public static void WriteLog(string msg, bool GravarLogOperacoesRealizadas)
+        public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog, string CNPJEmpresa)
         {
-
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif
+            if (!string.IsNullOrEmpty(CNPJEmpresa))
+                CNPJEmpresa += "_";
 
-            WriteLog(msg, false, GravarLogOperacoesRealizadas);
-        }
-
-        public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog)
-        {
             if (geraLog)
             {
-                string fileName = Propriedade.PastaLog + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
+                string fileName = Propriedade.PastaLog + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + CNPJEmpresa + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
 
                 DateTime startTime;
                 DateTime stopTime;

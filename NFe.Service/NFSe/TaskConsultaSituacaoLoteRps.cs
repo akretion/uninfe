@@ -94,7 +94,8 @@ namespace NFe.Service.NFSe
                         break;
 
                 }
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (padraoNFSe != PadroesNFSe.IPM && 
+                    padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -106,7 +107,7 @@ namespace NFe.Service.NFSe
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedSitLoteRps, Propriedade.ExtRetorno.SitLoteRps)));
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSitLoteRps) + Propriedade.ExtRetorno.SitLoteRps);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }

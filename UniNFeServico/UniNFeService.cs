@@ -179,7 +179,7 @@ namespace UniNFeServico
         {
             bool o = ConfiguracaoApp.GravarLogOperacoesRealizadas;
             ConfiguracaoApp.GravarLogOperacoesRealizadas = true;
-            Auxiliar.WriteLog(msg);
+            Auxiliar.WriteLog(msg, false);
             ConfiguracaoApp.GravarLogOperacoesRealizadas = o;
         }
     }

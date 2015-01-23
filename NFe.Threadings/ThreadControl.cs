@@ -94,16 +94,16 @@ namespace NFe.Threadings
                             {
                                 ThreadItem item = Buffer.Dequeue();
                                 if (item == null) continue;
-                                Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento pelo Buffer");
+                                Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento pelo Buffer", false);
                                 processar.Invoke(item);
                                 Thread.Sleep(0);
-                                Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento pelo Buffer");
+                                Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento pelo Buffer", false);
                                 if (Disposed) return;//cai fora ... foi descarregada
                             }
                         }
                         catch (Exception ex)
                         {
-                            Auxiliar.WriteLog("ExceptionBuffer: " + ex.ToString());
+                            Auxiliar.WriteLog("ExceptionBuffer: " + ex.ToString(), false);
                         }
                         finally
                         {

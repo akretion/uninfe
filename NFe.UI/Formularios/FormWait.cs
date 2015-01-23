@@ -23,7 +23,7 @@ namespace NFe.UI.Formularios
             uninfeDummy.ClearControls(this, true, true);
             this.metroLabel6.Text = mensagem;
 
-            NFe.Settings.Auxiliar.WriteLog(this.metroLabel6.Text);
+            NFe.Settings.Auxiliar.WriteLog(this.metroLabel6.Text, false);
         }
 
         protected override void OnShown(EventArgs e)

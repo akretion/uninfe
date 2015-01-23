@@ -172,5 +172,45 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_gov_sp_piracicaba_sistemas_www_h_NfseService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx")]
+        public string NFe_Components_br_com_etransparencia_nfe_varginha_p_ws_nfe {
+            get {
+                return ((string)(this["NFe_Components_br_com_etransparencia_nfe_varginha_p_ws_nfe"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfehomologacao.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx")]
+        public string NFe_Components_br_com_etransparencia_nfehomologacao_varginha_h_ws_nfe {
+            get {
+                return ((string)(this["NFe_Components_br_com_etransparencia_nfehomologacao_varginha_h_ws_nfe"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx")]
+        public string NFe_Components_br_com_etransparencia_nfe_p_ws_nfe {
+            get {
+                return ((string)(this["NFe_Components_br_com_etransparencia_nfe_p_ws_nfe"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfehomologacao.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx")]
+        public string NFe_Components_br_com_etransparencia_nfehomologacao_h_ws_nfe {
+            get {
+                return ((string)(this["NFe_Components_br_com_etransparencia_nfehomologacao_h_ws_nfe"]));
+            }
+        }
     }
 }

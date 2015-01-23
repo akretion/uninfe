@@ -655,9 +655,9 @@ namespace NFe.Service
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName("cStat")[0] != null)
+                if (retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatCons = retConsSitElemento.GetElementsByTagName("cStat")[0].InnerText;
+                    cStatCons = retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
                 }
                 switch (cStatCons)
                 {
@@ -667,25 +667,31 @@ namespace NFe.Service
                             for (int i = 0; i < envEventosList.Count; ++i)
                             {
                                 XmlElement eleRetorno = envEventosList.Item(i) as XmlElement;
-                                cStatCons = eleRetorno.GetElementsByTagName("cStat")[0].InnerText;
+                                cStatCons = eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
                                 if (cStatCons == "135" || cStatCons == "136" || cStatCons == "155")
                                 {
-                                    string chNFe = eleRetorno.GetElementsByTagName("chNFe")[0].InnerText;
-                                    Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
-                                    NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText);
+                                    string chNFe = eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.chNFe.ToString())[0].InnerText;
+                                    Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                                    NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEvento.ToString())[0].InnerText);
                                     string Id = NFe.Components.NFeStrConstants.ID + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado
                                     ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
                                     foreach (XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
                                     {
-                                        string Idd = env.Attributes.GetNamedItem("Id").Value;
+                                        string Idd = env.Attributes.GetNamedItem(NFe.ConvertTxt.TpcnResources.Id.ToString()).Value;
                                         if (Idd == Id)
                                         {
-                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
+                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
-                                            //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+                                            ///
+                                            /// Gerar o arquivo XML de distribuição do evento
+                                            /// 
+                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, 
+                                                                    env.ParentNode.OuterXml, 
+                                                                    eleRetorno.OuterXml, 
+                                                                    dhRegEvento,
+                                                                    true);
 
                                             switch (tpEvento)
                                             {
@@ -697,7 +703,7 @@ namespace NFe.Service
                                                     }
                                                     catch (Exception ex)
                                                     {
-                                                        Auxiliar.WriteLog("TaskEventos: " + ex.Message);
+                                                        Auxiliar.WriteLog("TaskEventos: " + ex.Message, false);
                                                     }
                                                     break;
 
@@ -710,7 +716,7 @@ namespace NFe.Service
                                                         }
                                                         catch (Exception ex)
                                                         {
-                                                            Auxiliar.WriteLog("TaskEventos: " + ex.Message);
+                                                            Auxiliar.WriteLog("TaskEventos: " + ex.Message, false);
                                                         }
                                                     break;
                                             }

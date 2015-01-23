@@ -349,7 +349,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskRetRecepcaoMDFe: " + ex.Message);
+                                                    Auxiliar.WriteLog("TaskRetRecepcaoMDFe: " + ex.Message, false);
                                                 }
                                             }
                                             //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012

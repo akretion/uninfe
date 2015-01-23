@@ -12,6 +12,7 @@ using NFSe.Components;
 using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
+using NFe.Components.Conam;
 
 namespace NFe.Service.NFSe
 {
@@ -106,9 +107,19 @@ namespace NFe.Service.NFSe
                         simpliss.ConsultarLoteRps(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.CONAM:
+                        Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        conam.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI && padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (base.IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -120,10 +131,11 @@ namespace NFe.Service.NFSe
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.LoteRps)));
+                                                      Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedLoteRps) + Propriedade.ExtRetorno.LoteRps);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
+
             }
             catch (Exception ex)
             {

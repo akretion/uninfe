@@ -13,6 +13,7 @@ using NFe.Components.SystemPro;
 using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
+using NFe.Components.Conam;
 
 namespace NFe.Service.NFSe
 {
@@ -47,9 +48,9 @@ namespace NFe.Service.NFSe
                 if (padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe);
-                    envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);    
+                    envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
-                
+
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
@@ -147,10 +148,21 @@ namespace NFe.Service.NFSe
                         simpliss.EmiteNF(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.CONAM:
+                        Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio),
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        conam.EmiteNF(NomeArquivoXML);
+                        break;
+
+
 
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM && padraoNFSe != PadroesNFSe.SYSTEMPRO && padraoNFSe != PadroesNFSe.SIGCORP_SIGISS && padraoNFSe != PadroesNFSe.FIORILLI && padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -162,7 +174,7 @@ namespace NFe.Service.NFSe
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps)));
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvLoteRps) + "\\" + Propriedade.ExtRetorno.RetLoteRps);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
 

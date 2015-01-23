@@ -88,6 +88,7 @@ namespace NFe.Service
 
             string erroMessage = string.Empty;
 
+            erroMessage += "Versão|" + NFe.Components.Propriedade.Versao + "\r\n";
             erroMessage += "ErrorCode|" + ((int)erroPadrao).ToString("0000000000");
             erroMessage += "\r\n";
             erroMessage += "Message|" + exception.Message;
@@ -573,14 +574,14 @@ namespace NFe.Service
                                             string email = "")
         {
 #if DEBUG
-            Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe p/ o arquivo: \"" + nomeArqXMLNFe + "\"");
+            Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe p/ o arquivo: \"" + nomeArqXMLNFe + "\"", false);
 #endif
 
             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
             if (!string.IsNullOrEmpty(emp.PastaExeUniDanfe) &&
                 File.Exists(Path.Combine(emp.PastaExeUniDanfe, "unidanfe.exe")))
             {
-                Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe.");
+                Auxiliar.WriteLog("ExecutaUniDanfe: Preparando a execução do UniDANFe.", false);
 
                 string nomePastaEnviado = string.Empty;
                 string arqProcNFe = string.Empty;
@@ -1147,9 +1148,9 @@ namespace NFe.Service
                         ///OBS: deveria existir um argumento para excluir o arquivo auxiliar, já que ele é temporario
                     }
 
-                    Auxiliar.WriteLog("ExecutaUniDanfe: Iniciou a execução do UniDANFe.");
+                    Auxiliar.WriteLog("ExecutaUniDanfe: Iniciou a execução do UniDANFe.", false);
                     System.Diagnostics.Process.Start(Path.Combine(emp.PastaExeUniDanfe, "unidanfe.exe"), Args);
-                    Auxiliar.WriteLog("ExecutaUniDanfe: Encerrou a execução do UniDANFe.");
+                    Auxiliar.WriteLog("ExecutaUniDanfe: Encerrou a execução do UniDANFe.", false);
 
                     if (fAuxiliar != "")
                     {
@@ -1211,6 +1212,24 @@ namespace NFe.Service
         #endregion
 
         #region Decompress
+        public static string Decompress(string input)
+        {
+            char[] enc = input.ToCharArray();
+            byte[] dec = Convert.FromBase64CharArray(enc, 0, enc.Length);
+
+            byte[] encodedDataAsBytes = Convert.FromBase64String(input);
+            using (System.IO.Stream comp = new System.IO.MemoryStream(encodedDataAsBytes))
+            {
+                using (System.IO.Stream decomp = new System.IO.Compression.GZipStream(comp, System.IO.Compression.CompressionMode.Decompress, false))
+                {
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(decomp))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+        }
+/*
         public static string Decompress(string compressedValue)
         {
             byte[] gZipBuffer = Convert.FromBase64String(compressedValue);
@@ -1230,6 +1249,7 @@ namespace NFe.Service
                 return Encoding.UTF8.GetString(buffer);
             }
         }
+*/
 	    #endregion    
 
         /// <summary>

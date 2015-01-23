@@ -71,19 +71,18 @@ namespace NFe.Settings
         #endregion
 
         #region WriteLog()
-        public static void WriteLog(string msg)
+        public static void WriteLog(string msg, bool gravarStackTrace)
         {
-
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif
-
-            Auxiliar.WriteLog(msg, false);
-        }
-        
-        public static void WriteLog(string msg, bool gravarStackTrace)
-        {
-            NFe.Components.Functions.WriteLog(msg, gravarStackTrace, ConfiguracaoApp.GravarLogOperacoesRealizadas);
+            int emp = -1;
+            try
+            {
+                emp = Empresas.FindEmpresaByThread();
+            }
+            catch { }
+            NFe.Components.Functions.WriteLog(msg, gravarStackTrace, ConfiguracaoApp.GravarLogOperacoesRealizadas, emp >= 0 ? Empresas.Configuracoes[emp].CNPJ + "_" + Empresas.Configuracoes[emp].Servico.ToString() : "");
         }
         #endregion
 

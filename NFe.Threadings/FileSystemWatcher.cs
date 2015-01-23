@@ -66,7 +66,7 @@ namespace NFe.Threadings
             CancelProcess = false;
             if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
                 CancelProcess = true;
-            
+
             while (!CancelProcess)
             {
                 try
@@ -166,8 +166,8 @@ namespace NFe.Threadings
                 }
                 catch (Exception ex)
                 {
-                    Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
-                    Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
+                    Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
+                        Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
                 }
                 finally
                 {

@@ -147,7 +147,7 @@ namespace NFe.Service
 
                     dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
                     dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                    dadosPedSit.versao = consSitNFeElemento.Attributes["versao"].InnerText;
+                    dadosPedSit.versao = consSitNFeElemento.Attributes["versao"].Value;
                     dadosPedSit.mod = dadosPedSit.chNFe.Substring(20, 2);
 
                     bool doSave = false;
@@ -187,6 +187,17 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            oGerarXML.XmlDistEvento(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
+
+            ///
+            /// CNPJ da chave não é de uma empresa Uninfe
+            /// 
+            if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
+            {
+                return;
+            }
+
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
 
@@ -194,10 +205,6 @@ namespace NFe.Service
 
             XmlDocument doc = new XmlDocument();
             doc.Load(msXml);
-
-            #region Distribuicao de Eventos
-            oGerarXML.XmlDistEvento(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
-            #endregion
 
             XmlNodeList retConsSitList = doc.GetElementsByTagName("retConsSitNFe");
 
@@ -223,9 +230,9 @@ namespace NFe.Service
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName("cStat")[0] != null)
+                if (retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatCons = retConsSitElemento.GetElementsByTagName("cStat")[0].InnerText;
+                    cStatCons = retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
                 }
 
                 switch (cStatCons)
@@ -307,11 +314,11 @@ namespace NFe.Service
                                 XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
 
                                 //Pegar o Status do Retorno da consulta situação
-                                string strStat = Functions.LerTag(infConsSitElemento, "cStat").Replace(";", "");
+                                string strStat = Functions.LerTag(infConsSitElemento, NFe.ConvertTxt.TpcnResources.cStat.ToString(), false);
 
                                 //Pegar a versão do XML
                                 var protNFeElemento = (XmlElement)retConsSitElemento.GetElementsByTagName("protNFe")[0];
-                                string versao = protNFeElemento.GetAttribute("versao");
+                                string versao = protNFeElemento.GetAttribute(NFe.ConvertTxt.TpcnResources.versao.ToString());
 
                                 switch (strStat)
                                 {
@@ -342,7 +349,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe: Gerou o arquivo de distribuição através da consulta situação da NFe.");
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe: Gerou o arquivo de distribuição através da consulta situação da NFe.", false);
                                                     oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
                                                 }
                                             }
@@ -393,7 +400,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe:  (Falha na execução do UniDANFe) " + ex.Message);
+                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe:  (Falha na execução do UniDANFe) " + ex.Message, false);
                                                 }
                                             }
                                         }

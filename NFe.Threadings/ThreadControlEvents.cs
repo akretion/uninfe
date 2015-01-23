@@ -35,7 +35,7 @@ namespace NFe.Threadings
 
             //danasa 12/8/2011
             //mudei de posição e inclui o FullName
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento");
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento", false);
             Processar(item);
         }
 
@@ -57,7 +57,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnReleased(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento");
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento", false);
 
             //Se estiver reconfigurando o UniNFe, tem que reiniciar as threads
             if (item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
@@ -75,7 +75,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnEnded(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento");
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento", false);
         }
         #endregion
 

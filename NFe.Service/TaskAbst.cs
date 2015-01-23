@@ -1628,6 +1628,8 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            bool gException = true;
+
             bool booValido = false;
             int nPos = 0;
             string cTextoErro = "";
@@ -1652,27 +1654,36 @@ namespace NFe.Service
                             switch (tpEmis)
                             {
                                 case (int)TipoEmissao.teNormal:
+                                    ///
+                                    /// Ops!!!
+                                    /// Foi emitido em contingencia e agora os quer enviar
+                                    /// 
                                 case (int)TipoEmissao.teFS:
                                 case (int)TipoEmissao.teFSDA:
                                 case (int)TipoEmissao.teEPECeDPEC:
                                 case (int)TipoEmissao.teOffLine:
-                                    booValido = true; break;
+                                //case (int)TipoEmissao.teSVCSP:
+                                    booValido = true; 
+                                    break;
 
-                                default:
-                                    goto default;
+                                //default:
+                                  //  goto default;
                             }
                             break;
 
                         case (int)TipoEmissao.teSVCSP:
-                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP) { booValido = true; } else { goto default; }
+                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP) { booValido = true; } else { goto default; }
+                            booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP);
                             break;
 
                         case (int)TipoEmissao.teSVCAN:
-                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN) { booValido = true; } else { goto default; }
+                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN) { booValido = true; } else { goto default; }
+                            booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN);
                             break;
 
                         case (int)TipoEmissao.teSVCRS:
-                            if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS) { booValido = true; } else { goto default; }
+                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS) { booValido = true; } else { goto default; }
+                            booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS);
                             break;
 
                         case (int)TipoEmissao.teFS:
@@ -1680,8 +1691,10 @@ namespace NFe.Service
                         case (int)TipoEmissao.teFSDA:
                         case (int)TipoEmissao.teOffLine:
                             //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
-                            booValido = false;
+                            gException = booValido = false;
                             break;
+
+                            /*
 
                         default:
                             cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
@@ -1690,9 +1703,19 @@ namespace NFe.Service
                                          "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
 
                             throw new Exception(cTextoErro);
+                             */
                     }
 
                     break;
+            }
+            if (!booValido && gException)
+            {
+                cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
+                             "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
+                             "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
+                             "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+
+                throw new Exception(cTextoErro);
             }
 
             #region Verificar o ambiente da nota com o que está configurado no uninfe. Wandrey 20/08/2014
@@ -1935,7 +1958,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                Auxiliar.WriteLog("ProcessaDenegada: " + ex.Message);
+                Auxiliar.WriteLog("ProcessaDenegada: " + ex.Message, false);
             }
         }
         #endregion
@@ -1952,6 +1975,27 @@ namespace NFe.Service
         {
             GerarXML gerarXML = new GerarXML(empresa);
             gerarXML.XmlPedRec(mod, nRec, versao);
+        }
+        #endregion
+
+        #region Ultiliza WS compilado
+        public bool IsUtilizaCompilacaoWs(PadroesNFSe padrao)
+        {
+            bool retorno = true;
+
+            switch (padrao)
+            {
+                case PadroesNFSe.IPM:
+                case PadroesNFSe.SYSTEMPRO:
+                case PadroesNFSe.SIGCORP_SIGISS:
+                case PadroesNFSe.FIORILLI:
+                case PadroesNFSe.CONAM:
+                case PadroesNFSe.SIMPLISS:
+                    retorno = false;
+                    break;
+            }
+
+            return retorno;
         }
         #endregion
 

@@ -649,7 +649,7 @@ namespace NFe.UI
                             new ConfiguracaoApp().GravarArqEmpresas();
                             this.CreateControles();
 
-                            Auxiliar.WriteLog("Empresa '" + _Empresa.CNPJ + "' - Serviço: '" + _Empresa.Servico.ToString() + "' excluida");
+                            Auxiliar.WriteLog("Empresa '" + _Empresa.CNPJ + "' - Serviço: '" + _Empresa.Servico.ToString() + "' excluída", false);
 
                             if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja excluir as pastas desta empresa?\r\n\r\nExcluindo-as, serão eliminadas todos os XML's autorizados/denegados/eventos", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {

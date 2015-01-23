@@ -32,6 +32,13 @@ namespace NFe.Components.Abstract
             write.Dispose();
         }
 
+        public string CreateXML(Object objetoRetorno)
+        {
+            Object tcErros = null;
+
+            return CreateXML(objetoRetorno, tcErros);
+        }
+
         public string CreateXML(Object objetoRetorno, Object tcErros)
         {
             XmlDocument xmlDoc = new XmlDocument();

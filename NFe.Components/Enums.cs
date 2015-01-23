@@ -511,7 +511,13 @@ namespace NFe.Components
         /// Prefeitura de Piracicaba - SP
         /// </summary>
         [Description("SimplIss")]
-        SIMPLISS
+        SIMPLISS,
+        /// <summary>
+        /// Padrão Conam
+        /// Prefeitura de Varginha - MG
+        /// </summary>
+        [Description("CONAM")]
+        CONAM
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

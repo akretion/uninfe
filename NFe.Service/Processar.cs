@@ -1098,6 +1098,7 @@ namespace NFe.Service
                 else
                 {
                     if (nfe is TaskRetRecepcao ||
+                        nfe is TaskRecepcaoDFe ||
                         nfe is TaskRecepcaoDPEC ||
                         nfe is TaskConsultaStatus ||
                         nfe is TaskConsultaSituacaoNFe ||
@@ -1311,9 +1312,9 @@ namespace NFe.Service
             catch (Exception ex)
             {
                 if (empresa >= 0)
-                    Functions.WriteLog(Empresas.Configuracoes[empresa].Nome + "\r\n" + ex.Message, true);
+                    Functions.WriteLog(Empresas.Configuracoes[empresa].Nome + "\r\n" + ex.Message, false, true, Empresas.Configuracoes[empresa].CNPJ);
                 else
-                    Functions.WriteLog("Geral:\r\n" + ex.Message, true);
+                    Functions.WriteLog("Geral:\r\n" + ex.Message, false, true, "");
             }
         }
         #endregion

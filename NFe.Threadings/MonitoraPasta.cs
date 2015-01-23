@@ -176,7 +176,7 @@ namespace NFe.Threadings
             }
             catch(Exception ex)
             {
-                Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace);
+                Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
             }
         }
 

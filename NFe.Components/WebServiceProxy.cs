@@ -816,7 +816,8 @@ namespace NFe.Components
                     {
                         string msg = "";
                         Console.WriteLine(msg = "wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
-                        NFe.Components.Functions.WriteLog(msg, true);
+
+                        NFe.Components.Functions.WriteLog(msg, false, true, "");
                     }
                 }
             }
