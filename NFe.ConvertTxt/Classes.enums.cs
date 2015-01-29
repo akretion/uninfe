@@ -33,6 +33,7 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLMDFePedRec = "1.00";
         public static string VersaoXMLMDFePedSit = "1.00";
         public static string VersaoXMLMDFeEvento = "1.00";
+        public static string VersaoXMLMDFeConsNaoEnc = "1.00";
         #endregion
 
         #region CT-e

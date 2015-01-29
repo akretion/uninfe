@@ -245,6 +245,10 @@ namespace NFe.Components
         /// Enviar XML Evento MDFe
         /// </summary>
         RecepcaoEventoMDFe,
+        /// <summary>
+        /// Consulta MDFe nao encerrados
+        /// </summary>
+        ConsultaNaoEncerradoMDFe,
         #endregion
 
         #region Serviços em comum NFe, CTe, MDFe e NFSe

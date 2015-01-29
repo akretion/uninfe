@@ -897,6 +897,7 @@ namespace NFe.Components
             MDFeConsulta =
             MDFeStatusServico =
             MDFeRecepcaoEvento =
+            MDFeNaoEncerrado =
                 ///
                 /// DF-e
             DFeRecepcao =
@@ -988,6 +989,10 @@ namespace NFe.Components
         /// Recepcao dos eventos do MDF-e
         /// </summary>
         public string MDFeRecepcaoEvento { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MDFeNaoEncerrado { get; set; }
         #endregion
 
         #region CTe

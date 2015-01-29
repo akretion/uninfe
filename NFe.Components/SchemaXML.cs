@@ -599,6 +599,19 @@ namespace NFe.Components
             });
             #endregion
 
+            #region XML de Eventos Gerais do MDFe
+            InfSchemas.Add("NFE-consMDFeNaoEnc", new InfSchema()
+            {
+                Tag = "consMDFeNaoEnc",
+                ID = ++id,
+                ArquivoXSD = "MDFe\\consMDFeNaoEnc_v1.00.xsd",
+                Descricao = "Pedido de Consulta MDF-e não encerrados",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+            });
+            #endregion
+
             #endregion
 
             #region CTe

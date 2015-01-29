@@ -899,6 +899,9 @@ namespace NFe.Settings
                         case Servicos.RecepcaoEventoMDFe:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcaoEvento : list.LocalProducao.MDFeRecepcaoEvento);
                             break;
+                        case Servicos.ConsultaNaoEncerradoMDFe:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeNaoEncerrado : list.LocalProducao.MDFeNaoEncerrado);
+                            break;
                         #endregion
 
                         #region CT-e

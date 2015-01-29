@@ -36,6 +36,7 @@ namespace uninfe_ws
                 "MDFeConsulta",
                 "MDFeStatusServico",
                 "MDFeRecepcaoEvento",
+                "MDFeNaoEncerrado",
                 "DFeRecepcao",
                 "CTeRecepcaoEvento",
                 "CTeRecepcao",

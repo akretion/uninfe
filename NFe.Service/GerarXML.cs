@@ -1439,7 +1439,7 @@ namespace NFe.Service
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresNFeNode, "chNFe");
                                         string FCNPJCPF = Functions.LerTag((XmlElement)infresNFeNode, "CNPJ", false);
                                         if (string.IsNullOrEmpty(FCNPJCPF)) FCNPJCPF = Functions.LerTag((XmlElement)infresNFeNode, "CPF", false);
-                                        ConteudoRetorno += FCNPJCPF + ",";
+                                        ConteudoRetorno += FCNPJCPF + ";";
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresNFeNode, "xNome");
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresNFeNode, "IE");
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresNFeNode, "dEmi");
@@ -1458,7 +1458,7 @@ namespace NFe.Service
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresCancNode, "chNFe");
                                         string FCNPJCPF = Functions.LerTag((XmlElement)infresCancNode, "CNPJ", false);
                                         if (string.IsNullOrEmpty(FCNPJCPF)) FCNPJCPF = Functions.LerTag((XmlElement)infresCancNode, "CPF", false);
-                                        ConteudoRetorno += FCNPJCPF + ",";
+                                        ConteudoRetorno += FCNPJCPF + ";";
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresCancNode, "xNome");
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresCancNode, "IE");
                                         ConteudoRetorno += Functions.LerTag((XmlElement)infresCancNode, "dEmi");
@@ -1553,6 +1553,83 @@ namespace NFe.Service
                     }
                     break;
 
+                case Servicos.EnviarDFe:
+                    #region Servicos.EnviarDFe
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(msXml);
+                    XmlNodeList envEventoList = doc.GetElementsByTagName("retDistDFeInt");
+                    foreach (XmlNode ret1Node in envEventoList)
+                    {
+                        XmlElement ret1Elemento = (XmlElement)ret1Node;
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "tpAmb");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "verAplic");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "cStat");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "xMotivo");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "dhResp");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "ultNSU");
+                        ConteudoRetorno += Functions.LerTag(ret1Elemento, "maxNSU");
+                        ConteudoRetorno += "\r\n";
+
+                        XmlNodeList ret1List = ret1Elemento.GetElementsByTagName("loteDistDFeInt");
+                        foreach (XmlNode ret in ret1List)
+                        {
+                            for (int n = 0; n < ret.ChildNodes.Count; ++n)
+                            {
+                                if (ret.ChildNodes[n].Name.Equals("docZip"))
+                                {
+                                    string chNFe = "";
+                                    string NSU = ret.ChildNodes[n].Attributes[NFe.ConvertTxt.TpcnResources.NSU.ToString()].Value;
+
+                                    ///
+                                    /// descompacta o conteudo
+                                    /// 
+                                    string xmlRes = TFunctions.Decompress(ret.ChildNodes[n].InnerText);
+
+                                    XmlDocument docres = new XmlDocument();
+                                    docres.Load(Functions.StringXmlToStreamUTF8(xmlRes));
+
+                                    if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resEvento"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("resEvento");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
+                                        int nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString(), false));
+                                        ConvertTxt.tpEventos tpEvento = (ConvertTxt.tpEventos)Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.tpEvento.ToString(), false));
+
+                                        ConteudoRetorno += "resEvento;" + NSU + ";" + chNFe+";"+tpEvento.ToString()+";"+nSeqEvento.ToString("00");
+                                    }
+                                    else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procEventoNFe"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("procEventoNFe");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
+                                        int nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString(), false));
+                                        ConvertTxt.tpEventos tpEvento = (ConvertTxt.tpEventos)Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.tpEvento.ToString(), false));
+
+                                        ConteudoRetorno += "procEventoNFe;" + NSU + ";" + chNFe + ";" + tpEvento.ToString() + ";" + nSeqEvento.ToString("00");
+                                    }
+                                    else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procNFe"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("procNFe");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
+                                        ConteudoRetorno += "procNFe;" + NSU + ";" + chNFe + ";";
+                                    }
+                                    else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resNFe"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("resNFe");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
+                                        ConteudoRetorno += "resNFe;" + NSU + ";" + chNFe + ";";
+                                    }
+                                    ConteudoRetorno += "\r\n";
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    break;
+
                 case Servicos.RecepcaoEvento:
                 case Servicos.EnviarEventoCancelamento:
                 case Servicos.EnviarManifDest:
@@ -1610,13 +1687,17 @@ namespace NFe.Service
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, "nSeqEvento");
                                                     string FCNPJCPF = Functions.LerTag((XmlElement)infCCeElemento, "CNPJDest", false);
                                                     if (string.IsNullOrEmpty(FCNPJCPF)) FCNPJCPF = Functions.LerTag((XmlElement)infCCeElemento, "CPFDest", false);
-                                                    ConteudoRetorno += FCNPJCPF + ",";
+                                                    ConteudoRetorno += FCNPJCPF + ";";
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, "dhRegEvento");
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, "nProt");
                                                     if (Functions.LerTag(infCCeElemento, "tpEvento") == "110140") //EPEC
                                                     {
                                                         ConteudoRetorno += Functions.LerTag(infCCeElemento, "cOrgaoAutor");
-                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFePend");
+                                                        //ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFePend");
+                                                        foreach (XmlNode conschNFePend in infCCeElemento.GetElementsByTagName("chNFePend"))
+                                                        {
+                                                            ConteudoRetorno += conschNFePend.InnerText + ";";
+                                                        }
                                                     }
                                                     ConteudoRetorno += "\r\n";
                                                 }
@@ -1634,8 +1715,8 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(ConteudoRetorno))
             {
                 string TXTRetorno = string.Empty;
-                TXTRetorno = Functions/*oAux*/.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
-                TXTRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions/*oAux*/.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
+                TXTRetorno = Functions.ExtrairNomeArq(this.NomeXMLDadosMsg, pFinalArqEnvio) + pFinalArqRetorno;
+                TXTRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
 
                 if (Servico == Servicos.PedidoConsultaSituacaoNFe && temEvento)
                     File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.UTF8);
@@ -2270,7 +2351,7 @@ namespace NFe.Service
                 foreach (XmlNode retConsSitNode1 in retprocEventoNFeList)
                 {
                     string cStat = ((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
-                    if (cStat == "135" || cStat == "136" || cStat == "155")
+                    if (cStat == "135" || cStat == "136" || cStat == "155" || cStat == "124")
                     {
                         NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEvento.ToString())[0].InnerText);
                         if (tpEvento != ConvertTxt.tpEventos.tpEvEPEC)

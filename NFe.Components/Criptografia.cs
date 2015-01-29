@@ -148,11 +148,10 @@ namespace NFe.Components
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
-
         }
 
         public static bool compararStrings(string num01, string num02)

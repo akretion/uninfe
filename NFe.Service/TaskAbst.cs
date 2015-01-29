@@ -588,6 +588,7 @@ namespace NFe.Service
                 case Servicos.EnviarLoteMDFe:
                 case Servicos.ConsultaStatusServicoMDFe:
                 case Servicos.RecepcaoEventoMDFe:
+                case Servicos.ConsultaNaoEncerradoMDFe:
                     retorna = "mdfeCabecMsg";
                     break;
                 #endregion

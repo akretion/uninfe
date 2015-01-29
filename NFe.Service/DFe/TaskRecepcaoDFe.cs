@@ -77,6 +77,7 @@ namespace NFe.Service
                                         Propriedade.ExtRetorno.retEnvDFe_XML.Replace(".xml", ""));
 
                     LeRetornoDFe(emp, doc);
+
                 }
             }
             catch (Exception ex)

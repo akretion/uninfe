@@ -347,6 +347,10 @@ namespace NFe.Components
             /// -mdfe.xml
             /// </summary>
             public static string MDFe = "-mdfe.xml";
+            /// <summary>
+            /// -ped-cons-mdfe-naoenc.xml
+            /// </summary>
+            public static string MDFeConsNaoEnc = "-ped-cons-mdfe-naoenc.xml";
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e
@@ -570,6 +574,14 @@ namespace NFe.Components
             /// -mdfe.err
             /// </summary>
             public const string MDFe_ERR = "-mdfe.err";
+            /// <summary>
+            /// -ret-consmdfenaoenc.xml"
+            /// </summary>
+            public static string MDFeConsNaoEnc = "-ret-cons-mdfe-naoenc.xml";
+            /// <summary>
+            /// -ret-consmdfenaoenc.err
+            /// </summary>
+            public static string MDFeConsNaoEnc_ERR = "-ret-cons-mdfe-naoenc.err";
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e

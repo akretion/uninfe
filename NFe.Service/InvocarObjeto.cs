@@ -110,6 +110,7 @@ namespace NFe.Service
                     case Servicos.EnviarLoteMDFe:
                     case Servicos.ConsultaStatusServicoMDFe:
                     case Servicos.RecepcaoEventoMDFe:
+                    case Servicos.ConsultaNaoEncerradoMDFe:
                         oWSProxy.SetProp(oServicoWS, "mdfeCabecMsgValue", cabecMsg);
                         break;
 

@@ -195,6 +195,12 @@ namespace NFe.Service
                         #endregion
 
                         #region MDFe
+                        case Servicos.ConsultaNaoEncerradoMDFe:
+                            CertVencido(emp);
+                            IsConnectedToInternet();
+                            DirecionarArquivo(arquivo, new TaskConsNaoEncMDFe());
+                            break;
+
                         case Servicos.ConsultaStatusServicoMDFe:
                             CertVencido(emp);
                             IsConnectedToInternet();
@@ -529,6 +535,10 @@ namespace NFe.Service
                                 #endregion
 
                                 #region MDFe
+                                case "consMDFeNaoEnc":
+                                    tipoServico = Servicos.ConsultaNaoEncerradoMDFe;
+                                    break;
+
                                 case "consStatServMDFe":
                                     tipoServico = Servicos.ConsultaStatusServicoMDFe;
                                     break;

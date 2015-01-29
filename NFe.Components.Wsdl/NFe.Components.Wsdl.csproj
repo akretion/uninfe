@@ -2192,6 +2192,23 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PVarginhaMG-CONAN.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consMDFeNaoEncTiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\consMDFeNaoEnc_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\MDFe\retConsMDFeNaoEnc_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
