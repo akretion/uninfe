@@ -108,6 +108,14 @@
 			<xs:pattern value="[0-9]{44}"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="TSegCodBarra">
+		<xs:annotation>
+			<xs:documentation>Tipo Segundo Codigo Barra</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{36}"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TProt">
 		<xs:annotation>
 			<xs:documentation>Tipo Número do Protocolo de Status</xs:documentation>

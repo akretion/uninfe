@@ -37,6 +37,17 @@
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
+				<xs:element name="xEmbar">
+					<xs:annotation>
+						<xs:documentation>Nome da embarcação</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="TString">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="60"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
 				<xs:element name="nViag">
 					<xs:annotation>
 						<xs:documentation>Número da Viagem</xs:documentation>
@@ -90,6 +101,17 @@
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
+							<xs:element name="xTermCarreg">
+								<xs:annotation>
+									<xs:documentation>Nome do Terminal de Carregamento</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="TString">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="60"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -111,6 +133,17 @@
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
+							<xs:element name="xTermDescarreg">
+								<xs:annotation>
+									<xs:documentation>Nome do Terminal de Descarregamento</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="TString">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="60"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -128,6 +161,32 @@
 									<xs:restriction base="TString">
 										<xs:minLength value="1"/>
 										<xs:maxLength value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="infUnidCargaVazia" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Informações das Undades de Carga vazias</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="idUnidCargaVazia" type="TContainer">
+								<xs:annotation>
+									<xs:documentation>Identificação da unidades de carga vazia</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="tpUnidCargaVazia">
+								<xs:annotation>
+									<xs:documentation>Tipo da unidade de carga vazia</xs:documentation>
+									<xs:documentation>1 - Container 2 - Carreta</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="TString">
+										<xs:enumeration value="1"/>
+										<xs:enumeration value="2"/>
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>

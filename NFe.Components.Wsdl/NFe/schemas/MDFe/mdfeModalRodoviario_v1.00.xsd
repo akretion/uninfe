@@ -67,6 +67,17 @@
 									<xs:restriction base="TPlaca"/>
 								</xs:simpleType>
 							</xs:element>
+							<xs:element name="RENAVAM" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>RENAVAM do veículo </xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="TString">
+										<xs:minLength value="9"/>
+										<xs:maxLength value="11"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
 							<xs:element name="tara">
 								<xs:annotation>
 									<xs:documentation>Tara em KG</xs:documentation>
@@ -134,7 +145,7 @@ Só preenchido quando o veículo não pertencer à empresa emitente do MDF-e</xs
 											<xs:simpleType>
 												<xs:restriction base="TString">
 													<xs:maxLength value="60"/>
-													<xs:minLength value="1"/>
+													<xs:minLength value="2"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -186,7 +197,7 @@ Só preenchido quando o veículo não pertencer à empresa emitente do MDF-e</xs
 											<xs:simpleType>
 												<xs:restriction base="TString">
 													<xs:maxLength value="60"/>
-													<xs:minLength value="1"/>
+													<xs:minLength value="2"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -277,6 +288,17 @@ Só preenchido quando o veículo não pertencer à empresa emitente do MDF-e</xs
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="TPlaca"/>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="RENAVAM" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>RENAVAM do veículo </xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="TString">
+										<xs:minLength value="9"/>
+										<xs:maxLength value="11"/>
+									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
 							<xs:element name="tara">
@@ -463,6 +485,17 @@ Só preenchido quando o veículo não pertencer à empresa emitente do MDF-e</xs
 							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
+				</xs:element>
+				<xs:element name="codAgPorto" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Código de Agendamento no porto</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="TString">
+							<xs:minLength value="0"/>
+							<xs:maxLength value="16"/>
+						</xs:restriction>
+					</xs:simpleType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>

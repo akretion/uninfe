@@ -1032,6 +1032,7 @@ namespace NFe.Settings
                     case Servicos.PedidoSituacaoLoteMDFe:
                     case Servicos.EnviarLoteMDFe:
                     case Servicos.RecepcaoEventoMDFe:
+                    case Servicos.ConsultaNaoEncerradoMDFe:
                         throw new Exception(string.Format(errorStr, "do MDF-e"));
 
                     case Servicos.ConsultaStatusServicoCTe:

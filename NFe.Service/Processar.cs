@@ -1121,6 +1121,7 @@ namespace NFe.Service
                         nfe is TaskRetRecepcaoMDFe ||
                         nfe is TaskConsultaStatusMDFe ||
                         nfe is TaskConsultaSituacaoMDFe ||
+                        nfe is TaskConsNaoEncMDFe ||
                         (nfe is TaskEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPECeDPEC))
                     {
                         doExecute = true;
