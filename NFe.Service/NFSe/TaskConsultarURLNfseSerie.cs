@@ -12,7 +12,7 @@ using NFSe.Components;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarURLNfseSerie : TaskAbst
+    public class TaskNFSeConsultarURLSerie : TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
         /// <summary>
@@ -27,7 +27,7 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarURLNfseSerie;
+            Servico = Servicos.NFSeConsultarURLSerie;
 
             try
             {

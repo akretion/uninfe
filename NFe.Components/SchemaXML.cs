@@ -491,7 +491,7 @@ namespace NFe.Components
                 Descricao = "XML do Manifesto Eletrônico de Documentos Fiscais",
                 TagAssinatura = "MDFe",
                 TagAtributoId = "infMDFe",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -504,7 +504,7 @@ namespace NFe.Components
                 Descricao = "XML de Envio de Lote de Manifesto Eletrônico de Docimentos Fiscais",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -517,7 +517,7 @@ namespace NFe.Components
                 Descricao = "XML de consulta recibo MDF-e",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -530,7 +530,7 @@ namespace NFe.Components
                 Descricao = "XML de consulta situação do MDF-e",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -543,7 +543,7 @@ namespace NFe.Components
                 Descricao = "XML de consulta status do serviço do MDF-e",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -556,7 +556,7 @@ namespace NFe.Components
                 Descricao = "XML de evento de cancelamento do MDF-e",
                 TagAssinatura = "eventoMDFe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -569,7 +569,7 @@ namespace NFe.Components
                 Descricao = "XML de evento de encerramento do MDF-e",
                 TagAssinatura = "eventoMDFe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -582,7 +582,7 @@ namespace NFe.Components
                 Descricao = "XML de evento de encerramento do MDF-e",
                 TagAssinatura = "eventoMDFe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -595,7 +595,7 @@ namespace NFe.Components
                 Descricao = "XML de evento de registro de passagem do MDF-e",
                 TagAssinatura = "eventoMDFe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -608,7 +608,7 @@ namespace NFe.Components
                 Descricao = "Pedido de Consulta MDF-e não encerrados",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/mdfe"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
             });
             #endregion
 
@@ -625,7 +625,7 @@ namespace NFe.Components
                 Descricao = "XML de distribuição do CTe com protocolo de autorização anexado",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -638,7 +638,7 @@ namespace NFe.Components
                 Descricao = "XML de distribuição do Cancelamento do CTe com protocolo de autorização anexado",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -651,7 +651,7 @@ namespace NFe.Components
                 Descricao = "XML de distribuição de Inutilização de Números do CTe com protocolo de autorização anexado",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -664,7 +664,7 @@ namespace NFe.Components
                 Descricao = "XML de Conhecimento de Transporte Eletrônico",
                 TagAssinatura = "CTe",
                 TagAtributoId = "infCte",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -677,7 +677,7 @@ namespace NFe.Components
                 Descricao = "XML de Envio de Lote dos Conhecimentos de Transportes Eletrônicos",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -690,7 +690,7 @@ namespace NFe.Components
                 Descricao = "XML de Cancelamento do Conhecimento de Transporte Eletrônico",
                 TagAssinatura = "eventoCTe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -703,7 +703,7 @@ namespace NFe.Components
                 Descricao = "XML de Inutilização de Numerações do Conhecimento de Transporte Eletrônico",
                 TagAssinatura = "inutCTe",
                 TagAtributoId = "infInut",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -716,7 +716,7 @@ namespace NFe.Components
                 Descricao = "XML de Consulta da Situação do Conhecimento de Transporte Eletrônico",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -729,7 +729,7 @@ namespace NFe.Components
                 Descricao = "XML de Consulta do Recibo do Lote de Conhecimentos de Transportes Eletrônicos",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -742,7 +742,7 @@ namespace NFe.Components
                 Descricao = "XML de Consulta da Situação do Serviço do Conhecimento de Transporte Eletrônico",
                 TagAssinatura = string.Empty,
                 TagAtributoId = string.Empty,
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -755,7 +755,7 @@ namespace NFe.Components
                 Descricao = "XML de registro de envio da CCe da CTe",
                 TagAssinatura = "eventoCTe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
 
             });
             #endregion
@@ -769,7 +769,7 @@ namespace NFe.Components
                 Descricao = "XML de Envio do evento de contingencia EPEC",
                 TagAssinatura = "eventoCTe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 
@@ -782,7 +782,7 @@ namespace NFe.Components
                 Descricao = "XML de Envio do evento de Registro Multimodal",
                 TagAssinatura = "eventoCTe",
                 TagAtributoId = "infEvento",
-                TargetNameSpace = "http://www.portalfiscal.inf.br/cte"
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
             #endregion
 

@@ -169,7 +169,7 @@ namespace NFe.Validate
                     if(TipoArqXml.TargetNameSpace != string.Empty)
                         schemas.Add(TipoArqXml.TargetNameSpace, TipoArqXml.cArquivoSchema);
                     else
-                        schemas.Add(Propriedade.nsURI_nfe, TipoArqXml.cArquivoSchema);
+                        schemas.Add(NFeStrConstants.NAME_SPACE_NFE, TipoArqXml.cArquivoSchema);
 
                     settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
 
@@ -226,7 +226,6 @@ namespace NFe.Validate
         {
             this.cErro += "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
         }
-
 
         #region ValidarArqXML()
         /// <summary>
@@ -393,8 +392,8 @@ namespace NFe.Validate
 
             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                                     new XElement("Validacao",
-                                        new XElement("cStat", cStat),
-                                        new XElement("xMotivo", xMotivo)));
+                                        new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
+                                        new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
             xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
         }
         #endregion

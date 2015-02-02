@@ -40,271 +40,197 @@ namespace NFe.Service
                     switch (servico)
                     {
                         #region NFS-e
-                        case Servicos.ConsultarLoteRps:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarLoteRps());
+                        case Servicos.NFSeCancelar:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeCancelar());
                             break;
 
-                        case Servicos.CancelarNfse:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskCancelarNfse());
+                        case Servicos.NFSeConsultar:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultar());
                             break;
 
-                        case Servicos.ConsultarSituacaoLoteRps:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultaSituacaoLoteRps());
+                        case Servicos.NFSeConsultarLoteRps:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultarLoteRps());
                             break;
 
-                        case Servicos.ConsultarNfse:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarNfse());
+                        case Servicos.NFSeConsultarPorRps:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultarPorRps());
                             break;
 
-                        case Servicos.ConsultarNfsePorRps:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarNfsePorRps());
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultaSituacaoLoteRps());
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskRecepcionarLoteRps());
+                        case Servicos.NFSeConsultarURL:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultarURL());
                             break;
 
-                        case Servicos.ConsultarURLNfse:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarURLNfse());
+                        case Servicos.NFSeConsultarURLSerie:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeConsultarURLSerie());
                             break;
 
-                        case Servicos.ConsultarURLNfseSerie:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            this.DirecionarArquivo(arquivo, new NFSe.TaskConsultarURLNfseSerie());
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeRecepcionarLoteRps());
                             break;
                         #endregion
 
                         #region NFe
-                        case Servicos.PedidoConsultaSituacaoNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaSituacaoNFe());
-                            break;
-
-                        case Servicos.ConsultaStatusServicoNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaStatus());
-                            break;
-
-                        case Servicos.InutilizarNumerosNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskInutilizacao());
-                            break;
-
-                        case Servicos.PedidoSituacaoLoteNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRetRecepcao());
-                            break;
-
-                        case Servicos.MontarLoteUmaNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteUmaNFe());
-                            break;
-
-                        case Servicos.MontarLoteVariasNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteVariasNFe());
-                            break;
-
-                        case Servicos.EnviarLoteNfe:
-                            DirecionarArquivo(arquivo, new TaskNFeRecepcao());
-                            break;
-
-                        case Servicos.GerarChaveNFe:
-                            GerarChaveNFe(arquivo);
-                            break;
-
-                        case Servicos.EnviarDPEC:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRecepcaoDPEC());
-                            break;
-
-                        case Servicos.ConsultarDPEC:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaDPEC());
-                            break;
-
-                        case Servicos.ConverterTXTparaXML:
-                            ConverterTXTparaXML(arquivo);
-                            break;
-
-                        case Servicos.RecepcaoEvento:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskEventos());
-                            break;
-
-                        case Servicos.ConsultaNFDest:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaNFDest());
-                            break;
-
-                        case Servicos.DownloadNFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskDownloadNFe());
-                            break;
-
-                        case Servicos.AssinarValidarNFeEnvioEmLote:
+                        case Servicos.NFeAssinarValidarEnvioEmLote:
                             CertVencido(emp);
                             AssinarValidarNFe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                             break;
 
                         case Servicos.ConsultaCadastroContribuinte:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskCadastroContribuinte());
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCadastroContribuinte());
+                            break;
+
+                        case Servicos.DPECEnviar:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskDPECRecepcao());
+                            break;
+
+                        case Servicos.DPECConsultar:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskDPECConsulta());
+                            break;
+
+                        case Servicos.EventoRecepcao:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeEventos());
+                            break;
+
+                        case Servicos.NFeConsultaNFDest:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeConsultaNFDest());
+                            break;
+
+                        case Servicos.NFeConsultaStatusServico:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeConsultaStatus());
+                            break;
+
+                        case Servicos.NFeConverterTXTparaXML:
+                            ConverterTXTparaXML(arquivo);
+                            break;
+
+                        case Servicos.NFeDownload:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeDownload());
+                            break;
+
+                        case Servicos.NFeEnviarLote:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskNFeRecepcao());
+                            break;
+
+                        case Servicos.NFeGerarChave:
+                            GerarChaveNFe(arquivo);
+                            break;
+
+                        case Servicos.NFeInutilizarNumeros:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeInutilizacao());
+                            break;
+
+                        case Servicos.NFePedidoSituacaoLote:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeRetRecepcao());
+                            break;
+
+                        case Servicos.NFeMontarLoteUma:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeMontarLoteUmaNFe());
+                            break;
+
+                        case Servicos.NFeMontarLoteVarias:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeMontarLoteVarias());
+                            break;
+
+                        case Servicos.NFePedidoConsultaSituacao:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskNFeConsultaSituacao());
                             break;
 
 #if nao
                         case Servicos.RegistroDeSaida:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRegistroDeSaida());
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskRegistroDeSaida());
                             break;
 
                         case Servicos.RegistroDeSaidaCancelamento:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRegistroDeSaidaCancelamento());
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskRegistroDeSaidaCancelamento());
                             break;
 #endif
                         #endregion
 
                         #region MDFe
-                        case Servicos.ConsultaNaoEncerradoMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsNaoEncMDFe());
-                            break;
-
-                        case Servicos.ConsultaStatusServicoMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaStatusMDFe());
-                            break;
-
-                        case Servicos.MontarLoteUmMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteUmMDFe());
-                            break;
-
-                        case Servicos.EnviarLoteMDFe:
-                            DirecionarArquivo(arquivo, new TaskMDFeRecepcao());
-                            break;
-
-                        case Servicos.PedidoSituacaoLoteMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRetRecepcaoMDFe());
-                            break;
-
-                        case Servicos.PedidoConsultaSituacaoMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaSituacaoMDFe());
-                            break;
-
-                        case Servicos.AssinarValidarMDFeEnvioEmLote:
+                        case Servicos.MDFeAssinarValidarEnvioEmLote:
                             CertVencido(emp);
                             AssinarValidarMDFe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                             break;
 
-                        case Servicos.MontarLoteVariosMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteVariasMDFe());
+                        case Servicos.MDFeConsultaNaoEncerrado:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeConsNaoEncerrado());
                             break;
 
-                        case Servicos.RecepcaoEventoMDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskEventosMDFe());
+                        case Servicos.MDFeConsultaStatusServico:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeConsultaStatus());
+                            break;
+
+                        case Servicos.MDFeEnviarLote:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskMDFeRecepcao());
+                            break;
+
+                        case Servicos.MDFeMontarLoteUm:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeMontarLoteUm());
+                            break;
+
+                        case Servicos.MDFeMontarLoteVarios:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeMontarLoteVarias());
+                            break;
+
+                        case Servicos.MDFePedidoSituacaoLote:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeRetRecepcao());
+                            break;
+
+                        case Servicos.MDFePedidoConsultaSituacao:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeConsultaSituacao());
+                            break;
+
+                        case Servicos.MDFeRecepcaoEvento:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskMDFeEventos());
                             break;
                         #endregion
 
                         #region CTe
-                        case Servicos.ConsultaStatusServicoCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaStatusCTe());
-                            break;
-
-                        case Servicos.MontarLoteUmCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteUmCTe());
-                            break;
-
-                        case Servicos.EnviarLoteCTe:
-                            DirecionarArquivo(arquivo, new TaskCTeRecepcao());
-                            break;
-
-                        case Servicos.PedidoSituacaoLoteCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRetRecepcaoCTe());
-                            break;
-
-                        case Servicos.PedidoConsultaSituacaoCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskConsultaSituacaoCTe());
-                            break;
-
-                        case Servicos.InutilizarNumerosCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskInutilizacaoCTe());
-                            break;
-
-                        case Servicos.RecepcaoEventoCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskEventosCTe());
-                            break;
-
-                        case Servicos.AssinarValidarCTeEnvioEmLote:
+                        case Servicos.CTeAssinarValidarEnvioEmLote:
                             CertVencido(emp);
                             AssinarValidarCTe(arquivo, Empresas.Configuracoes[emp].PastaXmlEmLote);
                             break;
 
-                        case Servicos.MontarLoteVariosCTe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskMontarLoteVariasCTe());
+                        case Servicos.CTeConsultaStatusServico:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeConsultaStatus());
+                            break;
+
+                        case Servicos.CTeEnviarLote:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskCTeRecepcao());
+                            break;
+
+                        case Servicos.CTeInutilizarNumeros:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeInutilizacao());
+                            break;
+
+                        case Servicos.CTeMontarLoteUm:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeMontarLoteUm());
+                            break;
+
+                        case Servicos.CTeMontarLoteVarios:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeMontarLoteVarias());
+                            break;
+
+                        case Servicos.CTePedidoConsultaSituacao:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeConsultaSituacao());
+                            break;
+
+                        case Servicos.CTePedidoSituacaoLote:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeRetRecepcao());
+                            break;
+
+                        case Servicos.CTeRecepcaoEvento:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeEventos());
                             break;
                         #endregion
 
                         #region DFe
-                        case Servicos.EnviarDFe:
-                            CertVencido(emp);
-                            IsConnectedToInternet();
-                            DirecionarArquivo(arquivo, new TaskRecepcaoDFe());
+                        case Servicos.DFeEnviar:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskDFeRecepcao());
                             break;
                         #endregion
                     }
@@ -318,32 +244,32 @@ namespace NFe.Service
                             AssinarValidar(arquivo);
                             break;
 
-                        case Servicos.ConsultaInformacoesUniNFe:
-                            ConsultaInformacoesUniNFe(arquivo);
-                            break;
-
-                        case Servicos.AlterarConfiguracoesUniNFe:
+                        case Servicos.UniNFeAlterarConfiguracoes:
                             AlterarConfiguracoesUniNFe(arquivo);
                             break;
 
-                        case Servicos.ConsultaGeral:
+                        case Servicos.UniNFeConsultaGeral:
                             ConsultarGeral(arquivo);
                             break;
 
+                        case Servicos.UniNFeConsultaInformacoes:
+                            ConsultaInformacoesUniNFe(arquivo);
+                            break;
+
                         case Servicos.WSExiste:
-                            DirecionarArquivo(arquivo, new TaskWSExiste());
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskWSExiste());
                             break;
 
-                        case Servicos.ImpressaoNFe:
-                            DirecionarArquivo(arquivo, new TaskDanfe());
+                        case Servicos.DANFEImpressao:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskDanfe());
                             break;
 
-                        case Servicos.ImpressaoNFe_Contingencia:
-                            DirecionarArquivo(arquivo, new TaskDanfeContingencia());
+                        case Servicos.DANFEImpressao_Contingencia:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskDanfeContingencia());
                             break;
 
-                        case Servicos.DanfeRelatorio:
-                            DirecionarArquivo(arquivo, new TaskDanfeReport());
+                        case Servicos.DANFERelatorio:
+                            DirecionarArquivo(emp, false, false, arquivo, new TaskDanfeReport());
                             break;
                     }
                     #endregion
@@ -358,7 +284,7 @@ namespace NFe.Service
                 }
                 catch (Exception ex)
                 {
-                    if (servico == Servicos.Nulo || servico == Servicos.ConsultaStatusServicoNFe)
+                    if (servico == Servicos.Nulo || servico == Servicos.NFeConsultaStatusServico)
                     {
                         /// 7/2012 <<< danasa
                         ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
@@ -400,11 +326,11 @@ namespace NFe.Service
             #region Serviços que funcionam tanto na pasta Geral como na pasta da Empresa
             if (arq.IndexOf(Propriedade.ExtEnvio.ConsCertificado) >= 0)
             {
-                tipoServico = Servicos.ConsultaGeral;
+                tipoServico = Servicos.UniNFeConsultaGeral;
             }
             else if (arq.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
             {
-                tipoServico = Servicos.AlterarConfiguracoesUniNFe;
+                tipoServico = Servicos.UniNFeAlterarConfiguracoes;
             }
             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
             {
@@ -412,18 +338,18 @@ namespace NFe.Service
             }
             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT) >= 0)
             {
-                tipoServico = Servicos.ImpressaoNFe;
+                tipoServico = Servicos.DANFEImpressao;
             }
             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDanfeReport_XML) >= 0 || arq.IndexOf(Propriedade.ExtEnvio.EnvDanfeReport_TXT) >= 0)
             {
-                tipoServico = Servicos.DanfeRelatorio;
+                tipoServico = Servicos.DANFERelatorio;
             }
             #endregion
             else
             {
                 if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaContingencia.ToLower()) >= 0)
                 {
-                    tipoServico = Servicos.ImpressaoNFe_Contingencia;
+                    tipoServico = Servicos.DANFEImpressao_Contingencia;
                 }
                 else
                     if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
@@ -444,11 +370,11 @@ namespace NFe.Service
                         {
                             if (arq.IndexOf(Propriedade.ExtEnvio.PedSit_TXT) >= 0)
                             {
-                                tipoServico = Servicos.PedidoConsultaSituacaoNFe;
+                                tipoServico = Servicos.NFePedidoConsultaSituacao;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.PedSta_TXT) >= 0)
                             {
-                                tipoServico = Servicos.ConsultaStatusServicoNFe;
+                                tipoServico = Servicos.NFeConsultaStatusServico;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsCad_TXT) >= 0)
                             {
@@ -456,15 +382,15 @@ namespace NFe.Service
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.PedInu_TXT) >= 0)
                             {
-                                tipoServico = Servicos.InutilizarNumerosNFe;
+                                tipoServico = Servicos.NFeInutilizarNumeros;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.Nfe_TXT) >= 0)
                             {
-                                tipoServico = Servicos.ConverterTXTparaXML;
+                                tipoServico = Servicos.NFeConverterTXTparaXML;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.GerarChaveNFe_TXT) >= 0)
                             {
-                                tipoServico = Servicos.GerarChaveNFe;
+                                tipoServico = Servicos.NFeGerarChave;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvWSExiste_TXT) >= 0)
                             {
@@ -472,34 +398,34 @@ namespace NFe.Service
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
                             {
-                                tipoServico = Servicos.EnviarDPEC;
+                                tipoServico = Servicos.DPECEnviar;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
                             {
-                                tipoServico = Servicos.ConsultarDPEC;
+                                tipoServico = Servicos.DPECConsultar;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
                             {
-                                tipoServico = Servicos.ConsultaInformacoesUniNFe;
+                                tipoServico = Servicos.UniNFeConsultaInformacoes;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvCCe_TXT) >= 0 ||
                                     arq.IndexOf(Propriedade.ExtEnvio.PedEve_TXT) >= 0 ||
                                     arq.IndexOf(Propriedade.ExtEnvio.EnvCancelamento_TXT) >= 0 ||
                                     arq.IndexOf(Propriedade.ExtEnvio.EnvManifestacao_TXT) >= 0)
                             {
-                                tipoServico = Servicos.RecepcaoEvento;
+                                tipoServico = Servicos.EventoRecepcao;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
                             {
-                                tipoServico = Servicos.ConsultaNFDest;
+                                tipoServico = Servicos.NFeConsultaNFDest;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDownload_TXT) >= 0)
                             {
-                                tipoServico = Servicos.DownloadNFe;
+                                tipoServico = Servicos.NFeDownload;
                             }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDFe_TXT) >= 0)
                             {
-                                tipoServico = Servicos.EnviarDFe;
+                                tipoServico = Servicos.DFeEnviar;
                             }
 #if nao
                         else if (arq.IndexOf(Propriedade.ExtEnvio.EnvRegistroDeSaida_TXT) >= 0)
@@ -515,7 +441,7 @@ namespace NFe.Service
                             {
                                 if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
-                                    tipoServico = Servicos.MontarLoteVariasNFe;
+                                    tipoServico = Servicos.NFeMontarLoteVarias;
                                 }
                             }
                         }
@@ -530,120 +456,120 @@ namespace NFe.Service
                             {
                                 #region DFe
                                 case "distDFeInt":
-                                    tipoServico = Servicos.EnviarDFe;
+                                    tipoServico = Servicos.DFeEnviar;
                                     break;
                                 #endregion
 
                                 #region MDFe
                                 case "consMDFeNaoEnc":
-                                    tipoServico = Servicos.ConsultaNaoEncerradoMDFe;
+                                    tipoServico = Servicos.MDFeConsultaNaoEncerrado;
                                     break;
 
                                 case "consStatServMDFe":
-                                    tipoServico = Servicos.ConsultaStatusServicoMDFe;
+                                    tipoServico = Servicos.MDFeConsultaStatusServico;
                                     break;
 
                                 case "MDFe":
                                     if (pastaArq == pastaLote)
-                                        tipoServico = Servicos.AssinarValidarMDFeEnvioEmLote;
+                                        tipoServico = Servicos.MDFeAssinarValidarEnvioEmLote;
                                     else if (pastaArq == pastaEnvio)
-                                        tipoServico = Servicos.MontarLoteUmMDFe;
+                                        tipoServico = Servicos.MDFeMontarLoteUm;
                                     break;
 
                                 case "enviMDFe":
-                                    tipoServico = Servicos.EnviarLoteMDFe;
+                                    tipoServico = Servicos.MDFeEnviarLote;
                                     break;
 
                                 case "consReciMDFe":
-                                    tipoServico = Servicos.PedidoSituacaoLoteMDFe;
+                                    tipoServico = Servicos.MDFePedidoSituacaoLote;
                                     break;
 
                                 case "consSitMDFe":
-                                    tipoServico = Servicos.PedidoConsultaSituacaoMDFe;
+                                    tipoServico = Servicos.MDFePedidoConsultaSituacao;
                                     break;
 
                                 case "MontarLoteMDFe":
                                     if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                     {
-                                        tipoServico = Servicos.MontarLoteVariosMDFe;
+                                        tipoServico = Servicos.MDFeMontarLoteVarios;
                                     }
                                     break;
 
                                 case "eventoMDFe":
-                                    tipoServico = Servicos.RecepcaoEventoMDFe;
+                                    tipoServico = Servicos.MDFeRecepcaoEvento;
                                     break;
                                 #endregion
 
                                 #region CTe
                                 case "consStatServCte":
-                                    tipoServico = Servicos.ConsultaStatusServicoCTe;
+                                    tipoServico = Servicos.CTeConsultaStatusServico;
                                     break;
 
                                 case "CTe":
                                     if (pastaArq == pastaLote)
-                                        tipoServico = Servicos.AssinarValidarCTeEnvioEmLote;
+                                        tipoServico = Servicos.CTeAssinarValidarEnvioEmLote;
                                     else if (pastaArq == pastaEnvio)
-                                        tipoServico = Servicos.MontarLoteUmCTe;
+                                        tipoServico = Servicos.CTeMontarLoteUm;
                                     break;
 
                                 case "enviCTe":
-                                    tipoServico = Servicos.EnviarLoteCTe;
+                                    tipoServico = Servicos.CTeEnviarLote;
                                     break;
 
                                 case "consReciCTe":
-                                    tipoServico = Servicos.PedidoSituacaoLoteCTe;
+                                    tipoServico = Servicos.CTePedidoSituacaoLote;
                                     break;
 
                                 case "consSitCTe":
-                                    tipoServico = Servicos.PedidoConsultaSituacaoCTe;
+                                    tipoServico = Servicos.CTePedidoConsultaSituacao;
                                     break;
 
                                 case "inutCTe":
-                                    tipoServico = Servicos.InutilizarNumerosCTe;
+                                    tipoServico = Servicos.CTeInutilizarNumeros;
                                     break;
 
                                 case "eventoCTe":
-                                    tipoServico = Servicos.RecepcaoEventoCTe;
+                                    tipoServico = Servicos.CTeRecepcaoEvento;
                                     break;
 
                                 case "MontarLoteCTe":
                                     if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                     {
-                                        tipoServico = Servicos.MontarLoteVariosCTe;
+                                        tipoServico = Servicos.CTeMontarLoteVarios;
                                     }
                                     break;
                                 #endregion
 
                                 #region NFe
                                 case "consStatServ":
-                                    tipoServico = Servicos.ConsultaStatusServicoNFe;
+                                    tipoServico = Servicos.NFeConsultaStatusServico;
                                     break;
 
                                 case "NFe":
                                     if (pastaArq == pastaLote)
-                                        tipoServico = Servicos.AssinarValidarNFeEnvioEmLote;
+                                        tipoServico = Servicos.NFeAssinarValidarEnvioEmLote;
                                     else if (pastaArq == pastaEnvio)
-                                        tipoServico = Servicos.MontarLoteUmaNFe;
+                                        tipoServico = Servicos.NFeMontarLoteUma;
                                     break;
 
                                 case "enviNFe":
-                                    tipoServico = Servicos.EnviarLoteNfe;
+                                    tipoServico = Servicos.NFeEnviarLote;
                                     break;
 
                                 case "consReciNFe":
-                                    tipoServico = Servicos.PedidoSituacaoLoteNFe;
+                                    tipoServico = Servicos.NFePedidoSituacaoLote;
                                     break;
 
                                 case "consSitNFe":
-                                    tipoServico = Servicos.PedidoConsultaSituacaoNFe;
+                                    tipoServico = Servicos.NFePedidoConsultaSituacao;
                                     break;
 
                                 case "inutNFe":
-                                    tipoServico = Servicos.InutilizarNumerosNFe;
+                                    tipoServico = Servicos.NFeInutilizarNumeros;
                                     break;
 
                                 case "envEvento":
-                                    tipoServico = Servicos.RecepcaoEvento;
+                                    tipoServico = Servicos.EventoRecepcao;
                                     break;
 
                                 case "ConsCad":
@@ -653,34 +579,34 @@ namespace NFe.Service
                                 case "MontarLoteNFe":
                                     if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                     {
-                                        tipoServico = Servicos.MontarLoteVariasNFe;
+                                        tipoServico = Servicos.NFeMontarLoteVarias;
                                     }
                                     break;
 
                                 case "envDPEC":
-                                    tipoServico = Servicos.EnviarDPEC;
+                                    tipoServico = Servicos.DPECEnviar;
                                     break;
 
                                 case "consDPEC":
-                                    tipoServico = Servicos.ConsultarDPEC;
+                                    tipoServico = Servicos.DPECConsultar;
                                     break;
 
                                 case "gerarChave":
-                                    tipoServico = Servicos.GerarChaveNFe;
+                                    tipoServico = Servicos.NFeGerarChave;
                                     break;
 
                                 case "consNFeDest":
-                                    tipoServico = Servicos.ConsultaNFDest;
+                                    tipoServico = Servicos.NFeConsultaNFDest;
                                     break;
 
                                 case "downloadNFe":
-                                    tipoServico = Servicos.DownloadNFe;
+                                    tipoServico = Servicos.NFeDownload;
                                     break;
                                 #endregion
 
                                 #region Geral
                                 case "ConsInf":
-                                    tipoServico = Servicos.ConsultaInformacoesUniNFe;
+                                    tipoServico = Servicos.UniNFeConsultaInformacoes;
                                     break;
                                 #endregion
 
@@ -688,35 +614,35 @@ namespace NFe.Service
                                     #region NFS-e
                                     if (arq.IndexOf(Propriedade.ExtEnvio.PedLoteRps) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarLoteRps;
+                                        tipoServico = Servicos.NFSeConsultarLoteRps;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedCanNfse) >= 0)
                                     {
-                                        tipoServico = Servicos.CancelarNfse;
+                                        tipoServico = Servicos.NFSeCancelar;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitLoteRps) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarSituacaoLoteRps;
+                                        tipoServico = Servicos.NFSeConsultarSituacaoLoteRps;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.EnvLoteRps) >= 0)
                                     {
-                                        tipoServico = Servicos.RecepcionarLoteRps;
+                                        tipoServico = Servicos.NFSeRecepcionarLoteRps;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfse) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarNfse;
+                                        tipoServico = Servicos.NFSeConsultar;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedSitNfseRps) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarNfsePorRps;
+                                        tipoServico = Servicos.NFSeConsultarPorRps;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedURLNfse) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarURLNfse;
+                                        tipoServico = Servicos.NFSeConsultarURL;
                                     }
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedURLNfseSerie) >= 0)
                                     {
-                                        tipoServico = Servicos.ConsultarURLNfseSerie;
+                                        tipoServico = Servicos.NFSeConsultarURLSerie;
                                     }
                                     #endregion
 
@@ -738,7 +664,7 @@ namespace NFe.Service
         /// <param name="arquivo">Arquivo a ser validado e assinado</param>
         protected void AssinarValidarNFe(string arquivo, string pasta)
         {
-            TaskAssinarValidarNFe nfe = new TaskAssinarValidarNFe();
+            TaskNFeAssinarValidar nfe = new TaskNFeAssinarValidar();
             nfe.NomeArquivoXML = arquivo;
             nfe.AssinarValidarXMLNFe(pasta);
         }
@@ -752,7 +678,7 @@ namespace NFe.Service
         /// <param name="arquivo">Arquivo a ser validado e assinado</param>
         protected void AssinarValidarCTe(string arquivo, string pasta)
         {
-            TaskAssinarValidarCTe nfe = new TaskAssinarValidarCTe();
+            TaskCTeAssinarValidar nfe = new TaskCTeAssinarValidar();
             nfe.NomeArquivoXML = arquivo;
             nfe.AssinarValidarXMLNFe(pasta);
         }
@@ -766,7 +692,7 @@ namespace NFe.Service
         /// <param name="arquivo">Arquivo a ser validado e assinado</param>
         protected void AssinarValidarMDFe(string arquivo, string pasta)
         {
-            TaskAssinarValidarMDFe nfe = new TaskAssinarValidarMDFe();
+            TaskMDFeAssinarValidar nfe = new TaskMDFeAssinarValidar();
             nfe.NomeArquivoXML = arquivo;
             nfe.AssinarValidarXMLNFe(pasta);
         }
@@ -811,7 +737,7 @@ namespace NFe.Service
                         #region DFe
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvDFe_TXT) + Propriedade.ExtRetorno.retEnvDFe_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvDFe_TXT) + Propriedade.ExtRetorno.retEnvDFe_XML));
-                        DirecionarArquivo(arquivo, new TaskRecepcaoDFe());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskDFeRecepcao());
                         #endregion
                     }
 
@@ -820,7 +746,7 @@ namespace NFe.Service
                         #region Consulta ao cadastro de contribuinte
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.ConsCad_TXT) + Propriedade.ExtRetorno.ConsCad_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.ConsCad_TXT) + Propriedade.ExtRetorno.ConsCad_XML));
-                        DirecionarArquivo(arquivo, new TaskCadastroContribuinte());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskCadastroContribuinte());
                         #endregion
                     }
 
@@ -839,7 +765,7 @@ namespace NFe.Service
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvCancelamento_TXT) + Propriedade.ExtRetorno.retCancelamento_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvManifestacao_TXT) + Propriedade.ExtRetorno.retManifestacao_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedEve_TXT) + Propriedade.ExtRetorno.Eve_ERR));
-                        DirecionarArquivo(arquivo, new TaskEventos());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskNFeEventos());
                         #endregion
                     }
 
@@ -848,26 +774,26 @@ namespace NFe.Service
                         #region Inutilizacao
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedInu_TXT) + Propriedade.ExtRetorno.Inu_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedInu_TXT) + "-ped-inu-ret.xml"));
-                        DirecionarArquivo(arquivo, new TaskInutilizacao());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskNFeInutilizacao());
                         #endregion
                     }
 
                     if (arquivo.EndsWith(Propriedade.ExtEnvio.PedSta_TXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedSta_TXT) + Propriedade.ExtRetorno.Sta_ERR));
-                        DirecionarArquivo(arquivo, new TaskConsultaStatus());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskNFeConsultaStatus());
                     }
 
                     if (arquivo.IndexOf(Propriedade.ExtEnvio.ConsNFeDest_TXT) >= 0)
                     {
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.ConsNFeDest_TXT) + Propriedade.ExtRetorno.retConsNFeDest_ERR));
-                        DirecionarArquivo(arquivo, new TaskConsultaNFDest());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskNFeConsultaNFDest());
                     }
 
                     if (arquivo.IndexOf(Propriedade.ExtEnvio.PedSit_TXT) >= 0)
                     {
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedSit_TXT) + Propriedade.ExtRetorno.Sit_ERR));
-                        DirecionarArquivo(arquivo, new TaskConsultaSituacaoNFe());
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskNFeConsultaSituacao());
                     }
                 }
                 else
@@ -1019,7 +945,7 @@ namespace NFe.Service
 
         #region DirecionarArquivo()
         /// <summary>
-        /// Direcionar os arquivos encontrados na pasta de envico corretamente
+        /// Direcionar os arquivos encontrados na pasta de envio corretamente
         /// </summary>
         /// <param name="arquivos">Lista de arquivos</param>
         /// <param name="metodo">Método a ser executado do serviço da NFe</param>
@@ -1028,13 +954,13 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 18/04/2011
         /// </remarks>
-        private void DirecionarArquivo(List<string> arquivos, object nfe, string metodo)
+        /*private void DirecionarArquivo(List<string> arquivos, object nfe, string metodo)
         {
             for (int i = 0; i < arquivos.Count; i++)
             {
                 DirecionarArquivo(arquivos[i], nfe, metodo);
             }
-        }
+        }*/
         #endregion
 
         #region DirecionarArquivo()
@@ -1048,10 +974,15 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 18/04/2011
         /// </remarks>
-        private void DirecionarArquivo(string arquivo, object taskClass)
+        private void DirecionarArquivo(int emp, bool veCertificado, bool veConexao, string arquivo, object taskClass)
         {
             try
             {
+                if (veCertificado)
+                    CertVencido(emp);
+                if (veConexao)
+                    IsConnectedToInternet();
+                    
                 //Processa ou envia o XML
                 EnviarArquivo(arquivo, taskClass, "Execute");
             }
@@ -1059,11 +990,12 @@ namespace NFe.Service
             {
                 //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
                 //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
-                if (taskClass is TaskConsultaStatus)
+                if (taskClass is TaskNFeConsultaStatus)
                     throw;
             }
         }
 
+        /*
         private void DirecionarArquivo(string arquivo, object nfe, string metodo)
         {
             try
@@ -1076,7 +1008,7 @@ namespace NFe.Service
                 //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
                 //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
             }
-        }
+        }*/
         #endregion
 
         #region EnviarArquivo()
@@ -1107,22 +1039,23 @@ namespace NFe.Service
                 }
                 else
                 {
-                    if (nfe is TaskRetRecepcao ||
-                        nfe is TaskRecepcaoDFe ||
-                        nfe is TaskRecepcaoDPEC ||
-                        nfe is TaskConsultaStatus ||
-                        nfe is TaskConsultaSituacaoNFe ||
-                        nfe is TaskConsultaDPEC ||
+                    if (nfe is TaskDFeRecepcao ||
+                        nfe is TaskDPECRecepcao ||
+                        nfe is TaskDPECConsulta ||
+                        nfe is TaskNFeRetRecepcao ||
+                        nfe is TaskNFeConsultaStatus ||
+                        nfe is TaskNFeConsultaSituacao ||
                         nfe is TaskDanfeContingencia ||
+                        nfe is TaskDanfe ||
                         nfe is TaskCadastroContribuinte ||
-                        nfe is TaskRetRecepcaoCTe ||
-                        nfe is TaskConsultaStatusCTe ||
-                        nfe is TaskConsultaSituacaoCTe ||
-                        nfe is TaskRetRecepcaoMDFe ||
-                        nfe is TaskConsultaStatusMDFe ||
-                        nfe is TaskConsultaSituacaoMDFe ||
-                        nfe is TaskConsNaoEncMDFe ||
-                        (nfe is TaskEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPECeDPEC))
+                        nfe is TaskCTeRetRecepcao ||
+                        nfe is TaskCTeConsultaStatus ||
+                        nfe is TaskCTeConsultaSituacao ||
+                        nfe is TaskMDFeRetRecepcao ||
+                        nfe is TaskMDFeConsultaStatus ||
+                        nfe is TaskMDFeConsultaSituacao ||
+                        nfe is TaskMDFeConsNaoEncerrado ||
+                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPECeDPEC))
                     {
                         doExecute = true;
                     }
@@ -1384,29 +1317,29 @@ namespace NFe.Service
             switch (servico)
             {
                 #region NFe / CTe / MDFe
-                case Servicos.InutilizarNumerosCTe:
-                case Servicos.InutilizarNumerosNFe:
+                case Servicos.CTeInutilizarNumeros:
+                case Servicos.NFeInutilizarNumeros:
                     extRet = Propriedade.ExtEnvio.PedInu_XML;
                     extRetERR = Propriedade.ExtRetorno.Inu_ERR;
                     break;
 
-                case Servicos.PedidoConsultaSituacaoCTe:
-                case Servicos.PedidoConsultaSituacaoNFe:
-                case Servicos.PedidoConsultaSituacaoMDFe:
+                case Servicos.CTePedidoConsultaSituacao:
+                case Servicos.NFePedidoConsultaSituacao:
+                case Servicos.MDFePedidoConsultaSituacao:
                     extRet = Propriedade.ExtEnvio.PedSit_XML;
                     extRetERR = Propriedade.ExtRetorno.Sit_ERR;
                     break;
 
-                case Servicos.ConsultaStatusServicoCTe:
-                case Servicos.ConsultaStatusServicoNFe:
-                case Servicos.ConsultaStatusServicoMDFe:
+                case Servicos.CTeConsultaStatusServico:
+                case Servicos.NFeConsultaStatusServico:
+                case Servicos.MDFeConsultaStatusServico:
                     extRet = Propriedade.ExtEnvio.PedSta_XML;
                     extRetERR = Propriedade.ExtRetorno.Sta_ERR;
                     break;
 
-                case Servicos.PedidoSituacaoLoteCTe:
-                case Servicos.PedidoSituacaoLoteMDFe:
-                case Servicos.PedidoSituacaoLoteNFe:
+                case Servicos.CTePedidoSituacaoLote:
+                case Servicos.MDFePedidoSituacaoLote:
+                case Servicos.NFePedidoSituacaoLote:
                     extRet = Propriedade.ExtEnvio.PedRec_XML;
                     extRetERR = Propriedade.ExtRetorno.ProRec_ERR;
                     break;
@@ -1416,90 +1349,90 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.ConsCad_ERR;
                     break;
 
-                case Servicos.MontarLoteUmCTe:
+                case Servicos.CTeMontarLoteUm:
                     extRet = Propriedade.ExtEnvio.Cte;
                     extRetERR = Propriedade.ExtRetorno.Cte_ERR;
                     break;
 
-                case Servicos.MontarLoteUmaNFe:
+                case Servicos.NFeMontarLoteUma:
                     extRet = Propriedade.ExtEnvio.Nfe;
                     extRetERR = Propriedade.ExtRetorno.Nfe_ERR;
                     break;
 
-                case Servicos.MontarLoteUmMDFe:
+                case Servicos.MDFeMontarLoteUm:
                     extRet = Propriedade.ExtEnvio.MDFe;
                     extRetERR = Propriedade.ExtRetorno.MDFe_ERR;
                     break;
 
-                case Servicos.MontarLoteVariosCTe:
-                case Servicos.MontarLoteVariasNFe:
-                case Servicos.MontarLoteVariosMDFe:
+                case Servicos.CTeMontarLoteVarios:
+                case Servicos.NFeMontarLoteVarias:
+                case Servicos.MDFeMontarLoteVarios:
                     extRet = Propriedade.ExtEnvio.MontarLote;
                     extRetERR = Propriedade.ExtRetorno.MontarLote_ERR;
                     break;
 
-                case Servicos.EnviarLoteCTe:
-                case Servicos.EnviarLoteNfe:
-                case Servicos.EnviarLoteNfe2:
-                case Servicos.EnviarLoteMDFe:
+                case Servicos.CTeEnviarLote:
+                case Servicos.NFeEnviarLote:
+                case Servicos.NFeEnviarLote2:
+                case Servicos.MDFeEnviarLote:
                     extRet = Propriedade.ExtEnvio.EnvLot;
                     extRetERR = Propriedade.ExtRetorno.Rec_ERR;
                     break;
 
-                case Servicos.EnviarDPEC:
+                case Servicos.DPECEnviar:
                     extRet = Propriedade.ExtEnvio.EnvDPEC_XML;
                     extRetERR = Propriedade.ExtRetorno.retDPEC_ERR;
                     break;
 
-                case Servicos.ConsultarDPEC:
+                case Servicos.DPECConsultar:
                     extRet = Propriedade.ExtEnvio.ConsDPEC_XML;
                     extRetERR = Propriedade.ExtRetorno.retConsDPEC_ERR;
                     break;
 
-                case Servicos.AssinarValidarCTeEnvioEmLote:
+                case Servicos.CTeAssinarValidarEnvioEmLote:
                     extRet = Propriedade.ExtEnvio.Cte;
                     extRetERR = Propriedade.ExtRetorno.Cte_ERR;
                     break;
 
-                case Servicos.AssinarValidarMDFeEnvioEmLote:
+                case Servicos.MDFeAssinarValidarEnvioEmLote:
                     extRet = Propriedade.ExtEnvio.MDFe;
                     extRetERR = Propriedade.ExtRetorno.MDFe_ERR;
                     break;
 
-                case Servicos.AssinarValidarNFeEnvioEmLote:
+                case Servicos.NFeAssinarValidarEnvioEmLote:
                     extRet = Propriedade.ExtEnvio.Nfe;
                     extRetERR = Propriedade.ExtRetorno.Nfe_ERR;
                     break;
 
-                case Servicos.RecepcaoEvento:
-                case Servicos.RecepcaoEventoCTe:
-                case Servicos.RecepcaoEventoMDFe:
-                case Servicos.EnviarEPEC:
+                case Servicos.EventoRecepcao:
+                case Servicos.CTeRecepcaoEvento:
+                case Servicos.MDFeRecepcaoEvento:
+                case Servicos.EventoEPEC:
                     extRet = Propriedade.ExtEnvio.PedEve;
                     extRetERR = Propriedade.ExtRetorno.Eve_ERR;
                     break;
 
-                case Servicos.EnviarCCe:
+                case Servicos.EventoCCe:
                     extRet = Propriedade.ExtEnvio.EnvCCe_XML;
                     extRetERR = Propriedade.ExtRetorno.retEnvCCe_ERR;
                     break;
 
-                case Servicos.EnviarManifDest:
+                case Servicos.EventoManifestacaoDest:
                     extRet = Propriedade.ExtEnvio.EnvManifestacao_XML;
                     extRetERR = Propriedade.ExtRetorno.retManifestacao_ERR;
                     break;
 
-                case Servicos.EnviarEventoCancelamento:
+                case Servicos.EventoCancelamento:
                     extRet = Propriedade.ExtEnvio.EnvCancelamento_XML;
                     extRetERR = Propriedade.ExtRetorno.retCancelamento_ERR;
                     break;
 
-                case Servicos.DownloadNFe:
+                case Servicos.NFeDownload:
                     extRet = Propriedade.ExtEnvio.EnvDownload_XML;
                     extRetERR = Propriedade.ExtRetorno.retDownload_ERR;
                     break;
 
-                case Servicos.ConsultaNFDest:
+                case Servicos.NFeConsultaNFDest:
                     extRet = Propriedade.ExtEnvio.ConsNFeDest_XML;
                     extRetERR = Propriedade.ExtRetorno.retConsNFeDest_ERR;
                     break;
@@ -1507,32 +1440,32 @@ namespace NFe.Service
                 #endregion
 
                 #region NFSe
-                case Servicos.RecepcionarLoteRps:
+                case Servicos.NFSeRecepcionarLoteRps:
                     extRet = Propriedade.ExtEnvio.EnvLoteRps;
                     extRetERR = Propriedade.ExtRetorno.RetLoteRps_ERR;
                     break;
 
-                case Servicos.ConsultarSituacaoLoteRps:
+                case Servicos.NFSeConsultarSituacaoLoteRps:
                     extRet = Propriedade.ExtEnvio.PedSitLoteRps;
                     extRetERR = Propriedade.ExtRetorno.SitLoteRps_ERR;
                     break;
 
-                case Servicos.ConsultarNfsePorRps:
+                case Servicos.NFSeConsultarPorRps:
                     extRet = Propriedade.ExtEnvio.PedSitNfseRps;
                     extRetERR = Propriedade.ExtRetorno.SitNfseRps_ERR;
                     break;
 
-                case Servicos.ConsultarNfse:
+                case Servicos.NFSeConsultar:
                     extRet = Propriedade.ExtEnvio.PedSitNfse;
                     extRetERR = Propriedade.ExtRetorno.SitNfse_ERR;
                     break;
 
-                case Servicos.ConsultarLoteRps:
+                case Servicos.NFSeConsultarLoteRps:
                     extRet = Propriedade.ExtEnvio.PedLoteRps;
                     extRetERR = Propriedade.ExtRetorno.LoteRps_ERR;
                     break;
 
-                case Servicos.CancelarNfse:
+                case Servicos.NFSeCancelar:
                     extRet = Propriedade.ExtEnvio.PedCanNfse;
                     extRetERR = Propriedade.ExtRetorno.CanNfse_ERR;
                     break;
@@ -1540,13 +1473,13 @@ namespace NFe.Service
                 #endregion
 
                 #region Diversos
-                case Servicos.AlterarConfiguracoesUniNFe:
+                case Servicos.UniNFeAlterarConfiguracoes:
                 case Servicos.AssinarValidar:
-                case Servicos.ConsultaInformacoesUniNFe:
-                case Servicos.ConverterTXTparaXML:
+                case Servicos.UniNFeConsultaInformacoes:
+                case Servicos.NFeConverterTXTparaXML:
                 case Servicos.EmProcessamento:
-                case Servicos.GerarChaveNFe:
-                case Servicos.LimpezaTemporario:
+                case Servicos.NFeGerarChave:
+                case Servicos.UniNFeLimpezaTemporario:
                     //Não tem definição pois não gera arquivo .ERR
                     break;
                 #endregion

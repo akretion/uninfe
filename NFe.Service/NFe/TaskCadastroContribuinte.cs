@@ -47,8 +47,8 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosConsCad.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosConsCad.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosConsCad.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), this.dadosConsCad.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,
@@ -56,24 +56,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        "-cons-cad", "-ret-cons-cad");
-
-#if old
-                    object oConsCad = wsProxy.CriarObjeto(NomeClasseWS(Servico, dadosConsCad.cUF));
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosConsCad.cUF, Servico));
-
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosConsCad.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", this.dadosConsCad.versao);// NFe.ConvertTxt.versoes.VersaoXMLConsCad);
-
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy,
-                        oConsCad,
-                        NomeMetodoWS(Servico, dadosConsCad.cUF),
-                        oCabecMsg,
-                        this,
-                        "-cons-cad", "-ret-cons-cad");
-#endif
+                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML.Replace(".xml",""),
+                                        NFe.Components.Propriedade.ExtRetorno.ConsCad_XML.Replace(".xml", ""));//"-cons-cad", "-ret-cons-cad");
                 }
                 else
                 {
@@ -153,30 +137,6 @@ namespace NFe.Service
             {
                 List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
                 Functions.PopulateClasse(this.dadosConsCad, cLinhas);
-#if false
-                foreach(string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    switch(dados[0].ToLower())
-                    {
-                        case "cnpj":
-                            this.dadosConsCad.CNPJ = dados[1].Trim();
-                            break;
-                        case "cpf":
-                            this.dadosConsCad.CPF = dados[1].Trim();
-                            break;
-                        case "ie":
-                            this.dadosConsCad.IE = dados[1].Trim();
-                            break;
-                        case "uf":
-                            this.dadosConsCad.UF = dados[1].Trim();
-                            break;
-                        case "versao":
-                            this.dadosConsCad.versao = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -188,7 +148,7 @@ namespace NFe.Service
                 {
                     XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
 
-                    this.dadosConsCad.versao = ConsCadElemento.Attributes["versao"].InnerText;
+                    this.dadosConsCad.versao = ConsCadElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
 
                     XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
 
@@ -196,24 +156,6 @@ namespace NFe.Service
                     {
                         XmlElement infConsElemento = (XmlElement)infConsNode;
                         Functions.PopulateClasse(this.dadosConsCad, infConsElemento);
-#if false
-                        if(infConsElemento.GetElementsByTagName("CNPJ")[0] != null)
-                        {
-                            this.dadosConsCad.CNPJ = infConsElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                        }
-                        if(infConsElemento.GetElementsByTagName("CPF")[0] != null)
-                        {
-                            this.dadosConsCad.CPF = infConsElemento.GetElementsByTagName("CPF")[0].InnerText;
-                        }
-                        if(infConsElemento.GetElementsByTagName("UF")[0] != null)
-                        {
-                            this.dadosConsCad.UF = infConsElemento.GetElementsByTagName("UF")[0].InnerText;
-                        }
-                        if(infConsElemento.GetElementsByTagName("IE")[0] != null)
-                        {
-                            this.dadosConsCad.IE = infConsElemento.GetElementsByTagName("IE")[0].InnerText;
-                        }
-#endif
                     }
                 }
             }

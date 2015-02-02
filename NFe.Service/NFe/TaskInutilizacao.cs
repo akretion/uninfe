@@ -14,11 +14,11 @@ namespace NFe.Service
     /// <summary>
     /// Classe para envio de XMLs de inutilização do NFe
     /// </summary>
-    public class TaskInutilizacao : TaskAbst
+    public class TaskNFeInutilizacao : TaskAbst
     {
-        public TaskInutilizacao()
+        public TaskNFeInutilizacao()
         {
-            Servico = Servicos.InutilizarNumerosNFe;
+            Servico = Servicos.NFeInutilizarNumeros;
         }
 
         #region Classe com os dados do XML do pedido de inutilização de números de NF
@@ -48,8 +48,8 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
                     //Atribuir conteúdo p ara duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedInut.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedInut.versao);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
 
                     //Criar objeto da classe de assinatura digita
                     AssinaturaDigital oAD = new AssinaturaDigital();
@@ -162,7 +162,7 @@ namespace NFe.Service
                 foreach (XmlNode InutNFeNode in InutNFeList)
                 {
                     XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
-                    dadosPedInut.versao = InutNFeElemento.Attributes["versao"].InnerText;
+                    dadosPedInut.versao = InutNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
 
                     XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
                     
@@ -171,11 +171,11 @@ namespace NFe.Service
                         XmlElement infInutElemento = (XmlElement)infInutNode;
                         Functions.PopulateClasse(dadosPedInut, infInutElemento);                   
 
-                        if (infInutElemento.GetElementsByTagName("tpEmis").Count != 0)
+                        if (infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                         {
-                            dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                            dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                             /// para que o validador não rejeite, excluo a tag <tpEmis>
-                            doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName("tpEmis")[0]);
+                            doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
                             /// salvo o arquivo modificado
                             doc.Save(cArquivoXML);
                         }
@@ -214,7 +214,7 @@ namespace NFe.Service
                 {
                     XmlElement infInutElemento = (XmlElement)infInutNode;
 
-                    if (infInutElemento.GetElementsByTagName("cStat")[0].InnerText == "102") //Inutilização de Número Homologado
+                    if (infInutElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText == "102") //Inutilização de Número Homologado
                     {
                         string strRetInutNFe = retInutNFeNode.OuterXml;
 

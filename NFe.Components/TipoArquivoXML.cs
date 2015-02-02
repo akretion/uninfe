@@ -59,6 +59,10 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4314050-";
                             break;
 
+                        case 4125506: //São José dos Pinhais-PR (GINFES)
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4125506-";
+                            break;
+
                         default:
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                             break;
@@ -80,10 +84,10 @@ namespace NFe.Components
                         doc.Load(fullPathXML);
                         string nome = doc.DocumentElement.Name;
                         string versao = string.Empty;
-                        if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"] != null)
-                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes["versao"].Value;
-                        else if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"] != null)
-                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes["versao"].Value;
+                        if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
+                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
+                        else if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
+                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
 
                         if (versao.Equals("3.10") && string.IsNullOrEmpty(padraoNFSe))
                             versaoXML = "-" + versao;
@@ -96,7 +100,7 @@ namespace NFe.Components
                             {
                                 if (nome.Equals("envEvento") || nome.Equals("eventoCTe"))
                                 {
-                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName("tpEvento")[0];
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0];
                                     if (cl != null)
                                     {
                                         string evento = cl.InnerText;
@@ -121,7 +125,7 @@ namespace NFe.Components
                                 }
                                 else if (nome.Equals("eventoMDFe"))
                                 {
-                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName("tpEvento")[0];
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0];
                                     if (cl != null)
                                     {
                                         nome = "eventoMDFe" + cl.InnerText;

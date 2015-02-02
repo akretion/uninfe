@@ -17,7 +17,7 @@ using NFe.Components.Conam;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskCancelarNfse : TaskAbst
+    public class TaskNFSeCancelar : TaskAbst
     {
         #region Objeto com os dados do XML de cancelamento de NFS-e
         /// <summary>
@@ -32,7 +32,7 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.CancelarNfse;
+            Servico = Servicos.NFSeCancelar;
 
             try
             {

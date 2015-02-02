@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Webservice>
-  <Estado ID="12" Nome="Acre" UF="AC">
+  <Estado ID="12" Nome="Acre" UF="AC" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -20,6 +20,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -47,6 +48,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -56,7 +58,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="27" Nome="Alagoas" UF="AL">
+  <Estado ID="27" Nome="Alagoas" UF="AL" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -76,6 +78,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -103,6 +106,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -112,7 +116,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="16" Nome="Amapa" UF="AP">
+  <Estado ID="16" Nome="Amapa" UF="AP" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -132,6 +136,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -159,6 +164,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -168,7 +174,7 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="13" Nome="Amazonas" UF="AM">
+  <Estado ID="13" Nome="Amazonas" UF="AM" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\AM\HAMNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\AM\HAMNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -188,6 +194,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -215,6 +222,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -224,7 +232,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="29" Nome="Bahia" UF="BA">
+  <Estado ID="29" Nome="Bahia" UF="BA" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\BA\HBANfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\BA\HBANfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -244,6 +252,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -271,6 +280,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -280,7 +290,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="23" Nome="Ceará" UF="CE">
+  <Estado ID="23" Nome="Ceará" UF="CE" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\CE\HCENfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\CE\HCENfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -300,6 +310,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -327,6 +338,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -336,7 +348,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="53" Nome="Distrito Federal" UF="DF">
+  <Estado ID="53" Nome="Distrito Federal" UF="DF" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -356,6 +368,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -383,6 +396,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -392,7 +406,123 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="32" Nome="Espirito Santo" UF="ES">
+  <Estado ID="901" Nome="DPEC - Declaração Prévia de Emissão em Contingência" UF="DPEC" SVC="teNone">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl</NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
+      <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
+      <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
+      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\DPEC\PDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\DPEC\PDEPCSCEConsultaRFB.wsdl</NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
+      <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
+      <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
+      <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência" UF="EPEC" SVC="teNone">
+    <LocalHomologacao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\AN\HANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\AN\PANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="32" Nome="Espirito Santo" UF="ES" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -412,6 +542,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -439,6 +570,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -448,7 +580,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="52" Nome="Goiás" UF="GO">
+  <Estado ID="52" Nome="Goiás" UF="GO" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\GO\HGONfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\GO\HGONfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -468,6 +600,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -495,6 +628,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -504,7 +638,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="21" Nome="Maranhão" UF="MA">
+  <Estado ID="21" Nome="Maranhão" UF="MA" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -517,13 +651,14 @@
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
       <NFeAutorizacao>wsdl\homologacao\SVAN\HSVANNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\homologacao\SVAN\HSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>      
+      <NFeRetAutorizacao>wsdl\homologacao\SVAN\HSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -544,13 +679,14 @@
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
       <NFeAutorizacao>wsdl\producao\SVAN\PSVANNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\producao\SVAN\PSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>      
+      <NFeRetAutorizacao>wsdl\producao\SVAN\PSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -560,7 +696,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="51" Nome="Mato Grosso" UF="MT">
+  <Estado ID="51" Nome="Mato Grosso" UF="MT" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\MT\HMTNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\MT\HMTNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -580,6 +716,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\MT\HMTCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\MT\HMTCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\MT\HMTCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -607,6 +744,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\MT\PMTCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\MT\PMTCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\MT\PMTCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -616,7 +754,7 @@
       <CTeConsultaCadastro>wsdl\producao\MT\PMTNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS">
+  <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\MS\HMSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\MS\HMSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -636,6 +774,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\MS\HMSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\MS\HMSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\MS\HMSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -663,6 +802,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\MS\PMSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\MS\PMSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\MS\PMSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -672,7 +812,7 @@
       <CTeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="31" Nome="Minas Gerais" UF="MG">
+  <Estado ID="31" Nome="Minas Gerais" UF="MG" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\MG\HMGNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\MG\HMGNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -692,6 +832,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\MG\HMGCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\MG\HMGCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\MG\HMGCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -719,6 +860,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\MG\PMGCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\MG\PMGCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\MG\PMGCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -728,7 +870,7 @@
       <CTeConsultaCadastro>wsdl\producao\MG\PMGNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="15" Nome="Pará" UF="PA">
+  <Estado ID="15" Nome="Pará" UF="PA" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -748,6 +890,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -775,6 +918,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -784,7 +928,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="25" Nome="Paraiba" UF="PB">
+  <Estado ID="25" Nome="Paraiba" UF="PB" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -804,6 +948,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -831,6 +976,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -840,7 +986,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="41" Nome="Paraná" UF="PR">
+  <Estado ID="41" Nome="Paraná" UF="PR" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\PR\HPRNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\PR\HPRNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -860,6 +1006,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\PR\HPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\PR\HPRCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\PR\HPRCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -887,6 +1034,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\PR\PPRCTeRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\PR\PPRCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\PR\PPRCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -896,7 +1044,7 @@
       <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="26" Nome="Pernambuco" UF="PE">
+  <Estado ID="26" Nome="Pernambuco" UF="PE" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\PE\HPENfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\PE\HPENfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -916,6 +1064,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -943,6 +1092,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -952,7 +1102,7 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="22" Nome="Piaui" UF="PI">
+  <Estado ID="22" Nome="Piaui" UF="PI" SVC="teSVCRS">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVAN\HSVANNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVAN\HSVANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -972,6 +1122,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -999,6 +1150,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1008,7 +1160,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="33" Nome="Rio de Janeiro" UF="RJ">
+  <Estado ID="33" Nome="Rio de Janeiro" UF="RJ" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1028,6 +1180,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1055,6 +1208,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1064,7 +1218,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="24" Nome="Rio Grande do Norte" UF="RN">
+  <Estado ID="24" Nome="Rio Grande do Norte" UF="RN" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1084,6 +1238,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1111,6 +1266,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1120,7 +1276,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="43" Nome="Rio Grande do Sul" UF="RS">
+  <Estado ID="43" Nome="Rio Grande do Sul" UF="RS" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\RS\HRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\RS\HRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1140,6 +1296,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\RS\HRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\RS\HRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\RS\HRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1167,6 +1324,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\RS\PRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\RS\PRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\RS\PRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1176,7 +1334,7 @@
       <CTeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="11" Nome="Rondonia" UF="RO">
+  <Estado ID="11" Nome="Rondonia" UF="RO" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1196,6 +1354,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1223,6 +1382,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1232,7 +1392,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="14" Nome="Roraima" UF="RR">
+  <Estado ID="14" Nome="Roraima" UF="RR" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1252,6 +1412,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVSP\HSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVSP\HSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVSP\HSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1279,6 +1440,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVSP\PSVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVSP\PSVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVSP\PSVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1288,7 +1450,7 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="42" Nome="Santa Catarina" UF="SC">
+  <Estado ID="42" Nome="Santa Catarina" UF="SC" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1308,6 +1470,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1335,6 +1498,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1344,7 +1508,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="35" Nome="São Paulo" UF="SP">
+  <Estado ID="35" Nome="São Paulo" UF="SP" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SP\HSPNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SP\HSPNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1362,8 +1526,9 @@
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
-      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>      
+      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SP\HSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SP\HSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SP\HSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1391,6 +1556,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SP\PSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SP\PSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SP\PSPCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1400,7 +1566,7 @@
       <CTeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="28" Nome="Sergipe" UF="SE">
+  <Estado ID="28" Nome="Sergipe" UF="SE" SVC="teSVCAN">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
@@ -1420,6 +1586,7 @@
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1447,6 +1614,7 @@
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
       <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
       <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
@@ -1456,183 +1624,181 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="17" Nome="Tocantins" UF="TO">
+  <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP" SVC="teNone">
     <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
-      <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
-      <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
-      <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
-      <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
-      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
-      <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
-      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
-      <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
-      <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
-      <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
-      <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao>wsdl\producao\SVRS\PSVRSNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\SVRS\PSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
-      <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
-      <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
-      <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
-      <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
-      <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
-      <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
-      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
-      <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
-      <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
-      <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
-      <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="901" Nome="DPEC - Declaração Prévia de Emissão em Contingência" UF="DPEC">
-    <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
+      <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl</NFeConsulta>
+      <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
       <NFeManifDest></NFeManifDest>
-      <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
-      <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
-      <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
-      <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
-      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
-      <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao>wsdl\producao\DPEC\PDEPCSCERecepcaoRFB.wsdl</NFeRecepcao>
-      <NFeRetRecepcao></NFeRetRecepcao>
-      <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\DPEC\PDEPCSCEConsultaRFB.wsdl</NFeConsulta>
-      <NFeStatusServico></NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-      <NFeManifDest></NFeManifDest>
-      <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
-      <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
-      <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
-      <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
-      <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
-      <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="902" Nome="Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe)" UF="SVCRS">
-    <LocalHomologacao>
-      <NFeRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeRecepcaoEvento>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
-      <NFeConsultaCadastro>wsdl\homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\homologacao\SCVRS\HSVCRSNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\homologacao\SCVRS\HSVCRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
-      <CTeRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRecepcao.wsdl</CTeRecepcao>
-      <CTeRetRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
-      <CTeConsulta>wsdl\homologacao\SCVRS\HSCVRSCteConsulta.wsdl</CTeConsulta>
-      <CTeStatusServico>wsdl\homologacao\SCVRS\HSCVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
-    </LocalHomologacao>
-    <LocalProducao>
-      <NFeRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
-      <NFeRetRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeRecepcaoEvento>wsdl\producao\SCVRS\PSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
-      <NFeConsultaCadastro>wsdl\producao\SCVRS\PSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
-      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
-      <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
-      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\producao\SCVRS\PSVCRSNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\producao\SCVRS\PSVCRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
-      <CTeRecepcao>wsdl\producao\SCVRS\PSCVRSCteRecepcao.wsdl</CTeRecepcao>
-      <CTeRetRecepcao>wsdl\producao\SCVRS\PSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
-      <CTeConsulta>wsdl\producao\SCVRS\PSCVRSCteConsulta.wsdl</CTeConsulta>
-      <CTeStatusServico>wsdl\producao\SCVRS\PSCVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\producao\SCVRS\PSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
-    </LocalProducao>
-  </Estado>
-  <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP">
-    <LocalHomologacao>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\homologacao\SCVSP\HSCVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SCVSP\HSCVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SCVSP\HSCVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao></CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SCVSP\HSCVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SCVSP\HSCVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\homologacao\SCVSP\HSCVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalHomologacao>
     <LocalProducao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\producao\SCVSP\PSCVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SCVSP\PSCVSPCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SCVSP\PSCVSPCteRetRecepcao.wsdl</CTeRetRecepcao>
       <CTeInutilizacao></CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SCVSP\PSCVSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SCVSP\PSCVSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
-      <CTeRecepcaoEvento>wsdl\producao\SCVSP\PSCVSPCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
     </LocalProducao>
   </Estado>
-  <Estado ID="904" Nome="Servico Virtual de Contingência do Ambiente Nacional (NFe)" UF="SVCAN">
+  <Estado ID="904" Nome="Servico Virtual de Contingência do Ambiente Nacional (NFe)" UF="SVCAN" SVC="teNone">
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SCVAN\HSVCANNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SCVAN\HSVCANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\SCVAN\HSVCANNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\SCVAN\HSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SCVAN\HSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
       <NFeAutorizacao>wsdl\homologacao\SCVAN\HSVCANNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SCVAN\HSVCANNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\SCVAN\PSVCANNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\producao\SCVAN\PSVCANNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
       <NFeConsulta>wsdl\producao\SCVAN\PSVCANNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\SCVAN\PSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SCVAN\PSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
       <NFeAutorizacao>wsdl\producao\SCVAN\PSVCANNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SCVAN\PSVCANNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência" UF="EPEC">
+  <Estado ID="902" Nome="Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe)" UF="SVCRS" SVC="teNone">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SCVRS\HSVCRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SCVRS\HSVCRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
+      <CTeRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRecepcao.wsdl</CTeRecepcao>
+      <CTeRetRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta>wsdl\homologacao\SCVRS\HSCVRSCteConsulta.wsdl</CTeConsulta>
+      <CTeStatusServico>wsdl\homologacao\SCVRS\HSCVRSCteStatusServico.wsdl</CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SCVRS\PSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\SCVRS\PSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\producao\SCVRS\PSVCRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\producao\SCVRS\PSVCRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\producao\SCVRS\PSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
+      <CTeRecepcao>wsdl\producao\SCVRS\PSCVRSCteRecepcao.wsdl</CTeRecepcao>
+      <CTeRetRecepcao>wsdl\producao\SCVRS\PSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta>wsdl\producao\SCVRS\PSCVRSCteConsulta.wsdl</CTeConsulta>
+      <CTeStatusServico>wsdl\producao\SCVRS\PSCVRSCteStatusServico.wsdl</CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="991" Nome="Serviços da SEFAZ Ambiente Nacional" UF="AN" SVC="teNone">
     <LocalHomologacao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
@@ -1640,13 +1806,26 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
       <NFeManifDest></NFeManifDest>
-      <NFeRecepcaoEvento>wsdl\homologacao\AN\HANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
       <MDFeRecepcao></MDFeRecepcao>
       <MDFeRetRecepcao></MDFeRetRecepcao>
       <MDFeConsulta></MDFeConsulta>
       <MDFeStatusServico></MDFeStatusServico>
       <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao>WSDL\Homologacao\AN\HANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao></NFeRecepcao>
@@ -1655,21 +1834,84 @@
       <NFeConsulta></NFeConsulta>
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento></NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
       <NFeManifDest></NFeManifDest>
-      <NFeRecepcaoEvento>wsdl\producao\AN\PANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
       <MDFeRecepcao></MDFeRecepcao>
       <MDFeRetRecepcao></MDFeRetRecepcao>
       <MDFeConsulta></MDFeConsulta>
       <MDFeStatusServico></MDFeStatusServico>
       <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao>WSDL\Producao\AN\PANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="991" Nome="Serviços da SEFAZ Ambiente Nacional" UF="AN">
-      <LocalHomologacao>
-        <DFeRecepcao>WSDL\Homologacao\AN\HANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
-      </LocalHomologacao>
-      <LocalProducao>
-        <DFeRecepcao>WSDL\Producao\AN\PANNFeDistribuicaoDFe.wsdl</DFeRecepcao>
-      </LocalProducao>
-    </Estado>
+  <Estado ID="17" Nome="Tocantins" UF="TO" SVC="teSVCAN">
+    <LocalHomologacao>
+      <NFeRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\homologacao\SVRS\HSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest>wsdl\homologacao\AN\HANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
+      <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
+      <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
+      <MDFeRecepcaoEvento>wsdl\homologacao\mdfe\HMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado>WSDL\Homologacao\MDFe\HMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
+      <CTeRecepcao>wsdl\homologacao\SVRS\HSVRSCteRecepcao.wsdl</CTeRecepcao>
+      <CTeRetRecepcao>wsdl\homologacao\SVRS\HSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
+      <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
+      <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
+      <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao>wsdl\producao\SVRS\PSVRSNfeRecepcao2.wsdl</NFeRecepcao>
+      <NFeRetRecepcao>wsdl\producao\SVRS\PSVRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest>wsdl\producao\AN\PANNFeConsultaDest.wsdl</NFeConsultaNFeDest>
+      <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
+      <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
+      <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
+      <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
+      <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
+      <MDFeRecepcaoEvento>wsdl\producao\mdfe\PMDFeRecepcaoEvento.wsdl</MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado>WSDL\Producao\MDFe\PMDFeConsNaoEnc.wsdl</MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
+      <CTeRecepcao>wsdl\producao\SVRS\PSVRSCteRecepcao.wsdl</CTeRecepcao>
+      <CTeRetRecepcao>wsdl\producao\SVRS\PSVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
+      <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
+      <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
+      <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
 </Webservice>

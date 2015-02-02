@@ -42,7 +42,7 @@ namespace NFe.ConvertTxt
             //    xmlInf.Attributes.Append(xmlVersion);
             //}
             XmlAttribute xmlVersion1 = doc.CreateAttribute("xmlns");
-            xmlVersion1.Value = !string.IsNullOrEmpty(Propriedade.nsURI_nfe) ? Propriedade.nsURI_nfe : "http://www.portalfiscal.inf.br/nfe";
+            xmlVersion1.Value = NFeStrConstants.NAME_SPACE_NFE;// !string.IsNullOrEmpty(Propriedade.nsURI_nfe) ? Propriedade.nsURI_nfe : "http://www.portalfiscal.inf.br/nfe";
             xmlInf.Attributes.Append(xmlVersion1);
             doc.AppendChild(xmlInf);
 
@@ -56,7 +56,7 @@ namespace NFe.ConvertTxt
                          NFe.ide.dhEmi.Substring(5, 2); //data AAMM
 
             Int64 iTmp = Convert.ToInt64("0" + NFe.emit.CNPJ + NFe.emit.CPF);
-            cChave += iTmp.ToString("00000000000000");// +"55";
+            cChave += iTmp.ToString("00000000000000");
             cChave += Convert.ToInt32(NFe.ide.mod).ToString("00");
 
             if (NFe.ide.cNF == 0)
@@ -106,7 +106,7 @@ namespace NFe.ConvertTxt
             infNfeAttr1.Value = NFe.infNFe.Versao.ToString("0.00").Replace(",", ".");
             infNfe.Attributes.Append(infNfeAttr1);
 
-            XmlAttribute infNfeAttrId = doc.CreateAttribute("Id");
+            XmlAttribute infNfeAttrId = doc.CreateAttribute(TpcnResources.Id.ToString());
             infNfeAttrId.Value = "NFe" + NFe.infNFe.ID;
             infNfe.Attributes.Append(infNfeAttrId);
             xmlInf.AppendChild(infNfe);
@@ -135,7 +135,7 @@ namespace NFe.ConvertTxt
             GerarCompra(NFe.compra, infNfe);
             GerarCana(NFe.cana, infNfe);
 
-            this.cFileName = NFe.infNFe.ID + "-nfe.xml";
+            this.cFileName = NFe.infNFe.ID + Propriedade.ExtEnvio.Nfe;
 
             if (!string.IsNullOrEmpty(folderDestino))
             {
@@ -2218,6 +2218,14 @@ namespace NFe.ConvertTxt
             if (FBuffer.StartsWith("<![CDATA["))
                 return FBuffer;
 
+            FBuffer = FBuffer.Replace("& ", "&amp; ");
+            FBuffer = FBuffer.Replace("<", "&lt;");
+            FBuffer = FBuffer.Replace(">", "&gt;");
+            FBuffer = FBuffer.Replace("\"", "&quot;");
+            FBuffer = FBuffer.Replace("\t", " ");
+            FBuffer = FBuffer.Replace("\n", ";");
+            FBuffer = FBuffer.Replace("\r", "");
+
             String normalizedString = FBuffer.Normalize(NormalizationForm.FormD);
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -2373,29 +2381,29 @@ namespace NFe.ConvertTxt
                     {
                         XmlElement mChaveElemento = (XmlElement)mChaveNode;
 
-                        if (mChaveElemento.GetElementsByTagName("UF").Count != 0)
-                            cUF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("UF")[0].InnerText);
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.UF.ToString()).Count != 0)
+                            cUF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName(TpcnResources.UF.ToString())[0].InnerText);
 
-                        if (mChaveElemento.GetElementsByTagName("tpEmis").Count != 0)
-                            tpEmis = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
+                            tpEmis = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
 
-                        if (mChaveElemento.GetElementsByTagName("nNF").Count != 0)
-                            nNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("nNF")[0].InnerText);
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.nNF.ToString()).Count != 0)
+                            nNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName(TpcnResources.nNF.ToString())[0].InnerText);
 
-                        if (mChaveElemento.GetElementsByTagName("cNF").Count != 0)
-                            cNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("cNF")[0].InnerText);
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.cNF.ToString()).Count != 0)
+                            cNF = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName(TpcnResources.cNF.ToString())[0].InnerText);
 
-                        if (mChaveElemento.GetElementsByTagName("serie").Count != 0)
-                            serie = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName("serie")[0].InnerText);
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.serie.ToString()).Count != 0)
+                            serie = Convert.ToInt32("0" + mChaveElemento.GetElementsByTagName(TpcnResources.serie.ToString())[0].InnerText);
 
-                        if (mChaveElemento.GetElementsByTagName("AAMM").Count != 0)
-                            cAAMM = mChaveElemento.GetElementsByTagName("AAMM")[0].InnerText;
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.AAMM.ToString()).Count != 0)
+                            cAAMM = mChaveElemento.GetElementsByTagName(TpcnResources.AAMM.ToString())[0].InnerText;
 
-                        if (mChaveElemento.GetElementsByTagName("CNPJ").Count != 0)
-                            cCNPJ = mChaveElemento.GetElementsByTagName("CNPJ")[0].InnerText;
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.CNPJ.ToString()).Count != 0)
+                            cCNPJ = mChaveElemento.GetElementsByTagName(TpcnResources.CNPJ.ToString())[0].InnerText;
 
-                        if (mChaveElemento.GetElementsByTagName("mod").Count != 0)
-                            cMod = mChaveElemento.GetElementsByTagName("mod")[0].InnerText;
+                        if (mChaveElemento.GetElementsByTagName(TpcnResources.mod.ToString()).Count != 0)
+                            cMod = mChaveElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0].InnerText;
                     }
                 }
                 else

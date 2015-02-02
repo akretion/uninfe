@@ -14,7 +14,7 @@ namespace NFe.Service
     {
         public override void Execute()
         {
-            Servico = Servicos.DanfeRelatorio;
+            Servico = Servicos.DANFERelatorio;
 
             int emp = Empresas.FindEmpresaByThread();
 
@@ -148,7 +148,7 @@ ExportarPasta|Enviar | Enviados | Erros
     {
         public override void Execute()
         {
-            Servico = Servicos.ImpressaoNFe;
+            Servico = Servicos.DANFEImpressao;
 
             int emp = Empresas.FindEmpresaByThread();
             string aFilename = "";

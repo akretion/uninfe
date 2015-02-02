@@ -199,7 +199,7 @@ namespace NFe.Service
             {
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                if (Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
+                if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlErro) && Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
                 {
                     string vNomeArquivo = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
@@ -610,14 +610,14 @@ namespace NFe.Service
                     case "NFe":
                         foreach (var el3 in doc.GetElementsByTagName("ide"))
                         {
-                            if (((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEmis.ToString())[0] != null)
+                            if (((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0] != null)
                             {
-                                NFe.Components.TipoEmissao tpe = NFe.Components.EnumHelper.StringToEnum<NFe.Components.TipoEmissao>(((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEmis.ToString())[0].InnerText);
+                                NFe.Components.TipoEmissao tpe = NFe.Components.EnumHelper.StringToEnum<NFe.Components.TipoEmissao>(((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                                 if (tpe != (NFe.Components.TipoEmissao)emp.tpEmis)
                                 {
                                     throw new Exception("Tipo de emissão do arquivo diferente do tipo de emissão definido na empresa");
                                 }
-                                tipo = ((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.mod.ToString())[0].InnerText.Equals("55") ? "nfe" : "nfce";
+                                tipo = ((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.mod.ToString())[0].InnerText.Equals("55") ? "nfe" : "nfce";
                             }
                         }
                         arqProcNFe = nomeArqXMLNFe;
@@ -630,9 +630,9 @@ namespace NFe.Service
                         /// 
                         foreach (var el3 in doc.GetElementsByTagName("protCTe"))
                         {
-                            if (((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0] != null)
+                            if (((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0] != null)
                             {
-                                string cStat = ((XmlElement)el3).GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
+                                string cStat = ((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText;
                                 switch (cStat)
                                 {
                                     //denegada
@@ -663,7 +663,7 @@ namespace NFe.Service
                         {
                             temCancelamento = true;
                             tipo = "nfe";
-                            XmlElement cl = (XmlElement)doc.GetElementsByTagName("chNFe")[0];
+                            XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0];
                             if (cl != null)
                             {
                                 tempFile = cl.InnerText;
@@ -676,7 +676,7 @@ namespace NFe.Service
                     case "procEventoCTe":
                     case "procEventoMDFe":
                         {
-                            XmlElement cl = (XmlElement)doc.GetElementsByTagName("tpEvento")[0];
+                            XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0];
                             if (cl != null)
                             {
                                 switch ((NFe.ConvertTxt.tpEventos)Convert.ToInt32(cl.InnerText))
@@ -686,7 +686,7 @@ namespace NFe.Service
                                         {
                                             case "procEventoCTe":
                                                 tipo = "ccte";
-                                                cl = (XmlElement)doc.GetElementsByTagName("chCTe")[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chCTe.ToString())[0];
                                                 break;
                                             case "procEventoMDFe":
                                                 ///
@@ -696,7 +696,7 @@ namespace NFe.Service
                                                 break;
                                             default:
                                                 tipo = "cce";
-                                                cl = (XmlElement)doc.GetElementsByTagName("chNFe")[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0];
                                                 break;
                                         }
                                         break;
@@ -707,15 +707,15 @@ namespace NFe.Service
                                         {
                                             case "procEventoCTe":
                                                 tipo = "cte";
-                                                cl = (XmlElement)doc.GetElementsByTagName("chCTe")[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chCTe.ToString())[0];
                                                 break;
                                             case "procEventoMDFe":
                                                 tipo = "canmdfe";
-                                                cl = (XmlElement)doc.GetElementsByTagName("chMDFe")[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chMDFe.ToString())[0];
                                                 break;
                                             default:
                                                 tipo = "nfe";
-                                                cl = (XmlElement)doc.GetElementsByTagName("chNFe")[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0];
                                                 break;
                                         }
                                         break;
@@ -1254,7 +1254,7 @@ namespace NFe.Service
 
         /// <summary>
         /// Lucas A. Araujo
-        /// 卐 Criptografa uma string.
+        /// Criptografa uma string.
         /// </summary>
         /// <param name="messageString">String</param>
         /// <returns>Texto criptografado</returns>

@@ -249,7 +249,7 @@ namespace NFe.UI
                 {
                     if (elem.NodeType == XmlNodeType.Element)
                     {
-                        if (elem.Name == "xMotivo")
+                        if (elem.Name == NFe.Components.TpcnResources.xMotivo.ToString())
                         {
                             elem.Read();
                             rst = elem.Value;

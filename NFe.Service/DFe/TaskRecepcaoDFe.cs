@@ -12,14 +12,14 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskRecepcaoDFe : TaskAbst
+    public class TaskDFeRecepcao : TaskAbst
     {
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
             distDFeInt _distDFeInt = new distDFeInt();
 
-            Servico = Servicos.EnviarDFe;
+            Servico = Servicos.DFeEnviar;
             try
             {
                 if (!this.vXmlNfeDadosMsgEhXML)
@@ -77,7 +77,6 @@ namespace NFe.Service
                                         Propriedade.ExtRetorno.retEnvDFe_XML.Replace(".xml", ""));
 
                     LeRetornoDFe(emp, doc);
-
                 }
             }
             catch (Exception ex)
@@ -127,14 +126,9 @@ namespace NFe.Service
                     return;
                 }
                 ///
-                /// cria a pasta de download para comportar as notas e eventos retornados já descompactados
+                /// cria a pasta para comportar as notas e eventos retornados já descompactados
                 /// 
-                /// não estando definida, assume a pasta de retorno\dfe
-                /// 
-                string folderTerceiros = "";// Empresas.Configuracoes[emp].PastaDownloadNFeDest;
-                if (string.IsNullOrEmpty(folderTerceiros))
-                    folderTerceiros = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, "dfe");
-
+                string folderTerceiros = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, "dfe");
                 if (!Directory.Exists(folderTerceiros))
                     Directory.CreateDirectory(folderTerceiros);
 
@@ -159,8 +153,7 @@ namespace NFe.Service
                             if (ret.ChildNodes[n].Name.Equals("docZip"))
                             {
                                 string FileToFtp = "";
-                                //string chNFe = "";
-                                string NSU = ret.ChildNodes[n].Attributes[NFe.ConvertTxt.TpcnResources.NSU.ToString()].Value;
+                                string NSU = ret.ChildNodes[n].Attributes[TpcnResources.NSU.ToString()].Value;
 
                                 ///
                                 /// descompacta o conteudo
@@ -172,47 +165,20 @@ namespace NFe.Service
                                 }
                                 else
                                 {
-                                    //XmlDocument docres = new XmlDocument();
-                                    //docres.Load(Functions.StringXmlToStreamUTF8(xmlRes));
-
                                     if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resEvento"))
                                     {
-                                        //XmlNodeList envres = docres.GetElementsByTagName("resEvento");
-                                        //XmlElement ret1 = (XmlElement)envres.Item(0);
-                                        //chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
-                                        //int nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString(), false));
-                                        //ConvertTxt.tpEventos tpEvento = (ConvertTxt.tpEventos)Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.tpEvento.ToString(), false));
-
-                                        //chNFe += "_" + NSU + "_" + (tpEvento != ConvertTxt.tpEventos.tpEvCCe ? ((int)tpEvento).ToString() + "_" : "") + nSeqEvento.ToString("00");
-
                                         FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.Eve);
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procEventoNFe"))
                                     {
-                                        //XmlNodeList envres = docres.GetElementsByTagName("procEventoNFe");
-                                        //XmlElement ret1 = (XmlElement)envres.Item(0);
-                                        //chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false);
-                                        //int nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString(), false));
-                                        //ConvertTxt.tpEventos tpEvento = (ConvertTxt.tpEventos)Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.tpEvento.ToString(), false));
-
-                                        //chNFe += "_" + NSU + "_" + (tpEvento != ConvertTxt.tpEventos.tpEvCCe ? ((int)tpEvento).ToString() + "_" : "") + nSeqEvento.ToString("00");
-
                                         FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcEventoNFe);
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procNFe"))
                                     {
-                                        //XmlNodeList envres = docres.GetElementsByTagName("procNFe");
-                                        //XmlElement ret1 = (XmlElement)envres.Item(0);
-                                        //chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false) + "_" + NSU;
-
                                         FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcNFe);
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resNFe"))
                                     {
-                                        //XmlNodeList envres = docres.GetElementsByTagName("resNFe");
-                                        //XmlElement ret1 = (XmlElement)envres.Item(0);
-                                        //chNFe = Functions.LerTag(ret1, NFe.ConvertTxt.TpcnResources.chNFe.ToString(), false) + "_" + NSU;
-
                                         FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtEnvio.Nfe);
                                     }
                                     else

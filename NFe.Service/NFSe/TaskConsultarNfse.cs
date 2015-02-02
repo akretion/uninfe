@@ -16,7 +16,7 @@ using NFe.Components.Conam;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarNfse : TaskAbst
+    public class TaskNFSeConsultar : TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
         /// <summary>
@@ -31,7 +31,7 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarNfse;
+            Servico = Servicos.NFSeConsultar;
 
             try
             {

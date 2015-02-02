@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Xml.Linq;
+using NFe.Components;
 
 namespace uninfe_ws
 {
@@ -14,6 +15,7 @@ namespace uninfe_ws
         public string ID { get; set; }
         public string UF { get; set; }
         public string Padrao { get; set; }
+        public string svc { get; set; }
 
         public string text
         {
@@ -43,6 +45,7 @@ namespace uninfe_ws
     {
         public static Dictionary<string, int> listageral = new Dictionary<string, int>();
 
+        /********
         public static string LerWSDLS(string configname, string ID, string UF, string Padrao)
         {
             XmlDocument doc = new XmlDocument();
@@ -61,8 +64,8 @@ namespace uninfe_ws
                         p = ele.Attributes[NFe.Components.NFeStrConstants.Padrao].Value;
                     }
                     catch { }
-                    if (ele.Attributes[NFe.Components.NFeStrConstants.ID].Value.Equals(ID) &&
-                        ele.Attributes[NFe.Components.NFeStrConstants.UF].Value.Equals(UF) &&
+                    if (ele.Attributes[TpcnResources.ID.ToString()].Value.Equals(ID) &&
+                        ele.Attributes[TpcnResources.UF.ToString()].Value.Equals(UF) &&
                         p.Equals(Padrao))
                     {
                         return ele.OuterXml;
@@ -70,8 +73,8 @@ namespace uninfe_ws
                 }
                 else
                 {
-                    string id = NFe.Components.Functions.LerTag(ele, NFe.Components.NFeStrConstants.ID, false);
-                    string uf = NFe.Components.Functions.LerTag(ele, NFe.Components.NFeStrConstants.UF, false);
+                    string id = NFe.Components.Functions.LerTag(ele, NFe.Components.TpcnResources.ID.ToString(), false);
+                    string uf = NFe.Components.Functions.LerTag(ele, NFe.Components.TpcnResources.UF.ToString(), false);
                     string pa = NFe.Components.Functions.LerTag(ele, NFe.Components.NFeStrConstants.Padrao, false);
                     if (id == ID && uf == UF && Padrao == pa)
                         return ele.OuterXml;
@@ -79,6 +82,7 @@ namespace uninfe_ws
             }
             return "";
         }
+        ********/
 
         public static void ArquivoExiste(StringBuilder erro, string configname, string wsdlname)
         {

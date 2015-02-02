@@ -14,11 +14,11 @@ namespace NFe.Service
     /// <summary>
     /// Classe responsável por montar lote de vários MDFes
     /// </summary>
-    public class TaskMontarLoteVariasMDFe : TaskAbst
+    public class TaskMDFeMontarLoteVarias : TaskAbst
     {
-        public TaskMontarLoteVariasMDFe()
+        public TaskMDFeMontarLoteVarias()
         {
-            Servico = Servicos.MontarLoteVariosMDFe;
+            Servico = Servicos.MDFeMontarLoteVarios;
             oGerarXML.Servico = Servico;
         }
 

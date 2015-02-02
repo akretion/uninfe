@@ -11,11 +11,11 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskRetRecepcaoMDFe : TaskAbst
+    public class TaskMDFeRetRecepcao : TaskAbst
     {
-        public TaskRetRecepcaoMDFe()
+        public TaskMDFeRetRecepcao()
         {
-            Servico = Servicos.PedidoSituacaoLoteMDFe;
+            Servico = Servicos.MDFePedidoSituacaoLote;
         }
 
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
@@ -31,7 +31,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.PedidoSituacaoLoteMDFe;
+            Servico = Servicos.MDFePedidoSituacaoLote;
 
             try
             {
@@ -47,8 +47,8 @@ namespace NFe.Service
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFePedRec);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFePedRec);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -112,23 +112,23 @@ namespace NFe.Service
             {
                 XmlElement consReciNFeElemento = (XmlElement)consReciNFeNode;
 
-                dadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                dadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
 
-                if (consReciNFeElemento.GetElementsByTagName("cUF").Count != 0)
+                if (consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString()).Count != 0)
                 {
-                    this.dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName("cUF")[0].InnerText);
+                    this.dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <cUF>
-                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("cUF")[0]);
+                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0]);
                     /// Salvo o arquivo modificado
                     doc.Save(cArquivoXML);
                 }
-                if (consReciNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                if (consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    this.dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                    this.dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <tpEmis>
-                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
                     /// Salvo o arquivo modificado
                     doc.Save(cArquivoXML);
                 }
@@ -162,16 +162,16 @@ namespace NFe.Service
 
                 //Pegar o número do recibo do lote enviado
                 var nRec = string.Empty;
-                if (retConsReciNFeElemento.GetElementsByTagName("nRec")[0] != null)
+                if (retConsReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
                 {
-                    nRec = retConsReciNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                    nRec = retConsReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 }
 
                 //Pegar o status de retorno do lote enviado
                 var cStatLote = string.Empty;
-                if (retConsReciNFeElemento.GetElementsByTagName("cStat")[0] != null)
+                if (retConsReciNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatLote = retConsReciNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+                    cStatLote = retConsReciNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 }
 
                 switch (cStatLote)
@@ -255,14 +255,14 @@ namespace NFe.Service
                                 var strChaveNFe = string.Empty;
                                 var strStat = string.Empty;
 
-                                if (infProtElemento.GetElementsByTagName("chMDFe")[0] != null)
+                                if (infProtElemento.GetElementsByTagName(TpcnResources.chMDFe.ToString())[0] != null)
                                 {
-                                    strChaveNFe = "MDFe" + infProtElemento.GetElementsByTagName("chMDFe")[0].InnerText;
+                                    strChaveNFe = "MDFe" + infProtElemento.GetElementsByTagName(TpcnResources.chMDFe.ToString())[0].InnerText;
                                 }
 
-                                if (infProtElemento.GetElementsByTagName("cStat")[0] != null)
+                                if (infProtElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0] != null)
                                 {
-                                    strStat = infProtElemento.GetElementsByTagName("cStat")[0].InnerText;
+                                    strStat = infProtElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText;
                                 }
 
                                 //Definir o nome do arquivo da NFe e seu caminho
@@ -349,7 +349,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskRetRecepcaoMDFe: " + ex.Message, false);
+                                                    Auxiliar.WriteLog("TaskMDFeRetRecepcao: " + ex.Message, false);
                                                 }
                                             }
                                             //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012

@@ -15,7 +15,7 @@ namespace NFe.Service
     /// <summary>
     /// Classe para consultar status do serviço do CTe
     /// </summary>
-    public class TaskConsultaStatusCTe : TaskAbst
+    public class TaskCTeConsultaStatus : TaskAbst
     {
         #region Classe com os dados do XML da consulta do status do serviço da NFe
         /// <summary>
@@ -30,7 +30,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultaStatusServicoCTe;
+            Servico = Servicos.CTeConsultaStatusServico;
 
             try
             {
@@ -46,8 +46,8 @@ namespace NFe.Service
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico, dadosPedSta.tpEmis));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
@@ -108,24 +108,24 @@ namespace NFe.Service
 
                 XmlElement consStatServElemento = (XmlElement)consStatServNode;
 
-                this.dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                this.dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
 
-                if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                if (consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString()).Count != 0)
                 {
-                    this.dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
+                    this.dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0].InnerText);
 
                     // para que o validador não rejeite, excluo a tag <cUF>
-                    doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("cUF")[0]);
+                    doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0]);
 
                     regravar = true;
                 }
 
-                if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    this.dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                    this.dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
 
                     // para que o validador não rejeite, excluo a tag <tpEmis>
-                    doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                    doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
 
                     regravar = true;
                 }

@@ -14,11 +14,11 @@ namespace NFe.Service
     /// <summary>
     /// Executar as tarefas pertinentes a assinatura e montagem do lote de uma única nota fiscal eletrônica
     /// </summary>
-    public class TaskMontarLoteUmCTe : TaskAbst
+    public class TaskCTeMontarLoteUm : TaskAbst
     {
-        public TaskMontarLoteUmCTe()
+        public TaskCTeMontarLoteUm()
         {
-            Servico = Servicos.MontarLoteUmCTe;
+            Servico = Servicos.CTeMontarLoteUm;
         }
 
         public override void Execute()

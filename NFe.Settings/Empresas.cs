@@ -144,7 +144,7 @@ namespace NFe.Settings
                     {
                         Empresa empresa = new Empresa();
 
-                        empresa.CNPJ = item.Attribute(NFe.Components.NFeStrConstants.CNPJ).Value;
+                        empresa.CNPJ = item.Attribute(NFe.Components.TpcnResources.CNPJ.ToString()).Value;
                         empresa.Nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value.Trim();
                         empresa.Servico = Propriedade.TipoAplicativo;
                         if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)

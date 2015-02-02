@@ -11,7 +11,7 @@ using NFe.Certificado;
 
 namespace NFe.Service
 {
-    public class TaskDownloadNFe : TaskAbst
+    public class TaskNFeDownload : TaskAbst
     {
         #region Classe com os dados do XML do registro de download da nfe
         private DadosenvDownload oDadosenvDownload;// = new DadosenvDownload();
@@ -21,7 +21,7 @@ namespace NFe.Service
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
-            Servico = Servicos.DownloadNFe;
+            Servico = Servicos.NFeDownload;
             try
             {
                 oDadosenvDownload = new DadosenvDownload();
@@ -38,8 +38,8 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", oDadosenvDownload.chNFe.Substring(0, 2));
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), oDadosenvDownload.chNFe.Substring(0, 2));
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, 
@@ -47,20 +47,6 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this);
-#if old
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oDownloadEvento = wsProxy.CriarObjeto("NfeDownloadNF");
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), Servico));
-
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", oDadosenvDownload.chNFe.Substring(0, 2));
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
-
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oDownloadEvento, "nfeDownloadNF",
-                                        oCabecMsg,
-                                        this);
-#endif
                     //Ler o retorno
                     LerRetornoDownloadNFe(emp);
 
@@ -113,26 +99,6 @@ namespace NFe.Service
                 /// chNFe|35110310290739000139550010000000011051128041
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                 Functions.PopulateClasse(this.oDadosenvDownload, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    if (dados.GetLength(0) <= 1) continue;
-
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cnpj":
-                            this.oDadosenvDownload.CNPJ = dados[1].Trim();
-                            break;
-                        case "chnfe":
-                            this.oDadosenvDownload.chNFe = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -153,11 +119,6 @@ namespace NFe.Service
                 {
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
                     Functions.PopulateClasse(this.oDadosenvDownload, envEventoElemento);
-#if false
-                    this.oDadosenvDownload.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    this.oDadosenvDownload.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                    this.oDadosenvDownload.chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
-#endif
                 }
             }
         }
@@ -240,13 +201,10 @@ namespace NFe.Service
                 if (retDownLoadList.Count > 0)
                 {
                     XmlElement retElemento = (XmlElement)retDownLoadList.Item(0);
-                    //int tpAmb = Convert.ToInt32(Functions.LerTag(retElemento, "tpAmb", false));
-                    //string verAplic = Functions.LerTag(retElemento, "verAplic", false);
-                    //string xMotivo = Functions.LerTag(retElemento, "xMotivo", false);
-                    int cStat = Convert.ToInt32(Functions.LerTag(retElemento, "cStat", false));
+                    int cStat = Convert.ToInt32(Functions.LerTag(retElemento, TpcnResources.cStat.ToString(), false));
                     if (cStat == 139)
                     {
-                        DateTime dhResp = Functions.GetDateTime(Functions.LerTag(retElemento, "dhResp", false));
+                        DateTime dhResp = Functions.GetDateTime(Functions.LerTag(retElemento, TpcnResources.dhResp.ToString(), false));
 
                         System.Xml.XmlNodeList retDownLoadListx = retElemento.GetElementsByTagName("retNFe");
                         if (retDownLoadListx != null)
@@ -255,9 +213,9 @@ namespace NFe.Service
                             {
                                 XmlElement el1 = retDownLoadListx.Item(iitem) as XmlElement;
 
-                                if (Convert.ToInt32(Functions.LerTag(el1, "cStat", false)) == 140)
+                                if (Convert.ToInt32(Functions.LerTag(el1, TpcnResources.cStat.ToString(), false)) == 140)
                                 {
-                                    string chave = Functions.LerTag(el1, "chNFe", false) + Propriedade.ExtRetorno.ProcNFe;
+                                    string chave = Functions.LerTag(el1, NFe.Components.TpcnResources.chNFe.ToString(), false) + Propriedade.ExtRetorno.ProcNFe;
 
                                     foreach (XmlElement xitem in el1.ChildNodes)
                                     {
@@ -277,7 +235,7 @@ namespace NFe.Service
                                                             if (!afound)
                                                             {
                                                                 XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
-                                                                xmlVersion1.Value = Propriedade.nsURI_nfe;// "http://www.portalfiscal.inf.br/nfe";
+                                                                xmlVersion1.Value = NFeStrConstants.NAME_SPACE_NFE;
                                                                 xitem1.ChildNodes[0].Attributes.Append(xmlVersion1);
                                                             }
 
@@ -289,7 +247,7 @@ namespace NFe.Service
                                                             if (!afound)
                                                             {
                                                                 XmlAttribute xmlVersion1 = docretDownload.CreateAttribute("xmlns");
-                                                                xmlVersion1.Value = Propriedade.nsURI_nfe;// "http://www.portalfiscal.inf.br/nfe";
+                                                                xmlVersion1.Value = NFeStrConstants.NAME_SPACE_NFE;
                                                                 xitem1.ChildNodes[1].Attributes.Append(xmlVersion1);
                                                             }
                                                             System.IO.File.WriteAllText(Path.Combine(folderDestino, chave), "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + xitem1.OuterXml, Encoding.UTF8);
@@ -309,7 +267,7 @@ namespace NFe.Service
 
                                                         case "protNFeZip":
                                                             //item.GrupoOpcional.procNFeGrupoZip.protNFeZip = xitem1.InnerText;
-                                                            Decode(xitem1.InnerText);
+                                                            //Decode(xitem1.InnerText);
                                                             break;
                                                     }
                                                 }
@@ -350,6 +308,7 @@ namespace NFe.Service
         }
         #endregion
 
+#if false
         #region Decode/Encode
         private string Encode(string str)
         {
@@ -372,5 +331,6 @@ namespace NFe.Service
             return decomp;
         }
         #endregion
+#endif
     }
 }

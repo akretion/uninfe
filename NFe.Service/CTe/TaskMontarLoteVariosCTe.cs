@@ -14,11 +14,11 @@ namespace NFe.Service
     /// <summary>
     /// Classe responsável por montar lote de vários CTes
     /// </summary>
-    public class TaskMontarLoteVariasCTe : TaskAbst
+    public class TaskCTeMontarLoteVarias : TaskAbst
     {
-        public TaskMontarLoteVariasCTe()
+        public TaskCTeMontarLoteVarias()
         {
-            Servico = Servicos.MontarLoteVariosCTe;
+            Servico = Servicos.CTeMontarLoteVarios;
             oGerarXML.Servico = Servico;
         }
 

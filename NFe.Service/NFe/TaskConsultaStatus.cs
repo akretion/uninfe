@@ -13,11 +13,11 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskConsultaStatus : TaskAbst
+    public class TaskNFeConsultaStatus : TaskAbst
     {
-        public TaskConsultaStatus()
+        public TaskNFeConsultaStatus()
         {
-            Servico = Servicos.ConsultaStatusServicoNFe;
+            Servico = Servicos.NFeConsultaStatusServico;
         }
 
         #region Classe com os dados do XML da consulta do status do serviço da NFe
@@ -55,8 +55,8 @@ namespace NFe.Service
                     var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSta.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSta.versao);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
@@ -147,29 +147,29 @@ namespace NFe.Service
                 {
                     XmlElement consStatServElemento = (XmlElement)consStatServNode;
 
-                    dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    dadosPedSta.versao = consStatServElemento.Attributes["versao"].InnerText;
+                    dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                    dadosPedSta.versao = consStatServElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
 
-                    if (consStatServElemento.GetElementsByTagName("cUF").Count != 0)
+                    if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString()).Count != 0)
                     {
-                        dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName("cUF")[0].InnerText);
+                        dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0].InnerText);
                     }
 
                     bool saveXml = false;
 
-                    if (consStatServElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                     {
-                        dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("tpEmis")[0]);
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
                         saveXml = true;
                     }
 
-                    if (consStatServElemento.GetElementsByTagName("mod").Count != 0)
+                    if (consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString()).Count != 0)
                     {
-                        dadosPedSta.mod = consStatServElemento.GetElementsByTagName("mod")[0].InnerText;
+                        dadosPedSta.mod = consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0].InnerText;
                         /// para que o validador não rejeite, excluo a tag <mod>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName("mod")[0]);
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0]);
                         saveXml = true;
                     }
 

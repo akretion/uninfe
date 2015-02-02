@@ -13,11 +13,11 @@ namespace NFe.Service
     /// <summary>
     /// Consultar situação da NFe
     /// </summary>
-    public class TaskConsultaSituacaoNFe : TaskAbst
+    public class TaskNFeConsultaSituacao : TaskAbst
     {
-        public TaskConsultaSituacaoNFe()
+        public TaskNFeConsultaSituacao()
         {
-            Servico = Servicos.PedidoConsultaSituacaoNFe;
+            Servico = Servicos.NFePedidoConsultaSituacao;
         }
 
         #region Classe com os dados do XML da pedido de consulta da situação da NFe
@@ -47,8 +47,8 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSit.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", dadosPedSit.versao);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSit.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedSit.versao);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oConsulta, wsProxy.NomeMetodoWS[0], oCabecMsg, this);
@@ -145,24 +145,24 @@ namespace NFe.Service
                 {
                     XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
-                    dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                    dadosPedSit.versao = consSitNFeElemento.Attributes["versao"].Value;
+                    dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                    dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
+                    dadosPedSit.versao = consSitNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
                     dadosPedSit.mod = dadosPedSit.chNFe.Substring(20, 2);
 
                     bool doSave = false;
                     //Se alguém ainda gerar com a versão 2.00 vou mudar para a "2.01" para facilitar para o usuário do UniNFe
                     if (dadosPedSit.versao == "2.00")
                     {
-                        consSitNFeElemento.Attributes["versao"].InnerText = dadosPedSit.versao = "2.01";
+                        consSitNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText = dadosPedSit.versao = "2.01";
                         doSave = true;
                     }
 
-                    if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                    if (consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                     {
-                        this.dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                        this.dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                        doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
                         /// salvo o arquivo modificado
                         doSave = true;
                     }
@@ -230,9 +230,9 @@ namespace NFe.Service
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0] != null)
+                if (retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatCons = retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
+                    cStatCons = retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 }
 
                 switch (cStatCons)
@@ -314,11 +314,11 @@ namespace NFe.Service
                                 XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
 
                                 //Pegar o Status do Retorno da consulta situação
-                                string strStat = Functions.LerTag(infConsSitElemento, NFe.ConvertTxt.TpcnResources.cStat.ToString(), false);
+                                string strStat = Functions.LerTag(infConsSitElemento, NFe.Components.TpcnResources.cStat.ToString(), false);
 
                                 //Pegar a versão do XML
                                 var protNFeElemento = (XmlElement)retConsSitElemento.GetElementsByTagName("protNFe")[0];
-                                string versao = protNFeElemento.GetAttribute(NFe.ConvertTxt.TpcnResources.versao.ToString());
+                                string versao = protNFeElemento.GetAttribute(NFe.Components.TpcnResources.versao.ToString());
 
                                 switch (strStat)
                                 {
@@ -349,7 +349,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe: Gerou o arquivo de distribuição através da consulta situação da NFe.", false);
+                                                    Auxiliar.WriteLog("TaskNFeConsultaSituacao: Gerou o arquivo de distribuição através da consulta situação da NFe.", false);
                                                     oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
                                                 }
                                             }
@@ -400,7 +400,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoNFe:  (Falha na execução do UniDANFe) " + ex.Message, false);
+                                                    Auxiliar.WriteLog("TaskNFeConsultaSituacao:  (Falha na execução do UniDANFe) " + ex.Message, false);
                                                 }
                                             }
                                         }

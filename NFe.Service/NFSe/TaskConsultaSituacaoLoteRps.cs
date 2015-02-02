@@ -14,7 +14,7 @@ using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultaSituacaoLoteRps : TaskAbst
+    public class TaskNFSeConsultaSituacaoLoteRps : TaskAbst
     {
         #region Objeto com os dados do XML de consulta situação do lote rps
         /// <summary>
@@ -29,7 +29,7 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarSituacaoLoteRps;
+            Servico = Servicos.NFSeConsultarSituacaoLoteRps;
 
             try
             {

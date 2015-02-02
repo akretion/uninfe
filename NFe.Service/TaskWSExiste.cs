@@ -19,7 +19,10 @@ namespace NFe.Service
             public Int32 tpEmis { get; set; }
             public string servicos { get; set; }
         }
-
+        /// <summary>
+        /// Alguns estados nao tem o servico de consulta ao cadastro de contribuinte, por exemplo.
+        /// Então, antes da aplicacao chamar um servico, ela pode consultar para saber ser um servico está disponivel para um estado
+        /// </summary>
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -56,9 +59,9 @@ namespace NFe.Service
                     {
                         XmlElement elementConfig = (XmlElement)node;
 
-                        odados.tpEmis = Convert.ToInt32(Functions.LerTag(elementConfig, NFeStrConstants.tpEmis, odados.tpEmis.ToString()));
-                        odados.tpAmb = Convert.ToInt32(Functions.LerTag(elementConfig, NFeStrConstants.tpAmb, odados.tpAmb.ToString()));
-                        string temp = Functions.LerTag(elementConfig, "cUF", odados.cUF.ToString());
+                        odados.tpEmis = Convert.ToInt32(Functions.LerTag(elementConfig, TpcnResources.tpEmis.ToString(), odados.tpEmis.ToString()));
+                        odados.tpAmb = Convert.ToInt32(Functions.LerTag(elementConfig, TpcnResources.tpAmb.ToString(), odados.tpAmb.ToString()));
+                        string temp = Functions.LerTag(elementConfig, TpcnResources.cUF.ToString(), odados.cUF.ToString());
                         if (int.TryParse(temp, out intValue))
                             odados.cUF = intValue;
                         else
@@ -153,59 +156,80 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
 
                         switch (aservico.ToLower())
                         {
+                            case "mdfeconsulta":
+                                srv = Servicos.MDFePedidoSituacaoLote;
+                                break;
+                            case "mdfeconsultanaoencerrado":
+                                srv = Servicos.MDFeConsultaNaoEncerrado;
+                                break;
+                            case "mdferecepcaoevento":
+                                srv = Servicos.MDFeRecepcaoEvento;
+                                break;
+                            case "mdfestatusservico":
+                                srv = Servicos.MDFeConsultaStatusServico;
+                                break;
+
                             case "cancelarnfse":
-                                srv = Servicos.CancelarNfse; break;
-                            case "cterecepcaoevento":
-                                srv = Servicos.RecepcaoEventoCTe; break;
+                                srv = Servicos.NFSeCancelar; 
+                                break;
                             case "consultarloterps":
-                                srv = Servicos.ConsultarLoteRps; break;
+                                srv = Servicos.NFSeConsultarLoteRps; 
+                                break;
                             case "consultarnfse":
-                                srv = Servicos.ConsultarNfse; break;
+                                srv = Servicos.NFSeConsultar; 
+                                break;
                             case "consultarnfseporrps":
-                                srv = Servicos.ConsultarNfsePorRps; break;
+                                srv = Servicos.NFSeConsultarPorRps; 
+                                break;
                             case "consultarsituacaoloterps":
-                                srv = Servicos.ConsultarSituacaoLoteRps;break;
+                                srv = Servicos.NFSeConsultarSituacaoLoteRps;
+                                break;
                             case "recepcionarloterps":
-                                srv = Servicos.RecepcionarLoteRps; break;
+                                srv = Servicos.NFSeRecepcionarLoteRps; 
+                                break;
                             case "recepcaoevento":
-                                srv = Servicos.RecepcaoEvento; break;
+                                srv = Servicos.EventoRecepcao; 
+                                break;
+                            case "cterecepcaoevento":
+                                srv = Servicos.CTeRecepcaoEvento; 
+                                break;
                             case "recepcaoeventocte":
-                                srv = Servicos.RecepcaoEventoCTe; break;
-                            case "recepcaoeventomdfe":
-                                srv = Servicos.RecepcaoEventoMDFe; break;
+                                srv = Servicos.CTeRecepcaoEvento; 
+                                break;
                             case "enviarcce":
-                                srv = Servicos.EnviarCCe; break;
+                                srv = Servicos.EventoCCe; 
+                                break;
                             case "enviarepec":
-                                srv = Servicos.EnviarEPEC; break;
+                                srv = Servicos.EventoEPEC; break;
                             case "enviareventocancelamento":
-                                srv = Servicos.EnviarEventoCancelamento; break;
+                                srv = Servicos.EventoCancelamento; break;
                             case "nfeconsulta1":
                             case "nfeconsulta":
-                                srv = Servicos.PedidoConsultaSituacaoNFe; break;
+                                srv = Servicos.NFePedidoConsultaSituacao; break;
                             case "nfeconsultardpec":
-                                srv = Servicos.ConsultarDPEC; break;
+                                srv = Servicos.DPECConsultar; break;
                             case "nfeconsultacadastro":
                                 srv = Servicos.ConsultaCadastroContribuinte; break;
                             case "nfeconsultanfedest":
-                                srv = Servicos.ConsultaNFDest; break;
+                                srv = Servicos.NFeConsultaNFDest; break;
                             case "nfedownload":
-                                srv = Servicos.DownloadNFe; break;
+                                srv = Servicos.NFeDownload; break;
                             case "nfeinutilizacao":
-                                srv = Servicos.InutilizarNumerosNFe; break;
+                                srv = Servicos.NFeInutilizarNumeros; break;
                             case "nfemanifestacao":
-                                srv = Servicos.EnviarManifDest; break;
+                                srv = Servicos.EventoManifestacaoDest; break;
                             case "nferetrecepcao":
                             case "nferecepcao":
                             case "nfeenviardpec":
-                                srv = Servicos.EnviarLoteNfe; break;
+                                srv = Servicos.NFeEnviarLote; break;
                             case "dferecepcao":
-                                srv = Servicos.EnviarDFe; break;
+                                srv = Servicos.DFeEnviar; break;
                             //case "nferegistrodesaida":
                                 //srv = Servicos.RegistroDeSaida; break;
                             //case "nferegistrodesaidacancelamento":
                                 //srv = Servicos.RegistroDeSaidaCancelamento; break;
                             case "nfestatusservico":
-                                srv = Servicos.ConsultaStatusServicoNFe; break;
+                                srv = Servicos.NFeConsultaStatusServico; break;
                         }
 
                         if (srv == Servicos.Nulo)
@@ -222,7 +246,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                     aServicos += "," + info.Name;
                                     continue;
                                 }
-                                bool isNFse = ("RecepcionarLoteRps,ConsultarSituacaoLoteRps,ConsultarNfsePorRps,ConsultarNfse,ConsultarLoteRps,CancelarNfse").Contains(info.Name);
+                                bool isNFse = ("ConsultarURLNfse,RecepcionarLoteRps,ConsultarSituacaoLoteRps,ConsultarNfsePorRps,ConsultarNfse,ConsultarLoteRps,CancelarNfse").Contains(info.Name);
 
                                 if (Empresas.Configuracoes[emp].Servico != TipoAplicativo.Nfse && isNFse)
                                     continue;

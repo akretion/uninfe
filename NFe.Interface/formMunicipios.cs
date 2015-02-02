@@ -30,12 +30,18 @@ namespace NFe.Interface
 
             this.colPadrao_D.Items.Clear();
             this.colPadrao_D.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
-            
+
+            foreach (var estado in Propriedade.Estados)
+            {
+                arrUF.Add(new ComboElem(estado.UF, estado.CodigoMunicipio, estado.ToString()));
+                this.edtUF.Items.Add(estado.UF);
+            }
+            /*
             for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
             {
                 arrUF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2), Convert.ToInt32(Propriedade.CodigosEstados[v, 0]), Propriedade.CodigosEstados[v, 1]));
                 this.edtUF.Items.Add(Propriedade.CodigosEstados[v, 1].Substring(0, 2));
-            }
+            }*/
             this.comboUf.DataSource = arrUF;
             this.comboUf.DisplayMember = "nome";
             this.comboUf.ValueMember = "codigo";

@@ -78,6 +78,7 @@
     <Compile Include="CONAM\ConamBase.cs" />
     <Compile Include="CONAM\VarginhaMG\h\ConamH.cs" />
     <Compile Include="CONAM\VarginhaMG\p\ConamP.cs" />
+    <Compile Include="NFeStrConstants.cs" />
     <Compile Include="SimplISS\SimplISS.cs" />
     <Compile Include="SimplISS\SimplISSBase.cs" />
     <Compile Include="SimplISS\PiracicabaSP\h\SimplISSH.cs" />

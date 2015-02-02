@@ -266,10 +266,10 @@ namespace NFe.Service
 
                             try
                             {
-                                if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes["versao"] != null)
-                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes["versao"].Value;
-                                else if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes["versao"] != null)
-                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes["versao"].Value;
+                                if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
+                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
+                                else if (((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
+                                    versaoXmlNFe = ((XmlElement)(XmlNode)xmlNFe.GetElementsByTagName(xmlNFe.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
                             }
                             catch
                             {
@@ -423,7 +423,7 @@ namespace NFe.Service
         /// <summary>
         /// Excluir as NFe´s no fluxo através do recibo. Ótimo para retirar todas as notas de um único lote de uma única vez.
         /// </summary>
-        /// <param name="nRec">Número do recibo do lote enviado</param>
+        /// <param name=TpcnResources.nRec.ToString()>Número do recibo do lote enviado</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Date: 20/07/2010
@@ -767,7 +767,7 @@ namespace NFe.Service
                                     strChaveNFe = documentoElemento.Attributes["ChaveNFe"].InnerText;
                                 }
 
-                                if (documentoElemento.GetElementsByTagName("idLote")[0].InnerText == strLote)
+                                if (documentoElemento.GetElementsByTagName(TpcnResources.idLote.ToString())[0].InnerText == strLote)
                                 {
                                     AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, DateTime.Now.ToString());
                                     AtualizarTag(strChaveNFe, ElementoEditavel.nRec, strRecibo);
@@ -1077,7 +1077,7 @@ namespace NFe.Service
                                     strChaveNFe = documentoElemento.Attributes["ChaveNFe"].InnerText;
                                 }
 
-                                if (documentoElemento.GetElementsByTagName("nRec")[0].InnerText == strRec)
+                                if (documentoElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText == strRec)
                                 {
                                     AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, dtData.ToString());
                                 }

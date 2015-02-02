@@ -412,7 +412,7 @@ namespace NFe.Threadings
             Processar srv = new Processar();
             Thread t3 = new Thread(srv.GerarXMLPedRec);
             t3.IsBackground = true;
-            t3.Start(new NFe.Service.TaskGerarXMLPedRec());
+            t3.Start(new NFe.Service.TaskNFeGerarXMLPedRec());
             Threads.Add(t3);
         }
     }

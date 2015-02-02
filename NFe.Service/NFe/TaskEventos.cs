@@ -11,9 +11,9 @@ using NFe.Certificado;
 
 namespace NFe.Service
 {
-    public class TaskEventos : TaskAbst
+    public class TaskNFeEventos : TaskAbst
     {
-        public TaskEventos()
+        public TaskNFeEventos()
         {
             Servico = Servicos.Nulo;
             novaNomenclatura = false;
@@ -41,16 +41,16 @@ namespace NFe.Service
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
-                        Servico = Servicos.EnviarEventoCancelamento;
+                        Servico = Servicos.EventoCancelamento;
                         break;
                     case ConvertTxt.tpEventos.tpEvCCe:
-                        Servico = Servicos.EnviarCCe;
+                        Servico = Servicos.EventoCCe;
                         break;
                     case ConvertTxt.tpEventos.tpEvEPEC:
-                        Servico = Servicos.EnviarEPEC;
+                        Servico = Servicos.EventoEPEC;
                         break;
                     default:
-                        Servico = Servicos.EnviarManifDest;
+                        Servico = Servicos.EventoManifestacaoDest;
                         break;
                 }
                 foreach (Evento item in dadosEnvEvento.eventos)
@@ -71,7 +71,7 @@ namespace NFe.Service
                 // Se for evento de cancelamento
                 switch (Servico)
                 {
-                    case Servicos.EnviarEventoCancelamento:
+                    case Servicos.EventoCancelamento:
                         switch ((NFe.Components.TipoEmissao)tpEmis)
                         {
                             case NFe.Components.TipoEmissao.teSVCAN:
@@ -88,12 +88,12 @@ namespace NFe.Service
                         }
                         break;
 
-                    case Servicos.EnviarCCe:
+                    case Servicos.EventoCCe:
                         //CCe só existe no ambiente Normal. Wandrey 22/04/2013
                         tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
 
-                    case Servicos.EnviarEPEC:
+                    case Servicos.EventoEPEC:
                         tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
                         break;
 
@@ -119,8 +119,8 @@ namespace NFe.Service
                     string xmlExtEnvio = string.Empty;
                     string xmlExtRetorno = string.Empty;
 
-                    wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEvento);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), cOrgao.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEvento);
 
                     if (novaNomenclatura)
                     {
@@ -131,12 +131,12 @@ namespace NFe.Service
                     {
                         switch (Servico)
                         {
-                            case Servicos.EnviarCCe:
+                            case Servicos.EventoCCe:
                                 xmlExtEnvio = Propriedade.ExtEnvio.EnvCCe_XML.Replace(".xml", "");
                                 xmlExtRetorno = Propriedade.ExtRetorno.retEnvCCe_XML.Replace(".xml", "");
                                 break;
 
-                            case Servicos.EnviarEventoCancelamento:
+                            case Servicos.EventoCancelamento:
                                 xmlExtEnvio = Propriedade.ExtEnvio.EnvCancelamento_XML.Replace(".xml", "");
                                 xmlExtRetorno = Propriedade.ExtRetorno.retCancelamento_XML.Replace(".xml", "");
                                 break;
@@ -173,12 +173,12 @@ namespace NFe.Service
                     {
                         switch (Servico)
                         {
-                            case Servicos.EnviarCCe:
+                            case Servicos.EventoCCe:
                                 xmlFileExt = Propriedade.ExtEnvio.EnvCCe_XML;
                                 xmlFileExtTXT = Propriedade.ExtEnvio.EnvCCe_TXT;
                                 break;
 
-                            case Servicos.EnviarEventoCancelamento:
+                            case Servicos.EventoCancelamento:
                                 xmlFileExt = Propriedade.ExtEnvio.EnvCancelamento_XML;
                                 xmlFileExtTXT = Propriedade.ExtEnvio.EnvCancelamento_TXT;
                                 break;
@@ -217,28 +217,28 @@ namespace NFe.Service
                         {
                             // pode ter vindo de um txt e houve erro
                             if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_TXT))
-                                Servico = Servicos.EnviarCCe;
+                                Servico = Servicos.EventoCCe;
                             else
                                 if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_TXT))
-                                    Servico = Servicos.EnviarManifDest;
+                                    Servico = Servicos.EventoManifestacaoDest;
                                 else
                                     if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT))
-                                        Servico = Servicos.EnviarEventoCancelamento;
+                                        Servico = Servicos.EventoCancelamento;
                         }
 
                         switch (Servico)
                         {
-                            case Servicos.EnviarCCe:
+                            case Servicos.EventoCCe:
                                 ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCCe_XML : Propriedade.ExtEnvio.EnvCCe_TXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retEnvCCe_ERR;
                                 break;
 
-                            case Servicos.EnviarEventoCancelamento:
+                            case Servicos.EventoCancelamento:
                                 ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCancelamento_XML : Propriedade.ExtEnvio.EnvCancelamento_TXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retCancelamento_ERR;
                                 break;
 
-                            case Servicos.EnviarManifDest:
+                            case Servicos.EventoManifestacaoDest:
                                 ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvManifestacao_XML : Propriedade.ExtEnvio.EnvManifestacao_TXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retManifestacao_ERR;
                                 break;
@@ -570,7 +570,7 @@ namespace NFe.Service
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
 
                     if (string.IsNullOrEmpty(evento.Id))
-                        evento.Id = NFe.Components.NFeStrConstants.ID + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
+                        evento.Id = NFe.Components.TpcnResources.ID.ToString() + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
 
                     if (string.IsNullOrEmpty(evento.xCondUso))
                         if (evento.descEvento == "Carta de Correcao")
@@ -624,11 +624,11 @@ namespace NFe.Service
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
                     dadosEnvEvento.eventos.Add(new Evento());
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName("chNFe")[0].InnerText;
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("nSeqEvento")[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText;
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpAmb.ToString())[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.cOrgao.ToString())[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.nSeqEvento.ToString())[0].InnerText);
                 }
             }
         }
@@ -655,9 +655,9 @@ namespace NFe.Service
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0] != null)
+                if (retConsSitElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatCons = retConsSitElemento.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
+                    cStatCons = retConsSitElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText;
                 }
                 switch (cStatCons)
                 {
@@ -667,22 +667,22 @@ namespace NFe.Service
                             for (int i = 0; i < envEventosList.Count; ++i)
                             {
                                 XmlElement eleRetorno = envEventosList.Item(i) as XmlElement;
-                                cStatCons = eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.cStat.ToString())[0].InnerText;
+                                cStatCons = eleRetorno.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText;
                                 if (cStatCons == "135" || cStatCons == "136" || cStatCons == "155")
                                 {
-                                    string chNFe = eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.chNFe.ToString())[0].InnerText;
-                                    Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.nSeqEvento.ToString())[0].InnerText);
-                                    NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.tpEvento.ToString())[0].InnerText);
-                                    string Id = NFe.Components.NFeStrConstants.ID + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
+                                    string chNFe = eleRetorno.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
+                                    Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(NFe.Components.TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                                    NFe.ConvertTxt.tpEventos tpEvento = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText);
+                                    string Id = NFe.Components.TpcnResources.ID.ToString() + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado
                                     ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
                                     foreach (XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
                                     {
-                                        string Idd = env.Attributes.GetNamedItem(NFe.ConvertTxt.TpcnResources.Id.ToString()).Value;
+                                        string Idd = env.Attributes.GetNamedItem(NFe.Components.TpcnResources.Id.ToString()).Value;
                                         if (Idd == Id)
                                         {
-                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(NFe.ConvertTxt.TpcnResources.dhRegEvento.ToString())[0].InnerText);
+                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(NFe.Components.TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                             ///
                                             /// Gerar o arquivo XML de distribuição do evento
@@ -703,7 +703,7 @@ namespace NFe.Service
                                                     }
                                                     catch (Exception ex)
                                                     {
-                                                        Auxiliar.WriteLog("TaskEventos: " + ex.Message, false);
+                                                        Auxiliar.WriteLog("TaskNFeEventos: " + ex.Message, false);
                                                     }
                                                     break;
 
@@ -716,7 +716,7 @@ namespace NFe.Service
                                                         }
                                                         catch (Exception ex)
                                                         {
-                                                            Auxiliar.WriteLog("TaskEventos: " + ex.Message, false);
+                                                            Auxiliar.WriteLog("TaskNFeEventos: " + ex.Message, false);
                                                         }
                                                     break;
                                             }

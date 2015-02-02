@@ -113,7 +113,7 @@ namespace NFe.ConvertTxt
                     case "infnfe":
                         char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
                         nfe.infNFe.Versao = Convert.ToDecimal("0" + nodeNFe.Attributes[TpcnResources.versao.ToString()].Value.Replace(".", charSeparator.ToString()));
-                        nfe.infNFe.ID = nodeNFe.Attributes["Id"].Value;
+                        nfe.infNFe.ID = nodeNFe.Attributes[TpcnResources.Id.ToString()].Value;
                         foreach (XmlNode nodeinfNFe in nodeNFe.ChildNodes)
                         {
                             switch (nodeinfNFe.LocalName)
@@ -207,10 +207,10 @@ namespace NFe.ConvertTxt
         private void processaProtNfe(XmlNode nodenfeProc)
         {
             nfe.protNFe.chNFe = this.readValue(nodenfeProc, TpcnResources.chNFe);
-            nfe.protNFe.cStat = Convert.ToInt32(" 0" + this.readValue(nodenfeProc, "cStat"));
+            nfe.protNFe.cStat = Convert.ToInt32(" 0" + this.readValue(nodenfeProc, TpcnResources.cStat.ToString()));
             nfe.protNFe.dhRecbto = this.readDate(nodenfeProc, TpcnResources.dhRecbto);
-            nfe.protNFe.digVal = this.readValue(nodenfeProc, "digVal");
-            nfe.protNFe.nProt = this.readValue(nodenfeProc, "nProt");
+            nfe.protNFe.digVal = this.readValue(nodenfeProc, TpcnResources.digVal.ToString());
+            nfe.protNFe.nProt = this.readValue(nodenfeProc, TpcnResources.nProt.ToString());
             nfe.protNFe.tpAmb = (TipoAmbiente)this.readInt32(nodenfeProc, TpcnResources.tpAmb);
             nfe.protNFe.verAplic = this.readValue(nodenfeProc, TpcnResources.verAplic);
             nfe.protNFe.xMotivo = this.readValue(nodenfeProc, TpcnResources.xMotivo);

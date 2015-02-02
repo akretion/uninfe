@@ -124,6 +124,8 @@ namespace NFe.Settings
                     ConfiguracaoApp.GravarLogOperacoesRealizadas = true;
                 }
 
+                Propriedade.Estados = null;
+
                 List<ArquivoItem> ListArqsAtualizar = new List<ArquivoItem>();
                 UpdateWSDL(ListArqsAtualizar);
                 bool gravaLista = false;
@@ -441,7 +443,7 @@ namespace NFe.Settings
             if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
 
-            Propriedade.nsURI_nfe = "http://www.portalfiscal.inf.br/nfe";
+            //Propriedade.nsURI_nfe = NFe.Components.NFeStrConstants.NAME_SPACE_NFE;
             SchemaXML.CriarListaIDXML();
             SchemaXMLNFSe.CriarListaIDXML();
         }
@@ -784,11 +786,11 @@ namespace NFe.Settings
                 case NFe.Components.TipoEmissao.teEPECeDPEC:
                     switch (servico)
                     {
-                        case Servicos.ConsultarDPEC:
-                        case Servicos.EnviarDPEC:
+                        case Servicos.DPECConsultar:
+                        case Servicos.DPECEnviar:
                             CodigoUF = 901;
                             break;
-                        case Servicos.EnviarEPEC:
+                        case Servicos.EventoEPEC:
                             CodigoUF = 905;
                             break;
                     }
@@ -817,59 +819,59 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaCadastro : list.LocalProducao.NFeConsultaCadastro);
                             break;
 
-                        case Servicos.EnviarLoteNfe2:
+                        case Servicos.NFeEnviarLote2:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeAutorizacao : list.LocalProducao.NFeAutorizacao);
                             break;
 
-                        case Servicos.EnviarLoteNfe:
-                        case Servicos.EnviarDPEC:
+                        case Servicos.NFeEnviarLote:
+                        case Servicos.DPECEnviar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
                             break;
 
-                        case Servicos.InutilizarNumerosNFe:
+                        case Servicos.NFeInutilizarNumeros:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeInutilizacao : list.LocalProducao.NFeInutilizacao);
                             break;
 
-                        case Servicos.PedidoConsultaSituacaoNFe:
+                        case Servicos.NFePedidoConsultaSituacao:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
                             break;
 
-                        case Servicos.ConsultarDPEC:
+                        case Servicos.DPECConsultar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
                             break;
 
-                        case Servicos.ConsultaStatusServicoNFe:
+                        case Servicos.NFeConsultaStatusServico:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeStatusServico : list.LocalProducao.NFeStatusServico);
                             break;
 
-                        case Servicos.PedidoSituacaoLoteNFe:
+                        case Servicos.NFePedidoSituacaoLote:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRetRecepcao : list.LocalProducao.NFeRetRecepcao);
                             break;
 
-                        case Servicos.PedidoSituacaoLoteNFe2:
+                        case Servicos.NFePedidoSituacaoLote2:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRetAutorizacao : list.LocalProducao.NFeRetAutorizacao);
                             break;
 
-                        case Servicos.EnviarCCe:
-                        case Servicos.EnviarEventoCancelamento:
-                        case Servicos.EnviarEPEC:
-                        case Servicos.RecepcaoEvento:
+                        case Servicos.EventoCCe:
+                        case Servicos.EventoCancelamento:
+                        case Servicos.EventoEPEC:
+                        case Servicos.EventoRecepcao:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcaoEvento : list.LocalProducao.NFeRecepcaoEvento);
                             break;
 
-                        case Servicos.ConsultaNFDest:
+                        case Servicos.NFeConsultaNFDest:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsultaNFeDest : list.LocalProducao.NFeConsultaNFeDest);
                             break;
 
-                        case Servicos.DownloadNFe:
+                        case Servicos.NFeDownload:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeDownload : list.LocalProducao.NFeDownload);
                             break;
 
-                        case Servicos.EnviarManifDest:
+                        case Servicos.EventoManifestacaoDest:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifDest : list.LocalProducao.NFeManifDest);
                             break;
 
-                        case Servicos.EnviarDFe:
+                        case Servicos.DFeEnviar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.DFeRecepcao : list.LocalProducao.DFeRecepcao);
                             break;
 
@@ -884,76 +886,76 @@ namespace NFe.Settings
                         #endregion
 
                         #region MDF-e
-                        case Servicos.ConsultaStatusServicoMDFe:
+                        case Servicos.MDFeConsultaStatusServico:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeStatusServico : list.LocalProducao.MDFeStatusServico);
                             break;
-                        case Servicos.EnviarLoteMDFe:
+                        case Servicos.MDFeEnviarLote:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcao : list.LocalProducao.MDFeRecepcao);
                             break;
-                        case Servicos.PedidoSituacaoLoteMDFe:
+                        case Servicos.MDFePedidoSituacaoLote:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRetRecepcao : list.LocalProducao.MDFeRetRecepcao);
                             break;
-                        case Servicos.PedidoConsultaSituacaoMDFe:
+                        case Servicos.MDFePedidoConsultaSituacao:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeConsulta : list.LocalProducao.MDFeConsulta);
                             break;
-                        case Servicos.RecepcaoEventoMDFe:
+                        case Servicos.MDFeRecepcaoEvento:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcaoEvento : list.LocalProducao.MDFeRecepcaoEvento);
                             break;
-                        case Servicos.ConsultaNaoEncerradoMDFe:
+                        case Servicos.MDFeConsultaNaoEncerrado:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeNaoEncerrado : list.LocalProducao.MDFeNaoEncerrado);
                             break;
                         #endregion
 
                         #region CT-e
-                        case Servicos.ConsultaStatusServicoCTe:
+                        case Servicos.CTeConsultaStatusServico:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeStatusServico : list.LocalProducao.CTeStatusServico);
                             break;
-                        case Servicos.EnviarLoteCTe:
+                        case Servicos.CTeEnviarLote:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRecepcao : list.LocalProducao.CTeRecepcao);
                             break;
-                        case Servicos.PedidoSituacaoLoteCTe:
+                        case Servicos.CTePedidoSituacaoLote:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRetRecepcao : list.LocalProducao.CTeRetRecepcao);
                             break;
-                        case Servicos.PedidoConsultaSituacaoCTe:
+                        case Servicos.CTePedidoConsultaSituacao:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeConsulta : list.LocalProducao.CTeConsulta);
                             break;
-                        case Servicos.InutilizarNumerosCTe:
+                        case Servicos.CTeInutilizarNumeros:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeInutilizacao : list.LocalProducao.CTeInutilizacao);
                             break;
-                        case Servicos.RecepcaoEventoCTe:
+                        case Servicos.CTeRecepcaoEvento:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRecepcaoEvento : list.LocalProducao.CTeRecepcaoEvento);
                             break;
                         #endregion
 
                         #region NFS-e
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcionarLoteRps : list.LocalProducao.RecepcionarLoteRps);
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarSituacaoLoteRps : list.LocalProducao.ConsultarSituacaoLoteRps);
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNfsePorRps : list.LocalProducao.ConsultarNfsePorRps);
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNfse : list.LocalProducao.ConsultarNfse);
                             break;
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteRps : list.LocalProducao.ConsultarLoteRps);
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.CancelarNfse : list.LocalProducao.CancelarNfse);
                             break;
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
                             break;
-                        case Servicos.ConsultarURLNfseSerie:
+                        case Servicos.NFSeConsultarURLSerie:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
                             break;
                         #endregion
                     }
                     if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPECeDPEC)
-                        ufNome = (servico == Servicos.EnviarEPEC ? "EPEC" : "DPEC");
+                        ufNome = (servico == Servicos.EventoEPEC ? "EPEC" : "DPEC");
                     else
                         ufNome = "de " + list.Nome;
 
@@ -1011,49 +1013,49 @@ namespace NFe.Settings
 
                 switch (servico)
                 {
-                    case Servicos.EnviarDFe:
+                    case Servicos.DFeEnviar:
                         throw new Exception(string.Format(errorStr, "de envio de eventos da DFe"));
 
-                    case Servicos.EnviarCCe:
-                    case Servicos.EnviarEventoCancelamento:
-                    case Servicos.RecepcaoEvento:
-                    case Servicos.EnviarManifDest:
-                    case Servicos.EnviarEPEC:
+                    case Servicos.EventoCCe:
+                    case Servicos.EventoCancelamento:
+                    case Servicos.EventoRecepcao:
+                    case Servicos.EventoManifestacaoDest:
+                    case Servicos.EventoEPEC:
                         throw new Exception(string.Format(errorStr, "de envio de eventos da NFe"));
 
-                    case Servicos.ConsultaNFDest:
+                    case Servicos.NFeConsultaNFDest:
                         throw new Exception(string.Format(errorStr, "de envio de consulta a NFe do destinatário"));
 
-                    case Servicos.DownloadNFe:
+                    case Servicos.NFeDownload:
                         throw new Exception(string.Format(errorStr, "de envio de download de NFe do destinatário"));
 
-                    case Servicos.ConsultaStatusServicoMDFe:
-                    case Servicos.PedidoConsultaSituacaoMDFe:
-                    case Servicos.PedidoSituacaoLoteMDFe:
-                    case Servicos.EnviarLoteMDFe:
-                    case Servicos.RecepcaoEventoMDFe:
-                    case Servicos.ConsultaNaoEncerradoMDFe:
+                    case Servicos.MDFeConsultaStatusServico:
+                    case Servicos.MDFePedidoConsultaSituacao:
+                    case Servicos.MDFePedidoSituacaoLote:
+                    case Servicos.MDFeEnviarLote:
+                    case Servicos.MDFeRecepcaoEvento:
+                    case Servicos.MDFeConsultaNaoEncerrado:
                         throw new Exception(string.Format(errorStr, "do MDF-e"));
 
-                    case Servicos.ConsultaStatusServicoCTe:
-                    case Servicos.PedidoConsultaSituacaoCTe:
-                    case Servicos.PedidoSituacaoLoteCTe:
-                    case Servicos.EnviarLoteCTe:
-                    case Servicos.RecepcaoEventoCTe:
-                    case Servicos.InutilizarNumerosCTe:
+                    case Servicos.CTeConsultaStatusServico:
+                    case Servicos.CTePedidoConsultaSituacao:
+                    case Servicos.CTePedidoSituacaoLote:
+                    case Servicos.CTeEnviarLote:
+                    case Servicos.CTeRecepcaoEvento:
+                    case Servicos.CTeInutilizarNumeros:
                         throw new Exception(string.Format(errorStr, "do CT-e"));
 
                     default:
                         switch (servico)
                         {
-                            case Servicos.CancelarNfse:
-                            case Servicos.ConsultarURLNfse:
-                            case Servicos.ConsultarURLNfseSerie:
-                            case Servicos.ConsultarLoteRps:
-                            case Servicos.ConsultarNfse:
-                            case Servicos.ConsultarNfsePorRps:
-                            case Servicos.ConsultarSituacaoLoteRps:
-                            case Servicos.RecepcionarLoteRps:
+                            case Servicos.NFSeCancelar:
+                            case Servicos.NFSeConsultarURL:
+                            case Servicos.NFSeConsultarURLSerie:
+                            case Servicos.NFSeConsultarLoteRps:
+                            case Servicos.NFSeConsultar:
+                            case Servicos.NFSeConsultarPorRps:
+                            case Servicos.NFSeConsultarSituacaoLoteRps:
+                            case Servicos.NFSeRecepcionarLoteRps:
                                 throw new Exception(string.Format(errorStr, "da NFS-e"));
                         }
                         throw new Exception(string.Format(errorStr, "da NF-e"));
@@ -1100,7 +1102,7 @@ namespace NFe.Settings
             foreach (Empresa empresa in Empresas.Configuracoes)
             {
                 empresasele.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
-                                new XAttribute(NFe.Components.NFeStrConstants.CNPJ, empresa.CNPJ),
+                                new XAttribute(NFe.Components.TpcnResources.CNPJ.ToString(), empresa.CNPJ),
                                 new XAttribute(NFe.Components.NFeStrConstants.Servico, ((int)empresa.Servico).ToString()),
                                 new XElement(NFe.Components.NFeStrConstants.Nome, empresa.Nome.Trim())));
             }
@@ -1750,8 +1752,8 @@ namespace NFe.Settings
                 {
                     var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                                             new XElement("retAltConfUniNFe",
-                                                new XElement("cStat", cStat),
-                                                new XElement("xMotivo", xMotivo)));
+                                                new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
+                                                new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
                     xml.Save(cArqRetorno);
                 }
             }
@@ -1845,9 +1847,9 @@ namespace NFe.Settings
                     #endregion
 
                     #region CNPJ
-                    if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("CNPJ")))
+                    if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute(NFe.Components.TpcnResources.CNPJ.ToString())))
                     {
-                        cnpj = dadosEmpresa.GetAttribute("CNPJ");
+                        cnpj = dadosEmpresa.GetAttribute(NFe.Components.TpcnResources.CNPJ.ToString());
                         temEmpresa = true;
                     }
                     else if (!String.IsNullOrEmpty(dadosEmpresa.GetAttribute("cnpj")))
@@ -2024,7 +2026,7 @@ namespace NFe.Settings
                         docGerar.Load(tmp_arqRet);
 
                         XmlNode Registro = docGerar.CreateElement("ThumbPrint");
-                        XmlAttribute IdThumbPrint = docGerar.CreateAttribute(NFe.Components.NFeStrConstants.ID);
+                        XmlAttribute IdThumbPrint = docGerar.CreateAttribute(NFe.Components.TpcnResources.ID.ToString());
                         IdThumbPrint.Value = _X509Cert.Thumbprint.ToString();
                         Registro.Attributes.Append(IdThumbPrint);
 
@@ -2082,8 +2084,8 @@ namespace NFe.Settings
 
                         var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                                                 new XElement("retCadConfUniNFe",
-                                                    new XElement("cStat", cStat),
-                                                    new XElement("xMotivo", xMotivo)));
+                                                    new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
+                                                    new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
                         xml.Save(cArqRetorno);
                     }
                     else

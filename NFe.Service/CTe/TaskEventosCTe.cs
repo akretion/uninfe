@@ -10,11 +10,11 @@ using NFe.Certificado;
 
 namespace NFe.Service
 {
-    public class TaskEventosCTe : TaskAbst
+    public class TaskCTeEventos : TaskAbst
     {
-        public TaskEventosCTe()
+        public TaskCTeEventos()
         {
-            Servico = Servicos.RecepcaoEventoCTe;
+            Servico = Servicos.CTeRecepcaoEvento;
         }
 
         #region Classe com os dados do XML do registro de eventos
@@ -56,8 +56,8 @@ namespace NFe.Service
                 object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, ufParaWS));
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
-                wsProxy.SetProp(oCabecMsg, "cUF", cOrgao.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTeEvento);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTeEvento);
 
                 //Criar objeto da classe de assinatura digital
                 AssinaturaDigital oAD = new AssinaturaDigital();
@@ -123,11 +123,11 @@ namespace NFe.Service
                 XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
                 dadosEnvEvento.eventos.Add(new Evento());
-                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName("tpEvento")[0].InnerText;
-                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("cOrgao")[0].InnerText);
-                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName("chCTe")[0].InnerText;
-                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("nSeqEvento")[0].InnerText);
+                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText;
+                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(TpcnResources.cOrgao.ToString())[0].InnerText);
+                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName(TpcnResources.chCTe.ToString())[0].InnerText;
+                dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
             }
         }
         #endregion
@@ -175,23 +175,23 @@ namespace NFe.Service
                 {
                     XmlElement eleRetorno = retEnvRetornoList.Item(i) as XmlElement;
 
-                    string cStatCons = eleRetorno.GetElementsByTagName("cStat")[0].InnerText;
+                    string cStatCons = eleRetorno.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
                     if (cStatCons == "134" || cStatCons == "135" || cStatCons == "136")
                     {
-                        string chCTe = eleRetorno.GetElementsByTagName("chCTe")[0].InnerText;
-                        Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName("nSeqEvento")[0].InnerText);
-                        string tpEvento = eleRetorno.GetElementsByTagName("tpEvento")[0].InnerText;
-                        string Id = NFe.Components.NFeStrConstants.ID + tpEvento + chCTe + nSeqEvento.ToString("00");
+                        string chCTe = eleRetorno.GetElementsByTagName(TpcnResources.chCTe.ToString())[0].InnerText;
+                        Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                        string tpEvento = eleRetorno.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText;
+                        string Id = NFe.Components.TpcnResources.ID.ToString() + tpEvento + chCTe + nSeqEvento.ToString("00");
                         ///
                         ///procura no Xml de envio pelo Id retornado
                         ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
                         foreach (XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
                         {
-                            string Idd = env.Attributes.GetNamedItem("Id").Value;
+                            string Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
                             if (Idd == Id)
                             {
-                                DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName("dhRegEvento")[0].InnerText);
+                                DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
                                 oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
@@ -206,7 +206,7 @@ namespace NFe.Service
                                         }
                                         catch (Exception ex)
                                         {
-                                            Auxiliar.WriteLog("TaskEventosCTe: " + ex.Message, false);
+                                            Auxiliar.WriteLog("TaskCTeEventos: " + ex.Message, false);
                                         }
                                         break;
                                 }

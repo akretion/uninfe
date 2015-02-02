@@ -124,13 +124,13 @@ namespace NFe.Service
             switch (servico)
             {
         #region NF-e
-                case Servicos.InutilizarNumerosNFe:
+                case Servicos.NFeInutilizarNumeros:
                     retorna = "NfeInutilizacao2";
                     break;
-                case Servicos.PedidoConsultaSituacaoNFe:
+                case Servicos.NFePedidoConsultaSituacao:
                     retorna = "NfeConsulta2";
                     break;
-                case Servicos.ConsultaStatusServicoNFe:
+                case Servicos.NFeConsultaStatusServico:
                     switch (cUFeVersao)
                     {
                         case "29|3.10": //Bahia - XML versão 3.10
@@ -141,81 +141,81 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                case Servicos.PedidoSituacaoLoteNFe:
+                case Servicos.NFePedidoSituacaoLote:
                     retorna = "NfeRetRecepcao2";
                     break;
-                case Servicos.PedidoSituacaoLoteNFe2:
+                case Servicos.NFePedidoSituacaoLote2:
                     retorna = "NfeRetAutorizacao";
                     break;
                 case Servicos.ConsultaCadastroContribuinte:
                     retorna = "CadConsultaCadastro2";
                     break;
-                case Servicos.EnviarLoteNfe:
+                case Servicos.NFeEnviarLote:
                     retorna = "NfeRecepcao2";
                     break;
-                case Servicos.EnviarLoteNfe2:
+                case Servicos.NFeEnviarLote2:
                     retorna = "NfeAutorizacao";
                     break;
-                case Servicos.EnviarLoteNfeZip2:
+                case Servicos.NFeEnviarLoteZip2:
                     retorna = "NfeAutorizacao";
                     break;
 
-                case Servicos.ConsultarDPEC:
+                case Servicos.DPECConsultar:
                     retorna = "SCEConsultaRFB";
                     break;
-                case Servicos.EnviarDPEC:
+                case Servicos.DPECEnviar:
                     retorna = "SCERecepcaoRFB";
                     break;
-                case Servicos.RecepcaoEvento:
-                case Servicos.EnviarEventoCancelamento:
-                case Servicos.EnviarManifDest:
-                case Servicos.EnviarCCe:    //danasa 2/7/2011
-                case Servicos.EnviarEPEC:
+                case Servicos.EventoRecepcao:
+                case Servicos.EventoCancelamento:
+                case Servicos.EventoManifestacaoDest:
+                case Servicos.EventoCCe:    //danasa 2/7/2011
+                case Servicos.EventoEPEC:
                     retorna = "RecepcaoEvento";
                     break;
-                case Servicos.ConsultaNFDest:
+                case Servicos.NFeConsultaNFDest:
                     retorna = "NFeConsultaDest";
                     break;
-                case Servicos.DownloadNFe:
+                case Servicos.NFeDownload:
                     retorna = "NfeDownloadNF";
                     break;
         #endregion
 
         #region MDF-e
-                case Servicos.ConsultaStatusServicoMDFe:
+                case Servicos.MDFeConsultaStatusServico:
                     retorna = "MDFeStatusServico";
                     break;
-                case Servicos.EnviarLoteMDFe:
+                case Servicos.MDFeEnviarLote:
                     retorna = "MDFeRecepcao";
                     break;
-                case Servicos.PedidoSituacaoLoteMDFe:
+                case Servicos.MDFePedidoSituacaoLote:
                     retorna = "MDFeRetRecepcao";
                     break;
-                case Servicos.PedidoConsultaSituacaoMDFe:
+                case Servicos.MDFePedidoConsultaSituacao:
                     retorna = "MDFeConsulta";
                     break;
-                case Servicos.RecepcaoEventoMDFe:
+                case Servicos.MDFeRecepcaoEvento:
                     retorna = "MDFeRecepcaoEvento";
                     break;
         #endregion
 
         #region CT-e
-                case Servicos.ConsultaStatusServicoCTe:
+                case Servicos.CTeConsultaStatusServico:
                     retorna = "CteStatusServico";
                     break;
-                case Servicos.EnviarLoteCTe:
+                case Servicos.CTeEnviarLote:
                     retorna = "CteRecepcao";
                     break;
-                case Servicos.PedidoSituacaoLoteCTe:
+                case Servicos.CTePedidoSituacaoLote:
                     retorna = "CteRetRecepcao";
                     break;
-                case Servicos.PedidoConsultaSituacaoCTe:
+                case Servicos.CTePedidoConsultaSituacao:
                     retorna = "CteConsulta";
                     break;
-                case Servicos.InutilizarNumerosCTe:
+                case Servicos.CTeInutilizarNumeros:
                     retorna = "CteInutilizacao";
                     break;
-                case Servicos.RecepcaoEventoCTe:
+                case Servicos.CTeRecepcaoEvento:
                     if (cUF == 31) //Minas Gerais (MG)
                         retorna = "RecepcaoEvento";
                     else
@@ -252,22 +252,22 @@ namespace NFe.Service
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "NFSEconsulta";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "NFSEconsulta";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "NFSEconsulta";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "NFSEconsulta";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "NFSEcancelamento";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "NFSEremessa";
                             break;
                     }
@@ -278,22 +278,22 @@ namespace NFe.Service
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -304,22 +304,22 @@ namespace NFe.Service
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRPS";
                             break;
                     }
@@ -362,22 +362,22 @@ namespace NFe.Service
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "basic_INFSEConsultas";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "basic_INFSEConsultas";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "basic_INFSEConsultas";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "basic_INFSEConsultas";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "basic_INFSEGeracao";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "basic_INFSEGeracao";
                             break;
                     }
@@ -402,22 +402,22 @@ namespace NFe.Service
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultaLoteRPS";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultaNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNfseRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaSituacaoLoteRPS";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "EnvioLoteRPS";
                             break;
                     }
@@ -435,11 +435,11 @@ namespace NFe.Service
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "basic_INFSEGeracao";
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "basic_INFSEGeracao";
                             break;
 
@@ -454,21 +454,21 @@ namespace NFe.Service
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             if (taHomologacao)
                                 retorna = "hConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfsePorRps";
                             break;
 
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             if (taHomologacao)
                                 retorna = "hCancelarNfse";
                             else
-                                retorna = NFe.Components.Servicos.CancelarNfse.ToString();
+                                retorna = NFe.Components.Servicos.NFSeCancelar.ToString();
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             if (taHomologacao)
                                 retorna = "hRecepcionarLoteRpsSincrono";
                             else
@@ -489,22 +489,22 @@ namespace NFe.Service
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultaLoteRPS";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultaNFSeServicosPrestados";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNFSePorRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaNFSePorFaixa";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelamentoNFSe";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "EnvioLoteRPSSincrono";
                             break;
                     }
@@ -527,22 +527,22 @@ namespace NFe.Service
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultaLoteRPS";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultaNFSeServicosPrestados";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNFSePorRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaNFSePorFaixa";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelamentoNFSe";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "nfdEntrada";
                             break;
                     }
@@ -583,23 +583,23 @@ namespace NFe.Service
             switch (servico)
             {
                 #region MDFe
-                case Servicos.PedidoConsultaSituacaoMDFe:
-                case Servicos.PedidoSituacaoLoteMDFe:
-                case Servicos.EnviarLoteMDFe:
-                case Servicos.ConsultaStatusServicoMDFe:
-                case Servicos.RecepcaoEventoMDFe:
-                case Servicos.ConsultaNaoEncerradoMDFe:
+                case Servicos.MDFePedidoConsultaSituacao:
+                case Servicos.MDFePedidoSituacaoLote:
+                case Servicos.MDFeEnviarLote:
+                case Servicos.MDFeConsultaStatusServico:
+                case Servicos.MDFeRecepcaoEvento:
+                case Servicos.MDFeConsultaNaoEncerrado:
                     retorna = "mdfeCabecMsg";
                     break;
                 #endregion
 
                 #region CTe
-                case Servicos.InutilizarNumerosCTe:
-                case Servicos.PedidoConsultaSituacaoCTe:
-                case Servicos.PedidoSituacaoLoteCTe:
-                case Servicos.EnviarLoteCTe:
-                case Servicos.ConsultaStatusServicoCTe:
-                case Servicos.RecepcaoEventoCTe:
+                case Servicos.CTeInutilizarNumeros:
+                case Servicos.CTePedidoConsultaSituacao:
+                case Servicos.CTePedidoSituacaoLote:
+                case Servicos.CTeEnviarLote:
+                case Servicos.CTeConsultaStatusServico:
+                case Servicos.CTeRecepcaoEvento:
                     retorna = "cteCabecMsg";
 
                     if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal)
@@ -661,13 +661,13 @@ namespace NFe.Service
             switch (servico)
             {
                 #region NF-e
-                case Servicos.InutilizarNumerosNFe:
+                case Servicos.NFeInutilizarNumeros:
                     retorna = "nfeInutilizacaoNF2";
                     break;
-                case Servicos.PedidoConsultaSituacaoNFe:
+                case Servicos.NFePedidoConsultaSituacao:
                     retorna = "nfeConsultaNF2";
                     break;
-                case Servicos.ConsultaStatusServicoNFe:
+                case Servicos.NFeConsultaStatusServico:
                     switch (cUFeVersao)
                     {
                         case "29|3.10": //Bahia - XML versão 3.10
@@ -678,10 +678,10 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                case Servicos.PedidoSituacaoLoteNFe:
+                case Servicos.NFePedidoSituacaoLote:
                     retorna = "nfeRetRecepcao2";
                     break;
-                case Servicos.PedidoSituacaoLoteNFe2:
+                case Servicos.NFePedidoSituacaoLote2:
                     switch (cUFeVersao)
                     {
                         case "29|3.10": //Bahia - XML versão 3.10
@@ -695,7 +695,7 @@ namespace NFe.Service
                 case Servicos.ConsultaCadastroContribuinte:
                     retorna = "consultaCadastro2";
                     break;
-                case Servicos.EnviarLoteNfe2:
+                case Servicos.NFeEnviarLote2:
                     switch (cUFeVersao)
                     {
                         case "29|3.10": //Bahia - XML versão 3.10
@@ -706,7 +706,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                case Servicos.EnviarLoteNfeZip2:
+                case Servicos.NFeEnviarLoteZip2:
                     switch (cUFeVersao)
                     {
                         case "29|3.10": //Bahia - XML versão 3.10
@@ -717,52 +717,52 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                case Servicos.EnviarLoteNfe:
+                case Servicos.NFeEnviarLote:
                     retorna = "nfeRecepcaoLote2";
                     break;
-                case Servicos.EnviarCCe:
-                case Servicos.EnviarEventoCancelamento:
-                case Servicos.EnviarManifDest:
-                case Servicos.RecepcaoEvento:
+                case Servicos.EventoCCe:
+                case Servicos.EventoCancelamento:
+                case Servicos.EventoManifestacaoDest:
+                case Servicos.EventoRecepcao:
                     retorna = "nfeRecepcaoEvento";
                     break;
                 #endregion
 
                 #region MDF-e
-                case Servicos.ConsultaStatusServicoMDFe:
+                case Servicos.MDFeConsultaStatusServico:
                     retorna = "mdfeStatusServicoMDF";
                     break;
-                case Servicos.EnviarLoteMDFe:
+                case Servicos.MDFeEnviarLote:
                     retorna = "mdfeRecepcaoLote";
                     break;
-                case Servicos.PedidoSituacaoLoteMDFe:
+                case Servicos.MDFePedidoSituacaoLote:
                     retorna = "mdfeRetRecepcao";
                     break;
-                case Servicos.PedidoConsultaSituacaoMDFe:
+                case Servicos.MDFePedidoConsultaSituacao:
                     retorna = "mdfeConsultaMDF";
                     break;
-                case Servicos.RecepcaoEventoMDFe:
+                case Servicos.MDFeRecepcaoEvento:
                     retorna = "mdfeRecepcaoEvento";
                     break;
                 #endregion
 
                 #region CT-e
-                case Servicos.ConsultaStatusServicoCTe:
+                case Servicos.CTeConsultaStatusServico:
                     retorna = "cteStatusServicoCT";
                     break;
-                case Servicos.EnviarLoteCTe:
+                case Servicos.CTeEnviarLote:
                     retorna = "cteRecepcaoLote";
                     break;
-                case Servicos.PedidoSituacaoLoteCTe:
+                case Servicos.CTePedidoSituacaoLote:
                     retorna = "cteRetRecepcao";
                     break;
-                case Servicos.PedidoConsultaSituacaoCTe:
+                case Servicos.CTePedidoConsultaSituacao:
                     retorna = "cteConsultaCT";
                     break;
-                case Servicos.InutilizarNumerosCTe:
+                case Servicos.CTeInutilizarNumeros:
                     retorna = "cteInutilizacaoCT";
                     break;
-                case Servicos.RecepcaoEventoCTe:
+                case Servicos.CTeRecepcaoEvento:
                     retorna = "cteRecepcaoEvento";
                     break;
 
@@ -794,13 +794,13 @@ namespace NFe.Service
                 case PadroesNFSe.ISSWEB:
                     switch (servico)
                     {
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNotaFiscal";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNotaFiscalEletronica";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = taHomologacao ? "EnviarLoteNotaFiscalDeTeste" : "EnviarLoteNotaFiscal";
                             break;
                     }
@@ -811,22 +811,22 @@ namespace NFe.Service
                 case PadroesNFSe.GINFES:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRpsV3";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfseV3";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRpsV3";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRpsV3";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRpsV3";
                             break;
                     }
@@ -837,22 +837,22 @@ namespace NFe.Service
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "consultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "consultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "consultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "consultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "cancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "recepcionarLoteRpsLimitado"; //"recepcionarLoteRps";
                             break;
                     }
@@ -863,22 +863,22 @@ namespace NFe.Service
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -889,22 +889,22 @@ namespace NFe.Service
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "Execute";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "Execute";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "Execute";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "Execute";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "Execute";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "Execute";
                             break;
                     }
@@ -915,28 +915,28 @@ namespace NFe.Service
                 case PadroesNFSe.ISSNET:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNFSePorRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaSituacaoLoteRPS";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             retorna = "ConsultarUrlVisualizacaoNfse";
                             break;
-                        case Servicos.ConsultarURLNfseSerie:
+                        case Servicos.NFSeConsultarURLSerie:
                             retorna = "ConsultarUrlVisualizacaoNfseSerie";
                             break;
                     }
@@ -953,22 +953,22 @@ namespace NFe.Service
                 case PadroesNFSe.BLUMENAU_SC:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultaLote";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultaNFeEmitidas";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNFe";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaInformacoesLote";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelamentoNFe";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
@@ -982,22 +982,22 @@ namespace NFe.Service
                 case PadroesNFSe.BHISS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -1008,19 +1008,19 @@ namespace NFe.Service
                 case PadroesNFSe.GIF:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "consultarNotaFiscal";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "obterCriticaLote";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             if (cMunicipio == 4305108) //Caxias do Sul-RS
                             {
                                 retorna = "cancelarNotaFiscal";
@@ -1030,10 +1030,10 @@ namespace NFe.Service
                                 retorna = "anularNotaFiscal";
                             }
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "enviarLoteNotas";
                             break;
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             retorna = "obterNotasEmPNG";
                             break;
                     }
@@ -1044,25 +1044,25 @@ namespace NFe.Service
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             retorna = "";
                             break;
                     }
@@ -1073,22 +1073,22 @@ namespace NFe.Service
                 case PadroesNFSe.WEBISS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -1099,22 +1099,22 @@ namespace NFe.Service
                 case PadroesNFSe.PAULISTANA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultaLote";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultaNFeEmitidas";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultaNFe";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultaInformacoesLote";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelamentoNFe";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
                                 retorna = "TesteEnvioLoteRPS";
                             else
@@ -1128,22 +1128,22 @@ namespace NFe.Service
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRPS";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfseRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRPS";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "EnviarLoteRPS";
                             break;
                     }
@@ -1154,22 +1154,22 @@ namespace NFe.Service
                 case PadroesNFSe.PORTOVELHENSE:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfsePorFaixa";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = ""; //Ainda não implmentado pelo municipio somenete pelo Site - Renan 
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "GerarNfse";
                             break;
                     }
@@ -1182,27 +1182,27 @@ namespace NFe.Service
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
 
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
 
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
 
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
 
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -1219,42 +1219,42 @@ namespace NFe.Service
                 case PadroesNFSe.DSF:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             if (taHomologacao)
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                             else
                                 retorna = "consultarLote";
                             break;
 
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             if (taHomologacao)
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                             else
                                 retorna = "consultarNota";
                             break;
 
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             if (taHomologacao)
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                             else
                                 retorna = "consultarNFSeRps";
                             break;
 
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             if (taHomologacao)
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                             else
                                 retorna = "consultarSequencialRps";
                             break;
 
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             if (taHomologacao)
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                             else
                                 retorna = "cancelar";
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             if (taHomologacao)
                                 if (cMunicipio.ToString().Equals("5002704")) // Campo grande - MS não tem web service de teste
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
@@ -1274,22 +1274,22 @@ namespace NFe.Service
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "mConsultaLoteRPS";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "mConsultaNFSeServicosPrestados";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "mConsultaNFSePorRPS";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "mConsultaNFSePorFaixa";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "mCancelamentoNFSe";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "mEnvioLoteRPSSincrono";
                             break;
                     }
@@ -1300,18 +1300,18 @@ namespace NFe.Service
                 case PadroesNFSe.TIPLAN:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             if (cMunicipio.Equals(3304201))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
                             break;
 
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
 
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             if (cMunicipio.Equals(3304201))
                                 retorna = "ConsultarNfsePorRps";
                             else
@@ -1319,7 +1319,7 @@ namespace NFe.Service
 
                             break;
 
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             if (cMunicipio.Equals(3304201))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
@@ -1327,11 +1327,11 @@ namespace NFe.Service
 
                             break;
 
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
 
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -1342,22 +1342,22 @@ namespace NFe.Service
                 case PadroesNFSe.CARIOCA:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfse";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarSituacaoLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
                     }
@@ -1368,10 +1368,10 @@ namespace NFe.Service
                 case PadroesNFSe.SIGCORP_SIGISS:
                     switch (servico)
                     {
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "GerarNota";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNota";
                             break;
                     }
@@ -1383,28 +1383,28 @@ namespace NFe.Service
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "nfdSaida";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "nfdEntradaCancelar";
                             break;
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "nfdEntrada";
                             break;
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             retorna = "urlNfd";
                             break;
-                        case Servicos.ConsultarURLNfseSerie:
+                        case Servicos.NFSeConsultarURLSerie:
                             retorna = "";
                             break;
                     }
@@ -1415,29 +1415,29 @@ namespace NFe.Service
                 case PadroesNFSe.FINTEL:
                     switch (servico)
                     {
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
-                        case Servicos.ConsultarLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
                             retorna = "ConsultarLoteRps";
                             break;
-                        case Servicos.ConsultarNfsePorRps:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfsePorRps";
                             break;
-                        case Servicos.ConsultarNfse:
+                        case Servicos.NFSeConsultar:
                             retorna = "ConsultarNfseFaixa";
                             break;
-                        case Servicos.ConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarLoteNotasFiscais";
                             break;
 
-                        case Servicos.ConsultarURLNfse:
+                        case Servicos.NFSeConsultarURL:
                             retorna = "";
                             break;
-                        case Servicos.ConsultarURLNfseSerie:
+                        case Servicos.NFSeConsultarURLSerie:
                             retorna = "";
                             break;
                     }
@@ -1463,15 +1463,15 @@ namespace NFe.Service
 
             switch (Servico)
             {
-                case Servicos.AssinarValidarMDFeEnvioEmLote:
-                case Servicos.MontarLoteVariosMDFe:
-                case Servicos.MontarLoteUmMDFe:
+                case Servicos.MDFeAssinarValidarEnvioEmLote:
+                case Servicos.MDFeMontarLoteVarios:
+                case Servicos.MDFeMontarLoteUm:
                     oLerXML.Mdfe(arquivo);
                     break;
 
-                case Servicos.AssinarValidarCTeEnvioEmLote:
-                case Servicos.MontarLoteVariosCTe:
-                case Servicos.MontarLoteUmCTe:
+                case Servicos.CTeAssinarValidarEnvioEmLote:
+                case Servicos.CTeMontarLoteVarios:
+                case Servicos.CTeMontarLoteUm:
                     oLerXML.Cte(arquivo);
                     break;
 
@@ -1583,14 +1583,14 @@ namespace NFe.Service
                     string extErro = Propriedade.ExtRetorno.Nfe_ERR;
                     switch (Servico)
                     {
-                        case Servicos.AssinarValidarMDFeEnvioEmLote:
-                        case Servicos.MontarLoteUmMDFe:
+                        case Servicos.MDFeAssinarValidarEnvioEmLote:
+                        case Servicos.MDFeMontarLoteUm:
                             extFinal = Propriedade.ExtEnvio.MDFe;
                             extErro = Propriedade.ExtRetorno.MDFe_ERR;
                             break;
 
-                        case Servicos.AssinarValidarCTeEnvioEmLote:
-                        case Servicos.MontarLoteUmCTe:
+                        case Servicos.CTeAssinarValidarEnvioEmLote:
+                        case Servicos.CTeMontarLoteUm:
                             extFinal = Propriedade.ExtEnvio.Cte;
                             extErro = Propriedade.ExtRetorno.Cte_ERR;
                             break;
@@ -1603,13 +1603,13 @@ namespace NFe.Service
                     //forçar mover para a pasta de XML com erro neste ponto.
                     oAux.MoveArqErro(arqDestino);
                 }
-                catch
+                catch (Exception exx)
                 {
+                    Auxiliar.WriteLog(exx.Message, true);
                     //Se ocorrer algum erro na hora de tentar gravar o XML de erro para o ERP ou mover o arquivo XML para a pasta de XML com erro, não 
                     //vou poder fazer nada, pq foi algum erro de rede, permissão de acesso a pasta ou arquivo, etc.
                     //Wandey 13/03/2010
                 }
-
                 throw;
             }
         }
@@ -1639,16 +1639,16 @@ namespace NFe.Service
 
             switch (Servico)
             {
-                case Servicos.AssinarValidarMDFeEnvioEmLote:
-                case Servicos.MontarLoteUmMDFe:
+                case Servicos.MDFeAssinarValidarEnvioEmLote:
+                case Servicos.MDFeMontarLoteUm:
                     booValido = true;
                     nPos = 1;
-                    goto case Servicos.MontarLoteUmaNFe;
+                    goto case Servicos.NFeMontarLoteUma;
 
-                case Servicos.AssinarValidarCTeEnvioEmLote:
-                case Servicos.MontarLoteUmCTe:
-                case Servicos.AssinarValidarNFeEnvioEmLote:
-                case Servicos.MontarLoteUmaNFe:
+                case Servicos.CTeAssinarValidarEnvioEmLote:
+                case Servicos.CTeMontarLoteUm:
+                case Servicos.NFeAssinarValidarEnvioEmLote:
+                case Servicos.NFeMontarLoteUma:
                     switch (Empresas.Configuracoes[emp].tpEmis)
                     {
                         case (int)TipoEmissao.teNormal:
@@ -1656,34 +1656,26 @@ namespace NFe.Service
                             {
                                 case (int)TipoEmissao.teNormal:
                                     ///
-                                    /// Ops!!!
                                     /// Foi emitido em contingencia e agora os quer enviar
                                     /// 
                                 case (int)TipoEmissao.teFS:
                                 case (int)TipoEmissao.teFSDA:
                                 case (int)TipoEmissao.teEPECeDPEC:
                                 case (int)TipoEmissao.teOffLine:
-                                //case (int)TipoEmissao.teSVCSP:
                                     booValido = true; 
                                     break;
-
-                                //default:
-                                  //  goto default;
                             }
                             break;
 
                         case (int)TipoEmissao.teSVCSP:
-                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP) { booValido = true; } else { goto default; }
                             booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCSP);
                             break;
 
                         case (int)TipoEmissao.teSVCAN:
-                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN) { booValido = true; } else { goto default; }
                             booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCAN);
                             break;
 
                         case (int)TipoEmissao.teSVCRS:
-                            //if (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS) { booValido = true; } else { goto default; }
                             booValido = (tpEmis == (int)NFe.Components.TipoEmissao.teSVCRS);
                             break;
 
@@ -1694,29 +1686,32 @@ namespace NFe.Service
                             //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                             gException = booValido = false;
                             break;
-
-                            /*
-
-                        default:
-                            cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
-                                         "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
-                                         "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
-                                         "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
-
-                            throw new Exception(cTextoErro);
-                             */
                     }
-
                     break;
             }
+            string cTextoErro2 = "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+
             if (!booValido && gException)
             {
                 cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
                              "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
                              "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
-                             "O XML não será enviado e será movido para a pasta de XML com erro para análise.";
+                             cTextoErro2;
 
                 throw new Exception(cTextoErro);
+            }
+
+            switch (tpEmis)
+            {
+                case (int)TipoEmissao.teSVCAN:
+                case (int)TipoEmissao.teSVCRS:
+                    var se = Propriedade.Estados.First(s => s.CodigoMunicipio.Equals(Convert.ToInt32(dadosNFe.cUF)));
+                    if (se.svc != (TipoEmissao)tpEmis && se.svc != TipoEmissao.teNone)
+                    {
+                        throw new Exception("UF: " + Functions.CodigoParaUF(Convert.ToInt32(dadosNFe.cUF)) + " não está sendo atendida pelo WebService do SVC: " + 
+                                NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + ". " + cTextoErro2);
+                    }
+                    break;
             }
 
             #region Verificar o ambiente da nota com o que está configurado no uninfe. Wandrey 20/08/2014
@@ -1969,7 +1964,7 @@ namespace NFe.Service
         /// Gerar o XML de consulta do recibo do lote da nfe
         /// </summary>
         /// <param name="empresa">Código da empresa</param>
-        /// <param name="nRec">Número do recibo a ser consultado</param>
+        /// <param name=TpcnResources.nRec.ToString()>Número do recibo a ser consultado</param>
         /// <param name="versao">Versao do Schema XML</param>
         /// <param name="mod">Modelo do documento fiscal</param>
         public void XmlPedRec(int empresa, string nRec, string versao, string mod)

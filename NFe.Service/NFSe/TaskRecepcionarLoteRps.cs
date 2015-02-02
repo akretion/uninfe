@@ -17,7 +17,7 @@ using NFe.Components.Conam;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskRecepcionarLoteRps : TaskAbst
+    public class TaskNFSeRecepcionarLoteRps : TaskAbst
     {
         #region Objeto com os dados do XML de lote rps
         /// <summary>
@@ -31,7 +31,7 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.RecepcionarLoteRps;
+            Servico = Servicos.NFSeRecepcionarLoteRps;
 
             try
             {

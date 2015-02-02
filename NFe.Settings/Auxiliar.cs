@@ -14,34 +14,6 @@ namespace NFe.Settings
 {
     public class Auxiliar
     {
-        #region ExtrairNomeArq()
-        /// <summary>
-        /// Extrai somente o nome do arquivo de uma string; para ser utilizado na situação desejada. Veja os exemplos na documentação do código.
-        /// </summary>
-        /// <param name="pPastaArq">String contendo o caminho e nome do arquivo que é para ser extraido o nome.</param>
-        /// <param name="pFinalArq">String contendo o final do nome do arquivo até onde é para ser extraído.</param>
-        /// <returns>Retorna somente o nome do arquivo de acordo com os parâmetros passados - veja exemplos.</returns>
-        /// <example>
-        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
-        /// //Será demonstrado no message a string "ArqSituacao"
-        /// 
-        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
-        /// //Será demonstrado no message a string "ArqSituacao-ped-sta"
-        /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>19/06/2008</date>
-        /// 
-#if tirada
-        public string xExtrairNomeArq(string pPastaArq, string pFinalArq)
-        {
-            FileInfo fi = new FileInfo(pPastaArq);
-            string ret = fi.Name;
-            ret = ret.Substring(0, ret.Length - pFinalArq.Length);
-            return ret;
-        }
-#endif
-        #endregion
-
         #region GravarArqErroERP
         /// <summary>
         /// grava um arquivo de erro ao ERP
@@ -50,21 +22,21 @@ namespace NFe.Settings
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
-            if(!string.IsNullOrEmpty(Arquivo))
+            if (!string.IsNullOrEmpty(Arquivo))
             {
                 try
                 {
                     int emp = Empresas.FindEmpresaByThread();
-                    if(Empresas.Configuracoes[emp].PastaXmlRetorno != string.Empty)
+                    if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlRetorno))
                     {
                         //Grava arquivo de ERRO para o ERP
                         string cArqErro = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
                         File.WriteAllText(cArqErro, Erro, Encoding.Default);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    //TODO: V3.0 - Não deveriamos retornar a exeção com throw?
+                    WriteLog(ex.Message, true);
                 }
             }
         }
@@ -76,13 +48,20 @@ namespace NFe.Settings
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif
-            int emp = -1;
-            try
+            if (ConfiguracaoApp.GravarLogOperacoesRealizadas)
             {
-                emp = Empresas.FindEmpresaByThread();
+                int emp = -1;
+                if (Empresas.Configuracoes.Count != 0) //Tive que comparar aqui se tem empresas, pois quando não tem nenhuma empresa e tento consultar os certificados pela pasta geral, retorna um erro. Wandrey 02/02/2015
+                {
+                    try
+                    {
+                        emp = Empresas.FindEmpresaByThread();
+                    }
+                    catch { }
+                }
+
+                NFe.Components.Functions.WriteLog(msg, gravarStackTrace, true, emp >= 0 ? Empresas.Configuracoes[emp].CNPJ + "_" + Empresas.Configuracoes[emp].Servico.ToString() : "");
             }
-            catch { }
-            NFe.Components.Functions.WriteLog(msg, gravarStackTrace, ConfiguracaoApp.GravarLogOperacoesRealizadas, emp >= 0 ? Empresas.Configuracoes[emp].CNPJ + "_" + Empresas.Configuracoes[emp].Servico.ToString() : "");
         }
         #endregion
 
@@ -109,18 +88,17 @@ namespace NFe.Settings
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            if(File.Exists(Arquivo))
+            if (File.Exists(Arquivo))
             {
                 FileInfo oArquivo = new FileInfo(Arquivo);
 
-                if(Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
+                if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlErro) && Directory.Exists(Empresas.Configuracoes[emp].PastaXmlErro))
                 {
                     string vNomeArquivo = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(Arquivo, ExtensaoArq) + ExtensaoArq;
 
                     Functions.Move(Arquivo, vNomeArquivo);
 
                     Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para " + vNomeArquivo, true);
-                    //Auxiliar.WriteLog("O arquivo " + Arquivo + " foi movido para a pasta de XML com problemas.", true);
 
                     /*
                     //Deletar o arquivo da pasta de XML com erro se o mesmo existir lá para evitar erros na hora de mover. Wandrey
@@ -193,22 +171,22 @@ namespace NFe.Settings
             //Criar uma Lista dos arquivos existentes na pasta
             List<string> lstArquivos = new List<string>();
 
-            if(strPasta.Trim() != "" && Directory.Exists(strPasta))
+            if (strPasta.Trim() != "" && Directory.Exists(strPasta))
             {
                 string cError = "";
                 try
                 {
                     string[] filesInFolder = Directory.GetFiles(strPasta, strMascara);
-                    foreach(string item in filesInFolder)
+                    foreach (string item in filesInFolder)
                     {
                         lstArquivos.Add(item);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     cError = ex.Message;
                 }
-                if(!string.IsNullOrEmpty(cError))
+                if (!string.IsNullOrEmpty(cError))
                 {
                     this.GravarArqErroERP(string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")), cError);
                     lstArquivos.Clear();
@@ -248,38 +226,38 @@ namespace NFe.Settings
 
             string arqXML = Propriedade.NomeArqEmpresas;
 
-            if(File.Exists(arqXML))
+            if (File.Exists(arqXML))
             {
-                    //Carregar os dados do arquivo XML de configurações da Aplicação
-                    int codEmp = 0;
-                    XElement axml = XElement.Load(arqXML);
-                    var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
-                    foreach (var item in b1)
+                //Carregar os dados do arquivo XML de configurações da Aplicação
+                int codEmp = 0;
+                XElement axml = XElement.Load(arqXML);
+                var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
+                foreach (var item in b1)
+                {
+                    string cnpj = item.Attribute(NFe.Components.TpcnResources.CNPJ.ToString()).Value;
+                    string nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value;
+                    string servico = "";
+                    if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
                     {
-                        string cnpj = item.Attribute(NFe.Components.NFeStrConstants.CNPJ).Value;
-                        string nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value;
-                        string servico = "";
-                        if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
-                        {
-                            servico = item.Attribute(NFe.Components.NFeStrConstants.Servico).Value;
-                            if (!string.IsNullOrEmpty(servico))
-                                servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
-                        }
-                        if (string.IsNullOrEmpty(servico))
-                            servico = Propriedade.TipoAplicativo.ToString();
-
-                        if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
-                            continue;
-
-                        empresa.Add(new ComboElem
-                        {
-                            Valor = cnpj,
-                            Codigo = codEmp,
-                            Nome = nome + "  <" + servico + ">",
-                            Servico = servico
-                        });
-                        codEmp++;
+                        servico = item.Attribute(NFe.Components.NFeStrConstants.Servico).Value;
+                        if (!string.IsNullOrEmpty(servico))
+                            servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
                     }
+                    if (string.IsNullOrEmpty(servico))
+                        servico = Propriedade.TipoAplicativo.ToString();
+
+                    if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                        continue;
+
+                    empresa.Add(new ComboElem
+                    {
+                        Valor = cnpj,
+                        Codigo = codEmp,
+                        Nome = nome + "  <" + servico + ">",
+                        Servico = servico
+                    });
+                    codEmp++;
+                }
             }
             empresa.Sort(new OrdenacaoPorNome());
 

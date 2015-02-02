@@ -526,7 +526,6 @@
     <None Include="Resources\palette.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="news.txt" />
     <Content Include="Resources\atualizar.png" />
     <None Include="Resources\visual1.png" />
     <None Include="Resources\atualizar1.png" />

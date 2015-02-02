@@ -5,11 +5,11 @@ using System.Text;
 
 namespace NFe.Service
 {
-    public class TaskAssinarValidarCTe : TaskAbst
+    public class TaskCTeAssinarValidar : TaskAbst
     {
-        public TaskAssinarValidarCTe()
+        public TaskCTeAssinarValidar()
         {
-            Servico = Components.Servicos.AssinarValidarCTeEnvioEmLote;
+            Servico = Components.Servicos.CTeAssinarValidarEnvioEmLote;
         }
 
         public override void Execute()

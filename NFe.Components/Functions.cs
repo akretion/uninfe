@@ -90,11 +90,14 @@ namespace NFe.Components
         {
             try
             {
+                var es = Propriedade.Estados.First(s => s.CodigoMunicipio == codigo);
+                return es.UF;
+                /*
                 for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
                     if (Propriedade.CodigosEstados[v, 0] == codigo.ToString())
                         return Propriedade.CodigosEstados[v, 1].Substring(0, 2);
 
-                return "";
+                return "";*/
             }
             catch
             {
@@ -108,11 +111,14 @@ namespace NFe.Components
         {
             try
             {
+                var es = Propriedade.Estados.First(s => s.UF.Equals(uf));
+                return es.CodigoMunicipio;
+                /*
                 for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
                     if (Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf)
                         return Convert.ToInt32(Propriedade.CodigosEstados[v, 0]);
 
-                return 0;
+                return 0;*/
             }
             catch
             {
@@ -435,18 +441,18 @@ namespace NFe.Components
                 //Carregar os dados do arquivo XML de configurações da Aplicação
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                         where (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                         where (string)p.Attribute(TpcnResources.UF.ToString()) != "XX"
                          select p);
                 foreach (var item in s)
                 {
-                    if (Convert.ToInt32("0" + OnlyNumbers(item.Attribute(NFeStrConstants.ID).Value)) == 0)
+                    if (Convert.ToInt32("0" + OnlyNumbers(item.Attribute(TpcnResources.ID.ToString()).Value)) == 0)
                         continue;
 
-                    var temp = Propriedade.Municipios.FirstOrDefault(x => x.CodigoMunicipio == Convert.ToInt32(item.Attribute(NFeStrConstants.ID).Value));
+                    var temp = Propriedade.Municipios.FirstOrDefault(x => x.CodigoMunicipio == Convert.ToInt32(item.Attribute(TpcnResources.ID.ToString()).Value));
                     if (temp == null)
                     {
-                        UF.Add(new ComboElem(item.Attribute(NFeStrConstants.UF).Value,
-                            Convert.ToInt32(item.Attribute(NFe.Components.NFeStrConstants.ID).Value),
+                        UF.Add(new ComboElem(item.Attribute(TpcnResources.UF.ToString()).Value,
+                            Convert.ToInt32(item.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value),
                             item.Element(NFe.Components.NFeStrConstants.Nome).Value));
                     }
                 }
@@ -474,12 +480,17 @@ namespace NFe.Components
         public static ArrayList CarregaEstados()
         {
             ArrayList UF = new ArrayList();
+            foreach (var estado in Propriedade.Estados)
+            {
+                UF.Add(new ComboElem(estado.UF, estado.CodigoMunicipio, estado.Nome));
+            }
+            /*
             for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
             {
                 UF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2),
                     Convert.ToInt32(Propriedade.CodigosEstados[v, 0]),
                     Propriedade.CodigosEstados[v, 1].Substring(5)));
-            }
+            }*/
             UF.Sort(new OrdenacaoPorNome());
             return UF;
         }
@@ -719,12 +730,15 @@ namespace NFe.Components
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif
-            if (!string.IsNullOrEmpty(CNPJEmpresa))
-                CNPJEmpresa += "_";
-
             if (geraLog)
             {
-                string fileName = Propriedade.PastaLog + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + CNPJEmpresa + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
+                if (!string.IsNullOrEmpty(CNPJEmpresa))
+                    CNPJEmpresa += "_";
+
+                string fileName = Propriedade.PastaLog + 
+                                (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + 
+                                (string.IsNullOrEmpty(CNPJEmpresa) ? "" : CNPJEmpresa) + 
+                                DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
 
                 DateTime startTime;
                 DateTime stopTime;
@@ -804,22 +818,5 @@ namespace NFe.Components
             write.Close();
             write.Dispose();
         }
-
-        /*
-        public static string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute[] attributes =
-                (DescriptionAttribute[])fi.GetCustomAttributes(
-                typeof(DescriptionAttribute),
-                false);
-
-            if (attributes != null &&
-                attributes.Length > 0)
-                return attributes[0].Description;
-            else
-                return value.ToString();
-        }*/
     }
 }

@@ -10,18 +10,18 @@ using NFe.Settings;
 
 namespace NFe.Service
 {
-    public class TaskConsNaoEncMDFe : TaskAbst
+    public class TaskMDFeConsNaoEncerrado : TaskAbst
     {
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            this.Servico = Components.Servicos.ConsultaNaoEncerradoMDFe;
+            this.Servico = Components.Servicos.MDFeConsultaNaoEncerrado;
 
             try
             {
-                Int32 tpAmb = 2;
+                Int32 tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
                 Int32 cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
                 XmlDocument doc = new XmlDocument();
@@ -30,8 +30,9 @@ namespace NFe.Service
                 {
                     XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
-                    tpAmb = Convert.ToInt32("0" + Functions.LerTag(consSitNFeElemento, "tpAmb", false));
+                    tpAmb = Convert.ToInt32("0" + Functions.LerTag(consSitNFeElemento, NFe.Components.TpcnResources.tpAmb.ToString(), false));
                 }
+
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, cUF, tpAmb);
 
@@ -40,8 +41,8 @@ namespace NFe.Service
                 var cabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(cabecMsg, "cUF", cUF.ToString());
-                wsProxy.SetProp(cabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFeConsNaoEnc);
+                wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString(), cUF.ToString());
+                wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeConsNaoEnc);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, 

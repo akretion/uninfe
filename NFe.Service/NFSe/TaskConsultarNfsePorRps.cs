@@ -14,14 +14,14 @@ using NFe.Components.SimplISS;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarNfsePorRps : TaskAbst
+    public class TaskNFSeConsultarPorRps : TaskAbst
     {
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarNfsePorRps;
+            Servico = Servicos.NFSeConsultarPorRps;
 
             try
             {

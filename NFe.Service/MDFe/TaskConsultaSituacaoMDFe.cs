@@ -13,11 +13,11 @@ namespace NFe.Service
     /// <summary>
     /// Consultar situação do MDFe
     /// </summary>
-    public class TaskConsultaSituacaoMDFe : TaskAbst
+    public class TaskMDFeConsultaSituacao : TaskAbst
     {
-        public TaskConsultaSituacaoMDFe()
+        public TaskMDFeConsultaSituacao()
         {
-            Servico = Servicos.PedidoConsultaSituacaoMDFe;
+            Servico = Servicos.MDFePedidoConsultaSituacao;
         }
 
         #region Classe com os dados do XML da pedido de consulta da situação da NFe
@@ -46,8 +46,8 @@ namespace NFe.Service
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSit.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", dadosPedSit.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLMDFePedSit);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSit.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFePedSit);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -110,14 +110,14 @@ namespace NFe.Service
             {
                 XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
-                dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName("chMDFe")[0].InnerText;
+                dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpAmb.ToString())[0].InnerText);
+                dadosPedSit.chNFe = consSitNFeElemento.GetElementsByTagName(TpcnResources.chMDFe.ToString())[0].InnerText;
 
-                if (consSitNFeElemento.GetElementsByTagName("tpEmis").Count != 0)
+                if (consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    this.dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName("tpEmis")[0].InnerText);
+                    this.dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
                     /// para que o validador não rejeite, excluo a tag <tpEmis>
-                    doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName("tpEmis")[0]);
+                    doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
                     /// salvo o arquivo modificado
                     doc.Save(arquivoXML);
                 }
@@ -181,9 +181,9 @@ namespace NFe.Service
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName("cStat")[0] != null)
+                if (retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                 {
-                    cStatCons = retConsSitElemento.GetElementsByTagName("cStat")[0].InnerText;
+                    cStatCons = retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 }
 
                 switch (cStatCons)
@@ -250,7 +250,7 @@ namespace NFe.Service
                                 XmlElement infConsSitElemento = (XmlElement)infConsSitNode;
 
                                 //Pegar o Status do Retorno da consulta situação
-                                string strStat = Functions.LerTag(infConsSitElemento, "cStat").Replace(";", "");
+                                string strStat = Functions.LerTag(infConsSitElemento, NFe.Components.TpcnResources.cStat.ToString()).Replace(";", "");
 
                                 switch (strStat)
                                 {
@@ -330,7 +330,7 @@ namespace NFe.Service
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Auxiliar.WriteLog("TaskConsultaSituacaoMDFe: " + ex.Message, false);
+                                                    Auxiliar.WriteLog("TaskMDFeConsultaSituacao: " + ex.Message, false);
                                                 }
                                             }
                                         }

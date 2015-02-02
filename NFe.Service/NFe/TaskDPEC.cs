@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskRecepcaoDPEC : TaskAbst
+    public class TaskDPECRecepcao : TaskAbst
     {
         #region Classe com os dados do XML de registro do DPEC
         /// <summary>
@@ -27,7 +27,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.EnviarDPEC;
+            Servico = Servicos.DPECEnviar;
 
             try
             {
@@ -38,15 +38,15 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.EnviarDPEC, emp, dadosEnvDPEC.cUF, dadosEnvDPEC.tpAmb, dadosEnvDPEC.tpEmis);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.DPECEnviar, emp, dadosEnvDPEC.cUF, dadosEnvDPEC.tpAmb, dadosEnvDPEC.tpEmis);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoDPEC = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// "SCERecepcaoRFB");
                     object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    //oWSProxy.SetProp(oCabecMsg, "cUF", /*oLer.*/dadosEnvDPEC.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC);
+                    //oWSProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), /*oLer.*/dadosEnvDPEC.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC);
 
                     //Criar objeto da classe de assinatura digita
                     AssinaturaDigital oAD = new AssinaturaDigital();
@@ -131,50 +131,6 @@ namespace NFe.Service
                 ///vST|121.99
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                 Functions.PopulateClasse(this.dadosEnvDPEC, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    if (dados.GetLength(0) == 1) continue;
-
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cuf":
-                            this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "verproc":
-                            this.dadosEnvDPEC.verProc = dados[1].Trim();
-                            break;
-                        case "cnpj":
-                            this.dadosEnvDPEC.CNPJ = (string)Functions.OnlyNumbers(dados[1].Trim());
-                            break;
-                        case "ie":
-                            this.dadosEnvDPEC.IE = (string)Functions.OnlyNumbers(dados[1].Trim());
-                            break;
-                        case "chnfe":
-                            this.dadosEnvDPEC.chNFe = dados[1].Trim();
-                            break;
-                        case "cnpjcpf":
-                            this.dadosEnvDPEC.CNPJCPF = (string)Functions.OnlyNumbers(dados[1].Trim());
-                            break;
-                        case "uf":
-                            this.dadosEnvDPEC.UF = dados[1].Trim();
-                            break;
-                        case "vicms":
-                            this.dadosEnvDPEC.vICMS = dados[1].Trim();
-                            break;
-                        case "vst":
-                            this.dadosEnvDPEC.vST = dados[1].Trim();
-                            break;
-                        case "vnf":
-                            this.dadosEnvDPEC.vNF = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -187,8 +143,8 @@ namespace NFe.Service
                 {
                     XmlElement infDPECElemento = (XmlElement)infDPECNode;
 
-                    this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName("cUF")[0].InnerText);
+                    this.dadosEnvDPEC.tpAmb = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                    this.dadosEnvDPEC.cUF = Convert.ToInt32("0" + infDPECElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0].InnerText);
                 }
             }
         }
@@ -216,10 +172,10 @@ namespace NFe.Service
                 {
                     XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
-                        infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
+                    if (infDPECRegElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText == "124" ||
+                        infDPECRegElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText == "125") //DPEC Homologado
                     {
-                        string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        string cChaveNFe = infDPECRegElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
                         string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
                         DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
@@ -243,7 +199,7 @@ namespace NFe.Service
         #endregion
     }
 
-    public class TaskConsultaDPEC : TaskAbst
+    public class TaskDPECConsulta : TaskAbst
     {
         #region Classe com os dados do XML de consulta do registro do DPEC
         /// <summary>
@@ -258,7 +214,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarDPEC;
+            Servico = Servicos.DPECConsultar;
 
             try
             {
@@ -269,14 +225,14 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.ConsultarDPEC, emp, 0, dadosConsDPEC.tpAmb, dadosConsDPEC.tpEmis, string.Empty);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servicos.DPECConsultar, emp, 0, dadosConsDPEC.tpAmb, dadosConsDPEC.tpEmis, string.Empty);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoDPEC = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//"SCEConsultaRFB");
                     object oCabecMsg = wsProxy.CriarObjeto("sceCabecMsg");
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLConsDPEC);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLConsDPEC);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oRecepcaoDPEC, wsProxy.NomeMetodoWS[0]/* "sceConsultaDPEC"*/, oCabecMsg, this);
@@ -343,10 +299,10 @@ namespace NFe.Service
                 {
                     XmlElement infDPECRegElemento = (XmlElement)infDPECRegNode;
 
-                    if (infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "124" ||
-                        infDPECRegElemento.GetElementsByTagName("cStat")[0].InnerText == "125") //DPEC Homologado
+                    if (infDPECRegElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText == "124" ||
+                        infDPECRegElemento.GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText == "125") //DPEC Homologado
                     {
-                        //string cChaveNFe = infDPECRegElemento.GetElementsByTagName("chNFe")[0].InnerText;
+                        //string cChaveNFe = infDPECRegElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
                         string dhRegDPEC = infDPECRegElemento.GetElementsByTagName("dhRegDPEC")[0].InnerText;
                         DateTime dtEmissaoDPEC = new DateTime(Convert.ToInt16(dhRegDPEC.Substring(0, 4)), Convert.ToInt16(dhRegDPEC.Substring(5, 2)), Convert.ToInt16(dhRegDPEC.Substring(8, 2)));
 
@@ -398,29 +354,6 @@ namespace NFe.Service
                 ///vST|121.99
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                 Functions.PopulateClasse(this.dadosConsDPEC, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    if (dados.GetLength(0) == 1) continue;
-
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "veraplic":
-                            this.dadosConsDPEC.verAplic = dados[1].Trim();
-                            break;
-                        case "chnfe":
-                            this.dadosConsDPEC.chNFe = dados[1].Trim();
-                            break;
-                        case "nregdpec":
-                            this.dadosConsDPEC.nRegDPEC = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -433,7 +366,7 @@ namespace NFe.Service
                 {
                     XmlElement consDPECElemento = (XmlElement)consDPECNode;
 
-                    this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + consDPECElemento.GetElementsByTagName("tpAmb")[0].InnerText);
+                    this.dadosConsDPEC.tpAmb = Convert.ToInt32("0" + consDPECElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpAmb.ToString())[0].InnerText);
                 }
             }
         }

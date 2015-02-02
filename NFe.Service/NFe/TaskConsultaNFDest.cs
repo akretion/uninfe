@@ -12,7 +12,7 @@ using NFe.Exceptions;
 
 namespace NFe.Service
 {
-    public class TaskConsultaNFDest : TaskAbst
+    public class TaskNFeConsultaNFDest : TaskAbst
     {
         #region Classe com os dados do XML do registro de consulta da nfe do destinatario
         private DadosConsultaNFeDest oDadosConsultaNFeDest = new DadosConsultaNFeDest();
@@ -22,7 +22,7 @@ namespace NFe.Service
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
-            Servico = Servicos.ConsultaNFDest;
+            Servico = Servicos.NFeConsultaNFDest;
 
             try
             {
@@ -41,8 +41,8 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest);
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,
@@ -53,40 +53,6 @@ namespace NFe.Service
                                         Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
                                         Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
 
-
-#if old
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oConsNFDestEvento;
-                    //if (NFe.Components.Propriedade.TipoAmbiente.taHomologacao == oDadosConsultaNFeDest.tpAmb)
-                    //    oConsNFDestEvento = wsProxy.CriarObjeto("NfeConsultaDest");
-                    //else
-                    oConsNFDestEvento = wsProxy.CriarObjeto("NFeConsultaDest");
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
-
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, "cUF", cUF.ToString());
-                    //                  try
-                    //                  {
-                    //                      wsProxy.SetProp(oCabecMsg, "indComp", "0");
-                    //                  }
-                    //                  catch { }
-                    wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest);
-
-                    //Criar objeto da classe de assinatura digital
-                    //AssinaturaDigital oAD = new AssinaturaDigital();
-
-                    //Assinar o XML
-                    //oAD.Assinar(NomeArquivoXML, emp);
-
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy,
-                                        oConsNFDestEvento,
-                                        "nfeConsultaNFDest",
-                                        oCabecMsg,
-                                        this,
-                                        Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
-                                        Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
-#endif
                     //Ler o retorno
                     this.LerRetornoConsultaNFeDest(emp);
                 }
@@ -144,32 +110,6 @@ namespace NFe.Service
                 /// ultNSU|00000001
                 List<string> cLinhas = Functions.LerArquivo(arquivoXML);
                 Functions.PopulateClasse(this.oDadosConsultaNFeDest, cLinhas);
-#if false
-                foreach (string cTexto in cLinhas)
-                {
-                    string[] dados = cTexto.Split('|');
-                    if (dados.GetLength(0) <= 1) continue;
-
-                    switch (dados[0].ToLower())
-                    {
-                        case "tpamb":
-                            this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "cnpj":
-                            this.oDadosConsultaNFeDest.CNPJ = dados[1].Trim();
-                            break;
-                        case "indnfe":
-                            this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "indemi":
-                            this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + dados[1].Trim());
-                            break;
-                        case "ultnsu":
-                            this.oDadosConsultaNFeDest.ultNSU = dados[1].Trim();
-                            break;
-                    }
-                }
-#endif
             }
             else
             {
@@ -192,13 +132,6 @@ namespace NFe.Service
                 {
                     XmlElement envEventoElemento = (XmlElement)envEventoNode;
                     Functions.PopulateClasse(this.oDadosConsultaNFeDest, envEventoElemento);
-#if false
-                    this.oDadosConsultaNFeDest.tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("tpAmb")[0].InnerText);
-                    this.oDadosConsultaNFeDest.CNPJ = envEventoElemento.GetElementsByTagName("CNPJ")[0].InnerText;
-                    this.oDadosConsultaNFeDest.indNFe = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indNFe")[0].InnerText);
-                    this.oDadosConsultaNFeDest.indEmi = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName("indEmi")[0].InnerText);
-                    this.oDadosConsultaNFeDest.ultNSU = envEventoElemento.GetElementsByTagName("ultNSU")[0].InnerText;
-#endif
                 }
             }
         }

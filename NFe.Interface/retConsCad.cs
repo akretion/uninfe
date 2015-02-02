@@ -18,7 +18,7 @@ namespace NFe.Interface
 
             if (!string.IsNullOrEmpty(infCad.CNPJ))
             {
-                this.label1.Text = NFe.Components.NFeStrConstants.CNPJ;
+                this.label1.Text = NFe.Components.TpcnResources.CNPJ.ToString();
                 this.txtCNPJ_CPF.Text = FmtCgcCpf(infCad.CNPJ, true);
             }
             else

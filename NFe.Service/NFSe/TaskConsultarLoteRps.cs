@@ -19,14 +19,14 @@ namespace NFe.Service.NFSe
     /// <summary>
     /// Consultar uma NFS-e por RPS
     /// </summary>
-    public class TaskConsultarLoteRps : TaskAbst
+    public class TaskNFSeConsultarLoteRps : TaskAbst
     {
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
-            Servico = Servicos.ConsultarLoteRps;
+            Servico = Servicos.NFSeConsultarLoteRps;
 
             try
             {

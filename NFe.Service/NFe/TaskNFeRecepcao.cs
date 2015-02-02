@@ -16,7 +16,7 @@ namespace NFe.Service
     {
         public TaskNFeRecepcao()
         {
-            Servico = Servicos.EnviarLoteNfe;
+            Servico = Servicos.NFeEnviarLote;
         }
 
         #region Classe com os dados do XML do retorno do envio do Lote de NFe
@@ -42,7 +42,7 @@ namespace NFe.Service
 
                 if (oLer.oDadosNfe.versao != "2.00")
                 {
-                    Servico = Servicos.EnviarLoteNfe2;
+                    Servico = Servicos.NFeEnviarLote2;
                 }
 
                 var idLote = oLer.oDadosNfe.idLote;
@@ -56,28 +56,28 @@ namespace NFe.Service
                     oLer.oDadosNfe.mod);
 
                 if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00" && wsProxy.NomeMetodoWS.Length == 2)
-                    Servico = Servicos.EnviarLoteNfeZip2;
+                    Servico = Servicos.NFeEnviarLoteZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", oLer.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, "versaoDados", oLer.oDadosNfe.versao);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), oLer.oDadosNfe.cUF);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), oLer.oDadosNfe.versao);
 
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 
                 //Fica aqui somente este lembrete. Wandrey 16/03/2010
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.EnviarLoteNfeZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.NFeEnviarLoteZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
                 }
 
-                string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.EnviarLoteNfeZip2) ? 1 : 0];
+                string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip2) ? 1 : 0];
 
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
@@ -127,7 +127,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.EnviarLoteNfeZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.NFeEnviarLoteZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)
@@ -201,7 +201,7 @@ namespace NFe.Service
             {
                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
-                this.dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+                this.dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
                 XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
 
@@ -209,8 +209,8 @@ namespace NFe.Service
                 {
                     XmlElement infRecElemento = (XmlElement)infRecNode;
 
-                    this.dadosRec.nRec = infRecElemento.GetElementsByTagName("nRec")[0].InnerText;
-                    this.dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
+                    this.dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
+                    this.dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
                 }
             }
         }
@@ -238,10 +238,10 @@ namespace NFe.Service
             {
                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
-                dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+                dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
-                if (retEnviNFeElemento.GetElementsByTagName("nRec")[0] != null)
-                    dadosRec.nRec = retEnviNFeElemento.GetElementsByTagName("nRec")[0].InnerText;
+                if (retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
+                    dadosRec.nRec = retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
             }
         }
         #endregion
@@ -263,7 +263,7 @@ namespace NFe.Service
 
             FluxoNfe fluxoNFe = new FluxoNfe();
 
-            TaskRetRecepcao retRecepcao = new TaskRetRecepcao();
+            TaskNFeRetRecepcao retRecepcao = new TaskNFeRetRecepcao();
             retRecepcao.FinalizarNFe(protNFe, fluxoNFe, emp);
         }
         #endregion

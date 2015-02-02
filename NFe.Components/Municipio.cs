@@ -13,6 +13,7 @@ namespace NFe.Components
         public string Nome { get; set; }
         public string PadraoStr { get; set; } 
         public PadroesNFSe Padrao { get; set; }
+        public TipoEmissao svc { get; set; }
 
         public Municipio() { }
         public Municipio(int _cod, string _uf, string _nome, PadroesNFSe _padrao)
@@ -24,6 +25,10 @@ namespace NFe.Components
             this.Padrao = _padrao;
             this.PadraoStr = _padrao.ToString();
             this.UF = _uf;
+        }
+        public override string ToString()
+        {
+            return this.UF + " - " + this.Nome;
         }
     }
 }

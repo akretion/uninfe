@@ -66,7 +66,7 @@ namespace NFe.Components
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
                          where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
-                                (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == idMunicipio.ToString()
+                                (string)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) == idMunicipio.ToString()
                          select p);
                 foreach (var item in s)
                 {
@@ -77,8 +77,8 @@ namespace NFe.Components
 
                 var xs = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
                           where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
-                                 (string)p.Attribute(NFe.Components.NFeStrConstants.UF) == "XX" &&
-                                 (string)p.Attribute(NFe.Components.NFeStrConstants.ID) == padrao.ToString()
+                                 (string)p.Attribute(TpcnResources.UF.ToString()) == "XX" &&
+                                 (string)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) == padrao.ToString()
                           select p);
                 foreach (var item in xs)
                 {
@@ -173,7 +173,7 @@ namespace NFe.Components
                 foreach (Municipio item in Propriedade.Municipios)
                 {
                     elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
-                                    new XAttribute(NFe.Components.NFeStrConstants.ID, item.CodigoMunicipio.ToString()),
+                                    new XAttribute(NFe.Components.TpcnResources.ID.ToString(), item.CodigoMunicipio.ToString()),
                                     new XAttribute(NFe.Components.NFeStrConstants.Nome, item.Nome.Trim()),
                                     new XAttribute(NFe.Components.NFeStrConstants.Padrao, item.PadraoStr)));
                 }
@@ -202,7 +202,7 @@ namespace NFe.Components
 
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFeStrConstants.Estado)
-                         where  (string)p.Attribute(NFe.Components.NFeStrConstants.UF) != "XX"
+                         where (string)p.Attribute(TpcnResources.UF.ToString()) != "XX"
                          select p);
                 foreach (var item in s)
                 {
@@ -212,12 +212,12 @@ namespace NFe.Components
 
                     if (padrao != PadroesNFSe.NaoIdentificado.ToString())
                     {
-                        string ID = item.Attribute(NFe.Components.NFeStrConstants.ID).Value;
+                        string ID = item.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value;
                         string Nome = item.Attribute(NFe.Components.NFeStrConstants.Nome).Value;
-                        string UF = item.Attribute(NFe.Components.NFeStrConstants.UF).Value;
+                        string UF = item.Attribute(TpcnResources.UF.ToString()).Value;
 
                         elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
-                                        new XAttribute(NFe.Components.NFeStrConstants.ID, ID),
+                                        new XAttribute(NFe.Components.TpcnResources.ID.ToString(), ID),
                                         new XAttribute(NFe.Components.NFeStrConstants.Nome, Nome.Trim()),
                                         new XAttribute(NFe.Components.NFeStrConstants.Padrao, padrao)));
                     }

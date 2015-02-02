@@ -31,224 +31,216 @@ namespace NFe.Components
         /// <summary>
         /// Consulta status serviço NFe
         /// </summary>
-        ConsultaStatusServicoNFe,
-        /// <summary>
-        /// Assinar e montar lote de uma NFe
-        /// </summary>
-        MontarLoteUmaNFe,
-        /// <summary>
-        /// Envia os lotes de NFe para os webservices (NfeRecepcao)
-        /// </summary>
-        EnviarLoteNfe,
-        /// <summary>
-        /// Envia os lotes de NFe para os webservices (NFeAutorizacao)
-        /// </summary>
-        EnviarLoteNfe2,
-        /// <summary>
-        /// Envia os lotes de NFe para os webservices de forma Compactada (NFeAutorizacao)
-        /// </summary>
-        EnviarLoteNfeZip2,
-        /// <summary>
-        /// Consulta recibo do lote nfe (NFeRetRecepcao)
-        /// </summary>
-        PedidoSituacaoLoteNFe,
-        /// <summary>
-        /// Consulta recibo do lote nfe (NFeRetAutorizacao)
-        /// </summary>
-        PedidoSituacaoLoteNFe2,
-        /// <summary>
-        /// Consulta situação da NFe
-        /// </summary>
-        PedidoConsultaSituacaoNFe,
-        /// <summary>
-        /// Envia XML de Inutilização da NFe
-        /// </summary>
-        InutilizarNumerosNFe,
+        NFeConsultaStatusServico,
         /// <summary>
         /// Somente converter TXT da NFe para XML de NFe
         /// </summary>
-        ConverterTXTparaXML,
+        NFeConverterTXTparaXML,
+        /// <summary>
+        /// Envia os lotes de NFe para os webservices (NfeRecepcao)
+        /// </summary>
+        NFeEnviarLote,
+        /// <summary>
+        /// Envia os lotes de NFe para os webservices (NFeAutorizacao)
+        /// </summary>
+        NFeEnviarLote2,
+        /// <summary>
+        /// Envia os lotes de NFe para os webservices de forma Compactada (NFeAutorizacao)
+        /// </summary>
+        NFeEnviarLoteZip2,
+        /// <summary>
+        /// Envia XML de Inutilização da NFe
+        /// </summary>
+        NFeInutilizarNumeros,
+        /// <summary>
+        /// Assinar e montar lote de uma NFe
+        /// </summary>
+        NFeMontarLoteUma,
+        /// <summary>
+        /// Consulta situação da NFe
+        /// </summary>
+        NFePedidoConsultaSituacao,
+        /// <summary>
+        /// Consulta recibo do lote nfe (NFeRetRecepcao)
+        /// </summary>
+        NFePedidoSituacaoLote,
+        /// <summary>
+        /// Consulta recibo do lote nfe (NFeRetAutorizacao)
+        /// </summary>
+        NFePedidoSituacaoLote2,
 
         #region Eventos NFe
         /// <summary>
-        /// Enviar XML de Evento NFe
+        /// Enviar XML Evento - Cancelamento
         /// </summary>
-        RecepcaoEvento,
+        EventoCancelamento,
         /// <summary>
         /// Enviar XML Evento - Carta de Correção
         /// </summary>
-        EnviarCCe,
-        /// <summary>
-        /// Enviar XML Evento - Cancelamento
-        /// </summary>
-        EnviarEventoCancelamento,
-        /// <summary>
-        /// Enviar um evento de manifestacao
-        /// </summary>
-        EnviarManifDest,
+        EventoCCe,
         /// <summary>
         /// Enviar um evento de EPEC
         /// </summary>
-        EnviarEPEC,
+        EventoEPEC,
+        /// <summary>
+        /// Enviar um evento de manifestacao
+        /// </summary>
+        EventoManifestacaoDest,
+        /// <summary>
+        /// Enviar XML de Evento NFe
+        /// </summary>
+        EventoRecepcao,
         #endregion
 
         /// <summary>
         /// Assinar e validar um XML de NFe no envio em Lote
         /// </summary>
-        AssinarValidarNFeEnvioEmLote,
-        /// <summary>
-        /// Assinar e montar lote de várias NFe
-        /// </summary>
-        MontarLoteVariasNFe,
-        /// <summary>
-        /// Monta chave de acesso
-        /// </summary>
-        GerarChaveNFe,
-        /// <summary>
-        /// Enviar o XML do DPEC para o SCE - Sistema de Contingência Eletrônica
-        /// </summary>
-        EnviarDPEC,
-        /// <summary>
-        /// Consultar o registro do DPEC no SCE - Sistema de Contingência Eletrônica        
-        /// </summary>
-        ConsultarDPEC,
-        /// <summary>
-        /// Enviar solicitacao de download de nfe
-        /// </summary>
-        DownloadNFe,
+        NFeAssinarValidarEnvioEmLote,
         /// <summary>
         /// Enviar uma consulta de nfe de destinatario
         /// </summary>
-        ConsultaNFDest,
+        NFeConsultaNFDest,
         /// <summary>
-        /// Registro de saida
+        /// Enviar solicitacao de download de nfe
         /// </summary>
-        //RegistroDeSaida,
+        NFeDownload,
         /// <summary>
-        /// Registro de saida
+        /// Monta chave de acesso
         /// </summary>
-        //RegistroDeSaidaCancelamento,
+        NFeGerarChave,
+        /// <summary>
+        /// Assinar e montar lote de várias NFe
+        /// </summary>
+        NFeMontarLoteVarias,
+        /// <summary>
+        /// Consultar o registro do DPEC no SCE - Sistema de Contingência Eletrônica        
+        /// </summary>
+        DPECConsultar,
+        /// <summary>
+        /// Enviar o XML do DPEC para o SCE - Sistema de Contingência Eletrônica
+        /// </summary>
+        DPECEnviar,
         #endregion
 
         #region CTe
         /// <summary>
+        /// Assinar e validar um XML de CTe no envio em Lote
+        /// </summary>
+        CTeAssinarValidarEnvioEmLote,
+        /// <summary>
         /// Consulta Status Serviço CTe
         /// </summary>
-        ConsultaStatusServicoCTe,
-        /// <summary>
-        /// Montar lote de um CTe
-        /// </summary>
-        MontarLoteUmCTe,
+        CTeConsultaStatusServico,
         /// <summary>
         /// Envia os lotes de CTe para os webservices
         /// </summary>
-        EnviarLoteCTe,
-        /// <summary>
-        /// Consulta recibo do lote CTe
-        /// </summary>
-        PedidoSituacaoLoteCTe,
-        /// <summary>
-        /// Consulta situação da CTe
-        /// </summary>
-        PedidoConsultaSituacaoCTe,
+        CTeEnviarLote,
         /// <summary>
         /// Envia XML de Inutilização da CTe
         /// </summary>
-        InutilizarNumerosCTe,
+        CTeInutilizarNumeros,
         /// <summary>
-        /// Enviar XML Evento CTe
+        /// Montar lote de um CTe
         /// </summary>
-        RecepcaoEventoCTe,
-        /// <summary>
-        /// Assinar e validar um XML de CTe no envio em Lote
-        /// </summary>
-        AssinarValidarCTeEnvioEmLote,
+        CTeMontarLoteUm,
         /// <summary>
         /// Assinar e montar lote de várias CTe
         /// </summary>
-        MontarLoteVariosCTe,
+        CTeMontarLoteVarios,
+        /// <summary>
+        /// Consulta situação da CTe
+        /// </summary>
+        CTePedidoConsultaSituacao,
+        /// <summary>
+        /// Consulta recibo do lote CTe
+        /// </summary>
+        CTePedidoSituacaoLote,
+        /// <summary>
+        /// Enviar XML Evento CTe
+        /// </summary>
+        CTeRecepcaoEvento,
         #endregion
 
         #region NFSe
         /// <summary>
-        /// Enviar Lote RPS NFS-e 
+        /// Cancelar NFS-e
         /// </summary>
-        [Description("Enviar Lote RPS NFS-e ")]
-        RecepcionarLoteRps,
-        /// <summary>
-        /// Consultar Situação do lote RPS NFS-e
-        /// </summary>
-        [Description("Consultar Situação do lote RPS NFS-e")]
-        ConsultarSituacaoLoteRps,
-        /// <summary>
-        /// Consultar NFS-e por RPS
-        /// </summary>
-        [Description("Consultar NFS-e por RPS")]
-        ConsultarNfsePorRps,
+        [Description("Cancelar NFS-e")]
+        NFSeCancelar,
         /// <summary>
         /// Consultar NFS-e por Data
         /// </summary>
         [Description("Consultar NFS-e por Data")]
-        ConsultarNfse,
+        NFSeConsultar,
         /// <summary>
         /// Consultar lote RPS
         /// </summary>
         [Description("ConsultarLoteRPS")]
-        ConsultarLoteRps,
+        NFSeConsultarLoteRps,
         /// <summary>
-        /// Cancelar NFS-e
+        /// Consultar NFS-e por RPS
         /// </summary>
-        [Description("Cancelar NFS-e")]
-        CancelarNfse,
+        [Description("Consultar NFS-e por RPS")]
+        NFSeConsultarPorRps,
+        /// <summary>
+        /// Consultar Situação do lote RPS NFS-e
+        /// </summary>
+        [Description("Consultar Situação do lote RPS NFS-e")]
+        NFSeConsultarSituacaoLoteRps,
         /// <summary>
         /// Consultar a URL de visualização da NFSe
         /// </summary>
         [Description("Consultar a URL de Visualização da NFS-e")]
-        ConsultarURLNfse,
+        NFSeConsultarURL,
         /// <summary>
         /// Consultar a URL de visualização da NFSe
         /// </summary>
         [Description("Consultar a URL de Visualização da NFS-e com a Série")]
-        ConsultarURLNfseSerie,
+        NFSeConsultarURLSerie,
+        /// <summary>
+        /// Enviar Lote RPS NFS-e 
+        /// </summary>
+        [Description("Enviar Lote RPS NFS-e ")]
+        NFSeRecepcionarLoteRps,
         #endregion
 
         #region MDFe
         /// <summary>
-        /// Consulta Status Serviço MDFe
-        /// </summary>
-        ConsultaStatusServicoMDFe,
-        /// <summary>
-        /// Montar lote de um MDFe
-        /// </summary>
-        MontarLoteUmMDFe,
-        /// <summary>
-        /// Envia os lotes de MDFe para os webservices
-        /// </summary>
-        EnviarLoteMDFe,
-        /// <summary>
-        /// Consulta recibo do lote MDFe
-        /// </summary>
-        PedidoSituacaoLoteMDFe,
-        /// <summary>
-        /// Consulta situação da MDFe
-        /// </summary>
-        PedidoConsultaSituacaoMDFe,
-        /// <summary>
         /// Assinar e validar um XML de MDFe no envio em Lote
         /// </summary>
-        AssinarValidarMDFeEnvioEmLote,
-        /// <summary>
-        /// Assinar e montar lote de várias MDFe
-        /// </summary>
-        MontarLoteVariosMDFe,
-        /// <summary>
-        /// Enviar XML Evento MDFe
-        /// </summary>
-        RecepcaoEventoMDFe,
+        MDFeAssinarValidarEnvioEmLote,
         /// <summary>
         /// Consulta MDFe nao encerrados
         /// </summary>
-        ConsultaNaoEncerradoMDFe,
+        MDFeConsultaNaoEncerrado,
+        /// <summary>
+        /// Consulta Status Serviço MDFe
+        /// </summary>
+        MDFeConsultaStatusServico,
+        /// <summary>
+        /// Envia os lotes de MDFe para os webservices
+        /// </summary>
+        MDFeEnviarLote,
+        /// <summary>
+        /// Montar lote de um MDFe
+        /// </summary>
+        MDFeMontarLoteUm,
+        /// <summary>
+        /// Assinar e montar lote de várias MDFe
+        /// </summary>
+        MDFeMontarLoteVarios,
+        /// <summary>
+        /// Consulta situação da MDFe
+        /// </summary>
+        MDFePedidoConsultaSituacao,
+        /// <summary>
+        /// Consulta recibo do lote MDFe
+        /// </summary>
+        MDFePedidoSituacaoLote,
+        /// <summary>
+        /// Enviar XML Evento MDFe
+        /// </summary>
+        MDFeRecepcaoEvento,
         #endregion
 
         #region Serviços em comum NFe, CTe, MDFe e NFSe
@@ -270,23 +262,23 @@ namespace NFe.Components
         /// <summary>
         /// Consultar Informações Gerais do UniNFe
         /// </summary>
-        ConsultaInformacoesUniNFe,
+        UniNFeConsultaInformacoes,
         /// <summary>
         /// Solicitar ao UniNFe que altere suas configurações
         /// </summary>
-        AlterarConfiguracoesUniNFe,
+        UniNFeAlterarConfiguracoes,
         /// <summary>
         /// Efetua uma limpeza das pastas que recebem arquivos temporários
         /// </summary>
-        LimpezaTemporario,
+        UniNFeLimpezaTemporario,
         /// <summary>
         /// Consultas efetuadas pela pasta GERAL.
         /// </summary>
-        ConsultaGeral,
+        UniNFeConsultaGeral,
         /// <summary>
         /// Consulta Certificados Instalados na estação do UniNFe.
         /// </summary>
-        ConsultaCertificados,
+        UniNFeConsultaCertificados,
         #endregion
 
         #region Não sei para que serve - Wandrey
@@ -297,15 +289,15 @@ namespace NFe.Components
         #endregion
 
         #region Impressao do DANFE
-        ImpressaoNFe,
-        ImpressaoNFe_Contingencia,
+        DANFEImpressao,
+        DANFEImpressao_Contingencia,
         #endregion
 
         #region Impressao do relatorio de e-mails do DANFE
-        DanfeRelatorio,
+        DANFERelatorio,
         #endregion
 
-        EnviarDFe,
+        DFeEnviar,
 
         /// <summary>
         /// Nulo / Nenhum serviço em execução
@@ -632,6 +624,17 @@ combo.ValueMember = "Key";
             : base()
         {
             this.description = description;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+    public class SVC_AtendidoPor : Attribute
+    {
+        NFe.Components.TipoEmissao _valor;
+        public NFe.Components.TipoEmissao svc
+        {
+            get { return _valor; }
+            set { _valor = value; }
         }
     }
 

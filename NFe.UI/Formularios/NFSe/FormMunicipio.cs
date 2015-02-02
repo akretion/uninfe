@@ -24,11 +24,16 @@ namespace NFe.UI.Formularios.NFSe
             base.OnLoad(e);
             uninfeDummy.ClearControls(this, true, true);
 
+            foreach (var estado in Propriedade.Estados)
+            {
+                this.edtUF.Items.Add(estado.UF);
+            }
+            /*
             for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
             {
                 this.edtUF.Items.Add(Propriedade.CodigosEstados[v, 1].Substring(0, 2));
             }
-
+            */
             this.edtUF.SelectedIndex = 0;
 
             this.edtPadrao.Sorted = false;

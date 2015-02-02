@@ -76,17 +76,17 @@ namespace NFe.Components
                     case PadroesNFSe.DUETO:
                         switch (servico)
                         {
-                            case Servicos.ConsultarLoteRps:
+                            case Servicos.NFSeConsultarLoteRps:
                                 return "basic_INFSEConsultas";
-                            case Servicos.ConsultarNfse:
+                            case Servicos.NFSeConsultar:
                                 return "basic_INFSEConsultas";
-                            case Servicos.ConsultarNfsePorRps:
+                            case Servicos.NFSeConsultarPorRps:
                                 return "basic_INFSEConsultas";
-                            case Servicos.ConsultarSituacaoLoteRps:
+                            case Servicos.NFSeConsultarSituacaoLoteRps:
                                 return "basic_INFSEConsultas";
-                            case Servicos.CancelarNfse:
+                            case Servicos.NFSeCancelar:
                                 return "basic_INFSEGeracao";
-                            case Servicos.RecepcionarLoteRps:
+                            case Servicos.NFSeRecepcionarLoteRps:
                                 return "basic_INFSEGeracao";
                             default:
                                 return _NomeClasseWS;
@@ -97,13 +97,13 @@ namespace NFe.Components
                     case PadroesNFSe.ISSONLINE4R:
                         switch (servico)
                         {
-                            case Servicos.ConsultarNfsePorRps:
+                            case Servicos.NFSeConsultarPorRps:
                                 return (taHomologacao ? "hConsultarNfsePorRps" : "ConsultarNfsePorRps");
 
-                            case Servicos.CancelarNfse:
-                                return (taHomologacao ? "hCancelarNfse" : NFe.Components.Servicos.CancelarNfse.ToString());
+                            case Servicos.NFSeCancelar:
+                                return (taHomologacao ? "hCancelarNfse" : NFe.Components.Servicos.NFSeCancelar.ToString());
 
-                            case Servicos.RecepcionarLoteRps:
+                            case Servicos.NFSeRecepcionarLoteRps:
                                 return (taHomologacao ? "hRecepcionarLoteRpsSincrono" : "RecepcionarLoteRpsSincrono");
 
                             default:
@@ -120,9 +120,9 @@ namespace NFe.Components
                     case PadroesNFSe.PRONIN:
                         switch (servico)
                         {
-                            case Servicos.CancelarNfse:
+                            case Servicos.NFSeCancelar:
                                 return "basic_INFSEGeracao";
-                            case Servicos.RecepcionarLoteRps:
+                            case Servicos.NFSeRecepcionarLoteRps:
                                 return "basic_INFSEGeracao";
                             default:
                                 return "basic_INFSEConsultas";
@@ -617,7 +617,7 @@ namespace NFe.Components
                         XmlElement registroElemento = (XmlElement)registroNode;
                         if (registroElemento.Attributes.Count > 0)
                         {
-                            int IDmunicipio = Convert.ToInt32("0" + Functions.OnlyNumbers(registroElemento.Attributes[NFeStrConstants.ID].Value));
+                            int IDmunicipio = Convert.ToInt32("0" + Functions.OnlyNumbers(registroElemento.Attributes[TpcnResources.ID.ToString()].Value));
                             string Nome = registroElemento.Attributes[NFeStrConstants.Nome].Value;
                             string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
                             string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
@@ -681,13 +681,13 @@ namespace NFe.Components
                     XmlElement estadoElemento = (XmlElement)estadoNode;
                     if (estadoElemento.Attributes.Count > 0)
                     {
-                        if (estadoElemento.Attributes[NFeStrConstants.UF].Value != "XX")
+                        if (estadoElemento.Attributes[TpcnResources.UF.ToString()].Value != "XX")
                         {
-                            int ID = Convert.ToInt32("0" + Functions.OnlyNumbers(estadoElemento.Attributes[NFeStrConstants.ID].Value));
+                            int ID = Convert.ToInt32("0" + Functions.OnlyNumbers(estadoElemento.Attributes[TpcnResources.ID.ToString()].Value));
                             if (ID == 0)
                                 continue;
                             string Nome = estadoElemento.Attributes[NFeStrConstants.Nome].Value;
-                            string UF = estadoElemento.Attributes[NFeStrConstants.UF].Value;
+                            string UF = estadoElemento.Attributes[TpcnResources.UF.ToString()].Value;
 
                             /// danasa 1-2012
                             ///

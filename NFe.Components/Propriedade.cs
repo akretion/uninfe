@@ -4,6 +4,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace NFe.Components
 {
@@ -121,6 +124,43 @@ namespace NFe.Components
 
         public static List<Municipio> Municipios { get; set; }
 
+        private static List<Municipio> _Estados = null;
+        public static List<Municipio> Estados 
+        {
+            get
+            {
+                if (_Estados == null)
+                {
+                    _Estados = new List<Components.Municipio>();
+
+                    XElement axml = XElement.Load(NomeArqXMLWebService_NFe);
+                    var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                             where (Int32)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) < 900
+                             orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
+                             select new 
+                            {
+                                Nome = (string)p.Attribute(NFeStrConstants.Nome),
+                                ID = (Int32)p.Attribute(TpcnResources.ID.ToString()),
+                                UF = (string)p.Attribute(TpcnResources.UF.ToString()),
+                                SVC = (string)p.Attribute(NFeStrConstants.SVC)
+                            });
+                    foreach (var item in s)
+                    {
+                        _Estados.Add(new Municipio
+                        {
+                            CodigoMunicipio = item.ID,
+                            Nome = item.Nome,
+                            UF = item.UF,
+                            svc =  NFe.Components.EnumHelper.StringToEnum<TipoEmissao>(item.SVC)
+                        });
+                    }
+                }
+                return _Estados;
+            }
+            set { _Estados = value; }
+        }
+
+        /*
         public static string[,] CodigosEstados
         {
             get
@@ -157,6 +197,7 @@ namespace NFe.Components
                 };
             }
         }
+*/
 
         /// <summary>
         /// Retorna a pasta onde são gravados os log´s do UniNFe
@@ -179,7 +220,7 @@ namespace NFe.Components
         /// <summary>
         /// Namespace URI associado (Endereço http dos schemas de XML)
         /// </summary>
-        public static string nsURI_nfe { get; set; }
+        //public static string nsURI_nfe { get; set; }
 
         #region Propriedades com as extensões dos XML ou TXT de envio
         /// <summary>
@@ -847,74 +888,4 @@ namespace NFe.Components
         #endregion
     }
 
-    public class NFeStrConstants
-    {
-        public static string proxyError = "Especifique o nome do servidor/usuário/senha e porta para conectar do servidor proxy";
-        public static string versaoError = "Defina a versão";
-        public static string Nome = "Nome";
-        public static string ID = "ID";
-        public static string Padrao = "Padrao";
-        public static string UF = "UF";
-        public static string Estado = "Estado";
-        public static string Registro = "Registro";
-        public static string Servico = "Servico";
-        public static string CNPJ = "CNPJ";
-        public static string LocalHomologacao = "LocalHomologacao";
-        public static string LocalProducao = "LocalProducao";
-
-
-        public static string nfe_configuracoes = "nfe_configuracoes";
-        public static string PastaXmlAssinado = "PastaXmlAssinado";
-        public static string PastaXmlEnvio = "PastaXmlEnvio";
-        public static string PastaXmlEmLote = "PastaXmlEmLote";
-        public static string PastaXmlRetorno = "PastaXmlRetorno";
-        public static string PastaXmlEnviado = "PastaXmlEnviado";
-        public static string PastaXmlErro = "PastaXmlErro";
-        public static string PastaBackup = "PastaBackup";
-        public static string PastaValidar = "PastaValidar";
-        public static string PastaDownloadNFeDest = "PastaDownloadNFeDest";
-        public static string ConfiguracaoDanfe = "ConfiguracaoDanfe";
-        public static string ConfiguracaoCCe = "ConfiguracaoCCe";
-        public static string PastaExeUniDanfe = "PastaExeUniDanfe";
-        public static string PastaConfigUniDanfe = "PastaConfigUniDanfe";
-        public static string PastaDanfeMon = "PastaDanfeMon";
-        public static string XMLDanfeMonNFe = "XMLDanfeMonNFe";
-        public static string XMLDanfeMonProcNFe = "XMLDanfeMonProcNFe";
-        public static string XMLDanfeMonDenegadaNFe = "XMLDanfeMonDenegadaNFe";
-
-        public static string UsuarioWS = "UsuarioWS";
-        public static string SenhaWS = "SenhaWS";
-
-        public static string FTPAtivo = "FTPAtivo";
-        public static string FTPGravaXMLPastaUnica = "FTPGravaXMLPastaUnica";
-        public static string FTPSenha = "FTPSenha";
-        public static string FTPPastaAutorizados = "FTPPastaAutorizados";
-        public static string FTPPastaRetornos = "FTPPastaRetornos";
-        public static string FTPNomeDoUsuario = "FTPNomeDoUsuario";
-        public static string FTPNomeDoServidor = "FTPNomeDoServidor";
-        public static string FTPPorta = "FTPPorta";
-
-        public static string CertificadoDigital = "CertificadoDigital";
-        public static string CertificadoDigitalThumbPrint = "CertificadoDigitalThumbPrint";
-        public static string CertificadoInstalado = "CertificadoInstalado";
-        public static string CertificadoArquivo = "CertificadoArquivo";
-        public static string CertificadoSenha = "CertificadoSenha";
-        public static string CertificadoPIN = "CertificadoPIN";
-        public static string ProviderCertificado = "ProviderCertificado";
-        public static string ProviderTypeCertificado = "ProviderTypeCertificado";
-
-        public static string AmbienteCodigo = "AmbienteCodigo";
-        public static string DiasLimpeza = "DiasLimpeza";
-        public static string DiretorioSalvarComo = "DiretorioSalvarComo";
-        public static string GravarRetornoTXTNFe = "GravarRetornoTXTNFe";
-        public static string GravarEventosNaPastaEnviadosNFe = "GravarEventosNaPastaEnviadosNFe";
-        public static string GravarEventosCancelamentoNaPastaEnviadosNFe = "GravarEventosCancelamentoNaPastaEnviadosNFe";
-        public static string GravarEventosDeTerceiros = "GravarEventosDeTerceiros";
-        public static string CompactarNfe = "CompactarNfe";
-        public static string TempoConsulta = "TempoConsulta";
-        public static string tpEmis = "tpEmis";
-        public static string tpAmb = "tpAmb";
-        public static string UnidadeFederativaCodigo = "UnidadeFederativaCodigo";
-        public static string IndSinc = "IndSinc";
-    }
 }

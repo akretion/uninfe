@@ -105,22 +105,22 @@ namespace NFe.Service
             {
                 switch (servico)
                 {
-                    case Servicos.PedidoConsultaSituacaoMDFe:
-                    case Servicos.PedidoSituacaoLoteMDFe:
-                    case Servicos.EnviarLoteMDFe:
-                    case Servicos.ConsultaStatusServicoMDFe:
-                    case Servicos.RecepcaoEventoMDFe:
-                    case Servicos.ConsultaNaoEncerradoMDFe:
+                    case Servicos.MDFePedidoConsultaSituacao:
+                    case Servicos.MDFePedidoSituacaoLote:
+                    case Servicos.MDFeEnviarLote:
+                    case Servicos.MDFeConsultaStatusServico:
+                    case Servicos.MDFeRecepcaoEvento:
+                    case Servicos.MDFeConsultaNaoEncerrado:
                         oWSProxy.SetProp(oServicoWS, "mdfeCabecMsgValue", cabecMsg);
                         break;
 
-                    case Servicos.InutilizarNumerosCTe:
-                    case Servicos.PedidoConsultaSituacaoCTe:
-                    case Servicos.PedidoSituacaoLoteCTe:
-                    case Servicos.EnviarLoteCTe:
-                    case Servicos.RecepcaoEventoCTe:
-                    case Servicos.ConsultaStatusServicoCTe:
-                        if (oWSProxy.GetProp(cabecMsg, "cUF").ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
+                    case Servicos.CTeInutilizarNumeros:
+                    case Servicos.CTePedidoConsultaSituacao:
+                    case Servicos.CTePedidoSituacaoLote:
+                    case Servicos.CTeEnviarLote:
+                    case Servicos.CTeRecepcaoEvento:
+                    case Servicos.CTeConsultaStatusServico:
+                        if (oWSProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                         {
                             try
                             {
@@ -137,7 +137,7 @@ namespace NFe.Service
                         }
                         break;
 
-                    case Servicos.EnviarDFe:
+                    case Servicos.DFeEnviar:
                         break;
 
                     default:
@@ -147,7 +147,7 @@ namespace NFe.Service
             }
 
             // Envio da NFe Compactada - Renan
-            if (servico == Servicos.EnviarLoteNfeZip2)
+            if (servico == Servicos.NFeEnviarLoteZip2)
             {
                 XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
                 FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
@@ -322,10 +322,10 @@ namespace NFe.Service
 
                     switch (servicoNFSe)
                     {
-                        case Servicos.RecepcionarLoteRps:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             operacao = 1;
                             break;
-                        case Servicos.CancelarNfse:
+                        case Servicos.NFSeCancelar:
                             operacao = 2;
                             break;
                         default:

@@ -67,8 +67,8 @@ namespace NFe.Service
                 //Pegar a chave da NF-e
                 if (infNFeElemento.HasAttributes)
                 {
-                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
-                    oDadosNfe.versao = infNFeElemento.Attributes["versao"].InnerText;
+                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes[TpcnResources.Id.ToString()].InnerText;
+                    oDadosNfe.versao = infNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
                 }
 
                 //Montar lista de tag´s da tag <ide>
@@ -79,17 +79,17 @@ namespace NFe.Service
                     XmlElement ideElemento = (XmlElement)ideNode;
 
                     if (oDadosNfe.versao == "2.00")
-                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dEmi", false));
+                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, NFe.Components.TpcnResources.dEmi.ToString(), false));
                     else
-                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
-                    oDadosNfe.cNF = Functions.LerTag(ideElemento, "cNF", false);
-                    oDadosNfe.nNF = Functions.LerTag(ideElemento, "nNF", false);
-                    oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
-                    oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
-                    oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
-                    oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
-                    oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
-                    oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
+                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
+                    oDadosNfe.cNF = Functions.LerTag(ideElemento, TpcnResources.cNF.ToString(), false);
+                    oDadosNfe.nNF = Functions.LerTag(ideElemento, TpcnResources.nNF.ToString(), false);
+                    oDadosNfe.tpEmis = Functions.LerTag(ideElemento, NFe.Components.TpcnResources.tpEmis.ToString(), false);
+                    oDadosNfe.tpAmb = Functions.LerTag(ideElemento, TpcnResources.tpAmb.ToString(), false);
+                    oDadosNfe.serie = Functions.LerTag(ideElemento, TpcnResources.serie.ToString(), false);
+                    oDadosNfe.cUF = Functions.LerTag(ideElemento, NFe.Components.TpcnResources.cUF.ToString(), false);
+                    oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
+                    oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -99,7 +99,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CNPJ.ToString(), false);
                 }
             }
 
@@ -110,7 +110,7 @@ namespace NFe.Service
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
 
-                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, TpcnResources.idLote.ToString(), false);
             }
         }
         #endregion
@@ -136,7 +136,7 @@ namespace NFe.Service
                 //Pegar a chave da NF-e
                 if (infNFeElemento.HasAttributes)
                 {
-                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
+                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes[TpcnResources.Id.ToString()].InnerText;
                 }
 
                 //Montar lista de tag´s da tag <ide>
@@ -146,15 +146,15 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
-                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, "cCT", false);
-                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, "nCT", false);
-                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
-                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
-                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
-                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
-                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
-                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
+                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
+                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, TpcnResources.cCT.ToString(), false);
+                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, TpcnResources.nCT.ToString(), false);
+                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, TpcnResources.tpEmis.ToString(), false);
+                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, TpcnResources.tpAmb.ToString(), false);
+                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, TpcnResources.serie.ToString(), false);
+                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, TpcnResources.cUF.ToString(), false);
+                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
+                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -164,7 +164,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CNPJ.ToString(), false);
                 }
             }
 
@@ -174,7 +174,7 @@ namespace NFe.Service
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
-                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, TpcnResources.idLote.ToString(), false);
             }
         }
         #endregion
@@ -200,7 +200,7 @@ namespace NFe.Service
                 //Pegar a chave da NF-e
                 if (infNFeElemento.HasAttributes)
                 {
-                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes["Id"].InnerText;
+                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes[TpcnResources.Id.ToString()].InnerText;
                 }
 
                 //Montar lista de tag´s da tag <ide>
@@ -210,15 +210,15 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, "dhEmi", false));
-                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, "cMDF", false);
-                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, "nMDF", false);
-                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, "tpEmis", false);
-                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, "tpAmb", false);
-                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, "serie", false);
-                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, "cUF", false);
-                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, "mod", false);
-                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, "cDV", false);
+                    this.oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
+                    this.oDadosNfe.cNF = Functions.LerTag(ideElemento, TpcnResources.cMDF.ToString(), false);
+                    this.oDadosNfe.nNF = Functions.LerTag(ideElemento, TpcnResources.nMDF.ToString(), false);
+                    this.oDadosNfe.tpEmis = Functions.LerTag(ideElemento, TpcnResources.tpEmis.ToString(), false);
+                    this.oDadosNfe.tpAmb = Functions.LerTag(ideElemento, TpcnResources.tpAmb.ToString(), false);
+                    this.oDadosNfe.serie = Functions.LerTag(ideElemento, TpcnResources.serie.ToString(), false);
+                    this.oDadosNfe.cUF = Functions.LerTag(ideElemento, TpcnResources.cUF.ToString(), false);
+                    this.oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
+                    this.oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -228,7 +228,7 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, "CNPJ", false);
+                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CNPJ.ToString(), false);
                 }
             }
 
@@ -238,7 +238,7 @@ namespace NFe.Service
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
-                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, "idLote", false);
+                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, TpcnResources.idLote.ToString(), false);
             }
         }
         #endregion

@@ -15,7 +15,7 @@ namespace NFe.Service
     {
         public TaskCTeRecepcao()
         {
-            Servico = Servicos.EnviarLoteCTe;
+            Servico = Servicos.CTeEnviarLote;
         }
 
         #region Classe com os dados do XML do retorno do envio do Lote de NFe
@@ -49,8 +49,8 @@ namespace NFe.Service
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, "cUF", lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, "versaoDados", NFe.ConvertTxt.versoes.VersaoXMLCTe);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
+                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTe);
 
                 //
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 
@@ -173,7 +173,7 @@ namespace NFe.Service
             {
                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
-                this.dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName("cStat")[0].InnerText;
+                this.dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
                 XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
 
@@ -181,8 +181,8 @@ namespace NFe.Service
                 {
                     XmlElement infRecElemento = (XmlElement)infRecNode;
 
-                    this.dadosRec.nRec = infRecElemento.GetElementsByTagName("nRec")[0].InnerText;
-                    this.dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName("tMed")[0].InnerText);
+                    this.dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
+                    this.dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
                 }
             }
         }
