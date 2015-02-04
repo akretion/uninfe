@@ -202,6 +202,12 @@ namespace NFe.Components
         /// </summary>
         [Description("Enviar Lote RPS NFS-e ")]
         NFSeRecepcionarLoteRps,
+        /// <summary>
+        /// Enviar Lote RPS NFS-e de forma sincrona 
+        /// Criado inicialmente para ser utilizado para o padrão BHIss, pois é necessario utilizar a recepção de lote das duas formas.
+        /// </summary>
+        [Description("Enviar Lote RPS NFS-e Sincrono")]
+        NFSeRecepcionarLoteRpsSincrono,
         #endregion
 
         #region MDFe
@@ -513,7 +519,13 @@ namespace NFe.Components
         /// Prefeitura de Varginha - MG
         /// </summary>
         [Description("CONAM")]
-        CONAM
+        CONAM,
+        /// <summary>
+        /// Padrão Rlz Informatica
+        /// Prefeitura de Santa Fé do Sul
+        /// </summary>
+        [Description("Rlz Informática")]
+        RLZ_INFORMATICA
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

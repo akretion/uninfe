@@ -123,7 +123,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-        #region NF-e
+                #region NF-e
                 case Servicos.NFeInutilizarNumeros:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -179,9 +179,9 @@ namespace NFe.Service
                 case Servicos.NFeDownload:
                     retorna = "NfeDownloadNF";
                     break;
-        #endregion
+                #endregion
 
-        #region MDF-e
+                #region MDF-e
                 case Servicos.MDFeConsultaStatusServico:
                     retorna = "MDFeStatusServico";
                     break;
@@ -197,9 +197,9 @@ namespace NFe.Service
                 case Servicos.MDFeRecepcaoEvento:
                     retorna = "MDFeRecepcaoEvento";
                     break;
-        #endregion
+                #endregion
 
-        #region CT-e
+                #region CT-e
                 case Servicos.CTeConsultaStatusServico:
                     retorna = "CteStatusServico";
                     break;
@@ -221,7 +221,7 @@ namespace NFe.Service
                     else
                         retorna = "CteRecepcaoEvento";
                     break;
-        #endregion
+                #endregion
             }
 
             return retorna;
@@ -242,13 +242,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-        #region GINFES
+                #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
-        #endregion
+                #endregion
 
-        #region THEMA
+                #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -272,9 +272,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region BETHA
+                #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -298,9 +298,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region CANOAS-RS (ABACO)
+                #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -324,41 +324,41 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region ISSNet
+                #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
-        #endregion
+                #endregion
 
-        #region ISSNet
+                #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
 
-        #region Blumenau-SC
+                #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
-        #endregion
+                #endregion
 
-        #region BHISS
+                #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region GIF
+                #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region DUETO
+                #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -382,23 +382,23 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region WEBISS
+                #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
-        #endregion
+                #endregion
 
-        #region PAULISTANA
+                #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
-        #endregion
+                #endregion
 
-        #region SALVADOR_BA
+                #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -422,16 +422,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region PORTOVELHENSE
+                #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region PRONIN
+                #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -448,9 +448,9 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region ISSONLINE4R (4R Sistemas)
+                #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -476,16 +476,16 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region DSF
+                #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
-        #endregion
+                #endregion
 
-        #region TECNOSISTEMAS
+                #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -509,21 +509,21 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
 
-        #region TIPLAN
+                #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
 
-        #region CARIOCA
+                #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
-        #endregion
+                #endregion
 
-        #region SMARAPD
+                #region SMARAPD
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
@@ -547,7 +547,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-        #endregion
+                #endregion
             }
 
             return retorna;
@@ -996,6 +996,9 @@ namespace NFe.Service
                             break;
                         case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "GerarNfse";
                             break;
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
@@ -1655,14 +1658,14 @@ namespace NFe.Service
                             switch (tpEmis)
                             {
                                 case (int)TipoEmissao.teNormal:
-                                    ///
-                                    /// Foi emitido em contingencia e agora os quer enviar
-                                    /// 
+                                ///
+                                /// Foi emitido em contingencia e agora os quer enviar
+                                /// 
                                 case (int)TipoEmissao.teFS:
                                 case (int)TipoEmissao.teFSDA:
                                 case (int)TipoEmissao.teEPECeDPEC:
                                 case (int)TipoEmissao.teOffLine:
-                                    booValido = true; 
+                                    booValido = true;
                                     break;
                             }
                             break;
@@ -1708,7 +1711,7 @@ namespace NFe.Service
                     var se = Propriedade.Estados.First(s => s.CodigoMunicipio.Equals(Convert.ToInt32(dadosNFe.cUF)));
                     if (se.svc != (TipoEmissao)tpEmis && se.svc != TipoEmissao.teNone)
                     {
-                        throw new Exception("UF: " + Functions.CodigoParaUF(Convert.ToInt32(dadosNFe.cUF)) + " não está sendo atendida pelo WebService do SVC: " + 
+                        throw new Exception("UF: " + Functions.CodigoParaUF(Convert.ToInt32(dadosNFe.cUF)) + " não está sendo atendida pelo WebService do SVC: " +
                                 NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + ". " + cTextoErro2);
                     }
                     break;
@@ -1987,6 +1990,7 @@ namespace NFe.Service
                 case PadroesNFSe.FIORILLI:
                 case PadroesNFSe.CONAM:
                 case PadroesNFSe.SIMPLISS:
+                case PadroesNFSe.RLZ_INFORMATICA:
                     retorno = false;
                     break;
             }
@@ -2008,5 +2012,84 @@ namespace NFe.Service
             oGerarXML.XmlRetorno(pFinalArqEnvio, pFinalArqRetorno, this.vStrXmlRetorno);
         }
         #endregion
+
+        public Servicos GetTipoServicoSincrono(Servicos servico, string file, PadroesNFSe padrao)
+        {
+            Servicos result = servico;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+
+            switch (padrao)
+            {
+                case PadroesNFSe.NaoIdentificado:
+                    break;
+                case PadroesNFSe.GINFES:
+                    break;
+                case PadroesNFSe.BETHA:
+                    break;
+                case PadroesNFSe.THEMA:
+                    break;
+                case PadroesNFSe.SALVADOR_BA:
+                    break;
+                case PadroesNFSe.CANOAS_RS:
+                    break;
+                case PadroesNFSe.ISSNET:
+                    break;
+                case PadroesNFSe.ISSONLINE:
+                    break;
+                case PadroesNFSe.BLUMENAU_SC:
+                    break;
+                case PadroesNFSe.BHISS:
+                    if (doc.DocumentElement.Name.Equals("GerarNfseEnvio") && servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                    }
+                    break;
+                case PadroesNFSe.GIF:
+                    break;
+                case PadroesNFSe.IPM:
+                    break;
+                case PadroesNFSe.DUETO:
+                    break;
+                case PadroesNFSe.WEBISS:
+                    break;
+                case PadroesNFSe.PAULISTANA:
+                    break;
+                case PadroesNFSe.PORTOVELHENSE:
+                    break;
+                case PadroesNFSe.PRONIN:
+                    break;
+                case PadroesNFSe.ISSONLINE4R:
+                    break;
+                case PadroesNFSe.DSF:
+                    break;
+                case PadroesNFSe.TECNOSISTEMAS:
+                    break;
+                case PadroesNFSe.SYSTEMPRO:
+                    break;
+                case PadroesNFSe.TIPLAN:
+                    break;
+                case PadroesNFSe.CARIOCA:
+                    break;
+                case PadroesNFSe.SIGCORP_SIGISS:
+                    break;
+                case PadroesNFSe.SMARAPD:
+                    break;
+                case PadroesNFSe.FIORILLI:
+                    break;
+                case PadroesNFSe.FINTEL:
+                    break;
+                case PadroesNFSe.ISSWEB:
+                    break;
+                case PadroesNFSe.SIMPLISS:
+                    break;
+                case PadroesNFSe.CONAM:
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
     }
 }

@@ -1612,9 +1612,9 @@ namespace NFe.ConvertTxt
         {
             if ((!string.IsNullOrEmpty(InfAdic.infAdFisco)) ||
                 (!string.IsNullOrEmpty(InfAdic.infCpl)) ||
-                (InfAdic.obsCont.Count > 1) ||
-                (InfAdic.obsFisco.Count > 1) ||
-                (InfAdic.procRef.Count > 1))
+                (InfAdic.obsCont.Count > 0) ||
+                (InfAdic.obsFisco.Count > 0) ||
+                (InfAdic.procRef.Count > 0))
             {
                 XmlElement nodeinfAdic = doc.CreateElement("infAdic");
                 root.AppendChild(nodeinfAdic);

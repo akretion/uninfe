@@ -58,6 +58,8 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
 
+                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
+
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, "-ped-sta", "-sta");
                 }

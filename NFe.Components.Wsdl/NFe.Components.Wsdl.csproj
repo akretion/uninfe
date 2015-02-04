@@ -2213,7 +2213,14 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGINFES_SaoJosePinhaisPR.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PGINFES_SaoJosePinhaisPR.wsdl" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeinutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBARecepcaoEvento_C.wsdl" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_SJP\cabecalho_v03.xsd">
       <SubType>Designer</SubType>
@@ -2260,6 +2267,20 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_SJP\xmldsig-core-schema20020212_v03.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBARecepcaoEvento_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantaFeDoSul-RLZ_Informatica.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

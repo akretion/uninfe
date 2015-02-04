@@ -15,6 +15,7 @@ namespace NFe.Threadings
 {
     public class FileSystemWatcher : IDisposable    //<<<danasa 1-5-2011
     {
+        #region Propriedades
         public delegate void FileChangedHandler(FileInfo fi);
         public event FileChangedHandler OnFileChanged;
         public string Directory { get; set; }
@@ -23,6 +24,9 @@ namespace NFe.Threadings
         private bool CancelProcess = false;
 
         private bool _disposed = false;
+        #endregion
+
+        #region Destrutores
         ~FileSystemWatcher()
         {
             Dispose(false);
@@ -42,7 +46,9 @@ namespace NFe.Threadings
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
 
+        #region Construtores
         public FileSystemWatcher(string directory, string filter)
         {
             Directory = directory;
@@ -56,7 +62,9 @@ namespace NFe.Threadings
             t.IsBackground = true;
             t.Start();
         }
+        #endregion
 
+        #region Metodos
         void ProcessFiles()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -222,11 +230,11 @@ namespace NFe.Threadings
         /// <summary>
         /// StopWatch
         /// </summary>
-        public bool StopWatch       //modifiquei para que no mainform se verifique se foi cancelado ou nao
+        public bool StopWatch       
         {
             get { return CancelProcess; }
             set { CancelProcess = value; }
         }
-
+        #endregion
     }
 }

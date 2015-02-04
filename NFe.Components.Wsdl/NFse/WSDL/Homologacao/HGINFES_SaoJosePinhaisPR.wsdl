@@ -133,109 +133,109 @@
   <operation name='CancelarNfse'>
    <soap:operation soapAction='CancelarNfse'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='CancelarNfseV3'>
    <soap:operation soapAction='CancelarNfseV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarLoteRps'>
    <soap:operation soapAction='ConsultarLoteRps'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarLoteRpsV3'>
    <soap:operation soapAction='ConsultarLoteRpsV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarNfse'>
    <soap:operation soapAction='ConsultarNfse'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarNfsePorRps'>
    <soap:operation soapAction='ConsultarNfsePorRps'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarNfsePorRpsV3'>
    <soap:operation soapAction='ConsultarNfsePorRpsV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarNfseV3'>
    <soap:operation soapAction='ConsultarNfseV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarSituacaoLoteRps'>
    <soap:operation soapAction='ConsultarSituacaoLoteRps'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='ConsultarSituacaoLoteRpsV3'>
    <soap:operation soapAction='ConsultarSituacaoLoteRpsV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='RecepcionarLoteRps'>
    <soap:operation soapAction='RecepcionarLoteRps'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
   <operation name='RecepcionarLoteRpsV3'>
    <soap:operation soapAction='RecepcionarLoteRpsV3'/>
    <input>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </input>
    <output>
-    <soap:body namespace='http://devel.sjp.pr.gov.br' use='literal'/>
+    <soap:body namespace='http://nfe.sjp.pr.gov.br' use='literal'/>
    </output>
   </operation>
  </binding>

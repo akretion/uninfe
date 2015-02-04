@@ -14,6 +14,7 @@ using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.Conam;
+using NFe.Components.RLZ_INFORMATICA;
 
 namespace NFe.Service.NFSe
 {
@@ -80,6 +81,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.BHISS:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BHISS);
                         break;
 
                     case PadroesNFSe.WEBISS:
@@ -158,8 +160,13 @@ namespace NFe.Service.NFSe
                         conam.EmiteNF(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.RLZ_INFORMATICA:
+                        Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
 
-
+                        rlz.EmiteNF(NomeArquivoXML);
+                        break;
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

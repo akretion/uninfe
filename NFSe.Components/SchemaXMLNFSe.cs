@@ -721,16 +721,31 @@ namespace NFSe.Components
             });
             #endregion
 
-            #region XML de lote RPS
+            #region XML de lote RPS (Assincrono)
             SchemaXML.InfSchemas.Add("NFSE-BHISS-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
-                Descricao = "XML de Lote RPS",
+                Descricao = "XML de Lote RPS (Assincrono)",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfRps",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS (Sincrono)
+            SchemaXML.InfSchemas.Add("NFSE-BHISS-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "GerarNfseEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });

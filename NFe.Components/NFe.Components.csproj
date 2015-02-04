@@ -74,11 +74,15 @@
     <Compile Include="Abstract\EmiteNFSeBase.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
+    <Compile Include="RLZ_INFORMATICA\Rlz_Informatica.cs" />
+    <Compile Include="RLZ_INFORMATICA\Rlz_InformaticaBase.cs" />
+    <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\h\Rlz_InformaticaH.cs" />
     <Compile Include="CONAM\Conam.cs" />
     <Compile Include="CONAM\ConamBase.cs" />
     <Compile Include="CONAM\VarginhaMG\h\ConamH.cs" />
     <Compile Include="CONAM\VarginhaMG\p\ConamP.cs" />
     <Compile Include="NFeStrConstants.cs" />
+    <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\p\Rlz_InformaticaP.cs" />
     <Compile Include="SimplISS\SimplISS.cs" />
     <Compile Include="SimplISS\SimplISSBase.cs" />
     <Compile Include="SimplISS\PiracicabaSP\h\SimplISSH.cs" />
@@ -131,6 +135,16 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.etransparencia.nfehomologacao.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.rlz.ceiss.santafedosul.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.rlz.saturno.santafedosul.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -290,6 +304,22 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.etransparencia.nfehomologacao.h\ws_nfe.wsdl" />
+    <None Include="Web References\br.com.rlz.ceiss.santafedosul.p\Nota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.rlz.ceiss.santafedosul.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.rlz.ceiss.santafedosul.p\server.wsdl" />
+    <None Include="Web References\br.com.rlz.saturno.santafedosul.h\Nota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.rlz.saturno.santafedosul.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.rlz.saturno.santafedosul.h\santafedosul.wsdl" />
     <None Include="Web References\br.com.sigiss.bauru.p\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -630,6 +660,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://ceiss.rlz.com.br/amfphp/services/RLZ/webservice/server.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.rlz.ceiss.santafedosul.p\</RelPath>
+      <UpdateFromURL>http://ceiss.rlz.com.br/amfphp/services/RLZ/webservice/server.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_rlz_ceiss_santafedosul_p_Webservice_Prefeitura</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.net.taquarituba.fiorilli.p\</RelPath>
@@ -640,6 +681,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://saturno.rlz.com.br:3080/amfphp/services/RLZ/webservice/santafedosul.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.rlz.saturno.santafedosul.h\</RelPath>
+      <UpdateFromURL>http://saturno.rlz.com.br:3080/amfphp/services/RLZ/webservice/santafedosul.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_rlz_saturno_santafedosul_h_Webservice_Prefeitura</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

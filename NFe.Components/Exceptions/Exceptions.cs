@@ -46,4 +46,23 @@ namespace NFe.Components.Exceptions
             }
         }
     }
+
+    public class ProblemaLeituraXML : Exception
+    {
+        private string Arquivo = "";
+
+        public ProblemaLeituraXML(string arquivo)
+        {
+            Arquivo = arquivo;
+
+        }
+        public override string Message
+        {
+            get
+            {
+                return String.Format("Não foi possivel abrir/ler o arquivo {0}.", Arquivo);
+            }
+        }
+
+    }
 }

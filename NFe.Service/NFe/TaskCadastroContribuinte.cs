@@ -50,13 +50,15 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosConsCad.cUF.ToString());
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), this.dadosConsCad.versao);
 
+                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
+
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,
                                         oConsCad,
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML.Replace(".xml",""),
+                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML.Replace(".xml", ""),
                                         NFe.Components.Propriedade.ExtRetorno.ConsCad_XML.Replace(".xml", ""));//"-cons-cad", "-ret-cons-cad");
                 }
                 else

@@ -13,6 +13,7 @@ using NFe.Components.SystemPro;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
 using NFe.Components.Conam;
+using NFe.Components.RLZ_INFORMATICA;
 
 namespace NFe.Service.NFSe
 {
@@ -118,6 +119,14 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         conam.ConsultarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.RLZ_INFORMATICA:
+                        Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Convert.ToInt32(oDadosPedSitNfse.cMunicipio));
+
+                        rlz.ConsultarNfse(NomeArquivoXML);
                         break;
                 }
 

@@ -2484,4 +2484,24 @@
       <CancelarNfse>wsdl\producao\PPortoAlegreRS-BHISS.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3546603" Nome="Santa Fé do Sul - SP" UF="SP" Padrao="RLZ_INFORMATICA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HSantaFeDoSul-RLZ_Informatica.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

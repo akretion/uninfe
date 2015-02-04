@@ -878,6 +878,8 @@ namespace NFe.Service
                         var nfer = new NFe.ConvertTxt.nfeRead();
                         nfer.ReadFromXml(arqProcNFe);
                         fEmail = nfer.nfe.dest.email;
+                        //nfer.nfe.InfAdic.obsCont.ForEach(s => fEmail += (s.xCampo.ToLower().StartsWith("email") || s.xTexto.Contains("@") ? ";" + s.xTexto : ""));
+
                         if (tipo == "")
                         {
                             tipo = (nfer.nfe.ide.mod == ConvertTxt.TpcnMod.modNFCe ? "nfce" : "nfe");
@@ -1001,24 +1003,41 @@ namespace NFe.Service
                 {
                     string Args = "";
 
+                    if (tipo.Equals("cte"))
+                    {
+                        Args += " EE=1";    //EnviarEmail
+                        if (!string.IsNullOrEmpty(emp.EmailDanfe) && !emp.AdicionaEmailDanfe)
+                            Args += " E=\"" + emp.EmailDanfe + "\"";
+                    }
+                    else
+                    {
+
                     if (string.IsNullOrEmpty(fEmail))
                         fEmail = email;
 
+                    ///
+                    /// se tem um e-mail definido nos parametros da empresa
+                    /// 
+
                     if (!string.IsNullOrEmpty(emp.EmailDanfe))
+                        {
                         if (!emp.AdicionaEmailDanfe)
                             fEmail = emp.EmailDanfe;
                         else
                             fEmail += ";" + emp.EmailDanfe;
+                        }
 
                     if (!string.IsNullOrEmpty(fEmail))
-                        if (fEmail.StartsWith(";"))
-                            fEmail = fEmail.Substring(1);
+                    {
+                            fEmail = fEmail.Replace(";",",").TrimStart(new char[] { ',', ' ' }).TrimEnd(new char[] { ',' });
 
                     if (!string.IsNullOrEmpty(fEmail))
                     {
                         Args += " EE=1";    //EnviarEmail
                         Args += " E=\"" + fEmail + "\"";
-                        Args += " IEX=123";   //IgnorarEmailXML
+                                Args += " IEX=1";   //IgnorarEmail principal
+                            }
+                        }
                     }
 
                     if (!string.IsNullOrEmpty(emp.PastaConfigUniDanfe))

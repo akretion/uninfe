@@ -260,6 +260,34 @@ namespace NFe.Certificado
             }
         }
 
+        public void CarregarPIN(int emp, string arqXML, Servicos servico)
+        {
+            X509Certificate2 x509Cert = new X509Certificate2(Empresas.Configuracoes[emp].X509Certificado);
+
+            if (Empresas.Configuracoes[emp].UsaCertificado && clsX509Certificate2Extension.IsA3(x509Cert))
+            {                
+                string tempFile = arqXML.Replace(".xml", "_.xml");
+                File.Copy(arqXML, tempFile);
+
+                switch (servico)
+                {
+                    case Servicos.ConsultaCadastroContribuinte:
+                        Assinar(tempFile, "ConsCad", "infCons", x509Cert, emp);
+                        break;
+
+                    case Servicos.NFeConsultaStatusServico:
+                        Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                File.Delete(tempFile);
+            }
+
+        }
+
         /// <summary>
         /// Verificar se o XML já tem assinatura
         /// </summary>
