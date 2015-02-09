@@ -112,14 +112,14 @@ namespace NFe.Service.NFSe
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
-                        ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                        ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.SIGCORP_SIGISS:
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
-                            Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                            oDadosEnvLoteRps.cMunicipio);
                         sigcorp.EmiteNF(NomeArquivoXML);
                         break;
 
@@ -127,12 +127,12 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio),
+                        oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         AssinaturaDigital ass = new AssinaturaDigital();
-                        ass.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                        ass.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         fiorilli.EmiteNF(NomeArquivoXML);
                         break;
@@ -140,12 +140,12 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SIMPLISS:
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio),
+                        oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         AssinaturaDigital sign = new AssinaturaDigital();
-                        sign.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                        sign.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         simpliss.EmiteNF(NomeArquivoXML);
                         break;
@@ -153,7 +153,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.CONAM:
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio),
+                        oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -163,7 +163,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.RLZ_INFORMATICA:
                         Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                        oDadosEnvLoteRps.cMunicipio);
 
                         rlz.EmiteNF(NomeArquivoXML);
                         break;
@@ -173,7 +173,7 @@ namespace NFe.Service.NFSe
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
-                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosEnvLoteRps.cMunicipio));
+                    ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this, "-env-loterps", "-ret-loterps", padraoNFSe, Servico);

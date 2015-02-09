@@ -639,17 +639,6 @@ combo.ValueMember = "Key";
         }
     }
 
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
-    public class SVC_AtendidoPor : Attribute
-    {
-        NFe.Components.TipoEmissao _valor;
-        public NFe.Components.TipoEmissao svc
-        {
-            get { return _valor; }
-            set { _valor = value; }
-        }
-    }
-
     /// <summary>
     /// Classe com metodos para serem utilizadas nos Enuns
     /// </summary>

@@ -112,14 +112,14 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SIGCORP_SIGISS:
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
-                            Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+                            oDadosPedCanNfse.cMunicipio);
                         sigcorp.CancelarNfse(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosPedCanNfse.cMunicipio),
+                        oDadosPedCanNfse.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -132,7 +132,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SIMPLISS:
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosPedCanNfse.cMunicipio),
+                        oDadosPedCanNfse.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -145,7 +145,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.CONAM:
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(oDadosPedCanNfse.cMunicipio),
+                        oDadosPedCanNfse.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -158,7 +158,7 @@ namespace NFe.Service.NFSe
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
-                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+                    ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);

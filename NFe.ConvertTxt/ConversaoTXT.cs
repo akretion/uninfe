@@ -2149,6 +2149,16 @@ namespace NFe.ConvertTxt
                 ///
                 /// NFC-e
                 /// 
+                case "YA":
+                    layout = "§YA|tPag¨|vPag¨|CNPJ¨|tBand¨|cAut¨";
+                    NFe.pag.Add(new pag());
+                    NFe.pag[NFe.pag.Count - 1].tPag = (TpcnFormaPagamento)this.LerInt32(TpcnResources.tPag, ObOp.Obrigatorio, 2, 2);
+                    NFe.pag[NFe.pag.Count - 1].vPag = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio, 15);
+                    NFe.pag[NFe.pag.Count - 1].CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
+                    NFe.pag[NFe.pag.Count - 1].tBand = (TpcnBandeiraCartao)this.LerInt32(TpcnResources.tBand, ObOp.Opcional, 2, 2);
+                    NFe.pag[NFe.pag.Count - 1].cAut = this.LerString(TpcnResources.cAut, ObOp.Opcional, 1, 20);
+                    break;
+
                 case "YA02":
                     layout = "§YA02|tPag¨";
                     NFe.pag.Add(new pag());
@@ -2160,15 +2170,15 @@ namespace NFe.ConvertTxt
                     break;
                 case "YA05":
                     layout = "§YA05|CNPJ¨";
-                    NFe.pag[NFe.pag.Count - 1].CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14);
+                    NFe.pag[NFe.pag.Count - 1].CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
                     break;
                 case "YA06":
                     layout = "§YA06|tBand¨";
-                    NFe.pag[NFe.pag.Count - 1].tBand = (TpcnBandeiraCartao)this.LerInt32(TpcnResources.tBand, ObOp.Obrigatorio, 2, 2);
+                    NFe.pag[NFe.pag.Count - 1].tBand = (TpcnBandeiraCartao)this.LerInt32(TpcnResources.tBand, ObOp.Opcional, 2, 2);
                     break;
                 case "YA07":
                     layout = "§YA07|cAut¨";
-                    NFe.pag[NFe.pag.Count - 1].cAut = this.LerString(TpcnResources.cAut, ObOp.Obrigatorio, 1, 20);
+                    NFe.pag[NFe.pag.Count - 1].cAut = this.LerString(TpcnResources.cAut, ObOp.Opcional, 1, 20);
                     break;
 
                 case "Z":
@@ -2212,9 +2222,9 @@ namespace NFe.ConvertTxt
 
                 case "ZA":
                 case "ZA01":    //Só UniNFe
-                    if (NFe.infNFe.Versao >= 3 || this.FSegmento.Equals("ZA01"))
+                    if (NFe.infNFe.Versao >= 3)
                     {
-                        layout = "§"+this.FSegmento+"|UFSaidaPais¨|xLocExporta¨|xLocDespacho¨|"; //ok
+                        layout = "§"+this.FSegmento+"|UFSaidaPais¨|xLocExporta¨|xLocDespacho¨"; //ok
                         ///
                         /// Grupo da TAG <exporta>
                         /// 
@@ -2243,8 +2253,10 @@ namespace NFe.ConvertTxt
                     NFe.compra.xCont = this.LerString(TpcnResources.xCont, ObOp.Opcional, 1, 60);
                     break;
 
+                case "ZC":
+
                 case "ZC01":
-                    layout = "§ZC01|safra¨|ref¨|qTotMes¨|qTotAnt¨|qTotGer¨|vFor¨|vTotDed¨|vLiqFor¨";
+                    layout = "§"+this.FSegmento + "|safra¨|ref¨|qTotMes¨|qTotAnt¨|qTotGer¨|vFor¨|vTotDed¨|vLiqFor¨";
                     NFe.cana.safra = this.LerString(TpcnResources.safra, ObOp.Obrigatorio, 4, 9);
                     NFe.cana.Ref = this.LerString(TpcnResources.Ref, ObOp.Obrigatorio, 7, 7);
                     NFe.cana.qTotMes = this.LerDouble(TpcnTipoCampo.tcDec10, TpcnResources.qTotMes, ObOp.Obrigatorio, 11);

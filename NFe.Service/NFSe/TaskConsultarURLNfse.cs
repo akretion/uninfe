@@ -43,7 +43,7 @@ namespace NFe.Service.NFSe
 
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();
-                ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedURLNfse.cMunicipio));
+                ad.Assinar(NomeArquivoXML, emp, oDadosPedURLNfse.cMunicipio);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.InvocarNFSe(wsProxy, pedURLNfse, NomeMetodoWS(Servico, oDadosPedURLNfse.cMunicipio), cabecMsg, this, "-ped-urlnfse", "-urlnfse", padraoNFSe, Servico);

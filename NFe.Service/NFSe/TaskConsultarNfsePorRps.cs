@@ -79,7 +79,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        ler.oDadosPedSitNfseRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -89,7 +89,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SIMPLISS:
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio),
+                        ler.oDadosPedSitNfseRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
                         Empresas.Configuracoes[emp].SenhaWS);
 
@@ -103,7 +103,7 @@ namespace NFe.Service.NFSe
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
-                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(ler.oDadosPedSitNfseRps.cMunicipio));
+                    ad.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio), cabecMsg, this, "-ped-sitnfserps", "-sitnfserps", padraoNFSe, Servico);

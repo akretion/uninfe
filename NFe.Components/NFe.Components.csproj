@@ -72,8 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\EmiteNFSeBase.cs" />
+    <Compile Include="Betha\Betha.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
+    <Compile Include="IPM\IPM.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_Informatica.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_InformaticaBase.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\h\Rlz_InformaticaH.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="CONAM\VarginhaMG\p\ConamP.cs" />
     <Compile Include="NFeStrConstants.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\p\Rlz_InformaticaP.cs" />
+    <Compile Include="SchemaXMLNFSe.cs" />
     <Compile Include="SimplISS\SimplISS.cs" />
     <Compile Include="SimplISS\SimplISSBase.cs" />
     <Compile Include="SimplISS\PiracicabaSP\h\SimplISSH.cs" />
