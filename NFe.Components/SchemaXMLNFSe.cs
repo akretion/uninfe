@@ -98,8 +98,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_nfse_envio_v03.xsd",
                 Descricao = "XML de Consulta de NFSe por Data",
-                TagAssinatura = "ConsultarNfseEnvio",
-                TagAtributoId = "NumeroNfse",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_nfse_envio_v03.xsd"
             });
             #endregion
@@ -111,8 +111,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_nfse_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
-                TagAssinatura = "ConsultarNfseRpsEnvio",
-                TagAtributoId = "Prestador",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_nfse_rps_envio_v03.xsd"
             });
             #endregion
@@ -124,8 +124,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
-                TagAssinatura = "ConsultarLoteRpsEnvio",
-                TagAtributoId = "Protocolo",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_lote_rps_envio_v03.xsd"
             });
             #endregion
@@ -138,7 +138,7 @@ namespace NFSe.Components
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_cancelar_nfse_envio_v03.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "CancelarNfseEnvio",
-                TagAtributoId = "Pedido",// "NumeroNfse",
+                TagAtributoId = "Pedido",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_cancelar_nfse_envio_v03.xsd"
             });
             #endregion
@@ -150,8 +150,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_situacao_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
-                TagAssinatura = "ConsultarSituacaoLoteRpsEnvio",
-                TagAtributoId = "Protocolo",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_situacao_lote_rps_envio_v03.xsd"
             });
             #endregion
@@ -172,7 +172,6 @@ namespace NFSe.Components
             #endregion
 
             #endregion
-
 
             #region Schemas padrão BETHA
 
@@ -956,16 +955,29 @@ namespace NFSe.Components
             });
             #endregion
 
-            #region XML de consulta URL NFSe
-            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSePNG", new InfSchema()
+            #region XML de consulta NFSe em PNG
+            SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSePNG", new InfSchema()
             {
-                Tag = "pedidoLoteNFSePNG",
+                Tag = "pedidoNFSePNG",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
-                Descricao = "XML de consulta URL NFe padrão GIF",
-                TagAssinatura = "pedidoLoteNFSePNG",
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de consulta da NFSe em PNG padrão GIF",
+                TagAssinatura = "pedidoNFSePNG",
                 TagAtributoId = "CNPJ",
-                TargetNameSpace = ""
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Inutilização da NFSe
+            SchemaXML.InfSchemas.Add("NFSE-GIF-solicitacaoInutilizacao", new InfSchema()
+            {
+                Tag = "solicitacaoInutilizacao",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-v1.xsd",
+                Descricao = "XML de Inutilização da NFSe com padrão GIF/Infisc.",
+                TagAssinatura = "solicitacaoInutilizacao",
+                TagAtributoId = "numerosInutilizados",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
             #endregion
 
@@ -2297,6 +2309,99 @@ namespace NFSe.Components
                 TagLoteAtributoId = "InfRps",
                 TagLoteAssinatura = "Rps",
                 TargetNameSpace = "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd"
+            });
+            #endregion
+
+            #endregion
+
+            #region E-GOVERNE
+
+            #region Consulta NFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta da NFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region Consulta NFSe por RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta da NFSe por RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
+            });
+            
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-EGOVERNE-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\EGOVERNE\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://isscuritiba.curitiba.pr.gov.br/iss/nfse.xsd"
             });
             #endregion
 

@@ -15,6 +15,7 @@ using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.Conam;
 using NFe.Components.RLZ_INFORMATICA;
+using NFe.Components.EGoverne;
 
 namespace NFe.Service.NFSe
 {
@@ -63,7 +64,10 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.GINFES:
-                        cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        if (oDadosEnvLoteRps.cMunicipio == 4125506) //São José dos Pinhais - PR  
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        else
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";                            
                         break;
 
                     case PadroesNFSe.BETHA:
@@ -109,22 +113,26 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
+                        #region SystemPro
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
 
                     case PadroesNFSe.SIGCORP_SIGISS:
+                        #region SigCorp
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio);
                         sigcorp.EmiteNF(NomeArquivoXML);
                         break;
-
+                        #endregion
 
                     case PadroesNFSe.FIORILLI:
+                        #region Fiorilli
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -136,8 +144,10 @@ namespace NFe.Service.NFSe
 
                         fiorilli.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
 
                     case PadroesNFSe.SIMPLISS:
+                        #region Simpliss
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -149,8 +159,10 @@ namespace NFe.Service.NFSe
 
                         simpliss.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
 
                     case PadroesNFSe.CONAM:
+                        #region Conam
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -159,14 +171,34 @@ namespace NFe.Service.NFSe
 
                         conam.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
 
                     case PadroesNFSe.RLZ_INFORMATICA:
+                        #region RLZ
                         Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio);
 
                         rlz.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
+
+                    case PadroesNFSe.EGOVERNE:
+                        #region E-Governe
+                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosEnvLoteRps.cMunicipio,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor,
+                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assEGovoverne = new AssinaturaDigital();
+                        assEGovoverne.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        egoverne.EmiteNF(NomeArquivoXML);
+                        break;
+                        #endregion
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

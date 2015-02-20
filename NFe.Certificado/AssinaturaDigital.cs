@@ -21,6 +21,9 @@ namespace NFe.Certificado
 
     public class AssinaturaDigital
     {
+        public bool AssinaturaValida { get; private set; }
+        public bool TesteCertificado { get; set; }
+
         /// <summary>
         /// O método assina digitalmente o arquivo XML passado por parâmetro e 
         /// grava o XML assinado com o mesmo nome, sobreponto o XML informado por parâmetro.
@@ -193,12 +196,13 @@ namespace NFe.Certificado
                  * 29/07/2013
                  */
 
+                AssinaturaValida = false;
 #if DEBUG
                 Debug.WriteLine("O erro CryptographicException foi lançado");
 #endif
                 x509Cert = Empresas.ResetCertificado(empresa);
-
-                throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                if (!TesteCertificado)
+                    throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
                 #endregion
             }
             catch
@@ -265,7 +269,7 @@ namespace NFe.Certificado
             X509Certificate2 x509Cert = new X509Certificate2(Empresas.Configuracoes[emp].X509Certificado);
 
             if (Empresas.Configuracoes[emp].UsaCertificado && clsX509Certificate2Extension.IsA3(x509Cert))
-            {                
+            {
                 string tempFile = arqXML.Replace(".xml", "_.xml");
                 File.Copy(arqXML, tempFile);
 
@@ -286,6 +290,33 @@ namespace NFe.Certificado
                 File.Delete(tempFile);
             }
 
+        }
+
+        public bool TestarProviderCertificado(string tempFile, 
+            string tagAssinatura, 
+            string tagAtributo, 
+            X509Certificate2 certificado, 
+            int codEmp, 
+            string pin,
+            string provider,
+            string type)
+        {
+            string _pin = Empresas.Configuracoes[codEmp].CertificadoPIN;
+            string _provider = Empresas.Configuracoes[codEmp].ProviderCertificado;
+            string _type = Empresas.Configuracoes[codEmp].ProviderTypeCertificado;
+
+            Empresas.Configuracoes[codEmp].CertificadoPIN = pin;
+            Empresas.Configuracoes[codEmp].ProviderTypeCertificado = type;
+            Empresas.Configuracoes[codEmp].ProviderCertificado = provider;
+
+            AssinaturaValida = true;
+            Assinar(tempFile, tagAssinatura, tagAtributo, certificado, codEmp);
+            
+            Empresas.Configuracoes[codEmp].CertificadoPIN = _pin;
+            Empresas.Configuracoes[codEmp].ProviderTypeCertificado = _type;
+            Empresas.Configuracoes[codEmp].ProviderCertificado = _provider;
+
+            return AssinaturaValida;
         }
 
         /// <summary>

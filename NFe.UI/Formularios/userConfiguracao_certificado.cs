@@ -33,10 +33,16 @@ namespace NFe.UI.Formularios
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
+            System.Windows.Forms.ToolTip tltBuscarProvider = new System.Windows.Forms.ToolTip();
+            tltBuscarProvider.SetToolTip(btnBuscarProvider, "Pesquisar provider válido automaticamente");
+
+            System.Windows.Forms.ToolTip tltValidarProvider = new System.Windows.Forms.ToolTip();
+            tltBuscarProvider.SetToolTip(btnValidarProvider, "Validar provider selecionado");
+
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 160;
             ckbTemCertificadoInstalado.Checked = empresa.UsaCertificado;
-			ckbTemCertificadoInstalado.Enabled = (empresa.Servico == TipoAplicativo.Nfse);
+            ckbTemCertificadoInstalado.Enabled = (empresa.Servico == TipoAplicativo.Nfse);
 
             oMeuCert = null;
 
@@ -85,15 +91,12 @@ namespace NFe.UI.Formularios
             foreach (CertProviders certinfo in providers)
             {
                 cboProviders.Items.Add(certinfo.NameKey);
-
-                //define o default se houver este, pois a maioria vai ser Certisign
-                if (String.IsNullOrEmpty(empresa.ProviderCertificado) && certinfo.NameKey.Equals("SafeSign Standard Cryptographic Service Provider"))
-                    cboProviders.SelectedItem = certinfo.NameKey;
-
             }
 
             if (!String.IsNullOrEmpty(empresa.ProviderCertificado))
                 cboProviders.SelectedItem = empresa.ProviderCertificado;
+            else
+                IdentificarProviderValido();
 
         }
 
@@ -108,13 +111,18 @@ namespace NFe.UI.Formularios
             empresa.UsaCertificado = ckbTemCertificadoInstalado.Checked;
             if (ckbTemCertificadoInstalado.Checked)
             {
-                if (cboProviders.SelectedItem != null)
+                if (!String.IsNullOrEmpty(empresa.CertificadoPIN))
                 {
                     CertificadoDigital oCertificado = new CertificadoDigital();
                     CertProviders providerInfo = new CertProviders();
                     providerInfo = oCertificado.GetInfoProvider(cboProviders.SelectedItem.ToString());
                     empresa.ProviderCertificado = providerInfo.NameKey;
                     empresa.ProviderTypeCertificado = providerInfo.Type;
+
+                    ValidarCertificadoA3(true);
+                }
+                if (cboProviders.SelectedItem != null)
+                {
                 }
             }
         }
@@ -154,6 +162,7 @@ namespace NFe.UI.Formularios
                     this.empresa.CertificadoDigitalThumbPrint = oMeuCert.Thumbprint;
                     this.empresa.X509Certificado = oMeuCert;
                     DemonstraDadosCertificado();
+                    IdentificarProviderValido();
                     if (changeEvent != null)
                         changeEvent(sender, e);
                 }
@@ -177,6 +186,39 @@ namespace NFe.UI.Formularios
                     txtArquivoCertificado.Text = this.openFileDialog1.FileName;
                 }
             }
+        }
+
+        private void IdentificarProviderValido()
+        {
+            Wait.Show("Procurando provider válido...");
+            CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
+                                                                                 empresa.PastaXmlEnvio,
+                                                                                 Empresas.FindEmpresaByThread(),
+                                                                                 txtPinCertificado.Text);
+            if (certificadoProviders.Run())
+            {
+                Wait.Close();
+                if (certificadoProviders.ProviderIdentificado)
+                {
+                    DialogResult result = MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                          "Foi identificado um provider para o Certificado: " + certificadoProviders.ProviderValido.NameKey + "\n" +
+                                                          "Deseja defini-lo com provider para este certificado?", "Identificação automatica de Provider",
+                                                          MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        cboProviders.SelectedItem = certificadoProviders.ProviderValido.NameKey;
+                    }
+                }
+                else
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                          "Não foi identificado um provider para o funcionamento adequado do Certificado selecionado \n" +
+                                                          "Tente reiniciar o Certificado e a Senha do PIN e tente novamente.", "Identificação automatica de Provider",
+                                                          MessageBoxButtons.OK);
+                }
+            }
+            else
+                Wait.Close();
         }
 
         #region DemonstraDadosCertificado()
@@ -237,12 +279,16 @@ namespace NFe.UI.Formularios
             lblSenhaCertificado.Visible =
                 txtSenhaCertificado.Visible =
                 lblArquivoCertificado.Visible =
-                txtArquivoCertificado.Visible = !ckbCertificadoInstalado.Checked;
+                txtArquivoCertificado.Visible =
+                btnBuscarProvider.Visible =
+                btnValidarProvider.Visible = !ckbCertificadoInstalado.Checked;
 
             lblCerificadoInstalado.Visible =
                 textBox_dadoscertificado.Visible =
                 lblPinCertificado.Visible =
-                txtPinCertificado.Visible = ckbCertificadoInstalado.Checked;
+                txtPinCertificado.Visible =
+                btnBuscarProvider.Visible =
+                btnValidarProvider.Visible = ckbCertificadoInstalado.Checked;
 
             lblPinCertificado.Visible =
                 txtPinCertificado.Visible = true;
@@ -296,8 +342,10 @@ namespace NFe.UI.Formularios
                     cboProviders.Enabled = false;
                 else
                     cboProviders.Enabled = true;
-                
+
                 txtPinCertificado.Enabled = true;
+
+                //IdentificarProviderValido();
             }
             else
             {
@@ -324,6 +372,53 @@ namespace NFe.UI.Formularios
         {
             if (changeEvent != null)
                 changeEvent(sender, e);
+        }
+
+        private void btnBuscarProvider_Click_1(object sender, EventArgs e)
+        {
+            IdentificarProviderValido();
+        }
+
+        private void btnValidarProvider_Click(object sender, EventArgs e)
+        {
+            ValidarCertificadoA3(false);
+        }
+
+        private void ValidarCertificadoA3(bool salvando)
+        {
+            Wait.Show("Validando provider...");
+
+            CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
+                                                                                 empresa.PastaXmlEnvio,
+                                                                                 Empresas.FindEmpresaByThread(),
+                                                                                 empresa.CertificadoPIN);
+            CertProviders xCertProviders = new CertProviders();
+            xCertProviders.NameKey = cboProviders.SelectedItem.ToString();
+            xCertProviders.Type = certificadoProviders.GetProviderType(xCertProviders.NameKey);
+
+            if (certificadoProviders.TestarProvider(xCertProviders))
+            {
+                Wait.Close();
+                if (!salvando)
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                          "Provider Válido, XML assinado com sucesso.",
+                                                          "Validação do Provider - Resultado:",
+                                                          MessageBoxButtons.OK);
+            }
+
+            else
+            {
+                Wait.Close();
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                      "Provider Inválido, não foi possível assinar um XML com este provider.",
+                                      "Validação do Provider - Resultado:",
+                                      MessageBoxButtons.OK);
+
+                if (salvando)
+                {
+                    throw new Exception("Não foi possível salvar a configuração.");
+                }
+            }            
         }
     }
 }

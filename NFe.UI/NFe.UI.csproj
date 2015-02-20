@@ -59,6 +59,12 @@
     <Compile Include="Formularios\FormSenha.Designer.cs">
       <DependentUpon>FormSenha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FormSpinner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormSpinner.Designer.cs">
+      <DependentUpon>FormSpinner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FormUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormSenha.resx">
       <DependentUpon>FormSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormSpinner.resx">
+      <DependentUpon>FormSpinner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FormUpdate.resx">
       <DependentUpon>FormUpdate.cs</DependentUpon>
@@ -543,6 +552,7 @@
     <None Include="Resources\info1.png" />
     <Content Include="Resources\log.png" />
     <None Include="Resources\log1.png" />
+    <None Include="Resources\lupa_25x25.jpg" />
     <Content Include="Resources\munucipios.png" />
     <None Include="Resources\munucipios1.png" />
     <Content Include="Resources\sefaz.png" />

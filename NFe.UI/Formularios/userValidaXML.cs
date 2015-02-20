@@ -77,7 +77,9 @@ namespace NFe.UI
                                 ";*" + Propriedade.ExtEnvio.PedLoteRps +
                                 ";*" + Propriedade.ExtEnvio.PedSitLoteRps +
                                 ";*" + Propriedade.ExtEnvio.PedSitNfse +
-                                ";*" + Propriedade.ExtEnvio.PedSitNfseRps;
+                                ";*" + Propriedade.ExtEnvio.PedSitNfseRps +
+                                ";*" + Propriedade.ExtEnvio.PedInuNfse +
+                                ";*" + Propriedade.ExtEnvio.PedNFSePNG; 
                         }
                         else
                         {

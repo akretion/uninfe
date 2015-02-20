@@ -806,6 +806,8 @@ namespace NFe.Components
         /// <param name="ex"></param>
         public static void GravarErroMover(string file, string resultFolder, string ex)
         {
+            if (Directory.Exists(Path.GetDirectoryName(file)))
+            {
             FileInfo infFile = new FileInfo(file);
             string extFile = infFile.Name.Replace(".xml", "");
             string extError = extFile + ".err";
@@ -817,6 +819,7 @@ namespace NFe.Components
             write.Flush();
             write.Close();
             write.Dispose();
+            }
         }
     }
 }

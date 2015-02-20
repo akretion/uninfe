@@ -14,6 +14,7 @@ using NFe.Components.SigCorp;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.Conam;
+using NFe.Components.EGoverne;
 
 namespace NFe.Service.NFSe
 {
@@ -105,7 +106,8 @@ namespace NFe.Service.NFSe
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
-                        ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+                        ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
                         syspro.CancelarNfse(NomeArquivoXML);
                         break;
 
@@ -124,7 +126,7 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         AssinaturaDigital ass = new AssinaturaDigital();
-                        ass.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+                        ass.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                         fiorilli.CancelarNfse(NomeArquivoXML);
                         break;
@@ -137,7 +139,7 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         AssinaturaDigital sing = new AssinaturaDigital();
-                        sing.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedCanNfse.cMunicipio));
+                        sing.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                         simpliss.CancelarNfse(NomeArquivoXML);
                         break;
@@ -150,6 +152,23 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].SenhaWS);
 
                         conam.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.EGOVERNE:
+                        #region E-Governe
+                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedCanNfse.cMunicipio,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor,
+                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assegov = new AssinaturaDigital();
+                        assegov.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        egoverne.CancelarNfse(NomeArquivoXML);
+                        #endregion
                         break;
 
                 }

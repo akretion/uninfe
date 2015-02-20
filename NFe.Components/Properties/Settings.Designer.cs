@@ -232,5 +232,27 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_rlz_ceiss_santafedosul_p_Webservice_Prefeitura"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://pilotoisscuritiba.curitiba.pr.gov.br/nfse_ws/nfsews.asmx")]
+        public string NFe_Components_br_gov_egoverne_isscuritiba_curitiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
+            get {
+                return ((string)(this["NFe_Components_br_gov_egoverne_isscuritiba_curitiba_h_WS_x0020___x0020_NFS_e_x002" +
+                    "0_V1_0_0_1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://isscuritiba.curitiba.pr.gov.br/Iss.NfseWebService/nfsews.asmx")]
+        public string NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
+            get {
+                return ((string)(this["NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x002" +
+                    "0_V1_0_0_1"]));
+            }
+        }
     }
 }

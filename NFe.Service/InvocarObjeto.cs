@@ -271,7 +271,7 @@ namespace NFe.Service
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
             if (padraoNFSe != PadroesNFSe.BETHA)
-                oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
+                oWSProxy.SetProp(oServicoWS, "Timeout", 120000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
             if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013

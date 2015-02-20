@@ -208,6 +208,19 @@ namespace NFe.Components
         /// </summary>
         [Description("Enviar Lote RPS NFS-e Sincrono")]
         NFSeRecepcionarLoteRpsSincrono,
+        /// <summary>
+        /// Consulta da imagem de uma NFS-e em formato PNG
+        /// Criado inicialmente para ser utilizado para o padrão INFISC para a Prefeitura de Caxias do Sul - RS
+        /// </summary>
+        [Description("Consulta da imagem de uma NFS-e em formato PNG")]
+        NFSeConsultarNFSePNG,
+        /// <summary>
+        /// Consulta da imagem de uma NFS-e em formato 
+        /// Criado inicialmente para ser utilizado para o padrão INFISC para a Prefeitura de Caxias do Sul - RS
+        /// </summary>
+        [Description("Inutilização de uma NFS-e")]
+        NFSeInutilizarNFSe,
+
         #endregion
 
         #region MDFe
@@ -522,10 +535,16 @@ namespace NFe.Components
         CONAM,
         /// <summary>
         /// Padrão Rlz Informatica
-        /// Prefeitura de Santa Fé do Sul
+        /// Prefeitura de Santa Fé do Sul - PR
         /// </summary>
         [Description("Rlz Informática")]
-        RLZ_INFORMATICA
+        RLZ_INFORMATICA,
+        /// <summary>
+        /// Padrão E-Governe
+        /// Prefeitura de Curitiba - PR
+        /// </summary>
+        [Description("E-Governe")]
+        EGOVERNE
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

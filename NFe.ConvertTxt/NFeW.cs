@@ -583,7 +583,7 @@ namespace NFe.ConvertTxt
 
                     if (!string.IsNullOrEmpty(detx.exportInd.nRE))
                     {
-                        XmlElement nodeDI2 = doc.CreateElement("ExportInd");
+                        XmlElement nodeDI2 = doc.CreateElement("exportInd");
                         nodeDI.AppendChild(nodeDI2);
                         nodeCurrent = nodeDI2;
 
@@ -2224,7 +2224,7 @@ namespace NFe.ConvertTxt
             FBuffer = FBuffer.Replace("\"", "&quot;");
             FBuffer = FBuffer.Replace("\t", " ");
             FBuffer = FBuffer.Replace("\n", ";");
-            FBuffer = FBuffer.Replace("\r", "");
+            FBuffer = FBuffer.Replace("\r", "").Replace("'", "&#39;");
 
             String normalizedString = FBuffer.Normalize(NormalizationForm.FormD);
             StringBuilder stringBuilder = new StringBuilder();

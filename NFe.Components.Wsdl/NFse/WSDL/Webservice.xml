@@ -551,11 +551,11 @@
     </LocalHomologacao>
     <LocalProducao>
       <RecepcionarLoteRps>wsdl\producao\PVarginhaMG-CONAN.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\producao\PVarginhaMG.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\producao\PVarginhaMG.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\producao\PVarginhaMG.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\producao\PVarginhaMG.wsdl</ConsultarLoteRps>
-      <CancelarNfse>wsdl\producao\PVarginhaMG.wsdl</CancelarNfse>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PVarginhaMG-CONAN.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PVarginhaMG-CONAN.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PVarginhaMG-CONAN.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PVarginhaMG-CONAN.wsdl</ConsultarLoteRps>
+      <CancelarNfse>wsdl\producao\PVarginhaMG-CONAN.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <Estado ID="3506359" Nome="Bertioga - SP" UF="SP" Padrao="GINFES">
@@ -2118,7 +2118,9 @@
       <ConsultarNfse>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfse>
       <ConsultarLoteRps>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
+      <ConsultarNFSePNG>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNFSePNG>
       <CancelarNfse>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</CancelarNfse>
+      <InutilizarNFSe>WSDL\Homologacao\HCaxiasdoSulRS-GIFServicos.wsdl</InutilizarNFSe>
     </LocalHomologacao>
     <LocalProducao>
       <RecepcionarLoteRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</RecepcionarLoteRps>
@@ -2127,7 +2129,9 @@
       <ConsultarNfse>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNfse>
       <ConsultarLoteRps>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
+      <ConsultarNFSePNG>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</ConsultarNFSePNG>
       <CancelarNfse>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</CancelarNfse>
+      <InutilizarNFSe>WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl</InutilizarNFSe>
     </LocalProducao>
   </Estado>
   <Estado ID="4216602" Nome="São José - SC" UF="SC" Padrao="PRONIN">
@@ -2502,6 +2506,26 @@
       <ConsultarLoteRps>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
       <CancelarNfse>wsdl\producao\PSantaFeDoSul-RLZ_Informatica.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4106902" Nome="Curitiba - PR" UF="PR" Padrao="EGOVERNE">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HCuritibaPR-EGoverne.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PCuritibaPR-EGoverne.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PCuritibaPR-EGoverne.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PCuritibaPR-EGoverne.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PCuritibaPR-EGoverne.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PCuritibaPR-EGoverne.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PCuritibaPR-EGoverne.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
 </Webservice>

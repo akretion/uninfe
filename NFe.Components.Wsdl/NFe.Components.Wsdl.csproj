@@ -2282,6 +2282,16 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantaFeDoSul-RLZ_Informatica.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EGOVERNE\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EGOVERNE\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCuritibaPR-EGoverne.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCuritibaPR-EGoverne.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

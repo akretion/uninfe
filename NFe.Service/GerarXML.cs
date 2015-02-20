@@ -1608,7 +1608,7 @@ namespace NFe.Service
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procNFe"))
                                     {
-                                        XmlNodeList envres = docres.GetElementsByTagName("procNFe");
+                                        XmlNodeList envres = docres.GetElementsByTagName("nfeProc");
                                         XmlElement ret1 = (XmlElement)envres.Item(0);
                                         chNFe = Functions.LerTag(ret1, NFe.Components.TpcnResources.chNFe.ToString(), false);
                                         ConteudoRetorno += "procNFe;" + NSU + ";" + chNFe + ";";

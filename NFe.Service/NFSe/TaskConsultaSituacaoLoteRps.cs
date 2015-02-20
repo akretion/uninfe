@@ -11,6 +11,7 @@ using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
+using NFe.Components.EGoverne;
 
 namespace NFe.Service.NFSe
 {
@@ -55,7 +56,10 @@ namespace NFe.Service.NFSe
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
-                        cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        if (oDadosPedSitLoteRps.cMunicipio == 4125506) //São José dos Pinhais - PR  
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        else
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
                     case PadroesNFSe.BETHA:
@@ -93,8 +97,25 @@ namespace NFe.Service.NFSe
                         simpliss.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.EGOVERNE:
+                        #region E-Governe
+                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedSitLoteRps.cMunicipio,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor,
+                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assegov = new AssinaturaDigital();
+                        assegov.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
+
+                        egoverne.ConsultarSituacaoLoteRps(NomeArquivoXML);
+                        break;
+                        #endregion
+
                 }
-                if (padraoNFSe != PadroesNFSe.IPM && 
+                if (padraoNFSe != PadroesNFSe.IPM &&
                     padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     //Assinar o XML

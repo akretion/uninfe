@@ -11,6 +11,7 @@ using NFe.Certificado;
 using NFSe.Components;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
+using NFe.Components.EGoverne;
 
 namespace NFe.Service.NFSe
 {
@@ -31,19 +32,22 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(ler.oDadosPedSitNfseRps.cMunicipio);
-                WebServiceProxy wsProxy = null; 
+                WebServiceProxy wsProxy = null;
                 object pedLoteRps = null;
                 if (padraoNFSe != PadroesNFSe.SIMPLISS)
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
                     pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    
+
                 }
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
-                        cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        if (ler.oDadosPedSitNfseRps.cMunicipio == 4125506) //São José dos Pinhais - PR  
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        else
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
                     case PadroesNFSe.BETHA:
@@ -95,6 +99,24 @@ namespace NFe.Service.NFSe
 
                         simpliss.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.EGOVERNE:
+                        #region E-Governe
+                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        ler.oDadosPedSitNfseRps.cMunicipio,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor,
+                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assegov = new AssinaturaDigital();
+                        assegov.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
+                        egoverne.ConsultarNfsePorRps(NomeArquivoXML);
+                        #endregion
+                        break;
+
                 }
 
                 if (padraoNFSe != PadroesNFSe.IPM &&

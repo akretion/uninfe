@@ -95,6 +95,8 @@
     <Compile Include="NFeEmProcessamento.cs" />
     <Compile Include="NFe\TaskRegistroDeSaida.cs" />
     <Compile Include="NFe\TaskRegistroDeSaidaCancelamento.cs" />
+    <Compile Include="NFSe\TaskInutilizarNfse.cs" />
+    <Compile Include="NFSe\TaskConsultarNfsePNG.cs" />
     <Compile Include="NFSe\TaskConsultarURLNfseSerie.cs" />
     <Compile Include="NFSe\TaskConsultarURLNfse.cs" />
     <Compile Include="NFSe\TaskCancelarNfse.cs" />

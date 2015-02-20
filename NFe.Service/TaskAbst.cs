@@ -548,6 +548,13 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region E-GOVERNE
+                case PadroesNFSe.EGOVERNE:
+                    retorna = "WSNFSeV1001";
+                    break;
+                #endregion
+
             }
 
             return retorna;
@@ -1036,8 +1043,11 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "enviarLoteNotas";
                             break;
-                        case Servicos.NFSeConsultarURL:
+                        case Servicos.NFSeConsultarNFSePNG:
                             retorna = "obterNotasEmPNG";
+                            break;
+                        case Servicos.NFSeInutilizarNFSe:
+                            retorna = "inutilizacao";
                             break;
                     }
                     break;
@@ -1984,6 +1994,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.EGOVERNE:
                 case PadroesNFSe.IPM:
                 case PadroesNFSe.SYSTEMPRO:
                 case PadroesNFSe.SIGCORP_SIGISS:

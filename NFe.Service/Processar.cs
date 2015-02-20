@@ -71,6 +71,15 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskNFSeRecepcionarLoteRps());
                             break;
+
+                        case Servicos.NFSeConsultarNFSePNG:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInutilizarNfse());
+                            break;
+
+                        case Servicos.NFSeInutilizarNFSe:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInutilizarNfse());
+                            break;
+                                
                         #endregion
 
                         #region NFe
@@ -643,6 +652,14 @@ namespace NFe.Service
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedURLNfseSerie) >= 0)
                                     {
                                         tipoServico = Servicos.NFSeConsultarURLSerie;
+                                    }
+                                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedNFSePNG) >= 0)
+                                    {
+                                        tipoServico = Servicos.NFSeConsultarNFSePNG;
+                                    }
+                                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedInuNfse) >= 0)
+                                    {
+                                        tipoServico = Servicos.NFSeInutilizarNFSe;
                                     }
                                     #endregion
 

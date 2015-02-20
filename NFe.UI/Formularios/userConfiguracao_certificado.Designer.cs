@@ -43,6 +43,8 @@
             this.ckbTemCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
             this.lblProvider = new MetroFramework.Controls.MetroLabel();
             this.cboProviders = new MetroFramework.Controls.MetroComboBox();
+            this.btnBuscarProvider = new MetroFramework.Controls.MetroButton();
+            this.btnValidarProvider = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             this.txtPinCertificado.PasswordChar = '#';
             this.txtPinCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtPinCertificado.SelectedText = "";
-            this.txtPinCertificado.Size = new System.Drawing.Size(623, 22);
+            this.txtPinCertificado.Size = new System.Drawing.Size(605, 22);
             this.txtPinCertificado.TabIndex = 9;
             this.txtPinCertificado.Text = "Styled Textbox";
             this.txtPinCertificado.UseSelectable = true;
@@ -88,7 +90,7 @@
             this.txtSenhaCertificado.PasswordChar = '#';
             this.txtSenhaCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSenhaCertificado.SelectedText = "";
-            this.txtSenhaCertificado.Size = new System.Drawing.Size(623, 22);
+            this.txtSenhaCertificado.Size = new System.Drawing.Size(605, 22);
             this.txtSenhaCertificado.TabIndex = 7;
             this.txtSenhaCertificado.Text = "Styled Textbox";
             this.txtSenhaCertificado.UseSelectable = true;
@@ -119,7 +121,7 @@
             this.txtArquivoCertificado.PasswordChar = '\0';
             this.txtArquivoCertificado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtArquivoCertificado.SelectedText = "";
-            this.txtArquivoCertificado.Size = new System.Drawing.Size(623, 22);
+            this.txtArquivoCertificado.Size = new System.Drawing.Size(605, 22);
             this.txtArquivoCertificado.TabIndex = 5;
             this.txtArquivoCertificado.Text = "Styled Textbox";
             this.txtArquivoCertificado.UseSelectable = true;
@@ -151,7 +153,7 @@
             this.textBox_dadoscertificado.ReadOnly = true;
             this.textBox_dadoscertificado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_dadoscertificado.SelectedText = "";
-            this.textBox_dadoscertificado.Size = new System.Drawing.Size(623, 135);
+            this.textBox_dadoscertificado.Size = new System.Drawing.Size(605, 135);
             this.textBox_dadoscertificado.TabIndex = 3;
             this.textBox_dadoscertificado.Text = "Styled Textbox";
             this.textBox_dadoscertificado.UseSelectable = true;
@@ -185,7 +187,7 @@
             this.button_selecionar_certificado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_selecionar_certificado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_selecionar_certificado.Image = global::NFe.UI.Properties.Resources.identity1;
-            this.button_selecionar_certificado.Location = new System.Drawing.Point(632, 43);
+            this.button_selecionar_certificado.Location = new System.Drawing.Point(614, 43);
             this.button_selecionar_certificado.Name = "button_selecionar_certificado";
             this.button_selecionar_certificado.Size = new System.Drawing.Size(55, 63);
             this.button_selecionar_certificado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -232,14 +234,38 @@
             this.cboProviders.ItemHeight = 19;
             this.cboProviders.Location = new System.Drawing.Point(3, 333);
             this.cboProviders.Name = "cboProviders";
-            this.cboProviders.Size = new System.Drawing.Size(623, 25);
+            this.cboProviders.Size = new System.Drawing.Size(605, 25);
             this.cboProviders.TabIndex = 60;
             this.cboProviders.UseSelectable = true;
             this.cboProviders.TextChanged += new System.EventHandler(this.cboProviders_TextChanged);
             // 
+            // btnBuscarProvider
+            // 
+            this.btnBuscarProvider.BackgroundImage = global::NFe.UI.Properties.Resources.lupa_25x25;
+            this.btnBuscarProvider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnBuscarProvider.Location = new System.Drawing.Point(647, 289);
+            this.btnBuscarProvider.Name = "btnBuscarProvider";
+            this.btnBuscarProvider.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscarProvider.TabIndex = 61;
+            this.btnBuscarProvider.UseSelectable = true;
+            this.btnBuscarProvider.Click += new System.EventHandler(this.btnBuscarProvider_Click_1);
+            // 
+            // btnValidarProvider
+            // 
+            this.btnValidarProvider.BackgroundImage = global::NFe.UI.Properties.Resources.e10b_Accept_48;
+            this.btnValidarProvider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnValidarProvider.Location = new System.Drawing.Point(678, 289);
+            this.btnValidarProvider.Name = "btnValidarProvider";
+            this.btnValidarProvider.Size = new System.Drawing.Size(25, 25);
+            this.btnValidarProvider.TabIndex = 62;
+            this.btnValidarProvider.UseSelectable = true;
+            this.btnValidarProvider.Click += new System.EventHandler(this.btnValidarProvider_Click);
+            // 
             // userConfiguracao_certificado
             // 
             this.AutoScroll = true;
+            this.Controls.Add(this.btnValidarProvider);
+            this.Controls.Add(this.btnBuscarProvider);
             this.Controls.Add(this.ckbTemCertificadoInstalado);
             this.Controls.Add(this.lblProvider);
             this.Controls.Add(this.txtPinCertificado);
@@ -278,5 +304,7 @@
         private MetroFramework.Controls.MetroCheckBox ckbTemCertificadoInstalado;
         private MetroFramework.Controls.MetroLabel lblProvider;
         private MetroFramework.Controls.MetroComboBox cboProviders;
+        private MetroFramework.Controls.MetroButton btnBuscarProvider;
+        private MetroFramework.Controls.MetroButton btnValidarProvider;
     }
 }

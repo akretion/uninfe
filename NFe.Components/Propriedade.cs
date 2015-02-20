@@ -381,6 +381,14 @@ namespace NFe.Components
             /// -ped-urlnfseserie.xml x -urlnfseserie.xml
             /// </summary>
             public const string PedURLNfseSerie = "-ped-urlnfseserie.xml";
+            /// <summary>
+            /// -ped-nfsepng.xml x -nfsepng.xml
+            /// </summary>
+            public const string PedNFSePNG = "-ped-nfsepng.xml";
+            /// <summary>
+            /// -ped-inunfse.xml x -inunfse.xml
+            /// </summary>
+            public const string PedInuNfse = "-ped-inunfse.xml";
             #endregion
 
             #region Extensões MDF-e
@@ -741,6 +749,23 @@ namespace NFe.Components
             /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
             /// </summary>
             public const string Urlnfse_ERR = "-urlnfse.err";
+            /// <summary>
+            /// -ped-nfsepng.xml x -nfsepng.xml
+            /// </summary>
+            public const string NFSePNG = "-nfsepng.xml";
+            /// <summary>
+            /// -ped-nfsepng.xml x -nfsepng.xml x nfsepng.err
+            /// </summary>
+            public const string NFSePNG_ERR = "-nfsepng.err";
+            /// <summary>
+            /// -ped-inunfse.xml x -inunfse.xml
+            /// </summary>
+            public const string InuNfse = "-inunfse.xml";
+            /// <summary>
+            /// -ped-inunfse.xml x -inunfse.xml x -inunfse.err
+            /// </summary>
+            public const string InuNfse_ERR = "-inunfse.err";
+
             #endregion
 
             #region Extensões usadas para retorno da pesquisa de se um serviço exista para um determinado estado (Producao/Homologacao)

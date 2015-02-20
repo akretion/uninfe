@@ -738,7 +738,8 @@ namespace NFe.Settings
                         //Definir a URI para conexão com o Webservice
                         string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
 
-                        wsProxy = new WebServiceProxy(Url,
+                        wsProxy = new WebServiceProxy(cUF,
+                                                      Url,
                                                       Empresas.Configuracoes[emp].X509Certificado,
                                                       padraoNFSe,
                                                       (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
@@ -952,6 +953,13 @@ namespace NFe.Settings
                         case Servicos.NFSeConsultarURLSerie:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarURLNfse : list.LocalProducao.ConsultarURLNfse);
                             break;
+                        case Servicos.NFSeConsultarNFSePNG:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNFSePNG : list.LocalProducao.ConsultarNFSePNG);
+                            break;
+                        case Servicos.NFSeInutilizarNFSe:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.InutilizarNFSe : list.LocalProducao.InutilizarNFSe);
+                            break;
+
                         #endregion
                     }
                     if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPECeDPEC)

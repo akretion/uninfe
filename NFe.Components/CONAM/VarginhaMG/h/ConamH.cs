@@ -83,9 +83,9 @@ namespace NFe.Components.Conam.VarginhaMG.h
 
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
-            XmlNodeList nodes = doc.GetElementsByTagName("nfe:" + result.GetType().Name);
+            XmlNodeList nodes = doc.GetElementsByTagName(result.GetType().Name);
             object rps = result;
-            string tagName = "nfe:" + rps.GetType().Name;
+            string tagName = rps.GetType().Name;
 
             XmlNode node = nodes[0];
             ReadXML(node, rps, tagName);
@@ -143,12 +143,12 @@ namespace NFe.Components.Conam.VarginhaMG.h
                             null
                         );
 
-                        if (n.Name.Equals("nfe:Reg20"))
+                        if (n.Name.Equals("Reg20"))
                         {
                             instance = new List<NFe.Components.br.com.etransparencia.nfehomologacao.h.Sdt_ProcessarpsInSDTRPSReg20Item>();
                         }
 
-                        if (n.Name.Equals("nfe:Reg30"))
+                        if (n.Name.Equals("Reg30"))
                         {
                             instance = new List<NFe.Components.br.com.etransparencia.nfehomologacao.h.Sdt_ProcessarpsInSDTRPSReg20ItemReg30Item>();
                         }
@@ -209,19 +209,19 @@ namespace NFe.Components.Conam.VarginhaMG.h
                     nameObject = "Não existe";
                     break;
 
-                case "nfe:Reg20":
+                case "Reg20":
                     nameObject = parentTag + tag.Replace("nfe:", "") + "Item";
                     break;
 
-                case "nfe:Reg30":
+                case "Reg30":
                     nameObject = parentTag + tag.Replace("nfe:", "") + "Item";
                     break;
 
-                case "nfe:Reg20Item":
+                case "Reg20Item":
                     nameObject = "Sdt_ProcessarpsInSDTRPSReg20Item";
                     break;
 
-                case "nfe:Reg30Item":
+                case "Reg30Item":
                     nameObject = "Sdt_ProcessarpsInSDTRPSReg20ItemReg30Item";
                     break;
 

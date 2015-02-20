@@ -129,6 +129,11 @@ namespace NFe.Components
                         }
                     #endregion
 
+                    #region E-GOVERNE
+                    case PadroesNFSe.EGOVERNE:
+                        return "WSNFSeV1001";
+                    #endregion
+
                     default:
                         return _NomeClasseWS;
                 }
@@ -145,7 +150,7 @@ namespace NFe.Components
         #endregion
 
         #region Construtores
-        public WebServiceProxy(string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico)
+        public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico)
         {
             this.ArquivoWSDL = arquivoWSDL;
             this.PadraoNFSe = padraoNFSe;
@@ -158,8 +163,16 @@ namespace NFe.Components
             //Confirmar a solicitação SSL automaticamente
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
 
-            //Obter a descrção do serviço (WSDL)
-            this.DescricaoServico(arquivoWSDL);
+            //Problema identificado com a Prefeitura de Porto Alegre - RS  Renan - 09/02/2015
+            //Esta propriedade "Expect100Continue" por default é definida como "true" ou seja, o cliente esperará obter uma resposta 100-Continue do servidor para indicar que o cliente deve 
+            //enviar os dados a ser lançadas. Esse mecanismo permite que os clientes evitem enviar grandes quantidades de dados através da rede quando o servidor, com base em cabeçalhos de solicitação, 
+            //pretende descartar a solicitação.
+            //Já esta propriedade marcada como "false", quando a solicitação inicial é enviada para o servidor, inclui os dados. Se, após ler os cabeçalhos de solicitação,
+            //o servidor requer autenticação e deve enviar uma resposta 401, o cliente deve enviar novamente os dados com os cabeçalhos apropriadas de autenticação.
+            ServicePointManager.Expect100Continue = false;
+
+            //Obter a descrição do serviço (WSDL)    
+            this.DescricaoServico(cUF, taHomologacao, arquivoWSDL);
 
             this.NomeClasseWS = null;
             this.NomeMetodoWS = null;
@@ -206,12 +219,12 @@ namespace NFe.Components
         /// <param name="Instance">Instancia do objeto</param>
         /// <param name="methodName">Nome do método</param>
         /// <returns>true se o tipo de retorno do método passado por parâmetro for um array</returns>
-        public bool ReturnArray(object Instance, string methodName)
+        /*public bool ReturnArray(object Instance, string methodName)
         {
             Type tipoInstance = Instance.GetType();
 
             return tipoInstance.GetMethod(methodName).ReturnType.IsSubclassOf(typeof(Array));
-        }
+        }*/
         #endregion
 
         #region Invoke()
@@ -222,46 +235,16 @@ namespace NFe.Components
         /// <param name="methodName">Nome do método</param>
         /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
         /// <returns>Objeto - Um objeto somente, podendo ser primário ou complexo</returns>
-        public object Invoke(object Instance, string methodName, object[] parameters)
+        private object Invoke(object Instance, string methodName, object[] parameters)
         {
-            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-            Type tipoInstance = Instance.GetType();
-            if (this.oCertificado != null)
-            {
-                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-                Type tipoClientCertificates = oClientCertificates.GetType();
-                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
-            }
-
-            //Invocar método do serviço
-            return tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
-        }
-        #endregion
-
-        #region InvokeXML()
-        /// <summary>
-        /// Invocar o método da classe
-        /// </summary>
-        /// <param name="Instance">Instância do objeto</param>
-        /// <param name="methodName">Nome do método</param>
-        /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
-        /// <returns>Um objeto do tipo XML</returns>
-        public XmlNode InvokeXML(object Instance, string methodName, object[] parameters)
-        {
-            XmlNode xmlNode = null;
-
-            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-            Type tipoInstance = Instance.GetType();
-            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-            Type tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
-
-            //Invocar método do serviço
             try
             {
-                xmlNode = (XmlNode)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
+                //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
+                this.RelacCertificado(Instance);
+                
+                Type tipoInstance = Instance.GetType();
 
-                return xmlNode;
+                return tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
             }
             catch (Exception ex)
             {
@@ -299,20 +282,26 @@ namespace NFe.Components
         /// <param name="Instance">Instância do objeto</param>
         /// <param name="methodName">Nome do método</param>
         /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
+        /// <returns>Um objeto do tipo XML</returns>
+        public XmlNode InvokeXML(object Instance, string methodName, object[] parameters)
+        {
+            //Invocar método do serviço
+            return (XmlNode)this.Invoke(Instance, methodName, parameters);
+        }
+        #endregion
+
+        #region InvokeXML()
+        /// <summary>
+        /// Invocar o método da classe
+        /// </summary>
+        /// <param name="Instance">Instância do objeto</param>
+        /// <param name="methodName">Nome do método</param>
+        /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
         /// <returns>Um objeto do tipo string</returns>
         public string InvokeStr(object Instance, string methodName, object[] parameters)
         {
-            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-            Type tipoInstance = Instance.GetType();
-            if (this.oCertificado != null)
-            {
-                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-                Type tipoClientCertificates = oClientCertificates.GetType();
-                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
-            }
-
             //Invocar método do serviço
-            return (string)tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
+            return (string)this.Invoke(Instance, methodName, parameters);
         }
         #endregion
 
@@ -355,28 +344,6 @@ namespace NFe.Components
         }
         #endregion
 
-        #region InvokeArray()
-        /// <summary>
-        /// Invocar o método da classe
-        /// </summary>
-        /// <param name="Instance">Instância do objeto</param>
-        /// <param name="methodName">Nome do método</param>
-        /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
-        /// <returns>Vetor de objetos - uma lista de objetos primários ou complexos</returns>
-        public object[] InvokeArray(object Instance, string methodName, object[] parameters)
-        {
-            //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-            Type tipoInstance = Instance.GetType();
-            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, Instance, new Object[] { });
-            Type tipoClientCertificates;
-            tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
-
-            //Invocar método do serviço
-            return (object[])tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
-        }
-        #endregion
-
         #region CertificateValidation
         /// <summary>
         /// Responsável por retornar uma confirmação verdadeira para a proriedade ServerCertificateValidationCallback 
@@ -413,56 +380,29 @@ namespace NFe.Components
 
         #region DescricaoServico()
         /// <summary>
-        /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice a partir de uma URL
-        /// </summary>
-        /// <param name="requestUri">Uri (endereço https) para obter o WSDL</param>
-        /// <param name="Certificado">Certificado digital</param>
-        private void DescricaoServico(Uri requestUri, X509Certificate2 Certificado)
-        {
-            //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
-            //Wandrey 31/03/2010
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-
-            //Definir o endereço para a requisição do wsdl
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
-
-            //Definir dados para conexão com Proxy. Wandrey 22/11/2010
-            if (UtilizaServidorProxy)
-            {
-                if (string.IsNullOrEmpty(ProxyServidor))
-                    throw new Exception("Nome do servidor para conectar ao servidor proxy deve ser informado");
-
-                if (string.IsNullOrEmpty(ProxyUsuario))
-                    throw new Exception("Nome do usuário para conectar ao servidor proxy deve ser informado");
-
-                request.Proxy = Proxy.DefinirProxy(ProxyServidor, ProxyUsuario, ProxySenha, ProxyPorta);
-            }
-
-            //Definir o certificado digital que deve ser utilizado na requisição do wsdl
-            request.ClientCertificates.Add(Certificado);
-
-            //Requisitar o WSDL e gravar em um stream                
-            Stream stream = request.GetResponse().GetResponseStream();
-
-            //Definir a descrição completa do servido (WSDL)
-            this.serviceDescription = ServiceDescription.Read(stream);
-        }
-        #endregion
-
-        #region DescricaoServico()
-        /// <summary>
         /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice de um arquivo local
         /// </summary>
         /// <param name="arquivoWSDL">Local e nome do arquivo WDDL</param>
         /// <param name="Certificado">Certificado digital</param>
-        private void DescricaoServico(string arquivoWSDL)
+        private void DescricaoServico(int cUF, bool taHomologacao, string arquivoWSDL)
         {
             //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
             //Wandrey 31/03/2010
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            switch (cUF)
+            {
+                case 52: //Goiás
+                    if (taHomologacao)
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                    else
+                        goto default;
+                    break;
+
+                default:
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+                    break;
+            }
 
             //Definir a descrição completa do servido (WSDL)
-            //this.serviceDescription = ServiceDescription.Read(stream);
             this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
         }
         #endregion
@@ -873,6 +813,8 @@ namespace NFe.Components
             ConsultarNfsePorRps =
             ConsultarSituacaoLoteRps =
             ConsultarURLNfse =
+            ConsultarNFSePNG =
+            InutilizarNFSe =
             RecepcionarLoteRps =
                 ///
                 /// NF-e
@@ -966,6 +908,14 @@ namespace NFe.Components
         /// Consulta URL de Visualização da NFSe
         /// </summary>
         public string ConsultarURLNfse { get; set; }
+        /// <summary>
+        /// Consulta a imagem em PNG da Nota
+        /// </summary>
+        public string ConsultarNFSePNG { get; set; }
+        /// <summary>
+        /// Inutilização da NFSe
+        /// </summary>
+        public string InutilizarNFSe { get; set; }
         #endregion
 
         #region MDF-e
