@@ -71,7 +71,6 @@ namespace NFSe.Components
                 GerarRetorno(file, result, Propriedade.ExtEnvio.EnvCancelamento_XML, Propriedade.ExtRetorno.CanNfse);
 
             return result;
-
         }
 
         public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
@@ -92,7 +91,7 @@ namespace NFSe.Components
             {
                 case 4104303: // Campo mourão - PR
                     return (int)7483;
-                    
+
                 case 4309209: // Gravatai - RS
                     return (int)8683;
             }

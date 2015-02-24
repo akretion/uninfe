@@ -1706,10 +1706,12 @@ namespace NFe.Service
 
             if (!booValido && gException)
             {
-                cTextoErro = "O XML está configurando para um tipo de emissão e o UniNFe para outro. " +
-                             "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) + " (tpEmis = " + tpEmis.ToString() + "). " +
-                             "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) + " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
-                             cTextoErro2;
+                cTextoErro =  "O XML está configurado para um tipo de emissão e o UniNFe para outro. " +
+                         "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) +
+                         " (tpEmis = " + tpEmis.ToString() + "). " +
+                         "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) +
+                         " (tpEmis = " + Empresas.Configuracoes[emp].tpEmis.ToString() + "). " +
+                        cTextoErro2;
 
                 throw new Exception(cTextoErro);
             }
@@ -1865,7 +1867,7 @@ namespace NFe.Service
         /// <param name="Arquivo">Nome do arquivo XML da NFe para montagem do lote de 1 NFe</param>
         /// <date>07/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        public void LoteNfe(string Arquivo, string versaoXml)
+        protected void LoteNfe(string Arquivo, string versaoXml)
         {
             oGerarXML.LoteNfe(Servico, Arquivo, versaoXml);
         }
@@ -1879,7 +1881,7 @@ namespace NFe.Service
         /// <param name="versaoXml">Versao do Xml de lote</param>
         /// <date>24/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        public void LoteNfe(List<string> lstArquivoNfe, string versaoXml)
+        protected void LoteNfe(List<string> lstArquivoNfe, string versaoXml)
         {
             oGerarXML.LoteNfe(lstArquivoNfe, versaoXml);
         }
@@ -1988,7 +1990,7 @@ namespace NFe.Service
         #endregion
 
         #region Ultiliza WS compilado
-        public bool IsUtilizaCompilacaoWs(PadroesNFSe padrao)
+        protected bool IsUtilizaCompilacaoWs(PadroesNFSe padrao)
         {
             bool retorno = true;
 
@@ -2024,7 +2026,8 @@ namespace NFe.Service
         }
         #endregion
 
-        public Servicos GetTipoServicoSincrono(Servicos servico, string file, PadroesNFSe padrao)
+        #region GetTipoServicoSincrono
+        protected Servicos GetTipoServicoSincrono(Servicos servico, string file, PadroesNFSe padrao)
         {
             Servicos result = servico;
             XmlDocument doc = new XmlDocument();
@@ -2101,6 +2104,60 @@ namespace NFe.Service
             }
             return result;
         }
+        #endregion
 
+        #region ValidaEvento
+        protected void ValidaEvento(int emp, DadosenvEvento dadosEnvEvento)
+        {
+            string cErro = "";
+            string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
+            foreach (Evento item in dadosEnvEvento.eventos)
+            {
+                if (!currentEvento.Equals(item.tpEvento))
+                    throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
+
+                switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
+                {
+                    case ConvertTxt.tpEventos.tpEvEPEC:
+                        switch (Empresas.Configuracoes[emp].AmbienteCodigo)
+                        {
+                            case (int)NFe.Components.TipoAmbiente.taHomologacao:
+                                if (Convert.ToInt32(item.tpAmb) == (int)NFe.Components.TipoAmbiente.taProducao)
+                                {
+                                    cErro += "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de produção e o UniNFe está configurado para ambiente de homologação.\r\n";
+                                }
+                                break;
+
+                            case (int)NFe.Components.TipoAmbiente.taProducao:
+                                if (Convert.ToInt32(item.tpAmb) == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                                {
+                                    cErro += "Conteúdo da tag tpAmb do XML está com conteúdo indicando o envio para ambiente de homologação e o UniNFe está configurado para ambiente de produção.\r\n";
+                                }
+                                break;
+                        }
+                        int tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1));
+                        if ((TipoEmissao)tpEmis != TipoEmissao.teEPECeDPEC)
+                        {
+                            cErro += string.Format("Tipo de emissão no XML deve ser \"{0}\" (tpEmis={1}), mas está informado \"{2}\" (tpEmis={3}).\r\n",
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPECeDPEC)),
+                                         (int)TipoEmissao.teEPECeDPEC,
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)),
+                                         tpEmis);
+                        }
+                        if ((TipoEmissao)Empresas.Configuracoes[emp].tpEmis != TipoEmissao.teEPECeDPEC)
+                        {
+                            cErro += string.Format("Tipo de emissão no Uninfe deve ser \"{0}\" (tpEmis={1}), mas está definido como \"{2}\" (tpEmis={3}).",
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPECeDPEC)),
+                                         (int)TipoEmissao.teEPECeDPEC,
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)),
+                                         Empresas.Configuracoes[emp].tpEmis);
+                        }
+                        break;
+                }
+            }
+            if (cErro != "")
+                throw new Exception(cErro);
+        }
+        #endregion
     }
 }

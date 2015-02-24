@@ -152,10 +152,10 @@ namespace NFe.Service
                 XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
                 FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
                 string encodedData = StreamExtensions.ToBase64(XMLNfeZip);
-                XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { encodedData });
+                XmlRetorno = oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { encodedData });
             }
             else
-                XmlRetorno = (XmlNode)oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
+                XmlRetorno = oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
 
             if (XmlRetorno == null)
                 throw new Exception("Erro de envio da solicitação do serviço: " + servico.ToString());

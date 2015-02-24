@@ -43,47 +43,6 @@ namespace uninfe_ws
 
     public class dummy
     {
-        public static Dictionary<string, int> listageral = new Dictionary<string, int>();
-
-        /********
-        public static string LerWSDLS(string configname, string ID, string UF, string Padrao)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(configname);
-
-            foreach (var node in doc.GetElementsByTagName(NFe.Components.NFeStrConstants.Estado))
-            {
-                XmlElement ele = (XmlElement)node;
-                string p = NFe.Components.PadroesNFSe.NaoIdentificado.ToString();
-                if (ele.Attributes.Count > 0)
-                {
-                    ///
-                    /// versao antiga
-                    try
-                    {
-                        p = ele.Attributes[NFe.Components.NFeStrConstants.Padrao].Value;
-                    }
-                    catch { }
-                    if (ele.Attributes[TpcnResources.ID.ToString()].Value.Equals(ID) &&
-                        ele.Attributes[TpcnResources.UF.ToString()].Value.Equals(UF) &&
-                        p.Equals(Padrao))
-                    {
-                        return ele.OuterXml;
-                    }
-                }
-                else
-                {
-                    string id = NFe.Components.Functions.LerTag(ele, NFe.Components.TpcnResources.ID.ToString(), false);
-                    string uf = NFe.Components.Functions.LerTag(ele, NFe.Components.TpcnResources.UF.ToString(), false);
-                    string pa = NFe.Components.Functions.LerTag(ele, NFe.Components.NFeStrConstants.Padrao, false);
-                    if (id == ID && uf == UF && Padrao == pa)
-                        return ele.OuterXml;
-                }
-            }
-            return "";
-        }
-        ********/
-
         public static void ArquivoExiste(StringBuilder erro, string configname, string wsdlname)
         {
             if (!string.IsNullOrEmpty(wsdlname))

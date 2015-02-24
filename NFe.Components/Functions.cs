@@ -92,12 +92,6 @@ namespace NFe.Components
             {
                 var es = Propriedade.Estados.First(s => s.CodigoMunicipio == codigo);
                 return es.UF;
-                /*
-                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if (Propriedade.CodigosEstados[v, 0] == codigo.ToString())
-                        return Propriedade.CodigosEstados[v, 1].Substring(0, 2);
-
-                return "";*/
             }
             catch
             {
@@ -113,14 +107,8 @@ namespace NFe.Components
             {
                 var es = Propriedade.Estados.First(s => s.UF.Equals(uf));
                 return es.CodigoMunicipio;
-                /*
-                for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-                    if (Propriedade.CodigosEstados[v, 1].Substring(0, 2) == uf)
-                        return Convert.ToInt32(Propriedade.CodigosEstados[v, 0]);
-
-                return 0;*/
             }
-            catch
+            catch 
             {
                 return 0;
             }
@@ -484,13 +472,6 @@ namespace NFe.Components
             {
                 UF.Add(new ComboElem(estado.UF, estado.CodigoMunicipio, estado.Nome));
             }
-            /*
-            for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-            {
-                UF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2),
-                    Convert.ToInt32(Propriedade.CodigosEstados[v, 0]),
-                    Propriedade.CodigosEstados[v, 1].Substring(5)));
-            }*/
             UF.Sort(new OrdenacaoPorNome());
             return UF;
         }
@@ -791,7 +772,6 @@ namespace NFe.Components
                             break;
                         }
                     }
-
                     Thread.Sleep(2);
                 }
             }
@@ -806,20 +786,22 @@ namespace NFe.Components
         /// <param name="ex"></param>
         public static void GravarErroMover(string file, string resultFolder, string ex)
         {
-            if (Directory.Exists(Path.GetDirectoryName(file)))
+            if (!string.IsNullOrEmpty(resultFolder) && Directory.Exists(Path.GetDirectoryName(resultFolder)) && !string.IsNullOrEmpty(file))
             {
-            FileInfo infFile = new FileInfo(file);
-            string extFile = infFile.Name.Replace(".xml", "");
-            string extError = extFile + ".err";
+                FileInfo infFile = new FileInfo(file);
+                string extFile = infFile.Name.Replace(".xml", "");
+                string extError = extFile + ".err";
 
-            string nomearq = resultFolder + "\\" + extError;
+                string nomearq = resultFolder + "\\" + extError;
 
-            StreamWriter write = new StreamWriter(nomearq);
-            write.Write(ex);
-            write.Flush();
-            write.Close();
-            write.Dispose();
+                StreamWriter write = new StreamWriter(nomearq);
+                write.Write(ex);
+                write.Flush();
+                write.Close();
+                write.Dispose();
             }
+            else
+                WriteLog(ex, false, true, "");
         }
     }
 }

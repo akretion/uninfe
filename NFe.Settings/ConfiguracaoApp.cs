@@ -486,7 +486,7 @@ namespace NFe.Settings
                             ConfiguracaoApp.ProxyUsuario = elementConfig[NfeConfiguracoes.ProxyUsuario.ToString()].InnerText.Trim();
 
                         if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0] != null)
-                            ConfiguracaoApp.ProxySenha = elementConfig[NfeConfiguracoes.ProxySenha.ToString()].InnerText.Trim();
+                            ConfiguracaoApp.ProxySenha = Criptografia.descriptografaSenha(elementConfig[NfeConfiguracoes.ProxySenha.ToString()].InnerText.Trim());
 
                         if (elementConfig.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0] != null)
                             ConfiguracaoApp.ProxyPorta = Convert.ToInt32(elementConfig[NfeConfiguracoes.ProxyPorta.ToString()].InnerText.Trim());
@@ -1164,7 +1164,7 @@ namespace NFe.Settings
             elementos.Add(new XElement(NfeConfiguracoes.ProxyServidor.ToString(), ConfiguracaoApp.ProxyServidor));
             elementos.Add(new XElement(NfeConfiguracoes.ProxyUsuario.ToString(), ConfiguracaoApp.ProxyUsuario));
             elementos.Add(new XElement(NfeConfiguracoes.ProxyPorta.ToString(), ConfiguracaoApp.ProxyPorta.ToString()));
-            elementos.Add(new XElement(NfeConfiguracoes.ProxySenha.ToString(), ConfiguracaoApp.ProxySenha));
+            elementos.Add(new XElement(NfeConfiguracoes.ProxySenha.ToString(), Criptografia.criptografaSenha(ConfiguracaoApp.ProxySenha)));
             elementos.Add(new XElement(NfeConfiguracoes.ChecarConexaoInternet.ToString(), ConfiguracaoApp.ChecarConexaoInternet.ToString()));
             elementos.Add(new XElement(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString(), ConfiguracaoApp.GravarLogOperacoesRealizadas.ToString()));
             if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))

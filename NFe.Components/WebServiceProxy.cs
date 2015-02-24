@@ -519,11 +519,14 @@ namespace NFe.Components
         /// <param name="instance">Objeto do serviço que será consumido</param>
         private void RelacCertificado(object instance)
         {
-            Type tipoInstance = instance.GetType();
-            object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, instance, new Object[] { });
-            Type tipoClientCertificates;
-            tipoClientCertificates = oClientCertificates.GetType();
-            tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            if (this.oCertificado != null)
+            {
+                Type tipoInstance = instance.GetType();
+                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, instance, new Object[] { });
+                Type tipoClientCertificates;
+                tipoClientCertificates = oClientCertificates.GetType();
+                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+            }
         }
         #endregion
 
@@ -572,24 +575,25 @@ namespace NFe.Components
                             }
                             PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
 
-                            ///
-                            /// adiciona na lista que será usada na manutencao
-                            Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
 
                             webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
                             PreencheURLw(wsItem.LocalHomologacao,
                                          NFe.Components.NFeStrConstants.LocalHomologacao,
-                                         WebServiceNFSe.WebServicesHomologacao(pdr, IDmunicipio),
+                                         WebServiceNFSe.WebServicesHomologacao(ref pdr, IDmunicipio),
                                          "",
                                          "NFse\\");
                             PreencheURLw(wsItem.LocalProducao,
                                          NFe.Components.NFeStrConstants.LocalProducao,
-                                         WebServiceNFSe.WebServicesProducao(pdr, IDmunicipio),
+                                         WebServiceNFSe.WebServicesProducao(ref pdr, IDmunicipio),
                                          "",
                                          "NFse\\");
 
                             webServicesList.Add(wsItem);
+                            ///
+                            /// adiciona na lista que será usada na manutencao
+                            /// 
+                            Propriedade.Municipios.Add(new Municipio(IDmunicipio, UF, Nome, pdr));
                         }
                     }
                 }
@@ -659,7 +663,7 @@ namespace NFe.Components
                                 webServicesList.Add(wsItem);
                             }
                             // danasa 1-2012
-                            if (estadoElemento.HasAttribute(NFeStrConstants.Padrao))
+                            if (estadoElemento.HasAttribute(NFeStrConstants.Padrao) || subfolder.Equals("NFse\\"))
                             {
                                 try
                                 {
@@ -828,8 +832,8 @@ namespace NFe.Components
             NFeRecepcao =
             NFeRetRecepcao =
             NFeStatusServico =
-            NFeRegistroDeSaida =
-            NFeRegistroDeSaidaCancelamento =
+            //NFeRegistroDeSaida =
+            //NFeRegistroDeSaidaCancelamento =
             NFeAutorizacao =
             NFeRetAutorizacao =
                 ///
@@ -875,8 +879,8 @@ namespace NFe.Components
         public string NFeDownload { get; set; }
         public string NFeConsultaNFeDest { get; set; }
         public string NFeManifDest { get; set; }
-        public string NFeRegistroDeSaida { get; set; }
-        public string NFeRegistroDeSaidaCancelamento { get; set; }
+        //public string NFeRegistroDeSaida { get; set; }
+        //public string NFeRegistroDeSaidaCancelamento { get; set; }
         #endregion
 
         #region NFS-e

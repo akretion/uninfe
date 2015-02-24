@@ -2528,4 +2528,28 @@
       <CancelarNfse>wsdl\producao\PCuritibaPR-EGoverne.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="5105259" Nome="Lucas do Rio Verde - MT" UF="MT" Padrao="WEBISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HLucasRVMT_WebISS.wsdl</CancelarNfse>
+      <ConsultarNFSePNG></ConsultarNFSePNG>
+      <InutilizarNFSe></InutilizarNFSe>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PLucasRVMT_WebISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PLucasRVMT_WebISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PLucasRVMT_WebISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PLucasRVMT_WebISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PLucasRVMT_WebISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PLucasRVMT_WebISS.wsdl</CancelarNfse>
+      <ConsultarNFSePNG></ConsultarNFSePNG>
+      <InutilizarNFSe></InutilizarNFSe>
+    </LocalProducao>
+  </Estado>
 </Webservice>

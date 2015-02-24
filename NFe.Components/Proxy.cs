@@ -24,12 +24,15 @@ namespace NFe.Components
         {
             System.Net.NetworkCredential credencial = new System.Net.NetworkCredential(usuario, senha);
             System.Net.IWebProxy proxy;
-            proxy = new System.Net.WebProxy(servidor, porta);
-
+            proxy = new System.Net.WebProxy(servidor, porta);            
             if (!String.IsNullOrEmpty(usuario) && usuario.Trim().Length > 0)
             {
                 proxy.Credentials = credencial;
             }
+
+            //Pegar configuração do proxy definida no sistema operacional
+            //proxy = System.Net.WebProxy.GetDefaultProxy();
+            //proxy.Credentials = credencial;            
 
             return proxy;
         }

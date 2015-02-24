@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Xml;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -36,12 +37,6 @@ namespace NFe.Interface
                 arrUF.Add(new ComboElem(estado.UF, estado.CodigoMunicipio, estado.ToString()));
                 this.edtUF.Items.Add(estado.UF);
             }
-            /*
-            for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-            {
-                arrUF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2), Convert.ToInt32(Propriedade.CodigosEstados[v, 0]), Propriedade.CodigosEstados[v, 1]));
-                this.edtUF.Items.Add(Propriedade.CodigosEstados[v, 1].Substring(0, 2));
-            }*/
             this.comboUf.DataSource = arrUF;
             this.comboUf.DisplayMember = "nome";
             this.comboUf.ValueMember = "codigo";
@@ -49,8 +44,24 @@ namespace NFe.Interface
             this.comboUf.SelectedIndex = 0;
 
             this.edtUF.SelectedIndex = 0;
-            this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
-            this.edtPadrao.Items.RemoveAt(0);
+
+            this.edtPadrao.Items.Clear();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(Propriedade.NomeArqXMLWebService_NFSe);
+            XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Estado);
+            foreach (XmlNode estadoNode in estadoList)
+            {
+                XmlElement estadoElemento = (XmlElement)estadoNode;
+                if (estadoElemento.Attributes.Count > 0)
+                {
+                    if (estadoElemento.Attributes[TpcnResources.UF.ToString()].Value == "XX")
+                    {
+                        this.edtPadrao.Items.Add(estadoElemento.Attributes[NFe.Components.NFeStrConstants.Padrao].Value);
+                    }
+                }
+            }
+            //this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
+            //this.edtPadrao.Items.RemoveAt(0);
             this.edtPadrao.SelectedIndex = 0;
         }
 

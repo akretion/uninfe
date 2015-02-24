@@ -889,7 +889,7 @@ namespace NFe.Settings
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
 
                 dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
-
+                
                 ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
                 objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);
 

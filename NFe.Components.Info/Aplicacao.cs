@@ -39,8 +39,13 @@ namespace NFe.Components.Info
             }
             else
             {
+                if (!Empresas.Configuracoes[emp].UsaCertificado)
+                    xMotivo = "Empresa sem certificado digital informado e/ou não necessário";
+                else
+                {
                 cStat = "2";
                 xMotivo = "Certificado digital não foi localizado";
+                }
             }
 
             //danasa 22/7/2011

@@ -10,7 +10,7 @@ namespace NFSe.Components
     /// <summary>
     /// Esta classe utiliza métodos POST para fazer requisições
     /// </summary>
-    public class POSTRequest: IDisposable
+    public class POSTRequest : IDisposable
     {
         /// <summary>
         /// Proxy para ser utilizado na requisição, pode ser nulo
@@ -33,11 +33,12 @@ namespace NFSe.Components
             request.ContentType = "multipart/form-data; boundary=" + boundary;
             request.Method = "POST";
             request.KeepAlive = true;
-            request.Credentials =
-            System.Net.CredentialCache.DefaultCredentials;
+            request.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
-            if(Proxy != null)
-                request.Proxy = Proxy; 
+            if (Proxy != null)
+            {
+                request.Proxy = Proxy;
+            }
             #endregion
 
             #region Crar o stream da solicitação
@@ -47,7 +48,7 @@ namespace NFSe.Components
 
             string formdataTemplate = "\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
 
-            foreach(KeyValuePair<string, string> keyValue in postData)
+            foreach (KeyValuePair<string, string> keyValue in postData)
             {
                 string formitem = string.Format(formdataTemplate, keyValue.Key, keyValue.Value);
                 byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
@@ -70,13 +71,13 @@ namespace NFSe.Components
 
             int bytesRead = 0;
 
-            while((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 memStream.Write(buffer, 0, bytesRead);
             }
 
             memStream.Write(boundarybytes, 0, boundarybytes.Length);
-            fileStream.Close(); 
+            fileStream.Close();
 
             request.ContentLength = memStream.Length;
             #endregion
@@ -89,7 +90,7 @@ namespace NFSe.Components
             memStream.Read(tempBuffer, 0, tempBuffer.Length);
             memStream.Close();
             requestStream.Write(tempBuffer, 0, tempBuffer.Length);
-            requestStream.Close(); 
+            requestStream.Close();
             #endregion
 
             #region Resposta do servidor
@@ -100,7 +101,7 @@ namespace NFSe.Components
             string result = reader.ReadToEnd();
             stream.Dispose();
             reader.Dispose();
-            return result; 
+            return result;
             #endregion
         }
 

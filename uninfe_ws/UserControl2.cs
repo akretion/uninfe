@@ -66,6 +66,9 @@ namespace uninfe_ws
 
         private string getfile(string value)
         {
+            if (value.ToUpper().StartsWith("NFE\\")) value = value.Substring(4);
+            if (value.ToUpper().StartsWith("NFSE\\")) value = value.Substring(5);
+
             string[] s = value.Split(new char[] { '\\' });
             if (s.Length > 3)
             {

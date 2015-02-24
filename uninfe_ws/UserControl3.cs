@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace uninfe_ws
 {
@@ -18,46 +20,12 @@ namespace uninfe_ws
             InitializeComponent();
         }
 
-        private string[] labels_nfe = new string[]{
-                "NFeRecepcao",
-                "NFeRetRecepcao",
-                "NFeInutilizacao",
-                "NFeConsulta",
-                "NFeStatusServico",
-                "NFeConsultaCadastro",
-                "NFeRecepcaoEvento",
-                "NFeConsultaNFeDest",
-                "NFeDownload",
-                "NFeManifDest",
-                "NFeAutorizacao",
-                "NFeRetAutorizacao",
-                "MDFeRecepcao",
-                "MDFeRetRecepcao",
-                "MDFeConsulta",
-                "MDFeStatusServico",
-                "MDFeRecepcaoEvento",
-                "MDFeNaoEncerrado",
-                "DFeRecepcao",
-                "CTeRecepcaoEvento",
-                "CTeRecepcao",
-                "CTeRetRecepcao",
-                "CTeInutilizacao",
-                "CTeConsulta",
-                "CTeStatusServico",
-                "CTeConsultaCadastro"};
-
-        private string[] labels_nfse = new string[]{
-                "RecepcionarLoteRps",
-                "ConsultarSituacaoLoteRps",
-                "ConsultarNfsePorRps",
-                "ConsultarNfse",
-                "ConsultarLoteRps",
-                "ConsultarURLNfse",
-                "CancelarNfse"};
-        private string[] xlabels;
+        private List<string> xlabels = null;
         private string configname = null;
+        private string uf = null;
         private XmlDocument doc = new XmlDocument();
         private List<Estado> listaEstados = new List<Estado>();
+        private List<string> listageral = new List<string>();
         private NFe.Components.TipoAplicativo _tipo;
         private string filebackup;
 
@@ -69,11 +37,12 @@ namespace uninfe_ws
             this.metroTabControl1.SelectedIndex = 0;
         }
 
-        public void loadData(NFe.Components.TipoAplicativo opcao)
+        public void loadData(NFe.Components.TipoAplicativo opcao, string uf)
         {
             this._tipo = opcao;
+            this.uf = uf;
 
-            dummy.listageral.Clear();
+            listageral.Clear();
             listaEstados.Clear();
 
             edtEstados.SelectedIndexChanged -= metroComboBox1_SelectedIndexChanged;
@@ -81,7 +50,6 @@ namespace uninfe_ws
             try
             {
                 string padraobase = NFe.Components.PadroesNFSe.NaoIdentificado.ToString();
-                xlabels = this._tipo == NFe.Components.TipoAplicativo.Nfse ? labels_nfse : labels_nfe;
                 if (this.configname == null)
                 {
                     string fn = System.IO.Path.Combine(Application.StartupPath, "uninfe_ws.xml");
@@ -104,9 +72,22 @@ namespace uninfe_ws
                     }
                     filebackup = this.configname + ".xml.bck";
 
-                    //if (!System.IO.File.Exists(configname + ".xml"))
-                    //    System.IO.File.Copy(configname, configname + ".xml");
-                    //configname += ".xml";
+                    xlabels = new List<string>();
+                    ///
+                    /// varre os nomes das propriedades da classe, eliminando o esquecimento quando da criacao de novas propriedades
+                    /// 
+                    NFe.Components.URLws temp = new NFe.Components.URLws();
+                    foreach (var se in temp.GetType().GetProperties())
+                    {
+                        if (se.Name.StartsWith("NFe") || se.Name.StartsWith("CTe") || se.Name.StartsWith("DFe") || se.Name.StartsWith("MDFe"))
+                        {
+                            if (this._tipo == NFe.Components.TipoAplicativo.Nfe)
+                                this.xlabels.Add(se.Name);
+                        }
+                        else
+                            if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                                this.xlabels.Add(se.Name);
+                    }
 
                     int X = 2;
                     foreach (var label in xlabels)
@@ -135,9 +116,15 @@ namespace uninfe_ws
                 else
                     oIndex = edtEstados.SelectedIndex;
 
+                if (this._tipo == NFe.Components.TipoAplicativo.Nfe)
+                {
+                    NFe.Components.Propriedade.Estados = null;
+                    NFe.Components.Propriedade.NomeArqXMLWebService_NFe = configname;
+                }
                 XElement axml = XElement.Load(configname);
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                         where (string)p.Attribute(NFe.Components.TpcnResources.UF.ToString()) != "XX"
+                         where  (uf == null && p.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value != "XX") ||
+                                (uf != null && p.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == "XX")
                          orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
                          select p);
                 foreach (var item in s)
@@ -150,8 +137,7 @@ namespace uninfe_ws
                         svc = (this._tipo == NFe.Components.TipoAplicativo.Nfse ? "" : (item.Attribute(NFe.Components.NFeStrConstants.SVC) == null ? NFe.Components.TipoEmissao.teNone.ToString() : item.Attribute(NFe.Components.NFeStrConstants.SVC).Value)),
                         Padrao = item.Attribute(NFe.Components.NFeStrConstants.Padrao) == null ? (this._tipo == NFe.Components.TipoAplicativo.Nfse ? padraobase : "") : item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value
                     });
-                    dummy.listageral.Remove(listaEstados[listaEstados.Count - 1].key);
-                    dummy.listageral.Add(listaEstados[listaEstados.Count - 1].key, (int)this._tipo);
+                    listageral.Add(listaEstados[listaEstados.Count - 1].key);
                 }
                 edtEstados.DataSource = null;
                 edtEstados.Items.Clear();
@@ -189,7 +175,7 @@ namespace uninfe_ws
 
                 ///
                 /// limpa todos os enderecos
-                for (int vs = 0; vs < xlabels.Length; ++vs)
+                for (int vs = 0; vs < xlabels.Count; ++vs)
                 {
                     (this.tpHomo.Controls["H_" + xlabels[vs]] as UserControl2).metroTextBox1.Text = "";
                     (this.tpProd.Controls["P_" + xlabels[vs]] as UserControl2).metroTextBox1.Text = "";
@@ -211,7 +197,7 @@ namespace uninfe_ws
                     docx.LoadXml(itemx.FirstNode.ToString());
                     foreach (var node in docx.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalHomologacao))
                     {
-                        for (int vs = 0; vs < xlabels.Length; ++vs)
+                        for (int vs = 0; vs < xlabels.Count; ++vs)
                         {
                             string c = NFe.Components.Functions.LerTag((XmlElement)node, xlabels[vs], false);
                             (this.tpHomo.Controls["H_" + xlabels[vs]] as UserControl2).metroTextBox1.Text = c;
@@ -221,7 +207,7 @@ namespace uninfe_ws
                     docx.LoadXml(itemx.LastNode.ToString());
                     foreach (var node in docx.GetElementsByTagName(NFe.Components.NFeStrConstants.LocalProducao))
                     {
-                        for (int vs = 0; vs < xlabels.Length; ++vs)
+                        for (int vs = 0; vs < xlabels.Count; ++vs)
                         {
                             string c = NFe.Components.Functions.LerTag((XmlElement)node, xlabels[vs], false);
                             (this.tpProd.Controls["P_" + xlabels[vs]] as UserControl2).metroTextBox1.Text = c;
@@ -237,13 +223,24 @@ namespace uninfe_ws
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
+            this.makebackup();
+
             try
             {
-                this.edtID.Text = this.edtID.Text.PadLeft(this._tipo == NFe.Components.TipoAplicativo.Nfse ? 7 : 2, '0');
                 this.edtUF.Text = this.edtUF.Text.ToUpper();
 
                 if (string.IsNullOrEmpty(this.edtNome.Text))
                     throw new Exception("Nome deve ser informado");
+
+                if (string.IsNullOrEmpty(this.edtUF.Text))
+                    throw new Exception("UF deve ser informada");
+
+                if (this.uf == null)
+                {
+                    this.edtID.Text = this.edtID.Text.PadLeft(this._tipo == NFe.Components.TipoAplicativo.Nfse ? 7 : 2, '0');
+
+                if (this.edtUF.Text == "XX")
+                    throw new Exception("Não atualize nada nesta UF");
 
                 if (Convert.ToInt32(this.edtID.Text) < 900 && this._tipo == NFe.Components.TipoAplicativo.Nfe)
                 {
@@ -260,6 +257,7 @@ namespace uninfe_ws
                         throw new Exception("Divergência entre 'UF' e 'ID'");
                     }
                 }
+                }
 
                 string key = this.edtUF.Text + " - " +
                             this.edtID.Text +
@@ -274,8 +272,16 @@ namespace uninfe_ws
                 {
                     item = new Estado();
                 }
+
+                if (item != null)
+                    if (!key.Equals(item.key))  //é diferente da selecionada?
+                    {
+                        if (listageral.Contains(key))   //a nova chave existe?
+                            throw new Exception("Já existe uma configuração com os parâmetros informados");
+                    }
+
                 StringBuilder erro = new StringBuilder();
-                for (int vs = 0; vs < xlabels.Length; ++vs)
+                for (int vs = 0; vs < xlabels.Count; ++vs)
                 {
                     string c = (this.tpProd.Controls["P_" + xlabels[vs]] as UserControl2).metroTextBox1.Text;
                     dummy.ArquivoExiste(erro, configname, c);
@@ -289,22 +295,50 @@ namespace uninfe_ws
                         return;
                 }
 
-                if (this.edtUF.Text == "XX")
-                {
-                    throw new Exception("Não atualize nada nesta UF");
-                }
-
-                if (!key.Equals(item.key))  //é diferente da selecionada?
-                {
-                    if (dummy.listageral.ContainsKey(key))   //a nova chave existe?
-                    {
-                        throw new Exception("Já existe uma configuração com os parâmetros informados");
-                    }
-                }
-                if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                if (this._tipo == NFe.Components.TipoAplicativo.Nfse && this.uf == null)
                     if (!this.edtNome.Text.Trim().EndsWith(this.edtUF.Text))
                         this.edtNome.Text += " - " + this.edtUF.Text;
 
+                XElement[] eleProducao = new XElement[this.xlabels.Count];
+                XElement[] eleHomologa = new XElement[this.xlabels.Count];
+                for (int vs = 0; vs < xlabels.Count; ++vs)
+                {
+                    eleProducao[vs] = new XElement(xlabels[vs], (this.tpProd.Controls["P_" + xlabels[vs]] as UserControl2).metroTextBox1.Text);
+                    eleHomologa[vs] = new XElement(xlabels[vs], (this.tpHomo.Controls["H_" + xlabels[vs]] as UserControl2).metroTextBox1.Text);
+                }
+
+                XElement users = XElement.Load(this.configname);
+                IEnumerable<XElement> elements = users.Elements();
+
+                if (item != null)
+                {
+                    if (!string.IsNullOrEmpty(item.ID))
+                    {
+                        /*if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                        elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
+                            Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
+                                        x1.Attribute(NFe.Components.NFeStrConstants.Padrao).Value == item.Padrao &&
+                                        x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
+                        else*/
+                        elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
+                            Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
+                                        x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
+                }
+                }
+                XElement ele = new XElement(NFe.Components.NFeStrConstants.Estado,
+                    new XAttribute(NFe.Components.TpcnResources.ID.ToString(), this.edtID.Text),
+                    new XAttribute(NFe.Components.NFeStrConstants.Nome, this.edtNome.Text),
+                    new XAttribute(NFe.Components.TpcnResources.UF.ToString(), this.edtUF.Text),
+                    new XAttribute((this._tipo == NFe.Components.TipoAplicativo.Nfse ? NFe.Components.NFeStrConstants.Padrao : NFe.Components.NFeStrConstants.SVC), this.edtPadrao.SelectedItem.ToString()),
+                    new XElement(NFe.Components.NFeStrConstants.LocalHomologacao, eleHomologa),
+                    new XElement(NFe.Components.NFeStrConstants.LocalProducao, eleProducao)
+                );
+                users.Add(ele);
+
+                users.Save(this.configname);
+
+                /********** tirado pq quando terminar, é lido tudo novamente
+                 * 
                 if (dummy.listageral.ContainsKey(key))   //a nova chave existe?
                 {
                     item.Nome = this.edtNome.Text;
@@ -324,89 +358,15 @@ namespace uninfe_ws
                     if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
                         estado.Padrao = this.edtPadrao.SelectedItem.ToString();
                     else
-                        item.svc = this.edtPadrao.SelectedItem.ToString();
+                        estado.svc = this.edtPadrao.SelectedItem.ToString();
 
                     dummy.listageral.Add(key, (int)this._tipo);
 
                     listaEstados.Add(estado);
                 }
+                *********/
 
-                XElement[] eleProducao = new XElement[this.xlabels.Length];
-                XElement[] eleHomologa = new XElement[this.xlabels.Length];
-                for (int vs = 0; vs < xlabels.Length; ++vs)
-                {
-                    eleProducao[vs] = new XElement(xlabels[vs], (this.tpProd.Controls["P_" + xlabels[vs]] as UserControl2).metroTextBox1.Text);
-                    eleHomologa[vs] = new XElement(xlabels[vs], (this.tpHomo.Controls["H_" + xlabels[vs]] as UserControl2).metroTextBox1.Text);
-                }
-
-                this.makebackup();
-
-                bool atualizou = false;
-                XElement users = XElement.Load(this.configname);
-                IEnumerable<XElement> elements = users.Elements();
-
-                if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
-                    elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
-                        Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
-                                    x1.Attribute(NFe.Components.NFeStrConstants.Padrao).Value == item.Padrao &&
-                                    x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
-                else
-                    elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
-                        Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
-                                    x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
-                /*
-                var query =
-                    from b in users.Elements()
-                    where ((string)b.Attribute(NFe.Components.NFeStrConstants.UF)).Equals(this.edtUF.Text) &&
-                          ((string)b.Attribute(NFe.Components.NFeStrConstants.ID)).Equals(this.edtID.Text)
-                    select b;
-                foreach (var cconv in query)
-                {
-                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
-                    {
-                        if (!cconv.Attribute(NFe.Components.NFeStrConstants.Padrao).Value.Equals(item.Padrao))
-                            continue;
-                    }
-                    cconv.SetAttributeValue(NFe.Components.NFeStrConstants.Nome, this.edtNome.Text);
-                    cconv.SetAttributeValue(NFe.Components.NFeStrConstants.ID, this.edtID.Text);
-                    cconv.SetAttributeValue(NFe.Components.NFeStrConstants.UF, this.edtUF.Text);
-                    cconv.SetAttributeValue(NFe.Components.NFeStrConstants.Padrao, this.edtPadrao.SelectedItem.ToString());
-                    cconv.SetElementValue(NFe.Components.NFeStrConstants.LocalHomologacao, eleHomologacao);
-                    cconv.SetElementValue(NFe.Components.NFeStrConstants.LocalProducao, eleProducao);
-
-                    atualizou = true;
-                    break;
-                }*/
-                if (!atualizou)
-                {
-                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
-                    {
-                        XElement ele = new XElement(NFe.Components.NFeStrConstants.Estado,
-                           new XAttribute(NFe.Components.TpcnResources.ID.ToString(), this.edtID.Text),
-                           new XAttribute(NFe.Components.NFeStrConstants.Nome, this.edtNome.Text),
-                           new XAttribute(NFe.Components.TpcnResources.UF.ToString(), this.edtUF.Text),
-                           new XAttribute(NFe.Components.NFeStrConstants.Padrao, this.edtPadrao.SelectedItem.ToString()),
-                           new XElement(NFe.Components.NFeStrConstants.LocalHomologacao, eleHomologa),
-                           new XElement(NFe.Components.NFeStrConstants.LocalProducao, eleProducao)
-                        );
-                        users.Add(ele);
-                    }
-                    else
-                    {
-                        XElement ele = new XElement(NFe.Components.NFeStrConstants.Estado,
-                           new XAttribute(NFe.Components.TpcnResources.ID.ToString(), this.edtID.Text),
-                           new XAttribute(NFe.Components.NFeStrConstants.Nome, this.edtNome.Text),
-                           new XAttribute(NFe.Components.TpcnResources.UF.ToString(), this.edtUF.Text),
-                           new XAttribute(NFe.Components.NFeStrConstants.SVC, this.edtPadrao.Text),
-                           new XElement(NFe.Components.NFeStrConstants.LocalHomologacao, eleHomologa),
-                           new XElement(NFe.Components.NFeStrConstants.LocalProducao, eleProducao)
-                        );
-                        users.Add(ele);
-                    }
-                }
-                users.Save(this.configname);
-
-                RefreshEstados();
+                RefreshDados();
 
                 MetroFramework.MetroMessageBox.Show(null, "OK Atualizado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -430,22 +390,21 @@ namespace uninfe_ws
                     XElement users = XElement.Load(this.configname);
                     IEnumerable<XElement> elements = users.Elements();
 
-                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                    /*if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
                         elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
                             Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
                                         x1.Attribute(NFe.Components.NFeStrConstants.Padrao).Value == item.Padrao &&
                                         x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
-                    else
+                    else*/
                         elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
                             Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
                                         x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
                     users.Save(this.configname);
 
-                    dummy.listageral.Remove(item.key);
+                    //dummy.listageral.Remove(item.key);
+                    //listaEstados.RemoveAt(edtEstados.SelectedIndex);
 
-                    listaEstados.RemoveAt(edtEstados.SelectedIndex);
-
-                    RefreshEstados();
+                    RefreshDados();
                 }
                 catch (Exception ex)
                 {
@@ -466,9 +425,9 @@ namespace uninfe_ws
                 System.IO.File.Copy(this.filebackup, this.configname, true);
         }
 
-        private void RefreshEstados()
+        private void RefreshDados()
         {
-            this.loadData(this._tipo);
+            this.loadData(this._tipo, this.uf);
         }
     }
 }

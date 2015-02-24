@@ -60,6 +60,10 @@ namespace NFe.Service.NFSe
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
                         IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, oDadosEnvLoteRps.cMunicipio, Empresas.Configuracoes[emp].PastaXmlRetorno);
+
+                        if (ConfiguracaoApp.Proxy)
+                            ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
                         ipm.EmitirNF(NomeArquivoXML, (TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo);
                         break;
 
@@ -67,7 +71,7 @@ namespace NFe.Service.NFSe
                         if (oDadosEnvLoteRps.cMunicipio == 4125506) //São José dos Pinhais - PR  
                             cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         else
-                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";                            
+                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
                     case PadroesNFSe.BETHA:

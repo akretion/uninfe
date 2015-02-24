@@ -2218,7 +2218,7 @@ namespace NFe.ConvertTxt
             if (FBuffer.StartsWith("<![CDATA["))
                 return FBuffer;
 
-            FBuffer = FBuffer.Replace("& ", "&amp; ");
+            FBuffer = FBuffer.Replace("&", "&amp;");
             FBuffer = FBuffer.Replace("<", "&lt;");
             FBuffer = FBuffer.Replace(">", "&gt;");
             FBuffer = FBuffer.Replace("\"", "&quot;");

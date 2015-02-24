@@ -58,7 +58,12 @@ namespace NFe.Service.NFSe
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
                         IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, oDadosPedCanNfse.cMunicipio, Empresas.Configuracoes[emp].PastaXmlRetorno);
+
+                        if (ConfiguracaoApp.Proxy)
+                            ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
                         ipm.EmitirNF(NomeArquivoXML, (TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo, true);
+
                         break;
 
                     case PadroesNFSe.GINFES:

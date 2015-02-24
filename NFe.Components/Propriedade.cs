@@ -105,11 +105,19 @@ namespace NFe.Components
         /// <summary>
         /// Retorna o XML contendos as definicoes dos webservices
         /// </summary>
+        private static string _NomeArqXMLWebService_NFe = "";
         public static string NomeArqXMLWebService_NFe
         {
             get 
             {
-                return Propriedade.PastaExecutavel + "\\NFe\\WSDL\\Webservice.xml"; 
+                if (string.IsNullOrEmpty(_NomeArqXMLWebService_NFe))
+                    return Propriedade.PastaExecutavel + "\\NFe\\WSDL\\Webservice.xml";
+
+                return _NomeArqXMLWebService_NFe;
+            }
+            set
+            {
+                _NomeArqXMLWebService_NFe = value;
             }
         }
         public static string NomeArqXMLWebService_NFSe
@@ -133,71 +141,35 @@ namespace NFe.Components
                 {
                     _Estados = new List<Components.Municipio>();
 
-                    XElement axml = XElement.Load(NomeArqXMLWebService_NFe);
-                    var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                             where (Int32)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) < 900
-                             orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
-                             select new 
-                            {
-                                Nome = (string)p.Attribute(NFeStrConstants.Nome),
-                                ID = (Int32)p.Attribute(TpcnResources.ID.ToString()),
-                                UF = (string)p.Attribute(TpcnResources.UF.ToString()),
-                                SVC = (string)p.Attribute(NFeStrConstants.SVC)
-                            });
-                    foreach (var item in s)
+                    if (File.Exists(NomeArqXMLWebService_NFe))
                     {
-                        _Estados.Add(new Municipio
+                        XElement axml = XElement.Load(NomeArqXMLWebService_NFe);
+                        var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                                 where (Int32)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) < 900
+                                 orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
+                                 select new
+                                {
+                                    Nome = (string)p.Attribute(NFeStrConstants.Nome),
+                                    ID = (Int32)p.Attribute(TpcnResources.ID.ToString()),
+                                    UF = (string)p.Attribute(TpcnResources.UF.ToString()),
+                                    SVC = (string)p.Attribute(NFeStrConstants.SVC)
+                                });
+                        foreach (var item in s)
                         {
-                            CodigoMunicipio = item.ID,
-                            Nome = item.Nome,
-                            UF = item.UF,
-                            svc =  NFe.Components.EnumHelper.StringToEnum<TipoEmissao>(item.SVC)
-                        });
+                            _Estados.Add(new Municipio
+                            {
+                                CodigoMunicipio = item.ID,
+                                Nome = item.Nome,
+                                UF = item.UF,
+                                svc = NFe.Components.EnumHelper.StringToEnum<TipoEmissao>(item.SVC)
+                            });
+                        }
                     }
                 }
                 return _Estados;
             }
             set { _Estados = value; }
         }
-
-        /*
-        public static string[,] CodigosEstados
-        {
-            get
-            {
-                return new string[,] 
-                {
-                    { "12", "AC - Acre" },
-                    { "27", "AL - Alagoas" },
-                    { "16", "AP - Amapá" },
-                    { "13", "AM - Amazonas" },
-                    { "29", "BA - Bahia" },
-                    { "23", "CE - Ceará" },
-                    { "53", "DF - Distrito Federal" },
-                    { "32", "ES - Espirito Santo" },
-                    { "52", "GO - Goiás" },
-                    { "21", "MA - Maranhão" },
-                    { "51", "MT - Mato Grosso" },
-                    { "50", "MS - Mato Grosso do Sul" },
-                    { "31", "MG - Minas Gerais" },
-                    { "15", "PA - Pará" },
-                    { "25", "PB - Paraiba" },
-                    { "41", "PR - Paraná" },
-                    { "26", "PE - Pernambuco" },
-                    { "22", "PI - Piauí" },
-                    { "33", "RJ - Rio de Janeiro" },
-                    { "24", "RN - Rio Grande do Norte" },
-                    { "43", "RS - Rio Grande do Sul" },
-                    { "11", "RO - Rondonia" },
-                    { "14", "RR - Roraima" },
-                    { "42", "SC - Santa Catarina" },
-                    { "35", "SP - São Paulo" },
-                    { "28", "SE - Sergipe" },
-                    { "17", "TO - Tocantins" }
-                };
-            }
-        }
-*/
 
         /// <summary>
         /// Retorna a pasta onde são gravados os log´s do UniNFe

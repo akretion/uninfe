@@ -54,7 +54,7 @@ namespace NFe.Components
             }
         }
 
-        private static string getURLs(string local, PadroesNFSe padrao, int idMunicipio)
+        private static string getURLs(string local, ref PadroesNFSe padrao, int idMunicipio)
         {
             /*
              * tenta ler as URL's do 'WebService.xml'
@@ -64,21 +64,35 @@ namespace NFe.Components
             if (System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe))
             {
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
+                ///
+                /// primeiro, pesquisa pelo ID
+                /// 
                 var s = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                         where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
+                         where  //(string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
                                 (string)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) == idMunicipio.ToString()
                          select p);
                 foreach (var item in s)
                 {
                     if (item.Element(local) != null)
+                    {
+                        ///
+                        /// pega o padrao definido no WebService.xml descartando o que constar no UninMunic.xml
+                        /// 
+                        padrao = WebServiceNFSe.GetPadraoFromString(item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value);
+
                         return local.Equals(NFe.Components.NFeStrConstants.LocalHomologacao) ?
                             item.FirstNode.ToString() : item.LastNode.ToString();
                 }
+                }
+                ///
+                /// não encontrei, assume o ID='padrao' e UF='XX' e padrao='padrao'
+                /// 
+                PadroesNFSe pdr = padrao;
 
                 var xs = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
-                          where (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == padrao.ToString() &&
+                          where  (string)p.Attribute(NFe.Components.NFeStrConstants.Padrao) == pdr.ToString() &&
                                  (string)p.Attribute(TpcnResources.UF.ToString()) == "XX" &&
-                                 (string)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) == padrao.ToString()
+                                 (string)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) == pdr.ToString()
                           select p);
                 foreach (var item in xs)
                 {
@@ -91,19 +105,15 @@ namespace NFe.Components
             return "";
         }
 
-        public static string WebServicesHomologacao(PadroesNFSe padrao, int idMunicipio = 0)
+        public static string WebServicesHomologacao(ref PadroesNFSe padrao, int idMunicipio = 0)
         {
-            string result = getURLs(NFe.Components.NFeStrConstants.LocalHomologacao, padrao, idMunicipio);
-    
-            return result;
+            return getURLs(NFe.Components.NFeStrConstants.LocalHomologacao, ref padrao, idMunicipio);
 
         }
 
-        public static string WebServicesProducao(NFe.Components.PadroesNFSe padrao, int idMunicipio = 0)
+        public static string WebServicesProducao(ref NFe.Components.PadroesNFSe padrao, int idMunicipio = 0)
         {
-            string result = getURLs(NFe.Components.NFeStrConstants.LocalProducao, padrao, idMunicipio);
-
-            return result;
+            return getURLs(NFe.Components.NFeStrConstants.LocalProducao, ref padrao, idMunicipio);
         }
 
         public static NFe.Components.PadroesNFSe GetPadraoFromString(string padrao)
@@ -170,7 +180,8 @@ namespace NFe.Components
 
                 var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
                 XElement elementos = new XElement("nfes_municipios");
-                foreach (Municipio item in Propriedade.Municipios)
+                var r = (from ss in Propriedade.Municipios orderby ss.Nome select ss);
+                foreach (Municipio item in r)//Propriedade.Municipios)
                 {
                     elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
                                     new XAttribute(NFe.Components.TpcnResources.ID.ToString(), item.CodigoMunicipio.ToString()),
@@ -203,6 +214,7 @@ namespace NFe.Components
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFeStrConstants.Estado)
                          where (string)p.Attribute(TpcnResources.UF.ToString()) != "XX"
+                         orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
                          select p);
                 foreach (var item in s)
                 {

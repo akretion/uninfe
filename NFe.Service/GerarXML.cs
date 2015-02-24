@@ -2831,14 +2831,14 @@ namespace NFe.Service
 
             try
             {
-                if (string.IsNullOrEmpty(Arquivo))
-                    throw new Exception("Nome do arquivo deve ser informado");
-
                 //Arquivo na pasta Temp
                 arqTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + Path.GetFileName(Arquivo);
 
                 if (Arquivo.ToLower().IndexOf(Empresas.Configuracoes[EmpIndex].PastaValidar.ToLower()) >= 0)
                     arqTemp = Arquivo;
+
+                if (string.IsNullOrEmpty(Arquivo))
+                    throw new Exception("Nome do arquivo deve ser informado");
 
                 MemoryStream oMemoryStream;
                 ///

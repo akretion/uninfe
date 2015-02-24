@@ -28,6 +28,7 @@ namespace NFe.UI
 
         uninfe_ws.UserControl3 uc1;
         uninfe_ws.UserControl3 uc2;
+        uninfe_ws.UserControl3 uc3;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -80,13 +81,18 @@ namespace NFe.UI
 
             uc1 = new UserControl3();
             uc1.Parent = metroTabPage1;
-            uc1.loadData(NFe.Components.TipoAplicativo.Nfe);
+            uc1.loadData(NFe.Components.TipoAplicativo.Nfe, null);
             uc1.Dock = DockStyle.Fill;
 
             uc2 = new UserControl3();
             uc2.Parent = metroTabPage2;
-            uc2.loadData(NFe.Components.TipoAplicativo.Nfse);
+            uc2.loadData(NFe.Components.TipoAplicativo.Nfse, null);
             uc2.Dock = DockStyle.Fill;
+
+            uc3 = new UserControl3();
+            uc3.Parent = metroTabPage3;
+            uc3.loadData(NFe.Components.TipoAplicativo.Nfse, "XX");
+            uc3.Dock = DockStyle.Fill;
         }
     }
 

@@ -79,7 +79,7 @@ namespace NFe.Threadings
             {
                 try
                 {
-                    if (!String.IsNullOrEmpty(Directory))
+                    if (!String.IsNullOrEmpty(Directory) && System.IO.Directory.Exists(Directory))
                     {
                         var Files = System.IO.Directory.GetFiles(Directory, "*.*", System.IO.SearchOption.TopDirectoryOnly).
                                         Where(s => Filter.Contains(System.IO.Path.GetExtension(s).ToLower()));

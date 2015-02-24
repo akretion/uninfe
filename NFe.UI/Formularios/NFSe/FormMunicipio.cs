@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -28,22 +30,26 @@ namespace NFe.UI.Formularios.NFSe
             {
                 this.edtUF.Items.Add(estado.UF);
             }
-            /*
-            for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-            {
-                this.edtUF.Items.Add(Propriedade.CodigosEstados[v, 1].Substring(0, 2));
-            }
-            */
             this.edtUF.SelectedIndex = 0;
 
+            var _PadroesDataSource = new List<PadroesDataSource>();
+            XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
+            var xs = (from p in axml.Descendants(NFe.Components.NFeStrConstants.Estado)
+                      where p.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == "XX" &&
+                             p.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == p.Attribute(NFe.Components.NFeStrConstants.Padrao).Value
+                      orderby p.Attribute(NFe.Components.NFeStrConstants.Padrao).Value
+                      select p);
+            foreach (var item in xs)
+            {
+                PadroesNFSe type = WebServiceNFSe.GetPadraoFromString(item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value);
+                _PadroesDataSource.Add(new PadroesDataSource { fromType = type.ToString(), fromDescription = EnumHelper.GetEnumItemDescription(type) });
+            }
+
             this.edtPadrao.Sorted = false;
-            this.edtPadrao.DataSource = WebServiceNFSe.PadroesNFSeListDataSource.Where(p => p.fromType != PadroesNFSe.NaoIdentificado.ToString()).ToList();
+            this.edtPadrao.DataSource = _PadroesDataSource;// WebServiceNFSe.PadroesNFSeListDataSource.Where(p => p.fromType != PadroesNFSe.NaoIdentificado.ToString()).ToList();
             this.edtPadrao.ValueMember = "fromType";
             this.edtPadrao.DisplayMember = "fromDescription";
             
-            //this.edtPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
-            //this.edtPadrao.Items.RemoveAt(0);
-            //this.edtPadrao.Sorted = true;
             this.edtPadrao.SelectedIndex = 0;
         }
 

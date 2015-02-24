@@ -22,7 +22,6 @@ namespace NFe.Service
 
         #region Classe com os dados do XML do registro de eventos
         private DadosenvEvento dadosEnvEvento;
-        private int tpEmis = 0;
         private bool novaNomenclatura = false;
         #endregion
 
@@ -37,7 +36,7 @@ namespace NFe.Service
                 EnvEvento(emp, NomeArquivoXML);
 
                 string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
-                // mudei para aqui cajo haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
+                // mudei para aqui caso haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
@@ -53,22 +52,17 @@ namespace NFe.Service
                         Servico = Servicos.EventoManifestacaoDest;
                         break;
                 }
-                foreach (Evento item in dadosEnvEvento.eventos)
-                {
-                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir
-                    if (!currentEvento.Equals(item.tpEvento))
-                        throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
-                }
+                ValidaEvento(emp, dadosEnvEvento);
 
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
                 int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
+                int tpEmis = Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
                 int ufParaWS = cOrgao;
 
                 //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
                 if (cOrgao == 91)
                     ufParaWS = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
 
-                // Se for evento de cancelamento
                 switch (Servico)
                 {
                     case Servicos.EventoCancelamento:
@@ -92,13 +86,10 @@ namespace NFe.Service
                         //CCe só existe no ambiente Normal. Wandrey 22/04/2013
                         tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
-
+                        /*
                     case Servicos.EventoEPEC:
                         tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
-                        break;
-
-                    default:
-                        break;
+                        break;*/
                 }
 
                 if (vXmlNfeDadosMsgEhXML)
@@ -273,6 +264,7 @@ namespace NFe.Service
                 }
             }
         }
+
         #endregion
 
         #region EnvEvento()
