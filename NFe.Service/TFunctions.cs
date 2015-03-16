@@ -796,6 +796,14 @@ namespace NFe.Service
                             fTemp = Directory.GetFiles(emp.PastaContingencia,
                                                             Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, Propriedade.ExtEnvio.PedEve) + Propriedade.ExtEnvio.Nfe),
                                                             SearchOption.AllDirectories);
+                            if (fTemp.Length == 0)
+                                fTemp = Directory.GetFiles(emp.PastaValidado,
+                                                                Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.ProcEventoNFe : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
+                                                                SearchOption.TopDirectoryOnly);
+                            if (fTemp.Length == 0)
+                                fTemp = Directory.GetFiles(emp.PastaContingencia,
+                                                                Path.GetFileName(Functions.ExtrairNomeArq(nomeArqXMLNFe, (isEPEC ? Propriedade.ExtRetorno.ProcEventoNFe : Propriedade.ExtRetorno.retDPEC_XML)) + Propriedade.ExtEnvio.Nfe),
+                                                                SearchOption.TopDirectoryOnly);
                             if (fTemp.Length > 0)
                             {
                                 arqProcNFe = fTemp[0];

@@ -2298,6 +2298,12 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PLucasRVMT_WebISS.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRegenteFeijo-PRONIN.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -95,7 +95,10 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         ler.oDadosPedSitNfseRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
 
                         simpliss.ConsultarNfsePorRps(NomeArquivoXML);
                         break;

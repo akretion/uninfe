@@ -25,6 +25,7 @@ namespace NFe.ConvertTxt
         private string Registro;
         private string layout;
         private string chave;
+        private const string prefix = "§";
         /// <summary>
         /// conteudo do arquivo de cada nota
         /// </summary>
@@ -74,7 +75,7 @@ namespace NFe.ConvertTxt
                             }
                             List<string> temp;
                             xConteudoArquivo.TryGetValue(nNota, out temp);
-                            temp.Add("§" + cLinhaTXT.Trim() + (!cLinhaTXT.EndsWith("|") ? "|" : ""));
+                            temp.Add(prefix + cLinhaTXT.Trim() + (!cLinhaTXT.EndsWith("|") ? "|" : ""));
                         }
                         cLinhaTXT = txt.ReadLine();
                     }
@@ -128,7 +129,7 @@ namespace NFe.ConvertTxt
                         catch(Exception ex)
                         {
                             houveErro = true;
-                            this.cMensagemErro += "Layout: " + this.layout.Replace("§", "") + Environment.NewLine;
+                            this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                             this.cMensagemErro += "Linha lida: " + (this.LinhaLida+1).ToString()+ Environment.NewLine+
                                                     "Conteudo: " + xContent.Substring(1) + Environment.NewLine +
                                                     ex.Message + Environment.NewLine;
@@ -267,14 +268,15 @@ namespace NFe.ConvertTxt
             /// neste caso no comando abaixo será retornado "§B14|cUF|AAMM|" existindo 3 pipes para pegar
             /// o valor do retorno
             /// 
-            if (!layout.StartsWith("§")) layout = "§" + layout;
+
+            if (!layout.StartsWith(prefix)) layout = prefix + layout;
             if (!layout.EndsWith("|")) layout += "|";
             string fValue = layout.Substring(0, layout.ToUpper().IndexOf("|" + TAG.ToUpper().Trim() + "|") + 1);
             if (fValue == "")
                 throw new Exception("Segmento: " + this.FSegmento + " - Tag: " + TAG + " não encontrada");
 
             string[] pipes = fValue.Split(new char[] { '|' });
-            int j = pipes.GetLength(0) - 2;
+            int j = pipes.GetLength(0) - 1;
             if (j >= 0)
             {
                 ///
@@ -283,7 +285,7 @@ namespace NFe.ConvertTxt
                 string[] dados = this.Registro.Split(new char[] { '|' });
                 try
                 {
-                    return dados[j + 1].TrimStart().TrimEnd();
+                    return dados[j/* + 1*/].TrimStart().TrimEnd();
                 }
                 catch
                 {
@@ -342,7 +344,7 @@ namespace NFe.ConvertTxt
                 ConteudoTag = RetornarConteudoTag(tag.ToString());
 
                 if (ConteudoTag != "")
-                    if (ConteudoTag.StartsWith("§"))
+                    if (ConteudoTag.StartsWith(prefix))
                         ConteudoTag = "";
 
                 int len = ConteudoTag.Length;
@@ -381,7 +383,7 @@ namespace NFe.ConvertTxt
 
                     if (len == 0 && minLength > 0)
                     {
-                        this.cMensagemErro += "Layout: " + this.layout.Replace("§", "") + Environment.NewLine;
+                        this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                         this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ser informada.\r\n" +
                                                             "\tLinha: {2}: Conteudo do segmento: {3}",
                                                             this.FSegmento, tag.ToString(), this.LinhaLida, this.Registro.Substring(1)) + Environment.NewLine;
@@ -399,7 +401,7 @@ namespace NFe.ConvertTxt
                             default:
                                 if ((len > maxLength || len < minLength) && (maxLength + minLength > 0))
                                 {
-                                    this.cMensagemErro += "Layout: " + this.layout.Replace("§", "") + Environment.NewLine;
+                                    this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                                     this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> deve ter seu tamanho entre {2} e {3}. Conteudo: {4}" +
                                                             "\r\n\tLinha: {5}: Conteudo do segmento: {6}",
                                                             this.FSegmento, tag.ToString(), minLength, maxLength, ConteudoTag, this.LinhaLida, this.Registro.Substring(1)) + Environment.NewLine;
@@ -433,7 +435,7 @@ namespace NFe.ConvertTxt
 
                                 if (ndec > nDecimais)
                                 {
-                                    this.cMensagemErro += "Layout: " + this.layout.Replace("§", "") + Environment.NewLine;
+                                    this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                                     this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" +
                                                                         "\r\n\tLinha: {4}: Conteudo do segmento: {5}",
                                                                         this.FSegmento, tag.ToString(), nDecimais, ndec, this.LinhaLida, this.Registro.Substring(1)) + Environment.NewLine;
@@ -587,7 +589,7 @@ namespace NFe.ConvertTxt
             }
             catch (Exception ex)
             {
-                this.cMensagemErro += "Layout: " + this.layout.Replace("§", "") + Environment.NewLine;
+                this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> Conteudo: {2}\r\n" +
                                                     "\tLinha: {3}: Conteudo do segmento: {4}\r\n\tMensagem de erro: {5}",
                                                     this.FSegmento, tag.ToString(), ConteudoTag, this.LinhaLida, this.Registro.Substring(1),
@@ -711,7 +713,7 @@ namespace NFe.ConvertTxt
 
                 case "B13":
                 case "BA02":
-                    layout = "§"+ this.FSegmento + "|refNFe"; //ok
+                    layout = prefix+ this.FSegmento + "|refNFe"; //ok
 
                     ///
                     /// Grupo da TAG <ide><NFref><refNFe>
@@ -725,7 +727,7 @@ namespace NFe.ConvertTxt
 
                 case "B14":
                 case "BA03":
-                    layout = "§" + this.FSegmento + "|cUF|AAMM|CNPJ|mod|serie|nNF"; //ok
+                    layout = prefix + this.FSegmento + "|cUF|AAMM|CNPJ|mod|serie|nNF"; //ok
 
                     ///
                     /// Grupo da TAG <ide><NFref><RefNF>
@@ -750,7 +752,7 @@ namespace NFe.ConvertTxt
                 case "BA10":
 
                 case "B20A":
-                    layout = "§" + this.FSegmento + "|cUF|AAMM|IE|mod|serie|nNF" + (FSegmento.ToUpper().Equals("BA10") ? "|refCTe" : "");
+                    layout = prefix + this.FSegmento + "|cUF|AAMM|IE|mod|serie|nNF" + (FSegmento.ToUpper().Equals("BA10") ? "|refCTe" : "");
 
                     #region B20a | BA10
                     {
@@ -764,7 +766,7 @@ namespace NFe.ConvertTxt
                         item.refNFP.nNF     = this.LerInt32(TpcnResources.nNF, ObOp.Obrigatorio, 1, 9);
                         if (FSegmento.ToUpper().Equals("BA10"))
                         {
-                            item.refCTe = this.LerString(TpcnResources.refCTe, ObOp.Obrigatorio, 44, 44);
+                            item.refCTe = this.LerString(TpcnResources.refCTe, ObOp.Opcional, 44, 44);
                         }
                         NFe.ide.NFref.Add(item);
                     }
@@ -773,7 +775,7 @@ namespace NFe.ConvertTxt
 
                 case "B20D":
                 case "BA13":
-                    layout = "§" + this.FSegmento + "|CNPJ"; //ok
+                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
 
                     if (NFe.ide.NFref.Count == 0 || (NFe.ide.NFref.Count > 0 && NFe.ide.NFref[NFe.ide.NFref.Count-1].refNFP == null))
                         throw new Exception(FSegmento.ToUpper().Equals("B20D") ? "Segmento B20d sem segmento B20A" : "Segmento BA13 sem segmento BA10");
@@ -782,7 +784,7 @@ namespace NFe.ConvertTxt
 
                 case "B20E":
                 case "BA14":
-                    layout = "§" + this.FSegmento + "|CPF"; //ok
+                    layout = prefix + this.FSegmento + "|CPF"; //ok
 
                     if (NFe.ide.NFref.Count == 0 || (NFe.ide.NFref.Count > 0 && NFe.ide.NFref[NFe.ide.NFref.Count - 1].refNFP == null))
                         throw new Exception(FSegmento.ToUpper().Equals("B20E") ? "Segmento B20e sem segmento B20A" : "Segmento BA14 sem segmento BA10");
@@ -797,7 +799,7 @@ namespace NFe.ConvertTxt
 
                 case "B20J":
                 case "BA20":
-                    layout = "§"+ this.FSegmento + "|mod|nECF|nCOO"; //ok
+                    layout = prefix+ this.FSegmento + "|mod|nECF|nCOO"; //ok
                     {
                         NFref item = new NFref();
                         item.refECF = new refECF();
@@ -1022,24 +1024,24 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "G02":
-                    layout = "§" + this.FSegmento + "|CNPJ"; //ok
+                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
                     NFe.entrega.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14);
                     break;
 
                 case "G02A":
-                    layout = "§" + this.FSegmento + "|CPF"; //ok
+                    layout = prefix + this.FSegmento + "|CPF"; //ok
                     NFe.entrega.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     break;
 
                 case "G51":
                 case "GA02":
-                    layout = "§" + this.FSegmento + "|CNPJ"; //ok
+                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
                     NFe.autXML.Add(new autXML { CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14) });
                     break;
 
                 case "G52":
                 case "GA03":
-                    layout = "§" + this.FSegmento + "|CPF"; //ok
+                    layout = prefix + this.FSegmento + "|CPF"; //ok
                     NFe.autXML.Add(new autXML { CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11) });
                     break;
 
@@ -1057,8 +1059,6 @@ namespace NFe.ConvertTxt
 
                 case "I":
                         layout = "§I|cProd|cEAN|XProd|NCM|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI"; //ok
-                    if (NFe.infNFe.Versao >= 3 && lenPipesRegistro > 23)
-                        layout = "§I|cProd|cEAN|XProd|NCM|NVE|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI"; //ok
                     ///
                     /// Grupo da TAG <det><prod>
                     /// 
@@ -1068,10 +1068,6 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.cEAN = this.LerString(TpcnResources.cEAN, ObOp.Obrigatorio, 0, 14);
                     NFe.det[nProd].Prod.xProd   = this.LerString(TpcnResources.xProd, ObOp.Obrigatorio, 1, 120);
                     NFe.det[nProd].Prod.NCM     = this.LerString(TpcnResources.NCM, ObOp.Obrigatorio, 2, 8);
-                    if (NFe.infNFe.Versao >= 3 && lenPipesRegistro > 23)
-                    {
-                        NFe.det[nProd].Prod.NVE = this.LerString(TpcnResources.NVE, ObOp.Opcional, 0, 6);
-                    }
                     NFe.det[nProd].Prod.EXTIPI  = this.LerString(TpcnResources.EXTIPI, ObOp.Opcional, 2, 3);
                     NFe.det[nProd].Prod.CFOP    = this.LerString(TpcnResources.CFOP, ObOp.Obrigatorio, 4, 4);
                     NFe.det[nProd].Prod.uCom    = this.LerString(TpcnResources.uCom, ObOp.Obrigatorio, 1, 6);
@@ -1097,7 +1093,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I05A":
-                    layout = "§" + this.FSegmento + "|NVE";
+                    layout = prefix + this.FSegmento + "|NVE";
                     NFe.det[nProd].Prod.NVE = this.LerString(TpcnResources.NVE, ObOp.Opcional, 0, 6);
                     break;
 
@@ -1210,7 +1206,7 @@ namespace NFe.ConvertTxt
 
                 case "J":   
                 case "JA":
-                    layout = "§" + this.FSegmento + "|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest"; //ok
+                    layout = prefix + this.FSegmento + "|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest"; //ok
                     ///
                     /// Grupo da TAG <det><prod><veicProd>
                     /// 
@@ -1284,8 +1280,8 @@ namespace NFe.ConvertTxt
                 case "LA":
                 case "L01":
                     layout = (NFe.infNFe.Versao >= 3 ?
-                                "§" + this.FSegmento + "|CProdANP|pMixGN|CODIF|QTemp|UFCons" :
-                                "§" + this.FSegmento + "|CProdANP|CODIF|QTemp|UFCons"); //ok
+                                prefix + this.FSegmento + "|CProdANP|pMixGN|CODIF|QTemp|UFCons" :
+                                prefix + this.FSegmento + "|CProdANP|CODIF|QTemp|UFCons"); //ok
                     ///
                     /// Grupo da TAG <det><prod><comb>
                     /// 
@@ -1311,7 +1307,7 @@ namespace NFe.ConvertTxt
 
                 case "LA07":
                 case "L105":
-                    layout = "§" + this.FSegmento + "|qBCProd|vAliqProd|vCIDE"; //ok
+                    layout = prefix + this.FSegmento + "|qBCProd|vAliqProd|vCIDE"; //ok
                     ///
                     /// Grupo da TAG <det><prod><comb><CIDE>
                     /// 
@@ -1324,7 +1320,7 @@ namespace NFe.ConvertTxt
 
                 case "LB":
                 case "L109":
-                    layout = "§" + this.FSegmento + "|nRECOPI"; //ok
+                    layout = prefix + this.FSegmento + "|nRECOPI"; //ok
                     NFe.det[nProd].Prod.nRECOPI = this.LerString(TpcnResources.nRECOPI, ObOp.Opcional, 20, 20);
                     break;
 
@@ -1418,18 +1414,18 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N06":
-                    //layout = "§N06|orig|CST|vICMSDeson|motDesICMS";   <<<<<<<<< layout errado da Sefaz
                     layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N06|orig|CST|vICMS|vICMSDeson|motDesICMS" :
+                                "§N06|orig|CST|vICMSDeson|motDesICMS" :
                                 "§N06|orig|CST|vICMS|motDesICMS");
 
                     #region ICMS40, ICMS41 ICMS50
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CST = this.LerString(TpcnResources.CST, ObOp.Obrigatorio, 2, 2);
-                    NFe.det[nProd].Imposto.ICMS.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional, 15);
                     if (NFe.infNFe.Versao >= 3)
                         NFe.det[nProd].Imposto.ICMS.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    else
+                        NFe.det[nProd].Imposto.ICMS.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional, 15);
                     NFe.det[nProd].Imposto.ICMS.motDesICMS = this.LerInt32(TpcnResources.motDesICMS, ObOp.Opcional, 1, 1);
 
                     #endregion
@@ -2365,7 +2361,7 @@ namespace NFe.ConvertTxt
                 case "ZA01":    //Só UniNFe
                     if (NFe.infNFe.Versao >= 3)
                     {
-                        layout = "§"+this.FSegmento+"|UFSaidaPais|xLocExporta|xLocDespacho"; //ok
+                        layout = prefix+this.FSegmento+"|UFSaidaPais|xLocExporta|xLocDespacho"; //ok
                         ///
                         /// Grupo da TAG <exporta>
                         /// 
@@ -2397,7 +2393,7 @@ namespace NFe.ConvertTxt
                 case "ZC":
 
                 case "ZC01":
-                    layout = "§"+this.FSegmento + "|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor";
+                    layout = prefix+this.FSegmento + "|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor";
                     NFe.cana.safra = this.LerString(TpcnResources.safra, ObOp.Obrigatorio, 4, 9);
                     NFe.cana.Ref = this.LerString(TpcnResources.Ref, ObOp.Obrigatorio, 7, 7);
                     NFe.cana.qTotMes = this.LerDouble(TpcnTipoCampo.tcDec10, TpcnResources.qTotMes, ObOp.Obrigatorio, 11);

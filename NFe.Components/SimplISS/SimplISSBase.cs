@@ -17,6 +17,9 @@ namespace NFe.Components.SimplISS
         int CodigoMun = 0;
         string Usuario = "";
         string SenhaWs = "";
+        string ProxyUser = "";
+        string ProxyPass = "";
+        string ProxyServer = "";
         EmiteNFSeBase simplissService;
         protected EmiteNFSeBase SimplISSService
         {
@@ -28,7 +31,7 @@ namespace NFe.Components.SimplISS
                         switch (CodigoMun)
                         {
                             case 3538709: //Piracicaba-SP 
-                                simplissService = new NFe.Components.SimplISS.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                simplissService = new NFe.Components.SimplISS.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:
@@ -38,7 +41,7 @@ namespace NFe.Components.SimplISS
                         switch (CodigoMun)
                         {
                             case 3538709: //Piracicaba-SP 
-                                simplissService = new NFe.Components.SimplISS.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                simplissService = new NFe.Components.SimplISS.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:
@@ -51,12 +54,15 @@ namespace NFe.Components.SimplISS
         #endregion
 
         #region Construtores
-        public SimplISSBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs)
+        public SimplISSBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
             CodigoMun = codMun;
             Usuario = usuario;
             SenhaWs = senhaWs;
+            ProxyUser = proxyuser;
+            ProxyPass = proxypass;
+            ProxyServer = proxyserver;
         }
         #endregion
 

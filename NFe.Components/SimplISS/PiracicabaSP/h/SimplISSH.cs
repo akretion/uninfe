@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
 using NFe.Components.br.gov.sp.piracicaba.sistemas.www.h;
+using System.Net;
 
 namespace NFe.Components.SimplISS.h
 {
@@ -17,11 +18,21 @@ namespace NFe.Components.SimplISS.h
     {
         NfseService service = new NfseService();
         ddDuasStrings dadosConexao = new ddDuasStrings();
-        
+
         #region construtores
-        public SimplISSH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs)
+        public SimplISSH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
+            if (!String.IsNullOrEmpty(proxyuser))
+            {
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(proxyuser, proxypass, proxyserver);
+                System.Net.WebRequest.DefaultWebProxy.Credentials = credentials;
+
+                service.Proxy = WebRequest.DefaultWebProxy;
+                service.Proxy.Credentials = new NetworkCredential(proxyuser, proxypass);
+                service.Credentials = new NetworkCredential(proxyuser, proxypass);
+            }
+            
             dadosConexao.P1 = usuario;
             dadosConexao.P2 = senhaWs;
         }
@@ -41,7 +52,7 @@ namespace NFe.Components.SimplISS.h
             GerarNovaNfseResposta result = service.GerarNfse(oGerarNfseEnvio, dadosConexao);
 
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
         }
 
         public override void CancelarNfse(string file)
@@ -217,7 +228,7 @@ namespace NFe.Components.SimplISS.h
                     {
                         Object instance =
                         System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(
-                            "NFe.Components.br.gov.sp.piracicaba.sistemas.www.p." + this.GetNameObject(n.Name),
+                            "NFe.Components.br.gov.sp.piracicaba.sistemas.www.h." + this.GetNameObject(n.Name),
                             false,
                             BindingFlags.Default,
                             null,
@@ -237,7 +248,7 @@ namespace NFe.Components.SimplISS.h
                     }
                 }
             }
-            catch 
+            catch
             {
                 throw;
             }

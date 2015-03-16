@@ -44,9 +44,19 @@ namespace NFe.ConvertTxt
         private string readValue(object element, string tag)
         {
             if (((XmlElement)element).GetElementsByTagName(tag)[0] != null)
-                return ((XmlElement)element).GetElementsByTagName(tag)[0].InnerText;
+                return ReverterFiltroTextoXML(((XmlElement)element).GetElementsByTagName(tag)[0].InnerText);
 
             return "";
+        }
+
+        private string ReverterFiltroTextoXML(string aTexto)
+        {
+            aTexto = aTexto.Replace("&amp;", "&");
+            aTexto = aTexto.Replace("&lt;", "<");
+            aTexto = aTexto.Replace("&gt;", ">");
+            aTexto = aTexto.Replace("&quot;", "\"");
+            aTexto = aTexto.Replace("&#39;", "'");
+            return aTexto.Trim();
         }
 
         public void ReadFromString(string xmlString)

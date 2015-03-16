@@ -110,7 +110,10 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitNfse.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
 
                         simpliss.ConsultarNfse(NomeArquivoXML);
                         break;

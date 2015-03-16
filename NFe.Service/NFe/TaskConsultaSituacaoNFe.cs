@@ -395,7 +395,8 @@ namespace NFe.Service
                                                     string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                                 PastaEnviados.Autorizados.ToString() + "\\" +
                                                                                 Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                                Path.GetFileName(strArquivoNFeProc);
+                                                                                Path.GetFileName(strArquivoNFe);
+
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }
                                                 catch (Exception ex)
@@ -418,10 +419,15 @@ namespace NFe.Service
                                     case "301":
                                     case "302":
                                     case "303":                                       
-                                        //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s Denegados
-                                        //
-                                        // NFe existe na pasta EmProcessamento?
-                                        ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml, versao);
+                                        if (File.Exists(strArquivoNFe))
+                                        {
+                                            ///
+                                            /// se o ERP copiou o arquivo da NFe para a pasta em Processamento, o Uninfe irá montar o XML de distribuicao, caso nao exista,  
+                                            /// e imprimir o DANFE
+                                            /// 
+                                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, protNFeElemento.OuterXml, versao);
+                                        }
+                                        //ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml, versao);
                                         break;
 
                                     default:

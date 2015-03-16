@@ -156,7 +156,10 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
 
                         AssinaturaDigital sign = new AssinaturaDigital();
                         sign.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);

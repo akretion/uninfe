@@ -147,13 +147,14 @@ namespace NFe.Settings
         /// <param name="Arquivo">Arquivo XML a ser verificado</param>
         /// <param name="Emissao">Data de emissão da NFe</param>
         /// <returns>Se está na pasta de XML´s denegados</returns>
-        public bool EstaDenegada(string Arquivo, DateTime Emissao)
+        public bool EstaDenegada(string Arquivo, DateTime Emissao, string extNFe, string extArqProtNfe)
         {
             int emp = Empresas.FindEmpresaByThread();
             string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
-            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
+            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, extNFe) + extArqProtNfe);
+            //return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
         }
         #endregion
 

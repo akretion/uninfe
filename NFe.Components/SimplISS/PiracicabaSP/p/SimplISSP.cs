@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
 using NFe.Components.br.gov.sp.piracicaba.sistemas.www.p;
+using System.Net;
 
 namespace NFe.Components.SimplISS.p
 {
@@ -19,9 +20,19 @@ namespace NFe.Components.SimplISS.p
         ddDuasStrings dadosConexao = new ddDuasStrings();
 
         #region construtores
-        public SimplISSP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs)
+        public SimplISSP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
+            if (!String.IsNullOrEmpty(proxyuser))
+            {
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(proxyuser, proxypass, proxyserver);
+                System.Net.WebRequest.DefaultWebProxy.Credentials = credentials;
+
+                service.Proxy = WebRequest.DefaultWebProxy;
+                service.Proxy.Credentials = new NetworkCredential(proxyuser, proxypass);
+                service.Credentials = new NetworkCredential(proxyuser, proxypass);
+            }
+
             dadosConexao.P1 = usuario;
             dadosConexao.P2 = senhaWs;
         }

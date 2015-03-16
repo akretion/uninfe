@@ -2552,4 +2552,24 @@
       <InutilizarNFSe></InutilizarNFSe>
     </LocalProducao>
   </Estado>
+  <Estado ID="3542404" Nome="Regente Feijó - SP" UF="SP" Padrao="PRONIN">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HRegenteFeijo-PRONIN.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PRegenteFeijo-PRONIN.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

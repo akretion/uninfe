@@ -23,7 +23,7 @@ namespace NFe.Components.Abstract
         public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
         {
             FileInfo fi = new FileInfo(file);
-            string nomearq = PastaRetorno + "\\" + fi.Name.Replace(extEnvio, extRetorno);
+            string nomearq = PastaRetorno + "\\" + fi.Name.ToLower().Replace(extEnvio.ToLower(), extRetorno.ToLower());
 
             StreamWriter write = new StreamWriter(nomearq);
             write.Write(result);

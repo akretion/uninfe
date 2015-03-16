@@ -536,7 +536,7 @@ namespace NFe.ConvertTxt
                     if (NFe.infNFe.Versao >= 3)
                     {
                         wCampo((int)di.tpViaTransp, TpcnTipoCampo.tcInt, TpcnResources.tpViaTransp, ObOp.Opcional);
-                        wCampo(di.vAFRMM, TpcnTipoCampo.tcDec2, TpcnResources.vAFRMM, ObOp.Opcional);
+                        wCampo(di.vAFRMM, TpcnTipoCampo.tcDec2, TpcnResources.vAFRMM, di.tpViaTransp == TpcnTipoViaTransp.tvMaritima ? ObOp.Obrigatorio : ObOp.Opcional);
                         wCampo((int)di.tpIntermedio, TpcnTipoCampo.tcInt, TpcnResources.tpIntermedio, ObOp.Opcional);
                         wCampo(di.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Opcional);
                         wCampo(di.UFTerceiro, TpcnTipoCampo.tcStr, TpcnResources.UFTerceiro, ObOp.Opcional);
@@ -1036,10 +1036,13 @@ namespace NFe.ConvertTxt
                         case "40":
                         case "41":
                         case "50":
-                            if ((double)nfe.infNFe.Versao >= 3.10 && imposto.ICMS.vICMSDeson > 0)
+                            if ((double)nfe.infNFe.Versao >= 3.10)
+                            {
+                                if (imposto.ICMS.vICMSDeson > 0)
                             {
                                 wCampo(imposto.ICMS.vICMSDeson, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson);
                                 wCampo(imposto.ICMS.motDesICMS, TpcnTipoCampo.tcInt, TpcnResources.motDesICMS);
+                            }
                             }
                             else
                             {
@@ -1800,11 +1803,14 @@ namespace NFe.ConvertTxt
             {
                 if (!string.IsNullOrEmpty(refNFe.refCTe))
                 {
+                    if (refNFe.refCTe.Substring(0, 2) != "00")
+                    {
                     XmlElement ep = doc.CreateElement(TpcnResources.NFref.ToString());
                     XmlElement el = doc.CreateElement(TpcnResources.refCTe.ToString());
                     el.InnerText = refNFe.refCTe;
                     ep.AppendChild(el);
                     ELide.AppendChild(ep);
+                    }
                 }
             }
             foreach (NFref refNFe in Nfe.ide.NFref)

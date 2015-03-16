@@ -314,7 +314,7 @@ namespace NFe.Service
                                             oLerXml.Cte(strArquivoNFe);
 
                                             //Move a NFE da pasta de NFE em processamento para NFe Denegadas
-                                            if (!oAux.EstaDenegada(strArquivoNFe, oLerXml.oDadosNfe.dEmi))
+                                            if (!oAux.EstaDenegada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.Den))
                                             {
                                                 TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
                                                 ///
