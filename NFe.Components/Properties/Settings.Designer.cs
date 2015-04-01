@@ -254,5 +254,15 @@ namespace NFe.Components.Properties {
                     "0_V1_0_0_1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://201.49.29.18:8081/el-nfse/RpsService")]
+        public string NFe_Components_br_com_elnfse_simoesfilho_p_RpsServiceService {
+            get {
+                return ((string)(this["NFe_Components_br_com_elnfse_simoesfilho_p_RpsServiceService"]));
+            }
+        }
     }
 }

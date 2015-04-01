@@ -131,7 +131,7 @@ namespace NFe.Certificado
                             {
                                 signedXml.SigningKey = LerDispositivo(Empresas.Configuracoes[empresa].CertificadoPIN,
                                                                       Convert.ToInt32(Empresas.Configuracoes[empresa].ProviderTypeCertificado),
-                                                                      Empresas.Configuracoes[empresa].ProviderCertificado); ;
+                                                                      Empresas.Configuracoes[empresa].ProviderCertificado);
                             }
                             else
                                 signedXml.SigningKey = x509Cert.PrivateKey;
@@ -270,7 +270,7 @@ namespace NFe.Certificado
 
             if (Empresas.Configuracoes[emp].UsaCertificado && clsX509Certificate2Extension.IsA3(x509Cert))
             {
-                string tempFile = arqXML.Replace(".xml", "_.xml");
+                string tempFile = arqXML.ToLower().Replace(".xml", "_.xml");
                 File.Copy(arqXML, tempFile);
 
                 switch (servico)
@@ -289,7 +289,6 @@ namespace NFe.Certificado
 
                 File.Delete(tempFile);
             }
-
         }
 
         public bool TestarProviderCertificado(string tempFile, 

@@ -81,18 +81,19 @@ namespace NFe.Threadings
                 {
                     if (!String.IsNullOrEmpty(Directory) && System.IO.Directory.Exists(Directory))
                     {
-                        var Files = System.IO.Directory.GetFiles(Directory, "*.*", System.IO.SearchOption.TopDirectoryOnly).
-                                        Where(s => Filter.Contains(System.IO.Path.GetExtension(s).ToLower()));
-
-                        if (Files != null)
+                        DirectoryInfo dirInfo = new DirectoryInfo(Directory);
+                        FileInfo[] files = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly)
+                                                            .Where(s => Filter.Contains(s.Extension.ToLower()))
+                                                            .OrderBy(o => o.CreationTime)
+                                                            .ToArray(); //Retorna o conteúdo já ordenado por data de modificação, do menor para o maior. Wandrey 26/03/2015
+                        
+                        if (files != null)
                         {
                             Hashtable NewFiles = new Hashtable();
 
                             //cria todos os fileinfos
-                            foreach (string s in Files)
+                            foreach (FileInfo fi in files)
                             {
-                                FileInfo fi = new FileInfo(s);
-
                                 if (File.Exists(fi.FullName))
                                     if (!Functions.FileInUse(fi.FullName))
                                     {
@@ -175,7 +176,7 @@ namespace NFe.Threadings
                 catch (Exception ex)
                 {
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
-                        Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
+                    Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
                 }
                 finally
                 {
@@ -230,7 +231,7 @@ namespace NFe.Threadings
         /// <summary>
         /// StopWatch
         /// </summary>
-        public bool StopWatch       
+        public bool StopWatch
         {
             get { return CancelProcess; }
             set { CancelProcess = value; }

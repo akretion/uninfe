@@ -65,4 +65,47 @@ namespace NFe.Components.Exceptions
         }
 
     }
+
+    /// <summary>
+    /// Se ocorrer alguma falha na execução do UniNFe vai gerar esta exceção
+    /// </summary>
+    public class ProblemaExecucaoUniNFe : Exception
+    {
+        private string Mensagem = "";
+
+        public ProblemaExecucaoUniNFe(string mensagem)
+        {
+            Mensagem = mensagem;
+        }
+
+        public override string Message
+        {
+            get
+            {
+                return Mensagem;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Se já tiver algum UniNFe executando vai gerar esta exceção
+    /// </summary>
+    public class AppJaExecutando : Exception
+    {
+        private string Mensagem = "";
+
+        public AppJaExecutando(string mensagem)
+        {
+            Mensagem = mensagem;
+        }
+
+        public override string Message
+        {
+            get
+            {
+                return Mensagem;
+            }
+        }
+
+    }
 }

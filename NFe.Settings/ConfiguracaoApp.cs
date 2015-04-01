@@ -47,7 +47,8 @@ namespace NFe.Settings
             ProxyPorta,
             SenhaConfig,
             ChecarConexaoInternet,
-            GravarLogOperacaoRealizada
+            GravarLogOperacaoRealizada,
+            DetectarProxyAuto
         }
         #endregion
 
@@ -63,6 +64,7 @@ namespace NFe.Settings
 
         #region Propriedades para controle de servidor proxy
         public static bool Proxy { get; set; }
+        public static bool DetectarConfiguracaoProxyAuto { get; set; }
         public static string ProxyServidor { get; set; }
         public static string ProxyUsuario { get; set; }
         public static string ProxySenha { get; set; }
@@ -475,6 +477,9 @@ namespace NFe.Settings
                     foreach (XmlNode nodeConfig in configList)
                     {
                         XmlElement elementConfig = (XmlElement)nodeConfig;
+
+                        if (elementConfig.GetElementsByTagName(NfeConfiguracoes.DetectarProxyAuto.ToString())[0] != null)
+                            ConfiguracaoApp.DetectarConfiguracaoProxyAuto = Convert.ToBoolean(elementConfig[NfeConfiguracoes.DetectarProxyAuto.ToString()].InnerText);
 
                         if (elementConfig.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0] != null)
                             ConfiguracaoApp.Proxy = Convert.ToBoolean(elementConfig[NfeConfiguracoes.Proxy.ToString()].InnerText);
@@ -1160,6 +1165,7 @@ namespace NFe.Settings
         {
             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
             XElement elementos = new XElement(NFeStrConstants.nfe_configuracoes);
+            elementos.Add(new XElement(NfeConfiguracoes.DetectarProxyAuto.ToString(), ConfiguracaoApp.DetectarConfiguracaoProxyAuto.ToString()));
             elementos.Add(new XElement(NfeConfiguracoes.Proxy.ToString(), ConfiguracaoApp.Proxy.ToString()));
             elementos.Add(new XElement(NfeConfiguracoes.ProxyServidor.ToString(), ConfiguracaoApp.ProxyServidor));
             elementos.Add(new XElement(NfeConfiguracoes.ProxyUsuario.ToString(), ConfiguracaoApp.ProxyUsuario));
@@ -1513,7 +1519,15 @@ namespace NFe.Settings
             if (validou)
             {
                 //Se encontrar algum arquivo de lock nos diretórios, não permitir que seja executado
-                erro = Empresas.CanRun(false);
+                try
+                {
+                    Empresas.CanRun();
+                }
+                catch (NFe.Components.Exceptions.AppJaExecutando ex)
+                {
+                    erro = ex.Message;
+                }
+
                 validou = String.IsNullOrEmpty(erro);
             }
             #endregion
@@ -1789,31 +1803,17 @@ namespace NFe.Settings
         #endregion
 
         #region RemoveEndSlash
-        public static string RemoveEndSlash(string value)
-        {
-            return RemoveEndSlash(value, false);
-        }
-        #endregion
-
-        #region RemoveEndSlash
         /// <summary>
-        /// danasa 8-2009
+        /// 
         /// </summary>
         /// <param name="value"></param>
-        /// <param name="acertarNomeCurto"></param>
         /// <returns></returns>
-        public static string RemoveEndSlash(string value, bool acertarNomeCurto)
+        public static string RemoveEndSlash(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
-                if (acertarNomeCurto)
-                {
-                    DirectoryInfo dir = new DirectoryInfo(value);
-                    value = dir.FullName;
-                }
+                value = new DirectoryInfo(value).FullName;
                 value = value.TrimEnd('\\');
-                //while (value.Substring(value.Length - 1, 1) == @"\" && !string.IsNullOrEmpty(value))
-                //value = value.Substring(0, value.Length - 1);
             }
             else
             {

@@ -12,6 +12,7 @@ using NFSe.Components;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.EGoverne;
+using NFe.Components.EL;
 
 namespace NFe.Service.NFSe
 {
@@ -46,7 +47,7 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object pedSitLoteRps = null;
 
-                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe);
                     pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -117,9 +118,23 @@ namespace NFe.Service.NFSe
                         break;
                         #endregion
 
+                    case PadroesNFSe.EL:
+                        #region E&L
+                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                        oDadosPedSitLoteRps.cMunicipio,
+                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                        Empresas.Configuracoes[emp].SenhaWS,
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
+                        
+                        el.ConsultarSituacaoLoteRps(NomeArquivoXML);
+
+                        break;
+                        #endregion
                 }
-                if (padraoNFSe != PadroesNFSe.IPM &&
-                    padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

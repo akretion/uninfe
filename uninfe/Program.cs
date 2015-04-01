@@ -48,15 +48,15 @@ namespace uninfe
             bool silencioso = false;
             ConfiguracaoApp.AtualizaWSDL = false;
 
-            if(args.Length >= 1)
-                foreach(string param in args)
+            if (args.Length >= 1)
+                foreach (string param in args)
                 {
-                    if(param.ToLower().Equals("/silent"))
+                    if (param.ToLower().Equals("/silent"))
                     {
                         silencioso = true;
                         continue;
                     }
-                    if(param.ToLower().Equals("/updatewsdl"))
+                    if (param.ToLower().Equals("/updatewsdl"))
                     {
                         ConfiguracaoApp.AtualizaWSDL = true;
                         continue;
@@ -91,14 +91,35 @@ namespace uninfe
 
             Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
-            if(Aplicacao.AppExecutando(silencioso))
-            {
-                return;
-            }
+#if DEBUG
+            NFe.Components.NativeMethods.AllocConsole();
+            Console.WriteLine("start....." + Propriedade.NomeAplicacao);
+#endif
+
+            bool executando = Aplicacao.AppExecutando();
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if (executando)
+            {
+                if (!silencioso)
+                    MessageBox.Show("Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada." + (Empresas.ExisteErroDiretorio ? "\r\n\r\nPossíveis erros:\r\n\r\n" + Empresas.ErroCaminhoDiretorio : ""), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (Empresas.ExisteErroDiretorio)
+                    if (!silencioso)
+                        MessageBox.Show("Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
+                                "Por favor entre na tela de configurações da(s) empresa(s) listada(s), acesse a aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresas.ErroCaminhoDiretorio, "Atenção",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                Application.Run(new MainForm());
+            }
+#if DEBUG
+            NFe.Components.NativeMethods.FreeConsole();
+#endif
         }
     }
 }

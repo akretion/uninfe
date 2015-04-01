@@ -54,6 +54,7 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.cbProxy = new System.Windows.Forms.CheckBox();
+            this.chkUseProxyAutomaticamente = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage9.SuspendLayout();
@@ -140,6 +141,7 @@
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.chkUseProxyAutomaticamente);
             this.tabPage9.Controls.Add(this.chkGravarLogOperacao);
             this.tabPage9.Controls.Add(this.cbChecaConexaoInternet);
             this.tabPage9.Controls.Add(this.groupBox1);
@@ -187,7 +189,7 @@
             this.groupBox1.Controls.Add(this.tbSenhaConfig);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Location = new System.Drawing.Point(9, 182);
+            this.groupBox1.Location = new System.Drawing.Point(9, 203);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(350, 123);
             this.groupBox1.TabIndex = 13;
@@ -322,6 +324,16 @@
             this.cbProxy.UseVisualStyleBackColor = true;
             this.cbProxy.CheckedChanged += new System.EventHandler(this.cbProxy_CheckedChanged);
             // 
+            // chkUseProxyAutomaticamente
+            // 
+            this.chkUseProxyAutomaticamente.AutoSize = true;
+            this.chkUseProxyAutomaticamente.Location = new System.Drawing.Point(9, 172);
+            this.chkUseProxyAutomaticamente.Name = "chkUseProxyAutomaticamente";
+            this.chkUseProxyAutomaticamente.Size = new System.Drawing.Size(240, 17);
+            this.chkUseProxyAutomaticamente.TabIndex = 16;
+            this.chkUseProxyAutomaticamente.Text = "Usar configuração de proxy automaticamente";
+            this.chkUseProxyAutomaticamente.UseVisualStyleBackColor = true;
+            // 
             // FormConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,5 +387,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cbChecaConexaoInternet;
         private System.Windows.Forms.CheckBox chkGravarLogOperacao;
+        private System.Windows.Forms.CheckBox chkUseProxyAutomaticamente;
     }
 }

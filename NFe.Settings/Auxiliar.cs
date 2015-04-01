@@ -248,8 +248,10 @@ namespace NFe.Settings
                         servico = Propriedade.TipoAplicativo.ToString();
 
                     if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                    {
+                        codEmp++;
                         continue;
-
+                    }
                     empresa.Add(new ComboElem
                     {
                         Valor = cnpj,

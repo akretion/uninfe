@@ -20,19 +20,17 @@ namespace NFe.Components
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 29/09/2009
         /// </remarks>
-        public static System.Net.IWebProxy DefinirProxy(string servidor, string usuario, string senha, int porta)
+        public static System.Net.IWebProxy DefinirProxy(string servidor, string usuario, string senha, int porta, bool detectarAutomaticamente = false)
         {
-            System.Net.NetworkCredential credencial = new System.Net.NetworkCredential(usuario, senha);
-            System.Net.IWebProxy proxy;
-            proxy = new System.Net.WebProxy(servidor, porta);            
-            if (!String.IsNullOrEmpty(usuario) && usuario.Trim().Length > 0)
-            {
-                proxy.Credentials = credencial;
-            }
+            System.Net.IWebProxy proxy = detectarAutomaticamente ? 
+                System.Net.WebRequest.GetSystemWebProxy() 
+                : System.Net.WebRequest.DefaultWebProxy;
 
-            //Pegar configuração do proxy definida no sistema operacional
-            //proxy = System.Net.WebProxy.GetDefaultProxy();
-            //proxy.Credentials = credencial;            
+            if (proxy != null)
+            {
+                if (!String.IsNullOrEmpty(usuario) && !String.IsNullOrEmpty(senha))
+                    proxy.Credentials = new System.Net.NetworkCredential(usuario, senha);
+            }
 
             return proxy;
         }

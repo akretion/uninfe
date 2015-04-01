@@ -33,24 +33,29 @@ namespace NFe.Settings
         /// <param name="showMessage">Se verdadeiro, irá exibir a mensage e retornar o resultado
         /// <para>O padrão é verdadeiro</para></param>
         /// <returns></returns>
-        public static string CanRun(bool showMessage = true)
+        public static void CanRun()
         {
-            if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0) return "";
-
-            StringBuilder result = new StringBuilder();
+            if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0)
+            {
+                return;
+            }
 
             //se no diretório de envio existir o arquivo "nome da máquina.locked" o diretório já está sendo atendido por alguma instancia do UniNFe
 
             foreach (Empresa emp in Empresas.Configuracoes)
             {
                 if (string.IsNullOrEmpty(emp.PastaBase))
-                    result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não está definida");
+                {
+                    throw new NFe.Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não está definida.");
+                }
                 else
                 {
                     string dir = emp.PastaBase;
 
                     if (!Directory.Exists(dir))
-                        result.AppendLine("Pasta de envio da empresa '" + emp.Nome + "' não existe");
+                    {
+                        throw new NFe.Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não existe.");
+                    }
                     else
                     {
                         string fileName = String.Format("{0}-{1}.lock", Propriedade.NomeAplicacao, Environment.MachineName);
@@ -69,19 +74,13 @@ namespace NFe.Settings
                         {
                             FileInfo fi = new FileInfo(fileLock);
 
-                            result.AppendFormat("Já existe uma instância do {2} em Execução que atende a conjunto de pastas: {0} (*Incluindo subdiretórios).\r\n\r\n Nome da estação que está executando: {1}",
-                                fi.Directory.FullName, fi.Name
-                                                        .Replace(Propriedade.NomeAplicacao + "-", "")
-                                                        .Replace(".lock", ""),
-                                                        Propriedade.NomeAplicacao);
+                            throw  new NFe.Components.Exceptions.AppJaExecutando("Já existe uma instância do " + Propriedade.NomeAplicacao + 
+                                                                                 " em Execução que atende a conjunto de pastas: " + fi.Directory.FullName + " (*Incluindo subdiretórios).\r\n\r\n" +
+                                                                                 "Nome da estação que está executando: " + fi.Name.Replace(Propriedade.NomeAplicacao + "-", "").Replace(".lock", ""));
                         }
                     }
                 }
             }
-            if (showMessage && result.Length > 0)
-                MessageBox.Show(result.ToString(), "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            return result.ToString();
         }
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace NFe.Settings
 
             foreach (string dir in diretorios)
             {
-                if (!string.IsNullOrEmpty(dir))
+                if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
                 {
                     string file = String.Format("{0}\\{1}-{2}.lock", dir, Propriedade.NomeAplicacao, Environment.MachineName);
                     FileInfo fi = new FileInfo(file);
@@ -150,6 +149,8 @@ namespace NFe.Settings
                         if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
                             empresa.Servico = (TipoAplicativo)Convert.ToInt16(item.Attribute(NFe.Components.NFeStrConstants.Servico).Value.Trim());
 
+                        string cArqErro = null;
+
                         try
                         {
                             empresa.BuscaConfiguracao();
@@ -162,11 +163,7 @@ namespace NFe.Settings
                                 /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
                                 /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
                                 /// as thread's
-                                string cArqErro;
-                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-                                else
-                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+                                cArqErro = CriaArquivoDeErro(empresa, cArqErro);
 
                                 //Grava arquivo de ERRO para o ERP
                                 File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
@@ -176,6 +173,20 @@ namespace NFe.Settings
                         ///
                         /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
                         empresa.ChecaCaminhoDiretorio();
+
+                        if (!string.IsNullOrEmpty(Empresas.ErroCaminhoDiretorio) && Empresas.ExisteErroDiretorio)
+                        {
+                            try
+                            {
+                                if (cArqErro == null)
+                                {
+                                    cArqErro = CriaArquivoDeErro(empresa, cArqErro);
+                                }
+                                //Grava arquivo de ERRO para o ERP
+                                File.AppendAllText(cArqErro, "Erros de diretorios:\r\n\r\n" + Empresas.ErroCaminhoDiretorio, Encoding.Default);
+                            }
+                            catch { }
+                        }
 
                         Configuracoes.Add(empresa);
                     }
@@ -256,6 +267,20 @@ namespace NFe.Settings
                 Empresas.CriarPasta();
         }
         #endregion
+
+        private static string CriaArquivoDeErro(Empresa empresa, string cArqErro)
+        {
+            if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
+                cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+            else
+                cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
+
+            if (!Directory.Exists(Path.GetDirectoryName(cArqErro)))
+            {
+                cArqErro = Path.Combine(Propriedade.PastaLog, Path.GetFileName(cArqErro));
+            }
+            return cArqErro;
+        }
 
         /// <summary>
         /// Exclui todos os arquivos de lock existentes nas configurações de pasta das empresas

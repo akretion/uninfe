@@ -69,7 +69,7 @@ namespace NFe.UI.Formularios
 
         private void FormUpdate_Load(object sender, EventArgs e)
         {
-            this.Text = "Atualização do " + NFe.Components.Propriedade.NomeAplicacao;
+            ShowTitle();
 
             string NomeInstalador = "i" + NFe.Components.Propriedade.NomeAplicacao.ToLower() + ".exe";
             this.PastaInstalar = Application.StartupPath;
@@ -80,6 +80,12 @@ namespace NFe.UI.Formularios
             prgDownload.Visible = false;
             this.lblProgresso.Text = "";
             uninfeDummy.ClearControls(this, true, true);
+        }
+
+        private void ShowTitle()
+        {
+            this.Text = "Atualização do " + NFe.Components.Propriedade.NomeAplicacao;
+            Application.DoEvents();
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -95,27 +101,36 @@ namespace NFe.UI.Formularios
 
                 // Habilitar alguns controles
                 prgDownload.Visible = true;
-                Application.DoEvents();
 
                 //Executar o download
+                this.Text = "Baixando a atualização do " + NFe.Components.Propriedade.NomeAplicacao;
+                Application.DoEvents();
                 this.Download();
+
+                this.metroButton1.Enabled = true;
 
                 //Executar o instalador do uninfe
                 if (File.Exists(LocalArq) && !Cancelado)
                 {
+                    NFe.UI.uninfeDummy.mainForm.PararServicos(true);
+
                     System.Diagnostics.Process.Start(this.LocalArq, "/SILENT /DIR=" + this.PastaInstalar);
 
+                    Auxiliar.WriteLog("Processo de download da atualização do UniNFe pelo foi concluído.", false);
                     //Forçar o encerramento da aplicação
                     Propriedade.EncerrarApp = true;
+
+                    this.Close();
                 }
                 else if (!Cancelado)
                 {
-                    MetroFramework.MetroMessageBox.Show(null, "Não foi possível localizar o instalador da atualização", "");
-                    this.metroButton1.Enabled =
-                        this.btnAtualizar.Enabled = true;
-                }
+                    ShowTitle();
 
-                Auxiliar.WriteLog("Processo de download da atualização do UniNFe pelo foi concluído.", false);
+                    string msg = "Não foi possível localizar o instalador da atualização";
+                    MetroFramework.MetroMessageBox.Show(null, msg, "");
+                    this.btnAtualizar.Enabled = true;
+                    Auxiliar.WriteLog(msg, false);
+                }
             }
         }
 

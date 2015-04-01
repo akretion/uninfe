@@ -1054,17 +1054,29 @@ namespace NFe.ConvertTxt
 
                         case "51":
                             //Esse bloco fica a critério de cada UF a obrigação das informações, conforme o manual
+                            {
+                                var obop = ObOp.Opcional;
+                                if ((double)nfe.infNFe.Versao >= 3.10)
+                                {
+                                    if (imposto.ICMS.pRedBC > 0 ||
+                                        imposto.ICMS.vBC > 0 ||
+                                        imposto.ICMS.vICMSOp > 0 ||
+                                        imposto.ICMS.pDif > 0 ||
+                                        imposto.ICMS.vICMSDif > 0 ||
+                                        imposto.ICMS.vICMS > 0) obop = ObOp.Obrigatorio;
+                                }
                             wCampo(imposto.ICMS.modBC, TpcnTipoCampo.tcInt, TpcnResources.modBC, ObOp.Opcional);
-                            wCampo(imposto.ICMS.pRedBC, this.nDecimaisPerc, TpcnResources.pRedBC, ObOp.Opcional);
-                            wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, TpcnResources.vBC, ObOp.Opcional);
-                            wCampo(imposto.ICMS.pICMS, this.nDecimaisPerc, TpcnResources.pICMS, ObOp.Opcional);
+                                wCampo(imposto.ICMS.pRedBC, this.nDecimaisPerc, TpcnResources.pRedBC, obop);
+                                wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, TpcnResources.vBC, obop);
+                                wCampo(imposto.ICMS.pICMS, this.nDecimaisPerc, TpcnResources.pICMS, obop);
                             if ((double)nfe.infNFe.Versao >= 3.10)
                             {
-                                wCampo(imposto.ICMS.vICMSOp, TpcnTipoCampo.tcDec2, TpcnResources.vICMSOp, ObOp.Opcional);
-                                wCampo(imposto.ICMS.pDif, this.nDecimaisPerc, TpcnResources.pDif, ObOp.Opcional);
-                                wCampo(imposto.ICMS.vICMSDif, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDif, ObOp.Opcional);
+                                    wCampo(imposto.ICMS.vICMSOp, TpcnTipoCampo.tcDec2, TpcnResources.vICMSOp, obop);
+                                    wCampo(imposto.ICMS.pDif, this.nDecimaisPerc, TpcnResources.pDif, obop);
+                                    wCampo(imposto.ICMS.vICMSDif, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDif, obop);
+                                }
+                                wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS, obop);
                             }
-                            wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional);
                             break;
 
                         case "60":
@@ -2468,8 +2480,29 @@ namespace NFe.ConvertTxt
                 if (Convert.ToInt32(cAAMM.Substring(2, 2)) <= 0 || Convert.ToInt32(cAAMM.Substring(2, 2)) > 12)
                     cError += "Mês da emissão inválido" + Environment.NewLine;
 
+                if (cMod == "")
+                {
+                    switch (Empresas.Configuracoes[emp].Servico)
+                    {
+                        case TipoAplicativo.Cte:
+                            cMod = ((int)TpcnMod.modCTe).ToString();
+                            break;
+                        case TipoAplicativo.MDFe:
+                            cMod = ((int)TpcnMod.modMDFe).ToString();
+                            break;
+                        case TipoAplicativo.NFCe:
+                            cMod = ((int)TpcnMod.modNFCe).ToString();
+                            break;
+                        case TipoAplicativo.Nfe:
+                            cMod = ((int)TpcnMod.modNFe).ToString();
+                            break;
+                        default:
+
                 if (!("55,57,58,65").Contains(cMod))
                     cError += "Mod inválido. Deve ser '55 p/NFe','57 p/Cte','58 p/MDF-e' ou '65 p/NFC-e'" + Environment.NewLine;
+                            break;
+                    }
+                }
 
 
                 if (cError != "")

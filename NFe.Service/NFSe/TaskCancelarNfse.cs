@@ -15,6 +15,7 @@ using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.Conam;
 using NFe.Components.EGoverne;
+using NFe.Components.EL;
 
 namespace NFe.Service.NFSe
 {
@@ -45,7 +46,7 @@ namespace NFe.Service.NFSe
                 object pedCanNfse = null;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
                     pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -176,6 +177,21 @@ namespace NFe.Service.NFSe
                         assegov.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                         egoverne.CancelarNfse(NomeArquivoXML);
+                        #endregion
+                        break;
+
+                    case PadroesNFSe.EL:
+                        #region E&L
+                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                        oDadosPedCanNfse.cMunicipio,
+                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                        Empresas.Configuracoes[emp].SenhaWS,
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
+                        
+                        el.CancelarNfse(NomeArquivoXML);
                         #endregion
                         break;
 

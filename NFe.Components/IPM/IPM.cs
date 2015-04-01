@@ -14,7 +14,7 @@ namespace NFSe.Components
         /// <summary>
         /// Serviço não disponível para o padrão IPM
         /// </summary>
-        public class ServicoInexistenteIPMException : NFe.Components.Exceptions.ServicoInexistenteException
+        public class ServicoInexistenteIPMException: NFe.Components.Exceptions.ServicoInexistenteException
         {
             public override string Message
             {
@@ -29,7 +29,7 @@ namespace NFSe.Components
     /// <summary>
     /// Emite notas fiscais de serviço no padrão IPM
     /// </summary>
-    public class IPM : IEmiteNFSeIPM
+    public class IPM: IEmiteNFSeIPM
     {
         #region Propriedades
         public string Usuario { get; set; }
@@ -54,7 +54,10 @@ namespace NFSe.Components
         {
             string result = "";
 
-            using (POSTRequest post = new POSTRequest { Proxy = Proxy })
+            using(POSTRequest post = new POSTRequest
+                {
+                    Proxy = Proxy
+                })
             {
                 //                                                                                                    informe 1 para retorno em xml
                 result = post.PostForm("http://www.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
@@ -65,7 +68,7 @@ namespace NFSe.Components
                 });
             }
 
-            if (!cancelamento)
+            if(!cancelamento)
                 GerarRetorno(file, result, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
             else
                 GerarRetorno(file, result, Propriedade.ExtEnvio.EnvCancelamento_XML, Propriedade.ExtRetorno.CanNfse);
@@ -87,7 +90,7 @@ namespace NFSe.Components
 
         public int CodigoTom(int nCodIbge)
         {
-            switch (nCodIbge)
+            switch(nCodIbge)
             {
                 case 4104303: // Campo mourão - PR
                     return (int)7483;

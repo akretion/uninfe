@@ -47,6 +47,7 @@
             this.cbProxy = new MetroFramework.Controls.MetroCheckBox();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.chkConfProxyAuto = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel2.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -189,7 +190,7 @@
             this.lblServidor.Location = new System.Drawing.Point(281, 85);
             this.lblServidor.Margin = new System.Windows.Forms.Padding(3);
             this.lblServidor.Name = "lblServidor";
-            this.lblServidor.Size = new System.Drawing.Size(48, 15);
+            this.lblServidor.Size = new System.Drawing.Size(49, 15);
             this.lblServidor.TabIndex = 7;
             this.lblServidor.Text = "Servidor";
             // 
@@ -314,6 +315,7 @@
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.Transparent;
             this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.chkConfProxyAuto);
             this.metroPanel1.Controls.Add(this.lblSenha);
             this.metroPanel1.Controls.Add(this.tbUsuario);
             this.metroPanel1.Controls.Add(this.lblUsuario);
@@ -333,6 +335,17 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // chkConfProxyAuto
+            // 
+            this.chkConfProxyAuto.AutoSize = true;
+            this.chkConfProxyAuto.Location = new System.Drawing.Point(192, 4);
+            this.chkConfProxyAuto.Name = "chkConfProxyAuto";
+            this.chkConfProxyAuto.Size = new System.Drawing.Size(285, 15);
+            this.chkConfProxyAuto.TabIndex = 9;
+            this.chkConfProxyAuto.Text = "Detectar configuração de proxy automaticamente";
+            this.chkConfProxyAuto.UseSelectable = true;
+            this.chkConfProxyAuto.CheckedChanged += new System.EventHandler(this.chkConfProxyAuto_CheckedChanged);
             // 
             // userConfiguracao_geral
             // 
@@ -376,5 +389,6 @@
         private MetroFramework.Controls.MetroCheckBox cbProxy;
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroCheckBox chkConfProxyAuto;
     }
 }

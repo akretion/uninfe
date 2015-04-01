@@ -24,15 +24,6 @@ namespace NFe.UI.Formularios
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
-            loc1 = lbl_textBox_PastaRetornoXML.Location;
-            loc2 = textBox_PastaXmlRetorno.Location;
-
-            loc3 = lbl_textBox_PastaXmlErro.Location;
-            loc4 = textBox_PastaXmlErro.Location;
-
-            loc5 = lbl_textBox_PastaValidar.Location;
-            loc6 = textBox_PastaValidar.Location;
         }
 
         public event EventHandler changeEvent;
@@ -42,6 +33,18 @@ namespace NFe.UI.Formularios
 
         public void Populate(NFe.Settings.Empresa empresa)
         {
+            if (this.Tag == null)
+            {
+                loc1 = lbl_textBox_PastaRetornoXML.Location;
+                loc2 = textBox_PastaXmlRetorno.Location;
+
+                loc3 = lbl_textBox_PastaXmlErro.Location;
+                loc4 = textBox_PastaXmlErro.Location;
+
+                loc5 = lbl_textBox_PastaValidar.Location;
+                loc6 = textBox_PastaValidar.Location;
+            }
+            this.Tag = 1;
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
@@ -205,8 +208,8 @@ namespace NFe.UI.Formularios
         private void textBox_PastaXmlEnvio_Validating(object sender, CancelEventArgs e)
         {
             MetroFramework.Controls.MetroTextBox _control = (MetroFramework.Controls.MetroTextBox)sender;
-
-            _control.Text = _control.Text.TrimEnd('\\');
+            
+            _control.Text =  _control.Text.TrimEnd('\\');
 
             if (__oldvalues[_control].ToString().Equals(_control.Text, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -301,3 +304,4 @@ namespace NFe.UI.Formularios
         }
     }
 }
+

@@ -544,7 +544,13 @@ namespace NFe.Components
         /// Prefeitura de Curitiba - PR
         /// </summary>
         [Description("E-Governe")]
-        EGOVERNE
+        EGOVERNE,
+        /// <summary>
+        /// Padrão E&L
+        /// Prefeitura de Simões Filho - BA
+        /// </summary>
+        [Description("E&L")]
+        EL
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

@@ -255,7 +255,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3537305 /*Penapolis*/||
                            ufCod == 4309209 /*Gravatai*/||
                            ufCod == 3551702 /*Sertaozinho*/||
-                           ufCod == 3538709 /*Piracicaba*/;
+                           ufCod == 3538709 /*Piracicaba*/||
+                           ufCod == 2930709 /*Simoes Filho*/;
 
             lbl_UsuarioWS.Visible =
                 lbl_SenhaWS.Visible =

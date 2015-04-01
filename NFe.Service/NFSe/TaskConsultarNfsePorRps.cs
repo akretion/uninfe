@@ -12,6 +12,7 @@ using NFSe.Components;
 using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.EGoverne;
+using NFe.Components.EL;
 
 namespace NFe.Service.NFSe
 {
@@ -34,7 +35,7 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(ler.oDadosPedSitNfseRps.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedLoteRps = null;
-                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
                     pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -120,11 +121,25 @@ namespace NFe.Service.NFSe
                         #endregion
                         break;
 
+                    case PadroesNFSe.EL:
+                        #region E&L
+                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                        ler.oDadosPedSitNfseRps.cMunicipio,
+                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                        Empresas.Configuracoes[emp].SenhaWS,
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
+
+                        el.ConsultarNfsePorRps(NomeArquivoXML);
+                        #endregion 
+
+                        break;
+
                 }
 
-                if (padraoNFSe != PadroesNFSe.IPM &&
-                    padraoNFSe != PadroesNFSe.FIORILLI &&
-                    padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

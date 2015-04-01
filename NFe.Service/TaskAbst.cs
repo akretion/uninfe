@@ -1843,9 +1843,9 @@ namespace NFe.Service
                 if (dadosNFe.dEmi.Month.ToString("00") != dadosNFe.chavenfe.Substring(7 + nPos, 2) ||
                     dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) != dadosNFe.chavenfe.Substring(5 + nPos, 2))
                 {
-                    cTextoErro += "A ano e mês da emissão informada na tag <dEmi> está diferente da informada na chave da NF-e.\r\n" +
-                        "Mês/Ano da data de emissão informada na tag <dEmi>: " + dadosNFe.dEmi.Month.ToString("00") + "/" + dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
-                        "Mês/Ano informados na chave da NF-e: " + dadosNFe.chavenfe.Substring(5 + nPos, 2) + "/" + dadosNFe.chavenfe.Substring(7 + nPos, 2) + "\r\n\r\n";
+                    cTextoErro += "O ano e mês da emissão informada na tag " + dadosNFe.versao=="2.00" ? "<dEmi> " : "<dhEmi> " + "está diferente da informada na chave da NF-e.\r\n" +
+                        "Mês/Ano da data de emissão informada na tag " + dadosNFe.versao=="2.00" ? "<dEmi>: " : "<dhEmi>: " + dadosNFe.dEmi.Month.ToString("00") + "/" + dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
+                        "Mês/Ano informados na chave da NF-e: " + dadosNFe.chavenfe.Substring(7 + nPos, 2) + "/" + dadosNFe.chavenfe.Substring(5 + nPos, 2) + "\r\n\r\n";
                     booValido = false;
                 }
                 #endregion
@@ -1996,6 +1996,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.EL:
                 case PadroesNFSe.EGOVERNE:
                 case PadroesNFSe.IPM:
                 case PadroesNFSe.SYSTEMPRO:

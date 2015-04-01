@@ -272,7 +272,10 @@ namespace NFe.ConvertTxt
     public enum TpcnMod
     {
         modNFe = 55,
-        modNFCe = 65
+        modNFCe = 65,
+        modCTe = 57,
+        modMDFe = 58,
+        modIntefinido = 99
     }
 
     public enum TpcnTipoViaTransp

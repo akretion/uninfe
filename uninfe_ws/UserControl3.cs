@@ -239,26 +239,26 @@ namespace uninfe_ws
                 {
                     this.edtID.Text = this.edtID.Text.PadLeft(this._tipo == NFe.Components.TipoAplicativo.Nfse ? 7 : 2, '0');
 
-                if (this.edtUF.Text == "XX")
-                    throw new Exception("Não atualize nada nesta UF");
+                    if (this.edtUF.Text == "XX")
+                        throw new Exception("Não atualize nada nesta UF");
 
-                if (Convert.ToInt32(this.edtID.Text) < 900 && this._tipo == NFe.Components.TipoAplicativo.Nfe)
-                {
-                    if (!NFe.Components.Functions.UFParaCodigo(this.edtUF.Text).Equals(Convert.ToInt32(this.edtID.Text)))
+                    if (Convert.ToInt32(this.edtID.Text) < 900 && this._tipo == NFe.Components.TipoAplicativo.Nfe)
                     {
-                        throw new Exception("Divergência entre 'UF' e 'ID'");
+                        if (!NFe.Components.Functions.UFParaCodigo(this.edtUF.Text).Equals(Convert.ToInt32(this.edtID.Text)))
+                        {
+                            throw new Exception("Divergência entre 'UF' e 'ID'");
+                        }
+                    }
+
+                    if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
+                    {
+                        int cUF = NFe.Components.Functions.UFParaCodigo(this.edtUF.Text);
+                        if (cUF != Convert.ToInt32(this.edtID.Text.Substring(0, 2)) || cUF == 0)
+                        {
+                            throw new Exception("Divergência entre 'UF' e 'ID'");
+                        }
                     }
                 }
-                if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
-                {
-                    int cUF = NFe.Components.Functions.UFParaCodigo(this.edtUF.Text);
-                    if (cUF != Convert.ToInt32(this.edtID.Text.Substring(0, 2)) || cUF == 0)
-                    {
-                        throw new Exception("Divergência entre 'UF' e 'ID'");
-                    }
-                }
-                }
-
                 string key = this.edtUF.Text + " - " +
                             this.edtID.Text +
                             (this._tipo == NFe.Components.TipoAplicativo.Nfse ? (" - " + this.edtPadrao.SelectedItem.ToString()) : "");
@@ -315,15 +315,15 @@ namespace uninfe_ws
                     if (!string.IsNullOrEmpty(item.ID))
                     {
                         /*if (this._tipo == NFe.Components.TipoAplicativo.Nfse)
-                        elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
-                            Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
-                                        x1.Attribute(NFe.Components.NFeStrConstants.Padrao).Value == item.Padrao &&
-                                        x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
+                            elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
+                                Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
+                                            x1.Attribute(NFe.Components.NFeStrConstants.Padrao).Value == item.Padrao &&
+                                            x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
                         else*/
                         elements.AncestorsAndSelf(NFe.Components.NFeStrConstants.Estado).
                             Where(x1 => x1.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value == item.ID &&
                                         x1.Attribute(NFe.Components.TpcnResources.UF.ToString()).Value == item.UF).Remove();
-                }
+                    }
                 }
                 XElement ele = new XElement(NFe.Components.NFeStrConstants.Estado,
                     new XAttribute(NFe.Components.TpcnResources.ID.ToString(), this.edtID.Text),

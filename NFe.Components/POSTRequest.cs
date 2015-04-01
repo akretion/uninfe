@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Reflection;
 
 namespace NFSe.Components
 {
     /// <summary>
     /// Esta classe utiliza métodos POST para fazer requisições
     /// </summary>
-    public class POSTRequest : IDisposable
+    public class POSTRequest: IDisposable
     {
         /// <summary>
         /// Proxy para ser utilizado na requisição, pode ser nulo
@@ -35,9 +36,18 @@ namespace NFSe.Components
             request.KeepAlive = true;
             request.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
-            if (Proxy != null)
+            //ajustar para permitir o cabeçalho HTTP/1.0
+            SetAllowUnsafeHeaderParsing20();
+            //evitar o erro "The remote server returned an error: (417) Expectation Failed."
+            //para caeçalhos HTTP/1.0
+            System.Net.ServicePointManager.Expect100Continue = false;
+
+            if(Proxy != null)
             {
+                request.UseDefaultCredentials = false;
                 request.Proxy = Proxy;
+                request.Proxy.Credentials = Proxy.Credentials;
+                request.Credentials = Proxy.Credentials;
             }
             #endregion
 
@@ -48,7 +58,7 @@ namespace NFSe.Components
 
             string formdataTemplate = "\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
 
-            foreach (KeyValuePair<string, string> keyValue in postData)
+            foreach(KeyValuePair<string, string> keyValue in postData)
             {
                 string formitem = string.Format(formdataTemplate, keyValue.Key, keyValue.Value);
                 byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
@@ -71,7 +81,7 @@ namespace NFSe.Components
 
             int bytesRead = 0;
 
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+            while((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 memStream.Write(buffer, 0, bytesRead);
             }
@@ -97,7 +107,10 @@ namespace NFSe.Components
             WebResponse response = request.GetResponse();
 
             Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(response.ContentType.Substring(response.ContentType.IndexOf("charset=") + 8)));
+            StreamReader reader = response.ContentType.IndexOf("charset=") == -1 ?
+                new StreamReader(stream, Encoding.UTF8) :
+                new StreamReader(stream, Encoding.GetEncoding(response.ContentType.Substring(response.ContentType.IndexOf("charset=") + 8)));
+
             string result = reader.ReadToEnd();
             stream.Dispose();
             reader.Dispose();
@@ -108,6 +121,32 @@ namespace NFSe.Components
         public void Dispose()
         {
             Proxy = null;
+        }
+
+        /// <summary>
+        /// Evita o erro de servidor cometeu uma violação de protocolo. 
+        /// </summary>
+        /// <seealso cref="https://msdn.microsoft.com/pt-br/library/system.net.configuration.httpwebrequestelement.useunsafeheaderparsing%28v=vs.110%29.aspx"/>
+        void SetAllowUnsafeHeaderParsing20()
+        {
+            Assembly aNetAssembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
+            if(aNetAssembly != null)
+            {
+                Type aSettingsType = aNetAssembly.GetType("System.Net.Configuration.SettingsSectionInternal");
+                if(aSettingsType != null)
+                {
+                    object anInstance = aSettingsType.InvokeMember("Section",
+                    BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic, null, null, new object[] { });
+                    if(anInstance != null)
+                    {
+                        FieldInfo aUseUnsafeHeaderParsing = aSettingsType.GetField("useUnsafeHeaderParsing", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if(aUseUnsafeHeaderParsing != null)
+                        {
+                            aUseUnsafeHeaderParsing.SetValue(anInstance, true);
+                        }
+                    }
+                }
+            }
         }
     }
 }

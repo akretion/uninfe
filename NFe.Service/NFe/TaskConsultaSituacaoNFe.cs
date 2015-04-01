@@ -225,7 +225,6 @@ namespace NFe.Service
 
                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                 }
-
                 string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
@@ -418,7 +417,7 @@ namespace NFe.Service
                                     case "110": //Uso Denegado
                                     case "301":
                                     case "302":
-                                    case "303":                                       
+                                    case "303":
                                         if (File.Exists(strArquivoNFe))
                                         {
                                             ///

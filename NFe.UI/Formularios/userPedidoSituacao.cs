@@ -73,31 +73,19 @@ namespace NFe.UI
 
         private void cbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.Emp = -1;
+            this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
             try
             {
-                this.cbAmbiente.Enabled =
-                    this.cbEmissao.Enabled =
-                    this.comboUf.Enabled =
-                    this.cbServico.Enabled =
-                    this.cbVersao.Enabled = this.cbEmpresa.SelectedValue != null;
-
-                this.buttonPesquisa.Enabled = false;
-
                 if (this.cbEmpresa.SelectedValue != null)
                 {
                     var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
-
                     this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
                     if (this.Emp >= 0)
                     {
                         uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresa.SelectedIndex);
                         uninfeDummy.xmlParams.Save();
-                        /*
-                        if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Nfse)
-                        {
-                            throw new Exception("NFS-e não dispõe do serviço de consulta a status.");
-                        }
-                        */
+
                         this.comboUf.SelectedValue = Functions.CodigoParaUF(Empresas.Configuracoes[this.Emp].UnidadeFederativaCodigo).Trim();
 
                         //Posicionar o elemento da combo Ambiente
@@ -106,28 +94,64 @@ namespace NFe.UI
                         //Posicionar o elemento da combo tipo de emissão
                         this.cbEmissao.SelectedValue = Empresas.Configuracoes[this.Emp].tpEmis;
 
-                        //Posicionar o elemento da combo tipo de servico
-                        this.cbServico.SelectedValue = (int)Empresas.Configuracoes[this.Emp].Servico;
+                        this.ChangeVersao(Empresas.Configuracoes[this.Emp].Servico);
 
-                        if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Todos)
-                        {
-                            this.cbVersao.SelectedValue = "3.10";
-                            this.cbServico.SelectedIndex = 0;
-                            this.cbServico.Enabled = true;
-                        }
+                        //Posicionar o elemento da combo tipo de servico
+                        if (Empresas.Configuracoes[this.Emp].Servico != TipoAplicativo.Todos)
+                            this.cbServico.SelectedValue = (int)Empresas.Configuracoes[this.Emp].Servico;
                         else
-                        {
-                            this.cbServico.Enabled = false;
-                            if (Empresas.Configuracoes[this.Emp].Servico != TipoAplicativo.Nfe)
-                                this.cbVersao.SelectedValue = "2.00";
-                        }
-                        this.buttonPesquisa.Enabled = true;
+                            this.cbServico.SelectedValue = (int)TipoAplicativo.Nfe;
                     }
                 }
             }
             catch (Exception ex)
             {
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
+            }
+            finally
+            {
+                this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
+                this.buttonPesquisa.Enabled = 
+                    this.cbAmbiente.Enabled =
+                    this.cbEmissao.Enabled =
+                    this.comboUf.Enabled =
+                    this.cbServico.Enabled =
+                    this.cbVersao.Enabled = this.Emp >= 0;
+            }
+        }
+
+        private void ChangeVersao(TipoAplicativo Servico)
+        {
+            switch (Servico)
+            {
+                case TipoAplicativo.Todos:
+                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+                    this.cbVersao.Enabled = this.cbServico.Enabled = true;
+                    break;
+
+                case TipoAplicativo.Nfe:
+                    this.cbVersao.Enabled = true;
+                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+
+                case TipoAplicativo.NFCe:
+                    this.cbVersao.Enabled = true;
+                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+
+                case TipoAplicativo.Cte:
+                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico;
+                    this.cbVersao.Enabled = false;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+
+                case TipoAplicativo.MDFe:
+                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico;
+                    this.cbVersao.Enabled = false;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
             }
         }
 
@@ -136,7 +160,7 @@ namespace NFe.UI
             if (cbServico.SelectedValue != null)
             {
                 TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
-                this.cbVersao.Enabled = (servico == TipoAplicativo.Nfe || Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Todos);
+                this.ChangeVersao(servico);
             }
         }
 
@@ -161,9 +185,6 @@ namespace NFe.UI
                         if (tpEmis == TipoEmissao.teSVCSP)// this.cbEmissao.SelectedIndex == 3)
                             throw new Exception("NF-e não dispõe do tipo de contingência SCVSP.");
                         break;
-
-                    //case TipoAplicativo.Nfse:
-                    //throw new Exception("NFS-e não dispõe do serviço de consulta status.");
 
                     case TipoAplicativo.MDFe:
                         if (tpEmis != TipoEmissao.teNormal)

@@ -567,6 +567,8 @@ namespace NFe.UI
                     bool grava = DadosMudaramDaEmpresa(true);
                     if (grava)
                     {
+                        currentEmpresa.RemoveEndSlash();
+
                         string _key = this.currentEmpresa.CNPJ + this.currentEmpresa.Servico.ToString();
                         ///
                         /// salva a configuracao da empresa

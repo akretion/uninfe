@@ -322,12 +322,27 @@ namespace NFe.Components
                 Tag = "envEvento",
                 ID = ++id,
                 ArquivoXSD = "EPEC\\envEPEC_v1.00.xsd",
-                Descricao = "XML de registro do EPEC (Sistema de Contingência Eletrônica)",
+                //ArquivoXSD = "EPEC\\eventoEPEC_v0.01.xsd",
+                Descricao = "XML de registro do EPEC (Sistema de Contingência Eletrônica) NF-e",
                 TagAssinatura = "evento",
                 TagAtributoId = "infEvento",
                 TargetNameSpace = string.Empty
             });
             #endregion
+
+            #region XML Recepção EPEC
+            InfSchemas.Add("NFE-envEvento-65-110140", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "EPEC\\eventoEPEC_v0.01.xsd",
+                Descricao = "XML de registro do EPEC (Sistema de Contingência Eletrônica) NFC-e",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
 
             #region XML Envio CCe
             InfSchemas.Add("NFE-envEvento110110", new InfSchema()

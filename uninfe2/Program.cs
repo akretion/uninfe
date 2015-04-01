@@ -38,21 +38,6 @@ namespace uninfe2
                         Auxiliar.WriteLog(e.Exception.InnerException.InnerException.InnerException.Message + "\r\n" + e.Exception.InnerException.InnerException.InnerException.StackTrace, false);
                     }
                 }
-#if false
-                ///
-                /// executando por servico?
-                if (Propriedade.ServicoRodando)
-                    return;
-
-                if (NFe.UI.uninfeDummy.mainForm == null)
-                    return;
-
-                if (NFe.UI.uninfeDummy.mainForm.WindowState != FormWindowState.Minimized &&
-                    NFe.UI.uninfeDummy.showError)
-                {
-                    MetroFramework.MetroMessageBox.Show(NFe.UI.uninfeDummy.mainForm, e.Exception.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-#endif
             });
 
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, e) =>
@@ -60,7 +45,6 @@ namespace uninfe2
                 Auxiliar.WriteLog(e.ExceptionObject.ToString(), false);
             });
 
-            //NFe.UI.uninfeDummy.showError = true;
             //Esta deve ser a primeira linha do Main, não coloque nada antes dela. Wandrey 31/07/2009
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
@@ -108,33 +92,35 @@ namespace uninfe2
                     }
                 }
 
-            Propriedade.TipoAplicativo = (Propriedade.NomeAplicacao.ToLower().StartsWith("uninfe") ? TipoAplicativo.Nfe : TipoAplicativo.Nfse);
+            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
 
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();
             Console.WriteLine("start....." + Propriedade.NomeAplicacao);
 #endif
 
-            bool executando = Aplicacao.AppExecutando(!silencioso, true);
+            bool executando = Aplicacao.AppExecutando();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (executando)
             {
-                MetroFramework.MetroMessageBox.Show(null, 
-                    "Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada.", "", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (!silencioso)
+                    MetroFramework.MetroMessageBox.Show(null,
+                        "Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada." + (Empresas.ExisteErroDiretorio ? "\r\nPossíveis erros:\r\n" + Empresas.ErroCaminhoDiretorio : ""), "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                if (Empresas.ExisteErroDiretorio)
-                    MetroFramework.MetroMessageBox.Show(null,
-                            "Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
-                            "Por favor entre na tela de configurações da(s) empresa(s) listada(s) abaixo na aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresas.ErroCaminhoDiretorio, "", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                if (!silencioso)
+                    if (Empresas.ExisteErroDiretorio)
+                        MetroFramework.MetroMessageBox.Show(null,
+                                "Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
+                                "Por favor entre na tela de configurações da(s) empresa(s) listada(s), acesse a aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresas.ErroCaminhoDiretorio, "",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            Application.Run(new NFe.UI.Form_Main());
-
+                Application.Run(new NFe.UI.Form_Main());
+            }
 #if DEBUG
             NFe.Components.NativeMethods.FreeConsole();
 #endif

@@ -34,6 +34,7 @@ namespace NFe.UI
             uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + "  (" + NFe.Components.Propriedade.Versao + ")";
             //metroTile_sobre.Text = "Sobre o " + NFe.Components.Propriedade.NomeAplicacao;
             metroTile_update.Text = "Atualizar o " + NFe.Components.Propriedade.NomeAplicacao;
+            metroTile_sefaz_200.Visible = DateTime.Today <= new DateTime(2015, 4, 1);
 
             this.metroTile_doc.Enabled =
                 System.IO.File.Exists(System.IO.Path.Combine(NFe.Components.Propriedade.PastaExecutavel, NFe.Components.Propriedade.NomeAplicacao + ".pdf"));

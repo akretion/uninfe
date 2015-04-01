@@ -16,6 +16,7 @@ using NFe.Components.SimplISS;
 using NFe.Components.Conam;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.EGoverne;
+using NFe.Components.EL;
 
 namespace NFe.Service.NFSe
 {
@@ -47,7 +48,7 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object envLoteRps = null;
 
-                if (padraoNFSe != PadroesNFSe.SIMPLISS)
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe);
                     envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -204,6 +205,21 @@ namespace NFe.Service.NFSe
                         assEGovoverne.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         egoverne.EmiteNF(NomeArquivoXML);
+                        break;
+                        #endregion
+
+                    case PadroesNFSe.EL:
+                        #region E&L
+                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                        oDadosEnvLoteRps.cMunicipio,
+                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                        Empresas.Configuracoes[emp].SenhaWS,
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
+                                        (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
+
+                        el.EmiteNF(NomeArquivoXML);
                         break;
                         #endregion
                 }

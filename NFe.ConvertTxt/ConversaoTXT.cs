@@ -2128,7 +2128,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X03":
-                    layout = "§X03|xNome|IE|xEnder|UF|xMun"; //ok
+                    //layout = "§X03|xNome|IE|xEnder|UF|xMun"; //ok - alterado em 18/3/15
+                    layout = "§X03|xNome|IE|xEnder|xMun|UF"; //ok
                     ///
                     /// Grupo da TAG <transp><TRansportadora>
                     /// 
@@ -2367,7 +2368,7 @@ namespace NFe.ConvertTxt
                         /// 
                         NFe.exporta.UFSaidaPais = this.LerString(TpcnResources.UFSaidaPais, ObOp.Obrigatorio, 2, 2);
                         NFe.exporta.xLocExporta = this.LerString(TpcnResources.xLocExporta, ObOp.Obrigatorio, 1, 60);
-                        NFe.exporta.xLocDespacho = this.LerString(TpcnResources.xLocDespacho, ObOp.Obrigatorio, 1, 60);
+                        NFe.exporta.xLocDespacho = this.LerString(TpcnResources.xLocDespacho, ObOp.Opcional, 1, 60);
                     }
                     else
                     {

@@ -110,8 +110,19 @@ namespace NFe.Components
                                             case "110111":  //XML de Envio de evento de cancelamento
                                             case "110113":  //XML de Envio do evento de contingencia EPEC, CTe
                                             case "110160":  //XML de Envio do evento de Registro Multimodal, CTe
-                                            case "110140":  //EPEC
                                                 nome = nome + evento;
+                                                break;
+
+                                            case "110140":  //EPEC
+                                                string mod = string.Empty;
+                                                if (((XmlElement)(XmlNode)doc.GetElementsByTagName("infEvento")[0]).Attributes[NFe.Components.TpcnResources.Id.ToString()] != null)
+                                                {
+                                                    mod = "-" + ((XmlElement)(XmlNode)doc.GetElementsByTagName("infEvento")[0]).Attributes[NFe.Components.TpcnResources.Id.ToString()].Value.Substring(28, 2) + "-";
+                                                    if (! mod.Equals("-65-"))
+                                                        mod = string.Empty;
+                                                }
+
+                                                nome = nome + mod + evento;
                                                 break;
 
                                             case "210200":  //XML Evento de manifestação do destinatário

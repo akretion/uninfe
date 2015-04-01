@@ -575,21 +575,29 @@ namespace NFe.Components
                             }
                             PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
 
+                            string urlsH = WebServiceNFSe.WebServicesHomologacao(ref pdr, IDmunicipio);
+                            string urlsP = WebServiceNFSe.WebServicesProducao(ref pdr, IDmunicipio);
 
-                            webServices wsItem = new webServices(IDmunicipio, Nome, UF);
+                            if (!string.IsNullOrEmpty(urlsH) || !string.IsNullOrEmpty(urlsP))
+                            {
+                                var ci = (from i in webServicesList where i.ID == IDmunicipio select i).FirstOrDefault();
+                                if (ci == null)
+                                {
+                                    webServices wsItem = new webServices(IDmunicipio, Nome, UF);
 
-                            PreencheURLw(wsItem.LocalHomologacao,
-                                         NFe.Components.NFeStrConstants.LocalHomologacao,
-                                         WebServiceNFSe.WebServicesHomologacao(ref pdr, IDmunicipio),
-                                         "",
-                                         "NFse\\");
-                            PreencheURLw(wsItem.LocalProducao,
-                                         NFe.Components.NFeStrConstants.LocalProducao,
-                                         WebServiceNFSe.WebServicesProducao(ref pdr, IDmunicipio),
-                                         "",
-                                         "NFse\\");
-
-                            webServicesList.Add(wsItem);
+                                    PreencheURLw(wsItem.LocalHomologacao,
+                                                 NFe.Components.NFeStrConstants.LocalHomologacao,
+                                                 urlsH,
+                                                 "",
+                                                 "NFse\\");
+                                    PreencheURLw(wsItem.LocalProducao,
+                                                 NFe.Components.NFeStrConstants.LocalProducao,
+                                                 urlsP,
+                                                 "",
+                                                 "NFse\\");
+                                    webServicesList.Add(wsItem);
+                                }
+                            }
                             ///
                             /// adiciona na lista que será usada na manutencao
                             /// 
@@ -663,7 +671,7 @@ namespace NFe.Components
                                 webServicesList.Add(wsItem);
                             }
                             // danasa 1-2012
-                            if (estadoElemento.HasAttribute(NFeStrConstants.Padrao) || subfolder.Equals("NFse\\"))
+                            if (estadoElemento.HasAttribute(NFeStrConstants.Padrao))
                             {
                                 try
                                 {
