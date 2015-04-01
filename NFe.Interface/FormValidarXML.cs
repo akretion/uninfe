@@ -111,15 +111,9 @@ namespace NFe.Interface
 
         private void cbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateDetalheForm();
-        }
-
-        /// <summary>
-        /// Popular detalhes do form de acordo com a empresa selecionada
-        /// </summary>
-        private void PopulateDetalheForm()
-        {
-            Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
+            var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
+            this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+            //Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
         }
 
         #region PopulateCbEmpresa()

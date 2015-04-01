@@ -88,12 +88,22 @@ namespace NFe.Interface
             #endregion
 
             #region cbServico
-            cbServico.Items.Clear();
-            cbServico.Items.Add("NF-e"); //0
-            cbServico.Items.Add("CT-e"); //1
-            cbServico.Items.Add("NFS-e"); //2
-            cbServico.Items.Add("MDF-e"); //3
-            cbServico.Items.Add("NFC-e"); //4
+//            cbServico.Items.Clear();
+//            cbServico.Items.Add("NF-e"); //0
+//            cbServico.Items.Add("CT-e"); //1
+//            cbServico.Items.Add("NFS-e"); //2
+//            cbServico.Items.Add("MDF-e"); //3
+//            cbServico.Items.Add("NFC-e"); //4
+
+            ArrayList list = new ArrayList();
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfe, EnumHelper.GetDescription(TipoAplicativo.Nfe)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Cte, EnumHelper.GetDescription(TipoAplicativo.Cte)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.MDFe, EnumHelper.GetDescription(TipoAplicativo.MDFe)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
+            this.cbServico.DataSource = list;
+            this.cbServico.DisplayMember = "Value";
+            this.cbServico.ValueMember = "Key";
+
             #endregion
         }
 
@@ -108,20 +118,28 @@ namespace NFe.Interface
         /// </remarks>
         private void PopulateCbEmpresa()
         {
+            this.cbEmpresa.SelectedIndexChanged -= cbEmpresa_SelectedIndexChanged;
             try
             {
                 empresa = Auxiliar.CarregaEmpresa(true);
+
+                if (empresa.Count > 0)
+                {
+                    cbEmpresa.DataSource = empresa;
+                    cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
+                    cbEmpresa.ValueMember = "Valor";
+                    cbEmpresa.SelectedIndex = 0;
+                    this.PopulateDetalheForm();
+            }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            if (empresa.Count > 0)
+            finally
             {
-                cbEmpresa.DataSource = empresa;
-                cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
-                cbEmpresa.ValueMember = "Valor";
+                this.cbEmpresa.SelectedIndexChanged += cbEmpresa_SelectedIndexChanged;
             }
         }
         #endregion
@@ -134,7 +152,7 @@ namespace NFe.Interface
             this.Refresh();
 
             TipoEmissao tpEmis = (TipoEmissao)Enum.Parse(typeof(TipoEmissao), Enum.GetName(typeof(TipoEmissao), ((ComboElem)(new System.Collections.ArrayList(arrTpEmis))[cbEmissao.SelectedIndex]).Codigo));
-            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedIndex;
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
 
             if (servico == TipoAplicativo.Cte)
             {
@@ -286,13 +304,15 @@ namespace NFe.Interface
         /// </summary>
         private void PopulateDetalheForm()
         {
-            Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
-            /*
-            if (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Nfse)
+            this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
+            try
             {
-                MessageBox.Show("NFS-e não dispõe do serviço de consulta status.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            */
+                var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
+                this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+                if (this.Emp >= 0)
+            {
+                    //Emp = ((ComboElem)(new System.Collections.ArrayList(empresa))[cbEmpresa.SelectedIndex]).Codigo;
+
             //Posicionar o elemento da combo UF
             foreach (ComboElem elem in arrUF)
             {
@@ -308,15 +328,71 @@ namespace NFe.Interface
             //Posicionar o elemento da combo tipo de emissão
             cbEmissao.SelectedValue = Empresas.Configuracoes[Emp].tpEmis;
 
+                    this.ChangeVersao(Empresas.Configuracoes[Emp].Servico);
+
             if (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos)
-            {
-                cbServico.SelectedIndex = 0;
-                cbServico.Enabled = true;
+                        cbServico.SelectedValue = (int)TipoAplicativo.Nfe;
+                    else
+                        cbServico.SelectedValue = (int)Empresas.Configuracoes[Emp].Servico;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                cbServico.Enabled = false;
-                cbServico.SelectedIndex = (int)Empresas.Configuracoes[Emp].Servico;
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
+                this.buttonPesquisa.Enabled =
+                    this.buttonStatusServidor.Enabled =
+                    this.cbAmbiente.Enabled =
+                    this.cbEmissao.Enabled =
+                    this.comboUf.Enabled =
+                    this.cbServico.Enabled =
+                    this.cbVersao.Enabled = this.Emp >= 0;
+            }
+        }
+        private void cbServico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbServico.SelectedValue != null)
+            {
+                TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
+                this.ChangeVersao(servico);
+            }
+        }
+
+        private void ChangeVersao(TipoAplicativo Servico)
+        {
+            switch (Servico)
+            {
+                case TipoAplicativo.Todos:
+                    this.cbVersao.SelectedItem = "3.10";
+                    this.cbVersao.Enabled = this.cbServico.Enabled = true;
+                    break;
+                    
+                case TipoAplicativo.Nfe:
+                    this.cbVersao.Enabled = true;
+                    this.cbVersao.SelectedItem = "3.10";
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+
+                case TipoAplicativo.NFCe:
+                    this.cbVersao.Enabled = true;
+                    this.cbVersao.SelectedItem = "3.10";
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+
+                case TipoAplicativo.Cte:
+                    this.cbVersao.SelectedItem = "2.00";
+                    this.cbVersao.Enabled = false;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
+                    
+                case TipoAplicativo.MDFe:
+                    this.cbVersao.SelectedItem = "2.00";
+                    this.cbVersao.Enabled = false;
+                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    break;
             }
         }
 
@@ -544,10 +620,5 @@ namespace NFe.Interface
         }
         #endregion
 
-        private void cbServico_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedIndex;
-            this.cbVersao.Enabled = (servico == TipoAplicativo.Nfe || Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
-        }
     }
 }

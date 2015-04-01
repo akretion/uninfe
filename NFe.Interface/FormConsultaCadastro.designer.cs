@@ -277,12 +277,14 @@
             // cbServico
             // 
             this.cbServico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbServico.DisplayMember = "Value";
             this.cbServico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbServico.FormattingEnabled = true;
             this.cbServico.Location = new System.Drawing.Point(292, 118);
             this.cbServico.Name = "cbServico";
             this.cbServico.Size = new System.Drawing.Size(70, 21);
             this.cbServico.TabIndex = 5;
+            this.cbServico.ValueMember = "Key";
             this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
             // 
             // tabPage2
