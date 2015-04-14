@@ -12,7 +12,7 @@ using NFe.Components.Abstract;
 using NFe.Components.br.gov.sp.piracicaba.sistemas.www.h;
 using System.Net;
 
-namespace NFe.Components.SimplISS.h
+namespace NFe.Components.SimplISS.PiracicabaSP.h
 {
     public class SimplISSH : EmiteNFSeBase
     {

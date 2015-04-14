@@ -264,5 +264,25 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_elnfse_simoesfilho_p_RpsServiceService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.45.245.217/ws_nfse/nfseservice.svc")]
+        public string NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService {
+            get {
+                return ((string)(this["NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.45.245.217/ws_nfse_presidente_prudente/nfseservice.svc")]
+        public string NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService {
+            get {
+                return ((string)(this["NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService"]));
+            }
+        }
     }
 }

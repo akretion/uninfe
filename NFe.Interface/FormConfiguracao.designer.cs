@@ -38,6 +38,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.chkUseProxyAutomaticamente = new System.Windows.Forms.CheckBox();
             this.chkGravarLogOperacao = new System.Windows.Forms.CheckBox();
             this.cbChecaConexaoInternet = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -54,7 +55,6 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.cbProxy = new System.Windows.Forms.CheckBox();
-            this.chkUseProxyAutomaticamente = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage9.SuspendLayout();
@@ -161,6 +161,18 @@
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "Geral";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // chkUseProxyAutomaticamente
+            // 
+            this.chkUseProxyAutomaticamente.AutoSize = true;
+            this.chkUseProxyAutomaticamente.Enabled = false;
+            this.chkUseProxyAutomaticamente.Location = new System.Drawing.Point(166, 7);
+            this.chkUseProxyAutomaticamente.Name = "chkUseProxyAutomaticamente";
+            this.chkUseProxyAutomaticamente.Size = new System.Drawing.Size(259, 17);
+            this.chkUseProxyAutomaticamente.TabIndex = 16;
+            this.chkUseProxyAutomaticamente.Text = "Detectar configuração de proxy automaticamente";
+            this.chkUseProxyAutomaticamente.UseVisualStyleBackColor = true;
+            this.chkUseProxyAutomaticamente.CheckedChanged += new System.EventHandler(this.chkUseProxyAutomaticamente_CheckedChanged);
             // 
             // chkGravarLogOperacao
             // 
@@ -323,16 +335,6 @@
             this.cbProxy.Text = "Usar um servidor proxy";
             this.cbProxy.UseVisualStyleBackColor = true;
             this.cbProxy.CheckedChanged += new System.EventHandler(this.cbProxy_CheckedChanged);
-            // 
-            // chkUseProxyAutomaticamente
-            // 
-            this.chkUseProxyAutomaticamente.AutoSize = true;
-            this.chkUseProxyAutomaticamente.Location = new System.Drawing.Point(9, 172);
-            this.chkUseProxyAutomaticamente.Name = "chkUseProxyAutomaticamente";
-            this.chkUseProxyAutomaticamente.Size = new System.Drawing.Size(240, 17);
-            this.chkUseProxyAutomaticamente.TabIndex = 16;
-            this.chkUseProxyAutomaticamente.Text = "Usar configuração de proxy automaticamente";
-            this.chkUseProxyAutomaticamente.UseVisualStyleBackColor = true;
             // 
             // FormConfiguracao
             // 

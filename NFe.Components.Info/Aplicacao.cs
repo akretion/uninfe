@@ -112,13 +112,15 @@ namespace NFe.Components.Info
 
                 //Dados das configurações do aplicativo
                 if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(NFeStrConstants.nfe_configuracoes);
-                Functions.GravaTxtXml(oXmlGravar, NFe.Components.NFeStrConstants.DiretorioSalvarComo, Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString());
+                //Functions.GravaTxtXml(oXmlGravar, NFe.Components.NFeStrConstants.DiretorioSalvarComo, Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString());
 
                 bool hasFTP = false;
                 foreach (var pT in Empresas.Configuracoes[emp].GetType().GetProperties())
                 {
                     if (pT.CanWrite)
                     {
+                        if (pT.Name.Equals("diretorioSalvarComo")) continue;
+
                         if (isXml)
                         {
                             if (!hasFTP && pT.Name.StartsWith("FTP"))
@@ -147,6 +149,19 @@ namespace NFe.Components.Info
                     if (list.ID == Empresas.Configuracoes[emp].UnidadeFederativaCodigo ||
                         list.UF == "DPEC")
                     {
+                        if (list.UF == "DPEC")
+                        {
+                            bool go = true;
+                            switch (Empresas.Configuracoes[emp].Servico)
+                            {
+                                case TipoAplicativo.Nfse:
+                                case TipoAplicativo.Cte:
+                                    go = false;
+                                    break;
+                            }
+                            if (!go) continue;
+                        }
+
                         if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(list.UF);
                         if (Empresas.Configuracoes[emp].AmbienteCodigo == 2)
                         {
@@ -173,8 +188,13 @@ namespace NFe.Components.Info
                                 break;
 
                             default:
+                                if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe ||
+                                    Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfe ||
+                                    Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
+                                {
                                 Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
                                 Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
+                                }
 
                                 if (list.UF != "DPEC")
                                 {

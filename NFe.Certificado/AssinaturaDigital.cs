@@ -267,25 +267,27 @@ namespace NFe.Certificado
         public void CarregarPIN(int emp, string arqXML, Servicos servico)
         {
             X509Certificate2 x509Cert = new X509Certificate2(Empresas.Configuracoes[emp].X509Certificado);
-
             if (Empresas.Configuracoes[emp].UsaCertificado && clsX509Certificate2Extension.IsA3(x509Cert))
             {
-                string tempFile = arqXML.ToLower().Replace(".xml", "_.xml");
-                File.Copy(arqXML, tempFile);
+                string tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
+                
 
                 switch (servico)
                 {
                     case Servicos.ConsultaCadastroContribuinte:
+                        File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "ConsCad", "infCons", x509Cert, emp);
                         break;
 
                     case Servicos.NFeConsultaStatusServico:
+                        File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
                         break;
 
                     default:
                         break;
                 }
+                if (File.Exists(tempFile))
 
                 File.Delete(tempFile);
             }
@@ -327,12 +329,16 @@ namespace NFe.Certificado
         private bool Assinado(string arqXML, string tagAssinatura)
         {
             bool retorno = false;
+            try
+            {
 
             XmlDocument doc = new XmlDocument();
             doc.Load(arqXML);
 
             if (doc.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
                 retorno = true;
+            }
+            catch { }
 
             return retorno;
         }

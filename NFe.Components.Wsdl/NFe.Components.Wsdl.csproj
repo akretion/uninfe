@@ -2323,6 +2323,18 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPRecepcaoEPEC.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPRecepcaoEPEC.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

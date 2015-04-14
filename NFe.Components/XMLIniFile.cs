@@ -842,6 +842,7 @@ namespace NFe.Components
             return result;
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         protected string Translate(string Value)	// OK
 		{
 			int I;

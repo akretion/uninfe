@@ -291,20 +291,20 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 304);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(500, 17);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(591, 17);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 21;
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe autorizados/" +
-    "denegados?";
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/NFCe/MDFe/CT" +
+    "e autorizados/denegados?";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // checkBoxGravarEventosDeTerceiros
             // 
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
-            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(8, 327);
+            this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(10, 327);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(273, 17);
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(364, 17);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 22;
-            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe de terceiros?";
+            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe/NFCe/MDFe/CTe de terceiros?";
             this.checkBoxGravarEventosDeTerceiros.UseVisualStyleBackColor = true;
             // 
             // checkBoxGravarEventosNaPastaEnviadosNFe
@@ -312,9 +312,10 @@
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(8, 281);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(415, 17);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(506, 17);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 20;
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe autorizados/denegados?";
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/NFCe/MDFe/CTe autorizados/de" +
+    "negados?";
             this.checkBoxGravarEventosNaPastaEnviadosNFe.UseVisualStyleBackColor = true;
             // 
             // labelPadrao
@@ -595,9 +596,10 @@
             this.lbl_textBox_PastaDownload.AutoSize = true;
             this.lbl_textBox_PastaDownload.Location = new System.Drawing.Point(5, 315);
             this.lbl_textBox_PastaDownload.Name = "lbl_textBox_PastaDownload";
-            this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(358, 13);
+            this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(580, 13);
             this.lbl_textBox_PastaDownload.TabIndex = 32;
-            this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
+            this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz e retornos " +
+    "da consulta de eventos de terceiros";
             // 
             // textBox_PastaDownload
             // 
@@ -1396,7 +1398,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl3);
             this.Name = "ucConfiguracao";
-            this.Size = new System.Drawing.Size(619, 469);
+            this.Size = new System.Drawing.Size(644, 469);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);

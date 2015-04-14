@@ -95,6 +95,8 @@
     <Compile Include="NFeStrConstants.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\p\Rlz_InformaticaP.cs" />
     <Compile Include="SchemaXMLNFSe.cs" />
+    <Compile Include="SimplISS\PresidentePrudenteSP\h\SimplISSH.cs" />
+    <Compile Include="SimplISS\PresidentePrudenteSP\p\SimplISSP.cs" />
     <Compile Include="SimplISS\SimplISS.cs" />
     <Compile Include="SimplISS\SimplISSBase.cs" />
     <Compile Include="SimplISS\PiracicabaSP\h\SimplISSH.cs" />
@@ -232,6 +234,16 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.gov.sp.piracicaba.sistemas.www.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -646,6 +658,84 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\GerarNovaNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\NfseService.wsdl" />
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\nfseservice0.wsdl" />
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\GerarNovaNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\NfseService.wsdl" />
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\nfseservice0.wsdl" />
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.gov.sp.presidenteprudente.sistemas.www.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\br.net.cosmorama.fiorilli.p\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -774,6 +864,28 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Users\Renan\Desktop\NFSE\Presidente Prudente SP\HPresidentePrudenteSP-SIMPLISS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.sp.presidenteprudente.sistemas.www.h\</RelPath>
+      <UpdateFromURL>C:\Users\Renan\Desktop\NFSE\Presidente Prudente SP\HPresidentePrudenteSP-SIMPLISS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Users\Renan\Desktop\NFSE\Presidente Prudente SP\PPresidentePrudenteSP-SIMPLISS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.sp.presidenteprudente.sistemas.www.p\</RelPath>
+      <UpdateFromURL>C:\Users\Renan\Desktop\NFSE\Presidente Prudente SP\PPresidentePrudenteSP-SIMPLISS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://187.45.245.217/ws_nfse/nfseservice.svc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

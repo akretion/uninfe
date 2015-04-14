@@ -339,6 +339,7 @@
             // chkConfProxyAuto
             // 
             this.chkConfProxyAuto.AutoSize = true;
+            this.chkConfProxyAuto.Enabled = false;
             this.chkConfProxyAuto.Location = new System.Drawing.Point(192, 4);
             this.chkConfProxyAuto.Name = "chkConfProxyAuto";
             this.chkConfProxyAuto.Size = new System.Drawing.Size(285, 15);

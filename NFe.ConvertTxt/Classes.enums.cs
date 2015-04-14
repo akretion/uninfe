@@ -19,11 +19,6 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLEnvConsultaNFeDest = "1.01";
         public static string VersaoXMLEnvDownload = "1.00";
         public static string VersaoXMLEnvDFe = "1.00";
-        //public static string VersaoXMLCanc = "3.10";
-        //public static string NFeCCe = "1.00";
-        //public static string NfeAutorizacao = "3.10";
-        //public static string NfeRetAutorizacao = "3.10";
-        //public static string NfeRetRecepcao = "3.10";
         #endregion
 
         #region MDF-e
@@ -157,8 +152,9 @@ namespace NFe.ConvertTxt
         crtRegimeNormal = 3
     }
     public enum TpcnTipoCampo 
-    { 
-        tcStr, tcInt, tcDatYYYY_MM_DD, tcDatYYYYMMDD, tcHor, tcDatHor, tcDec2, tcDec3, tcDec4, tcDec10 
+    {
+        tcDec2 = 2, tcDec3 = 3, tcDec4 = 4, tcDec5 = 5, tcDec6 = 6, tcDec7 = 7, tcDec8 = 8, tcDec9 = 9, tcDec10 = 10,
+        tcStr, tcInt, tcDatYYYY_MM_DD, tcDatYYYYMMDD, tcHor, tcDatHor
     }
 
     public enum TpcnIndicadorPagamento 
@@ -220,7 +216,9 @@ namespace NFe.ConvertTxt
         [Description("Registro de passagem")]
         tpEvRegistroPassagem = 310620,
         [Description("Registro de passagem-BRid")]
-        tpEvRegistroPassagemBRid = 510620
+        tpEvRegistroPassagemBRid = 510620,
+        [Description("Registro Multimodal")]
+        tpevRegMultimodal = 110160
     }
 
     public enum TpcnTipoAutor

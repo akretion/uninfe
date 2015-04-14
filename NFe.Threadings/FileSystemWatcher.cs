@@ -24,6 +24,9 @@ namespace NFe.Threadings
         private bool CancelProcess = false;
 
         private bool _disposed = false;
+
+        public static System.Threading.Semaphore _pool;
+        public static int _padding;
         #endregion
 
         #region Destrutores
@@ -75,6 +78,13 @@ namespace NFe.Threadings
             if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
                 CancelProcess = true;
 
+            // Create a semaphore that can satisfy up to three
+            // concurrent requests. Use an initial count of zero,
+            // so that the entire semaphore count is initially
+            // owned by the main program thread.
+            //
+            _pool = new System.Threading.Semaphore(10, 10);
+
             while (!CancelProcess)
             {
                 try
@@ -86,7 +96,7 @@ namespace NFe.Threadings
                                                             .Where(s => Filter.Contains(s.Extension.ToLower()))
                                                             .OrderBy(o => o.CreationTime)
                                                             .ToArray(); //Retorna o conteúdo já ordenado por data de modificação, do menor para o maior. Wandrey 26/03/2015
-                        
+
                         if (files != null)
                         {
                             Hashtable NewFiles = new Hashtable();
@@ -169,7 +179,9 @@ namespace NFe.Threadings
 #endif
                                 }
                             }
+                            
                             OldFiles = NewFiles.Clone() as Hashtable;
+                            
                         }
                     }
                 }
@@ -187,7 +199,7 @@ namespace NFe.Threadings
         }
 
         private void RaiseFileChanged(FileInfo fi)
-        {
+        {            
             if (File.Exists(fi.FullName))
             {
                 ///
@@ -226,6 +238,8 @@ namespace NFe.Threadings
             {
                 Auxiliar.WriteLog(fi.FullName + " - Arquivo não existe.", true);
             }
+
+
         }
 
         /// <summary>

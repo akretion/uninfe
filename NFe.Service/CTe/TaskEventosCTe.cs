@@ -196,7 +196,7 @@ namespace NFe.Service
                                 DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento);
+                                oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true);
 
                                 switch ((NFe.ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
                                 {

@@ -367,6 +367,7 @@ namespace NFe.ConvertTxt
                         case TpcnTipoCampo.tcDatHor:
                             maxLength = minLength = 19; //aaaa-mm-dd hh:mm:ss
                             break;
+                            /*
                         case TpcnTipoCampo.tcDec2:
                             nDecimais = 2;
                             break;
@@ -378,6 +379,10 @@ namespace NFe.ConvertTxt
                             break;
                         case TpcnTipoCampo.tcDec10:
                             nDecimais = 10;
+                            break;*/
+                        default:
+                            if (Tipo >= TpcnTipoCampo.tcDec2 && Tipo <= TpcnTipoCampo.tcDec10)
+                                nDecimais = (int)Tipo;
                             break;
                     }
 
@@ -395,6 +400,11 @@ namespace NFe.ConvertTxt
                             case TpcnTipoCampo.tcDec2:
                             case TpcnTipoCampo.tcDec3:
                             case TpcnTipoCampo.tcDec4:
+                            case TpcnTipoCampo.tcDec5:
+                            case TpcnTipoCampo.tcDec6:
+                            case TpcnTipoCampo.tcDec7:
+                            case TpcnTipoCampo.tcDec8:
+                            case TpcnTipoCampo.tcDec9:
                             case TpcnTipoCampo.tcDec10:
                                 //quando numerico do tipo double não consiste o tamanho minimo nem maximo
                                 break;
@@ -418,6 +428,11 @@ namespace NFe.ConvertTxt
                         case TpcnTipoCampo.tcDec2:
                         case TpcnTipoCampo.tcDec3:
                         case TpcnTipoCampo.tcDec4:
+                        case TpcnTipoCampo.tcDec5:
+                        case TpcnTipoCampo.tcDec6:
+                        case TpcnTipoCampo.tcDec7:
+                        case TpcnTipoCampo.tcDec8:
+                        case TpcnTipoCampo.tcDec9:
                         case TpcnTipoCampo.tcDec10:
                             {
                                 int pos = ConteudoTag.IndexOf(".") + 1;
@@ -443,7 +458,15 @@ namespace NFe.ConvertTxt
 
                                 #region -- atribui o numero de casas decimais que serão gravadas
 
+                                if (ndec < (int)TpcnTipoCampo.tcDec2 || ndec > (int)TpcnTipoCampo.tcDec10)
+                                    ndec = (int)TpcnTipoCampo.tcDec2;
+
+                                TpcnTipoCampo tipo = (TpcnTipoCampo)ndec;
+
                                 if (tag == TpcnResources.vUnCom)
+                                {
+                                    NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo = tipo;
+/*
                                     switch (ndec)
                                     {
                                         case 2:
@@ -455,12 +478,22 @@ namespace NFe.ConvertTxt
                                         case 4:
                                             NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo = TpcnTipoCampo.tcDec4;
                                             break;
+                                        case 5:
+                                            NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo = TpcnTipoCampo.tcDec5;
+                                            break;
+                                        case 6:
+                                            NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo = TpcnTipoCampo.tcDec6;
+                                            break;
                                         case 10:
                                             NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo = TpcnTipoCampo.tcDec10;
                                             break;
+                                    }*/
                                     }
 
                                 if (tag == TpcnResources.vUnTrib)
+                                {
+                                    NFe.det[NFe.det.Count - 1].Prod.vUnTrib_Tipo = tipo;
+                                    /*
                                     switch (ndec)
                                     {
                                         case 2:
@@ -475,9 +508,13 @@ namespace NFe.ConvertTxt
                                         case 10:
                                             NFe.det[NFe.det.Count - 1].Prod.vUnTrib_Tipo = TpcnTipoCampo.tcDec10;
                                             break;
+                                    }*/
                                     }
 
                                 if (tag == TpcnResources.qTotMes)
+                                {
+                                    NFe.cana.qTotMes_Tipo = tipo;
+                                    /*
                                     switch (ndec)
                                     {
                                         case 2:
@@ -492,9 +529,13 @@ namespace NFe.ConvertTxt
                                         case 10:
                                             NFe.cana.qTotMes_Tipo = TpcnTipoCampo.tcDec10;
                                             break;
+                                    }*/
                                     }
 
                                 if (tag == TpcnResources.qTotAnt)
+                                {
+                                    NFe.cana.qTotAnt_Tipo = tipo;
+                                    /*
                                     switch (ndec)
                                     {
                                         case 2:
@@ -509,9 +550,13 @@ namespace NFe.ConvertTxt
                                         case 10:
                                             NFe.cana.qTotAnt_Tipo = TpcnTipoCampo.tcDec10;
                                             break;
+                                    }*/
                                     }
 
                                 if (tag == TpcnResources.qTotGer)
+                                {
+                                    NFe.cana.qTotGer_Tipo = tipo;
+                                    /*
                                     switch (ndec)
                                     {
                                         case 2:
@@ -526,9 +571,13 @@ namespace NFe.ConvertTxt
                                         case 10:
                                             NFe.cana.qTotGer_Tipo = TpcnTipoCampo.tcDec10;
                                             break;
+                                    }*/
                                     }
 
-                                if (tag == TpcnResources.qtde)// || tag == TpcnResources.qTotGer)
+                                if (tag == TpcnResources.qtde)
+                                {
+                                    NFe.cana.fordia[NFe.cana.fordia.Count - 1].qtde_Tipo = tipo;
+                                    /*
                                         switch (ndec)
                                         {
                                             case 2:
@@ -543,6 +592,7 @@ namespace NFe.ConvertTxt
                                             case 10:
                                                 NFe.cana.fordia[NFe.cana.fordia.Count - 1].qtde_Tipo = TpcnTipoCampo.tcDec10;
                                                 break;
+                                    }*/
                                         }
                                 
 
@@ -567,6 +617,11 @@ namespace NFe.ConvertTxt
                     case TpcnTipoCampo.tcDec2:
                     case TpcnTipoCampo.tcDec3:
                     case TpcnTipoCampo.tcDec4:
+                    case TpcnTipoCampo.tcDec5:
+                    case TpcnTipoCampo.tcDec6:
+                    case TpcnTipoCampo.tcDec7:
+                    case TpcnTipoCampo.tcDec8:
+                    case TpcnTipoCampo.tcDec9:
                     case TpcnTipoCampo.tcDec10:
                         return Convert.ToDouble("0" + ConteudoTag.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
 
@@ -605,6 +660,11 @@ namespace NFe.ConvertTxt
                     case TpcnTipoCampo.tcDec2:
                     case TpcnTipoCampo.tcDec3:
                     case TpcnTipoCampo.tcDec4:
+                    case TpcnTipoCampo.tcDec5:
+                    case TpcnTipoCampo.tcDec6:
+                    case TpcnTipoCampo.tcDec7:
+                    case TpcnTipoCampo.tcDec8:
+                    case TpcnTipoCampo.tcDec9:
                     case TpcnTipoCampo.tcDec10:
                         return 0.0;
 
@@ -676,6 +736,14 @@ namespace NFe.ConvertTxt
                         NFe.ide.dhEmi    = this.LerString(TpcnResources.dhEmi,    ObOp.Obrigatorio, 19, 25);
                         NFe.ide.dhSaiEnt = this.LerString(TpcnResources.dhSaiEnt, ObOp.Opcional,     0, 25);
                         NFe.ide.idDest = (TpcnDestinoOperacao)this.LerInt32(TpcnResources.idDest, ObOp.Obrigatorio, 1, 1);
+
+                        if (string.IsNullOrEmpty(NFe.ide.dhEmi) || Convert.ToDateTime(NFe.ide.dhEmi).Year == 1 ||
+                            NFe.ide.dhEmi.EndsWith("00:00"))
+                            throw new Exception("Data de emissão da nota inválida");
+
+                        if (!string.IsNullOrEmpty(NFe.ide.dhSaiEnt))
+                            if (Convert.ToDateTime(NFe.ide.dhSaiEnt).Year == 1)
+                                throw new Exception("Data de saida da nota inválida");
                     }
                     else
                     {
@@ -1087,6 +1155,9 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.nItemPed = this.LerInt32(TpcnResources.nItemPed, ObOp.Opcional, 0, 6);
                     NFe.det[nProd].Prod.nFCI    = this.LerString(TpcnResources.nFCI, ObOp.Opcional, 0, 255);
                     NFe.det[nProd].Imposto.ISSQN.cSitTrib = string.Empty;
+
+                    Console.WriteLine(NFe.det[NFe.det.Count - 1].Prod.vUnCom_Tipo);
+                    Console.WriteLine(NFe.det[nProd].Prod.vUnCom_Tipo);
 
                     
                     #endregion                    

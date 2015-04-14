@@ -108,7 +108,7 @@ namespace NFe.Components
                 var es = Propriedade.Estados.First(s => s.UF.Equals(uf));
                 return es.CodigoMunicipio;
             }
-            catch 
+            catch
             {
                 return 0;
             }
@@ -240,25 +240,46 @@ namespace NFe.Components
 
         #region ExtrairNomeArq()
         /// <summary>
-        /// Extrai somente o nome do arquivo de uma string; para ser utilizado na situação desejada. Veja os exemplos na documentação do código.
+        /// Extrai o nome do arquivo de uma determinada string. Este não mantem a pasta que ele está localizado, fica somente o nome do arquivo.
         /// </summary>
-        /// <param name="pPastaArq">String contendo o caminho e nome do arquivo que é para ser extraido o nome.</param>
-        /// <param name="pFinalArq">String contendo o final do nome do arquivo até onde é para ser extraído.</param>
-        /// <returns>Retorna somente o nome do arquivo de acordo com os parâmetros passados - veja exemplos.</returns>
+        /// <param name="arquivo">string contendo o caminho e nome do arquivo que é para ser extraído o conteúdo desejado</param>
+        /// <param name="finalArq">string contendo o final do nome do arquivo que é para ser retirado do nome</param>
+        /// <returns>Retorna somente o nome do arquivo de acordo com os parâmetros passado</returns>
         /// <example>
-        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
+        /// MessageBox.Show(ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
         /// //Será demonstrado no message a string "ArqSituacao"
         /// 
-        /// MessageBox.Show(this.ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
+        /// MessageBox.Show(ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
         /// //Será demonstrado no message a string "ArqSituacao-ped-sta"
         /// </example>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>19/06/2008</date>
-        public static string ExtrairNomeArq(string pPastaArq, string pFinalArq)
+        public static string ExtrairNomeArq(string arquivo, string finalArq)
         {
-            FileInfo fi = new FileInfo(pPastaArq);
+            FileInfo fi = new FileInfo(arquivo);
             string ret = fi.Name;
-            ret = ret.Substring(0, ret.Length - pFinalArq.Length);
+            ret = ret.Substring(0, ret.Length - finalArq.Length);
+            return ret;
+        }
+        #endregion
+
+        #region ExtraiPastaNomeArq()
+        /// <summary>
+        /// Extrai o nome do arquivo de uma determinada string mantendo a pasta que ele está localizado
+        /// </summary>
+        /// <param name="arquivo">string contendo o caminho e nome do arquivo que é para ser extraído o conteúdo desejado</param>
+        /// <param name="finalArq">string contendo o final do nome do arquivo que é para ser retirado do nome</param>
+        /// <returns>Retorna a pasta e o nome do arquivo de acordo com os parâmetros passado.</returns>
+        /// <example>
+        /// MessageBox.Show(ExtrairPastaNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
+        /// //Será demonstrado no message a string "C:\\TESTE\\NFE\\ENVIO\\ArqSituacao"
+        /// 
+        /// MessageBox.Show(ExtrairPastaNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
+        /// //Será demonstrado no message a string "C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta"
+        /// </example>
+        public static string ExtraiPastaNomeArq(string arquivo, string finalArq)
+        {
+            FileInfo fi = new FileInfo(arquivo);
+            string ret = fi.FullName;
+            ret = ret.Substring(0, ret.Length - finalArq.Length);
             return ret;
         }
         #endregion
@@ -270,6 +291,7 @@ namespace NFe.Components
         /// <param name="file">caminho do arquivo</param>
         /// <returns>true se estiver em uso</returns>
         /// <by>http://desenvolvedores.net/marcelo</by>
+        [System.Diagnostics.DebuggerHidden()]
         public static bool FileInUse(string file)
         {
             bool ret = false;
@@ -527,6 +549,7 @@ namespace NFe.Components
         }
         #endregion
 
+        [System.Diagnostics.DebuggerHidden()]
         public static void CopyObjectTo(this object Source, object Destino)
         {
             foreach (var pS in Source.GetType().GetProperties())
@@ -716,9 +739,9 @@ namespace NFe.Components
                 if (!string.IsNullOrEmpty(CNPJEmpresa))
                     CNPJEmpresa += "_";
 
-                string fileName = Propriedade.PastaLog + 
-                                (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") + 
-                                (string.IsNullOrEmpty(CNPJEmpresa) ? "" : CNPJEmpresa) + 
+                string fileName = Propriedade.PastaLog +
+                                (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") +
+                                (string.IsNullOrEmpty(CNPJEmpresa) ? "" : CNPJEmpresa) +
                                 DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
 
                 DateTime startTime;

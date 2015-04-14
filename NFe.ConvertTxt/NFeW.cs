@@ -2142,7 +2142,7 @@ namespace NFe.ConvertTxt
                     if ((int)obj == 0)
                         return;
 
-                if (Tipo == TpcnTipoCampo.tcDec2 || Tipo == TpcnTipoCampo.tcDec3 || Tipo == TpcnTipoCampo.tcDec4 || Tipo == TpcnTipoCampo.tcDec10)
+                if (Tipo >= TpcnTipoCampo.tcDec2 && Tipo <=TpcnTipoCampo.tcDec10)// || Tipo == TpcnTipoCampo.tcDec3 || Tipo == TpcnTipoCampo.tcDec4 || Tipo == TpcnTipoCampo.tcDec10)
                     if ((double)obj == 0)
                         return;
 
@@ -2158,23 +2158,21 @@ namespace NFe.ConvertTxt
             switch (Tipo)
             {
                 case TpcnTipoCampo.tcDec2:
-                    if (((double)obj) > 0 || Obrigatorio == ObOp.Obrigatorio)
-                        valueEl1.InnerText = ((double)obj).ToString("0.00").Replace(",", ".");
-                    break;
 
                 case TpcnTipoCampo.tcDec3:
-                    if (((double)obj) > 0 || Obrigatorio == ObOp.Obrigatorio)
-                        valueEl1.InnerText = ((double)obj).ToString("0.000").Replace(",", ".");
-                    break;
 
                 case TpcnTipoCampo.tcDec4:
-                    if (((double)obj) > 0 || Obrigatorio == ObOp.Obrigatorio)
-                        valueEl1.InnerText = ((double)obj).ToString("0.0000").Replace(",", ".");
-                    break;
+                case TpcnTipoCampo.tcDec5:
+                case TpcnTipoCampo.tcDec6:
+                case TpcnTipoCampo.tcDec7:
+                case TpcnTipoCampo.tcDec8:
+                case TpcnTipoCampo.tcDec9:
 
                 case TpcnTipoCampo.tcDec10:
                     if (((double)obj) > 0 || Obrigatorio == ObOp.Obrigatorio)
-                        valueEl1.InnerText = ((double)obj).ToString("0.0000000000").Replace(",", ".");
+                    {
+                        valueEl1.InnerText = ((double)obj).ToString("0." + ("").PadLeft((int)Tipo,'0')).Replace(",", ".");
+                    }
                     break;
 
                 case TpcnTipoCampo.tcDatHor:

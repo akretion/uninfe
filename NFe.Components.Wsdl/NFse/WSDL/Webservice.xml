@@ -2601,4 +2601,26 @@
       <CancelarNfse>wsdl\producao\pginfes.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3541406" Nome="Presidente Prudente - SP" UF="SP" Padrao="SIMPLISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HPresidentePrudenteSP-SIMPLISS.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+
+
 </Webservice>

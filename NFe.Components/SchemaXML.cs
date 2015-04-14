@@ -775,6 +775,20 @@ namespace NFe.Components
             });
             #endregion
 
+            #region XML Envio Registro Multimodal
+            SchemaXML.InfSchemas.Add("NFE-envEvento110160", new InfSchema()
+            {
+                Tag = "eventoCTe",
+                ID = ++id,
+                ArquivoXSD = "CTe\\eventoCTe_v2.00.xsd",
+                Descricao = "XML de registro de envio Registro Multimodal do CTe",
+                TagAssinatura = "eventoCTe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
+
+            });
+            #endregion
+
             #region XML de Envio do evento de contingencia EPEC
             SchemaXML.InfSchemas.Add("NFE-eventoCTe110113", new InfSchema()
             {

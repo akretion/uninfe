@@ -684,7 +684,7 @@ namespace NFe.Service
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">");
+            aXML.Append("<consSitCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTePedSit + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -2405,8 +2405,10 @@ namespace NFe.Service
                     ChaveNFe + "_" + (tpEvento != ConvertTxt.tpEventos.tpEvCCe ? ((int)tpEvento).ToString() + "_" : "") + nSeqEvento.ToString("00") +
                     Propriedade.ExtRetorno.ProcEventoNFe;
 
+            bool sendtodanfemon = true;
+
             string filenameToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
-            string filenameBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
+            string filenameBackup = Empresas.Configuracoes[emp].PastaBackup;
             bool NFeDeTerceiros = ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
                                   ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString();
 
@@ -2423,12 +2425,6 @@ namespace NFe.Service
                 tpEvento != ConvertTxt.tpEventos.tpEvCCe &&
                 tpEvento != ConvertTxt.tpEventos.tpEvEPEC) && !FromTaskEventos && NFeDeTerceiros)
             {
-                //if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
-                //ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
-                //{
-                ///evento não é do cliente uninfe
-                ///41120776676436000167550010000003961000316515
-                ///
 
                 if (!Empresas.Configuracoes[emp].GravarEventosDeTerceiros ||
                     string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaDownloadNFeDest)) return;
@@ -2438,7 +2434,7 @@ namespace NFe.Service
                 /// xml de terceiros nao grava na pasta de backup
                 /// 
                 filenameBackup = "";
-                //}
+                sendtodanfemon = false;
             }
             else
             {
@@ -2474,9 +2470,10 @@ namespace NFe.Service
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
             //Gravar o arquivo de distribuição na pasta de backup
-            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup) && !string.IsNullOrEmpty(filenameBackup))
+            if (!string.IsNullOrEmpty(filenameBackup))
             {
                 // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
+                filenameBackup = Path.Combine(filenameBackup, tempXmlFile);
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
 
@@ -2492,7 +2489,7 @@ namespace NFe.Service
 
             this.XmlParaFTP(emp, filenameToWrite);
 
-            if (!string.IsNullOrEmpty(filenameBackup))
+            if (sendtodanfemon)
                 TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
 
             NomeArqGerado = filenameToWrite;
@@ -2525,7 +2522,7 @@ namespace NFe.Service
                         Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText);
                         DateTime dhRegEvento = Functions.GetDateTime(((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
-                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
+                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false);
                     }
                 }
             }
@@ -2537,18 +2534,35 @@ namespace NFe.Service
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos CTe
         /// </summary>
-        public void XmlDistEventoCTe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento)
+        public void XmlDistEventoCTe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio,
+            DateTime dhRegEvento, bool FromTaskEventos)
         {
-            // grava o xml de distribuicao como: chave + "_" +  nSeqEvento
-            // ja que a nSeqEvento deve ser unico para cada chave
-            // 
-            // quando o evento for de manifestacao ou cancelamento o nome do arquivo contera o tipo do evento
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
                     Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoCTe;
+            bool NFeDeTerceiros = ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                      ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString();
+
+            bool sendtodanfemon = true;
 
             string filenameToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
+            string filenameBackup = Empresas.Configuracoes[emp].PastaBackup;
+
+            if (!FromTaskEventos && NFeDeTerceiros)
+            {
+                if (!Empresas.Configuracoes[emp].GravarEventosDeTerceiros ||
+                    string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaDownloadNFeDest)) return;
+
+                filenameToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
+                ///
+                /// xml de terceiros nao grava na pasta de backup
+                /// 
+                filenameBackup = "";
+                sendtodanfemon = false;
+            }
+            else
+            {
 
             bool vePasta = false;
             if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
@@ -2564,6 +2578,7 @@ namespace NFe.Service
                     filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
                 }
             }
+            }
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoCTe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
@@ -2578,12 +2593,13 @@ namespace NFe.Service
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
             // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup))
+            if (!string.IsNullOrEmpty(filenameBackup))
             {
-                //Gravar o arquivo de distribuição na pasta de backup
-                string filenameBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
+                filenameBackup = Path.Combine(filenameBackup, tempXmlFile);
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
+
+                //Gravar o arquivo de distribuição na pasta de backup
 
                 if (!File.Exists(filenameBackup))
                     File.WriteAllText(filenameBackup, protEnvioEvento, Encoding.UTF8);
@@ -2596,6 +2612,8 @@ namespace NFe.Service
                 File.WriteAllText(filenameToWrite, protEnvioEvento, Encoding.UTF8);
 
             this.XmlParaFTP(emp, filenameToWrite);
+
+            if (sendtodanfemon)
 
             TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
 
@@ -2627,7 +2645,7 @@ namespace NFe.Service
                         Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText);
                         DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
-                        XmlDistEventoMDFe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento);
+                        XmlDistEventoMDFe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false);
                     }
                 }
             }
@@ -2639,7 +2657,7 @@ namespace NFe.Service
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos MDFe
         /// </summary>
-        public void XmlDistEventoMDFe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento)
+        public void XmlDistEventoMDFe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento, bool FromTaskEventos)
         {
             // grava o xml de distribuicao como: chave + "_" +  nSeqEvento
             // ja que a nSeqEvento deve ser unico para cada chave
@@ -2649,8 +2667,28 @@ namespace NFe.Service
                     PastaEnviados.Autorizados.ToString() + "\\" +
                     Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) +
                     ChaveNFe + "_" + tpEvento.ToString() + "_" + nSeqEvento.ToString("00") + Propriedade.ExtRetorno.ProcEventoMDFe;
+            bool NFeDeTerceiros = ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                      ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString();
+
+            bool sendtodanfemon = true;
 
             string filenameToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, tempXmlFile);
+            string filenameBackup = Empresas.Configuracoes[emp].PastaBackup;
+
+            if (!FromTaskEventos && NFeDeTerceiros)
+            {
+                if (!Empresas.Configuracoes[emp].GravarEventosDeTerceiros ||
+                    string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaDownloadNFeDest)) return;
+
+                filenameToWrite = Path.Combine(Empresas.Configuracoes[emp].PastaDownloadNFeDest, Path.GetFileName(tempXmlFile));
+                ///
+                /// xml de terceiros nao grava na pasta de backup
+                /// 
+                filenameBackup = "";
+                sendtodanfemon = false;
+            }
+            else
+            {
 
             bool vePasta = false;
             if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
@@ -2666,6 +2704,7 @@ namespace NFe.Service
                     filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
                 }
             }
+            }
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoMDFe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
@@ -2680,10 +2719,10 @@ namespace NFe.Service
                 protEnvioEvento = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + protEnvioEvento;
 
             //Gravar o arquivo de distribuição na pasta de backup
-            if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaBackup))
+            if (!string.IsNullOrEmpty(filenameBackup))
             {
                 // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-                string filenameBackup = Path.Combine(Empresas.Configuracoes[emp].PastaBackup, tempXmlFile);
+                filenameBackup = Path.Combine(filenameBackup, tempXmlFile);
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
 
@@ -2698,6 +2737,8 @@ namespace NFe.Service
                 File.WriteAllText(filenameToWrite, protEnvioEvento, Encoding.UTF8);
 
             this.XmlParaFTP(emp, filenameToWrite);
+
+            if (sendtodanfemon)
 
             TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
 

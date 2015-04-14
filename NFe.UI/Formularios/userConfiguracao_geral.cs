@@ -35,7 +35,7 @@ namespace NFe.UI.Formularios
             tbSenhaConfig2.Text = ConfiguracaoApp.SenhaConfig;
             cbChecaConexaoInternet.Checked = ConfiguracaoApp.ChecarConexaoInternet;
             chkGravarLogOperacao.Checked = ConfiguracaoApp.GravarLogOperacoesRealizadas;
-
+            chkConfProxyAuto.Checked = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
             cbProxy_CheckedChanged(null, null);
 
             this.tbUsuario.Focus();
@@ -136,7 +136,7 @@ namespace NFe.UI.Formularios
                 tbUsuario.Enabled =
                 tbSenha.Enabled =
                 nudPorta.Enabled =
-                tbServidor.Enabled = cbProxy.Checked;
+                tbServidor.Enabled = chkConfProxyAuto.Enabled = cbProxy.Checked;
         }
 
         private void chkConfProxyAuto_CheckedChanged(object sender, EventArgs e)

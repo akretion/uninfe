@@ -15,7 +15,7 @@ namespace NFe.Interface
 {
     public delegate void UpdateText(string nome);
 
-    public partial class FormConfiguracao: Form
+    public partial class FormConfiguracao : Form
     {
         ///
         /// danasa 9-2010
@@ -42,7 +42,7 @@ namespace NFe.Interface
             Modificado = false;
             tabControl4.SelectedIndex = 0;
 
-            if(!SolicitaSenha())
+            if (!SolicitaSenha())
             {
                 AcessoAutorizado = false;
                 this.Close();
@@ -72,11 +72,11 @@ namespace NFe.Interface
         {
             bool retorna = true;
 
-            if(!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
+            if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
             {
                 FormSenha senha = new FormSenha();
 
-                if(this.MdiParent == null)
+                if (this.MdiParent == null)
                 {
                     senha.StartPosition = FormStartPosition.CenterScreen;
                     senha.FormBorderStyle = FormBorderStyle.FixedToolWindow;
@@ -91,7 +91,7 @@ namespace NFe.Interface
 
                 senha.ShowDialog();
 
-                if(!senha.AcessoAutorizado || senha.AcessoCancelado)
+                if (!senha.AcessoAutorizado || senha.AcessoCancelado)
                     retorna = false;
             }
 
@@ -121,6 +121,7 @@ namespace NFe.Interface
             tbSenhaConfig2.Text = ConfiguracaoApp.SenhaConfig;
             cbChecaConexaoInternet.Checked = ConfiguracaoApp.ChecarConexaoInternet;
             chkGravarLogOperacao.Checked = ConfiguracaoApp.GravarLogOperacoesRealizadas;
+            chkUseProxyAutomaticamente.Checked = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
         }
         #endregion
 
@@ -163,7 +164,7 @@ namespace NFe.Interface
 
         public void UpdateText(string nome)
         {
-            if(!string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrEmpty(nome))
                 this.tabControl4.TabPages[this.tabControl4.SelectedIndex].Text = nome;
         }
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -194,13 +195,13 @@ namespace NFe.Interface
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             int ativa = this.tabControl4.SelectedIndex;
-            if(ativa == 0)
+            if (ativa == 0)
                 return;
 
             ucConfiguracao control = (ucConfiguracao)this.tabControl4.TabPages[this.tabControl4.SelectedIndex].Controls[0];
-            if(control != null)
+            if (control != null)
             {
-                if(MessageBox.Show("Exclui esta empresa?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Exclui esta empresa?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (Empresas.FindConfEmpresa(control.oEmpresa.CNPJ, control.oEmpresa.Servico) != null)
                     {
@@ -210,10 +211,10 @@ namespace NFe.Interface
                     control.Dispose();
 
                     //  this.tabControl4.TabPages.RemoveAt(ativa);
-                    if(this.tabControl4.TabPages[ativa] is TabPage)
+                    if (this.tabControl4.TabPages[ativa] is TabPage)
                         this.tabControl4.TabPages.Remove(this.tabControl4.TabPages[ativa]);
 
-                    if(ativa >= this.tabControl4.TabPages.Count)
+                    if (ativa >= this.tabControl4.TabPages.Count)
                         this.tabControl4.SelectedIndex = this.tabControl4.TabPages.Count - 1;
                     else
                         this.tabControl4.SelectedIndex = ativa;
@@ -224,7 +225,7 @@ namespace NFe.Interface
 
         private void tabControl4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(this.tabControl4.SelectedIndex > 0)
+            if (this.tabControl4.SelectedIndex > 0)
             {
                 ucConfiguracao control = (ucConfiguracao)this.tabControl4.TabPages[this.tabControl4.SelectedIndex].Controls[0];
                 control.focusNome();
@@ -234,11 +235,11 @@ namespace NFe.Interface
 
         private void FormConfiguracao_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                if(!this.Salvos && this.TeveModificacao())
+                if (!this.Salvos && this.TeveModificacao())
                 {
-                    switch(MessageBox.Show("Dados foram alterados, deseja salvá-los?", "Advertência...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                    switch (MessageBox.Show("Dados foram alterados, deseja salvá-los?", "Advertência...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                     {
                         case DialogResult.Cancel:
                             //continua a editar
@@ -256,7 +257,7 @@ namespace NFe.Interface
                     }
                 }
             }
-            if(!e.Cancel)
+            if (!e.Cancel)
             {
                 ///
                 /// danasa 9-2009
@@ -267,9 +268,9 @@ namespace NFe.Interface
                 ///
                 /// danasa 9-2010
                 /// 
-                if(OnMyClose != null)
+                if (OnMyClose != null)
                 {
-                    if(this.Salvos)    //danasa 20-9-2010
+                    if (this.Salvos)    //danasa 20-9-2010
                     {
                         OnMyClose(sender, null);
                     }
@@ -288,8 +289,8 @@ namespace NFe.Interface
         public bool Salvar()
         {
             if (cbProxy.Checked &&
-                (nudPorta.Value == 0 ||
-                string.IsNullOrEmpty(tbServidor.Text) ||
+                (nudPorta.Value == 0 && !chkUseProxyAutomaticamente.Checked||
+                (string.IsNullOrEmpty(tbServidor.Text) && !chkUseProxyAutomaticamente.Checked) ||
                 string.IsNullOrEmpty(tbUsuario.Text) ||
                 string.IsNullOrEmpty(tbSenha.Text)))
             {
@@ -303,33 +304,33 @@ namespace NFe.Interface
             }
 
             //Verificar se as senhas são idênticas
-            if(tbSenhaConfig.Text.Trim() != tbSenhaConfig2.Text.Trim())
+            if (tbSenhaConfig.Text.Trim() != tbSenhaConfig2.Text.Trim())
             {
                 MessageBox.Show("As senhas de acesso a tela de configurações devem ser idênticas.", "Senhas diferentes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             //Atualizar as propriedades das configurações da empresa
-            foreach(TabPage page in this.tabControl4.TabPages)
+            foreach (TabPage page in this.tabControl4.TabPages)
             {
-                if(page.Controls[0] is ucConfiguracao)
+                if (page.Controls[0] is ucConfiguracao)
                 {
                     ucConfiguracao dados = (ucConfiguracao)page.Controls[0];
                     dados.AtualizarPropriedadeEmpresa();
 
-                    if(string.IsNullOrEmpty(dados.oEmpresa.CNPJ))
+                    if (string.IsNullOrEmpty(dados.oEmpresa.CNPJ))
                     {
                         this.tabControl4.SelectedTab = page;
                         MessageBox.Show("CNPJ deve ser informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    if(string.IsNullOrEmpty(dados.oEmpresa.Nome))
+                    if (string.IsNullOrEmpty(dados.oEmpresa.Nome))
                     {
                         this.tabControl4.SelectedTab = page;
                         MessageBox.Show("Nome da empresa deve ser informado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    if(dados.Tag.ToString() == "new" && Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) != null)
+                    if (dados.Tag.ToString() == "new" && Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) != null)
                     {
                         this.tabControl4.SelectedTab = page;
                         MessageBox.Show("Empresa/CNPJ já existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -343,12 +344,12 @@ namespace NFe.Interface
             try
             {
                 //inclui a(s) empresa(s) incluida(s) na lista de empresas
-                foreach(TabPage page in this.tabControl4.TabPages)
+                foreach (TabPage page in this.tabControl4.TabPages)
                 {
-                    if(page.Controls[0] is ucConfiguracao)
+                    if (page.Controls[0] is ucConfiguracao)
                     {
                         ucConfiguracao dados = (ucConfiguracao)page.Controls[0];
-                        if(Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) == null)
+                        if (Empresas.FindConfEmpresa(dados.oEmpresa.CNPJ, dados.oEmpresa.Servico) == null)
                         {
                             page.Controls[0].Tag = dados.oEmpresa.CNPJ;
                             Empresas.Configuracoes.Add(dados.oEmpresa);
@@ -363,8 +364,9 @@ namespace NFe.Interface
                 ConfiguracaoApp.ProxyUsuario = tbUsuario.Text;
                 ConfiguracaoApp.ChecarConexaoInternet = cbChecaConexaoInternet.Checked;
                 ConfiguracaoApp.GravarLogOperacoesRealizadas = chkGravarLogOperacao.Checked;
+                ConfiguracaoApp.DetectarConfiguracaoProxyAuto = chkUseProxyAutomaticamente.Checked;
 
-                if(string.IsNullOrEmpty(tbSenhaConfig.Text))
+                if (string.IsNullOrEmpty(tbSenhaConfig.Text))
                 {
                     ConfiguracaoApp.SenhaConfig = string.Empty;
                 }
@@ -378,7 +380,7 @@ namespace NFe.Interface
 
                 this.Salvos = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Advertência", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -391,7 +393,7 @@ namespace NFe.Interface
             ValidateConfiguracao();
 
             this.Salvar();
-            if(this.Salvos)
+            if (this.Salvos)
                 this.Close();   //danasa 20-9-2010 - força a entrada em "Configuracao_FormClosed"
         }
 
@@ -402,9 +404,9 @@ namespace NFe.Interface
         /// deveriam ter a mesma estrutura do diretório de envio</remarks>
         private void ValidateConfiguracao()
         {
-            foreach(TabPage page in this.tabControl4.TabPages)
+            foreach (TabPage page in this.tabControl4.TabPages)
             {
-                if(page.Controls[0] is ucConfiguracao)
+                if (page.Controls[0] is ucConfiguracao)
                 {
                     ucConfiguracao control = (ucConfiguracao)page.Controls[0];
                     control.Validate();
@@ -421,7 +423,7 @@ namespace NFe.Interface
                 tbUsuario.Enabled =
                 tbSenha.Enabled =
                 nudPorta.Enabled =
-                tbServidor.Enabled = cbProxy.Checked;
+                tbServidor.Enabled = chkUseProxyAutomaticamente.Enabled = cbProxy.Checked;
 
             this.Modificado = true;
         }
@@ -433,17 +435,24 @@ namespace NFe.Interface
 
         private bool TeveModificacao()
         {
-            if(this.Modificado) return true;
+            if (this.Modificado) return true;
 
-            foreach(TabPage page in this.tabControl4.TabPages)
+            foreach (TabPage page in this.tabControl4.TabPages)
             {
-                if(page.Controls[0] is ucConfiguracao)
+                if (page.Controls[0] is ucConfiguracao)
                 {
                     ucConfiguracao control = (ucConfiguracao)page.Controls[0];
-                    if(control.Modificado) return true;
+                    if (control.Modificado) return true;
                 }
             }
             return false;
+        }
+
+        private void chkUseProxyAutomaticamente_CheckedChanged(object sender, EventArgs e)
+        {
+            nudPorta.Enabled = tbServidor.Enabled = !chkUseProxyAutomaticamente.Checked;
+            nudPorta.Value = decimal.Zero;
+            tbServidor.Clear();
         }
     }
 }

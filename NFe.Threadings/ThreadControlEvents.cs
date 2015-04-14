@@ -28,6 +28,9 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnStarted(ThreadItem item)
         {
+#if DEBUG
+            Debug.WriteLine(String.Format("Contagem em processamento: '{0}'.", FileSystemWatcher._pool.GetLifetimeService()));
+#endif
             if (Empresas.Configuracoes.Count != 0)
             {
                 Empresa empresa = Empresas.Configuracoes[item.Empresa];
@@ -45,8 +48,14 @@ namespace NFe.Threadings
         /// <param name="item">Item que deverá ser processado</param>
         private static void Processar(ThreadItem item)
         {
+            FileSystemWatcher._pool.WaitOne();
+
+            // A padding interval to make the output more orderly.
+            int padding = Interlocked.Add(ref FileSystemWatcher._padding, 100);
+
             //Serviços tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
             new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);//, tipoServico);
+            
         }
         #endregion
 
@@ -75,7 +84,8 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnEnded(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento", false);
+            int listCount = FileSystemWatcher._pool.Release();
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento. Itens disponiveis no Semaforo (" + listCount.ToString() +")." , false);            
         }
         #endregion
 

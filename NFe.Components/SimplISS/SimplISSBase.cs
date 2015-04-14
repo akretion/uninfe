@@ -31,7 +31,11 @@ namespace NFe.Components.SimplISS
                         switch (CodigoMun)
                         {
                             case 3538709: //Piracicaba-SP 
-                                simplissService = new NFe.Components.SimplISS.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                simplissService = new NFe.Components.SimplISS.PiracicabaSP.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
+                            case 3541406: //Presidente Prudente-SP
+                                simplissService = new NFe.Components.SimplISS.PresidentePrudenteSP.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:
@@ -41,8 +45,13 @@ namespace NFe.Components.SimplISS
                         switch (CodigoMun)
                         {
                             case 3538709: //Piracicaba-SP 
-                                simplissService = new NFe.Components.SimplISS.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                simplissService = new NFe.Components.SimplISS.PiracicabaSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
+
+                            case 3541406: //Presidente Prudente-SP
+                                simplissService = new NFe.Components.SimplISS.PresidentePrudenteSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();

@@ -283,10 +283,10 @@
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 236);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(509, 15);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(543, 15);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 26;
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/MDFe/CTe autorizados/denegad" +
-    "os?";
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/NFCe/MDFe/CTe autorizados/de" +
+    "negados?";
             this.checkBoxGravarEventosNaPastaEnviadosNFe.UseSelectable = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
@@ -295,10 +295,10 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 257);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(603, 15);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(637, 15);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 27;
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/MDFe/CTe aut" +
-    "orizados/denegados?";
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/NFCe/MDFe/CT" +
+    "e autorizados/denegados?";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.UseSelectable = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
@@ -387,9 +387,9 @@
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
             this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(3, 278);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(289, 15);
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(385, 15);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 28;
-            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe de terceiros?";
+            this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe/NFCe/MDFe/CTe de terceiros?";
             this.checkBoxGravarEventosDeTerceiros.UseSelectable = true;
             this.checkBoxGravarEventosDeTerceiros.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 

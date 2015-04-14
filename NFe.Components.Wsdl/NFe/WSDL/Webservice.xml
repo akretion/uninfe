@@ -406,7 +406,7 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
     </LocalProducao>
   </Estado>
-  <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência" UF="EPEC" SVC="teNone">
+  <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência - NFe" UF="EPEC" SVC="teNone">
     <LocalHomologacao>
       <NFeRecepcao></NFeRecepcao>
       <NFeRetRecepcao></NFeRetRecepcao>
@@ -443,6 +443,64 @@
       <NFeStatusServico></NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\AN\PANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="906" Nome="EPEC - Evento Prévio de Emissão em Contingência - NFCe" UF="EPEC" SVC="teNone">
+    <LocalHomologacao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\SP\HSPRecepcaoEPEC.wsdl</NFeRecepcaoEvento>
+      <NFeConsultaNFeDest></NFeConsultaNFeDest>
+      <NFeDownload></NFeDownload>
+      <NFeManifDest></NFeManifDest>
+      <NFeAutorizacao></NFeAutorizacao>
+      <NFeRetAutorizacao></NFeRetAutorizacao>
+      <MDFeRecepcao></MDFeRecepcao>
+      <MDFeRetRecepcao></MDFeRetRecepcao>
+      <MDFeConsulta></MDFeConsulta>
+      <MDFeStatusServico></MDFeStatusServico>
+      <MDFeRecepcaoEvento></MDFeRecepcaoEvento>
+      <MDFeNaoEncerrado></MDFeNaoEncerrado>
+      <DFeRecepcao></DFeRecepcao>
+      <CTeRecepcaoEvento></CTeRecepcaoEvento>
+      <CTeRecepcao></CTeRecepcao>
+      <CTeRetRecepcao></CTeRetRecepcao>
+      <CTeInutilizacao></CTeInutilizacao>
+      <CTeConsulta></CTeConsulta>
+      <CTeStatusServico></CTeStatusServico>
+      <CTeConsultaCadastro></CTeConsultaCadastro>
+    </LocalHomologacao>
+    <LocalProducao>
+      <NFeRecepcao></NFeRecepcao>
+      <NFeRetRecepcao></NFeRetRecepcao>
+      <NFeInutilizacao></NFeInutilizacao>
+      <NFeConsulta></NFeConsulta>
+      <NFeStatusServico></NFeStatusServico>
+      <NFeConsultaCadastro></NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\SP\PSPRecepcaoEPEC.wsdl</NFeRecepcaoEvento>
       <NFeConsultaNFeDest></NFeConsultaNFeDest>
       <NFeDownload></NFeDownload>
       <NFeManifDest></NFeManifDest>

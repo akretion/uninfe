@@ -797,7 +797,10 @@ namespace NFe.Settings
                             CodigoUF = 901;
                             break;
                         case Servicos.EventoEPEC:
-                            CodigoUF = 905;
+                            if (CodigoUF == 35 && ehNFCe) //Se for NFCe em São Paulo, tem um ambiente para EPEC exclusivo.
+                                CodigoUF = 906;
+                            else
+                                CodigoUF = 905;
                             break;
                     }
                     break;

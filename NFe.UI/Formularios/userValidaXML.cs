@@ -36,7 +36,7 @@ namespace NFe.UI
             this.cbEmpresas.SelectedIndexChanged += cbEmpresas_SelectedIndexChanged;
 
             int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
-            if (posicao > (this.cbEmpresas.DataSource as System.Collections.ArrayList).Count)
+            if (posicao >= (this.cbEmpresas.DataSource as System.Collections.ArrayList).Count)
                 posicao = 0;
 
             this.cbEmpresas.SelectedIndex = posicao;

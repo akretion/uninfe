@@ -66,9 +66,10 @@
             this.lbl_textBox_PastaDownload.Location = new System.Drawing.Point(3, 325);
             this.lbl_textBox_PastaDownload.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaDownload.Name = "lbl_textBox_PastaDownload";
-            this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(375, 15);
+            this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(610, 15);
             this.lbl_textBox_PastaDownload.TabIndex = 60;
-            this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz";
+            this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz e retornos " +
+    "da consulta de eventos de terceiros";
             // 
             // lbl_textBox_PastaValidar
             // 
