@@ -56,8 +56,9 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
         public override void EmiteNF(string file)
         {
             loteRpsResposta result = service.EnviarLoteRpsEnvio(UsuarioWs, SenhaWs, XMLtoString(file));
+            
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
         }
 
         public override void CancelarNfse(string file)

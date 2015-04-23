@@ -628,6 +628,7 @@ namespace NFe.Service
 
                     case "cteProc":
                         tipo = "cte";
+                        arqProcNFe = nomeArqXMLNFe;
                         ///
                         /// le o protocolo de autorizacao
                         /// 
@@ -656,6 +657,7 @@ namespace NFe.Service
 
                     case "mdfeProc":
                         tipo = "mdfe";
+                        arqProcNFe = nomeArqXMLNFe;
                         break;
 
                     case "nfeProc":
@@ -718,7 +720,7 @@ namespace NFe.Service
                                                 break;
                                             default:
                                                 tipo = "nfe";
-                                                cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0];
+                                                cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chNFe.ToString())[0];
                                                 break;
                                         }
                                         break;
@@ -1076,13 +1078,13 @@ namespace NFe.Service
                                 break;
 
                             case "mdfe":
-                                Args += " A=\"" + nomeArqXMLNFe + "\"";
+                                Args += " A=\"" + arqProcNFe + "\"";
                                 Args += " T=damdfe";
                                 configDanfe = emp.ConfiguracaoDanfe;
                                 break;
 
                             case "cte":
-                                Args += " A=\"" + nomeArqXMLNFe + "\"";
+                                Args += " A=\"" + arqProcNFe + "\"";
                                 Args += " T=dacte";
                                 configDanfe = emp.ConfiguracaoDanfe;
                                 break;

@@ -767,9 +767,10 @@ namespace NFe.Interface
             if (!ckbCertificadoInstalado.Checked)
             {
                 textBox_dadoscertificado.Text = "";
-                oMeuCert = null;
-                oEmpresa.Certificado = "";
-                oEmpresa.X509Certificado = oMeuCert;
+                //Este codigo foi retirado por ser desnecessário e gerava falha no uninfe se o usuário fechasse a tela sem gravar as configurações. Wandrey 16/04/2015
+                //oMeuCert = null;
+                //oEmpresa.Certificado = "";
+                //oEmpresa.X509Certificado = oMeuCert;
 
                 lblCertificadoArquivo.Location = new Point(3, 30);
                 lblCertificadoArquivo.Refresh();

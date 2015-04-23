@@ -505,7 +505,7 @@ namespace NFe.Settings
                     else if (!string.IsNullOrEmpty(this.CertificadoArquivo) && !File.Exists(this.CertificadoArquivo))
                         throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", this.CertificadoArquivo));
 
-                    using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open))
+                    using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open, FileAccess.Read))
                     {
                         byte[] buffer = new byte[fs.Length];
                         fs.Read(buffer, 0, buffer.Length);

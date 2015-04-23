@@ -18,6 +18,7 @@ namespace NFe.Threadings
         #region Propriedades
         public delegate void FileChangedHandler(FileInfo fi);
         public event FileChangedHandler OnFileChanged;
+        private List<string> Directorys = new List<string>();
         public string Directory { get; set; }
         public string Filter { get; set; }
 
@@ -54,9 +55,22 @@ namespace NFe.Threadings
         #region Construtores
         public FileSystemWatcher(string directory, string filter)
         {
-            Directory = directory;
+            Directorys.Clear();
+            Directorys.Add(directory);
             Filter = filter;
         }
+
+        public FileSystemWatcher(List<string> directorys, string filter)
+        {
+            Directorys.Clear();
+            foreach (var item in directorys)
+            {
+                Directorys.Add(item);
+            }
+
+            Filter = filter;
+        }
+        #endregion
 
         public void StartWatch()
         {
@@ -65,7 +79,6 @@ namespace NFe.Threadings
             t.IsBackground = true;
             t.Start();
         }
-        #endregion
 
         #region Metodos
         void ProcessFiles()
@@ -75,8 +88,8 @@ namespace NFe.Threadings
             string arqTemp = "";
 
             CancelProcess = false;
-            if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
-                CancelProcess = true;
+/*            if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
+                CancelProcess = true;*/
 
             // Create a semaphore that can satisfy up to three
             // concurrent requests. Use an initial count of zero,
@@ -89,99 +102,104 @@ namespace NFe.Threadings
             {
                 try
                 {
-                    if (!String.IsNullOrEmpty(Directory) && System.IO.Directory.Exists(Directory))
+                    foreach (var item in Directorys)
                     {
-                        DirectoryInfo dirInfo = new DirectoryInfo(Directory);
-                        FileInfo[] files = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly)
-                                                            .Where(s => Filter.Contains(s.Extension.ToLower()))
-                                                            .OrderBy(o => o.CreationTime)
-                                                            .ToArray(); //Retorna o conteúdo já ordenado por data de modificação, do menor para o maior. Wandrey 26/03/2015
+                        Directory = item;
 
-                        if (files != null)
+                        if (!String.IsNullOrEmpty(Directory) && System.IO.Directory.Exists(Directory))
                         {
-                            Hashtable NewFiles = new Hashtable();
+                            DirectoryInfo dirInfo = new DirectoryInfo(Directory);                            
+                            FileInfo[] files = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly)
+                                                                .Where(s => Filter.Contains(s.Extension.ToLower()))
+                                                                .OrderBy(o => o.CreationTime)
+                                                                .ToArray(); //Retorna o conteúdo já ordenado por data de modificação, do menor para o maior. Wandrey 26/03/2015
 
-                            //cria todos os fileinfos
-                            foreach (FileInfo fi in files)
+                            if (files != null)
                             {
-                                if (File.Exists(fi.FullName))
-                                    if (!Functions.FileInUse(fi.FullName))
-                                    {
-                                        //Definir o nome do arquivo na pasta temp
-                                        arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
+                                Hashtable NewFiles = new Hashtable();
 
-                                        //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
-                                        NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
-
-                                        //Mover o arquivo para pasta temp e disparar o serviço a ser executado
-                                        Functions.Move(fi.FullName, arqTemp);
-
-                                        FileInfo fi2 = new FileInfo(arqTemp);
-                                        NewFiles.Add(fi2.Name, fi2);
-                                    }
-                            }
-
-                            foreach (FileInfo fi in NewFiles.Values)
-                            {
-                                if (CancelProcess)
+                                //cria todos os fileinfos
+                                foreach (FileInfo fi in files)
                                 {
-                                    break;
+                                    if (File.Exists(fi.FullName))
+                                        if (!Functions.FileInUse(fi.FullName))
+                                        {
+                                            //Definir o nome do arquivo na pasta temp
+                                            arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
+
+                                            //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
+                                            NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
+
+                                            //Mover o arquivo para pasta temp e disparar o serviço a ser executado
+                                            Functions.Move(fi.FullName, arqTemp);
+
+                                            FileInfo fi2 = new FileInfo(arqTemp);
+                                            NewFiles.Add(fi2.Name, fi2);
+                                        }
                                 }
 
-                                if (OldFiles.Contains(fi.Name))
+                                foreach (FileInfo fi in NewFiles.Values)
                                 {
-                                    FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
+                                    if (CancelProcess)
+                                    {
+                                        break;
+                                    }
+
+                                    if (OldFiles.Contains(fi.Name))
+                                    {
+                                        FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
 
 #if DEBUG
                                     Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
 #endif
 
-                                    if (oldFi.CreationTime != fi.CreationTime || oldFi.Length != fi.Length)
-                                    {
-                                        RaiseFileChanged(fi);
-                                    }
-                                    else
-                                    {
-                                        #region Bug Fix #14522
-                                        if (!fi.FullName.ToLower().Contains("\\contingencia"))
+                                        if (oldFi.CreationTime != fi.CreationTime || oldFi.Length != fi.Length)
                                         {
-                                            //-------------------------------------------------------------------------
-                                            // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
-                                            //-------------------------------------------------------------------------
-                                            int index = Empresas.FindEmpresaByThread();
-                                            string errorPath = String.Format("{0}\\{1}",
-                                                Settings.Empresas.Configuracoes[index].PastaXmlErro,
-                                                oldFi.Name);
+                                            RaiseFileChanged(fi);
+                                        }
+                                        else
+                                        {
+                                            #region Bug Fix #14522
+                                            if (!fi.FullName.ToLower().Contains("\\contingencia"))
+                                            {
+                                                //-------------------------------------------------------------------------
+                                                // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
+                                                //-------------------------------------------------------------------------
+                                                int index = Empresas.FindEmpresaByThread();
+                                                string errorPath = String.Format("{0}\\{1}",
+                                                    Settings.Empresas.Configuracoes[index].PastaXmlErro,
+                                                    oldFi.Name);
 
 #if DEBUG
                                             Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
 #endif
 
-                                            Functions.Move(oldFi.FullName, errorPath);
+                                                Functions.Move(oldFi.FullName, errorPath);
+                                            }
+                                            #endregion
                                         }
-                                        #endregion
-                                    }
 
 #if DEBUG
                                     Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
 #endif
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
 #if DEBUG
                                     Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
 #endif
 
-                                    RaiseFileChanged(fi);
-                                    OldFiles.Add(fi.Name, fi);
+                                        RaiseFileChanged(fi);
+                                        OldFiles.Add(fi.Name, fi);
 #if DEBUG
                                     Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
 #endif
+                                    }
                                 }
+
+                                OldFiles = NewFiles.Clone() as Hashtable;
+
                             }
-                            
-                            OldFiles = NewFiles.Clone() as Hashtable;
-                            
                         }
                     }
                 }

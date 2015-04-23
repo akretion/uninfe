@@ -1336,7 +1336,7 @@ namespace NFe.Settings
                                 {
                                     try
                                     {
-                                        using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open))
+                                        using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open, FileAccess.Read))
                                         {
                                             byte[] buffer = new byte[fs.Length];
                                             fs.Read(buffer, 0, buffer.Length);

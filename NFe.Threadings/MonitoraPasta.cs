@@ -41,8 +41,9 @@ namespace NFe.Threadings
         {
             fsw.Clear();
 
-            for(int i = 0; i < Empresas.Configuracoes.Count; i++)
+            for (int i = 0; i < Empresas.Configuracoes.Count; i++)
             {
+                /*
                 #region Pasta de envio
                 fsw.Add(new FileSystemWatcher(Empresas.Configuracoes[i].PastaXmlEnvio, "*.xml,*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
@@ -74,6 +75,31 @@ namespace NFe.Threadings
                     fsw[fsw.Count - 1].StartWatch();
                 }
                 #endregion
+                */
+
+                List<string> pastas = new List<string>();
+
+                pastas.Add(Empresas.Configuracoes[i].PastaXmlEnvio);
+
+                if (!string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaXmlEmLote) &&
+                    Empresas.Configuracoes[i].Servico != Components.TipoAplicativo.Nfse)
+                {
+                    pastas.Add(Empresas.Configuracoes[i].PastaXmlEmLote);
+                }
+
+                pastas.Add(Empresas.Configuracoes[i].PastaValidar);
+
+                #region Pasta impressão dfe em contingência
+                if (Directory.Exists(Empresas.Configuracoes[i].PastaContingencia) &&
+                    Empresas.Configuracoes[i].tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
+                {
+                    pastas.Add(Empresas.Configuracoes[i].PastaContingencia);
+                }
+                #endregion
+
+                fsw.Add(new FileSystemWatcher(pastas, "*.xml,*.txt"));
+                fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
+                fsw[fsw.Count - 1].StartWatch();
             }
 
             #region Pasta Geral
@@ -105,13 +131,13 @@ namespace NFe.Threadings
                 string fullName = ConfiguracaoApp.RemoveEndSlash(fi.Directory.FullName.ToLower());
                 ///
                 /// "EndsWith" é para pegar apenas se terminar com, já que nas empresas pode ter um nome 'temp' no meio das definicoes das pastas
-                if(fullName.EndsWith("\\temp"))
+                if (fullName.EndsWith("\\temp"))
                     /// exclui o 'arquivo' temp.
                     fullName = Path.GetDirectoryName(fullName);
 
-                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
+                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
-                    if(fullName == Empresas.Configuracoes[i].PastaXmlEnvio.ToLower() ||
+                    if (fullName == Empresas.Configuracoes[i].PastaXmlEnvio.ToLower() ||
                         fullName == Empresas.Configuracoes[i].PastaXmlEmLote.ToLower() ||
                         fullName == Empresas.Configuracoes[i].PastaValidar.ToLower() ||
                         fullName == Empresas.Configuracoes[i].PastaContingencia.ToLower())
@@ -141,10 +167,10 @@ namespace NFe.Threadings
                 int empresa;
                 string arq = fi.FullName.ToLower();
 
-                if(fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
+                if (fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
                 {
                     //encerra o UniNFe no arquivo -sair.xmls
-                    if(arq.EndsWith("-sair.xml"))
+                    if (arq.EndsWith("-sair.xml"))
                     {
                         File.Delete(fi.FullName);
                         Environment.Exit(0);
@@ -158,7 +184,7 @@ namespace NFe.Threadings
                 }
 
 
-                if(empresa >= 0)
+                if (empresa >= 0)
                 {
                     /*<#8084>
                      * Aqui foi modificado porque a ThreadControl deixou de existir.
@@ -174,7 +200,7 @@ namespace NFe.Threadings
                     Auxiliar.WriteLog(fi.FullName + " - Não localizou a empresa.", true);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
             }

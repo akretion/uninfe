@@ -269,17 +269,18 @@ namespace NFe.Certificado
             X509Certificate2 x509Cert = new X509Certificate2(Empresas.Configuracoes[emp].X509Certificado);
             if (Empresas.Configuracoes[emp].UsaCertificado && clsX509Certificate2Extension.IsA3(x509Cert))
             {
-                string tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
-                
+                string tempFile = "";
 
                 switch (servico)
                 {
                     case Servicos.ConsultaCadastroContribuinte:
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.ConsCad_XML) + "__" + Propriedade.ExtEnvio.ConsCad_XML;
                         File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "ConsCad", "infCons", x509Cert, emp);
                         break;
 
                     case Servicos.NFeConsultaStatusServico:
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
                         File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
                         break;
@@ -287,17 +288,16 @@ namespace NFe.Certificado
                     default:
                         break;
                 }
-                if (File.Exists(tempFile))
-
-                File.Delete(tempFile);
+                if (tempFile != "" && File.Exists(tempFile))
+                    File.Delete(tempFile);
             }
         }
 
-        public bool TestarProviderCertificado(string tempFile, 
-            string tagAssinatura, 
-            string tagAtributo, 
-            X509Certificate2 certificado, 
-            int codEmp, 
+        public bool TestarProviderCertificado(string tempFile,
+            string tagAssinatura,
+            string tagAtributo,
+            X509Certificate2 certificado,
+            int codEmp,
             string pin,
             string provider,
             string type)
@@ -312,7 +312,7 @@ namespace NFe.Certificado
 
             AssinaturaValida = true;
             Assinar(tempFile, tagAssinatura, tagAtributo, certificado, codEmp);
-            
+
             Empresas.Configuracoes[codEmp].CertificadoPIN = _pin;
             Empresas.Configuracoes[codEmp].ProviderTypeCertificado = _type;
             Empresas.Configuracoes[codEmp].ProviderCertificado = _provider;
@@ -332,11 +332,11 @@ namespace NFe.Certificado
             try
             {
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arqXML);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arqXML);
 
-            if (doc.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
-                retorno = true;
+                if (doc.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
+                    retorno = true;
             }
             catch { }
 
