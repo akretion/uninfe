@@ -26,22 +26,36 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeRecepcaoEventoSoap12In">
+  <wsdl:message name="nfeRecepcaoEventoSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeRecepcaoEventoSoap12Out">
+  <wsdl:message name="nfeRecepcaoEventoSoapOut">
     <wsdl:part name="nfeRecepcaoEventoResult" element="tns:nfeRecepcaoEventoResult" />
   </wsdl:message>
   <wsdl:message name="nfeRecepcaoEventonfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:portType name="RecepcaoEventoSoap12">
+  <wsdl:portType name="RecepcaoEventoSoap">
     <wsdl:operation name="nfeRecepcaoEvento">
-      <wsdl:input message="tns:nfeRecepcaoEventoSoap12In" />
-      <wsdl:output message="tns:nfeRecepcaoEventoSoap12Out" />
+      <wsdl:input message="tns:nfeRecepcaoEventoSoapIn" />
+      <wsdl:output message="tns:nfeRecepcaoEventoSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="RecepcaoEventoSoap12" type="tns:RecepcaoEventoSoap12">
+  <wsdl:binding name="RecepcaoEventoSoap" type="tns:RecepcaoEventoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeRecepcaoEvento">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento/nfeRecepcaoEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeRecepcaoEventonfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeRecepcaoEventonfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RecepcaoEventoSoap12" type="tns:RecepcaoEventoSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeRecepcaoEvento">
       <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento/nfeRecepcaoEvento" style="document" />
@@ -56,8 +70,11 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="RecepcaoEvento">
+    <wsdl:port name="RecepcaoEventoSoap" binding="tns:RecepcaoEventoSoap">
+      <soap:address location="https://nfe-homologacao.sefazrs.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" />
+    </wsdl:port>
     <wsdl:port name="RecepcaoEventoSoap12" binding="tns:RecepcaoEventoSoap12">
-      <soap12:address location="https://homologacao.nfe.sefaz.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" />
+      <soap12:address location="https://nfe-homologacao.sefazrs.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

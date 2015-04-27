@@ -26,22 +26,36 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeRetAutorizacaoLoteSoap12In">
+  <wsdl:message name="nfeRetAutorizacaoLoteSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeRetAutorizacaoLoteSoap12Out">
+  <wsdl:message name="nfeRetAutorizacaoLoteSoapOut">
     <wsdl:part name="nfeRetAutorizacaoLoteResult" element="tns:nfeRetAutorizacaoLoteResult" />
   </wsdl:message>
   <wsdl:message name="nfeRetAutorizacaoLotenfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:portType name="NfeRetAutorizacaoSoap12">
+  <wsdl:portType name="NfeRetAutorizacaoSoap">
     <wsdl:operation name="nfeRetAutorizacaoLote">
-      <wsdl:input message="tns:nfeRetAutorizacaoLoteSoap12In" />
-      <wsdl:output message="tns:nfeRetAutorizacaoLoteSoap12Out" />
+      <wsdl:input message="tns:nfeRetAutorizacaoLoteSoapIn" />
+      <wsdl:output message="tns:nfeRetAutorizacaoLoteSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NfeRetAutorizacaoSoap12" type="tns:NfeRetAutorizacaoSoap12">
+  <wsdl:binding name="NfeRetAutorizacaoSoap" type="tns:NfeRetAutorizacaoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeRetAutorizacaoLote">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao/nfeRetAutorizacaoLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeRetAutorizacaoLotenfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeRetAutorizacaoLotenfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NfeRetAutorizacaoSoap12" type="tns:NfeRetAutorizacaoSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeRetAutorizacaoLote">
       <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeRetAutorizacao/nfeRetAutorizacaoLote" style="document" />
@@ -56,8 +70,11 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="NfeRetAutorizacao">
+    <wsdl:port name="NfeRetAutorizacaoSoap" binding="tns:NfeRetAutorizacaoSoap">
+      <soap:address location="https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx" />
+    </wsdl:port>
     <wsdl:port name="NfeRetAutorizacaoSoap12" binding="tns:NfeRetAutorizacaoSoap12">
-      <soap12:address location="https://homologacao.nfe.sefaz.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx" />
+      <soap12:address location="https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

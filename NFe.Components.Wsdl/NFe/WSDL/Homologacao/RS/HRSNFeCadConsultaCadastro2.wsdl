@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CadConsultaCadastro2">
     <wsdl:port name="CadConsultaCadastro2Soap12" binding="tns:CadConsultaCadastro2Soap12">
-      <soap12:address location="https://sef.sefaz.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro2.asmx" />
+      <soap12:address location="https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro2.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

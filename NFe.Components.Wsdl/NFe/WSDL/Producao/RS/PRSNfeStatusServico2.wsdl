@@ -26,22 +26,36 @@
       </s:complexType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeStatusServicoNF2Soap12In">
+  <wsdl:message name="nfeStatusServicoNF2SoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeStatusServicoNF2Soap12Out">
+  <wsdl:message name="nfeStatusServicoNF2SoapOut">
     <wsdl:part name="nfeStatusServicoNF2Result" element="tns:nfeStatusServicoNF2Result" />
   </wsdl:message>
   <wsdl:message name="nfeStatusServicoNF2nfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:portType name="NfeStatusServico2Soap12">
+  <wsdl:portType name="NfeStatusServico2Soap">
     <wsdl:operation name="nfeStatusServicoNF2">
-      <wsdl:input message="tns:nfeStatusServicoNF2Soap12In" />
-      <wsdl:output message="tns:nfeStatusServicoNF2Soap12Out" />
+      <wsdl:input message="tns:nfeStatusServicoNF2SoapIn" />
+      <wsdl:output message="tns:nfeStatusServicoNF2SoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NfeStatusServico2Soap12" type="tns:NfeStatusServico2Soap12">
+  <wsdl:binding name="NfeStatusServico2Soap" type="tns:NfeStatusServico2Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeStatusServicoNF2">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2/nfeStatusServicoNF2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeStatusServicoNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeStatusServicoNF2nfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NfeStatusServico2Soap12" type="tns:NfeStatusServico2Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeStatusServicoNF2">
       <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeStatusServico2/nfeStatusServicoNF2" style="document" />
@@ -56,8 +70,11 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="NfeStatusServico2">
+    <wsdl:port name="NfeStatusServico2Soap" binding="tns:NfeStatusServico2Soap">
+      <soap:address location="https://nfe.sefazrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx" />
+    </wsdl:port>
     <wsdl:port name="NfeStatusServico2Soap12" binding="tns:NfeStatusServico2Soap12">
-      <soap12:address location="https://nfe.sefaz.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx" />
+      <soap12:address location="https://nfe.sefazrs.rs.gov.br/ws/NfeStatusServico/NfeStatusServico2.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

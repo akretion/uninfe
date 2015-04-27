@@ -189,15 +189,6 @@ namespace NFe.Service
 
             oGerarXML.XmlDistEvento(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
 
-            ///
-            /// CNPJ da chave não é de uma empresa Uninfe
-            /// 
-            if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
-                ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
-            {
-                return;
-            }
-
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
 
@@ -220,12 +211,34 @@ namespace NFe.Service
 
                 if (string.IsNullOrEmpty(strNomeArqNfe))
                 {
-                    if (string.IsNullOrEmpty(strChaveNFe))
-                        throw new Exception("LerRetornoSitNFe(): Não pode obter o nome do arquivo");
+                    //if (string.IsNullOrEmpty(strChaveNFe))
+                    //    throw new Exception("LerRetornoSitNFe(): Não pode obter o nome do arquivo");
 
                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                 }
                 string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+
+                #region CNPJ da chave não é de uma empresa Uninfe
+                bool notDaEmpresa = (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                                    ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString());
+
+                /*
+                if (File.Exists(strArquivoNFe))
+                {
+                    if (notDaEmpresa)
+                        throw new Exception("NFe gravada na pasta 'EmProcessamento' não tem seu CNPJ igual ao da empresa sendo processada");
+                }
+                else
+                {
+                    if (notDaEmpresa)
+                        return;
+                }*/
+                if (!File.Exists(strArquivoNFe))
+                {
+                    if (notDaEmpresa)
+                        return;
+                }
+                #endregion
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;

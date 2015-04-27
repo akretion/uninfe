@@ -152,13 +152,11 @@ ExportarPasta|Enviar | Enviados | Erros
 
             int emp = Empresas.FindEmpresaByThread();
             string aFilename = "";
-            string aAnexos = "";
-            string aPrinter = "";
-            string aEmail = "";
-            int aCopias = -1;
 
             try
             {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+
                 if (this.vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
 #if modelo_xml
@@ -169,6 +167,13 @@ ExportarPasta|Enviar | Enviados | Erros
     <Copias>2</Copias>
     <Impressora></Impressora>
     <Email></Email>
+    <pp></pp>
+    <PastaPDF></PastaPDF>
+    <np></np>
+    <NomePDF></NomePDF>
+    <plq></plq>
+    <Auxiliar></Auxiliar>
+    <Opcoes></Opcoes>
 </dados>
 #endif
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
@@ -180,11 +185,17 @@ ExportarPasta|Enviar | Enviados | Erros
                         XmlElement elementConfig = (XmlElement)node;
 
                         aFilename = Functions.LerTag(elementConfig, "FileName", "");
-                        aAnexos = Functions.LerTag(elementConfig, "Anexos", "");
-                        aPrinter = Functions.LerTag(elementConfig, "Impressora", "");
-                        aEmail = Functions.LerTag(elementConfig, "Email", "");
-                        aCopias = Convert.ToInt32("0" + Functions.LerTag(elementConfig, "Copias", "-1"));
+                        args.Add("anexos", Functions.LerTag(elementConfig, "Anexos", ""));
+                        args.Add("impressora", Functions.LerTag(elementConfig, "Impressora", ""));
+                        args.Add("email", Functions.LerTag(elementConfig, "Email", ""));
+                        args.Add("pp", Functions.LerTag(elementConfig, "pp", Functions.LerTag(elementConfig, "PastaPDF", "")));
+                        args.Add("np", Functions.LerTag(elementConfig, "np", Functions.LerTag(elementConfig, "NomePDF", "")));
+                        args.Add("plq", Functions.LerTag(elementConfig, "plq", ""));
+                        args.Add("auxiliar", Functions.LerTag(elementConfig, "Auxiliar", ""));
+                        args.Add("copias", Functions.LerTag(elementConfig, "Copias", "-1"));
+                        args.Add("opcoes", Functions.LerTag(elementConfig, "Opcoes", ""));
                     }
+                    args.Add("xml", "1");
                 }
                 else
                 {
@@ -194,6 +205,13 @@ Anexos|c:\temp\anexo1.txt;c:\temp\anexo2.txt;c:\temp\anexo3.txt
 Copias|1
 Impressora|
 Email|
+pp|
+pastapdf|
+np|
+nomepdf|
+plq|
+auxiliar|
+opcoes|
 #endif
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
 
@@ -209,18 +227,24 @@ Email|
                                 aFilename = dados[1].Trim();
                                 break;
                             case "anexos":
-                                aAnexos = dados[1].Trim();
-                                break;
                             case "impressora":
-                                aPrinter = dados[1].Trim();
-                                break;
+                            case "plq":
                             case "copias":
-                                aCopias = Convert.ToInt32("0" + dados[1].Trim());
-                                break;
                             case "email":
-                                aEmail = dados[1].Trim();
+                            case "pp":
+                            case "pastapdf":
+                            case "np":
+                            case "nomepdf":
+                            case "auxiliar":
+                            case "opcoes":
+                                if (dados[0].ToLower().Equals("pastapdf"))
+                                    args.Add("pp", dados[1].Trim());
+                                else if (dados[0].ToLower().Equals("nomepdf"))
+                                    args.Add("np", dados[1].Trim());
+                                else args.Add(dados[0].ToLower(), dados[1].Trim());
                                 break;
                         }
+                        args.Add("xml", "0");
                     }
                 }
                 if (Path.GetDirectoryName(aFilename).ToLower().StartsWith((Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
@@ -230,7 +254,7 @@ Email|
                     {
                         throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + Empresas.Configuracoes[emp].Nome);
                     }
-                    TFunctions.ExecutaUniDanfe(aFilename, DateTime.Today, Empresas.Configuracoes[emp], aAnexos, aPrinter, aCopias, aEmail);
+                    TFunctions.ExecutaUniDanfe(aFilename, DateTime.Today, Empresas.Configuracoes[emp], args);
                 }
                 else
                     throw new Exception("Arquivo '" + aFilename + "' deve estar na pasta de 'Autorizados/Denegados' da empresa: " + Empresas.Configuracoes[emp].Nome);

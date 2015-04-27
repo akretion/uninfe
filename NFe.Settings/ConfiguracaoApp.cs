@@ -274,13 +274,14 @@ namespace NFe.Settings
             public void UpdateWSDL(List<ArquivoItem> ListArquivosVerificar)
             {
                 if (File.Exists(XMLVersoesWSDL))
-                {
-                    LerXmlWSDLs(ListArquivosVerificar);
-                }
-                else
-                {
-                    //Não faz nada só vai atualizar e no final gravar o XML
-                }
+                    try
+                    {
+                        LerXmlWSDLs(ListArquivosVerificar);
+                    }
+                    catch
+                    {
+                        //Não faz nada só vai atualizar e no final gravar o XML
+                    }
             }
             #endregion
 
@@ -406,12 +407,12 @@ namespace NFe.Settings
 
                 foreach (XmlNode item in xnListXml)
                 {
-                    string _arquivo = item["arquivo"].InnerText;
-                    string _data = item["data"].InnerText;
-                    string _manual = item["manual"].InnerText;
-
                     try
                     {
+                        string _arquivo = item["arquivo"].InnerText;
+                        string _data = item["data"].InnerText;
+                        string _manual = item["manual"].InnerText;
+
                         ListArqInstalados.Add(new ArquivoItem
                         {
                             Arquivo = _arquivo,

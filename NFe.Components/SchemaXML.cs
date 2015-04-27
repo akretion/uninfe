@@ -136,7 +136,7 @@ namespace NFe.Components
                 TagAtributoId = "infNFe",
                 TargetNameSpace = string.Empty
             });
-            #endregion            
+            #endregion
 
             #region XML Distribuição Inutilização
             InfSchemas.Add("NFE-procInutNFe", new InfSchema()
@@ -245,7 +245,7 @@ namespace NFe.Components
                 TagAtributoId = "infNFe",
                 TargetNameSpace = string.Empty
             });*/
-            #endregion            
+            #endregion
 
             #region XML Distribuição Inutilização
             /*InfSchemas.Add("NFE-3.10-procInutNFe", new InfSchema()
@@ -790,7 +790,7 @@ namespace NFe.Components
             #endregion
 
             #region XML de Envio do evento de contingencia EPEC
-            SchemaXML.InfSchemas.Add("NFE-eventoCTe110113", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFE-eventoCTe110140"/*"NFE-eventoCTe110113"*/, new InfSchema()
             {
                 Tag = "eventoCTe",
                 ID = ++id,
