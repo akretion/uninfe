@@ -419,6 +419,7 @@
             this.txtUsuarioWS.Text = "Styled Textbox";
             this.txtUsuarioWS.UseSelectable = true;
             this.txtUsuarioWS.UseStyleColors = true;
+            this.txtUsuarioWS.TextChanged += new System.EventHandler(this.txtUsuarioWS_TextChanged);
             // 
             // lbl_SenhaWS
             // 
@@ -438,7 +439,7 @@
             this.txtSenhaWS.Location = new System.Drawing.Point(503, 161);
             this.txtSenhaWS.MaxLength = 32767;
             this.txtSenhaWS.Name = "txtSenhaWS";
-            this.txtSenhaWS.PasswordChar = '\0';
+            this.txtSenhaWS.PasswordChar = '*';
             this.txtSenhaWS.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSenhaWS.SelectedText = "";
             this.txtSenhaWS.Size = new System.Drawing.Size(134, 22);
@@ -446,6 +447,7 @@
             this.txtSenhaWS.Text = "Styled Textbox";
             this.txtSenhaWS.UseSelectable = true;
             this.txtSenhaWS.UseStyleColors = true;
+            this.txtSenhaWS.TextChanged += new System.EventHandler(this.txtSenhaWS_TextChanged);
             // 
             // lbl_Padrao
             // 

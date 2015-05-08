@@ -26,11 +26,19 @@ namespace NFe.Settings
             {
                 try
                 {
+                    ///
+                    /// grava o erro na pasta de retorno geral do UniNFe caso a pasta de retorno da empresa nao exista
+                    /// 
+                    string fFolder = Propriedade.PastaGeralRetorno;
+
                     int emp = Empresas.FindEmpresaByThread();
                     if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlRetorno))
+                        fFolder = Empresas.Configuracoes[emp].PastaXmlRetorno;
+
+                    if (Directory.Exists(fFolder))
                     {
                         //Grava arquivo de ERRO para o ERP
-                        string cArqErro = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Arquivo);
+                        string cArqErro = Path.Combine(fFolder, Path.GetFileName(Arquivo));
                         File.WriteAllText(cArqErro, Erro, Encoding.Default);
                     }
                 }

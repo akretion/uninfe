@@ -418,6 +418,6 @@
         private MetroFramework.Controls.MetroTextBox textBox_PastaXmlEnviado;
         private MetroFramework.Controls.MetroTextBox textBox_PastaXmlRetorno;
         private MetroFramework.Controls.MetroTextBox textBox_PastaXmlEmLote;
-        private MetroFramework.Controls.MetroTextBox textBox_PastaXmlEnvio;
+        public MetroFramework.Controls.MetroTextBox textBox_PastaXmlEnvio;
     }
 }

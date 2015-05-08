@@ -115,7 +115,7 @@
             this.tbSenhaConfig2.Location = new System.Drawing.Point(11, 81);
             this.tbSenhaConfig2.MaxLength = 32767;
             this.tbSenhaConfig2.Name = "tbSenhaConfig2";
-            this.tbSenhaConfig2.PasswordChar = '#';
+            this.tbSenhaConfig2.PasswordChar = '*';
             this.tbSenhaConfig2.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenhaConfig2.SelectedText = "";
             this.tbSenhaConfig2.Size = new System.Drawing.Size(403, 22);
@@ -148,7 +148,7 @@
             this.tbSenhaConfig.Location = new System.Drawing.Point(11, 27);
             this.tbSenhaConfig.MaxLength = 32767;
             this.tbSenhaConfig.Name = "tbSenhaConfig";
-            this.tbSenhaConfig.PasswordChar = '#';
+            this.tbSenhaConfig.PasswordChar = '*';
             this.tbSenhaConfig.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenhaConfig.SelectedText = "";
             this.tbSenhaConfig.Size = new System.Drawing.Size(403, 22);
@@ -190,7 +190,7 @@
             this.lblServidor.Location = new System.Drawing.Point(281, 85);
             this.lblServidor.Margin = new System.Windows.Forms.Padding(3);
             this.lblServidor.Name = "lblServidor";
-            this.lblServidor.Size = new System.Drawing.Size(49, 15);
+            this.lblServidor.Size = new System.Drawing.Size(48, 15);
             this.lblServidor.TabIndex = 7;
             this.lblServidor.Text = "Servidor";
             // 
@@ -249,7 +249,7 @@
             this.tbSenha.Location = new System.Drawing.Point(281, 53);
             this.tbSenha.MaxLength = 32767;
             this.tbSenha.Name = "tbSenha";
-            this.tbSenha.PasswordChar = '#';
+            this.tbSenha.PasswordChar = '*';
             this.tbSenha.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSenha.SelectedText = "";
             this.tbSenha.Size = new System.Drawing.Size(267, 22);

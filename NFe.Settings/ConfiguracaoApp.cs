@@ -1087,12 +1087,14 @@ namespace NFe.Settings
         /// <summary>
         /// Método responsável por gravar as configurações da Aplicação no arquivo "UniNfeConfig.xml"
         /// </summary>
-        /// <returns>Retorna true se conseguiu gravar corretamente as configurações ou false se não conseguiu</returns>
         public void GravarConfig(bool gravaArqEmpresa, bool validaCertificado)  //<<<<<<danasa 1-5-2011
         {
-            ValidarConfig(validaCertificado);
+            ValidarConfig(validaCertificado, null);
             GravarConfigGeral();
-            GravarConfigEmpresas();
+            foreach (Empresa empresa in Empresas.Configuracoes)
+            {
+                empresa.SalvarConfiguracao(false, false);
+            }
             if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
             {                           //<<<<<<danasa 1-5-2011
                 GravarArqEmpresas();    //<<<<<<danasa 1-5-2011
@@ -1128,34 +1130,6 @@ namespace NFe.Settings
         }
         #endregion
 
-        #region GravarConfigEmpresas()
-        /// <summary>
-        /// Gravar as configurações das empresas
-        /// </summary>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 30/07/2010
-        /// </remarks>
-        private void GravarConfigEmpresas()
-        {
-            /***********
-            XmlWriterSettings oSettings = new XmlWriterSettings();
-            UTF8Encoding c = new UTF8Encoding(false);
-
-            //Para começar, vamos criar um XmlWriterSettings para configurar nosso XML
-            oSettings.Encoding = c;
-            oSettings.Indent = true;
-            oSettings.IndentChars = "";
-            oSettings.NewLineOnAttributes = false;
-            oSettings.OmitXmlDeclaration = false;
-            ***********/
-
-            foreach (Empresa empresa in Empresas.Configuracoes)
-            {
-                empresa.SalvarConfiguracao(false, false);
-            }
-        }
-        #endregion
 
         #region GravarConfigGeral()
         /// <summary>
@@ -1194,7 +1168,8 @@ namespace NFe.Settings
 
         #region ValidarConfig()
 
-        static void AddEmpresaNaListaDeComparacao(List<FolderCompare> fc, int i, Empresa empresa)
+#if f
+        void AddEmpresaNaListaDeComparacao(List<FolderCompare> fc, int i, Empresa empresa)
         {
             fc.Add(new FolderCompare(i, empresa.PastaXmlEnvio));
             fc.Add(new FolderCompare(i + 1, empresa.PastaXmlRetorno));
@@ -1208,21 +1183,76 @@ namespace NFe.Settings
                 fc.Add(new FolderCompare(i + 7, empresa.PastaDownloadNFeDest));
             }
         }
+#endif
+        internal class xValid
+        {
+            public bool valid;
+            public string folder;
+            public string msg1;
+            public string msg2;
+
+            public xValid(string _folder, string _msg1, string _msg2, bool _valid)
+            {
+                this.valid = _valid;
+                this.msg1 = _msg1;
+                this.msg2 = _msg2;
+                this.folder = _folder;
+            }
+        }
+        private Dictionary<string, int> _folders;
+        private string AddEmpresaNaLista(string folder)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(folder))
+                    _folders.Add(folder.ToLower(), 0);
+                return "";
+            }
+            catch
+            {
+                return "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas.\r\nPasta utilizada: \r\n" + folder;
+            }
+        }
         /// <summary>
         /// Verifica se algumas das informações das configurações tem algum problema ou falha
         /// </summary>
         /// <param name="validarCertificado">Se valida se tem certificado informado ou não nas configurações</param>
-        public void ValidarConfig(bool validarCertificado)
+        public void ValidarConfig(bool validarCertificado, Empresa empresaValidada)
         {
             string erro = string.Empty;
             bool validou = true;
 
-            #region Remover End Slash
-            for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+            _folders = new Dictionary<string, int>();
+
+            foreach (Empresa emp in Empresas.Configuracoes)
             {
-                Empresas.Configuracoes[i].RemoveEndSlash();
+
+            #region Remover End Slash
+                emp.RemoveEndSlash();
+                #endregion
+
+                #region Verificar a duplicação de nome de pastas que não pode existir
+                if ((erro = this.AddEmpresaNaLista(emp.PastaXmlEnvio)) == "")
+                    if ((erro = this.AddEmpresaNaLista(emp.PastaXmlRetorno)) == "")
+                        if ((erro = this.AddEmpresaNaLista(emp.PastaXmlErro)) == "")
+                            if ((erro = this.AddEmpresaNaLista(emp.PastaValidar)) == "")
+                                if (emp.Servico != TipoAplicativo.Nfse)
+                                    if ((erro = this.AddEmpresaNaLista(emp.PastaXmlEnviado)) == "")
+                                        if ((erro = this.AddEmpresaNaLista(emp.PastaXmlEmLote)) == "")
+                                            if ((erro = this.AddEmpresaNaLista(emp.PastaBackup)) == "")
+                                                erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
+
+                if (erro != "")
+            {
+                    erro += "\r\nNa empresa: " + emp.Nome + "\r\n" + emp.CNPJ;
+                    validou = false;
+                    break;
             }
             #endregion
+            }
+
+            //substitui pq para debugar dava muito trabalho
+#if f
 
             #region Verificar a duplicação de nome de pastas que não pode existir
             List<FolderCompare> fc = new List<FolderCompare>();
@@ -1237,6 +1267,15 @@ namespace NFe.Settings
                 if (string.IsNullOrEmpty(fc1.folder))
                     continue;
 
+                var fCount = fc.Count(fc2 => fc2.id != fc1.id && fc1.folder.ToLower().Equals(fc2.folder.ToLower()));
+                if (fCount > 0)
+                {
+                    erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas. \r\nPasta utilizada: \r\n" + fc1.folder.Trim();
+                    validou = false;
+                    break;
+                }
+                /*
+
                 foreach (FolderCompare fc2 in fc)
                 {
                     if (fc1.id != fc2.id)
@@ -1248,21 +1287,79 @@ namespace NFe.Settings
                             break;
                         }
                     }
-                }
+                }*/
                 if (!validou)
                     break;
             }
             #endregion
+#endif
 
             if (validou)
             {
-                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                int empFrom = 0;
+                int empTo = Empresas.Configuracoes.Count;
+
+                if (empresaValidada != null)
+                {
+                    ///
+                    /// quando alterada uma configuracao pelo visual, valida apenas a empresa sendo alterada
+                    /// 
+                    empFrom = empTo = Empresas.FindConfEmpresaIndex(empresaValidada.CNPJ, empresaValidada.Servico);
+                    if (empFrom == -1)
+                        throw new Exception("Não foi possivel encontrar a empresa para validação");
+
+                    ++empTo;
+                }
+                for (int i = empFrom; i < empTo; i++)
                 {
                     Empresa empresa = Empresas.Configuracoes[i];
+
+                    string xNomeCNPJ = "\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+
+                    #region Verificar se tem alguma pasta em branco
+                    List<xValid> _xValids = new List<xValid>();
+                    _xValids.Add(new xValid(empresa.PastaXmlEnvio, "Informe a pasta de envio dos arquivos XML.", "A pasta de envio dos arquivos XML informada não existe.", true));
+                    _xValids.Add(new xValid(empresa.PastaXmlRetorno, "Informe a pasta de envio dos arquivos XML.", "A pasta de retorno dos arquivos XML informada não existe.", true));
+                    _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
+                    _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
+                    if (empresa.Servico != TipoAplicativo.Nfse)
+                    {
+                        _xValids.Add(new xValid(empresa.PastaXmlEmLote, "Informe a pasta de envio dos arquivos XML em lote.", "A pasta de envio das notas fiscais eletrônicas em lote informada não existe.", true));
+                        _xValids.Add(new xValid(empresa.PastaXmlEnviado, "Informe a pasta para arquivamento dos arquivos XML enviados.", "A pasta para arquivamento dos arquivos XML enviados informada não existe.", true));
+
+                        _xValids.Add(new xValid(empresa.PastaBackup, "", "A pasta para backup dos XML enviados informada não existe.", false));
+                        _xValids.Add(new xValid(empresa.PastaDownloadNFeDest, "", "A pasta para arquivamento das NFe de destinatários informada não existe.", false));
+                        _xValids.Add(new xValid(empresa.PastaDanfeMon, "", "A pasta informada para gravação do XML da NFe para o DANFeMon não existe.", false));
+                        _xValids.Add(new xValid(empresa.PastaExeUniDanfe, "", "A pasta do executável do UniDANFe informada não existe.", false));
+                        _xValids.Add(new xValid(empresa.PastaConfigUniDanfe, "", "A pasta do arquivo de configurações do UniDANFe informada não existe.", false));
+                    }
+                    foreach (var val in _xValids)
+                    {
+                        if (val.valid && string.IsNullOrEmpty(val.folder))
+                        {
+                            erro = val.msg1 + xNomeCNPJ;
+                            validou = false;
+                            break;
+                        }
+                        else
+                            if (!string.IsNullOrEmpty(val.folder))
+                                if (!Directory.Exists(val.folder))
+                                    if (empresa.CriaPastasAutomaticamente)
+                                    {
+                                        Directory.CreateDirectory(val.folder);
+                                    }
+                                    else
+                                    {
+                                        erro = val.msg2 + xNomeCNPJ;
+                                        validou = false;
+                                        break;
+                                    }
+                    }
+
+#if f
                     List<string> diretorios = new List<string>();
                     List<string> mensagens = new List<string>();
 
-                    #region Verificar se tem alguma pasta em branco
                     diretorios.Add(empresa.PastaXmlEnvio); mensagens.Add("Informe a pasta de envio dos arquivos XML.");
                     diretorios.Add(empresa.PastaXmlRetorno); mensagens.Add("Informe a pasta de retorno dos arquivos XML.");
                     diretorios.Add(empresa.PastaXmlErro); mensagens.Add("Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.");
@@ -1271,66 +1368,63 @@ namespace NFe.Settings
                     {
                         diretorios.Add(empresa.PastaXmlEmLote); mensagens.Add("Informe a pasta de envio dos arquivos XML em lote.");
                         diretorios.Add(empresa.PastaXmlEnviado); mensagens.Add("Informe a pasta para arquivamento dos arquivos XML enviados.");
-                        //diretorios.Add(empresa.PastaBackup); mensagens.Add("Informe a pasta para o Backup dos arquivos XML enviados.");
-                        //diretorios.Add(empresa.PastaDownloadNFeDest); mensagens.Add("Informe a pasta onde será gravado os arquivos XML de download de destinatário.");
                     }
 
                     for (int b = 0; b < diretorios.Count; b++)
                     {
                         if (diretorios[b].Equals(string.Empty))
                         {
-                            erro = mensagens[b].Trim() + "\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                            erro = mensagens[b] + xNomeCNPJ;
                             validou = false;
                             break;
                         }
                     }
+#endif
                     ///
                     /// informacoes do FTP
                     /// danasa 7/7/2011
-                    if (empresa.FTPIsAlive)
+                    if (empresa.FTPIsAlive && validou)
                     {
                         if (empresa.Servico != TipoAplicativo.Nfse)
                         {
                             if (string.IsNullOrEmpty(empresa.FTPPastaAutorizados))
                             {
-                                erro = "Informe a pasta do FTP de destino dos autorizados\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                                erro = "Informe a pasta do FTP de destino dos autorizados" + xNomeCNPJ;
                                 validou = false;
                             }
                         }
                         else
                             if (string.IsNullOrEmpty(empresa.FTPPastaRetornos))
                             {
-                                erro = "Informe a pasta do FTP de destino dos retornos\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                                erro = "Informe a pasta do FTP de destino dos retornos" + xNomeCNPJ;
                                 validou = false;
                             }
                     }
                     #endregion
 
                     #region Verificar se o certificado foi informado
-                    if (validarCertificado && empresa.UsaCertificado)
-                    {
-                        if (validou)
+                    if (validarCertificado && empresa.UsaCertificado && validou)
                         {
                             if (empresa.CertificadoInstalado && empresa.CertificadoDigitalThumbPrint.Equals(string.Empty))
                             {
-                                erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                            erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
                                 validou = false;
                             }
-                            if (!empresa.CertificadoInstalado)
+                        if (!empresa.CertificadoInstalado && validou)
                             {
                                 if (empresa.CertificadoArquivo.Equals(string.Empty))
                                 {
-                                    erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                                erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
                                     validou = false;
                                 }
                                 else if (!File.Exists(empresa.CertificadoArquivo))
                                 {
-                                    erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços não foi encontrado.\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                                erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços não foi encontrado." + xNomeCNPJ;
                                     validou = false;
                                 }
                                 else if (empresa.CertificadoSenha.Equals(string.Empty))
                                 {
-                                    erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços.\r\n" + Empresas.Configuracoes[i].Nome + "\r\n" + Empresas.Configuracoes[i].CNPJ;
+                                erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
                                     validou = false;
                                 }
                                 else
@@ -1346,18 +1440,17 @@ namespace NFe.Settings
                                     }
                                     catch (System.Security.Cryptography.CryptographicException ex)
                                     {
-                                        erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                    erro = ex.Message + "." + xNomeCNPJ;
                                         validou = false;
                                     }
                                     catch (Exception ex)
                                     {
-                                        erro = ex.Message + ".\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                    erro = ex.Message + "." + xNomeCNPJ;
                                         validou = false;
                                     }
                                 }
                             }
                         }
-                    }
                     #endregion
 
                     #region Verificar se as pastas informadas existem
@@ -1368,55 +1461,59 @@ namespace NFe.Settings
                         {
                             if (!string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
                             {
-                                while (Empresas.Configuracoes[i].PastaConfigUniDanfe.Substring(Empresas.Configuracoes[i].PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" && !string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaConfigUniDanfe))
-                                    Empresas.Configuracoes[i].PastaConfigUniDanfe = Empresas.Configuracoes[i].PastaConfigUniDanfe.Substring(0, Empresas.Configuracoes[i].PastaConfigUniDanfe.Length - 6);
+                                while (empresa.PastaConfigUniDanfe.Substring(empresa.PastaConfigUniDanfe.Length - 6, 6).ToLower() == @"\dados" &&
+                                    !string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
+                                {
+                                    empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe.Substring(0, empresa.PastaConfigUniDanfe.Length - 6);
                             }
-                            Empresas.Configuracoes[i].PastaConfigUniDanfe = Empresas.Configuracoes[i].PastaConfigUniDanfe.Replace("\r\n", "").Trim();
-
-                            empresa.PastaConfigUniDanfe = Empresas.Configuracoes[i].PastaConfigUniDanfe;
+                        }
+                            empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe.Replace("\r\n", "").Trim();
+                            //empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
                         }
 
                         if (empresa.PastaXmlEnvio.ToLower().EndsWith("geral"))
                         {
-                            erro = "Pasta de envio não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                            erro = "Pasta de envio não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                             validou = false;
                         }
                         else
                             if (empresa.PastaXmlEmLote.ToLower().EndsWith("geral"))
                             {
-                                erro = "Pasta de envio em lote não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                erro = "Pasta de envio em lote não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                                 validou = false;
                             }
                             else
                                 if (empresa.PastaValidar.ToLower().EndsWith("geral"))
                                 {
-                                    erro = "Pasta de validação não pode terminar com a subpasta 'geral'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                    erro = "Pasta de validação não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                                     validou = false;
                                 }
                                 else
                                     if (empresa.PastaXmlEnvio.ToLower().EndsWith("temp"))
                                     {
-                                        erro = "Pasta de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                        erro = "Pasta de envio não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                                         validou = false;
                                     }
                                     else
                                         if (empresa.PastaXmlEmLote.ToLower().EndsWith("temp"))
                                         {
-                                            erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                            erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                                             validou = false;
                                         }
                                         else
                                             if (empresa.PastaValidar.ToLower().EndsWith("temp"))
                                             {
-                                                erro = "Pasta de validação não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                                erro = "Pasta de validação não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                                                 validou = false;
                                             }
                                             else
                                                 if (empresa.PastaXmlErro.ToLower().EndsWith("temp"))
                                                 {
-                                                    erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                                    erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                                                     validou = false;
                                                 }
+
+#if f
 
                         if (validou)
                         {
@@ -1448,7 +1545,7 @@ namespace NFe.Settings
                                         }
                                         else
                                         {
-                                            erro = mensagens[b].Trim() + "\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                            erro = mensagens[b].Trim() + xNomeCNPJ;
                                             validou = false;
                                             break;
                                         }
@@ -1456,6 +1553,7 @@ namespace NFe.Settings
                                 }
                             }
                         }
+#endif
 
                         #region Criar pasta Temp dentro da pasta de envio, envio em lote e validar
                         //Criar pasta Temp dentro da pasta de envio, envio em Lote e Validar. Wandrey 03/08/2011
@@ -1490,13 +1588,13 @@ namespace NFe.Settings
                     #endregion
 
                     #region Verificar se as pastas configuradas do unidanfe estão corretas
-                    if (empresa.Servico != TipoAplicativo.Nfse)
+                    if (empresa.Servico != TipoAplicativo.Nfse && validou)
                     {
-                        if (validou && empresa.PastaExeUniDanfe.Trim() != string.Empty)
+                        if (empresa.PastaExeUniDanfe.Trim() != string.Empty)
                         {
                             if (!File.Exists(empresa.PastaExeUniDanfe + "\\unidanfe.exe"))
                             {
-                                erro = "O executável do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                erro = "O executável do UniDANFe não foi localizado na pasta informada." + xNomeCNPJ;
                                 validou = false;
                             }
                         }
@@ -1506,7 +1604,7 @@ namespace NFe.Settings
                             //Verificar a existência o arquivo de configuração
                             if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
                             {
-                                erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada.\r\n" + empresa.Nome + "\r\n" + empresa.CNPJ;
+                                erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada." + xNomeCNPJ;
                                 validou = false;
                             }
                         }
@@ -1537,10 +1635,8 @@ namespace NFe.Settings
             #endregion
 
             if (!validou)
-            {
                 throw new Exception(erro);
             }
-        }
         #endregion
 
         #region ReconfigurarUniNFe()
@@ -1702,7 +1798,7 @@ namespace NFe.Settings
                     /// 
 
                     //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                    Empresas.Configuracoes[emp].SalvarConfiguracao(false);
+                    Empresas.Configuracoes[emp].SalvarConfiguracao(false, true);
 
                     /// salva o arquivo da lista de empresas
                     this.GravarArqEmpresas();

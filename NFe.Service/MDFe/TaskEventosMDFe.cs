@@ -30,19 +30,13 @@ namespace NFe.Service
             {
                 dadosEnvEvento = new DadosenvEvento();
                 //Ler o XML para pegar parâmetros de envio
-                EnvEvento(emp, NomeArquivoXML);
+                EnvEvento(emp, NomeArquivoXML, dadosEnvEvento, TpcnResources.chMDFe.ToString());
 
                 ValidaEvento(emp, dadosEnvEvento);
-                int tpEmis = Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
-                /*
-                int currentEvento = Convert.ToInt32(dadosEnvEvento.eventos[0].tpEvento);
-                foreach (Evento item in dadosEnvEvento.eventos)
-                {
-                    tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
-                    if (currentEvento != Convert.ToInt32(item.tpEvento))
-                        throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
-                }
-                */
+
+                //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
+                int tpEmis = this.dadosEnvEvento.eventos[0].tpEmis; //Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1));
+
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
                 int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
                 int ufParaWS = cOrgao;
@@ -106,6 +100,7 @@ namespace NFe.Service
         }
         #endregion
 
+#if f
         #region EnvEvento()
         /// <summary>
         /// Fazer a leitura dos dados do XML
@@ -132,6 +127,7 @@ namespace NFe.Service
             }
         }
         #endregion
+#endif
 
         #region LerRetornoEvento
         private void LerRetornoEvento(int emp)

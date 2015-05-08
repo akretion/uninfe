@@ -564,6 +564,7 @@ namespace NFe.Service
         public string Id { get; set; }
         public int cOrgao { get; set; }
         public int tpAmb { get; set; }
+        public int tpEmis { get; set; }
         public string CNPJ { get; set; }
         public string CPF { get; set; }
         public string chNFe { get; set; }
@@ -595,6 +596,7 @@ namespace NFe.Service
             verEvento = "1.00";
             versao = "1.00";
             tpEvento = "110110";
+            tpEmis = 0;
         }
     }
     public class EventoEPEC

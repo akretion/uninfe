@@ -129,25 +129,17 @@ namespace NFe.Service
         /// <summary>
         /// Ler o retorno da consulta situação da nota fiscal e de acordo com o status ele trata as notas enviadas se ainda não foram tratadas
         /// </summary>
-        /// <param name="ChaveNFe">Chave da NFe que está sendo consultada</param>
+        /// <param name="ChaveMDFe">Chave da NFe que está sendo consultada</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 16/06/2010
         /// </remarks>
-        private void LerRetornoSitMDFe(string ChaveNFe)
+        private void LerRetornoSitMDFe(string ChaveMDFe)
         {
             int emp = Empresas.FindEmpresaByThread();
 
             oGerarXML.XmlDistEventoMDFe(emp, this.vStrXmlRetorno);
 
-            ///
-            /// CNPJ da chave não é de uma empresa Uninfe
-            /// 
-            if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
-                ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
-            {
-                return;
-            }
 
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
@@ -164,20 +156,26 @@ namespace NFe.Service
                 XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
 
                 //Definir a chave da NFe a ser pesquisada
-                string strChaveNFe = "MDFe" + ChaveNFe;
+                string strChaveNFe = "MDFe" + ChaveMDFe;
 
                 //Definir o nome do arquivo da NFe e seu caminho
                 string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
 
                 if (string.IsNullOrEmpty(strNomeArqNfe))
                 {
-                    if (string.IsNullOrEmpty(strChaveNFe))
-                        throw new Exception("LerRetornoSitMDFe(): Não pode obter o nome do arquivo");
 
                     strNomeArqNfe = strChaveNFe.Substring(4) + Propriedade.ExtEnvio.MDFe;
                 }
 
                 string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+
+                #region CNPJ da chave não é de uma empresa Uninfe
+                bool notDaEmpresa = (ChaveMDFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                                    ChaveMDFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString());
+
+                if (!File.Exists(strArquivoNFe) && notDaEmpresa)
+                    return;
+                #endregion
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;

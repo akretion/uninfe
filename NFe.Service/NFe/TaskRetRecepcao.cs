@@ -42,12 +42,12 @@ namespace NFe.Service
                 }
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = 
-                    ConfiguracaoApp.DefinirWS(  Servico, 
-                                                emp, 
-                                                dadosPedRec.cUF, 
-                                                dadosPedRec.tpAmb, 
-                                                dadosPedRec.tpEmis, 
+                WebServiceProxy wsProxy =
+                    ConfiguracaoApp.DefinirWS(Servico,
+                                                emp,
+                                                dadosPedRec.cUF,
+                                                dadosPedRec.tpAmb,
+                                                dadosPedRec.tpEmis,
                                                 dadosPedRec.versao,
                                                 dadosPedRec.mod);
 
@@ -60,8 +60,8 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oRepRecepcao, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oRepRecepcao,
                                     wsProxy.NomeMetodoWS[0],// NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.versao), 
                                     oCabecMsg, this);
                 #endregion
@@ -167,6 +167,30 @@ namespace NFe.Service
         /// <date>20/04/2009</date>
         private void LerRetornoLoteNFe()
         {
+            /*
+            vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"windows-1250\"?>" + 
+                "<retConsReciNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"2.00\">" + 
+                "<tpAmb>2</tpAmb>" + 
+                "<verAplic>0582</verAplic>" + 
+                "<nRec>310000008211450</nRec>" + 
+                "<cStat>104</cStat>" + 
+                "<xMotivo>Rejeicao: UF informada no campo cUF nao e atendida pelo Web Service</xMotivo>" + 
+                "<cUF>31</cUF>" + 
+                "<protNFe versao=\"2.00\" xmlns=\"http://www.portalfiscal.inf.br/nfe\">" + 
+                "<infProt Id=\"ID31100371139034000100550000009999201000000005\">" + 
+                "<tpAmb>2</tpAmb>" + 
+                "<verAplic>2.00</verAplic>" + 
+                "<chNFe>31100371139034000100550000009999201000000005</chNFe>" + 
+                "<dhRecbto>2010-03-17T17:07:34</dhRecbto>" + 
+                "<nProt>131100015665325</nProt>" + 
+                "<digVal>ajBuZFhtT3JyT0VFVHIzdDJvZTc3RHhURElnPQ==</digVal>" + 
+                "<cStat>100</cStat>" + 
+                "<xMotivo>AUTORIZADA</xMotivo>" + 
+                "</infProt>" + 
+                "</protNFe>" + 
+                "</retConsReciNFe>";
+             */
+
             int emp = Empresas.FindEmpresaByThread();
             var msXml = Functions.StringXmlToStreamUTF8(vStrXmlRetorno);
             var fluxoNFe = new FluxoNfe();
@@ -334,8 +358,8 @@ namespace NFe.Service
 
                         strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
                     }
-                    var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
-                        PastaEnviados.EmProcessamento.ToString() + "\\" + 
+                    var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                        PastaEnviados.EmProcessamento.ToString() + "\\" +
                         strNomeArqNfe;
 
                     //Atualizar a Tag de status da NFe no fluxo para que se ocorrer alguma falha na exclusão eu tenha esta campo para ter uma referencia em futuras consultas
@@ -350,7 +374,7 @@ namespace NFe.Service
                                 //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                 var strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                        Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) + 
+                                                        Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.Nfe) +
                                                         Propriedade.ExtRetorno.ProcNFe;
 
                                 //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
@@ -415,7 +439,7 @@ namespace NFe.Service
                                     }
                                 }
                                 //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012
-                                NFeJaNaAutorizada     = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe);
+                                NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe);
                                 procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.ProcNFe);
                                 if (!procNFeJaNaAutorizada || !NFeJaNaAutorizada)
                                 {
@@ -429,7 +453,7 @@ namespace NFe.Service
                                     File.Delete(strArquivoNFe);
                             }
                             else
-                                throw new Exception("Arquivo " + strNomeArqNfe + " não encontrado.");
+                                Auxiliar.WriteLog("TaskRetRecepcao: (Foi efetuada uma consulta recibo e não foi localizado o arquivo da NFe ( " + strNomeArqNfe + ") na pasta EmProcessamento) ", false);
 
                             break;
 
@@ -445,7 +469,7 @@ namespace NFe.Service
                             //O Status da NFe tem que ser maior que 1 ou deu algum erro na hora de ler o XML de retorno da consulta do recibo, sendo assim, vou mantar a nota no fluxo para consultar novamente.
                             if (Convert.ToInt32(strStat) >= 1)
                             {
-                                Auxiliar.WriteLog("Arquivo: " + strNomeArqNfe+" codigo de retorno: "+strStat, false);
+                                Auxiliar.WriteLog("Arquivo: " + strNomeArqNfe + " codigo de retorno: " + strStat, false);
                                 //Mover o XML da NFE a pasta de XML´s com erro
                                 oAux.MoveArqErro(strArquivoNFe);
                             }

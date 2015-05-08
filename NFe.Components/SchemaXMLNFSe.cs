@@ -2040,9 +2040,9 @@ namespace NFSe.Components
 
             #region XML de Cancelamento de NFS-e
 
-            SchemaXML.InfSchemas.Add("NFSE-FIORILLI-ws:cancelarNfse", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-FIORILLI-cancelarNfse", new InfSchema()
             {
-                Tag = "ws:cancelarNfse",
+                Tag = "cancelarNfse",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
                 Descricao = "XML de Cancelamento da NFS-e",
@@ -2098,9 +2098,9 @@ namespace NFSe.Components
             #endregion
 
             #region XML de lote RPS
-            SchemaXML.InfSchemas.Add("NFSE-FIORILLI-ws:gerarNfse", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-FIORILLI-gerarNfse", new InfSchema()
             {
-                Tag = "ws:gerarNfse",
+                Tag = "gerarNfse",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
                 Descricao = "XML de Lote RPS",

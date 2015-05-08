@@ -78,6 +78,7 @@ namespace NFe.UI
                     tpage.Text = "Certificado digital";
                     uce_cert = new Formularios.userConfiguracao_certificado();
                     uce_cert.changeEvent += changed_Modificado;
+                    uce_cert.ucPastas = this.uce_pastas;
                     tpage.Controls.Add(uce_cert);
                     break;
                 case 3:
@@ -572,7 +573,7 @@ namespace NFe.UI
                         string _key = this.currentEmpresa.CNPJ + this.currentEmpresa.Servico.ToString();
                         ///
                         /// salva a configuracao da empresa
-                        this.currentEmpresa.SalvarConfiguracao(true);
+                        this.currentEmpresa.SalvarConfiguracao(true, true);
 
                         var app = new ConfiguracaoApp();
                         ///

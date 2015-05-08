@@ -33,7 +33,7 @@ namespace NFe.Service
             try
             {
                 //Ler o XML para pegar parâmetros de envio
-                EnvEvento(emp, NomeArquivoXML);
+                EnvEvento(emp, NomeArquivoXML, dadosEnvEvento, NFe.Components.TpcnResources.chNFe.ToString());
 
                 string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui caso haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
@@ -56,7 +56,8 @@ namespace NFe.Service
 
                 //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
                 int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
-                int tpEmis = Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1)); //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
+                //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
+                int tpEmis = this.dadosEnvEvento.eventos[0].tpEmis; //Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1)); 
                 int ufParaWS = cOrgao;
 
                 //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
@@ -268,7 +269,8 @@ namespace NFe.Service
         #endregion
 
         #region EnvEvento()
-        private void EnvEvento(int emp, string arquivoXML)
+
+        protected override void EnvEvento(int emp, string arquivoXML, DadosenvEvento dadosEnvEvento, string chNFe_chCTe_chMDFe)
         {
             novaNomenclatura =
                 arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
@@ -279,6 +281,7 @@ namespace NFe.Service
             /// 
             if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
             {
+                #region --txt
                 ///<<<<EVENTO DE CARTA DE CORRECAO>>>>
                 ///idLote|000000000015255
                 ///evento|1
@@ -448,6 +451,9 @@ namespace NFe.Service
                         case "tpamb":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + dados[1].Trim());
                             break;
+                        case "tpemis":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
                         case "cnpj":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].CNPJ = dados[1].Trim();
                             break;
@@ -561,6 +567,9 @@ namespace NFe.Service
                     if (evento.cOrgao == 0)
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
 
+                    if (evento.tpEmis == 0)
+                        evento.tpEmis = Convert.ToInt32(evento.chNFe.Substring(34, 1));
+
                     if (string.IsNullOrEmpty(evento.Id))
                         evento.Id = NFe.Components.TpcnResources.ID.ToString() + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
 
@@ -581,6 +590,7 @@ namespace NFe.Service
                                 "quantidade, valor da operação ou da prestação; II - a correção de dados cadastrais que implique mudança do " +
                                 "remetente ou do destinatário; III - a data de emissão ou de saída.";
                 }
+                #endregion
             }
             else
             {
@@ -606,6 +616,10 @@ namespace NFe.Service
                 //  </evento>
                 //</envEvento>
 
+                base.EnvEvento(emp, arquivoXML, dadosEnvEvento, chNFe_chCTe_chMDFe);
+                /**************
+                bool doSave = false;
+
                 XmlDocument doc = new XmlDocument();
                 doc.Load(arquivoXML);
 
@@ -621,7 +635,19 @@ namespace NFe.Service
                     dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.cOrgao.ToString())[0].InnerText);
                     dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
                     dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe.Substring(34, 1));
+
+                    if (envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
+                    {
+                        dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
+                        /// para que o validador não rejeite, excluo a tag <tpEmis>
+                        doc.DocumentElement.RemoveChild(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
+                        /// salvo o arquivo modificado
+                        doSave = true;
+                    }
                 }
+                if (doSave) doc.Save(arquivoXML);
+                 * ***************/
             }
         }
         #endregion

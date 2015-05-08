@@ -129,25 +129,17 @@ namespace NFe.Service
         /// <summary>
         /// Ler o retorno da consulta situação da nota fiscal e de acordo com o status ele trata as notas enviadas se ainda não foram tratadas
         /// </summary>
-        /// <param name="ChaveNFe">Chave da NFe que está sendo consultada</param>
+        /// <param name="ChaveCTe">Chave da NFe que está sendo consultada</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 16/06/2010
         /// </remarks>
-        private void LerRetornoSitCTe(string ChaveNFe)
+        private void LerRetornoSitCTe(string ChaveCTe)
         {
             int emp = Empresas.FindEmpresaByThread();
 
             oGerarXML.XmlDistEventoCTe(emp, this.vStrXmlRetorno);  //<<<danasa 6-2011
 
-            ///
-            /// CNPJ da chave não é de uma empresa Uninfe
-            /// 
-            if (ChaveNFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
-                ChaveNFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString())
-            {
-                return;
-            }
 
             LerXML oLerXml = new LerXML();
             MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
@@ -164,20 +156,25 @@ namespace NFe.Service
                 XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
 
                 //Definir a chave da NFe a ser pesquisada
-                string strChaveNFe = "CTe" + ChaveNFe;
+                string strChaveCTe = "CTe" + ChaveCTe;
 
                 //Definir o nome do arquivo da NFe e seu caminho
-                string strNomeArqNfe = oFluxoNfe.LerTag(strChaveNFe, FluxoNfe.ElementoFixo.ArqNFe);
+                string strNomeArqCTe = oFluxoNfe.LerTag(strChaveCTe, FluxoNfe.ElementoFixo.ArqNFe);
 
-                if (string.IsNullOrEmpty(strNomeArqNfe))
+                if (string.IsNullOrEmpty(strNomeArqCTe))
                 {
-                    if (string.IsNullOrEmpty(strChaveNFe))
-                        throw new Exception("LerRetornoSitCTe(): Não pode obter o nome do arquivo");
-
-                    strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Cte;
+                    strNomeArqCTe = strChaveCTe.Substring(3) + Propriedade.ExtEnvio.Cte;
                 }
 
-                string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
+                string strArquivoCTe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqCTe;
+
+                #region CNPJ da chave não é de uma empresa Uninfe
+                bool notDaEmpresa = (ChaveCTe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
+                                    ChaveCTe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString());
+
+                if (!File.Exists(strArquivoCTe) && notDaEmpresa)
+                    return;
+                #endregion
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
@@ -243,44 +240,44 @@ namespace NFe.Service
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe;
+                                                                    Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe;
 
                                         //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
                                         //Não tenho como fazer mais nada. Wandrey 08/10/2009
-                                        if (File.Exists(strArquivoNFe))
+                                        if (File.Exists(strArquivoCTe))
                                         {
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
-                                            oLerXml.Cte(strArquivoNFe);
+                                            oLerXml.Cte(strArquivoCTe);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte);
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe);
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe);
 
                                             //Se o XML de distribuição não estiver na pasta em processamento
                                             if (!procNFeJaNaAutorizada && !File.Exists(strArquivoNFeProc))
                                             {
-                                                oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe);
+                                                oGerarXML.XmlDistCTe(strArquivoCTe, strProtNfe);
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados
-                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe)))
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe)))
                                             {
                                                 //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
                                                 TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                             }
 
                                             //Se a NFe não existir ainda na pasta de autorizados
-                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte)))
+                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte)))
                                             {
                                                 //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
-                                                TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                             }
                                             else
                                             {
                                                 //Se já estiver na pasta de autorizados, vou somente excluir ela da pasta de XML´s em processamento
-                                                Functions.DeletarArquivo(strArquivoNFe);
+                                                Functions.DeletarArquivo(strArquivoCTe);
                                             }
 
                                             //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
@@ -309,14 +306,14 @@ namespace NFe.Service
 
                                     case "301":
                                         //Ler o XML para pegar a data de emissão para criar a psta dos XML´s Denegados
-                                        if (File.Exists(strArquivoNFe))
+                                        if (File.Exists(strArquivoCTe))
                                         {
-                                            oLerXml.Cte(strArquivoNFe);
+                                            oLerXml.Cte(strArquivoCTe);
 
                                             //Move a NFE da pasta de NFE em processamento para NFe Denegadas
-                                            if (!oAux.EstaDenegada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.Den))
+                                            if (!oAux.EstaDenegada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.Den))
                                             {
-                                                TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
+                                                TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
                                                 ///
                                                 /// existe DACTE de CTe denegado???
                                                 /// 
@@ -325,7 +322,7 @@ namespace NFe.Service
                                                     var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Denegados.ToString() + "\\" +
                                                                             Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                            Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
+                                                                            Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
 
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }
@@ -358,12 +355,12 @@ namespace NFe.Service
 
                                     default:
                                         //Mover o XML da NFE a pasta de XML´s com erro
-                                        oAux.MoveArqErro(strArquivoNFe);
+                                        oAux.MoveArqErro(strArquivoCTe);
                                         break;
                                 }
 
                                 //Deletar a NFE do arquivo de controle de fluxo
-                                oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
+                                oFluxoNfe.ExcluirNfeFluxo(strChaveCTe);
                             }
                         }
                         break;
@@ -400,10 +397,10 @@ namespace NFe.Service
                     #region Conteúdo para retirar a nota fiscal do fluxo
                     case "TirarFluxo":
                         //Mover o XML da NFE a pasta de XML´s com erro
-                        oAux.MoveArqErro(strArquivoNFe);
+                        oAux.MoveArqErro(strArquivoCTe);
 
                         //Deletar a NFE do arquivo de controle de fluxo
-                        oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
+                        oFluxoNfe.ExcluirNfeFluxo(strChaveCTe);
                         break;
                     #endregion
 

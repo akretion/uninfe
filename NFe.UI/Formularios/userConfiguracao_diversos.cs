@@ -321,5 +321,17 @@ namespace NFe.UI.Formularios
             if (this.empresa.Servico == TipoAplicativo.Nfse)
                 comboBox_UF.DropDownWidth = 300;
         }
+
+        private void txtUsuarioWS_TextChanged(object sender, EventArgs e)
+        {
+            if (this.changeEvent != null)
+                this.changeEvent(sender, e);
+        }
+
+        private void txtSenhaWS_TextChanged(object sender, EventArgs e)
+        {
+            if (this.changeEvent != null)
+                this.changeEvent(sender, e);
+        }
     }
 }

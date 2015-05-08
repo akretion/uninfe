@@ -10,6 +10,8 @@ namespace NFe.Components
     /// danasa 8-2009
     /// classe interna para comparar as pastas informadas
     /// </summary>
+    /// 
+    /*
     public class FolderCompare
     {
         public Int32 id { get; set; }
@@ -20,6 +22,6 @@ namespace NFe.Components
             this.id = _id;
             this.folder = _folder;
         }
-    }
+    }*/
     #endregion
 }

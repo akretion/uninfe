@@ -2112,6 +2112,7 @@ namespace NFe.Service
         {
             string cErro = "";
             string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
+            string ctpEmis = dadosEnvEvento.eventos[0].chNFe.Substring(34, 1); 
             foreach (Evento item in dadosEnvEvento.eventos)
             {
                 if (!currentEvento.Equals(item.tpEvento))
@@ -2119,6 +2120,10 @@ namespace NFe.Service
 
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
+                    case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                        if (!ctpEmis.Equals(item.chNFe.Substring(34,1)))
+                            cErro += "Não é possivel mesclar chaves com tipo de emissão dentro de um mesmo xml/txt de eventos.\r\n";
+                        break;
                     case ConvertTxt.tpEventos.tpEvEPEC:
                         switch (Empresas.Configuracoes[emp].AmbienteCodigo)
                         {
@@ -2158,6 +2163,42 @@ namespace NFe.Service
             }
             if (cErro != "")
                 throw new Exception(cErro);
+        }
+        #endregion
+
+        #region EnvEvento
+        protected virtual void EnvEvento(int emp, string arquivoXML, DadosenvEvento dadosEnvEvento, string chNFe_chCTe_chMDFe)
+        {
+            bool doSave = false;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(arquivoXML);
+
+            XmlNodeList envEventoList = doc.GetElementsByTagName("infEvento");
+
+            foreach (XmlNode envEventoNode in envEventoList)
+            {
+                XmlElement envEventoElemento = (XmlElement)envEventoNode;
+
+                dadosEnvEvento.eventos.Add(new Evento(){
+                    tpEvento = Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpEvento.ToString(), false),
+                    tpAmb = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpAmb.ToString(), false)),
+                    cOrgao = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.cOrgao.ToString(), false)),
+                    nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.nSeqEvento.ToString(), false)),
+                    chNFe = Functions.LerTag(envEventoElemento, chNFe_chCTe_chMDFe, false)
+                });
+                dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe.Substring(34, 1));
+
+                if (envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
+                {
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpEmis.ToString(), false));
+                    /// para que o validador não rejeite, excluo a tag <tpEmis>
+                    doc.DocumentElement.RemoveChild(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
+                    /// salvo o arquivo modificado
+                    doSave = true;
+                }
+            }
+            if (doSave) doc.Save(arquivoXML);
         }
         #endregion
     }

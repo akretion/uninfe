@@ -857,7 +857,7 @@ namespace NFe.Settings
         }
 
         #region SalvarConfiguracao()
-        public void SalvarConfiguracao(bool validaCertificado, bool validarConfig = true)
+        public void SalvarConfiguracao(bool validaCertificado, bool validarConfig)
         {
             bool empresaNova = false;
             try
@@ -876,7 +876,7 @@ namespace NFe.Settings
 
                 //Criptografar a senha do certificado digital para gravar no XML. Wandrey 23/09/2014
                 if (validarConfig)
-                    new ConfiguracaoApp().ValidarConfig(validaCertificado);
+                    new ConfiguracaoApp().ValidarConfig(validaCertificado, this);
 
                 if (!Directory.Exists(this.PastaEmpresa))
                     Directory.CreateDirectory(this.PastaEmpresa);

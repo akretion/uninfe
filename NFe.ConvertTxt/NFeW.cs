@@ -1604,7 +1604,7 @@ namespace NFe.ConvertTxt
 
                     wCampo(exporta.UFSaidaPais, TpcnTipoCampo.tcStr, TpcnResources.UFSaidaPais);
                     wCampo(exporta.xLocExporta, TpcnTipoCampo.tcStr, TpcnResources.xLocExporta);
-                    wCampo(exporta.xLocDespacho, TpcnTipoCampo.tcStr, TpcnResources.xLocDespacho);
+                    wCampo(exporta.xLocDespacho, TpcnTipoCampo.tcStr, TpcnResources.xLocDespacho, ObOp.Opcional);
                 }
             }
             else

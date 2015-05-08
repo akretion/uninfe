@@ -1033,7 +1033,6 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            StreamWriter SW = null;
 
             try
             {
@@ -1045,28 +1044,21 @@ namespace NFe.Service
                 string ArqXMLRetorno = pastaGravar + "\\" +
                                        Functions.ExtrairNomeArq(this.NomeXMLDadosMsg, finalArqEnvio) +
                                        finalArqRetorno;
-                SW = File.CreateText(ArqXMLRetorno);
-                SW.Write(conteudoXMLRetorno);
-                SW.Close();
-                SW = null;
+
+                File.WriteAllText(ArqXMLRetorno, conteudoXMLRetorno, Encoding.UTF8);
 
                 //gravar o conteudo no FTP
                 if (Empresas.Configuracoes[emp].FTPIsAlive)
                     this.XmlParaFTP(emp, ArqXMLRetorno);
+
+                //Gravar o XML de retorno também no formato TXT
+                if (Empresas.Configuracoes[emp].GravarRetornoTXTNFe)
+                {
+                    this.TXTRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno);
+                }
             }
             finally
             {
-                if (SW != null)
-                {
-                    SW.Close();
-                    SW = null;
-                }
-            }
-
-            //Gravar o XML de retorno também no formato TXT
-            if (Empresas.Configuracoes[emp].GravarRetornoTXTNFe)
-            {
-                this.TXTRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno);
             }
         }
         #endregion
@@ -2211,6 +2203,8 @@ namespace NFe.Service
                 infEvento.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.Id.ToString(), evento.Id));
                 infEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.cOrgao.ToString(), evento.cOrgao.ToString()));
                 infEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAmb.ToString(), evento.tpAmb.ToString()));
+                if (evento.tpEmis != 0)
+                    infEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpEmis.ToString(), evento.tpEmis.ToString()));
                 if (!string.IsNullOrEmpty(evento.CNPJ))
                     infEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), evento.CNPJ));
                 else

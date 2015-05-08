@@ -27,6 +27,7 @@ namespace NFe.UI.Formularios
         public event EventHandler changeEvent;
         private NFe.Settings.Empresa empresa;
         private X509Certificate2 oMeuCert;
+        public Formularios.userConfiguracao_pastas ucPastas { private get; set; }
 
         public void Populate(NFe.Settings.Empresa empresa)
         {
@@ -37,7 +38,7 @@ namespace NFe.UI.Formularios
             tltBuscarProvider.SetToolTip(btnBuscarProvider, "Pesquisar provider válido automaticamente");
 
             System.Windows.Forms.ToolTip tltValidarProvider = new System.Windows.Forms.ToolTip();
-            tltBuscarProvider.SetToolTip(btnValidarProvider, "Validar provider selecionado");
+            tltValidarProvider.SetToolTip(btnValidarProvider, "Validar provider selecionado");
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 160;
@@ -77,7 +78,6 @@ namespace NFe.UI.Formularios
             }
             else
                 oMeuCert = null;
-
         }
 
         public void ProvidersCertificado()
@@ -97,10 +97,9 @@ namespace NFe.UI.Formularios
                 cboProviders.SelectedItem = empresa.ProviderCertificado;
             else
                 IdentificarProviderValido();
-
         }
 
-        public void Validar()
+        public void Validar(bool salvando = true)
         {
             empresa.CertificadoInstalado = ckbCertificadoInstalado.Checked && ckbTemCertificadoInstalado.Checked;
             empresa.CertificadoArquivo = ckbTemCertificadoInstalado.Checked ? txtArquivoCertificado.Text : "";
@@ -119,7 +118,8 @@ namespace NFe.UI.Formularios
                     empresa.ProviderCertificado = providerInfo.NameKey;
                     empresa.ProviderTypeCertificado = providerInfo.Type;
 
-                    ValidarCertificadoA3(true);
+                    if (salvando)
+                        ValidarCertificadoA3(true);
                 }
                 if (cboProviders.SelectedItem != null)
                 {
@@ -180,45 +180,11 @@ namespace NFe.UI.Formularios
                     this.openFileDialog1.InitialDirectory = "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
                     this.openFileDialog1.FileName = null;
                 }
-
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtArquivoCertificado.Text = this.openFileDialog1.FileName;
                 }
             }
-        }
-
-        private void IdentificarProviderValido()
-        {
-            Wait.Show("Procurando provider válido...");
-            CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
-                                                                                 empresa.PastaXmlEnvio,
-                                                                                 Empresas.FindEmpresaByThread(),
-                                                                                 txtPinCertificado.Text);
-            if (certificadoProviders.Run())
-            {
-                Wait.Close();
-                if (certificadoProviders.ProviderIdentificado)
-                {
-                    DialogResult result = MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                          "Foi identificado um provider para o Certificado: " + certificadoProviders.ProviderValido.NameKey + "\n" +
-                                                          "Deseja defini-lo com provider para este certificado?", "Identificação automatica de Provider",
-                                                          MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        cboProviders.SelectedItem = certificadoProviders.ProviderValido.NameKey;
-                    }
-                }
-                else
-                {
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                          "Não foi identificado um provider para o funcionamento adequado do Certificado selecionado \n" +
-                                                          "Tente reiniciar o Certificado e a Senha do PIN e tente novamente.", "Identificação automatica de Provider",
-                                                          MessageBoxButtons.OK);
-                }
-            }
-            else
-                Wait.Close();
         }
 
         #region DemonstraDadosCertificado()
@@ -376,49 +342,124 @@ namespace NFe.UI.Formularios
 
         private void btnBuscarProvider_Click_1(object sender, EventArgs e)
         {
-            IdentificarProviderValido();
+            try
+            {
+                this.Validar(false);
+                this.empresa.PastaXmlEnvio = this.ucPastas.textBox_PastaXmlEnvio.Text;
+                this.IdentificarProviderValido();
+            }
+            catch (Exception ex)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                      ex.Message,
+                                      "Buscar provider - Resultado:",
+                                      MessageBoxButtons.OK);
+            }
         }
+
+        private const string provError = "Validação do Provider - Resultado:";
 
         private void btnValidarProvider_Click(object sender, EventArgs e)
         {
-            ValidarCertificadoA3(false);
+            try
+            {
+                this.Validar(false);
+                this.empresa.PastaXmlEnvio = this.ucPastas.textBox_PastaXmlEnvio.Text;
+                this.ValidarCertificadoA3(false);
+            }
+            catch (Exception ex)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                      ex.Message,
+                                      provError,
+                                      MessageBoxButtons.OK);
+            }
         }
 
         private void ValidarCertificadoA3(bool salvando)
         {
-            Wait.Show("Validando provider...");
+            if (String.IsNullOrEmpty(empresa.CertificadoPIN))
+                throw new Exception("Informe o PIN do certificado");
 
+            if (cboProviders.SelectedItem.ToString() == "")
+                throw new Exception("Informe o provedor do certificado");
+
+            Wait.Show("Validando provider...");
+            try
+            {
+                CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
+                                                                                     empresa.PastaXmlEnvio,
+                                                                                     Empresas.FindEmpresaByThread(),
+                                                                                     empresa.CertificadoPIN);
+                CertProviders xCertProviders = new CertProviders();
+                xCertProviders.NameKey = cboProviders.SelectedItem.ToString();
+                xCertProviders.Type = certificadoProviders.GetProviderType(xCertProviders.NameKey);
+
+                if (certificadoProviders.TestarProvider(xCertProviders))
+                {
+                    Wait.Close();
+                    if (!salvando)
+                        MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                              "Provider válido, XML assinado com sucesso.",
+                                                              provError,
+                                                              MessageBoxButtons.OK);
+                }
+
+                else
+                {
+                    Wait.Close();
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                          "Provider inválido, não foi possível assinar um XML com este provider.",
+                                          provError,
+                                          MessageBoxButtons.OK);
+
+                    if (salvando)
+                    {
+                        throw new Exception("Não foi possível salvar a configuração.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Wait.Close();
+            }
+        }
+
+        private void IdentificarProviderValido()
+        {
+            Wait.Show("Procurando por um provider válido...");
             CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
                                                                                  empresa.PastaXmlEnvio,
                                                                                  Empresas.FindEmpresaByThread(),
-                                                                                 empresa.CertificadoPIN);
-            CertProviders xCertProviders = new CertProviders();
-            xCertProviders.NameKey = cboProviders.SelectedItem.ToString();
-            xCertProviders.Type = certificadoProviders.GetProviderType(xCertProviders.NameKey);
-
-            if (certificadoProviders.TestarProvider(xCertProviders))
+                                                                                 txtPinCertificado.Text);
+            if (certificadoProviders.Run())
             {
                 Wait.Close();
-                if (!salvando)
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                          "Provider Válido, XML assinado com sucesso.",
-                                                          "Validação do Provider - Resultado:",
-                                                          MessageBoxButtons.OK);
-            }
-
-            else
-            {
-                Wait.Close();
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                      "Provider Inválido, não foi possível assinar um XML com este provider.",
-                                      "Validação do Provider - Resultado:",
-                                      MessageBoxButtons.OK);
-
-                if (salvando)
+                if (certificadoProviders.ProviderIdentificado)
                 {
-                    throw new Exception("Não foi possível salvar a configuração.");
+                    DialogResult result = MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                          "Foi identificado um provider para o Certificado: " + certificadoProviders.ProviderValido.NameKey + "\n" +
+                                                          "Deseja defini-lo com provider para este certificado?", "Identificação automatica de Provider",
+                                                          MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        cboProviders.SelectedItem = certificadoProviders.ProviderValido.NameKey;
+                    }
                 }
-            }            
+                else
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                          "Não foi identificado um provider para o funcionamento adequado do Certificado selecionado \n" +
+                                                          "Tente reiniciar o Certificado e a Senha do PIN e tente novamente.", "Identificação automatica de Provider",
+                                                          MessageBoxButtons.OK);
+                }
+            }
+            else
+                Wait.Close();
         }
     }
 }
