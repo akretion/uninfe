@@ -36,7 +36,7 @@ namespace NFe.Service
             {
                 dadosPedSta = new DadosPedSta();
                 //Ler o XML para pegar parâmetros de envio
-                PedSta(emp, NomeArquivoXML);
+                PedSta(emp, dadosPedSta);//NomeArquivoXML);
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
@@ -89,6 +89,8 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="arquivoXML">Arquivo xml a ser lido</param>
+        /// 
+#if f
         private void PedSta(int emp, string arquivoXML)
         {
             dadosPedSta.tpAmb = 0;
@@ -135,6 +137,7 @@ namespace NFe.Service
                     doc.Save(arquivoXML);
             }
         }
+#endif
         #endregion
     }
 }

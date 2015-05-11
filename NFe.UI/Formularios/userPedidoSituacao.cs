@@ -75,6 +75,8 @@ namespace NFe.UI
         {
             this.Emp = -1;
             this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
+            this.cbServico.Enabled = false;
+
             try
             {
                 if (this.cbEmpresa.SelectedValue != null)
@@ -98,14 +100,20 @@ namespace NFe.UI
 
                         //Posicionar o elemento da combo tipo de servico
                         if (Empresas.Configuracoes[this.Emp].Servico != TipoAplicativo.Todos)
+                        {
                             this.cbServico.SelectedValue = (int)Empresas.Configuracoes[this.Emp].Servico;
+                        }
                         else
+                        {
                             this.cbServico.SelectedValue = (int)TipoAplicativo.Nfe;
+                            this.cbServico.Enabled = true;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
+                this.cbServico.Enabled = false;
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
             }
             finally
@@ -115,7 +123,6 @@ namespace NFe.UI
                     this.cbAmbiente.Enabled =
                     this.cbEmissao.Enabled =
                     this.comboUf.Enabled =
-                    this.cbServico.Enabled =
                     this.cbVersao.Enabled = this.Emp >= 0;
             }
         }
@@ -132,25 +139,25 @@ namespace NFe.UI
                 case TipoAplicativo.Nfe:
                     this.cbVersao.Enabled = true;
                     this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
                     break;
 
                 case TipoAplicativo.NFCe:
                     this.cbVersao.Enabled = true;
                     this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
                     break;
 
                 case TipoAplicativo.Cte:
                     this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico;
                     this.cbVersao.Enabled = false;
-                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
                     break;
 
                 case TipoAplicativo.MDFe:
                     this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico;
                     this.cbVersao.Enabled = false;
-                    this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
                     break;
             }
         }
@@ -206,6 +213,8 @@ namespace NFe.UI
                 int amb = (int)cbAmbiente.SelectedValue;
                 string versao = this.cbVersao.SelectedItem.ToString();
 
+                NFe.UI.Formularios.Wait.Show("Consulta a situação do serviço...");
+
                 string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" +
                     oGerar.StatusServico(servico, (int)tpEmis, cUF, amb, versao);
 
@@ -214,6 +223,7 @@ namespace NFe.UI
             }
             catch (Exception ex)
             {
+                NFe.UI.Formularios.Wait.Close();
                 this.textResultado.Text = ex.Message;
             }
         }
@@ -249,6 +259,8 @@ namespace NFe.UI
             {
                 Functions.DeletarArquivo(ArqERRRetorno);
                 Functions.DeletarArquivo(ArqXMLRetorno);
+
+                NFe.UI.Formularios.Wait.Close();
             }
             return result;
         }

@@ -79,7 +79,7 @@ namespace NFe.Service
                         case Servicos.NFSeInutilizarNFSe:
                             this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInutilizarNfse());
                             break;
-                                
+
                         #endregion
 
                         #region NFe
@@ -743,12 +743,12 @@ namespace NFe.Service
             {
                 int emp = Empresas.FindEmpresaByThread();
 
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaValidado, Path.GetFileName(Path.ChangeExtension(arquivo, ".xml"))));
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(Path.ChangeExtension(arquivo, ".xml"))));
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(arquivo)));
+
                 if (arquivo.EndsWith(".txt", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaValidado, Path.GetFileName(Path.ChangeExtension(arquivo, ".xml"))));
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(Path.ChangeExtension(arquivo, ".xml"))));
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(arquivo)));
-
                     if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvDFe_TXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region DFe
@@ -815,6 +815,16 @@ namespace NFe.Service
                 }
                 else
                 {
+                    if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvCCe_XML, StringComparison.InvariantCultureIgnoreCase) ||
+                        arquivo.EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML, StringComparison.InvariantCultureIgnoreCase) ||
+                        arquivo.EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML, StringComparison.InvariantCultureIgnoreCase) ||
+                        arquivo.EndsWith(Propriedade.ExtEnvio.PedEve, StringComparison.InvariantCultureIgnoreCase) ||
+                        arquivo.EndsWith(Propriedade.ExtEnvio.PedSit_XML, StringComparison.InvariantCultureIgnoreCase) ||
+                        arquivo.EndsWith(Propriedade.ExtEnvio.PedSta_XML, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        DirecionarArquivo(arquivo);
+                    }
+
                     ValidarXML validar = new ValidarXML(arquivo, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
                     validar.ValidarAssinarXML(arquivo);
                 }
@@ -999,7 +1009,7 @@ namespace NFe.Service
                     CertVencido(emp);
                 if (veConexao)
                     IsConnectedToInternet();
-                    
+
                 //Processa ou envia o XML
                 EnviarArquivo(arquivo, taskClass, "Execute");
             }
@@ -1012,20 +1022,16 @@ namespace NFe.Service
             }
         }
 
-        /*
-        private void DirecionarArquivo(string arquivo, object nfe, string metodo)
+        private void DirecionarArquivo(string arquivo)
         {
-            try
-            {
-                //Processa ou envia o XML
-                EnviarArquivo(arquivo, nfe, metodo);
-            }
-            catch
-            {
-                //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
-                //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
-            }
-        }*/
+            //Processa ou envia o XML
+            var valclass = new TaskValidar();
+            //Definir o tipo do serviço
+            Type tipoServico = valclass.GetType();
+            //Definir o arquivo XML para a classe UniNfeClass
+            tipoServico.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.SetProperty, null, valclass, new object[] { arquivo });
+            tipoServico.InvokeMember("Execute", System.Reflection.BindingFlags.InvokeMethod, null, valclass, null);
+        }
         #endregion
 
         #region EnviarArquivo()
@@ -1290,13 +1296,13 @@ namespace NFe.Service
         /// </remarks>
         protected void CertVencido(int emp)
         {
-//#if !DEBUG
+            //#if !DEBUG
             CertificadoDigital CertDig = new CertificadoDigital();
             if (CertDig.Vencido(emp))
             {
                 throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + CertDig.dValidadeInicial.ToString() + " a " + CertDig.dValidadeFinal.ToString() + ")");
             }
-//#endif
+            //#endif
         }
         #endregion
 

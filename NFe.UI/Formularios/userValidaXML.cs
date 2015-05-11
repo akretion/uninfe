@@ -191,6 +191,10 @@ namespace NFe.UI
                 //Remover atributo de somente leitura que pode gerar problemas no acesso do arquivo
                 NFe.Service.TFunctions.RemoveSomenteLeitura(cArquivo);
 
+                NFe.Service.TaskValidar val = new Service.TaskValidar();
+                val.NomeArquivoXML = oArqDestino.FullName;
+                val.Execute();
+
                 //Detectar o tipo do arquivo
                 NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
 

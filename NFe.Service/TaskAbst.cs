@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -123,7 +122,7 @@ namespace NFe.Service
 
             switch (servico)
             {
-                #region NF-e
+        #region NF-e
                 case Servicos.NFeInutilizarNumeros:
                     retorna = "NfeInutilizacao2";
                     break;
@@ -181,7 +180,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region MDF-e
+        #region MDF-e
                 case Servicos.MDFeConsultaStatusServico:
                     retorna = "MDFeStatusServico";
                     break;
@@ -199,7 +198,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region CT-e
+        #region CT-e
                 case Servicos.CTeConsultaStatusServico:
                     retorna = "CteStatusServico";
                     break;
@@ -242,13 +241,13 @@ namespace NFe.Service
 
             switch (Functions.PadraoNFSe(cMunicipio))
             {
-                #region GINFES
+        #region GINFES
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
                 #endregion
 
-                #region THEMA
+        #region THEMA
                 case PadroesNFSe.THEMA:
                     switch (servico)
                     {
@@ -274,7 +273,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region BETHA
+        #region BETHA
                 case PadroesNFSe.BETHA:
                     switch (servico)
                     {
@@ -300,7 +299,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region CANOAS-RS (ABACO)
+        #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
                     switch (servico)
                     {
@@ -326,39 +325,39 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
                 #endregion
 
-                #region ISSNet
+        #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region Blumenau-SC
+        #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
                 #endregion
 
-                #region BHISS
+        #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
                 #endregion
 
-                #region GIF
+        #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
                 #endregion
 
-                #region DUETO
+        #region DUETO
                 case PadroesNFSe.DUETO:
                     switch (servico)
                     {
@@ -384,21 +383,21 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region WEBISS
+        #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
                 #endregion
 
-                #region PAULISTANA
+        #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
                 #endregion
 
-                #region SALVADOR_BA
+        #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
                     switch (servico)
                     {
@@ -424,14 +423,14 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region PORTOVELHENSE
+        #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
                 #endregion
 
-                #region PRONIN
+        #region PRONIN
                 case PadroesNFSe.PRONIN:
                     switch (servico)
                     {
@@ -450,7 +449,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region ISSONLINE4R (4R Sistemas)
+        #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
                     switch (servico)
                     {
@@ -478,14 +477,14 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region DSF
+        #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
                 #endregion
 
-                #region TECNOSISTEMAS
+        #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
                     switch (servico)
                     {
@@ -511,19 +510,19 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region TIPLAN
+        #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region CARIOCA
+        #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
                 #endregion
 
-                #region SMARAPD
+        #region SMARAPD
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
                     {
@@ -549,7 +548,7 @@ namespace NFe.Service
                     break;
                 #endregion
 
-                #region E-GOVERNE
+        #region E-GOVERNE
                 case PadroesNFSe.EGOVERNE:
                     retorna = "WSNFSeV1001";
                     break;
@@ -1706,7 +1705,7 @@ namespace NFe.Service
 
             if (!booValido && gException)
             {
-                cTextoErro =  "O XML está configurado para um tipo de emissão e o UniNFe para outro. " +
+                cTextoErro = "O XML está configurado para um tipo de emissão e o UniNFe para outro. " +
                          "XML: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)) +
                          " (tpEmis = " + tpEmis.ToString() + "). " +
                          "UniNFe: " + NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)) +
@@ -1843,8 +1842,8 @@ namespace NFe.Service
                 if (dadosNFe.dEmi.Month.ToString("00") != dadosNFe.chavenfe.Substring(7 + nPos, 2) ||
                     dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) != dadosNFe.chavenfe.Substring(5 + nPos, 2))
                 {
-                    cTextoErro += "O ano e mês da emissão informada na tag " + dadosNFe.versao=="2.00" ? "<dEmi> " : "<dhEmi> " + "está diferente da informada na chave da NF-e.\r\n" +
-                        "Mês/Ano da data de emissão informada na tag " + dadosNFe.versao=="2.00" ? "<dEmi>: " : "<dhEmi>: " + dadosNFe.dEmi.Month.ToString("00") + "/" + dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
+                    cTextoErro += "O ano e mês da emissão informada na tag " + dadosNFe.versao == "2.00" ? "<dEmi> " : "<dhEmi> " + "está diferente da informada na chave da NF-e.\r\n" +
+                        "Mês/Ano da data de emissão informada na tag " + dadosNFe.versao == "2.00" ? "<dEmi>: " : "<dhEmi>: " + dadosNFe.dEmi.Month.ToString("00") + "/" + dadosNFe.dEmi.Year.ToString("0000").Substring(2, 2) + "\r\n" +
                         "Mês/Ano informados na chave da NF-e: " + dadosNFe.chavenfe.Substring(7 + nPos, 2) + "/" + dadosNFe.chavenfe.Substring(5 + nPos, 2) + "\r\n\r\n";
                     booValido = false;
                 }
@@ -2112,7 +2111,7 @@ namespace NFe.Service
         {
             string cErro = "";
             string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
-            string ctpEmis = dadosEnvEvento.eventos[0].chNFe.Substring(34, 1); 
+            string ctpEmis = dadosEnvEvento.eventos[0].chNFe.Substring(34, 1);
             foreach (Evento item in dadosEnvEvento.eventos)
             {
                 if (!currentEvento.Equals(item.tpEvento))
@@ -2121,7 +2120,7 @@ namespace NFe.Service
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
-                        if (!ctpEmis.Equals(item.chNFe.Substring(34,1)))
+                        if (!ctpEmis.Equals(item.chNFe.Substring(34, 1)))
                             cErro += "Não é possivel mesclar chaves com tipo de emissão dentro de um mesmo xml/txt de eventos.\r\n";
                         break;
                     case ConvertTxt.tpEventos.tpEvEPEC:
@@ -2166,13 +2165,157 @@ namespace NFe.Service
         }
         #endregion
 
-        #region EnvEvento
-        protected virtual void EnvEvento(int emp, string arquivoXML, DadosenvEvento dadosEnvEvento, string chNFe_chCTe_chMDFe)
+        #region PedSta
+        protected virtual void PedSta(int emp, DadosPedSta dadosPedSta)
         {
+            dadosPedSta.tpAmb = 0;
+            dadosPedSta.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosPedSta.tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            dadosPedSta.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
+
+            ///
+            /// danasa 12-9-2009
+            /// 
+            if (Path.GetExtension(this.NomeArquivoXML).ToLower() == ".txt")
+            {
+                // tpEmis|1						<<< opcional >>>
+                // tpAmb|1
+                // cUF|35
+                // versao|3.10
+                List<string> cLinhas = Functions.LerArquivo(this.NomeArquivoXML);
+                Functions.PopulateClasse(dadosPedSta, cLinhas);
+            }
+            else
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(this.NomeArquivoXML);
+
+                bool regravar = false;
+                bool isCteMDFe = false;
+
+                XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServCte");
+                if (consStatServList.Count == 0)
+                {
+                    consStatServList = doc.GetElementsByTagName("consStatServMDFe");
+                    if (consStatServList.Count == 0)
+                        consStatServList = doc.GetElementsByTagName("consStatServ");
+                    else
+                        isCteMDFe = true;
+                }
+                else
+                    isCteMDFe = true;
+
+                foreach (XmlNode consStatServNode in consStatServList)
+                {
+                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
+
+                    dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                    dadosPedSta.versao = consStatServElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
+
+                    if (consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString()).Count != 0)
+                    {
+                        dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0].InnerText);
+
+                        if (isCteMDFe)
+                        {
+                            // para que o validador não rejeite, excluo a tag <cUF>
+                            doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0]);
+                            regravar = true;
+                        }
+                    }
+
+                    if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
+                    {
+                        dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
+
+                        // para que o validador não rejeite, excluo a tag <tpEmis>
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
+                        regravar = true;
+                    }
+
+                    if (consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString()).Count != 0)
+                    {
+                        dadosPedSta.mod = consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0].InnerText;
+                        /// para que o validador não rejeite, excluo a tag <mod>
+                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0]);
+                        regravar = true;
+                    }
+                }
+                // Salvar o arquivo modificado
+                if (regravar)
+                    doc.Save(this.NomeArquivoXML);
+            }
+        }
+        #endregion
+
+        #region PedSit
+        protected virtual void PedSit(int emp, DadosPedSit dadosPedSit)
+        {
+            dadosPedSit.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            dadosPedSit.chNFe = string.Empty;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(this.NomeArquivoXML);
+
+            bool doSave = false;
+
+            XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitCTe");
+            if (consSitNFeList.Count == 0)
+            {
+                consSitNFeList = doc.GetElementsByTagName("consSitMDFe");
+            }
+            foreach (XmlNode consSitNFeNode in consSitNFeList)
+            {
+                XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
+
+                dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+                dadosPedSit.chNFe = Functions.LerTag(consSitNFeElemento, TpcnResources.chCTe.ToString(), "") +
+                                    Functions.LerTag(consSitNFeElemento, TpcnResources.chMDFe.ToString(), "");
+
+                if (consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
+                {
+                    dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
+                    /// para que o validador não rejeite, excluo a tag <tpEmis>
+                    doc.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0]);
+                    /// salvo o arquivo modificado
+                    doSave = true;
+                }
+            }
+            /// salvo o arquivo modificado
+            if (doSave)
+                doc.Save(this.NomeArquivoXML);
+        }
+        #endregion
+
+        #region EnvEvento
+        protected virtual void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)
+        {
+            //<?xml version="1.0" encoding="UTF-8"?>
+            //<envEvento versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+            //  <idLote>000000000015255</idLote>
+            //  <evento versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+            //    <infEvento Id="ID1101103511031029073900013955001000000001105112804108">
+            //      <cOrgao>35</cOrgao>
+            //      <tpAmb>2</tpAmb>
+            //      <CNPJ>10290739000139</CNPJ>
+            //      <chNFe>35110310290739000139550010000000011051128041</chNFe>
+            //      <dhEvento>2011-03-03T08:06:00-03:00</dhEvento>
+            //      <tpEvento>110110</tpEvento>
+            //      <nSeqEvento>8</nSeqEvento>
+            //      <verEvento>1.00</verEvento>
+            //      <detEvento versao="1.00">
+            //          <descEvento>Carta de Correção</descEvento>
+            //          <xCorrecao>Texto de teste para Carta de Correção. Conteúdo do campo xCorrecao.</xCorrecao>
+            //          <xCondUso>A Carta de Correção é disciplinada pelo § 1º-A do art. 7º do Convênio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularização de erro ocorrido na emissão de documento fiscal, desde que o erro não esteja relacionado com: I - as variáveis que determinam o valor do imposto tais como: base de cálculo, alíquota, diferença de preço, quantidade, valor da operação ou da prestação; II - a correção de dados cadastrais que implique mudança do remetente ou do destinatário; III - a data de emissão ou de saída.</xCondUso>
+            //      </detEvento>
+            //    </infEvento>
+            //  </evento>
+            //</envEvento>
+
             bool doSave = false;
 
             XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
+            doc.Load(this.NomeArquivoXML);
 
             XmlNodeList envEventoList = doc.GetElementsByTagName("infEvento");
 
@@ -2180,25 +2323,34 @@ namespace NFe.Service
             {
                 XmlElement envEventoElemento = (XmlElement)envEventoNode;
 
-                dadosEnvEvento.eventos.Add(new Evento(){
+                dadosEnvEvento.eventos.Add(new Evento()
+                {
                     tpEvento = Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpEvento.ToString(), false),
                     tpAmb = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpAmb.ToString(), false)),
                     cOrgao = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.cOrgao.ToString(), false)),
-                    nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.nSeqEvento.ToString(), false)),
-                    chNFe = Functions.LerTag(envEventoElemento, chNFe_chCTe_chMDFe, false)
+                    nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.nSeqEvento.ToString(), false))
                 });
-                dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe.Substring(34, 1));
+                dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe =
+                    Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.chNFe.ToString(), "") +
+                    Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.chMDFe.ToString(), "") +
+                    Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.chCTe.ToString(), "");
+
+                dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis =
+                    Convert.ToInt16(dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe.Substring(34, 1));
 
                 if (envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16("0" + Functions.LerTag(envEventoElemento, NFe.Components.TpcnResources.tpEmis.ToString(), false));
+                    var node = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0];
+
+                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16("0" + node.InnerText);
                     /// para que o validador não rejeite, excluo a tag <tpEmis>
-                    doc.DocumentElement.RemoveChild(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
-                    /// salvo o arquivo modificado
+                    envEventoNode.RemoveChild(node);
                     doSave = true;
                 }
             }
-            if (doSave) doc.Save(arquivoXML);
+            /// salvo o arquivo modificado
+            if (doSave)
+                doc.Save(this.NomeArquivoXML);
         }
         #endregion
     }

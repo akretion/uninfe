@@ -36,18 +36,18 @@ namespace NFe.Service
             {
                 dadosPedSta = new DadosPedSta();
                 //Ler o XML para pegar parâmetros de envio
-                PedSta(emp, NomeArquivoXML);
+                PedSta(emp, dadosPedSta);//NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = 
-                        ConfiguracaoApp.DefinirWS(  Servico, 
-                                                    emp,  
-                                                    dadosPedSta.cUF,  
-                                                    dadosPedSta.tpAmb,  
-                                                    dadosPedSta.tpEmis,  
-                                                    dadosPedSta.versao, 
+                    WebServiceProxy wsProxy =
+                        ConfiguracaoApp.DefinirWS(Servico,
+                                                    emp,
+                                                    dadosPedSta.cUF,
+                                                    dadosPedSta.tpAmb,
+                                                    dadosPedSta.tpEmis,
+                                                    dadosPedSta.versao,
                                                     dadosPedSta.mod);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -114,6 +114,15 @@ namespace NFe.Service
         /// </summary>
         /// <param name="cArquivoXml">Nome do XML a ser lido</param>
         /// <by>Wandrey Mundin Ferreira</by>
+        /// 
+        protected override void PedSta(int emp, DadosPedSta dadosPedSta)
+        {
+            base.PedSta(emp, dadosPedSta);
+
+            if (string.IsNullOrEmpty(dadosPedSta.versao))
+                throw new Exception(NFeStrConstants.versaoError);
+        }
+#if f
         private void PedSta(int emp, string cArquivoXML)
         {
             dadosPedSta.tpAmb = 0;
@@ -183,6 +192,7 @@ namespace NFe.Service
             if (string.IsNullOrEmpty(dadosPedSta.versao))
                 throw new Exception(NFeStrConstants.versaoError);
         }
+#endif
         #endregion
     }
 }

@@ -35,7 +35,7 @@ namespace NFe.Service
             try
             {
                 dadosPedSit = new DadosPedSit();
-                PedSit(emp, NomeArquivoXML);
+                PedSit(emp, dadosPedSit);// NomeArquivoXML);
 
                 if (vXmlNfeDadosMsgEhXML)
                 {
@@ -116,28 +116,31 @@ namespace NFe.Service
         /// </summary>
         /// <param name="cArquivoXML">Nome do XML a ser lido</param>
         /// <by>Wandrey Mundin Ferreira</by>
-        private void PedSit(int emp, string cArquivoXML)
+        /// 
+        protected override void PedSit(int emp, DadosPedSit dadosPedSit)
         {
             dadosPedSit.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             dadosPedSit.chNFe = string.Empty;
             dadosPedSit.tpEmis = Empresas.Configuracoes[emp].tpEmis;
             dadosPedSit.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLPedSit;
 
-            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(this.NomeArquivoXML).ToLower() == ".txt")
             {
                 //      tpAmb|2
                 //      tpEmis|1                <<< opcional >>>
                 //      chNFe|35080600000000000000550000000000010000000000
                 //      versao|3.10
-                List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
-                Functions.PopulateClasse(this.dadosPedSit, cLinhas);
+                List<string> cLinhas = Functions.LerArquivo(this.NomeArquivoXML);
+                Functions.PopulateClasse(dadosPedSit, cLinhas);
                 if (dadosPedSit.versao == "2.00")
                     dadosPedSit.versao = "2.01";
             }
             else
             {
+                bool doSave = false;
+
                 XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
+                doc.Load(this.NomeArquivoXML);
 
                 XmlNodeList consSitNFeList = doc.GetElementsByTagName("consSitNFe");
 
@@ -150,7 +153,6 @@ namespace NFe.Service
                     dadosPedSit.versao = consSitNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
                     dadosPedSit.mod = dadosPedSit.chNFe.Substring(20, 2);
 
-                    bool doSave = false;
                     //Se alguém ainda gerar com a versão 2.00 vou mudar para a "2.01" para facilitar para o usuário do UniNFe
                     if (dadosPedSit.versao == "2.00")
                     {
@@ -166,8 +168,8 @@ namespace NFe.Service
                         /// salvo o arquivo modificado
                         doSave = true;
                     }
-                    if (doSave) doc.Save(cArquivoXML);
                 }
+                if (doSave) doc.Save(this.NomeArquivoXML);
             }
             if (this.dadosPedSit.versao == "")
                 throw new Exception(NFeStrConstants.versaoError);

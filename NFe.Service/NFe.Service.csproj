@@ -123,6 +123,7 @@
     <Compile Include="NFe\TaskConsultaSituacaoNFe.cs" />
     <Compile Include="NFe\TaskRetRecepcao.cs" />
     <Compile Include="TaskDanfe.cs" />
+    <Compile Include="TaskValidar.cs" />
     <Compile Include="TaskWSExiste.cs" />
     <Compile Include="TFunctions.cs" />
   </ItemGroup>

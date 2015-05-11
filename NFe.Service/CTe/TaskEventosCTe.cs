@@ -30,7 +30,7 @@ namespace NFe.Service
             {
                 dadosEnvEvento = new DadosenvEvento();
                 //Ler o XML para pegar parâmetros de envio
-                EnvEvento(emp, NomeArquivoXML, dadosEnvEvento, TpcnResources.chCTe.ToString());
+                EnvEvento(emp, dadosEnvEvento);//, TpcnResources.chCTe.ToString());
 
                 ValidaEvento(emp, dadosEnvEvento);
 

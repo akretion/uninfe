@@ -33,7 +33,7 @@ namespace NFe.Service
             try
             {
                 //Ler o XML para pegar parâmetros de envio
-                EnvEvento(emp, NomeArquivoXML, dadosEnvEvento, NFe.Components.TpcnResources.chNFe.ToString());
+                EnvEvento(emp, dadosEnvEvento);//, NFe.Components.TpcnResources.chNFe.ToString());
 
                 string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui caso haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
@@ -87,10 +87,10 @@ namespace NFe.Service
                         //CCe só existe no ambiente Normal. Wandrey 22/04/2013
                         tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
-                        /*
-                    case Servicos.EventoEPEC:
-                        tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
-                        break;*/
+                    /*
+                case Servicos.EventoEPEC:
+                    tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
+                    break;*/
                 }
 
                 if (vXmlNfeDadosMsgEhXML)
@@ -270,16 +270,16 @@ namespace NFe.Service
 
         #region EnvEvento()
 
-        protected override void EnvEvento(int emp, string arquivoXML, DadosenvEvento dadosEnvEvento, string chNFe_chCTe_chMDFe)
+        protected override void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)//, string chNFe_chCTe_chMDFe)
         {
             novaNomenclatura =
-                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
-                arquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT);
+                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
+                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT);
 
             ///
             /// danasa 6/2011
             /// 
-            if (Path.GetExtension(arquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(this.NomeArquivoXML).ToLower() == ".txt")
             {
                 #region --txt
                 ///<<<<EVENTO DE CARTA DE CORRECAO>>>>
@@ -427,7 +427,7 @@ namespace NFe.Service
                 ///epec.dest.vICMS|1.00
                 ///epec.dest.vST|2.00
 
-                List<string> cLinhas = Functions.LerArquivo(arquivoXML);
+                List<string> cLinhas = Functions.LerArquivo(this.NomeArquivoXML);
 
                 foreach (string cTexto in cLinhas)
                 {
@@ -616,7 +616,7 @@ namespace NFe.Service
                 //  </evento>
                 //</envEvento>
 
-                base.EnvEvento(emp, arquivoXML, dadosEnvEvento, chNFe_chCTe_chMDFe);
+                base.EnvEvento(emp, dadosEnvEvento);//, chNFe_chCTe_chMDFe);
                 /**************
                 bool doSave = false;
 
@@ -705,9 +705,9 @@ namespace NFe.Service
                                             ///
                                             /// Gerar o arquivo XML de distribuição do evento
                                             /// 
-                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento, 
-                                                                    env.ParentNode.OuterXml, 
-                                                                    eleRetorno.OuterXml, 
+                                            oGerarXML.XmlDistEvento(emp, chNFe, nSeqEvento, tpEvento,
+                                                                    env.ParentNode.OuterXml,
+                                                                    eleRetorno.OuterXml,
                                                                     dhRegEvento,
                                                                     true);
 

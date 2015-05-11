@@ -36,7 +36,7 @@ namespace NFe.Service
             {
                 dadosPedSit = new DadosPedSit();
                 //Ler o XML para pegar parâmetros de envio
-                PedSit(emp, NomeArquivoXML);
+                PedSit(emp, dadosPedSit);// NomeArquivoXML);
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis);
@@ -96,7 +96,7 @@ namespace NFe.Service
         /// </summary>
         /// <param name="arquivoXML">Nome do XML a ser lido</param>
         /// <param name="emp">Código da empresa</param>
-        private void PedSit(int emp, string arquivoXML)
+        /*private void PedSit(int emp, string arquivoXML)
         {
             this.dadosPedSit.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             this.dadosPedSit.chNFe = string.Empty;
@@ -122,7 +122,7 @@ namespace NFe.Service
                     doc.Save(arquivoXML);
                 }
             }
-        }
+        }*/
         #endregion
 
         #region LerRetornoSitCTe()
