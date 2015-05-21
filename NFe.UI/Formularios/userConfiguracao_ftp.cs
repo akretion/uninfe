@@ -28,6 +28,7 @@ namespace NFe.UI.Formularios
             uninfeDummy.ClearControls(this, true, false);
 
             edtFTP_Ativo.Checked = empresa.FTPAtivo;
+            edtFTP_Passivo.Checked = empresa.FTPPassivo;
             edtFTP_GravaXMLPastaUnica.Checked = empresa.FTPGravaXMLPastaUnica;
             edtFTP_Password.Text = empresa.FTPSenha;
             edtFTP_PastaDestino.Text = empresa.FTPPastaAutorizados;
@@ -49,6 +50,7 @@ namespace NFe.UI.Formularios
         public void Validar()
         {
             this.empresa.FTPAtivo = this.edtFTP_Ativo.Checked;
+            this.empresa.FTPPassivo = this.edtFTP_Passivo.Checked;
             this.empresa.FTPGravaXMLPastaUnica = this.edtFTP_GravaXMLPastaUnica.Checked;
             this.empresa.FTPSenha = this.edtFTP_Password.Text;
             this.empresa.FTPPastaAutorizados = this.edtFTP_PastaDestino.Text;

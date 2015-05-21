@@ -98,6 +98,7 @@ namespace NFe.Service
                 bool IniciouLote = false;
                 int ContaNfe = 0;
                 List<string> arquivosInseridoLote = new List<string>();
+                int nfesCount = arquivosNFe.Count;
 
                 for (int i = 0; i < arquivosNFe.Count; i++)
                 {
@@ -120,7 +121,7 @@ namespace NFe.Service
                     {
                         numeroLote = ProximoNumeroLote();
 
-                        IniciarLoteNfe(numeroLote, versaoXml);
+                        IniciarLoteNfe(numeroLote, versaoXml, nfesCount);
 
                         IniciouLote = true;
                     }
@@ -242,7 +243,7 @@ namespace NFe.Service
         /// <param name="intNumeroLote">Número do lote que será enviado</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>15/04/2009</date>
-        protected void IniciarLoteNfe(Int32 intNumeroLote, string versaoXml)
+        protected void IniciarLoteNfe(Int32 intNumeroLote, string versaoXml, int nfesCount)
         {
             strXMLLoteNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
@@ -264,8 +265,12 @@ namespace NFe.Service
                         strXMLLoteNfe += "<enviNFe xmlns=\"" + NFeStrConstants.NAME_SPACE_NFE + "\" versao=\"" + "2.00" + "\">";
                     else
                     {
+                        // Só vai poder ser sincrono se o lote for com uma nota,
+                        // Se for mais de uma o SEFAZ so valida a primeira - Renan 20/05/2015
+                        string indsinc = (Empresas.Configuracoes[EmpIndex].IndSinc && nfesCount == 1 ? "1" : "0");
+
                         strXMLLoteNfe += "<enviNFe xmlns=\"" + NFeStrConstants.NAME_SPACE_NFE + "\" versao=\"" + versaoXml + "\">";
-                        indSinc = "<indSinc>" + (Empresas.Configuracoes[EmpIndex].IndSinc ? "1" : "0") + "</indSinc>";
+                        indSinc = "<indSinc>" + indsinc + "</indSinc>";
                     }
                     break;
             }

@@ -43,6 +43,7 @@
             this.metroLabel41 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel40 = new MetroFramework.Controls.MetroLabel();
             this.btnTestarFTP = new MetroFramework.Controls.MetroButton();
+            this.edtFTP_Passivo = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // edtFTP_GravaXMLPastaUnica
@@ -258,11 +259,22 @@
             this.btnTestarFTP.UseSelectable = true;
             this.btnTestarFTP.Click += new System.EventHandler(this.btnTestarFTP_Click);
             // 
+            // edtFTP_Passivo
+            // 
+            this.edtFTP_Passivo.AutoSize = true;
+            this.edtFTP_Passivo.Location = new System.Drawing.Point(86, 148);
+            this.edtFTP_Passivo.Name = "edtFTP_Passivo";
+            this.edtFTP_Passivo.Size = new System.Drawing.Size(102, 15);
+            this.edtFTP_Passivo.TabIndex = 76;
+            this.edtFTP_Passivo.Text = "Modo passivo?";
+            this.edtFTP_Passivo.UseSelectable = true;
+            // 
             // userConfiguracao_ftp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.edtFTP_Passivo);
             this.Controls.Add(this.btnTestarFTP);
             this.Controls.Add(this.metroLabel41);
             this.Controls.Add(this.metroLabel40);
@@ -302,5 +314,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel41;
         private MetroFramework.Controls.MetroLabel metroLabel40;
         private MetroFramework.Controls.MetroButton btnTestarFTP;
+        private MetroFramework.Controls.MetroCheckBox edtFTP_Passivo;
     }
 }

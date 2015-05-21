@@ -16,6 +16,7 @@ using NFe.Components.Conam;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
+using NFe.Components.GovDigital;
 
 namespace NFe.Service.NFSe
 {
@@ -168,6 +169,20 @@ namespace NFe.Service.NFSe
                         el.ConsultarNfse(NomeArquivoXML);
                         break;
                         #endregion 
+
+                    case PadroesNFSe.GOVDIGITAL:
+                        GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                        AssinaturaDigital adgovdig = new AssinaturaDigital();
+                        adgovdig.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
+
+                        govdig.ConsultarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.EQUIPLANO:
+                        cabecMsg = "1";
+                        break;
+
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

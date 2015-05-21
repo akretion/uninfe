@@ -17,6 +17,9 @@ namespace NFe.Components.Fiorilli
         int CodigoMun = 0;
         string Usuario = "";
         string SenhaWs = "";
+        string ProxyUser = "";
+        string ProxyPass = "";
+        string ProxyServer = "";
         EmiteNFSeBase fiorilliService;
         protected EmiteNFSeBase FiorilliService
         {
@@ -28,11 +31,11 @@ namespace NFe.Components.Fiorilli
                         switch (CodigoMun)
                         {
                             case 3553807: //Taquarituba-SP <-Ambiente da Fiorilli para testes
-                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             case 3512902: //Cosmorama-SP <-Ambiente da Fiorilli para testes
-                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:
@@ -59,12 +62,15 @@ namespace NFe.Components.Fiorilli
         #endregion
 
         #region Construtores
-        public FiorilliBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs)
+        public FiorilliBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
             CodigoMun = codMun;
             Usuario = usuario;
             SenhaWs = senhaWs;
+            ProxyUser = proxyuser;
+            ProxyPass = proxypass;
+            ProxyServer = proxyserver;
         }
         #endregion
 

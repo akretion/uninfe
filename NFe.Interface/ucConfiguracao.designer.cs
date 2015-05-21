@@ -141,6 +141,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.edtFTP_Passivo = new System.Windows.Forms.CheckBox();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTempoConsulta)).BeginInit();
@@ -1211,6 +1212,7 @@
             // 
             // tabPageFTP
             // 
+            this.tabPageFTP.Controls.Add(this.edtFTP_Passivo);
             this.tabPageFTP.Controls.Add(this.btnFTPTestar);
             this.tabPageFTP.Controls.Add(this.label26);
             this.tabPageFTP.Controls.Add(this.edtFTP_PastaRetornos);
@@ -1392,6 +1394,18 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // edtFTP_Passivo
+            // 
+            this.edtFTP_Passivo.AutoSize = true;
+            this.edtFTP_Passivo.Checked = true;
+            this.edtFTP_Passivo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.edtFTP_Passivo.Location = new System.Drawing.Point(95, 151);
+            this.edtFTP_Passivo.Name = "edtFTP_Passivo";
+            this.edtFTP_Passivo.Size = new System.Drawing.Size(92, 17);
+            this.edtFTP_Passivo.TabIndex = 26;
+            this.edtFTP_Passivo.Text = "Movo passivo";
+            this.edtFTP_Passivo.UseVisualStyleBackColor = true;
+            // 
             // ucConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1532,5 +1546,6 @@
         private System.Windows.Forms.CheckBox chkAddEmailDANFE;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox edtEmailDANFE;
+        private System.Windows.Forms.CheckBox edtFTP_Passivo;
     }
 }

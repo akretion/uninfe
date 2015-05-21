@@ -352,6 +352,7 @@ namespace NFe.Settings
         public string FTPSenha { get; set; }
         public Int32 FTPPorta { get; set; }
         public bool FTPAtivo { get; set; }
+        public bool FTPPassivo { get; set; }
         public bool FTPGravaXMLPastaUnica { get; set; }
         public bool FTPIsAlive
         {
@@ -433,6 +434,8 @@ namespace NFe.Settings
 
                     if (!temp.Contains("<UsaCertificado>"))
                         t.UsaCertificado = true;
+                    if (!temp.Contains("<FTPPassivo>"))
+                        t.FTPPassivo = false;
 
                     if (t.UsaCertificado)
                     {
@@ -935,6 +938,7 @@ namespace NFe.Settings
                             ftp.makeDir(folderName);
                         //volta para a pasta corrente já que na "makeDir" a pasta se torna ativa na ultima pasta criada
                         ftp.ChangeDir(vCorrente);
+                        ftp.PassiveMode = this.FTPPassivo;
                         //transfere o arquivo da pasta temp
                         ftp.OpenUpload(arqDestino, folderName + "/" + Path.GetFileName(fileName), false);
                         while (ftp.DoUpload() > 0)

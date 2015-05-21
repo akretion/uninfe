@@ -284,5 +284,25 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/div")]
+        public string NFe_Components_br_com_govdigital_ws_NfseServiceImplDivService {
+            get {
+                return ((string)(this["NFe_Components_br_com_govdigital_ws_NfseServiceImplDivService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/div")]
+        public string NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService {
+            get {
+                return ((string)(this["NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService"]));
+            }
+        }
     }
 }

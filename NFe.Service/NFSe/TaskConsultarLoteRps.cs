@@ -15,6 +15,7 @@ using NFe.Components.SimplISS;
 using NFe.Components.Conam;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
+using NFe.Components.GovDigital;
 
 namespace NFe.Service.NFSe
 {
@@ -97,7 +98,11 @@ namespace NFe.Service.NFSe
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         ler.oDadosPedSitNfseRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
 
                         fiorilli.ConsultarLoteRps(NomeArquivoXML);
                         break;
@@ -143,7 +148,7 @@ namespace NFe.Service.NFSe
                         #endregion
 
                     case PadroesNFSe.EL:
-                    #region E&L
+                        #region E&L
                         EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         ler.oDadosPedSitNfseRps.cMunicipio,
@@ -152,11 +157,23 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-                        
-                       el.ConsultarLoteRps(NomeArquivoXML);
-                       break;
-                    #endregion
 
+                        el.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+                        #endregion
+
+                    case PadroesNFSe.GOVDIGITAL:
+                        GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                        AssinaturaDigital adgovdig = new AssinaturaDigital();
+                        adgovdig.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
+                        govdig.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.EQUIPLANO:
+                        cabecMsg = "1";
+                        break;
                 }
 
                 if (base.IsUtilizaCompilacaoWs(padraoNFSe))

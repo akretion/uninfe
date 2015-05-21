@@ -18,10 +18,8 @@ namespace NFe.Service
         private FluxoNfe fluxo = null;
         private const int _Minutos = 12;  //12 minutos para atender o consumo indevido da SEFAZ
 
-        public void Analisar()
+        public void Analisar(int emp)
         {
-            int emp = Empresas.FindEmpresaByThread();
-
             this.oAux = new Auxiliar();
 
             try
@@ -162,10 +160,6 @@ namespace NFe.Service
                 {
                     //Se deu erro na hora de gravar o erro para o ERP, infelizmente não posso fazer mais nada. Wandrey 28/04/2011
                 }
-            }
-            finally
-            {
-                Thread.CurrentThread.Abort();
             }
         }
     }

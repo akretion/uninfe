@@ -335,6 +335,7 @@ namespace NFe.Interface
                 udTempoConsulta.Value = (oEmpresa.TempoConsulta >= udTempoConsulta.Minimum && oEmpresa.TempoConsulta <= udTempoConsulta.Maximum ? oEmpresa.TempoConsulta : udTempoConsulta.Minimum);
 
                 edtFTP_Ativo.Checked = oEmpresa.FTPAtivo;
+                edtFTP_Passivo.Checked = oEmpresa.FTPPassivo;
                 edtFTP_GravaXMLPastaUnica.Checked = oEmpresa.FTPGravaXMLPastaUnica;
                 edtFTP_Password.Text = oEmpresa.FTPSenha;
                 edtFTP_PastaDestino.Text = oEmpresa.FTPPastaAutorizados;
@@ -499,6 +500,7 @@ namespace NFe.Interface
             oEmpresa.IndSinc = cbIndSinc.Checked;
 
             oEmpresa.FTPAtivo = this.edtFTP_Ativo.Checked;
+            oEmpresa.FTPPassivo = this.edtFTP_Passivo.Checked;
             oEmpresa.FTPGravaXMLPastaUnica = this.edtFTP_GravaXMLPastaUnica.Checked;
             oEmpresa.FTPSenha = this.edtFTP_Password.Text;
             oEmpresa.FTPPastaAutorizados = this.edtFTP_PastaDestino.Text;

@@ -550,10 +550,23 @@ namespace NFe.Components
         /// Prefeitura de Simões Filho - BA
         /// </summary>
         [Description("E&L")]
-        EL
+        EL,
+        /// <summary>
+        /// Padrao GOV-Digital
+        /// Prefeitura de Divinopolis-MG
+        /// </summary>
+        [Description("Gov-Digital")]
+        GOVDIGITAL,
+        /// <summary>
+        /// Padrão Equiplano
+        /// Prefeitura de Toledo - PR
+        /// </summary>
+        [Description("Equiplano")]
+        EQUIPLANO
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
+        
 
     }
     #endregion

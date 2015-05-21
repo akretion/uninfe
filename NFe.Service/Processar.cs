@@ -899,12 +899,8 @@ namespace NFe.Service
                     if (Empresas.Configuracoes[i].Servico == TipoAplicativo.Nfse)
                         continue;
 
-                    BackgroundWorker worker = new BackgroundWorker();
-
-                    worker.WorkerSupportsCancellation = true;
-                    worker.RunWorkerCompleted += ((sender, e) => ((BackgroundWorker)sender).Dispose());
-                    worker.DoWork += new DoWorkEventHandler(ExecutarEmProcessamento);
-                    worker.RunWorkerAsync(i);
+                    NFeEmProcessamento nfe = new NFeEmProcessamento();
+                    nfe.Analisar(i);
 
                     hasAll = true;
                 }
@@ -913,13 +909,6 @@ namespace NFe.Service
                 else
                     break;
             }
-        }
-
-        public void ExecutarEmProcessamento(object sender, DoWorkEventArgs e)
-        {
-            Thread.CurrentThread.Name = e.Argument.ToString();
-            NFeEmProcessamento nfe = new NFeEmProcessamento();
-            nfe.Analisar();
         }
         #endregion
 

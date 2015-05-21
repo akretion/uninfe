@@ -1455,6 +1455,39 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region EQUIPLANO
+                case PadroesNFSe.EQUIPLANO:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "esRecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "esCancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "esConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "esConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "esConsultarNfse";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "esConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -1995,6 +2028,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.GOVDIGITAL:
                 case PadroesNFSe.EL:
                 case PadroesNFSe.EGOVERNE:
                 case PadroesNFSe.IPM:

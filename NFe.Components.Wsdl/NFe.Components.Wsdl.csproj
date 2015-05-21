@@ -2335,6 +2335,118 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HDivinopolisMG-GOVDigital.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GOVDIGITAL\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GOVDIGITAL\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PDivinopolisMG-GOVDigital.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeStatusServico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNFeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVRS\PSVRSNfeStatusServico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSnfeinutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNfeStatusServico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNFeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSnfeinutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNFeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\RS\PRSNfeStatusServico2_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esCancelarNfseEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esCancelarNfseResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarLoteRpsEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarLoteRpsResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarNfseEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarNfsePorRpsEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarNfsePorRpsResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarNfseResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarSituacaoLoteRpsEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esConsultarSituacaoLoteRpsResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esRecepcionarLoteRpsEnvio_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\esRecepcionarLoteRpsResposta_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\TiposEsnfs_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EQUIPLANO\xmldsig-core-schema_v01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PToledoPR-EQUIPLANO.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaGasparSCCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaGasparSCConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaGasparSCRemessa.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaGasparSCCancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaGasparSCConsulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaGasparSCRemessa.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HArcosMG-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PArcosMG-WebISS.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

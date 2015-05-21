@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
 using NFe.Components.br.net.taquarituba.fiorilli.h;
+using System.Net;
 
 namespace NFe.Components.Fiorilli.TaquaraSP.h
 {
@@ -20,11 +21,22 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
         string SenhaWs = "";
 
         #region construtores
-        public FiorilliH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs)
+        public FiorilliH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
+            System.Net.ServicePointManager.Expect100Continue = false;
             UsuarioWs = usuario;
             SenhaWs = senhaWs;
+
+            if (!String.IsNullOrEmpty(proxyuser))
+            {
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(proxyuser, proxypass, proxyserver);
+                System.Net.WebRequest.DefaultWebProxy.Credentials = credentials;
+
+                service.Proxy = WebRequest.DefaultWebProxy;
+                service.Proxy.Credentials = new NetworkCredential(proxyuser, proxypass);
+                service.Credentials = new NetworkCredential(proxyuser, proxypass);
+            }
         }
         #endregion
 

@@ -133,6 +133,10 @@ namespace NFe.Service.NFSe
 
                         break;
                         #endregion
+
+                    case PadroesNFSe.EQUIPLANO:
+                        cabecMsg = "1";
+                        break;
                 }
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {

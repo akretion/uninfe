@@ -35,6 +35,7 @@ namespace NFe.Components.SimplISS.PiracicabaSP.h
             
             dadosConexao.P1 = usuario;
             dadosConexao.P2 = senhaWs;
+            
         }
         #endregion
 

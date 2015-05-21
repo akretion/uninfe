@@ -23,6 +23,8 @@ namespace NFe.Components.Fiorilli.TaquaraSP.p
         public FiorilliP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs)
             : base(tpAmb, pastaRetorno)
         {
+            System.Net.ServicePointManager.Expect100Continue = false;
+
             UsuarioWs = usuario;
             SenhaWs = senhaWs;
         }

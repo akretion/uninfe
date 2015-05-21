@@ -140,31 +140,17 @@ namespace NFe.Settings
                     {
                         string fileoutput = null;
 
+#if DEBUG
+                        System.IO.File.WriteAllLines(System.IO.Path.GetTempPath() + "uninfe_wsdls.txt", x);
+#endif
+
                         var afiles = (from d in x
                                       where d.StartsWith("NFe.Components.Wsdl.NF")
                                       select d);
 
                         foreach (string s in afiles)
                         {
-                            fileoutput = null;
                             fileoutput = s.Replace("NFe.Components.Wsdl.", NFe.Components.Propriedade.PastaExecutavel + "\\");
-                            /*
-                            if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-                            {
-                                fileoutput = s.Replace("NFe.Components.Wsdl.", NFe.Components.Propriedade.PastaExecutavel + "\\");
-                            }
-                            else
-                            {
-                                switch (NFe.Components.Propriedade.TipoAplicativo)
-                                {
-                                    case TipoAplicativo.Nfe:
-                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFe.", NFe.Components.Propriedade.PastaExecutavel + "\\NFe\\");
-                                        break;
-                                    case TipoAplicativo.Nfse:
-                                        fileoutput = s.Replace("NFe.Components.Wsdl.NFse.", NFe.Components.Propriedade.PastaExecutavel + "\\NFse\\");
-                                        break;
-                                }
-                            }*/
                             if (fileoutput == null)
                                 continue;
 
@@ -728,8 +714,6 @@ namespace NFe.Settings
             WebServiceProxy wsProxy = null;
             string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "") + (!string.IsNullOrEmpty(mod) ? " " + mod : "");
 
-            while (true)
-            {
                 lock (Smf.WebProxy)
                 {
                     if (Empresas.Configuracoes[emp].WSProxy.ContainsKey(key))
@@ -738,6 +722,8 @@ namespace NFe.Settings
                     }
                     else
                     {
+                    Thread.Sleep(1000); //1 segundo
+
                         //Definir se é uma configurações específica para NFC-e
                         bool ehNFCe = (mod == "65");
 
@@ -754,8 +740,6 @@ namespace NFe.Settings
                         Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
                     }
 
-                    break;
-                }
             }
 
             return wsProxy;
@@ -988,6 +972,12 @@ namespace NFe.Settings
                 string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_C" + Path.GetExtension(WSDL));
                 if (File.Exists(temp))
                     WSDL = temp;
+                else
+                {
+                    temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_C" + CodigoUF.ToString() + Path.GetExtension(WSDL));
+                    if (File.Exists(temp))
+                        WSDL = temp;
+                }
             }
 
             ///

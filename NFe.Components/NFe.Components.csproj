@@ -84,6 +84,8 @@
     <Compile Include="EGoverne\EGoverneBase.cs" />
     <Compile Include="EGoverne\CuritibaPR\h\EGoverneH.cs" />
     <Compile Include="EGoverne\CuritibaPR\p\EGoverneP.cs" />
+    <Compile Include="GovDigital\GovDigital.cs" />
+    <Compile Include="GovDigital\GovDigitalBase.cs" />
     <Compile Include="IPM\IPM.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_Informatica.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_InformaticaBase.cs" />
@@ -154,6 +156,16 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.etransparencia.nfehomologacao.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.govdigital.homolog1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.govdigital.ws\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -378,6 +390,22 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.etransparencia.nfehomologacao.h\ws_nfe.wsdl" />
+    <None Include="Web References\br.com.govdigital.homolog1\div.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.govdigital.homolog1\NfseServiceImplDivService.wsdl" />
+    <None Include="Web References\br.com.govdigital.homolog1\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.govdigital.ws\div.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.govdigital.ws\NfseServiceImplDivService.wsdl" />
+    <None Include="Web References\br.com.govdigital.ws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\br.com.rlz.ceiss.santafedosul.p\Nota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -1008,6 +1036,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.govdigital.com.br/ws/div%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.govdigital.homolog1\</RelPath>
+      <UpdateFromURL>https://homolog.govdigital.com.br/ws/div%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://iss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.gov.pr.londrina.iss.p\</RelPath>
@@ -1084,6 +1123,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_tremembe_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://ws.govdigital.com.br/ws/div%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.govdigital.ws\</RelPath>
+      <UpdateFromURL>https://ws.govdigital.com.br/ws/div%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_govdigital_ws_NfseServiceImplDivService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -84,8 +84,14 @@
  <message name='Servicos_licencaTLS'>
   <part name='xml' type='xsd:string'></part>
  </message>
+ <message name='Servicos_obterNotasEmPDF'>
+  <part name='xml' type='xsd:string'></part>
+ </message>
  <message name='Servicos_enviarLoteDms'>
   <part name='xml' type='xsd:string'></part>
+ </message>
+ <message name='Servicos_obterNotasEmPDFResponse'>
+  <part name='return' type='xsd:string'></part>
  </message>
  <message name='Servicos_obterCriticaLoteResponse'>
   <part name='return' type='xsd:string'></part>
@@ -170,6 +176,10 @@
   <operation name='obterNotaFiscalXml' parameterOrder='xml'>
    <input message='tns:Servicos_obterNotaFiscalXml'></input>
    <output message='tns:Servicos_obterNotaFiscalXmlResponse'></output>
+  </operation>
+  <operation name='obterNotasEmPDF' parameterOrder='xml'>
+   <input message='tns:Servicos_obterNotasEmPDF'></input>
+   <output message='tns:Servicos_obterNotasEmPDFResponse'></output>
   </operation>
   <operation name='obterNotasEmPNG' parameterOrder='xml'>
    <input message='tns:Servicos_obterNotasEmPNG'></input>
@@ -320,6 +330,15 @@
     <soap:body namespace='http://ws.pc.gif.com.br/' use='literal'/>
    </output>
   </operation>
+  <operation name='obterNotasEmPDF'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body namespace='http://ws.pc.gif.com.br/' use='literal'/>
+   </input>
+   <output>
+    <soap:body namespace='http://ws.pc.gif.com.br/' use='literal'/>
+   </output>
+  </operation>
   <operation name='obterNotasEmPNG'>
    <soap:operation soapAction=''/>
    <input>
@@ -368,7 +387,7 @@
  </binding>
  <service name='ServicosService'>
   <port binding='tns:ServicosBinding' name='ServicosPort'>
-   <soap:address location='http://homol.farroupilha.infisc.com.br:9090/portal/Servicos'/>
+   <soap:address location='http://homol.farroupilha.infisc.com.br/portal/Servicos'/>
   </port>
  </service>
 </definitions>
