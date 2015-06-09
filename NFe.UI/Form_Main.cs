@@ -26,7 +26,7 @@ namespace NFe.UI
     {
         private bool first = false;
         private bool servicoInstaladoErodando = false;
-        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
+        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfse ? 1 : 0];
         private menu _menu;
         private bool _maximized;
         private bool _formloaded = false;
@@ -124,14 +124,8 @@ namespace NFe.UI
                 this.cmManual.Text = "Manual do " + NFe.Components.Propriedade.NomeAplicacao;
                 this.cmManual.Enabled = File.Exists(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, NFe.Components.Propriedade.NomeAplicacao + ".pdf"));
 
-                string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
-                string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
-                string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
                 string msg = "";
-
-                error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-                msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-
+                NFe.Components.Propriedade.VerificaArquivos(out error, out msg);
                 if (error)
                 {
                     MetroFramework.MetroMessageBox.Show(this, msg, "", MessageBoxButtons.OK, MessageBoxIcon.Error);

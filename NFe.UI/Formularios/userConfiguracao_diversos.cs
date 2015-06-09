@@ -63,7 +63,7 @@ namespace NFe.UI.Formularios
                 #endregion
 
                 #region Montar Array DropList do Tipo de Emissão da NF-e
-                if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                if (Propriedade.TipoAplicativo == TipoAplicativo.Todos)//.Nfe)
                 {
                     comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 }
@@ -136,7 +136,7 @@ namespace NFe.UI.Formularios
                 this.edtNome.Text = empresa.Nome;
 
                 if (!string.IsNullOrEmpty(empresa.CNPJ))
-                    this.edtCNPJ.Text = uninfeDummy.FmtCgcCpf(this.edtCNPJ.Text, true);
+                    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, true);
 
                 comboBox_tpEmis.SelectedValue = this.empresa.tpEmis;
                 comboBox_Ambiente.SelectedValue = this.empresa.AmbienteCodigo;

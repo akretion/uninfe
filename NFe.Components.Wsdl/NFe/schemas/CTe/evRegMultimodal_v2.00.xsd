@@ -14,8 +14,7 @@
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
 							<xs:whiteSpace value="preserve"/>
-							<xs:enumeration value="Ocorrências de Trânsito"/>
-							<xs:enumeration value="Ocorrencias de Transito"/>
+							<xs:enumeration value="Registro Multimodal"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
@@ -39,9 +38,9 @@
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
 							<xs:minLength value="1"/>
-							<xs:maxLength value="43"/>
+							<xs:maxLength value="44"/>
 							<xs:whiteSpace value="preserve"/>
-							<xs:pattern value="[0-9]{1,43}"/>
+							<xs:pattern value="[0-9]{1,44}"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>

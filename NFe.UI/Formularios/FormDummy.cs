@@ -108,7 +108,8 @@ namespace NFe.UI
 
             switch (NFe.Components.Propriedade.TipoAplicativo)
             {
-                case NFe.Components.TipoAplicativo.Nfe:
+                //case NFe.Components.TipoAplicativo.Nfe:
+                default:
                     this.Icon = NFe.UI.Properties.Resources.uninfe_icon;
                     break;
 

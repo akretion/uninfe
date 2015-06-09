@@ -61,18 +61,15 @@ namespace UniNFeServico
 
         private void iniciarServicosUniNFe()
         {
-            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoAplicativo = TipoAplicativo.Todos;
             ConfiguracaoApp.StartVersoes();
 
             string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
             string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
             string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
             string msg = "";
-
             bool error = false;
-            error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-            msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-
+            NFe.Components.Propriedade.VerificaArquivos(out error, out msg);
             if (error)
             {
                 this.WriteLog(msg);

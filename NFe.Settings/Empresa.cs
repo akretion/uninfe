@@ -577,7 +577,7 @@ namespace NFe.Settings
         /// </remarks>
         public void CriarSubPastaEnviado()
         {
-            if (this.Servico != TipoAplicativo.Nfse)//Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
+            if (this.Servico != TipoAplicativo.Nfse)
             {
                 if (!string.IsNullOrEmpty(this.PastaXmlEnviado))
                 {
@@ -625,11 +625,13 @@ namespace NFe.Settings
 
             if (this.Servico != TipoAplicativo.Nfse)
             {
-                //Criar subpasta Assinado na pasta de envio individual de nfe
-                if (!Directory.Exists(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado))
-                {
-                    System.IO.Directory.CreateDirectory(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado);
-                }
+                if (!string.IsNullOrEmpty(PastaXmlEnvio))
+                    //Criar subpasta Assinado na pasta de envio individual de nfe
+                    if (!Directory.Exists(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado))
+                    {
+                        System.IO.Directory.CreateDirectory(PastaXmlEnvio + Propriedade.NomePastaXMLAssinado);
+                    }
+
                 //Criar pasta de Envio em Lote
                 if (!string.IsNullOrEmpty(PastaXmlEmLote))
                 {
@@ -825,7 +827,7 @@ namespace NFe.Settings
 
             empresa.AmbienteCodigo = (int)NFe.Components.TipoAmbiente.taHomologacao; //2
             empresa.tpEmis = (int)NFe.Components.TipoEmissao.teNormal; //1
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
                 empresa.UnidadeFederativaCodigo = 41;
 
             empresa.GravarRetornoTXTNFe =
@@ -892,7 +894,7 @@ namespace NFe.Settings
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
 
                 dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
-                
+
                 ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
                 objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);
 

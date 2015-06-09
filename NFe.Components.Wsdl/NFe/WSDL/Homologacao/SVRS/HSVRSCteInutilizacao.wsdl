@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CteInutilizacao">
     <wsdl:port name="CteInutilizacaoSoap12" binding="tns:CteInutilizacaoSoap12">
-      <soap12:address location="https://homologacao.cte.sefaz.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx" />
+      <soap12:address location="https://cte-homologacao.svrs.rs.gov.br/ws/cteinutilizacao/cteinutilizacao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

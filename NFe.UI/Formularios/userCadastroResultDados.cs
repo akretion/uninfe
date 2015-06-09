@@ -23,12 +23,12 @@ namespace NFe.UI
             if (!string.IsNullOrEmpty(infCad.CNPJ))
             {
                 this.label1.Text = NFe.Components.TpcnResources.CNPJ.ToString();
-                this.txtCNPJ_CPF.Text = uninfeDummy.FmtCgcCpf(infCad.CNPJ, true);
+                this.txtCNPJ_CPF.Text = uninfeDummy.FmtCnpjCpf(infCad.CNPJ, true);
             }
             else
             {
                 this.label1.Text = "CPF";
-                this.txtCNPJ_CPF.Text = uninfeDummy.FmtCgcCpf(infCad.CPF, false);
+                this.txtCNPJ_CPF.Text = uninfeDummy.FmtCnpjCpf(infCad.CPF, false);
             }
             this.txtxIE.Text = infCad.IE;
             this.txtxNome.Text = infCad.xNome;

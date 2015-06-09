@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CteStatusServico">
     <wsdl:port name="CteStatusServicoSoap12" binding="tns:CteStatusServicoSoap12">
-      <soap12:address location="https://homologacao.cte.sefaz.rs.gov.br/ws/ctestatusservico/ctestatusservico.asmx" />
+      <soap12:address location="https://cte-homologacao.svrs.rs.gov.br/ws/ctestatusservico/CteStatusServico.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

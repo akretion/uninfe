@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CteConsulta">
     <wsdl:port name="CteConsultaSoap12" binding="tns:CteConsultaSoap12">
-      <soap12:address location="https://cte.sefaz.rs.gov.br/ws/cteconsulta/cteconsulta.asmx" />
+      <soap12:address location="https://cte.svrs.rs.gov.br/ws/cteconsulta/CteConsulta.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

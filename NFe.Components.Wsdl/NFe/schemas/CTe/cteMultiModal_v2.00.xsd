@@ -15,7 +15,9 @@
 					</xs:annotation>
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:pattern value=""/>
+							<xs:minLength value="1"/>
+							<xs:maxLength value="20"/>
+							<xs:pattern value="[!-ÿ]{1}[ -ÿ]{0,}[!-ÿ]{1}|[!-ÿ]{1}"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>

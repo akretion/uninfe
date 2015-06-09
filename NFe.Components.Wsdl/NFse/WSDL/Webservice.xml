@@ -2763,22 +2763,22 @@
   </Estado>
   <Estado ID="4127700" Nome="Toledo - PR" UF="PR" Padrao="EQUIPLANO">
     <LocalHomologacao>
-      <RecepcionarLoteRps>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</ConsultarLoteRps>
+      <RecepcionarLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>wsdl\homologacao\HToledoPR-EQUIPLANO.wsdl</CancelarNfse>
+      <CancelarNfse>wsdl\homologacao\HEQUIPLANOO.wsdl</CancelarNfse>
     </LocalHomologacao>
     <LocalProducao>
-      <RecepcionarLoteRps>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</RecepcionarLoteRps>
-      <ConsultarSituacaoLoteRps>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</ConsultarNfsePorRps>
-      <ConsultarNfse>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</ConsultarNfse>
-      <ConsultarLoteRps>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</ConsultarLoteRps>
+      <RecepcionarLoteRps>wsdl\producao\PEQUIPLANO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PEQUIPLANO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>wsdl\producao\PToledoPR-EQUIPLANO.wsdl</CancelarNfse>
+      <CancelarNfse>wsdl\producao\PEQUIPLANO.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <Estado ID="4205902" Nome="Gaspar - SC" UF="SC" Padrao="THEMA">
@@ -2825,4 +2825,64 @@
       <InutilizarNFSe></InutilizarNFSe>
     </LocalProducao>
   </Estado>
+  <Estado ID="4109708" Nome="Ibaiti - PR" UF="PR" Padrao="EQUIPLANO">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HEQUIPLANO.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PEQUIPLANO.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PEQUIPLANO.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PEQUIPLANO.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PEQUIPLANO.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="5211503" Nome="Itumbiara - GO" UF="GO" Padrao="PRODATA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps></RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps></ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps></ConsultarNfsePorRps>
+      <ConsultarNfse></ConsultarNfse>
+      <ConsultarLoteRps></ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse></CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PItumbiaraGO-Prodata.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PItumbiaraGO-Prodata.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PItumbiaraGO-Prodata.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PItumbiaraGO-Prodata.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PItumbiaraGO-Prodata.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PItumbiaraGO-Prodata.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
+  <Estado ID="4314100" Nome="Passo Fundo - RS" UF="RS" Padrao="THEMA">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HPassoFundoRS-remessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\homologacao\HPassoFundoRS-consulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HPassoFundoRS-consulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\homologacao\HPassoFundoRS-consulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\homologacao\HPassoFundoRS-consulta.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HPassoFundoRS-cancelamento.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\producao\PPassoFundoRS-remessa.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>wsdl\producao\PPassoFundoRS-consulta.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\producao\PPassoFundoRS-consulta.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>wsdl\producao\PPassoFundoRS-consulta.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>wsdl\producao\PPassoFundoRS-consulta.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\producao\PPassoFundoRS-cancelamento.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>  
 </Webservice>

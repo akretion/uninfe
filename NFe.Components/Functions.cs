@@ -731,6 +731,8 @@ namespace NFe.Components
         #region WriteLog()
         public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog, string CNPJEmpresa)
         {
+            if (string.IsNullOrEmpty(msg)) return;
+
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif

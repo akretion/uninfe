@@ -24,7 +24,7 @@ namespace uninfe
     {
         private bool restartServico = false;
         private bool servicoInstaladoErodando = false;
-        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfe ? 0 : 1];
+        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfse ? 1 : 0];
 
         #region MainForm()
         public MainForm()
@@ -85,19 +85,14 @@ namespace uninfe
             this.MinimumSize = new Size(750, 600);
 
             #region Definir valores propriedades de configuração
-            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoAplicativo = TipoAplicativo.Todos;//.Nfe;
             //ConfiguracaoApp.AtualizaWSDL = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService); //danasa: 12/2013
             ConfiguracaoApp.StartVersoes();
             #endregion
 
-            string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
-            string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;
-            string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
             string msg = "";
             bool error = false;
-            error = !System.IO.File.Exists(filenameWS1) || !System.IO.File.Exists(filenameWS2) || !System.IO.File.Exists(filenameWS3);
-            msg = "Arquivos '" + filenameWS1 + "', '" + filenameWS2 + "' e '" + filenameWS3 + "' não encontrados";
-
+            NFe.Components.Propriedade.VerificaArquivos(out error, out msg);
             if (error)
             {
                 MessageBox.Show(msg);

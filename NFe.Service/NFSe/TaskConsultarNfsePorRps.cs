@@ -152,6 +152,10 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
                         break;
+
+                    case PadroesNFSe.PRODATA:
+                        cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"<versaoDados>2.01</versaoDados></cabecalho>";
+                        break;
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

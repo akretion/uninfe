@@ -2928,6 +2928,20 @@ namespace NFe.Service
         /// </summary>
         /// <param name="msXml"></param>
         /// <returns></returns>
+        /// 
+        private string ReadInnerText(string value)
+        {
+            value = value.Replace("&#231;", "ç");
+            value = value.Replace("&#227;", "ã");
+            value = value.Replace("&amp;", "&");
+            value = value.Replace("&lt;", "<");
+            value = value.Replace("&gt;", ">");
+            value = value.Replace("&quot;", "\"");
+            value = value.Replace("&#39;", "'");
+
+            return value;
+        }
+
         public RetConsCad ProcessaConsultaCadastro(XmlDocument doc)
         {
             if (doc.GetElementsByTagName("infCad") == null)
@@ -2970,10 +2984,10 @@ namespace NFe.Service
                                                 vRetorno.infCad[vRetorno.infCad.Count - 1].CNPJ = nodeinfCad.InnerText;
                                                 break;
                                             case "xNome":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = nodeinfCad.InnerText;
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xNome = ReadInnerText(nodeinfCad.InnerText);
                                                 break;
                                             case "xFant":
-                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = nodeinfCad.InnerText;
+                                                vRetorno.infCad[vRetorno.infCad.Count - 1].xFant = ReadInnerText(nodeinfCad.InnerText);
                                                 break;
 
                                             case "ender":
@@ -2982,19 +2996,19 @@ namespace NFe.Service
                                                     switch (nodeinfConsEnder.Name)
                                                     {
                                                         case "xLgr":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xLgr = nodeinfConsEnder.InnerText;
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xLgr = ReadInnerText(nodeinfConsEnder.InnerText);
                                                             break;
                                                         case "nro":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.nro = nodeinfConsEnder.InnerText;
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.nro = ReadInnerText(nodeinfConsEnder.InnerText);
                                                             break;
                                                         case "xCpl":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xCpl = nodeinfConsEnder.InnerText;
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xCpl = ReadInnerText(nodeinfConsEnder.InnerText);
                                                             break;
                                                         case "xBairro":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xBairro = nodeinfConsEnder.InnerText;
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xBairro = ReadInnerText(nodeinfConsEnder.InnerText);
                                                             break;
                                                         case "xMun":
-                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xMun = nodeinfConsEnder.InnerText;
+                                                            vRetorno.infCad[vRetorno.infCad.Count - 1].ender.xMun = ReadInnerText(nodeinfConsEnder.InnerText);
                                                             break;
                                                         case "cMun":
                                                             vRetorno.infCad[vRetorno.infCad.Count - 1].ender.cMun = Convert.ToInt32("0" + nodeinfConsEnder.InnerText);
@@ -3044,7 +3058,7 @@ namespace NFe.Service
                                             vRetorno.cStat = Convert.ToInt32("0" + nodeinfCons.InnerText);
                                             break;
                                         case "xMotivo":
-                                            vRetorno.xMotivo = nodeinfCons.InnerText;
+                                            vRetorno.xMotivo = ReadInnerText(nodeinfCons.InnerText);
                                             break;
                                         case "UF":
                                             vRetorno.UF = nodeinfCons.InnerText;

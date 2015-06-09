@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CteRetRecepcao">
     <wsdl:port name="CteRetRecepcaoSoap12" binding="tns:CteRetRecepcaoSoap12">
-      <soap12:address location="https://homologacao.cte.sefaz.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx" />
+      <soap12:address location="https://cte-homologacao.svrs.rs.gov.br/ws/cteretrecepcao/cteRetRecepcao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1430,6 +1430,12 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
                         case Servicos.NFSeCancelar:
                             retorna = "CancelarNfse";
                             break;
@@ -1445,7 +1451,6 @@ namespace NFe.Service
                         case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarLoteNotasFiscais";
                             break;
-
                         case Servicos.NFSeConsultarURL:
                             retorna = "";
                             break;
@@ -1477,6 +1482,39 @@ namespace NFe.Service
                             break;
                         case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "esConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region PRODATA
+                case PadroesNFSe.PRODATA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "";
                             break;
 
                         case Servicos.NFSeConsultarURL:
@@ -2085,7 +2123,23 @@ namespace NFe.Service
                     break;
                 case PadroesNFSe.ISSONLINE:
                     break;
-                case PadroesNFSe.BLUMENAU_SC:
+                case PadroesNFSe.BLUMENAU_SC:            
+                    break;
+                case PadroesNFSe.FINTEL:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        switch (doc.DocumentElement.Name)
+                        {
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+                            case "GerarNfseEnvio":
+                                result = Servicos.NFSeGerarNfse;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
                 case PadroesNFSe.BHISS:
                     if (doc.DocumentElement.Name.Equals("GerarNfseEnvio") && servico == Servicos.NFSeRecepcionarLoteRps)
@@ -2124,8 +2178,6 @@ namespace NFe.Service
                 case PadroesNFSe.SMARAPD:
                     break;
                 case PadroesNFSe.FIORILLI:
-                    break;
-                case PadroesNFSe.FINTEL:
                     break;
                 case PadroesNFSe.ISSWEB:
                     break;

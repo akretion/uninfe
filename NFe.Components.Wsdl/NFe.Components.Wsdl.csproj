@@ -2426,10 +2426,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HEQUIPLANO.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PToledoPR-EQUIPLANO.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEQUIPLANO.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PThemaGasparSCCancelamento.wsdl" />
@@ -2446,6 +2446,25 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PArcosMG-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItumbiaraGO-Prodata.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSCteInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNfeInutilizacao2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSCVRSCteInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSCVRSNFeInutilizacao2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPassoFundoRS-cancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPassoFundoRS-consulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPassoFundoRS-remessa.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-cancelamento.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-consulta.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-remessa.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

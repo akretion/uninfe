@@ -209,6 +209,12 @@ namespace NFe.Components
         [Description("Enviar Lote RPS NFS-e Sincrono")]
         NFSeRecepcionarLoteRpsSincrono,
         /// <summary>
+        /// Enviar Lote RPS NFS-e de forma sincrona 
+        /// Criado inicialmente para ser utilizado para o padrão BHIss, pois é necessario utilizar a recepção de lote das duas formas.
+        /// </summary>
+        [Description("Enviar Lote RPS NFS-e Sincrono")]
+        NFSeGerarNfse,
+        /// <summary>
         /// Consulta da imagem de uma NFS-e em formato PNG
         /// Criado inicialmente para ser utilizado para o padrão INFISC para a Prefeitura de Caxias do Sul - RS
         /// </summary>
@@ -562,7 +568,13 @@ namespace NFe.Components
         /// Prefeitura de Toledo - PR
         /// </summary>
         [Description("Equiplano")]
-        EQUIPLANO
+        EQUIPLANO,
+        /// <summary>
+        /// Padrão Prodata
+        /// Prefeitura de Itumbiara - GO
+        /// </summary>
+        [Description("Prodata")]
+        PRODATA
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

@@ -92,7 +92,7 @@ namespace uninfe2
                     }
                 }
 
-            Propriedade.TipoAplicativo = TipoAplicativo.Nfe;
+            Propriedade.TipoAplicativo = TipoAplicativo.Todos;
 
 #if DEBUG
             NFe.Components.NativeMethods.AllocConsole();

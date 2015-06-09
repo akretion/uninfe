@@ -1744,7 +1744,7 @@
     <LocalHomologacao>
       <NFeRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\homologacao\SCVRS\HSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao></NFeInutilizacao>
+      <NFeInutilizacao>wsdl\homologacao\SCVRS\HSVCRSNfeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
@@ -1764,7 +1764,7 @@
       <CTeRecepcaoEvento>wsdl\homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\homologacao\SCVRS\HSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\homologacao\SCVRS\HSCVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SCVRS\HSCVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SCVRS\HSCVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>
@@ -1772,7 +1772,7 @@
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRecepcao2.wsdl</NFeRecepcao>
       <NFeRetRecepcao>wsdl\producao\SCVRS\PSVCRSNfeRetRecepcao2.wsdl</NFeRetRecepcao>
-      <NFeInutilizacao></NFeInutilizacao>
+      <NFeInutilizacao>wsdl\producao\SCVRS\PSCVRSNFeInutilizacao2.wsdl</NFeInutilizacao>
       <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta2.wsdl</NFeConsulta>
       <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
       <NFeConsultaCadastro>wsdl\producao\SCVRS\PSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
@@ -1792,7 +1792,7 @@
       <CTeRecepcaoEvento>wsdl\producao\SCVRS\PSCVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <CTeRecepcao>wsdl\producao\SCVRS\PSCVRSCteRecepcao.wsdl</CTeRecepcao>
       <CTeRetRecepcao>wsdl\producao\SCVRS\PSCVRSCteRetRecepcao.wsdl</CTeRetRecepcao>
-      <CTeInutilizacao></CTeInutilizacao>
+      <CTeInutilizacao>wsdl\producao\SCVRS\PSCVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SCVRS\PSCVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SCVRS\PSCVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro></CTeConsultaCadastro>

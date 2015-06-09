@@ -1089,10 +1089,10 @@
   </wsdl:binding>
   <wsdl:service name="Services">
     <wsdl:port name="ServicesSoap" binding="tns:ServicesSoap">
-      <soap:address location="https://iss.pontagrossa.pr.gov.br:4431/Homologacao/Services.asmx" />
+      <soap:address location="https://iss.pontagrossa.pr.gov.br:4431/homologacao/services.asmx" />
     </wsdl:port>
     <wsdl:port name="ServicesSoap12" binding="tns:ServicesSoap12">
-      <soap12:address location="https://iss.pontagrossa.pr.gov.br:4431/Homologacao/Services.asmx" />
+      <soap12:address location="https://iss.pontagrossa.pr.gov.br:4431/homologacao/services.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

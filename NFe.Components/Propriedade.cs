@@ -37,7 +37,7 @@ namespace NFe.Components
         /// <summary>
         /// Nome do arquivo XML que é gravado as empresas cadastradas
         /// </summary>
-        public static readonly string NomeArqEmpresas = Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml";
+        public static string NomeArqEmpresas { get { return Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml"; } }
         /// <summary>     
         /// Nome do arquivo para controle da numeração sequencial do lote.
         /// </summary>
@@ -71,9 +71,20 @@ namespace NFe.Components
         /// Retorna a pasta do executável
         /// </summary>
         /// <returns>Retorna a pasta onde está o executável</returns>
+        private static string _PastaExecutavel = string.Empty;
         public static string PastaExecutavel
         {
-            get { return System.IO.Path.GetDirectoryName(Application.ExecutablePath); }
+            get
+            {
+                if (string.IsNullOrEmpty(_PastaExecutavel))
+                    return System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+
+                return _PastaExecutavel;
+            }
+            set
+            {
+                _PastaExecutavel = value;
+            }
         }
 
         #region Pastas de comunicação geral do ERP com o UniNFe
@@ -108,7 +119,7 @@ namespace NFe.Components
         private static string _NomeArqXMLWebService_NFe = "";
         public static string NomeArqXMLWebService_NFe
         {
-            get 
+            get
             {
                 if (string.IsNullOrEmpty(_NomeArqXMLWebService_NFe))
                     return Propriedade.PastaExecutavel + "\\NFe\\WSDL\\Webservice.xml";
@@ -133,7 +144,7 @@ namespace NFe.Components
         public static List<Municipio> Municipios { get; set; }
 
         private static List<Municipio> _Estados = null;
-        public static List<Municipio> Estados 
+        public static List<Municipio> Estados
         {
             get
             {
@@ -828,8 +839,8 @@ namespace NFe.Components
             {
                 try
                 {
-                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe ? 0 : 1]))
-                        return ServiceProcess.StatusService(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfe ? 0 : 1]) == System.ServiceProcess.ServiceControllerStatus.Running;
+                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfse ? 1 : 0]))
+                        return ServiceProcess.StatusService(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfse ? 1 : 0]) == System.ServiceProcess.ServiceControllerStatus.Running;
                     else
                         return false;
                 }
@@ -883,6 +894,27 @@ namespace NFe.Components
             }
         }
         #endregion
-    }
 
+        public static void VerificaArquivos(out bool error, out string msg)
+        {
+            switch (NFe.Components.Propriedade.TipoAplicativo)
+            {
+                case TipoAplicativo.MDFe:
+                case TipoAplicativo.Cte:
+                case TipoAplicativo.NFCe:
+                case TipoAplicativo.Nfe:
+                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFe);
+                    msg = "Arquivo '" + Propriedade.NomeArqXMLWebService_NFe + "' não encontrado";
+                    break;
+                case TipoAplicativo.Nfse:
+                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe);
+                    msg = "Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService_NFSe + "' não encontrados";
+                    break;
+                default:
+                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFe);
+                    msg = "Arquivos '" + Propriedade.NomeArqXMLMunicipios + "', '" + Propriedade.NomeArqXMLWebService_NFSe + "' e/ou '" + Propriedade.NomeArqXMLWebService_NFe + "' não encontrados";
+                    break;
+            }
+        }
+    }
 }

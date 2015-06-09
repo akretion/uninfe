@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="MDFeConsulta">
     <wsdl:port name="MDFeConsultaSoap12" binding="tns:MDFeConsultaSoap12">
-      <soap12:address location="https://mdfe-hml.sefaz.rs.gov.br/WS/mdfeConsulta/MDFeConsulta.asmx" />
+      <soap12:address location="https://mdfe-homologacao.svrs.rs.gov.br/ws/mdfeconsulta/MDFeConsulta.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

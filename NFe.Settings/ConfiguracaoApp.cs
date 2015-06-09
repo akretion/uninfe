@@ -139,13 +139,67 @@ namespace NFe.Settings
                     if (x.GetLength(0) > 0)
                     {
                         string fileoutput = null;
+                        List<string> okFiles = new List<string>();
+                        string prefix = "";
+                        ///
+                        /// se o Uninfe estiver sendo executado como embedded da aplicacao
+                        /// 
+                        switch (NFe.Components.Propriedade.TipoAplicativo)
+                        {
+                            case TipoAplicativo.Nfe:
+                            case TipoAplicativo.NFCe:
+                                prefix = "NFe";
+                                break;
+                            case TipoAplicativo.MDFe:
+                                prefix = "MDFe";
+                                break;
+                            case TipoAplicativo.Cte:
+                                prefix = "CTe";
+                                break;
+                        }
 
-#if DEBUG
-                        System.IO.File.WriteAllLines(System.IO.Path.GetTempPath() + "uninfe_wsdls.txt", x);
-#endif
+                        if (prefix != "")
+                        {
+                            fileoutput = Path.GetTempFileName();
+                            ExtractResourceToDisk(ass, "NFe.Components.Wsdl.NFe.WSDL.Webservice.xml", fileoutput);
+                            ///
+                            /// le apenas os wsdl's definidos para o tipo de aplicativo
+                            /// 
+                            var xxa = new XmlDocument();
+                            xxa.Load(fileoutput);
+                            foreach (var a1 in xxa.GetElementsByTagName("Estado"))
+                                foreach (var tag in new string[] { "LocalHomologacao", "LocalProducao" })
+                                    foreach (var a2 in (a1 as XmlElement).GetElementsByTagName(tag))
+                                        if (a2 is XmlElement)
+                                            for (int c = 0; c < (a2 as XmlElement).ChildNodes.Count; ++c)
+                                                if ((a2 as XmlElement).ChildNodes[c] is XmlElement)
+                                                {
+                                                    string ln = (a2 as XmlElement).ChildNodes[c].Name;
+
+                                                    if (ln.StartsWith(prefix) || (prefix.Equals("NFe") && ln.StartsWith("DFe")))
+                                                    {
+                                                        if ((a2 as XmlElement).ChildNodes[c].InnerText != "")
+                                                        {
+                                                            ln = (a2 as XmlElement).ChildNodes[c].InnerText.ToLower().Replace("\\", ".");
+                                                            if (!okFiles.Contains(ln))
+                                                                okFiles.Add(ln);
+
+                                                            if (!okFiles.Contains(ln.Replace(".wsdl", "_200.wsdl")))
+                                                                okFiles.Add(ln.Replace(".wsdl", "_200.wsdl"));
+                                                            ///
+                                                            /// adiciona a lista os wsdl's de NFCe
+                                                            /// 
+                                                            if (!okFiles.Contains(ln.Replace(".wsdl", "_c.wsdl")))
+                                                                okFiles.Add(ln.Replace(".wsdl", "_c.wsdl"));
+                                                        }
+                                                    }
+                                                }
+
+                            File.Delete(fileoutput);
+                        }
 
                         var afiles = (from d in x
-                                      where d.StartsWith("NFe.Components.Wsdl.NF")
+                                      where d.StartsWith("NFe.Components.Wsdl.NF" + (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "se" : ""))
                                       select d);
 
                         foreach (string s in afiles)
@@ -171,8 +225,49 @@ namespace NFe.Settings
                             }
                             else
                             {
-                                fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "#" + fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("#", ".");
+                                fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "#" +
+                                                fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("#", ".");
                             }
+
+                            if (NFe.Components.Propriedade.TipoAplicativo != TipoAplicativo.Todos)
+                            {
+                                if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                                {
+                                    if (!s.ToLower().Contains(".nfse."))
+                                        continue;
+                                }
+                                else
+                                {
+                                    if (s.ToLower().Contains(".nfse."))
+                                        continue;
+
+                                    if (s.ToLower().EndsWith(".wsdl") && okFiles.Count > 0)
+                                    {
+                                        if (!okFiles.Contains(s.Replace("NFe.Components.Wsdl.NFe.", "").ToLower()) &&
+                                            !okFiles.Contains(s.Replace("NFe.Components.Wsdl.NFse.", "").ToLower()))
+                                        {
+                                            continue;
+                                        }
+                                    }
+
+                                    if (s.ToLower().EndsWith(".xsd"))
+                                    {
+                                        if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Cte ||
+                                            NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.MDFe)
+                                        {
+                                            if (!s.ToLower().Contains(".schemas." + prefix.ToLower() + "."))
+                                                continue;
+                                        }
+                                        if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.NFCe ||
+                                            NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                                        {
+                                            if (s.ToLower().Contains(".schemas.cte.") || s.ToLower().Contains(".schemas.mdfe."))
+                                                continue;
+                                        }
+                                    }
+                                }
+                            }
+
                             FileInfo fi = new FileInfo(fileoutput);
                             ArquivoItem item = null;
 
@@ -225,7 +320,11 @@ namespace NFe.Settings
                 }
                 finally
                 {
-                    WebServiceNFSe.SalvarXMLMunicipios();
+                    if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Todos ||
+                        NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
+                    {
+                        WebServiceNFSe.SalvarXMLMunicipios();
+                    }
                 }
             }
 
@@ -714,31 +813,31 @@ namespace NFe.Settings
             WebServiceProxy wsProxy = null;
             string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "") + (!string.IsNullOrEmpty(mod) ? " " + mod : "");
 
-                lock (Smf.WebProxy)
+            lock (Smf.WebProxy)
+            {
+                if (Empresas.Configuracoes[emp].WSProxy.ContainsKey(key))
                 {
-                    if (Empresas.Configuracoes[emp].WSProxy.ContainsKey(key))
-                    {
-                        wsProxy = Empresas.Configuracoes[emp].WSProxy[key];
-                    }
-                    else
-                    {
+                    wsProxy = Empresas.Configuracoes[emp].WSProxy[key];
+                }
+                else
+                {
                     Thread.Sleep(1000); //1 segundo
 
-                        //Definir se é uma configurações específica para NFC-e
-                        bool ehNFCe = (mod == "65");
+                    //Definir se é uma configurações específica para NFC-e
+                    bool ehNFCe = (mod == "65");
 
-                        //Definir a URI para conexão com o Webservice
-                        string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
+                    //Definir a URI para conexão com o Webservice
+                    string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
 
-                        wsProxy = new WebServiceProxy(cUF,
-                                                      Url,
-                                                      Empresas.Configuracoes[emp].X509Certificado,
-                                                      padraoNFSe,
-                                                      (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
-                                                      servico);
+                    wsProxy = new WebServiceProxy(cUF,
+                                                  Url,
+                                                  Empresas.Configuracoes[emp].X509Certificado,
+                                                  padraoNFSe,
+                                                  (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
+                                                  servico);
 
-                        Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
-                    }
+                    Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
+                }
 
             }
 
@@ -999,7 +1098,8 @@ namespace NFe.Settings
                 if (!File.Exists(WSDL) && !string.IsNullOrEmpty(WSDL))
                     switch (Propriedade.TipoAplicativo)
                     {
-                        case TipoAplicativo.Nfe:
+                        //case TipoAplicativo.Nfe:
+                        default:
                             throw new Exception("O arquivo \"" + WSDL + "\" não existe. Aconselhamos a reinstalação do UniNFe.");
                         case TipoAplicativo.Nfse:
                             throw new Exception("O arquivo \"" + WSDL + "\" não existe. Aconselhamos a reinstalação do UniNFSe.");
@@ -1217,7 +1317,7 @@ namespace NFe.Settings
             foreach (Empresa emp in Empresas.Configuracoes)
             {
 
-            #region Remover End Slash
+                #region Remover End Slash
                 emp.RemoveEndSlash();
                 #endregion
 
@@ -1233,12 +1333,12 @@ namespace NFe.Settings
                                                 erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
 
                 if (erro != "")
-            {
+                {
                     erro += "\r\nNa empresa: " + emp.Nome + "\r\n" + emp.CNPJ;
                     validou = false;
                     break;
-            }
-            #endregion
+                }
+                #endregion
             }
 
             //substitui pq para debugar dava muito trabalho
@@ -1394,53 +1494,53 @@ namespace NFe.Settings
 
                     #region Verificar se o certificado foi informado
                     if (validarCertificado && empresa.UsaCertificado && validou)
+                    {
+                        if (empresa.CertificadoInstalado && empresa.CertificadoDigitalThumbPrint.Equals(string.Empty))
                         {
-                            if (empresa.CertificadoInstalado && empresa.CertificadoDigitalThumbPrint.Equals(string.Empty))
-                            {
                             erro = "Selecione o certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
+                            validou = false;
+                        }
+                        if (!empresa.CertificadoInstalado && validou)
+                        {
+                            if (empresa.CertificadoArquivo.Equals(string.Empty))
+                            {
+                                erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
                                 validou = false;
                             }
-                        if (!empresa.CertificadoInstalado && validou)
+                            else if (!File.Exists(empresa.CertificadoArquivo))
                             {
-                                if (empresa.CertificadoArquivo.Equals(string.Empty))
-                                {
-                                erro = "Informe o local de armazenamento do certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
-                                    validou = false;
-                                }
-                                else if (!File.Exists(empresa.CertificadoArquivo))
-                                {
                                 erro = "Arquivo do certificado digital a ser utilizado na autenticação dos serviços não foi encontrado." + xNomeCNPJ;
-                                    validou = false;
-                                }
-                                else if (empresa.CertificadoSenha.Equals(string.Empty))
-                                {
+                                validou = false;
+                            }
+                            else if (empresa.CertificadoSenha.Equals(string.Empty))
+                            {
                                 erro = "Informe a senha do certificado digital a ser utilizado na autenticação dos serviços." + xNomeCNPJ;
+                                validou = false;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open, FileAccess.Read))
+                                    {
+                                        byte[] buffer = new byte[fs.Length];
+                                        fs.Read(buffer, 0, buffer.Length);
+                                        empresa.X509Certificado = new X509Certificate2(buffer, empresa.CertificadoSenha);
+                                    }
+                                }
+                                catch (System.Security.Cryptography.CryptographicException ex)
+                                {
+                                    erro = ex.Message + "." + xNomeCNPJ;
                                     validou = false;
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    try
-                                    {
-                                        using (FileStream fs = new FileStream(empresa.CertificadoArquivo, FileMode.Open, FileAccess.Read))
-                                        {
-                                            byte[] buffer = new byte[fs.Length];
-                                            fs.Read(buffer, 0, buffer.Length);
-                                            empresa.X509Certificado = new X509Certificate2(buffer, empresa.CertificadoSenha);
-                                        }
-                                    }
-                                    catch (System.Security.Cryptography.CryptographicException ex)
-                                    {
                                     erro = ex.Message + "." + xNomeCNPJ;
-                                        validou = false;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                    erro = ex.Message + "." + xNomeCNPJ;
-                                        validou = false;
-                                    }
+                                    validou = false;
                                 }
                             }
                         }
+                    }
                     #endregion
 
                     #region Verificar se as pastas informadas existem
@@ -1455,8 +1555,8 @@ namespace NFe.Settings
                                     !string.IsNullOrEmpty(empresa.PastaConfigUniDanfe))
                                 {
                                     empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe.Substring(0, empresa.PastaConfigUniDanfe.Length - 6);
+                                }
                             }
-                        }
                             empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe.Replace("\r\n", "").Trim();
                             //empresa.PastaConfigUniDanfe = empresa.PastaConfigUniDanfe;
                         }
@@ -1626,7 +1726,7 @@ namespace NFe.Settings
 
             if (!validou)
                 throw new Exception(erro);
-            }
+        }
         #endregion
 
         #region ReconfigurarUniNFe()

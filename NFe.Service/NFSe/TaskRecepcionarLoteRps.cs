@@ -116,6 +116,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.FINTEL:
                         cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.FINTEL);
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
@@ -229,6 +230,7 @@ namespace NFe.Service.NFSe
                         #endregion
 
                     case PadroesNFSe.GOVDIGITAL:
+                        #region GOV-Digital
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
@@ -236,9 +238,14 @@ namespace NFe.Service.NFSe
 
                         govdig.EmiteNF(NomeArquivoXML);
                         break;
+                        #endregion
 
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
+                        break;
+
+                    case PadroesNFSe.PRODATA:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
                 }
 

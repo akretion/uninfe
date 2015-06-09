@@ -183,6 +183,10 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
+                    case PadroesNFSe.PRODATA:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        break;
+
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

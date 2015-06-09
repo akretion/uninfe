@@ -74,7 +74,7 @@ namespace NFe.Settings
                         {
                             FileInfo fi = new FileInfo(fileLock);
 
-                            throw  new NFe.Components.Exceptions.AppJaExecutando("Já existe uma instância do " + Propriedade.NomeAplicacao + 
+                            throw new NFe.Components.Exceptions.AppJaExecutando("Já existe uma instância do " + Propriedade.NomeAplicacao +
                                                                                  " em Execução que atende a conjunto de pastas: " + fi.Directory.FullName + " (*Incluindo subdiretórios).\r\n\r\n" +
                                                                                  "Nome da estação que está executando: " + fi.Name.Replace(Propriedade.NomeAplicacao + "-", "").Replace(".lock", ""));
                         }
@@ -133,8 +133,6 @@ namespace NFe.Settings
 
             if (File.Exists(Propriedade.NomeArqEmpresas))
             {
-                //FileStream arqXml = null;
-
                 try
                 {
                     XElement axml = XElement.Load(Propriedade.NomeArqEmpresas);
@@ -187,81 +185,13 @@ namespace NFe.Settings
                             }
                             catch { }
                         }
-
                         Configuracoes.Add(empresa);
                     }
-#if false
-                    arqXml = new FileStream(Propriedade.NomeArqEmpresas, FileMode.Open, FileAccess.Read, FileShare.Read); //Abrir um arquivo XML usando FileStream
-
-                    var xml = new XmlDocument();
-                    xml.Load(arqXml);
-
-                    var empresaList = xml.GetElementsByTagName("Empresa");
-
-                    foreach (XmlNode empresaNode in empresaList)
-                    {
-                        var empresaElemento = (XmlElement)empresaNode;
-
-                        var registroList = xml.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
-
-                        for (int i = 0; i < registroList.Count; i++)
-                        {
-                            Empresa empresa = new Empresa();
-
-                            var registroNode = registroList[i];
-                            var registroElemento = (XmlElement)registroNode;
-
-                            empresa.CNPJ = registroElemento.GetAttribute(NFe.Components.NFeStrConstants.CNPJ).Trim();
-                            empresa.Nome = registroElemento.GetElementsByTagName(NFe.Components.NFeStrConstants.Nome)[0].InnerText.Trim();
-                            empresa.Servico = Propriedade.TipoAplicativo;// TipoAplicativo.Nfe;
-                            if (registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico) != "")
-                                empresa.Servico = (TipoAplicativo)Convert.ToInt16(registroElemento.GetAttribute(NFe.Components.NFeStrConstants.Servico).Trim());
-
-                            try
-                            {
-                                empresa.BuscaConfiguracao();
-                            }
-                            catch (Exception ex)
-                            {
-                                ///
-                                /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
-                                /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
-                                /// as thread's
-                                string cArqErro;
-                                if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
-                                    cArqErro = Path.Combine(Propriedade.PastaExecutavel, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-                                else
-                                    cArqErro = Path.Combine(empresa.PastaXmlRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
-
-                                try
-                                {
-                                    //Grava arquivo de ERRO para o ERP
-                                    File.WriteAllText(cArqErro, ex.Message, Encoding.Default);
-                                }
-                                catch { }
-                            }
-                            ///
-                            /// mesmo com erro, adicionar a lista para que o usuário possa altera-la
-                            empresa.ChecaCaminhoDiretorio();
-
-                            Configuracoes.Add(empresa);
-                        }
-                    }
-                    arqXml.Close();
-                    arqXml = null;
-#endif
                 }
                 catch
                 {
                     throw;
                 }
-#if false
-                finally
-                {
-                    if (arqXml != null)
-                        arqXml.Close();
-                }
-#endif
             }
             if (!ExisteErroDiretorio)
                 Empresas.CriarPasta();

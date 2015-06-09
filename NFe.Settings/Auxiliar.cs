@@ -53,6 +53,7 @@ namespace NFe.Settings
         #region WriteLog()
         public static void WriteLog(string msg, bool gravarStackTrace)
         {
+            if (string.IsNullOrEmpty(msg)) return;
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(msg);
 #endif

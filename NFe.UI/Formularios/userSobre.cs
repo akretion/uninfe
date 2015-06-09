@@ -24,7 +24,8 @@ namespace NFe.UI
 
             switch (NFe.Components.Propriedade.TipoAplicativo)
             {
-                case NFe.Components.TipoAplicativo.Nfe:
+                //case NFe.Components.TipoAplicativo.Nfe:
+                default:
                     break;
 
                 case NFe.Components.TipoAplicativo.Nfse:

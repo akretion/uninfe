@@ -91,7 +91,7 @@ namespace NFe.UI
         /// <param name="Value"></param>
         /// <param name="juridica"></param>
         /// <returns></returns>
-        public static string FmtCgcCpf(string Value, bool juridica)
+        public static string FmtCnpjCpf(string Value, bool juridica)
         {
             string Result = Value.PadLeft(14, '0');
 

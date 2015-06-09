@@ -241,7 +241,7 @@ namespace NFe.Components
             {
                 //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
                 this.RelacCertificado(Instance);
-                
+
                 Type tipoInstance = Instance.GetType();
 
                 return tipoInstance.GetMethod(methodName).Invoke(Instance, parameters);
@@ -766,10 +766,30 @@ namespace NFe.Components
 
                     if (appPath == "" && !string.IsNullOrEmpty(urlList[i].ChildNodes[j].InnerText))
                     {
-                        string msg = "";
-                        Console.WriteLine(msg = "wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
+                        bool wlog = false;
+                        switch (NFe.Components.Propriedade.TipoAplicativo)
+                        {
+                            case TipoAplicativo.Cte:
+                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("CTe");
+                                break;
+                            case TipoAplicativo.MDFe:
+                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("MDFe");
+                                break;
+                            case TipoAplicativo.NFCe:
+                            case TipoAplicativo.Nfe:
+                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("NFe") || urlList[i].ChildNodes[j].Name.StartsWith("DFe");
+                                break;
+                            default:
+                                wlog = true;
+                                break;
+                        }
+                        if (wlog)
+                        {
+                            string msg = "";
+                            Console.WriteLine(msg = "wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
 
-                        NFe.Components.Functions.WriteLog(msg, false, true, "");
+                            NFe.Components.Functions.WriteLog(msg, false, true, "");
+                        }
                     }
                 }
             }
@@ -840,8 +860,8 @@ namespace NFe.Components
             NFeRecepcao =
             NFeRetRecepcao =
             NFeStatusServico =
-            //NFeRegistroDeSaida =
-            //NFeRegistroDeSaidaCancelamento =
+                //NFeRegistroDeSaida =
+                //NFeRegistroDeSaidaCancelamento =
             NFeAutorizacao =
             NFeRetAutorizacao =
                 ///

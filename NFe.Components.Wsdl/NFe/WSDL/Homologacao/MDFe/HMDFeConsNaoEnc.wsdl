@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="MDFeConsNaoEnc">
     <wsdl:port name="MDFeConsNaoEncSoap12" binding="tns:MDFeConsNaoEncSoap12">
-      <soap12:address location="https://mdfe-hml.sefaz.rs.gov.br/ws/MDFeConsNaoEnc/MDFeConsNaoEnc.asmx" />
+      <soap12:address location="https://mdfe-homologacao.svrs.rs.gov.br/ws/mdfeconsnaoenc/MDFeConsNaoEnc.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

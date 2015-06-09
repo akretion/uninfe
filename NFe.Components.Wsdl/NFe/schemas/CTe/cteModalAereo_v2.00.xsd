@@ -117,7 +117,7 @@
 									<xs:documentation>Dimensão</xs:documentation>
 									<xs:documentation>Formato:1234X1234X1234 (cm)
 
-Esse campo deve sempre que possível ser preenchido. Entretanto, quando for impossível o preenchimento das dimensões, fica obrigatório o preechimento da cubagem em metro cúbico da #tag 281 do leiaute do CT-e da estrutura genérica.</xs:documentation>
+Esse campo deve sempre que possível ser preenchido. Entretanto, quando for impossível o preenchimento das dimensões, fica obrigatório o preechimento da cubagem em metro cúbico da infQ do leiaute do CT-e da estrutura genérica.</xs:documentation>
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="TString">

@@ -43,11 +43,16 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="tpEvento" type="xs:string">
+						<xs:element name="tpEvento">
 							<xs:annotation>
-								<xs:documentation>Tipo do Evento:
-110113 - EPEC</xs:documentation>
+								<xs:documentation>Tipo do Evento</xs:documentation>
 							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:whiteSpace value="preserve"/>
+									<xs:pattern value="[0-9]{6}"/>
+								</xs:restriction>
+							</xs:simpleType>
 						</xs:element>
 						<xs:element name="nSeqEvento">
 							<xs:annotation>
@@ -255,7 +260,7 @@ Insira neste local o XML específico do tipo de evento (cancelamento, encerramen
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve"/>
-			<xs:pattern value="[A-Z]{3}(([1-9]\d{3})|(0[1-9]\d{2})|(00[1-9]\d)|(000[1-9]))"/>
+			<xs:pattern value="[A-Z]{2,3}[0-9]{4}|[A-Z]{3,4}[0-9]{3}"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

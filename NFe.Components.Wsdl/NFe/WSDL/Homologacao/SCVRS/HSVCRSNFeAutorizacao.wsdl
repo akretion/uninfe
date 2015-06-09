@@ -34,35 +34,60 @@
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="nfeAutorizacaoLoteSoap12In">
+  <wsdl:message name="nfeAutorizacaoLoteSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeAutorizacaoLoteSoap12Out">
+  <wsdl:message name="nfeAutorizacaoLoteSoapOut">
     <wsdl:part name="nfeAutorizacaoLoteResult" element="tns:nfeAutorizacaoLoteResult" />
   </wsdl:message>
   <wsdl:message name="nfeAutorizacaoLotenfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:message name="nfeAutorizacaoLoteZipSoap12In">
+  <wsdl:message name="nfeAutorizacaoLoteZipSoapIn">
     <wsdl:part name="nfeDadosMsgZip" element="tns:nfeDadosMsgZip" />
   </wsdl:message>
-  <wsdl:message name="nfeAutorizacaoLoteZipSoap12Out">
+  <wsdl:message name="nfeAutorizacaoLoteZipSoapOut">
     <wsdl:part name="nfeAutorizacaoLoteZipResult" element="tns:nfeAutorizacaoLoteZipResult" />
   </wsdl:message>
   <wsdl:message name="nfeAutorizacaoLoteZipnfeCabecMsg">
     <wsdl:part name="nfeCabecMsg" element="tns:nfeCabecMsg" />
   </wsdl:message>
-  <wsdl:portType name="NfeAutorizacaoSoap12">
+  <wsdl:portType name="NfeAutorizacaoSoap">
     <wsdl:operation name="nfeAutorizacaoLote">
-      <wsdl:input message="tns:nfeAutorizacaoLoteSoap12In" />
-      <wsdl:output message="tns:nfeAutorizacaoLoteSoap12Out" />
+      <wsdl:input message="tns:nfeAutorizacaoLoteSoapIn" />
+      <wsdl:output message="tns:nfeAutorizacaoLoteSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="nfeAutorizacaoLoteZip">
-      <wsdl:input message="tns:nfeAutorizacaoLoteZipSoap12In" />
-      <wsdl:output message="tns:nfeAutorizacaoLoteZipSoap12Out" />
+      <wsdl:input message="tns:nfeAutorizacaoLoteZipSoapIn" />
+      <wsdl:output message="tns:nfeAutorizacaoLoteZipSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NfeAutorizacaoSoap12" type="tns:NfeAutorizacaoSoap12">
+  <wsdl:binding name="NfeAutorizacaoSoap" type="tns:NfeAutorizacaoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="nfeAutorizacaoLote">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao/nfeAutorizacaoLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeAutorizacaoLotenfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeAutorizacaoLotenfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="nfeAutorizacaoLoteZip">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao/nfeAutorizacaoLoteZip" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeAutorizacaoLoteZipnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:nfeAutorizacaoLoteZipnfeCabecMsg" part="nfeCabecMsg" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NfeAutorizacaoSoap12" type="tns:NfeAutorizacaoSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="nfeAutorizacaoLote">
       <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao/nfeAutorizacaoLote" style="document" />
@@ -88,8 +113,11 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="NfeAutorizacao">
+    <wsdl:port name="NfeAutorizacaoSoap" binding="tns:NfeAutorizacaoSoap">
+      <soap:address location="https://nfe-homologacao.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" />
+    </wsdl:port>
     <wsdl:port name="NfeAutorizacaoSoap12" binding="tns:NfeAutorizacaoSoap12">
-      <soap12:address location="https://homologacao.nfe.sefazvirtual.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" />
+      <soap12:address location="https://nfe-homologacao.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

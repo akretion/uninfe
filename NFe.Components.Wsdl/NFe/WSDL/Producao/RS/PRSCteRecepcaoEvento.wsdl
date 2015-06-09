@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="CteRecepcaoEvento">
     <wsdl:port name="CteRecepcaoEventoSoap12" binding="tns:CteRecepcaoEventoSoap12">
-      <soap12:address location="https://cte.sefaz.rs.gov.br/ws/cterecepcaoevento/cterecepcaoevento.asmx" />
+      <soap12:address location="https://cte.svrs.rs.gov.br/ws/cterecepcaoevento/cterecepcaoevento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

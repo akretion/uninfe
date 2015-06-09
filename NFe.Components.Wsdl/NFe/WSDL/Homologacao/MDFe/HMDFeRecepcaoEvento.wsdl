@@ -57,7 +57,7 @@
   </wsdl:binding>
   <wsdl:service name="MDFeRecepcaoEvento">
     <wsdl:port name="MDFeRecepcaoEventoSoap12" binding="tns:MDFeRecepcaoEventoSoap12">
-      <soap12:address location="https://mdfe-hml.sefaz.rs.gov.br/WS/mdferecepcaoevento/MDFerecepcaoevento.asmx" />
+      <soap12:address location="https://mdfe-homologacao.svrs.rs.gov.br/ws/mdferecepcaoevento/MDFeRecepcaoEvento.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

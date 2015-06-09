@@ -706,7 +706,8 @@ namespace NFe.Interface
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
-                    if (Propriedade.TipoAplicativo == TipoAplicativo.Nfe)
+                    if (Propriedade.TipoAplicativo == TipoAplicativo.Todos)
+                    {
                         if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
                             string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
@@ -715,7 +716,7 @@ namespace NFe.Interface
                                 ftp.makeDir(this.edtFTP_PastaDestino.Text);
                             }
                         }
-
+                    }
                     ftp.ChangeDir(vCurrente);
 
                     if (!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
