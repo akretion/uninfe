@@ -22,7 +22,7 @@ namespace NFe.Settings
         /// <param name="Erro"></param>
         public void GravarArqErroERP(string Arquivo, string Erro)
         {
-            if (!string.IsNullOrEmpty(Arquivo))
+            if (!string.IsNullOrEmpty(Arquivo) && !string.IsNullOrEmpty(Erro))
             {
                 try
                 {
@@ -32,8 +32,9 @@ namespace NFe.Settings
                     string fFolder = Propriedade.PastaGeralRetorno;
 
                     int emp = Empresas.FindEmpresaByThread();
-                    if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlRetorno))
-                        fFolder = Empresas.Configuracoes[emp].PastaXmlRetorno;
+                    if (emp >= 0)
+                        if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlRetorno))
+                            fFolder = Empresas.Configuracoes[emp].PastaXmlRetorno;
 
                     if (Directory.Exists(fFolder))
                     {

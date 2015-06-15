@@ -2466,6 +2466,12 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-consulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-remessa.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCianortePR-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -697,6 +697,7 @@ namespace NFe.Interface
 
         private void btnFTPTestar_Click(object sender, EventArgs e)
         {
+            bool errorftp = false;
             Cursor = Cursors.WaitCursor;
             FTP ftp = new FTP(this.edtFTP_Server.Text, Convert.ToInt32(this.edtFTP_Porta.Value), this.edtFTP_UserName.Text, this.edtFTP_Password.Text);
             try
@@ -710,11 +711,15 @@ namespace NFe.Interface
                     {
                         if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
-                            string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
+                            string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDeseja criá-la agora?";
                             if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaDestino.Text);
+                                if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                                    throw new Exception("Pasta de destino criada mas não foi possivel acessá-la");
                             }
+                            else
+                                errorftp = true;
                         }
                     }
                     ftp.ChangeDir(vCurrente);
@@ -722,15 +727,21 @@ namespace NFe.Interface
                     if (!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
                         if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
                         {
-                            string error = "Pasta '" + this.edtFTP_PastaRetornos.Text + "' não existe no FTP.";
+                            string error = "Pasta '" + this.edtFTP_PastaRetornos.Text + "' não existe no FTP.\r\nDeseja criá-la agora?";
                             if (MessageBox.Show(error, "Informação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaRetornos.Text);
+                                if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
+                                    throw new Exception("Pasta de retornos criada mas não foi possivel acessá-la");
                             }
+                            else
+                                errorftp = true;
                         }
 
-                    MessageBox.Show("FTP conectado com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("FTP conectado com sucesso, " + (errorftp ? "\r\nmas houve erro da definição da(s) pasta(s)" : ""), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                    throw new Exception("FTP não conectado");
             }
             catch (Exception ex)
             {

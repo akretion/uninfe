@@ -21,7 +21,9 @@ namespace NFe.UI.Formularios
         }
 
         public event EventHandler changeEvent;
-        NFe.Settings.Empresa empresa;
+        private NFe.Settings.Empresa empresa;
+        private bool ErrorFtp = false;
+
         public void Populate(NFe.Settings.Empresa empresa)
         {
             this.empresa = empresa;
@@ -49,6 +51,9 @@ namespace NFe.UI.Formularios
 
         public void Validar()
         {
+            if (ErrorFtp && this.edtFTP_Ativo.Checked)
+                throw new Exception("Erros foram encontrados no teste de FTP que não foram sanados");
+
             this.empresa.FTPAtivo = this.edtFTP_Ativo.Checked;
             this.empresa.FTPPassivo = this.edtFTP_Passivo.Checked;
             this.empresa.FTPGravaXMLPastaUnica = this.edtFTP_GravaXMLPastaUnica.Checked;
@@ -76,6 +81,7 @@ namespace NFe.UI.Formularios
 
         private void btnTestarFTP_Click(object sender, EventArgs e)
         {
+            this.ErrorFtp = false;
             FTP ftp = null;
             try
             {
@@ -85,14 +91,19 @@ namespace NFe.UI.Formularios
                 {
                     string vCurrente = ftp.GetWorkingDirectory();
 
+                    const string error = "Pasta {0} '{1}' não existe no FTP.\r\nDeseja criá-la agora?";
+
                     if (this.empresa.Servico == TipoAplicativo.Nfe || this.empresa.Servico == TipoAplicativo.Todos)
                         if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
                         {
-                            string error = "Pasta '" + this.edtFTP_PastaDestino.Text + "' não existe no FTP.\r\nDesejá criá-la agora?";
-                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, error, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, string.Format(error, "destino", this.edtFTP_PastaDestino.Text), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaDestino.Text);
+                                if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                                    throw new Exception("Pasta de destino criada mas não foi possivel acessá-la");
                             }
+                            else
+                                this.ErrorFtp = true;
                         }
 
                     ftp.ChangeDir(vCurrente);
@@ -100,18 +111,24 @@ namespace NFe.UI.Formularios
                     if (!string.IsNullOrEmpty(this.edtFTP_PastaRetornos.Text))
                         if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
                         {
-                            string error = "Pasta '" + this.edtFTP_PastaRetornos.Text + "' não existe no FTP.";
-                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, error, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, string.Format(error, "para retornos", this.edtFTP_PastaRetornos.Text), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ftp.makeDir(this.edtFTP_PastaRetornos.Text);
+                                if (!ftp.changeDir(this.edtFTP_PastaRetornos.Text))
+                                    throw new Exception("Pasta de retornos criada mas não foi possivel acessá-la");
                             }
+                            else
+                                this.ErrorFtp = true;
                         }
 
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "FTP conectado com sucesso!", "");
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "FTP conectado com sucesso," + (ErrorFtp ? "\r\nmas houve erro da definição da(s) pasta(s)" : ""), "");
                 }
+                else
+                    throw new Exception("FTP não conectado");
             }
             catch (Exception ex)
             {
+                this.ErrorFtp = true;
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

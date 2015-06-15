@@ -2884,5 +2884,25 @@
       <ConsultarURLNfse></ConsultarURLNfse>
       <CancelarNfse>wsdl\producao\PPassoFundoRS-cancelamento.wsdl</CancelarNfse>
     </LocalProducao>
-  </Estado>  
+  </Estado> 
+  <Estado ID="4105508" Nome="Cianorte - PR" UF="PR" Padrao="SIGCORP_SIGISS">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</ConsultarNfse>
+      <ConsultarLoteRps>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>WSDL\Producao\PCianortePR-sigiss_ws.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
 </Webservice>

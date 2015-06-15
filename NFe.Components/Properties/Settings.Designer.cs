@@ -304,5 +304,15 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://cianorte.sigiss.com.br:443/cianorte/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS"]));
+            }
+        }
     }
 }

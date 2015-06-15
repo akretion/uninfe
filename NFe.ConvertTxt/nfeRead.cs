@@ -379,9 +379,9 @@ namespace NFe.ConvertTxt
         {
             foreach (XmlNode noder in nodeinfNFe.ChildNodes)
                 if (noder.LocalName.Equals(TpcnResources.CNPJ.ToString()))
-                    nfe.autXML.Add(new autXML{CNPJ = this.readValue(noder, TpcnResources.CNPJ)});
+                    nfe.autXML.Add(new autXML { CNPJ = noder.InnerText });
                 else
-                    nfe.autXML.Add(new autXML{CPF = this.readValue(noder, TpcnResources.CPF)});
+                    nfe.autXML.Add(new autXML { CPF = noder.InnerText } );
         }
 
         /// <summary>

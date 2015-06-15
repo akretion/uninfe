@@ -932,25 +932,41 @@ namespace NFe.Settings
                     {
                         //conecta ao ftp
                         ftp.Connect();
+                        if (!ftp.IsConnected)
+                            throw new Exception("FTP '" + this.FTPNomeDoServidor + "' não conectado");
+
+                        ftp.PassiveMode = this.FTPPassivo;
+
                         //pega a pasta corrente no ftp
                         string vCorrente = ftp.GetWorkingDirectory();
+                        
                         //tenta mudar para a pasta de destino
                         if (!ftp.changeDir(folderName))
+                        {
                             //como nao foi possivel mudar de pasta, a cria
                             ftp.makeDir(folderName);
+                            if (!ftp.changeDir(folderName))
+                                throw new Exception("Pasta '" + folderName + "' criada, mas não foi possível acessá-la");
+                        }
                         //volta para a pasta corrente já que na "makeDir" a pasta se torna ativa na ultima pasta criada
                         ftp.ChangeDir(vCorrente);
-                        ftp.PassiveMode = this.FTPPassivo;
+
                         //transfere o arquivo da pasta temp
-                        ftp.OpenUpload(arqDestino, folderName + "/" + Path.GetFileName(fileName), false);
-                        while (ftp.DoUpload() > 0)
-                        {
-                            //Thread.Sleep(1);
-                        }
+                        string remote_filename = folderName + "/" + Path.GetFileName(fileName);
+                        ftp.UploadFile(arqDestino, remote_filename, false);
+
+                        if (ftp.GetFileSize(remote_filename) == 0)
+                            throw new Exception("Arquivo '" + remote_filename + "' não encontrado no FTP");
+
+                        Auxiliar.WriteLog("Arquivo '" + fileName + "' enviado ao FTP com o nome '"+ remote_filename + "' com sucesso.", false);
                     }
                     catch (Exception ex)
                     {
                         Auxiliar.WriteLog("Ocorreu um erro ao tentar conectar no FTP: " + ex.Message, false);
+                        ///
+                        /// gravado o log de ftp aqui, pq o 'chamador' nao o trataria
+                        /// 
+                        new Auxiliar().GravarArqErroERP(Path.ChangeExtension(fileName, ".ftp"), ex.Message);
                     }
                     finally
                     {

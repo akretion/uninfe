@@ -1037,8 +1037,6 @@ namespace NFe.Service
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar)
         {
             int emp = Empresas.FindEmpresaByThread();
-
-
             try
             {
                 //Deletar o arquivo XML da pasta de temporários de XML´s com erros se 
@@ -1053,8 +1051,7 @@ namespace NFe.Service
                 File.WriteAllText(ArqXMLRetorno, conteudoXMLRetorno, Encoding.UTF8);
 
                 //gravar o conteudo no FTP
-                if (Empresas.Configuracoes[emp].FTPIsAlive)
-                    this.XmlParaFTP(emp, ArqXMLRetorno);
+                this.XmlParaFTP(emp, ArqXMLRetorno);
 
                 //Gravar o XML de retorno também no formato TXT
                 if (Empresas.Configuracoes[emp].GravarRetornoTXTNFe)
@@ -3123,50 +3120,52 @@ namespace NFe.Service
         public void XmlParaFTP(int emp, string vNomeDoArquivo)
         {
             // verifica se o FTP da empresa está ativo
-            if (Empresas.Configuracoes[emp].FTPIsAlive)
+            string vFolder = "";
+            ///
+            /// exclui o arquivo de erro de FTP
+            Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(Path.ChangeExtension(vNomeDoArquivo, ".ftp"))));
+            ///
+            /// o arquivo é Autorizado ou Denegado?
+            if (vNomeDoArquivo.Contains(PastaEnviados.Autorizados.ToString()) ||
+                vNomeDoArquivo.Contains(PastaEnviados.Denegados.ToString()))
             {
-                string vFolder = "";
                 ///
-                /// exclui o arquivo de erro de FTP
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(Path.ChangeExtension(vNomeDoArquivo, ".ftp"))));
-                ///
-                /// o arquivo é Autorizado ou Denegado?
-                if (vNomeDoArquivo.Contains(PastaEnviados.Autorizados.ToString()) ||
-                    vNomeDoArquivo.Contains(PastaEnviados.Denegados.ToString()))
-                {
-                    ///
-                    /// pega a pasta de enviados do FTP
-                    vFolder = Empresas.Configuracoes[emp].FTPPastaAutorizados;
-                    if (!string.IsNullOrEmpty(vFolder))
-                    {
-                        ///
-                        /// verifica se é para gravar na pasta especifica ou se é para gravar na mesma
-                        /// hierarquia definida para gravar localmente
-                        if (!Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica)
-                        {
-                            string[] temp = vNomeDoArquivo.Split('\\');
-                            ///
-                            /// pega a ultima pasta atribuida
-                            /// Ex: "c:\nfe\autorizados\201112\3539438493843493-procNFe.xml
-                            /// pega a pasta "201112"
-                            vFolder += "/" + temp[temp.Length - 2];
-                        }
-                    }
-                }
-                else
-                {
-                    ///
-                    /// pega a pasta de retorno no FTP para gravar os retornos dos webservices
-                    /// se vazia nao grava os retornos
-                    if (vNomeDoArquivo.ToLower().EndsWith(".xml") ||
-                        vNomeDoArquivo.ToLower().EndsWith(".txt") ||
-                        vNomeDoArquivo.ToLower().EndsWith(".err"))
-                    {
-                        vFolder = Empresas.Configuracoes[emp].FTPPastaRetornos;
-                    }
-                }
+                /// pega a pasta de enviados do FTP
+                vFolder = Empresas.Configuracoes[emp].FTPPastaAutorizados;
                 if (!string.IsNullOrEmpty(vFolder))
                 {
+                    ///
+                    /// verifica se é para gravar na pasta especifica ou se é para gravar na mesma
+                    /// hierarquia definida para gravar localmente
+                    if (!Empresas.Configuracoes[emp].FTPGravaXMLPastaUnica)
+                    {
+                        string[] temp = vNomeDoArquivo.Split('\\');
+                        ///
+                        /// pega a ultima pasta atribuida
+                        /// Ex: "c:\nfe\autorizados\201112\3539438493843493-procNFe.xml
+                        /// pega a pasta "201112"
+                        vFolder += "/" + temp[temp.Length - 2];
+                    }
+                }
+            }
+            else
+            {
+                ///
+                /// pega a pasta de retorno no FTP para gravar os retornos dos webservices
+                /// se vazia nao grava os retornos
+                if (vNomeDoArquivo.ToLower().EndsWith(".xml") ||
+                    vNomeDoArquivo.ToLower().EndsWith(".txt") ||
+                    vNomeDoArquivo.ToLower().EndsWith(".err"))
+                {
+                    vFolder = Empresas.Configuracoes[emp].FTPPastaRetornos;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(vFolder))
+            {
+                if (!Empresas.Configuracoes[emp].FTPIsAlive)
+                    Auxiliar.WriteLog("Tentando enviar o arquivo '" + vNomeDoArquivo + "' para a pasta '" + vFolder + "' no FTP, mas o FTP está inativo.", false);
+                else
                     try
                     {
                         Empresas.Configuracoes[emp].SendFileToFTP(vNomeDoArquivo, vFolder);
@@ -3177,7 +3176,6 @@ namespace NFe.Service
                         /// grava um arquivo de erro com extensao "FTP" para diferenciar dos arquivos de erro
                         oAux.GravarArqErroERP(Path.ChangeExtension(vNomeDoArquivo, ".ftp"), ex.Message);
                     }
-                }
             }
         }
         #endregion

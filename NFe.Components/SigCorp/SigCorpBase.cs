@@ -33,6 +33,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new NFe.Components.SigCorp.LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 4105508: //Cianorte-PR
+                                sigCorpService = new NFe.Components.SigCorp.CianortePR.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception(); // não tem                                
                         }
@@ -61,6 +65,10 @@ namespace NFe.Components.SigCorp
 
                             case 3554805: //Tremembé-SP
                                 sigCorpService = new NFe.Components.SigCorp.TremembeSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 4105508: //Cianorte-PR
+                                sigCorpService = new NFe.Components.SigCorp.CianortePR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

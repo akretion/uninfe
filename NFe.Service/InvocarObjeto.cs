@@ -28,39 +28,39 @@ namespace NFe.Service
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
-        /// <param name="oWSProxy">Objeto da classe construida do WSDL</param>
-        /// <param name="oServicoWS">Objeto da classe de envio do XML</param>
-        /// <param name="cMetodo">Método da classe de envio do XML que faz o envio</param>
+        /// <param name="wsProxy">Objeto da classe construida do WSDL</param>
+        /// <param name="servicoWS">Objeto da classe de envio do XML</param>
+        /// <param name="metodo">Método da classe de envio do XML que faz o envio</param>
         /// <param name="cabecMsg">Objeto da classe de cabecalho do serviço</param>
-        /// <param name="oServicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
-        /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
-        /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
+        /// <param name="servicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
+        /// <param name="finalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
+        /// <param name="finalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 17/03/2010
         /// </remarks>
-        public void Invocar(WebServiceProxy oWSProxy,
-                            object oServicoWS,
-                            string cMetodo,
+        public void Invocar(WebServiceProxy wsProxy,
+                            object servicoWS,
+                            string metodo,
                             object cabecMsg,
-                            object oServicoNFe,
-                            string cFinalArqEnvio,
-                            string cFinalArqRetorno)
+                            object servicoNFe,
+                            string finalArqEnvio,
+                            string finalArqRetorno)
         {
             int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
-            Type typeServicoNFe = oServicoNFe.GetType();
+            Type typeServicoNFe = servicoNFe.GetType();
 
-            Servicos servico = (Servicos)oWSProxy.GetProp(oServicoNFe, NFe.Components.NFeStrConstants.Servico);
+            Servicos servico = (Servicos)wsProxy.GetProp(servicoNFe, NFe.Components.NFeStrConstants.Servico);
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
-            string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
+            string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, servicoNFe, null));
 
             // Exclui o Arquivo de Erro
-            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, finalArqEnvio + ".xml") + finalArqRetorno + ".err");
 
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
@@ -77,7 +77,7 @@ namespace NFe.Service
             // Definir Proxy
             if (ConfiguracaoApp.Proxy)
             {
-                oWSProxy.SetProp(oServicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto));
+                wsProxy.SetProp(servicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto));
             }
 
             // Limpa a variável de retorno
@@ -86,7 +86,7 @@ namespace NFe.Service
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            oWSProxy.SetProp(oServicoWS, "Timeout", 60000);
+            wsProxy.SetProp(servicoWS, "Timeout", 60000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
             if (ConfiguracaoApp.ChecarConexaoInternet)
@@ -97,9 +97,9 @@ namespace NFe.Service
                 }
 
             //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
-            if (cMetodo.Substring(0, 3).ToLower() == "sce") // DPEC
+            if (metodo.Substring(0, 3).ToLower() == "sce") // DPEC
             {
-                oWSProxy.SetProp(oServicoWS, "sceCabecMsgValue", cabecMsg);
+                wsProxy.SetProp(servicoWS, "sceCabecMsgValue", cabecMsg);
             }
             else
             {
@@ -111,7 +111,7 @@ namespace NFe.Service
                     case Servicos.MDFeConsultaStatusServico:
                     case Servicos.MDFeRecepcaoEvento:
                     case Servicos.MDFeConsultaNaoEncerrado:
-                        oWSProxy.SetProp(oServicoWS, "mdfeCabecMsgValue", cabecMsg);
+                        wsProxy.SetProp(servicoWS, "mdfeCabecMsgValue", cabecMsg);
                         break;
 
                     case Servicos.CTeInutilizarNumeros:
@@ -120,20 +120,20 @@ namespace NFe.Service
                     case Servicos.CTeEnviarLote:
                     case Servicos.CTeRecepcaoEvento:
                     case Servicos.CTeConsultaStatusServico:
-                        if (oWSProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
+                        if (wsProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                         {
                             try
                             {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsg", cabecMsg);
+                                wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
                             }
                             catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
                             {
-                                oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                                wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
                             }
                         }
                         else
                         {
-                            oWSProxy.SetProp(oServicoWS, "cteCabecMsgValue", cabecMsg);
+                            wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
                         }
                         break;
 
@@ -141,7 +141,7 @@ namespace NFe.Service
                         break;
 
                     default:
-                        oWSProxy.SetProp(oServicoWS, "nfeCabecMsgValue", cabecMsg);
+                        wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
                         break;
                 }
             }
@@ -152,20 +152,20 @@ namespace NFe.Service
                 XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
                 FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
                 string encodedData = StreamExtensions.ToBase64(XMLNfeZip);
-                XmlRetorno = oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { encodedData });
+                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { encodedData });
             }
             else
-                XmlRetorno = oWSProxy.InvokeXML(oServicoWS, cMetodo, new object[] { docXML });
+                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { docXML });
 
             if (XmlRetorno == null)
                 throw new Exception("Erro de envio da solicitação do serviço: " + servico.ToString());
 
-            typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { XmlRetorno.OuterXml });
+            typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, servicoNFe, new object[] { XmlRetorno.OuterXml });
 
             // Registra o retorno de acordo com o status obtido
-            if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
+            if (finalArqEnvio != string.Empty && finalArqRetorno != string.Empty)
             {
-                typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
+                typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, servicoNFe, new Object[] { finalArqEnvio + ".xml", finalArqRetorno + ".xml" });
             }
         }
         #endregion
@@ -174,11 +174,11 @@ namespace NFe.Service
         /// <summary>
         /// Método responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
-        /// <param name="oWSProxy">Objeto da classe construída do WSDL</param>
-        /// <param name="oServicoWS">Objeto da classe de envio do XML</param>
-        /// <param name="cMetodo">Método da classe de envio do XML que faz o envio</param>
-        /// <param name="oCabecMsg">Objeto da classe de cabeçalho do serviço</param>
-        /// <param name="oServicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
+        /// <param name="wsProxy">Objeto da classe construída do WSDL</param>
+        /// <param name="servicoWS">Objeto da classe de envio do XML</param>
+        /// <param name="metodo">Método da classe de envio do XML que faz o envio</param>
+        /// <param name="cabecMsg">Objeto da classe de cabeçalho do serviço</param>
+        /// <param name="servicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
         /// <remarks>
         /// Observações: Como esta sobrecarga não tem os parâmetros "cFinalArqEnvio e cFinalArqRetorno", 
         /// não será gerado o arquivo de retorno do webservice, 
@@ -186,13 +186,13 @@ namespace NFe.Service
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 17/03/2010
         /// </remarks>
-        public void Invocar(WebServiceProxy oWSProxy,
-                            object oServicoWS,
-                            string cMetodo,
-                            object oCabecMsg,
-                            object oServicoNFe)
+        public void Invocar(WebServiceProxy wsProxy,
+                            object servicoWS,
+                            string metodo,
+                            object cabecMsg,
+                            object servicoNFe)
         {
-            this.Invocar(oWSProxy, oServicoWS, cMetodo, oCabecMsg, oServicoNFe, string.Empty, string.Empty);
+            this.Invocar(wsProxy, servicoWS, metodo, cabecMsg, servicoNFe, string.Empty, string.Empty);
         }
         #endregion
 
@@ -200,24 +200,24 @@ namespace NFe.Service
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
-        /// <param name="oWSProxy">Objeto da classe construida do WSDL</param>
-        /// <param name="oServicoWS">Objeto da classe de envio do XML</param>
-        /// <param name="cMetodo">Método da classe de envio do XML que faz o envio</param>
+        /// <param name="wsProxy">Objeto da classe construida do WSDL</param>
+        /// <param name="servicoWS">Objeto da classe de envio do XML</param>
+        /// <param name="metodo">Método da classe de envio do XML que faz o envio</param>
         /// <param name="cabecMsg">Objeto da classe de cabecalho do serviço</param>
-        /// <param name="oServicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
-        /// <param name="cFinalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
-        /// <param name="cFinalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
+        /// <param name="servicoNFe">Objeto do Serviço de envio da NFE do UniNFe</param>
+        /// <param name="finalArqEnvio">string do final do arquivo a ser enviado. Sem a extensão ".xml"</param>
+        /// <param name="finalArqRetorno">string do final do arquivo a ser gravado com o conteúdo do retorno. Sem a extensão ".xml"</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 17/03/2010
         /// </remarks>
-        public void InvocarNFSe(WebServiceProxy oWSProxy,
-                            object oServicoWS,
-                            string cMetodo,
+        public void InvocarNFSe(WebServiceProxy wsProxy,
+                            object servicoWS,
+                            string metodo,
                             string cabecMsg,
-                            object oServicoNFe,
-                            string cFinalArqEnvio,
-                            string cFinalArqRetorno,
+                            object servicoNFe,
+                            string finalArqEnvio,
+                            string finalArqRetorno,
                             PadroesNFSe padraoNFSe,
                             Servicos servicoNFSe)
         {
@@ -226,13 +226,13 @@ namespace NFe.Service
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
-            Type typeServicoNFe = oServicoNFe.GetType();
+            Type typeServicoNFe = servicoNFe.GetType();
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
-            string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, oServicoNFe, null));
+            string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, servicoNFe, null));
 
             // Exclui o Arquivo de Erro
-            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, cFinalArqEnvio + ".xml") + cFinalArqRetorno + ".err");
+            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, finalArqEnvio + ".xml") + finalArqRetorno + ".err");
 
             // Validar o Arquivo XML
             ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
@@ -258,11 +258,11 @@ namespace NFe.Service
             if (ConfiguracaoApp.Proxy)
                 if (padraoNFSe != PadroesNFSe.BETHA)
                 {
-                    oWSProxy.SetProp(oServicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto));
+                    wsProxy.SetProp(servicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto));
                 }
                 else
                 {
-                    oWSProxy.Betha.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
+                    wsProxy.Betha.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
                 }
 
             // Limpa a variável de retorno
@@ -271,7 +271,7 @@ namespace NFe.Service
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
             if (padraoNFSe != PadroesNFSe.BETHA)
-                oWSProxy.SetProp(oServicoWS, "Timeout", 120000);
+                wsProxy.SetProp(servicoWS, "Timeout", 120000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
             if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013
@@ -286,30 +286,30 @@ namespace NFe.Service
             {
                 #region Padrão BETHA
                 case PadroesNFSe.BETHA:
-                    switch (cMetodo)
+                    switch (metodo)
                     {
                         case "ConsultarSituacaoLoteRps":
-                            strRetorno = oWSProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.ConsultarSituacaoLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarLoteRps":
-                            strRetorno = oWSProxy.Betha.ConsultarLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.ConsultarLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "CancelarNfse":
-                            strRetorno = oWSProxy.Betha.CancelarNfse(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.CancelarNfse(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarNfse":
-                            strRetorno = oWSProxy.Betha.ConsultarNfse(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.ConsultarNfse(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "ConsultarNfsePorRps":
-                            strRetorno = oWSProxy.Betha.ConsultarNfsePorRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.ConsultarNfsePorRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
 
                         case "RecepcionarLoteRps":
-                            strRetorno = oWSProxy.Betha.RecepcionarLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
+                            strRetorno = wsProxy.Betha.RecepcionarLoteRps(docXML, Empresas.Configuracoes[emp].AmbienteCodigo);
                             break;
                     }
                     break;
@@ -333,34 +333,34 @@ namespace NFe.Service
                             break;
                     }
 
-                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Convert.ToSByte(operacao), Empresas.Configuracoes[emp].UsuarioWS, senhaWs, docXML.OuterXml });
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Convert.ToSByte(operacao), Empresas.Configuracoes[emp].UsuarioWS, senhaWs, docXML.OuterXml });
                     break;
                 #endregion
 
                 #region Padrão Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
-                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { 1, docXML.OuterXml });
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { 1, docXML.OuterXml });
                     break;
                 #endregion
 
                 #region Padrão Paulistana
                 case PadroesNFSe.PAULISTANA:
-                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { 1, docXML.OuterXml });
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { 1, docXML.OuterXml });
                     break;
                 #endregion
 
                 #region Demais padrões
                 case PadroesNFSe.TECNOSISTEMAS:
-                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
                     break;
 
                 case PadroesNFSe.SMARAPD:
-                    if (cMetodo == "nfdEntradaCancelar")
-                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
+                    if (metodo == "nfdEntradaCancelar")
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
                         TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
                         docXML.OuterXml });
                     else
-                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
                         TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
                         Empresas.Configuracoes[emp].UnidadeFederativaCodigo, 
                         docXML.OuterXml });
@@ -369,7 +369,7 @@ namespace NFe.Service
                 case PadroesNFSe.ISSWEB:
                     string versao = docXML.DocumentElement.GetElementsByTagName("Versao")[0].InnerText;
                     string cnpj = docXML.DocumentElement.GetElementsByTagName("CNPJCPFPrestador")[0].InnerText;
-                    strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cnpj, docXML.OuterXml, versao });
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cnpj, docXML.OuterXml, versao });
                     break;
 
                 case PadroesNFSe.GINFES:
@@ -379,9 +379,9 @@ namespace NFe.Service
                 case PadroesNFSe.ISSNET:
                 default:
                     if (string.IsNullOrEmpty(cabecMsg))
-                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { docXML.OuterXml });
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
                     else
-                        strRetorno = oWSProxy.InvokeStr(oServicoWS, cMetodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
                     break;
                 #endregion
             }
@@ -405,19 +405,18 @@ namespace NFe.Service
             #endregion
 
             //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
-            typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, oServicoNFe, new object[] { strRetorno });
+            typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, servicoNFe, new object[] { strRetorno });
 
             // Registra o retorno de acordo com o status obtido
-            if (cFinalArqEnvio != string.Empty && cFinalArqRetorno != string.Empty)
+            if (finalArqEnvio != string.Empty && finalArqRetorno != string.Empty)
             {
-                typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, oServicoNFe, new Object[] { cFinalArqEnvio + ".xml", cFinalArqRetorno + ".xml" });
+                typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, servicoNFe, new Object[] { finalArqEnvio + ".xml", finalArqRetorno + ".xml" });
             }
         }
         #endregion
 
         #endregion
     }
-
 }
 
 namespace NFe.Exceptions

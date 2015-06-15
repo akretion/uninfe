@@ -59,7 +59,7 @@ namespace NFe.Service
                     Servico = Servicos.NFeEnviarLoteZip2;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);// NomeClasseWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF)));
+                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
@@ -71,7 +71,7 @@ namespace NFe.Service
 
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.NFeEnviarLoteZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.NFeEnviarLoteZip2)
                 {
                     FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
                     TFunctions.CompressXML(dadosArquivo);
@@ -82,10 +82,12 @@ namespace NFe.Service
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
                 {
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oRecepcao, 
-                                        nOperacao,//NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), 
-                                        oCabecMsg, this);
+                    //Não posso gerar o arquivo na pasta de retorno através do método Invocar, por isso não estou colocando os dois ultimos parâmetros com a definição dos prefixos dos arquivos. O arquivo de retorno no processo síncrono deve acontecer somente depois de finalizado o processo da nota, ou gera problemas. Wandrey 11/06/2015
+                    oInvocarObj.Invocar(wsProxy,
+                                        oRecepcao,
+                                        nOperacao,
+                                        oCabecMsg,
+                                        this); 
 
                     Protocolo(vStrXmlRetorno);
                 }
@@ -93,8 +95,11 @@ namespace NFe.Service
                 {
                     oInvocarObj.Invocar(wsProxy, 
                                         oRecepcao, 
-                                        nOperacao,//NomeMetodoWS(Servico, Convert.ToInt32(oLer.oDadosNfe.cUF), oLer.oDadosNfe.versao), 
-                                        oCabecMsg, this, "-env-lot", "-rec");
+                                        nOperacao,
+                                        oCabecMsg, 
+                                        this, 
+                                        "-env-lot", 
+                                        "-rec");
 
                     Recibo(vStrXmlRetorno);
                 }
@@ -108,16 +113,21 @@ namespace NFe.Service
                 else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
                 {
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, /*oLerRecibo.*/dadosRec.tMed.ToString());
-                    oFluxoNfe.AtualizarTagRec(idLote, /*oLerRecibo.*/dadosRec.nRec);
+                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, dadosRec.tMed.ToString());
+                    oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
                 }
                 else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
                          Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
                          Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
                 {
+                    if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
+                    {
+                        // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
+                        oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
+                    }
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109, 
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
-                    //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois tira ela do fluxo
+                    //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois a tira do fluxo
                     //Wandrey 30/04/2009
                     oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
                     oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
@@ -127,7 +137,7 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.NFeEnviarLoteZip2)//Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00")
+                if (Servico == Servicos.NFeEnviarLoteZip2)
                     Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)
