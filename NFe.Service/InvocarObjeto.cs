@@ -97,53 +97,46 @@ namespace NFe.Service
                 }
 
             //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
-            if (metodo.Substring(0, 3).ToLower() == "sce") // DPEC
+            switch (servico)
             {
-                wsProxy.SetProp(servicoWS, "sceCabecMsgValue", cabecMsg);
-            }
-            else
-            {
-                switch (servico)
-                {
-                    case Servicos.MDFePedidoConsultaSituacao:
-                    case Servicos.MDFePedidoSituacaoLote:
-                    case Servicos.MDFeEnviarLote:
-                    case Servicos.MDFeConsultaStatusServico:
-                    case Servicos.MDFeRecepcaoEvento:
-                    case Servicos.MDFeConsultaNaoEncerrado:
-                        wsProxy.SetProp(servicoWS, "mdfeCabecMsgValue", cabecMsg);
-                        break;
+                case Servicos.MDFePedidoConsultaSituacao:
+                case Servicos.MDFePedidoSituacaoLote:
+                case Servicos.MDFeEnviarLote:
+                case Servicos.MDFeConsultaStatusServico:
+                case Servicos.MDFeRecepcaoEvento:
+                case Servicos.MDFeConsultaNaoEncerrado:
+                    wsProxy.SetProp(servicoWS, "mdfeCabecMsgValue", cabecMsg);
+                    break;
 
-                    case Servicos.CTeInutilizarNumeros:
-                    case Servicos.CTePedidoConsultaSituacao:
-                    case Servicos.CTePedidoSituacaoLote:
-                    case Servicos.CTeEnviarLote:
-                    case Servicos.CTeRecepcaoEvento:
-                    case Servicos.CTeConsultaStatusServico:
-                        if (wsProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
+                case Servicos.CTeInutilizarNumeros:
+                case Servicos.CTePedidoConsultaSituacao:
+                case Servicos.CTePedidoSituacaoLote:
+                case Servicos.CTeEnviarLote:
+                case Servicos.CTeRecepcaoEvento:
+                case Servicos.CTeConsultaStatusServico:
+                    if (wsProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
+                    {
+                        try
                         {
-                            try
-                            {
-                                wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
-                            }
-                            catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
-                            {
-                                wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
-                            }
+                            wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
                         }
-                        else
+                        catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
                         {
                             wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
                         }
-                        break;
+                    }
+                    else
+                    {
+                        wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
+                    }
+                    break;
 
-                    case Servicos.DFeEnviar:
-                        break;
+                case Servicos.DFeEnviar:
+                    break;
 
-                    default:
-                        wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
-                        break;
-                }
+                default:
+                    wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
+                    break;
             }
 
             // Envio da NFe Compactada - Renan

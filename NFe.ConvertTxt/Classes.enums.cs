@@ -13,8 +13,6 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLPedSit = "3.10";
         public static string VersaoXMLInut = "3.10";
         public static string VersaoXMLConsCad = "2.00";
-        public static string VersaoXMLEnvDPEC = "1.01";
-        public static string VersaoXMLConsDPEC = "1.01";
         public static string VersaoXMLEvento = "1.00";
         public static string VersaoXMLEnvConsultaNFeDest = "1.01";
         public static string VersaoXMLEnvDownload = "1.00";

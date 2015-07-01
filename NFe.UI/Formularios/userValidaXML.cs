@@ -79,7 +79,8 @@ namespace NFe.UI
                                 ";*" + Propriedade.ExtEnvio.PedSitNfse +
                                 ";*" + Propriedade.ExtEnvio.PedSitNfseRps +
                                 ";*" + Propriedade.ExtEnvio.PedInuNfse +
-                                ";*" + Propriedade.ExtEnvio.PedNFSePNG; 
+                                ";*" + Propriedade.ExtEnvio.PedNFSePNG + 
+                                ";*" + Propriedade.ExtEnvio.PedNFSePDF; 
                         }
                         else
                         {
@@ -87,7 +88,6 @@ namespace NFe.UI
                                         ";*" + Propriedade.ExtEnvio.Cte +
                                         ";*" + Propriedade.ExtEnvio.EnvCancelamento_XML +
                                         ";*" + Propriedade.ExtEnvio.EnvCCe_XML +
-                                        ";*" + Propriedade.ExtEnvio.EnvDPEC_XML +
                                         ";*" + Propriedade.ExtEnvio.EnvManifestacao_XML +
                                         ";*" + Propriedade.ExtEnvio.EnvDFe_XML +
                                 //";*" + Propriedade.ExtEnvio.ConsNFeDest_XML +
@@ -107,7 +107,6 @@ namespace NFe.UI
                                 Propriedade.ExtEnvio.EnvCancelamento_XML,
                                 Propriedade.ExtEnvio.EnvDownload_XML,
                                 Propriedade.ExtEnvio.EnvManifestacao_XML);
-                            dlg.Filter += string.Format("|Arquivos de DPEC (*.*{0})|*{0}", Propriedade.ExtEnvio.EnvDPEC_XML);
                         }
                         
                         if (!string.IsNullOrEmpty(path))

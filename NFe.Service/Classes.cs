@@ -501,62 +501,6 @@ namespace NFe.Service
     }
     #endregion
 
-    #region Classe com os dados do XML de registro do DPEC
-    /// <summary>
-    /// Classe com os dados do XML de registro do DPEC
-    /// </summary>
-    public class DadosEnvDPEC
-    {
-        /// <summary>
-        /// Ambiente (2-Homologação ou 1-Produção)
-        /// </summary>
-        public int tpAmb { get; set; }
-        /// <summary>
-        /// Código da Unidade Federativa (UF)
-        /// </summary>
-        public int cUF { get; set; }
-        /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
-        /// </summary>
-        public int tpEmis { get; set; }
-
-        public string CNPJ { get; set; }
-        public string IE { get; set; }
-        public string verProc { get; set; }
-        public string chNFe { get; set; }
-        public string CNPJCPF { get; set; }
-        public string UF { get; set; }
-        public string vNF { get; set; }
-        public string vICMS { get; set; }
-        public string vST { get; set; }
-    }
-    #endregion
-
-    #region Classe com os dados do XML de consulta do registro do DPEC
-    /// <summary>
-    /// Classe com os dados do XML de registro do DPEC
-    /// </summary>
-    public class DadosConsDPEC
-    {
-        /// <summary>
-        /// Ambiente (2-Homologação ou 1-Produção)
-        /// </summary>
-        public int tpAmb { get; set; }
-        /// <summary>
-        /// Código da Unidade Federativa (UF)
-        /// </summary>
-        //public int cUF { get; set; }
-        /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
-        /// </summary>
-        public int tpEmis { get; set; }
-
-        public string chNFe { get; set; }
-        public string nRegDPEC { get; set; }
-        public string verAplic { get; set; }
-    }
-    #endregion
-
     #region Classe com os dados do XML do registro de eventos
     public class Evento
     {

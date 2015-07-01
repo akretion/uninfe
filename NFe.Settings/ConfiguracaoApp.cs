@@ -102,6 +102,7 @@ namespace NFe.Settings
 
         #region Prorpiedades utilizadas no inicio do sistema
         public static bool AtualizaWSDL { get; set; }
+        public static Stopwatch ExecutionTime { get; set; }
         #endregion
 
         #endregion
@@ -873,13 +874,9 @@ namespace NFe.Settings
                     CodigoUF = 904;
                     break;
 
-                case NFe.Components.TipoEmissao.teEPECeDPEC:
+                case NFe.Components.TipoEmissao.teEPEC:
                     switch (servico)
                     {
-                        case Servicos.DPECConsultar:
-                        case Servicos.DPECEnviar:
-                            CodigoUF = 901;
-                            break;
                         case Servicos.EventoEPEC:
                             if (CodigoUF == 35 && ehNFCe) //Se for NFCe em São Paulo, tem um ambiente para EPEC exclusivo.
                                 CodigoUF = 906;
@@ -917,7 +914,6 @@ namespace NFe.Settings
                             break;
 
                         case Servicos.NFeEnviarLote:
-                        case Servicos.DPECEnviar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcao : list.LocalProducao.NFeRecepcao);
                             break;
 
@@ -926,10 +922,6 @@ namespace NFe.Settings
                             break;
 
                         case Servicos.NFePedidoConsultaSituacao:
-                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
-                            break;
-
-                        case Servicos.DPECConsultar:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeConsulta : list.LocalProducao.NFeConsulta);
                             break;
 
@@ -1051,11 +1043,13 @@ namespace NFe.Settings
                         case Servicos.NFSeInutilizarNFSe:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.InutilizarNFSe : list.LocalProducao.InutilizarNFSe);
                             break;
-
+                        case Servicos.NFSeConsultarNFSePDF:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNFSePDF : list.LocalProducao.ConsultarNFSePDF);
+                            break;
                         #endregion
                     }
-                    if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPECeDPEC)
-                        ufNome = (servico == Servicos.EventoEPEC ? "EPEC" : "DPEC");
+                    if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPEC)
+                        ufNome = "EPEC";
                     else
                         ufNome = "de " + list.Nome;
 

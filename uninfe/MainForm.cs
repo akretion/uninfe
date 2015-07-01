@@ -749,14 +749,12 @@ namespace uninfe
                     ";*" + Propriedade.ExtRetorno.Den +
                     ";*" + Propriedade.ExtRetorno.retCancelamento_XML +
                     ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
-                    ";*" + Propriedade.ExtRetorno.ProcEventoNFe +
-                    ";*" + Propriedade.ExtRetorno.retDPEC_XML;
+                    ";*" + Propriedade.ExtRetorno.ProcEventoNFe;
                 dlg.Filter += "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe;
                 dlg.Filter += "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
                     ",*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
                     ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe;
                 dlg.Filter += "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe;
-                dlg.Filter += "|Arquivos de DPEC (*.*" + Propriedade.ExtRetorno.retDPEC_XML + ")|*" + Propriedade.ExtRetorno.retDPEC_XML;
                 dlg.Filter += "|Arquivos de CTe (*.*" + Propriedade.ExtRetorno.ProcCTe + ")|*" + Propriedade.ExtRetorno.ProcCTe;
                 dlg.Filter += "|Arquivos de MDFe (*.*" + Propriedade.ExtRetorno.ProcMDFe + ")|*" + Propriedade.ExtRetorno.ProcMDFe;
                 dlg.Filter += "|Todos os arquivos XML (*.xml)|*.xml";

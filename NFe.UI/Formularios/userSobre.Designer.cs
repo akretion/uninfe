@@ -43,6 +43,8 @@
             this.textBox_licenca = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.txtElapsedDays = new MetroFramework.Controls.MetroTextBox();
+            this.lblExecucao = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
@@ -145,6 +147,8 @@
             // 
             // textBox_DataUltimaModificacao
             // 
+            this.textBox_DataUltimaModificacao.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_DataUltimaModificacao.Location = new System.Drawing.Point(0, 283);
             this.textBox_DataUltimaModificacao.MaxLength = 32767;
             this.textBox_DataUltimaModificacao.Name = "textBox_DataUltimaModificacao";
@@ -170,6 +174,8 @@
             // 
             // textBox_versao
             // 
+            this.textBox_versao.Lines = new string[] {
+        "Styled Textbox"};
             this.textBox_versao.Location = new System.Drawing.Point(194, 283);
             this.textBox_versao.MaxLength = 32767;
             this.textBox_versao.Name = "textBox_versao";
@@ -187,6 +193,8 @@
             this.textBox_licenca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_licenca.Lines = new string[] {
+        "Multiline Textbox"};
             this.textBox_licenca.Location = new System.Drawing.Point(0, 326);
             this.textBox_licenca.MaxLength = 32767;
             this.textBox_licenca.Multiline = true;
@@ -222,10 +230,38 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
+            // txtElapsedDays
+            // 
+            this.txtElapsedDays.Lines = new string[] {
+        "metroTextBox1"};
+            this.txtElapsedDays.Location = new System.Drawing.Point(386, 282);
+            this.txtElapsedDays.MaxLength = 32767;
+            this.txtElapsedDays.Name = "txtElapsedDays";
+            this.txtElapsedDays.PasswordChar = '\0';
+            this.txtElapsedDays.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtElapsedDays.SelectedText = "";
+            this.txtElapsedDays.Size = new System.Drawing.Size(204, 23);
+            this.txtElapsedDays.TabIndex = 28;
+            this.txtElapsedDays.Text = "metroTextBox1";
+            this.txtElapsedDays.UseSelectable = true;
+            // 
+            // lblExecucao
+            // 
+            this.lblExecucao.AutoSize = true;
+            this.lblExecucao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblExecucao.Location = new System.Drawing.Point(386, 260);
+            this.lblExecucao.Margin = new System.Windows.Forms.Padding(3);
+            this.lblExecucao.Name = "lblExecucao";
+            this.lblExecucao.Size = new System.Drawing.Size(152, 15);
+            this.lblExecucao.TabIndex = 29;
+            this.lblExecucao.Text = "Aplicativo está executando a:";
+            // 
             // userSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblExecucao);
+            this.Controls.Add(this.txtElapsedDays);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.textBox_licenca);
@@ -260,6 +296,8 @@
             this.Controls.SetChildIndex(this.textBox_licenca, 0);
             this.Controls.SetChildIndex(this.metroLabel4, 0);
             this.Controls.SetChildIndex(this.pictureBox3, 0);
+            this.Controls.SetChildIndex(this.txtElapsedDays, 0);
+            this.Controls.SetChildIndex(this.lblExecucao, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
@@ -284,5 +322,7 @@
         private MetroFramework.Controls.MetroTextBox textBox_licenca;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private MetroFramework.Controls.MetroTextBox txtElapsedDays;
+        private MetroFramework.Controls.MetroLabel lblExecucao;
     }
 }

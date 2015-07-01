@@ -73,11 +73,15 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarNFSePNG:
-                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInutilizarNfse());
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarNfsePNG());
                             break;
 
                         case Servicos.NFSeInutilizarNFSe:
                             this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInutilizarNfse());
+                            break;
+
+                        case Servicos.NFSeConsultarNFSePDF:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarNfsePDF());
                             break;
 
                         #endregion
@@ -90,14 +94,6 @@ namespace NFe.Service
 
                         case Servicos.ConsultaCadastroContribuinte:
                             DirecionarArquivo(emp, true, true, arquivo, new TaskCadastroContribuinte());
-                            break;
-
-                        case Servicos.DPECEnviar:
-                            DirecionarArquivo(emp, true, true, arquivo, new TaskDPECRecepcao());
-                            break;
-
-                        case Servicos.DPECConsultar:
-                            DirecionarArquivo(emp, true, true, arquivo, new TaskDPECConsulta());
                             break;
 
                         case Servicos.EventoRecepcao:
@@ -405,14 +401,6 @@ namespace NFe.Service
                             {
                                 tipoServico = Servicos.WSExiste;
                             }
-                            else if (arq.IndexOf(Propriedade.ExtEnvio.EnvDPEC_TXT) >= 0)
-                            {
-                                tipoServico = Servicos.DPECEnviar;
-                            }
-                            else if (arq.IndexOf(Propriedade.ExtEnvio.ConsDPEC_TXT) >= 0)
-                            {
-                                tipoServico = Servicos.DPECConsultar;
-                            }
                             else if (arq.IndexOf(Propriedade.ExtEnvio.ConsInf_TXT) >= 0)
                             {
                                 tipoServico = Servicos.UniNFeConsultaInformacoes;
@@ -592,14 +580,6 @@ namespace NFe.Service
                                     }
                                     break;
 
-                                case "envDPEC":
-                                    tipoServico = Servicos.DPECEnviar;
-                                    break;
-
-                                case "consDPEC":
-                                    tipoServico = Servicos.DPECConsultar;
-                                    break;
-
                                 case "gerarChave":
                                     tipoServico = Servicos.NFeGerarChave;
                                     break;
@@ -660,6 +640,10 @@ namespace NFe.Service
                                     else if (arq.IndexOf(Propriedade.ExtEnvio.PedInuNfse) >= 0)
                                     {
                                         tipoServico = Servicos.NFSeInutilizarNFSe;
+                                    }
+                                    else if (arq.IndexOf(Propriedade.ExtEnvio.PedNFSePDF) >= 0)
+                                    {
+                                        tipoServico = Servicos.NFSeConsultarNFSePDF;
                                     }
                                     #endregion
 
@@ -1045,15 +1029,13 @@ namespace NFe.Service
                 if (Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teFS &&
                     Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teFSDA &&
                     Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teOffLine &&
-                    Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teEPECeDPEC) //Confingência em formulário de segurança e DPEC não envia na hora, tem que aguardar voltar para normal.
+                    Empresas.Configuracoes[emp].tpEmis != (int)NFe.Components.TipoEmissao.teEPEC) //Confingência em formulário de segurança e EPEC não envia na hora, tem que aguardar voltar para normal.
                 {
                     doExecute = true;
                 }
                 else
                 {
                     if (nfe is TaskDFeRecepcao ||
-                        nfe is TaskDPECRecepcao ||
-                        nfe is TaskDPECConsulta ||
                         nfe is TaskNFeRetRecepcao ||
                         nfe is TaskNFeConsultaStatus ||
                         nfe is TaskNFeConsultaSituacao ||
@@ -1067,7 +1049,7 @@ namespace NFe.Service
                         nfe is TaskMDFeConsultaStatus ||
                         nfe is TaskMDFeConsultaSituacao ||
                         nfe is TaskMDFeConsNaoEncerrado ||
-                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPECeDPEC))
+                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC))
                     {
                         doExecute = true;
                     }
@@ -1391,16 +1373,6 @@ namespace NFe.Service
                     extRetERR = Propriedade.ExtRetorno.Rec_ERR;
                     break;
 
-                case Servicos.DPECEnviar:
-                    extRet = Propriedade.ExtEnvio.EnvDPEC_XML;
-                    extRetERR = Propriedade.ExtRetorno.retDPEC_ERR;
-                    break;
-
-                case Servicos.DPECConsultar:
-                    extRet = Propriedade.ExtEnvio.ConsDPEC_XML;
-                    extRetERR = Propriedade.ExtRetorno.retConsDPEC_ERR;
-                    break;
-
                 case Servicos.CTeAssinarValidarEnvioEmLote:
                     extRet = Propriedade.ExtEnvio.Cte;
                     extRetERR = Propriedade.ExtRetorno.Cte_ERR;
@@ -1497,10 +1469,18 @@ namespace NFe.Service
                 #endregion
 
                 default:
-                    //Como não foi possível identificar o tipo do servico vou mudar somente a extensão para .err pois isso pode acontecer caso exista erro na estrutura do XML.
-                    //Renan - 05/03/2014 
-                    extRet = ".xml";
-                    extRetERR = ".err";
+                    if (arquivo.EndsWith(Propriedade.ExtEnvio.PedSit_XML))
+                    {
+                        extRet = Propriedade.ExtEnvio.PedSit_XML;
+                        extRetERR = Propriedade.ExtRetorno.Sit_ERR;
+                    }
+                    else
+                    {
+                        //Como não foi possível identificar o tipo do servico vou mudar somente a extensão para .err pois isso pode acontecer caso exista erro na estrutura do XML.
+                        //Renan - 05/03/2014 
+                        extRet = ".xml";
+                        extRetERR = ".err";
+                    }
                     break;
             }
             if (!string.IsNullOrEmpty(extRet))

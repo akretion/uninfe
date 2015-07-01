@@ -95,6 +95,7 @@
     <Compile Include="NFeEmProcessamento.cs" />
     <Compile Include="NFe\TaskRegistroDeSaida.cs" />
     <Compile Include="NFe\TaskRegistroDeSaidaCancelamento.cs" />
+    <Compile Include="NFSe\TaskConsultarNfsePDF.cs" />
     <Compile Include="NFSe\TaskInutilizarNfse.cs" />
     <Compile Include="NFSe\TaskConsultarNfsePNG.cs" />
     <Compile Include="NFSe\TaskConsultarURLNfseSerie.cs" />
@@ -113,7 +114,6 @@
     <Compile Include="NFe\TaskConsultaNFDest.cs" />
     <Compile Include="NFe\TaskConsultaStatus.cs" />
     <Compile Include="NFe\TaskDownloadNFe.cs" />
-    <Compile Include="NFe\TaskDPEC.cs" />
     <Compile Include="NFe\TaskEventos.cs" />
     <Compile Include="NFe\TaskGerarXMLPedRec.cs" />
     <Compile Include="NFe\TaskInutilizacao.cs" />

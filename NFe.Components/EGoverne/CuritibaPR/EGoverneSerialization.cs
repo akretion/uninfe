@@ -196,15 +196,21 @@ namespace NFe.Components.EGoverne.CuritibaPR
             {
                 if (n.Name == "Signature")
                 {
-                    SignObject(n, value);
+                    if (tpAmb == TipoAmbiente.taHomologacao)
+                        SignObject(n, value);
+                    else
+                        PSignObject(n, value);
+                    
                     continue;
                 }
 
                 if (n.HasChildNodes && n.FirstChild.NodeType == XmlNodeType.Element)
                 {
+                    string component = (tpAmb == TipoAmbiente.taHomologacao ? "NFe.Components.br.gov.egoverne.isscuritiba.curitiba.h." : "NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.");
+
                     Object instance =
-                    System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(
-                        "NFe.Components.br.gov.egoverne.isscuritiba.curitiba.h." + this.GetNameObject(n.Name, WsMethod),
+                    System.Reflection.Assembly.GetExecutingAssembly().CreateInstance( 
+                        component + this.GetNameObject(n.Name, WsMethod),
                         false,
                         BindingFlags.Default,
                         null,
@@ -212,8 +218,11 @@ namespace NFe.Components.EGoverne.CuritibaPR
                         null,
                         null
                     );
-
-                    SetProperty(value, n.Name, ReadXML(n, instance, n.Name));
+                    
+                    if (tpAmb == TipoAmbiente.taHomologacao)
+                        SetProperty(value, n.Name, ReadXML(n, instance, n.Name));
+                    else
+                        PSetProperty(value, n.Name, ReadXML(n, instance, n.Name));
                 }
                 else
                 {
@@ -306,5 +315,131 @@ namespace NFe.Components.EGoverne.CuritibaPR
 
             return nameObject;
         }
+
+        private void PSetProperty(object result, string propertyName, object value)
+        {
+            PropertyInfo pi = result.GetType().GetProperty(propertyName);
+
+            /// Como tem duas propriedades eu tenho que setar os valores da propriedades do RPS a assinatura e feita pelo metodo especifico
+            if (propertyName.Equals("Rps"))
+            {
+                SetProperty(result, "InfRps", ((NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.tcRps)value).InfRps);
+                SetProperty(result, "Signature", ((NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.tcRps)value).Signature);
+            }
+            else
+                if (pi != null)
+                {
+                    if (!String.IsNullOrEmpty(value.ToString()))
+                    {
+                        Type t = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
+
+                        /// Melhorar a conversao 
+                        if (t.Name.Equals("Rps[]"))
+                        {
+                            NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[] obj = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[1];
+                            obj[0] = ((NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps)value);
+                            pi.SetValue(result, obj, null);
+                        }
+                        else
+                        {
+                            object safeValue = (value == null) ? null : Convert.ChangeType(value, t);
+                            pi.SetValue(result, safeValue, null);
+                        }
+
+                    }
+                }
+        }
+
+        private void PSignObject(XmlNode nodes, object rps)
+        {
+            NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureType sign = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureType();
+
+            //Grupo: Signature->SignedInfo
+            sign.SignedInfo = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignedInfoType();
+
+            sign.SignedInfo.CanonicalizationMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.CanonicalizationMethodType();
+            // <- Elemento foreach
+
+            sign.SignedInfo.SignatureMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureMethodType();
+            // <- Elemento foreach
+
+            // Grupo: Signature->SignedInfo->Reference
+            sign.SignedInfo.Reference = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType[1];
+
+            NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType referenceType = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType();
+            // <- Elemento foreach
+            referenceType.DigestMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.DigestMethodType();
+
+            sign.SignedInfo.Reference[0] = referenceType;
+
+            // Grupo: Signature->SignedInfo->Reference->Transforms
+            sign.SignedInfo.Reference[0].Transforms = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.TransformType[CountElements(nodes, "Transform")];
+            // <- Elemento foreach
+
+            //Tag: Signature->SignatureValue
+            sign.SignatureValue = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureValueType();
+            // <- Elemento foreach
+
+            //Grupo: Signature->KeyInfo
+            sign.KeyInfo = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.KeyInfoType();
+            NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType x509 = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType();
+            x509.Items = new object[1];
+            // <- Elemento foreach
+            x509.ItemsElementName = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType[1] { NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType.X509Certificate };
+
+            sign.KeyInfo.Items = new object[1];
+            sign.KeyInfo.Items[0] = x509;
+
+            sign.KeyInfo.ItemsElementName = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType2[1] { NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType2.X509Data };
+
+            PPopulateSignature(sign, referenceType, x509, nodes);
+
+            SetProperty(rps, "Signature", sign);
+
+        }
+
+        private void PPopulateSignature(NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureType sign, NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType referenceType, NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType x509, XmlNode nodes)
+        {
+            int transformCount = 0;
+
+            foreach (XmlNode item in nodes.ChildNodes)
+            {
+                if (item.Name.Equals("CanonicalizationMethod"))
+                    sign.SignedInfo.CanonicalizationMethod.Algorithm = item.Attributes["Algorithm"].Value;
+
+                if (item.Name.Equals("SignatureMethod"))
+                    sign.SignedInfo.SignatureMethod.Algorithm = item.Attributes["Algorithm"].Value;
+
+                if (item.Name.Equals("Reference"))
+                    referenceType.URI = item.Attributes["URI"].Value;
+
+                if (item.Name.Equals("Transform"))
+                {
+                    NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.TransformType transformType = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.TransformType();
+                    transformType.Algorithm = item.Attributes["Algorithm"].Value;
+                    sign.SignedInfo.Reference[0].Transforms[transformCount] = transformType;
+                    transformCount += 1;
+                }
+
+                if (item.Name.Equals("DigestMethod"))
+                    referenceType.DigestMethod.Algorithm = item.Attributes["Algorithm"].Value;
+
+                if (item.Name.Equals("DigestValue"))
+                    referenceType.DigestValue = GetBytes(item.InnerText);
+
+                if (item.Name.Equals("SignatureValue"))
+                    sign.SignatureValue.Value = GetBytes(item.InnerText);
+
+                if (item.Name.Equals("X509Certificate"))
+                    x509.Items[0] = GetBytes(item.InnerText);
+
+                if (item.HasChildNodes)
+                {
+                    PPopulateSignature(sign, referenceType, x509, item);
+                }
+
+            }
+        }
+
     }
 }

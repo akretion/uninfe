@@ -159,12 +159,6 @@ namespace NFe.Service
                     retorna = "NfeAutorizacao";
                     break;
 
-                case Servicos.DPECConsultar:
-                    retorna = "SCEConsultaRFB";
-                    break;
-                case Servicos.DPECEnviar:
-                    retorna = "SCERecepcaoRFB";
-                    break;
                 case Servicos.EventoRecepcao:
                 case Servicos.EventoCancelamento:
                 case Servicos.EventoManifestacaoDest:
@@ -1048,6 +1042,9 @@ namespace NFe.Service
                         case Servicos.NFSeInutilizarNFSe:
                             retorna = "inutilizacao";
                             break;
+                        case Servicos.NFSeConsultarNFSePDF:
+                            retorna = "obterNotasEmPDF";
+                            break;
                     }
                     break;
                 #endregion
@@ -1526,6 +1523,44 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region VVISS
+                case PadroesNFSe.VVISS:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarLoteNotasFiscais";
+                            break;
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -1743,7 +1778,7 @@ namespace NFe.Service
                                 /// 
                                 case (int)TipoEmissao.teFS:
                                 case (int)TipoEmissao.teFSDA:
-                                case (int)TipoEmissao.teEPECeDPEC:
+                                case (int)TipoEmissao.teEPEC:
                                 case (int)TipoEmissao.teOffLine:
                                     booValido = true;
                                     break;
@@ -1763,7 +1798,7 @@ namespace NFe.Service
                             break;
 
                         case (int)TipoEmissao.teFS:
-                        case (int)TipoEmissao.teEPECeDPEC:
+                        case (int)TipoEmissao.teEPEC:
                         case (int)TipoEmissao.teFSDA:
                         case (int)TipoEmissao.teOffLine:
                             //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
@@ -2185,6 +2220,22 @@ namespace NFe.Service
                     break;
                 case PadroesNFSe.CONAM:
                     break;
+                case PadroesNFSe.VVISS:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        switch (doc.DocumentElement.Name)
+                        {
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+                            case "GerarNfseEnvio":
+                                result = Servicos.NFSeGerarNfse;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -2227,19 +2278,19 @@ namespace NFe.Service
                                 break;
                         }
                         int tpEmis = Convert.ToInt32(item.chNFe.Substring(34, 1));
-                        if ((TipoEmissao)tpEmis != TipoEmissao.teEPECeDPEC)
+                        if ((TipoEmissao)tpEmis != TipoEmissao.teEPEC)
                         {
                             cErro += string.Format("Tipo de emissão no XML deve ser \"{0}\" (tpEmis={1}), mas está informado \"{2}\" (tpEmis={3}).\r\n",
-                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPECeDPEC)),
-                                         (int)TipoEmissao.teEPECeDPEC,
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPEC)),
+                                         (int)TipoEmissao.teEPEC,
                                          NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), tpEmis)),
                                          tpEmis);
                         }
-                        if ((TipoEmissao)Empresas.Configuracoes[emp].tpEmis != TipoEmissao.teEPECeDPEC)
+                        if ((TipoEmissao)Empresas.Configuracoes[emp].tpEmis != TipoEmissao.teEPEC)
                         {
                             cErro += string.Format("Tipo de emissão no Uninfe deve ser \"{0}\" (tpEmis={1}), mas está definido como \"{2}\" (tpEmis={3}).",
-                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPECeDPEC)),
-                                         (int)TipoEmissao.teEPECeDPEC,
+                                         NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), (int)TipoEmissao.teEPEC)),
+                                         (int)TipoEmissao.teEPEC,
                                          NFe.Components.EnumHelper.GetDescription((TipoEmissao)Enum.ToObject(typeof(TipoEmissao), Empresas.Configuracoes[emp].tpEmis)),
                                          Empresas.Configuracoes[emp].tpEmis);
                         }

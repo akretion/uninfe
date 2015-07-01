@@ -273,22 +273,6 @@ namespace NFe.Components
             /// </summary>
             public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
             /// <summary>
-            /// -env-dpec.xml
-            /// </summary>
-            public const string EnvDPEC_XML = "-env-dpec.xml";
-            /// <summary>
-            /// -env-dpec.txt
-            /// </summary>
-            public const string EnvDPEC_TXT = "-env-dpec.txt";
-            /// <summary>
-            /// -cons-dpec.xml"
-            /// </summary>
-            public const string ConsDPEC_XML = "-cons-dpec.xml";
-            /// <summary>
-            /// -cons-dpec.txt
-            /// </summary>
-            public const string ConsDPEC_TXT = "-cons-dpec.txt";
-            /// <summary>
             /// -down-nfe.xml
             /// </summary>
             public const string EnvDownload_XML = "-nfe-down.xml";
@@ -372,6 +356,10 @@ namespace NFe.Components
             /// -ped-inunfse.xml x -inunfse.xml
             /// </summary>
             public const string PedInuNfse = "-ped-inunfse.xml";
+            /// <summary>
+            /// -ped-nfsepdf.xml x -nfsepdf.xml
+            /// </summary>
+            public const string PedNFSePDF = "-ped-nfsepdf.xml";
             #endregion
 
             #region Extensões MDF-e
@@ -514,22 +502,6 @@ namespace NFe.Components
             /// -nfe.err
             /// </summary>
             public const string Nfe_ERR = "-nfe.err";
-            /// <summary>
-            /// -ret-dpec.xml
-            /// </summary>
-            public const string retDPEC_XML = "-ret-dpec.xml";
-            /// <summary>
-            /// -ret-dpec.err
-            /// </summary>
-            public const string retDPEC_ERR = "-ret-dpec.err";
-            /// <summary>
-            /// -ret-cons-dpec.xml
-            /// </summary>
-            public const string retConsDPEC_XML = "-ret-cons-dpec.xml";
-            /// <summary>
-            /// -ret-cons-dpec.err
-            /// </summary>
-            public const string retConsDPEC_ERR = "-ret-cons-dpec.err";
             /// <summary>
             /// -ret-down-nfe.xml
             /// </summary>
@@ -748,7 +720,10 @@ namespace NFe.Components
             /// -ped-inunfse.xml x -inunfse.xml x -inunfse.err
             /// </summary>
             public const string InuNfse_ERR = "-inunfse.err";
-
+            /// <summary>
+            /// -ped-nfsepng.xml x -nfsepng.xml
+            /// </summary>
+            public const string NFSePDF = "-nfsepdf.xml";
             #endregion
 
             #region Extensões usadas para retorno da pesquisa de se um serviço exista para um determinado estado (Producao/Homologacao)

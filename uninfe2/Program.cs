@@ -50,6 +50,10 @@ namespace uninfe2
 
             bool silencioso = false;
             ConfiguracaoApp.AtualizaWSDL = false;
+            
+            //Começar a contar o tempo de execução do aplicativo - Renan 24/06/2015
+            ConfiguracaoApp.ExecutionTime = new System.Diagnostics.Stopwatch();
+            ConfiguracaoApp.ExecutionTime.Start();
 
             if (args.Length >= 1)
                 foreach (string param in args)

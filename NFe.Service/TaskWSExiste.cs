@@ -206,8 +206,6 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                             case "nfeconsulta1":
                             case "nfeconsulta":
                                 srv = Servicos.NFePedidoConsultaSituacao; break;
-                            case "nfeconsultardpec":
-                                srv = Servicos.DPECConsultar; break;
                             case "nfeconsultacadastro":
                                 srv = Servicos.ConsultaCadastroContribuinte; break;
                             case "nfeconsultanfedest":
@@ -220,7 +218,6 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.EventoManifestacaoDest; break;
                             case "nferetrecepcao":
                             case "nferecepcao":
-                            case "nfeenviardpec":
                                 srv = Servicos.NFeEnviarLote; break;
                             case "dferecepcao":
                                 srv = Servicos.DFeEnviar; break;
@@ -234,9 +231,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
 
                         if (srv == Servicos.Nulo)
                         {
-                            string aServicos = "NFeConsultarDPEC,NFeEnviarDPEC";
-                            if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfse)
-                                aServicos = "";
+                            string aServicos = "";
 
                             System.Reflection.PropertyInfo[] fieldInfo = typeof(URLws).GetProperties();
                             foreach (System.Reflection.PropertyInfo info in fieldInfo)

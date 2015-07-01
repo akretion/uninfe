@@ -290,32 +290,6 @@ namespace NFe.Components
 
             #region XML Gerais da NFe
 
-            #region XML Consulta DPEC
-            InfSchemas.Add("NFE-consDPEC", new InfSchema()
-            {
-                Tag = "consDPEC",
-                ID = ++id,
-                ArquivoXSD = "DPEC\\consDPEC_v1.01.xsd",
-                Descricao = "XML de consulta do DPEC no SCE (Sistema de Contingência Eletrônica)",
-                TagAssinatura = string.Empty,
-                TagAtributoId = string.Empty,
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
-            #region XML Recepção DPEC
-            InfSchemas.Add("NFE-envDPEC", new InfSchema()
-            {
-                Tag = "envDPEC",
-                ID = ++id,
-                ArquivoXSD = "DPEC\\envDPEC_v1.01.xsd",
-                Descricao = "XML de registro do DPEC no SCE (Sistema de Contingência Eletrônica)",
-                TagAssinatura = "envDPEC",
-                TagAtributoId = "infDPEC",
-                TargetNameSpace = string.Empty
-            });
-            #endregion
-
             #region XML Recepção EPEC
             InfSchemas.Add("NFE-envEvento110140", new InfSchema()
             {
@@ -342,7 +316,6 @@ namespace NFe.Components
                 TargetNameSpace = string.Empty
             });
             #endregion
-
 
             #region XML Envio CCe
             InfSchemas.Add("NFE-envEvento110110", new InfSchema()

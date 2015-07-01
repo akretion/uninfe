@@ -227,7 +227,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\br.gov.pr.londrina.iss.p\Reference.cs">
+    <Compile Include="Web References\br.gov.pr.londrina.iss\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -591,15 +591,15 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\br.gov.pr.londrina.iss.p\Reference.map">
+    <None Include="Web References\br.gov.pr.londrina.iss\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\br.gov.pr.londrina.iss.p\sigiss_ws.wsdl" />
-    <None Include="Web References\br.gov.pr.londrina.iss.p\tcEstruturaDescricaoErros.datasource">
+    <None Include="Web References\br.gov.pr.londrina.iss\sigiss_ws.wsdl" />
+    <None Include="Web References\br.gov.pr.londrina.iss\tcEstruturaDescricaoErros.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.pr.londrina.iss.p\tcRetornoNota.datasource">
+    <None Include="Web References\br.gov.pr.londrina.iss\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.gov.pr.londrina.testeiss.h\Reference.map">
@@ -1013,10 +1013,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_rlz_saturno_santafedosul_h_Webservice_Prefeitura</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
+    <WebReferenceUrl Include="http://testeiss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.gov.pr.londrina.testeiss.h\</RelPath>
-      <UpdateFromURL>http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://testeiss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1079,16 +1079,16 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://iss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl">
+    <WebReferenceUrl Include="https://iss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\br.gov.pr.londrina.iss.p\</RelPath>
-      <UpdateFromURL>https://iss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <RelPath>Web References\br.gov.pr.londrina.iss\</RelPath>
+      <UpdateFromURL>https://iss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe</CachedSettingsPropName>
+      <CachedSettingsPropName>NFe_Components_br_gov_pr_londrina_iss_ModuloEmissorNFSe</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://marilia.sigiss.com.br/marilia/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

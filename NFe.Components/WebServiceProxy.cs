@@ -846,6 +846,7 @@ namespace NFe.Components
             ConsultarSituacaoLoteRps =
             ConsultarURLNfse =
             ConsultarNFSePNG =
+            ConsultarNFSePDF =
             InutilizarNFSe =
             RecepcionarLoteRps =
                 ///
@@ -944,6 +945,10 @@ namespace NFe.Components
         /// Consulta a imagem em PNG da Nota
         /// </summary>
         public string ConsultarNFSePNG { get; set; }
+        /// <summary>
+        /// Consulta a imagem em PDF da Nota
+        /// </summary>
+        public string ConsultarNFSePDF { get; set; }
         /// <summary>
         /// Inutilização da NFSe
         /// </summary>

@@ -442,6 +442,9 @@ namespace NFe.Service
                             }
                             else
                             {
+                                if (Functions.FileInUse(NomeArqXmlLote))
+                                    continue;
+
                                 XmlDocument xmlNumLote = new XmlDocument();
                                 fsArquivo = new FileStream(NomeArqXmlLote, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
 
@@ -922,77 +925,6 @@ namespace NFe.Service
             StatusServico(pArquivo, tpAmb, tpEmis, cUF, NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico, "consStatServMDFe", NFeStrConstants.NAME_SPACE_MDFE);
         }
         #endregion
-        #endregion
-
-        #region ConsultaDPEC
-        /// <summary>
-        /// ConsultaDPEC
-        /// </summary>
-        /// <param name="pArquivo"></param>
-        /// <param name="dadosConsDPEC"></param>
-        public void ConsultaDPEC(string pArquivo, DadosConsDPEC dadosConsDPEC)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
-            XmlNode node = doc.CreateElement("consDPEC");
-            node.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLConsDPEC));
-            node.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.xmlns.ToString(), NFeStrConstants.NAME_SPACE_NFE));
-            node.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAmb.ToString(), dadosConsDPEC.tpAmb.ToString()));
-            node.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.verAplic.ToString(), dadosConsDPEC.verAplic));
-            if (!string.IsNullOrEmpty(dadosConsDPEC.chNFe))
-                node.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.chNFe.ToString(), dadosConsDPEC.chNFe));
-            else
-                node.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nRegDPEC.ToString(), dadosConsDPEC.nRegDPEC));
-            doc.AppendChild(node);
-            GravarArquivoParaEnvio(pArquivo, doc.OuterXml);
-        }
-        #endregion
-
-        #region EnvioDPEC
-        /// <summary>
-        /// EnvioDPEC
-        /// </summary>
-        /// <param name="pArquivo"></param>
-        /// <param name="dadosEnvDPEC"></param>
-        public void EnvioDPEC(string pArquivo, DadosEnvDPEC dadosEnvDPEC)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
-            XmlNode node = doc.CreateElement("envDPEC");
-            node.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDPEC));
-            node.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.xmlns.ToString(), NFeStrConstants.NAME_SPACE_NFE));
-
-            XmlNode nodeInfDPEC = doc.CreateElement("infDPEC");
-            nodeInfDPEC.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.Id.ToString(), "DPEC" + dadosEnvDPEC.CNPJ));
-
-            XmlNode nodeIdeDEC = doc.CreateElement("ideDec");
-            nodeIdeDEC.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.cUF.ToString(), dadosEnvDPEC.cUF.ToString()));
-            nodeIdeDEC.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAmb.ToString(), dadosEnvDPEC.tpAmb.ToString()));
-            nodeIdeDEC.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.verProc.ToString(), dadosEnvDPEC.verProc));
-            nodeIdeDEC.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), dadosEnvDPEC.CNPJ));
-            nodeIdeDEC.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), dadosEnvDPEC.IE));
-            nodeInfDPEC.AppendChild(nodeIdeDEC);
-
-            XmlNode noderesNFe = doc.CreateElement("resNFe");
-            noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.chNFe.ToString(), dadosEnvDPEC.chNFe));
-            if (dadosEnvDPEC.UF == "EX" || dadosEnvDPEC.CNPJCPF.Length == 0)
-                noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), ""));
-            else
-                if (dadosEnvDPEC.CNPJCPF.Length == 14)
-                    noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), dadosEnvDPEC.CNPJCPF));
-                else
-                    noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CPF.ToString(), dadosEnvDPEC.CNPJCPF));
-            noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.UF.ToString(), dadosEnvDPEC.UF));
-            noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), dadosEnvDPEC.vNF));
-            noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), dadosEnvDPEC.vICMS));
-            noderesNFe.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vST.ToString(), dadosEnvDPEC.vST));
-            nodeInfDPEC.AppendChild(noderesNFe);
-
-            node.AppendChild(nodeInfDPEC);
-            doc.AppendChild(node);
-
-            GravarArquivoParaEnvio(pArquivo, doc.OuterXml);
-        }
         #endregion
 
         #region XmlRetorno()

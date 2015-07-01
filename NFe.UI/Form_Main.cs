@@ -348,20 +348,12 @@ namespace NFe.UI
 
                             try
                             {
-                                if (xa.Value.Contains("\\DPEC\\"))
-                                    if (xa.Value.Contains("DEPCSCEConsultaRFB"))
-                                        servico = Servicos.ConsultarDPEC;
-                                    else
-                                        servico = Servicos.EnviarDPEC;
-
                                 NFe.UI.aaaa xxx = new NFe.UI.aaaa();
                                 var nome = xxx.nome(servico, Convert.ToInt16(item.Attribute("ID").Value), versao);
 
                                 foreach (NFe.Components.TipoEmissao temissao in Enum.GetValues(typeof(NFe.Components.TipoEmissao)))
                                 {
                                     if (temissao == NFe.Components.TipoEmissao.teNone) continue;
-                                    if (temissao != NFe.Components.TipoEmissao.teNormal && xa.Value.Contains("\\DPEC\\")) break;
-                                    if (temissao == TipoEmissao.teDPEC && !xa.Value.Contains("\\DPEC\\")) continue;
 
                                     var proxy = NFe.Settings.ConfiguracaoApp.DefinirWS(servico, 0,
                                         Convert.ToInt16(item.Attribute("ID").Value),

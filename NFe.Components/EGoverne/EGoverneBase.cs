@@ -40,7 +40,7 @@ namespace NFe.Components.EGoverne
                         switch (CodigoMun)
                         {
                             case 4106902: //Curitiba-PR
-                                egoverneService = new NFe.Components.EGoverne.CuritibaPR.h.EGoverneH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                egoverneService = new NFe.Components.EGoverne.CuritibaPR.p.EGoverneP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

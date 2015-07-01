@@ -387,7 +387,7 @@
  </binding>
  <service name='ServicosService'>
   <port binding='tns:ServicosBinding' name='ServicosPort'>
-   <soap:address location='https://nfsehomol.caxias.rs.gov.br/portal/Servicos'/>
+   <soap:address location='https://nfse.sapucaiadosul.rs.gov.br/portal/Servicos'/>
   </port>
  </service>
 </definitions>

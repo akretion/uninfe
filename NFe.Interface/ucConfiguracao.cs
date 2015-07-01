@@ -172,7 +172,7 @@ namespace NFe.Interface
                 if (servico != TipoAplicativo.Nfse)
                 {
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFS), (int)NFe.Components.TipoEmissao.teFS));
-                    arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teEPECeDPEC), (int)NFe.Components.TipoEmissao.teEPECeDPEC));
+                    arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teEPEC), (int)NFe.Components.TipoEmissao.teEPEC));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teFSDA), (int)NFe.Components.TipoEmissao.teFSDA));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCAN), (int)NFe.Components.TipoEmissao.teSVCAN));
                     arrTpEmis.Add(new ComboElem(EnumHelper.GetDescription(NFe.Components.TipoEmissao.teSVCRS), (int)NFe.Components.TipoEmissao.teSVCRS));

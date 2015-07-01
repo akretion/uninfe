@@ -112,14 +112,6 @@ namespace NFe.Components
         /// Assinar e montar lote de várias NFe
         /// </summary>
         NFeMontarLoteVarias,
-        /// <summary>
-        /// Consultar o registro do DPEC no SCE - Sistema de Contingência Eletrônica        
-        /// </summary>
-        DPECConsultar,
-        /// <summary>
-        /// Enviar o XML do DPEC para o SCE - Sistema de Contingência Eletrônica
-        /// </summary>
-        DPECEnviar,
         #endregion
 
         #region CTe
@@ -226,6 +218,12 @@ namespace NFe.Components
         /// </summary>
         [Description("Inutilização de uma NFS-e")]
         NFSeInutilizarNFSe,
+        /// <summary>
+        /// Consulta da imagem de uma NFS-e em formato PDF
+        /// Criado inicialmente para ser utilizado para o padrão INFISC para a Prefeitura de Caxias do Sul - RS
+        /// </summary>
+        [Description("Consulta da imagem de uma NFS-e em formato PDF")]
+        NFSeConsultarNFSePDF,
 
         #endregion
 
@@ -574,7 +572,13 @@ namespace NFe.Components
         /// Prefeitura de Itumbiara - GO
         /// </summary>
         [Description("Prodata")]
-        PRODATA
+        PRODATA,
+        /// <summary>
+        /// Padrão VVISS
+        /// Prefeitura de Vila Velha - ES
+        /// </summary>
+        [Description("VVISS")]
+        VVISS
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
@@ -608,8 +612,8 @@ namespace NFe.Components
         teNormal = 1,
         [Description("Contingência com formulário de segurança (FS)")]
         teFS = 2,
-        [Description("Contingência com EPEC / DPEC")]
-        teEPECeDPEC = 4,
+        [Description("Contingência com EPEC")]
+        teEPEC = 4,
         [Description("Contingência com formulário de segurança (FS-DA)")]
         teFSDA = 5,
         [Description("Contingência com SVC-AN")]
@@ -630,7 +634,6 @@ namespace NFe.Components
         FalhaInternet = 1,
         FalhaEnvioXmlWS = 2,
         CertificadoVencido = 3,
-        FalhaEnvioXmlWSDPEC = 4, //danasa 21/10/2010
         FalhaEnvioXmlNFeWS = 5
     }
     #endregion

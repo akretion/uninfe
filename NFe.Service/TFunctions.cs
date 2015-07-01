@@ -594,7 +594,6 @@ namespace NFe.Service
                 bool denegada = false;
                 bool temCancelamento = false;
                 bool isEPEC = false;
-                bool isDPEC = false;
 
                 if (!File.Exists(nomeArquivoRecebido))
                     throw new Exception(string.Format(erroMsg, nomeArquivoRecebido, ""));
@@ -761,13 +760,8 @@ namespace NFe.Service
                         }
                         break;
 
-                    case "retDPEC":
-                        isDPEC = true;
-                        break;
-
                     default:
-                        if (!nomeArquivoRecebido.EndsWith(Propriedade.ExtRetorno.Den) &&
-                            !nomeArquivoRecebido.EndsWith(Propriedade.ExtRetorno.retDPEC_XML))
+                        if (!nomeArquivoRecebido.EndsWith(Propriedade.ExtRetorno.Den))
                         {
                             ///
                             /// tipo de arquivo desconhecido
@@ -776,10 +770,8 @@ namespace NFe.Service
                         }
                         break;
                 }
-                if (!isDPEC && !isEPEC)
-                    isDPEC = nomeArquivoRecebido.EndsWith(Propriedade.ExtRetorno.retDPEC_XML);
 
-                if (isDPEC || isEPEC)
+                if (isEPEC)
                 {
                     switch (epecTipo)
                     {
@@ -789,14 +781,14 @@ namespace NFe.Service
                         case "procEventoMDFe":
                             fExtensao = Propriedade.ExtEnvio.MDFe;
                             break;
-                        default:    //pode ser DPEC ou NFe
+                        default:    //pode ser NFe
                             fExtensao = Propriedade.ExtEnvio.Nfe;
                             break;
                     }
-                    string xTemp = Path.GetFileName(Functions.ExtrairNomeArq(nomeArquivoRecebido, (isEPEC ? Propriedade.ExtRetorno.ProcEventoNFe : Propriedade.ExtRetorno.retDPEC_XML))) + fExtensao;
+                    string xTemp = Path.GetFileName(Functions.ExtrairNomeArq(nomeArquivoRecebido, Propriedade.ExtRetorno.ProcEventoNFe)) + fExtensao;
 
-                    if (isEPEC)
-                        xTemp = xTemp.Replace("_" + ((int)ConvertTxt.tpEventos.tpEvEPEC).ToString() + "_01", "");
+                    xTemp = xTemp.Replace("_" + ((int)ConvertTxt.tpEventos.tpEvEPEC).ToString() + "_01", "");
+
                     ///
                     /// pesquisa pelo arquivo da NFe/NFCe/MDFe/CTe
                     /// 
@@ -825,7 +817,7 @@ namespace NFe.Service
                                 if (fTemp.Length == 0)
                                 {
                                     ///
-                                    /// OPS!!! EPEC/DPEC <-> denegado?
+                                    /// OPS!!! EPEC <-> denegado?
                                     /// 
                                     xTemp = Functions.ExtrairNomeArq(xTemp, fExtensao) + Propriedade.ExtRetorno.Den;
                                     if (File.Exists(Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), xTemp)))
@@ -1021,21 +1013,17 @@ namespace NFe.Service
                     }
                 }
                 ///
-                /// DPEC, EPEC, CCe e Cancelamento por evento
+                /// EPEC, CCe e Cancelamento por evento
                 /// 
                 string ctemp = doc.OuterXml;// File.ReadAllText(nomeArqXMLNFe);
-                string dhReg = RetornarConteudoEntre(ctemp, "<dhRegDPEC>", "</dhRegDPEC>");
-                if (dhReg == "")
-                    dhReg = RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>");
+                string dhReg = RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>");
                 DateTime dhRegEvento = Functions.GetDateTime(dhReg);
 
                 if (dhRegEvento.Year > 1)
                 {
-                    if ((fProtocolo = RetornarConteudoEntre(ctemp, "<nRegDPEC>", "</nRegDPEC>")) == "")
-                    {
-                        if ((fProtocolo = RetornarConteudoEntre(ctemp, "</dhRegEvento><nProt>", "</nProt>")) == "")
-                            fProtocolo = RetornarConteudoEntre(ctemp, "<nProt>", "</nProt>");
-                    }
+                    if ((fProtocolo = RetornarConteudoEntre(ctemp, "</dhRegEvento><nProt>", "</nProt>")) == "")
+                        fProtocolo = RetornarConteudoEntre(ctemp, "<nProt>", "</nProt>");
+
                     fProtocolo += "  " + dhRegEvento.ToString("dd/MM/yyyy HH:mm:ss");
                     if (dhReg.EndsWith("-01:00") ||
                         dhReg.EndsWith("-02:00") ||
@@ -1109,7 +1097,7 @@ namespace NFe.Service
                     }
 
                     string configDanfe = "";
-                    if (isDPEC || isEPEC)
+                    if (isEPEC)
                     {
                         ///
                         /// define como arquivo principal o XML da NFe/NFCe/MDFe/CTe

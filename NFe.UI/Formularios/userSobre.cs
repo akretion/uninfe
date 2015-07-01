@@ -55,6 +55,16 @@ namespace NFe.UI
             linkLabelSite.Text = ConfiguracaoApp.Site;
             linkLabelSiteProduto.Text = ConfiguracaoApp.SiteProduto;
             linkLabelEmail.Text = ConfiguracaoApp.Email;
+
+            string elapsedDays = ConfiguracaoApp.ExecutionTime.Elapsed.Days + " dias ininterruptos.";
+
+            if (ConfiguracaoApp.ExecutionTime.Elapsed.Days < 1)
+                elapsedDays = ConfiguracaoApp.ExecutionTime.Elapsed.Hours + " horas ininterruptas.";
+
+            if (ConfiguracaoApp.ExecutionTime.Elapsed.Hours < 1)
+                elapsedDays = "A menos de uma hora.";
+
+            txtElapsedDays.Text = elapsedDays;
         }
 
         private void linkLabelSite_Click(object sender, EventArgs e)

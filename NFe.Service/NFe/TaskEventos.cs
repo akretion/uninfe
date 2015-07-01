@@ -87,10 +87,6 @@ namespace NFe.Service
                         //CCe só existe no ambiente Normal. Wandrey 22/04/2013
                         tpEmis = (int)NFe.Components.TipoEmissao.teNormal;
                         break;
-                    /*
-                case Servicos.EventoEPEC:
-                    tpEmis = (int)NFe.Components.TipoEmissao.teEPECeDPEC;
-                    break;*/
                 }
 
                 if (vXmlNfeDadosMsgEhXML)

@@ -7,16 +7,15 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
-using NFe.Components.br.gov.pr.londrina.iss.p;
+using NFe.Components.br.gov.pr.londrina.iss;
 
 namespace NFe.Components.SigCorp.LondrinaPR.p
 {
     public class SigCorpP : EmiteNFSeBase
     {
-
         ModuloEmissorNFSe service = new ModuloEmissorNFSe();
 
-        #region constrututores
+        #region construtores
         public SigCorpP(TipoAmbiente tpAmb, string pastaRetorno)
             : base(tpAmb, pastaRetorno)
         {
@@ -45,7 +44,7 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
 
         public override void ConsultarLoteRps(string file)
         {
-            tcConsultarRpsServicoPrestadoEnvio oTcDadosConsultaNota = ReadXML<tcConsultarRpsServicoPrestadoEnvio>(file);            
+            tcConsultarRpsServicoPrestadoEnvio oTcDadosConsultaNota = ReadXML<tcConsultarRpsServicoPrestadoEnvio>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
 
             string result = service.ConsultarRpsServicoPrestado(oTcDadosConsultaNota, out tcErros);
@@ -70,7 +69,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
+
         private T ReadXML<T>(string file)
             where T : new()
         {

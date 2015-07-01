@@ -86,24 +86,6 @@
     <EmbeddedResource Include="NFe\schemas\DownloadNFe\tiposBasico_v1.03.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\consDPEC_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\envDPEC_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\leiauteDPEC_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\retConsDPEC_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\retDPEC_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\DPEC\xmldsig-core-schema_v1.01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\EventoCanc\e110111_v1.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -251,8 +233,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCERecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\DPEC\HDEPCSCEConsultaRFB.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\DPEC\HDEPCSCERecepcaoRFB.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGOCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeInutilizacao2.wsdl" />
@@ -340,8 +320,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetRecepcao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCERecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\DPEC\PDEPCSCEConsultaRFB.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\DPEC\PDEPCSCERecepcaoRFB.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGOCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeInutilizacao2.wsdl" />
@@ -2471,6 +2449,32 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVilaVelhaES-VVISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVilaVelhaES-VVISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVitoriaES-VVISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVitoriaES-VVISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSapucaiadoSulRS-GIF.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSapucaiadoSulRS-GIF.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItajubaMG-GOVDIGITAL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItajubaMG-GOVDIGITAL.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -96,26 +96,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://iss.londrina.pr.gov.br:443/ws/v1_02/sigiss_ws.php")]
-        public string NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe {
-            get {
-                return ((string)(this["NFe_Components_br_gov_pr_londrina_iss_p_ModuloEmissorNFSe"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://testeiss.londrina.pr.gov.br/ws/v1_02/sigiss_ws.php")]
-        public string NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe {
-            get {
-                return ((string)(this["NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://saogoncalo.sigiss.com.br:443/saogoncalo/ws/sigiss_ws.php")]
         public string NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS {
             get {
@@ -312,6 +292,26 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS {
             get {
                 return ((string)(this["NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://testeiss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php")]
+        public string NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://iss.londrina.pr.gov.br:443/ws/v1_03/sigiss_ws.php")]
+        public string NFe_Components_br_gov_pr_londrina_iss_ModuloEmissorNFSe {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_londrina_iss_ModuloEmissorNFSe"]));
             }
         }
     }
