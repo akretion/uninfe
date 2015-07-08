@@ -1672,6 +1672,26 @@
       <CancelarNfse>wsdl\producao\PGovernadorValadaresCancelarNfse.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
+  <Estado ID="3526100" Nome="Juquiá - SP" UF="SP" Padrao="ISSONLINE4R">
+    <LocalHomologacao>
+      <RecepcionarLoteRps>wsdl\homologacao\HSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps></ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\HSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse></ConsultarNfse>
+      <ConsultarLoteRps></ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\HSistemaISSOnLine4rJuquiaCancelarNfse.wsdl</CancelarNfse>
+    </LocalHomologacao>
+    <LocalProducao>
+      <RecepcionarLoteRps>wsdl\homologacao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
+      <ConsultarSituacaoLoteRps></ConsultarSituacaoLoteRps>
+      <ConsultarNfsePorRps>wsdl\homologacao\PSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfse></ConsultarNfse>
+      <ConsultarLoteRps></ConsultarLoteRps>
+      <ConsultarURLNfse></ConsultarURLNfse>
+      <CancelarNfse>wsdl\homologacao\PSistemaISSOnLine4rJuquiaCancelarNfse.wsdl</CancelarNfse>
+    </LocalProducao>
+  </Estado>
   <Estado ID="3170206" Nome="Uberlândia - MG" UF="MG" Padrao="DSF">
     <LocalHomologacao>
       <RecepcionarLoteRps>wsdl\homologacao\HUberlandiaMGDFSLoteRps.wsdl</RecepcionarLoteRps>

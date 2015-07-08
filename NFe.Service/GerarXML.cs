@@ -1027,20 +1027,51 @@ namespace NFe.Service
                                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeList.Item(0);
                                 if (retEnviNFeElemento != null)   //danasa 23-9-2009
                                 {
+                                    ConteudoRetorno += (Empresas.Configuracoes[emp].IndSinc ? ";" : "");                                     
                                     ConteudoRetorno += Functions.LerTag(retEnviNFeElemento, NFe.Components.TpcnResources.cStat.ToString());
                                     ConteudoRetorno += Functions.LerTag(retEnviNFeElemento, NFe.Components.TpcnResources.xMotivo.ToString());
 
-                                    XmlNodeList infRecList = retEnviNFeElemento.GetElementsByTagName("infRec");
-                                    if (infRecList != null)
+                                    //Processo assíncrono
+                                    if (!Empresas.Configuracoes[emp].IndSinc)
                                     {
-                                        if (infRecList.Count > 0)   //danasa 23-9-2009
+                                        XmlNodeList infRecList = retEnviNFeElemento.GetElementsByTagName("infRec");
+                                        if (infRecList != null)
                                         {
-                                            XmlElement infRecElemento = (XmlElement)infRecList.Item(0);
-                                            if (infRecElemento != null)   //danasa 23-9-2009
+                                            if (infRecList.Count > 0)   //danasa 23-9-2009
                                             {
-                                                ConteudoRetorno += Functions.LerTag(infRecElemento, NFe.Components.TpcnResources.nRec.ToString());
-                                                ConteudoRetorno += Functions.LerTag(infRecElemento, NFe.Components.TpcnResources.dhRecbto.ToString());
-                                                ConteudoRetorno += Functions.LerTag(infRecElemento, TpcnResources.tMed.ToString());
+                                                XmlElement infRecElemento = (XmlElement)infRecList.Item(0);
+                                                if (infRecElemento != null)   //danasa 23-9-2009
+                                                {
+                                                    ConteudoRetorno += Functions.LerTag(infRecElemento, NFe.Components.TpcnResources.nRec.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infRecElemento, NFe.Components.TpcnResources.dhRecbto.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infRecElemento, TpcnResources.tMed.ToString());
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Processo síncrono
+                                        XmlNodeList infProtList = retEnviNFeElemento.GetElementsByTagName("infProt");
+                                        if (infProtList != null)
+                                        {
+                                            if (infProtList.Count > 0)
+                                            {
+                                                XmlElement infProtElemento = (XmlElement)infProtList.Item(0);
+                                                if (infProtElemento != null)   //danasa 23-9-2009
+                                                {
+                                                    string chNFe = Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.chNFe.ToString());
+
+                                                    ConteudoRetorno += "\r\n";
+                                                    ConteudoRetorno += chNFe.Substring(6, 14) + ";";
+                                                    ConteudoRetorno += chNFe.Substring(25, 9) + ";";
+                                                    ConteudoRetorno += chNFe;
+                                                    ConteudoRetorno += Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.dhRecbto.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.nProt.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.digVal.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.cStat.ToString());
+                                                    ConteudoRetorno += Functions.LerTag(infProtElemento, NFe.Components.TpcnResources.xMotivo.ToString());
+                                                }
                                             }
                                         }
                                     }
