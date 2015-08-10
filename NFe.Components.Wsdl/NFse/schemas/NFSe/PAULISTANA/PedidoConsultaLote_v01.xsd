@@ -8,7 +8,7 @@
   <xs:element name="PedidoConsultaLote">
     <xs:annotation>
       <xs:documentation>Schema utilizado para PEDIDO de consultas de Lote.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelos prestadores de serviços consultarem as NF-e geradas a partir de um lote de RPS.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelos prestadores de serviços consultarem as NFS-e geradas a partir de um lote de RPS.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>

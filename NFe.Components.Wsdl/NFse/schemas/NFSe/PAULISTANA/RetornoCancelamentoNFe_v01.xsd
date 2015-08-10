@@ -7,8 +7,8 @@
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v01.xsd" />
   <xs:element name="RetornoCancelamentoNFe">
     <xs:annotation>
-      <xs:documentation>Schema utilizado para RETORNO de Pedidos de cancelamento de NF-e.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos prestadores de serviços qual o resultado do pedido de cancelamento de NF-e.</xs:documentation>
+      <xs:documentation>Schema utilizado para RETORNO de Pedidos de cancelamento de NFS-e.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos prestadores de serviços qual o resultado do pedido de cancelamento de NFS-e.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>

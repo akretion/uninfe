@@ -1681,15 +1681,15 @@
       <ConsultarLoteRps></ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
       <CancelarNfse>wsdl\homologacao\HSistemaISSOnLine4rJuquiaCancelarNfse.wsdl</CancelarNfse>
-    </LocalHomologacao>
+    </LocalHomologacao>              
     <LocalProducao>
-      <RecepcionarLoteRps>wsdl\homologacao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
+      <RecepcionarLoteRps>wsdl\producao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl</RecepcionarLoteRps>
       <ConsultarSituacaoLoteRps></ConsultarSituacaoLoteRps>
-      <ConsultarNfsePorRps>wsdl\homologacao\PSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
+      <ConsultarNfsePorRps>wsdl\producao\PSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl</ConsultarNfsePorRps>
       <ConsultarNfse></ConsultarNfse>
       <ConsultarLoteRps></ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>wsdl\homologacao\PSistemaISSOnLine4rJuquiaCancelarNfse.wsdl</CancelarNfse>
+      <CancelarNfse>wsdl\producao\PSistemaISSOnLine4rJuquiaCancelarNfse.wsdl</CancelarNfse>
     </LocalProducao>
   </Estado>
   <Estado ID="3170206" Nome="Uberlândia - MG" UF="MG" Padrao="DSF">
@@ -2791,7 +2791,7 @@
       <ConsultarNfse>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarNfse>
       <ConsultarLoteRps>wsdl\homologacao\HEQUIPLANO.wsdl</ConsultarLoteRps>
       <ConsultarURLNfse></ConsultarURLNfse>
-      <CancelarNfse>wsdl\homologacao\HEQUIPLANOO.wsdl</CancelarNfse>
+      <CancelarNfse>wsdl\homologacao\HEQUIPLANO.wsdl</CancelarNfse>
     </LocalHomologacao>
     <LocalProducao>
       <RecepcionarLoteRps>wsdl\producao\PEQUIPLANO.wsdl</RecepcionarLoteRps>

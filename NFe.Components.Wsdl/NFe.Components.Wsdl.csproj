@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Components.Wsdl</RootNamespace>
     <AssemblyName>NFe.Components.Wsdl</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -2475,6 +2477,32 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HItajubaMG-GOVDIGITAL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItajubaMG-GOVDIGITAL.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeConsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNFeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANRecepcaoEvento_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANnfeconsulta2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNFeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANNFeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\SVAN\PSVANRecepcaoEvento_C.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSistemaISSOnLine4rJuquiaCancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaCancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

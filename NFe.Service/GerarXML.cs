@@ -1335,7 +1335,7 @@ namespace NFe.Service
                                 ConteudoRetorno += infCadNode.IEAtual.Replace(";", " ") + ";";
                                 ConteudoRetorno += infCadNode.ender.xLgr.Replace(";", " ") + ";";
                                 ConteudoRetorno += infCadNode.ender.nro.Replace(";", " ") + ";";
-                                ConteudoRetorno += infCadNode.ender.xCpl.Replace(";", " ") + ";";
+                                ConteudoRetorno += (string.IsNullOrEmpty(infCadNode.ender.xCpl) ? "" : infCadNode.ender.xCpl.Replace(";", " ")) + ";";
                                 ConteudoRetorno += infCadNode.ender.xBairro.Replace(";", " ") + ";";
                                 ConteudoRetorno += infCadNode.ender.cMun.ToString("0000000") + ";";
                                 ConteudoRetorno += infCadNode.ender.xMun.Replace(";", " ") + ";";

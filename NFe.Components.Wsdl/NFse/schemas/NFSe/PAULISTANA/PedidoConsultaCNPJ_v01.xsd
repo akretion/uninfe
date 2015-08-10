@@ -8,7 +8,7 @@
   <xs:element name="PedidoConsultaCNPJ">
     <xs:annotation>
       <xs:documentation>Schema utilizado para PEDIDO de consultas de CNPJ.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelos tomadores e/ou prestadores de serviços consultarem quais Inscrições Municipais (CCM) estão vinculadas a um determinado CNPJ e se estes CCM emitem NF-e ou não.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelos tomadores e/ou prestadores de serviços consultarem quais Inscrições Municipais (CCM) estão vinculadas a um determinado CNPJ e se estes CCM emitem NFS-e ou não.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>

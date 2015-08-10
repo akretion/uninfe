@@ -7,8 +7,8 @@
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v01.xsd" />
   <xs:element name="PedidoConsultaNFePeriodo">
     <xs:annotation>
-      <xs:documentation>Schema utilizado para PEDIDO de consulta de NF-e Emitidas ou Recebidas por período.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelos Prestadores/Tomadores de serviços consultarem NF-e Emitidas ou Recebidas por eles.</xs:documentation>
+      <xs:documentation>Schema utilizado para PEDIDO de consulta de NFS-e Emitidas ou Recebidas por período.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelos Prestadores/Tomadores de serviços consultarem NFS-e Emitidas ou Recebidas por eles.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
@@ -25,14 +25,14 @@
               </xs:element>
               <xs:element name="CPFCNPJ" type="tipos:tpCPFCNPJ" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Para consulta de NF-e Recebidas Informe o CNPJ do Tomador.</xs:documentation>
-                  <xs:documentation>Para consulta de NF-e Emitidas Informe o CNPJ do Prestador.</xs:documentation>
+                  <xs:documentation>Para consulta de NFS-e Recebidas Informe o CNPJ do Tomador.</xs:documentation>
+                  <xs:documentation>Para consulta de NFS-e Emitidas Informe o CNPJ do Prestador.</xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name="Inscricao" type="tipos:tpInscricaoMunicipal" minOccurs ="0" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Para consulta de NF-e Recebidas Informe a Inscrição Municipal do Tomador.</xs:documentation>
-                  <xs:documentation>Para consulta de NF-e Emitidas Informe a Inscrição Municipal do Prestador. Neste caso o preenchimento deste campo se torna obrigatório.</xs:documentation>
+                  <xs:documentation>Para consulta de NFS-e Recebidas Informe a Inscrição Municipal do Tomador.</xs:documentation>
+                  <xs:documentation>Para consulta de NFS-e Emitidas Informe a Inscrição Municipal do Prestador. Neste caso o preenchimento deste campo se torna obrigatório.</xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name="dtInicio" type="xs:date" minOccurs="1" maxOccurs ="1">
@@ -60,7 +60,7 @@
         </xs:element>
         <xs:element ref="ds:Signature" minOccurs="1" maxOccurs="1">
           <xs:annotation>
-            <xs:documentation>Assinatura digital do tomador das NF-e.</xs:documentation>
+            <xs:documentation>Assinatura digital do tomador das NFS-e.</xs:documentation>
           </xs:annotation>
         </xs:element>
       </xs:sequence>

@@ -8,7 +8,7 @@
   <xs:element name="RetornoConsultaCNPJ">
     <xs:annotation>
       <xs:documentation>Schema utilizado para RETORNO de Pedidos de Consultas de CNPJ.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos tomadores e/ou prestadores de serviços quais Inscrições Municipais (CCM) estão vinculadas a um determinado CNPJ e se estes CCM emitem NF-e ou não.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos tomadores e/ou prestadores de serviços quais Inscrições Municipais (CCM) estão vinculadas a um determinado CNPJ e se estes CCM emitem NFS-e ou não.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
@@ -51,7 +51,7 @@
               </xs:element>
               <xs:element name="EmiteNFe" type="xs:boolean" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Campo que indica se o CCM vinculado ao CNPJ consultado emite NF-e ou não.</xs:documentation>
+                  <xs:documentation>Campo que indica se o CCM vinculado ao CNPJ consultado emite NFS-e ou não.</xs:documentation>
                 </xs:annotation>
               </xs:element>
           </xs:sequence>            

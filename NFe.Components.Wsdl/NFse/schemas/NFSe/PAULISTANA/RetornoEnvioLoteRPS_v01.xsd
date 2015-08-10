@@ -48,7 +48,7 @@
         </xs:element>
         <xs:element name="ChaveNFeRPS" type="tipos:tpChaveNFeRPS" minOccurs="0" maxOccurs="50">
           <xs:annotation>
-            <xs:documentation>Chave da NF-e e Chave do RPS que esta substitui.</xs:documentation>
+            <xs:documentation>Chave da NFS-e e Chave do RPS que esta substitui.</xs:documentation>
           </xs:annotation>
         </xs:element>
       </xs:sequence>

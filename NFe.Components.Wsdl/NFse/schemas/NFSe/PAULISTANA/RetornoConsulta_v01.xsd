@@ -7,8 +7,8 @@
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema_v01.xsd" />
   <xs:element name="RetornoConsulta">
     <xs:annotation>
-      <xs:documentation>Schema utilizado para RETORNO de pedidos de consulta de NF-e/RPS, consultade NF-e recebidas e consulta de lote.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos tomadores e/ou prestadores de serviços o resultado de pedidos de consulta de NF-e/RPS, consultade NF-e recebidas e consulta de lote.</xs:documentation>
+      <xs:documentation>Schema utilizado para RETORNO de pedidos de consulta de NFS-e/RPS, consultade NFS-e recebidas e consulta de lote.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelo Web Service para informar aos tomadores e/ou prestadores de serviços o resultado de pedidos de consulta de NFS-e/RPS, consultade NFS-e recebidas e consulta de lote.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
@@ -43,7 +43,7 @@
         </xs:element>
         <xs:element name="NFe" type="tipos:tpNFe" minOccurs="0" maxOccurs="50">
           <xs:annotation>
-            <xs:documentation>Elemento NFe - Cada item será um NF-e.</xs:documentation>
+            <xs:documentation>Elemento NFe - Cada item será um NFS-e.</xs:documentation>
           </xs:annotation>
         </xs:element>
       </xs:sequence>

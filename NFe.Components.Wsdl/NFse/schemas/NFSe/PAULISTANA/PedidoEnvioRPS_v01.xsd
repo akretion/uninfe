@@ -8,7 +8,7 @@
   <xs:element name="PedidoEnvioRPS">
     <xs:annotation>
       <xs:documentation>Schema utilizado para PEDIDO de envio de RPS.</xs:documentation>
-      <xs:documentation>Este Schema XML é utilizado pelos prestadores de serviços para substituição online e individual de RPS por NF-e.</xs:documentation>
+      <xs:documentation>Este Schema XML é utilizado pelos prestadores de serviços para substituição online e individual de RPS por NFS-e.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
@@ -33,7 +33,7 @@
         </xs:element>
         <xs:element name="RPS" type="tipos:tpRPS" minOccurs="1" maxOccurs="1">
           <xs:annotation>
-            <xs:documentation>Informe o RPS a ser substituido por NF-e.</xs:documentation>
+            <xs:documentation>Informe o RPS a ser substituido por NFS-e.</xs:documentation>
           </xs:annotation>
         </xs:element>
         <xs:element ref="ds:Signature" minOccurs="1" maxOccurs="1">
