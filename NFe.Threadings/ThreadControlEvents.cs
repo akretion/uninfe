@@ -38,7 +38,7 @@ namespace NFe.Threadings
 
             //danasa 12/8/2011
             //mudei de posição e inclui o FullName
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento", false);
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento (Data criação: " + item.FileInfo.LastWriteTime + ")", false);
             Processar(item);
         }
 
@@ -52,10 +52,7 @@ namespace NFe.Threadings
 
             // A padding interval to make the output more orderly.
             int padding = Interlocked.Add(ref FileSystemWatcher._padding, 100);
-
-            //Serviços tipoServico = Auxiliar.DefinirTipoServico(item.Empresa, item.FileInfo.FullName);
-            new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);//, tipoServico);
-            
+            new Processar().ProcessaArquivo(item.Empresa, item.FileInfo.FullName);            
         }
         #endregion
 
@@ -66,7 +63,7 @@ namespace NFe.Threadings
         /// <param name="item"></param>
         protected void ThreadItem_OnReleased(ThreadItem item)
         {
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento", false);
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento (Data criação: " + item.FileInfo.LastWriteTime + ")", false);
 
             //Se estiver reconfigurando o UniNFe, tem que reiniciar as threads
             if (item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
@@ -85,7 +82,7 @@ namespace NFe.Threadings
         protected void ThreadItem_OnEnded(ThreadItem item)
         {
             int listCount = FileSystemWatcher._pool.Release();
-            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento. Itens disponiveis no Semaforo (" + listCount.ToString() +")." , false);            
+            Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " finalizou o processamento. Itens disponiveis no Semaforo (" + listCount.ToString() + "). (Data criação: " + item.FileInfo.LastWriteTime + ")", false);            
         }
         #endregion
 

@@ -884,7 +884,10 @@ namespace NFe.Components
             CTeConsulta =
             CTeStatusServico =
             CTeRecepcaoEvento =
-            CTeConsultaCadastro = string.Empty;
+            CTeConsultaCadastro = 
+                ///
+                /// LMC
+            LMCAutorizacao = string.Empty;
         }
 
         #region Propriedades referente as tags do webservice.xml
@@ -977,9 +980,14 @@ namespace NFe.Components
         /// </summary>
         public string MDFeRecepcaoEvento { get; set; }
         /// <summary>
-        /// 
+        /// Consulta dos MDFe´s não encerrados
         /// </summary>
         public string MDFeNaoEncerrado { get; set; }
+        /// <summary>
+        /// Recepcao dos LMC´s
+        /// </summary>
+        public string LMCAutorizacao { get; set; }
+
         #endregion
 
         #region CTe

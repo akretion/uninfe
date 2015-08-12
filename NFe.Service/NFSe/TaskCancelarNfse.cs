@@ -17,6 +17,7 @@ using NFe.Components.Conam;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
+using NFe.Components.EloTech;
 
 namespace NFe.Service.NFSe
 {
@@ -202,7 +203,8 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
+                                                            oDadosPedCanNfse.cMunicipio);
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
@@ -216,6 +218,22 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.ELOTECH:
+                        #region EloTech
+                        EloTech elotech = new EloTech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      oDadosPedCanNfse.cMunicipio,
+                                                      Empresas.Configuracoes[emp].UsuarioWS,
+                                                      Empresas.Configuracoes[emp].SenhaWS,
+                                                      ConfiguracaoApp.ProxyUsuario,
+                                                      ConfiguracaoApp.ProxySenha,
+                                                      ConfiguracaoApp.ProxyServidor,
+                                                      Empresas.Configuracoes[emp].X509Certificado);
+
+                        elotech.CancelarNfse(NomeArquivoXML);
+                        break;
+                        #endregion
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))

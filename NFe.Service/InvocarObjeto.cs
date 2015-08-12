@@ -134,6 +134,9 @@ namespace NFe.Service
                 case Servicos.DFeEnviar:
                     break;
 
+                case Servicos.LMCAutorizacao:
+                    break;
+
                 default:
                     wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
                     break;

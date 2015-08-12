@@ -238,6 +238,12 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskDFeRecepcao());
                             break;
                         #endregion
+
+                        #region LMC
+                        case Servicos.LMCAutorizacao:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskLMCAutorizacao());
+                            break;
+                        #endregion
                     }
 
                     #region Serviços em comum
@@ -590,6 +596,12 @@ namespace NFe.Service
 
                                 case "downloadNFe":
                                     tipoServico = Servicos.NFeDownload;
+                                    break;
+                                #endregion
+
+                                #region LMC
+                                case "autorizacao":
+                                    tipoServico = Servicos.LMCAutorizacao;
                                     break;
                                 #endregion
 
@@ -1049,7 +1061,9 @@ namespace NFe.Service
                         nfe is TaskMDFeConsultaStatus ||
                         nfe is TaskMDFeConsultaSituacao ||
                         nfe is TaskMDFeConsNaoEncerrado ||
-                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC))
+                        nfe is TaskLMCAutorizacao ||
+                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC)||
+                        (nfe is TaskCTeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC))
                     {
                         doExecute = true;
                     }

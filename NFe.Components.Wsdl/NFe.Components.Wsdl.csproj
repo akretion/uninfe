@@ -2504,6 +2504,108 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaConsultarNfsePorRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTcancelarnfse-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTconsultaloterps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTconsultanfse-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTconsultanfseporrps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTconsultarsituacaoloterps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMTrecepcionarloterps-FISSLEX.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTcancelarnfse-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultaloterps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultanfse-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultanfseporrps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultarsituacaoloterps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTrecepcionarloterps-FISSLEX.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\FISSLEX\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPocosdeCaldasMG-GOVDIGITAL.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPocosdeCaldasMG-GOVDIGITAL.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCariacicaES-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCariacicaES-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCariacicaES-WSUtil.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParacatuMG-GOVDIGITAL.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParacatuMG-GOVDIGITAL.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\LMC\autorizacaoRetorno_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\autorizacao_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\leiauteLivroCombustivel_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\leiauteLMCAutorizacaoRetorno_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\leiauteLMCAutorizacao_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\leiauteLMCStatusServico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\leiauteProtLivroCombustivel_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\livroCombustivel_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\lmcComum_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\statusServico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\tiposBasico_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\LMC\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRLMCAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRLMCAutorizacao.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PQuatroBarrasPR-ELOTECH.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HQuatroBarrasPR-ELOTECH.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFormigaMG-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ELOTECH\nfse_v1_2.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFormigaMG-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PEmbuDasArtes-SIMPLISS.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

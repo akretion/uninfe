@@ -105,8 +105,7 @@ namespace NFe.Service
                     //Encerra o lote se o tamanho do arquivo de lote for maior ou igual a 450000 bytes (450 kbytes)
                     if (IniciouLote && TamArqLote >= 450000)
                     {
-                        EncerrarLoteNfe(numeroLote);
-                        FinalizacaoLote(numeroLote, arquivosInseridoLote);
+                        EncerrarLoteNfe(numeroLote, arquivosInseridoLote);
 
                         //Limpar as variáveis, atributos depois de totalmente finalizado o lote, pois o conteúdo
                         //de aglumas variáveis são utilizados na finalização.
@@ -138,13 +137,10 @@ namespace NFe.Service
                     if ((i + 1) == arquivosNFe.Count || ContaNfe == 50)
                     {
                         //Encerra o lote
-                        EncerrarLoteNfe(numeroLote);
+                        EncerrarLoteNfe(numeroLote, arquivosInseridoLote);
 
                         //Se já encerrou o lote não pode mais tirar do fluxo se der erro daqui para baixo
                         excluirFluxo = false;
-
-                        //Finalizar o lote gerando retornos para o ERP.
-                        FinalizacaoLote(numeroLote, arquivosInseridoLote);
 
                         //Limpar as variáveis, atributos depois de totalmente finalizado o lote, pois o conteúdo
                         //de aglumas variáveis são utilizados na finalização.
@@ -166,7 +162,10 @@ namespace NFe.Service
 
                         //Excluir a nota fiscal do fluxo pois deu algum erro neste ponto
                         FluxoNfe oFluxoNfe = new FluxoNfe();
-                        oFluxoNfe.ExcluirNfeFluxo(oDadosNfe.chavenfe);
+                        if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
+                        {                            
+                            oFluxoNfe.ExcluirNfeFluxo(oDadosNfe.chavenfe);
+                        }
                     }
                 }
 
@@ -322,10 +321,10 @@ namespace NFe.Service
         /// <summary>
         /// Encerra a string do XML de lote de notas fiscais eletrônicas
         /// </summary>
-        /// <param name="intNumeroLote">Número do lote que será enviado</param>
+        /// <param name="numeroLote">Número do lote que será enviado</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>15/04/2009</date>
-        protected void EncerrarLoteNfe(Int32 intNumeroLote)
+        protected void EncerrarLoteNfe(Int32 numeroLote, List<string> arquivosNFe)
         {
             switch (Servico)
             {
@@ -344,7 +343,7 @@ namespace NFe.Service
                     break;
             }
 
-            GerarXMLLote(intNumeroLote);
+            GerarXMLLote(numeroLote, arquivosNFe);
         }
         #endregion
 
@@ -352,16 +351,16 @@ namespace NFe.Service
         /// <summary>
         /// Grava o XML de lote de notas fiscais eletrônicas fisicamente no HD na pasta de envio
         /// </summary>
-        /// <param name="intNumeroLote">Número do lote que será enviado</param>
+        /// <param name="numeroLote">Número do lote que será enviado</param>
         /// <date>15/04/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        protected void GerarXMLLote(Int32 intNumeroLote)
+        private void GerarXMLLote(Int32 numeroLote, List<string> arquivosNFe)
         {
             int emp = Empresas.FindEmpresaByThread();
 
             //Gravar o XML do lote das notas fiscais
             string nomeArqLoteNfeTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
-                                        intNumeroLote.ToString("000000000000000") +
+                                        numeroLote.ToString("000000000000000") +
                                         Propriedade.ExtEnvio.EnvLot;
 
             StreamWriter SW_2 = null;
@@ -370,12 +369,13 @@ namespace NFe.Service
             {
                 SW_2 = File.CreateText(nomeArqLoteNfeTemp);
                 SW_2.Write(strXMLLoteNfe);
-                SW_2.Close();
             }
             finally
             {
                 SW_2.Close();
             }
+
+            FinalizacaoLote(numeroLote, arquivosNFe);
         }
         #endregion
 
@@ -2093,6 +2093,60 @@ namespace NFe.Service
                 }
             }
             return nomeArqProcMDFe;   //danasa 11-4-2012
+        }
+        #endregion
+
+        #region XMLDistMDFe()
+        /// <summary>
+        /// Criar o arquivo XML de distribuição dos LMC com o protocolo de autorização anexado
+        /// </summary>
+        /// <param name="arqLMC">Nome arquivo XML da LMC</param>
+        /// <param name="protLMC">String contendo a parte do XML do protocolo a ser anexado</param>
+        /// <param name="extensao">String contendo a extensão do arquivo</param>
+        public string XmlDistLMC(string arqLMC, string protLMC, string extensao)  
+        {
+            string nomeArqProcLMC = string.Empty;
+            int emp = EmpIndex;
+            StreamWriter swProc = null;
+
+            try
+            {
+                if (File.Exists(arqLMC))
+                {
+                    string tipo = "livroCombustivel";
+
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(arqLMC);
+
+                    XmlNodeList LMCList = doc.GetElementsByTagName(tipo);
+                    XmlNode LMCNode = LMCList[0];
+                    string conteudoLMC = LMCNode.OuterXml;
+
+                    //Montar a string contendo o XML -procLMC.xml
+                    string xmlProcLMC = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                        "<" + tipo + "Proc xmlns=\"" + NFeStrConstants.NAME_SPACE_LMC + "\" versao=\"1.00\">" +
+                        conteudoLMC +
+                        protLMC +
+                        "</" + tipo + "Proc>";
+
+                    //Montar o nome do arquivo -procLMC.xml
+                    nomeArqProcLMC = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                     Functions.ExtrairNomeArq(arqLMC, Propriedade.ExtEnvio.LMC) +
+                                     extensao;
+
+                    swProc = File.CreateText(nomeArqProcLMC);
+                    swProc.Write(xmlProcLMC);
+                }
+            }
+            finally
+            {
+                if (swProc != null)
+                {
+                    swProc.Close();
+                }
+            }
+            return nomeArqProcLMC; 
         }
         #endregion
 

@@ -448,6 +448,13 @@ namespace NFe.Components
             public const string EnvDFe_TXT = "-con-dist-dfe.txt";
             #endregion
 
+            #region Extensões LMC
+            /// <summary>
+            /// "-lmc.xml"
+            /// </summary>
+            public static string LMC = "-lmc.xml";
+            #endregion
+
             #region Extensões só para resolver um problema de compatibilidade de um usuário, com o tempo poderemos excluir. Wandrey 10/12/2014
             public const string cce_XML = "-cce.xml";
             public const string cancel_XML = "-cancel.xml";
@@ -740,6 +747,21 @@ namespace NFe.Components
             public const string retEnvDFe_XML = "-dist-dfe.xml";
             public const string retEnvDFe_TXT = "-dist-dfe.txt";
             public const string retEnvDFe_ERR = "-con-dist-dfe.err";
+            #endregion
+
+            #region Extensões do LMC
+            /// <summary>
+            /// -ret-lmc.xml
+            /// </summary>
+            public static string LMCRet = "-ret-lmc.xml";
+            /// <summary>
+            /// -ret-lmc.err
+            /// </summary>
+            public static string LMCRet_ERR = "-ret-lmc.err";
+            /// <summary>
+            /// -procLMC.xml
+            /// </summary>
+            public static string ProcLMC = "-procLMC.xml";
             #endregion
         }
         #endregion

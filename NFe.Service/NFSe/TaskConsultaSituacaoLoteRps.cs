@@ -13,6 +13,7 @@ using NFe.Components.Fiorilli;
 using NFe.Components.SimplISS;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
+using NFe.Components.FISSLEX;
 
 namespace NFe.Service.NFSe
 {
@@ -137,8 +138,22 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
                         break;
+
+
+                    case PadroesNFSe.FISSLEX:
+                        FISSLEX fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedSitLoteRps.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+                        
+                        fisslex.ConsultarSituacaoLoteRps(NomeArquivoXML);
+                        break;
                 }
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

@@ -145,17 +145,17 @@ namespace NFe.Service
                 "    <tpAmb>2</tpAmb>" +
                 "    <verAplic>RS20130820221405</verAplic>" +
                 "    <cOrgao>42</cOrgao>" +
-                "    <cStat>135</cStat>" +
+                "    <cStat>136</cStat>" +
                 "    <xMotivo>Evento registrado e vinculado a CT-e</xMotivo>" +
-                "    <chCTe>42131175892067000187570040000001091211932160</chCTe>" +
-                "    <tpEvento>110111</tpEvento>" +
+                "    <chCTe>41120178408960000182570010000000044000000047</chCTe>" +
+                "    <tpEvento>110140</tpEvento>" +
                 "    <xEvento>Cancelamento</xEvento>" +
                 "    <nSeqEvento>1</nSeqEvento>" +
                 "    <dhRegEvento>2013-11-13T15:27:12</dhRegEvento>" +
                 "    <nProt>342130000096132</nProt>" +
                 "</infEvento>" +
                 "</retEventoCTe>";
-             */
+            */
 
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(vStrXmlRetorno);
             XmlDocument doc = new XmlDocument();
@@ -197,6 +197,7 @@ namespace NFe.Service
                                 {
                                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                                     case ConvertTxt.tpEventos.tpEvCCe:
+                                    case ConvertTxt.tpEventos.tpEvEPEC:
                                         try
                                         {
                                             NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);

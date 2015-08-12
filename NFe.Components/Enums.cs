@@ -320,6 +320,13 @@ namespace NFe.Components
         DANFERelatorio,
         #endregion
 
+        #region LMC
+        /// <summary>
+        /// Envio do XML de LMC
+        /// </summary>
+        LMCAutorizacao,
+        #endregion
+
         DFeEnviar,
 
         /// <summary>
@@ -578,7 +585,19 @@ namespace NFe.Components
         /// Prefeitura de Vila Velha - ES
         /// </summary>
         [Description("VVISS")]
-        VVISS
+        VVISS,
+        /// <summary>
+        /// Padrão FISSLEX
+        /// Prefeitura Sinop - MT
+        /// </summary>
+        [Description("FISSLEX")]
+        FISSLEX,
+        /// <summary>
+        /// Padrão EloTech
+        /// Prefeitura de Quatro Barras - PR
+        /// </summary>
+        [Description("EloTech")]
+        ELOTECH
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

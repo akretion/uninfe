@@ -180,12 +180,6 @@ namespace NFe.Components.Info
                                 {
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsulta", (!string.IsNullOrEmpty(item.NFeConsulta)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
-                                }
-
-                                if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe ||
-                                    Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfe ||
-                                    Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
-                                {
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcaoEvento", (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaNFeDest", (!string.IsNullOrEmpty(item.NFeConsultaNFeDest)).ToString());
@@ -196,6 +190,7 @@ namespace NFe.Components.Info
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeAutorizacao", (!string.IsNullOrEmpty(item.NFeAutorizacao)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRetAutorizacao", (!string.IsNullOrEmpty(item.NFeRetAutorizacao)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "DFeRecepcao", (!string.IsNullOrEmpty(item.DFeRecepcao)).ToString());
+                                    Functions.GravaTxtXml(oXmlGravar, tipo + NFe.Components.Servicos.LMCAutorizacao.ToString(), (!string.IsNullOrEmpty(item.LMCAutorizacao)).ToString());
                                 }
                                 if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.MDFe ||
                                     Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)

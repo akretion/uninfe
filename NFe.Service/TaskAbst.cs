@@ -172,7 +172,7 @@ namespace NFe.Service
                 case Servicos.NFeDownload:
                     retorna = "NfeDownloadNF";
                     break;
-                #endregion
+        #endregion
 
         #region MDF-e
                 case Servicos.MDFeConsultaStatusServico:
@@ -190,7 +190,7 @@ namespace NFe.Service
                 case Servicos.MDFeRecepcaoEvento:
                     retorna = "MDFeRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
 
         #region CT-e
                 case Servicos.CTeConsultaStatusServico:
@@ -214,7 +214,7 @@ namespace NFe.Service
                     else
                         retorna = "CteRecepcaoEvento";
                     break;
-                #endregion
+        #endregion
             }
 
             return retorna;
@@ -239,7 +239,7 @@ namespace NFe.Service
                 case PadroesNFSe.GINFES:
                     retorna = "ServiceGinfesImplService";
                     break;
-                #endregion
+        #endregion
 
         #region THEMA
                 case PadroesNFSe.THEMA:
@@ -265,7 +265,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region BETHA
                 case PadroesNFSe.BETHA:
@@ -291,7 +291,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region CANOAS-RS (ABACO)
                 case PadroesNFSe.CANOAS_RS:
@@ -317,39 +317,39 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region ISSNet
                 case PadroesNFSe.ISSNET:
                     retorna = "Servicos";
                     break;
-                #endregion
+        #endregion
 
         #region ISSNet
                 case PadroesNFSe.ISSONLINE:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
         #region Blumenau-SC
                 case PadroesNFSe.BLUMENAU_SC:
                     retorna = "LoteNFe";
                     break;
-                #endregion
+        #endregion
 
         #region BHISS
                 case PadroesNFSe.BHISS:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
         #region GIF
                 case PadroesNFSe.GIF:
                     retorna = "ServicosService";
                     break;
 
-                #endregion
+        #endregion
 
         #region DUETO
                 case PadroesNFSe.DUETO:
@@ -375,21 +375,21 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region WEBISS
                 case PadroesNFSe.WEBISS:
                     retorna = "NfseServices";
                     break;
 
-                #endregion
+        #endregion
 
         #region PAULISTANA
                 case PadroesNFSe.PAULISTANA:
                     retorna = "LoteNFe";
                     break;
 
-                #endregion
+        #endregion
 
         #region SALVADOR_BA
                 case PadroesNFSe.SALVADOR_BA:
@@ -415,14 +415,14 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region PORTOVELHENSE
                 case PadroesNFSe.PORTOVELHENSE:
                     retorna = "NfseWSService";
                     break;
 
-                #endregion
+        #endregion
 
         #region PRONIN
                 case PadroesNFSe.PRONIN:
@@ -441,7 +441,7 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region ISSONLINE4R (4R Sistemas)
                 case PadroesNFSe.ISSONLINE4R:
@@ -469,14 +469,14 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region DSF
                 case PadroesNFSe.DSF:
                     retorna = "LoteRpsService";
                     break;
 
-                #endregion
+        #endregion
 
         #region TECNOSISTEMAS
                 case PadroesNFSe.TECNOSISTEMAS:
@@ -502,19 +502,19 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region TIPLAN
                 case PadroesNFSe.TIPLAN:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
         #region CARIOCA
                 case PadroesNFSe.CARIOCA:
                     retorna = "Nfse";
                     break;
-                #endregion
+        #endregion
 
         #region SMARAPD
                 case PadroesNFSe.SMARAPD:
@@ -540,13 +540,13 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+        #endregion
 
         #region E-GOVERNE
                 case PadroesNFSe.EGOVERNE:
                     retorna = "WSNFSeV1001";
                     break;
-                #endregion
+        #endregion
 
             }
 
@@ -1561,6 +1561,12 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region VVISS
+                case PadroesNFSe.FISSLEX:
+                    retorna = "Execute";
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -2095,12 +2101,13 @@ namespace NFe.Service
         #endregion
 
         #region Ultiliza WS compilado
-        protected bool IsUtilizaCompilacaoWs(PadroesNFSe padrao)
+        protected bool IsUtilizaCompilacaoWs(PadroesNFSe padrao, Servicos servico = Servicos.Nulo)
         {
             bool retorno = true;
 
             switch (padrao)
             {
+                case PadroesNFSe.ELOTECH:
                 case PadroesNFSe.GOVDIGITAL:
                 case PadroesNFSe.EL:
                 case PadroesNFSe.EGOVERNE:
@@ -2112,6 +2119,22 @@ namespace NFe.Service
                 case PadroesNFSe.SIMPLISS:
                 case PadroesNFSe.RLZ_INFORMATICA:
                     retorno = false;
+                    break;
+
+                case PadroesNFSe.FISSLEX:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarPorRps:
+                        case Servicos.NFSeConsultar:
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorno = false;
+                            break;
+
+                        default:
+                            retorno = true;
+                            break;
+                    }
                     break;
             }
 
@@ -2158,7 +2181,7 @@ namespace NFe.Service
                     break;
                 case PadroesNFSe.ISSONLINE:
                     break;
-                case PadroesNFSe.BLUMENAU_SC:            
+                case PadroesNFSe.BLUMENAU_SC:
                     break;
                 case PadroesNFSe.FINTEL:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
@@ -2490,5 +2513,33 @@ namespace NFe.Service
                 doc.Save(this.NomeArquivoXML);
         }
         #endregion
+
+        #region XmlLMC()
+        /// <summary>
+        /// Efetua a leitura do XML de LMC e grava os dados no objeto "dadosLMC"
+        /// </summary>
+        /// <param name="emp">Empresa</param>
+        /// <param name="dadosLMC">Objeto dados LMC para receber os valores</param>
+        protected virtual void XmlLMC(int emp, DadosLMC dadosLMC)
+        {
+            dadosLMC.tpAmb = 0;
+            dadosLMC.Id = string.Empty;
+            dadosLMC.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosLMC.versao = string.Empty;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(NomeArquivoXML);
+
+            XmlElement infLivroCombustivel = (XmlElement)doc.GetElementsByTagName("infLivroCombustivel")[0];
+
+            dadosLMC.tpAmb = Convert.ToInt32("0" + infLivroCombustivel.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
+            dadosLMC.versao = infLivroCombustivel.Attributes[TpcnResources.versao.ToString()].InnerText;
+            dadosLMC.Id = infLivroCombustivel.Attributes[TpcnResources.Id.ToString()].InnerText;
+
+            XmlElement movimento = (XmlElement)infLivroCombustivel.GetElementsByTagName("movimento")[0];
+            dadosLMC.dEmissao = Convert.ToDateTime(movimento.Attributes[TpcnResources.dEmissao.ToString()].InnerText);
+        }
+        #endregion
+
     }
 }

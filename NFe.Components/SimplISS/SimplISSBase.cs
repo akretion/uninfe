@@ -30,6 +30,7 @@ namespace NFe.Components.SimplISS
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
+                            case 3515004: //Embu das Artes-SP
                             case 3538709: //Piracicaba-SP 
                                 simplissService = new NFe.Components.SimplISS.PiracicabaSP.h.SimplISSH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
@@ -52,6 +53,9 @@ namespace NFe.Components.SimplISS
                                 simplissService = new NFe.Components.SimplISS.PresidentePrudenteSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
+                            case 3515004: //Embu das Artes-SP
+                                simplissService = new NFe.Components.SimplISS.EmbuDasArtesSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();

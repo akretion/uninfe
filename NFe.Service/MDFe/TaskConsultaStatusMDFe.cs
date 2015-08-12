@@ -39,7 +39,7 @@ namespace NFe.Service
             {
                 dadosPedSta = new DadosPedSta();
                 //Ler o XML para pegar parâmetros de envio
-                PedSta(emp, dadosPedSta);//NomeArquivoXML);
+                PedSta(emp, dadosPedSta);
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);

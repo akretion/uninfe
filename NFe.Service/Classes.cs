@@ -772,6 +772,7 @@ namespace NFe.Service
 
     #endregion
 
+    #region Classe para receber dados do XML de Distribuição do DFe
     public class distDFeInt
     {
         public string versao { get; set; }
@@ -782,4 +783,34 @@ namespace NFe.Service
         public string ultNSU { get; set; }
         public string NSU { get; set; }
     }
+    #endregion
+
+    #region Classe para receber dados do XML de LMC
+    /// <summary>
+    /// Classe com os dados do XML da consulta do status do serviço da NFe
+    /// </summary>
+    public class DadosLMC
+    {
+        /// <summary>
+        /// Ambiente (2-Homologação ou 1-Produção)
+        /// </summary>
+        public int tpAmb { get; set; }
+        /// <summary>
+        /// Versão do XML
+        /// </summary>
+        public string versao { get; set; }
+        /// <summary>
+        /// Id do LMC
+        /// </summary>
+        public string Id { get; set; }
+        /// <summary>
+        /// Data de emissão do LMC
+        /// </summary>
+        public DateTime dEmissao { get; set; }
+        /// <summary>
+        /// Código da UF do emitente
+        /// </summary>
+        public int cUF { get; set; }
+    }
+    #endregion
 }

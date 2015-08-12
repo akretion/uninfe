@@ -726,7 +726,7 @@ namespace NFe.Service
                                                         //Evento autorizado sem vinculação do evento à respectiva NF-e
                                                         try
                                                         {
-                                                            NFe.Service.TFunctions.ExecutaUniDanfe(NomeArquivoXML, DateTime.Today, Empresas.Configuracoes[emp]);
+                                                            NFe.Service.TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                                         }
                                                         catch (Exception ex)
                                                         {

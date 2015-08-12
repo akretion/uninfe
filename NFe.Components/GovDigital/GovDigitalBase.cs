@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -13,6 +14,8 @@ namespace NFe.Components.GovDigital
     {
         #region locais/ protegidos
         object govDigitalService;
+        private int CodigoMun = 0;
+
         protected object GovDigitalService
         {
             get
@@ -20,9 +23,46 @@ namespace NFe.Components.GovDigital
                 if (govDigitalService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        govDigitalService = new br.com.govdigital.homolog1.NfseServiceImplDivService();
+                    {
+                        switch (CodigoMun)
+                        {
+                            case 3122306: // Divinópolis-MG
+                                govDigitalService = new br.com.govdigital.homolog1.NfseServiceImplDivService();
+                                break;
+
+                            case 3151800: //Pocos de caldas-MG
+                                govDigitalService = new br.com.govdigital.homolog.pocos.h.NfseServiceImplPocosService();
+                                break;
+
+                            case 3147006: //Paracatu-MG
+                                govDigitalService = new br.com.govdigital.homolog.paracatu.h.NfseServiceImplPctuService();
+                                break;
+
+                            default:
+                                break;
+                        }                        
+                    }
+
                     else
-                        govDigitalService = new br.com.govdigital.ws.NfseServiceImplDivService();
+                    {
+                        switch (CodigoMun)
+                        {
+                            case 3122306: // Divinópolis-MG
+                                govDigitalService = new br.com.govdigital.ws.NfseServiceImplDivService();
+                                break;
+
+                            case 3151800: //Pocos de caldas-MG
+                                govDigitalService = new br.com.govdigital.ws.pocos.p.NfseServiceImplPocosService();
+                                break;
+
+                            case 3147006: //Paracatu-MG
+                                govDigitalService = new br.com.govdigital.ws.paracatu.p.NfseServiceImplPctuService();
+                                break;
+
+                            default:
+                                break;
+                        }                        
+                    }
 
                     AddClientCertificates();
                 }
@@ -46,10 +86,11 @@ namespace NFe.Components.GovDigital
         #endregion
 
         #region Construtores
-        public GovDigitalBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate)
+        public GovDigitalBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate, int codMun)
             : base(tpAmb, pastaRetorno)
         {
             Certificate = certificate;
+            CodigoMun = codMun;
         }
         #endregion
 
@@ -79,7 +120,7 @@ namespace NFe.Components.GovDigital
 
         public override void ConsultarNfse(string file)
         {
-            string strResult = Invoke("ConsultarNfsePorFaixa", new[] { NfseCabecMsg, ReaderXML(file) });
+            string strResult = Invoke("ConsultarNfseServicoPrestado", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
         }
 
@@ -93,7 +134,10 @@ namespace NFe.Components.GovDigital
         #region invoke
         string Invoke(string methodName, params object[] _params)
         {
+            br.com.govdigital.ws.NfseServiceImplDivService qq = new br.com.govdigital.ws.NfseServiceImplDivService();
+            
             object result = "";
+            ServicePointManager.Expect100Continue = false;
             Type t = GovDigitalService.GetType();
             MethodInfo mi = t.GetMethod(methodName);
             result = mi.Invoke(GovDigitalService, _params);

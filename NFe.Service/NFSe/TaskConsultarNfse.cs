@@ -17,6 +17,7 @@ using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
+using NFe.Components.FISSLEX;
 
 namespace NFe.Service.NFSe
 {
@@ -172,7 +173,8 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
+                                                            oDadosPedSitNfse.cMunicipio);
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
@@ -187,9 +189,21 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.FISSLEX:
+                        FISSLEX fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedSitNfse.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+                        
+                        fisslex.ConsultarNfse(NomeArquivoXML);
+                        break;
                 }
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

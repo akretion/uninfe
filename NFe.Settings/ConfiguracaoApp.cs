@@ -1047,6 +1047,12 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNFSePDF : list.LocalProducao.ConsultarNFSePDF);
                             break;
                         #endregion
+
+                        #region LMC
+                        case Servicos.LMCAutorizacao:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.LMCAutorizacao : list.LocalProducao.LMCAutorizacao);
+                            break;
+                        #endregion
                     }
                     if (tipoEmissao == (int)NFe.Components.TipoEmissao.teEPEC)
                         ufNome = "EPEC";

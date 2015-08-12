@@ -956,6 +956,7 @@
       <CTeConsulta>wsdl\homologacao\PR\HPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\PR\HPRCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <LMCAutorizacao>wsdl\homologacao\PR\HPRLMCAutorizacao.wsdl</LMCAutorizacao>
     </LocalHomologacao>
     <LocalProducao>
       <NFeRecepcao>wsdl\producao\PR\PPRNfeRecepcao2.wsdl</NFeRecepcao>
@@ -984,6 +985,7 @@
       <CTeConsulta>wsdl\producao\PR\PPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\PR\PPRCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <LMCAutorizacao>wsdl\producao\PR\PPRLMCAutorizacao.wsdl</LMCAutorizacao>
     </LocalProducao>
   </Estado>
   <Estado ID="26" Nome="Pernambuco" UF="PE" SVC="teSVCRS">

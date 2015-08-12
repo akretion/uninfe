@@ -528,7 +528,10 @@ namespace NFe.Components
         xRota,
         xSeg,
         xServ,
-        xTexto
+        xTexto,
+        dEmissao,
+        infProt,
+        protLivroCombustivel
     }
 
     public class NFeStrConstants
@@ -536,6 +539,7 @@ namespace NFe.Components
         public static string NAME_SPACE_MDFE = "http://www.portalfiscal.inf.br/mdfe";
         public static string NAME_SPACE_CTE = "http://www.portalfiscal.inf.br/cte";
         public static string NAME_SPACE_NFE = "http://www.portalfiscal.inf.br/nfe";
+        public static string NAME_SPACE_LMC = "http://www.fazenda.pr.gov.br/sefaws";
 
         public static string proxyError = "Especifique o nome do servidor/usuário/senha e porta para conectar do servidor proxy";
         public static string versaoError = "Defina a versão";

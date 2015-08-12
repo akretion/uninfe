@@ -16,6 +16,7 @@ using NFe.Components.Conam;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
+using NFe.Components.FISSLEX;
 
 namespace NFe.Service.NFSe
 {
@@ -164,7 +165,8 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
+                                                            ler.oDadosPedSitNfseRps.cMunicipio);
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
 
@@ -178,9 +180,23 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.FISSLEX:
+                        FISSLEX fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        ler.oDadosPedSitNfseRps.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+                        
+                        fisslex.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
                 }
 
-                if (base.IsUtilizaCompilacaoWs(padraoNFSe))
+                if (base.IsUtilizaCompilacaoWs(padraoNFSe, Servico))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
