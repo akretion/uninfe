@@ -31,8 +31,7 @@ namespace NFe.UI
 
             metroLink_unimake.Visible = !string.IsNullOrEmpty(NFe.Settings.ConfiguracaoApp.Site);
             metroLink_unimake.Text = NFe.Settings.ConfiguracaoApp.Site;
-            uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + "  (" + NFe.Components.Propriedade.Versao + ")";
-            //metroTile_sobre.Text = "Sobre o " + NFe.Components.Propriedade.NomeAplicacao;
+            uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + " - Monitor DF-e";
             metroTile_update.Text = "Atualizar o " + NFe.Components.Propriedade.NomeAplicacao;
             metroTile_sefaz_200.Visible = DateTime.Today <= new DateTime(2015, 4, 1);
 

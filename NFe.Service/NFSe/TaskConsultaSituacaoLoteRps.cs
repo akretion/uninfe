@@ -152,6 +152,10 @@ namespace NFe.Service.NFSe
                         
                         fisslex.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.NATALENSE:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        break;
                 }
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico))
                 {

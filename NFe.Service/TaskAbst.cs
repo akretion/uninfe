@@ -1567,6 +1567,32 @@ namespace NFe.Service
                     retorna = "Execute";
                     break;
                 #endregion
+
+                #region NATALENSE
+                case PadroesNFSe.NATALENSE:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps"; 
+                            break;
+                    }
+                    break;
+                #endregion
             }
 
             return retorna;
@@ -2107,6 +2133,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.MGM:
                 case PadroesNFSe.ELOTECH:
                 case PadroesNFSe.GOVDIGITAL:
                 case PadroesNFSe.EL:

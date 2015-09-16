@@ -146,7 +146,7 @@ namespace NFe.Settings
             string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Autorizados.ToString() + "\\" +
                                             Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
-            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
+            return File.Exists(strNomePastaEnviado + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
         }
         #endregion
 
@@ -163,8 +163,7 @@ namespace NFe.Settings
             string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                             PastaEnviados.Denegados.ToString() + "\\" +
                                             Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(Emissao);
-            return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, extNFe) + extArqProtNfe);
-            //return File.Exists(strNomePastaEnviado + "\\" + Functions.ExtrairNomeArq(Arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
+            return File.Exists(strNomePastaEnviado + Functions.ExtrairNomeArq(Arquivo, extNFe) + extArqProtNfe);
         }
         #endregion
 

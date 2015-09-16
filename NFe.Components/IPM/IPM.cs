@@ -58,9 +58,9 @@ namespace NFSe.Components
                 {
                     Proxy = Proxy
                 })
-            {
+            {                 
                 //                                                                                                    informe 1 para retorno em xml
-                result = post.PostForm("http://www.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
+                result = post.PostForm("http://sync.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
                      {"login", Usuario  },  //CPF/CNPJ, sem separadores}
                      {"senha", Senha},      //Senha de acesso ao sistema: www.nfse.
                      {"cidade", Cidade.ToString()},   //Código da cidade na receita federal (TOM), pesquisei o código em http://www.ekwbrasil.com.br/municipio.php3.
@@ -97,6 +97,9 @@ namespace NFSe.Components
 
                 case 4309209: // Gravatai - RS
                     return (int)8683;
+
+                case 4104204: // Campo Largo - PR
+                    return (int)7481;
             }
 
             return 0;

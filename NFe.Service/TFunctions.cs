@@ -255,7 +255,7 @@ namespace NFe.Service
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                         PastaEnviados.Autorizados.ToString() + "\\" +
                                         Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
-                    destinoArquivo = nomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                    destinoArquivo = nomePastaEnviado + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     goto default;
 
                 case PastaEnviados.Denegados:
@@ -352,7 +352,7 @@ namespace NFe.Service
                         if (Directory.Exists(nomePastaBackup))
                         {
                             //Mover o arquivo da nota fiscal para a pasta de backup
-                            string destinoBackup = nomePastaBackup + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                            string destinoBackup = nomePastaBackup + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                             if (File.Exists(destinoBackup))
                             {
                                 File.Delete(destinoBackup);

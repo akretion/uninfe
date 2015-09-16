@@ -131,5 +131,44 @@
     <Setting Name="NFe_Components_br_gov_sp_embudasartes_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://187.45.245.217/ws_nfse_embu_artes/nfseservice.svc</Value>
     </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_lavras_p_NfseServiceImplLavrService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/lavr</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_lavras_h_NfseServiceImplLavrService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/lavr</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_prata_p_NfseServiceImplPrataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/prata</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_prata_h_NfseServiceImplPrataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/prata</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_saojosedalapa_p_NfseServiceImplSjlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/sjl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_saojosedalapa_h_NfseServiceImplSjlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/sjl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_pedroleopoldo_p_NfseServiceImplPlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/pl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_pedroleopoldo_h_NfseServiceImplPlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_mgmtributacao_www_penapolis_h_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.mgmtributacao.com.br/issqn/wservice/wsnfe_teste_homologacao.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapois_envio_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_consulta_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeconsulta.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_consultaxml_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeconsultaxml.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_cancela_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfecancela.php</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

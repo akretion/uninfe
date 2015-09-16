@@ -18,6 +18,7 @@ using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
+using NFe.Components.MGM;
 
 namespace NFe.Service.NFSe
 {
@@ -173,8 +174,13 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
-                                                            oDadosPedSitNfse.cMunicipio);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                                            Empresas.Configuracoes[emp].X509Certificado,
+                                                            oDadosPedSitNfse.cMunicipio,
+                                                            ConfiguracaoApp.ProxyUsuario,
+                                                            ConfiguracaoApp.ProxySenha,
+                                                            ConfiguracaoApp.ProxyServidor);
+
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
@@ -201,6 +207,22 @@ namespace NFe.Service.NFSe
                         
                         fisslex.ConsultarNfse(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.MGM:
+                        #region MGM
+                        MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                           oDadosPedSitNfse.cMunicipio,
+                                           Empresas.Configuracoes[emp].UsuarioWS,
+                                           Empresas.Configuracoes[emp].SenhaWS);
+                        mgm.ConsultarNfse(NomeArquivoXML);
+                        break;
+                        #endregion
+
+                    case PadroesNFSe.NATALENSE:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        break;
+
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico))

@@ -19,6 +19,7 @@ using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.EloTech;
+using NFe.Components.MGM;
 
 namespace NFe.Service.NFSe
 {
@@ -233,8 +234,13 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.GOVDIGITAL:
                         #region GOV-Digital
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
-                                                            oDadosEnvLoteRps.cMunicipio);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                            Empresas.Configuracoes[emp].X509Certificado,
+                                                            oDadosEnvLoteRps.cMunicipio,
+                                                            ConfiguracaoApp.ProxyUsuario,
+                                                            ConfiguracaoApp.ProxySenha,
+                                                            ConfiguracaoApp.ProxyServidor);
+
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
@@ -246,11 +252,12 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
+                    case PadroesNFSe.NATALENSE:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 
-                    case PadroesNFSe.VVISS:                                                
+                    case PadroesNFSe.VVISS:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.VVISS);
                         break;
 
@@ -267,6 +274,17 @@ namespace NFe.Service.NFSe
                                                       Empresas.Configuracoes[emp].X509Certificado);
 
                         elotech.EmiteNF(NomeArquivoXML);
+                        break;
+                        #endregion
+
+                    case PadroesNFSe.MGM:
+                        #region MGM
+                        MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                           oDadosEnvLoteRps.cMunicipio,
+                                           Empresas.Configuracoes[emp].UsuarioWS,
+                                           Empresas.Configuracoes[emp].SenhaWS);
+                        mgm.EmiteNF(NomeArquivoXML);
                         break;
                         #endregion
 

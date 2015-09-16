@@ -597,11 +597,22 @@ namespace NFe.Components
         /// Prefeitura de Quatro Barras - PR
         /// </summary>
         [Description("EloTech")]
-        ELOTECH
+        ELOTECH,
+        /// <summary>
+        /// Padrão MGM
+        /// Prefeitura de Penapolis - SP
+        /// </summary>
+        [Description("MGM")]
+        MGM,
+        /// <summary>
+        /// Padrão Natalense
+        /// Prefeitura de Natal - RN
+        /// </summary>
+        [Description("Natalense")]
+        NATALENSE
 
         ///Atencao Wandrey.
-        ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
-        
+        ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao        
 
     }
     #endregion

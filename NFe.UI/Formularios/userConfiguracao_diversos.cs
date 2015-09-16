@@ -252,6 +252,7 @@ namespace NFe.UI.Formularios
             bool visible = ufCod == 4101408 /*Apucarana*/ ||
                            ufCod == 3502804 /*Araçatuba*/||
                            ufCod == 4104303 /*Campo Mourão*/||
+                           ufCod == 4104204 /*Campo Largo*/||
                            ufCod == 3537305 /*Penapolis*/||
                            ufCod == 4309209 /*Gravatai*/||
                            ufCod == 3551702 /*Sertaozinho*/||

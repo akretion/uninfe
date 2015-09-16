@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Web.Services.Protocols;
 
 namespace NFe.Components.GovDigital
 {
@@ -15,6 +16,10 @@ namespace NFe.Components.GovDigital
         #region locais/ protegidos
         object govDigitalService;
         private int CodigoMun = 0;
+        private string ProxyUser = null;
+        private string ProxyPass = null;
+        private string ProxyServer = null;
+
 
         protected object GovDigitalService
         {
@@ -38,9 +43,25 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new br.com.govdigital.homolog.paracatu.h.NfseServiceImplPctuService();
                                 break;
 
+                            case 3138203: //Lavras-MG
+                                govDigitalService = new br.com.govdigital.homolog.lavras.h.NfseServiceImplLavrService();
+                                break;
+
+                            case 3152808: //Prata-MG
+                                govDigitalService = new br.com.govdigital.homolog.prata.h.NfseServiceImplPrataService();
+                                break;
+
+                            case 3162955: //São José da Lapa-MG
+                                govDigitalService = new br.com.govdigital.homolog.saojosedalapa.h.NfseServiceImplSjlService();
+                                break;
+
+                            case 3149309: //Pedro Leopoldo-MG
+                                govDigitalService = new br.com.govdigital.homolog.pedroleopoldo.h.NfseServiceImplPlService();
+                                break;
+
                             default:
                                 break;
-                        }                        
+                        }
                     }
 
                     else
@@ -59,12 +80,29 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new br.com.govdigital.ws.paracatu.p.NfseServiceImplPctuService();
                                 break;
 
+                            case 3138203: //Lavras-MG
+                                govDigitalService = new br.com.govdigital.ws.lavras.p.NfseServiceImplLavrService();
+                                break;
+
+                            case 3152808: //Prata-MG
+                                govDigitalService = new br.com.govdigital.ws.prata.p.NfseServiceImplPrataService();
+                                break;
+
+                            case 3162955: //São José da Lapa-MG
+                                govDigitalService = new br.com.govdigital.ws.saojosedalapa.p.NfseServiceImplSjlService();
+                                break;
+
+                            case 3149309: //Pedro Leopoldo-MG
+                                govDigitalService = new br.com.govdigital.ws.pedroleopoldo.p.NfseServiceImplPlService();
+                                break;
+
                             default:
                                 break;
-                        }                        
+                        }
                     }
 
                     AddClientCertificates();
+                    AddProxyUser();
                 }
                 return govDigitalService;
             }
@@ -78,6 +116,19 @@ namespace NFe.Components.GovDigital
             certificates = pi.GetValue(govDigitalService, null) as X509CertificateCollection;
             certificates.Add(Certificate);
         }
+
+        private void AddProxyUser()
+        {
+            if (!String.IsNullOrEmpty(ProxyUser))
+            {
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ProxyUser, ProxyPass, ProxyServer);
+                System.Net.WebRequest.DefaultWebProxy.Credentials = credentials;
+
+                WebServiceProxy wsp = new WebServiceProxy(Certificate as X509Certificate2);
+
+                wsp.SetProp(govDigitalService, "Proxy", Proxy.DefinirProxy(ProxyServer, ProxyUser, ProxyPass, 8080));
+            }
+        }
         #endregion
 
         #region propriedades
@@ -86,11 +137,15 @@ namespace NFe.Components.GovDigital
         #endregion
 
         #region Construtores
-        public GovDigitalBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate, int codMun)
+        public GovDigitalBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate, int codMun, string proxyUser, string proxyPass, string proxyServer)
             : base(tpAmb, pastaRetorno)
         {
             Certificate = certificate;
             CodigoMun = codMun;
+            ProxyUser = proxyUser;
+            ProxyPass = proxyPass;
+            ProxyServer = proxyServer;
+
         }
         #endregion
 
@@ -134,8 +189,6 @@ namespace NFe.Components.GovDigital
         #region invoke
         string Invoke(string methodName, params object[] _params)
         {
-            br.com.govdigital.ws.NfseServiceImplDivService qq = new br.com.govdigital.ws.NfseServiceImplDivService();
-            
             object result = "";
             ServicePointManager.Expect100Continue = false;
             Type t = GovDigitalService.GetType();
@@ -162,4 +215,5 @@ namespace NFe.Components.GovDigital
         }
         #endregion
     }
+    
 }

@@ -198,7 +198,7 @@ namespace NFe.Components
                     }
                 }
             }
-            //if (Certificado != null)
+
             //Gerar e compilar a classe
             this.GerarClasse();
         }
@@ -390,15 +390,19 @@ namespace NFe.Components
             //Wandrey 31/03/2010
             switch (cUF)
             {
-                case 52: //Goiás
+                case 52: //Estado de Goiás
                     if (taHomologacao)
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
                     else
                         goto default;
                     break;
 
+                case 3550308: //Municipio de São Paulo-SP
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                    break;
+
                 default:
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;                    
                     break;
             }
 
@@ -521,11 +525,13 @@ namespace NFe.Components
         {
             if (this.oCertificado != null)
             {
-                Type tipoInstance = instance.GetType();
-                object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, instance, new Object[] { });
-                Type tipoClientCertificates;
-                tipoClientCertificates = oClientCertificates.GetType();
-                tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
+                ((System.Web.Services.Protocols.SoapHttpClientProtocol)instance).ClientCertificates.Add(this.oCertificado);
+
+                //Type tipoInstance = instance.GetType();
+                //object oClientCertificates = tipoInstance.InvokeMember("ClientCertificates", System.Reflection.BindingFlags.GetProperty, null, instance, new Object[] { });
+                //Type tipoClientCertificates;
+                //tipoClientCertificates = oClientCertificates.GetType();
+                //tipoClientCertificates.InvokeMember("Add", System.Reflection.BindingFlags.InvokeMethod, null, oClientCertificates, new Object[] { this.oCertificado });
             }
         }
         #endregion
@@ -884,7 +890,7 @@ namespace NFe.Components
             CTeConsulta =
             CTeStatusServico =
             CTeRecepcaoEvento =
-            CTeConsultaCadastro = 
+            CTeConsultaCadastro =
                 ///
                 /// LMC
             LMCAutorizacao = string.Empty;

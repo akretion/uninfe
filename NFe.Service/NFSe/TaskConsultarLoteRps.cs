@@ -165,8 +165,13 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado,
-                                                            ler.oDadosPedSitNfseRps.cMunicipio);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                                            Empresas.Configuracoes[emp].X509Certificado,
+                                                            ler.oDadosPedSitNfseRps.cMunicipio,
+                                                            ConfiguracaoApp.ProxyUsuario,
+                                                            ConfiguracaoApp.ProxySenha,
+                                                            ConfiguracaoApp.ProxyServidor);
+
                         AssinaturaDigital adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
 
@@ -192,6 +197,10 @@ namespace NFe.Service.NFSe
                         ConfiguracaoApp.ProxyServidor);
                         
                         fisslex.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.NATALENSE:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 
                 }
