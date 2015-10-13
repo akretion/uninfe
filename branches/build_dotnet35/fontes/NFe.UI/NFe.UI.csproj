@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37A93E14-D881-4957-AD44-3615ED65CD57}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFe.UI</RootNamespace>
+    <AssemblyName>NFe.UI</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Formularios\FormDummy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormDummy.Designer.cs">
+      <DependentUpon>FormDummy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormNova.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormNova.Designer.cs">
+      <DependentUpon>FormNova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormSenha.Designer.cs">
+      <DependentUpon>FormSenha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormSpinner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormSpinner.Designer.cs">
+      <DependentUpon>FormSpinner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormUpdate.Designer.cs">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormWait.Designer.cs">
+      <DependentUpon>FormWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\menu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\menu.Designer.cs">
+      <DependentUpon>menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\NFSe\FormMunicipio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\NFSe\FormMunicipio.Designer.cs">
+      <DependentUpon>FormMunicipio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userGrid1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userGrid1.Designer.cs">
+      <DependentUpon>userGrid1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userGrid2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userGrid2.Designer.cs">
+      <DependentUpon>userGrid2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_certificado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_certificado.Designer.cs">
+      <DependentUpon>userConfiguracao_certificado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_danfe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_danfe.Designer.cs">
+      <DependentUpon>userConfiguracao_danfe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_diversos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_diversos.Designer.cs">
+      <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_ftp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_ftp.Designer.cs">
+      <DependentUpon>userConfiguracao_ftp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_geral.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_geral.Designer.cs">
+      <DependentUpon>userConfiguracao_geral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_pastas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_pastas.Designer.cs">
+      <DependentUpon>userConfiguracao_pastas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userCadastro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userCadastro.Designer.cs">
+      <DependentUpon>userCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userCadastroResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userCadastroResult.Designer.cs">
+      <DependentUpon>userCadastroResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userCadastroResultDados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userCadastroResultDados.Designer.cs">
+      <DependentUpon>userCadastroResultDados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracoes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracoes.Designer.cs">
+      <DependentUpon>userConfiguracoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\UserControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\UserControl2.Designer.cs">
+      <DependentUpon>UserControl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userLogs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userLogs.Designer.cs">
+      <DependentUpon>userLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userMunicipios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\NFSe\userMunicipios.Designer.cs">
+      <DependentUpon>userMunicipios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userPedidoSituacao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userPedidoSituacao.Designer.cs">
+      <DependentUpon>userPedidoSituacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userSobre.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userSobre.Designer.cs">
+      <DependentUpon>userSobre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userValidaXML.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userValidaXML.Designer.cs">
+      <DependentUpon>userValidaXML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Main.Designer.cs">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="uninfeDummy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetroFramework\MetroFramework.Design\MetroFramework.Design.csproj">
+      <Project>{7316584d-9a16-4280-a8ab-6d45198c6e4d}</Project>
+      <Name>MetroFramework.Design</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroFramework\MetroFramework.Fonts\MetroFramework.Fonts.csproj">
+      <Project>{5a2fcae8-c2fa-41bd-90ea-16103ea07b26}</Project>
+      <Name>MetroFramework.Fonts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroFramework\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
+      <Project>{c045a27f-415b-4f7d-8b9b-2956589932c8}</Project>
+      <Name>NFe.Certificado</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components.Info\NFe.Components.Info.csproj">
+      <Project>{b7222c8a-6160-4d6f-bdc8-20134308175a}</Project>
+      <Name>NFe.Components.Info</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
+      <Project>{c199d582-6da4-4d00-8963-89ba04777872}</Project>
+      <Name>NFe.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.ConvertTxt\NFe.ConvertTxt.csproj">
+      <Project>{9f2e5401-1c0b-4613-ab7f-985c7f0f267a}</Project>
+      <Name>NFe.ConvertTxt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Service\NFe.Service.csproj">
+      <Project>{975c0cfb-c646-4a1d-8927-fd63869f2daf}</Project>
+      <Name>NFe.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
+      <Project>{a963e456-a54b-4c4d-a9de-e80c136c3554}</Project>
+      <Name>NFe.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Threadings\NFe.Threadings.csproj">
+      <Project>{f570942e-c531-497d-a860-f86a8c2a31c9}</Project>
+      <Name>NFe.Threadings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Validate\NFe.Validate.csproj">
+      <Project>{4a0d1e87-2994-4678-9af1-eebd093b7b44}</Project>
+      <Name>NFe.Validate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\FormDummy.resx">
+      <DependentUpon>FormDummy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormNova.resx">
+      <DependentUpon>FormNova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormSenha.resx">
+      <DependentUpon>FormSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormSpinner.resx">
+      <DependentUpon>FormSpinner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormUpdate.resx">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormWait.resx">
+      <DependentUpon>FormWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\menu.resx">
+      <DependentUpon>menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\NFSe\FormMunicipio.resx">
+      <DependentUpon>FormMunicipio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\NFSe\userGrid1.resx">
+      <DependentUpon>userGrid1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\NFSe\userGrid2.resx">
+      <DependentUpon>userGrid2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_certificado.resx">
+      <DependentUpon>userConfiguracao_certificado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_danfe.resx">
+      <DependentUpon>userConfiguracao_danfe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_diversos.resx">
+      <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_ftp.resx">
+      <DependentUpon>userConfiguracao_ftp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_geral.resx">
+      <DependentUpon>userConfiguracao_geral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_pastas.resx">
+      <DependentUpon>userConfiguracao_pastas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userCadastro.resx">
+      <DependentUpon>userCadastro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userCadastroResult.resx">
+      <DependentUpon>userCadastroResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userCadastroResultDados.resx">
+      <DependentUpon>userCadastroResultDados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracoes.resx">
+      <DependentUpon>userConfiguracoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\UserControl2.resx">
+      <DependentUpon>UserControl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userLogs.resx">
+      <DependentUpon>userLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\NFSe\userMunicipios.resx">
+      <DependentUpon>userMunicipios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userPedidoSituacao.resx">
+      <DependentUpon>userPedidoSituacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userSobre.resx">
+      <DependentUpon>userSobre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userValidaXML.resx">
+      <DependentUpon>userValidaXML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\NFe.Components.Municipio.datasource" />
+    <None Include="Resources\_0013_Printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_0025_Ticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_0047_ID.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_0049_Trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e107-Delete.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e10b-Accept.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e112-Back.48 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e112-Back.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e118-Download.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kontact_todo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfse128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\identity1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_orange_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\city48x48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF11.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF12.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF13.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF14.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF15.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF16.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF17.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF21.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF22.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF23.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF24.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF25.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF26.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF27.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF28.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF29.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF31.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF32.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF33.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF35.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF41.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF42.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF43.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF50.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF51.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF52.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Formularios\NFSe\Municipios\MunIBGE-UF53.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClearLock_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BluePixel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\atualizar.png" />
+    <None Include="Resources\visual1.png" />
+    <None Include="Resources\atualizar1.png" />
+    <Content Include="Resources\cadastro.png" />
+    <None Include="Resources\cadastro1.png" />
+    <Content Include="Resources\config.png" />
+    <None Include="Resources\config1.png" />
+    <Content Include="Resources\documentacao.png" />
+    <None Include="Resources\documentacao1.png" />
+    <Content Include="Resources\excluir.png" />
+    <None Include="Resources\excluir1.png" />
+    <Content Include="Resources\imprimir.png" />
+    <None Include="Resources\imprimir1.png" />
+    <Content Include="Resources\info.png" />
+    <None Include="Resources\info1.png" />
+    <Content Include="Resources\log.png" />
+    <None Include="Resources\log1.png" />
+    <None Include="Resources\lupa_25x25.jpg" />
+    <Content Include="Resources\munucipios.png" />
+    <None Include="Resources\munucipios1.png" />
+    <Content Include="Resources\sefaz.png" />
+    <None Include="Resources\sefaz1.png" />
+    <Content Include="Resources\sefaz20.png" />
+    <None Include="Resources\sefaz201.png" />
+    <Content Include="Resources\situacao.png" />
+    <None Include="Resources\situacao1.png" />
+    <Content Include="Resources\update.png" />
+    <None Include="Resources\update1.png" />
+    <Content Include="Resources\validar.png" />
+    <None Include="Resources\validar1.png" />
+    <Content Include="Resources\visual.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
