@@ -1,0 +1,174 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NFe.Components.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NFe_Components_br_gov_rs_erechim_nfse_www_h_NfseService_Homolog" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.nfse.erechim.rs.gov.br:8182/NfseService_Homolog/NfseService_Homolog</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_rs_erechim_nfse_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_testebauru_h_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testebauru.sigiss.com.br:443/testebauru/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_bauru_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://bauru.sigiss.com.br:443/bauru/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://botucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://saogoncalo.sigiss.com.br:443/saogoncalo/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_tremembe_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://tremembe.sigiss.com.br:443/tremembe/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_marilia_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://marilia.sigiss.com.br:443/marilia/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_net_cosmorama_fiorilli_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_sp_piracicaba_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.sistemas.piracicaba.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_sp_piracicaba_sistemas_www_h_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.45.245.217/ws_nfse/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_etransparencia_nfe_varginha_p_ws_nfe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_etransparencia_nfehomologacao_varginha_h_ws_nfe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfehomologacao.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_etransparencia_nfe_p_ws_nfe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_etransparencia_nfehomologacao_h_ws_nfe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfehomologacao.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_rlz_saturno_santafedosul_h_Webservice_Prefeitura" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://saturno.rlz.com.br:3080/amfphp/services/RLZ/webservice/santafedosul.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_rlz_ceiss_santafedosul_p_Webservice_Prefeitura" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ceiss.rlz.com.br/amfphp/services/RLZ/webservice/server.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_egoverne_isscuritiba_curitiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://pilotoisscuritiba.curitiba.pr.gov.br/nfse_ws/nfsews.asmx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://isscuritiba.curitiba.pr.gov.br/Iss.NfseWebService/nfsews.asmx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_elnfse_simoesfilho_p_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://201.49.29.18:8081/el-nfse/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.45.245.217/ws_nfse/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.45.245.217/ws_nfse_presidente_prudente/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/div</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/div</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cianorte.sigiss.com.br:443/cianorte/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://testeiss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_pr_londrina_iss_ModuloEmissorNFSe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://iss.londrina.pr.gov.br:443/ws/v1_03/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultaloterps_p_WS_ConsultaLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultanfse_p_WS_ConsultaNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfse</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultanfseporrps_p_WS_ConsultaNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultarsituacaoloterps_p_WS_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_demo_aws_consultaloterps_h_WS_ConsultaLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_demo_aws_consultanfse_h_WS_ConsultaNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultanfse</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_demo_aws_consultanfseporrps_h_WS_ConsultaNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fisslex_demo_aws_consultarsituacaoloterps_h_WS_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_pocos_p_NfseServiceImplPocosService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/pocos</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_pocos_h_NfseServiceImplPocosService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pocos</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_paracatu_p_NfseServiceImplPctuService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/pctu</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_paracatu_h_NfseServiceImplPctuService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pctu</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_elotech_quatrobarras_hp_NfsePortService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://200.150.67.99:32777/WebEloWS/nfseService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_sp_embudasartes_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.45.245.217/ws_nfse_embu_artes/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_lavras_p_NfseServiceImplLavrService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/lavr</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_lavras_h_NfseServiceImplLavrService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/lavr</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_prata_p_NfseServiceImplPrataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/prata</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_prata_h_NfseServiceImplPrataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/prata</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_saojosedalapa_p_NfseServiceImplSjlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/sjl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_saojosedalapa_h_NfseServiceImplSjlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/sjl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_pedroleopoldo_p_NfseServiceImplPlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/pl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_pedroleopoldo_h_NfseServiceImplPlService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pl</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_mgmtributacao_www_penapolis_h_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.mgmtributacao.com.br/issqn/wservice/wsnfe_teste_homologacao.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapois_envio_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_consulta_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeconsulta.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_consultaxml_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfeconsultaxml.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fgmaiss_www_p_penapolis_cancela_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.fgmaiss.com.br/issqn/wservice/wsnfecancela.php</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
