@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Webservice>
+	<Estado ID="4100400" Nome="Almirante Tamandaré - PR" UF="PR" Padrao="BETHA"/>
+	<Estado ID="1500800" Nome="Ananindeua - PA" UF="PA" Padrao="GINFES"/>
+	<Estado ID="5201108" Nome="Anapolis - GO" UF="GO" Padrao="ISSNET"/>
+	<Estado ID="4101408" Nome="Apucarana - PR" UF="PR" Padrao="ISSONLINE"/>
+	<Estado ID="3502804" Nome="Aracatuba - SP" UF="SP" Padrao="ISSONLINE"/>
+	<Estado ID="3503208" Nome="Araraquara - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3104205" Nome="Arcos - MG" UF="MG" Padrao="WEBISS"/>
+	<Estado ID="3504008" Nome="Assis - SP" UF="SP" Padrao="PRONIN"/>
+	<Estado ID="4102307" Nome="Balsa Nova - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3506003" Nome="Bauru - SP" UF="SP" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="1501402" Nome="Belém - PA" UF="PA" Padrao="DSF"/>
+	<Estado ID="3300456" Nome="Belford Roxo - RJ" UF="RJ" Padrao="GINFES"/>
+	<Estado ID="3106200" Nome="Belo Horizonte - MG" UF="MG" Padrao="BHISS"/>
+	<Estado ID="4302105" Nome="Bento Gonçalves - RS" UF="RS" Padrao="BETHA"/>
+	<Estado ID="3506359" Nome="Bertioga - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3106705" Nome="Betim - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="4202404" Nome="Blumenau - SC" UF="SC" Padrao="BLUMENAU_SC"/>
+	<Estado ID="3507506" Nome="Botucatu - SP" UF="SP" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="4302808" Nome="Caçapava do Sul - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="4303103" Nome="Cachoeirinha - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="4103453" Nome="Cafelândia - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3509502" Nome="Campinas - SP" UF="SP" Padrao="DSF"/>
+	<Estado ID="4303905" Nome="Campo Bom - RS" UF="RS" Padrao="GIF"/>
+	<Estado ID="5002704" Nome="Campo Grande - MS" UF="MS" Padrao="DSF"/>
+	<Estado ID="4104303" Nome="Campo Mourão - PR" UF="PR" Padrao="IPM"/>
+	<Estado ID="3301009" Nome="Campos dos Goytacazes - RJ" UF="RJ" Padrao="GINFES"/>
+	<Estado ID="4104428" Nome="Candói - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4304606" Nome="Canoas - RS" UF="RS" Padrao="CANOAS_RS"/>
+	<Estado ID="4104501" Nome="Capanema - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4203907" Nome="Capinzal - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="4104600" Nome="Capitão Leônidas Marques - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4104659" Nome="Carâmbei - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="2604106" Nome="Caruaru - PE" UF="PE" Padrao="GINFES"/>
+	<Estado ID="4104808" Nome="Cascavel - PR" UF="PR" Padrao="ISSNET"/>
+	<Estado ID="3115300" Nome="Cataguases - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="4305108" Nome="Caxias do Sul - RS" UF="RS" Padrao="GIF"/>
+	<Estado ID="3511300" Nome="Cedral - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4105508" Nome="Cianorte - PR" UF="PR" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="4204251" Nome="Cocal do Sul - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3118601" Nome="Contagem - MG" UF="MG" Padrao="PRONIN"/>
+	<Estado ID="3512902" Nome="Cosmorama - SP" UF="SP" Padrao="FIORILLI"/>
+	<Estado ID="3513009" Nome="Cotia - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4204608" Nome="Criciúma - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="5103403" Nome="Cuiabá - MT" UF="MT" Padrao="ISSNET"/>
+	<Estado ID="4106902" Nome="Curitiba - PR" UF="PR" Padrao="EGOVERNE"/>
+	<Estado ID="4204806" Nome="Curitibanos - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3513801" Nome="Diadema - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3122306" Nome="Divinópolis - MG" UF="MG" Padrao="GOVDIGITAL"/>
+	<Estado ID="4107207" Nome="Dois Vizinhos - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4307005" Nome="Erechim - RS" UF="RS" Padrao="SYSTEMPRO"/>
+	<Estado ID="4307609" Nome="Estância Velha - RS" UF="RS" Padrao="TECNOSISTEMAS"/>
+	<Estado ID="4307708" Nome="Esteio - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="4307906" Nome="Farroupilha - RS" UF="RS" Padrao="GIF"/>
+	<Estado ID="2910800" Nome="Feira de Santana - BA" UF="BA" Padrao="WEBISS"/>
+	<Estado ID="2304400" Nome="Fortaleza - CE" UF="CE" Padrao="GINFES"/>
+	<Estado ID="3516200" Nome="Franca - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4108403" Nome="Francisco Beltrão - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4205902" Nome="Gaspar - SC" UF="SC" Padrao="THEMA"/>
+	<Estado ID="3127701" Nome="Governador Valadares - MG" UF="MG" Padrao="ISSONLINE4R"/>
+	<Estado ID="4309209" Nome="Gravataí - RS" UF="RS" Padrao="IPM"/>
+	<Estado ID="4309308" Nome="Guaíba - RS" UF="RS" Padrao="GINFES"/>
+	<Estado ID="4109609" Nome="Guaratuba - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3518800" Nome="Guarulhos - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4206702" Nome="Herval D'Oeste - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3519071" Nome="Hortolândia - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4109708" Nome="Ibaiti - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4109807" Nome="Ibiporã - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4310207" Nome="Ijui - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="4110102" Nome="Imbituva - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3131307" Nome="Ipatinga - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="3132404" Nome="Itajubá - MG" UF="MG" Padrao="GOVDIGITAL"/>
+	<Estado ID="4208302" Nome="Itapema - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3523909" Nome="Itu - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="5211503" Nome="Itumbiara - GO" UF="GO" Padrao="PRODATA"/>
+	<Estado ID="3524402" Nome="Jacareí - SP" UF="SP" Padrao="ISSNET"/>
+	<Estado ID="3524709" Nome="Jaguariúna - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3525300" Nome="Jaú - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4209003" Nome="Joaçaba - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="2507507" Nome="João Pessoa - PB" UF="PB" Padrao="GINFES"/>
+	<Estado ID="3136702" Nome="Juiz de Fora - MG" UF="MG" Padrao="BHISS"/>
+	<Estado ID="3525904" Nome="Jundiaí - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3526100" Nome="Juquiá - SP" UF="SP" Padrao="ISSONLINE4R"/>
+	<Estado ID="4209300" Nome="Lages - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3137601" Nome="Lagoa Santa - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="4311403" Nome="Lajeado - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="4113304" Nome="Laranjeiras do Sul - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="4113700" Nome="Londrina - PR" UF="PR" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="5105259" Nome="Lucas do Rio Verde - MT" UF="MT" Padrao="WEBISS"/>
+	<Estado ID="4210035" Nome="Luzerna - SC" UF="SC" Padrao="BETHA"/>
+	<Estado ID="3302403" Nome="Macaé - RJ" UF="RJ" Padrao="TIPLAN"/>
+	<Estado ID="2704302" Nome="Maceió - AL" UF="AL" Padrao="GINFES"/>
+	<Estado ID="3528502" Nome="Mairipora - SP" UF="SP" Padrao="ISSWEB"/>
+	<Estado ID="2704708" Nome="Marechal Deodoro - AL" UF="AL" Padrao="GINFES"/>
+	<Estado ID="3302700" Nome="Maricá - RJ" UF="RJ" Padrao="GINFES"/>
+	<Estado ID="3529005" Nome="Marília - SP" UF="SP" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="3529401" Nome="Mauá - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3530300" Nome="Mirassol - SP" UF="SP" Padrao="PRONIN"/>
+	<Estado ID="4116059" Nome="Missal - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3530508" Nome="Mococa - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3530607" Nome="Mogi das Cruzes - SP" UF="SP" Padrao="SMARAPD"/>
+	<Estado ID="4312401" Nome="Montenegro - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="3303302" Nome="Niterói - RJ" UF="RJ" Padrao="WEBISS"/>
+	<Estado ID="3303500" Nome="Nova Iguaçu - RJ" UF="RJ" Padrao="DSF"/>
+	<Estado ID="4313375" Nome="Nova Santa Rita - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="4313409" Nome="Novo Hamburgo - RS" UF="RS" Padrao="ISSNET"/>
+	<Estado ID="3533908" Nome="Olímpia - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3147105" Nome="Pará de Minas - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="4118204" Nome="Paranaguá - PR" UF="PR" Padrao="GINFES"/>
+	<Estado ID="3535804" Nome="Paranapanema - SP" UF="SP" Padrao="PRONIN"/>
+	<Estado ID="4118402" Nome="Paranavaí - PR" UF="PR" Padrao="BETHA"/>
+	<Estado ID="1505536" Nome="Parauapebas - PA" UF="PA" Padrao="GINFES"/>
+	<Estado ID="4314050" Nome="Parobé - RS" UF="RS" Padrao="GIF"/>
+	<Estado ID="4314100" Nome="Passo Fundo - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="4118501" Nome="Pato Branco - PR" UF="PR" Padrao="PRONIN"/>
+	<Estado ID="3536505" Nome="Paulínia - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4314407" Nome="Pelotas - RS" UF="RS" Padrao="GINFES"/>
+	<Estado ID="3537305" Nome="Penapois - SP" UF="SP" Padrao="ISSONLINE"/>
+	<Estado ID="3538709" Nome="Piracicaba - SP" UF="SP" Padrao="SIMPLISS"/>
+	<Estado ID="4119905" Nome="Ponta Grossa - PR" UF="PR" Padrao="FINTEL"/>
+	<Estado ID="4314803" Nome="Portão - RS" UF="RS" Padrao="TECNOSISTEMAS"/>
+	<Estado ID="4314902" Nome="Porto Alegre - RS" UF="RS" Padrao="BHISS"/>
+	<Estado ID="1100205" Nome="Porto Velho - RO" UF="RO" Padrao="PORTOVELHENSE"/>
+	<Estado ID="4120358" Nome="Pranchita - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3541406" Nome="Presidente Prudente - SP" UF="SP" Padrao="SIMPLISS"/>
+	<Estado ID="4120606" Nome="Prudentópolis - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3542404" Nome="Regente Feijó - SP" UF="SP" Padrao="PRONIN"/>
+	<Estado ID="3542602" Nome="Registro - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3304201" Nome="Resende - RJ" UF="RJ" Padrao="TIPLAN"/>
+	<Estado ID="3154606" Nome="Ribeirão das Neves - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="3543402" Nome="Ribeirão Preto - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4122008" Nome="Rio Azul - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3304300" Nome="Rio Bonito - RJ" UF="RJ" Padrao="GINFES"/>
+	<Estado ID="3304557" Nome="Rio de Janeiro - RJ" UF="RJ" Padrao="CARIOCA"/>
+	<Estado ID="2927408" Nome="Salvador - BA" UF="BA" Padrao="SALVADOR_BA"/>
+	<Estado ID="4316808" Nome="Santa Cruz do Sul - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="3546603" Nome="Santa Fé do Sul - SP" UF="SP" Padrao="RLZ_INFORMATICA"/>
+	<Estado ID="4316907" Nome="Santa Maria - RS" UF="RS" Padrao="ISSNET"/>
+	<Estado ID="3547809" Nome="Santo André - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4124400" Nome="Santo Antonio do Sudoeste - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3548500" Nome="Santos - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3548708" Nome="São Bernardo do Campo - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3548807" Nome="São Caetano do Sul - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3548906" Nome="São Carlos - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3304904" Nome="São Gonçalo - RJ" UF="RJ" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="4216602" Nome="São José - SC" UF="SC" Padrao="PRONIN"/>
+	<Estado ID="3549805" Nome="São José do Rio Preto - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="3549904" Nome="São José dos Campos - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="4125506" Nome="São José dos Pinhais - PR" UF="PR" Padrao="GINFES"/>
+	<Estado ID="4318705" Nome="São Leopoldo - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="2111300" Nome="São Luis - MA" UF="MA" Padrao="DSF"/>
+	<Estado ID="3550308" Nome="São Paulo - SP" UF="SP" Padrao="PAULISTANA"/>
+	<Estado ID="4320008" Nome="Sapucaia do Sul - RS" UF="RS" Padrao="GIF"/>
+	<Estado ID="4126306" Nome="Sengés - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3551702" Nome="Sertãozinho - SP" UF="SP" Padrao="SMARAPD"/>
+	<Estado ID="2930709" Nome="Simões Filho - BA" UF="BA" Padrao="EL"/>
+	<Estado ID="3552205" Nome="Sorocaba - SP" UF="SP" Padrao="DSF"/>
+	<Estado ID="4321204" Nome="Taquara - RS" UF="RS" Padrao="THEMA"/>
+	<Estado ID="3553807" Nome="Taquarituba - SP" UF="SP" Padrao="FIORILLI"/>
+	<Estado ID="3554003" Nome="Tatuí - SP" UF="SP" Padrao="GINFES"/>
+	<Estado ID="2211001" Nome="Teresina - PI" UF="PI" Padrao="DSF"/>
+	<Estado ID="4127700" Nome="Toledo - PR" UF="PR" Padrao="EQUIPLANO"/>
+	<Estado ID="3554805" Nome="Tremembé - SP" UF="SP" Padrao="SIGCORP_SIGISS"/>
+	<Estado ID="4321709" Nome="Tres Coroas - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="4322004" Nome="Triunfo - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="3169901" Nome="Ubá - MG" UF="MG" Padrao="GINFES"/>
+	<Estado ID="3170206" Nome="Uberlândia - MG" UF="MG" Padrao="DSF"/>
+	<Estado ID="4128104" Nome="Umuarama - PR" UF="PR" Padrao="GINFES"/>
+	<Estado ID="4322400" Nome="Uruguaiana - RS" UF="RS" Padrao="DUETO"/>
+	<Estado ID="3170701" Nome="Varginha - MG" UF="MG" Padrao="CONAM"/>
+	<Estado ID="3205200" Nome="Vila Velha - ES" UF="ES" Padrao="VVISS"/>
+	<Estado ID="3205309" Nome="Vitória - ES" UF="ES" Padrao="VVISS"/>
+	<Estado ID="3557105" Nome="Votuporanga - SP" UF="SP" Padrao="GINFES"/>
+</Webservice>
