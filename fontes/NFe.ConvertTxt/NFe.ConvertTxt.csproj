@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F2E5401-1C0B-4613-AB7F-985C7F0F267A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFe.ConvertTxt</RootNamespace>
+    <AssemblyName>NFe.ConvertTxt</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes.autXml.cs" />
+    <Compile Include="Classes.det.cs" />
+    <Compile Include="Classes.export.cs" />
+    <Compile Include="Classes.exporta.cs" />
+    <Compile Include="Classes.fordia.cs" />
+    <Compile Include="Classes.ide.cs" />
+    <Compile Include="Classes.infAdic.cs" />
+    <Compile Include="Classes.infNFe.cs" />
+    <Compile Include="Classes.lacres.cs" />
+    <Compile Include="Classes.med.cs" />
+    <Compile Include="Classes.nfe.cs" />
+    <Compile Include="Classes.obsCont.cs" />
+    <Compile Include="Classes.obsFisco.cs" />
+    <Compile Include="Classes.pag.cs" />
+    <Compile Include="Classes.prod.cs" />
+    <Compile Include="Classes.prot_proc.cs" />
+    <Compile Include="Classes.Reboque.cs" />
+    <Compile Include="Classes.Retirada.cs" />
+    <Compile Include="Classes.transp.cs" />
+    <Compile Include="Classes.adi.cs" />
+    <Compile Include="Classes.Arma.cs" />
+    <Compile Include="Classes.Avulsa.cs" />
+    <Compile Include="Classes.Cana.cs" />
+    <Compile Include="Classes.comb_cide.cs" />
+    <Compile Include="Classes.Cobr.cs" />
+    <Compile Include="Classes.compra.cs" />
+    <Compile Include="Classes.enums.cs" />
+    <Compile Include="Classes.deduc.cs" />
+    <Compile Include="Classes.dest.cs" />
+    <Compile Include="Classes.emit.cs" />
+    <Compile Include="Classes.entrega.cs" />
+    <Compile Include="Classes.impostos.cs" />
+    <Compile Include="Classes.Transporta.cs" />
+    <Compile Include="Classes.veic.cs" />
+    <Compile Include="Classes.vol.cs" />
+    <Compile Include="ConversaoTXT.cs" />
+    <Compile Include="nfeRead.cs" />
+    <Compile Include="NFeW.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
+      <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
+      <Name>NFe.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
+      <Project>{A963E456-A54B-4C4D-A9DE-E80C136C3554}</Project>
+      <Name>NFe.Settings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
