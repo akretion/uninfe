@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D5EB0BA1-EB5A-4D0B-ABA3-133B25B1C0CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFe.Interface</RootNamespace>
+    <AssemblyName>NFe.Interface</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormCNPJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCNPJ.designer.cs">
+      <DependentUpon>FormCNPJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConfiguracao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConfiguracao.designer.cs">
+      <DependentUpon>FormConfiguracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultaCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaCadastro.designer.cs">
+      <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultaCadastroResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaCadastroResult.designer.cs">
+      <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogs.Designer.cs">
+      <DependentUpon>FormLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formMunicipios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMunicipios.designer.cs">
+      <DependentUpon>formMunicipios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNova.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNova.Designer.cs">
+      <DependentUpon>FormNova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSenha.designer.cs">
+      <DependentUpon>FormSenha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSobre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSobre.designer.cs">
+      <DependentUpon>FormSobre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUpdate.designer.cs">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWait.designer.cs">
+      <DependentUpon>FormWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDANFE.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="retConsCad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="retConsCad.designer.cs">
+      <DependentUpon>retConsCad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucConfiguracao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucConfiguracao.designer.cs">
+      <DependentUpon>ucConfiguracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormValidarXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormValidarXML.designer.cs">
+      <DependentUpon>FormValidarXML.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormCNPJ.resx">
+      <DependentUpon>FormCNPJ.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConfiguracao.resx">
+      <DependentUpon>FormConfiguracao.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaCadastro.resx">
+      <DependentUpon>FormConsultaCadastro.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaCadastroResult.resx">
+      <DependentUpon>FormConsultaCadastroResult.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogs.resx">
+      <DependentUpon>FormLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMunicipios.resx">
+      <DependentUpon>formMunicipios.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNova.resx">
+      <DependentUpon>FormNova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSenha.resx">
+      <DependentUpon>FormSenha.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSobre.resx">
+      <DependentUpon>FormSobre.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUpdate.resx">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWait.resx">
+      <DependentUpon>FormWait.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="retConsCad.resx">
+      <DependentUpon>retConsCad.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucConfiguracao.resx">
+      <DependentUpon>ucConfiguracao.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormValidarXML.resx">
+      <DependentUpon>FormValidarXML.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excluir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileclose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_orange_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\identity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\identity1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\incluir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kontact_todo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_utilities.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
+      <Project>{C045A27F-415B-4F7D-8B9B-2956589932C8}</Project>
+      <Name>NFe.Certificado</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
+      <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
+      <Name>NFe.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Service\NFe.Service.csproj">
+      <Project>{975C0CFB-C646-4A1D-8927-FD63869F2DAF}</Project>
+      <Name>NFe.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
+      <Project>{A963E456-A54B-4C4D-A9DE-E80C136C3554}</Project>
+      <Name>NFe.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Validate\NFe.Validate.csproj">
+      <Project>{4A0D1E87-2994-4678-9AF1-EEBD093B7B44}</Project>
+      <Name>NFe.Validate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Municipios\MunIBGE-UF11.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF12.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF13.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF14.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF15.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF16.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF17.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF21.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF22.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF23.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF24.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF25.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF26.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF27.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF28.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF29.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF31.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF32.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF33.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF35.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF41.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF42.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF43.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF50.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF51.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF52.txt" />
+    <EmbeddedResource Include="Municipios\MunIBGE-UF53.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unicte128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unicte.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfse128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uninfse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClearLock_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClearLock_48x48.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
