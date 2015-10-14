@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="FISS-LEX" xmlns:wsdlns="FISS-LEX" name="WS_ConsultaNfsePorRps" targetNamespace="FISS-LEX" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="FISS-LEX">
+      <xsd:complexType name="ConsultarNfseRpsEnvio">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="IdentificacaoRps" type="wsdlns:tcIdentificacaoRps" />
+          <xsd:element form="unqualified" name="Prestador" type="wsdlns:tcIdentificacaoPrestador" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tcIdentificacaoRps">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Numero" type="xsd:int" />
+          <xsd:element form="unqualified" name="Serie" type="xsd:string" />
+          <xsd:element form="unqualified" name="Tipo" type="xsd:byte" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tcIdentificacaoPrestador">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Cnpj" type="xsd:string" />
+          <xsd:element form="unqualified" name="InscricaoMunicipal" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOftcMensagemRetorno">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="tcMensagemRetorno" type="wsdlns:tcMensagemRetorno" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tcMensagemRetorno">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Codigo" type="xsd:string" />
+          <xsd:element form="unqualified" name="Mensagem" type="xsd:string" />
+          <xsd:element form="unqualified" name="Correcao" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="WS_ConsultaNfsePorRps.Execute">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfserpsenvio" type="wsdlns:ConsultarNfseRpsEnvio" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WS_ConsultaNfsePorRps.ExecuteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfserpsresposta" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Listamensagemretorno" type="wsdlns:ArrayOftcMensagemRetorno" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="WS_ConsultaNfsePorRps.ExecuteSoapIn">
+    <part name="parameters" element="wsdlns:WS_ConsultaNfsePorRps.Execute" />
+  </message>
+  <message name="WS_ConsultaNfsePorRps.ExecuteSoapOut">
+    <part name="parameters" element="wsdlns:WS_ConsultaNfsePorRps.ExecuteResponse" />
+  </message>
+  <portType name="WS_ConsultaNfsePorRpsSoapPort">
+    <operation name="Execute">
+      <input message="wsdlns:WS_ConsultaNfsePorRps.ExecuteSoapIn" />
+      <output message="wsdlns:WS_ConsultaNfsePorRps.ExecuteSoapOut" />
+    </operation>
+  </portType>
+  <binding name="WS_ConsultaNfsePorRpsSoapBinding" type="wsdlns:WS_ConsultaNfsePorRpsSoapPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Execute">
+      <soap:operation soapAction="FISS-LEXaction/AWS_CONSULTANFSEPORRPS.Execute" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WS_ConsultaNfsePorRps">
+    <port name="WS_ConsultaNfsePorRpsSoapPort" binding="wsdlns:WS_ConsultaNfsePorRpsSoapBinding">
+      <soap:address location="http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps" />
+    </port>
+  </service>
+</definitions>

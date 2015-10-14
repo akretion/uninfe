@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://nfse.abrasf.org.br" targetNamespace="http://nfse.abrasf.org.br" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CancelarNfseRequest" nillable="true" type="tns:input" />
+  <xs:element name="CancelarNfseResponse" nillable="true" type="tns:output" />
+  <xs:element name="ConsultarLoteRpsRequest" nillable="true" type="tns:input" />
+  <xs:element name="ConsultarLoteRpsResponse" nillable="true" type="tns:output" />
+  <xs:element name="ConsultarNfsePorFaixaRequest" nillable="true" type="tns:input" />
+  <xs:element name="ConsultarNfsePorFaixaResponse" nillable="true" type="tns:output" />
+  <xs:element name="ConsultarNfsePorRpsRequest" nillable="true" type="tns:input" />
+  <xs:element name="ConsultarNfsePorRpsResponse" nillable="true" type="tns:output" />
+  <xs:element name="ConsultarNfseServicoPrestadoRequest" nillable="true" type="tns:input" />
+  <xs:element name="ConsultarNfseServicoPrestadoResponse" nillable="true" type="tns:output" />
+  <xs:element name="ConsultarNfseServicoTomadoRequest" nillable="true" type="tns:input" />
+  <xs:element name="ConsultarNfseServicoTomadoResponse" nillable="true" type="tns:output" />
+  <xs:element name="GerarNfseRequest" nillable="true" type="tns:input" />
+  <xs:element name="GerarNfseResponse" nillable="true" type="tns:output" />
+  <xs:element name="RecepcionarLoteRpsRequest" nillable="true" type="tns:input" />
+  <xs:element name="RecepcionarLoteRpsResponse" nillable="true" type="tns:output" />
+  <xs:element name="RecepcionarLoteRpsSincronoRequest" nillable="true" type="tns:input" />
+  <xs:element name="RecepcionarLoteRpsSincronoResponse" nillable="true" type="tns:output" />
+  <xs:element name="SubstituirNfseRequest" nillable="true" type="tns:input" />
+  <xs:element name="SubstituirNfseResponse" nillable="true" type="tns:output" />
+  <xs:complexType name="input">
+    <xs:sequence>
+      <xs:element name="nfseCabecMsg" type="xs:string" />
+      <xs:element name="nfseDadosMsg" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="output">
+    <xs:sequence>
+      <xs:element name="outputXML" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
