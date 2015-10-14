@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?xsd=xsd2" filename="nfseservice.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?xsd=xsd3" filename="nfseservice0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?wsdl" filename="NfseService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?wsdl=wsdl0" filename="nfseservice0.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?xsd=xsd0" filename="nfseservice1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.45.245.217/ws_nfse/nfseservice.svc?xsd=xsd1" filename="nfseservice2.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>
