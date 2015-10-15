@@ -1763,7 +1763,6 @@ namespace NFe.Service
                     }
 
                     TFunctions.GravarArqErroServico(NomeArquivoXML, extFinal, extErro, ex);
-                    Functions.GravarErroMover(NomeArquivoXML, Empresas.Configuracoes[Empresas.FindEmpresaByThread()].PastaXmlRetorno, ex.ToString());
 
                     //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                     //forçar mover para a pasta de XML com erro neste ponto.

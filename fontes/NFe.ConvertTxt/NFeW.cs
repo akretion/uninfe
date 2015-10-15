@@ -261,7 +261,8 @@ namespace NFe.ConvertTxt
                     XmlElement xnodePag = doc.CreateElement("card"); //YA04
                     nodeCurrent = xnodePag;
                     nodePag.AppendChild(xnodePag);
-
+                    
+                    wCampo((int)pagItem.tpIntegra, TpcnTipoCampo.tcInt, TpcnResources.tpIntegra, ObOp.Opcional);
                     wCampo(pagItem.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Obrigatorio); //YA05
                     wCampo((int)pagItem.tBand, TpcnTipoCampo.tcInt, TpcnResources.tBand, ObOp.Obrigatorio, 2);          //YA06
                     wCampo(pagItem.cAut, TpcnTipoCampo.tcStr, TpcnResources.cAut, ObOp.Obrigatorio);                    //YA07
@@ -499,6 +500,7 @@ namespace NFe.ConvertTxt
                 this.convertToOem = true;
                 wCampo(det.Prod.NCM, TpcnTipoCampo.tcStr, TpcnResources.NCM);
                 wCampo(det.Prod.NVE, TpcnTipoCampo.tcStr, TpcnResources.NVE, ObOp.Opcional);
+                wCampo(det.Prod.CEST, TpcnTipoCampo.tcInt, TpcnResources.CEST, ObOp.Opcional);
                 wCampo(det.Prod.EXTIPI, TpcnTipoCampo.tcStr, TpcnResources.EXTIPI, ObOp.Opcional);
                 wCampo(det.Prod.CFOP, TpcnTipoCampo.tcStr, TpcnResources.CFOP);
                 wCampo(det.Prod.uCom, TpcnTipoCampo.tcStr, TpcnResources.uCom);
@@ -693,6 +695,23 @@ namespace NFe.ConvertTxt
                         wCampo(det.Prod.comb.CIDE.qBCprod, TpcnTipoCampo.tcDec4, TpcnResources.qBCProd);
                         wCampo(det.Prod.comb.CIDE.vAliqProd, TpcnTipoCampo.tcDec4, TpcnResources.vAliqProd);
                         wCampo(det.Prod.comb.CIDE.vCIDE, TpcnTipoCampo.tcDec2, TpcnResources.vCIDE);
+
+                        nodeCurrent = e0;
+                    }
+                    if (det.Prod.comb.encerrante.nBico > 0 &&
+                        det.Prod.comb.encerrante.nTanque > 0 &&
+                        !string.IsNullOrEmpty(det.Prod.comb.encerrante.vEncIni) &&
+                        !string.IsNullOrEmpty(det.Prod.comb.encerrante.vEncFin))
+                    {
+                        XmlElement e1 = doc.CreateElement("encerrante");
+                        e0.AppendChild(e1);
+                        nodeCurrent = e1;
+
+                        wCampo((int)det.Prod.comb.encerrante.nBico, TpcnTipoCampo.tcInt, TpcnResources.nBico);
+                        wCampo((int)det.Prod.comb.encerrante.nBomba, TpcnTipoCampo.tcInt, TpcnResources.nBomba, ObOp.Opcional);
+                        wCampo((int)det.Prod.comb.encerrante.nTanque, TpcnTipoCampo.tcInt, TpcnResources.nTanque);
+                        wCampo(det.Prod.comb.encerrante.vEncIni, TpcnTipoCampo.tcStr, TpcnResources.vEncIni);
+                        wCampo(det.Prod.comb.encerrante.vEncFin, TpcnTipoCampo.tcStr, TpcnResources.vEncFin);
 
                         nodeCurrent = e0;
                     }
@@ -1142,6 +1161,29 @@ namespace NFe.ConvertTxt
                                     wCampo(imposto.ICMS.motDesICMS, TpcnTipoCampo.tcInt, TpcnResources.motDesICMS);
                                 }
                             break;
+                    }
+                    if (imposto.ICMS.ICMSPart10 == 1 || imposto.ICMS.ICMSPart90 == 1 && (double)nfe.infNFe.Versao >= 3.10)
+                    {
+                        if (imposto.ICMS.ICMSUFDest.vBCUFDest > 0 ||
+                            imposto.ICMS.ICMSUFDest.pICMSUFDest > 0 ||
+                            imposto.ICMS.ICMSUFDest.pICMSInter > 0 ||
+                            imposto.ICMS.ICMSUFDest.pICMSInterPart > 0 ||
+                            imposto.ICMS.ICMSUFDest.vICMSUFDest > 0 ||
+                            imposto.ICMS.ICMSUFDest.vICMSUFRemet > 0)
+                        {
+                            var x_nodeCurrent = nodeCurrent;
+                            XmlElement ee0 = doc.CreateElement(TpcnResources.ICMSUFDest.ToString());
+                            nodeCurrent.AppendChild(ee0);
+
+                            wCampo(imposto.ICMS.ICMSUFDest.vBCUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest);
+                            wCampo(imposto.ICMS.ICMSUFDest.pICMSUFDest, TpcnTipoCampo.tcDec4, TpcnResources.pICMSUFDest);
+                            wCampo(imposto.ICMS.ICMSUFDest.pICMSInter, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInter);
+                            wCampo(imposto.ICMS.ICMSUFDest.pICMSInterPart, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInterPart);
+                            wCampo(imposto.ICMS.ICMSUFDest.vICMSUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest);
+                            wCampo(imposto.ICMS.ICMSUFDest.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet);
+
+                            nodeCurrent = x_nodeCurrent;
+                        }
                     }
                 }
             }
@@ -2010,7 +2052,11 @@ namespace NFe.ConvertTxt
             wCampo(NFe.Total.ICMSTot.vBC, TpcnTipoCampo.tcDec2, TpcnResources.vBC);
             wCampo(NFe.Total.ICMSTot.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS);
             if ((double)NFe.infNFe.Versao >= 3.10)
+            {
                 wCampo(NFe.Total.ICMSTot.vICMSDeson, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson);
+                wCampo(NFe.Total.ICMSTot.vICMSUFDest, TpcnTipoCampo.tcDec2,  TpcnResources.vICMSUFDest, ObOp.Opcional);
+                wCampo(NFe.Total.ICMSTot.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional);
+            }
             wCampo(NFe.Total.ICMSTot.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
             wCampo(NFe.Total.ICMSTot.vST, TpcnTipoCampo.tcDec2, TpcnResources.vST);
             wCampo(NFe.Total.ICMSTot.vProd, TpcnTipoCampo.tcDec2, TpcnResources.vProd);
