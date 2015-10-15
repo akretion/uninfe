@@ -86,7 +86,7 @@ namespace NFe.UI.Formularios
 
         private Point loc_1, loc_2;
 
-        public void Populate(NFe.Settings.Empresa empresa)
+        public void Populate(NFe.Settings.Empresa empresa, bool novaempresa)
         {
             this.loading = true;
             try
@@ -182,6 +182,9 @@ namespace NFe.UI.Formularios
 
                 this.edtCNPJ.ReadOnly = !string.IsNullOrEmpty(empresa.CNPJ);
                 this.cbServico.Enabled = !this.edtCNPJ.ReadOnly;
+
+                if (this.empresa.Servico != TipoAplicativo.Nfse && !novaempresa)
+                    this.cbServico.Enabled = true;
             }
             finally
             {
@@ -191,8 +194,10 @@ namespace NFe.UI.Formularios
             }
         }
 
-        public void Validar()
+        public bool Validar(bool exibeerro, bool novaempresa)
         {
+            string cnpj = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
+
             if (Convert.ToInt32("0" + udTempoConsulta.Text) < 2 || Convert.ToInt32("0" + udTempoConsulta.Text) > 15)
                 throw new Exception(lbl_udTempoConsulta.Text + " inválido");
 
@@ -204,14 +209,23 @@ namespace NFe.UI.Formularios
             if (string.IsNullOrEmpty(edtNome.Text))
                 throw new Exception("Nome da empresa deve ser informado");
 
-            string cnpj = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
-            /*
-            if (!this.edtCNPJ.ReadOnly &&
-                Empresa.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue) != null)
+            if (servicoCurrent != (TipoAplicativo)this.cbServico.SelectedValue && !novaempresa && exibeerro)
             {
-                throw new Exception("Empresa/CNPJ já existe");
+                if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfse)
+                {
+                    throw new Exception("Não pode mudar para esse tipo de serviço (NFSe)");
+                }
+
+                var e = Empresas.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue);
+                if (e != null)
+                    throw new Exception("A empresa '"+e.Nome+"' já está monitorando esse tipo de serviço");
+
+                if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma a alteração do tipo de serviço?", "",
+                                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    return false;
+                }
             }
-            */
 
             this.empresa.AmbienteCodigo = (int)comboBox_Ambiente.SelectedValue;
             this.empresa.CNPJ = cnpj;
@@ -232,6 +246,8 @@ namespace NFe.UI.Formularios
             this.empresa.UsuarioWS = this.txtUsuarioWS.Text;
             this.empresa.IndentificadorCSC = this.edtIdentificadorCSC.Text;
             this.empresa.TokenCSC = this.edtTokenCSC.Text;
+
+            return true;
         }
 
         private void HabilitaOpcaoCompactar(bool ativar)
