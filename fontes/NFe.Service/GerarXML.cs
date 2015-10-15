@@ -2787,9 +2787,9 @@ namespace NFe.Service
             DateTime dte = Convert.ToDateTime("20" + ChaveNFe.Substring(2, 2) + "/" + ChaveNFe.Substring(4, 2) + "/1");
             string olddir = null;
             string retorno = null;
-            for (int nd = 0; nd < 31; ++nd)
+            for (int nd = 0; nd < 60; ++nd)
             {
-                string dsc = Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dte.AddDays(nd));
+                string dsc = TFunctions.getSubFolder(dte, nd, Empresas.Configuracoes[emp].DiretorioSalvarComo);//.ToString(dte.AddDays(nd));
                 if (dsc != "") dsc = "\\" + dsc.TrimEnd('\\');
                 if (olddir != null && olddir.Equals(dsc)) continue; //evitamos pesquisar por uma pasta que já haviamos pesquisado (AM, MA, ...)
                 olddir = dsc;

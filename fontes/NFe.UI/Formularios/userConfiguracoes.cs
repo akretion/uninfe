@@ -47,6 +47,7 @@ namespace NFe.UI
         private Formularios.userConfiguracao_geral uc_geral = null;
         public Formularios.userConfiguracao_pastas uce_pastas;
         private Empresa currentEmpresa;
+        private TipoAplicativo servicoCurrent;
 
         private MetroFramework.Controls.MetroTabPage createtpage(int id)
         {
@@ -303,11 +304,13 @@ namespace NFe.UI
         void CopiaDadosDaEmpresaParaControls(Empresa oempresa, bool empty)
         {
             bool _modificado = false;
+            bool _nova = string.IsNullOrEmpty(oempresa.PastaXmlEnvio);
+            
             stopChangedEvent = true;
             try
             {
+                this.servicoCurrent = oempresa.Servico;
                 oempresa.CriaPastasAutomaticamente = false;
-
 
                 if (string.IsNullOrEmpty(oempresa.PastaXmlEnvio) && !empty)
                 {
@@ -373,7 +376,7 @@ namespace NFe.UI
                         }
                     }
                 }
-                uce_divs.Populate(oempresa);
+                uce_divs.Populate(oempresa, _nova);
                 uce_pastas.Populate(oempresa);
                 uce_ftp.Populate(oempresa);
                 uce_cert.Populate(oempresa);
@@ -454,14 +457,18 @@ namespace NFe.UI
             #endregion
         }
 
+        const string constAbandono = "Dados da configuração foram alterados, abandona mesmo assim?";
+
         public bool VerificaSeAbandona()
         {
             #region
 
             if (this.tc_empresa.Enabled)
             {
-                if (DadosMudaramDaEmpresa(false) || this.uc_geral.Modificado)
-                    return MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Dados da configuração foram alterados, abandona mesmo assim?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                if (DadosMudaramDaEmpresa(false) || this.uc_geral.Modificado || !this.EmpresaValidada)
+                    return MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                        constAbandono, "", 
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
             }
             BackFuncao();
             return true;
@@ -469,9 +476,13 @@ namespace NFe.UI
             #endregion
         }
 
+        private bool EmpresaValidada = false;
+
         private bool DadosMudaramDaEmpresa(bool exibeerro)
         {
             #region --DadosMudaramDaEmpresa
+
+            this.EmpresaValidada = true;
 
             if (this.currentEmpresa == null || !this.Modificado)
                 return false;
@@ -479,7 +490,11 @@ namespace NFe.UI
             try
             {
                 this.uc_geral.Validar();
-                this.uce_divs.Validar();
+                if (!this.uce_divs.Validar(exibeerro, Convert.ToInt16(this.btnNova.Tag) == 1))
+                {
+                    this.EmpresaValidada = false;
+                    return false;
+                }
                 this.uce_pastas.Validar();
                 this.uce_cert.Validar();
                 if (this.currentEmpresa.Servico != TipoAplicativo.Nfse)
@@ -560,24 +575,42 @@ namespace NFe.UI
             }
             else
             {
+                ///
+                /// salva a lista de empresas
+                List<Empresa> temp = new List<Empresa>(Empresas.Configuracoes);
                 try
                 {
                     ///
                     /// compara o que foi mudado
                     /// 
                     bool grava = DadosMudaramDaEmpresa(true);
+
+                    if (!this.EmpresaValidada)
+                        return;
+
                     if (grava)
                     {
                         currentEmpresa.RemoveEndSlash();
 
+                        if (this.servicoCurrent != this.currentEmpresa.Servico)
+                        {
+                            var oe = Empresas.FindConfEmpresa(this.currentEmpresa.CNPJ, this.servicoCurrent);
+                            if (oe != null)
+                                Empresas.Configuracoes.Remove(oe);
+                        }
+
                         string _key = this.currentEmpresa.CNPJ + this.currentEmpresa.Servico.ToString();
                         ///
                         /// salva a configuracao da empresa
+                        /// 
+
                         this.currentEmpresa.SalvarConfiguracao(true, true);
+
 
                         var app = new ConfiguracaoApp();
                         ///
                         /// salva o arquivo da lista de empresas
+                        ///                         
                         app.GravarArqEmpresas();
 
                         if (this.uc_geral.Modificado)
@@ -608,7 +641,7 @@ namespace NFe.UI
                     else
                     {
                         ///
-                        /// a empresa nao mudou mas as propriedades gerais mudou?
+                        /// a empresa nao mudou mas as propriedades gerais mudaram?
                         if (this.uc_geral.Modificado)
                         {
                             new ConfiguracaoApp().GravarConfigGeral();
@@ -620,6 +653,10 @@ namespace NFe.UI
                 }
                 catch (Exception ex)
                 {
+                    ///
+                    /// restaura a lista de empresas
+                    Empresas.Configuracoes = new List<Empresa>(temp);
+
                     if (Convert.ToInt16(this.btnNova.Tag) == 1)//inclusao
                     {
                         ///
@@ -682,34 +719,47 @@ namespace NFe.UI
                 ///
                 /// compara o que foi mudado
                 /// 
-                bool pergunta = DadosMudaramDaEmpresa(false);
-                if (pergunta)
+                try
                 {
-                    pergunta = !(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma o abandono da edição desta empresa?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
-                }
-                if (!pergunta)
-                {
-                    this.Modificado = false;
-                    this.empcnpj = "";
+                    bool pergunta = DadosMudaramDaEmpresa(false);
 
-                    if (Empresas.Configuracoes.Count > 0)
+                    if (this.EmpresaValidada)
                     {
-                        cbEmpresas_SelectedIndexChanged(sender, e);
-                    }
-                    else
-                    {
-                        ///
-                        /// as propriedades gerais mudou?
-                        if (this.uc_geral.Modificado)
+                        if (pergunta)
                         {
-                            new ConfiguracaoApp().GravarConfigGeral();
-                            this.uc_geral.PopulateConfGeral();
+                            pergunta = !(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                                constAbandono, "", 
+                                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
                         }
-                        ///
-                        /// como nao tem nenhuma empresa, fecha este processo voltando ao menu principal
-                        this.BackFuncao();
+                        if (!pergunta)
+                        {
+                            this.Modificado = false;
+                            this.empcnpj = "";
+
+                            if (Empresas.Configuracoes.Count > 0)
+                            {
+                                cbEmpresas_SelectedIndexChanged(sender, e);
+                            }
+                            else
+                            {
+                                ///
+                                /// as propriedades gerais mudou?
+                                if (this.uc_geral.Modificado)
+                                {
+                                    new ConfiguracaoApp().GravarConfigGeral();
+                                    this.uc_geral.PopulateConfGeral();
+                                }
+                                ///
+                                /// como nao tem nenhuma empresa, fecha este processo voltando ao menu principal
+                                this.BackFuncao();
+                            }
+                            this.cbEmpresas.Visible = this.metroLabel2.Visible = true;
+                        }
                     }
-                    this.cbEmpresas.Visible = this.metroLabel2.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
             }
         }

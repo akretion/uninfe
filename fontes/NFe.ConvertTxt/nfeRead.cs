@@ -204,6 +204,7 @@ namespace NFe.ConvertTxt
 
             pagItem.tPag = (TpcnFormaPagamento)this.readInt32(nodenfeProc, TpcnResources.tPag);
             pagItem.vPag = this.readDouble(nodenfeProc, TpcnResources.vPag);
+            pagItem.tpIntegra = this.readInt32(nodenfeProc, TpcnResources.tpIntegra);
             pagItem.CNPJ = this.readValue(nodenfeProc, TpcnResources.CNPJ);
             pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(nodenfeProc, TpcnResources.tBand);
             pagItem.cAut = this.readValue(nodenfeProc, TpcnResources.cAut);
@@ -521,6 +522,8 @@ namespace NFe.ConvertTxt
                 nfe.Total.ICMSTot.vST = this.readDouble(nodeICMSTot, TpcnResources.vST);
                 nfe.Total.ICMSTot.vTotTrib = this.readDouble(nodeICMSTot, TpcnResources.vTotTrib);
                 nfe.Total.ICMSTot.vICMSDeson = this.readDouble(nodeICMSTot, TpcnResources.vICMSDeson);
+                nfe.Total.ICMSTot.vICMSUFDest = this.readDouble(nodeICMSTot, TpcnResources.vICMSUFDest);
+                nfe.Total.ICMSTot.vICMSUFRemet = this.readDouble(nodeICMSTot, TpcnResources.vICMSUFRemet);
             }
 
             foreach (XmlNode nodeISSQNtot in ((XmlElement)nodetotal).GetElementsByTagName("ISSQNtot"))
@@ -591,6 +594,7 @@ namespace NFe.ConvertTxt
                 detInfo.Prod.xProd = this.readValue(ele, TpcnResources.xProd);
                 detInfo.Prod.nRECOPI = this.readValue(ele, TpcnResources.nRECOPI);
                 detInfo.Prod.nFCI = this.readValue(ele, TpcnResources.nFCI);
+                detInfo.Prod.CEST = this.readInt32(ele, TpcnResources.CEST);
             }
 
             #region -->prod->arma
@@ -620,6 +624,14 @@ namespace NFe.ConvertTxt
                     detInfo.Prod.comb.CIDE.qBCprod = this.readDouble(nodedetCombCIDE, TpcnResources.qBCProd);
                     detInfo.Prod.comb.CIDE.vAliqProd = this.readDouble(nodedetCombCIDE, TpcnResources.vAliqProd);
                     detInfo.Prod.comb.CIDE.vCIDE = this.readDouble(nodedetCombCIDE, TpcnResources.vCIDE);
+                }
+                foreach (XmlNode nodedetCombEncerrante in ((XmlElement)nodedetComb).GetElementsByTagName("encerrante"))
+                {
+                    detInfo.Prod.comb.encerrante.vEncIni = this.readValue(nodedetCombEncerrante, TpcnResources.vEncIni);
+                    detInfo.Prod.comb.encerrante.vEncFin = this.readValue(nodedetCombEncerrante, TpcnResources.vEncFin);
+                    detInfo.Prod.comb.encerrante.nBico = this.readInt32(nodedetCombEncerrante, TpcnResources.nBico);
+                    detInfo.Prod.comb.encerrante.nBomba = this.readInt32(nodedetCombEncerrante, TpcnResources.nBomba);
+                    detInfo.Prod.comb.encerrante.nTanque = this.readInt32(nodedetCombEncerrante, TpcnResources.nTanque);
                 }
             }
             #endregion
@@ -765,6 +777,21 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.vICMSOp = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSOp);
                         detInfo.Imposto.ICMS.pDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.pDif);
                         detInfo.Imposto.ICMS.vICMSDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSDif);
+
+                        foreach (XmlNode nodedetImpostoICMS_ICMSUFDest in ((XmlElement)nodedetImpostoICMS_).GetElementsByTagName(TpcnResources.ICMSUFDest.ToString()))
+                        {
+                            if (nodedetImpostoICMS_ICMSUFDest.ChildNodes.Count > 0)
+                            {
+                                XmlNode nodedetImpostoICMS__ICMSUFDest = nodedetImpostoICMS.ChildNodes[0];
+
+                                detInfo.Imposto.ICMS.ICMSUFDest.vBCUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vBCUFDest);
+                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSUFDest);
+                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSInter = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInter);
+                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSInterPart = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInterPart);
+                                detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFDest);
+                                detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFRemet = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFRemet);
+                            }
+                        }
                     }
                 }
                 #endregion

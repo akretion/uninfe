@@ -838,7 +838,7 @@ namespace NFe.Components
             if (!string.IsNullOrEmpty(resultFolder) && Directory.Exists(Path.GetDirectoryName(resultFolder)) && !string.IsNullOrEmpty(file))
             {
                 FileInfo infFile = new FileInfo(file);
-                string extFile = infFile.Name.Replace(".xml", "");
+                string extFile = infFile.Name.Replace(infFile.Extension, "");
                 string extError = extFile + ".err";
 
                 string nomearq = resultFolder + "\\" + extError;

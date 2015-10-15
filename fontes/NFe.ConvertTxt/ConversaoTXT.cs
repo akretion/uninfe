@@ -1168,6 +1168,11 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.NVE = this.LerString(TpcnResources.NVE, ObOp.Opcional, 0, 6);
                     break;
 
+                case "I05W":
+                    layout = prefix + this.FSegmento + "|CEST";
+                    NFe.det[nProd].Prod.CEST = this.LerInt32(TpcnResources.CEST, ObOp.Opcional, 0, 7);
+                    break;
+
                 case "I18":
                     layout = (NFe.infNFe.Versao >= 3 ?
                                 "§I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador" :
@@ -1366,6 +1371,18 @@ namespace NFe.ConvertTxt
                     #endregion
                     break;
 
+                case "LA1":
+                    layout = prefix + this.FSegmento + "|nBico|nBomba|nTanque|vEncIni|vEncFin"; //ok
+                    ///
+                    /// Grupo da TAG <det><prod><comb><encerrante>
+                    /// 
+                    NFe.det[nProd].Prod.comb.encerrante.nBico = this.LerInt32(TpcnResources.nBico, ObOp.Obrigatorio, 1, 3);
+                    NFe.det[nProd].Prod.comb.encerrante.nBomba = this.LerInt32(TpcnResources.nBomba, ObOp.Opcional, 0, 3);
+                    NFe.det[nProd].Prod.comb.encerrante.nTanque = this.LerInt32(TpcnResources.nTanque, ObOp.Obrigatorio, 1, 3);
+                    NFe.det[nProd].Prod.comb.encerrante.vEncIni = this.LerString(TpcnResources.vEncIni, ObOp.Obrigatorio, 1, 15);
+                    NFe.det[nProd].Prod.comb.encerrante.vEncFin = this.LerString(TpcnResources.vEncFin, ObOp.Obrigatorio, 1, 15);
+                    break;
+
                     /*
                      * 
 
@@ -1396,8 +1413,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "M":
-                    layout = "§M|vTotTrib|"; //ok   
-                        NFe.det[nProd].Imposto.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
+                    layout = prefix + "M|vTotTrib|"; //ok   
+                    NFe.det[nProd].Imposto.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
                     break;
 
                     /*
@@ -1754,10 +1771,8 @@ namespace NFe.ConvertTxt
                     
                 case "N10H":    
                     layout = "§N10h|Orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN";
-                    
 
                     #region ICMSSN900
-
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
                     NFe.det[nProd].Imposto.ICMS.CSOSN = this.LerInt32(TpcnResources.CSOSN, ObOp.Obrigatorio, 3, 3);
                     NFe.det[nProd].Imposto.ICMS.modBC = (TpcnDeterminacaoBaseIcms)this.LerInt32(TpcnResources.modBC, ObOp.Obrigatorio, 1, 1);
@@ -1773,7 +1788,19 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.vICMSST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSST, ObOp.Obrigatorio, 15);
                     NFe.det[nProd].Imposto.ICMS.pCredSN = this.LerDouble(this.TipoCampo42, TpcnResources.pCredSN, ObOp.Obrigatorio, this.CasasDecimais75);
                     NFe.det[nProd].Imposto.ICMS.vCredICMSSN = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vCredICMSSN, ObOp.Obrigatorio, 15);
+                    #endregion
+                    break;
 
+                case "NA":
+                    layout = prefix + this.FSegmento + "|vBCUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vICMSUFDest|vICMSUFRemet"; //ok
+                    
+                    #region ICMSUFDest
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vBCUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest, ObOp.Obrigatorio, 1, 15);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSUFDest, ObOp.Obrigatorio, 1, 8);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSInter = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSInter, ObOp.Obrigatorio, 1, 8);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSInterPart = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSInterPart, ObOp.Obrigatorio, 1, 8);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Obrigatorio, 1, 15);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vICMSUFRemet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Obrigatorio, 1, 15);
                     #endregion
                     break;
 
@@ -2147,6 +2174,12 @@ namespace NFe.ConvertTxt
                     #endregion
                     break;
 
+                case "W04":
+                    layout = prefix + this.FSegmento + "|vICMSUFDest|vICMSUFRemet";
+                    NFe.Total.ICMSTot.vICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Opcional, 15);
+                    NFe.Total.ICMSTot.vICMSUFRemet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional, 15);
+                    break;
+
                 case "W17":
                     layout = (NFe.infNFe.Versao >= 3 ?
                                 "§W17|VServ|VBC|VISS|VPIS|VCOFINS|dCompet|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|cRegTrib" :
@@ -2344,7 +2377,9 @@ namespace NFe.ConvertTxt
                 /// NFC-e
                 /// 
                 case "YA":
-                    layout = "§YA|tPag|vPag|CNPJ|tBand|cAut";
+                    layout = prefix + this.FSegmento + "|tPag|vPag|CNPJ|tBand|cAut";
+                    if (lenPipesRegistro == 5)
+                        layout += "|tpIntegra";
                     #region YA
                     NFe.pag.Add(new pag());
                     NFe.pag[NFe.pag.Count - 1].tPag = (TpcnFormaPagamento)this.LerInt32(TpcnResources.tPag, ObOp.Obrigatorio, 2, 2);
@@ -2352,7 +2387,15 @@ namespace NFe.ConvertTxt
                     NFe.pag[NFe.pag.Count - 1].CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
                     NFe.pag[NFe.pag.Count - 1].tBand = (TpcnBandeiraCartao)this.LerInt32(TpcnResources.tBand, ObOp.Opcional, 2, 2);
                     NFe.pag[NFe.pag.Count - 1].cAut = this.LerString(TpcnResources.cAut, ObOp.Opcional, 1, 20);
+                    if (lenPipesRegistro == 5)
+                        NFe.pag[NFe.pag.Count - 1].tpIntegra = this.LerInt32(TpcnResources.tpIntegra, ObOp.Opcional, 1, 1);
                     #endregion
+                    break;
+
+                case "YA04":
+                case "YA04A":
+                    layout = prefix + this.FSegmento + "|tpIntegra";
+                    NFe.pag[NFe.pag.Count - 1].tpIntegra = this.LerInt32(TpcnResources.tpIntegra, ObOp.Obrigatorio, 1, 1);
                     break;
 
                     /*

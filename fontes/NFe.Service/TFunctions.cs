@@ -569,6 +569,17 @@ namespace NFe.Service
         #endregion
 
         #region ExecutaUniDanfe()
+        public static string getSubFolder(DateTime value, int ndias, DiretorioSalvarComo salvarComo)
+        {
+            if (salvarComo.ToString().Contains("D"))
+                return salvarComo.ToString(value.AddDays(ndias * -1));
+            
+            if (salvarComo.ToString().Contains("M"))
+                return salvarComo.ToString(value.AddMonths(ndias * -1));
+
+            return "";
+        }
+
         public static void ExecutaUniDanfe(string nomeArquivoRecebido, DateTime dataEmissaoNFe, NFe.Settings.Empresa emp, Dictionary<string, string> args = null)
         {
 #if DEBUG
@@ -869,7 +880,7 @@ namespace NFe.Service
                         /// arquivo da NFe/NFce não encontrada no 'path' especifico, então pesquisamos na arvore de enviados
                         /// 
                         int ndias = 0;
-                        while (ndias < 5)
+                        while (ndias < 60)
                         {
                             ///
                             /// usamos o 'DiretorioSalvarComo' para pesquisar pelo arquivo numa pasta baseando-se pela
@@ -877,12 +888,12 @@ namespace NFe.Service
                             /// 
                             string fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                             "\\" + PastaEnviados.Autorizados.ToString() +
-                                                            "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                            "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
                                                         Path.GetFileName(arqProcNFe));
                             if (!File.Exists(fTemp))
                                 fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                         "\\" + PastaEnviados.Denegados.ToString() +
-                                                        "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                        "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
                                                      Path.GetFileName(arqProcNFe));
                             ++ndias;
                             if (File.Exists(fTemp))
@@ -955,7 +966,7 @@ namespace NFe.Service
                         if (!string.IsNullOrEmpty(fExtensao))
                         {
                             int ndias = 0;
-                            while (ndias < 5)
+                            while (ndias < 60)
                             {
                                 string filenameCancelamento = tempFile +
                                                                 string.Format("_{0}_01{1}",
@@ -968,7 +979,7 @@ namespace NFe.Service
                                 /// 
                                 string fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                                 "\\" + PastaEnviados.Autorizados.ToString() +
-                                                                "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                                "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
                                                             Path.GetFileName(filenameCancelamento));
                                 if (!File.Exists(fTemp) && tipo.Equals("nfe"))
                                 {
@@ -980,7 +991,7 @@ namespace NFe.Service
                                     filenameCancelamento = tempFile + "-procCancNFe.xml";
                                     fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                             "\\" + PastaEnviados.Autorizados.ToString() +
-                                                            "\\" + emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
+                                                            "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
                                                          Path.GetFileName(filenameCancelamento));
                                 }
                                 if (!File.Exists(fTemp))
