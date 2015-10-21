@@ -308,6 +308,26 @@ namespace NFe.Validate
 
             if (Assinou)
             {
+                #region Adicionar a tag do qrCode na NFCe
+                if (Arquivo.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC))
+                    {
+                        QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, Arquivo);
+
+                        if (qrCode.CalcularLink())
+                        {
+                            string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+
+                            qrCode.GerarLinkConsulta(url);
+                            qrCode.AddLinkQRCode();
+                        }
+                    }
+                }
+                #endregion
+
+
+
                 // Validar o Arquivo XML
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {

@@ -61,10 +61,10 @@
             this.lbl_CodMun = new MetroFramework.Controls.MetroLabel();
             this.edtCodMun = new MetroFramework.Controls.MetroTextBox();
             this.grpQRCode = new System.Windows.Forms.GroupBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.edtIdentificadorCSC = new MetroFramework.Controls.MetroTextBox();
             this.edtTokenCSC = new MetroFramework.Controls.MetroTextBox();
+            this.edtIdentificadorCSC = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.grpQRCode.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -528,16 +528,41 @@
             this.grpQRCode.Text = "Dados QR-Code";
             this.grpQRCode.Visible = false;
             // 
-            // metroLabel1
+            // edtTokenCSC
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel1.Location = new System.Drawing.Point(20, 19);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(30, 15);
-            this.metroLabel1.TabIndex = 16;
-            this.metroLabel1.Text = "CSC:";
+            this.edtTokenCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtTokenCSC.Lines = new string[] {
+        "Styled Textbox"};
+            this.edtTokenCSC.Location = new System.Drawing.Point(360, 37);
+            this.edtTokenCSC.MaxLength = 6;
+            this.edtTokenCSC.Name = "edtTokenCSC";
+            this.edtTokenCSC.PasswordChar = '\0';
+            this.edtTokenCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.edtTokenCSC.SelectedText = "";
+            this.edtTokenCSC.Size = new System.Drawing.Size(315, 22);
+            this.edtTokenCSC.TabIndex = 21;
+            this.edtTokenCSC.Text = "Styled Textbox";
+            this.edtTokenCSC.UseSelectable = true;
+            this.edtTokenCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
+            // 
+            // edtIdentificadorCSC
+            // 
+            this.edtIdentificadorCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtIdentificadorCSC.Lines = new string[] {
+        "Styled Textbox"};
+            this.edtIdentificadorCSC.Location = new System.Drawing.Point(20, 37);
+            this.edtIdentificadorCSC.MaxLength = 36;
+            this.edtIdentificadorCSC.Name = "edtIdentificadorCSC";
+            this.edtIdentificadorCSC.PasswordChar = '\0';
+            this.edtIdentificadorCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.edtIdentificadorCSC.SelectedText = "";
+            this.edtIdentificadorCSC.Size = new System.Drawing.Size(327, 22);
+            this.edtIdentificadorCSC.TabIndex = 20;
+            this.edtIdentificadorCSC.Text = "Styled Textbox";
+            this.edtIdentificadorCSC.UseSelectable = true;
+            this.edtIdentificadorCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
             // metroLabel2
             // 
@@ -550,41 +575,16 @@
             this.metroLabel2.TabIndex = 18;
             this.metroLabel2.Text = "ID Token:";
             // 
-            // edtIdentificadorCSC
+            // metroLabel1
             // 
-            this.edtIdentificadorCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtIdentificadorCSC.Lines = new string[] {
-        "Styled Textbox"};
-            this.edtIdentificadorCSC.Location = new System.Drawing.Point(20, 37);
-            this.edtIdentificadorCSC.MaxLength = 32767;
-            this.edtIdentificadorCSC.Name = "edtIdentificadorCSC";
-            this.edtIdentificadorCSC.PasswordChar = '\0';
-            this.edtIdentificadorCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.edtIdentificadorCSC.SelectedText = "";
-            this.edtIdentificadorCSC.Size = new System.Drawing.Size(327, 22);
-            this.edtIdentificadorCSC.TabIndex = 20;
-            this.edtIdentificadorCSC.Text = "Styled Textbox";
-            this.edtIdentificadorCSC.UseSelectable = true;
-            this.edtIdentificadorCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
-            // 
-            // edtTokenCSC
-            // 
-            this.edtTokenCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtTokenCSC.Lines = new string[] {
-        "Styled Textbox"};
-            this.edtTokenCSC.Location = new System.Drawing.Point(360, 37);
-            this.edtTokenCSC.MaxLength = 32767;
-            this.edtTokenCSC.Name = "edtTokenCSC";
-            this.edtTokenCSC.PasswordChar = '\0';
-            this.edtTokenCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.edtTokenCSC.SelectedText = "";
-            this.edtTokenCSC.Size = new System.Drawing.Size(315, 22);
-            this.edtTokenCSC.TabIndex = 21;
-            this.edtTokenCSC.Text = "Styled Textbox";
-            this.edtTokenCSC.UseSelectable = true;
-            this.edtTokenCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(20, 19);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(30, 15);
+            this.metroLabel1.TabIndex = 16;
+            this.metroLabel1.Text = "CSC:";
             // 
             // userConfiguracao_diversos
             // 

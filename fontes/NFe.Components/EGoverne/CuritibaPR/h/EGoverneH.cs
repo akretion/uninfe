@@ -35,7 +35,7 @@ namespace NFe.Components.EGoverne.CuritibaPR.h
         public override void EmiteNF(string file)
         {
             EnviarLoteRpsEnvio loterpsenvio = ReadXML<EnviarLoteRpsEnvio>(file);
-            EnviarLoteRpsResposta result = service.RecepcionarLoteRps(loterpsenvio);            
+            EnviarLoteRpsResposta result = service.RecepcionarLoteRps(loterpsenvio);
             GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
         }
 
