@@ -236,7 +236,7 @@
     </ProjectReference>
     <ProjectReference Include="..\MetroFramework\MetroFramework\MetroFramework.csproj">
       <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
-      <Name>MetroFramework</Name>
+      <Name>MetroFramework %28MetroFramework\MetroFramework%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
       <Project>{c045a27f-415b-4f7d-8b9b-2956589932c8}</Project>

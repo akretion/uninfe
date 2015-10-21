@@ -1527,6 +1527,19 @@ namespace NFe.Settings
 
                     ++empTo;
                 }
+
+                if (empresaValidada.Servico == TipoAplicativo.NFCe)
+                {
+                    if (!string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    {
+                        throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
+                    }
+                    else if (string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && ! string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    {
+                        throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                    }
+                }
+
                 for (int i = empFrom; i < empTo; i++)
                 {
                     Empresa empresa = Empresas.Configuracoes[i];
@@ -1825,6 +1838,14 @@ namespace NFe.Settings
                                 validou = false;
                             }
                         }
+                    }
+                    #endregion
+
+                    #region Verificar se o IDToken informado é menor que 6 caracteres
+                    if (!string.IsNullOrEmpty(empresa.TokenCSC) && empresa.TokenCSC.Length < 6)
+                    {
+                        erro = "O IDToken deve ter 6 caracteres." + xNomeCNPJ;
+                        validou = false;
                     }
                     #endregion
                 }
