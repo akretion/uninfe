@@ -1695,13 +1695,11 @@ namespace NFe.Service
                 //Adicionar a tag do QRCode
                 if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC) && dadosNFe.mod == "65")
                 {
-                    QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC,
-                                Empresas.Configuracoes[emp].TokenCSC,
-                                NomeArquivoXML);
-                    string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                    QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, NomeArquivoXML);
 
                     if (qrCode.CalcularLink())
                     {
+                        string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
                         qrCode.GerarLinkConsulta(url);
                         qrCode.AddLinkQRCode();
                     }

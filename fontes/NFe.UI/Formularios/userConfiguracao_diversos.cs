@@ -124,6 +124,8 @@ namespace NFe.UI.Formularios
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
                     cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse);
 
+                /*
+
                 if (empresa.Servico == TipoAplicativo.Nfe || empresa.Servico == TipoAplicativo.NFCe || empresa.Servico == TipoAplicativo.Todos)
                 {
                     grpQRCode.Visible =
@@ -136,6 +138,7 @@ namespace NFe.UI.Formularios
                     edtIdentificadorCSC.Visible =
                     edtTokenCSC.Visible = false;
                 }
+                */
 
                 if (empresa.Servico == TipoAplicativo.Nfse)
                     comboBox_UF.DataSource = arrMunicipios;
@@ -218,13 +221,28 @@ namespace NFe.UI.Formularios
 
                 var e = Empresas.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue);
                 if (e != null)
-                    throw new Exception("A empresa '"+e.Nome+"' já está monitorando esse tipo de serviço");
+                    throw new Exception("A empresa '" + e.Nome + "' já está monitorando esse tipo de serviço");
 
                 if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma a alteração do tipo de serviço?", "",
                                                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     return false;
                 }
+            }
+
+            switch ((TipoAplicativo)this.cbServico.SelectedValue)
+            {
+                case TipoAplicativo.NFCe:
+                    if (!string.IsNullOrEmpty(this.edtIdentificadorCSC.Text) && string.IsNullOrEmpty(this.edtTokenCSC.Text))
+                    {
+                        throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
+                    }
+                    else if (string.IsNullOrEmpty(this.edtIdentificadorCSC.Text) && !string.IsNullOrEmpty(this.edtTokenCSC.Text))
+                    {
+                        throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                    }
+
+                    break;
             }
 
             this.empresa.AmbienteCodigo = (int)comboBox_Ambiente.SelectedValue;
@@ -266,7 +284,12 @@ namespace NFe.UI.Formularios
             if (this.loading)
                 return;
 
+            this.grpQRCode.Visible = (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos;
+
             if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
                 (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos)
             {
                 HabilitaOpcaoCompactar(true);
