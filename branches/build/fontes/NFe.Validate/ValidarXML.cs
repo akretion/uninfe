@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
+using NFe.Components.QRCode;
 
 namespace NFe.Validate
 {
@@ -91,7 +92,7 @@ namespace NFe.Validate
                         if (!found)
                             throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
                     }
-                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse) && 
+                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse) &&
                             !TipoArqXml.cArquivoSchema.Contains("DSF"))
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
@@ -110,7 +111,7 @@ namespace NFe.Validate
                                     //Encryptar a tag Assinatura
                                     sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                                                     detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText);
-                                    
+
                                     detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText = sh1;
                                 }
                             }
@@ -144,7 +145,7 @@ namespace NFe.Validate
             Retorno = 0;
             RetornoString = "";
 
-            if(lArqXML && lArqXSD)
+            if (lArqXML && lArqXSD)
             {
                 XmlReader xmlReader = null;
 
@@ -166,7 +167,7 @@ namespace NFe.Validate
                      * o esquema informado no início. */
                     settings.XmlResolver = resolver;
 
-                    if(TipoArqXml.TargetNameSpace != string.Empty)
+                    if (TipoArqXml.TargetNameSpace != string.Empty)
                         schemas.Add(TipoArqXml.TargetNameSpace, TipoArqXml.cArquivoSchema);
                     else
                         schemas.Add(NFeStrConstants.NAME_SPACE_NFE, TipoArqXml.cArquivoSchema);
@@ -178,18 +179,18 @@ namespace NFe.Validate
                     this.cErro = "";
                     try
                     {
-                        while(xmlReader.Read()) { }
+                        while (xmlReader.Read()) { }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         this.cErro = ex.Message;
                     }
 
                     xmlReader.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    if(xmlReader != null)
+                    if (xmlReader != null)
                         xmlReader.Close();
 
                     cErro = ex.Message + "\r\n";
@@ -197,7 +198,7 @@ namespace NFe.Validate
 
                 this.Retorno = 0;
                 this.RetornoString = "";
-                if(cErro != "")
+                if (cErro != "")
                 {
                     this.Retorno = 1;
                     this.RetornoString = "Início da validação...\r\n\r\n";
@@ -209,12 +210,12 @@ namespace NFe.Validate
             }
             else
             {
-                if(lArqXML == false)
+                if (lArqXML == false)
                 {
                     this.Retorno = 2;
                     this.RetornoString = "Arquivo XML não foi encontrato";
                 }
-                else if(lArqXSD == false && temXSD)
+                else if (lArqXSD == false && temXSD)
                 {
                     this.Retorno = 3;
                     this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + TipoArqXml.cArquivoSchema;
@@ -242,10 +243,10 @@ namespace NFe.Validate
         {
             string cRetorna = "";
 
-            if(TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+            if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
             {
                 Validar(arquivo);
-                if(Retorno != 0)
+                if (Retorno != 0)
                 {
                     cRetorna = "XML INCONSISTENTE!\r\n\r\n" + RetornoString;
                 }
@@ -290,7 +291,7 @@ namespace NFe.Validate
                     Assinou = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assinou = false;
                 try
@@ -305,22 +306,42 @@ namespace NFe.Validate
                 }
             }
 
-            if(Assinou)
+            if (Assinou)
             {
+                #region Adicionar a tag do qrCode na NFCe
+                if (Arquivo.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC))
+                    {
+                        QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, Arquivo);
+
+                        if (qrCode.CalcularLink())
+                        {
+                            string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+
+                            qrCode.GerarLinkConsulta(url);
+                            qrCode.AddLinkQRCode();
+                        }
+                    }
+                }
+                #endregion
+
+
+
                 // Validar o Arquivo XML
-                if(TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+                if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
                     try
                     {
                         Validar(Arquivo);
-                        if(Retorno != 0)
+                        if (Retorno != 0)
                         {
                             this.GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + RetornoString);
                             new Auxiliar().MoveArqErro(Arquivo);
                         }
                         else
                         {
-                            if(!Directory.Exists(Empresas.Configuracoes[emp].PastaValidado))
+                            if (!Directory.Exists(Empresas.Configuracoes[emp].PastaValidado))
                             {
                                 Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidado);
                             }
@@ -342,7 +363,7 @@ namespace NFe.Validate
                             this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         try
                         {

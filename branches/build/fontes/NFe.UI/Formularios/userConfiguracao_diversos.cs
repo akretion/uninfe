@@ -86,7 +86,7 @@ namespace NFe.UI.Formularios
 
         private Point loc_1, loc_2;
 
-        public void Populate(NFe.Settings.Empresa empresa)
+        public void Populate(NFe.Settings.Empresa empresa, bool novaempresa)
         {
             this.loading = true;
             try
@@ -124,6 +124,22 @@ namespace NFe.UI.Formularios
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
                     cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse);
 
+                /*
+
+                if (empresa.Servico == TipoAplicativo.Nfe || empresa.Servico == TipoAplicativo.NFCe || empresa.Servico == TipoAplicativo.Todos)
+                {
+                    grpQRCode.Visible =
+                    edtIdentificadorCSC.Visible =
+                    edtTokenCSC.Visible = true;
+                }
+                else
+                {
+                    grpQRCode.Visible =
+                    edtIdentificadorCSC.Visible =
+                    edtTokenCSC.Visible = false;
+                }
+                */
+
                 if (empresa.Servico == TipoAplicativo.Nfse)
                     comboBox_UF.DataSource = arrMunicipios;
                 else
@@ -152,6 +168,8 @@ namespace NFe.UI.Formularios
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                 checkBoxCompactaNFe.Checked = this.empresa.CompactarNfe;
                 cbIndSinc.Checked = this.empresa.IndSinc;
+                edtIdentificadorCSC.Text = this.empresa.IndentificadorCSC;
+                edtTokenCSC.Text = this.empresa.TokenCSC;
 
                 cboDiretorioSalvarComo.Text = this.empresa.DiretorioSalvarComo;
                 udDiasLimpeza.Text = this.empresa.DiasLimpeza.ToString();
@@ -167,6 +185,9 @@ namespace NFe.UI.Formularios
 
                 this.edtCNPJ.ReadOnly = !string.IsNullOrEmpty(empresa.CNPJ);
                 this.cbServico.Enabled = !this.edtCNPJ.ReadOnly;
+
+                if (this.empresa.Servico != TipoAplicativo.Nfse && !novaempresa)
+                    this.cbServico.Enabled = true;
             }
             finally
             {
@@ -176,8 +197,10 @@ namespace NFe.UI.Formularios
             }
         }
 
-        public void Validar()
+        public bool Validar(bool exibeerro, bool novaempresa)
         {
+            string cnpj = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
+
             if (Convert.ToInt32("0" + udTempoConsulta.Text) < 2 || Convert.ToInt32("0" + udTempoConsulta.Text) > 15)
                 throw new Exception(lbl_udTempoConsulta.Text + " inválido");
 
@@ -189,14 +212,38 @@ namespace NFe.UI.Formularios
             if (string.IsNullOrEmpty(edtNome.Text))
                 throw new Exception("Nome da empresa deve ser informado");
 
-            string cnpj = (string)Functions.OnlyNumbers(this.edtCNPJ.Text, ".-/");
-            /*
-            if (!this.edtCNPJ.ReadOnly &&
-                Empresa.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue) != null)
+            if (servicoCurrent != (TipoAplicativo)this.cbServico.SelectedValue && !novaempresa && exibeerro)
             {
-                throw new Exception("Empresa/CNPJ já existe");
+                if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfse)
+                {
+                    throw new Exception("Não pode mudar para esse tipo de serviço (NFSe)");
+                }
+
+                var e = Empresas.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue);
+                if (e != null)
+                    throw new Exception("A empresa '" + e.Nome + "' já está monitorando esse tipo de serviço");
+
+                if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma a alteração do tipo de serviço?", "",
+                                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    return false;
+                }
             }
-            */
+
+            switch ((TipoAplicativo)this.cbServico.SelectedValue)
+            {
+                case TipoAplicativo.NFCe:
+                    if (!string.IsNullOrEmpty(this.edtIdentificadorCSC.Text) && string.IsNullOrEmpty(this.edtTokenCSC.Text))
+                    {
+                        throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
+                    }
+                    else if (string.IsNullOrEmpty(this.edtIdentificadorCSC.Text) && !string.IsNullOrEmpty(this.edtTokenCSC.Text))
+                    {
+                        throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                    }
+
+                    break;
+            }
 
             this.empresa.AmbienteCodigo = (int)comboBox_Ambiente.SelectedValue;
             this.empresa.CNPJ = cnpj;
@@ -215,6 +262,10 @@ namespace NFe.UI.Formularios
             this.empresa.Servico = (TipoAplicativo)this.cbServico.SelectedValue;
             this.empresa.SenhaWS = this.txtSenhaWS.Text;
             this.empresa.UsuarioWS = this.txtUsuarioWS.Text;
+            this.empresa.IndentificadorCSC = this.edtIdentificadorCSC.Text;
+            this.empresa.TokenCSC = this.edtTokenCSC.Text;
+
+            return true;
         }
 
         private void HabilitaOpcaoCompactar(bool ativar)
@@ -233,7 +284,12 @@ namespace NFe.UI.Formularios
             if (this.loading)
                 return;
 
+            this.grpQRCode.Visible = (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos;
+
             if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
                 (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos)
             {
                 HabilitaOpcaoCompactar(true);

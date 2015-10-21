@@ -232,7 +232,7 @@ namespace NFe.Components.Info
                 else
                 {
                     ((StringWriter)oXmlGravar).Flush();
-                    File.WriteAllText(sArquivo, ((StringWriter)oXmlGravar).GetStringBuilder().ToString(), Encoding.Default);
+                    File.WriteAllText(sArquivo, ((StringWriter)oXmlGravar).GetStringBuilder().ToString());
                     ((StringWriter)oXmlGravar).Close();
                 }
             }

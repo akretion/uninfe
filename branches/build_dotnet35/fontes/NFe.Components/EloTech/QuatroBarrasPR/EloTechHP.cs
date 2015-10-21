@@ -32,7 +32,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
                 service.Proxy = WebRequest.DefaultWebProxy;
                 service.Proxy.Credentials = new NetworkCredential(proxyuser, proxypass);
                 service.Credentials = new NetworkCredential(proxyuser, proxypass);
-                X509Certificate2 Certificado = certificado;
+                Certificado = certificado;
                 AddClientCertificates();
             }
         }
@@ -47,6 +47,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             certificates = pi.GetValue(service, null) as X509CertificateCollection;
             certificates.Add(Certificado);
         }
+
         public override void EmiteNF(string file)
         {
             EnviarLoteRpsEnvio oEnviarLoteRpsEnvio = ReadXML<EnviarLoteRpsEnvio>(file);            

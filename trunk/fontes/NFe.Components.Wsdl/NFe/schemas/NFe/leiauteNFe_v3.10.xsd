@@ -1707,27 +1707,15 @@ ambiente.</xs:documentation>
 																					</xs:restriction>
 																				</xs:simpleType>
 																			</xs:element>
-																			<xs:element name="vEncIni">
+																			<xs:element name="vEncIni" type="TDec_1203">
 																				<xs:annotation>
 																					<xs:documentation>Valor do Encerrante no ínicio do abastecimento</xs:documentation>
 																				</xs:annotation>
-																				<xs:simpleType>
-																					<xs:restriction base="xs:string">
-																						<xs:whiteSpace value="preserve"/>
-																						<xs:pattern value="[0-9]{1,15}"/>
-																					</xs:restriction>
-																				</xs:simpleType>
 																			</xs:element>
-																			<xs:element name="vEncFin">
+																			<xs:element name="vEncFin" type="TDec_1203">
 																				<xs:annotation>
 																					<xs:documentation>Valor do Encerrante no final do abastecimento</xs:documentation>
 																				</xs:annotation>
-																				<xs:simpleType>
-																					<xs:restriction base="xs:string">
-																						<xs:whiteSpace value="preserve"/>
-																						<xs:pattern value="[0-9]{1,15}"/>
-																					</xs:restriction>
-																				</xs:simpleType>
 																			</xs:element>
 																		</xs:sequence>
 																	</xs:complexType>

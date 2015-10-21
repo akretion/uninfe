@@ -15,6 +15,7 @@ namespace NFe.ConvertTxt
         public string CNPJ;
         public TpcnBandeiraCartao tBand;
         public string cAut;
+        public int tpIntegra;
 
         public pag()
         {

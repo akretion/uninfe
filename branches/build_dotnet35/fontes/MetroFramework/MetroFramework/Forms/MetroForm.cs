@@ -517,17 +517,21 @@ namespace MetroFramework.Forms
             if (shadowType == MetroFormShadowType.AeroShadow &&
                 IsAeroThemeEnabled() && IsDropShadowSupported())
             {
-                int val = 2;
-                DwmApi.DwmSetWindowAttribute(Handle, 2, ref val, 4);
-                var m = new DwmApi.MARGINS
+                try
                 {
-                    cyBottomHeight = 1,
-                    cxLeftWidth = 0,
-                    cxRightWidth = 0,
-                    cyTopHeight = 0
-                };
+                    int val = 2;
+                    DwmApi.DwmSetWindowAttribute(Handle, 2, ref val, 4);
+                    var m = new DwmApi.MARGINS
+                    {
+                        cyBottomHeight = 1,
+                        cxLeftWidth = 0,
+                        cxRightWidth = 0,
+                        cyTopHeight = 0
+                    };
 
-                DwmApi.DwmExtendFrameIntoClientArea(Handle, ref m);
+                    DwmApi.DwmExtendFrameIntoClientArea(Handle, ref m);
+                }
+                catch { }
             }
         }
 

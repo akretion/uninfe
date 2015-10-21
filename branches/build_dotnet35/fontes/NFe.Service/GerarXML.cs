@@ -607,7 +607,7 @@ namespace NFe.Service
                 {
                     string TXTRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(cArqLoteRetorno, ".xml") + ".txt";
 
-                    File.WriteAllText(TXTRetorno, intNumeroLote.ToString() + ";", Encoding.Default);
+                    File.WriteAllText(TXTRetorno, intNumeroLote.ToString() + ";");
                 }
             }
             finally
@@ -980,7 +980,7 @@ namespace NFe.Service
                                        Functions.ExtrairNomeArq(this.NomeXMLDadosMsg, finalArqEnvio) +
                                        finalArqRetorno;
 
-                File.WriteAllText(ArqXMLRetorno, conteudoXMLRetorno, Encoding.UTF8);
+                File.WriteAllText(ArqXMLRetorno, conteudoXMLRetorno);
 
                 //gravar o conteudo no FTP
                 this.XmlParaFTP(emp, ArqXMLRetorno);
@@ -1326,7 +1326,7 @@ namespace NFe.Service
                                 ConteudoRetorno += infCadNode.UF + ";";
                                 ConteudoRetorno += infCadNode.cSit + ";";
                                 ConteudoRetorno += infCadNode.xNome.Replace(";", " ") + ";";
-                                ConteudoRetorno += infCadNode.xFant.Replace(";", " ") + ";";
+                                ConteudoRetorno += (string.IsNullOrEmpty(infCadNode.xFant) ? "" : infCadNode.xFant.Replace(";", " ")) + ";";
                                 ConteudoRetorno += infCadNode.xRegApur.Replace(";", " ") + ";";
                                 ConteudoRetorno += infCadNode.CNAE.ToString() + ";";
                                 ConteudoRetorno += infCadNode.dIniAtiv + ";";
@@ -1682,7 +1682,7 @@ namespace NFe.Service
                 TXTRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(TXTRetorno, ".xml") + ".txt";
 
                 if (Servico == Servicos.NFePedidoConsultaSituacao && temEvento)
-                    File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.UTF8);
+                    File.WriteAllText(TXTRetorno, ConteudoRetorno);
                 else
                     File.WriteAllText(TXTRetorno, ConteudoRetorno, Encoding.Default);
 
@@ -2491,14 +2491,14 @@ namespace NFe.Service
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
 
                 if (!File.Exists(filenameBackup))
-                    File.WriteAllText(filenameBackup, protEnvioEvento, Encoding.UTF8);
+                    File.WriteAllText(filenameBackup, protEnvioEvento);
             }
             // cria a pasta se não existir
             if (!Directory.Exists(Path.GetDirectoryName(filenameToWrite)))
                 System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameToWrite));
 
             if (!File.Exists(filenameToWrite))
-                File.WriteAllText(filenameToWrite, protEnvioEvento, Encoding.UTF8);
+                File.WriteAllText(filenameToWrite, protEnvioEvento);
 
             this.XmlParaFTP(emp, filenameToWrite);
 
@@ -2615,14 +2615,14 @@ namespace NFe.Service
                 //Gravar o arquivo de distribuição na pasta de backup
 
                 if (!File.Exists(filenameBackup))
-                    File.WriteAllText(filenameBackup, protEnvioEvento, Encoding.UTF8);
+                    File.WriteAllText(filenameBackup, protEnvioEvento);
             }
             // cria a pasta se não existir
             if (!Directory.Exists(Path.GetDirectoryName(filenameToWrite)))
                 System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameToWrite));
 
             if (!File.Exists(filenameToWrite))
-                File.WriteAllText(filenameToWrite, protEnvioEvento, Encoding.UTF8);
+                File.WriteAllText(filenameToWrite, protEnvioEvento);
 
             this.XmlParaFTP(emp, filenameToWrite);
 
@@ -2740,14 +2740,14 @@ namespace NFe.Service
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
 
                 if (!File.Exists(filenameBackup))
-                    File.WriteAllText(filenameBackup, protEnvioEvento, Encoding.UTF8);
+                    File.WriteAllText(filenameBackup, protEnvioEvento);
             }
             // cria a pasta se não existir
             if (!Directory.Exists(Path.GetDirectoryName(filenameToWrite)))
                 System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameToWrite));
 
             if (!File.Exists(filenameToWrite))
-                File.WriteAllText(filenameToWrite, protEnvioEvento, Encoding.UTF8);
+                File.WriteAllText(filenameToWrite, protEnvioEvento);
 
             this.XmlParaFTP(emp, filenameToWrite);
 
@@ -2787,9 +2787,9 @@ namespace NFe.Service
             DateTime dte = Convert.ToDateTime("20" + ChaveNFe.Substring(2, 2) + "/" + ChaveNFe.Substring(4, 2) + "/1");
             string olddir = null;
             string retorno = null;
-            for (int nd = 0; nd < 31; ++nd)
+            for (int nd = 0; nd < 60; ++nd)
             {
-                string dsc = Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dte.AddDays(nd));
+                string dsc = TFunctions.getSubFolder(dte, nd, Empresas.Configuracoes[emp].DiretorioSalvarComo);//.ToString(dte.AddDays(nd));
                 if (dsc != "") dsc = "\\" + dsc.TrimEnd('\\');
                 if (olddir != null && olddir.Equals(dsc)) continue; //evitamos pesquisar por uma pasta que já haviamos pesquisado (AM, MA, ...)
                 olddir = dsc;

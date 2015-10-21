@@ -83,7 +83,7 @@ namespace UniNFeServico
 
                         string f = Path.Combine(empresa.PastaXmlRetorno,
                                                 "uninfeServico_" + DateTime.Now.ToString("yyyy-MMM-dd_hh-mm-ss") + ".txt");
-                        System.IO.File.WriteAllText(f, msg, Encoding.UTF8);
+                        System.IO.File.WriteAllText(f, msg);
                         error = true;
 
                         WriteLog(msg);

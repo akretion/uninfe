@@ -43,7 +43,7 @@ namespace NFe.Service
                             xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.ExtEnvio.Nfe) ? "" : Propriedade.ExtEnvio.Nfe));
                         }
                         xml.Append("</MontarLoteNFe>");
-                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString(), Encoding.Default);
+                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString());
 
                         //Deletar o arquivo de solicitação de montagem do lote de NFe
                         FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);

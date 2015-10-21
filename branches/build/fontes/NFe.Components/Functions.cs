@@ -499,6 +499,30 @@ namespace NFe.Components
         }
         #endregion
 
+        #region ComputeHexadecimal()
+        /// <summary>
+        /// Calcula valor hexadecimal
+        /// Usado para calcular o Link do QRCode da NFCe
+        /// </summary>
+        /// <param name="input">Valor a ser convertido</param>
+        /// <returns></returns>
+        public static string ComputeHexadecimal(string input)
+        {            
+            string hexOutput = "";
+            char[] values = input.ToCharArray();
+            foreach (char letter in values)
+            {
+                // Get the integral value of the character.
+                int value = Convert.ToInt32(letter);
+                // Convert the decimal value to a hexadecimal value in string form.
+                hexOutput += String.Format("{0:X}", value);
+            }
+
+            return hexOutput;
+
+        }
+        #endregion
+
         /// <summary>
         /// Criptografar conteúdo com MD5
         /// </summary>
@@ -814,7 +838,7 @@ namespace NFe.Components
             if (!string.IsNullOrEmpty(resultFolder) && Directory.Exists(Path.GetDirectoryName(resultFolder)) && !string.IsNullOrEmpty(file))
             {
                 FileInfo infFile = new FileInfo(file);
-                string extFile = infFile.Name.Replace(".xml", "");
+                string extFile = infFile.Name.Replace(infFile.Extension, "");
                 string extError = extFile + ".err";
 
                 string nomearq = resultFolder + "\\" + extError;
