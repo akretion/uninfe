@@ -727,7 +727,7 @@ namespace NFe.Service
         {
             tpEmis = Empresas.Configuracoes[emp].tpEmis;
             tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
-            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;            
         }
     }
     #endregion

@@ -538,6 +538,133 @@ namespace NFe.Settings
         }
         #endregion
 
+        #region URLs do Estados
+        public static EstadoURLConsultaDFe CarregarURLConsultaDFe(string uf)
+        {
+            string LocalFile = Application.StartupPath + "\\sefaz.inc";
+            EstadoURLConsultaDFe estado = new EstadoURLConsultaDFe();
+
+            if (DownloadArquivoURLConsultaDFe())
+            {
+                var inifile = new IniFile(LocalFile);
+
+                estado.UF = uf;
+                estado.UrlNFe = inifile.Read("NF-e", uf);
+                estado.UrlCTe = inifile.Read("CT-e", uf);
+                estado.UrlNFCe = inifile.Read("NFC-e", uf);
+                estado.UrlNFCeH = inifile.Read("NFC-e(h)", uf);
+            }
+
+            return estado;
+        }
+
+        private static bool DownloadArquivoURLConsultaDFe()
+        {
+            string URL = "http://www.unimake.com.br/pub/downloads/sefaz.inc";
+            string LocalFile = Application.StartupPath + "\\sefaz.inc";
+            HttpWebRequest webRequest = null;
+            HttpWebResponse webResponse = null;
+            Stream strResponse = null;
+            Stream strLocal = null;
+            bool result = true;
+            DateTime dateFile = new DateTime(2000, 1, 1);
+
+            if (File.Exists(LocalFile))
+            {
+                dateFile = File.GetCreationTime(LocalFile).Date;
+            }
+
+            double lastUpdate = (DateTime.Now.Date - dateFile).TotalDays;
+
+            // Vai rodar atualização do arquivo somente se tiver mais que 30 dias
+            if (lastUpdate < 30)
+            {
+                return result;
+            }
+
+            // Vamos deletar para fazer o download novamente
+            if (File.Exists(LocalFile))
+            {
+                File.Delete(LocalFile);
+            }
+
+            using (WebClient Client = new WebClient())
+            {
+                try
+                {
+                    // Criar um pedido do arquivo que será baixado
+                    webRequest = (HttpWebRequest)WebRequest.Create(URL);
+
+                    // Definir dados da conexao do proxy
+                    if (ConfiguracaoApp.Proxy)
+                    {
+                        webRequest.Proxy = NFe.Components.Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
+                    }
+
+                    webRequest.Timeout = 10000; //10 segundos, se não conseguir, vai abortar para não atrabalhar o sistema. Wandrey
+
+                    // Atribuir autenticação padrão para a recuperação do arquivo
+                    webRequest.Credentials = CredentialCache.DefaultCredentials;
+
+                    // Obter a resposta do servidor
+                    webResponse = (HttpWebResponse)webRequest.GetResponse();
+
+                    // Perguntar ao servidor o tamanho do arquivo que será baixado
+                    Int64 fileSize = webResponse.ContentLength;
+
+                    // Abrir a URL para download                    
+                    strResponse = Client.OpenRead(URL);
+
+                    // Criar um novo arquivo a partir do fluxo de dados que será salvo na local disk
+                    strLocal = new FileStream(LocalFile, FileMode.Create, FileAccess.Write, FileShare.None);
+
+                    // Ele irá armazenar o número atual de bytes recuperados do servidor
+                    int bytesSize = 0;
+
+                    // Um buffer para armazenar e gravar os dados recuperados do servidor
+                    byte[] downBuffer = new byte[2048];
+
+                    // Loop através do buffer - Até que o buffer esteja vazio
+                    while ((bytesSize = strResponse.Read(downBuffer, 0, downBuffer.Length)) > 0)
+                    {
+                        // Gravar os dados do buffer no disco rigido
+                        strLocal.Write(downBuffer, 0, bytesSize);
+                    }
+                }
+                catch (IOException ex)
+                {
+                    Auxiliar.WriteLog(ex.Message, true);
+                    result = false;
+                }
+                catch (WebException ex)
+                {
+                    Auxiliar.WriteLog(ex.Message, true);
+                    result = false;
+                }
+                catch (Exception ex)
+                {
+                    Auxiliar.WriteLog(ex.Message, true);
+                    result = false;
+                }
+                finally
+                {
+                    // Encerrar as streams
+                    if (strResponse != null)
+                        strResponse.Close();
+
+                    if (strLocal != null)
+                        strLocal.Close();
+
+                    webRequest.Abort();
+                    webResponse.Close();
+                }
+
+                return result;
+            }
+
+        }
+        #endregion
+
         #region CarregarDados()
         /// <summary>
         /// Carrega as configurações realizadas na Aplicação gravadas no XML UniNfeConfig.xml para
@@ -1400,6 +1527,19 @@ namespace NFe.Settings
 
                     ++empTo;
                 }
+
+                if (empresaValidada.Servico == TipoAplicativo.NFCe)
+                {
+                    if (!string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    {
+                        throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
+                    }
+                    else if (string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && ! string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    {
+                        throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                    }
+                }
+
                 for (int i = empFrom; i < empTo; i++)
                 {
                     Empresa empresa = Empresas.Configuracoes[i];
@@ -1698,6 +1838,14 @@ namespace NFe.Settings
                                 validou = false;
                             }
                         }
+                    }
+                    #endregion
+
+                    #region Verificar se o IDToken informado é menor que 6 caracteres
+                    if (!string.IsNullOrEmpty(empresa.TokenCSC) && empresa.TokenCSC.Length < 6)
+                    {
+                        erro = "O IDToken deve ter 6 caracteres." + xNomeCNPJ;
+                        validou = false;
                     }
                     #endregion
                 }

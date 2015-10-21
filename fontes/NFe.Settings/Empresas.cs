@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 using NFe.Components;
+using System.Collections;
 
 namespace NFe.Settings
 {
@@ -131,6 +132,7 @@ namespace NFe.Settings
             Empresas.Configuracoes.Clear();
             ExisteErroDiretorio = false;
 
+
             if (File.Exists(Propriedade.NomeArqEmpresas))
             {
                 try
@@ -152,6 +154,9 @@ namespace NFe.Settings
                         try
                         {
                             empresa.BuscaConfiguracao();
+                            string uf = GetUF(empresa.UnidadeFederativaCodigo);
+                            if (uf != null)
+                                empresa.URLConsultaDFe = ConfiguracaoApp.CarregarURLConsultaDFe(uf);                            
                         }
                         catch (Exception ex)
                         {
@@ -197,6 +202,22 @@ namespace NFe.Settings
                 Empresas.CriarPasta();
         }
         #endregion
+
+        private static string GetUF(int codigoUnidade)
+        {
+            string result = null;
+
+            foreach (var estado in Propriedade.Estados)
+            {
+                if (estado.CodigoMunicipio.ToString().Equals(codigoUnidade.ToString()))
+                {
+                    result = estado.UF;
+                    break;
+                }
+            }
+
+            return result;
+        }
 
         private static string CriaArquivoDeErro(Empresa empresa, string cArqErro)
         {

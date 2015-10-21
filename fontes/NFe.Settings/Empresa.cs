@@ -263,6 +263,12 @@ namespace NFe.Settings
         /// </summary>
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool IndSinc { get; set; }
+
+        /// <summary>
+        /// URLs de Serviços da NFe, NFCe, CTe
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public EstadoURLConsultaDFe URLConsultaDFe { get; set; }
         #endregion
 
         #region Propriedades para controle da impressão do DANFE
@@ -305,6 +311,17 @@ namespace NFe.Settings
         public string EmailDanfe { get; set; }
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool AdicionaEmailDanfe { get; set; }
+        /// <summary>
+        /// Codigo de indentificacao do CSC
+        /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        public string IndentificadorCSC { get; set; }
+        /// <summary>
+        /// Codigo CSC/Token
+        /// </summary>
+        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        public string TokenCSC { get; set; }
+
         #endregion
 
         #region Propriedade para controle do nome da pasta a serem salvos os XML´s enviados

@@ -187,7 +187,7 @@ namespace NFe.Service
                                     if (FileToFtp != "")
                                     {
                                         if (!File.Exists(FileToFtp))
-                                            File.WriteAllText(FileToFtp, xmlRes, Encoding.UTF8);
+                                            File.WriteAllText(FileToFtp, xmlRes);
 
                                         string vFolder = Empresas.Configuracoes[emp].FTPPastaRetornos;
                                         if (!string.IsNullOrEmpty(vFolder))

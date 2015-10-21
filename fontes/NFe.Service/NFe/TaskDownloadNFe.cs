@@ -250,7 +250,7 @@ namespace NFe.Service
                                                                 xmlVersion1.Value = NFeStrConstants.NAME_SPACE_NFE;
                                                                 xitem1.ChildNodes[1].Attributes.Append(xmlVersion1);
                                                             }
-                                                            System.IO.File.WriteAllText(Path.Combine(folderDestino, chave), "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + xitem1.OuterXml, Encoding.UTF8);
+                                                            System.IO.File.WriteAllText(Path.Combine(folderDestino, chave), "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + xitem1.OuterXml);
                                                             break;
                                                     }
                                                 }

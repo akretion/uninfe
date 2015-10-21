@@ -166,13 +166,17 @@ namespace NFe.UI.Formularios
                     // Criar um pedido do arquivo que será baixado
                     webRequest = (HttpWebRequest)WebRequest.Create(URL);
 
+                    // Definir dados da conexao do proxy
+                    if (ConfiguracaoApp.Proxy)
+                    {
+                        webRequest.Proxy = NFe.Components.Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
+                    }
+
                     // Atribuir autenticação padrão para a recuperação do arquivo
                     webRequest.Credentials = CredentialCache.DefaultCredentials;
 
                     // Obter a resposta do servidor
                     webResponse = (HttpWebResponse)webRequest.GetResponse();
-
-                    //TODO: Fazer a parte do proxy da atualização do UNINFE
 
                     // Perguntar ao servidor o tamanho do arquivo que será baixado
                     Int64 fileSize = webResponse.ContentLength;

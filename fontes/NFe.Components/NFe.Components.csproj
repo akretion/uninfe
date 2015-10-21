@@ -88,12 +88,14 @@
     <Compile Include="EGoverne\EGoverneBase.cs" />
     <Compile Include="EGoverne\CuritibaPR\h\EGoverneH.cs" />
     <Compile Include="EGoverne\CuritibaPR\p\EGoverneP.cs" />
+    <Compile Include="EstadoURLs.cs" />
     <Compile Include="FISSLEX\PiracicabaSP\p\FISSLEXP.cs" />
     <Compile Include="GovDigital\GovDigital.cs" />
     <Compile Include="GovDigital\GovDigitalBase.cs" />
     <Compile Include="IPM\IPM.cs" />
     <Compile Include="MGM\BauruSP\p\MGMP.cs" />
     <Compile Include="MGM\XmlDocumentUtilities.cs" />
+    <Compile Include="QRCode\QRCode.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_Informatica.cs" />
     <Compile Include="RLZ_INFORMATICA\Rlz_InformaticaBase.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\h\Rlz_InformaticaH.cs" />
