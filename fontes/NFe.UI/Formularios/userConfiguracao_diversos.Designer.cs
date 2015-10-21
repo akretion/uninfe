@@ -60,6 +60,12 @@
             this.edtPadrao = new MetroFramework.Controls.MetroTextBox();
             this.lbl_CodMun = new MetroFramework.Controls.MetroLabel();
             this.edtCodMun = new MetroFramework.Controls.MetroTextBox();
+            this.grpQRCode = new System.Windows.Forms.GroupBox();
+            this.edtTokenCSC = new MetroFramework.Controls.MetroTextBox();
+            this.edtIdentificadorCSC = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.grpQRCode.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxRetornoNFETxt
@@ -100,7 +106,7 @@
             this.checkBoxCompactaNFe.AutoSize = true;
             this.checkBoxCompactaNFe.Location = new System.Drawing.Point(3, 341);
             this.checkBoxCompactaNFe.Name = "checkBoxCompactaNFe";
-            this.checkBoxCompactaNFe.Size = new System.Drawing.Size(212, 15);
+            this.checkBoxCompactaNFe.Size = new System.Drawing.Size(211, 15);
             this.checkBoxCompactaNFe.TabIndex = 31;
             this.checkBoxCompactaNFe.Text = "Compactar NFe para enviar a SEFAZ";
             this.checkBoxCompactaNFe.UseSelectable = true;
@@ -283,7 +289,7 @@
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 236);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(543, 15);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(542, 15);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 26;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/NFCe/MDFe/CTe autorizados/de" +
     "negados?";
@@ -295,7 +301,7 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 257);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(637, 15);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(636, 15);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 27;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/NFCe/MDFe/CT" +
     "e autorizados/denegados?";
@@ -309,7 +315,7 @@
             this.metroLabel19.Location = new System.Drawing.Point(3, 46);
             this.metroLabel19.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel19.Name = "metroLabel19";
-            this.metroLabel19.Size = new System.Drawing.Size(42, 15);
+            this.metroLabel19.Size = new System.Drawing.Size(43, 15);
             this.metroLabel19.TabIndex = 4;
             this.metroLabel19.Text = "Serviço";
             // 
@@ -360,7 +366,7 @@
             this.metroLabel22.Location = new System.Drawing.Point(3, 3);
             this.metroLabel22.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel22.Name = "metroLabel22";
-            this.metroLabel22.Size = new System.Drawing.Size(34, 15);
+            this.metroLabel22.Size = new System.Drawing.Size(33, 15);
             this.metroLabel22.TabIndex = 0;
             this.metroLabel22.Text = "CNPJ";
             // 
@@ -387,7 +393,7 @@
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
             this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(3, 278);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(385, 15);
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(384, 15);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 28;
             this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe/NFCe/MDFe/CTe de terceiros?";
             this.checkBoxGravarEventosDeTerceiros.UseSelectable = true;
@@ -456,7 +462,7 @@
             this.lbl_Padrao.Location = new System.Drawing.Point(503, 97);
             this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_Padrao.Name = "lbl_Padrao";
-            this.lbl_Padrao.Size = new System.Drawing.Size(44, 15);
+            this.lbl_Padrao.Size = new System.Drawing.Size(43, 15);
             this.lbl_Padrao.TabIndex = 16;
             this.lbl_Padrao.Text = "Padrão";
             // 
@@ -507,11 +513,85 @@
             this.edtCodMun.UseSelectable = true;
             this.edtCodMun.UseStyleColors = true;
             // 
+            // grpQRCode
+            // 
+            this.grpQRCode.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.grpQRCode.Controls.Add(this.edtTokenCSC);
+            this.grpQRCode.Controls.Add(this.edtIdentificadorCSC);
+            this.grpQRCode.Controls.Add(this.metroLabel2);
+            this.grpQRCode.Controls.Add(this.metroLabel1);
+            this.grpQRCode.Location = new System.Drawing.Point(3, 362);
+            this.grpQRCode.Name = "grpQRCode";
+            this.grpQRCode.Size = new System.Drawing.Size(681, 67);
+            this.grpQRCode.TabIndex = 32;
+            this.grpQRCode.TabStop = false;
+            this.grpQRCode.Text = "Dados QR-Code";
+            this.grpQRCode.Visible = false;
+            // 
+            // edtTokenCSC
+            // 
+            this.edtTokenCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtTokenCSC.Lines = new string[] {
+        "Styled Textbox"};
+            this.edtTokenCSC.Location = new System.Drawing.Point(360, 37);
+            this.edtTokenCSC.MaxLength = 6;
+            this.edtTokenCSC.Name = "edtTokenCSC";
+            this.edtTokenCSC.PasswordChar = '\0';
+            this.edtTokenCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.edtTokenCSC.SelectedText = "";
+            this.edtTokenCSC.Size = new System.Drawing.Size(315, 22);
+            this.edtTokenCSC.TabIndex = 21;
+            this.edtTokenCSC.Text = "Styled Textbox";
+            this.edtTokenCSC.UseSelectable = true;
+            this.edtTokenCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
+            // 
+            // edtIdentificadorCSC
+            // 
+            this.edtIdentificadorCSC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtIdentificadorCSC.Lines = new string[] {
+        "Styled Textbox"};
+            this.edtIdentificadorCSC.Location = new System.Drawing.Point(20, 37);
+            this.edtIdentificadorCSC.MaxLength = 36;
+            this.edtIdentificadorCSC.Name = "edtIdentificadorCSC";
+            this.edtIdentificadorCSC.PasswordChar = '\0';
+            this.edtIdentificadorCSC.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.edtIdentificadorCSC.SelectedText = "";
+            this.edtIdentificadorCSC.Size = new System.Drawing.Size(327, 22);
+            this.edtIdentificadorCSC.TabIndex = 20;
+            this.edtIdentificadorCSC.Text = "Styled Textbox";
+            this.edtIdentificadorCSC.UseSelectable = true;
+            this.edtIdentificadorCSC.TextChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel2.Location = new System.Drawing.Point(360, 19);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(52, 15);
+            this.metroLabel2.TabIndex = 18;
+            this.metroLabel2.Text = "ID Token:";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(20, 19);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(30, 15);
+            this.metroLabel1.TabIndex = 16;
+            this.metroLabel1.Text = "CSC:";
+            // 
             // userConfiguracao_diversos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.grpQRCode);
             this.Controls.Add(this.lbl_Padrao);
             this.Controls.Add(this.edtPadrao);
             this.Controls.Add(this.lbl_CodMun);
@@ -545,7 +625,9 @@
             this.Controls.Add(this.edtCNPJ);
             this.Controls.Add(this.checkBoxGravarEventosDeTerceiros);
             this.Name = "userConfiguracao_diversos";
-            this.Size = new System.Drawing.Size(701, 362);
+            this.Size = new System.Drawing.Size(701, 433);
+            this.grpQRCode.ResumeLayout(false);
+            this.grpQRCode.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,5 +667,10 @@
         private MetroFramework.Controls.MetroTextBox edtPadrao;
         private MetroFramework.Controls.MetroLabel lbl_CodMun;
         private MetroFramework.Controls.MetroTextBox edtCodMun;
+        private System.Windows.Forms.GroupBox grpQRCode;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTextBox edtTokenCSC;
+        private MetroFramework.Controls.MetroTextBox edtIdentificadorCSC;
     }
 }

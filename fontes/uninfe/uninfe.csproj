@@ -1,104 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B6E8E809-6501-4D21-A94C-D751A3D57085}</ProjectGuid>
+    <ProjectGuid>{347CF3C4-EE18-4D46-AABF-479B73BF85D6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>uninfe</RootNamespace>
-    <AssemblyName>uninfe</AssemblyName>
+    <AssemblyName>UniNFe</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>F85F0EB90081CEC015E5EE2D30E62901C714F270</ManifestCertificateThumbprint>
-    <ManifestKeyFile>uninfe_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
-    <ApplicationIcon>uninfe.ico</ApplicationIcon>
-    <SignAssembly>false</SignAssembly>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <PublishUrl>c:\qqqq1\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\release\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_uninfe_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;_uninfe_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>uninfe.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>uninfe.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -121,98 +76,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileclose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\filesave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\folder_orange_open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\gear.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\package_utilities.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\identity.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\identity1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\kontact_todo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\atualizar2.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pdf.png" />
-    <None Include="Resources\pdf1.png" />
-    <None Include="Resources\pdf2.png" />
-    <None Include="Resources\pdf3.png" />
-    <None Include="Resources\windows_view_detail 48x48.png" />
-    <None Include="Resources\uninfe128.png" />
-    <None Include="Resources\uninfe.ico" />
-    <Content Include="uninfe.ico" />
     <Content Include="UniNfeSobre.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="uninfe.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MetroFramework\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework %28MetroFramework\MetroFramework%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NFe.Components.Info\NFe.Components.Info.csproj">
-      <Project>{B7222C8A-6160-4D6F-BDC8-20134308175A}</Project>
+      <Project>{b7222c8a-6160-4d6f-bdc8-20134308175a}</Project>
       <Name>NFe.Components.Info</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NFe.Components.Wsdl\NFe.Components.Wsdl.csproj">
-      <Project>{22362DF8-4026-4964-8975-ED87871BA07E}</Project>
-      <Name>NFe.Components.Wsdl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
-      <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
+      <Project>{c199d582-6da4-4d00-8963-89ba04777872}</Project>
       <Name>NFe.Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NFe.Interface\NFe.Interface.csproj">
-      <Project>{D5EB0BA1-EB5A-4D0B-ABA3-133B25B1C0CF}</Project>
-      <Name>NFe.Interface</Name>
+    <ProjectReference Include="..\NFe.ConvertTxt\NFe.ConvertTxt.csproj">
+      <Project>{9f2e5401-1c0b-4613-ab7f-985c7f0f267a}</Project>
+      <Name>NFe.ConvertTxt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Service\NFe.Service.csproj">
+      <Project>{975c0cfb-c646-4a1d-8927-fd63869f2daf}</Project>
+      <Name>NFe.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
-      <Project>{A963E456-A54B-4C4D-A9DE-E80C136C3554}</Project>
+      <Project>{a963e456-a54b-4c4d-a9de-e80c136c3554}</Project>
       <Name>NFe.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NFe.Threadings\NFe.Threadings.csproj">
-      <Project>{F570942E-C531-497D-A860-F86A8C2A31C9}</Project>
-      <Name>NFe.Threadings</Name>
+    <ProjectReference Include="..\NFe.UI\NFe.UI.csproj">
+      <Project>{37a93e14-d881-4957-ad44-3615ed65cd57}</Project>
+      <Name>NFe.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

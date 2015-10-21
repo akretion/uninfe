@@ -14,7 +14,6 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Components.Info.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Components.Wsdl.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.ConvertTxt.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Interface.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Service.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Settings.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Threadings.dll

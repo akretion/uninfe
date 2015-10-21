@@ -43,6 +43,7 @@ namespace NFe.ConvertTxt
         public Comb comb;
         public string nRECOPI;
         public List<detExport> detExport;
+        public int CEST;
 
         public Prod()
         {

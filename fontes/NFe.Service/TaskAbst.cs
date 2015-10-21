@@ -10,6 +10,7 @@ using NFe.Settings;
 using NFe.Certificado;
 using NFe.Exceptions;
 using NFe.Validate;
+using NFe.Components.QRCode;
 
 namespace NFe.Service
 {
@@ -1588,7 +1589,7 @@ namespace NFe.Service
                             retorna = "CancelarNfse";
                             break;
                         case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "RecepcionarLoteRps"; 
+                            retorna = "RecepcionarLoteRps";
                             break;
                     }
                     break;
@@ -1691,6 +1692,19 @@ namespace NFe.Service
                 AssinaturaDigital assDig = new AssinaturaDigital();
                 assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosNFe.cUF));
 
+                //Adicionar a tag do QRCode
+                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC) && dadosNFe.mod == "65")
+                {
+                    QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, NomeArquivoXML);
+
+                    if (qrCode.CalcularLink())
+                    {
+                        string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                        qrCode.GerarLinkConsulta(url);
+                        qrCode.AddLinkQRCode();
+                    }
+                }
+
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
                 ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(dadosNFe.cUF));
                 string cResultadoValidacao = validar.ValidarArqXML(NomeArquivoXML);
@@ -1747,7 +1761,6 @@ namespace NFe.Service
                     }
 
                     TFunctions.GravarArqErroServico(NomeArquivoXML, extFinal, extErro, ex);
-                    Functions.GravarErroMover(NomeArquivoXML, Empresas.Configuracoes[Empresas.FindEmpresaByThread()].PastaXmlRetorno, ex.ToString());
 
                     //Se já foi movido o XML da Nota Fiscal para a pasta em Processamento, vou ter que 
                     //forçar mover para a pasta de XML com erro neste ponto.

@@ -1,8 +1,8 @@
 #include ReadReg(HKEY_LOCAL_MACHINE,'Software\Sherlock Software\InnoTools\Downloader','ScriptPath','')
 
 [Setup]
-AppName=UniNFe - Monitor da Nota Fiscal Eletrônica
-AppVerName=UniNFe 4.6
+AppName=UniNFe - Monitor de Documentos Fiscais Eletrônicos
+AppVerName=UniNFe 5.0
 DefaultDirName={sd}\Unimake\UniNFe
 DefaultGroupName=Unimake Softwares
 SetupIconFile=C:\clipart\unimake\ICONES\Install.ico
@@ -15,10 +15,10 @@ LicenseFile=..\doc\usuario\licenca.txt
 AppPublisherURL=www.uninfe.com.br
 AppSupportURL=www.uninfe.com.br
 AppUpdatesURL=www.uninfe.com.br
-AppVersion=4.6
-AppSupportPhone=(044) 3423-4904
+AppVersion=5.0
+AppSupportPhone=(044) 3141-4900
 UninstallDisplayIcon={app}\uninfe.exe
-UninstallDisplayName=UniNFe - Monitor NFe
+UninstallDisplayName=UniNFe - Monitor DF-e
 AppPublisher=Unimake Softwares
 DisableProgramGroupPage=true
 DisableReadyPage=false
@@ -26,12 +26,12 @@ DisableFinishedPage=true
 WizardImageFile=C:\Program Files (x86)\Inno Setup 5\WizModernImage-IS.bmp
 WizardSmallImageFile=C:\Program Files (x86)\Inno Setup 5\WizModernSmallImage-IS.bmp
 OutputBaseFilename=iuninfe
-VersionInfoVersion=4.6
+VersionInfoVersion=5.0
 VersionInfoCompany=Unimake Softwares
-VersionInfoDescription=UniNFe - Monitor NFe
+VersionInfoDescription=UniNFe - Monitor DF-e
 VersionInfoCopyright=Unimake Softwares
 VersionInfoProductName=UniNFe
-VersionInfoProductVersion=4.6
+VersionInfoProductVersion=5.0
 OutputDir=\projetos\instaladores
 
 [Languages]
@@ -44,7 +44,6 @@ Source: ..\fontes\uninfe\bin\Release\NFe.Components.dll; DestDir: {app}; Flags: 
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.Info.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.Wsdl.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.ConvertTxt.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\NFe.Interface.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Service.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Settings.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Threadings.dll; DestDir: {app}; Flags: ignoreversion
@@ -61,7 +60,7 @@ Source: ..\fontes\NFe.Components.Wsdl\NFse\WSDL\*.*; DestDir: {app}\nfse\wsdl; F
 Source: ..\fontes\NFe.Components.Wsdl\NFse\schemas\*.*; DestDir: {app}\nfse\schemas; Flags: ignoreversion recursesubdirs
 
 [Icons]
-Name: {group}\UniNFe - Monitor NFe; Filename: {app}\uninfe.exe; WorkingDir: {app}; IconFilename: {app}\uninfe.exe; IconIndex: 0; Languages: ; Comment: Aplicativo responsável por monitorar os arquivos da nota fiscal eletrônica para assinar, validar e enviar ao SEFAZ
+Name: {group}\UniNFe - Monitor DF-e; Filename: {app}\uninfe.exe; WorkingDir: {app}; IconFilename: {app}\uninfe.exe; IconIndex: 0; Languages: ; Comment: Aplicativo responsável por monitorar os arquivos de documentos fiscais eletrônicos (NF-e, NFC-e, CT-e, MDF-e, NFS-e, etc.) para assinar, validar e enviar ao SEFAZ.
 Name: {group}\Links\www.uninfe.com.br; Filename: {app}\uninfe.url; IconFilename: {app}\uninfe.url; Flags: runmaximized
 
 [UninstallDelete]
