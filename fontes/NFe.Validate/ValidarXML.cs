@@ -311,9 +311,9 @@ namespace NFe.Validate
                 #region Adicionar a tag do qrCode na NFCe
                 if (Arquivo.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC))
+                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
                     {
-                        QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, Arquivo);
+                        QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, Arquivo);
 
                         if (qrCode.CalcularLink())
                         {

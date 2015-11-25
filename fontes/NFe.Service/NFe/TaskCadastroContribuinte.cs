@@ -58,8 +58,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML.Replace(".xml", ""),
-                                        NFe.Components.Propriedade.ExtRetorno.ConsCad_XML.Replace(".xml", ""));//"-cons-cad", "-ret-cons-cad");
+                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML,
+                                        NFe.Components.Propriedade.ExtRetorno.ConsCad_XML);
                 }
                 else
                 {

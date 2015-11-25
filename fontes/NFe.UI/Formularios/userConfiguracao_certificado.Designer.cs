@@ -36,11 +36,11 @@
             this.lblArquivoCertificado = new MetroFramework.Controls.MetroLabel();
             this.textBox_dadoscertificado = new MetroFramework.Controls.MetroTextBox();
             this.lblCerificadoInstalado = new MetroFramework.Controls.MetroLabel();
-            this.ckbCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
+            this.ckbUsarCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
             this.button_selecionar_certificado = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.ckbTemCertificadoInstalado = new MetroFramework.Controls.MetroCheckBox();
+            this.ckbUsaCertificado = new MetroFramework.Controls.MetroCheckBox();
             this.lblProvider = new MetroFramework.Controls.MetroLabel();
             this.cboProviders = new MetroFramework.Controls.MetroComboBox();
             this.btnBuscarProvider = new MetroFramework.Controls.MetroButton();
@@ -171,16 +171,16 @@
             this.lblCerificadoInstalado.TabIndex = 2;
             this.lblCerificadoInstalado.Text = "Informações do certificado digital selecionado:";
             // 
-            // ckbCertificadoInstalado
+            // ckbUsarCertificadoInstalado
             // 
-            this.ckbCertificadoInstalado.AutoSize = true;
-            this.ckbCertificadoInstalado.Location = new System.Drawing.Point(140, 3);
-            this.ckbCertificadoInstalado.Name = "ckbCertificadoInstalado";
-            this.ckbCertificadoInstalado.Size = new System.Drawing.Size(246, 15);
-            this.ckbCertificadoInstalado.TabIndex = 1;
-            this.ckbCertificadoInstalado.Text = "Utilizar certificado instalado no Windows ?";
-            this.ckbCertificadoInstalado.UseSelectable = true;
-            this.ckbCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbCertificadoInstalado_CheckedChanged);
+            this.ckbUsarCertificadoInstalado.AutoSize = true;
+            this.ckbUsarCertificadoInstalado.Location = new System.Drawing.Point(140, 3);
+            this.ckbUsarCertificadoInstalado.Name = "ckbUsarCertificadoInstalado";
+            this.ckbUsarCertificadoInstalado.Size = new System.Drawing.Size(246, 15);
+            this.ckbUsarCertificadoInstalado.TabIndex = 1;
+            this.ckbUsarCertificadoInstalado.Text = "Utilizar certificado instalado no Windows ?";
+            this.ckbUsarCertificadoInstalado.UseSelectable = true;
+            this.ckbUsarCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbCertificadoInstalado_CheckedChanged);
             // 
             // button_selecionar_certificado
             // 
@@ -203,16 +203,16 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // ckbTemCertificadoInstalado
+            // ckbUsaCertificado
             // 
-            this.ckbTemCertificadoInstalado.AutoSize = true;
-            this.ckbTemCertificadoInstalado.Location = new System.Drawing.Point(3, 3);
-            this.ckbTemCertificadoInstalado.Name = "ckbTemCertificadoInstalado";
-            this.ckbTemCertificadoInstalado.Size = new System.Drawing.Size(118, 15);
-            this.ckbTemCertificadoInstalado.TabIndex = 0;
-            this.ckbTemCertificadoInstalado.Text = "Utilizar certificado";
-            this.ckbTemCertificadoInstalado.UseSelectable = true;
-            this.ckbTemCertificadoInstalado.CheckedChanged += new System.EventHandler(this.ckbTemCertificadoInstalado_CheckedChanged);
+            this.ckbUsaCertificado.AutoSize = true;
+            this.ckbUsaCertificado.Location = new System.Drawing.Point(3, 3);
+            this.ckbUsaCertificado.Name = "ckbUsaCertificado";
+            this.ckbUsaCertificado.Size = new System.Drawing.Size(118, 15);
+            this.ckbUsaCertificado.TabIndex = 0;
+            this.ckbUsaCertificado.Text = "Utilizar certificado";
+            this.ckbUsaCertificado.UseSelectable = true;
+            this.ckbUsaCertificado.CheckedChanged += new System.EventHandler(this.ckbTemCertificadoInstalado_CheckedChanged);
             // 
             // lblProvider
             // 
@@ -266,7 +266,7 @@
             this.AutoScroll = true;
             this.Controls.Add(this.btnValidarProvider);
             this.Controls.Add(this.btnBuscarProvider);
-            this.Controls.Add(this.ckbTemCertificadoInstalado);
+            this.Controls.Add(this.ckbUsaCertificado);
             this.Controls.Add(this.lblProvider);
             this.Controls.Add(this.txtPinCertificado);
             this.Controls.Add(this.lblPinCertificado);
@@ -277,7 +277,7 @@
             this.Controls.Add(this.button_selecionar_certificado);
             this.Controls.Add(this.textBox_dadoscertificado);
             this.Controls.Add(this.lblCerificadoInstalado);
-            this.Controls.Add(this.ckbCertificadoInstalado);
+            this.Controls.Add(this.ckbUsarCertificadoInstalado);
             this.Controls.Add(this.cboProviders);
             this.Name = "userConfiguracao_certificado";
             this.Size = new System.Drawing.Size(715, 359);
@@ -298,10 +298,10 @@
         private System.Windows.Forms.PictureBox button_selecionar_certificado;
         private MetroFramework.Controls.MetroTextBox textBox_dadoscertificado;
         private MetroFramework.Controls.MetroLabel lblCerificadoInstalado;
-        private MetroFramework.Controls.MetroCheckBox ckbCertificadoInstalado;
+        private MetroFramework.Controls.MetroCheckBox ckbUsarCertificadoInstalado;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private MetroFramework.Controls.MetroCheckBox ckbTemCertificadoInstalado;
+        private MetroFramework.Controls.MetroCheckBox ckbUsaCertificado;
         private MetroFramework.Controls.MetroLabel lblProvider;
         private MetroFramework.Controls.MetroComboBox cboProviders;
         private MetroFramework.Controls.MetroButton btnBuscarProvider;

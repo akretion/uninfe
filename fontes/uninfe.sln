@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
@@ -37,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfe_ws", "uninfe_ws\unin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework.Demo", "MetroFramework\MetroFramework.Demo\MetroFramework.Demo.csproj", "{AF988819-4618-4852-9506-C1D06D04F6B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniNFe", "uninfe\UniNFe.csproj", "{347CF3C4-EE18-4D46-AABF-479B73BF85D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninfe", "uninfe\UniNFe.csproj", "{347CF3C4-EE18-4D46-AABF-479B73BF85D6}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution

@@ -534,15 +534,65 @@ namespace NFe.Service
             get { return chNFe.Substring(20, 2); }
         }
 
+        /// <summary>
+        /// Prorrogacao de ICMS
+        /// </summary>
+        public List<ProrrogacaoICMS> prorrogacaoICMS { get; set; }
+        /// <summary>
+        /// Cancelamento/Prorrogacao de ICMS
+        /// </summary>
+        public string idPedidoCancelado { get; set; }
+
+        public string idPedido { get; set; }
+        public RespPedido respPedido { get; set; }
+        public RespCancPedido respCancPedido { get; set; }
+
         public Evento()
         {
             epec = new EventoEPEC();
+            prorrogacaoICMS = new List<ProrrogacaoICMS>();
+            respPedido = new RespPedido();
+            respCancPedido = new RespCancPedido();
             verEvento = "1.00";
             versao = "1.00";
             tpEvento = "110110";
             tpEmis = 0;
         }
     }
+
+    public class RespPedido
+    {
+        public string statPrazo { get; set; }
+
+        public List<ItemPedido> itemPedido { get; set; }
+
+        public RespPedido()
+        {
+            itemPedido = new List<ItemPedido>();
+        }
+    }
+
+    public class ItemPedido
+    {
+        public Int32 numItem { get; set; }
+        public Int32 statPedido { get; set; }
+        public Int32 justStatus { get; set; }
+        public string justStaOutra { get; set; }
+    }
+
+    public class RespCancPedido
+    {
+        public Int32 statCancPedido { get; set; }
+        public Int32 justStatus { get; set; }
+        public string justStaOutra { get; set; }
+    }
+
+    public class ProrrogacaoICMS
+    {
+        public string numItem { get; set; }
+        public string qtdeItem { get; set; }
+    }
+
     public class EventoEPEC
     {
         public Int32 cOrgaoAutor { get; set; }

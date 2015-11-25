@@ -64,7 +64,9 @@ namespace NFe.Service
                 oInvocarObj.Invocar(wsProxy,
                                     oRecepcao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
-                                    oCabecMsg, this, "-env-lot", "-rec");
+                                    oCabecMsg, this, 
+                                    Propriedade.ExtEnvio.EnvLot,//"-env-lot", 
+                                    Propriedade.ExtRetorno.Rec);//"-rec");
                 #endregion
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo

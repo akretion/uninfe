@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.br.gov.egoverne.isscuritiba.curitiba.h;
+using NFe.Components.br.gov.pr.curitiba.pilotoisscuritiba.h;
 using System;
 using System.Collections.Generic;
 using System.Linq;

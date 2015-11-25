@@ -63,6 +63,14 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4125506-";
                             break;
 
+                        case 4113700: //Londrina-PR (SIGCORP_SIGISS)
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4113700-";
+                            break;
+
+                        case 2611606: //Recife-PE (ABRASF)
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-2611606-";
+                            break;
+
                         default:
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                             break;
@@ -110,6 +118,14 @@ namespace NFe.Components
                                             case "110111":  //XML de Envio de evento de cancelamento
                                             case "110113":  //XML de Envio do evento de contingencia EPEC, CTe
                                             case "110160":  //XML de Envio do evento de Registro Multimodal, CTe
+                                            case "111500":  //Evento pedido de prorrogação 1º. prazo
+                                            case "111501":  //Evento pedido de prorrogação 2º. prazo
+                                            case "111502":  //Evento Cancelamento de Pedido de Prorrogação 1º. Prazo
+                                            case "111503":  //Evento Cancelamento de Pedido de Prorrogação 2º. Prazo
+                                            case "411500":  //Evento Fisco Resposta ao Pedido de Prorrogação 1º prazo
+                                            case "411501":  //Evento Fisco Resposta ao Pedido de Prorrogação 2º prazo
+                                            case "411502":  //Evento Fisco Resposta ao Cancelamento de Prorrogação 1º prazo
+                                            case "411503":  //Evento Fisco Resposta ao Cancelamento de Prorrogação 2º prazo
                                                 nome = nome + evento;
                                                 break;
 

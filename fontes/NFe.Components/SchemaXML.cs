@@ -395,6 +395,112 @@ namespace NFe.Components
             });
             #endregion
 
+            #region Evento pedido de prorrogação 1º. prazo - 111500
+            InfSchemas.Add("NFE-envEvento111500", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "", //"NFe\\envPProrrogNFe_v1.0.xsd",
+                Descricao = "Evento pedido de prorrogação 1º. prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento pedido de prorrogação 2º. prazo - 111501
+            InfSchemas.Add("NFE-envEvento111501", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "", //"NFe\\envPProrrogNFe_v1.0.xsd",
+                Descricao = "Evento pedido de prorrogação 2º. prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento Cancelamento de Pedido de Prorrogação 1º. Prazo - 111502
+            InfSchemas.Add("NFE-envEvento111502", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "", //"NFe\\envCancelPProrrogNFe_v1.0.xsd",
+                Descricao = "Evento Cancelamento de pedido de prorrogação 1º. prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento Cancelamento de Pedido de Prorrogação 2º. Prazo - 111503
+            InfSchemas.Add("NFE-envEvento111503", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "", //"NFe\\envCancelPProrrogNFe_v1.0.xsd",
+                Descricao = "Evento Cancelamento de pedido de prorrogação 2º. prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            /*
+            #region Evento Fisco Resposta ao Pedido de Prorrogação 1º prazo - 411500
+            InfSchemas.Add("NFE-envEvento411500", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "NFe\\envFiscoNfe_v1.0.xsd",
+                Descricao = "Evento Fisco Resposta ao Pedido de Prorrogação 1º prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento Fisco Resposta ao Pedido de Prorrogação 2º prazo - 411501
+            InfSchemas.Add("NFE-envEvento411501", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "NFe\\envFiscoNfe_v1.0.xsd",
+                Descricao = "Evento Fisco Resposta ao Pedido de Prorrogação 2º prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento Fisco Resposta ao Pedido de Prorrogação 1º prazo - 411502
+            InfSchemas.Add("NFE-envEvento411502", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "NFe\\envFiscoNfe_v1.0.xsd",
+                Descricao = "Evento Fisco Resposta ao Cancelamento de Prorrogação 1º prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+
+            #region Evento Fisco Resposta ao Pedido de Prorrogação 2º prazo - 411503
+            InfSchemas.Add("NFE-envEvento411503", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = ++id,
+                ArquivoXSD = "NFe\\envFiscoNfe_v1.0.xsd",
+                Descricao = "Evento Fisco Resposta ao Cancelamento de Prorrogação 2º prazo",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
+            */
+
             #region XML Envio de consulta de nfe
             InfSchemas.Add("NFE-consNFeDest", new InfSchema()
             {

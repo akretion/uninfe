@@ -19,6 +19,7 @@ using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.EloTech;
 using NFe.Components.MGM;
+using NFe.Components.Consist;
 
 namespace NFe.Service.NFSe
 {
@@ -41,6 +42,10 @@ namespace NFe.Service.NFSe
 
             try
             {
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCanNfse) + Propriedade.ExtRetorno.CanNfse_ERR);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
+
                 oDadosPedCanNfse = new DadosPedCanNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 PedCanNfse(emp, NomeArquivoXML);
@@ -52,7 +57,8 @@ namespace NFe.Service.NFSe
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
-                    pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    if (wsProxy != null)
+                        pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
 
                 string cabecMsg = "";
@@ -113,7 +119,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SYSTEMPRO:
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
@@ -122,21 +128,20 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIGCORP_SIGISS:
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno,
-                            oDadosPedCanNfse.cMunicipio);
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedCanNfse.cMunicipio);
                         sigcorp.CancelarNfse(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedCanNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS,
-                        ConfiguracaoApp.ProxyUsuario,
-                        ConfiguracaoApp.ProxySenha,
-                        ConfiguracaoApp.ProxyServidor);
-
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedCanNfse.cMunicipio,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor);
 
                         AssinaturaDigital ass = new AssinaturaDigital();
                         ass.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
@@ -146,13 +151,13 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIMPLISS:
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedCanNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS,
-                        ConfiguracaoApp.ProxyUsuario,
-                        ConfiguracaoApp.ProxySenha,
-                        ConfiguracaoApp.ProxyServidor);
+                                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                oDadosPedCanNfse.cMunicipio,
+                                                Empresas.Configuracoes[emp].UsuarioWS,
+                                                Empresas.Configuracoes[emp].SenhaWS,
+                                                ConfiguracaoApp.ProxyUsuario,
+                                                ConfiguracaoApp.ProxySenha,
+                                                ConfiguracaoApp.ProxyServidor);
 
                         AssinaturaDigital sing = new AssinaturaDigital();
                         sing.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
@@ -162,10 +167,10 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.CONAM:
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedCanNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                oDadosPedCanNfse.cMunicipio,
+                                                Empresas.Configuracoes[emp].UsuarioWS,
+                                                Empresas.Configuracoes[emp].SenhaWS);
 
                         conam.CancelarNfse(NomeArquivoXML);
                         break;
@@ -197,7 +202,7 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-                        
+
                         el.CancelarNfse(NomeArquivoXML);
                         #endregion
                         break;
@@ -255,7 +260,20 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.NATALENSE:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
+                    case PadroesNFSe.CONSIST:
+                        #region Consist
+                        Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedCanNfse.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
 
+                        consist.CancelarNfse(NomeArquivoXML);
+                        break;
+                        #endregion
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
@@ -265,7 +283,10 @@ namespace NFe.Service.NFSe
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this, "-ped-cannfse", "-cannfse", padraoNFSe, Servico);
+                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this,
+                                            Propriedade.ExtEnvio.PedCanNfse,   //"-ped-cannfse", 
+                                            Propriedade.ExtRetorno.CanNfse,   //"-cannfse", 
+                                            padraoNFSe, Servico);
 
                     ///
                     /// grava o arquivo no FTP
@@ -313,15 +334,15 @@ namespace NFe.Service.NFSe
         {
             //int emp = Empresas.FindEmpresaByThread();
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(arquivoXML);
 
-            XmlNodeList infCancList = doc.GetElementsByTagName("CancelarNfseEnvio");
+            //XmlNodeList infCancList = doc.GetElementsByTagName("CancelarNfseEnvio");
 
-            foreach (XmlNode infCancNode in infCancList)
-            {
-                XmlElement infCancElemento = (XmlElement)infCancNode;
-            }
+            //foreach (XmlNode infCancNode in infCancList)
+            //{
+            //    XmlElement infCancElemento = (XmlElement)infCancNode;
+            //}
         }
         #endregion
 
@@ -334,37 +355,6 @@ namespace NFe.Service.NFSe
             ///danasa: 12/2013
             NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosPedCanNfse.cMunicipio);
             val.EncryptAssinatura(NomeArquivoXML);
-
-            /*
-            string arquivoXML = NomeArquivoXML;
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
-
-            XmlNodeList pedidoCancelamentoNFeList = doc.GetElementsByTagName("PedidoCancelamentoNFe");
-
-            foreach (XmlNode pedidoCancelamentoNFeNode in pedidoCancelamentoNFeList)
-            {
-                XmlElement pedidoCancelamentoNFeElemento = (XmlElement)pedidoCancelamentoNFeNode;
-
-                XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
-
-                foreach (XmlNode detalheNode in detalheList)
-                {
-                    XmlElement detalheElement = (XmlElement)detalheNode;
-
-
-                    if (detalheElement.GetElementsByTagName("AssinaturaCancelamento").Count != 0)
-                    {
-                        //Encryptar a tag Assinatura
-                        detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
-                            detalheElement.GetElementsByTagName("AssinaturaCancelamento")[0].InnerText);
-                    }
-                }
-            }
-
-            //Salvar o XML com as alterações efetuadas
-            doc.Save(arquivoXML);*/
         }
         #endregion
     }

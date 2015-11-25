@@ -216,17 +216,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://pilotoisscuritiba.curitiba.pr.gov.br/nfse_ws/nfsews.asmx")]
-        public string NFe_Components_br_gov_egoverne_isscuritiba_curitiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
-            get {
-                return ((string)(this["NFe_Components_br_gov_egoverne_isscuritiba_curitiba_h_WS_x0020___x0020_NFS_e_x002" +
-                    "0_V1_0_0_1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://isscuritiba.curitiba.pr.gov.br/Iss.NfseWebService/nfsews.asmx")]
         public string NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
             get {
@@ -588,6 +577,69 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_fgmaiss_www_p_penapolis_cancela_webservice {
             get {
                 return ((string)(this["NFe_Components_br_com_fgmaiss_www_p_penapolis_cancela_webservice"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://pilotoisscuritiba.curitiba.pr.gov.br/nfse_ws/nfsews.asmx")]
+        public string NFe_Components_br_gov_pr_curitiba_pilotoisscuritiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_curitiba_pilotoisscuritiba_h_WS_x0020___x0020_NFS_e_x002" +
+                    "0_V1_0_0_1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://igarape.sigiss.com.br:443/igarape/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_igarape_p_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_igarape_p_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://200.162.29.193:8082/axis2/services/eISSWService.eISSWServiceHttpSoap11Endp" +
+            "oint/")]
+        public string NFe_Components_br_com_consist_patosdeminas_h_eISSWService {
+            get {
+                return ((string)(this["NFe_Components_br_com_consist_patosdeminas_h_eISSWService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://200.162.29.193:8080/axis2/services/eISSWService.eISSWServiceHttpSoap11Endp" +
+            "oint/")]
+        public string NFe_Components_br_com_consist_patosdeminas_p_eISSWService {
+            get {
+                return ((string)(this["NFe_Components_br_com_consist_patosdeminas_p_eISSWService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse00.el.com.br:19080/nfse_es_colatina/RpsService")]
+        public string NFe_Components_br_com_el_colatina_p_RpsServiceService {
+            get {
+                return ((string)(this["NFe_Components_br_com_el_colatina_p_RpsServiceService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testeigarape.sigiss.com.br:443/testeigarape/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_testeigarape_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_testeigarape_WebService_SigISS"]));
             }
         }
     }

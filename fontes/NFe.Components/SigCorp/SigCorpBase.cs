@@ -37,8 +37,12 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new NFe.Components.SigCorp.CianortePR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3130101: //Igarapé-MG
+                                sigCorpService = new NFe.Components.SigCorp.IgarapeMG.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
-                                throw new Exception(); // não tem                                
+                                throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
                     else
                         switch (CodigoMun)
@@ -71,8 +75,12 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new NFe.Components.SigCorp.CianortePR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3130101: //Igarape-MG
+                                sigCorpService = new NFe.Components.SigCorp.IgarapeMG.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
                             default:
-                                throw new Exception(); // não tem                                
+                                throw new Exception("Município não implementado para o ambiente de produção no padrão SIGCORP/SIGISS.");
                         }
                 }
                 return sigCorpService;

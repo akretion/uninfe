@@ -528,6 +528,7 @@ namespace NFe.Settings
             new loadResources().load();
 
             ConfiguracaoApp.CarregarDados();
+            ConfiguracaoApp.DownloadArquivoURLConsultaDFe();
 
             if (!Propriedade.ServicoRodando || Propriedade.ExecutandoPeloUniNFe)
                 ConfiguracaoApp.CarregarDadosSobre();
@@ -538,13 +539,14 @@ namespace NFe.Settings
         }
         #endregion
 
-        #region URLs do Estados
+        private static string LocalFile { get { return Application.StartupPath + "\\sefaz.inc"; } }
+
+        #region URLs do Estados p/ ConsultaDFe
         public static EstadoURLConsultaDFe CarregarURLConsultaDFe(string uf)
         {
-            string LocalFile = Application.StartupPath + "\\sefaz.inc";
             EstadoURLConsultaDFe estado = new EstadoURLConsultaDFe();
 
-            if (DownloadArquivoURLConsultaDFe())
+            if (File.Exists(LocalFile)) //if (DownloadArquivoURLConsultaDFe())
             {
                 var inifile = new IniFile(LocalFile);
 
@@ -558,36 +560,38 @@ namespace NFe.Settings
             return estado;
         }
 
-        private static bool DownloadArquivoURLConsultaDFe()
+        public static void DownloadArquivoURLConsultaDFe(bool forceDownload = false)
         {
             string URL = "http://www.unimake.com.br/pub/downloads/sefaz.inc";
-            string LocalFile = Application.StartupPath + "\\sefaz.inc";
             HttpWebRequest webRequest = null;
             HttpWebResponse webResponse = null;
             Stream strResponse = null;
             Stream strLocal = null;
             bool result = true;
-            DateTime dateFile = new DateTime(2000, 1, 1);
 
             if (File.Exists(LocalFile))
             {
-                dateFile = File.GetCreationTime(LocalFile).Date;
-            }
+                if (!forceDownload)
+                {
+                    DateTime dateFile = File.GetCreationTime(LocalFile).Date;
 
-            double lastUpdate = (DateTime.Now.Date - dateFile).TotalDays;
+                    double lastUpdate = (DateTime.Now.Date - dateFile).TotalDays;
 
-            // Vai rodar atualização do arquivo somente se tiver mais que 30 dias
-            if (lastUpdate < 30)
-            {
-                return result;
-            }
-
-            // Vamos deletar para fazer o download novamente
-            if (File.Exists(LocalFile))
-            {
+                    if (lastUpdate == 0)//mesmo dia?
+                    {
+                        if ((DateTime.Now.Date - dateFile).TotalHours <= 0)
+                            return;
+                    }
+                    else
+                        // Vai rodar atualização do arquivo somente se tiver mais que 30 dias
+                        if (lastUpdate < 30)
+                        {
+                            return;// result;
+                        }
+                }
+                // Vamos deletar para fazer o download novamente
                 File.Delete(LocalFile);
             }
-
             using (WebClient Client = new WebClient())
             {
                 try
@@ -659,9 +663,18 @@ namespace NFe.Settings
                     webResponse.Close();
                 }
 
-                return result;
+                if (result)
+                {
+                    if (Empresas.Configuracoes != null)
+                        foreach (var empresa in Empresas.Configuracoes)
+                        {
+                            string uf = Empresas.GetUF(empresa.UnidadeFederativaCodigo);
+                            if (uf != null)
+                                empresa.URLConsultaDFe = ConfiguracaoApp.CarregarURLConsultaDFe(uf);
+                        }
+                }
+                //return result;
             }
-
         }
         #endregion
 
@@ -916,27 +929,9 @@ namespace NFe.Settings
         /// <param name="tpEmis">Tipo de emissão do XML</param>
         /// <param name="padraoNFSe">Padrão da NFSe</param>
         /// <param name="versao">Versão do XML</param>
-        /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao)
-        {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, padraoNFSe, versao, string.Empty);
-        }
-        #endregion
-
-        #region DefinirWS()
-        /// <summary>
-        /// Definir o webservice que será utilizado para o envio do XML
-        /// </summary>
-        /// <param name="servico">Serviço que será executado</param>
-        /// <param name="emp">Index da empresa que será executado o serviço</param>
-        /// <param name="cUF">Código da UF</param>
-        /// <param name="tpAmb">Código do ambiente que será acessado</param>
-        /// <param name="tpEmis">Tipo de emissão do XML</param>
-        /// <param name="padraoNFSe">Padrão da NFSe</param>
-        /// <param name="versao">Versão do XML</param>
         /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao, string mod)
+        private static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao, string mod)
         {
             WebServiceProxy wsProxy = null;
             string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "") + (!string.IsNullOrEmpty(mod) ? " " + mod : "");
@@ -962,7 +957,8 @@ namespace NFe.Settings
                                                   Empresas.Configuracoes[emp].X509Certificado,
                                                   padraoNFSe,
                                                   (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
-                                                  servico);
+                                                  servico,
+                                                  tpEmis);
 
                     Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
                 }
@@ -1530,11 +1526,11 @@ namespace NFe.Settings
 
                 if (empresaValidada.Servico == TipoAplicativo.NFCe)
                 {
-                    if (!string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    if (!string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
                     {
                         throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
                     }
-                    else if (string.IsNullOrEmpty(empresaValidada.IndentificadorCSC) && ! string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    else if (string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && ! string.IsNullOrEmpty(empresaValidada.TokenCSC))
                     {
                         throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
                     }
@@ -2029,7 +2025,7 @@ namespace NFe.Settings
                         throw new Exception(NFeStrConstants.proxyError);
                     }
                     Empresas.Configuracoes[emp].RemoveEndSlash();
-                    Empresas.CriarPasta();
+                    Empresas.CriarPasta(false);
 
                     ///
                     /// salva a configuracao da empresa
@@ -2075,6 +2071,8 @@ namespace NFe.Settings
                 Empresas.CreateLockFile(true);
                 #endregion
             }
+            else
+                ConfiguracaoApp.DownloadArquivoURLConsultaDFe(true);
 
             //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
             FileInfo arqInfo = new FileInfo(cArquivoXml);

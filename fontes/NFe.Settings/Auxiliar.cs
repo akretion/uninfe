@@ -40,7 +40,7 @@ namespace NFe.Settings
                     {
                         //Grava arquivo de ERRO para o ERP
                         string cArqErro = Path.Combine(fFolder, Path.GetFileName(Arquivo));
-                        File.WriteAllText(cArqErro, Erro, Encoding.Default);
+                        File.WriteAllText(cArqErro, Erro);//, Encoding.Default);
                     }
                 }
                 catch (Exception ex)
@@ -256,19 +256,28 @@ namespace NFe.Settings
                     if (string.IsNullOrEmpty(servico))
                         servico = Propriedade.TipoAplicativo.ToString();
 
-                    if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                    Empresa emp = new Empresa() { 
+                        Nome = nome, 
+                        CNPJ = cnpj, 
+                        Servico =  (NFe.Components.TipoAplicativo)Enum.Parse(typeof(NFe.Components.TipoAplicativo), servico, true)
+                    };
+
+                    if (File.Exists(emp.NomeArquivoConfig))
                     {
+                        if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                        {
+                            codEmp++;
+                            continue;
+                        }
+                        empresa.Add(new ComboElem
+                        {
+                            Valor = cnpj,
+                            Codigo = codEmp,
+                            Nome = nome + "  <" + servico + ">",
+                            Servico = servico
+                        });
                         codEmp++;
-                        continue;
                     }
-                    empresa.Add(new ComboElem
-                    {
-                        Valor = cnpj,
-                        Codigo = codEmp,
-                        Nome = nome + "  <" + servico + ">",
-                        Servico = servico
-                    });
-                    codEmp++;
                 }
             }
             empresa.Sort(new OrdenacaoPorNome());

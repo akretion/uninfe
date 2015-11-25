@@ -168,7 +168,7 @@ namespace NFe.UI.Formularios
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                 checkBoxCompactaNFe.Checked = this.empresa.CompactarNfe;
                 cbIndSinc.Checked = this.empresa.IndSinc;
-                edtIdentificadorCSC.Text = this.empresa.IndentificadorCSC;
+                edtIdentificadorCSC.Text = this.empresa.IdentificadorCSC;
                 edtTokenCSC.Text = this.empresa.TokenCSC;
 
                 cboDiretorioSalvarComo.Text = this.empresa.DiretorioSalvarComo;
@@ -262,7 +262,7 @@ namespace NFe.UI.Formularios
             this.empresa.Servico = (TipoAplicativo)this.cbServico.SelectedValue;
             this.empresa.SenhaWS = this.txtSenhaWS.Text;
             this.empresa.UsuarioWS = this.txtUsuarioWS.Text;
-            this.empresa.IndentificadorCSC = this.edtIdentificadorCSC.Text;
+            this.empresa.IdentificadorCSC = this.edtIdentificadorCSC.Text;
             this.empresa.TokenCSC = this.edtTokenCSC.Text;
 
             return true;
@@ -317,7 +317,10 @@ namespace NFe.UI.Formularios
                            ufCod == 2930709 /*Simoes Filho*/||
                            ufCod == 3553807 /*Taquaritua*/||
                            ufCod == 3512902 /*Cosmorama*/||
-                           ufCod == 3515004 /*Embu das Artes*/;
+                           ufCod == 3515004 /*Embu das Artes*/||
+                           ufCod == 3148004 /*Patos de Minas*/||
+                           ufCod == 3506508 /*Birigui*/||
+                           ufCod == 3201506 /*Colatina*/;
 
             lbl_UsuarioWS.Visible =
                 lbl_SenhaWS.Visible =

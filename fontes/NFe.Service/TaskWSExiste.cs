@@ -282,7 +282,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                 {
                     outStr.AppendFormat("servicos|{0}", outServicos.Substring(0, outServicos.Length - 1));
                 }
-                System.IO.File.WriteAllText(nomeArquivoRetorno, outStr.ToString(), Encoding.Default);
+                System.IO.File.WriteAllText(nomeArquivoRetorno, outStr.ToString());//, Encoding.Default);
             }
             catch (Exception ex)
             {

@@ -1430,8 +1430,11 @@ namespace NFe.Service
                     try
                     {
                         string windir = Environment.GetEnvironmentVariable("windir");
-                        string path = Path.Combine(windir, @"microsoft.net\framework\v2.0.50727\installutil");
-
+#if x64
+                        string path = Path.Combine(windir, @"Microsoft.NET\Framework64\v2.0.50727\installutil");
+#else
+                        string path = Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727\installutil");
+#endif
                         Microsoft.Win32.RegistryKey ndpKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\", false);
                         foreach (string versionKeyName in ndpKey.GetSubKeyNames())
                         {
@@ -1440,7 +1443,11 @@ namespace NFe.Service
                                 Microsoft.Win32.RegistryKey ndpKey4 = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\v4.0.30319\", false);
                                 foreach (var v in ndpKey4.GetSubKeyNames())
                                 {
-                                    path = Path.Combine(windir, @"microsoft.net\framework\v4.0.30319\installutil");
+#if x64
+                                    path = Path.Combine(windir, @"Microsoft.NET\Framework64\v4.0.30319\installutil");
+#else
+                                    path = Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\installutil");
+#endif
                                     break;
                                 }
                             }

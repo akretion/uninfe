@@ -46,8 +46,8 @@ namespace NFe.Service
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, 
-                                    Propriedade.ExtEnvio.MDFeConsNaoEnc.Replace(".xml",""), 
-                                    Propriedade.ExtRetorno.MDFeConsNaoEnc.Replace(".xml",""));
+                                    Propriedade.ExtEnvio.MDFeConsNaoEnc,    //.Replace(".xml",""), 
+                                    Propriedade.ExtRetorno.MDFeConsNaoEnc); //.Replace(".xml",""));
             }
             catch (Exception ex)
             {

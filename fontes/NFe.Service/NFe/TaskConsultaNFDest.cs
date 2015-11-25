@@ -50,8 +50,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        Propriedade.ExtEnvio.ConsNFeDest_XML.Replace(".xml", ""),
-                                        Propriedade.ExtRetorno.retConsNFeDest_XML.Replace(".xml", ""));
+                                        Propriedade.ExtEnvio.ConsNFeDest_XML,
+                                        Propriedade.ExtRetorno.retConsNFeDest_XML);
 
                     //Ler o retorno
                     this.LerRetornoConsultaNFeDest(emp);

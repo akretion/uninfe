@@ -33,7 +33,7 @@ namespace NFe.Service
             try
             {
                 //Ler o XML para pegar parâmetros de envio
-                EnvEvento(emp, dadosEnvEvento);//, NFe.Components.TpcnResources.chNFe.ToString());
+                EnvEvento(emp, dadosEnvEvento);
 
                 string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui caso haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
@@ -47,6 +47,14 @@ namespace NFe.Service
                         break;
                     case ConvertTxt.tpEventos.tpEvEPEC:
                         Servico = Servicos.EventoEPEC;
+                        break;
+                    case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_2:
+                        Servico = Servicos.EventoRecepcao;
                         break;
                     default:
                         Servico = Servicos.EventoManifestacaoDest;
@@ -423,7 +431,57 @@ namespace NFe.Service
                 ///epec.dest.vICMS|1.00
                 ///epec.dest.vST|2.00
 
+                /// --------------------------------------------
+                ///<<<<Evento pedido de prorrogação de ICMS | Evento cancelamento de pedido de prorrogação de ICMS>>>>
+                ///idLote|000000000015255
+                ///evento|1
+                ///Id|ID2102403511031029073900013955001000000001105112804102
+                ///cOrgao|35
+                ///tpAmb|2
+                ///CNPJ|10290739000139 
+                ///chNFe|35110310290739000139550010000000011051128041
+                ///dhEvento|2011-03-03T08:06:00-03:00
+                ///tpEvento|111500 ou 111501 ou 111502 ou 111503
+                ///nSeqEvento|1
+                ///verEvento|1.00
+                ///descEvento|Pedido de Prorrogacao                                             <<opcional
+                ///nProt|0000000000001
+                ///itemPedido.numItem|1
+                ///itemPedido.qtdeItem|1
+                ///
+                ///descEvento|Cancelamento de Pedido de Prorrogacao                             <<opcional
+                ///nProt|0000000000001
+                ///idPedidoCancelado|ID999999CHAVE-NFE-9
+
+
+                /// --------------------------------------------
+                ///<<<<Evento Fisco Resposta ao Pedido de Prorrogação>>>>
+                ///idLote|000000000015255
+                ///evento|1
+                ///Id|ID2102403511031029073900013955001000000001105112804102
+                ///cOrgao|35
+                ///tpAmb|2
+                ///CNPJ|10290739000139 
+                ///chNFe|35110310290739000139550010000000011051128041
+                ///dhEvento|2011-03-03T08:06:00-03:00
+                ///tpEvento|411500 ou 411501 ou 411502 ou 411503
+                ///nSeqEvento|1
+                ///verEvento|1.00
+                ///descEvento|Fisco – Prorrogação ICMS remessa para industrialização            <<opcional
+                ///idPedido|
+                ///respPedido.statPrazo|
+                ///respPedido.itemPedido.numItem|
+                ///respPedido.itemPedido.statPedido|
+                ///respPedido.itemPedido.justStatus|
+                ///respPedido.itemPedido.justStaOutra|
+                ///respCancPedido.statCancPedido|
+                ///respCancPedido.justStatus|
+                ///respCancPedido.justStaOutra|
+
                 List<string> cLinhas = Functions.LerArquivo(this.NomeArquivoXML);
+                ProrrogacaoICMS lpcICMS = null;
+                ItemPedido itemPedido = null;
+                const string err0 = "Informe a linha \"respPedido.itemPedido.numItem\"";
 
                 foreach (string cTexto in cLinhas)
                 {
@@ -486,6 +544,59 @@ namespace NFe.Service
                         case "nprot":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nProt = dados[1].Trim();
                             break;
+                        ///
+                        /// Prorrogacao/Cancelamento de ICMS
+                        /// 
+                        case "itempedido.numitem":
+                            lpcICMS = new ProrrogacaoICMS() { numItem = dados[1].Trim() };
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].prorrogacaoICMS.Add(lpcICMS);
+                            break;
+                        case "itempedido.qtdeitem":
+                            if (lpcICMS == null) throw new Exception("Informe a linha \"itemPedido.numItem\"");
+                            lpcICMS.qtdeItem = dados[1].Trim();
+                            lpcICMS = null;
+                            break;
+                        case "idpedidocancelado":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].idPedidoCancelado = dados[1].Trim();
+                            break;
+                        ///
+                        /// Fisco – Prorrogação ICMS remessa para industrialização
+                        /// 
+                        case "idpedido":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].idPedido = dados[1].Trim();
+                            break;
+                        case "resppedido.statprazo":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].respPedido.statPrazo = dados[1].Trim();
+                            break;
+                        case "resppedido.itempedido.numitem":
+                            itemPedido = new ItemPedido() { numItem = Convert.ToInt32("0" + dados[1].Trim()) };
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].respPedido.itemPedido.Add(itemPedido);
+                            break;
+                        case "resppedido.itempedido.statpedido":
+                            if (itemPedido == null) throw new Exception(err0);
+                            itemPedido.statPedido = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "resppedido.itempedido.juststatus":
+                            if (itemPedido == null) throw new Exception(err0);
+                            itemPedido.justStatus = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "resppedido.itempedido.juststaoutra":
+                            if (!string.IsNullOrEmpty(dados[1].Trim()))
+                            {
+                                if (itemPedido == null) throw new Exception(err0);
+                                itemPedido.justStaOutra = dados[1].Trim();
+                            }
+                            break;
+                        case "respcancpedido.statcancpedido":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].respCancPedido.statCancPedido = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "respcancpedido.juststatus":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].respCancPedido.justStatus = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+                        case "respcancpedido.juststaoutra":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].respCancPedido.justStaOutra = dados[1].Trim();
+                            break;
+
                         ///
                         /// EPEC
                         /// 
@@ -551,11 +662,31 @@ namespace NFe.Service
                         case ConvertTxt.tpEventos.tpEvRegistroPassagem:
                         case ConvertTxt.tpEventos.tpEvRegistroPassagemBRid:
                             break;
+                        case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_1: //pedido de prorrogacao 1
+                        case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_2: //pedido de prorrogacao 2
+                            if (string.IsNullOrEmpty(evento.descEvento))
+                                evento.descEvento = "Pedido de Prorrogacao";
+                            break;
+                        case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1: //pedido de cancelamento 1
+                        case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2: //pedido de cancelamento 2
+                            if (string.IsNullOrEmpty(evento.descEvento))
+                                evento.descEvento = "Cancelamento de Pedido de Prorrogacao";
+                            break;
+                        case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_1:
+                        case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_2:
+                        case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
+                        case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
+                            if (string.IsNullOrEmpty(evento.descEvento))
+                                evento.descEvento = "Fisco – Prorrogacao ICMS remessa para industrializacao";
+                            break;
                     }
                     if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = EnumHelper.GetDescription(tpe);
 
                     if (string.IsNullOrEmpty(evento.verEvento))
                         evento.verEvento = "1.00";
+
+                    if (evento.nSeqEvento == 0)
+                        evento.nSeqEvento = 1;
 
                     if (evento.tpAmb == 0)
                         evento.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
@@ -612,38 +743,7 @@ namespace NFe.Service
                 //  </evento>
                 //</envEvento>
 
-                base.EnvEvento(emp, dadosEnvEvento);//, chNFe_chCTe_chMDFe);
-                /**************
-                bool doSave = false;
-
-                XmlDocument doc = new XmlDocument();
-                doc.Load(arquivoXML);
-
-                XmlNodeList envEventoList = doc.GetElementsByTagName("infEvento");
-
-                foreach (XmlNode envEventoNode in envEventoList)
-                {
-                    XmlElement envEventoElemento = (XmlElement)envEventoNode;
-
-                    dadosEnvEvento.eventos.Add(new Evento());
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEvento = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText;
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpAmb = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpAmb.ToString())[0].InnerText);
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].cOrgao = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.cOrgao.ToString())[0].InnerText);
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe = envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0].InnerText;
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].nSeqEvento = Convert.ToInt32("0" + envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.nSeqEvento.ToString())[0].InnerText);
-                    dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].chNFe.Substring(34, 1));
-
-                    if (envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
-                    {
-                        dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
-                        /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(envEventoElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
-                        /// salvo o arquivo modificado
-                        doSave = true;
-                    }
-                }
-                if (doSave) doc.Save(arquivoXML);
-                 * ***************/
+                base.EnvEvento(emp, dadosEnvEvento);
             }
         }
         #endregion

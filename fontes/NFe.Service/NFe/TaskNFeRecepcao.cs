@@ -87,19 +87,19 @@ namespace NFe.Service
                                         oRecepcao,
                                         nOperacao,
                                         oCabecMsg,
-                                        this); 
+                                        this);
 
                     Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oRecepcao, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oRecepcao,
                                         nOperacao,
-                                        oCabecMsg, 
-                                        this, 
-                                        "-env-lot", 
-                                        "-rec");
+                                        oCabecMsg,
+                                        this,
+                                        Propriedade.ExtEnvio.EnvLot,
+                                        Propriedade.ExtRetorno.Rec);
 
                     Recibo(vStrXmlRetorno);
                 }
@@ -151,7 +151,10 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
+                    if (Empresas.Configuracoes[emp].IndSinc)
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    else
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
                 }
                 catch
                 {
@@ -164,7 +167,10 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex, false);
+                    if (Empresas.Configuracoes[emp].IndSinc)
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex, false);
+                    else
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex, false);
                 }
                 catch
                 {
@@ -177,7 +183,10 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
+                    if (Empresas.Configuracoes[emp].IndSinc)
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    else
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
                 }
                 catch
                 {

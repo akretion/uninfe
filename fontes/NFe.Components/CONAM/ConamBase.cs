@@ -24,26 +24,27 @@ namespace NFe.Components.Conam
             {
                 if (conamService == null)
                 {
-                    if (tpAmb == TipoAmbiente.taHomologacao)
-                        switch (CodigoMun)
-                        {
-                            case 3170701: //Varginha-MG
-                                conamService = new NFe.Components.Conam.VarginhaMG.h.ConamH(tpAmb, PastaRetorno, Usuario, SenhaWs);
-                                break;
+                    switch (CodigoMun)
+                    {
+                        case 3170701:   //Varginha-MG
+                        case 3507001:   //Boituva
+                        case 3525300:   //Jau
+                        case 3528502:   //Mairipora
+                        case 3526902:   //Limeira
+                        case 3539806:   //Poa
+                        case 3552809:   //Taboao da Serra
+                        case 3554102:   //Taubate
+                        case 3509007:   //Caieiras
+                        case 3522208:   //Itapecerica da Serra
+                            //if (tpAmb == TipoAmbiente.taHomologacao)
+                                conamService = new NFe.Components.Conam.VarginhaMG.h.ConamH(tpAmb, PastaRetorno, Usuario, SenhaWs, CodigoMun);
+                            //else
+                                //conamService = new NFe.Components.Conam.VarginhaMG.p.ConamP(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                            break;
 
-                            default:
-                                throw new Exceptions.ServicoInexistenteException();
-                        }
-                    else
-                        switch (CodigoMun)
-                        {
-                            case 3170701: //Varginha-MG
-                                conamService = new NFe.Components.Conam.VarginhaMG.p.ConamP(tpAmb, PastaRetorno, Usuario, SenhaWs);
-                                break;
-
-                            default:
-                                throw new Exceptions.ServicoInexistenteException();
-                        }
+                        default:
+                            throw new Exceptions.ServicoInexistenteException();
+                    }
                 }
                 return conamService;
             }
@@ -91,7 +92,5 @@ namespace NFe.Components.Conam
             ConamService.ConsultarNfsePorRps(file);
         }
         #endregion
-
-
     }
 }

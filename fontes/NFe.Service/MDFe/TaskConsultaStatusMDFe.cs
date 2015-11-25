@@ -53,7 +53,7 @@ namespace NFe.Service
                 wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, "-ped-sta", "-sta");
+                oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, Propriedade.ExtEnvio.PedSta_XML, Propriedade.ExtRetorno.Sta_XML);
             }
             catch (Exception ex)
             {

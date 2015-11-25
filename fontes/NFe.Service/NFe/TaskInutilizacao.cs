@@ -61,7 +61,9 @@ namespace NFe.Service
                     oInvocarObj.Invocar(wsProxy, 
                                         oInutilizacao, 
                                         wsProxy.NomeMetodoWS[0],
-                                        oCabecMsg, this, "-ped-inu", "-inu");
+                                        oCabecMsg, this,
+                                        Propriedade.ExtEnvio.PedInu_XML, 
+                                        Propriedade.ExtRetorno.Inu_XML);
 
                     //Ler o retorno do webservice
                     LerRetornoInut();

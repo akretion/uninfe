@@ -42,8 +42,8 @@ namespace NFe.UI.Formularios
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 160;
-            ckbTemCertificadoInstalado.Checked = empresa.UsaCertificado;
-            ckbTemCertificadoInstalado.Enabled = (empresa.Servico == TipoAplicativo.Nfse);
+            ckbUsaCertificado.Checked = empresa.UsaCertificado;
+            ckbUsaCertificado.Enabled = (empresa.Servico == TipoAplicativo.Nfse);
 
             oMeuCert = null;
 
@@ -62,7 +62,7 @@ namespace NFe.UI.Formularios
                     oMeuCert = empresa.X509Certificado;
                 }
 
-                ckbCertificadoInstalado.Checked = empresa.CertificadoInstalado;
+                ckbUsarCertificadoInstalado.Checked = empresa.CertificadoInstalado;
                 if (empresa.CertificadoInstalado)
                 {
                     DemonstraDadosCertificado();
@@ -80,7 +80,7 @@ namespace NFe.UI.Formularios
                 oMeuCert = null;
         }
 
-        public void ProvidersCertificado()
+        private void ProvidersCertificado()
         {
             CertificadoDigital oCertificado = new CertificadoDigital();
             List<CertProviders> providers = new List<CertProviders>();
@@ -101,14 +101,17 @@ namespace NFe.UI.Formularios
 
         public void Validar(bool salvando = true)
         {
-            empresa.CertificadoInstalado = ckbCertificadoInstalado.Checked && ckbTemCertificadoInstalado.Checked;
-            empresa.CertificadoArquivo = ckbTemCertificadoInstalado.Checked ? txtArquivoCertificado.Text : "";
-            empresa.CertificadoSenha = ckbTemCertificadoInstalado.Checked ? txtSenhaCertificado.Text : "";
-            empresa.Certificado = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString()) : "");
-            empresa.CertificadoDigitalThumbPrint = (ckbTemCertificadoInstalado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
-            empresa.CertificadoPIN = ckbTemCertificadoInstalado.Checked ? txtPinCertificado.Text : "";
-            empresa.UsaCertificado = ckbTemCertificadoInstalado.Checked;
-            if (ckbTemCertificadoInstalado.Checked)
+            empresa.CertificadoInstalado = ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked;
+            empresa.CertificadoArquivo = ckbUsaCertificado.Checked ? txtArquivoCertificado.Text : "";
+            empresa.CertificadoSenha = ckbUsaCertificado.Checked ? txtSenhaCertificado.Text : "";
+            empresa.Certificado = (ckbUsaCertificado.Checked ? (this.oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString()) : "");
+            empresa.CertificadoDigitalThumbPrint = (ckbUsaCertificado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
+            empresa.CertificadoPIN = ckbUsaCertificado.Checked ? txtPinCertificado.Text : "";
+            empresa.UsaCertificado = ckbUsaCertificado.Checked;
+            empresa.ProviderCertificado = 
+                empresa.ProviderTypeCertificado = "";
+
+            if (ckbUsaCertificado.Checked)
             {
                 if (!String.IsNullOrEmpty(empresa.CertificadoPIN))
                 {
@@ -120,9 +123,6 @@ namespace NFe.UI.Formularios
 
                     if (salvando)
                         ValidarCertificadoA3(true);
-                }
-                if (cboProviders.SelectedItem != null)
-                {
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace NFe.UI.Formularios
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
-            if (this.ckbCertificadoInstalado.Checked)
+            if (this.ckbUsarCertificadoInstalado.Checked)
             {
                 CertificadoDigital oCertDig = new CertificadoDigital();
 
@@ -190,7 +190,7 @@ namespace NFe.UI.Formularios
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
-            if (this.ckbTemCertificadoInstalado.Checked)
+            if (this.ckbUsaCertificado.Checked)
             {
                 if (oMeuCert != null)
                 {
@@ -247,14 +247,14 @@ namespace NFe.UI.Formularios
                 lblArquivoCertificado.Visible =
                 txtArquivoCertificado.Visible =
                 btnBuscarProvider.Visible =
-                btnValidarProvider.Visible = !ckbCertificadoInstalado.Checked;
+                btnValidarProvider.Visible = !ckbUsarCertificadoInstalado.Checked;
 
             lblCerificadoInstalado.Visible =
                 textBox_dadoscertificado.Visible =
                 lblPinCertificado.Visible =
                 txtPinCertificado.Visible =
                 btnBuscarProvider.Visible =
-                btnValidarProvider.Visible = ckbCertificadoInstalado.Checked;
+                btnValidarProvider.Visible = ckbUsarCertificadoInstalado.Checked;
 
             lblPinCertificado.Visible =
                 txtPinCertificado.Visible = true;
@@ -262,7 +262,7 @@ namespace NFe.UI.Formularios
             lblProvider.Visible =
                    cboProviders.Visible = true;
 
-            if (!ckbCertificadoInstalado.Checked)
+            if (!ckbUsarCertificadoInstalado.Checked)
             {
                 textBox_dadoscertificado.Text = "";
                 oMeuCert = null;
@@ -283,7 +283,6 @@ namespace NFe.UI.Formularios
                     txtPinCertificado.Visible = false;
                 lblProvider.Visible =
                     cboProviders.Visible = false;
-
             }
             else
             {
@@ -318,18 +317,16 @@ namespace NFe.UI.Formularios
                 txtPinCertificado.Enabled = false;
                 cboProviders.Enabled = false;
             }
-
-
         }
 
         private void ckbTemCertificadoInstalado_CheckedChanged(object sender, EventArgs e)
         {
-            this.ckbCertificadoInstalado.Enabled =
+            this.ckbUsarCertificadoInstalado.Enabled =
                 this.button_selecionar_certificado.Enabled =
                 this.textBox_dadoscertificado.Enabled =
                 this.txtArquivoCertificado.Enabled =
                 this.txtPinCertificado.Enabled =
-                this.txtSenhaCertificado.Enabled = this.ckbTemCertificadoInstalado.Checked;
+                this.txtSenhaCertificado.Enabled = this.ckbUsaCertificado.Checked;
             if (changeEvent != null)
                 changeEvent(sender, e);
         }

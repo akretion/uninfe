@@ -175,6 +175,7 @@ namespace NFe.ConvertTxt
         tiDANFENFCe = 4,
         tiDANFENFCe_em_mensagem_eletrônica = 5
     }
+
     public enum TpcnFinalidadeNFe
     {
         fnNormal = 1,
@@ -216,7 +217,23 @@ namespace NFe.ConvertTxt
         [Description("Registro de passagem-BRid")]
         tpEvRegistroPassagemBRid = 510620,
         [Description("Registro Multimodal")]
-        tpevRegMultimodal = 110160
+        tpevRegMultimodal = 110160,
+        [Description("Pedido de prorrogação 1º. prazo")]
+        tpEvPedProrrogacao_ICMS_1 = 111500,
+        [Description("Pedido de prorrogação 2º. prazo")]
+        tpEvPedProrrogacao_ICMS_2 = 111501,
+        [Description("Cancelamento de Pedido de Prorrogação 1º. Prazo")]
+        tpEvCancPedProrrogacao_ICMS_1 = 111502,
+        [Description("Cancelamento de Pedido de Prorrogação 2º. Prazo")]
+        tpEvCancPedProrrogacao_ICMS_2 = 111503,
+        [Description("Fisco Resposta ao Pedido de Prorrogação 1º prazo")]
+        tpEvFiscoRespPedProrrogacao_ICMS_1 = 411500,
+        [Description("Fisco Resposta ao Pedido de Prorrogação 2º prazo")]
+        tpEvFiscoRespPedProrrogacao_ICMS_2 = 411501,
+        [Description("Fisco Resposta ao Cancelamento de Prorrogação 1º prazo")]
+        tpEvFiscoRespCancPedProrrogacao_ICMS_1 = 411502,
+        [Description("Fisco Resposta ao Cancelamento de Prorrogação 2º prazo")]
+        tpEvFiscoRespCancPedProrrogacao_ICMS_2 = 411503
     }
 
     public enum TpcnTipoAutor

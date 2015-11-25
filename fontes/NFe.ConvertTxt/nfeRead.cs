@@ -778,22 +778,8 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.pDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.pDif);
                         detInfo.Imposto.ICMS.vICMSDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSDif);
 
-                        foreach (XmlNode nodedetImpostoICMS_ICMSUFDest in ((XmlElement)nodedetImpostoICMS_).GetElementsByTagName(TpcnResources.ICMSUFDest.ToString()))
-                        {
-                            if (nodedetImpostoICMS_ICMSUFDest.ChildNodes.Count > 0)
-                            {
-                                XmlNode nodedetImpostoICMS__ICMSUFDest = nodedetImpostoICMS.ChildNodes[0];
-
-                                detInfo.Imposto.ICMS.ICMSUFDest.vBCUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vBCUFDest);
-                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSUFDest);
-                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSInter = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInter);
-                                detInfo.Imposto.ICMS.ICMSUFDest.pICMSInterPart = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInterPart);
-                                detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFDest);
-                                detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFRemet = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFRemet);
                             }
                         }
-                    }
-                }
                 #endregion
 
                 // Inicializa CST como sendo Não tributada e conforme o TIPO entrada ou saida
@@ -882,6 +868,23 @@ namespace NFe.ConvertTxt
                     detInfo.Imposto.COFINSST.qBCProd = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.qBCProd);
                     detInfo.Imposto.COFINSST.vAliqProd = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.vAliqProd);
                     detInfo.Imposto.COFINSST.vCOFINS = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.vCOFINS);
+                }
+                #endregion
+
+                #region --Imposto->ICMSUFDest
+                foreach (XmlNode nodedetImpostoICMS_ICMSUFDest in ((XmlElement)nodedetImposto).GetElementsByTagName(TpcnResources.ICMSUFDest.ToString()))
+                {
+                    if (nodedetImpostoICMS_ICMSUFDest.ChildNodes.Count > 0)
+                    {
+                        XmlNode nodedetImpostoICMS__ICMSUFDest = nodedetImpostoICMS_ICMSUFDest.ChildNodes[0];
+
+                        detInfo.Imposto.ICMS.ICMSUFDest.vBCUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vBCUFDest);
+                        detInfo.Imposto.ICMS.ICMSUFDest.pICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSUFDest);
+                        detInfo.Imposto.ICMS.ICMSUFDest.pICMSInter = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInter);
+                        detInfo.Imposto.ICMS.ICMSUFDest.pICMSInterPart = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.pICMSInterPart);
+                        detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFDest = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFDest);
+                        detInfo.Imposto.ICMS.ICMSUFDest.vICMSUFRemet = this.readDouble(nodedetImpostoICMS__ICMSUFDest, TpcnResources.vICMSUFRemet);
+                    }
                 }
                 #endregion
 

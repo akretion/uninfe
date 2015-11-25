@@ -41,6 +41,10 @@ namespace NFe.Components.EL
                                 elService = new NFe.Components.EL.SimoesFilhoBA.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
 
+                            case 3201506: //Colatina-ES
+                                elService = new NFe.Components.EL.ColatinaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;                            
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

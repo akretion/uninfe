@@ -19,6 +19,7 @@ using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
 using NFe.Components.MGM;
+using NFe.Components.Consist;
 
 namespace NFe.Service.NFSe
 {
@@ -36,11 +37,18 @@ namespace NFe.Service.NFSe
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            //Definir o serviço que será executado para a classe
+            ///
+            /// extensao permitida:  PedSitNfse = "-ped-sitnfse.xml"
+            /// 
+            /// Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeConsultar;
 
             try
             {
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSitNfse) + Propriedade.ExtRetorno.SitNfse_ERR);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
+
                 oDadosPedSitNfse = new DadosPedSitNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 PedSitNfse(NomeArquivoXML);
@@ -52,7 +60,7 @@ namespace NFe.Service.NFSe
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe);
-                    pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
 
                 string cabecMsg = "";
@@ -96,7 +104,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SYSTEMPRO:
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
                         syspro.ConsultarNfse(NomeArquivoXML);
@@ -111,31 +119,31 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIMPLISS:
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedSitNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS,
-                        ConfiguracaoApp.ProxyUsuario,
-                        ConfiguracaoApp.ProxySenha,
-                        ConfiguracaoApp.ProxyServidor);
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                            oDadosPedSitNfse.cMunicipio,
+                                                            Empresas.Configuracoes[emp].UsuarioWS,
+                                                            Empresas.Configuracoes[emp].SenhaWS,
+                                                            ConfiguracaoApp.ProxyUsuario,
+                                                            ConfiguracaoApp.ProxySenha,
+                                                            ConfiguracaoApp.ProxyServidor);
 
                         simpliss.ConsultarNfse(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.CONAM:
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedSitNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS);
+                                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                oDadosPedSitNfse.cMunicipio,
+                                                Empresas.Configuracoes[emp].UsuarioWS,
+                                                Empresas.Configuracoes[emp].SenhaWS);
 
                         conam.ConsultarNfse(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.RLZ_INFORMATICA:
                         Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedSitNfse.cMunicipio);
+                                                                    Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                                    oDadosPedSitNfse.cMunicipio);
 
                         rlz.ConsultarNfse(NomeArquivoXML);
                         break;
@@ -167,14 +175,14 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-                        
+
                         el.ConsultarNfse(NomeArquivoXML);
                         break;
-                        #endregion 
+                        #endregion
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                             Empresas.Configuracoes[emp].X509Certificado,
                                                             oDadosPedSitNfse.cMunicipio,
                                                             ConfiguracaoApp.ProxyUsuario,
@@ -197,14 +205,14 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.FISSLEX:
                         FISSLEX fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosPedSitNfse.cMunicipio,
-                        Empresas.Configuracoes[emp].UsuarioWS,
-                        Empresas.Configuracoes[emp].SenhaWS,
-                        ConfiguracaoApp.ProxyUsuario,
-                        ConfiguracaoApp.ProxySenha,
-                        ConfiguracaoApp.ProxyServidor);
-                        
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedSitNfse.cMunicipio,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor);
+
                         fisslex.ConsultarNfse(NomeArquivoXML);
                         break;
 
@@ -223,6 +231,21 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.CONSIST:
+                        #region Consist
+                        Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedSitNfse.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
+                        consist.ConsultarNfse(NomeArquivoXML);
+                        break;
+                        #endregion
+
                 }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico))
@@ -232,7 +255,11 @@ namespace NFe.Service.NFSe
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, oDadosPedSitNfse.cMunicipio), cabecMsg, this, "-ped-sitnfse", "-sitnfse", padraoNFSe, Servico);
+                    oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, oDadosPedSitNfse.cMunicipio), 
+                                            cabecMsg, this, 
+                                            Propriedade.ExtEnvio.PedSitNfse,    //"-ped-sitnfse",
+                                            Propriedade.ExtRetorno.SitNfse,     //"-sitnfse", 
+                                            padraoNFSe, Servico);
 
                     ///
                     /// grava o arquivo no FTP

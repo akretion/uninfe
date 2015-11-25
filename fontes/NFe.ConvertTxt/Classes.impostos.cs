@@ -81,6 +81,7 @@ namespace NFe.ConvertTxt
         public double vICMS;
         public double vICMSDeson;
         public double vICMSUFDest;
+        public double vFCPUFDest;
         public double vICMSUFRemet;
         public double vBCST;
         public double vST;
@@ -100,9 +101,11 @@ namespace NFe.ConvertTxt
     public struct ICMSUFDest
     {
         public double vBCUFDest;
+        public double pFCPUFDest;
         public double pICMSUFDest;
         public double pICMSInter;
-        public double pICMSInterPart;
+        public double pICMSInterPart; 
+        public double vFCPUFDest;
         public double vICMSUFDest;
         public double vICMSUFRemet;
     }

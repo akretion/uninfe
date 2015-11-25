@@ -51,6 +51,7 @@ Source: ..\fontes\uninfe\bin\Release\NFe.UI.dll; DestDir: {app}; Flags: ignoreve
 Source: ..\fontes\uninfe\bin\Release\NFe.Validate.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\release\uninfe.exe; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\release\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
+Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\UniNfeSobre.xml; DestDir: {app}; Flags: ignoreversion
 Source: ..\doc\usuario\uninfe.pdf; DestDir: {app}; Flags: ignoreversion
 Source: ..\doc\usuario\uninfe.url; DestDir: {app}; Flags: ignoreversion
@@ -103,7 +104,7 @@ begin
           itd_addfile('http://download.microsoft.com/download/7/4/0/74078A56-A3A1-492D-BBA9-865684B83C1B/NDP451-KB2859818-Web.exe', filename);
 
           //aqui dizemos ao itd que é para fazer o download após o inno exibir a tela de preparação do setup
-          itd_downloadafter(wpReady);
+          itd_downloadafter(2);
         end else begin
           // o usuário optou por não fazer o download do fw, então avisamos de onde ele pode baixar
           MsgBox('O link para download manual do framework é http://download.microsoft.com/download/7/4/0/74078A56-A3A1-492D-BBA9-865684B83C1B/NDP451-KB2859818-Web.exe', mbInformation, mb_Ok);
