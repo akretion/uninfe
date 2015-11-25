@@ -748,8 +748,9 @@ namespace NFe.Service
                     if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvDFe_TXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region DFe
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvDFe_TXT) + Propriedade.ExtRetorno.retEnvDFe_ERR));
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvDFe_TXT) + Propriedade.ExtRetorno.retEnvDFe_XML));
+                        var temp = Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvDFe_TXT);
+                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.ExtRetorno.retEnvDFe_ERR));
+                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.ExtRetorno.retEnvDFe_XML));
                         DirecionarArquivo(emp, false, false, arquivo, new TaskDFeRecepcao());
                         #endregion
                     }
@@ -774,10 +775,10 @@ namespace NFe.Service
                         arquivo.EndsWith(Propriedade.ExtEnvio.PedEve_TXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region Eventos
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvCCe_TXT) + Propriedade.ExtRetorno.retEnvCCe_ERR));
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvCancelamento_TXT) + Propriedade.ExtRetorno.retCancelamento_ERR));
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvManifestacao_TXT) + Propriedade.ExtRetorno.retManifestacao_ERR));
-                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedEve_TXT) + Propriedade.ExtRetorno.Eve_ERR));
+                        if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvCCe_TXT, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvCCe_TXT) + Propriedade.ExtRetorno.retEnvCCe_ERR));
+                        if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvCancelamento_TXT) + Propriedade.ExtRetorno.retCancelamento_ERR));
+                        if (arquivo.EndsWith(Propriedade.ExtEnvio.EnvManifestacao_TXT, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.EnvManifestacao_TXT) + Propriedade.ExtRetorno.retManifestacao_ERR));
+                        if (arquivo.EndsWith(Propriedade.ExtEnvio.PedEve_TXT, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.PedEve_TXT) + Propriedade.ExtRetorno.Eve_ERR));
                         DirecionarArquivo(emp, false, false, arquivo, new TaskNFeEventos());
                         #endregion
                     }
@@ -998,12 +999,18 @@ namespace NFe.Service
                 //Processa ou envia o XML
                 EnviarArquivo(arquivo, taskClass, "Execute");
             }
+            catch (ExceptionCertificadoDigital ex)
+            {
+                throw ex;
+            }
+            catch (ExceptionSemInternet ex)
+            {
+                throw ex;
+            }
             catch
             {
                 //Não pode ser tratado nenhum erro aqui, visto que já estão sendo tratados e devidamente retornados
                 //para o ERP no ponto da execução dos serviços. Foi muito bem testado e analisado. Wandrey 09/03/2010
-                if (taskClass is TaskNFeConsultaStatus)
-                    throw;
             }
         }
 
@@ -1062,7 +1069,7 @@ namespace NFe.Service
                         nfe is TaskMDFeConsultaSituacao ||
                         nfe is TaskMDFeConsNaoEncerrado ||
                         nfe is TaskLMCAutorizacao ||
-                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC)||
+                        (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC) ||
                         (nfe is TaskCTeEventos && Empresas.Configuracoes[emp].tpEmis == (int)NFe.Components.TipoEmissao.teEPEC))
                     {
                         doExecute = true;
@@ -1263,7 +1270,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                if (empresa >= 0)
+                if (empresa >= 0 && Empresas.Configuracoes.Count > 0)
                     Functions.WriteLog(Empresas.Configuracoes[empresa].Nome + "\r\n" + ex.Message, false, true, Empresas.Configuracoes[empresa].CNPJ);
                 else
                     Functions.WriteLog("Geral:\r\n" + ex.Message, false, true, "");

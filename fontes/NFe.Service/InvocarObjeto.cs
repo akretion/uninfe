@@ -49,6 +49,12 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            if (!string.IsNullOrEmpty(finalArqEnvio))
+                finalArqEnvio = Functions.ExtrairNomeArq(finalArqEnvio, ".xml");
+
+            if (!string.IsNullOrEmpty(finalArqRetorno))
+                finalArqRetorno = Functions.ExtrairNomeArq(finalArqRetorno, ".xml");
+
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
@@ -219,6 +225,9 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            finalArqEnvio = Functions.ExtrairNomeArq(finalArqEnvio, ".xml");
+            finalArqRetorno = Functions.ExtrairNomeArq(finalArqRetorno, ".xml");
+
             XmlDocument docXML = new XmlDocument();
 
             // Definir o tipo de serviço da NFe
@@ -251,7 +260,7 @@ namespace NFe.Service
             docXML.Load(XmlNfeDadosMsg);
 
             // Definir Proxy
-            if (ConfiguracaoApp.Proxy)
+            if (ConfiguracaoApp.Proxy && wsProxy != null)
                 if (padraoNFSe != PadroesNFSe.BETHA)
                 {
                     wsProxy.SetProp(servicoWS, "Proxy", Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta, ConfiguracaoApp.DetectarConfiguracaoProxyAuto));
@@ -266,7 +275,7 @@ namespace NFe.Service
 
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
-            if (padraoNFSe != PadroesNFSe.BETHA)
+            if (padraoNFSe != PadroesNFSe.BETHA && wsProxy != null)
                 wsProxy.SetProp(servicoWS, "Timeout", 120000);
 
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP

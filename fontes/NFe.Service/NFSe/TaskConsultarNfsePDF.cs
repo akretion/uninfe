@@ -31,11 +31,15 @@ namespace NFe.Service.NFSe
 
             try
             {
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedNFSePNG) + Propriedade.ExtRetorno.NFSePNG_ERR);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
+
                 oDadosPedNfsePDF = new DadosPedSitNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 PedNFSePDF(NomeArquivoXML);
 
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
+                //Criar objetos das classes dos serviços dos webservices do municipio
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedNfsePDF.cMunicipio);
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedNfsePDF.cMunicipio, oDadosPedNfsePDF.tpAmb, oDadosPedNfsePDF.tpEmis, padraoNFSe);
                 object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -45,8 +49,11 @@ namespace NFe.Service.NFSe
                 AssinaturaDigital ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedNfsePDF.cMunicipio));
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, pedNfsePNG, NomeMetodoWS(Servico, oDadosPedNfsePDF.cMunicipio), cabecMsg, this, "-ped-nfsepdf", "-nfsepdf", padraoNFSe, Servico);
+                //Invocar o método que envia o XML para o municipio
+                oInvocarObj.InvocarNFSe(wsProxy, pedNfsePNG, NomeMetodoWS(Servico, oDadosPedNfsePDF.cMunicipio), cabecMsg, this,
+                                        Propriedade.ExtEnvio.PedNFSePDF,   //"-ped-nfsepdf", 
+                                        Propriedade.ExtRetorno.NFSePDF,   //"-nfsepdf", 
+                                        padraoNFSe, Servico);
 
                 ///
                 /// grava o arquivo no FTP

@@ -65,8 +65,8 @@ namespace NFe.Service
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, ufParaWS), 
                                     oCabecMsg,
                                     this,
-                                    Propriedade.ExtEnvio.PedEve.Replace(".xml", ""),
-                                    Propriedade.ExtRetorno.Eve.Replace(".xml", ""));
+                                    Propriedade.ExtEnvio.PedEve,
+                                    Propriedade.ExtRetorno.Eve);
 
                 //Ler o retorno
                 LerRetornoEvento(emp);

@@ -26,7 +26,7 @@ namespace NFe.UI
     {
         private bool first = false;
         private bool servicoInstaladoErodando = false;
-        private string srvName = Propriedade.ServiceName[Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfse ? 1 : 0];
+        private string srvName = Propriedade.ServiceName;
         private menu _menu;
         private bool _maximized;
         private bool _formloaded = false;

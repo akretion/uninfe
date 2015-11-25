@@ -73,8 +73,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         null,
                                         this,
-                                        Propriedade.ExtEnvio.EnvDFe_XML.Replace(".xml", ""),
-                                        Propriedade.ExtRetorno.retEnvDFe_XML.Replace(".xml", ""));
+                                        Propriedade.ExtEnvio.EnvDFe_XML,
+                                        Propriedade.ExtRetorno.retEnvDFe_XML);
 
                     LeRetornoDFe(emp, doc);
                 }
@@ -114,7 +114,7 @@ namespace NFe.Service
                 ///
                 /// pega o nome base dos arquivos a serem gravados
                 /// 
-                string fileRetorno2 = Functions.ExtrairNomeArq(Path.GetFileName(this.NomeArquivoXML), Propriedade.ExtEnvio.EnvDFe_XML);
+                string fileRetorno2 = Functions.ExtrairNomeArq(this.NomeArquivoXML, Propriedade.ExtEnvio.EnvDFe_XML);
                 ///
                 /// pega o nome do arquivo de retorno
                 /// 

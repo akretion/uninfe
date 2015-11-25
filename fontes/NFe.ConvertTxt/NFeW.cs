@@ -500,7 +500,8 @@ namespace NFe.ConvertTxt
                 this.convertToOem = true;
                 wCampo(det.Prod.NCM, TpcnTipoCampo.tcStr, TpcnResources.NCM);
                 wCampo(det.Prod.NVE, TpcnTipoCampo.tcStr, TpcnResources.NVE, ObOp.Opcional);
-                wCampo(det.Prod.CEST, TpcnTipoCampo.tcInt, TpcnResources.CEST, ObOp.Opcional);
+                if (det.Prod.CEST > 0)
+                    wCampo(det.Prod.CEST.ToString("0000000"), TpcnTipoCampo.tcStr, TpcnResources.CEST);
                 wCampo(det.Prod.EXTIPI, TpcnTipoCampo.tcStr, TpcnResources.EXTIPI, ObOp.Opcional);
                 wCampo(det.Prod.CFOP, TpcnTipoCampo.tcStr, TpcnResources.CFOP);
                 wCampo(det.Prod.uCom, TpcnTipoCampo.tcStr, TpcnResources.uCom);
@@ -769,6 +770,7 @@ namespace NFe.ConvertTxt
             GerarDetImpostoPISST(nfe, imposto.PISST, nodeImposto);
             GerarDetImpostoCOFINS(nfe, imposto.COFINS, nodeImposto);
             GerarDetImpostoCOFINSST(nfe, imposto.COFINSST, nodeImposto);
+            GerarDetImpostoICMSUFDest(nfe, imposto, nodeImposto);
         }
 
         /// <summary>
@@ -1162,31 +1164,8 @@ namespace NFe.ConvertTxt
                                 }
                             break;
                     }
-                    if (imposto.ICMS.ICMSPart10 == 1 || imposto.ICMS.ICMSPart90 == 1 && (double)nfe.infNFe.Versao >= 3.10)
-                    {
-                        if (imposto.ICMS.ICMSUFDest.vBCUFDest > 0 ||
-                            imposto.ICMS.ICMSUFDest.pICMSUFDest > 0 ||
-                            imposto.ICMS.ICMSUFDest.pICMSInter > 0 ||
-                            imposto.ICMS.ICMSUFDest.pICMSInterPart > 0 ||
-                            imposto.ICMS.ICMSUFDest.vICMSUFDest > 0 ||
-                            imposto.ICMS.ICMSUFDest.vICMSUFRemet > 0)
-                        {
-                            var x_nodeCurrent = nodeCurrent;
-                            XmlElement ee0 = doc.CreateElement(TpcnResources.ICMSUFDest.ToString());
-                            nodeCurrent.AppendChild(ee0);
-
-                            wCampo(imposto.ICMS.ICMSUFDest.vBCUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest);
-                            wCampo(imposto.ICMS.ICMSUFDest.pICMSUFDest, TpcnTipoCampo.tcDec4, TpcnResources.pICMSUFDest);
-                            wCampo(imposto.ICMS.ICMSUFDest.pICMSInter, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInter);
-                            wCampo(imposto.ICMS.ICMSUFDest.pICMSInterPart, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInterPart);
-                            wCampo(imposto.ICMS.ICMSUFDest.vICMSUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest);
-                            wCampo(imposto.ICMS.ICMSUFDest.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet);
-
-                            nodeCurrent = x_nodeCurrent;
                         }
                     }
-                }
-            }
 
             if (imposto.ICMS.CSOSN > 100)
             {
@@ -1255,6 +1234,42 @@ namespace NFe.ConvertTxt
                         wCampo(imposto.ICMS.pCredSN, this.nDecimaisPerc, TpcnResources.pCredSN);
                         wCampo(imposto.ICMS.vCredICMSSN, TpcnTipoCampo.tcDec2, TpcnResources.vCredICMSSN);
                         break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// GerarDetImpostoICMSUFDest
+        /// </summary>
+        /// <param name="nfe"></param>
+        /// <param name="imposto"></param>
+        /// <param name="nodeImposto"></param>
+        private void GerarDetImpostoICMSUFDest(NFe nfe, Imposto imposto, XmlElement nodeImposto)
+        {
+            if (/*(imposto.ICMS.ICMSPart10 == 1 || imposto.ICMS.ICMSPart90 == 1) &&*/ (double)nfe.infNFe.Versao >= 3.10)
+            {
+                if (imposto.ICMS.ICMSUFDest.vBCUFDest > 0 ||
+                    imposto.ICMS.ICMSUFDest.pICMSUFDest > 0 ||
+                    imposto.ICMS.ICMSUFDest.pICMSInter > 0 ||
+                    imposto.ICMS.ICMSUFDest.pICMSInterPart > 0 ||
+                    imposto.ICMS.ICMSUFDest.vICMSUFDest > 0 ||
+                    imposto.ICMS.ICMSUFDest.vICMSUFRemet > 0)
+                {
+                    var x_nodeCurrent = nodeCurrent;
+                    XmlElement ee0 = doc.CreateElement(TpcnResources.ICMSUFDest.ToString());
+                    nodeImposto.AppendChild(ee0);
+                    nodeCurrent = ee0;
+
+                    wCampo(imposto.ICMS.ICMSUFDest.vBCUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest);
+                    wCampo(imposto.ICMS.ICMSUFDest.pFCPUFDest, TpcnTipoCampo.tcDec4, TpcnResources.pFCPUFDest);
+                    wCampo(imposto.ICMS.ICMSUFDest.pICMSUFDest, TpcnTipoCampo.tcDec4, TpcnResources.pICMSUFDest);
+                    wCampo(imposto.ICMS.ICMSUFDest.pICMSInter, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInter);
+                    wCampo(imposto.ICMS.ICMSUFDest.pICMSInterPart, TpcnTipoCampo.tcDec4, TpcnResources.pICMSInterPart);
+                    wCampo(imposto.ICMS.ICMSUFDest.vFCPUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vFCPUFDest);
+                    wCampo(imposto.ICMS.ICMSUFDest.vICMSUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest);
+                    wCampo(imposto.ICMS.ICMSUFDest.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet);
+
+                    nodeCurrent = x_nodeCurrent;
                 }
             }
         }
@@ -2054,6 +2069,7 @@ namespace NFe.ConvertTxt
             if ((double)NFe.infNFe.Versao >= 3.10)
             {
                 wCampo(NFe.Total.ICMSTot.vICMSDeson, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson);
+                wCampo(NFe.Total.ICMSTot.vFCPUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vFCPUFDest);
                 wCampo(NFe.Total.ICMSTot.vICMSUFDest, TpcnTipoCampo.tcDec2,  TpcnResources.vICMSUFDest, ObOp.Opcional);
                 wCampo(NFe.Total.ICMSTot.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional);
             }
@@ -2412,8 +2428,8 @@ namespace NFe.ConvertTxt
             // ERR - resposta
             // Filename: XXXXXXXX-gerar-chave.err
 
-            string ArqXMLRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-ret-gerar-chave.xml" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-ret-gerar-chave.txt");
-            string ArqERRRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
+            string ArqXMLRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + (xml ? Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_XML) + Propriedade.ExtRetorno.RetGerarChaveNFe_XML : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + Propriedade.ExtRetorno.RetGerarChaveNFe_TXT);
+            string ArqERRRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.ChangeExtension(Path.GetFileName(ArqPedido), ".err");//Propriedade.ExtEnvio.GerarChaveNFe_XML) + "-gerar-chave.err" : Functions.ExtrairNomeArq(ArqPedido, Propriedade.ExtEnvio.GerarChaveNFe_TXT) + "-gerar-chave.err");
 
             try
             {
@@ -2584,7 +2600,7 @@ namespace NFe.ConvertTxt
                 /// grava o XML/TXT de resposta
                 /// 
                 string vMsgRetorno = (xml ? "<?xml version=\"1.0\" encoding=\"UTF-8\"?><retGerarChave><chaveNFe>" + cChave + "</chaveNFe></retGerarChave>" : cChave);
-                File.WriteAllText(ArqXMLRetorno, vMsgRetorno, Encoding.Default);
+                File.WriteAllText(ArqXMLRetorno, vMsgRetorno);//, Encoding.Default);
 
                 ///
                 /// exclui o XML/TXT de pedido
@@ -2597,7 +2613,7 @@ namespace NFe.ConvertTxt
                 {
                     new Auxiliar().MoveArqErro(ArqPedido);
 
-                    File.WriteAllText(ArqERRRetorno, "Arquivo " + ArqERRRetorno + Environment.NewLine + ex.Message, Encoding.Default);
+                    File.WriteAllText(ArqERRRetorno, "Arquivo " + ArqERRRetorno + Environment.NewLine + ex.Message);//, Encoding.Default);
                 }
                 catch
                 {

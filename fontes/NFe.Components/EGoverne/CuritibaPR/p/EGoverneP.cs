@@ -34,45 +34,50 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
         #region Métodos
         public override void EmiteNF(string file)
         {
-            EnviarLoteRpsEnvio loterpsenvio = ReadXML<EnviarLoteRpsEnvio>(file);
-            EnviarLoteRpsResposta result = service.RecepcionarLoteRps(loterpsenvio);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("RecepcionarLoteRps", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
         }
 
         public override void CancelarNfse(string file)
         {
-            CancelarNfseEnvio cancelarnfseenvio = ReadXML<CancelarNfseEnvio>(file);
-            CancelarNfseResposta result = service.CancelarNfse(cancelarnfseenvio);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
-
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("CancelarNfse", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
-            ConsultarLoteRpsEnvio consultarloterps = ReadXML<ConsultarLoteRpsEnvio>(file);
-            ConsultarLoteRpsResposta result = service.ConsultarLoteRps(consultarloterps);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("ConsultarLoteRps", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
         {
-            ConsultarSituacaoLoteRpsEnvio consultarsituacaoloterps = ReadXML<ConsultarSituacaoLoteRpsEnvio>(file);
-            ConsultarSituacaoLoteRpsResposta result = service.ConsultarSituacaoLoteRps(consultarsituacaoloterps);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("ConsultarSituacaoLoteRps", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
         }
 
         public override void ConsultarNfse(string file)
         {
-            ConsultarNfseEnvio consultarnfseenvio = ReadXML<ConsultarNfseEnvio>(file);
-            ConsultarNfseResposta result = service.ConsultarNfse(consultarnfseenvio);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("ConsultarNfse", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
-            ConsultarNfseRpsEnvio consultarnfserps = ReadXML<ConsultarNfseRpsEnvio>(file);
-            ConsultarNfseRpsResposta result = service.ConsultarNfsePorRps(consultarnfserps);
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = service.RecepcionarXml("ConsultarNfsePorRps", doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
         }
         #endregion
     }

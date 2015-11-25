@@ -130,7 +130,7 @@ namespace NFe.Certificado
                             if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) && clsX509Certificate2Extension.IsA3(x509Cert))
                             {
                                 signedXml.SigningKey = LerDispositivo(Empresas.Configuracoes[empresa].CertificadoPIN,
-                                                                      Convert.ToInt32(Empresas.Configuracoes[empresa].ProviderTypeCertificado),
+                                                                      Convert.ToInt32("0" + Empresas.Configuracoes[empresa].ProviderTypeCertificado),
                                                                       Empresas.Configuracoes[empresa].ProviderCertificado);
                             }
                             else
@@ -219,25 +219,27 @@ namespace NFe.Certificado
         public RSACryptoServiceProvider LerDispositivo(string PIN, int providerType, string provider)
         {
             CspParameters csp = new CspParameters(providerType, provider);
-
+            
             SecureString ss = new SecureString();
-            foreach (char a in PIN)
+            char[] PINs = PIN.ToCharArray();
+            foreach (char a in PINs)
             {
                 ss.AppendChar(a);
             }
-
             csp.KeyPassword = ss;
             csp.KeyNumber = 1;
             csp.Flags = CspProviderFlags.NoPrompt;
-
+            csp.KeyContainerName = "SecurityBin2";
+            
             // Initialize an RSACryptoServiceProvider object using
             // the CspParameters object.
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
             //rsa.PersistKeyInCsp = false; //importante, senão ele lota o certificado de chaves!
             rsa.PersistKeyInCsp = false;
+            rsa.ToXmlString(false);            
             return rsa;
         }
-
+    
         /// <summary>
         /// Assina o XML sobrepondo-o
         /// </summary>
@@ -285,6 +287,12 @@ namespace NFe.Certificado
                         Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
                         break;
 
+                    case Servicos.NFePedidoConsultaSituacao:
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
+                        File.Copy(arqXML, tempFile);
+                        Assinar(tempFile, "consSitNFe", "xServ", x509Cert, emp);
+                        break;
+
                     default:
                         break;
                 }
@@ -309,14 +317,17 @@ namespace NFe.Certificado
             Empresas.Configuracoes[codEmp].CertificadoPIN = pin;
             Empresas.Configuracoes[codEmp].ProviderTypeCertificado = type;
             Empresas.Configuracoes[codEmp].ProviderCertificado = provider;
-
             AssinaturaValida = true;
-            Assinar(tempFile, tagAssinatura, tagAtributo, certificado, codEmp);
-
-            Empresas.Configuracoes[codEmp].CertificadoPIN = _pin;
-            Empresas.Configuracoes[codEmp].ProviderTypeCertificado = _type;
-            Empresas.Configuracoes[codEmp].ProviderCertificado = _provider;
-
+            try
+            {
+                Assinar(tempFile, tagAssinatura, tagAtributo, certificado, codEmp);
+            }
+            finally
+            {
+                Empresas.Configuracoes[codEmp].CertificadoPIN = _pin;
+                Empresas.Configuracoes[codEmp].ProviderTypeCertificado = _type;
+                Empresas.Configuracoes[codEmp].ProviderCertificado = _provider;
+            }
             return AssinaturaValida;
         }
 

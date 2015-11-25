@@ -175,6 +175,7 @@ namespace NFe.UI
             this.cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
             this.cbEmpresas.ValueMember = "Key";
             this.cbEmpresas.DataSource = Auxiliar.CarregaEmpresa(false);
+            this.btnExcluir.Visible = this.cbEmpresas.Items.Count > 0;
 
             ConfiguracaoApp.CarregarDados();
             uc_geral.PopulateConfGeral();
@@ -754,6 +755,7 @@ namespace NFe.UI
                                 this.BackFuncao();
                             }
                             this.cbEmpresas.Visible = this.metroLabel2.Visible = true;
+                            this.btnExcluir.Visible = this.cbEmpresas.Items.Count > 0;
                         }
                     }
                 }

@@ -20,10 +20,10 @@ namespace NFe.Service
                 NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML, StringComparison.InvariantCultureIgnoreCase) ||
                 NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedEve, StringComparison.InvariantCultureIgnoreCase))
             {
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvCCe_XML) + Propriedade.ExtRetorno.retEnvCCe_ERR));
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvCancelamento_XML) + Propriedade.ExtRetorno.retCancelamento_ERR));
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvManifestacao_XML) + Propriedade.ExtRetorno.retManifestacao_ERR));
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedEve) + Propriedade.ExtRetorno.Eve_ERR));
+                if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.EnvCCe_XML, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvCCe_XML) + Propriedade.ExtRetorno.retEnvCCe_ERR));
+                if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvCancelamento_XML) + Propriedade.ExtRetorno.retCancelamento_ERR));
+                if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvManifestacao_XML) + Propriedade.ExtRetorno.retManifestacao_ERR));
+                if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedEve, StringComparison.InvariantCultureIgnoreCase)) Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedEve) + Propriedade.ExtRetorno.Eve_ERR));
 
                 DadosenvEvento eve = new DadosenvEvento();
                 EnvEvento(emp, eve);
@@ -31,7 +31,7 @@ namespace NFe.Service
 
             if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedSit_XML, StringComparison.InvariantCultureIgnoreCase))
             {
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSit_XML)));
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(NomeArquivoXML)));
                 Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSit_XML) + Propriedade.ExtRetorno.Sit_ERR));
                 
                 DadosPedSit sit = new DadosPedSit();
@@ -40,8 +40,9 @@ namespace NFe.Service
 
             if (NomeArquivoXML.EndsWith(Propriedade.ExtEnvio.PedSta_XML, StringComparison.InvariantCultureIgnoreCase))
             {
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSta_XML) + Propriedade.ExtRetorno.Sta_ERR));
-                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSta_XML) + "-ped-sta-ret.xml"));
+                var fn = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSta_XML);
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, fn + Propriedade.ExtRetorno.Sta_ERR));
+                Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, fn + "-ped-sta-ret.xml"));
 
                 DadosPedSta sta = new DadosPedSta();
                 PedSta(emp, sta);

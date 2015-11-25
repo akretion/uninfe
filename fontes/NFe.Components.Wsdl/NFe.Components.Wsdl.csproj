@@ -2703,6 +2703,31 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PIvoti-ConsultaNFSeServicosPrestados.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIvoti-EnvioLoteRPSSincrono.wsdl" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SIGCORP_SIGISS\tcDescricaoRps.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIgarapeMG-sigiss.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPatosDeMinasMG-Consist.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPatosDeMinasMG-Consist.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PDuquedeCaxiasRJ-TIPLAN.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSUtil.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
+    <None Include="NFse\WSDL\Producao\PColatinaES-EL.wsdl" />
+    <None Include="NFse\WSDL\Producao\PRecifePE-ABRASF.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

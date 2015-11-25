@@ -24,10 +24,9 @@ namespace NFe.Service
 
             try
             {
+                if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlEnviado) || !Directory.Exists(Empresas.Configuracoes[emp].PastaXmlEnviado)) return;
+
                 // le todos os arquivos que estão na pasta em processamento
-                //                string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(),
-                //                                                "*" + Propriedade.ExtEnvio.Nfe,
-                //                                                SearchOption.TopDirectoryOnly);
 
                 string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
                                                                                                                                                           w.EndsWith(Propriedade.ExtEnvio.Cte, StringComparison.InvariantCultureIgnoreCase) ||

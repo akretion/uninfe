@@ -31,6 +31,10 @@ namespace NFe.Service.NFSe
 
             try
             {
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedNFSePNG) + Propriedade.ExtRetorno.NFSePNG_ERR);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
+
                 oDadosInuNfse = new DadosPedSitNfse(emp);
                 //Ler o XML para pegar parâmetros de envio
                 PedInuNFSe(NomeArquivoXML);
@@ -46,7 +50,10 @@ namespace NFe.Service.NFSe
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosInuNfse.cMunicipio));
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, pedInuNfse, NomeMetodoWS(Servico, oDadosInuNfse.cMunicipio), cabecMsg, this, "-ped-inunfse", "-inunfse", padraoNFSe, Servico);
+                oInvocarObj.InvocarNFSe(wsProxy, pedInuNfse, NomeMetodoWS(Servico, oDadosInuNfse.cMunicipio), cabecMsg, this, 
+                                        Propriedade.ExtEnvio.PedInuNfse,    //"-ped-inunfse", 
+                                        Propriedade.ExtRetorno.InuNfse,     //"-inunfse", 
+                                        padraoNFSe, Servico);
 
                 ///
                 /// grava o arquivo no FTP

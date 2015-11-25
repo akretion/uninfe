@@ -312,10 +312,10 @@ namespace NFe.Settings
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool AdicionaEmailDanfe { get; set; }
         /// <summary>
-        /// Codigo de indentificacao do CSC
+        /// Codigo de identificacao do CSC
         /// </summary>
         [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
-        public string IndentificadorCSC { get; set; }
+        public string IdentificadorCSC { get; set; }
         /// <summary>
         /// Codigo CSC/Token
         /// </summary>
@@ -413,8 +413,10 @@ namespace NFe.Settings
         }
 
         #region BuscaConfiguracao()
-        public void BuscaConfiguracao()
+        public string BuscaConfiguracao(ref int tipoerro)
         {
+            tipoerro = 0;
+
             if (!Directory.Exists(this.PastaEmpresa))
                 Directory.CreateDirectory(this.PastaEmpresa);
 
@@ -479,8 +481,16 @@ namespace NFe.Settings
                     //Não vou mais fazer isso pois estava gerando problemas com Certificados A3 - Renan 18/06/2013
                     //empresa.Certificado = string.Empty;
                     //empresa.CertificadoThumbPrint = string.Empty;
-                    throw new Exception("Ocorreu um erro ao efetuar a leitura das configurações da empresa " + this.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message);
+                    tipoerro = 2;
+                    return "Ocorreu um erro ao efetuar a leitura das configurações da empresa " +
+                        this.CNPJ + "=" + this.Nome.Trim() + ". Por favor entre na tela de configurações desta empresa e reconfigure.\r\n\r\nErro: " + ex.Message;
                 }
+                return null;
+            }
+            else
+            {
+                tipoerro = 1;
+                return "Arquivo [" + this.NomeArquivoConfig + "] de configuração da empresa [" + this.CNPJ + "=" + this.Nome.Trim() + "] não encontrado";
             }
         }
         #endregion

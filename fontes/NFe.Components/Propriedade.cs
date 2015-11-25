@@ -19,7 +19,7 @@ namespace NFe.Components
 
         public static bool ExecutandoPeloUniNFe = true;
 
-        public static string[] ServiceName = new string[] { "UniNFeServico", "UniNFSeServico" };
+        public static string ServiceName = "UniNFeServico";
 
         /// <summary>
         /// Nome para a pasta dos XML assinados
@@ -468,6 +468,13 @@ namespace NFe.Components
         /// </summary>
         public class ExtRetorno
         {
+            //public const string RetAltCon_XML = "-ret-alt-con.xml";
+            //public const string RetAltCon_TXT = "-ret-alt-con.txt";
+            public const string RetGerarChaveNFe_XML = "-ret-gerar-chave.xml";
+            public const string RetGerarChaveNFe_TXT = "-ret-gerar-chave.txt";
+            public const string RetConsInf_XML = "-ret-cons-inf.xml";
+            public const string RetConsInf_TXT = "-ret-cons-inf.txt";
+
             #region Extensões gerais
 
             #endregion
@@ -640,6 +647,10 @@ namespace NFe.Components
             /// -sta.err
             /// </summary>
             public const string Sta_ERR = "-sta.err";
+            /// <summary>
+            /// -inu.xml
+            /// </summary>
+            public const string Inu_XML = "-inu.xml";
             /// <summary>
             /// -inu.err
             /// </summary>
@@ -836,8 +847,8 @@ namespace NFe.Components
             {
                 try
                 {
-                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfse ? 1 : 0]))
-                        return ServiceProcess.StatusService(Propriedade.ServiceName[Propriedade.TipoAplicativo == Components.TipoAplicativo.Nfse ? 1 : 0]) == System.ServiceProcess.ServiceControllerStatus.Running;
+                    if (ServiceProcess.IsServiceInstalled(Propriedade.ServiceName))
+                        return ServiceProcess.StatusService(Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running;
                     else
                         return false;
                 }

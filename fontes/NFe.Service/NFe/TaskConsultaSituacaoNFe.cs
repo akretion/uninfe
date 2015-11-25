@@ -50,6 +50,8 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSit.cUF.ToString());
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedSit.versao);
 
+                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
+
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy, oConsulta, wsProxy.NomeMetodoWS[0], oCabecMsg, this);
 
@@ -499,10 +501,11 @@ namespace NFe.Service
                         //Deletar a NFE do arquivo de controle de fluxo
                         oFluxoNfe.ExcluirNfeFluxo(strChaveNFe);
                         break;
+
                     #endregion
 
                     default:
-                        break;
+                        goto case "TirarFluxo";
                 }
             }
         }

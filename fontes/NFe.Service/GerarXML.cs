@@ -1653,14 +1653,30 @@ namespace NFe.Service
                                                     ConteudoRetorno += FCNPJCPF + ";";
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.dhRegEvento.ToString());
                                                     ConteudoRetorno += Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.nProt.ToString());
-                                                    if (Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.tpEvento.ToString()) == "110140") //EPEC
+
+                                                    switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.tpEvento.ToString(), false)))
                                                     {
-                                                        ConteudoRetorno += Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.cOrgaoAutor.ToString());
-                                                        //ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFePend");
-                                                        foreach (XmlNode conschNFePend in infCCeElemento.GetElementsByTagName("chNFePend"))
-                                                        {
-                                                            ConteudoRetorno += conschNFePend.InnerText + ";";
-                                                        }
+                                                        case ConvertTxt.tpEventos.tpEvEPEC:
+                                                            {
+                                                                ConteudoRetorno += Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.cOrgaoAutor.ToString());
+                                                                //ConteudoRetorno += Functions.LerTag(infCCeElemento, "chNFePend");
+                                                                foreach (XmlNode conschNFePend in infCCeElemento.GetElementsByTagName("chNFePend"))
+                                                                {
+                                                                    ConteudoRetorno += conschNFePend.InnerText + ";";
+                                                                }
+                                                            }
+                                                            break;
+
+                                                        case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
+                                                        case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
+                                                        case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_1:
+                                                        case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_2:
+                                                        case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_1:
+                                                        case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_2:
+                                                        case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1:
+                                                        case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2:
+                                                            ConteudoRetorno += Functions.LerTag(infCCeElemento, NFe.Components.TpcnResources.emailDest.ToString());
+                                                            break;
                                                     }
                                                     ConteudoRetorno += "\r\n";
                                                 }
@@ -2257,14 +2273,82 @@ namespace NFe.Service
 
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(evento.tpEvento))
                 {
+                    case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_2:
+                        {
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nProt.ToString(), evento.nProt));
+                            foreach (var ppICMS in evento.prorrogacaoICMS)
+                            {
+                                XmlNode itemPedido = doc.CreateElement(NFe.Components.TpcnResources.itemPedido.ToString());
+                                itemPedido.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.numItem.ToString(), ppICMS.numItem));
+                                itemPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.qtdeItem.ToString(), ppICMS.qtdeItem.Trim()));
+                                detEvento.AppendChild(itemPedido);
+                            }
+                        }
+                        break;
+
+                    case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2:
+                        {
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.idPedidoCancelado.ToString(), evento.idPedidoCancelado));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nProt.ToString(), evento.nProt));
+                        }
+                        break;
+
+                    case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_2:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
+                        {
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.idPedido.ToString(), evento.idPedido));
+                            switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(evento.tpEvento))
+                            {
+                                case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
+                                case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
+                                    {
+                                        XmlNode respCancPedido = doc.CreateElement(NFe.Components.TpcnResources.respCancPedido.ToString());
+                                        respCancPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.statCancPedido.ToString(), evento.respCancPedido.statCancPedido.ToString()));
+                                        respCancPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.justStatus.ToString(), evento.respCancPedido.justStatus.ToString("00")));
+                                        if (!string.IsNullOrEmpty(evento.respCancPedido.justStaOutra))
+                                            respCancPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.justStaOutra.ToString(), evento.respCancPedido.justStaOutra));
+                                        detEvento.AppendChild(respCancPedido);
+                                    }
+                                    break;
+
+                                default:
+                                    {
+                                        XmlNode respPedido = doc.CreateElement(NFe.Components.TpcnResources.respPedido.ToString());
+                                        respPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.statPrazo.ToString(), evento.respPedido.statPrazo));
+
+                                        foreach (ItemPedido ipt in evento.respPedido.itemPedido)
+                                        {
+                                            XmlNode itemPedido = doc.CreateElement(NFe.Components.TpcnResources.itemPedido.ToString());
+                                            itemPedido.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.numItem.ToString(), ipt.numItem.ToString()));
+                                            itemPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.statPedido.ToString(), ipt.statPedido.ToString()));
+                                            itemPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.justStatus.ToString(), ipt.justStatus.ToString()));
+                                            if (!string.IsNullOrEmpty(ipt.justStaOutra))
+                                                itemPedido.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.justStaOutra.ToString(), ipt.justStaOutra));
+                                            respPedido.AppendChild(itemPedido);
+                                        }
+                                        detEvento.AppendChild(respPedido);
+                                    }
+                                    break;
+                            }
+                        }
+                        break;
+
                     case ConvertTxt.tpEventos.tpEvCCe:
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xCorrecao.ToString(), evento.xCorrecao.Trim()));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xCondUso.ToString(), evento.xCondUso.Trim()));
+                        {
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xCorrecao.ToString(), evento.xCorrecao.Trim()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xCondUso.ToString(), evento.xCondUso.Trim()));
+                        }
                         break;
 
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nProt.ToString(), evento.nProt));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
+                        {
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nProt.ToString(), evento.nProt));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
+                        }
                         break;
 
                     case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
@@ -2272,40 +2356,43 @@ namespace NFe.Service
                         break;
 
                     case ConvertTxt.tpEventos.tpEvEPEC:
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.cOrgaoAutor.ToString(), evento.epec.cOrgaoAutor.ToString()));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAutor.ToString(), ((Int32)evento.epec.tpAutor).ToString()));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.verAplic.ToString(), evento.epec.verAplic.Trim()));
-                        if (!string.IsNullOrEmpty(evento.epec.dhEmi))
                         {
-                            if (!(evento.epec.dhEmi.EndsWith("-01:00") ||
-                                    evento.epec.dhEmi.EndsWith("-02:00") ||
-                                    evento.epec.dhEmi.EndsWith("-03:00") ||
-                                    evento.epec.dhEmi.EndsWith("-04:00")))
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.cOrgaoAutor.ToString(), evento.epec.cOrgaoAutor.ToString()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAutor.ToString(), ((Int32)evento.epec.tpAutor).ToString()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.verAplic.ToString(), evento.epec.verAplic.Trim()));
+                            if (!string.IsNullOrEmpty(evento.epec.dhEmi))
                             {
-                                evento.epec.dhEmi = Convert.ToDateTime(evento.epec.dhEmi).ToString("yyyy-MM-dd\"T\"HH:mm:sszzz");
+                                if (!(evento.epec.dhEmi.EndsWith("-01:00") ||
+                                        evento.epec.dhEmi.EndsWith("-02:00") ||
+                                        evento.epec.dhEmi.EndsWith("-03:00") ||
+                                        evento.epec.dhEmi.EndsWith("-04:00")))
+                                {
+                                    evento.epec.dhEmi = Convert.ToDateTime(evento.epec.dhEmi).ToString("yyyy-MM-dd\"T\"HH:mm:sszzz");
+                                }
                             }
-                        }
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.dhEmi.ToString(), evento.epec.dhEmi));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpNF.ToString(), ((Int32)evento.epec.tpNF).ToString()));
-                        detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.IE));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.dhEmi.ToString(), evento.epec.dhEmi));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpNF.ToString(), ((Int32)evento.epec.tpNF).ToString()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.IE));
 
-                        XmlNode destEvento = doc.CreateElement("dest");
-                        destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.UF.ToString(), evento.epec.dest.UF));
-                        if (!string.IsNullOrEmpty(evento.epec.dest.idEstrangeiro) || evento.epec.dest.UF.Equals("EX"))
-                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.idEstrangeiro.ToString(), evento.epec.dest.idEstrangeiro));
-                        else
-                            if (!string.IsNullOrEmpty(evento.epec.dest.CNPJ))
-                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), evento.epec.dest.CNPJ));
+                            XmlNode destEvento = doc.CreateElement("dest");
+                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.UF.ToString(), evento.epec.dest.UF));
+                            if (!string.IsNullOrEmpty(evento.epec.dest.idEstrangeiro) || evento.epec.dest.UF.Equals("EX"))
+                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.idEstrangeiro.ToString(), evento.epec.dest.idEstrangeiro));
                             else
-                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CPF.ToString(), evento.epec.dest.CPF));
-                        if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
-                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.dest.IE));
+                                if (!string.IsNullOrEmpty(evento.epec.dest.CNPJ))
+                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), evento.epec.dest.CNPJ));
+                                else
+                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CPF.ToString(), evento.epec.dest.CPF));
+                            if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
+                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.dest.IE));
 
-                        destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
-                        destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
-                        destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vST.ToString(), evento.epec.dest.vST.ToString("0.00").Replace(",", ".")));
+                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
+                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
+                            if (evento.chNFe.Substring(23, 2).Equals("65"))
+                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vST.ToString(), evento.epec.dest.vST.ToString("0.00").Replace(",", ".")));
 
-                        detEvento.AppendChild(destEvento);
+                            detEvento.AppendChild(destEvento);
+                        }
                         break;
                 }
                 infEvento.AppendChild(detEvento);

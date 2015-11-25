@@ -1311,7 +1311,7 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
-                            if (cMunicipio.Equals(3304201))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
@@ -1322,7 +1322,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (cMunicipio.Equals(3304201))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702))
                                 retorna = "ConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfseRPS";
@@ -1330,7 +1330,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (cMunicipio.Equals(3304201))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
                                 retorna = "ConsultarSituacaoLoteRPS";
@@ -1668,7 +1668,9 @@ namespace NFe.Service
                 if (oFluxoNfe.NfeExiste(ChaveNfe))
                 {
                     //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
-                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                        PastaEnviados.EmProcessamento.ToString() + "\\" + 
+                                        Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
 
                     //Deletar a NFE do arquivo de controle de fluxo
                     oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
@@ -1682,7 +1684,7 @@ namespace NFe.Service
                 else
                 {
                     //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                    Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                    Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(NomeArquivoXML));//  Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
                 }
 
                 //Validações gerais
@@ -1693,9 +1695,9 @@ namespace NFe.Service
                 assDig.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosNFe.cUF));
 
                 //Adicionar a tag do QRCode
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IndentificadorCSC) && dadosNFe.mod == "65")
+                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
                 {
-                    QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IndentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, NomeArquivoXML);
+                    QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, NomeArquivoXML);
 
                     if (qrCode.CalcularLink())
                     {
@@ -2146,6 +2148,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.CONSIST:
                 case PadroesNFSe.MGM:
                 case PadroesNFSe.ELOTECH:
                 case PadroesNFSe.GOVDIGITAL:
@@ -2190,6 +2193,9 @@ namespace NFe.Service
         /// <param name="pFinalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
         /// <date>07/08/2009</date>
         /// <by>Wandrey Mundin Ferreira</by>
+        /// 
+        /// NAO RENOMEAR ou EXCLUIR porque ela é acessada por Invoke
+        /// 
         public void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno)
         {
             oGerarXML.XmlRetorno(pFinalArqEnvio, pFinalArqRetorno, this.vStrXmlRetorno);

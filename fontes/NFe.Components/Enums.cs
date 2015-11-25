@@ -609,7 +609,19 @@ namespace NFe.Components
         /// Prefeitura de Natal - RN
         /// </summary>
         [Description("Natalense")]
-        NATALENSE
+        NATALENSE,
+        /// <summary>
+        /// Padrão ABRASF
+        /// Prefeitura de Recife - PE
+        /// </summary>
+        [Description("ABRASF")]
+        ABRASF,
+        /// <summary>
+        /// Padrão Consist
+        /// Prefeitura de Patos de Minas - MG
+        /// </summary>
+        [Description("Consist")]
+        CONSIST
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao        
@@ -741,10 +753,7 @@ combo.ValueMember = "Key";
                         as DescriptionAttribute;
 
             return attribute == null ? value.ToString() : attribute.Description;
-        }*/
-
-
-
+        }*/               
 
         public static T StringToEnum<T>(string name) { return (T)Enum.Parse(typeof(T), name, true); }
 

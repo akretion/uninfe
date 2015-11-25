@@ -60,7 +60,9 @@ namespace NFe.Service
                                     oInutilizacao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedInut.cUF), 
                                     oCabecMsg,
-                                    this, "-ped-inu", "-inu");
+                                    this, 
+                                    Propriedade.ExtEnvio.PedInu_XML,
+                                    Propriedade.ExtRetorno.Inu_XML);
 
                 //Ler o retorno do webservice
                 this.LerRetornoInut();

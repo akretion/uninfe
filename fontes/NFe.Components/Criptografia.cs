@@ -113,7 +113,7 @@ namespace NFe.Components
                 else
                     return IsCriptografadaSenha(senhaCripto, _chave);
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -195,13 +195,22 @@ namespace NFe.Components
 
         public static string GetSHA1HashData(string data)
         {
+            return GetSHA1HashData(data, false);
+        }
+
+        public static string GetSHA1HashData(string data, bool toUpper)
+        {
             HashAlgorithm algorithm = new SHA1CryptoServiceProvider();
             byte[] buffer = algorithm.ComputeHash(System.Text.Encoding.ASCII.GetBytes(data));
             System.Text.StringBuilder builder = new System.Text.StringBuilder(buffer.Length);
             foreach (byte num in buffer)
             {
-                builder.Append(num.ToString("x2"));
+                if (toUpper)
+                    builder.Append(num.ToString("X2"));
+                else
+                    builder.Append(num.ToString("x2"));
             }
+
             return builder.ToString();
         }
 

@@ -84,7 +84,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MetroFramework\MetroFramework\MetroFramework.csproj">
       <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
-      <Name>MetroFramework %28MetroFramework\MetroFramework%29</Name>
+      <Name>MetroFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFe.Components.Info\NFe.Components.Info.csproj">
       <Project>{b7222c8a-6160-4d6f-bdc8-20134308175a}</Project>

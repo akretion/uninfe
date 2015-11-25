@@ -74,7 +74,7 @@ namespace NFe.Components.QRCode
                 "&digVal=" + Functions.ComputeHexadecimal(this.digVal) +
                 "&cIdToken=" + this.TokenCSC;
 
-            this.HashQRCode = Criptografia.GetSHA1HashData(this.ParametrosQR + this.IdentificadorCSC);
+            this.HashQRCode = Criptografia.GetSHA1HashData(this.ParametrosQR + this.IdentificadorCSC, true);
 
             this.ParametrosLinkConsulta = linkUF + "?" + this.ParametrosQR.Trim() + "&cHashQRCode=" + this.HashQRCode.Trim();
         }

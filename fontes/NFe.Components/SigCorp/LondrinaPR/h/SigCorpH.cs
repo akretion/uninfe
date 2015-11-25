@@ -69,7 +69,7 @@ namespace NFe.Components.SigCorp.LondrinaPR.h
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
 
         private T ReadXML<T>(string file)
             where T : new()
@@ -124,7 +124,7 @@ namespace NFe.Components.SigCorp.LondrinaPR.h
         {
             PropertyInfo pi = result.GetType().GetProperty(propertyName);
 
-            if (pi != null)
+            if (pi != null && !String.IsNullOrEmpty(value.ToString()))
             {
                 value = Convert.ChangeType(value, pi.PropertyType);
                 pi.SetValue(result, value, null);

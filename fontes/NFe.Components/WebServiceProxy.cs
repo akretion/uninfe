@@ -150,7 +150,7 @@ namespace NFe.Components
         #endregion
 
         #region Construtores
-        public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico)
+        public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico, int tpEmis)
         {
             this.ArquivoWSDL = arquivoWSDL;
             this.PadraoNFSe = padraoNFSe;
@@ -172,7 +172,7 @@ namespace NFe.Components
             ServicePointManager.Expect100Continue = false;
 
             //Obter a descrição do serviço (WSDL)    
-            this.DescricaoServico(cUF, taHomologacao, arquivoWSDL);
+            this.DescricaoServico(cUF, taHomologacao, arquivoWSDL, tpEmis, padraoNFSe);
 
             this.NomeClasseWS = null;
             this.NomeMetodoWS = null;
@@ -384,25 +384,47 @@ namespace NFe.Components
         /// </summary>
         /// <param name="arquivoWSDL">Local e nome do arquivo WDDL</param>
         /// <param name="Certificado">Certificado digital</param>
-        private void DescricaoServico(int cUF, bool taHomologacao, string arquivoWSDL)
+        private void DescricaoServico(int cUF, bool taHomologacao, string arquivoWSDL, int tpEmis, PadroesNFSe padraoNFSe)
         {
-            //Forçar utilizar o protocolo SSL 3.0 que está de acordo com o manual de integração do SEFAZ
-            //Wandrey 31/03/2010
-            switch (cUF)
+            switch (tpEmis)
             {
-                case 52: //Estado de Goiás
+                case 6: //SVAN em homologação só tá aceitando protocolo Tls
                     if (taHomologacao)
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
                     else
                         goto default;
                     break;
 
-                case 3550308: //Municipio de São Paulo-SP
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-                    break;
-
                 default:
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;                    
+                    switch (cUF)
+                    {
+                        case 52: //Estado de Goiás em ambiente de homologação só tá aceitando Tls
+                            if (taHomologacao)
+                                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                            else
+                                goto default;
+                            break;
+
+                        case 3550308: //Municipio de São Paulo-SP só tá aceitando Tls
+                            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                            break;
+
+                        default:
+                            switch (padraoNFSe)
+                            {
+                                case PadroesNFSe.GINFES: 
+                                case PadroesNFSe.EQUIPLANO:
+                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                                    break;
+
+                                default:
+                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;                                    
+                                    break;
+                            }
+
+                            break;
+                    }
+
                     break;
             }
 
