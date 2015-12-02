@@ -69,7 +69,7 @@ namespace NFe.Components.Conam.VarginhaMG.p
             SDT_ConsultaProtocoloOut result = service.CONSULTAPROTOCOLO(oConsultaProtocolo);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

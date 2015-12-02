@@ -37,7 +37,8 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("RecepcionarLoteRps", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -45,7 +46,9 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("CancelarNfse", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+
         }
 
         public override void ConsultarLoteRps(string file)
@@ -53,7 +56,8 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("ConsultarLoteRps", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -61,7 +65,8 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("ConsultarSituacaoLoteRps", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
@@ -69,7 +74,8 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("ConsultarNfse", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -77,7 +83,8 @@ namespace NFe.Components.EGoverne.CuritibaPR.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
             string result = service.RecepcionarXml("ConsultarNfsePorRps", doc.InnerXml);
-            GerarRetorno(file, result, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, base.CreateXML(result),  Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
         #endregion
     }

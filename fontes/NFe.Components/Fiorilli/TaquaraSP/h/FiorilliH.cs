@@ -48,7 +48,8 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             GerarNfseEnvio oGerarNfseEnvio = ReadXML<GerarNfseEnvio>(file);
             GerarNfseResposta result = service.gerarNfse(oGerarNfseEnvio, UsuarioWs, SenhaWs);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -58,7 +59,8 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             CancelarNfseEnvio oTcDadosCancela = ReadXML<CancelarNfseEnvio>(file);
             CancelarNfseResposta result = service.cancelarNfse(oTcDadosCancela, UsuarioWs, SenhaWs);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -68,7 +70,8 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             ConsultarLoteRpsEnvio oTcDadosConsultaNota = ReadXML<ConsultarLoteRpsEnvio>(file);
             ConsultarLoteRpsResposta result = service.consultarLoteRps(oTcDadosConsultaNota, UsuarioWs, SenhaWs);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -89,7 +92,7 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             ConsultarNfseFaixaEnvio oTcDadosPrestador = ReadXML<ConsultarNfseFaixaEnvio>(file);
             ConsultarNfseFaixaResposta result = service.consultarNfsePorFaixa(oTcDadosPrestador, UsuarioWs, SenhaWs);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
             */
         }
 
@@ -100,7 +103,8 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             ConsultarNfseRpsEnvio oTcConsultarNfseRpsEnvio = ReadXML<ConsultarNfseRpsEnvio>(file);
             ConsultarNfseRpsResposta result = service.consultarNfsePorRps(oTcConsultarNfseRpsEnvio, UsuarioWs, SenhaWs);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
         private T ReadXML<T>(string file)
@@ -118,6 +122,7 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
             {
                 ((GerarNfseEnvio)(object)result).Rps = new tcDeclaracaoPrestacaoServico();
                 nodes = doc.GetElementsByTagName("Rps");
+                if (nodes[0] == null) throw new Exception("Tag <Rps> não encontrada"); 
                 rps = ((GerarNfseEnvio)(object)result).Rps;
                 tagName = "InfDeclaracaoPrestacaoServico";
             }
@@ -126,9 +131,12 @@ namespace NFe.Components.Fiorilli.TaquaraSP.h
                 {
                     ((CancelarNfseEnvio)(object)result).Pedido = new tcPedidoCancelamento();
                     nodes = doc.GetElementsByTagName("Pedido");
+                    if (nodes[0] == null) throw new Exception("Tag <Pedido> não encontrada");
                     rps = ((CancelarNfseEnvio)(object)result).Pedido;
                     tagName = "InfPedidoCancelamento";
                 }
+                else
+                    if (nodes[0] == null) throw new Exception("Tag <" + result.GetType().Name + "> não encontrada");
 
             XmlNode node = nodes[0];
             ReadXML(node, rps, tagName);

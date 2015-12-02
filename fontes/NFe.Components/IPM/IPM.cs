@@ -69,9 +69,11 @@ namespace NFSe.Components
             }
 
             if(!cancelamento)
-                GerarRetorno(file, result, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+                GerarRetorno(file, result,  Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
             else
-                GerarRetorno(file, result, Propriedade.ExtEnvio.EnvCancelamento_XML, Propriedade.ExtRetorno.CanNfse);
+                GerarRetorno(file, result,  Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
 
             return result;
         }

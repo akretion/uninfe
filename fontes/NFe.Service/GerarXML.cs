@@ -205,11 +205,11 @@ namespace NFe.Service
             #region Move o arquivo de lote que a principio foi gerado na pasta temp para a pasta de envio. Wandrey 14/09/2011
             string nomeArqLoteNfe = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" +
                                     numeroLote.ToString("000000000000000") +
-                                    Propriedade.ExtEnvio.EnvLot;
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML;
 
             string nomeArqLoteNfeTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
                                         numeroLote.ToString("000000000000000") +
-                                        Propriedade.ExtEnvio.EnvLot;
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML;
 
             Functions.Move(nomeArqLoteNfeTemp, nomeArqLoteNfe);
             #endregion
@@ -361,7 +361,7 @@ namespace NFe.Service
             //Gravar o XML do lote das notas fiscais
             string nomeArqLoteNfeTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" +
                                         numeroLote.ToString("000000000000000") +
-                                        Propriedade.ExtEnvio.EnvLot;
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML;
 
             StreamWriter SW_2 = null;
 
@@ -629,12 +629,12 @@ namespace NFe.Service
         /// Gera arquivo XML de consulta situação da NFe, CTe ou MDFe
         /// </summary>
         /// <param name="tipoAplicativo">Tipo do aplicativo, se NFe, CTe ou MDFe</param>
-        /// <param name="pFinalArqEnvio">Final do arquivo a ser gerado</param>
+        /// <param name="Arquivo">Final do arquivo a ser gerado</param>
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="tpEmis">Tipo de emissão</param>
         /// <param name="chNFe">Chave da NFe, CTe ou MDFe</param>
         /// <param name="versao">Versão do schema do XML</param>
-        public void Consulta(TipoAplicativo tipoAplicativo, string pFinalArqEnvio, int tpAmb, int tpEmis, string chNFe, string versao)
+        public void Consulta(TipoAplicativo tipoAplicativo, string Arquivo, int tpAmb, int tpEmis, string chNFe, string versao)
         {
             string xmlDados = string.Empty;
             switch (tipoAplicativo)
@@ -653,7 +653,7 @@ namespace NFe.Service
                     break;
             }
 
-            GravarArquivoParaEnvio(pFinalArqEnvio, xmlDados);
+            GravarArquivoParaEnvio(Arquivo, xmlDados);
         }
 
         #region ConsultaNFe()
@@ -750,7 +750,7 @@ namespace NFe.Service
             if (string.IsNullOrEmpty(versao))
                 versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
 
-            string _arquivo_saida = (string.IsNullOrEmpty(pArquivo) ? DateTime.Now.ToString("yyyyMMddTHHmmss") + Propriedade.ExtEnvio.ConsCad_XML : pArquivo);
+            string _arquivo_saida = (string.IsNullOrEmpty(pArquivo) ? DateTime.Now.ToString("yyyyMMddTHHmmss") + Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML : pArquivo);
 
             XmlDocument doc = new XmlDocument();
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
@@ -846,7 +846,7 @@ namespace NFe.Service
         /// <returns>Retorna o nome e pasta do arquivo xml gerado</returns>
         public string StatusServico(TipoAplicativo servico, int tpEmis, int cUF, int amb, string versao)
         {
-            string arquivoSaida = DateTime.Now.ToString("yyyyMMddTHHmmss") + Propriedade.ExtEnvio.PedSta_XML;
+            string arquivoSaida = DateTime.Now.ToString("yyyyMMddTHHmmss") + Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML;
 
             switch (servico)
             {
@@ -1752,7 +1752,7 @@ namespace NFe.Service
                 //Montar o nome do arquivo -proc-NFe.xml
                 string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                               Functions.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
+                                               Functions.ExtrairNomeArq(strArqInut, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) +
                                                Propriedade.ExtRetorno.ProcInutNFe;
 
                 //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
@@ -1803,7 +1803,7 @@ namespace NFe.Service
                 //Montar o nome do arquivo -proc-NFe.xml
                 string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                               Functions.ExtrairNomeArq(strArqInut, Propriedade.ExtEnvio.PedInu_XML) +
+                                               Functions.ExtrairNomeArq(strArqInut, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) +
                                                Propriedade.ExtRetorno.ProcInutCTe;
 
                 //Gravar o XML em uma linha só (sem quebrar as tag's linha a linha) ou dá erro na hora de validar o XML pelos Schemas. Wandrey 13/05/2009
@@ -1832,8 +1832,8 @@ namespace NFe.Service
         {
             int emp = EmpIndex;
 
-            string nomeArqPedRec = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
-            string nomeArqPedRecTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" + recibo + Propriedade.ExtEnvio.PedRec_XML;
+            string nomeArqPedRec = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + recibo + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
+            string nomeArqPedRecTemp = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\Temp\\" + recibo + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
 
             FileInfo fiTemp = new FileInfo(nomeArqPedRecTemp);
 
@@ -1972,7 +1972,7 @@ namespace NFe.Service
                     //Montar o nome do arquivo -proc-NFe.xml
                     nomeArqProcNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                      PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                     Functions.ExtrairNomeArq(arqNFe, Propriedade.ExtEnvio.Nfe) +
+                                     Functions.ExtrairNomeArq(arqNFe, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) +
                                      extensao;
 
                     //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de 
@@ -2012,7 +2012,7 @@ namespace NFe.Service
                 //Montar o nome do arquivo -proc-CTe.xml
                 nomeArqProcCTe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                  PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                 Functions.ExtrairNomeArq(arqCTe, Propriedade.ExtEnvio.Cte) +
+                                 Functions.ExtrairNomeArq(arqCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) +
                                  Propriedade.ExtRetorno.ProcCTe;
 
                 if (File.Exists(arqCTe))
@@ -2092,7 +2092,7 @@ namespace NFe.Service
                     //Montar o nome do arquivo -proc-MDFe.xml
                     nomeArqProcMDFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                      PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                     Functions.ExtrairNomeArq(arqMDFe, Propriedade.ExtEnvio.MDFe) +
+                                     Functions.ExtrairNomeArq(arqMDFe, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML) +
                                      extensao;
 
                     //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de 
@@ -2148,7 +2148,7 @@ namespace NFe.Service
                     //Montar o nome do arquivo -procLMC.xml
                     nomeArqProcLMC = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                      PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                     Functions.ExtrairNomeArq(arqLMC, Propriedade.ExtEnvio.LMC) +
+                                     Functions.ExtrairNomeArq(arqLMC, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML) +
                                      extensao;
 
                     swProc = File.CreateText(nomeArqProcLMC);
@@ -2951,16 +2951,15 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            string ext = Propriedade.ExtEnvio.Nfe;
+            string ext = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
 
-            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.ExtEnvio.MDFe) >= 0)
-                ext = Propriedade.ExtEnvio.MDFe;
-            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.ExtEnvio.Cte) >= 0)
-                ext = Propriedade.ExtEnvio.Cte;
+            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML) >= 0)
+                ext = Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
+            if (NomeArquivoXML.ToLower().IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) >= 0)
+                ext = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
 
-            return Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
-                Functions.ExtrairNomeArq(NomeArquivoXML, ext) +
-                "-num-lot.xml";
+            return  Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                    Functions.ExtrairNomeArq(NomeArquivoXML, ext) + "-num-lot.xml";
         }
         #endregion
 

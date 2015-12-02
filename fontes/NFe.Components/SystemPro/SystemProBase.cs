@@ -58,13 +58,15 @@ namespace NFe.Components.SystemPro
         public override void EmiteNF(string file)
         {
             string strResult = Invoke("EnviarLoteRpsSincrono", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
             string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.CanNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -80,8 +82,8 @@ namespace NFe.Components.SystemPro
         public override void ConsultarNfse(string file)
         {
             string strResult = Invoke("ConsultarNfseFaixa", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
-
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

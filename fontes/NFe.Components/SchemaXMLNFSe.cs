@@ -3085,6 +3085,25 @@ namespace NFSe.Components
             #endregion
 
             #endregion
+
+            #region Schemas padrão GOIANIA
+
+            // Ainda não está implementado o envio de lote de RPS em Goiania
+            //#region XML de lote RPS
+            //SchemaXML.InfSchemas.Add("NFSE-GOIANIA-EnviarLoteRpsEnvio", new InfSchema() {
+            //    Tag = "EnviarLoteRpsEnvio",
+            //    ID = SchemaXML.InfSchemas.Count + 1,
+            //    ArquivoXSD = "NFSe\\GOIANIA\\nfse_gyn_v02.xsd",
+            //    Descricao = "XML de Lote RPS",
+            //    TagAssinatura = "Rps",
+            //    TagAtributoId = "InfDeclaracaoPrestacaoServico",
+            //    TagLoteAssinatura = "EnviarLoteRpsEnvio",
+            //    TagLoteAtributoId = "LoteRps",
+            //    TargetNameSpace = "http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd"
+            //});
+            //#endregion            
+
+            #endregion
         }
     }
 }

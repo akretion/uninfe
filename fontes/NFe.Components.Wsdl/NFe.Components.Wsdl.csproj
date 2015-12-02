@@ -867,7 +867,9 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSantaRitaRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBeloHorizonteMG-BHISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBeloHorizonteMG-BHISS.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PBeloHorizonteMG-BHISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS.wsdl" />
@@ -1855,7 +1857,9 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HRiodeJaneiro-RJ-CARIOCA.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PRiodeJaneiro-RJ-CARIOCA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRiodeJaneiro-RJ-CARIOCA.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeAutorizacao3.wsdl" />
@@ -2724,9 +2728,18 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSUtil.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GOIANIA\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GOIANIA\nfse_gyn_v02.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
     <None Include="NFse\WSDL\Producao\PColatinaES-EL.wsdl" />
     <None Include="NFse\WSDL\Producao\PRecifePE-ABRASF.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianiaGO.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

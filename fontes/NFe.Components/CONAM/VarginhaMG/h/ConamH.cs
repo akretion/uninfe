@@ -80,7 +80,6 @@ namespace NFe.Components.Conam.VarginhaMG.h
                         _service.Url = Url("mg.varginha");
                         break;
                 }
-                Console.WriteLine(_service.Url);
                 return _service;
             }
         }
@@ -91,16 +90,18 @@ namespace NFe.Components.Conam.VarginhaMG.h
             Sdt_ProcessarpsOut result = service.PROCESSARPS(oProcessaRpsIn);
             
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
-        {            
+        {
             Sdt_CancelaNFE oCancelaNFE = ReadXML<Sdt_CancelaNFE>(file);
             Sdt_RetornoCancelaNFE result = service.CANCELANOTAELETRONICA(oCancelaNFE);
             
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -109,7 +110,8 @@ namespace NFe.Components.Conam.VarginhaMG.h
             SDT_ConsultaNotasProtocoloOut result = service.CONSULTANOTASPROTOCOLO(oConsultaLoteRps);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -123,7 +125,8 @@ namespace NFe.Components.Conam.VarginhaMG.h
             SDT_ConsultaProtocoloOut result = service.CONSULTAPROTOCOLO(oConsultaProtocolo);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -145,6 +148,7 @@ namespace NFe.Components.Conam.VarginhaMG.h
 
             object rps = result;
             string tagName = rps.GetType().Name;
+            if (nodes[0] == null) throw new Exception("Tag <" + tagName + "> não encontrada");
 
             XmlNode node = nodes[0];
             ReadXML(node, rps, tagName);

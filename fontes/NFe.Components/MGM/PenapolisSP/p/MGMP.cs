@@ -156,8 +156,8 @@ namespace NFe.Components.MGM.PenapolisSP.p
 
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
-
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);//.LoteRps);
         }
 
         public override void CancelarNfse(string file)
@@ -178,7 +178,8 @@ namespace NFe.Components.MGM.PenapolisSP.p
                                                      XmlDocumentUtilities.GetValue<string>(oXml, "obs"));
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.CanNfse);            
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);            
         }
 
         public override void ConsultarLoteRps(string file)
@@ -208,9 +209,8 @@ namespace NFe.Components.MGM.PenapolisSP.p
                                                        XmlDocumentUtilities.GetValue<string>(oXml, "tipo"));
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
-
-
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

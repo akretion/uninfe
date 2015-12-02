@@ -30,12 +30,12 @@ namespace NFe.Components
         public string cArquivoSchema { get; private set; }
         public string TargetNameSpace { get; private set; }
 
-        public TipoArquivoXML(string rotaArqXML, int UFCod)
+        public TipoArquivoXML(string rotaArqXML, int UFCod, bool soValidar)
         {
-            DefinirTipoArq(rotaArqXML, UFCod);
+            DefinirTipoArq(rotaArqXML, UFCod, soValidar);
         }
 
-        private void DefinirTipoArq(string fullPathXML, int UFCod)
+        private void DefinirTipoArq(string fullPathXML, int UFCod, bool soValidar)
         {
             nRetornoTipoArq = 0;
             cRetornoTipoArq = string.Empty;
@@ -67,10 +67,6 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4113700-";
                             break;
 
-                        case 2611606: //Recife-PE (ABRASF)
-                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-2611606-";
-                            break;
-
                         default:
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                             break;
@@ -82,7 +78,7 @@ namespace NFe.Components
                     if (fullPathXML.EndsWith(".txt"))
                     {
                         this.nRetornoTipoArq = SchemaXML.MaxID + 104;
-                        this.cRetornoTipoArq = "Arquivo '" + fullPathXML + " não pode ser um arquivo texto para validação";
+                        this.cRetornoTipoArq = "Não pode validar um arquivo texto. Arquivo: '" + fullPathXML + "'";
                         return;
                     }
 
@@ -161,7 +157,7 @@ namespace NFe.Components
                             }
 
                             if (string.IsNullOrEmpty(padraoNFSe))
-                                chave = TipoAplicativo.Nfe.ToString().ToUpper() + /*versaoXML + "-" + padraoNFSe +*/ "-" + nome;
+                                chave = TipoAplicativo.Nfe.ToString().ToUpper() + "-" + nome;
                             else
                                 chave = TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
 
@@ -169,6 +165,12 @@ namespace NFe.Components
                         }
                         catch
                         {
+                            if (soValidar && chave.StartsWith(TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-"))
+                            {
+                                this.cRetornoTipoArq = fullPathXML;
+                                nRetornoTipoArq = -1;
+                                return;
+                            }
                             throw new Exception(string.Format("Não foi possível identificar o tipo do XML para ser validado, ou seja, o sistema não sabe se é um XML de {0}, consulta, etc. ", string.IsNullOrEmpty(padraoNFSe) ? "NF-e/NFC-e/CT-e/MDF-e" : "NFS-e") +
                                 "Por favor verifique se não existe algum erro de estrutura do XML que impede sua identificação. (Chave: " + chave + ")");
                         }

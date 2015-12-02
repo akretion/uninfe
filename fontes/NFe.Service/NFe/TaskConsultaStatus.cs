@@ -61,7 +61,12 @@ namespace NFe.Service
                     new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, Propriedade.ExtEnvio.PedSta_XML, Propriedade.ExtRetorno.Sta_XML);
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oStatusServico, 
+                                        wsProxy.NomeMetodoWS[0], 
+                                        oCabecMsg, this, 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);//.ExtRetorno.Sta_XML);
                 }
                 else
                 {
@@ -77,7 +82,8 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedSta_XML : Propriedade.ExtEnvio.PedSta_TXT;
+                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML : 
+                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT;
 
                 try
                 {

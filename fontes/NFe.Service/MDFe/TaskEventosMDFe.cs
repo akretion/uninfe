@@ -65,8 +65,8 @@ namespace NFe.Service
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, ufParaWS), 
                                     oCabecMsg,
                                     this,
-                                    Propriedade.ExtEnvio.PedEve,
-                                    Propriedade.ExtRetorno.Eve);
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML);
 
                 //Ler o retorno
                 LerRetornoEvento(emp);
@@ -76,7 +76,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedEve, Propriedade.ExtRetorno.Eve_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, Propriedade.ExtRetorno.Eve_ERR, ex);
                 }
                 catch
                 {

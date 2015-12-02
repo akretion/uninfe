@@ -153,19 +153,22 @@ namespace NFe.Components.GovDigital
         public override void EmiteNF(string file)
         {
             string strResult = Invoke("GerarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
             string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.CanNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
             string strResult = Invoke("ConsultarLoteRps", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -176,13 +179,15 @@ namespace NFe.Components.GovDigital
         public override void ConsultarNfse(string file)
         {
             string strResult = Invoke("ConsultarNfseServicoPrestado", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             string strResult = Invoke("ConsultarNfsePorRps", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
         #endregion
 

@@ -52,14 +52,14 @@ namespace NFe.Service
 
                 LerRetornoLMC(dadosLMC);
 
-                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.LMC, Propriedade.ExtRetorno.LMCRet, vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).RetornoXML, vStrXmlRetorno);
             }
             catch (ExceptionEnvioXML ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.LMC, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
                 }
                 catch
                 {
@@ -71,7 +71,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.LMC, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
                 }
                 catch
                 {
@@ -83,7 +83,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.LMC, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.ExtRetorno.LMCRet_ERR, ex, false);
                 }
                 catch
                 {
@@ -120,7 +120,7 @@ namespace NFe.Service
             {
                 var arquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.LMC) + Propriedade.ExtRetorno.ProcLMC;
+                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML) + Propriedade.ExtRetorno.ProcLMC;
 
                 var protLMC = protLivroCombustivel.OuterXml;
                 if (!File.Exists(arquivoNFeProc))
@@ -128,12 +128,12 @@ namespace NFe.Service
                     oGerarXML.XmlDistLMC(NomeArquivoXML, protLMC, Propriedade.ExtRetorno.ProcLMC);
                 }
 
-                if (!oAux.EstaAutorizada(NomeArquivoXML, dadosLMC.dEmissao, Propriedade.ExtEnvio.LMC, Propriedade.ExtRetorno.ProcLMC))
+                if (!oAux.EstaAutorizada(NomeArquivoXML, dadosLMC.dEmissao, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.ExtRetorno.ProcLMC))
                 {
                     TFunctions.MoverArquivo(arquivoNFeProc, PastaEnviados.Autorizados, dadosLMC.dEmissao);
                 }
 
-                if (!oAux.EstaAutorizada(NomeArquivoXML, dadosLMC.dEmissao, Propriedade.ExtEnvio.LMC, Propriedade.ExtEnvio.LMC))
+                if (!oAux.EstaAutorizada(NomeArquivoXML, dadosLMC.dEmissao, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML))
                 {
                     TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, dadosLMC.dEmissao);
                 }

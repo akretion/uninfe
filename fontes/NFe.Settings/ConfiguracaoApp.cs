@@ -534,8 +534,22 @@ namespace NFe.Settings
                 ConfiguracaoApp.CarregarDadosSobre();
 
             //Propriedade.nsURI_nfe = NFe.Components.NFeStrConstants.NAME_SPACE_NFE;
-            SchemaXML.CriarListaIDXML();
-            SchemaXMLNFSe.CriarListaIDXML();
+            try
+            {
+                NFe.Components.SchemaXML.CriarListaIDXML();
+
+                //--------
+                // eliminada, condensada tudo na classe SchemaXML
+                //
+                //SchemaXMLNFSe.CriarListaIDXML();
+            }
+            catch(Exception ex)
+            {
+                ///
+                /// essa mensagem nunca será exibida ao usuário, porque se ela for exibida, você terá que ajustar
+                /// 
+                System.Windows.Forms.MessageBox.Show(ex.Message+"\r\n"+ex.StackTrace);
+            }
         }
         #endregion
 
@@ -962,9 +976,7 @@ namespace NFe.Settings
 
                     Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
                 }
-
             }
-
             return wsProxy;
         }
         #endregion
@@ -1530,7 +1542,7 @@ namespace NFe.Settings
                     {
                         throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
                     }
-                    else if (string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && ! string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    else if (string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && !string.IsNullOrEmpty(empresaValidada.TokenCSC))
                     {
                         throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
                     }
@@ -2088,9 +2100,11 @@ namespace NFe.Settings
 
             string nomeArqRetorno;
             if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
-                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.ExtEnvio.AltCon_TXT) + "-ret-alt-con.txt";
+                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioTXT) + 
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).RetornoTXT;
             else
-                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.ExtEnvio.AltCon_XML) + "-ret-alt-con.xml";
+                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) + 
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).RetornoXML;
 
             string cArqRetorno = pastaRetorno + "\\" + nomeArqRetorno;
 
@@ -2104,7 +2118,7 @@ namespace NFe.Settings
 
                 if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                 {
-                    File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n", Encoding.Default);
+                    File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n");//, Encoding.Default);
                 }
                 else
                 {
@@ -2128,8 +2142,7 @@ namespace NFe.Settings
             try
             {
                 //Deletar o arquivo de configurações automáticas gerado pelo ERP
-                FileInfo oArqReconf = new FileInfo(cArquivoXml);
-                oArqReconf.Delete();
+                Functions.DeletarArquivo(cArquivoXml);
             }
             catch
             {
@@ -2313,7 +2326,7 @@ namespace NFe.Settings
         {
             bool lConsultar = false;
             bool lErro = false;
-            string arqRet = "uninfe-ret-cons-certificado.xml";
+            string arqRet = Propriedade.Extensao(Propriedade.TipoEnvio.ConsCertificado).RetornoXML;
             string tmp_arqRet = Path.Combine(Propriedade.PastaGeralTemporaria, arqRet);
             string cStat = "";
             string xMotivo = "";

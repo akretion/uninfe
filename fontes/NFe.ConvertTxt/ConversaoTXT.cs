@@ -429,25 +429,30 @@ namespace NFe.ConvertTxt
                         case TpcnTipoCampo.tcDec10:
                             {
                                 int pos = ConteudoTag.IndexOf(".") + 1;
-                                int ndec = ConteudoTag.Substring(pos).Length;
-                                string xdec = ConteudoTag.Substring(pos);
-                                //
-                                // ajusta o numero de casas decimais
-                                while (ndec > nDecimais)
+                                int ndec = (pos>1?ConteudoTag.Substring(pos).Length:0);
+                                if (pos >= 1)
                                 {
-                                    if (xdec.Substring(ndec - 1, 1) == "0")
-                                        --ndec;
-                                    else
-                                        break;
-                                }
+                                    string xdec = ConteudoTag.Substring(pos);
+                                    //
+                                    // ajusta o numero de casas decimais
+                                    while (ndec > nDecimais)
+                                    {
+                                        if (xdec.Substring(ndec - 1, 1) == "0")
+                                            --ndec;
+                                        else
+                                            break;
+                                    }
 
-                                if (ndec > nDecimais)
-                                {
-                                    this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
-                                    this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" +
-                                                                        "\r\n\tLinha: {4}: Conteudo do segmento: {5}",
-                                                                        this.FSegmento, tag.ToString(), nDecimais, ndec, this.LinhaLida, this.Registro.Substring(1)) + Environment.NewLine;
+                                    if (ndec > nDecimais)
+                                    {
+                                        this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
+                                        this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> número de casas decimais deve ser de {2} e existe(m) {3}" +
+                                                                            "\r\n\tLinha: {4}: Conteudo do segmento: {5}",
+                                                                            this.FSegmento, tag.ToString(), nDecimais, ndec, this.LinhaLida, this.Registro.Substring(1)) + Environment.NewLine;
+                                    }
                                 }
+                                else
+                                    ndec = nDecimais;
 
                                 #region -- atribui o numero de casas decimais que serão gravadas
 
@@ -1599,7 +1604,7 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vBCUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest, ObOp.Obrigatorio, 1, 15);
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pFCPUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.pFCPUFDest, ObOp.Opcional, 1, 8);
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSUFDest, ObOp.Opcional, 1, 8);
-                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSInter = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSInter, ObOp.Obrigatorio, 1, 8);
+                    NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSInter = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.pICMSInter, ObOp.Obrigatorio, 1, 8);
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.pICMSInterPart = this.LerDouble(TpcnTipoCampo.tcDec4, TpcnResources.pICMSInterPart, ObOp.Opcional, 1, 8);
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vFCPUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFCPUFDest, ObOp.Opcional, 1, 15);
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Obrigatorio, 1, 15);
@@ -2253,7 +2258,6 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "ZC":
-
                 case "ZC01":
                     layout = prefix + this.FSegmento + "|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor";
                     NFe.cana.safra = this.LerString(TpcnResources.safra, ObOp.Obrigatorio, 4, 9);

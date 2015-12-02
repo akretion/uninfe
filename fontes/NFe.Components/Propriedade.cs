@@ -200,10 +200,320 @@ namespace NFe.Components
             get { return PastaExecutavel + "\\schemas"; }
         }
 
-        /// <summary>
-        /// Namespace URI associado (Endereço http dos schemas de XML)
-        /// </summary>
-        //public static string nsURI_nfe { get; set; }
+        public class ExtensaoClass
+        {
+            public string EnvioXML { get; set; }
+            public string EnvioTXT { get; set; }
+            public string RetornoXML { get; set; }
+            public string RetornoTXT { get; set; }
+            public string descricao { get; set; }
+
+            public ExtensaoClass(string exml, string etxt, string rxml, string rtxt, string descr)
+            {
+                this.EnvioXML = exml;
+                this.EnvioTXT = etxt;
+                this.descricao = descr;
+                this.RetornoTXT = rtxt;
+                this.RetornoXML = rxml;
+            }
+        }
+
+        public enum TipoEnvio
+        {
+            AltCon,
+            ConsCertificado,
+            ConsInf,
+            GerarChaveNFe,
+            /// <summary>
+            /// NFe
+            /// </summary>
+            NFe,
+            ConsNFeDest,
+            EnvCancelamento,
+            EnvCCe,
+            EnvDownload,
+            EnvManifestacao,
+            /// <summary>
+            /// CTe
+            /// </summary>
+            CTe,
+            /// <summary>
+            /// MDFe
+            /// </summary>
+            MDFe,
+            MDFeConsNaoEncerrados,
+            /// <summary>
+            /// NFSe
+            /// </summary>
+            EnvLoteRps,
+            PedCanNFSe,
+            PedInuNFSe,
+            PedLoteRps,
+            PedNFSePDF,
+            PedNFSePNG,
+            PedSitLoteRps,
+            PedSitNFSe,
+            PedSitNFSeRps,
+            PedURLNFSe,
+            PedURLNFSeSerie,
+            /// <summary>
+            /// Extensões em comum entre NFe, CTe e MDF-e
+            /// </summary>
+            ConsCad,
+            EnvDFe,
+            EnvDanfeReport,
+            EnvImpressaoDanfe,
+            EnvLot,
+            EnvWSExiste,
+            LMC,
+            MontarLote,
+            PedEve,
+            PedInu,
+            PedRec,
+            PedSit,
+            PedSta,
+            ///
+            /// Exporadicos
+            /// 
+            cce_XML,
+            cancel_XML,
+            sair_XML
+        }
+        private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
+        public static ExtensaoClass Extensao(TipoEnvio value)
+        {
+            if (ListaExtensoes.Count == 0)
+            {
+                #region Extensões gerais
+                ListaExtensoes.Add(TipoEnvio.AltCon, new ExtensaoClass(
+                    "-alt-con.xml", "-alt-con.txt", 
+                    "-ret-alt-con.xml", "-ret-alt-con.txt", 
+                    "Alteração de configuração de empresas"));
+                
+                ListaExtensoes.Add(TipoEnvio.ConsCertificado, new ExtensaoClass(
+                    "-cons-certificado.xml", null, 
+                    "uninfe-ret-cons-certificado.xml", null, 
+                    "Consulta aos certificados instalados"));
+                
+                ListaExtensoes.Add(TipoEnvio.ConsInf, new ExtensaoClass(
+                    "-cons-inf.xml", "-cons-inf.txt", 
+                    "-ret-cons-inf.xml", "-ret-cons-inf.txt", 
+                    "Consulta as configurações do UniNFe"));
+                #endregion
+
+                #region Extensões da NFe
+                ListaExtensoes.Add(TipoEnvio.ConsNFeDest, new ExtensaoClass(
+                    "-cons-nfe-dest.xml",
+                    "-cons-nfe-dest.txt",
+                    "-ret-cons-nfe-dest.xml",
+                    "",
+                    "Consulta de notas destinadas"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvCancelamento, new ExtensaoClass(
+                    "-env-canc.xml", "-env-canc.txt", 
+                    "-ret-env-canc.xml", null, 
+                    "Pedido de cancelamento de NFe/NFCe, use a extensão -ped-eve.xml ou -ped-eve.txt"));
+                
+                ListaExtensoes.Add(TipoEnvio.EnvCCe, new ExtensaoClass(
+                    "-env-cce.xml","-env-cce.txt",
+                    "-ret-env-cce.xml",null, 
+                    "Carta de correção, use a extensao -ped-eve.xml ou -ped-eve.txt"));
+                
+                ListaExtensoes.Add(TipoEnvio.EnvManifestacao, new ExtensaoClass(
+                    "-env-manif.xml", "-env-manif.txt",
+                    "-ret-env-manif.xml", null,
+                    "Pedido de manifestação, use a extensao -ped-eve.xml ou -ped-eve.txt"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvDownload, new ExtensaoClass(
+                    "-nfe-down.xml", "-nfe-down.txt",
+                    "-ret-nfe-down.xml", null,
+                    "Pedido de download de NFe"));
+
+                ListaExtensoes.Add(TipoEnvio.GerarChaveNFe, new ExtensaoClass(
+                    "-gerar-chave.xml", "-gerar-chave.txt",
+                    "-ret-gerar-chave.xml", "-ret-gerar-chave.txt",
+                    "Pedido de geração da chave de acesso da NFe/NFCe/MDFe/CTe"
+                ));
+                
+                ListaExtensoes.Add(TipoEnvio.NFe, new ExtensaoClass(
+                    "-nfe.xml", "-nfe.txt",
+                    "-nfe-ret.xml", null,
+                    "Pedido de envio de NFe/NFCe"
+                ));
+
+                #endregion
+
+                #region Extensões do CTe
+                ListaExtensoes.Add(TipoEnvio.CTe, new ExtensaoClass(
+                    "-cte.xml", "",
+                    "", "",
+                    "Pedido de emissão de CTe"));
+                #endregion
+
+                #region Extensões do MDFe
+                ListaExtensoes.Add(TipoEnvio.MDFe, new ExtensaoClass(
+                    "-mdfe.xml", "",
+                    "", "",
+                    "Pedido de emissão do MDFe"));
+
+                ListaExtensoes.Add(TipoEnvio.MDFeConsNaoEncerrados, new ExtensaoClass(
+                    "-ped-cons-mdfe-naoenc.xml", "",
+                    "-ret-cons-mdfe-naoenc.xml", "",
+                    "Consulta de MDFe não encerrados"));
+                #endregion
+
+                #region Extensoes da NFSe
+                ListaExtensoes.Add(TipoEnvio.EnvLoteRps, new ExtensaoClass(
+                    "-env-loterps.xml", "",
+                    "-ret-loterps.xml", "",
+                    "Envio de lote/rps (NFSe)"));
+
+                ListaExtensoes.Add(TipoEnvio.PedCanNFSe, new ExtensaoClass(
+                    "-ped-cannfse.xml", "",
+                    "-cannfse.xml", "",
+                    "Pedido de cancelamento (NFSe)"));
+
+                ListaExtensoes.Add(TipoEnvio.PedLoteRps, new ExtensaoClass(
+                    "-ped-loterps.xml", "",
+                    "-loterps.xml", "",
+                    "Envio de consulta de lote/rps (NFSe)" ));
+
+                ListaExtensoes.Add(TipoEnvio.PedSitLoteRps, new ExtensaoClass(
+                    "-ped-sitloterps.xml", "",
+                    "-sitloterps.xml", "",
+                    "Pedido de situação de lote/rps (NFSe)"));
+
+                ListaExtensoes.Add(TipoEnvio.PedSitNFSeRps, new ExtensaoClass(
+                    "-ped-sitnfserps.xml", "",
+                    "-sitnfserps.xml", "",
+                    "Pedido de situação do rps (NFSe)"));
+
+                ListaExtensoes.Add(TipoEnvio.PedSitNFSe, new ExtensaoClass(
+                    "-ped-sitnfse.xml", "",
+                    "-sitnfse.xml", "",
+                    "Pedido de situação da nota (NFSe)"));
+
+                ListaExtensoes.Add(TipoEnvio.PedURLNFSe, new ExtensaoClass(
+                    "-ped-urlnfse.xml", "",
+                    "-urlnfse.xml", "",
+                    "XML de Consulta da URL de Visualização da NFSe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedURLNFSeSerie, new ExtensaoClass(
+                    "-ped-urlnfseserie.xml", "",
+                    "-urlnfseserie.xml", "",
+                    "XML de Consulta da URL de Visualização da NFSe-Serie"));
+
+                ListaExtensoes.Add(TipoEnvio.PedNFSePDF, new ExtensaoClass(
+                    "-ped-nfsepdf.xml", "",
+                    "-nfsepdf.xml", "",
+                    "Pedido do link da NFSe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedNFSePNG, new ExtensaoClass(
+                    "-ped-nfsepng.xml", "",
+                    "-nfsepng.xml", "",
+                    "Pedido do link da NFSe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedInuNFSe, new ExtensaoClass(
+                    "-ped-inunfse.xml", "",
+                    "-inunfse.xml", "",
+                    "Inutilização de NFSe"));
+                #endregion
+
+                #region Extensões em comum entre NFe, CTe e MDF-e
+                ListaExtensoes.Add(TipoEnvio.ConsCad, new ExtensaoClass(
+                    "-cons-cad.xml",
+                    "-cons-cad.txt",
+                    "-ret-cons-cad.xml",
+                    "",
+                    "Consulta ao cadastro de contribuinte"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvLot, new ExtensaoClass(
+                    "-env-lot.xml", "",
+                    "", "",
+                    "Pedido de envio de lote de NFe/NFCe/MDFe/CTe"));
+
+                ListaExtensoes.Add(TipoEnvio.LMC, new ExtensaoClass(
+                    "-lmc.xml", "",
+                    "-ret-lmc.xml", "",
+                    "Movimentação de Combustíveis (LMC)"));
+
+                ListaExtensoes.Add(TipoEnvio.MontarLote, new ExtensaoClass(
+                    "-montar-lote.xml", "-montar-lote.txt",
+                    "", "",
+                    "Criação de XML contendo várias NFe/NFCe/MDFe/CTe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedEve, new ExtensaoClass(
+                    "-ped-eve.xml", "-ped-eve.txt",
+                    "-eve.xml", "",
+                    "Pedido de eventos associados a NFe/NFCe/MDFe/CTe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedInu, new ExtensaoClass(
+                    "-ped-inu.xml", "-ped-inu.txt",
+                    "-inu.xml", "",
+                    "Pedido de inutilização de NFe/NFCe/CTe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedRec, new ExtensaoClass(
+                    "-ped-rec.xml", "",
+                    "-pro-rec.xml", "",
+                    "Pedido do recibo da NFe/NFCe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedSit, new ExtensaoClass(
+                    "-ped-sit.xml",
+                    "-ped-sit.txt",
+                    "-sit.xml",
+                    "",
+                    "Pedido de situação da NFe/NFCe/MDFe/CTe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedSta, new ExtensaoClass(
+                    "-ped-sta.xml",
+                    "-ped-sta.txt",
+                    "-sta.xml",
+                    "",
+                    "Pedido de situação de serviços de NFe/NFCe/MDFe/CTe junto a Sefaz"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvWSExiste, new ExtensaoClass(
+                    "-env-ws.xml",
+                    "-env-ws.txt",
+                    "-ret-env-ws.xml",
+                    "-ret-env-ws.txt",
+                    "Pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvDanfeReport, new ExtensaoClass(
+                    "-env-danfe-report.xml",
+                    "-env-danfe-report.txt",
+                    "-ret-env-danfe-report.xml",
+                    "-ret-env-danfe-report.txt",
+                    "Pedido de solicitação do relatório de e-mail enviado pelo DAMFe/DACTe/DAMDFe/CCe"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvImpressaoDanfe, new ExtensaoClass(
+                    "-env-danfe.xml",
+                    "-env-danfe.txt",
+                    "-ret-danfe.xml",
+                    "-ret-danfe.txt",
+                    "Pedido de impressão do DAMFe/DACTe/DAMDFe/CCe"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvDFe, new ExtensaoClass(
+                    "-con-dist-dfe.xml",
+                    "-con-dist-dfe.txt",
+                    "-dist-dfe.xml",
+                    "-dist-dfe.txt",
+                    "Consulta de DFe"));
+                #endregion
+
+                #region Exporadicos
+                ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml","","","",""));
+                ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", ""));
+
+                #region Exporadicos
+                ListaExtensoes.Add(TipoEnvio.sair_XML, new ExtensaoClass("-sair.xml", "", "", "", "Fechar o UniNFe"));
+                ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml", "", "", "", "Uso específico, não usar"));
+                ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", "Uso específico, não usar"));
+                #endregion
+
+                #endregion
+            }
+            return ListaExtensoes[value];
+        }
 
         #region Propriedades com as extensões dos XML ou TXT de envio
         /// <summary>
@@ -211,166 +521,171 @@ namespace NFe.Components
         /// </summary>
         public class ExtEnvio
         {
+            #region Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
+
             #region Extensões gerais
-            public const string ConsCertificado = "-cons-certificado.xml";
             /// <summary>
-            /// -alt-con.xml
+            /// -cons-certificado.xml
             /// </summary>
-            public const string AltCon_XML = "-alt-con.xml";
+            public static string ConsCertificado = Extensao(TipoEnvio.ConsCertificado).EnvioXML;
+            ///// <summary>
+            ///// -alt-con.xml | -alt-con.txt
+            ///// </summary>
+            public static string AltCon_XML = Extensao(TipoEnvio.AltCon).EnvioXML;
+            public static string AltCon_TXT = Extensao(TipoEnvio.AltCon).EnvioTXT;
             /// <summary>
-            /// -alt-con.txt
+            /// -cons-inf.xml | -cons-nf.txt
             /// </summary>
-            public const string AltCon_TXT = "-alt-con.txt";
-            /// <summary>
-            /// -cons-inf.xml
-            /// </summary>
-            public const string ConsInf_XML = "-cons-inf.xml";
-            /// <summary>
-            /// -cons-inf.txt
-            /// </summary>
-            public const string ConsInf_TXT = "-cons-inf.txt";
+            public static string ConsInf_XML = Extensao(TipoEnvio.ConsInf).EnvioXML;
+            public static string ConsInf_TXT = Extensao(TipoEnvio.ConsInf).EnvioTXT;
             #endregion
 
             #region Extensões da NFe
             /// <summary>
             /// -nfe.xml
             /// </summary>
-            public const string Nfe = "-nfe.xml";
+            public static string NFe = Extensao(TipoEnvio.NFe).EnvioXML;
+            
             /// <summary>
             /// -nfe.txt
             /// </summary>
-            public const string Nfe_TXT = "-nfe.txt";
+            public static string NFe_TXT = Extensao(TipoEnvio.NFe).EnvioTXT;
+            
             /// <summary>
             /// -env-cce.xml
             /// </summary>
-            public const string EnvCCe_XML = "-env-cce.xml";
+            public static string EnvCCe = Extensao(TipoEnvio.EnvCCe).EnvioXML;
+
             /// <summary>
             /// -env-cce.txt
             /// </summary>
-            public const string EnvCCe_TXT = "-env-cce.txt";
+            public static string EnvCCe_TXT = Extensao(TipoEnvio.EnvCCe).EnvioTXT;
+            
             /// <summary>
             /// -env-manif.xml
             /// </summary>
-            public const string EnvManifestacao_XML = "-env-manif.xml";
+            public static string EnvManifestacao = Extensao(TipoEnvio.EnvManifestacao).EnvioTXT;
+            
             /// <summary>
             /// -env-manif.txt
             /// </summary>
-            public const string EnvManifestacao_TXT = "-env-manif.txt";
+            public static string EnvManifestacao_TXT = Extensao(TipoEnvio.EnvManifestacao).EnvioTXT;
+            
             /// <summary>
             /// -env-canc.xml
             /// </summary>
-            public const string EnvCancelamento_XML = "-env-canc.xml";
-            /// <summary>
+            public static string EnvCancelamento = Extensao(TipoEnvio.EnvCancelamento).EnvioXML;
+            
+                /// <summary>
             /// -env-canc.txt
             /// </summary>
-            public const string EnvCancelamento_TXT = "-env-canc.txt";
+            public static string EnvCancelamento_TXT = Extensao(TipoEnvio.EnvCancelamento).EnvioTXT;
+            
             /// <summary>
             /// -gerar-chave.xml
             /// </summary>
-            public const string GerarChaveNFe_XML = "-gerar-chave.xml";
+            public static string GerarChaveNFe = Extensao(TipoEnvio.GerarChaveNFe).EnvioXML;
+            
             /// <summary>
             /// -gerar-chave.txt
             /// </summary>
-            public const string GerarChaveNFe_TXT = "-gerar-chave.txt";
+            public static string GerarChaveNFe_TXT = Extensao(TipoEnvio.GerarChaveNFe).EnvioTXT;
+            
             /// <summary>
             /// -down-nfe.xml
             /// </summary>
-            public const string EnvDownload_XML = "-nfe-down.xml";
+            public static string EnvDownload_XML = Extensao(TipoEnvio.EnvDownload).EnvioXML;
+            
             /// <summary>
             /// -down-nfe.txt
             /// </summary>
-            public const string EnvDownload_TXT = "-nfe-down.txt";
+            public static string EnvDownload_TXT = Extensao(TipoEnvio.EnvDownload).EnvioTXT;
+            
             /// <summary>
             /// -cons-nfe-dest.xml
             /// </summary>
-            public const string ConsNFeDest_XML = "-cons-nfe-dest.xml";
+            public static string ConsNFeDest_XML = Extensao(TipoEnvio.ConsNFeDest).EnvioXML;
+            
             /// <summary>
             /// -cons-nfe-dest.txt
             /// </summary>
-            public const string ConsNFeDest_TXT = "-cons-nfe-dest.txt";
-#if nao
-            /// <summary>
-            /// -env-regs.xml
-            /// </summary>
-            public const string EnvRegistroDeSaida_XML = "-env-regs.xml";
-            /// <summary>
-            /// -env-regs.txt
-            /// </summary>
-            public const string EnvRegistroDeSaida_TXT = "-env-regs.txt";
-            /// <summary>
-            /// -env-canc-regs.xml
-            /// </summary>
-            public const string EnvCancRegistroDeSaida_XML = "-env-canc-regs.xml";
-            /// <summary>
-            /// -env-canc-regs.txt
-            /// </summary>
-            public const string EnvCancRegistroDeSaida_TXT = "-env-canc-regs.txt";
-#endif
+            public static string ConsNFeDest_TXT = Extensao(TipoEnvio.ConsNFeDest).EnvioTXT;
             #endregion
 
             #region Extensões do CTe
             /// <summary>
             /// -cte.xml
             /// </summary>
-            public const string Cte = "-cte.xml";
+            public static string CTe = Extensao(TipoEnvio.CTe).EnvioXML;
             #endregion
 
             #region Extensões da NFS-e
             /// <summary>
             /// -env-loterps.xml X -ret-loterps.xml
             /// </summary>
-            public const string EnvLoteRps = "-env-loterps.xml";
+            public static string EnvLoteRps = Extensao(TipoEnvio.EnvLoteRps).EnvioXML;
+
             /// <summary>
             /// -ped-cannfse.xml
             /// </summary>
-            public const string PedCanNfse = "-ped-cannfse.xml";
+            public static string PedCanNfse = Extensao(TipoEnvio.PedCanNFSe).EnvioXML;
+
             /// <summary>
             /// -ped-loterps.xml
             /// </summary>
-            public const string PedLoteRps = "-ped-loterps.xml";
+            public static string PedLoteRps = Extensao(TipoEnvio.PedLoteRps).EnvioXML;
+
             /// <summary>
             /// -ped-sitloterps.xml
             /// </summary>
-            public const string PedSitLoteRps = "-ped-sitloterps.xml";
+            public static string PedSitLoteRps = Extensao(TipoEnvio.PedSitLoteRps).EnvioXML;
+
             /// <summary>
             /// -ped-sitnfserps.xml
             /// </summary>
-            public const string PedSitNfseRps = "-ped-sitnfserps.xml";
+            public static string PedSitNfseRps = Extensao(TipoEnvio.PedSitNFSeRps).EnvioXML;
+
             /// <summary>
             /// -ped-sitnfse.xml
             /// </summary>
-            public const string PedSitNfse = "-ped-sitnfse.xml";
+            public static string PedSitNfse = Extensao(TipoEnvio.PedSitNFSe).EnvioXML;
+
             /// <summary>
             /// -ped-urlnfse.xml x -urlnfse.xml
             /// </summary>
-            public const string PedURLNfse = "-ped-urlnfse.xml";
+            public static string PedURLNfse = Extensao(TipoEnvio.PedURLNFSe).EnvioXML;
+
             /// <summary>
             /// -ped-urlnfseserie.xml x -urlnfseserie.xml
             /// </summary>
-            public const string PedURLNfseSerie = "-ped-urlnfseserie.xml";
+            public static string PedURLNfseSerie = Extensao(TipoEnvio.PedURLNFSeSerie).EnvioXML;
+
             /// <summary>
             /// -ped-nfsepng.xml x -nfsepng.xml
             /// </summary>
-            public const string PedNFSePNG = "-ped-nfsepng.xml";
+            public static string PedNfsePNG = Extensao(TipoEnvio.PedNFSePNG).EnvioXML;
+            
             /// <summary>
             /// -ped-inunfse.xml x -inunfse.xml
             /// </summary>
-            public const string PedInuNfse = "-ped-inunfse.xml";
+            public static string PedInuNfse = Extensao(TipoEnvio.PedInuNFSe).EnvioXML;
+
             /// <summary>
             /// -ped-nfsepdf.xml x -nfsepdf.xml
             /// </summary>
-            public const string PedNFSePDF = "-ped-nfsepdf.xml";
+            public static string PedNfsePDF = Extensao(TipoEnvio.PedNFSePDF).EnvioXML;
             #endregion
 
             #region Extensões MDF-e
             /// <summary>
             /// -mdfe.xml
             /// </summary>
-            public static string MDFe = "-mdfe.xml";
+            public static string MDFe = Extensao(TipoEnvio.MDFe).EnvioXML;
+
             /// <summary>
             /// -ped-cons-mdfe-naoenc.xml
             /// </summary>
-            public static string MDFeConsNaoEnc = "-ped-cons-mdfe-naoenc.xml";
+            public static string MDFeConsNaoEncerrados = Extensao(TipoEnvio.MDFeConsNaoEncerrados).EnvioXML;
             #endregion
 
             #region Extensões em comum entre NFe, CTe e MDF-e
@@ -378,86 +693,101 @@ namespace NFe.Components
             /// <summary>
             /// -ped-eve.xml
             /// </summary>
-            public const string PedEve = "-ped-eve.xml";
+            public static string PedEve = Extensao(TipoEnvio.PedEve).EnvioXML;
+
             /// <summary>
             /// -ped-eve.txt
             /// </summary>
-            public const string PedEve_TXT = "-ped-eve.txt";
+            public static string PedEve_TXT = Extensao(TipoEnvio.PedEve).EnvioTXT;
+            
             /// <summary>
             /// -montar-lote.xml
             /// </summary>
-            public const string MontarLote = "-montar-lote.xml";
+            public static string MontarLote = Extensao(TipoEnvio.MontarLote).EnvioXML;
+
             /// <summary>
             /// -montar-lote.txt
             /// </summary>
-            public const string MontarLote_TXT = "-montar-lote.txt";
+            public static string MontarLote_TXT = Extensao(TipoEnvio.MontarLote).EnvioTXT;
+            
             /// <summary>
             /// -cons-cad.xml
             /// </summary>
-            public const string ConsCad_XML = "-cons-cad.xml";
+            public static string ConsCad = Extensao(TipoEnvio.ConsCad).EnvioXML;
+            
             /// <summary>
             /// -cons-cad.txt
             /// </summary>
-            public const string ConsCad_TXT = "-cons-cad.txt";
+            public static string ConsCad_TXT = Extensao(TipoEnvio.ConsCad).EnvioTXT;
+            
             /// <summary>
             /// -env-lot.xml
             /// </summary>
-            public const string EnvLot = "-env-lot.xml";
+            public static string EnvLot = Extensao(TipoEnvio.EnvLot).EnvioXML;
+
             /// <summary>
             /// -ped-inu.xml
             /// </summary>
-            public const string PedInu_XML = "-ped-inu.xml";
+            public static string PedInu = Extensao(TipoEnvio.PedInu).EnvioXML;
+            
             /// <summary>
             /// -ped-inu.txt
             /// </summary>
-            public const string PedInu_TXT = "-ped-inu.txt";
+            public static string PedInu_TXT = Extensao(TipoEnvio.PedInu).EnvioTXT;
+            
             /// <summary>
             /// -ped-rec.xml
             /// </summary>
-            public const string PedRec_XML = "-ped-rec.xml";
+            public static string PedRec = Extensao(TipoEnvio.PedRec).EnvioXML;
+            
             /// <summary>
-            /// -ped-rec.xml
+            /// -ped-sit.xml
             /// </summary>
-            public const string PedSit_XML = "-ped-sit.xml";
+            public static string PedSit = Extensao(TipoEnvio.PedSit).EnvioXML;
+
             /// <summary>
             /// -ped-sit.txt
             /// </summary>
-            public const string PedSit_TXT = "-ped-sit.txt";
+            public static string PedSit_TXT = Extensao(TipoEnvio.PedSit).EnvioTXT;
+            
             /// <summary>
             /// -ped-sta.xml
             /// </summary>
-            public const string PedSta_XML = "-ped-sta.xml";
+            public static string PedSta = Extensao(TipoEnvio.PedSta).EnvioXML;
+            
             /// <summary>
             /// -ped-sta.txt
             /// </summary>
-            public const string PedSta_TXT = "-ped-sta.txt";
+            public static string PedSta_TXT = Extensao(TipoEnvio.PedSta).EnvioTXT;
             #endregion
 
             #region Extensões usadas na pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)
-            public const string EnvWSExiste_XML = "-env-ws.xml";
-            public const string EnvWSExiste_TXT = "-env-ws.txt";
+            public static string EnvWSExiste = Extensao(TipoEnvio.EnvWSExiste).EnvioXML;
+            public static string EnvWSExiste_TXT = Extensao(TipoEnvio.EnvWSExiste).EnvioTXT;
             #endregion
 
-            public const string EnvImpressaoDanfe_XML = "-env-danfe.xml";
-            public const string EnvImpressaoDanfe_TXT = "-env-danfe.txt";
-            public const string EnvDanfeReport_XML = "-env-danfe-report.xml";
-            public const string EnvDanfeReport_TXT = "-env-danfe-report.txt";
+            #region DANFE
+            public static string EnvImpressaoDanfe = Extensao(TipoEnvio.EnvImpressaoDanfe).EnvioXML;
+            public static string EnvImpressaoDanfe_TXT = Extensao(TipoEnvio.EnvImpressaoDanfe).EnvioTXT;
+
+            public static string EnvDanfeReport = Extensao(TipoEnvio.EnvDanfeReport).EnvioXML;
+            public static string EnvDanfeReport_TXT = Extensao(TipoEnvio.EnvDanfeReport).EnvioTXT;
+            #endregion
 
             #region Extensoes de DFe
-            public const string EnvDFe_XML = "-con-dist-dfe.xml";
-            public const string EnvDFe_TXT = "-con-dist-dfe.txt";
+            public static string EnvDFe = Extensao(TipoEnvio.EnvDFe).EnvioXML;
+            public static string EnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).EnvioTXT;
             #endregion
 
             #region Extensões LMC
-            /// <summary>
-            /// "-lmc.xml"
-            /// </summary>
-            public static string LMC = "-lmc.xml";
+            public static string LMC = Extensao(TipoEnvio.LMC).EnvioXML;
             #endregion
 
             #region Extensões só para resolver um problema de compatibilidade de um usuário, com o tempo poderemos excluir. Wandrey 10/12/2014
-            public const string cce_XML = "-cce.xml";
-            public const string cancel_XML = "-cancel.xml";
+            public static string cce_XML = Extensao(TipoEnvio.cce_XML).EnvioXML;
+            public static string cancel_XML = Extensao(TipoEnvio.cancel_XML).EnvioXML;
+            #endregion
+
             #endregion
         }
         #endregion
@@ -468,12 +798,45 @@ namespace NFe.Components
         /// </summary>
         public class ExtRetorno
         {
-            //public const string RetAltCon_XML = "-ret-alt-con.xml";
-            //public const string RetAltCon_TXT = "-ret-alt-con.txt";
-            public const string RetGerarChaveNFe_XML = "-ret-gerar-chave.xml";
-            public const string RetGerarChaveNFe_TXT = "-ret-gerar-chave.txt";
-            public const string RetConsInf_XML = "-ret-cons-inf.xml";
-            public const string RetConsInf_TXT = "-ret-cons-inf.txt";
+            #region Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
+            public static string RetAltCon_XML = Extensao(TipoEnvio.AltCon).RetornoXML;
+            public static string RetAltCon_TXT = Extensao(TipoEnvio.AltCon).RetornoTXT;
+            public static string RetGerarChaveNFe_XML = Extensao(TipoEnvio.GerarChaveNFe).RetornoXML;
+            public static string RetGerarChaveNFe_TXT = Extensao(TipoEnvio.GerarChaveNFe).RetornoTXT;
+            public static string RetConsInf_XML = Extensao(TipoEnvio.ConsInf).RetornoXML;
+            public static string RetConsInf_TXT = Extensao(TipoEnvio.ConsInf).RetornoTXT;
+            public static string retEnvCCe_XML = Extensao(TipoEnvio.EnvCCe).RetornoXML;
+            public static string retCancelamento_XML = Extensao(TipoEnvio.EnvCancelamento).RetornoXML;
+            public static string retDownload_XML = Extensao(TipoEnvio.EnvDownload).RetornoXML;
+            public static string retConsNFeDest_XML = Extensao(TipoEnvio.ConsNFeDest).RetornoXML;
+            public static string retManifestacao_XML = Extensao(TipoEnvio.EnvManifestacao).RetornoXML;
+            public static string MDFeConsNaoEnc = Extensao(TipoEnvio.MDFeConsNaoEncerrados).RetornoXML;
+            public static string Eve = Extensao(TipoEnvio.PedEve).RetornoXML;
+            public static string Inu_XML = Extensao(TipoEnvio.PedInu).RetornoXML;
+            public static string ConsCad_XML = Extensao(TipoEnvio.ConsCad).RetornoXML;
+            public static string RetEnvLoteRps = Extensao(TipoEnvio.EnvLoteRps).RetornoXML;
+            public static string CanNfse = Extensao(TipoEnvio.PedCanNFSe).RetornoXML;
+            public static string Sit_XML = Extensao(TipoEnvio.PedSit).RetornoXML;
+            public static string ProRec_XML = Extensao(TipoEnvio.PedRec).RetornoXML;
+            public static string Sta_XML = Extensao(TipoEnvio.PedSta).RetornoXML;
+            public static string LoteRps = Extensao(TipoEnvio.PedLoteRps).RetornoXML;
+            public static string SitLoteRps = Extensao(TipoEnvio.PedSitLoteRps).RetornoXML;
+            public static string SitNfse = Extensao(TipoEnvio.PedSitNFSe).RetornoXML;
+            public static string SitNfseRps = Extensao(TipoEnvio.PedSitNFSeRps).RetornoXML;
+            public static string Urlnfse = Extensao(TipoEnvio.PedURLNFSe).RetornoXML;
+            public static string NFSePNG = Extensao(TipoEnvio.PedNFSePNG).RetornoXML;
+            public static string InuNfse = Extensao(TipoEnvio.PedInuNFSe).RetornoXML;
+            public static string NFSePDF = Extensao(TipoEnvio.PedNFSePDF).RetornoXML;
+            public static string retWSExiste_XML = Extensao(TipoEnvio.EnvWSExiste).RetornoXML;
+            public static string retWSExiste_TXT = Extensao(TipoEnvio.EnvWSExiste).RetornoTXT;
+            public static string RetImpressaoDanfe_XML = Extensao(TipoEnvio.EnvImpressaoDanfe).RetornoXML;
+            public static string RetImpressaoDanfe_TXT = Extensao(TipoEnvio.EnvImpressaoDanfe).RetornoTXT;
+            public static string RetDanfeReport_XML = Extensao(TipoEnvio.EnvDanfeReport).RetornoXML;
+            public static string RetDanfeReport_TXT = Extensao(TipoEnvio.EnvDanfeReport).RetornoTXT;
+            public static string retEnvDFe_XML = Extensao(TipoEnvio.EnvDFe).RetornoXML;
+            public static string retEnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).RetornoTXT;
+            public static string LMCRet = Extensao(TipoEnvio.LMC).RetornoXML;
+            #endregion
 
             #region Extensões gerais
 
@@ -484,95 +847,70 @@ namespace NFe.Components
             /// -procnfe.xml
             /// </summary>
             public const string ProcNFe = "-procNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            
             /// <summary>
             /// -den.xml
             /// </summary>
             public const string Den = "-den.xml";
-            /// <summary>
-            /// -ret-env-cce.xml
-            /// </summary>
-            public const string retEnvCCe_XML = "-ret-env-cce.xml";
+            
             /// <summary>
             /// -ret-env-cce.err
             /// </summary>
             public const string retEnvCCe_ERR = "-ret-env-cce.err";
-            /// <summary>
-            /// -ret-canc.xml
-            /// </summary>
-            public const string retCancelamento_XML = "-ret-env-canc.xml";
+            
             /// <summary>
             /// -ret-canc.err
             /// </summary>
             public const string retCancelamento_ERR = "-ret-env-canc.err";
+            
             /// <summary>
             /// -procEventoNFe.xml
             /// </summary>
             public const string ProcEventoNFe = "-procEventoNFe.xml";
+            
             /// <summary>
             /// -procinutnfe.xml
             /// </summary>
             public const string ProcInutNFe = "-procInutNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            
             /// <summary>
             /// -nfe.err
             /// </summary>
             public const string Nfe_ERR = "-nfe.err";
-            /// <summary>
-            /// -ret-down-nfe.xml
-            /// </summary>
-            public const string retDownload_XML = "-ret-nfe-down.xml";
+            
             /// <summary>
             /// -ret-down-nfe.err
             /// </summary>
             public const string retDownload_ERR = "-ret-nfe-down.err";
-            /// <summary>
-            /// -ret-cons-nfe-dest.xml
-            /// </summary>
-            public const string retConsNFeDest_XML = "-ret-cons-nfe-dest.xml";
+            
             /// <summary>
             /// -ret-cons-nfe-dest.err
             /// </summary>
             public const string retConsNFeDest_ERR = "-ret-cons-nfe-dest.err";
-            /// <summary>
-            /// -ret-manif.xml
-            /// </summary>
-            public const string retManifestacao_XML = "-ret-env-manif.xml";
+            
             /// <summary>
             /// -ret-manif.err
             /// </summary>
             public const string retManifestacao_ERR = "-ret-env-manif.err";
-#if nao
-            /// <summary>
-            /// -ret-env-regsaida.xml
-            /// </summary>
-            public const string retRegistroDeSaida_XML = "-ret-env-regs.xml";
-            /// <summary>
-            /// -ret-env-regsaida.txt
-            /// </summary>
-            public const string retRegistroDeSaida_TXT = "-ret-env-regs.txt";
-            /// <summary>
-            /// -ret-env-regsaida.xml
-            /// </summary>
-            public const string retCancRegistroDeSaida_XML = "-ret-env-canc-regs.xml";
-            /// <summary>
-            /// -ret-env-regsaida.txt
-            /// </summary>
-            public const string retCancRegistroDeSaida_TXT = "-ret-env-canc-regs.txt";
-#endif
             #endregion
 
             #region Extensões CTe
+            
             /// <summary>
             /// -procCTe.xml
             /// </summary>
             public const string ProcCTe = "-procCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            
             /// <summary>
             /// -procEventoCTe.xml
             /// </summary>
             public const string ProcEventoCTe = "-procEventoCTe.xml";
+            
             /// <summary>
             /// -procInutCTe.xml
             /// </summary>
             public static string ProcInutCTe = "-procInutCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            
             /// <summary>
             /// -cte.err
             /// </summary>
@@ -584,18 +922,17 @@ namespace NFe.Components
             /// -procMDFe.xml
             /// </summary>
             public const string ProcMDFe = "-procMDFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
+            
             /// <summary>
             /// -procEventoMDFe.xml
             /// </summary>
             public const string ProcEventoMDFe = "-procEventoMDFe.xml";
+            
             /// <summary>
             /// -mdfe.err
             /// </summary>
             public const string MDFe_ERR = "-mdfe.err";
-            /// <summary>
-            /// -ret-consmdfenaoenc.xml"
-            /// </summary>
-            public static string MDFeConsNaoEnc = "-ret-cons-mdfe-naoenc.xml";
+            
             /// <summary>
             /// -ret-consmdfenaoenc.err
             /// </summary>
@@ -604,61 +941,45 @@ namespace NFe.Components
 
             #region Extensões em comum entre NFe, CTe e MDF-e
             /// <summary>
-            /// -eve.xml
-            /// </summary>
-            public const string Eve = "-eve.xml";
-            /// <summary>
             /// -eve.err
             /// </summary>
             public const string Eve_ERR = "-eve.err";
+            
             /// <summary>
             /// -montar-lote.err
             /// </summary>
             public const string MontarLote_ERR = "-montar-lote.err";
-            /// <summary>
-            /// -ret-cons-cad.xml
-            /// </summary>
-            public const string ConsCad_XML = "-ret-cons-cad.xml";
+            
             /// <summary>
             /// -ret-cons-cad.err
             /// </summary>
             public const string ConsCad_ERR = "-ret-cons-cad.err";
-            /// <summary>
-            /// -sit.xml
-            /// </summary>
-            public const string Sit_XML = "-sit.xml";
+            
             /// <summary>
             /// -sit.err
             /// </summary>
             public const string Sit_ERR = "-sit.err";
-            /// <summary>
-            /// -pro-rec.xml
-            /// </summary>
-            public const string ProRec_XML = "-pro-rec.xml";
+            
             /// <summary>
             /// -pro-rec.err
             /// </summary>
             public const string ProRec_ERR = "-pro-rec.err";
-            /// <summary>
-            /// -sta.xml
-            /// </summary>
-            public const string Sta_XML = "-sta.xml";
+            
             /// <summary>
             /// -sta.err
             /// </summary>
             public const string Sta_ERR = "-sta.err";
-            /// <summary>
-            /// -inu.xml
-            /// </summary>
-            public const string Inu_XML = "-inu.xml";
+            
             /// <summary>
             /// -inu.err
             /// </summary>
             public const string Inu_ERR = "-inu.err";
+            
             /// <summary>
             /// -rec.xml
             /// </summary>
             public const string Rec = "-rec.xml";
+            
             /// <summary>
             /// -rec.err
             /// </summary>
@@ -666,105 +987,60 @@ namespace NFe.Components
             #endregion
 
             #region Extensões NFSe
+            
             /// <summary>
-            /// -ret-loterps.xml X -env-loterps.xml
+            /// -ret-loterps.err
             /// </summary>
-            public const string RetLoteRps = "-ret-loterps.xml";
-            /// <summary>
-            /// -ret-loterps.err X -env-loterps.xml
-            /// </summary>
-            public const string RetLoteRps_ERR = "-ret-loterps.err";
-            /// <summary>
-            /// -cannfse.xml
-            /// </summary>
-            public const string CanNfse = "-cannfse.xml";
+            public const string RetEnvLoteRps_ERR = "-ret-loterps.err";
+            
             /// <summary>
             /// -cannfse.err
             /// </summary>
             public const string CanNfse_ERR = "-cannfse.err";
-            /// <summary>
-            /// -loterps.xml
-            /// </summary>
-            public const string LoteRps = "-loterps.xml";
+            
             /// <summary>
             /// -lotrps.err
             /// </summary>
             public const string LoteRps_ERR = "-loterps.err";
-            /// <summary>
-            /// -sitloterps.xml
-            /// </summary>
-            public const string SitLoteRps = "-sitloterps.xml";
+            
             /// <summary>
             /// -sitloterps.err
             /// </summary>
             public const string SitLoteRps_ERR = "-sitloterps.err";
-            /// <summary>
-            /// -sitnfse.xml
-            /// </summary>
-            public const string SitNfse = "-sitnfse.xml";
+
             /// <summary>
             /// -sitnfse.err
             /// </summary>
             public const string SitNfse_ERR = "-sitnfse.err";
-            /// <summary>
-            /// -sitnfserps.xml
-            /// </summary>
-            public const string SitNfseRps = "-sitnfserps.xml";
+
             /// <summary>
             /// -sitnfserps.err
             /// </summary>
             public const string SitNfseRps_ERR = "-sitnfserps.err";
-            /// <summary>
-            /// -urlnfse.xml x -ped-urlnfse.xml
-            /// </summary>
-            public const string Urlnfse = "-urlnfse.xml";
+            
             /// <summary>
             /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
             /// </summary>
             public const string Urlnfse_ERR = "-urlnfse.err";
+            public const string UrlnfseSerie_ERR = "-urlnfserie.err";
+
             /// <summary>
-            /// -ped-nfsepng.xml x -nfsepng.xml
-            /// </summary>
-            public const string NFSePNG = "-nfsepng.xml";
-            /// <summary>
-            /// -ped-nfsepng.xml x -nfsepng.xml x nfsepng.err
+            /// nfsepng.err
             /// </summary>
             public const string NFSePNG_ERR = "-nfsepng.err";
+            
             /// <summary>
-            /// -ped-inunfse.xml x -inunfse.xml
-            /// </summary>
-            public const string InuNfse = "-inunfse.xml";
-            /// <summary>
-            /// -ped-inunfse.xml x -inunfse.xml x -inunfse.err
+            /// -inunfse.err
             /// </summary>
             public const string InuNfse_ERR = "-inunfse.err";
-            /// <summary>
-            /// -ped-nfsepng.xml x -nfsepng.xml
-            /// </summary>
-            public const string NFSePDF = "-nfsepdf.xml";
+            public const string NFSePDF_ERR = "-nfsepdf.err";
             #endregion
-
-            #region Extensões usadas para retorno da pesquisa de se um serviço exista para um determinado estado (Producao/Homologacao)
-            public const string retWSExiste_XML = "-ret-env-ws.xml";
-            public const string retWSExiste_TXT = "-ret-env-ws.txt";
-            #endregion
-
-            public const string RetImpressaoDanfe_XML = "-ret-danfe.xml";
-            public const string RetImpressaoDanfe_TXT = "-ret-danfe.txt";
-            public const string RetDanfeReport_XML = "-ret-env-danfe-report.xml";
-            public const string RetDanfeReport_TXT = "-ret-env-danfe-report.txt";
 
             #region Extensoes de DFe
-            public const string retEnvDFe_XML = "-dist-dfe.xml";
-            public const string retEnvDFe_TXT = "-dist-dfe.txt";
             public const string retEnvDFe_ERR = "-con-dist-dfe.err";
             #endregion
 
             #region Extensões do LMC
-            /// <summary>
-            /// -ret-lmc.xml
-            /// </summary>
-            public static string LMCRet = "-ret-lmc.xml";
             /// <summary>
             /// -ret-lmc.err
             /// </summary>

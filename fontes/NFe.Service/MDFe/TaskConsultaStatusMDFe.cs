@@ -53,14 +53,18 @@ namespace NFe.Service
                 wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, Propriedade.ExtEnvio.PedSta_XML, Propriedade.ExtRetorno.Sta_XML);
+                oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, 
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, 
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);//.ExtRetorno.Sta_XML);
             }
             catch (Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedSta_XML, Propriedade.ExtRetorno.Sta_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, 
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, 
+                                    Propriedade.ExtRetorno.Sta_ERR, ex);
                 }
                 catch
                 {

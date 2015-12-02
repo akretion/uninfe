@@ -41,7 +41,8 @@ namespace NFe.Components.FISSLEX
                         switch (CodigoMun)
                         {
                             case 5107909: //Sinop-MT
-                                fisslexService = new NFe.Components.SimplISS.PiracicabaSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                fisslexService = new NFe.Components.FISSLEX.SinopMT.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                //fisslexService = new NFe.Components.SimplISS.PiracicabaSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:

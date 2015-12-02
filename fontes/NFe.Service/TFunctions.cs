@@ -248,14 +248,14 @@ namespace NFe.Service
             {
                 case PastaEnviados.EmProcessamento:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
-                    destinoArquivo = nomePastaEnviado + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                    destinoArquivo = nomePastaEnviado + "\\" + Path.GetFileName(arquivo);//Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     break;
 
                 case PastaEnviados.Autorizados:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                         PastaEnviados.Autorizados.ToString() + "\\" +
                                         Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
-                    destinoArquivo = nomePastaEnviado + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                    destinoArquivo = nomePastaEnviado + Path.GetFileName(arquivo);//Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                     goto default;
 
                 case PastaEnviados.Denegados:
@@ -265,7 +265,7 @@ namespace NFe.Service
                     if (arquivo.ToLower().EndsWith(Propriedade.ExtRetorno.Den))//danasa 11-4-2012
                         destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(arquivo));
                     else
-                        destinoArquivo = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.Den);
+                        destinoArquivo = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) + Propriedade.ExtRetorno.Den);
                     goto default;
 
                 default:
@@ -288,7 +288,7 @@ namespace NFe.Service
                     //ele para a pasta com erro antes para evitar exceção. Wandrey 05/07/2011
                     if (File.Exists(destinoArquivo))
                     {
-                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                         File.Move(destinoArquivo, destinoErro);
 
                         //danasa 11-4-2012
@@ -307,7 +307,7 @@ namespace NFe.Service
                     }
                     else
                     {
-                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                         File.Move(arquivo, destinoErro);
 
                         //danasa 11-4-2012
@@ -352,7 +352,7 @@ namespace NFe.Service
                         if (Directory.Exists(nomePastaBackup))
                         {
                             //Mover o arquivo da nota fiscal para a pasta de backup
-                            string destinoBackup = nomePastaBackup + Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                            string destinoBackup = nomePastaBackup + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
                             if (File.Exists(destinoBackup))
                             {
                                 File.Delete(destinoBackup);
@@ -416,19 +416,19 @@ namespace NFe.Service
             {
                 if (Directory.Exists(Empresas.Configuracoes[emp].PastaDanfeMon))
                 {
-                    if ((arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.Nfe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                    if ((arquivoCopiar.ToLower().Contains(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcNFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.Den.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonDenegadaNFe) ||
-                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.Cte.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
-                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtEnvio.MDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoNFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
                     {
                         //Montar o nome do arquivo de destino
-                        string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
+                        string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Path.GetFileName(arquivoCopiar);// Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
 
                         //Copiar o arquivo para o destino
                         FileInfo oArquivo = new FileInfo(arquivoCopiar);
@@ -787,13 +787,13 @@ namespace NFe.Service
                     switch (epecTipo)
                     {
                         case "procEventoCTe":
-                            fExtensao = Propriedade.ExtEnvio.Cte;
+                            fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                             break;
                         case "procEventoMDFe":
-                            fExtensao = Propriedade.ExtEnvio.MDFe;
+                            fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
                             break;
                         default:    //pode ser NFe
-                            fExtensao = Propriedade.ExtEnvio.Nfe;
+                            fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                             break;
                     }
                     string xTemp = Path.GetFileName(Functions.ExtrairNomeArq(nomeArquivoRecebido, Propriedade.ExtRetorno.ProcEventoNFe)) + fExtensao;
@@ -816,8 +816,8 @@ namespace NFe.Service
                                 if (emp.tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
                                 {
                                     fTemp = Directory.GetFiles(emp.PastaContingencia,
-                                                                            Path.GetFileName(Functions.ExtrairNomeArq(nomeArquivoRecebido, Propriedade.ExtEnvio.PedEve) + fExtensao),
-                                                                    SearchOption.AllDirectories);
+                                                               Path.GetFileName(Functions.ExtrairNomeArq(nomeArquivoRecebido, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML) + fExtensao),
+                                                               SearchOption.AllDirectories);
                                     if (fTemp.Length == 0)
                                     {
                                         fTemp = Directory.GetFiles(emp.PastaValidado, xTemp, SearchOption.TopDirectoryOnly);
@@ -1281,7 +1281,7 @@ namespace NFe.Service
 
                     if (args != null)
                     {
-                        string fFileNameRetornoOk = temps + NFe.Components.Propriedade.ExtRetorno.RetImpressaoDanfe_XML;
+                        string fFileNameRetornoOk = temps + NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoXML;
                         ///
                         /// formata o arquivo de retorno ao ERP com base no arquivo enviado para impressao
                         /// 999999-procNFe.xml -> 99999-procNFe-ret-danfe.xml
@@ -1291,9 +1291,10 @@ namespace NFe.Service
                         tipo = "";
                         if (args.TryGetValue("xml", out tipo))
                             if (tipo == "0")    //é TXT?
-                                fFileNameRetornoOk = NFe.Components.Functions.ExtrairNomeArq(fFileNameRetornoOk, NFe.Components.Propriedade.ExtRetorno.RetImpressaoDanfe_XML) + NFe.Components.Propriedade.ExtRetorno.RetImpressaoDanfe_TXT;
+                                fFileNameRetornoOk = NFe.Components.Functions.ExtrairNomeArq(fFileNameRetornoOk, NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoXML) +
+                                                     NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoTXT;
 
-                        if (fFileNameRetornoOk.EndsWith(NFe.Components.Propriedade.ExtRetorno.RetImpressaoDanfe_XML))
+                        if (fFileNameRetornoOk.EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoXML))
                         {
                             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                                                     new XElement("DANFE",

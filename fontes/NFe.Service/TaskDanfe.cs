@@ -37,7 +37,7 @@ namespace NFe.Service
 </dados>
 #endif
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_XML, Propriedade.ExtRetorno.RetDanfeReport_XML).Replace(".xml", ".err"))));
+                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).RetornoXML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -50,7 +50,7 @@ namespace NFe.Service
                         dataf = Convert.ToDateTime(Functions.LerTag(elementConfig, "DataFinal", "2999-1-1"));
                         imprimir = Convert.ToBoolean(Functions.LerTag(elementConfig, "Imprimir", "true"));
                     }
-                    fm = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvDanfeReport_XML) + Propriedade.ExtRetorno.RetDanfeReport_XML;
+                    fm = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).RetornoXML;
                 }
                 else
                 {
@@ -61,7 +61,7 @@ Imprimir|true | false
 ExportarPasta|Enviar | Enviados | Erros
 #endif
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvDanfeReport_TXT, Propriedade.ExtRetorno.RetDanfeReport_TXT).Replace(".txt", ".err"))));
+                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioTXT, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).RetornoTXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                     foreach (string cTexto in cLinhas)
@@ -85,7 +85,8 @@ ExportarPasta|Enviar | Enviados | Erros
                                 break;
                         }
                     }
-                    fm = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvDanfeReport_TXT) + Propriedade.ExtRetorno.RetDanfeReport_TXT;
+                    fm = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioTXT) + 
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).RetornoTXT;
                 }
                 if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
                 {
@@ -98,8 +99,9 @@ ExportarPasta|Enviar | Enviados | Erros
             {
                 try
                 {
-                    string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDanfeReport_XML : Propriedade.ExtEnvio.EnvDanfeReport_TXT);
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.RetDanfeReport_XML.Replace(".xml", ".err"), ex);
+                    string ExtEnvio = (this.vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioXML : 
+                                                                   Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioTXT);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtEnvio, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).RetornoXML.Replace(".xml", ".err"), ex);
                 }
                 catch
                 {
@@ -135,7 +137,7 @@ ExportarPasta|Enviar | Enviados | Erros
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Nfe_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.ExtRetorno.Nfe_ERR, ex);
                 }
                 catch
                 {
@@ -176,7 +178,8 @@ ExportarPasta|Enviar | Enviados | Erros
     <Opcoes></Opcoes>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_XML, Propriedade.ExtRetorno.RetImpressaoDanfe_XML).Replace(".xml", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                            Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoXML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -213,7 +216,8 @@ plq|
 auxiliar|
 opcoes|
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT, Propriedade.ExtRetorno.RetImpressaoDanfe_TXT).Replace(".txt", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                            Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioTXT, Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoTXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                     foreach (string cTexto in cLinhas)
@@ -263,8 +267,8 @@ opcoes|
             {
                 try
                 {
-                    string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvImpressaoDanfe_XML : Propriedade.ExtEnvio.EnvImpressaoDanfe_TXT);
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.RetImpressaoDanfe_XML.Replace(".xml", ".err"), ex);
+                    string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioXML : Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioTXT);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioXML.Replace(".xml", ".err"), ex);
                 }
                 catch
                 {

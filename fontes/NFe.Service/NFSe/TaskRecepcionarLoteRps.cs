@@ -43,7 +43,7 @@ namespace NFe.Service.NFSe
             try
             {
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
-                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvLoteRps) + Propriedade.ExtRetorno.RetLoteRps_ERR);
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) + Propriedade.ExtRetorno.RetEnvLoteRps_ERR);
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
 
                 oDadosEnvLoteRps = new DadosEnvLoteRps(emp);
@@ -319,15 +319,15 @@ namespace NFe.Service.NFSe
                     ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this, 
-                                            Propriedade.ExtEnvio.EnvLoteRps,    //"-env-loterps", 
-                                            Propriedade.ExtRetorno.RetLoteRps,  //"-ret-loterps", 
+                    oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,    //"-env-loterps", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,  //"-ret-loterps", 
                                             padraoNFSe, Servico);
 
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvLoteRps) + "\\" + Propriedade.ExtRetorno.RetLoteRps);
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) + "\\" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
@@ -337,7 +337,7 @@ namespace NFe.Service.NFSe
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, Propriedade.ExtRetorno.RetEnvLoteRps_ERR, ex);
                 }
                 catch
                 {
@@ -367,7 +367,7 @@ namespace NFe.Service.NFSe
         private void EncryptAssinatura()
         {
             ///danasa: 12/2013
-            NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosEnvLoteRps.cMunicipio);
+            NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosEnvLoteRps.cMunicipio, false);
             val.EncryptAssinatura(NomeArquivoXML);
         }
         #endregion

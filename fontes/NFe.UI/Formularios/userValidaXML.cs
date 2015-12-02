@@ -72,41 +72,37 @@ namespace NFe.UI
 
                         if (Empresas.Configuracoes[this.Emp].Servico == TipoAplicativo.Nfse)
                         {
-                            dlg.Filter += "Arquivos de NFSe|*" + Propriedade.ExtEnvio.EnvLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedCanNfse +
-                                ";*" + Propriedade.ExtEnvio.PedLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedSitLoteRps +
-                                ";*" + Propriedade.ExtEnvio.PedSitNfse +
-                                ";*" + Propriedade.ExtEnvio.PedSitNfseRps +
-                                ";*" + Propriedade.ExtEnvio.PedInuNfse +
-                                ";*" + Propriedade.ExtEnvio.PedNFSePNG + 
-                                ";*" + Propriedade.ExtEnvio.PedNFSePDF; 
+                            dlg.Filter += "Arquivos de NFSe|*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML; 
                         }
                         else
                         {
-                            dlg.Filter = "Todos os arquivos|*" + Propriedade.ExtEnvio.Nfe +
-                                        ";*" + Propriedade.ExtEnvio.Cte +
-                                        ";*" + Propriedade.ExtEnvio.EnvCancelamento_XML +
-                                        ";*" + Propriedade.ExtEnvio.EnvCCe_XML +
-                                        ";*" + Propriedade.ExtEnvio.EnvManifestacao_XML +
-                                        ";*" + Propriedade.ExtEnvio.EnvDFe_XML +
-                                //";*" + Propriedade.ExtEnvio.ConsNFeDest_XML +
-                                //";*" + Propriedade.ExtEnvio.EnvDownload_XML +
-                                //";*" + Propriedade.ExtEnvio.EnvCancRegistroDeSaida_XML +
-                                //";*" + Propriedade.ExtEnvio.EnvRegistroDeSaida_XML +
-                                        ";*" + Propriedade.ExtEnvio.PedEve +
-                                        ";*" + Propriedade.ExtEnvio.PedInu_XML +
-                                        ";*" + Propriedade.ExtEnvio.PedSit_XML;
-                            dlg.Filter += string.Format("|Arquivos da NFe/NFCe (*.*{0})|*{0}", Propriedade.ExtEnvio.Nfe);
-                            dlg.Filter += string.Format("|Arquivos de CTe (*.*{0})|*{0}", Propriedade.ExtEnvio.Cte);
-                            dlg.Filter += string.Format("|Arquivos de DFe (*.*{0})|*{0}", Propriedade.ExtEnvio.EnvDFe_XML);
-                            dlg.Filter += string.Format("|Arquivos de MDFe (*.*{0})|*{0}", Propriedade.ExtEnvio.MDFe);
+                            dlg.Filter = "Todos os arquivos|*" + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML +
+                                        ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML;
+                            dlg.Filter += string.Format("|Arquivos da NFe/NFCe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
+                            dlg.Filter += string.Format("|Arquivos de CTe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML);
+                            dlg.Filter += string.Format("|Arquivos de DFe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML);
+                            dlg.Filter += string.Format("|Arquivos de MDFe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);
                             dlg.Filter += string.Format("|Arquivos de eventos (*.*{0},*.*{1},*.*{2},*.*{3},*.*{4})|*{0};*{1};*{2};*{3};*{4}",
-                                Propriedade.ExtEnvio.EnvCCe_XML,
-                                Propriedade.ExtEnvio.PedEve,
-                                Propriedade.ExtEnvio.EnvCancelamento_XML,
-                                Propriedade.ExtEnvio.EnvDownload_XML,
-                                Propriedade.ExtEnvio.EnvManifestacao_XML);
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML);
                         }
                         
                         if (!string.IsNullOrEmpty(path))
@@ -195,7 +191,7 @@ namespace NFe.UI
                 val.Execute();
 
                 //Detectar o tipo do arquivo
-                NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
+                NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
 
                 this.textBox_resultado.Text = validarXML.TipoArqXml.cRetornoTipoArq;
 

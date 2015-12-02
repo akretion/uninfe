@@ -621,7 +621,13 @@ namespace NFe.Components
         /// Prefeitura de Patos de Minas - MG
         /// </summary>
         [Description("Consist")]
-        CONSIST
+        CONSIST,
+        /// <summary>
+        /// Padrão Consist
+        /// Prefeitura de Goiania - GO
+        /// </summary>
+        [Description("Goiania")]
+        GOIANIA
 
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao        
