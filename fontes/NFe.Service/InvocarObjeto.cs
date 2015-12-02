@@ -49,11 +49,8 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            if (!string.IsNullOrEmpty(finalArqEnvio))
-                finalArqEnvio = Functions.ExtrairNomeArq(finalArqEnvio, ".xml");
-
-            if (!string.IsNullOrEmpty(finalArqRetorno))
-                finalArqRetorno = Functions.ExtrairNomeArq(finalArqRetorno, ".xml");
+            finalArqEnvio = Functions.ExtractExtension(finalArqEnvio);
+            finalArqRetorno = Functions.ExtractExtension(finalArqRetorno);
 
             XmlDocument docXML = new XmlDocument();
 
@@ -69,7 +66,7 @@ namespace NFe.Service
             Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, finalArqEnvio + ".xml") + finalArqRetorno + ".err");
 
             // Validar o Arquivo XML
-            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
 
             string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
@@ -225,8 +222,8 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            finalArqEnvio = Functions.ExtrairNomeArq(finalArqEnvio, ".xml");
-            finalArqRetorno = Functions.ExtrairNomeArq(finalArqRetorno, ".xml");
+            finalArqEnvio = Functions.ExtractExtension(finalArqEnvio);
+            finalArqRetorno = Functions.ExtractExtension(finalArqRetorno);
 
             XmlDocument docXML = new XmlDocument();
 
@@ -240,7 +237,7 @@ namespace NFe.Service
             Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, finalArqEnvio + ".xml") + finalArqRetorno + ".err");
 
             // Validar o Arquivo XML
-            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
             string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
             if (cResultadoValidacao != "")
             {

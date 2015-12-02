@@ -28,10 +28,10 @@ namespace NFe.Service
             List<string> arquivosNFe = new List<string>();
 
             //Aguardar a assinatura de todos os arquivos da pasta de lotes
-            arquivosNFe = oAux.ArquivosPasta(Empresas.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.ExtEnvio.Nfe);
+            arquivosNFe = oAux.ArquivosPasta(Empresas.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
             if (arquivosNFe.Count == 0)
             {
-                if (this.NomeArquivoXML.IndexOf(Propriedade.ExtEnvio.MontarLote_TXT) >= 0)
+                if (this.NomeArquivoXML.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
                 {
                     try
                     {
@@ -40,10 +40,10 @@ namespace NFe.Service
                         xml.Append("<MontarLoteNFe>");
                         foreach (var filename in File.ReadAllLines(this.NomeArquivoXML, Encoding.Default))
                         {
-                            xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.ExtEnvio.Nfe) ? "" : Propriedade.ExtEnvio.Nfe));
+                            xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) ? "" : Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML));
                         }
                         xml.Append("</MontarLoteNFe>");
-                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.ExtEnvio.MontarLote_TXT, Propriedade.ExtEnvio.MontarLote))), xml.ToString());
+                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML))), xml.ToString());
 
                         //Deletar o arquivo de solicitação de montagem do lote de NFe
                         FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
@@ -53,7 +53,7 @@ namespace NFe.Service
                     {
                         try
                         {
-                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.ExtEnvio.MontarLote_TXT, "-montar-lote.err", ex);
+                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.ExtRetorno.MontarLote_ERR, ex);
                         }
                         catch
                         {
@@ -133,7 +133,7 @@ namespace NFe.Service
                     {
                         try
                         {
-                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.ExtEnvio.MontarLote, "-montar-lote.err", ex);
+                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML, Propriedade.ExtRetorno.MontarLote_ERR, ex);
                         }
                         catch
                         {

@@ -259,6 +259,10 @@ namespace NFe.Components
 
             FileInfo fi = new FileInfo(arquivo);
             string ret = fi.Name;
+            string retorno = "";
+
+            if (!string.IsNullOrEmpty(finalArq) && finalArq.Length == 4 && finalArq.StartsWith("."))
+                return ret.Substring(0, ret.Length - finalArq.Length);
 
             ///
             /// alteracao feita pq um usuario comentou que estava truncando uma parte do nome original do arquivo
@@ -269,27 +273,72 @@ namespace NFe.Components
             /// se o nome do arquivo for: 123456790-ret-nfe.xml e
             ///             finalArq for:              -nfe.xml, retornaria: 123456789-ret
             ///
-            if (ret.EndsWith(finalArq, StringComparison.InvariantCultureIgnoreCase))
-            {
-                ret = ret.Substring(0, ret.Length - finalArq.Length);
-                
-                return ret;
-            }
-
-            foreach (var pS in typeof(Propriedade.ExtEnvio).GetFields(BindingFlags.Public | BindingFlags.Static))
-            {
-                string extensao = pS.GetValue(null).ToString();
-
-                if (ret.EndsWith(extensao, StringComparison.InvariantCultureIgnoreCase))
-                    return ret.Substring(0, ret.Length - extensao.Length);
-            }
-
+            /*
+                -pro-rec.err
+                -pro-rec.xml
+                -rec.err
+                -rec.xml
+             */
+            ///
+            /// pesquisa primeiro pela lista de retornos, porque geralmente os nomes são maiores que os de envio
+            /// isso evita conflito de nomes como por ex: -cons-cad.xml x -ret-cons-cad.xml
+            /// 
             foreach (var pS in typeof(Propriedade.ExtRetorno).GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 string extensao = pS.GetValue(null).ToString();
 
                 if (ret.EndsWith(extensao, StringComparison.InvariantCultureIgnoreCase))
-                    return ret.Substring(0, ret.Length - extensao.Length);
+                {
+                    retorno = ret.Substring(0, ret.Length - extensao.Length);
+                    break;
+                }
+            }
+
+            if (retorno == "")
+            {
+                foreach (Propriedade.TipoEnvio item in Enum.GetValues(typeof(Propriedade.TipoEnvio)))
+                {
+                    var EXT = Propriedade.Extensao(item);
+
+                    ///
+                    /// pesquisa primeiro pelas extensões de retorno, pois geralmente, elas são maiores que as de envio
+                    /// 
+                    if (!string.IsNullOrEmpty(EXT.RetornoXML))
+                        if (ret.EndsWith(EXT.RetornoXML, StringComparison.InvariantCultureIgnoreCase))
+                            retorno = ret.Substring(0, ret.Length - EXT.RetornoXML.Length);
+
+                    if (!string.IsNullOrEmpty(EXT.RetornoTXT))
+                        if (ret.EndsWith(EXT.RetornoTXT, StringComparison.InvariantCultureIgnoreCase))
+                            retorno = ret.Substring(0, ret.Length - EXT.RetornoTXT.Length);
+
+                    if (ret.EndsWith(EXT.EnvioXML, StringComparison.InvariantCultureIgnoreCase))
+                        retorno = ret.Substring(0, ret.Length - EXT.EnvioXML.Length);
+
+                    if (!string.IsNullOrEmpty(EXT.EnvioTXT))
+                        if (ret.EndsWith(EXT.EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                            retorno = ret.Substring(0, ret.Length - EXT.EnvioTXT.Length);
+                }
+            }
+            if (retorno == "")
+                if (!string.IsNullOrEmpty(finalArq))
+                    if (ret.EndsWith(finalArq, StringComparison.InvariantCultureIgnoreCase))
+                        retorno = ret.Substring(0, ret.Length - finalArq.Length);
+
+            if (retorno != "")
+            {
+                if (retorno.EndsWith("-ped"))
+                    return retorno.Substring(0, retorno.IndexOf("-ped"));
+
+                if (retorno.EndsWith("-ret"))
+                    return retorno.Substring(0, retorno.IndexOf("-ret"));
+
+                if (retorno.EndsWith("-con"))
+                    return retorno.Substring(0, retorno.IndexOf("-con"));
+
+                if (retorno.EndsWith("-env"))
+                    return retorno.Substring(0, retorno.IndexOf("-env"));
+
+                return retorno.TrimEnd(new char[] { '-' });
             }
 
             return fi.Name;
@@ -320,10 +369,10 @@ namespace NFe.Components
         }
         #endregion
 
-        public static string ExtractExtencion(string value)
+        public static string ExtractExtension(string value)
         {
             if (string.IsNullOrEmpty(value)) return "";
-            return (value.IndexOf('.') >= 0 ? Path.ChangeExtension(("X" + value),"").Substring(1).Replace(".","") : value);
+            return (value.IndexOf('.') >= 0 ? Path.ChangeExtension(("X" + value), "").Substring(1).Replace(".", "") : value);
         }
 
         #region FileInUse()
@@ -549,7 +598,7 @@ namespace NFe.Components
         /// <param name="input">Valor a ser convertido</param>
         /// <returns></returns>
         public static string ComputeHexadecimal(string input)
-        {            
+        {
             string hexOutput = "";
             char[] values = input.ToCharArray();
             foreach (char letter in values)

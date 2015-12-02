@@ -51,7 +51,9 @@ namespace NFe.Service
     <servicos>NFeConsultaCadastro,NFeStatusServico,...</servicos>
 </dados>
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_XML, Propriedade.ExtRetorno.retWSExiste_XML).Replace(".xml", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).RetornoXML).Replace(".xml", ".err"))));
 
                     XmlDocument doc = new XmlDocument();
                     doc.Load(NomeArquivoXML);
@@ -77,7 +79,9 @@ tpAmb|2             --opcional
 tpEmis|1            --opcional: (1)Normal, (2)Contingencia, ...
 servicos|NFeConsultaCadastro,NFeStatusServico,...
 #endif
-                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.ExtEnvio.EnvWSExiste_TXT, Propriedade.ExtRetorno.retWSExiste_TXT).Replace(".txt", ".err"))));
+                    Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT, 
+                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT).Replace(".txt", ".err"))));
 
                     List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
 
@@ -124,9 +128,11 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
 #endif
                 string nomeArquivoRetorno;
                 if (this.vXmlNfeDadosMsgEhXML)
-                    nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvWSExiste_XML) + Propriedade.ExtRetorno.retWSExiste_XML;
+                    nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioXML) + 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).RetornoXML;
                 else
-                    nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvWSExiste_TXT) + Propriedade.ExtRetorno.retWSExiste_TXT;
+                    nomeArquivoRetorno = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT) + 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).RetornoTXT;
                 nomeArquivoRetorno = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Path.GetFileName(nomeArquivoRetorno));
                 Functions.DeletarArquivo(nomeArquivoRetorno);
 
@@ -288,11 +294,12 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
             {
                 try
                 {
-                    string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvWSExiste_XML : Propriedade.ExtEnvio.EnvWSExiste_TXT);
+                    string ExtRet = (this.vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioXML : 
+                                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT);
 
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     //retorna um arquivo com o nome NomeArquivoSolicitado-ret-env-ws.err
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retWSExiste_XML.Replace(".xml",".err"), ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).RetornoXML.Replace(".xml", ".err"), ex);
                 }
                 catch
                 {

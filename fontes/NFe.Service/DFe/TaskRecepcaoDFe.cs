@@ -73,8 +73,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         null,
                                         this,
-                                        Propriedade.ExtEnvio.EnvDFe_XML,
-                                        Propriedade.ExtRetorno.retEnvDFe_XML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).RetornoXML);
 
                     LeRetornoDFe(emp, doc);
                 }
@@ -114,12 +114,12 @@ namespace NFe.Service
                 ///
                 /// pega o nome base dos arquivos a serem gravados
                 /// 
-                string fileRetorno2 = Functions.ExtrairNomeArq(this.NomeArquivoXML, Propriedade.ExtEnvio.EnvDFe_XML);
+                string fileRetorno2 = Functions.ExtrairNomeArq(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML);
                 ///
                 /// pega o nome do arquivo de retorno
                 /// 
-                string fileRetorno = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, 
-                                                  fileRetorno2 + Propriedade.ExtRetorno.retEnvDFe_XML);
+                string fileRetorno = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                  fileRetorno2 + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).RetornoXML);
 
                 if (!File.Exists(fileRetorno))
                 {
@@ -167,7 +167,7 @@ namespace NFe.Service
                                 {
                                     if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resEvento"))
                                     {
-                                        FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.Eve);
+                                        FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML);
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procEventoNFe"))
                                     {
@@ -179,7 +179,7 @@ namespace NFe.Service
                                     }
                                     else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resNFe"))
                                     {
-                                        FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtEnvio.Nfe);
+                                        FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
                                     }
                                     else
                                         Auxiliar.WriteLog("LerRetornoDFe:  Nao foi possivel ler o schema", false);
@@ -224,7 +224,8 @@ namespace NFe.Service
 
         private void WriteLogError(Exception ex)
         {
-            var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDFe_XML : Propriedade.ExtEnvio.EnvDFe_TXT;
+            var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML : 
+                                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT;
 
             try
             {

@@ -51,19 +51,22 @@ namespace NFe.Service
                     LerRetornoDownloadNFe(emp);
 
                     //Gravar o xml de retorno para o ERP. Não pode gravar antes de extrair os downloads, para que o ERP saiba quando realmente terminou. Wandrey 03/04/2013
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvDownload_XML, Propriedade.ExtRetorno.retDownload_XML, this.vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML, 
+                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).RetornoXML, this.vStrXmlRetorno);
                 }
                 else
                 {
                     // Gerar o XML de eventos a partir do TXT gerado pelo ERP
-                    oGerarXML.EnvioDownloadNFe(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.EnvDownload_TXT) + Propriedade.ExtEnvio.EnvDownload_XML, /*oLer.*/oDadosenvDownload);
+                    oGerarXML.EnvioDownloadNFe(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioTXT) + 
+                                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML, oDadosenvDownload);
                 }
             }
             catch (Exception ex)
             {
                 try
                 {
-                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvDownload_XML : Propriedade.ExtEnvio.EnvDownload_TXT;
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML : 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioTXT;
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retDownload_ERR, ex);
                 }

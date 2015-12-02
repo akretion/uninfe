@@ -143,8 +143,9 @@ namespace NFe.Components.MGM.PenapolisSP.h
 
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
-
+            /// WANDREY: como não tem consulta a lote, a extensao do retorno deve seguir o padrao ou já retorna como -loterps.xml?????????????????????
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);//.LoteRps);
         }
 
         public override void CancelarNfse(string file)

@@ -60,7 +60,8 @@ namespace NFe.Service
                     LerRetornoSitNFe(dadosPedSit.chNFe);
 
                     //Gerar o retorno para o ERP
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedSit_XML, Propriedade.ExtRetorno.Sit_XML, this.vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
+                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).RetornoXML, this.vStrXmlRetorno);
                 }
                 else
                 {
@@ -79,16 +80,16 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                string ExtRet = string.Empty;
+                string ExtEnvio = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.PedSit_XML;
+                    ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML;
                 else //Se for TXT
-                    ExtRet = Propriedade.ExtEnvio.PedSit_TXT;
+                    ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT;
 
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.Sit_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtEnvio, Propriedade.ExtRetorno.Sit_ERR, ex);
                 }
                 catch
                 {
@@ -218,7 +219,7 @@ namespace NFe.Service
                     //if (string.IsNullOrEmpty(strChaveNFe))
                     //    throw new Exception("LerRetornoSitNFe(): Não pode obter o nome do arquivo");
 
-                    strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Nfe;
+                    strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                 }
                 string strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
@@ -345,7 +346,7 @@ namespace NFe.Service
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Nfe) + Propriedade.ExtRetorno.ProcNFe;
+                                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) + Propriedade.ExtRetorno.ProcNFe;
 
                                         //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
                                         //Não tenho como fazer mais nada. Wandrey 08/10/2009
@@ -355,10 +356,10 @@ namespace NFe.Service
                                             oLerXml.Nfe(strArquivoNFe);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe);
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.ProcNFe);
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.ExtRetorno.ProcNFe);
 
                                             //Se o XML de distribuição não estiver na pasta de autorizados
                                             if (!procNFeJaNaAutorizada)
@@ -371,7 +372,7 @@ namespace NFe.Service
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados
-                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.ProcNFe)))
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.ExtRetorno.ProcNFe)))
                                             {
                                                 //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
                                                 TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
@@ -379,11 +380,11 @@ namespace NFe.Service
                                                 //Atualizar a situação para que eu só mova o arquivo com final -NFe.xml para a pasta autorizado se 
                                                 //a procnfe já estiver lá, ou vai ficar na pasta emProcessamento para tentar gerar novamente.
                                                 //Isso vai dar uma maior segurança para não deixar sem gerar o -procnfe.xml. Wandrey 13/12/2012
-                                                procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.ProcNFe);
+                                                procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.ExtRetorno.ProcNFe);
                                             }
 
                                             //Se a NFe não existir ainda na pasta de autorizados
-                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Nfe, Propriedade.ExtEnvio.Nfe)))
+                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML)))
                                             {
                                                 //1-Mover a NFE da pasta de NFE em processamento para NFe Autorizada
                                                 //2-Só vou mover o -nfe.xml para a pasta autorizados se já existir a -procnfe.xml, caso contrário vou manter na pasta EmProcessamento

@@ -22,9 +22,9 @@ namespace NFe.Validate
     public class ValidarXML
     {
         #region Construtores
-        public ValidarXML(string arquivoXML, int UFCod)
+        public ValidarXML(string arquivoXML, int UFCod, bool soValidar)
         {
-            TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod);
+            TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod, soValidar);
         }
         #endregion
 
@@ -50,8 +50,8 @@ namespace NFe.Validate
                 TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
                 TipoArqXml.cArquivoSchema.Contains("DSF"))
             {
-                if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps) ||
-                    arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse))
+                if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) ||
+                    arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML))
                 {
                     bool found = false;
                     bool bSave = false;
@@ -59,7 +59,7 @@ namespace NFe.Validate
                     XmlDocument doc = new XmlDocument();
                     doc.Load(arquivoXML);
 
-                    if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.EnvLoteRps))
+                    if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML))
                     {
                         const string Assinatura = "Assinatura";
 
@@ -92,7 +92,7 @@ namespace NFe.Validate
                         if (!found)
                             throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
                     }
-                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.ExtEnvio.PedCanNfse) &&
+                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) &&
                             !TipoArqXml.cArquivoSchema.Contains("DSF"))
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
@@ -309,7 +309,7 @@ namespace NFe.Validate
             if (Assinou)
             {
                 #region Adicionar a tag do qrCode na NFCe
-                if (Arquivo.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase))
+                if (Arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
                     if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
                     {
@@ -325,8 +325,6 @@ namespace NFe.Validate
                     }
                 }
                 #endregion
-
-
 
                 // Validar o Arquivo XML
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
@@ -346,19 +344,9 @@ namespace NFe.Validate
                                 Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidado);
                             }
 
-                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Path.GetFileName(Arquivo);// Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
 
                             Functions.Move(Arquivo, ArquivoNovo);
-                            /*
-                            if (File.Exists(ArquivoNovo))
-                            {
-                                FileInfo oArqNovo = new FileInfo(ArquivoNovo);
-                                oArqNovo.Delete();
-                            }
-
-                            FileInfo oArquivo = new FileInfo(Arquivo);
-                            oArquivo.MoveTo(ArquivoNovo);
-                            */
 
                             this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
                         }
@@ -379,15 +367,26 @@ namespace NFe.Validate
                 }
                 else
                 {
-                    try
+                    if (TipoArqXml.nRetornoTipoArq == -1)
                     {
-                        this.GravarXMLRetornoValidacao(Arquivo, "5", "Ocorreu um erro ao validar o XML: " + TipoArqXml.cRetornoTipoArq);
+                        ///
+                        /// OPS!!! Arquivo de NFS-e enviado p/ a pasta de validação, mas não existe definicao de schemas p/ sua validacao
+                        /// 
+                        this.GravarXMLRetornoValidacao(Arquivo, "1", "XML não validado contra o schema da prefeitura. XML: " + TipoArqXml.cRetornoTipoArq);
                         new Auxiliar().MoveArqErro(Arquivo);
                     }
-                    catch
+                    else
                     {
-                        //Se deu algum erro na hora de gravar o retorno do erro para o ERP, infelizmente não posso fazer nada.
-                        //Isso pode acontecer se falhar rede, hd, problema de permissão de pastas, etc... Wandrey 23/03/2010
+                        try
+                        {
+                            this.GravarXMLRetornoValidacao(Arquivo, "5", "Ocorreu um erro ao validar o XML: " + TipoArqXml.cRetornoTipoArq);
+                            new Auxiliar().MoveArqErro(Arquivo);
+                        }
+                        catch
+                        {
+                            //Se deu algum erro na hora de gravar o retorno do erro para o ERP, infelizmente não posso fazer nada.
+                            //Isso pode acontecer se falhar rede, hd, problema de permissão de pastas, etc... Wandrey 23/03/2010
+                        }
                     }
                 }
             }

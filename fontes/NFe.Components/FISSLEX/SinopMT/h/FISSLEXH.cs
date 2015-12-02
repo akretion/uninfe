@@ -73,7 +73,8 @@ namespace NFe.Components.FISSLEX.SinopMT.h
             ServiceConsultaLoteRps.Execute(oTcDadosConsultaLote, out result);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -88,8 +89,8 @@ namespace NFe.Components.FISSLEX.SinopMT.h
             result = ServiceConsultarSituacaoLoteRps.Execute(oTcDadosConsultaLote);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitLoteRps, Propriedade.ExtRetorno.SitLoteRps);
-
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
@@ -100,11 +101,13 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
             ConsultarNfseEnvio oTcDadosConsultaNfse = ReadXML<ConsultarNfseEnvio>(file);
             NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcMensagemRetorno[] result = null;
+            string strResult = "";
 
-            ServiceConsultaNfse.Execute(oTcDadosConsultaNfse, out result);
+            strResult = ServiceConsultaNfse.Execute(oTcDadosConsultaNfse, out result);
 
-            string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            strResult = base.CreateXML(result);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -119,7 +122,8 @@ namespace NFe.Components.FISSLEX.SinopMT.h
             ServiceConsultaNfsePorRps.Execute(oTcDadosConsultaNfse, out result);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
         private T ReadXML<T>(string file)
@@ -154,6 +158,11 @@ namespace NFe.Components.FISSLEX.SinopMT.h
                         if (tag.Equals("Tomador") && n.Name.Equals("CpfCnpj"))
                         {
                             NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcIdentificacaoTomador instances = new NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcIdentificacaoTomador();
+                            instance = instances.CpfCnpj = new tcCpfCnpj();
+                        }
+                        else if (tag.Equals("IntermediarioServico") && n.Name.Equals("CpfCnpj"))
+                        {
+                            NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcIdentificacaoIntermediarioServico instances = new NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcIdentificacaoIntermediarioServico();
                             instance = instances.CpfCnpj = new tcCpfCnpj();
                         }
                         else
@@ -240,6 +249,10 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
                 case "Tomador":
                     nameObject = "tcIdentificacaoTomador";
+                    break;
+
+                case "IntermediarioServico":
+                    nameObject = "tcIdentificacaoIntermediarioServico";
                     break;
 
                 default:

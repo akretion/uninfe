@@ -30,7 +30,8 @@ namespace NFe.Components.SigCorp.BauruSP.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.GerarNota(oTcDescricaoRps, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -39,7 +40,8 @@ namespace NFe.Components.SigCorp.BauruSP.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -49,7 +51,8 @@ namespace NFe.Components.SigCorp.BauruSP.p
 
             tcRetornoNota result = service.ConsultarNotaValida(oTcDadosConsultaNota, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -63,14 +66,15 @@ namespace NFe.Components.SigCorp.BauruSP.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "urn:ConsultarNotaPrestador"), out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
         private T ReadXML<T>(string file)
             where T : new()
         {
@@ -85,6 +89,8 @@ namespace NFe.Components.SigCorp.BauruSP.p
             doc.Load(file);
             XmlNodeList nodes = doc.GetElementsByTagName(tag);
             XmlNode node = nodes[0];
+            if (node == null)
+                throw new Exception("Tag <" + tag + "> não encontrada");
 
             foreach (XmlNode n in node)
             {
@@ -104,6 +110,8 @@ namespace NFe.Components.SigCorp.BauruSP.p
             doc.Load(file);
             XmlNodeList nodes = doc.GetElementsByTagName(tag);
             XmlNode node = nodes[0];
+            if (node == null)
+                throw new Exception("Tag <" + tag + "> não encontrada");
 
             foreach (XmlNode n in node)
             {
@@ -111,7 +119,7 @@ namespace NFe.Components.SigCorp.BauruSP.p
                 {
                     if (n.Name.Equals("Nota"))
                     {
-                        nNumeroNota = Convert.ToInt32(n.InnerText);
+                        nNumeroNota = Convert.ToInt32("0" + n.InnerText);
                         break;
                     }
                 }

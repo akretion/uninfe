@@ -61,14 +61,14 @@ namespace NFe.Service
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 //Wandrey 18/06/2009
-                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 #endregion
             }
             catch (Exception ex)
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex);
                 }
                 catch
                 {
@@ -258,7 +258,7 @@ namespace NFe.Service
                                     if (string.IsNullOrEmpty(strChaveNFe))
                                         throw new Exception("LerRetornoLoteCTe(): Não pode obter o nome do arquivo");
 
-                                    strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.ExtEnvio.Cte;
+                                    strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                                 }
                                 var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
@@ -324,7 +324,7 @@ namespace NFe.Service
                                                 var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                         PastaEnviados.Denegados.ToString() + "\\" +
                                                                         Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                        Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
+                                                                        Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + Propriedade.ExtRetorno.Den;
 
                                                 TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }

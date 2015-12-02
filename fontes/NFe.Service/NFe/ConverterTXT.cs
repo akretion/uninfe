@@ -31,7 +31,7 @@ namespace NFe.Service
             pasta = pasta.Substring(0, pasta.Length - 5); //Retirar a pasta \Temp do final - Wandrey 03/08/2011
 
             string ccMessage = string.Empty;
-            string ccExtension = "-nfe.err";
+            string ccExtension = Propriedade.ExtRetorno.Nfe_ERR;// "-nfe.err";
 
             try
             {
@@ -40,8 +40,8 @@ namespace NFe.Service
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + ccExtension));
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + "-nfe-ret.xml"));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + ccExtension));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).RetornoXML));
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
@@ -98,7 +98,7 @@ namespace NFe.Service
                             string nomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
                             Functions.Move(txtClass.XMLFileName, nomeArquivoDestino);
 
-                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + Propriedade.ExtEnvio.Nfe);
+                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
                         }
                     }
                 }
@@ -115,7 +115,7 @@ namespace NFe.Service
             catch (Exception ex)
             {
                 ccMessage = ex.Message;
-                ccExtension = "-nfe.err";
+                ccExtension = Propriedade.ExtRetorno.Nfe_ERR;//"-nfe.err";
             }
 
             if (!string.IsNullOrEmpty(ccMessage))
@@ -137,7 +137,7 @@ namespace NFe.Service
                 /// 
                 /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
                 /// 
-                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, Propriedade.ExtEnvio.Nfe_TXT) + ccExtension, ccMessage);
+                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + ccExtension, ccMessage);
             }
         }
     }

@@ -64,14 +64,15 @@ namespace NFe.Service
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 //Wandrey 18/06/2009
-                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, 
+                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 #endregion
             }
             catch (Exception ex)
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedRec_XML, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex);
                 }
                 catch
                 {
@@ -275,7 +276,7 @@ namespace NFe.Service
                                     if (string.IsNullOrEmpty(strChaveNFe))
                                         throw new Exception("LerRetornoLoteMDFe(): Não pode obter o nome do arquivo");
 
-                                    strNomeArqNfe = strChaveNFe.Substring(4) + Propriedade.ExtEnvio.MDFe;
+                                    strNomeArqNfe = strChaveNFe.Substring(4) + Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
                                 }
                                 var strArquivoNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqNfe;
 
@@ -293,16 +294,16 @@ namespace NFe.Service
                                             //Juntar o protocolo com a NFE já copiando para a pasta de autorizadas
                                             var strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.ExtEnvio.MDFe) + Propriedade.ExtRetorno.ProcMDFe;
+                                                                    Functions.ExtrairNomeArq(strNomeArqNfe, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML) + Propriedade.ExtRetorno.ProcMDFe;
 
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                             oLerXml.Mdfe(strArquivoNFe);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtEnvio.MDFe);
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe);
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.ExtRetorno.ProcMDFe);
 
                                             //Se o XML de distribuição não estiver na pasta de autorizados
                                             if (!procNFeJaNaAutorizada)
@@ -313,7 +314,7 @@ namespace NFe.Service
                                                 }
                                             }
 
-                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe)))
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.ExtRetorno.ProcMDFe)))
                                             {
                                                 //Mover a nfePRoc da pasta de NFE em processamento para a NFe Autorizada
                                                 //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procnfe.xml) para
@@ -324,7 +325,7 @@ namespace NFe.Service
                                                 //Atualizar a situação para que eu só mova o arquivo com final -NFe.xml para a pasta autorizado se 
                                                 //a procnfe já estiver lá, ou vai ficar na pasta emProcessamento para tentar gerar novamente.
                                                 //Isso vai dar uma maior segurança para não deixar sem gerar o -procnfe.xml. Wandrey 13/12/2012
-                                                procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe);
+                                                procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.ExtRetorno.ProcMDFe);
                                             }
 
                                             if (!NFeJaNaAutorizada && procNFeJaNaAutorizada)
@@ -353,8 +354,8 @@ namespace NFe.Service
                                                 }
                                             }
                                             //Vou verificar se estão os dois arquivos na pasta Autorizados, se tiver eu tiro do fluxo caso contrário não. Wandrey 13/02/2012
-                                            NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtEnvio.MDFe);
-                                            procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.MDFe, Propriedade.ExtRetorno.ProcMDFe);
+                                            NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);
+                                            procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.ExtRetorno.ProcMDFe);
                                             if (!procNFeJaNaAutorizada || !NFeJaNaAutorizada)
                                             {
                                                 tirarFluxo = false;

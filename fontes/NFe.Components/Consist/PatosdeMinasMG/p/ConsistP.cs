@@ -47,7 +47,9 @@ namespace NFe.Components.Consist.PatosdeMinasMG.p
                                       SenhaWs,
                                       ReadXML<eISSWService_NFeInfo>(file));
 
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            string strResult = base.CreateXML(result);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -58,7 +60,9 @@ namespace NFe.Components.Consist.PatosdeMinasMG.p
                                         Convert.ToInt32(GetValueXML(file, "CancelaNFe", "numNota")),
                                         GetValueXML(file, "CancelaNFe", "motivo"));
 
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            string strResult = base.CreateXML(result);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -79,7 +83,9 @@ namespace NFe.Components.Consist.PatosdeMinasMG.p
                                          Convert.ToInt32(GetValueXML(file, "ConsultaNFe", "numNota")),
                                          Convert.ToInt32(GetValueXML(file, "ConsultaNFe", "numRPS")));
 
-            GerarRetorno(file, base.CreateXML(result), Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            string strResult = base.CreateXML(result);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

@@ -60,13 +60,16 @@ namespace NFe.Service
                 LerRetornoSitCTe(dadosPedSit.chNFe);
 
                 //Gerar o retorno para o ERP
-                oGerarXML.XmlRetorno(Propriedade.ExtEnvio.PedSit_XML, Propriedade.ExtRetorno.Sit_XML, this.vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML, 
+                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).RetornoXML, this.vStrXmlRetorno);
             }
             catch (Exception ex)
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedSit_XML, Propriedade.ExtRetorno.Sit_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, 
+                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML, 
+                                                    Propriedade.ExtRetorno.Sit_ERR, ex);
                 }
                 catch
                 {
@@ -163,7 +166,7 @@ namespace NFe.Service
 
                 if (string.IsNullOrEmpty(strNomeArqCTe))
                 {
-                    strNomeArqCTe = strChaveCTe.Substring(3) + Propriedade.ExtEnvio.Cte;
+                    strNomeArqCTe = strChaveCTe.Substring(3) + Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                 }
 
                 string strArquivoCTe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + strNomeArqCTe;
@@ -240,7 +243,8 @@ namespace NFe.Service
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.ProcCTe;
+                                                                    Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + 
+                                                                    Propriedade.ExtRetorno.ProcCTe;
 
                                         //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
                                         //Não tenho como fazer mais nada. Wandrey 08/10/2009
@@ -250,10 +254,14 @@ namespace NFe.Service
                                             oLerXml.Cte(strArquivoCTe);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte);
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
+                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe);
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
+                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                                                        Propriedade.ExtRetorno.ProcCTe);
 
                                             //Se o XML de distribuição não estiver na pasta em processamento
                                             if (!procNFeJaNaAutorizada && !File.Exists(strArquivoNFeProc))
@@ -262,14 +270,14 @@ namespace NFe.Service
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados
-                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.ProcCTe)))
+                                            if (!(procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, Propriedade.ExtRetorno.ProcCTe)))
                                             {
                                                 //Move a nfeProc da pasta de NFE em processamento para a NFe Autorizada
                                                 TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
                                             }
 
                                             //Se a NFe não existir ainda na pasta de autorizados
-                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtEnvio.Cte)))
+                                            if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML)))
                                             {
                                                 //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
                                                 TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
@@ -311,7 +319,7 @@ namespace NFe.Service
                                             oLerXml.Cte(strArquivoCTe);
 
                                             //Move a NFE da pasta de NFE em processamento para NFe Denegadas
-                                            if (!oAux.EstaDenegada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.ExtEnvio.Cte, Propriedade.ExtRetorno.Den))
+                                            if (!oAux.EstaDenegada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, Propriedade.ExtRetorno.Den))
                                             {
                                                 TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
                                                 ///
@@ -322,7 +330,7 @@ namespace NFe.Service
                                                     var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                             PastaEnviados.Denegados.ToString() + "\\" +
                                                                             Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                            Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.ExtEnvio.Cte) + Propriedade.ExtRetorno.Den;
+                                                                            Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + Propriedade.ExtRetorno.Den;
 
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }

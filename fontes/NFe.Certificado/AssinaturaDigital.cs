@@ -251,7 +251,7 @@ namespace NFe.Certificado
         {
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
-                TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod);
+                TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod, false);
 
                 if (!String.IsNullOrEmpty(v.TagAssinatura))
                 {
@@ -276,19 +276,19 @@ namespace NFe.Certificado
                 switch (servico)
                 {
                     case Servicos.ConsultaCadastroContribuinte:
-                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.ConsCad_XML) + "__" + Propriedade.ExtEnvio.ConsCad_XML;
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML;
                         File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "ConsCad", "infCons", x509Cert, emp);
                         break;
 
                     case Servicos.NFeConsultaStatusServico:
-                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML;
                         File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
                         break;
 
                     case Servicos.NFePedidoConsultaSituacao:
-                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.ExtEnvio.PedSta_XML) + "__" + Propriedade.ExtEnvio.PedSta_XML;
+                        tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML;
                         File.Copy(arqXML, tempFile);
                         Assinar(tempFile, "consSitNFe", "xServ", x509Cert, emp);
                         break;

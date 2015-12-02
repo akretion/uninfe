@@ -52,7 +52,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             GerarNovaNfseResposta result = service.GerarNfse(oGerarNfseEnvio, dadosConexao);
 
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -62,7 +63,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             CancelarNfseEnvio oTcDadosCancela = ReadXML<CancelarNfseEnvio>(file);
             CancelarNfseResposta result = service.CancelarNfse(oTcDadosCancela, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -72,7 +74,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             ConsultarLoteRpsEnvio oTcDadosConsultaNota = ReadXML<ConsultarLoteRpsEnvio>(file);
             ConsultarLoteRpsResposta result = service.ConsultarLoteRps(oTcDadosConsultaNota, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -82,7 +85,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             ConsultarSituacaoLoteRpsEnvio oTcDadosConsultaNota = ReadXML<ConsultarSituacaoLoteRpsEnvio>(file);
             ConsultarSituacaoLoteRpsResposta result = service.ConsultarSituacaoLoteRps(oTcDadosConsultaNota, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
@@ -92,7 +96,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             ConsultarNfseEnvio oTcDadosPrestador = ReadXML<ConsultarNfseEnvio>(file);
             ConsultarNfseResposta result = service.ConsultarNfse(oTcDadosPrestador, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -102,7 +107,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             ConsultarNfseRpsEnvio oTcConsultarNfseRpsEnvio = ReadXML<ConsultarNfseRpsEnvio>(file);
             ConsultarNfseRpsResposta result = service.ConsultarNfsePorRps(oTcConsultarNfseRpsEnvio, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
         private T ReadXML<T>(string file)
@@ -120,6 +126,7 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             {
                 ((GerarNovaNfseEnvio)(object)result).InformacaoNfse = new tcInfNovaNfse();
                 nodes = doc.GetElementsByTagName("InfRps");
+                if (nodes[0] == null) throw new Exception("Tag <InfRps> não encontrada");
                 rps = ((GerarNovaNfseEnvio)(object)result).InformacaoNfse;
                 tagName = "InfDeclaracaoPrestacaoServico";
 
@@ -135,9 +142,12 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
                 {
                     ((CancelarNfseEnvio)(object)result).Pedido = new tcPedidoCancelamento();
                     nodes = doc.GetElementsByTagName("Pedido");
+                    if (nodes[0] == null) throw new Exception("Tag <Pedido> não encontrada");
                     rps = ((CancelarNfseEnvio)(object)result).Pedido;
                     tagName = "InfPedidoCancelamento";
                 }
+                else
+                    if (nodes[0] == null) throw new Exception("Tag <" + result.GetType().Name + "> não encontrada");
 
                 XmlNode node = nodes[0];
                 ReadXML(node, rps, tagName);
@@ -236,7 +246,6 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
                             null,
                             null
                         );
-
                         SetProperty(value, GetNameProperty(n.Name), ReadXML(n, instance, n.Name));
                     }
                     else
@@ -276,8 +285,11 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             tcItemServico[] serviceArray = new tcItemServico[1];
             serviceArray[0] = new tcItemServico();
             serviceArray[0].Descricao = valueObject.Descricao;
-            serviceArray[0].IssTributavel = valueObject.IssTributavel;
-            serviceArray[0].IssTributavelSpecified = valueObject.IssTributavelSpecified;
+            if (tpAmb == TipoAmbiente.taProducao)
+            {
+                serviceArray[0].IssTributavel = valueObject.IssTributavel;
+                serviceArray[0].IssTributavelSpecified = valueObject.IssTributavelSpecified;
+            }
             serviceArray[0].Quantidade = valueObject.Quantidade;
             serviceArray[0].ValorUnitario = valueObject.ValorUnitario;
 

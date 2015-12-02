@@ -32,8 +32,8 @@ namespace NFe.Service.NFSe
 
             try
             {
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + 
-                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSitNfseRps) + Propriedade.ExtRetorno.SitNfseRps_ERR);
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML) + Propriedade.ExtRetorno.SitNfseRps_ERR);
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
 
                 //Ler o XML para pegar parâmetros de envio
@@ -198,14 +198,14 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, ler.oDadosPedSitNfseRps.cMunicipio), cabecMsg, this,
-                                            Propriedade.ExtEnvio.PedSitNfseRps,   //"-ped-sitnfserps", 
-                                            Propriedade.ExtRetorno.SitNfseRps,   //"-sitnfserps", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,   //"-ped-sitnfserps", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML, //"-sitnfserps", 
                                             padraoNFSe, Servico);
 
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                      Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedSitNfseRps) + Propriedade.ExtRetorno.SitNfseRps);
+                                                      Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
@@ -215,7 +215,7 @@ namespace NFe.Service.NFSe
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, Propriedade.ExtRetorno.SitNfseRps_ERR, ex);
                 }
                 catch
                 {

@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using System.Reflection;
 
 namespace NFe.Components.Abstract
 {
@@ -20,10 +21,15 @@ namespace NFe.Components.Abstract
             this.PastaRetorno = pastaRetorno;
         }
 
+        /// WANDREY:
+        ///  nao precisa passar a extensao para excluir, porque podemos varrer a lista de extensoes e exclui-la
+        ///  
         public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
         {
-            FileInfo fi = new FileInfo(file);
-            string nomearq = PastaRetorno + "\\" + fi.Name.ToLower().Replace(extEnvio.ToLower(), extRetorno.ToLower());
+            string nomearq = Path.Combine(PastaRetorno, Functions.ExtrairNomeArq(file, extEnvio) + extRetorno);
+
+            //FileInfo fi = new FileInfo(file);
+            //string nomearq = PastaRetorno + "\\" + fi.Name.ToLower().Replace(extEnvio.ToLower(), extRetorno.ToLower());
 
             StreamWriter write = new StreamWriter(nomearq);
             write.Write(result);

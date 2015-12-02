@@ -244,11 +244,11 @@ namespace NFe.UI
             string result = string.Empty;
 
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
-                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
-                      Propriedade.ExtRetorno.Sta_XML;
+                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) +
+                      Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML;//.ExtRetorno.Sta_XML;
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
-                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.PedSta_XML) +
+                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) +
                       Propriedade.ExtRetorno.Sta_ERR;
 
             try

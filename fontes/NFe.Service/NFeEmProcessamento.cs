@@ -27,10 +27,10 @@ namespace NFe.Service
                 if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaXmlEnviado) || !Directory.Exists(Empresas.Configuracoes[emp].PastaXmlEnviado)) return;
 
                 // le todos os arquivos que estão na pasta em processamento
-
-                string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.ExtEnvio.Nfe, StringComparison.InvariantCultureIgnoreCase) ||
-                                                                                                                                                          w.EndsWith(Propriedade.ExtEnvio.Cte, StringComparison.InvariantCultureIgnoreCase) ||
-                                                                                                                                                          w.EndsWith(Propriedade.ExtEnvio.MDFe, StringComparison.InvariantCultureIgnoreCase)).ToArray<string>();
+                string[] files = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                                    PastaEnviados.EmProcessamento.ToString()).Where(w => w.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
+                                                                                        w.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
+                                                                                        w.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase)).ToArray<string>();
 
                 // considera os arquivos em que a data do ultimo acesso é superior a 5 minutos
                 DateTime UltimaData = DateTime.Now.AddMinutes(-_Minutos);
@@ -57,7 +57,7 @@ namespace NFe.Service
                                 doc.Load(file);
 
                                 TipoAplicativo tipoArquivo = TipoAplicativo.Nfe;
-                                string extNFe = Propriedade.ExtEnvio.Nfe;
+                                string extNFe = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                                 string extProcNFe = Propriedade.ExtRetorno.ProcNFe;
                                 string arquivoSit = string.Empty;
                                 string chNFe = string.Empty;
@@ -66,7 +66,7 @@ namespace NFe.Service
                                 {
                                     case "MDFe":
                                         tipoArquivo = TipoAplicativo.MDFe;
-                                        extNFe = Propriedade.ExtEnvio.MDFe;
+                                        extNFe = Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
                                         extProcNFe = Propriedade.ExtRetorno.ProcMDFe;
 
                                         oLerXml.Mdfe(file);
@@ -76,7 +76,7 @@ namespace NFe.Service
 
                                     case "NFe":
                                         tipoArquivo = TipoAplicativo.Nfe;
-                                        extNFe = Propriedade.ExtEnvio.Nfe;
+                                        extNFe = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                                         extProcNFe = Propriedade.ExtRetorno.ProcNFe;
 
                                         oLerXml.Nfe(file);
@@ -86,7 +86,7 @@ namespace NFe.Service
 
                                     case "CTe":
                                         tipoArquivo = TipoAplicativo.Cte;
-                                        extNFe = Propriedade.ExtEnvio.Cte;
+                                        extNFe = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                                         extProcNFe = Propriedade.ExtRetorno.ProcCTe;
 
                                         oLerXml.Cte(file);
@@ -114,7 +114,7 @@ namespace NFe.Service
                                     }
 
                                     //gera um -ped-sit.xml mesmo sendo autorizada ou denegada, pois assim sendo, o ERP precisaria dele
-                                    oGerarXml.Consulta(tipoArquivo, arquivoSit + Propriedade.ExtEnvio.PedSit_XML,
+                                    oGerarXml.Consulta(tipoArquivo, arquivoSit + Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpAmb),
                                         Convert.ToInt32(oLerXml.oDadosNfe.tpEmis),
                                         chNFe,

@@ -50,15 +50,15 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        Propriedade.ExtEnvio.ConsNFeDest_XML,
-                                        Propriedade.ExtRetorno.retConsNFeDest_XML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).RetornoXML);
 
                     //Ler o retorno
                     this.LerRetornoConsultaNFeDest(emp);
                 }
                 else
                 {
-                    string f = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.ConsNFeDest_TXT) + Propriedade.ExtEnvio.ConsNFeDest_XML;
+                    string f = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioTXT) + Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML;
 
                     if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
@@ -72,7 +72,8 @@ namespace NFe.Service
             {
                 try
                 {
-                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.ConsNFeDest_XML : Propriedade.ExtEnvio.ConsNFeDest_TXT;
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML : 
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioTXT;
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retConsNFeDest_ERR, ex);
                 }

@@ -30,7 +30,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.GerarNota(oTcDescricaoRps, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -39,7 +40,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -49,7 +51,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
 
             string result = service.ConsultarRpsServicoPrestado(oTcDadosConsultaNota, out tcErros);
             string strResult = result;
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -62,7 +65,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
             tcConsultarNfseServicoPrestadoEnvio oTcDadosPrestador = ReadXML<tcConsultarNfseServicoPrestadoEnvio>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
             string strResult = service.ConsultarNfseServicoPrestado(oTcDadosPrestador, out tcErros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -85,6 +89,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
             doc.Load(file);
             XmlNodeList nodes = doc.GetElementsByTagName(tag);
             XmlNode node = nodes[0];
+            if (node == null)
+                throw new Exception("Tag <" + tag + "> não encontrada");
 
             foreach (XmlNode n in node)
             {
@@ -104,6 +110,8 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
             doc.Load(file);
             XmlNodeList nodes = doc.GetElementsByTagName(tag);
             XmlNode node = nodes[0];
+            if (node == null)
+                throw new Exception("Tag <" + tag + "> não encontrada");
 
             foreach (XmlNode n in node)
             {

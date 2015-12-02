@@ -58,8 +58,8 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
-                                        NFe.Components.Propriedade.ExtEnvio.ConsCad_XML,
-                                        NFe.Components.Propriedade.ExtRetorno.ConsCad_XML);
+                                        NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML,
+                                        NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).RetornoXML);
                 }
                 else
                 {
@@ -75,17 +75,17 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                string ExtRet = string.Empty;
+                string ExtEnvio = string.Empty;
 
                 if (this.vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.ConsCad_XML;
+                    ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML;
                 else //Se for TXT
-                    ExtRet = Propriedade.ExtEnvio.ConsCad_TXT;
+                    ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT;
 
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.ConsCad_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, ExtEnvio, Propriedade.ExtRetorno.ConsCad_ERR, ex);
                 }
                 catch
                 {

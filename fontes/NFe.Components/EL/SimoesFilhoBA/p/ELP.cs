@@ -58,7 +58,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             loteRpsResposta result = service.EnviarLoteRpsEnvio(UsuarioWs, SenhaWs, XMLtoString(file));
             
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -66,7 +67,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             string numeroNfse = GetValueXML(file, "IdentificacaoNfse", "Numero");
             nfseRpsResposta result = service.CancelarNfseEnvio(UsuarioWs, numeroNfse);
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -74,7 +76,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             string numeroProtocolo = GetValueXML(file, "ConsultarLoteRpsEnvio", "Protocolo");
             nfseResposta result = service.ConsultarLoteRpsEnvio(UsuarioWs, numeroProtocolo);
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -82,7 +85,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             string numeroProtocolo = GetValueXML(file, "ConsultarSituacaoLoteRpsEnvio", "Protocolo");
             situacaoLoteRps result = service.ConsultarSituacaoLoteRpsEnvio(UsuarioWs, numeroProtocolo);
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitLoteRps, Propriedade.ExtRetorno.SitLoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
@@ -106,7 +110,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
 
             nfseResposta result = service.ConsultarNfseEnvio(UsuarioWs, numeroNfse, dataFinal, dataInicialDef, dataFinal, dataFinalDef, identificacaoTomador, identificacaoIntermediario);
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
@@ -114,7 +119,8 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             string identificacaoRps = GetValueXML(file, "IdentificacaoRps", "Numero");
             nfseRpsResposta result = service.ConsultarNfseRpsEnvio(identificacaoRps, UsuarioWs);
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
         private string XMLtoString(string arquivo)
@@ -131,6 +137,7 @@ namespace NFe.Components.EL.SimoesFilhoBA.p
             doc.Load(file);
             XmlNodeList nodes = doc.GetElementsByTagName(elementTag);
             XmlNode node = nodes[0];
+            if (node == null) throw new Exception("Tag <" + valueTag + "> não encontrada");
 
             foreach (XmlNode n in node)
             {

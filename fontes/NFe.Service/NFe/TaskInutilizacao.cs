@@ -62,8 +62,8 @@ namespace NFe.Service
                                         oInutilizacao, 
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg, this,
-                                        Propriedade.ExtEnvio.PedInu_XML, 
-                                        Propriedade.ExtRetorno.Inu_XML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML, 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML);
 
                     //Ler o retorno do webservice
                     LerRetornoInut();
@@ -95,9 +95,9 @@ namespace NFe.Service
                 string ExtRet = string.Empty;
 
                 if (vXmlNfeDadosMsgEhXML) //Se for XML
-                    ExtRet = Propriedade.ExtEnvio.PedInu_XML;
+                    ExtRet = Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML;
                 else //Se for TXT
-                    ExtRet = Propriedade.ExtEnvio.PedInu_TXT;
+                    ExtRet = Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioTXT;
 
                 try
                 {
@@ -228,7 +228,7 @@ namespace NFe.Service
                         //Move o arquivo de Distribuição para a pasta de enviados autorizados
                         string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                         PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedInu_XML) + Propriedade.ExtRetorno.ProcInutNFe;
+                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) + Propriedade.ExtRetorno.ProcInutNFe;
                         TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
                     }
                     else

@@ -120,26 +120,26 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        xmlExtEnvio = Propriedade.ExtEnvio.PedEve.Replace(".xml", "");
-                        xmlExtRetorno = Propriedade.ExtRetorno.Eve.Replace(".xml", "");
+                        xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML.Replace(".xml", "");
+                        xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML.Replace(".xml", "");
                     }
                     else
                     {
                         switch (Servico)
                         {
                             case Servicos.EventoCCe:
-                                xmlExtEnvio = Propriedade.ExtEnvio.EnvCCe_XML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.ExtRetorno.retEnvCCe_XML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML.Replace(".xml", "");
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).RetornoXML.Replace(".xml", "");
                                 break;
 
                             case Servicos.EventoCancelamento:
-                                xmlExtEnvio = Propriedade.ExtEnvio.EnvCancelamento_XML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.ExtRetorno.retCancelamento_XML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML.Replace(".xml", "");
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).RetornoXML.Replace(".xml", "");
                                 break;
 
                             default:
-                                xmlExtEnvio = Propriedade.ExtEnvio.EnvManifestacao_XML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.ExtRetorno.retManifestacao_XML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML.Replace(".xml", "");
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).RetornoXML.Replace(".xml", "");
                                 break;
                         }
                     }
@@ -162,26 +162,26 @@ namespace NFe.Service
                     string xmlFileExtTXT = string.Empty;
                     if (novaNomenclatura)
                     {
-                        xmlFileExt = Propriedade.ExtEnvio.PedEve;
-                        xmlFileExtTXT = Propriedade.ExtEnvio.PedEve_TXT;
+                        xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML;
+                        xmlFileExtTXT = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT;
                     }
                     else
                     {
                         switch (Servico)
                         {
                             case Servicos.EventoCCe:
-                                xmlFileExt = Propriedade.ExtEnvio.EnvCCe_XML;
-                                xmlFileExtTXT = Propriedade.ExtEnvio.EnvCCe_TXT;
+                                xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML;
+                                xmlFileExtTXT = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT;
                                 break;
 
                             case Servicos.EventoCancelamento:
-                                xmlFileExt = Propriedade.ExtEnvio.EnvCancelamento_XML;
-                                xmlFileExtTXT = Propriedade.ExtEnvio.EnvCancelamento_TXT;
+                                xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML;
+                                xmlFileExtTXT = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT;
                                 break;
 
                             default:
-                                xmlFileExt = Propriedade.ExtEnvio.EnvManifestacao_XML;
-                                xmlFileExtTXT = Propriedade.ExtEnvio.EnvManifestacao_TXT;
+                                xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML;
+                                xmlFileExtTXT = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT;
                                 break;
                         }
                     }
@@ -204,7 +204,8 @@ namespace NFe.Service
 
                     if (novaNomenclatura)
                     {
-                        ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.PedEve : Propriedade.ExtEnvio.PedEve_TXT;
+                        ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML :
+                                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT;
                         ExtRetorno = Propriedade.ExtRetorno.Eve_ERR;
                     }
                     else
@@ -212,30 +213,36 @@ namespace NFe.Service
                         if (Servico == Servicos.Nulo)
                         {
                             // pode ter vindo de um txt e houve erro
-                            if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCCe_TXT))
+                            if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML) ||
+                                NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT))
                                 Servico = Servicos.EventoCCe;
                             else
-                                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvManifestacao_TXT))
+                                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) || 
+                                    NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT))
                                     Servico = Servicos.EventoManifestacaoDest;
                                 else
-                                    if (NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_XML) || NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.EnvCancelamento_TXT))
+                                    if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML) ||
+                                        NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT))
                                         Servico = Servicos.EventoCancelamento;
                         }
 
                         switch (Servico)
                         {
                             case Servicos.EventoCCe:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCCe_XML : Propriedade.ExtEnvio.EnvCCe_TXT;
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML : 
+                                                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retEnvCCe_ERR;
                                 break;
 
                             case Servicos.EventoCancelamento:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvCancelamento_XML : Propriedade.ExtEnvio.EnvCancelamento_TXT;
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML : 
+                                                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retCancelamento_ERR;
                                 break;
 
                             case Servicos.EventoManifestacaoDest:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.ExtEnvio.EnvManifestacao_XML : Propriedade.ExtEnvio.EnvManifestacao_TXT;
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML : 
+                                                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retManifestacao_ERR;
                                 break;
 
@@ -277,8 +284,8 @@ namespace NFe.Service
         protected override void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)//, string chNFe_chCTe_chMDFe)
         {
             novaNomenclatura =
-                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve) ||
-                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.ExtEnvio.PedEve_TXT);
+                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML) ||
+                this.NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT);
 
             ///
             /// danasa 6/2011

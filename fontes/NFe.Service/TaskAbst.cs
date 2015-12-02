@@ -517,6 +517,12 @@ namespace NFe.Service
                     break;
         #endregion
 
+        #region GOIANIA
+                case PadroesNFSe.GOIANIA:
+                    retorna = "Nfse";
+                    break;
+        #endregion
+
         #region SMARAPD
                 case PadroesNFSe.SMARAPD:
                     switch (servico)
@@ -881,6 +887,20 @@ namespace NFe.Service
                             break;
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region GOIANIA
+                case PadroesNFSe.GOIANIA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseRps";
+                            break;
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
                             break;
                     }
                     break;
@@ -1654,7 +1674,7 @@ namespace NFe.Service
             string pastaLoteAssinado = pasta + Propriedade.NomePastaXMLAssinado;
 
             //Se o arquivo XML já existir na pasta de assinados, vou avisar o ERP que já tem um em andamento
-            string arqDestino = pastaLoteAssinado + "\\" + Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml";
+            string arqDestino = pastaLoteAssinado + "\\" + Path.GetFileName(NomeArquivoXML);// Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml";
 
             try
             {
@@ -1670,7 +1690,7 @@ namespace NFe.Service
                     //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
                     oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                         PastaEnviados.EmProcessamento.ToString() + "\\" + 
-                                        Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
+                                        Path.GetFileName(NomeArquivoXML));//Functions.ExtrairNomeArq(NomeArquivoXML, ".xml") + ".xml");
 
                     //Deletar a NFE do arquivo de controle de fluxo
                     oFluxoNfe.ExcluirNfeFluxo(ChaveNfe);
@@ -1708,7 +1728,7 @@ namespace NFe.Service
                 }
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
-                ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(dadosNFe.cUF));
+                ValidarXML validar = new ValidarXML(NomeArquivoXML, Convert.ToInt32(dadosNFe.cUF), false);
                 string cResultadoValidacao = validar.ValidarArqXML(NomeArquivoXML);
                 if (cResultadoValidacao != "")
                 {
@@ -1745,19 +1765,19 @@ namespace NFe.Service
             {
                 try
                 {
-                    string extFinal = Propriedade.ExtEnvio.Nfe;
+                    string extFinal = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                     string extErro = Propriedade.ExtRetorno.Nfe_ERR;
                     switch (Servico)
                     {
                         case Servicos.MDFeAssinarValidarEnvioEmLote:
                         case Servicos.MDFeMontarLoteUm:
-                            extFinal = Propriedade.ExtEnvio.MDFe;
+                            extFinal = Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
                             extErro = Propriedade.ExtRetorno.MDFe_ERR;
                             break;
 
                         case Servicos.CTeAssinarValidarEnvioEmLote:
                         case Servicos.CTeMontarLoteUm:
-                            extFinal = Propriedade.ExtEnvio.Cte;
+                            extFinal = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                             extErro = Propriedade.ExtRetorno.Cte_ERR;
                             break;
                     }
@@ -2051,7 +2071,7 @@ namespace NFe.Service
             string nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                         PastaEnviados.Denegados.ToString() + "\\" +
                                         Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
-            string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.ExtEnvio.Nfe, Propriedade.ExtRetorno.Den));
+            string dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe).Replace(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.ExtRetorno.Den));
             string strNomeArqDenegadaNFe = dArquivo;
             string arqDen = dArquivo;
 
@@ -2276,6 +2296,20 @@ namespace NFe.Service
                 case PadroesNFSe.TIPLAN:
                     break;
                 case PadroesNFSe.CARIOCA:
+                    break;
+                case PadroesNFSe.GOIANIA:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps) {
+                        switch (doc.DocumentElement.Name) {
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+                            case "GerarNfseEnvio":
+                                result = Servicos.NFSeGerarNfse;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
                 case PadroesNFSe.SIGCORP_SIGISS:
                     break;

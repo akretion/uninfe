@@ -43,7 +43,7 @@ namespace NFe.Service.NFSe
             try
             {
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
-                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCanNfse) + Propriedade.ExtRetorno.CanNfse_ERR);
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) + Propriedade.ExtRetorno.CanNfse_ERR);
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
 
                 oDadosPedCanNfse = new DadosPedCanNfse(emp);
@@ -202,7 +202,7 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-
+                        
                         el.CancelarNfse(NomeArquivoXML);
                         #endregion
                         break;
@@ -284,14 +284,14 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this,
-                                            Propriedade.ExtEnvio.PedCanNfse,   //"-ped-cannfse", 
-                                            Propriedade.ExtRetorno.CanNfse,   //"-cannfse", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,   //"-ped-cannfse", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,   //"-cannfse", 
                                             padraoNFSe, Servico);
 
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                      Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.ExtEnvio.PedCanNfse) + Propriedade.ExtRetorno.CanNfse);
+                                                      Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                 }
@@ -301,7 +301,7 @@ namespace NFe.Service.NFSe
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.CanNfse_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, Propriedade.ExtRetorno.CanNfse_ERR, ex);
                 }
                 catch
                 {
@@ -353,7 +353,7 @@ namespace NFe.Service.NFSe
         private void EncryptAssinatura()
         {
             ///danasa: 12/2013
-            NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosPedCanNfse.cMunicipio);
+            NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosPedCanNfse.cMunicipio, false);
             val.EncryptAssinatura(NomeArquivoXML);
         }
         #endregion

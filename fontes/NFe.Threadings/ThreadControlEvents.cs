@@ -66,7 +66,8 @@ namespace NFe.Threadings
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " foi descarregado da lista de processamento (Data criação: " + item.FileInfo.LastWriteTime + ")", false);
 
             //Se estiver reconfigurando o UniNFe, tem que reiniciar as threads
-            if (item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_XML) >= 0 || item.FileInfo.FullName.IndexOf(Propriedade.ExtEnvio.AltCon_TXT) >= 0)
+            if (item.FileInfo.FullName.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) >= 0 ||
+                item.FileInfo.FullName.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioTXT) >= 0)
             {
                 ThreadService.Stop();
                 ThreadService.Start();

@@ -200,11 +200,11 @@ namespace NFe.UI
         public object VerConsultaCadastro(string XmlNfeDadosMsg)
         {
             string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
-                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
-                       Propriedade.ExtRetorno.ConsCad_XML;
+                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML) +
+                       Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).RetornoXML;
 
             string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
-                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.ExtEnvio.ConsCad_XML) +
+                      Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML) +
                       Propriedade.ExtRetorno.ConsCad_ERR;
 
             object vRetorno = null;

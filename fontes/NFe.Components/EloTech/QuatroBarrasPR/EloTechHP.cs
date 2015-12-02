@@ -54,7 +54,8 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             EnviarLoteRpsResposta result = service.EnviarLoteRps(oEnviarLoteRpsEnvio);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.EnvLoteRps, Propriedade.ExtRetorno.LoteRps);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
@@ -63,7 +64,8 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             CancelarNfseResposta result = service.CancelarNfse(oCancelarNfseEnvio);
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedCanNfse, Propriedade.ExtRetorno.retCancelamento_XML);
+            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
 
             /*
             object erros = new object[1];
@@ -81,7 +83,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             ConsultarLoteRpsEnvio oTcDadosConsultaNota = ReadXML<ConsultarLoteRpsEnvio>(file);
             ConsultarLoteRpsResposta result = service.ConsultarLoteRps(oTcDadosConsultaNota, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps[0], Propriedade.ExtRetorno.RetLoteRps);
             */
         }
 
@@ -93,7 +95,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             ConsultarSituacaoLoteRpsEnvio oTcDadosConsultaNota = ReadXML<ConsultarSituacaoLoteRpsEnvio>(file);
             ConsultarSituacaoLoteRpsResposta result = service.ConsultarSituacaoLoteRps(oTcDadosConsultaNota, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps, Propriedade.ExtRetorno.RetLoteRps);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedLoteRps[], Propriedade.ExtRetorno.RetLoteRps);
             */
         }
 
@@ -105,7 +107,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             ConsultarNfseEnvio oTcDadosPrestador = ReadXML<ConsultarNfseEnvio>(file);
             ConsultarNfseResposta result = service.ConsultarNfse(oTcDadosPrestador, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse, Propriedade.ExtRetorno.SitNfse);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfse[0], Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
             */
         }
 
@@ -117,7 +119,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             ConsultarNfseRpsEnvio oTcConsultarNfseRpsEnvio = ReadXML<ConsultarNfseRpsEnvio>(file);
             ConsultarNfseRpsResposta result = service.ConsultarNfsePorRps(oTcConsultarNfseRpsEnvio, dadosConexao);
             string strResult = base.CreateXML(result, erros);
-            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps, Propriedade.ExtRetorno.SitNfseRps);
+            GerarRetorno(file, strResult, Propriedade.ExtEnvio.PedSitNfseRps[0], Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
             */
         }
 
@@ -133,6 +135,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             string tagName = rps.GetType().Name;
 
             XmlNode node = nodes[0];
+            if (node == null) throw new Exception("Tag <" + result.GetType().Name + "> não encontrada");
             ReadXML(node, rps, tagName);
 
             return result;
@@ -184,7 +187,7 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return value;
         }

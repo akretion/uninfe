@@ -214,7 +214,7 @@ namespace NFe.UI
                     ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
                     ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe +
                     ";*" + Propriedade.ExtRetorno.Den +
-                    ";*" + Propriedade.ExtRetorno.retCancelamento_XML +
+                    ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML +
                     ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
                     ";*" + Propriedade.ExtRetorno.ProcEventoNFe +
                     "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe +

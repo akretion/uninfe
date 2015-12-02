@@ -87,18 +87,18 @@ namespace NFe.Service
                                         oRecepcao,
                                         nOperacao,
                                         oCabecMsg,
-                                        this);
+                                        this); 
 
                     Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
-                    oInvocarObj.Invocar(wsProxy,
-                                        oRecepcao,
+                    oInvocarObj.Invocar(wsProxy, 
+                                        oRecepcao, 
                                         nOperacao,
-                                        oCabecMsg,
+                                        oCabecMsg, 
                                         this,
-                                        Propriedade.ExtEnvio.EnvLot,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, 
                                         Propriedade.ExtRetorno.Rec);
 
                     Recibo(vStrXmlRetorno);
@@ -108,7 +108,7 @@ namespace NFe.Service
                 {
                     FinalizarNFeSincrono(vStrXmlRetorno, emp);
 
-                    oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
                 }
                 else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
                 {
@@ -123,7 +123,7 @@ namespace NFe.Service
                     if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
                     {
                         // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
-                        oGerarXML.XmlRetorno(Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_XML, vStrXmlRetorno);
+                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
                     }
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109, 
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
@@ -154,7 +154,7 @@ namespace NFe.Service
                     if (Empresas.Configuracoes[emp].IndSinc)
                         TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
                     else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
                 }
                 catch
                 {
@@ -170,7 +170,7 @@ namespace NFe.Service
                     if (Empresas.Configuracoes[emp].IndSinc)
                         TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex, false);
                     else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex, false);
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex, false);
                 }
                 catch
                 {
@@ -186,7 +186,7 @@ namespace NFe.Service
                     if (Empresas.Configuracoes[emp].IndSinc)
                         TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
                     else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.Rec_ERR, ex);
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
                 }
                 catch
                 {
