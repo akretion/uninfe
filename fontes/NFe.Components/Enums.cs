@@ -387,7 +387,7 @@ namespace NFe.Components
         GINFES,
         /// <summary>
         /// Padrão da BETHA Sistemas
-        /// </summary>
+        /// </summary>        
         [Description("BETHA")]
         BETHA,
         /// <summary>

@@ -21,19 +21,20 @@ using NFSe.Components;
 namespace NFe.Settings
 {
     #region Classe ConfiguracaoApp
+    public class ArquivoItem
+    {
+        public string Arquivo;
+        public DateTime Data;
+        public bool Manual;
+        public long Size;
+    }
+
     /// <summary>
     /// Classe responsável por realizar algumas tarefas na parte de configurações da aplicação.
     /// Arquivo de configurações: UniNfeConfig.xml
     /// </summary>
     public class ConfiguracaoApp
     {
-        internal class ArquivoItem
-        {
-            public string Arquivo;
-            public DateTime Data;
-            public bool Manual;
-        }
-
         #region NfeConfiguracoes
         /// <summary>
         /// Enumerador com as tags do xml nfe_Configuracoes
@@ -109,10 +110,31 @@ namespace NFe.Settings
 
         #region Métodos gerais
 
+        public static string XMLVersoesWSDL = Propriedade.PastaExecutavel + "\\VersoesWSDLs.xml";
+
+        public static bool ExtractResourceToDisk(System.Reflection.Assembly ass, string s, string fileoutput)
+        {
+            bool extraido = false;
+            using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(fileoutput)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(fileoutput));
+
+                using (StreamWriter FileWriter = new StreamWriter(fileoutput))
+                {
+                    FileWriter.Write(FileReader.ReadToEnd());
+                    FileWriter.Close();
+                    extraido = true;
+                }
+            }
+            return extraido;
+        }
+
         #region Extrae os arquivos necessarios a executacao
         internal class loadResources
         {
-            private static string XMLVersoesWSDL = Propriedade.PastaExecutavel + "\\VersoesWSDLs.xml";
+            public string cErros { get; private set; }
+            //private static string XMLVersoesWSDL = Propriedade.PastaExecutavel + "\\VersoesWSDLs.xml";
 
             #region load()
             /// <summary>
@@ -275,26 +297,41 @@ namespace NFe.Settings
                             if (fi.Exists)  //danasa 9-2013
                                 if (ListArqsAtualizar.Count > 0)
                                 {
-                                    item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo.ToLower() == fi.Name.ToLower());
+                                    var fx = fi.Directory.FullName.Replace(Propriedade.PastaExecutavel,"").Substring(1);
+                                    item = ListArqsAtualizar.FirstOrDefault(f => f.Arquivo.Equals(fx + "\\" + fi.Name, StringComparison.InvariantCultureIgnoreCase));
                                 }
 
                             // A comparação é feita (fi.LastWriteTime != item.Data)
                             // Pois intende-se que se a data do arquivo que esta na pasta do UniNFe for superior a data
                             // de quando foi feita a ultima atualizacao do UniNfe, significa que ele foi atualizado manualmente e não devemos
                             // sobrepor o WSDL ou SCHEMA do Usuario - Renan 26/03/2013
-                            if (item == null ||
-                                (item != null && fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))
+
+                            //Console.WriteLine("{0} {1} {2} {3}", fi.Name, fi.Length, fi.LastWriteTime, fi.LastWriteTime.CompareTo(item.Data));
+                            if (fi.Exists && item != null)
                             {
-                                if (item == null || (item != null && !item.Manual))
+                                DateTime dt = new DateTime(fi.LastWriteTime.Year, fi.LastWriteTime.Month, fi.LastWriteTime.Day);
+                                if (fi.Length != item.Size || item.Data.CompareTo(dt) != 0)
+                                    if (item.Manual)
+                                        item = null;
+                            }
+
+                            if (item == null /*||
+                                (item != null && (fi.Length != item.Size || fi.LastWriteTime.ToString("dd/MM/yyyy") != item.Data.ToString("dd/MM/yyyy")))*/)
+                            {
+                                //Console.WriteLine("Extraindo: {0}", fi.FullName);
+
+                                //if (item == null || (item != null && !item.Manual))
                                 {
                                     if (ExtractResourceToDisk(ass, s, fileoutput))
+                                    {
                                         gravaLista = true;
+                                    }
                                 }
-                                else
-                                {
-                                    if (item != null && !item.Manual)
-                                        Auxiliar.WriteLog(fileoutput + " não copiado", false);
-                                }
+                                //else
+                                //{
+                                //    if (item != null && !item.Manual)
+                                //        Auxiliar.WriteLog(fileoutput + " não copiado", false);
+                                //}
                             }
                             else if (item != null)
                             {
@@ -310,13 +347,13 @@ namespace NFe.Settings
                 {
                     string xMotivo = "Não foi possível atualizar pacotes de Schemas/WSDLs.";
 
-                    Auxiliar.WriteLog(xMotivo + Environment.NewLine + ex.Message, false);
+                    Auxiliar.WriteLog(this.cErros = xMotivo + Environment.NewLine + ex.Message, false);
 
                     if (Empresas.Configuracoes.Count > 0)
                     {
                         int emp = Empresas.FindEmpresaByThread();
                         Auxiliar oAux = new Auxiliar();
-                        oAux.GravarArqErroERP(Empresas.Configuracoes[emp].CNPJ + ".err", xMotivo + Environment.NewLine + ex.Message);
+                        oAux.GravarArqErroERP(Empresas.Configuracoes[emp].CNPJ + ".err", this.cErros);
                     }
                 }
                 finally
@@ -327,24 +364,6 @@ namespace NFe.Settings
                         WebServiceNFSe.SalvarXMLMunicipios();
                     }
                 }
-            }
-
-            private bool ExtractResourceToDisk(System.Reflection.Assembly ass, string s, string fileoutput)
-            {
-                bool gravaLista = false;
-                using (StreamReader FileReader = new StreamReader(ass.GetManifestResourceStream(s)))
-                {
-                    if (!Directory.Exists(Path.GetDirectoryName(fileoutput)))
-                        Directory.CreateDirectory(Path.GetDirectoryName(fileoutput));
-
-                    using (StreamWriter FileWriter = new StreamWriter(fileoutput))
-                    {
-                        FileWriter.Write(FileReader.ReadToEnd());
-                        FileWriter.Close();
-                        gravaLista = true;
-                    }
-                }
-                return gravaLista;
             }
 
             #endregion
@@ -381,24 +400,19 @@ namespace NFe.Settings
             /// <param name="ListaAnterior"></param>
             public void GravarVersoesWSDLs(List<ArquivoItem> ListaAnterior)
             {
-                //string pastaExecutavel = Propriedade.PastaExecutavel;
-                //string pastaWSDLProducao = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\WSDL\\Producao\\");
-                //string pastaWSDLHomologacao = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\WSDL\\Homologacao\\");
-                //string pastaXSD = pastaExecutavel + (Propriedade.TipoExecucao == TipoExecucao.teAll ? "" : "\\schemas\\");
-
                 string[] ArquivosWSDLProducao = Directory.GetFiles(Propriedade.PastaExecutavel, "*.wsdl", SearchOption.AllDirectories);
-                //string[] ArquivosWSDLHomologacao = Directory.GetFiles(pastaWSDLHomologacao, "*.wsdl", SearchOption.AllDirectories);
                 string[] ArquivosXSD = Directory.GetFiles(Propriedade.PastaExecutavel, "*.xsd", SearchOption.AllDirectories);
+                string[] ArquivosXMLs = Directory.GetFiles(Propriedade.PastaExecutavel, "WebService.xml", SearchOption.AllDirectories);
 
                 List<ArquivoItem> ArquivosXML = new List<ArquivoItem>();
 
                 PreparaDadosWSDLs(ArquivosWSDLProducao, ArquivosXML);
-                //PreparaDadosWSDLs(ArquivosWSDLHomologacao, ArquivosXML);
                 PreparaDadosWSDLs(ArquivosXSD, ArquivosXML);
+                PreparaDadosWSDLs(ArquivosXMLs, ArquivosXML);
 
                 foreach (ArquivoItem item in ArquivosXML)
                 {
-                    ArquivoItem itemAntigo = ListaAnterior.FirstOrDefault(a => a.Arquivo.ToLower() == item.Arquivo.ToLower());
+                    ArquivoItem itemAntigo = ListaAnterior.FirstOrDefault(a =>  a.Arquivo.Equals(item.Arquivo, StringComparison.InvariantCultureIgnoreCase));
                     item.Manual = itemAntigo == null ? false : itemAntigo.Manual;
                 }
 
@@ -428,13 +442,14 @@ namespace NFe.Settings
 
                     DateTime dataModif = infArquivo.LastWriteTime;
                     string nomearquivo = infArquivo.Name;
+                    string dir = infArquivo.Directory.FullName.Replace(Propriedade.PastaExecutavel,"").Substring(1);
 
                     ListArquivos.Add(new ArquivoItem
                     {
-                        Arquivo = nomearquivo,
+                        Arquivo = dir + "\\" + nomearquivo,
                         Data = dataModif,
-                        Manual = false
-
+                        Manual = false,
+                        Size = infArquivo.Length
                     });
                 }
             }
@@ -465,15 +480,14 @@ namespace NFe.Settings
                         arqXML.WriteElementString("arquivo", item.Arquivo);
                         arqXML.WriteElementString("data", item.Data.ToShortDateString());
                         arqXML.WriteElementString("manual", item.Manual.ToString());
+                        arqXML.WriteElementString("size", item.Size.ToString());
 
                         arqXML.WriteEndElement();
                     }
-
                     arqXML.WriteFullEndElement();
 
                     arqXML.Close();
                 }
-
             }
             #endregion
 
@@ -498,12 +512,17 @@ namespace NFe.Settings
                         string _arquivo = item["arquivo"].InnerText;
                         string _data = item["data"].InnerText;
                         string _manual = item["manual"].InnerText;
+                        string _size = "-1";
+
+                        try { _size = item["size"].InnerText; }
+                        catch { }
 
                         ListArqInstalados.Add(new ArquivoItem
                         {
                             Arquivo = _arquivo,
                             Data = Convert.ToDateTime(_data),
-                            Manual = Convert.ToBoolean(_manual)
+                            Manual = Convert.ToBoolean(_manual),
+                            Size = Convert.ToInt64("0" + _size)
                         });
                     }
                     catch
@@ -537,11 +556,6 @@ namespace NFe.Settings
             try
             {
                 NFe.Components.SchemaXML.CriarListaIDXML();
-
-                //--------
-                // eliminada, condensada tudo na classe SchemaXML
-                //
-                //SchemaXMLNFSe.CriarListaIDXML();
             }
             catch(Exception ex)
             {
@@ -2468,29 +2482,26 @@ namespace NFe.Settings
         #endregion
 
         #region ForceUpdateWSDL()
-        public static bool ForceUpdateWSDL(bool pergunta = true)
+        public static bool ForceUpdateWSDL(bool pergunta, ref string cerros)
         {
             if (!pergunta)
             {
-                new loadResources().load();
+                var c = new loadResources();
+                c.load();
+                cerros = c.cErros;
                 return true;
             }
-            string XMLVersoesWSDL = Propriedade.PastaExecutavel + "\\VersoesWSDLs.xml";
+
             string msg = "Após confirmada esta função o UniNFe irá sobrepor todos os WSDLs e Schemas com as versões originais da Versão do UniNFe, sobrepondo assim possíveis arquivos que tenham sido atualizados manualmente.\r\n\r\nTem certeza que deseja continuar? ";
 
             if (MessageBox.Show(msg, "ATENÇÂO! - Atualização dos WSDLs e SCHEMAS", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (File.Exists(XMLVersoesWSDL))
-                {
-                    File.Delete(XMLVersoesWSDL);
-                }
+                Functions.DeletarArquivo(XMLVersoesWSDL);
 
                 new loadResources().load();
 
                 MessageBox.Show("WSDLs e Schemas atualizados com sucesso.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
             return true;
         }
 

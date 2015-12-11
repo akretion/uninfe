@@ -32,6 +32,7 @@ namespace NFe.Service
 
             string ccMessage = string.Empty;
             string ccExtension = Propriedade.ExtRetorno.Nfe_ERR;// "-nfe.err";
+            var EXT = Propriedade.Extensao(Propriedade.TipoEnvio.NFe);
 
             try
             {
@@ -40,8 +41,8 @@ namespace NFe.Service
                 ///
                 /// exclui o arquivo de erro
                 /// 
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + ccExtension));
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).RetornoXML));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, EXT.EnvioTXT) + ccExtension));
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Path.GetFileName(Functions.ExtrairNomeArq(arquivo, EXT.EnvioTXT) + EXT.RetornoXML));
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo));
                 ///
                 /// exclui o arquivo TXT original
@@ -80,7 +81,7 @@ namespace NFe.Service
                         }
                         ccExtension = "-nfe.txt";
                         ccMessage = "cStat=01\r\n" +
-                            "xMotivo=Convertido com sucesso. Foi(ram) convertida(s) " + oUniTxtToXml.cRetorno.Count.ToString() + " nota(s) fiscal(is)";
+                            "xMotivo=Conversão efetuada com sucesso." + (oUniTxtToXml.cRetorno.Count == 1 ? "" : " Foram convertidas " + oUniTxtToXml.cRetorno.Count.ToString() + " notas fiscais");
 
                         foreach (NFe.ConvertTxt.txtTOxmlClassRetorno txtClass in oUniTxtToXml.cRetorno)
                         {
@@ -89,7 +90,7 @@ namespace NFe.Service
                             /// 
                             ccMessage += Environment.NewLine +
                                     "Nota fiscal: " + txtClass.NotaFiscal.ToString("000000000") +
-                                    " Série: " + txtClass.Serie.ToString("000") +
+                                    " Serie: " + txtClass.Serie.ToString("000") +
                                     " - ChaveNFe: " + txtClass.ChaveNFe;
 
                             // move o arquivo XML criado na pasta Envio\Convertidos para a pasta Envio
@@ -98,7 +99,8 @@ namespace NFe.Service
                             string nomeArquivoDestino = Path.Combine(pasta, Path.GetFileName(txtClass.XMLFileName));
                             Functions.Move(txtClass.XMLFileName, nomeArquivoDestino);
 
-                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
+                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + EXT.EnvioXML);
+                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + txtClass.ChaveNFe + EXT.EnvioTXT);
                         }
                     }
                 }
@@ -137,7 +139,7 @@ namespace NFe.Service
                 /// 
                 /// Gravar o retorno para o ERP em formato TXT com o erro ocorrido
                 /// 
-                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) + ccExtension, ccMessage);
+                oAux.GravarArqErroERP(Functions.ExtrairNomeArq(arquivo, EXT.EnvioTXT) + ccExtension, ccMessage);
             }
         }
     }

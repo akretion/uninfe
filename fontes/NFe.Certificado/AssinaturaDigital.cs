@@ -229,7 +229,7 @@ namespace NFe.Certificado
             csp.KeyPassword = ss;
             csp.KeyNumber = 1;
             csp.Flags = CspProviderFlags.NoPrompt;
-            csp.KeyContainerName = "SecurityBin2";
+            csp.KeyContainerName = "";
             
             // Initialize an RSACryptoServiceProvider object using
             // the CspParameters object.

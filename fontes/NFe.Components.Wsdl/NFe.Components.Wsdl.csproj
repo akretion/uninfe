@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -2669,25 +2669,7 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PAracajuSE-WEBISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFe\schemas\NFe\envCancelPProrrogNFe_v1.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\envFiscoNfe_v1.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\envPProrrogNFe_v1.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\NFe\procEventoNFe_v99.99.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\retEnvCancelPProrrogNFe_v1.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\retEnvFiscoNFe_v1.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\NFe\retPProrrogNFe_v1.0.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -2734,12 +2716,63 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\GOIANIA\nfse_gyn_v02.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
-    <None Include="NFse\WSDL\Producao\PColatinaES-EL.wsdl" />
-    <None Include="NFse\WSDL\Producao\PRecifePE-ABRASF.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HToledoPR-EQUIPLANO.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PColatinaES-EL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRecifePE-ABRASF.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HRioGrandeRS-sigiss.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPicadaCafe-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPicadaCafe-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRioGrandeRS-sigiss.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PGoianiaGO.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\schemas\NFe\e111500_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e111501_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e111502_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e111503_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e411500_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e411501_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e411502_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\e411503_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\envRemIndus_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\eventoRemIndus_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\leiauteRemIndus_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\procRemIndus_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\NFe\retEnvRemIndus_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBrumadoBA-WebISS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBrumadoBA-WebISS.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

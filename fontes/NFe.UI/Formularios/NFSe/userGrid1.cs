@@ -31,7 +31,7 @@ namespace NFe.UI.Formularios.NFSe
             //colPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
 
             colPadrao.Sorted = false;
-            colPadrao.DataSource = WebServiceNFSe.PadroesNFSeListDataSource;
+            colPadrao.DataSource = WebServiceNFSe.PadroesNFSeUnicoWSDLDataSource;
             colPadrao.ValueMember = "fromType";
             colPadrao.DisplayMember = "fromDescription";
 

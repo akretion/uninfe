@@ -237,7 +237,6 @@ namespace NFe.UI
 
         private void metroTile_wsdl_Click(object sender, EventArgs e)
         {
-            string XMLVersoesWSDL = Propriedade.PastaExecutavel + "\\VersoesWSDLs.xml";
             string msg = string.Format("Após confirmada esta função o {0} irá sobrepor todos os WSDLs e Schemas com as versões originais da versão do {0}" +
                     ", sobrepondo assim possíveis arquivos que tenham sido atualizados manualmente.\r\n\r\nTem certeza que deseja continuar?",
                                 Propriedade.NomeAplicacao);
@@ -246,11 +245,10 @@ namespace NFe.UI
             {
                 try
                 {
-                    if (File.Exists(XMLVersoesWSDL))
-                    {
-                        File.Delete(XMLVersoesWSDL);
-                    }
-                    ConfiguracaoApp.ForceUpdateWSDL(false);
+                    Functions.DeletarArquivo(ConfiguracaoApp.XMLVersoesWSDL);
+
+                    string cerros = "";
+                    ConfiguracaoApp.ForceUpdateWSDL(false, ref cerros);
 
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "WSDLs e Schemas atualizados com sucesso.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

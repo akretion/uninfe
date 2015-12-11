@@ -35,7 +35,7 @@ namespace NFe.Components
             var xx = ass.GetTypes().Where(p => p.IsClass && (p.Name.StartsWith("SchemaXML_") || p.Name.StartsWith("SchemaXMLNFSe_")));
             foreach (var h1 in xx)
             {
-                Console.WriteLine(h1 + " -> ");
+                //Console.WriteLine(h1 + " -> ");
                 h1.InvokeMember("CriarListaIDXML", System.Reflection.BindingFlags.InvokeMethod, null, null, null);
             }
         }
