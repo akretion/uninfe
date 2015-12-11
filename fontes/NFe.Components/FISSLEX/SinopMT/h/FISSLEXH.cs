@@ -63,9 +63,14 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
         public override void ConsultarLoteRps(string file)
         {
-            ServiceConsultaLoteRps.Proxy = WebRequest.DefaultWebProxy;
-            ServiceConsultaLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
-            ServiceConsultaLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            #region Definições de proxy
+            if (!String.IsNullOrEmpty(ProxyUser))
+            {
+                ServiceConsultarSituacaoLoteRps.Proxy = WebRequest.DefaultWebProxy;
+                ServiceConsultarSituacaoLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+                ServiceConsultarSituacaoLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            }
+            #endregion
 
             ConsultarLoteRpsEnvio oTcDadosConsultaLote = ReadXML<ConsultarLoteRpsEnvio>(file);
             NFe.Components.br.com.fisslex.demo.aws_consultaloterps.h.tcMensagemRetorno[] result = null;
@@ -79,9 +84,14 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
         public override void ConsultarSituacaoLoteRps(string file)
         {
-            ServiceConsultarSituacaoLoteRps.Proxy = WebRequest.DefaultWebProxy;
-            ServiceConsultarSituacaoLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
-            ServiceConsultarSituacaoLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            #region Definições de proxy
+            if (!String.IsNullOrEmpty(ProxyUser))
+            {
+                ServiceConsultarSituacaoLoteRps.Proxy = WebRequest.DefaultWebProxy;
+                ServiceConsultarSituacaoLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+                ServiceConsultarSituacaoLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            }
+            #endregion
 
             ConsultarSituacaoLoteRpsEnvio oTcDadosConsultaLote = ReadXML<ConsultarSituacaoLoteRpsEnvio>(file);
             NFe.Components.br.com.fisslex.demo.aws_consultarsituacaoloterps.h.ConsultarSituacaoLoteRpsResposta result = null;
@@ -95,9 +105,14 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
         public override void ConsultarNfse(string file)
         {
-            ServiceConsultaNfse.Proxy = WebRequest.DefaultWebProxy;
-            ServiceConsultaNfse.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
-            ServiceConsultaNfse.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            #region Definições de proxy
+            if (!String.IsNullOrEmpty(ProxyUser))
+            {
+                ServiceConsultarSituacaoLoteRps.Proxy = WebRequest.DefaultWebProxy;
+                ServiceConsultarSituacaoLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+                ServiceConsultarSituacaoLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            }
+            #endregion
 
             ConsultarNfseEnvio oTcDadosConsultaNfse = ReadXML<ConsultarNfseEnvio>(file);
             NFe.Components.br.com.fisslex.demo.aws_consultanfse.h.tcMensagemRetorno[] result = null;
@@ -112,16 +127,21 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
         public override void ConsultarNfsePorRps(string file)
         {
-            ServiceConsultaNfsePorRps.Proxy = WebRequest.DefaultWebProxy;
-            ServiceConsultaNfsePorRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
-            ServiceConsultaNfsePorRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            #region Definições de proxy
+            if (!String.IsNullOrEmpty(ProxyUser))
+            {
+                ServiceConsultarSituacaoLoteRps.Proxy = WebRequest.DefaultWebProxy;
+                ServiceConsultarSituacaoLoteRps.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+                ServiceConsultarSituacaoLoteRps.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            }
+            #endregion
 
             ConsultarNfseRpsEnvio oTcDadosConsultaNfse = ReadXML<ConsultarNfseRpsEnvio>(file);
             NFe.Components.br.com.fisslex.demo.aws_consultanfseporrps.h.tcMensagemRetorno[] result = null;
 
-            ServiceConsultaNfsePorRps.Execute(oTcDadosConsultaNfse, out result);
+            string xResult = ServiceConsultaNfsePorRps.Execute(oTcDadosConsultaNfse, out result);
 
-            string strResult = base.CreateXML(result);
+            string strResult = base.CreateXML(xResult, result);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }

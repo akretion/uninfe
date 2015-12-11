@@ -206,7 +206,8 @@ namespace NFe.Threadings
                 catch (Exception ex)
                 {
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
-                    Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
+                    if (emp >= 0)
+                        Functions.GravarErroMover(arqTemp, Empresas.Configuracoes[emp].PastaXmlRetorno, ex.ToString());
                 }
                 finally
                 {
@@ -217,14 +218,19 @@ namespace NFe.Threadings
         }
 
         private void RaiseFileChanged(FileInfo fi)
-        {            
+        {
+            string msgError = null;
+
             if (File.Exists(fi.FullName))
             {
                 ///
                 /// TODO!!!
                 /// entre este processo e o RaiseEvent está tendo uma demora considerável
                 /// 
-                if (fi.Length > 0)
+                if (fi.Length > 0 || (  fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.sair_XML).EnvioTXT) ||
+                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedUpdatewsdl).EnvioTXT) ||
+                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedLayouts).EnvioTXT) ||
+                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedRestart).EnvioTXT)))
                 {
                     Thread tworker = new Thread(
                         new ThreadStart(
@@ -249,15 +255,18 @@ namespace NFe.Threadings
                 }
                 else
                 {
-                    Auxiliar.WriteLog(fi.FullName + " - Arquivo com tamanho zerado.", true);
+                    msgError = fi.FullName + " - Arquivo com tamanho zerado.";
                 }
             }
             else
             {
-                Auxiliar.WriteLog(fi.FullName + " - Arquivo não existe.", true);
+                msgError = fi.FullName + " - Arquivo não existe.";
             }
-
-
+            if (msgError != null)
+                if (fi.Directory.Name.ToLower().EndsWith("geral\\temp"))
+                    NFe.Components.Functions.WriteLog(msgError, false, true, "");
+                else
+                    Auxiliar.WriteLog(msgError, true);
         }
 
         /// <summary>

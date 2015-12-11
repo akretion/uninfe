@@ -17,6 +17,7 @@ namespace NFe.Components
     public class WebServiceNFSe
     {
         private static List<PadroesDataSource> _PadroesDataSource = null;
+        private static List<PadroesDataSource> _PadroesUnicoWSDLDataSource = null;
         /// <summary>
         /// lista de padrões usados para preencher o datagrid e pesquisas internas
         /// </summary>
@@ -34,6 +35,32 @@ namespace NFe.Components
                 return _PadroesDataSource.OrderBy(p => p.fromDescription).ToList();
             }
         }
+
+        public static List<PadroesDataSource> PadroesNFSeUnicoWSDLDataSource
+        {
+            get
+            {
+                if (_PadroesUnicoWSDLDataSource == null)
+                {
+                    Array arr = Enum.GetValues(typeof(PadroesNFSe));
+                    _PadroesUnicoWSDLDataSource = new List<PadroesDataSource>();
+                    foreach (PadroesNFSe type in arr)
+                        switch (type)
+                        {
+                            case PadroesNFSe.NaoIdentificado:
+                            case PadroesNFSe.GINFES:
+                            case PadroesNFSe.BETHA:
+                            case PadroesNFSe.EQUIPLANO:
+                                _PadroesUnicoWSDLDataSource.Add(new PadroesDataSource { fromType = type.ToString(), fromDescription = EnumHelper.GetEnumItemDescription(type) });
+                                break;
+                        }
+                        
+                }
+                return _PadroesUnicoWSDLDataSource.OrderBy(p => p.fromDescription).ToList();
+            }
+        }
+
+
 
         private static List<string> _Padroes = null;
         /// <summary>

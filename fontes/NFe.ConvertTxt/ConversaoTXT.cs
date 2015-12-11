@@ -12,6 +12,201 @@ namespace NFe.ConvertTxt
     {
         #region --- public properties
 
+        public Dictionary<string, string> LayoutTXT
+        {
+            get
+            {
+                if (_LayoutTXT == null)
+                {
+                    _LayoutTXT = new Dictionary<string, string>();
+
+                    /// "A"
+                    _LayoutTXT.Add("A", "§A|versao|Id|");
+                    /// "B"
+                    _LayoutTXT.Add("B_200", prefix + "B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|hSaiEnt|tpNF|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|ProcEmi|VerProc|dhCont|xJust|");
+                    _LayoutTXT.Add("B_310", prefix + "B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|indFinal|indPres|ProcEmi|VerProc|dhCont|xJust|");
+                    _LayoutTXT.Add("B13", prefix + "B13|refNFe|");
+                    _LayoutTXT.Add("BA02", prefix + "B02|refNFe|");
+                    _LayoutTXT.Add("B14", prefix + "B14|cUF|AAMM|CNPJ|mod|serie|nNF|");
+                    _LayoutTXT.Add("BA03", prefix + "BA03|cUF|AAMM|CNPJ|mod|serie|nNF|");
+                    _LayoutTXT.Add("BA10", prefix + "BA10|cUF|AAMM|IE|mod|serie|nNF|refCTe|");
+                    _LayoutTXT.Add("B20A", prefix + "B20a|cUF|AAMM|IE|mod|serie|nNF|");
+                    _LayoutTXT.Add("B20D", prefix + "B20d|CNPJ|");
+                    _LayoutTXT.Add("BA13", prefix + "BA13|CNPJ|");
+                    _LayoutTXT.Add("B20E", prefix + "B20e|CPF|");
+                    _LayoutTXT.Add("BA14", prefix + "BA14|CPF|");
+                    _LayoutTXT.Add("B20I", prefix + "B20i|refCTe|");
+                    _LayoutTXT.Add("B20J", prefix + "B20j|mod|nECF|nCOO|");
+                    _LayoutTXT.Add("BA20", prefix + "BA20|mod|nECF|nCOO|");
+                    /// "C"
+                    _LayoutTXT.Add("C", prefix + "C|xNome|xFant|IE|IEST|IM|CNAE|CRT|");
+                    _LayoutTXT.Add("C02", prefix + "C02|CNPJ|");
+                    _LayoutTXT.Add("C02A", prefix + "C02a|CPF|");
+                    _LayoutTXT.Add("C05", prefix + "C05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone|");
+                    /// "D"
+                    _LayoutTXT.Add("D", prefix + "D|CNPJ|xOrgao|matr|xAgente|fone|UF|nDAR|dEmi|vDAR|repEmi|dPag|");
+                    /// "E"
+                    _LayoutTXT.Add("E_200", prefix + "E|xNome|IE|ISUF|email|");
+                    _LayoutTXT.Add("E_310", prefix + "E|xNome|indIEDest|IE|ISUF|IM|email|");
+                    _LayoutTXT.Add("E02", prefix + "E02|CNPJ|");
+                    _LayoutTXT.Add("E03", prefix + "E03|CPF|");
+                    _LayoutTXT.Add("E03A", prefix + "E03a|idEstrangeiro|");
+                    _LayoutTXT.Add("E05", prefix + "E05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone|");
+                    /// "F"
+                    _LayoutTXT.Add("F", prefix + "F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|");
+                    _LayoutTXT.Add("F02", prefix + "F02|CNPJ|");
+                    _LayoutTXT.Add("F02A", prefix + "F02a|CPF|");
+                    /// "G"
+                    _LayoutTXT.Add("G", prefix + "G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|");
+                    _LayoutTXT.Add("G02", prefix + "G02|CNPJ|");
+                    _LayoutTXT.Add("G02A", prefix + "G02a|CPF|");
+                    _LayoutTXT.Add("G51", prefix + "G51|CNPJ|");
+                    _LayoutTXT.Add("GA02", prefix + "GA02|CNPJ|");
+                    _LayoutTXT.Add("G52", prefix + "G52|CPF|");
+                    _LayoutTXT.Add("GA03", prefix + "GA03|CPF|");
+                    /// "H"
+                    _LayoutTXT.Add("H", prefix + "H|nItem|infAdProd|");
+                    /// "I"
+                    _LayoutTXT.Add("I_23", prefix + "I|cProd|cEAN|XProd|NCM|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI|"); //ok
+                    _LayoutTXT.Add("I_25", prefix + "I|cProd|cEAN|XProd|NCM|NVE|CEST|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI|"); //ok
+                    _LayoutTXT.Add("I05A", prefix + "I05a|NVE|");
+                    _LayoutTXT.Add("I05W", prefix + "I05w|CEST|");
+                    _LayoutTXT.Add("I18_200", prefix + "I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|cExportador|");
+                    _LayoutTXT.Add("I18_310", prefix + "I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador|");
+                    _LayoutTXT.Add("I25_200", prefix + "I25|NAdicao|NSeqAdic|CFabricante|VDescDI|");
+                    _LayoutTXT.Add("I25_310", prefix + "I25|NAdicao|NSeqAdic|CFabricante|VDescDI|nDraw|");
+                    _LayoutTXT.Add("I50", prefix + "I50|nDraw|");
+                    _LayoutTXT.Add("I52", prefix + "I52|nRE|chNFe|qExport|");
+                    /// "J"
+                    _LayoutTXT.Add("J", prefix + "J|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest|");
+                    _LayoutTXT.Add("JA", prefix + "JA|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest|");
+                    /// "K"
+                    _LayoutTXT.Add("K", prefix + "K|nLote|qLote|dFab|dVal|vPMC|");
+                    /// "L"
+                    _LayoutTXT.Add("L", prefix + "L|tpArma|nSerie|nCano|descr|");
+                    _LayoutTXT.Add("LA_200", prefix + "LA|cProdANP|CODIF|qTemp|UFCons|");
+                    _LayoutTXT.Add("L01_200", prefix + "L01|cProdANP|CODIF|qTemp|UFCons|");
+                    _LayoutTXT.Add("LA_310", prefix + "LA|cProdANP|pMixGN|CODIF|qTemp|UFCons|");
+                    _LayoutTXT.Add("L01_310", prefix + "L01|cProdANP|pMixGN|CODIF|qTemp|UFCons|");
+                    _LayoutTXT.Add("LA1", prefix + "LA1|nBico|nBomba|nTanque|vEncIni|vEncFin|");
+                    _LayoutTXT.Add("LA07", prefix + "LA07|qBCProd|vAliqProd|vCIDE|");
+                    _LayoutTXT.Add("L105", prefix + "L105|qBCProd|vAliqProd|vCIDE|");
+                    _LayoutTXT.Add("LB", prefix + "LB|nRECOPI|");
+                    _LayoutTXT.Add("L109", prefix + "L109|nRECOPI|");
+                    /// "M"
+                    _LayoutTXT.Add("M", prefix + "M|vTotTrib|");
+                    /// "N"
+                    _LayoutTXT.Add("N02", prefix + "N02|Orig|CST|modBC|vBC|pICMS|vICMS|");
+                    _LayoutTXT.Add("N03", prefix + "N03|Orig|CST|modBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
+                    _LayoutTXT.Add("N04", prefix + "N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vICMSDeson|motDesICMS|");
+                    _LayoutTXT.Add("N05", prefix + "N05|orig|CST|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS|");
+                    _LayoutTXT.Add("N06_310", prefix + "N06|orig|CST|vICMSDeson|motDesICMS|");
+                    _LayoutTXT.Add("N06_200", prefix + "N06|orig|CST|vICMS|motDesICMS|");
+                    _LayoutTXT.Add("N07_310", prefix + "N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS|");
+                    _LayoutTXT.Add("N07_200", prefix + "N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|");
+                    _LayoutTXT.Add("N08_310", prefix + "N08|Orig|CST|vBCSTRet|vICMSSTRet|");
+                    _LayoutTXT.Add("N08_200", prefix + "N08|Orig|CST|vBCST|vICMSST|");
+                    _LayoutTXT.Add("N09_310", prefix + "N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS|");
+                    _LayoutTXT.Add("N09_200", prefix + "N09|Orig|CST|modBC|PRedBC|VBC|pICMS|VICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
+                    _LayoutTXT.Add("N10_310", prefix + "N10|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS|");
+                    _LayoutTXT.Add("N10_200", prefix + "N10|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
+                    _LayoutTXT.Add("N10A_310", prefix + "N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|");
+                    _LayoutTXT.Add("N10A_200", prefix + "N10a|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|");
+                    _LayoutTXT.Add("N10B", prefix + "N10b|oOrig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest|");
+                    _LayoutTXT.Add("N10C", prefix + "N10c|orig|CSOSN|pCredSN|vCredICMSSN|");
+                    _LayoutTXT.Add("N10D", prefix + "N10d|orig|CSOSN|");
+                    _LayoutTXT.Add("N10E", prefix + "N10e|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
+                    _LayoutTXT.Add("N10F", prefix + "N10f|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
+                    _LayoutTXT.Add("N10G_310", prefix + "N10g|orig|CSOSN|vBCSTRet|vICMSSTRet|");
+                    _LayoutTXT.Add("N10G_200", prefix + "N10g|Orig|CSOSN|modBCST|vBCSTRet|vICMSSTRet|");
+                    _LayoutTXT.Add("N10H", prefix + "N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
+                    _LayoutTXT.Add("NA", prefix + "NA|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet|");
+                    /// "O"
+                    _LayoutTXT.Add("O", prefix + "O|clEnq|CNPJProd|cSelo|qSelo|cEnq|");
+                    _LayoutTXT.Add("O07", prefix + "O07|CST|vIPI|");
+                    _LayoutTXT.Add("O08", prefix + "O08|CST|");
+                    _LayoutTXT.Add("O10", prefix + "O10|vBC|pIPI|");
+                    _LayoutTXT.Add("O11_310", prefix + "O11|qUnid|vUnid|vIPI|");
+                    _LayoutTXT.Add("O11_200", prefix + "O11|qUnid|vUnid|");
+                    /// "P":
+                    _LayoutTXT.Add("P", prefix + "P|vBC|vDespAdu|vII|vIOF|");
+                    /// "Q":
+                    _LayoutTXT.Add("Q02", prefix + "Q02|CST|VBC|PPIS|VPIS|");
+                    _LayoutTXT.Add("Q03", prefix + "Q03|CST|QBCProd|VAliqProd|VPIS|");
+                    _LayoutTXT.Add("Q04", prefix + "Q04|CST|");
+                    _LayoutTXT.Add("Q05", prefix + "Q05|CST|vPIS|");
+                    _LayoutTXT.Add("Q07_310", prefix + "Q07|vBC|pPIS|vPIS|");
+                    _LayoutTXT.Add("Q07_200", prefix + "Q07|vBC|pPIS|");
+                    _LayoutTXT.Add("Q10", prefix + "Q10|qBCProd|vAliqProd|");
+                    /// "R":
+                    _LayoutTXT.Add("R", prefix + "R|vPIS|"); //ok
+                    _LayoutTXT.Add("R02", prefix + "R02|vBC|pPIS|");
+                    _LayoutTXT.Add("R04_310", prefix + "R04|qBCProd|vAliqProd|vPIS|");
+                    _LayoutTXT.Add("R04_200", prefix + "R04|qBCProd|vAliqProd|");
+                    /// "S"
+                    _LayoutTXT.Add("S02", prefix + "S02|CST|vBC|pCOFINS|vCOFINS|");
+                    _LayoutTXT.Add("S03", prefix + "S03|CST|QBCProd|VAliqProd|VCOFINS|");
+                    _LayoutTXT.Add("S04", prefix + "S04|CST|");
+                    _LayoutTXT.Add("S05", prefix + "S05|CST|VCOFINS|");
+                    _LayoutTXT.Add("S07", prefix + "S07|VBC|PCOFINS|");
+                    _LayoutTXT.Add("S09", prefix + "S09|QBCProd|VAliqProd|");
+                    /// "T":
+                    _LayoutTXT.Add("T", prefix + "T|VCOFINS|"); //ok
+                    _LayoutTXT.Add("T02", prefix + "T02|VBC|PCOFINS|");
+                    _LayoutTXT.Add("T04", prefix + "T04|QBCProd|VAliqProd|");
+                    /// "U":
+                    _LayoutTXT.Add("U_310", prefix + "U|VBC|VAliq|VISSQN|CMunFG|CListServ|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|indISS|cServico|cMun|cPais|nProcesso|indIncentivo|");
+                    _LayoutTXT.Add("U_200", prefix + "U|VBC|VAliq|VISSQN|CMunFG|CListServ|cSitTrib|"); //ok
+                    _LayoutTXT.Add("UA", prefix + "UA|pDevol|vIPIDevol|");
+                    /// "W"
+                    _LayoutTXT.Add("W02_200", prefix + "W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson|");
+                    _LayoutTXT.Add("W02_310_17", prefix + "W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib|");
+                    _LayoutTXT.Add("W02_310_20", prefix + "W02|vBC|vICMS|vICMSDeson|vFCPUFDest|vICMSUFDest|vICMSUFRemet|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib|");
+                    ///
+                    /// criada duas entradas porque acho que a Sefaz cometeu um erro, colocando um pipe em branco
+                    _LayoutTXT.Add("W02_310_21", prefix + "W02|vBC|vICMS|vICMSDeson|vFCPUFDest|vICMSUFDest|vICMSUFRemet||vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib|");
+                    _LayoutTXT.Add("W04", prefix + "W04|vICMSUFDest|vICMSUFRemet|vFCPUFDest|");
+                    _LayoutTXT.Add("W17_310", prefix + "W17|VServ|VBC|VISS|VPIS|VCOFINS|dCompet|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|cRegTrib|");
+                    _LayoutTXT.Add("W17_200", prefix + "W17|VServ|VBC|VISS|VPIS|VCOFINS|");
+                    _LayoutTXT.Add("W23", prefix + "W23|VRetPIS|VRetCOFINS|VRetCSLL|VBCIRRF|VIRRF|VBCRetPrev|VRetPrev|");
+                    /// "X":
+                    _LayoutTXT.Add("X", prefix + "X|modFrete|");
+                    _LayoutTXT.Add("X03", prefix + "X03|xNome|IE|xEnder|xMun|UF|");
+                    _LayoutTXT.Add("X04", prefix + "X04|CNPJ|");
+                    _LayoutTXT.Add("X05", prefix + "X05|CPF|");
+                    _LayoutTXT.Add("X11", prefix + "X11|VServ|VBCRet|PICMSRet|VICMSRet|CFOP|CMunFG|");
+                    _LayoutTXT.Add("X18", prefix + "X18|Placa|UF|RNTC|");
+                    _LayoutTXT.Add("X22_310", prefix + "X22|Placa|UF|RNTC|vagao|balsa|");
+                    _LayoutTXT.Add("X22_200", prefix + "X22|Placa|UF|RNTC|");
+                    _LayoutTXT.Add("X26", prefix + "X26|QVol|Esp|Marca|NVol|PesoL|PesoB|");
+                    _LayoutTXT.Add("X33", prefix + "X33|NLacre|");
+                    /// "Y":
+                    _LayoutTXT.Add("Y02", prefix + "Y02|NFat|VOrig|VDesc|VLiq|");
+                    _LayoutTXT.Add("Y07", prefix + "Y07|NDup|DVenc|VDup|");
+                    _LayoutTXT.Add("YA_6", prefix + "YA|tPag|vPag|CNPJ|tBand|cAut|");
+                    _LayoutTXT.Add("YA_7", prefix + "YA|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|");
+                    _LayoutTXT.Add("YA04", prefix + "YA04|tpIntegra|");
+                    _LayoutTXT.Add("YA04A", prefix + "YA04a|tpIntegra");
+                    /// "Z":
+                    _LayoutTXT.Add("Z", prefix + "Z|InfAdFisco|InfCpl|");
+                    _LayoutTXT.Add("Z04", prefix + "Z04|XCampo|XTexto|");
+                    _LayoutTXT.Add("Z07", prefix + "Z07|XCampo|XTexto|");
+                    _LayoutTXT.Add("Z10", prefix + "Z10|NProc|IndProc|");
+                    _LayoutTXT.Add("ZA_310", prefix + "ZA|UFSaidaPais|xLocExporta|xLocDespacho|");
+                    _LayoutTXT.Add("ZA01_310", prefix +"ZA01|UFSaidaPais|xLocExporta|xLocDespacho|");
+                    _LayoutTXT.Add("ZA_200",   prefix +  "ZA|UFEmbarq|XLocEmbarq|");
+                    _LayoutTXT.Add("ZA01_200", prefix +"ZA01|UFEmbarq|XLocEmbarq|");
+                    _LayoutTXT.Add("ZB", prefix + "ZB|XNEmp|XPed|XCont|");
+                    _LayoutTXT.Add("ZC", prefix + "ZC|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor|");
+                    _LayoutTXT.Add("ZC01", prefix + "ZC01|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor|");
+                    _LayoutTXT.Add("ZC04", prefix + "ZC04|dia|qtde|");
+                    _LayoutTXT.Add("ZC10", prefix + "ZC10|xDed|vDed|");
+
+                }
+                return _LayoutTXT;
+            }
+        }
+
         public List<txtTOxmlClassRetorno> cRetorno = null;
         public string cMensagemErro { get; private set; }
 
@@ -19,6 +214,7 @@ namespace NFe.ConvertTxt
 
         #region -- private proprieties
 
+        private Dictionary<string, string> _LayoutTXT = null;
         private NFe NFe = null;
         private string FSegmento;
         private int LinhaLida;
@@ -129,6 +325,7 @@ namespace NFe.ConvertTxt
                         catch (Exception ex)
                         {
                             houveErro = true;
+                            if (!string.IsNullOrEmpty(this.layout))
                             this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                             this.cMensagemErro += "Linha lida: " + (this.LinhaLida + 1).ToString() + Environment.NewLine +
                                                     "Conteudo: " + xContent.Substring(1) + Environment.NewLine +
@@ -268,6 +465,7 @@ namespace NFe.ConvertTxt
             /// neste caso no comando abaixo será retornado "§B14|cUF|AAMM|" existindo 3 pipes para pegar
             /// o valor do retorno
             /// 
+            if (string.IsNullOrEmpty(layout)) throw new Exception("Layout para o segmento '" + this.FSegmento + "' não encontrado");
 
             if (!layout.StartsWith(prefix)) layout = prefix + layout;
             if (!layout.EndsWith("|")) layout += "|";
@@ -529,6 +727,7 @@ namespace NFe.ConvertTxt
             }
             catch (Exception ex)
             {
+                if (!string.IsNullOrEmpty(layout))
                 this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> Conteudo: {2}\r\n" +
                                                     "\tLinha: {3}: Conteudo do segmento: {4}\r\n\tMensagem de erro: {5}",
@@ -586,11 +785,56 @@ namespace NFe.ConvertTxt
             int nProd = NFe.det.Count - 1;
             this.Registro = aRegistro;
             this.FSegmento = this.Registro.Substring(1, this.Registro.IndexOf("|") - 1);
+#if DEBUG
+            Console.WriteLine("Segmento lido: {0} - linha: {1}", FSegmento, this.LinhaLida);
+#endif
+
+            try
+            {
+                layout = this.LayoutTXT[this.FSegmento].ToString();
+            }
+            catch {
+                try
+                {
+                    /// Exemplo: "B_310"
+                    layout = this.LayoutTXT[this.FSegmento + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "")].ToString();
+                }
+                catch {
+                    try
+                    {
+                        /// Exemplo: "W02_310_21"
+                        layout = this.LayoutTXT[this.FSegmento + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "") + "_" + lenPipesRegistro.ToString()].ToString();
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            /// Exemplo: "I_23"
+                            layout = this.LayoutTXT[this.FSegmento + "_" + lenPipesRegistro.ToString()].ToString();
+                        }
+                        catch
+                        {
+                            layout = null;
+                            ///
+                            /// OPS!!! cometemos um erro
+                            /// 
+                            foreach (KeyValuePair<string, string> k in this._LayoutTXT)
+                            { 
+                                if (k.Value.Substring(0, k.Value.IndexOf('|')+1).Equals(this.FSegmento+"|"))
+                                {
+                                    layout = k.Value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             switch (this.FSegmento.ToUpper())
             {
                 case "A":
-                    layout = "§A|versao|Id|";
+                    //layout = this.LayoutTXT[this.FSegmento].ToString();//"§A|versao|Id|";
                     double v = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.versao, ObOp.Opcional, 6);
                     this.chave = this.LerString(TpcnResources.ID, ObOp.Opcional, 0, 47);
                     this.chave = this.SomenteNumeros(this.chave);
@@ -603,8 +847,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "B":
-                    layout = (NFe.infNFe.Versao >= 3 ? "§B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|indFinal|indPres|ProcEmi|VerProc|dhCont|xJust" :
-                                                        "§B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|hSaiEnt|tpNF|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|ProcEmi|VerProc|dhCont|xJust");
+                    //layout = this.LayoutTXT[this.FSegmento + "_" + NFe.infNFe.Versao.ToString(".00").Replace(".","").Replace(",","")].ToString();
+                    //layout = (NFe.infNFe.Versao >= 3 ? "§B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|indFinal|indPres|ProcEmi|VerProc|dhCont|xJust" :
+                    //                                   "§B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dEmi|dSaiEnt|hSaiEnt|tpNF|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|ProcEmi|VerProc|dhCont|xJust");
 
                     ///
                     /// Grupo da TAG <ide>
@@ -668,7 +913,8 @@ namespace NFe.ConvertTxt
 
                 case "B13":
                 case "BA02":
-                    layout = prefix + this.FSegmento + "|refNFe"; //ok
+                    //layout = prefix + this.FSegmento + "|refNFe"; //ok
+                    //layout = this.LayoutTXT[this.FSegmento].ToString();
 
                     ///
                     /// Grupo da TAG <ide><NFref><refNFe>
@@ -682,7 +928,7 @@ namespace NFe.ConvertTxt
 
                 case "B14":
                 case "BA03":
-                    layout = prefix + this.FSegmento + "|cUF|AAMM|CNPJ|mod|serie|nNF"; //ok
+                    //layout = prefix + this.FSegmento + "|cUF|AAMM|CNPJ|mod|serie|nNF"; //ok
 
                     ///
                     /// Grupo da TAG <ide><NFref><RefNF>
@@ -705,9 +951,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "BA10":
-
                 case "B20A":
-                    layout = prefix + this.FSegmento + "|cUF|AAMM|IE|mod|serie|nNF" + (FSegmento.ToUpper().Equals("BA10") ? "|refCTe" : "");
+                    //layout = prefix + this.FSegmento + "|cUF|AAMM|IE|mod|serie|nNF" + (FSegmento.ToUpper().Equals("BA10") ? "|refCTe" : "");
 
                     #region B20a | BA10
                     {
@@ -730,7 +975,7 @@ namespace NFe.ConvertTxt
 
                 case "B20D":
                 case "BA13":
-                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
+                    //layout = prefix + this.FSegmento + "|CNPJ"; //ok
 
                     if (NFe.ide.NFref.Count == 0 || (NFe.ide.NFref.Count > 0 && NFe.ide.NFref[NFe.ide.NFref.Count - 1].refNFP == null))
                         throw new Exception(FSegmento.ToUpper().Equals("B20D") ? "Segmento B20d sem segmento B20A" : "Segmento BA13 sem segmento BA10");
@@ -739,22 +984,20 @@ namespace NFe.ConvertTxt
 
                 case "B20E":
                 case "BA14":
-                    layout = prefix + this.FSegmento + "|CPF"; //ok
-
+                    //layout = prefix + this.FSegmento + "|CPF"; //ok
                     if (NFe.ide.NFref.Count == 0 || (NFe.ide.NFref.Count > 0 && NFe.ide.NFref[NFe.ide.NFref.Count - 1].refNFP == null))
                         throw new Exception(FSegmento.ToUpper().Equals("B20E") ? "Segmento B20e sem segmento B20A" : "Segmento BA14 sem segmento BA10");
                     NFe.ide.NFref[NFe.ide.NFref.Count - 1].refNFP.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     break;
 
                 case "B20I":
-                    layout = "§B20i|refCTe"; //ok
-
+                    //layout = "§B20i|refCTe"; //ok
                     NFe.ide.NFref.Add(new NFref(null, LerString(TpcnResources.refCTe, ObOp.Obrigatorio, 44, 44)));
                     break;
 
                 case "B20J":
                 case "BA20":
-                    layout = prefix + this.FSegmento + "|mod|nECF|nCOO"; //ok
+                    //layout = prefix + this.FSegmento + "|mod|nECF|nCOO"; //ok
                     {
                         NFref item = new NFref();
                         item.refECF = new refECF();
@@ -766,8 +1009,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "C":
-                    layout = "§C|xNome|xFant|IE|IEST|IM|CNAE|CRT"; //okz
-
+                    //layout = "§C|xNome|xFant|IE|IEST|IM|CNAE|CRT"; //okz
                     ///
                     /// Grupo da TAG <emit>
                     ///
@@ -785,20 +1027,17 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "C02":
-                    layout = "§C02|CNPJ"; //ok
-
-
+                    //layout = "§C02|CNPJ"; //ok
                     NFe.emit.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14);
                     break;
 
                 case "C02A":
-                    layout = "§C02A|CPF"; //ok
+                    //layout = "§C02A|CPF"; //ok
                     NFe.emit.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     break;
 
                 case "C05":
-                    layout = "§C05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone"; //ok
-
+                    //layout = "§C05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone"; //ok
                     ///
                     /// Grupo da TAG <emit><EnderEmit>
                     /// 
@@ -820,8 +1059,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "D":
-                    layout = "§D|CNPJ|xOrgao|matr|xAgente|fone|UF|nDAR|dEmi|vDAR|repEmi|dPag"; //ok
-
+                    //layout = "§D|CNPJ|xOrgao|matr|xAgente|fone|UF|nDAR|dEmi|vDAR|repEmi|dPag"; //ok
                     ///
                     /// Grupo da TAG <avulsa>
                     /// 
@@ -843,9 +1081,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "E":
-
-                    layout = (NFe.infNFe.Versao >= 3 ? "§E|xNome|indIEDest|IE|ISUF|IM|email" : "§E|xNome|IE|ISUF|email");
-
+                    //layout = (NFe.infNFe.Versao >= 3 ? "§E|xNome|indIEDest|IE|ISUF|IM|email" : "§E|xNome|IE|ISUF|email");
                     ///
                     /// Grupo da TAG <dest>
                     /// 
@@ -864,15 +1100,12 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "E02":
-                    layout = "§E02|CNPJ"; //ok
+                    //layout = "§E02|CNPJ"; //ok
                     NFe.dest.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
                     break;
 
                 case "E03":
-                    //if (NFe.infNFe.Versao >= 3)
-                    //  layout = "§E03|CPF|idEstrangeiro"; //só UniNFe = segmento "E03A"
-                    //else
-                    layout = "§E03|CPF"; //ok
+                    //layout = "§E03|CPF"; //ok
                     if (NFe.ide.mod == TpcnMod.modNFCe && NFe.infNFe.Versao >= 3) //nfc-e
                         NFe.dest.CPF = this.LerString(TpcnResources.CPF, ObOp.Opcional, 11, 11);
                     else
@@ -880,14 +1113,14 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "E03A":
-                    layout = "§E03a|idEstrangeiro"; //ok
+                    //layout = "§E03a|idEstrangeiro"; //ok
                     NFe.dest.idEstrangeiro = this.LerString(TpcnResources.idEstrangeiro, ObOp.Opcional, 5, 20);
                     if (string.IsNullOrEmpty(NFe.dest.idEstrangeiro) && string.IsNullOrEmpty(NFe.dest.CPF))
                         NFe.dest.idEstrangeiro = "NAO GERAR TAG";
                     break;
 
                 case "E05":
-                    layout = "§E05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone"; //ok
+                    //layout = "§E05|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|CEP|cPais|xPais|fone"; //ok
                     ///
                     /// Grupo da TAG <dest><EnderDest>
                     /// 
@@ -907,7 +1140,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "F":
-                    layout = "§F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF"; //ok
+                    //layout = "§F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF"; //ok
                     ///
                     /// Grupo da TAG <retirada> 
                     /// 
@@ -923,17 +1156,17 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "F02":
-                    layout = "§F02|CNPJ"; //ok
+                    //layout = "§F02|CNPJ"; //ok
                     NFe.retirada.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14);
                     break;
 
                 case "F02A":
-                    layout = "§F02a|CPF"; //ok
+                    //layout = "§F02a|CPF"; //ok
                     NFe.retirada.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     break;
 
                 case "G":
-                    layout = "§G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF"; //ok
+                    //layout = "§G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF"; //ok
                     ///
                     /// Grupo da TAG <entrega>
                     /// 
@@ -950,24 +1183,24 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "G02":
-                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
+                    //layout = prefix + this.FSegmento + "|CNPJ"; //ok
                     NFe.entrega.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14);
                     break;
 
                 case "G02A":
-                    layout = prefix + this.FSegmento + "|CPF"; //ok
+                    //layout = prefix + this.FSegmento + "|CPF"; //ok
                     NFe.entrega.CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11);
                     break;
 
                 case "G51":
                 case "GA02":
-                    layout = prefix + this.FSegmento + "|CNPJ"; //ok
+                    //layout = prefix + this.FSegmento + "|CNPJ"; //ok
                     NFe.autXML.Add(new autXML { CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Obrigatorio, 14, 14) });
                     break;
 
                 case "G52":
                 case "GA03":
-                    layout = prefix + this.FSegmento + "|CPF"; //ok
+                    //layout = prefix + this.FSegmento + "|CPF"; //ok
                     NFe.autXML.Add(new autXML { CPF = this.LerString(TpcnResources.CPF, ObOp.Obrigatorio, 11, 11) });
                     break;
 
@@ -975,8 +1208,7 @@ namespace NFe.ConvertTxt
                 /// Grupo da TAG <det>
                 /// 
                 case "H":
-                    layout = "§H|nItem|infAdProd"; //ok
-
+                    //layout = "§H|nItem|infAdProd"; //ok
                     NFe.det.Add(new Det());
                     nProd = NFe.det.Count - 1;
                     NFe.det[nProd].Prod.nItem = this.LerInt32(TpcnResources.NItem, ObOp.Obrigatorio, 1, 3);
@@ -984,7 +1216,11 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I":
-                    layout = "§I|cProd|cEAN|XProd|NCM|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI"; //ok
+                    //layout = this.LayoutTXT["I_" + lenPipesRegistro.ToString()].ToString();
+                    //if (lenPipesRegistro == 25)
+                    //    layout = "§I|cProd|cEAN|XProd|NCM|NVE|CEST|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI"; //ok
+                    //else
+                    //    layout = "§I|cProd|cEAN|XProd|NCM|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI"; //ok
                     ///
                     /// Grupo da TAG <det><prod>
                     /// 
@@ -994,6 +1230,12 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Prod.cEAN = this.LerString(TpcnResources.cEAN, ObOp.Obrigatorio, 0, 14);
                     NFe.det[nProd].Prod.xProd = this.LerString(TpcnResources.xProd, ObOp.Obrigatorio, 1, 120);
                     NFe.det[nProd].Prod.NCM = this.LerString(TpcnResources.NCM, ObOp.Obrigatorio, 2, 8);
+
+                    if (lenPipesRegistro == 25)
+                    {
+                        NFe.det[nProd].Prod.NVE = this.LerString(TpcnResources.NVE, ObOp.Opcional, 0, 6);
+                        NFe.det[nProd].Prod.CEST = this.LerInt32(TpcnResources.CEST, ObOp.Opcional, 0, 7);
+                    }
                     NFe.det[nProd].Prod.EXTIPI = this.LerString(TpcnResources.EXTIPI, ObOp.Opcional, 2, 3);
                     NFe.det[nProd].Prod.CFOP = this.LerString(TpcnResources.CFOP, ObOp.Obrigatorio, 4, 4);
                     NFe.det[nProd].Prod.uCom = this.LerString(TpcnResources.uCom, ObOp.Obrigatorio, 1, 6);
@@ -1018,19 +1260,19 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I05A":
-                    layout = prefix + this.FSegmento + "|NVE";
+                    //layout = prefix + this.FSegmento + "|NVE";
                     NFe.det[nProd].Prod.NVE = this.LerString(TpcnResources.NVE, ObOp.Opcional, 0, 6);
                     break;
 
                 case "I05W":
-                    layout = prefix + this.FSegmento + "|CEST";
+                    //layout = prefix + this.FSegmento + "|CEST";
                     NFe.det[nProd].Prod.CEST = this.LerInt32(TpcnResources.CEST, ObOp.Opcional, 0, 7);
                     break;
 
                 case "I18":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador" :
-                                "§I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|cExportador"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador" :
+                    //            "§I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|cExportador"); //ok
 
                     ///
                     /// Grupo da TAG <det><prod><DI>
@@ -1059,9 +1301,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I25":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§I25|NAdicao|NSeqAdic|CFabricante|VDescDI|nDraw" :
-                                "§I25|NAdicao|NSeqAdic|CFabricante|VDescDI"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§I25|NAdicao|NSeqAdic|CFabricante|VDescDI|nDraw" :
+                    //            "§I25|NAdicao|NSeqAdic|CFabricante|VDescDI"); //ok
                     ///
                     /// Grupo da TAG <det><prod><DI><adi> 
                     /// 
@@ -1081,14 +1323,14 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I50":
-                    layout = "§I50|nDraw";
+                    //layout = "§I50|nDraw";
                     #region <det><prod><detExport>
                     NFe.det[nProd].Prod.detExport.Add(new detExport { nDraw = this.LerString(TpcnResources.nDraw, ObOp.Opcional, 0, 11) });
                     #endregion
                     break;
 
                 case "I52":
-                    layout = "§I52|nRE|chNFe|qExport"; //ok
+                    //layout = "§I52|nRE|chNFe|qExport"; //ok
                     #region <det><prod><detExport><exportInd>
                     NFe.det[nProd].Prod.detExport[NFe.det[nProd].Prod.detExport.Count - 1].exportInd.nRE = this.LerString(TpcnResources.nRE, ObOp.Obrigatorio, 12, 12);
                     NFe.det[nProd].Prod.detExport[NFe.det[nProd].Prod.detExport.Count - 1].exportInd.chNFe = this.LerString(TpcnResources.chNFe, ObOp.Obrigatorio, 44, 44);
@@ -1098,7 +1340,7 @@ namespace NFe.ConvertTxt
 
                 case "J":
                 case "JA":
-                    layout = prefix + this.FSegmento + "|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest"; //ok
+                    //layout = prefix + this.FSegmento + "|tpOp|Chassi|CCor|XCor|Pot|cilin|pesoL|pesoB|NSerie|TpComb|NMotor|CMT|Dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest"; //ok
                     ///
                     /// Grupo da TAG <det><prod><veicProd>
                     /// 
@@ -1134,8 +1376,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "K":
-                    layout = "§K|nLote|qLote|dFab|dVal|vPMC"; //ok
-
+                    //layout = "§K|nLote|qLote|dFab|dVal|vPMC"; //ok
                     ///
                     /// Grupo da TAG <det><prod><med>
                     /// 
@@ -1153,7 +1394,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "L":
-                    layout = "§L|tpArma|nSerie|nCano|descr"; //ok
+                    //layout = "§L|tpArma|nSerie|nCano|descr"; //ok
                     ///
                     /// Grupo da TAG <det><prod><arma>
                     /// 
@@ -1171,9 +1412,9 @@ namespace NFe.ConvertTxt
 
                 case "LA":
                 case "L01":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                prefix + this.FSegmento + "|CProdANP|pMixGN|CODIF|QTemp|UFCons" :
-                                prefix + this.FSegmento + "|CProdANP|CODIF|QTemp|UFCons"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            prefix + this.FSegmento + "|cProdANP|pMixGN|CODIF|qTemp|UFCons" :
+                    //            prefix + this.FSegmento + "|cProdANP|CODIF|qTemp|UFCons"); //ok
                     ///
                     /// Grupo da TAG <det><prod><comb>
                     /// 
@@ -1188,7 +1429,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "LA1":
-                    layout = prefix + this.FSegmento + "|nBico|nBomba|nTanque|vEncIni|vEncFin"; //ok
+                    //layout = prefix + this.FSegmento + "|nBico|nBomba|nTanque|vEncIni|vEncFin"; //ok
                     ///
                     /// Grupo da TAG <det><prod><comb><encerrante>
                     /// 
@@ -1201,7 +1442,7 @@ namespace NFe.ConvertTxt
 
                 case "LA07":
                 case "L105":
-                    layout = prefix + this.FSegmento + "|qBCProd|vAliqProd|vCIDE"; //ok
+                    //layout = prefix + this.FSegmento + "|qBCProd|vAliqProd|vCIDE"; //ok
                     ///
                     /// Grupo da TAG <det><prod><comb><CIDE>
                     /// 
@@ -1214,12 +1455,12 @@ namespace NFe.ConvertTxt
 
                 case "LB":
                 case "L109":
-                    layout = prefix + this.FSegmento + "|nRECOPI"; //ok
+                    //layout = prefix + this.FSegmento + "|nRECOPI"; //ok
                     NFe.det[nProd].Prod.nRECOPI = this.LerString(TpcnResources.nRECOPI, ObOp.Opcional, 20, 20);
                     break;
 
                 case "M":
-                    layout = prefix + "M|vTotTrib|"; //ok   
+                    //layout = prefix + "M|vTotTrib|"; //ok   
                     NFe.det[nProd].Imposto.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
                     break;
 
@@ -1237,7 +1478,7 @@ namespace NFe.ConvertTxt
                 /// Grupo da TAG <det><imposto><ICMS>
                 /// 
                 case "N02":
-                    layout = "§N02|Orig|CST|ModBC|VBC|PICMS|VICMS"; //ok   
+                    //layout = "§N02|Orig|CST|ModBC|VBC|PICMS|VICMS"; //ok   
                     #region ICMS00
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
@@ -1251,7 +1492,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N03":
-                    layout = "§N03|Orig|CST|ModBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST"; //ok
+                    //layout = "§N03|Orig|CST|ModBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST"; //ok
                     #region ICMS10
 
                     NFe.det[nProd].Imposto.ICMS.ICMSPart10 = 0;
@@ -1272,7 +1513,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N04":
-                    layout = "§N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vICMSDeson|motDesICMS|";  //no manual
+                    //layout = "§N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vICMSDeson|motDesICMS|";  //no manual
                     #region ICMS20
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
@@ -1289,8 +1530,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N05":
-                    layout = "§N05|orig|CST|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS"; //no manual
-
+                    //layout = "§N05|orig|CST|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS"; //no manual
                     #region ICMS30
 
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
@@ -1308,9 +1548,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N06":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N06|orig|CST|vICMSDeson|motDesICMS" :
-                                "§N06|orig|CST|vICMS|motDesICMS");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N06|orig|CST|vICMSDeson|motDesICMS" :
+                    //            "§N06|orig|CST|vICMS|motDesICMS");
 
                     #region ICMS40, ICMS41 ICMS50
 
@@ -1326,9 +1566,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N07":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS" :
-                                "§N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS" :
+                    //            "§N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS");
 
                     #region ICMS51
 
@@ -1368,9 +1608,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N08":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N08|Orig|CST|vBCSTRet|vICMSSTRet" :
-                                "§N08|Orig|CST|vBCST|vICMSST");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N08|Orig|CST|vBCSTRet|vICMSSTRet" :
+                    //            "§N08|Orig|CST|vBCST|vICMSST");
 
                     #region ICMS60
 
@@ -1392,9 +1632,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N09":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS" :
-                                "§N09|Orig|CST|ModBC|PRedBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS" :
+                    //            "§N09|Orig|CST|ModBC|PRedBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST");
 
                     #region ICMS70
 
@@ -1421,9 +1661,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N10|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS" :
-                                "§N10|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N10|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS" :
+                    //            "§N10|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST");
 
                     #region ICMS90
 
@@ -1451,9 +1691,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10A":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST" :
-                                "§N10a|Orig|CST|ModBC|PRedBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST|pBCOp|UFST");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST" :
+                    //            "§N10a|Orig|CST|ModBC|PRedBC|VBC|PICMS|VICMS|ModBCST|PMVAST|PRedBCST|VBCST|PICMSST|VICMSST|pBCOp|UFST");
 
                     #region ICMSPart-10, ICMSPart-90
 
@@ -1482,7 +1722,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10B":
-                    layout = "§N10b|Orig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest";
+                    //layout = "§N10b|Orig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest";
 
                     #region ICMS-ST
 
@@ -1499,7 +1739,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10C":
-                    layout = "§N10c|Orig|CSOSN|pCredSN|vCredICMSSN";
+                    //layout = "§N10c|Orig|CSOSN|pCredSN|vCredICMSSN";
 
                     #region ICMSSN101
 
@@ -1512,7 +1752,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10D":
-                    layout = "§N10d|Orig|CSOSN";
+                    //layout = "§N10d|Orig|CSOSN";
 
                     #region ICMSSN102
 
@@ -1523,7 +1763,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10E":
-                    layout = "§N10e|Orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN";
+                    //layout = "§N10e|Orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN";
 
                     #region ICMSSN201
 
@@ -1542,7 +1782,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10F":
-                    layout = "§N10f|Orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST";
+                    //layout = "§N10f|Orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST";
 
                     #region ICMSSN202
 
@@ -1559,8 +1799,8 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "N10G":
-                    layout = (NFe.infNFe.Versao >= 3 ? "§N10g|orig|CSOSN|vBCSTRet|vICMSSTRet" :
-                                                       "§N10g|Orig|CSOSN|modBCST|vBCSTRet|vICMSSTRet");
+                    //layout = (NFe.infNFe.Versao >= 3 ? "§N10g|orig|CSOSN|vBCSTRet|vICMSSTRet" :
+                    //                                   "§N10g|Orig|CSOSN|modBCST|vBCSTRet|vICMSSTRet");
 
                     #region ICMSSN500
 
@@ -1576,7 +1816,7 @@ namespace NFe.ConvertTxt
 
 
                 case "N10H":
-                    layout = "§N10h|Orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN";
+                    //layout = "§N10h|Orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN";
 
                     #region ICMSSN900
                     NFe.det[nProd].Imposto.ICMS.orig = (TpcnOrigemMercadoria)this.LerInt32(TpcnResources.orig, ObOp.Obrigatorio, 1, 1);
@@ -1598,7 +1838,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "NA":
-                    layout = prefix + this.FSegmento + "|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet"; //ok
+                    //layout = prefix + this.FSegmento + "|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet"; //ok
 
                     #region ICMSUFDest
                     NFe.det[nProd].Imposto.ICMS.ICMSUFDest.vBCUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCUFDest, ObOp.Obrigatorio, 1, 15);
@@ -1613,7 +1853,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "O":
-                    layout = "§O|clEnq|CNPJProd|cSelo|qSelo|cEnq"; //ok
+                    //layout = "§O|clEnq|CNPJProd|cSelo|qSelo|cEnq"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
@@ -1629,7 +1869,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "O07":
-                    layout = "§O07|CST|vIPI"; //ok
+                    //layout = "§O07|CST|vIPI"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><IPITrib>
                     /// 
@@ -1642,7 +1882,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "O08":
-                    layout = "§O08|CST"; //ok
+                    //layout = "§O08|CST"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><IPINT>
                     /// 
@@ -1650,7 +1890,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "O10":
-                    layout = "§O10|vBC|pIPI"; //ok
+                    //layout = "§O10|vBC|pIPI"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
@@ -1661,7 +1901,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "O11":
-                    layout = (NFe.infNFe.Versao >= 3 ? "§O11|qUnid|vUnid|vIPI" : "§O11|qUnid|vUnid"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ? "§O11|qUnid|vUnid|vIPI" : "§O11|qUnid|vUnid"); //ok
                     ///
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
@@ -1674,7 +1914,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "P":
-                    layout = "§P|vBC|vDespAdu|vII|vIOF"; //ok
+                    //layout = "§P|vBC|vDespAdu|vII|vIOF"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><II>
                     /// 
@@ -1687,7 +1927,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q02":
-                    layout = "§Q02|CST|VBC|PPIS|VPIS"; //ok
+                    //layout = "§Q02|CST|VBC|PPIS|VPIS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisaliq>
                     /// 
@@ -1700,7 +1940,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q03":
-                    layout = "§Q03|CST|QBCProd|VAliqProd|VPIS"; //ok
+                    //layout = "§Q03|CST|QBCProd|VAliqProd|VPIS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisqtde>
                     /// 
@@ -1713,7 +1953,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q04":
-                    layout = "§Q04|CST"; //ok
+                    //layout = "§Q04|CST"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisNT>
                     /// 
@@ -1723,7 +1963,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q05":
-                    layout = "§Q05|CST|vPIS"; //ok
+                    //layout = "§Q05|CST|vPIS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisOutr>
                     /// 
@@ -1734,7 +1974,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q07":
-                    layout = (NFe.infNFe.Versao >= 3 ? "§Q07|vBC|pPIS|vPIS" : "§Q07|vBC|pPIS"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ? "§Q07|vBC|pPIS|vPIS" : "§Q07|vBC|pPIS"); //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisqtde>
                     /// 
@@ -1754,7 +1994,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Q10":
-                    layout = "§Q10|qBCProd|vAliqProd"; //ok
+                    //layout = "§Q10|qBCProd|vAliqProd"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pis><pisqtde>
                     /// 
@@ -1765,7 +2005,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "R":
-                    layout = "§R|vPIS"; //ok
+                    //layout = "§R|vPIS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pisST>
                     /// 
@@ -1775,7 +2015,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "R02":
-                    layout = "§R02|vBC|pPIS"; //ok
+                    //layout = "§R02|vBC|pPIS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><pisST>
                     /// 
@@ -1786,7 +2026,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "R04":
-                    layout = "§R04|qBCProd|vAliqProd" + (NFe.infNFe.Versao >= 3 ? "|vPIS" : "");
+                    //layout = "§R04|qBCProd|vAliqProd" + (NFe.infNFe.Versao >= 3 ? "|vPIS" : "");
                     ///
                     /// Grupo da TAG <det><imposto><pisST>
                     /// 
@@ -1799,7 +2039,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S02":
-                    layout = "§S02|CST|vBC|pCOFINS|vCOFINS"; //ok
+                    //layout = "§S02|CST|vBC|pCOFINS|vCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINS>
                     /// 
@@ -1812,7 +2052,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S03":
-                    layout = "§S03|CST|QBCProd|VAliqProd|VCOFINS"; //ok
+                    //layout = "§S03|CST|QBCProd|VAliqProd|VCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSQtde>
                     /// 
@@ -1825,7 +2065,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S04":
-                    layout = "§S04|CST"; //ok
+                    //layout = "§S04|CST"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSNT>
                     /// 
@@ -1835,7 +2075,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S05":
-                    layout = "§S05|CST|VCOFINS"; //ok
+                    //layout = "§S05|CST|VCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSOutr>
                     /// 
@@ -1846,7 +2086,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S07":
-                    layout = "§S07|VBC|PCOFINS"; //ok
+                    //layout = "§S07|VBC|PCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSOutr>
                     /// 
@@ -1857,7 +2097,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "S09":
-                    layout = "§S09|QBCProd|VAliqProd"; //ok
+                    //layout = "§S09|QBCProd|VAliqProd"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSST>
                     /// 
@@ -1868,7 +2108,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "T":
-                    layout = "§T|VCOFINS"; //ok
+                    //layout = "§T|VCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSST>
                     /// 
@@ -1878,7 +2118,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "T02":
-                    layout = "§T02|VBC|PCOFINS"; //ok
+                    //layout = "§T02|VBC|PCOFINS"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSST>
                     /// 
@@ -1889,7 +2129,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "T04":
-                    layout = "§T04|QBCProd|VAliqProd"; //ok
+                    //layout = "§T04|QBCProd|VAliqProd"; //ok
                     ///
                     /// Grupo da TAG <det><imposto><COFINSST>
                     /// 
@@ -1900,9 +2140,9 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "U":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§U|VBC|VAliq|VISSQN|CMunFG|CListServ|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|indISS|cServico|cMun|cPais|nProcesso|indIncentivo|" :
-                                "§U|VBC|VAliq|VISSQN|CMunFG|CListServ|cSitTrib"); //ok
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§U|VBC|VAliq|VISSQN|CMunFG|CListServ|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|indISS|cServico|cMun|cPais|nProcesso|indIncentivo|" :
+                    //            "§U|VBC|VAliq|VISSQN|CMunFG|CListServ|cSitTrib"); //ok
                     ///
                     /// Grupo da TAG <det><imposto><ISSQN>
                     /// 
@@ -1935,15 +2175,20 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "UA":
-                    layout = "§UA|pDevol|vIPIDevol";
+                    //layout = "§UA|pDevol|vIPIDevol";
                     NFe.det[nProd].impostoDevol.pDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.pDevol, ObOp.Opcional, 5);
                     NFe.det[nProd].impostoDevol.vIPIDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPIDevol, ObOp.Opcional, 5);
                     break;
 
                 case "W02":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib" :
-                                "§W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson"); //ok
+
+                    //layout = prefix + this.FSegmento + "|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson";
+                    //if (NFe.infNFe.Versao > 3)
+                    //    if (lenPipesRegistro == 17)
+                    //        layout = prefix + this.FSegmento + "|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib";
+                    //    else
+                    //        layout = prefix + this.FSegmento + "|vBC|vICMS|vICMSDeson|vFCPUFDest|vICMSUFDest|vICMSUFRemet||vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib";
+
                     ///
                     /// Grupo da TAG <total><ICMSTot>
                     /// 
@@ -1963,21 +2208,29 @@ namespace NFe.ConvertTxt
                     NFe.Total.ICMSTot.vOutro = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Obrigatorio, 15);
                     NFe.Total.ICMSTot.vNF = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vNF, ObOp.Obrigatorio, 15);
                     NFe.Total.ICMSTot.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
+
                     NFe.Total.ICMSTot.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+
+                    if (NFe.infNFe.Versao >= 3 && lenPipesRegistro > 17)
+                    {
+                        NFe.Total.ICMSTot.vICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Opcional, 15);
+                        NFe.Total.ICMSTot.vFCPUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFCPUFDest, ObOp.Opcional, 15);
+                        NFe.Total.ICMSTot.vICMSUFRemet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional, 15);
+                    }
                     #endregion
                     break;
 
                 case "W04":
-                    layout = prefix + this.FSegmento + "|vICMSUFDest|vICMSUFRemet|vFCPUFDest";
+                    //layout = prefix + this.FSegmento + "|vICMSUFDest|vICMSUFRemet|vFCPUFDest";
                     NFe.Total.ICMSTot.vICMSUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Opcional, 15);
                     NFe.Total.ICMSTot.vICMSUFRemet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional, 15);
                     NFe.Total.ICMSTot.vFCPUFDest = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFCPUFDest, ObOp.Opcional, 15);
                     break;
 
                 case "W17":
-                    layout = (NFe.infNFe.Versao >= 3 ?
-                                "§W17|VServ|VBC|VISS|VPIS|VCOFINS|dCompet|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|cRegTrib" :
-                                "§W17|VServ|VBC|VISS|VPIS|VCOFINS");
+                    //layout = (NFe.infNFe.Versao >= 3 ?
+                    //            "§W17|VServ|VBC|VISS|VPIS|VCOFINS|dCompet|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|cRegTrib" :
+                    //            "§W17|VServ|VBC|VISS|VPIS|VCOFINS");
                     ///
                     /// Grupo da TAG <total><ISSQNtot>
                     /// 
@@ -2002,7 +2255,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "W23":
-                    layout = "§W23|VRetPIS|VRetCOFINS|VRetCSLL|VBCIRRF|VIRRF|VBCRetPrev|VRetPrev"; //ok
+                    //layout = "§W23|VRetPIS|VRetCOFINS|VRetCSLL|VBCIRRF|VIRRF|VBCRetPrev|VRetPrev"; //ok
                     ///
                     /// Grupo da TAG <total><retTrib>
                     /// 
@@ -2018,7 +2271,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X":
-                    layout = "§X|modFrete"; //ok
+                    //layout = "§X|modFrete"; //ok
                     ///
                     /// Grupo da TAG <transp>
                     /// 
@@ -2027,7 +2280,7 @@ namespace NFe.ConvertTxt
 
                 case "X03":
                     //layout = "§X03|xNome|IE|xEnder|UF|xMun"; //ok - alterado em 18/3/15
-                    layout = "§X03|xNome|IE|xEnder|xMun|UF"; //ok
+                    //layout = "§X03|xNome|IE|xEnder|xMun|UF"; //ok
                     ///
                     /// Grupo da TAG <transp><TRansportadora>
                     /// 
@@ -2041,19 +2294,19 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X04":
-                    layout = "§X04|CNPJ"; //ok
+                    //layout = "§X04|CNPJ"; //ok
 
                     NFe.Transp.Transporta.CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
                     break;
 
                 case "X05":
-                    layout = "§X05|CPF"; //ok
+                    //layout = "§X05|CPF"; //ok
 
                     NFe.Transp.Transporta.CPF = this.LerString(TpcnResources.CPF, ObOp.Opcional, 11, 11);
                     break;
 
                 case "X11":
-                    layout = "§X11|VServ|VBCRet|PICMSRet|VICMSRet|CFOP|CMunFG"; //ok
+                    //layout = "§X11|VServ|VBCRet|PICMSRet|VICMSRet|CFOP|CMunFG"; //ok
                     ///
                     /// Grupo da TAG <transp><retTransp>
                     /// 
@@ -2068,7 +2321,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X18":
-                    layout = "§X18|Placa|UF|RNTC"; //ok
+                    //layout = "§X18|Placa|UF|RNTC"; //ok
                     ///
                     /// Grupo da TAG <transp><veicTransp>
                     /// 
@@ -2080,7 +2333,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X22":
-                    layout = "§X22|Placa|UF|RNTC" + (NFe.infNFe.Versao >= 3 ? "|vagao|balsa" : "");
+                    //layout = "§X22|Placa|UF|RNTC" + (NFe.infNFe.Versao >= 3 ? "|vagao|balsa" : "");
                     ///
                     /// Grupo da TAG <transp><reboque>
                     /// 
@@ -2098,7 +2351,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X26":
-                    layout = "§X26|QVol|Esp|Marca|NVol|PesoL|PesoB"; //ok
+                    //layout = "§X26|QVol|Esp|Marca|NVol|PesoL|PesoB"; //ok
                     ///
                     /// Grupo da TAG <transp><vol>
                     /// 
@@ -2114,7 +2367,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "X33":
-                    layout = "§X33|NLacre"; //ok
+                    //layout = "§X33|NLacre"; //ok
                     ///
                     /// Grupo da TAG <transp><vol><lacres>
                     /// 
@@ -2127,7 +2380,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Y02":
-                    layout = "§Y02|NFat|VOrig|VDesc|VLiq"; //ok
+                    //layout = "§Y02|NFat|VOrig|VDesc|VLiq"; //ok
                     ///
                     /// Grupo da TAG <cobr>
                     /// 
@@ -2140,7 +2393,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Y07":
-                    layout = "§Y07|NDup|DVenc|VDup"; //ok
+                    //layout = "§Y07|NDup|DVenc|VDup"; //ok
                     ///
                     /// Grupo da TAG <cobr><dup>
                     /// 
@@ -2156,9 +2409,9 @@ namespace NFe.ConvertTxt
                 /// NFC-e
                 /// 
                 case "YA":
-                    layout = prefix + this.FSegmento + "|tPag|vPag|CNPJ|tBand|cAut";
-                    if (lenPipesRegistro == 7)
-                        layout += "|tpIntegra";
+                    //layout = prefix + this.FSegmento + "|tPag|vPag|CNPJ|tBand|cAut";
+                    //if (lenPipesRegistro == 7)
+                    //    layout += "|tpIntegra";
                     #region YA
                     NFe.pag.Add(new pag());
                     NFe.pag[NFe.pag.Count - 1].tPag = (TpcnFormaPagamento)this.LerInt32(TpcnResources.tPag, ObOp.Obrigatorio, 2, 2);
@@ -2173,12 +2426,12 @@ namespace NFe.ConvertTxt
 
                 case "YA04":
                 case "YA04A":
-                    layout = prefix + this.FSegmento + "|tpIntegra";
+                    //layout = prefix + this.FSegmento + "|tpIntegra";
                     NFe.pag[NFe.pag.Count - 1].tpIntegra = this.LerInt32(TpcnResources.tpIntegra, ObOp.Obrigatorio, 1, 1);
                     break;
 
                 case "Z":
-                    layout = "§Z|InfAdFisco|InfCpl"; //ok
+                    //layout = "§Z|InfAdFisco|InfCpl"; //ok
                     ///
                     /// Grupo da TAG <InfAdic>
                     /// 
@@ -2189,7 +2442,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Z04":
-                    layout = "§Z04|XCampo|XTexto"; //ok
+                    //layout = "§Z04|XCampo|XTexto"; //ok
                     ///
                     /// Grupo da TAG <infAdic><obsCont>
                     /// 
@@ -2201,7 +2454,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Z07":
-                    layout = "§Z07|XCampo|XTexto"; //ok - ?
+                    //layout = "§Z07|XCampo|XTexto"; //ok - ?
                     ///
                     /// Grupo da TAG <infAdic><obsFisco>
                     /// 
@@ -2213,7 +2466,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "Z10":
-                    layout = "§Z10|NProc|IndProc"; //ok
+                    //layout = "§Z10|NProc|IndProc"; //ok
                     ///
                     /// Grupo da TAG <infAdic><procRef>
                     /// 
@@ -2228,7 +2481,7 @@ namespace NFe.ConvertTxt
                 case "ZA01":    //Só UniNFe
                     if (NFe.infNFe.Versao >= 3)
                     {
-                        layout = prefix + this.FSegmento + "|UFSaidaPais|xLocExporta|xLocDespacho"; //ok
+                        //layout = prefix + this.FSegmento + "|UFSaidaPais|xLocExporta|xLocDespacho"; //ok
                         ///
                         /// Grupo da TAG <exporta>
                         /// 
@@ -2238,7 +2491,7 @@ namespace NFe.ConvertTxt
                     }
                     else
                     {
-                        layout = "§ZA|UFEmbarq|XLocEmbarq"; //ok
+                        //layout = "§ZA|UFEmbarq|XLocEmbarq"; //ok
                         ///
                         /// Grupo da TAG <exporta>
                         /// 
@@ -2248,7 +2501,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "ZB":
-                    layout = "§ZB|XNEmp|XPed|XCont"; //ok
+                    //layout = "§ZB|XNEmp|XPed|XCont"; //ok
                     ///
                     /// Grupo da TAG <compra>
                     /// 
@@ -2259,7 +2512,7 @@ namespace NFe.ConvertTxt
 
                 case "ZC":
                 case "ZC01":
-                    layout = prefix + this.FSegmento + "|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor";
+                    //layout = prefix + this.FSegmento + "|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor";
                     NFe.cana.safra = this.LerString(TpcnResources.safra, ObOp.Obrigatorio, 4, 9);
                     NFe.cana.Ref = this.LerString(TpcnResources.Ref, ObOp.Obrigatorio, 7, 7);
                     NFe.cana.qTotMes = this.LerDouble(TpcnTipoCampo.tcDec10, TpcnResources.qTotMes, ObOp.Obrigatorio, 11);
@@ -2271,14 +2524,14 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "ZC04":
-                    layout = "§ZC04|dia|qtde";
+                    //layout = "§ZC04|dia|qtde";
                     NFe.cana.fordia.Add(new fordia());
                     NFe.cana.fordia[NFe.cana.fordia.Count - 1].dia = this.LerInt32(TpcnResources.dia, ObOp.Obrigatorio, 1, 2);
                     NFe.cana.fordia[NFe.cana.fordia.Count - 1].qtde = this.LerDouble(TpcnTipoCampo.tcDec10, TpcnResources.qtde, ObOp.Obrigatorio, 11);
                     break;
 
                 case "ZC10":
-                    layout = "§ZC10|xDed|vDed";
+                    //layout = "§ZC10|xDed|vDed";
                     NFe.cana.deduc.Add(new deduc());
                     NFe.cana.deduc[NFe.cana.deduc.Count - 1].xDed = this.LerString(TpcnResources.xDed, ObOp.Obrigatorio, 1, 60);
                     NFe.cana.deduc[NFe.cana.deduc.Count - 1].vDed = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDed, ObOp.Obrigatorio, 15);

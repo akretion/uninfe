@@ -1012,7 +1012,7 @@ namespace NFe.Service
                     IsConnectedToInternet();
 
                 //Processa ou envia o XML
-                EnviarArquivo(arquivo, taskClass, "Execute");
+                EnviarArquivo(emp, arquivo, taskClass, "Execute");
             }
             catch (ExceptionCertificadoDigital ex)
             {
@@ -1047,9 +1047,9 @@ namespace NFe.Service
         /// </summary>
         /// <param name="cArquivo">Nome do arquivo XML a ser enviado ou analisado</param>
         /// <param name="oNfe">Objeto da classe UniNfeClass a ser utilizado nas operações</param>
-        private void EnviarArquivo(string arquivo, Object nfe, string metodo)
+        private void EnviarArquivo(int emp, string arquivo, Object nfe, string metodo)
         {
-            int emp = Empresas.FindEmpresaByThread();
+            //int emp = Empresas.FindEmpresaByThread();
 
             //Definir o tipo do serviço
             Type tipoServico = nfe.GetType();

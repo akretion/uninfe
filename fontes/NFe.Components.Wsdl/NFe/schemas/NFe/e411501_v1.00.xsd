@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.portalfiscal.inf.br/nfe" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.portalfiscal.inf.br/nfe" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:include schemaLocation="tiposBasico_v1.03.xsd"/>
   <xs:element name="detEvento">
     <xs:annotation>
             <xs:documentation>Informações do Fisco</xs:documentation>
@@ -29,10 +30,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:choice>
-                <xs:element name="respPedido" type="TRespPedido"/>
-                <xs:element name="respCancPedido" type="TRespCancPedido"/>
-            </xs:choice>
+            <xs:element name="respPedido" type="TRespPedido"/>          
         </xs:sequence>
         <xs:attribute name="versao" use="required">
             <xs:annotation>
@@ -46,6 +44,10 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
+	<xs:unique name="pk_numItem">
+		<xs:selector xpath=".//*"/>
+		<xs:field xpath="@numItem"/>
+	</xs:unique>
   </xs:element>
   <xs:complexType name="TRespPedido">
     <xs:annotation>
@@ -129,51 +131,4 @@
         </xs:element>
     </xs:sequence>
   </xs:complexType>
-
-  <xs:complexType name="TRespCancPedido">
-    <xs:annotation>
-        <xs:documentation>Resposta a um tpEvento 111502 ou 111503.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-        <xs:element name="statCancPedido">
-            <xs:annotation>
-                <xs:documentation>Resposta do Fisco ao Cancelamento do Pedido de Prorrogação: 1 - Deferido, 2 - Indeferido</xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:whiteSpace value="preserve" /> 
-                    <xs:enumeration value="1" /> 
-                    <xs:enumeration value="2" />
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:element>
-        <xs:element name="justStatus">
-            <xs:annotation>
-                <xs:documentation>Justificativa da resposta do Fisco ao Cancelamento de Pedido de Prorrogação</xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:whiteSpace value="preserve" /> 
-                    <xs:enumeration value="1" /> 
-                    <xs:enumeration value="2" />
-                    <xs:enumeration value="3" />
-					<xs:enumeration value="4" />
-					<xs:enumeration value="5" />
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:element>
-		<xs:element name="justStaOutra" maxOccurs="1" minOccurs="0" >
-            <xs:annotation>
-                <xs:documentation>Justificativa diferente das opções disponíveis no campo P29</xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-					<xs:minLength value="0"/>
-					<xs:maxLength value="1000"/>
-				</xs:restriction>
-            </xs:simpleType>
-        </xs:element>
-    </xs:sequence>
-  </xs:complexType>
- 
 </xs:schema>

@@ -163,7 +163,7 @@ namespace NFe.Service
                         //Excluir a nota fiscal do fluxo pois deu algum erro neste ponto
                         FluxoNfe oFluxoNfe = new FluxoNfe();
                         if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
-                        {                            
+                        {
                             oFluxoNfe.ExcluirNfeFluxo(oDadosNfe.chavenfe);
                         }
                     }
@@ -1027,7 +1027,7 @@ namespace NFe.Service
                                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeList.Item(0);
                                 if (retEnviNFeElemento != null)   //danasa 23-9-2009
                                 {
-                                    ConteudoRetorno += (Empresas.Configuracoes[emp].IndSinc ? ";" : "");                                     
+                                    ConteudoRetorno += (Empresas.Configuracoes[emp].IndSinc ? ";" : "");
                                     ConteudoRetorno += Functions.LerTag(retEnviNFeElemento, NFe.Components.TpcnResources.cStat.ToString());
                                     ConteudoRetorno += Functions.LerTag(retEnviNFeElemento, NFe.Components.TpcnResources.xMotivo.ToString());
 
@@ -2119,7 +2119,7 @@ namespace NFe.Service
         /// <param name="arqLMC">Nome arquivo XML da LMC</param>
         /// <param name="protLMC">String contendo a parte do XML do protocolo a ser anexado</param>
         /// <param name="extensao">String contendo a extensão do arquivo</param>
-        public string XmlDistLMC(string arqLMC, string protLMC, string extensao)  
+        public string XmlDistLMC(string arqLMC, string protLMC, string extensao)
         {
             string nomeArqProcLMC = string.Empty;
             int emp = EmpIndex;
@@ -2162,7 +2162,7 @@ namespace NFe.Service
                     swProc.Close();
                 }
             }
-            return nomeArqProcLMC; 
+            return nomeArqProcLMC;
         }
         #endregion
 
@@ -2572,8 +2572,9 @@ namespace NFe.Service
             //Gravar o arquivo de distribuição na pasta de backup
             if (!string.IsNullOrEmpty(filenameBackup))
             {
-                // Criar a pasta de backup, caso não exista. Wandrey 25/05/211
-                filenameBackup = Path.Combine(filenameBackup, tempXmlFile);
+                filenameBackup += "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Directory.GetParent(filenameToWrite).Name;
+                filenameBackup = Path.Combine(filenameBackup, Path.GetFileName(filenameToWrite));
+
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
 
@@ -2664,20 +2665,20 @@ namespace NFe.Service
             else
             {
 
-            bool vePasta = false;
-            if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
-                vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
-            else
-                vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
+                bool vePasta = false;
+                if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
+                else
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
-            if (vePasta)
-            {
-                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcCTe);
-                if (!string.IsNullOrEmpty(folderNFe))
+                if (vePasta)
                 {
-                    filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
+                    string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcCTe);
+                    if (!string.IsNullOrEmpty(folderNFe))
+                    {
+                        filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
+                    }
                 }
-            }
             }
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoCTe") >= 0)
@@ -2715,7 +2716,7 @@ namespace NFe.Service
 
             if (sendtodanfemon)
 
-            TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
+                TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
 
             NomeArqGerado = filenameToWrite;
         }
@@ -2790,20 +2791,20 @@ namespace NFe.Service
             else
             {
 
-            bool vePasta = false;
-            if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
-                vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
-            else
-                vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
+                bool vePasta = false;
+                if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
+                else
+                    vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
-            if (vePasta)
-            {
-                string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcMDFe);
-                if (!string.IsNullOrEmpty(folderNFe))
+                if (vePasta)
                 {
-                    filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
+                    string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcMDFe);
+                    if (!string.IsNullOrEmpty(folderNFe))
+                    {
+                        filenameToWrite = Path.Combine(folderNFe, Path.GetFileName(filenameToWrite));
+                    }
                 }
-            }
             }
             string protEnvioEvento;
             if (xmlEventoEnvio.IndexOf("<procEventoMDFe") >= 0)
@@ -2840,7 +2841,7 @@ namespace NFe.Service
 
             if (sendtodanfemon)
 
-            TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
+                TFunctions.CopiarXMLPastaDanfeMon(filenameToWrite);
 
             NomeArqGerado = filenameToWrite;
         }
@@ -2881,19 +2882,35 @@ namespace NFe.Service
                 if (olddir != null && olddir.Equals(dsc)) continue; //evitamos pesquisar por uma pasta que já haviamos pesquisado (AM, MA, ...)
                 olddir = dsc;
 
-                ///
-                /// pesquisa onde o arquivo de distribuicao da nota foi gravado
+                // pesquisa onde o arquivo de distribuicao da nota foi gravado
                 string files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + dsc,
-                                                                ChaveNFe + extensao);
+                                                               ChaveNFe + extensao);
+
+                // Procurar por um arquivo com NFe no ínicio do nome.
                 if (!File.Exists(files))
-                    files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + dsc,
+                {
+                    files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString() + dsc,
+                                                            "nfe" + ChaveNFe + extensao);
+
+                    //Procurar na pasta denegados
+                    if (!File.Exists(files))
+                    {
+                        files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + dsc,
                                                                 ChaveNFe + Propriedade.ExtRetorno.Den);
+
+                        // Procurar por um arquivo com NFe no ínicio do nome.
+                        if (!File.Exists(files))
+                            files = System.IO.Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString() + dsc,
+                                                                    "nfe" + ChaveNFe + Propriedade.ExtRetorno.Den);
+                    }
+                }
 
                 retorno = File.Exists(files) ? Path.GetDirectoryName(files) : "";
 
                 if (!string.IsNullOrEmpty(retorno) || string.IsNullOrEmpty(dsc))
                     break;
             }
+
             if (string.IsNullOrEmpty(retorno))
             {
                 ///
@@ -2901,14 +2918,36 @@ namespace NFe.Service
                 /// mudado o tipo DiretorioSalvarComo
                 /// 
                 string[] files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
-                                            ChaveNFe + extensao,//Propriedade.ExtRetorno.ProcNFe,
-                                            SearchOption.AllDirectories);
+                                                              ChaveNFe + extensao,
+                                                              SearchOption.AllDirectories);
+
                 if (files.Length == 0)
-                    files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
-                                            ChaveNFe + Propriedade.ExtRetorno.Den,
-                                            SearchOption.AllDirectories);
+                {
+                    // Procurar por um arquivo com NFe no ínicio do nome.
+                    files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString(),
+                                                                  "nfe" + ChaveNFe + extensao,
+                                                                  SearchOption.AllDirectories);
+
+                    //Procurar na pasta denegados
+                    if (files.Length == 0)
+                    {
+                        files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
+                                                             ChaveNFe + Propriedade.ExtRetorno.Den,
+                                                             SearchOption.AllDirectories);
+
+                        // Procurar por um arquivo com NFe no ínicio do nome.
+                        if (files.Length == 0)
+                        {
+                            files = System.IO.Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString(),
+                                                                 "nfe" + ChaveNFe + Propriedade.ExtRetorno.Den,
+                                                                 SearchOption.AllDirectories);
+                        }
+                    }
+                }
+
                 retorno = files.Length > 0 ? Path.GetDirectoryName(files[0]) : "";
             }
+
             return retorno;
         }
         #endregion
@@ -2958,7 +2997,7 @@ namespace NFe.Service
             if (NomeArquivoXML.ToLower().IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) >= 0)
                 ext = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
 
-            return  Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
+            return Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                     Functions.ExtrairNomeArq(NomeArquivoXML, ext) + "-num-lot.xml";
         }
         #endregion

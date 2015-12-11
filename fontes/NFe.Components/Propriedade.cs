@@ -277,7 +277,10 @@ namespace NFe.Components
             /// 
             cce_XML,
             cancel_XML,
-            sair_XML
+            sair_XML,
+            pedLayouts,
+            pedUpdatewsdl,
+            pedRestart
         }
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
         public static ExtensaoClass Extensao(TipoEnvio value)
@@ -311,22 +314,22 @@ namespace NFe.Components
 
                 ListaExtensoes.Add(TipoEnvio.EnvCancelamento, new ExtensaoClass(
                     "-env-canc.xml", "-env-canc.txt", 
-                    "-ret-env-canc.xml", null, 
+                    "-ret-env-canc.xml", "", 
                     "Pedido de cancelamento de NFe/NFCe, use a extensão -ped-eve.xml ou -ped-eve.txt"));
                 
                 ListaExtensoes.Add(TipoEnvio.EnvCCe, new ExtensaoClass(
                     "-env-cce.xml","-env-cce.txt",
-                    "-ret-env-cce.xml",null, 
+                    "-ret-env-cce.xml", "", 
                     "Carta de correção, use a extensao -ped-eve.xml ou -ped-eve.txt"));
                 
                 ListaExtensoes.Add(TipoEnvio.EnvManifestacao, new ExtensaoClass(
                     "-env-manif.xml", "-env-manif.txt",
-                    "-ret-env-manif.xml", null,
+                    "-ret-env-manif.xml", "",
                     "Pedido de manifestação, use a extensao -ped-eve.xml ou -ped-eve.txt"));
 
                 ListaExtensoes.Add(TipoEnvio.EnvDownload, new ExtensaoClass(
                     "-nfe-down.xml", "-nfe-down.txt",
-                    "-ret-nfe-down.xml", null,
+                    "-ret-nfe-down.xml", "",
                     "Pedido de download de NFe"));
 
                 ListaExtensoes.Add(TipoEnvio.GerarChaveNFe, new ExtensaoClass(
@@ -337,7 +340,7 @@ namespace NFe.Components
                 
                 ListaExtensoes.Add(TipoEnvio.NFe, new ExtensaoClass(
                     "-nfe.xml", "-nfe.txt",
-                    "-nfe-ret.xml", null,
+                    "-nfe-ret.xml", "",
                     "Pedido de envio de NFe/NFCe"
                 ));
 
@@ -501,15 +504,13 @@ namespace NFe.Components
                 #endregion
 
                 #region Exporadicos
-                ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml","","","",""));
-                ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", ""));
 
-                #region Exporadicos
-                ListaExtensoes.Add(TipoEnvio.sair_XML, new ExtensaoClass("-sair.xml", "", "", "", "Fechar o UniNFe"));
+                ListaExtensoes.Add(TipoEnvio.pedUpdatewsdl, new ExtensaoClass("-updatewsdl.xml", "-updatewsdl.txt", "-ret-updatewsdl.xml", "-ret-updatewsdl.txt", "Executar a atualização dos WSDL's e Schemas"));
+                ListaExtensoes.Add(TipoEnvio.pedRestart, new ExtensaoClass("-restart.xml", "-restart.txt", "", "", "Reiniciar o UniNFe."));
+                ListaExtensoes.Add(TipoEnvio.sair_XML, new ExtensaoClass("-sair.xml", "-sair.txt", "", "", "Fechar o UniNFe"));
                 ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml", "", "", "", "Uso específico, não usar"));
                 ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", "Uso específico, não usar"));
-                #endregion
-
+                ListaExtensoes.Add(TipoEnvio.pedLayouts, new ExtensaoClass("-layouts.xml", "-layouts.txt", "-ret-layouts.pdf", "", "Gerar um PDF com o layout da NFe em TXT e extensões usadas no UniNFe."));
                 #endregion
             }
             return ListaExtensoes[value];

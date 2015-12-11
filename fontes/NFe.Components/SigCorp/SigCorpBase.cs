@@ -41,6 +41,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new NFe.Components.SigCorp.IgarapeMG.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 4315602: //Rio Grande-RS
+                                sigCorpService = new NFe.Components.SigCorp.RioGrandeRS.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -77,6 +81,10 @@ namespace NFe.Components.SigCorp
 
                             case 3130101: //Igarape-MG
                                 sigCorpService = new NFe.Components.SigCorp.IgarapeMG.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 4315602: //Rio Grande-RS
+                                sigCorpService = new NFe.Components.SigCorp.RioGrandeRS.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:
