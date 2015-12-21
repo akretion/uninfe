@@ -1434,7 +1434,7 @@ namespace NFe.Settings
             {
                 this.valid = _valid;
                 this.msg1 = _msg1;
-                this.msg2 = _msg2;
+                this.msg2 = _msg2 + " - '" + (!string.IsNullOrEmpty(_folder) ? "VAZIO" : _folder) + "'";
                 this.folder = _folder;
             }
         }
@@ -2084,83 +2084,96 @@ namespace NFe.Settings
                 lErro = true;
             }
 
-
-            //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
-            //exatamente como estavam gravadas no XML de configuração
-            if (lErro)
-            {
-                ConfiguracaoApp.CarregarDados();
-                ConfiguracaoApp.CarregarDadosSobre();
-                Empresas.CarregaConfiguracao();
-
-                #region Ticket: #110
-                Empresas.CreateLockFile(true);
-                #endregion
-            }
-            else
-                ConfiguracaoApp.DownloadArquivoURLConsultaDFe(true);
-
-            //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
-            FileInfo arqInfo = new FileInfo(cArquivoXml);
-            string pastaRetorno = string.Empty;
-            if (arqInfo.DirectoryName.ToLower().Trim() == Propriedade.PastaGeralTemporaria.ToLower().Trim())
-            {
-                pastaRetorno = Propriedade.PastaGeralRetorno;
-            }
-            else
-            {
-                pastaRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno;
-            }
-
-            string nomeArqRetorno;
-            if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
-                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioTXT) + 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).RetornoTXT;
-            else
-                nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) + 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).RetornoXML;
-
-            string cArqRetorno = pastaRetorno + "\\" + nomeArqRetorno;
-
             try
             {
-                FileInfo oArqRetorno = new FileInfo(cArqRetorno);
-                if (oArqRetorno.Exists == true)
+                //Gravar o XML de retorno com a informação do sucesso ou não na reconfiguração
+                FileInfo arqInfo = new FileInfo(cArquivoXml);
+                string pastaRetorno = string.Empty;
+                if (arqInfo.DirectoryName.ToLower().Trim() == Propriedade.PastaGeralTemporaria.ToLower().Trim())
                 {
-                    oArqRetorno.Delete();
-                }
-
-                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
-                {
-                    File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n");//, Encoding.Default);
+                    pastaRetorno = Propriedade.PastaGeralRetorno;
                 }
                 else
                 {
-                    var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
-                                            new XElement("retAltConfUniNFe",
-                                                new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
-                                                new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
-                    xml.Save(cArqRetorno);
+                    pastaRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno;
+                    ///
+                    /// se der erro na atualizacao e se for solicitada a alteracao da pasta de retorno, 
+                    /// verificamos se ainda assim ela existe
+                    /// 
+                    /// Nao existindo, gravamos o retorno na pasta de retorno do UniNFe
+                    /// 
+                    if (!Directory.Exists(pastaRetorno) && lErro)
+                        pastaRetorno = Propriedade.PastaGeralRetorno;
+                }
+
+                string nomeArqRetorno;
+                var EXT = Propriedade.Extensao(Propriedade.TipoEnvio.AltCon);
+                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                    nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, EXT.EnvioTXT) + EXT.RetornoTXT;
+                else
+                    nomeArqRetorno = Functions.ExtrairNomeArq(cArquivoXml, EXT.EnvioXML) + EXT.RetornoXML;
+
+                string cArqRetorno = pastaRetorno + "\\" + nomeArqRetorno;
+
+                try
+                {
+                    FileInfo oArqRetorno = new FileInfo(cArqRetorno);
+                    if (oArqRetorno.Exists == true)
+                    {
+                        oArqRetorno.Delete();
+                    }
+
+                    if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                    {
+                        File.WriteAllText(cArqRetorno, "cStat|" + cStat + "\r\nxMotivo|" + xMotivo + "\r\n");
+                    }
+                    else
+                    {
+                        var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
+                                                new XElement("retAltConfUniNFe",
+                                                    new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
+                                                    new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
+                        xml.Save(cArqRetorno);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
+                    ///
+                    /// danasa 8-2009
+                    /// 
+                    Auxiliar oAux = new Auxiliar();
+                    oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
+                }
+
+                try
+                {
+                    //Deletar o arquivo de configurações automáticas gerado pelo ERP
+                    Functions.DeletarArquivo(cArquivoXml);
+                }
+                catch
+                {
+                    //Não vou fazer nada, so trato a exceção para evitar fechar o aplicativo. Wandrey 09/03/2010
                 }
             }
-            catch (Exception ex)
+            finally
             {
-                //Ocorreu erro na hora de gerar o arquivo de erro para o ERP
-                ///
-                /// danasa 8-2009
-                /// 
-                Auxiliar oAux = new Auxiliar();
-                oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(cArqRetorno) + ".err", xMotivo + Environment.NewLine + ex.Message);
-            }
+                //Se deu algum erro tenho que voltar as configurações como eram antes, ou seja
+                //exatamente como estavam gravadas no XML de configuração
+                if (lErro)
+                {
+                    ConfiguracaoApp.CarregarDados();
+                    ConfiguracaoApp.CarregarDadosSobre();
+                    Empresas.CarregaConfiguracao();
 
-            try
-            {
-                //Deletar o arquivo de configurações automáticas gerado pelo ERP
-                Functions.DeletarArquivo(cArquivoXml);
-            }
-            catch
-            {
-                //Não vou fazer nada, so trato a exceção para evitar fechar o aplicativo. Wandrey 09/03/2010
+                    #region Ticket: #110
+                    Empresas.CreateLockFile(true);
+                    #endregion
+                }
+                else
+                {
+                    ConfiguracaoApp.DownloadArquivoURLConsultaDFe(true);
+                }
             }
         }
         #endregion

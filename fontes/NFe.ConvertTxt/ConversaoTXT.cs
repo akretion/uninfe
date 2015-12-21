@@ -71,6 +71,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("I_25", prefix + "I|cProd|cEAN|XProd|NCM|NVE|CEST|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI|"); //ok
                     _LayoutTXT.Add("I05A", prefix + "I05a|NVE|");
                     _LayoutTXT.Add("I05W", prefix + "I05w|CEST|");
+                    _LayoutTXT.Add("I05C", prefix + "I05c|CEST|");
                     _LayoutTXT.Add("I18_200", prefix + "I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|cExportador|");
                     _LayoutTXT.Add("I18_310", prefix + "I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador|");
                     _LayoutTXT.Add("I25_200", prefix + "I25|NAdicao|NSeqAdic|CFabricante|VDescDI|");
@@ -117,7 +118,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("N10D", prefix + "N10d|orig|CSOSN|");
                     _LayoutTXT.Add("N10E", prefix + "N10e|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("N10F", prefix + "N10f|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
-                    _LayoutTXT.Add("N10G_310", prefix + "N10g|orig|CSOSN|vBCSTRet|vICMSSTRet|");
+                    _LayoutTXT.Add("N10G_310_5", prefix + "N10g|orig|CSOSN|vBCSTRet|vICMSSTRet|");
                     _LayoutTXT.Add("N10G_200", prefix + "N10g|Orig|CSOSN|modBCST|vBCSTRet|vICMSSTRet|");
                     _LayoutTXT.Add("N10H", prefix + "N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("NA", prefix + "NA|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet|");
@@ -201,7 +202,6 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("ZC01", prefix + "ZC01|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor|");
                     _LayoutTXT.Add("ZC04", prefix + "ZC04|dia|qtde|");
                     _LayoutTXT.Add("ZC10", prefix + "ZC10|xDed|vDed|");
-
                 }
                 return _LayoutTXT;
             }
@@ -326,7 +326,7 @@ namespace NFe.ConvertTxt
                         {
                             houveErro = true;
                             if (!string.IsNullOrEmpty(this.layout))
-                            this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
+                                this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                             this.cMensagemErro += "Linha lida: " + (this.LinhaLida + 1).ToString() + Environment.NewLine +
                                                     "Conteudo: " + xContent.Substring(1) + Environment.NewLine +
                                                     ex.Message + Environment.NewLine;
@@ -466,7 +466,6 @@ namespace NFe.ConvertTxt
             /// o valor do retorno
             /// 
             if (string.IsNullOrEmpty(layout)) throw new Exception("Layout para o segmento '" + this.FSegmento + "' não encontrado");
-
             if (!layout.StartsWith(prefix)) layout = prefix + layout;
             if (!layout.EndsWith("|")) layout += "|";
             string fValue = layout.Substring(0, layout.ToUpper().IndexOf("|" + TAG.ToUpper().Trim() + "|") + 1);
@@ -728,7 +727,7 @@ namespace NFe.ConvertTxt
             catch (Exception ex)
             {
                 if (!string.IsNullOrEmpty(layout))
-                this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
+                    this.cMensagemErro += "Layout: " + this.layout.Replace(prefix, "") + Environment.NewLine;
                 this.cMensagemErro += string.Format("Segmento [{0}]: tag <{1}> Conteudo: {2}\r\n" +
                                                     "\tLinha: {3}: Conteudo do segmento: {4}\r\n\tMensagem de erro: {5}",
                                                     this.FSegmento, tag.ToString(), ConteudoTag, this.LinhaLida, this.Registro.Substring(1),
@@ -788,29 +787,28 @@ namespace NFe.ConvertTxt
 #if DEBUG
             Console.WriteLine("Segmento lido: {0} - linha: {1}", FSegmento, this.LinhaLida);
 #endif
-
             try
             {
-                layout = this.LayoutTXT[this.FSegmento].ToString();
+                layout = this.LayoutTXT[this.FSegmento.ToUpper()].ToString();
             }
             catch {
                 try
                 {
                     /// Exemplo: "B_310"
-                    layout = this.LayoutTXT[this.FSegmento + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "")].ToString();
+                    layout = this.LayoutTXT[this.FSegmento.ToUpper() + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "")].ToString();
                 }
                 catch {
                     try
                     {
                         /// Exemplo: "W02_310_21"
-                        layout = this.LayoutTXT[this.FSegmento + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "") + "_" + lenPipesRegistro.ToString()].ToString();
+                        layout = this.LayoutTXT[this.FSegmento.ToUpper() + "_" + NFe.infNFe.Versao.ToString("0.00").Replace(".", "").Replace(",", "") + "_" + lenPipesRegistro.ToString()].ToString();
                     }
                     catch
                     {
                         try
                         {
                             /// Exemplo: "I_23"
-                            layout = this.LayoutTXT[this.FSegmento + "_" + lenPipesRegistro.ToString()].ToString();
+                            layout = this.LayoutTXT[this.FSegmento.ToUpper() + "_" + lenPipesRegistro.ToString()].ToString();
                         }
                         catch
                         {
@@ -819,9 +817,17 @@ namespace NFe.ConvertTxt
                             /// OPS!!! cometemos um erro
                             /// 
                             foreach (KeyValuePair<string, string> k in this._LayoutTXT)
-                            { 
-                                if (k.Value.Substring(0, k.Value.IndexOf('|')+1).Equals(this.FSegmento+"|"))
+                            {
+                                if (k.Value.Substring(1, k.Value.IndexOf('|')).Equals(this.FSegmento + "|", StringComparison.InvariantCultureIgnoreCase))
                                 {
+                                    if (k.Key.Contains("_310") && NFe.infNFe.Versao != (decimal)3.1) continue;
+                                    if (k.Key.Contains("_200") && NFe.infNFe.Versao != (decimal)2) continue;
+
+                                    if (k.Key.Contains("_310_"))
+                                    {
+                                        string kk = this.FSegmento.ToUpper() + "_310_" + lenPipesRegistro.ToString();
+                                        if (!k.Key.Equals(kk)) continue;
+                                    }
                                     layout = k.Value;
                                     break;
                                 }
@@ -1265,6 +1271,7 @@ namespace NFe.ConvertTxt
                     break;
 
                 case "I05W":
+		        case "I05C":
                     //layout = prefix + this.FSegmento + "|CEST";
                     NFe.det[nProd].Prod.CEST = this.LerInt32(TpcnResources.CEST, ObOp.Opcional, 0, 7);
                     break;
@@ -1863,8 +1870,6 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].Imposto.IPI.cSelo = this.LerString(TpcnResources.cSelo, ObOp.Opcional, 1, 60);
                     NFe.det[nProd].Imposto.IPI.qSelo = this.LerInt32(TpcnResources.qSelo, ObOp.Opcional, 1, 12);
                     NFe.det[nProd].Imposto.IPI.cEnq = this.LerString(TpcnResources.cEnq, ObOp.Obrigatorio, 3, 3);
-
-
                     #endregion
                     break;
 
