@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EBC28336-2313-4CE1-8711-5DDF907FB7C0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFe.Service</RootNamespace>
+    <AssemblyName>NFe.Service</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;x64</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;x64</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.8.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\iTextSharp.5.5.8\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\NFe.Service\Classes.cs">
+      <Link>Classes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskAssinarValidarCTe.cs">
+      <Link>CTe\TaskAssinarValidarCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskConsultaSituacaoCTe.cs">
+      <Link>CTe\TaskConsultaSituacaoCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskConsultaStatusCTe.cs">
+      <Link>CTe\TaskConsultaStatusCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskCTeRecepcao.cs">
+      <Link>CTe\TaskCTeRecepcao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskEventosCTe.cs">
+      <Link>CTe\TaskEventosCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskInutilizacaoCTe.cs">
+      <Link>CTe\TaskInutilizacaoCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskMontarLoteUmCTe.cs">
+      <Link>CTe\TaskMontarLoteUmCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskMontarLoteVariosCTe.cs">
+      <Link>CTe\TaskMontarLoteVariosCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\CTe\TaskRetRecepcaoCTe.cs">
+      <Link>CTe\TaskRetRecepcaoCTe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\DFe\TaskRecepcaoDFe.cs">
+      <Link>DFe\TaskRecepcaoDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\FluxoNfe.cs">
+      <Link>FluxoNfe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\GerarXML.cs">
+      <Link>GerarXML.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\InvocarObjeto.cs">
+      <Link>InvocarObjeto.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\LerXML.cs">
+      <Link>LerXML.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\LMC\LMCAutorizacao.cs">
+      <Link>LMC\LMCAutorizacao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskAssinarValidarMDFe.cs">
+      <Link>MDFe\TaskAssinarValidarMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskConsNaoEncMDFe.cs">
+      <Link>MDFe\TaskConsNaoEncMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskConsultaSituacaoMDFe.cs">
+      <Link>MDFe\TaskConsultaSituacaoMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskConsultaStatusMDFe.cs">
+      <Link>MDFe\TaskConsultaStatusMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskEventosMDFe.cs">
+      <Link>MDFe\TaskEventosMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskMDFeRecepcao.cs">
+      <Link>MDFe\TaskMDFeRecepcao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskMontarLoteUmMDFe.cs">
+      <Link>MDFe\TaskMontarLoteUmMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskMontarLoteVariosMDFe.cs">
+      <Link>MDFe\TaskMontarLoteVariosMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\MDFe\TaskRetRecepcaoMDFe.cs">
+      <Link>MDFe\TaskRetRecepcaoMDFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFeEmProcessamento.cs">
+      <Link>NFeEmProcessamento.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\ConverterTXT.cs">
+      <Link>NFe\ConverterTXT.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskAssinarValidarNFe.cs">
+      <Link>NFe\TaskAssinarValidarNFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskCadastroContribuinte.cs">
+      <Link>NFe\TaskCadastroContribuinte.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskConsultaNFDest.cs">
+      <Link>NFe\TaskConsultaNFDest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskConsultaSituacaoNFe.cs">
+      <Link>NFe\TaskConsultaSituacaoNFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskConsultaStatus.cs">
+      <Link>NFe\TaskConsultaStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskDownloadNFe.cs">
+      <Link>NFe\TaskDownloadNFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskEventos.cs">
+      <Link>NFe\TaskEventos.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskGerarXMLPedRec.cs">
+      <Link>NFe\TaskGerarXMLPedRec.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskInutilizacao.cs">
+      <Link>NFe\TaskInutilizacao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskMontarLoteUmaNFe.cs">
+      <Link>NFe\TaskMontarLoteUmaNFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskMontarLoteVariasNFe.cs">
+      <Link>NFe\TaskMontarLoteVariasNFe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskNFeRecepcao.cs">
+      <Link>NFe\TaskNFeRecepcao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskRegistroDeSaida.cs">
+      <Link>NFe\TaskRegistroDeSaida.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskRegistroDeSaidaCancelamento.cs">
+      <Link>NFe\TaskRegistroDeSaidaCancelamento.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFe\TaskRetRecepcao.cs">
+      <Link>NFe\TaskRetRecepcao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskCancelarNfse.cs">
+      <Link>NFSe\TaskCancelarNfse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarLoteRps.cs">
+      <Link>NFSe\TaskConsultarLoteRps.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarNfse.cs">
+      <Link>NFSe\TaskConsultarNfse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarNfsePDF.cs">
+      <Link>NFSe\TaskConsultarNfsePDF.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarNfsePNG.cs">
+      <Link>NFSe\TaskConsultarNfsePNG.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarNfsePorRps.cs">
+      <Link>NFSe\TaskConsultarNfsePorRps.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarURLNfse.cs">
+      <Link>NFSe\TaskConsultarURLNfse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultarURLNfseSerie.cs">
+      <Link>NFSe\TaskConsultarURLNfseSerie.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskConsultaSituacaoLoteRps.cs">
+      <Link>NFSe\TaskConsultaSituacaoLoteRps.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskInutilizarNfse.cs">
+      <Link>NFSe\TaskInutilizarNfse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\NFSe\TaskRecepcionarLoteRps.cs">
+      <Link>NFSe\TaskRecepcionarLoteRps.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\Processar.cs">
+      <Link>Processar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TaskAbst.cs">
+      <Link>TaskAbst.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TaskDanfe.cs">
+      <Link>TaskDanfe.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TaskValidar.cs">
+      <Link>TaskValidar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TaskWSExiste.cs">
+      <Link>TaskWSExiste.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TFunctions.cs">
+      <Link>TFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NFe.Service\TaskLayouts.cs">
+      <Link>TaskLayouts.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFe.Certificado\NFe.Certificado64.csproj">
+      <Project>{52182e2b-c78b-45ca-a6cb-e1fb1e455761}</Project>
+      <Name>NFe.Certificado64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components.Info\NFe.Components.Info64.csproj">
+      <Project>{0617bee5-c255-42a4-a94c-e5073161ee55}</Project>
+      <Name>NFe.Components.Info64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components\NFe.Components64.csproj">
+      <Project>{3e93064d-98f4-4eca-9003-2f531d8d3f03}</Project>
+      <Name>NFe.Components64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.ConvertTxt\NFe.ConvertTxt64.csproj">
+      <Project>{54b1af2d-94d3-41e3-8d15-6f93fd7b8c68}</Project>
+      <Name>NFe.ConvertTxt64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Settings\NFe.Settings64.csproj">
+      <Project>{eda09fc4-82ae-4ad1-9320-e4314e5a45b0}</Project>
+      <Name>NFe.Settings64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Validate\NFe.Validate64.csproj">
+      <Project>{2d9bcc1e-bff3-417b-90af-5b7a273a8f95}</Project>
+      <Name>NFe.Validate64</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logounimake.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
