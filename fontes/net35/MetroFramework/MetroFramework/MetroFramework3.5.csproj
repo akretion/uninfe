@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3992DCD3-3E34-4CBC-A774-6F4606BB5000}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MetroFramework</RootNamespace>
+    <AssemblyName>MetroFramework</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../MetroFramework.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\uninfe\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\AnimationBase.cs">
+      <Link>Animation\AnimationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\ColorBlendAnimation.cs">
+      <Link>Animation\ColorBlendAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\DelayedCall.cs">
+      <Link>Animation\DelayedCall.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\ExpandAnimation.cs">
+      <Link>Animation\ExpandAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\MoveAnimation.cs">
+      <Link>Animation\MoveAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Animation\TransitionType.cs">
+      <Link>Animation\TransitionType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Components\MetroStyleExtender.cs">
+      <Link>Components\MetroStyleExtender.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Components\MetroStyleManager.cs">
+      <Link>Components\MetroStyleManager.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Components\MetroToolTip.cs">
+      <Link>Components\MetroToolTip.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroButton.cs">
+      <Link>Controls\MetroButton.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroCheckBox.cs">
+      <Link>Controls\MetroCheckBox.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroComboBox.cs">
+      <Link>Controls\MetroComboBox.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroContextMenu.cs">
+      <Link>Controls\MetroContextMenu.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroGrid.cs">
+      <Link>Controls\MetroGrid.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroGrid.designer.cs">
+      <Link>Controls\MetroGrid.designer.cs</Link>
+      <DependentUpon>MetroGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroLabel.cs">
+      <Link>Controls\MetroLabel.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroLink.cs">
+      <Link>Controls\MetroLink.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroPanel.cs">
+      <Link>Controls\MetroPanel.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroProgressBar.cs">
+      <Link>Controls\MetroProgressBar.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroProgressSpinner.cs">
+      <Link>Controls\MetroProgressSpinner.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroRadioButton.cs">
+      <Link>Controls\MetroRadioButton.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroScrollBar.cs">
+      <Link>Controls\MetroScrollBar.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroTabControl.cs">
+      <Link>Controls\MetroTabControl.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroTabPage.cs">
+      <Link>Controls\MetroTabPage.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroTextBox.cs">
+      <Link>Controls\MetroTextBox.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroTile.cs">
+      <Link>Controls\MetroTile.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroToggle.cs">
+      <Link>Controls\MetroToggle.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroTrackBar.cs">
+      <Link>Controls\MetroTrackBar.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroUserControl.cs">
+      <Link>Controls\MetroUserControl.cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssAnonymousBlockBox.cs">
+      <Link>Drawing\Html\CssAnonymousBlockBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssAnonymousBox.cs">
+      <Link>Drawing\Html\CssAnonymousBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssBlock.cs">
+      <Link>Drawing\Html\CssBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssBox.cs">
+      <Link>Drawing\Html\CssBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssBoxWord.cs">
+      <Link>Drawing\Html\CssBoxWord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssBoxWordSplitter.cs">
+      <Link>Drawing\Html\CssBoxWordSplitter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssConstants.cs">
+      <Link>Drawing\Html\CssConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssDefaults.cs">
+      <Link>Drawing\Html\CssDefaults.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssDrawingHelper.cs">
+      <Link>Drawing\Html\CssDrawingHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssLayoutEngine.cs">
+      <Link>Drawing\Html\CssLayoutEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssLength.cs">
+      <Link>Drawing\Html\CssLength.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssLineBox.cs">
+      <Link>Drawing\Html\CssLineBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssPropertyAttribute.cs">
+      <Link>Drawing\Html\CssPropertyAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssPropertyInheritedAttribute.cs">
+      <Link>Drawing\Html\CssPropertyInheritedAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssRectangle.cs">
+      <Link>Drawing\Html\CssRectangle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssTable.cs">
+      <Link>Drawing\Html\CssTable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\CssValue.cs">
+      <Link>Drawing\Html\CssValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlConstants.cs">
+      <Link>Drawing\Html\HtmlConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlLabel.cs">
+      <Link>Drawing\Html\HtmlLabel.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlPanel.cs">
+      <Link>Drawing\Html\HtmlPanel.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlRenderer.cs">
+      <Link>Drawing\Html\HtmlRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlTag.cs">
+      <Link>Drawing\Html\HtmlTag.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\HtmlToolTip.cs">
+      <Link>Drawing\Html\HtmlToolTip.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\InitialContainer.cs">
+      <Link>Drawing\Html\InitialContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\Html\Parser.cs">
+      <Link>Drawing\Html\Parser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\MetroBackBuffer.cs">
+      <Link>Drawing\MetroBackBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Drawing\MetroPaint.cs">
+      <Link>Drawing\MetroPaint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Forms\MetroMessageBox.cs">
+      <Link>Forms\MetroMessageBox.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Forms\MetroForm.cs">
+      <Link>Forms\MetroForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Forms\MetroTaskWindow.cs">
+      <Link>Forms\MetroTaskWindow.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Interfaces\IMetroControl.cs">
+      <Link>Interfaces\IMetroControl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Interfaces\IMetroForm.cs">
+      <Link>Interfaces\IMetroForm.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Interfaces\IMetroComponent.cs">
+      <Link>Interfaces\IMetroComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Localization\MetroLocalize.cs">
+      <Link>Localization\MetroLocalize.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MessageBox\MetroMessageBox.cs">
+      <Link>MessageBox\MetroMessageBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MessageBox\MetroMessageBoxControl.cs">
+      <Link>MessageBox\MetroMessageBoxControl.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MessageBox\MetroMessageBoxControl.Designer.cs">
+      <Link>MessageBox\MetroMessageBoxControl.Designer.cs</Link>
+      <DependentUpon>MetroMessageBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MessageBox\MetroMessageBoxProperties.cs">
+      <Link>MessageBox\MetroMessageBoxProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroBrushes.cs">
+      <Link>MetroBrushes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroColors.cs">
+      <Link>MetroColors.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroColorStyle.cs">
+      <Link>MetroColorStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroDefaults.cs">
+      <Link>MetroDefaults.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroFonts.cs">
+      <Link>MetroFonts.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroImage.cs">
+      <Link>MetroImage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroPens.cs">
+      <Link>MetroPens.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\MetroThemeStyle.cs">
+      <Link>MetroThemeStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Native\DwmApi.cs">
+      <Link>Native\DwmApi.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Native\SubClass.cs">
+      <Link>Native\SubClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Native\Taskbar.cs">
+      <Link>Native\Taskbar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Native\WinApi.cs">
+      <Link>Native\WinApi.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MetroFramework\MetroFramework\Native\WinCaret.cs">
+      <Link>Native\WinCaret.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\MetroFramework\MetroFramework\MetroFramework.pfx">
+      <Link>MetroFramework.pfx</Link>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\Controls\MetroGrid.resx">
+      <Link>Controls\MetroGrid.resx</Link>
+      <DependentUpon>MetroGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\Forms\MetroMessageBox.resx">
+      <Link>Forms\MetroMessageBox.resx</Link>
+      <DependentUpon>MetroMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\Forms\MetroTaskWindow.resx">
+      <Link>Forms\MetroTaskWindow.resx</Link>
+      <DependentUpon>MetroTaskWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\MessageBox\MetroMessageBoxControl.resx">
+      <Link>MessageBox\MetroMessageBoxControl.resx</Link>
+      <DependentUpon>MetroMessageBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\Localization\de\MetroToggle.xml">
+      <Link>Localization\de\MetroToggle.xml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\MetroFramework\MetroFramework\Localization\en\MetroToggle.xml">
+      <Link>Localization\en\MetroToggle.xml</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

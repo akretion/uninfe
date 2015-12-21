@@ -26,7 +26,7 @@ namespace NFe.Components.SigCorp.CianortePR.h
         #region Métodos
         public override void EmiteNF(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+           throw new Exceptions.ServicoInexistenteException();
         }
 
         public override void CancelarNfse(string file)

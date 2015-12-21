@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UniNFe")]
-[assembly: AssemblyDescription("Monitor de Documentos Fiscais Eletrônicos")]
+[assembly: AssemblyTitle("NFe.Certificado")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unimake")]
-[assembly: AssemblyProduct("UniNFe")]
-[assembly: AssemblyCopyright("Copyright © 2008 - Unimake Software")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("NFe.Certificado")]
+[assembly: AssemblyCopyright("Copyright ©  2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e107a4ee-6ff6-47c8-aa16-45be938eb0f5")]
+[assembly: Guid("c0f27bb4-2f70-4f01-b003-efad29b66d2a")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.0.0.17")]
-[assembly: AssemblyFileVersion("5.0.0.17")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
