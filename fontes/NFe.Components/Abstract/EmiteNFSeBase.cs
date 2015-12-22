@@ -49,7 +49,7 @@ namespace NFe.Components.Abstract
         {
             XmlDocument xmlDoc = new XmlDocument();
 
-            if (objetoRetorno != null)
+            if (objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(objetoRetorno.GetType());
                 using (MemoryStream xmlStream = new MemoryStream())
@@ -71,7 +71,7 @@ namespace NFe.Components.Abstract
                     xmlDoc2.Load(xmlStream2);
                 }
 
-                if (objetoRetorno != null)
+                if (objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
                 {
                     XmlNode importedDocument = xmlDoc.ImportNode(xmlDoc2.DocumentElement, true);
                     xmlDoc.DocumentElement.AppendChild(importedDocument);

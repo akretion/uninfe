@@ -141,7 +141,16 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 
             string xResult = ServiceConsultaNfsePorRps.Execute(oTcDadosConsultaNfse, out result);
 
-            string strResult = base.CreateXML(xResult, result);
+            string strResult = string.Empty;
+            if (result.Length != 0)
+                strResult = base.CreateXML(result);
+            else
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xResult);
+                strResult = xmlDoc.OuterXml;
+            }
+            
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
