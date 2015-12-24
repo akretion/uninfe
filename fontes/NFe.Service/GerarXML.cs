@@ -2386,12 +2386,23 @@ namespace NFe.Service
                             if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
                                 destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.dest.IE));
 
-                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
-                            destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
-                            if (evento.chNFe.Substring(23, 2).Equals("65"))
-                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vST.ToString(), evento.epec.dest.vST.ToString("0.00").Replace(",", ".")));
+                            switch (evento.chNFe.Substring(20, 2))
+                            {
+                                case "55":
+                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
+                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
+                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vST.ToString(), evento.epec.dest.vST.ToString("0.00").Replace(",", ".")));
+                                    detEvento.AppendChild(destEvento);
+                                    break;
 
-                            detEvento.AppendChild(destEvento);
+                                case "65":
+                                    detEvento.AppendChild(destEvento);
+
+                                    detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vNF.ToString(), evento.epec.dest.vNF.ToString("0.00").Replace(",", ".")));
+                                    detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.vICMS.ToString(), evento.epec.dest.vICMS.ToString("0.00").Replace(",", ".")));
+                                    break;
+                            }
+
                         }
                         break;
                 }

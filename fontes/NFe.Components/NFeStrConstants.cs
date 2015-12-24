@@ -158,6 +158,7 @@ namespace NFe.Components
         idDest,
         idEstrangeiro,
         idLote,
+        indSinc,
         idPedido,
         idPedidoCancelado,
         IdT,

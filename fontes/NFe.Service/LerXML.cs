@@ -110,7 +110,18 @@ namespace NFe.Service
             {
                 XmlElement enviNFeElemento = (XmlElement)enviNFeNode;
 
-                this.oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, TpcnResources.idLote.ToString(), false);
+                oDadosNfe.idLote = Functions.LerTag(enviNFeElemento, TpcnResources.idLote.ToString(), false);
+
+                switch (Functions.LerTag(enviNFeElemento, TpcnResources.indSinc.ToString(), false))
+                {
+                    case "1": //Processo síncrono
+                        oDadosNfe.indSinc = true;
+                        break;
+
+                    default:
+                        oDadosNfe.indSinc = false;
+                        break;
+                }
             }
         }
         #endregion

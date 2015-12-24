@@ -310,7 +310,13 @@ namespace NFe.Components
             try
             {
                 if (ValueExists(Path, ValueSection))
-                    return Convert.ToInt32("0" + ReadThisValue(Path, ValueSection));
+                {
+                    var val = ReadThisValue(Path, ValueSection);
+                    if (val != "")
+                    {
+                        return Convert.ToInt32(val);
+                    }
+                }
             }
             catch
             {
@@ -727,9 +733,9 @@ namespace NFe.Components
 
 					if (xform.MdiParent==null)
 					{
-						if ((height + top) > SystemInformation.VirtualScreen.Height)
+                        if ((height + top) > SystemInformation.VirtualScreen.Height || top < 0)
 							top = 0;
-						if ((width + left) > SystemInformation.VirtualScreen.Width)
+						if ((width + left) > SystemInformation.VirtualScreen.Width || left < 0)
 							left = 0;
 					}
 					xform.StartPosition = FormStartPosition.Manual;
