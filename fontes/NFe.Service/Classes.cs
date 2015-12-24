@@ -318,6 +318,10 @@ namespace NFe.Service
         /// Versão do XML
         /// </summary>
         public string versao { get; set; }
+        /// <summary>
+        /// Enviar nota no modo síncrono? true/false
+        /// </summary>
+        public bool indSinc { get; set; }
     }
     #endregion
 

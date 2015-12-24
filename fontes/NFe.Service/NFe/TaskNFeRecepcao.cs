@@ -80,25 +80,25 @@ namespace NFe.Service
                 string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip2) ? 1 : 0];
 
                 //Invocar o método que envia o XML para o SEFAZ
-                if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
+                if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00" && oLer.oDadosNfe.indSinc)
                 {
                     //Não posso gerar o arquivo na pasta de retorno através do método Invocar, por isso não estou colocando os dois ultimos parâmetros com a definição dos prefixos dos arquivos. O arquivo de retorno no processo síncrono deve acontecer somente depois de finalizado o processo da nota, ou gera problemas. Wandrey 11/06/2015
                     oInvocarObj.Invocar(wsProxy,
                                         oRecepcao,
                                         nOperacao,
                                         oCabecMsg,
-                                        this); 
+                                        this);
 
                     Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oRecepcao, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oRecepcao,
                                         nOperacao,
-                                        oCabecMsg, 
+                                        oCabecMsg,
                                         this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
                                         Propriedade.ExtRetorno.Rec);
 
                     Recibo(vStrXmlRetorno);
@@ -120,7 +120,7 @@ namespace NFe.Service
                          Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
                          Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012              
                 {
-                    if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00")
+                    if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.versao != "2.00" && oLer.oDadosNfe.indSinc)
                     {
                         // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
                         oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
@@ -142,60 +142,52 @@ namespace NFe.Service
             }
             catch (ExceptionEnvioXML ex)
             {
-                //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
-                //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
-                //E ver se vamos tirar o XML do Fluxo ou finalizar ele com a consulta situação da NFe
-
-                //TODO: V3.0 - Tratar o problema de não conseguir pegar o recibo exatamente neste ponto
-
-                try
-                {
-                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    if (Empresas.Configuracoes[emp].IndSinc)
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
-                    else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
-                }
-                catch
-                {
-                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
-                    //Wandrey 16/03/2010
-                }
+                TrataException(emp, ex);
             }
             catch (ExceptionSemInternet ex)
             {
-                try
-                {
-                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    if (Empresas.Configuracoes[emp].IndSinc)
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex, false);
-                    else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex, false);
-                }
-                catch
-                {
-                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
-                    //Wandrey 16/03/2010
-                }
+                TrataException(emp, ex);
             }
             catch (Exception ex)
             {
-                try
-                {
-                    //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    if (Empresas.Configuracoes[emp].IndSinc)
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
-                    else
-                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
-                }
-                catch
-                {
-                    //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
-                    //Wandrey 16/03/2010
-                }
+                TrataException(emp, ex);
             }
         }
         #endregion
+
+        /// <summary>
+        /// Tratar exceção 
+        /// </summary>
+        /// <param name="emp">Código da empresa</param>
+        /// <param name="ex">Objeto com a exception</param>
+        private void TrataException(int emp, Exception ex)
+        {
+            try
+            {
+                //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
+                switch (Empresas.Configuracoes[emp].IndSinc)
+                {
+                    case true:
+                        LerXML oLer = new LerXML();
+                        oLer.Nfe(NomeArquivoXML);
+                        if (oLer.oDadosNfe.indSinc)
+                            TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                        else
+                            goto default;
+
+                        break;
+
+                    default:
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
+                        break;
+                }
+            }
+            catch
+            {
+                //Se falhou algo na hora de gravar o retorno .ERR (de erro) para o ERP, infelizmente não posso fazer mais nada.
+                //Wandrey 16/03/2010
+            }
+        }
 
         #region Recibo
         /// <summary>
