@@ -103,7 +103,7 @@ namespace NFe.UI.Formularios
                 }
                 else
                 {
-                    labelUF.Text = "Unidade Federativa (UF-Estado)";
+                    labelUF.Text = "Unidade Federativa (UF)";
                     lbl_udDiasLimpeza.Location = loc_1;
                     udDiasLimpeza.Location = loc_2;
                 }

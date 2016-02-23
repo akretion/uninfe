@@ -162,14 +162,6 @@ namespace NFe.Settings
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
-        /// Provider utilizado pelo certificado se utilizar a opção para salvar o PIN
-        /// </summary>
-        public string ProviderCertificado { get; set; }
-        /// <summary>
-        /// Type do Provider do Certificado selecionado
-        /// </summary>
-        public string ProviderTypeCertificado { get; set; }
-        /// <summary>
         /// Certificado digital - Subject
         /// </summary>
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
@@ -831,8 +823,6 @@ namespace NFe.Settings
                 empresa.CertificadoDigitalThumbPrint =
                 empresa.CertificadoSenha =
                 empresa.CertificadoPIN =
-                empresa.ProviderCertificado =
-                empresa.ProviderTypeCertificado =
                 empresa.Certificado = string.Empty;
 
             empresa.FTPAtivo = false;

@@ -33,6 +33,10 @@ namespace NFe.UI
                     break;
             }
             this.textBox_versao.Text = Propriedade.Versao;
+            this.textBox_versaofw.Text = "4.5";
+#if _fw35
+            this.textBox_versaofw.Text = "3.5";
+#endif
             lblDescricaoAplicacao.Text = Propriedade.DescricaoAplicacao;
             lblNomeAplicacao.Text = Propriedade.NomeAplicacao;
             this.labelTitle.Text = "Sobre o " + Propriedade.NomeAplicacao;

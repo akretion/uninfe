@@ -34,11 +34,8 @@ namespace NFe.UI.Formularios
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
-            System.Windows.Forms.ToolTip tltBuscarProvider = new System.Windows.Forms.ToolTip();
-            tltBuscarProvider.SetToolTip(btnBuscarProvider, "Pesquisar provider válido automaticamente");
-
             System.Windows.Forms.ToolTip tltValidarProvider = new System.Windows.Forms.ToolTip();
-            tltValidarProvider.SetToolTip(btnValidarProvider, "Validar provider selecionado");
+            tltValidarProvider.SetToolTip(btnValidarProvider, "Testar o PIN informado.");
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
             textBox_dadoscertificado.Height = 160;
@@ -66,8 +63,7 @@ namespace NFe.UI.Formularios
                 if (empresa.CertificadoInstalado)
                 {
                     DemonstraDadosCertificado();
-                    txtPinCertificado.Text = empresa.CertificadoPIN;
-                    ProvidersCertificado();
+                    txtPinCertificado.Text = empresa.CertificadoPIN;                    
                 }
                 else
                 {
@@ -75,28 +71,11 @@ namespace NFe.UI.Formularios
                     txtSenhaCertificado.Text = empresa.CertificadoSenha;
                 }
                 ckbCertificadoInstalado_CheckedChanged(null, null);
+
+                HabilitaComponentesPINA3();
             }
             else
                 oMeuCert = null;
-        }
-
-        private void ProvidersCertificado()
-        {
-            CertificadoDigital oCertificado = new CertificadoDigital();
-            List<CertProviders> providers = new List<CertProviders>();
-            cboProviders.Items.Clear();
-
-            providers = oCertificado.GetListProviders();
-
-            foreach (CertProviders certinfo in providers)
-            {
-                cboProviders.Items.Add(certinfo.NameKey);
-            }
-
-            if (!String.IsNullOrEmpty(empresa.ProviderCertificado))
-                cboProviders.SelectedItem = empresa.ProviderCertificado;
-            else
-                IdentificarProviderValido();
         }
 
         public void Validar(bool salvando = true)
@@ -108,19 +87,12 @@ namespace NFe.UI.Formularios
             empresa.CertificadoDigitalThumbPrint = (ckbUsaCertificado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
             empresa.CertificadoPIN = ckbUsaCertificado.Checked ? txtPinCertificado.Text : "";
             empresa.UsaCertificado = ckbUsaCertificado.Checked;
-            empresa.ProviderCertificado = 
-                empresa.ProviderTypeCertificado = "";
 
             if (ckbUsaCertificado.Checked)
             {
                 if (!String.IsNullOrEmpty(empresa.CertificadoPIN))
                 {
                     CertificadoDigital oCertificado = new CertificadoDigital();
-                    CertProviders providerInfo = new CertProviders();
-                    providerInfo = oCertificado.GetInfoProvider(cboProviders.SelectedItem.ToString());
-                    empresa.ProviderCertificado = providerInfo.NameKey;
-                    empresa.ProviderTypeCertificado = providerInfo.Type;
-
                     if (salvando)
                         ValidarCertificadoA3(true);
                 }
@@ -162,7 +134,7 @@ namespace NFe.UI.Formularios
                     this.empresa.CertificadoDigitalThumbPrint = oMeuCert.Thumbprint;
                     this.empresa.X509Certificado = oMeuCert;
                     DemonstraDadosCertificado();
-                    IdentificarProviderValido();
+
                     if (changeEvent != null)
                         changeEvent(sender, e);
                 }
@@ -185,6 +157,8 @@ namespace NFe.UI.Formularios
                     txtArquivoCertificado.Text = this.openFileDialog1.FileName;
                 }
             }
+
+            HabilitaComponentesPINA3();
         }
 
         #region DemonstraDadosCertificado()
@@ -233,7 +207,6 @@ namespace NFe.UI.Formularios
             {
                 this.textBox_dadoscertificado.Clear();
                 this.txtArquivoCertificado.Clear();
-                this.txtPinCertificado.Clear();
                 this.txtSenhaCertificado.Clear();
             }
         }
@@ -245,22 +218,10 @@ namespace NFe.UI.Formularios
             lblSenhaCertificado.Visible =
                 txtSenhaCertificado.Visible =
                 lblArquivoCertificado.Visible =
-                txtArquivoCertificado.Visible =
-                btnBuscarProvider.Visible =
-                btnValidarProvider.Visible = !ckbUsarCertificadoInstalado.Checked;
+                txtArquivoCertificado.Visible = !ckbUsarCertificadoInstalado.Checked;
 
             lblCerificadoInstalado.Visible =
-                textBox_dadoscertificado.Visible =
-                lblPinCertificado.Visible =
-                txtPinCertificado.Visible =
-                btnBuscarProvider.Visible =
-                btnValidarProvider.Visible = ckbUsarCertificadoInstalado.Checked;
-
-            lblPinCertificado.Visible =
-                txtPinCertificado.Visible = true;
-
-            lblProvider.Visible =
-                   cboProviders.Visible = true;
+                textBox_dadoscertificado.Visible = ckbUsarCertificadoInstalado.Checked;
 
             if (!ckbUsarCertificadoInstalado.Checked)
             {
@@ -278,20 +239,15 @@ namespace NFe.UI.Formularios
                 lblSenhaCertificado.Refresh();
                 txtSenhaCertificado.Location = new Point(lblCerificadoInstalado.Location.X, 90);
                 txtSenhaCertificado.Refresh();
-
-                lblPinCertificado.Visible =
-                    txtPinCertificado.Visible = false;
-                lblProvider.Visible =
-                    cboProviders.Visible = false;
             }
             else
             {
                 lblPinCertificado.Location = new Point(textBox_dadoscertificado.Location.X, textBox_dadoscertificado.Location.Y + textBox_dadoscertificado.Size.Height + 10);
                 txtPinCertificado.Location = new Point(lblPinCertificado.Location.X, lblPinCertificado.Location.Y + lblPinCertificado.Size.Height + 7);
-
-                lblProvider.Location = new Point(txtPinCertificado.Location.X, txtPinCertificado.Location.Y + txtPinCertificado.Size.Height + 10);
-                cboProviders.Location = new Point(lblProvider.Location.X, lblProvider.Location.Y + lblProvider.Size.Height + 7);
             }
+
+            HabilitaComponentesPINA3();
+
             if (changeEvent != null)
                 changeEvent(sender, e);
         }
@@ -300,22 +256,37 @@ namespace NFe.UI.Formularios
         {
             if (changeEvent != null)
                 changeEvent(sender, e);
+        }
 
-            if (clsX509Certificate2Extension.IsA3(empresa.X509Certificado))
+        /// <summary>
+        /// Habilita os componentes na tela para digitação do PIN do certificado A3
+        /// </summary>
+        private void HabilitaComponentesPINA3()
+        {
+            bool isA3 = false;
+
+#if _fw45
+            if (this.ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked)
+               isA3 = clsX509Certificate2Extension.IsA3(empresa.X509Certificado);
+#endif
+
+            if (isA3)
             {
-                if (String.IsNullOrEmpty(txtPinCertificado.Text))
-                    cboProviders.Enabled = false;
-                else
-                    cboProviders.Enabled = true;
-
+                btnValidarProvider.Visible = true;
+                txtPinCertificado.Visible = true;
+                lblPinCertificado.Visible = true;
+                btnValidarProvider.Enabled = true;
                 txtPinCertificado.Enabled = true;
-
-                //IdentificarProviderValido();
+                lblPinCertificado.Enabled = true;
             }
             else
             {
+                btnValidarProvider.Visible = false;
+                txtPinCertificado.Visible = false;
+                lblPinCertificado.Visible = false;
+                btnValidarProvider.Enabled = false;
                 txtPinCertificado.Enabled = false;
-                cboProviders.Enabled = false;
+                lblPinCertificado.Enabled = false;
             }
         }
 
@@ -325,8 +296,10 @@ namespace NFe.UI.Formularios
                 this.button_selecionar_certificado.Enabled =
                 this.textBox_dadoscertificado.Enabled =
                 this.txtArquivoCertificado.Enabled =
-                this.txtPinCertificado.Enabled =
                 this.txtSenhaCertificado.Enabled = this.ckbUsaCertificado.Checked;
+
+            HabilitaComponentesPINA3();
+
             if (changeEvent != null)
                 changeEvent(sender, e);
         }
@@ -336,25 +309,8 @@ namespace NFe.UI.Formularios
             if (changeEvent != null)
                 changeEvent(sender, e);
         }
-
-        private void btnBuscarProvider_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                this.Validar(false);
-                this.empresa.PastaXmlEnvio = this.ucPastas.textBox_PastaXmlEnvio.Text;
-                this.IdentificarProviderValido();
-            }
-            catch (Exception ex)
-            {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                      ex.Message,
-                                      "Buscar provider - Resultado:",
-                                      MessageBoxButtons.OK);
-            }
-        }
-
-        private const string provError = "Validação do Provider - Resultado:";
+        
+        private const string provError = "Validação do PIN - Resultado:";
 
         private void btnValidarProvider_Click(object sender, EventArgs e)
         {
@@ -378,10 +334,7 @@ namespace NFe.UI.Formularios
             if (String.IsNullOrEmpty(empresa.CertificadoPIN))
                 throw new Exception("Informe o PIN do certificado");
 
-            if (cboProviders.SelectedItem.ToString() == "")
-                throw new Exception("Informe o provedor do certificado");
-
-            Wait.Show("Validando provider...");
+            Wait.Show("Validando PIN...");
             try
             {
                 CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
@@ -389,15 +342,13 @@ namespace NFe.UI.Formularios
                                                                                      Empresas.FindEmpresaByThread(),
                                                                                      empresa.CertificadoPIN);
                 CertProviders xCertProviders = new CertProviders();
-                xCertProviders.NameKey = cboProviders.SelectedItem.ToString();
-                xCertProviders.Type = certificadoProviders.GetProviderType(xCertProviders.NameKey);
 
                 if (certificadoProviders.TestarProvider(xCertProviders))
                 {
                     Wait.Close();
                     if (!salvando)
                         MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                              "Provider válido, XML assinado com sucesso.",
+                                                              "Configuração do PIN validada, XML assinado com sucesso.",
                                                               provError,
                                                               MessageBoxButtons.OK);
                 }
@@ -406,7 +357,7 @@ namespace NFe.UI.Formularios
                 {
                     Wait.Close();
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                          "Provider inválido, não foi possível assinar um XML com este provider.",
+                                          "PIN inválido, não foi possível assinar um XML com esta chave.",
                                           provError,
                                           MessageBoxButtons.OK);
 
@@ -424,39 +375,6 @@ namespace NFe.UI.Formularios
             {
                 Wait.Close();
             }
-        }
-
-        private void IdentificarProviderValido()
-        {
-            Wait.Show("Procurando por um provider válido...");
-            CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
-                                                                                 empresa.PastaXmlEnvio,
-                                                                                 Empresas.FindEmpresaByThread(),
-                                                                                 txtPinCertificado.Text);
-            if (certificadoProviders.Run())
-            {
-                Wait.Close();
-                if (certificadoProviders.ProviderIdentificado)
-                {
-                    DialogResult result = MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                          "Foi identificado um provider para o Certificado: " + certificadoProviders.ProviderValido.NameKey + "\n" +
-                                                          "Deseja defini-lo com provider para este certificado?", "Identificação automatica de Provider",
-                                                          MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        cboProviders.SelectedItem = certificadoProviders.ProviderValido.NameKey;
-                    }
-                }
-                else
-                {
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                          "Não foi identificado um provider para o funcionamento adequado do Certificado selecionado \n" +
-                                                          "Tente reiniciar o Certificado e a Senha do PIN e tente novamente.", "Identificação automatica de Provider",
-                                                          MessageBoxButtons.OK);
-                }
-            }
-            else
-                Wait.Close();
         }
     }
 }

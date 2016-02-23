@@ -19,8 +19,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\uninfe\bin\Release\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_uninfe_</DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_fw45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -29,11 +29,31 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\uninfe\bin\Release\</OutputPath>
-    <DefineConstants>TRACE;_uninfe_</DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;_fw45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release35_AnyCPU|AnyCPU'">
+    <OutputPath>bin\Release35_AnyCPU\</OutputPath>
+    <DefineConstants>TRACE;_fw35</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release45_x64|x64'">
+    <OutputPath>bin\Release45_x64\</OutputPath>
+    <DefineConstants>TRACE;_fw45;x64</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>uninfe.ico</ApplicationIcon>
@@ -90,6 +110,10 @@
       <Project>{b7222c8a-6160-4d6f-bdc8-20134308175a}</Project>
       <Name>NFe.Components.Info</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NFe.Components.Wsdl\NFe.Components.Wsdl.csproj">
+      <Project>{22362df8-4026-4964-8975-ed87871ba07e}</Project>
+      <Name>NFe.Components.Wsdl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
       <Project>{c199d582-6da4-4d00-8963-89ba04777872}</Project>
       <Name>NFe.Components</Name>
@@ -113,6 +137,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+      if "$(ConfigurationName)" == "Debug"  (GOTO doNothing)
+      START $(SolutionDir)build.bat "$(SolutionPath)"
+      :doNothing
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -72,6 +72,9 @@ namespace NFe.UI.Formularios
             ShowTitle();
 
             string NomeInstalador = "i" + NFe.Components.Propriedade.NomeAplicacao.ToLower() + "5.exe";
+#if _fw35
+            NomeInstalador = "i" + NFe.Components.Propriedade.NomeAplicacao.ToLower() + "5_fw35.exe";
+#endif
             this.PastaInstalar = Application.StartupPath;
             this.LocalArq = Application.StartupPath + "\\" + NomeInstalador;
             this.URL = "http://www.unimake.com.br/downloads/" + NomeInstalador;

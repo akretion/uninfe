@@ -126,15 +126,12 @@ namespace NFe.Certificado
                             // Create a SignedXml object.
                             SignedXml signedXml = new SignedXml(doc);
 
+#if _fw45
                             //A3
                             if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) && clsX509Certificate2Extension.IsA3(x509Cert))
-                            {
-                                signedXml.SigningKey = LerDispositivo(Empresas.Configuracoes[empresa].CertificadoPIN,
-                                                                      Convert.ToInt32("0" + Empresas.Configuracoes[empresa].ProviderTypeCertificado),
-                                                                      Empresas.Configuracoes[empresa].ProviderCertificado);
-                            }
-                            else
-                                signedXml.SigningKey = x509Cert.PrivateKey;
+                                x509Cert.SetPinPrivateKey(Empresas.Configuracoes[empresa].CertificadoPIN);
+#endif
+                            signedXml.SigningKey = x509Cert.PrivateKey;
 
                             // Add an enveloped transformation to the reference.
                             XmlDsigEnvelopedSignatureTransform env = new XmlDsigEnvelopedSignatureTransform();
@@ -311,12 +308,8 @@ namespace NFe.Certificado
             string type)
         {
             string _pin = Empresas.Configuracoes[codEmp].CertificadoPIN;
-            string _provider = Empresas.Configuracoes[codEmp].ProviderCertificado;
-            string _type = Empresas.Configuracoes[codEmp].ProviderTypeCertificado;
 
             Empresas.Configuracoes[codEmp].CertificadoPIN = pin;
-            Empresas.Configuracoes[codEmp].ProviderTypeCertificado = type;
-            Empresas.Configuracoes[codEmp].ProviderCertificado = provider;
             AssinaturaValida = true;
             try
             {
@@ -325,8 +318,6 @@ namespace NFe.Certificado
             finally
             {
                 Empresas.Configuracoes[codEmp].CertificadoPIN = _pin;
-                Empresas.Configuracoes[codEmp].ProviderTypeCertificado = _type;
-                Empresas.Configuracoes[codEmp].ProviderCertificado = _provider;
             }
             return AssinaturaValida;
         }

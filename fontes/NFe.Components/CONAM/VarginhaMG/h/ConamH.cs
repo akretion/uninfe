@@ -79,6 +79,9 @@ namespace NFe.Components.Conam.VarginhaMG.h
                     case 3170701:
                         _service.Url = Url("mg.varginha");
                         break;
+                    case 3506102:
+                        _service.Url = Url("sp.bebedouro");
+                        break;
                 }
                 return _service;
             }

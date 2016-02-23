@@ -20,6 +20,20 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.UI.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Validate.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfe.exe
+
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Certificado.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Components.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Components.Info.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Components.Wsdl.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.ConvertTxt.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Service.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Settings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Threadings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.UI.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Validate.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\uninfe.exe
+
   
    Goto Fim
 
@@ -29,6 +43,7 @@
 
 :setup
    call assina_udf.bat \projetos\instaladores\iuninfe5.exe
+   call assina_udf.bat \projetos\instaladores\iuninfe5_fw35.exe
    
    Goto Fim
 
