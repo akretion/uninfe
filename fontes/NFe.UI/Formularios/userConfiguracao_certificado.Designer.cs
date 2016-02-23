@@ -41,9 +41,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ckbUsaCertificado = new MetroFramework.Controls.MetroCheckBox();
-            this.lblProvider = new MetroFramework.Controls.MetroLabel();
-            this.cboProviders = new MetroFramework.Controls.MetroComboBox();
-            this.btnBuscarProvider = new MetroFramework.Controls.MetroButton();
             this.btnValidarProvider = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +49,7 @@
             // 
             this.txtPinCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPinCertificado.Enabled = false;
             this.txtPinCertificado.Lines = new string[] {
         "Styled Textbox"};
             this.txtPinCertificado.Location = new System.Drawing.Point(3, 292);
@@ -65,6 +63,7 @@
             this.txtPinCertificado.Text = "Styled Textbox";
             this.txtPinCertificado.UseSelectable = true;
             this.txtPinCertificado.UseStyleColors = true;
+            this.txtPinCertificado.Visible = false;
             this.txtPinCertificado.TextChanged += new System.EventHandler(this.txtArquivoCertificado_TextChanged);
             // 
             // lblPinCertificado
@@ -74,7 +73,7 @@
             this.lblPinCertificado.Location = new System.Drawing.Point(3, 273);
             this.lblPinCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblPinCertificado.Name = "lblPinCertificado";
-            this.lblPinCertificado.Size = new System.Drawing.Size(150, 15);
+            this.lblPinCertificado.Size = new System.Drawing.Size(151, 15);
             this.lblPinCertificado.TabIndex = 8;
             this.lblPinCertificado.Text = "PIN Certificado A3 (opcional)";
             // 
@@ -104,7 +103,7 @@
             this.lblSenhaCertificado.Location = new System.Drawing.Point(3, 228);
             this.lblSenhaCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblSenhaCertificado.Name = "lblSenhaCertificado";
-            this.lblSenhaCertificado.Size = new System.Drawing.Size(110, 15);
+            this.lblSenhaCertificado.Size = new System.Drawing.Size(111, 15);
             this.lblSenhaCertificado.TabIndex = 6;
             this.lblSenhaCertificado.Text = "Senha do Certificado";
             // 
@@ -135,7 +134,7 @@
             this.lblArquivoCertificado.Location = new System.Drawing.Point(3, 184);
             this.lblArquivoCertificado.Margin = new System.Windows.Forms.Padding(3);
             this.lblArquivoCertificado.Name = "lblArquivoCertificado";
-            this.lblArquivoCertificado.Size = new System.Drawing.Size(241, 15);
+            this.lblArquivoCertificado.Size = new System.Drawing.Size(242, 15);
             this.lblArquivoCertificado.TabIndex = 4;
             this.lblArquivoCertificado.Text = "Local de armazenamento do Certificado Digital";
             // 
@@ -167,7 +166,7 @@
             this.lblCerificadoInstalado.Location = new System.Drawing.Point(3, 24);
             this.lblCerificadoInstalado.Margin = new System.Windows.Forms.Padding(3);
             this.lblCerificadoInstalado.Name = "lblCerificadoInstalado";
-            this.lblCerificadoInstalado.Size = new System.Drawing.Size(238, 15);
+            this.lblCerificadoInstalado.Size = new System.Drawing.Size(239, 15);
             this.lblCerificadoInstalado.TabIndex = 2;
             this.lblCerificadoInstalado.Text = "Informações do certificado digital selecionado:";
             // 
@@ -214,60 +213,24 @@
             this.ckbUsaCertificado.UseSelectable = true;
             this.ckbUsaCertificado.CheckedChanged += new System.EventHandler(this.ckbTemCertificadoInstalado_CheckedChanged);
             // 
-            // lblProvider
-            // 
-            this.lblProvider.AutoSize = true;
-            this.lblProvider.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblProvider.Location = new System.Drawing.Point(3, 316);
-            this.lblProvider.Margin = new System.Windows.Forms.Padding(3);
-            this.lblProvider.Name = "lblProvider";
-            this.lblProvider.Size = new System.Drawing.Size(321, 15);
-            this.lblProvider.TabIndex = 59;
-            this.lblProvider.Text = "Provedor Certificado A3 (obrigatório se houver PIN informado)";
-            // 
-            // cboProviders
-            // 
-            this.cboProviders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboProviders.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cboProviders.FormattingEnabled = true;
-            this.cboProviders.ItemHeight = 19;
-            this.cboProviders.Location = new System.Drawing.Point(3, 333);
-            this.cboProviders.Name = "cboProviders";
-            this.cboProviders.Size = new System.Drawing.Size(605, 25);
-            this.cboProviders.TabIndex = 60;
-            this.cboProviders.UseSelectable = true;
-            this.cboProviders.TextChanged += new System.EventHandler(this.cboProviders_TextChanged);
-            // 
-            // btnBuscarProvider
-            // 
-            this.btnBuscarProvider.BackgroundImage = global::NFe.UI.Properties.Resources.lupa_25x25;
-            this.btnBuscarProvider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnBuscarProvider.Location = new System.Drawing.Point(647, 289);
-            this.btnBuscarProvider.Name = "btnBuscarProvider";
-            this.btnBuscarProvider.Size = new System.Drawing.Size(25, 25);
-            this.btnBuscarProvider.TabIndex = 61;
-            this.btnBuscarProvider.UseSelectable = true;
-            this.btnBuscarProvider.Click += new System.EventHandler(this.btnBuscarProvider_Click_1);
-            // 
             // btnValidarProvider
             // 
             this.btnValidarProvider.BackgroundImage = global::NFe.UI.Properties.Resources.e10b_Accept_48;
             this.btnValidarProvider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnValidarProvider.Location = new System.Drawing.Point(678, 289);
+            this.btnValidarProvider.Enabled = false;
+            this.btnValidarProvider.Location = new System.Drawing.Point(644, 233);
             this.btnValidarProvider.Name = "btnValidarProvider";
             this.btnValidarProvider.Size = new System.Drawing.Size(25, 25);
             this.btnValidarProvider.TabIndex = 62;
             this.btnValidarProvider.UseSelectable = true;
+            this.btnValidarProvider.Visible = false;
             this.btnValidarProvider.Click += new System.EventHandler(this.btnValidarProvider_Click);
             // 
             // userConfiguracao_certificado
             // 
             this.AutoScroll = true;
             this.Controls.Add(this.btnValidarProvider);
-            this.Controls.Add(this.btnBuscarProvider);
             this.Controls.Add(this.ckbUsaCertificado);
-            this.Controls.Add(this.lblProvider);
             this.Controls.Add(this.txtPinCertificado);
             this.Controls.Add(this.lblPinCertificado);
             this.Controls.Add(this.txtSenhaCertificado);
@@ -278,7 +241,6 @@
             this.Controls.Add(this.textBox_dadoscertificado);
             this.Controls.Add(this.lblCerificadoInstalado);
             this.Controls.Add(this.ckbUsarCertificadoInstalado);
-            this.Controls.Add(this.cboProviders);
             this.Name = "userConfiguracao_certificado";
             this.Size = new System.Drawing.Size(715, 359);
             ((System.ComponentModel.ISupportInitialize)(this.button_selecionar_certificado)).EndInit();
@@ -302,9 +264,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private MetroFramework.Controls.MetroCheckBox ckbUsaCertificado;
-        private MetroFramework.Controls.MetroLabel lblProvider;
-        private MetroFramework.Controls.MetroComboBox cboProviders;
-        private MetroFramework.Controls.MetroButton btnBuscarProvider;
         private MetroFramework.Controls.MetroButton btnValidarProvider;
     }
 }

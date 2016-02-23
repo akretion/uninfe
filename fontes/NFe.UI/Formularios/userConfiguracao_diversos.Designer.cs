@@ -198,12 +198,13 @@
             this.comboBox_tpEmis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_tpEmis.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.comboBox_tpEmis.FontWeight = MetroFramework.MetroComboBoxWeight.Light;
             this.comboBox_tpEmis.FormattingEnabled = true;
             this.comboBox_tpEmis.ItemHeight = 19;
-            this.comboBox_tpEmis.Location = new System.Drawing.Point(503, 64);
+            this.comboBox_tpEmis.Location = new System.Drawing.Point(448, 64);
             this.comboBox_tpEmis.MaxDropDownItems = 15;
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
-            this.comboBox_tpEmis.Size = new System.Drawing.Size(181, 25);
+            this.comboBox_tpEmis.Size = new System.Drawing.Size(250, 25);
             this.comboBox_tpEmis.TabIndex = 11;
             this.comboBox_tpEmis.UseSelectable = true;
             this.comboBox_tpEmis.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -212,7 +213,7 @@
             // 
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel11.Location = new System.Drawing.Point(503, 46);
+            this.metroLabel11.Location = new System.Drawing.Point(448, 46);
             this.metroLabel11.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(89, 15);
@@ -224,10 +225,10 @@
             this.comboBox_Ambiente.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBox_Ambiente.FormattingEnabled = true;
             this.comboBox_Ambiente.ItemHeight = 19;
-            this.comboBox_Ambiente.Location = new System.Drawing.Point(363, 64);
+            this.comboBox_Ambiente.Location = new System.Drawing.Point(337, 64);
             this.comboBox_Ambiente.MaxDropDownItems = 15;
             this.comboBox_Ambiente.Name = "comboBox_Ambiente";
-            this.comboBox_Ambiente.Size = new System.Drawing.Size(134, 25);
+            this.comboBox_Ambiente.Size = new System.Drawing.Size(105, 25);
             this.comboBox_Ambiente.TabIndex = 9;
             this.comboBox_Ambiente.UseSelectable = true;
             this.comboBox_Ambiente.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -236,7 +237,7 @@
             // 
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel10.Location = new System.Drawing.Point(363, 46);
+            this.metroLabel10.Location = new System.Drawing.Point(337, 46);
             this.metroLabel10.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(56, 15);
@@ -252,7 +253,7 @@
             this.comboBox_UF.Location = new System.Drawing.Point(183, 64);
             this.comboBox_UF.MaxDropDownItems = 15;
             this.comboBox_UF.Name = "comboBox_UF";
-            this.comboBox_UF.Size = new System.Drawing.Size(174, 25);
+            this.comboBox_UF.Size = new System.Drawing.Size(148, 25);
             this.comboBox_UF.TabIndex = 7;
             this.comboBox_UF.UseSelectable = true;
             this.comboBox_UF.DropDown += new System.EventHandler(this.comboBox_UF_DropDown);
@@ -266,9 +267,9 @@
             this.labelUF.Location = new System.Drawing.Point(183, 46);
             this.labelUF.Margin = new System.Windows.Forms.Padding(3);
             this.labelUF.Name = "labelUF";
-            this.labelUF.Size = new System.Drawing.Size(167, 15);
+            this.labelUF.Size = new System.Drawing.Size(127, 15);
             this.labelUF.TabIndex = 6;
-            this.labelUF.Text = "Unidade Federativa (UF-Estado)";
+            this.labelUF.Text = "Unidade Federativa (UF)";
             // 
             // cbServico
             // 
@@ -353,7 +354,7 @@
             this.edtNome.PasswordChar = '\0';
             this.edtNome.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.edtNome.SelectedText = "";
-            this.edtNome.Size = new System.Drawing.Size(501, 22);
+            this.edtNome.Size = new System.Drawing.Size(515, 22);
             this.edtNome.TabIndex = 3;
             this.edtNome.Text = "Styled Textbox";
             this.edtNome.UseSelectable = true;

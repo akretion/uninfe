@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://nfse00.el.com.br:19080/nfse_es_colatina/RpsServiceService?wsdl" filename="RpsServiceService.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://nfse00.el.com.br:19080/nfse_es_colatina/RpsService?xsd=1" filename="RpsService.xsd" />
-  </Results>
-</DiscoveryClientResultsFile>

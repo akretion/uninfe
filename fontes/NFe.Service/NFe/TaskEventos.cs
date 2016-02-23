@@ -758,12 +758,10 @@ namespace NFe.Service
         #region LerRetornoEvento
         private void LerRetornoEvento(int emp)
         {
-            // <<<UTF8 -> tem acentuacao no retorno
-            TextReader txt = new StreamReader(NomeArquivoXML, Encoding.Default);
             XmlDocument docEventoOriginal = new XmlDocument();
-            docEventoOriginal.Load(Functions.StringXmlToStreamUTF8(txt.ReadToEnd()));
-            txt.Close();
+            docEventoOriginal.Load(NomeArquivoXML);
 
+            // <<<UTF8 -> tem acentuacao no retorno
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
             XmlDocument doc = new XmlDocument();
             doc.Load(msXml);
