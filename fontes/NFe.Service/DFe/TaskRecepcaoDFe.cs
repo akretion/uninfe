@@ -64,6 +64,7 @@ namespace NFe.Service
                                                     emp,
                                                     991,
                                                     _distDFeInt.tpAmb);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(991, _distDFeInt.tpAmb, 1, PadroesNFSe.NaoIdentificado);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
@@ -74,7 +75,9 @@ namespace NFe.Service
                                         null,
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).RetornoXML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).RetornoXML,
+                                        true,
+                                        securityProtocolType);
 
                     LeRetornoDFe(emp, doc);
                 }

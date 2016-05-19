@@ -326,17 +326,17 @@ namespace NFe.Components
 
             if (retorno != "")
             {
-                if (retorno.EndsWith("-ped"))
-                    return retorno.Substring(0, retorno.IndexOf("-ped"));
+                if (retorno.ToLower().EndsWith("-ped"))
+                    return retorno.Substring(0, retorno.ToLower().IndexOf("-ped"));
 
-                if (retorno.EndsWith("-ret"))
-                    return retorno.Substring(0, retorno.IndexOf("-ret"));
+                if (retorno.ToLower().EndsWith("-ret"))
+                    return retorno.Substring(0, retorno.ToLower().IndexOf("-ret"));
 
-                if (retorno.EndsWith("-con"))
-                    return retorno.Substring(0, retorno.IndexOf("-con"));
+                if (retorno.ToLower().EndsWith("-con"))
+                    return retorno.Substring(0, retorno.ToLower().IndexOf("-con"));
 
-                if (retorno.EndsWith("-env"))
-                    return retorno.Substring(0, retorno.IndexOf("-env"));
+                if (retorno.ToLower().EndsWith("-env"))
+                    return retorno.Substring(0, retorno.ToLower().IndexOf("-env"));
 
                 return retorno.TrimEnd(new char[] { '-' });
             }

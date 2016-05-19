@@ -9,7 +9,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NFe.Components.Abstract;
-using NFe.Components.br.gov.sp.piracicaba.sistemas.www.h;
+using NFe.Components.br.com.simplissweb.wshomologacao.h;
 using System.Net;
 
 namespace NFe.Components.SimplISS.PiracicabaSP.h
@@ -47,8 +47,8 @@ namespace NFe.Components.SimplISS.PiracicabaSP.h
             GerarNovaNfseEnvio oGerarNfseEnvio = ReadXML<GerarNovaNfseEnvio>(file);
 
             oGerarNfseEnvio.Prestador = new tcIdentificacaoPrestador();
-            oGerarNfseEnvio.Prestador.Cnpj = GetValueXML(file, "LoteRps", "Cnpj");
-            oGerarNfseEnvio.Prestador.InscricaoMunicipal = GetValueXML(file, "LoteRps", "InscricaoMunicipal");
+            oGerarNfseEnvio.Prestador.Cnpj = GetValueXML(file, "Prestador", "Cnpj");
+            oGerarNfseEnvio.Prestador.InscricaoMunicipal = GetValueXML(file, "Prestador", "InscricaoMunicipal");
 
             GerarNovaNfseResposta result = service.GerarNfse(oGerarNfseEnvio, dadosConexao);
 
@@ -126,10 +126,10 @@ namespace NFe.Components.SimplISS.PiracicabaSP.h
             if (typeof(T).FullName == typeof(GerarNovaNfseEnvio).FullName)
             {
                 ((GerarNovaNfseEnvio)(object)result).InformacaoNfse = new tcInfNovaNfse();
-                nodes = doc.GetElementsByTagName("InfRps");
-                if (nodes[0] == null) throw new Exception("Tag <InfRps> não encontrada");
+                nodes = doc.GetElementsByTagName("InformacaoNfse");
+                if (nodes[0] == null) throw new Exception("Tag <InformacaoNfse> não encontrada");
                 rps = ((GerarNovaNfseEnvio)(object)result).InformacaoNfse;
-                tagName = "InfDeclaracaoPrestacaoServico";
+                tagName = "InformacaoNfse";
 
                 XmlNode node = nodes[0];
                 ReadXML(node, rps, tagName);
@@ -238,7 +238,7 @@ namespace NFe.Components.SimplISS.PiracicabaSP.h
                     {
                         Object instance =
                         System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(
-                            "NFe.Components.br.gov.sp.piracicaba.sistemas.www.h." + this.GetNameObject(n.Name),
+                            "NFe.Components.br.com.simplissweb.wshomologacao.h." + this.GetNameObject(n.Name),
                             false,
                             BindingFlags.Default,
                             null,
@@ -349,6 +349,10 @@ namespace NFe.Components.SimplISS.PiracicabaSP.h
 
                 case "Contato":
                     nameObject = "tcContato";
+                    break;
+
+                case "PeriodoEmissao":
+                    nameObject = "ConsultarNfseEnvioPeriodoEmissao";
                     break;
 
                 default:

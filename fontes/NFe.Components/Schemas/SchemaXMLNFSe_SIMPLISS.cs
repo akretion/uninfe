@@ -85,14 +85,14 @@ namespace NFSe.Components
             #endregion
 
             #region XML de lote RPS
-            SchemaXML.InfSchemas.Add("NFSE-SIMPLISS-EnviarLoteRpsEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-SIMPLISS-GerarNovaNfseEnvio", new InfSchema()
             {
-                Tag = "EnviarLoteRpsEnvio",
+                Tag = "GerarNovaNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
                 Descricao = "XML de Lote RPS",
-                TagLoteAtributoId = "InfRps",
-                TagLoteAssinatura = "Rps",
+                TagLoteAtributoId = "InformacaoNfse",
+                TagLoteAssinatura = "GerarNovaNfseEnvio",
                 TargetNameSpace = "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd"
             });
             #endregion

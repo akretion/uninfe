@@ -321,12 +321,16 @@ namespace NFe.UI.Formularios
                            ufCod == 3148004 /*Patos de Minas*/||
                            ufCod == 3506508 /*Birigui*/||
                            ufCod == 3201506 /*Colatina*/||
-                           ufCod == 4118204 /*Paranagua*/;
+                           ufCod == 4118204 /*Paranagua*/||
+                           ufCod == 3130309 /*Iguatama*/;
 
-            lbl_UsuarioWS.Visible =
-                lbl_SenhaWS.Visible =
-                txtUsuarioWS.Visible =
-                txtSenhaWS.Visible = visible;
+            bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
+
+            lbl_UsuarioWS.Visible =                
+                txtUsuarioWS.Visible = visible;
+
+            lbl_SenhaWS.Visible =
+                txtSenhaWS.Visible = visiblepass;
         }
 
         private void comboBox_UF_SelectedIndexChanged(object sender, EventArgs e)

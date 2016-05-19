@@ -43,6 +43,7 @@ namespace NFe.Service
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis));
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), PadroesNFSe.NaoIdentificado);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)));
@@ -60,10 +61,12 @@ namespace NFe.Service
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
                                     oRecepcao,
-                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, Convert.ToInt32(lerXml.oDadosNfe.cUF)), 
+                                    wsProxy.NomeMetodoWS[0],
                                     oCabecMsg, this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,//"-env-lot", 
-                                    Propriedade.ExtRetorno.Rec);//"-rec");
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
+                                    Propriedade.ExtRetorno.Rec,
+                                    true,
+                                    securityProtocolType);
                 #endregion
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo

@@ -1066,6 +1066,9 @@ namespace NFe.Service
                         case Servicos.NFSeConsultarNFSePDF:
                             retorna = "obterNotasEmPDF";
                             break;
+                        case Servicos.NFSeObterNotaFiscal:
+                            retorna = "obterNotaFiscal";
+                            break;
                     }
                     break;
                 #endregion
@@ -1614,6 +1617,73 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                #region NOTA INTELIGENTE
+                case PadroesNFSe.NOTAINTELIGENTE:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region FREIRE INFORMATICA
+                case PadroesNFSe.FREIRE_INFORMATICA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfse";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region CAMACARI_BA
+                case PadroesNFSe.CAMACARI_BA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                    }
+                    break;
+                    #endregion
             }
 
             return retorna;
@@ -2171,6 +2241,7 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.MEMORY:
                 case PadroesNFSe.CONSIST:
                 case PadroesNFSe.MGM:
                 case PadroesNFSe.ELOTECH:
@@ -2184,6 +2255,8 @@ namespace NFe.Service
                 case PadroesNFSe.CONAM:
                 case PadroesNFSe.SIMPLISS:
                 case PadroesNFSe.RLZ_INFORMATICA:
+                case PadroesNFSe.PAULISTANA:
+                case PadroesNFSe.NOTAINTELIGENTE:
                     retorno = false;
                     break;
 
@@ -2207,6 +2280,27 @@ namespace NFe.Service
             return retorno;
         }
         #endregion
+
+        /// <summary>
+        /// Se invoca o serviço
+        /// </summary>
+        /// <param name="padrao"></param>
+        /// <param name="servico"></param>
+        /// <returns></returns>
+        protected bool IsInvocar(PadroesNFSe padrao, Servicos servico = Servicos.Nulo)
+        {
+            bool invocar = IsUtilizaCompilacaoWs(padrao, servico);
+
+            switch (padrao)
+            {
+                case PadroesNFSe.NOTAINTELIGENTE:
+                case PadroesNFSe.PAULISTANA:
+                    invocar = true;
+                    break;
+            }
+
+            return invocar;
+        }
 
         #region XmlRetorno()
         /// <summary>

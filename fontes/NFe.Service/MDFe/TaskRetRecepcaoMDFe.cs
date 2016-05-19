@@ -41,6 +41,7 @@ namespace NFe.Service
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, PadroesNFSe.NaoIdentificado);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF));
@@ -54,7 +55,12 @@ namespace NFe.Service
                 oInvocarObj.Invocar(wsProxy,
                                     oRepRecepcao,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedRec.cUF), 
-                                    oCabecMsg, this);
+                                    oCabecMsg, 
+                                    this,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
+                                    false,
+                                    securityProtocolType);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo

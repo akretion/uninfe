@@ -251,6 +251,7 @@ namespace NFe.Components
             PedLoteRps,
             PedNFSePDF,
             PedNFSePNG,
+            PedNFSeXML,
             PedSitLoteRps,
             PedSitNFSe,
             PedSitNFSeRps,
@@ -410,6 +411,12 @@ namespace NFe.Components
                     "-ped-nfsepdf.xml", "",
                     "-nfsepdf.xml", "",
                     "Pedido do link da NFSe"));
+
+                ListaExtensoes.Add(TipoEnvio.PedNFSeXML, new ExtensaoClass(
+                    "-ped-nfsexml.xml", "",
+                    "-nfsexml.xml", "",
+                    "Pedido do XML da NFSe"
+                    ));
 
                 ListaExtensoes.Add(TipoEnvio.PedNFSePNG, new ExtensaoClass(
                     "-ped-nfsepng.xml", "",
@@ -1029,12 +1036,13 @@ namespace NFe.Components
             /// nfsepng.err
             /// </summary>
             public const string NFSePNG_ERR = "-nfsepng.err";
-            
+            public const string NFSePDF_ERR = "-nfsepdf.err";
+            public const string NFSeXML_ERR = "-nfsexml.err";
+
             /// <summary>
             /// -inunfse.err
             /// </summary>
             public const string InuNfse_ERR = "-inunfse.err";
-            public const string NFSePDF_ERR = "-nfsepdf.err";
             #endregion
 
             #region Extensoes de DFe

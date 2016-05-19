@@ -197,9 +197,16 @@ namespace NFe.Certificado
 #if DEBUG
                 Debug.WriteLine("O erro CryptographicException foi lançado");
 #endif
-                x509Cert = Empresas.ResetCertificado(empresa);
-                if (!TesteCertificado)
-                    throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                if (clsX509Certificate2Extension.IsA3(x509Cert))
+                {
+                    x509Cert = Empresas.ResetCertificado(empresa);
+                    if (!TesteCertificado)
+                        throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                }
+                else
+                {
+                    throw;
+                }
                 #endregion
             }
             catch
@@ -216,7 +223,7 @@ namespace NFe.Certificado
         public RSACryptoServiceProvider LerDispositivo(string PIN, int providerType, string provider)
         {
             CspParameters csp = new CspParameters(providerType, provider);
-            
+
             SecureString ss = new SecureString();
             char[] PINs = PIN.ToCharArray();
             foreach (char a in PINs)
@@ -227,16 +234,16 @@ namespace NFe.Certificado
             csp.KeyNumber = 1;
             csp.Flags = CspProviderFlags.NoPrompt;
             csp.KeyContainerName = "";
-            
+
             // Initialize an RSACryptoServiceProvider object using
             // the CspParameters object.
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
             //rsa.PersistKeyInCsp = false; //importante, senão ele lota o certificado de chaves!
             rsa.PersistKeyInCsp = false;
-            rsa.ToXmlString(false);            
+            rsa.ToXmlString(false);
             return rsa;
         }
-    
+
         /// <summary>
         /// Assina o XML sobrepondo-o
         /// </summary>
@@ -274,19 +281,19 @@ namespace NFe.Certificado
                 {
                     case Servicos.ConsultaCadastroContribuinte:
                         tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML;
-                        File.Copy(arqXML, tempFile);
+                        File.Copy(arqXML, tempFile, true);
                         Assinar(tempFile, "ConsCad", "infCons", x509Cert, emp);
                         break;
 
                     case Servicos.NFeConsultaStatusServico:
                         tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML;
-                        File.Copy(arqXML, tempFile);
+                        File.Copy(arqXML, tempFile, true);
                         Assinar(tempFile, "consStatServ", "xServ", x509Cert, emp);
                         break;
 
                     case Servicos.NFePedidoConsultaSituacao:
                         tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML;
-                        File.Copy(arqXML, tempFile);
+                        File.Copy(arqXML, tempFile, true);
                         Assinar(tempFile, "consSitNFe", "xServ", x509Cert, emp);
                         break;
 

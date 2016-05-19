@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -152,62 +151,62 @@ namespace NFe.Components
         #region Construtores
         public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico, int tpEmis)
         {
-            this.ArquivoWSDL = arquivoWSDL;
-            this.PadraoNFSe = padraoNFSe;
+            ArquivoWSDL = arquivoWSDL;
+            PadraoNFSe = padraoNFSe;
             this.servico = servico;
             this.taHomologacao = taHomologacao;
 
             //Definir o certificado digital que será utilizado na conexão com os serviços
-            this.oCertificado = Certificado;
+            oCertificado = Certificado;
 
-            //Confirmar a solicitação SSL automaticamente
-            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
-
+            #region Obter a descrição do serviço (WSDL)
             //Problema identificado com a Prefeitura de Porto Alegre - RS  Renan - 09/02/2015
             //Esta propriedade "Expect100Continue" por default é definida como "true" ou seja, o cliente esperará obter uma resposta 100-Continue do servidor para indicar que o cliente deve 
             //enviar os dados a ser lançadas. Esse mecanismo permite que os clientes evitem enviar grandes quantidades de dados através da rede quando o servidor, com base em cabeçalhos de solicitação, 
             //pretende descartar a solicitação.
             //Já esta propriedade marcada como "false", quando a solicitação inicial é enviada para o servidor, inclui os dados. Se, após ler os cabeçalhos de solicitação,
             //o servidor requer autenticação e deve enviar uma resposta 401, o cliente deve enviar novamente os dados com os cabeçalhos apropriadas de autenticação.
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
             ServicePointManager.Expect100Continue = false;
+            ServicePointManager.SecurityProtocol = DefinirProtocoloSeguranca(cUF, taHomologacao, tpEmis, padraoNFSe);
+            serviceDescription = ServiceDescription.Read(arquivoWSDL);
+            #endregion
 
-            //Obter a descrição do serviço (WSDL)    
-            this.DescricaoServico(cUF, taHomologacao, arquivoWSDL, tpEmis, padraoNFSe);
-
-            this.NomeClasseWS = null;
-            this.NomeMetodoWS = null;
-            if (this.serviceDescription.Services != null)
+            #region Descobrir o nome da classe e dos métodos
+            NomeClasseWS = null;
+            NomeMetodoWS = null;
+            if (serviceDescription.Services != null)
             {
-                this.NomeClasseWS = ((System.Web.Services.Description.Service)this.serviceDescription.Services[0]).Name.Replace(" ", "");
+                NomeClasseWS = ((Service)serviceDescription.Services[0]).Name.Replace(" ", "");
             }
 
-            if (this.serviceDescription.Bindings != null)
+            if (serviceDescription.Bindings != null)
             {
-                foreach (var xx in this.serviceDescription.Bindings)
+                foreach (var xx in serviceDescription.Bindings)
                 {
-                    if (((System.Web.Services.Description.Binding)xx).Operations != null)
+                    if (((Binding)xx).Operations != null)
                     {
-                        if (((System.Web.Services.Description.Binding)xx).Operations.Count > 0)
+                        if (((Binding)xx).Operations.Count > 0)
                         {
-                            this.NomeMetodoWS = new string[((System.Web.Services.Description.Binding)xx).Operations.Count];
-                            for (int n = 0; n < ((System.Web.Services.Description.Binding)xx).Operations.Count; ++n)
+                            NomeMetodoWS = new string[((Binding)xx).Operations.Count];
+                            for (int n = 0; n < ((Binding)xx).Operations.Count; ++n)
                             {
-                                this.NomeMetodoWS[n] = ((System.Web.Services.Description.Binding)xx).Operations[n].Name;
+                                NomeMetodoWS[n] = ((Binding)xx).Operations[n].Name;
                             }
                         }
                     }
                 }
             }
+            #endregion
 
             //Gerar e compilar a classe
-            this.GerarClasse();
+            GerarClasse();
         }
 
         public WebServiceProxy(X509Certificate2 Certificado)
         {
-            this.oCertificado = Certificado;
+            oCertificado = Certificado;
         }
-
         #endregion
 
         #region Métodos públicos
@@ -240,7 +239,7 @@ namespace NFe.Components
             try
             {
                 //Relacionar o certificado digital que será utilizado no serviço que será consumido do webservice
-                this.RelacCertificado(Instance);
+                RelacCertificado(Instance);
 
                 Type tipoInstance = Instance.GetType();
 
@@ -301,7 +300,7 @@ namespace NFe.Components
         public string InvokeStr(object Instance, string methodName, object[] parameters)
         {
             //Invocar método do serviço
-            return (string)this.Invoke(Instance, methodName, parameters);
+            return (string)Invoke(Instance, methodName, parameters);
         }
         #endregion
 
@@ -376,21 +375,25 @@ namespace NFe.Components
 
         #endregion
 
-        #region Métodos privados
-
-        #region DescricaoServico()
+        #region DefinirProtocoloSeguranca()
         /// <summary>
-        /// Obter a descrição completa do serviço, ou seja, o WSDL do webservice de um arquivo local
+        /// Definir o protocolo de segurança a ser utilizado na comunicação com os WebServices
         /// </summary>
-        /// <param name="arquivoWSDL">Local e nome do arquivo WDDL</param>
-        /// <param name="Certificado">Certificado digital</param>
-        private void DescricaoServico(int cUF, bool taHomologacao, string arquivoWSDL, int tpEmis, PadroesNFSe padraoNFSe)
+        /// <param name="cUF"></param>
+        /// <param name="taHomologacao"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="padraoNFSe"></param>
+        /// <returns>Protocolo de segurança a ser utilizado</returns>
+        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe)
         {
+            SecurityProtocolType securityProtocolType = SecurityProtocolType.Ssl3;
+
             switch (tpEmis)
             {
+                case 4: //EPEC - Ambiente Nacional
                 case 6: //SVAN em homologação só tá aceitando protocolo Tls
                     if (taHomologacao)
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                        securityProtocolType = SecurityProtocolType.Tls;
                     else
                         goto default;
                     break;
@@ -400,25 +403,31 @@ namespace NFe.Components
                     {
                         case 52: //Estado de Goiás em ambiente de homologação só tá aceitando Tls
                             if (taHomologacao)
-                                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                                securityProtocolType = SecurityProtocolType.Tls;
                             else
                                 goto default;
                             break;
 
+                        case 50: //Mato Grosso do Sul
+                        case 51: //Mato grosso
+                        case 15: //Pará
+                        case 21: //Maranhão
+                        case 22: //Piauí
                         case 3550308: //Municipio de São Paulo-SP só tá aceitando Tls
-                            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                            securityProtocolType = SecurityProtocolType.Tls;
                             break;
 
                         default:
                             switch (padraoNFSe)
                             {
-                                case PadroesNFSe.GINFES: 
+                                case PadroesNFSe.GINFES:
+                                case PadroesNFSe.BHISS:
                                 case PadroesNFSe.EQUIPLANO:
-                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                                    securityProtocolType = SecurityProtocolType.Tls;
                                     break;
 
                                 default:
-                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;                                    
+                                    securityProtocolType = SecurityProtocolType.Ssl3;
                                     break;
                             }
 
@@ -428,10 +437,24 @@ namespace NFe.Components
                     break;
             }
 
-            //Definir a descrição completa do servido (WSDL)
-            this.serviceDescription = ServiceDescription.Read(arquivoWSDL);
+            return securityProtocolType;
+        }
+
+        /// <summary>
+        /// Definir o protocolo de segurança a ser utilizado na comunicação com os WebServices
+        /// </summary>
+        /// <param name="cUF"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="padraoNFSe"></param>
+        /// <returns>Protocolo de segurança a ser utilizado</returns>
+        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe)
+        {
+            return DefinirProtocoloSeguranca(cUF, (tpAmb == (int)TipoAmbiente.taHomologacao), tpEmis, padraoNFSe);
         }
         #endregion
+
+        #region Métodos privados
 
         #region GerarClasse()
         /// <summary>
@@ -495,6 +518,7 @@ namespace NFe.Components
             #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
             switch (PadraoNFSe)
             {
+                case PadroesNFSe.NOTAINTELIGENTE:
                 case PadroesNFSe.SMARAPD:
                 case PadroesNFSe.DUETO:
                 case PadroesNFSe.WEBISS:
@@ -877,8 +901,8 @@ namespace NFe.Components
             ConsultarNFSePDF =
             InutilizarNFSe =
             RecepcionarLoteRps =
-                ///
-                /// NF-e
+            ///
+            /// NF-e
             NFeRecepcaoEvento =
             NFeConsulta =
             NFeConsultaCadastro =
@@ -889,23 +913,23 @@ namespace NFe.Components
             NFeRecepcao =
             NFeRetRecepcao =
             NFeStatusServico =
-                //NFeRegistroDeSaida =
-                //NFeRegistroDeSaidaCancelamento =
+            //NFeRegistroDeSaida =
+            //NFeRegistroDeSaidaCancelamento =
             NFeAutorizacao =
             NFeRetAutorizacao =
-                ///
-                /// MDF-e
+            ///
+            /// MDF-e
             MDFeRecepcao =
             MDFeRetRecepcao =
             MDFeConsulta =
             MDFeStatusServico =
             MDFeRecepcaoEvento =
             MDFeNaoEncerrado =
-                ///
-                /// DF-e
+            ///
+            /// DF-e
             DFeRecepcao =
-                ///
-                /// CT-e
+            ///
+            /// CT-e
             CTeRecepcao =
             CTeRetRecepcao =
             CTeInutilizacao =
@@ -913,8 +937,8 @@ namespace NFe.Components
             CTeStatusServico =
             CTeRecepcaoEvento =
             CTeConsultaCadastro =
-                ///
-                /// LMC
+            ///
+            /// LMC
             LMCAutorizacao = string.Empty;
         }
 
@@ -984,6 +1008,10 @@ namespace NFe.Components
         /// Inutilização da NFSe
         /// </summary>
         public string InutilizarNFSe { get; set; }
+        /// <summary>
+        /// Obter o XML da NFSe
+        /// </summary>
+        public string ObterNotaFiscal { get; set; }
         #endregion
 
         #region MDF-e

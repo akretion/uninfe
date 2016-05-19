@@ -17,6 +17,7 @@ using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
+using NFe.Components.Memory;
 
 namespace NFe.Service.NFSe
 {
@@ -54,6 +55,8 @@ namespace NFe.Service.NFSe
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe); ;
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
+
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
 
                 string cabecMsg = "";
                 switch (padraoNFSe)
@@ -209,9 +212,45 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.NATALENSE:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.PAULISTANA:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (ler.oDadosPedSitNfseRps.tpAmb == 1)
+                        {
+                            pedLoteRps = new NFe.Components.PSaoPauloSP.LoteNFe();
+                        }
+                        else
+                        {
+                            pedLoteRps = new NFe.Components.HSaoPauloSP.LoteNFe();
+                        }
+                        break;
+
+                    case PadroesNFSe.FREIRE_INFORMATICA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.MEMORY:
+                        #region Memory
+                        Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        ler.oDadosPedSitNfseRps.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
+                        memory.CancelarNfse(NomeArquivoXML);
+                        break;
+                    #endregion
+
+                    case PadroesNFSe.CAMACARI_BA:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
+                        break;
                 }
 
-                if (base.IsUtilizaCompilacaoWs(padraoNFSe, Servico))
+                if (base.IsInvocar(padraoNFSe, Servico))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -222,7 +261,7 @@ namespace NFe.Service.NFSe
                                             cabecMsg, this,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,   //"-ped-loterps", 
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML, //"-loterps", 
-                                            padraoNFSe, Servico);
+                                            padraoNFSe, Servico, securityProtocolType);
 
                     ///
                     /// grava o arquivo no FTP

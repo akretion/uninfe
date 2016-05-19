@@ -32,7 +32,7 @@ namespace NFe.Service.NFSe
             try
             {
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
-                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) + 
+                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) +
                                          Propriedade.ExtRetorno.NFSePDF_ERR);
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + NomeArquivoXML);
 
@@ -44,6 +44,8 @@ namespace NFe.Service.NFSe
                 object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePDF.cMunicipio, oDadosPedNfsePDF.tpAmb, oDadosPedNfsePDF.tpEmis, padraoNFSe);
+
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedNfsePDF.cMunicipio));
@@ -52,12 +54,13 @@ namespace NFe.Service.NFSe
                 oInvocarObj.InvocarNFSe(wsProxy, pedNfsePNG, NomeMetodoWS(Servico, oDadosPedNfsePDF.cMunicipio), cabecMsg, this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML,   //"-ped-nfsepdf", 
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML,   //"-nfsepdf", 
-                                        padraoNFSe, Servico);
+                                        padraoNFSe, Servico, securityProtocolType);
 
-                ///
+                ConvertBase64ToPDF(emp, padraoNFSe);
+
                 /// grava o arquivo no FTP
                 string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) + 
+                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) +
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML);
                 if (File.Exists(filenameFTP))
                     new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
@@ -67,7 +70,7 @@ namespace NFe.Service.NFSe
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, 
+                    TFunctions.GravarArqErroServico(NomeArquivoXML,
                                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML,
                                                     Propriedade.ExtRetorno.NFSePDF_ERR, ex);
                 }
@@ -89,6 +92,59 @@ namespace NFe.Service.NFSe
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
                     //Wandrey 31/08/2011
                 }
+            }
+        }
+        #endregion
+
+        #region ConvertBase64ToPDF()
+        /// <summary>
+        /// Converte o retorno em Base64 para PDF e grava o PDF na pasta de retorno com o mesmo nome do retorno em XML, modificando somente a extensão para PDF.
+        /// </summary>
+        /// <param name="emp">Código da empresa</param>
+        /// <param name="padraoNFSe">Padrão da NFSe</param>
+        public void ConvertBase64ToPDF(int emp, PadroesNFSe padraoNFSe)
+        {
+            if (padraoNFSe != PadroesNFSe.GIF)
+            {
+                return;
+            }
+
+            string arqPDF = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) +
+                            Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML;
+            arqPDF = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, arqPDF.Replace(".xml", ".pdf"));
+
+            if (File.Exists(arqPDF))
+                File.Delete(arqPDF);
+
+            BinaryWriter writer = null;
+
+            try
+            {
+                string base64BinaryStr = "";
+
+                MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(msXml);                
+
+                switch (padraoNFSe)
+                {
+                    case PadroesNFSe.GIF:
+                        if (doc.GetElementsByTagName("NFS-ePDF")[0] != null)
+                            base64BinaryStr = doc.GetElementsByTagName("NFS-ePDF")[0].InnerText;
+                        else
+                            throw new Exception("Não foi possível localizar a tag <NFS-ePDF> no xml retornado pela prefeitura, sendo assim, o arquivo PDF da NFS-e não foi gerado.");
+                        break;
+                }
+
+                byte[] sPDFDecoded = Convert.FromBase64String(base64BinaryStr);
+
+                writer = new BinaryWriter(File.Open(arqPDF, FileMode.CreateNew));
+                writer.Write(sPDFDecoded);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
             }
         }
         #endregion

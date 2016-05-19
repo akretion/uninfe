@@ -38,6 +38,8 @@ namespace NFe.Service
 
                 //Criar objeto para envio do XML
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosLMC.cUF, Empresas.Configuracoes[emp].AmbienteCodigo);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosLMC.cUF, Empresas.Configuracoes[emp].AmbienteCodigo, 1, PadroesNFSe.NaoIdentificado);
+
                 object oAutorizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
                 //Assinar o XML
@@ -48,7 +50,11 @@ namespace NFe.Service
                                     oAutorizacao,
                                     wsProxy.NomeMetodoWS[0],
                                     null,
-                                    this);
+                                    this,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.LMC).EnvioXML,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.LMC).RetornoXML,
+                                    false,
+                                    securityProtocolType);
 
                 LerRetornoLMC(dadosLMC);
 

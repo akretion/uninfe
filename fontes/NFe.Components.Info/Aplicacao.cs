@@ -108,6 +108,8 @@ namespace NFe.Components.Info
                 Functions.GravaTxtXml(oXmlGravar, "NomeComputador", Environment.MachineName);
                 //danasa 22/7/2011
                 Functions.GravaTxtXml(oXmlGravar, "ExecutandoPeloServico", Propriedade.ServicoRodando.ToString());
+                Functions.GravaTxtXml(oXmlGravar, "ConexaoInternet", Functions.IsConnectedToInternet().ToString());
+
                 if (isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosUniNfe
 
                 //Dados das configurações do aplicativo

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.IO;
-using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -21,6 +16,7 @@ using NFe.Components.GovDigital;
 using NFe.Components.EloTech;
 using NFe.Components.MGM;
 using NFe.Components.Consist;
+using NFe.Components.Memory;
 
 namespace NFe.Service.NFSe
 {
@@ -62,6 +58,8 @@ namespace NFe.Service.NFSe
                     if (wsProxy != null)
                         envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
+
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe);
 
                 string cabecMsg = "";
                 switch (padraoNFSe)
@@ -107,6 +105,17 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PAULISTANA:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosEnvLoteRps.tpAmb == 1)
+                        {
+                            envLoteRps = new NFe.Components.PSaoPauloSP.LoteNFe();
+                        }
+                        else
+                        {
+                            envLoteRps = new NFe.Components.HSaoPauloSP.LoteNFe();
+                        }
+
                         EncryptAssinatura();
                         break;
 
@@ -135,7 +144,7 @@ namespace NFe.Service.NFSe
                         ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.SIGCORP_SIGISS:
                         #region SigCorp
@@ -144,7 +153,7 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio);
                         sigcorp.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.FIORILLI:
                         #region Fiorilli
@@ -163,7 +172,7 @@ namespace NFe.Service.NFSe
 
                         fiorilli.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.SIMPLISS:
                         #region Simpliss
@@ -181,7 +190,7 @@ namespace NFe.Service.NFSe
 
                         simpliss.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.CONAM:
                         #region Conam
@@ -193,7 +202,7 @@ namespace NFe.Service.NFSe
 
                         conam.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.RLZ_INFORMATICA:
                         #region RLZ
@@ -203,7 +212,7 @@ namespace NFe.Service.NFSe
 
                         rlz.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.EGOVERNE:
                         #region E-Governe
@@ -220,7 +229,7 @@ namespace NFe.Service.NFSe
 
                         egoverne.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.EL:
                         #region E&L
@@ -235,7 +244,7 @@ namespace NFe.Service.NFSe
 
                         el.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.GOVDIGITAL:
                         #region GOV-Digital
@@ -252,7 +261,7 @@ namespace NFe.Service.NFSe
 
                         govdig.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
@@ -281,7 +290,7 @@ namespace NFe.Service.NFSe
 
                         elotech.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.MGM:
                         #region MGM
@@ -292,7 +301,7 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
 
                     case PadroesNFSe.CONSIST:
@@ -308,11 +317,52 @@ namespace NFe.Service.NFSe
 
                         consist.EmiteNF(NomeArquivoXML);
                         break;
+                    #endregion
+
+                    case PadroesNFSe.NOTAINTELIGENTE:
+                        #region Nota Inteligente
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosEnvLoteRps.tpAmb == 1)
+                        {                            
+                            //envLoteRps = new NFe.Components.PClaudioMG.api_portClient();
+                        }
+                        else
+                        {
+                            envLoteRps = new Components.HSaoPauloSP.LoteNFe();
+                        }
                         #endregion
+                        break;
+
+                    case PadroesNFSe.FREIRE_INFORMATICA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.MEMORY:
+                        #region Memory
+                        Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosEnvLoteRps.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
+                        AssinaturaDigital sigMem = new AssinaturaDigital();
+                        sigMem.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        memory.EmiteNF(NomeArquivoXML);
+                        break;
+                    #endregion
+
+                    case PadroesNFSe.CAMACARI_BA:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
+                        break;
 
                 }
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsInvocar(padraoNFSe))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();
@@ -322,7 +372,7 @@ namespace NFe.Service.NFSe
                     oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,    //"-env-loterps", 
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,  //"-ret-loterps", 
-                                            padraoNFSe, Servico);
+                                            padraoNFSe, Servico, securityProtocolType);
 
                     ///
                     /// grava o arquivo no FTP

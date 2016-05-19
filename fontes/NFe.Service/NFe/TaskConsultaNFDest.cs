@@ -36,6 +36,7 @@ namespace NFe.Service
 
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, cUF, oDadosConsultaNFeDest.tpAmb);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(cUF, oDadosConsultaNFeDest.tpAmb, (int)TipoEmissao.teNormal, PadroesNFSe.NaoIdentificado);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
@@ -51,7 +52,9 @@ namespace NFe.Service
                                         oCabecMsg,
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).RetornoXML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).RetornoXML,
+                                        true,
+                                        securityProtocolType);
 
                     //Ler o retorno
                     this.LerRetornoConsultaNFeDest(emp);

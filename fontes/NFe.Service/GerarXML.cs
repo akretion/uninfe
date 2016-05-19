@@ -433,7 +433,7 @@ namespace NFe.Service
                     {
                         //Vou fazer quatro tentativas de leitura do arquivo XML, se falhar, vou tentando restaurar o backup 
                         //do arquivo, pois pode estar com a estrutura do XML danificada. Wandrey 04/10/2011
-                        for (int i = 0; i < 4; i++)
+                        for (int i = 0; i < 5; i++)
                         {
                             if (!File.Exists(NomeArqXmlLote))
                             {
@@ -486,10 +486,21 @@ namespace NFe.Service
                                             break;
 
                                         case 3:
-                                            throw new Exception("Não foi possível efetuar a leitura do arquivo " + NomeArqXmlLote + ". Verifique se o mesmo não está com sua estrutura de XML danificada."); //Se tentou 4 vezes e deu errado, vamos retornar o erro e não tem o que ser feito.                                            
+                                            if (File.Exists(Bkp1NomeArqXmlLote))
+                                                File.Delete(Bkp1NomeArqXmlLote);
 
-                                        default:
+                                            if (File.Exists(Bkp2NomeArqXmlLote))
+                                                File.Delete(Bkp2NomeArqXmlLote);
+
+                                            if (File.Exists(Bkp3NomeArqXmlLote))
+                                                File.Delete(Bkp3NomeArqXmlLote);
+
+                                            if (File.Exists(NomeArqXmlLote))
+                                                File.Delete(NomeArqXmlLote);
                                             break;
+
+                                        case 4:
+                                            throw new Exception("Não foi possível efetuar a leitura do arquivo " + NomeArqXmlLote + ". Verifique se o mesmo não está com sua estrutura de XML danificada."); //Se tentou 4 vezes e deu errado, vamos retornar o erro e não tem o que ser feito.                                            
                                     }
                                 }
                                 finally
@@ -2380,9 +2391,9 @@ namespace NFe.Service
                                 destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.idEstrangeiro.ToString(), evento.epec.dest.idEstrangeiro));
                             else
                                 if (!string.IsNullOrEmpty(evento.epec.dest.CNPJ))
-                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), evento.epec.dest.CNPJ));
-                                else
-                                    destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CPF.ToString(), evento.epec.dest.CPF));
+                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), evento.epec.dest.CNPJ));
+                            else
+                                destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CPF.ToString(), evento.epec.dest.CPF));
                             if (!string.IsNullOrEmpty(evento.epec.dest.IE) && !evento.epec.dest.IE.Equals("ISENTO"))
                                 destEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.IE.ToString(), evento.epec.dest.IE));
 
@@ -2583,8 +2594,7 @@ namespace NFe.Service
             //Gravar o arquivo de distribuição na pasta de backup
             if (!string.IsNullOrEmpty(filenameBackup))
             {
-                filenameBackup += "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Directory.GetParent(filenameToWrite).Name;
-                filenameBackup = Path.Combine(filenameBackup, Path.GetFileName(filenameToWrite));
+                filenameBackup += "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + "\\" + Path.GetFileName(filenameToWrite);
 
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));
