@@ -48,6 +48,8 @@ namespace NFe.Service
                     case ConvertTxt.tpEventos.tpEvEPEC:
                         Servico = Servicos.EventoEPEC;
                         break;
+                    case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_1:
+                    case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_2:
                     case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1:
                     case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2:
                     case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
@@ -108,6 +110,7 @@ namespace NFe.Service
                         tpEmis,
                         string.Empty,
                         dadosEnvEvento.eventos[0].mod);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, PadroesNFSe.NaoIdentificado);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -150,7 +153,7 @@ namespace NFe.Service
                     //Assinar o XML
                     oAD.Assinar(NomeArquivoXML, emp, cOrgao);
 
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0], oCabecMsg, this, xmlExtEnvio, xmlExtRetorno);
+                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0], oCabecMsg, this, xmlExtEnvio, xmlExtRetorno, true, securityProtocolType);
 
                     //Ler o retorno
                     LerRetornoEvento(emp);
@@ -217,7 +220,7 @@ namespace NFe.Service
                                 NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT))
                                 Servico = Servicos.EventoCCe;
                             else
-                                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) || 
+                                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) ||
                                     NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT))
                                     Servico = Servicos.EventoManifestacaoDest;
                                 else
@@ -229,19 +232,19 @@ namespace NFe.Service
                         switch (Servico)
                         {
                             case Servicos.EventoCCe:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML : 
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML :
                                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retEnvCCe_ERR;
                                 break;
 
                             case Servicos.EventoCancelamento:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML : 
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML :
                                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retCancelamento_ERR;
                                 break;
 
                             case Servicos.EventoManifestacaoDest:
-                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML : 
+                                ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML :
                                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT;
                                 ExtRetorno = Propriedade.ExtRetorno.retManifestacao_ERR;
                                 break;
@@ -765,6 +768,7 @@ namespace NFe.Service
             MemoryStream msXml = Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno);
             XmlDocument doc = new XmlDocument();
             doc.Load(msXml);
+            //doc.Load(@"C:\Users\wandrey\Downloads\51160417625687000153550010001224661001224662-ret-env-canc (1).xml");
 
             XmlNodeList retEnvRetornoList = doc.GetElementsByTagName("retEnvEvento");
 

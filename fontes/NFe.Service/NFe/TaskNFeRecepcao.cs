@@ -54,6 +54,7 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao,
                     oLer.oDadosNfe.mod);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), PadroesNFSe.NaoIdentificado);
 
                 if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00" && wsProxy.NomeMetodoWS.Length == 2)
                     Servico = Servicos.NFeEnviarLoteZip2;
@@ -68,7 +69,6 @@ namespace NFe.Service
 
                 //XML neste ponto a NFe já está assinada, pois foi assinada, validada e montado o lote para envio por outro serviço. 
                 //Fica aqui somente este lembrete. Wandrey 16/03/2010
-
 
                 // Envio de NFe Compactada - Renan 29/04/2014
                 if (Servico == Servicos.NFeEnviarLoteZip2)
@@ -87,7 +87,11 @@ namespace NFe.Service
                                         oRecepcao,
                                         nOperacao,
                                         oCabecMsg,
-                                        this);
+                                        this,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
+                                        false,
+                                        securityProtocolType);
 
                     Protocolo(vStrXmlRetorno);
                 }
@@ -99,7 +103,9 @@ namespace NFe.Service
                                         oCabecMsg,
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
-                                        Propriedade.ExtRetorno.Rec);
+                                        Propriedade.ExtRetorno.Rec,
+                                        true,
+                                        securityProtocolType);
 
                     Recibo(vStrXmlRetorno);
                 }
@@ -108,7 +114,7 @@ namespace NFe.Service
                 {
                     FinalizarNFeSincrono(vStrXmlRetorno, emp);
 
-                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 }
                 else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
                 {

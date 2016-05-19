@@ -224,6 +224,11 @@ namespace NFe.Components
         /// </summary>
         [Description("Consulta da imagem de uma NFS-e em formato PDF")]
         NFSeConsultarNFSePDF,
+        /// <summary>
+        /// Baixar o XML da NFSe
+        /// </summary>
+        [Description("Obter o XML da NFS-e")]
+        NFSeObterNotaFiscal,
 
         #endregion
 
@@ -627,8 +632,31 @@ namespace NFe.Components
         /// Prefeitura de Goiania - GO
         /// </summary>
         [Description("Goiania")]
-        GOIANIA
-
+        GOIANIA,
+        /// <summary>
+        /// Padrão Nota Inteligente
+        /// Prefeitura de Claudio - MG
+        /// </summary>
+        [Description("Nota Inteligente")]
+        NOTAINTELIGENTE,
+        /// <summary>
+        /// Padrão Freire Informática
+        /// Prefeitura de Alagoinhas - BA
+        /// </summary>
+        [Description("Freire Informática")]
+        FREIRE_INFORMATICA,
+        /// <summary>
+        /// Padrão Memory
+        /// Prefeitura de Ponte Nova - MG
+        /// </summary>
+        [Description("Memory")]
+        MEMORY,
+        /// <summary>
+        /// Prefeitura de Camaçari - BA
+        /// </summary>
+        [Description("Camaçari-BA")]
+        CAMACARI_BA
+        
         ///Atencao Wandrey.
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao        
 

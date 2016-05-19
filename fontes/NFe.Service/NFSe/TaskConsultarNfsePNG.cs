@@ -44,6 +44,8 @@ namespace NFe.Service.NFSe
                 object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe);
+
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedNfsePNG.cMunicipio));
@@ -52,7 +54,7 @@ namespace NFe.Service.NFSe
                 oInvocarObj.InvocarNFSe(wsProxy, pedNfsePNG, NomeMetodoWS(Servico, oDadosPedNfsePNG.cMunicipio), cabecMsg, this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML,   //"-ped-nfsepng", 
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).RetornoXML,   //"-nfsepng", 
-                                        padraoNFSe, Servico);
+                                        padraoNFSe, Servico, securityProtocolType);
 
                 ///
                 /// grava o arquivo no FTP

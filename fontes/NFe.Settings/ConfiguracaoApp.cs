@@ -157,7 +157,7 @@ namespace NFe.Settings
 
                 try
                 {
-                    System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFrom(Propriedade.PastaExecutavel + "\\NFe.Components.Wsdl.dll");
+                    System.Reflection.Assembly ass = Assembly.LoadFile(Propriedade.PastaExecutavel + "\\NFe.Components.Wsdl.dll");
                     string[] x = ass.GetManifestResourceNames();
                     if(x.GetLength(0) > 0)
                     {
@@ -614,12 +614,11 @@ namespace NFe.Settings
                         // Vai rodar atualização do arquivo somente se tiver mais que 30 dias
                         if(lastUpdate < 30)
                         {
-                            return;// result;
+                            return;
                         }
                 }
-                // Vamos deletar para fazer o download novamente
-                File.Delete(LocalFile);
             }
+
             using(WebClient Client = new WebClient())
             {
                 try
@@ -703,7 +702,6 @@ namespace NFe.Settings
                                 empresa.URLConsultaDFe = ConfiguracaoApp.CarregarURLConsultaDFe(uf);
                         }
                 }
-                //return result;
             }
         }
         #endregion
@@ -968,8 +966,11 @@ namespace NFe.Settings
 
             lock(Smf.WebProxy)
             {
+                
                 if(Empresas.Configuracoes[emp].WSProxy.ContainsKey(key))
                 {
+                    ServicePointManager.SecurityProtocol = WebServiceProxy.DefinirProtocoloSeguranca(cUF, tpAmb, tpEmis, padraoNFSe);
+
                     wsProxy = Empresas.Configuracoes[emp].WSProxy[key];
                 }
                 else
@@ -986,7 +987,7 @@ namespace NFe.Settings
                                                   Url,
                                                   Empresas.Configuracoes[emp].X509Certificado,
                                                   padraoNFSe,
-                                                  (tpAmb == (int)NFe.Components.TipoAmbiente.taHomologacao),
+                                                  (tpAmb == (int)TipoAmbiente.taHomologacao),
                                                   servico,
                                                   tpEmis);
 
@@ -1196,6 +1197,9 @@ namespace NFe.Settings
                             break;
                         case Servicos.NFSeConsultarNFSePDF:
                             WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarNFSePDF : list.LocalProducao.ConsultarNFSePDF);
+                            break;
+                        case Servicos.NFSeObterNotaFiscal:
+                            WSDL = (tipoAmbiente == (int)NFe.Components.TipoAmbiente.taHomologacao ? list.LocalHomologacao.ObterNotaFiscal : list.LocalProducao.ObterNotaFiscal);
                             break;
                         #endregion
 

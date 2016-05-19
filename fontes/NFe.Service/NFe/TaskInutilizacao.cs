@@ -42,6 +42,7 @@ namespace NFe.Service
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString());
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, PadroesNFSe.NaoIdentificado);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -63,7 +64,9 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg, this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML, 
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML,
+                                        true,
+                                        securityProtocolType);
 
                     //Ler o retorno do webservice
                     LerRetornoInut();

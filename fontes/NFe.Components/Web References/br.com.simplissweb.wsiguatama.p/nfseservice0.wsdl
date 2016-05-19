@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.sistema.com.br/Sistema.Ws.Nfse" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse/Imports">
+      <xsd:import schemaLocation="http://wsiguatama.simplissweb.com.br/nfseservice.svc?xsd=xsd0" namespace="http://www.sistema.com.br/Sistema.Ws.Nfse" />
+      <xsd:import schemaLocation="http://wsiguatama.simplissweb.com.br/nfseservice.svc?xsd=xsd1" namespace="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" />
+      <xsd:import schemaLocation="http://wsiguatama.simplissweb.com.br/nfseservice.svc?xsd=xsd2" namespace="http://www.w3.org/2000/09/xmldsig#" />
+      <xsd:import schemaLocation="http://wsiguatama.simplissweb.com.br/nfseservice.svc?xsd=xsd3" namespace="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="INfseService_Versao_InputMessage">
+    <wsdl:part name="parameters" element="tns:Versao" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_Versao_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VersaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_RecepcionarLoteRps_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRps" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_RecepcionarLoteRps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarSituacaoLoteRps_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarSituacaoLoteRps" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarSituacaoLoteRps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarSituacaoLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarNfsePorRps_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorRps" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarNfsePorRps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarNfse_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarNfse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarNfse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarLoteRps_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarLoteRps" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_ConsultarLoteRps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_CancelarNfse_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelarNfse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_CancelarNfse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_GerarNfse_InputMessage">
+    <wsdl:part name="parameters" element="tns:GerarNfse" />
+  </wsdl:message>
+  <wsdl:message name="INfseService_GerarNfse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GerarNfseResponse" />
+  </wsdl:message>
+  <wsdl:portType name="INfseService">
+    <wsdl:operation name="Versao">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/Versao" message="tns:INfseService_Versao_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/VersaoResponse" message="tns:INfseService_Versao_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecepcionarLoteRps">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/RecepcionarLoteRps" message="tns:INfseService_RecepcionarLoteRps_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/RecepcionarLoteRpsResponse" message="tns:INfseService_RecepcionarLoteRps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarSituacaoLoteRps">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarSituacaoLoteRps" message="tns:INfseService_ConsultarSituacaoLoteRps_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarSituacaoLoteRpsResponse" message="tns:INfseService_ConsultarSituacaoLoteRps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorRps">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfsePorRps" message="tns:INfseService_ConsultarNfsePorRps_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfsePorRpsResponse" message="tns:INfseService_ConsultarNfsePorRps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfse">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfse" message="tns:INfseService_ConsultarNfse_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseResponse" message="tns:INfseService_ConsultarNfse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLoteRps">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarLoteRps" message="tns:INfseService_ConsultarLoteRps_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarLoteRpsResponse" message="tns:INfseService_ConsultarLoteRps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelarNfse">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/CancelarNfse" message="tns:INfseService_CancelarNfse_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/CancelarNfseResponse" message="tns:INfseService_CancelarNfse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GerarNfse">
+      <wsdl:input wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarNfse" message="tns:INfseService_GerarNfse_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarNfseResponse" message="tns:INfseService_GerarNfse_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

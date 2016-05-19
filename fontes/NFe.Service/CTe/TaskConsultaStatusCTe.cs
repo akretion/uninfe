@@ -40,6 +40,7 @@ namespace NFe.Service
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -51,8 +52,10 @@ namespace NFe.Service
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, oStatusServico, wsProxy.NomeMetodoWS[0], oCabecMsg, this, 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,    //"-ped-sta", 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);//"-sta");
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,   
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML,
+                                    true,
+                                    securityProtocolType);
             }
             catch (Exception ex)
             {

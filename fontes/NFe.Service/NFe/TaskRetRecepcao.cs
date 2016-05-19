@@ -50,6 +50,7 @@ namespace NFe.Service
                                                 dadosPedRec.tpEmis,
                                                 dadosPedRec.versao,
                                                 dadosPedRec.mod);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, PadroesNFSe.NaoIdentificado);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
@@ -62,8 +63,12 @@ namespace NFe.Service
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
                                     oRepRecepcao,
-                                    wsProxy.NomeMetodoWS[0],// NomeMetodoWS(Servico, dadosPedRec.cUF, dadosPedRec.versao), 
-                                    oCabecMsg, this);
+                                    wsProxy.NomeMetodoWS[0],
+                                    oCabecMsg, this,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML,
+                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
+                                    false,
+                                    securityProtocolType);
                 #endregion
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo
@@ -73,7 +78,7 @@ namespace NFe.Service
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 //Wandrey 18/06/2009
-                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 #endregion
             }
             catch (Exception ex)

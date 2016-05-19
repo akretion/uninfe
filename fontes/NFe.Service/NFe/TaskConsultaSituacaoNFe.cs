@@ -41,6 +41,7 @@ namespace NFe.Service
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, dadosPedSit.versao, dadosPedSit.mod);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, PadroesNFSe.NaoIdentificado);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oConsulta = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -53,7 +54,11 @@ namespace NFe.Service
                     new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, oConsulta, wsProxy.NomeMetodoWS[0], oCabecMsg, this);
+                    oInvocarObj.Invocar(wsProxy, oConsulta, wsProxy.NomeMetodoWS[0], oCabecMsg, this,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).RetornoXML,
+                                        false,
+                                        securityProtocolType);
 
                     //Efetuar a leitura do retorno da situação para ver se foi autorizada ou não
                     //Na versão 1 não posso gerar o -procNfe, ou vou ter que tratar a estrutura do XML de acordo com a versão, a consulta na versão 1 é somente para obter o resultado mesmo.

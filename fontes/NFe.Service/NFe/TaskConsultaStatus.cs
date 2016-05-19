@@ -49,6 +49,7 @@ namespace NFe.Service
                                                     dadosPedSta.tpEmis,
                                                     dadosPedSta.versao,
                                                     dadosPedSta.mod);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -66,7 +67,9 @@ namespace NFe.Service
                                         wsProxy.NomeMetodoWS[0], 
                                         oCabecMsg, this, 
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, 
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);//.ExtRetorno.Sta_XML);
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML,
+                                        true,
+                                        securityProtocolType);
                 }
                 else
                 {

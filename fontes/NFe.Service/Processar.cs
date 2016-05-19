@@ -84,6 +84,10 @@ namespace NFe.Service
                             this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarNfsePDF());
                             break;
 
+                        case Servicos.NFSeObterNotaFiscal:
+                            this.DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskObterNotaFiscal());
+                            break;
+
                         #endregion
 
                         #region NFe
@@ -665,9 +669,13 @@ namespace NFe.Service
                                     {
                                         tipoServico = Servicos.NFSeConsultarNFSePDF;
                                     }
-                                    #endregion
+                                    else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) >= 0)
+                                    {
+                                        tipoServico = Servicos.NFSeObterNotaFiscal;
+                                    }
+                                #endregion
 
-                                    break;
+                                break;
                             }
                         }
                         #endregion

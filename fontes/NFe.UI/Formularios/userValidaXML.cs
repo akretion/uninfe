@@ -80,7 +80,8 @@ namespace NFe.UI
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML +
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML +
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML +
-                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML; 
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML +
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML; 
                         }
                         else
                         {
