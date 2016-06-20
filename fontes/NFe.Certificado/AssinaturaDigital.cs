@@ -128,8 +128,14 @@ namespace NFe.Certificado
 
 #if _fw45
                             //A3
-                            if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) && clsX509Certificate2Extension.IsA3(x509Cert))
+                            if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) && 
+                                clsX509Certificate2Extension.IsA3(x509Cert) &&
+                                !Empresas.Configuracoes[empresa].CertificadoPINCarregado)
+                            {
                                 x509Cert.SetPinPrivateKey(Empresas.Configuracoes[empresa].CertificadoPIN);
+                                Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
+                            }                             
+                               
 #endif
                             signedXml.SigningKey = x509Cert.PrivateKey;
 

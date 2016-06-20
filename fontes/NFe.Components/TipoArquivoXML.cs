@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
 
@@ -37,6 +34,8 @@ namespace NFe.Components
 
         private void DefinirTipoArq(string fullPathXML, int UFCod, bool soValidar)
         {
+            bool nfse = (UFCod.ToString().Length == 7);
+
             nRetornoTipoArq = 0;
             cRetornoTipoArq = string.Empty;
             cArquivoSchema = string.Empty;
@@ -51,7 +50,7 @@ namespace NFe.Components
 
             try
             {
-                if (UFCod.ToString().Length == 7)
+                if (nfse)
                 {
                     switch (UFCod)
                     {
@@ -77,8 +76,8 @@ namespace NFe.Components
                 {
                     if (fullPathXML.EndsWith(".txt"))
                     {
-                        this.nRetornoTipoArq = SchemaXML.MaxID + 104;
-                        this.cRetornoTipoArq = "Não pode validar um arquivo texto. Arquivo: '" + fullPathXML + "'";
+                        nRetornoTipoArq = SchemaXML.MaxID + 104;
+                        cRetornoTipoArq = "Não pode validar um arquivo texto. Arquivo: '" + fullPathXML + "'";
                         return;
                     }
 
@@ -88,12 +87,22 @@ namespace NFe.Components
                         doc.Load(fullPathXML);
                         string nome = doc.DocumentElement.Name;
                         string versao = string.Empty;
-                        if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
-                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
-                        else if (((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()] != null)
-                            versao = ((XmlElement)(XmlNode)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[NFe.Components.TpcnResources.versao.ToString()].Value;
+                        if (((XmlElement)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
+                            versao = ((XmlElement)doc.GetElementsByTagName(doc.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
+                        else if (((XmlElement)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
+                            versao = ((XmlElement)doc.GetElementsByTagName(doc.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
 
-                        if (versao.Equals("3.10") && string.IsNullOrEmpty(padraoNFSe))
+                        if (nfse)
+                        {
+                            if (Functions.PadraoNFSe(UFCod) == PadroesNFSe.GINFES)
+                            {
+                                if (doc.DocumentElement.Name == "CancelarNfseEnvio" && doc.DocumentElement.FirstChild.Name == "Pedido")
+                                {
+                                    versaoXML = "-3";
+                                }
+                            }
+                        }
+                        else if (versao.Equals("3.10"))
                             versaoXML = "-" + versao;
 
                         InfSchema schema = null;
@@ -104,7 +113,7 @@ namespace NFe.Components
                             {
                                 if (nome.Equals("envEvento") || nome.Equals("eventoCTe"))
                                 {
-                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0];
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0];
                                     if (cl != null)
                                     {
                                         string evento = cl.InnerText;
@@ -127,10 +136,10 @@ namespace NFe.Components
 
                                             case "110140":  //EPEC
                                                 string mod = string.Empty;
-                                                if (((XmlElement)(XmlNode)doc.GetElementsByTagName("infEvento")[0]).Attributes[NFe.Components.TpcnResources.Id.ToString()] != null)
+                                                if (((XmlElement)doc.GetElementsByTagName("infEvento")[0]).Attributes[TpcnResources.Id.ToString()] != null)
                                                 {
-                                                    mod = "-" + ((XmlElement)(XmlNode)doc.GetElementsByTagName("infEvento")[0]).Attributes[NFe.Components.TpcnResources.Id.ToString()].Value.Substring(28, 2) + "-";
-                                                    if (! mod.Equals("-65-"))
+                                                    mod = "-" + ((XmlElement)doc.GetElementsByTagName("infEvento")[0]).Attributes[TpcnResources.Id.ToString()].Value.Substring(28, 2) + "-";
+                                                    if (!mod.Equals("-65-"))
                                                         mod = string.Empty;
                                                 }
 
@@ -148,7 +157,7 @@ namespace NFe.Components
                                 }
                                 else if (nome.Equals("eventoMDFe"))
                                 {
-                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0];
+                                    XmlElement cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0];
                                     if (cl != null)
                                     {
                                         nome = "eventoMDFe" + cl.InnerText;
@@ -156,7 +165,7 @@ namespace NFe.Components
                                 }
                             }
 
-                            if (string.IsNullOrEmpty(padraoNFSe))
+                            if (!nfse)
                                 chave = TipoAplicativo.Nfe.ToString().ToUpper() + "-" + nome;
                             else
                                 chave = TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
@@ -167,7 +176,7 @@ namespace NFe.Components
                         {
                             if (soValidar && chave.StartsWith(TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-"))
                             {
-                                this.cRetornoTipoArq = fullPathXML;
+                                cRetornoTipoArq = fullPathXML;
                                 nRetornoTipoArq = -1;
                                 return;
                             }
@@ -193,26 +202,26 @@ namespace NFe.Components
                     }
                     catch (Exception ex)
                     {
-                        this.nRetornoTipoArq = SchemaXML.MaxID + 102;
-                        this.cRetornoTipoArq = ex.Message;
+                        nRetornoTipoArq = SchemaXML.MaxID + 102;
+                        cRetornoTipoArq = ex.Message;
                     }
                 }
                 else
                 {
-                    this.nRetornoTipoArq = SchemaXML.MaxID + 100;
-                    this.cRetornoTipoArq = "Arquivo XML não foi encontrado";
+                    nRetornoTipoArq = SchemaXML.MaxID + 100;
+                    cRetornoTipoArq = "Arquivo XML não foi encontrado";
                 }
             }
             catch (Exception ex)
             {
-                this.nRetornoTipoArq = SchemaXML.MaxID + 103;
-                this.cRetornoTipoArq = ex.Message;
+                nRetornoTipoArq = SchemaXML.MaxID + 103;
+                cRetornoTipoArq = ex.Message;
             }
 
-            if (this.nRetornoTipoArq == 0)
+            if (nRetornoTipoArq == 0)
             {
-                this.nRetornoTipoArq = SchemaXML.MaxID + 101;
-                this.cRetornoTipoArq = "Não foi possível identificar o arquivo XML";
+                nRetornoTipoArq = SchemaXML.MaxID + 101;
+                cRetornoTipoArq = "Não foi possível identificar o arquivo XML";
             }
         }
     }

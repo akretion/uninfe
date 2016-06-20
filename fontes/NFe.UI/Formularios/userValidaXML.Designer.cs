@@ -45,7 +45,7 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.Size = new System.Drawing.Size(103, 25);
+            this.labelTitle.Size = new System.Drawing.Size(101, 25);
             this.labelTitle.Text = "Validar XML";
             // 
             // metroLabel17
@@ -54,7 +54,7 @@
             this.metroLabel17.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel17.Location = new System.Drawing.Point(0, 58);
             this.metroLabel17.Name = "metroLabel17";
-            this.metroLabel17.Size = new System.Drawing.Size(327, 15);
+            this.metroLabel17.Size = new System.Drawing.Size(328, 15);
             this.metroLabel17.TabIndex = 0;
             this.metroLabel17.Text = "Selecione a empresa do certificado a ser utilizado para validação";
             // 

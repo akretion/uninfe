@@ -33,6 +33,7 @@ namespace NFe.ConvertTxt
         /// NFC-e
         /// </summary>
         public List<pag> pag { get; private set; }
+        public qrCode qrCode { get; private set; }
 
         public NFe()
         {
@@ -52,6 +53,7 @@ namespace NFe.ConvertTxt
             ///
             /// NFC-e
             pag = new List<pag>();
+            qrCode = new qrCode();
 
             infNFe.Versao = (decimal)2.0;
         }

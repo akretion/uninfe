@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Globalization;
 
 using NFe.Components;
 
@@ -114,12 +115,50 @@ namespace NFe.ConvertTxt
             ReadFromString(System.IO.File.ReadAllText(xmlFilename, Encoding.UTF8));
         }
 
+        DateTime FromHex(string value)
+        {
+            string result = "";
+            for (int i = 0; i < value.Length; i += 2)
+            {
+                string hs = value.Substring(i, 2);
+                result += Convert.ToChar(Convert.ToUInt32(hs, 16));
+            }
+            return Convert.ToDateTime(result);
+        }
+
         private void processaNFe(XmlNode nodeRoot)
         {
             foreach (XmlNode nodeNFe in nodeRoot.ChildNodes)
             {
                 switch (nodeNFe.LocalName.ToLower())
                 {
+                    case "infnfesupl":
+                        //<qrCode><![CDATA[http://www.sefaz.mt.gov.br/nfce/consultanfce?chNFe=51160417625687000153650020000006611000006615&nVersao=100&tpAmb=1&cDest=32622775091&dhEmi=323031362d30342d32375431353a31343a32362d30343a3030&vNF=2.00&vICMS=0.00&digVal=7169746e59786b51753950376e4e716536686e3859596b327354773d&cIdToken=000001&cHashQRCode=C0C48B5D9353FEDDBC40E4ECBF931D32E95D977B]]></qrCode>
+                        foreach (XmlNode nodeinfNFe in nodeNFe.ChildNodes)
+                        {
+                            var minhaCultura = new CultureInfo("pt-BR"); //pt-BR usada como base
+                            minhaCultura.NumberFormat.NumberDecimalSeparator = ".";
+
+                            var data = nodeinfNFe.InnerText.Replace("<![CDATA[", "").Replace("]]>", "");
+                            var split = data.Split(new char[] { '&' });
+                            foreach (var s in split)
+                            {
+                                Console.WriteLine(s);
+                                if (s.Contains("chNFe"))
+                                    nfe.qrCode.chNFe = s.Split('?')[1].Substring(6);
+                                else if (s.StartsWith("nVersao")) nfe.qrCode.nVersao = s.Split('=')[1];
+                                else if (s.StartsWith("tpAmb")) nfe.qrCode.tpAmb = (TipoAmbiente)Convert.ToInt16(s.Split('=')[1]);
+                                else if (s.StartsWith("cDest")) nfe.qrCode.cDest = s.Split('=')[1];
+                                else if (s.StartsWith("digVal")) nfe.qrCode.digVal = s.Split('=')[1];
+                                else if (s.StartsWith("cIdToken")) nfe.qrCode.cIdToken = s.Split('=')[1];
+                                else if (s.StartsWith("cHashQRCode")) nfe.qrCode.cHashQRCode = s.Split('=')[1];
+                                else if (s.StartsWith("vICMS")) nfe.qrCode.vICMS = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
+                                else if (s.StartsWith("vNF")) nfe.qrCode.vNF = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
+                                else if (s.StartsWith("dhEmi")) nfe.qrCode.dhEmi = FromHex(s.Split('=')[1]);
+                            }
+                        }
+                        break;
+
                     case "infnfe":
                         char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
                         nfe.infNFe.Versao = Convert.ToDecimal("0" + nodeNFe.Attributes[TpcnResources.versao.ToString()].Value.Replace(".", charSeparator.ToString()));

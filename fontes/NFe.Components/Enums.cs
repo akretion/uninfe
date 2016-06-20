@@ -655,11 +655,21 @@ namespace NFe.Components
         /// Prefeitura de Camaçari - BA
         /// </summary>
         [Description("Camaçari-BA")]
-        CAMACARI_BA
-        
-        ///Atencao Wandrey.
-        ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao        
+        CAMACARI_BA,
+        /// <summary>
+        /// Padrão N&A Informática
+        /// </summary>
+        [Description("N&A Informática")]
+        NA_INFORMATICA,
+        /// <summary>
+        /// PAdrão ABACO
+        /// Prefeitura de Rondonópolis - MT
+        /// </summary>
+        [Description("ABACO")]
+        ABACO
 
+        ///***ATENÇÃO***
+        ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }
     #endregion
 
@@ -787,7 +797,7 @@ combo.ValueMember = "Key";
                         as DescriptionAttribute;
 
             return attribute == null ? value.ToString() : attribute.Description;
-        }*/               
+        }*/
 
         public static T StringToEnum<T>(string name) { return (T)Enum.Parse(typeof(T), name, true); }
 

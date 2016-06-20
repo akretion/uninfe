@@ -202,9 +202,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="logounimake.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

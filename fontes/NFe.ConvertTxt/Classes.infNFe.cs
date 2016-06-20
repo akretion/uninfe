@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NFe.Components;
+using System;
 
 namespace NFe.ConvertTxt
 {
@@ -12,5 +10,19 @@ namespace NFe.ConvertTxt
     {
         public string ID;
         public decimal Versao;
+    }
+
+    public class qrCode
+    {
+        public string chNFe { get; set; }
+        public string nVersao { get; set; }
+        public TipoAmbiente tpAmb { get; set; }
+        public string cDest { get; set; }
+        public DateTime dhEmi { get; set; }
+        public decimal vNF { get; set; }
+        public decimal vICMS { get; set; }
+        public string digVal { get; set; }
+        public string cIdToken { get; set; }
+        public string cHashQRCode { get; set; }
     }
 }

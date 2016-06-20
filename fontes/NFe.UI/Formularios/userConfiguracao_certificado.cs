@@ -27,7 +27,7 @@ namespace NFe.UI.Formularios
         public event EventHandler changeEvent;
         private NFe.Settings.Empresa empresa;
         private X509Certificate2 oMeuCert;
-        public Formularios.userConfiguracao_pastas ucPastas { private get; set; }
+        public Formularios.UserConfiguracaoPastas ucPastas { private get; set; }
 
         public void Populate(NFe.Settings.Empresa empresa)
         {
