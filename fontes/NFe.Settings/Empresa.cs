@@ -162,6 +162,12 @@ namespace NFe.Settings
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
+        /// Utiliza
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CertificadoPINCarregado = false;
+
+        /// <summary>
         /// Certificado digital - Subject
         /// </summary>
         //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
@@ -762,6 +768,9 @@ namespace NFe.Settings
         #region ExcluiPastas
         public void ExcluiPastas()
         {
+            /*
+            //Não vou mais excluir nenhuma pasta, usuário que exclua manualmente, pois aconteceu de usuários excluirem a empresa para cadastrar 
+            //novamente e perdeu todos os XMLs da empresa. Wandrey 07/06/2016
             if (Directory.Exists(this.PastaEmpresa))
             {
                 ///
@@ -780,6 +789,7 @@ namespace NFe.Settings
                     vazia = false;
                     break;
                 }
+
                 if (vazia)
                 {
                     DeltreeMain.BeginDeleteTree(this.PastaBackup, true);
@@ -793,6 +803,7 @@ namespace NFe.Settings
                     DeltreeMain.BeginDeleteTree(this.PastaEmpresa, true);
                 }
             }
+            */
         }
         #endregion
 
@@ -937,7 +948,7 @@ namespace NFe.Settings
             //verifique se o arquivo existe e se o FTP da empresa está configurado e ativo
             if (File.Exists(fileName) && this.FTPIsAlive)
             {
-                Thread t = new Thread(new ThreadStart(delegate()
+                Thread t = new Thread(new ThreadStart(delegate ()
                 {
                     string arqDestino = Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName));
                     //Copia o arquivo para a pasta temp
@@ -956,7 +967,7 @@ namespace NFe.Settings
 
                         //pega a pasta corrente no ftp
                         string vCorrente = ftp.GetWorkingDirectory();
-                        
+
                         //tenta mudar para a pasta de destino
                         if (!ftp.changeDir(folderName))
                         {
@@ -975,7 +986,7 @@ namespace NFe.Settings
                         if (ftp.GetFileSize(remote_filename) == 0)
                             throw new Exception("Arquivo '" + remote_filename + "' não encontrado no FTP");
 
-                        Auxiliar.WriteLog("Arquivo '" + fileName + "' enviado ao FTP com o nome '"+ remote_filename + "' com sucesso.", false);
+                        Auxiliar.WriteLog("Arquivo '" + fileName + "' enviado ao FTP com o nome '" + remote_filename + "' com sucesso.", false);
                     }
                     catch (Exception ex)
                     {

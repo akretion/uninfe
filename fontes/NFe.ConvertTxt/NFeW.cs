@@ -1220,19 +1220,19 @@ namespace NFe.ConvertTxt
                         wCampo(imposto.ICMS.vICMSSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSSTRet);
                         break;
                     case 900:
-                        wCampo(imposto.ICMS.modBC, TpcnTipoCampo.tcInt, TpcnResources.modBC);
-                        wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, TpcnResources.vBC);
+                        wCampo(imposto.ICMS.modBC, TpcnTipoCampo.tcInt, TpcnResources.modBC, ObOp.Opcional);
+                        wCampo(imposto.ICMS.vBC, TpcnTipoCampo.tcDec2, TpcnResources.vBC, ObOp.Opcional);
                         wCampo(imposto.ICMS.pRedBC, this.nDecimaisPerc, TpcnResources.pRedBC, ObOp.Opcional);
-                        wCampo(imposto.ICMS.pICMS, this.nDecimaisPerc, TpcnResources.pICMS);
-                        wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS);
-                        wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
+                        wCampo(imposto.ICMS.pICMS, this.nDecimaisPerc, TpcnResources.pICMS, ObOp.Opcional);
+                        wCampo(imposto.ICMS.vICMS, TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Opcional);
+                        wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST, ObOp.Opcional);
                         wCampo(imposto.ICMS.pMVAST, this.nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
                         wCampo(imposto.ICMS.pRedBCST, this.nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
-                        wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
-                        wCampo(imposto.ICMS.pICMSST, this.nDecimaisPerc, TpcnResources.pICMSST);
-                        wCampo(imposto.ICMS.vICMSST, TpcnTipoCampo.tcDec2, TpcnResources.vICMSST);
-                        wCampo(imposto.ICMS.pCredSN, this.nDecimaisPerc, TpcnResources.pCredSN);
-                        wCampo(imposto.ICMS.vCredICMSSN, TpcnTipoCampo.tcDec2, TpcnResources.vCredICMSSN);
+                        wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Opcional);
+                        wCampo(imposto.ICMS.pICMSST, this.nDecimaisPerc, TpcnResources.pICMSST, ObOp.Opcional);
+                        wCampo(imposto.ICMS.vICMSST, TpcnTipoCampo.tcDec2, TpcnResources.vICMSST, ObOp.Opcional);
+                        wCampo(imposto.ICMS.pCredSN, this.nDecimaisPerc, TpcnResources.pCredSN, ObOp.Opcional);
+                        wCampo(imposto.ICMS.vCredICMSSN, TpcnTipoCampo.tcDec2, TpcnResources.vCredICMSSN, ObOp.Opcional);
                         break;
                 }
             }
@@ -1319,7 +1319,7 @@ namespace NFe.ConvertTxt
                 wCampo(IPI.CNPJProd, TpcnTipoCampo.tcStr, TpcnResources.CNPJProd, ObOp.Opcional);
                 wCampo(IPI.cSelo, TpcnTipoCampo.tcStr, TpcnResources.cSelo, ObOp.Opcional);
                 wCampo(IPI.qSelo, TpcnTipoCampo.tcInt, TpcnResources.qSelo, ObOp.Opcional);
-                if (IPI.cEnq.Trim() == "")
+                if (string.IsNullOrEmpty(IPI.cEnq))
                     IPI.cEnq = "999";
                 wCampo(IPI.cEnq, TpcnTipoCampo.tcStr, TpcnResources.cEnq);
 

@@ -228,10 +228,10 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.ConsultarNfse(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.NATALENSE:
-                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.CONSIST:
@@ -258,7 +258,7 @@ namespace NFe.Service.NFSe
                         }
                         else
                         {
-                            pedLoteRps = new NFe.Components.HSaoPauloSP.LoteNFe();
+                            throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
                         }
 
                         break;
@@ -284,6 +284,16 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.CAMACARI_BA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.NA_INFORMATICA:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosPedSitNfse.tpAmb == 1)
+                            pedLoteRps = new Components.PCorumbaMS.NfseWSService();
+                        else
+                            pedLoteRps = new Components.HCorumbaMS.NfseWSService();
+
                         break;
                 }
 

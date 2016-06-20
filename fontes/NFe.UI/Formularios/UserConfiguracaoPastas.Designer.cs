@@ -1,6 +1,6 @@
 ﻿namespace NFe.UI.Formularios
 {
-    partial class userConfiguracao_pastas
+    partial class UserConfiguracaoPastas
     {
         /// <summary> 
         /// Required designer variable.
@@ -67,7 +67,7 @@
             this.lbl_textBox_PastaDownload.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaDownload.Name = "lbl_textBox_PastaDownload";
             this.lbl_textBox_PastaDownload.Size = new System.Drawing.Size(610, 15);
-            this.lbl_textBox_PastaDownload.TabIndex = 60;
+            this.lbl_textBox_PastaDownload.TabIndex = 15;
             this.lbl_textBox_PastaDownload.Text = "Pasta onde serão gravados os arquivos XML´s  de NFe baixados da Sefaz e retornos " +
     "da consulta de eventos de terceiros";
             // 
@@ -79,7 +79,7 @@
             this.lbl_textBox_PastaValidar.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaValidar.Name = "lbl_textBox_PastaValidar";
             this.lbl_textBox_PastaValidar.Size = new System.Drawing.Size(378, 15);
-            this.lbl_textBox_PastaValidar.TabIndex = 57;
+            this.lbl_textBox_PastaValidar.TabIndex = 13;
             this.lbl_textBox_PastaValidar.Text = "Pasta onde serão gravados os arquivos XML´s a serem somente validados";
             // 
             // lbl_textBox_PastaBackup
@@ -90,7 +90,7 @@
             this.lbl_textBox_PastaBackup.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaBackup.Name = "lbl_textBox_PastaBackup";
             this.lbl_textBox_PastaBackup.Size = new System.Drawing.Size(202, 15);
-            this.lbl_textBox_PastaBackup.TabIndex = 54;
+            this.lbl_textBox_PastaBackup.TabIndex = 11;
             this.lbl_textBox_PastaBackup.Text = "Pasta para Backup dos XML´s enviados";
             // 
             // lbl_textBox_PastaXmlErro
@@ -101,7 +101,7 @@
             this.lbl_textBox_PastaXmlErro.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaXmlErro.Name = "lbl_textBox_PastaXmlErro";
             this.lbl_textBox_PastaXmlErro.Size = new System.Drawing.Size(474, 15);
-            this.lbl_textBox_PastaXmlErro.TabIndex = 51;
+            this.lbl_textBox_PastaXmlErro.TabIndex = 9;
             this.lbl_textBox_PastaXmlErro.Text = "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa d" +
     "o envio";
             // 
@@ -113,7 +113,7 @@
             this.lbl_textBox_PastaEnviados.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_textBox_PastaEnviados.Name = "lbl_textBox_PastaEnviados";
             this.lbl_textBox_PastaEnviados.Size = new System.Drawing.Size(285, 15);
-            this.lbl_textBox_PastaEnviados.TabIndex = 48;
+            this.lbl_textBox_PastaEnviados.TabIndex = 7;
             this.lbl_textBox_PastaEnviados.Text = "Pasta onde serão gravados os arquivos XML´s enviados";
             // 
             // lbl_textBox_PastaRetornoXML
@@ -172,7 +172,7 @@
             this.textBox_PastaDownloadNFeDest.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaDownloadNFeDest.SelectedText = "";
             this.textBox_PastaDownloadNFeDest.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaDownloadNFeDest.TabIndex = 7;
+            this.textBox_PastaDownloadNFeDest.TabIndex = 16;
             this.textBox_PastaDownloadNFeDest.Text = "Styled Textbox";
             this.textBox_PastaDownloadNFeDest.UseSelectable = true;
             this.textBox_PastaDownloadNFeDest.TextChanged += new System.EventHandler(this.textBox_PastaXmlEnvio_TextChanged);
@@ -198,7 +198,7 @@
             this.textBox_PastaValidar.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaValidar.SelectedText = "";
             this.textBox_PastaValidar.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaValidar.TabIndex = 6;
+            this.textBox_PastaValidar.TabIndex = 14;
             this.textBox_PastaValidar.Text = "Styled Textbox";
             this.textBox_PastaValidar.UseSelectable = true;
             this.textBox_PastaValidar.UseStyleColors = true;
@@ -225,7 +225,7 @@
             this.textBox_PastaBackup.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaBackup.SelectedText = "";
             this.textBox_PastaBackup.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaBackup.TabIndex = 5;
+            this.textBox_PastaBackup.TabIndex = 12;
             this.textBox_PastaBackup.Text = "Styled Textbox";
             this.textBox_PastaBackup.UseSelectable = true;
             this.textBox_PastaBackup.UseStyleColors = true;
@@ -252,7 +252,7 @@
             this.textBox_PastaXmlErro.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaXmlErro.SelectedText = "";
             this.textBox_PastaXmlErro.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaXmlErro.TabIndex = 4;
+            this.textBox_PastaXmlErro.TabIndex = 10;
             this.textBox_PastaXmlErro.Text = "Styled Textbox";
             this.textBox_PastaXmlErro.UseSelectable = true;
             this.textBox_PastaXmlErro.UseStyleColors = true;
@@ -279,7 +279,7 @@
             this.textBox_PastaXmlEnviado.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaXmlEnviado.SelectedText = "";
             this.textBox_PastaXmlEnviado.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaXmlEnviado.TabIndex = 3;
+            this.textBox_PastaXmlEnviado.TabIndex = 8;
             this.textBox_PastaXmlEnviado.Text = "Styled Textbox";
             this.textBox_PastaXmlEnviado.UseSelectable = true;
             this.textBox_PastaXmlEnviado.UseStyleColors = true;
@@ -306,7 +306,7 @@
             this.textBox_PastaXmlRetorno.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaXmlRetorno.SelectedText = "";
             this.textBox_PastaXmlRetorno.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaXmlRetorno.TabIndex = 2;
+            this.textBox_PastaXmlRetorno.TabIndex = 6;
             this.textBox_PastaXmlRetorno.Text = "Styled Textbox";
             this.textBox_PastaXmlRetorno.UseSelectable = true;
             this.textBox_PastaXmlRetorno.UseStyleColors = true;
@@ -333,7 +333,7 @@
             this.textBox_PastaXmlEmLote.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaXmlEmLote.SelectedText = "";
             this.textBox_PastaXmlEmLote.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaXmlEmLote.TabIndex = 1;
+            this.textBox_PastaXmlEmLote.TabIndex = 4;
             this.textBox_PastaXmlEmLote.Text = "Styled Textbox";
             this.textBox_PastaXmlEmLote.UseSelectable = true;
             this.textBox_PastaXmlEmLote.UseStyleColors = true;
@@ -360,7 +360,7 @@
             this.textBox_PastaXmlEnvio.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.textBox_PastaXmlEnvio.SelectedText = "";
             this.textBox_PastaXmlEnvio.Size = new System.Drawing.Size(623, 22);
-            this.textBox_PastaXmlEnvio.TabIndex = 0;
+            this.textBox_PastaXmlEnvio.TabIndex = 2;
             this.textBox_PastaXmlEnvio.Text = "Styled Textbox";
             this.textBox_PastaXmlEnvio.UseSelectable = true;
             this.textBox_PastaXmlEnvio.UseStyleColors = true;

@@ -234,7 +234,7 @@ namespace NFe.Components
         /// <param name="methodName">Nome do método</param>
         /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
         /// <returns>Objeto - Um objeto somente, podendo ser primário ou complexo</returns>
-        private object Invoke(object Instance, string methodName, object[] parameters)
+        public object Invoke(object Instance, string methodName, object[] parameters)
         {
             try
             {

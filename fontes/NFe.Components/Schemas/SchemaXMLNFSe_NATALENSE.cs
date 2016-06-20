@@ -30,8 +30,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\NATALENSE\\nfse.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "CancelarNfseEnvio",
-                TagAtributoId = "Pedido",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion

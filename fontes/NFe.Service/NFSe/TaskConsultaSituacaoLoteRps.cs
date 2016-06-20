@@ -163,7 +163,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.NATALENSE:
-                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.CONAM:
@@ -178,7 +178,7 @@ namespace NFe.Service.NFSe
                         }
                         else
                         {
-                            pedSitLoteRps = new NFe.Components.HSaoPauloSP.LoteNFe();
+                            throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
                         }
 
                         break;
@@ -200,9 +200,9 @@ namespace NFe.Service.NFSe
 
                         memory.CancelarNfse(NomeArquivoXML);
                         break;
-                        #endregion
-
+                    #endregion
                 }
+
                 if (IsInvocar(padraoNFSe, Servico))
                 {
                     //Assinar o XML

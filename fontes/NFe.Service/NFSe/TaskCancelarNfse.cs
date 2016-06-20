@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.IO;
-using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -112,7 +107,7 @@ namespace NFe.Service.NFSe
                         }
                         else
                         {
-                            pedCanNfse = new NFe.Components.HSaoPauloSP.LoteNFe();
+                            throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
                         }
 
                         EncryptAssinatura();
@@ -216,7 +211,7 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-                        
+
                         el.CancelarNfse(NomeArquivoXML);
                         #endregion
                         break;
@@ -258,7 +253,7 @@ namespace NFe.Service.NFSe
 
                         elotech.CancelarNfse(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.MGM:
                         #region MGM
@@ -269,11 +264,12 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.CancelarNfse(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.NATALENSE:
-                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
+
                     case PadroesNFSe.CONSIST:
                         #region Consist
                         Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
@@ -310,6 +306,16 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.CAMACARI_BA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.NA_INFORMATICA:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosPedCanNfse.tpAmb == 1)
+                            pedCanNfse = new Components.PCorumbaMS.NfseWSService();
+                        else
+                            pedCanNfse = new Components.HCorumbaMS.NfseWSService();
+
                         break;
                 }
 

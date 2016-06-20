@@ -87,10 +87,14 @@ begin
 
     // se o resultado for um. Então o SP1 está instalado
     // Este resultado é o valor da chave
-    // 378675 = .NET framework 4.5.1 instaladas com o Windows 8.1 ou Windows Server 2012 R2
-    // 378758 = .NET Framework 4.5.1 instalado no Windows 8, Windows 7 SP1 ou Windows Vista SP2
-    // 379893 = .NET Framework 4.5.2
-    // 381029 = .NET Framework 4.6 RC
+    // 378389 = .NET Framework 4.5
+    // 378675 = .NET framework 4.5.1 instalado com Windows 8.1 ou Windows Server 2012 R2
+    // 378758 = .NET framework 4.5.1 instalado no Windows 8, Windows 7 SP1 ou Windows Vista SP2
+    // 379893 = .NET framework 4.5.2
+    // 393295 = .NET Framework 4.6 - Windows 10
+    // 393297 = .NET Framework 4.6 - Demais windows
+    // 394254 = .NET Framework 4.6.1 - Windows 10
+    // 394271 = .NET Framework 4.6.1 - Demais windows
     if regresult < 378675 then begin
       // definir o caminho do arquivo
       filename := expandconstant('{tmp}\fx451.exe');

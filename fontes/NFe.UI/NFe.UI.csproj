@@ -155,11 +155,11 @@
     <Compile Include="Formularios\userConfiguracao_geral.Designer.cs">
       <DependentUpon>userConfiguracao_geral.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\userConfiguracao_pastas.cs">
+    <Compile Include="Formularios\UserConfiguracaoPastas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Formularios\userConfiguracao_pastas.Designer.cs">
-      <DependentUpon>userConfiguracao_pastas.cs</DependentUpon>
+    <Compile Include="Formularios\UserConfiguracaoPastas.Designer.cs">
+      <DependentUpon>UserConfiguracaoPastas.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\userCadastro.cs">
       <SubType>UserControl</SubType>
@@ -339,8 +339,8 @@
     <EmbeddedResource Include="Formularios\userConfiguracao_geral.resx">
       <DependentUpon>userConfiguracao_geral.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\userConfiguracao_pastas.resx">
-      <DependentUpon>userConfiguracao_pastas.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\UserConfiguracaoPastas.resx">
+      <DependentUpon>UserConfiguracaoPastas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\userCadastro.resx">
       <DependentUpon>userCadastro.cs</DependentUpon>

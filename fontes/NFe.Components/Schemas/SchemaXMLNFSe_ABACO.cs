@@ -92,6 +92,89 @@ namespace NFSe.Components
             #endregion
 
             #endregion
+
+            #region ABACO
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region Consulta NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Consulta da NFSe por RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #region Consulta NFSe por período
+            SchemaXML.InfSchemas.Add("NFSE-ABACO-ConsultarNfsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABACO\\V2\\nfse_v2010.xsd",
+                Descricao = "XML de Consulta da NFSe por período",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion
+
+            #endregion
         }
     }
 }

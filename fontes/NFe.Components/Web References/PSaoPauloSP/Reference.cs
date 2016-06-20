@@ -53,7 +53,7 @@ namespace NFe.Components.PSaoPauloSP {
         
         /// <remarks/>
         public LoteNFe() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HSaoPauloSP_LoteNFe;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PSaoPauloSP_LoteNFe;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
