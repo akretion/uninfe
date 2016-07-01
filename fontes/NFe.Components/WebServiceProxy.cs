@@ -168,7 +168,7 @@ namespace NFe.Components
             //o servidor requer autenticação e deve enviar uma resposta 401, o cliente deve enviar novamente os dados com os cabeçalhos apropriadas de autenticação.
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CertificateValidation);
             ServicePointManager.Expect100Continue = false;
-            ServicePointManager.SecurityProtocol = DefinirProtocoloSeguranca(cUF, taHomologacao, tpEmis, padraoNFSe);
+            ServicePointManager.SecurityProtocol = DefinirProtocoloSeguranca(cUF, taHomologacao, tpEmis, padraoNFSe, servico);
             serviceDescription = ServiceDescription.Read(arquivoWSDL);
             #endregion
 
@@ -383,15 +383,17 @@ namespace NFe.Components
         /// <param name="taHomologacao"></param>
         /// <param name="tpEmis"></param>
         /// <param name="padraoNFSe"></param>
+        /// <param name="servico"></param>
         /// <returns>Protocolo de segurança a ser utilizado</returns>
-        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe)
+        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe, Servicos servico)
         {
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Ssl3;
 
-            switch (tpEmis)
+            switch (servico)
             {
-                case 4: //EPEC - Ambiente Nacional
-                case 6: //SVAN em homologação só tá aceitando protocolo Tls
+                case Servicos.EventoManifestacaoDest:
+                case Servicos.NFeConsultaNFDest:
+                case Servicos.NFeDownload:
                     if (taHomologacao)
                         securityProtocolType = SecurityProtocolType.Tls;
                     else
@@ -399,35 +401,46 @@ namespace NFe.Components
                     break;
 
                 default:
-                    switch (cUF)
+                    switch (tpEmis)
                     {
-                        case 52: //Estado de Goiás em ambiente de homologação só tá aceitando Tls
+                        case 4: //EPEC
+                        case 6: //SVAN 
                             if (taHomologacao)
                                 securityProtocolType = SecurityProtocolType.Tls;
                             else
                                 goto default;
                             break;
 
-                        case 50: //Mato Grosso do Sul
-                        case 51: //Mato grosso
-                        case 15: //Pará
-                        case 21: //Maranhão
-                        case 22: //Piauí
-                        case 3550308: //Municipio de São Paulo-SP só tá aceitando Tls
-                            securityProtocolType = SecurityProtocolType.Tls;
-                            break;
-
                         default:
-                            switch (padraoNFSe)
+                            switch (cUF)
                             {
-                                case PadroesNFSe.GINFES:
-                                case PadroesNFSe.BHISS:
-                                case PadroesNFSe.EQUIPLANO:
+                                case 52: //Goiás
+                                case 50: //Mato Grosso do Sul
+                                case 51: //Mato grosso
+                                case 15: //Pará
+                                case 41: //Paraná
+                                case 21: //Maranhão
+                                case 22: //Piauí
+                                case 31: //Minas Gerais
+                                case 29: //Bahia
+                                case 3550308: //São Paulo-SP
                                     securityProtocolType = SecurityProtocolType.Tls;
                                     break;
 
                                 default:
-                                    securityProtocolType = SecurityProtocolType.Ssl3;
+                                    switch (padraoNFSe)
+                                    {
+                                        case PadroesNFSe.GINFES:
+                                        case PadroesNFSe.BHISS:
+                                        case PadroesNFSe.EQUIPLANO:
+                                            securityProtocolType = SecurityProtocolType.Tls;
+                                            break;
+
+                                        default:
+                                            securityProtocolType = SecurityProtocolType.Ssl3;
+                                            break;
+                                    }
+
                                     break;
                             }
 
@@ -447,10 +460,11 @@ namespace NFe.Components
         /// <param name="tpAmb"></param>
         /// <param name="tpEmis"></param>
         /// <param name="padraoNFSe"></param>
+        /// <param name="servico"></param>
         /// <returns>Protocolo de segurança a ser utilizado</returns>
-        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe)
+        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, Servicos servico)
         {
-            return DefinirProtocoloSeguranca(cUF, (tpAmb == (int)TipoAmbiente.taHomologacao), tpEmis, padraoNFSe);
+            return DefinirProtocoloSeguranca(cUF, (tpAmb == (int)TipoAmbiente.taHomologacao), tpEmis, padraoNFSe, servico);
         }
         #endregion
 

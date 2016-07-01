@@ -63,14 +63,16 @@ namespace NFSe.Components
             #endregion
 
             #region XML de Cancelamento de NFS-e - Versão 3
-            SchemaXML.InfSchemas.Add("NFSE-3-GINFES-CancelarNfseEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-3-GINFES-e:CancelarNfseEnvio", new InfSchema()
             {
-                Tag = "CancelarNfseEnvio",
+                Tag = "e:CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES\\servico_cancelar_nfse_envio_v03.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "CancelarNfseEnvio",
+                TagAssinatura = "e:CancelarNfseEnvio",
                 TagAtributoId = "Pedido",
+                TagLoteAssinatura = "Pedido",
+                TagLoteAtributoId = "tipos:InfPedidoCancelamento",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
             });
             #endregion

@@ -763,5 +763,35 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_PCorumbaMS_NfseWSService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://mogiguacu.sigiss.com.br:443/mogiguacu/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_mogiguacu_p_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_mogiguacu_p_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testemogiguacu.sigiss.com.br:443/testemogiguacu/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_testemogiguacu_h_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_testemogiguacu_h_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services")]
+        public string NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse {
+            get {
+                return ((string)(this["NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse"]));
+            }
+        }
     }
 }

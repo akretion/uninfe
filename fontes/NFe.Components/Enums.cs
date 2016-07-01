@@ -666,7 +666,17 @@ namespace NFe.Components
         /// Prefeitura de Rondonópolis - MT
         /// </summary>
         [Description("ABACO")]
-        ABACO
+        ABACO,
+        /// <summary>
+        /// Padrão Metrópolis
+        /// </summary>
+        [Description("Metrópolis")]
+        METROPOLIS,
+        /// <summary>
+        /// Apdrão Actcon
+        /// </summary>
+        [Description("Actcon")]
+        ACTCON
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
