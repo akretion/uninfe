@@ -32,7 +32,7 @@ namespace NFe.Service
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb);
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb, (int)TipoEmissao.teNormal, PadroesNFSe.NaoIdentificado);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb, (int)TipoEmissao.teNormal, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oDownloadEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);

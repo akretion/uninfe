@@ -18,6 +18,7 @@ using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
+using NFe.Components.Metropolis;
 
 namespace NFe.Service.NFSe
 {
@@ -56,7 +57,7 @@ namespace NFe.Service.NFSe
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe, Servico);
 
                 string cabecMsg = "";
                 switch (padraoNFSe)
@@ -192,6 +193,7 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
+                    case PadroesNFSe.ACTCON:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
@@ -258,6 +260,23 @@ namespace NFe.Service.NFSe
                             pedLoteRps = new Components.HCorumbaMS.NfseWSService();
 
                         break;
+
+                    case PadroesNFSe.METROPOLIS:
+                        #region METROPOLIS
+                        Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      ler.oDadosPedSitNfseRps.cMunicipio,
+                                                      ConfiguracaoApp.ProxyUsuario,
+                                                      ConfiguracaoApp.ProxySenha,
+                                                      ConfiguracaoApp.ProxyServidor,
+                                                      Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital metropolisdig = new AssinaturaDigital();
+                        metropolisdig.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
+                        metropolis.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+                        #endregion
                 }
 
                 if (base.IsInvocar(padraoNFSe, Servico))

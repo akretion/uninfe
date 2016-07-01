@@ -11,6 +11,7 @@ using NFe.Components.EL;
 using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
+using NFe.Components.Metropolis;
 
 namespace NFe.Service.NFSe
 {
@@ -46,7 +47,7 @@ namespace NFe.Service.NFSe
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe, Servico);
 
                 string cabecMsg = "";
                 switch (padraoNFSe)
@@ -147,7 +148,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                             Empresas.Configuracoes[emp].X509Certificado,
                                                             ler.oDadosPedSitNfseRps.cMunicipio,
                                                             ConfiguracaoApp.ProxyUsuario,
@@ -164,6 +165,7 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
+                    case PadroesNFSe.ACTCON:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"<versaoDados>2.01</versaoDados></cabecalho>";
                         break;
@@ -201,6 +203,24 @@ namespace NFe.Service.NFSe
                         }
 
                         break;
+
+
+                    case PadroesNFSe.METROPOLIS:
+                        #region METROPOLIS
+                        Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      ler.oDadosPedSitNfseRps.cMunicipio,
+                                                      ConfiguracaoApp.ProxyUsuario,
+                                                      ConfiguracaoApp.ProxySenha,
+                                                      ConfiguracaoApp.ProxyServidor,
+                                                      Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital metropolisdig = new AssinaturaDigital();
+                        metropolisdig.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
+                        metropolis.ConsultarNfsePorRps(NomeArquivoXML);
+                        break;
+                        #endregion
 
                     case PadroesNFSe.FREIRE_INFORMATICA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";

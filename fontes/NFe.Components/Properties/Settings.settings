@@ -221,5 +221,14 @@
     <Setting Name="NFe_Components_PCorumbaMS_NfseWSService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://usloft3931.serverloft.com:16680/pmcrbnfseletronica/ServicoWeb</Value>
     </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_mogiguacu_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://mogiguacu.sigiss.com.br:443/mogiguacu/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_sigiss_testemogiguacu_h_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testemogiguacu.sigiss.com.br:443/testemogiguacu/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -54,7 +54,7 @@ namespace NFe.Service
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
                     oLer.oDadosNfe.versao,
                     oLer.oDadosNfe.mod);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), PadroesNFSe.NaoIdentificado);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), PadroesNFSe.NaoIdentificado, Servico);
 
                 if (Empresas.Configuracoes[emp].CompactarNfe && oLer.oDadosNfe.versao != "2.00" && wsProxy.NomeMetodoWS.Length == 2)
                     Servico = Servicos.NFeEnviarLoteZip2;

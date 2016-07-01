@@ -49,6 +49,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new NFe.Components.SigCorp.BarretosSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3530706: //Mogi Guaçu-SP
+                                sigCorpService = new NFe.Components.SigCorp.MogiGuacuSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -93,6 +97,10 @@ namespace NFe.Components.SigCorp
 
                             case 3505500: //Barretos-SP
                                 sigCorpService = new NFe.Components.SigCorp.BarretosSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 3530706: //Mogi Guaçu-SP
+                                sigCorpService = new NFe.Components.SigCorp.MogiGuacuSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

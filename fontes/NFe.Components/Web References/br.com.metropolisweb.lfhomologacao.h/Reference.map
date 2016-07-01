@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services?wsdl" filename="Nfse.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services?wsdl=1" filename="services.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services?xsd=1" filename="services.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

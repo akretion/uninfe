@@ -89,6 +89,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -120,6 +121,9 @@
     <Compile Include="GovDigital\GovDigital.cs" />
     <Compile Include="GovDigital\GovDigitalBase.cs" />
     <Compile Include="IPM\IPM.cs" />
+    <Compile Include="Metropolis\Metropolis.cs" />
+    <Compile Include="Metropolis\MetropolisBase.cs" />
+    <Compile Include="Metropolis\LauroDeFreitasBA\h\MetropolisH.cs" />
     <Compile Include="MGM\PenapolisSP\p\MGMP.cs" />
     <Compile Include="MGM\XmlDocumentUtilities.cs" />
     <Compile Include="QRCode\QRCode.cs" />
@@ -136,6 +140,8 @@
     <Compile Include="Schemas\SchemaXMLNFSe_FREIRE_INFORMATICA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_CAMACARI_BA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_NA_INFORMATICA.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_METROPOLIS.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_ACTCON.cs" />
     <Compile Include="Schemas\SchemaXML_NFe.cs" />
     <Compile Include="Schemas\SchemaXML_MDFe.cs" />
     <Compile Include="Schemas\SchemaXML_CTE.cs" />
@@ -180,6 +186,10 @@
     <Compile Include="MGM\PenapolisSP\h\MGMH.cs" />
     <Compile Include="MGM\MGMCorp.cs" />
     <Compile Include="MGM\MGMBase.cs" />
+    <Compile Include="SigCorp\MogiGuacuSP\h\SigCorpH.cs" />
+    <Compile Include="SigCorp\MogiGuacuSP\h\WebInvokeAttribute.cs" />
+    <Compile Include="SigCorp\MogiGuacuSP\h\WebMessageFormat.cs" />
+    <Compile Include="SigCorp\MogiGuacuSP\p\SigCorpP.cs" />
     <Compile Include="SigCorp\BarretosSP\h\SigCorpH.cs" />
     <Compile Include="SigCorp\BarretosSP\p\SigCorpP.cs" />
     <Compile Include="SigCorp\RioGrandeRS\h\SigCorpH.cs" />
@@ -417,6 +427,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.metropolisweb.lfhomologacao.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.mgmtributacao.www.penapolis.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -462,6 +477,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.sigiss.mogiguacu.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.sigiss.riogrande.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -483,6 +503,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.sigiss.testeigarape\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.sigiss.testemogiguacu.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1051,6 +1076,18 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\Nfse.wsdl" />
+    <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\services.wsdl" />
+    <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\services.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\br.com.mgmtributacao.www.penapolis.h\EnvNfe.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -1159,6 +1196,20 @@
     <None Include="Web References\br.com.sigiss.marilia.p\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.com.sigiss.mogiguacu.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.mogiguacu.p\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.mogiguacu.p\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.mogiguacu.p\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.mogiguacu.p\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.sigiss.riogrande.p\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -1227,6 +1278,20 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.sigiss.testeigarape\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemogiguacu.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemogiguacu.h\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.testemogiguacu.h\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemogiguacu.h\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemogiguacu.h\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.sigiss.testeriogrande.h\Reference.map">
@@ -2055,6 +2120,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.metropolisweb.lfhomologacao.h\</RelPath>
+      <UpdateFromURL>http://lfhomologacao.metropolisweb.com.br:9090/webservicenfse/nfse/services%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://nfse00.el.com.br:19080/nfse_es_colatina/RpsServiceService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.el.colatina.p\</RelPath>
@@ -2385,6 +2461,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_marilia_p_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://mogiguacu.sigiss.com.br/mogiguacu/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.mogiguacu.p\</RelPath>
+      <UpdateFromURL>https://mogiguacu.sigiss.com.br/mogiguacu/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_mogiguacu_p_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfehomologacao.etransparencia.com.br/mg.varginha/webservice/aws_nfe.aspx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.etransparencia.nfehomologacao.h\</RelPath>
@@ -2494,6 +2581,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_testeigarape_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://testemogiguacu.sigiss.com.br/testemogiguacu/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.testemogiguacu.h\</RelPath>
+      <UpdateFromURL>https://testemogiguacu.sigiss.com.br/testemogiguacu/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_testemogiguacu_h_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://testeriogrande.sigiss.com.br/testeriogrande/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

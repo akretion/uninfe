@@ -96,7 +96,7 @@ namespace NFe.Components
                         {
                             if (Functions.PadraoNFSe(UFCod) == PadroesNFSe.GINFES)
                             {
-                                if (doc.DocumentElement.Name == "CancelarNfseEnvio" && doc.DocumentElement.FirstChild.Name == "Pedido")
+                                if (doc.DocumentElement.Name == "e:CancelarNfseEnvio" && doc.DocumentElement.FirstChild.Name == "Pedido")
                                 {
                                     versaoXML = "-3";
                                 }

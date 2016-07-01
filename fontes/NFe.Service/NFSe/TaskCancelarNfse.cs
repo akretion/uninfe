@@ -16,6 +16,7 @@ using NFe.Components.EloTech;
 using NFe.Components.MGM;
 using NFe.Components.Consist;
 using NFe.Components.Memory;
+using NFe.Components.Metropolis;
 
 namespace NFe.Service.NFSe
 {
@@ -56,7 +57,7 @@ namespace NFe.Service.NFSe
                     if (wsProxy != null)
                         pedCanNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedCanNfse.cMunicipio, oDadosPedCanNfse.tpAmb, oDadosPedCanNfse.tpEmis, padraoNFSe, Servico);
 
                 string cabecMsg = "";
                 switch (padraoNFSe)
@@ -141,6 +142,23 @@ namespace NFe.Service.NFSe
                                                         oDadosPedCanNfse.cMunicipio);
                         sigcorp.CancelarNfse(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.METROPOLIS:
+                        #region METROPOLIS
+                        Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      oDadosPedCanNfse.cMunicipio,
+                                                      ConfiguracaoApp.ProxyUsuario,
+                                                      ConfiguracaoApp.ProxySenha,
+                                                      ConfiguracaoApp.ProxyServidor,
+                                                      Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital metropolisdig = new AssinaturaDigital();
+                        metropolisdig.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        metropolis.CancelarNfse(NomeArquivoXML);
+                        break;
+                    #endregion
 
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
@@ -235,6 +253,7 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
+                    case PadroesNFSe.ACTCON:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;

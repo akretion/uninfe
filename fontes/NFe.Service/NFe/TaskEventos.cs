@@ -110,7 +110,7 @@ namespace NFe.Service
                         tpEmis,
                         string.Empty,
                         dadosEnvEvento.eventos[0].mod);
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, PadroesNFSe.NaoIdentificado);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);

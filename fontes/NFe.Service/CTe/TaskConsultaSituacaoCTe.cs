@@ -40,7 +40,7 @@ namespace NFe.Service
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, PadroesNFSe.NaoIdentificado);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oConsulta = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedSit.cUF));
@@ -54,7 +54,7 @@ namespace NFe.Service
                 oInvocarObj.Invocar(wsProxy,
                                     oConsulta,
                                     wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedSit.cUF), 
-                                    oCabecMsg, 
+                                    oCabecMsg,
                                     this,
                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).RetornoXML,
@@ -66,15 +66,15 @@ namespace NFe.Service
                 LerRetornoSitCTe(dadosPedSit.chNFe);
 
                 //Gerar o retorno para o ERP
-                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML, 
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
                                      Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).RetornoXML, this.vStrXmlRetorno);
             }
             catch (Exception ex)
             {
                 try
                 {
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, 
-                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML, 
+                    TFunctions.GravarArqErroServico(NomeArquivoXML,
+                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML,
                                                     Propriedade.ExtRetorno.Sit_ERR, ex);
                 }
                 catch
@@ -249,7 +249,7 @@ namespace NFe.Service
                                         //Definir o nome do arquivo -procNfe.xml                                               
                                         string strArquivoNFeProc = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                                                     PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                                    Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + 
+                                                                    Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) +
                                                                     Propriedade.ExtRetorno.ProcCTe;
 
                                         //Se existir o strArquivoNfe, tem como eu fazer alguma coisa, se ele não existir
@@ -260,13 +260,13 @@ namespace NFe.Service
                                             oLerXml.Cte(strArquivoCTe);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
-                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi,
+                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML,
                                                                         Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
-                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi,
+                                                                        Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML,
                                                                         Propriedade.ExtRetorno.ProcCTe);
 
                                             //Se o XML de distribuição não estiver na pasta em processamento

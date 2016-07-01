@@ -2863,6 +2863,22 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeStatusServico2_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCERecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMogiGuacu-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiGuacu-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\METROPOLIS\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\METROPOLIS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorLauroFreitas-METROPOLIS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValarares-ACTCON.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\ACTCON\nfse_v201.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ACTCON\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl" />

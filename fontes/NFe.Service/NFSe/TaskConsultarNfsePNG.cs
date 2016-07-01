@@ -44,7 +44,7 @@ namespace NFe.Service.NFSe
                 object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe, Servico);
 
                 //Assinar o XML
                 AssinaturaDigital ad = new AssinaturaDigital();

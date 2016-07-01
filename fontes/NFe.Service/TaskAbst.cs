@@ -1677,6 +1677,44 @@ namespace NFe.Service
 
                     }
                     break;
+                #endregion
+
+                #region ACTCON
+                case PadroesNFSe.ACTCON:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarLoteNotasFiscais";
+                            break;
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
                     #endregion
             }
 
@@ -2252,6 +2290,7 @@ namespace NFe.Service
                 case PadroesNFSe.PAULISTANA:
                 case PadroesNFSe.NOTAINTELIGENTE:
                 case PadroesNFSe.NA_INFORMATICA:
+                case PadroesNFSe.METROPOLIS:
                     retorno = false;
                     break;
 
@@ -2392,6 +2431,23 @@ namespace NFe.Service
                                 break;
                             case "EnviarLoteRpsEnvio":
                                 result = Servicos.NFSeGerarNfse;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+
+                case PadroesNFSe.ACTCON:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        switch (doc.DocumentElement.Name)
+                        {
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+                            case "EnviarLoteRpsEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRps;
                                 break;
                             default:
                                 break;

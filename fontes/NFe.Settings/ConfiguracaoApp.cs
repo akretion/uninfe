@@ -969,7 +969,7 @@ namespace NFe.Settings
                 
                 if(Empresas.Configuracoes[emp].WSProxy.ContainsKey(key))
                 {
-                    ServicePointManager.SecurityProtocol = WebServiceProxy.DefinirProtocoloSeguranca(cUF, tpAmb, tpEmis, padraoNFSe);
+                    ServicePointManager.SecurityProtocol = WebServiceProxy.DefinirProtocoloSeguranca(cUF, tpAmb, tpEmis, padraoNFSe, servico);
 
                     wsProxy = Empresas.Configuracoes[emp].WSProxy[key];
                 }
