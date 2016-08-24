@@ -322,7 +322,9 @@ namespace NFe.UI.Formularios
                            ufCod == 3506508 /*Birigui*/||
                            ufCod == 3201506 /*Colatina*/||
                            ufCod == 4118204 /*Paranagua*/||
-                           ufCod == 3130309 /*Iguatama*/;
+                           ufCod == 3130309 /*Iguatama*/||
+                           ufCod == 3504503 /*Avaré*/||
+                           ufCod == 4217808 /*Taió-SC*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

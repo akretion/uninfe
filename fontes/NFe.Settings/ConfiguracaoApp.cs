@@ -871,9 +871,9 @@ namespace NFe.Settings
         /// <param name="cUF">Código da UF</param>
         /// <param name="tpAmb">Código do ambiente que será acessado</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int cMunicipio)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, 1, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty);
+            return DefinirWS(servico, emp, cUF, tpAmb, 1, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty, cMunicipio);
         }
         #endregion
 
@@ -888,9 +888,9 @@ namespace NFe.Settings
         /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
         /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, int cMunicipio)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, string.Empty, string.Empty, cMunicipio);
         }
         #endregion
 
@@ -905,9 +905,9 @@ namespace NFe.Settings
         /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
         /// <param name="versao">Versão do XML</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao, int cMunicipio)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, string.Empty);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, string.Empty, cMunicipio);
         }
         #endregion
 
@@ -923,9 +923,9 @@ namespace NFe.Settings
         /// <param name="versao">Versão do XML</param>
         /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao, string mod)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, string versao, string mod, int cMunicipio)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, mod);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, versao, mod, cMunicipio);
         }
         #endregion
 
@@ -940,9 +940,9 @@ namespace NFe.Settings
         /// <param name="tpEmis">Tipo de emissão do documento fiscal</param>
         /// <param name="padraoNFSe">Padrão da NFSe</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe)
+        public static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, int cMunicipio)
         {
-            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, padraoNFSe, string.Empty, string.Empty);
+            return DefinirWS(servico, emp, cUF, tpAmb, tpEmis, padraoNFSe, string.Empty, string.Empty, cMunicipio);
         }
         #endregion
 
@@ -959,7 +959,7 @@ namespace NFe.Settings
         /// <param name="versao">Versão do XML</param>
         /// <param name="mod">Modelo do documento fiscal (55=NFe, 65=NFCe, etc...)</param>
         /// <returns>Retorna o objeto do WebService</returns>
-        private static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao, string mod)
+        private static WebServiceProxy DefinirWS(Servicos servico, int emp, int cUF, int tpAmb, int tpEmis, PadroesNFSe padraoNFSe, string versao, string mod, int cMunicipio)
         {
             WebServiceProxy wsProxy = null;
             string key = servico + " " + cUF + " " + tpAmb + " " + tpEmis + (!string.IsNullOrEmpty(versao) ? " " + versao : "") + (!string.IsNullOrEmpty(mod) ? " " + mod : "");
@@ -989,7 +989,8 @@ namespace NFe.Settings
                                                   padraoNFSe,
                                                   (tpAmb == (int)TipoAmbiente.taHomologacao),
                                                   servico,
-                                                  tpEmis);
+                                                  tpEmis,
+                                                  cMunicipio);
 
                     Empresas.Configuracoes[emp].WSProxy.Add(key, wsProxy);
                 }

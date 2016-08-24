@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
 using NFe.Components;
-using NFe.Settings;
 
 namespace NFe.UI.Formularios
 {
@@ -38,10 +31,6 @@ namespace NFe.UI.Formularios
             edtFTP_Porta.Text = empresa.FTPPorta.ToString();
             edtFTP_Server.Text = empresa.FTPNomeDoServidor;
             edtFTP_UserName.Text = empresa.FTPNomeDoUsuario;
-
-            edtFTP_PastaDestino.Visible =
-                lbl_edtFTP_PastaDestino.Visible =
-                edtFTP_GravaXMLPastaUnica.Visible = (empresa.Servico == TipoAplicativo.Nfe || empresa.Servico == TipoAplicativo.Todos);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -62,7 +51,7 @@ namespace NFe.UI.Formularios
             this.empresa.FTPPastaRetornos = this.edtFTP_PastaRetornos.Text;
             this.empresa.FTPPorta = Convert.ToInt32(this.edtFTP_Porta.Text);
             this.empresa.FTPNomeDoServidor = this.edtFTP_Server.Text;
-            this.empresa.FTPNomeDoUsuario = this.edtFTP_UserName.Text;            
+            this.empresa.FTPNomeDoUsuario = this.edtFTP_UserName.Text;
         }
 
         public void FocusFirstControl()
@@ -93,18 +82,17 @@ namespace NFe.UI.Formularios
 
                     const string error = "Pasta {0} '{1}' não existe no FTP.\r\nDeseja criá-la agora?";
 
-                    if (this.empresa.Servico == TipoAplicativo.Nfe || this.empresa.Servico == TipoAplicativo.Todos)
-                        if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                    if (!ftp.changeDir(edtFTP_PastaDestino.Text))
+                    {
+                        if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, string.Format(error, "destino", this.edtFTP_PastaDestino.Text), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, string.Format(error, "destino", this.edtFTP_PastaDestino.Text), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                ftp.makeDir(this.edtFTP_PastaDestino.Text);
-                                if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
-                                    throw new Exception("Pasta de destino criada mas não foi possivel acessá-la");
-                            }
-                            else
-                                this.ErrorFtp = true;
+                            ftp.makeDir(this.edtFTP_PastaDestino.Text);
+                            if (!ftp.changeDir(this.edtFTP_PastaDestino.Text))
+                                throw new Exception("Pasta de destino criada mas não foi possivel acessá-la");
                         }
+                        else
+                            ErrorFtp = true;
+                    }
 
                     ftp.ChangeDir(vCurrente);
 

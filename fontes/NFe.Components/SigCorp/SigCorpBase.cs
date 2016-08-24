@@ -25,32 +25,36 @@ namespace NFe.Components.SigCorp
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
+                            case 3529005: //Marilia-SP
+                                sigCorpService = new MariliaSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             case 3506003: //Bauru-SP
-                                sigCorpService = new NFe.Components.SigCorp.BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 4113700: //Londrina-PR
-                                sigCorpService = new NFe.Components.SigCorp.LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 4105508: //Cianorte-PR
-                                sigCorpService = new NFe.Components.SigCorp.CianortePR.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new CianortePR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 3130101: //Igarapé-MG
-                                sigCorpService = new NFe.Components.SigCorp.IgarapeMG.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new IgarapeMG.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 4315602: //Rio Grande-RS
-                                sigCorpService = new NFe.Components.SigCorp.RioGrandeRS.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new RioGrandeRS.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 3505500: //Barretos-SP
-                                sigCorpService = new NFe.Components.SigCorp.BarretosSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new BarretosSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             case 3530706: //Mogi Guaçu-SP
-                                sigCorpService = new NFe.Components.SigCorp.MogiGuacuSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                sigCorpService = new MogiGuacuSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             default:
@@ -60,47 +64,47 @@ namespace NFe.Components.SigCorp
                         switch (CodigoMun)
                         {
                             case 3529005: //Marilia-SP
-                                sigCorpService = new NFe.Components.SigCorp.MariliaSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new MariliaSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3304904: //São Gonçalo-RJ
-                                sigCorpService = new NFe.Components.SigCorp.SaoGoncaloRJ.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new SaoGoncaloRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3507506: //Botucatu-SP
-                                sigCorpService = new NFe.Components.SigCorp.BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3506003: //Bauru-SP
-                                sigCorpService = new NFe.Components.SigCorp.BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 4113700: //Londrina-PR 
-                                sigCorpService = new NFe.Components.SigCorp.LondrinaPR.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new LondrinaPR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3554805: //Tremembé-SP
-                                sigCorpService = new NFe.Components.SigCorp.TremembeSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new TremembeSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 4105508: //Cianorte-PR
-                                sigCorpService = new NFe.Components.SigCorp.CianortePR.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new CianortePR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3130101: //Igarape-MG
-                                sigCorpService = new NFe.Components.SigCorp.IgarapeMG.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new IgarapeMG.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 4315602: //Rio Grande-RS
-                                sigCorpService = new NFe.Components.SigCorp.RioGrandeRS.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new RioGrandeRS.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3505500: //Barretos-SP
-                                sigCorpService = new NFe.Components.SigCorp.BarretosSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new BarretosSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 3530706: //Mogi Guaçu-SP
-                                sigCorpService = new NFe.Components.SigCorp.MogiGuacuSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                sigCorpService = new MogiGuacuSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

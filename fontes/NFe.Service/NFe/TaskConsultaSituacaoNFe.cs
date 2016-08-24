@@ -40,7 +40,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, dadosPedSit.versao, dadosPedSit.mod);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, dadosPedSit.versao, dadosPedSit.mod, 0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSit.cUF, dadosPedSit.tpAmb, dadosPedSit.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -482,7 +482,7 @@ namespace NFe.Service
 
                     case "205": //Nfe já está denegada na base do SEFAZ
                         goto case "100";    ///<<<<<<<<<< ??????????????????? >>>>>>>>>>>>
-                    ///
+                                            ///
                     //Ler o XML para pegar a data de emissão para criar a psta dos XML´s Denegados
                     /*
                     if (File.Exists(strArquivoNFe))

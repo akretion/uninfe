@@ -32,7 +32,11 @@ namespace NFe.Components.Metropolis
 
                     else
                         switch (CodigoMun)
-                        {                            
+                        {
+                            case 2919207:
+                                metropolisService = new LauroDeFreitasBA.p.MetropolisP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

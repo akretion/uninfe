@@ -793,5 +793,45 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services")]
+        public string NFe_Components_br_com_metropolisweb_lftributos_p_Nfse {
+            get {
+                return ((string)(this["NFe_Components_br_com_metropolisweb_lftributos_p_Nfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fiorilli.avare.sp.gov.br:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_gov_sp_avare_fiorilli_h_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_gov_sp_avare_fiorilli_h_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testemarilia.sigiss.com.br:443/testemarilia/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_testemarilia_h_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_testemarilia_h_WebService_SigISS"]));
+            }
+        }
     }
 }

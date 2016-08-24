@@ -673,10 +673,15 @@ namespace NFe.Components
         [Description("Metrópolis")]
         METROPOLIS,
         /// <summary>
-        /// Apdrão Actcon
+        /// Padrão Actcon
         /// </summary>
         [Description("Actcon")]
-        ACTCON
+        ACTCON,
+        /// <summary>
+        /// Padrão Pública
+        /// </summary>
+        [Description("Pública")]
+        PUBLICA
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

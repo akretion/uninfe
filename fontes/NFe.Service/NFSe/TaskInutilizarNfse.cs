@@ -39,7 +39,7 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosInuNfse.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe, oDadosInuNfse.cMunicipio);
                 object pedInuNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 

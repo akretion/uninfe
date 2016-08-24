@@ -43,6 +43,8 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.textResultado = new MetroFramework.Controls.MetroTextBox();
             this.buttonPesquisa = new MetroFramework.Controls.MetroButton();
+            this.lblCNPJ = new MetroFramework.Controls.MetroLabel();
+            this.txtCNPJ = new MetroFramework.Controls.MetroTextBox();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -56,7 +58,7 @@
             this.metroLabel17.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel17.Location = new System.Drawing.Point(0, 58);
             this.metroLabel17.Name = "metroLabel17";
-            this.metroLabel17.Size = new System.Drawing.Size(238, 15);
+            this.metroLabel17.Size = new System.Drawing.Size(239, 15);
             this.metroLabel17.TabIndex = 16;
             this.metroLabel17.Text = "Utilizar para consulta o certificado da empresa";
             // 
@@ -109,7 +111,7 @@
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.Location = new System.Drawing.Point(189, 109);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(42, 15);
+            this.metroLabel2.Size = new System.Drawing.Size(41, 15);
             this.metroLabel2.TabIndex = 20;
             this.metroLabel2.Text = "Versão";
             // 
@@ -182,7 +184,7 @@
             this.lblServico.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblServico.Location = new System.Drawing.Point(374, 161);
             this.lblServico.Name = "lblServico";
-            this.lblServico.Size = new System.Drawing.Size(42, 15);
+            this.lblServico.Size = new System.Drawing.Size(43, 15);
             this.lblServico.TabIndex = 26;
             this.lblServico.Text = "Serviço";
             // 
@@ -241,10 +243,37 @@
             this.buttonPesquisa.UseSelectable = true;
             this.buttonPesquisa.Click += new System.EventHandler(this.buttonPesquisa_Click);
             // 
+            // lblCNPJ
+            // 
+            this.lblCNPJ.AutoSize = true;
+            this.lblCNPJ.Enabled = false;
+            this.lblCNPJ.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCNPJ.Location = new System.Drawing.Point(561, 109);
+            this.lblCNPJ.Name = "lblCNPJ";
+            this.lblCNPJ.Size = new System.Drawing.Size(36, 15);
+            this.lblCNPJ.TabIndex = 30;
+            this.lblCNPJ.Text = "CNPJ:";
+            // 
+            // txtCNPJ
+            // 
+            this.txtCNPJ.Enabled = false;
+            this.txtCNPJ.Lines = new string[0];
+            this.txtCNPJ.Location = new System.Drawing.Point(561, 128);
+            this.txtCNPJ.MaxLength = 32767;
+            this.txtCNPJ.Name = "txtCNPJ";
+            this.txtCNPJ.PasswordChar = '\0';
+            this.txtCNPJ.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCNPJ.SelectedText = "";
+            this.txtCNPJ.Size = new System.Drawing.Size(131, 25);
+            this.txtCNPJ.TabIndex = 31;
+            this.txtCNPJ.UseSelectable = true;
+            // 
             // userPedidoSituacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtCNPJ);
+            this.Controls.Add(this.lblCNPJ);
             this.Controls.Add(this.buttonPesquisa);
             this.Controls.Add(this.textResultado);
             this.Controls.Add(this.metroLabel3);
@@ -278,6 +307,8 @@
             this.Controls.SetChildIndex(this.metroLabel3, 0);
             this.Controls.SetChildIndex(this.textResultado, 0);
             this.Controls.SetChildIndex(this.buttonPesquisa, 0);
+            this.Controls.SetChildIndex(this.lblCNPJ, 0);
+            this.Controls.SetChildIndex(this.txtCNPJ, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,5 +331,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroTextBox textResultado;
         private MetroFramework.Controls.MetroButton buttonPesquisa;
+        private MetroFramework.Controls.MetroLabel lblCNPJ;
+        private MetroFramework.Controls.MetroTextBox txtCNPJ;
     }
 }

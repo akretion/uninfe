@@ -103,8 +103,11 @@ namespace NFSe.Components
                 case 4104204: // Campo Largo - PR
                     return (int)7481;
 
-                case 4118204: // Paranagua
+                case 4118204: // Paranagua - PR
                     return (int)7745;
+
+                case 4217808: // Taió - SC
+                    return (int)8351;
             }
 
             return 0;

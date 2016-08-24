@@ -63,7 +63,7 @@ namespace NFe.Service
                         ConfiguracaoApp.DefinirWS(Servico,
                                                     emp,
                                                     991,
-                                                    _distDFeInt.tpAmb);
+                                                    _distDFeInt.tpAmb, 0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(991, _distDFeInt.tpAmb, 1, PadroesNFSe.NaoIdentificado, Servico);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
