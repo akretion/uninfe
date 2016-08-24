@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.IO;
-using System.Xml;
-
 using NFe.Components;
 using NFe.Settings;
 using NFe.Certificado;
@@ -22,6 +17,7 @@ using NFe.Components.MGM;
 using NFe.Components.Consist;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.Fiorilli;
 
 namespace NFe.Service.NFSe
 {
@@ -61,7 +57,7 @@ namespace NFe.Service.NFSe
                 object pedLoteRps = null;
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
-                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe);
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe, oDadosPedSitNfse.cMunicipio);
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
 
@@ -82,6 +78,7 @@ namespace NFe.Service.NFSe
                         wsProxy.Betha = new Betha();
                         break;
 
+                    case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
@@ -313,6 +310,20 @@ namespace NFe.Service.NFSe
                         else
                             pedLoteRps = new Components.HCorumbaMS.NfseWSService();
 
+                        break;
+
+                    case PadroesNFSe.FIORILLI:
+                        Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedSitNfse.cMunicipio,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        fiorilli.ConsultarNfse(NomeArquivoXML);
                         break;
                 }
 

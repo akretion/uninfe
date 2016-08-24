@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Xml.Linq;
-using System.Reflection;
 
 namespace NFe.Components.Abstract
 {
@@ -27,9 +22,6 @@ namespace NFe.Components.Abstract
         public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
         {
             string nomearq = Path.Combine(PastaRetorno, Functions.ExtrairNomeArq(file, extEnvio) + extRetorno);
-
-            //FileInfo fi = new FileInfo(file);
-            //string nomearq = PastaRetorno + "\\" + fi.Name.ToLower().Replace(extEnvio.ToLower(), extRetorno.ToLower());
 
             StreamWriter write = new StreamWriter(nomearq);
             write.Write(result);

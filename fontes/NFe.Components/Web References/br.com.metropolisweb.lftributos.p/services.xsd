@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://endpoint.nfse.ws.webservicenfse.edza.com.br/" targetNamespace="http://endpoint.nfse.ws.webservicenfse.edza.com.br/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CancelarNfse" type="tns:CancelarNfse" />
+  <xs:element name="CancelarNfseResponse" type="tns:CancelarNfseResponse" />
+  <xs:element name="ConsultarLoteRps" type="tns:ConsultarLoteRps" />
+  <xs:element name="ConsultarLoteRpsResponse" type="tns:ConsultarLoteRpsResponse" />
+  <xs:element name="ConsultarNfse" type="tns:ConsultarNfse" />
+  <xs:element name="ConsultarNfsePorRps" type="tns:ConsultarNfsePorRps" />
+  <xs:element name="ConsultarNfsePorRpsResponse" type="tns:ConsultarNfsePorRpsResponse" />
+  <xs:element name="ConsultarNfseResponse" type="tns:ConsultarNfseResponse" />
+  <xs:element name="ConsultarSituacaoLoteRps" type="tns:ConsultarSituacaoLoteRps" />
+  <xs:element name="ConsultarSituacaoLoteRpsResponse" type="tns:ConsultarSituacaoLoteRpsResponse" />
+  <xs:element name="RecepcionarLoteRps" type="tns:RecepcionarLoteRps" />
+  <xs:element name="RecepcionarLoteRpsResponse" type="tns:RecepcionarLoteRpsResponse" />
+  <xs:complexType name="ConsultarNfsePorRps">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarNfsePorRpsRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="input">
+    <xs:sequence>
+      <xs:element name="nfseCabecMsg" type="xs:string" />
+      <xs:element name="nfseDadosMsg" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarNfsePorRpsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarNfsePorRpsResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="output">
+    <xs:sequence>
+      <xs:element name="outputXML" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarSituacaoLoteRps">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarSituacaoLoteRpsRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarSituacaoLoteRpsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarSituacaoLoteRpsResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarNfse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarNfseRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarNfseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarNfseResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelarNfse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CancelarNfseRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelarNfseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CancelarNfseResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecepcionarLoteRps">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RecepcionarLoteRpsRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecepcionarLoteRpsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RecepcionarLoteRpsResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarLoteRps">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarLoteRpsRequest" type="tns:input" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsultarLoteRpsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarLoteRpsResponse" type="tns:output" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

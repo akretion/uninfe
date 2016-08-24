@@ -63,6 +63,7 @@ namespace NFe.Components
         private PadroesNFSe PadraoNFSe { get; set; }
         private Servicos servico;
         private bool taHomologacao;
+        private int cMunicipio;
 
         private string _NomeClasseWS;
         public string NomeClasseWS
@@ -100,7 +101,7 @@ namespace NFe.Components
                                 return (taHomologacao ? "hConsultarNfsePorRps" : "ConsultarNfsePorRps");
 
                             case Servicos.NFSeCancelar:
-                                return (taHomologacao ? "hCancelarNfse" : NFe.Components.Servicos.NFSeCancelar.ToString());
+                                return (taHomologacao ? "hCancelarNfse" : "CancelarNfse");
 
                             case Servicos.NFSeRecepcionarLoteRps:
                                 return (taHomologacao ? "hRecepcionarLoteRpsSincrono" : "RecepcionarLoteRpsSincrono");
@@ -120,11 +121,22 @@ namespace NFe.Components
                         switch (servico)
                         {
                             case Servicos.NFSeCancelar:
-                                return "basic_INFSEGeracao";
+                                if (cMunicipio == 4109401)
+                                    return "BasicHttpBinding_INFSEGeracao";
+                                else
+                                    return "basic_INFSEGeracao";                                
+
                             case Servicos.NFSeRecepcionarLoteRps:
-                                return "basic_INFSEGeracao";
+                                if (cMunicipio == 4109401)
+                                    return "BasicHttpBinding_INFSEGeracao";
+                                else
+                                    return "basic_INFSEGeracao";
                             default:
-                                return "basic_INFSEConsultas";
+                                if (cMunicipio == 4109401)
+                                    return "BasicHttpBinding_INFSEConsultas";
+                                else
+                                    return "basic_INFSEConsultas";
+                                
                         }
                     #endregion
 
@@ -149,12 +161,13 @@ namespace NFe.Components
         #endregion
 
         #region Construtores
-        public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico, int tpEmis)
+        public WebServiceProxy(int cUF, string arquivoWSDL, X509Certificate2 Certificado, PadroesNFSe padraoNFSe, bool taHomologacao, Servicos servico, int tpEmis, int cMunicipio)
         {
             ArquivoWSDL = arquivoWSDL;
             PadraoNFSe = padraoNFSe;
             this.servico = servico;
             this.taHomologacao = taHomologacao;
+            this.cMunicipio = cMunicipio;
 
             //Definir o certificado digital que será utilizado na conexão com os serviços
             oCertificado = Certificado;
@@ -393,6 +406,7 @@ namespace NFe.Components
             {
                 case Servicos.EventoManifestacaoDest:
                 case Servicos.NFeConsultaNFDest:
+                case Servicos.DFeEnviar:
                 case Servicos.NFeDownload:
                     if (taHomologacao)
                         securityProtocolType = SecurityProtocolType.Tls;
@@ -414,7 +428,6 @@ namespace NFe.Components
                         default:
                             switch (cUF)
                             {
-                                case 52: //Goiás
                                 case 50: //Mato Grosso do Sul
                                 case 51: //Mato grosso
                                 case 15: //Pará
@@ -423,6 +436,7 @@ namespace NFe.Components
                                 case 22: //Piauí
                                 case 31: //Minas Gerais
                                 case 29: //Bahia
+                                case 13: //Amazonas
                                 case 3550308: //São Paulo-SP
                                     securityProtocolType = SecurityProtocolType.Tls;
                                     break;
@@ -433,6 +447,7 @@ namespace NFe.Components
                                         case PadroesNFSe.GINFES:
                                         case PadroesNFSe.BHISS:
                                         case PadroesNFSe.EQUIPLANO:
+                                        case PadroesNFSe.ABACO:
                                             securityProtocolType = SecurityProtocolType.Tls;
                                             break;
 

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
+﻿using NFe.Components.Abstract;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
 
 namespace NFe.Components.Fiorilli
 {
@@ -20,6 +12,7 @@ namespace NFe.Components.Fiorilli
         string ProxyUser = "";
         string ProxyPass = "";
         string ProxyServer = "";
+        X509Certificate2 Certificado;
         EmiteNFSeBase fiorilliService;
         protected EmiteNFSeBase FiorilliService
         {
@@ -30,12 +23,16 @@ namespace NFe.Components.Fiorilli
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
-                            case 3553807: //Taquarituba-SP <-Ambiente da Fiorilli para testes
-                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                            case 3553807: //Taquarituba-SP
+                                fiorilliService = new TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
-                            case 3512902: //Cosmorama-SP <-Ambiente da Fiorilli para testes
-                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                            case 3512902: //Cosmorama-SP 
+                                fiorilliService = new TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3504503: //Avaré-SP
+                                fiorilliService = new AvareSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:
@@ -45,11 +42,15 @@ namespace NFe.Components.Fiorilli
                         switch (CodigoMun)
                         {
                             case 3553807: //Taquarituba-SP
-                                fiorilliService = new NFe.Components.Fiorilli.TaquaraSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs);
+                                fiorilliService = new TaquaraSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             case 3512902: //Cosmorama-SP
-                                fiorilliService = new NFe.Components.Fiorilli.CosmoramaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs);                                
+                                fiorilliService = new CosmoramaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3504503: //Avaré-SP
+                                fiorilliService = new AvareSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:
@@ -62,7 +63,7 @@ namespace NFe.Components.Fiorilli
         #endregion
 
         #region Construtores
-        public FiorilliBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
+        public FiorilliBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver, X509Certificate2 certificado)
             : base(tpAmb, pastaRetorno)
         {
             CodigoMun = codMun;
@@ -71,6 +72,7 @@ namespace NFe.Components.Fiorilli
             ProxyUser = proxyuser;
             ProxyPass = proxypass;
             ProxyServer = proxyserver;
+            Certificado = certificado;
         }
         #endregion
 
@@ -105,7 +107,5 @@ namespace NFe.Components.Fiorilli
             FiorilliService.ConsultarNfsePorRps(file);
         }
         #endregion
-
-
     }
 }

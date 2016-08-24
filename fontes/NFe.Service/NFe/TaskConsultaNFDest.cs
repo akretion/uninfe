@@ -35,7 +35,7 @@ namespace NFe.Service
                     int cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, cUF, oDadosConsultaNFeDest.tpAmb);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, cUF, oDadosConsultaNFeDest.tpAmb, 0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(cUF, oDadosConsultaNFeDest.tpAmb, (int)TipoEmissao.teNormal, PadroesNFSe.NaoIdentificado, Servico);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -75,7 +75,7 @@ namespace NFe.Service
             {
                 try
                 {
-                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML : 
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioXML :
                                                         Propriedade.Extensao(Propriedade.TipoEnvio.ConsNFeDest).EnvioTXT;
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retConsNFeDest_ERR, ex);

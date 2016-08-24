@@ -117,10 +117,13 @@
     <Compile Include="EGoverne\EGoverne.cs" />
     <Compile Include="EGoverne\EGoverneBase.cs" />
     <Compile Include="EstadoURLs.cs" />
+    <Compile Include="Fiorilli\AvareSP\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\AvareSP\p\FiorilliP.cs" />
     <Compile Include="FISSLEX\SinopMT\p\FISSLEXP.cs" />
     <Compile Include="GovDigital\GovDigital.cs" />
     <Compile Include="GovDigital\GovDigitalBase.cs" />
     <Compile Include="IPM\IPM.cs" />
+    <Compile Include="Metropolis\LauroDeFreitasBA\p\MetropolisP.cs" />
     <Compile Include="Metropolis\Metropolis.cs" />
     <Compile Include="Metropolis\MetropolisBase.cs" />
     <Compile Include="Metropolis\LauroDeFreitasBA\h\MetropolisH.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Schemas\SchemaXMLNFSe_NA_INFORMATICA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_METROPOLIS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_ACTCON.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_PUBLICA.cs" />
     <Compile Include="Schemas\SchemaXML_NFe.cs" />
     <Compile Include="Schemas\SchemaXML_MDFe.cs" />
     <Compile Include="Schemas\SchemaXML_CTE.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="MGM\PenapolisSP\h\MGMH.cs" />
     <Compile Include="MGM\MGMCorp.cs" />
     <Compile Include="MGM\MGMBase.cs" />
+    <Compile Include="SigCorp\MariliaSP\h\SigCorpH.cs" />
     <Compile Include="SigCorp\MogiGuacuSP\h\SigCorpH.cs" />
     <Compile Include="SigCorp\MogiGuacuSP\h\WebInvokeAttribute.cs" />
     <Compile Include="SigCorp\MogiGuacuSP\h\WebMessageFormat.cs" />
@@ -303,6 +308,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.fgmaiss.www.p.penapolis.consulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.fiorilli.avaresp.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -432,6 +442,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.metropolisweb.lftributos.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.mgmtributacao.www.penapolis.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -507,6 +522,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.sigiss.testemarilia.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.sigiss.testemogiguacu.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -563,6 +583,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.gov.rs.erechim.nfse.www.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.gov.sp.avare.fiorilli.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -890,6 +915,41 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.com.fgmaiss.www.p.penapolis.consulta\wsnfeconsulta.wsdl" />
+    <None Include="Web References\br.com.fiorilli.avaresp.p\CancelarNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarLoteRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseFaixaResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseServicoPrestadoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseServicoTomadoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\EnviarLoteRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\EnviarLoteRpsSincronoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\GerarNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\IssWebWS.wsdl" />
+    <None Include="Web References\br.com.fiorilli.avaresp.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.fiorilli.avaresp.p\SubstituirNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.fisslex.demo.aws_consultaloterps.h\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -1088,6 +1148,18 @@
     <None Include="Web References\br.com.metropolisweb.lfhomologacao.h\services.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\br.com.metropolisweb.lftributos.p\Nfse.wsdl" />
+    <None Include="Web References\br.com.metropolisweb.lftributos.p\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.metropolisweb.lftributos.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.metropolisweb.lftributos.p\services.wsdl" />
+    <None Include="Web References\br.com.metropolisweb.lftributos.p\services.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\br.com.mgmtributacao.www.penapolis.h\EnvNfe.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -1278,6 +1350,20 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.sigiss.testeigarape\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemarilia.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemarilia.h\sigiss_ws.wsdl" />
+    <None Include="Web References\br.com.sigiss.testemarilia.h\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemarilia.h\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.sigiss.testemarilia.h\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.sigiss.testemogiguacu.h\Reference.map">
@@ -1533,6 +1619,41 @@
     <None Include="Web References\br.gov.rs.erechim.nfse.www.p\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\IssWebWS.wsdl" />
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.gov.sp.avare.fiorilli.h\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.gov.sp.embudasartes.sistemas.www.p\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -1955,6 +2076,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PSaoPauloSP_LoteNFe</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.gov.sp.avare.fiorilli.h\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_gov_sp_avare_fiorilli_h_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Users\Renan\Desktop\NFSE\curitiba\PCuritibaPR-EGoverne.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.gov.egoverne.isscuritiba.curitiba.p\</RelPath>
@@ -2109,6 +2241,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_rlz_ceiss_santafedosul_p_Webservice_Prefeitura</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.fiorilli.avaresp.p\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.net.taquarituba.fiorilli.p\</RelPath>
@@ -2130,6 +2273,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lfhomologacao_h_Nfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.metropolisweb.lftributos.p\</RelPath>
+      <UpdateFromURL>http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lftributos_p_Nfse</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://nfse00.el.com.br:19080/nfse_es_colatina/RpsServiceService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -2581,6 +2735,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_sigiss_testeigarape_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://testemarilia.sigiss.com.br/testemarilia/ws/sigiss_ws.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.sigiss.testemarilia.h\</RelPath>
+      <UpdateFromURL>https://testemarilia.sigiss.com.br/testemarilia/ws/sigiss_ws.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_sigiss_testemarilia_h_WebService_SigISS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://testemogiguacu.sigiss.com.br/testemogiguacu/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

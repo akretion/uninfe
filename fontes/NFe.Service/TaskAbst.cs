@@ -430,16 +430,27 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeCancelar:
-                            retorna = "basic_INFSEGeracao";
+                            if (cMunicipio == 4109401)
+                                retorna = "BasicHttpBinding_INFSEGeracao";
+                            else
+                                retorna = "basic_INFSEGeracao";
                             break;
 
                         case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "basic_INFSEGeracao";
+                            if (cMunicipio == 4109401)
+                                retorna = "BasicHttpBinding_INFSEGeracao";
+                            else
+                                retorna = "basic_INFSEGeracao";
                             break;
 
                         default:
-                            retorna = "basic_INFSEConsultas";
+                            if (cMunicipio == 4109401)
+                                retorna = "BasicHttpBinding_INFSEConsultas";
+                            else
+                                retorna = "basic_INFSEConsultas";
                             break;
+
+
                     }
                     break;
                 #endregion
@@ -1706,6 +1717,38 @@ namespace NFe.Service
                             break;
                         case Servicos.NFSeConsultarSituacaoLoteRps:
                             retorna = "ConsultarLoteNotasFiscais";
+                            break;
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+                #endregion
+
+                #region PUBLICA
+                case PadroesNFSe.PUBLICA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
                             break;
                         case Servicos.NFSeConsultarURL:
                             retorna = "";

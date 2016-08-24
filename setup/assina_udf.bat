@@ -1,1 +1,1 @@
-"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe" sign /a /t http://timestamp.verisign.com/scripts/timstamp.dll %1
+"C:\Program Files (x86)\Windows Kits\10\bin\x86\signtool.exe" sign /a /t http://timestamp.verisign.com/scripts/timstamp.dll %1

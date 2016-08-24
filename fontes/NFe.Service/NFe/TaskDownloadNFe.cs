@@ -31,7 +31,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb, 0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oDadosenvDownload.chNFe.Substring(0, 2)), oDadosenvDownload.tpAmb, (int)TipoEmissao.teNormal, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -43,8 +43,8 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDownload);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oDownloadEvento, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oDownloadEvento,
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
@@ -56,13 +56,13 @@ namespace NFe.Service
                     LerRetornoDownloadNFe(emp);
 
                     //Gravar o xml de retorno para o ERP. Não pode gravar antes de extrair os downloads, para que o ERP saiba quando realmente terminou. Wandrey 03/04/2013
-                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML, 
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML,
                                          Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).RetornoXML, this.vStrXmlRetorno);
                 }
                 else
                 {
                     // Gerar o XML de eventos a partir do TXT gerado pelo ERP
-                    oGerarXML.EnvioDownloadNFe(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioTXT) + 
+                    oGerarXML.EnvioDownloadNFe(Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioTXT) +
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML, oDadosenvDownload);
                 }
             }
@@ -70,7 +70,7 @@ namespace NFe.Service
             {
                 try
                 {
-                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML : 
+                    var ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML :
                                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioTXT;
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, Propriedade.ExtRetorno.retDownload_ERR, ex);

@@ -263,7 +263,7 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                         else
                             try
                             {
-                                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(srv, emp, odados.cUF, odados.tpAmb, odados.tpEmis, string.Empty);
+                                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(srv, emp, odados.cUF, odados.tpAmb, odados.tpEmis, string.Empty, 0);
                                 if (wsProxy != null)
                                     outServicos += aservico + "=True,";
                                 else

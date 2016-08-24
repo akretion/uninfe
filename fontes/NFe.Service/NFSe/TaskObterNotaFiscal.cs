@@ -40,7 +40,7 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do municipio
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oObterNotaFiscal.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, oObterNotaFiscal.cMunicipio);
                 object pedNfseXML = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 

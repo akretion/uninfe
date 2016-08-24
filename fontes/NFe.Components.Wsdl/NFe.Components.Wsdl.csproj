@@ -2879,9 +2879,21 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\ACTCON\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLauroFreitas-METROPOLIS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacadorSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCacadorSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\PUBLICA\schema_nfse_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarapuava-PR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarapuava-PR.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCamacariBA.wsdl" />

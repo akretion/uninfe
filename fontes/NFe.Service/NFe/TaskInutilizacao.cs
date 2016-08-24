@@ -41,7 +41,7 @@ namespace NFe.Service
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString());
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString(), 0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -59,11 +59,11 @@ namespace NFe.Service
                     oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oInutilizacao, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oInutilizacao,
                                         wsProxy.NomeMetodoWS[0],
                                         oCabecMsg, this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML, 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML,
                                         true,
                                         securityProtocolType);
@@ -170,11 +170,11 @@ namespace NFe.Service
                     dadosPedInut.versao = InutNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
 
                     XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
-                    
+
                     foreach (XmlNode infInutNode in infInutList)
                     {
                         XmlElement infInutElemento = (XmlElement)infInutNode;
-                        Functions.PopulateClasse(dadosPedInut, infInutElemento);                   
+                        Functions.PopulateClasse(dadosPedInut, infInutElemento);
 
                         if (infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
                         {

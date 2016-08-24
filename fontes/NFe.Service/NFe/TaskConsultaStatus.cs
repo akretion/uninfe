@@ -48,7 +48,8 @@ namespace NFe.Service
                                                     dadosPedSta.tpAmb,
                                                     dadosPedSta.tpEmis,
                                                     dadosPedSta.versao,
-                                                    dadosPedSta.mod);
+                                                    dadosPedSta.mod,
+                                                    0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ

@@ -109,7 +109,8 @@ namespace NFe.Service
                         dadosEnvEvento.eventos[0].tpAmb,
                         tpEmis,
                         string.Empty,
-                        dadosEnvEvento.eventos[0].mod);
+                        dadosEnvEvento.eventos[0].mod,
+                        0);
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ

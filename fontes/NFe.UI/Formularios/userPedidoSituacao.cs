@@ -93,6 +93,9 @@ namespace NFe.UI
                         //Posicionar o elemento da combo Ambiente
                         this.cbAmbiente.SelectedValue = Empresas.Configuracoes[this.Emp].AmbienteCodigo;
 
+                        //Exibir CNPJ da empresa
+                        txtCNPJ.Text = uninfeDummy.FmtCnpjCpf(Empresas.Configuracoes[Emp].CNPJ, true);
+
                         //Posicionar o elemento da combo tipo de emissão
                         this.cbEmissao.SelectedValue = Empresas.Configuracoes[this.Emp].tpEmis;
 
