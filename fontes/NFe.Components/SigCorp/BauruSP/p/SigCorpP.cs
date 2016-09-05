@@ -14,6 +14,13 @@ namespace NFe.Components.SigCorp.BauruSP.p
     public class SigCorpP : EmiteNFSeBase
     {
         WebServiceSigISS service = new WebServiceSigISS();
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region constrututores
         public SigCorpP(TipoAmbiente tpAmb, string pastaRetorno)

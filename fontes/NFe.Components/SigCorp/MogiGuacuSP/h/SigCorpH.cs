@@ -15,6 +15,13 @@ namespace NFe.Components.SigCorp.MogiGuacuSP.h
     public class SigCorpH: EmiteNFSeBase
     {
         WebServiceSigISS service = new WebServiceSigISS();
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region construtores
         public SigCorpH(TipoAmbiente tpAmb, string pastaRetorno)

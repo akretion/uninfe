@@ -11,6 +11,13 @@ namespace NFe.Components.EGoverne.CuritibaPR
 {
     public class EGoverneSerialization : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         string UsuarioProxy = "";
         string SenhaProxy = "";
         string DomainProxy = "";

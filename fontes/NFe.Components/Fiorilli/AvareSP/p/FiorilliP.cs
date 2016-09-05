@@ -13,6 +13,14 @@ namespace NFe.Components.Fiorilli.AvareSP.p
         IssWebWS service = new IssWebWS();
         string UsuarioWs = "";
         string SenhaWs = "";
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 
         #region construtores
         public FiorilliP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver, X509Certificate2 certificado)

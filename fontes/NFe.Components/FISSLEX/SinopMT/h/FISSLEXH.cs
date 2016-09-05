@@ -19,6 +19,14 @@ namespace NFe.Components.FISSLEX.SinopMT.h
 {
     public class FISSLEXH : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         string ProxyUser = "";
         string ProxyPass = "";
         string ProxyServer = "";

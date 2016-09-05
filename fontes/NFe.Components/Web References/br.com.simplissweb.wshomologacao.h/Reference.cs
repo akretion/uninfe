@@ -548,8 +548,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
         
         private tcIdentificacaoRps rpsSubstituidoField;
         
-        private string outrasInformacoesField;
-        
         private tcDadosServico servicoField;
         
         private tcIdentificacaoPrestador prestadorField;
@@ -650,16 +648,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
             }
             set {
                 this.rpsSubstituidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OutrasInformacoes {
-            get {
-                return this.outrasInformacoesField;
-            }
-            set {
-                this.outrasInformacoesField = value;
             }
         }
         
@@ -2705,10 +2693,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
         
         private decimal valorUnitarioField;
         
-        private sbyte issTributavelField;
-        
-        private bool issTributavelFieldSpecified;
-        
         /// <remarks/>
         public string Descricao {
             get {
@@ -2736,27 +2720,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
             }
             set {
                 this.valorUnitarioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte IssTributavel {
-            get {
-                return this.issTributavelField;
-            }
-            set {
-                this.issTributavelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IssTributavelSpecified {
-            get {
-                return this.issTributavelFieldSpecified;
-            }
-            set {
-                this.issTributavelFieldSpecified = value;
             }
         }
     }
@@ -2830,8 +2793,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
         
         private string inscricaoMunicipalField;
         
-        private string inscricaoEstadualField;
-        
         /// <remarks/>
         public tcCpfCnpj CpfCnpj {
             get {
@@ -2849,16 +2810,6 @@ namespace NFe.Components.br.com.simplissweb.wshomologacao.h {
             }
             set {
                 this.inscricaoMunicipalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoEstadual {
-            get {
-                return this.inscricaoEstadualField;
-            }
-            set {
-                this.inscricaoEstadualField = value;
             }
         }
     }

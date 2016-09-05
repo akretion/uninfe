@@ -17,6 +17,14 @@ namespace NFe.Components.Metropolis.LauroDeFreitasBA.h
 {
     public class MetropolisH : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+        }
         Nfse service = new Nfse();
         private string CabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
 

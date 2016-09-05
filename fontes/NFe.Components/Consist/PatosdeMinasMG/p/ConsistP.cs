@@ -16,6 +16,14 @@ namespace NFe.Components.Consist.PatosdeMinasMG.p
 {
     public class ConsistP : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         string UsuarioWs = "";
         string SenhaWs = "";
         eISSWService service = new eISSWService();

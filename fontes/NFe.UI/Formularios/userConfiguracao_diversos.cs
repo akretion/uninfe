@@ -324,11 +324,14 @@ namespace NFe.UI.Formularios
                            ufCod == 4118204 /*Paranagua*/||
                            ufCod == 3130309 /*Iguatama*/||
                            ufCod == 3504503 /*Avaré*/||
-                           ufCod == 4217808 /*Taió-SC*/;
+                           ufCod == 3541406 /*Presidente Prudente-SP*/||
+                           ufCod == 4217808 /*Taió-SC*/||
+                           ufCod == 4101101 /*Andirá-PR*/||
+                           ufCod == 3306305 /*Volta Redonda-RJ*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 
-            lbl_UsuarioWS.Visible =                
+            lbl_UsuarioWS.Visible =
                 txtUsuarioWS.Visible = visible;
 
             lbl_SenhaWS.Visible =

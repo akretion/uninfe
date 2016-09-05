@@ -15,6 +15,14 @@ namespace NFe.Components.RLZ_INFORMATICA.SantaFeDoSul.p
 {
     public class Rlz_InformaticaP : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         WebservicePrefeitura service = new WebservicePrefeitura();
         string XmlString = "";
 

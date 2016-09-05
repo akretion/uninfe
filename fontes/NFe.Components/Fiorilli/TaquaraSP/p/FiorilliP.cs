@@ -10,6 +10,14 @@ namespace NFe.Components.Fiorilli.TaquaraSP.p
 {
     public class FiorilliP : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         IssWebWS service = new IssWebWS();
         string UsuarioWs = "";
         string SenhaWs = "";

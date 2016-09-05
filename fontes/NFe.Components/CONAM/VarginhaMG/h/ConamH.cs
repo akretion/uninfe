@@ -18,6 +18,13 @@ namespace NFe.Components.Conam.VarginhaMG.h
         string UsuarioWs = "";
         string SenhaWs = "";
         int codigoMun = 0;
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region construtores
         public ConamH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, int CodigoMun)
