@@ -14,6 +14,13 @@ namespace NFe.Components.SigCorp.LondrinaPR.p
     public class SigCorpP : EmiteNFSeBase
     {
         ModuloEmissorNFSe service = new ModuloEmissorNFSe();
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region construtores
         public SigCorpP(TipoAmbiente tpAmb, string pastaRetorno)

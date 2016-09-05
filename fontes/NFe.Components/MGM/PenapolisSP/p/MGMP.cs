@@ -18,6 +18,13 @@ namespace NFe.Components.MGM.PenapolisSP.p
     {
         string Login;
         string Senha;
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         NFe.Components.br.com.fgmaiss.www.p.penapois.envio.webservice serviceEnvio = new NFe.Components.br.com.fgmaiss.www.p.penapois.envio.webservice();
         NFe.Components.br.com.fgmaiss.www.p.penapolis.cancela.webservice serviceCancela = new br.com.fgmaiss.www.p.penapolis.cancela.webservice();

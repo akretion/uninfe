@@ -19,6 +19,13 @@ namespace NFe.Components.Consist.PatosdeMinasMG.h
         string UsuarioWs = "";
         string SenhaWs = "";
         eISSWService service = new eISSWService();
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region construtores
         public ConsistH(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)

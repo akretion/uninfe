@@ -9,11 +9,51 @@ namespace NFe.Components.Abstract
     {
         public TipoAmbiente tpAmb { get; set; }
         public string PastaRetorno { get; set; }
+        public abstract string NameSpaces { get; }
 
         public EmiteNFSeBase(TipoAmbiente tpAmb, string pastaRetorno)
         {
             this.tpAmb = tpAmb;
             this.PastaRetorno = pastaRetorno;
+        }
+
+        /// <summary>
+        /// Deserializar o objeto para string
+        /// </summary>
+        /// <typeparam name="T">Tipo do objeto</typeparam>
+        /// <param name="file">Caminho do arquivo</param>
+        /// <returns></returns>
+        public T DeserializarObjeto<T>(string file)
+            where T : new()
+        {
+            T envio = new T();
+
+            XmlRootAttribute xRoot = new XmlRootAttribute();
+            xRoot.ElementName = envio.GetType().Name;
+            xRoot.Namespace = NameSpaces;
+
+            XmlSerializer serializer = new XmlSerializer(typeof(T), xRoot);
+            StreamReader reader = new StreamReader(file);
+            envio = (T)serializer.Deserialize(reader);
+            reader.Close();
+
+            return envio;
+        }
+
+        /// <summary>
+        /// Serializar o objeto para XML
+        /// </summary>
+        /// <typeparam name="T">Tipo do objeto que será serializado</typeparam>
+        /// <param name="retorno">Objeto de retorno que será convertivo</param>
+        /// <returns></returns>
+        public string SerializarObjeto<T>(T retorno)
+            where T : new()
+        {
+            XmlSerializer serializerResposta = new XmlSerializer(typeof(T));
+            StringWriter textWriter = new StringWriter();
+            serializerResposta.Serialize(textWriter, retorno);
+
+            return textWriter.ToString();
         }
 
         /// WANDREY:

@@ -38,7 +38,6 @@
       <xs:element minOccurs="1" maxOccurs="1" name="IncentivadorCultural" type="xs:byte" />
       <xs:element minOccurs="1" maxOccurs="1" name="Status" type="xs:byte" />
       <xs:element minOccurs="0" maxOccurs="1" name="RpsSubstituido" type="tns:tcIdentificacaoRps" />
-      <xs:element minOccurs="0" maxOccurs="1" name="OutrasInformacoes" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Servico" type="tns:tcDadosServico" />
       <xs:element minOccurs="0" maxOccurs="1" name="Prestador" type="tns:tcIdentificacaoPrestador" />
       <xs:element minOccurs="0" maxOccurs="1" name="Tomador" type="tns:tcDadosTomador" />
@@ -90,7 +89,6 @@
       <xs:element minOccurs="0" maxOccurs="1" name="Descricao" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="Quantidade" type="xs:decimal" />
       <xs:element minOccurs="1" maxOccurs="1" name="ValorUnitario" type="xs:decimal" />
-      <xs:element minOccurs="0" maxOccurs="1" name="IssTributavel" type="xs:byte" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="tcIdentificacaoPrestador">
@@ -111,7 +109,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="CpfCnpj" type="tns:tcCpfCnpj" />
       <xs:element minOccurs="0" maxOccurs="1" name="InscricaoMunicipal" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="InscricaoEstadual" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="tcCpfCnpj">
@@ -155,7 +152,6 @@
   <xs:complexType name="EnviarLoteRpsResposta">
     <xs:sequence>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element minOccurs="0" maxOccurs="1" name="NumeroLote" type="xs:nonNegativeInteger" />
         <xs:element minOccurs="0" maxOccurs="1" name="Protocolo" type="xs:string" />
         <xs:element minOccurs="1" maxOccurs="1" name="DataRecebimento" type="xs:dateTime" />
         <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
@@ -165,6 +161,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="NumeroLote" type="xs:nonNegativeInteger" />
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -184,7 +181,6 @@
   <xs:complexType name="ConsultarSituacaoLoteRpsResposta">
     <xs:sequence>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element minOccurs="1" maxOccurs="1" name="Situacao" type="xs:byte" />
         <xs:element minOccurs="0" maxOccurs="1" name="NumeroLote" type="xs:nonNegativeInteger" />
         <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
           <xs:complexType>
@@ -193,6 +189,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="Situacao" type="xs:byte" />
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -333,17 +330,17 @@
   <xs:complexType name="ConsultarNfseResposta">
     <xs:sequence>
       <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element minOccurs="0" maxOccurs="unbounded" name="MensagemRetorno" type="tns:tcMensagemRetorno" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element minOccurs="0" maxOccurs="1" name="ListaNfse">
           <xs:complexType>
             <xs:sequence>
               <xs:element minOccurs="0" maxOccurs="unbounded" name="CompNfse" type="tns:tcCompNfse" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="MensagemRetorno" type="tns:tcMensagemRetorno" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -384,6 +381,7 @@
   <xs:complexType name="CancelarNfseResposta">
     <xs:sequence>
       <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element minOccurs="0" maxOccurs="1" name="Cancelamento" type="tns:tcCancelamentoNfse" />
         <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
           <xs:complexType>
             <xs:sequence>
@@ -391,7 +389,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element minOccurs="0" maxOccurs="1" name="Cancelamento" type="tns:tcCancelamentoNfse" />
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -422,6 +419,7 @@
   <xs:complexType name="GerarNovaNfseResposta">
     <xs:sequence>
       <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element minOccurs="0" maxOccurs="1" name="NovaNfse" type="tns:tcRespostaIdentNovaNfse" />
         <xs:element minOccurs="0" maxOccurs="1" name="ListaMensagemRetorno">
           <xs:complexType>
             <xs:sequence>
@@ -429,7 +427,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element minOccurs="0" maxOccurs="1" name="NovaNfse" type="tns:tcRespostaIdentNovaNfse" />
       </xs:choice>
     </xs:sequence>
   </xs:complexType>

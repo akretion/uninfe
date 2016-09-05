@@ -114,7 +114,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("N10_200", prefix + "N10|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
                     _LayoutTXT.Add("N10A_310", prefix + "N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|");
                     _LayoutTXT.Add("N10A_200", prefix + "N10a|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|");
-                    _LayoutTXT.Add("N10B", prefix + "N10b|oOrig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest|");
+                    _LayoutTXT.Add("N10B", prefix + "N10b|orig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest|");
                     _LayoutTXT.Add("N10C", prefix + "N10c|orig|CSOSN|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("N10D", prefix + "N10d|orig|CSOSN|");
                     _LayoutTXT.Add("N10E", prefix + "N10e|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");

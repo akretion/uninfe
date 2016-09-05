@@ -13,6 +13,14 @@ namespace NFe.Components.MGM.PenapolisSP.h
 {
     public class MGMH : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         webservice service = new webservice();        
 
         #region construtores

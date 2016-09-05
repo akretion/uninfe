@@ -17,6 +17,14 @@ namespace NFe.Components.EL.ColatinaES.p
 {
     public class ELP : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         RpsServiceService service = new RpsServiceService();
         System.Net.NetworkCredential Credentials;
         string UsuarioWs = "";

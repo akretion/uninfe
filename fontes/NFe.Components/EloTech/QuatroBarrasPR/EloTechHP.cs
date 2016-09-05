@@ -17,6 +17,14 @@ namespace NFe.Components.EloTech.QuatroBarrasPR
 {
     public class EloTechHP : EmiteNFSeBase
     {
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         NfsePortService service = new NfsePortService();
         X509Certificate2 Certificado;
 

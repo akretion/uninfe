@@ -20,6 +20,15 @@ namespace NFe.Components.Memory.PonteNovaMG.p
         string CodigoMun = "";
         string HashWs = "";
 
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
         #region construtores
         public MemoryP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver, int codMun)
             : base(tpAmb, pastaRetorno)
