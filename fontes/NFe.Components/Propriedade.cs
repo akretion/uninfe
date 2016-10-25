@@ -159,12 +159,12 @@ namespace NFe.Components
                                  where (Int32)p.Attribute(NFe.Components.TpcnResources.ID.ToString()) < 900
                                  orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
                                  select new
-                                {
-                                    Nome = (string)p.Attribute(NFeStrConstants.Nome),
-                                    ID = (Int32)p.Attribute(TpcnResources.ID.ToString()),
-                                    UF = (string)p.Attribute(TpcnResources.UF.ToString()),
-                                    SVC = (string)p.Attribute(NFeStrConstants.SVC)
-                                });
+                                 {
+                                     Nome = (string)p.Attribute(NFeStrConstants.Nome),
+                                     ID = (Int32)p.Attribute(TpcnResources.ID.ToString()),
+                                     UF = (string)p.Attribute(TpcnResources.UF.ToString()),
+                                     SVC = (string)p.Attribute(NFeStrConstants.SVC)
+                                 });
                         foreach (var item in s)
                         {
                             _Estados.Add(new Municipio
@@ -258,6 +258,20 @@ namespace NFe.Components
             PedURLNFSe,
             PedURLNFSeSerie,
             /// <summary>
+            /// Extensões para SAT/CFe
+            /// </summary>
+            ConsultarSAT,
+            ExtrairLogsSAT,
+            ConsultarStatusOperacionalSAT,
+            TesteFimAFimSAT,
+            TrocarCodigoDeAtivacaoSAT,
+            EnviarDadosVendaSAT,
+            ConverterSAT,
+            CancelarUltimaVendaSAT,
+            ConfigurarInterfaceDeRedeSAT,
+            AssociarAssinaturaSAT,
+            AtivarSAT,
+            /// <summary>
             /// Extensões em comum entre NFe, CTe e MDF-e
             /// </summary>
             ConsCad,
@@ -283,25 +297,27 @@ namespace NFe.Components
             pedUpdatewsdl,
             pedRestart
         }
+
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
+
         public static ExtensaoClass Extensao(TipoEnvio value)
         {
             if (ListaExtensoes.Count == 0)
             {
                 #region Extensões gerais
                 ListaExtensoes.Add(TipoEnvio.AltCon, new ExtensaoClass(
-                    "-alt-con.xml", "-alt-con.txt", 
-                    "-ret-alt-con.xml", "-ret-alt-con.txt", 
+                    "-alt-con.xml", "-alt-con.txt",
+                    "-ret-alt-con.xml", "-ret-alt-con.txt",
                     "Alteração de configuração de empresas"));
-                
+
                 ListaExtensoes.Add(TipoEnvio.ConsCertificado, new ExtensaoClass(
-                    "-cons-certificado.xml", null, 
-                    "uninfe-ret-cons-certificado.xml", null, 
+                    "-cons-certificado.xml", null,
+                    "uninfe-ret-cons-certificado.xml", null,
                     "Consulta aos certificados instalados"));
-                
+
                 ListaExtensoes.Add(TipoEnvio.ConsInf, new ExtensaoClass(
-                    "-cons-inf.xml", "-cons-inf.txt", 
-                    "-ret-cons-inf.xml", "-ret-cons-inf.txt", 
+                    "-cons-inf.xml", "-cons-inf.txt",
+                    "-ret-cons-inf.xml", "-ret-cons-inf.txt",
                     "Consulta as configurações do UniNFe"));
                 #endregion
 
@@ -314,15 +330,15 @@ namespace NFe.Components
                     "Consulta de notas destinadas"));
 
                 ListaExtensoes.Add(TipoEnvio.EnvCancelamento, new ExtensaoClass(
-                    "-env-canc.xml", "-env-canc.txt", 
-                    "-ret-env-canc.xml", "", 
+                    "-env-canc.xml", "-env-canc.txt",
+                    "-ret-env-canc.xml", "",
                     "Pedido de cancelamento de NFe/NFCe, use a extensão -ped-eve.xml ou -ped-eve.txt"));
-                
+
                 ListaExtensoes.Add(TipoEnvio.EnvCCe, new ExtensaoClass(
-                    "-env-cce.xml","-env-cce.txt",
-                    "-ret-env-cce.xml", "", 
+                    "-env-cce.xml", "-env-cce.txt",
+                    "-ret-env-cce.xml", "",
                     "Carta de correção, use a extensao -ped-eve.xml ou -ped-eve.txt"));
-                
+
                 ListaExtensoes.Add(TipoEnvio.EnvManifestacao, new ExtensaoClass(
                     "-env-manif.xml", "-env-manif.txt",
                     "-ret-env-manif.xml", "",
@@ -338,13 +354,70 @@ namespace NFe.Components
                     "-ret-gerar-chave.xml", "-ret-gerar-chave.txt",
                     "Pedido de geração da chave de acesso da NFe/NFCe/MDFe/CTe"
                 ));
-                
+
                 ListaExtensoes.Add(TipoEnvio.NFe, new ExtensaoClass(
                     "-nfe.xml", "-nfe.txt",
                     "-nfe-ret.xml", "",
                     "Pedido de envio de NFe/NFCe"
                 ));
 
+                #endregion
+
+                #region Extensões SAT/CFe
+                ListaExtensoes.Add(TipoEnvio.ConsultarSAT, new ExtensaoClass(
+                    "-sat-cons.xml", "-sat-cons.txt",
+                    "-sat-cons-ret.xml", "-sat-cons-ret.txt",
+                    "Consulta SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.ExtrairLogsSAT, new ExtensaoClass(
+                    "-sat-extlog.xml", "-sat-extlog.txt",
+                    "-sat-extlog-ret.xml", "-sat-extlog-ret.txt",
+                    "Extrair Logs do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.ConsultarStatusOperacionalSAT, new ExtensaoClass(
+                    "-sat-statop.xml", "-sat-statop.txt",
+                    "-sat-statop-ret.xml", "-sat-statop-ret.txt",
+                    "Consultar Status Operacional do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.TesteFimAFimSAT, new ExtensaoClass(
+                    "-testsat-cfe.xml", "-testsat-cfe.txt",
+                    "-testsat-cfe-ret.xml", "-testsat-cfe-ret.txt",
+                    "Teste Fim a Fim do SAT com XML de CFe"));
+
+                ListaExtensoes.Add(TipoEnvio.TrocarCodigoDeAtivacaoSAT, new ExtensaoClass(
+                    "-sat-trocativ.xml", "-sat-trocativ.txt",
+                    "-sat-trocativ-ret.xml", "-sat-trocativ-ret.txt",
+                    "Troca de código de ativação do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.EnviarDadosVendaSAT, new ExtensaoClass(
+                    "-sat.xml", "-sat.txt",
+                    "-sat-ret.xml", "-sat-ret.txt",
+                    "Envio da venda do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.ConverterSAT, new ExtensaoClass(
+                    "-sat-conv.xml", "-sat-conv.txt",
+                    "-sat-conv-ret.xml", "-sat-conv-ret.txt",
+                    "Conversão de NFCe para CFe/SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.CancelarUltimaVendaSAT, new ExtensaoClass(
+                    "-sat-canc.xml", "-sat-canc.txt",
+                    "-sat-canc-ret.xml", "-sat-canc-ret.txt",
+                    "Cancelamento de Ultima Venda do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.ConfigurarInterfaceDeRedeSAT, new ExtensaoClass(
+                    "-sat-confrede.xml", "-sat-confrede.txt",
+                    "-sat-confrede-ret.xml", "-sat-confrede-ret.txt",
+                    "Configurar Interface de Rede do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.AssociarAssinaturaSAT, new ExtensaoClass(
+                    "-sat-assin.xml", "-sat-assin.txt",
+                    "-sat-assin-ret.xml", "-sat-assin-ret.txt",
+                    "Associar Assinatura do SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.AtivarSAT, new ExtensaoClass(
+                    "-sat-atv.xml", "-sat-atv.txt",
+                    "-sat-atv-ret.xml", "-sat-atv-ret.txt",
+                    "Ativar SAT"));
                 #endregion
 
                 #region Extensões do CTe
@@ -380,7 +453,7 @@ namespace NFe.Components
                 ListaExtensoes.Add(TipoEnvio.PedLoteRps, new ExtensaoClass(
                     "-ped-loterps.xml", "",
                     "-loterps.xml", "",
-                    "Envio de consulta de lote/rps (NFSe)" ));
+                    "Envio de consulta de lote/rps (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSitLoteRps, new ExtensaoClass(
                     "-ped-sitloterps.xml", "",
@@ -520,6 +593,7 @@ namespace NFe.Components
                 ListaExtensoes.Add(TipoEnvio.pedLayouts, new ExtensaoClass("-layouts.xml", "-layouts.txt", "-ret-layouts.pdf", "", "Gerar um PDF com o layout da NFe em TXT e extensões usadas no UniNFe."));
                 #endregion
             }
+
             return ListaExtensoes[value];
         }
 
@@ -553,12 +627,12 @@ namespace NFe.Components
             /// -nfe.xml
             /// </summary>
             public static string NFe = Extensao(TipoEnvio.NFe).EnvioXML;
-            
+
             /// <summary>
             /// -nfe.txt
             /// </summary>
             public static string NFe_TXT = Extensao(TipoEnvio.NFe).EnvioTXT;
-            
+
             /// <summary>
             /// -env-cce.xml
             /// </summary>
@@ -568,52 +642,52 @@ namespace NFe.Components
             /// -env-cce.txt
             /// </summary>
             public static string EnvCCe_TXT = Extensao(TipoEnvio.EnvCCe).EnvioTXT;
-            
+
             /// <summary>
             /// -env-manif.xml
             /// </summary>
             public static string EnvManifestacao = Extensao(TipoEnvio.EnvManifestacao).EnvioTXT;
-            
+
             /// <summary>
             /// -env-manif.txt
             /// </summary>
             public static string EnvManifestacao_TXT = Extensao(TipoEnvio.EnvManifestacao).EnvioTXT;
-            
+
             /// <summary>
             /// -env-canc.xml
             /// </summary>
             public static string EnvCancelamento = Extensao(TipoEnvio.EnvCancelamento).EnvioXML;
-            
-                /// <summary>
+
+            /// <summary>
             /// -env-canc.txt
             /// </summary>
             public static string EnvCancelamento_TXT = Extensao(TipoEnvio.EnvCancelamento).EnvioTXT;
-            
+
             /// <summary>
             /// -gerar-chave.xml
             /// </summary>
             public static string GerarChaveNFe = Extensao(TipoEnvio.GerarChaveNFe).EnvioXML;
-            
+
             /// <summary>
             /// -gerar-chave.txt
             /// </summary>
             public static string GerarChaveNFe_TXT = Extensao(TipoEnvio.GerarChaveNFe).EnvioTXT;
-            
+
             /// <summary>
             /// -down-nfe.xml
             /// </summary>
             public static string EnvDownload_XML = Extensao(TipoEnvio.EnvDownload).EnvioXML;
-            
+
             /// <summary>
             /// -down-nfe.txt
             /// </summary>
             public static string EnvDownload_TXT = Extensao(TipoEnvio.EnvDownload).EnvioTXT;
-            
+
             /// <summary>
             /// -cons-nfe-dest.xml
             /// </summary>
             public static string ConsNFeDest_XML = Extensao(TipoEnvio.ConsNFeDest).EnvioXML;
-            
+
             /// <summary>
             /// -cons-nfe-dest.txt
             /// </summary>
@@ -672,7 +746,7 @@ namespace NFe.Components
             /// -ped-nfsepng.xml x -nfsepng.xml
             /// </summary>
             public static string PedNfsePNG = Extensao(TipoEnvio.PedNFSePNG).EnvioXML;
-            
+
             /// <summary>
             /// -ped-inunfse.xml x -inunfse.xml
             /// </summary>
@@ -707,7 +781,7 @@ namespace NFe.Components
             /// -ped-eve.txt
             /// </summary>
             public static string PedEve_TXT = Extensao(TipoEnvio.PedEve).EnvioTXT;
-            
+
             /// <summary>
             /// -montar-lote.xml
             /// </summary>
@@ -717,17 +791,17 @@ namespace NFe.Components
             /// -montar-lote.txt
             /// </summary>
             public static string MontarLote_TXT = Extensao(TipoEnvio.MontarLote).EnvioTXT;
-            
+
             /// <summary>
             /// -cons-cad.xml
             /// </summary>
             public static string ConsCad = Extensao(TipoEnvio.ConsCad).EnvioXML;
-            
+
             /// <summary>
             /// -cons-cad.txt
             /// </summary>
             public static string ConsCad_TXT = Extensao(TipoEnvio.ConsCad).EnvioTXT;
-            
+
             /// <summary>
             /// -env-lot.xml
             /// </summary>
@@ -737,17 +811,17 @@ namespace NFe.Components
             /// -ped-inu.xml
             /// </summary>
             public static string PedInu = Extensao(TipoEnvio.PedInu).EnvioXML;
-            
+
             /// <summary>
             /// -ped-inu.txt
             /// </summary>
             public static string PedInu_TXT = Extensao(TipoEnvio.PedInu).EnvioTXT;
-            
+
             /// <summary>
             /// -ped-rec.xml
             /// </summary>
             public static string PedRec = Extensao(TipoEnvio.PedRec).EnvioXML;
-            
+
             /// <summary>
             /// -ped-sit.xml
             /// </summary>
@@ -757,12 +831,12 @@ namespace NFe.Components
             /// -ped-sit.txt
             /// </summary>
             public static string PedSit_TXT = Extensao(TipoEnvio.PedSit).EnvioTXT;
-            
+
             /// <summary>
             /// -ped-sta.xml
             /// </summary>
             public static string PedSta = Extensao(TipoEnvio.PedSta).EnvioXML;
-            
+
             /// <summary>
             /// -ped-sta.txt
             /// </summary>
@@ -855,47 +929,47 @@ namespace NFe.Components
             /// -procnfe.xml
             /// </summary>
             public const string ProcNFe = "-procNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
-            
+
             /// <summary>
             /// -den.xml
             /// </summary>
             public const string Den = "-den.xml";
-            
+
             /// <summary>
             /// -ret-env-cce.err
             /// </summary>
             public const string retEnvCCe_ERR = "-ret-env-cce.err";
-            
+
             /// <summary>
             /// -ret-canc.err
             /// </summary>
             public const string retCancelamento_ERR = "-ret-env-canc.err";
-            
+
             /// <summary>
             /// -procEventoNFe.xml
             /// </summary>
             public const string ProcEventoNFe = "-procEventoNFe.xml";
-            
+
             /// <summary>
             /// -procinutnfe.xml
             /// </summary>
             public const string ProcInutNFe = "-procInutNFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
-            
+
             /// <summary>
             /// -nfe.err
             /// </summary>
             public const string Nfe_ERR = "-nfe.err";
-            
+
             /// <summary>
             /// -ret-down-nfe.err
             /// </summary>
             public const string retDownload_ERR = "-ret-nfe-down.err";
-            
+
             /// <summary>
             /// -ret-cons-nfe-dest.err
             /// </summary>
             public const string retConsNFeDest_ERR = "-ret-cons-nfe-dest.err";
-            
+
             /// <summary>
             /// -ret-manif.err
             /// </summary>
@@ -903,22 +977,22 @@ namespace NFe.Components
             #endregion
 
             #region Extensões CTe
-            
+
             /// <summary>
             /// -procCTe.xml
             /// </summary>
             public const string ProcCTe = "-procCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
-            
+
             /// <summary>
             /// -procEventoCTe.xml
             /// </summary>
             public const string ProcEventoCTe = "-procEventoCTe.xml";
-            
+
             /// <summary>
             /// -procInutCTe.xml
             /// </summary>
             public static string ProcInutCTe = "-procInutCTe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
-            
+
             /// <summary>
             /// -cte.err
             /// </summary>
@@ -930,17 +1004,17 @@ namespace NFe.Components
             /// -procMDFe.xml
             /// </summary>
             public const string ProcMDFe = "-procMDFe.xml"; //Não deixar tudo minusculo para evitar problemas com Linux configurado para Case Sensitive. Wandrey 23/06/2011
-            
+
             /// <summary>
             /// -procEventoMDFe.xml
             /// </summary>
             public const string ProcEventoMDFe = "-procEventoMDFe.xml";
-            
+
             /// <summary>
             /// -mdfe.err
             /// </summary>
             public const string MDFe_ERR = "-mdfe.err";
-            
+
             /// <summary>
             /// -ret-consmdfenaoenc.err
             /// </summary>
@@ -952,42 +1026,42 @@ namespace NFe.Components
             /// -eve.err
             /// </summary>
             public const string Eve_ERR = "-eve.err";
-            
+
             /// <summary>
             /// -montar-lote.err
             /// </summary>
             public const string MontarLote_ERR = "-montar-lote.err";
-            
+
             /// <summary>
             /// -ret-cons-cad.err
             /// </summary>
             public const string ConsCad_ERR = "-ret-cons-cad.err";
-            
+
             /// <summary>
             /// -sit.err
             /// </summary>
             public const string Sit_ERR = "-sit.err";
-            
+
             /// <summary>
             /// -pro-rec.err
             /// </summary>
             public const string ProRec_ERR = "-pro-rec.err";
-            
+
             /// <summary>
             /// -sta.err
             /// </summary>
             public const string Sta_ERR = "-sta.err";
-            
+
             /// <summary>
             /// -inu.err
             /// </summary>
             public const string Inu_ERR = "-inu.err";
-            
+
             /// <summary>
             /// -rec.xml
             /// </summary>
             public const string Rec = "-rec.xml";
-            
+
             /// <summary>
             /// -rec.err
             /// </summary>
@@ -995,22 +1069,22 @@ namespace NFe.Components
             #endregion
 
             #region Extensões NFSe
-            
+
             /// <summary>
             /// -ret-loterps.err
             /// </summary>
             public const string RetEnvLoteRps_ERR = "-ret-loterps.err";
-            
+
             /// <summary>
             /// -cannfse.err
             /// </summary>
             public const string CanNfse_ERR = "-cannfse.err";
-            
+
             /// <summary>
             /// -lotrps.err
             /// </summary>
             public const string LoteRps_ERR = "-loterps.err";
-            
+
             /// <summary>
             /// -sitloterps.err
             /// </summary>
@@ -1025,7 +1099,7 @@ namespace NFe.Components
             /// -sitnfserps.err
             /// </summary>
             public const string SitNfseRps_ERR = "-sitnfserps.err";
-            
+
             /// <summary>
             /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
             /// </summary>

@@ -37,17 +37,13 @@ namespace NFe.Components
         /// </summary>
         NFeConverterTXTparaXML,
         /// <summary>
-        /// Envia os lotes de NFe para os webservices (NfeRecepcao)
+        /// Envia os lotes de NFe para os webservices
         /// </summary>
         NFeEnviarLote,
         /// <summary>
-        /// Envia os lotes de NFe para os webservices (NFeAutorizacao)
-        /// </summary>
-        NFeEnviarLote2,
-        /// <summary>
         /// Envia os lotes de NFe para os webservices de forma Compactada (NFeAutorizacao)
         /// </summary>
-        NFeEnviarLoteZip2,
+        NFeEnviarLoteZip,
         /// <summary>
         /// Envia XML de Inutilização da NFe
         /// </summary>
@@ -61,13 +57,9 @@ namespace NFe.Components
         /// </summary>
         NFePedidoConsultaSituacao,
         /// <summary>
-        /// Consulta recibo do lote nfe (NFeRetRecepcao)
+        /// Consulta recibo do lote nfe 
         /// </summary>
         NFePedidoSituacaoLote,
-        /// <summary>
-        /// Consulta recibo do lote nfe (NFeRetAutorizacao)
-        /// </summary>
-        NFePedidoSituacaoLote2,
 
         #region Eventos NFe
         /// <summary>
@@ -96,10 +88,6 @@ namespace NFe.Components
         /// Assinar e validar um XML de NFe no envio em Lote
         /// </summary>
         NFeAssinarValidarEnvioEmLote,
-        /// <summary>
-        /// Enviar uma consulta de nfe de destinatario
-        /// </summary>
-        NFeConsultaNFDest,
         /// <summary>
         /// Enviar solicitacao de download de nfe
         /// </summary>
@@ -271,6 +259,23 @@ namespace NFe.Components
         MDFeRecepcaoEvento,
         #endregion
 
+        #region SAT/CFe
+        /// <summary>
+        /// Consultar SAT
+        /// </summary>
+        SATConsultar,
+        SATExtrairLogs,
+        SATConsultarStatusOperacional,
+        SATTesteFimAFim,
+        SATTrocarCodigoDeAtivacao,
+        SATEnviarDadosVenda,
+        SATConverterNFCe,
+        SATCancelarUltimaVenda,
+        SATConfigurarInterfaceDeRede,
+        SATAssociarAssinatura,
+        SATAtivar,
+        #endregion
+
         #region Serviços em comum NFe, CTe, MDFe e NFSe
         /// <summary>
         /// Valida e envia o XML de pedido de Consulta do Cadastro do Contribuinte para o webservice
@@ -370,6 +375,11 @@ namespace NFe.Components
         /// </summary>
         [Description("NFC-e")]
         NFCe = 4,
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs do SAT
+        /// </summary>
+        [Description("SAT")]
+        SAT = 5,
         [Description("NF-e, NFC-e, CT-e e MDF-e")]
         Todos = 10,
         [Description("")]
@@ -681,7 +691,12 @@ namespace NFe.Components
         /// Padrão Pública
         /// </summary>
         [Description("Pública")]
-        PUBLICA
+        PUBLICA,
+        /// <summary>
+        /// Padrão BSIT-BR
+        /// </summary>
+        [Description("BSIT-BR")]
+        BSITBR
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

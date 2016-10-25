@@ -47,6 +47,11 @@
           <xsd:element minOccurs="1" maxOccurs="1" name="inss" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="irrf" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="csll" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="municipal" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="federal" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="dia_prest_servico" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="mes_prest_servico" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ano_prest_servico" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="tcLoteRps">
@@ -180,13 +185,6 @@
     <wsdl:part name="RetornoNota" type="tns:tcRetornoNota" />
     <wsdl:part name="DescricaoErros" type="tns:tcDescricaoErros" />
   </wsdl:message>
-  <wsdl:message name="CancelarNotaRequest">
-    <wsdl:part name="DadosCancelaNota" type="tns:tcDadosCancelaNota" />
-  </wsdl:message>
-  <wsdl:message name="CancelarNotaResponse">
-    <wsdl:part name="RetornoNota" type="tns:tcRetornoNota" />
-    <wsdl:part name="DescricaoErros" type="tns:tcDescricaoErros" />
-  </wsdl:message>
   <wsdl:message name="ConsultarNotaValidaRequest">
     <wsdl:part name="DadosConsultaNota" type="tns:tcDadosConsultaNota" />
   </wsdl:message>
@@ -214,11 +212,6 @@
       <wsdl:input message="tns:GerarNotaRequest" />
       <wsdl:output message="tns:GerarNotaResponse" />
     </wsdl:operation>
-    <wsdl:operation name="CancelarNota">
-      <documentation>Faz o cancelamento da nota fiscal eletrônica</documentation>
-      <wsdl:input message="tns:CancelarNotaRequest" />
-      <wsdl:output message="tns:CancelarNotaResponse" />
-    </wsdl:operation>
     <wsdl:operation name="ConsultarNotaValida">
       <documentation>Faz a consulta de uma nota fiscal eletrônica para saber se esta válida</documentation>
       <wsdl:input message="tns:ConsultarNotaValidaRequest" />
@@ -239,15 +232,6 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="GerarNota">
       <soap:operation soapAction="urn:sigiss_ws#GerarNota" style="rpc" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:sigiss_ws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:sigiss_ws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CancelarNota">
-      <soap:operation soapAction="urn:sigiss_ws#CancelarNota" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:sigiss_ws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

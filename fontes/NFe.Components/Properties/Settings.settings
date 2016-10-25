@@ -18,10 +18,10 @@
       <Value Profile="(Default)">https://botucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php</Value>
     </Setting>
     <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+      <Value Profile="(Default)">http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
     <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://saogoncalo.sigiss.com.br:443/saogoncalo/ws/sigiss_ws.php</Value>
@@ -247,6 +247,18 @@
     </Setting>
     <Setting Name="NFe_Components_br_com_simplissweb_wsandira_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wsandira.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_simplissweb_wsitaporanga2_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://201.69.64.34:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PJaraguaGO_nfseWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://jaragua.bsit-br.com.br/integracao/services/nfseWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfse.guarapuava.pr.gov.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://pmassis.dyndns-server.com/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

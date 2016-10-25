@@ -43,12 +43,7 @@ namespace NFe.Components.SigCorp.CianortePR.p
 
         public override void CancelarNfse(string file)
         {
-            tcDadosCancelaNota oTcDadosCancela = ReadXML<tcDadosCancelaNota>(file);            
-            tcEstruturaDescricaoErros[] tcErros = null;
-            tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
-            string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+            throw new Exceptions.ServicoInexistenteException();
         }
 
         public override void ConsultarLoteRps(string file)
@@ -70,7 +65,7 @@ namespace NFe.Components.SigCorp.CianortePR.p
         {
             tcDadosPrestador oTcDadosPrestador = ReadXML<tcDadosPrestador>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
-            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "urn:ConsultarNotaPrestador"), out tcErros);
+            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), out tcErros);
             string strResult = base.CreateXML(result, tcErros);
             GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
