@@ -89,6 +89,19 @@ namespace NFSe.Components
                 TargetNameSpace = "http://notacarioca.rio.gov.br/WSNacional/XSD/1/nfse_pcrj_v01.xsd"
             });
             #endregion
+
+            #region XML de lote RPS (Sincrono)
+            SchemaXML.InfSchemas.Add("NFSE-CARIOCA-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\CARIOCA\\nfse_pcrj_v01.xsd",
+                Descricao = "XML de Lote RPS - Sincrono",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TargetNameSpace = "http://notacarioca.rio.gov.br/WSNacional/XSD/1/nfse_pcrj_v01.xsd"
+            });
+            #endregion
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,15 +45,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release45_x64|x64'">
-    <OutputPath>bin\Release45_x64\</OutputPath>
-    <DefineConstants>TRACE;_fw45;x64</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -2024,10 +2015,10 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaxiasdoSulRS-GIFServicos.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquaritubaSP-IssWebWS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquaritubaSP-Fiorilli.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquaritubaSP-IssWebWS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquaritubaSP-Fiorilli.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSCteRecepcaoEvento.wsdl" />
@@ -2818,12 +2809,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PBarretos-SIGCORP.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HClaudioMG-NotaInteligente.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PClaudioMG-NotaInteligente.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HAlagoinhasBA-FREIRE.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -2910,6 +2895,58 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PVenancioAires-NFSEconsulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PVenancioAires-NFSEremessa.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCruzAltaRSISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaporangaSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\BSITBR\nfse-v2.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeRecepcao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeAtivacao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeAtualizacao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeCancelamento_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeCertificacao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeComandos_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeLogs_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeParametrizacao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeRetRecepcao_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeServicoNacional_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeSignAC_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeStatus_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFe\CFeRecepcao\CfeTeste_0007.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="NFse\schemas\NFSe\BSITBR\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJaraguaGO-BSITBR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValarares-ACTCON.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItaporangaSP-FIORILLI.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

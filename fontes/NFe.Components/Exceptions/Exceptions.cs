@@ -108,26 +108,4 @@ namespace NFe.Components.Exceptions
         }
 
     }
-
-    public class FalhaLinkQRCode : Exception
-    {
-        private string Arquivo = "";
-        private string Grupo = "";
-        private string Tag = "";
-
-        public FalhaLinkQRCode(string arquivo, string grupo, string tag)
-        {
-            Arquivo = arquivo;
-            Grupo = grupo;
-            Tag = tag;
-        }
-        public override string Message
-        {
-            get
-            {
-                return String.Format("Não foi possivel ler valores no arquivo {0}, Tag: <{2}><{3}>.", Arquivo);
-            }
-        }
-
-    }
 }

@@ -38,6 +38,22 @@ namespace NFSe.Components
             });
             #endregion
 
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-CAMACARI_BA-EnviarLoteRpsSincronoEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsSincronoEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+
             #region Consulta NFSe por período
             SchemaXML.InfSchemas.Add("NFSE-CAMACARI_BA-ConsultarNfseFaixaEnvio", new InfSchema()
             {

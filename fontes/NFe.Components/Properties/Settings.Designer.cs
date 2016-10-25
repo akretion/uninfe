@@ -76,7 +76,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS"]));
@@ -86,7 +86,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://201.28.69.146:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS"]));
@@ -851,6 +851,46 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_simplissweb_wsandira_p_NfseService {
             get {
                 return ((string)(this["NFe_Components_br_com_simplissweb_wsandira_p_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://201.69.64.34:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_com_simplissweb_wsitaporanga2_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_com_simplissweb_wsitaporanga2_p_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://jaragua.bsit-br.com.br/integracao/services/nfseWS")]
+        public string NFe_Components_PJaraguaGO_nfseWS {
+            get {
+                return ((string)(this["NFe_Components_PJaraguaGO_nfseWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfse.guarapuava.pr.gov.br/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://pmassis.dyndns-server.com/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS"]));
             }
         }
     }

@@ -12,7 +12,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Net;
-using System.ComponentModel;
 
 namespace NFe.Components
 {
@@ -58,14 +57,12 @@ namespace NFe.Components
         /// <param name="arquivoDestino">Arquivo de destino (destino do arquivo)</param>
         public static void Move(string arquivoOrigem, string arquivoDestino)
         {
-            if (File.Exists(arquivoDestino))
-                File.Delete(arquivoDestino);
-
             if (!Directory.Exists(Path.GetDirectoryName(arquivoDestino)))
                 Directory.CreateDirectory(Path.GetDirectoryName(arquivoDestino));
+            else if (File.Exists(arquivoDestino))
+                File.Delete(arquivoDestino);
 
-            File.Copy(arquivoOrigem, arquivoDestino);
-            File.Delete(arquivoOrigem);
+            File.Move(arquivoOrigem, arquivoDestino);            
         }
         #endregion
 
@@ -319,6 +316,7 @@ namespace NFe.Components
                             retorno = ret.Substring(0, ret.Length - EXT.EnvioTXT.Length);
                 }
             }
+
             if (retorno == "")
                 if (!string.IsNullOrEmpty(finalArq))
                     if (ret.EndsWith(finalArq, StringComparison.InvariantCultureIgnoreCase))
@@ -444,6 +442,7 @@ namespace NFe.Components
                     Retorno = Elemento.GetElementsByTagName(NomeTag)[0].InnerText;  //Wandrey 07/10/2009
                 }
             }
+
             return Retorno;
         }
 
@@ -807,11 +806,11 @@ namespace NFe.Components
                 }
                 else
                     if (origem.GetType().IsAssignableFrom(typeof(List<System.String>)))
-                    {
-                        lEncontrou = populateClasse(classe, (origem as List<String>).ToArray());
-                    }
-                    else
-                        throw new Exception("Tipo de dados da origem desconhecido. (" + origem.GetType().ToString() + ")");
+                {
+                    lEncontrou = populateClasse(classe, (origem as List<String>).ToArray());
+                }
+                else
+                    throw new Exception("Tipo de dados da origem desconhecido. (" + origem.GetType().ToString() + ")");
             }
             return lEncontrou;
         }
