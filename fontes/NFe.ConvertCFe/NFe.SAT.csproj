@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5632878D-C7E7-4CFF-9FE1-06E7222532AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFe.ConvertCFe</RootNamespace>
+    <AssemblyName>NFe.SAT</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_fw45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\NFe.SAT.xml</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;_fw45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Conversao\ConverterNFCe.cs" />
+    <Compile Include="Abstract\Servico\ServicoBase.cs" />
+    <Compile Include="SATProxy.cs" />
+    <Compile Include="Servico\Envio\AtivarSAT.cs" />
+    <Compile Include="Servico\Envio\AssociarAssinatura.cs" />
+    <Compile Include="Servico\Envio\ConfigurarInterfaceDeRede.cs" />
+    <Compile Include="Servico\Envio\ConverterSAT.cs" />
+    <Compile Include="Servico\Envio\CancelarUltimaVenda.cs" />
+    <Compile Include="Servico\Envio\EnviarDadosVenda.cs" />
+    <Compile Include="Servico\Envio\TrocarCodigoDeAtivacao.cs" />
+    <Compile Include="Servico\Envio\ConsultarStatusOperacional.cs" />
+    <Compile Include="Servico\Envio\TesteFimAFim.cs" />
+    <Compile Include="Servico\Envio\ExtrairLogs.cs" />
+    <Compile Include="Servico\Envio\ConsultarSAT.cs" />
+    <Compile Include="Enum\ConversaoNFCe.cs" />
+    <Compile Include="Contract\IServico.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\unimake.framework\unimake.framework.svn\trunk\C#\source\Unimake.SAT\Unimake.SAT.csproj">
+      <Project>{6c5d1db6-5bab-46bb-b1ac-cd0ceba69aaf}</Project>
+      <Name>Unimake.SAT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
+      <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
+      <Name>NFe.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Settings\NFe.Settings.csproj">
+      <Project>{A963E456-A54B-4C4D-A9DE-E80C136C3554}</Project>
+      <Name>NFe.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFe.Validate\NFe.Validate.csproj">
+      <Project>{4a0d1e87-2994-4678-9af1-eebd093b7b44}</Project>
+      <Name>NFe.Validate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

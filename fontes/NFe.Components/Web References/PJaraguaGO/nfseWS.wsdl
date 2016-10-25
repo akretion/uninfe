@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ws.integration.iss.bsit.com.br/" name="nfseWS" targetNamespace="http://ws.integration.iss.bsit.com.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://ws.integration.iss.bsit.com.br/" elementFormDefault="unqualified" targetNamespace="http://ws.integration.iss.bsit.com.br/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="cancelarNfse" type="tns:cancelarNfse" />
+      <xs:element name="cancelarNfseResponse" type="tns:cancelarNfseResponse" />
+      <xs:element name="cancelarRps" type="tns:cancelarRps" />
+      <xs:element name="cancelarRpsResponse" type="tns:cancelarRpsResponse" />
+      <xs:element name="consultarLoteRps" type="tns:consultarLoteRps" />
+      <xs:element name="consultarLoteRpsResponse" type="tns:consultarLoteRpsResponse" />
+      <xs:element name="consultarNfseRps" type="tns:consultarNfseRps" />
+      <xs:element name="consultarNfseRpsResponse" type="tns:consultarNfseRpsResponse" />
+      <xs:element name="consultarPdfNfseRps" type="tns:consultarPdfNfseRps" />
+      <xs:element name="consultarPdfNfseRpsResponse" type="tns:consultarPdfNfseRpsResponse" />
+      <xs:element name="enviarLoteRpsSincrono" type="tns:enviarLoteRpsSincrono" />
+      <xs:element name="enviarLoteRpsSincronoResponse" type="tns:enviarLoteRpsSincronoResponse" />
+      <xs:element name="gerarNfse" type="tns:gerarNfse" />
+      <xs:element name="gerarNfseResponse" type="tns:gerarNfseResponse" />
+      <xs:element name="verificarStatusIntegracao" type="tns:verificarStatusIntegracao" />
+      <xs:element name="verificarStatusIntegracaoResponse" type="tns:verificarStatusIntegracaoResponse" />
+      <xs:complexType name="gerarNfse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GerarNfseEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="gerarNfseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GerarNfseRetorno" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelarNfse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CancelarNfseEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelarNfseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CancelarNfseResposta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarNfseRps">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ConsultarNfseRpsEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarNfseRpsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ConsultarNfseRpsResposta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarLoteRps">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ConsultarLoteRpsEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarLoteRpsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ConsultarLoteRpsResposta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarPdfNfseRps">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarPdfNfseRpsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nfse_pdf" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelarRps">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CancelarRpsEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelarRpsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CancelarRpsResposta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="verificarStatusIntegracao">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="verificarStatusIntegracaoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="statusOnline" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="enviarLoteRpsSincrono">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EnviarLoteRpsSincronoEnvio" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="enviarLoteRpsSincronoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EnviarLoteRpsSincronoResposta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="gerarNfseResponse">
+    <wsdl:part name="parameters" element="ns1:gerarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="verificarStatusIntegracao">
+    <wsdl:part name="parameters" element="ns1:verificarStatusIntegracao" />
+  </wsdl:message>
+  <wsdl:message name="gerarNfse">
+    <wsdl:part name="parameters" element="ns1:gerarNfse" />
+  </wsdl:message>
+  <wsdl:message name="cancelarNfse">
+    <wsdl:part name="parameters" element="ns1:cancelarNfse" />
+  </wsdl:message>
+  <wsdl:message name="cancelarNfseResponse">
+    <wsdl:part name="parameters" element="ns1:cancelarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelarRpsResponse">
+    <wsdl:part name="parameters" element="ns1:cancelarRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarLoteRps">
+    <wsdl:part name="parameters" element="ns1:consultarLoteRps" />
+  </wsdl:message>
+  <wsdl:message name="enviarLoteRpsSincrono">
+    <wsdl:part name="parameters" element="ns1:enviarLoteRpsSincrono" />
+  </wsdl:message>
+  <wsdl:message name="enviarLoteRpsSincronoResponse">
+    <wsdl:part name="parameters" element="ns1:enviarLoteRpsSincronoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarNfseRps">
+    <wsdl:part name="parameters" element="ns1:consultarNfseRps" />
+  </wsdl:message>
+  <wsdl:message name="consultarNfseRpsResponse">
+    <wsdl:part name="parameters" element="ns1:consultarNfseRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarPdfNfseRps">
+    <wsdl:part name="parameters" element="ns1:consultarPdfNfseRps" />
+  </wsdl:message>
+  <wsdl:message name="cancelarRps">
+    <wsdl:part name="parameters" element="ns1:cancelarRps" />
+  </wsdl:message>
+  <wsdl:message name="verificarStatusIntegracaoResponse">
+    <wsdl:part name="parameters" element="ns1:verificarStatusIntegracaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarPdfNfseRpsResponse">
+    <wsdl:part name="parameters" element="ns1:consultarPdfNfseRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarLoteRpsResponse">
+    <wsdl:part name="parameters" element="ns1:consultarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="nfseWS">
+    <wsdl:operation name="gerarNfse">
+      <wsdl:input name="gerarNfse" message="ns1:gerarNfse" />
+      <wsdl:output name="gerarNfseResponse" message="ns1:gerarNfseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelarNfse">
+      <wsdl:input name="cancelarNfse" message="ns1:cancelarNfse" />
+      <wsdl:output name="cancelarNfseResponse" message="ns1:cancelarNfseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarNfseRps">
+      <wsdl:input name="consultarNfseRps" message="ns1:consultarNfseRps" />
+      <wsdl:output name="consultarNfseRpsResponse" message="ns1:consultarNfseRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarLoteRps">
+      <wsdl:input name="consultarLoteRps" message="ns1:consultarLoteRps" />
+      <wsdl:output name="consultarLoteRpsResponse" message="ns1:consultarLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarPdfNfseRps">
+      <wsdl:input name="consultarPdfNfseRps" message="ns1:consultarPdfNfseRps" />
+      <wsdl:output name="consultarPdfNfseRpsResponse" message="ns1:consultarPdfNfseRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelarRps">
+      <wsdl:input name="cancelarRps" message="ns1:cancelarRps" />
+      <wsdl:output name="cancelarRpsResponse" message="ns1:cancelarRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="verificarStatusIntegracao">
+      <wsdl:input name="verificarStatusIntegracao" message="ns1:verificarStatusIntegracao" />
+      <wsdl:output name="verificarStatusIntegracaoResponse" message="ns1:verificarStatusIntegracaoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="enviarLoteRpsSincrono">
+      <wsdl:input name="enviarLoteRpsSincrono" message="ns1:enviarLoteRpsSincrono" />
+      <wsdl:output name="enviarLoteRpsSincronoResponse" message="ns1:enviarLoteRpsSincronoResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
