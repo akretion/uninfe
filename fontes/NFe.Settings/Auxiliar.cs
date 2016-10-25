@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.IO;
 using NFe.Components;
-using System.Xml;
 using System.Xml.Linq;
-using System.Windows.Forms;
 
 namespace NFe.Settings
 {
@@ -70,7 +65,7 @@ namespace NFe.Settings
                     catch { }
                 }
 
-                NFe.Components.Functions.WriteLog(msg, gravarStackTrace, true, emp >= 0 ? Empresas.Configuracoes[emp].CNPJ + "_" + Empresas.Configuracoes[emp].Servico.ToString() : "");
+                Functions.WriteLog(msg, gravarStackTrace, true, emp >= 0 ? Empresas.Configuracoes[emp].CNPJ + "_" + Empresas.Configuracoes[emp].Servico.ToString() : "");
             }
         }
         #endregion
@@ -144,8 +139,9 @@ namespace NFe.Settings
             int emp = Empresas.FindEmpresaByThread();
 
             string strNomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                            PastaEnviados.Autorizados.ToString() + "\\" +
-                                            Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                                         PastaEnviados.Autorizados.ToString() + "\\" +
+                                         Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+
             return File.Exists(strNomePastaEnviado + Functions.ExtrairNomeArq(arquivo, extNFe) + extArqProtNfe);
         }
         #endregion

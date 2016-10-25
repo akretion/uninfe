@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.IO;
 using System.Xml;
-using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
 
 namespace NFe.Service
 {
@@ -16,9 +11,12 @@ namespace NFe.Service
     /// </summary>
     public class TaskMDFeMontarLoteUm : TaskAbst
     {
-        public TaskMDFeMontarLoteUm()
+        public TaskMDFeMontarLoteUm(string arquivo)
         {
             Servico = Servicos.MDFeMontarLoteUm;
+            NomeArquivoXML = arquivo;
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(arquivo);
         }
 
         public override void Execute()
@@ -26,11 +24,7 @@ namespace NFe.Service
             try
             {
                 int emp = Empresas.FindEmpresaByThread();
-                this.AssinarValidarXMLNFe(Empresas.Configuracoes[emp].PastaXmlEnvio);
-
-                //Definir o nome do arquivo assinado
-                FileInfo arq = new FileInfo(this.NomeArquivoXML);
-                string arquivoAssinado = arq.DirectoryName.Substring(0, arq.DirectoryName.Length - 5) + Propriedade.NomePastaXMLAssinado + "\\" + arq.Name;
+                AssinarValidarXMLNFe(ConteudoXML);
 
                 //Montar lote de nfe
                 FluxoNfe oFluxoNfe = new FluxoNfe();
@@ -38,12 +32,12 @@ namespace NFe.Service
                 string cError = "";
                 try
                 {
-                    DadosNFeClass oDadosNfe = LerXMLNFe(arquivoAssinado);
+                    DadosNFeClass oDadosNfe = LerXMLNFe(ConteudoXML);
                     if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                     {
-                        //Gerar lote
-                        this.NomeArquivoXML = arquivoAssinado;
-                        this.LoteNfe(arquivoAssinado, oDadosNfe.versao);
+                        XmlDocument xmlLote = LoteNfe(ConteudoXML, NomeArquivoXML, oDadosNfe.versao);
+                        TaskMDFeRecepcao mdfeRecepcao = new TaskMDFeRecepcao(xmlLote);
+                        mdfeRecepcao.Execute();
                     }
                 }
                 catch (IOException ex)
@@ -60,9 +54,9 @@ namespace NFe.Service
                     try
                     {
                         // grava o arquivo de erro
-                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(arquivoAssinado) + ".err", cError);
+                        oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".err", cError);
                         // move o arquivo para a pasta de erro
-                        oAux.MoveArqErro(arquivoAssinado);
+                        oAux.MoveArqErro(NomeArquivoXML);
                     }
                     catch
                     {

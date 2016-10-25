@@ -11,8 +11,8 @@ namespace NFe.ConvertTxt
     public class Arma
     {
         public TpcnTipoArma tpArma;
-        public int nSerie;
-        public int nCano;
+        public string nSerie;
+        public string nCano;
         public string descr;
     }
 }

@@ -1,36 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.IO;
-
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
+using System;
+using System.Xml;
 
 namespace NFe.Service
 {
     public class TaskMDFeConsNaoEncerrado : TaskAbst
     {
+        public TaskMDFeConsNaoEncerrado(string arquivo)
+        {
+            Servico = Servicos.MDFeConsultaNaoEncerrado;
+            NomeArquivoXML = arquivo;
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(arquivo);
+        }
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
-
-            //Definir o serviço que será executado para a classe
-            this.Servico = Components.Servicos.MDFeConsultaNaoEncerrado;
 
             try
             {
                 Int32 tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
                 Int32 cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(this.NomeArquivoXML);
-                foreach (XmlNode consSitNFeNode in doc.GetElementsByTagName("consMDFeNaoEnc"))
+                foreach (XmlNode consSitNFeNode in ConteudoXML.GetElementsByTagName("consMDFeNaoEnc"))
                 {
                     XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
-                    tpAmb = Convert.ToInt32("0" + Functions.LerTag(consSitNFeElemento, NFe.Components.TpcnResources.tpAmb.ToString(), false));
+                    tpAmb = Convert.ToInt32("0" + Functions.LerTag(consSitNFeElemento, TpcnResources.tpAmb.ToString(), false));
                 }
 
                 //Definir o objeto do WebService
@@ -42,15 +40,19 @@ namespace NFe.Service
                 var cabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString(), cUF.ToString());
-                wsProxy.SetProp(cabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeConsNaoEnc);
+                wsProxy.SetProp(cabecMsg, TpcnResources.cUF.ToString(), cUF.ToString());
+                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), ConvertTxt.versoes.VersaoXMLMDFeConsNaoEnc);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, oServico, wsProxy.NomeMetodoWS[0], cabecMsg, this, 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).EnvioXML, 
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).RetornoXML,
-                                    true,
-                                    securityProtocolType);
+                oInvocarObj.Invocar(wsProxy,
+                    oServico,
+                    wsProxy.NomeMetodoWS[0],
+                    cabecMsg,
+                    this,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).RetornoXML,
+                    true,
+                    securityProtocolType);
             }
             catch (Exception ex)
             {
@@ -58,7 +60,7 @@ namespace NFe.Service
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML,
-                            Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).EnvioXML, 
+                            Propriedade.Extensao(Propriedade.TipoEnvio.MDFeConsNaoEncerrados).EnvioXML,
                             Propriedade.ExtRetorno.MDFeConsNaoEnc_ERR, ex);
                 }
                 catch
@@ -76,8 +78,8 @@ namespace NFe.Service
                 }
                 catch
                 {
-                    //Se falhou algo na hora de deletar o XML de solicitação do serviço, 
-                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar 
+                    //Se falhou algo na hora de deletar o XML de solicitação do serviço,
+                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar
                     //o arquivo novamente para o webservice
                     //Wandrey 09/03/2010
                 }

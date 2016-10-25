@@ -1,31 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.IO;
 using System.Xml;
-using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
 
 namespace NFe.Service
 {
     public class TaskCTeRetRecepcao : TaskAbst
     {
-        public TaskCTeRetRecepcao()
+        public TaskCTeRetRecepcao(string arquivo)
         {
             Servico = Servicos.CTePedidoSituacaoLote;
+            NomeArquivoXML = arquivo;
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(arquivo);
+        }
+
+        public TaskCTeRetRecepcao(XmlDocument conteudoXML)
+        {
+            Servico = Servicos.CTePedidoSituacaoLote;
+            ConteudoXML = conteudoXML;
+            ConteudoXML.PreserveWhitespace = false;
+            NomeArquivoXML = Empresas.Configuracoes[Empresas.FindEmpresaByThread()].PastaXmlEnvio + "\\temp\\" +
+                conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
+
         /// <summary>
         /// Esta Herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta do recibo do lote de NFe enviado
         /// </summary>
         private DadosPedRecClass dadosPedRec;
-        #endregion
+
+        #endregion Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -33,34 +43,37 @@ namespace NFe.Service
             try
             {
                 #region Parte do código que envia o XML de pedido de consulta do recibo
+
                 dadosPedRec = new DadosPedRecClass();
-                PedRec(emp, NomeArquivoXML);
+                PedRec(emp);
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico,  emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis);
+                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, 0);
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF));
+                var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTePedRec);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTePedRec);
 
                 //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, 
-                                    oRepRecepcao, 
-                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedRec.cUF), 
-                                    oCabecMsg, 
+                oInvocarObj.Invocar(wsProxy,
+                                    oRepRecepcao,
+                                    wsProxy.NomeMetodoWS[0],
+                                    oCabecMsg,
                                     this,
                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML,
                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
                                     false,
                                     securityProtocolType);
-                #endregion
+
+                #endregion Parte do código que envia o XML de pedido de consulta do recibo
 
                 #region Parte do código que trata o XML de retorno da consulta do recibo
+
                 //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
                 LerRetornoLoteCTe();
 
@@ -68,7 +81,8 @@ namespace NFe.Service
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 //Wandrey 18/06/2009
                 oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
-                #endregion
+
+                #endregion Parte do código que trata o XML de retorno da consulta do recibo
             }
             catch (Exception ex)
             {
@@ -88,28 +102,23 @@ namespace NFe.Service
                 Functions.DeletarArquivo(NomeArquivoXML);
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedRec()
+
         /// <summary>
         /// Faz a leitura do XML de pedido da consulta do recibo do lote de notas enviadas
         /// </summary>
-        /// <param name="cArquivoXml">Nome do XML a ser lido</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 16/03/2010
-        /// </remarks>
-        private void PedRec(int emp, string cArquivoXML)
+        /// <param name="emp">Código da empresa</param>
+        private void PedRec(int emp)
         {
-            this.dadosPedRec.tpAmb = 0;
-            this.dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
-            this.dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
-            this.dadosPedRec.nRec = string.Empty;
+            dadosPedRec.tpAmb = 0;
+            dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+            dadosPedRec.nRec = string.Empty;
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(cArquivoXML);
-
-            XmlNodeList consReciNFeList = doc.GetElementsByTagName("consReciCTe");
+            XmlNodeList consReciNFeList = ConteudoXML.GetElementsByTagName("consReciCTe");
 
             foreach (XmlNode consReciNFeNode in consReciNFeList)
             {
@@ -119,30 +128,27 @@ namespace NFe.Service
                 dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
 
-                if (consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString()).Count != 0)
+                if (consReciNFeElemento.GetElementsByTagName(TpcnResources.cUF.ToString()).Count != 0)
                 {
-                    this.dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0].InnerText);
+                    dadosPedRec.cUF = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <cUF>
-                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0]);
-                    /// Salvo o arquivo modificado
-                    doc.Save(cArquivoXML);
+                    ConteudoXML.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(TpcnResources.cUF.ToString())[0]);
                 }
-                if (consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
+                if (consReciNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    this.dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
+                    dadosPedRec.tpEmis = Convert.ToInt16(consReciNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
                     /// Para que o validador não rejeite, excluo a tag <tpEmis>
-                    doc.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
-                    /// Salvo o arquivo modificado
-                    doc.Save(cArquivoXML);
+                    ConteudoXML.DocumentElement.RemoveChild(consReciNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0]);
                 }
             }
-
         }
-        #endregion
+
+        #endregion PedRec()
 
         #region LerRetornoLoteCTe()
+
         /// <summary>
-        /// Efetua a leitura do XML de retorno do processamento do lote de notas fiscais e 
+        /// Efetua a leitura do XML de retorno do processamento do lote de notas fiscais e
         /// atualiza o arquivo de fluxo e envio de notas
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
@@ -151,17 +157,16 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
             var oLerXml = new LerXML();
-            var msXml = Functions.StringXmlToStream(vStrXmlRetorno);
             var fluxoNFe = new FluxoNfe();
 
-            var doc = new System.Xml.XmlDocument();
-            doc.Load(msXml);
+            var doc = new XmlDocument();
+            doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
 
             var retConsReciNFeList = doc.GetElementsByTagName("retConsReciCTe");
 
-            foreach (System.Xml.XmlNode retConsReciNFeNode in retConsReciNFeList)
+            foreach (XmlNode retConsReciNFeNode in retConsReciNFeList)
             {
-                var retConsReciNFeElemento = (System.Xml.XmlElement)retConsReciNFeNode;
+                var retConsReciNFeElemento = (XmlElement)retConsReciNFeNode;
 
                 //Pegar o número do recibo do lote enviado
                 var nRec = string.Empty;
@@ -180,6 +185,7 @@ namespace NFe.Service
                 switch (cStatLote)
                 {
                     #region Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
+
                     case "280": //A-Certificado transmissor inválido
                     case "281": //A-Validade do certificado
                     case "283": //A-Verifica a cadeia de Certificação
@@ -206,15 +212,19 @@ namespace NFe.Service
                     case "217": //E-Acesso BD CTE
                     case "216": //E-Verificar se campo "Codigo Numerico"
                         break;
-                    #endregion
+
+                    #endregion Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
 
                     #region Lote ainda está sendo processado
+
                     case "105": //E-Verifica se o lote não está na fila de resposta, mas está na fila de entrada (Lote em processamento)
                         //Ok vou aguardar o ERP gerar uma nova consulta para encerrar o fluxo da nota
                         break;
-                    #endregion
+
+                    #endregion Lote ainda está sendo processado
 
                     #region Lote não foi localizado pelo recibo que está sendo consultado
+
                     case "106": //E-Verifica se o lote não está na fila de saída, nem na fila de entrada (Lote não encontrado)
                         //No caso do lote não encontrado através do recibo, o ERP vai ter que consultar a situação da NFe para encerrar ela
                         //Vou somente excluir ela do fluxo para não ficar consultando o recibo que não existe
@@ -223,23 +233,25 @@ namespace NFe.Service
                             fluxoNFe.ExcluirNfeFluxoRec(nRec.Trim());
                         }
                         break;
-                    #endregion
+
+                    #endregion Lote não foi localizado pelo recibo que está sendo consultado
 
                     #region Lote foi processado, agora tenho que tratar as notas fiscais dele
+
                     case "104": //Lote processado
                         var protNFeList = retConsReciNFeElemento.GetElementsByTagName("protCTe");
 
-                        foreach (System.Xml.XmlNode protNFeNode in protNFeList)
+                        foreach (XmlNode protNFeNode in protNFeList)
                         {
-                            var protNFeElemento = (System.Xml.XmlElement)protNFeNode;
+                            var protNFeElemento = (XmlElement)protNFeNode;
 
                             var strProtNfe = protNFeElemento.OuterXml;
 
                             var infProtList = protNFeElemento.GetElementsByTagName("infProt");
 
-                            foreach (System.Xml.XmlNode infProtNode in infProtList)
+                            foreach (XmlNode infProtNode in infProtList)
                             {
-                                var infProtElemento = (System.Xml.XmlElement)infProtNode;
+                                var infProtElemento = (XmlElement)infProtNode;
 
                                 var strChaveNFe = string.Empty;
                                 var strStat = string.Empty;
@@ -281,18 +293,20 @@ namespace NFe.Service
                                         {
                                             //Juntar o protocolo com a NFE já copiando para a pasta em processamento
                                             var strArquivoNFeProc = oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe);
-                                            
+
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
-                                            oLerXml.Cte(strArquivoNFe);
+                                            XmlDocument conteudoXMLCTe = new XmlDocument();
+                                            conteudoXMLCTe.Load(strArquivoNFe);
+                                            oLerXml.Cte(conteudoXMLCTe);
 
                                             //Mover a cteProc da pasta de CTe em processamento para a NFe Autorizada
                                             //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para
-                                            //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o senário, 
+                                            //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o senário,
                                             //assim sendo não inverta as posições. Wandrey 08/10/2009
                                             TFunctions.MoverArquivo(strArquivoNFeProc, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
 
                                             //Mover a CTe da pasta de CTe em processamento para CTe Autorizada
-                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para 
+                                            //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para
                                             //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o cenário.
                                             //assim sendo não inverta as posições. Wandrey 08/10/2009
                                             TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
@@ -301,9 +315,9 @@ namespace NFe.Service
                                             try
                                             {
                                                 var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                                                        PastaEnviados.Autorizados.ToString() + "\\" +
-                                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                        Path.GetFileName(strArquivoNFeProc);
+                                                    PastaEnviados.Autorizados.ToString() + "\\" +
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
+                                                    Path.GetFileName(strArquivoNFeProc);
 
                                                 TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
@@ -318,19 +332,21 @@ namespace NFe.Service
                                         if (File.Exists(strArquivoNFe))
                                         {
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s Denegados
-                                            oLerXml.Cte(strArquivoNFe);
+                                            XmlDocument conteudoXMLCTe = new XmlDocument();
+                                            conteudoXMLCTe.Load(strArquivoNFe);
+                                            oLerXml.Cte(conteudoXMLCTe);
 
                                             //Mover a NFE da pasta de NFE em processamento para NFe Denegadas
                                             TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
                                             ///
                                             /// existe DACTE de CTe denegado???
-                                            /// 
+                                            ///
                                             try
                                             {
                                                 var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                                                        PastaEnviados.Denegados.ToString() + "\\" +
-                                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
-                                                                        Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + Propriedade.ExtRetorno.Den;
+                                                    PastaEnviados.Denegados.ToString() + "\\" +
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
+                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + Propriedade.ExtRetorno.Den;
 
                                                 TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
@@ -371,9 +387,11 @@ namespace NFe.Service
                             }
                         }
                         break;
-                    #endregion
+
+                    #endregion Lote foi processado, agora tenho que tratar as notas fiscais dele
 
                     #region Qualquer outro tipo de status que não for os acima relacionados, vai tirar a nota fiscal do fluxo.
+
                     default:
                         //Qualquer outro tipo de rejeião vou tirar todas as notas do lote do fluxo, pois se o lote foi rejeitado, todas as notas fiscais também foram
                         //De acordo com o manual de integração se o status do lote não for 104, tudo foi rejeitado. Wandrey 20/07/2010
@@ -385,10 +403,12 @@ namespace NFe.Service
                         }
 
                         break;
-                    #endregion
+
+                        #endregion Qualquer outro tipo de status que não for os acima relacionados, vai tirar a nota fiscal do fluxo.
                 }
             }
         }
-        #endregion
+
+        #endregion LerRetornoLoteCTe()
     }
 }

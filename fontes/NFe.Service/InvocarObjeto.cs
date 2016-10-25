@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Text;
-using System.Threading;
-using NFe.Exceptions;
+﻿using NFe.Components;
 using NFe.Settings;
-using NFe.Components;
 using NFe.Validate;
+using System;
 using System.IO;
-using System.Windows.Forms;
-using System.Security.Cryptography;
 using System.Net;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace NFe.Service
 {
@@ -20,12 +15,15 @@ namespace NFe.Service
     public class InvocarObjeto
     {
         #region Objetos
+
         private Auxiliar oAux = new Auxiliar();
-        #endregion
+
+        #endregion Objetos
 
         #region Métodos
 
         #region Invocar()
+
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
@@ -57,7 +55,9 @@ namespace NFe.Service
             // Definir o tipo de serviço da NFe
             Type typeServicoNFe = servicoNFe.GetType();
 
-            Servicos servico = (Servicos)wsProxy.GetProp(servicoNFe, NFe.Components.NFeStrConstants.Servico);
+            Servicos servico = (Servicos)wsProxy.GetProp(servicoNFe, NFeStrConstants.Servico);
+
+            docXML = (XmlDocument)(typeServicoNFe.InvokeMember("ConteudoXML", System.Reflection.BindingFlags.GetField, null, servicoNFe, null));
 
             // Resgatar o nome do arquivo XML a ser enviado para o webservice
             string XmlNfeDadosMsg = (string)(typeServicoNFe.InvokeMember("NomeArquivoXML", System.Reflection.BindingFlags.GetProperty, null, servicoNFe, null));
@@ -65,17 +65,28 @@ namespace NFe.Service
             // Exclui o Arquivo de Erro
             Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + Functions.ExtrairNomeArq(XmlNfeDadosMsg, finalArqEnvio + ".xml") + finalArqRetorno + ".err");
 
+            if (docXML == null)
+                docXML.Load(XmlNfeDadosMsg);
+
             // Validar o Arquivo XML
-            ValidarXML validar = new ValidarXML(XmlNfeDadosMsg, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
-
-            string cResultadoValidacao = validar.ValidarArqXML(XmlNfeDadosMsg);
-            if (cResultadoValidacao != "")
+            switch (servico)
             {
-                throw new Exception(cResultadoValidacao);
-            }
+                case Servicos.NFeEnviarLote:
+                case Servicos.NFeEnviarLoteZip:
+                case Servicos.CTeEnviarLote:
+                case Servicos.MDFeEnviarLote:
+                    //XML de NFe, CTe e MDFe, na montagem do lote eu valido o XML antes, como o lote quem monta é o XML entendo que não está montando errado, sendo assim, não vou validar novamente o XML para ganhar desempenho. Wandrey 18/09/2016
+                    break;
 
-            // Montar o XML de Lote de envio de Notas fiscais
-            docXML.Load(XmlNfeDadosMsg);
+                default:
+                    ValidarXML validar = new ValidarXML(docXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                    string cResultadoValidacao = validar.ValidarArqXML(docXML, XmlNfeDadosMsg);
+                    if (cResultadoValidacao != "")
+                    {
+                        throw new Exception(cResultadoValidacao);
+                    }
+                    break;
+            }
 
             // Definir Proxy
             if (ConfiguracaoApp.Proxy)
@@ -90,14 +101,6 @@ namespace NFe.Service
             //Vou mudar o timeout para evitar que demore a resposta e o uninfe aborte antes de recebe-la. Wandrey 17/09/2009
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
             wsProxy.SetProp(servicoWS, "Timeout", 60000);
-
-            //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if (ConfiguracaoApp.ChecarConexaoInternet)
-                if (!Functions.IsConnectedToInternet())
-                {
-                    //Registrar o erro da validação para o sistema ERP
-                    throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-                }
 
             //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
             switch (servico)
@@ -117,7 +120,7 @@ namespace NFe.Service
                 case Servicos.CTeEnviarLote:
                 case Servicos.CTeRecepcaoEvento:
                 case Servicos.CTeConsultaStatusServico:
-                    if (wsProxy.GetProp(cabecMsg, NFe.Components.TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
+                    if (wsProxy.GetProp(cabecMsg, TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                     {
                         try
                         {
@@ -149,7 +152,7 @@ namespace NFe.Service
             ServicePointManager.SecurityProtocol = securityProtocolType;
 
             // Envio da NFe Compactada - Renan
-            if (servico == Servicos.NFeEnviarLoteZip2)
+            if (servico == Servicos.NFeEnviarLoteZip)
             {
                 XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
                 FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
@@ -165,17 +168,16 @@ namespace NFe.Service
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, servicoNFe, new object[] { XmlRetorno.OuterXml });
 
             // Registra o retorno de acordo com o status obtido
-            //if (finalArqEnvio != string.Empty && finalArqRetorno != string.Empty)
-            //{
             if (gravaRetorno)
             {
                 typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, servicoNFe, new Object[] { finalArqEnvio + ".xml", finalArqRetorno + ".xml" });
             }
-            //}
         }
-        #endregion
+
+        #endregion Invocar()
 
         #region InvocarNFSe()
+
         /// <summary>
         /// Metodo responsável por invocar o serviço do WebService do SEFAZ
         /// </summary>
@@ -226,12 +228,13 @@ namespace NFe.Service
                 {
                     case PadroesNFSe.ISSONLINE4R:
                         break;
+
                     case PadroesNFSe.SMARAPD:
                         break;
+
                     default:
                         throw new Exception(cResultadoValidacao);
                 }
-
             }
 
             //Definir novamente o protocolo de segurança, pois é uma propriedade estática e o seu valor pode ser alterado antes do envio. Wandrey 03/05/2016
@@ -274,18 +277,11 @@ namespace NFe.Service
                 }
             }
 
-            //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if (ConfiguracaoApp.ChecarConexaoInternet)  //danasa: 12/2013
-                if (!Functions.IsConnectedToInternet())
-                {
-                    //Registrar o erro da validação para o sistema ERP
-                    throw new ExceptionSemInternet(ErroPadrao.FalhaInternet, "\r\nArquivo: " + XmlNfeDadosMsg);
-                }
-
             //Invocar o membro
             switch (padraoNFSe)
             {
                 #region Padrão BETHA
+
                 case PadroesNFSe.BETHA:
                     switch (metodo)
                     {
@@ -314,9 +310,11 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                #endregion
+
+                #endregion Padrão BETHA
 
                 #region NOTAINTELIGENTE
+
                 case PadroesNFSe.NOTAINTELIGENTE:
                     //NFe.Components.PClaudioMG.api_portClient wsClaudio = (NFe.Components.PClaudioMG.api_portClient)servicoWS;
 
@@ -328,9 +326,11 @@ namespace NFe.Service
                     }
                     //strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml.ToString() });
                     break;
-                #endregion
+
+                #endregion NOTAINTELIGENTE
 
                 #region Padrão ISSONLINE
+
                 case PadroesNFSe.ISSONLINE:
                     int operacao;
                     string senhaWs = Functions.GetMD5Hash(Empresas.Configuracoes[emp].SenhaWS);
@@ -340,9 +340,11 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             operacao = 1;
                             break;
+
                         case Servicos.NFSeCancelar:
                             operacao = 2;
                             break;
+
                         default:
                             operacao = 3;
                             break;
@@ -350,27 +352,35 @@ namespace NFe.Service
 
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Convert.ToSByte(operacao), Empresas.Configuracoes[emp].UsuarioWS, senhaWs, docXML.OuterXml });
                     break;
-                #endregion
+
+                #endregion Padrão ISSONLINE
 
                 #region Padrão Blumenau-SC
+
                 case PadroesNFSe.BLUMENAU_SC:
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { 1, docXML.OuterXml });
                     break;
-                #endregion
+
+                #endregion Padrão Blumenau-SC
 
                 #region Padrão Paulistana
+
                 case PadroesNFSe.PAULISTANA:
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { 1, docXML.OuterXml });
                     break;
-                #endregion
+
+                #endregion Padrão Paulistana
 
                 #region TECNOSISTEMAS
+
                 case PadroesNFSe.TECNOSISTEMAS:
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
                     break;
-                #endregion
+
+                #endregion TECNOSISTEMAS
 
                 #region SMARAPD
+
                 case PadroesNFSe.SMARAPD:
                     if (metodo == "nfdEntradaCancelar")
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
@@ -382,21 +392,26 @@ namespace NFe.Service
                         Empresas.Configuracoes[emp].UnidadeFederativaCodigo,
                         docXML.OuterXml });
                     break;
-                #endregion
+
+                #endregion SMARAPD
 
                 #region ISSWEB
+
                 case PadroesNFSe.ISSWEB:
                     string versao = docXML.DocumentElement.GetElementsByTagName("Versao")[0].InnerText;
                     string cnpj = docXML.DocumentElement.GetElementsByTagName("CNPJCPFPrestador")[0].InnerText;
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cnpj, docXML.OuterXml, versao });
                     break;
-                #endregion
+
+                #endregion ISSWEB
 
                 #region NA_INFORMATICA
+
                 case PadroesNFSe.NA_INFORMATICA:
                     switch (servicoNFSe)
                     {
                         #region Recepcionar Lote RPS - Assíncrono
+
                         case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -417,9 +432,11 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.EnviarLoteRpsResposta;
                             }
                             break;
-                        #endregion
+
+                        #endregion Recepcionar Lote RPS - Assíncrono
 
                         #region Recepcionar Lote RPS - Síncrono
+
                         case Servicos.NFSeRecepcionarLoteRpsSincrono:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -440,9 +457,11 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.EnviarLoteRpsSincronoResposta;
                             }
                             break;
-                        #endregion
+
+                        #endregion Recepcionar Lote RPS - Síncrono
 
                         #region Cancelar RPS
+
                         case Servicos.NFSeCancelar:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -463,9 +482,11 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.CancelarNfseResposta;
                             }
                             break;
-                        #endregion
+
+                        #endregion Cancelar RPS
 
                         #region Consultar Lote RPS
+
                         case Servicos.NFSeConsultarLoteRps:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -486,9 +507,11 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.ConsultarLoteRpsResposta;
                             }
                             break;
-                        #endregion
+
+                        #endregion Consultar Lote RPS
 
                         #region Consulta Situação Nfse
+
                         case Servicos.NFSeConsultar:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -509,9 +532,11 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.ConsultarNfsePorFaixaResposta;
                             }
                             break;
-                        #endregion
+
+                        #endregion Consulta Situação Nfse
 
                         #region Consulta Situação Nfse por RPS
+
                         case Servicos.NFSeConsultarPorRps:
                             if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
                             {
@@ -532,23 +557,27 @@ namespace NFe.Service
                                 strRetorno = dadosRetorno.ConsultarNfsePorRpsResposta;
                             }
                             break;
-                            #endregion
+
+                            #endregion Consulta Situação Nfse por RPS
                     }
                     break;
-                #endregion
 
-
+                #endregion NA_INFORMATICA
 
                 #region Demais padrões
+
                 default:
                     if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
                     else
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
                     break;
-                    #endregion
+
+                    #endregion Demais padrões
             }
+
             #region gerar arquivos assinados(somente debug)
+
 #if DEBUG
             string path = Application.StartupPath + "\\teste_assintura\\";
 
@@ -565,9 +594,10 @@ namespace NFe.Service
             sw2.Write(cabecMsg.ToString());
             sw2.Close();
 #endif
-            #endregion
 
-            //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz                  
+            #endregion gerar arquivos assinados(somente debug)
+
+            //Atualizar o atributo do serviço da Nfe com o conteúdo retornado do webservice do sefaz
             typeServicoNFe.InvokeMember("vStrXmlRetorno", System.Reflection.BindingFlags.SetProperty, null, servicoNFe, new object[] { strRetorno });
 
             // Registra o retorno de acordo com o status obtido
@@ -576,9 +606,10 @@ namespace NFe.Service
                 typeServicoNFe.InvokeMember("XmlRetorno", System.Reflection.BindingFlags.InvokeMethod, null, servicoNFe, new Object[] { finalArqEnvio + ".xml", finalArqRetorno + ".xml" });
             }
         }
-        #endregion
 
-        #endregion
+        #endregion InvocarNFSe()
+
+        #endregion Métodos
     }
 }
 

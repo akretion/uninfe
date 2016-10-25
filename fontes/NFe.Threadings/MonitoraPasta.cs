@@ -24,7 +24,7 @@ namespace NFe.Threadings
         /// Construtor
         /// </summary>
         public MonitoraPasta()
-        {
+        { 
             MonitorarPasta();
         }
         #endregion
@@ -65,17 +65,18 @@ namespace NFe.Threadings
                     pastas.Add(Empresas.Configuracoes[i].PastaContingencia);
                 }
                 #endregion
-
+                
                 fsw.Add(new FileSystemWatcher(pastas, "*.xml,*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
             }
-
+            /*
             #region Pasta Geral
             fsw.Add(new FileSystemWatcher(Path.Combine(System.Windows.Forms.Application.StartupPath, "Geral"), "*.xml,*.txt"));
             fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
             fsw[fsw.Count - 1].StartWatch();
             #endregion
+            */
         }
         #endregion
 
@@ -141,15 +142,15 @@ namespace NFe.Threadings
                     ///
                     /// encerra o UniNFe no arquivo -sair.xml
                     /// 
-                    var sext = NFe.Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.sair_XML);
+                    var sext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.sair_XML);
                     if (arq.EndsWith(sext.EnvioTXT) || arq.EndsWith(sext.EnvioXML))
                     {
                         File.Delete(fi.FullName);
                         Empresas.ClearLockFiles(false);
-                        if (!NFe.Components.Propriedade.ExecutandoPeloUniNFe)
+                        if (!Components.Propriedade.ExecutandoPeloUniNFe)
                         {
-                            if (NFe.Components.ServiceProcess.StatusService(NFe.Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running)
-                                NFe.Components.ServiceProcess.StopService(NFe.Components.Propriedade.ServiceName, 40000);
+                            if (Components.ServiceProcess.StatusService(NFe.Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running)
+                                Components.ServiceProcess.StopService(NFe.Components.Propriedade.ServiceName, 40000);
                         }
                         else
                             ThreadService.Stop();
@@ -164,13 +165,13 @@ namespace NFe.Threadings
                     ///
                     /// Atualiza WSDL / Schemas
                     /// 
-                    var ext = NFe.Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedUpdatewsdl);
+                    var ext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedUpdatewsdl);
                     if (arq.EndsWith(ext.EnvioTXT) || arq.EndsWith(ext.EnvioXML))
                     {
                         #region ---Atualiza WSDL e Schemas
                         File.Delete(fi.FullName);
 
-                        NFe.Components.Functions.DeletarArquivo(NFe.Settings.ConfiguracaoApp.XMLVersoesWSDL);
+                        Components.Functions.DeletarArquivo(NFe.Settings.ConfiguracaoApp.XMLVersoesWSDL);
 
                         string cerros = "";
                         try
@@ -180,7 +181,7 @@ namespace NFe.Threadings
                             if (!string.IsNullOrEmpty(cerros)) throw new Exception(cerros);
 
                             string ExtRet = (arq.EndsWith(".xml") ? ext.RetornoXML : ext.RetornoTXT);
-                            string arqRetorno = NFe.Components.Propriedade.PastaGeralRetorno + "\\" + NFe.Components.Functions.ExtrairNomeArq(fi.FullName, null) + ExtRet;
+                            string arqRetorno = Components.Propriedade.PastaGeralRetorno + "\\" + Components.Functions.ExtrairNomeArq(fi.FullName, null) + ExtRet;
                             const string rst = "Schemas atualizados com sucesso!!!";
 
                             if (arq.EndsWith(".xml"))
@@ -191,7 +192,7 @@ namespace NFe.Threadings
                                 xml.Save(arqRetorno);
                             }
                             else
-                                System.IO.File.WriteAllText(arqRetorno, rst);
+                                File.WriteAllText(arqRetorno, rst);
                             return;
                         }
                         catch (Exception ex)
@@ -206,31 +207,32 @@ namespace NFe.Threadings
                     ///
                     /// restart o UniNFe
                     /// 
-                    var uext = NFe.Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedRestart);
+                    var uext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedRestart);
                     if (arq.EndsWith(uext.EnvioTXT) || arq.EndsWith(uext.EnvioXML))
                     {
                         #region ---Reinicia o UniNFe
                         File.Delete(fi.FullName);
                         try
                         {
-                            if (NFe.Components.Propriedade.ExecutandoPeloUniNFe)
+                            if (Components.Propriedade.ExecutandoPeloUniNFe)
                             {
-                                System.Diagnostics.Process.Start(NFe.Components.Propriedade.PastaExecutavel + "\\uninfe.exe", "/restart");
+                                System.Diagnostics.Process.Start(Components.Propriedade.PastaExecutavel + "\\uninfe.exe", "/restart");
                             }
                             else
                             {
-                                NFe.Components.ServiceProcess.StopService(NFe.Components.Propriedade.ServiceName, 40000);
+                                Components.ServiceProcess.StopService(Components.Propriedade.ServiceName, 40000);
                                 for (int i = 0; i < 10; ++i)
                                 {
-                                    System.Threading.Thread.Sleep(500);
+                                    Thread.Sleep(500);
 
-                                    if (NFe.Components.ServiceProcess.StatusService(NFe.Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped)
+                                    if (Components.ServiceProcess.StatusService(Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped)
                                     {
-                                        NFe.Components.ServiceProcess.RestartService(NFe.Components.Propriedade.ServiceName, 40000);
+                                        Components.ServiceProcess.RestartService(Components.Propriedade.ServiceName, 40000);
                                         break;
                                     }
                                 }
                             }
+
                             return;
                         }
                         catch(Exception ex)
@@ -246,7 +248,7 @@ namespace NFe.Threadings
                     {
                         try
                         {
-                            NFe.Service.TFunctions.GravarArqErroServico(fi.FullName, ExtRetorno, finalArqErro, exx);
+                            Service.TFunctions.GravarArqErroServico(fi.FullName, ExtRetorno, finalArqErro, exx);
                         }
                         catch { }
                         return;
@@ -255,10 +257,10 @@ namespace NFe.Threadings
                     ///
                     /// solicitacao de layouts
                     /// 
-                    var lext = NFe.Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedLayouts);
+                    var lext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedLayouts);
                     if (arq.EndsWith(lext.EnvioTXT) || arq.EndsWith(lext.EnvioXML))
                     {
-                        NFe.Service.TaskLayouts l = new NFe.Service.TaskLayouts();
+                        Service.TaskLayouts l = new Service.TaskLayouts();
                         l.NomeArquivoXML = fi.FullName;
                         l.Execute();
                         return;
@@ -290,7 +292,7 @@ namespace NFe.Threadings
             catch (Exception ex)
             {
                 if (fi.Directory.Name.ToLower().EndsWith("geral\\temp"))
-                    NFe.Components.Functions.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false, true, "");
+                    Components.Functions.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false, true, "");
                 else
                     Auxiliar.WriteLog(ex.Message + "\r\n" + ex.StackTrace, false);
             }

@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.IO;
-using NFe.Settings;
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Exceptions;
-using NFe.Certificado;
+using NFe.Settings;
+using System;
+using System.IO;
+using System.Xml;
 
 namespace NFe.Service
 {
     /// <summary>
     /// Classe para envio do XML de LMC para a SEFAZ
     /// </summary>
-    class TaskLMCAutorizacao : TaskAbst
+    internal class TaskLMCAutorizacao : TaskAbst
     {
         /// <summary>
         /// Conteúdo de algumas tags do XML de LMC
         /// </summary>
         private DadosLMC dadosLMC;
 
-        public TaskLMCAutorizacao()
+        public TaskLMCAutorizacao(string arquivo)
         {
             Servico = Servicos.LMCAutorizacao;
+            NomeArquivoXML = arquivo;
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(arquivo);
         }
 
         public override void Execute()
@@ -43,7 +43,7 @@ namespace NFe.Service
                 object oAutorizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
                 //Assinar o XML
-                new AssinaturaDigital().Assinar(NomeArquivoXML, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+                new AssinaturaDigital().Assinar(ConteudoXML, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
 
                 //Enviar o XML
                 oInvocarObj.Invocar(wsProxy,
@@ -110,6 +110,7 @@ namespace NFe.Service
         }
 
         #region LerRetornoLMC()
+
         /// <summary>
         /// Le o retorno do LMC, e de acordo com o status guarda o XML enviado na pasta enviados
         /// </summary>
@@ -145,6 +146,7 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion LerRetornoLMC()
     }
 }

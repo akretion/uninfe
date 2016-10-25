@@ -18,6 +18,7 @@ using NFe.Components.MGM;
 using NFe.Components.Consist;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.Pronin;
 
 namespace NFe.Service.NFSe
 {
@@ -29,6 +30,15 @@ namespace NFe.Service.NFSe
         /// </summary>
         private DadosEnvLoteRps oDadosEnvLoteRps;
         #endregion
+    
+        public TaskNFSeRecepcionarLoteRps(string arquivo)
+        {
+            Servico = Servicos.NFSeRecepcionarLoteRps;
+
+            NomeArquivoXML = arquivo;
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(arquivo);
+        }
 
         public override void Execute()
         {
@@ -53,7 +63,7 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object envLoteRps = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, oDadosEnvLoteRps.cMunicipio);
                     if (wsProxy != null)
@@ -129,6 +139,16 @@ namespace NFe.Service.NFSe
 
                         break;
 
+                    case PadroesNFSe.BSITBR:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BSITBR);
+
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosEnvLoteRps.tpAmb == 1)
+                            envLoteRps = new Components.PJaraguaGO.nfseWS();
+                        else
+                            throw new Exception("Município de Jaraguá-GO não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                        break;
 
                     case PadroesNFSe.PORTOVELHENSE:
                         cabecMsg = "<cabecalho versao=\"2.00\" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.00</versaoDados></cabecalho>";
@@ -233,12 +253,12 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.EGOVERNE:
                         #region E-Governe
                         EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                        Empresas.Configuracoes[emp].PastaXmlRetorno,
-                        oDadosEnvLoteRps.cMunicipio,
-                        ConfiguracaoApp.ProxyUsuario,
-                        ConfiguracaoApp.ProxySenha,
-                        ConfiguracaoApp.ProxyServidor,
-                        Empresas.Configuracoes[emp].X509Certificado);
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosEnvLoteRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
 
                         AssinaturaDigital assEGovoverne = new AssinaturaDigital();
                         assEGovoverne.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
@@ -393,12 +413,36 @@ namespace NFe.Service.NFSe
                     #endregion
 
                     case PadroesNFSe.CAMACARI_BA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.CAMACARI_BA);
+
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.CARIOCA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.CARIOCA);
+                        break;
+
+                    case PadroesNFSe.PRONIN:
+                        if (oDadosEnvLoteRps.cMunicipio == 4109401)
+                        {
+                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosEnvLoteRps.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            assPronin.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                            pronin.EmiteNF(NomeArquivoXML);
+                        }
                         break;
 
                 }
 
-                if (IsInvocar(padraoNFSe))
+                if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

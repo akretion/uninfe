@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading;
-using System.Xml;
-using System.Xml.Linq;
-using Microsoft.Win32;
-
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace NFe.Service
 {
     public class TFunctions
     {
         #region GravarArqErroServico()
+
         /// <summary>
-        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los        
+        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los
         /// </summary>
         /// <param name="arquivo">Nome do arquivo que está sendo processado</param>
         /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de Erro</param>
@@ -36,11 +31,13 @@ namespace NFe.Service
         {
             GravarArqErroServico(arquivo, finalArqEnvio, finalArqErro, exception, ErroPadrao.ErroNaoDetectado, true);
         }
-        #endregion
+
+        #endregion GravarArqErroServico()
 
         #region GravarArqErroServico()
+
         /// <summary>
-        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los        
+        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los
         /// </summary>
         /// <param name="arquivo">Nome do arquivo que está sendo processado</param>
         /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de Erro</param>
@@ -56,11 +53,13 @@ namespace NFe.Service
         {
             GravarArqErroServico(arquivo, finalArqEnvio, finalArqErro, exception, ErroPadrao.ErroNaoDetectado, moveArqErro);
         }
-        #endregion
+
+        #endregion GravarArqErroServico()
 
         #region GravarArqErroServico()
+
         /// <summary>
-        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los        
+        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los
         /// </summary>
         /// <param name="arquivo">Nome do arquivo que está sendo processado</param>
         /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de Erro</param>
@@ -90,79 +89,12 @@ namespace NFe.Service
 
             string arqErro = pastaRetorno + "\\" + Functions.ExtrairNomeArq(arquivo, finalArqEnvio) + finalArqErro;
 
-            string erroMessage = string.Empty;
-
-            erroMessage += "Versão|" + NFe.Components.Propriedade.Versao + "\r\n";
-            erroMessage += "ErrorCode|" + ((int)erroPadrao).ToString("0000000000");
-            erroMessage += "\r\n";
-            erroMessage += "Message|" + exception.Message;
-            erroMessage += "\r\n";
-            erroMessage += "StackTrace|" + exception.StackTrace;
-            erroMessage += "\r\n";
-            erroMessage += "Source|" + exception.Source;
-            erroMessage += "\r\n";
-            erroMessage += "Type|" + exception.GetType();
-            erroMessage += "\r\n";
-            erroMessage += "TargetSite|" + exception.TargetSite;
-            erroMessage += "\r\n";
-            erroMessage += "HashCode|" + exception.GetHashCode().ToString();
-
-            if (exception.InnerException != null)
-            {
-                erroMessage += "\r\n";
-                erroMessage += "\r\n";
-                erroMessage += "InnerException 1";
-                erroMessage += "\r\n";
-                erroMessage += "Message|" + exception.InnerException.Message;
-                erroMessage += "\r\n";
-                erroMessage += "StackTrace|" + exception.InnerException.StackTrace;
-                erroMessage += "\r\n";
-                erroMessage += "TargetSite|" + exception.InnerException.TargetSite;
-                erroMessage += "\r\n";
-                erroMessage += "Source|" + exception.InnerException.Source;
-                erroMessage += "\r\n";
-                erroMessage += "HashCode|" + exception.InnerException.GetHashCode().ToString();
-
-                if (exception.InnerException.InnerException != null)
-                {
-                    erroMessage += "\r\n";
-                    erroMessage += "\r\n";
-                    erroMessage += "InnerException 2";
-                    erroMessage += "\r\n";
-                    erroMessage += "Message|" + exception.InnerException.InnerException.Message;
-                    erroMessage += "\r\n";
-                    erroMessage += "StackTrace|" + exception.InnerException.InnerException.StackTrace;
-                    erroMessage += "\r\n";
-                    erroMessage += "TargetSite|" + exception.InnerException.InnerException.TargetSite;
-                    erroMessage += "\r\n";
-                    erroMessage += "Source|" + exception.InnerException.InnerException.Source;
-                    erroMessage += "\r\n";
-                    erroMessage += "HashCode|" + exception.InnerException.InnerException.GetHashCode().ToString();
-
-                    if (exception.InnerException.InnerException.InnerException != null)
-                    {
-                        erroMessage += "\r\n";
-                        erroMessage += "\r\n";
-                        erroMessage += "InnerException 3";
-                        erroMessage += "\r\n";
-                        erroMessage += "Message|" + exception.InnerException.InnerException.InnerException.Message;
-                        erroMessage += "\r\n";
-                        erroMessage += "StackTrace|" + exception.InnerException.InnerException.InnerException.StackTrace;
-                        erroMessage += "\r\n";
-                        erroMessage += "TargetSite|" + exception.InnerException.InnerException.InnerException.TargetSite;
-                        erroMessage += "\r\n";
-                        erroMessage += "Source|" + exception.InnerException.InnerException.InnerException.Source;
-                        erroMessage += "\r\n";
-                        erroMessage += "HashCode|" + exception.InnerException.InnerException.InnerException.GetHashCode().ToString();
-                    }
-                }
-            }
+            string erroMessage = MontaStringErro(exception, erroPadrao);
 
             try
             {
                 // Gerar log do erro
                 Auxiliar.WriteLog(erroMessage, true);
-                //TODO: (Marcelo) Este tratamento de erro não poderia ser feito diretamente no método?
             }
             catch
             {
@@ -170,13 +102,49 @@ namespace NFe.Service
 
             File.WriteAllText(arqErro, erroMessage);
 
-            ///
-            /// grava o arquivo de erro no FTP
+            // grava o arquivo de erro no FTP
             new GerarXML(emp).XmlParaFTP(emp, arqErro);
         }
-        #endregion
+
+        #region MontaStringErro()
+
+        /// <summary>
+        /// Montar a string do erro da exception
+        /// </summary>
+        /// <param name="exception">Objeto da exception</param>
+        /// <param name="erroPadrao">ErroPadrao</param>
+        /// <returns>Retorna uma string com o erro ocorrido.</returns>
+        private static string MontaStringErro(Exception exception, ErroPadrao erroPadrao)
+        {
+            string erroMessage = string.Empty;
+
+            erroMessage += "Versão|" + Propriedade.Versao + "\r\n" +
+                "ErrorCode|" + ((int)erroPadrao).ToString("0000000000") +
+                "\r\n" +
+                "Message|" + exception.Message +
+                "\r\n" +
+                "StackTrace|" + exception.StackTrace +
+                "\r\n" +
+                "Source|" + exception.Source +
+                "\r\n" +
+                "Type|" + exception.GetType() +
+                "\r\n" +
+                "TargetSite|" + exception.TargetSite +
+                "\r\n" +
+                "HashCode|" + exception.GetHashCode().ToString();
+
+            if (exception.InnerException != null)
+                erroMessage += "\r\n\r\n" + MontaStringErro(exception.InnerException, erroPadrao);
+
+            return erroMessage;
+        }
+
+        #endregion MontaStringErro()
+
+        #endregion GravarArqErroServico()
 
         #region MoveArqErro
+
         /// <summary>
         /// Move arquivos XML com erro para uma pasta de xml´s com erro configurados no UniNFe.
         /// </summary>
@@ -186,9 +154,11 @@ namespace NFe.Service
         {
             MoveArqErro(Arquivo, Path.GetExtension(Arquivo));
         }
-        #endregion
+
+        #endregion MoveArqErro
 
         #region MoveArqErro()
+
         /// <summary>
         /// Move arquivos com a extensão informada e que está com erro para uma pasta de xml´s/arquivos com erro configurados no UniNFe.
         /// </summary>
@@ -220,9 +190,11 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion MoveArqErro()
 
         #region MoverArquivo()
+
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
         /// </summary>
@@ -238,7 +210,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             #region Criar pastas que receberão os arquivos
-            //Criar subpastas da pasta dos XML´s enviados
+
             Empresas.Configuracoes[emp].CriarSubPastaEnviado();
 
             //Criar Pasta do Mês para gravar arquivos enviados autorizados ou denegados
@@ -248,21 +220,22 @@ namespace NFe.Service
             {
                 case PastaEnviados.EmProcessamento:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
-                    destinoArquivo = nomePastaEnviado + "\\" + Path.GetFileName(arquivo);//Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                    destinoArquivo = nomePastaEnviado + "\\" + Path.GetFileName(arquivo);
                     break;
 
                 case PastaEnviados.Autorizados:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                        PastaEnviados.Autorizados.ToString() + "\\" +
-                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
-                    destinoArquivo = nomePastaEnviado + Path.GetFileName(arquivo);//Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                                       PastaEnviados.Autorizados.ToString() + "\\" +
+                                       Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+                    destinoArquivo = nomePastaEnviado + Path.GetFileName(arquivo);
                     goto default;
 
                 case PastaEnviados.Denegados:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                        PastaEnviados.Denegados.ToString() + "\\" +
-                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
-                    if (arquivo.ToLower().EndsWith(Propriedade.ExtRetorno.Den))//danasa 11-4-2012
+                                       PastaEnviados.Denegados.ToString() + "\\" +
+                                       Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(emissao);
+
+                    if (arquivo.ToLower().EndsWith(Propriedade.ExtRetorno.Den))
                         destinoArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(arquivo));
                     else
                         destinoArquivo = Path.Combine(nomePastaEnviado, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) + Propriedade.ExtRetorno.Den);
@@ -271,29 +244,32 @@ namespace NFe.Service
                 default:
                     if (!Directory.Exists(nomePastaEnviado))
                     {
-                        System.IO.Directory.CreateDirectory(nomePastaEnviado);
+                        Directory.CreateDirectory(nomePastaEnviado);
                     }
                     break;
             }
-            #endregion
+
+            #endregion Criar pastas que receberão os arquivos
 
             //Se conseguiu criar a pasta ele move o arquivo, caso contrário
             if (Directory.Exists(nomePastaEnviado))
             {
                 #region Mover o XML para a pasta de XML´s enviados
+
                 //Se for para mover para a Pasta EmProcessamento
                 if (subPastaXMLEnviado == PastaEnviados.EmProcessamento)
                 {
-                    //Se já existir o arquivo na pasta EmProcessamento vamos mover 
+                    //Se já existir o arquivo na pasta EmProcessamento vamos mover
                     //ele para a pasta com erro antes para evitar exceção. Wandrey 05/07/2011
                     if (File.Exists(destinoArquivo))
                     {
-                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);
                         File.Move(destinoArquivo, destinoErro);
 
                         //danasa 11-4-2012
                         Auxiliar.WriteLog("Arquivo \"" + destinoArquivo + "\" movido para a pasta \"" + Empresas.Configuracoes[emp].PastaXmlErro + "\".", true);
                     }
+
                     File.Move(arquivo, destinoArquivo);
                 }
                 else
@@ -307,18 +283,20 @@ namespace NFe.Service
                     }
                     else
                     {
-                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                        string destinoErro = Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Path.GetFileName(arquivo);
                         File.Move(arquivo, destinoErro);
 
                         //danasa 11-4-2012
                         Auxiliar.WriteLog("Arquivo \"" + arquivo + "\" movido para a pasta \"" + Empresas.Configuracoes[emp].PastaXmlErro + "\".", true);
                     }
                 }
-                #endregion
+
+                #endregion Mover o XML para a pasta de XML´s enviados
 
                 if (subPastaXMLEnviado == PastaEnviados.Autorizados || subPastaXMLEnviado == PastaEnviados.Denegados)
                 {
                     #region Copiar XML para a pasta de BACKUP
+
                     //Fazer um backup do XML que foi copiado para a pasta de enviados
                     //para uma outra pasta para termos uma maior segurança no arquivamento
                     //Normalmente esta pasta é em um outro computador ou HD
@@ -343,7 +321,7 @@ namespace NFe.Service
                             default:
                                 if (!Directory.Exists(nomePastaBackup))
                                 {
-                                    System.IO.Directory.CreateDirectory(nomePastaBackup);
+                                    Directory.CreateDirectory(nomePastaBackup);
                                 }
                                 break;
                         }
@@ -352,7 +330,7 @@ namespace NFe.Service
                         if (Directory.Exists(nomePastaBackup))
                         {
                             //Mover o arquivo da nota fiscal para a pasta de backup
-                            string destinoBackup = nomePastaBackup + Path.GetFileName(arquivo);// Functions.ExtrairNomeArq(arquivo, ".xml") + ".xml";
+                            string destinoBackup = nomePastaBackup + Path.GetFileName(arquivo);
                             if (File.Exists(destinoBackup))
                             {
                                 File.Delete(destinoBackup);
@@ -364,16 +342,20 @@ namespace NFe.Service
                             throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + nomePastaBackup + ")");
                         }
                     }
-                    #endregion
+
+                    #endregion Copiar XML para a pasta de BACKUP
 
                     #region Copiar o XML para a pasta do DanfeMon, se configurado para isso
+
                     CopiarXMLPastaDanfeMon(destinoArquivo);
-                    #endregion
+
+                    #endregion Copiar o XML para a pasta do DanfeMon, se configurado para isso
 
                     #region Copiar o XML para o FTP
-                    GerarXML oGerarXML = new GerarXML(emp);
-                    oGerarXML.XmlParaFTP(emp, destinoArquivo);
-                    #endregion
+
+                    new GerarXML(emp).XmlParaFTP(emp, destinoArquivo);
+
+                    #endregion Copiar o XML para o FTP
                 }
             }
             else
@@ -381,9 +363,11 @@ namespace NFe.Service
                 throw new Exception("Pasta para arquivamento dos XML´s enviados não existe. (Pasta: " + nomePastaEnviado + ")");
             }
         }
-        #endregion
+
+        #endregion MoverArquivo()
 
         #region MoverArquivo()
+
         /// <summary>
         /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
         /// </summary>
@@ -396,9 +380,11 @@ namespace NFe.Service
         {
             MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now);
         }
-        #endregion
+
+        #endregion MoverArquivo()
 
         #region CopiarXMLPastaDanfeMon()
+
         /// <summary>
         /// Copia o XML da NFe para a pasta monitorada pelo DANFEMon para que o mesmo imprima o DANFe.
         /// A copia só é efetuada de o UniNFe estiver configurado para isso.
@@ -428,20 +414,21 @@ namespace NFe.Service
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
                     {
                         //Montar o nome do arquivo de destino
-                        string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Path.GetFileName(arquivoCopiar);// Functions.ExtrairNomeArq(arquivoCopiar, ".xml") + ".xml";
+                        string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Path.GetFileName(arquivoCopiar);
 
                         //Copiar o arquivo para o destino
-                        FileInfo oArquivo = new FileInfo(arquivoCopiar);
-                        oArquivo.CopyTo(arqDestino, true);
+                        File.Copy(arquivoCopiar, arqDestino, true);
                     }
                 }
             }
         }
-        #endregion
+
+        #endregion CopiarXMLPastaDanfeMon()
 
         #region ExecutaUniDanfe()
 
         #region RetornarConteudoEntre()
+
         /// <summary>
         /// Executa o aplicativo UniDanfe para gerar/imprimir o DANFE
         /// </summary>
@@ -464,9 +451,11 @@ namespace NFe.Service
                 return "";
             return s.Substring(0, i);
         }
-        #endregion
+
+        #endregion RetornarConteudoEntre()
 
         #region ExcluirArqAuxiliar()
+
         private static void ExcluirArqAuxiliar(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             if (e.Cancel)
@@ -492,9 +481,11 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion ExcluirArqAuxiliar()
 
         #region ExecutaUniDanfe_ForcaEmail
+
         public static void ExecutaUniDanfe_ForcaEmail(int emp)
         {
             if (Empresas.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
@@ -503,9 +494,11 @@ namespace NFe.Service
                 System.Diagnostics.Process.Start(Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\unidanfe.exe", "envia_email=1");
             }
         }
-        #endregion
+
+        #endregion ExecutaUniDanfe_ForcaEmail
 
         #region RenomearXmlReport()
+
         private static void RenomearXmlReport(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             if (e.Cancel)
@@ -515,10 +508,10 @@ namespace NFe.Service
             int emp = Convert.ToInt32(sx.Split('|')[0]);
             string fm = sx.Split('|')[1];
 
-            string[] relname = new string[]{ 
+            string[] relname = new string[]{
                     Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviar.xml",
-                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviados.xml", 
-                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_erros.xml" 
+                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_enviados.xml",
+                    Empresas.Configuracoes[emp].PastaExeUniDanfe + "\\rel_email_erros.xml"
                 };
 
             System.Threading.Thread.Sleep(1000);
@@ -544,9 +537,11 @@ namespace NFe.Service
                 System.Threading.Thread.Sleep(100);
             }
         }
-        #endregion
+
+        #endregion RenomearXmlReport()
 
         #region ExecutaUniDanfe_ReportEmail
+
         public static void ExecutaUniDanfe_ReportEmail(int emp, DateTime datai, DateTime dataf, bool imprimir = false, string ExportarPasta = "Enviados", string filename = "")
         {
             if (Empresas.Configuracoes[emp].PastaExeUniDanfe != string.Empty &&
@@ -566,14 +561,16 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion ExecutaUniDanfe_ReportEmail
 
         #region ExecutaUniDanfe()
+
         public static string getSubFolder(DateTime value, int ndias, DiretorioSalvarComo salvarComo)
         {
             if (salvarComo.ToString().Contains("D"))
                 return salvarComo.ToString(value.AddDays(ndias * -1));
-            
+
             if (salvarComo.ToString().Contains("M"))
                 return salvarComo.ToString(value.AddMonths(ndias * -1));
 
@@ -640,7 +637,7 @@ namespace NFe.Service
                         arqProcNFe = nomeArquivoRecebido;
                         ///
                         /// le o protocolo de autorizacao
-                        /// 
+                        ///
                         if (doc.DocumentElement.Name.Equals("cteProc"))
                         {
                             foreach (var el3 in doc.GetElementsByTagName("protCTe"))
@@ -702,12 +699,14 @@ namespace NFe.Service
                                                 tipo = "ccte";
                                                 cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chCTe.ToString())[0];
                                                 break;
+
                                             case "procEventoMDFe":
                                                 ///
                                                 /// nao existe CCe de MDFe, mas fica aqui por enquanto
                                                 tipo = "ccemdfe";
                                                 cl = null;
                                                 break;
+
                                             default:
                                                 tipo = "cce";
                                                 cl = (XmlElement)doc.GetElementsByTagName(NFe.Components.TpcnResources.chNFe.ToString())[0];
@@ -723,10 +722,12 @@ namespace NFe.Service
                                                 tipo = "cte";
                                                 cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chCTe.ToString())[0];
                                                 break;
+
                                             case "procEventoMDFe":
                                                 tipo = "canmdfe";
                                                 cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chMDFe.ToString())[0];
                                                 break;
+
                                             default:
                                                 tipo = "nfe";
                                                 cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chNFe.ToString())[0];
@@ -743,7 +744,7 @@ namespace NFe.Service
                                     default:
                                         ///
                                         /// tipo de evento desconhecido
-                                        /// 
+                                        ///
                                         throw new Exception("Arquivo de evento " + nomeArquivoRecebido + " desconhecido para impressão do DANFE/DACTE/CCe/DAMDFe");
                                 }
 
@@ -751,17 +752,19 @@ namespace NFe.Service
                                 {
                                     ///
                                     /// le o nome do arquivo de distribuicao da NFe/CTe
-                                    /// 
+                                    ///
                                     switch (tipo)
                                     {
                                         case "nfe":
                                         case "cce":
                                             arqProcNFe = cl.InnerText + Propriedade.ExtRetorno.ProcNFe;
                                             break;
+
                                         case "cte":
                                         case "ccte":
                                             arqProcNFe = cl.InnerText + Propriedade.ExtRetorno.ProcCTe;
                                             break;
+
                                         case "canmdfe":
                                             arqProcNFe = cl.InnerText + Propriedade.ExtRetorno.ProcMDFe;
                                             break;
@@ -776,7 +779,7 @@ namespace NFe.Service
                         {
                             ///
                             /// tipo de arquivo desconhecido
-                            /// 
+                            ///
                             throw new Exception("Arquivo " + nomeArquivoRecebido + " desconhecido para impressão do DANFE/DACTE/CCe/DAMDFe");
                         }
                         break;
@@ -789,9 +792,11 @@ namespace NFe.Service
                         case "procEventoCTe":
                             fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                             break;
+
                         case "procEventoMDFe":
                             fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML;
                             break;
+
                         default:    //pode ser NFe
                             fExtensao = Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
                             break;
@@ -802,7 +807,7 @@ namespace NFe.Service
 
                     ///
                     /// pesquisa pelo arquivo da NFe/NFCe/MDFe/CTe
-                    /// 
+                    ///
                     if (File.Exists(Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), xTemp)))
                         arqProcNFe = Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), xTemp);
                     else
@@ -829,7 +834,7 @@ namespace NFe.Service
                                 {
                                     ///
                                     /// OPS!!! EPEC <-> denegado?
-                                    /// 
+                                    ///
                                     xTemp = Functions.ExtrairNomeArq(xTemp, fExtensao) + Propriedade.ExtRetorno.Den;
                                     if (File.Exists(Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), xTemp)))
                                         arqProcNFe = Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), xTemp);
@@ -869,23 +874,23 @@ namespace NFe.Service
                     else
 
                         if (Path.GetDirectoryName(arqProcNFe) == "")
-                            ///
-                            /// o nome pode ter sido atribuido pela leitura do evento, então não tem 'path'
-                            /// 
-                            arqProcNFe = Path.Combine(nomePastaEnviado, arqProcNFe);
+                        ///
+                        /// o nome pode ter sido atribuido pela leitura do evento, então não tem 'path'
+                        ///
+                        arqProcNFe = Path.Combine(nomePastaEnviado, arqProcNFe);
 
                     if (!File.Exists(arqProcNFe))
                     {
                         ///
                         /// arquivo da NFe/NFce não encontrada no 'path' especifico, então pesquisamos na arvore de enviados
-                        /// 
+                        ///
                         int ndias = 0;
                         while (ndias < 60)
                         {
                             ///
                             /// usamos o 'DiretorioSalvarComo' para pesquisar pelo arquivo numa pasta baseando-se pela
                             /// dataEmissaoNFe.AddDays(-ndias)
-                            /// 
+                            ///
                             string fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                             "\\" + PastaEnviados.Autorizados.ToString() +
                                                             "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
@@ -904,9 +909,9 @@ namespace NFe.Service
                             if (emp.DiretorioSalvarComo.ToString().Equals("Raiz") || emp.DiretorioSalvarComo.ToString().Equals(""))
                                 ///
                                 /// ops!
-                                /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em 
+                                /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em
                                 /// pastas baseado na data de emissao da nota
-                                /// 
+                                ///
                                 break;
                         }
                     }
@@ -918,7 +923,7 @@ namespace NFe.Service
                     {
                         ///
                         /// le o xml da NFe/NFCe
-                        /// 
+                        ///
                         var nfer = new NFe.ConvertTxt.nfeRead();
                         nfer.ReadFromXml(arqProcNFe);
                         fEmail = nfer.nfe.dest.email;
@@ -946,19 +951,22 @@ namespace NFe.Service
                     {
                         ///
                         /// mandou imprimir pelo -procNFe, -procMDFe ou -procCTe, verifica se tem o xml de cancelamento
-                        /// 
+                        ///
                         switch (tipo)
                         {
                             case "nfe":
                             case "nfce":
                                 fExtensao = Propriedade.ExtRetorno.ProcEventoNFe;
                                 break;
+
                             case "cte":
                                 fExtensao = Propriedade.ExtRetorno.ProcEventoCTe;
                                 break;
+
                             case "mdfe":
                                 fExtensao = Propriedade.ExtRetorno.ProcEventoMDFe;
                                 break;
+
                             default:
                                 fExtensao = "";
                                 break;
@@ -976,7 +984,7 @@ namespace NFe.Service
                                 ///
                                 /// usamos o 'DiretorioSalvarComo' para pesquisar pelo arquivo numa pasta baseando-se pela
                                 /// dataEmissaoNFe.AddDays(-ndias)
-                                /// 
+                                ///
                                 string fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                                 "\\" + PastaEnviados.Autorizados.ToString() +
                                                                 "\\" + getSubFolder(dataEmissaoNFe, ndias, emp.DiretorioSalvarComo), //emp.DiretorioSalvarComo.ToString(dataEmissaoNFe.AddDays(ndias * -1)),
@@ -985,9 +993,9 @@ namespace NFe.Service
                                 {
                                     ///
                                     /// ops, por evento não foi encontrado, procuramos pelo cancelamento antigo
-                                    /// só entramos aqui se o xml de cancelamento nao foi encontrado e se a nota for 'nfe' 
+                                    /// só entramos aqui se o xml de cancelamento nao foi encontrado e se a nota for 'nfe'
                                     /// já que para outros tipos não existia o cancelamento por '-procCancNFe.xml'.
-                                    /// 
+                                    ///
                                     filenameCancelamento = tempFile + "-procCancNFe.xml";
                                     fTemp = Path.Combine(emp.PastaXmlEnviado +
                                                             "\\" + PastaEnviados.Autorizados.ToString() +
@@ -1014,9 +1022,9 @@ namespace NFe.Service
                                     if (!tipo.Equals("nfe") || emp.DiretorioSalvarComo.ToString().Equals("Raiz") || emp.DiretorioSalvarComo.ToString().Equals(""))
                                         ///
                                         /// ops!
-                                        /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em 
+                                        /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em
                                         /// pastas baseado na data de emissao da nota e se o tipo de nota nao é 'nfe'
-                                        /// 
+                                        ///
                                         break;
                                 }
                             }
@@ -1025,7 +1033,7 @@ namespace NFe.Service
                 }
                 ///
                 /// EPEC, CCe e Cancelamento por evento
-                /// 
+                ///
                 string ctemp = doc.OuterXml;// File.ReadAllText(nomeArqXMLNFe);
                 string dhReg = RetornarConteudoEntre(ctemp, "<dhRegEvento>", "</dhRegEvento>");
                 DateTime dhRegEvento = Functions.GetDateTime(dhReg);
@@ -1057,7 +1065,6 @@ namespace NFe.Service
                     }
                     else
                     {
-
                         if (string.IsNullOrEmpty(fEmail))
                         {
                             if (args != null)
@@ -1066,7 +1073,7 @@ namespace NFe.Service
 
                         ///
                         /// se tem um e-mail definido nos parametros da empresa
-                        /// 
+                        ///
 
                         if (!string.IsNullOrEmpty(emp.EmailDanfe))
                         {
@@ -1112,19 +1119,19 @@ namespace NFe.Service
                     {
                         ///
                         /// define como arquivo principal o XML da NFe/NFCe/MDFe/CTe
-                        /// 
+                        ///
                         Args += " A=\"" + arqProcNFe + "\"";
                         ///
                         /// define como arquivo adicional o enviado a esta chamada
-                        /// 
+                        ///
                         Args += " AD=\"" + nomeArquivoRecebido + "\"";
                         if (epecTipo.Equals("procEventoMDFe"))
                             Args += " T=damdfe";
                         else
                             if (epecTipo.Equals("procEventoCTe"))
-                                Args += " T=dacte";
-                            else
-                                Args += " T=danfe";
+                            Args += " T=dacte";
+                        else
+                            Args += " T=danfe";
                         configDanfe = emp.ConfiguracaoDanfe;
                     }
                     else
@@ -1161,11 +1168,13 @@ namespace NFe.Service
                                             Args += " N=\"" + arqProcNFe + "\"";
                                             configDanfe = emp.ConfiguracaoCCe;
                                             break;
+
                                         case "canmdfe":
                                             Args += " A=\"" + nomeArquivoRecebido + "\"";
                                             Args += " N=\"" + arqProcNFe + "\"";
                                             tipo = "";
                                             break;
+
                                         default:
                                             Args += " A=\"" + arqProcNFe + "\"";
                                             break;
@@ -1182,7 +1191,6 @@ namespace NFe.Service
                     }
                     if (!string.IsNullOrEmpty(configDanfe))
                         Args += " C=\"" + configDanfe + "\"";
-
 
                     if (temCancelamento)
                         Args += " CC=1"; //Cancelamento
@@ -1229,7 +1237,7 @@ namespace NFe.Service
 
                         ///
                         /// define o arquivo de saida de erros
-                        /// 
+                        ///
                         args.TryGetValue("auxiliar", out fAuxiliar);
                     }
 
@@ -1239,12 +1247,12 @@ namespace NFe.Service
                     {
                         ///
                         /// formata o arquivo auxiliar com base no arquivo enviado para impressao
-                        /// 
+                        ///
                         /// 999999-procNFe.xml -> aux-99999-procNFe-danfe-erros.txt
                         /// 999999-procCTe.xml -> aux-99999-procCTe-danfe-erros.txt
                         /// 999999-procMDFe.xml -> aux-99999-procMDFe-danfe-erros.txt
                         /// 999999-procEventoNFe.xml -> aux-99999-procEventoNFe-danfe-erros.txt
-                        /// 
+                        ///
                         fAuxiliar = temps + "-danfe-erros.txt";
                     }
 
@@ -1260,7 +1268,7 @@ namespace NFe.Service
                         /// 999999-procCTe.xml -> aux-99999-procCTe.xml
                         /// 999999-procMDFe.xml -> aux-99999-procMDFe.xml
                         /// 999999-procEventoNFe.xml -> aux-99999-procEventoNFe.xml
-                        /// 
+                        ///
                         fAuxiliar = Path.Combine(Path.GetTempPath(), "aux-" + Path.GetFileName(nomeArquivoRecebido));
 
                         StringBuilder xmlAux = new StringBuilder();
@@ -1320,11 +1328,12 @@ namespace NFe.Service
             }
         }
 
-        #endregion
+        #endregion ExecutaUniDanfe()
 
-        #endregion
+        #endregion ExecutaUniDanfe()
 
         #region RemoveSomenteLeitura()
+
         /// <summary>
         /// Metodo que remove atributo de Somente Leitura do Arquivo caso o mesmo estiver marcado, evitando problemas no acesso do arquivo.
         /// Renan - 26/11/13
@@ -1346,9 +1355,11 @@ namespace NFe.Service
         {
             return attributes & ~attributesToRemove;
         }
-        #endregion
+
+        #endregion RemoveSomenteLeitura()
 
         #region Compacta XML
+
         public static void CompressXML(FileInfo fileToCompress)
         {
             using (FileStream fromZipFile = fileToCompress.OpenRead())
@@ -1365,9 +1376,11 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion Compacta XML
 
         #region Decompress
+
         public static string Decompress(string input)
         {
             char[] enc = input.ToCharArray();
@@ -1385,6 +1398,7 @@ namespace NFe.Service
                 }
             }
         }
+
         /*
                 public static string Decompress(string compressedValue)
                 {
@@ -1406,7 +1420,8 @@ namespace NFe.Service
                     }
                 }
         */
-        #endregion
+
+        #endregion Decompress
 
         /// <summary>
         /// Lucas A. Araujo
@@ -1466,6 +1481,11 @@ namespace NFe.Service
                     catch { }
                 }
             }
+        }
+
+        public static T ToEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
         }
     }
 }

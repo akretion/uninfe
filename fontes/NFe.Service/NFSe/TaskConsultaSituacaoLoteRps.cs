@@ -10,6 +10,7 @@ using NFe.Components.EL;
 using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.Pronin;
 
 namespace NFe.Service.NFSe
 {
@@ -212,7 +213,25 @@ namespace NFe.Service.NFSe
 
                         metropolis.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
+
+                    case PadroesNFSe.PRONIN:
+                        if (oDadosPedSitLoteRps.cMunicipio == 4109401)
+                        {
+                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosPedSitLoteRps.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            assPronin.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
+
+                            pronin.EmiteNF(NomeArquivoXML);
+                        }
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico))

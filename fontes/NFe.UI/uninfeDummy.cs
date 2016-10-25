@@ -124,6 +124,7 @@ namespace NFe.UI
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Cte, EnumHelper.GetDescription(TipoAplicativo.Cte)));
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.MDFe, EnumHelper.GetDescription(TipoAplicativo.MDFe)));
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
+            list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.SAT, EnumHelper.GetDescription(TipoAplicativo.SAT)));
 
             if (includeservico)
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));
@@ -196,63 +197,6 @@ namespace NFe.UI
                         //((MetroFramework.Interfaces.IMetroControl)control).StyleManager = mainForm.metroStyleManager1; 
                     }
                     catch { }
-                }
-            }
-        }
-
-        /// <summary>
-        /// printDanfe
-        /// </summary>
-        public static void printDanfe()
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.RestoreDirectory = true;
-                dlg.Filter = "Todos os arquivos|*" + Propriedade.ExtRetorno.ProcNFe +
-                    ";*" + Propriedade.ExtRetorno.ProcCTe +
-                    ";*" + Propriedade.ExtRetorno.ProcMDFe +
-                    ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe +
-                    ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe +
-                    ";*" + Propriedade.ExtRetorno.Den +
-                    ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML +
-                    ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
-                    ";*" + Propriedade.ExtRetorno.ProcEventoNFe +
-                    "|Arquivos da NFe/NFCe (*.*" + Propriedade.ExtRetorno.ProcNFe + ")|*" + Propriedade.ExtRetorno.ProcNFe +
-                    "|Arquivos de cancelamento por evento (*.*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*_110111_01" + Propriedade.ExtRetorno.ProcEventoNFe + ";*_110111_01" + Propriedade.ExtRetorno.ProcEventoCTe +
-                    "|Arquivos de CCe (*.*" + Propriedade.ExtRetorno.ProcEventoNFe + ", *.*" + Propriedade.ExtRetorno.ProcEventoCTe + ")|*" + Propriedade.ExtRetorno.ProcEventoNFe + ";*" + Propriedade.ExtRetorno.ProcEventoCTe +
-                    "|Arquivos de CTe (*.*" + Propriedade.ExtRetorno.ProcCTe + ")|*" + Propriedade.ExtRetorno.ProcCTe +
-                    "|Arquivos de MDFe (*.*" + Propriedade.ExtRetorno.ProcMDFe + ")|*" + Propriedade.ExtRetorno.ProcMDFe;
-
-                while (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    try
-                    {
-                        bool executou = false;
-
-                        for (int i = 0; i < Empresas.Configuracoes.Count; i++)
-                        {
-                            Empresa empresa = Empresas.Configuracoes[i];
-                            if (Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()).ToLower()) ||
-                                Path.GetDirectoryName(dlg.FileName).ToLower().StartsWith((empresa.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()).ToLower()))
-                            {
-                                if (string.IsNullOrEmpty(empresa.PastaExeUniDanfe))
-                                {
-                                    throw new Exception("Pasta contendo o UniDANFE não definida para a empresa: " + empresa.Nome);
-                                }
-                                NFe.Service.TFunctions.ExecutaUniDanfe(dlg.FileName, DateTime.Today, empresa);
-                                //NFe.Interface.PrintDANFE.printDANFE(dlg.FileName, empresa);
-
-                                executou = true;
-                                break;
-                            }
-                        }
-                        if (!executou)
-                            throw new Exception("Arquivo deve estar na pasta de 'Autorizados/Denegados' da empresa");
-                    }
-                    catch (Exception ex)
-                    {
-                        MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
-                    }
                 }
             }
         }

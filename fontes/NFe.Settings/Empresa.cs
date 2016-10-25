@@ -5,9 +5,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.IO;
 using System.Threading;
-using System.Linq;
-using System.Xml.Serialization;
-
 using NFe.Components;
 
 namespace NFe.Settings
@@ -144,49 +141,42 @@ namespace NFe.Settings
         /// <summary>
         /// Define a utilização do certficado instalado no windows ou através de arquivo
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public bool CertificadoInstalado { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar o local de armazenamento do certificado digital
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoArquivo { get; set; }
         /// <summary>
         /// Quando utilizar o certificado através de arquivo será necessário informar a senha do certificado
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoSenha { get; set; }
         /// <summary>
         /// Utilizado para certificados A3
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoPIN { get; set; }
         /// <summary>
         /// Utiliza
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CertificadoPINCarregado = false;
-
         /// <summary>
         /// Certificado digital - Subject
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string Certificado { get; set; }
         /// <summary>
         /// Certificado digital - ThumbPrint
         /// </summary>
-        //[NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public string CertificadoDigitalThumbPrint { get; set; }
         /// <summary>
         /// Certificado digital
         /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nulo)]
+        [System.Xml.Serialization.XmlIgnore()]
+        [AttributeTipoAplicacao(TipoAplicativo.Nulo)]
         public X509Certificate2 X509Certificado { get; set; }
         /// <summary>
         /// Gravar o retorno da NFe também em TXT
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarRetornoTXTNFe { get; set; }
         /// <summary>
         /// dias em que se deve manter os arquivos nas pastas retorno e temporario
@@ -244,22 +234,22 @@ namespace NFe.Settings
 
         public bool CriaPastasAutomaticamente { get; set; }
 
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosNaPastaEnviadosNFe { get; set; }
 
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosCancelamentoNaPastaEnviadosNFe { get; set; }
 
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosDeTerceiros { get; set; }
 
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool CompactarNfe { get; set; }
 
         /// <summary>
         /// Enviar NFe utilizando o processo síncrono (true or false)
         /// </summary>
-        [NFe.Components.AttributeTipoAplicacao(TipoAplicativo.Nfe)]
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool IndSinc { get; set; }
 
         /// <summary>
@@ -381,6 +371,30 @@ namespace NFe.Settings
         }
         #endregion
 
+        #region Propriedades de configuração do equipamento SAT
+        /// <summary>
+        /// Maraca do equipamento SAT
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string MarcaSAT { get; set; }
+
+        /// <summary>
+        /// Código de ativação do equipamento SAT
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string CodigoAtivacaoSAT { get; set; }
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public bool UtilizaConversaoCFe { get; set; }
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string CNPJSoftwareHouse { get; set; }
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string SignACSAT { get; set; }
+
+        #endregion
+
         #endregion
 
         #region Coleções
@@ -470,9 +484,9 @@ namespace NFe.Settings
 
                     t.CopyObjectTo(this);
 
-                    this.CriarPastasDaEmpresa();
+                    CriarPastasDaEmpresa();
 
-                    this.X509Certificado = this.BuscaConfiguracaoCertificado();
+                    X509Certificado = BuscaConfiguracaoCertificado();
                 }
                 catch (Exception ex)
                 {
@@ -498,19 +512,19 @@ namespace NFe.Settings
         {
             X509Certificate2 x509Cert = null;
 
-            if (this.UsaCertificado)
+            if (UsaCertificado)
             {
                 //Certificado instalado no windows
-                if (this.CertificadoInstalado)
+                if (CertificadoInstalado)
                 {
                     X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
                     store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                    X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+                    X509Certificate2Collection collection = store.Certificates;
                     X509Certificate2Collection collection1 = null;
-                    if (!string.IsNullOrEmpty(this.CertificadoDigitalThumbPrint))
-                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, this.CertificadoDigitalThumbPrint, false);
+                    if (!string.IsNullOrEmpty(CertificadoDigitalThumbPrint))
+                        collection1 = collection.Find(X509FindType.FindByThumbprint, CertificadoDigitalThumbPrint, false);
                     else
-                        collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectDistinguishedName, this.Certificado, false);
+                        collection1 = collection.Find(X509FindType.FindBySubjectDistinguishedName, Certificado, false);
 
                     for (int i = 0; i < collection1.Count; i++)
                     {
@@ -528,19 +542,20 @@ namespace NFe.Settings
                 }
                 else //Certificado está sendo acessado direto do arquivo .PFX
                 {
-                    if (string.IsNullOrEmpty(this.CertificadoArquivo))
+                    if (string.IsNullOrEmpty(CertificadoArquivo))
                         throw new Exception("Nome do arquivo referente ao certificado digital não foi informado nas configurações do UniNFe.");
-                    else if (!string.IsNullOrEmpty(this.CertificadoArquivo) && !File.Exists(this.CertificadoArquivo))
-                        throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", this.CertificadoArquivo));
+                    else if (!string.IsNullOrEmpty(CertificadoArquivo) && !File.Exists(CertificadoArquivo))
+                        throw new Exception(string.Format("Certificado digital \"{0}\" não encontrado.", CertificadoArquivo));
 
-                    using (FileStream fs = new FileStream(this.CertificadoArquivo, FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream(CertificadoArquivo, FileMode.Open, FileAccess.Read))
                     {
                         byte[] buffer = new byte[fs.Length];
                         fs.Read(buffer, 0, buffer.Length);
-                        x509Cert = new X509Certificate2(buffer, this.CertificadoSenha);
+                        x509Cert = new X509Certificate2(buffer, CertificadoSenha);
                     }
                 }
             }
+
             return x509Cert;
         }
         #endregion
@@ -602,26 +617,26 @@ namespace NFe.Settings
         /// </remarks>
         public void CriarSubPastaEnviado()
         {
-            if (this.Servico != TipoAplicativo.Nfse)
+            if (Servico != TipoAplicativo.Nfse)
             {
-                if (!string.IsNullOrEmpty(this.PastaXmlEnviado))
+                if (!string.IsNullOrEmpty(PastaXmlEnviado))
                 {
                     //Criar a pasta EmProcessamento
-                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
+                    if (!Directory.Exists(PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
+                        Directory.CreateDirectory(PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString());
                     }
 
                     //Criar a Pasta Autorizado
-                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
+                    if (!Directory.Exists(PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString());
+                        Directory.CreateDirectory(PastaXmlEnviado + "\\" + PastaEnviados.Autorizados.ToString());
                     }
 
                     //Criar a Pasta Denegado
-                    if (!Directory.Exists(this.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()))
+                    if (!Directory.Exists(PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString()))
                     {
-                        System.IO.Directory.CreateDirectory(this.PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString());
+                        Directory.CreateDirectory(PastaXmlEnviado + "\\" + PastaEnviados.Denegados.ToString());
                     }
                 }
             }
@@ -744,7 +759,8 @@ namespace NFe.Settings
                     Directory.CreateDirectory(PastaValidar.Trim() + "\\Temp");
                 }
             }
-            this.CriarSubPastaEnviado();
+
+            CriarSubPastaEnviado();
         }
         #endregion
 
@@ -916,7 +932,7 @@ namespace NFe.Settings
 
                 this.CriarPastasDaEmpresa();
 
-                Empresa dados = new Empresa();
+                Empresa dados = new Empresa();  
                 this.CopyObjectTo(dados);
                 if (dados.UsaCertificado)
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-
-using MetroFramework.Forms;
-
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NFe.UI
 {
@@ -29,46 +21,33 @@ namespace NFe.UI
 
             ConfiguracaoApp.CarregarDadosSobre();
 
-            metroLink_unimake.Visible = !string.IsNullOrEmpty(NFe.Settings.ConfiguracaoApp.Site);
-            metroLink_unimake.Text = NFe.Settings.ConfiguracaoApp.Site;
-            uninfeDummy.mainForm.Text = NFe.Components.Propriedade.NomeAplicacao + " - Monitor DF-e";
-            metroTile_update.Text = "Atualizar o " + NFe.Components.Propriedade.NomeAplicacao;
-            metroTile_sefaz_200.Visible = DateTime.Today <= new DateTime(2015, 4, 1);
+            metroLink_unimake.Visible = !string.IsNullOrEmpty(ConfiguracaoApp.Site);
+            metroLink_unimake.Text = ConfiguracaoApp.Site;
+            uninfeDummy.mainForm.Text = Propriedade.NomeAplicacao + " - Monitor DF-e";
+            metroTile_update.Text = "Atualizar o " + Propriedade.NomeAplicacao;
 
-            this.metroTile_doc.Enabled =
-                System.IO.File.Exists(System.IO.Path.Combine(NFe.Components.Propriedade.PastaExecutavel, NFe.Components.Propriedade.NomeAplicacao + ".pdf"));
+            metroTile_doc.Enabled =
+                System.IO.File.Exists(System.IO.Path.Combine(Propriedade.PastaExecutavel, Propriedade.NomeAplicacao + ".pdf"));
 
-            var Components = this.Controls.Cast<object>()
+            var Components = Controls.Cast<object>()
                                                    .Where(obj => !ReferenceEquals(obj, this))
                                                    .OfType<MetroFramework.Controls.MetroTile>();
             foreach (var c in Components)
             {
-                c.Style = (MetroFramework.MetroColorStyle)uninfeDummy.xmlParams.ReadValue(this.Name + "\\" + c.Name, "color", Convert.ToInt16(c.Style));
+                c.Style = (MetroFramework.MetroColorStyle)uninfeDummy.xmlParams.ReadValue(Name + "\\" + c.Name, "color", Convert.ToInt16(c.Style));
             }
-
-            //string _style = uninfeDummy.uStyle;
-            //this.cbStyles.DataSource = estilos;
-            //this.cbStyles.DisplayMember = "display_style";
-            //this.cbStyles.ValueMember = "internal_style";
-            //this.cbStyles.SelectedValue = _style;
 
             UpdateControles();
         }
 
         public void UpdateControles()
         {
-            //this.Theme = uninfeDummy.mainForm.uTheme;
-            //this.Style = uninfeDummy.mainForm.uStyle;
+            metroTile_Configuracoes.TileCount = Empresas.Configuracoes.Count;
+            metroTile_ValidaXml.Enabled =
+                (Empresas.Configuracoes != null && Empresas.Configuracoes.Count > 0);
 
-            this.metroTile_Configuracoes.TileCount = NFe.Settings.Empresas.Configuracoes.Count;
-            this.metroTile_excluirLock.Enabled =
-                this.metroTile_ValidaXml.Enabled =
-                    (NFe.Settings.Empresas.Configuracoes != null && NFe.Settings.Empresas.Configuracoes.Count > 0);
-
-            this.metroTile_municipios.Visible = Empresas.CountEmpresasNFse > 0;
-            this.metroTile_Servicos.Visible =
-                this.metroTile_Danfe.Visible =
-                this.metroTile_CadastroContrib.Visible = Empresas.CountEmpresasNFe > 0;
+            metroTile_Servicos.Visible =
+                metroTile_CadastroContrib.Visible = Empresas.CountEmpresasNFe > 0;
         }
 
         public void Show(uninfeOpcoes opcao)
@@ -78,11 +57,11 @@ namespace NFe.UI
             switch (opcao)
             {
                 case uninfeOpcoes.opCadastro:
-                    this.metroTile_CAD_Click(null, null);
+                    metroTile_CAD_Click(null, null);
                     break;
 
                 case uninfeOpcoes.opConfiguracoes:
-                    this.metroTile_CFG_Click(null, null);
+                    metroTile_CFG_Click(null, null);
                     break;
 
                 case uninfeOpcoes.opServicos:
@@ -90,19 +69,19 @@ namespace NFe.UI
                     break;
 
                 case uninfeOpcoes.opSobre:
-                    this.metroTile_sobre_Click(null, null);
+                    metroTile_sobre_Click(null, null);
                     break;
 
                 case uninfeOpcoes.opValidarXML:
-                    this.metroTile_VAL_Click(null, null);
+                    metroTile_VAL_Click(null, null);
                     break;
 
                 case uninfeOpcoes.opLogs:
-                    this.metroTile_log_Click(null, null);
+                    metroTile_log_Click(null, null);
                     break;
 
                 case uninfeOpcoes.opMunicipios:
-                    this.metroTile_municipios_Click(null, null);
+                    metroTile_municipios_Click(null, null);
                     break;
             }
         }
@@ -133,13 +112,13 @@ namespace NFe.UI
             bool _novo = false;
 
             //NFe.UI.uninfeDummy.showError = false;
-            this.VisibleChanged -= menu_VisibleChanged;
+            VisibleChanged -= menu_VisibleChanged;
             try
             {
                 UserControl1 _uc = null;
                 ///
                 /// processo já existe?
-                /// 
+                ///
                 foreach (Control __uc in uninfeDummy.mainForm.Controls)
                 {
                     if (__uc.GetType().Equals(user))
@@ -176,7 +155,7 @@ namespace NFe.UI
             }
             finally
             {
-                this.VisibleChanged += menu_VisibleChanged;
+                VisibleChanged += menu_VisibleChanged;
                 //NFe.UI.uninfeDummy.showError = true;
             }
             return _novo;
@@ -207,32 +186,6 @@ namespace NFe.UI
         private void metroTile_VAL_Click(object sender, EventArgs e)
         {
             createControl(typeof(userValidaXML));
-        }
-
-        private void metroTile_danfe_Click(object sender, EventArgs e)
-        {
-            uninfeDummy.printDanfe();
-        }
-
-        private void metroTile_excluir_Click(object sender, EventArgs e)
-        {
-            if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0) return;
-            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                "Exclui os arquivos de \".lock\" configurados para esta instância?\r\n" +
-                                "Tem certeza que deseja continuar? ", "",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                try
-                {
-                    Empresas.CreateLockFile(true);
-
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Arquivos de \".lock\" excluídos com sucesso.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void metroTile_wsdl_Click(object sender, EventArgs e)
@@ -291,17 +244,17 @@ namespace NFe.UI
 
         private void metroLink3_Click(object sender, EventArgs e)
         {
-            this.StartPage("http://" + NFe.Settings.ConfiguracaoApp.Site);
+            StartPage("http://" + ConfiguracaoApp.Site);
         }
 
         private void metroTile_sefaz_Click(object sender, EventArgs e)
         {
-            this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=2.00");
+            StartPage("http://www.cte.fazenda.gov.br/portal/disponibilidade.aspx?versao=1.00");
         }
 
         private void metroTile_sefaz_310_Click(object sender, EventArgs e)
         {
-            this.StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
+            StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
         }
 
         /*
@@ -318,7 +271,7 @@ namespace NFe.UI
         {
             try
             {
-                NFe.Components.Functions.ExibeDocumentacao();
+                Functions.ExibeDocumentacao();
             }
             catch (Exception ex)
             {
@@ -326,7 +279,7 @@ namespace NFe.UI
             }
         }
 
-        void StartPage(string url)
+        private void StartPage(string url)
         {
             try
             {
@@ -340,26 +293,26 @@ namespace NFe.UI
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            this.CurrentTile.Style = (MetroFramework.MetroColorStyle)Convert.ToInt16(e.ClickedItem.Tag);
-            this.CurrentTile.Refresh();
+            CurrentTile.Style = (MetroFramework.MetroColorStyle)Convert.ToInt16(e.ClickedItem.Tag);
+            CurrentTile.Refresh();
 
-            uninfeDummy.xmlParams.WriteValue(this.Name + "\\" + this.CurrentTile.Name, "color", (int)this.CurrentTile.Style);
+            uninfeDummy.xmlParams.WriteValue(Name + "\\" + CurrentTile.Name, "color", (int)CurrentTile.Style);
 
-            this.CurrentTile = null;
+            CurrentTile = null;
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (this.CurrentTile != null)
+            if (CurrentTile != null)
             {
-                foreach (var item in this.contextMenuStrip1.Items)
+                foreach (var item in contextMenuStrip1.Items)
                 {
                     try
                     {
                         if (item.ToString().Equals("Restaurar Padrão"))
                             continue;
 
-                        ((ToolStripMenuItem)item).Checked = Convert.ToInt16(((ToolStripMenuItem)item).Tag) == (int)this.CurrentTile.Style;
+                        ((ToolStripMenuItem)item).Checked = Convert.ToInt16(((ToolStripMenuItem)item).Tag) == (int)CurrentTile.Style;
                     }
                     catch
                     {
@@ -372,7 +325,12 @@ namespace NFe.UI
 
         private void metroTile_Configuracoes_MouseDown(object sender, MouseEventArgs e)
         {
-            this.CurrentTile = (MetroFramework.Controls.MetroTile)sender;
+            CurrentTile = (MetroFramework.Controls.MetroTile)sender;
+        }
+
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            StartPage("https://mdfe-portal.sefaz.rs.gov.br/Site/Servicos");
         }
     }
 }

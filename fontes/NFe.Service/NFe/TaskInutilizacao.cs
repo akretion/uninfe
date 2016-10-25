@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
-using System.Xml;
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 
 namespace NFe.Service
 {
@@ -16,19 +13,28 @@ namespace NFe.Service
     /// </summary>
     public class TaskNFeInutilizacao : TaskAbst
     {
-        public TaskNFeInutilizacao()
+        public TaskNFeInutilizacao(string arquivo)
         {
             Servico = Servicos.NFeInutilizarNumeros;
+            NomeArquivoXML = arquivo;
+            if (vXmlNfeDadosMsgEhXML)
+            {
+                ConteudoXML.PreserveWhitespace = false;
+                ConteudoXML.Load(arquivo);
+            }
         }
 
         #region Classe com os dados do XML do pedido de inutilização de números de NF
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de inutilizacao
         /// </summary>
         private DadosPedInut dadosPedInut;
-        #endregion
+
+        #endregion Classe com os dados do XML do pedido de inutilização de números de NF
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -36,7 +42,7 @@ namespace NFe.Service
             try
             {
                 dadosPedInut = new DadosPedInut(emp);
-                PedInut(emp, NomeArquivoXML);
+                PedInut(emp);
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
@@ -49,14 +55,12 @@ namespace NFe.Service
                     object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
                     //Atribuir conteúdo p ara duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
-
-                    //Criar objeto da classe de assinatura digita
-                    AssinaturaDigital oAD = new AssinaturaDigital();
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
 
                     //Assinar o XML
-                    oAD.Assinar(NomeArquivoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
+                    AssinaturaDigital oAD = new AssinaturaDigital();
+                    oAD.Assinar(ConteudoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,
@@ -122,26 +126,28 @@ namespace NFe.Service
                 }
                 catch
                 {
-                    //Se falhou algo na hora de deletar o XML de inutilização, infelizmente não posso 
-                    //fazer mais nada. Com certeza o uninfe sendo restabelecido novamente vai tentar enviar o mesmo 
+                    //Se falhou algo na hora de deletar o XML de inutilização, infelizmente não posso
+                    //fazer mais nada. Com certeza o uninfe sendo restabelecido novamente vai tentar enviar o mesmo
                     //xml de inutilização para o SEFAZ. Este erro pode ocorrer por falha no HD, rede, Permissão de pastas, etc. Wandrey 23/03/2010
                 }
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedInut()
+
         /// <summary>
         /// PedInut(string cArquivoXML)
         /// </summary>
-        /// <param name="cArquivoXML"></param>
-        private void PedInut(int emp, string cArquivoXML)
+        /// <param name="emp">Código da empresa</param>
+        private void PedInut(int emp)
         {
             dadosPedInut.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             dadosPedInut.tpEmis = Empresas.Configuracoes[emp].tpEmis;
             dadosPedInut.versao = "";
 
-            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            if (Path.GetExtension(NomeArquivoXML).ToLower() == ".txt")
             {
                 //      tpAmb|2
                 //      tpEmis|1                <<< opcional >>>
@@ -154,20 +160,17 @@ namespace NFe.Service
                 //      nNFFin|1
                 //      xJust|Teste do WS de Inutilizacao
                 //      versao|3.10
-                List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
+                List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                 Functions.PopulateClasse(dadosPedInut, cLinhas);
             }
             else
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList InutNFeList = doc.GetElementsByTagName("inutNFe");
+                XmlNodeList InutNFeList = ConteudoXML.GetElementsByTagName("inutNFe");
 
                 foreach (XmlNode InutNFeNode in InutNFeList)
                 {
                     XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
-                    dadosPedInut.versao = InutNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
+                    dadosPedInut.versao = InutNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                     XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
 
@@ -176,23 +179,26 @@ namespace NFe.Service
                         XmlElement infInutElemento = (XmlElement)infInutNode;
                         Functions.PopulateClasse(dadosPedInut, infInutElemento);
 
-                        if (infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
+                        if (infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
                         {
-                            dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
+                            dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
                             /// para que o validador não rejeite, excluo a tag <tpEmis>
-                            doc.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
+                            ConteudoXML.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0]);
                             /// salvo o arquivo modificado
-                            doc.Save(cArquivoXML);
+                            ConteudoXML.Save(NomeArquivoXML);
                         }
                     }
                 }
             }
+
             if (string.IsNullOrEmpty(dadosPedInut.versao))
                 throw new Exception("Inutilização: Versão deve ser informada");
         }
-        #endregion
+
+        #endregion PedInut()
 
         #region LerRetornoInut()
+
         /// <summary>
         /// Efetua a leitura do XML de retorno do processamento da Inutilização
         /// </summary>
@@ -203,9 +209,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
 
             XmlDocument doc = new XmlDocument();
-
-            MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
-            doc.Load(msXml);
+            doc.Load(Functions.StringXmlToStream(vStrXmlRetorno));
 
             XmlNodeList retInutNFeList = doc.GetElementsByTagName("retInutNFe");
 
@@ -223,15 +227,18 @@ namespace NFe.Service
                     {
                         string strRetInutNFe = retInutNFeNode.OuterXml;
 
-                        oGerarXML.XmlDistInut(NomeArquivoXML, strRetInutNFe);
+                        oGerarXML.XmlDistInut(ConteudoXML, strRetInutNFe, NomeArquivoXML);
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
+                        StreamWriter sw = File.CreateText(NomeArquivoXML);
+                        sw.Write(ConteudoXML.OuterXml);
+                        sw.Close();
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
 
                         //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
-                                                        PastaEnviados.EmProcessamento.ToString() + "\\" +
-                                                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) + Propriedade.ExtRetorno.ProcInutNFe;
+                        string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
+                            PastaEnviados.EmProcessamento.ToString() + "\\" +
+                            Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) + Propriedade.ExtRetorno.ProcInutNFe;
                         TFunctions.MoverArquivo(strNomeArqProcInutNFe, PastaEnviados.Autorizados, DateTime.Now);
                     }
                     else
@@ -242,6 +249,7 @@ namespace NFe.Service
                 }
             }
         }
-        #endregion
+
+        #endregion LerRetornoInut()
     }
 }

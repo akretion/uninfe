@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.IO;
-using System.Xml;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 namespace NFe.Service
 {
@@ -31,29 +28,29 @@ namespace NFe.Service
             arquivosNFe = oAux.ArquivosPasta(Empresas.Configuracoes[emp].PastaXmlEmLote, "*" + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);
             if (arquivosNFe.Count == 0)
             {
-                if (this.NomeArquivoXML.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
+                if (NomeArquivoXML.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
                 {
                     try
                     {
                         StringBuilder xml = new StringBuilder();
                         xml.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                         xml.Append("<MontarLoteNFe>");
-                        foreach (var filename in File.ReadAllLines(this.NomeArquivoXML, Encoding.Default))
+                        foreach (var filename in File.ReadAllLines(NomeArquivoXML, Encoding.Default))
                         {
                             xml.AppendFormat("<ArquivoNFe>{0}</ArquivoNFe>", filename + (filename.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML) ? "" : Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML));
                         }
                         xml.Append("</MontarLoteNFe>");
-                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(this.NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML))), xml.ToString());
+                        File.WriteAllText(Path.Combine(Empresas.Configuracoes[emp].PastaXmlEmLote, Path.GetFileName(NomeArquivoXML.Replace(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML))), xml.ToString());
 
                         //Deletar o arquivo de solicitação de montagem do lote de NFe
-                        FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
+                        FileInfo oArquivo = new FileInfo(NomeArquivoXML);
                         oArquivo.Delete();
                     }
                     catch (Exception ex)
                     {
                         try
                         {
-                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.ExtRetorno.MontarLote_ERR, ex);
+                            TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT, Propriedade.ExtRetorno.MontarLote_ERR, ex);
                         }
                         catch
                         {
@@ -65,7 +62,7 @@ namespace NFe.Service
                 }
                 else
                 {
-                    List<string> notas = new List<string>();
+                    List<ArquivoXMLDFe> notas = new List<ArquivoXMLDFe>();
                     FileStream fsArquivo = null;
                     FluxoNfe fluxoNfe = new FluxoNfe();
 
@@ -74,7 +71,7 @@ namespace NFe.Service
                         try
                         {
                             XmlDocument doc = new XmlDocument(); //Criar instância do XmlDocument Class
-                            fsArquivo = new FileStream(this.NomeArquivoXML, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
+                            fsArquivo = new FileStream(NomeArquivoXML, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); //Abrir um arquivo XML usando FileStream
                             doc.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
 
                             string versaoXml = string.Empty;
@@ -88,18 +85,21 @@ namespace NFe.Service
 
                                 for (int d = 0; d < QtdeArquivo; d++)
                                 {
-                                    string arquivoNFe = Empresas.Configuracoes[emp].PastaXmlEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
+                                    string arquivoNFe = Empresas.Configuracoes[emp].PastaXmlEmLote + "\\temp\\" + documentoElemento.GetElementsByTagName("ArquivoNFe")[d].InnerText;
 
                                     if (File.Exists(arquivoNFe))
                                     {
-                                        DadosNFeClass oDadosNfe = this.LerXMLNFe(arquivoNFe);
+                                        XmlDocument conteudoXMLNFe = new XmlDocument();
+                                        conteudoXMLNFe.Load(arquivoNFe);
+
+                                        DadosNFeClass oDadosNfe = LerXMLNFe(conteudoXMLNFe);
 
                                         if (string.IsNullOrEmpty(versaoXml))
                                             versaoXml = oDadosNfe.versao;
 
                                         if (!fluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                                         {
-                                            notas.Add(arquivoNFe);
+                                            notas.Add(new ArquivoXMLDFe() { NomeArquivoXML = arquivoNFe, ConteudoXML = conteudoXMLNFe });
                                         }
                                         else
                                         {
@@ -113,9 +113,11 @@ namespace NFe.Service
                                 }
                             }
 
-                            fsArquivo.Close(); //Fecha o arquivo XML
+                            fsArquivo.Close();
 
-                            this.LoteNfe(notas, versaoXml);
+                            XmlDocument xmlLote = LoteNfe(notas, versaoXml);
+                            TaskNFeRecepcao nfeRecepcao = new TaskNFeRecepcao(xmlLote);
+                            nfeRecepcao.Execute();
                         }
                         catch
                         {
@@ -126,14 +128,14 @@ namespace NFe.Service
                         }
 
                         //Deletar o arquivo de solicitão de montagem do lote de NFe
-                        FileInfo oArquivo = new FileInfo(this.NomeArquivoXML);
+                        FileInfo oArquivo = new FileInfo(NomeArquivoXML);
                         oArquivo.Delete();
                     }
                     catch (Exception ex)
                     {
                         try
                         {
-                            TFunctions.GravarArqErroServico(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML, Propriedade.ExtRetorno.MontarLote_ERR, ex);
+                            TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioXML, Propriedade.ExtRetorno.MontarLote_ERR, ex);
                         }
                         catch
                         {
@@ -144,7 +146,6 @@ namespace NFe.Service
                     }
                 }
             }
-
         }
     }
 }
